@@ -1,0 +1,350 @@
+<html lang="en">
+    <head>
+        <title>Four Creatures</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="main.css">
+    </head>
+    <body>
+
+        <div id="container"></div>
+
+        <script id="vertexShader" type="x-shader/x-vertex">
+
+            varying vec2 vUv;
+        uniform vec2 resolution;
+            void main()    {
+
+                vUv = uv;
+                gl_Position = vec4( position, 1.0 );
+            }
+        </script>
+
+        <script id="fragmentShader" type="x-shader/x-fragment">
+            varying vec2 vUv;
+        uniform vec2 resolution;
+        uniform float time;
+
+     #define ITERATION 50
+         float rate = .0;
+     float degrees2radians = 180./3.14159;
+     float golden_mean = 1.618;
+
+     float b = 4.;
+
+
+     vec3 man(vec2 p) {
+         p=p.yx;
+         vec2 s = p;
+         float d = 0.0, l;
+         float flip=-sin(3.14*3./2.+rate*time);
+         if (flip<0.) p = -p;
+         if (abs(p.x*p.x+p.y*p.y)<2.0){
+          for (int t = 0; t < ITERATION*2; t++) {
+                 s = vec2(((s.x * s.x - s.y * s.y) +flip* p.x), (1.* s.x * s.y + flip*p.y));
+             if(b==2. ||rate == 0.)
+                 s.x = 1./s.x;
+             else
+                 s.x = 1./pow(s.x,flip)*sign(s.x*flip);
+           l = length(s);
+           d += l/25.;
+             if (l >20.0&&t!=0)
+                 return vec3(-d);}}
+             return vec3(-0.);
+     }
+     vec3 eagle(vec2 p) {
+         p=-p.yx;
+         vec2 s = p;
+         float d = 0.0, l;
+         float flip=-sin(3.14*3./2.+rate*time)/abs(sin(time)*2.+2.);.5;
+         if (flip<0.) p = -p;
+         if(abs(6.*p.x*p.x+p.y*p.y*2.)<700.0)
+         for (int i = 0; i < ITERATION; i++) {
+             s=vec2(-(s.x * s.x - s.y * s.y) +flip* p.x, (1.* s.x * s.y + flip*p.y));
+             if(b<=.5 ||rate == 0.)
+                 s.x = 1./s.x;
+             else
+             s.x = 1./pow(s.x,flip)*sign(s.x*flip);
+               s.y = s.x*s.y;
+             l = length(s);
+             d +=2.;
+             if (l >(20.0) ) if( float(i)>3.&&float(i)>3.)
+                 return vec3(1.-sin(d * 0.003)-.5,1.- sin(d * 0.9)-.5,1.- sin(d * 0.1)-.5);}
+         return vec3(.0);}
+     vec3 lion(vec2 p) {
+       vec2 s = p.yx;
+         p=p.yx;
+
+       float d = 0.0, l;
+
+                 float flip=-sin(3.14/2.+rate*time);
+         if (flip<0.) p = -p;
+         if(p.x*p.x*1.+p.y*p.y*2.<21.)
+       for (int t = 0; t < ITERATION; t++) {
+         s = vec2(((s.x * s.x - s.y * s.y) +flip* p.x), (2.0* s.x * s.y + flip*p.y));
+
+         s/=2.0;
+           if(b==2. ||rate == 0.)
+           s.x = -1./s.x;
+          else
+           s.x = pow(s.x,flip)*sign(s.x*flip);
+
+
+
+
+          
+           l = length(s);
+         d += l/40.;
+           
+         if (l >14.0 )
+             if (float(t)  >2.)
+                 return vec3(-sin(d +1.),-sin(d +1.8),-sin(d+3.));
+                                 ;  // return vec3(0.);
+       }
+
+       return vec3(.0);
+     }
+
+
+     vec3 ox(vec2 p) {
+
+       vec2 s = p.yx;
+         p=p.yx;
+       float d = 0.0, l;
+
+                 float flip=-sin(3.14/2.+rate*time);
+         if (flip<0.) p = -p;
+         if( (p.x+.25)*(p.x+.25)+p.y*p.y<1.||(p.x>0.&& p.x*p.x+p.y*p.y<7. ))
+       for (int t = 0; t < ITERATION; t++) {
+         s = vec2(((s.x * s.x - s.y * s.y) +flip* p.x), (3.0* s.x * s.y + flip*p.y));
+
+           if(b==2. ||rate == 0.)
+           s.x = -1./s.x;
+          else
+           s.x = pow(s.x,flip)*sign(s.x*flip);
+
+
+          
+           
+           l = length(s);
+         d += l/10.;
+         if (l >14.0 )
+             if (float(t)  >2.)
+                 return vec3(-sin(d +time*1./golden_mean*2.),-sin(d +time*golden_mean*2.),-sin(d *time*2.));
+                                 ;  // return vec3(0.);
+       }
+
+       return vec3(.0);
+     }
+
+     vec3 body(vec2 p){
+         p=-p.yx*.5;
+            p.x+=.5;
+             float l=0.,b=0.,m=0.,n=0.,r=0.,q=0.//-sin(time)/50.; //uncomment prior comment to dance
+                 ;
+         //mandelbrot\heart
+             vec2 g=p;
+             g.x-=.5;
+             g.y=-g.y;
+             vec2 s=g;
+             vec3 heart=vec3(0.,0.,0.);;
+             for (int f=0;f<50;f+=1)if(abs(s.y)<2.){
+             s=vec2((s.x*s.x-s.y*s.y-g.x),2.0*s.x*s.y-g.y+q);
+             heart+=clamp(vec3(s.y*s.x,s.x,s.y)/5.,0.,1.);
+            }
+             else heart=vec3(0.);
+         //face
+             g=p*2.;
+             s = g;
+             vec3 face;
+             float d = 0., negator = 1.;
+             for (int f=0;f<21;f+=1)
+             if(abs(s.y)>21.&&(f==1||f>2)){
+                 l=1.-length(s)/40.;
+                 if (f == 1){
+                    s=vec2(p.x*p.x-p.y*p.y-p.x, 2.0*p.x*p.y-p.y);;
+                         d+=length(s)*1000.;
+                         }
+                 else
+                         d+=length(s)/10.;
+                 break;
+             }
+             else{
+                 s=vec2(-1./(s.x*s.x-s.y*s.y-g.x), 2.0*s.x*s.y-g.y);
+                 l=abs(s.y)*3.5;//refines middle horn, optional
+                 if(s.x>-.1)l=s.x*50.;//closes small holes
+                 d+=length(s)/10.;
+             }
+             if (l>.54) negator = 0.;
+             face=vec3(-sin(d +time*3.+6.28318/3.),-sin(d+time*3.+6.28318*2./3.),-sin(d+time*3.))*negator;
+         
+
+         //body
+             g=p;
+             s=g;
+             if (g.x>0.)for(int f=0;f<30;f+=1)if(abs(s.x)+abs(s.y)>52.&&f>4)b=abs(s.y)/77.;
+             else{
+                 s=2.*vec2(-1./(s.x*s.x-s.y*s.y-g.x),(2.0*s.x*s.y-g.y-q));
+                 s.x=sqrt(abs(s.x));
+             }
+         //musculature
+             g=p;
+             g.x+=.5;
+             s=g;
+             if (g.x>1.25&&abs(g.y)<2.5)for(int f=0;f<30;f+=1)if(abs(s.x+s.y)>11.&&f>8)m=abs(s.y)/50.;
+             else{
+                 s=1.3*vec2(-1.5/((1.*s.x*s.x-2.*s.y*s.y)-g.x),(1.9*s.x*s.y-1.87*g.y-q/4.));
+                 s.x=pow(abs(s.x),.57);
+             }
+         //robe
+             g=p;
+             g.x+=.1;
+             g/=1.1;
+             s=g;
+             if (g.x>.5)for(int f=0;f<70;f+=1)if(abs(s.x+s.y)>11.&&f>7)r=1.*clamp(1.3-abs(g.x-2.),0.,1.);
+             else {
+                 s=vec2(-2./((s.x*s.x-1.8*s.y*s.y)-g.x),(3.*s.x*s.y-1.3*g.y -q));s*=1.11;
+                 s.x=pow(abs(s.x),.8);
+             }
+
+         //legs
+             g=p*.5;
+             s=g;
+             if (g.x>.75&&g.x<1.7&&abs(g.y*g.x)<.54    )for(int f=0;f<23;f+=1)if(abs(s.x)+abs(s.y)>52.&&f>3)b=abs(s.x)/100.;
+                 else{
+                     s=3.*vec2(-1./(s.x*s.x-s.y*s.y-g.x),77.*s.x*s.y-g.y-q);
+                     s.y=-1./s.y;
+                 }
+         return face+heart+vec3(b+r+m*3.,b/2.+r+m*3.,r)+vec3(clamp(1.-l,0.,1.));}
+
+                          vec3 wings (vec2 p){
+                              
+
+                              vec3 destColor = vec3(.2);
+                              float f = 0.0;
+                              p*=5.;
+                              vec2 reincrementation = vec2 (0.);
+                                  for(float m = 0.0; m < 7.0; m++){
+                              for(float i = 0.0; i < 6.0; i++){
+                                  float s = -sin(3.141/3.*i);
+                                  float c = -cos(3.141/3.*i);
+
+                                  float val = pow((p.y+s+reincrementation.y)*(p.y+s+reincrementation.y)+(p.x+c+reincrementation.x)*(p.x+c+reincrementation.x),.5);
+                                  if (val>1.&& val<1.04)
+                                  f = 2.*(val+(p.y*p.y+p.x*p.x-9.)/10.);
+                              }
+                                      reincrementation = vec2(-sin(3.141/3.*m),-cos(3.141/3.*m));
+                          }
+                              return vec3(f*destColor);
+                          }
+                              
+
+     void main() {
+                        // vec2 p=-(vUv.yx-.5)/(resolution.xy/min(resolution.x,resolution.y))*14.;
+
+                         vec2 a = resolution.xy / min(resolution.x, resolution.y);
+                         vec2 p = (((vUv.xy ) -.5)*4.);
+                     float flip=-sin(rate*time+3.14);
+     p*=4.;
+     
+     float size = .7;(-sin(time)+3.)/2.3;
+   vec2 adj=a/1.2*size;
+     vec3 body = body((p)*adj/size);
+                    vec3 wingz;
+             float vertshift =-.0;
+         p.y-= vertshift;
+         float shift = 5.;
+
+         vec2 oxCoord = vec2(p.x-shift,p.y-shift)*adj;
+                    wingz+=  wings(oxCoord/3.)*4.;
+         vec2 lionCoord = vec2(p.x+shift,p.y+shift+vertshift)*adj;
+                                   wingz+=  wings(lionCoord/3.)*4.;
+
+         vec2 eagleCoord = vec2(p.x-shift,p.y+shift +vertshift)*adj;
+                                                  wingz+=  wings(eagleCoord/3.)*4.;
+
+         vec2 manCoord = vec2(p.x+shift,p.y-shift)*adj;
+                                                                 wingz+=  wings(manCoord/3.)*4.;
+
+         p*=a;
+         float ratio = min(resolution.x, resolution.y)/max(resolution.x, resolution.y)*2.;
+         float wingScale = 4./ratio;
+         //lion head tilt
+         float pixelangle = atan(lionCoord.y,lionCoord.x)-sin(time)/6.+3.14/8.;
+         float pixeldistance = pow((lionCoord.y*lionCoord.y+lionCoord.x*lionCoord.x),.5);
+         vec2 lionTiltCoord = -vec2(pixeldistance*ratio*2.*-cos(pixelangle),pixeldistance*ratio*2.*-sin(pixelangle));
+       gl_FragColor = vec4(wingz+body+12.*ox(ratio*oxCoord)+12.*lion(lionTiltCoord)+12.
+                   *eagle(ratio*13./2.0*eagleCoord)+man(ratio*2./2.0*manCoord)
+                   , 1.) ;
+     }
+        </script>
+<script src="./three.min.js"></script>
+        <script>
+
+            var container;
+            var camera, scene, renderer;
+            var uniforms;
+            init();
+            animate();
+
+            var invert = -1;
+            var rez = window.devicePixelRatio;
+            window.addEventListener('keydown', function(event) {
+            var x = parseInt(String.fromCharCode(event.which || event.keyCode));
+            if (x>0){rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
+            else if (x==0){rez = window.devicePixelRatio /10.; renderer.setPixelRatio( rez);}
+            else if (String.fromCharCode(event.which || event.keyCode)=="À")
+                {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
+            else if (String.fromCharCode(event.which || event.keyCode)=="=")        {    rez /=1.1; renderer.setPixelRatio(rez);}
+            else if ( event.keyCode==173)        {    rez *=1.1; renderer.setPixelRatio(rez);}
+            else if (String.fromCharCode(event.which || event.keyCode)=="M")        {    invert *= -1;}
+
+            }, false);
+
+            function init() {
+
+                container = document.getElementById( 'container' );
+                camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
+                scene = new THREE.Scene();
+                var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
+
+                uniforms = {
+        resolution: {value: new THREE.Vector2()},
+        
+        time: {value: 1.0 },
+      };
+
+      uniforms.resolution.value.x = window.innerWidth;
+      uniforms.resolution.value.y = window.innerHeight;
+                var material = new THREE.ShaderMaterial( {
+                    uniforms: uniforms,
+                    vertexShader: document.getElementById( 'vertexShader' ).textContent,
+                    fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+                } );
+                var mesh = new THREE.Mesh( geometry, material );
+                scene.add( mesh );
+                renderer = new THREE.WebGLRenderer();
+                renderer.setSize( window.innerWidth, window.innerHeight );
+
+
+                renderer.setPixelRatio( window.devicePixelRatio);//this will pixelate if changed
+
+                container.appendChild( renderer.domElement );
+                onWindowResize();
+                window.addEventListener( 'resize', onWindowResize, false );
+            }
+            function onWindowResize() {
+
+      uniforms.resolution.value.x = window.innerWidth;
+      uniforms.resolution.value.y = window.innerHeight;
+                renderer.setSize( window.innerWidth, window.innerHeight );
+            }
+            function animate( timestamp ) {
+                uniforms[ "time" ].value = timestamp / 1000;
+                requestAnimationFrame( animate );
+                renderer.render( scene, camera );
+            }
+        </script>
+
+    </body>
+</html>

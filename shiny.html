@@ -1,0 +1,118 @@
+<html lang="en">
+    <head>
+        <title>Shiny</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="main.css">
+    </head>
+    <body>
+
+        <div id="container"></div>
+
+        <script id="vertexShader" type="x-shader/x-vertex">
+
+            varying vec2 vUv;
+        uniform vec2 resolution;
+            void main()    {
+
+                vUv = uv;
+                gl_Position = vec4( position, 1.0 );
+            }
+        </script>
+
+        <script id="fragmentShader" type="x-shader/x-fragment">
+            varying vec2 vUv;
+        uniform vec2 resolution;
+        uniform float time;
+void main(){
+    vec2 p=-(vUv.yx-.5)/(resolution.xy/min(resolution.x,resolution.y))*15.;
+        p.x-=.75;
+        vec2 s = p;
+        float l=0., d = 0., negator = 1.;
+        for (int f=0;f<21;f+=1)
+        if(abs(s.y)>21.&&(f==1||f>2)){
+            l=1.-length(s)/40.;
+            if (f == 1)
+                    d+=length(s)*1000.;
+            else
+                    d+=length(s)/10.;
+            break;
+        }
+        else{
+            s=vec2(-1./(s.x*s.x-s.y*s.y-p.x), 2.0*s.x*s.y-p.y);
+            l=abs(s.y)*3.5;//refines middle horn, optional
+            if(s.x>-.1)l=s.x*50.;//closes small holes
+            d+=length(s)/10.;
+        }
+        if (l>.54) negator = 0.;
+        gl_FragColor=vec4(-sin(d +time*3.+6.28318/3.),-sin(d+time*3.+6.28318*5./3.),-sin(d+time*3.),1.)*negator;
+    }
+
+        </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r123/three.min.js"></script>
+        <script>
+
+            var container;
+            var camera, scene, renderer;
+            var uniforms;
+            init();
+            animate();
+
+var rez = window.devicePixelRatio;
+window.addEventListener('keydown', function(event) {
+var x = parseInt(String.fromCharCode(event.which || event.keyCode));
+if (x==1){rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
+else if (String.fromCharCode(event.which || event.keyCode)=="À")
+    {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);
+    }
+    
+
+}, false);
+
+            function init() {
+
+                container = document.getElementById( 'container' );
+                camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
+                scene = new THREE.Scene();
+                var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
+
+                uniforms = {
+        resolution: {value: new THREE.Vector2()},
+        
+        time: {value: 1.0 },
+      };
+
+      uniforms.resolution.value.x = window.innerWidth;
+      uniforms.resolution.value.y = window.innerHeight;
+                var material = new THREE.ShaderMaterial( {
+                    uniforms: uniforms,
+                    vertexShader: document.getElementById( 'vertexShader' ).textContent,
+                    fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+                } );
+                var mesh = new THREE.Mesh( geometry, material );
+                scene.add( mesh );
+                renderer = new THREE.WebGLRenderer();
+                renderer.setSize( window.innerWidth, window.innerHeight );
+
+
+                renderer.setPixelRatio( window.devicePixelRatio);//this will pixelate if changed
+
+                container.appendChild( renderer.domElement );
+                onWindowResize();
+                window.addEventListener( 'resize', onWindowResize, false );
+            }
+            function onWindowResize() {
+
+      uniforms.resolution.value.x = window.innerWidth;
+      uniforms.resolution.value.y = window.innerHeight;
+                renderer.setSize( window.innerWidth, window.innerHeight );
+            }
+            function animate( timestamp ) {
+                uniforms[ "time" ].value = timestamp / 1000;
+                requestAnimationFrame( animate );
+                renderer.render( scene, camera );
+            }
+        </script>
+
+    </body>
+</html>

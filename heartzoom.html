@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Zone:X - Sonic Starship</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="main.css">
+	</head>
+	<body>
+<script src="./threer127.min.js"></script>
+
+		<div id="container"></div>
+
+		<script id="vertexShader" type="x-shader/x-vertex">
+
+				varying vec2 vUv;
+        		uniform vec2 coords;
+       			uniform vec2 resolution;
+       			uniform float time;
+
+			void main()	{
+
+				vUv = uv;
+				gl_Position = vec4( position, 1.0 );
+			}
+		</script>
+
+		<script id="fragmentShader" type="x-shader/x-fragment">
+
+
+
+
+
+        precision highp float;
+                    uniform vec2 coords;
+                    varying vec2 vUv;
+    uniform vec2 resolution;
+    uniform float time;
+    uniform float zoom;
+
+ #define ITERATION 50
+     float rate = .0;
+ float degrees2radians = 180./3.14159;
+ float golden_mean = 1.618;
+
+ float b = 4.;
+
+
+ vec3 man(vec2 p) {
+     p=p.yx;
+     vec2 s = p;
+     float d = 0.0, l;
+     float flip=-sin(3.14*3./2.+rate*time);
+     if (flip<0.) p = -p;
+     if (abs(p.x*p.x+p.y*p.y)<2.0){
+      for (int t = 0; t < ITERATION*2; t++) {
+             s = vec2(((s.x * s.x - s.y * s.y) +flip* p.x), (1.* s.x * s.y + flip*p.y));
+         if(b==2. ||rate == 0.)
+             s.x = 1./s.x;
+         else
+             s.x = 1./pow(s.x,flip)*sign(s.x*flip);
+       l = length(s);
+       d += l/25.;
+         if (l >20.0&&t!=0)
+             return vec3(-d);}}
+         return vec3(-0.);
+ }
+ vec3 eagle(vec2 p) {
+     p=-p.yx;
+     vec2 s = p;
+     float d = 0.0, l;
+     float flip=-sin(3.14*3./2.+rate*time)/abs(sin(time)*2.+2.);.5;
+     if (flip<0.) p = -p;
+     if(abs(6.*p.x*p.x+p.y*p.y*2.)<700.0)
+     for (int i = 0; i < ITERATION; i++) {
+         s=vec2(-(s.x * s.x - s.y * s.y) +flip* p.x, (1.* s.x * s.y + flip*p.y));
+         if(b<=.5 ||rate == 0.)
+             s.x = 1./s.x;
+         else
+         s.x = 1./pow(s.x,flip)*sign(s.x*flip);
+           s.y = s.x*s.y;
+         l = length(s);
+         d +=2.;
+         if (l >(20.0) ) if( float(i)>3.&&float(i)>3.)
+             return vec3(1.-sin(d * 0.003)-.5,1.- sin(d * 0.9)-.5,1.- sin(d * 0.1)-.5);}
+     return vec3(.0);}
+ vec3 lion(vec2 p) {
+   vec2 s = p.yx;
+     p=p.yx;
+
+   float d = 0.0, l;
+
+             float flip=-sin(3.14/2.+rate*time);
+     if (flip<0.) p = -p;
+     if(p.x*p.x*1.+p.y*p.y*2.<21.)
+   for (int t = 0; t < ITERATION; t++) {
+     s = vec2(((s.x * s.x - s.y * s.y) +flip* p.x), (2.0* s.x * s.y + flip*p.y));
+
+     s/=2.0;
+       if(b==2. ||rate == 0.)
+       s.x = -1./s.x;
+      else
+       s.x = pow(s.x,flip)*sign(s.x*flip);
+
+
+
+
+
+       l = length(s);
+     d += l/40.;
+
+     if (l >14.0 )
+         if (float(t)  >2.)
+             return vec3(-sin(d +1.),-sin(d +1.8),-sin(d+3.));
+                             ;  // return vec3(0.);
+   }
+
+   return vec3(.0);
+ }
+
+
+ vec3 ox(vec2 p) {
+
+   vec2 s = p.yx;
+     p=p.yx;
+   float d = 0.0, l;
+
+             float flip=-sin(3.14/2.+rate*time);
+     if (flip<0.) p = -p;
+     if( (p.x+.25)*(p.x+.25)+p.y*p.y<1.||(p.x>0.&& p.x*p.x+p.y*p.y<7. ))
+   for (int t = 0; t < ITERATION; t++) {
+     s = vec2(((s.x * s.x - s.y * s.y) +flip* p.x), (3.0* s.x * s.y + flip*p.y));
+
+       if(b==2. ||rate == 0.)
+       s.x = -1./s.x;
+      else
+       s.x = pow(s.x,flip)*sign(s.x*flip);
+
+
+
+
+       l = length(s);
+     d += l/10.;
+     if (l >14.0 )
+         if (float(t)  >2.)
+             return vec3(-sin(d +time*1./golden_mean*2.),-sin(d +time*golden_mean*2.),-sin(d *time*2.));
+                             ;  // return vec3(0.);
+   }
+
+   return vec3(.0);
+ }
+
+ vec3 body(vec2 p){
+     p=-p.yx*.5;
+        p.x+=.5;
+            float l=0.,b=0.,m=0.,n=0.,r=0.,q=0.,qq=0.;
+            q=-sin(time*2.)/50.;qq=-sin(time*1.2)/30.;//(un)comment this line to toggle dancing
+     //face
+         vec2 g=p*2.;
+         vec2 s = g;
+         vec3 face;
+         float d = 0., negator = 1.;
+         for (int f=0;f<21;f+=1)
+         if(abs(s.y)>21.&&(f==1||f>2)){
+             l=1.-length(s)/40.;
+             if (f == 1){
+                     s=vec2((g.x*g.x-g.y*g.y-g.x), 2.0*g.x*g.y-g.y);
+                     d+=length(s)*50.;}
+             else
+                     d+=length(s)/10.;
+             break;
+         }
+         else{
+             s=vec2(-1./(s.x*s.x-s.y*s.y-g.x), 2.0*s.x*s.y-g.y);
+             l=abs(s.y)*3.5;//refines middle horn, optional
+             if(s.x>-.1)l=s.x*50.;//closes small holes
+             d+=length(s)/10.;
+         }
+         if (l>.54) negator = 0.;
+         face=vec3(-sin(d +time*3.+6.28318/3.),-sin(d+time*3.+6.28318*2./3.),-sin(d+time*3.))*negator;
+
+
+                    //body--I found the body the first time I ever used a square root with the Lamb equations.
+                        g=p;
+                        vec2 z=g;
+                        for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4)b=abs(z.y)/77.;
+                        else{
+                            z=2.*vec2(-1./(z.x*z.x-z.y*z.y-g.x+qq),(2.0*z.x*z.y-g.y+q));//z<=z^2-g; z.real<=-1/z.real; z*=2;
+                            z.x=sqrt(abs(z.x));}//z.real<=squareroot(z.real)
+                    //musculature
+                        g=p;
+                        g.x+=.5;
+                        z=g;
+                        for(int f=0;f<14;f+=1)if(abs(z.y)>15.&&f>7)m=abs(z.y)/25.;
+                        else {
+                            z=1.3*vec2(-1.5/((z.x*z.x-2.*z.y*z.y)-g.x+qq*2.),(1.9*z.x*z.y-1.87*g.y+q/4.));//the equation is an alteration of the coefficients of the body equation
+                            z.x=pow(abs(z.x),.57);}
+                    //robe--came from the body as soon as I looked for clothing
+                        g=p;
+                        g.x+=.05;
+                        g.y/=1.14;
+                        z=g;
+                        if(g.x>.5)for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7)r=clamp(1.4-abs(g.x-2.2)
+                                                        // *(1.-abs(g.y*g.x))-.07//(un)comment this line to toggle sleeves
+                                                        ,0.,1.);
+                        else{
+                            z=1.1*vec2(-2./((z.x*z.x-1.8*z.y*z.y)-g.x+qq),(3.*z.x*z.y-1.3*g.y+q));;
+                            z.x=pow(abs(z.x),.8);}
+
+                    //legs--I found these about hours before finding the body but left them, recovering them from memory
+                        g=p/2.;
+                        z=g;
+                        if(g.x>.75&&abs(g.y*g.x)<.54)for(int f=0;f<8;f+=1)if(abs(z.x)>52.&&f>1)b=abs(z.x)/100.;
+                        else{
+                            z=3.*vec2(-1./(z.x*z.x-z.y*z.y-g.x+qq/10.),72.*z.x*z.y-g.y+q);
+                            z.y=-1./z.y;}
+                    //horse
+                        g=p;
+                        g.x-=3.5;
+                        g.y/=1.14;
+                         z=g;
+                        if(g.x*g.x+g.y*g.y<3.)for(int f=0;f<23;f+=1)if(abs(z.y)>11.&&f>7)r=1.;
+                        else{
+                            z=1.0*vec2(1./((z.x*z.x-3.*z.y*z.y)-g.x),2.*(z.x*z.y-g.y+q));;
+                            z.x=pow(abs(z.x),.8);}
+                    //sword
+                        g=p*3.;
+                        g.x+=-sin(time)*20.+12.;
+                        g.x/=1.5;
+                        z=g;
+                        d = 0.0;
+                        float u=0.;
+                        vec3 h;
+                        if (p.x>.7&&g.x>-2.5 && abs(g.y*g.x) <1.77 &&abs(g.y)<2.11111111)for (int i = 0; i < 14; i++) {
+                              z = vec2(1.1/(1.-pow((z.x * z.x - z.y * z.y +1.+ g.x),2.)), -1.77/(2.0 * z.x * z.y + g.y));
+                            u = length(z);
+                            d +=z.x+z.y+20.;
+                            if (u >5.4 && ( i==4||( i==13 )))  h=vec3(-sin(-d*0.0061),-sin(-d * 0.0063),-sin(-d * 0.0069));
+                      }
+return face*2.+clamp(vec3(n+b+r+m,b/2.+r+m,r+m/2.5),0.,1.)+h;}
+                    //$$I originally found these equations while trying to combine x=1/(1/x-x) which produces increasingly many extraneous solutions on feedback algebraically with the Mandelbrot
+                    //x=1/(1/x-x) was in turn found from 1=(1/(1+1))=1/2=((1/(1+1))/((1/(1+1))+(1/(1+1))))=1 which is a feedback false to true loop.
+                    //the core concept of this is x=1/(n*x)=1/(n*(1/(n*x)) Also:
+                    //0 = 0*0 = 0*0 * 0*0 = .... = 00 & -1/x=x, solves to x = i or -i, whereas -1/-1/x=x, solves to all values.
+
+                      vec3 armyofthelamb(vec2 p)
+                                       {
+                                p=-p.yx*1.5;
+                                p.x+=5.;
+                                    float l=0.,b=0.,m=0.,n=1.,r=0.,q=0.;
+                                    q=-sin(time*2.)/50.;//(un)comment this line to toggle dancing
+                                    p=mod(p,5.);
+                                    p-=2.5;
+                                    p.x+=2.;
+                                //person--a body derived to have a head of its own
+                                    vec2 z=p;
+                                    for(int f=0;f<20;f+=1)if(abs(z.y)>50.&&f>4)l=1.;
+                                    else{z=2.*vec2(1./(z.x*z.x-z.y*z.y-p.x),(2.0*z.x*z.y-p.y-sin(time)/20.));
+                                             z.x=pow(abs(z.x),.59);}
+                                            
+                                //robe--came from the body as soon as I looked for clothing
+                                    vec2 g=p;
+                                    g.x+=.05;
+                                    g.y/=1.14;
+                                    z=g;
+                                    if(g.x>.5)for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7)r=clamp(1.4-abs(g.x-2.3)
+                                                                     *(1.-abs(g.y*g.x))-.07//(un)comment this line to toggle sleeves
+                                                                    ,0.,1.);
+                                    else{
+                                        z=1.1*vec2(-2./((z.x*z.x-1.8*z.y*z.y)-g.x),(3.*z.x*z.y-1.3*g.y+q));;
+                                        z.x=pow(abs(z.x),.8);}
+                                //horse
+                                    g=p;
+                                    g.x-=3.5;
+                                    g.y/=1.14;
+                                     z=g;
+                                    if(g.x*g.x+g.y*g.y<3.)for(int f=0;f<23;f+=1)if(abs(z.y)>11.&&f>7)r=1.;
+                                    else{
+                                        z=1.0*vec2(1./((z.x*z.x-3.*z.y*z.y)-g.x),2.*(z.x*z.y-g.y+q));;
+                                        z.x=pow(abs(z.x),.8);}
+                                //legs--I found these about hours before finding the body but left them, recovering them from memory
+                                    g=p/2.;
+                                    z=g;
+                                    if(g.x>.75&&g.x<1.7&&abs(g.y*g.x)<.54)for(int f=0;f<8;f+=1)if(abs(z.x)>52.&&f>1)b=abs(z.x)/100.;
+                                    else{
+                                        z=3.*vec2(-1./(z.x*z.x-z.y*z.y-g.x),77.*z.x*z.y-g.y+q);
+                                        z.y=-1./z.y;}
+                                return vec3(l+r+b);
+                            }
+                      vec3 wings (vec2 p){
+
+
+                          vec3 destColor = vec3(.2);
+                          float f = 0.0;
+                          p*=5.;
+                          vec2 reincrementation = vec2 (0.);
+                              for(float m = 0.0; m < 7.0; m++){
+                          for(float i = 0.0; i < 6.0; i++){
+                              float s = -sin(3.141/3.*i);
+                              float c = -cos(3.141/3.*i);
+
+                              float val = pow((p.y+s+reincrementation.y)*(p.y+s+reincrementation.y)+(p.x+c+reincrementation.x)*(p.x+c+reincrementation.x),.5);
+                              if (val>1.&& val<1.04)
+                              f = 2.*(val+(p.y*p.y+p.x*p.x-9.)/10.);
+                          }
+                                  reincrementation = vec2(-sin(3.141/3.*m),-cos(3.141/3.*m));
+                      }
+                          return vec3(f*destColor);
+                      }
+
+
+
+ void main() {
+                    // vec2 p=-(vUv.yx-.5)/(resolution.xy/min(resolution.x,resolution.y))*14.;
+
+//mandelbrot zoom
+            vec2 p=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*18.*zoom;
+        p+=coords.yx;
+        p.y=-p.y;
+        vec2 s=p;
+        vec4 heart=vec4(0.);
+        for (int f=0;f<50;f+=1)if(abs(s.y)<2.){
+        s=vec2((s.x*s.x-s.y*s.y-p.x),2.0*s.x*s.y-p.y);
+        heart+=vec4(s.y*s.x,s.x,s.y,1.)/5.;
+       }
+        else heart=vec4(0.);//vec4(s.x/s.y,s.y,s.x,1.)/40.;
+        //vec4(-sin(time*1.618+abs(s.x/s.y)),-sin(time*.618+abs(s.y/s.x)),-sin(time+1./abs(s.x*s.y)),1.);
+//close mandelbrot
+//open manoid
+    vec2 g=p*14.;
+    vec2 z=g;
+    vec4 manoid;
+    for(int f=0;f<42;f+=1)if(abs(z.y)>52.&&f>0)manoid=clamp(vec4((z.y))/500.,0.,1.);
+    else{
+        z=2.*vec2(-1./(z.x*z.x-z.y*z.y-g.x),(2.0*z.x*z.y-g.y));//z<=z^2-g; z.real<=-1/z.real; z*=2;
+        z.x=log(sqrt(abs(z.x)));}//z.real<=squareroot(z.real)
+//close manoid
+
+                     vec2 a = resolution.xy / min(resolution.x, resolution.y);
+                      p = (((vUv.xy ) -.5)*5.);
+                 float flip=-sin(rate*time+3.14);
+ p*=4.;
+
+ float size = .7;(-sin(time)+3.)/2.3;
+vec2 adj=a/1.2*size;
+ vec3 body = body((p)*adj/size);
+                vec3 wingz;
+         float vertshift =-.0;
+     p.y-= vertshift;
+     float shift = 6.;
+
+     vec2 oxCoord = vec2(p.x-shift,p.y-shift)*adj;
+                wingz+=  wings(oxCoord/3.)*4.;
+     vec2 lionCoord = vec2(p.x+shift,p.y+shift+vertshift)*adj;
+                               wingz+=  wings(lionCoord/3.)*4.;
+
+     vec2 eagleCoord = vec2(p.x-shift,p.y+shift +vertshift)*adj;
+                                              wingz+=  wings(eagleCoord/3.)*4.;
+
+     vec2 manCoord = vec2(p.x+shift,p.y-shift)*adj;
+                                                             wingz+=  wings(manCoord/3.)*4.;
+
+     p*=a;
+     float ratio = min(resolution.x, resolution.y)/max(resolution.x, resolution.y)*2.;
+     float wingScale = 4./ratio;
+     //lion head tilt
+     float pixelangle = atan(lionCoord.y,lionCoord.x)-sin(time)/6.+3.14/8.;
+     float pixeldistance = pow((lionCoord.y*lionCoord.y+lionCoord.x*lionCoord.x),.5);
+     vec2 lionTiltCoord = -vec2(pixeldistance*ratio*2.*-cos(pixelangle),pixeldistance*ratio*2.*-sin(pixelangle));
+   gl_FragColor = vec4(body+wingz+12.*ox(ratio*oxCoord)+12.*lion(lionTiltCoord)+12.
+               *eagle(ratio*13./2.0*eagleCoord)+man(ratio*2./2.0*manCoord)*3.//+armyofthelamb(p)
+               , 1.) +heart*1.+manoid;
+ }
+		</script>
+
+		<script>
+//number key resolution transmission
+            var rez = window.devicePixelRatio;
+            window.addEventListener('keydown', function(event) {
+            var x = parseInt(String.fromCharCode(event.which || event.keyCode));
+            if (x>0){rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
+            else if (x==0){rez = window.devicePixelRatio /10.; renderer.setPixelRatio( rez);}
+            else if (String.fromCharCode(event.which || event.keyCode)=="À")
+                {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
+            else if (String.fromCharCode(event.which || event.keyCode)=="=")        {    rez /=1.1; renderer.setPixelRatio(rez);}
+            else if ( event.keyCode==173)        {    rez *=1.1; renderer.setPixelRatio(rez);}
+            else if (String.fromCharCode(event.which || event.keyCode)=="M")        {    invert *= -1;}
+
+            }, false);
+
+	/*
+function hsv2rgb (let hsv) {
+  // from HSV to RGB color vector
+  hsv.yz = clamp (hsv[1],hsv[2], 0.0, 1.0);
+  return hsv[2] * (1.0 + 0.63 * hsv[1]] * (-cos (2.0 * 3.14159 * (hsv[0]] + vec3 (0.0, 2.0 / 3.0, 1.0 / 3.0))) - 1.0));
+}//^^^^^^above from https://shadertoy.fandom.com/wiki/Color_Processing^^^^^//modified by X
+*/
+
+		let pi = 3.14159
+let testar = Array(24);
+let testarD = Array(24);
+    let maxFreq = 0;
+let mamp = -1000000;
+	let averagedAmp =  0;
+
+	let len=0;
+	let spirray0 = new Float32Array(1024);
+	let spirray1 = new Float32Array(1024);
+	let spiregulator=0;
+	let phase = 0;
+function makeSpirograph()
+    {
+        		phase = phase % (pi*2);
+        len = 0;
+        let adjConstant = 1./(spirafreq)*3.14*1.618;
+        if(Math.abs(inputData[0])>.0	)
+        for(var m = 0; m < 1024; m++)
+        {
+                phase += adjConstant;//spira_pitch;
+                spirray0[m]=-Math.sin(phase)*inputData[m];
+                spirray1[m]=-Math.cos(phase)*inputData[m];
+               // len++;
+        }
+        len -= 1;
+        largest_loop = 0;
+        spiregulator = 0;
+        for(let j = 0; j<inputData.length-24; j++)
+        {
+
+            if (Math.abs(spirray0[j])>largest_loop)largest_loop =
+                                                             Math.abs(spirray0[j]);
+            if (Math.abs(spirray1[j])>largest_loop)largest_loop =
+                                                        Math.abs(spirray1[j]);
+        }
+        spiregulator=largest_loop*2;//*on;
+
+    }
+
+    function spiral_compress()
+    {
+        maxFreq = 0;
+        let freq = 0;
+        max1 = -100000;
+        min1 = 100000;
+		 mamp = -1000000;
+        for(let n = 0; n<24; n++){testar[n] = 0;testarD[n] = 1;}
+
+        let b = -1000000;
+let z = dataArray;
+	 averagedAmp =  0;
+        for(let t=1; t<1024; t+=1)//n<fftSize1/4-100
+        {
+            let n =t;
+            //if (fftSize1/4<t) n =Math.abs(t-let(t)/(let(fftSize1/4)));
+
+averagedAmp += z[n];
+        if ( z[n]>z[n-1] && z[n] > z[n+1] )
+            {
+
+                let   d = (-z[n-1]+z[n+1])/(z[n-1]+z[n+1]);
+
+                let nAdj = n;
+                if (Math.abs(d)<1.1) nAdj = n + d*4;
+                //if (Math.abs(nAdj-n) < 10)
+                freq =((( audioX.sampleRate /10000.)*(nAdj))/1024)*10000;
+
+
+                {
+                    let g = Math.pow ( 2, (1/24.));
+                    let aa = freq/440.0;
+                    let note = Math.log(aa)/Math.log(g)+69*2;
+                    testar[(Math.round(note))%24] += Math.abs(z[n]);
+                    testarD[(Math.round(note))%24] += 1;
+
+                }
+            }
+        }
+
+averagedAmp/=1000.;
+    };
+
+let time = 0;
+    let maxInt24 = 0;
+    let maxWave = 0;
+  //  for(let n = 0; n<audiBuffer.length; n++)
+///b = abs(-sin(n/audiBuffer.length*(pi*2.)));
+
+	let shrinking, moving;
+	let coordX=0.;
+	let coordY=0.;
+	let part = {cx : {  value: 0 },};
+	let trail = Array(1000);
+		let cx = Array(1000);
+				let cy = Array(1000);
+						let pitchCol = Array(1000);
+   let trailLoaded = false;
+   let trailDepth = -1;
+      let trailLength = 144;
+      let d_x=0,d_y=0;
+      let f = 0;
+
+
+
+                      let xPerp= Array(1000);
+                      let yPerp = Array(1000);
+                      let angle=Array(1000);
+                      let MIN_SAMPLES = 0;  // will be initialized when AudioContext is created.
+
+let pitc = 1;
+let inputData;
+let bufferSize = 1024;
+let reset = 0;
+let on;
+let spirafreq=1;
+
+function  move()
+    {
+    if (!trailLoaded) {trailLoaded = true; for(var n = 0; n<trailLength; n++)
+	{trail[n] = part;xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}}
+
+     analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
+		//let iD = Array(inputData.length);
+		//for(let m = 0; m<inputData.length; m++) iD[m]=(inputData[m]);
+		let pb = -1;
+		if(inputData[0]>0.0001)pb=calculatePitch();
+		pt = pb;
+		if(pb>0){pb =Math.pow(pb,.5)*.75;}
+		on = 1;
+
+		if (isFinite(pb) &&pb>0&& pb!=23.988278387579214 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;moving=true;}
+		else if (reset>5){averagedAmp =0;on = 0;spirafreq=pt;moving=false;}
+		else reset++
+
+		if (trailDepth<trailLength)trailDepth++;
+		radius = .1;
+		let g = Math.pow ( 2, (1/24.0));
+		let aa = pitc/440.0;
+		let note = Math.log(aa)/Math.log(g)+49;
+		let inc = 4;
+		let t =  (-note * 30+30*inc);
+		angle = t%360;
+		angle = -angle;
+		let vo = new THREE.Color();
+		vo.setHSL((angle+90)/360.,1.,.5);
+
+		pitchCol[f]  = new THREE.MeshBasicMaterial({
+				color:vo,
+                opacity: 0.5,
+                transparent: true,
+              });
+		angle = ((angle-30+180)/360*2*pi);
+           // angle = (maxInt24/24*2*pi);
+		angle[f] = angle;
+
+            //Colour pitchCol = Colour::fromHSV((angle-60)/360.,saturation,value,1.);
+
+
+                 d_x = -Math.sin(-angle)*(2.*averagedAmp)**.7;
+                 d_y = -Math.cos(-angle)*(2.*averagedAmp)**.7 ;
+		if(isFinite(d_x)&&isFinite(d_y)){
+			if(Math.abs(coordX+d_x*.04*zoom)<2)coordX+=d_x*.04*zoom;
+			if(Math.abs(coordY+d_y*.04*zoom)<2)coordY+=d_y*.04*zoom;}
+
+
+         interpolationFactor = 10.;//timeDif*1./(callbackWait-1);
+        if (interpolationFactor>30) interpolationFactor=30;
+        else if (interpolationFactor<1) interpolationFactor=1;
+
+		cx[f] = 0;
+		cy[f] = 0;
+		xPerp[f] = -Math.sin(-angle+pi/2);
+		yPerp[f] = -Math.cos(-angle+pi/2);
+		trail[f].radii = radius/2;
+		f++;
+		if (f>=trailDepth)f=0;
+        for(let n = 0; n < trailDepth; n++) {
+			cx[n] += d_x;
+			cy[n] += d_y;
+		}
+
+}
+
+
+let material;
+			let container;
+			let camera, renderer;
+let mesh;
+let analyser;
+let source;
+let dataArray;
+startMic();
+let geometries = Array(24);
+let meshes = Array(24);
+let zoom=1.;
+let trailGeom = Array(1000);
+let materials = Array(1000);
+let trailMeshes = Array(1000);
+let materialShader;
+let geometry;
+let progress = true;
+window.addEventListener('keydown', function(event) {
+let x = parseInt(String.fromCharCode(event.which || event.keyCode));
+//if (x>0)
+				//renderer.setPixelRatio( window.devicePixelRatio /x);
+}, false);
+
+
+
+let uniforms;
+			function init() {
+
+                inputData = new Float32Array(bufferSize);
+
+				container = document.getElementById( 'container' );
+				camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
+
+
+				 geometryP = new THREE.PlaneBufferGeometry( 2, 2 );
+
+
+for (let r=0; r<24; r++) {
+
+	let vo = new THREE.Color();
+				vo.setHSL((r-10)%24/24.,1.,.5);
+            material  = new THREE.MeshBasicMaterial( { color:vo});
+
+let vertices = new Float32Array( [0,0,0,
+0,0,0,
+0,0,0
+] );
+geometries[r] = new THREE.BufferGeometry();
+geometries[r].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
+
+
+meshes[r] = new THREE.Mesh(geometries[r] , material );
+
+	}
+
+                              materials = new THREE.MeshBasicMaterial( { color: 0x0000f0,
+                                });
+for (let r=0; r<trailLength; r++) {
+
+
+
+
+ //materials[r].alphaMap=.5;
+let vertices = new Float32Array( [0,0,0,
+0,0,0,
+0,0,0
+] );
+
+trailGeom[r] = new THREE.BufferGeometry();
+trailGeom[r].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
+trailMeshes[r] = new THREE.Mesh(trailGeom[r] , materials );
+
+
+	}
+uniforms = THREE.UniformsUtils.merge([
+  	  THREE.UniformsLib.lights,
+  {
+					micIn : {  value: null }, // float array (vec3)
+        time: {value: 1.0 },
+        zoom: {value: 1.0 },
+
+        resolution: {value: new THREE.Vector2() },
+        coords: {value: new THREE.Vector2() }
+}
+  ]);
+      uniforms.resolution.value.x = window.innerWidth;
+      uniforms.resolution.value.y = window.innerHeight;
+      uniforms.coords.value.x = coordX;
+      uniforms.coords.value.y = coordY;
+				 materialShader = new THREE.ShaderMaterial( {
+					uniforms: uniforms,
+					vertexShader: document.getElementById( 'vertexShader' ).textContent,
+					fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+				} );
+
+				renderer = new THREE.WebGLRenderer();
+                              mesh = new THREE.Mesh( geometryP, materialShader );
+
+
+
+
+				renderer.setPixelRatio( window.devicePixelRatio);
+
+				container.appendChild( renderer.domElement );
+				onWindowResize();
+				window.addEventListener( 'resize', onWindowResize, false );
+			animate();
+			}
+			function onWindowResize() {
+
+      uniforms.resolution.value.x = window.innerWidth;
+      uniforms.resolution.value.y = window.innerHeight;
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+
+
+
+			}
+			//
+
+			//
+	let point = [];
+
+			function animate( timestamp ) {
+
+spiral_compress();
+
+move();
+			if(moving) makeSpirograph();
+			let lineMat = new THREE.LineBasicMaterial( {
+	color: 0xffffff,
+	linewidth: 3,
+	linecap: 'round', //ignored by WebGLRenderer
+	linejoin:  'round' //ignored by WebGLRenderer
+} );
+
+
+let porportion = window.innerHeight/ window.innerWidth;
+	if(moving)for (let r= 0; r < 1000; r ++) {
+                let tx = spirray0[r]*porportion/spiregulator;
+                let ty =  spirray1[r]/spiregulator;
+//	if(!(isFinite(tx) || isFinite(ty) || Math.abs(tx)>window.innerWidth/2 || Math.abs(cy)>window.innerHeight/2))
+
+		//if (isFinite(tx)&&isFinite(ty))
+			point[r]=new THREE.Vector3( tx, ty, -0.07 );
+
+	}
+  const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), lineMat );
+				const	scene = new THREE.Scene();
+				if(moving)scene.add(line);
+			if (zoom>.000001&&progress){ zoom /= 1.005;}
+			else if (zoom<1.0){progress = false;zoom *= 1.1;}
+			else {progress = true;}
+      uniforms.coords.value.x = coordX;
+      uniforms.coords.value.y = coordY;
+    uniforms[ "time" ].value = timestamp / 1000;
+      uniforms[ "zoom" ].value = zoom;
+				requestAnimationFrame( animate );
+if (micOn)analyser.getByteFrequencyData(  dataArray);
+
+let maxTestar = 0.;
+for (var g=0; g<24; g++) if(testar[g]>maxTestar){maxTestar=testar[g];}
+
+for (let g=0; g<24; g++) {
+let widt = .01;
+let r = (g+14)%24;
+let lengt=0.;
+if (maxTestar>0.)
+     lengt = .5*testar[(r+4)%24]/maxTestar;
+	let vo = new THREE.Color();
+				vo=vo.setHSL((20-r)%24/24.,1.,.5);
+            material  = new THREE.MeshBasicMaterial( { color:vo});
+scene.add(new THREE.Mesh(geometries[r] , material ))
+
+let vertices = new Float32Array( [
+	0-widt*-Math.sin(r*pi*2./24+pi/2.)*porportion,	0-widt*-Math.cos(r*pi*2./24+pi/2.),  -0.05,
+	0+widt*-Math.sin(r*pi*2./24+pi/2.)*porportion,	0+widt*-Math.cos(r*pi*2./24+pi/2.),  -0.05,
+	(lengt*-Math.sin(r*pi*2./24)+widt*-Math.sin(r*pi*2./24+pi/2.))*porportion,
+	lengt*-Math.cos(r*pi*2./24)+widt*-Math.cos(r*pi*2./24+pi/2.),  -0.05,
+	0-widt*-Math.sin(r*pi*2./24+pi/2.)*porportion,	0-widt*-Math.cos(r*pi*2./24+pi/2.),  -0.05,
+	(lengt*-Math.sin(r*pi*2./24)+widt*-Math.sin(r*pi*2./24+pi/2.))*porportion,
+	lengt*-Math.cos(r*pi*2./24)+widt*-Math.cos(r*pi*2./24+pi/2.),  -0.05,
+	(lengt*-Math.sin(r*pi*2./24)-widt*-Math.sin(r*pi*2./24+pi/2.))*porportion,
+	lengt*-Math.cos(r*pi*2./24)-widt*-Math.cos(r*pi*2./24+pi/2.),  -0.05,
+] );
+
+// itemSize = 3 because there are 3 values (components) per vertex
+geometries[r].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
+
+	}
+let r = (f+trailDepth-2)%trailDepth;
+let s = (f+trailDepth-1)%trailDepth;
+let loopLimit = trailDepth;
+//if(isFinite(cx[r-1])&&isFinite(cx[s])&&isFinite(cy[r-1])&&isFinite(cy[s]))
+while(loopLimit>15)
+ {loopLimit--;
+
+material = pitchCol[r];
+trailMeshes[r] = new THREE.Mesh(trailGeom[r] , material );
+
+ //material = new THREE.LineBasicMaterial( { color: 0x0000ff } );
+ //trailMeshes[s] = new THREE.Mesh(trailGeom[s] , material );
+// create a simple square shape. We duplicate the top left and bottom right
+// vertices because each vertex needs to appear once per triangle.
+let widtr = .2*(trailDepth-loopLimit)/trailDepth;
+let widts = .2*(trailDepth-loopLimit-1)/trailDepth;
+let scalar = .005;//mobius mode: let scalar = .07*loopLimit/trailDepth;
+let tt = 0.;
+let vertices = new Float32Array( [
+(scalar*cx[r]+widtr*xPerp[r])*porportion, scalar*cy[r]+widtr*yPerp[r],-.1,
+		                            ( scalar*cx[s]-widts*xPerp[s])*porportion, scalar*cy[s]-widts*yPerp[s],-.1,
+				(scalar*cx[s]+widts*xPerp[s])*porportion, scalar*cy[s]+widts*yPerp[s],-.1,
+						         ( scalar*cx[r]-widtr*xPerp[r])*porportion, scalar*cy[r]-widtr*yPerp[r],-.1, //2
+								                       (scalar*cx[s]-widts*xPerp[s])*porportion, scalar*cy[s]-widts*yPerp[s],-.1,  //1
+		                            					(scalar*cx[r]+widtr*xPerp[r])*porportion, scalar*cy[r]+widtr*yPerp[r],-.1, //3
+
+
+] );
+
+trailGeom[r].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices,3 ) );
+	scene.add(trailMeshes[r])
+	s = r;
+	r--;
+
+	if(r<=0)r=trailDepth-1;
+
+}
+
+				scene.add( mesh );
+				renderer.render( scene, camera );
+				scene.remove(line);
+				line.geometry.dispose( );
+				for (let r=0; r<24; r++) geometries[r].dispose();
+for (let r=0; r<trailDepth; r++){ trailGeom[r].dispose();}
+			}
+
+
+ let audioX;
+let micOn = false;
+async function startMic() {
+  let stream = null;
+
+
+
+    stream = await navigator.mediaDevices.getUserMedia({audio: true}).then(
+
+ function (stream){
+ micOn = true;
+       audioX = new AudioContext();
+      analyser = audioX.createAnalyser();
+      source = audioX.createMediaStreamSource( stream );
+      source.connect(analyser);
+      analyser.fftSize = 2048.;
+      bufferLength = analyser.frequencyBinCount;
+      dataArray = new Uint8Array( bufferLength );
+      init();
+}
+);
+}
+
+    //begin MIT license
+    /** Full YIN algorithm */
+    function calculatePitch ()
+    {
+  let yinData = Array(bufferSize/2);
+        let period;
+        let delta = 0.0, runningSum = 0.0;
+        yinData[0] = 1.0;
+        for (let tau = 1; tau < yinData.length; tau++)
+        {
+
+            yinData[tau] = 0.0;
+            for (let j = 0; j < yinData.length; j++)
+            {
+                delta = inputData[j] - inputData[j + tau];
+               if(isFinite(delta)) yinData[tau] += (delta * delta);
+            }
+            runningSum += yinData[tau];
+            if (runningSum != 0)
+            {
+                yinData[tau] *= tau / runningSum;
+            }
+            else
+            {
+                yinData[tau] = 1.0;
+            }
+            period = tau - 3;
+
+
+            if (tau > 4 && (yinData[period] < tolerance) &&
+                    (yinData[period] < yinData[period + 1]))
+            {
+               return quadraticPeakPosition (yinData, period);
+            }
+        }
+        return quadraticPeakPosition (yinData, minElement(yinData));
+    }
+
+
+
+
+    let tolerance=.3; //, confidence;
+    let sampleRate=44100;
+   function minElement (d)
+    {
+
+        let j, pos = 0;
+        let tmp = d[0];
+        for (j = 0; j < bufferSize; j++)
+        {
+            pos = (tmp < d[j]) ? pos : j;
+            tmp = (tmp < d[j]) ? tmp : d[j];
+        }
+
+        return pos;
+    }
+
+    function quadraticPeakPosition (d, pos)
+    {
+
+        let s0, s1, s2;
+        let x0, x2;
+        if (pos == 0 || pos == bufferSize - 1) return pos;
+        x0 = (pos < 1) ? pos : pos - 1;
+        x2 = (pos + 1 < bufferSize) ? pos + 1 : pos;
+        if (x0 == pos) return (d[pos] <= d[x2]) ? pos : x2;
+        if (x2 == pos) return (d[pos] <= d[x0]) ? pos : x0;
+        s0 = d[x0];
+        s1 = d[pos];
+        s2 = d[x2];
+        return pos + 0.5 * (s0 - s2 ) / (s0 - 2.* s1 + s2);
+    }
+//end MIT license
+
+
+
+
+
+	</script>
+
+	</body>
+</html>

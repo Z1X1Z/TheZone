@@ -1,0 +1,113 @@
+<html lang="en">
+    <head>
+        <title>Shiny</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="main.css">
+    </head>
+    <body>
+
+        <div id="container"></div>
+
+        <script id="vertexShader" type="x-shader/x-vertex">
+
+            varying vec2 vUv;
+        uniform vec2 resolution;
+            void main()    {
+
+                vUv = uv;
+                gl_Position = vec4( position, 1.0 );
+            }
+        </script>
+        
+        <script id="fragmentShader" type="x-shader/x-fragment">
+            varying vec2 vUv;
+        uniform vec2 resolution;
+        uniform float time;
+void main(){
+    vec2 p=-(vUv.yx-.5)/(resolution.xy/min(resolution.x,resolution.y))*5.;
+
+        vec2 g=p*.5;
+        vec2 s=g;
+        float l=0.;
+        g = -p;
+                g.x+=.25;
+        s=g;
+                            float q = 0.;
+        for (int f=0;f<13;f+=1)if(abs(s.x)+abs(s.y)>20.)q/=2.;
+            else {s=vec2((-sin(time)*5.*(s.x*s.x-s.y*s.y)-g.x*g.x),-sin(time)*5.*(s.x*s.y+g.y*g.y)); s.x=pow(abs(s.x),s.x); q+=.2;}
+
+        
+                gl_FragColor=vec4(q,s,1.);
+            }
+
+
+
+        </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r123/three.min.js"></script>
+        <script>
+
+            var container;
+            var camera, scene, renderer;
+            var uniforms;
+            init();
+            animate();
+
+var rez = window.devicePixelRatio;
+window.addEventListener('keydown', function(event) {
+var x = parseInt(String.fromCharCode(event.which || event.keyCode));
+if (x==1){rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
+else if (String.fromCharCode(event.which || event.keyCode)=="À")
+    {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);
+    }
+    
+
+}, false);
+
+            function init() {
+
+                container = document.getElementById( 'container' );
+                camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
+                scene = new THREE.Scene();
+                var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
+
+                uniforms = {
+        resolution: {value: new THREE.Vector2()},
+        
+        time: {value: 1.0 },
+      };
+
+      uniforms.resolution.value.x = window.innerWidth;
+      uniforms.resolution.value.y = window.innerHeight;
+                var material = new THREE.ShaderMaterial( {
+                    uniforms: uniforms,
+                    vertexShader: document.getElementById( 'vertexShader' ).textContent,
+                    fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+                } );
+                var mesh = new THREE.Mesh( geometry, material );
+                scene.add( mesh );
+                renderer = new THREE.WebGLRenderer();
+                renderer.setSize( window.innerWidth, window.innerHeight );
+
+
+                renderer.setPixelRatio( window.devicePixelRatio);//this will pixelate if changed
+
+                container.appendChild( renderer.domElement );
+                onWindowResize();
+                window.addEventListener( 'resize', onWindowResize, false );
+            }
+            function onWindowResize() {
+
+      uniforms.resolution.value.x = window.innerWidth;
+      uniforms.resolution.value.y = window.innerHeight;
+                renderer.setSize( window.innerWidth, window.innerHeight );
+            }
+            function animate( timestamp ) {
+                uniforms[ "time" ].value = timestamp / 1000;
+                requestAnimationFrame( animate );
+                renderer.render( scene, camera );
+            }
+        </script>
+
+    </body>
+</html>
