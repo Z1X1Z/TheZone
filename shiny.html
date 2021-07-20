@@ -4,10 +4,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="main.css">
-    </head>
+          
+                </head>
     <body>
 
-        <div id="container"></div>
+        <div id="container">
 
         <script id="vertexShader" type="x-shader/x-vertex">
 
@@ -49,14 +50,34 @@ void main(){
     }
 
         </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r123/three.min.js"></script>
+        <script src="OFFLINEonlineSwitch.js"></script>
         <script>
-
+            //vvvvmodified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
+            function loadScript(url, callback)
+            {
+                // Adding the script tag to the head as suggested before
+                var head = document.head;
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = url;
+                // Then bind the event to the callback function.
+                // There are several events for cross browser compatibility.
+                script.onreadystatechange = callback;
+                script.onload = callback;
+                // Fire the loading
+                head.appendChild(script);
+            }
+            var load = function() {
+                init();
+                animate();
+            };
+        loadScript(window.three,load);
+        //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
+        
             var container;
             var camera, scene, renderer;
             var uniforms;
-            init();
-            animate();
+      
 
 var rez = window.devicePixelRatio;
 window.addEventListener('keydown', function(event) {
@@ -70,6 +91,7 @@ else if (String.fromCharCode(event.which || event.keyCode)=="À")
 }, false);
 
             function init() {
+                
 
                 container = document.getElementById( 'container' );
                 camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
@@ -112,7 +134,9 @@ else if (String.fromCharCode(event.which || event.keyCode)=="À")
                 requestAnimationFrame( animate );
                 renderer.render( scene, camera );
             }
+
         </script>
+        </div>
 
     </body>
 </html>

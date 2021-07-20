@@ -10,8 +10,6 @@
     <body>
 
         <div id="container"></div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r123/three.min.js"></script>
-
         <script id="vertexShader" type="x-shader/x-vertex">
 
             varying vec2 vUv;
@@ -67,13 +65,36 @@ void main(){
           n+=0.1;}
 gl_FragColor=vec4(l+n/2.+c,l+x+n+c,n+c,1.);}
         </script>
+        
+        
+        <script src="OFFLINEonlineSwitch.js"></script>
         <script>
+            //vvvvmodified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
+            function loadScript(url, callback)
+            {
+                // Adding the script tag to the head as suggested before
+                var head = document.head;
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = url;
+                // Then bind the event to the callback function.
+                // There are several events for cross browser compatibility.
+                script.onreadystatechange = callback;
+                script.onload = callback;
+                // Fire the loading
+                head.appendChild(script);
+            }
+            var load = function() {
+                init();
+                animate();
+            };
+        loadScript(window.three,load);
+        //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
+        
 
             var container;
             var camera, scene, renderer;
             var uniforms;
-            init();
-            animate();
 
 var rez = window.devicePixelRatio;
 window.addEventListener('keydown', function(event) {
