@@ -1,0 +1,6 @@
+This is Zone:X.  To download a copy visit https://github.com/Z1X1Z/TheZone.git, or try www.zonex.space or zone-x.herokuapp.com.  
+This is a free gift for any, all, and none.  I hope for this message to survive so I don't mind content sharing.  
+If you share it or use the code just drop a link to either of the before websites as attribution.
+To use offline open OFFLINEonlineSwitch.js and simply switch
+"online = true" to "online = false"
+This will turn on local loading.  Also use indexOFFLINE.html instead of index.html
