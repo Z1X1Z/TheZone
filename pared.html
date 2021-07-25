@@ -7,7 +7,7 @@
 		<link type="text/css" rel="stylesheet" href="main.css">
 	</head>
 	<body>
-<script src="three.min.js"></script>
+<script src="./three.min.js"></script>
 
 		<div id="container"></div>
 
@@ -15,136 +15,159 @@
 		<script>
 		
 
-var pi = 3.1415926535897932384626433;
+		var pi = 3.14159
 var testar = Array(24);
 var testarD = Array(24);
-var maxFreq = 0;
+    var maxFreq = 0;
 var mamp = -1000000;
-var averagedAmp =  0;
-var freq;
-var len=0;
-var spirray0 = Array(2000);
-var spirray1 = Array(2000);
-var spiregulator=0;
-var phase = 0;
+	var averagedAmp =  0;
+	
+	var len=0;
+	var spirray0 = Array(2000);
+	var spirray1 = Array(2000);
+	var spiregulator=0;
+	var phase = 0;
 function makeSpirograph()
-{
-    phase = phase % (pi*2);
-    len = 0;
-    linx= inputData.length;
-    var adjConstant = 1./(spirafreq)*3.14*1.618;
-    //linx*=440./pitc;
-   // if (linx >1100)linx = 1100;
-    for(var m = 0; m < linx/1.1; m++)
     {
-        if ( inputData[m]!=0 || isFinite(inputData[m]) )
+    		phase = phase % (pi*2);
+        len = 0;
+        linx= inputData.length;
+        var adjConstant = 1./(spirafreq)*3.14*1.618;
+        //linx*=440./pitc;
+       // if (linx >1100)linx = 1100;
+        for(var m = 0; m < linx/1.1; m++)
         {
-            var samp = inputData[m];
-            phase += adjConstant;//spira_pitch;
-            spirray0[len]=-Math.sin(phase)*samp;
-            spirray1[len]=-Math.cos(phase)*samp;
-            len++;
+            if ( inputData[m]!=0 || isFinite(inputData[m]) ) 
+            {
+
+                var samp = inputData[m];
+                phase += adjConstant;//spira_pitch;
+                spirray0[len]=-Math.sin(phase)*samp;
+                spirray1[len]=-Math.cos(phase)*samp;
+                len++;
+            }
         }
-    }
        
-    len -= 1;
-    largest_loop = 0;
-    spiregulator = 0;
-    for(var f = 0; f<len; f++)
-    {
-        if (Math.abs(spirray0[f])>largest_loop)largest_loop = Math.abs(spirray0[f]);
-        if (Math.abs(spirray1[f])>largest_loop)largest_loop = Math.abs(spirray1[f]);
-    }
-    spiregulator=largest_loop;//*on;
-    }
-
-function spiral_compress()
-    {
-    maxFreq = 0;
-    var freq = 0;
-    max1 = -100000;
-    min1 = 100000;
-    mamp = -1000000;
-    for(var n = 0; n<24; n++){testar[n] = 0;testarD[n] = 1;}
-    var b = -1000000;
-    z = dataArray;
-    averagedAmp =  0;
-    for(var t=1; t<1024; t+=1)//n<fftSize1/4-100
-    {
-        var n =t;
-        //if (fftSize1/4<t) n =Math.abs(t-var(t)/(var(fftSize1/4)));
-        averagedAmp += z[n];
-        if ( z[n]>z[n-1] && z[n] > z[n+1] )
+        len -= 1;
+        largest_loop = 0;
+        spiregulator = 0;
+        for(var f = 0; f<len; f++)
         {
-            var   d = (-z[n-1]+z[n+1])/(z[n-1]+z[n+1]);
-            var nAdj = n;
-            if (Math.abs(d)<1.1) nAdj = n + d;
-            //if (Math.abs(nAdj-n) < 10)
-            freq =((( audioX.sampleRate /10000.)*(nAdj))/analyser.fftSize/2.)*10000;
-            var g = Math.pow ( 2, (1/24.));
-            var aa = freq/440.0;
-            var note = Math.log(aa)/Math.log(g)+69*2;
-            testar[(Math.round(note))%24] += Math.abs(z[n]);
-            testarD[(Math.round(note))%24] += 1;
 
+            if (Math.abs(spirray0[f])>largest_loop)largest_loop =
+                                                             Math.abs(spirray0[f]);
+            if (Math.abs(spirray1[f])>largest_loop)largest_loop =
+                                                        Math.abs(spirray1[f]);
         }
+        spiregulator=largest_loop*2;//*on;
+
     }
+
+
+    function spiral_compress()
+    {
+        maxFreq = 0;
+        var freq = 0;
+        max1 = -100000;
+        min1 = 100000;
+		 mamp = -1000000;
+        for(var n = 0; n<24; n++){testar[n] = 0;testarD[n] = 1;}
+    
+        var b = -1000000;
+z = dataArray;
+	 averagedAmp =  0;
+        for(var t=1; t<1024; t+=1)//n<fftSize1/4-100
+        {
+            var n =t;
+            //if (fftSize1/4<t) n =Math.abs(t-var(t)/(var(fftSize1/4)));
+
+averagedAmp += z[n];
+
+        if ( z[n]>z[n-1] && z[n] > z[n+1] )
+            {
+
+                var   d = (-z[n-1]+z[n+1])/(z[n-1]+z[n+1]);
+
+                var nAdj = n;
+                if (Math.abs(d)<1.1) nAdj = n + d;          
+                //if (Math.abs(nAdj-n) < 10)
+                freq =((( audioX.sampleRate /10000.)*(nAdj))/analyser.fftSize/2.)*10000;
+
+
+                {
+                    var g = Math.pow ( 2, (1/24.));
+                    var aa = freq/440.0;
+                    var note = Math.log(aa)/Math.log(g)+69*2;
+                    testar[(Math.round(note))%24] += Math.abs(z[n]);
+                    testarD[(Math.round(note))%24] += 1;
+
+                }
+            }
+        }
+
 averagedAmp/=1000.;
-};
+    };
 
 var time = 0;
-var maxInt24 = 0;
-var maxWave = 0;
-//  for(var n = 0; n<audiBuffer.length; n++)
+    var maxInt24 = 0;
+    var maxWave = 0;
+  //  for(var n = 0; n<audiBuffer.length; n++)
 ///b = abs(-sin(n/audiBuffer.length*(pi*2.)));
-var shrinking, moving;
-var coordX=0.;
-var coordY=0.;
-var part = {cx : {  value: 0 },};
-var trail = Array(300);
-var cx = Array(300);
-var cy = Array(300);
-var pitchCol = Array(300);
-var trailLoaded = false;
-var trailDepth = -1;
-var trailLength = 144;
-var d_x=0,d_y=0;
-var f = 0;
-var xPerp= Array(300);
-var yPerp = Array(300);
-var angle=Array(300);
-var MIN_SAMPLES = 0;  // will be initialized when AudioContext is created.
+
+	var shrinking, moving;
+	var coordX=0.;
+	var coordY=0.;
+	var part = {cx : {  value: 0 },};
+	var trail = Array(300);
+		var cx = Array(300);
+				var cy = Array(300);
+						var pitchCol = Array(300);
+   var trailLoaded = false;
+   var trailDepth = -1;
+      var trailLength = 70;
+      var d_x=0,d_y=0;
+      var f = 0;
+      
+      
+
+                      var xPerp= Array(300);
+                      var yPerp = Array(300);
+                      var angle=Array(300);
+                      var MIN_SAMPLES = 0;  // will be initialized when AudioContext is created.
+
 var pitc = 1;
-var inputData;
+ var inputData;
 var nullresult= 0;
+
 var bufferSize = 1024;
 var reset = 0;
 var on;
-function  move()
-{
+    function  move()
+    {   
 
     if (!trailLoaded) {trailLoaded = true; for(var n = 0; n<trailLength; n++) trail[n] = part;xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}
-    inputData = null;
-    inputData = new Float32Array(bufferSize);
-    analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
+		inputData = null;
+      inputData = new Float32Array(bufferSize);
+    
+     analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData() 
 		//var iD = Array(inputData.length);
 		//for(var m = 0; m<inputData.length; m++) iD[m]=(inputData[m]);
 		 var pb = -1;
      
-      if(inputData[0]>0.0001){
+      if(inputData[0]>0.01)
        pb =    calculatePitch();
-       }
        pt = pb;
        if(pb>0){pb =Math.pow(pb,.5)*.75;}
+       var volumeModifier = dataArray[0];
 on = 1;
 
 if (isFinite(pb) &&pb>0&& pb!=23.988278387579214 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
-else if (reset>5){on = 0;spirafreq=pt;}
+else if (reset>5){averagedAmp =0;on = 0;spirafreq=pt;}
 else reset++
 			{
 if (trailDepth<trailLength)trailDepth++;
 
-        var magnitude=.5;
+        var magnitude=.1;
 
         radius = magnitude;
 
@@ -165,8 +188,8 @@ if (trailDepth<trailLength)trailDepth++;
             //Colour pitchCol = Colour::fromHSV((angle-60)/360.,saturation,value,1.);
 			
 
-            d_x = -Math.sin(-angle)*(2.*averagedAmp)**.7;
-            d_y = -Math.cos(-angle)*(2.*averagedAmp)**.7 ;
+            d_x = -Math.sin(-angle)*averagedAmp**.777/3.; 
+            d_y = -Math.cos(-angle)*averagedAmp**.777/3.;
             if(isFinite(d_x)&&isFinite(d_y)){coordX+=d_x*.02*zoom;
             coordY+=d_y*.02*zoom;}
 
@@ -177,19 +200,18 @@ if (trailDepth<trailLength)trailDepth++;
 
            cx[f] = 0;
             cy[f] = 0;
-                          let trailwidth = 4.;
-                 xPerp[f] = -Math.sin(-angle+pi/2)*trailwidth;
-                yPerp[f] = -Math.cos(-angle+pi/2)*trailwidth;
+                 xPerp[f] = -Math.sin(-angle+pi/2);
+                yPerp[f] = -Math.cos(-angle+pi/2);
                 trail[f].radii = radius/2;
 
                 
 			f++;
 			if (f>=trailDepth)f=0;
-//trail fadevvvv
+
         for(var n = 0; n < trailDepth; n++)
         {
-            cx[n] += d_x/2.;
-            cy[n] += d_y/2.;
+            cx[n] += d_x;
+            cy[n] += d_y;
             }
 
     }
@@ -215,7 +237,6 @@ var trailMeshes = Array(1000);
 var point;
 var geometry;
 var progress = true;
-var mouseDown = false;
 window.addEventListener('keydown', function(event) {
 var x = parseInt(String.fromCharCode(event.which || event.keyCode));
 //if (x>0)
@@ -225,13 +246,6 @@ var x = parseInt(String.fromCharCode(event.which || event.keyCode));
 
 
 			function init() {
-                window.addEventListener("mousemove", function(e) {
-                angleSound = Math.atan2(e.clientY-window.innerHeight/2.,e.clientX- window.innerWidth/2.);
-       frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*440.;
-
-                    });
-                    window.addEventListener("mousedown", function(e){ mouseDown=true;})
-                    window.addEventListener("mouseup", function(e){ mouseDown=false;})
 
 				container = document.getElementById( 'container' );
 				camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
@@ -250,7 +264,7 @@ var vertices = new Float32Array( [0,0,0,
 0,0,0
 ] );
 geometries[r] = new THREE.BufferGeometry();
-geometries[r].addAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
+geometries[r].addAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );    
 meshes[r] = new THREE.Mesh(geometries[r] , material );
 	}	
 
@@ -289,23 +303,22 @@ trailMeshes[r] = new THREE.Mesh(trailGeom[r] , materials[r] );
 			//
 			
 	var spirafreq = 1.;	
-var audioOff = false;
-var audioStart = false;
-			function animate( timestamp ) {
 
+
+			function animate( timestamp ) {
+			
 spiral_compress();
 
 move();
 			makeSpirograph();
 			var lineMat = new THREE.LineBasicMaterial( {
-	color: 0xffffff,
-	linewidth: 7,
+	color: 0x777777,
+	linewidth: 3,
 	linecap: 'round', //ignored by WebGLRenderer
 	linejoin:  'round' //ignored by WebGLRenderer
 } );
 var porportion = window.innerHeight/ window.innerWidth;
 				 point = new THREE.Geometry();
-                 if(on>.5)
   for (var r= 0; r < len; r ++) {
                 var tx = spirray0[r]*porportion/spiregulator;
                 var ty =  spirray1[r]/spiregulator;
@@ -323,18 +336,17 @@ var line = new THREE.Line( point, lineMat );
 			var	scene = new THREE.Scene();
 				             scene.add(line);
 
-				
-                        
+				requestAnimationFrame( animate );
 if (micOn)analyser.getByteFrequencyData(  dataArray); 
 
 
-var maxTestar=0.;
-for (var g=0; g<24; g++) if(testar[g]>maxTestar){maxTestar=testar[g];}
+
+
 
 for (var g=0; g<24; g++) {
 var widt = .02;
 var r = (g+14)%24;
-var lengt = 1.*testar[(r+4)%24]/maxTestar;
+var lengt = .1*testar[(r+4)%24]/200.;
 
 	var vo = new THREE.Color();
 				b = vo.setHSL((20-r)%24/24.,1.,.5);
@@ -391,76 +403,28 @@ trailGeom[r].addAttribute( 'position', new THREE.Float32BufferAttribute( vertice
 	if(r<=0)r=trailDepth-1;
 
 }
+
+
+
+
 				renderer.render( scene, camera );
 			  // scene1.add( scene );
 			scene.dispose();
 			point.dispose();
 for (var r=0; r<24; r++) geometries[r].dispose();
 for (var r=0; r<trailDepth; r++){ trailGeom[r].dispose();}
-                     requestAnimationFrame( animate );
-                            if (!audioStart&&mouseDown){
-                        // set our attack
-                        var b = fade.gain.value;
-
-                        fade.gain.cancelScheduledValues(audioX.currentTime);
-                        fade.gain.setValueAtTime(b, audioX.currentTime);
-
-                        fade.gain.linearRampToValueAtTime(maxVolume, audioX.currentTime + .4);
-                     
-                                
-                        audioStart = true;
-                        audioOff= false;
-                }
-                     osc.frequency.cancelScheduledValues(audioX.currentTime);
-                     osc1.frequency.cancelScheduledValues(audioX.currentTime);
-
-osc.frequency.value = -frequency;
-osc1.frequency.value = -frequency*2;
-                     
-                     if(mouseDown){
-            
-                         barbor.gain.linearRampToValueAtTime(maxVolume* (angleSound+pi)/2/pi,audioX.currentTime);
-                     barbor1.gain.linearRampToValueAtTime(maxVolume*(-angleSound+pi)/2/pi, audioX.currentTime);
-                  
-                    }
-if (!audioOff &&!mouseDown){
-                    var b = fade.gain.value;
-                    fade.gain.cancelScheduledValues(audioX.currentTime);
-                    fade.gain.setValueAtTime(b, audioX.currentTime);
-                    fade.gain.linearRampToValueAtTime(.0, audioX.currentTime+.3);
-                    audioOff = true;
-                    audioStart=false;
-                             }
-                     sweepEnv.gain.cancelScheduledValues(audioX.currentTime);
-                     sweepEnv1.gain.cancelScheduledValues(audioX.currentTime);
-
-                                    sweepEnv.gain.value=fade.gain.value*barbor.gain.value;
-                                    sweepEnv1.gain.value=fade.gain.value*barbor1.gain.value;
-                     lastAngleSound=angleSound
-
 			}
 
-                     const AudioContext = window.AudioContext || window.webkitAudioContext;
+			
  var audioX;
 var micOn = false;
-                     var lastAngleSound = 0;
-                         var frequency=1.;
-                                                  var correction = 14.;
-                                                  var angleSound=1.;
-                     var osc ;
-                     var sweepEnv;
-                     var sweepEnv1;
-
-                     var barbor;
-                     var barbor1;
-var fade;
-                     var startTime;
-                     var maxVolume = .5;
 async function startMic() {
   let stream = null;
 
+
+
     stream = await navigator.mediaDevices.getUserMedia({audio: true}).then(
-                                                            
+
  function (stream){
  micOn = true;
        audioX = new AudioContext();
@@ -470,47 +434,7 @@ async function startMic() {
       analyser.fftSize = 2048.;
       bufferLength = analyser.frequencyBinCount;
       dataArray = new Uint8Array( bufferLength );
-      
-      
-      
-startTime = audioX.currentTime
-
-osc = audioX.createOscillator();
-osc.frequency.value = 440;
-
-barbor = audioX.createGain();
-barbor.gain.setValueAtTime(.0, audioX.currentTime);
-    
-    barbor1 = audioX.createGain();
-   barbor1.gain.setValueAtTime(.0, audioX.currentTime);
-   
-   fade = audioX.createGain();
-   fade.gain.cancelScheduledValues(audioX.currentTime);
-
-   fade.gain.setValueAtTime(.0, audioX.currentTime);
-   
-  sweepEnv = audioX.createGain();
- // sweepEnv.gain.cancelScheduledValues(audioX.currentTime);
-  sweepEnv.gain.setValueAtTime(.0, audioX.currentTime);
-      
-      osc.connect(sweepEnv).connect(audioX.destination);
-
-      osc.start(0);
-      
-      osc1 = audioX.createOscillator();
-      osc1.frequency.value = 440;
-
-        sweepEnv1 = audioX.createGain();
-       // sweepEnv1.gain.cancelScheduledValues(audioX.currentTime);
-        sweepEnv1.gain.setValueAtTime(.0, audioX.currentTime);
-            
-            osc1.connect(sweepEnv1).connect(audioX.destination);
-
-            osc1.start(0);
-
-
       init();
-      
 }
 );	
 }
