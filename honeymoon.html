@@ -42,7 +42,7 @@
             float time2 = time2dance*2.;
 
             vec2 p=-(vUv.yx-.5)/(resolution.xy/min(resolution.x,resolution.y))*30.;
-                                                          p.y-=2.;
+                                                          p.y-=5.;
 
             float c=0.,n=0.,l=0.,x=0.;
             p.x+=1.;
@@ -99,7 +99,7 @@
             s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y);
             s.x=log(abs(s.x));
             }
-        vec4 tol=vec4(s.y,s.x/10.,1.-s.x/12.,1.);
+        vec4 tol=vec4(s.y,s.x/10.,1.-s.x/100.,1.);
         //Mandelbrot\heart
             vec2 g=p;
             g.x-=.5;
