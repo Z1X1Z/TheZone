@@ -31,18 +31,80 @@
 			uniform vec2 coords;
        			uniform vec2 resolution;
 			uniform float time;
+            uniform float time2dance;
+            float zin(float x){return -sin(x);}
+            float coz(float x){return -cos(x);}
+        //www.zonex.space
+        //holy christo, holy christo, christo christo, holy holy
+        //holy lamb, holy lamb, lamb lamb, holy holy holy art thou lord God almighty who was and is and is to come
+        //great and marvelous are thy works Lord God all mighty, just and true are thy ways though king of the saints, who doth not fear thee and glorify thy name, for thou alone are holy, for all nations shall come and bow down before thee, for thy judgments are made manafest
+        void main(){
 
-void main(){
+        vec2 p=-(vUv.yx-.5)/(resolution.xy/min(resolution.x,resolution.y))*11.;
+            p.x+=.5;
+            float l=0.,b=0.,m=0.,n=1.,r=0.,q=0.,qq=0.;
+            q=-zin(time2dance*3.)/20.; qq=zin(time2dance*(-coz(216.)/-coz(612.)-1.)*3.)/10.;//(un)comment this line to toggle dancing
+            vec4 heart=vec4(0.);
+            //Tree of life
+        vec2 f=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*18.*time;
+        f+=coords.yx;
+        vec2 s=f;
+        for (int f=0;f<21;f+=1)if(abs(s.y)<39.){
+            s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y);
+            s.x=log(abs(s.x));
+            }
+        vec4 tol=vec4(s.y,s.x/10.,1.-s.x/12.,1.);
+        //Mandelbrot\heart
+            vec2 g=p;
+            g.x-=.5;
+            g.y*=-1.;
+            vec2 z=g;
+            for (int f=0;f<20;f+=1)if(abs(z.y)>10.)heart=vec4(0.);
+            else {z=vec2(((z.x*z.x-z.y*z.y)-g.x+qq),(2.0*z.x*z.y-g.y+q*4.));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
+                  heart+=vec4(z.x*z.y,z.x,z.y,1.)/7.;}
+        //face--I saw the face in a vision dream coming from the Mandelbrot fractal five or so years before I found it in code$$see footnote
+            g=p*2.;
+            z=g;
+            for (int f=0;f<21;f+=1)if(abs(z.y)<19.){
+                z=vec2(-1./(z.x*z.x-z.y*z.y-g.x), 2.0*z.x*z.y-g.y);//z<=z^2-g; z.real<=-1/z.real;
+                if(z.x>-.1&&f!=0)l=z.x*(110.-sin(time/2.)*70.);}
+        //body--I found the body the first time I ever used a square root with the Lamb equations.
+            g=p;
+            z=g;
+            for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4)b=abs(z.y)/77.;
+            else{
+                z=2.*vec2(-1./(z.x*z.x-z.y*z.y-g.x+qq),(2.0*z.x*z.y-g.y+q));//z<=z^2-g; z.real<=-1/z.real; z*=2;
+                z.x=sqrt(abs(z.x));}//z.real<=squareroot(z.real)
+        //musculature
+            g=p;
+            g.x+=.5;
+            z=g;
+            for(int f=0;f<14;f+=1)if(abs(z.y)>15.&&f>7)m=abs(z.y)/25.;
+            else {
+                z=1.3*vec2(-1.5/((z.x*z.x-2.*z.y*z.y)-g.x+qq*2.),(1.9*z.x*z.y-1.87*g.y+q/4.));//the equation is an alteration of the coefficients of the body equation
+                z.x=pow(abs(z.x),.57);}
+        //robe--came from the body as soon as I looked for clothing
+            g=p;
+            g.x+=.05;
+            g.y/=1.14;
+            z=g;
+            if(g.x>.5)for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7)r=clamp(1.4-abs(g.x-2.2)
+                                            // *(1.-abs(g.y*g.x))-.07//(un)comment this line to toggle sleeves
+                                            ,0.,1.);
+            else{
+                z=1.1*vec2(-2./((z.x*z.x-1.8*z.y*z.y)-g.x+qq),(3.*z.x*z.y-1.3*g.y+q));;
+                z.x=pow(abs(z.x),.8);}
 
-	vec2 p=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*18.*time;
-p+=coords.yx;
-vec2 s=p;
-float l=0.;
-for (int f=0;f<21;f+=1)if(abs(s.y)<39.){
-    s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y);
-    s.x=log(abs(s.x));
-    }
-gl_FragColor=vec4(s.y,s.x/10.,1.-s.x/12.,1.);}
+        //legs--I found these about hours before finding the body but left them, recovering them from memory
+            g=p/2.;
+            z=g;
+            if(g.x>.75&&g.x<1.7&&abs(g.y*g.x)<.54)for(int f=0;f<8;f+=1)if(abs(z.x)>52.&&f>1)b=abs(z.x)/100.;
+            else{
+                z=3.*vec2(-1./(z.x*z.x-z.y*z.y-g.x+qq/10.),72.*z.x*z.y-g.y+q);
+                z.y=-1./z.y;}
+                if (l>.1)l=0.;
+                vec4 buffer =heart+vec4(b+r+m,b/2.+r+m,r+m/2.5,1.)+l;
+        gl_FragColor=clamp(tol-(buffer.x+buffer.y+buffer.z)*100.,0.,1.)+buffer;}
         </script>
 		<script>
 		
@@ -146,6 +208,8 @@ averagedAmp/=1000.;
     };
 
 var time = 0;
+var time2dance = 0;
+
     var maxInt24 = 0;
     var maxWave = 0;
   //  for(var n = 0; n<audiBuffer.length; n++)
@@ -180,9 +244,10 @@ var bufferSize = 1024;
 var reset = 0;
 var on;
 var spirafreq=1;
+var totalAMP;
     function  move()
     {   
-
+    totalAMP = 0.;
     if (!trailLoaded) {trailLoaded = true; for(var n = 0; n<trailLength; n++) trail[n] = part;xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}
 
       inputData = new Float32Array(bufferSize);
@@ -191,8 +256,8 @@ var spirafreq=1;
 		//var iD = Array(inputData.length);
 		//for(var m = 0; m<inputData.length; m++) iD[m]=(inputData[m]);
 		 var pb = -1;
-
-      if(inputData[0]>0.0001)
+        for(var b = 0; b<analyser.fftSize/2.; b++)totalAMP+=Math.abs(inputData[b]);
+        if(totalAMP>0.0001)
        pb =    calculatePitch();
        pt = pb;
        if(pb>0){pb =Math.pow(pb,.5)*.75;}
@@ -258,7 +323,13 @@ if (trailDepth<trailLength)trailDepth++;
     }
 }
 
-
+                                     var rez = window.devicePixelRatio;
+                                     window.addEventListener('keydown', function(event) {
+                                     var x = parseInt(String.fromCharCode(event.which || event.keyCode));
+                                    if (x==1){rez = window.devicePixelRatio ; renderer.setPixelRatio( rez);}
+                                     else if (String.fromCharCode(event.which || event.keyCode)=="À")
+                                         {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
+                                     }, false);
 var material;
 			var container;
 			var camera, renderer;
@@ -332,6 +403,8 @@ uniforms = THREE.UniformsUtils.merge([
   {
 					micIn : {  value: null }, // float array (vec3)
         time: {value: 1.0 },
+        time2dance: {value: 1.0 },
+
         resolution: {value: new THREE.Vector2() },
         coords: {value: new THREE.Vector2() }
 }
@@ -404,12 +477,14 @@ var porportion = window.innerHeight/ window.innerWidth;
 			var	scene = new THREE.Scene();
 				             scene.add(line);
 
-			if (zoom>.000001&&progress&& reset<5)zoom /= 1.005+Math.abs(inputData[0])/13.;
+			if (zoom>.000001&&progress&& reset<5)zoom /= 1.005+Math.abs(totalAMP/bufferSize*2.)/13.;
                 else if(zoom<1.)zoom *= 1.02;
       uniforms.coords.value.x = coordX;
       uniforms.coords.value.y = coordY;
       				//uniforms[ "time" ].value = timestamp / 1000;
       uniforms[ "time" ].value = zoom;
+      uniforms[ "time2dance" ].value += Math.abs(totalAMP/bufferSize*2.);
+
 				requestAnimationFrame( animate );
 if (micOn)analyser.getByteFrequencyData(  dataArray); 
 
