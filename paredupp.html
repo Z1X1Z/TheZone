@@ -133,17 +133,15 @@ function  move()
 		//var iD = Array(inputData.length);
 		//for(var m = 0; m<inputData.length; m++) iD[m]=(inputData[m]);
 		 var pb = -1;
-     
-      if(inputData[0]>0.0001){
-       pb =    calculatePitch();
-       }
-       pt = pb;
-       if(pb>0){pb =Math.pow(pb,.5)*.75;}
-on = 1;
+         if(inputData[0]>0.0001) pb =    calculatePitch();
+           pt = pb;
+           if (Math.pow(pb,.5)*.75==1) console.log(pb);
 
-if (isFinite(pb) &&pb>0&& pb!=23.988278387579214 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
-else if (reset>5){on = 0;spirafreq=pt;}
-else reset++
+           if(pb>0){pb =Math.pow(sampleRate/41000.*pb,.5)*.75;}
+    on = 1;
+    if (isFinite(pb) &&pb>0&& pb!=1023 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
+    else if (reset>5){on = 0;spirafreq=pt;}
+    else reset++
 			{
 if (trailDepth<trailLength)trailDepth++;
 
@@ -154,7 +152,7 @@ if (trailDepth<trailLength)trailDepth++;
             var g = Math.pow ( 2, (1/24.0));
             var aa = pitc/440.0;
             var note = Math.log(aa)/Math.log(g)+49;
-            var inc = 4;
+            var inc = 5;
             var t =  (-note * 30+30*inc);
             angle = t%360;
             angle = -angle;
