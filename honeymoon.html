@@ -528,7 +528,7 @@ var porportion = window.innerHeight/ window.innerWidth;
 			var	scene = new THREE.Scene();
 				             scene.add(line);
 
-			if (zoom>.000001&&progress&& reset<5)zoom /= 1.005+Math.abs(totalAMP/bufferSize*2.)/13.;
+			if (zoom>.000001&&progress&& reset<1)zoom /= 1.005+Math.abs(totalAMP/bufferSize*2.)/13.;
                 else if(zoom<1.)zoom *= 1.02;
       uniforms.coords.value.x = coordX;
       uniforms.coords.value.y = coordY;

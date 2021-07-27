@@ -264,7 +264,7 @@ var totalAMP;
        var volumeModifier = dataArray[0];
 on = 1;
 if (isFinite(pb) &&pb>0&& pb!=6.565706694547585 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
-else if (reset>5){averagedAmp =0;on = 0;spirafreq=pt}
+else if (reset>5){averagedAmp =0;on = 0;spirafreq=pt;reset++}
 else reset++
 
 			{
@@ -479,7 +479,7 @@ var porportion = window.innerHeight/ window.innerWidth;
 			var	scene = new THREE.Scene();
 				             scene.add(line);
 
-			if (zoom>.000001&&progress&& reset<5)zoom /= 1.005+Math.abs(totalAMP/bufferSize*2.)/17.;
+			if (zoom>.000001&&progress&& reset<1)zoom /= 1.005+Math.abs(totalAMP/bufferSize*2.)/17.;
                 else if(zoom<1.)zoom *= 1.026;
       uniforms.coords.value.x = coordX;
       uniforms.coords.value.y = coordY;
