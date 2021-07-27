@@ -64,7 +64,7 @@
             g=p;
             z=g;
             for (int f=0;f<10;f+=1)if(abs(z.x+abs(z.y))>17.&&f>4)l=1.;
-            else{z=vec2(-1./((z.x*z.x-z.y*z.y)-g.x),(2.0*z.x*z.y-g.y-sin(time)/8.));
+            else{z=vec2(-1./((z.x*z.x-z.y*z.y)-g.x),(2.0*z.x*z.y-g.y-sin(time*10.)/8.));
                  z*=pow(z.x,z.x);}
         //vv mandelbrot\heart vv
             g=p*2.;
@@ -72,7 +72,7 @@
             z=g;
             for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>20.)break;
             else {z=vec2(((z.x*z.x-z.y*z.y)-g.x),(2.0*z.x*z.y-g.y));
-                  n+=0.1;}
+                  n+=0.2;}
         //vv eye lights vv
             g=p;
             z=g;
@@ -112,7 +112,7 @@
             g=p*2.;
             z=g;
             for (int f=0;f<21;f+=1)if(abs(z.y)<19.){
-                z=vec2(-1./(z.x*z.x-z.y*z.y-g.x), 2.0*z.x*z.y-g.y);//z<=z^2-g; z.real<=-1/z.real;
+                z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+qq), 2.0*z.x*z.y-g.y+q);//z<=z^2-g; z.real<=-1/z.real;
                 if(z.x>-.1&&f!=0)l=z.x*(110.-sin(time/2.)*70.);}
         //body--I found the body the first time I ever used a square root with the Lamb equations.
             g=p;
@@ -152,7 +152,7 @@
                 vec4 bm=bride();
                 bm = clamp(bm,0.,1.);
                 vec4 buffer =bm+heart+vec4(b+r+m,b/2.+r+m,r+m/2.5,1.)+l;
-        gl_FragColor=clamp(tol-abs(buffer.x+buffer.y+buffer.z)*1.,0.,1.)+buffer;}
+        gl_FragColor=clamp(tol*1.4-abs(buffer.x+buffer.y+buffer.z)*1.,0.,1.)+buffer;}
         </script>
 		<script>
 		
@@ -326,8 +326,8 @@ if (trailDepth<trailLength)trailDepth++;
             var g = Math.pow ( 2, (1/24.0));
             var aa = pitc/440.0;
             var note = Math.log(aa)/Math.log(g)+49;
-            var inc = 4;
-            var t =  (-note * 30+30*inc);
+            var inc = 8;
+            var t =  (note * 30+30*inc);
             angle = t%360;
             angle = -angle;
 	var vo = new THREE.Color();
@@ -343,12 +343,17 @@ if (trailDepth<trailLength)trailDepth++;
             //Colour pitchCol = Colour::fromHSV((angle-60)/360.,saturation,value,1.);
 			
 
-           d_x = -Math.sin(-angle)*(2.*averagedAmp)**.7777;
-          d_y = -Math.cos(-angle)*(2.*averagedAmp)**.7777 ;
+           d_x = -Math.sin(-angle)*(2.*averagedAmp)**.8787;
+          d_y = -Math.cos(-angle)*(2.*averagedAmp)**.8787 ;
                           bx=coordX+d_x*.02*zoom;
                           by=coordY+d_y*.02*zoom;
-            if(isFinite(d_x)&&isFinite(d_y)&&by*by+bx*bx<12.){coordX+=d_x*.02*zoom;
+      if(isFinite(d_x)&&isFinite(d_y)){
+        if(Math.abs(by*by)+Math.abs(bx*bx)<12.){coordX+=d_x*.02*zoom;
             coordY+=d_y*.02*zoom;}
+        else{
+            if (Math.abs(by*by)<12.){coordY+=d_y*.02*zoom;coordX/=1.01;}
+            if (Math.abs(bx*bx)<12.){coordX+=d_x*.02*zoom;coordY/=1.01;}
+      }}
 
 
          interpolationFactor = 10.;//timeDif*1./(callbackWait-1);

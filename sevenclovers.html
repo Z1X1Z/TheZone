@@ -294,12 +294,18 @@ if (trailDepth<trailLength)trailDepth++;
             //Colour pitchCol = Colour::fromHSV((angle-60)/360.,saturation,value,1.);
 			
 
-           d_x = -Math.sin(-angle)*(2.*averagedAmp)**.7777;
-          d_y = -Math.cos(-angle)*(2.*averagedAmp)**.7777 ;
+           d_x = -Math.sin(-angle)*(2.*averagedAmp)**.8787;
+          d_y = -Math.cos(-angle)*(2.*averagedAmp)**.8787 ;
                           bx=coordX+d_x*.02*zoom;
                           by=coordY+d_y*.02*zoom;
-            if(isFinite(d_x)&&isFinite(d_y)&&by*by+bx*bx<12.){coordX+=d_x*.02*zoom;
-            coordY+=d_y*.02*zoom;}
+                                                              
+  if(isFinite(d_x)&&isFinite(d_y)){
+    if(Math.abs(by*by)+Math.abs(bx*bx)<12.){coordX+=d_x*.02*zoom;
+        coordY+=d_y*.02*zoom;}
+    else{
+        if (Math.abs(by*by)<12.){coordY+=d_y*.02*zoom;coordX/=1.01;}
+        if (Math.abs(bx*bx)<12.){coordX+=d_x*.02*zoom;coordY/=1.01;}
+  }}
 
 
          interpolationFactor = 10.;//timeDif*1./(callbackWait-1);
