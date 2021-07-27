@@ -521,23 +521,23 @@ function  move()
      analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
 		//let iD = Array(inputData.length);
 		//for(let m = 0; m<inputData.length; m++) iD[m]=(inputData[m]);
-		let pb = -1;
-		if(inputData[0]>0.0001)pb=calculatePitch();
-		pt = pb;
-		if(pb>0){pb =Math.pow(pb,.5)*.75;}
-		on = 1;
+        var pb = -1;
+        if(inputData[0]>0.0001) pb =    calculatePitch();
+          pt = pb;
 
-		if (isFinite(pb) &&pb>0&& pb!=23.988278387579214 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;moving=true;}
-		else if (reset>5){averagedAmp =0;on = 0;spirafreq=pt;moving=false;}
-		else reset++
+          if(pb>0){pb =Math.pow(sampleRate/pb,.5);}
+   on = 1;
+   if (isFinite(pb) &&pb>0&& pb!=6.565706694547585 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
+   else if (reset>5){on = 0;spirafreq=pt;}
+   else reset++
 
 		if (trailDepth<trailLength)trailDepth++;
 		radius = .1;
 		let g = Math.pow ( 2, (1/24.0));
 		let aa = pitc/440.0;
 		let note = Math.log(aa)/Math.log(g)+49;
-		let inc = 4;
-		let t =  (-note * 30+30*inc);
+		let inc = 8;
+		let t =  (note * 30+30*inc);
 		angle = t%360;
 		angle = -angle;
 		let vo = new THREE.Color();

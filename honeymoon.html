@@ -303,18 +303,18 @@ var totalAMP;
      analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData() 
 		//var iD = Array(inputData.length);
 		//for(var m = 0; m<inputData.length; m++) iD[m]=(inputData[m]);
-		 var pb = -1;
-        for(var b = 0; b<analyser.fftSize/2.; b++)totalAMP+=Math.abs(inputData[b]);
-        if(totalAMP>0.0001)
-       pb =    calculatePitch();
-       pt = pb;
-       if(pb>0){pb =Math.pow(pb,.5)*.75;}
-       var volumeModifier = dataArray[0];
+        var pb = -1;
+       for(var b = 0; b<analyser.fftSize/2.; b++)totalAMP+=Math.abs(inputData[b]);
+       if(totalAMP>0.0001)
+      pb =    calculatePitch();
+      pt = pb;
+           if(pb>0){pb =Math.pow(sampleRate/pb,.5);}
+      var volumeModifier = dataArray[0];
 on = 1;
-
-if (isFinite(pb) &&pb>0&& pb!=23.988278387579214 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
+if (isFinite(pb) &&pb>0&& pb!=6.565706694547585 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
 else if (reset>5){averagedAmp =0;on = 0;spirafreq=pt}
 else reset++
+
 
 			{
 if (trailDepth<trailLength)trailDepth++;

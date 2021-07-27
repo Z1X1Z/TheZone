@@ -190,19 +190,15 @@ var spirafreq=1;
      analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData() 
 		//var iD = Array(inputData.length);
 		//for(var m = 0; m<inputData.length; m++) iD[m]=(inputData[m]);
-		 var pb = -1;
+        var pb = -1;
+        if(inputData[0]>0.0001) pb =    calculatePitch();
+          pt = pb;
 
-      if(inputData[0]>0.0001)
-       pb =    calculatePitch();
-       pt = pb;
-       if(pb>0){pb =Math.pow(pb,.5)*.75;}
-       var volumeModifier = dataArray[0];
-on = 1;
-
-if (isFinite(pb) &&pb>0&& pb!=23.988278387579214 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
-else if (reset>5){averagedAmp =0;on = 0;spirafreq=pt}
-else reset++
-
+          if(pb>0){pb =Math.pow(sampleRate/pb,.5);}
+   on = 1;
+   if (isFinite(pb) &&pb>0&& pb!=6.565706694547585 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
+   else if (reset>5){on = 0;spirafreq=pt;}
+   else reset++
 			{
 if (trailDepth<trailLength)trailDepth++;
 
@@ -213,8 +209,8 @@ if (trailDepth<trailLength)trailDepth++;
             var g = Math.pow ( 2, (1/24.0));
             var aa = pitc/440.0;
             var note = Math.log(aa)/Math.log(g)+49;
-            var inc = 4;
-            var t =  (-note * 30+30*inc);
+            var inc = 8;
+            var t =  (note * 30+30*inc);
             angle = t%360;
             angle = -angle;
 	var vo = new THREE.Color();
