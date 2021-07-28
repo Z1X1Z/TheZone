@@ -50,7 +50,7 @@
         f+=coords.yx;
         vec2 s=f;
         for (int f=0;f<21;f+=1)if(abs(s.y)<39.){
-            s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y);
+            s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y);//x**3
             s.x=log(abs(s.x));
             }
         vec4 tol=vec4(s.y,s.x/10.,1.-s.x/12.,1.);
@@ -104,7 +104,7 @@
                 z.y=-1./z.y;}
                 if (l>.1)l=0.;
                 vec4 buffer =heart+vec4(b+r+m,b/2.+r+m,r+m/2.5,1.)+l;
-        gl_FragColor=clamp(tol-(buffer.x+buffer.y+buffer.z)*100.,0.,1.)+buffer;}
+        gl_FragColor=clamp(tol-(buffer.x+buffer.y+buffer.z)*1000.,0.,1.)+buffer;}
         </script>
 		<script>
 		
@@ -152,7 +152,8 @@ function makeSpirograph()
         len -= 1;
         largest_loop = 0;
         spiregulator = 0;
-        for(var f = 0; f<len; f++)
+        
+            for(var f = 0; f<len; f++)
         {
 
             if (Math.abs(spirray0[f])>largest_loop)largest_loop =
@@ -160,7 +161,7 @@ function makeSpirograph()
             if (Math.abs(spirray1[f])>largest_loop)largest_loop =
                                                         Math.abs(spirray1[f]);
         }
-        spiregulator=largest_loop*2;//*on;
+        spiregulator=largest_loop;//*on;
 
     }
 
@@ -246,7 +247,7 @@ var on;
 var spirafreq=1;
 var totalAMP;
     function  move()
-    {   
+    {
     totalAMP = 0.;
     if (!trailLoaded) {trailLoaded = true; for(var n = 0; n<trailLength; n++) trail[n] = part;xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}
 
@@ -257,14 +258,14 @@ var totalAMP;
 		//for(var m = 0; m<inputData.length; m++) iD[m]=(inputData[m]);
 		 var pb = -1;
         for(var b = 0; b<analyser.fftSize/2.; b++)totalAMP+=Math.abs(inputData[b]);
-        if(totalAMP>0.0001)
+        if(totalAMP>1.)
        pb =    calculatePitch();
        pt = pb;
             if(pb>0){pb =Math.pow(sampleRate/pb,.5);}
        var volumeModifier = dataArray[0];
 on = 1;
 if (isFinite(pb) &&pb>0&& pb!=6.565706694547585 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
-else if (reset>5){averagedAmp =0;on = 0;spirafreq=pt;reset++}
+else if (reset>3){averagedAmp =0;on = 0;spirafreq=pt;reset++}
 else reset++
 
 			{
@@ -285,7 +286,7 @@ if (trailDepth<trailLength)trailDepth++;
 				b = vo.setHSL((angle+90)/360.,1.,.5);
                               pitchCol[f]  = new THREE.MeshBasicMaterial({
                                       color:vo,
-                                      opacity: 0.5,
+                                      opacity: .54,
                                       transparent: true,
                                     });			     angle = ((angle-30+180)/360*2*pi);
            // angle = (maxInt24/24*2*pi);
@@ -460,16 +461,16 @@ uniforms = THREE.UniformsUtils.merge([
 spiral_compress();
 
 move();
-			makeSpirograph();
+            if (reset<3)makeSpirograph();
 			var lineMat = new THREE.LineBasicMaterial( {
 	color: 0xffffff,
-	linewidth: 1,
+	linewidth: 3,
 	linecap: 'round', //ignored by WebGLRenderer
 	linejoin:  'round' //ignored by WebGLRenderer
 } );
 			var point = new THREE.Geometry();
 var porportion = window.innerHeight/ window.innerWidth;
-  for (var r= 0; r < len; r ++) {
+if (reset<3)for (var r= 0; r < len; r ++) {
                 var tx = spirray0[r]*porportion/spiregulator;
                 var ty =  spirray1[r]/spiregulator;
 //if (r == 0) console.log(tx);
@@ -486,7 +487,7 @@ var porportion = window.innerHeight/ window.innerWidth;
 				             scene.add(line);
 
 			if (zoom>.000001&&progress&& reset<1)zoom /= 1.044+Math.abs(totalAMP/bufferSize*2.)/11.;
-                else if(zoom<1.)zoom *= 1.033;
+                else if(zoom<1.)zoom *= 1.044;
       uniforms.coords.value.x = coordX;
       uniforms.coords.value.y = coordY;
       				//uniforms[ "time" ].value = timestamp / 1000;

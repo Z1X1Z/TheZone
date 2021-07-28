@@ -42,7 +42,7 @@
             float time2 = time2dance*2.;
 
             vec2 p=-(vUv.yx-.5)/(resolution.xy/min(resolution.x,resolution.y))*30.;
-                                                          p.y-=5.;
+                                                          p.y-=8.;
 
             float c=0.,n=0.,l=0.,x=0.;
             p.x+=1.;
@@ -78,8 +78,8 @@
             z=g;
             for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>20.)break;
             else {z=vec2((1./(z.x*z.x-z.y*z.y)-g.x),(4.0*z.x*z.y-g.y));
-                  n+=0.1;}
-        return vec4(l+n/2.+c,l+x+n+c,n+c,1.);}
+                  if(f>4)n+=0.1;}
+        return vec4(l+c,l+x+c,l+c,1.)*10000.+clamp(vec4(n)-10.,0.,1.);}
                           
                           
                           
@@ -96,10 +96,10 @@
         f+=coords.yx;
         vec2 s=f;
         for (int f=0;f<21;f+=1)if(abs(s.y)<39.){
-            s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y);
+            s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y);//x**3
             s.x=log(abs(s.x));
             }
-        vec4 tol=vec4(s.y,s.x/10.,1.-s.x/100.,1.);
+        vec4 tol=vec4(s.y,s.x/10.,1.-s.x/12.,1.);
         //Mandelbrot\heart
             vec2 g=p;
             g.x-=.5;
@@ -150,9 +150,9 @@
                 z.y=-1./z.y;}
                 if (l>.1)l=0.;
                 vec4 bm=bride();
-                bm = clamp(bm,0.,1.);
-                vec4 buffer =bm+heart+vec4(b+r+m,b/2.+r+m,r+m/2.5,1.)+l;
-        gl_FragColor=clamp(tol*1.4-abs(buffer.x+buffer.y+buffer.z)*1.,0.,1.)+buffer;}
+                bm = (bm);
+                vec4 buffer =bm+heart*3.+vec4(b+r+m,b/2.+r+m,r+m/2.5,1.)+l;
+        gl_FragColor=clamp(tol*1.4-abs(buffer.x+buffer.y+buffer.z)*10000.,0.,1.)+clamp(buffer,0.,1.);}
         </script>
 		<script>
 		
@@ -208,7 +208,7 @@ function makeSpirograph()
             if (Math.abs(spirray1[f])>largest_loop)largest_loop =
                                                         Math.abs(spirray1[f]);
         }
-        spiregulator=largest_loop*2;//*on;
+        spiregulator=largest_loop;//*on;
 
     }
 
@@ -334,7 +334,7 @@ if (trailDepth<trailLength)trailDepth++;
 				b = vo.setHSL((angle+90)/360.,1.,.5);
                               pitchCol[f]  = new THREE.MeshBasicMaterial({
                                       color:vo,
-                                      opacity: 0.5,
+                                      opacity: 0.54,
                                       transparent: true,
                                     });			     angle = ((angle-30+180)/360*2*pi);
            // angle = (maxInt24/24*2*pi);
@@ -510,7 +510,7 @@ uniforms = THREE.UniformsUtils.merge([
 spiral_compress();
 
 move();
-			makeSpirograph();
+if (reset<1)makeSpirograph();
 			var lineMat = new THREE.LineBasicMaterial( {
 	color: 0xffffff,
 	linewidth: 1,
@@ -519,7 +519,7 @@ move();
 } );
 			var point = new THREE.Geometry();
 var porportion = window.innerHeight/ window.innerWidth;
-  for (var r= 0; r < len; r ++) {
+if (reset<3) for (var r= 0; r < len; r ++) {
                 var tx = spirray0[r]*porportion/spiregulator;
                 var ty =  spirray1[r]/spiregulator;
 //if (r == 0) console.log(tx);
