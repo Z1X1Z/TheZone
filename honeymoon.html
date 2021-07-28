@@ -44,7 +44,7 @@
             vec2 p=-(vUv.yx-.5)/(resolution.xy/min(resolution.x,resolution.y))*30.;
                                                           p.y-=8.;
 
-            float c=0.,n=0.,l=0.,x=0.;
+            float c=0.,k=0.,l=0.,x=0.,e=0.;
             p.x+=1.;
         //vv body vv
             vec2 g=p/3.;
@@ -63,23 +63,23 @@
         //vv head vv
             g=p;
             z=g;
-            for (int f=0;f<10;f+=1)if(abs(z.x+abs(z.y))>17.&&f>4)l=1.;
+            for (int f=0;f<10;f+=1)if(abs(z.x+abs(z.y))>27.&&f>4)l=1.;
             else{z=vec2(-1./((z.x*z.x-z.y*z.y)-g.x),(2.0*z.x*z.y-g.y-sin(time*10.)/8.));
                  z*=pow(z.x,z.x);}
         //vv mandelbrot\heart vv
             g=p*2.;
             g.x-=6.;
             z=g;
-            for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>20.)break;
-            else {z=vec2(((z.x*z.x-z.y*z.y)-g.x),(2.0*z.x*z.y-g.y));
-                  n+=0.2;}
+            for (int f=0;f<50;f+=1)if(abs(z.x+z.y)>20.)break;
+            else {z=vec2(((z.x*z.x-z.y*z.y)-g.x-sin(time*1.618)/4.),(2.0*z.x*z.y-g.y-sin(time2/2.)/4.));
+                         if(f>2)k+=0.02;}
         //vv eye lights vv
             g=p;
             z=g;
-            for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>20.)break;
+            for (int f=0;f<4;f+=1)if(abs(z.x+z.y)>20.)break;
             else {z=vec2((1./(z.x*z.x-z.y*z.y)-g.x),(4.0*z.x*z.y-g.y));
-                  if(f>4)n+=0.1;}
-        return vec4(l+c,l+x+c,l+c,1.)*10000.+clamp(vec4(n)-10.,0.,1.);}
+                  if(f>2)e+=0.3;}
+        return vec4(l+c,l+x+c,l+c,1.)*10000.+clamp(vec4(0.,(k+e)*10.,(k+e)*10.,1.),0.,1.);}
                           
                           
                           
