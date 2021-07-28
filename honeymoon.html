@@ -92,7 +92,7 @@
             q=-zin(time2dance*3.)/20.; qq=zin(time2dance*(-coz(216.)/-coz(612.)-1.)*3.)/10.;//(un)comment this line to toggle dancing
             vec4 heart=vec4(0.);
             //Tree of life
-        vec2 f=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*18.*time;
+        vec2 f=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*11.*time;
         f+=coords.yx;
         vec2 s=f;
         for (int f=0;f<21;f+=1)if(abs(s.y)<39.){
@@ -343,17 +343,19 @@ if (trailDepth<trailLength)trailDepth++;
             //Colour pitchCol = Colour::fromHSV((angle-60)/360.,saturation,value,1.);
 			
 
-           d_x = -Math.sin(-angle)*(2.*averagedAmp)**.8787;
-          d_y = -Math.cos(-angle)*(2.*averagedAmp)**.8787 ;
-                          bx=coordX+d_x*.02*zoom;
-                          by=coordY+d_y*.02*zoom;
-      if(isFinite(d_x)&&isFinite(d_y)){
-        if(Math.abs(by*by)+Math.abs(bx*bx)<12.){coordX+=d_x*.02*zoom;
-            coordY+=d_y*.02*zoom;}
-        else{
-            if (Math.abs(by*by)<12.){coordY+=d_y*.02*zoom;coordX/=1.01;}
-            if (Math.abs(bx*bx)<12.){coordX+=d_x*.02*zoom;coordY/=1.01;}
-      }}
+                  d_x = -Math.sin(-angle)*(2.*averagedAmp)**.8787;
+                 d_y = -Math.cos(-angle)*(2.*averagedAmp)**.8787 ;
+                                 bx=coordX+d_x*.02*zoom;
+                                 by=coordY+d_y*.02*zoom;
+                                                                     
+         if(isFinite(d_x)&&isFinite(d_y)){
+           if(Math.abs(by*by)+Math.abs(bx*bx)<2.){coordX+=d_x*.02*zoom;
+               coordY+=d_y*.02*zoom;}
+           else{
+               if (Math.abs(by*by)<2.){coordY+=d_y*.02*zoom;coordX/=1.01;}
+               if (Math.abs(bx*bx)<2.){coordX+=d_x*.02*zoom;coordY/=1.01;}
+         }}
+
 
 
          interpolationFactor = 10.;//timeDif*1./(callbackWait-1);
@@ -533,8 +535,8 @@ var porportion = window.innerHeight/ window.innerWidth;
 			var	scene = new THREE.Scene();
 				             scene.add(line);
 
-			if (zoom>.000001&&progress&& reset<1)zoom /= 1.005+Math.abs(totalAMP/bufferSize*2.)/13.;
-                else if(zoom<1.)zoom *= 1.02;
+     if (zoom>.000001&&progress&& reset<1)zoom /= 1.044+Math.abs(totalAMP/bufferSize*2.)/11.;
+     else if(zoom<1.)zoom *= 1.033;
       uniforms.coords.value.x = coordX;
       uniforms.coords.value.y = coordY;
       				//uniforms[ "time" ].value = timestamp / 1000;
