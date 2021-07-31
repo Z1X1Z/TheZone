@@ -399,7 +399,7 @@ if(onO){
     for (var g=0; g<starArms; g++) if(testar[g]>maxTestar)maxTestar=testar[g];
     for (var g=0; g<starArms; g++)if(testar[g]>.0000000000001) {
         var widt = .02;
-        var rr =(testarD[g]+17)%24./24.*pi*2.;
+        var rr =(testarD[g]+19)%24./24.*pi*2.;
         var lengt = testar[g]/maxTestar;
         var vo = new THREE.Color();
         b = vo.setHSL((4-testarD[g])%24./24.,1.,.5);
@@ -431,7 +431,7 @@ else{
             for (var g=0; g<24; g++) {
             var widt = .02;
                 var rr= (g+14)%24;
-            var lengt = 1.*testar[(rr+7)%24]/maxTestar;
+            var lengt = 1.*testar[(rr+5)%24]/maxTestar;
 
                 var vo = new THREE.Color();
                             b = vo.setHSL((20-rr)%24/24.,1.,.5);
