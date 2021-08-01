@@ -399,24 +399,24 @@ if(onO){
     for (var g=0; g<starArms; g++) if(testar[g]>maxTestar)maxTestar=testar[g];
     for (var g=0; g<starArms; g++)if(testar[g]>.0000000000001) {
         var widt = .02;
-        var rr =(testarD[g]+19)%24./24.*pi*2.;
+        var yy =(testarD[g]+19)%24./24.*pi*2.;
         var lengt = testar[g]/maxTestar;
         var vo = new THREE.Color();
-        b = vo.setHSL((4-testarD[g])%24./24.,1.,.5);
+        b = vo.setHSL((2-testarD[g])%24./24.,1.,.5);
                       material  = new THREE.MeshBasicMaterial( { color:vo});
     meshes[g] = new THREE.Mesh(geometries[g] , material );
     scene.add(meshes[g])
-            rpio2 =rr+pi/2.;
+            rpio2 =yy+pi/2.;
     var vertices = new Float32Array( [
         0-widt*-Math.sin(rpio2)*porportion,    0-widt*-Math.cos(rpio2),  -0.05,
         0+widt*-Math.sin(rpio2)*porportion,    0+widt*-Math.cos(rpio2),  -0.05,
-        (lengt*-Math.sin(rr)+widt*-Math.sin(rpio2))*porportion,
-        lengt*-Math.cos(rr)+widt*-Math.cos(rpio2),  -0.05,
+        (lengt*-Math.sin(yy)+widt*-Math.sin(rpio2))*porportion,
+        lengt*-Math.cos(yy)+widt*-Math.cos(rpio2),  -0.05,
         0-widt*-Math.sin(rpio2)*porportion,    0-widt*-Math.cos(rpio2),  -0.05,
-        (lengt*-Math.sin(rr)+widt*-Math.sin(rpio2))*porportion,
-        lengt*-Math.cos(rr)+widt*-Math.cos(rpio2),  -0.05,
-        (lengt*-Math.sin(rr)-widt*-Math.sin(rpio2))*porportion,
-        lengt*-Math.cos(rr)-widt*-Math.cos(rpio2),  -0.05,
+        (lengt*-Math.sin(yy)+widt*-Math.sin(rpio2))*porportion,
+        lengt*-Math.cos(yy)+widt*-Math.cos(rpio2),  -0.05,
+        (lengt*-Math.sin(yy)-widt*-Math.sin(rpio2))*porportion,
+        lengt*-Math.cos(yy)-widt*-Math.cos(rpio2),  -0.05,
     ] );
 
     // itemSize = 3 because there are 3 values (components) per vertex
@@ -424,6 +424,7 @@ if(onO){
 
         }
 }
+                      
 else{
             var maxTestar=1.;
             for (var g=0; g<24; g++) if(testar[g]>maxTestar){maxTestar=testar[g];}
