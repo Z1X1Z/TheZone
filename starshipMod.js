@@ -402,7 +402,7 @@ if(onO){
         var yy =(testarD[g]+19)%24./24.*pi*2.;
         var lengt = testar[g]/maxTestar;
         var vo = new THREE.Color();
-        b = vo.setHSL((2-testarD[g])%24./24.,1.,.5);
+        b = vo.setHSL((1-testarD[g])%24./24.,1.,.5);
                       material  = new THREE.MeshBasicMaterial( { color:vo});
     meshes[g] = new THREE.Mesh(geometries[g] , material );
     scene.add(meshes[g])
