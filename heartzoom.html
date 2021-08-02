@@ -718,7 +718,7 @@ uniforms = THREE.UniformsUtils.merge([
 spiral_compress();
 
 move();
-			if(moving) makeSpirograph();
+			if(reset<2) makeSpirograph();
 			let lineMat = new THREE.LineBasicMaterial( {
 	color: 0xffffff,
 	linewidth: 3,
