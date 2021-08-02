@@ -338,16 +338,22 @@ move();
                         }
                         //^^^^https://www.cssjunction.com/tutorials/detect-landscape-portrait-mode-using-javascript/
                         
-                    let porportion;
-                        if(currMode=="landscape"||currMode=="desktop")
-             porportion = maxDimension/ minDimension;
-                            else if (currMode=="portrait")
-                                porportion = .5;
+                    let porportionX =1.;
+                    let porportionY =1.;
+                        if(currMode=="landscape"||currMode=="desktop"){
+             porportionX = maxDimension/ minDimension;
+             porportionY = 1.;
+                        }
+                            else if (currMode=="portrait"){
+                                porportionY = minDimension/maxDimension;
+                                porportionX = 1.;
+                                }
+                                let porportion=porportionX;
             point = new THREE.Geometry();
                  if(on>.5)
   for (var r= 0; r < len; r ++) {
-                var tx = spirray0[r]*porportion/spiregulator;
-                var ty =  spirray1[r]/spiregulator;
+                var tx = spirray0[r]*porportionX/spiregulator;
+                var ty =  spirray1[r]*porportionY/spiregulator;
 
 //	if(!(isFinite(tx) || isFinite(ty) || Math.abs(tx)>window.innerWidth/2 || Math.abs(cy)>window.innerHeight/2))
 
