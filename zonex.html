@@ -381,8 +381,15 @@ move();
 	linejoin:  'round' //ignored by WebGLRenderer
 } );
 			var point = new THREE.Geometry();
-var porportion = window.innerHeight/ window.innerWidth;
-  for (var r= 0; r < len; r ++) {
+
+            var minDimension =window.innerWidth;
+            var maxDimension = window.innerHeight;
+            if ( window.innerHeight<window.innerHeight)
+            {
+                  maxDimension=window.innerWidth;
+                minDimension = window.innerHeight;
+                    }
+            let porportion = maxDimension/ minDimension;  for (var r= 0; r < len; r ++) {
                 var tx = spirray0[r]*porportion/spiregulator;
                 var ty =  spirray1[r]/spiregulator;
 //if (r == 0) console.log(tx);
