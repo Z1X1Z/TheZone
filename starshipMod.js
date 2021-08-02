@@ -400,7 +400,7 @@ linejoin:  'round' //ignored by WebGLRenderer
  porportionY = 1.;
             }
                 else if (currMode=="portrait"){
-                    porportionY =window.innerHeight/window.innerWidth;
+                    porportionY =window.innerWidth/window.innerHeight;
                     porportionX = 1.;
                     }
             
