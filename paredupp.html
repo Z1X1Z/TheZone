@@ -392,15 +392,15 @@ if(onO){
     scene.add(meshes[g])
             rpio2 =r+pi/2.;
     var vertices = new Float32Array( [
-        0-widt*-Math.sin(rpio2)*porportion,	0-widt*-Math.cos(rpio2),  -0.05,
-        0+widt*-Math.sin(rpio2)*porportion,	0+widt*-Math.cos(rpio2),  -0.05,
-        (lengt*-Math.sin(r)+widt*-Math.sin(rpio2))*porportion,
-        lengt*-Math.cos(r)+widt*-Math.cos(rpio2),  -0.05,
-        0-widt*-Math.sin(rpio2)*porportion,	0-widt*-Math.cos(rpio2),  -0.05,
-        (lengt*-Math.sin(r)+widt*-Math.sin(rpio2))*porportion,
-        lengt*-Math.cos(r)+widt*-Math.cos(rpio2),  -0.05,
-        (lengt*-Math.sin(r)-widt*-Math.sin(rpio2))*porportion,
-        lengt*-Math.cos(r)-widt*-Math.cos(rpio2),  -0.05,
+        0-widt*-Math.sin(rpio2)*porportionX,	0-widt*-Math.cos(rpio2)*porportionY,  -0.05,
+        0+widt*-Math.sin(rpio2)*porportionX,	0+widt*-Math.cos(rpio2)*porportionY,  -0.05,
+        (lengt*-Math.sin(r)+widt*-Math.sin(rpio2))*porportionX,
+        lengt*-Math.cos(r)+widt*-Math.cos(rpio2)*porportionY,  -0.05,
+        0-widt*-Math.sin(rpio2)*porportionX,	0-widt*-Math.cos(rpio2)*porportionY,  -0.05,
+        (lengt*-Math.sin(r)+widt*-Math.sin(rpio2))*porportionX,
+        lengt*-Math.cos(r)+widt*-Math.cos(rpio2)*porportionY,  -0.05,
+        (lengt*-Math.sin(r)-widt*-Math.sin(rpio2))*porportionX,
+        lengt*-Math.cos(r)-widt*-Math.cos(rpio2)*porportionY,  -0.05,
     ] );
 
     // itemSize = 3 because there are 3 values (components) per vertex
@@ -423,15 +423,15 @@ else{
             meshes[r] = new THREE.Mesh(geometries[r] , material );
             scene.add(meshes[r])
             var vertices = new Float32Array( [
-                0-widt*-Math.sin(r*pi*2./24+pi/2.)*porportion,    0-widt*-Math.cos(r*pi*2./24+pi/2.),  -0.05,
-                0+widt*-Math.sin(r*pi*2./24+pi/2.)*porportion,    0+widt*-Math.cos(r*pi*2./24+pi/2.),  -0.05,
-                (lengt*-Math.sin(r*pi*2./24)+widt*-Math.sin(r*pi*2./24+pi/2.))*porportion,
-                lengt*-Math.cos(r*pi*2./24)+widt*-Math.cos(r*pi*2./24+pi/2.),  -0.05,
-                0-widt*-Math.sin(r*pi*2./24+pi/2.)*porportion,    0-widt*-Math.cos(r*pi*2./24+pi/2.),  -0.05,
-                (lengt*-Math.sin(r*pi*2./24)+widt*-Math.sin(r*pi*2./24+pi/2.))*porportion,
-                lengt*-Math.cos(r*pi*2./24)+widt*-Math.cos(r*pi*2./24+pi/2.),  -0.05,
-                (lengt*-Math.sin(r*pi*2./24)-widt*-Math.sin(r*pi*2./24+pi/2.))*porportion,
-                lengt*-Math.cos(r*pi*2./24)-widt*-Math.cos(r*pi*2./24+pi/2.),  -0.05,
+                0-widt*-Math.sin(r*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(r*pi*2./24+pi/2.)*porportionY,  -0.05,
+                0+widt*-Math.sin(r*pi*2./24+pi/2.)*porportionX,    0+widt*-Math.cos(r*pi*2./24+pi/2.)*porportionY,  -0.05,
+                (lengt*-Math.sin(r*pi*2./24)+widt*-Math.sin(r*pi*2./24+pi/2.))*porportionX,
+                lengt*-Math.cos(r*pi*2./24)+widt*-Math.cos(r*pi*2./24+pi/2.)*porportionY,  -0.05,
+                0-widt*-Math.sin(r*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(r*pi*2./24+pi/2.)*porportionY,  -0.05,
+                (lengt*-Math.sin(r*pi*2./24)+widt*-Math.sin(r*pi*2./24+pi/2.))*porportionX,
+                lengt*-Math.cos(r*pi*2./24)+widt*-Math.cos(r*pi*2./24+pi/2.)*porportionY,  -0.05,
+                (lengt*-Math.sin(r*pi*2./24)-widt*-Math.sin(r*pi*2./24+pi/2.))*porportionX,
+                lengt*-Math.cos(r*pi*2./24)-widt*-Math.cos(r*pi*2./24+pi/2.)*porportionY,  -0.05,
             ] );
 
             // itemSize = 3 because there are 3 values (components) per vertex
@@ -452,12 +452,12 @@ var widts = .2*(trailDepth-loopLimit-1)/trailDepth;
 var scalar = .01;//mobius mode: var scalar = .07*loopLimit/trailDepth;
 var tt = 0.;
 var vertices = new Float32Array( [
-(scalar*cx[r]+widtr*xPerp[r])*porportion, scalar*cy[r]+widtr*yPerp[r],-.1,
-		                            ( scalar*cx[s]-widts*xPerp[s])*porportion, scalar*cy[s]-widts*yPerp[s],-.1,
-				(scalar*cx[s]+widts*xPerp[s])*porportion, scalar*cy[s]+widts*yPerp[s],-.1,
-						         ( scalar*cx[r]-widtr*xPerp[r])*porportion, scalar*cy[r]-widtr*yPerp[r],-.1, //2
-								                       (scalar*cx[s]-widts*xPerp[s])*porportion, scalar*cy[s]-widts*yPerp[s],-.1,  //1
-		                            					(scalar*cx[r]+widtr*xPerp[r])*porportion, scalar*cy[r]+widtr*yPerp[r],-.1, //3
+(scalar*cx[r]+widtr*xPerp[r])*porportionX, (scalar*cy[r]+widtr*yPerp[r])*porportionY,-.1,
+		                            ( scalar*cx[s]-widts*xPerp[s])*porportionX, (scalar*cy[s]-widts*yPerp[s])*porportionY,-.1,
+				(scalar*cx[s]+widts*xPerp[s])*porportionX, (scalar*cy[s]+widts*yPerp[s])*porportionY,-.1,
+						         ( scalar*cx[r]-widtr*xPerp[r])*porportionX, (scalar*cy[r]-widtr*yPerp[r])*porportionY,-.1, //2
+								                       (scalar*cx[s]-widts*xPerp[s])*porportionX, (scalar*cy[s]-widts*yPerp[s])*porportionY,-.1,  //1
+		                            					(scalar*cx[r]+widtr*xPerp[r])*porportionX, (scalar*cy[r]+widtr*yPerp[r])*porportionY,-.1, //3
 		                            					
 
 ] );
