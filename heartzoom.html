@@ -374,14 +374,6 @@ vec2 adj=a/1.2*size;
 		</script>
 
 		<script>
-            
-            var mobileRez=1.;
-            //vvvvhttps://code-boxx.com/detect-mobile-device-javascript/
-            if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.25;
-            //^^^^https://code-boxx.com/detect-mobile-device-javascript/
-            //number key resolution transmission
-                var rez = window.devicePixelRatio*mobileRez;
-                
 //number key resolution transmission
             var rez = window.devicePixelRatio;
             window.addEventListener('keydown', function(event) {
@@ -414,7 +406,7 @@ let mamp = -1000000;
 	let len=0;
 	let spirray0 = new Float32Array(1024);
 	let spirray1 = new Float32Array(1024);
-	let spiregulator=0;
+	let spiregulator=1;
 	let phase = 0;
 function makeSpirograph()
     {
@@ -685,7 +677,6 @@ uniforms = THREE.UniformsUtils.merge([
 				} );
 
 				renderer = new THREE.WebGLRenderer();
-                          renderer.setPixelRatio( rez);
                               mesh = new THREE.Mesh( geometryP, materialShader );
 
 
@@ -718,9 +709,10 @@ uniforms = THREE.UniformsUtils.merge([
 spiral_compress();
 
 move();
-			if(reset<2) makeSpirograph();
+
+			if(on) makeSpirograph();
 			let lineMat = new THREE.LineBasicMaterial( {
-	color: 0xffffff,
+	color: 0x8888888,
 	linewidth: 3,
 	linecap: 'round', //ignored by WebGLRenderer
 	linejoin:  'round' //ignored by WebGLRenderer
@@ -736,18 +728,18 @@ move();
                 minDimension = window.innerHeight;
                     }
             let porportion = maxDimension/ minDimension;
-            if(moving)for (let r= 0; r < 1000; r ++) {
+            if(on)for (let r= 0; r < 1000; r ++) {
                 let tx = spirray0[r]*porportion/spiregulator;
                 let ty =  spirray1[r]/spiregulator;
 //	if(!(isFinite(tx) || isFinite(ty) || Math.abs(tx)>window.innerWidth/2 || Math.abs(cy)>window.innerHeight/2))
 
-		//if (isFinite(tx)&&isFinite(ty))
+		if (isFinite(tx)&&isFinite(ty))
 			point[r]=new THREE.Vector3( tx, ty, -0.07 );
 
 	}
   const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), lineMat );
 				const	scene = new THREE.Scene();
-				if(moving)scene.add(line);
+				if(on)scene.add(line);
 			if (zoom>.000001&&progress){ zoom /= 1.005;}
 			else if (zoom<1.0){progress = false;zoom *= 1.1;}
 			else {progress = true;}
