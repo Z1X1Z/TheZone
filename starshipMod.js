@@ -1,4 +1,4 @@
-var mobileRez=1;
+var mobileRez=1.;
 //vvvvhttps://code-boxx.com/detect-mobile-device-javascript/
 if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.25;
 //^^^^https://code-boxx.com/detect-mobile-device-javascript/
@@ -337,7 +337,7 @@ uniforms.coords.value.y = coordY;
 
 
 
-        renderer.setPixelRatio( window.devicePixelRatio);
+        renderer.setPixelRatio( rez);
 
         container.appendChild( renderer.domElement );
         onWindowResize();
