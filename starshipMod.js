@@ -1,6 +1,9 @@
-
+var mobileRez=1;
+//vvvvhttps://code-boxx.com/detect-mobile-device-javascript/
+if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.25;
+//^^^^https://code-boxx.com/detect-mobile-device-javascript/
 //number key resolution transmission
-    var rez = window.devicePixelRatio;
+    var rez = window.devicePixelRatio*mobileRez;
     window.addEventListener('keydown', function(event) {
     var x = parseInt(String.fromCharCode(event.which || event.keyCode));
     if (x>0){rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
@@ -368,17 +371,41 @@ linewidth: 3,
 linecap: 'round', //ignored by WebGLRenderer
 linejoin:  'round' //ignored by WebGLRenderer
 } );
-var minDimension =window.innerWidth;
-var maxDimension = window.innerHeight;
-if ( window.innerHeight<window.innerHeight)
-{
-      maxDimension=window.innerWidth;
-    minDimension = window.innerHeight;
-        }
-let porportion = maxDimension/ minDimension;
+            var currMode = "desktop"
+            //vvvvhttps://www.cssjunction.com/tutorials/detect-landscape-portrait-mode-using-javascript/
+            switch(window.orientation){
+
+                 case 0:
+                 currMode = "portrait";
+                 break;
+
+                 case -90:
+                 currMode = "landscape";
+                 break;
+
+                 case 90:
+                 currMode = "landscape";
+                 break;
+
+                 case 180:
+                 currMode = "portrait";
+                 break;
+            }
+            //^^^^https://www.cssjunction.com/tutorials/detect-landscape-portrait-mode-using-javascript/
+            
+        let porportionX =1.;
+        let porportionY =1.;
+            if(currMode=="landscape"||currMode=="desktop"){
+ porportionX = window.innerHeight/window.innerWidth;
+ porportionY = 1.;
+            }
+                else if (currMode=="portrait"){
+                    porportionY =window.innerHeight/window.innerWidth;
+                    porportionX = 1.;
+                    }
             if (reset<1)for (let r= 0; r < 1000; r ++) {
-        let tx = spirray0[r]*porportion/spiregulator;
-        let ty =  spirray1[r]/spiregulator;
+        let tx = spirray0[r]*porportionX/spiregulator;
+        let ty =  spirray1[r]*porportionY/spiregulator;
 //    if(!(isFinite(tx) || isFinite(ty) || Math.abs(tx)>window.innerWidth/2 || Math.abs(cy)>window.innerHeight/2))
 
 //if (isFinite(tx)&&isFinite(ty))
@@ -413,15 +440,16 @@ if(onO){
     scene.add(meshes[g])
             rpio2 =yy+pi/2.;
     var vertices = new Float32Array( [
-        0-widt*-Math.sin(rpio2)*porportion,    0-widt*-Math.cos(rpio2),  -0.05,
-        0+widt*-Math.sin(rpio2)*porportion,    0+widt*-Math.cos(rpio2),  -0.05,
-        (lengt*-Math.sin(yy)+widt*-Math.sin(rpio2))*porportion,
-        lengt*-Math.cos(yy)+widt*-Math.cos(rpio2),  -0.05,
-        0-widt*-Math.sin(rpio2)*porportion,    0-widt*-Math.cos(rpio2),  -0.05,
-        (lengt*-Math.sin(yy)+widt*-Math.sin(rpio2))*porportion,
-        lengt*-Math.cos(yy)+widt*-Math.cos(rpio2),  -0.05,
-        (lengt*-Math.sin(yy)-widt*-Math.sin(rpio2))*porportion,
-        lengt*-Math.cos(yy)-widt*-Math.cos(rpio2),  -0.05,
+                                      
+          0-widt*-Math.sin(rpio2)*porportionX,    0-widt*-Math.cos(rpio2)*porportionY,  -0.05,
+          0+widt*-Math.sin(rpio2)*porportionX,    0+widt*-Math.cos(rpio2)*porportionY,  -0.05,
+          (lengt*-Math.sin(yy)+widt*-Math.sin(rpio2))*porportionX,
+          (lengt*-Math.cos(yy)+widt*-Math.cos(rpio2))*porportionY,  -0.05,
+          0-widt*-Math.sin(rpio2)*porportionX,    0-widt*-Math.cos(rpio2)*porportionY,  -0.05,
+          (lengt*-Math.sin(yy)+widt*-Math.sin(rpio2))*porportionX,
+          (lengt*-Math.cos(yy)+widt*-Math.cos(rpio2))*porportionY,  -0.05,
+          (lengt*-Math.sin(yy)-widt*-Math.sin(rpio2))*porportionX,
+          (lengt*-Math.cos(yy)-widt*-Math.cos(rpio2))*porportionY,  -0.05,
     ] );
 
     // itemSize = 3 because there are 3 values (components) per vertex
@@ -445,15 +473,15 @@ else{
             meshes[rr] = new THREE.Mesh(geometries[rr] , material );
             scene.add(meshes[rr])
             var vertices = new Float32Array( [
-                0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportion,    0-widt*-Math.cos(rr*pi*2./24+pi/2.),  -0.05,
-                0+widt*-Math.sin(rr*pi*2./24+pi/2.)*porportion,    0+widt*-Math.cos(rr*pi*2./24+pi/2.),  -0.05,
-                (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.))*porportion,
-                lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.),  -0.05,
-                0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportion,    0-widt*-Math.cos(rr*pi*2./24+pi/2.),  -0.05,
-                (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.))*porportion,
-                lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.),  -0.05,
-                (lengt*-Math.sin(rr*pi*2./24)-widt*-Math.sin(rr*pi*2./24+pi/2.))*porportion,
-                lengt*-Math.cos(rr*pi*2./24)-widt*-Math.cos(rr*pi*2./24+pi/2.),  -0.05,
+              0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
+              0+widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0+widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
+              (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
+              (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  -0.05,
+              0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
+              (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
+              (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  -0.05,
+              (lengt*-Math.sin(rr*pi*2./24)-widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
+              (lengt*-Math.cos(rr*pi*2./24)-widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  -0.05,
             ] );
 
             // itemSize = 3 because there are 3 values (components) per vertex
@@ -479,16 +507,17 @@ let widtr = .2*(trailDepth-loopLimit)/trailDepth;
 let widts = .2*(trailDepth-loopLimit-1)/trailDepth;
 let scalar = .005;//mobius mode: let scalar = .07*loopLimit/trailDepth;
 let tt = 0.;
-let vertices = new Float32Array( [
-(scalar*cx[r]+widtr*xPerp[r])*porportion, scalar*cy[r]+widtr*yPerp[r],-.1,
-                            ( scalar*cx[s]-widts*xPerp[s])*porportion, scalar*cy[s]-widts*yPerp[s],-.1,
-        (scalar*cx[s]+widts*xPerp[s])*porportion, scalar*cy[s]+widts*yPerp[s],-.1,
-                         ( scalar*cx[r]-widtr*xPerp[r])*porportion, scalar*cy[r]-widtr*yPerp[r],-.1, //2
-                                               (scalar*cx[s]-widts*xPerp[s])*porportion, scalar*cy[s]-widts*yPerp[s],-.1,  //1
-                                                (scalar*cx[r]+widtr*xPerp[r])*porportion, scalar*cy[r]+widtr*yPerp[r],-.1, //3
+    var vertices = new Float32Array( [
+    (scalar*cx[r]+widtr*xPerp[r])*porportionX, (scalar*cy[r]+widtr*yPerp[r])*porportionY,-.1,
+                                        ( scalar*cx[s]-widts*xPerp[s])*porportionX, (scalar*cy[s]-widts*yPerp[s])*porportionY,-.1,
+                    (scalar*cx[s]+widts*xPerp[s])*porportionX, (scalar*cy[s]+widts*yPerp[s])*porportionY,-.1,
+                                     ( scalar*cx[r]-widtr*xPerp[r])*porportionX, (scalar*cy[r]-widtr*yPerp[r])*porportionY,-.1, //2
+                                                           (scalar*cx[s]-widts*xPerp[s])*porportionX, (scalar*cy[s]-widts*yPerp[s])*porportionY,-.1,  //1
+                                                            (scalar*cx[r]+widtr*xPerp[r])*porportionX, (scalar*cy[r]+widtr*yPerp[r])*porportionY,-.1, //3
+                                                            
 
+    ] );
 
-] );
 
 trailGeom[r].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices,3 ) );
 scene.add(trailMeshes[r])
