@@ -309,8 +309,41 @@ move();
 	linecap: 'round', //ignored by WebGLRenderer
 	linejoin:  'round' //ignored by WebGLRenderer
 } );
-var porportion = window.innerHeight/ window.innerWidth;
-				 point = new THREE.Geometry();
+            var minDimension =window.innerWidth;
+            var maxDimension = window.innerHeight;
+            if ( window.innerHeight<window.innerHeight)
+            {
+                  maxDimension=window.innerWidth;
+                minDimension = window.innerHeight;
+                    }
+                        var currMode = "desktop"
+                        //vvvvhttps://www.cssjunction.com/tutorials/detect-landscape-portrait-mode-using-javascript/
+                        switch(window.orientation){
+
+                             case 0:
+                             currMode = "portrait";
+                             break;
+
+                             case -90:
+                             currMode = "landscape";
+                             break;
+
+                             case 90:
+                             currMode = "landscape";
+                             break;
+
+                             case 180:
+                             currMode = "portrait";
+                             break;
+                        }
+                        //^^^^https://www.cssjunction.com/tutorials/detect-landscape-portrait-mode-using-javascript/
+                        
+                    let porportion;
+                        if(currMode=="landscape"||currMode=="desktop")
+             porportion = maxDimension/ minDimension;
+                            else if (currMode=="portrait")
+                                porportion = minDimension/maxDimension;
+            point = new THREE.Geometry();
                  if(on>.5)
   for (var r= 0; r < len; r ++) {
                 var tx = spirray0[r]*porportion/spiregulator;
