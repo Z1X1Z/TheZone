@@ -332,6 +332,7 @@ uniforms.coords.value.y = coordY;
         } );
 
         renderer = new THREE.WebGLRenderer();
+                  renderer.setPixelRatio( rez);
                       mesh = new THREE.Mesh( geometryP, materialShader );
 
 
