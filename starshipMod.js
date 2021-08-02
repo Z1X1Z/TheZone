@@ -337,7 +337,7 @@ uniforms.coords.value.y = coordY;
 
 
 
-        renderer.setPixelRatio( window.devicePixelRatio);
+        renderer.setPixelRatio( rez);
 
         container.appendChild( renderer.domElement );
         onWindowResize();
