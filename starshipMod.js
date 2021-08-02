@@ -368,9 +368,14 @@ linewidth: 3,
 linecap: 'round', //ignored by WebGLRenderer
 linejoin:  'round' //ignored by WebGLRenderer
 } );
-
-
-let porportion = window.innerHeight/ window.innerWidth;
+var minDimension =window.innerWidth;
+var maxDimension = window.innerHeight;
+if ( window.innerHeight<window.innerHeight)
+{
+      maxDimension=window.innerWidth;
+    minDimension = window.innerHeight;
+        }
+let porportion = maxDimension/ minDimension;
             if (reset<1)for (let r= 0; r < 1000; r ++) {
         let tx = spirray0[r]*porportion/spiregulator;
         let ty =  spirray1[r]/spiregulator;
