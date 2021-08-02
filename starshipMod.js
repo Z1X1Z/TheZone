@@ -1,5 +1,6 @@
 
 window.zoomCageSize = 2.
+let radius = 4.;
 var mobileRez=1.;
 //vvvvhttps://code-boxx.com/detect-mobile-device-javascript/
 if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.25;
@@ -181,7 +182,6 @@ else if (reset>5){on = 0;spirafreq=pt;}
 else reset++
 
 if (trailDepth<trailLength)trailDepth++;
-radius = .1;
 let g = Math.pow ( 2, (1/24.0));
 let aa = pitc/440.0;
 let note = Math.log(aa)/Math.log(g)+49;
@@ -225,9 +225,9 @@ else if (interpolationFactor<1) interpolationFactor=1;
 
 cx[f] = 0;
 cy[f] = 0;
-xPerp[f] = -Math.sin(-angle+pi/2);
-yPerp[f] = -Math.cos(-angle+pi/2);
-trail[f].radii = radius/2;
+xPerp[f] = -Math.sin(-angle+pi/2)*radius;
+yPerp[f] = -Math.cos(-angle+pi/2)*radius;
+trail[f].radii = 0.;//I think this line is obsolete
 f++;
 if (f>=trailDepth)f=0;
 for(let n = 0; n < trailDepth; n++) {
