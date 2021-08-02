@@ -374,6 +374,14 @@ vec2 adj=a/1.2*size;
 		</script>
 
 		<script>
+            
+            var mobileRez=1.;
+            //vvvvhttps://code-boxx.com/detect-mobile-device-javascript/
+            if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.25;
+            //^^^^https://code-boxx.com/detect-mobile-device-javascript/
+            //number key resolution transmission
+                var rez = window.devicePixelRatio*mobileRez;
+                
 //number key resolution transmission
             var rez = window.devicePixelRatio;
             window.addEventListener('keydown', function(event) {
@@ -677,6 +685,7 @@ uniforms = THREE.UniformsUtils.merge([
 				} );
 
 				renderer = new THREE.WebGLRenderer();
+                          renderer.setPixelRatio( rez);
                               mesh = new THREE.Mesh( geometryP, materialShader );
 
 
