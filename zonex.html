@@ -45,7 +45,27 @@ gl_FragColor=vec4(l);}
 		</script>
 
 		<script>
-		
+            
+            var mobileRez=1.;
+            //vvvvhttps://code-boxx.com/detect-mobile-device-javascript/
+            if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.25;
+            //^^^^https://code-boxx.com/detect-mobile-device-javascript/
+            //number key resolution transmission
+                var rez = window.devicePixelRatio*mobileRez;
+                
+//number key resolution transmission
+            var rez = window.devicePixelRatio;
+            window.addEventListener('keydown', function(event) {
+            var x = parseInt(String.fromCharCode(event.which || event.keyCode));
+            if (x>0){rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
+            else if (x==0){rez = window.devicePixelRatio /10.; renderer.setPixelRatio( rez);}
+            else if (String.fromCharCode(event.which || event.keyCode)=="À")
+                {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
+            else if (String.fromCharCode(event.which || event.keyCode)=="=")        {    rez /=1.1; renderer.setPixelRatio(rez);}
+            else if ( event.keyCode==173)        {    rez *=1.1; renderer.setPixelRatio(rez);}
+            else if (String.fromCharCode(event.which || event.keyCode)=="M")        {    invert *= -1;}
+
+            }, false);
 	/*	
 function hsv2rgb (var hsv) {
   // from HSV to RGB color vector
@@ -345,7 +365,7 @@ uniforms = THREE.UniformsUtils.merge([
 
 
 
-				renderer.setPixelRatio( window.devicePixelRatio);
+                              renderer.setPixelRatio( rez);
 
 				container.appendChild( renderer.domElement );
 				onWindowResize();
