@@ -4,8 +4,7 @@ if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.25;
 //^^^^https://code-boxx.com/detect-mobile-device-javascript/
 //number key resolution transmission
     var rez = window.devicePixelRatio*mobileRez;
-//number key resolution transmission
-    var rez = window.devicePixelRatio;
+
     window.addEventListener('keydown', function(event) {
     var x = parseInt(String.fromCharCode(event.which || event.keyCode));
     if (x>0){rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
