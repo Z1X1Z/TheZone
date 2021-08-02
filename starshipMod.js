@@ -1,3 +1,5 @@
+
+window.zoomCageSize = 2.
 var mobileRez=1.;
 //vvvvhttps://code-boxx.com/detect-mobile-device-javascript/
 if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.25;
@@ -208,11 +210,11 @@ angle[f] = angle;
                         by=coordY+d_y*.02*zoom;
                                                             
 if(isFinite(d_x)&&isFinite(d_y)){
-  if(Math.abs(by*by)+Math.abs(bx*bx)<2.){coordX+=d_x*.02*zoom;
+  if(Math.abs(by*by)+Math.abs(bx*bx)<window.zoomCageSize){coordX+=d_x*.02*zoom;
       coordY+=d_y*.02*zoom;}
   else{
-      if (Math.abs(by*by)<2.){coordY+=d_y*.02*zoom;coordX/=1.01;}
-      if (Math.abs(bx*bx)<2.){coordX+=d_x*.02*zoom;coordY/=1.01;}
+      if (Math.abs(by*by)<window.zoomCageSize){coordY+=d_y*.02*zoom;coordX/=1.01;}
+      if (Math.abs(bx*bx)<window.zoomCageSize){coordX+=d_x*.02*zoom;coordY/=1.01;}
 }}
 
 

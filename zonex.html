@@ -35,6 +35,7 @@
 void main(){
 
 	vec2 p=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*18.*time;
+    p.x+=.5;
 p+=coords.yx;
 vec2 s=p;
 float l=1.;
@@ -45,6 +46,7 @@ gl_FragColor=vec4(l);}
 		</script>
 
 		<script src="starshipMod.js"></script>
-
+        <script>window.zoomCageSize=2</script>
+        
 	</body>
 </html>
