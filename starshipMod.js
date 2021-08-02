@@ -171,7 +171,7 @@ analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data r
    if(totalAMP>1.)
   pb =    calculatePitch();
   pt = pb;
-       if(pb>0){pb =Math.pow(sampleRate/pb,.5);}
+       if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5);}
   var volumeModifier = dataArray[0];
 on = 1;
 if (isFinite(pb) &&pb>0&& pb!=6.565706694547585 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
