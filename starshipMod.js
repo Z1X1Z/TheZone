@@ -32,12 +32,12 @@ if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.25;
         else if (event.keyCode==190) uniforms[ "metronome" ].value *= 1.1; //keycode for <
         else if (event.keyCode==188&&uniforms[ "metronome" ].value>.99) uniforms[ "metronome" ].value /= 1.1; //keycode for >
             
-        else if (String.fromCharCode(event.which || event.keyCode)=="L")
+        else if (String.fromCharCode(event.which || event.keyCode)=="I")
         {
             zoomOutRatchetThreshold/= 1.31313113131;
             console.log("zoomOutRatchetThreshold: "+zoomOutRatchetThreshold+ ", totalMicAmp: "+totalAMP );
         }
-            else if (String.fromCharCode(event.which || event.keyCode)==";"){
+            else if (String.fromCharCode(event.which || event.keyCode)=="O"){
                 zoomOutRatchetThreshold+= .777;//character for '
                 console.log("zoomOutRatchetThreshold: "+zoomOutRatchetThreshold+ ", totalMicAmp: "+totalAMP );
         }
