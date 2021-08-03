@@ -124,8 +124,10 @@
                        s.x = 1./pow(s.x,flip)*sign(s.x*flip);
                  l = length(s);
                  d += l/25.;
-                   if (l >20.0&&t!=0)return vec3(1.);}
-                   return vec3(0.);
+                   if (l >20.0&&t!=0)return vec3(-1.);}
+                  
+                  if (abs(p.x*p.x+p.y*p.y)<2.0)return vec3(1.);
+                  else return vec3(0.0);
            }
 
 
@@ -153,11 +155,11 @@
             vec3 eaglePerched(vec2 p, vec2 t){
                   p*=3.;
                   vec2 s=p;
-                  float l=0.;
-                          float k = 0.;
-                          if(abs((p.x+k)*(p.x+k)+(p.y*p.y))<8.)
+                          float l = 0.;
+                          if(abs((p.x)*(p.x)+(p.y*p.y))<8.&&p.x<0.1)
                   for (int f=0;f<20;f+=1)if(abs(s.x+s.y)>20.)l=1.;
-                  else s=vec2(1./(s.x*s.x+s.y*s.y+p.x),-(2.0*s.x*s.y-p.y));
+                  else {s=vec2(1./(s.x*s.x+s.y*s.y+p.x),-(2.0*s.x*s.y-p.y));
+                        l=-1.;}
                   return vec3(l);
               }
                               
@@ -294,7 +296,7 @@
           if(colorCombo<10)zoomer=tol(p*zoom,coords);
           else if (colorCombo==11)zoomer=heartZoom(p*zoom,coords);
           vec3 creatures;
-          if(fourCreats<0)creatures=fourCreatures(p*4.,t);
+          if(fourCreats<0)creatures=fourCreatures((p*zoom+coords.yx)*4.,t);
           vec3 mny,m=vec3(0.);
           if(metronome<1.) {mny = manny(p,t);m=mny;}
           else   mny = mannyX(p,t);
