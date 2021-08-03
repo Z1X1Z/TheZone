@@ -1,5 +1,6 @@
 
-window.zoomCageSize = 2.
+window.zoomCageSize = 2.;
+zoomOutRatchetThreshold=1.;
 let radius = 4.;
 var mobileRez=1.;
 //vvvvhttps://code-boxx.com/detect-mobile-device-javascript/
@@ -30,11 +31,22 @@ if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.25;
         else if (String.fromCharCode(event.which || event.keyCode)=="F") uniforms[ "fourCreats" ].value *= -1;
         else if (event.keyCode==190) uniforms[ "metronome" ].value *= 1.1; //keycode for <
         else if (event.keyCode==188&&uniforms[ "metronome" ].value>.99) uniforms[ "metronome" ].value /= 1.1; //keycode for >
+            
+        else if (String.fromCharCode(event.which || event.keyCode)=="L")
+        {
+            zoomOutRatchetThreshold/= 1.31313113131;
+            console.log("zoomOutRatchetThreshold: "+zoomOutRatchetThreshold+ ", totalMicAmp: "+totalAMP );
+        }
+            else if (String.fromCharCode(event.which || event.keyCode)==";"){
+                zoomOutRatchetThreshold+= .777;//character for '
+                console.log("zoomOutRatchetThreshold: "+zoomOutRatchetThreshold+ ", totalMicAmp: "+totalAMP );
+        }
         else if (String.fromCharCode(event.which || event.keyCode)=="O"||String.fromCharCode(event.which || event.keyCode)==" ")
         {
             if (onO)onO=false;
             else onO = true;
             }
+        //console.log(String.fromCharCode(event.which || event.keyCode));
     }, false);
 
 /*
@@ -218,8 +230,7 @@ angle[f] = angle;
         d_y = -Math.cos(-angle)*(2.*averagedAmp)**.8787 ;
                         bx=coordX+d_x*.02*zoom;
                         by=coordY+d_y*.02*zoom;
-                                                            
-if(isFinite(d_x)&&isFinite(d_y)){
+if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold){
   if(Math.abs(by*by)+Math.abs(bx*bx)<window.zoomCageSize){coordX+=d_x*.02*zoom;
       coordY+=d_y*.02*zoom;}
   else{
@@ -433,7 +444,7 @@ const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), l
         const    scene = new THREE.Scene();
         if (reset<1)scene.add(line);
 
-            if (zoom>.000001&&progress&& reset<1)zoom /= 1.044+Math.abs(totalAMP/bufferSize)/15.;
+            if (zoom>.000001&&progress&&totalAMP>zoomOutRatchetThreshold)zoom /= 1.044+Math.abs(totalAMP/bufferSize)/15.;
                 else if(zoom<1.)zoom *= 1.044;
 uniforms.coords.value.x = coordX;
 uniforms.coords.value.y = coordY;
