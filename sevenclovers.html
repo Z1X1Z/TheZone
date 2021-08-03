@@ -75,20 +75,43 @@
               if(z.x>-.1)l=z.x*50.;}//face with closed small holes
           return vec3(clamp(1.-l,0.,1.));
           }
-         vec3 excelsior(vec2 p,vec2 t){
-                     float r=-t.y;
-                     p*=2.;
-                     vec2 s=p;
-                     vec3 l=vec3(.1,.5,1.1);
-                         for (int f=0;f<21;f+=1)
-                     if(abs(s.y)<28.){
-                      s=vec2(((s.x*s.x-s.y*s.y)-p.x),(2.0*s.x*s.y-p.y));
-                         l=vec3(2.-abs(s.y*-sin(-r*time))*7.)*-sin(-r*time);//middle horn
-                         s.x=pow(s.x,-sin(r*time*2.+3.14))*sign(-s.x*-sin(r*-time*2.+3.14));
-                         if(s.x>-.1)l=vec3(-sin(r*time)-(s.x*(100.-100.*-sin(r*time*2.-3.14))*-sin(r*time)));
-                         }
-                 return vec3(1./l);
+         vec3 shiny(vec2 p,vec2 t){
+            p*=2.;
+             vec2 s = p;
+             float l=0., d = 0., negator = 1.;
+                 for (int f=0;f<21;f+=1)
+                 if(abs(s.y)>21.&&(f==1||f>2)){
+                     l=1.-length(s)/40.;
+                     if (f == 1)
+                             negator=0.;
+                     else
+                             d+=length(s)/10.;
+                     break;
+                 }
+                 else{
+                     s=vec2(-1./(s.x*s.x-s.y*s.y-p.x), 2.0*s.x*s.y-p.y);
+                     l=abs(s.y)*3.5;//refines middle horn, optional
+                     if(s.x>-.1)l=s.x*50.;//closes small holes
+                     d+=length(s)/10.;
+                 }
+                 if (l>.54) negator = 0.;
+                 return vec3(-sin(d +time*3.+6.28318/3.),-sin(d+time*3.+6.28318*5./3.),-sin(d+time*3.))*5.*negator;
          }
+                            vec3 excelsior(vec2 p,vec2 t){
+                                                t.x*=-1.;
+                                                 p*=2.;
+                                                 vec2 s=p;
+                                                 vec3 l=vec3(.1,.5,1.1);
+                                                     for (int f=0;f<21;f+=1)
+                                                 if(abs(s.y)<28.){
+                                                  s=vec2(((s.x*s.x-s.y*s.y)-p.x),(2.0*s.x*s.y-p.y));
+
+                                                     s.x=pow(s.x,-sin(t.x*2.+3.14))*sign(-s.x*-sin(-t.x*2.+3.14));
+                                                                      l=vec3(2.-abs(s.y*-sin(-t.x))*19.)*-sin(-t.x);//middle horn
+                                                     if(s.x>-.1)l=vec3(-sin(t.x)-(s.x*(100.-100.*-sin(t.x*2.-3.14))*-sin(t.x)));
+                                                     }
+                                             return vec3(1./l);
+                                     }
 
            vec3 man(vec2 p,vec2 t) {
                p*=-2.;
@@ -242,7 +265,7 @@
                         return clamp(tol,0.,1.);}
 
           vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t);}
-          vec3 manny(vec2 p, vec2 t){return body(p,t)+heart(p,t)+face(p,vec2(0.));}
+          vec3 manny(vec2 p, vec2 t){return body(p,t)+heart(p,t)+face(p,vec2(0.))+shiny(p,vec2(0.));}
           vec3 mannyX(vec2 p, vec2 t){return body(p,t)+excelsior(p,vec2(time,metronome*6.28/4.));}
                                                         
           vec3 fourCreatures(vec2 p, vec2 t){
@@ -259,7 +282,7 @@
           return pTiltCoord;
           }
           
-          //function library: manny body legs robe musculature torso face excelsior lion ox man eagle eaglePerched fourCreatures heart anomalyze spin
+          //function library: manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin
           void main(){
            vec2 p=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*11.;
               p.x+=.5;
