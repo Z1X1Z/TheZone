@@ -204,7 +204,9 @@
                         vec3 tol=vec3(s.y);
                         if(colorCombo==1) tol=vec3(s.y,s.x/10.,1.-s.x/12.);
                         else if(colorCombo==2) tol=vec3(s.y/100.,s.x/8.-s.y/s.x/7000.,1.-s.x/16.)/1.2;
-                        else if(colorCombo==3)tol=vec3(s.y);
+                        else if(colorCombo==3) tol=vec3(s.y/100.-s.x*s.y/888.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.);
+                        else if(colorCombo==4)tol=vec3(s.y);
+
                         return clamp(tol,0.,1.);}
           vec3 body(vec2 p, vec2 t){return heart(p,t)+torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t);}
 
