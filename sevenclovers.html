@@ -272,11 +272,11 @@
           else if (colorCombo==11)zoomer=heartZoom(p*zoom,coords);
           vec3 creatures;
           if(fourCreats<0)creatures=fourCreatures(p*4.,t);
-          vec3 mny;
-          if(metronome<1.) mny = manny(p,t);
+          vec3 mny,m=vec3(0.);
+          if(metronome<1.) {mny = manny(p,t);m=mny;}
           else   mny = mannyX(p,t);
           gl_FragColor=vec4(mny+creatures+
-                            clamp(zoomer-(mny.r+mny.b+mny.g+creatures.r+creatures.g+creatures.b)*100.,.0,1.)
+                            clamp(zoomer-(m.r+m.b+m.g+creatures.r+creatures.g+creatures.b)*100.,.0,1.)
                     ,1.);}
 		</script>
 		<script src="starshipMod.js"></script>
