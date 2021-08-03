@@ -28,8 +28,8 @@ if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.25;
         else if (String.fromCharCode(event.which || event.keyCode)=="I") uniforms[ "colorCombo" ].value = 7;
         else if (String.fromCharCode(event.which || event.keyCode)=="A") uniforms[ "colorCombo" ].value = 11;
         else if (String.fromCharCode(event.which || event.keyCode)=="F") uniforms[ "fourCreats" ].value *= -1;
-
-
+        else if (event.keyCode==190) uniforms[ "metronome" ].value *= 1.1; //keycode for <
+        else if (event.keyCode==188&&uniforms[ "metronome" ].value>.99) uniforms[ "metronome" ].value /= 1.1; //keycode for >
         else if (String.fromCharCode(event.which || event.keyCode)=="O"||String.fromCharCode(event.which || event.keyCode)==" ")
         {
             if (onO)onO=false;
@@ -328,6 +328,7 @@ zoom: {value: 1.0 },
     
     colorCombo: {value: 1 },
 fourCreats: {value: 1 },
+metronome: {value: .99 },
 
     time2dance: {value: 1.0 },
 
@@ -436,7 +437,9 @@ const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), l
                 else if(zoom<1.)zoom *= 1.044;
 uniforms.coords.value.x = coordX;
 uniforms.coords.value.y = coordY;
-uniforms[ "time" ].value = zoom;
+            uniforms[ "zoom" ].value = zoom;
+
+uniforms[ "time" ].value = timestamp/1000.;
         uniforms[ "time2dance" ].value += Math.abs(totalAMP/bufferSize*2.);
         requestAnimationFrame( animate );
 if (micOn)analyser.getByteFrequencyData(  dataArray);
