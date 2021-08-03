@@ -176,7 +176,7 @@ let f = 0;
 let pitc = 1;
 let inputData;
 let bufferSize = 1024;
-let reset = 0;
+let reset = 6;
 let on;
 let spirafreq=1;
 var totalAMP;
@@ -392,7 +392,7 @@ move();
     if(on) makeSpirograph();
     let lineMat = new THREE.LineBasicMaterial( {
 color: 0xffffff,
-linewidth: 3,
+linewidth: 5,
 linecap: 'round', //ignored by WebGLRenderer
 linejoin:  'round' //ignored by WebGLRenderer
 } );
@@ -443,7 +443,7 @@ const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), l
         const    scene = new THREE.Scene();
         if (on)scene.add(line);
 
-            if (zoom>.000001&&progress&&totalAMP>zoomOutRatchetThreshold)zoom /= 1.044+Math.abs(totalAMP/bufferSize)/15.;
+            if (zoom>.000001&&progress&&(totalAMP>zoomOutRatchetThreshold||on))zoom /= 1.044+Math.abs(totalAMP/bufferSize)/15.;
                 else if(zoom<1.)zoom *= 1.044;
 uniforms.coords.value.x = coordX;
 uniforms.coords.value.y = coordY;
