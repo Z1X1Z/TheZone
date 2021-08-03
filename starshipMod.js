@@ -1,6 +1,8 @@
 
 window.zoomCageSize = 2.;
 zoomOutRatchetThreshold=1.;
+var zoomOutEngage=false;
+var movementRate=.007;
 let radius = 4.;
 var mobileRez=1.;
 //vvvvhttps://code-boxx.com/detect-mobile-device-javascript/
@@ -227,14 +229,14 @@ angle[f] = angle;
 
          d_x = -Math.sin(-angle)*(2.*averagedAmp)**.8787;
         d_y = -Math.cos(-angle)*(2.*averagedAmp)**.8787 ;
-                        bx=coordX+d_x*.02*zoom;
-                        by=coordY+d_y*.02*zoom;
+                        bx=coordX+d_x*movementRate*zoom;
+                        by=coordY+d_y*movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)&&on){
-  if(Math.abs(by*by)+Math.abs(bx*bx)<window.zoomCageSize){coordX+=d_x*.02*zoom;
-      coordY+=d_y*.02*zoom;}
+  if(Math.abs(by*by)+Math.abs(bx*bx)<window.zoomCageSize){coordX+=d_x*movementRate*zoom;
+      coordY+=d_y*movementRate*zoom;}
   else{
-      if (Math.abs(by*by)<window.zoomCageSize){coordY+=d_y*.02*zoom;coordX/=1.01;}
-      if (Math.abs(bx*bx)<window.zoomCageSize){coordX+=d_x*.02*zoom;coordY/=1.01;}
+      if (Math.abs(by*by)<window.zoomCageSize){coordY+=d_y*movementRate*zoom;coordX/=1.01;}
+      if (Math.abs(bx*bx)<window.zoomCageSize){coordX+=d_x*movementRate*zoom;coordY/=1.01;}
 }}
 
 
@@ -396,6 +398,7 @@ linewidth: 5,
 linecap: 'round', //ignored by WebGLRenderer
 linejoin:  'round' //ignored by WebGLRenderer
 } );
+            lineMat.color = new THREE.Color(-Math.sin(uniforms[ "time" ].value*uniforms[ "metronome" ].value*6.18/8.))
             var currMode = "desktop"
             //vvvvhttps://www.cssjunction.com/tutorials/detect-landscape-portrait-mode-using-javascript/
             switch(window.orientation){
@@ -443,8 +446,14 @@ const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), l
         const    scene = new THREE.Scene();
         if (on)scene.add(line);
 
-            if (zoom>.000001&&progress&&(totalAMP>zoomOutRatchetThreshold||on))zoom /= 1.044+Math.abs(totalAMP/bufferSize)/15.;
+            if (zoom>.000001&&progress&&totalAMP>zoomOutRatchetThreshold)zoom /= 1.044+Math.abs(totalAMP/bufferSize)/15.;
                 else if(zoom<1.)zoom *= 1.044;
+            
+        if (zoom>1.)zoomOutEngage = false;
+        else if ( zoom<.000001)zoomOutEngage = true;
+            
+        if (zoomOutEngage == true)zoom *= 1.44;
+            
 uniforms.coords.value.x = coordX;
 uniforms.coords.value.y = coordY;
             uniforms[ "zoom" ].value = zoom;
