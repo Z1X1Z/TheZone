@@ -6,6 +6,7 @@ var mobileRez=1.;
 if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.25;
 //^^^^https://code-boxx.com/detect-mobile-device-javascript/
 //number key resolution transmission
+
     var rez = window.devicePixelRatio*mobileRez;
     window.addEventListener('keydown', function(event) {
     var x = parseInt(String.fromCharCode(event.which || event.keyCode));
@@ -22,8 +23,14 @@ if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.25;
         else if (String.fromCharCode(event.which || event.keyCode)=="E") uniforms[ "colorCombo" ].value = 3;
         else if (String.fromCharCode(event.which || event.keyCode)=="R") uniforms[ "colorCombo" ].value = 4;
         else if (String.fromCharCode(event.which || event.keyCode)=="T") uniforms[ "colorCombo" ].value = 5;
+        else if (String.fromCharCode(event.which || event.keyCode)=="Y") uniforms[ "colorCombo" ].value = 6;
+        else if (String.fromCharCode(event.which || event.keyCode)=="U") uniforms[ "colorCombo" ].value = 7;
+        else if (String.fromCharCode(event.which || event.keyCode)=="I") uniforms[ "colorCombo" ].value = 7;
+        else if (String.fromCharCode(event.which || event.keyCode)=="A") uniforms[ "colorCombo" ].value = 11;
+        else if (String.fromCharCode(event.which || event.keyCode)=="F") uniforms[ "fourCreats" ].value *= -1;
 
-        else if (String.fromCharCode(event.which || event.keyCode)=="O")
+
+        else if (String.fromCharCode(event.which || event.keyCode)=="O"||String.fromCharCode(event.which || event.keyCode)==" ")
         {
             if (onO)onO=false;
             else onO = true;
@@ -320,6 +327,8 @@ time: {value: 1.0 },
 zoom: {value: 1.0 },
     
     colorCombo: {value: 1 },
+fourCreats: {value: 1 },
+
     time2dance: {value: 1.0 },
 
 resolution: {value: new THREE.Vector2() },
@@ -429,7 +438,6 @@ uniforms.coords.value.x = coordX;
 uniforms.coords.value.y = coordY;
 uniforms[ "time" ].value = zoom;
         uniforms[ "time2dance" ].value += Math.abs(totalAMP/bufferSize*2.);
-
         requestAnimationFrame( animate );
 if (micOn)analyser.getByteFrequencyData(  dataArray);
 
