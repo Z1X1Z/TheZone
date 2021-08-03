@@ -432,7 +432,7 @@ const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), l
         const    scene = new THREE.Scene();
         if (reset<1)scene.add(line);
 
-            if (zoom>.000001&&progress&& reset<1)zoom /= 1.044+Math.abs(totalAMP/bufferSize*2.)/15.;
+            if (zoom>.000001&&progress&& reset<1)zoom /= 1.044+Math.abs(totalAMP/bufferSize)/15.;
                 else if(zoom<1.)zoom *= 1.044;
 uniforms.coords.value.x = coordX;
 uniforms.coords.value.y = coordY;

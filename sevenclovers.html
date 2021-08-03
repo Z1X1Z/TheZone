@@ -50,11 +50,10 @@
           }
               vec3 heartZoom(vec2 p, vec2 t){
                   p.x+=.5;
-                  p.y*=-1.;
                   p+=coords.yx;
                   vec2 z=p;
                   vec3 h;
-                  for (int f=0;f<20;f+=1)if(abs(z.y+z.x)>20.)h=vec3(1.);
+                  for (int f=0;f<100;f+=1)if(abs(z.y+z.x)>20.)h=vec3(1.);
                   else {z=vec2(((z.x*z.x-z.y*z.y)-p.x),(2.0*z.x*z.y-p.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
                     h+=vec3(.0);}
               return h;
