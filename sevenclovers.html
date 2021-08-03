@@ -255,16 +255,16 @@
                             s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y);//x**3
                             s.x=log(abs(s.x));
                             }
-                        vec3 tol=vec3(s.y);
-                        if(colorCombo==1) tol=vec3(s.y,s.x/10.,1.-s.x/12.);
-                        else if(colorCombo==2) tol=vec3(s.y/100.,s.x/8.-s.y/s.x/7000.,1.-s.x/16.)/1.2;
-                        else if(colorCombo==3) tol=vec3(s.y/100.-s.x*s.y/888.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.);
-                        else if(colorCombo==4) tol= vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.);
-                        else if(colorCombo==5)  tol=vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.);
-                        else if(colorCombo==6)tol= vec3(s.x/8.-s.y/s.x/7000.,1.-s.x/16.,s.y/100.)/1.1;
-                        else if(colorCombo==7) tol=vec3(s.y);
+                        vec3 o=vec3(s.y);
+                        if(colorCombo==1) o=vec3(s.y,s.x/10.,1.-s.x/12.);
+                        else if(colorCombo==2) o=vec3(s.y/100.,s.x/8.-s.y/s.x/7000.,1.-s.x/16.)/1.2;
+                        else if(colorCombo==3) o=vec3(s.y/100.-s.x*s.y/888.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.);
+                        else if(colorCombo==4) o= vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.);
+                        else if(colorCombo==5)  o=vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.);
+                        else if(colorCombo==6)o= vec3(s.x/8.-s.y/s.x/7000.,1.-s.x/16.,s.y/100.)/1.1;
+                        else if(colorCombo==7) o=vec3(s.y);
 
-                        return clamp(tol,0.,1.);}
+                        return clamp(o,0.,1.);}
 
           vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t);}
           vec3 manny(vec2 p, vec2 t){return body(p,t)+heart(p,t)+face(p,vec2(0.))+shiny(p,vec2(0.));}
@@ -293,10 +293,11 @@
           vec2 t =vec2(-sin(rate*time2dance)/50.,-sin(time2dance*(rate*gr)*3.)/30.);
           //vec2 fl=vec2(-1.,-sin(time));//vec2(-sin(rate*time),-sin(time*(rate*gr)*3.));
           vec3 zoomer;
-          if(colorCombo<10)zoomer=tol(p*zoom,coords);
-          else if (colorCombo==11)zoomer=heartZoom(p*zoom,coords);
+          vec2 bg =p/2.;
+          if(colorCombo<10)zoomer=tol(bg*zoom,coords);
+          else if (colorCombo==11)zoomer=heartZoom(bg*zoom,coords);
           vec3 creatures;
-          if(fourCreats<0)creatures=fourCreatures((p*zoom+coords.yx)*3.-vec2(-.5,.0),t);
+          if(fourCreats<0)creatures=fourCreatures((bg*zoom+coords.yx)*3.-vec2(-.5,.0),t);
           vec3 mny,m=vec3(0.);
           if(metronome<1.) {mny = manny(p,t);m=mny;}
           else   mny = mannyX(p,t);

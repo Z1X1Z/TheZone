@@ -26,7 +26,6 @@ if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.25;
         else if (String.fromCharCode(event.which || event.keyCode)=="T") uniforms[ "colorCombo" ].value = 5;
         else if (String.fromCharCode(event.which || event.keyCode)=="Y") uniforms[ "colorCombo" ].value = 6;
         else if (String.fromCharCode(event.which || event.keyCode)=="U") uniforms[ "colorCombo" ].value = 7;
-        else if (String.fromCharCode(event.which || event.keyCode)=="I") uniforms[ "colorCombo" ].value = 7;
         else if (String.fromCharCode(event.which || event.keyCode)=="A") uniforms[ "colorCombo" ].value = 11;
         else if (String.fromCharCode(event.which || event.keyCode)=="F") uniforms[ "fourCreats" ].value *= -1;
         else if (event.keyCode==190) uniforms[ "metronome" ].value *= 1.1; //keycode for <
@@ -34,7 +33,7 @@ if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.25;
             
         else if (String.fromCharCode(event.which || event.keyCode)=="I")
         {
-            zoomOutRatchetThreshold/= 1.31313113131;
+            zoomOutRatchetThreshold/= 1.212121;
             console.log("zoomOutRatchetThreshold: "+zoomOutRatchetThreshold+ ", totalMicAmp: "+totalAMP );
         }
             else if (String.fromCharCode(event.which || event.keyCode)=="O"){
@@ -230,7 +229,7 @@ angle[f] = angle;
         d_y = -Math.cos(-angle)*(2.*averagedAmp)**.8787 ;
                         bx=coordX+d_x*.02*zoom;
                         by=coordY+d_y*.02*zoom;
-if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold){
+if(isFinite(d_x)&&isFinite(d_y)&&on){
   if(Math.abs(by*by)+Math.abs(bx*bx)<window.zoomCageSize){coordX+=d_x*.02*zoom;
       coordY+=d_y*.02*zoom;}
   else{
@@ -390,7 +389,7 @@ let point = [];
 spiral_compress();
 
 move();
-    if(reset<2) makeSpirograph();
+    if(on) makeSpirograph();
     let lineMat = new THREE.LineBasicMaterial( {
 color: 0xffffff,
 linewidth: 3,
@@ -431,7 +430,7 @@ linejoin:  'round' //ignored by WebGLRenderer
                     }
             
             
-            if (reset<1)for (let r= 0; r < 1000; r ++) {
+            if (on)for (let r= 0; r < 1000; r ++) {
                         let tx = spirray0[r]*porportionX/spiregulator;
                         let ty =  spirray1[r]*porportionY/spiregulator;
                 //    if(!(isFinite(tx) || isFinite(ty) || Math.abs(tx)>window.innerWidth/2 || Math.abs(cy)>window.innerHeight/2))
@@ -442,7 +441,7 @@ linejoin:  'round' //ignored by WebGLRenderer
                 }
 const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), lineMat );
         const    scene = new THREE.Scene();
-        if (reset<1)scene.add(line);
+        if (on)scene.add(line);
 
             if (zoom>.000001&&progress&&totalAMP>zoomOutRatchetThreshold)zoom /= 1.044+Math.abs(totalAMP/bufferSize)/15.;
                 else if(zoom<1.)zoom *= 1.044;
