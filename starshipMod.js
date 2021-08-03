@@ -20,6 +20,9 @@ if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.25;
         else if (String.fromCharCode(event.which || event.keyCode)=="Q") uniforms[ "colorCombo" ].value = 1;
         else if (String.fromCharCode(event.which || event.keyCode)=="W")   uniforms[ "colorCombo" ].value = 2;
         else if (String.fromCharCode(event.which || event.keyCode)=="E") uniforms[ "colorCombo" ].value = 3;
+        else if (String.fromCharCode(event.which || event.keyCode)=="R") uniforms[ "colorCombo" ].value = 4;
+        else if (String.fromCharCode(event.which || event.keyCode)=="T") uniforms[ "colorCombo" ].value = 5;
+
         else if (String.fromCharCode(event.which || event.keyCode)=="O")
         {
             if (onO)onO=false;
@@ -227,7 +230,7 @@ cx[f] = 0;
 cy[f] = 0;
 xPerp[f] = -Math.sin(-angle+pi/2)*radius;
 yPerp[f] = -Math.cos(-angle+pi/2)*radius;
-trail[f].radii = 0.;//I think this line is obsolete
+
 f++;
 if (f>=trailDepth)f=0;
 for(let n = 0; n < trailDepth; n++) {
