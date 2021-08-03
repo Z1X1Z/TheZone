@@ -16,7 +16,6 @@
 			varying vec2 vUv;
         		uniform vec2 coords;
        			uniform vec2 resolution;
-       			uniform float time;
 
 			void main()	{
 
@@ -30,11 +29,11 @@
 			varying vec2 vUv;
 			uniform vec2 coords;
        			uniform vec2 resolution;
-			uniform float time;
+			uniform float zoom;
 
 void main(){
 
-	vec2 p=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*18.*time;
+	vec2 p=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*18.*zoom;
     p.x+=.5;
 p+=coords.yx;
 vec2 s=p;
