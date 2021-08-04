@@ -1,5 +1,5 @@
 
-window.zoomCageSize = 2.;
+window.zoomCageSize = 2.5;
 zoomOutRatchetThreshold=1.;
 var zoomOutEngage=false;
 var movementRate=.007;
