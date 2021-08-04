@@ -401,7 +401,7 @@ linejoin:  'round' //ignored by WebGLRenderer
             
            if (uniforms[ "metronome" ].value>1.)
                lineMat.color =
-                new THREE.Color(-Math.sin(-uniforms[ "time" ].value*uniforms[ "metronome" ].value*6.18/8.))//this line is geared with the shader, don't change unless you do both
+                new THREE.Color(-Math.sin(uniforms[ "time" ].value*uniforms[ "metronome" ].value))//this line is geared with the shader, don't change unless you do both
             var currMode = "desktop"
             //vvvvhttps://www.cssjunction.com/tutorials/detect-landscape-portrait-mode-using-javascript/
             switch(window.orientation){
