@@ -227,8 +227,8 @@ angle[f] = angle;
     //Colour pitchCol = Colour::fromHSV((angle-60)/360.,saturation,value,1.);
 
 
-         d_x = -Math.sin(-angle)*(2.*averagedAmp)**.8787;
-        d_y = -Math.cos(-angle)*(2.*averagedAmp)**.8787 ;
+         d_x = -Math.sin(-angle)*(1.+averagedAmp)**1.44
+        d_y = -Math.cos(-angle)*(1+averagedAmp)**1.44
                         bx=coordX+d_x*movementRate*zoom;
                         by=coordY+d_y*movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)&&on){
@@ -473,9 +473,15 @@ if(onO){
         var widt = .02;
         var yy =(testarD[g]+19)%24./24.*pi*2.;
         var lengt = testar[g]/maxTestar;
-        var vo = new THREE.Color();
-        b = vo.setHSL((1-testarD[g])%24./24.,1.,.5);
-                      material  = new THREE.MeshBasicMaterial( { color:vo});
+        var vop = new THREE.Color();
+       
+        b = vop.setHSL((1-testarD[g])%24./24.,1.,.5);
+                      material = new THREE.MeshBasicMaterial({
+        color:b,
+        opacity: .5+.5/uniforms[ "metronome" ].value ,
+        transparent: true,
+      });
+
     meshes[g] = new THREE.Mesh(geometries[g] , material );
     scene.add(meshes[g])
             rpio2 =yy+pi/2.;
