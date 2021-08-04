@@ -31,7 +31,7 @@ if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.25;
         else if (String.fromCharCode(event.which || event.keyCode)=="A") uniforms[ "colorCombo" ].value = 11;
         else if (String.fromCharCode(event.which || event.keyCode)=="F") uniforms[ "fourCreats" ].value *= -1;
         else if (event.keyCode==190) uniforms[ "metronome" ].value *= 1.1; //keycode for <
-        else if (event.keyCode==188&&uniforms[ "metronome" ].value>.99) uniforms[ "metronome" ].value /= 1.1; //keycode for >
+        else if (event.keyCode==188&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
             
         else if (String.fromCharCode(event.which || event.keyCode)=="I")
         {
@@ -199,9 +199,9 @@ analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data r
   pt = pb;
        if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5);}
   var volumeModifier = dataArray[0];
-on = 1;
+on = true;
 if (isFinite(pb) &&pb>0&& pb!=6.565706694547585 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
-else if (reset>5){on = 0;spirafreq=pt;}
+else if (reset>5){on = false;}
 else reset++
 
 if (trailDepth<trailLength)trailDepth++;
@@ -232,13 +232,13 @@ angle[f] = angle;
                         bx=coordX+d_x*movementRate*zoom;
                         by=coordY+d_y*movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)&&on){
-  if(Math.abs(by*by)+Math.abs(bx*bx)<window.zoomCageSize){coordX+=d_x*movementRate*zoom;
-      coordY+=d_y*movementRate*zoom;}
-  else{
-      if (Math.abs(by*by)<window.zoomCageSize){coordY+=d_y*movementRate*zoom;coordX/=1.01;}
-      if (Math.abs(bx*bx)<window.zoomCageSize){coordX+=d_x*movementRate*zoom;coordY/=1.01;}
-}}
-
+           if(Math.abs(by*by)+Math.abs(bx*bx)<window.zoomCageSize){
+               coordX+=d_x*movementRate*zoom;
+               coordY+=d_y*movementRate*zoom;
+           }
+       }
+         if (Math.abs(by*by)>window.zoomCageSize)coordX/=1.01;
+         if (Math.abs(bx*bx)>window.zoomCageSize)coordY/=1.01;
 
 
  interpolationFactor = 10.;//timeDif*1./(callbackWait-1);
@@ -252,7 +252,7 @@ yPerp[f] = -Math.cos(-angle+pi/2)*radius;
 
 f++;
 if (f>=trailDepth)f=0;
-for(let n = 0; n < trailDepth; n++) {
+if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
     cx[n] += d_x;
     cy[n] += d_y;
 }
@@ -478,7 +478,7 @@ if(onO){
         b = vop.setHSL((1-testarD[g])%24./24.,1.,.5);
                       material = new THREE.MeshBasicMaterial({
         color:b,
-        opacity: .5+.5/uniforms[ "metronome" ].value ,
+        opacity: .333+.777/uniforms[ "metronome" ].value ,
         transparent: true,
       });
 
