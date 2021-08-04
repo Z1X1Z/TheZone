@@ -161,10 +161,12 @@ let part = {cx : {  value: 0 },};
 let trail = Array(1000);
 let cx = Array(1000);
         let cy = Array(1000);
+                                   let fade = Array(1000);
+
                 let pitchCol = Array(1000);
 let trailLoaded = false;
 let trailDepth = -1;
-let trailLength = 144;
+let trailLength = 100;
 let d_x=0,d_y=0;
 let f = 0;
 
@@ -187,7 +189,7 @@ function  move()
     totalAMP = 0.;
 
 if (!trailLoaded) {trailLoaded = true; for(var n = 0; n<trailLength; n++)
-{trail[n] = part;xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}}
+{trail[n] = part;xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}fade[n]=0.;}
 
 analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
 //let iD = Array(inputData.length);
@@ -217,7 +219,7 @@ vo.setHSL((angle+90)/360.,1.,.5);
 
 pitchCol[f]  = new THREE.MeshBasicMaterial({
         color:vo,
-        opacity: 0.5,
+        opacity: 1.,
         transparent: true,
       });
 angle = ((angle-30+180)/360*2*pi);
@@ -249,12 +251,13 @@ cx[f] = 0;
 cy[f] = 0;
 xPerp[f] = -Math.sin(-angle+pi/2)*radius;
 yPerp[f] = -Math.cos(-angle+pi/2)*radius;
-
-f++;
+fade[f]=1.;
+f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
     cx[n] += d_x;
     cy[n] += d_y;
+    fade[n] *=.98
 }
 
 }
@@ -538,9 +541,10 @@ let r = (f+trailDepth-2)%trailDepth;
 let s = (f+trailDepth-1)%trailDepth;
 let loopLimit = trailDepth;
 //if(isFinite(cx[r-1])&&isFinite(cx[s])&&isFinite(cy[r-1])&&isFinite(cy[s]))
+
 while(loopLimit>15)
 {loopLimit--;
-
+pitchCol[r].opacity = 1.-(trailDepth-loopLimit)/trailDepth;
 material = pitchCol[r];
 trailMeshes[r] = new THREE.Mesh(trailGeom[r] , material );
 
@@ -548,8 +552,8 @@ trailMeshes[r] = new THREE.Mesh(trailGeom[r] , material );
 //trailMeshes[s] = new THREE.Mesh(trailGeom[s] , material );
 // create a simple square shape. We duplicate the top left and bottom right
 // vertices because each vertex needs to appear once per triangle.
-let widtr = .2*(trailDepth-loopLimit)/trailDepth;
-let widts = .2*(trailDepth-loopLimit-1)/trailDepth;
+let widtr = .2*(1.-fade[r]);
+let widts = .2*(1.-fade[s]);
 let scalar = .005;//mobius mode: let scalar = .07*loopLimit/trailDepth;
 let tt = 0.;
 let vertices = new Float32Array( [
