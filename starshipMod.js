@@ -544,7 +544,7 @@ let loopLimit = trailDepth;
 
 while(loopLimit>15)
 {loopLimit--;
-pitchCol[r].opacity = 1.-(trailDepth-loopLimit)/trailDepth;
+pitchCol[r].opacity = 1.-(trailDepth-loopLimit)/trailDepth*2.;
 material = pitchCol[r];
 trailMeshes[r] = new THREE.Mesh(trailGeom[r] , material );
 
