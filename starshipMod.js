@@ -166,7 +166,7 @@ let cx = Array(1000);
                 let pitchCol = Array(1000);
 let trailLoaded = false;
 let trailDepth = -1;
-let trailLength = 100;
+let trailLength = 288;
 let d_x=0,d_y=0;
 let f = 0;
 
@@ -231,7 +231,6 @@ angle[f] = angle;
 
          d_x = -Math.sin(-angle)*(5+averagedAmp);
         d_y = -Math.cos(-angle)*(5+averagedAmp);
-         console.log(averagedAmp)
                         bx=coordX+d_x*movementRate*zoom;
                         by=coordY+d_y*movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)){
@@ -557,13 +556,14 @@ let widtr = .2*(1.-fade[r]);
 let widts = .2*(1.-fade[s]);
 let scalar = .005;//mobius mode: let scalar = .07*loopLimit/trailDepth;
 let tt = 0.;
+    var z = -(trailDepth-loopLimit)/trailDepth;
 let vertices = new Float32Array( [
-(scalar*cx[r]+widtr*xPerp[r])*porportionX, (scalar*cy[r]+widtr*yPerp[r])*porportionY,-.1,
-                            ( scalar*cx[s]-widts*xPerp[s])*porportionX, (scalar*cy[s]-widts*yPerp[s])*porportionY,-.1,
-        (scalar*cx[s]+widts*xPerp[s])*porportionX, (scalar*cy[s]+widts*yPerp[s])*porportionY,-.1,
-                         ( scalar*cx[r]-widtr*xPerp[r])*porportionX, (scalar*cy[r]-widtr*yPerp[r])*porportionY,-.1, //2
-                                               (scalar*cx[s]-widts*xPerp[s])*porportionX, (scalar*cy[s]-widts*yPerp[s])*porportionY,-.1,  //1
-                                                (scalar*cx[r]+widtr*xPerp[r])*porportionX, (scalar*cy[r]+widtr*yPerp[r])*porportionY,-.1, //3
+(scalar*cx[r]+widtr*xPerp[r])*porportionX, (scalar*cy[r]+widtr*yPerp[r])*porportionY,z,
+                            ( scalar*cx[s]-widts*xPerp[s])*porportionX, (scalar*cy[s]-widts*yPerp[s])*porportionY,z,
+        (scalar*cx[s]+widts*xPerp[s])*porportionX, (scalar*cy[s]+widts*yPerp[s])*porportionY,z,
+                         ( scalar*cx[r]-widtr*xPerp[r])*porportionX, (scalar*cy[r]-widtr*yPerp[r])*porportionY,z, //2
+                                               (scalar*cx[s]-widts*xPerp[s])*porportionX, (scalar*cy[s]-widts*yPerp[s])*porportionY,z,  //1
+                                                (scalar*cx[r]+widtr*xPerp[r])*porportionX, (scalar*cy[r]+widtr*yPerp[r])*porportionY,z, //3
 
 
 ] );
