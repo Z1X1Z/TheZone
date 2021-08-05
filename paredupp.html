@@ -339,7 +339,7 @@ move();
              porportionY = 1.;
                         }
                             else if (currMode=="portrait"){
-                                porportionY =window.innerWidth/window.innerHeight;
+                                porportionY =window.innerHeight/window.innerWidth;
                                 porportionX = 1.;
                                 }
             point = new THREE.Geometry();
@@ -367,10 +367,6 @@ if (micOn)analyser.getByteFrequencyData(  dataArray);
 
 
 var maxTestar=0.;
-
-
-
-
 
 if(onO){
     for (var g=0; g<starArms; g++) if(testar[g]>maxTestar){maxTestar=testar[g];}
@@ -527,7 +523,7 @@ var micOn = false;
                      var barbor1;
 var fade;
                      var startTime;
-                     var maxVolume = .5;
+                     var maxVolume = .25;
 async function startMic() {
   let stream = null;
 
