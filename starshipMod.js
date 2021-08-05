@@ -1,5 +1,5 @@
 
-window.zoomCageSize = 2.;
+window.zoomCageSize = 1.7;
 zoomOutRatchetThreshold=1.;
 var zoomOutEngage=false;
 var movementRate=.007;
@@ -229,8 +229,9 @@ angle[f] = angle;
     //Colour pitchCol = Colour::fromHSV((angle-60)/360.,saturation,value,1.);
 
 
-         d_x = -Math.sin(-angle)*(1.+averagedAmp)**1.44
-        d_y = -Math.cos(-angle)*(1+averagedAmp)**1.44
+         d_x = -Math.sin(-angle)*(5+averagedAmp);
+        d_y = -Math.cos(-angle)*(5+averagedAmp);
+         console.log(averagedAmp)
                         bx=coordX+d_x*movementRate*zoom;
                         by=coordY+d_y*movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)){
@@ -481,7 +482,7 @@ if(onO){
         b = vop.setHSL((1-testarD[g])%24./24.,1.,.5);
                       material = new THREE.MeshBasicMaterial({
         color:b,
-        opacity: .333+.777/uniforms[ "metronome" ].value ,
+        opacity: .3+.7/uniforms[ "metronome" ].value ,
         transparent: true,
       });
 
