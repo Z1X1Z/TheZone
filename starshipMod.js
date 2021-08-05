@@ -6,7 +6,7 @@ var movementRate=.007;
 let radius = 4.;
 var mobileRez=1.;
 //vvvvhttps://code-boxx.com/detect-mobile-device-javascript/
-if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.25;
+if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.5;
 //^^^^https://code-boxx.com/detect-mobile-device-javascript/
 //number key resolution transmission
 
