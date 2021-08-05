@@ -1,6 +1,6 @@
 
 window.zoomCageSize = 1.7;
-zoomOutRatchetThreshold=1.;
+zoomOutRatchetThreshold=4.;
 var zoomOutEngage=false;
 var movementRate=.007;
 let radius = 4.;
