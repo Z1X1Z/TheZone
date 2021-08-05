@@ -233,9 +233,11 @@ angle[f] = angle;
         d_y = -Math.cos(-angle)*(1+averagedAmp)**1.44
                         bx=coordX+d_x*movementRate*zoom;
                         by=coordY+d_y*movementRate*zoom;
-if(isFinite(d_x)&&isFinite(d_y)&&on){
+if(isFinite(d_x)&&isFinite(d_y)){
+           if(on){
                coordX+=d_x*movementRate*zoom;
                coordY+=d_y*movementRate*zoom;
+           }
            if(Math.abs(by*by)+Math.abs(bx*bx)>=window.zoomCageSize){
                if (Math.abs(by*by)>window.zoomCageSize/2.)coordY*=1.-(Math.abs(by*by)-window.zoomCageSize/2.)/50.;
                if (Math.abs(bx*bx)>window.zoomCageSize/2.)coordX*=1.-(Math.abs(bx*bx)-window.zoomCageSize/2.)/50.;
