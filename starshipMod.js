@@ -237,8 +237,8 @@ if(isFinite(d_x)&&isFinite(d_y)&&on){
                coordX+=d_x*movementRate*zoom;
                coordY+=d_y*movementRate*zoom;
            if(Math.abs(by*by)+Math.abs(bx*bx)>=window.zoomCageSize){
-               if (Math.abs(by*by)>window.zoomCageSize/2.)coordY*=1.-(Math.abs(by*by)-window.zoomCageSize/2.)/100.;
-               if (Math.abs(bx*bx)>window.zoomCageSize/2.)coordX*=1.-(Math.abs(bx*bx)-window.zoomCageSize/2.)/100.;
+               if (Math.abs(by*by)>window.zoomCageSize/2.)coordY*=1.-(Math.abs(by*by)-window.zoomCageSize/2.)/50.;
+               if (Math.abs(bx*bx)>window.zoomCageSize/2.)coordX*=1.-(Math.abs(bx*bx)-window.zoomCageSize/2.)/50.;
                    }
        }
  interpolationFactor = 10.;//timeDif*1./(callbackWait-1);
