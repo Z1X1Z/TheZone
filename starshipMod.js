@@ -1,4 +1,4 @@
-
+if(!("shaderOn" in window))window.shaderOn=true;
 window.zoomCageSize = 1.7;
 zoomOutRatchetThreshold=4.;
 var zoomOutEngage=false;
@@ -355,14 +355,14 @@ uniforms.resolution.value.x = window.innerWidth;
 uniforms.resolution.value.y = window.innerHeight;
 uniforms.coords.value.x = coordX;
 uniforms.coords.value.y = coordY;
-         materialShader = new THREE.ShaderMaterial( {
+         if(window.shaderOn)materialShader = new THREE.ShaderMaterial( {
             uniforms: uniforms,
             vertexShader: document.getElementById( 'vertexShader' ).textContent,
             fragmentShader: document.getElementById( 'fragmentShader' ).textContent
         } );
 
         renderer = new THREE.WebGLRenderer();
-                      mesh = new THREE.Mesh( geometryP, materialShader );
+                  if(window.shaderOn)mesh = new THREE.Mesh( geometryP, materialShader );
 
 
 
@@ -544,7 +544,7 @@ let loopLimit = trailDepth;
 
 while(loopLimit>15)
 {loopLimit--;
-pitchCol[r].opacity = 1.-(trailDepth-loopLimit)/trailDepth*2.;
+pitchCol[r].opacity = 1.-(trailDepth-loopLimit)/trailDepth;
 material = pitchCol[r];
 trailMeshes[r] = new THREE.Mesh(trailGeom[r] , material );
 
@@ -556,7 +556,7 @@ let widtr = .2*(1.-fade[r]);
 let widts = .2*(1.-fade[s]);
 let scalar = .005;//mobius mode: let scalar = .07*loopLimit/trailDepth;
 let tt = 0.;
-    var z = -(trailDepth-loopLimit)/trailDepth;
+    var z = -(trailDepth-loopLimit)/trailDepth-.1;
 let vertices = new Float32Array( [
 (scalar*cx[r]+widtr*xPerp[r])*porportionX, (scalar*cy[r]+widtr*yPerp[r])*porportionY,z,
                             ( scalar*cx[s]-widts*xPerp[s])*porportionX, (scalar*cy[s]-widts*yPerp[s])*porportionY,z,
@@ -577,7 +577,7 @@ if(r<=0)r=trailDepth-1;
 
 }
 
-        scene.add( mesh );
+                 if(window.shaderOn)scene.add( mesh );
         renderer.render( scene, camera );
         scene.remove(line);
         line.geometry.dispose( );
