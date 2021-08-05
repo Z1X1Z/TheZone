@@ -234,15 +234,13 @@ angle[f] = angle;
                         bx=coordX+d_x*movementRate*zoom;
                         by=coordY+d_y*movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)&&on){
-           if(Math.abs(by*by)+Math.abs(bx*bx)<window.zoomCageSize){
                coordX+=d_x*movementRate*zoom;
                coordY+=d_y*movementRate*zoom;
-           }
+           if(Math.abs(by*by)+Math.abs(bx*bx)>=window.zoomCageSize){
+               if (Math.abs(by*by)>window.zoomCageSize/2.)coordY*=1.-(Math.abs(by*by)-window.zoomCageSize/2.)/100.;
+               if (Math.abs(bx*bx)>window.zoomCageSize/2.)coordX*=1.-(Math.abs(bx*bx)-window.zoomCageSize/2.)/100.;
+                   }
        }
-         if (Math.abs(by*by)>window.zoomCageSize)coordX/=1.01;
-         if (Math.abs(bx*bx)>window.zoomCageSize)coordY/=1.01;
-
-
  interpolationFactor = 10.;//timeDif*1./(callbackWait-1);
 if (interpolationFactor>30) interpolationFactor=30;
 else if (interpolationFactor<1) interpolationFactor=1;
