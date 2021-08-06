@@ -472,7 +472,7 @@ if (micOn)analyser.getByteFrequencyData(  dataArray);
    var maxTestar=0.;
 if(onO){
     for (var g=0; g<starArms; g++) if(testar[g]>maxTestar)maxTestar=testar[g];
-    for (var g=0; g<starArms; g++)if(testar[g]>.0000000000001) {
+    for (var g=0; g<starArms; g++)if(testar[g]>0) {
         var widt = .02;
         var yy =(testarD[g]+19)%24./24.*pi*2.;
         var lengt = testar[g]/maxTestar;
@@ -651,7 +651,7 @@ return quadraticPeakPosition (yinData, minElement(yinData));
 
 
 
-let tolerance=.3; //, confidence;
+let tolerance=1.; //, confidence;
 let sampleRate=44100;
 function minElement (d)
 {
