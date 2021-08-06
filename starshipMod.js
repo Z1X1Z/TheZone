@@ -161,7 +161,7 @@ let part = {cx : {  value: 0 },};
 let trail = Array(1000);
 let cx = Array(1000);
         let cy = Array(1000);
-                                   let fade = Array(1000);
+                                   let trailWidth = Array(1000);
 
                 let pitchCol = Array(1000);
 let trailLoaded = false;
@@ -189,7 +189,7 @@ function  move()
     totalAMP = 0.;
 
 if (!trailLoaded) {trailLoaded = true; for(var n = 0; n<trailLength; n++)
-{trail[n] = part;xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}fade[n]=0.;}
+{trail[n] = part;xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}trailWidth[n]=0.;}
 
 analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
 //let iD = Array(inputData.length);
@@ -229,8 +229,8 @@ angle[f] = angle;
     //Colour pitchCol = Colour::fromHSV((angle-60)/360.,saturation,value,1.);
 
 
-         d_x = -Math.sin(-angle)*(5+averagedAmp);
-        d_y = -Math.cos(-angle)*(5+averagedAmp);
+         d_x = -Math.sin(-angle)*(4+averagedAmp*2.);
+        d_y = -Math.cos(-angle)*(4+averagedAmp*2.);
                         bx=coordX+d_x*movementRate*zoom;
                         by=coordY+d_y*movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)){
@@ -251,13 +251,13 @@ cx[f] = 0;
 cy[f] = 0;
 xPerp[f] = -Math.sin(-angle+pi/2)*radius;
 yPerp[f] = -Math.cos(-angle+pi/2)*radius;
-fade[f]=1.;
+                     trailWidth[f]=1.;
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
     cx[n] += d_x;
     cy[n] += d_y;
-    fade[n] *=.98
+           trailWidth[n] *=.98
 }
 
 }
@@ -544,7 +544,7 @@ let loopLimit = trailDepth;
 
 while(loopLimit>15)
 {loopLimit--;
-pitchCol[r].opacity = 1.-(trailDepth-loopLimit)/trailDepth;
+pitchCol[r].opacity = 1.-(trailDepth-loopLimit)/trailDepth*3.;
 material = pitchCol[r];
 trailMeshes[r] = new THREE.Mesh(trailGeom[r] , material );
 
@@ -552,8 +552,8 @@ trailMeshes[r] = new THREE.Mesh(trailGeom[r] , material );
 //trailMeshes[s] = new THREE.Mesh(trailGeom[s] , material );
 // create a simple square shape. We duplicate the top left and bottom right
 // vertices because each vertex needs to appear once per triangle.
-let widtr = .2*(1.-fade[r]);
-let widts = .2*(1.-fade[s]);
+let widtr = .2*(1.-trailWidth[r]);
+let widts = .2*(1.-trailWidth[s]);
 let scalar = .005;//mobius mode: let scalar = .07*loopLimit/trailDepth;
 let tt = 0.;
     var z = -(trailDepth-loopLimit)/trailDepth-.1;
