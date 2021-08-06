@@ -5,6 +5,7 @@ var zoomOutEngage=false;
 var movementRate=.007;
 let radius = 4.;
 var mobileRez=1.;
+const fftSize=2048;
 //vvvvhttps://code-boxx.com/detect-mobile-device-javascript/
 if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.5;
 //^^^^https://code-boxx.com/detect-mobile-device-javascript/
@@ -60,7 +61,7 @@ return hsv[2] * (1.0 + 0.63 * hsv[1]] * (-cos (2.0 * 3.14159 * (hsv[0]] + vec3 (
 
 let pi = 3.14159
         
-const starArms = 240;
+const starArms = fftSize/2;
 var geometries = Array(starArms);
 var meshes = Array(starArms);
 var testar = Array(starArms);
@@ -118,16 +119,15 @@ averagedAmp =  0;
 for(let t=1; t<1024; t+=1)//n<fftSize1/4-100
 {
     let n =t;
-    //if (fftSize1/4<t) n =Math.abs(t-let(t)/(let(fftSize1/4)));
 
 averagedAmp += z[n];
-if ( z[n]>z[n-1] && z[n] > z[n+1] )
+//if ( z[n]>z[n-1] && z[n] > z[n+1] )
     {
 
         let   d = (-z[n-1]+z[n+1])/(z[n-1]+z[n+1]);
 
         let nAdj = n;
-        if (Math.abs(d)<1.1) nAdj = n + d*4;
+        if (Math.abs(d)<5.) nAdj = n + d*4;
         //if (Math.abs(nAdj-n) < 10)
         freq =((( audioX.sampleRate /10000.)*(nAdj))/1024)*10000;
 
@@ -195,7 +195,7 @@ analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data r
 //let iD = Array(inputData.length);
 //for(let m = 0; m<inputData.length; m++) iD[m]=(inputData[m]);
     var pb = -1;
-   for(var b = 0; b<analyser.fftSize/2.; b++)totalAMP+=Math.abs(inputData[b]);
+   for(var b = 0; b<fftSize/2.; b++)totalAMP+=Math.abs(inputData[b]);
    if(totalAMP>1.)
   pb =    calculatePitch();
   pt = pb;
@@ -272,7 +272,7 @@ let source;
 let dataArray;
 startMic();
 let trailGeom = Array(1000);
-let materials = Array(1000);
+let materials;
 let trailMeshes = Array(1000);
 let materialShader;
 let geometry;
@@ -472,23 +472,21 @@ if (micOn)analyser.getByteFrequencyData(  dataArray);
    var maxTestar=0.;
 if(onO){
     for (var g=0; g<starArms; g++) if(testar[g]>maxTestar)maxTestar=testar[g];
-    for (var g=0; g<starArms; g++)if(testar[g]>0) {
+    for (var g=0; g<starArms; g++)if(testar[g]>0.00001) {
         var widt = .02;
         var yy =(testarD[g]+19)%24./24.*pi*2.;
         var lengt = testar[g]/maxTestar;
         var vop = new THREE.Color();
        
-        b = vop.setHSL((1-testarD[g])%24./24.,1.,.5);
+       vop.setHSL((1-testarD[g])%24./24.,1.,.5);
                       material = new THREE.MeshBasicMaterial({
-        color:b,
+        color:vop,
         opacity: .3+.7/uniforms[ "metronome" ].value ,
         transparent: true,
       });
 
-    meshes[g] = new THREE.Mesh(geometries[g] , material );
-    scene.add(meshes[g])
             rpio2 =yy+pi/2.;
-    var vertices = new Float32Array( [
+    var v = new Float32Array( [
         0-widt*-Math.sin(rpio2)*porportionX,    0-widt*-Math.cos(rpio2)*porportionY,  -0.05,
         0+widt*-Math.sin(rpio2)*porportionX,    0+widt*-Math.cos(rpio2)*porportionY,  -0.05,
         (lengt*-Math.sin(yy)+widt*-Math.sin(rpio2))*porportionX,
@@ -501,8 +499,10 @@ if(onO){
     ] );
 
     // itemSize = 3 because there are 3 values (components) per vertex
-    geometries[g].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
+    geometries[g].setAttribute( 'position', new THREE.Float32BufferAttribute( v, 3 ) );
+                       meshes[g] = new THREE.Mesh(geometries[g] , material );
 
+                       scene.add(meshes[g])
         }
 }
                       
@@ -516,10 +516,9 @@ else{
             var lengt = 1.*testar[(rr+5)%24]/maxTestar;
 
                 var vo = new THREE.Color();
-                            b = vo.setHSL((20-rr)%24/24.,1.,.5);
+                      vo.setHSL((20-rr)%24/24.,1.,.5);
                         material  = new THREE.MeshBasicMaterial( { color:vo});
-            meshes[rr] = new THREE.Mesh(geometries[rr] , material );
-            scene.add(meshes[rr])
+
             var vertices = new Float32Array( [
                 0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
                 0+widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0+widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
@@ -534,6 +533,8 @@ else{
 
             // itemSize = 3 because there are 3 values (components) per vertex
             geometries[rr].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
+                 meshes[rr] = new THREE.Mesh(geometries[rr] , material );
+                 scene.add(meshes[rr])
                 } }
                                                      
 
@@ -576,14 +577,17 @@ r--;
 if(r<=0)r=trailDepth-1;
 
 }
-
                  if(window.shaderOn)scene.add( mesh );
         renderer.render( scene, camera );
         scene.remove(line);
         line.geometry.dispose( );
-if(onO)for (let r=0; r<starArms; r++) geometries[r].dispose();
-                                 else for (let r=0; r<24; r++) geometries[r].dispose();
-for (let r=0; r<trailDepth; r++){ trailGeom[r].dispose();}
+                 
+                 //if(onO)
+                 for (let j=0; j<starArms; j++) {                 scene.remove(meshes[j]);
+meshes[j].dispose; geometries[j].dispose();}
+                               // else for (let j=0; j<24; j++) {meshes[j].dispose; geometries[j].dispose();}
+for (let j=0; j<trailDepth; j++){                  scene.remove(trailMeshes[j]);
+trailGeom[j].dispose();trailMeshes[j].dispose}
     }
 
 
@@ -602,7 +606,7 @@ audioX = new AudioContext();
 analyser = audioX.createAnalyser();
 source = audioX.createMediaStreamSource( stream );
 source.connect(analyser);
-analyser.fftSize = 2048.;
+analyser.fftSize = fftSize;
 bufferLength = analyser.frequencyBinCount;
 dataArray = new Uint8Array( bufferLength );
 init();
