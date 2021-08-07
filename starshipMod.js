@@ -1,5 +1,5 @@
 if(!("shaderOn" in window))window.shaderOn=true;
-window.zoomCageSize = 1.7;
+window.zoomCageSize = 2.0;
 zoomOutRatchetThreshold=4.;
 var zoomOutEngage=false;
 var movementRate=.007;
@@ -61,7 +61,10 @@ return hsv[2] * (1.0 + 0.63 * hsv[1]] * (-cos (2.0 * 3.14159 * (hsv[0]] + vec3 (
 
 let pi = 3.14159
         
-const starArms = fftSize/2;
+        let inputData;
+        let bufferSize = fftSize;
+        let numberOfBins = fftSize/2.;
+const starArms = numberOfBins;
 var geometries = Array(starArms);
 var meshes = Array(starArms);
 var testar = Array(starArms);
@@ -127,9 +130,9 @@ averagedAmp += z[n];
         let   d = (-z[n-1]+z[n+1])/(z[n-1]+z[n+1]);
 
         let nAdj = n;
-        if (Math.abs(d)<5.) nAdj = n + d*4;
+        nAdj = n + d*4;
         //if (Math.abs(nAdj-n) < 10)
-        freq =((( audioX.sampleRate /10000.)*(nAdj))/1024)*10000;
+        if (Math.abs(d)<4+1)freq =((( audioX.sampleRate /10000.)*(nAdj))/1024)*10000;
 
 
         {
@@ -178,8 +181,7 @@ let f = 0;
               let MIN_SAMPLES = 0;  // will be initialized when AudioContext is created.
 
 let pitc = 1;
-let inputData;
-let bufferSize = 1024;
+
 let reset = 6;
 let on;
 let spirafreq=1;
@@ -195,8 +197,8 @@ analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data r
 //let iD = Array(inputData.length);
 //for(let m = 0; m<inputData.length; m++) iD[m]=(inputData[m]);
     var pb = -1;
-   for(var b = 0; b<fftSize/2.; b++)totalAMP+=Math.abs(inputData[b]);
-   if(totalAMP>1.)
+   for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
+if (totalAMP*2048./fftSize>zoomOutRatchetThreshold)//this line under revisement
   pb =    calculatePitch();
   pt = pb;
        if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5);}
@@ -215,6 +217,8 @@ let t =  (note * 30+30*inc);
 angle = t%360;
 angle = -angle;
 let vo = new THREE.Color();
+             //          vo.setHSL((angle+90)/360.,(180+note)/297,(180+note)/297);
+
 vo.setHSL((angle+90)/360.,1.,.5);
 
 pitchCol[f]  = new THREE.MeshBasicMaterial({
@@ -226,21 +230,18 @@ angle = ((angle-30+180)/360*2*pi);
    // angle = (maxInt24/24*2*pi);
 angle[f] = angle;
 
-    //Colour pitchCol = Colour::fromHSV((angle-60)/360.,saturation,value,1.);
-
-
          d_x = -Math.sin(-angle)*(4+averagedAmp*2.);
         d_y = -Math.cos(-angle)*(4+averagedAmp*2.);
                         bx=coordX+d_x*movementRate*zoom;
                         by=coordY+d_y*movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)){
            if(on){
-               coordX+=d_x*movementRate*zoom;
-               coordY+=d_y*movementRate*zoom;
+               coordX=bx;
+               coordY=by;
            }
            if(Math.abs(by*by)+Math.abs(bx*bx)>=window.zoomCageSize){
-               if (Math.abs(by*by)>window.zoomCageSize/2.)coordY*=1.-(Math.abs(by*by)-window.zoomCageSize/2.)/50.;
-               if (Math.abs(bx*bx)>window.zoomCageSize/2.)coordX*=1.-(Math.abs(bx*bx)-window.zoomCageSize/2.)/50.;
+               if (Math.abs(by*by)>window.zoomCageSize/2.)coordY*=1.-(Math.abs(by*by)-window.zoomCageSize/2.)*zoom/25.;
+               if (Math.abs(bx*bx)>window.zoomCageSize/2.)coordX*=1.-(Math.abs(bx*bx)-window.zoomCageSize/2.)*zoom/25.;
                    }
        }
  interpolationFactor = 10.;//timeDif*1./(callbackWait-1);
@@ -276,7 +277,6 @@ let materials;
 let trailMeshes = Array(1000);
 let materialShader;
 let geometry;
-let progress = true;
 window.addEventListener('keydown', function(event) {
 let x = parseInt(String.fromCharCode(event.which || event.keyCode));
 //if (x>0)
@@ -452,7 +452,7 @@ const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), l
         const    scene = new THREE.Scene();
         if (on)scene.add(line);
 
-            if (zoom>.000001&&progress&&totalAMP>zoomOutRatchetThreshold)zoom /= 1.044+Math.abs(totalAMP/bufferSize)/15.;
+            if (zoom>.000001&&totalAMP*2048./fftSize>zoomOutRatchetThreshold)zoom /= 1.044+Math.abs(totalAMP/numberOfBins)/15.;
                 else if(zoom<1.)zoom *= 1.044;
             
         if (zoom>1.)zoomOutEngage = false;
@@ -465,7 +465,7 @@ uniforms.coords.value.y = coordY;
             uniforms[ "zoom" ].value = zoom;
 
 uniforms[ "time" ].value = timestamp/1000.;
-        uniforms[ "time2dance" ].value += Math.abs(totalAMP/bufferSize*2.);
+        uniforms[ "time2dance" ].value += Math.abs(totalAMP/numberOfBins*2.);
         requestAnimationFrame( animate );
 if (micOn)analyser.getByteFrequencyData(  dataArray);
 
@@ -475,13 +475,12 @@ if(onO){
             
             
             
-    for (var g=starArms; g>0; g--)if(testar[g]>0.00001) {
+    for (var g=starArms; g>0; g--)if(isFinite(testar[g])&&testar[g]!=0.) {
         var widt = .02;
         var yy =(testarD[g]+19)%24./24.*pi*2.;
         var lengt = testar[g]/maxTestar;
         var vop = new THREE.Color();
-       vop.setHSL((1-testarD[g])%24./24.,
-                  testarD[g]/297,testarD[g]/297);//this line might need tweaking 288 is the theoretical value
+       vop.setHSL((1-testarD[g])%24./24., testarD[g]/297,testarD[g]/297);//297 is the highest heard note
                       material = new THREE.MeshBasicMaterial({
         color:vop,
         opacity: .3+.7/uniforms[ "metronome" ].value ,

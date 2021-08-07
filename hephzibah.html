@@ -1,0 +1,1241 @@
+
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+		<title>Hephzibah</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+		<style>
+
+			body {
+
+				background-color: #000000;
+				margin: 0;
+				padding: 0;
+				overflow: hidden;
+
+			}
+
+			button, select, a, a:visited {
+
+				padding: 8px 12px 8px 12px;
+
+				border: none;
+				border-radius: 5px;
+				margin-right: 5px;
+
+				color: #ffffff;
+				background-color: #000000;
+				opacity: 0.5;
+
+				font-family: Monospace;
+				font-size: 12px;
+				font-weight: bold;
+
+				cursor: pointer;
+				text-decoration: none;
+
+			}
+
+			button:hover, select:hover, a:hover {
+
+				opacity: 1;
+				box-shadow: 0 0 4px #FFF;
+
+			}
+
+			option {
+
+				color: #ffffff;
+				background-color: #000000;
+
+			}
+
+		</style>
+	</head>
+	<body style="cursor: none;">
+
+		<link rel="stylesheet" href="GLSL%20Sandbox_files/codemirror.css">
+		<link rel="stylesheet" href="GLSL%20Sandbox_files/default.css">
+
+		<script src="GLSL%20Sandbox_files/lzma.js"></script>
+		<script src="GLSL%20Sandbox_files/jquery.js"></script>
+		<script src="GLSL%20Sandbox_files/helpers.js"></script>
+		<script src="GLSL%20Sandbox_files/codemirror.js"></script>
+		<script src="GLSL%20Sandbox_files/glsl.js"></script>
+
+		<script id="example" type="x-shader/x-fragment">
+          
+          
+          //this is a locally hosted GlSlsandbox.com, big thanks to Mr. Doobs 'n' crew for
+          //threeJS which this site uses, and for the sandbox where Manny was found
+          //you can use ctrl-a or cmd-a to jump to the bottom where all the fun is
+                      precision highp float;
+                      
+               uniform vec2 resolution;
+            uniform  float time;
+            int fourCreats=1;
+            vec2 coords=vec2(0.,0.);
+            float zoom=1.;
+
+
+            float zin(float x){return -sin(x);}
+            float coz(float x){return -cos(x);}
+                      const float gr=-cos(216.)/-cos(612.)-1.;
+                      vec3 bride(vec2 p,vec2 t){
+                                 float time2 = t.x;
+                                 float c=0.,k=0.,l=0.,x=0.,e=0.;
+                if(abs(p.y*p.y)+abs(p.x*p.x)<49.){
+
+                             //vv body vv
+                                 vec2 g=p/3.;
+                                 g.x+=.5;
+                                 vec2 z=g;
+                                 for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>20.&&f>4)x+=z.y;
+                                 else {z=2.*vec2(-1./((z.x*z.x-1.44*z.y*z.y)-g.x*1.2-sin(time2*gr)/40.),(1.2*z.x*z.y-1.2*g.y-sin(time2/2.)/40.));
+//The Holy Bible Revelation 21:16 "The city was laid out like a square, as long as it was wide.
+    //He measured the city with the rod and found it to be 12,000 stadia in length,
+     //and as wide and high as it is long. The angel measured the wall using human measurement, and it was 144 cubits thick.
+                                       z.x=pow(abs(z.x),.777-sin(time2)/4.);}
+                                 g=p/4.;
+                                 //g.x-=.5;
+                                 z=g;
+                                 if(p.x>0.)for (int f=0;f<20;f+=1)if(abs(z.x+z.y)>200.&&f>4)c=1.;
+                                 else {z=3.*vec2(-1./((z.x*z.x-z.y*z.y)-g.x),(77.0*z.x*z.y-2.*g.y-sin(time2)/7.));
+                                       z.y = -1./z.y;}
+                             //vv head vv
+                                 g=p;
+                                 z=g;
+                                 for (int f=0;f<10;f+=1)if(abs(z.x+abs(z.y))>27.&&f>4)l=1.;
+                                 else{z=vec2(-1./((z.x*z.x-z.y*z.y)-g.x),(2.0*z.x*z.y-g.y-sin(time2*4.)/8.));
+                                      z*=pow(z.x,z.x);}
+                             //vv mandelbrot\heart vv
+                                 g=p*2.;
+                                 g.x-=6.;
+                                 z=g;
+                                 for (int f=0;f<50;f+=1)if(abs(z.x+z.y)>20.)break;
+                                 else {z=vec2(((z.x*z.x-z.y*z.y)-g.x-sin(time2*gr)/4.),(2.0*z.x*z.y-g.y-sin(time2/2.)/4.));
+                                              if(f>2)k+=0.02;}
+                             //vv eye lights vv
+                                 g=p;
+                                 z=g;
+                                              
+                                 for (int f=0;f<4;f+=1)if(abs(z.x+z.y)>20.)break;
+                                 else {z=vec2((1./(z.x*z.x-z.y*z.y)-g.x-sin(time2*gr)/4.),(4.0*z.x*z.y-g.y-sin(time2*2.)/4.));
+                                       if(f>2)e+=0.3;}
+        }
+                             return vec3(l+c,l+x+c,l+c)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
+                                               
+                                               
+          vec3 heart(vec2 g, vec2 t){
+              g.x-=.5;
+              g.y*=-1.;
+              vec2 z=g.xy;
+          vec3 h=vec3(0.);
+              for (int f=0;f<60;f+=1)if(abs(z.y+z.x)>2.)h=vec3(0.);
+              else {z=vec2(((z.x*z.x-z.y*z.y)-g.x+t.x),(2.0*z.x*z.y-g.y+t.y*4.));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
+                h+=vec3(z.x*z.y,z.x,z.y)/21.;}
+          return h;
+          }
+              vec3 heartZoom(vec2 p, vec2 t){
+                  p.x+=.5;
+                  p+=coords.yx;
+                  vec2 z=p;
+                  vec3 h;
+                  for (int f=0;f<100;f+=1)if(abs(z.y+z.x)>20.)h=vec3(1.);
+                  else {z=vec2(((z.x*z.x-z.y*z.y)-p.x),(2.0*z.x*z.y-p.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
+                    h+=vec3(.0);}
+              return h;
+                              }
+          vec3 face(vec2 g, vec2 t){
+          float l = 1.;
+          g*=2.;
+          vec2 z=g.xy;
+          if(g.x*g.x+g.y*g.y<40.)for (int f=0;f<21;f+=1)if(abs(z.y)>19.&&(f==1||f>3)){
+              if (f==1){l=1.;break;}
+              l=1.-length(z)/40.;//clouds and face
+              break;}
+          else{
+              z=vec2(-1./(z.x*z.x-z.y*z.y-g.x),2.0*z.x*z.y-g.y);
+              l=abs(z.y)*6.;//smooths middle horn, removes some clouds
+              if(z.x>-.1)l=z.x*50.;}//face with closed small holes
+          return vec3(clamp(1.-l,0.,1.));
+          }
+     vec3 shiny(vec2 p,vec2 t){
+                p*=2.;
+                 vec2 s = p;
+                 float l=0., d = 0., negator = 1.;
+                     if(p.x*p.x+p.y*p.y*5.<50.){for (int f=0;f<21;f+=1)
+                     if(abs(s.y)>21.&&(f==1||f>2)){
+                         l=1.-length(s)/40.;
+                         if (f == 1)
+                                 negator=0.;
+                         else
+                                 d+=length(s)/10.;
+                         break;
+                     }
+                     else{
+                         s=vec2(-1./(s.x*s.x-s.y*s.y-p.x), 2.0*s.x*s.y-p.y);
+                         l=abs(s.y)*3.5;//refines middle horn, optional
+                         if(s.x>-.1)l=s.x*50.;//closes small holes
+                         d+=length(s)/10.;
+                     }}else negator=0.;
+                     if (l>.54) negator = 0.;
+                     return vec3(-sin(d +t.x*3.+6.28318/3.),-sin(d+t.x*3.+6.28318*5./3.),-sin(d+t.x*3.))*5.*negator;
+}
+    vec3 excelsior(vec2 p,vec2 t){
+                t.x*=-1.;
+                 p*=2.;
+                 vec2 s=p;
+                 vec3 l=vec3(.1,.5,1.1);
+                     for (int f=0;f<21;f+=1)
+                 if(abs(s.y)<21.){
+                  s=vec2(((s.x*s.x-s.y*s.y)-p.x),(2.0*s.x*s.y-p.y));
+
+                     s.x=pow(s.x,-sin(t.x*2.+3.14))*sign(-s.x*-sin(-t.x*2.+3.14));
+                                      l=vec3(2.-abs(s.y*-sin(-t.x))*19.)*-sin(-t.x);//middle horn
+                     if(s.x>-.1)l=vec3(-sin(t.x)-(s.x*(100.-100.*-sin(t.x*2.-3.14))*-sin(t.x)));
+                     }
+             return vec3(1./l);
+     }
+
+           vec3 man(vec2 p,vec2 t) {
+               p*=-2.;
+               vec2 s = p;
+               float d = 1.0, l;
+               float flip=-t.x;
+               if (flip<0.) p = -p;
+               if (abs(p.x*p.x+p.y*p.y)<2.0)for (int t = 0; t < 30; t++) {
+                       s = vec2(((s.x * s.x - s.y * s.y) +flip* p.x), (s.x * s.y + flip*p.y));
+                       s.x = 1./pow(s.x,flip)*sign(s.x*flip);
+                 l = length(s);
+                 d += l/25.;
+                   if (l >20.0&&t!=0)return vec3(-1.);}
+                  
+                  if (abs(p.x*p.x+p.y*p.y)<2.0)return vec3(1.);
+                  else return vec3(0.0);
+           }
+
+
+           vec3 eagle(vec2 p,vec2 t) {
+           p*=10.;
+               vec2 s = p;
+               float d = 0.0, l;
+               float flip=-t.x;
+               if (flip<0.) p = -p;
+               if(abs(6.*p.x*p.x+p.y*p.y*2.)<700.0)
+               for (int i = 0; i < 30; i++) {
+                   s=vec2(-(s.x * s.x - s.y * s.y) +flip* p.x, (s.x * s.y + t.y*p.y));
+                  /* if(b<=.5 ||rate == 0.)
+                       s.x = 1./s.x;
+                   else*/
+                   s.x = 1./pow(s.x,flip)*sign(s.x*flip);
+                     s.y = s.x*s.y;
+                   l = length(s);
+                   d +=2.;
+                   if (l >(20.0) ) if( float(i)>3.&&float(i)>3.)
+                       return vec3(1.-sin(d * 0.003)-.5,1.- sin(d * 0.9)-.5,1.- sin(d * 0.1)-.5)*3.;}
+               return vec3(.0);
+              }
+                     
+            vec3 eaglePerched(vec2 p, vec2 t){
+                  p*=3.;
+                  vec2 s=p;
+                          float l = 0.;
+                          if(abs((p.x)*(p.x)+(p.y*p.y))<8.&&p.x<0.1)
+                  for (int f=0;f<20;f+=1)if(abs(s.x+s.y)>20.)l=1.;
+                  else {s=vec2(1./(s.x*s.x+s.y*s.y+p.x),-(2.0*s.x*s.y-p.y));
+                        l=-1.;}
+                  return vec3(l);
+              }
+                              
+           vec3 lion(vec2 p,vec2 t) {
+               p*=-3.;
+             vec2 s = -p;
+
+          float d = 0.0, l;
+          
+          float flip=t.x;
+          if (flip<0.) p = -p;
+          if(p.x*p.x*1.+p.y*p.y*2.<21.)
+          for (int t = 0; t < 30; t++) {
+              s = vec2(((s.x * s.x - s.y * s.y) +flip* p.x), (2.0* s.x * s.y + flip*p.y));
+              s/=2.;
+              s.x = pow(s.x,flip)*sign(s.x*flip);
+              l = length(s);
+              d += l/40.;
+          
+              if (l >14.0 &&float(t)  >2.)
+                  return vec3(-sin(d +1.),-sin(d +1.8),-sin(d+3.));
+               ;  // return vec3(0.);
+          }
+          return vec3(.0);
+          }
+       vec3 ox(vec2 p,vec2 t) {
+          p*=-2.;
+             vec2 s = p;
+             float d = 0.0, l;
+               float flip=t.x;
+               if (flip<0.) p = -p;
+               if( (p.x+.25)*(p.x+.25)+p.y*p.y<1.||(p.x>0.&& p.x*p.x+p.y*p.y<7. ))
+             for (int t = 0; t < 30; t++) {
+               s = vec2(((s.x * s.x - s.y * s.y) +flip* p.x), (3.0* s.x * s.y + flip*p.y));
+                 s.x = pow(s.x,flip)*sign(s.x*flip);
+                 l = length(s);
+               d += l/10.;
+               if (l >14.0 )
+                   if (float(t)  >2.)
+                       return vec3(-sin(d +time*1./gr*2.),-sin(d +time*gr*2.),-sin(d *time*2.));
+                                 // return vec3(0.);
+             }
+             return vec3(.0);
+           }
+
+          vec3 torso(vec2 g, vec2 t){
+          float b = 0.;
+          vec2 z=g.xy;
+          if(g.x*g.x+g.y*g.y<40.)if (g.x>0.)for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4)b=abs(z.y)/77.;
+          else{
+              z=2.*vec2(-1./(z.x*z.x-z.y*z.y-g.x),(2.0*z.x*z.y-g.y+t.y));
+              z.x=sqrt(abs(z.x));}
+          return vec3(b,b/2.5,0.);
+          }
+          vec3 musculature(vec2 g, vec2 t){
+          float m=0.;
+          g.x+=.54;
+          vec2 z=g.xy;
+          if(g.x>1.25&&abs(g.y)<2.5)for(int f=0;f<15;f+=1)if(abs(z.y)>15.&&f>7&&f!=15)m=abs(z.y)/25.;
+          else {
+              z=1.3*vec2(-1.5/((z.x*z.x-2.*z.y*z.y)-g.x),(1.9*z.x*z.y-1.87*g.y+t.y/4.));
+              z.x=pow(abs(z.x),.57);}
+          return vec3(m,m,m/2.);
+          }
+          vec3 robe(vec2 g, vec2 t){
+          float r=0.;
+          g.x+=.05;
+          g.y/=1.14;
+          vec2 z=g.xy;
+          if(g.x>.5 &&abs(g.y)<1.)for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7)r=clamp(1.4-abs(g.x-2.3)
+                           //*(1.-abs(g.y*g.x))-.07//(un)comment this line to toggle sleeves
+                          ,0.,1.);
+          else{
+              z=1.1*vec2(-2./((z.x*z.x-1.8*z.y*z.y)-g.x),(3.*z.x*z.y-1.3*g.y+t.y));;
+              z.x=pow(abs(z.x),.8);}
+          return vec3(r);
+          }
+          vec3 legs(vec2 g, vec2 t){
+          float b=0.;
+          g/=2.;
+          vec2 z=g.xy;
+          if(g.x>.75&&g.x<1.7&&abs(g.y*g.x)<.54)for(int f=0;f<8;f+=1)if(abs(z.x)>52.&&f>1)b=abs(z.x)/70.;
+          else{
+              z=3.*vec2(-1./(z.x*z.x-z.y*z.y-g.x),77.*z.x*z.y-g.y+t.y);
+              z.y=-1./z.y;}
+          return vec3(b/2.,b,b/2.);
+          }
+        vec3 tol(vec2 f, vec2 coords){
+                        
+                        f+=coords.yx;
+                        vec2 s=f;
+                        for (int counter=0;counter<21;counter+=1)if(abs(s.y)<47.){
+                            s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y);//x**3
+                            s.x=log(abs(s.x));
+                            }
+
+
+
+                        vec3 o=vec3(s.y/100.-s.x*s.y/888.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.);
+
+                        return clamp(o,0.,1.);}
+
+          vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t);}
+          vec3 bod(vec2 p, vec2 t){t*=zoom;return body(p,t)+heart(p,t);}
+          vec3 manny(vec2 p, vec2 t){return body(p,t)+heart(p,t)+face(p,vec2(0.))+shiny(p,vec2(time,0.));}
+          vec3 mannyX(vec2 p, vec2 t){return body(p,t)+excelsior(p,t);}
+                                                        
+          vec3 fourCreatures(vec2 p, vec2 t){
+                    vec2 spacing = vec2(5.,3.)*.7;
+                    p.x+=.5;
+                    
+                    return eaglePerched(p+spacing,vec2(-1.,0.))+bod(p+spacing,t)+
+                    lion(p+vec2(-spacing.x,spacing.y),vec2(-1.,0.))+bod(p+vec2(-spacing.x,spacing.y),t)+
+                    ox(p+vec2(spacing.x,-spacing.y),vec2(-1.,0.))+bod(p+vec2(spacing.x,-spacing.y),t)+
+                    man(p-spacing,vec2(-1.,0.))+bod(p-spacing,t)  ;
+        }
+          vec2 spin(vec2 p,float time_){
+          float pixelangle = -atan(p.y,p.x)-(time_)/6.+3.14/8.;
+          float pixeldistance = pow((p.y*p.y+p.x*p.x),.5);
+          vec2 pTiltCoord =-vec2(pixeldistance*-cos(pixelangle),pixeldistance*-sin(pixelangle));
+          return pTiltCoord;
+          }
+          
+          //function library:
+//bride manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin
+    void main(){
+vec2 p = -(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,resolution.y)*30.;
+      p+=2.;
+      vec2 t = vec2(-sin(time)/20.,-sin(time*1.618)/40.);
+       vec3 fourCreatures=vec3(0.);
+      vec2 m = vec2(1.,2.);
+      vec2 g = p/2.;
+     g*=1.25;
+     g=(g-m);
+    fourCreatures+= lion(g,vec2(-1.))+bod(g,t);
+    g*=1.25;
+     g=(g-m);
+    fourCreatures+= ox(g,vec2(-1.))+bod(g,t);
+      g*=1.25;
+     g=(g-m);
+    fourCreatures+= man(g,vec2(-1.))+bod(g,t);
+      g*=1.25;
+     g=(g-m);
+    fourCreatures+= eaglePerched(g,vec2(-1.))+bod(g,t);
+       gl_FragColor=vec4(.5+bride(p,vec2(time,0.))+manny(p/2.+vec2(0.,2.5),t) +fourCreatures
+             ,1.);}
+        </script>
+
+		<script id="fragmentShader" type="x-shader/x-fragment">
+
+			#ifdef GL_ES
+			precision mediump float;
+			#endif
+
+			uniform vec2 resolution;
+			uniform sampler2D texture;
+
+			void main() {
+
+				vec2 uv = gl_FragCoord.xy / resolution.xy;
+				gl_FragColor = texture2D( texture, uv );
+
+			}
+
+		</script>
+
+		<script id="vertexShader" type="x-shader/x-vertex">
+
+			attribute vec3 position;
+
+			void main() {
+
+				gl_Position = vec4( position, 1.0 );
+
+			}
+
+		</script>
+
+		<script id="surfaceVertexShader" type="x-shader/x-vertex">
+
+			attribute vec3 position;
+			attribute vec2 surfacePosAttrib;
+			varying vec2 surfacePosition;
+
+			void main() {
+
+				surfacePosition = surfacePosAttrib;
+				gl_Position = vec4( position, 1.0 );
+
+			}
+
+		</script>
+
+		<script>
+
+			initialize_helper();
+
+			var compressor=initialize_compressor();
+
+			if ( !window.requestAnimationFrame ) {
+
+				window.requestAnimationFrame = ( function() {
+
+					return window.webkitRequestAnimationFrame ||
+						window.mozRequestAnimationFrame ||
+						window.oRequestAnimationFrame ||
+						window.msRequestAnimationFrame ||
+						function ( callback, element ) {
+
+							window.setTimeout( callback, 1000 / 60 );
+
+						};
+
+				} )();
+
+			}
+
+			// Get older browsers safely through init code, so users can read the
+			// message about how to download newer browsers.
+			if (!Date.now) {
+				Date.now = function() {
+					return +new Date();
+				};
+			}
+
+			// Greetings to Iq/RGBA! ;)
+
+			var quality = 2, quality_levels = [ 0.5, 1, 2, 4, 8 ];
+			var toolbar, compileButton, fullscreenButton, compileTimer, errorLines = [];
+			var code, canvas, gl, buffer, currentProgram, vertexPosition, screenVertexPosition, panButton,
+			parameters = { startTime: Date.now(), time: 0, mouseX: 0.5, mouseY: 0.5, screenWidth: 0, screenHeight: 0 },
+			surface = { centerX: 0, centerY: 0, width: 1, height: 1, isPanning: false, isZooming: false, lastX: 0, lastY: 0 },
+			frontTarget, backTarget, screenProgram, getWebGL, resizer = {}, compileOnChangeCode = true;
+
+			init();
+			if (gl) { animate(); }
+
+			function init() {
+
+				if (!document.addEventListener) {
+					document.location = 'http://get.webgl.org/';
+					return;
+				}
+
+				canvas = document.createElement( 'canvas' );
+				canvas.style.display = 'block';
+				document.body.appendChild( canvas );
+
+				//
+
+
+				//
+
+				toolbar = document.createElement( 'div' );
+				toolbar.style.position = 'absolute';
+				toolbar.style.top = '25px';
+				toolbar.style.left = '25px';
+				document.body.appendChild( toolbar );
+
+				var rightside = document.createElement( 'div' );
+				rightside.style.cssFloat = 'right';
+				toolbar.appendChild( rightside );
+
+				panButton = document.createElement( 'button' );
+				panButton.textContent = 'pan/zoom';
+				panButton.style.cursor = 'move';
+				panButton.style.display = 'none';
+				panButton.title = "Pan: left-drag, Zoom: right-drag. Use 'hide code' for a large pan/zoom area.";
+				rightside.appendChild( panButton );
+
+				fullscreenButton = document.createElement( 'button' );
+				fullscreenButton.textContent = 'fullscreen';
+				fullscreenButton.title = 'Press F11 to enter or leave fullscreen mode';
+				fullscreenButton.addEventListener( 'click', function ( event ) {
+
+					if (document.body.requestFullScreen) {
+						document.body.requestFullScreen();
+					} else if (document.body.mozRequestFullScreen) {
+						document.body.mozRequestFullScreen();
+					} else if (document.body.webkitRequestFullScreen) {
+						document.body.webkitRequestFullScreen( Element.ALLOW_KEYBOARD_INPUT );
+					}
+
+				}, false );
+
+				rightside.appendChild( fullscreenButton );
+
+				var button = document.createElement( 'button' );
+				button.textContent = 'hide code';
+				button.addEventListener( 'click', function ( event ) {
+
+					if ( isCodeVisible() ) {
+
+						button.textContent = 'show code';
+						code.getWrapperElement().style.display = 'none';
+						compileButton.style.visibility = 'hidden';
+						set_save_button('hidden');
+						set_parent_button('hidden');
+						stopHideUI();
+
+					} else {
+
+						button.textContent = 'hide code';
+						code.getWrapperElement().style.display = '';
+						compileButton.style.visibility = 'visible';
+						set_save_button('hidden');
+						set_parent_button('visible');
+
+					}
+
+				}, false );
+				toolbar.appendChild( button );
+
+				var select = document.createElement( 'select' );
+
+				for ( var i = 0; i < quality_levels.length; i ++ ) {
+
+					var option = document.createElement( 'option' );
+					option.textContent = quality_levels[ i ];
+					if ( quality_levels[ i ] == quality ) option.selected = true;
+					select.appendChild( option );
+
+				}
+
+				select.addEventListener( 'change', function ( event ) {
+
+					quality = quality_levels[ event.target.selectedIndex ];
+					onWindowResize();
+
+				}, false );
+
+				toolbar.appendChild( select );
+
+				compileButton = document.createElement( 'button' );
+				compileButton.textContent = 'compile';
+				compileButton.addEventListener( 'click', function ( event ) {
+
+					compile();
+
+				}, false );
+				toolbar.appendChild( compileButton );
+
+				// from helper.js
+				add_server_buttons();
+
+				// Initialise WebGL
+
+				try {
+
+					gl = canvas.getContext( 'experimental-webgl', { preserveDrawingBuffer: true } );
+
+				} catch( error ) { }
+
+				if ( !gl ) {
+
+					alert("WebGL not supported, but code will be shown.");
+
+				} else {
+					
+					// enable dFdx, dFdy, fwidth
+					gl.getExtension('OES_standard_derivatives');
+
+					// Create vertex buffer (2 triangles)
+
+					buffer = gl.createBuffer();
+					gl.bindBuffer( gl.ARRAY_BUFFER, buffer );
+					gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( [ - 1.0, - 1.0, 1.0, - 1.0, - 1.0, 1.0, 1.0, - 1.0, 1.0, 1.0, - 1.0, 1.0 ] ), gl.STATIC_DRAW );
+
+					// Create surface buffer (coordinates at screen corners)
+
+					surface.buffer = gl.createBuffer();
+				}
+
+				// initialize code editor
+				code = CodeMirror(document.body, {
+					lineNumbers: true,
+					matchBrackets: true,
+					indentWithTabs: true,
+					tabSize: 8,
+					indentUnit: 8,
+					mode: "text/x-glsl",
+					onChange: function () {
+						if (compileOnChangeCode) {
+							clearTimeout(compileTimer);
+							compileTimer = setTimeout(compile, 500);
+						}
+					}
+				});
+				code.getWrapperElement().style.display = '';
+
+				resizer.offsetMouseX = 0;
+				resizer.offsetMouseY = 0;
+				resizer.isResizing = false;
+				resizer.currentWidth = 100;
+				resizer.currentHeight = 100;
+				resizer.minWidth = 100;
+				resizer.minHeight = 100;
+				resizer.maxWidth = 100;
+				resizer.maxHeight = 100;
+				resizer.element = document.createElement( 'div' );
+				resizer.element.className = 'resizer';
+				code.getWrapperElement().appendChild(resizer.element);
+
+				resizer.element.addEventListener( 'mousedown', function ( event ) {
+					if (event.button !== 2) {
+						resizer.offsetMouseX = event.clientX - resizer.currentWidth;
+						resizer.offsetMouseY = event.clientY - resizer.currentHeight;
+						resizer.isResizing = true;
+						event.preventDefault();
+					}
+				}, false );
+				
+				if (gl) {
+
+					var surfaceMouseDown = function ( event ) {
+
+						if (event.shiftKey) {
+							resetSurface();
+						}
+
+						if (event.button === 0) {
+							surface.isPanning = true;
+							document.body.style.cursor = 'move';
+						} else {
+							surface.isZooming = true;
+							document.body.style.cursor = 'se-resize';
+							panButton.style.cursor = 'se-resize';
+						}
+
+						surface.lastX = event.clientX;
+						surface.lastY = event.clientY;
+						event.preventDefault();
+
+					};
+
+					var noContextMenu = function ( event ) {
+
+						event.preventDefault();
+
+					};
+
+					canvas.addEventListener( 'mousedown', surfaceMouseDown, false );
+					panButton.addEventListener( 'mousedown', surfaceMouseDown, false );
+
+					canvas.addEventListener( 'contextmenu', noContextMenu, false);
+					panButton.addEventListener( 'contextmenu', noContextMenu, false);
+				}
+				
+				var clientXLast, clientYLast;
+
+				document.addEventListener( 'mousemove', function ( event ) {
+
+					var clientX = event.clientX;
+					var clientY = event.clientY;
+
+					if (clientXLast == clientX && clientYLast == clientY)
+						return;
+
+					clientXLast = clientX;
+					clientYLast = clientY;
+
+					stopHideUI();
+
+					var codeElement, dx, dy;
+					
+					parameters.mouseX = clientX / window.innerWidth;
+					parameters.mouseY = 1 - clientY / window.innerHeight;
+						
+					if (resizer.isResizing) {
+
+						resizer.currentWidth = Math.max(Math.min(clientX - resizer.offsetMouseX, resizer.maxWidth), resizer.minWidth);
+						resizer.currentHeight = Math.max(Math.min(clientY - resizer.offsetMouseY, resizer.maxHeight), resizer.minWidth);
+						codeElement = code.getWrapperElement();
+						codeElement.style.width = resizer.currentWidth + 'px';
+						codeElement.style.height = resizer.currentHeight + 'px';
+						code.refresh();
+						event.preventDefault();
+
+					} else if (surface.isPanning) {
+
+						dx = clientX - surface.lastX;
+						dy = clientY - surface.lastY;
+						surface.centerX -= dx * surface.width / window.innerWidth;
+						surface.centerY += dy * surface.height / window.innerHeight;
+						surface.lastX = clientX;
+						surface.lastY = clientY;
+						computeSurfaceCorners();
+						event.preventDefault();
+
+					} else if (surface.isZooming) {
+
+						dx = clientX - surface.lastX;
+						dy = clientY - surface.lastY;
+						surface.height *= Math.pow(0.997, dx + dy);
+						surface.lastX = clientX;
+						surface.lastY = clientY;
+						computeSurfaceCorners();
+						event.preventDefault();
+
+					}
+				}, false );
+
+				function settleDown ( event ) {
+					resizer.isResizing = surface.isPanning = surface.isZooming = false;
+					document.body.style.cursor = 'default';
+					panButton.style.cursor = 'move';
+				}
+
+				function mouseLeave(event) {
+					settleDown(event);
+
+					if (!isCodeVisible())
+						startHideUITimer();
+				}
+
+				document.addEventListener( 'mouseup', settleDown, false );
+				document.addEventListener( 'mouseleave', mouseLeave, false );
+
+				onWindowResize();
+				window.addEventListener( 'resize', onWindowResize, false );
+				load_url_code();
+
+				compileScreenProgram();
+
+			}
+
+			function isCodeVisible() {
+				return code && code.getWrapperElement().style.display !== 'none';
+			}
+
+			var hideUITimer;
+			var isUIHidden = false;
+
+			function startHideUITimer () {
+
+				stopHideUITimer();
+				if (!isUIHidden && !isCodeVisible())
+					hideUITimer = window.setTimeout(onHideUITimer, 1000 * 5 );
+
+				function onHideUITimer() {
+
+					stopHideUITimer();
+					if (!isUIHidden && !isCodeVisible()) {
+
+						isUIHidden = true;
+						toolbar.style.display = 'none';
+						document.body.style.cursor = 'none';
+					}
+				}
+
+				function stopHideUITimer () {
+
+					if (hideUITimer) {
+
+						window.clearTimeout(hideUITimer);
+						hideUITimer = 0;
+					}
+				}
+			}
+
+			function stopHideUI () {
+
+				if (isUIHidden) {
+
+					isUIHidden = false;
+					toolbar.style.display = '';
+					document.body.style.cursor = '';
+				}
+				startHideUITimer();
+			}
+
+
+			function computeSurfaceCorners() {
+
+				if (gl) {
+
+					surface.width = surface.height * parameters.screenWidth / parameters.screenHeight;
+					
+					var halfWidth = surface.width * 0.5, halfHeight = surface.height * 0.5;
+					
+					gl.bindBuffer( gl.ARRAY_BUFFER, surface.buffer );
+					gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( [
+						surface.centerX - halfWidth, surface.centerY - halfHeight,
+						surface.centerX + halfWidth, surface.centerY - halfHeight,
+						surface.centerX - halfWidth, surface.centerY + halfHeight,
+						surface.centerX + halfWidth, surface.centerY - halfHeight,
+						surface.centerX + halfWidth, surface.centerY + halfHeight,
+						surface.centerX - halfWidth, surface.centerY + halfHeight ] ), gl.STATIC_DRAW );
+
+				}
+
+			}
+
+			function resetSurface() {
+
+				surface.centerX = surface.centerY = 0;
+				surface.height = 1;
+				computeSurfaceCorners();
+
+			}
+
+			function compile() {
+			
+				if (!gl) {
+				
+					if (!getWebGL) {
+					
+						getWebGL = true;
+						compileButton.addEventListener( 'click', function ( event ) {
+
+							document.location = 'http://get.webgl.org/';
+
+						}, false );
+						compileButton.title = 'http://get.webgl.org/';
+						compileButton.style.color = '#ff0000';
+						compileButton.textContent = 'WebGL not supported!';
+						set_save_button('hidden');
+						
+					}
+					return;
+					
+				}
+
+				var program = gl.createProgram();
+				var fragment = code.getValue();
+				var vertex = document.getElementById( 'surfaceVertexShader' ).textContent;
+
+				var vs = createShader( vertex, gl.VERTEX_SHADER );
+				var fs = createShader( fragment, gl.FRAGMENT_SHADER );
+
+				if ( vs == null || fs == null ) return null;
+
+				gl.attachShader( program, vs );
+				gl.attachShader( program, fs );
+
+				gl.deleteShader( vs );
+				gl.deleteShader( fs );
+
+				gl.linkProgram( program );
+
+				if ( !gl.getProgramParameter( program, gl.LINK_STATUS ) ) {
+
+					var error = gl.getProgramInfoLog( program );
+
+					compileButton.title = error;
+					console.error( error );
+
+					console.error( 'VALIDATE_STATUS: ' + gl.getProgramParameter( program, gl.VALIDATE_STATUS ), 'ERROR: ' + gl.getError() );
+					compileButton.style.color = '#ff0000';
+					compileButton.textContent = 'compiled with errors';
+
+					set_save_button('hidden');
+
+					return;
+
+				}
+
+				if ( currentProgram ) {
+
+					gl.deleteProgram( currentProgram );
+					setURL( fragment );
+
+				}
+
+				currentProgram = program;
+
+				compileButton.style.color = '#00ff00';
+				compileButton.textContent = 'compiled successfully';
+
+				set_save_button('hidden');
+
+				panButton.style.display = (fragment.indexOf('varying vec2 surfacePosition;') >= 0) ? 'inline' : 'none';
+
+				// Cache uniforms
+
+				cacheUniformLocation( program, 'time' );
+				cacheUniformLocation( program, 'mouse' );
+				cacheUniformLocation( program, 'resolution' );
+				cacheUniformLocation( program, 'backbuffer' );
+				cacheUniformLocation( program, 'surfaceSize' );
+
+				// Load program into GPU
+
+				gl.useProgram( currentProgram );
+
+				// Set up buffers
+
+				surface.positionAttribute = gl.getAttribLocation(currentProgram, "surfacePosAttrib");
+				gl.enableVertexAttribArray(surface.positionAttribute);
+
+				vertexPosition = gl.getAttribLocation(currentProgram, "position");
+				gl.enableVertexAttribArray( vertexPosition );
+
+			}
+
+			function compileScreenProgram() {
+			
+				if (!gl) { return; }
+
+				var program = gl.createProgram();
+				var fragment = document.getElementById( 'fragmentShader' ).textContent;
+				var vertex = document.getElementById( 'vertexShader' ).textContent;
+
+				var vs = createShader( vertex, gl.VERTEX_SHADER );
+				var fs = createShader( fragment, gl.FRAGMENT_SHADER );
+
+				gl.attachShader( program, vs );
+				gl.attachShader( program, fs );
+
+				gl.deleteShader( vs );
+				gl.deleteShader( fs );
+
+				gl.linkProgram( program );
+
+				if ( !gl.getProgramParameter( program, gl.LINK_STATUS ) ) {
+
+					console.error( 'VALIDATE_STATUS: ' + gl.getProgramParameter( program, gl.VALIDATE_STATUS ), 'ERROR: ' + gl.getError() );
+
+					return;
+
+				}
+
+				screenProgram = program;
+
+				gl.useProgram( screenProgram );
+
+				cacheUniformLocation( program, 'resolution' );
+				cacheUniformLocation( program, 'texture' );
+
+				screenVertexPosition = gl.getAttribLocation(screenProgram, "position");
+				gl.enableVertexAttribArray( screenVertexPosition );
+
+			}
+
+			function cacheUniformLocation( program, label ) {
+
+				if ( program.uniformsCache === undefined ) {
+
+					program.uniformsCache = {};
+
+				}
+
+				program.uniformsCache[ label ] = gl.getUniformLocation( program, label );
+
+			}
+
+			//
+
+			function createTarget( width, height ) {
+
+				var target = {};
+
+				target.framebuffer = gl.createFramebuffer();
+				target.renderbuffer = gl.createRenderbuffer();
+				target.texture = gl.createTexture();
+
+				// set up framebuffer
+
+				gl.bindTexture( gl.TEXTURE_2D, target.texture );
+				gl.texImage2D( gl.TEXTURE_2D, 0, gl.RGBA, width, height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null );
+
+				gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE );
+				gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE );
+
+				gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST );
+				gl.texParameteri( gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST );
+
+				gl.bindFramebuffer( gl.FRAMEBUFFER, target.framebuffer );
+				gl.framebufferTexture2D( gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, target.texture, 0 );
+
+				// set up renderbuffer
+
+				gl.bindRenderbuffer( gl.RENDERBUFFER, target.renderbuffer );
+
+				gl.renderbufferStorage( gl.RENDERBUFFER, gl.DEPTH_COMPONENT16, width, height );
+				gl.framebufferRenderbuffer( gl.FRAMEBUFFER, gl.DEPTH_ATTACHMENT, gl.RENDERBUFFER, target.renderbuffer );
+
+				// clean up
+
+				gl.bindTexture( gl.TEXTURE_2D, null );
+				gl.bindRenderbuffer( gl.RENDERBUFFER, null );
+				gl.bindFramebuffer( gl.FRAMEBUFFER, null);
+
+				return target;
+
+			}
+
+			function createRenderTargets() {
+
+				frontTarget = createTarget( parameters.screenWidth, parameters.screenHeight );
+				backTarget = createTarget( parameters.screenWidth, parameters.screenHeight );
+
+			}
+
+			//
+
+			var dummyFunction = function() {};
+
+
+			//
+			
+			function htmlEncode(str){
+
+				return String(str)
+					.replace(/&/g, '&amp;')
+					.replace(/"/g, '&quot;')
+					.replace(/'/g, '&#39;')
+					.replace(/</g, '&lt;')
+					.replace(/>/g, '&gt;');
+
+			}
+
+			//
+
+			function createShader( src, type ) {
+			
+				var shader = gl.createShader( type );
+				var line, lineNum, lineError, index = 0, indexEnd;
+
+				while (errorLines.length > 0) {
+					line = errorLines.pop();
+					code.setLineClass(line, null);
+					code.clearMarker(line);
+				}
+
+				gl.shaderSource( shader, src );
+				gl.compileShader( shader );
+
+				compileButton.title = '';
+
+				if ( !gl.getShaderParameter( shader, gl.COMPILE_STATUS ) ) {
+
+					var error = gl.getShaderInfoLog( shader );
+					
+					// Remove trailing linefeed, for FireFox's benefit.
+					while ((error.length > 1) && (error.charCodeAt(error.length - 1) < 32)) {
+						error = error.substring(0, error.length - 1);
+					}
+
+					compileButton.title = error;
+					console.error( error );
+
+					compileButton.style.color = '#ff0000';
+					compileButton.textContent = 'compiled with errors';
+
+					set_save_button('hidden');
+
+					while (index >= 0) {
+						index = error.indexOf("ERROR: 0:", index);
+						if (index < 0) { break; }
+						index += 9;
+						indexEnd = error.indexOf(':', index);
+						if (indexEnd > index) {
+							lineNum = parseInt(error.substring(index, indexEnd));
+							if ((!isNaN(lineNum)) && (lineNum > 0)) {
+								index = indexEnd + 1;
+								indexEnd = error.indexOf("ERROR: 0:", index);
+								lineError = htmlEncode((indexEnd > index) ? error.substring(index, indexEnd) : error.substring(index));
+								line = code.setMarker(lineNum - 1, '<abbr title="' + lineError + '">' + lineNum + '</abbr>', "errorMarker");
+								code.setLineClass(line, "errorLine");
+								errorLines.push(line);
+							}
+						}
+					}
+
+					return null;
+
+				}
+
+				return shader;
+
+			}
+
+			//
+
+			function onWindowResize( event ) {
+
+				var isMaxWidth = ((resizer.currentWidth === resizer.maxWidth) || (resizer.currentWidth === resizer.minWidth)),
+					isMaxHeight = ((resizer.currentHeight === resizer.maxHeight) || (resizer.currentHeight === resizer.minHeight));
+
+				toolbar.style.width = window.innerWidth - 47 + 'px';
+
+				resizer.isResizing = false;
+				resizer.maxWidth = window.innerWidth - 75;
+				resizer.maxHeight = window.innerHeight - 125;
+				if (isMaxWidth || (resizer.currentWidth > resizer.maxWidth)) {
+					resizer.currentWidth = resizer.maxWidth;
+				}
+				if (isMaxHeight || (resizer.currentHeight > resizer.maxHeight)) {
+					resizer.currentHeight = resizer.maxHeight;
+				}
+				if (resizer.currentWidth < resizer.minWidth) { resizer.currentWidth = resizer.minWidth; }
+				if (resizer.currentHeight < resizer.minHeight) { resizer.currentHeight = resizer.minHeight; }
+
+				code.getWrapperElement().style.top = '75px';
+				code.getWrapperElement().style.left = '25px';
+				code.getWrapperElement().style.width = resizer.currentWidth + 'px';
+				code.getWrapperElement().style.height = resizer.currentHeight + 'px';
+
+				canvas.width = window.innerWidth / quality;
+				canvas.height = window.innerHeight / quality;
+
+				canvas.style.width = window.innerWidth + 'px';
+				canvas.style.height = window.innerHeight + 'px';
+
+				parameters.screenWidth = canvas.width;
+				parameters.screenHeight = canvas.height;
+
+				computeSurfaceCorners();
+
+				if (gl) {
+				
+					gl.viewport( 0, 0, canvas.width, canvas.height );
+
+					createRenderTargets();
+					
+				}
+			}
+
+			//
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+				render();
+
+			}
+
+			function render() {
+
+				if ( !currentProgram ) return;
+
+				parameters.time = Date.now() - parameters.startTime;
+
+				// Set uniforms for custom shader
+
+				gl.useProgram( currentProgram );
+
+				gl.uniform1f( currentProgram.uniformsCache[ 'time' ], parameters.time / 1000 );
+				gl.uniform2f( currentProgram.uniformsCache[ 'mouse' ], parameters.mouseX, parameters.mouseY );
+				gl.uniform2f( currentProgram.uniformsCache[ 'resolution' ], parameters.screenWidth, parameters.screenHeight );
+				gl.uniform1i( currentProgram.uniformsCache[ 'backbuffer' ], 0 );
+				gl.uniform2f( currentProgram.uniformsCache[ 'surfaceSize' ], surface.width, surface.height );
+
+				gl.bindBuffer( gl.ARRAY_BUFFER, surface.buffer );
+				gl.vertexAttribPointer( surface.positionAttribute, 2, gl.FLOAT, false, 0, 0 );
+				
+				gl.bindBuffer( gl.ARRAY_BUFFER, buffer );
+				gl.vertexAttribPointer( vertexPosition, 2, gl.FLOAT, false, 0, 0 );
+
+				gl.activeTexture( gl.TEXTURE0 );
+				gl.bindTexture( gl.TEXTURE_2D, backTarget.texture );
+
+				// Render custom shader to front buffer
+
+				gl.bindFramebuffer( gl.FRAMEBUFFER, frontTarget.framebuffer );
+
+				gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT );
+				gl.drawArrays( gl.TRIANGLES, 0, 6 );
+
+				// Set uniforms for screen shader
+
+				gl.useProgram( screenProgram );
+
+				gl.uniform2f( screenProgram.uniformsCache[ 'resolution' ], parameters.screenWidth, parameters.screenHeight );
+				gl.uniform1i( screenProgram.uniformsCache[ 'texture' ], 1 );
+
+				gl.bindBuffer( gl.ARRAY_BUFFER, buffer );
+				gl.vertexAttribPointer( screenVertexPosition, 2, gl.FLOAT, false, 0, 0 );
+				
+				gl.activeTexture( gl.TEXTURE1 );
+				gl.bindTexture( gl.TEXTURE_2D, frontTarget.texture );
+
+				// Render front buffer to screen
+
+				gl.bindFramebuffer( gl.FRAMEBUFFER, null );
+
+				gl.clear( gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT );
+				gl.drawArrays( gl.TRIANGLES, 0, 6 );
+
+				// Swap buffers
+
+				var tmp = frontTarget;
+				frontTarget = backTarget;
+				backTarget = tmp;
+
+			}
+
+		</script><canvas style="display: block; width: 1440px; height: 773px;" width="1440" height="773"></canvas><div style="position: absolute; top: 25px; left: 25px; width: 1393px; display: none;"><div style="float: right;"><button style="cursor: move; display: none;" title="Pan: left-drag, Zoom: right-drag. Use 'hide code' for a large pan/zoom area.">pan/zoom</button><button title="Press F11 to enter or leave fullscreen mode">fullscreen</button></div><button>show code</button><select><option>0.5</option><option selected="selected">1</option><option>2</option><option>4</option><option>8</option></select><button title="" style="color: rgb(0, 255, 0); visibility: hidden;">compiled successfully</button><button style="visibility: hidden;">fork</button><a style="visibility: visible;" href="http://glslsandbox.com/e#55945">parent</a><a style="visibility: visible;" href="http://glslsandbox.com/diff#55945-vs-56016.0">diff</a></div><div class="CodeMirror" style="top: 75px; left: 25px; width: 1365px; height: 648px; display: none;"><div style="overflow: hidden; position: relative; width: 1px; height: 0px; top: 0px; left: 0px;"><textarea style="position: absolute; width: 10000px;" autocorrect="off" autocapitalize="off" wrap="off"></textarea></div><div class="CodeMirror-scroll cm-s-default"><div style="position: relative; height: 436px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-gutter" style="height: 2198px;"><div class="CodeMirror-gutter-text"></div></div></div></div></div></div><div class="resizer"></div></div>
+
+	
+
+</body></html>
