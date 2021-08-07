@@ -5,9 +5,12 @@ var zoomOutEngage=false;
 var movementRate=.007;
 let radius = 4.;
 var mobileRez=1.;
-const fftSize=2048;
+let fftSize=2048;
 //vvvvhttps://code-boxx.com/detect-mobile-device-javascript/
-if(navigator.userAgent.toLowerCase().match(/mobile/i))mobileRez=.5;
+if(navigator.userAgent.toLowerCase().match(/mobile/i)){
+    mobileRez=.5;
+    fftSize=512;
+}
 //^^^^https://code-boxx.com/detect-mobile-device-javascript/
 //number key resolution transmission
 
@@ -119,7 +122,7 @@ for(let n = 0; n<starArms; n++){testar[n] = 0;testarD[n] = 1;}
 let b = -1000000;
 let z = dataArray;
 averagedAmp =  0;
-for(let t=1; t<1024; t+=1)//n<fftSize1/4-100
+for(let t=1; t<1024; t+=1)
 {
     let n =t;
 
@@ -127,10 +130,9 @@ averagedAmp += z[n];
 //if ( z[n]>z[n-1] && z[n] > z[n+1] )
     {
 
-        let   d = (-z[n-1]+z[n+1])/(z[n-1]+z[n+1]);
+        let   d = (z[n+1]-z[n-1])/(z[n-1]+z[n+1]);
 
-        let nAdj = n;
-        nAdj = n + d*4;
+        let nAdj = n + d*4;
         //if (Math.abs(nAdj-n) < 10)
         if (Math.abs(d)<4+1)freq =((( audioX.sampleRate /10000.)*(nAdj))/1024)*10000;
 
@@ -209,9 +211,7 @@ else if (reset>5){on = false;}
 else reset++
 
 if (trailDepth<trailLength)trailDepth++;
-let g = Math.pow ( 2, (1/24.0));
-let aa = pitc/440.0;
-let note = Math.log(aa)/Math.log(g)+49;
+let note = Math.log(pitc/440.0)/Math.log(Math.pow ( 2, (1/24.0)))+49;
 let inc = 8;
 let t =  (note * 30+30*inc);
 angle = t%360;
@@ -229,9 +229,8 @@ pitchCol[f]  = new THREE.MeshBasicMaterial({
 angle = ((angle-30+180)/360*2*pi);
    // angle = (maxInt24/24*2*pi);
 angle[f] = angle;
-
-         d_x = -Math.sin(-angle)*(4+averagedAmp*2.);
-        d_y = -Math.cos(-angle)*(4+averagedAmp*2.);
+         d_x = -Math.sin(-angle)*(4+totalAMP*2048./fftSize/7);
+        d_y = -Math.cos(-angle)*(4+totalAMP*2048./fftSize/7.);
                         bx=coordX+d_x*movementRate*zoom;
                         by=coordY+d_y*movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)){
