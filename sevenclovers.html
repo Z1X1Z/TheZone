@@ -41,6 +41,48 @@
             float zin(float x){return -sin(x);}
             float coz(float x){return -cos(x);}
                       const float gr=-cos(216.)/-cos(612.)-1.;
+                      vec3 bride(vec2 p,vec2 t){
+                                 float time2 = t.x;
+                                 float c=0.,k=0.,l=0.,x=0.,e=0.;
+                if(abs(p.y*p.y)+abs(p.x*p.x)<49.){
+
+                             //vv body vv
+                                 vec2 g=p/3.;
+                                 g.x+=.5;
+                                 vec2 z=g;
+                                 for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>20.&&f>4)x+=z.y;
+                                 else {z=2.*vec2(-1./((z.x*z.x-1.44*z.y*z.y)-g.x*1.2-sin(time2*gr)/40.),(1.2*z.x*z.y-1.2*g.y-sin(time2/2.)/40.));
+                                       z.x=pow(abs(z.x),.777-sin(time2)/4.);}
+                             //vv legs vv
+                                 g=p/4.;
+                                 //g.x-=.5;
+                                 z=g;
+                                 for (int f=0;f<70;f+=1)if(abs(z.x+z.y)>200.&&f>4)c=1.;
+                                 else {z=3.*vec2(-1./((z.x*z.x-z.y*z.y)-g.x),(77.0*z.x*z.y-2.*g.y-sin(time2)/7.));
+                                       z.y = -1./z.y;}
+                             //vv head vv
+                                 g=p;
+                                 z=g;
+                                 for (int f=0;f<10;f+=1)if(abs(z.x+abs(z.y))>27.&&f>4)l=1.;
+                                 else{z=vec2(-1./((z.x*z.x-z.y*z.y)-g.x),(2.0*z.x*z.y-g.y-sin(time2*4.)/8.));
+                                      z*=pow(z.x,z.x);}
+                             //vv mandelbrot\heart vv
+                                 g=p*2.;
+                                 g.x-=6.;
+                                 z=g;
+                                 for (int f=0;f<50;f+=1)if(abs(z.x+z.y)>20.)break;
+                                 else {z=vec2(((z.x*z.x-z.y*z.y)-g.x-sin(time2*gr)/4.),(2.0*z.x*z.y-g.y-sin(time2/2.)/4.));
+                                              if(f>2)k+=0.02;}
+                             //vv eye lights vv
+                                 g=p;
+                                 z=g;
+                                 for (int f=0;f<4;f+=1)if(abs(z.x+z.y)>20.)break;
+                                 else {z=vec2((1./(z.x*z.x-z.y*z.y)-g.x-sin(time2*gr)/4.),(4.0*z.x*z.y-g.y-sin(time2*2.)/4.));
+                                       if(f>2)e+=0.3;}
+        }
+                             return vec3(l+c,l+x+c,l+c)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
+                                               
+                                               
           vec3 heart(vec2 g, vec2 t){
               g.x-=.5;
               g.y*=-1.;
@@ -299,12 +341,12 @@
           vec3 zoomer;
           if(colorCombo<10)zoomer=tol(bg*zoom,coords);
           else if (colorCombo==11)zoomer=heartZoom(bg*zoom,coords);
-          vec3 creatures;
-          if(fourCreats<0)creatures=fourCreatures((bg*zoom+coords.yx)*4.-vec2(-.0,.0),t);
+          vec3 creatures,b;
+          if(fourCreats<0){creatures=fourCreatures((bg*zoom+coords.yx)*4.,t);  b=bride((bg*zoom+coords.yx)*12.,vec2(time2dance));}
           vec3 mny,m=vec3(0.);
           if(metronome<1.) {mny = manny(p,t);m=mny;}
           else   mny = mannyX(p,t);
-          gl_FragColor=vec4(mny+creatures+
+          gl_FragColor=vec4(mny+creatures+b+
                             clamp(zoomer-(m.r+m.b+m.g+creatures.r+creatures.g+creatures.b)*100.,.0,1.)
                     ,1.);}
 		</script>
