@@ -472,19 +472,23 @@ if (micOn)analyser.getByteFrequencyData(  dataArray);
    var maxTestar=0.;
 if(onO){
     for (var g=0; g<starArms; g++) if(testar[g]>maxTestar)maxTestar=testar[g];
-    for (var g=0; g<starArms; g++)if(testar[g]>0.00001) {
+            
+            
+            
+    for (var g=starArms; g>0; g--)if(testar[g]>0.00001) {
         var widt = .02;
         var yy =(testarD[g]+19)%24./24.*pi*2.;
         var lengt = testar[g]/maxTestar;
         var vop = new THREE.Color();
-       
-       vop.setHSL((1-testarD[g])%24./24.,1.,.5);
+       vop.setHSL((1-testarD[g])%24./24.,
+                  testarD[g]/297,testarD[g]/297);//this line might need tweaking 288 is the theoretical value
                       material = new THREE.MeshBasicMaterial({
         color:vop,
         opacity: .3+.7/uniforms[ "metronome" ].value ,
         transparent: true,
       });
 
+    
             rpio2 =yy+pi/2.;
     var v = new Float32Array( [
         0-widt*-Math.sin(rpio2)*porportionX,    0-widt*-Math.cos(rpio2)*porportionY,  -0.05,
