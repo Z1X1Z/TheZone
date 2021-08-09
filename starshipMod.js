@@ -2,7 +2,7 @@ if(!("shaderOn" in window))window.shaderOn=true;
 window.zoomCageSize = 2.0;
 zoomOutRatchetThreshold=4.;
 var zoomOutEngage=false;
-var movementRate=.007;
+window.movementRate=1.;
 let radius = 4.;
 var mobileRez=1.;
 let fftSize=2048;
@@ -34,6 +34,9 @@ if(navigator.userAgent.toLowerCase().match(/mobile/i)){
         else if (String.fromCharCode(event.which || event.keyCode)=="U") uniforms[ "colorCombo" ].value = 7;
         else if (String.fromCharCode(event.which || event.keyCode)=="A") uniforms[ "colorCombo" ].value = 11;
         else if (String.fromCharCode(event.which || event.keyCode)=="F") uniforms[ "fourCreats" ].value *= -1;
+        else if (String.fromCharCode(event.which || event.keyCode)=="K") uniforms[ "colorCombo" ].value = 13;
+        else if (String.fromCharCode(event.which || event.keyCode)=="X") uniforms[ "colorCombo" ].value = 14;
+
         else if (event.keyCode==190) uniforms[ "metronome" ].value *= 1.1; //keycode for <
         else if (event.keyCode==188&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
             
@@ -51,7 +54,23 @@ if(navigator.userAgent.toLowerCase().match(/mobile/i)){
             if (onO)onO=false;
             else onO = true;
             }
+        
+        
+        
+        
+        if(uniforms["colorCombo"].value == 13){
+            window.zoomCageSize=1.;
+           // window.movementRate=.125;
+        }
+        else if(uniforms["colorCombo"].value == 14){
+            window.zoomCageSize=4.;
+           // window.movementRate=.125;
+        }
+        else
+        {            window.zoomCageSize=2.;
+            window.movementRate=1.;}
         //console.log(String.fromCharCode(event.which || event.keyCode));
+        
     }, false);
 
 /*
@@ -231,8 +250,8 @@ angle = ((angle-30+180)/360*2*pi);
 angle[f] = angle;
          d_x = -Math.sin(-angle)*(4+totalAMP*2048./fftSize/7);
         d_y = -Math.cos(-angle)*(4+totalAMP*2048./fftSize/7.);
-                        bx=coordX+d_x*movementRate*zoom;
-                        by=coordY+d_y*movementRate*zoom;
+                        bx=coordX+d_x*.007*window.movementRate*zoom;
+                        by=coordY+d_y*.007*window.movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)){
            if(on){
                coordX=bx;
