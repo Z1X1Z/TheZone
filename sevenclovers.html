@@ -323,21 +323,50 @@
                                          
                   return digorno/4.;
               }
+                                                      
+                                                      
+                                                      
+                                                      
+                                                      
+                                                      
   vec3 TOLTOK    (vec2 s, vec2 t){
-     
-      for (int f=0;f<11;f+=1)if(abs(s.y)<40.){
+                            s=-s.yx;
+                            vec2 p = s;
+    vec3 ret = vec3(1.);
+      for (int f=0;f<20;f+=1)if(abs(s.y)<30.){
+          if (f<10)
+          for (int p=0;p<2;p+=1)if(abs(s.y)<(1.-t.x)*2.)
+          {
           s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y);//x**3
               s.x=log(abs(s.x));
-              if(abs(s.y)<10.)
-              {
-            s=vec2((s.x+s.y/(s.x*s.x + s.y*s.y)), (1./(s.x*s.x + s.y*s.y)));
-          s.y=s.y-log(dot(s.y,s.y))*-sin((1.-t.x)/2.);
-                                         }
-      
+              ret+=vec3(s.y/100.-s.x*s.y/888.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.)/20.;
+             }
+          if (f>3){ s=vec2((s.x+s.y/(s.x*s.x + s.y*s.y)), (1./(s.x*s.x + s.y*s.y)))-abs(p);
+          s.y=s.y-log(dot(s.y,s.y))*-sin(1.-t.x);
+          ret= vec3(s.y,abs(s.x-s.y),s.y*s.x)/50.;
+                    }
       }
-
-      return vec3(s.y/100.-s.x*s.y/888.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.);//-vec3(s.x*1.4,(s.y*s.x),s.y)/200.;
+      return ret;
 }
+                                    
+                                    
+                                    
+                                    
+                                    
+vec3 TOLTOKbu    (vec2 s, vec2 t){
+  for (int f=0;f<10;f+=1)if(abs(s.y)<20.){
+      for (int p=0;p<4;p+=1)if(abs(s.y)+abs(s.x)<(1.-t.x)*4.)
+      {
+      s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y);//x**3
+          s.x=log(abs(s.x));
+         }
+        if (f>10){s=vec2((s.x+s.y/(s.x*s.x + s.y*s.y)), (1./(s.x*s.x + s.y*s.y)));
+      s.y=s.y-log(dot(s.y,s.y))*(1.-t.x);
+                }
+  }
+  return vec3(s.x*s.y,s.x/s.y,(s.y/s.x));
+}
+
                                                      
           vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t);}
           vec3 bod(vec2 p, vec2 t){t*=zoom;return body(p,t)+heart(p,t);}
@@ -373,7 +402,7 @@
           if(colorCombo<10)zoomer=tol(bg*zoom,coords);
           else if (colorCombo==11)zoomer=heartZoom(bg*zoom,coords);
           else if (colorCombo==13)zoomer=tokogae(bg*zoom+coords.yx,vec2(zoom));
-          else if (colorCombo==14)zoomer=TOLTOK(bg*zoom+coords.yx,vec2(zoom*4.));
+          else if (colorCombo==14)zoomer=TOLTOK(bg*zoom+coords.yx,vec2(zoom));
 
           vec3 creatures,b;
           if(fourCreats<0){creatures=fourCreatures((bg*zoom+coords.yx)*4.,t);  b=bride((bg*zoom+coords.yx)*12.,vec2(time2dance));}
