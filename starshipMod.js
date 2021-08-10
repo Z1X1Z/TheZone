@@ -1,15 +1,15 @@
 if(!("shaderOn" in window))window.shaderOn=true;
+if(!("window.spiroRainbow" in window))window.spiroRainbow = false;
+window.movementRate=1.;
 window.zoomCageSize = 2.0;
 zoomOutRatchetThreshold=4.;
 var zoomOutEngage=false;
-window.movementRate=1.;
 let radius = 4.;
 var mobileRez=1.;
 let fftSize=2048;
 let trailLength = 288;
 let colorSound;
 let mobile = false;
-window.spiroRainbow = false;
 //vvvvhttps://code-boxx.com/detect-mobile-device-javascript/
 if(navigator.userAgent.toLowerCase().match(/mobile/i)){
     mobileRez=.5;
@@ -426,7 +426,7 @@ linewidth: 2,
 linecap: 'round', //ignored by WebGLRenderer
 linejoin:  'round' //ignored by WebGLRenderer
 } );
-            if(mobile||onO||window.spiroRainbow){lineMat.color = colorSound; lineMat.opacity = .5;}//opacity has no effect
+            if(onO||window.spiroRainbow){lineMat.color = colorSound; lineMat.opacity = .5;}//opacity has no effect
            
            if (uniforms[ "metronome" ].value>1.)
                lineMat.color =
