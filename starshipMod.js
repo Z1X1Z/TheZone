@@ -6,10 +6,13 @@ window.movementRate=1.;
 let radius = 4.;
 var mobileRez=1.;
 let fftSize=2048;
+let trailLength = 288;
+
 //vvvvhttps://code-boxx.com/detect-mobile-device-javascript/
 if(navigator.userAgent.toLowerCase().match(/mobile/i)){
     mobileRez=.5;
     fftSize=512;
+    trailLength = 75;
 }
 //^^^^https://code-boxx.com/detect-mobile-device-javascript/
 //number key resolution transmission
@@ -190,7 +193,6 @@ let cx = Array(1000);
                 let pitchCol = Array(1000);
 let trailLoaded = false;
 let trailDepth = -1;
-let trailLength = 288;
 let d_x=0,d_y=0;
 let f = 0;
 
