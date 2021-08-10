@@ -63,7 +63,7 @@ if(navigator.userAgent.toLowerCase().match(/mobile/i)){
            // window.movementRate=.125;
         }
         else if(uniforms["colorCombo"].value == 14){
-            window.zoomCageSize=.5;
+            window.zoomCageSize=.125;
             //window.movementRate=.5;
         }
         else
@@ -105,7 +105,7 @@ function makeSpirograph()
 {
         phase = phase % (pi*2);
 len = 0;
-let adjConstant = 1./(spirafreq)*3.14*1.618;
+let adjConstant = 1./(spirafreq)*3.14*1.618/2.;
 if(Math.abs(inputData[0])>.0    )
 for(var m = 0; m < 1024; m++)
 {
@@ -248,8 +248,8 @@ pitchCol[f]  = new THREE.MeshBasicMaterial({
 angle = ((angle-30+180)/360*2*pi);
    // angle = (maxInt24/24*2*pi);
 angle[f] = angle;
-         d_x = -Math.sin(-angle)*(4+totalAMP*2048./fftSize/7);
-        d_y = -Math.cos(-angle)*(4+totalAMP*2048./fftSize/7.);
+         d_x = -Math.sin(-angle)*(2+Math.log(totalAMP*2048./fftSize)*4);
+        d_y = -Math.cos(-angle)*(2+Math.log(totalAMP*2048./fftSize)*4);
                         bx=coordX+d_x*.007*window.movementRate*zoom;
                         by=coordY+d_y*.007*window.movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)){
@@ -470,7 +470,7 @@ const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), l
         const    scene = new THREE.Scene();
         if (on)scene.add(line);
 
-            if (zoom>.000001&&totalAMP*2048./fftSize>zoomOutRatchetThreshold)zoom /= 1.044+Math.abs(totalAMP/numberOfBins)/15.;
+            if (zoom>.000001&&totalAMP*2048./fftSize>zoomOutRatchetThreshold)zoom /= 1.044;//+Math.abs(totalAMP/numberOfBins)/15.;
                 else if(zoom<1.)zoom *= 1.044;
         if (zoom>1.)zoom=1.;
 
