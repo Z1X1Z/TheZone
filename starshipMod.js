@@ -63,8 +63,8 @@ if(navigator.userAgent.toLowerCase().match(/mobile/i)){
            // window.movementRate=.125;
         }
         else if(uniforms["colorCombo"].value == 14){
-            window.zoomCageSize=2.;
-            window.movementRate=.5;
+            window.zoomCageSize=.5;
+            //window.movementRate=.5;
         }
         else
         {            window.zoomCageSize=2.;
@@ -472,11 +472,12 @@ const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), l
 
             if (zoom>.000001&&totalAMP*2048./fftSize>zoomOutRatchetThreshold)zoom /= 1.044+Math.abs(totalAMP/numberOfBins)/15.;
                 else if(zoom<1.)zoom *= 1.044;
+        if (zoom>1.)zoom=1.;
+
         if (zoom>=1.)zoomOutEngage = false;
         else if ( zoom<.000001)zoomOutEngage = true;
             
         if (zoomOutEngage == true)zoom *= 1.44;
-         if (zoom>1.)zoom=1.;
 
 uniforms.coords.value.x = coordX;
 uniforms.coords.value.y = coordY;

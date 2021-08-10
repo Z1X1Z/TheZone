@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Zone:X - Sonic Starship</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<link type="text/css" rel="stylesheet" href="main.css">
-	</head>
-	<body>
+    <head>
+        <title>Zone:X - Sonic Starship</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        <link type="text/css" rel="stylesheet" href="main.css">
+    </head>
+    <body>
 <script src="./threer127.min.js"></script>
 
-		<div id="container"></div>
+        <div id="container"></div>
 
-		<script id="vertexShader" type="x-shader/x-vertex">
+        <script id="vertexShader" type="x-shader/x-vertex">
 
-				varying vec2 vUv;
-        		uniform vec2 coords;
-       			uniform vec2 resolution;
-       			uniform float time;
+                varying vec2 vUv;
+                uniform vec2 coords;
+                   uniform vec2 resolution;
+                   uniform float time;
 
-			void main()	{
+            void main()    {
 
-				vUv = uv;
-				gl_Position = vec4( position, 1.0 );
-			}
-		</script>
+                vUv = uv;
+                gl_Position = vec4( position, 1.0 );
+            }
+        </script>
 
-		<script id="fragmentShader" type="x-shader/x-fragment">
+        <script id="fragmentShader" type="x-shader/x-fragment">
 
             varying vec2 vUv;
             uniform vec2 coords;
@@ -324,12 +324,28 @@
                   return digorno/4.;
               }
                                                       
+      
+      vec3 TOLTOK (vec2 p, vec2 t){
+                  vec2 s = p;
+                   float l=1.;
+                  vec3 digorno=vec3(0);
+
+                   for (int f=0;f<21;f+=1)if(abs(s.y)<5.){
+           if(f>0) s=vec2(s.x+s.y/(s.x*s.x + s.y*s.y), (1./(s.x*s.x + s.y*s.y))+t.x-1.);//this equation comes from the equation (x-1/((x - y*i)))=x.  This equation has no solutions, but upon feedback it gains solutions (technically this may require other steps too)
+                   for (int counter=0;counter<7;counter+=1)if(abs(s.y)<1.5*(1.-t.x)){
+                            s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y);//x**3
+                            s.x=log(abs(s.x));
+                            }
+                  l = s.x-l;
+
+                  //s.y=s.y-log(dot(s.y,s.y))*-sin((1.-t.x)/2.);
+                  digorno+=vec3((s.y/s.x),s.x,l*s.y);
+                  }
+                  return digorno/8.;
+              }
                                                       
                                                       
-                                                      
-                                                      
-                                                      
-  vec3 TOLTOK    (vec2 s, vec2 t){
+  vec3 TOLTOK1    (vec2 s, vec2 t){
                             s=-s.yx;
                             vec2 p = s;
     vec3 ret = vec3(1.);
@@ -350,22 +366,7 @@
 }
                                     
                                     
-                                    
-                                    
-                                    
-vec3 TOLTOKbu    (vec2 s, vec2 t){
-  for (int f=0;f<10;f+=1)if(abs(s.y)<20.){
-      for (int p=0;p<4;p+=1)if(abs(s.y)+abs(s.x)<(1.-t.x)*4.)
-      {
-      s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y);//x**3
-          s.x=log(abs(s.x));
-         }
-        if (f>10){s=vec2((s.x+s.y/(s.x*s.x + s.y*s.y)), (1./(s.x*s.x + s.y*s.y)));
-      s.y=s.y-log(dot(s.y,s.y))*(1.-t.x);
-                }
-  }
-  return vec3(s.x*s.y,s.x/s.y,(s.y/s.x));
-}
+      
 
                                                      
           vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t);}
@@ -412,7 +413,7 @@ vec3 TOLTOKbu    (vec2 s, vec2 t){
           gl_FragColor=vec4(mny+creatures+b+
                             clamp(zoomer-(m.r+m.b+m.g+creatures.r+creatures.g+creatures.b)*100.,.0,1.)
                     ,1.);}
-		</script>
-		<script src="starshipMod.js"></script>
-	</body>
+        </script>
+        <script src="starshipMod.js"></script>
+    </body>
 </html>
