@@ -7,12 +7,15 @@ let radius = 4.;
 var mobileRez=1.;
 let fftSize=2048;
 let trailLength = 288;
-
+let colorSound;
+let mobile = false;
+window.spiroRainbow = false;
 //vvvvhttps://code-boxx.com/detect-mobile-device-javascript/
 if(navigator.userAgent.toLowerCase().match(/mobile/i)){
     mobileRez=.5;
     fftSize=512;
     trailLength = 75;
+    mobile = true;
 }
 //^^^^https://code-boxx.com/detect-mobile-device-javascript/
 //number key resolution transmission
@@ -237,13 +240,13 @@ let inc = 8;
 let t =  (note * 30+30*inc);
 angle = t%360;
 angle = -angle;
-let vo = new THREE.Color();
-             //          vo.setHSL((angle+90)/360.,(180+note)/297,(180+note)/297);
+colorSound = new THREE.Color();
+             //          colorSound.setHSL((angle+90)/360.,(180+note)/297,(180+note)/297);
 
-vo.setHSL((angle+90)/360.,1.,.5);
+                                                        colorSound.setHSL((angle+90)/360.,1.,.5);
 
 pitchCol[f]  = new THREE.MeshBasicMaterial({
-        color:vo,
+        color:colorSound,
         opacity: 1.,
         transparent: true,
       });
@@ -415,13 +418,16 @@ spiral_compress();
 
 move();
     if(on) makeSpirograph();
-    let lineMat = new THREE.LineBasicMaterial( {
+    let lineMat =
+            new THREE.LineBasicMaterial( {
 color: 0xffffff,
-linewidth: 5,
+opacity: .5,
+linewidth: 2,
 linecap: 'round', //ignored by WebGLRenderer
 linejoin:  'round' //ignored by WebGLRenderer
 } );
-            
+            if(mobile||onO||window.spiroRainbow){lineMat.color = colorSound; lineMat.opacity = .5;}//opacity has no effect
+           
            if (uniforms[ "metronome" ].value>1.)
                lineMat.color =
                 new THREE.Color(-Math.sin(uniforms[ "time" ].value*uniforms[ "metronome" ].value))//this line is geared with the shader, don't change unless you do both
@@ -457,7 +463,8 @@ linejoin:  'round' //ignored by WebGLRenderer
                     porportionY =window.innerWidth/window.innerHeight;
                     porportionX = 1.;
                     }
-            
+            let depth =- .07;
+            if (onO) depth = 0;
             
             if (on)for (let r= 0; r < 1000; r ++) {
                         let tx = spirray0[r]*porportionX/spiregulator;
@@ -465,7 +472,7 @@ linejoin:  'round' //ignored by WebGLRenderer
                 //    if(!(isFinite(tx) || isFinite(ty) || Math.abs(tx)>window.innerWidth/2 || Math.abs(cy)>window.innerHeight/2))
 
                 //if (isFinite(tx)&&isFinite(ty))
-                    point[r]=new THREE.Vector3( tx, ty, -0.07 );
+                    point[r]=new THREE.Vector3( tx, ty, depth );
 
                 }
 const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), lineMat );
@@ -601,6 +608,7 @@ r--;
 if(r<=0)r=trailDepth-1;
 
 }
+                 
                  if(window.shaderOn)scene.add( mesh );
         renderer.render( scene, camera );
         scene.remove(line);
