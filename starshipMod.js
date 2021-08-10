@@ -1,5 +1,5 @@
 if(!("shaderOn" in window))window.shaderOn=true;
-if(!("window.spiroRainbow" in window))window.spiroRainbow = false;
+if(!("spiroRainbow" in window))window.spiroRainbow = false;
 window.movementRate=1.;
 window.zoomCageSize = 2.0;
 zoomOutRatchetThreshold=4.;
