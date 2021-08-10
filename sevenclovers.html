@@ -331,8 +331,8 @@
                    float l=1.;
                   vec3 digorno=vec3(0.);
                    for (int f=0;f<21;f+=1)if(abs(s.y)<5.){
-           if(f>0) s=vec2(s.x+s.y/(s.x*s.x + s.y*s.y), (1./(s.x*s.x + s.y*s.y))+t.x-1.);//this equation comes from the equation (x-1/((x - y*i)))=x.  This equation has no solutions, but upon feedback it gains solutions (technically this may require other steps too)
-                   for (int counter=0;counter<10;counter+=1)if(abs(s.y)<1.5*(1.-t.x)){
+                       if(f>0) s=vec2(s.x+s.y/(s.x*s.x + s.y*s.y), (1./(s.x*s.x + s.y*s.y))+t.x-1.);//this equation comes from the equation (x-1/((x - y*i)))=x.  This equation has no solutions, but upon feedback it gains solutions (technically this may require other steps too)
+                       for (int counter=0;counter<10;counter+=1)if(abs(s.y)<1.5*(1.-t.x)){
                             s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y);//x**3
                             s.x=log(abs(s.x));
                             }
