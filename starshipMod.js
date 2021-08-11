@@ -104,7 +104,7 @@ function makeSpirograph(){
       len = 0;
       let adjConstant = 1./(spirafreq)*3.14*1.618/2.;
       if(Math.abs(inputData[0])>.0    )
-      for(var m = 0; m < bufferSize; m++)
+      for(var m = 0; m < 256; m++)
       {
               phase += adjConstant;//spira_pitch;
               spirray0[m]=-Math.sin(phase)*inputData[m];
@@ -175,15 +175,14 @@ function  move()
       {xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}trailWidth[n]=0.;}
 
     var pb = -1;
-   for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(dataArray[b]/255.);
+   for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
 if (totalAMP*2048./fftSize>zoomOutRatchetThreshold)//this line under revisement
   pb =    calculatePitch();
   pt = pb;
        if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5);}
-  var volumeModifier = dataArray[0];
 on = true;
 if (isFinite(pb) &&pb>0&& pb!=6.565706694547585 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
-else if (reset>5){on = false;}
+else if (reset>0){on = false;}
 else reset++
 
 if (trailDepth<trailLength)trailDepth++;
