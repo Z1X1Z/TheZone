@@ -83,6 +83,7 @@ window.addEventListener('keydown', function(event) {
 
 let pi = 3.14159;
 let inputData;
+let dataArray;
 let bufferSize = fftSize;
 let numberOfBins = fftSize/2.;
 let spirray0 = new Float32Array(bufferSize);
@@ -122,7 +123,8 @@ function makeSpirograph(){
 }
 function spiral_compress(){
     let freq = 0;
-    let z = inputData;
+    let z = dataArray;
+
     for(let n = 0; n<starArms; n++){testar[n] = 0;testarD[n] = 1;}
     for(let t=1; t<numberOfBins; t+=1)
     {
@@ -171,16 +173,14 @@ function  move()
   totalAMP = 0.;
   if (!trailLoaded) {trailLoaded = true; for(var n = 0; n<trailLength; n++)
       {xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}trailWidth[n]=0.;}
-analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
-//let iD = Array(inputData.length);
-//for(let m = 0; m<inputData.length; m++) iD[m]=(inputData[m]);
+
     var pb = -1;
-   for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
+   for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(dataArray[b]/255.);
 if (totalAMP*2048./fftSize>zoomOutRatchetThreshold)//this line under revisement
   pb =    calculatePitch();
   pt = pb;
        if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5);}
-  var volumeModifier = inputData[0]*255;
+  var volumeModifier = dataArray[0];
 on = true;
 if (isFinite(pb) &&pb>0&& pb!=6.565706694547585 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
 else if (reset>5){on = false;}
@@ -334,6 +334,7 @@ function onWindowResize() {
 
 let point = [];
 function animate( timestamp ) {
+  analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
     move();
     if(on) makeSpirograph();
@@ -416,6 +417,8 @@ function animate( timestamp ) {
   uniforms[ "time2dance" ].value += Math.abs(totalAMP/numberOfBins*2.);
 
   requestAnimationFrame( animate );
+  if (micOn)analyser.getByteFrequencyData(  dataArray);
+
    var maxTestar=0.;
    if(onO){
     for (var g=0; g<starArms; g++) if(testar[g]>maxTestar)maxTestar=testar[g];
@@ -436,16 +439,20 @@ function animate( timestamp ) {
 
 
             rpio2 =yy+pi/2.;
+            let x = widt*-Math.sin(rpio2)*porportionX;
+            let y = widt*-Math.cos(rpio2)*porportionY;
+            let xr = lengt*-Math.sin(yy)*porportionX;
+            let yr = lengt*-Math.cos(yy)*porportionY;
     var v = new Float32Array( [
-        0-widt*-Math.sin(rpio2)*porportionX,    0-widt*-Math.cos(rpio2)*porportionY,  -0.05,
-        0+widt*-Math.sin(rpio2)*porportionX,    0+widt*-Math.cos(rpio2)*porportionY,  -0.05,
-        (lengt*-Math.sin(yy)+widt*-Math.sin(rpio2))*porportionX,
-        (lengt*-Math.cos(yy)+widt*-Math.cos(rpio2))*porportionY,  -0.05,
-        0-widt*-Math.sin(rpio2)*porportionX,    0-widt*-Math.cos(rpio2)*porportionY,  -0.05,
-        (lengt*-Math.sin(yy)+widt*-Math.sin(rpio2))*porportionX,
-        (lengt*-Math.cos(yy)+widt*-Math.cos(rpio2))*porportionY,  -0.05,
-        (lengt*-Math.sin(yy)-widt*-Math.sin(rpio2))*porportionX,
-        (lengt*-Math.cos(yy)-widt*-Math.cos(rpio2)*porportionY),  -0.05,
+        -x,    -y,  -0.05,
+        x,    y,  -0.05,
+        (xr+x),
+        (yr+y),  -0.05,
+        -x, -y,  -0.05,
+        (xr+x),
+        (yr+y),  -0.05,
+        (xr-x),
+        (yr-y),  -0.05,
     ] );
 
     // itemSize = 3 because there are 3 values (components) per vertex
@@ -551,6 +558,7 @@ async function startMic() {
         source = audioX.createMediaStreamSource( stream );
         source.connect(analyser);
         analyser.fftSize = fftSize;
+        dataArray = new Uint8Array( bufferSize );
         init();
       } );
 }
