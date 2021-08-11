@@ -1,12 +1,12 @@
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
-window.movementRate=1.;
+window.movementRate=1.1;
 window.zoomCageSize = 2.0;
 zoomOutRatchetThreshold=4.;
 var zoomOutEngage=false;
 let radius = 4.;
 var mobileRez=1.;
-let fftSize=2048;
+let fftSize=1024;
 let trailLength = 288;
 let colorSound;
 let mobile = false;
@@ -19,7 +19,7 @@ if(navigator.userAgent.toLowerCase().match(/mobile/i)){
 }
 
 //key press handling vvvv
-
+var pointed=true;
 var rez = window.devicePixelRatio*mobileRez;
 window.addEventListener('keydown', function(event) {
       var x = parseInt(String.fromCharCode(event.which || event.keyCode));
@@ -46,6 +46,9 @@ window.addEventListener('keydown', function(event) {
       else if (String.fromCharCode(event.which || event.keyCode)=="F") uniforms[ "fourCreats" ].value *= -1;
       else if (String.fromCharCode(event.which || event.keyCode)=="K") uniforms[ "colorCombo" ].value = 13;
       else if (String.fromCharCode(event.which || event.keyCode)=="X") uniforms[ "colorCombo" ].value = 14;
+      else if (String.fromCharCode(event.which || event.keyCode)=="Z") {
+        if (pointed==true)pointed=false;
+        else pointed = true;}
 
       else if (event.keyCode==190) uniforms[ "metronome" ].value *= 1.1; //keycode for <
       else if (event.keyCode==188&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
@@ -92,7 +95,7 @@ const starArms = numberOfBins;
 var geometries = Array(starArms);
 var meshes = Array(starArms);
 var testar = Array(starArms);
-var testarD = Array(starArms);
+var mustarD = Array(starArms);
 let averagedAmp =  0;
 let zoom = 1;
 let len=0;
@@ -125,7 +128,7 @@ function spiral_compress(){
     let freq = 0;
     let z = dataArray;
 
-    for(let n = 0; n<starArms; n++){testar[n] = 0;testarD[n] = 1;}
+    for(let n = 0; n<starArms; n++){testar[n] = 0;mustarD[n] = 1;}
     for(let t=1; t<numberOfBins; t+=1)
     {
     let n =t;
@@ -141,7 +144,7 @@ function spiral_compress(){
     if (!onO)testar[(Math.round(note))%24] += Math.abs(z[n]);
     else{
       testar[n] = Math.abs(z[n]);
-      testarD[n] = note;
+      mustarD[n] = note;
     }
   }
 };
@@ -182,7 +185,7 @@ if (totalAMP*2048./fftSize>zoomOutRatchetThreshold)//this line under revisement
        if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5);}
 on = true;
 if (isFinite(pb) &&pb>0&& pb!=6.565706694547585 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
-else if (reset>0){on = false;}
+else if (reset>3){on = false;}
 else reset++
 
 if (trailDepth<trailLength)trailDepth++;
@@ -399,7 +402,7 @@ function animate( timestamp ) {
 
   if (on)scene.add(line);
 
-  if (zoom>.000001&&totalAMP*2048./fftSize>zoomOutRatchetThreshold)zoom /= 1.044;//+Math.abs(totalAMP/numberOfBins)/15.;
+  if (zoom>.000001&&totalAMP*2048./fftSize>zoomOutRatchetThreshold)zoom /= 1.02;//+Math.abs(totalAMP/numberOfBins)/15.;
   else if(zoom<1.)zoom *= 1.044;
 
   if (zoom>1.)zoom=1.;
@@ -426,10 +429,10 @@ function animate( timestamp ) {
 
     for (var g=starArms; g>0; g--)if(isFinite(testar[g])&&testar[g]!=0.) {
         var widt = .02;
-        var yy =(testarD[g]+19)%24./24.*pi*2.;
+        var arm =(mustarD[g]+19)%24./24.*pi*2.;
         var lengt = testar[g]/maxTestar;
         var vop = new THREE.Color();
-       vop.setHSL((1-testarD[g])%24./24., testarD[g]/297,testarD[g]/297);//297 is the highest heard note
+       vop.setHSL((1-mustarD[g])%24./24., mustarD[g]/297,mustarD[g]/297);//297 is the highest heard note
                       material = new THREE.MeshBasicMaterial({
         color:vop,
         opacity: .3+.7/uniforms[ "metronome" ].value ,
@@ -437,23 +440,38 @@ function animate( timestamp ) {
       });
 
 
-            rpio2 =yy+pi/2.;
+
+
+            rpio2 =arm+pi/2.;
             let x = widt*-Math.sin(rpio2)*porportionX;
             let y = widt*-Math.cos(rpio2)*porportionY;
-            let xr = lengt*-Math.sin(yy)*porportionX;
-            let yr = lengt*-Math.cos(yy)*porportionY;
-    var v = new Float32Array( [
-        -x,    -y,  -0.05,
+            let xr = lengt*-Math.sin(arm)*porportionX;
+            let yr = lengt*-Math.cos(arm)*porportionY;
+    var v;
+    if(pointed) v= new Float32Array( [
+       -x,    -y,  -0.05,
         x,    y,  -0.05,
-        (xr+x),
-        (yr+y),  -0.05,
+        (xr+x), (yr+y),  -0.05,
+        /* -x, -y,  -0.05,
+        (xr+x), (yr+y),  -0.05,
+        (xr-x), (yr-y),  -0.05,*/
+    ] );
+    else v= new Float32Array( [
+       -x,    -y,  -0.05,
+        x,    y,  -0.05,
+        (xr+x), (yr+y),  -0.05,
         -x, -y,  -0.05,
-        (xr+x),
-        (yr+y),  -0.05,
-        (xr-x),
-        (yr-y),  -0.05,
+        (xr+x), (yr+y),  -0.05,
+        (xr-x), (yr-y),  -0.05
     ] );
 
+/*
+      0-widt*-Math.sin(rpio2)*porportionX,    0-widt*-Math.cos(rpio2)*porportionY,  -0.05,
+      (lengt*-Math.sin(yy)+widt*-Math.sin(rpio2))*porportionX,
+      (lengt*-Math.cos(yy)+widt*-Math.cos(rpio2))*porportionY,  -0.05,
+      (lengt*-Math.sin(yy)-widt*-Math.sin(rpio2))*porportionX,
+      (lengt*-Math.cos(yy)-widt*-Math.cos(rpio2)*porportionY),  -0.05,
+      */
     // itemSize = 3 because there are 3 values (components) per vertex
     geometries[g].setAttribute( 'position', new THREE.Float32BufferAttribute( v, 3 ) );
                        meshes[g] = new THREE.Mesh(geometries[g] , material );
@@ -475,7 +493,16 @@ else{
                       vo.setHSL((20-rr)%24/24.,1.,.5);
                         material  = new THREE.MeshBasicMaterial( { color:vo});
 
-            var vertices = new Float32Array( [
+var vertices;
+if (pointed==true)
+vertices = new Float32Array( [
+   0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
+   0+widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0+widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
+   (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
+   (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  -0.05,
+] );
+else
+             vertices = new Float32Array( [
                 0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
                 0+widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0+widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
                 (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
