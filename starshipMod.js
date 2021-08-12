@@ -179,7 +179,7 @@ function  move()
 
     var pb = -1;
    for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
-if (totalAMP*2048./fftSize>zoomOutRatchetThreshold)//this line under revisement
+//if (totalAMP*2048./fftSize>zoomOutRatchetThreshold)//this line under revisement
   pb =    calculatePitch();
   pt = pb;
        if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5);}
