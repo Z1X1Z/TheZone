@@ -2,8 +2,7 @@ if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
 window.movementRate=1.1;
 window.zoomCageSize = 2.0;
-zoomOutRatchetThreshold=.07;
-var zoomOutEngage=false;
+zoomOutRatchetThreshold=.17;
 let radius = 4.;
 var mobileRez=1.;
 let fftSize=1024;
@@ -83,7 +82,7 @@ window.addEventListener('keydown', function(event) {
         //console.log(String.fromCharCode(event.which || event.keyCode));
 
     }, false);
-
+var zoomOutEngage=false;
 let pi = 3.14159;
 let inputData;
 let dataArray;
@@ -209,8 +208,8 @@ angle = ((angle-30+180)/360*2*pi);
    // angle = (maxInt24/24*2*pi);
 angle[f] = angle;
 
-  d_x = -Math.sin(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)*2.;
-  d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)*2.;
+  d_x = -Math.sin(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**2/4.;
+  d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**2/4.;
 
   bx=coordX+d_x*.007*window.movementRate*zoom;
   by=coordY+d_y*.007*window.movementRate*zoom;
@@ -405,7 +404,7 @@ function animate( timestamp ) {
 
   if (on)scene.add(line);
 
-  if (zoom>.000001&&totalAMP*2048./fftSize>zoomOutRatchetThreshold)zoom /= 1.02;//+Math.abs(totalAMP/numberOfBins)/15.;
+  if (zoom>.000001&&totalAMP*2048./fftSize>zoomOutRatchetThreshold)zoom /= 1.0404;//+Math.abs(totalAMP/numberOfBins)/15.;
   else if(zoom<1.)zoom *= 1.044;
 
   if (zoom>1.)zoom=1.;
