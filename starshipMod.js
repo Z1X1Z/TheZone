@@ -179,7 +179,7 @@ function  move()
 
     var pb = -1;
    for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
-//if (totalAMP*2048./fftSize>zoomOutRatchetThreshold)//this line under revisement
+if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisement
   pb =    calculatePitch();
   pt = pb;
        if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5);}
@@ -194,10 +194,11 @@ let inc = 8;
 let t =  (note * 30+30*inc);
 angle = t%360;
 angle = -angle;
+
 colorSound = new THREE.Color();
              //          colorSound.setHSL((angle+90)/360.,(180+note)/297,(180+note)/297);
 
-                                                        colorSound.setHSL((angle+90)/360.,1.,.5);
+    colorSound.setHSL((angle+90)/360.,1.,.5);
 
 pitchCol[f]  = new THREE.MeshBasicMaterial({
         color:colorSound,
@@ -207,10 +208,12 @@ pitchCol[f]  = new THREE.MeshBasicMaterial({
 angle = ((angle-30+180)/360*2*pi);
    // angle = (maxInt24/24*2*pi);
 angle[f] = angle;
-         d_x = -Math.sin(-angle)*(Math.log(totalAMP*2048./fftSize)*4);
-        d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)*4);
-                        bx=coordX+d_x*.007*window.movementRate*zoom;
-                        by=coordY+d_y*.007*window.movementRate*zoom;
+
+  d_x = -Math.sin(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)*2.;
+  d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)*2.;
+
+  bx=coordX+d_x*.007*window.movementRate*zoom;
+  by=coordY+d_y*.007*window.movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)){
            if(on){
                coordX=bx;
@@ -631,7 +634,7 @@ return quadraticPeakPosition (yinData, minElement(yinData));
 
 
 
-let tolerance=1.; //, confidence;
+let tolerance=.5; //, confidence;
 let sampleRate=44100;
 function minElement (d)
 {
@@ -646,6 +649,7 @@ for (j = 0; j < bufferSize; j++)
 
 return pos;
 }
+
 
 function quadraticPeakPosition (d, pos)
 {
