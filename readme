@@ -3,7 +3,6 @@ This is a free gift for any, all, and none.  I hope for this message to survive 
 If you share it or use the code just drop a link to any of the before websites as attribution or leave this message. 
 To use offline open OFFLINEonlineSwitch.js and simply switch
 "online = true" to "online = false"
-This will turn on local loading.  Also use indexOFFLINE.html instead of index.html This helps with bandwidth issues
-
+This will turn on local loading.  Also use indexOFFLINE.html instead of index.html.
 The license for GLSLsandbox is MIT and found in the "GLSL Sandbox_files" folder.
 
