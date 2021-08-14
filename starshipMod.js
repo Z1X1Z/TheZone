@@ -2,7 +2,7 @@ if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
 window.movementRate=1.1;
 window.zoomCageSize = 2.0;
-zoomOutRatchetThreshold=.17;
+zoomOutRatchetThreshold=1.;
 let radius = 4.;
 var mobileRez=1.;
 let fftSize=1024;
@@ -11,14 +11,14 @@ let colorSound;
 let mobile = false;
 //vvvvbelow line from https://code-boxx.com/detect-mobile-device-javascript/
 if(navigator.userAgent.toLowerCase().match(/mobile/i)){
-    mobileRez=.5;
+    mobileRez=.25;
     fftSize=512;
     trailLength = 75;
     mobile = true;
 }
 
 //key press handling vvvv
-var pointed=true;
+var pointed=false;
 var rez = window.devicePixelRatio*mobileRez;
 window.addEventListener('keydown', function(event) {
       var x = parseInt(String.fromCharCode(event.which || event.keyCode));
