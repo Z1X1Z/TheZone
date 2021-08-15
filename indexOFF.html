@@ -33,7 +33,8 @@ Sonic Starship:
 
 <a href="#" onclick="
 if(navigator.userAgent.toLowerCase().match(/mobi/i)
-||navigator.userAgent.match(/iP/i))
+||navigator.userAgent.match(/iP/i)
+|| (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
 document.location.href='https://zone-x.herokuapp.com/mobile.html';
 else document.location.href='https://zone-x.herokuapp.com/sevenclovers.html';
 "><figure>
