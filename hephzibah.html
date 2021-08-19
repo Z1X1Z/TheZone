@@ -65,13 +65,13 @@
 		<script src="GLSL%20Sandbox_files/glsl.js"></script>
 
 		<script id="example" type="x-shader/x-fragment">
-          
-          
+
+
           //this is a locally hosted GlSlsandbox.com, big thanks to Mr. Doobs 'n' crew for
           //threeJS which this site uses, and for the sandbox where Manny was found
           //you can use ctrl-a or cmd-a to jump to the bottom where all the fun is
                       precision highp float;
-                      
+
                uniform vec2 resolution;
             uniform  float time;
             int fourCreats=1;
@@ -119,14 +119,14 @@
                              //vv eye lights vv
                                  g=p;
                                  z=g;
-                                              
+
                                  for (int f=0;f<4;f+=1)if(abs(z.x+z.y)>20.)break;
                                  else {z=vec2((1./(z.x*z.x-z.y*z.y)-g.x-sin(time2*gr)/4.),(4.0*z.x*z.y-g.y-sin(time2*2.)/4.));
                                        if(f>2)e+=0.3;}
         }
                              return vec3(l+c,l+x+c,l+c)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
-                                               
-                                               
+
+
           vec3 heart(vec2 g, vec2 t){
               g.x-=.5;
               g.y*=-1.;
@@ -211,7 +211,7 @@
                  l = length(s);
                  d += l/25.;
                    if (l >20.0&&t!=0)return vec3(-1.);}
-                  
+
                   if (abs(p.x*p.x+p.y*p.y)<2.0)return vec3(1.);
                   else return vec3(0.0);
            }
@@ -237,7 +237,7 @@
                        return vec3(1.-sin(d * 0.003)-.5,1.- sin(d * 0.9)-.5,1.- sin(d * 0.1)-.5)*3.;}
                return vec3(.0);
               }
-                     
+
             vec3 eaglePerched(vec2 p, vec2 t){
                   p*=3.;
                   vec2 s=p;
@@ -248,13 +248,13 @@
                         l=-1.;}
                   return vec3(l);
               }
-                              
+
            vec3 lion(vec2 p,vec2 t) {
                p*=-3.;
              vec2 s = -p;
 
           float d = 0.0, l;
-          
+
           float flip=t.x;
           if (flip<0.) p = -p;
           if(p.x*p.x*1.+p.y*p.y*2.<21.)
@@ -264,7 +264,7 @@
               s.x = pow(s.x,flip)*sign(s.x*flip);
               l = length(s);
               d += l/40.;
-          
+
               if (l >14.0 &&float(t)  >2.)
                   return vec3(-sin(d +1.),-sin(d +1.8),-sin(d+3.));
                ;  // return vec3(0.);
@@ -334,7 +334,7 @@
           return vec3(b/2.,b,b/2.);
           }
         vec3 tol(vec2 f, vec2 coords){
-                        
+
                         f+=coords.yx;
                         vec2 s=f;
                         for (int counter=0;counter<21;counter+=1)if(abs(s.y)<47.){
@@ -352,11 +352,11 @@
           vec3 bod(vec2 p, vec2 t){t*=zoom;return body(p,t)+heart(p,t);}
           vec3 manny(vec2 p, vec2 t){return body(p,t)+heart(p,t)+face(p,vec2(0.))+shiny(p,vec2(time,0.));}
           vec3 mannyX(vec2 p, vec2 t){return body(p,t)+excelsior(p,t);}
-                                                        
+
           vec3 fourCreatures(vec2 p, vec2 t){
                     vec2 spacing = vec2(5.,3.)*.7;
                     p.x+=.5;
-                    
+
                     return eaglePerched(p+spacing,vec2(-1.,0.))+bod(p+spacing,t)+
                     lion(p+vec2(-spacing.x,spacing.y),vec2(-1.,0.))+bod(p+vec2(-spacing.x,spacing.y),t)+
                     ox(p+vec2(spacing.x,-spacing.y),vec2(-1.,0.))+bod(p+vec2(spacing.x,-spacing.y),t)+
@@ -368,7 +368,7 @@
           vec2 pTiltCoord =-vec2(pixeldistance*-cos(pixelangle),pixeldistance*-sin(pixelangle));
           return pTiltCoord;
           }
-          
+
           //function library:
 //bride manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin
     void main(){
@@ -390,7 +390,7 @@ vec2 p = -(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,reso
       g*=1.25;
      g=(g-m);
     fourCreatures+= eaglePerched(g,vec2(-1.))+bod(g,t);
-       gl_FragColor=vec4(.5+bride(p,vec2(time,0.))+manny(p/2.+vec2(0.,2.5),t) +fourCreatures
+       gl_FragColor=vec4(.5+bride(p,vec2(time,0.))+robe(p/2.,t)/2.+manny(p/2.+vec2(0.,2.5),t) +fourCreatures
              ,1.);}
         </script>
 
@@ -604,7 +604,7 @@ vec2 p = -(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,reso
 					alert("WebGL not supported, but code will be shown.");
 
 				} else {
-					
+
 					// enable dFdx, dFdy, fwidth
 					gl.getExtension('OES_standard_derivatives');
 
@@ -657,7 +657,7 @@ vec2 p = -(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,reso
 						event.preventDefault();
 					}
 				}, false );
-				
+
 				if (gl) {
 
 					var surfaceMouseDown = function ( event ) {
@@ -693,7 +693,7 @@ vec2 p = -(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,reso
 					canvas.addEventListener( 'contextmenu', noContextMenu, false);
 					panButton.addEventListener( 'contextmenu', noContextMenu, false);
 				}
-				
+
 				var clientXLast, clientYLast;
 
 				document.addEventListener( 'mousemove', function ( event ) {
@@ -710,10 +710,10 @@ vec2 p = -(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,reso
 					stopHideUI();
 
 					var codeElement, dx, dy;
-					
+
 					parameters.mouseX = clientX / window.innerWidth;
 					parameters.mouseY = 1 - clientY / window.innerHeight;
-						
+
 					if (resizer.isResizing) {
 
 						resizer.currentWidth = Math.max(Math.min(clientX - resizer.offsetMouseX, resizer.maxWidth), resizer.minWidth);
@@ -823,9 +823,9 @@ vec2 p = -(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,reso
 				if (gl) {
 
 					surface.width = surface.height * parameters.screenWidth / parameters.screenHeight;
-					
+
 					var halfWidth = surface.width * 0.5, halfHeight = surface.height * 0.5;
-					
+
 					gl.bindBuffer( gl.ARRAY_BUFFER, surface.buffer );
 					gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( [
 						surface.centerX - halfWidth, surface.centerY - halfHeight,
@@ -848,11 +848,11 @@ vec2 p = -(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,reso
 			}
 
 			function compile() {
-			
+
 				if (!gl) {
-				
+
 					if (!getWebGL) {
-					
+
 						getWebGL = true;
 						compileButton.addEventListener( 'click', function ( event ) {
 
@@ -863,10 +863,10 @@ vec2 p = -(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,reso
 						compileButton.style.color = '#ff0000';
 						compileButton.textContent = 'WebGL not supported!';
 						set_save_button('hidden');
-						
+
 					}
 					return;
-					
+
 				}
 
 				var program = gl.createProgram();
@@ -942,7 +942,7 @@ vec2 p = -(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,reso
 			}
 
 			function compileScreenProgram() {
-			
+
 				if (!gl) { return; }
 
 				var program = gl.createProgram();
@@ -1046,7 +1046,7 @@ vec2 p = -(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,reso
 
 
 			//
-			
+
 			function htmlEncode(str){
 
 				return String(str)
@@ -1061,7 +1061,7 @@ vec2 p = -(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,reso
 			//
 
 			function createShader( src, type ) {
-			
+
 				var shader = gl.createShader( type );
 				var line, lineNum, lineError, index = 0, indexEnd;
 
@@ -1079,7 +1079,7 @@ vec2 p = -(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,reso
 				if ( !gl.getShaderParameter( shader, gl.COMPILE_STATUS ) ) {
 
 					var error = gl.getShaderInfoLog( shader );
-					
+
 					// Remove trailing linefeed, for FireFox's benefit.
 					while ((error.length > 1) && (error.charCodeAt(error.length - 1) < 32)) {
 						error = error.substring(0, error.length - 1);
@@ -1157,11 +1157,11 @@ vec2 p = -(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,reso
 				computeSurfaceCorners();
 
 				if (gl) {
-				
+
 					gl.viewport( 0, 0, canvas.width, canvas.height );
 
 					createRenderTargets();
-					
+
 				}
 			}
 
@@ -1192,7 +1192,7 @@ vec2 p = -(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,reso
 
 				gl.bindBuffer( gl.ARRAY_BUFFER, surface.buffer );
 				gl.vertexAttribPointer( surface.positionAttribute, 2, gl.FLOAT, false, 0, 0 );
-				
+
 				gl.bindBuffer( gl.ARRAY_BUFFER, buffer );
 				gl.vertexAttribPointer( vertexPosition, 2, gl.FLOAT, false, 0, 0 );
 
@@ -1215,7 +1215,7 @@ vec2 p = -(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,reso
 
 				gl.bindBuffer( gl.ARRAY_BUFFER, buffer );
 				gl.vertexAttribPointer( screenVertexPosition, 2, gl.FLOAT, false, 0, 0 );
-				
+
 				gl.activeTexture( gl.TEXTURE1 );
 				gl.bindTexture( gl.TEXTURE_2D, frontTarget.texture );
 
@@ -1236,6 +1236,6 @@ vec2 p = -(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,reso
 
 		</script><canvas style="display: block; width: 1440px; height: 773px;" width="1440" height="773"></canvas><div style="position: absolute; top: 25px; left: 25px; width: 1393px; display: none;"><div style="float: right;"><button style="cursor: move; display: none;" title="Pan: left-drag, Zoom: right-drag. Use 'hide code' for a large pan/zoom area.">pan/zoom</button><button title="Press F11 to enter or leave fullscreen mode">fullscreen</button></div><button>show code</button><select><option>0.5</option><option selected="selected">1</option><option>2</option><option>4</option><option>8</option></select><button title="" style="color: rgb(0, 255, 0); visibility: hidden;">compiled successfully</button><button style="visibility: hidden;">fork</button><a style="visibility: visible;" href="http://glslsandbox.com/e#55945">parent</a><a style="visibility: visible;" href="http://glslsandbox.com/diff#55945-vs-56016.0">diff</a></div><div class="CodeMirror" style="top: 75px; left: 25px; width: 1365px; height: 648px; display: none;"><div style="overflow: hidden; position: relative; width: 1px; height: 0px; top: 0px; left: 0px;"><textarea style="position: absolute; width: 10000px;" autocorrect="off" autocapitalize="off" wrap="off"></textarea></div><div class="CodeMirror-scroll cm-s-default"><div style="position: relative; height: 436px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-gutter" style="height: 2198px;"><div class="CodeMirror-gutter-text"></div></div></div></div></div></div><div class="resizer"></div></div>
 
-	
+
 
 </body></html>
