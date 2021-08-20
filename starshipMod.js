@@ -16,6 +16,13 @@ if(navigator.userAgent.toLowerCase().match(/mobile/i)){
     trailLength = 75;
     mobile = true;
 }
+else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+{
+    mobileRez=.5;
+    fftSize=1024;
+    trailLength = 125;
+
+}
 
 //key press handling vvvv
 var pointed=false;
