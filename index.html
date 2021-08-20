@@ -31,7 +31,13 @@
 Sonic Starship:
 <ul>
 
-<a href="https://zone-x.herokuapp.com/sevenclovers.html"><figure>
+<a href="#" onclick="
+if(navigator.userAgent.toLowerCase().match(/mobi/i)
+||navigator.userAgent.match(/iP/i)
+|| (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
+document.location.href='https://zone-x.herokuapp.com/mobile.html';
+else document.location.href='https://zone-x.herokuapp.com/sevenclovers.html';
+"><figure>
 <img src="http://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/tol.png"
      alt="{z<-z**3,z.real=log(abs(z.real))}">
 
