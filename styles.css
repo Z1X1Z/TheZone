@@ -29,3 +29,9 @@ figure {
     margin-top: 0%;
     display: inline-block;
 }
+body{background-image: url('lionandlamb.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: contain;
+    background-position:center;
+}
