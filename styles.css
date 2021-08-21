@@ -3,16 +3,16 @@ body
     font-size: 1.2em;
     color: white;
     background-color:black;
-    margin-left: 5%;
-    margin-right: 0%;
+    margin-left: 7%;
+    margin-right: 7%;
     margin-top: 5%;
     text-indent: 3.4%;
-    
     background-image: url('lionandlamb.png');
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: contain;
     background-position:center;
+    
 
 }
 h1
@@ -21,17 +21,22 @@ h1
     font-size: 2em;
 
 }
-ul{
-text-indent: 0em;
-}
+
 h2
 {
 	
     font-size: 1.5em;
 
 }
-ul {    margin-top: 0%;}
+li {
+
+
+    }
+ul{
+    text-align: center;
+text-indent: 0em;
+}
 figure { 
     margin-top: 0%;
     display: inline-block;
-}
+    }
