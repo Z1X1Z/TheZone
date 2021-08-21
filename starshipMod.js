@@ -15,12 +15,16 @@ if(navigator.userAgent.toLowerCase().match(/mobile/i)){
     fftSize=512;
     trailLength = 75;
     mobile = true;
+    zoomOutRatchetThreshold=3.;
+
 }
 else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 {
     mobileRez=.5;
     fftSize=1024;
     trailLength = 125;
+    zoomOutRatchetThreshold=3.;
+
 
 }
 
