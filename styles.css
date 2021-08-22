@@ -1,7 +1,7 @@
 body
 {
     font-size: 1.2em;
-    color: red;
+    color: chartreuse;
     background-color:black;
     margin-left: 7%;
     margin-right: 7%;
@@ -25,8 +25,11 @@ body
     background-position:center;
 
 }
+a {
+  color: red;
+}
 a:visited {
-  color: limegreen;
+  color: orange;
 }
 h1
 {
