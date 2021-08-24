@@ -31,13 +31,14 @@ Sonic Starship:
 <ul>
 
 <a href="#" onclick="
-if(navigator.userAgent.toLowerCase().match(/mobi/i)
-||navigator.userAgent.match(/iP/i)
-|| (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
-document.location.href='https://zone-x.herokuapp.com/mobile.html';
-else document.location.href='https://zone-x.herokuapp.com/sevenclovers.html';
+if(window.online){
+    if(navigator.userAgent.toLowerCase().match(/mobi/i)||navigator.userAgent.match(/iP/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
+        document.location.href='https://zone-x.herokuapp.com/mobile.html';
+    else document.location.href='https://zone-x.herokuapp.com/sevenclovers.html';
+}
+else document.location.href='sevenclovers.html';
 "><figure>
-<img src="http://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/tol.png"
+<img class="onoffline" src = "" name="tol.png"
      alt="{z<-z**3,z.real=log(abs(z.real))}">
 
 
@@ -45,13 +46,13 @@ else document.location.href='https://zone-x.herokuapp.com/sevenclovers.html';
     </figure>
 
 
-<a href="https://zone-x.herokuapp.com/zonex.html"><figure>
-    <img src="http://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@1/1.png"
+<a class="onoffline2" src = "" name="zonex.html"><figure>
+    <img  class="onoffline" src = "" name="1.png"
          alt="fly">
     <figcaption>Mandelbrot</figcaption></a>
 </figure>
-<a href="https://zone-x.herokuapp.com/pared.html"><figure>
-    <img src="http://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@1/2.png"
+<a href=class="onoffline2" src = "" name="pared.html"><figure>
+    <img class="onoffline" src = "" name="2.png"
          alt="fly">
     <figcaption>Essential</figcaption></a>
 </figure>
@@ -63,43 +64,43 @@ else document.location.href='https://zone-x.herokuapp.com/sevenclovers.html';
 <a href="https://biblehub.com/niv/revelation/5.htm">(Chapter 5 of The Revelation of John, The Holy Bible)</a>:
 <ul>
 <a href="throne.html"><figure>
-    <img src="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@1/3.png"
+    <img class="onoffline" src = "" name="3.png"
          alt="lamb">
     <figcaption>Throne</figcaption></a>
 </figure>
 
 <a href="fourcreatures.html"><figure>
-    <img src="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/fourcreatures.png"
+    <img class="onoffline" src = "" name="fourcreatures.png"
          alt="lamb">
     <figcaption>Four Creatures</figcaption></a>
 </figure>
 </ul>
 <ul>
 <a href="inhisimage.html"><figure>
-    <img src="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@1/4.png"
+    <img class="onoffline" src = "" name="4.png"
          alt="lamb">
     <figcaption>In His Image</figcaption></a>
 </figure>
 <a href="breathing.html"><figure>
-    <img src="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@1/breathing.png"
+    <img class="onoffline" src = "" name="breathing.png"
          alt="lamb">
     <figcaption>Breathing</figcaption></a>
 </figure>
 </ul>
 <ul>
  <a href="lamb.html"><figure>
-    <img src="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@1/5.png"
+    <img class="onoffline" src = "" name="5.png"
          alt="lamb">
    <figcaption>Static</figcaption></a>
 </figure>
 <a href="shiny.html"><figure>
-   <img src="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@1/shiny.png"
+   <img class="onoffline" src = "" name="shiny.png"
         alt="lamb">
   <figcaption>Shiny</figcaption></a>
 </figure>
 <a href="oi.html">
 <figure>
-    <img src="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@1/6.png"
+    <img class="onoffline" src = "" name="6.png"
          alt="lamb">
     <figcaption>Interactive</figcaption></a>
 </figure>
@@ -107,14 +108,14 @@ else document.location.href='https://zone-x.herokuapp.com/sevenclovers.html';
 <ul>
 <a href="144.html">
 <figure>
-    <img src="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/144.png"
+    <img class="onoffline" src = "" name="144.png"
          alt="aRe">
     <figcaption>First Fruits</figcaption></a>
 </figure>
 
 <a href="441.html">
 <figure>
-    <img src="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/441.png"
+    <img class="onoffline" src = "" name="441.png"
          alt="aRe">
     <figcaption>First Fruits</figcaption></a>
 </figure>
@@ -124,21 +125,21 @@ else document.location.href='https://zone-x.herokuapp.com/sevenclovers.html';
 
 <a href="bride.html">
 <figure>
-    <img src="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/Bride.png"
+    <img class="onoffline" src = "" name="Bride.png"
          alt="New Jerusalem">
     <figcaption>Bride</figcaption></a>
 </figure>
 
 <a href="hephzibah.html">
 <figure>
-    <img src="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/hephzibah.png"
+    <img class="onoffline" src = "" name="hephzibah.png"
          alt="New Jerusalem">
     <figcaption>Family</figcaption></a>
 </figure>
 
 </ul>
 </figure>
-<a href="https://zone-x.herokuapp.com/thronewitheq.html">Buggy</a>
+<a class="onoffline2" src = "" name="thronewitheq.html">Buggy</a>
 </ul>
 
 </li>
@@ -149,7 +150,7 @@ Email me: z1x1z@protonmail.com<p></p>
 <a href="ideas.html">e^2=emc^2=PVnRT=PVNkT</a><p></p>
 <a href="https://teespring.com/stores/zonex">
 <figure>
-    <img src="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@1/7.png"
+    <img class="onoffline" src = "" name="7.png"
          alt="Store">
     <figcaption>Store</figcaption></a>
 </figure><p></p>
@@ -158,6 +159,20 @@ Email me: z1x1z@protonmail.com<p></p>
 
 </h1>
 </ul>
+
+
+<script>
+    //this script sets all the images to online or offline depending on which you are.
+    nf = document.querySelectorAll('.onoffline');
+    for(var c = 0; c<nf.length; c++) if(window.online)
+        nf[c].src ="http://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/"+nf[c].name;
+        else nf[c].src =nf[c].name;
+nf = document.querySelectorAll('.onoffline2');
+        for(var c = 0; c<nf.length; c++) if(window.online)
+            nf[c].href ="https://zone-x.herokuapp.com/"+nf[c].name;
+            else nf[c].href =nf[c].name;
+</script>
+
 
 <!--raygunvvvv-->
 <script type="text/javascript">
