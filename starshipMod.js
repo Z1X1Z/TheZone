@@ -435,15 +435,17 @@ function animate( timestamp ) {
   if (micOn)analyser.getByteFrequencyData(  dataArray);
 
    var maxTestar=0.;
+   var minTestar=100000000000000;
    if(onO){
     for (var g=0; g<starArms; g++) if(testar[g]>maxTestar)maxTestar=testar[g];
+      for (var g=0; g<starArms; g++) if(testar[g]<minTestar)minTestar=testar[g];
 
 
 
     for (var g=starArms; g>0; g--)if(isFinite(testar[g])&&testar[g]!=0.) {
         var widt = .02;
         var arm =(mustarD[g]+19)%24./24.*pi*2.;
-        var lengt = testar[g]/maxTestar;
+        var lengt = (testar[g]-minTestar)/(maxTestar-minTestar);
         var vop = new THREE.Color();
        vop.setHSL((1-mustarD[g])%24./24., mustarD[g]/297,mustarD[g]/297);//297 is the highest heard note
                       material = new THREE.MeshBasicMaterial({
@@ -496,11 +498,12 @@ function animate( timestamp ) {
 else{
             var maxTestar=1.;
             for (var g=0; g<24; g++) if(testar[g]>maxTestar){maxTestar=testar[g];}
+           for (var g=0; g<24; g++) if(testar[g]<minTestar)minTestar=testar[g];
 
             for (var g=0; g<24; g++) {
             var widt = .02;
                 var rr= (g+14)%24;
-            var lengt = 1.*testar[(rr+5)%24]/maxTestar;
+            var lengt = (testar[(rr+5)%24]-minTestar)/(maxTestar-minTestar);
 
                 var vo = new THREE.Color();
                       vo.setHSL((20-rr)%24/24.,1.,.5);
