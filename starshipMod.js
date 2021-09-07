@@ -219,8 +219,8 @@ angle = ((angle-30+180)/360*2*pi);
    // angle = (maxInt24/24*2*pi);
 angle[f] = angle;
 
-  d_x = -Math.sin(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**2/4.;
-  d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**2/4.;
+  d_x = -Math.sin(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
+  d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
 
   bx=coordX+d_x*.007*window.movementRate*zoom;
   by=coordY+d_y*.007*window.movementRate*zoom;
