@@ -5,14 +5,14 @@ window.zoomCageSize = 2.0;
 zoomOutRatchetThreshold=1.;
 let radius = 4.;
 var mobileRez=1.;
-let fftSize=1024;
+let fftSize=2048;
 let trailLength = 288;
 let colorSound;
 let mobile = false;
 //vvvvbelow line from https://code-boxx.com/detect-mobile-device-javascript/
 if(navigator.userAgent.toLowerCase().match(/mobile/i)){
     mobileRez=.25;
-    fftSize=512;
+    fftSize=1024;
     trailLength = 75;
     mobile = true;
     zoomOutRatchetThreshold=3.;
@@ -117,7 +117,7 @@ function makeSpirograph(){
       len = 0;
       let adjConstant = 1./(spirafreq)*3.14*1.618/2.;
       if(Math.abs(inputData[0])>.0    )
-      for(var m = 0; m < 256; m++)
+      for(var m = 0; m < bufferSize; m++)
       {
               phase += adjConstant;//spira_pitch;
               spirray0[m]=-Math.sin(phase)*inputData[m];
@@ -194,10 +194,9 @@ if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisem
   pt = pb;
        if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5);}
 on = true;
-if (isFinite(pb) &&pb>0&& pb!=6.565706694547585 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
+if (isFinite(pb) &&pb>0&& pb!=4.64152157387662 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
 else if (reset>3){on = false;}
 else reset++
-
 if (trailDepth<trailLength)trailDepth++;
 let note = Math.log(pitc/440.0)/Math.log(Math.pow ( 2, (1/24.0)))+49;
 let inc = 8;
