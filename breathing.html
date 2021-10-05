@@ -81,8 +81,9 @@
 void main(){vec2 p=-(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,resolution.y)*12.,s=p;
        p.x+=.5;
        float l=0.,b=0.,m=0.,n=1.,r=0.,q=0.,qq=0.;
-       q=-zin(time*3.)/30.;qq=zin(time*(-coz(216.)/-coz(612.)-1.)*3.)/10.;//(un)comment this line to toggle dancing
-       vec4 heart=vec4(0.);
+     float gr =coz(216.)/coz(612.)-1.;
+     q=-zin(time*3.)/30.*zin(time*(gr-1.));qq=zin(time*(gr)*3.)/10.*zin(time*(-gr+1.));//(un)comment this line to toggle dancing
+                     vec4 heart=vec4(0.);
 
    //Mandelbrot\heart
        vec2 g=p;
