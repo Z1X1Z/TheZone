@@ -22,7 +22,13 @@
           <!--raygun^^^^-->
 </head>
 <body>
-    <div id="background_wrap" style="background-image: url('http://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/lionandlamb.png');"></div>
+    <div class=onofflineBG id="background_wrap"></div>
+    <script>
+        nf = document.querySelectorAll('.onofflineBG');
+        if(window.online)nf[0].style = "background-image: url('http://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/lionandlamb.png');"
+        else nf[0].style = "background-image: url('lionandlamb.png');"
+    </script>
+
 <h1>
     This is Manny, short for Immanuel.  He appeared face (of God) first from the Mandelbrot fractal while I was developing this singing game.  This website comes with love from and for Jesus who came in the flesh and in the blood.  To play cleave with love to good and hate evil.  Please share this free gift with everyone in the spirit of the gospel: in truth and with much good cheer.
     <p> <a href="keys.html">Hotkeys</a></p>
