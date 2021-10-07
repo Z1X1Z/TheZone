@@ -1,5 +1,4 @@
-//on our origins-holy new jerusalem
-
+on our origins-holy new jerusalem
 <html lang="en">
     <head>
         <title>Bride</title>
@@ -63,10 +62,22 @@ void main(){
     for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>20.)break;
     else {z=vec2((1./(z.x*z.x-z.y*z.y)-g.x),(4.0*z.x*z.y-g.y));
           n+=0.1;}
-gl_FragColor=vec4(l+n/2.+c,l+x+n+c,n+c,1.);}
+				          float r=0.;
+                  g=p/2.;
+				          g.x+=-.2;
+				          g.y/=1.14;
+                  z=g;
+		 if(g.x>.5 &&abs(g.y)<1.)for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7)r=clamp(1.4-abs(g.x-2.3)
+				                           *(1.-abs(g.y*g.x))-.07//(un)comment this line to toggle sleeves
+				                          ,0.,1.);
+				          else{
+				              z=1.1*vec2(-2./((1.2*z.x*z.x-1.8*z.y*z.y)-g.x),(3.*z.x*z.y-1.4*g.y));;
+				              z.x=pow(abs(z.x),.8);}
+
+gl_FragColor=vec4(l+n/2.+c,l+x+n+c,n+c,1.)+vec4(r)/4.;}
         </script>
-        
-        
+
+
         <script src="OFFLINEonlineSwitch.js"></script>
         <script>
             //vvvvmodified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
@@ -90,7 +101,7 @@ gl_FragColor=vec4(l+n/2.+c,l+x+n+c,n+c,1.);}
             };
         loadScript(window.three,load);
         //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
-        
+
 
             var container;
             var camera, scene, renderer;
@@ -103,7 +114,7 @@ if (x==1){rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
 else if (String.fromCharCode(event.which || event.keyCode)=="À")
     {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);
     }
-    
+
 
 }, false);
 
@@ -116,7 +127,7 @@ else if (String.fromCharCode(event.which || event.keyCode)=="À")
 
                 uniforms = {
         resolution: {value: new THREE.Vector2()},
-        
+
         time: {value: 1.0 },
       };
 
