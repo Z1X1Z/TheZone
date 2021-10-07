@@ -67,331 +67,345 @@
 		<script id="example" type="x-shader/x-fragment">
 
 
-          //this is a locally hosted GlSlsandbox.com, big thanks to Mr. Doobs 'n' crew for
-          //threeJS which this site uses, and for the sandbox where Manny was found
-          //you can use ctrl-a or cmd-a to jump to the bottom where all the fun is
-                      precision highp float;
-
-               uniform vec2 resolution;
-            uniform  float time;
-            int fourCreats=1;
-            vec2 coords=vec2(0.,0.);
-            float zoom=1.;
 
 
-            float zin(float x){return -sin(x);}
-            float coz(float x){return -cos(x);}
-                      const float gr=-cos(216.)/-cos(612.)-1.;
-                      vec3 bride(vec2 p,vec2 t){
-                                 float time2 = t.x;
-                                 float c=0.,k=0.,l=0.,x=0.,e=0.;
-                if(abs(p.y*p.y)+abs(p.x*p.x)<49.){
+		          //this is a locally hosted GlSlsandbox.com, big thanks to Mr. Doobs 'n' crew for
+		          //threeJS which this site uses, and for the sandbox where Manny was found
+		          //you can use ctrl-a or cmd-a to jump to the bottom where all the fun is
+		                      precision highp float;
 
-                             //vv body vv
-                                 vec2 g=p/3.;
-                                 g.x+=.5;
-                                 vec2 z=g;
-                                 for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>20.&&f>4)x+=z.y;
-                                 else {z=2.*vec2(-1./((z.x*z.x-1.44*z.y*z.y)-g.x*1.2-sin(time2*gr)/40.),(1.2*z.x*z.y-1.2*g.y-sin(time2/2.)/40.));
-//The Holy Bible Revelation 21:16 "The city was laid out like a square, as long as it was wide.
-    //He measured the city with the rod and found it to be 12,000 stadia in length,
-     //and as wide and high as it is long. The angel measured the wall using human measurement, and it was 144 cubits thick.
-                                       z.x=pow(abs(z.x),.777-sin(time2)/4.);}
-                                 g=p/4.;
-                                 //g.x-=.5;
-                                 z=g;
-                                 if(p.x>0.)for (int f=0;f<20;f+=1)if(abs(z.x+z.y)>200.&&f>4)c=1.;
-                                 else {z=3.*vec2(-1./((z.x*z.x-z.y*z.y)-g.x),(77.0*z.x*z.y-2.*g.y-sin(time2)/7.));
-                                       z.y = -1./z.y;}
-                             //vv head vv
-                                 g=p;
-                                 z=g;
-                                 for (int f=0;f<10;f+=1)if(abs(z.x+abs(z.y))>27.&&f>4)l=1.;
-                                 else{z=vec2(-1./((z.x*z.x-z.y*z.y)-g.x),(2.0*z.x*z.y-g.y-sin(time2*4.)/8.));
-                                      z*=pow(z.x,z.x);}
-                             //vv mandelbrot\heart vv
-                                 g=p*2.;
-                                 g.x-=6.;
-                                 z=g;
-                                 for (int f=0;f<50;f+=1)if(abs(z.x+z.y)>20.)break;
-                                 else {z=vec2(((z.x*z.x-z.y*z.y)-g.x-sin(time2*gr)/4.),(2.0*z.x*z.y-g.y-sin(time2/2.)/4.));
-                                              if(f>2)k+=0.02;}
-                             //vv eye lights vv
-                                 g=p;
-                                 z=g;
-
-                                 for (int f=0;f<4;f+=1)if(abs(z.x+z.y)>20.)break;
-                                 else {z=vec2((1./(z.x*z.x-z.y*z.y)-g.x-sin(time2*gr)/4.),(4.0*z.x*z.y-g.y-sin(time2*2.)/4.));
-                                       if(f>2)e+=0.3;}
-        }
-                             return vec3(l+c,l+x+c,l+c)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
+		               uniform vec2 resolution;
+		            uniform  float time;
+		            int fourCreats=1;
+		            vec2 coords=vec2(0.,0.);
+		            float zoom=1.;
 
 
-          vec3 heart(vec2 g, vec2 t){
-              g.x-=.5;
-              g.y*=-1.;
-              vec2 z=g.xy;
-          vec3 h=vec3(0.);
-              for (int f=0;f<60;f+=1)if(abs(z.y+z.x)>2.)h=vec3(0.);
-              else {z=vec2(((z.x*z.x-z.y*z.y)-g.x+t.x),(2.0*z.x*z.y-g.y+t.y*4.));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
-                h+=vec3(z.x*z.y,z.x,z.y)/21.;}
-          return h;
-          }
-              vec3 heartZoom(vec2 p, vec2 t){
-                  p.x+=.5;
-                  p+=coords.yx;
-                  vec2 z=p;
-                  vec3 h;
-                  for (int f=0;f<100;f+=1)if(abs(z.y+z.x)>20.)h=vec3(1.);
-                  else {z=vec2(((z.x*z.x-z.y*z.y)-p.x),(2.0*z.x*z.y-p.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
-                    h+=vec3(.0);}
-              return h;
-                              }
-          vec3 face(vec2 g, vec2 t){
-          float l = 1.;
-          g*=2.;
-          vec2 z=g.xy;
-          if(g.x*g.x+g.y*g.y<40.)for (int f=0;f<21;f+=1)if(abs(z.y)>19.&&(f==1||f>3)){
-              if (f==1){l=1.;break;}
-              l=1.-length(z)/40.;//clouds and face
-              break;}
-          else{
-              z=vec2(-1./(z.x*z.x-z.y*z.y-g.x),2.0*z.x*z.y-g.y);
-              l=abs(z.y)*6.;//smooths middle horn, removes some clouds
-              if(z.x>-.1)l=z.x*50.;}//face with closed small holes
-          return vec3(clamp(1.-l,0.,1.));
-          }
-     vec3 shiny(vec2 p,vec2 t){
-                p*=2.;
-                 vec2 s = p;
-                 float l=0., d = 0., negator = 1.;
-                     if(p.x*p.x+p.y*p.y*5.<50.){for (int f=0;f<21;f+=1)
-                     if(abs(s.y)>21.&&(f==1||f>2)){
-                         l=1.-length(s)/40.;
-                         if (f == 1)
-                                 negator=0.;
-                         else
-                                 d+=length(s)/10.;
-                         break;
-                     }
-                     else{
-                         s=vec2(-1./(s.x*s.x-s.y*s.y-p.x), 2.0*s.x*s.y-p.y);
-                         l=abs(s.y)*3.5;//refines middle horn, optional
-                         if(s.x>-.1)l=s.x*50.;//closes small holes
-                         d+=length(s)/10.;
-                     }}else negator=0.;
-                     if (l>.54) negator = 0.;
-                     return vec3(-sin(d +t.x*3.+6.28318/3.),-sin(d+t.x*3.+6.28318*5./3.),-sin(d+t.x*3.))*5.*negator;
-}
-    vec3 excelsior(vec2 p,vec2 t){
-                t.x*=-1.;
-                 p*=2.;
-                 vec2 s=p;
-                 vec3 l=vec3(.1,.5,1.1);
-                     for (int f=0;f<21;f+=1)
-                 if(abs(s.y)<21.){
-                  s=vec2(((s.x*s.x-s.y*s.y)-p.x),(2.0*s.x*s.y-p.y));
+		            float zin(float x){return -sin(x);}
+		            float coz(float x){return -cos(x);}
+		                      const float gr=-cos(216.)/-cos(612.)-1.;
+		                      vec3 bride(vec2 p,vec2 t){
+		                                 float time2 = t.x;
+		                                 float c=0.,k=0.,l=0.,x=0.,e=0.;
+		                if(abs(p.y*p.y)+abs(p.x*p.x)<49.){
 
-                     s.x=pow(s.x,-sin(t.x*2.+3.14))*sign(-s.x*-sin(-t.x*2.+3.14));
-                                      l=vec3(2.-abs(s.y*-sin(-t.x))*19.)*-sin(-t.x);//middle horn
-                     if(s.x>-.1)l=vec3(-sin(t.x)-(s.x*(100.-100.*-sin(t.x*2.-3.14))*-sin(t.x)));
-                     }
-             return vec3(1./l);
-     }
+		                             //vv body vv
+		                                 vec2 g=p/3.;
+		                                 g.x+=.5;
+		                                 vec2 z=g;
+		                                 for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>20.&&f>4)x+=z.y;
+		                                 else {z=2.*vec2(-1./((z.x*z.x-1.44*z.y*z.y)-g.x*1.2-sin(time2*gr)/40.),(1.2*z.x*z.y-1.2*g.y-sin(time2/2.)/40.));
+		//The Holy Bible Revelation 21:16 "The city was laid out like a square, as long as it was wide.
+		    //He measured the city with the rod and found it to be 12,000 stadia in length,
+		     //and as wide and high as it is long. The angel measured the wall using human measurement, and it was 144 cubits thick.
+		                                       z.x=pow(abs(z.x),.777-sin(time2)/4.);}
+		                                 g=p/4.;
+		                                 //g.x-=.5;
+		                                 z=g;
+		                                 if(p.x>0.)for (int f=0;f<20;f+=1)if(abs(z.x+z.y)>200.&&f>4)c=1.;
+		                                 else {z=3.*vec2(-1./((z.x*z.x-z.y*z.y)-g.x),(77.0*z.x*z.y-2.*g.y-sin(time2)/7.));
+		                                       z.y = -1./z.y;}
+		                             //vv head vv
+		                                 g=p;
+		                                 z=g;
+		                                 for (int f=0;f<10;f+=1)if(abs(z.x+abs(z.y))>27.&&f>4)l=1.;
+		                                 else{z=vec2(-1./((z.x*z.x-z.y*z.y)-g.x),(2.0*z.x*z.y-g.y-sin(time2*4.)/8.));
+		                                      z*=pow(z.x,z.x);}
+		                             //vv mandelbrot\heart vv
+		                                 g=p*2.;
+		                                 g.x-=6.;
+		                                 z=g;
+		                                 for (int f=0;f<50;f+=1)if(abs(z.x+z.y)>20.)break;
+		                                 else {z=vec2(((z.x*z.x-z.y*z.y)-g.x-sin(time2*gr)/4.),(2.0*z.x*z.y-g.y-sin(time2/2.)/4.));
+		                                              if(f>2)k+=0.02;}
+		                             //vv eye lights vv
+		                                 g=p;
+		                                 z=g;
 
-           vec3 man(vec2 p,vec2 t) {
-               p*=-2.;
-               vec2 s = p;
-               float d = 1.0, l;
-               float flip=-t.x;
-               if (flip<0.) p = -p;
-               if (abs(p.x*p.x+p.y*p.y)<2.0)for (int t = 0; t < 30; t++) {
-                       s = vec2(((s.x * s.x - s.y * s.y) +flip* p.x), (s.x * s.y + flip*p.y));
-                       s.x = 1./pow(s.x,flip)*sign(s.x*flip);
-                 l = length(s);
-                 d += l/25.;
-                   if (l >20.0&&t!=0)return vec3(-1.);}
-
-                  if (abs(p.x*p.x+p.y*p.y)<2.0)return vec3(1.);
-                  else return vec3(0.0);
-           }
+		                                 for (int f=0;f<4;f+=1)if(abs(z.x+z.y)>20.)break;
+		                                 else {z=vec2((1./(z.x*z.x-z.y*z.y)-g.x-sin(time2*gr)/4.),(4.0*z.x*z.y-g.y-sin(time2*2.)/4.));
+		                                       if(f>2)e+=0.3;}
+		        }
+		                             return vec3(l+c,l+x+c,l+c)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
 
 
-           vec3 eagle(vec2 p,vec2 t) {
-           p*=10.;
-               vec2 s = p;
-               float d = 0.0, l;
-               float flip=-t.x;
-               if (flip<0.) p = -p;
-               if(abs(6.*p.x*p.x+p.y*p.y*2.)<700.0)
-               for (int i = 0; i < 30; i++) {
-                   s=vec2(-(s.x * s.x - s.y * s.y) +flip* p.x, (s.x * s.y + t.y*p.y));
-                  /* if(b<=.5 ||rate == 0.)
-                       s.x = 1./s.x;
-                   else*/
-                   s.x = 1./pow(s.x,flip)*sign(s.x*flip);
-                     s.y = s.x*s.y;
-                   l = length(s);
-                   d +=2.;
-                   if (l >(20.0) ) if( float(i)>3.&&float(i)>3.)
-                       return vec3(1.-sin(d * 0.003)-.5,1.- sin(d * 0.9)-.5,1.- sin(d * 0.1)-.5)*3.;}
-               return vec3(.0);
-              }
+		          vec3 heart(vec2 g, vec2 t){
+		              g.x-=.5;
+		              g.y*=-1.;
+		              vec2 z=g.xy;
+		          vec3 h=vec3(0.);
+		              for (int f=0;f<60;f+=1)if(abs(z.y+z.x)>2.)h=vec3(0.);
+		              else {z=vec2(((z.x*z.x-z.y*z.y)-g.x+t.x),(2.0*z.x*z.y-g.y+t.y*4.));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
+		                h+=vec3(z.x*z.y,z.x,z.y)/21.;}
+		          return h;
+		          }
+		              vec3 heartZoom(vec2 p, vec2 t){
+		                  p.x+=.5;
+		                  p+=coords.yx;
+		                  vec2 z=p;
+		                  vec3 h;
+		                  for (int f=0;f<100;f+=1)if(abs(z.y+z.x)>20.)h=vec3(1.);
+		                  else {z=vec2(((z.x*z.x-z.y*z.y)-p.x),(2.0*z.x*z.y-p.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
+		                    h+=vec3(.0);}
+		              return h;
+		                              }
+		          vec3 face(vec2 g, vec2 t){
+		          float l = 1.;
+		          g*=2.;
+		          vec2 z=g.xy;
+		          if(g.x*g.x+g.y*g.y<40.)for (int f=0;f<21;f+=1)if(abs(z.y)>19.&&(f==1||f>3)){
+		              if (f==1){l=1.;break;}
+		              l=1.-length(z)/40.;//clouds and face
+		              break;}
+		          else{
+		              z=vec2(-1./(z.x*z.x-z.y*z.y-g.x),2.0*z.x*z.y-g.y);
+		              l=abs(z.y)*6.;//smooths middle horn, removes some clouds
+		              if(z.x>-.1)l=z.x*50.;}//face with closed small holes
+		          return vec3(clamp(1.-l,0.,1.));
+		          }
+		     vec3 shiny(vec2 p,vec2 t){
+		                p*=2.;
+		                 vec2 s = p;
+		                 float l=0., d = 0., negator = 1.;
+		                     if(p.x*p.x+p.y*p.y*5.<50.){for (int f=0;f<21;f+=1)
+		                     if(abs(s.y)>21.&&(f==1||f>2)){
+		                         l=1.-length(s)/40.;
+		                         if (f == 1)
+		                                 negator=0.;
+		                         else
+		                                 d+=length(s)/10.;
+		                         break;
+		                     }
+		                     else{
+		                         s=vec2(-1./(s.x*s.x-s.y*s.y-p.x), 2.0*s.x*s.y-p.y);
+		                         l=abs(s.y)*3.5;//refines middle horn, optional
+		                         if(s.x>-.1)l=s.x*50.;//closes small holes
+		                         d+=length(s)/10.;
+		                     }}else negator=0.;
+		                     if (l>.54) negator = 0.;
+		                     return vec3(-sin(d +t.x*3.+6.28318/3.),-sin(d+t.x*3.+6.28318*5./3.),-sin(d+t.x*3.))*5.*negator;
+		}
+		    vec3 excelsior(vec2 p,vec2 t){
+		                t.x*=-1.;
+		                 p*=2.;
+		                 vec2 s=p;
+		                 vec3 l=vec3(.1,.5,1.1);
+		                     for (int f=0;f<21;f+=1)
+		                 if(abs(s.y)<21.){
+		                  s=vec2(((s.x*s.x-s.y*s.y)-p.x),(2.0*s.x*s.y-p.y));
 
-            vec3 eaglePerched(vec2 p, vec2 t){
-                  p*=3.;
-                  vec2 s=p;
-                          float l = 0.;
-                          if(abs((p.x)*(p.x)+(p.y*p.y))<8.&&p.x<0.1)
-                  for (int f=0;f<20;f+=1)if(abs(s.x+s.y)>20.)l=1.;
-                  else {s=vec2(1./(s.x*s.x+s.y*s.y+p.x),-(2.0*s.x*s.y-p.y));
-                        l=-1.;}
-                  return vec3(l);
-              }
+		                     s.x=pow(s.x,-sin(t.x*2.+3.14))*sign(-s.x*-sin(-t.x*2.+3.14));
+		                                      l=vec3(2.-abs(s.y*-sin(-t.x))*19.)*-sin(-t.x);//middle horn
+		                     if(s.x>-.1)l=vec3(-sin(t.x)-(s.x*(100.-100.*-sin(t.x*2.-3.14))*-sin(t.x)));
+		                     }
+		             return vec3(1./l);
+		     }
 
-           vec3 lion(vec2 p,vec2 t) {
-               p*=-3.;
-             vec2 s = -p;
+		           vec3 man(vec2 p,vec2 t) {
+		               p*=-2.;
+		               vec2 s = p;
+		               float d = 1.0, l;
+		               float flip=-t.x;
+		               if (flip<0.) p = -p;
+		               if (abs(p.x*p.x+p.y*p.y)<2.0)for (int t = 0; t < 30; t++) {
+		                       s = vec2(((s.x * s.x - s.y * s.y) +flip* p.x), (s.x * s.y + flip*p.y));
+		                       s.x = 1./pow(s.x,flip)*sign(s.x*flip);
+		                 l = length(s);
+		                 d += l/25.;
+		                   if (l >20.0&&t!=0)return vec3(-1.);}
 
-          float d = 0.0, l;
-
-          float flip=t.x;
-          if (flip<0.) p = -p;
-          if(p.x*p.x*1.+p.y*p.y*2.<21.)
-          for (int t = 0; t < 30; t++) {
-              s = vec2(((s.x * s.x - s.y * s.y) +flip* p.x), (2.0* s.x * s.y + flip*p.y));
-              s/=2.;
-              s.x = pow(s.x,flip)*sign(s.x*flip);
-              l = length(s);
-              d += l/40.;
-
-              if (l >14.0 &&float(t)  >2.)
-                  return vec3(-sin(d +1.),-sin(d +1.8),-sin(d+3.));
-               ;  // return vec3(0.);
-          }
-          return vec3(.0);
-          }
-       vec3 ox(vec2 p,vec2 t) {
-          p*=-2.;
-             vec2 s = p;
-             float d = 0.0, l;
-               float flip=t.x;
-               if (flip<0.) p = -p;
-               if( (p.x+.25)*(p.x+.25)+p.y*p.y<1.||(p.x>0.&& p.x*p.x+p.y*p.y<7. ))
-             for (int t = 0; t < 30; t++) {
-               s = vec2(((s.x * s.x - s.y * s.y) +flip* p.x), (3.0* s.x * s.y + flip*p.y));
-                 s.x = pow(s.x,flip)*sign(s.x*flip);
-                 l = length(s);
-               d += l/10.;
-               if (l >14.0 )
-                   if (float(t)  >2.)
-                       return vec3(-sin(d +time*1./gr*2.),-sin(d +time*gr*2.),-sin(d *time*2.));
-                                 // return vec3(0.);
-             }
-             return vec3(.0);
-           }
-
-          vec3 torso(vec2 g, vec2 t){
-          float b = 0.;
-          vec2 z=g.xy;
-          if(g.x*g.x+g.y*g.y<40.)if (g.x>0.)for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4)b=abs(z.y)/77.;
-          else{
-              z=2.*vec2(-1./(z.x*z.x-z.y*z.y-g.x),(2.0*z.x*z.y-g.y+t.y));
-              z.x=sqrt(abs(z.x));}
-          return vec3(b,b/2.5,0.);
-          }
-          vec3 musculature(vec2 g, vec2 t){
-          float m=0.;
-          g.x+=.54;
-          vec2 z=g.xy;
-          if(g.x>1.25&&abs(g.y)<2.5)for(int f=0;f<15;f+=1)if(abs(z.y)>15.&&f>7&&f!=15)m=abs(z.y)/25.;
-          else {
-              z=1.3*vec2(-1.5/((z.x*z.x-2.*z.y*z.y)-g.x),(1.9*z.x*z.y-1.87*g.y+t.y/4.));
-              z.x=pow(abs(z.x),.57);}
-          return vec3(m,m,m/2.);
-          }
-          vec3 robe(vec2 g, vec2 t){
-          float r=0.;
-          g.x+=.05;
-          g.y/=1.14;
-          vec2 z=g.xy;
-          if(g.x>.5 &&abs(g.y)<1.)for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7)r=clamp(1.4-abs(g.x-2.3)
-                           //*(1.-abs(g.y*g.x))-.07//(un)comment this line to toggle sleeves
-                          ,0.,1.);
-          else{
-              z=1.1*vec2(-2./((z.x*z.x-1.8*z.y*z.y)-g.x),(3.*z.x*z.y-1.3*g.y+t.y));;
-              z.x=pow(abs(z.x),.8);}
-          return vec3(r);
-          }
-          vec3 legs(vec2 g, vec2 t){
-          float b=0.;
-          g/=2.;
-          vec2 z=g.xy;
-          if(g.x>.75&&g.x<1.7&&abs(g.y*g.x)<.54)for(int f=0;f<8;f+=1)if(abs(z.x)>52.&&f>1)b=abs(z.x)/70.;
-          else{
-              z=3.*vec2(-1./(z.x*z.x-z.y*z.y-g.x),77.*z.x*z.y-g.y+t.y);
-              z.y=-1./z.y;}
-          return vec3(b/2.,b,b/2.);
-          }
-        vec3 tol(vec2 f, vec2 coords){
-
-                        f+=coords.yx;
-                        vec2 s=f;
-                        for (int counter=0;counter<21;counter+=1)if(abs(s.y)<47.){
-                            s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y);//x**3
-                            s.x=log(abs(s.x));
-                            }
+		                  if (abs(p.x*p.x+p.y*p.y)<2.0)return vec3(1.);
+		                  else return vec3(0.0);
+		           }
 
 
+		           vec3 eagle(vec2 p,vec2 t) {
+		           p*=10.;
+		               vec2 s = p;
+		               float d = 0.0, l;
+		               float flip=-t.x;
+		               if (flip<0.) p = -p;
+		               if(abs(6.*p.x*p.x+p.y*p.y*2.)<700.0)
+		               for (int i = 0; i < 30; i++) {
+		                   s=vec2(-(s.x * s.x - s.y * s.y) +flip* p.x, (s.x * s.y + t.y*p.y));
+		                  /* if(b<=.5 ||rate == 0.)
+		                       s.x = 1./s.x;
+		                   else*/
+		                   s.x = 1./pow(s.x,flip)*sign(s.x*flip);
+		                     s.y = s.x*s.y;
+		                   l = length(s);
+		                   d +=2.;
+		                   if (l >(20.0) ) if( float(i)>3.&&float(i)>3.)
+		                       return vec3(1.-sin(d * 0.003)-.5,1.- sin(d * 0.9)-.5,1.- sin(d * 0.1)-.5)*3.;}
+		               return vec3(.0);
+		              }
 
-                        vec3 o=vec3(s.y/100.-s.x*s.y/888.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.);
+		            vec3 eaglePerched(vec2 p, vec2 t){
+		                  p*=3.;
+		                  vec2 s=p;
+		                          float l = 0.;
+		                          if(abs((p.x)*(p.x)+(p.y*p.y))<8.&&p.x<0.1)
+		                  for (int f=0;f<20;f+=1)if(abs(s.x+s.y)>20.)l=1.;
+		                  else {s=vec2(1./(s.x*s.x+s.y*s.y+p.x),-(2.0*s.x*s.y-p.y));
+		                        l=-1.;}
+		                  return vec3(l);
+		              }
 
-                        return clamp(o,0.,1.);}
+		           vec3 lion(vec2 p,vec2 t) {
+		               p*=-3.;
+		             vec2 s = -p;
 
-          vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t);}
-          vec3 bod(vec2 p, vec2 t){t*=zoom;return body(p,t)+heart(p,t);}
-          vec3 manny(vec2 p, vec2 t){return body(p,t)+heart(p,t)+face(p,vec2(0.))+shiny(p,vec2(time,0.));}
-          vec3 mannyX(vec2 p, vec2 t){return body(p,t)+excelsior(p,t);}
+		          float d = 0.0, l;
 
-          vec3 fourCreatures(vec2 p, vec2 t){
-                    vec2 spacing = vec2(5.,3.)*.7;
-                    p.x+=.5;
+		          float flip=t.x;
+		          if (flip<0.) p = -p;
+		          if(p.x*p.x*1.+p.y*p.y*2.<21.)
+		          for (int t = 0; t < 30; t++) {
+		              s = vec2(((s.x * s.x - s.y * s.y) +flip* p.x), (2.0* s.x * s.y + flip*p.y));
+		              s/=2.;
+		              s.x = pow(s.x,flip)*sign(s.x*flip);
+		              l = length(s);
+		              d += l/40.;
 
-                    return eaglePerched(p+spacing,vec2(-1.,0.))+bod(p+spacing,t)+
-                    lion(p+vec2(-spacing.x,spacing.y),vec2(-1.,0.))+bod(p+vec2(-spacing.x,spacing.y),t)+
-                    ox(p+vec2(spacing.x,-spacing.y),vec2(-1.,0.))+bod(p+vec2(spacing.x,-spacing.y),t)+
-                    man(p-spacing,vec2(-1.,0.))+bod(p-spacing,t)  ;
-        }
-          vec2 spin(vec2 p,float time_){
-          float pixelangle = -atan(p.y,p.x)-(time_)/6.+3.14/8.;
-          float pixeldistance = pow((p.y*p.y+p.x*p.x),.5);
-          vec2 pTiltCoord =-vec2(pixeldistance*-cos(pixelangle),pixeldistance*-sin(pixelangle));
-          return pTiltCoord;
-          }
+		              if (l >14.0 &&float(t)  >2.)
+		                  return vec3(-sin(d +1.),-sin(d +1.8),-sin(d+3.));
+		               ;  // return vec3(0.);
+		          }
+		          return vec3(.0);
+		          }
+		       vec3 ox(vec2 p,vec2 t) {
+		          p*=-2.;
+		             vec2 s = p;
+		             float d = 0.0, l;
+		               float flip=t.x;
+		               if (flip<0.) p = -p;
+		               if( (p.x+.25)*(p.x+.25)+p.y*p.y<1.||(p.x>0.&& p.x*p.x+p.y*p.y<7. ))
+		             for (int t = 0; t < 30; t++) {
+		               s = vec2(((s.x * s.x - s.y * s.y) +flip* p.x), (3.0* s.x * s.y + flip*p.y));
+		                 s.x = pow(s.x,flip)*sign(s.x*flip);
+		                 l = length(s);
+		               d += l/10.;
+		               if (l >14.0 )
+		                   if (float(t)  >2.)
+		                       return vec3(-sin(d +time*1./gr*2.),-sin(d +time*gr*2.),-sin(d *time*2.));
+		                                 // return vec3(0.);
+		             }
+		             return vec3(.0);
+		           }
 
-          //function library:
-//bride manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin
-    void main(){
-vec2 p = -(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,resolution.y)*30.;
-      p+=2.;
-      vec2 t = vec2(-sin(time)/20.,-sin(time*1.618)/40.);
-       vec3 fourCreatures=vec3(0.);
-      vec2 m = vec2(1.,2.);
-      vec2 g = p/2.;
-     g*=1.25;
-     g=(g-m);
-    fourCreatures+= lion(g,vec2(-1.))+bod(g,t);
-    g*=1.25;
-     g=(g-m);
-    fourCreatures+= ox(g,vec2(-1.))+bod(g,t);
-      g*=1.25;
-     g=(g-m);
-    fourCreatures+= man(g,vec2(-1.))+bod(g,t);
-      g*=1.25;
-     g=(g-m);
-    fourCreatures+= eaglePerched(g,vec2(-1.))+bod(g,t);
-       gl_FragColor=vec4(.5+bride(p,vec2(time,0.))+robe(p/2.,t)/2.+manny(p/2.+vec2(0.,2.5),t) +fourCreatures
-             ,1.);}
+		          vec3 torso(vec2 g, vec2 t){
+		          float b = 0.;
+		          vec2 z=g.xy;
+		          if(g.x*g.x+g.y*g.y<40.)if (g.x>0.)for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4)b=abs(z.y)/77.;
+		          else{
+		              z=2.*vec2(-1./(z.x*z.x-z.y*z.y-g.x),(2.0*z.x*z.y-g.y+t.y));
+		              z.x=sqrt(abs(z.x));}
+		          return vec3(b,b/2.5,0.);
+		          }
+		          vec3 musculature(vec2 g, vec2 t){
+		          float m=0.;
+		          g.x+=.54;
+		          vec2 z=g.xy;
+		          if(g.x>1.25&&abs(g.y)<2.5)for(int f=0;f<15;f+=1)if(abs(z.y)>15.&&f>7&&f!=15)m=abs(z.y)/25.;
+		          else {
+		              z=1.3*vec2(-1.5/((z.x*z.x-2.*z.y*z.y)-g.x),(1.9*z.x*z.y-1.87*g.y+t.y/4.));
+		              z.x=pow(abs(z.x),.57);}
+		          return vec3(m,m,m/2.);
+		          }
+		          vec3 robe(vec2 g, vec2 t){
+		          float r=0.;
+		          g.x+=.05;
+		          g.y/=1.14;
+		          vec2 z=g.xy;
+		          if(g.x>.5 &&abs(g.y)<1.)for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7)r=clamp(1.4-abs(g.x-2.3)
+		                           //*(1.-abs(g.y*g.x))-.07//(un)comment this line to toggle sleeves
+		                          ,0.,1.);
+		          else{
+		              z=1.1*vec2(-2./((z.x*z.x-1.8*z.y*z.y)-g.x),(3.*z.x*z.y-1.3*g.y+t.y));;
+		              z.x=pow(abs(z.x),.8);}
+		          return vec3(r);
+		          }
+		         vec3 robeW(vec2 g, vec2 t){
+		          float r=0.;
+		          g.x+=-.15;
+		          g.y/=1.14;
+		          vec2 z=g.xy;
+		          if(g.x>.5 &&abs(g.y)<1.)for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7)r=1.;
+		          else{
+		              z=1.1*vec2(-2./((1.2*z.x*z.x-1.8*z.y*z.y)-g.x),(3.*z.x*z.y-1.4*g.y+t.y));;
+		              z.x=pow(abs(z.x),.8);}
+		          return vec3(r);
+		          }
+		          vec3 legs(vec2 g, vec2 t){
+		          float b=0.;
+		          g/=2.;
+		          vec2 z=g.xy;
+		          if(g.x>.75&&g.x<1.7&&abs(g.y*g.x)<.54)for(int f=0;f<8;f+=1)if(abs(z.x)>52.&&f>1)b=abs(z.x)/70.;
+		          else{
+		              z=3.*vec2(-1./(z.x*z.x-z.y*z.y-g.x),77.*z.x*z.y-g.y+t.y);
+		              z.y=-1./z.y;}
+		          return vec3(b/2.,b,b/2.);
+		          }
+		        vec3 tol(vec2 f, vec2 coords){
+
+		                        f+=coords.yx;
+		                        vec2 s=f;
+		                        for (int counter=0;counter<21;counter+=1)if(abs(s.y)<47.){
+		                            s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y);//x**3
+		                            s.x=log(abs(s.x));
+		                            }
+
+
+
+		                        vec3 o=vec3(s.y/100.-s.x*s.y/888.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.);
+
+		                        return clamp(o,0.,1.);}
+
+		          vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t);}
+		          vec3 bod(vec2 p, vec2 t){t*=zoom;return body(p,t)+heart(p,t);}
+		          vec3 manny(vec2 p, vec2 t){return body(p,t)+heart(p,t)+face(p,vec2(0.))+shiny(p,vec2(time,0.));}
+		          vec3 mannyX(vec2 p, vec2 t){return body(p,t)+excelsior(p,t);}
+
+		          vec3 fourCreatures(vec2 p, vec2 t){
+		                    vec2 spacing = vec2(5.,3.)*.7;
+		                    p.x+=.5;
+
+		                    return eaglePerched(p+spacing,vec2(-1.,0.))+bod(p+spacing,t)+
+		                    lion(p+vec2(-spacing.x,spacing.y),vec2(-1.,0.))+bod(p+vec2(-spacing.x,spacing.y),t)+
+		                    ox(p+vec2(spacing.x,-spacing.y),vec2(-1.,0.))+bod(p+vec2(spacing.x,-spacing.y),t)+
+		                    man(p-spacing,vec2(-1.,0.))+bod(p-spacing,t)  ;
+		        }
+		          vec2 spin(vec2 p,float time_){
+		          float pixelangle = -atan(p.y,p.x)-(time_)/6.+3.14/8.;
+		          float pixeldistance = pow((p.y*p.y+p.x*p.x),.5);
+		          vec2 pTiltCoord =-vec2(pixeldistance*-cos(pixelangle),pixeldistance*-sin(pixelangle));
+		          return pTiltCoord;
+		          }
+
+		          //function library:
+		//bride manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin
+		    void main(){
+		vec2 p = -(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,resolution.y)*30.;
+		      p+=2.;
+		      vec2 t = vec2(-sin(time)/20.,-sin(time*1.618)/40.);
+		       vec3 fourCreatures=vec3(0.);
+		      vec2 m = vec2(1.,2.);
+		      vec2 g = p/2.;
+		     g*=1.25;
+		     g=(g-m);
+		    fourCreatures+= lion(g,vec2(-1.))+bod(g,t);
+		    g*=1.25;
+		     g=(g-m);
+		    fourCreatures+= ox(g,vec2(-1.))+bod(g,t);
+		      g*=1.25;
+		     g=(g-m);
+		    fourCreatures+= man(g,vec2(-1.))+bod(g,t);
+		      g*=1.25;
+		     g=(g-m);
+		    fourCreatures+= eaglePerched(g,vec2(-1.))+bod(g,t);
+		       gl_FragColor=vec4(.5+bride(p,vec2(time,0.))+robeW(p/2.,t)/3.+manny(p/2.+vec2(0.,2.5),t) +fourCreatures
+		             ,1.);}
+		        
         </script>
 
 		<script id="fragmentShader" type="x-shader/x-fragment">
