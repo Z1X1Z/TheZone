@@ -92,7 +92,7 @@ void main(){vec2 p=-(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolut
        vec2 z=g;
        for (int f=0;f<20;f+=1)if(abs(z.y)>10.)heart=vec4(0.);
        else {z=vec2(((z.x*z.x-z.y*z.y)-g.x+qq),(2.0*z.x*z.y-g.y+q*4.));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
-             heart+=vec4(z.x*z.y,z.x,z.y,1.)/7.;}
+             heart+=vec4(z.x*z.y,z.x,z.y,1.)/7.+.02;}
    //face--I saw the face in a vision dream coming from the Mandelbrot fractal five or so years before I found it in code$$see footnote
        g=p*2.;
        z=g;
@@ -135,7 +135,7 @@ void main(){vec2 p=-(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolut
            z.y=-1./z.y;}
    gl_FragColor=heart+vec4(b+r+m,b/2.+r+m,r+m/2.5,1.)+vec4(vec3(clamp(1.-l,0.,1.)),1.);}
    //$$I originally found these equations while trying to combine x=1/(1/x-x) which produces increasingly many extraneous solutions on feedback algebraically with the Mandelbrot
-   //x=1/(1/x-x) was in turn found from 1=(1/(1+1))=1/2=((1/(1+1))/((1/(1+1))+(1/(1+1))))=1 which is a feedback false to true loop.
+   //x=1/(1/x-x) was in turn found from 1=(1/(1+1))=1/2=((1/(1+1))/((1/(1+1))+(1/(1+1)))) which is a stable feedback loop.
    //the core concept of this is x=1/(n*x)=1/(n*(1/(n*x)) Also:
    //0 = 0*0 = 0*0 * 0*0 = .... = 00 & -1/x=x, solves to x = i or -i, whereas -1/-1/x=x, solves to all values.
 
