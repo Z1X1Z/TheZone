@@ -49,8 +49,9 @@
            l = length(s);
            d += l/25.;
              if (l >20.0&&t!=0)
-                 return vec3(-d);}}
-             return vec3(-0.);
+                 return vec3(-2.*-sin(time));}
+             return vec3(2.*-sin(time));}
+            return vec3(0.);
      }
      vec3 eagle(vec2 p) {
          p=-p.yx;
