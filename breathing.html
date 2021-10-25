@@ -93,7 +93,7 @@ void main(){vec2 p=-(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolut
        for (int f=0;f<20;f+=1)if(abs(z.y)>10.)heart=vec4(0.);
        else {z=vec2(((z.x*z.x-z.y*z.y)-g.x+qq),(2.0*z.x*z.y-g.y+q*4.));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
              heart+=vec4(z.x*z.y,z.x,z.y,1.)/7.+.02;}
-   //face--I saw the face in a vision dream coming from the Mandelbrot fractal five or so years before I found it in code$$see footnote
+   //face--I saw the face in a vision dream coming from the Mandelbrot fractal just about exactly (give or take a few months) 7 years before I found it in code$$see footnote
        g=p*2.;
        z=g;
        for (int f=0;f<21;f+=1)if(abs(z.y)<19.){
