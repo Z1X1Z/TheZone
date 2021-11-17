@@ -135,19 +135,13 @@ vec3 bride2manny(vec2 p,vec2 t){
 
 
                          //vv mandelbrot\heart vv
-                             g=p*2.;
-                             g.x-=4.;
+                             g=p*1.;
+                             g.x-=2.;
                              z=g;
                              for (int f=0;f<50;f+=1)if(abs(z.x+z.y)>20.)break;
                              else {z=vec2(((z.x*z.x-z.y*z.y)-g.x-sin(time2*gr)/4.),(2.0*z.x*z.y-g.y-sin(time2/2.)/4.));
                                           if(f>2)k+=0.02;}
-                         //vv eye lights vv
-                             g=p;
-                             z=g;
-
-                             for (int f=0;f<4;f+=1)if(abs(z.x+z.y)>20.)break;
-                             else {z=vec2((1./(z.x*z.x-z.y*z.y)-g.x-sin(time2*gr)/4.),(4.0*z.x*z.y-g.y-sin(time2*2.)/4.));
-                                   if(f>2)e+=0.3;}
+                   
     }
                          return head+vec3(c,x+c,c)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
 
