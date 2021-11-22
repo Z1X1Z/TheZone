@@ -329,7 +329,8 @@ option {
               }
              vec3 robeW(vec2 g, vec2 t){
               float r=0.;
-              g.x+=-.15;
+              g.x*=1.2;
+              g.x+=-.5;
               g.y/=1.14;
               vec2 z=g.xy;
 if(g.x>.5 &&abs(g.y)<1.)for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7)r=clamp(1.4-abs(g.x-2.3)
