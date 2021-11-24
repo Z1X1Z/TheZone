@@ -598,9 +598,9 @@ while(loopLimit>15){
 
 let audioX;
 let micOn = false;
-async function startMic() {
-                          let stream = null;
+                 var stream = null;
 
+async function startMic() {
   stream = await navigator.mediaDevices.getUserMedia({audio: true}).then(
       function (stream)
       {
@@ -615,7 +615,7 @@ async function startMic() {
       } );
 }
                  async function restartMic() {
-                          let stream = null;
+                          stream=null;
                           audioX = null;
                           analyser = null;
                           source = null;
