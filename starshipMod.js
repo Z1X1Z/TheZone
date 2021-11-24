@@ -347,8 +347,18 @@ function onWindowResize() {
 }
 
 let point = [];
+var lastFrame;
+var audioNotWorking=0;
 function animate( timestamp ) {
+  lastFrame = new Float32Array(bufferSize);
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
+    var sameCheck=0;
+    for(var n = 0; n<inputData.length; n++)if(lastFrame[n]==inputData[n])sameCheck++;
+    if(sameCheck==inputData.length) audioNotWorking++
+    else audioNotWorking=0.
+        if(micOn)if(audioNotWorking>100)restartMic();
+            lastFrame=inputData
+
     spiral_compress();
     move();
     if(on) makeSpirograph();
@@ -589,7 +599,8 @@ while(loopLimit>15){
 let audioX;
 let micOn = false;
 async function startMic() {
-  let stream = null;
+                          let stream = null;
+
   stream = await navigator.mediaDevices.getUserMedia({audio: true}).then(
       function (stream)
       {
@@ -603,6 +614,21 @@ async function startMic() {
         init();
       } );
 }
+                 async function restartMic() {
+                          let stream = null;
+
+                          stream = await navigator.mediaDevices.getUserMedia({audio: true}).then(
+                              function (stream)
+                              {
+                                micOn = true;
+                                audioX = new AudioContext();
+                                analyser = audioX.createAnalyser();
+                                source = audioX.createMediaStreamSource( stream );
+                                source.connect(analyser);
+                                analyser.fftSize = fftSize;
+                                dataArray = new Uint8Array( bufferSize );
+                              } );
+                 }
 
 
 //begin MIT license, code from https://github.com/adamski/pitch_detector
