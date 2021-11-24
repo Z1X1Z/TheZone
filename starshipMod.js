@@ -616,7 +616,9 @@ async function startMic() {
 }
                  async function restartMic() {
                           let stream = null;
-
+                          audioX = null;
+                          analyser = null;
+                          source = null;
                           stream = await navigator.mediaDevices.getUserMedia({audio: true}).then(
                               function (stream)
                               {
