@@ -355,8 +355,8 @@ function animate( timestamp ) {
     var sameCheck=0;
     for(var n = 0; n<inputData.length; n++)if(lastFrame[n]==inputData[n])sameCheck++;
     if(sameCheck==inputData.length) audioNotWorking++
-    else audioNotWorking=0.
-        if(micOn)if(audioNotWorking>100)restartMic();
+    else audioNotWorking=0;
+        if(micOn)if(audioNotWorking>100){restartMic();audioNotWorking=0}
             lastFrame=inputData
 
     spiral_compress();
