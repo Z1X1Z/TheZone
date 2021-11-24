@@ -345,7 +345,17 @@ function onWindowResize() {
     uniforms.resolution.value.y = window.innerHeight;
     renderer.setSize( window.innerWidth, window.innerHeight );
 }
-
+                  // https://stackoverflow.com/questions/11642926/stop-close-webcam-stream-which-is-opened-by-navigator-mediadevices-getusermedia//
+                      function stopAudioOnly(stream) {
+                          stream.getTracks().forEach(function(track) {
+                              if (track.readyState == 'live' && track.kind === 'audio') {
+                                  track.stop();
+                              }
+                          });
+                      }
+                  
+                  
+                  
 let point = [];
 var lastFrame;
 var audioNotWorking=0;
@@ -356,7 +366,13 @@ function animate( timestamp ) {
     for(var n = 0; n<inputData.length; n++)if(lastFrame[n]==inputData[n])sameCheck++;
     if(sameCheck==inputData.length) audioNotWorking++
     else audioNotWorking=0;
-        if(micOn)if(audioNotWorking>100){restartMic();audioNotWorking=0}
+        if(micOn)if(audioNotWorking>100){
+
+            stopAudioOnly(stream) ;
+                
+                restartMic();audioNotWorking=0}
+            
+            
             lastFrame=inputData
 
     spiral_compress();
@@ -615,8 +631,8 @@ async function startMic() {
       } );
 }
                  async function restartMic() {
-                          stream=null;
-                          audioX = null;
+                    
+                              audioX = null;
                           analyser = null;
                           source = null;
                           stream = await navigator.mediaDevices.getUserMedia({audio: true}).then(
