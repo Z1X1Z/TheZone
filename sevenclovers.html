@@ -135,8 +135,8 @@ vec3 bride2manny(vec2 p,vec2 t){
 
 
                          //vv mandelbrot\heart vv
-                             g=p*1.5;
-                             g.x-=3.;
+                                              g=p*(2.+(-sin(t.y)-1.)/2.*1.);
+                                              g.x-=6.+(-sin(t.y)-1.)/2.*5.5;
                              z=g;
                              for (int f=0;f<50;f+=1)if(abs(z.x+z.y)>20.)break;
                              else {z=vec2(((z.x*z.x-z.y*z.y)-g.x-sin(time2*gr)/4.),(2.0*z.x*z.y-g.y-sin(time2/2.)/4.));
