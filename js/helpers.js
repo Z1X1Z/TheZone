@@ -1,4 +1,3 @@
-
 var saveButton, forkButton, parentButton, diffButton;
 var effect_owner=false;
 var original_code='';
