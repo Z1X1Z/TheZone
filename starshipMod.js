@@ -56,6 +56,8 @@ window.addEventListener('keydown', function(event) {
       else if (String.fromCharCode(event.which || event.keyCode)=="F") uniforms[ "fourCreats" ].value *= -1;
       else if (String.fromCharCode(event.which || event.keyCode)=="K") uniforms[ "colorCombo" ].value = 13;
       else if (String.fromCharCode(event.which || event.keyCode)=="X") uniforms[ "colorCombo" ].value = 14;
+      else if (String.fromCharCode(event.which || event.keyCode)=="L") uniforms[ "colorCombo" ].value = 15;
+
       else if (String.fromCharCode(event.which || event.keyCode)=="Z") {
         if (pointed==true)pointed=false;
         else pointed = true;}
