@@ -1,8 +1,7 @@
-
 <!DOCTYPE html>
-<html lang="en"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-		<title>zGLSL Sandbox</title>
+<html lang="en">
+	<head>
+		<title>GLSL Sandbox</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
 		<style>
@@ -53,40 +52,33 @@
 
 		</style>
 	</head>
-	<body style="cursor: none;">
+	<body>
 
-		<link rel="stylesheet" href="GLSL%20Sandbox_files/codemirror.css">
-		<link rel="stylesheet" href="GLSL%20Sandbox_files/default.css">
+		<link rel="stylesheet" href="css/codemirror.css">
+		<link rel="stylesheet" href="css/default.css">
 
-		<script src="GLSL%20Sandbox_files/lzma.js"></script>
-		<script src="GLSL%20Sandbox_files/jquery.js"></script>
-		<script src="GLSL%20Sandbox_files/helpers.js"></script>
-		<script src="GLSL%20Sandbox_files/codemirror.js"></script>
-		<script src="GLSL%20Sandbox_files/glsl.js"></script>
+		<script src="js/lzma.js"></script>
+		<script src='js/jquery.js'></script>
+		<script src='js/helpers.js'></script>
+		<script src="js/codemirror.js"></script>
+		<script src="js/glsl.js"></script>
 
 		<script id="example" type="x-shader/x-fragment">
-          
-          //this is a locally hosted GlSlsandbox.com, big thanks
-          //to the devolopers of GlSl Sandbox who enabled me to find manny with their website:
-             //@thevaw @feiss @mrdoob, @mrkishi, @p01, @alteredq, @kusmabite and @emackey
-              //thanks to co3moz for the Mandelbrot shader where manny appeared
-         //also, thanks for threeJS for without these programs which this site uses our world would be a drabber place
-          precision highp float;
-          uniform vec2 resolution;
-          uniform float time;
-          void main(){vec2 p=-(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,resolution.y)*16.-vec2(.5,0.),s=p;
-              float l=0.;
-              for (int f=0;f<21;f+=1)if(abs(s.y)<19.){
-                  s=vec2(-1./(s.x*s.x-s.y*s.y-p.x), 2.0*s.x*s.y-p.y);//this is {s^2-p;s.real=-1./s.real}
-                  if(s.x>-.1&&f!=0)l=s.x*(120.-sin(time)*80.);}
-          gl_FragColor=vec4(l);}
-        </script>
+
+            precision highp float;
+            uniform vec2 resolution;
+            uniform float time;
+            void main(){vec2 p=-(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,resolution.y)*16.-vec2(.5,0.),s=p;
+                float l=0.;
+                for (int f=0;f<21;f+=1)if(abs(s.y)<19.){
+                    s=vec2(-1./(s.x*s.x-s.y*s.y-p.x), 2.0*s.x*s.y-p.y);//this is {s^2-p;s.real=-1./s.real}
+                    if(s.x>-.1&&f!=0)l=s.x*(120.-sin(time)*80.);}
+            gl_FragColor=vec4(l);}
+</script>
 
 		<script id="fragmentShader" type="x-shader/x-fragment">
 
-			#ifdef GL_ES
 			precision mediump float;
-			#endif
 
 			uniform vec2 resolution;
 			uniform sampler2D texture;
@@ -245,7 +237,7 @@
 						code.getWrapperElement().style.display = '';
 						compileButton.style.visibility = 'visible';
 						set_save_button('hidden');
-						set_parent_button('visible');
+						set_parent_button('hidden');
 
 					}
 
@@ -297,7 +289,7 @@
 					alert("WebGL not supported, but code will be shown.");
 
 				} else {
-					
+
 					// enable dFdx, dFdy, fwidth
 					gl.getExtension('OES_standard_derivatives');
 
@@ -350,7 +342,7 @@
 						event.preventDefault();
 					}
 				}, false );
-				
+
 				if (gl) {
 
 					var surfaceMouseDown = function ( event ) {
@@ -386,7 +378,7 @@
 					canvas.addEventListener( 'contextmenu', noContextMenu, false);
 					panButton.addEventListener( 'contextmenu', noContextMenu, false);
 				}
-				
+
 				var clientXLast, clientYLast;
 
 				document.addEventListener( 'mousemove', function ( event ) {
@@ -403,10 +395,10 @@
 					stopHideUI();
 
 					var codeElement, dx, dy;
-					
+
 					parameters.mouseX = clientX / window.innerWidth;
 					parameters.mouseY = 1 - clientY / window.innerHeight;
-						
+
 					if (resizer.isResizing) {
 
 						resizer.currentWidth = Math.max(Math.min(clientX - resizer.offsetMouseX, resizer.maxWidth), resizer.minWidth);
@@ -516,9 +508,9 @@
 				if (gl) {
 
 					surface.width = surface.height * parameters.screenWidth / parameters.screenHeight;
-					
+
 					var halfWidth = surface.width * 0.5, halfHeight = surface.height * 0.5;
-					
+
 					gl.bindBuffer( gl.ARRAY_BUFFER, surface.buffer );
 					gl.bufferData( gl.ARRAY_BUFFER, new Float32Array( [
 						surface.centerX - halfWidth, surface.centerY - halfHeight,
@@ -541,11 +533,11 @@
 			}
 
 			function compile() {
-			
+
 				if (!gl) {
-				
+
 					if (!getWebGL) {
-					
+
 						getWebGL = true;
 						compileButton.addEventListener( 'click', function ( event ) {
 
@@ -556,10 +548,10 @@
 						compileButton.style.color = '#ff0000';
 						compileButton.textContent = 'WebGL not supported!';
 						set_save_button('hidden');
-						
+
 					}
 					return;
-					
+
 				}
 
 				var program = gl.createProgram();
@@ -635,7 +627,7 @@
 			}
 
 			function compileScreenProgram() {
-			
+
 				if (!gl) { return; }
 
 				var program = gl.createProgram();
@@ -739,7 +731,7 @@
 
 
 			//
-			
+
 			function htmlEncode(str){
 
 				return String(str)
@@ -754,7 +746,7 @@
 			//
 
 			function createShader( src, type ) {
-			
+
 				var shader = gl.createShader( type );
 				var line, lineNum, lineError, index = 0, indexEnd;
 
@@ -772,7 +764,7 @@
 				if ( !gl.getShaderParameter( shader, gl.COMPILE_STATUS ) ) {
 
 					var error = gl.getShaderInfoLog( shader );
-					
+
 					// Remove trailing linefeed, for FireFox's benefit.
 					while ((error.length > 1) && (error.charCodeAt(error.length - 1) < 32)) {
 						error = error.substring(0, error.length - 1);
@@ -850,11 +842,11 @@
 				computeSurfaceCorners();
 
 				if (gl) {
-				
+
 					gl.viewport( 0, 0, canvas.width, canvas.height );
 
 					createRenderTargets();
-					
+
 				}
 			}
 
@@ -885,7 +877,7 @@
 
 				gl.bindBuffer( gl.ARRAY_BUFFER, surface.buffer );
 				gl.vertexAttribPointer( surface.positionAttribute, 2, gl.FLOAT, false, 0, 0 );
-				
+
 				gl.bindBuffer( gl.ARRAY_BUFFER, buffer );
 				gl.vertexAttribPointer( vertexPosition, 2, gl.FLOAT, false, 0, 0 );
 
@@ -908,7 +900,7 @@
 
 				gl.bindBuffer( gl.ARRAY_BUFFER, buffer );
 				gl.vertexAttribPointer( screenVertexPosition, 2, gl.FLOAT, false, 0, 0 );
-				
+
 				gl.activeTexture( gl.TEXTURE1 );
 				gl.bindTexture( gl.TEXTURE_2D, frontTarget.texture );
 
@@ -927,8 +919,7 @@
 
 			}
 
-		</script><canvas style="display: block; width: 1440px; height: 773px;" width="1440" height="773"></canvas><div style="position: absolute; top: 25px; left: 25px; width: 1393px; display: none;"><div style="float: right;"><button style="cursor: move; display: none;" title="Pan: left-drag, Zoom: right-drag. Use 'hide code' for a large pan/zoom area.">pan/zoom</button><button title="Press F11 to enter or leave fullscreen mode">fullscreen</button></div><button>show code</button><select><option>0.5</option><option selected="selected">1</option><option>2</option><option>4</option><option>8</option></select><button title="" style="color: rgb(0, 255, 0); visibility: hidden;">compiled successfully</button><button style="visibility: hidden;">fork</button><a style="visibility: visible;" >parent</a><a style="visibility: visible;">diff</a></div><div class="CodeMirror" style="top: 75px; left: 25px; width: 1365px; height: 648px; display: none;"><div style="overflow: hidden; position: relative; width: 1px; height: 0px; top: 0px; left: 0px;"><textarea style="position: absolute; width: 10000px;" autocorrect="off" autocapitalize="off" wrap="off"></textarea></div><div class="CodeMirror-scroll cm-s-default"><div style="position: relative; height: 436px;"><div style="position: relative; top: 0px;"><div class="CodeMirror-gutter" style="height: 2198px;"><div class="CodeMirror-gutter-text"></div></div></div></div></div></div><div class="resizer"></div></div>
+		</script>
 
-	
-
-</body></html>
+	</body>
+</html>
