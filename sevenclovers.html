@@ -436,7 +436,7 @@ vec3 bride2manny(vec2 p,vec2 t){
 vec3 xx(vec2 s, vec2 t){
       float l=0.;
       for (int f=0;f<40;f+=1)if(abs(s.y)<19.){
-          s=vec2((s.x*s.x-s.y*s.y)-t.x, 2.0*s.x*s.y)-t.y;//this is {s^2-p;s.real=-1./s.real}
+          s=vec2((s.x*s.x-s.y*s.y)-t.x, 2.0*s.x*s.y)-t.y;//this is {s^2}
   s.x=log(abs(s.x));
 }
 
