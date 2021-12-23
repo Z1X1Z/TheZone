@@ -13,7 +13,7 @@ let mobile = false;
 if(navigator.userAgent.toLowerCase().match(/mobile/i)){
     mobileRez=.25;
     fftSize=1024;
-    trailLength = 75;
+    trailLength = 150;
     mobile = true;
     zoomOutRatchetThreshold=3.;
 
@@ -22,7 +22,7 @@ else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 {
     mobileRez=.5;
     fftSize=1024;
-    trailLength = 125;
+    trailLength = 150;
     zoomOutRatchetThreshold=3.;
 
 
@@ -55,8 +55,10 @@ window.addEventListener('keydown', function(event) {
       else if (String.fromCharCode(event.which || event.keyCode)=="A") uniforms[ "colorCombo" ].value = 11;
       else if (String.fromCharCode(event.which || event.keyCode)=="F") uniforms[ "fourCreats" ].value *= -1;
       else if (String.fromCharCode(event.which || event.keyCode)=="K") uniforms[ "colorCombo" ].value = 13;
-      else if (String.fromCharCode(event.which || event.keyCode)=="X") uniforms[ "colorCombo" ].value = 14;
-      else if (String.fromCharCode(event.which || event.keyCode)=="L") uniforms[ "colorCombo" ].value = 15;
+      else if (String.fromCharCode(event.which || event.keyCode)=="S") uniforms[ "colorCombo" ].value = 14;
+      else if (String.fromCharCode(event.which || event.keyCode)=="X") uniforms[ "colorCombo" ].value = 15;
+      else if (String.fromCharCode(event.which || event.keyCode)=="B") uniforms[ "colorCombo" ].value = 16;
+
 
       else if (String.fromCharCode(event.which || event.keyCode)=="Z") {
         if (pointed==true)pointed=false;
@@ -220,8 +222,10 @@ angle = ((angle-30+180)/360*2*pi);
    // angle = (maxInt24/24*2*pi);
 angle[f] = angle;
 
-  d_x = -Math.sin(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
-  d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
+  //d_x = -Math.sin(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
+  //d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
+         d_x = -Math.sin(-angle)*15.;
+         d_y = -Math.cos(-angle)*15.;
 
   bx=coordX+d_x*.007*window.movementRate*zoom;
   by=coordY+d_y*.007*window.movementRate*zoom;
