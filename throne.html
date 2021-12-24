@@ -479,26 +479,26 @@ void main( )
     
   vec2 a = resolution.xy / min(resolution.x, resolution.y);
 
-  vec2 p = (vUv.xy - .5)*20.*a ;
+  vec2 p = (vUv.xy - .5)*20.;
   p = -p.yx;
                 float flip=-sin(rate*time_+3.14);
 
+   // p/=1.1715;
     
-    p/=1.1715;
-  float f = sin(time_ * 0.10 + 99.0) * 0.5 + 0.5;
+  float vertshift =-.5;
+p.x-= vertshift;
+float shift = 6.;
 
-        float vertshift =-1.5;
-    p.x-= vertshift;
-    float shift = 6.+creaturesSpacing;
-  float size = creaturesSize;
-  float vertSqueeze = 3.5;
-  float bottomDown = .5;
-  vec2 oxCoord = -vec2(p.x+shift-vertSqueeze+vertshift,p.y+shift)*size;
-vec2 lionCoord = -vec2(p.x-shift+vertSqueeze+bottomDown+vertshift,p.y-shift)*size;
-    vec2 eagleCoord = -vec2(p.x-shift+vertSqueeze+bottomDown+vertshift,p.y+shift)*size;
-    vec2 manCoord = -vec2(p.x+shift-vertSqueeze+vertshift,p.y-shift)*size;
-    
-    float variate = 1.;
+float size = 1.;(-sin(time)+3.)/2.3;
+vec2 adj=-a.yx/1.2*size;
+vec2 oxCoord = vec2(p.x-shift,p.y-shift)*adj;
+vec2 lionCoord = vec2(p.x+shift,p.y+shift+vertshift)*adj;
+vec2 eagleCoord = vec2(p.x-shift,p.y+shift +vertshift)*adj;
+vec2 manCoord = vec2(p.x+shift,p.y-shift)*adj;
+
+p*=a.yx;
+
+float variate = 1.;
 
     bool starter = true, radar = false;
         for(float rad = 0.; rad<7.; rad++)
