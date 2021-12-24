@@ -387,7 +387,7 @@ vec2 s=p;
 float l=0.;
 	    float m = 0.;
 	    float k = 0.;
-	    if(abs((p.x)*(p.x)+(p.y*p.y))<50.)
+	    if(abs((p.x)*(p.x)+(p.y*p.y))<50.&&p.x<0.)
 for (int f=0;f<20;f+=1)if(abs(s.x+s.y)>20. && f>1)l=1.;
 	else{ s=vec2(-1./(s.x*s.x+s.y*s.y+p.x),-(2.0*s.x/s.y+p.y));
 		m += abs(s.x+s.y);
@@ -472,32 +472,31 @@ return clamp(chair,0.,1.);
 }
 
 void main( )
-{
-	frame = 0.;
-
-	time_ = time;
-	if (b == 2.0) rate = 0.;
-	
+{    frame = 0.;
+    
+    time_ = time;
+    if (b == 2.0) rate = 0.;
+    
   vec2 a = resolution.xy / min(resolution.x, resolution.y);
 
   vec2 p = (vUv.xy - .5)*20.*a ;
   p = -p.yx;
-				float flip=-sin(rate*time_+3.14);
+                float flip=-sin(rate*time_+3.14);
 
-	
-	p/=1.1715;
+    
+    p/=1.1715;
   float f = sin(time_ * 0.10 + 99.0) * 0.5 + 0.5;
 
-		float vertshift =-1.5;
-	p.x-= vertshift;
-	float shift = 6.+creaturesSpacing;
+        float vertshift =-1.5;
+    p.x-= vertshift;
+    float shift = 6.+creaturesSpacing;
   float size = creaturesSize;
   float vertSqueeze = 3.5;
   float bottomDown = .5;
   vec2 oxCoord = -vec2(p.x+shift-vertSqueeze+vertshift,p.y+shift)*size;
 vec2 lionCoord = -vec2(p.x-shift+vertSqueeze+bottomDown+vertshift,p.y-shift)*size;
-	vec2 eagleCoord = -vec2(p.x-shift+vertSqueeze+bottomDown+vertshift,p.y+shift)*size;
-	vec2 manCoord = -vec2(p.x+shift-vertSqueeze+vertshift,p.y-shift)*size;
+    vec2 eagleCoord = -vec2(p.x-shift+vertSqueeze+bottomDown+vertshift,p.y+shift)*size;
+    vec2 manCoord = -vec2(p.x+shift-vertSqueeze+vertshift,p.y-shift)*size;
     
     float variate = 1.;
 
@@ -510,47 +509,47 @@ vec2 lionCoord = -vec2(p.x-shift+vertSqueeze+bottomDown+vertshift,p.y-shift)*siz
         radar = true;
         variate+=-(1.618*variate)*.5-sign(mod(variate,1.));
     }
-		float ratio = min(resolution.x, resolution.y)/max(resolution.x, resolution.y)*2.;
-	float wingScale = 4./ratio;
+        float ratio = min(resolution.x, resolution.y)/max(resolution.x, resolution.y)*2.;
+    float wingScale = 4./ratio;
 
 
-	float pixelangle = atan(lionCoord.y,lionCoord.x)-sin(time_)/6.+3.14/8.;
-	float pixeldistance = pow((lionCoord.y*lionCoord.y+lionCoord.x*lionCoord.x),.5);
-	vec2 lionTiltCoord = -vec2(pixeldistance*ratio*2.*-cos(pixelangle),pixeldistance*ratio*2.*-sin(pixelangle));
+    float pixelangle = atan(lionCoord.y,lionCoord.x)-sin(time_)/6.+3.14/8.;
+    float pixeldistance = pow((lionCoord.y*lionCoord.y+lionCoord.x*lionCoord.x),.5);
+    vec2 lionTiltCoord = -vec2(pixeldistance*ratio*2.*-cos(pixelangle),pixeldistance*ratio*2.*-sin(pixelangle));
   vec3 wingss = wings(oxCoord/wingScale)+wings(lionCoord/wingScale)+wings(eagleCoord/wingScale)+wings(manCoord/wingScale);
-	vec3 swordDelimited = vec3(0.);
-	if (p.x >2.)swordDelimited=1.*sword(vec2(p.x,-p.y),false);
+    vec3 swordDelimited = vec3(0.);
+    if (p.x >2.)swordDelimited=1.*sword(vec2(p.x,-p.y),false);
 
     vec3 zeroLamb = vec3(1.0);
-	
+    
 vec3 zeroCenter =vec3(1.0);
-	float dist = length(p);
-		float distM = length(manCoord);
-		float distL = length(lionCoord);
-		float distO = length(oxCoord);
-		float distE = length(eagleCoord);
+    float dist = length(p);
+        float distM = length(manCoord);
+        float distL = length(lionCoord);
+        float distO = length(oxCoord);
+        float distE = length(eagleCoord);
 if (dist<6.){
     zeroLamb = vec3(dist/3.);
-		 if(dist<3. ){
+         if(dist<3. ){
     zeroLamb = vec3(1.-dist/3.);
-	 zeroCenter = zeroLamb; 
+     zeroCenter = zeroLamb;
 
 }
 
 }
-			else if(distM<3. )
-	 zeroCenter -= vec3(.7); 
-				
-	
-			else if(distL<3. )
-	 zeroCenter -= vec3(.7); 
-			else if(distO<3. )
-	 zeroCenter -= vec3(.7); 
+            else if(distM<3. )
+     zeroCenter -= vec3(.7);
+                
+    
+            else if(distL<3. )
+     zeroCenter -= vec3(.7);
+            else if(distO<3. )
+     zeroCenter -= vec3(.7);
 
-			else if(distE<3. )
-	 zeroCenter -= vec3(.7); 
-				
-    vec3 throne = 
+            else if(distE<3. )
+     zeroCenter -= vec3(.7);
+                
+    vec3 throne =
          -lambFace*eyes(vec2(p.x-2.,p.y))*2.+
 
 
@@ -559,14 +558,14 @@ if (dist<6.){
 +lion(lionTiltCoord/2.,false)*lionFace
             +eagle(ratio*4.115*eagleCoord, false)*eagleFace
             +man(ratio*.5*manCoord,false)*manFace
-	+ wingss*5.;
-		   float temporalVar = (time_);
-    vec3	colorBuffer ,colorBufferOriginal ;
+    + wingss*5.;
+           float temporalVar = (time_);
+    vec3    colorBuffer ,colorBufferOriginal ;
             vec2 bbbb = p;
 
- 	
+     
     
-				float timeBuffer = time_;
+                float timeBuffer = time_;
 
     vec4 creatureWings;
     for (int m = 0; m<2; m++)
@@ -605,9 +604,9 @@ if (dist<6.){
 
 	vec2 g= p;
   vec2 s = g;
+                     vec3 litLamp = flames(vec2(p.x-1.,p.y))*10.+lamp(-vec2(p.x-8.,p.y),false);
 
-		  filterable+=clamp(body(p),0.,1.);
-		  
+		  filterable+=clamp(body(p),0.,1.)+vec4(litLamp,1.);
 		  
 
  gl_FragColor= tol
@@ -677,7 +676,6 @@ else if (String.fromCharCode(event.which || event.keyCode)=="M")		{	invert *= -1
 
 
 var uniforms;
-init();
 			function init() {
 
 				container = document.getElementById( 'container' );
