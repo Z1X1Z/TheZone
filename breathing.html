@@ -85,7 +85,7 @@
             for (int f=0;f<20;f+=1)if(abs(z.y)>10.)heart=vec4(0.);
             else {z=vec2(((z.x*z.x-z.y*z.y)-g.x+qq),(2.0*z.x*z.y-g.y+q*4.));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
                   heart+=vec4(z.x*z.y,z.x,z.y,1.)/7.+.02;}
-        //face--I saw the face in a vision dream coming from the Mandelbrot fractal just about exactly (give or take a few months) 7 years before I found it in code$$see footnote
+        //face--I saw the face in a vision dream coming from the Mandelbrot fractal (2012-2013) before I found it in code(about february 25th of 2019)$$see footnote
             g=p*2.;
             z=g;
             for (int f=0;f<21;f+=1)if(abs(z.y)<19.){
@@ -98,7 +98,7 @@
             else{
                 z=2.*vec2(-1./(z.x*z.x-z.y*z.y-g.x+qq),(2.0*z.x*z.y-g.y+q));//z<=z^2-g; z.real<=-1/z.real; z*=2;
                 z.x=sqrt(abs(z.x));}//z.real<=squareroot(z.real)
-        //musculature
+        //musculature-from woman
             g=p;
             g.x+=.5;
             z=g;
@@ -118,7 +118,7 @@
                 z=1.1*vec2(-2./((z.x*z.x-1.8*z.y*z.y)-g.x+qq),(3.*z.x*z.y-1.3*g.y+q));;
                 z.x=pow(abs(z.x),.8);}
 
-        //legs--I found these about hours before finding the body but left them, recovering them from memory
+        //legs--I found these about a few hours before finding the body but left them, recovering them from memory
             g=p/2.;
             z=g;
             if(g.x>.75&&g.x<1.7&&abs(g.y*g.x)<.54)for(int f=0;f<8;f+=1)if(abs(z.x)>52.&&f>1)b=abs(z.x)/100.;
