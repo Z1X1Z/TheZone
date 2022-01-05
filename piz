@@ -1,3 +1,4 @@
+
 //x=1+1/(1+x) an equation of the golden ratio
 //nx=1/(1+nx) phi/x (basically just y=mx+b with a -1/ hoverboard) 
 //x=1/(n+n**2x)
@@ -20,4 +21,4 @@ float l=1.,t=1.;
 	    }
 	    
 
-	    gl_FragColor=vec4(l,t+s.x,s.y,1.);}
+	    gl_FragColor=vec4(l+t,l,t+s.x+s.y,1.);}
