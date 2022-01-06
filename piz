@@ -5,7 +5,7 @@
 //s=p+p/(p+p**2*s)//this is a big leap
 //small mistake in the real imaginary coordinate in original calculation put “+p.y*s.y*s.y+s.y” on the imaginary side when it should be real.  
 //Same with no negatiziation(meaning no imaginaries, just two reals, no i).
-//also techni
+//also technically I don't know if you can seperate the real and imaginary like this, but oh well!
 precision lowp float;
 uniform vec2 resolution;
 void main(){vec2 p=-((gl_FragCoord.yx/resolution.yx)-.5)/
