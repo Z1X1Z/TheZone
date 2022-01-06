@@ -2,9 +2,10 @@
 //x=1+1/(1+x) an equation of the golden ratio
 //nx=1/(1+nx) phi/x (basically just y=mx+b with a -1/ hoverboard) 
 //x=1/(n+n**2x)
-//s=p+p/(p+p**2*s)
+//s=p+p/(p+p**2*s)//this is a big leap
 //small mistake in the real imaginary coordinate in original calculation put “+p.y*s.y*s.y+s.y” on the imaginary side when it should be real.  
 //Same with no negatiziation(meaning no imaginaries, just two reals, no i).
+//also techni
 precision lowp float;
 uniform vec2 resolution;
 void main(){vec2 p=-((gl_FragCoord.yx/resolution.yx)-.5)/
@@ -16,7 +17,7 @@ float l=1.,t=1.;
 	    {
 		    s=(p+p/vec2(p.x*s.x*s.x+p.x*s.y*s.y+2.*p.y*s.x*s.y+s.x, 2.*p.x*s.x*p.y+p.y*s.x*s.x+p.y*s.y*s.y+s.y))/s;
 		//s.y=log(s.y);
-		   if (abs(s.y/log(s.x))<1.)l-=.06; //lense
+		   if (abs(s.y/log(s.x))<1.)l-=.02; //lense
 		    		   if (abs(s.y/(s.x))<1.)t-=.06;//lense too
 	    }
 	    
