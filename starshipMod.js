@@ -198,8 +198,9 @@ if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisem
   pt = pb;
        if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5);}
 on = true;
-if (isFinite(pb) &&pb>0&& pb!=4.64152157387662 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
-else if (reset>3){on = false;}
+if (isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1) {  console.log(pb);spirafreq=pt;pitc =pb;reset =0;}
+else if (reset>3){on = false;
+}
 else reset++
 if (trailDepth<trailLength)trailDepth++;
 let note = Math.log(pitc/440.0)/Math.log(Math.pow ( 2, (1/24.0)))+49;
