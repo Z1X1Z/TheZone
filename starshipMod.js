@@ -198,7 +198,7 @@ if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisem
   pt = pb;
        if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5);}
 on = true;
-if (isFinite(pb) &&pb>0&& pb=4.64152157387662 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
+if (isFinite(pb) &&pb>0&& pb!=4.64152157387662 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
 else if (reset>3){on = false;}
 else reset++
 if (trailDepth<trailLength)trailDepth++;
@@ -229,7 +229,7 @@ angle[f] = angle;
 
   bx=coordX+d_x*.007*window.movementRate*zoom;
   by=coordY+d_y*.007*window.movementRate*zoom;
-if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold||on){
+if(isFinite(d_x)&&isFinite(d_y)){
            if(on){
                coordX=bx;
                coordY=by;
@@ -353,18 +353,8 @@ function onWindowResize() {
 }
 
 let point = [];
-var interval=.033;
 function animate( timestamp ) {
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
-  if(mobile)
-            {
-            if (rez<=1.&&(timestamp-interval)/1000.>30.)
-            {      rez = (window.devicePixelRatio/(1.-(timestamp-interval)/1000.)/(33./1000.)*.01);renderer.setPixelRatio(rez);}
-            else if (rez>=.25&&(timestamp-interval)/1000.<30.)             {     rez = (window.devicePixelRatio/(1.-(timestamp-interval)/1000.)/(33./1000.)*.01);renderer.setPixelRatio( rez);}
-        }
-                                         console.log(rez)
-            interval = timestamp;
-
     spiral_compress();
     move();
     if(on) makeSpirograph();
