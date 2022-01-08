@@ -20,6 +20,7 @@ if(navigator.userAgent.toLowerCase().match(/mobile/i)){
 }
 else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 {
+    mobile = true;
     mobileRez=.5;
     fftSize=1024;
     trailLength = 150;
@@ -229,7 +230,7 @@ angle[f] = angle;
 
   bx=coordX+d_x*.007*window.movementRate*zoom;
   by=coordY+d_y*.007*window.movementRate*zoom;
-if(isFinite(d_x)&&isFinite(d_y)){
+if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold||on){
            if(on){
                coordX=bx;
                coordY=by;
@@ -353,8 +354,18 @@ function onWindowResize() {
 }
 
 let point = [];
+var interval=.033;
 function animate( timestamp ) {
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
+  if(mobile)
+            {
+            if (rez<=1.&&(timestamp-interval)/1000.>30.)
+            {      rez = (window.devicePixelRatio/(1.-(timestamp-interval)/1000.)/(33./1000.)*.01);renderer.setPixelRatio(rez);}
+            else if (rez>=.25&&(timestamp-interval)/1000.<30.)             {     rez = (window.devicePixelRatio/(1.-(timestamp-interval)/1000.)/(33./1000.)*.01);renderer.setPixelRatio( rez);}
+        }
+                                         console.log(rez)
+            interval = timestamp;
+
     spiral_compress();
     move();
     if(on) makeSpirograph();
