@@ -230,7 +230,7 @@ angle[f] = angle;
 
   bx=coordX+d_x*.007*window.movementRate*zoom;
   by=coordY+d_y*.007*window.movementRate*zoom;
-if(isFinite(d_x)&&isFinite(d_y)){
+if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold){
            if(on){
                coordX=bx;
                coordY=by;
