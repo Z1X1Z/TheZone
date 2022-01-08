@@ -198,7 +198,7 @@ if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisem
   pt = pb;
        if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5);}
 on = true;
-if (isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1) {  spirafreq=pt;pitc =pb;reset =0;}
+if (isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) {  spirafreq=pt;pitc =pb;reset =0;}
 else if (reset>3){on = false;
 }
 else reset++
