@@ -20,7 +20,6 @@ if(navigator.userAgent.toLowerCase().match(/mobile/i)){
 }
 else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 {
-    mobile = true;
     mobileRez=.5;
     fftSize=1024;
     trailLength = 150;
@@ -199,7 +198,7 @@ if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisem
   pt = pb;
        if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5);}
 on = true;
-if (isFinite(pb) &&pb>0&& abs(pb-4.64152157387662)=<.00000001 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
+if (isFinite(pb) &&pb>0&& pb=4.64152157387662 &&pb!=1) {spirafreq=pt;pitc =pb;reset =0;}
 else if (reset>3){on = false;}
 else reset++
 if (trailDepth<trailLength)trailDepth++;
