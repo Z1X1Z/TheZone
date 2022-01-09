@@ -507,7 +507,7 @@ vec3 xtol(vec2 s, vec2 t){
           if(metronome<1.) {mny = bride2manny(p*2.,vec2(time2dance))+robeL(p,vec2(time2dance));m=mny;}
           else   mny = mannyX(p,t);
           gl_FragColor=vec4(mny+creatures+b+
-                            clamp(zoomer-(m.r+m.b+m.g+creatures.r+creatures.g+creatures.b)*100.,.0,1.)
+                            clamp((zoomer+robeL(p,vec2(time2dance)))-(m.r+m.b+m.g+creatures.r+creatures.g+creatures.b)*100.,.0,1.)
                     ,1.);}
         </script>
         <script src="starshipMod.js"></script>
