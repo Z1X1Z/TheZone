@@ -82,7 +82,7 @@
         }
                              return vec3(l+c,l+x+c,l+c)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
 vec3 bride2manny(vec2 p,vec2 t){
-                                     p/=1.5;
+                                     
                              float time2 = t.x;
                              float c=0.,k=0.,l=0.,x=0.,e=0.;
                              vec3 head;
@@ -145,7 +145,20 @@ vec3 bride2manny(vec2 p,vec2 t){
     }
                          return head+vec3(c,x+c,c)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
 
-
+      vec3 robeL(vec2 g, vec2 t){
+      float r=0.;
+      g.x*=(1.2+(-sin(t.y)-1.)/2.*.2);
+      g.x+=(-.5-(-sin(t.y)-1.)/2.*.5);
+      g.y/=1.14;
+      vec2 z=g.xy;
+      if(g.x>.5 &&abs(g.y)<(.8-(-sin(t.y)-1.)/2.*1.0))for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7)r=clamp(1.4-abs(g.x-2.3)
+                       *(1.-abs(g.y*g.x))-.07//(un)comment this line to toggle sleeves
+                      ,0.,1.);
+      else{
+          z=1.1*vec2(-2./(((1.2+(-sin(t.y)-1.)/2.*.1)*z.x*z.x-1.8*z.y*z.y)-g.x),(3.*z.x*z.y-(1.4+(-sin(t.y)-1.)/2.*.1)*g.y));;
+          z.x=pow(abs(z.x),.8);}
+      return vec3(r);
+      }
 
           vec3 heart(vec2 g, vec2 t){
               g.x-=.5;
@@ -491,7 +504,7 @@ vec3 xtol(vec2 s, vec2 t){
           vec3 creatures,b;
           if(fourCreats<0){creatures=fourCreatures((bg*zoom+coords.yx)*4.,t);  b=bride((bg*zoom+coords.yx)*12.,vec2(time2dance));}
           vec3 mny,m=vec3(0.);
-          if(metronome<1.) {mny = bride2manny(p*3.,vec2(time2dance));m=mny;}
+          if(metronome<1.) {mny = bride2manny(p*2.,vec2(time2dance))+robeL(p,vec2(time2dance));m=mny;}
           else   mny = mannyX(p,t);
           gl_FragColor=vec4(mny+creatures+b+
                             clamp(zoomer-(m.r+m.b+m.g+creatures.r+creatures.g+creatures.b)*100.,.0,1.)
