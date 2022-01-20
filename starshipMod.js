@@ -29,7 +29,7 @@ else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 }
 
 //key press handling vvvv
-let cored=false;
+let cored=true;
 var pointed=false;
 var rez = window.devicePixelRatio*mobileRez;
 window.addEventListener('keydown', function(event) {
