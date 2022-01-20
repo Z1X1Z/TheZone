@@ -1,7 +1,7 @@
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
 window.movementRate=1.1;
-window.zoomCageSize = 2.0;
+window.zoomCageSize = .25;
 zoomOutRatchetThreshold=1.;
 let radius = 4.;
 var mobileRez=1.;
@@ -29,6 +29,7 @@ else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 }
 
 //key press handling vvvv
+let cored=false;
 var pointed=false;
 var rez = window.devicePixelRatio*mobileRez;
 window.addEventListener('keydown', function(event) {
@@ -58,6 +59,7 @@ window.addEventListener('keydown', function(event) {
       else if (String.fromCharCode(event.which || event.keyCode)=="S") uniforms[ "colorCombo" ].value = 14;
       else if (String.fromCharCode(event.which || event.keyCode)=="X") uniforms[ "colorCombo" ].value = 15;
       else if (String.fromCharCode(event.which || event.keyCode)=="B") uniforms[ "colorCombo" ].value = 16;
+      else if (String.fromCharCode(event.which || event.keyCode)=="P"){ cored=!cored;uniforms[ "cored" ].value = 0;;}
 
 
       else if (String.fromCharCode(event.which || event.keyCode)=="Z") {
@@ -91,8 +93,12 @@ window.addEventListener('keydown', function(event) {
             window.zoomCageSize=.125;
             //window.movementRate=.5;
         }
+            else if(uniforms["colorCombo"].value == 11){
+                window.zoomCageSize=1.;
+                //window.movementRate=.5;
+            }
         else
-        {            window.zoomCageSize=2.;
+        {            window.zoomCageSize=.5;
             window.movementRate=1.;}
         //console.log(String.fromCharCode(event.which || event.keyCode));
 
@@ -319,6 +325,8 @@ materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
       time: {value: 1.0 },
       zoom: {value: 1.0 },
       colorCombo: {value: 1 },
+        cored: {value: 0 },
+
       fourCreats: {value: 1 },
       metronome: {value: .99 },
       time2dance: {value: 1.0 },
@@ -423,14 +431,20 @@ function animate( timestamp ) {
 
   if (zoom>.000001&&totalAMP*2048./fftSize>zoomOutRatchetThreshold)zoom /= 1.0404;//+Math.abs(totalAMP/numberOfBins)/15.;
   else if(zoom<1.)zoom *= 1.044;
-
+  
   if (zoom>1.)zoom=1.;
 
   if (zoom>=1.)zoomOutEngage = false;
-  else if ( zoom<.000001)zoomOutEngage = true;
+      else if ( zoom<.000001)zoomOutEngage = true;
 
   if (zoomOutEngage == true)zoom *= 1.44;
-
+      if(cored==true)
+      {
+      let zoombuffer= zoom*3/2.*3/2.;
+      uniforms[ "cored" ].value = 0;
+      while(zoombuffer<3./2){zoombuffer*=3./2;uniforms[ "cored" ].value += 1;}
+            }
+      
   uniforms.coords.value.x = coordX;
   uniforms.coords.value.y = coordY;
   uniforms[ "zoom" ].value = zoom;
