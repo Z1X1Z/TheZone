@@ -63,6 +63,7 @@ window.addEventListener('keydown', function(event) {
       else if (String.fromCharCode(event.which || event.keyCode)=="B") uniforms[ "colorCombo" ].value = 16;
       else if (String.fromCharCode(event.which || event.keyCode)=="P"){ cored=!cored;uniforms[ "cored" ].value = 0;}
       else if (String.fromCharCode(event.which || event.keyCode)=="L"){ zoomAtl41=!zoomAtl41;cored=true;}
+      else if (!(String.fromCharCode(event.which || event.keyCode)=="L")){zoomAtl41=false;}
 
 
       else if (String.fromCharCode(event.which || event.keyCode)=="Z") {
@@ -236,7 +237,7 @@ angle[f] = angle;
   //d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
          d_x = -Math.sin(-angle)*15.;
          d_y = -Math.cos(-angle)*15.;
-         if(zoomAtl41){d_x*=4.;d_y*=4.;}
+         if(zoomAtl41){d_x*=2.;d_y*=2.;}
   bx=coordX+d_x*.007*window.movementRate*zoom;
   by=coordY+d_y*.007*window.movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold){
@@ -453,7 +454,8 @@ function animate( timestamp ) {
   uniforms.coords.value.x = coordX;
   uniforms.coords.value.y = coordY;
             
-            if(zoomAtl41)zoom=.001;
+            if(zoomAtl41){zoom=.05;  uniforms[ "cored" ].value = 120;}
+
   uniforms[ "zoom" ].value = zoom;
   uniforms[ "time" ].value = timestamp/1000.;
   uniforms[ "time2dance" ].value += Math.abs(totalAMP/numberOfBins*2.);
