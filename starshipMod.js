@@ -30,7 +30,9 @@ else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 
 //key press handling vvvv
 let cored=true;
+let zoomAt717=false;
 var pointed=false;
+let zoomAtl41=false;//watch for the 1 and the l
 var rez = window.devicePixelRatio*mobileRez;
 window.addEventListener('keydown', function(event) {
       var x = parseInt(String.fromCharCode(event.which || event.keyCode));
@@ -59,7 +61,8 @@ window.addEventListener('keydown', function(event) {
       else if (String.fromCharCode(event.which || event.keyCode)=="S") uniforms[ "colorCombo" ].value = 14;
       else if (String.fromCharCode(event.which || event.keyCode)=="X") uniforms[ "colorCombo" ].value = 15;
       else if (String.fromCharCode(event.which || event.keyCode)=="B") uniforms[ "colorCombo" ].value = 16;
-      else if (String.fromCharCode(event.which || event.keyCode)=="P"){ cored=!cored;uniforms[ "cored" ].value = 0;;}
+      else if (String.fromCharCode(event.which || event.keyCode)=="P"){ cored=!cored;uniforms[ "cored" ].value = 0;}
+      else if (String.fromCharCode(event.which || event.keyCode)=="L"){ zoomAtl41=!zoomAtl41;cored=true;}
 
 
       else if (String.fromCharCode(event.which || event.keyCode)=="Z") {
@@ -233,7 +236,7 @@ angle[f] = angle;
   //d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
          d_x = -Math.sin(-angle)*15.;
          d_y = -Math.cos(-angle)*15.;
-
+         if(zoomAtl41){d_x*=4.;d_y*=4.;}
   bx=coordX+d_x*.007*window.movementRate*zoom;
   by=coordY+d_y*.007*window.movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold){
@@ -444,9 +447,13 @@ function animate( timestamp ) {
       uniforms[ "cored" ].value = 0;
       while(zoombuffer<3./2){zoombuffer*=3./2;uniforms[ "cored" ].value += 1;}
             }
-      
+
+         
+
   uniforms.coords.value.x = coordX;
   uniforms.coords.value.y = coordY;
+            
+            if(zoomAtl41)zoom=.001;
   uniforms[ "zoom" ].value = zoom;
   uniforms[ "time" ].value = timestamp/1000.;
   uniforms[ "time2dance" ].value += Math.abs(totalAMP/numberOfBins*2.);
