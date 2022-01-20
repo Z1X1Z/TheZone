@@ -63,7 +63,6 @@ window.addEventListener('keydown', function(event) {
       else if (String.fromCharCode(event.which || event.keyCode)=="B") uniforms[ "colorCombo" ].value = 16;
       else if (String.fromCharCode(event.which || event.keyCode)=="P"){ cored=!cored;uniforms[ "cored" ].value = 0;}
       else if (String.fromCharCode(event.which || event.keyCode)=="L"){ zoomAtl41=!zoomAtl41;cored=true;}
-      else if (!(String.fromCharCode(event.which || event.keyCode)=="L")){zoomAtl41=false;}
 
 
       else if (String.fromCharCode(event.which || event.keyCode)=="Z") {
@@ -81,12 +80,13 @@ window.addEventListener('keydown', function(event) {
         zoomOutRatchetThreshold+= .777;//character for '
         console.log("zoomOutRatchetThreshold: "+zoomOutRatchetThreshold+ ", totalMicAmp: "+totalAMP );
       }
-      else if (String.fromCharCode(event.which || event.keyCode)=="O"||String.fromCharCode(event.which || event.keyCode)==" ")
+      else if (String.fromCharCode(event.which || event.keyCode)==" ")
       {
         if (onO)onO=false;
         else onO = true;
       }
 
+if (!(String.fromCharCode(event.which || event.keyCode)=="L")){zoomAtl41=false;}
 
 
         if(uniforms["colorCombo"].value == 13){
