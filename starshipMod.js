@@ -16,7 +16,6 @@ if(navigator.userAgent.toLowerCase().match(/mobile/i)){
     mobileRez=.25;
     fftSize=1024;
     trailLength = 150;
-    window.mobile = true;
     zoomOutRatchetThreshold=3.;
 }
 else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
@@ -25,7 +24,6 @@ else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
     fftSize=1024;
     trailLength = 150;
     zoomOutRatchetThreshold=3.;
-    window.mobile = true;
 }
 
 //key press handling vvvv
