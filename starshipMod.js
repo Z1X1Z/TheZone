@@ -245,9 +245,9 @@ if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold)
                coordX=bx;
                coordY=by;
            }
-           if(by*by+bx*bx>=window.zoomCageSize){
-               if (Math.abs(by*by)>window.zoomCageSize/2.)coordY*=1.-(Math.abs(by*by)-window.zoomCageSize/2.)*zoom/25.;
-               if (Math.abs(bx*bx)>window.zoomCageSize/2.)coordX*=1.-(Math.abs(bx*bx)-window.zoomCageSize/2.)*zoom/25.;
+           if(by*by+bx*bx>=window.zoomCageSize*zoom){
+               if (by*by>window.zoomCageSize/2.)coordY*=1.-(by*by-window.zoomCageSize/2.)*zoom/25.;
+               if (bx*bx>window.zoomCageSize/2.)coordX*=1.-(bx*bx-window.zoomCageSize/2.)*zoom/25.;
                    }
        }
  interpolationFactor = 10.;//timeDif*1./(callbackWait-1);
