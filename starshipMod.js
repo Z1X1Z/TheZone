@@ -237,7 +237,7 @@ angle[f] = angle;
   //d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
          d_x = -Math.sin(-angle)*15.;
          d_y = -Math.cos(-angle)*15.;
-         if(zoomAtl41){d_x*=2.;d_y*=2.;}
+         if(zoomAtl41){d_x*=3.;d_y*=3.;}
   bx=coordX+d_x*.007*window.movementRate*zoom;
   by=coordY+d_y*.007*window.movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold){
@@ -245,7 +245,7 @@ if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold)
                coordX=bx;
                coordY=by;
            }
-           if(Math.abs(by*by)+Math.abs(bx*bx)>=window.zoomCageSize){
+           if(by*by+bx*bx>=window.zoomCageSize){
                if (Math.abs(by*by)>window.zoomCageSize/2.)coordY*=1.-(Math.abs(by*by)-window.zoomCageSize/2.)*zoom/25.;
                if (Math.abs(bx*bx)>window.zoomCageSize/2.)coordX*=1.-(Math.abs(bx*bx)-window.zoomCageSize/2.)*zoom/25.;
                    }
@@ -444,9 +444,9 @@ function animate( timestamp ) {
   if (zoomOutEngage == true)zoom *= 1.44;
       if(cored==true)
       {
-      let zoombuffer= zoom*3/2.*3/2.;
+      let zoombuffer= zoom*3/2.;
       uniforms[ "cored" ].value = 0;
-      while(zoombuffer<3./2){zoombuffer*=3./2;uniforms[ "cored" ].value += 1;}
+      while(zoombuffer<1.){zoombuffer*=2.;uniforms[ "cored" ].value += 1;}
             }
 
          
@@ -454,7 +454,7 @@ function animate( timestamp ) {
   uniforms.coords.value.x = coordX;
   uniforms.coords.value.y = coordY;
             
-            if(zoomAtl41){zoom=.05;  uniforms[ "cored" ].value = 120;}
+            if(zoomAtl41){zoom=.05;  uniforms[ "cored" ].value = 24;}
 
   uniforms[ "zoom" ].value = zoom;
   uniforms[ "time" ].value = timestamp/1000.;
