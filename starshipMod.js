@@ -9,14 +9,15 @@ let fftSize=2048;
 let trailLength = 288;
 let colorSound;
 let mobile = false;
+
+    
 //vvvvbelow line from https://code-boxx.com/detect-mobile-device-javascript/
 if(navigator.userAgent.toLowerCase().match(/mobile/i)){
     mobileRez=.25;
     fftSize=1024;
     trailLength = 150;
-    mobile = true;
+    window.mobile = true;
     zoomOutRatchetThreshold=3.;
-
 }
 else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 {
@@ -24,8 +25,7 @@ else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
     fftSize=1024;
     trailLength = 150;
     zoomOutRatchetThreshold=3.;
-
-
+    window.mobile = true;
 }
 
 //key press handling vvvv

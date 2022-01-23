@@ -7,8 +7,21 @@
         <link type="text/css" rel="stylesheet" href="main.css">
     </head>
     <body>
+        <!--
+        https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_text_create
+        -->
         
-            
+        <script>
+        function hk() {
+          var x = document.createElement("INPUT");
+          x.setAttribute("type", "text");
+          x.setAttribute("value", "Hotkeys!");
+          document.body.appendChild(x);
+        }
+        if(window.mobile)hk();
+        </script>
+        
+        
 <script src="./threer127.min.js"></script>
 
         <div id="container"></div>
