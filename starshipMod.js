@@ -445,7 +445,7 @@ function animate( timestamp ) {
             
             
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
-  if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333;
+  if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
   if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom /= 1.0404;//+Math.abs(totalAMP/numberOfBins)/15.;
   else if(zoom<1.)zoom *= 1.044;
   
