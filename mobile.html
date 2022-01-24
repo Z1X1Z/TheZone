@@ -11,7 +11,7 @@
 <input id="hotkeys" type="text" placeholder="Hotkeys!" oninput="getKey()">
 
 <script>
-    let androidGetKey="Hotkeys!";
+    let androidGetKey="";
     let androidGetKeyLast;
 
     function getKey(){
@@ -21,6 +21,8 @@
      if(androidGetKey.length==androidGetKeyLast.length+1) while(androidGetKey[scan]==androidGetKeyLast[scan])scan--;
      window.key=androidGetKey[scan];
      console.log(androidGetKey[scan]);
+     else     window.key="";
+
      }
 </script>
 
