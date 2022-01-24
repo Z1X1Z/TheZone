@@ -430,14 +430,14 @@ function animate( timestamp ) {
   const scene = new THREE.Scene();
 
   if (on)scene.add(line);
-
-  if (zoom>.000001&&totalAMP*2048./fftSize>zoomOutRatchetThreshold)zoom /= 1.0404;//+Math.abs(totalAMP/numberOfBins)/15.;
+  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
+  if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom /= 1.0404;//+Math.abs(totalAMP/numberOfBins)/15.;
   else if(zoom<1.)zoom *= 1.044;
   
   if (zoom>1.)zoom=1.;
 
   if (zoom>=1.)zoomOutEngage = false;
-      else if ( zoom<.000001)zoomOutEngage = true;
+      else if ( zoom<zoomCone)zoomOutEngage = true;
 
   if (zoomOutEngage == true)zoom *= 1.44;
       if(cored==true)
@@ -448,7 +448,7 @@ function animate( timestamp ) {
             while(zoombuffer<1.){zoombuffer*=2.;uniforms[ "cored" ].value += 1;}
         }
         else{
-            let zoombuffer= zoom*3/2.*1.33333333;
+            let zoombuffer= zoom*(2.33333333/1.333333);
             uniforms[ "cored" ].value = 0;
             while(zoombuffer<1.){zoombuffer*=1.33333333;uniforms[ "cored" ].value += 1;}
         }
@@ -459,8 +459,10 @@ function animate( timestamp ) {
   uniforms.coords.value.x = coordX;
   uniforms.coords.value.y = coordY;
             
-            if(zoomAtl41){zoom=.05;  uniforms[ "cored" ].value = 6;}
-
+            if(zoomAtl41){zoom=.01;
+                if(uniforms[ "colorCombo" ].value != 16)uniforms[ "cored" ].value = 7;
+                else uniforms[ "cored" ].value = 17;
+            }
   uniforms[ "zoom" ].value = zoom;
   uniforms[ "time" ].value = timestamp/1000.;
   uniforms[ "time2dance" ].value += Math.abs(totalAMP/numberOfBins*2.);
