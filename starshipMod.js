@@ -35,6 +35,7 @@ var rez = window.devicePixelRatio*mobileRez;
 
 
 window.addEventListener('keyup', function(event) {
+      let key = String.fromCharCode(event.which || event.keyCode);
       if(!window.key)window.key="";
       var x = parseInt(String.fromCharCode(event.which || event.keyCode));
     if (parseInt(window.key)>=0) x = parseInt(window.key)
@@ -42,48 +43,48 @@ window.addEventListener('keyup', function(event) {
         {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
       else if (x==0)
         {rez = window.devicePixelRatio /10.; renderer.setPixelRatio( rez);}
-      else if (String.fromCharCode(event.which || event.keyCode)=="À"||window.key.toLowerCase()=="`")
+      else if (key=="À"||window.key.toLowerCase()=="`")
         {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
-      else if (String.fromCharCode(event.which || event.keyCode)=="="||window.key.toLowerCase()=="=")
+      else if (key=="="||window.key.toLowerCase()=="=")
         {rez /=1.1; renderer.setPixelRatio(rez);}
       else if ( event.keyCode==173||window.key.toLowerCase()=="-")
         {rez *=1.1; renderer.setPixelRatio(rez);}
       else if (String.fromCharCode(event.which || event.keyCode)=="M"||window.key.toLowerCase()=="m")        {    invert *= -1;}
 
-      else if (String.fromCharCode(event.which || event.keyCode)=="Q"||window.key.toLowerCase()=="q") uniforms[ "colorCombo" ].value = 1;
-      else if (String.fromCharCode(event.which || event.keyCode)=="W"||window.key.toLowerCase()=="w")   uniforms[ "colorCombo" ].value = 2;
-      else if (String.fromCharCode(event.which || event.keyCode)=="E"||window.key.toLowerCase()=="e") uniforms[ "colorCombo" ].value = 3;
-      else if (String.fromCharCode(event.which || event.keyCode)=="R"||window.key.toLowerCase()=="r") uniforms[ "colorCombo" ].value = 4;
-      else if (String.fromCharCode(event.which || event.keyCode)=="T"||window.key.toLowerCase()=="t") uniforms[ "colorCombo" ].value = 5;
-      else if (String.fromCharCode(event.which || event.keyCode)=="Y"||window.key.toLowerCase()=="y") uniforms[ "colorCombo" ].value = 6;
-      else if (String.fromCharCode(event.which || event.keyCode)=="U"||window.key.toLowerCase()=="u") uniforms[ "colorCombo" ].value = 7;
-      else if (String.fromCharCode(event.which || event.keyCode)=="A"||window.key.toLowerCase()=="a") uniforms[ "colorCombo" ].value = 11;
-      else if (String.fromCharCode(event.which || event.keyCode)=="F"||window.key.toLowerCase()=="f") uniforms[ "fourCreats" ].value *= -1;
-      else if (String.fromCharCode(event.which || event.keyCode)=="K"||window.key.toLowerCase()=="k") uniforms[ "colorCombo" ].value = 13;
-      else if (String.fromCharCode(event.which || event.keyCode)=="S"||window.key.toLowerCase()=="s") uniforms[ "colorCombo" ].value = 14;
-      else if (String.fromCharCode(event.which || event.keyCode)=="X"||window.key.toLowerCase()=="x") uniforms[ "colorCombo" ].value = 15;
-      else if (String.fromCharCode(event.which || event.keyCode)=="B"||window.key.toLowerCase()=="b") uniforms[ "colorCombo" ].value = 16;
-      else if (String.fromCharCode(event.which || event.keyCode)=="P"||window.key.toLowerCase()=="p"){ cored=!cored;uniforms[ "cored" ].value = 0;}
-      else if (String.fromCharCode(event.which || event.keyCode)=="L"||window.key.toLowerCase()=="l")
-      {zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
+      else if (key=="Q"||window.key.toLowerCase()=="q") uniforms[ "colorCombo" ].value = 1;
+      else if (key=="W"||window.key.toLowerCase()=="w")   uniforms[ "colorCombo" ].value = 2;
+      else if (key=="E"||window.key.toLowerCase()=="e") uniforms[ "colorCombo" ].value = 3;
+      else if (key=="R"||window.key.toLowerCase()=="r") uniforms[ "colorCombo" ].value = 4;
+      else if (key=="T"||window.key.toLowerCase()=="t") uniforms[ "colorCombo" ].value = 5;
+      else if (key=="Y"||window.key.toLowerCase()=="y") uniforms[ "colorCombo" ].value = 6;
+      else if (key=="U"||window.key.toLowerCase()=="u") uniforms[ "colorCombo" ].value = 7;
+      else if (key=="A"||window.key.toLowerCase()=="a") uniforms[ "colorCombo" ].value = 11;
+      else if (key=="F"||window.key.toLowerCase()=="f") uniforms[ "fourCreats" ].value *= -1;
+      else if (key=="K"||window.key.toLowerCase()=="k") uniforms[ "colorCombo" ].value = 13;
+      else if (key=="S"||window.key.toLowerCase()=="s") uniforms[ "colorCombo" ].value = 14;
+      else if (key=="X"||window.key.toLowerCase()=="x") uniforms[ "colorCombo" ].value = 15;
+      else if (key=="B"||window.key.toLowerCase()=="b") uniforms[ "colorCombo" ].value = 16;
+      else if (key=="P"||window.key.toLowerCase()=="p"){ cored=!cored;uniforms[ "cored" ].value = 0;}
+      else if (key=="L"||window.key.toLowerCase()=="l")
+      {if(zoomAtl41){zoom=1.;coordX=0.; coordY=0.;}zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
 
 
-      else if (String.fromCharCode(event.which || event.keyCode)=="Z") {
+      else if (key=="Z"||window.key.toLowerCase()=="z") {
         if (pointed==true)pointed=false;
         else pointed = true;}
 
       else if (event.keyCode==190) uniforms[ "metronome" ].value *= 1.1; //keycode for <
       else if (event.keyCode==188&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
 
-      else if (String.fromCharCode(event.which || event.keyCode)=="I"){
+      else if (key=="I"||window.key.toLowerCase()=="i"){
         zoomOutRatchetThreshold/= 1.212121;
         console.log("zoomOutRatchetThreshold: "+zoomOutRatchetThreshold+ ", totalMicAmp: "+totalAMP );
       }
-      else if (String.fromCharCode(event.which || event.keyCode)=="O"){
+      else if (key=="O"||window.key.toLowerCase()=="o"){
         zoomOutRatchetThreshold+= .777;//character for '
         console.log("zoomOutRatchetThreshold: "+zoomOutRatchetThreshold+ ", totalMicAmp: "+totalAMP );
       }
-      else if (String.fromCharCode(event.which || event.keyCode)==" ")
+      else if (key==" "||window.key.toLowerCase()==" ")
       {
         if (onO)onO=false;
         else onO = true;
