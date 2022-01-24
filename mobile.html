@@ -8,8 +8,21 @@
     </head>
     <body>
 <script src="./threer127.min.js"></script>
-<input id="hotkeys" type="EditText" placeholder="Hotkeys!" oninput="getKey()">
 
+    <!--
+    https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_text_create
+    -->
+    <script>
+    function hk() {
+      var x = document.createElement("hotkeys");
+      x.setAttribute("type", "EditText");
+      x.setAttribute("placeholder", "Hotkeys!");
+      x.setAttribute("oninput", "getKey()");
+      document.body.appendChild(x);
+    }
+    if(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+        hk();
+    </script>
 <script>
     let androidGetKey="";
     let androidGetKeyLast;
