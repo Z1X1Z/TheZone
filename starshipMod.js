@@ -459,7 +459,7 @@ function animate( timestamp ) {
   uniforms.coords.value.x = coordX;
   uniforms.coords.value.y = coordY;
             
-            if(zoomAtl41){zoom=.05;  uniforms[ "cored" ].value = 9;}
+            if(zoomAtl41){zoom=.05;  uniforms[ "cored" ].value = 6;}
 
   uniforms[ "zoom" ].value = zoom;
   uniforms[ "time" ].value = timestamp/1000.;
