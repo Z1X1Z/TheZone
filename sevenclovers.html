@@ -498,7 +498,7 @@ vec3 xtol(vec2 s, vec2 t){
                                              float c = sqrt(s.y*s.y+s.x*s.x);
                                              float h =1.3333333;
                                              c/=h;
-                                             if(c<h){float h =1.26;for(int i = 0; i<int(cored)+1; i++)if(c<h/2.){s*=h;c*=h;}}
+                                             if(c<h){for(int i = 0; i<int(cored)+1; i++)if(c<h/2.){s*=h;c*=h;}}
                                          }
                                                                                             
                             for (int f=0;f<40;f+=1)if(abs(s.y)<19.){

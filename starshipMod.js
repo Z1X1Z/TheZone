@@ -458,7 +458,7 @@ function animate( timestamp ) {
         else{
             let zoombuffer= zoom*(2.33333333/1.333333);
             uniforms[ "cored" ].value = 0;
-            while(zoombuffer<1.){zoombuffer*=1.33333333;uniforms[ "cored" ].value += 1;}
+            while(zoombuffer<1.3333333/2.){zoombuffer*=1.33333333;uniforms[ "cored" ].value += 1;}
         }
     }
 
