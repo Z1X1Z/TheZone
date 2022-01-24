@@ -1,7 +1,7 @@
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
 window.movementRate=1.1;
-window.zoomCageSize = .25;
+window.zoomCageSize = 1.;
 zoomOutRatchetThreshold=1.;
 let radius = 4.;
 var mobileRez=1.;
@@ -99,8 +99,13 @@ if (!(String.fromCharCode(event.which || event.keyCode)=="L")){zoomAtl41=false;}
                 window.zoomCageSize=1.;
                 //window.movementRate=.5;
             }
+            
+                else if(uniforms["colorCombo"].value == 15){
+                    window.zoomCageSize=1.5;
+                    //window.movementRate=.5;
+                }
         else
-        {            window.zoomCageSize=.5;
+        {            window.zoomCageSize=1.;
             window.movementRate=1.;}
         //console.log(String.fromCharCode(event.which || event.keyCode));
 
@@ -238,16 +243,16 @@ angle[f] = angle;
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
   bx=coordX+d_x*.007*window.movementRate*zoom;
   by=coordY+d_y*.007*window.movementRate*zoom;
-if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold){
-           if(on){
+if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on){
+        
                coordX=bx;
                coordY=by;
            }
-           if(by*by+bx*bx>=window.zoomCageSize*zoom){
-               if (by*by>window.zoomCageSize/2.)coordY*=1.-(by*by-window.zoomCageSize/2.)*zoom/25.;
-               if (bx*bx>window.zoomCageSize/2.)coordX*=1.-(bx*bx-window.zoomCageSize/2.)*zoom/25.;
-                   }
-       }
+if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize*zoom){
+               if (Math.abs(by)>window.zoomCageSize)coordY*=1.-(Math.abs(by)-window.zoomCageSize)/25.;
+               if (Math.abs(bx)>window.zoomCageSize)coordX*=1.-(Math.abs(bx)-window.zoomCageSize)/25.;
+  }
+       
  interpolationFactor = 10.;//timeDif*1./(callbackWait-1);
 if (interpolationFactor>30) interpolationFactor=30;
 else if (interpolationFactor<1) interpolationFactor=1;
@@ -430,6 +435,9 @@ function animate( timestamp ) {
   const scene = new THREE.Scene();
 
   if (on)scene.add(line);
+            
+            
+            
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom /= 1.0404;//+Math.abs(totalAMP/numberOfBins)/15.;
   else if(zoom<1.)zoom *= 1.044;
@@ -459,8 +467,8 @@ function animate( timestamp ) {
   uniforms.coords.value.x = coordX;
   uniforms.coords.value.y = coordY;
             
-            if(zoomAtl41){zoom=.01;
-                if(uniforms[ "colorCombo" ].value != 16)uniforms[ "cored" ].value = 7;
+            if(zoomAtl41){zoom=.02;
+                if(uniforms[ "colorCombo" ].value != 16)uniforms[ "cored" ].value = 6;
                 else uniforms[ "cored" ].value = 17;
             }
   uniforms[ "zoom" ].value = zoom;
