@@ -70,7 +70,7 @@ window.addEventListener('keydown', function(event) {
       else if (String.fromCharCode(event.which || event.keyCode)=="X") uniforms[ "colorCombo" ].value = 15;
       else if (String.fromCharCode(event.which || event.keyCode)=="B") uniforms[ "colorCombo" ].value = 16;
       else if (String.fromCharCode(event.which || event.keyCode)=="P"){ cored=!cored;uniforms[ "cored" ].value = 0;}
-      else if (String.fromCharCode(event.which || event.keyCode)=="L"||key.toLowerCase()="l"){ zoomAtl41=!zoomAtl41;cored=true;}
+      else if (String.fromCharCode(event.which || event.keyCode)=="L"||key.toLowerCase()=="l"){ zoomAtl41=!zoomAtl41;cored=true;}
 
 
       else if (String.fromCharCode(event.which || event.keyCode)=="Z") {
