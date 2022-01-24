@@ -442,10 +442,17 @@ function animate( timestamp ) {
   if (zoomOutEngage == true)zoom *= 1.44;
       if(cored==true)
       {
-      let zoombuffer= zoom*3/2.;
-      uniforms[ "cored" ].value = 0;
-      while(zoombuffer<1.){zoombuffer*=2.;uniforms[ "cored" ].value += 1;}
-            }
+        if(uniforms[ "colorCombo" ].value != 16){
+            let zoombuffer= zoom*3/2.;
+            uniforms[ "cored" ].value = 0;
+            while(zoombuffer<1.){zoombuffer*=2.;uniforms[ "cored" ].value += 1;}
+        }
+        else{
+            let zoombuffer= zoom*3/2.*1.33333333;
+            uniforms[ "cored" ].value = 0;
+            while(zoombuffer<1.){zoombuffer*=1.33333333;uniforms[ "cored" ].value += 1;}
+        }
+    }
 
          
 
