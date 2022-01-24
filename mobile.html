@@ -20,8 +20,8 @@
      let scan=androidGetKey.length-1;
      if(androidGetKey.length==androidGetKeyLast.length+1) while(androidGetKey[scan]==androidGetKeyLast[scan])scan--;
      window.key=androidGetKey[scan];
+     if(!window.key)window.key="";
      console.log(androidGetKey[scan]);
-     else     window.key="";
 
      }
 </script>
