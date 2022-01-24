@@ -9,6 +9,22 @@
     <body>
 <script src="./threer127.min.js"></script>
 
+<!--
+https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_text_create
+-->
+<script>
+function hk() {
+  var x = document.createElement("INPUT");
+  x.setAttribute("type", "text");
+  x.setAttribute("value", "Hotkeys!");
+  document.body.appendChild(x);
+}
+if(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+    hk();
+</script>
+
+
+
         <div id="container"></div>
 
         <script id="vertexShader" type="x-shader/x-vertex">
@@ -122,7 +138,6 @@
         vec3 tol(vec2 p, vec2 coords){
 
                         p+=coords.yx;
-   
 
                         vec2 s=p;
                         for (int counter=0;counter<21;counter+=1)if(abs(s.y)<47.){
