@@ -37,7 +37,7 @@ var rez = window.devicePixelRatio*mobileRez;
 window.addEventListener('keyup', function(event) {
       if(!window.key)window.key="";
       var x = parseInt(String.fromCharCode(event.which || event.keyCode));
-      if (parseInt(window.key)>=0) x = parseInt(window.key);
+    if (parseInt(window.key)>=0) x = parseInt(window.key)
       if (x>0)
         {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
       else if (x==0)
@@ -64,7 +64,8 @@ window.addEventListener('keyup', function(event) {
       else if (String.fromCharCode(event.which || event.keyCode)=="X"||window.key.toLowerCase()=="x") uniforms[ "colorCombo" ].value = 15;
       else if (String.fromCharCode(event.which || event.keyCode)=="B"||window.key.toLowerCase()=="b") uniforms[ "colorCombo" ].value = 16;
       else if (String.fromCharCode(event.which || event.keyCode)=="P"||window.key.toLowerCase()=="p"){ cored=!cored;uniforms[ "cored" ].value = 0;}
-      else if (String.fromCharCode(event.which || event.keyCode)=="L"||window.key.toLowerCase()=="l")zoomAtl41=!zoomAtl41;
+      else if (String.fromCharCode(event.which || event.keyCode)=="L"||window.key.toLowerCase()=="l")
+      {zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
 
 
       else if (String.fromCharCode(event.which || event.keyCode)=="Z") {
@@ -89,9 +90,9 @@ window.addEventListener('keyup', function(event) {
       }
 
 
-
-        if(uniforms["colorCombo"].value == 13){
-            window.zoomCageSize=1.;
+        if(uniforms[ "free" ].value) window.zoomCageSize=100000000000000000.;
+        else if(uniforms["colorCombo"].value == 13){
+            ç=1.;
            // window.movementRate=.125;
         }
         else if(uniforms["colorCombo"].value == 14){
@@ -336,6 +337,7 @@ materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
       zoom: {value: 1.0 },
       colorCombo: {value: 1 },
         cored: {value: 0 },
+        free: {value: false },
 
       fourCreats: {value: 1 },
       metronome: {value: .99 },

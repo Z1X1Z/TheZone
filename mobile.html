@@ -153,6 +153,12 @@
         vec3 tol(vec2 p, vec2 coords){
                   
                   p+=coords.yx;
+                  if(free){
+                      float shift = 3.;
+                      p+=shift/2.;
+                      p=(mod(abs(p),shift));
+                      p-=shift/2.;
+                  }
                  if(cored>1.)
                   {           float c = sqrt(p.y*p.y+p.x*p.x);
                               c*=3./2.;

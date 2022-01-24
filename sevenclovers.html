@@ -70,6 +70,7 @@
             uniform int fourCreats;
 
             uniform float cored;
+            uniform bool free;
 
             float zin(float x){return -sin(x);}
             float coz(float x){return -cos(x);}
@@ -402,11 +403,17 @@ vec3 bride2manny(vec2 p,vec2 t){
         vec3 tol(vec2 p, vec2 coords){
           
                         p+=coords.yx;
+                        if(free){
+                            float shift = 3.;
+                            p+=shift/2.;
+                            p=(mod(abs(p),shift));
+                            p-=shift/2.;
+                        }
                        if(cored>1.)
                         {                        float c = sqrt(p.y*p.y+p.x*p.x);
                                 if(true){
                                     c*=3./2.;
-                                    for(int i=0;i<int(cored); i++)if(c<1.){p*=2.;c*=2.;}
+                                    for(int i=0;i<69; i++)if(c<1.&&i<int(cored)){p*=2.;c*=2.;}
                                     }
                                 else p/=mod(1.,c)+c;
 
@@ -422,7 +429,7 @@ vec3 bride2manny(vec2 p,vec2 t){
                                 if(cored>=1.&&false){
                                     float c = sqrt(s.y*s.y+s.x*s.x);
                                     if(counter<int(cored))
-                                    for(int i=0;i<int(cored); i++)if(c<1. && mod(c*float(i),1.)>1./7.){float shift=1.5;s*=shift;c*=shift;}
+                                    for(int i=0;i<69; i++)if(c<1. &&i<int(cored)){float shift=1.5;s*=shift;c*=shift;}
                                 }
                             }
                                     
