@@ -33,15 +33,10 @@ var pointed=false;
 let zoomAtl41=false;//watch for the 1 and the l
 var rez = window.devicePixelRatio*mobileRez;
 
-let androidGetKey="Hotkeys!";
-let androidGetKeyLast="Hotkeys!";
 
-window.addEventListener('keydown', function(event) {
-    androidGetKeyLast = androidGetKey;
-    androidGetKey = document.getElementById("INPUT").value;
-     let scan=androidGetKey.length-1;
-     while(androidGetKey[scan]==androidGetKeyLast[scan])scan--;
-     let key = androidGetKey[scan]
+window.addEventListener('keyup', function(event) {
+    
+     let key = window.key;
     
       var x = parseInt(String.fromCharCode(event.which || event.keyCode));
       if (x>0)
@@ -70,7 +65,7 @@ window.addEventListener('keydown', function(event) {
       else if (String.fromCharCode(event.which || event.keyCode)=="X") uniforms[ "colorCombo" ].value = 15;
       else if (String.fromCharCode(event.which || event.keyCode)=="B") uniforms[ "colorCombo" ].value = 16;
       else if (String.fromCharCode(event.which || event.keyCode)=="P"){ cored=!cored;uniforms[ "cored" ].value = 0;}
-      else if (String.fromCharCode(event.which || event.keyCode)=="L"||key.toLowerCase()=="l"){ zoomAtl41=!zoomAtl41;cored=true;}
+      else if (key.toLowerCase()=="l"){ zoomAtl41=!zoomAtl41;cored=true;}
 
 
       else if (String.fromCharCode(event.which || event.keyCode)=="Z") {

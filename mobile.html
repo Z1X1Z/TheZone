@@ -8,19 +8,20 @@
     </head>
     <body>
 <script src="./threer127.min.js"></script>
+<input id="hotkeys" type="text" placeholder="Hotkeys!" oninput="getKey()">
 
-<!--
-https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_text_create
--->
 <script>
-function hk() {
-  var x = document.createElement("INPUT");
-  x.setAttribute("type", "text");
-  x.setAttribute("value", "Hotkeys!");
-  document.body.appendChild(x);
-}
-if(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
-    hk();
+    let androidGetKey="Hotkeys!";
+    let androidGetKeyLast;
+
+    function getKey(){
+        androidGetKeyLast = androidGetKey;
+        androidGetKey = document.getElementById("hotkeys").value;
+     let scan=androidGetKey.length-1;
+     if(androidGetKey.length==androidGetKeyLast.length+1) while(androidGetKey[scan]==androidGetKeyLast[scan])scan--;
+     window.key=androidGetKey[scan];
+     console.log(androidGetKey[scan]);
+     }
 </script>
 
 
