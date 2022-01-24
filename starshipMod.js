@@ -36,8 +36,6 @@ var rez = window.devicePixelRatio*mobileRez;
 
 window.addEventListener('keyup', function(event) {
     
-     let key = window.key;
-    
       var x = parseInt(String.fromCharCode(event.which || event.keyCode));
       if (x>0)
         {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
@@ -65,7 +63,6 @@ window.addEventListener('keyup', function(event) {
       else if (String.fromCharCode(event.which || event.keyCode)=="X") uniforms[ "colorCombo" ].value = 15;
       else if (String.fromCharCode(event.which || event.keyCode)=="B") uniforms[ "colorCombo" ].value = 16;
       else if (String.fromCharCode(event.which || event.keyCode)=="P"){ cored=!cored;uniforms[ "cored" ].value = 0;}
-      else if (key.toLowerCase()=="l"){ zoomAtl41=!zoomAtl41;cored=true;}
 
 
       else if (String.fromCharCode(event.which || event.keyCode)=="Z") {
@@ -89,7 +86,8 @@ window.addEventListener('keyup', function(event) {
         else onO = true;
       }
 
-if (!(String.fromCharCode(event.which || event.keyCode)=="L")){zoomAtl41=false;}
+//if (!(String.fromCharCode(event.which || event.keyCode)=="L")){zoomAtl41=false;}
+if (window.key.toLowerCase()=="l"){ zoomAtl41=!zoomAtl41;cored=true;}
 
 
         if(uniforms["colorCombo"].value == 13){

@@ -18,11 +18,9 @@
         androidGetKeyLast = androidGetKey;
         androidGetKey = document.getElementById("hotkeys").value;
      let scan=androidGetKey.length-1;
-     if(androidGetKey.length==androidGetKeyLast.length+1) while(androidGetKey[scan]==androidGetKeyLast[scan])scan--;
+     if(androidGetKey.length-1==androidGetKeyLast.length) while(androidGetKey[scan]==androidGetKeyLast[scan]&&scan>=0)scan--;
      window.key=androidGetKey[scan];
      if(!window.key)window.key="";
-     console.log(androidGetKey[scan]);
-
      }
 </script>
 
