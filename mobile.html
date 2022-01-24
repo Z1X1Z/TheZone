@@ -14,13 +14,14 @@
     -->
     <script>
     function hk() {
-      var x = document.createElement("hotkeys");
-      x.setAttribute("type", "EditText");
+      var x = document.createElement("INPUT");
+      x.setAttribute("type", "text");
+      x.setAttribute("id", "hotkeys");
       x.setAttribute("placeholder", "Hotkeys!");
       x.setAttribute("oninput", "getKey()");
       document.body.appendChild(x);
     }
-    if(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+  if(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
         hk();
     </script>
 <script>
@@ -33,7 +34,6 @@
      let scan=androidGetKey.length-1;
      if(androidGetKey.length-1==androidGetKeyLast.length) while(androidGetKey[scan]==androidGetKeyLast[scan]&&scan>=0)scan--;
      window.key=androidGetKey[scan];
-     if(!window.key)window.key="";
      }
 </script>
 
