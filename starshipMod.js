@@ -10,25 +10,6 @@ let trailLength = 288;
 let colorSound;
 let mobile = false;
 
-
-function hk() {
-  var x = document.createElement("INPUT");
-  x.setAttribute("type", "text");
-  x.setAttribute("id", "hotkeys");
-  x.setAttribute("placeholder", "Hotkeys!");
-  x.setAttribute("oninput", "getKey()");
-  document.body.appendChild(x);
-}
-let androidGetKey="";
-let androidGetKeyLast;
-
-function getKey(){
-    androidGetKeyLast = androidGetKey;
-    androidGetKey = document.getElementById("hotkeys").value;
- let scan=androidGetKey.length-1;
- if(androidGetKey.length-1==androidGetKeyLast.length) while(androidGetKey[scan]==androidGetKeyLast[scan]&&scan>=0)scan--;
- window.key=androidGetKey[scan];
- }
 //vvvvbelow line from https://code-boxx.com/detect-mobile-device-javascript/
 if(navigator.userAgent.toLowerCase().match(/mobile/i)){
     mobileRez=.25;
@@ -48,7 +29,6 @@ else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 
 //key press handling vvvv
 let cored=true;
-let zoomAt717=false;
 var pointed=false;
 let zoomAtl41=false;//watch for the 1 and the l
 var rez = window.devicePixelRatio*mobileRez;
