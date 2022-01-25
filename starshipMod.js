@@ -10,13 +10,33 @@ let trailLength = 288;
 let colorSound;
 let mobile = false;
 
-    
+
+function hk() {
+  var x = document.createElement("INPUT");
+  x.setAttribute("type", "text");
+  x.setAttribute("id", "hotkeys");
+  x.setAttribute("placeholder", "Hotkeys!");
+  x.setAttribute("oninput", "getKey()");
+  document.body.appendChild(x);
+}
+hk();
+let androidGetKey="";
+let androidGetKeyLast;
+
+function getKey(){
+    androidGetKeyLast = androidGetKey;
+    androidGetKey = document.getElementById("hotkeys").value;
+ let scan=androidGetKey.length-1;
+ if(androidGetKey.length-1==androidGetKeyLast.length) while(androidGetKey[scan]==androidGetKeyLast[scan]&&scan>=0)scan--;
+ window.key=androidGetKey[scan];
+ }
 //vvvvbelow line from https://code-boxx.com/detect-mobile-device-javascript/
 if(navigator.userAgent.toLowerCase().match(/mobile/i)){
     mobileRez=.25;
     fftSize=1024;
     trailLength = 150;
     zoomOutRatchetThreshold=3.;
+    hk();
 }
 else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 {
@@ -24,6 +44,7 @@ else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
     fftSize=1024;
     trailLength = 150;
     zoomOutRatchetThreshold=3.;
+    hk();
 }
 
 //key press handling vvvv
@@ -32,6 +53,7 @@ let zoomAt717=false;
 var pointed=false;
 let zoomAtl41=false;//watch for the 1 and the l
 var rez = window.devicePixelRatio*mobileRez;
+
 
 
 window.addEventListener('keyup', function(event) {
@@ -45,7 +67,7 @@ window.addEventListener('keyup', function(event) {
         {rez = window.devicePixelRatio /10.; renderer.setPixelRatio( rez);}
       else if (key=="À"||window.key.toLowerCase()=="`")
         {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
-      else if (key=="="||window.key.toLowerCase()=="=")
+      else if (key=="="||window.key.toLowerCase()=="+")
         {rez /=1.1; renderer.setPixelRatio(rez);}
       else if ( event.keyCode==173||window.key.toLowerCase()=="-")
         {rez *=1.1; renderer.setPixelRatio(rez);}
@@ -300,6 +322,7 @@ let x = parseInt(String.fromCharCode(event.which || event.keyCode));
 let geometryP;
 let uniforms;
 function init() {
+    
     inputData = new Float32Array(bufferSize);
     container = document.getElementById( 'container' );
     camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
@@ -364,7 +387,9 @@ materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
   container.appendChild( renderer.domElement );
   onWindowResize();
   window.addEventListener( 'resize', onWindowResize, false );
+
   animate();
+
 }
 
 

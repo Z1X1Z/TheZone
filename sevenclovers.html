@@ -8,38 +8,12 @@
     </head>
     <body>
         
-        <!--
-        https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_text_create
-        -->
-        <script>
-        function hk() {
-          var x = document.createElement("INPUT");
-          x.setAttribute("type", "text");
-          x.setAttribute("id", "hotkeys");
-          x.setAttribute("placeholder", "Hotkeys!");
-          x.setAttribute("oninput", "getKey()");
-          document.body.appendChild(x);
-        }
-      if(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
-            hk();
-        </script>
-    <script>
-        let androidGetKey="";
-        let androidGetKeyLast;
-
-        function getKey(){
-            androidGetKeyLast = androidGetKey;
-            androidGetKey = document.getElementById("hotkeys").value;
-         let scan=androidGetKey.length-1;
-         if(androidGetKey.length-1==androidGetKeyLast.length) while(androidGetKey[scan]==androidGetKeyLast[scan]&&scan>=0)scan--;
-         window.key=androidGetKey[scan];
-         }
-    </script>
-
-
         
-<script src="./threer127.min.js"></script>
 
+
+
+<script src="./threer127.min.js"></script>
+<script src="starshipMod.js"></script>
         <div id="container"></div>
 
         <script id="vertexShader" type="x-shader/x-vertex">
@@ -584,6 +558,5 @@ vec3 xtol(vec2 s, vec2 t){
                             clamp((zoomer+robeL(p,vec2(time2dance)))-(m.r+m.b+m.g+creatures.r+creatures.g+creatures.b)*100.,.0,1.)
                     ,1.);}
         </script>
-        <script src="starshipMod.js"></script>
     </body>
 </html>

@@ -7,40 +7,8 @@
 		<link type="text/css" rel="stylesheet" href="main.css">
 	</head>
 	<body>
-
-        <!--
-        https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_text_create
-        -->
-        <script>
-        function hk() {
-          var x = document.createElement("INPUT");
-          x.setAttribute("type", "text");
-          x.setAttribute("id", "hotkeys");
-          x.setAttribute("placeholder", "Hotkeys!");
-          x.setAttribute("oninput", "getKey()");
-          document.body.appendChild(x);
-        }
-      if(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
-            hk();
-        </script>
-    <script>
-        let androidGetKey="";
-        let androidGetKeyLast;
-
-        function getKey(){
-            androidGetKeyLast = androidGetKey;
-            androidGetKey = document.getElementById("hotkeys").value;
-         let scan=androidGetKey.length-1;
-         if(androidGetKey.length-1==androidGetKeyLast.length) while(androidGetKey[scan]==androidGetKeyLast[scan]&&scan>=0)scan--;
-         window.key=androidGetKey[scan];
-         }
-    </script>
-
-
-        
-        
-        
 <script src="threer127.min.js"></script>
+<script src="starshipMod.js"></script>
 
 		<div id="container"></div>
 
@@ -77,7 +45,6 @@ gl_FragColor=vec4(l);}
 		</script>
         <script>window.zoomCageSize=2; window.spiroRainbow = true;
 </script>
-		<script src="starshipMod.js"></script>
 
         
 	</body>
