@@ -19,7 +19,6 @@ function hk() {
   x.setAttribute("oninput", "getKey()");
   document.body.appendChild(x);
 }
-hk();
 let androidGetKey="";
 let androidGetKeyLast;
 
