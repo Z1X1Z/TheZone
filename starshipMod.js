@@ -461,7 +461,7 @@ function animate( timestamp ) {
   if (zoomOutEngage == true)zoom *= 1.44;
       if(cored==true)
       {
-        if(uniforms[ "colorCombo" ].value != 16){
+        if(uniforms[ "colorCombo" ].value != 16){//this is !16 for !twelve petals
             let zoombuffer= zoom*3/2.;
             uniforms[ "cored" ].value = 0;
             while(zoombuffer<1.){zoombuffer*=2.;uniforms[ "cored" ].value += 1;}
@@ -479,8 +479,8 @@ function animate( timestamp ) {
   uniforms.coords.value.y = coordY;
             
             if(zoomAtl41){zoom=.05;
-                if(uniforms[ "colorCombo" ].value != 16)uniforms[ "cored" ].value = 6;
-                else uniforms[ "cored" ].value = 11;
+                if(uniforms[ "colorCombo" ].value != 16)uniforms[ "cored" ].value = 4;//this is !16 for !twelve petals
+                else uniforms[ "cored" ].value = 7;
             }
   uniforms[ "zoom" ].value = zoom;
   uniforms[ "time" ].value = timestamp/1000.;
