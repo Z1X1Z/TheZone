@@ -387,6 +387,8 @@ vec2 t = vec2(-sin(time)/20.,-sin(time*1.618)/40.);
 vec3 fourCreatures=vec3(0.);
 vec2 m = vec2(1.,2.);
 vec2 g = p/2.;
+
+for(int n = 0; n<5; n++){
 g*=1.25;
 g=(g-m);
 fourCreatures+= lion(g,vec2(-1.))+bod(g,t);
@@ -399,6 +401,7 @@ fourCreatures+= man(g,vec2(-1.))+bod(g,t);
 g*=1.25;
 g=(g-m);
 fourCreatures+= eaglePerched(g,vec2(-1.))+bod(g,t);
+}
 gl_FragColor=vec4(.5+bride(p,vec2(time,0.))+robeW(p/2.,t)/3.+manny(p/2.+vec2(0.,2.5),t) +fourCreatures
    ,1.);}
 

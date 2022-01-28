@@ -1,7 +1,7 @@
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
-window.movementRate=1.1;
-window.zoomCageSize = 1.;
+window.movementRate=1.;
+window.zoomCageSize = 1.2;
 zoomOutRatchetThreshold=1.;
 let radius = 4.;
 var mobileRez=1.;
@@ -93,7 +93,7 @@ window.addEventListener('keyup', function(event) {
 
         if(uniforms[ "free" ].value) window.zoomCageSize=100000000000000000.;
         else if(uniforms["colorCombo"].value == 13){
-            ç=1.;
+            window.zoomCageSize=.5;
            // window.movementRate=.125;
         }
         else if(uniforms["colorCombo"].value == 14){
@@ -110,7 +110,7 @@ window.addEventListener('keyup', function(event) {
                     //window.movementRate=.5;
                 }
         else
-        {            window.zoomCageSize=1.;
+        {            window.zoomCageSize=1.2;
             window.movementRate=1.;}
         //console.log(String.fromCharCode(event.which || event.keyCode));
 
@@ -246,8 +246,11 @@ angle[f] = angle;
          d_x = -Math.sin(-angle)*15.;
          d_y = -Math.cos(-angle)*15.;
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
-  bx=coordX+d_x*.007*window.movementRate*zoom;
-  by=coordY+d_y*.007*window.movementRate*zoom;
+         let minSide = 0.;
+         if(window.innerWidth>window.innerHeight)minSide=window.innerHeight
+         else minSide = window.innerWidth;
+  bx=coordX+3.*3./2.*d_x/minSide*window.movementRate*zoom;
+  by=coordY+3.*3./2.*d_y/minSide*window.movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on){
         
                coordX=bx;
