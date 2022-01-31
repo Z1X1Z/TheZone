@@ -1,6 +1,7 @@
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
 window.movementRate=1.;
+let zoomFrames = 15.;
 window.zoomCageSize = 1.2;
 zoomOutRatchetThreshold=1.;
 let radius = 4.;
@@ -246,11 +247,9 @@ angle[f] = angle;
          d_x = -Math.sin(-angle);
          d_y = -Math.cos(-angle);
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
-         let minSide = 0.;
-         if(window.innerWidth>window.innerHeight)minSide=window.innerHeight
-         else minSide = window.innerWidth;
-  bx=coordX+90.*d_x/777.*window.movementRate*zoom;
-  by=coordY+90.*d_y/777.*window.movementRate*zoom;
+ 
+  bx=coordX+d_x*3./2./zoomFrames*window.movementRate*zoom;
+  by=coordY+d_y*3./2./zoomFrames*window.movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on){
         
                coordX=bx;
@@ -452,8 +451,8 @@ function animate( timestamp ) {
             
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
-  if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom *=Math.E**(Math.log(.5)/(15.*window.movementRate));
-  else if(zoom<1.)zoom /= Math.E**(Math.log(.5)/(15.*window.movementRate));
+  if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom *=Math.E**(Math.log(.5)/(zoomFrames*window.movementRate));
+  else if(zoom<1.)zoom /= Math.E**(Math.log(.5)/(zoomFrames*window.movementRate));
   if (zoom>1.)zoom=1.;
 
   if (zoom>=1.)zoomOutEngage = false;
