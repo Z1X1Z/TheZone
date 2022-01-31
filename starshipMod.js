@@ -243,14 +243,14 @@ angle[f] = angle;
 
   //d_x = -Math.sin(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
   //d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
-         d_x = -Math.sin(-angle)*15.;
-         d_y = -Math.cos(-angle)*15.;
+         d_x = -Math.sin(-angle);
+         d_y = -Math.cos(-angle);
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
          let minSide = 0.;
          if(window.innerWidth>window.innerHeight)minSide=window.innerHeight
          else minSide = window.innerWidth;
-  bx=coordX+3.*3./2.*d_x/minSide*window.movementRate*zoom;
-  by=coordY+3.*3./2.*d_y/minSide*window.movementRate*zoom;
+  bx=coordX+90.*d_x/minSide*window.movementRate*zoom;
+  by=coordY+90.*d_y/minSide*window.movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on){
         
                coordX=bx;
@@ -273,8 +273,8 @@ yPerp[f] = -Math.cos(-angle+pi/2)*radius;
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
-    cx[n] += d_x;
-    cy[n] += d_y;
+    cx[n] += d_x*15.;
+    cy[n] += d_y*15.;
            trailWidth[n] *=.98
 }
 
@@ -380,7 +380,6 @@ function onWindowResize() {
     uniforms.resolution.value.y = window.innerHeight;
     renderer.setSize( window.innerWidth, window.innerHeight );
 }
-
 let point = [];
 function animate( timestamp ) {
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
@@ -453,9 +452,8 @@ function animate( timestamp ) {
             
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
-  if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom /= 1.05;//+Math.abs(totalAMP/numberOfBins)/15.;
-  else if(zoom<1.)zoom *= 1.05;
-  
+  if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom *=Math.E**(Math.log(.5)/(15.*window.movementRate));
+  else if(zoom<1.)zoom /= Math.E**(Math.log(.5)/(15.*window.movementRate));
   if (zoom>1.)zoom=1.;
 
   if (zoom>=1.)zoomOutEngage = false;
