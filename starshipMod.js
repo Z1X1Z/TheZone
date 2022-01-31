@@ -249,8 +249,8 @@ angle[f] = angle;
          let minSide = 0.;
          if(window.innerWidth>window.innerHeight)minSide=window.innerHeight
          else minSide = window.innerWidth;
-  bx=coordX+90.*d_x/minSide*window.movementRate*zoom;
-  by=coordY+90.*d_y/minSide*window.movementRate*zoom;
+  bx=coordX+90.*d_x/777.*window.movementRate*zoom;
+  by=coordY+90.*d_y/777.*window.movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on){
         
                coordX=bx;
