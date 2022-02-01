@@ -138,7 +138,7 @@ vec3 bride2manny(vec2 p,vec2 t){
                              vec2 g=p/2.;
                               ///g.x+=(-sin(t.y)-1.)/2.*.5;
                              vec2 z=g;
-                             for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>(20.-(-sin(t.y)-1.)/2.*50.)&&f>4)x+=z.y;
+                             for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>(20.-(-sin(t.y)-1.)/2.*50.)&&f>4)x+=z.y/25000000.;
                              else {z=2.*vec2(-1./((z.x*z.x-(1.44+(-sin(t.y)-1.)/2.*.44)*z.y*z.y)
                           -g.x*(1.2+(-sin(t.y)-1.)/2.*.2)),
                      ((1.2-(-sin(t.y)-1.)/2.*.8)*z.x*z.y-(1.2+(-sin(t.y)-1.)/2.*.2)*g.y-sin(t.y/2.)/20.));
@@ -153,7 +153,7 @@ vec3 bride2manny(vec2 p,vec2 t){
                              g=p/4.;
                             // g.x-=.5;
                              z=g;
-                             if(g.x>.75&&g.x<1.7&&abs(g.y*g.x)<.54)for(int f=0;f<20;f+=1)if(abs(z.x)>52.&&f>1)c=1.;
+                             if(g.x>.75&&g.x<1.7&&abs(g.y*g.x)<.54)for(int f=0;f<8;f+=1)if(abs(z.x)>52.&&f>1)c=abs(z.x)/1000000.;
                              else {z=3.*vec2(-1./((z.x*z.x-z.y*z.y)-g.x),(77.0*z.x*z.y-(2.+(-sin(t.y)-1.)/2.)*g.y-sin(t.y*2.)/7.));
                                    z.y = -1./z.y;}
                          //vv head vv
@@ -189,7 +189,7 @@ vec3 bride2manny(vec2 p,vec2 t){
                                           if(f>2)k+=0.02;}
                    
     }
-                         return head+vec3(c,x+c,c)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
+                         return head+vec3(c,x+c/2.,0.)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
 
       vec3 robeL(vec2 g, vec2 t){
       float r=0.;
