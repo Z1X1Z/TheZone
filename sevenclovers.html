@@ -138,7 +138,7 @@ vec3 bride2manny(vec2 p,vec2 t){
                              vec2 g=p/2.;
                               ///g.x+=(-sin(t.y)-1.)/2.*.5;
                              vec2 z=g;
-                             for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>(20.-(-sin(t.y)-1.)/2.*50.)&&f>4)x+=z.y/25000000.;
+                             for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>(20.-(-sin(t.y)-1.)/2.*50.)&&f>4)x+=z.y/20000000.;
                              else {z=2.*vec2(-1./((z.x*z.x-(1.44+(-sin(t.y)-1.)/2.*.44)*z.y*z.y)
                           -g.x*(1.2+(-sin(t.y)-1.)/2.*.2)),
                      ((1.2-(-sin(t.y)-1.)/2.*.8)*z.x*z.y-(1.2+(-sin(t.y)-1.)/2.*.2)*g.y-sin(t.y/2.)/20.));
@@ -156,29 +156,16 @@ vec3 bride2manny(vec2 p,vec2 t){
                              if(g.x>.75&&g.x<1.7&&abs(g.y*g.x)<.54)for(int f=0;f<8;f+=1)if(abs(z.x)>52.&&f>1)c=abs(z.x)/1000000.;
                              else {z=3.*vec2(-1./((z.x*z.x-z.y*z.y)-g.x),(77.0*z.x*z.y-(2.+(-sin(t.y)-1.)/2.)*g.y-sin(t.y*2.)/7.));
                                    z.y = -1./z.y;}
-                         //vv head vv
-                                    //p*=2.;
-                                     vec2 s = p;
-                                     float l=0., d = 0., negator = 1.;
-                                         if(p.x*p.x+p.y*p.y*5.<50.){for (int f=0;f<21;f+=1)
-                                         if(abs(s.y)>21.&&(f==1||f>2)){
-                                             l=1.-length(s)/40.;
-                                             if (f == 1)
-                                                     negator=0.;
-                                             else
-                                                     d+=length(s)/10.;
-                                             break;
-                                         }
-                                         else{
-                                             s=vec2(-1./(s.x*s.x-s.y*s.y-p.x), 2.0*s.x*s.y-p.y);
-                                  s*=pow(s.x,(s.x-(-sin(t.x)-1.)/2.*-s.x));
-                                             l=abs(s.y)*3.5;//refines middle horn, optional
-                                             if(s.x>-.1)l=s.x*50.;//closes small holes
-                                             d+=length(s)/10.;
-                                         }}else negator=0.;
-                                         if (l>.54) negator = 0.;
-                                         head=vec3(-sin(d +t.x*3.+6.28318/3.),-sin(d+t.x*3.+6.28318*5./3.),-sin(d+t.x*3.))*5.*negator;
-
+               //vv head vv
+                                     g=p;
+                                     z=g;
+                        if(abs(p.y)<4.)for (int f=0;f<21;f+=1)if(abs(z.y)>19.&&(f==int(floor(.8-(zin(t.x)-1.)/2.*.4)))){l=0.;break;}
+                             else if(abs(z.y)>19.&&(f>4))l=1.;
+                                     else{z=vec2(-1./((z.x*z.x-z.y*z.y)-g.x),2.0*z.x*z.y-g.y);
+                          z*=pow(z.x,(z.x-(zin(t.x)-1.)/2.*-z.x));
+                          l = clamp(1.-abs(z.y)*6.,0.,1.);
+                          if(z.x>-.1&&f!=0)l=clamp(1.-z.x*(120.-sin(t.x)*80.),0.,1.);
+                             }
 
                          //vv mandelbrot\heart vv
                                               g=p*(2.+(-sin(t.y)-1.)/2.*1.);
@@ -186,10 +173,10 @@ vec3 bride2manny(vec2 p,vec2 t){
                              z=g;
                              for (int f=0;f<50;f+=1)if(abs(z.x+z.y)>20.)break;
                              else {z=vec2(((z.x*z.x-z.y*z.y)-g.x-sin(time2*gr)/4.),(2.0*z.x*z.y-g.y-sin(time2/2.)/4.));
-                                          if(f>2)k+=0.02;}
+                                          if(f>2)k+=0.005;}
                    
     }
-                         return head+vec3(c,x+c/2.,0.)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
+                         return vec3(l)+vec3(c,x+c/2.,0.)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
 
       vec3 robeL(vec2 g, vec2 t){
       float r=0.;
@@ -589,10 +576,10 @@ vec3 xtol(vec2 s, vec2 t){
           
           if(fourCreats<0){creatures=fourCreatures((bg)*4.,t);  b=bride((bg-vec2(.125,0.))*12.,vec2(time2dance));}
           vec3 mny,m=vec3(0.);
-          if(metronome<1.) {mny = bride2manny(p*2.,vec2(time2dance))+face(p,vec2(time,0.))*1.4+robeL(p,vec2(time2dance));m=mny;}
+          if(metronome<1.) {mny = bride2manny(p*2.,vec2(time2dance))+robeL(p,vec2(time2dance))*.95;m=mny;}
           else   mny = mannyX(p,t);
           gl_FragColor=vec4(mny+creatures+b+
-                            clamp((zoomer+heart((p+vec2(.5,0.))/2.,t)+robeL(p,vec2(time2dance)))-(m.r+m.b+m.g+creatures.r+creatures.g+creatures.b)*100.,.0,1.)
+                            clamp((zoomer+heart((p+vec2(.5,0.))/2.,t))-(m.r+m.b+m.g+creatures.r+creatures.g+creatures.b)*100.,.0,1.)
                     ,1.);}
         </script>
     </body>
