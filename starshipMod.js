@@ -1,8 +1,8 @@
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
 window.movementRate=1.;
-let zoomFrames = 15.;
-window.zoomCageSize = 1.2;
+let zoomFrames = 14.4;
+window.zoomCageSize = 1.5;
 zoomOutRatchetThreshold=1.;
 let radius = 4.;
 var mobileRez=1.;
@@ -111,7 +111,7 @@ window.addEventListener('keyup', function(event) {
                     //window.movementRate=.5;
                 }
         else
-        {            window.zoomCageSize=1.2;
+        {            window.zoomCageSize=1.5;
             window.movementRate=1.;}
         //console.log(String.fromCharCode(event.which || event.keyCode));
 
