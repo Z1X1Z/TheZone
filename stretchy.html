@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Zone:X</title>
+  <meta name="description" content="Zone:X">
+  <meta name="author" content="Xevin" >
+<style>
+    #background_wrap {
+        z-index: -1;
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-repeat: no-repeat;
+        background-attachment: scroll;
+        background-size: contain;
+        background-image: url('');
+        background-position:center;
+
+    }
+    </style>
+
+</head>
+<body>
+  <script src="OFFLINEonlineSwitch.js"></script>
+    <div class=onofflineBG id="background_wrap"></div>
+    <script>
+        nf = document.querySelectorAll('.onofflineBG');
+        if(window.online)nf[0].style = "background-image: url('http://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/fj.png');"
+        else nf[0].style = "background-image: url('fj.png');"
+    </script>
+
+<h1>
+
+
+
+</body>
+</html>
