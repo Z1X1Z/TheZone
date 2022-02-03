@@ -6,7 +6,7 @@ if (window.location.protocol.match(/http/i)||window.location.href.match(/zonex.s
     window.online=true;
 }
 else{
-    window.threeSonicStarship = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js"
+    window.threeSonicStarship = "threer127.min.js"
     window.three = "three.min.js"
     window.threeThrone = "three.min.js"
     window.online=false;
