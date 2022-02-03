@@ -10,6 +10,31 @@ let fftSize=2048;
 let trailLength = 288;
 let colorSound;
 let mobile = false;
+//load threeJS and call startMic()
+//vvvvmodified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
+function loadScript(url, callback)
+{
+    // Adding the script tag to the head as suggested before
+    var head = document.head;
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = url;
+    // Then bind the event to the callback function.
+    // There are several events for cross browser compatibility.
+    script.onreadystatechange = callback;
+    script.onload = callback;
+    // Fire the loading
+    head.appendChild(script);
+}
+var load = function() {
+    startMic();
+};
+loadScript(window.threeSonicStarship,load);
+//^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
+
+
+
+
 
 //vvvvbelow line from https://code-boxx.com/detect-mobile-device-javascript/
 if(navigator.userAgent.toLowerCase().match(/mobile/i)){
@@ -286,7 +311,6 @@ let material;
 let mesh;
 let analyser;
 let source;
-startMic();
 let trailGeom = Array(1000);
 let materials;
 let trailMeshes = Array(1000);
