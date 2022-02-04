@@ -5,35 +5,16 @@
   <title>Zone:X</title>
   <meta name="description" content="Zone:X">
   <meta name="author" content="Xevin" >
-<style>
-    #background_wrap {
-        z-index: -1;
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        background-repeat: no-repeat;
-        background-attachment: scroll;
-        background-size: contain;
-        background-image: url('');
-        background-position:center;
-
-    }
-    </style>
-
+  
 </head>
 <body>
-  <script src="OFFLINEonlineSwitch.js"></script>
-    <div class=onofflineBG id="background_wrap"></div>
+    <image class="onofflinePNG" style="width:50em; height:50em;margin:auto;display:block;  "></image>
+    <script src="OFFLINEonlineSwitch.js"></script>
     <script>
-        nf = document.querySelectorAll('.onofflineBG');
-        if(window.online)nf[0].style = "background-image: url('http://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/fj.png');"
-        else nf[0].style = "background-image: url('fj.png');"
+        nf = document.querySelectorAll('.onofflinePNG');
+        if(window.online)nf[0].src ='https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/fractalJesus.png'
+        else nf[0].src = 'fractalJesus.png';
     </script>
-
-<h1>
-
 
 
 </body>
