@@ -146,6 +146,7 @@ window.addEventListener('keyup', function(event) {
             let sound = new Wad({source : 'square'});
             let sound2 = new Wad({source : 'square'});
             let initialAngleSound;
+            let container = document.getElementById( 'container' );
             function startSound(e){
                 
                    let volume= Math.sqrt(e.clientY*e.clientY+e.clientX*e.clientX)/Math.max(window.innerHeight,window.innerWidth)/2.;
@@ -159,7 +160,8 @@ window.addEventListener('keyup', function(event) {
                     sound.play({env:{attack: .1, release:.02,hold:-1}});
                     sound2.play({env:{attack: .1, release:.02,hold:-1}});
             }
-            window.addEventListener('mousedown', function(e) {startSound(e);
+                                             
+            container.addEventListener('mousedown', function(e) {startSound(e);
             }, false);
              function followSound(e){
                                              let volume= Math.sqrt(e.clientY*e.clientY+e.clientX*e.clientX)/Math.max(window.innerHeight,window.innerWidth)/2.;
@@ -172,15 +174,15 @@ window.addEventListener('keyup', function(event) {
                                              sound2.setVolume(volume*(1.-((angleSound-initialAngleSound))/(2.*pi)));
                                                                       }
                                                                       
-            window.addEventListener('ontouchstart', function(e) {followSound(e);
+                                                                      container.addEventListener('touchstart', function(e) {followSound(e);
                                                                                                                                 }, false);
-            window.addEventListener('mousemove', function(e) {followSound(e);
+                                                                      container.addEventListener('mousemove', function(e) {followSound(e);
                                          }, false);
-            window.addEventListener('ontouchmove', function(e) {followSound(e);
+                                                                      container.addEventListener('touchmove', function(e) {followSound(e);
                                                                                                    }, false);
-                window.addEventListener('mouseup', function(e){ sound.stop();sound2.stop()}, false);
-               window.addEventListener('ontouchend', function(e){ sound.stop();sound2.stop()}, false);
-           window.addEventListener('ontouchcancel', function(e){ sound.stop();sound2.stop()}, false);
+                                                                      container.addEventListener('mouseup', function(e){ sound.stop();sound2.stop()}, false);
+                                                                      container.addEventListener('touchend', function(e){ sound.stop();sound2.stop()}, false);
+                                                                      container.addEventListener('touchcancel', function(e){ sound.stop();sound2.stop()}, false);
 
 
 
@@ -350,7 +352,6 @@ if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
 
 
 let material;
-    let container;
     let camera, renderer;
 let mesh;
 let analyser;
@@ -372,7 +373,6 @@ let uniforms;
 function init() {
     
     inputData = new Float32Array(bufferSize);
-    container = document.getElementById( 'container' );
     camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
     geometryP = new THREE.PlaneBufferGeometry( 2, 2 );
     for (let r=0; r<starArms; r++) {
