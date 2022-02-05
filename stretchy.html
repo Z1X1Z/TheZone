@@ -8,17 +8,20 @@
   
 </head>
 <body>
-    <image class="onofflinePNG" style=" width:30em; height:30em; margin: 0;
+ <image class="onofflinePNG" style="
+     width: 100%;
+       height: auto;
+       
+       margin: 0;
         position: absolute;
-        top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
-        "></image>
+        transform: translate(-50%);
+        "></image></div>
     <script src="OFFLINEonlineSwitch.js"></script>
     <script>
         nf = document.querySelectorAll('.onofflinePNG');
-        if(window.online)nf[0].src ='https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/fj.png'
-        else nf[0].src = 'fj.png';
+        if(window.online)nf[0].src ='https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/fractalJesus.png'
+        else nf[0].src = 'fractalJesus.png';
     </script>
 </body>
 </html>
