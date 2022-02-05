@@ -162,6 +162,8 @@ window.addEventListener('keyup', function(event) {
             }
                                              
             container.addEventListener('mousedown', function(e) {startSound(e);
+             container.addEventListener('touchstart', function(e) {startSound(e);
+
             }, false);
              function followSound(e){
                                              let volume= Math.sqrt(e.clientY*e.clientY+e.clientX*e.clientX)/Math.max(window.innerHeight,window.innerWidth)/2.;
@@ -174,7 +176,6 @@ window.addEventListener('keyup', function(event) {
                                              sound2.setVolume(volume*(1.-((angleSound-initialAngleSound))/(2.*pi)));
                                                                       }
                                                                       
-                                                                      container.addEventListener('touchstart', function(e) {followSound(e);
                                                                                                                                 }, false);
                                                                       container.addEventListener('mousemove', function(e) {followSound(e);
                                          }, false);
