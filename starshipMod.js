@@ -162,7 +162,7 @@ window.addEventListener('keyup', function(event) {
             }
                                              
             container.addEventListener('mousedown', function(e) {startSound(e);
-             container.addEventListener('touchstart', function(e) {startSound(e);
+             container.addEventListener('touchstart', function(e) {startSound(e.touch[0]);
 
             }, false);
              function followSound(e){
@@ -179,7 +179,7 @@ window.addEventListener('keyup', function(event) {
                                                                                                                                 }, false);
                                                                       container.addEventListener('mousemove', function(e) {followSound(e);
                                          }, false);
-                                                                      container.addEventListener('touchmove', function(e) {followSound(e);
+                                                                      container.addEventListener('touchmove', function(e) {followSound(e.touch[0]);
                                                                                                    }, false);
                                                                       container.addEventListener('mouseup', function(e){ sound.stop();sound2.stop()}, false);
                                                                       container.addEventListener('touchend', function(e){ sound.stop();sound2.stop()}, false);
