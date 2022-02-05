@@ -10,7 +10,7 @@ let fftSize=2048;
 let trailLength = 288;
 let colorSound;
 let mobile = false;
-//load threeJS and call startMic()
+//load threeJS then call startMic()
 //vvvvmodified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
 function loadScript(url, callback)
 {
@@ -141,6 +141,42 @@ window.addEventListener('keyup', function(event) {
         //console.log(String.fromCharCode(event.which || event.keyCode));
 
     }, false);
+            
+            let correction = 14.5 ;
+            let sound = new Wad({source : 'square'});
+            let sound2 = new Wad({source : 'square'});
+            let initialAngleSound;
+            window.addEventListener('mousedown', function(e) {
+               let volume= Math.sqrt(e.clientY*e.clientY+e.clientX*e.clientX)/Math.max(window.innerHeight,window.innerWidth)/2.;
+                initialAngleSound = Math.atan2(e.clientY-window.innerHeight/2.,e.clientX- window.innerWidth/2.);
+                let frequency = Math.pow(2.,((initialAngleSound)/pi/2*12+correction)/12.)*440.;
+                                         sound.pitch=frequency;
+                                         sound2.pitch=frequency*2;
+                sound.setVolume(volume*initialAngleSound/(pi*2));
+                sound2.setVolume(volume*(1.-initialAngleSound/(pi*2)));
+
+                sound.play({env:{attack: .1, release:.02,hold:-1}});
+                sound2.play({env:{attack: .1, release:.02,hold:-1}});
+
+            }, false);
+
+            
+            window.addEventListener('mousemove', function(e) {
+                let volume= Math.sqrt(e.clientY*e.clientY+e.clientX*e.clientX)/Math.max(window.innerHeight,window.innerWidth)/2.;
+                let angleSound = Math.atan2(e.clientY-window.innerHeight/2.,e.clientX- window.innerWidth/2.);
+                angleSound=(angleSound-initialAngleSound+4*pi)%(2*pi)+initialAngleSound;
+                let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*440.;
+                sound.setPitch(frequency);
+                sound2.setPitch(frequency*2);
+                sound.setVolume(volume*(((angleSound-initialAngleSound))/(2.*pi)));
+                sound2.setVolume(volume*(1.-((angleSound-initialAngleSound))/(2.*pi)));
+                                         }, false);
+                
+                window.addEventListener('mouseup', function(e){ sound.stop();sound2.stop()}, false);
+
+
+
+            
 var zoomOutEngage=false;
 let pi = 3.14159;
 let inputData;
@@ -192,7 +228,7 @@ function spiral_compress(){
     let n =t;
     //if ( z[n]>z[n-1] && z[n] > z[n+1] ){
     let   d = (z[n+1]-z[n-1])/(z[n-1]+z[n+1]);
-    let nAdj = n + d*4;
+    let nAdj = n + d*4 ;
     //if (Math.abs(nAdj-n) < 10)
     if (Math.abs(d)<4+1)freq =((( audioX.sampleRate)*(nAdj))/1024);
 

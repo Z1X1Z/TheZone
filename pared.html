@@ -10,9 +10,30 @@
 
         <div id="container"></div>
         <script>window.shaderOn=false;</script>
+        
         <script src="OFFLINEonlineSwitch.js"></script>
-
-        <script src="starshipMod.js"></script>
+        <script>
+            function loadScript(url, callback)
+            {
+                // Adding the script tag to the head as suggested before
+                var head = document.head;
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = url;
+                // Then bind the event to the callback function.
+                // There are several events for cross browser compatibility.
+                script.onreadystatechange = callback;
+                script.onload = callback;
+                // Fire the loading
+                head.appendChild(script);
+            }
+            function takeOff(){loadScript("starshipMod.js",null);}
+            let wadLoader="";
+            if(window.online)wadLoader ="https://unpkg.com/web-audio-daw";
+            else wadLoader="wad.min.js";
+            loadScript(wadLoader,takeOff);
+        </script>
+        
         <script>window.zoomCageSize = 10000000000000000.0;</script>
     </body>
 </html>
