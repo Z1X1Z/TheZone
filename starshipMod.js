@@ -162,9 +162,24 @@ window.addEventListener('keyup', function(event) {
                     sound.play({env:{attack: .1, release:.02,hold:-1}});
                     sound2.play({env:{attack: .1, release:.02,hold:-1}});
             }
-                                             
+                                             function startSoundTouch(e){
+                        e=e.touches[0];
+                                                 sound.stop();sound2.stop()
+                                                let y = e.clientY-window.innerHeight/2.;
+                                                 let x = e.clientX- window.innerWidth/2.;
+                                                    let volume= Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight,window.innerWidth)/2.);
+                                                     initialAngleSound = Math.atan2(y,x);
+                                                     let frequency = Math.pow(2.,((initialAngleSound)/pi/2*12+correction)/12.)*440.;
+                                                                              sound.pitch=frequency;
+                                                                              sound2.pitch=frequency*2;
+                                                     sound.setVolume(volume*initialAngleSound/(pi*2));
+                                                     sound2.setVolume(volume*(1.-initialAngleSound/(pi*2)));
+
+                                                     sound.play({env:{attack: .1, release:.02,hold:-1}});
+                                                     sound2.play({env:{attack: .1, release:.02,hold:-1}});
+                                             }
             container.addEventListener('mousedown', startSound, false);
-             container.addEventListener('touchstart', function(e) {startSound(e.touches[0]);uniforms[ "colorCombo" ].value = 7;}, false);
+             container.addEventListener('touchstart', startSoundTouch, false);
              function followSound(e){
                         
                            let y = e.clientY-window.innerHeight/2.;
