@@ -146,33 +146,41 @@ window.addEventListener('keyup', function(event) {
             let sound = new Wad({source : 'square'});
             let sound2 = new Wad({source : 'square'});
             let initialAngleSound;
-            window.addEventListener('mousedown', function(e) {
-               let volume= Math.sqrt(e.clientY*e.clientY+e.clientX*e.clientX)/Math.max(window.innerHeight,window.innerWidth)/2.;
-                initialAngleSound = Math.atan2(e.clientY-window.innerHeight/2.,e.clientX- window.innerWidth/2.);
-                let frequency = Math.pow(2.,((initialAngleSound)/pi/2*12+correction)/12.)*440.;
-                                         sound.pitch=frequency;
-                                         sound2.pitch=frequency*2;
-                sound.setVolume(volume*initialAngleSound/(pi*2));
-                sound2.setVolume(volume*(1.-initialAngleSound/(pi*2)));
-
-                sound.play({env:{attack: .1, release:.02,hold:-1}});
-                sound2.play({env:{attack: .1, release:.02,hold:-1}});
-
-            }, false);
-
-            
-            window.addEventListener('mousemove', function(e) {
-                let volume= Math.sqrt(e.clientY*e.clientY+e.clientX*e.clientX)/Math.max(window.innerHeight,window.innerWidth)/2.;
-                let angleSound = Math.atan2(e.clientY-window.innerHeight/2.,e.clientX- window.innerWidth/2.);
-                angleSound=(angleSound-initialAngleSound+4*pi)%(2*pi)+initialAngleSound;
-                let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*440.;
-                sound.setPitch(frequency);
-                sound2.setPitch(frequency*2);
-                sound.setVolume(volume*(((angleSound-initialAngleSound))/(2.*pi)));
-                sound2.setVolume(volume*(1.-((angleSound-initialAngleSound))/(2.*pi)));
-                                         }, false);
+            function startSound(e){
                 
+                   let volume= Math.sqrt(e.clientY*e.clientY+e.clientX*e.clientX)/Math.max(window.innerHeight,window.innerWidth)/2.;
+                    initialAngleSound = Math.atan2(e.clientY-window.innerHeight/2.,e.clientX- window.innerWidth/2.);
+                    let frequency = Math.pow(2.,((initialAngleSound)/pi/2*12+correction)/12.)*440.;
+                                             sound.pitch=frequency;
+                                             sound2.pitch=frequency*2;
+                    sound.setVolume(volume*initialAngleSound/(pi*2));
+                    sound2.setVolume(volume*(1.-initialAngleSound/(pi*2)));
+
+                    sound.play({env:{attack: .1, release:.02,hold:-1}});
+                    sound2.play({env:{attack: .1, release:.02,hold:-1}});
+            }
+            window.addEventListener('mousedown', function(e) {startSound(e);
+            }, false);
+             function followSound(e){
+                                             let volume= Math.sqrt(e.clientY*e.clientY+e.clientX*e.clientX)/Math.max(window.innerHeight,window.innerWidth)/2.;
+                                             let angleSound = Math.atan2(e.clientY-window.innerHeight/2.,e.clientX- window.innerWidth/2.);
+                                             angleSound=(angleSound-initialAngleSound+4*pi)%(2*pi)+initialAngleSound;
+                                             let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*440.;
+                                             sound.setPitch(frequency);
+                                             sound2.setPitch(frequency*2);
+                                             sound.setVolume(volume*(((angleSound-initialAngleSound))/(2.*pi)));
+                                             sound2.setVolume(volume*(1.-((angleSound-initialAngleSound))/(2.*pi)));
+                                                                      }
+                                                                      
+            window.addEventListener('ontouchstart', function(e) {followSound(e);
+                                                                                                                                }, false);
+            window.addEventListener('mousemove', function(e) {followSound(e);
+                                         }, false);
+            window.addEventListener('ontouchmove', function(e) {followSound(e);
+                                                                                                   }, false);
                 window.addEventListener('mouseup', function(e){ sound.stop();sound2.stop()}, false);
+               window.addEventListener('ontouchend', function(e){ sound.stop();sound2.stop()}, false);
+           window.addEventListener('ontouchcancel', function(e){ sound.stop();sound2.stop()}, false);
 
 
 
