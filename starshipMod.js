@@ -164,7 +164,7 @@ window.addEventListener('keyup', function(event) {
             }
                                              
             container.addEventListener('mousedown', startSound, false);
-             container.addEventListener('touchstart', function(e) {startSound(e.touches[0]);}, false);
+             container.addEventListener('touchstart', function(e) {startSound(e.touches[0]);uniforms[ "colorCombo" ].value = 7;}, false);
              function followSound(e){
                         
                            let y = e.clientY-window.innerHeight/2.;
@@ -501,7 +501,7 @@ function animate( timestamp ) {
   if(onO||window.spiroRainbow)
   {
     lineMat.color = colorSound;
-    lineMat.opacity = .5; //opacity has no effect
+    lineMat.opacity = 1.; //opacity has no effect
   }
 
   let depth =- .07;
