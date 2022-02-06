@@ -9,7 +9,6 @@ var mobileRez=1.;
 let fftSize=2048;
 let trailLength = 288;
 let colorSound;
-let mobile = false;
 //load threeJS then call startMic()
 //vvvvmodified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
 function loadScript(url, callback)
@@ -34,7 +33,7 @@ loadScript(window.threeSonicStarship,load);
 
 
 
-var mobile = false;
+let mobile = false;
 
 //vvvvbelow line from https://code-boxx.com/detect-mobile-device-javascript/
 if(navigator.userAgent.toLowerCase().match(/mobile/i)){
