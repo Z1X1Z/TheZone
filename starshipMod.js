@@ -34,7 +34,7 @@ loadScript(window.threeSonicStarship,load);
 
 
 
-bool mobile = false;
+var mobile = false;
 
 //vvvvbelow line from https://code-boxx.com/detect-mobile-device-javascript/
 if(navigator.userAgent.toLowerCase().match(/mobile/i)){
