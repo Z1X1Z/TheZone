@@ -175,7 +175,6 @@ window.addEventListener('keyup', function(event) {
             let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight,window.innerWidth)/2.);
             let angleSound = Math.atan2(y,x);
             angleSound=(angleSound-initialAngleSound+pi/2.+4.*pi)%(2*pi)+initialAngleSound;
-            console.log(angleSound)
             let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*220.;
             sound.setPitch(frequency,0.,touchNumber);
             sound2.setPitch(frequency*2,0.,touchNumber);
@@ -194,10 +193,10 @@ window.addEventListener('keyup', function(event) {
                   followSound(e.changedTouches[o]);}, false);
               container.addEventListener('touchend', function(e){for(var o=0; o<e.changedTouches.length; o++)
                   
-              {sound.stop(touches[o].identifier);sound2.stop(touches[o].identifier);}}, false);
+              {sound.stop(changedTouches[o].identifier);sound2.stop(changedTouches[o].identifier);}}, false);
 
                 container.addEventListener('touchcancel', function(e){for(var o=0; o<e.changedTouches.length; o++)
-                {sound.stop(touches[o].identifier);sound2.stop(touches[o].identifier);}}, false);
+                {sound.stop(String(changedTouches[o].identifier));sound2.stop(changedTouches[o].identifier);}}, false);
                 
             }
         else{
