@@ -151,7 +151,7 @@ window.addEventListener('keyup', function(event) {
             let sound2 =new Wad({
                 source : 'sine'})
             let initialAngleSound;
-            let touchNumber=0.;
+            let touchNumber="";
             let container = document.getElementById( 'container' );
             function startSound(e){
                 sound.stop({label : touchNumber});sound2.stop({label : touchNumber});
@@ -159,7 +159,6 @@ window.addEventListener('keyup', function(event) {
                 let x = e.clientX- window.innerWidth/2.;
                    let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight,window.innerWidth)/2.);
                     initialAngleSound = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi);
-                                         console.log(initialAngleSound)
                     let frequency = Math.pow(2.,((initialAngleSound)/pi/2*12+correction)/12.)*220.;
                                              sound.pitch=frequency;
                                              sound2.pitch=frequency*2;
@@ -186,18 +185,18 @@ window.addEventListener('keyup', function(event) {
                 container.addEventListener('touchstart', function(e)
                                            {
                     for(var o=0; o<e.touches.length; o++)
-                    {touchNumber=changedTouches[0].identifier;startSound(e.touches[o]);}
+                    {touchNumber=String(changedTouches[0].identifier);startSound(e.touches[o]);}
                     
                 }, false);
               container.addEventListener('touchmove', function(e) {for(var o=0; o<e.changedTouches.length; o++)
                   followSound(e.changedTouches[o]);}, false);
               container.addEventListener('touchend', function(e){for(var o=0; o<e.changedTouches.length; o++)
                   
-              {sound.stop(changedTouches[o].identifier);sound2.stop(changedTouches[o].identifier);}}, false);
+              {sound.stop(String(changedTouches[o].identifier));sound2.stop(Sring(changedTouches[o].identifier));}}, false);
 
                 container.addEventListener('touchcancel', function(e){for(var o=0; o<e.changedTouches.length; o++)
-                {sound.stop(String(changedTouches[o].identifier));sound2.stop(changedTouches[o].identifier);}}, false);
-                
+                {sound.stop(String(changedTouches[o].identifier));sound2.stop(Sring(changedTouches[o].identifier));}}, false);
+
             }
         else{
              container.addEventListener('mousedown', startSound, false);
