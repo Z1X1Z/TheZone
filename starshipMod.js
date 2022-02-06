@@ -34,7 +34,7 @@ loadScript(window.threeSonicStarship,load);
 
 
 
-
+bool mobile = false;
 
 //vvvvbelow line from https://code-boxx.com/detect-mobile-device-javascript/
 if(navigator.userAgent.toLowerCase().match(/mobile/i)){
@@ -42,6 +42,7 @@ if(navigator.userAgent.toLowerCase().match(/mobile/i)){
     fftSize=1024;
     trailLength = 150;
     zoomOutRatchetThreshold=3.;
+    mobile=true;
 }
 else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 {
@@ -49,6 +50,8 @@ else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
     fftSize=1024;
     trailLength = 150;
     zoomOutRatchetThreshold=3.;
+    mobile=true;
+
 }
 
 //key press handling vvvv
@@ -163,28 +166,32 @@ window.addEventListener('keyup', function(event) {
                     sound2.play({env:{attack: .1, release:.02,hold:-1}});
             }
                                              
-           // container.addEventListener('mousedown', startSound, false);
-             container.addEventListener('touchstart', function(e) {startSound(e.touches[0]);uniforms[ "colorCombo" ].value = 7;}, false);
-             function followSound(e){
-                        
-                           let y = e.clientY-window.innerHeight/2.;
-                            let x = e.clientX- window.innerWidth/2.;
-                               let volume= Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight,window.innerWidth)/2.);
-                                             let angleSound = Math.atan2(y,x);
-                                             angleSound=(angleSound-initialAngleSound+4*pi)%(2*pi)+initialAngleSound;
-                                             let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*440.;
-                                             sound.setPitch(frequency);
-                                             sound2.setPitch(frequency*2);
-                                             sound.setVolume(volume*(((angleSound-initialAngleSound))/(2.*pi)));
-                                             sound2.setVolume(volume*(1.-((angleSound-initialAngleSound))/(2.*pi)));
-                                                                      }
-                                                                      
-                                                                                                                                ;
-                                                                    //  container.addEventListener('mousemove', followSound, false);
-                                                                      container.addEventListener('touchmove', function(e) {followSound(e.touches[0]);}, false);
-                                                                      container.addEventListener('mouseup', function(e){ sound.stop();sound2.stop()}, false);
-                                                                      container.addEventListener('touchend', function(e){ sound.stop();sound2.stop()}, false);
-                                                                      container.addEventListener('touchcancel', function(e){ sound.stop();sound2.stop()}, false);
+        function followSound(e){
+
+            let y = e.clientY-window.innerHeight/2.;
+            let x = e.clientX- window.innerWidth/2.;
+            let volume= Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight,window.innerWidth)/2.);
+            let angleSound = Math.atan2(y,x);
+            angleSound=(angleSound-initialAngleSound+4*pi)%(2*pi)+initialAngleSound;
+            let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*440.;
+            sound.setPitch(frequency);
+            sound2.setPitch(frequency*2);
+            sound.setVolume(volume*(((angleSound-initialAngleSound))/(2.*pi)));
+            sound2.setVolume(volume*(1.-((angleSound-initialAngleSound))/(2.*pi)));
+        }
+
+        if (mobile){
+              container.addEventListener('touchstart', function(e) {startSound(e.touches[0]);}, false);
+              container.addEventListener('touchmove', function(e) {followSound(e.touches[0]);}, false);
+              container.addEventListener('touchend', function(e){ sound.stop();sound2.stop()}, false);
+              container.addEventListener('touchcancel', function(e){ sound.stop();sound2.stop()}, false);
+            }
+        else{
+             container.addEventListener('mousedown', startSound, false);
+             container.addEventListener('mousemove', followSound, false);
+             container.addEventListener('mouseup', function(e){ sound.stop();sound2.stop()}, false);
+         }
+
 
 
 
