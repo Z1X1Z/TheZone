@@ -194,10 +194,12 @@ window.addEventListener('keyup', function(event) {
                   followSound(e.changedTouches[o]);}, false);
               container.addEventListener('touchend', function(e){for(var o=0; o<e.changedTouches.length; o++)
                   
-              {sound.stop({label=touches[o].identifier});sound2.stop({label : touches[o].identifier});}}, false);            }
+              {sound.stop(touches[o].identifier);sound2.stop(touches[o].identifier);}}, false);
 
                 container.addEventListener('touchcancel', function(e){for(var o=0; o<e.changedTouches.length; o++)
-                {sound.stop({label=touches[o].identifier});sound2.stop({label : touches[o].identifier});}}, false);            }
+                {sound.stop(touches[o].identifier);sound2.stop(touches[o].identifier);}}, false);
+                
+            }
         else{
              container.addEventListener('mousedown', startSound, false);
              container.addEventListener('mousemove', followSound, false);
