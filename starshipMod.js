@@ -164,7 +164,7 @@ window.addEventListener('keyup', function(event) {
             }
                                              
             container.addEventListener('mousedown', startSound, false);
-             container.addEventListener('touchstart', function(e) {uniforms[ "colorCombo" ].value = 7;}, false);
+             window.addEventListener('touchstart', function(e) {uniforms[ "colorCombo" ].value = 7;}, false);
              function followSound(e){
                         
                            let y = e.clientY-window.innerHeight/2.;
