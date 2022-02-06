@@ -154,7 +154,7 @@ window.addEventListener('keyup', function(event) {
             let touchNumber=0.;
             let container = document.getElementById( 'container' );
             function startSound(e){
-                sound.stop();sound2.stop()
+                sound.stop({label : touchNumber});sound2.stop({label : touchNumber});
                let y = e.clientY-window.innerHeight/2.;
                 let x = e.clientX- window.innerWidth/2.;
                    let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight,window.innerWidth)/2.);
@@ -190,7 +190,7 @@ window.addEventListener('keyup', function(event) {
                     {touchNumber=o;startSound(e.touches[o]);}
                     
                 }, false);
-              container.addEventListener('touchmove', function(e) {for(var o=0; o<e.touches.length; o++)followSound(e.touches[o]);}, false);
+              container.addEventListener('touchmove', function(e) {for(var o=0; o<e.touches.length; o++)followSound(e.touches[o]j);}, false);
               container.addEventListener('touchend', function(e){for(var o=0; o<e.touches.length; o++)
                   
               {touchNumber=o; sound.stop({label : touchNumber});sound2.stop({label : touchNumber});}}, false);
