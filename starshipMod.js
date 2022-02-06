@@ -186,7 +186,7 @@ window.addEventListener('keyup', function(event) {
                 container.addEventListener('touchstart', function(e)
                                            {
                     for(var o=0; o<e.touches.length; o++)
-                    {touchNumber=o;startSound(e.touches[o]);}
+                    {touchNumber=changedTouches[0].identifier;startSound(e.touches[o]);}
                     
                 }, false);
               container.addEventListener('touchmove', function(e) {for(var o=0; o<e.changedTouches.length; o++)
