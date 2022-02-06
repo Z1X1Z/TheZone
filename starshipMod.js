@@ -153,7 +153,7 @@ window.addEventListener('keyup', function(event) {
                 sound.stop();sound2.stop()
                let y = e.clientY-window.innerHeight/2.;
                 let x = e.clientX- window.innerWidth/2.;
-                   let volume= Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight,window.innerWidth)/2.);
+                   let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight,window.innerWidth)/2.);
                     initialAngleSound = Math.atan2(y,x);
                     let frequency = Math.pow(2.,((initialAngleSound)/pi/2*12+correction)/12.)*440.;
                                              sound.pitch=frequency;
@@ -169,7 +169,7 @@ window.addEventListener('keyup', function(event) {
 
             let y = e.clientY-window.innerHeight/2.;
             let x = e.clientX- window.innerWidth/2.;
-            let volume= Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight,window.innerWidth)/2.);
+            let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight,window.innerWidth)/2.);
             let angleSound = Math.atan2(y,x);
             angleSound=(angleSound-initialAngleSound+4*pi)%(2*pi)+initialAngleSound;
             let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*440.;
