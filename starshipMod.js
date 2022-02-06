@@ -145,9 +145,13 @@ window.addEventListener('keyup', function(event) {
     }, false);
             
             let correction = 11.5 ;
-            let sound = new Wad({source : 'square'});
-            let sound2 = new Wad({source : 'square'});
+            let sound = new Wad({
+                source : 'sine',
+            })
+            let sound2 =new Wad({
+                source : 'sine'})
             let initialAngleSound;
+            let touchNumber=0.;
             let container = document.getElementById( 'container' );
             function startSound(e){
                 sound.stop();sound2.stop()
@@ -159,13 +163,11 @@ window.addEventListener('keyup', function(event) {
                     let frequency = Math.pow(2.,((initialAngleSound)/pi/2*12+correction)/12.)*220.;
                                              sound.pitch=frequency;
                                              sound2.pitch=frequency*2;
-                    sound.setVolume(0.);
-                    sound2.setVolume(volume);
-
+                    sound.setVolume(0.,0.,touchNumber);
+                    sound2.setVolume(volume,0.,touchNumber);
                     sound.play({env:{attack: .1, release:.02,hold:-1},label : touchNumber});
                     sound2.play({env:{attack: .1, release:.02,hold:-1},label : touchNumber});
             }
-                                         let    touchNumber=0.;
         function followSound(e){
 
             let y = e.clientY-window.innerHeight/2.;
@@ -175,10 +177,10 @@ window.addEventListener('keyup', function(event) {
             angleSound=(angleSound-initialAngleSound+pi/2.+4.*pi)%(2*pi)+initialAngleSound;
             console.log(angleSound)
             let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*220.;
-            sound.setPitch(frequency);
-            sound2.setPitch(frequency*2);
-            sound.setVolume(volume*(((angleSound-initialAngleSound))/(2.*pi)));
-            sound2.setVolume(volume*(1.-((angleSound-initialAngleSound))/(2.*pi)));
+            sound.setPitch(frequency,0.,touchNumber);
+            sound2.setPitch(frequency*2,0.,touchNumber);
+            sound.setVolume(volume*(((angleSound-initialAngleSound))/(2.*pi)),0.,touchNumber);
+            sound2.setVolume(volume*(1.-((angleSound-initialAngleSound))/(2.*pi)),0.,touchNumber    );
         }
 
         if (mobile){
@@ -188,7 +190,7 @@ window.addEventListener('keyup', function(event) {
                     {touchNumber=o;startSound(e.touches[o]);}
                     
                 }, false);
-              container.addEventListener('touchmove', function(e) {followSound(e.touches[0]);}, false);
+              container.addEventListener('touchmove', function(e) {for(var o=0; o<e.touches.length; o++)followSound(e.touches[o]);}, false);
               container.addEventListener('touchend', function(e){for(var o=0; o<e.touches.length; o++)
                   
               {touchNumber=o; sound.stop({label : touchNumber});sound2.stop({label : touchNumber});}}, false);
