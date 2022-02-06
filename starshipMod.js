@@ -148,9 +148,11 @@ window.addEventListener('keyup', function(event) {
             let initialAngleSound;
             let container = document.getElementById( 'container' );
             function startSound(e){
-                
-                   let volume= Math.sqrt(e.clientY*e.clientY+e.clientX*e.clientX)/Math.max(window.innerHeight,window.innerWidth)/2.;
-                    initialAngleSound = Math.atan2(e.clientY-window.innerHeight/2.,e.clientX- window.innerWidth/2.);
+                sound.stop();sound2.stop()
+               let y = e.clientY-window.innerHeight/2.;
+                let x = e.clientX- window.innerWidth/2.;
+                   let volume= Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight,window.innerWidth)/2.);
+                    initialAngleSound = Math.atan2(y,x);
                     let frequency = Math.pow(2.,((initialAngleSound)/pi/2*12+correction)/12.)*440.;
                                              sound.pitch=frequency;
                                              sound2.pitch=frequency*2;
@@ -161,11 +163,14 @@ window.addEventListener('keyup', function(event) {
                     sound2.play({env:{attack: .1, release:.02,hold:-1}});
             }
                                              
-            container.addEventListener('mousedown', function(e) {startSound(e);
-            }, false);
+           // container.addEventListener('mousedown', startSound, false);
+             container.addEventListener('touchstart', function(e) {startSound(e.touches[0]);uniforms[ "colorCombo" ].value = 7;}, false);
              function followSound(e){
-                                             let volume= Math.sqrt(e.clientY*e.clientY+e.clientX*e.clientX)/Math.max(window.innerHeight,window.innerWidth)/2.;
-                                             let angleSound = Math.atan2(e.clientY-window.innerHeight/2.,e.clientX- window.innerWidth/2.);
+                        
+                           let y = e.clientY-window.innerHeight/2.;
+                            let x = e.clientX- window.innerWidth/2.;
+                               let volume= Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight,window.innerWidth)/2.);
+                                             let angleSound = Math.atan2(y,x);
                                              angleSound=(angleSound-initialAngleSound+4*pi)%(2*pi)+initialAngleSound;
                                              let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*440.;
                                              sound.setPitch(frequency);
@@ -174,12 +179,9 @@ window.addEventListener('keyup', function(event) {
                                              sound2.setVolume(volume*(1.-((angleSound-initialAngleSound))/(2.*pi)));
                                                                       }
                                                                       
-                                                                      container.addEventListener('touchstart', function(e) {followSound(e);
-                                                                                                                                }, false);
-                                                                      container.addEventListener('mousemove', function(e) {followSound(e);
-                                         }, false);
-                                                                      container.addEventListener('touchmove', function(e) {followSound(e);
-                                                                                                   }, false);
+                                                                                                                                ;
+                                                                    //  container.addEventListener('mousemove', followSound, false);
+                                                                      container.addEventListener('touchmove', function(e) {followSound(e.touches[0]);}, false);
                                                                       container.addEventListener('mouseup', function(e){ sound.stop();sound2.stop()}, false);
                                                                       container.addEventListener('touchend', function(e){ sound.stop();sound2.stop()}, false);
                                                                       container.addEventListener('touchcancel', function(e){ sound.stop();sound2.stop()}, false);
@@ -499,7 +501,7 @@ function animate( timestamp ) {
   if(onO||window.spiroRainbow)
   {
     lineMat.color = colorSound;
-    lineMat.opacity = .5; //opacity has no effect
+    lineMat.opacity = 1.; //opacity has no effect
   }
 
   let depth =- .07;
