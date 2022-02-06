@@ -190,13 +190,13 @@ window.addEventListener('keyup', function(event) {
                     {touchNumber=o;startSound(e.touches[o]);}
                     
                 }, false);
-              container.addEventListener('touchmove', function(e) {for(var o=0; o<e.touches.length; o++)followSound(e.touches[o]j);}, false);
+              container.addEventListener('touchmove', function(e) {for(var o=0; o<e.touches.length; o++)followSound(e.touches[o]);}, false);
               container.addEventListener('touchend', function(e){for(var o=0; o<e.touches.length; o++)
                   
-              {touchNumber=o; sound.stop({label : touchNumber});sound2.stop({label : touchNumber});}}, false);
+              {sound.stop({label : o});sound2.stop({label : o});}}, false);
                 
                 container.addEventListener('touchcancel', function(e){for(var o=0; o<e.touches.length; o++)
-                {touchNumber=o; sound.stop({label : touchNumber});sound2.stop({label : touchNumber});}}, false);            }
+                {sound.stop({label : o});sound2.stop({label : o});}}, false);            }
         else{
              container.addEventListener('mousedown', startSound, false);
              container.addEventListener('mousemove', followSound, false);
