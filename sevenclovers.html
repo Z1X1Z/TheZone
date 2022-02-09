@@ -244,7 +244,7 @@ vec3 bride2manny(vec2 p,vec2 t){
                   break;}
               else{
                   z=vec2(-1./(z.x*z.x-z.y*z.y-g.x),2.0*z.x*z.y-g.y);
-                  l=abs(z.y)*4.;//smooths middle horn, removes some clouds
+                  l=abs(z.y)*5.;//smooths middle horn, removes some clouds
                   if(z.x>-.1)l=z.x*50.;}//face with closed small holes
               return vec3(clamp(1.-l,0.,1.));
               }
@@ -258,7 +258,7 @@ vec3 bride2manny(vec2 p,vec2 t){
               break;}
           else{
               z=vec2(-1./(z.x*z.x-z.y*z.y-g.x),2.0*z.x*z.y-g.y);
-              l=abs(z.y)*4.;//smooths middle horn, removes some clouds
+              l=abs(z.y)*5.;//smooths middle horn, removes some clouds
               if(z.x>-.1)l=z.x*50.;}//face with closed small holes
           return vec3(clamp(1.-l,0.,1.));
           }
