@@ -87,6 +87,7 @@ window.addEventListener('keyup', function(event) {
       else if (key=="U"||window.key.toLowerCase()=="u") uniforms[ "colorCombo" ].value = 7;
       else if (key=="A"||window.key.toLowerCase()=="a") uniforms[ "colorCombo" ].value = 11;
       else if (key=="F"||window.key.toLowerCase()=="f") uniforms[ "fourCreats" ].value *= -1;
+      else if (key=="G"||window.key.toLowerCase()=="g") uniforms[ "colorCombo" ].value *= 17;
       else if (key=="K"||window.key.toLowerCase()=="k") uniforms[ "colorCombo" ].value = 13;
       else if (key=="S"||window.key.toLowerCase()=="s") uniforms[ "colorCombo" ].value = 14;
       else if (key=="X"||window.key.toLowerCase()=="x") uniforms[ "colorCombo" ].value = 15;
@@ -143,10 +144,26 @@ window.addEventListener('keyup', function(event) {
         //console.log(String.fromCharCode(event.which || event.keyCode));
 
     }, false);
-            
+            let hyperdriveTUNA = {
+            Overdrive:{
+                    outputGain: -9.154,           //-42 to 0 in dB
+                    drive: .2,                 //0 to 1
+                    curveAmount: .2,           //0 to 1
+                    algorithmIndex: 0,            //0 to 5, selects one of the drive algorithms
+                    bypass: 0
+                },
+                Delay:{
+                    feedback: .5,    //0 to 1+
+                    delayTime: 100,    //1 to 10000 milliseconds
+                    wetLevel: 0.25,     //0 to 1+
+                    dryLevel: .5,       //0 to 1+
+                    cutoff: 20000,      //cutoff frequency of the built in lowpass-filter. 20 to 22050
+                    bypass: 0
+                }
+            };
             let correction = 11.5 ;
-            let sound = new Wad({source : 'sine'});
-            let sound2 = new Wad({source : 'sine'});
+            let sound =  new Wad({source : 'sine', tuna   : hyperdriveTUNA});
+            let sound2 = new Wad({source : 'sine', tuna   : hyperdriveTUNA});
             let initialAngleSound;
             function startSound(e){
                 sound.stop();sound2.stop()
@@ -405,6 +422,7 @@ materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
             );
 
         trailGeom[r] = new THREE.BufferGeometry();
+
         trailGeom[r].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
         trailMeshes[r] = new THREE.Mesh(trailGeom[r] , materials );
     }
@@ -698,7 +716,9 @@ while(loopLimit>15){
   r--;
   if(r<=0)r=trailDepth-1;
 }
-  if(window.shaderOn)scene.add( mesh );
+
+                 
+  if(window.shaderOn)scene.add( mesh );//mesh here is the PIXELshader.
   renderer.render( scene, camera );
 
   scene.remove(line);
