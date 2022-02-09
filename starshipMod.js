@@ -87,7 +87,7 @@ window.addEventListener('keyup', function(event) {
       else if (key=="U"||window.key.toLowerCase()=="u") uniforms[ "colorCombo" ].value = 7;
       else if (key=="A"||window.key.toLowerCase()=="a") uniforms[ "colorCombo" ].value = 11;
       else if (key=="F"||window.key.toLowerCase()=="f") uniforms[ "fourCreats" ].value *= -1;
-      else if (key=="G"||window.key.toLowerCase()=="g") uniforms[ "colorCombo" ].value *= 17;
+      else if (key=="G"||window.key.toLowerCase()=="g") uniforms[ "colorCombo" ].value = 17;
       else if (key=="K"||window.key.toLowerCase()=="k") uniforms[ "colorCombo" ].value = 13;
       else if (key=="S"||window.key.toLowerCase()=="s") uniforms[ "colorCombo" ].value = 14;
       else if (key=="X"||window.key.toLowerCase()=="x") uniforms[ "colorCombo" ].value = 15;
