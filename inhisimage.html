@@ -47,14 +47,14 @@
         vec2 z=g;
         for (int f=0;f<20;f+=1)if(abs(z.y)>10.)heart=vec4(0.);
         else {z=vec2(((z.x*z.x-z.y*z.y)-g.x+qq),(2.0*z.x*z.y-g.y+q*4.));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
-              heart+=vec4(z.x*z.y,z.x,z.y,1.)/7.;}
+              heart+=vec4(z.x*z.y+.3,z.x+.3,z.y,1.)/10.;}
     //face--I saw the face in a vision dream coming from the Mandelbrot fractal five or so years before I found it in code$$see footnote
         g=p*2.;
         vec2 s=g;
         for (int f=0;f<21;f+=1)if(abs(s.y)>18.&&(f==1||f>3)){
             l=1.-length(s)/40.;break;}
             else{ s=vec2(-1./((s.x*s.x-s.y*s.y)-g.x),(2.0*s.x*s.y-g.y));
-                l=abs(s.y)*6.;//middle horn
+                l=abs(s.y)*5.;//middle horn
         if(s.x*50.>-3.)l=(s.x*50.);//closes small holes
         }
     //body--I found the body the first time I ever used a square root with the Lamb equations.
@@ -89,7 +89,7 @@
         z=g;
         if(g.x>.75&&g.x<1.7&&abs(g.y*g.x)<.54)for(int f=0;f<8;f+=1)if(abs(z.x)>52.&&f>1)b=abs(z.x)/100.;
         else{
-            z=3.*vec2(-1./(z.x*z.x-z.y*z.y-g.x+qq/10.),72.*z.x*z.y-g.y+q);
+            z=3.*vec2(-1./(z.x*z.x-z.y*z.y-g.x+qq/10.),77.*z.x*z.y-g.y+q);
             z.y=-1./z.y;}
     gl_FragColor=heart+vec4(b+r+m,b/2.+r+m,r+m/2.5,1.)+vec4(vec3(clamp(1.-l,0.,1.)),1.);}
     //$$I originally found these equations while trying to combine x=1/(1/x-x) which produces increasingly many extraneous solutions on feedback algebraically with the Mandelbrot
