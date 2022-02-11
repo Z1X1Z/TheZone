@@ -606,7 +606,7 @@ vec3 xtol(vec2 s, vec2 t){
           bg=freed(bg*zoom+coords.yx);
           
           if(colorCombo<10)zoomer=tol(bg,vec2(0.));
-          else if (colorCombo==11)zoomer=heartZoom(bg,vec2(-sin(time2dance),-sin(time2dance*.618))*.75);
+          else if (colorCombo==11)zoomer=heartZoom(bg,vec2(-sin(time2dance/4.),-sin(time2dance*.618/4.)));
           else if (colorCombo==13)zoomer=tokogae(bg,vec2(zoom));
           else if (colorCombo==14)zoomer=TOLTOK(bg,vec2(zoom));
           else if (colorCombo==15)zoomer=xx(bg,vec2(0.));

@@ -89,7 +89,7 @@ function getKey(){
 void main(){
 
 	vec2 p=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*7.*zoom;
-            vec2 t=vec2(-sin(time2dance),-sin(time2dance*.618))*.75;
+            vec2 t=vec2(-sin(time2dance/4.),-sin(time2dance*.618/4.));
             p.x+=.5;
             p+=coords.yx;
             p.y=-p.y;
