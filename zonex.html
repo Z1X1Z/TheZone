@@ -90,7 +90,7 @@ function getKey(){
 void main(){
 
 	vec2 p=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*7.*zoom;
-            vec2 t=vec2(-sin(time2dance/4.),-sin(time2dance*.618/4.))-coords.yx*2.;
+            vec2 t=(vec2((-sin(time2dance/4.),-sin(time2dance*.618/4.)))+coords)*-log(zoom)*zoom/2.;
             p.x+=.5;
             p+=coords.yx;
             p.y=-p.y;
@@ -99,7 +99,7 @@ void main(){
             if (colorCombo!=1)t=vec2(0.);
             const int cycles = 300;
             for (int f=0;f<cycles;f+=1)if(abs(z.y)>10.)h=vec3(0.);
-            else {z=vec2(((z.x*z.x-z.y*z.y)-p.x+t.x*zoom),(2.0*z.x*z.y-p.y+t.y*zoom));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
+            else {z=vec2(((z.x*z.x-z.y*z.y)-p.x+t.x),(2.0*z.x*z.y-p.y+t.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
                   h+=vec3(z.x*z.y+.3,z.x+.3,z.y)*2./float(cycles);}
                 gl_FragColor=vec4(h,1.);
     }
