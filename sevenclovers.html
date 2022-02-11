@@ -224,7 +224,7 @@ vec3 bride2manny(vec2 p,vec2 t){
                   const int cycles = 60;
                   for (int f=0;f<cycles;f+=1)if(abs(z.y)>10.)h=vec3(0.);
                         else {z=vec2(((z.x*z.x-z.y*z.y)-g.x+t.x),(2.0*z.x*z.y-g.y+t.y*4.));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
-                        h+=vec3(z.x*z.y+.3,z.x+.3,z.y)*2./float(cycles);}
+                            h+=(vec3(z.x*z.y,z.x,z.y)+.3)*2./float(cycles);}
           return h;
           }
               vec3 heartZoom(vec2 p, vec2 t){
@@ -237,7 +237,7 @@ vec3 bride2manny(vec2 p,vec2 t){
                   const int cycles = 300;
                   for (int f=0;f<cycles;f+=1)if(abs(z.y)>10.)h=vec3(0.);
                   else {z=vec2(((z.x*z.x-z.y*z.y)-p.x+t.x),(2.0*z.x*z.y-p.y+t.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
-                        h+=vec3(z.x*z.y+.3,z.x+.3,z.y)*2./float(cycles);}
+                      h+=(vec3(z.x*z.y,z.x,z.y)+.3)*2./float(cycles);}
           return h;
           }
               vec3 face(vec2 g, vec2 t){
@@ -606,7 +606,7 @@ vec3 xtol(vec2 s, vec2 t){
           vec3 zoomer;
           bg=freed(bg*zoom+coords.yx);
           
-          if(colorCombo<10)zoomer=tol(bg, morph*-vec2(coords.y,coords.x)*-log(pow(zoom,2.))*zoom*2.);
+          if(colorCombo<10)zoomer=tol(bg, morph*-vec2(coords.y,coords.x)*-log(pow(zoom,3./2.))*zoom*2.);
           else if (colorCombo==11)zoomer=heartZoom(bg-vec2(.0,0.), morph*-vec2(-coords.y,coords.x)*-log(pow(zoom,.5))*zoom*2.);
           else if (colorCombo==13)zoomer=tokogae(bg,vec2(zoom));
           else if (colorCombo==14)zoomer=TOLTOK(bg,vec2(zoom));
