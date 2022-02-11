@@ -215,25 +215,30 @@ vec3 bride2manny(vec2 p,vec2 t){
       }
 
           vec3 heart(vec2 g, vec2 t){
-              g.x-=.5;
-              g.y*=-1.;
-              vec2 z=g.xy;
-          vec3 h=vec3(0.);
-              for (int f=0;f<60;f+=1)if(abs(z.y+z.x)>2.)h=vec3(0.);
-              else {z=vec2(((z.x*z.x-z.y*z.y)-g.x+t.x),(2.0*z.x*z.y-g.y+t.y*4.));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
-                h+=vec3(z.x*z.y+.2,z.x+.2,z.y)/21.;}
+              //Mandelbrot\heart
+                  g.x-=.5;
+                  g.y*=-1.;
+                  vec2 z=g;
+                  vec3 h=vec3(0.);
+                  const int cycles = 60;
+                  for (int f=0;f<cycles;f+=1)if(abs(z.y)>10.)h=vec3(0.);
+                        else {z=vec2(((z.x*z.x-z.y*z.y)-g.x+t.x),(2.0*z.x*z.y-g.y+t.y*4.));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
+                        h+=vec3(z.x*z.y+.3,z.x+.3,z.y)*2./float(cycles);}
           return h;
           }
               vec3 heartZoom(vec2 p, vec2 t){
                   p.x+=.5;
-                  p+=coords.yx;
+                  //p+=coords.yx;
+                  p.y=-p.y;
+
                   vec2 z=p;
-                  vec3 h;
-                  for (int f=0;f<100;f+=1)if(abs(z.y+z.x)>20.)h=vec3(1.);
-                  else {z=vec2(((z.x*z.x-z.y*z.y)-p.x),(2.0*z.x*z.y-p.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
-                    h+=vec3(.0);}
-              return h;
-                              }
+                  vec3 h=vec3(0.);
+                  const int cycles = 100;
+                  for (int f=0;f<cycles;f+=1)if(abs(z.y)>10.)h=vec3(0.);
+                  else {z=vec2(((z.x*z.x-z.y*z.y)-p.x+t.x*zoom*3.),(2.0*z.x*z.y-p.y+t.y*12.*zoom));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
+                        h+=vec3(z.x*z.y+.3,z.x+.3,z.y)*2./float(cycles);}
+          return h;
+          }
               vec3 face(vec2 g, vec2 t){
               float l = 1.;
               g*=2.;
@@ -252,7 +257,7 @@ vec3 bride2manny(vec2 p,vec2 t){
           float l = 1.;
           g*=2.;
           vec2 z=g.xy;
-          if(g.x*g.x+g.y*g.y<40.)for (int f=0;f<21+6*50;f+=1)if(abs(z.y)>19.&&(f==1||f>3)){
+          if(g.x*g.x+g.y*g.y<40.)for (int f=0;f<21+6*5;f+=1)if(abs(z.y)>19.&&(f==1||f>3)){
               if (f==1){l=1.;break;}
               l=1.-length(z)/40.;//clouds and face
               break;}
@@ -594,19 +599,19 @@ vec3 xtol(vec2 s, vec2 t){
            vec2 p=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*12.;
            vec2 bg =p/2.;
 
-          float rate = 7.;
+          float rate = 1.;
           vec2 t =vec2(-sin(rate*time2dance)/50.,-sin(time2dance*(rate*gr)*3.)/30.);
           //vec2 fl=vec2(-1.,-sin(time));//vec2(-sin(rate*time),-sin(time*(rate*gr)*3.));
           vec3 zoomer;
           bg=freed(bg*zoom+coords.yx);
           
           if(colorCombo<10)zoomer=tol(bg,vec2(0.));
-          else if (colorCombo==11)zoomer=heartZoom(bg,vec2(0.));
+          else if (colorCombo==11)zoomer=heartZoom(bg,t*3.);
           else if (colorCombo==13)zoomer=tokogae(bg,vec2(zoom));
           else if (colorCombo==14)zoomer=TOLTOK(bg,vec2(zoom));
           else if (colorCombo==15)zoomer=xx(bg,vec2(0.));
           else if (colorCombo==16)zoomer=xtol(bg,vec2(0.));
-          else if (colorCombo==17)zoomer=body(bg,vec2(0.))+faceHeights(bg,vec2(0.))+heart(bg*2.-vec2(1.,0.),vec2(0.));
+          else if (colorCombo==17)zoomer=body(bg,vec2(0.))+robe(bg,vec2(0.))/2.+faceHeights(bg,vec2(0.))+heart(bg-vec2(.5,0.),vec2(0.));
           vec3 creatures,b;
           p.x+=.5;
           

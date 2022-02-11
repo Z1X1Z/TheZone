@@ -81,16 +81,24 @@ function getKey(){
 			uniform vec2 coords;
        			uniform vec2 resolution;
 			uniform float zoom;
+            uniform float time;
+
 
 void main(){
 
 	vec2 p=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*7.*zoom;
-p+=coords.yx;
-vec2 s=p;
-float l=1.;
-for (int f=0;f<90;f+=1)if(abs(s.x+s.y)>17.)l=0.;
-else s=vec2((s.x*s.x-s.y*s.y-p.x),2.0*s.x*s.y-p.y);
-gl_FragColor=vec4(l);}
+            vec2 t=vec2(-sin(time)/30.,-sin(time*.618))/50.*100.;
+            p.x+=.5;
+            p+=coords.yx;
+            p.y=-p.y;
+            vec2 z=p;
+            vec3 h=vec3(0.);
+            const int cycles = 100;
+            for (int f=0;f<cycles;f+=1)if(abs(z.y)>10.)h=vec3(0.);
+            else {z=vec2(((z.x*z.x-z.y*z.y)-p.x+t.x*zoom),(2.0*z.x*z.y-p.y+t.y*zoom));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
+                  h+=vec3(z.x*z.y+.3,z.x+.3,z.y)*2./float(cycles);}
+                gl_FragColor=vec4(h,1.);
+    }
 
 		</script>
         <script>window.zoomCageSize=2; window.spiroRainbow = true;
