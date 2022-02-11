@@ -83,6 +83,7 @@ function getKey(){
 			uniform float zoom;
             uniform float time;
             uniform float time2dance;
+            uniform int colorCombo;
 
 
 
@@ -95,6 +96,7 @@ void main(){
             p.y=-p.y;
             vec2 z=p;
             vec3 h=vec3(0.);
+            if (colorCombo!=1)t=vec2(0.);
             const int cycles = 300;
             for (int f=0;f<cycles;f+=1)if(abs(z.y)>10.)h=vec3(0.);
             else {z=vec2(((z.x*z.x-z.y*z.y)-p.x+t.x*zoom),(2.0*z.x*z.y-p.y+t.y*zoom));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
