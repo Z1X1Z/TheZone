@@ -235,7 +235,7 @@ vec3 bride2manny(vec2 p,vec2 t){
                   vec3 h=vec3(0.);
                   const int cycles = 300;
                   for (int f=0;f<cycles;f+=1)if(abs(z.y)>10.)h=vec3(0.);
-                  else {z=vec2(((z.x*z.x-z.y*z.y)-p.x+t.x*zoom),(2.0*z.x*z.y-p.y+t.y*zoom));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
+                  else {z=vec2(((z.x*z.x-z.y*z.y)-p.x+t.x),(2.0*z.x*z.y-p.y+t.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
                         h+=vec3(z.x*z.y+.3,z.x+.3,z.y)*2./float(cycles);}
           return h;
           }
@@ -606,7 +606,7 @@ vec3 xtol(vec2 s, vec2 t){
           bg=freed(bg*zoom+coords.yx);
           
           if(colorCombo<10)zoomer=tol(bg,vec2(0.));
-          else if (colorCombo==11)zoomer=heartZoom(bg,(vec2((-sin(time2dance/4.),-sin(time2dance*.618/4.)))+coords)*-log(zoom)*zoom/2.);
+          else if (colorCombo==11)zoomer=heartZoom(bg,vec2((-sin(time2dance/4.),-sin(time2dance*.618/4.))-vec2(-coords.y,coords.x))*-log(zoom)*zoom);
           else if (colorCombo==13)zoomer=tokogae(bg,vec2(zoom));
           else if (colorCombo==14)zoomer=TOLTOK(bg,vec2(zoom));
           else if (colorCombo==15)zoomer=xx(bg,vec2(0.));
