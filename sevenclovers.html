@@ -94,6 +94,7 @@
             uniform float cored;
             uniform bool free;
             uniform bool MetaCored;
+            uniform float morph;
 
             
             float zin(float x){return -sin(x);}
@@ -262,7 +263,7 @@ vec3 bride2manny(vec2 p,vec2 t){
               l=1.-length(z)/40.;//clouds and face
               break;}
           else{
-              z=vec2(-1./(z.x*z.x-z.y*z.y-g.x),2.0*z.x*z.y-g.y);
+              z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),2.0*z.x*z.y-g.y+t.y);
               l=abs(z.y)*5.;//smooths middle horn, removes some clouds
               if(z.x>-.1)l=z.x*50.;}//face with closed small holes
           return vec3(clamp(1.-l,0.,1.));
@@ -439,7 +440,7 @@ vec3 bride2manny(vec2 p,vec2 t){
               z.y=-1./z.y;}
           return vec3(b/2.,b,b/2.);
           }
-        vec3 tol(vec2 p, vec2 coords){
+        vec3 tol(vec2 p, vec2 t){
                                  if(cored>1.)
                         {                        float c = sqrt(p.y*p.y+p.x*p.x);
                                 if(true){
@@ -453,13 +454,13 @@ vec3 bride2manny(vec2 p,vec2 t){
 
                         vec2 s=p;
                         for (int counter=0;counter<41;counter+=1)if(abs(s.y)<47.){
-                            s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y);//x**3
+                            s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y+t.x, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y+t.y);//x**3
                             s.x=log(abs(s.x));
                             
                                 
                                 if(MetaCored){
                                     float c = sqrt(s.y*s.y+s.x*s.x);
-                                    if(c<=2./3.){float shift=1./-sin(time);s*=shift;c*=shift;}
+                                    if(c<=2./3.&&counter<int(cored/2.)){float shift=3.;s*=shift;c*=shift;}
                                                              
                                                              }
                                     }
@@ -605,13 +606,13 @@ vec3 xtol(vec2 s, vec2 t){
           vec3 zoomer;
           bg=freed(bg*zoom+coords.yx);
           
-          if(colorCombo<10)zoomer=tol(bg,vec2(0.));
-          else if (colorCombo==11)zoomer=heartZoom(bg-vec2(.0,0.), -vec2(-coords.y,coords.x)*-log(pow(zoom,.5))*zoom*2.);
+          if(colorCombo<10)zoomer=tol(bg, morph*-vec2(coords.y,coords.x)*-log(pow(zoom,2.))*zoom*2.);
+          else if (colorCombo==11)zoomer=heartZoom(bg-vec2(.0,0.), morph*-vec2(-coords.y,coords.x)*-log(pow(zoom,.5))*zoom*2.);
           else if (colorCombo==13)zoomer=tokogae(bg,vec2(zoom));
           else if (colorCombo==14)zoomer=TOLTOK(bg,vec2(zoom));
           else if (colorCombo==15)zoomer=xx(bg,vec2(0.));
           else if (colorCombo==16)zoomer=xtol(bg,vec2(0.));
-          else if (colorCombo==17)zoomer=body(bg,vec2(0.))+robe(bg,vec2(0.))/2.+faceHeights(bg,vec2(0.))+                                                   heartZoom(bg-vec2(.5,0.),(-vec2(-coords.y,coords.x)-vec2(.5,0.))*-log(pow(zoom,.5))*zoom*2.);
+          else if (colorCombo==17)zoomer=body(bg,coords.yx*-log(pow(zoom,1.))*zoom*2.)+robe(bg,vec2(0.))/2.+faceHeights(bg,morph*coords*-log(pow(zoom,.5))*zoom*2.)+                                                   heartZoom(bg-vec2(.5,0.),morph*(-vec2(-coords.y,coords.x)-vec2(.5,0.))*-log(pow(zoom,.5))*zoom*2.);
 ;
                                                    
           vec3 creatures,b;

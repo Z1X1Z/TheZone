@@ -89,10 +89,11 @@ window.addEventListener('keyup', function(event) {
       else if (key=="F"||window.key.toLowerCase()=="f") uniforms[ "fourCreats" ].value *= -1;
       else if (key=="G"||window.key.toLowerCase()=="g") uniforms[ "colorCombo" ].value = 17;
       else if (key=="K"||window.key.toLowerCase()=="k") uniforms[ "colorCombo" ].value = 13;
-      else if (key=="S"||window.key.toLowerCase()=="s") uniforms[ "colorCombo" ].value = 14;
+      else if (key=="D"||window.key.toLowerCase()=="d") uniforms[ "colorCombo" ].value = 14;
       else if (key=="X"||window.key.toLowerCase()=="x") uniforms[ "colorCombo" ].value = 15;
       else if (key=="B"||window.key.toLowerCase()=="b") uniforms[ "colorCombo" ].value = 16;
       else if (key=="P"||window.key.toLowerCase()=="p"){ cored=!cored;uniforms[ "cored" ].value = 0.;}
+      else if (key=="S"||window.key.toLowerCase()=="s"){ if(uniforms[ "morph" ].value == 0.)uniforms[ "morph" ].value = 1.;else uniforms[ "morph" ].value = 0.; }
       else if (key=="N"||window.key.toLowerCase()=="n") uniforms[ "MetaCored" ].value = !uniforms[ "MetaCored" ].value;
       else if (key=="L"||window.key.toLowerCase()=="l")
       {if(zoomAtl41){zoom=1.;coordX=0.; coordY=0.;}zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
@@ -435,7 +436,8 @@ materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
       colorCombo: {value: 1 },
         cored: {value: 0 },
         free: {value: false },
-        MetaCored: {value: false },
+        MetaCored: {value: true },
+        morph: {value: 0.0 },
 
       fourCreats: {value: 1 },
       metronome: {value: .99 },
