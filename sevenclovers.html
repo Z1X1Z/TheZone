@@ -606,12 +606,14 @@ vec3 xtol(vec2 s, vec2 t){
           bg=freed(bg*zoom+coords.yx);
           
           if(colorCombo<10)zoomer=tol(bg,vec2(0.));
-          else if (colorCombo==11)zoomer=heartZoom(bg,vec2((-sin(time2dance/4.),-sin(time2dance*.618/4.))-vec2(-coords.y,coords.x))*-log(zoom)*zoom);
+          else if (colorCombo==11)zoomer=heartZoom(bg,vec2((-sin(time2dance/4.),-sin(time2dance*.618/4.))-vec2(-coords.y,coords.x))*-log(zoom)*zoom/2.);
           else if (colorCombo==13)zoomer=tokogae(bg,vec2(zoom));
           else if (colorCombo==14)zoomer=TOLTOK(bg,vec2(zoom));
           else if (colorCombo==15)zoomer=xx(bg,vec2(0.));
           else if (colorCombo==16)zoomer=xtol(bg,vec2(0.));
-          else if (colorCombo==17)zoomer=body(bg,vec2(0.))+robe(bg,vec2(0.))/2.+faceHeights(bg,vec2(0.))+heart(bg-vec2(.5,0.),vec2(0.));
+          else if (colorCombo==17)zoomer=body(bg,vec2(0.))+robe(bg,vec2(0.))/2.+faceHeights(bg,vec2(0.))+                                                   heartZoom(bg-vec2(.5,0.),vec2((-sin(time2dance/4.),-sin(time2dance*.618/4.))-vec2(-coords.y,coords.x)-vec2(.5,0.))*-log(zoom)*zoom/2.);
+;
+                                                   
           vec3 creatures,b;
           p.x+=.5;
           
