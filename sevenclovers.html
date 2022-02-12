@@ -605,8 +605,8 @@ vec3 xtol(vec2 s, vec2 t){
           //vec2 fl=vec2(-1.,-sin(time));//vec2(-sin(rate*time),-sin(time*(rate*gr)*3.));
           vec3 zoomer;
           bg=freed(bg*zoom+coords.yx);
-          vec2 dance1 = morph*abs((coords.yx+1.)*.5*log(zoom)*zoom);
-          vec2 dance2 = morph*abs((coords.yx-vec2(.5,0.)+1.)*.5*log(zoom)*zoom);
+          vec2 dance1 = morph*abs((coords.yx*vec2(-sin(time2dance/3.+time*20.),-cos(time2dance/3.+time*20.))*2.)*.5*log(pow(zoom,1.618))*zoom)/2.;
+          vec2 dance2 = morph*abs(((coords.yx-vec2(.5,0.))*vec2(-sin(time2dance/3.+time*2.),-cos(time2dance/3.+time))*2.)*.5*log(pow(zoom,1.618))*zoom)/2.;
 
           if(colorCombo<10)zoomer=tol(bg+vec2(dance1.x,-dance1.y), dance1);
           else if (colorCombo==11)zoomer=heartZoom(bg+vec2(dance1.x,-dance1.y), dance1);

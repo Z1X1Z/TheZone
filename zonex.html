@@ -59,7 +59,7 @@ function getKey(){
  window.key=androidGetKey[scan];
  }
 </script>
-
+PRESS [W] TO disengage dynamic morphing and [A] to engage it again, NUMBER Keys are resolution!
 		<div id="container"></div>
 
 		<script id="vertexShader" type="x-shader/x-vertex">
@@ -90,7 +90,7 @@ function getKey(){
 void main(){
 
 	vec2 p=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*7.*zoom;
-            vec2 t=abs((coords.yx+1.)*.5*log(zoom)*zoom);
+            vec2 t=abs((coords.yx*vec2(-sin(time2dance/2.+time),-cos(time2dance/2.+time))*2.)*.5*log(pow(zoom,1.618))*zoom);
             //p.x+=.5;
             p+=coords.yx;
             p.y*=-1.;
@@ -106,7 +106,7 @@ void main(){
     }
 
 		</script>
-        <script>window.zoomCageSize=2; window.spiroRainbow = true;
+        <script>window.zoomCageSize=2.4; window.spiroRainbow = true;
 </script>
 
         
