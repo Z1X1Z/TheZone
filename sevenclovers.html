@@ -605,14 +605,16 @@ vec3 xtol(vec2 s, vec2 t){
           //vec2 fl=vec2(-1.,-sin(time));//vec2(-sin(rate*time),-sin(time*(rate*gr)*3.));
           vec3 zoomer;
           bg=freed(bg*zoom+coords.yx);
-          
-          if(colorCombo<10)zoomer=tol(bg, morph*-vec2(coords.y,coords.x)*-log(pow(zoom,3./2.))*zoom*2.);
-          else if (colorCombo==11)zoomer=heartZoom(bg-vec2(.0,0.), morph*-vec2(-coords.y,coords.x)*-log(pow(zoom,.5))*zoom*2.);
+          vec2 dance1 = morph*abs((coords.yx+1.)*.5*log(pow(zoom,2.))*zoom);
+          vec2 dance2 = morph*abs((coords.yx-vec2(.5,0.)+1.)*.5*log(pow(zoom,2.))*zoom);
+
+          if(colorCombo<10)zoomer=tol(bg+vec2(dance1.x,-dance1.y), dance1);
+          else if (colorCombo==11)zoomer=heartZoom(bg+vec2(dance1.x,-dance1.y), dance1);
           else if (colorCombo==13)zoomer=tokogae(bg,vec2(zoom));
           else if (colorCombo==14)zoomer=TOLTOK(bg,vec2(zoom));
           else if (colorCombo==15)zoomer=xx(bg,vec2(0.));
           else if (colorCombo==16)zoomer=xtol(bg,vec2(0.));
-          else if (colorCombo==17)zoomer=body(bg,coords.yx*-log(pow(zoom,1.))*zoom*2.)+robe(bg,vec2(0.))/2.+faceHeights(bg,morph*coords*-log(pow(zoom,.5))*zoom*2.)+                                                   heartZoom(bg-vec2(.5,0.),morph*(-vec2(-coords.y,coords.x)-vec2(.5,0.))*-log(pow(zoom,.5))*zoom*2.);
+          else if (colorCombo==17)zoomer=body(bg,vec2(-sin(time*20.)/50.,-sin(time*gr*20.)/30.))+robe(bg,vec2(0.))/2.+faceHeights(bg,t)+                                                   heartZoom(bg-vec2(.5,0.)+vec2(dance2.x,-dance2.y),dance2);
 ;
                                                    
           vec3 creatures,b;
