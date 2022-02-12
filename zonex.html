@@ -91,9 +91,9 @@ void main(){
 
 	vec2 p=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*7.*zoom;
             vec2 t=abs(((coords.yx-vec2(.5,0.))+vec2(-sin(time2dance/
-                                                          2.+time*6.28),
+                                                          2.+time*3.14),
                                                      -cos(time2dance/
-                                                          2.+time*6.28)))
+                                                          2.+time*3.14)))
                                                 *.5*log(pow(zoom,1.618))*zoom);
             p.x+=.5;
             p+=coords.yx;
