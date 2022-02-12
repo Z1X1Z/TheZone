@@ -90,10 +90,11 @@ function getKey(){
 void main(){
 
 	vec2 p=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*7.*zoom;
-            vec2 t=-vec2(-coords.y,coords.x)*-log(pow(zoom,.5))*zoom*2.;
+            vec2 t=abs((coords.yx+1.)*.5*log(zoom)*zoom);
             //p.x+=.5;
             p+=coords.yx;
-            p.y=-p.y;
+            p.y*=-1.;
+            p+=t;
             vec2 z=p;
             vec3 h=vec3(0.);
             if (colorCombo!=1)t=vec2(0.);
