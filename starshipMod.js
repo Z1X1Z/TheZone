@@ -131,7 +131,7 @@ window.addEventListener('keyup', function(event) {
             //window.movementRate=.5;
         }
             else if(uniforms["colorCombo"].value == 11){
-                window.zoomCageSize=1.;
+                window.zoomCageSize=2.;
                 //window.movementRate=.5;
             }
             
