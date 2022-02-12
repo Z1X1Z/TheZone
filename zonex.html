@@ -90,15 +90,15 @@ PRESS [W] TO disengage dynamic morphing and [A] to engage it again, NUMBER Keys 
 void main(){
 
 	vec2 p=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*7.*zoom;
-            vec2 t=abs((coords.yx*vec2(-sin(time2dance/2.+time),-cos(time2dance/2.+time))*2.)*.5*log(pow(zoom,1.618))*zoom);
-            //p.x+=.5;
+            vec2 t=abs(((coords.yx-vec2(.5,0.))*vec2(-sin(time2dance/2.+time),-cos(time2dance/2.+time))*2.)*.5*log(pow(zoom,1.618))*zoom);
+            p.x+=.5;
             p+=coords.yx;
             p.y*=-1.;
             p+=t;
             vec2 z=p;
             vec3 h=vec3(0.);
             if (colorCombo!=1)t=vec2(0.);
-            const int cycles = 300;
+            const int cycles = 1000;
             for (int f=0;f<cycles;f+=1)if(abs(z.y)>10.)h=vec3(0.);
             else {z=vec2(((z.x*z.x-z.y*z.y)-p.x+t.x),(2.0*z.x*z.y-p.y+t.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
                   h+=(vec3(z.x*z.y,z.x,z.y)+.3)*2./float(cycles);}
