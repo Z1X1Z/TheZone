@@ -206,7 +206,7 @@ function getKey(){
                           
                           if(MetaCored){
                               float c = sqrt(s.y*s.y+s.x*s.x);
-                              if(c<=2./3.&&counter<int(cored/2.+log(length(freed(coords)))+.5)){float shift=2.;s*=shift;c*=shift;}
+                              if(c<=2./3.&&counter<int(cored/2.+log(length(freed(coords))*2./3.)+.5)){float shift=2.;s*=shift;c*=shift;}
                                                        
                                                        }
                               }
