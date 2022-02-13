@@ -27,7 +27,7 @@ function loadScript(url, callback)
 }
 var load = function() {
     startMic();
-};
+}; 
 loadScript(window.threeSonicStarship,load);
 //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
 
@@ -145,71 +145,8 @@ window.addEventListener('keyup', function(event) {
         //console.log(String.fromCharCode(event.which || event.keyCode));
 
     }, false);
-            let hyperdriveTUNA = {
-            Overdrive:{
-                    outputGain: -9.154,           //-42 to 0 in dB
-                    drive: .2,                 //0 to 1
-                    curveAmount: .2,           //0 to 1
-                    algorithmIndex: 0,            //0 to 5, selects one of the drive algorithms
-                    bypass: 0
-                },
-                Delay:{
-                    feedback: .5,    //0 to 1+
-                    delayTime: 100,    //1 to 10000 milliseconds
-                    wetLevel: 0.25,     //0 to 1+
-                    dryLevel: .5,       //0 to 1+
-                    cutoff: 20000,      //cutoff frequency of the built in lowpass-filter. 20 to 22050
-                    bypass: 0
-                }
-            };
-            let correction = 11.5 ;
-            let sound =  new Wad({source : 'sine', tuna   : hyperdriveTUNA});
-            let sound2 = new Wad({source : 'sine', tuna   : hyperdriveTUNA});
-            let initialAngleSound;
-            function startSound(e){
-                sound.stop();sound2.stop()
-               let y = e.clientY-window.innerHeight/2.;
-                let x = e.clientX- window.innerWidth/2.;
-                   let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight,window.innerWidth)/2.);
-                    initialAngleSound = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi);
-                    let frequency = Math.pow(2.,((initialAngleSound)/pi/2*12+correction)/12.)*220.;
-                                             sound.pitch=frequency;
-                                             sound2.pitch=frequency*2;
-                    sound.setVolume(0.);
-                    sound2.setVolume(volume);
-
-                    sound.play({env:{attack: .1, release:.02,hold:-1}});
-                    sound2.play({env:{attack: .1, release:.02,hold:-1}});
-            }
-                                             
-        function followSound(e){
-
-            let y = e.clientY-window.innerHeight/2.;
-            let x = e.clientX- window.innerWidth/2.;
-            let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight,window.innerWidth)/2.);
-            let angleSound = Math.atan2(y,x);
-            angleSound=(angleSound-initialAngleSound+pi/2.+4.*pi)%(2*pi)+initialAngleSound;
-            let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*220.;
-            sound.setPitch(frequency);
-            sound2.setPitch(frequency*2);
-            sound.setVolume(volume*(((angleSound-initialAngleSound))/(2.*pi)));
-            sound2.setVolume(volume*(1.-((angleSound-initialAngleSound))/(2.*pi)));
-        }
-    let container = document.getElementById( 'container' );
-        if (mobile){
-              container.addEventListener('touchstart', function(e) {startSound(e.touches[0]);}, false);
-              container.addEventListener('touchmove', function(e) {followSound(e.touches[0]);}, false);
-              container.addEventListener('touchend', function(e){ sound.stop();sound2.stop()}, false);
-              container.addEventListener('touchcancel', function(e){ sound.stop();sound2.stop()}, false);
-            }
-        else{
-             container.addEventListener('mousedown', startSound, false);
-             container.addEventListener('mousemove', followSound, false);
-             container.addEventListener('mouseup', function(e){ sound.stop();sound2.stop()}, false);
-         }
-
-
-
+       
+            let container = document.getElementById( 'container' );
 
             
 var zoomOutEngage=false;
