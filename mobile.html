@@ -174,15 +174,15 @@ function getKey(){
               z.y=-1./z.y;}
           return vec3(b/2.,b,b/2.);
           }
-                        
+                        vec2 freed(vec2 p){
+                            if(free){
+                                float shift = 3.;
+                                p+=shift/2.;
+                                p=(mod(abs(p),shift));
+                                p-=shift/2.;
+                            }
         vec3 tol(vec2 p, vec2 t){
-                  
-                  if(free){
-                      float shift = 3.;
-                      p+=shift/2.;
-                      p=(mod(abs(p),shift));
-                      p-=shift/2.;
-                  }
+                  freed(p);
                   float c;
                     if(cored>1.)
                   {
@@ -203,7 +203,7 @@ function getKey(){
                           
                           if(MetaCored){
                               float c = sqrt(s.y*s.y+s.x*s.x);
-                              if(c<=2./3.&&counter<int(cored/2.+log(length(coords)*2./3.)+.5)){float shift=2.;s*=shift;c*=shift;}
+                              if(c<=2./3.&&counter<int(cored/2.+log(length(freed(coords)))+.5)){float shift=2.;s*=shift;c*=shift;}
                                                        
                                                        }
                               }
