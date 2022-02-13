@@ -38,8 +38,8 @@ let sound;
 let sound2;
 function initialize(){
     
-    sound =  new Wad({source : 'sine', tuna   : hyperdriveTUNA});
-     sound2 = new Wad({source : 'sine', tuna   : hyperdriveTUNA});
+    sound =  new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
+     sound2 = new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
 }
 loadScript(wadLoader,initialize);
 
