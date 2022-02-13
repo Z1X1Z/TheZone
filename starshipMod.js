@@ -288,7 +288,7 @@ if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold&
                coordX=bx;
                coordY=by;
            }
-if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize*zoom){
+if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize){
                if (Math.abs(by)>window.zoomCageSize)coordY*=1.-(Math.abs(by)-window.zoomCageSize)/25.;
                if (Math.abs(bx)>window.zoomCageSize)coordX*=1.-(Math.abs(bx)-window.zoomCageSize)/25.;
   }
