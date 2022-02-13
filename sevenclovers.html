@@ -422,8 +422,8 @@ vec3 bride2manny(vec2 p,vec2 t){
                                  if(cored>1.)
                         {                        float c = sqrt(p.y*p.y+p.x*p.x);
                                 if(true){
-                                    c*=3./2.;
-                                    for(int i=0;i<69; i++)if(c<1.&&i<int(cored)){p*=2.;c*=2.;}
+                                    //c*=3./2.;
+                                    for(int i=0;i<69; i++)if(c<2./3.&&i<int(cored)){p*=2.;c*=2.;}
                                     }
                                 else p/=mod(1.,c)+c;
 
@@ -531,7 +531,7 @@ vec3 xtol(vec2 s, vec2 t){
                                          {
                                              float c = sqrt(s.y*s.y+s.x*s.x);
                                              c/=h;
-                                             if(c<h){for(int i = 0; i<int(cored)+1; i++)if(c<h/2.){s*=h;c*=h;}
+                                             {for(int i = 0; i<int(cored)+1; i++)if(c<h/2.){s*=h;c*=h;}
                                                                                            
                                                                                            }
                                          }
@@ -541,12 +541,14 @@ vec3 xtol(vec2 s, vec2 t){
                             s=vec2((s.x*s.x-s.y*s.y), 2.0*s.x*s.y);//this is {s^2-p;s.real=-1./s.real}
                                     s.x=log(abs(s.x));
                                     
-                                    if(cored>=1.&&MetaCored&&false){
+                                    if(MetaCored){
                                         float c = sqrt(s.y*s.y+s.x*s.x);
-                                        if(c<h){for(int i = 0; i<int(cored)+1; i++)if(c<h/2.){s*=h;c*=h;}
+                                        //for(int i=0;i<69; i++)if(c<2./3.&&i<int(cored)){p*=2.;c*=2.;}
+                                        c/=h;
+                                        if(c<h/2. &&f<int((cored/2.+log(length(freed(coords))*h/2.)+.5)/2.)){float shift=h;s*=shift;c*=shift;}
                                                                  }
                                                                                       }
-                        }
+                        
                            return vec3(s.y/50.-s.x*s.y/600.,s.x/8.-s.y/s.x/200.,1.-s.x/10.);
                            
                         }
