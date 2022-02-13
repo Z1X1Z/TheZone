@@ -19,8 +19,8 @@ else wadLoader="wad.min.js";
 let hyperdriveTUNA = {
 Overdrive:{
         outputGain: -9.154,           //-42 to 0 in dB
-        drive: .2,                 //0 to 1
-        curveAmount: .2,           //0 to 1
+        drive: .5,                 //0 to 1
+        curveAmount: .5,           //0 to 1
         algorithmIndex: 0,            //0 to 5, selects one of the drive algorithms
         bypass: 0
     },
@@ -38,8 +38,8 @@ let sound;
 let sound2;
 function initialize(){
     
-    sound =  new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
-     sound2 = new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
+    sound =  new Wad({source : 'square', tuna   : hyperdriveTUNA});
+     sound2 = new Wad({source : 'square', tuna   : hyperdriveTUNA});
 }
 loadScript(wadLoader,initialize);
 
