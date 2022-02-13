@@ -183,9 +183,11 @@ function getKey(){
                       p=(mod(abs(p),shift));
                       p-=shift/2.;
                   }
+                  float c;
                     if(cored>1.)
                   {
-                      float c = sqrt(p.y*p.y+p.x*p.x);
+                      c = sqrt(p.y*p.y+p.x*p.x);
+
                           if(true){
                               c*=3./2.;
                               for(int i=0;i<69; i++)if(c<1.&&i<int(cored)){p*=2.;c*=2.;}
@@ -201,7 +203,7 @@ function getKey(){
                           
                           if(MetaCored){
                               float c = sqrt(s.y*s.y+s.x*s.x);
-                              if(c<=2./3.&&counter<int(cored/2.)){float shift=3.;s*=shift;c*=shift;}
+                              if(c<=2./3.&&counter<int(cored/2.+log(length(coords)))){float shift=3.;s*=shift;c*=shift;}
                                                        
                                                        }
                               }
