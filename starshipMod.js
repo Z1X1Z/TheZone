@@ -510,7 +510,7 @@ function animate( timestamp ) {
   uniforms.coords.value.x = coordX;
   uniforms.coords.value.y = coordY;
             
-            if(zoomAtl41){zoom=.01;
+            if(zoomAtl41){zoom=.025;
                 if(uniforms[ "colorCombo" ].value != 16)uniforms[ "cored" ].value = 9;//this is !16 for !twelve petals
                 else uniforms[ "cored" ].value = 7;
             }
