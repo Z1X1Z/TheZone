@@ -222,7 +222,7 @@ function getKey(){
                   else if(colorCombo==4) o= vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.);
                   else if(colorCombo==5)  o=vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.);
                   else if(colorCombo==6)o= vec3(s.x/8.-s.y/s.x/7000.,1.-s.x/16.,s.y/100.)/1.1;
-                  else if(colorCombo==7) return vec3(-sin(time*1.)*s.y/100.-sin(time*1.618)*s.x*s.y/888.,s.x/8.-sin(time*-.618)*s.y/s.x/2000.,1.-sin(time-sin(time*2.618))*s.x/20.);
+                  else if(colorCombo==7) return vec3(-sin(time*1.)*s.y/100.-sin(time*1.618)*s.x*s.y/888.,s.x/8.-sin(time*-.618)*s.y/s.x/2000.,1.-sin(time*2.618)*s.x/20.);
                                                 
                     return clamp(o,0.,1.);}
 
