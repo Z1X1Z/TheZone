@@ -438,8 +438,8 @@ vec3 bride2manny(vec2 p,vec2 t){
                                 
                                 if(MetaCored){
                                     float c = sqrt(s.y*s.y+s.x*s.x);
-                                    if(c<=2./3.&&counter<int(cored/2.+log(length(coords)))){float shift=2.;s*=shift;c*=shift;}
-
+                                    if(c<=2./3.&&counter<int(cored/2.+log(length(coords)*2./3.)+1.)){float shift=2.;s*=shift;c*=shift;}
+s
                                                              }
                                     }
                         
