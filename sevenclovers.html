@@ -431,10 +431,10 @@ vec3 bride2manny(vec2 p,vec2 t){
                                 
                                 if(MetaCored){
                                     float d = length(s);
-                                    for(int i=0;i<69; i++)if(d<2./3.&&counter+i<int(cored/2.+log(length(freed(coords))*2./3.)+.5)&&length(freed(coords))<1.5){float shift=2.;s*=shift;d*=shift;}
+                                    for(int i=0;i<69; i++)if(d<2./3.&&counter+i<int(cored/2.+log(length(freed(coords))*2./3.)+.5)&&(counter)<int((cored/2.+log(length(s)*2./3.))-.5)&&length(freed(coords))<1.5){float shift=2.;s*=shift;d*=shift;}
                                         else break;
-                                                             }
-                                    }
+                                }
+                        }
                         
                                                    
                                                    vec3 o=vec3(s.y);
