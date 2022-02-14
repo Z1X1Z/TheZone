@@ -54,7 +54,6 @@ else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 }
 
 //key press handling vvvv
-let cored=true;
 var pointed=false;
 let zoomAtl41=false;//watch for the 1 and the l
 var rez = window.devicePixelRatio*mobileRez;
@@ -92,7 +91,6 @@ window.addEventListener('keyup', function(event) {
       else if (key=="D"||window.key.toLowerCase()=="d") uniforms[ "colorCombo" ].value = 14;
       else if (key=="X"||window.key.toLowerCase()=="x") uniforms[ "colorCombo" ].value = 15;
       else if (key=="B"||window.key.toLowerCase()=="b") uniforms[ "colorCombo" ].value = 16;
-      else if (key=="P"||window.key.toLowerCase()=="p"){ cored=!cored;uniforms[ "cored" ].value = 0.;}
       else if (key=="S"||window.key.toLowerCase()=="s"){ if(uniforms[ "morph" ].value == 0.)uniforms[ "morph" ].value = 1.;else uniforms[ "morph" ].value = 0.; }
       else if (key=="N"||window.key.toLowerCase()=="n") uniforms[ "MetaCored" ].value = !uniforms[ "MetaCored" ].value;
       else if (key=="L"||window.key.toLowerCase()=="l")
@@ -371,7 +369,6 @@ materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
       time: {value: 1.0 },
       zoom: {value: 1.0 },
       colorCombo: {value: 1 },
-        cored: {value: 0 },
         free: {value: false },
         MetaCored: {value: true },
         morph: {value: 0.0 },
@@ -491,23 +488,15 @@ function animate( timestamp ) {
       else if ( zoom<zoomCone)zoomOutEngage = true;
 
   if (zoomOutEngage == true)zoom *= 1.44;
-      if(cored==true)
-      {
-        if(uniforms[ "colorCombo" ].value != 16)//this is !16 for !twelve petals
-            uniforms[ "cored" ].value = Math.log(zoom*3./2.)/Math.log(.5)+1.;
-        else uniforms[ "cored" ].value = Math.log(zoom*1.75)/Math.log(.75)+1.;
 
-    }
 
          
 
   uniforms.coords.value.x = coordX;
   uniforms.coords.value.y = coordY;
             
-            if(zoomAtl41){zoom=.025;
-                if(uniforms[ "colorCombo" ].value != 16)uniforms[ "cored" ].value = 9;//this is !16 for !twelve petals
-                else uniforms[ "cored" ].value = 7;
-            }
+            if(zoomAtl41)zoom=.025;
+            
   uniforms[ "zoom" ].value = zoom;
   uniforms[ "time" ].value = timestamp/1000.;
   uniforms[ "time2dance" ].value += Math.abs(totalAMP/numberOfBins*2.);

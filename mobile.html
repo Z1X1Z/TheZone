@@ -77,7 +77,6 @@ function getKey(){
             uniform int fourCreats;
 
             
-            uniform float cored;
             uniform bool MetaCored;
             uniform bool free;
             float zin(float x){return -sin(x);}
@@ -185,8 +184,9 @@ function getKey(){
                             }
                         
                       vec3 tol(vec2 p, vec2 t){
+                  float cored = log(zoom*3./2.)/log(.5)+1.;
                                       float c = length(p);
-                                      for(int i=1;i<70; i++)if(c<2./3.&&i<int(cored)){p*=2.;c*=2.;}else break;
+                                      if(MetaCored)for(int i=1;i<70; i++)if(c<2./3.&&i<int(cored)){p*=2.;c*=2.;}else break;
                                       vec2 s=p;
                                                                int loops=0;
                                       for (int counter=0;counter<41;counter+=1)if(abs(s.y)<47.){
