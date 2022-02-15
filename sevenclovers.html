@@ -214,7 +214,7 @@ vec3 bride2manny(vec2 p,vec2 t){
                   const int cycles = 300;
                   for (int f=0;f<cycles;f+=1)if(abs(z.y)>10.)h=vec3(0.);
                   else {z=vec2(((z.x*z.x-z.y*z.y)-p.x+t.x),(2.0*z.x*z.y-p.y+t.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
-                      h+=(vec3(z.x*z.y,z.x,z.y)+.3)*2./float(cycles);}
+                      h+=(vec3(z.x*z.y,z.x,z.y-.2*(1.-p.x))+.3)*2./float(cycles);}
           return h;
           }
               vec3 face(vec2 g, vec2 t){

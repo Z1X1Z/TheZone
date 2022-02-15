@@ -68,7 +68,7 @@ PRESS [A] TO disengage dynamic morphing and [Q] to engage it again!
 void main(){
 
 	vec2 p=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*4.*zoom;
-            vec2 t=abs(((coords.yx-vec2(.5,0.))+vec2(1.))*.5*log(zoom*zoom)/log(1.618)*zoom);
+            vec2 t=(coords.yx+.5)*log(pow(zoom,1.618))/log(1.618)*zoom*.5;
                                                 
             p.x+=.5;
             p+=coords.yx;
@@ -80,7 +80,7 @@ void main(){
             const int cycles = 300;
             for (int f=0;f<cycles;f+=1)if(abs(z.y)>10.)h=vec3(0.);
             else {z=vec2(((z.x*z.x-z.y*z.y)-p.x+t.x),(2.0*z.x*z.y-p.y+t.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
-                  h+=(vec3(z.x*z.y,z.x,z.y)+.3)*2./float(cycles);}
+                  h+=(vec3(z.x*z.y,z.x,z.y-.2*(1.-p.x))+.3)*2./float(cycles);}
                 gl_FragColor=vec4(h,1.);
     }
 
