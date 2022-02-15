@@ -517,8 +517,8 @@ float shift = 6.;
 
 float size = 1.;(-sin(time)+3.)/2.3;
 vec2 adj=-a.yx/1.2*size;
-vec2 oxCoord = vec2(p.x-shift,p.y-shift)*adj;
-vec2 lionCoord = vec2(p.x+shift,p.y+shift+vertshift)*adj;
+vec2 oxCoord = vec2(p.x+shift,p.y+shift+vertshift)*adj;
+vec2 lionCoord = vec2(p.x-shift,p.y-shift)*adj;
 vec2 eagleCoord = vec2(p.x-shift,p.y+shift +vertshift)*adj;
 vec2 manCoord = vec2(p.x+shift,p.y-shift)*adj;
 
