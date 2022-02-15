@@ -68,8 +68,7 @@ PRESS [A] TO disengage dynamic morphing and [Q] to engage it again!
 void main(){
 
 	vec2 p=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*4.*zoom;
-            vec2 t=abs(((coords.yx-vec2(.5,0.))+vec2(1.))
-                                                *.5*log(pow(zoom,1.618))*zoom);
+            vec2 t=abs(((coords.yx-vec2(.5,0.))+vec2(1.))*.5*log(zoom*zoom)/log(1.618)*zoom);
                                                 
             p.x+=.5;
             p+=coords.yx;
