@@ -188,7 +188,8 @@ function getKey(){
                                       float c = length(p);
                                       if(MetaCored)for(int i=1;i<70; i++)if(c<2./3.&&i<int(cored)){p*=2.;c*=2.;}else break;
                                       vec2 s=p;
-                                                               int loops=0;
+                                      int loops=0;
+                                      int hyperCore= int(cored*2./3.+log(length(freed(coords)))/log(2.));
                                       for (int counter=0;counter<41;counter+=1)if(abs(s.y)<47.){
                                           
                                           
@@ -198,7 +199,7 @@ function getKey(){
                                             if(MetaCored){
                                                 float d = length(s);
 
-                                                for(int i=0;i<69; i++)if(d<2./3.&& loops+counter<int((cored*2./3.+log(length(freed(coords)))/log(2.)))&&1.49>length(freed(coords)))
+                                                for(int i=0;i<69; i++)if(d<2./3.&& loops+counter<hyperCore&&1.49>length(freed(coords)))
                                          {float shift=2.;s*=shift;d*=shift;loops++;}
                                                 
                                                     else break;
