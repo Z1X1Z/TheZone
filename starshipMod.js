@@ -1,5 +1,6 @@
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
+if(!("mandelbrot" in window))window.mandelbrot=false;
 window.movementRate=1.;
 let zoomFrames = 14.4;
 window.zoomCageSize = 1.5;//radius of zoom bounding
@@ -138,7 +139,8 @@ window.addEventListener('keyup', function(event) {
                     //window.movementRate=.5;
                 }
         else
-        {            window.zoomCageSize=1.5;
+        {   if(!window.mandelbrot)window.zoomCageSize=1.5;
+            else window.zoomCageSize=2.;
             window.movementRate=1.;}
         //console.log(String.fromCharCode(event.which || event.keyCode));
 
