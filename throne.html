@@ -204,7 +204,7 @@ vec3 man(vec2 p,bool unleashed) {
     } return vec3(-0.);}
 vec3 eagle(vec2 p,	bool unleashed) {
     vec2 s = p;
-    float d = 0.0, l, flip=-sin(3.14*3./2.+rate*(time_))/abs(sin((time_))*2.+1.);
+    float d = 0.0, l, flip=-sin(3.14*3./2.+rate*(time_))/abs(-sin((time_))*2.-1.);
     
 
     if (flip<0.) p = -p;
