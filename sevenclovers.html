@@ -126,56 +126,57 @@
                                        if(f>2)e+=0.3;}
         }
                              return vec3(l+c,l+x+c,l+c)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
-vec3 bride2manny(vec2 p,vec2 t){
-                                     
-                             float time2 = t.x;
-                             float c=0.,k=0.,l=0.,x=0.,e=0.;
-                             vec3 head;
-            if(abs(p.y*p.y)+abs(p.x*p.x)<700.){
-                t.y=t.x;
-                         //vv body vv
-                             vec2 g=p/2.;
-                              ///g.x+=(-sin(t.y)-1.)/2.*.5;
-                             vec2 z=g;
-                             for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>(20.-(-sin(t.y)-1.)/2.*50.)&&f>4)x+=z.y/20000000.;
-                             else {z=2.*vec2(-1./((z.x*z.x-(1.44+(-sin(t.y)-1.)/2.*.44)*z.y*z.y)
-                          -g.x*(1.2+(-sin(t.y)-1.)/2.*.2)),
-                     ((1.2-(-sin(t.y)-1.)/2.*.8)*z.x*z.y-(1.2+(-sin(t.y)-1.)/2.*.2)*g.y-sin(t.y/2.)/20.));
-//The Holy Bible Revelation 21:16 "The city was laid out like a square, as long as it was wide.
-//He measured the city with the rod and found it to be 12,000 stadia in length,
- //and as wide and high as it is long. The angel measured the wall using human measurement, and it was 144 cubits thick.
-                                                       z.x=pow(abs(z.x),(.777+(-sin(t.y)-1.)/2.*.277));}
+           vec3 bride2manny(vec2 p,vec2 t){
+                                                
+                                        float time2 = t.x;
+                                        float c=0.,k=0.,l=0.,x=0.,e=0.;
+                                        vec3 head;
+                       if(abs(p.y*p.y)+abs(p.x*p.x)<700.){
+                           t.y=t.x;
+                                    //vv body vv
+                                        vec2 g=p/2.;
+                                         ///g.x+=(coz(t.y)-1.)/2.*.5;
+                                        vec2 z=g;
+                                        for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>(20.-(coz(t.y)-1.)/2.*50.)&&f>4)x+=z.y/20000000.;
+                                        else {z=2.*vec2(-1./((z.x*z.x-(1.44+(coz(t.y)-1.)/2.*.44)*z.y*z.y)
+                                     -g.x*(1.2+(coz(t.y)-1.)/2.*.2)),
+                                ((1.2-(coz(t.y)-1.)/2.*.8)*z.x*z.y-(1.2+(coz(t.y)-1.)/2.*.2)*g.y-sin(t.y/2.)/20.));
+           //The Holy Bible Revelation 21:16 "The city was laid out like a square, as long as it was wide.
+           //He measured the city with the rod and found it to be 12,000 stadia in length,
+            //and as wide and high as it is long. The angel measured the wall using human measurement, and it was 144 cubits thick.
+                                                                  z.x=pow(abs(z.x),(.777+(coz(t.y)-1.)/2.*.277));}
 
 
 
-        //legs
-                             g=p/4.;
-                            // g.x-=.5;
-                             z=g;
-                             if(g.x>.75&&g.x<1.7&&abs(g.y*g.x)<.54)for(int f=0;f<8;f+=1)if(abs(z.x)>52.&&f>1)c=abs(z.x)/1000000.;
-                             else {z=3.*vec2(-1./((z.x*z.x-z.y*z.y)-g.x),(77.0*z.x*z.y-(2.+(-sin(t.y)-1.)/2.)*g.y-sin(t.y*2.)/7.));
-                                   z.y = -1./z.y;}
-               //vv head vv
-                                     g=p;
-                                     z=g;
-                        if(abs(p.y)<4.)for (int f=0;f<21;f+=1)if(abs(z.y)>19.&&(f==int(floor(.8-(zin(t.x)-1.)/2.*.4)))){l=0.;break;}
-                             else if(abs(z.y)>19.&&(f>4))l=1.;
-                                     else{z=vec2(-1./((z.x*z.x-z.y*z.y)-g.x),2.0*z.x*z.y-g.y);
-                          z*=pow(z.x,(z.x-(zin(t.x)-1.)/2.*-z.x));
-                          l = clamp(1.-abs(z.y)*6.,0.,1.);
-                          if(z.x>-.1&&f!=0)l=clamp(1.-z.x*(120.-sin(t.x)*80.),0.,1.);
-                             }
+                   //legs
+                                        g=p/4.;
+                                       // g.x-=.5;
+                                        z=g;
+                                        if(g.x>.75&&g.x<1.7&&abs(g.y*g.x)<.54)for(int f=0;f<8;f+=1)if(abs(z.x)>52.&&f>1)c=abs(z.x)/1000000.;
+                                        else {z=3.*vec2(-1./((z.x*z.x-z.y*z.y)-g.x),(77.0*z.x*z.y-(2.+(coz(t.y)-1.)/2.)*g.y-sin(t.y*2.)/7.));
+                                              z.y = -1./z.y;}
+                          //vv head vv
+                                                g=p;
+                                                z=g;
+                                   if(abs(p.y)<4.)for (int f=0;f<21;f+=1)if(abs(z.y)>19.&&(f==int(floor(.8-(coz(t.x)-1.)/2.*.4)))){l=0.;break;}
+                                        else if(abs(z.y)>19.&&(f>4))l=1.;
+                                                else{z=vec2(-1./((z.x*z.x-z.y*z.y)-g.x),2.0*z.x*z.y-g.y);
+                                     z*=pow(z.x,(z.x-(coz(t.x)-1.)/2.*-z.x));
+                                     l = clamp(1.-abs(z.y)*6.,0.,1.);
+                                     if(z.x>-.1&&f!=0)l=clamp(1.-z.x*(120.-sin(t.x)*80.),0.,1.);
+                                        }
 
-                         //vv mandelbrot\heart vv
-                                              g=p*(2.+(-sin(t.y)-1.)/2.*1.);
-                                              g.x-=6.+(-sin(t.y)-1.)/2.*5.5;
-                             z=g;
-                             for (int f=0;f<50;f+=1)if(abs(z.x+z.y)>20.)break;
-                             else {z=vec2(((z.x*z.x-z.y*z.y)-g.x-sin(time2*gr)/4.),(2.0*z.x*z.y-g.y-sin(time2/2.)/4.));
-                                          if(f>2)k+=0.005;}
-                   
-    }
-                         return vec3(l)+vec3(c,x+c/2.,0.)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
+                                    //vv mandelbrot\heart vv
+                                                         g=p*(2.+(coz(t.y)-1.)/2.*1.);
+                                                         g.x-=6.+(coz(t.y)-1.)/2.*5.5;
+                                        z=g;
+                                        for (int f=0;f<50;f+=1)if(abs(z.x+z.y)>20.)break;
+                                        else {z=vec2(((z.x*z.x-z.y*z.y)-g.x-sin(time2*gr)/4.),(2.0*z.x*z.y-g.y-sin(time2/2.)/4.));
+                                                     if(f>2)k+=0.005;}
+                              
+               }
+                                    return vec3(l)+vec3(c,x+c/2.,0.)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
+                                                                                                                                        
 
       vec3 robeL(vec2 g, vec2 t){
       float r=0.;

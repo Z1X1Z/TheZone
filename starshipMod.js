@@ -375,7 +375,7 @@ materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
 
       fourCreats: {value: 1 },
       metronome: {value: .99 },
-      time2dance: {value: 1.0 },
+      time2dance: {value: 0.0 },
       resolution: {value: new THREE.Vector2() },
       coords: {value: new THREE.Vector2() }
     }
