@@ -58,7 +58,7 @@ else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 var pointed=false;
 let zoomAtl41=false;//watch for the 1 and the l
 var rez = window.devicePixelRatio*mobileRez;
-
+var center = false;
 
 
 window.addEventListener('keyup', function(event) {
@@ -96,6 +96,7 @@ window.addEventListener('keyup', function(event) {
       else if (key=="N"||window.key.toLowerCase()=="n") uniforms[ "MetaCored" ].value = !uniforms[ "MetaCored" ].value;
       else if (key=="L"||window.key.toLowerCase()=="l")
       {if(zoomAtl41){zoom=1.;coordX=0.; coordY=0.;}zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
+      else if (key=="C"||window.key.toLowerCase()=="c")center=!center;
 
 
       else if (key=="Z"||window.key.toLowerCase()=="z") {
@@ -289,8 +290,8 @@ if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold&
                coordY=by;
            }
 if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize){
-               if (Math.abs(by)>window.zoomCageSize)coordY*=1.-(Math.abs(by)-window.zoomCageSize)/25./zoom;
-               if (Math.abs(bx)>window.zoomCageSize)coordX*=1.-(Math.abs(bx)-window.zoomCageSize)/25./zoom;
+               if (Math.abs(by)>window.zoomCageSize)coordY*=1.-(Math.abs(by)-window.zoomCageSize)/15./zoom;
+               if (Math.abs(bx)>window.zoomCageSize)coordX*=1.-(Math.abs(bx)-window.zoomCageSize)/15./zoom;
   }
        
  interpolationFactor = 10.;//timeDif*1./(callbackWait-1);
@@ -479,17 +480,18 @@ function animate( timestamp ) {
   if (on)scene.add(line);
             
             
-            
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
+            
+            if (zoom>=1.)zoomOutEngage = false;
+            
+            else if ( zoom<zoomCone)zoomOutEngage = true;
+
+            if (zoomOutEngage == true){zoom *= 1.44; coordX*=1-zoom; coordY*=1-zoom;}
+
   if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom *=Math.E**(Math.log(.5)/(zoomFrames*window.movementRate));
-  else if(zoom<1.)zoom /= Math.E**(Math.log(.5)/(zoomFrames*window.movementRate));
+  else if(zoom<1.){zoom /= Math.E**(Math.log(.5)/(zoomFrames*window.movementRate)); if(!zoomOutEngage&&center){coordX*=1-zoom; coordY*=1-zoom;}}
   if (zoom>1.)zoom=1.;
-
-  if (zoom>=1.)zoomOutEngage = false;
-      else if ( zoom<zoomCone)zoomOutEngage = true;
-
-  if (zoomOutEngage == true)zoom *= 1.44;
 
 
          
