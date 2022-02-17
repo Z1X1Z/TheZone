@@ -187,7 +187,7 @@ function getKey(){
         float cored = log(zoom*3./2.)/log(.5)+1.;
         float c = length(p);
         int loops=1;
-        if(MetaCored)for(int i=1;i<70; i++)if(c<2./3.&&float(loops)<cored){p*=2.;c*=2.;loops++;}else break;
+        if(MetaCored)for(int i=1;i<144; i++)if(c<2./3.&&float(loops)<cored){p*=2.;c*=2.;loops++;}else break;
         vec2 s=p;
         loops=0;
         int hyperCore= int(cored*2./3.+log(length(freed(coords))*3./2.)-1.);

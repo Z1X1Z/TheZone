@@ -140,7 +140,7 @@
                                         for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>(20.-(coz(t.y)-1.)/2.*50.)&&f>4)x+=z.y/20000000.;
                                         else {z=2.*vec2(-1./((z.x*z.x-(1.44+(coz(t.y)-1.)/2.*.44)*z.y*z.y)
                                      -g.x*(1.2+(coz(t.y)-1.)/2.*.2)),
-                                ((1.2-(coz(t.y)-1.)/2.*.8)*z.x*z.y-(1.2+(coz(t.y)-1.)/2.*.2)*g.y-sin(t.y/2.)/20.));
+                                ((1.2-(coz(t.y)-1.)/2.*.8)*z.x*z.y-(1.2+(coz(t.y)-1.)/2.*.2)*g.y-sin(t.x/2.)/20.));
            //The Holy Bible Revelation 21:16 "The city was laid out like a square, as long as it was wide.
            //He measured the city with the rod and found it to be 12,000 stadia in length,
             //and as wide and high as it is long. The angel measured the wall using human measurement, and it was 144 cubits thick.
@@ -158,12 +158,12 @@
                           //vv head vv
                                                 g=p;
                                                 z=g;
-                                   if(abs(p.y)<4.)for (int f=0;f<21;f+=1)if(abs(z.y)>19.&&(f==int(floor(.8-(coz(t.x)-1.)/2.*.4)))){l=0.;break;}
+                                   if(abs(p.y)<4.)for (int f=0;f<21;f+=1)if(abs(z.y)>19.&&(f==int(floor(.8-(coz(t.y)-1.)/2.*.4)))){l=0.;break;}
                                         else if(abs(z.y)>19.&&(f>4))l=1.;
                                                 else{z=vec2(-1./((z.x*z.x-z.y*z.y)-g.x),2.0*z.x*z.y-g.y);
-                                     z*=pow(z.x,(z.x-(coz(t.x)-1.)/2.*-z.x));
+                                     z*=pow(z.x,(z.x-(coz(t.y)-1.)/2.*-z.x));
                                      l = clamp(1.-abs(z.y)*6.,0.,1.);
-                                     if(z.x>-.1&&f!=0)l=clamp(1.-z.x*(120.-sin(t.x)*80.),0.,1.);
+                                     if(z.x>-.1&&f!=0)l=clamp(1.-z.x*49.,0.,1.);
                                         }
 
                                     //vv mandelbrot\heart vv
@@ -425,7 +425,7 @@
             float cored = log(zoom*3./2.)/log(.5)+1.;
             float c = length(p);
             int loops=1;
-            if(MetaCored)for(int i=1;i<70; i++)if(c<2./3.&&float(loops)<cored){p*=2.;c*=2.;loops++;}else break;
+            if(MetaCored)for(int i=1;i<144; i++)if(c<2./3.&&float(loops)<cored){p*=2.;c*=2.;loops++;}else break;
             vec2 s=p;
             loops=0;
             int hyperCore= int(cored*2./3.+log(length(freed(coords))*3./2.)-1.);
@@ -438,7 +438,7 @@
                 if(MetaCored){
                     float d = length(s);
 
-                    for(int i=0;i<69; i++)if(d<2./3.&& loops+counter<hyperCore&&1.49>length(coords))
+                    for(int i=0;i<69; i++)if(d<2./3.&& loops+counter<hyperCore)
              {float shift=2.;s*=shift;d*=shift;loops++;}
                     
                         else break;
@@ -530,7 +530,7 @@ vec3 xtol(vec2 s, vec2 t){
                                   float cored=   log(zoom*1.75)/log(.75)+1.;
                                         float h =1.3333333;
                                             float loops=1.;
-                                        if(cored>1.)
+                                        if(cored>1.&&MetaCored)
                                          {
                                              float c = sqrt(s.y*s.y+s.x*s.x);
                                              c/=h;
