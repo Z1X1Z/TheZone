@@ -243,7 +243,7 @@ if (!trailLoaded) {trailLoaded = true;
         {xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}trailWidth[n]=0.;}
 
 var pb = -1;
-pitch=.00000000000000000001;
+//pitch=.00000000000000000001;
 for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
 //if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisement
     pb =  calculatePitch();
@@ -484,12 +484,18 @@ function animate( timestamp ) {
   if (on)scene.add(line);
             
             
-noteNumber =  Math.round(Math.log(pitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49);
-if(noteNumber ==-854)noteNumber="undefined";
-noteNameNumber=Math.floor(noteNumber%12)
+let noteNumber =  Math.log(pitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
+if(Math.round(noteNumber) ==-854)noteNumber="undefined";
+let noteNameNumber=Math.floor(Math.round(noteNumber))%12;
+let hour =noteNameNumber;
+let minute =(noteNumber-Math.floor(noteNumber))*60;
+let second =(minute-Math.floor(minute))*60
+let timeOfTheSound  =  " Time: "+Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second)+"<p style='margin : 0px'></p>";
+
 let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"]
   if(textON)document.getElementById("textOUT").innerHTML =
                             " note: "+notes[noteNameNumber]+", freq: "+Math.round(pitch)+"<p style='margin : 0px'></p>"+
+                            timeOfTheSound+"<p style='margin : 0px'></p>"+
                             "zoom: "+zoom+", cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+"<p style='margin : 0px'></p>"+
                             "AMP: "+totalAMP +", InOutThresh: "+zoomOutRatchetThreshold;
   else document.getElementById("textOUT").innerHTML = "";
