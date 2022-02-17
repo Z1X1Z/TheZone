@@ -490,7 +490,7 @@ function animate( timestamp ) {
             if (zoomOutEngage == true){zoom *= 1.44; coordX*=1-zoom; coordY*=1-zoom;}
 
   if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom *=Math.E**(Math.log(.5)/(zoomFrames*window.movementRate));
-  else if(zoom<1.){zoom /= Math.E**(Math.log(.5)/(zoomFrames*window.movementRate)); if(!zoomOutEngage&&center){coordX*=1-zoom; coordY*=1-zoom;}}
+  else if(zoom<1.){zoom /= Math.E**(Math.log(.5)/(zoomFrames*window.movementRate)); if(!zoomOutEngage&&center){coordX*=(1-zoom)*2./3.; coordY*=(1-zoom)*2./3.;}}
   if (zoom>1.)zoom=1.;
 
 
