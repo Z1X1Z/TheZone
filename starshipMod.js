@@ -492,6 +492,7 @@ let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"]
                             " note: "+notes[noteNameNumber]+", note Number: "+noteNumber+", freq: "+Math.round(pitch)+
                             ", zoom: "+zoom+", cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+
                             ", totalMicAmp: "+totalAMP +", zoomOutRatchetThreshold: "+zoomOutRatchetThreshold;
+  else document.getElementById("textOUT").innerHTML = "";
             
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
