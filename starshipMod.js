@@ -485,7 +485,7 @@ function animate( timestamp ) {
             
             if (zoom>=1.)zoomOutEngage = false;
             
-            else if ( zoom<zoomCone||zoom>.0000000000000000000000000000000000001)zoomOutEngage = true;
+            else if ( zoom<zoomCone||zoom<.0000000000000000000000000000000000001)zoomOutEngage = true;
 
             if (zoomOutEngage == true){zoom *= 1.44; coordX*=1-zoom; coordY*=1-zoom;}
 
