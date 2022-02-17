@@ -24,7 +24,9 @@ function loadScript(url, callback)
     script.onreadystatechange = callback;
     script.onload = callback;
     // Fire the loading
+    
     head.appendChild(script);
+    
 }
 var load = function() {
     startMic();
@@ -59,6 +61,7 @@ var pointed=false;
 let zoomAtl41=false;//watch for the 1 and the l
 var rez = window.devicePixelRatio*mobileRez;
 var center = false;
+var textON = false;
 
 
 window.addEventListener('keyup', function(event) {
@@ -97,6 +100,7 @@ window.addEventListener('keyup', function(event) {
       else if (key=="L"||window.key.toLowerCase()=="l")
       {if(zoomAtl41){zoom=1.;coordX=0.; coordY=0.;}zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
       else if (key=="C"||window.key.toLowerCase()=="c")center=!center;
+      else if (key=="V"||window.key.toLowerCase()=="v")textON=!textON;
 
 
       else if (key=="Z"||window.key.toLowerCase()=="z") {
@@ -106,14 +110,9 @@ window.addEventListener('keyup', function(event) {
       else if (event.keyCode==190) uniforms[ "metronome" ].value *= 1.1; //keycode for <
       else if (event.keyCode==188&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
 
-      else if (key=="I"||window.key.toLowerCase()=="i"){
-        zoomOutRatchetThreshold/= 1.212121;
-        console.log("zoomOutRatchetThreshold: "+zoomOutRatchetThreshold+ ", totalMicAmp: "+totalAMP );
-      }
-      else if (key=="O"||window.key.toLowerCase()=="o"){
-        zoomOutRatchetThreshold+= .777;//character for '
-        console.log("zoomOutRatchetThreshold: "+zoomOutRatchetThreshold+ ", totalMicAmp: "+totalAMP );
-      }
+      else if (key=="I"||window.key.toLowerCase()=="i")zoomOutRatchetThreshold/= 1.212121;
+      else if (key=="O"||window.key.toLowerCase()=="o")zoomOutRatchetThreshold+= .777;
+      
       else if (key==" "||window.key.toLowerCase()==" ")
       {
         if (onO)onO=false;
@@ -172,13 +171,13 @@ let onO = false;
 function makeSpirograph(){
       phase = phase % (pi*2);
       len = 0;
-      let adjConstant = 1./(spirafreq)*3.14*1.618/2.;
+      let adjConstant = 1./pitch*3.14;
       if(Math.abs(inputData[0])>.0    )
       for(var m = 0; m < bufferSize; m++)
       {
               phase += adjConstant;//spira_pitch;
-              spirray0[m]=-Math.sin(phase)*inputData[m];
-              spirray1[m]=-Math.cos(phase)*inputData[m];
+              spirray0[m]=-Math.sin(phase)*inputData[m]*m;
+              spirray1[m]=-Math.cos(phase)*inputData[m]*m;
              // len++;
       }
       len -= 1;
@@ -232,31 +231,31 @@ let xPerp= Array(1000);
 let yPerp = Array(1000);
 let angle=Array(1000);
 
-let pitc = 1;
-
 let reset = 6;
 let on;
-let spirafreq=1;
+let pitch=0;
 var totalAMP;
 function  move()
 {
-  totalAMP = 0.;
-  if (!trailLoaded) {trailLoaded = true; for(var n = 0; n<trailLength; n++)
-      {xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}trailWidth[n]=0.;}
+totalAMP = 0.;
+if (!trailLoaded) {trailLoaded = true;
+    for(var n = 0; n<trailLength; n++)
+        {xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}trailWidth[n]=0.;}
 
-    var pb = -1;
-   for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
-if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisement
-  pb =    calculatePitch();
-  pt = pb;
-       if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5);}
+var pb = -1;
+pitch=1.;
+for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
+//if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisement
+    pb =  calculatePitch();
+if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5); }
 on = true;
-if (isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) {  spirafreq=pt;pitc =pb;reset =0;}
-else if (reset>3){on = false;
-}
+if (isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) {pitch =Math.pow(pb,2.);reset =0;}
+else if (reset>3)on = false;
 else reset++
+    
 if (trailDepth<trailLength)trailDepth++;
-let note = Math.log(pitc/440.0)/Math.log(Math.pow ( 2, (1/24.0)))+49;
+    
+let note = Math.log(pb/440)/Math.log(Math.pow ( 2, (1/24.0)))+49;
 let inc = 8;
 let t =  (note * 30+30*inc);
 angle = t%360;
@@ -412,6 +411,11 @@ function onWindowResize() {
     renderer.setSize( window.innerWidth, window.innerHeight );
 }
 let point = [];
+                  
+                  var textOUT = document.createElement('text');
+                  textOUT.id="textOUT";
+                  container.appendChild(textOUT);
+
 function animate( timestamp ) {
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
@@ -480,12 +484,20 @@ function animate( timestamp ) {
   if (on)scene.add(line);
             
             
+noteNumber =  (Math.log(pitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49);
+noteNameNumber=Math.floor(noteNumber%12)
+let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"]
+  if(textON)document.getElementById("textOUT").innerHTML =
+                            " note: "+notes[noteNameNumber]+", note Number: "+Math.round(noteNumber)+", freq: "+Math.round(pitch)+
+                            ", zoom: "+zoom+", cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+
+                            ", totalMicAmp: "+totalAMP +", zoomOutRatchetThreshold: "+zoomOutRatchetThreshold;
+            
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
             
             if (zoom>=1.)zoomOutEngage = false;
             
-            else if ( zoom<zoomCone||zoom<.0000000000000000000000000000000000001)zoomOutEngage = true;
+            else if ( zoom<zoomCone||zoom<.0000000000000000000000000000000000001)zoomOutEngage = true;//this value is too deep right now for no apparent reason, researching!
 
             if (zoomOutEngage == true){zoom *= 1.44; coordX*=1-zoom; coordY*=1-zoom;}
 
