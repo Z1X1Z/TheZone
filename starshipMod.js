@@ -412,9 +412,9 @@ function onWindowResize() {
 }
 let point = [];
                   
-                  //var textOUT = document.createElement('text');
-                  //textOUT.id="textOUT";
-                  //container.appendChild(textOUT);
+var textOUT = document.createElement('text');
+textOUT.id="textOUT";
+container.appendChild(textOUT);
 
 function animate( timestamp ) {
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
