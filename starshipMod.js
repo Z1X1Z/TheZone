@@ -490,14 +490,14 @@ let noteNameNumber=Math.floor(Math.round(noteNumber))%12;
 let hour =noteNameNumber;
 let minute =(noteNumber-Math.floor(noteNumber))*60;
 let second =(minute-Math.floor(minute))*60
-let timeOfTheSound  =  " Time: "+Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second)+"<p style='margin : 0px'></p>";
+let timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
 
 let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"]
   if(textON)document.getElementById("textOUT").innerHTML =
                             " note: "+notes[noteNameNumber]+", freq: "+Math.round(pitch)+"<p style='margin : 0px'></p>"+
-                            timeOfTheSound+"<p style='margin : 0px'></p>"+
-                            "zoom: "+zoom+", cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+"<p style='margin : 0px'></p>"+
-                            "AMP: "+totalAMP +", InOutThresh: "+zoomOutRatchetThreshold;
+                            "note number: "+Math.round(noteNumber)+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
+                            "cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+", zoom: "+zoom+"<p style='margin : 0px'></p>"+
+                            "InOutThresh: "+zoomOutRatchetThreshold+", AMP: "+totalAMP;
   else document.getElementById("textOUT").innerHTML = "";
             
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
