@@ -489,9 +489,9 @@ if(noteNumber ==-854)noteNumber="undefined";
 noteNameNumber=Math.floor(noteNumber%12)
 let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"]
   if(textON)document.getElementById("textOUT").innerHTML =
-                            " note: "+notes[noteNameNumber]+", note Number: "+noteNumber+", freq: "+Math.round(pitch)+"\n"+
-                            ", zoom: "+zoom+", cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+"\n"+
-                            ", AMP: "+totalAMP +", InOutThresh: "+zoomOutRatchetThreshold;
+                            " note: "+notes[noteNameNumber]+", note Number: "+noteNumber+", freq: "+Math.round(pitch)+"<p style='margin : 0px'></p>"+
+                            "zoom: "+zoom+", cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+"<p style='margin : 0px'></p>"+
+                            "AMP: "+totalAMP +", InOutThresh: "+zoomOutRatchetThreshold;
   else document.getElementById("textOUT").innerHTML = "";
             
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
