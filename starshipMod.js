@@ -495,7 +495,6 @@ let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"]
             
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
-            zoom =.00000000000000000000001;
             if (zoom>=1.)zoomOutEngage = false;
             
             else if ( zoom<zoomCone||zoom<.00000000000000000000001)zoomOutEngage = true;//this value is too deep right now for no apparent reason, researching!
