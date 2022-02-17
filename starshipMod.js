@@ -233,7 +233,7 @@ let angle=Array(1000);
 
 let reset = 6;
 let on;
-let pitch=0;
+let pitch=.00000000000000000001;
 var totalAMP;
 function  move()
 {
@@ -243,7 +243,7 @@ if (!trailLoaded) {trailLoaded = true;
         {xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}trailWidth[n]=0.;}
 
 var pb = -1;
-pitch=1.;
+pitch=.00000000000000000001;
 for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
 //if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisement
     pb =  calculatePitch();
@@ -412,9 +412,9 @@ function onWindowResize() {
 }
 let point = [];
                   
-                  var textOUT = document.createElement('text');
-                  textOUT.id="textOUT";
-                  container.appendChild(textOUT);
+                  //var textOUT = document.createElement('text');
+                  //textOUT.id="textOUT";
+                  //container.appendChild(textOUT);
 
 function animate( timestamp ) {
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
