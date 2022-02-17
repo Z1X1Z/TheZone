@@ -100,7 +100,7 @@ window.addEventListener('keyup', function(event) {
       else if (key=="L"||window.key.toLowerCase()=="l")
       {if(zoomAtl41){zoom=1.;coordX=0.; coordY=0.;}zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
       else if (key=="C"||window.key.toLowerCase()=="c")center=!center;
-      else if (key=="V"||window.key.toLowerCase()=="v")textON=!textON;
+      else if (key=="V"||window.key.toLowerCase()=="v"){textON=!textON;}
 
 
       else if (key=="Z"||window.key.toLowerCase()=="z") {
@@ -382,8 +382,8 @@ materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
       coords: {value: new THREE.Vector2() }
     }
   ]);
-  uniforms.resolution.value.x = window.innerWidth;
-  uniforms.resolution.value.y = window.innerHeight;
+  uniforms.resolution.value.x = container.innerWidth;
+  uniforms.resolution.value.y = container.innerHeight;
   uniforms.coords.value.x = coordX;
   uniforms.coords.value.y = coordY;
   if(window.shaderOn)
@@ -406,9 +406,11 @@ materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
 
 
 function onWindowResize() {
+    let correlationForText=0;
+    if(textON)correlationForText=textOUT.offsetHeight;
     uniforms.resolution.value.x = window.innerWidth;
-    uniforms.resolution.value.y = window.innerHeight;
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    uniforms.resolution.value.y = window.innerHeight-correlationForText;
+    renderer.setSize( window.innerWidth, window.innerHeight-correlationForText);
 }
 let point = [];
                   
@@ -417,6 +419,9 @@ textOUT.id="textOUT";
 container.appendChild(textOUT);
 
 function animate( timestamp ) {
+  let correlationForText=0;
+  if(textON)correlationForText=textOUT.offsetHeight;
+  renderer.setSize( window.innerWidth, window.innerHeight-correlationForText);
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
     move();

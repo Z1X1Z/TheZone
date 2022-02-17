@@ -46,9 +46,13 @@ loadScript(wadLoader,initialize);
 let initialAngleSound;
 function startSound(e){
     sound.stop();sound2.stop()
-   let y = e.clientY-window.innerHeight/2.;
+    
+    let correlationForText=0;
+    if(textON)correlationForText=textOUT.offsetHeight;
+    
+   let y = e.clientY-(window.innerHeight+correlationForText)/2.;
     let x = e.clientX- window.innerWidth/2.;
-       let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight,window.innerWidth)/2.)*10.;
+       let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.)*10.;
         initialAngleSound = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi);
         let frequency = Math.pow(2.,((initialAngleSound)/pi/2*12+correction)/12.)*220.;
                                  sound.pitch=frequency;
@@ -61,10 +65,12 @@ function startSound(e){
 }
                                  
 function followSound(e){
-
-let y = e.clientY-window.innerHeight/2.;
-let x = e.clientX- window.innerWidth/2.;
-let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight,window.innerWidth)/2.)*10.;
+            
+let correlationForText=0;
+if(textON)correlationForText=textOUT.offsetHeight;
+let y = e.clientY-(window.innerHeight+correlationForText)/2.;
+let x = e.clientX-window.innerWidth/2.;
+let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight-correlationForText,window.innerWidth)/2.)*10.;
 let angleSound = Math.atan2(y,x);
 angleSound=(angleSound-initialAngleSound+pi/2.+4.*pi)%(2*pi)+initialAngleSound;
 let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*220.;
