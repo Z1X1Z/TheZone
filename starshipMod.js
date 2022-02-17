@@ -484,20 +484,21 @@ function animate( timestamp ) {
   if (on)scene.add(line);
             
             
-noteNumber =  (Math.log(pitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49);
+noteNumber =  Math.round(Math.log(pitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49);
+if(noteNumber ==-854)noteNumber="undefined";
 noteNameNumber=Math.floor(noteNumber%12)
 let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"]
   if(textON)document.getElementById("textOUT").innerHTML =
-                            " note: "+notes[noteNameNumber]+", note Number: "+Math.round(noteNumber)+", freq: "+Math.round(pitch)+
+                            " note: "+notes[noteNameNumber]+", note Number: "+noteNumber+", freq: "+Math.round(pitch)+
                             ", zoom: "+zoom+", cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+
                             ", totalMicAmp: "+totalAMP +", zoomOutRatchetThreshold: "+zoomOutRatchetThreshold;
             
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
-            
+            zoom =.00000000000000000000001;
             if (zoom>=1.)zoomOutEngage = false;
             
-            else if ( zoom<zoomCone||zoom<.0000000000000000000000000000000000001)zoomOutEngage = true;//this value is too deep right now for no apparent reason, researching!
+            else if ( zoom<zoomCone||zoom<.00000000000000000000001)zoomOutEngage = true;//this value is too deep right now for no apparent reason, researching!
 
             if (zoomOutEngage == true){zoom *= 1.44; coordX*=1-zoom; coordY*=1-zoom;}
 
