@@ -168,6 +168,7 @@ let len=0;
 let spiregulator=0;
 let phase = 0;
 let onO = false;
+var pb=-1;
 function makeSpirograph(){
       phase = phase % (pi*2);
       len = 0;
@@ -242,7 +243,7 @@ if (!trailLoaded) {trailLoaded = true;
     for(var n = 0; n<trailLength; n++)
         {xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}trailWidth[n]=0.;}
 
-var pb = -1;
+pb = -1;
 //pitch=.00000000000000000001;
 for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
 //if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisement
@@ -408,6 +409,8 @@ materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
 function onWindowResize() {
     let correlationForText=0;
     if(textON)correlationForText=textOUT.offsetHeight;
+    if(mobile)correlationForText+=document.getElementById("hotkeys").offsetHeight;
+
     uniforms.resolution.value.x = window.innerWidth;
     uniforms.resolution.value.y = window.innerHeight-correlationForText;
     renderer.setSize( window.innerWidth, window.innerHeight-correlationForText);
@@ -496,11 +499,13 @@ let minute =(noteNumber-Math.floor(noteNumber))*60;
 let second =(minute-Math.floor(minute))*60
 let timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
 let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"]
+
   if(textON)document.getElementById("textOUT").innerHTML =
+                                                              
                             " note: "+notes[noteNameNumber]+", cents: "+Math.round((noteNumber-Math.round(noteNumber))*100)+", freq: "+Math.round(pitch)+"<p style='margin : 0px'></p>"+
                             "note number: "+Math.round(noteNumber)+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
                             "cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+", zoom: "+zoom+"<p style='margin : 0px'></p>"+
-                            "InOutThresh: "+zoomOutRatchetThreshold+", AMP: "+totalAMP;
+                            "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+(isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1)+", AMP: "+totalAMP*2048./fftSize;
   else document.getElementById("textOUT").innerHTML = "";
             
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
