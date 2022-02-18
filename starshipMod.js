@@ -496,7 +496,6 @@ let hour =noteNameNumber;
 let minute =(noteNumber-Math.floor(noteNumber))*60;
 let second =(minute-Math.floor(minute))*60
 let timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
-
 let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"]
   if(textON)document.getElementById("textOUT").innerHTML =
                             " note: "+notes[noteNameNumber]+", freq: "+Math.round(pitch)+"<p style='margin : 0px'></p>"+
@@ -509,7 +508,7 @@ let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"]
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
             if (zoom>=1.)zoomOutEngage = false;
             
-            else if ( zoom<zoomCone||zoom<.00000000000000000000001)zoomOutEngage = true;//this value is too deep right now for no apparent reason, researching!
+            else if ( zoom<zoomCone||zoom<.000000000000000000000001)zoomOutEngage = true;//this value is too deep right now for no apparent reason, researching!
 
             if (zoomOutEngage == true){zoom *= 1.44; coordX*=1-zoom; coordY*=1-zoom;}
 
