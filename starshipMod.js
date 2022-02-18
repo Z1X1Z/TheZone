@@ -497,7 +497,7 @@ let second =(minute-Math.floor(minute))*60
 let timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
 let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"]
   if(textON)document.getElementById("textOUT").innerHTML =
-                            " note: "+notes[noteNameNumber]+", freq: "+Math.round(pitch)+"<p style='margin : 0px'></p>"+
+                            " note: "+notes[noteNameNumber]+", cents: "+Math.round((noteNumber-Math.round(noteNumber))*100)+", freq: "+Math.round(pitch)+"<p style='margin : 0px'></p>"+
                             "note number: "+Math.round(noteNumber)+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
                             "cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+", zoom: "+zoom+"<p style='margin : 0px'></p>"+
                             "InOutThresh: "+zoomOutRatchetThreshold+", AMP: "+totalAMP;
