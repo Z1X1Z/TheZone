@@ -404,7 +404,7 @@ materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
   animate();
 
 }
-
+                  
 
 function onWindowResize() {
     let correlationForText=0;
