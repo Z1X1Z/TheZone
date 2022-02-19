@@ -6,6 +6,7 @@ body {
 	font-size: 1em;
 	line-height: 1em;
     position: fixed;
+    overflow: hidden
 }
 
 
