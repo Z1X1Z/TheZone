@@ -421,7 +421,9 @@ let point = [];
 var textOUT = document.createElement('text');
 textOUT.id="textOUT";
 container.appendChild(textOUT);
-
+                  
+let lastTime=0.;
+let fpsAverage  = [];
 function animate( timestamp ) {
             const scene = new THREE.Scene();
 
@@ -528,12 +530,20 @@ let minute =(noteNumber-Math.floor(noteNumber))*60;
 let second =(minute-Math.floor(minute))*60
 let timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
 let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"]
-
+let fps = (timestamp-lastTime)/60.*100.;
+lastTime = timestamp;
+fpsAverage.push(fps);
+const FPSconstant=10;
+while(fpsAverage.length>FPSconstant)fpsAverage.shift();
+let FPS=0.
+    for(var n =0;n<fpsAverage.length;n++) FPS+=fpsAverage[n];
+    FPS/=FPSconstant;
+    
   if(textON)document.getElementById("textOUT").innerHTML =
                                                               
                             " note: "+notes[noteNameNumber]+", cents: "+Math.round((noteNumber-Math.round(noteNumber))*100)+", freq: "+Math.round(pitch)+"<p style='margin : 0px'></p>"+
                             "note number: "+Math.round(noteNumber)+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
-                            "cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+", zoom: "+zoom+"<p style='margin : 0px'></p>"+
+                            "cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+", zoom: "+zoom+", FPS: "+Math.round(FPS)+"<p style='margin : 0px'></p>"+
                             "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+(isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1)+", AMP: "+totalAMP*2048./fftSize;
   else document.getElementById("textOUT").innerHTML = "";
             
