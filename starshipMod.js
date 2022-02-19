@@ -533,7 +533,7 @@ let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"]
 let fps = (timestamp-lastTime)*.6;
 lastTime = timestamp;
 fpsAverage.push(fps);
-const FPSconstant=10;
+const FPSconstant=70;
 while(fpsAverage.length>FPSconstant)fpsAverage.shift();
 let FPS=0.
     for(var n =0;n<fpsAverage.length;n++) FPS+=fpsAverage[n];
