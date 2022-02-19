@@ -543,7 +543,7 @@ let FPS=0.
                                                               
                             " note: "+notes[noteNameNumber]+", cents: "+Math.round((noteNumber-Math.round(noteNumber))*100)+", freq: "+Math.round(pitch)+"<p style='margin : 0px'></p>"+
                             "note number: "+Math.round(noteNumber)+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
-                            "cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+", zoom: "+zoom+", FPS: "+Math.round(FPS)+"<p style='margin : 0px'></p>"+
+                            "FPS: "+Math.round(FPS)+", cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+", zoom: "+zoom+"<p style='margin : 0px'></p>"+
                             "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+(isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1)+", AMP: "+totalAMP*2048./fftSize;
   else document.getElementById("textOUT").innerHTML = "";
             
