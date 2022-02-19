@@ -423,7 +423,9 @@ textOUT.id="textOUT";
 container.appendChild(textOUT);
                   
 let lastTime=0.;
-let fpsAverage  = [];
+let ticker = 0;
+let FPS=0.;
+
 function animate( timestamp ) {
             const scene = new THREE.Scene();
 
@@ -529,15 +531,15 @@ if (hour==0)hour = 12;
 let minute =(noteNumber-Math.floor(noteNumber))*60;
 let second =(minute-Math.floor(minute))*60
 let timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
-let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"]
-let fps = (timestamp-lastTime)*.6;
-lastTime = timestamp;
-fpsAverage.push(fps);
-const FPSconstant=70;
-while(fpsAverage.length>FPSconstant)fpsAverage.shift();
-let FPS=0.
-    for(var n =0;n<fpsAverage.length;n++) FPS+=fpsAverage[n];
-    FPS/=FPSconstant;
+let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"];
+                                                              
+                                                              
+let elapsedTimeBetweenFrames = (timestamp-lastTime);
+let interval = 100;
+if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
+    ticker++;
+    
+    
     
   if(textON)document.getElementById("textOUT").innerHTML =
                                                               
