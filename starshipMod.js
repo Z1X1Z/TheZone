@@ -530,7 +530,7 @@ let minute =(noteNumber-Math.floor(noteNumber))*60;
 let second =(minute-Math.floor(minute))*60
 let timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
 let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"]
-let fps = (timestamp-lastTime)/60.*100.;
+let fps = (timestamp-lastTime)*.6;
 lastTime = timestamp;
 fpsAverage.push(fps);
 const FPSconstant=10;
