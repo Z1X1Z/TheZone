@@ -422,8 +422,11 @@ textOUT.id="textOUT";
 container.appendChild(textOUT);
 
 function animate( timestamp ) {
+            const scene = new THREE.Scene();
+
   let correlationForText=0;
   if(textON)correlationForText=textOUT.offsetHeight;
+  if(mobile)correlationForText+=document.getElementById("hotkeys").offsetHeight;
   renderer.setSize( window.innerWidth, window.innerHeight-correlationForText);
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
@@ -462,6 +465,26 @@ function animate( timestamp ) {
       porportionY =window.innerWidth/window.innerHeight;
       porportionX = 1.;
   }
+      
+            /*
+            var iterable = function*(){ yield* [
+                                                , -1.0,  0.0,
+                                                 1.0, -1.0,  0.0,
+                                                 1.0,  1.0,  0.0,
+                                                                          
+                                                ]; }();
+
+            
+            var vert = new Float32Array(iterable);
+            let fibStar = new THREE.BufferGeometry();
+            // itemSize = 3 because there are 3 values (components) per vertex
+            fibStar.setAttribute( 'position', new THREE.BufferAttribute( vert, 3 ) );
+            const mat = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+            var fibStarMesh = new THREE.Mesh( fibStar, mat);
+            
+            scene.add(fibStarMesh);
+            */
+            
   let lineMat =
   new THREE.LineBasicMaterial( {
         color: 0xffffff,
@@ -486,7 +509,6 @@ function animate( timestamp ) {
     point[r]=new THREE.Vector3( tx, ty, depth );
   }
   const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), lineMat );
-  const scene = new THREE.Scene();
 
   if (on)scene.add(line);
             
@@ -495,6 +517,7 @@ let noteNumber =  Math.log(pitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
 if(Math.round(noteNumber) ==-854)noteNumber="undefined";
 let noteNameNumber=Math.floor(Math.round(noteNumber))%12;
 let hour =noteNameNumber;
+if (hour==0)hour = 12;
 let minute =(noteNumber-Math.floor(noteNumber))*60;
 let second =(minute-Math.floor(minute))*60
 let timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
