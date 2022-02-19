@@ -407,13 +407,14 @@ materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
                   
 
 function onWindowResize() {
-    let correlationForText=0;
+  /*  let correlationForText=0;
     if(textON)correlationForText=textOUT.offsetHeight;
     if(mobile)correlationForText+=document.getElementById("hotkeys").offsetHeight;
 
     uniforms.resolution.value.x = window.innerWidth;
     uniforms.resolution.value.y = window.innerHeight-correlationForText;
     renderer.setSize( window.innerWidth, window.innerHeight-correlationForText);
+   */
 }
 let point = [];
                   
@@ -424,10 +425,15 @@ container.appendChild(textOUT);
 function animate( timestamp ) {
             const scene = new THREE.Scene();
 
+            
   let correlationForText=0;
   if(textON)correlationForText=textOUT.offsetHeight;
   if(mobile)correlationForText+=document.getElementById("hotkeys").offsetHeight;
   renderer.setSize( window.innerWidth, window.innerHeight-correlationForText);
+
+            uniforms.resolution.value.x = window.innerWidth;
+            uniforms.resolution.value.y = window.innerHeight-correlationForText;
+            
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
     move();
