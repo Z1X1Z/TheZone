@@ -176,20 +176,20 @@
                                     return vec3(l)+vec3(c,x+c/2.,0.)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
                                                                                                                                         
 
-      vec3 robeL(vec2 g, vec2 t){
-      float r=0.;
-      g.x*=(1.2+(-sin(t.y)-1.)/2.*.2);
-      g.x+=(-.45-(-sin(t.y)-1.)/2.*.5);
-      g.y/=1.14;
-      vec2 z=g.xy;
-      if(g.x>.5 &&abs(g.y)<(.8-(-sin(t.y)-1.)/2.*1.0))for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7)r=clamp(1.4-abs(g.x-2.3)
-                       *(1.-abs(g.y*g.x))-.07//(un)comment this line to toggle sleeves
-                      ,0.,1.);
-      else{
-          z=1.1*vec2(-2./(((1.2+(-sin(t.y)-1.)/2.*.1)*z.x*z.x-1.8*z.y*z.y)-g.x),(3.*z.x*z.y-(1.4+(-sin(t.y)-1.)/2.*.1)*g.y));;
-          z.x=pow(abs(z.x),.8);}
-      return vec3(r);
-      }
+        vec3 robeL(vec2 g, vec2 t){
+              float r=0.;
+              g.x*=(1.2+(coz(t.y)-1.)/2.*.2);
+              g.x+=(-.45-(coz(t.y)-1.)/2.*.5);
+              g.y/=1.14;
+              vec2 z=g.xy;
+              if(g.x>.5 &&abs(g.y)<(.8-(coz(t.y)-1.)/2.*1.0))for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7)r=clamp(1.4-abs(g.x-2.3)
+                               *(1.-abs(g.y*g.x))-.07//(un)comment this line to toggle sleeves
+                              ,0.,1.);
+              else{
+                  z=1.1*vec2(-2./(((1.2+(coz(t.y)-1.)/2.*.1)*z.x*z.x-1.8*z.y*z.y)-g.x),(3.*z.x*z.y-(1.4+(coz(t.y)-1.)/2.*.1)*g.y));;
+                  z.x=pow(abs(z.x),.8);}
+              return vec3(r);
+              }
 
           vec3 heart(vec2 g, vec2 t){
               //Mandelbrot\heart
