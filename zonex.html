@@ -67,10 +67,10 @@ PRESS [A] TO disengage dynamic morphing and [Q] to engage it again!
 
 void main(){
 
-	vec2 p=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*4.*zoom;
+	vec2 p=-((vUv.yx)-.5)/(resolution.xy/max(resolution.x,resolution.y))*2.*zoom;
             vec2 t=(coords.yx+.5)*log(pow(zoom,1.618))/log(1.618)*zoom*.5;
                                                 
-            p.x+=.5;
+            //p.x+=.5;
             p+=coords.yx;
             p.y*=-1.;
             if (colorCombo!=1)t=vec2(0.);
@@ -85,7 +85,7 @@ void main(){
     }
 
 		</script>
-        <script>window.zoomCageSize=2.4; window.spiroRainbow = true;
+        <script>window.zoomCageSize=2; window.spiroRainbow = true; window.mandelbrot=true;
 </script>
 
         <script src="starshipMod.js"></script>

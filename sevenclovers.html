@@ -578,7 +578,7 @@ vec3 xtol(vec2 s, vec2 t){
 
           //function library: manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin x
           void main(){
-           vec2 p=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*12.;
+           vec2 p=-((vUv.yx)-.5)/(resolution.xy/max(resolution.x,resolution.y))*6.;
            
            vec2 bg =p/2.;
            vec2 bg2 =p/3.;
