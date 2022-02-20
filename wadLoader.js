@@ -48,7 +48,7 @@ function startSound(e){
     sound.stop();sound2.stop()
     
     let correlationForText=0;
-    if(textON)correlationForText=textOUT.offsetHeight;
+    if(textON)correlationForText=document.getElementById("textOUT").offsetHeight;
     if(mobile)correlationForText+=document.getElementById("hotkeys").offsetHeight;
    let y = e.clientY-(window.innerHeight+correlationForText)/2.;
     let x = e.clientX- window.innerWidth/2.;
@@ -67,7 +67,7 @@ function startSound(e){
 function followSound(e){
             
 let correlationForText=0;
-if(textON)correlationForText=textOUT.offsetHeight;
+if(textON)correlationForText=document.getElementById("textOUT").offsetHeight;
 if(mobile)correlationForText+=document.getElementById("hotkeys").offsetHeight;
 let y = e.clientY-(window.innerHeight+correlationForText)/2.;
 let x = e.clientX-window.innerWidth/2.;
