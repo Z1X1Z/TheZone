@@ -158,10 +158,10 @@ let numberOfBins = fftSize/2.;
 let spirray0 = new Float32Array(bufferSize);
 let spirray1 = new Float32Array(bufferSize);
 const starArms = numberOfBins;
-var geometries = Array(starArms);
-var meshes = Array(starArms);
-var testar = Array(starArms);
-var mustarD = Array(starArms);
+let geometries = Array(starArms);
+let meshes = Array(starArms);
+let testar = Array(starArms);
+let mustarD = Array(starArms);
 let averagedAmp =  0;
 let zoom = 1;
 let len=0;
@@ -322,7 +322,6 @@ let trailGeom = Array(1000);
 let materials;
 let trailMeshes = Array(1000);
 let materialShader;
-let geometry;
 window.addEventListener('keydown', function(event) {
 let x = parseInt(String.fromCharCode(event.which || event.keyCode));
 //if (x>0)
@@ -678,7 +677,7 @@ else
                  scene.add(meshes[rr])
                 } }
 
-
+/*
 let r = (f+trailDepth-2)%trailDepth;
 let s = (f+trailDepth-1)%trailDepth;
 let loopLimit = trailDepth;
@@ -712,7 +711,7 @@ while(loopLimit>15){
   if(r<=0)r=trailDepth-1;
 }
 
-                 
+              */
   if(window.shaderOn)scene.add( mesh );//mesh here is the PIXELshader.
   renderer.render( scene, camera );
   material = null;
@@ -735,7 +734,7 @@ line=null;
     trailMeshes[j]=null;
   }
                  //scene.dispose();
-                // scene=null;
+                //  scene=null;
 }
 
 
