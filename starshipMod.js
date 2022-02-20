@@ -158,6 +158,8 @@ let numberOfBins = fftSize/2.;
 let spirray0 = new Float32Array(bufferSize);
 let spirray1 = new Float32Array(bufferSize);
 const starArms = numberOfBins;
+var geometries = Array(starArms);
+var meshes = Array(starArms);
 var testar = Array(starArms);
 var mustarD = Array(starArms);
 let averagedAmp =  0;
@@ -316,6 +318,9 @@ if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
 let mesh;
 let analyser;
 let source;
+let trailGeom = Array(1000);
+let materials;
+let trailMeshes = Array(1000);
 let materialShader;
 let geometry;
 window.addEventListener('keydown', function(event) {
@@ -327,13 +332,41 @@ let x = parseInt(String.fromCharCode(event.which || event.keyCode));
 
 let geometryP;
 let uniforms;
+let scene;
 function init() {
     let material;
+    scene = new THREE.Scene();
 
     inputData = new Float32Array(bufferSize);
     camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
     geometryP = new THREE.PlaneBufferGeometry( 2, 2 );
-    
+    for (let r=0; r<starArms; r++) {
+        let vo = new THREE.Color();
+        vo.setHSL((r-10)%24/24.,1.,.5);
+        material  = new THREE.MeshBasicMaterial( { color:vo});
+
+        let vertices = new Float32Array( [0,0,0,
+        0,0,0,
+        0,0,0
+        ] );
+
+        geometries[r] = new THREE.BufferGeometry();
+        geometries[r].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
+        meshes[r] = new THREE.Mesh(geometries[r] , material );
+    }
+materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
+    for (let r=0; r<trailLength; r++) {
+        let vertices = new Float32Array(
+            [0,0,0,
+            0,0,0,
+            0,0,0]
+            );
+
+        trailGeom[r] = new THREE.BufferGeometry();
+
+        trailGeom[r].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
+        trailMeshes[r] = new THREE.Mesh(trailGeom[r] , materials );
+    }
   uniforms = THREE.UniformsUtils.merge([
   THREE.UniformsLib.lights,
     {
@@ -395,42 +428,6 @@ let ticker = 0;
 let FPS=0.;
 
 function animate( timestamp ) {
-    var meshes = Array(starArms);
-    var geometries = Array(starArms);
-    for (let p=0; p<starArms; p++) {
-        let vo = new THREE.Color();
-        vo.setHSL((p-10)%24/24.,1.,.5);
-        material  = new THREE.MeshBasicMaterial( { color:vo});
-
-        let vertices = new Float32Array( [0,0,0,
-        0,0,0,
-        0,0,0
-        ] );
-
-        geometries[p] = new THREE.BufferGeometry();
-        geometries[p].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
-        meshes[p] = new THREE.Mesh(geometries[p] , material );
-    }
-                  
-                  
-                  let trailGeom = Array(1000);
-                  let trailMeshes = Array(1000);
-           let   materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
-                  for (let p=0; p<trailLength; p++) {
-                      let vertices = new Float32Array(
-                          [0,0,0,
-                          0,0,0,
-                          0,0,0]
-                          );
-
-                      trailGeom[p] = new THREE.BufferGeometry();
-
-                      trailGeom[p].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
-                      trailMeshes[p] = new THREE.Mesh(trailGeom[p] , materials );
-                  }
-                  
-                  
-            let scene = new THREE.Scene();
 
             
   let correlationForText=0;
@@ -633,8 +630,6 @@ if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.;
       (lengt*-Math.cos(yy)-widt*-Math.cos(rpio2)*porportionY),  -0.05,
       */
     // itemSize = 3 because there are 3 values (components) per vertex
-                  geometries[g] = new THREE.BufferGeometry();
-
     geometries[g].setAttribute( 'position', new THREE.Float32BufferAttribute( v, 3 ) );
                        meshes[g] = new THREE.Mesh(geometries[g] , material );
 
@@ -678,8 +673,6 @@ else
             ] );
 
             // itemSize = 3 because there are 3 values (components) per vertex
-                 geometries[rr] = new THREE.BufferGeometry();
-
             geometries[rr].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
                  meshes[rr] = new THREE.Mesh(geometries[rr] , material );
                  scene.add(meshes[rr])
@@ -730,12 +723,10 @@ line=null;
   for (let j=0; j<starArms; j++) {
     scene.remove(meshes[j]);
     meshes[j]=null;
-                          
                           scene.remove(geometries[j]);
 
     geometries[j].dispose();
-                          
-                      }
+  }
                                // else for (let j=0; j<24; j++) {meshes[j].dispose; geometries[j].dispose();}
   for (let j=0; j<trailDepth; j++){
     scene.remove(trailGeom[j]);
@@ -744,7 +735,7 @@ line=null;
     trailMeshes[j]=null;
   }
                  //scene.dispose();
-                 scene=null;
+                // scene=null;
 }
 
 
