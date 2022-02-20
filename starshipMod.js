@@ -427,7 +427,7 @@ let ticker = 0;
 let FPS=0.;
 
 function animate( timestamp ) {
-            const scene = new THREE.Scene();
+            let scene = new THREE.Scene();
 
             
   let correlationForText=0;
@@ -687,7 +687,6 @@ while(loopLimit>15){
   loopLimit--;
   pitchCol[r].opacity = 1.-(trailDepth-loopLimit)/trailDepth*3.;
   material = pitchCol[r];
-  trailMeshes[r] = new THREE.Mesh(trailGeom[r] , material );
 
   let widtr = .2*(1.-trailWidth[r]);
   let widts = .2*(1.-trailWidth[s]);
@@ -702,8 +701,10 @@ while(loopLimit>15){
     (scalar*cx[s]-widts*xPerp[s])*porportionX, (scalar*cy[s]-widts*yPerp[s])*porportionY,z,  //1
     (scalar*cx[r]+widtr*xPerp[r])*porportionX, (scalar*cy[r]+widtr*yPerp[r])*porportionY,z, //3
   ] );
-
+                          
   trailGeom[r].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices,3 ) );
+                          trailMeshes[r] = new THREE.Mesh(trailGeom[r] , material );
+
   scene.add(trailMeshes[r])
   s = r;
   r--;
@@ -729,7 +730,8 @@ while(loopLimit>15){
     scene.remove(trailMeshes[j]);
     trailMeshes[j]=null;
   }
-                 scene.dispose();
+                 //scene.dispose();
+                 scene=null;
 }
 
 
