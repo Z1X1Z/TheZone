@@ -1,9 +1,10 @@
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
+if(!("mandelbrot" in window))window.mandelbrot=false;
 window.movementRate=1.;
 let zoomFrames = 14.4;
 window.zoomCageSize = 1.5;//radius of zoom bounding
-zoomOutRatchetThreshold=1.;
+let zoomOutRatchetThreshold=1.;
 let radius = 4.;
 var mobileRez=1.;
 let fftSize=2048;
@@ -23,7 +24,9 @@ function loadScript(url, callback)
     script.onreadystatechange = callback;
     script.onload = callback;
     // Fire the loading
+    
     head.appendChild(script);
+    
 }
 var load = function() {
     startMic();
@@ -57,7 +60,8 @@ else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
 var pointed=false;
 let zoomAtl41=false;//watch for the 1 and the l
 var rez = window.devicePixelRatio*mobileRez;
-
+var center = false;
+var textON = false;
 
 
 window.addEventListener('keyup', function(event) {
@@ -95,6 +99,8 @@ window.addEventListener('keyup', function(event) {
       else if (key=="N"||window.key.toLowerCase()=="n") uniforms[ "MetaCored" ].value = !uniforms[ "MetaCored" ].value;
       else if (key=="L"||window.key.toLowerCase()=="l")
       {if(zoomAtl41){zoom=1.;coordX=0.; coordY=0.;}zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
+      else if (key=="C"||window.key.toLowerCase()=="c")center=!center;
+      else if (key=="V"||window.key.toLowerCase()=="v"){textON=!textON;}
 
 
       else if (key=="Z"||window.key.toLowerCase()=="z") {
@@ -104,14 +110,9 @@ window.addEventListener('keyup', function(event) {
       else if (event.keyCode==190) uniforms[ "metronome" ].value *= 1.1; //keycode for <
       else if (event.keyCode==188&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
 
-      else if (key=="I"||window.key.toLowerCase()=="i"){
-        zoomOutRatchetThreshold/= 1.212121;
-        console.log("zoomOutRatchetThreshold: "+zoomOutRatchetThreshold+ ", totalMicAmp: "+totalAMP );
-      }
-      else if (key=="O"||window.key.toLowerCase()=="o"){
-        zoomOutRatchetThreshold+= .777;//character for '
-        console.log("zoomOutRatchetThreshold: "+zoomOutRatchetThreshold+ ", totalMicAmp: "+totalAMP );
-      }
+      else if (key=="I"||window.key.toLowerCase()=="i")zoomOutRatchetThreshold/= 1.212121;
+      else if (key=="O"||window.key.toLowerCase()=="o")zoomOutRatchetThreshold+= .777;
+      
       else if (key==" "||window.key.toLowerCase()==" ")
       {
         if (onO)onO=false;
@@ -138,7 +139,8 @@ window.addEventListener('keyup', function(event) {
                     //window.movementRate=.5;
                 }
         else
-        {            window.zoomCageSize=1.5;
+        {   if(!window.mandelbrot)window.zoomCageSize=1.5;
+            else window.zoomCageSize=2.;
             window.movementRate=1.;}
         //console.log(String.fromCharCode(event.which || event.keyCode));
 
@@ -166,16 +168,17 @@ let len=0;
 let spiregulator=0;
 let phase = 0;
 let onO = false;
+var pb=-1;
 function makeSpirograph(){
       phase = phase % (pi*2);
       len = 0;
-      let adjConstant = 1./(spirafreq)*3.14*1.618/2.;
+      let adjConstant = 1./pitch*3.14;
       if(Math.abs(inputData[0])>.0    )
       for(var m = 0; m < bufferSize; m++)
       {
               phase += adjConstant;//spira_pitch;
-              spirray0[m]=-Math.sin(phase)*inputData[m];
-              spirray1[m]=-Math.cos(phase)*inputData[m];
+              spirray0[m]=-Math.sin(phase)*inputData[m]*m;
+              spirray1[m]=-Math.cos(phase)*inputData[m]*m;
              // len++;
       }
       len -= 1;
@@ -229,31 +232,31 @@ let xPerp= Array(1000);
 let yPerp = Array(1000);
 let angle=Array(1000);
 
-let pitc = 1;
-
 let reset = 6;
 let on;
-let spirafreq=1;
+let pitch=.00000000000000000001;
 var totalAMP;
 function  move()
 {
-  totalAMP = 0.;
-  if (!trailLoaded) {trailLoaded = true; for(var n = 0; n<trailLength; n++)
-      {xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}trailWidth[n]=0.;}
+totalAMP = 0.;
+if (!trailLoaded) {trailLoaded = true;
+    for(var n = 0; n<trailLength; n++)
+        {xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}trailWidth[n]=0.;}
 
-    var pb = -1;
-   for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
-if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisement
-  pb =    calculatePitch();
-  pt = pb;
-       if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5);}
+pb = -1;
+//pitch=.00000000000000000001;
+for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
+//if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisement
+    pb =  calculatePitch();
+if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5); }
 on = true;
-if (isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) {  spirafreq=pt;pitc =pb;reset =0;}
-else if (reset>3){on = false;
-}
+if (isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) {pitch =Math.pow(pb,2.);reset =0;}
+else if (reset>3)on = false;
 else reset++
+    
 if (trailDepth<trailLength)trailDepth++;
-let note = Math.log(pitc/440.0)/Math.log(Math.pow ( 2, (1/24.0)))+49;
+    
+let note = Math.log(pb/440)/Math.log(Math.pow ( 2, (1/24.0)))+49;
 let inc = 8;
 let t =  (note * 30+30*inc);
 angle = t%360;
@@ -287,8 +290,8 @@ if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold&
                coordY=by;
            }
 if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize){
-               if (Math.abs(by)>window.zoomCageSize)coordY*=1.-(Math.abs(by)-window.zoomCageSize)/25.;
-               if (Math.abs(bx)>window.zoomCageSize)coordX*=1.-(Math.abs(bx)-window.zoomCageSize)/25.;
+               if (Math.abs(by)>window.zoomCageSize)coordY*=1.-(Math.abs(by)-window.zoomCageSize)/15./zoom;
+               if (Math.abs(bx)>window.zoomCageSize)coordX*=1.-(Math.abs(bx)-window.zoomCageSize)/15./zoom;
   }
        
  interpolationFactor = 10.;//timeDif*1./(callbackWait-1);
@@ -380,8 +383,8 @@ materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
       coords: {value: new THREE.Vector2() }
     }
   ]);
-  uniforms.resolution.value.x = window.innerWidth;
-  uniforms.resolution.value.y = window.innerHeight;
+  uniforms.resolution.value.x = container.innerWidth;
+  uniforms.resolution.value.y = container.innerHeight;
   uniforms.coords.value.x = coordX;
   uniforms.coords.value.y = coordY;
   if(window.shaderOn)
@@ -401,20 +404,44 @@ materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
   animate();
 
 }
-
+                  
 
 function onWindowResize() {
+  /*  let correlationForText=0;
+    if(textON)correlationForText=textOUT.offsetHeight;
+    if(mobile)correlationForText+=document.getElementById("hotkeys").offsetHeight;
+
     uniforms.resolution.value.x = window.innerWidth;
-    uniforms.resolution.value.y = window.innerHeight;
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    uniforms.resolution.value.y = window.innerHeight-correlationForText;
+    renderer.setSize( window.innerWidth, window.innerHeight-correlationForText);
+   */
 }
 let point = [];
+                  
+var textOUT = document.createElement('text');
+textOUT.id="textOUT";
+container.appendChild(textOUT);
+                  
+let lastTime=0.;
+let ticker = 0;
+let FPS=0.;
+
 function animate( timestamp ) {
+            const scene = new THREE.Scene();
+
+            
+  let correlationForText=0;
+  if(textON)correlationForText=textOUT.offsetHeight;
+  if(mobile)correlationForText+=document.getElementById("hotkeys").offsetHeight;
+  renderer.setSize( window.innerWidth, window.innerHeight-correlationForText);
+
+            uniforms.resolution.value.x = window.innerWidth;
+            uniforms.resolution.value.y = window.innerHeight-correlationForText;
+            
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
     move();
     if(on) makeSpirograph();
-
             var currMode = "desktop"
             //vvvvhttps://www.cssjunction.com/tutorials/detect-landscape-portrait-mode-using-javascript/
             switch(window.orientation){
@@ -447,6 +474,26 @@ function animate( timestamp ) {
       porportionY =window.innerWidth/window.innerHeight;
       porportionX = 1.;
   }
+      
+            /*
+            var iterable = function*(){ yield* [
+                                                , -1.0,  0.0,
+                                                 1.0, -1.0,  0.0,
+                                                 1.0,  1.0,  0.0,
+                                                                          
+                                                ]; }();
+
+            
+            var vert = new Float32Array(iterable);
+            let fibStar = new THREE.BufferGeometry();
+            // itemSize = 3 because there are 3 values (components) per vertex
+            fibStar.setAttribute( 'position', new THREE.BufferAttribute( vert, 3 ) );
+            const mat = new THREE.MeshBasicMaterial( { color: 0xff0000 } );
+            var fibStarMesh = new THREE.Mesh( fibStar, mat);
+            
+            scene.add(fibStarMesh);
+            */
+            
   let lineMat =
   new THREE.LineBasicMaterial( {
         color: 0xffffff,
@@ -463,8 +510,7 @@ function animate( timestamp ) {
     lineMat.opacity = 1.; //opacity has no effect
   }
 
-  let depth =- .07;
-  if (onO) depth = 0;
+  let depth = 0;
 
   if (on)for (let r= 0; r < bufferSize; r ++) {
     let tx = spirray0[r]*porportionX/spiregulator;
@@ -472,22 +518,47 @@ function animate( timestamp ) {
     point[r]=new THREE.Vector3( tx, ty, depth );
   }
   const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), lineMat );
-  const scene = new THREE.Scene();
 
   if (on)scene.add(line);
             
             
+let noteNumber =  Math.log(pitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
+if(Math.round(noteNumber) ==-854)noteNumber="undefined";
+let noteNameNumber=Math.floor(Math.round(noteNumber))%12;
+let hour =noteNameNumber;
+if (hour==0)hour = 12;
+let minute =(noteNumber-Math.floor(noteNumber))*60;
+let second =(minute-Math.floor(minute))*60
+let timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
+let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"];
+                                                              
+                                                              
+let elapsedTimeBetweenFrames = (timestamp-lastTime);
+let interval = 100;
+if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
+    ticker++;
+    
+    
+    
+  if(textON)document.getElementById("textOUT").innerHTML =
+                                                              
+                            " note: "+notes[noteNameNumber]+", cents: "+Math.round((noteNumber-Math.round(noteNumber))*100)+", freq: "+Math.round(pitch)+"<p style='margin : 0px'></p>"+
+                            "note number: "+Math.round(noteNumber)+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
+                            "FPS: "+Math.round(FPS)+", cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+", zoom: "+zoom+"<p style='margin : 0px'></p>"+
+                            "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+(isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1)+", AMP: "+totalAMP*2048./fftSize;
+  else document.getElementById("textOUT").innerHTML = "";
             
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
+            if (zoom>=1.)zoomOutEngage = false;
+            
+            else if ( zoom<zoomCone||zoom<.000000000000000000000001)zoomOutEngage = true;//this value is too deep right now for no apparent reason, researching!
+
+            if (zoomOutEngage == true){zoom *= 1.44; coordX*=1-zoom; coordY*=1-zoom;}
+
   if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom *=Math.E**(Math.log(.5)/(zoomFrames*window.movementRate));
-  else if(zoom<1.)zoom /= Math.E**(Math.log(.5)/(zoomFrames*window.movementRate));
+  else if(zoom<1.){zoom /= Math.E**(Math.log(.5)/(zoomFrames*window.movementRate)); if(!zoomOutEngage&&center){coordX*=(1-zoom)*2./3.; coordY*=(1-zoom)*2./3.;}}
   if (zoom>1.)zoom=1.;
-
-  if (zoom>=1.)zoomOutEngage = false;
-      else if ( zoom<zoomCone)zoomOutEngage = true;
-
-  if (zoomOutEngage == true)zoom *= 1.44;
 
 
          
