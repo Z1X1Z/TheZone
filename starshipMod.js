@@ -416,7 +416,6 @@ function onWindowResize() {
     renderer.setSize( window.innerWidth, window.innerHeight-correlationForText);
    */
 }
-let point = [];
                   
 var textOUT = document.createElement('text');
 textOUT.id="textOUT";
@@ -511,6 +510,7 @@ function animate( timestamp ) {
   }
 
   let depth = 0;
+            let point = [];
 
   if (on)for (let r= 0; r < bufferSize; r ++) {
     let tx = spirray0[r]*porportionX/spiregulator;
@@ -518,7 +518,6 @@ function animate( timestamp ) {
     point[r]=new THREE.Vector3( tx, ty, depth );
   }
   const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), lineMat );
-
   if (on)scene.add(line);
             
             
