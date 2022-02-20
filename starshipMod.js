@@ -717,7 +717,7 @@ while(loopLimit>15){
 
   scene.remove(line);
   line.geometry.dispose( );
-
+                 scene.remove( mesh );
   for (let j=0; j<starArms; j++) {
     scene.remove(meshes[j]);
     meshes[j]=null;
