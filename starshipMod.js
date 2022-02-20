@@ -721,18 +721,15 @@ while(loopLimit>15){
     scene.remove(meshes[j]);
     meshes[j]=null;
     geometries[j].dispose();
-                          geometries[j]=null;
-
   }
                                // else for (let j=0; j<24; j++) {meshes[j].dispose; geometries[j].dispose();}
-  for (let j=0; j<trailDepth-1; j++){
+  for (let j=0; j<trailDepth; j++){
+    scene.remove(trailMeshes[j]);
+    trailGeom[j].dispose();
     scene.remove(trailMeshes[j]);
     trailMeshes[j]=null;
-    trailGeom[j].dispose();
-    trailGeom[j]=null;
   }
                  scene.dispose();
-                 scene=null;
 }
 
 
