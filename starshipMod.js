@@ -518,6 +518,7 @@ function animate( timestamp ) {
     point[r]=new THREE.Vector3( tx, ty, depth );
   }
   const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), lineMat );
+  point=null;
   if (on)scene.add(line);
             
             
