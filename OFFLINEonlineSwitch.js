@@ -1,6 +1,6 @@
 if (window.location.protocol.match(/http/i)||window.location.href.match(/zonex.space/i))
 {
-    window.threeSonicStarship = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js"
+    window.threeSonicStarship = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
     window.three = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r123/three.min.js"
     window.threeThrone = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r111/three.min.js"
     window.online=true;
