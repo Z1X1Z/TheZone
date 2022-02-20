@@ -35,7 +35,6 @@ function getKey(){
  let scan=androidGetKey.length-1;
  if(androidGetKey.length-1==androidGetKeyLast.length) while(androidGetKey[scan]==androidGetKeyLast[scan]&&scan>=0)scan--;
  window.key=androidGetKey[scan];
- document.getElementById("hotkeys").value="";
  }
 </script>
 PRESS [A] TO disengage dynamic morphing and [Q] to engage it again!
