@@ -433,7 +433,7 @@ function animate( timestamp ) {
   let correlationForText=0;
   if(textON)correlationForText=textOUT.offsetHeight;
   if(mobile)correlationForText+=document.getElementById("hotkeys").offsetHeight;
-  renderer.setSize( window.innerWidth, window.innerHeight-correlationForText);
+  //renderer.setSize( window.innerWidth, window.innerHeight-correlationForText);
 
             uniforms.resolution.value.x = window.innerWidth;
             uniforms.resolution.value.y = window.innerHeight-correlationForText;
@@ -442,7 +442,6 @@ function animate( timestamp ) {
     spiral_compress();
     move();
     if(on) makeSpirograph();
-
             var currMode = "desktop"
             //vvvvhttps://www.cssjunction.com/tutorials/detect-landscape-portrait-mode-using-javascript/
             switch(window.orientation){
