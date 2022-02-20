@@ -314,7 +314,6 @@ if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
 }
 
 
-let material;
     let camera, renderer;
 let mesh;
 let analyser;
@@ -334,7 +333,8 @@ let x = parseInt(String.fromCharCode(event.which || event.keyCode));
 let geometryP;
 let uniforms;
 function init() {
-    
+    let material;
+
     inputData = new Float32Array(bufferSize);
     camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
     geometryP = new THREE.PlaneBufferGeometry( 2, 2 );
