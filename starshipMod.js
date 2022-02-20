@@ -630,6 +630,7 @@ if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.;
       */
     // itemSize = 3 because there are 3 values (components) per vertex
     geometries[g].setAttribute( 'position', new THREE.Float32BufferAttribute( v, 3 ) );
+                  v=null;
                        meshes[g] = new THREE.Mesh(geometries[g] , material );
 
                        scene.add(meshes[g])
@@ -714,7 +715,7 @@ while(loopLimit>15){
                  
   if(window.shaderOn)scene.add( mesh );//mesh here is the PIXELshader.
   renderer.render( scene, camera );
-
+  material = null;
   scene.remove(line);
   line.geometry.dispose( );
                  scene.remove( mesh );
