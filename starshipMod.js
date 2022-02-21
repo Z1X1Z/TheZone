@@ -724,13 +724,13 @@ line=null;
   for (let j=0; j<starArms; j++) {
     scene.remove(meshes[j]);
     meshes[j].geometry.dispose();
-                          scene.remove(geometries[j]);
+                 //         scene.remove(geometries[j]);
 
     geometries[j].dispose();
   }
                                // else for (let j=0; j<24; j++) {meshes[j].dispose; geometries[j].dispose();}
   for (let j=0; j<trailDepth; j++){
-    scene.remove(trailGeom[j]);
+   // scene.remove(trailGeom[j]);
     trailGeom[j].dispose();
     trailMeshes[j].geometry.dispose();
     scene.remove(trailMeshes[j]);
