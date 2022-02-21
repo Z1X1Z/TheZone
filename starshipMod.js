@@ -319,6 +319,7 @@ let mesh;
 let analyser;
 let source;
 let trailGeom = Array(1000);
+//let materials;
 //let material;
 let trailMeshes = Array(1000);
 let materialShader;
@@ -397,11 +398,11 @@ let materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
         vertexShader: document.getElementById( 'vertexShader' ).textContent,
         fragmentShader: document.getElementById( 'fragmentShader' ).textContent
       } );
- // renderer = new THREE.WebGLRenderer();
+  renderer = new THREE.WebGLRenderer();
   if(window.shaderOn)mesh = new THREE.Mesh( geometryP, materialShader );
 
-  //renderer.setPixelRatio( rez);
-  //container.appendChild( renderer.domElement );
+  renderer.setPixelRatio( rez);
+  container.appendChild( renderer.domElement );
   onWindowResize();
   window.addEventListener( 'resize', onWindowResize, false );
 
@@ -431,12 +432,11 @@ let FPS=0.;
 
 function animate( timestamp ) {
 
-            let material;
-
+            
   let correlationForText=0;
   if(textON)correlationForText=textOUT.offsetHeight;
   if(mobile)correlationForText+=document.getElementById("hotkeys").offsetHeight;
-  //renderer.setSize( window.innerWidth, window.innerHeight-correlationForText);
+  renderer.setSize( window.innerWidth, window.innerHeight-correlationForText);
 
             uniforms.resolution.value.x = window.innerWidth;
             uniforms.resolution.value.y = window.innerHeight-correlationForText;
@@ -577,6 +577,7 @@ if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.;
   uniforms[ "time2dance" ].value += Math.abs(totalAMP/numberOfBins*2.);
 
   if (micOn)analyser.getByteFrequencyData(  dataArray);
+let material;
    var maxTestar=0.;
    var minTestar=100000000000000;
    if(onO){
@@ -715,7 +716,8 @@ while(loopLimit>15){
 
                  
   if(window.shaderOn)scene.add( mesh );//mesh here is the PIXELshader.
-  //renderer.render( scene, camera );
+  renderer.render( scene, camera );
+  renderer.dispose();
                          material.dispose();
   scene.remove(line);
   line.geometry.dispose( );
