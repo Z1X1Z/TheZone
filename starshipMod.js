@@ -320,6 +320,7 @@ let analyser;
 let source;
 let trailGeom = Array(1000);
 let materials;
+let material;
 let trailMeshes = Array(1000);
 let materialShader;
 let geometry;
@@ -439,7 +440,7 @@ function animate( timestamp ) {
             uniforms.resolution.value.x = window.innerWidth;
             uniforms.resolution.value.y = window.innerHeight-correlationForText;
             
-  analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
+  //analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
     move();
     if(on) makeSpirograph();
@@ -575,7 +576,7 @@ if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.;
   uniforms[ "time2dance" ].value += Math.abs(totalAMP/numberOfBins*2.);
 
   requestAnimationFrame( animate );
-  if (micOn)analyser.getByteFrequencyData(  dataArray);
+  //if (micOn)analyser.getByteFrequencyData(  dataArray);
 
    var maxTestar=0.;
    var minTestar=100000000000000;
@@ -732,8 +733,7 @@ line=null;
   for (let j=0; j<trailDepth; j++){
     trailGeom[j].dispose();
     scene.remove(trailGeom[j]);
-                         // trailMeshes[j].material.dispose();
-                          trailMeshes[j].geometry.dispose();
+    
     scene.remove(trailMeshes[j]);
   }
                  //scene.dispose();
