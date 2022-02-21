@@ -51,8 +51,8 @@ let lastTime=0.;
 let ticker = 0;
 let FPS=0.;
 
-function animate( timestamp ){
-requestAnimationFrame( animate );
+function draw( timestamp ){
+requestAnimationFrame( draw );
 
 
 let elapsedTimeBetweenFrames = (timestamp-lastTime);
@@ -66,8 +66,10 @@ document.getElementById("textOUT").innerHTML =
 
 "FPS: "+Math.round(FPS);
 }
-animate ();
+draw ();
             </script>
+        <script src="three.min.js"></script>
+
         <script src="starshipMod.js"></script>
         <!--  <script src="wadLoader.js"></script> -->
 
