@@ -30,7 +30,6 @@ function loadScript(url, callback)
 }
 var load = function() {
 };
-animate();
 
 //loadScript(window.threeSonicStarship,load);
 //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
@@ -833,3 +832,4 @@ s2 = d[x2];
 return pos + 0.5 * (s0 - s2 ) / (s0 - 2.* s1 + s2);
 }
 //end MIT license
+                    animate();
