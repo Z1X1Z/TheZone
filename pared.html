@@ -36,12 +36,37 @@
          }
     </script>
         <script>window.zoomCageSize = 10000000000000000.0;</script>
-        <script>window.shaderOn=false;</script>
+        <script>window.shaderOn=false;
+            
+var textOUT = document.createElement('text');
+textOUT.id="textOUT";
+document.body.appendChild(textOUT);
+
+let lastTime=0.;
+let ticker = 0;
+let FPS=0.;
+
+function animate( timestamp ) {
+    
+let elapsedTimeBetweenFrames = (timestamp-lastTime);
+let interval = 100;
+if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
+ticker++;
+let textON=true;
+  if(textON)document.getElementById("textOUT").innerHTML =
+                                                              
+                            "FPS: "+Math.round(FPS)+"<p style='margin : 0px'></p>";
+                            requestAnimationFrame( animate );
+
+                 }
+animate  ();
+</script>
         <script src="OFFLINEonlineSwitch.js"></script>
         <div id="container"></div>
 
-        <script src="starshipMod.js"></script>
-            <script src="wadLoader.js"></script>
+        
+       <!-- <script src="starshipMod.js"></script>
+            <script src="wadLoader.js"></script> -->
 
         </script>
     </body>
