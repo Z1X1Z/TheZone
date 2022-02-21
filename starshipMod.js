@@ -402,7 +402,8 @@ let materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
   if(window.shaderOn){
             mesh = new THREE.Mesh( geometryP, materialShader );
             scene.add( mesh );
-        }
+            
+        }//mesh here is the PIXELshader.
   renderer.setPixelRatio( rez);
   container.appendChild( renderer.domElement );
   onWindowResize();
@@ -576,7 +577,7 @@ if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.;
             
   uniforms[ "zoom" ].value = zoom;
   uniforms[ "time" ].value = timestamp/1000.;
-  uniforms[ "time2dance" ].value += Math.abs(totalAMP/numberOfBins/2.);
+  uniforms[ "time2dance" ].value += Math.abs(totalAMP/numberOfBins*2.);
 
   if (micOn)analyser.getByteFrequencyData(  dataArray);
 let material;
