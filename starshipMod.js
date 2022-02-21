@@ -399,8 +399,10 @@ let materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
         fragmentShader: document.getElementById( 'fragmentShader' ).textContent
       } );
   renderer = new THREE.WebGLRenderer();
-                  if(window.shaderOn){mesh = new THREE.Mesh( geometryP, materialShader );
-            scene.add( mesh );}//mesh here is the PIXELshader.
+  if(window.shaderOn){
+            mesh = new THREE.Mesh( geometryP, materialShader );
+            scene.add( mesh );
+        }
   renderer.setPixelRatio( rez);
   container.appendChild( renderer.domElement );
   onWindowResize();
@@ -442,8 +444,8 @@ function animate( timestamp ) {
             uniforms.resolution.value.y = window.innerHeight-correlationForText;
             
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
-    //spiral_compress();
-    //move();
+    spiral_compress();
+    move();
     if(on) makeSpirograph();
             var currMode = "desktop"
             //vvvvhttps://www.cssjunction.com/tutorials/detect-landscape-portrait-mode-using-javascript/
@@ -496,7 +498,7 @@ function animate( timestamp ) {
             
             scene.add(fibStarMesh);
             */
-            /*
+            
   let lineMat =
   new THREE.LineBasicMaterial( {
         color: 0xffffff,
@@ -524,7 +526,7 @@ function animate( timestamp ) {
   let line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), lineMat );
   point=null;
   if (on)scene.add(line);
-            */
+            
             
 let noteNumber =  Math.log(pitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
 if(Math.round(noteNumber) ==-854)noteNumber="undefined";
@@ -574,7 +576,7 @@ if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.;
             
   uniforms[ "zoom" ].value = zoom;
   uniforms[ "time" ].value = timestamp/1000.;
-  uniforms[ "time2dance" ].value += Math.abs(totalAMP/numberOfBins*2.);
+  uniforms[ "time2dance" ].value += Math.abs(totalAMP/numberOfBins/2.);
 
   if (micOn)analyser.getByteFrequencyData(  dataArray);
 let material;
@@ -717,12 +719,12 @@ while(loopLimit>15){
                  
   renderer.render( scene, camera );
                          material.dispose();
-  /*scene.remove(line);
+  scene.remove(line);
   line.geometry.dispose( );
                          line.material.dispose( );
 
 line=null;
-           */              //scene.remove( mesh );
+                         //scene.remove( mesh );
                          //mesh.geometry.dispose();
   for (let j=0; j<starArms; j++) {
     scene.remove(meshes[j]);
