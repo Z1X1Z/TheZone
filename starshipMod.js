@@ -319,8 +319,7 @@ let mesh;
 let analyser;
 let source;
 let trailGeom = Array(1000);
-let materials;
-let material;
+//let material;
 let trailMeshes = Array(1000);
 let materialShader;
 let geometry;
@@ -344,7 +343,8 @@ function init() {
     for (let r=0; r<starArms; r++) {
         let vo = new THREE.Color();
         vo.setHSL((r-10)%24/24.,1.,.5);
-        material  = new THREE.MeshBasicMaterial( { color:vo});
+
+        let material  = new THREE.MeshBasicMaterial( { color:vo});
 
         let vertices = new Float32Array( [0,0,0,
         0,0,0,
@@ -355,7 +355,8 @@ function init() {
         geometries[r].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
         meshes[r] = new THREE.Mesh(geometries[r] , material );
     }
-materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
+
+let materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
     for (let r=0; r<trailLength; r++) {
         let vertices = new Float32Array(
             [0,0,0,
@@ -396,11 +397,11 @@ materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
         vertexShader: document.getElementById( 'vertexShader' ).textContent,
         fragmentShader: document.getElementById( 'fragmentShader' ).textContent
       } );
-  renderer = new THREE.WebGLRenderer();
+ // renderer = new THREE.WebGLRenderer();
   if(window.shaderOn)mesh = new THREE.Mesh( geometryP, materialShader );
 
-  renderer.setPixelRatio( rez);
-  container.appendChild( renderer.domElement );
+  //renderer.setPixelRatio( rez);
+  //container.appendChild( renderer.domElement );
   onWindowResize();
   window.addEventListener( 'resize', onWindowResize, false );
 
@@ -430,11 +431,12 @@ let FPS=0.;
 
 function animate( timestamp ) {
 
-            
+            let material;
+
   let correlationForText=0;
   if(textON)correlationForText=textOUT.offsetHeight;
   if(mobile)correlationForText+=document.getElementById("hotkeys").offsetHeight;
-  renderer.setSize( window.innerWidth, window.innerHeight-correlationForText);
+  //renderer.setSize( window.innerWidth, window.innerHeight-correlationForText);
 
             uniforms.resolution.value.x = window.innerWidth;
             uniforms.resolution.value.y = window.innerHeight-correlationForText;
@@ -575,7 +577,6 @@ if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.;
   uniforms[ "time2dance" ].value += Math.abs(totalAMP/numberOfBins*2.);
 
   if (micOn)analyser.getByteFrequencyData(  dataArray);
-
    var maxTestar=0.;
    var minTestar=100000000000000;
    if(onO){
@@ -714,9 +715,8 @@ while(loopLimit>15){
 
                  
   if(window.shaderOn)scene.add( mesh );//mesh here is the PIXELshader.
-  renderer.render( scene, camera );
+  //renderer.render( scene, camera );
                          material.dispose();
-                         materials.dispose();
   scene.remove(line);
   line.geometry.dispose( );
                          line.material.dispose( );
@@ -726,8 +726,9 @@ line=null;
                          mesh.geometry.dispose();
   for (let j=0; j<starArms; j++) {
     scene.remove(meshes[j]);
-    meshes[j].material.dispose();
+                          meshes[j].material.dispose();
                           scene.remove(geometries[j]);
+                          geometries[j].dispose();
 
     geometries[j].dispose();
   }
