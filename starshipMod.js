@@ -322,6 +322,7 @@ let trailGeom = Array(1000);
 let materials;
 let trailMeshes = Array(1000);
 let materialShader;
+let geometry;
 window.addEventListener('keydown', function(event) {
 let x = parseInt(String.fromCharCode(event.which || event.keyCode));
 //if (x>0)
@@ -332,6 +333,7 @@ let x = parseInt(String.fromCharCode(event.which || event.keyCode));
 let geometryP;
 let uniforms;
 let scene;
+
 function init() {
     let material;
     scene = new THREE.Scene();
@@ -473,34 +475,7 @@ function animate( timestamp ) {
       porportionY =window.innerWidth/window.innerHeight;
       porportionX = 1.;
   }
-            
-let noteNumber =  Math.log(pitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
-if(Math.round(noteNumber) ==-854)noteNumber="undefined";
-let noteNameNumber=Math.floor(Math.round(noteNumber))%12;
-let hour =noteNameNumber;
-if (hour==0)hour = 12;
-let minute =(noteNumber-Math.floor(noteNumber))*60;
-let second =(minute-Math.floor(minute))*60
-let timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
-let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"];
-                                                             
-                                                             
-let elapsedTimeBetweenFrames = (timestamp-lastTime);
-let interval = 100;
-if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
-   ticker++;
-   
-   
-   
- if(textON)document.getElementById("textOUT").innerHTML =
-                                                             
-                           " note: "+notes[noteNameNumber]+", cents: "+Math.round((noteNumber-Math.round(noteNumber))*100)+", freq: "+Math.round(pitch)+"<p style='margin : 0px'></p>"+
-                           "note number: "+Math.round(noteNumber)+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
-                           "FPS: "+Math.round(FPS)+", cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+", zoom: "+zoom+"<p style='margin : 0px'></p>"+
-                           "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+(isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1)+", AMP: "+totalAMP*2048./fftSize;
- else document.getElementById("textOUT").innerHTML = "";
-                                                                          requestAnimationFrame( animate );
-
+      
             /*
             var iterable = function*(){ yield* [
                                                 , -1.0,  0.0,
@@ -519,7 +494,7 @@ if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.;
             
             scene.add(fibStarMesh);
             */
-            /*
+            
   let lineMat =
   new THREE.LineBasicMaterial( {
         color: 0xffffff,
@@ -548,7 +523,32 @@ if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.;
   point=null;
   if (on)scene.add(line);
             
-             
+            
+let noteNumber =  Math.log(pitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
+if(Math.round(noteNumber) ==-854)noteNumber="undefined";
+let noteNameNumber=Math.floor(Math.round(noteNumber))%12;
+let hour =noteNameNumber;
+if (hour==0)hour = 12;
+let minute =(noteNumber-Math.floor(noteNumber))*60;
+let second =(minute-Math.floor(minute))*60
+let timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
+let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"];
+                                                              
+                                                              
+let elapsedTimeBetweenFrames = (timestamp-lastTime);
+let interval = 100;
+if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
+    ticker++;
+    
+    
+    
+  if(textON)document.getElementById("textOUT").innerHTML =
+                                                              
+                            " note: "+notes[noteNameNumber]+", cents: "+Math.round((noteNumber-Math.round(noteNumber))*100)+", freq: "+Math.round(pitch)+"<p style='margin : 0px'></p>"+
+                            "note number: "+Math.round(noteNumber)+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
+                            "FPS: "+Math.round(FPS)+", cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+", zoom: "+zoom+"<p style='margin : 0px'></p>"+
+                            "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+(isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1)+", AMP: "+totalAMP*2048./fftSize;
+  else document.getElementById("textOUT").innerHTML = "";
             
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
@@ -574,6 +574,7 @@ if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.;
   uniforms[ "time" ].value = timestamp/1000.;
   uniforms[ "time2dance" ].value += Math.abs(totalAMP/numberOfBins*2.);
 
+  requestAnimationFrame( animate );
   if (micOn)analyser.getByteFrequencyData(  dataArray);
 
    var maxTestar=0.;
@@ -608,7 +609,10 @@ if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.;
     if(pointed) v= new Float32Array( [
        -x,    -y,  -0.05,
         x,    y,  -0.05,
-        (xr+x), (yr+y),  -0.05
+        (xr+x), (yr+y),  -0.05,
+        /* -x, -y,  -0.05,
+        (xr+x), (yr+y),  -0.05,
+        (xr-x), (yr-y),  -0.05,*/
     ] );
     else v= new Float32Array( [
        -x,    -y,  -0.05,
@@ -618,7 +622,14 @@ if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.;
         (xr+x), (yr+y),  -0.05,
         (xr-x), (yr-y),  -0.05
     ] );
-             
+
+/*
+      0-widt*-Math.sin(rpio2)*porportionX,    0-widt*-Math.cos(rpio2)*porportionY,  -0.05,
+      (lengt*-Math.sin(yy)+widt*-Math.sin(rpio2))*porportionX,
+      (lengt*-Math.cos(yy)+widt*-Math.cos(rpio2))*porportionY,  -0.05,
+      (lengt*-Math.sin(yy)-widt*-Math.sin(rpio2))*porportionX,
+      (lengt*-Math.cos(yy)-widt*-Math.cos(rpio2)*porportionY),  -0.05,
+      */
     // itemSize = 3 because there are 3 values (components) per vertex
     geometries[g].setAttribute( 'position', new THREE.Float32BufferAttribute( v, 3 ) );
                        meshes[g] = new THREE.Mesh(geometries[g] , material );
@@ -642,25 +653,25 @@ else{
                         material  = new THREE.MeshBasicMaterial( { color:vo});
 
 var vertices;
-if (pointed==true)
-vertices = new Float32Array( [
-   0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
-   0+widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0+widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
-   (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
-   (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  -0.05,
-] );
-else
-             vertices = new Float32Array( [
-                0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
-                0+widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0+widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
-                (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
-                (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  -0.05,
-                0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
-                (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
-                (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  -0.05,
-                (lengt*-Math.sin(rr*pi*2./24)-widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
-                (lengt*-Math.cos(rr*pi*2./24)-widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  -0.05,
-            ] );
+                if (pointed==true)
+                vertices = new Float32Array( [
+                   0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
+                   0+widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0+widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
+                   (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
+                   (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  -0.05,
+                ] );
+                else
+                            vertices = new Float32Array( [
+                        0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
+                        0+widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0+widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
+                        (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
+                        (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  -0.05,
+                        0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
+                        (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
+                        (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  -0.05,
+                        (lengt*-Math.sin(rr*pi*2./24)-widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
+                        (lengt*-Math.cos(rr*pi*2./24)-widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  -0.05,
+                    ] );
 
             // itemSize = 3 because there are 3 values (components) per vertex
             geometries[rr].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
@@ -700,18 +711,19 @@ while(loopLimit>15){
   s = r;
   r--;
   if(r<=0)r=trailDepth-1;
-}*/
+}
 
                  
   if(window.shaderOn)scene.add( mesh );//mesh here is the PIXELshader.
   renderer.render( scene, camera );
   material = null;
-  //scene.remove(line);
-  //line.geometry.dispose( );
+  scene.remove(line);
+  line.geometry.dispose( );
+line=null;
                  scene.remove( mesh );
   for (let j=0; j<starArms; j++) {
     scene.remove(meshes[j]);
-    meshes[j]=null;
+    meshes[j].geometry.dispose();
                           scene.remove(geometries[j]);
 
     geometries[j].dispose();
@@ -720,11 +732,11 @@ while(loopLimit>15){
   for (let j=0; j<trailDepth; j++){
     scene.remove(trailGeom[j]);
     trailGeom[j].dispose();
+    trailMeshes[j].geometry.dispose();
     scene.remove(trailMeshes[j]);
-    trailMeshes[j]=null;
   }
                  //scene.dispose();
-                //  scene=null;
+            //     scene=null;
 }
 
 
