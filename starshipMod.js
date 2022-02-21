@@ -440,7 +440,7 @@ function animate( timestamp ) {
             uniforms.resolution.value.x = window.innerWidth;
             uniforms.resolution.value.y = window.innerHeight-correlationForText;
             
-  //analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
+  analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
     move();
     if(on) makeSpirograph();
@@ -575,8 +575,7 @@ if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.;
   uniforms[ "time" ].value = timestamp/1000.;
   uniforms[ "time2dance" ].value += Math.abs(totalAMP/numberOfBins*2.);
 
-  requestAnimationFrame( animate );
-  //if (micOn)analyser.getByteFrequencyData(  dataArray);
+  if (micOn)analyser.getByteFrequencyData(  dataArray);
 
    var maxTestar=0.;
    var minTestar=100000000000000;
@@ -717,10 +716,14 @@ while(loopLimit>15){
                  
   if(window.shaderOn)scene.add( mesh );//mesh here is the PIXELshader.
   renderer.render( scene, camera );
-  material = null;
+                         material.dispose();
+                         materials.dispose();
   scene.remove(line);
   line.geometry.dispose( );
+                         line.material.dispose( );
+
 line=null;
+                         mesh.geometry.dispose();
                  scene.remove( mesh );
   for (let j=0; j<starArms; j++) {
     scene.remove(meshes[j]);
@@ -735,9 +738,12 @@ line=null;
     scene.remove(trailGeom[j]);
     
     scene.remove(trailMeshes[j]);
+                          
   }
                  //scene.dispose();
             //     scene=null;
+                         requestAnimationFrame( animate );
+
 }
 
 
