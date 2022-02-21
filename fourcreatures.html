@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <title>Four Creatures</title>
@@ -332,7 +333,7 @@
         loadScript(window.three,load);
         //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
         
-            var container;
+            var container = document.getElementById( 'container' );
             var camera, scene, renderer;
             var uniforms;
    
@@ -358,10 +359,8 @@
             else if (String.fromCharCode(event.which || event.keyCode)=="M")        {    invert *= -1;}
 
             }, false);
-
             function init() {
 
-                container = document.getElementById( 'container' );
                 camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
                 scene = new THREE.Scene();
                 var geometry = new THREE.PlaneBufferGeometry( 2, 2 );
@@ -397,7 +396,28 @@
       uniforms.resolution.value.y = window.innerHeight;
                 renderer.setSize( window.innerWidth, window.innerHeight );
             }
+            
+            
+var textOUT = document.createElement('text');
+textOUT.id="textOUT";
+container.appendChild(textOUT);
+
+let lastTime=0.;
+let ticker = 0;
+let FPS=0.;
+
             function animate( timestamp ) {
+                
+let elapsedTimeBetweenFrames = (timestamp-lastTime);
+let interval = 100;
+if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
+ticker++;
+let textON=true;
+              if(textON)document.getElementById("textOUT").innerHTML =
+                                                                          
+                                        "FPS: "+Math.round(FPS)+"<p style='margin : 0px'></p>";
+                                                                                       
+                                                                                       
                 uniforms[ "time" ].value = timestamp / 1000;
                 requestAnimationFrame( animate );
                 renderer.render( scene, camera );
