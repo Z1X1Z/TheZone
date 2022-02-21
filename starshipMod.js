@@ -336,7 +336,6 @@ let uniforms;
 let scene;
 
 function init() {
-    let material;
     scene = new THREE.Scene();
 
     inputData = new Float32Array(bufferSize);
@@ -723,8 +722,8 @@ while(loopLimit>15){
                          line.material.dispose( );
 
 line=null;
+                         scene.remove( mesh );
                          mesh.geometry.dispose();
-                 scene.remove( mesh );
   for (let j=0; j<starArms; j++) {
     scene.remove(meshes[j]);
     meshes[j].material.dispose();
@@ -734,10 +733,10 @@ line=null;
   }
                                // else for (let j=0; j<24; j++) {meshes[j].dispose; geometries[j].dispose();}
   for (let j=0; j<trailDepth; j++){
+     scene.remove(trailGeom[j]);
     trailGeom[j].dispose();
-    scene.remove(trailGeom[j]);
-    
     scene.remove(trailMeshes[j]);
+                          trailMeshes[j].geometry.dispose();
                           
   }
                  //scene.dispose();
