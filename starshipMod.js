@@ -734,7 +734,7 @@ line=null;
                                          "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+(isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1)+", AMP: "+totalAMP*2048./fftSize;
                else document.getElementById("textOUT").innerHTML = "";
                          
-                         requestAnimationFrame( animate );
+                         window.requestAnimationFrame( animate );
 
 }
 
