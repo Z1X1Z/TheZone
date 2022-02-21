@@ -29,7 +29,7 @@ function loadScript(url, callback)
     
 }
 var load = function() {
-    startMic();
+    animate();
 }; 
 loadScript(window.threeSonicStarship,load);
 //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
@@ -193,7 +193,7 @@ function makeSpirograph(){
 }
 function spiral_compress(){
     let freq = 0;
-    let z = dataArray;
+    let z =[];// dataArray;
 
     for(let n = 0; n<starArms; n++){testar[n] = 0;mustarD[n] = 1;}
     for(let t=1; t<numberOfBins; t+=1)
@@ -203,7 +203,7 @@ function spiral_compress(){
     let   d = (z[n+1]-z[n-1])/(z[n-1]+z[n+1]);
     let nAdj = n + d*4 ;
     //if (Math.abs(nAdj-n) < 10)
-    if (Math.abs(d)<4+1)freq =((( audioX.sampleRate)*(nAdj))/1024);
+    if (Math.abs(d)<4+1)freq =((( 44100)*(nAdj))/1024);
 
     let g = Math.pow ( 2, (1/24.));
     let aa = freq/440.0;
@@ -248,7 +248,7 @@ pb = -1;
 for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
 //if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisement
     pb =  calculatePitch();
-if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5); }
+if(pb>0){pb =Math.pow(44100/pb,.5); }
 on = true;
 if (isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) {pitch =Math.pow(pb,2.);reset =0;}
 else if (reset>3)on = false;
@@ -435,7 +435,7 @@ let FPS=0.;
 
 function animate( timestamp ) {
 
-            
+        /*
   let correlationForText=0;
   if(textON)correlationForText=textOUT.offsetHeight;
   if(mobile)correlationForText+=document.getElementById("hotkeys").offsetHeight;
@@ -481,8 +481,7 @@ function animate( timestamp ) {
       porportionX = 1.;
   }
       
-            /*
-            var iterable = function*(){ yield* [
+                        var iterable = function*(){ yield* [
                                                 , -1.0,  0.0,
                                                  1.0, -1.0,  0.0,
                                                  1.0,  1.0,  0.0,
@@ -498,7 +497,7 @@ function animate( timestamp ) {
             var fibStarMesh = new THREE.Mesh( fibStar, mat);
             
             scene.add(fibStarMesh);
-            */
+            
             
   let lineMat =
   new THREE.LineBasicMaterial( {
@@ -527,33 +526,6 @@ function animate( timestamp ) {
   let line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), lineMat );
   point=null;
   if (on)scene.add(line);
-            
-            
-let noteNumber =  Math.log(pitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
-if(Math.round(noteNumber) ==-854)noteNumber="undefined";
-let noteNameNumber=Math.floor(Math.round(noteNumber))%12;
-let hour =noteNameNumber;
-if (hour==0)hour = 12;
-let minute =(noteNumber-Math.floor(noteNumber))*60;
-let second =(minute-Math.floor(minute))*60
-let timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
-let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"];
-                                                              
-                                                              
-let elapsedTimeBetweenFrames = (timestamp-lastTime);
-let interval = 100;
-if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
-    ticker++;
-    
-    
-    
-  if(textON)document.getElementById("textOUT").innerHTML =
-                                                              
-                            " note: "+notes[noteNameNumber]+", cents: "+Math.round((noteNumber-Math.round(noteNumber))*100)+", freq: "+Math.round(pitch)+"<p style='margin : 0px'></p>"+
-                            "note number: "+Math.round(noteNumber)+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
-                            "FPS: "+Math.round(FPS)+", cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+", zoom: "+zoom+"<p style='margin : 0px'></p>"+
-                            "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+(isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1)+", AMP: "+totalAMP*2048./fftSize;
-  else document.getElementById("textOUT").innerHTML = "";
             
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
@@ -614,9 +586,7 @@ let material;
        -x,    -y,  -0.05,
         x,    y,  -0.05,
         (xr+x), (yr+y),  -0.05,
-        /* -x, -y,  -0.05,
-        (xr+x), (yr+y),  -0.05,
-        (xr-x), (yr-y),  -0.05,*/
+ 
     ] );
     else v= new Float32Array( [
        -x,    -y,  -0.05,
@@ -627,13 +597,6 @@ let material;
         (xr-x), (yr-y),  -0.05
     ] );
 
-/*
-      0-widt*-Math.sin(rpio2)*porportionX,    0-widt*-Math.cos(rpio2)*porportionY,  -0.05,
-      (lengt*-Math.sin(yy)+widt*-Math.sin(rpio2))*porportionX,
-      (lengt*-Math.cos(yy)+widt*-Math.cos(rpio2))*porportionY,  -0.05,
-      (lengt*-Math.sin(yy)-widt*-Math.sin(rpio2))*porportionX,
-      (lengt*-Math.cos(yy)-widt*-Math.cos(rpio2)*porportionY),  -0.05,
-      */
     // itemSize = 3 because there are 3 values (components) per vertex
     geometries[g].setAttribute( 'position', new THREE.Float32BufferAttribute( v, 3 ) );
                        meshes[g] = new THREE.Mesh(geometries[g] , material );
@@ -721,30 +684,56 @@ while(loopLimit>15){
   renderer.render( scene, camera );
                          material.dispose();
   scene.remove(line);
-  line.geometry.dispose( );
-                         line.material.dispose( );
 
 line=null;
                          //scene.remove( mesh );
                          //mesh.geometry.dispose();
   for (let j=0; j<starArms; j++) {
     scene.remove(meshes[j]);
+                          meshes[j].geometry.dispose();
                           meshes[j].material.dispose();
-                          scene.remove(geometries[j]);
                           geometries[j].dispose();
-
-    geometries[j].dispose();
   }
                                // else for (let j=0; j<24; j++) {meshes[j].dispose; geometries[j].dispose();}
   for (let j=0; j<trailDepth; j++){
-     scene.remove(trailGeom[j]);
     trailGeom[j].dispose();
     scene.remove(trailMeshes[j]);
                           trailMeshes[j].geometry.dispose();
-                          
+                          trailMeshes[j].material.dispose();
+
   }
                  //scene.dispose();
             //     scene=null;
+                         
+                 */
+                 pitch=0.;
+            pb=0.;
+             let noteNumber =  Math.log(pitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
+             if(Math.round(noteNumber) ==-854)noteNumber="undefined";
+             let noteNameNumber=Math.floor(Math.round(noteNumber))%12;
+             let hour =noteNameNumber;
+             if (hour==0)hour = 12;
+             let minute =(noteNumber-Math.floor(noteNumber))*60;
+             let second =(minute-Math.floor(minute))*60
+             let timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
+             let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"];
+                                                                           
+                                                                           
+             let elapsedTimeBetweenFrames = (timestamp-lastTime);
+             let interval = 100;
+             if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
+                 ticker++;
+                 
+                 
+                 
+               if(textON)document.getElementById("textOUT").innerHTML =
+                                                                           
+                                         " note: "+notes[noteNameNumber]+", cents: "+Math.round((noteNumber-Math.round(noteNumber))*100)+", freq: "+Math.round(pitch)+"<p style='margin : 0px'></p>"+
+                                         "note number: "+Math.round(noteNumber)+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
+                                         "FPS: "+Math.round(FPS)+", cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+", zoom: "+zoom+"<p style='margin : 0px'></p>"+
+                                         "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+(isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1)+", AMP: "+totalAMP*2048./fftSize;
+               else document.getElementById("textOUT").innerHTML = "";
+                         
                          requestAnimationFrame( animate );
 
 }
