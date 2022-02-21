@@ -29,7 +29,7 @@ function loadScript(url, callback)
     
 }
 var load = function() {
-    init();
+    startMic();
 }; 
 loadScript(window.threeSonicStarship,load);
 //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
@@ -193,7 +193,7 @@ function makeSpirograph(){
 }
 function spiral_compress(){
     let freq = 0;
-    let z = [];dataArray;
+    let z = dataArray;
 
     for(let n = 0; n<starArms; n++){testar[n] = 0;mustarD[n] = 1;}
     for(let t=1; t<numberOfBins; t+=1)
@@ -203,7 +203,7 @@ function spiral_compress(){
     let   d = (z[n+1]-z[n-1])/(z[n-1]+z[n+1]);
     let nAdj = n + d*4 ;
     //if (Math.abs(nAdj-n) < 10)
-    if (Math.abs(d)<4+1)freq =((( 44100)*(nAdj))/1024);
+    if (Math.abs(d)<4+1)freq =((( audioX.sampleRate)*(nAdj))/1024);
 
     let g = Math.pow ( 2, (1/24.));
     let aa = freq/440.0;
@@ -248,7 +248,7 @@ pb = -1;
 for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
 //if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisement
     pb =  calculatePitch();
-if(pb>0){pb =Math.pow(44100/pb,.5); }
+if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5); }
 on = true;
 if (isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) {pitch =Math.pow(pb,2.);reset =0;}
 else if (reset>3)on = false;
@@ -444,7 +444,7 @@ function animate( timestamp ) {
             uniforms.resolution.value.x = window.innerWidth;
             uniforms.resolution.value.y = window.innerHeight-correlationForText;
             
-  //analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
+  analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
     move();
     if(on) makeSpirograph();
@@ -579,7 +579,7 @@ if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.;
   uniforms[ "time" ].value = timestamp/1000.;
   uniforms[ "time2dance" ].value += Math.abs(totalAMP/numberOfBins*2.);
 
- // if (micOn)analyser.getByteFrequencyData(  dataArray);
+  if (micOn)analyser.getByteFrequencyData(  dataArray);
 let material;
    var maxTestar=0.;
    var minTestar=100000000000000;
@@ -721,23 +721,27 @@ while(loopLimit>15){
   renderer.render( scene, camera );
                          material.dispose();
   scene.remove(line);
+  line.geometry.dispose( );
+                         line.material.dispose( );
 
 line=null;
                          //scene.remove( mesh );
                          //mesh.geometry.dispose();
   for (let j=0; j<starArms; j++) {
     scene.remove(meshes[j]);
-                          meshes[j].geometry.dispose();
                           meshes[j].material.dispose();
+                          scene.remove(geometries[j]);
                           geometries[j].dispose();
+
+    geometries[j].dispose();
   }
                                // else for (let j=0; j<24; j++) {meshes[j].dispose; geometries[j].dispose();}
   for (let j=0; j<trailDepth; j++){
+     scene.remove(trailGeom[j]);
     trailGeom[j].dispose();
     scene.remove(trailMeshes[j]);
                           trailMeshes[j].geometry.dispose();
-                          trailMeshes[j].material.dispose();
-
+                          
   }
                  //scene.dispose();
             //     scene=null;
