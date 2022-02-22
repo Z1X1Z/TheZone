@@ -97,7 +97,7 @@ window.addEventListener('keyup', function(event) {
       else if (key=="L"||window.key.toLowerCase()=="l")
       {if(zoomAtl41){zoom=1.;coordX=0.; coordY=0.;}zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
       else if (key=="C"||window.key.toLowerCase()=="c")center=!center;
-      else if (key=="V"||window.key.toLowerCase()=="v"){textON=!textON;}
+      else if (key=="V"||window.key.toLowerCase()=="v")textON=!textON;
 
 
       else if (key=="Z"||window.key.toLowerCase()=="z") {
@@ -281,8 +281,8 @@ angle[f] = angle;
          d_y = -Math.cos(-angle);
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
 
-  bx=coordX+d_x/zoomFrames*window.movementRate*zoom;
-  by=coordY+d_y/zoomFrames*window.movementRate*zoom;
+  bx=coordX+d_x*3./2./zoomFrames*window.movementRate*zoom;
+  by=coordY+d_y*3./2./zoomFrames*window.movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on){
 
                coordX=bx;
@@ -414,15 +414,17 @@ let lastTime=0.;
 let ticker = 0;
 let FPS=0.;
 
+                  let lastPitch = 0;
 function animate( timestamp ) {
 
   onWindowResize();//may need to be taken out someday, just for iOS windowing rotation bug
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
     move();
+    
+    if(pitch!=1)lastPitch = pitch;
             
-            
-    let noteNumber =  Math.log(pitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
+    let noteNumber =  Math.log(lastPitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
     if(Math.round(noteNumber) ==-854)noteNumber="undefined";
     let noteNameNumber=Math.floor(Math.round(noteNumber))%12;
     let hour =noteNameNumber;
@@ -439,10 +441,10 @@ function animate( timestamp ) {
 
      let note = notes[noteNameNumber];
      let cents = Math.round((noteNumber-Math.round(noteNumber))*100);
-     let fr = Math.round(pitch);
+     let fr = Math.round(lastPitch);
      let n_n = Math.round(noteNumber);
      let cores = Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.);
-     let pf = String(pitch!=1);
+     let pf = String(lastPitch!=1);
      let totalAMP_=totalAMP*2048./fftSize;
       if(textON)document.getElementById("textWindow").innerHTML =
 
@@ -513,9 +515,7 @@ function animate( timestamp ) {
     lineMat.opacity = 1.; //opacity has no effect
   }
 
-  let depth =- .07;
-  if (onO) depth = 0;
-
+  let depth = .0;
   if (on)for (let r= 0; r < bufferSize; r ++) {
     let tx = spirray0[r]*porportionX/spiregulator;
     let ty =  spirray1[r]*porportionY/spiregulator;
@@ -537,8 +537,7 @@ function animate( timestamp ) {
   if (zoom>1.)zoom=1.;
 
   if (zoom>=1.)zoomOutEngage = false;
-      else if ( zoom<zoomCone)zoomOutEngage = true;
-
+   else if ( zoom<zoomCone||zoom<.000000000000000000000001)zoomOutEngage = true;
       if (zoomOutEngage == true){zoom *= 1.44; coordX*=1-zoom; coordY*=1-zoom;}
 
 
