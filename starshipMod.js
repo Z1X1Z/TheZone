@@ -170,7 +170,7 @@ let onO = false;
 function makeSpirograph(){
       phase = phase % (pi*2);
       len = 0;
-      let adjConstant = 1./(pitch)*3.14*1.618/2.;
+      let adjConstant = 1./(spirafreq)*3.14*1.618/2.;
       if(Math.abs(inputData[0])>.0    )
       for(var m = 0; m < bufferSize; m++)
       {
@@ -272,7 +272,7 @@ pitchCol[f]  = new THREE.MeshBasicMaterial({
       });
 angle = ((angle-30+180)/360*2*pi);
    // angle = (maxInt24/24*2*pi);
-angle[f] = -angle;
+angle[f] = angle;
 
   //d_x = -Math.sin(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
   //d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
@@ -426,6 +426,8 @@ function animate( timestamp ) {
     spiral_compress();
     move();
 
+    let pitch = 440;
+    let pb = 440**.5;
 
     let noteNumber =  Math.log(pitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
     if(Math.round(noteNumber) ==-854)noteNumber="undefined";
@@ -443,6 +445,7 @@ function animate( timestamp ) {
     if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
         ticker++;
 
+
      let note = notes[noteNameNumber];
      let cents = Math.round((noteNumber-Math.round(noteNumber))*100);
      let fr = Math.round(pitch);
@@ -453,8 +456,8 @@ function animate( timestamp ) {
       if(textON)document.getElementById("textOUT").innerHTML =
 
                                 " note: "+note+", cents: "+cents+", freq: "+fr+"<p></p>"+
-                                "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
-                                "FPS: "+Math.round(FPS)+", cores: "+cores+", zoom: "+zoom+"<p style='margin : 0px'></p>"+
+                                "note number: "+n_n+", time: "+timeOfTheSound+"<p></p>"+
+                                "FPS: "+Math.round(FPS)+", cores: "+cores+", zoom: "+zoom+"<p></p>"+
                                 "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+pf+", AMP: "+totalAMP_;
       else document.getElementById("textOUT").innerHTML = "";
 
