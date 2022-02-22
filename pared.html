@@ -20,7 +20,7 @@
           x.setAttribute("id", "hotkeys");
           x.setAttribute("placeholder", "Hotkeys!");
           x.setAttribute("oninput", "getKey()");
-          document.body.appendChild(x);
+          document.getElementById("textWindow").appendChild(x);
         }
       if(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
             hk();

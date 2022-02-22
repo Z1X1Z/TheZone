@@ -402,9 +402,11 @@ materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
 
 
 function onWindowResize() {
+            let correlationForText=document.getElementById("textWindow").offsetHeight;
+
     uniforms.resolution.value.x = window.innerWidth;
-    uniforms.resolution.value.y = window.innerHeight;
-    renderer.setSize( window.innerWidth, window.innerHeight );
+    uniforms.resolution.value.y = window.innerHeight-correlationForText;
+    renderer.setSize( window.innerWidth, window.innerHeight-correlationForText);
 }
 let point = [];
 
@@ -415,7 +417,7 @@ let FPS=0.;
 
 function animate( timestamp ) {
 
-  if(mobile)onWindowResize();//may need to be taken out someday, just for iOS windowing
+  onWindowResize();//may need to be taken out someday, just for iOS windowing
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
     move();
@@ -445,9 +447,9 @@ function animate( timestamp ) {
      let totalAMP_=totalAMP*2048./fftSize;
       if(textON)document.getElementById("textWindow").innerHTML =
 
-                                " note: "+note+", cents: "+cents+", freq: "+fr+"<p'></p>"+
-                                "note number: "+n_n+", time: "+timeOfTheSound+"<p></p>"+
-                                "FPS: "+Math.round(FPS)+", cores: "+cores+", zoom: "+zoom+"<p></p>"+                // style='margin : 0px'
+                                " note: "+note+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
+                                "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
+                                "FPS: "+Math.round(FPS)+", cores: "+cores+", zoom: "+zoom+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
                                 "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+pf+", AMP: "+totalAMP_;
       else document.getElementById("textWindow").innerHTML = "";
 
