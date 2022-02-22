@@ -403,7 +403,7 @@ materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
 
 function onWindowResize() {
             let correlationForText=document.getElementById("textWindow").offsetHeight;
-            let correlationForText+=document.getElementById("hotkeys").offsetHeight;
+            if(mobile)correlationForText+=document.getElementById("hotkeys").offsetHeight;
 
     uniforms.resolution.value.x = window.innerWidth;
     uniforms.resolution.value.y = window.innerHeight-correlationForText;

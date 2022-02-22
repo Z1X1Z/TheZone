@@ -47,9 +47,9 @@ let initialAngleSound;
 function startSound(e){
     sound.stop();sound2.stop()
     
-    let correlationForText=0;
-    if(textON)correlationForText=document.getElementById("textOUT").offsetHeight;
+    let correlationForText=document.getElementById("textWindow").offsetHeight;
     if(mobile)correlationForText+=document.getElementById("hotkeys").offsetHeight;
+
    let y = e.clientY-(window.innerHeight+correlationForText)/2.;
     let x = e.clientX- window.innerWidth/2.;
        let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.)*10.;
@@ -66,9 +66,9 @@ function startSound(e){
                                  
 function followSound(e){
             
-let correlationForText=0;
-if(textON)correlationForText=document.getElementById("textOUT").offsetHeight;
-if(mobile)correlationForText+=document.getElementById("hotkeys").offsetHeight;
+let correlationForText=document.getElementById("textWindow").offsetHeight;
+            if(mobile) correlationForText+=document.getElementById("hotkeys").offsetHeight;
+
 let y = e.clientY-(window.innerHeight+correlationForText)/2.;
 let x = e.clientX-window.innerWidth/2.;
 let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.)*10.;
