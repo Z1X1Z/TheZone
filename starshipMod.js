@@ -425,10 +425,10 @@ function onWindowResize() {
    */
 }
                   
-var textOUT = document.createElement('text');
+/*var textOUT = document.createElement('text');
 textOUT.id="textOUT";
 container.appendChild(textOUT);
-                  
+           */
 let lastTime=0.;
 let ticker = 0;
 let FPS=0.;
@@ -545,7 +545,7 @@ if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.;
     ticker++;
     
     
-    
+    /*
   if(textON)document.getElementById("textOUT").innerHTML =
                                                               
                             " note: "+notes[noteNameNumber]+", cents: "+Math.round((noteNumber-Math.round(noteNumber))*100)+", freq: "+Math.round(pitch)+"<p style='margin : 0px'></p>"+
@@ -553,7 +553,7 @@ if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.;
                             "FPS: "+Math.round(FPS)+", cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+", zoom: "+zoom+"<p style='margin : 0px'></p>"+
                             "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+(isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1)+", AMP: "+totalAMP*2048./fftSize;
   else document.getElementById("textOUT").innerHTML = "";
-            
+            */
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
             if (zoom>=1.)zoomOutEngage = false;
