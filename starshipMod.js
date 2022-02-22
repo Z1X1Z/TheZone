@@ -416,8 +416,7 @@ let materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
 
 function onWindowResize() {
     let correlationForText=0;
-    if(textON)correlationForText=textOUT.offsetHeight;
-    if(mobile)correlationForText+=document.getElementById("hotkeys").offsetHeight;
+    correlationForText=document.getElementById("textWindow").offsetHeight;
 
     uniforms.resolution.value.x = window.innerWidth;
     uniforms.resolution.value.y = window.innerHeight-correlationForText;
@@ -427,7 +426,7 @@ function onWindowResize() {
                   
 var textOUT = document.createElement('text');
 textOUT.id="textOUT";
-container.appendChild(textOUT);
+document.getElementById("textWindow").appendChild(textOUT);
                   
 let lastTime=0.;
 let ticker = 0;
