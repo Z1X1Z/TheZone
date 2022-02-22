@@ -31,10 +31,9 @@ function loadScript(url, callback)
 var load = function() {
     startMic();
 }; 
-///loadScript(window.threeSonicStarship,load);
+loadScript(window.threeSonicStarship,load);
 //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
 
-startMic();
 
 
 let mobile = false;
