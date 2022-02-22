@@ -413,7 +413,7 @@ let point = [];
 
 var textOUT = document.createElement('text');
 textOUT.id="textOUT";
-document.getElementById("textWindow").appendChild(textOUT);
+container.appendChild(textOUT);
 let textON=true;
 let lastTime=0.;
 let ticker = 0;
@@ -425,9 +425,9 @@ function animate( timestamp ) {
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
     move();
-
+    
     let pitch = 440;
-    let pb = 440**.5;
+    let pb = Math.root(440)
 
     let noteNumber =  Math.log(pitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
     if(Math.round(noteNumber) ==-854)noteNumber="undefined";
@@ -444,8 +444,6 @@ function animate( timestamp ) {
     let interval = 100;
     if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
         ticker++;
-
-
      let note = notes[noteNameNumber];
      let cents = Math.round((noteNumber-Math.round(noteNumber))*100);
      let fr = Math.round(pitch);
@@ -455,9 +453,9 @@ function animate( timestamp ) {
      let totalAMP_=totalAMP*2048./fftSize;
       if(textON)document.getElementById("textOUT").innerHTML =
 
-                                " note: "+note+", cents: "+cents+", freq: "+fr+"<p></p>"+
-                                "note number: "+n_n+", time: "+timeOfTheSound+"<p></p>"+
-                                "FPS: "+Math.round(FPS)+", cores: "+cores+", zoom: "+zoom+"<p></p>"+
+                                " note: "+note+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
+                                "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
+                                "FPS: "+Math.round(FPS)+", cores: "+cores+", zoom: "+zoom+"<p style='margin : 0px'></p>"+
                                 "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+pf+", AMP: "+totalAMP_;
       else document.getElementById("textOUT").innerHTML = "";
 
