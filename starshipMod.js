@@ -402,10 +402,10 @@ materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
 
 
 function onWindowResize() {
-       let correlationForText = document.getElementById("textWindow").offsetHeight;
+       let correlationForText = document.getElementById("allText").offsetHeight;
     uniforms.resolution.value.x = window.innerWidth;
     uniforms.resolution.value.y = window.innerHeight-correlationForText;
-    renderer.setSize( window.innerWidth, window.innerHeight);
+    renderer.setSize( window.innerWidth, window.innerHeight-correlationForText);
 }
 let point = [];
 
@@ -416,7 +416,7 @@ let FPS=0.;
 
 function animate( timestamp ) {
 
-  onWindowResize();//may need to be taken out someday, just for iOS windowing
+  onWindowResize();//may need to be taken out someday, just for iOS windowing rotation bug
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
     move();
