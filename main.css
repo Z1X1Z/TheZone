@@ -3,12 +3,9 @@ body {
 	background-color: #000;
 	color: #fff;
 	font-family: Monospace;
-	font-size: 12px;
-	line-height: 1em;
-    position: fixed;
-    overflow: hidden
+	font-size: 1em;
+	line-height: 24px;
 }
-
 
 a {
 	color: #ff0;
