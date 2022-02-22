@@ -230,17 +230,15 @@ let xPerp= Array(1000);
 let yPerp = Array(1000);
 let angle=Array(1000);
 
-let pitch=.00000000000000000001;
-let pb = -1;
-
 let reset = 6;
 let on;
 let spirafreq=1;
 var totalAMP;
 function  move()
 {
-
-pb = -1;
+  
+  let pitch=.00000000000000000001;
+  let pb = -1;
 //pitch=.00000000000000000001;
 for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
 //if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisement
