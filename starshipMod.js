@@ -170,7 +170,7 @@ let onO = false;
 function makeSpirograph(){
       phase = phase % (pi*2);
       len = 0;
-      let adjConstant = 1./(spirafreq)*3.14*1.618/2.;
+      let adjConstant = 1./(pitch)*3.14*1.618/2.;
       if(Math.abs(inputData[0])>.0    )
       for(var m = 0; m < bufferSize; m++)
       {
@@ -272,7 +272,7 @@ pitchCol[f]  = new THREE.MeshBasicMaterial({
       });
 angle = ((angle-30+180)/360*2*pi);
    // angle = (maxInt24/24*2*pi);
-angle[f] = angle;
+angle[f] = -angle;
 
   //d_x = -Math.sin(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
   //d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
@@ -443,14 +443,19 @@ function animate( timestamp ) {
     if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
         ticker++;
 
-
-
+     let note = notes[noteNameNumber];
+     let cents = Math.round((noteNumber-Math.round(noteNumber))*100);
+     let fr = Math.round(pitch);
+     let n_n = Math.round(noteNumber);
+     let cores = Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.);
+     let pf = (isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1);
+     let totalAMP_=totalAMP*2048./fftSize;
       if(textON)document.getElementById("textOUT").innerHTML =
 
-                                " note: "+notes[noteNameNumber]+", cents: "+Math.round((noteNumber-Math.round(noteNumber))*100)+", freq: "+Math.round(pitch)+"<p style='margin : 0px'></p>"+
-                                "note number: "+Math.round(noteNumber)+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
-                                "FPS: "+Math.round(FPS)+", cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+", zoom: "+zoom+"<p style='margin : 0px'></p>"+
-                                "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+(isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1)+", AMP: "+totalAMP*2048./fftSize;
+                                " note: "+note+", cents: "+cents+", freq: "+fr+"<p></p>"+
+                                "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
+                                "FPS: "+Math.round(FPS)+", cores: "+cores+", zoom: "+zoom+"<p style='margin : 0px'></p>"+
+                                "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+pf+", AMP: "+totalAMP_;
       else document.getElementById("textOUT").innerHTML = "";
 
 
