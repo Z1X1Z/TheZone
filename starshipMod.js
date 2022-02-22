@@ -95,6 +95,7 @@ window.addEventListener('keyup', function(event) {
       else if (key=="N"||window.key.toLowerCase()=="n") uniforms[ "MetaCored" ].value = !uniforms[ "MetaCored" ].value;
       else if (key=="L"||window.key.toLowerCase()=="l")
       {if(zoomAtl41){zoom=1.;coordX=0.; coordY=0.;}zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
+      else if (key=="V"||window.key.toLowerCase()=="v"){textON=!textON;onWindowResize();}
 
 
       else if (key=="Z"||window.key.toLowerCase()=="z") {
@@ -426,16 +427,32 @@ function animate( timestamp ) {
     move();
 
 
-let elapsedTimeBetweenFrames = (timestamp-lastTime);
-let interval = 100;
-if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
-ticker++;
+    let noteNumber =  Math.log(pitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
+    if(Math.round(noteNumber) ==-854)noteNumber="undefined";
+    let noteNameNumber=Math.floor(Math.round(noteNumber))%12;
+    let hour =noteNameNumber;
+    if (hour==0)hour = 12;
+    let minute =(noteNumber-Math.floor(noteNumber))*60;
+    let second =(minute-Math.floor(minute))*60
+    let timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
+    let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"];
+
+
+    let elapsedTimeBetweenFrames = (timestamp-lastTime);
+    let interval = 100;
+    if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
+        ticker++;
 
 
 
-document.getElementById("textOUT").innerHTML =
+      if(textON)document.getElementById("textOUT").innerHTML =
 
-                   "FPS: "+Math.round(FPS);
+                                " note: "+notes[noteNameNumber]+", cents: "+Math.round((noteNumber-Math.round(noteNumber))*100)+", freq: "+Math.round(pitch)+"<p style='margin : 0px'></p>"+
+                                "note number: "+Math.round(noteNumber)+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
+                                "FPS: "+Math.round(FPS)+", cores: "+Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.)+", zoom: "+zoom+"<p style='margin : 0px'></p>"+
+                                "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+(isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1)+", AMP: "+totalAMP*2048./fftSize;
+      else document.getElementById("textOUT").innerHTML = "";
+
 
 
     if(on) makeSpirograph();
