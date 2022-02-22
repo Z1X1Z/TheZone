@@ -95,7 +95,6 @@ window.addEventListener('keyup', function(event) {
       else if (key=="N"||window.key.toLowerCase()=="n") uniforms[ "MetaCored" ].value = !uniforms[ "MetaCored" ].value;
       else if (key=="L"||window.key.toLowerCase()=="l")
       {if(zoomAtl41){zoom=1.;coordX=0.; coordY=0.;}zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
-      else if (key=="V"||window.key.toLowerCase()=="v"){textON=!textON;onWindowResize();}
 
 
       else if (key=="Z"||window.key.toLowerCase()=="z") {
@@ -230,33 +229,35 @@ let xPerp= Array(1000);
 let yPerp = Array(1000);
 let angle=Array(1000);
 
+let pitc = 1;
+
 let reset = 6;
 let on;
 let spirafreq=1;
 var totalAMP;
 function  move()
 {
-  
-  let pitch=.00000000000000000001;
-  let pb = -1;
-//pitch=.00000000000000000001;
-for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
-//if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisement
-    pb =  calculatePitch();
-if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5); }
+  totalAMP = 0.;
+  if (!trailLoaded) {trailLoaded = true; for(var n = 0; n<trailLength; n++)
+      {xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}trailWidth[n]=0.;}
+
+    var pb = -1;
+   for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
+if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisement
+  pb =    calculatePitch();
+  pt = pb;
+       if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5);}
 on = true;
-if (isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) {pitch =Math.pow(pb,2.);reset =0;}
-else if (reset>3)on = false;
+if (isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) {  spirafreq=pt;pitc =pb;reset =0;}
+else if (reset>3){on = false;
+}
 else reset++
-
 if (trailDepth<trailLength)trailDepth++;
-
-let note = Math.log(pb/440)/Math.log(Math.pow ( 2, (1/24.0)))+49;
+let note = Math.log(pitc/440.0)/Math.log(Math.pow ( 2, (1/24.0)))+49;
 let inc = 8;
 let t =  (note * 30+30*inc);
 angle = t%360;
 angle = -angle;
-
 
 colorSound = new THREE.Color();
              //          colorSound.setHSL((angle+90)/360.,(180+note)/297,(180+note)/297);
@@ -423,9 +424,9 @@ function animate( timestamp ) {
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
     move();
-    
+
     let pitch = 440;
-    let pb = Math.root(440)
+    let pb = 440**.5;
 
     let noteNumber =  Math.log(pitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
     if(Math.round(noteNumber) ==-854)noteNumber="undefined";
@@ -456,6 +457,13 @@ function animate( timestamp ) {
                                 "FPS: "+Math.round(FPS)+", cores: "+cores+", zoom: "+zoom+"<p style='margin : 0px'></p>"+
                                 "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+pf+", AMP: "+totalAMP_;
       else document.getElementById("textOUT").innerHTML = "";
+
+
+
+
+  analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
+    spiral_compress();
+    move();
 
 
 
