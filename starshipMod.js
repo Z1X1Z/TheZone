@@ -415,7 +415,7 @@ let FPS=0.;
 
 function animate( timestamp ) {
 
-
+  if(mobile)onWindowResize();//may need to be taken out someday, just for iOS windowing
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
     move();
