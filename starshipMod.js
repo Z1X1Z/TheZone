@@ -230,7 +230,8 @@ let xPerp= Array(1000);
 let yPerp = Array(1000);
 let angle=Array(1000);
 
-let pitc = 1;
+let pitch=.00000000000000000001;
+let pb = -1;
 
 let reset = 6;
 let on;
@@ -238,27 +239,26 @@ let spirafreq=1;
 var totalAMP;
 function  move()
 {
-  totalAMP = 0.;
-  if (!trailLoaded) {trailLoaded = true; for(var n = 0; n<trailLength; n++)
-      {xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}trailWidth[n]=0.;}
 
-    var pb = -1;
-   for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
-if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisement
-  pb =    calculatePitch();
-  pt = pb;
-       if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5);}
+pb = -1;
+//pitch=.00000000000000000001;
+for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
+//if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisement
+    pb =  calculatePitch();
+if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5); }
 on = true;
-if (isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) {  spirafreq=pt;pitc =pb;reset =0;}
-else if (reset>3){on = false;
-}
+if (isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) {pitch =Math.pow(pb,2.);reset =0;}
+else if (reset>3)on = false;
 else reset++
+
 if (trailDepth<trailLength)trailDepth++;
-let note = Math.log(pitc/440.0)/Math.log(Math.pow ( 2, (1/24.0)))+49;
+
+let note = Math.log(pb/440)/Math.log(Math.pow ( 2, (1/24.0)))+49;
 let inc = 8;
 let t =  (note * 30+30*inc);
 angle = t%360;
 angle = -angle;
+
 
 colorSound = new THREE.Color();
              //          colorSound.setHSL((angle+90)/360.,(180+note)/297,(180+note)/297);
