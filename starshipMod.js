@@ -413,7 +413,7 @@ let point = [];
 
 var textOUT = document.createElement('text');
 textOUT.id="textOUT";
-document.getElementById("container").appendChild(textOUT);
+document.getElementById("textWindow").appendChild(textOUT);
 let textON=true;
 let lastTime=0.;
 let ticker = 0;
