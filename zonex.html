@@ -6,7 +6,34 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<link type="text/css" rel="stylesheet" href="main.css">
 	</head>
+	
 	<body>
+		<script>
+var textOUT = document.createElement('text');
+textOUT.id="textOUT";
+container.appendChild(textOUT);
+
+let lastTime=0.;
+let ticker = 0;
+let FPS=0.;
+
+function draw( timestamp ){
+requestAnimationFrame( draw );
+
+
+let elapsedTimeBetweenFrames = (timestamp-lastTime);
+let interval = 100;
+if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
+ticker++;
+
+
+
+document.getElementById("textOUT").innerHTML =
+
+"FPS: "+Math.round(FPS);
+}
+draw ();
+	</script>
 <script src="three.min.js"></script>
 
 		<div id="container"></div>
