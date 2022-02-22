@@ -27,7 +27,7 @@ function loadScript(url, callback)
 }
 var load = function() {
     startMic();
-}; 
+};
 loadScript(window.threeSonicStarship,load);
 //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
 
@@ -132,7 +132,7 @@ window.addEventListener('keyup', function(event) {
                 window.zoomCageSize=2.;
                 //window.movementRate=.5;
             }
-            
+
                 else if(uniforms["colorCombo"].value == 15){
                     window.zoomCageSize=1.5;
                     //window.movementRate=.5;
@@ -143,10 +143,10 @@ window.addEventListener('keyup', function(event) {
         //console.log(String.fromCharCode(event.which || event.keyCode));
 
     }, false);
-       
+
             let container = document.getElementById( 'container' );
 
-            
+
 var zoomOutEngage=false;
 let pi = Math.PI;
 let inputData;
@@ -278,11 +278,11 @@ angle[f] = angle;
          d_x = -Math.sin(-angle);
          d_y = -Math.cos(-angle);
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
- 
+
   bx=coordX+d_x*3./2./zoomFrames*window.movementRate*zoom;
   by=coordY+d_y*3./2./zoomFrames*window.movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on){
-        
+
                coordX=bx;
                coordY=by;
            }
@@ -290,7 +290,7 @@ if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize){
                if (Math.abs(by)>window.zoomCageSize)coordY*=1.-(Math.abs(by)-window.zoomCageSize)/25.;
                if (Math.abs(bx)>window.zoomCageSize)coordX*=1.-(Math.abs(bx)-window.zoomCageSize)/25.;
   }
-       
+
  interpolationFactor = 10.;//timeDif*1./(callbackWait-1);
 if (interpolationFactor>30) interpolationFactor=30;
 else if (interpolationFactor<1) interpolationFactor=1;
@@ -331,7 +331,7 @@ let x = parseInt(String.fromCharCode(event.which || event.keyCode));
 let geometryP;
 let uniforms;
 function init() {
-    
+
     inputData = new Float32Array(bufferSize);
     camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
     geometryP = new THREE.PlaneBufferGeometry( 2, 2 );
@@ -409,10 +409,35 @@ function onWindowResize() {
     renderer.setSize( window.innerWidth, window.innerHeight );
 }
 let point = [];
+
+var textOUT = document.createElement('text');
+textOUT.id="textOUT";
+document.getElementById("container").appendChild(textOUT);
+let textON=true;
+let lastTime=0.;
+let ticker = 0;
+let FPS=0.;
+
 function animate( timestamp ) {
+
+
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
     move();
+
+
+let elapsedTimeBetweenFrames = (timestamp-lastTime);
+let interval = 100;
+if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
+ticker++;
+
+
+
+document.getElementById("textOUT").innerHTML =
+
+                   "FPS: "+Math.round(FPS);
+
+
     if(on) makeSpirograph();
 
             var currMode = "desktop"
@@ -475,9 +500,9 @@ function animate( timestamp ) {
   const scene = new THREE.Scene();
 
   if (on)scene.add(line);
-            
-            
-            
+
+
+
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
   if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom *=Math.E**(Math.log(.5)/(zoomFrames*window.movementRate));
@@ -490,13 +515,13 @@ function animate( timestamp ) {
   if (zoomOutEngage == true)zoom *= 1.44;
 
 
-         
+
 
   uniforms.coords.value.x = coordX;
   uniforms.coords.value.y = coordY;
-            
+
             if(zoomAtl41)zoom=.025;
-            
+
   uniforms[ "zoom" ].value = zoom;
   uniforms[ "time" ].value = timestamp/1000.;
   uniforms[ "time2dance" ].value += Math.abs(totalAMP/numberOfBins*2.);
@@ -639,7 +664,7 @@ while(loopLimit>15){
   if(r<=0)r=trailDepth-1;
 }
 
-                 
+
   if(window.shaderOn)scene.add( mesh );//mesh here is the PIXELshader.
   renderer.render( scene, camera );
 
