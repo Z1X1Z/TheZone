@@ -408,9 +408,6 @@ function onWindowResize() {
 }
 let point = [];
 
-var textOUT = document.createElement('text');
-textOUT.id="textOUT";
-document.getElementById("textWindow").appendChild(textOUT);
 let textON=false;
 let lastTime=0.;
 let ticker = 0;
@@ -446,13 +443,13 @@ function animate( timestamp ) {
      let cores = Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.);
      let pf = String(pitch!=1);
      let totalAMP_=totalAMP*2048./fftSize;
-      if(textON)document.getElementById("textOUT").innerHTML =
+      if(textON)document.getElementById("textWindow").innerHTML =
 
                                 " note: "+note+", cents: "+cents+", freq: "+fr+"<p'></p>"+
                                 "note number: "+n_n+", time: "+timeOfTheSound+"<p></p>"+
                                 "FPS: "+Math.round(FPS)+", cores: "+cores+", zoom: "+zoom+"<p></p>"+                // style='margin : 0px'
                                 "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+pf+", AMP: "+totalAMP_;
-      else document.getElementById("textOUT").innerHTML = "";
+      else document.getElementById("textWindow").innerHTML = "";
 
 
 
