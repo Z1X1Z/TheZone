@@ -281,8 +281,8 @@ angle[f] = angle;
          d_y = -Math.cos(-angle);
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
 
-  bx=coordX+d_x*3./2./zoomFrames*window.movementRate*zoom;
-  by=coordY+d_y*3./2./zoomFrames*window.movementRate*zoom;
+  bx=coordX+d_x/zoomFrames*window.movementRate*zoom;
+  by=coordY+d_y/zoomFrames*window.movementRate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on){
 
                coordX=bx;
