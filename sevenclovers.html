@@ -7,11 +7,12 @@
         <link type="text/css" rel="stylesheet" href="main.css">
     </head>
     <body>
-        
-        <script src="OFFLINEonlineSwitch.js"></script>
         <div id="textWindow"></div>
+
+        <script src="OFFLINEonlineSwitch.js"></script>
+        
         <!--
-        https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_text_create
+         https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_text_create
         -->
         <script>
         function hk() {
@@ -32,15 +33,13 @@
             androidGetKeyLast = androidGetKey;
             androidGetKey = document.getElementById("hotkeys").value;
          let scan=androidGetKey.length-1;
-         if(androidGetKey.length-1==androidGetKeyLast.length) while(androidGetKey[scan]==androidGetKeyLast[scan]&&scan>=0)scan--;
+         if(androidGetKey.length-1==androidGetKeyLast.length) while(androidGetKey[scan]==androidGetKeyjLast[scan]&&scan>=0)scan--;
          window.key=androidGetKey[scan];
          }
     </script>
 
 
-        
-
-        <div id="container"></div>
+    <div id="container"></div>
 
         <script id="vertexShader" type="x-shader/x-vertex">
 
@@ -137,10 +136,10 @@
                                         vec2 g=p/2.;
                                          ///g.x+=(coz(t.y)-1.)/2.*.5;
                                         vec2 z=g;
-                                        for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>(20.-(coz(t.y)-1.)/2.*50.)&&f>4)x+=z.y/20000000.;
+                                        if(abs(p.y)<6.)for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>(20.-(coz(t.y)-1.)/2.*50.)&&f>4)x+=z.y/20000000.;
                                         else {z=2.*vec2(-1./((z.x*z.x-(1.44+(coz(t.y)-1.)/2.*.44)*z.y*z.y)
                                      -g.x*(1.2+(coz(t.y)-1.)/2.*.2)),
-                                ((1.2-(coz(t.y)-1.)/2.*.8)*z.x*z.y-(1.2+(coz(t.y)-1.)/2.*.2)*g.y-sin(t.y/2.)/20.));
+                                ((1.2-(coz(t.y)-1.)/2.*.8)*z.x*z.y-(1.2+(coz(t.y)-1.)/2.*.2)*g.y-sin(t.x/2.)/20.));
            //The Holy Bible Revelation 21:16 "The city was laid out like a square, as long as it was wide.
            //He measured the city with the rod and found it to be 12,000 stadia in length,
             //and as wide and high as it is long. The angel measured the wall using human measurement, and it was 144 cubits thick.
@@ -158,12 +157,12 @@
                           //vv head vv
                                                 g=p;
                                                 z=g;
-                                   if(abs(p.y)<4.)for (int f=0;f<21;f+=1)if(abs(z.y)>19.&&(f==int(floor(.8-(coz(t.x)-1.)/2.*.4)))){l=0.;break;}
+                                   if(abs(p.y)<4.)for (int f=0;f<21;f+=1)if(abs(z.y)>19.&&(f==int(floor(.8-(coz(t.y)-1.)/2.*.4)))){l=0.;break;}
                                         else if(abs(z.y)>19.&&(f>4))l=1.;
                                                 else{z=vec2(-1./((z.x*z.x-z.y*z.y)-g.x),2.0*z.x*z.y-g.y);
-                                     z*=pow(z.x,(z.x-(coz(t.x)-1.)/2.*-z.x));
+                                     z*=pow(z.x,(z.x-(coz(t.y)-1.)/2.*-z.x));
                                      l = clamp(1.-abs(z.y)*6.,0.,1.);
-                                     if(z.x>-.1&&f!=0)l=clamp(1.-z.x*(120.-sin(t.x)*80.),0.,1.);
+                                     if(z.x>-.1&&f!=0)l=clamp(1.-z.x*49.,0.,1.);
                                         }
 
                                     //vv mandelbrot\heart vv
@@ -178,20 +177,20 @@
                                     return vec3(l)+vec3(c,x+c/2.,0.)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
                                                                                                                                         
 
-      vec3 robeL(vec2 g, vec2 t){
-      float r=0.;
-      g.x*=(1.2+(-sin(t.y)-1.)/2.*.2);
-      g.x+=(-.45-(-sin(t.y)-1.)/2.*.5);
-      g.y/=1.14;
-      vec2 z=g.xy;
-      if(g.x>.5 &&abs(g.y)<(.8-(-sin(t.y)-1.)/2.*1.0))for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7)r=clamp(1.4-abs(g.x-2.3)
-                       *(1.-abs(g.y*g.x))-.07//(un)comment this line to toggle sleeves
-                      ,0.,1.);
-      else{
-          z=1.1*vec2(-2./(((1.2+(-sin(t.y)-1.)/2.*.1)*z.x*z.x-1.8*z.y*z.y)-g.x),(3.*z.x*z.y-(1.4+(-sin(t.y)-1.)/2.*.1)*g.y));;
-          z.x=pow(abs(z.x),.8);}
-      return vec3(r);
-      }
+        vec3 robeL(vec2 g, vec2 t){
+              float r=0.;
+              g.x*=(1.2+(coz(t.y)-1.)/2.*.2);
+              g.x+=(-.45-(coz(t.y)-1.)/2.*.5);
+              g.y/=1.14;
+              vec2 z=g.xy;
+              if(g.x>.5 &&abs(g.y)<(.8-(coz(t.y)-1.)/2.*1.0))for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7)r=clamp(1.4-abs(g.x-2.3)
+                               *(1.-abs(g.y*g.x))-.07//(un)comment this line to toggle sleeves
+                              ,0.,1.);
+              else{
+                  z=1.1*vec2(-2./(((1.2+(coz(t.y)-1.)/2.*.1)*z.x*z.x-1.8*z.y*z.y)-g.x),(3.*z.x*z.y-(1.4+(coz(t.y)-1.)/2.*.1)*g.y));;
+                  z.x=pow(abs(z.x),.8);}
+              return vec3(r);
+              }
 
           vec3 heart(vec2 g, vec2 t){
               //Mandelbrot\heart
@@ -425,7 +424,7 @@
             float cored = log(zoom*3./2.)/log(.5)+1.;
             float c = length(p);
             int loops=1;
-            if(MetaCored)for(int i=1;i<70; i++)if(c<2./3.&&float(loops)<cored){p*=2.;c*=2.;loops++;}else break;
+            if(MetaCored)for(int i=1;i<60; i++)if(c<2./3.&&float(loops)<cored){p*=2.;c*=2.;loops++;}else break;
             vec2 s=p;
             loops=0;
             int hyperCore= int(cored*2./3.+log(length(freed(coords))*3./2.)-1.);
@@ -438,7 +437,7 @@
                 if(MetaCored){
                     float d = length(s);
 
-                    for(int i=0;i<69; i++)if(d<2./3.&& loops+counter<hyperCore&&1.49>length(coords))
+                    for(int i=0;i<69; i++)if(d<2./3.&& loops+counter<hyperCore)
              {float shift=2.;s*=shift;d*=shift;loops++;}
                     
                         else break;
@@ -530,7 +529,7 @@ vec3 xtol(vec2 s, vec2 t){
                                   float cored=   log(zoom*1.75)/log(.75)+1.;
                                         float h =1.3333333;
                                             float loops=1.;
-                                        if(cored>1.)
+                                        if(cored>1.&&MetaCored)
                                          {
                                              float c = sqrt(s.y*s.y+s.x*s.x);
                                              c/=h;
@@ -580,7 +579,7 @@ vec3 xtol(vec2 s, vec2 t){
 
           //function library: manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin x
           void main(){
-           vec2 p=-((vUv.yx)-.5)/(resolution.xy/min(resolution.x,resolution.y))*12.;
+           vec2 p=-((vUv.yx)-.5)/(resolution.xy/max(resolution.x,resolution.y))*6.;
            
            vec2 bg =p/2.;
            vec2 bg2 =p/3.;
