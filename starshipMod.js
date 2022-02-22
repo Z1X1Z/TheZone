@@ -97,6 +97,7 @@ window.addEventListener('keyup', function(event) {
       else if (key=="L"||window.key.toLowerCase()=="l")
       {if(zoomAtl41){zoom=1.;coordX=0.; coordY=0.;}zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
       else if (key=="C"||window.key.toLowerCase()=="c")center=!center;
+      else if (key=="V"||window.key.toLowerCase()=="v")textON=!textON;
 
 
       else if (key=="Z"||window.key.toLowerCase()=="z") {
@@ -171,13 +172,13 @@ let onO = false;
 function makeSpirograph(){
       phase = phase % (pi*2);
       len = 0;
-      let adjConstant = 1./(spirafreq)*3.14*1.618/2.;
+      let adjConstant = 1./(pitch)*3.14;
       if(Math.abs(inputData[0])>.0    )
       for(var m = 0; m < bufferSize; m++)
       {
               phase += adjConstant;//spira_pitch;
-              spirray0[m]=-Math.sin(phase)*inputData[m];
-              spirray1[m]=-Math.cos(phase)*inputData[m];
+              spirray0[m]=-Math.sin(phase)*inputData[m]*m;
+              spirray1[m]=-Math.cos(phase)*inputData[m]*m;
              // len++;
       }
       len -= 1;
@@ -231,7 +232,7 @@ let xPerp= Array(1000);
 let yPerp = Array(1000);
 let angle=Array(1000);
 
-let pitc = 1;
+let pitch = 1;
 
 let reset = 6;
 let on;
@@ -242,20 +243,19 @@ function  move()
   totalAMP = 0.;
   if (!trailLoaded) {trailLoaded = true; for(var n = 0; n<trailLength; n++)
       {xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}trailWidth[n]=0.;}
-
+    pitch=1;
     var pb = -1;
    for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
 if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisement
   pb =    calculatePitch();
-  pt = pb;
-       if(pb>0){pb =Math.pow(audioX.sampleRate/pb,.5);}
+  if(pb>0) pb =audioX.sampleRate/pb;
 on = true;
-if (isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) {  spirafreq=pt;pitc =pb;reset =0;}
+if (isFinite(pb) &&pb>0&& Math.abs(pb-4.64152157387662*4.64152157387662)>.000001&&Math.abs(pb-4.842411556493535*4.842411556493535)>.000001&&pb!=1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) { pitch =pb;reset =0;}
 else if (reset>3){on = false;
 }
 else reset++
 if (trailDepth<trailLength)trailDepth++;
-let note = Math.log(pitc/440.0)/Math.log(Math.pow ( 2, (1/24.0)))+49;
+let note = Math.log(Math.sqrt(pitch)/440.0)/Math.log(Math.pow ( 2, (1/24.0)))+49;
 let inc = 8;
 let t =  (note * 30+30*inc);
 angle = t%360;
@@ -408,24 +408,22 @@ function onWindowResize() {
 }
 let point = [];
 
-/*var textOUT = document.createElement('text');
+var textOUT = document.createElement('text');
 textOUT.id="textOUT";
-container.appendChild(textOUT);
-let textON=true;
+document.getElementById("textWindow").appendChild(textOUT);
+let textON=false;
 let lastTime=0.;
 let ticker = 0;
 let FPS=0.;
-*/
+
 function animate( timestamp ) {
 
 
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
     move();
-/*
-    let pitch = 440;
-    let pb = 440**.5;
-
+            
+            
     let noteNumber =  Math.log(pitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
     if(Math.round(noteNumber) ==-854)noteNumber="undefined";
     let noteNameNumber=Math.floor(Math.round(noteNumber))%12;
@@ -436,29 +434,31 @@ function animate( timestamp ) {
     let timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
     let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"];
 
+              let elapsedTimeBetweenFrames = (timestamp-lastTime);
+              let interval = 100;
+              if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
+                  ticker++;
 
-    let elapsedTimeBetweenFrames = (timestamp-lastTime);
-    let interval = 100;
-    if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
-        ticker++;
      let note = notes[noteNameNumber];
      let cents = Math.round((noteNumber-Math.round(noteNumber))*100);
      let fr = Math.round(pitch);
      let n_n = Math.round(noteNumber);
      let cores = Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.);
-     let pf = (isFinite(pb) &&pb>0&& pb!=4.64152157387662&&pb!=4.842411556493535&&pb!=1);
+     let pf = String(pitch!=1);
      let totalAMP_=totalAMP*2048./fftSize;
       if(textON)document.getElementById("textOUT").innerHTML =
 
-                                " note: "+note+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
-                                "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
-                                "FPS: "+Math.round(FPS)+", cores: "+cores+", zoom: "+zoom+"<p style='margin : 0px'></p>"+
+                                " note: "+note+", cents: "+cents+", freq: "+fr+"<p'></p>"+
+                                "note number: "+n_n+", time: "+timeOfTheSound+"<p></p>"+
+                                "FPS: "+Math.round(FPS)+", cores: "+cores+", zoom: "+zoom+"<p></p>"+                // style='margin : 0px'
                                 "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+pf+", AMP: "+totalAMP_;
       else document.getElementById("textOUT").innerHTML = "";
-*/
 
 
 
+ 
+ 
+ 
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
     move();
