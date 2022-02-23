@@ -425,6 +425,7 @@ let FPS=0.;
 
                   let lastPitch = 0;
 function animate( timestamp ) {
+  requestAnimationFrame( animate );
 
   onWindowResize();//may need to be taken out someday, just for iOS windowing rotation bug
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
@@ -560,7 +561,6 @@ function animate( timestamp ) {
   uniforms[ "time" ].value = timestamp/1000.;
   uniforms[ "time2dance" ].value += Math.abs(totalAMP/numberOfBins*2.);
 
-  requestAnimationFrame( animate );
   if (micOn)analyser.getByteFrequencyData(  dataArray);
 
    var maxTestar=0.;
@@ -571,7 +571,7 @@ function animate( timestamp ) {
 
 
 
-    for (var g=starArms; g>0; g--)if(isFinite(testar[g])&&testar[g]!=0.) {
+    for (var g=0; g<starArms; g++)if(isFinite(testar[g])&&testar[g]!=0.) {
         var widt = .02;
         var arm =(mustarD[g]+19)%24./24.*pi*2.;
         var lengt = (testar[g]-minTestar)/(maxTestar-minTestar);
@@ -592,21 +592,22 @@ function animate( timestamp ) {
             let xr = lengt*-Math.sin(arm)*porportionX;
             let yr = lengt*-Math.cos(arm)*porportionY;
     var v;
+    let depth = -.5+Math.abs(1.-(g-starArms/2.))/starArms;//this depth should draw the back around the middle up towards the top.
     if(pointed) v= new Float32Array( [
-       -x,    -y,  -0.05,
-        x,    y,  -0.05,
-        (xr+x), (yr+y),  -0.05,
+       -x,    -y,  depth,
+        x,    y,  depth,
+        (xr+x), (yr+y),  depth,
         /* -x, -y,  -0.05,
         (xr+x), (yr+y),  -0.05,
         (xr-x), (yr-y),  -0.05,*/
     ] );
     else v= new Float32Array( [
-       -x,    -y,  -0.05,
-        x,    y,  -0.05,
-        (xr+x), (yr+y),  -0.05,
-        -x, -y,  -0.05,
-        (xr+x), (yr+y),  -0.05,
-        (xr-x), (yr-y),  -0.05
+       -x,    -y,  depth,
+        x,    y,  depth,
+        (xr+x), (yr+y),  depth,
+        -x, -y,  depth,
+        (xr+x), (yr+y),  depth,
+        (xr-x), (yr-y),  depth
     ] );
 
 /*
