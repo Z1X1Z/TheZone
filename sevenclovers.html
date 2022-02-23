@@ -29,14 +29,16 @@
             hk();
       
         let androidGetKey="";
-        let androidGetKeyLast;
+        let androidGetKeyLast="";
 
         function getKey(){
             androidGetKeyLast = androidGetKey;
             androidGetKey = document.getElementById("hotkeys").value;
          let scan=androidGetKey.length-1;
-         if(androidGetKey.length-1==androidGetKeyLast.length) while(androidGetKey[scan]==androidGetKeyLast[scan]&&scan>=0)scan--;
-         window.key=androidGetKey[scan];
+         if(androidGetKey.length-1==androidGetKeyLast.length) while(androidGetKey[scan]==androidGetKeyLast[scan]&&scan>=0){
+                window.key=androidGetKey[scan];
+                scan--;
+                }
          }
     </script>
 
