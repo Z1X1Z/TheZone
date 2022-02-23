@@ -718,7 +718,7 @@ geometries[j].dispose();
   }
                                // else for (let j=0; j<24; j++) {meshes[j].dispose; geometries[j].dispose();}
   for (let j=0; j<trailDepth; j++){
-   // scene.remove(trailMeshes[j]);
+    scene.remove(trailMeshes[j]);
                           
     trailMeshes[j].geometry.dispose();
     trailMeshes[j].material.dispose();
