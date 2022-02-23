@@ -328,8 +328,10 @@ let geometry;
 
 let geometryP;
 let uniforms;
-function init() {
+                     let scene;
 
+function init() {
+    scene = new THREE.Scene();
     inputData = new Float32Array(bufferSize);
     camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
     geometryP = new THREE.PlaneBufferGeometry( 2, 2 );
@@ -346,6 +348,8 @@ function init() {
         geometries[r] = new THREE.BufferGeometry();
         geometries[r].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
         meshes[r] = new THREE.Mesh(geometries[r] , material );
+                  scene.add( meshes[r] );
+
     }
 materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
     for (let r=0; r<trailLength; r++) {
@@ -359,6 +363,8 @@ materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
 
         trailGeom[r].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
         trailMeshes[r] = new THREE.Mesh(trailGeom[r] , materials );
+            scene.add( trailMeshes[r] );
+
     }
   uniforms = THREE.UniformsUtils.merge([
   THREE.UniformsLib.lights,
@@ -389,7 +395,10 @@ materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
         fragmentShader: document.getElementById( 'fragmentShader' ).textContent
       } );
   renderer = new THREE.WebGLRenderer();
-  if(window.shaderOn)mesh = new THREE.Mesh( geometryP, materialShader );
+      if(window.shaderOn){
+            mesh = new THREE.Mesh( geometryP, materialShader );
+            scene.add( mesh );
+        }
 
   renderer.setPixelRatio( rez);
   container.appendChild( renderer.domElement );
@@ -522,7 +531,6 @@ function animate( timestamp ) {
     point[r]=new THREE.Vector3( tx, ty, depth );
   }
   const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), lineMat );
-  const scene = new THREE.Scene();
 
   if (on)scene.add(line);
 
@@ -610,9 +618,10 @@ function animate( timestamp ) {
       */
     // itemSize = 3 because there are 3 values (components) per vertex
     geometries[g].setAttribute( 'position', new THREE.Float32BufferAttribute( v, 3 ) );
-                       meshes[g] = new THREE.Mesh(geometries[g] , material );
+                       meshes[g].geometries =geometries[g]
+                  meshes[g].material=material;
 
-                       scene.add(meshes[g])
+                     //  scene.add(meshes[g])
         }
 }
 
@@ -653,8 +662,11 @@ else
 
             // itemSize = 3 because there are 3 values (components) per vertex
             geometries[rr].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
-                 meshes[rr] = new THREE.Mesh(geometries[rr] , material );
-                 scene.add(meshes[rr])
+                // meshes[rr] = new THREE.Mesh(geometries[rr] , material );
+                 meshes[rr].geometries = geometries[rr]
+                 meshes[rr].material = material;
+
+                // scene.add(meshes[rr])
                 } }
 
 
@@ -667,7 +679,6 @@ while(loopLimit>15){
   loopLimit--;
   pitchCol[r].opacity = 1.-(trailDepth-loopLimit)/trailDepth*3.;
   material = pitchCol[r];
-  trailMeshes[r] = new THREE.Mesh(trailGeom[r] , material );
 
   let widtr = .2*(1.-trailWidth[r]);
   let widts = .2*(1.-trailWidth[s]);
@@ -684,6 +695,9 @@ while(loopLimit>15){
   ] );
 
   trailGeom[r].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices,3 ) );
+                          trailMeshes[r].geometry = trailGeom[r]
+                          trailMeshes[r].material=material;
+
   scene.add(trailMeshes[r])
   s = r;
   r--;
@@ -691,21 +705,24 @@ while(loopLimit>15){
 }
 
 
-  if(window.shaderOn)scene.add( mesh );//mesh here is the PIXELshader.
   renderer.render( scene, camera );
 
   scene.remove(line);
   line.geometry.dispose( );
 
   for (let j=0; j<starArms; j++) {
-    scene.remove(meshes[j]);
-    meshes[j].dispose;
-    geometries[j].dispose();
+  scene.remove(meshes[j]);
+  meshes[j].geometry.dispose();
+  meshes[j].material.dispose();
+geometries[j].dispose();
   }
                                // else for (let j=0; j<24; j++) {meshes[j].dispose; geometries[j].dispose();}
   for (let j=0; j<trailDepth; j++){
-    scene.remove(trailMeshes[j]);
-    trailGeom[j].dispose();trailMeshes[j].dispose
+   // scene.remove(trailMeshes[j]);
+                          
+    trailMeshes[j].geometry.dispose();
+    trailMeshes[j].material.dispose();
+    trailGeom[j].dispose();
   }
 }
 
