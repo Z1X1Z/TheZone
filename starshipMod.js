@@ -621,7 +621,7 @@ function animate( timestamp ) {
                        meshes[g].geometries =geometries[g]
                   meshes[g].material=material;
 
-                     //  scene.add(meshes[g])
+                       scene.add(meshes[g])
         }
 }
 
@@ -666,7 +666,7 @@ else
                  meshes[rr].geometries = geometries[rr]
                  meshes[rr].material = material;
 
-                // scene.add(meshes[rr])
+                 scene.add(meshes[rr])
                 } }
 
 
