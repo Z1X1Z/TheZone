@@ -592,7 +592,7 @@ function animate( timestamp ) {
             let xr = lengt*-Math.sin(arm)*porportionX;
             let yr = lengt*-Math.cos(arm)*porportionY;
     var v;
-    let depth = -Math.abs(-.5+Math.abs(1.-(g-starArms/2.))/starArms);//this depth should draw the back around the middle up towards the top.
+    let depth = -Math.abs(.5-Math.abs(1.-(g-starArms/2.))/starArms);//this depth should draw the back around the middle up towards the top.
     if(pointed) v= new Float32Array( [
        -x,    -y,  depth,
         x,    y,  depth,
