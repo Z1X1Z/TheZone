@@ -1,7 +1,9 @@
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
-window.movementRate=1.;
+window.movementRate=4.;
 let zoomFrames = 14;
+let ZR = 1.;
+let MR = 1.;
 window.zoomCageSize = 1.5;//radius of zoom bounding
 zoomOutRatchetThreshold=1.;
 let radius = 4.;
@@ -142,7 +144,7 @@ window.addEventListener('keyup', function(event) {
                 }
         else
         {            window.zoomCageSize=1.5;
-            window.movementRate=1.;}
+            window.movementRate=4.;}
         //console.log(String.fromCharCode(event.which || event.keyCode));
 
     }, false);
@@ -280,9 +282,11 @@ angle[f] = angle;
          d_x = -Math.sin(-angle);
          d_y = -Math.cos(-angle);
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
-  let rate = (.5*Math.E**(0.693147/zoomFrames/window.movementRate))/zoomFrames*window.movementRate;
-  bx=coordX+d_x*rate*zoom;
-  by=coordY+d_y*rate*zoom;
+         
+         let MR = (.5*Math.E**(0.693147/zoomFrames/window.movementRate/FPS*60))/zoomFrames*window.movementRate*FPS/60.;
+                                 //https://www.wolframalpha.com/input?i=c*%28x*E**%28log%28.5%29%2F%28c%29%29%29+%3D1.59
+    bx=coordX+d_x*MR*zoom;
+  by=coordY+d_y*MR*zoom;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on){
 
                coordX=bx;
@@ -422,7 +426,11 @@ let textON=false;
 let lastTime=0.;
 let ticker = 0;
 let FPS=0.;
-
+                  
+                  const interval = 100;
+                  let elapsedTimeBetweenFrames = 0.;
+                  let interpolation = 1.;
+                  
                   let lastPitch = 0;
 function animate( timestamp ) {
   requestAnimationFrame( animate );
@@ -444,11 +452,12 @@ function animate( timestamp ) {
     let timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
     let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"];
 
-              let elapsedTimeBetweenFrames = (timestamp-lastTime);
-              let interval = 100;
-              if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
+              elapsedTimeBetweenFrames = (timestamp-lastTime);
+              if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;
+};
                   ticker++;
-
+        
+        
      let note = notes[noteNameNumber];
      let cents = Math.round((noteNumber-Math.round(noteNumber))*100);
      let fr = Math.round(lastPitch);
@@ -539,8 +548,12 @@ function animate( timestamp ) {
 
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
-  if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom *=Math.E**(Math.log(.5)/(zoomFrames/window.movementRate));
-  else if(zoom<1.){zoom /= Math.E**(Math.log(.5)/(zoomFrames/window.movementRate));
+                            
+                            let ZR = Math.E**(Math.log(.5)/(zoomFrames/window.movementRate/FPS*60))
+
+    
+  if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom *=ZR;
+  else if(zoom<1.){zoom /= ZR;
                   if(!zoomOutEngage&&center){coordX*=(1-zoom)*2./3.; coordY*=(1-zoom)*2./3.;}
   }
   if (zoom>1.)zoom=1.;
@@ -664,7 +677,7 @@ else
             // itemSize = 3 because there are 3 values (components) per vertex
             geometries[rr].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
                 // meshes[rr] = new THREE.Mesh(geometries[rr] , material );
-                 meshes[rr].geometries = geometries[rr]
+                 meshes[rr].geometry = geometries[rr]
                  meshes[rr].material = material;
 
                  scene.add(meshes[rr])
