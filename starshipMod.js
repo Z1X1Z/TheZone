@@ -280,9 +280,9 @@ angle[f] = angle;
          d_x = -Math.sin(-angle);
          d_y = -Math.cos(-angle);
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
-  let rate = (.5*Math.E**(0.693147/zoomFrames))/zoomFrames;
-  bx=coordX+d_x*rate*window.movementRate*zoom;
-  by=coordY+d_y*rate*window.movementRate*zoom;
+  let rate = (.5*Math.E**(0.693147/zoomFrames/window.movementRate))/zoomFrames*window.movementRate;
+  bx=coordX+d_x*rate*zoom;
+  by=coordY+d_y*rate*zoom;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on){
 
                coordX=bx;
@@ -539,8 +539,8 @@ function animate( timestamp ) {
 
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
-  if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom *=Math.E**(Math.log(.5)/(zoomFrames*window.movementRate));
-  else if(zoom<1.){zoom /= Math.E**(Math.log(.5)/(zoomFrames*window.movementRate));
+  if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom *=Math.E**(Math.log(.5)/(zoomFrames/window.movementRate));
+  else if(zoom<1.){zoom /= Math.E**(Math.log(.5)/(zoomFrames/window.movementRate));
                   if(!zoomOutEngage&&center){coordX*=(1-zoom)*2./3.; coordY*=(1-zoom)*2./3.;}
   }
   if (zoom>1.)zoom=1.;
