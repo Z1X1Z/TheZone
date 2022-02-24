@@ -1,6 +1,6 @@
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
-window.movementRate=4.;
+window.movementRate=1.;
 let zoomFrames = 14;
 let ZR = 1.;
 let MR = 1.;
@@ -282,8 +282,8 @@ angle[f] = angle;
          d_x = -Math.sin(-angle);
          d_y = -Math.cos(-angle);
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
-         
-         let MR = (.5*Math.E**(0.693147/zoomFrames/window.movementRate*FPS/60.))/zoomFrames*window.movementRate*FPS/60.;
+         interpolation =30./FPS;
+         let MR = (.5*Math.E**(0.693147/zoomFrames/window.movementRate/interpolation))/zoomFrames*window.movementRate*interpolation;
                                  //https://www.wolframalpha.com/input?i=c*%28x*E**%28log%28.5%29%2F%28c%29%29%29+%3D1.59
     bx=coordX+d_x*MR*zoom;
   by=coordY+d_y*MR*zoom;
@@ -422,7 +422,7 @@ let point = [];
 let textON=false;
 let lastTime=0.;
 let ticker = 0;
-let FPS=0.;
+let FPS=30.;
                   
                   const interval = 100;
                   let elapsedTimeBetweenFrames = 0.;
@@ -546,7 +546,7 @@ function animate( timestamp ) {
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
                             
-                            let ZR = Math.E**(Math.log(.5)/(zoomFrames/window.movementRate/FPS*60))
+                            let ZR = Math.E**(Math.log(.5)/(zoomFrames/window.movementRate/interpolation))
 
     
   if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom *=ZR;
