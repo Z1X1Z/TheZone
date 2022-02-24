@@ -1,8 +1,8 @@
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
-window.movementRate=1.;
+window.movementRate=.5;
 let zoomFrames = 14;
-const ZR = Math.E**(Math.log(.5)/(zoomFrames/window.movementRate))
+let ZR = Math.E**(Math.log(.5)/zoomFrames)
 const MR = 2./3./zoomFrames;
 window.zoomCageSize = 1.5;//radius of zoom bounding
 zoomOutRatchetThreshold=1.;
@@ -144,7 +144,9 @@ window.addEventListener('keyup', function(event) {
                 }
         else
         {            window.zoomCageSize=1.5;
-            window.movementRate=1.;}
+            //window.movementRate=1.;
+            
+        }
         //console.log(String.fromCharCode(event.which || event.keyCode));
 
     }, false);
@@ -282,8 +284,8 @@ angle[f] = angle;
          d_x = -Math.sin(-angle);
          d_y = -Math.cos(-angle);
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
-    bx=coordX+d_x*MR*zoom;
-  by=coordY+d_y*MR*zoom;
+    bx=coordX+d_x*MR*zoom*interpolation*window.movementRate;
+  by=coordY+d_y*MR*zoom*interpolation*window.movementRate;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on){
 
                coordX=bx;
@@ -423,12 +425,17 @@ let FPS=0.;
                   const interval = 100;
                   let elapsedTimeBetweenFrames = 0.;
                   let lastPitch = 0;
+                  
+                  let lastFrameTime=0.;
+                  let interpolation=1.;
 function animate( timestamp ) {
   requestAnimationFrame( animate );
 
   onWindowResize();//may need to be taken out someday, just for iOS windowing rotation bug
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
+             interpolation = (timestamp-lastFrameTime)/1000.*60.;
+             lastFrameTime=timestamp;
     move();
     
     if(pitch!=1)lastPitch = pitch;
@@ -446,6 +453,9 @@ function animate( timestamp ) {
               elapsedTimeBetweenFrames = (timestamp-lastTime);
               if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
                   ticker++;
+        
+        
+        
 
      let note = notes[noteNameNumber];
      let cents = Math.round((noteNumber-Math.round(noteNumber))*100);
@@ -537,6 +547,8 @@ function animate( timestamp ) {
 
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
+                             ZR = Math.E**(Math.log(.5)/zoomFrames*interpolation*window.movementRate);
+
   if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom *=ZR;
   else if(zoom<1.){zoom /= ZR;
                   if(!zoomOutEngage&&center){coordX*=(1-zoom)*2./3.; coordY*=(1-zoom)*2./3.;}
