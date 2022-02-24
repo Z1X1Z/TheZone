@@ -280,7 +280,6 @@ angle[f] = angle;
          d_x = -Math.sin(-angle);
          d_y = -Math.cos(-angle);
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
-  let c =zoomFrames
   let rate = (.5*Math.E**(0.693147/zoomFrames))/zoomFrames;
   bx=coordX+d_x*rate*window.movementRate*zoom;
   by=coordY+d_y*rate*window.movementRate*zoom;
