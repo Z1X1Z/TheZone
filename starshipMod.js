@@ -283,11 +283,10 @@ angle[f] = angle;
          d_x = -Math.sin(-angle);
          d_y = -Math.cos(-angle);
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
-         if (FPS!=0)interpolation=FPS/60.;
+         if (FPS!=0)interpolation=FPS/60.*.2;
          else FPS=1.;
-         console.log(interpolation);
-    bx=coordX+d_x*MR*zoom/interpolation;
-  by=coordY+d_y*MR*zoom/interpolation;
+    bx=coordX+d_x*MR*zoom*interpolation;
+  by=coordY+d_y*MR*zoom*interpolation;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on){
 
                coordX=bx;
@@ -545,8 +544,8 @@ function animate( timestamp ) {
 
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
-  if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom *=ZR;
-  else if(zoom<1.){zoom /= ZR;
+  if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom *=ZR*(1-interpolation);
+  else if(zoom<1.){zoom /= ZR*(1-interpolation);
                   if(!zoomOutEngage&&center){coordX*=(1-zoom)*2./3.; coordY*=(1-zoom)*2./3.;}
   }
   if (zoom>1.)zoom=1.;
