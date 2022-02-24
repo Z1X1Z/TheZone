@@ -2,8 +2,9 @@ if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
 window.movementRate=1.;
 let zoomFrames = 14;
-const ZR = 1.;
-const MR = 1.5;
+const ZR = Math.E**(Math.log(.5)/(zoomFrames/window.movementRate))
+const MR = (.5*Math.E**(Math.log(.5)/zoomFrames/window.movementRate))/zoomFrames*window.movementRate;
+                        //https://www.wolframalpha.com/input?i=c*%28x*E**%28log%28.5%29%2F%28c%29%29%29+%3D1.59
 window.zoomCageSize = 1.5;//radius of zoom bounding
 zoomOutRatchetThreshold=1.;
 let radius = 4.;
@@ -240,7 +241,6 @@ let reset = 6;
 let on;
 let spirafreq=1;
 var totalAMP;
-                       let interpolation=1.;
 function  move()
 {
   totalAMP = 0.;
@@ -283,10 +283,8 @@ angle[f] = angle;
          d_x = -Math.sin(-angle);
          d_y = -Math.cos(-angle);
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
-         if (FPS!=0)interpolation=FPS/60.*.2;
-         else FPS=1.;
-    bx=coordX+d_x*MR*zoom*interpolation;
-  by=coordY+d_y*MR*zoom*interpolation;
+    bx=coordX+d_x*MR*zoom;
+  by=coordY+d_y*MR*zoom;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on){
 
                coordX=bx;
@@ -296,10 +294,6 @@ if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize){
                if (Math.abs(by)>window.zoomCageSize)coordY*=1.-(Math.abs(by)-window.zoomCageSize)/25.;
                if (Math.abs(bx)>window.zoomCageSize)coordX*=1.-(Math.abs(bx)-window.zoomCageSize)/25.;
   }
-
- interpolationFactor = 10.;//timeDif*1./(callbackWait-1);
-if (interpolationFactor>30) interpolationFactor=30;
-else if (interpolationFactor<1) interpolationFactor=1;
 
 cx[f] = 0;
 cy[f] = 0;
@@ -544,8 +538,8 @@ function animate( timestamp ) {
 
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
-  if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom *=ZR*(1-interpolation);
-  else if(zoom<1.){zoom /= ZR*(1-interpolation);
+  if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom *=ZR;
+  else if(zoom<1.){zoom /= ZR;
                   if(!zoomOutEngage&&center){coordX*=(1-zoom)*2./3.; coordY*=(1-zoom)*2./3.;}
   }
   if (zoom>1.)zoom=1.;
