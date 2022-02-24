@@ -283,7 +283,7 @@ angle[f] = angle;
          d_y = -Math.cos(-angle);
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
          interpolation =30./FPS;
-         let MR = (.5*Math.E**(0.693147/zoomFrames/window.movementRate/interpolation))/zoomFrames*window.movementRate*interpolation;
+         let MR = (.5*Math.E**(0.693147/zoomFrames))/zoomFrames*window.movementRate*interpolation;
                                  //https://www.wolframalpha.com/input?i=c*%28x*E**%28log%28.5%29%2F%28c%29%29%29+%3D1.59
     bx=coordX+d_x*MR*zoom;
   by=coordY+d_y*MR*zoom;
