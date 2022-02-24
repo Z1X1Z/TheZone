@@ -1,6 +1,6 @@
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
-window.movementRate=4.;
+window.movementRate=3.;
 let zoomFrames = 14;
 let ZR = 1.;
 let MR = 1.;
@@ -283,7 +283,7 @@ angle[f] = angle;
          d_y = -Math.cos(-angle);
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
          
-         let MR = (.5*Math.E**(0.693147/zoomFrames/window.movementRate/FPS*60))/zoomFrames*window.movementRate*FPS/60.;
+         let MR = (.5*Math.E**(0.693147/zoomFrames/window.movementRate))/zoomFrames*window.movementRate*FPS/60.;
                                  //https://www.wolframalpha.com/input?i=c*%28x*E**%28log%28.5%29%2F%28c%29%29%29+%3D1.59
     bx=coordX+d_x*MR*zoom;
   by=coordY+d_y*MR*zoom;
@@ -297,9 +297,6 @@ if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize){
                if (Math.abs(bx)>window.zoomCageSize)coordX*=1.-(Math.abs(bx)-window.zoomCageSize)/25.;
   }
 
- interpolationFactor = 10.;//timeDif*1./(callbackWait-1);
-if (interpolationFactor>30) interpolationFactor=30;
-else if (interpolationFactor<1) interpolationFactor=1;
 
 cx[f] = 0;
 cy[f] = 0;
