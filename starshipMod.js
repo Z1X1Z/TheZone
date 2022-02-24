@@ -2,9 +2,8 @@ if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
 window.movementRate=1.;
 let zoomFrames = 14;
-const ZR = Math.E**(Math.log(.5)/(zoomFrames/window.movementRate))
-const MR = (.5*Math.E**(0.693147/zoomFrames/window.movementRate))/zoomFrames*window.movementRate;
-                        //https://www.wolframalpha.com/input?i=c*%28x*E**%28log%28.5%29%2F%28c%29%29%29+%3D1.59
+const ZR = 1.;
+const MR = 1.5;
 window.zoomCageSize = 1.5;//radius of zoom bounding
 zoomOutRatchetThreshold=1.;
 let radius = 4.;
@@ -241,6 +240,7 @@ let reset = 6;
 let on;
 let spirafreq=1;
 var totalAMP;
+                       let interpolation=1.;
 function  move()
 {
   totalAMP = 0.;
@@ -283,8 +283,11 @@ angle[f] = angle;
          d_x = -Math.sin(-angle);
          d_y = -Math.cos(-angle);
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
-    bx=coordX+d_x*MR*zoom;
-  by=coordY+d_y*MR*zoom;
+         if (FPS!=0)interpolation=FPS/60.;
+         else FPS=1.;
+         console.log(interpolation);
+    bx=coordX+d_x*MR*zoom/interpolation;
+  by=coordY+d_y*MR*zoom/interpolation;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on){
 
                coordX=bx;
