@@ -54,7 +54,14 @@ function loadScript(url, callback)
     head.appendChild(script);
 }
 var load = function() {
-    startMic();
+//https://stackfame.com/auto-refresh-page-first-load-javascript-jquery
+    if(!window.location.hash) {
+        //setting window location
+        window.location = window.location + '#144073';
+        //using reload() method to reload web page
+        window.location.reload(false);
+    }
+    else startMic();
 };
 loadScript(window.threeSonicStarship,load);
 //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
@@ -332,16 +339,8 @@ let geometry;
 let geometryP;
 let uniforms;
                      let scene;
-         function reloadPage(){//https://stackfame.com/auto-refresh-page-first-load-javascript-jquery
-                     if(!window.location.hash) {
-                         //setting window location
-                         window.location = window.location + '#144073';
-                         //using reload() method to reload web page
-                         window.location.reload(false);
-                     }
-}
+
 function init() {
-    reloadPage();
     scene = new THREE.Scene();
     inputData = new Float32Array(bufferSize);
     camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
