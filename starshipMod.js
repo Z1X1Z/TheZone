@@ -66,9 +66,9 @@ var load = function() {
         
     }
     else {
-        if(window.location.hash)window.location.hash="#";
         startMic();}
-    
+    if(window.location.hash)window.location.hash="#";
+
 }
 loadScript(window.threeSonicStarship,load);
 
