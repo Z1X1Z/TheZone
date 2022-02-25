@@ -42,18 +42,28 @@ let center = false;
 function loadScript(url, callback)
 {
     // Adding the script tag to the head as suggested before
-    var body = document.body;
+    var head = document.head;
     var script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = url;
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
-    if(navigator.userAgent.indexOf("Safari") > -1&&!mobile)script.onreadystatechange = callback;
+    script.onreadystatechange = callback;
     script.onload = callback;
     // Fire the loading
-    body.appendChild(script);
+    head.appendChild(script);
 }
 var load = function() {
+//https://stackfame.com/auto-refresh-page-first-load-javascript-jquery
+    if(!window.location.hash) {
+        //setting window location
+        window.location = window.location + '#144073';
+        //using reload() method to reload web page
+        window.location.reload(false);
+    }
+    
+    
+    
     startMic();
 };
 loadScript(window.threeSonicStarship,load);
