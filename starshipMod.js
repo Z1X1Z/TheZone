@@ -60,7 +60,7 @@ var load = function() {
     
     if(!window.location.hash) {
         //setting window location
-        window.location = window.location + '#144073';
+        window.location = window.location + '#m144073';
         //using reload() method to reload web page
         window.location.reload(false);
         
@@ -133,6 +133,11 @@ window.addEventListener('keyup', function(event) {
         zoomOutRatchetThreshold+= .777;//character for '
         console.log("zoomOutRatchetThreshold: "+zoomOutRatchetThreshold+ ", totalMicAmp: "+totalAMP );
       }
+            
+            else if (key=="P"||window.key.toLowerCase()=="p"){
+              zoomOutRatchetThreshold= finalAverageAmp;//character for '
+              console.log("zoomOutRatchetThreshold: "+zoomOutRatchetThreshold+ ", totalMicAmp: "+totalAMP );
+            }
       else if (key==" "||window.key.toLowerCase()==" ")
       {
         if (onO)onO=false;
@@ -444,7 +449,10 @@ let FPS=0.;
                   
                   let lastFrameTime=0.;
                   let interpolation=1.;
+                  let finalAverageAmp=1.;
+                  let averageFrameTotalAmp = [];
 function animate( timestamp ) {
+
   requestAnimationFrame( animate );
 
   onWindowResize();//may need to be taken out someday, just for iOS windowing rotation bug
@@ -453,7 +461,15 @@ function animate( timestamp ) {
              interpolation = (timestamp-lastFrameTime)/1000.*60.;
              lastFrameTime=timestamp;
     move();
-    
+            
+            
+            averageFrameTotalAmp.push(totalAMP);
+            if (averageFrameTotalAmp.length>interval)averageFrameTotalAmp.shift();
+             finalAverageAmp = 0.;
+          for(var l=0.; l<averageFrameTotalAmp.length;l++)finalAverageAmp+=averageFrameTotalAmp[l];
+            console.log(averageFrameTotalAmp.length)
+              finalAverageAmp/=interval;
+                      
     if(pitch!=1)lastPitch = pitch;
             
     let noteNumber =  Math.log(lastPitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
