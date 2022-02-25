@@ -53,8 +53,9 @@ function loadScript(url, callback)
     // Fire the loading
     head.appendChild(script);
 }
+//^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
 var load = function() {
-//https://stackfame.com/auto-refresh-page-first-load-javascript-jquery
+//vvvhttps://stackfame.com/auto-refresh-page-first-load-javascript-jquery
     if(!window.location.hash) {
         //setting window location
         window.location = window.location + '#144073';
@@ -64,8 +65,7 @@ var load = function() {
     else startMic();
     if(window.location.hash)window.location.hash="#";
 }
-loadScript(window.threeSonicStarship,load);
-//^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
+if(!window.location.hash) loadScript(window.threeSonicStarship,load);
 
 
 //key press handling vvvv
