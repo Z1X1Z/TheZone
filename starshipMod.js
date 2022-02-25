@@ -62,7 +62,10 @@ var load = function() {
         window.location.reload(false);
     }
     else startMic();
-};
+    if(window.location.hash)window.location=String(window.location).slice(0,-6);
+    if(window.location.hash=="##")window.location.hash="#"   ;
+                  console.log(window.location.hash);
+}
 loadScript(window.threeSonicStarship,load);
 //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
 
