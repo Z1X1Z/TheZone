@@ -54,16 +54,6 @@ function loadScript(url, callback)
     head.appendChild(script);
 }
 var load = function() {
-//https://stackfame.com/auto-refresh-page-first-load-javascript-jquery
-    if(!window.location.hash) {
-        //setting window location
-        window.location = window.location + '#144073';
-        //using reload() method to reload web page
-        window.location.reload(false);
-    }
-    
-    
-    
     startMic();
 };
 loadScript(window.threeSonicStarship,load);
@@ -342,8 +332,16 @@ let geometry;
 let geometryP;
 let uniforms;
                      let scene;
-
+         function reloadPage(){//https://stackfame.com/auto-refresh-page-first-load-javascript-jquery
+                     if(!window.location.hash) {
+                         //setting window location
+                         window.location = window.location + '#144073';
+                         //using reload() method to reload web page
+                         window.location.reload(false);
+                     }
+}
 function init() {
+    reloadPage();
     scene = new THREE.Scene();
     inputData = new Float32Array(bufferSize);
     camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
