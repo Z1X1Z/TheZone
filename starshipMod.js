@@ -467,7 +467,6 @@ function animate( timestamp ) {
             if (averageFrameTotalAmp.length>interval)averageFrameTotalAmp.shift();
              finalAverageAmp = 0.;
           for(var l=0.; l<averageFrameTotalAmp.length;l++)finalAverageAmp+=averageFrameTotalAmp[l];
-            console.log(averageFrameTotalAmp.length)
               finalAverageAmp/=interval;
                       
     if(pitch!=1)lastPitch = pitch;
