@@ -42,7 +42,7 @@ let center = false;
 function loadScript(url, callback)
 {
     // Adding the script tag to the head as suggested before
-    var head = document.head;
+    var body = document.body;
     var script = document.createElement('script');
     script.type = 'text/javascript';
     script.src = url;
@@ -51,7 +51,7 @@ function loadScript(url, callback)
     if(navigator.userAgent.indexOf("Safari") > -1&&!mobile)script.onreadystatechange = callback;
     script.onload = callback;
     // Fire the loading
-    head.appendChild(script);
+    body.appendChild(script);
 }
 var load = function() {
     startMic();
