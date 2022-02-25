@@ -12,6 +12,31 @@ let fftSize=2048;
 let trailLength = 288;
 let colorSound;
 let center = false;
+                  
+                  
+                  
+                  
+      let mobile = false;
+
+      //vvvvbelow line from https://code-boxx.com/detect-mobile-device-javascript/
+      if(navigator.userAgent.toLowerCase().match(/mobile/i)){
+          mobileRez=.25;
+          fftSize=1024;
+          trailLength = 150;
+          zoomOutRatchetThreshold=3.;
+          mobile=true;
+      }
+      else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+      {
+          mobileRez=.5;
+          fftSize=1024;
+          trailLength = 150;
+          zoomOutRatchetThreshold=3.;
+          mobile=true;
+
+      }
+
+      
 //load threeJS then call startMic()
 //vvvvmodified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
 function loadScript(url, callback)
@@ -23,7 +48,7 @@ function loadScript(url, callback)
     script.src = url;
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
-    //script.onreadystatechange = callback;
+    if(navigator.userAgent.indexOf("Safari") > -1&&!mobile)script.onreadystatechange = callback;
     script.onload = callback;
     // Fire the loading
     head.appendChild(script);
@@ -34,27 +59,6 @@ var load = function() {
 loadScript(window.threeSonicStarship,load);
 //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
 
-
-
-let mobile = false;
-
-//vvvvbelow line from https://code-boxx.com/detect-mobile-device-javascript/
-if(navigator.userAgent.toLowerCase().match(/mobile/i)){
-    mobileRez=.25;
-    fftSize=1024;
-    trailLength = 150;
-    zoomOutRatchetThreshold=3.;
-    mobile=true;
-}
-else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
-{
-    mobileRez=.5;
-    fftSize=1024;
-    trailLength = 150;
-    zoomOutRatchetThreshold=3.;
-    mobile=true;
-
-}
 
 //key press handling vvvv
 var pointed=false;
