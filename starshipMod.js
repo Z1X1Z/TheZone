@@ -1,3 +1,4 @@
+let zoom=1., coordX=0., coordY=0.;
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
 window.movementRate=.5;
@@ -56,17 +57,20 @@ function loadScript(url, callback)
 //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
 var load = function() {
 //https://stackfame.com/auto-refresh-page-first-load-javascript-jquery
+    
     if(!window.location.hash) {
         //setting window location
         window.location = window.location + '#144073';
         //using reload() method to reload web page
         window.location.reload(false);
+        
     }
-    else startMic();
-    if(window.location.hash)window.location.hash="#";
+    else {
+        if(window.location.hash)window.location.hash="#";
+        startMic();}
+    
 }
 loadScript(window.threeSonicStarship,load);
-
 
 //key press handling vvvv
 var pointed=false;
@@ -180,7 +184,6 @@ var meshes = Array(starArms);
 var testar = Array(starArms);
 var mustarD = Array(starArms);
 let averagedAmp =  0;
-let zoom = 1;
 let len=0;
 let spiregulator=0;
 let phase = 0;
@@ -232,8 +235,6 @@ function spiral_compress(){
   }
 };
 
-let coordX=0.;
-let coordY=0.;
 let trail = Array(1000);
 let cx = Array(1000);
 let cy = Array(1000);
@@ -256,6 +257,9 @@ let spirafreq=1;
 var totalAMP;
 function  move()
 {
+    if (isNaN(coordX))coordX=0.;
+    if (isNaN(coordY))coordY=0.;
+
   totalAMP = 0.;
   if (!trailLoaded) {trailLoaded = true; for(var n = 0; n<trailLength; n++)
       {xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}trailWidth[n]=0.;}
@@ -554,7 +558,6 @@ function animate( timestamp ) {
   const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), lineMat );
 
   if (on)scene.add(line);
-
 
 
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
