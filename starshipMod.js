@@ -130,7 +130,7 @@ window.addEventListener('keyup', function(event) {
         console.log("zoomOutRatchetThreshold: "+zoomOutRatchetThreshold+ ", totalMicAmp: "+totalAMP );
       }
       else if (key=="O"||window.key.toLowerCase()=="o"){
-        zoomOutRatchetThreshold+= .777;//character for '
+        zoomOutRatchetThreshold*= 1.212121;;//character for '
         console.log("zoomOutRatchetThreshold: "+zoomOutRatchetThreshold+ ", totalMicAmp: "+totalAMP );
       }
             
