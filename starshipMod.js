@@ -262,8 +262,8 @@ let spirafreq=1;
 var totalAMP;
 function  move()
 {
-    if (isNaN(coordX))coordX=0.;
-    if (isNaN(coordY))coordY=0.;
+    if (isNaN(coordX)||(!zoomAtl41&&coordX>4.))coordX=0.;
+    if (isNaN(coordY)||(!zoomAtl41&&coordY>4.))coordY=0.;
 
   totalAMP = 0.;
   if (!trailLoaded) {trailLoaded = true; for(var n = 0; n<trailLength; n++)
