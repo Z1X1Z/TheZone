@@ -59,7 +59,7 @@ var load = function() {
     
     if(!window.location.hash) {
         //setting window location
-        window.location = window.location + 'm144073';
+        window.location = window.location + '#m144073';
         //using reload() method to reload web page
         window.location.reload(false);
         
@@ -70,7 +70,7 @@ var load = function() {
 
 }
                       
-        loadScript(window.threeSonicStarship,load);
+loadScript(window.threeSonicStarship,load);
                   
 //key press handling vvvv
 var pointed=false;

@@ -1,10 +1,9 @@
-var script = document.createElement('script');
-
 function loadScript(url, callback)
 {
     // Adding the script tag to the head as suggested before
     var head = document.head;
-    script.type = 'application/javascript';
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
     script.src = url;
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
@@ -42,7 +41,7 @@ function initialize(){
     sound =  new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
      sound2 = new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
 }
-loadScript(wadLoader,initialize);
+if(window.location.hash)loadScript(wadLoader,initialize);
 
 let initialAngleSound;
 function startSound(e){
