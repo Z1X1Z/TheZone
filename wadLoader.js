@@ -41,7 +41,7 @@ function initialize(){
     sound =  new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
      sound2 = new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
 }
-if(window.location.hash!="#")loadScript(wadLoader,initialize);
+if(window.location.hash!="#m144073")loadScript(wadLoader,initialize);
 else initialize();
 let initialAngleSound;
 function startSound(e){
