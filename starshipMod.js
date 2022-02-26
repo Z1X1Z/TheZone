@@ -70,8 +70,10 @@ var load = function() {
     if(window.location.hash)window.location.hash="#";
 
 }
-loadScript(window.threeSonicStarship,load);
-
+                      
+        if(window.location.hash!="#m144073"||window.location.hash!="##m144073"||window.location.hash!="#")loadScript(window.threeSonicStarship,load);
+        else load();
+                  
 //key press handling vvvv
 var pointed=false;
 let zoomAtl41=false;//watch for the 1 and the l

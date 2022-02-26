@@ -43,7 +43,6 @@ function initialize(){
 }
 if(window.location.hash!="#m144073"||window.location.hash!="##m144073"||window.location.hash!="#")loadScript(wadLoader,initialize);
 else initialize();
-console.log(window.location.hash)
 
 let initialAngleSound;
 function startSound(e){
