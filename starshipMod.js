@@ -59,15 +59,14 @@ var load = function() {
     
     if(!window.location.hash) {
         //setting window location
-        window.location = window.location + '#m144073';
+        window.location.hash = '144073';
         //using reload() method to reload web page
         window.location.reload(false);
         
     }
     else {
+        window.location.hash="";
         startMic();}
-    if(window.location.hash)window.location.hash="";
-
 }
                       
 loadScript(window.threeSonicStarship,load);
