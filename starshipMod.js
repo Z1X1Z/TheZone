@@ -614,7 +614,7 @@ function animate( timestamp ) {
     for (var g=0; g<starArms; g++)if(isFinite(testar[g])&&testar[g]!=0.) {
         var widt = .02;
         var arm =(mustarD[g]+20)%24./24.*pi*2.;
-        var lengt = (testar[g]-minTestar)/(maxTestar-minTestar);
+        var lengt = (testar[(g+1)%24]-minTestar)/(maxTestar-minTestar);
         var vop = new THREE.Color();
        vop.setHSL((1-mustarD[g])%24./24., mustarD[g]/297,mustarD[g]/297);//297 is the highest heard note
                       material = new THREE.MeshBasicMaterial({
