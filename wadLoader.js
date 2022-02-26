@@ -3,7 +3,7 @@ function loadScript(url, callback)
     // Adding the script tag to the head as suggested before
     var head = document.head;
     var script = document.createElement('script');
-    script.type = 'text/javascript';
+    script.type = 'application/javascript';
     script.src = url;
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
