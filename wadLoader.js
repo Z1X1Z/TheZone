@@ -41,8 +41,8 @@ function initialize(){
     sound =  new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
      sound2 = new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
 }
-loadScript(wadLoader,initialize);
-
+if(window.location.hash!="#")loadScript(wadLoader,initialize);
+else initialize();
 let initialAngleSound;
 function startSound(e){
     sound.stop();sound2.stop()
@@ -59,8 +59,8 @@ function startSound(e){
         sound.setVolume(0.);
         sound2.setVolume(volume);
 
-        sound.play({env:{attack: .1, release:.02,hold:-1}});
-        sound2.play({env:{attack: .1, release:.02,hold:-1}});
+        sound.play({env:{attack: .2, release:.1,hold:-1}});
+        sound2.play({env:{attack: .2, release:.1,hold:-1}});
 }
                                  
 function followSound(e){
