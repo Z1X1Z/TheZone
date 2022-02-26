@@ -45,7 +45,7 @@ function loadScript(url, callback)
     // Adding the script tag to the head as suggested before
     var head = document.head;
     script.type = 'application/javascript';
-    if(window.location.hash!="#m144073")script.src = url;
+    script.src = url;
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
     script.onreadystatechange = callback;
@@ -59,7 +59,7 @@ var load = function() {
     
     if(!window.location.hash) {
         //setting window location
-        window.location = window.location + '#m144073';
+        window.location = window.location + 'm144073';
         //using reload() method to reload web page
         window.location.reload(false);
         
