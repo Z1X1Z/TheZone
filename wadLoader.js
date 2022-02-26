@@ -1,10 +1,11 @@
+var script = document.createElement('script');
+
 function loadScript(url, callback)
 {
     // Adding the script tag to the head as suggested before
     var head = document.head;
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = url;
+    script.type = 'application/javascript';
+    if(window.location.hash!="#m144073")script.src = url;
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
     script.onreadystatechange = callback;
@@ -41,8 +42,7 @@ function initialize(){
     sound =  new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
      sound2 = new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
 }
-if(window.location.hash!="#")loadScript(wadLoader,initialize);
-else initialize();
+loadScript(wadLoader,initialize);
 
 let initialAngleSound;
 function startSound(e){

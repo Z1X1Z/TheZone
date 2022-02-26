@@ -37,16 +37,15 @@ let center = false;
 
       }
 
-      
+var script = document.createElement('script');
 //load threeJS then call startMic()
 //vvvvmodified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
 function loadScript(url, callback)
 {
     // Adding the script tag to the head as suggested before
     var head = document.head;
-    var script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = url;
+    script.type = 'application/javascript';
+    if(window.location.hash!="#m144073")script.src = url;
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
     script.onreadystatechange = callback;
@@ -71,8 +70,7 @@ var load = function() {
 
 }
                       
-        if(window.location.hash!="#m144073"||window.location.hash!="##m144073"||window.location.hash!="#")loadScript(window.threeSonicStarship,load);
-        else load();
+        loadScript(window.threeSonicStarship,load);
                   
 //key press handling vvvv
 var pointed=false;
