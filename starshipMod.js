@@ -66,7 +66,7 @@ var load = function() {
     }
     else {
         startMic();}
-    if(window.location.hash)window.location.hash="#";
+    if(window.location.hash)window.location.hash="";
 
 }
                       
@@ -136,7 +136,7 @@ window.addEventListener('keyup', function(event) {
             
             else if (key=="P"||window.key.toLowerCase()=="p"){
               zoomOutRatchetThreshold= finalAverageAmp;//character for '
-              console.log("zoomOutRatchetThreshold: "+zoomOutRatchetThreshold+ ", totalMicAmp: "+totalAMP );
+              console.log("zoomOutRatchetThreshold: "+finalAverageAmp+ ", totalMicAmp: "+totalAMP );
             }
       else if (key==" "||window.key.toLowerCase()==" ")
       {
@@ -464,10 +464,11 @@ function animate( timestamp ) {
             
             
             averageFrameTotalAmp.push(totalAMP);
-            if (averageFrameTotalAmp.length>60)averageFrameTotalAmp.shift();
+            var framesLong=FPS*3;
+            if (averageFrameTotalAmp.length>framesLong)averageFrameTotalAmp.shift();
              finalAverageAmp = 0.;
           for(var l=0.; l<averageFrameTotalAmp.length;l++)finalAverageAmp+=averageFrameTotalAmp[l];
-              finalAverageAmp/=interval;
+              finalAverageAmp/=framesLong;
                       
     if(pitch!=1)lastPitch = pitch;
             
