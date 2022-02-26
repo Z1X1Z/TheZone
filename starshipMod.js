@@ -280,7 +280,7 @@ else if (reset>3){on = false;
 else reset++
 if (trailDepth<trailLength)trailDepth++;
 let note = Math.log(Math.sqrt(pitch)/440.0)/Math.log(Math.pow ( 2, (1/24.0)))+49;
-let inc = 8;
+let inc = 8.5 ;
 let t =  (note * 30+30*inc);
 angle = t%360;
 angle = -angle;
@@ -613,7 +613,7 @@ function animate( timestamp ) {
 
     for (var g=0; g<starArms; g++)if(isFinite(testar[g])&&testar[g]!=0.) {
         var widt = .02;
-        var arm =(mustarD[g]+19)%24./24.*pi*2.;
+        var arm =(mustarD[g]+20)%24./24.*pi*2.;
         var lengt = (testar[g]-minTestar)/(maxTestar-minTestar);
         var vop = new THREE.Color();
        vop.setHSL((1-mustarD[g])%24./24., mustarD[g]/297,mustarD[g]/297);//297 is the highest heard note
@@ -673,8 +673,8 @@ else{
 
             for (var g=0; g<24; g++) {
             var widt = .02;
-                var rr= (g+14)%24;
-            var lengt = (testar[(rr+5)%24]-minTestar)/(maxTestar-minTestar);
+                var rr= (g+15)%24;
+            var lengt = (testar[(rr+4)%24]-minTestar)/(maxTestar-minTestar);
 
                 var vo = new THREE.Color();
                       vo.setHSL((20-rr)%24/24.,1.,.5);
