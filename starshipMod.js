@@ -77,6 +77,8 @@ let zoomAtl41=false;//watch for the 1 and the l
 var rez = window.devicePixelRatio*mobileRez;
 
 
+                  var framesLong;
+                  let computeP=false;
 
 window.addEventListener('keyup', function(event) {
       let key = String.fromCharCode(event.which || event.keyCode);
@@ -124,18 +126,15 @@ window.addEventListener('keyup', function(event) {
       else if (event.keyCode==190) uniforms[ "metronome" ].value *= 1.1; //keycode for <
       else if (event.keyCode==188&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
 
-      else if (key=="I"||window.key.toLowerCase()=="i"){
-        zoomOutRatchetThreshold/= 1.212121;
-        console.log("zoomOutRatchetThreshold: "+zoomOutRatchetThreshold+ ", totalMicAmp: "+totalAMP );
-      }
-      else if (key=="O"||window.key.toLowerCase()=="o"){
-        zoomOutRatchetThreshold*= 1.212121;;//character for '
-        console.log("zoomOutRatchetThreshold: "+zoomOutRatchetThreshold+ ", totalMicAmp: "+totalAMP );
-      }
+      else if (key=="I"||window.key.toLowerCase()=="i") zoomOutRatchetThreshold/= 1.212121;
+      else if (key=="O"||window.key.toLowerCase()=="o") zoomOutRatchetThreshold*= 1.212121;
+      
             
             else if (key=="P"||window.key.toLowerCase()=="p"){
-              zoomOutRatchetThreshold= finalAverageAmp;//character for '
-              console.log("zoomOutRatchetThreshold: "+finalAverageAmp+ ", totalMicAmp: "+totalAMP );
+                
+                framesLong=FPS;
+                computeP=true;
+                
             }
       else if (key==" "||window.key.toLowerCase()==" ")
       {
@@ -462,13 +461,18 @@ function animate( timestamp ) {
     move();
             
             
-            averageFrameTotalAmp.push(totalAMP);
-            var framesLong=FPS*3;
-            if (averageFrameTotalAmp.length>framesLong)averageFrameTotalAmp.shift();
+    if (computeP)
+    {
+        averageFrameTotalAmp.push(totalAMP);
+        if (averageFrameTotalAmp.length>framesLong)computeP=false;
+        if(computeP==false){
              finalAverageAmp = 0.;
           for(var l=0.; l<averageFrameTotalAmp.length;l++)finalAverageAmp+=averageFrameTotalAmp[l];
               finalAverageAmp/=framesLong;
-                      
+            zoomOutRatchetThreshold= finalAverageAmp;
+            averageFrameTotalAmp=[];
+        }
+    }
     if(pitch!=1)lastPitch = pitch;
             
     let noteNumber =  Math.log(lastPitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
