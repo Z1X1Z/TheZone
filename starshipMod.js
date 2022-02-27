@@ -145,24 +145,24 @@ window.addEventListener('keyup', function(event) {
 
         if(uniforms[ "free" ].value) window.zoomCageSize=100000000000000000.;
         else if(uniforms["colorCombo"].value == 13){
-            window.zoomCageSize=.5;
+          //  window.zoomCageSize=.5;
            // window.movementRate=.125;
         }
         else if(uniforms["colorCombo"].value == 14){
-            window.zoomCageSize=.125;
+         //   window.zoomCageSize=2.;
             //window.movementRate=.5;
         }
             else if(uniforms["colorCombo"].value == 11){
-                window.zoomCageSize=2.;
+          //      window.zoomCageSize=2.;
                 //window.movementRate=.5;
             }
 
                 else if(uniforms["colorCombo"].value == 15){
-                    window.zoomCageSize=1.5;
+                   // window.zoomCageSize=1.5;
                     //window.movementRate=.5;
                 }
         else
-        {            window.zoomCageSize=1.5;
+        {     //       window.zoomCageSize=1.5;
             //window.movementRate=1.;
             
         }
@@ -457,6 +457,7 @@ function animate( timestamp ) {
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
              interpolation = (timestamp-lastFrameTime)/1000.*60.;
+            if (interpolation>120)interpolation=1;
              lastFrameTime=timestamp;
     move();
             
