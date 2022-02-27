@@ -479,7 +479,7 @@ function animate( timestamp ) {
     let noteNumber =  Math.log(lastPitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
     if(Math.round(noteNumber) ==-854)noteNumber="undefined";
     let noteNameNumber=Math.floor(Math.round(noteNumber))%12;
-    let hour =noteNameNumber;
+    let hour =Math.floor(Math.floor(noteNumber))%12;
     if (hour==0)hour = 12;
     let minute =(noteNumber-Math.floor(noteNumber))*60;
     let second =(minute-Math.floor(minute))*60
