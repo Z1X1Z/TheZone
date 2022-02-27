@@ -601,15 +601,17 @@ vec3 xtol(vec2 s, vec2 t){
           vec2(-sin(time+time2dance),-sin((time+time2dance)*-1.618))*zoom+
            (coords.yx+.5)*log(pow(zoom,1.618))/log(1.618)*zoom*.5
                               );
+        
+        vec2 dance2 =  morph*(coords+zoom*vec2(-sin(time+time2dance),-sin((time+time2dance)*-1.618)))/(length(coords)-zoom);
 
           vec2 driftCanceller=vec2(dance.x,-dance.y);
           
           
-          if(colorCombo<10)zoomer=tol(bg+dance, dance);
+          if(colorCombo<10)zoomer=tol(bg, dance2);
           else if (colorCombo==11)zoomer=heartZoom(bg2+vec2(.5,0.)+driftCanceller, dance);
           else if (colorCombo==13)zoomer=tokogae(bg,vec2(zoom));
           else if (colorCombo==14)zoomer=TOLTOK(bg,vec2(zoom));
-          else if (colorCombo==15)zoomer=xx(bg,vec2(0.));
+          else if (colorCombo==15)zoomer=xx(bg,dance2);
           else if (colorCombo==16)zoomer=xtol(bg,vec2(0.));
           else if (colorCombo==17)zoomer=body(bg,vec2(-sin(time*20.)/50.,-sin(time*gr*20.)/30.))+robe(bg,vec2(0.))/2.+faceHeights(bg,t)+                                                   heartZoom(bg-vec2(.5,0.)+driftCanceller,dance);
 ;
