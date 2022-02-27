@@ -244,7 +244,7 @@ function getKey(){
               p.x+=.5;
           float rate = 7.;
           vec2 t =vec2(-sin(rate*time2dance)/50.,-sin(time2dance*(rate*1.618)*3.)/30.);
-          vec3 zoomer=tol(freed(bg*zoom+coords.yx),         morph*(coords+zoom*vec2(-sin(time+time2dance),-sin((time+time2dance)*-1.618)))/(length(coords)-zoom));
+          vec3 zoomer=tol(freed(bg*zoom+coords.yx),        morph*(coords.yx)/(length(coords)-zoom)*2./3.);
           vec3 mny=manny(p,t);
           gl_FragColor=vec4(mny+
                             clamp(zoomer-(mny.r+mny.b+mny.g)*100.,.0,1.)
