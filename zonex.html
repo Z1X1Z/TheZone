@@ -75,7 +75,7 @@ void main(){
 
 	vec2 p=-((vUv.yx)-.5)/(resolution.xy/max(resolution.x,resolution.y))*2.*zoom;
             vec2 t=vec2(0.);
-            if (colorCombo!=1)t+=(coords.yx+.5)*log(pow(zoom,1.618))/log(1.618)*zoom*.5;
+            if (colorCombo!=1)t=vec2(-sin(time+time2dance),-sin((time+time2dance)*-1.618))*zoom+(coords.yx+.5)*log(pow(zoom,1.618))/log(1.618)*zoom*.5;
                                                 
             //p.x+=.5;
             p+=coords.yx;
