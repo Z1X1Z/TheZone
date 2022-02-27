@@ -22,7 +22,7 @@ let center = false;
       //vvvvbelow line from https://code-boxx.com/detect-mobile-device-javascript/
       if(navigator.userAgent.toLowerCase().match(/mobile/i)){
           mobileRez=.25;
-          fftSize=1024;
+          //fftSize=2048;
           trailLength = 150;
           zoomOutRatchetThreshold=3.;
           mobile=true;
@@ -30,7 +30,7 @@ let center = false;
       else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
       {
           mobileRez=.5;
-          fftSize=1024;
+          //fftSize=2048;
           trailLength = 150;
           zoomOutRatchetThreshold=3.;
           mobile=true;
