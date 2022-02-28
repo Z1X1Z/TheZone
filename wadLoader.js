@@ -1,10 +1,10 @@
-function loadScript(url, callback)
+function loadScript(callback)
 {
     // Adding the script tag to the head as suggested before
     var head = document.head;
     var script = document.createElement('script');
     script.type = 'application/javascript';
-    script.src = url;
+    script.src = "wad.min.js";
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
     script.onreadystatechange = callback;
@@ -12,10 +12,6 @@ function loadScript(url, callback)
     // Fire the loading
     head.appendChild(script);
 }
-let wadLoader="";
-if(window.online)wadLoader ="https://unpkg.com/web-audio-daw";
-else wadLoader="wad.min.js";
-
 let hyperdriveTUNA = {
 Overdrive:{
         outputGain: -9.154,           //-42 to 0 in dB
@@ -41,7 +37,8 @@ function initialize(){
     sound =  new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
      sound2 = new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
 }
-if(window.location.hash)loadScript(wadLoader,initialize);
+if(!window.online)loadScript(initialize);
+else initialize();
 
 let initialAngleSound;
 function startSound(e){
