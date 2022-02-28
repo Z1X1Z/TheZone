@@ -51,7 +51,7 @@ function loadScript(url, callback)
     script.onreadystatechange = callback;
     script.onload = callback;
     // Fire the loading
-    if(!window.location.hash)head.appendChild(script);
+    //head.appendChild(script);
 }
 //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
 var load = function() {
@@ -69,8 +69,7 @@ var load = function() {
         startMic();}
 }
                       
-loadScript(window.threeSonicStarship,load);
-                  
+    loadScript(window.threeSonicStarship,load);
 //key press handling vvvv
 var pointed=false;
 let zoomAtl41=false;//watch for the 1 and the l
