@@ -510,7 +510,6 @@ function animate( timestamp ) {
         }
     }
     if(pitch!=1)lastPitch = pitch;
-            
     let noteNumber =  Math.log(lastPitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
     if(Math.round(noteNumber) ==-854)noteNumber="undefined";
     let noteNameNumber=Math.floor(Math.round(noteNumber))%12;
@@ -533,7 +532,7 @@ function animate( timestamp ) {
      let fr = Math.round(lastPitch);
      let n_n = Math.round(noteNumber);
      let cores = Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.);
-     let pf = String(lastPitch!=1);
+     let pf = String(pitch!=1);
      let totalAMP_=totalAMP*2048./fftSize;
       if(textON)document.getElementById("textWindow").innerHTML =
 
