@@ -138,6 +138,13 @@ window.addEventListener('keyup', function(event) {
                 computeP=true;
                 
             }
+            
+            else if (key=="H"||window.key.toLowerCase()=="h"){
+                fullscreen=!fullscreen
+                if(fullscreen)openFullscreen();
+                else closeFullscreen();
+            }
+                
       else if (key==" "||window.key.toLowerCase()==" ")
       {
         if (onO)onO=false;
@@ -171,9 +178,35 @@ window.addEventListener('keyup', function(event) {
         //console.log(String.fromCharCode(event.which || event.keyCode));
 
     }, false);
-
+            
+            
+            
+            //https://www.w3schools.com/howto/howto_js_fullscreen.asp
+            var fullscreen=false;
+            function openFullscreen() {
+                
+              if (document.body.requestFullscreen) {
+                  document.body.requestFullscreen();
+              } else if (document.body.webkitRequestFullscreen) { /* Safari */
+                  document.body.webkitRequestFullscreen();
+              } else if (document.body.msRequestFullscreen) { /* IE11 */
+                  document.body.msRequestFullscreen();
+              }
+            }
+            
+            function closeFullscreen() {
+              if (document.exitFullscreen) {
+                document.exitFullscreen();
+              } else if (document.webkitExitFullscreen) { /* Safari */
+                document.webkitExitFullscreen();
+              } else if (document.msExitFullscreen) { /* IE11 */
+                document.msExitFullscreen();
+              }
+            }
+            
+            
             let container = document.getElementById( 'container' );
-
+            
 
 var zoomOutEngage=false;
 let pi = Math.PI;
