@@ -37,11 +37,11 @@ let center = false;
 
       }
 
-var script = document.createElement('script');
 //load threeJS then call startMic()
 //vvvvmodified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
 function loadScript(url, callback)
 {
+    var script = document.getElementById('threeJSscript');
     // Adding the script tag to the head as suggested before
     var head = document.head;
     script.type = 'application/javascript';
@@ -51,7 +51,7 @@ function loadScript(url, callback)
     script.onreadystatechange = callback;
     script.onload = callback;
     // Fire the loading
-    head.appendChild(script);
+    if(!window.location.hash)head.appendChild(script);
 }
 //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
 var load = function() {
