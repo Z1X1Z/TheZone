@@ -71,7 +71,7 @@ var load = function() {
     
 }
       
-    if(!window.online)loadScript(window.threeSonicStarship,load);
+    if(!THREE)loadScript(window.threeSonicStarship,load);
     else load();
 //key press handling vvvv
 var pointed=false;

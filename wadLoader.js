@@ -1,4 +1,4 @@
-function loadScript(callback)
+function loadScript(url, callback)
 {
     // Adding the script tag to the head as suggested before
     var head = document.head;
@@ -37,9 +37,8 @@ function initialize(){
     sound =  new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
      sound2 = new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
 }
-if(!window.online)loadScript(initialize);
+if(!Wad)loadScript(wadLoader,initialize);
 else initialize();
-
 let initialAngleSound;
 function startSound(e){
     sound.stop();sound2.stop()
