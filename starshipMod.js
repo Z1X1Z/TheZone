@@ -185,12 +185,12 @@ window.addEventListener('keyup', function(event) {
             var fullscreen=false;
             function openFullscreen() {
                 
-              if (document.body.requestFullscreen) {
-                  document.body.requestFullscreen();
-              } else if (document.body.webkitRequestFullscreen) { /* Safari */
-                  document.body.webkitRequestFullscreen();
+              if (document.documentElement.requestFullscreen) {
+                  document.documentElement.requestFullscreen();
+              } else if (document.documentElement.webkitRequestFullscreen) { /* Safari */
+                  document.documentElement.webkitRequestFullscreen();
               } else if (document.body.msRequestFullscreen) { /* IE11 */
-                  document.body.msRequestFullscreen();
+                  document.documentElement.msRequestFullscreen();
               }
             }
             
