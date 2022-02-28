@@ -71,7 +71,7 @@ var load = function() {
     
 }
       
-    if(!THREE)loadScript(window.threeSonicStarship,load);
+    if(!THREE)loadScript("threer127.min.js",load);
     else load();
 //key press handling vvvv
 var pointed=false;
