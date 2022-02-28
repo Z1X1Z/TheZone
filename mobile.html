@@ -210,7 +210,7 @@ function getKey(){
     for (int counter=0;counter<41;counter+=1)if(abs(s.y)<47.){
           
           
-          s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y+t.x, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y+t.y);//x**3
+          s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y-length(t)*length(s), -s.y*s.y*s.y+ 3.*s.x*s.x*s.y-length(t)*length(s));//x**3
           s.x=log(abs(s.x));
           
             if(MetaCored){
@@ -249,7 +249,7 @@ function getKey(){
               p.x+=.5;
           float rate = 7.;
           vec2 t =vec2(-sin(rate*time2dance)/50.,-sin(time2dance*(rate*1.618)*3.)/30.);
-          vec3 zoomer=tol(freed(bg*zoom+coords.yx),        morph*(-coords)/(length(coords)-zoom)*2./3.);
+          vec3 zoomer=tol(freed(bg*zoom+coords.yx),        morph*(coords)/(length(coords)-zoom)*2./3.);
           vec3 mny=manny(p,t);
           gl_FragColor=vec4(mny+
                             clamp(zoomer-(mny.r+mny.b+mny.g)*100.,.0,1.)
