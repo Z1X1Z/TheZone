@@ -39,11 +39,13 @@ let center = false;
 
 //load threeJS then call startMic()
 //vvvvmodified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
+var script = document.getElementById('threeJSscript');
 function loadScript(url, callback)
 {
-    var script = document.getElementById('threeJSscript');
+    
     // Adding the script tag to the head as suggested before
     var head = document.head;
+    var script = document.getElementById('threeJSscript');
     script.type = 'application/javascript';
     script.src = url;
     // Then bind the event to the callback function.
@@ -57,19 +59,18 @@ function loadScript(url, callback)
 var load = function() {
 //https://stackfame.com/auto-refresh-page-first-load-javascript-jquery
     
-    if(!window.location.hash) {
+        window.location.hash="";
+        startMic();
+    
+}
+      
+    if(window.location.hash)loadScript(window.threeSonicStarship,load);
+    else{
         //setting window location
         window.location.hash = '144073';
         //using reload() method to reload web page
         window.location.reload(false);
-        
-    }
-    else {
-        window.location.hash="";
-        startMic();}
-}
-                      
-    loadScript(window.threeSonicStarship,load);
+                        }
 //key press handling vvvv
 var pointed=false;
 let zoomAtl41=false;//watch for the 1 and the l
