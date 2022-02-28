@@ -441,7 +441,7 @@
             for (int counter=0;counter<41;counter+=1)if(abs(s.y)<47.){
               
               
-              s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y+length(t)*length(s), -s.y*s.y*s.y+ 3.*s.x*s.x*s.y+t.y*length(s));//x**3
+              s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y-length(t)*length(s)*sign(t.y*t.x), -s.y*s.y*s.y+ 3.*s.x*s.x*s.y-length(t)*length(s)*sign(t.x*t.y));//x**3
               s.x=log(abs(s.x));
               
                 if(MetaCored){
