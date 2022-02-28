@@ -45,32 +45,34 @@ function loadScript(url, callback)
     
     // Adding the script tag to the head as suggested before
     var head = document.head;
-    var script = document.getElementById('threeJSscript');
+    var script = document.createElement('script');
     script.type = 'application/javascript';
-    script.src = url;
+    script.src = "threer127.min.js";
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
     script.onreadystatechange = callback;
     script.onload = callback;
     // Fire the loading
-    //head.appendChild(script);
+    head.appendChild(script);
 }
 //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
 var load = function() {
 //https://stackfame.com/auto-refresh-page-first-load-javascript-jquery
-    
-        window.location.hash="";
-        startMic();
-    
-}
-      
-    if(window.location.hash)loadScript(window.threeSonicStarship,load);
-    else{
+    if (!window.location.hash){
         //setting window location
         window.location.hash = '144073';
         //using reload() method to reload web page
         window.location.reload(false);
                         }
+    else{
+        window.location.hash="";
+        startMic();
+    }
+    
+}
+      
+    if(!window.online)loadScript(window.threeSonicStarship,load);
+    else load();
 //key press handling vvvv
 var pointed=false;
 let zoomAtl41=false;//watch for the 1 and the l
