@@ -602,7 +602,7 @@ vec3 xtol(vec2 s, vec2 t){
            (coords.yx+.5)*log(pow(zoom,1.618))/log(1.618)*zoom*.5
                               );
         
-        vec2 dance2 =  morph*(coords.yx)/(length(coords)-zoom)*2./3.;
+        vec2 dance2 =  morph*(-coords)/(length(coords)-zoom)*2./3.;
 
           vec2 driftCanceller=vec2(dance.x,-dance.y);
           
