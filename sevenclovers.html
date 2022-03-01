@@ -601,12 +601,13 @@ vec3 xtol(vec2 s, vec2 t){
           bg=freed(bg*zoom+coords.yx);
           bg2=freed(bg2*zoom+coords.yx);
 
-          vec2 dance = morph*(
+          vec2 dance = vec2(0.);
+          if (morph>.5)  dance = (
           vec2(-sin(time+time2dance),-sin((time+time2dance)*-1.618))*zoom+
            (coords.yx+.5)*log(pow(zoom,1.618))/log(1.618)*zoom*.5
                               );
-        
-        vec2 dance2 =  morph*vec2(length(freed(coords))/(length(freed(coords))-zoom)*sign(coords.y*coords.x)+length(freed(coords))*zoom,-((zoom*length(freed(coords)))/(length(freed(coords))+zoom)*sign(coords.y*coords.x)*(1.-length(freed(coords)*zoom)) ))*2./3.;
+                              vec2 dance2 = vec2(0.);
+                              if (morph>.5)  dance2 =  morph*vec2(length(freed(coords))/(length(freed(coords))-zoom)*sign(coords.y*coords.x)+length(freed(coords))*zoom,-((zoom*length(freed(coords)))/(length(freed(coords))+zoom)*sign(coords.y*coords.x)*(1.-length(freed(coords)*zoom)) ))*2./3.;
 
           vec2 driftCanceller=vec2(dance.x,-dance.y);
           
