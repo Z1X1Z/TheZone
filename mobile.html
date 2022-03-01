@@ -248,7 +248,11 @@ function getKey(){
           float rate = 7.;
           vec2 t =vec2(-sin(rate*time2dance)/50.,-sin(time2dance*(rate*1.618)*3.)/30.);
           vec2 dance = vec2(0.);
-          if (morph>.5) dance = vec2(length(freed(coords))/(length(freed(coords))-zoom)*sign(coords.y*coords.x)+length(freed(coords))*zoom,-((zoom*length(freed(coords)))/(length(freed(coords))+zoom)*sign(coords.y*coords.x)*(1.-length(freed(coords)*zoom)) ))*2./3.;
+          if (morph>.5) dance = vec2(
+                                     (length(freed(coords))/(length(freed(coords))-zoom)*sign(coords.y*coords.x)-length(freed(coords))*zoom),
+                                      -((zoom*length(freed(coords)))/(length(freed(coords))+zoom)*sign(coords.y*coords.x)*(1.-length(freed(coords)*zoom)) )
+                                        )
+                                        ;
           
           vec3 zoomer=tol(freed(bg*zoom+coords.yx),dance);
           vec3 mny=manny(p,t);
