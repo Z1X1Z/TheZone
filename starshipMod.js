@@ -6,7 +6,7 @@ let zoomFrames = 14;
 let ZR = Math.E**(Math.log(.5)/zoomFrames)
 const MR = 2./3./zoomFrames;
 window.zoomCageSize = 1.5;//radius of zoom bounding
-zoomOutRatchetThreshold=1.;
+zoomOutRatchetThreshold=.00005;
 let radius = 4.;
 var mobileRez=1.;
 let fftSize=2048;
@@ -22,17 +22,15 @@ let center = false;
       //vvvvbelow line from https://code-boxx.com/detect-mobile-device-javascript/
       if(navigator.userAgent.toLowerCase().match(/mobile/i)){
           mobileRez=.25;
-          //fftSize=2048;
+          //fftSize=512;
           trailLength = 150;
-          zoomOutRatchetThreshold=3.;
           mobile=true;
       }
       else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
       {
           mobileRez=.5;
-          //fftSize=2048;
+          //fftSize=512;
           trailLength = 150;
-          zoomOutRatchetThreshold=3.;
           mobile=true;
 
       }
@@ -62,13 +60,13 @@ var load = function() {
         //setting window location
         window.location.hash = '144073';
         //using reload() method to reload web page
-        window.location.reload(false);
+        window.location.reload();
                         }
     else{
         window.location.hash="";
         startMic();
     }
-    
+
 }
       
     if(!THREE)loadScript("threer127.min.js",load);
@@ -304,7 +302,8 @@ function  move()
     pitch=1;
     var pb = -1;
    for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
-if (totalAMP*2048./fftSize>zoomOutRatchetThreshold||on)//this line under revisement
+    totalAMP/=fftSize
+if (totalAMP>zoomOutRatchetThreshold||on)//this line under revisement
   pb =    calculatePitch();
   if(pb>0) pb =audioX.sampleRate/pb;
 on = true;
@@ -340,7 +339,7 @@ angle[f] = angle;
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
     bx=coordX+d_x*MR*zoom*interpolation*window.movementRate;
   by=coordY+d_y*MR*zoom*interpolation*window.movementRate;
-if(isFinite(d_x)&&isFinite(d_y)&&totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on){
+if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold&&on){
 
                coordX=bx;
                coordY=by;
@@ -533,7 +532,7 @@ function animate( timestamp ) {
      let n_n = Math.round(noteNumber);
      let cores = Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.);
      let pf = String(pitch!=1);
-     let totalAMP_=totalAMP*2048./fftSize;
+     let totalAMP_=totalAMP;
       if(textON)document.getElementById("textWindow").innerHTML =
 
                                 " note: "+note+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
@@ -618,7 +617,7 @@ function animate( timestamp ) {
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
                              ZR = Math.E**(Math.log(.5)/zoomFrames*interpolation*window.movementRate);
 
-  if (zoom>zoomCone && totalAMP*2048./fftSize>zoomOutRatchetThreshold&&on)zoom *=ZR;
+  if (zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&on)zoom *=ZR;
   else if(zoom<1.){zoom /= ZR;
                   if(!zoomOutEngage&&center){coordX*=(1-zoom)*2./3.; coordY*=(1-zoom)*2./3.;}
   }
