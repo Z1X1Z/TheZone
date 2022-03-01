@@ -43,9 +43,9 @@ function loadScript(url, callback)
     
     // Adding the script tag to the head as suggested before
     var head = document.head;
-    var script = document.createElement('script');
+    var script = document.getElementById('threeJSscript');
     script.type = 'application/javascript';
-    script.src = "threer127.min.js";
+    script.src = url;
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
     script.onreadystatechange = callback;
