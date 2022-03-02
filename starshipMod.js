@@ -151,24 +151,7 @@ window.addEventListener('keyup', function(event) {
 
 
         if(uniforms[ "free" ].value) window.zoomCageSize=100000000000000000.;
-        else if(uniforms["colorCombo"].value == 13){
-          //  window.zoomCageSize=.5;
-           // window.movementRate=.125;
-        }
-        else if(uniforms["colorCombo"].value == 14){
-         //   window.zoomCageSize=2.;
-            //window.movementRate=.5;
-        }
-            else if(uniforms["colorCombo"].value == 11){
-          //      window.zoomCageSize=2.;
-                //window.movementRate=.5;
-            }
-
-                else if(uniforms["colorCombo"].value == 15){
-                   // window.zoomCageSize=1.5;
-                    //window.movementRate=.5;
-                }
-        else
+        else window.zoomCageSize=1.5;
         {     //       window.zoomCageSize=1.5;
             //window.movementRate=1.;
             
