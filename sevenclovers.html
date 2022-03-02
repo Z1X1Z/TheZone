@@ -605,7 +605,7 @@ vec3 xtol(vec2 s, vec2 t){
                               );
                               vec2 dance2 = vec2(0.);
                               if (morph>.5)dance2 = vec2(
-                                                         abs(length(-freed(coords))/(length(freed(coords))-zoom)) -(length(freed(coords)))*2./3.*sign(coords.y*coords.x),
+                                                         -abs(length(-freed(coords))/(length(freed(coords))-zoom)) -(length(freed(coords)))*2./3.,
                                                    -((zoom*length(freed(coords)))/(length(freed(coords))+zoom)*sign(coords.y*coords.x)*(1.-length(freed(coords)*zoom)) )
                                                      )
                                                      ;
