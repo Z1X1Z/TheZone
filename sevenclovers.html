@@ -434,10 +434,8 @@
             if(MetaCored)for(int i=1;i<60; i++)if(c<2./3.&&float(loops)<cored){p*=2.;c*=2.;loops++;}else break;
             vec2 s=p;
             loops=0.;
-                                                
-            float hyperCore= (cored*2./3.+
-                               log(length(freed(coords)))
-                               -1.);
+            float hyperCore=0.;
+            if(MetaCored)hyperCore=(cored*2./3.+log(length(freed(coords)))-1.);
             for (float counter=0.;counter<41.;counter++)if(abs(s.y)<47.){
               
               
@@ -446,7 +444,6 @@
               
                 if(MetaCored){
                     float d = length(s);
-
                     for(int i=0;i<69; i++)if(d<2./3.&& loops+counter<hyperCore)
              {float shift=2.;s*=shift;d*=shift;loops++;}
                     
@@ -457,15 +454,16 @@
                                              
             vec3 o=vec3(s.y);
             if(colorCombo==1) o=vec3(s.y,s.x/10.,1.-s.x/12.);
-            else if(colorCombo==2) o= vec3(s.x/8.-s.y/s.x/7000.,1.-s.x/16.,s.y/100.);
-            else if(colorCombo==3) o=vec3(s.y/100.-s.x*s.y/888.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.);
+             else if(colorCombo==2) o=vec3(s.y/100.-s.x*s.y/888.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.);
+             else if(colorCombo==3) o= vec3(s.x/8.-s.y/s.x/7000.,1.-s.x/16.,s.y/100.);
             else if(colorCombo==4) o= vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.);
             else if(colorCombo==5)  o=vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.);
             else if(colorCombo==6)return vec3(-sin(time*1.)*s.y/100.-sin(time*1.618)*s.x*s.y/888.,s.x/8.-sin(time*-.618)*s.y/s.x/2000.,1.-sin(time*2.618)*s.x/20.);
            else if(colorCombo==7) return
            1.-(vec3(s.y/100.-s.x*s.y/888.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.)
-            *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
-            *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.));
+            *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y-s.x*s.y/888.)
+            *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)
+               );
          return clamp(o,0.,1.);}
 
               vec3 tokogae (vec2 p, vec2 t){
@@ -501,7 +499,7 @@
                   //s.y=s.y-log(dot(s.y,s.y))*-sin((1.-t.x)/2.);
                   digorno+=vec3((s.y/s.x),(s.y/s.x)*5.+l*s.y,s.x);
                   }
-                  	else 		digorno-=vec3(s.x*1.4,(s.y*s.x),s.y)/21.;
+                      else         digorno-=vec3(s.x*1.4,(s.y*s.x),s.y)/21.;
 
                   return digorno/8.;
               }
