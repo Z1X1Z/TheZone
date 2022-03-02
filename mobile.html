@@ -242,7 +242,7 @@ function getKey(){
           vec2 t =vec2(-sin(rate*time2dance)/50.,-sin(time2dance*(rate*1.618)*3.)/30.);
           vec2 dance = vec2(0.);
           if (morph>.5) dance = vec2(
-                                     -length(freed(coords))/(length(freed(coords))-zoom)*sign(coords.y*coords.x)) +(length(freed(coords))*1./3.,
+                                     -length(freed(coords))/(length(freed(coords))-zoom)) +(length(freed(coords))*.5,
                                       -((zoom*length(freed(coords)))/(length(freed(coords))+zoom)*sign(coords.y*coords.x)*(1.-length(freed(coords)*zoom)) )
                                         )
                                         ;
