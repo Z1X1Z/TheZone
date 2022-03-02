@@ -638,7 +638,7 @@ function animate( timestamp ) {
 
   uniforms[ "zoom" ].value = zoom;
   uniforms[ "time" ].value = timestamp/1000.;
-  uniforms[ "time2dance" ].value += Math.abs(totalAMP/numberOfBins*2.);
+  uniforms[ "time2dance" ].value += Math.abs(totalAMP)*4.;
 
   if (micOn)analyser.getByteFrequencyData(  dataArray);
 
