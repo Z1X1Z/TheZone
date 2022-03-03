@@ -604,7 +604,7 @@ ZR = Math.E**(Math.log(.5)/zoomFrames*interpolation*window.movementRate);
 
   if (zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&on)zoom *=ZR;
   else if(zoom<1.){zoom /= ZR;
-                  if(!zoomOutEngage&&center){coordX*=(1-zoom)*ZR; coordY*=(1-zoom)*ZR;}
+                  if(!zoomOutEngage&&center){coordX*=(1-zoom)*ZR*2./3.; coordY*=(1-zoom)*ZR*2./3.;}
   }
   if (zoom>1.)zoom=1.;
 
