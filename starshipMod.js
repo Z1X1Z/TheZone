@@ -13,9 +13,9 @@ let fftSize=2048;
 let trailLength = 288;
 let colorSound;
 let center = false;
+                  let geome;
                   
-                  
-                  
+                  let meshe;
                   
       let mobile = false;
 
@@ -185,7 +185,11 @@ window.addEventListener('keyup', function(event) {
               }
             }
             
-            
+            function disposeArray() {
+
+                                this.array = null;
+
+                            }
             let container = document.getElementById( 'container' );
             
 
@@ -198,8 +202,6 @@ let numberOfBins = fftSize/2.;
 let spirray0 = new Float32Array(bufferSize);
 let spirray1 = new Float32Array(bufferSize);
 const starArms = numberOfBins;
-var geometries = Array(starArms);
-var meshes = Array(starArms);
 var testar = Array(starArms);
 var mustarD = Array(starArms);
 let averagedAmp =  0;
@@ -306,11 +308,7 @@ colorSound = new THREE.Color();
 
     colorSound.setHSL((angle+90)/360.,1.,.5);
 
-pitchCol[f]  = new THREE.MeshBasicMaterial({
-        color:colorSound,
-        opacity: 1.,
-        transparent: true,
-      });
+pitchCol[f]  = colorSound;
 angle = ((angle-30+180)/360*2*pi);
    // angle = (maxInt24/24*2*pi);
 angle[f] = angle;
@@ -353,9 +351,7 @@ let material;
 let mesh;
 let analyser;
 let source;
-let trailGeom = Array(1000);
 let materials;
-let trailMeshes = Array(1000);
 let materialShader;
 let geometry;
 
@@ -369,38 +365,9 @@ function init() {
     scene = new THREE.Scene();
     inputData = new Float32Array(bufferSize);
     camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
-    geometryP = new THREE.PlaneBufferGeometry( 2, 2 );
-    for (let r=0; r<starArms; r++) {
-        let vo = new THREE.Color();
-        vo.setHSL((r-10)%24/24.,1.,.5);
-        material  = new THREE.MeshBasicMaterial( { color:vo});
-
-        let vertices = new Float32Array( [0,0,0,
-        0,0,0,
-        0,0,0
-        ] );
-
-        geometries[r] = new THREE.BufferGeometry();
-        geometries[r].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
-        meshes[r] = new THREE.Mesh(geometries[r] , material );
-                  scene.add( meshes[r] );
-
-    }
-materials = new THREE.MeshBasicMaterial( { color: 0x0000f0});
-    for (let r=0; r<trailLength; r++) {
-        let vertices = new Float32Array(
-            [0,0,0,
-            0,0,0,
-            0,0,0]
-            );
-
-        trailGeom[r] = new THREE.BufferGeometry();
-
-        trailGeom[r].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
-        trailMeshes[r] = new THREE.Mesh(trailGeom[r] , materials );
-            scene.add( trailMeshes[r] );
-
-    }
+    geometryP = new THREE.PlaneGeometry( 2, 2 );
+    geometryP.z=-1.;
+    
   uniforms = THREE.UniformsUtils.merge([
   THREE.UniformsLib.lights,
     {
@@ -612,7 +579,7 @@ if(!zoomOutEngage){
   if (zoom>=1.)zoomOutEngage = false;
    else if ( zoom<zoomCone||zoom<.000000000000000000000001)zoomOutEngage = true;
       if (zoomOutEngage == true){
-         zoom *= 1.44/ZR;
+         zoom /= ZR/1.44;
          coordX*=(1-zoom)*ZR;
          coordY*=(1-zoom)*ZR;
      }
@@ -634,50 +601,43 @@ if(!zoomOutEngage){
 
    var maxTestar=0.;
    var minTestar=100000000000000;
+              
+   const star=[];
+   const starColors=[];
    if(onO){
-    for (var g=0; g<starArms; g++) if(testar[g]>maxTestar)maxTestar=testar[g];
-      for (var g=0; g<starArms; g++) if(testar[g]<minTestar)minTestar=testar[g];
+    for (var g=0; g<starArms; g++) if(testar[g]>maxTestar) maxTestar=testar[g];
+      for (var g=0; g<starArms; g++) if(testar[g]<minTestar) minTestar=testar[g];
 
-
-
-    for (var g=0; g<starArms; g++)if(isFinite(testar[g])&&testar[g]!=0.) {
+    for (var g=0; g<starArms; g++)if(!isNaN(testar[g])&&isFinite(testar[g])&&testar[g]!=0.) {
         var widt = .02;
         var arm =(mustarD[g]+20)%24./24.*pi*2.;
         var lengt = (testar[g]-minTestar)/(maxTestar-minTestar);
         var vop = new THREE.Color();
        vop.setHSL((1-mustarD[g])%24./24., mustarD[g]/297,mustarD[g]/297);//297 is the highest heard note
-                      material = new THREE.MeshBasicMaterial({
+        material = new THREE.MeshBasicMaterial({
         color:vop,
         opacity: .3+.7/uniforms[ "metronome" ].value ,
         transparent: true,
       });
 
-
-
+                  for(var yy=0;yy<6;yy++)   starColors.push(vop.r,vop.g,vop.b,1.)
 
             rpio2 =arm+pi/2.;
             let x = widt*-Math.sin(rpio2)*porportionX;
             let y = widt*-Math.cos(rpio2)*porportionY;
             let xr = lengt*-Math.sin(arm)*porportionX;
             let yr = lengt*-Math.cos(arm)*porportionY;
-    var v;
-    let depth = -.5+Math.abs(g-starArms/2.)/starArms;//this depth should draw the back around the middle up towards the top.
-    if(pointed) v= new Float32Array( [
-       -x,    -y,  depth,
-        x,    y,  depth,
-        (xr+x), (yr+y),  depth,
-        /* -x, -y,  -0.05,
-        (xr+x), (yr+y),  -0.05,
-        (xr-x), (yr-y),  -0.05,*/
-    ] );
-    else v= new Float32Array( [
+    let depth = -.5+Math.abs(g-starArms/2.)/starArms/100000.;//this depth should draw the back around the middle up towards the top.
+
+     star.push(
+
        -x,    -y,  depth,
         x,    y,  depth,
         (xr+x), (yr+y),  depth,
         -x, -y,  depth,
         (xr+x), (yr+y),  depth,
-        (xr-x), (yr-y),  depth
-    ] );
+        (xr-x), (yr-y),  depth,
+    ) ;
 
 /*
       0-widt*-Math.sin(rpio2)*porportionX,    0-widt*-Math.cos(rpio2)*porportionY,  -0.05,
@@ -687,14 +647,10 @@ if(!zoomOutEngage){
       (lengt*-Math.cos(yy)-widt*-Math.cos(rpio2)*porportionY),  -0.05,
       */
     // itemSize = 3 because there are 3 values (components) per vertex
-    geometries[g].setAttribute( 'position', new THREE.Float32BufferAttribute( v, 3 ) );
-                       meshes[g].geometries =geometries[g]
-                  meshes[g].material=material;
-
-                       scene.add(meshes[g])
+           
         }
+                   
 }
-
 else{
             var maxTestar=1.;
             for (var g=0; g<24; g++) if(testar[g]>maxTestar){maxTestar=testar[g];}
@@ -705,20 +661,15 @@ else{
                 var rr= (g+15)%24;
             var lengt = (testar[(rr+4)%24]-minTestar)/(maxTestar-minTestar);
 
-                var vo = new THREE.Color();
-                      vo.setHSL((20-rr)%24/24.,1.,.5);
-                        material  = new THREE.MeshBasicMaterial( { color:vo});
+                var vop = new THREE.Color();
+                      vop.setHSL((20-rr)%24/24.,1.,.5);
+
+                             for(var yy=0;yy<6;yy++)   starColors.push(vop.r,vop.g,vop.b,1.)
+                             
 
 var vertices;
-if (pointed==true)
-vertices = new Float32Array( [
-   0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
-   0+widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0+widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
-   (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
-   (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  -0.05,
-] );
-else
-             vertices = new Float32Array( [
+
+             star.push(
                 0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
                 0+widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0+widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
                 (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
@@ -728,18 +679,28 @@ else
                 (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  -0.05,
                 (lengt*-Math.sin(rr*pi*2./24)-widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
                 (lengt*-Math.cos(rr*pi*2./24)-widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  -0.05,
-            ] );
+                    );
+} }
+                 geome = new THREE.BufferGeometry();
+ 
+                 geome.setAttribute( 'position', new THREE.Float32BufferAttribute( star, 3 ).onUpload( disposeArray ) );
+                    geome.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ).onUpload( disposeArray ));
+                     geome.computeBoundingSphere();
+                    
+                    
 
-            // itemSize = 3 because there are 3 values (components) per vertex
-            geometries[rr].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices, 3 ) );
-                // meshes[rr] = new THREE.Mesh(geometries[rr] , material );
-                 meshes[rr].geometry = geometries[rr]
-                 meshes[rr].material = material;
+                   material= new THREE.MeshBasicMaterial({
+                               opacity: 1.,
+                             transparent: true,
+                               vertexColors: true,
+                               side: THREE.DoubleSide
+                           });
 
-                 scene.add(meshes[rr])
-                } }
+                    meshe = new THREE.Mesh(geome , material );
 
-
+                   scene.add(meshe);
+                 var trail=[];
+                 var trailColor=[];
 let r = (f+trailDepth-2)%trailDepth;
 let s = (f+trailDepth-1)%trailDepth;
 let loopLimit = trailDepth;
@@ -747,53 +708,55 @@ let loopLimit = trailDepth;
 
 while(loopLimit>15){
   loopLimit--;
-  pitchCol[r].opacity = 1.-(trailDepth-loopLimit)/trailDepth*3.;
-  material = pitchCol[r];
-
+  for(var yy=0;yy<6;yy++)   trailColor.push(pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,1.-(trailDepth-loopLimit)/trailDepth)
   let widtr = .2*(1.-trailWidth[r]);
   let widts = .2*(1.-trailWidth[s]);
   let scalar = .005;//mobius mode: let scalar = .07*loopLimit/trailDepth;
   let tt = 0.;
-  var z = -(trailDepth-loopLimit)/trailDepth-.1;
-  let vertices = new Float32Array( [
+  var z = -.4-(trailDepth-loopLimit)/trailDepth/1000.;
+ trail.push(
     (scalar*cx[r]+widtr*xPerp[r])*porportionX, (scalar*cy[r]+widtr*yPerp[r])*porportionY,z,
     (scalar*cx[s]-widts*xPerp[s])*porportionX, (scalar*cy[s]-widts*yPerp[s])*porportionY,z,
     (scalar*cx[s]+widts*xPerp[s])*porportionX, (scalar*cy[s]+widts*yPerp[s])*porportionY,z,
     (scalar*cx[r]-widtr*xPerp[r])*porportionX, (scalar*cy[r]-widtr*yPerp[r])*porportionY,z, //2
     (scalar*cx[s]-widts*xPerp[s])*porportionX, (scalar*cy[s]-widts*yPerp[s])*porportionY,z,  //1
     (scalar*cx[r]+widtr*xPerp[r])*porportionX, (scalar*cy[r]+widtr*yPerp[r])*porportionY,z, //3
-  ] );
+  );
 
-  trailGeom[r].setAttribute( 'position', new THREE.Float32BufferAttribute( vertices,3 ) );
-                          trailMeshes[r].geometry = trailGeom[r]
-                          trailMeshes[r].material=material;
-
-  scene.add(trailMeshes[r])
   s = r;
   r--;
   if(r<=0)r=trailDepth-1;
 }
 
+                 
+                 geome = new THREE.BufferGeometry();
+ 
+                 geome.setAttribute( 'position', new THREE.Float32BufferAttribute( trail, 3 ).onUpload( disposeArray ) );
+                    geome.setAttribute( 'color', new THREE.Float32BufferAttribute( trailColor, 4 ).onUpload( disposeArray ));
+                     geome.computeBoundingSphere();
+                    
+                    
+
+                   material= new THREE.MeshBasicMaterial({
+                               opacity: 1.,
+                             transparent: true,
+                               vertexColors: true,
+                               side: THREE.DoubleSide
+                           });
+
+                    meshTrail = new THREE.Mesh(geome , material );
+
+                   scene.add(meshTrail);
+                 
 
   renderer.render( scene, camera );
 
   scene.remove(line);
   line.geometry.dispose( );
 
-  for (let j=0; j<starArms; j++) {
-  scene.remove(meshes[j]);
-  meshes[j].geometry.dispose();
-  meshes[j].material.dispose();
-geometries[j].dispose();
-  }
-                               // else for (let j=0; j<24; j++) {meshes[j].dispose; geometries[j].dispose();}
-  for (let j=0; j<trailDepth; j++){
-    scene.remove(trailMeshes[j]);
-                          
-    trailMeshes[j].geometry.dispose();
-    trailMeshes[j].material.dispose();
-    trailGeom[j].dispose();
-  }
+                 scene.remove(meshe);
+                 scene.remove(meshTrail);
+
 }
 
 
