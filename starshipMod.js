@@ -739,7 +739,7 @@ while(loopLimit>15){
                      geome.computeBoundingSphere();
                     
                     
-
+                   material.dispose();
                    material= new THREE.MeshBasicMaterial({
                                opacity: 1.,
                              transparent: true,
@@ -758,9 +758,14 @@ while(loopLimit>15){
   line.geometry.dispose( );
 
                  scene.remove(meshe);
+                                            //meshe.geometry.dispose();
+                                            //meshe.material.dispose();
                  scene.remove(meshTrail);
+                                            
+                                           // meshTrail.geometry.dispose();
+                                           // meshTrail.material.dispose();
                 geome.dispose();
-
+                material.dispose();
 
 }
 
