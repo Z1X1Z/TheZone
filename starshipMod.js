@@ -10,13 +10,14 @@ zoomOutRatchetThreshold=.0005;
 let radius = 4.;
 var mobileRez=1.;
 let fftSize=2048;
-let trailLength = 288;
+let trailLength = 144;
 let colorSound;
 let center = false;
                   let geome;
-                  
+                  let geomeTrail;
                   let meshe;
-                  
+                  let materialTrail;
+
       let mobile = false;
 
       //vvvvbelow line from https://code-boxx.com/detect-mobile-device-javascript/
@@ -731,23 +732,21 @@ while(loopLimit>15){
   if(r<=0)r=trailDepth-1;
 }
 
-                 geome.dispose();
-                 geome = new THREE.BufferGeometry();
+                 geomeTrail = new THREE.BufferGeometry();
  
-                 geome.setAttribute( 'position', new THREE.Float32BufferAttribute( trail, 3 ).onUpload( disposeArray ) );
-                    geome.setAttribute( 'color', new THREE.Float32BufferAttribute( trailColor, 4 ).onUpload( disposeArray ));
-                     geome.computeBoundingSphere();
+                                            geomeTrail.setAttribute( 'position', new THREE.Float32BufferAttribute( trail, 3 ).onUpload( disposeArray ) );
+                                            geomeTrail.setAttribute( 'color', new THREE.Float32BufferAttribute( trailColor, 4 ).onUpload( disposeArray ));
+                                            geomeTrail.computeBoundingSphere();
                     
                     
-                   material.dispose();
-                   material= new THREE.MeshBasicMaterial({
+                materialTrail= new THREE.MeshBasicMaterial({
                                opacity: 1.,
                              transparent: true,
                                vertexColors: true,
                                side: THREE.DoubleSide
                            });
 
-                    meshTrail = new THREE.Mesh(geome , material );
+                    meshTrail = new THREE.Mesh(geomeTrail , materialTrail );
 
                    scene.add(meshTrail);
                  
@@ -764,8 +763,10 @@ while(loopLimit>15){
                                             
                                            // meshTrail.geometry.dispose();
                                            // meshTrail.material.dispose();
-                geome.dispose();
-                material.dispose();
+                                            geome.dispose();
+                                            //material.dispose();
+                                            geomeTrail.dispose();
+                                            materialTrail.dispose();
 
 }
 
