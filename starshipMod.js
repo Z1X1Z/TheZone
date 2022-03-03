@@ -292,7 +292,7 @@ if (totalAMP>zoomOutRatchetThreshold||on)//this line under revisement
   pb =    calculatePitch();
   if(pb>0) pb =audioX.sampleRate/pb;
 on = true;
-if (isFinite(pb) &&pb>0&& Math.abs(pb-4.64152157387662*4.64152157387662)>.000001&&Math.abs(pb-4.842411556493535*4.842411556493535)>.000001&&pb!=1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) { pitch =pb;reset =0;}
+if (isFinite(pb) &&pb>0&& Math.abs(pb-4.64152157387662*4.64152157387662)>.000001&&Math.abs(pb-4.842411556493535*4.842411556493535)>.000001&&pb!=-1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) { pitch =pb;reset =0;}
 else if (reset>3){on = false;
 }
 else reset++
@@ -425,7 +425,7 @@ let lastTime=0.;
 let ticker = 0;
 let FPS=0.;
                   
-                  const interval = 100;
+                  const interval = 200;
                   let elapsedTimeBetweenFrames = 0.;
                   let lastPitch = 0;
                   
@@ -608,12 +608,13 @@ if(!zoomOutEngage){
     for (var g=0; g<starArms; g++) if(testar[g]>maxTestar) maxTestar=testar[g];
       for (var g=0; g<starArms; g++) if(testar[g]<minTestar) minTestar=testar[g];
 
-    for (var g=0; g<starArms; g++)if(!isNaN(testar[g])&&isFinite(testar[g])&&testar[g]!=0.) {
+    for (var g=1; g<starArms; g++)if(isFinite(testar[g])&&testar[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.) {
         var widt = .02;
         var arm =(mustarD[g]+20)%24./24.*pi*2.;
-        var lengt = (testar[g]-minTestar)/(maxTestar-minTestar);
+        var lengt = (testar[g]-minTestar)/(maxTestar-minTestar)*.9;
+        
         var vop = new THREE.Color();
-       vop.setHSL((1-mustarD[g])%24./24., mustarD[g]/297,mustarD[g]/297);//297 is the highest heard note
+       vop.setHSL((1-mustarD[g])%24./24., mustarD[g]/297.,mustarD[g]/297.);//297 is the highest heard note
         material = new THREE.MeshBasicMaterial({
         color:vop,
         opacity: .3+.7/uniforms[ "metronome" ].value ,
@@ -627,7 +628,7 @@ if(!zoomOutEngage){
             let y = widt*-Math.cos(rpio2)*porportionY;
             let xr = lengt*-Math.sin(arm)*porportionX;
             let yr = lengt*-Math.cos(arm)*porportionY;
-    let depth = -.5+Math.abs(g-starArms/2.)/starArms/100000.;//this depth should draw the back around the middle up towards the top.
+    let depth = -.5+Math.abs(g-starArms/2.)/starArms;//this depth should draw the back around the middle up towards the top.
 
      star.push(
 
@@ -659,6 +660,7 @@ else{
             for (var g=0; g<24; g++) {
             var widt = .02;
                 var rr= (g+15)%24;
+                
             var lengt = (testar[(rr+4)%24]-minTestar)/(maxTestar-minTestar);
 
                 var vop = new THREE.Color();
