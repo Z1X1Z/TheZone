@@ -21,16 +21,16 @@ let center = false;
 
       //vvvvbelow line from https://code-boxx.com/detect-mobile-device-javascript/
       if(navigator.userAgent.toLowerCase().match(/mobile/i)){
-          mobileRez=.25;
+          mobileRez=5;
           //fftSize=512;
-          trailLength = 150;
+          trailLength = 144;
           mobile=true;
       }
       else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
       {
           mobileRez=.5;
           //fftSize=512;
-          trailLength = 150;
+          trailLength = 144;
           mobile=true;
 
       }
