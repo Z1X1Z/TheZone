@@ -683,6 +683,7 @@ var vertices;
                 (lengt*-Math.cos(rr*pi*2./24)-widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  -0.05,
                     );
 } }
+                 
                  geome = new THREE.BufferGeometry();
  
                  geome.setAttribute( 'position', new THREE.Float32BufferAttribute( star, 3 ).onUpload( disposeArray ) );
@@ -730,7 +731,7 @@ while(loopLimit>15){
   if(r<=0)r=trailDepth-1;
 }
 
-                 
+                 geome.dispose();
                  geome = new THREE.BufferGeometry();
  
                  geome.setAttribute( 'position', new THREE.Float32BufferAttribute( trail, 3 ).onUpload( disposeArray ) );
@@ -758,6 +759,8 @@ while(loopLimit>15){
 
                  scene.remove(meshe);
                  scene.remove(meshTrail);
+                geome.dispose();
+
 
 }
 
