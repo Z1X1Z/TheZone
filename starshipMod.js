@@ -89,13 +89,9 @@ window.addEventListener('keyup', function(event) {
       if (x>0)
         {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
       else if (x==0)
-        {rez = window.devicePixelRatio /10.; renderer.setPixelRatio( rez);}
+        {window.movementRate=.5}
       else if (key=="À"||window.key.toLowerCase()=="`")
         {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
-      else if (key=="="||window.key.toLowerCase()=="+")
-        {rez /=1.1; renderer.setPixelRatio(rez);}
-      else if ( event.keyCode==173||window.key.toLowerCase()=="-")
-        {rez *=1.1; renderer.setPixelRatio(rez);}
       else if (String.fromCharCode(event.which || event.keyCode)=="M"||window.key.toLowerCase()=="m")        {    invert *= -1;}
 
       else if (key=="Q"||window.key.toLowerCase()=="q") uniforms[ "colorCombo" ].value = 1;
@@ -149,7 +145,10 @@ window.addEventListener('keyup', function(event) {
         if (onO)onO=false;
         else onO = true;
       }
-
+      else if (key=="="||window.key.toLowerCase()=="+")
+        {window.movementRate *=1.11111111;}
+      else if ( event.keyCode==173||window.key.toLowerCase()=="-")
+        {window.movementRate /=1.11111111;}
 
         if(uniforms[ "free" ].value) window.zoomCageSize=100000000000000000.;
         else window.zoomCageSize=1.5;
@@ -599,17 +598,23 @@ function animate( timestamp ) {
 
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
-                             ZR = Math.E**(Math.log(.5)/zoomFrames*interpolation*window.movementRate);
+
+                            
+ZR = Math.E**(Math.log(.5)/zoomFrames*interpolation*window.movementRate);
 
   if (zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&on)zoom *=ZR;
   else if(zoom<1.){zoom /= ZR;
-                  if(!zoomOutEngage&&center){coordX*=(1-zoom)*2./3.; coordY*=(1-zoom)*2./3.;}
+                  if(!zoomOutEngage&&center){coordX*=(1-zoom)*ZR; coordY*=(1-zoom)*ZR;}
   }
   if (zoom>1.)zoom=1.;
 
   if (zoom>=1.)zoomOutEngage = false;
    else if ( zoom<zoomCone||zoom<.000000000000000000000001)zoomOutEngage = true;
-      if (zoomOutEngage == true){zoom *= 1.44; coordX*=1-zoom; coordY*=1-zoom;}
+      if (zoomOutEngage == true){
+         zoom *= 1.44*ZR;
+         coordX*=(1-zoom)*ZR;
+         coordY*=(1-zoom)*ZR;
+     }
 
        if(zoom<.0000000000000000000000001)zoom = 1.;
 
