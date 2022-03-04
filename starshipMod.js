@@ -553,7 +553,7 @@ function animate( timestamp ) {
     lineMat.opacity = 1.; //opacity has no effect
   }
 
-  let depth = .0;
+  let depth = -1.0;
   if (on)for (let r= 0; r < bufferSize; r ++) {
     let tx = spirray0[r]*porportionX/spiregulator;
     let ty =  spirray1[r]*porportionY/spiregulator;
