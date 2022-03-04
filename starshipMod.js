@@ -8,7 +8,7 @@ const MR = 2./3./zoomFrames;
 window.zoomCageSize = 1.5;//radius of zoom bounding
 zoomOutRatchetThreshold=.0005;
 let radius = 4.;
-var mobileRez=1.;
+var rez=.5;
 let fftSize=2048;
 let trailLength = 144;
 let colorSound;
@@ -22,16 +22,16 @@ let center = false;
 
       //vvvvbelow line from https://code-boxx.com/detect-mobile-device-javascript/
       if(navigator.userAgent.toLowerCase().match(/mobile/i)){
-          mobileRez=.5;
+          //rez=.5;
           //fftSize=512;
-          trailLength = 144;
+          //trailLength = 144;
           mobile=true;
       }
       else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
       {
-          mobileRez=.5;
+          //rez=.5;
           //fftSize=512;
-          trailLength = 144;
+          //trailLength = 144;
           mobile=true;
 
       }
@@ -76,7 +76,7 @@ var load = function() {
 //key press handling vvvv
 var pointed=false;
 let zoomAtl41=false;//watch for the 1 and the l
-var rez = window.devicePixelRatio*mobileRez;
+var rez = window.devicePixelRatio*rez;
 
 
                   var framesLong;
@@ -580,7 +580,7 @@ if(!zoomOutEngage){
   if (zoom>=1.)zoomOutEngage = false;
    else if ( zoom<zoomCone||zoom<.000000000000000000000001)zoomOutEngage = true;
       if (zoomOutEngage == true){
-         zoom /= ZR/1.44;
+         zoom *= ZR*1.44;
          coordX*=(1-zoom)*ZR;
          coordY*=(1-zoom)*ZR;
      }
@@ -697,7 +697,7 @@ var vertices;
                                opacity: 1.,
                              transparent: true,
                                vertexColors: true,
-                               side: THREE.DoubleSide
+                              // side: THREE.DoubleSide
                            });
 
                     meshe = new THREE.Mesh(geome , material );
@@ -743,7 +743,7 @@ while(loopLimit>15){
                                opacity: 1.,
                              transparent: true,
                                vertexColors: true,
-                               side: THREE.DoubleSide
+                              // side: THREE.DoubleSide
                            });
 
                     meshTrail = new THREE.Mesh(geomeTrail , materialTrail );
@@ -757,14 +757,11 @@ while(loopLimit>15){
   line.geometry.dispose( );
 
                  scene.remove(meshe);
-                                            //meshe.geometry.dispose();
-                                            //meshe.material.dispose();
+                                            
                  scene.remove(meshTrail);
                                             
-                                           // meshTrail.geometry.dispose();
-                                           // meshTrail.material.dispose();
                                             geome.dispose();
-                                            //material.dispose();
+                                            material.dispose();
                                             geomeTrail.dispose();
                                             materialTrail.dispose();
 
