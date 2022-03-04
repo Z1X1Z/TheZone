@@ -365,7 +365,7 @@ let uniforms;
 function init() {
     scene = new THREE.Scene();
     inputData = new Float32Array(bufferSize);
-    camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
+    camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 1, -1);
     geometryP = new THREE.PlaneGeometry( 2, 2 );
     geometryP.z=-1.;
     
@@ -629,7 +629,7 @@ if(!zoomOutEngage){
             let y = widt*-Math.cos(rpio2)*porportionY;
             let xr = lengt*-Math.sin(arm)*porportionX;
             let yr = lengt*-Math.cos(arm)*porportionY;
-    let depth = -.5+Math.abs(g-starArms/2.)/starArms;//this depth should draw the back around the middle up towards the top.
+    let depth = -1.+lengt;//this depth should draw the back around the middle up towards the top.
 
      star.push(
 
