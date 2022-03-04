@@ -6,7 +6,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="main.css">
-            <script id="threeJSscript" src = "https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js"></script>
             
     </head>
     <body>
@@ -14,7 +13,6 @@
             <div id="HK"></div>
             <div id="textWindow"></div>
         </div>
-        <script src="OFFLINEonlineSwitch.js"></script>
         
         <!--
          https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_text_create
@@ -636,8 +634,10 @@ vec3 xtol(vec2 s, vec2 t){
                             clamp((zoomer+heart((p+vec2(.5,0.))/2.,t))-(m.r+m.b+m.g+creatures.r+creatures.g+creatures.b)*100.,.0,1.)
                     ,1.);}
         </script>
+        <script src="OFFLINEonlineSwitch.js"></script>
+        <script id="threeJSscript"></script>
         <script src="starshipMod.js"></script>
-        <script id="wadJSscript" src = "https://unpkg.com/web-audio-daw@4.12.0/build/wad.min.js"></script>
+        <script id="wadJSscript"></script>
         <script src="wadLoader.js"></script>
     </body>
 </html>

@@ -38,14 +38,13 @@ let center = false;
 
 //load threeJS then call startMic()
 //vvvvmodified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
-var script = document.getElementById('threeJSscript');
 function loadScript(url, callback)
 {
     
     // Adding the script tag to the head as suggested before
     var head = document.head;
     var script = document.getElementById('threeJSscript');
-    script.type = 'application/javascript';
+    script.type = 'text/javascript';
     script.src = url;
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
@@ -54,25 +53,28 @@ function loadScript(url, callback)
     // Fire the loading
     head.appendChild(script);
 }
-//^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
-if(!window.localStorage.getItem("m144073"))window.localStorage.setItem('m144073', "f");
-var load = function() {
-//https://stackfame.com/auto-refresh-page-first-load-javascript-jquery
-    if ( window.localStorage.getItem("m144073")!="t"){
-        //setting window location
-        window.localStorage.setItem('m144073', "t");
-        //using reload() method to reload web page
-        window.location.reload();
-                        }
-    else{
-        window.localStorage.setItem('m144073', "f");
-        startMic();
-    }
 
+//^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
+                  
+                  var load = function() {
+                  //https://stackfame.com/auto-refresh-page-first-load-javascript-jquery
+                      if ( window.sessionStorage.getItem("alreadyReset")!="t"){
+                          //setting window location
+                          window.sessionStorage.setItem('alreadyReset', "t");
+                          //using reload() method to reload web page
+                          window.location.reload();
+                                          }
+                      else{
+                          window.sessionStorage.setItem('alreadyReset', "f");
+                          startMic();
+                      }
+
+                  
 }
-      
-    if(!THREE)loadScript("threer127.min.js",load);
-    else load();
+                  
+            var cdnSwitch="threer127.min.js";
+       if (window.online)cdnSwitch="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js"
+loadScript(cdnSwitch,load);
 //key press handling vvvv
 var pointed=false;
 let zoomAtl41=false;//watch for the 1 and the l
@@ -363,6 +365,7 @@ let uniforms;
                      let scene;
 
 function init() {
+
     scene = new THREE.Scene();
     inputData = new Float32Array(bufferSize);
     camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 1, -1);
@@ -572,7 +575,7 @@ ZR = Math.E**(Math.log(.5)/zoomFrames*interpolation*window.movementRate);
 if(!zoomOutEngage){
   if (zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&on)zoom *=ZR;
   else if(zoom<1.){zoom /= ZR;
-  if(center){coordX*=(1-zoom)*ZR*2./3.; coordY*=(1-zoom)*ZR*2./3.;}
+  if(center){coordX*=(1-zoom)*ZR*8./9.; coordY*=(1-zoom)*ZR*2./3.;}
   }
 }
   if (zoom>1.)zoom=1.;
@@ -618,7 +621,7 @@ if(!zoomOutEngage){
        vop.setHSL((1-mustarD[g])%24./24., mustarD[g]/297.,mustarD[g]/297.);//297 is the highest heard note
         material = new THREE.MeshBasicMaterial({
         color:vop,
-        opacity: .3+.7/uniforms[ "metronome" ].value ,
+        opacity: 1.,
         transparent: true,
       });
 
@@ -629,7 +632,7 @@ if(!zoomOutEngage){
             let y = widt*-Math.cos(rpio2)*porportionY;
             let xr = lengt*-Math.sin(arm)*porportionX;
             let yr = lengt*-Math.cos(arm)*porportionY;
-    let depth = -1.+lengt;//this depth should draw the back around the middle up towards the top.
+    let depth = -1.+lengt/1000.;//this depth should draw the back around the middle up towards the top.
 
      star.push(
 
@@ -691,10 +694,10 @@ var vertices;
                     geome.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ).onUpload( disposeArray ));
                      geome.computeBoundingSphere();
                     
-                    
-
+                  var  opac=1.;
+                  if(onO)opac=.3+.7/uniforms[ "metronome" ].value
                    material= new THREE.MeshBasicMaterial({
-                               opacity: 1.,
+                               opacity: opac,
                              transparent: true,
                                vertexColors: true,
                               // side: THREE.DoubleSide
