@@ -8,7 +8,7 @@ const MR = 2./3./zoomFrames;
 window.zoomCageSize = 1.5;//radius of zoom bounding
 zoomOutRatchetThreshold=.0005;
 let radius = 4.;
-var rez=.5;
+var rez=1.;
 let fftSize=2048;
 let trailLength = 144;
 let colorSound;
@@ -22,14 +22,14 @@ let center = false;
 
       //vvvvbelow line from https://code-boxx.com/detect-mobile-device-javascript/
       if(navigator.userAgent.toLowerCase().match(/mobile/i)){
-          //rez=.5;
+          rez=.5;
           //fftSize=512;
           //trailLength = 144;
           mobile=true;
       }
       else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
       {
-          //rez=.5;
+          rez=.5;
           //fftSize=512;
           //trailLength = 144;
           mobile=true;
