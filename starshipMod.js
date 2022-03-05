@@ -21,20 +21,20 @@ let center = false;
       let mobile = false;
 
       //vvvvbelow line from https://code-boxx.com/detect-mobile-device-javascript/
-      if(navigator.userAgent.toLowerCase().match(/mobile/i)){
-          rez=.5;
-          //fftSize=512;
-          //trailLength = 144;
-          mobile=true;
-      }
-      else if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+
+    if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
       {
           rez=.5;
           //fftSize=512;
           //trailLength = 144;
           mobile=true;
-
       }
+      else if(navigator.userAgent.toLowerCase().match(/mobile/i)){
+           rez=.25;
+           //fftSize=512;
+           //trailLength = 144;
+           mobile=true;
+       }
 
 //load threeJS then call startMic()
 //vvvvmodified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
