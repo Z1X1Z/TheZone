@@ -10,7 +10,7 @@ zoomOutRatchetThreshold=.0005;
 let radius = 4.;
 var rez=1.;
 let fftSize=2048;
-let trailLength = 144;
+let trailLength = 576;
 let colorSound;
 let center = false;
                   let geome;
