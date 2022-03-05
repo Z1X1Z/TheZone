@@ -632,7 +632,7 @@ if(!zoomOutEngage){
             let y = widt*-Math.cos(rpio2)*porportionY;
             let xr = lengt*-Math.sin(arm)*porportionX;
             let yr = lengt*-Math.cos(arm)*porportionY;
-    let depth = -1.+lengt/1000.;//this depth should draw the back around the middle up towards the top.
+    let depth = -1.+lengt;//this depth should draw the back around the middle up towards the top.
 
      star.push(
 
@@ -720,7 +720,7 @@ while(loopLimit>15){
   let widts = .2*(1.-trailWidth[s]);
   let scalar = .005;//mobius mode: let scalar = .07*loopLimit/trailDepth;
   let tt = 0.;
-  var z = -.4-(trailDepth-loopLimit)/trailDepth/1000.;
+  var z = -1.+(trailDepth-loopLimit)/trailDepth;
  trail.push(
     (scalar*cx[r]+widtr*xPerp[r])*porportionX, (scalar*cy[r]+widtr*yPerp[r])*porportionY,z,
     (scalar*cx[s]-widts*xPerp[s])*porportionX, (scalar*cy[s]-widts*yPerp[s])*porportionY,z,
