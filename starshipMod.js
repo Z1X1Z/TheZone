@@ -215,7 +215,7 @@ let onO = false;
 function makeSpirograph(){
       phase = phase % (pi*2);
       len = 0;
-      let adjConstant = 1./(pitch)*3.14;
+      let adjConstant = 1./(pitch)*3.14*10;
       if(Math.abs(inputData[0])>.0    )
       for(var m = 0; m < bufferSize; m++)
       {
@@ -341,9 +341,9 @@ yPerp[f] = -Math.cos(-angle+pi/2)*radius;
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
-    cx[n] += d_x*15.;
-    cy[n] += d_y*15.;
-           trailWidth[n] *=.98
+    cx[n] += d_x*3.;
+    cy[n] += d_y*3.;
+           trailWidth[n] *=.997
 }
 
 }
@@ -720,7 +720,7 @@ while(loopLimit>15){
   let widts = .2*(1.-trailWidth[s]);
   let scalar = .005;//mobius mode: let scalar = .07*loopLimit/trailDepth;
   let tt = 0.;
-  var z = -1.+(trailDepth-loopLimit)/trailDepth;
+  var z = -1.+(trailDepth-loopLimit)/trailDepth/2.;
  trail.push(
     (scalar*cx[r]+widtr*xPerp[r])*porportionX, (scalar*cy[r]+widtr*yPerp[r])*porportionY,z,
     (scalar*cx[s]-widts*xPerp[s])*porportionX, (scalar*cy[s]-widts*yPerp[s])*porportionY,z,
