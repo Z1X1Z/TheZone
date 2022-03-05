@@ -720,7 +720,7 @@ while(loopLimit>15){
   let widts = .2*(1.-trailWidth[s]);
   let scalar = .005;//mobius mode: let scalar = .07*loopLimit/trailDepth;
   let tt = 0.;
-  var z = -1.+(trailDepth-loopLimit)/trailDepth/2.;
+  var z = -1.+(trailDepth-loopLimit)/trailDepth;
  trail.push(
     (scalar*cx[r]+widtr*xPerp[r])*porportionX, (scalar*cy[r]+widtr*yPerp[r])*porportionY,z,
     (scalar*cx[s]-widts*xPerp[s])*porportionX, (scalar*cy[s]-widts*yPerp[s])*porportionY,z,
