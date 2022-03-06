@@ -20,7 +20,7 @@ let center = false;
 
       let mobile = false;
 
-      //vvvvbelow line from https://code-boxx.com/detect-mobile-device-javascript/
+      //vvvvbelow line partly from https://code-boxx.com/detect-mobile-device-javascript/
 
     if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
       {
@@ -82,7 +82,7 @@ var rez = window.devicePixelRatio*rez;
 
 
                   var framesLong;
-                  let computeP=false;
+                  let computeFPS=false;
 
 window.addEventListener('keyup', function(event) {
       let key = String.fromCharCode(event.which || event.keyCode);
@@ -133,7 +133,7 @@ window.addEventListener('keyup', function(event) {
             else if (key=="P"||window.key.toLowerCase()=="p"){
                 
                 framesLong=FPS;
-                computeP=true;
+                computeFPS=true;
                 
             }
             
@@ -341,8 +341,8 @@ yPerp[f] = -Math.cos(-angle+pi/2)*radius;
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
-    cx[n] += d_x*totalAMP*42;
-    cy[n] += d_y*totalAMP*42;
+    cx[n] += d_x*totalAMP*144;
+    cy[n] += d_y*totalAMP*144;
            trailWidth[n] *=.997
 }
 
@@ -450,11 +450,11 @@ function animate( timestamp ) {
     move();
             
             
-    if (computeP)
+    if (computeFPS)
     {
         averageFrameTotalAmp.push(totalAMP);
-        if (averageFrameTotalAmp.length>framesLong)computeP=false;
-        if(computeP==false){
+        if (averageFrameTotalAmp.length>framesLong)computeFPS=false;
+        if(computeFPS==false){
              finalAverageAmp = 0.;
           for(var l=0.; l<averageFrameTotalAmp.length;l++)finalAverageAmp+=averageFrameTotalAmp[l];
               finalAverageAmp/=framesLong;
@@ -656,7 +656,7 @@ if(!zoomOutEngage){
         }
                    
 }
-else{
+else{//start drawing of just twenty four frets here
             var maxTestar=1.;
             for (var g=0; g<24; g++) if(testar[g]>maxTestar){maxTestar=testar[g];}
            for (var g=0; g<24; g++) if(testar[g]<minTestar)minTestar=testar[g];
@@ -674,17 +674,17 @@ else{
                              
 
 var vertices;
-
+var z = -.333;
              star.push(
-                0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
-                0+widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0+widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
+                0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY, z,
+                0+widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0+widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  z,
                 (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
-                (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  -0.05,
-                0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  -0.05,
+                (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  z,
+                0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  z,
                 (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
-                (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  -0.05,
+                (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  z,
                 (lengt*-Math.sin(rr*pi*2./24)-widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
-                (lengt*-Math.cos(rr*pi*2./24)-widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  -0.05,
+                (lengt*-Math.cos(rr*pi*2./24)-widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  z,
                     );
 } }
                  
