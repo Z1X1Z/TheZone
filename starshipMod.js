@@ -220,8 +220,8 @@ function makeSpirograph(){
       for(var m = 0; m < bufferSize; m++)
       {
               phase += adjConstant;//spira_pitch;
-              spirray0[m]=-Math.sin(phase)*inputData[m]*m;
-              spirray1[m]=-Math.cos(phase)*inputData[m]*m;
+              spirray0[m]=-Math.sin(phase)*(inputData[m]+1.)*(m+1.);
+              spirray1[m]=-Math.cos(phase)*(inputData[m]+1.)*(m+1.);
              // len++;
       }
       len -= 1;
