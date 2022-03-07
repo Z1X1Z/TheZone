@@ -215,7 +215,7 @@ let onO = false;
 function makeSpirograph(){
       phase = phase % (pi*2);
       len = 0;
-      let adjConstant = 1./(pitch)*3.14*10;
+      let adjConstant = 1./(pitch)*Math.PI*2.;
       if(Math.abs(inputData[0])>.0    )
       for(var m = 0; m < bufferSize; m++)
       {
