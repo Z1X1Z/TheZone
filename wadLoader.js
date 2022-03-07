@@ -39,8 +39,9 @@ function initialize(){
 }
 
 var cdnSwitch="wad.min.js";
-if (window.online)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0"
+if ( window.sessionStorage.getItem("alreadyReset")=="t"){if (window.online)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0"
 loadScript(cdnSwitch,initialize);
+}
 
 let initialAngleSound;
 function startSound(e){
