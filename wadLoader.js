@@ -2,9 +2,9 @@ function loadScript(url, callback)
 {
     // Adding the script tag to the head as suggested before
     var head = document.head;
-    var script = document.createElement('script');
+    var script = document.getElementById('wadJSscript');
     script.type = 'application/javascript';
-    script.src = "wad.min.js";
+    script.src = url;
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
     script.onreadystatechange = callback;
@@ -37,8 +37,11 @@ function initialize(){
     sound =  new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
      sound2 = new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
 }
-if(!Wad)loadScript(wadLoader,initialize);
-else initialize();
+
+var cdnSwitch="wad.min.js";
+if (window.online)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0"
+loadScript(cdnSwitch,initialize);
+
 let initialAngleSound;
 function startSound(e){
     sound.stop();sound2.stop()
