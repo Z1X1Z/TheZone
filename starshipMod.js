@@ -220,8 +220,8 @@ function makeSpirograph(){
       for(var m = 0; m < bufferSize; m++)
       {
               phase += adjConstant;//spira_pitch;
-              spirray0[m]=-Math.sin(phase)*(inputData[m]+1.)*(m+1.);
-              spirray1[m]=-Math.cos(phase)*(inputData[m]+1.)*(m+1.);
+              spirray0[m]=-Math.sin(phase)*(inputData[m]+1.)*m;
+              spirray1[m]=-Math.cos(phase)*(inputData[m]+1.)*m;
              // len++;
       }
       len -= 1;
@@ -612,7 +612,7 @@ if(!zoomOutEngage){
     for (var g=0; g<starArms; g++) if(testar[g]>maxTestar) maxTestar=testar[g];
       for (var g=0; g<starArms; g++) if(testar[g]<minTestar) minTestar=testar[g];
 
-    for (var g=1; g<starArms; g++)if(isFinite(testar[g])&&testar[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.) {
+    for (var g=0; g<starArms; g++)if(isFinite(testar[g])&&testar[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.) {
         var widt = .02;
         var arm =(mustarD[g]+20)%24./24.*pi*2.;
         var lengt = (testar[g]-minTestar)/(maxTestar-minTestar)*.9;
