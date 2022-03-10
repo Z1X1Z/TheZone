@@ -343,8 +343,8 @@ yPerp[f] = -Math.cos(-angle+pi/2)*radius;
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
-    cx[n] += d_x*interpolation;
-    cy[n] += d_y*interpolation;
+    cx[n] += d_x*interpolation*1.5;
+    cy[n] += d_y*interpolation*1.5;
            trailWidth[n] *=.997
 }
 
