@@ -341,8 +341,8 @@ yPerp[f] = -Math.cos(-angle+pi/2)*radius;
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
-    cx[n] += d_x*3;
-    cy[n] += d_y*3;
+    cx[n] += d_x*interpolation;
+    cy[n] += d_y*interpolation;
            trailWidth[n] *=.997
 }
 
@@ -715,7 +715,7 @@ let loopLimit = trailDepth;
 
 while(loopLimit>15){
   loopLimit--;
-  for(var yy=0;yy<6;yy++)   trailColor.push(pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,1.-(trailDepth-loopLimit)/trailDepth)
+  for(var yy=0;yy<6;yy++)   trailColor.push(pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,.75*(1.-(trailDepth-loopLimit)/trailDepth))
   let widtr = .2*(1.-trailWidth[r]);
   let widts = .2*(1.-trailWidth[s]);
   let scalar = .005;//mobius mode: let scalar = .07*loopLimit/trailDepth;
