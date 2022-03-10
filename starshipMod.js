@@ -216,12 +216,14 @@ function makeSpirograph(){
       phase = phase % (pi*2);
       len = 0;
       let adjConstant = 1./(pitch)*Math.PI*2.;
+    var maxSamp=0.;
+    for(var t=0; t<inputData.length;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
       if(Math.abs(inputData[0])>.0    )
       for(var m = 0; m < bufferSize; m++)
       {
               phase += adjConstant;//spira_pitch;
-              spirray0[m]=-Math.sin(phase)*(inputData[m]+1.)*m;
-              spirray1[m]=-Math.cos(phase)*(inputData[m]+1.)*m;
+              spirray0[m]=-Math.sin(phase)*(inputData[m]/maxSamp+1.)*m;
+              spirray1[m]=-Math.cos(phase)*(inputData[m]/maxSamp+1.)*m;
              // len++;
       }
       len -= 1;
