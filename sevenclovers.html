@@ -17,31 +17,7 @@
         <!--
          https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_text_create
         -->
-        <script>
-        function hk() {
-          var x = document.createElement("INPUT");
-          x.setAttribute("type", "text");
-          x.setAttribute("id", "hotkeys");
-          x.setAttribute("placeholder", "Hotkeys!");
-          x.setAttribute("oninput", "getKey()");
-          document.getElementById("HK").appendChild(x);
-        }
-      if(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
-            hk();
-      
-        let androidGetKey="";
-        let androidGetKeyLast="";
-
-        function getKey(){
-            androidGetKeyLast = androidGetKey;
-            androidGetKey = document.getElementById("hotkeys").value;
-         let scan=androidGetKey.length-1;
-         if(androidGetKey.length-1==androidGetKeyLast.length) while(androidGetKey[scan]==androidGetKeyLast[scan]&&scan>=0){
-                window.key=androidGetKey[scan];
-                scan--;
-                }
-         }
-    </script>
+ 
 
 
     <div id="container"></div>
@@ -144,7 +120,7 @@
                                         if(abs(p.y)<6.)for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>(20.-(coz(t.y)-1.)/2.*50.)&&f>4)x+=z.y/20000000.;
                                         else {z=2.*vec2(-1./((z.x*z.x-(1.44+(coz(t.y)-1.)/2.*.44)*z.y*z.y)
                                      -g.x*(1.2+(coz(t.y)-1.)/2.*.2)),
-                                ((1.2-(coz(t.y)-1.)/2.*.8)*z.x*z.y-(1.2+(coz(t.y)-1.)/2.*.2)*g.y-coz(t.x/2.)/20.));
+                                ((1.2-(coz(t.y)-1.)/2.*.8)*z.x*z.y-(1.2+(coz(t.y)-1.)/2.*.2)*g.y));
            //The Holy Bible Revelation 21:16 "The city was laid out like a square, as long as it was wide.
            //He measured the city with the rod and found it to be 12,000 stadia in length,
             //and as wide and high as it is long. The angel measured the wall using human measurement, and it was 144 cubits thick.
@@ -157,7 +133,7 @@
                                        // g.x-=.5;
                                         z=g;
                                         if(g.x>.75&&g.x<1.7&&abs(g.y*g.x)<.54)for(int f=0;f<8;f+=1)if(abs(z.x)>52.&&f>1)c=abs(z.x)/1000000.;
-                                        else {z=3.*vec2(-1./((z.x*z.x-z.y*z.y)-g.x),(77.0*z.x*z.y-(2.+(coz(t.y)-1.)/2.)*g.y-sin(t.y*2.)/7.));
+                                        else {z=3.*vec2(-1./((z.x*z.x-z.y*z.y)-g.x),(77.0*z.x*z.y-(2.+(coz(t.y)-1.)/2.)*g.y));
                                               z.y = -1./z.y;}
                           //vv head vv
                                                 g=p;
@@ -175,7 +151,7 @@
                                                          g.x-=6.+(coz(t.y)-1.)/2.*5.5;
                                         z=g;
                                         for (int f=0;f<50;f+=1)if(abs(z.x+z.y)>20.)break;
-                                        else {z=vec2(((z.x*z.x-z.y*z.y)-g.x-sin(time2*gr)/4.),(2.0*z.x*z.y-g.y-sin(time2/2.)/4.));
+                                        else {z=vec2(((z.x*z.x-z.y*z.y)-g.x),(2.0*z.x*z.y-g.y));
                                                      if(f>2)k+=0.005;}
                               
                }
@@ -639,5 +615,6 @@ vec3 xtol(vec2 s, vec2 t){
         <script src="starshipMod.js"></script>
         <script id="wadJSscript"></script>
         <script src="wadLoader.js"></script>
+        <script src="hotkeys.js"></script>
     </body>
 </html>
