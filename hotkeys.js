@@ -29,7 +29,9 @@ function callKey(event){
       let key = event.key.toUpperCase();
       var x = parseInt(String.fromCharCode( event.keyCode));
       if (x>0)
-        {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez); onWindowResize();//onWindowResize for Android to register change in resolution}
+        {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez); onWindowResize();//onWindowResize for Android to register change in resolution
+            
+        }
       else if (x==0)
         {window.movementRate=.5}
       else if (key=="À"||key.toLowerCase()=="`")
