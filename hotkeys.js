@@ -20,7 +20,7 @@ function getKey(){
         window.key=androidGetKey[scan];
         scan--;
         }
-    window.dispatchEvent(new KeyboardEvent('keydown', {
+    callKey(new KeyboardEvent('keydown', {
       'key': window.key
     })); }
 
