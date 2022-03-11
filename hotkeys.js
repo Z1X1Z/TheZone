@@ -6,7 +6,7 @@ function hk() {
   x.setAttribute("oninput", "getKey()");
   document.getElementById("HK").appendChild(x);
 }
-//if(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+if(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
     hk();
 
 let androidGetKey="";
@@ -24,7 +24,7 @@ var key = "";
     callKey(new KeyboardEvent('keydown', {'key': key, "keyCode":key.charCodeAt(0)}));
 }
 
-//if(!mobile)window.addEventListener('keydown', function(event) {callKey(event)}, false);
+if(!mobile)window.addEventListener('keydown', function(event) {callKey(event)}, false);
 function callKey(event){
       let key = event.key.toUpperCase();
       var x = parseInt(String.fromCharCode( event.keyCode));
