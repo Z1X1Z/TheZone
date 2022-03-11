@@ -6,7 +6,7 @@ function hk() {
   x.setAttribute("oninput", "getKey()");
   document.getElementById("HK").appendChild(x);
 }
-if(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+//if(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
     hk();
 
 let androidGetKey="";
@@ -21,10 +21,10 @@ var key = "";
         if(androidGetKey[scan]!=androidGetKeyLast[scan])key=androidGetKey[scan];
         scan--;
         }
-    callKey(new KeyboardEvent('keydown', {'key': key, "keyCode":key.charCode}));
+    callKey(new KeyboardEvent('keydown', {'key': key, "keyCode":key.charCodeAt(0)}));
 }
 
-if(!mobile)window.addEventListener('keydown', function(event) {callKey(event)}, false);
+//if(!mobile)window.addEventListener('keydown', function(event) {callKey(event)}, false);
 function callKey(event){
       let key = event.key.toUpperCase();
       var x = parseInt(String.fromCharCode( event.keyCode));
@@ -58,8 +58,8 @@ function callKey(event){
       else if (key=="V")textON=!textON;
 
 
-      else if (event.keyCode==190) uniforms[ "metronome" ].value *= 1.1; //keycode for <
-      else if (event.keyCode==188&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
+      else if (event.keyCode==190||event.key=="."||event.key==">") uniforms[ "metronome" ].value *= 1.1; //keycode for <
+      else if ((event.keyCode==188||event.key==","||event.key=="<")&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
 
       else if (key=="I") zoomOutRatchetThreshold/= 1.212121;
       else if (key=="O") zoomOutRatchetThreshold*= 1.212121;
