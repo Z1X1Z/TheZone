@@ -84,7 +84,7 @@ var rez = window.devicePixelRatio*rez;
                   var framesLong;
                   let computeFPS=false;
 
-window.addEventListener('keydown', function(event) {
+window.addEventListener('keyup', function(event) {
       let key = String.fromCharCode(event.which || event.keyCode);
       if(!window.key)window.key="";
       var x = parseInt(String.fromCharCode(event.which || event.keyCode));
