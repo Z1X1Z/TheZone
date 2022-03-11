@@ -27,8 +27,7 @@ var key = "";
 if(!mobile)window.addEventListener('keydown', function(event) {callKey(event)}, false);
 function callKey(event){
       let key = event.key.toUpperCase();
-      var x = parseInt(String.fromCharCode(event.which || event.keyCode));
-    if (parseInt(key)>=0) x = parseInt(key)
+      var x = parseInt(String.fromCharCode( event.keyCode));
       if (x>0)
         {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
       else if (x==0)
@@ -37,53 +36,49 @@ function callKey(event){
         {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
       else if (event.key.toUpperCase=="M"||key.toLowerCase()=="m")        {    invert *= -1;}
 
-      else if (key=="Q"||key.toLowerCase()=="q") uniforms[ "colorCombo" ].value = 1;
-      else if (key=="W"||key.toLowerCase()=="w")   uniforms[ "colorCombo" ].value = 2;
-      else if (key=="E"||key.toLowerCase()=="e") uniforms[ "colorCombo" ].value = 3;
-      else if (key=="R"||key.toLowerCase()=="r") uniforms[ "colorCombo" ].value = 4;
-      else if (key=="T"||key.toLowerCase()=="t") uniforms[ "colorCombo" ].value = 5;
-      else if (key=="Y"||key.toLowerCase()=="y") uniforms[ "colorCombo" ].value = 6;
-      else if (key=="U"||key.toLowerCase()=="u") uniforms[ "colorCombo" ].value = 7;
-      else if (key=="A"||key.toLowerCase()=="a") uniforms[ "colorCombo" ].value = 11;
-      else if (key=="F"||key.toLowerCase()=="f") uniforms[ "fourCreats" ].value *= -1;
-      else if (key=="G"||key.toLowerCase()=="g") uniforms[ "colorCombo" ].value = 17;
-      else if (key=="K"||key.toLowerCase()=="k") uniforms[ "colorCombo" ].value = 13;
-      else if (key=="D"||key.toLowerCase()=="d") uniforms[ "colorCombo" ].value = 14;
-      else if (key=="X"||key.toLowerCase()=="x") uniforms[ "colorCombo" ].value = 15;
-      else if (key=="B"||key.toLowerCase()=="b") uniforms[ "colorCombo" ].value = 16;
-      else if (key=="S"||key.toLowerCase()=="s"){ if(uniforms[ "morph" ].value == 0.)uniforms[ "morph" ].value = 1.;else uniforms[ "morph" ].value = 0.; }
-      else if (key=="N"||key.toLowerCase()=="n") uniforms[ "MetaCored" ].value = !uniforms[ "MetaCored" ].value;
-      else if (key=="L"||key.toLowerCase()=="l")
+      else if (key=="Q") uniforms[ "colorCombo" ].value = 1;
+      else if (key=="W")   uniforms[ "colorCombo" ].value = 2;
+      else if (key=="E") uniforms[ "colorCombo" ].value = 3;
+      else if (key=="R") uniforms[ "colorCombo" ].value = 4;
+      else if (key=="T") uniforms[ "colorCombo" ].value = 5;
+      else if (key=="Y") uniforms[ "colorCombo" ].value = 6;
+      else if (key=="U") uniforms[ "colorCombo" ].value = 7;
+      else if (key=="A") uniforms[ "colorCombo" ].value = 11;
+      else if (key=="F") uniforms[ "fourCreats" ].value *= -1;
+      else if (key=="G") uniforms[ "colorCombo" ].value = 17;
+      else if (key=="K") uniforms[ "colorCombo" ].value = 13;
+      else if (key=="D") uniforms[ "colorCombo" ].value = 14;
+      else if (key=="X") uniforms[ "colorCombo" ].value = 15;
+      else if (key=="B") uniforms[ "colorCombo" ].value = 16;
+      else if (key=="S"){ if(uniforms[ "morph" ].value == 0.)uniforms[ "morph" ].value = 1.;else uniforms[ "morph" ].value = 0.; }
+      else if (key=="N") uniforms[ "MetaCored" ].value = !uniforms[ "MetaCored" ].value;
+      else if (key=="L")
       {if(zoomAtl41){zoom=1.;coordX=0.; coordY=0.;}zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
-      else if (key=="C"||key.toLowerCase()=="c")center=!center;
-      else if (key=="V"||key.toLowerCase()=="v")textON=!textON;
+      else if (key=="C")center=!center;
+      else if (key=="V")textON=!textON;
 
-
-      else if (key=="Z"||key.toLowerCase()=="z") {
-        if (pointed==true)pointed=false;
-        else pointed = true;}
 
       else if (event.keyCode==190) uniforms[ "metronome" ].value *= 1.1; //keycode for <
       else if (event.keyCode==188&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
 
-      else if (key=="I"||key.toLowerCase()=="i") zoomOutRatchetThreshold/= 1.212121;
-      else if (key=="O"||key.toLowerCase()=="o") zoomOutRatchetThreshold*= 1.212121;
+      else if (key=="I") zoomOutRatchetThreshold/= 1.212121;
+      else if (key=="O") zoomOutRatchetThreshold*= 1.212121;
       
             
-            else if (key=="P"||key.toLowerCase()=="p"){
+            else if (key=="P"){
                 
                 framesLong=FPS;
                 computeFPS=true;
                 
             }
             
-            else if (key=="H"||key.toLowerCase()=="h"){
+            else if (key=="H"){
                 fullscreen=!fullscreen
                 if(fullscreen)openFullscreen();
                 else closeFullscreen();
             }
                 
-      else if (key==" "||key.toLowerCase()==" ")
+      else if (key==" ")
       {
         if (onO)onO=false;
         else onO = true;
@@ -95,11 +90,7 @@ function callKey(event){
 
         if(uniforms[ "free" ].value) window.zoomCageSize=100000000000000000.;
         else window.zoomCageSize=1.5;
-        {     //       window.zoomCageSize=1.5;
-            //window.movementRate=1.;
-            
-        }
-        //console.log(String.fromCharCode(event.which || event.keyCode));
+      
 
     }
             
