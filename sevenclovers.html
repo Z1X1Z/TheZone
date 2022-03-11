@@ -40,7 +40,10 @@
                 window.key=androidGetKey[scan];
                 scan--;
                 }
-         window.dispatchEvent("keydown");
+         let event = new Event("keydown", {
+                 bubbles: true
+               });
+         window.dispatchEvent(event);
          }
     </script>
 
