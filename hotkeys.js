@@ -20,11 +20,11 @@ function getKey(){
         window.key=androidGetKey[scan];
         scan--;
         }
-    callKey();
- }
+    window.dispatchEvent(new KeyboardEvent('keydown', {
+      'key': window.key
+    })); }
 
-if(!mobile)window.addEventListener('keydown', function(event) {
-    callKey(event)}, false);
+if(!mobile)window.addEventListener('keydown', function(event) {callKey(event)}, false);
 function callKey(event){
       let key = String.fromCharCode(event.which || event.keyCode);
       if(!window.key)window.key="";
