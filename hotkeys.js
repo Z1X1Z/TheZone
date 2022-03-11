@@ -25,21 +25,20 @@ var key = "";
 }
 
 if(!mobile)window.addEventListener('keydown', function(event) {callKey(event)}, false);
+
 function callKey(event){
       let key = event.key.toUpperCase();
       var x = parseInt(String.fromCharCode( event.keyCode));
       if (x>0)
-        {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez); onWindowResize();//onWindowResize for Android to register change in resolution
-            
-        }
+        {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
       else if (x==0)
         {window.movementRate=.5}
       else if (key=="À"||key.toLowerCase()=="`")
         {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
-      else if (event.key.toUpperCase=="M"||key.toLowerCase()=="m")        {    invert *= -1;}
+      else if (event.key.toUpperCase=="M") invert *= -1;
 
       else if (key=="Q") uniforms[ "colorCombo" ].value = 1;
-      else if (key=="W")   uniforms[ "colorCombo" ].value = 2;
+      else if (key=="W") uniforms[ "colorCombo" ].value = 2;
       else if (key=="E") uniforms[ "colorCombo" ].value = 3;
       else if (key=="R") uniforms[ "colorCombo" ].value = 4;
       else if (key=="T") uniforms[ "colorCombo" ].value = 5;
@@ -54,8 +53,7 @@ function callKey(event){
       else if (key=="B") uniforms[ "colorCombo" ].value = 16;
       else if (key=="S"){ if(uniforms[ "morph" ].value == 0.)uniforms[ "morph" ].value = 1.;else uniforms[ "morph" ].value = 0.; }
       else if (key=="N") uniforms[ "MetaCored" ].value = !uniforms[ "MetaCored" ].value;
-      else if (key=="L")
-      {if(zoomAtl41){zoom=1.;coordX=0.; coordY=0.;}zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
+      else if (key=="L"){if(zoomAtl41){zoom=1.;coordX=0.; coordY=0.;}zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
       else if (key=="C")center=!center;
       else if (key=="V")textON=!textON;
 
@@ -65,35 +63,26 @@ function callKey(event){
 
       else if (key=="I") zoomOutRatchetThreshold/= 1.212121;
       else if (key=="O") zoomOutRatchetThreshold*= 1.212121;
-      
-            
-            else if (key=="P"){
-                
+    
+      else if (key=="P"){
                 framesLong=FPS;
                 computeFPS=true;
-                
             }
-            
-            else if (key=="H"){
+      else if (key=="H"){
                 fullscreen=!fullscreen
                 if(fullscreen)openFullscreen();
                 else closeFullscreen();
             }
-                
       else if (key==" ")
       {
         if (onO)onO=false;
         else onO = true;
       }
-      else if (key=="="||key.toLowerCase()=="+")
-        {window.movementRate *=1.11111111;}
-      else if ( event.keyCode==173||key.toLowerCase()=="-")
-        {window.movementRate /=1.11111111;}
+      else if (key=="="||key.toLowerCase()=="+")window.movementRate *=1.11111111;
+      else if ( event.keyCode==173||key.toLowerCase()=="-")window.movementRate /=1.11111111;
 
-        if(uniforms[ "free" ].value) window.zoomCageSize=100000000000000000.;
-        else window.zoomCageSize=1.5;
-      
-
+      if(uniforms[ "free" ].value) window.zoomCageSize=100000000000000000.;
+      else window.zoomCageSize=1.5;
     }
             
             
