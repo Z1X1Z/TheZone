@@ -80,10 +80,14 @@ sound2.setVolume(volume*(1.-((angleSound-initialAngleSound))/(2.*pi)));
 }
 let c = document.getElementById( 'container' );
 if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)){
-  c.addEventListener('touchstart', function(e) {startSound(e.touches[0]);}, false);
-  c.addEventListener('touchmove', function(e) {followSound(e.touches[0]);}, false);
-  c.addEventListener('touchend', function(e){ sound.stop();sound2.stop()}, false);
-  c.addEventListener('touchcancel', function(e){ sound.stop();sound2.stop()}, false);
+  c.addEventListener('touchstart', function(e) {e.preventDefault(); e.stopImmediatePropagation();
+                                                startSound(e.touches[0]);}, false);
+  c.addEventListener('touchmove', function(e) {e.preventDefault();e.stopImmediatePropagation();
+                                                followSound(e.touches[0]);}, false);
+  c.addEventListener('touchend', function(e){ e.preventDefault();e.stopImmediatePropagation()
+                                            sound.stop();sound2.stop()}, false);
+  c.addEventListener('touchcancel', function(e){ e.preventDefault();e.stopImmediatePropagation()
+                                            ysound.stop();sound2.stop()}, false);
 }
 else{
  c.addEventListener('mousedown', startSound, false);
