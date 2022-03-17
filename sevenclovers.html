@@ -49,6 +49,7 @@
 
             uniform float time2dance;
             uniform int fourCreats;
+            uniform bool helm;
 
             uniform bool free;
             uniform bool MetaCored;
@@ -538,6 +539,8 @@ vec3 xtol(vec2 s, vec2 t){
 
 
           vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t);}
+        vec3 bodySmall(vec2 p, vec2 t){return torso(p*2.,t)+musculature(p*2.,t)+robe(p*2.,t)+legs(p*4.,t);heart(p,t);}
+
           vec3 bod(vec2 p, vec2 t){t*=zoom;return body(p,t)+heart(p,t);}
           vec3 manny(vec2 p, vec2 t){return body(p,t)+heart(p,t)+face(p,vec2(0.));}//+shiny(p,vec2(time,0.));}
           vec3 mannyX(vec2 p, vec2 t){return body(p,t)+excelsior(p,vec2(time*metronome,0.));}
@@ -551,6 +554,15 @@ vec3 xtol(vec2 s, vec2 t){
                     ox(p+vec2(spacing.x,-spacing.y),vec2(-1.,0.))+bod(p+vec2(spacing.x,-spacing.y),t)+
                     man(p-spacing,vec2(-1.,0.))+bod(p-spacing,t)  ;
         }
+                    vec3 fourCreaturesSmall(vec2 p, vec2 t){
+                              vec2 spacing = vec2(1.5,4.);
+                              //p.x+=1.;
+
+                              return eaglePerched(p+spacing,vec2(-1.,0.))+bodySmall(p+spacing,t)+
+                              lion(p+vec2(-spacing.x,spacing.y),vec2(-1.,0.))+bodySmall(p+vec2(-spacing.x,spacing.y),t)+
+                              ox(p+vec2(spacing.x,-spacing.y),vec2(-1.,0.))+bodySmall(p+vec2(spacing.x,-spacing.y),t)+
+                              man(p-spacing,vec2(-1.,0.))+bodySmall(p-spacing,t)  ;
+                  }
           vec2 spin(vec2 p,float time_){
           float pixelangle = -atan(p.y,p.x)-(time_)/6.+3.14/8.;
           float pixeldistance = pow((p.y*p.y+p.x*p.x),.5);
@@ -566,7 +578,7 @@ vec3 xtol(vec2 s, vec2 t){
            vec2 bg2 =p/3.;
 
           float rate = 1.;
-          vec2 t =vec2(-sin(rate*time2dance)/50.,-sin(time2dance*(rate*gr)*3.)/30.);
+          vec2 t =vec2(-sin(rate*time2dance)/25.,-sin(time2dance*(rate*gr))/15.);
           //vec2 fl=vec2(-1.,-sin(time));//vec2(-sin(rate*time),-sin(time*(rate*gr)*3.));
           vec3 zoomer;
           bg=freed(bg*zoom+coords.yx);
@@ -598,7 +610,8 @@ vec3 xtol(vec2 s, vec2 t){
                                                    
           vec3 creatures,b;
           p.x+=.5;
-          
+          vec3 bridge=vec3(0.);
+                                                         if(helm)bridge=fourCreaturesSmall(p,t);
           if(fourCreats<0){creatures=fourCreatures((bg)*4.,t);  b=bride((bg-vec2(.125,0.))*12.,vec2(time2dance));}
           vec3 mny=vec3(0.);
           vec3 m=vec3(0.);
@@ -606,7 +619,7 @@ vec3 xtol(vec2 s, vec2 t){
               if(metronome<1.) {mny = bride2manny(p*2.,vec2(time2dance))+robeL(p,vec2(time2dance))*.95;m=mny;}
               else   mny = mannyX(p,t);
               }
-          gl_FragColor=vec4(mny+creatures+b+
+          gl_FragColor=vec4(mny+creatures+b+bridge+
                             clamp((zoomer+heart((p+vec2(.5,0.))/2.,t))-(m.r+m.b+m.g+creatures.r+creatures.g+creatures.b)*100.,.0,1.)
                     ,1.);}
         </script>

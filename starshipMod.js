@@ -283,6 +283,8 @@ function init() {
         morph: {value: 0.0 },
 
       fourCreats: {value: 1 },
+       helm: {value: false },
+
       metronome: {value: .99 },
       time2dance: {value: 0.0 },
       resolution: {value: new THREE.Vector2() },
