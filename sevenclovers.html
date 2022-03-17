@@ -555,9 +555,8 @@ vec3 xtol(vec2 s, vec2 t){
                     man(p-spacing,vec2(-1.,0.))+bod(p-spacing,t)  ;
         }
                     vec3 fourCreaturesSmall(vec2 p, vec2 t){
-                              vec2 spacing = vec2(1.5,4.);
+                              vec2 spacing = vec2(resolution.y/min(resolution.x,resolution.y),resolution.x/min(resolution.x,resolution.y))*1.25;
                               //p.x+=1.;
-
                               return eaglePerched(p+spacing,vec2(-1.,0.))+bodySmall(p+spacing,t)+
                               lion(p+vec2(-spacing.x,spacing.y),vec2(-1.,0.))+bodySmall(p+vec2(-spacing.x,spacing.y),t)+
                               ox(p+vec2(spacing.x,-spacing.y),vec2(-1.,0.))+bodySmall(p+vec2(spacing.x,-spacing.y),t)+
