@@ -1,3 +1,5 @@
+
+
 function hk() {
   var x = document.createElement("INPUT");
   x.setAttribute("type", "text");
@@ -24,7 +26,8 @@ var key = "";
     callKey(new KeyboardEvent('keydown', {'key': key, "keyCode":key.charCodeAt(0)}));
 }
 
-if(!mobile)window.addEventListener('keydown', function(event) {callKey(event)}, false);
+if(!(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))//if not mobile
+window.addEventListener('keydown', function(event) {callKey(event)}, false);
 
 function callKey(event){
       let key = event.key.toUpperCase();
@@ -56,6 +59,7 @@ function callKey(event){
       else if (key=="L"){if(zoomAtl41){zoom=1.;coordX=0.; coordY=0.;}zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
       else if (key=="C")center=!center;
       else if (key=="V")textON=!textON;
+      else if (key=="Z")uniforms[ "helm" ].value = !uniforms[ "helm" ].value;
 
 
       else if (event.keyCode==190||event.key=="."||event.key==">") uniforms[ "metronome" ].value *= 1.1; //keycode for <
