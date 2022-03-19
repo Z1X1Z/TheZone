@@ -38,7 +38,7 @@ function callKey(event){
         {window.movementRate=.5}
       else if (key=="À"||key.toLowerCase()=="`")
         {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
-      else if (event.key.toUpperCase=="M") invert *= -1;
+      else if (key=="M") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
 
       else if (key=="Q") uniforms[ "colorCombo" ].value = 1;
       else if (key=="W") uniforms[ "colorCombo" ].value = 2;
