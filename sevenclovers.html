@@ -544,7 +544,7 @@ vec3 xtol(vec2 s, vec2 t){
 
 
           vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t);}
-        vec3 bodySmall(vec2 p, vec2 t){return torso(p*2.,t)+musculature(p*2.,t)+robe(p*2.,t)+legs(p*4.,t);heart(p,t);}
+        vec3 bodySmall(vec2 p, vec2 t){return torso(p*2.,t)+musculature(p*2.,t)+robe(p*2.,t)+legs(p*4.,t)+heart(p,t);}
 
           vec3 bod(vec2 p, vec2 t){t*=zoom;return body(p,t)+heart(p,t);}
           vec3 manny(vec2 p, vec2 t){return body(p,t)+heart(p,t)+face(p,vec2(0.));}//+shiny(p,vec2(time,0.));}
