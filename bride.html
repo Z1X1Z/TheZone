@@ -1,12 +1,13 @@
-on our origins-holy new jerusalem
-<html lang="en">
+<!DOCTYPE html>
     <head>
-        <title>Bride</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+            <title>Bride</title>
+
         <link type="text/css" rel="stylesheet" href="main.css">
     </head>
     <body>
+        on our origins-holy new jerusalem
 
         <div id="container"></div>
         <script id="vertexShader" type="x-shader/x-vertex">
@@ -14,7 +15,6 @@ on our origins-holy new jerusalem
             varying vec2 vUv;
         uniform vec2 resolution;
             void main()    {
-
                 vUv = uv;
                 gl_Position = vec4( position, 1.0 );
             }
@@ -54,7 +54,7 @@ void main(){
     g.x-=6.;
     z=g;
     for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>20.)break;
-    else {z=vec2(((z.x*z.x-z.y*z.y)-g.x),(2.0*z.x*z.y-g.y));
+    else {z=vec2(((z.x*z.x-z.y*z.y)-g.x-sin(time*1.618)/5.),(2.0*z.x*z.y-g.y-sin(time2/2.)/5.));
           n+=0.1;}
 //vv eye lights vv
     g=p;
