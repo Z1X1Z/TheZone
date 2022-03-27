@@ -60,7 +60,11 @@ function callKey(event){
       else if (key=="C")center=!center;
       else if (key=="V")textON=!textON;
       else if (key=="Z")uniforms[ "helm" ].value = !uniforms[ "helm" ].value;
-
+      else if (key=="J"){
+          if(uniforms[ "carousel" ].value==0)uniforms[ "carousel" ].value=1;
+          else if(uniforms[ "carousel" ].value==1)uniforms[ "carousel" ].value=-1;
+          else if(uniforms[ "carousel" ].value==-1)uniforms[ "carousel" ].value=0;
+      }
 
       else if (event.keyCode==190||event.key=="."||event.key==">") uniforms[ "metronome" ].value *= 1.1; //keycode for <
       else if ((event.keyCode==188||event.key==","||event.key=="<")&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >

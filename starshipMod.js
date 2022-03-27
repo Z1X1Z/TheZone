@@ -178,6 +178,16 @@ let reset = 6;
 let on;
 let spirafreq=1;
 var totalAMP;
+                           
+                           function spin(f, t)
+                           {    //https://en.wikipedia.org/wiki/Rotation_matrix
+                               var angle =t;
+                               var fxb=f[0];
+                               f[0]=f[0]*Math.cos(angle)-f[1]*Math.sin(angle);
+                            f[1]=fxb*Math.sin(angle)+f[1]*Math.cos(angle);
+                            return f;
+                           }
+                           let coo;
 function  move()
 {
     if (isNaN(coordX)||(!zoomAtl41&&coordX>4.))coordX=0.;
@@ -215,8 +225,10 @@ angle = ((angle-30+180)/360*2*pi);
    // angle = (maxInt24/24*2*pi);
 angle[f] = angle;
 
-  //d_x = -Math.sin(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
-  //d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
+         //d_x = -Math.sin(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
+         //d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
+              
+
          d_x = -Math.sin(-angle);
          d_y = -Math.cos(-angle);
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
@@ -231,7 +243,6 @@ if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize){
                if (Math.abs(by)>window.zoomCageSize)coordY*=1.-(Math.abs(by)-window.zoomCageSize)/25.;
                if (Math.abs(bx)>window.zoomCageSize)coordX*=1.-(Math.abs(bx)-window.zoomCageSize)/25.;
   }
-
 cx[f] = 0;
 cy[f] = 0;
 xPerp[f] = -Math.sin(-angle+pi/2)*radius;
@@ -285,6 +296,7 @@ function init() {
       fourCreats: {value: 1 },
   helm: {value: false },
   wheel: {value: false },
+  carousel: {value: 0.0 },
 
       metronome: {value: .99 },
       time2dance: {value: 0.0 },
@@ -493,10 +505,16 @@ if(!zoomOutEngage){
        if(zoom<.0000000000000000000000001)zoom = 1.;
 
 
-
-  uniforms.coords.value.x = coordX;
-  uniforms.coords.value.y = coordY;
-
+              
+if(uniforms.carousel.value!=0.){
+                 coo=spin([coordX,coordY],uniforms.carousel.value*timestamp/1000.);
+        uniforms.coords.value.x = coo[0];
+         uniforms.coords.value.y = coo[1];
+                }
+else{
+         uniforms.coords.value.x = coordX;
+         uniforms.coords.value.y = coordY;
+     }
             if(zoomAtl41)zoom=.025;
 
   uniforms[ "zoom" ].value = zoom;

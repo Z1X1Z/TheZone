@@ -56,6 +56,8 @@
             uniform bool MetaCored;
             uniform float morph;
 
+            uniform float carousel;
+
             float zin(float x){return -sin(x);}
             float coz(float x){return -cos(x);}
                       const float gr=-cos(216.)/-cos(612.)-1.;
@@ -414,7 +416,17 @@
 
                         
         
-        vec3 tol(vec2 p, vec2 t){
+                        vec2 spin2(vec2 f, float t)
+                        {    //https://en.wikipedia.org/wiki/Rotation_matrix
+                            float angle =t;
+                            float fxb=f.x;
+                            f.x=f.x*cos(angle)-f.y*sin(angle);
+                         f.y=fxb*sin(angle)+f.y*cos(angle);
+                         return f;
+                        }
+       vec3 tol(vec2 p, vec2 t){
+            if(carousel!=0.)p=spin2(p,carousel*time);
+                  
             float cored = log(zoom*3./2.)/log(.5)+1.;
             float c = length(p);
             float loops=1.;
