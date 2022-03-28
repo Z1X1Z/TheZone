@@ -1,3 +1,4 @@
+
 function loadScript(url, callback)
 {
     // Adding the script tag to the head as suggested before
@@ -10,7 +11,8 @@ function loadScript(url, callback)
     script.onreadystatechange = callback;
     script.onload = callback;
     // Fire the loading
-    head.appendChild(script);
+   // head.appendChild(script);
+    startWhenLoaded();
 }
 let hyperdriveTUNA = {
 Overdrive:{
@@ -37,6 +39,7 @@ function initialize(){
     sound =  new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
      sound2 = new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
 }
+function startWhenLoaded(){if(Wad)initialize();else startWhenLoaded();}
 
 var cdnSwitch="wad.min.js";
 if ( window.sessionStorage.getItem("alreadyReset")=="t"){if (window.online)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0"
