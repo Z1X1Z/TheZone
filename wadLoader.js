@@ -1,3 +1,4 @@
+function startWhenLoaded(){if(typeof Wad=="function")initialize();else setTimeout(startWhenLoaded,100);}
 
 function loadScript(url, callback)
 {
@@ -8,10 +9,10 @@ function loadScript(url, callback)
     script.src = url;
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
-   // script.onreadystatechange = callback;
-   // script.onload = callback;
+    //script.onreadystatechange = callback;
+    //script.onload = callback;
     // Fire the loading
-   head.appendChild(script);
+    head.appendChild(script);
     startWhenLoaded();
 }
 let hyperdriveTUNA = {
@@ -39,10 +40,11 @@ function initialize(){
     sound =  new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
      sound2 = new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
 }
-function startWhenLoaded(){if(Wad)initialize();else startWhenLoaded();}
 
 var cdnSwitch="wad.min.js";
-if ( window.sessionStorage.getItem("alreadyReset")=="t"){if (window.online)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0"
+if ( window.sessionStorage.getItem("alreadyReset")=="t")
+{
+    if (window.online)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0"
 loadScript(cdnSwitch,initialize);
 }
 
