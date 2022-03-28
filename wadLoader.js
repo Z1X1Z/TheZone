@@ -1,7 +1,7 @@
 function loadScript(url, callback)
 {
     // Adding the script tag to the head as suggested before
-    var head = document.head;
+    var body = document.body;
     var script = document.getElementById('wadJSscript');
     script.type = 'application/javascript';
     script.src = url;
@@ -10,7 +10,7 @@ function loadScript(url, callback)
     script.onreadystatechange = callback;
     script.onload = callback;
     // Fire the loading
-    head.appendChild(script);
+    body.appendChild(script);
 }
 let hyperdriveTUNA = {
 Overdrive:{

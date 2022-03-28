@@ -42,7 +42,7 @@ function loadScript(url, callback)
 {
     
     // Adding the script tag to the head as suggested before
-    var head = document.head;
+    var body = document.body;
     var script = document.getElementById('threeJSscript');
     script.type = 'text/javascript';
     script.src = url;
@@ -51,7 +51,7 @@ function loadScript(url, callback)
     script.onreadystatechange = callback;
     script.onload = callback;
     // Fire the loading
-    head.appendChild(script);
+    body.appendChild(script);
 }
 
 //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
