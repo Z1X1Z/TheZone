@@ -1,5 +1,3 @@
-function startWhenLoaded(){if(typeof Wad=="function")initialize();else setTimeout(startWhenLoaded,100);}
-
 function loadScript(url, callback)
 {
     // Adding the script tag to the head as suggested before
@@ -9,11 +7,10 @@ function loadScript(url, callback)
     script.src = url;
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
-    //script.onreadystatechange = callback;
-    //script.onload = callback;
+    script.onreadystatechange = callback;
+    script.onload = callback;
     // Fire the loading
     head.appendChild(script);
-    startWhenLoaded();
 }
 let hyperdriveTUNA = {
 Overdrive:{
@@ -42,9 +39,7 @@ function initialize(){
 }
 
 var cdnSwitch="wad.min.js";
-if ( window.sessionStorage.getItem("alreadyReset")=="t")
-{
-    if (window.online)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0"
+if ( window.sessionStorage.getItem("alreadyReset")=="t"){if (window.online)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0"
 loadScript(cdnSwitch,initialize);
 }
 
