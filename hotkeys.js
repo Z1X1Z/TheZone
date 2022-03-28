@@ -1,4 +1,4 @@
-function initWhenReady(){if(THREE)init();else initWhenReady}
+function initWhenReady(){if(THREE)init();else initWhenReady()}
 
 function hk() {
   var x = document.createElement("INPUT");
