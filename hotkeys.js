@@ -1,4 +1,3 @@
-function initWhenReady(){if(THREE)init();else initWhenReady()}
 
 function hk() {
   var x = document.createElement("INPUT");
@@ -6,8 +5,7 @@ function hk() {
   x.setAttribute("id", "hotkeys");
   x.setAttribute("placeholder", "Hotkeys!");
   x.setAttribute("oninput", "getKey()");
-  initWhenReady();
-  //document.getElementById("HK").appendChild(x);
+  document.getElementById("HK").appendChild(x);
     
 }
 if(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)

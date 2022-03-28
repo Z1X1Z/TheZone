@@ -35,6 +35,7 @@ let center = false;
            //trailLength = 144;
            mobile=true;
        }
+                  function initWhenReady(){if(THREE)init();else initWhenReady();}
 
 //load threeJS then call startMic()
 //vvvvmodified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
@@ -48,10 +49,13 @@ function loadScript(url, callback)
     script.src = url;
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
-    script.onreadystatechange = callback;
-    script.onload = callback;
+    
+    //script.onreadystatechange = callback;
+    //script.onload = callback;
+    
     // Fire the loading
     head.appendChild(script);
+    initWhenReady();
 }
 
 //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
