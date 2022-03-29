@@ -506,21 +506,21 @@ if(!zoomOutEngage){
 
 
               
-if(uniforms.carousel.value!=0.){
-                 coo=spin([coordX,coordY],uniforms.carousel.value*timestamp/1000.);
-        uniforms.coords.value.x = coo[0];
-         uniforms.coords.value.y = coo[1];
-                }
-else{
-         uniforms.coords.value.x = coordX;
-         uniforms.coords.value.y = coordY;
-     }
+
             if(zoomAtl41)zoom=.025;
 
   uniforms[ "zoom" ].value = zoom;
   uniforms[ "time" ].value = timestamp/1000.;
   uniforms[ "time2dance" ].value += Math.abs(totalAMP)*4.;
-
+              if(uniforms.carousel.value!=0.){
+                               coo=spin([coordX,coordY],uniforms.carousel.value*uniforms[ "time" ].value);
+                      uniforms.coords.value.x = coo[0];
+                       uniforms.coords.value.y = coo[1];
+                              }
+              else{
+                       uniforms.coords.value.x = coordX;
+                       uniforms.coords.value.y = coordY;
+                   }
   if (micOn)analyser.getByteFrequencyData(  dataArray);
 
    var maxTestar=0.;
