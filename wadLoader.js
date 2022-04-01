@@ -10,7 +10,7 @@ function loadScript(url, callback)
     script.onreadystatechange = callback;
     script.onload = callback;
     // Fire the loading
-    body.appendChild(script);
+   // body.appendChild(script);
 }
 let hyperdriveTUNA = {
 Overdrive:{
