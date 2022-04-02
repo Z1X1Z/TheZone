@@ -13,15 +13,17 @@
             <div id="HK"></div>
             <div id="textWindow"></div>
         </div>
-        
-        <!--
-         https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_text_create
-        -->
- 
-
 
     <div id="container"></div>
 
+    
+    
+    <script src="OFFLINEonlineSwitch.js" async></script>
+    <script id="threeJSscript" async></script>
+    <script id="wadJSscript" async></script>
+    <script src="hotkeys.js" async></script>
+    <script src="wadLoader.js" async></script>
+    
         <script id="vertexShader" type="x-shader/x-vertex">
 
                 varying vec2 vUv;
@@ -650,11 +652,7 @@ vec3 xtol(vec2 s, vec2 t){
                             clamp((zoomer)-(m.r+m.b+m.g+creatures.r+creatures.g+creatures.b)*100.,.0,1.)
                     ,1.);}
         </script>
-        <script src="OFFLINEonlineSwitch.js" async></script>
-        <script id="threeJSscript" async></script>
         <script src="starshipMod.js" async></script>
-        <script id="wadJSscript" async></script>
-        <script src="wadLoader.js" async></script>
-        <script src="hotkeys.js" async></script>
+        
     </body>
 </html>
