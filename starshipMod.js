@@ -53,7 +53,10 @@ function loadScript(url, callback)
     // Fire the loading
     //body.appendChild(script);
 }
+                  
+                  function stallTIllTHREE(){if(typeof THREE=="object")startMic();else setTimeout(stallTIllTHREE,100);}
 
+                  
 //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
                   
                   var load = function() {
@@ -66,15 +69,16 @@ function loadScript(url, callback)
                                           }
                       else{
                           window.sessionStorage.setItem('alreadyReset', "f");
+                          document.getElementById('threeJSscript').src=cdnSwitchThree;
+                          stallTIllTHREE();
                           startMic();
                       }
-
-                  
 }
-                  
-            var cdnSwitch="threer127.min.js";
-       if (window.online)cdnSwitch="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js"
-loadScript(cdnSwitch,load);
+    var cdnSwitchThree="threer127.min.js";
+    if (window.online)cdnSwitchThree="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js"
+
+
+load();
 //key press handling vvvv
 var pointed=false;
 let zoomAtl41=false;//watch for the 1 and the l
