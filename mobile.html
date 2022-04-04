@@ -20,7 +20,10 @@
                     <script id="wadJSscript" ></script>
                     <script src="hotkeys.js"></script>
                     <script src="wadLoader.js" dynamic></script>
-
+                    <script>
+                        //block process for Wad loading
+                        function stallTillWad(){if(typeof Wad=="function");else setTimeout(stallTillWad,10);}
+                        stallTillWad();
 
         <div id="container"></div>
         
