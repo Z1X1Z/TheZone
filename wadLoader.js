@@ -15,7 +15,7 @@ function loadScript(url, callback)
     
     stallTillWad()
 }
-function stallTillWad(){if(typeof Wad=="function")initialize();else setTimeout(stallTillWad,100);}
+function stallTillWad(){if(typeof Wad=="function")initialize();else setTimeout(stallTillWad,1);}
 
 let hyperdriveTUNA = {
 Overdrive:{
