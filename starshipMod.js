@@ -54,7 +54,7 @@ function loadScript(url, callback)
     //body.appendChild(script);
 }
                   
-                  function stallTillTHREE(){if(typeof THREE=="object")startMic();else setTimeout(stallTIllTHREE,100);}
+                  function stallTillTHREE(){if(typeof THREE=="object")startMic();else setTimeout(stallTillTHREE,100);}
 
                 
 //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
