@@ -10,10 +10,10 @@ function loadScript(url, callback)
     script.onreadystatechange = callback;
     script.onload = callback;
     // Fire the loading
-   // body.appendChild(script);
+    body.appendChild(script);
     
     
-    stallTillWad()
+   // stallTillWad()
     
 }
 function stallTillWad(){if(typeof Wad=="function")initialize();else setTimeout(stallTillWad,10);}
