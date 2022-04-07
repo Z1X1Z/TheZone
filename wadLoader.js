@@ -7,16 +7,16 @@ function loadScript(url, callback)
     script.src = url;
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
-    script.onreadystatechange = callback;
-    script.onload = callback;
+   // script.onreadystatechange = callback;
+    //script.onload = callback;
     // Fire the loading
     body.appendChild(script);
     
     
-   // stallTillWad()
+    stallTillWad()
     
 }
-function stallTillWad(){if(typeof Wad=="function")initialize();else setTimeout(stallTillWad,10);}
+function stallTillWad(){if(typeof Wad=="function")initialize();else setTimeout(stallTillWad,100);}
 
 let hyperdriveTUNA = {
 Overdrive:{
