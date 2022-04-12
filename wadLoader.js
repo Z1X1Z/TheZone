@@ -43,7 +43,16 @@ function initialize(){
     for(var o=0;o<10;o++){
     sound[o] =  new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
      sound2[o] = new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
+      
     }
+    
+    try{sound[0].play({wait:1000000});
+        sound2[0].play({wait:1000000});
+        sound[0].stop()
+        sound2[0].stop()
+       }
+    catch{
+}
 }
 
 var cdnSwitch="wad.min.js";
@@ -52,37 +61,51 @@ loadScript(cdnSwitch,initialize);
 }
 
 let initialAngleSound = Array(10);
+initialAngleSound[0]=0;
 function startSound(e){
-    sound[touchNumber.get(e.identifier)].stop();sound2[touchNumber.get(e.identifier)].stop();
-    console.log(touchNumber.get(e.identifier))
+    var id = 0;
+    if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
+        id = touchNumber.get(e.identifier);
+    sound[id].stop();
+    sound2[id].stop();
+
     let correlationForText=document.getElementById("allText").offsetHeight;
     
    let y = e.clientY-(window.innerHeight+correlationForText)/2.;
     let x = e.clientX- window.innerWidth/2.;
        let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
-        initialAngleSound[touchNumber.get(e.identifier)] = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi);
-        let frequency = Math.pow(2.,((initialAngleSound[touchNumber.get(e.identifier)])/pi/2*12+correction)/12.)*220.;
-                                 sound.pitch=frequency;
-                                 sound2.pitch=frequency*2.;
-                                 sound.volume=0.;
-                                 sound2.volume=volume;
-                                 sound[touchNumber.get(e.identifier)].play({env:{attack: .1, release:.02,hold:-1}});
-                                 sound2[touchNumber.get(e.identifier)].play({env:{attack: .1, release:.02,hold:-1}});
+        initialAngleSound[id] = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi);
+        let frequency = Math.pow(2.,((initialAngleSound[id])/pi/2*12+correction)/12.)*220.;
+                                 console.log(volume)
+                                 //sound[id].pitch=frequency;
+                                 //sound2[id].pitch=frequency*2.;
+                                 //sound[id].volume=0.;
+                                 //sound2[id].volume=volume;
+                                 try{sound[id].play({env:{attack: .1, release:.02,hold:-1},pitch:frequency,volume:0.});
+                                 sound2[id].play({env:{attack: .1, release:.02,hold:-1},pitch:frequency*2.,volume:volume});
+                                    }
+                                 catch{
+        }
 }
                                  
 function followSound(e){
+            
+            var id = 0;
+            if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
+                id = touchNumber.get(e.identifier);
+            
 let correlationForText=document.getElementById("allText").offsetHeight;
 
 let y = e.clientY-(window.innerHeight+correlationForText)/2.;
 let x = e.clientX-window.innerWidth/2.;
 let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
 let angleSound = Math.atan2(y,x);
-angleSound=(angleSound-initialAngleSound[touchNumber.get(e.identifier)]+pi/2.+4.*pi)%(2*pi)+initialAngleSound[touchNumber.get(e.identifier)];
+angleSound=(angleSound-initialAngleSound[id]+pi/2.+4.*pi)%(2*pi)+initialAngleSound[id];
 let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*220.;
-     sound[touchNumber.get(e.identifier)].setPitch(frequency);
-     sound2[touchNumber.get(e.identifier)].setPitch(2.*frequency);
-     sound[touchNumber.get(e.identifier)].setVolume(volume*(((angleSound-initialAngleSound[touchNumber.get(e.identifier)]))/(2.*pi)));
-     sound2[touchNumber.get(e.identifier)].setVolume(volume*(1.-((angleSound-initialAngleSound[touchNumber.get(e.identifier)]))/(2.*pi)));
+     sound[id].setPitch(frequency);
+     sound2[id].setPitch(2.*frequency);
+     sound[id].setVolume(volume*(((angleSound-initialAngleSound[id]))/(2.*pi)));
+     sound2[id].setVolume(volume*(1.-((angleSound-initialAngleSound[id]))/(2.*pi)));
                                       
                                      // sound.play({label:touchNumber,pitch:frequency, volume*(((angleSound-initialAngleSound[touchNumber]))/(2.*pi))},{timeConstant:0.});
                                                         //  sound2.play({label:touchNumber,pitch:frequency*2.,volume*(1.-((angleSound-initialAngleSound[touchNumber]))/(2.*pi))},{timeConstant:0.});
@@ -133,7 +156,7 @@ else{
     
  c.addEventListener('mousedown', startSound, false);
  c.addEventListener('mousemove', followSound, false);
- c.addEventListener('mouseup', function(e){ sound.stop();sound2.stop()}, false);
+ c.addEventListener('mouseup', function(e){ sound[0].stop();sound2[0].stop()}, false);
 }
 
 
