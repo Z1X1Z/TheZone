@@ -101,14 +101,14 @@ if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 
   container.addEventListener('touchmove', function(e) {
       for(var o=0; o<e.changedTouches.length; o++){
           e.preventDefault(); e.stopImmediatePropagation();
-          touchNumber.set(e.changedTouches[o].identifier,o); followSound(e.changedTouches[o]);}
+          followSound(e.changedTouches[o]);}
   }
       , false);
       
   container.addEventListener('touchend', function(e){
       e.preventDefault(); e.stopImmediatePropagation();
       for(var o=0; o<e.changedTouches.length; o++)
-        {sound[touchNumber.get(e.changedTouches[o].identifier)].stop();sound2[e.changedTouches[o].identifier].stop();}
+        {sound[touchNumber.get(e.changedTouches[o].identifier)].stop();sound2[touchNumber.get(e.changedTouches[o].identifier)].stop();}
   }
                              , false);
 
