@@ -53,7 +53,7 @@ loadScript(cdnSwitch,initialize);
 
 let initialAngleSound = Array(10);
 function startSound(e){
-    //sound[touchNumber.get(e.identifier)].stop();sound2[e.identifier].stop();
+    sound[touchNumber.get(e.identifier)].stop();sound2[e.identifier].stop();
     
     let correlationForText=document.getElementById("allText").offsetHeight;
     
@@ -62,7 +62,6 @@ function startSound(e){
        let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
         initialAngleSound[touchNumber.get(e.identifier)] = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi);
         let frequency = Math.pow(2.,((initialAngleSound[touchNumber.get(e.identifier)])/pi/2*12+correction)/12.)*220.;
-                                 //console.log(frequency)
                                  sound.pitch=frequency;
                                  sound2.pitch=frequency*2.;
                                  sound.volume=0.;
@@ -80,7 +79,6 @@ let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,
 let angleSound = Math.atan2(y,x);
 angleSound=(angleSound-initialAngleSound[touchNumber.get(e.identifier)]+pi/2.+4.*pi)%(2*pi)+initialAngleSound[touchNumber.get(e.identifier)];
 let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*220.;
-console.log(frequency)
      sound[touchNumber.get(e.identifier)].setPitch(frequency);
      sound2[touchNumber.get(e.identifier)].setPitch(2.*frequency);
      sound[touchNumber.get(e.identifier)].setVolume(volume*(((angleSound-initialAngleSound[touchNumber.get(e.identifier)]))/(2.*pi)));
