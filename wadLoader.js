@@ -99,8 +99,8 @@ if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 
         
     }, false);
   container.addEventListener('touchmove', function(e) {
-      for(var o=0; o<e.touches.length; o++)
-          touchNumber.set(e.touches[o].identifier,o); followSound(e.changedTouches[o]);}, false);
+      for(var o=0; o<e.changedTouches.length; o++)
+          touchNumber.set(e.changedTouches[o].identifier,o); followSound(e.changedTouches[o]);}, false);
   container.addEventListener('touchend', function(e){
       for(var o=0; o<e.changedTouches.length; o++)
         {sound.stop(String(e.changedTouches[o].identifier));
