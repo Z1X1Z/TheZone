@@ -54,7 +54,7 @@ loadScript(cdnSwitch,initialize);
 let initialAngleSound = Array(10);
 function startSound(e){
     sound[touchNumber.get(e.identifier)].stop();sound2[e.identifier].stop();
-    
+    console.log(touchNumber.get(e.identifier))
     let correlationForText=document.getElementById("allText").offsetHeight;
     
    let y = e.clientY-(window.innerHeight+correlationForText)/2.;
@@ -108,8 +108,7 @@ if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 
   container.addEventListener('touchend', function(e){
       e.preventDefault(); e.stopImmediatePropagation();
       for(var o=0; o<e.changedTouches.length; o++)
-        {sound[touchNumber.get(e.changedTouches[o].identifier)].stop();sound2[e.changedTouches[o].identifier].stop();}
-      
+        {sound[touchNumber.get(e.changedTouches[o].identifier)].stop();sound2[e.changedTouches[o].identifier].stop();}      
   }
                              , false);
 
