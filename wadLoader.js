@@ -76,16 +76,13 @@ function startSound(e){
        let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
         initialAngleSound[id] = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi);
         let frequency = Math.pow(2.,((initialAngleSound[id])/pi/2*12+correction)/12.)*220.;
-                                 console.log(volume)
                                  //sound[id].pitch=frequency;
                                  //sound2[id].pitch=frequency*2.;
                                  //sound[id].volume=0.;
                                  //sound2[id].volume=volume;
-                                 try{sound[id].play({env:{attack: .1, release:.02,hold:-1},pitch:frequency,volume:0.});
+                                 sound[id].play({env:{attack: .1, release:.02,hold:-1},pitch:frequency,volume:0.});
                                  sound2[id].play({env:{attack: .1, release:.02,hold:-1},pitch:frequency*2.,volume:volume});
-                                    }
-                                 catch{
-        }
+        
 }
                                  
 function followSound(e){
