@@ -94,7 +94,7 @@ if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 
     container.addEventListener('touchstart', function(e)
                                {
         e.preventDefault(); e.stopImmediatePropagation();
-        for(var o=0; o<e.changedTouches.length; o++)
+        for(var o=0; o<e.changedTouches.length; o++)if(e.type=="touchstart")
         {touchNumber.set(e.changedTouches[o].identifier,o);startSound(e.changedTouches[o]);}
         
     }, false);
@@ -107,22 +107,28 @@ if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 
       
   container.addEventListener('touchend', function(e){
       e.preventDefault(); e.stopImmediatePropagation();
-      for(var o=0; o<e.changedTouches.length; o++)
+      for(var o=0; o<e.changedTouches.length; o++)if(e.type=="touchend")
         {sound[touchNumber.get(e.changedTouches[o].identifier)].stop();sound2[touchNumber.get(e.changedTouches[o].identifier)].stop();}
   }
                              , false);
 
-    container.addEventListener('touchcancel', function(e){for(var o=0; o<e.changedTouches.length; o++)
-    {
+    container.addEventListener('touchcancel', function(e){
         e.preventDefault(); e.stopImmediatePropagation();
+        
+        for(var o=0; o<e.changedTouches.length; o++)
+        if(e.type=="touchstart")
+    {
         sound[touchNumber.get(e.changedTouches[o].identifier)].stop();
-        sound2[touchNumber.get(e.changedTouches[o].identifier)].stop();}
+        sound2[touchNumber.get(e.changedTouches[o].identifier)].stop();
+        
+    }
         
         
     }, false);
 
 }
 else{
+    
  c.addEventListener('mousedown', startSound, false);
  c.addEventListener('mousemove', followSound, false);
  c.addEventListener('mouseup', function(e){ sound.stop();sound2.stop()}, false);
