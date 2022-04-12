@@ -53,7 +53,7 @@ loadScript(cdnSwitch,initialize);
 
 let initialAngleSound = Array(10);
 function startSound(e){
-    sound[touchNumber.get(e.identifier)].stop();sound2[e.identifier].stop();
+    //sound[touchNumber.get(e.identifier)].stop();sound2[e.identifier].stop();
     
     let correlationForText=document.getElementById("allText").offsetHeight;
     
