@@ -94,12 +94,12 @@ if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 
     container.addEventListener('touchstart', function(e)
                                {
         e.preventDefault(); e.stopImmediatePropagation();
-        for(var o=0; o<e.changedTouches.length; o++)if(e.type=="touchstart")
+        for(var o=0; o<e.changedTouches.length; o++)if(e.changedTouches[o].type=="touchstart")
         {touchNumber.set(e.changedTouches[o].identifier,o);startSound(e.changedTouches[o]);}
         
     }, false);
   container.addEventListener('touchmove', function(e) {
-      for(var o=0; o<e.changedTouches.length; o++)if(e.type='touchmove'){
+      for(var o=0; o<e.changedTouches.length; o++)if(e.changedTouches[o].type='touchmove'){
           e.preventDefault(); e.stopImmediatePropagation();
           followSound(e.changedTouches[o]);}
   }
@@ -107,7 +107,7 @@ if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 
       
   container.addEventListener('touchend', function(e){
       e.preventDefault(); e.stopImmediatePropagation();
-      for(var o=0; o<e.changedTouches.length; o++)if(e.type=="touchend")
+      for(var o=0; o<e.changedTouches.length; o++)if(e.changedTouches[o].type=="touchend")
         {sound[touchNumber.get(e.changedTouches[o].identifier)].stop();sound2[touchNumber.get(e.changedTouches[o].identifier)].stop();}
   }
                              , false);
@@ -116,7 +116,7 @@ if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 
         e.preventDefault(); e.stopImmediatePropagation();
         
         for(var o=0; o<e.changedTouches.length; o++)
-        if(e.type=="touchcancel")
+        if(e.changedTouches[o].type=="touchcancel")
     {
         sound[touchNumber.get(e.changedTouches[o].identifier)].stop();
         sound2[touchNumber.get(e.changedTouches[o].identifier)].stop();
