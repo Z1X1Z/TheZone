@@ -94,34 +94,34 @@ if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 
     container.addEventListener('touchstart', function(e)
                                {
         e.preventDefault(); e.stopImmediatePropagation();
-        for(var o=0; o<e.changedTouches.length; o++)if(e.changedTouches[o].type=="touchstart")
-        {touchNumber.set(e.changedTouches[o].identifier,o);startSound(e.changedTouches[o]);}
+        for(var o=0; o<e.changedTouches.length; o++)
+        {
+            touchNumber.set(e.changedTouches[o].identifier,o);
+            startSound(e.changedTouches[o]);
+            
+        }
         
     }, false);
   container.addEventListener('touchmove', function(e) {
-      for(var o=0; o<e.changedTouches.length; o++)if(e.changedTouches[o].type='touchmove'){
-          e.preventDefault(); e.stopImmediatePropagation();
-          followSound(e.changedTouches[o]);}
+      e.preventDefault(); e.stopImmediatePropagation();
+
+      for(var o=0; o<e.changedTouches.length; o++)
+          followSound(e.changedTouches[o]);
   }
       , false);
       
   container.addEventListener('touchend', function(e){
       e.preventDefault(); e.stopImmediatePropagation();
-      for(var o=0; o<e.changedTouches.length; o++)if(e.changedTouches[o].type=="touchend")
+      for(var o=0; o<e.changedTouches.length; o++)
         {sound[touchNumber.get(e.changedTouches[o].identifier)].stop();sound2[touchNumber.get(e.changedTouches[o].identifier)].stop();}
   }
                              , false);
 
-    container.addEventListener('touchcancel', function(e){
-        e.preventDefault(); e.stopImmediatePropagation();
-        
-        for(var o=0; o<e.changedTouches.length; o++)
-        if(e.changedTouches[o].type=="touchcancel")
+    container.addEventListener('touchcancel', function(e){for(var o=0; o<e.changedTouches.length; o++)
     {
+        e.preventDefault(); e.stopImmediatePropagation();
         sound[touchNumber.get(e.changedTouches[o].identifier)].stop();
-        sound2[touchNumber.get(e.changedTouches[o].identifier)].stop();
-        
-    }
+        sound2[touchNumber.get(e.changedTouches[o].identifier)].stop();}
         
         
     }, false);
