@@ -89,6 +89,7 @@ let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*220.;
                                                           
 
 }
+                                                             let cycle=0;
 let c = document.getElementById( 'container' );
 if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)){
     container.addEventListener('touchstart', function(e)
@@ -96,7 +97,8 @@ if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 
         e.preventDefault(); e.stopImmediatePropagation();
         for(var o=0; o<e.changedTouches.length; o++)
         {
-            touchNumber.set(e.changedTouches[o].identifier,o);
+            touchNumber.set(e.changedTouches[o].identifier,cycle);
+            cycle=(cycle+1)%10
             startSound(e.changedTouches[o]);
             
         }
