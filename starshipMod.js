@@ -513,10 +513,10 @@ if(!zoomOutEngage){
             if(zoomAtl41)zoom=.025;
 
   uniforms[ "zoom" ].value = zoom;
-  uniforms[ "time" ].value = timestamp/1000.;
+  uniforms[ "time" ].value = (timestamp/1000.);
   uniforms[ "time2dance" ].value += Math.abs(totalAMP)*4.;
               if(uniforms.carousel.value!=0.){
-                               coo=spin([coordX,coordY],uniforms.carousel.value*uniforms[ "time" ].value);
+                               coo=spin([coordX,coordY],uniforms.carousel.value*Math.fround(uniforms[ "time" ].value)%(Math.PI*2.));
                       uniforms.coords.value.x = coo[0];
                        uniforms.coords.value.y = coo[1];
                               }

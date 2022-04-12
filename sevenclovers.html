@@ -427,7 +427,7 @@
                          return f;
                         }
        vec3 tol(vec2 p, vec2 t){
-            if(carousel!=0.)p=spin2(p,carousel*time);
+            if(carousel!=0.)p=spin2(p,carousel*mod(time,3.1415926535897932384626433832*2.));
                   
             float cored = log(zoom*3./2.)/log(.5)+1.;
             float c = length(p);
