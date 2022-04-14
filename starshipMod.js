@@ -234,9 +234,16 @@ angle[f] = angle;
 
          d_x = -Math.sin(-angle);
          d_y = -Math.cos(-angle);
+         var spunD = [d_x,d_y];
+         
+                    if(uniforms.carousel.value!=0.)
+                                      spunD=spin(spunD,-uniforms.carousel.value*Math.fround(uniforms[ "time" ].value)%(Math.PI*2.));
+         var d_xS=spunD[0];
+         var d_yS=spunD[1];
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
-    bx=coordX+d_x*MR*zoom*interpolation*window.movementRate;
-  by=coordY+d_y*MR*zoom*interpolation*window.movementRate;
+         
+    bx=coordX+d_xS*MR*zoom*interpolation*window.movementRate;
+  by=coordY+d_yS*MR*zoom*interpolation*window.movementRate;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold&&on){
 
                coordX=bx;
@@ -492,7 +499,7 @@ ZR = Math.E**(Math.log(.5)/zoomFrames*interpolation*window.movementRate);
 if(!zoomOutEngage){
   if (zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&on)zoom *=ZR;
   else if(zoom<1.){zoom /= ZR;
-  if(center){coordX*=(1-zoom)*ZR*8./9.; coordY*=(1-zoom)*ZR*2./3.;}
+  if(center){coordX*=(1-zoom)*ZR*2./3.; coordY*=(1-zoom)*ZR*2./3.;}
   }
 }
   if (zoom>1.)zoom=1.;
@@ -511,14 +518,14 @@ if(!zoomOutEngage){
             if(zoomAtl41)zoom=.025;
 
   uniforms[ "zoom" ].value = zoom;
-  uniforms[ "time" ].value = (timestamp/1000.);
+  uniforms[ "time" ].value = (timestamp/1000.)*window.movementRate*2.;
   uniforms[ "time2dance" ].value += Math.abs(totalAMP)*4.;
-              if(uniforms.carousel.value!=0.){
+             /* if(uniforms.carousel.value!=0.){
                                coo=spin([coordX,coordY],uniforms.carousel.value*Math.fround(uniforms[ "time" ].value)%(Math.PI*2.));
                       uniforms.coords.value.x = coo[0];
                        uniforms.coords.value.y = coo[1];
                               }
-              else{
+              else*/{
                        uniforms.coords.value.x = coordX;
                        uniforms.coords.value.y = coordY;
                    }

@@ -427,7 +427,6 @@
                          return f;
                         }
        vec3 tol(vec2 p, vec2 t){
-            if(carousel!=0.)p=spin2(p,carousel*mod(time,3.1415926535897932384626433832*2.));
                   
             float cored = log(zoom*3./2.)/log(.5)+1.;
             float c = length(p);
@@ -603,16 +602,20 @@ vec3 xtol(vec2 s, vec2 t){
           void main(){
            vec2 p=-((vUv.yx)-.5)/(resolution.xy/max(resolution.x,resolution.y))*6.;
            
-           vec2 bg =p/2.;
-           vec2 bg2 =p/3.;
-
           float rate = 1.;
           vec2 t =vec2(-sin(rate*time2dance)/25.,-sin(time2dance*(rate*gr))/15.);
           //vec2 fl=vec2(-1.,-sin(time));//vec2(-sin(rate*time),-sin(time*(rate*gr)*3.));
           vec3 zoomer;
+          
+          
+          vec2 bg =p/2.;
           bg=freed(bg*zoom+coords.yx);
-          bg2=freed(bg2*zoom+coords.yx);
-
+          
+          vec2 spunC=coords;
+          if(carousel!=0.)spunC=spin2(spunC,carousel*mod(time,3.141592653*2.));
+          vec2 backGround=freed(p.yx/2.*zoom+spunC);
+          if(carousel!=0.)backGround=spin2(backGround,-carousel*mod(time,3.141592653*2.));
+                                backGround=backGround.yx;
           vec2 dance = vec2(0.);
           if (morph>.5)  dance = (
           vec2(-sin(time+time2dance),-sin((time+time2dance)*-1.618))*zoom+
@@ -628,13 +631,13 @@ vec3 xtol(vec2 s, vec2 t){
           vec2 driftCanceller=vec2(dance.x,-dance.y);
           
           
-          if(colorCombo<10)zoomer=tol(bg, dance2);
-          else if (colorCombo==11)zoomer=heartZoom(bg2+vec2(.5,0.)+driftCanceller, dance);
-          else if (colorCombo==13)zoomer=tokogae(bg,vec2(zoom));
-          else if (colorCombo==14)zoomer=TOLTOK(bg,vec2(zoom));
-          else if (colorCombo==15)zoomer=xx(bg,dance2);
-          else if (colorCombo==16)zoomer=xtol(bg,vec2(0.));
-          else if (colorCombo==17)zoomer=body(bg,vec2(-sin(time*20.)/50.,-sin(time*gr*20.)/30.))+robe(bg,vec2(0.))/2.+faceHeights(bg,t)+                                                   heartZoom(bg-vec2(.5,0.)+driftCanceller,dance);
+          if(colorCombo<10)zoomer=tol(backGround, dance2);
+          else if (colorCombo==11)zoomer=heartZoom(backGround+vec2(.5,0.)+driftCanceller, dance);
+          else if (colorCombo==13)zoomer=tokogae(backGround,vec2(zoom));
+          else if (colorCombo==14)zoomer=TOLTOK(backGround,vec2(zoom));
+          else if (colorCombo==15)zoomer=xx(backGround,dance2);
+          else if (colorCombo==16)zoomer=xtol(backGround,vec2(0.));
+          else if (colorCombo==17)zoomer=body(backGround,vec2(-sin(time*20.)/50.,-sin(time*gr*20.)/30.))+robe(backGround,vec2(0.))/2.+faceHeights(backGround,t)+                                                   heartZoom(backGround-vec2(.5,0.)+driftCanceller,dance);
 ;
                                                    
           vec3 creatures,b;

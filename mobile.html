@@ -173,7 +173,6 @@
                          return f;
                         }
        vec3 tol(vec2 p, vec2 t){
-            if(carousel!=0.)p=spin2(p,carousel*mod(time,3.1415926535897932384626433832*2.));
                   
         float cored = log(zoom*3./2.)/log(.5)+1.;
         float c = length(p);
@@ -216,8 +215,16 @@
           //function library: manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin
           void main(){
            vec2 p=-((vUv.yx)-.5)/(resolution.xy/max(resolution.x,resolution.y))*6.;
+           
            vec2 bg =p/2.;
-              p.x+=.5;
+           bg=freed(bg*zoom+coords.yx);
+           
+           vec2 spunC=coords;
+           if(carousel!=0.)spunC=spin2(spunC,-carousel*mod(time,3.141592653*2.));
+           vec2 backGround=freed(p.yx/2.*zoom+spunC);
+           if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time,3.141592653*2.));
+                                               
+                                 p.x+=.5;
           float rate = 1.;
           vec2 t =vec2(-sin(rate*time2dance)/50.,-sin(time2dance*(rate*1.618)*3.)/30.);
           vec2 dance = vec2(0.);
@@ -227,7 +234,7 @@
                                         )
                                         ;
           
-          vec3 zoomer=tol(freed(bg*zoom+coords.yx),dance);
+          vec3 zoomer=tol(backGround.yx,dance);
           vec3 mny=manny(p,t);
           gl_FragColor=vec4(mny+
                             clamp(zoomer-(mny.r+mny.b+mny.g)*100.,.0,1.)
