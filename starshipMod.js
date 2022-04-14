@@ -501,8 +501,6 @@ if(!zoomOutEngage){
    else if ( zoom<zoomCone||zoom<.000000000000000000000001)zoomOutEngage = true;
       if (zoomOutEngage == true){
          zoom *= ZR*1.44;
-         coordX*=(1-zoom)*ZR;
-         coordY*=(1-zoom)*ZR;
      }
 
        if(zoom<.0000000000000000000000001)zoom = 1.;
