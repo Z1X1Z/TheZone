@@ -1,4 +1,6 @@
 
+
+
 function hk() {
   var x = document.createElement("INPUT");
   x.setAttribute("type", "text");
@@ -65,7 +67,11 @@ function callKey(event){
           else if(uniforms[ "carousel" ].value==1)uniforms[ "carousel" ].value=-1;
           else if(uniforms[ "carousel" ].value==-1)uniforms[ "carousel" ].value=0;
       }
-
+      else if (key==";"){
+            if(uniforms[ "metaCarousel" ].value==0)uniforms[ "metaCarousel" ].value=1;
+            else if(uniforms[ "metaCarousel" ].value==1)uniforms[ "metaCarousel" ].value=-1;
+            else if(uniforms[ "metaCarousel" ].value==-1)uniforms[ "metaCarousel" ].value=0;
+        }
       else if (event.keyCode==190||event.key=="."||event.key==">") uniforms[ "metronome" ].value *= 1.1; //keycode for <
       else if ((event.keyCode==188||event.key==","||event.key=="<")&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
 

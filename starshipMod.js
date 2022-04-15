@@ -190,7 +190,7 @@ var totalAMP;
                             f[1]=fxb*Math.sin(angle)+f[1]*Math.cos(angle);
                             return f;
                            }
-                           let coo;
+         var synchTime=0.;
 function  move()
 {
     if (isNaN(coordX)||(!zoomAtl41&&coordX>4.))coordX=0.;
@@ -237,7 +237,7 @@ angle[f] = angle;
          var spunD = [d_x,d_y];
          
                     if(uniforms.carousel.value!=0.)
-                                      spunD=spin(spunD,-uniforms.carousel.value*Math.fround(uniforms[ "time" ].value)%(Math.PI*2.));
+                                      spunD=spin(spunD,-uniforms.carousel.value*Math.fround(synchTime)%(Math.PI*2.));
          var d_xS=spunD[0];
          var d_yS=spunD[1];
          if(zoomAtl41){d_x*=3.;d_y*=3.;}
@@ -307,6 +307,7 @@ function init() {
   helm: {value: false },
   wheel: {value: false },
   carousel: {value: 0.0 },
+  metaCarousel: {value: 0. },
 
       metronome: {value: .99 },
       time2dance: {value: 0.0 },
@@ -361,6 +362,7 @@ let FPS=0.;
                   let interpolation=1.;
                   let finalAverageAmp=1.;
                   let averageFrameTotalAmp = [];
+                    
 function animate( timestamp ) {
 
   requestAnimationFrame( animate );
@@ -371,6 +373,7 @@ function animate( timestamp ) {
              interpolation = (timestamp-lastFrameTime)/1000.*60.;
             if (interpolation>120)interpolation=1;
              lastFrameTime=timestamp;
+     synchTime=timestamp;
     move();
             
             
@@ -520,15 +523,9 @@ if(!zoomOutEngage){
   uniforms[ "zoom" ].value = zoom;
   uniforms[ "time" ].value = (timestamp/1000.)*window.movementRate*2.;
   uniforms[ "time2dance" ].value += Math.abs(totalAMP)*4.;
-             /* if(uniforms.carousel.value!=0.){
-                               coo=spin([coordX,coordY],uniforms.carousel.value*Math.fround(uniforms[ "time" ].value)%(Math.PI*2.));
-                      uniforms.coords.value.x = coo[0];
-                       uniforms.coords.value.y = coo[1];
-                              }
-              else*/{
                        uniforms.coords.value.x = coordX;
                        uniforms.coords.value.y = coordY;
-                   }
+                   
   if (micOn)analyser.getByteFrequencyData(  dataArray);
 
    var maxTestar=0.;
