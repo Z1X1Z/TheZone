@@ -616,9 +616,9 @@ vec3 xtol(vec2 s, vec2 t){
           bg=freed(bg*zoom+coords.yx);
           
           vec2 spunC=coords;
-          if(carousel!=0.)spunC=spin2(spunC,carousel*mod(time,3.1415927410125732*2.));
+          if(carousel!=0.)spunC=spin2(spunC,carousel*mod(time,6.2831854820251465));
           vec2 backGround=freed(p.yx/2.*zoom+spunC);
-          if(carousel!=0.)backGround=spin2(backGround,-carousel*mod(time,3.1415927410125732*2.));
+          if(carousel!=0.)backGround=spin2(backGround,-carousel*mod(time,6.2831854820251465));
                                 backGround=backGround.yx;
           vec2 dance = vec2(0.);
           if (morph>.5)  dance = (

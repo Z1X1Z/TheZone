@@ -190,7 +190,6 @@ var totalAMP;
                             f[1]=fxb*Math.sin(angle)+f[1]*Math.cos(angle);
                             return f;
                            }
-         var synchTime=0.;
 function  move()
 {
     if (isNaN(coordX)||(!zoomAtl41&&coordX>4.))coordX=0.;
@@ -234,14 +233,12 @@ angle[f] = angle;
 
          d_x = -Math.sin(-angle);
          d_y = -Math.cos(-angle);
-         var spunD = [d_x,d_y];
+         var spunD = [Math.fround(d_x),Math.fround(d_y)];
          
-                    if(uniforms.carousel.value!=0.)
-                                      spunD=spin(spunD,-uniforms.carousel.value*Math.fround(synchTime)%Math.fround(Math.PI*2.));
+                    if(uniforms.carousel.value!=0.)         spunD=spin(spunD,-uniforms.carousel.value*uniforms[ "time" ].value%(Math.fround(Math.PI*2.)));
          var d_xS=spunD[0];
          var d_yS=spunD[1];
-         if(zoomAtl41){d_x*=3.;d_y*=3.;}
-         
+         if(zoomAtl41){d_x*=3.;d_y*=3.;d_xS*=3;d_yS*=3;}
     bx=coordX+d_xS*MR*zoom*interpolation*window.movementRate;
   by=coordY+d_yS*MR*zoom*interpolation*window.movementRate;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold&&on){
@@ -366,16 +363,16 @@ let FPS=0.;
 function animate( timestamp ) {
 
   requestAnimationFrame( animate );
-
   onWindowResize();//may need to be taken out someday, just for iOS windowing rotation bug
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
              interpolation = (timestamp-lastFrameTime)/1000.*60.;
             if (interpolation>120)interpolation=1;
              lastFrameTime=timestamp;
-     synchTime=timestamp;
+    uniforms[ "time" ].value = Math.fround(timestamp/1000.);
+
     move();
-            
+
             
     if (computeFPS)
     {
@@ -521,7 +518,6 @@ if(!zoomOutEngage){
             if(zoomAtl41)zoom=.025;
 
   uniforms[ "zoom" ].value = zoom;
-  uniforms[ "time" ].value = (timestamp/1000.)*window.movementRate*2.;
   uniforms[ "time2dance" ].value += Math.abs(totalAMP)*4.;
                        uniforms.coords.value.x = coordX;
                        uniforms.coords.value.y = coordY;
