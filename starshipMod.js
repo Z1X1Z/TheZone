@@ -235,10 +235,10 @@ angle[f] = angle;
          d_y = -Math.cos(-angle);
          var spunD = [d_x,d_y];
          
-                    if(uniforms.carousel.value!=0.)         spunD=spin(spunD,-uniforms.carousel.value*uniforms[ "time" ].value%(Math.PI*2.));
+                    if(uniforms.carousel.value!=0.)         spunD=spin(spunD,uniforms.carousel.value*uniforms[ "time" ].value%(Math.PI*2.));
          var d_xS=spunD[0];
          var d_yS=spunD[1];
-         if(zoomAtl41){d_x*=3.;d_y*=3.;d_xS*=3;d_yS*=3;}
+         if(zoomAtl41){d_xS*=3;d_yS*=3;}
     bx=coordX+d_xS*MR*zoom*interpolation*window.movementRate;
   by=coordY+d_yS*MR*zoom*interpolation*window.movementRate;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold&&on){
