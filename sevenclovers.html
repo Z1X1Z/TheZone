@@ -447,15 +447,13 @@
                     float d = length(s);
                     for(int i=0;i<69; i++)if(d<2./3.&& loops+counter<hyperCore){
                                              float wise;
-                                             if(mod(float(i),4.)==0.)wise=-1.;
+                                             if(mod(float(i),4.)==0.)wise=1.;
                                                else if(mod(float(i),4.)==1.)wise=-1.;
-                                                 else  if(mod(float(i),4.)==2.)wise= 1.;
+                                                 else  if(mod(float(i),4.)==2.)wise= -1.;
                                                     else  if(mod(float(i),4.)==3.)wise=1.;
 
-
-
                             float shift=2.;s*=shift;d*=shift;loops++;
-                            if(metaCarousel!=0.)s=spin2(s,time/(mod(float(i),2.)-.5)*wise*metaCarousel);
+                            if(metaCarousel!=0.)s=spin2(s,time*wise*metaCarousel);
                     }
                     
                         else break;
