@@ -52,7 +52,7 @@ function callKey(event){
       else if (key=="A") uniforms[ "colorCombo" ].value = 11;
       else if (key=="F") uniforms[ "fourCreats" ].value *= -1;
       else if (key=="G") uniforms[ "colorCombo" ].value = 17;
-      else if (key=="K") uniforms[ "colorCombo" ].value = 13;
+      else if (key==";") uniforms[ "colorCombo" ].value = 13;
       else if (key=="D") uniforms[ "colorCombo" ].value = 14;
       else if (key=="X") uniforms[ "colorCombo" ].value = 15;
       else if (key=="B") uniforms[ "colorCombo" ].value = 16;
@@ -67,7 +67,7 @@ function callKey(event){
           else if(uniforms[ "carousel" ].value==1)uniforms[ "carousel" ].value=-1;
           else if(uniforms[ "carousel" ].value==-1)uniforms[ "carousel" ].value=0;
       }
-      else if (key==";"){
+      else if (key=="K"){
             if(uniforms[ "metaCarousel" ].value==0)uniforms[ "metaCarousel" ].value=1;
             else if(uniforms[ "metaCarousel" ].value==1)uniforms[ "metaCarousel" ].value=-1;
             else if(uniforms[ "metaCarousel" ].value==-1)uniforms[ "metaCarousel" ].value=0;
