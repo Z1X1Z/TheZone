@@ -237,7 +237,7 @@ angle[f] = angle;
          var spunD = [d_x,d_y];
          
                     if(uniforms.carousel.value!=0.)
-                                      spunD=spin(spunD,-uniforms.carousel.value*Math.fround(synchTime)%(Math.PI*2.));
+                                      spunD=spin(spunD,-uniforms.carousel.value*Math.fround(synchTime)%fround(Math.PI*2.));
          var d_xS=spunD[0];
          var d_yS=spunD[1];
          if(zoomAtl41){d_x*=3.;d_y*=3.;}

@@ -222,9 +222,9 @@
            bg=freed(bg*zoom+coords.yx);
            
            vec2 spunC=coords;
-           if(carousel!=0.)spunC=spin2(spunC,-carousel*mod(time,3.141592653*2.));
+           if(carousel!=0.)spunC=spin2(spunC,-carousel*mod(time,3.1415927410125732*2.));
            vec2 backGround=freed(p.yx/2.*zoom+spunC);
-           if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time,3.141592653*2.));
+           if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time,3.1415927410125732*2.));
                                                
                                  p.x+=.5;
           float rate = 1.;
