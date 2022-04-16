@@ -233,9 +233,9 @@ angle[f] = angle;
 
          d_x = -Math.sin(-angle);
          d_y = -Math.cos(-angle);
-         var spunD = [Math.fround(d_x),Math.fround(d_y)];
+         var spunD = [d_x,d_y];
          
-                    if(uniforms.carousel.value!=0.)         spunD=spin(spunD,-uniforms.carousel.value*uniforms[ "time" ].value%(Math.fround(Math.PI*2.)));
+                    if(uniforms.carousel.value!=0.)         spunD=spin(spunD,-uniforms.carousel.value*uniforms[ "time" ].value%(Math.PI*2.));
          var d_xS=spunD[0];
          var d_yS=spunD[1];
          if(zoomAtl41){d_x*=3.;d_y*=3.;d_xS*=3;d_yS*=3;}
