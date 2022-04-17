@@ -60,8 +60,8 @@
 
             uniform float carousel;
             uniform float metaCarousel;
-            uniform bool petalMorph;
-            uniform bool sierpinski;
+            uniform float petals;
+
 
             
             float zin(float x){return -sin(x);}
@@ -444,13 +444,12 @@
               
               
               s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y-t.x, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y-t.y);//x**3
-              if(sierpinski)s=spin2(s,-.5*atan(s.y,s.x));
 
               s.x=log(abs(s.x));
 
                 if(MetaCored){
                     float d = length(s);
-                    for(int i=0;i<69; i++)if(d<2./3.&& loops+counter<hyperCore){
+                    for(int i=0;i<69; i++){if(d<2./3.&& loops+counter<hyperCore){
                                              float wise;
                                              if(mod(float(i),4.)==0.)wise=1.;
                                                else if(mod(float(i),4.)==1.)wise=-1.;
@@ -459,11 +458,14 @@
 
                             float shift=2.;s*=shift;d*=shift;loops++;
                             if(metaCarousel!=0.)s=spin2(s,time*wise*metaCarousel);
-                            if(petalMorph)s=spin2(s,-atan(s.y,s.x)*(mod(float(loops),2.)-.5));
+         
+                            
 
                     }
-                    
-                        else break;
+                                              if(float(i)==0.&&d<1.5)s=spin2(s,atan(s.y,s.x)*petals/6.);
+
+                    }
+
                 }
 
             }
@@ -632,7 +634,9 @@ vec3 xtol(vec2 s, vec2 t){
           if(carousel!=0.)spunC=spin2(spunC,-carousel*mod(time,3.1415927410125732*2.));
           vec2 backGround=freed(p.yx/2.*zoom+spunC);
           if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time,3.1415927410125732*2.));
-                                
+          
+                                backGround=spin2(backGround,atan(backGround.y,backGround.x)*petals/6.);
+
                                 backGround=backGround.yx;
           vec2 dance = vec2(0.);
           if (morph>.5)  dance = (

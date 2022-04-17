@@ -32,6 +32,8 @@ if(!(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 
 window.addEventListener('keydown', function(event) {callKey(event)}, false);
 
 function callKey(event){
+    event.preventDefault(); event.stopImmediatePropagation();
+
       let key = event.key.toUpperCase();
       var x = parseInt(String.fromCharCode( event.keyCode));
       if (x>0)
@@ -72,6 +74,15 @@ function callKey(event){
             else if(uniforms[ "metaCarousel" ].value==1)uniforms[ "metaCarousel" ].value=-1;
             else if(uniforms[ "metaCarousel" ].value==-1)uniforms[ "metaCarousel" ].value=0;
         }
+      else if (key=="\'"||key=="\""){
+          uniforms[ "sierpinski" ].value = !uniforms[ "sierpinski" ].value;
+          if(uniforms[ "colorCombo" ].value > 7)uniforms[ "colorCombo" ].value = 1;
+              
+              }
+      else if (key=="["||key=="{") uniforms[ "petals" ].value -= 1.;
+      else if (key=="]"||key=="}") uniforms[ "petals" ].value += 1.;
+
+
       else if (event.keyCode==190||event.key=="."||event.key==">") uniforms[ "metronome" ].value *= 1.1; //keycode for <
       else if ((event.keyCode==188||event.key==","||event.key=="<")&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
 
@@ -98,7 +109,7 @@ function callKey(event){
       if(uniforms[ "free" ].value) window.zoomCageSize=100000000000000000.;
       else window.zoomCageSize=1.5;
     }
-            
+
             
             
             //https://www.w3schools.com/howto/howto_js_fullscreen.asp

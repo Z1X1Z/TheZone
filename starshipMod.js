@@ -303,8 +303,7 @@ function init() {
       fourCreats: {value: 1 },
   helm: {value: false },
   wheel: {value: false },
-  petalMorph: {value: false },
-  sierpinski: {value: false },
+  petals: {value: 0.0 },
 
   carousel: {value: 0.0 },
   metaCarousel: {value: 0. },
