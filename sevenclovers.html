@@ -60,6 +60,10 @@
 
             uniform float carousel;
             uniform float metaCarousel;
+            uniform bool petalMorph;
+            uniform bool sierpinski;
+
+            
             float zin(float x){return -sin(x);}
             float coz(float x){return -cos(x);}
                       const float gr=-cos(216.)/-cos(612.)-1.;
@@ -440,6 +444,7 @@
               
               
               s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y-t.x, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y-t.y);//x**3
+              if(sierpinski)s=spin2(s,-.5*atan(s.y,s.x));
 
               s.x=log(abs(s.x));
 
@@ -454,6 +459,8 @@
 
                             float shift=2.;s*=shift;d*=shift;loops++;
                             if(metaCarousel!=0.)s=spin2(s,time*wise*metaCarousel);
+                            if(petalMorph)s=spin2(s,-atan(s.y,s.x)*(mod(float(loops),2.)-.5));
+
                     }
                     
                         else break;
