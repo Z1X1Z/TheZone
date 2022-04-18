@@ -628,10 +628,10 @@ vec3 xtol(vec2 s, vec2 t){
           if(carousel!=0.)spunC=spin2(spunC,-carousel*mod(time,3.1415927410125732*2.));
           vec2 backGround=freed(p.yx/2.*zoom+spunC);
           if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time,3.1415927410125732*2.));
-          
+                                backGround=backGround.yx;
+
                                 backGround=spin2(backGround,atan(backGround.y,backGround.x)*petals/6.);
 
-                                backGround=backGround.yx;
           vec2 dance = vec2(0.);
           if (morph>.5)  dance = (
           vec2(-sin(time+time2dance),-sin((time+time2dance)*-1.618))*zoom+
@@ -647,7 +647,7 @@ vec3 xtol(vec2 s, vec2 t){
           vec2 driftCanceller=vec2(dance.x,-dance.y);
           
           
-          if(colorCombo<10)zoomer=tol(backGround, dance2);
+          if(colorCombo<10)zoomer=tol(-backGround, dance2);
           else if (colorCombo==11)zoomer=heartZoom(backGround+vec2(.5,0.)+driftCanceller, dance);
           else if (colorCombo==13)zoomer=tokogae(backGround,vec2(zoom));
           else if (colorCombo==14)zoomer=TOLTOK(backGround,vec2(zoom));
