@@ -448,7 +448,8 @@
               s.x=log(abs(s.x));
               
               float d = length(s);
-              for(int i=0;i<69; i++){if(MetaCored&&d<2./3.&& loops+counter<hyperCore)
+              if(d<1.5)s=spin2(s,atan(s.y,s.x)*petals/6.);
+              for(int i=0;i<69; i++)if(MetaCored&&d<2./3.&& loops+counter<hyperCore)
                  {
 
                  float wise;
@@ -458,9 +459,8 @@
                  else  if(mod(float(i),4.)==3.)wise=1.;
                  
                  float shift=2.;s*=shift;d*=shift;loops++;
-                 if(metaCarousel!=0.)s=spin2(s,time*wise*metaCarousel);
-              }
-                                        if(float(i)==0.&&d<1.5)s=spin2(s,atan(s.y,s.x)*petals/6.);
+                 if(metaCarousel!=0.)s=spin2(s,time*wise*metaCarousel*(1.+petals/6.));
+              
               }
          }
 
