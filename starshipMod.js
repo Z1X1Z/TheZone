@@ -56,7 +56,7 @@ function loadScript(url, callback)
     document.body.appendChild(scr);
 }
                   
-                  function stallTillTHREE(){if(typeof THREE=="object"){startMic();}else setTimeout(stallTillTHREE,100);}
+                  function stallTillTHREE(){if(typeof THREE=="object"){startMic();}else setTimeout(stallTillTHREE,10);}
                   stallTillTHREE();//this is a lurker. it waits for the .js loader to resolve to a loaded library, then initializes the game.
 
                 
