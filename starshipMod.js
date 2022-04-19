@@ -36,25 +36,28 @@ let center = false;
            mobile=true;
        }
 
+                 let unerroredTHREE=true;
 //load threeJS then call startMic()
 //vvvvmodified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
 function loadScript(url, callback)
 {
     
     // Adding the script tag to the head as suggested before
-    var body = document.body;
-    var script = document.getElementById('threeJSscript');
-    script.type = 'text/javascript';
-    script.src = url;
+    var scr = document.createElement("script");//document.getElementById('threeJSscript');
+    scr.type = 'text/javascript';
+    scr.src = url;
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
-    script.onreadystatechange = callback;
-    script.onload = callback;
+    //script.onreadystatechange = callback;
+    //script.onload = callback;
+    if(unerroredTHREE){unerroredTHREE=false;scr.onerror=function(){loadScript("threer127.min.js",initialize);}}
+
     // Fire the loading
-    //body.appendChild(script);
+    document.body.appendChild(scr);
 }
                   
-                  function stallTillTHREE(){if(typeof THREE=="object")startMic();else setTimeout(stallTillTHREE,100);}
+                  function stallTillTHREE(){if(typeof THREE=="object"){startMic();}else setTimeout(stallTillTHREE,100);}
+                  stallTillTHREE();//this is a lurker. it waits for the .js loader to resolve to a loaded library, then initializes the game.
 
                 
 //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
@@ -69,8 +72,8 @@ function loadScript(url, callback)
                                           }
                       else{
                           window.sessionStorage.setItem('alreadyReset', "f");
-                          document.getElementById('threeJSscript').src=cdnSwitchThree;
-                          stallTillTHREE();
+                          //document.getElementById('threeJSscript').src=cdnSwitchThree;
+                          loadScript(cdnSwitchThree,null)
                       }
 }
     var cdnSwitchThree="threer127.min.js";
@@ -303,7 +306,7 @@ function init() {
       fourCreats: {value: 1 },
   helm: {value: false },
   wheel: {value: false },
-  petals: {value: 0.0 },
+  petals: {value:  .0 },
 
   carousel: {value: 0.0 },
   metaCarousel: {value: 0. },

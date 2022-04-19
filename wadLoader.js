@@ -1,23 +1,24 @@
 let touchNumber=new Map();
+let unerrored = true;
 function loadScript(url, callback)
 {
     // Adding the script tag to the head as suggested before
-    var body = document.body;
-    var script = document.getElementById('wadJSscript');
+    var script = document.createElement("script");//document.getElementById('wadJSscript');
     script.type = 'application/javascript';
     script.src = url;
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
-   // script.onreadystatechange = callback;
+    //script.onreadystatechange =  callback;
     //script.onload = callback;
+    if(unerrored){unerrored=false;script.onerror=function(){loadScript("wad.min.js",initialize);}}
     // Fire the loading
-    body.appendChild(script);
-    
+    document.body.appendChild(script);
     
     stallTillWad()
+
     
 }
-function stallTillWad(){if(typeof Wad=="function")initialize();else setTimeout(stallTillWad,100);}
+function stallTillWad(){if(typeof Wad=="function"){initialize();} else  setTimeout(stallTillWad,100);}
 
 let hyperdriveTUNA = {
 Overdrive:{
@@ -56,7 +57,7 @@ function initialize(){
 }
 
 var cdnSwitch="wad.min.js";
-if ( window.sessionStorage.getItem("alreadyReset")=="t"){if (window.online)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0"
+if ( window.sessionStorage.getItem("alreadyReset")=="t"){if (window.online)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0";
 loadScript(cdnSwitch,initialize);
 }
 
