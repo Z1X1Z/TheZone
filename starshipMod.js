@@ -1,3 +1,5 @@
+
+
 let zoom=1., coordX=0., coordY=0.;
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
@@ -56,10 +58,9 @@ function loadScript(url, callback)
         }
     
 
-    // Fire the loading
 }
-                  
-                  function stallTillTHREE(){if(typeof THREE=="object"){startMic();}else setTimeout(stallTillTHREE,10);}
+
+                  function stallTillTHREE(){if(typeof THREE=="object"){init();}else setTimeout(stallTillTHREE,10);}
                   stallTillTHREE();//this is a lurker. it waits for the .js loader to resolve to a loaded library, then initializes the game.
 
                 
@@ -341,8 +342,7 @@ function init() {
   onWindowResize();
   window.addEventListener( 'resize', onWindowResize, false );
 
-  animate();
-
+    startMic();
 }
 
 
@@ -714,10 +714,11 @@ async function startMic() {
         source.connect(analyser);
         analyser.fftSize = fftSize;
         dataArray = new Uint8Array( bufferSize );
-        init();
+        //init();
+      animate();
+
       } );
 }
-
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
 function calculatePitch ()
