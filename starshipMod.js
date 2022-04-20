@@ -718,7 +718,6 @@ async function startMic() {
       } );
 }
 
-
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
 function calculatePitch ()
