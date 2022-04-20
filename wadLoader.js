@@ -2,23 +2,22 @@ let touchNumber=new Map();
 let unerrored = true;
 function loadScript(url, callback)
 {
-    // Adding the script tag to the head as suggested before
-    var script = document.createElement("script");//document.getElementById('wadJSscript');
+    var script = document.getElementById('wadJSscript');//document.createElement("script");//
     script.type = 'application/javascript';
     script.src = url;
     // Then bind the event to the callback function.
     // There are several events for cross browser compatibility.
     //script.onreadystatechange =  callback;
     //script.onload = callback;
-    if(unerrored){unerrored=false;script.onerror=function(){loadScript("wad.min.js",initialize);}}
-    // Fire the loading
-    document.body.appendChild(script);
-    
-    stallTillWad()
-
-    
+    script.onerror=function(){    var s = document.createElement("script");//document.getElementById('threeJSscript');
+        s.type = 'text/javascript';
+        s.src = "wad.min.js";
+        document.body.appendChild(s);
+        }
 }
+
 function stallTillWad(){if(typeof Wad=="function"){initialize();} else  setTimeout(stallTillWad,10);}
+stallTillWad()//lurker
 
 let hyperdriveTUNA = {
 Overdrive:{
