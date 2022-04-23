@@ -7,23 +7,25 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="main.css">
             
+                <div id="allText">
+                    <div id="HK"></div>
+                    <div id="textWindow"></div>
+                </div>
+
+            <div id="container"></div>
+
+            <script src="starshipMod.js"></script>
+
     </head>
     <body>
-        <div id="allText">
-            <div id="HK"></div>
-            <div id="textWindow"></div>
-        </div>
 
-    <div id="container"></div>
+        <script src="OFFLINEonlineSwitch.js"></script>
+    <script id="threeJSscript" async></script>
+    <script id="wadJSscript" async></script>
+    <script src="hotkeys.js" async></script>
+    <script src="wadLoader.js"></script>
+    <script src="threeJSLoader.js" async></script>
 
-    
-    
-    <script src="OFFLINEonlineSwitch.js" dynamic></script>
-    <script id="threeJSscript" dynamic></script>
-    <script id="wadJSscript" dynamic></script>
-    <script src="hotkeys.js" dynamic></script>
-    <script src="wadLoader.js" dynamic></script>
-    
         <script id="vertexShader" type="x-shader/x-vertex">
 
                 varying vec2 vUv;
@@ -671,8 +673,6 @@ vec3 xtol(vec2 s, vec2 t){
                             clamp((zoomer)-(m.r+m.b+m.g+creatures.r+creatures.g+creatures.b)*100.,.0,1.)
                     ,1.);}
         </script>
-        <script src="threeJSLoader.js" dynamic></script>
-        <script src="starshipMod.js" defer></script>
         
     </body>
 </html>
