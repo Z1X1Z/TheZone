@@ -1,4 +1,5 @@
-
+function stallTillTHREE(){if(typeof THREE=="object"){init();}else setTimeout(stallTillTHREE,10);}
+stallTillTHREE();//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
 
 let zoom=1., coordX=0., coordY=0.;
 if(!("shaderOn" in window))window.shaderOn=true;
@@ -38,53 +39,7 @@ let center = false;
            mobile=true;
        }
 
-//load threeJS then call startMic()
-//vvvvmodified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
-function loadScript(url, callback)
-{
-    
-    // Adding the script tag to the head as suggested before
-    var scr = document.getElementById('threeJSscript');//document.createElement("script");//
-    scr.type = 'text/javascript';
-    scr.src = url;
-    // Then bind the event to the callback function.
-    // There are several events for cross browser compatibility.
-    //script.onreadystatechange = callback;
-    //script.onload = callback;
-    scr.onerror=function(){    var s = document.createElement("script");//document.getElementById('threeJSscript');
-        s.type = 'text/javascript';
-        s.src = "threer127.min.js";
-        document.body.appendChild(s);
-        }
-    
 
-}
-
-                  function stallTillTHREE(){if(typeof THREE=="object"){init();}else setTimeout(stallTillTHREE,10);}
-                  stallTillTHREE();//this is a lurker. it waits for the .js loader to resolve to a loaded library, then initializes the game.
-
-                
-//^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
-                  
-                  var load = function() {
-                  //https://stackfame.com/auto-refresh-page-first-load-javascript-jquery
-                      if ( window.sessionStorage.getItem("alreadyReset")!="t"){
-                          //setting window location
-                          window.sessionStorage.setItem('alreadyReset', "t");
-                          //using reload() method to reload web page
-                          window.location.reload();
-                                          }
-                      else{
-                          window.sessionStorage.setItem('alreadyReset', "f");
-                          //document.getElementById('threeJSscript').src=cdnSwitchThree;
-                          loadScript(cdnSwitchThree,null)
-                      }
-}
-    var cdnSwitchThree="threer127.min.js";
-    if (window.online)cdnSwitchThree="https://cdnjs.cloudflare.com/ajax/libs/three.js/r127/three.min.js"
-
-
-load();
 //key press handling vvvv
 var pointed=false;
 let zoomAtl41=false;//watch for the 1 and the l
@@ -403,7 +358,7 @@ function animate( timestamp ) {
     let minute =(noteNumber-Math.floor(noteNumber))*60;
     let second =(minute-Math.floor(minute))*60
     let timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
-    let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","G"];
+    let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","F#","G"];
 
               elapsedTimeBetweenFrames = (timestamp-lastTime);
               if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
