@@ -178,7 +178,7 @@
                          return f;
                         }
        vec3 tol(vec2 p, vec2 t){
-                  
+                  p=p.yx;
         float cored = log(zoom*3./2.)/log(.5)+1.;
         float c = length(p);
         float loops=1.;
