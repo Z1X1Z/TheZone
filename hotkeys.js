@@ -81,7 +81,11 @@ function callKey(event){
               }
       else if (key=="["||key=="{") uniforms[ "petals" ].value -= 1.;
       else if (key=="]"||key=="}") uniforms[ "petals" ].value += 1.;
-
+      else if (key=="/"||key=="?"){
+            if(uniforms[ "spirated" ].value==0)uniforms[ "spirated" ].value=1;
+            else if(uniforms[ "spirated" ].value==1)uniforms[ "spirated" ].value=-1;
+            else if(uniforms[ "spirated" ].value==-1)uniforms[ "spirated" ].value=0;
+        }
 
       else if (event.keyCode==190||event.key=="."||event.key==">") uniforms[ "metronome" ].value *= 1.1; //keycode for <
       else if ((event.keyCode==188||event.key==","||event.key=="<")&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >

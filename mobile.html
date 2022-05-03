@@ -64,7 +64,9 @@
             uniform float carousel;
             uniform float metaCarousel;
             uniform float petals;
-
+            
+            uniform float spirated;
+            const float gr = 1.6180339;
             float zin(float x){return -sin(x);}
             float coz(float x){return -cos(x);}
 
@@ -177,51 +179,59 @@
                          f.y=fxb*sin(angle)+f.y*cos(angle);
                          return f;
                         }
-       vec3 tol(vec2 p, vec2 t){
-                  p=p.yx;
-        float cored = log(zoom*3./2.)/log(.5)+1.;
-        float c = length(p);
-        float loops=1.;
-        if(MetaCored)for(int i=1;i<60; i++)if(c<2./3.&&float(loops)<cored){p*=2.;c*=2.;loops++;}else break;
-        vec2 s=p;
-        loops=0.;
-          float hyperCore=0.;
-          if(MetaCored)hyperCore=(cored*2./3.+log(length(freed(coords)))-1.);
+                        vec3 tol(vec2 p, vec2 t){
+                                 p=p.yx;
+                             float precores = 0.49;
+                             if(spirated!=0.) precores = 1.;
+                             if(spirated>-.5) p.y*=-1.;
+                             float cored = log(zoom*3./2.)/log(.5)+1.+precores;
+                             float c = length(p);
+                             float loops=1.;
+                             if(MetaCored)for(int i=1;i<60; i++)if(c<2./3.&&loops<cored){p*=2.;c*=2.;loops++;}else break;
+                             vec2 s=p;
+                             loops=0.;
+                             float hyperCore=0.;
+                             if(MetaCored)hyperCore=(cored*2./3.+log(length(freed(coords)))-1.);
+                             for (float counter=0.;counter<41.;counter++)if(abs(s.y)<47.){
 
-    for (float counter=0.;counter<41.;counter++)if(abs(s.y)<47.){
+                             if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+3.14159);
 
-          s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y-t.x, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y-t.y);//x**3
+                               s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y-t.x, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y-t.y);//x**3
 
-          s.x=log(abs(s.x));
+                               s.x=log(abs(s.x));
 
-             float d = length(s);
-             if(d<1.5&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
-             for(int i=0;i<69; i++)if(MetaCored&&d<2./3.&& loops+counter<hyperCore)
-                {
+                               float d = length(s);
+                               if(d<1.5&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
 
-                float wise;
-                if(mod(float(i),4.)==0.)wise=1.;
-                else if(mod(float(i),4.)==1.)wise=-1.;
-                else  if(mod(float(i),4.)==2.)wise= -1.;
-                else  if(mod(float(i),4.)==3.)wise=1.;
-                
-                float shift=2.;s*=shift;d*=shift;loops++;
-                if(metaCarousel!=0.)s=spin2(s,time*wise*metaCarousel*(1.+petals/6.));
-             }
-             
-        }
-                                         
-        vec3 o=vec3(s.y);
-        if(colorCombo==7) o=vec3(s.y,s.x/10.,1.-s.x/12.);
-        else if(colorCombo==2) o=vec3(s.y/100.-s.x*s.y/888.+s.y/50000.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.+s.y/50000.);
-        else if(colorCombo==3) o= vec3(s.x/8.-s.y/s.x/7000.,1.-s.x/16.,s.y/100.);
-        else if(colorCombo==4) o= vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.);
-        else if(colorCombo==5)  o=vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.);
-        else if(colorCombo==6)return vec3(-sin(time*1.)*s.y/100.-sin(time*1.618)*s.x*s.y/888.,s.x/8.-sin(time*-.618)*s.y/s.x/2000.,1.-sin(time*2.618)*s.x/20.);
-        else if(colorCombo==1) return 1.-(vec3(s.y/125.-s.x*s.y/888.+s.y/25000.,s.x/8.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
-                                         *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
-                                         *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.));
-     return clamp(o,0.,1.);}
+                               for(int i=0;i<69; i++)if(MetaCored&&d<2./3.&& loops+counter<hyperCore && length(freed(coords))<1.4)
+                                  {
+
+                                  float wise;
+                                  if(mod(float(i),4.)==0.)wise=1.;
+                                  else if(mod(float(i),4.)==1.)wise=-1.;
+                                  else  if(mod(float(i),4.)==2.)wise= -1.;
+                                  else  if(mod(float(i),4.)==3.)wise=1.;
+                                  
+                                  float shift=2.;s*=shift;d*=shift;loops++;
+
+                                  if(metaCarousel!=0.)s=spin2(s,time*wise*metaCarousel*(1.+petals/6.));
+
+                               }
+
+                          }
+
+                                                              
+                             vec3 o=vec3(s.y);
+                             if(colorCombo==7) o=vec3(s.y,s.x/10.,1.-s.x/12.);
+                             else if(colorCombo==2) o=vec3(s.y/100.-s.x*s.y/888.+s.y/50000.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.+s.y/50000.);
+                             else if(colorCombo==3) o= vec3(s.x/8.-s.y/s.x/7000.,1.-s.x/16.,s.y/100.);
+                             else if(colorCombo==4) o= vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.);
+                             else if(colorCombo==5)  o=vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.);
+                             else if(colorCombo==6)return vec3(-sin(time*1.)*s.y/100.-sin(time*gr)*s.x*s.y/888.,s.x/8.-sin(time*(-gr+1.))*s.y/s.x/2000.,1.-sin(time*(gr+1.))*s.x/20.);
+                             else if(colorCombo==1) return 1.-(vec3(s.y/125.-s.x*s.y/888.+s.y/25000.,s.x/8.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
+                                                              *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
+                                                              *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.));
+    return clamp(o,0.,1.);}
  
           vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t);}
           vec3 bod(vec2 p, vec2 t){t*=zoom;return body(p,t)+heart(p,t);}

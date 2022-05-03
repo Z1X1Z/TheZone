@@ -56,7 +56,7 @@ var rez = window.devicePixelRatio*rez;
 
                             }
             let container = document.getElementById( 'container' );
-            
+
 
 var zoomOutEngage=false;
 let pi = Math.PI;
@@ -143,7 +143,7 @@ let reset = 6;
 let on;
 let spirafreq=1;
 var totalAMP;
-                           
+
                            function spin(f, t)
                            {    //https://en.wikipedia.org/wiki/Rotation_matrix
                                var angle =t;
@@ -191,12 +191,12 @@ angle[f] = angle;
 
          //d_x = -Math.sin(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
          //d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
-              
+
 
          d_x = -Math.sin(-angle);
          d_y = -Math.cos(-angle);
          var spunD = [d_x,d_y];
-         
+
                     if(uniforms.carousel.value!=0.)         spunD=spin(spunD,uniforms.carousel.value*uniforms[ "time" ].value%(Math.PI*2.));
          var d_xS=spunD[0];
          var d_yS=spunD[1];
@@ -250,7 +250,7 @@ function init() {
     camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 1, -1);
     geometryP = new THREE.PlaneGeometry( 2, 2 );
     geometryP.z=-1.;
-    
+
   uniforms = THREE.UniformsUtils.merge([
   THREE.UniformsLib.lights,
     {
@@ -269,6 +269,7 @@ function init() {
 
   carousel: {value: 0.0 },
   metaCarousel: {value: 0. },
+  spirated: {value: 0. },
 
       metronome: {value: .99 },
       time2dance: {value: 0.0 },
@@ -313,16 +314,16 @@ let textON=false;
 let lastTime=0.;
 let ticker = 0;
 let FPS=0.;
-                  
+
                   const interval = 200;
                   let elapsedTimeBetweenFrames = 0.;
                   let lastPitch = 0;
-                  
+
                   let lastFrameTime=0.;
                   let interpolation=1.;
                   let finalAverageAmp=1.;
                   let averageFrameTotalAmp = [];
-                    
+
 function animate( timestamp ) {
 
   requestAnimationFrame( animate );
@@ -336,7 +337,7 @@ function animate( timestamp ) {
 
     move();
 
-            
+
     if (computeFPS)
     {
         averageFrameTotalAmp.push(totalAMP);
@@ -363,9 +364,9 @@ function animate( timestamp ) {
               elapsedTimeBetweenFrames = (timestamp-lastTime);
               if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
                   ticker++;
-        
-        
-        
+
+
+
 
      let note = notes[noteNameNumber];
      let cents = Math.round((noteNumber-Math.round(noteNumber))*100);
@@ -384,9 +385,9 @@ function animate( timestamp ) {
 
 
 
- 
- 
- 
+
+
+
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
     spiral_compress();
     move();
@@ -457,7 +458,7 @@ function animate( timestamp ) {
   let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
   if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
 
-                            
+
 ZR = Math.E**(Math.log(.5)/zoomFrames*interpolation*window.movementRate);
 if(!zoomOutEngage){
   if (zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&on)zoom *=ZR;
@@ -476,7 +477,7 @@ if(!zoomOutEngage){
        if(zoom<.0000000000000000000000001)zoom = 1.;
 
 
-              
+
 
             if(zoomAtl41)zoom=.025;
 
@@ -484,12 +485,12 @@ if(!zoomOutEngage){
   uniforms[ "time2dance" ].value += Math.abs(totalAMP)*4.;
                        uniforms.coords.value.x = coordX;
                        uniforms.coords.value.y = coordY;
-                   
+
   if (micOn)analyser.getByteFrequencyData(  dataArray);
 
    var maxTestar=0.;
    var minTestar=100000000000000;
-              
+
    const star=[];
    const starColors=[];
    if(onO){
@@ -500,7 +501,7 @@ if(!zoomOutEngage){
         var widt = .02;
         var arm =(mustarD[g]+20)%24./24.*pi*2.;
         var lengt = (testar[g]-minTestar)/(maxTestar-minTestar)*.9;
-        
+
         var vop = new THREE.Color();
        vop.setHSL((1-mustarD[g])%24./24., mustarD[g]/297.,mustarD[g]/297.);//297 is the highest heard note
         material = new THREE.MeshBasicMaterial({
@@ -536,9 +537,9 @@ if(!zoomOutEngage){
       (lengt*-Math.cos(yy)-widt*-Math.cos(rpio2)*porportionY),  -0.05,
       */
     // itemSize = 3 because there are 3 values (components) per vertex
-           
+
         }
-                   
+
 }
 else{//start drawing of just twenty four frets here
             var maxTestar=1.;
@@ -548,14 +549,14 @@ else{//start drawing of just twenty four frets here
             for (var g=0; g<24; g++) {
             var widt = .02;
                 var rr= (g+15)%24;
-                
+
             var lengt = (testar[(rr+4)%24]-minTestar)/(maxTestar-minTestar);
 
                 var vop = new THREE.Color();
                       vop.setHSL((20-rr)%24/24.,1.,.5);
 
                              for(var yy=0;yy<6;yy++)   starColors.push(vop.r,vop.g,vop.b,1.)
-                             
+
 
 var vertices;
 var z = -1.;
@@ -571,13 +572,13 @@ var z = -1.;
                 (lengt*-Math.cos(rr*pi*2./24)-widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  z,
                     );
 } }
-                 
+
                  geome = new THREE.BufferGeometry();
- 
+
                  geome.setAttribute( 'position', new THREE.Float32BufferAttribute( star, 3 ).onUpload( disposeArray ) );
                     geome.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ).onUpload( disposeArray ));
                      geome.computeBoundingSphere();
-                    
+
                   var  opac=1.;
                   if(onO)opac=.3+.7/uniforms[ "metronome" ].value
                    material= new THREE.MeshBasicMaterial({
@@ -620,12 +621,12 @@ while(loopLimit>15){
 }
 
                  geomeTrail = new THREE.BufferGeometry();
- 
+
                                             geomeTrail.setAttribute( 'position', new THREE.Float32BufferAttribute( trail, 3 ).onUpload( disposeArray ) );
                                             geomeTrail.setAttribute( 'color', new THREE.Float32BufferAttribute( trailColor, 4 ).onUpload( disposeArray ));
                                             geomeTrail.computeBoundingSphere();
-                    
-                    
+
+
                 materialTrail= new THREE.MeshBasicMaterial({
                                opacity: 1.,
                              transparent: true,
@@ -636,7 +637,7 @@ while(loopLimit>15){
                     meshTrail = new THREE.Mesh(geomeTrail , materialTrail );
 
                    scene.add(meshTrail);
-                 
+
 
   renderer.render( scene, camera );
 
@@ -644,9 +645,9 @@ while(loopLimit>15){
   line.geometry.dispose( );
 
                  scene.remove(meshe);
-                                            
+
                  scene.remove(meshTrail);
-                                            
+
                                             geome.dispose();
                                             material.dispose();
                                             geomeTrail.dispose();
