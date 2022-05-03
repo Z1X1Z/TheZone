@@ -25,7 +25,7 @@ var key = "";
         if(androidGetKey[scan]!=androidGetKeyLast[scan])key=androidGetKey[scan];
         scan--;
         }
-    callKey(new KeyboardEvent('keydown', {'key': key, "keyCode":key.charCodeAt(0)}));
+    callKey(new KeyboardEvent('keydown', {'key': key, "keyCode":String.fromCharCode(key)}));
 }
 
 if(!(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))//if not mobile
@@ -50,11 +50,11 @@ function callKey(event){
       else if (key=="T") uniforms[ "colorCombo" ].value = 5;
       else if (key=="Y") uniforms[ "colorCombo" ].value = 6;
       else if (key=="U") uniforms[ "colorCombo" ].value = 7;
-      else if ( key=="\'"||key=="\"") uniforms[ "colorCombo" ].value = 8;
+      else if (key==";") uniforms[ "colorCombo" ].value = 8;
       else if (key=="A") uniforms[ "colorCombo" ].value = 11;
       else if (key=="F") uniforms[ "fourCreats" ].value *= -1;
       else if (key=="G") uniforms[ "colorCombo" ].value = 17;
-      else if (key==";") uniforms[ "colorCombo" ].value = 13;
+      else if (key=="\'"||key=="\"") uniforms[ "colorCombo" ].value = 13;
       else if (key=="D") uniforms[ "colorCombo" ].value = 14;
       else if (key=="X") uniforms[ "colorCombo" ].value = 15;
       else if (key=="B") uniforms[ "colorCombo" ].value = 16;
