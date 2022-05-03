@@ -33,7 +33,6 @@ window.addEventListener('keydown', function(event) {callKey(event)}, false);
 
 function callKey(event){
     event.preventDefault(); event.stopImmediatePropagation();
-
       let key = event.key.toUpperCase();
       var x = parseInt(String.fromCharCode( event.keyCode));
       if (x>0)
@@ -51,6 +50,7 @@ function callKey(event){
       else if (key=="T") uniforms[ "colorCombo" ].value = 5;
       else if (key=="Y") uniforms[ "colorCombo" ].value = 6;
       else if (key=="U") uniforms[ "colorCombo" ].value = 7;
+      else if ( key=="\'"||key=="\"") uniforms[ "colorCombo" ].value = 8;
       else if (key=="A") uniforms[ "colorCombo" ].value = 11;
       else if (key=="F") uniforms[ "fourCreats" ].value *= -1;
       else if (key=="G") uniforms[ "colorCombo" ].value = 17;
@@ -74,11 +74,7 @@ function callKey(event){
             else if(uniforms[ "metaCarousel" ].value==1)uniforms[ "metaCarousel" ].value=-1;
             else if(uniforms[ "metaCarousel" ].value==-1)uniforms[ "metaCarousel" ].value=0;
         }
-      else if (key=="\'"||key=="\""){
-          uniforms[ "sierpinski" ].value = !uniforms[ "sierpinski" ].value;
-          if(uniforms[ "colorCombo" ].value > 7)uniforms[ "colorCombo" ].value = 1;
-              
-              }
+  
       else if (key=="["||key=="{") uniforms[ "petals" ].value -= 1.;
       else if (key=="]"||key=="}") uniforms[ "petals" ].value += 1.;
       else if (key=="/"||key=="?"){
