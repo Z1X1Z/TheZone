@@ -25,7 +25,7 @@ var key = "";
         if(androidGetKey[scan]!=androidGetKeyLast[scan])key=androidGetKey[scan];
         scan--;
         }
-    callKey(new KeyboardEvent('keydown', {'key': key, "keyCode":String.fromCharCode(key)}));
+    callKey(new KeyboardEvent('keydown', {'key': key, "keyCode":key.charCodeAt(0)}));
 }
 
 if(!(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))//if not mobile
