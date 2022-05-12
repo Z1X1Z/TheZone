@@ -62,14 +62,8 @@ loadScript(cdnSwitch,initialize);
 let initialAngleSound = Array(10);
 initialAngleSound[0]=0;
 function startSound(e){
-    var id = 0;
-    if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
-        id = touchNumber.get(e.identifier);
-    sound[id].stop();
-    sound2[id].stop();
-
     let correlationForText=document.getElementById("allText").offsetHeight;
-    
+
    let y = e.clientY-(window.innerHeight+correlationForText)/2.;
     let x = e.clientX- window.innerWidth/2.;
     
@@ -77,6 +71,15 @@ function startSound(e){
 
     screenPressCoordX=x;
     screenPressCoordY=y;
+
+ if(!window.touchMode){
+    var id = 0;
+    if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
+        id = touchNumber.get(e.identifier);
+    sound[id].stop();
+    sound2[id].stop();
+
+    
        let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
         initialAngleSound[id] = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi);
         let frequency = Math.pow(2.,((initialAngleSound[id])/pi/2*12+correction)/12.)*220.;
@@ -86,22 +89,24 @@ function startSound(e){
                                  //sound2[id].volume=volume;
                                  sound[id].play({env:{attack: .1, release:.02,hold:-1},pitch:frequency,volume:0.});
                                  sound2[id].play({env:{attack: .1, release:.02,hold:-1},pitch:frequency*2.,volume:volume});
-        
+                                 }
 }
                                  
 function followSound(e){
-            
+            let correlationForText=document.getElementById("allText").offsetHeight;
+            let y = e.clientY-(window.innerHeight+correlationForText)/2.;
+            let x = e.clientX-window.innerWidth/2.;
+                        
+                        screenPressCoordX=x;
+                        screenPressCoordY=y;
+
+ if(!window.touchMode){
+
             var id = 0;
             if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
                 id = touchNumber.get(e.identifier);
             
-let correlationForText=document.getElementById("allText").offsetHeight;
 
-let y = e.clientY-(window.innerHeight+correlationForText)/2.;
-let x = e.clientX-window.innerWidth/2.;
-            
-            screenPressCoordX=x;
-            screenPressCoordY=y;
 let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
 let angleSound = Math.atan2(y,x);
 angleSound=(angleSound-initialAngleSound[id]+pi/2.+4.*pi)%(2*pi)+initialAngleSound[id];
@@ -110,9 +115,7 @@ let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*220.;
      sound2[id].setPitch(2.*frequency);
      sound[id].setVolume(volume*(((angleSound-initialAngleSound[id]))/(2.*pi)));
      sound2[id].setVolume(volume*(1.-((angleSound-initialAngleSound[id]))/(2.*pi)));
-                                      
-                                     // sound.play({label:touchNumber,pitch:frequency, volume*(((angleSound-initialAngleSound[touchNumber]))/(2.*pi))},{timeConstant:0.});
-                                                        //  sound2.play({label:touchNumber,pitch:frequency*2.,volume*(1.-((angleSound-initialAngleSound[touchNumber]))/(2.*pi))},{timeConstant:0.});
+                                  }
                                                           
 
 }
