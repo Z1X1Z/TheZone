@@ -1,14 +1,20 @@
-function stallTillTHREE(){if(typeof THREE=="object"){init();}else setTimeout(stallTillTHREE,10);}
+let terminateLoop=false;
+function stallTillTHREE(){if(typeof THREE=="object"){init();}else if(!terminateLoop) setTimeout(stallTillTHREE,10);}
 stallTillTHREE();//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
-
+document.head.addEventListener('beforeunload', event => { cancelAnimationFrame(); terminateLoop=true; });
+let screenPressCoordX, screenPressCoordY;
+window.pointerZoom=false;
 let zoom=1., coordX=0., coordY=0.;
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
 window.movementRate=.5;
+window.touchMode=false;
 let zoomFrames = 14;
 let ZR = Math.E**(Math.log(.5)/zoomFrames)
 const MR = 2./3./zoomFrames;
 window.zoomCageSize = 1.5;//radius of zoom bounding
+                  window.uniformsLoaded=false;
+
 zoomOutRatchetThreshold=.0005;
 let radius = 4.;
 var rez=1.;
@@ -220,8 +226,8 @@ yPerp[f] = -Math.cos(-angle+pi/2)*radius;
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
-    cx[n] += d_x*interpolation*1.5;
-    cy[n] += d_y*interpolation*1.5;
+    cx[n] += d_x*interpolation*2.;
+    cy[n] += d_y*interpolation*2.;
            trailWidth[n] *=.997
 }
 
@@ -270,17 +276,20 @@ function init() {
   carousel: {value: 0.0 },
   metaCarousel: {value: 0. },
   spirated: {value: 0. },
-
+  hearTOL: {value: false},
+  colorInverter: {value:false},
       metronome: {value: .99 },
       time2dance: {value: 0.0 },
       resolution: {value: new THREE.Vector2() },
-      coords: {value: new THREE.Vector2() }
+      coords: {value: new THREE.Vector2() },
+
     }
   ]);
   uniforms.resolution.value.x = window.innerWidth;
   uniforms.resolution.value.y = window.innerHeight;
   uniforms.coords.value.x = coordX;
   uniforms.coords.value.y = coordY;
+    window.uniformsLoaded=true;
   if(window.shaderOn)
       materialShader = new THREE.ShaderMaterial( {
         uniforms: uniforms,
@@ -323,19 +332,44 @@ let FPS=0.;
                   let interpolation=1.;
                   let finalAverageAmp=1.;
                   let averageFrameTotalAmp = [];
+function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
+                     if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
 
+
+                   ZR = Math.E**(Math.log(.5)/zoomFrames*interpolation*window.movementRate);
+                   if(!zoomOutEngage){
+                     if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&on)||window.pointerZoom)zoom *=ZR;
+                     else if(zoom<1.){zoom /= ZR;
+                     if(center){coordX*=(1-zoom)*ZR*2./3.; coordY*=(1-zoom)*ZR*2./3.;}
+                     }
+                   }
+                     if (zoom>1.)zoom=1.;
+
+                     if (zoom>=1.)zoomOutEngage = false;
+                      else if ( zoom<zoomCone||zoom<.000000000000000000000001)zoomOutEngage = true;
+                         if (zoomOutEngage == true){
+                            zoom *= ZR*1.44;
+                        }
+
+                          if(zoom<.0000000000000000000000001)zoom = 1.;
+
+}
 function animate( timestamp ) {
+                       uniforms[ "time" ].value = Math.fround(timestamp/1000.);
 
-  requestAnimationFrame( animate );
   onWindowResize();//may need to be taken out someday, just for iOS windowing rotation bug
+                                                              
+          interpolation = (timestamp-lastFrameTime)/1000.*60.;
+         if (interpolation>120)interpolation=1;
+            lastFrameTime=timestamp;
+if(!window.touchMode)pointerZoom=false;
+else on=false;
+if( !window.touchMode) {
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
-    spiral_compress();
-             interpolation = (timestamp-lastFrameTime)/1000.*60.;
-            if (interpolation>120)interpolation=1;
-             lastFrameTime=timestamp;
-    uniforms[ "time" ].value = Math.fround(timestamp/1000.);
-
-    move();
+   spiral_compress();
+                           
+                           move();
+                           if(on) makeSpirograph();
 
 
     if (computeFPS)
@@ -380,7 +414,8 @@ function animate( timestamp ) {
                                 " note: "+note+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
                                 "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
                                 "FPS: "+Math.round(FPS)+", cores: "+cores+", zoom: "+zoom+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
-                                "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+pf+", AMP: "+totalAMP_;
+                                "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+pf+", AMP: "+totalAMP_
+                            //+"<p style='margin : 0px'></p>"+"X: "+String(-coordX)+" Y: "+String(-coordY);
       else document.getElementById("textWindow").innerHTML = "";
 
 
@@ -388,13 +423,8 @@ function animate( timestamp ) {
 
 
 
-  analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
-    spiral_compress();
-    move();
 
 
-
-    if(on) makeSpirograph();
 
             var currMode = "desktop"
             //vvvvhttps://www.cssjunction.com/tutorials/detect-landscape-portrait-mode-using-javascript/
@@ -455,36 +485,16 @@ function animate( timestamp ) {
   if (on)scene.add(line);
 
 
-  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
-  if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
-
-
-ZR = Math.E**(Math.log(.5)/zoomFrames*interpolation*window.movementRate);
-if(!zoomOutEngage){
-  if (zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&on)zoom *=ZR;
-  else if(zoom<1.){zoom /= ZR;
-  if(center){coordX*=(1-zoom)*ZR*2./3.; coordY*=(1-zoom)*ZR*2./3.;}
-  }
-}
-  if (zoom>1.)zoom=1.;
-
-  if (zoom>=1.)zoomOutEngage = false;
-   else if ( zoom<zoomCone||zoom<.000000000000000000000001)zoomOutEngage = true;
-      if (zoomOutEngage == true){
-         zoom *= ZR*1.44;
-     }
-
-       if(zoom<.0000000000000000000000001)zoom = 1.;
-
-
-
+zoomRoutine();
 
             if(zoomAtl41)zoom=.025;
-
-  uniforms[ "zoom" ].value = zoom;
   uniforms[ "time2dance" ].value += Math.abs(totalAMP)*4.;
-                       uniforms.coords.value.x = coordX;
-                       uniforms.coords.value.y = coordY;
+              
+                
+              
+              uniforms[ "zoom" ].value = zoom;
+              uniforms.coords.value.x = coordX;
+              uniforms.coords.value.y = coordY;
 
   if (micOn)analyser.getByteFrequencyData(  dataArray);
 
@@ -493,6 +503,7 @@ if(!zoomOutEngage){
 
    const star=[];
    const starColors=[];
+if(!window.touchMode){
    if(onO){
     for (var g=0; g<starArms; g++) if(testar[g]>maxTestar) maxTestar=testar[g];
       for (var g=0; g<starArms; g++) if(testar[g]<minTestar) minTestar=testar[g];
@@ -638,9 +649,8 @@ while(loopLimit>15){
 
                    scene.add(meshTrail);
 
-
+                                                                                           }
   renderer.render( scene, camera );
-
   scene.remove(line);
   line.geometry.dispose( );
 
@@ -652,7 +662,28 @@ while(loopLimit>15){
                                             material.dispose();
                                             geomeTrail.dispose();
                                             materialTrail.dispose();
+           }
+else {
+          
+        if(window.touchMode){
+        zoomRoutine();
+        if(pointerZoom){
+             var spunTouch = [ (zoom-uniforms[ "zoom" ].value)*screenPressCoordX/(uniforms.resolution.value.y*1./3.),-(zoom-uniforms[ "zoom" ].value)*screenPressCoordY/(uniforms.resolution.value.y*1./3.)];
 
+                  if(uniforms.carousel.value!=0.)         spunD=spin(spunTouch,uniforms.carousel.value*uniforms[ "time" ].value%(Math.PI*2.));
+                      coordX+= spunTouch[0];
+                      coordY+= spunTouch[1];
+                  }
+
+          uniforms[ "zoom" ].value = zoom;
+          uniforms.coords.value.x = coordX;
+          uniforms.coords.value.y = coordY;
+        renderer.render( scene, camera );
+        }
+        }
+                                                                                           
+                                                                                           if(!terminateLoop)window.requestAnimationFrame( animate );
+                                                                                                                                                       else window.cancelAnimationFrame();
 }
 
 

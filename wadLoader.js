@@ -1,3 +1,4 @@
+
 let touchNumber=new Map();
 let unerrored = true;
 function loadScript(url, callback)
@@ -43,9 +44,7 @@ function initialize(){
     for(var o=0;o<10;o++){
     sound[o] =  new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
      sound2[o] = new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
-      
     }
-    
     try{sound[0].play({wait:1000000});
         sound2[0].play({wait:1000000});
         sound[0].stop()
@@ -73,6 +72,11 @@ function startSound(e){
     
    let y = e.clientY-(window.innerHeight+correlationForText)/2.;
     let x = e.clientX- window.innerWidth/2.;
+    
+    if(window.touchMode)window.pointerZoom=true
+
+    screenPressCoordX=x;
+    screenPressCoordY=y;
        let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
         initialAngleSound[id] = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi);
         let frequency = Math.pow(2.,((initialAngleSound[id])/pi/2*12+correction)/12.)*220.;
@@ -95,6 +99,9 @@ let correlationForText=document.getElementById("allText").offsetHeight;
 
 let y = e.clientY-(window.innerHeight+correlationForText)/2.;
 let x = e.clientX-window.innerWidth/2.;
+            
+            screenPressCoordX=x;
+            screenPressCoordY=y;
 let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
 let angleSound = Math.atan2(y,x);
 angleSound=(angleSound-initialAngleSound[id]+pi/2.+4.*pi)%(2*pi)+initialAngleSound[id];
@@ -135,7 +142,7 @@ if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 
   container.addEventListener('touchend', function(e){
       e.preventDefault(); e.stopImmediatePropagation();
       for(var o=0; o<e.changedTouches.length; o++)
-        {sound[touchNumber.get(e.changedTouches[o].identifier)].stop();sound2[touchNumber.get(e.changedTouches[o].identifier)].stop();}
+        {sound[touchNumber.get(e.changedTouches[o].identifier)].stop();sound2[touchNumber.get(e.changedTouches[o].identifier)].stop();window.pointerZoom=false;}
   }
                              , false);
 
@@ -153,8 +160,7 @@ else{
     
  c.addEventListener('mousedown', startSound, false);
  c.addEventListener('mousemove', followSound, false);
- c.addEventListener('mouseup', function(e){ sound[0].stop();sound2[0].stop()}, false);
+ c.addEventListener('mouseup', function(e){ sound[0].stop();sound2[0].stop();window.pointerZoom=false}, false);
 }
-
 
 
