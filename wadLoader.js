@@ -143,18 +143,22 @@ if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 
       , false);
       
   container.addEventListener('touchend', function(e){
-      e.preventDefault(); e.stopImmediatePropagation();
+      window.pointerZoom=false;
+      if(!window.touchMode){
+          e.preventDefault(); e.stopImmediatePropagation();
       for(var o=0; o<e.changedTouches.length; o++)
-        {sound[touchNumber.get(e.changedTouches[o].identifier)].stop();sound2[touchNumber.get(e.changedTouches[o].identifier)].stop();window.pointerZoom=false;}
-  }
+        {sound[touchNumber.get(e.changedTouches[o].identifier)].stop();sound2[touchNumber.get(e.changedTouches[o].identifier)].stop();}
+      }}
                              , false);
 
-    container.addEventListener('touchcancel', function(e){for(var o=0; o<e.changedTouches.length; o++)
+    container.addEventListener('touchcancel', function(e){
+        window.pointerZoom=false;
+if(!window.touchMode){ for(var o=0; o<e.changedTouches.length; o++)
     {
         e.preventDefault(); e.stopImmediatePropagation();
         sound[touchNumber.get(e.changedTouches[o].identifier)].stop();
         sound2[touchNumber.get(e.changedTouches[o].identifier)].stop();}
-        
+    }
         
     }, false);
 
@@ -163,7 +167,7 @@ else{
     
  c.addEventListener('mousedown', startSound, false);
  c.addEventListener('mousemove', followSound, false);
- c.addEventListener('mouseup', function(e){ sound[0].stop();sound2[0].stop();window.pointerZoom=false}, false);
+    c.addEventListener('mouseup', function(e){window.pointerZoom=false; if(!window.touchMode){sound[0].stop();sound2[0].stop();}}, false);
 }
 
 

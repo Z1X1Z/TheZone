@@ -668,7 +668,8 @@ else {
         if(window.touchMode){
         zoomRoutine();
         if(pointerZoom){
-             var spunTouch = [ (zoom-uniforms[ "zoom" ].value)*screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)*1./3.),-(zoom-uniforms[ "zoom" ].value)*screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)*1./3.)];
+             var spunTouch = [ (zoom-uniforms[ "zoom" ].value)*screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)*1./3.),
+                              -(zoom-uniforms[ "zoom" ].value)*screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)*1./3.)];
 
                   if(uniforms.carousel.value!=0.)         spunD=spin(spunTouch,uniforms.carousel.value*uniforms[ "time" ].value%(Math.PI*2.));
                       coordX+= spunTouch[0];
