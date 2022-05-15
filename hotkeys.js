@@ -9,7 +9,7 @@ function hk() {
   x.setAttribute("placeholder", "Hotkeys!");
   x.setAttribute("oninput", "getKey()");
   document.getElementById("HK").appendChild(x);
-    
+
 }
 if(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
     hk();
@@ -40,7 +40,7 @@ function callKey(event){
         {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
       else if (x==0)
         {window.movementRate=.5}
-      else if (key=="À"||key.toLowerCase()=="`")
+      else if (key=="À"||key=="`"||key=="~")
         {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
       else if (key=="M") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
 
@@ -73,7 +73,7 @@ function callKey(event){
             else if(uniforms[ "metaCarousel" ].value==1)uniforms[ "metaCarousel" ].value=-1;
             else if(uniforms[ "metaCarousel" ].value==-1)uniforms[ "metaCarousel" ].value=0;
         }
-  
+
       else if (key=="Y") uniforms[ "petals" ].value -= 1.;
       else if (key=="U") uniforms[ "petals" ].value += 1.;
       else if (key=="/"||key=="?"){
@@ -88,7 +88,7 @@ function callKey(event){
 
       else if (key=="I") zoomOutRatchetThreshold/= 1.212121;
       else if (key=="O") zoomOutRatchetThreshold*= 1.212121;
-    
+
       else if (key=="P"){
                 framesLong=FPS;
                 computeFPS=true;
@@ -110,12 +110,12 @@ function callKey(event){
       else window.zoomCageSize=1.5;
     }
 
-            
-            
+
+
             //https://www.w3schools.com/howto/howto_js_fullscreen.asp
             var fullscreen=false;
             function openFullscreen() {
-                
+
               if (document.documentElement.requestFullscreen) {
                   document.documentElement.requestFullscreen();
               } else if (document.documentElement.webkitRequestFullscreen) { /* Safari */
@@ -124,7 +124,7 @@ function callKey(event){
                   document.documentElement.msRequestFullscreen();
               }
             }
-            
+
             function closeFullscreen() {
               if (document.exitFullscreen) {
                 document.exitFullscreen();
@@ -134,4 +134,3 @@ function callKey(event){
                 document.msExitFullscreen();
               }
             }
-            
