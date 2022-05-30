@@ -50,13 +50,14 @@ function callKey(event){
       }
       else if (key==";") uniforms[ "colorInverter" ].value = !uniforms[ "colorInverter" ].value;
       else if (key=="T") window.touchMode = !window.touchMode;
-      else if (key=="A") uniforms[ "colorCombo" ].value = 11;
       else if (key=="F") uniforms[ "fourCreats" ].value *= -1;
-      else if (key=="G") uniforms[ "colorCombo" ].value = 17;
+      else if (key=="A") uniforms[ "colorCombo" ].value = 11;
       else if (key=="\'"||key=="\"") uniforms[ "colorCombo" ].value = 13;
       else if (key=="D") uniforms[ "colorCombo" ].value = 14;
       else if (key=="X") uniforms[ "colorCombo" ].value = 15;
       else if (key=="B") uniforms[ "colorCombo" ].value = 16;
+      else if (key=="G") uniforms[ "colorCombo" ].value = 17;
+      else if (key=="R")uniforms[ "colorCombo" ].value = 18;
       else if (key=="S"){ if(uniforms[ "morph" ].value == 0.)uniforms[ "morph" ].value = 1.;else uniforms[ "morph" ].value = 0.; }
       else if (key=="N") uniforms[ "MetaCored" ].value = !uniforms[ "MetaCored" ].value;
       else if (key=="L"){if(zoomAtl41){zoom=1.;coordX=0.; coordY=0.;}zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
