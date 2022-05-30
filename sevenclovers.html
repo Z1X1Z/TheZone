@@ -1,4 +1,4 @@
-<?php header('Cache-Control: max-age=31536000');header('Cache-Control: public'); ?>
+<?php header('Cache-Control:  public, max-age=31536000');?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -450,19 +450,10 @@
                              if(MetaCored)for(int i=1;i<60; i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;}else break;
                              loops=0.;
                              float hyperCore=0.;
-                             if(MetaCored)hyperCore=(cored*2./3.+log(length(freed(coords)))-1.);
+                             float lfc = length(freed(coords));
+                             if(MetaCored)hyperCore=(cored*2./3.+log(lfc)-1.);
                              for (float counter=0.;counter<41.;counter++)if(abs(s.y)<47.){
-                                 if(hearTOL){
-                                     
-                                     if((mod(counter,3.)==1.))   for(float b=0.;b<2.;b++)  s= vec2(((s.x*s.x-s.y*s.y)-p.x+jc.x),(2.0*s.x*s.y-p.y+jc.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
-                                       
-                                    // if(mod(counter,7.)==4.)s=vec2(-1./((s.x*s.x-s.y*s.y)-p.x),(2.0*s.x*s.y-p.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
-
-    
-                                  }
-
                                 if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+3.14159);
-                                                                                   
 
                                 s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y-t.x, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y-t.y);//x**3
                                 s.x=log(abs(s.x));
@@ -470,16 +461,15 @@
                                float d = length(s);
                                if(d<1.5&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
 
-                               for(int i=0;i<69; i++)if(MetaCored&&d<2./3.&& loops+counter<hyperCore && length(freed(coords))<1.4)
-                                  {
+                               for(int i=0;i<69; i++)if(MetaCored&&d<2./3.&& loops+counter<hyperCore && lfc<1.4)
+                            {
+                                  float shift=2.;s*=shift;d*=shift;loops++;
 
                                   float wise;
                                   if(mod(float(i),4.)==0.)wise=1.;
                                   else if(mod(float(i),4.)==1.)wise=-1.;
                                   else  if(mod(float(i),4.)==2.)wise= -1.;
                                   else  if(mod(float(i),4.)==3.)wise=1.;
-                                  
-                                  float shift=2.;s*=shift;d*=shift;loops++;
 
                                   if(metaCarousel!=0.)s=spin2(s,time*wise*metaCarousel*(1.+petals/6.));
 
@@ -609,6 +599,19 @@ vec3 xtol(vec2 s, vec2 t){
                            
                         }
 
+        vec3 refractelbrot(vec2 p, vec2 t){
+                          p.y*=-1.;
+                                        float c=3.58;
+                                        p.x+=.5;
+            p*=2.*c;
+                                        vec2 z=p;
+                const float iterations =  50.;
+                    for (float f=0.;f<iterations;f+=1.){
+                        if(length(z)>c)z/=c;
+                        z=vec2((z.x*z.x-z.y*z.y-p.x+t.x), 2.0*z.x*z.y-p.y+t.y);//this is {s=s^2-p;s.real=-1./s.real}
+                }
+                return  (vec3(z.x*z.y,z.x,z.y-.2*(1.-p.x))+.3);}
+
 
           vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t);}
         vec3 bodySmall(vec2 p, vec2 t){return torso(p*2.,t)+musculature(p*2.,t)+robe(p*2.,t)+legs(p*4.,t)+heart(p,t);}
@@ -666,18 +669,22 @@ vec3 xtol(vec2 s, vec2 t){
 
                                 backGround=spin2(backGround,atan(backGround.y,backGround.x)*petals/6.);
 
-          vec2 dance = vec2(0.);
-          if (morph>.5)  dance = (
-          vec2(-sin(time+time2dance),-sin((time+time2dance)*-gr))*zoom+
-           (coords.yx+.5)*log(pow(zoom,gr))/log(gr)*zoom*.5
-                              );
-                              vec2 dance2 = vec2(0.);
-                              if (morph>.5)dance2 = vec2(
-                                                         -abs(length(-freed(coords))/(length(freed(coords))-zoom)) -(length(freed(coords))/(length(freed(coords))+zoom))*2./3.,
-                                                   -((zoom*length(freed(coords)))/(length(freed(coords))+zoom)*sign(coords.y*coords.x)*(1.-length(freed(coords)*zoom)) )
-                                                     )
-                                                     ;
+                                                 
+                                                 
+                                                 
+     vec2 dance = vec2(0.);
+                                            vec2 dance2 = vec2(0.);
 
+     if (morph>.5 && colorCombo>=10)  dance=vec2(-sin(time+time2dance),
+                                                 -sin((time+time2dance)*-1.618))*zoom+(coords.yx+.5)*log(pow(zoom,1.618))/log(1.618)*zoom*.5;
+                                            
+    else if (morph>.5&&colorCombo<10){float lfc=length(freed(coords));
+                                            dance2 = vec2(
+                                                    -abs(lfc/(lfc-zoom)) -lfc/(lfc+zoom)*2./3.,
+                                              -((zoom*lfc)/(lfc+zoom)*sign(coords.y)*sign(coords.x)*(1.-lfc*zoom) )
+                                                )
+                                                ;}
+                                                         
           vec2 driftCanceller=vec2(dance.x,-dance.y);
           
           
@@ -687,8 +694,9 @@ vec3 xtol(vec2 s, vec2 t){
           else if (colorCombo==14)zoomer=TOLTOK(backGround,vec2(zoom));
           else if (colorCombo==15)zoomer=xx(backGround,dance2);
           else if (colorCombo==16)zoomer=xtol(backGround,vec2(0.));
-          else if (colorCombo==17)zoomer=body(backGround,vec2(-sin(time*20.)/50.,-sin(time*gr*20.)/30.))+robe(backGround,vec2(0.))/2.+faceHeights(backGround,t)+                                                   heartZoom(backGround-vec2(.5,0.)+driftCanceller,dance);
-;
+          else if (colorCombo==17)zoomer=body(backGround,vec2(-sin(time*20.)/50.,-sin(time*gr*20.)/30.)*zoom)+robe(backGround,vec2(0.))/2.+faceHeights(backGround,t*zoom)+                                                   heartZoom(backGround-vec2(.5,0.)+driftCanceller,dance);
+         else if (colorCombo==18)zoomer=refractelbrot(backGround,dance);
+
                                                    
           vec3 creatures,b;
           p.x+=.5;
