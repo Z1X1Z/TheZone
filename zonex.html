@@ -53,7 +53,7 @@
 
 void main(){
 
-	vec2 p=-((vUv.yx)-.5)/(resolution.xy/max(resolution.x,resolution.y))*2.*zoom;
+	vec2 p=-((vUv.yx)-.5)/(resolution.xy/max(resolution.x,resolution.y))*3.*zoom;
             vec2 t=vec2(0.);
             if (morph>.5)t=vec2(-sin(time+time2dance),-sin((time+time2dance)*-1.618))*zoom+(coords.yx+.5)*log(pow(zoom,1.618))/log(1.618)*zoom*.5;
 
