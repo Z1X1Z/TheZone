@@ -253,7 +253,11 @@ function init() {
 
     scene = new THREE.Scene();
     inputData = new Float32Array(bufferSize);
-    camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 1, -1);
+    var m = Math.max(window.innerWidth,window.innerHeight)
+    var h=window.innerHeight/m/2.;
+    var w=window.innerWidth/m/2.;
+
+    camera = new THREE.OrthographicCamera( -w, w, h, -h, 1, -1);
     geometryP = new THREE.PlaneGeometry( 2, 2 );
     geometryP.z=-1.;
 
@@ -312,6 +316,12 @@ function init() {
 
 
 function onWindowResize() {
+    var m = Math.max(window.innerWidth,window.innerHeight)
+    var h=window.innerHeight/m*2.;
+    var w=window.innerWidth/m*2.;
+
+    camera = new THREE.OrthographicCamera( -w, w, h, -h, 1, -1);
+    
        let correlationForText = document.getElementById("allText").offsetHeight;
     uniforms.resolution.value.x = window.innerWidth;
     uniforms.resolution.value.y = window.innerHeight-correlationForText;
@@ -426,38 +436,6 @@ if( !window.touchMode) {
 
 
 
-            var currMode = "desktop"
-            //vvvvhttps://www.cssjunction.com/tutorials/detect-landscape-portrait-mode-using-javascript/
-            switch(window.orientation){
-
-                 case 0:
-                 currMode = "portrait";
-                 break;
-
-                 case -90:
-                 currMode = "landscape";
-                 break;
-
-                 case 90:
-                 currMode = "landscape";
-                 break;
-
-                 case 180:
-                 currMode = "portrait";
-                 break;
-            }
-            //^^^^https://www.cssjunction.com/tutorials/detect-landscape-portrait-mode-using-javascript/
-
-  let porportionX =1.;
-  let porportionY =1.;
-  if(currMode=="landscape"||currMode=="desktop"){
-      porportionX = window.innerHeight/window.innerWidth;
-      porportionY = 1.;
-  }
-  else if (currMode=="portrait"){
-      porportionY =window.innerWidth/window.innerHeight;
-      porportionX = 1.;
-  }
   let lineMat =
   new THREE.LineBasicMaterial( {
         color: 0xffffff,
@@ -476,8 +454,8 @@ if( !window.touchMode) {
 
   let depth = -1.0;
   if (on)for (let r= 0; r < bufferSize; r ++) {
-    let tx = spirray0[r]*porportionX/spiregulator;
-    let ty =  spirray1[r]*porportionY/spiregulator;
+    let tx = spirray0[r]/spiregulator;
+    let ty =  spirray1[r]/spiregulator;
     point[r]=new THREE.Vector3( tx, ty, depth );
   }
   const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), lineMat );
@@ -501,7 +479,7 @@ zoomRoutine();
    var maxTestar=0.;
    var minTestar=100000000000000;
 
-   const star=[];
+   var star=[];
    const starColors=[];
 if(!window.touchMode){
    if(onO){
@@ -524,10 +502,10 @@ if(!window.touchMode){
                   for(var yy=0;yy<6;yy++)   starColors.push(vop.r,vop.g,vop.b,1.)
 
             rpio2 =arm+pi/2.;
-            let x = widt*-Math.sin(rpio2)*porportionX;
-            let y = widt*-Math.cos(rpio2)*porportionY;
-            let xr = lengt*-Math.sin(arm)*porportionX;
-            let yr = lengt*-Math.cos(arm)*porportionY;
+            let x = widt*-Math.sin(rpio2);
+            let y = widt*-Math.cos(rpio2);
+            let xr = lengt*-Math.sin(arm);
+            let yr = lengt*-Math.cos(arm);
     let depth = -1.+lengt;//this depth should draw the back around the middle up towards the top.
 
      star.push(
@@ -541,11 +519,11 @@ if(!window.touchMode){
     ) ;
 
 /*
-      0-widt*-Math.sin(rpio2)*porportionX,    0-widt*-Math.cos(rpio2)*porportionY,  -0.05,
-      (lengt*-Math.sin(yy)+widt*-Math.sin(rpio2))*porportionX,
-      (lengt*-Math.cos(yy)+widt*-Math.cos(rpio2))*porportionY,  -0.05,
-      (lengt*-Math.sin(yy)-widt*-Math.sin(rpio2))*porportionX,
-      (lengt*-Math.cos(yy)-widt*-Math.cos(rpio2)*porportionY),  -0.05,
+      0-widt*-Math.sin(rpio2),    0-widt*-Math.cos(rpio2),  -0.05,
+      (lengt*-Math.sin(yy)+widt*-Math.sin(rpio2)),
+      (lengt*-Math.cos(yy)+widt*-Math.cos(rpio2)),  -0.05,
+      (lengt*-Math.sin(yy)-widt*-Math.sin(rpio2)),
+      (lengt*-Math.cos(yy)-widt*-Math.cos(rpio2)),  -0.05,
       */
     // itemSize = 3 because there are 3 values (components) per vertex
 
@@ -572,24 +550,33 @@ else{//start drawing of just twenty four frets here
 var vertices;
 var z = -1.;
              star.push(
-                0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY, z,
-                0+widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0+widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  z,
-                (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
-                (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  z,
-                0-widt*-Math.sin(rr*pi*2./24+pi/2.)*porportionX,    0-widt*-Math.cos(rr*pi*2./24+pi/2.)*porportionY,  z,
-                (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
-                (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  z,
-                (lengt*-Math.sin(rr*pi*2./24)-widt*-Math.sin(rr*pi*2./24+pi/2.))*porportionX,
-                (lengt*-Math.cos(rr*pi*2./24)-widt*-Math.cos(rr*pi*2./24+pi/2.))*porportionY,  z,
+                0-widt*-Math.sin(rr*pi*2./24+pi/2.),    0-widt*-Math.cos(rr*pi*2./24+pi/2.), z,
+                0+widt*-Math.sin(rr*pi*2./24+pi/2.),    0+widt*-Math.cos(rr*pi*2./24+pi/2.),  z,
+                (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.)),
+                (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.)),  z,
+                0-widt*-Math.sin(rr*pi*2./24+pi/2.),    0-widt*-Math.cos(rr*pi*2./24+pi/2.),  z,
+                (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.)),
+                (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.)),  z,
+                (lengt*-Math.sin(rr*pi*2./24)-widt*-Math.sin(rr*pi*2./24+pi/2.)),
+                (lengt*-Math.cos(rr*pi*2./24)-widt*-Math.cos(rr*pi*2./24+pi/2.)),  z,
                     );
 } }
-
+         /*https://www.youtube.com/watch?v=4SH_-YhN15A&list=WL&index=10&t=2328s  wouldn't this be cool with zonex, description of process at beginning of video
+                 const quaternion = new THREE.Quaternion();
+                 quaternion.setFromAxisAngle( new THREE.Vector3( 0, 0, 1 ), Math.PI / 2 );
+                                             for(var n=0.; n<star.length;n+=3){
+                                             const a= new THREE.Vector3(star[n],star[n+1],star[n+2])
+                 const b = a.applyQuaternion(quaternion);
+                                             star[n]=b.x;
+                                             star[n+1]=b.y
+                                             }
+                       */
                  geome = new THREE.BufferGeometry();
 
                  geome.setAttribute( 'position', new THREE.Float32BufferAttribute( star, 3 ).onUpload( disposeArray ) );
                     geome.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ).onUpload( disposeArray ));
                      geome.computeBoundingSphere();
-
+                 
                   var  opac=1.;
                   if(onO)opac=.3+.7/uniforms[ "metronome" ].value
                    material= new THREE.MeshBasicMaterial({
@@ -618,12 +605,12 @@ while(loopLimit>15){
   let tt = 0.;
   var z = -1.+(trailDepth-loopLimit)/trailDepth;
  trail.push(
-    (scalar*cx[r]+widtr*xPerp[r])*porportionX, (scalar*cy[r]+widtr*yPerp[r])*porportionY,z,
-    (scalar*cx[s]-widts*xPerp[s])*porportionX, (scalar*cy[s]-widts*yPerp[s])*porportionY,z,
-    (scalar*cx[s]+widts*xPerp[s])*porportionX, (scalar*cy[s]+widts*yPerp[s])*porportionY,z,
-    (scalar*cx[r]-widtr*xPerp[r])*porportionX, (scalar*cy[r]-widtr*yPerp[r])*porportionY,z, //2
-    (scalar*cx[s]-widts*xPerp[s])*porportionX, (scalar*cy[s]-widts*yPerp[s])*porportionY,z,  //1
-    (scalar*cx[r]+widtr*xPerp[r])*porportionX, (scalar*cy[r]+widtr*yPerp[r])*porportionY,z, //3
+    (scalar*cx[r]+widtr*xPerp[r]), (scalar*cy[r]+widtr*yPerp[r]),z,
+    (scalar*cx[s]-widts*xPerp[s]), (scalar*cy[s]-widts*yPerp[s]),z,
+    (scalar*cx[s]+widts*xPerp[s]), (scalar*cy[s]+widts*yPerp[s]),z,
+    (scalar*cx[r]-widtr*xPerp[r]), (scalar*cy[r]-widtr*yPerp[r]),z, //2
+    (scalar*cx[s]-widts*xPerp[s]), (scalar*cy[s]-widts*yPerp[s]),z,  //1
+    (scalar*cx[r]+widtr*xPerp[r]), (scalar*cy[r]+widtr*yPerp[r]),z, //3
   );
 
   s = r;
