@@ -99,7 +99,7 @@ function callKey(event){
                 if(fullscreen)openFullscreen();
                 else closeFullscreen();
             }
-      else if (key==" ")
+      else if (key==" "||key=="_")
       {
         if (onO)onO=false;
         else onO = true;
