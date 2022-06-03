@@ -180,7 +180,7 @@ else if (reset>3){on = false;
 else reset++
 if (trailDepth<trailLength)trailDepth++;
 let note = Math.log(Math.sqrt(pitch)/440.0)/Math.log(Math.pow ( 2, (1/24.0)))+49;
-let inc = 8.5 ;
+let inc = 8.25 ;
 let t =  (note * 30+30*inc);
 angle = t%360;
 angle = -angle;
@@ -492,7 +492,7 @@ if(!window.touchMode){
         var lengt = (testar[g]-minTestar)/(maxTestar-minTestar)*.9;
 
         var vop = new THREE.Color();
-       vop.setHSL((1-mustarD[g])%24./24., mustarD[g]/297.,mustarD[g]/297.);//297 is the highest heard note
+       vop.setHSL(-mustarD[g]%24./24., mustarD[g]/297.,mustarD[g]/297.);//297 is the highest heard note
         material = new THREE.MeshBasicMaterial({
         color:vop,
         opacity: 1.,
@@ -561,7 +561,7 @@ var z = -1.;
                 (lengt*-Math.cos(rr*pi*2./24)-widt*-Math.cos(rr*pi*2./24+pi/2.)),  z,
                     );
 } }
-         /*https://www.youtube.com/watch?v=4SH_-YhN15A&list=WL&index=10&t=2328s  wouldn't this be cool with zonex, description of process at beginning of video
+         /*https://www.youtube.com/watch?v=4SH_-YhN15A&list=WL&index=10&t=2328s  wouldn't this be cool with the equalizer starship, description of process at beginning of video
                  const quaternion = new THREE.Quaternion();
                  quaternion.setFromAxisAngle( new THREE.Vector3( 0, 0, 1 ), Math.PI / 2 );
                                              for(var n=0.; n<star.length;n+=3){
