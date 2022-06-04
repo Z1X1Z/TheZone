@@ -64,7 +64,7 @@ void main(){
                               p.y*=-1.;
                               if(colorCombo==18) p*=2.*c;
                               vec2 z=p;
-      const float iterations =  21.+6.*20.;
+      const float iterations =  3.+6.*40.;
           for (float f=0.;f<iterations;f+=1.)if(length(z)>thresh&&colorCombo!=18)break;
           else{
               if(colorCombo==18)if(length(z)>c)z/=c;
