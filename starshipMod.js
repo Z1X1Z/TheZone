@@ -226,9 +226,9 @@ yPerp[f] = -Math.cos(-angle+pi/2)*radius;
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
-    cx[n] += d_x*interpolation*2.;
-    cy[n] += d_y*interpolation*2.;
-           trailWidth[n] *=.997
+    cx[n] += d_x*interpolation*3.*window.movementRate;
+    cy[n] += d_y*interpolation*3.*window.movementRate;
+           trailWidth[n] *=.997;
 }
 
 }
@@ -652,7 +652,6 @@ while(loopLimit>15){
            }
 else {
           
-        if(window.touchMode){
         zoomRoutine();
             var d = 3.;//this is the frame size in the shader: "p=vec2(...."
             if(uniforms.colorCombo.value==15&&window.mandelbrot) d = 10.;//for zonex.html
@@ -660,7 +659,8 @@ else {
              var spunTouch = [ (zoom-uniforms[ "zoom" ].value)*screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)*1./d),
                               -(zoom-uniforms[ "zoom" ].value)*screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)*1./d)];
 
-                  if(uniforms.carousel.value!=0.)         spunD=spin(spunTouch,uniforms.carousel.value*uniforms[ "time" ].value%(Math.PI*2.));
+                  if(uniforms.carousel.value!=0.)         spunTouch=spin(spunTouch,uniforms.carousel.value*uniforms[ "time" ].value%(Math.PI*2.));
+            
                       coordX+= spunTouch[0];
                       coordY+= spunTouch[1];
                   }
@@ -669,7 +669,7 @@ else {
           uniforms.coords.value.x = coordX;
           uniforms.coords.value.y = coordY;
         renderer.render( scene, camera );
-        }
+        
         }
                                                                                            
                                                                                            if(!terminateLoop)window.requestAnimationFrame( animate );
