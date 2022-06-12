@@ -1,4 +1,4 @@
-function stallTillTHREE(){if(typeof THREE=="object"){init();}else if(!terminateLoop) setTimeout(stallTillTHREE,10);}
+function stallTillTHREE(){if(typeof THREE=="object"){init();}else setTimeout(stallTillTHREE,10);}
 stallTillTHREE();//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
 //document.head.addEventListener('beforeunload', event => { cancelAnimationFrame();});
 let screenPressCoordX, screenPressCoordY;
