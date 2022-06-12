@@ -1,7 +1,6 @@
-let terminateLoop=false;
 function stallTillTHREE(){if(typeof THREE=="object"){init();}else if(!terminateLoop) setTimeout(stallTillTHREE,10);}
 stallTillTHREE();//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
-document.head.addEventListener('beforeunload', event => { cancelAnimationFrame(); terminateLoop=true; });
+//document.head.addEventListener('beforeunload', event => { cancelAnimationFrame();});
 let screenPressCoordX, screenPressCoordY;
 window.pointerZoom=false;
 let zoom=1., coordX=0., coordY=0.;
@@ -683,8 +682,7 @@ else {
         
         }
                                                                                            
-                                                                                           if(!terminateLoop)window.requestAnimationFrame( animate );
-                                                                                                                                                       else window.cancelAnimationFrame();
+                                                                                           window.requestAnimationFrame( animate );
 }
 
 
