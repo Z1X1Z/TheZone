@@ -9,6 +9,8 @@ if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
 window.movementRate=.5;
 window.touchMode=false;
+window.volumeSpeed = false;
+
 let zoomFrames = 14;
 let ZR = Math.E**(Math.log(.5)/zoomFrames)
 const MR = 2./3./zoomFrames;
@@ -199,8 +201,8 @@ angle[f] = angle;
          //d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
 
 
-         d_x = -Math.sin(-angle);
-         d_y = -Math.cos(-angle);
+         d_x = -Math.sin(-angle)*volume;
+         d_y = -Math.cos(-angle)*volume;
          var spunD = [d_x,d_y];
 
                     if(uniforms.carousel.value!=0.)         spunD=spin(spunD,uniforms.carousel.value*uniforms[ "time" ].value%(Math.PI*2.));
@@ -220,8 +222,8 @@ if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize){
   }
 cx[f] = 0;
 cy[f] = 0;
-xPerp[f] = -Math.sin(-angle+pi/2)*radius;
-yPerp[f] = -Math.cos(-angle+pi/2)*radius;
+xPerp[f] = -Math.sin(-angle+pi/2)*radius*volume;
+yPerp[f] = -Math.cos(-angle+pi/2)*radius*volume;
                      trailWidth[f]=1.;
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
@@ -365,6 +367,7 @@ function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coo
                           if(zoom<.0000000000000000000000001)zoom = 1.;
 
 }
+                                 var volume;
 function animate( timestamp ) {
                        uniforms[ "time" ].value = Math.fround(timestamp/1000.);
 
@@ -377,8 +380,15 @@ if(!window.touchMode)pointerZoom=false;
 else on=false;
 if( !window.touchMode) {
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
-   spiral_compress();
-                           
+           if(window.volumeSpeed){
+                           volume = 0.;
+                           for(var n=0; n<inputData.length-1;n++)volume+=Math.abs(inputData[n+1]-inputData[n]);
+                           volume/=inputData.length/audioX.sampleRate*255;
+                           volume*=2.;
+                       }
+                        else volume=1.;
+                                                              
+                                                              spiral_compress();
                            move();
                            if(on) makeSpirograph();
 

@@ -104,6 +104,8 @@ function callKey(event){
         if (onO)onO=false;
         else onO = true;
       }
+      else if (key=="W")window.volumeSpeed=!window.volumeSpeed;
+
       else if (key=="="||key.toLowerCase()=="+")window.movementRate *=1.11111111;
       else if ( event.keyCode==173||key.toLowerCase()=="-")window.movementRate /=1.11111111;
 
