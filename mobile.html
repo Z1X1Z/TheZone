@@ -13,13 +13,13 @@
             </div>
 
         <div id="container"></div>
+        <script src="OFFLINEonlineSwitch.js"></script>
 
         <script src="starshipMod.js"></script>
 
 </head>
 <body>
 
-    <script src="OFFLINEonlineSwitch.js"></script>
 <script id="threeJSscript" async></script>
 <script id="wadJSscript" async></script>
 <script src="hotkeys.js" async></script>
@@ -31,7 +31,7 @@
                 varying vec2 vUv;
 
             void main()    {
-
+  
                 vUv = uv;
                 gl_Position = vec4( position, 1.0 );
             }
@@ -275,7 +275,7 @@
                            backGround=spin2(backGround,atan(backGround.y,backGround.x)*petals/6.);
                            p.x+=.5;
     float rate = 1.;
-    vec2 t =vec2(-sin(rate*time2dance)/50.,-sin(time2dance*(rate*1.618)*3.)/30.);
+    vec2 t =vec2(-sin(rate*time2dance)/50.,-sin(time2dance*(rate*1.618))/30.);
     vec2 dance = vec2(0.);
     if (morph>.5) dance = vec2(
                                -abs(length(-freed(coords))/(length(freed(coords))-zoom)) -(length(freed(coords))/(length(freed(coords))+zoom))*2./3.,
