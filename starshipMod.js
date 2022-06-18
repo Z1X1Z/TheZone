@@ -6,12 +6,12 @@ window.pointerZoom=false;
 let zoom=1., coordX=0., coordY=0.;
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
-window.movementRate=.5;
+window.movementRate=1.;
 window.touchMode=false;
 window.volumeSpeed = false;
 
-let zoomFrames = 14;
-let ZR = Math.E**(Math.log(.5)/zoomFrames)
+let zoomFrames = 24;
+let ZR = Math.E**(Math.log(.5)/zoomFrames);
 const MR = 2./3./zoomFrames;
 window.zoomCageSize = 1.5;//radius of zoom bounding
                   window.uniformsLoaded=false;
@@ -208,6 +208,7 @@ angle[f] = angle;
          var d_xS=spunD[0];
          var d_yS=spunD[1];
          if(zoomAtl41){d_xS*=3;d_yS*=3;}
+         
     bx=coordX+d_xS*MR*zoom*interpolation*window.movementRate;
   by=coordY+d_yS*MR*zoom*interpolation*window.movementRate;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold&&on){
@@ -227,8 +228,8 @@ yPerp[f] = -Math.cos(-angle+pi/2)*radius*volume;
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
-    cx[n] += d_x*interpolation*7.*window.movementRate;
-    cy[n] += d_y*interpolation*7.*window.movementRate;
+    cx[n] += d_x*interpolation*3.5;
+    cy[n] += d_y*interpolation*3.5;
     
            trailWidth[n] *=.997;
 }
@@ -382,8 +383,9 @@ if( !window.touchMode) {
            if(window.volumeSpeed){
                            volume = 0.;
                            for(var n=0; n<inputData.length-1;n++)volume+=Math.abs(inputData[n+1]-inputData[n]);
-                           volume/=inputData.length/audioX.sampleRate*255;
-                           volume*=2.;
+                           volume*=audioX.sampleRate/inputData.length/255;
+               volume=volume
+             volume*=4.;
                        }
                         else volume=1.;
                                                               
