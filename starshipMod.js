@@ -175,7 +175,7 @@ if (totalAMP>zoomOutRatchetThreshold||on)//this line under revisement
   pb =    calculatePitch();
   if(pb>0) pb =audioX.sampleRate/pb;
 on = true;
-if (isFinite(pb) &&pb>0&& Math.abs(pb-4.64152157387662*4.64152157387662)>.000001&&Math.abs(pb-4.842411556493535*4.842411556493535)>.000001&&pb!=-1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) { pitch =pb;reset =0;}
+if (isFinite(pb) &&pb>0&& Math.abs(pb-Math.floor((audioX.sampleRate)/1024))>.000001 &&pb!=-1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) { pitch =pb;reset =0;}
 else if (reset>3){on = false;
 }
 else reset++
@@ -380,14 +380,14 @@ if(!window.touchMode)pointerZoom=false;
 else on=false;
 if( !window.touchMode) {
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
-           if(window.volumeSpeed){
+           if(window.volumeSpeed)
+           {
                            volume = 0.;
                            for(var n=0; n<inputData.length-1;n++)volume+=Math.abs(inputData[n+1]-inputData[n]);
                            volume*=audioX.sampleRate/inputData.length/255;
-               volume=volume
-             volume*=4.;
+                        volume*=2.;
                        }
-                        else volume=1.;
+                else volume=1.;
                                                               
                                                               spiral_compress();
                            move();
