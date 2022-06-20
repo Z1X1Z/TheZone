@@ -175,7 +175,7 @@ if (totalAMP>zoomOutRatchetThreshold||on)//this line under revisement
   pb =    calculatePitch();
   if(pb>0) pb =audioX.sampleRate/pb;
 on = true;
-if (isFinite(pb) &&pb>0&& Math.abs(pb-Math.floor((audioX.sampleRate)/1024))>.000001 &&pb!=-1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) { pitch =pb;reset =0;}
+if (isFinite(pb) &&pb>0&& Math.abs(Math.floor(pb)-Math.floor((audioX.sampleRate)/1024))>.000001 &&pb!=-1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) { pitch =pb;reset =0;}
 else if (reset>3){on = false;
 }
 else reset++
