@@ -658,16 +658,16 @@ vec3 xtol(vec2 s, vec2 t){
           vec3 zoomer;
           
           
-          vec2 bg =p/2.;
+          vec2 bg =p/4.;
           bg=freed(bg*zoom+coords.yx);
                     
-          vec2 spunC=coords;
-          if(carousel!=0.)spunC=spin2(spunC,-carousel*mod(time,3.1415927410125732*2.));
-          vec2 backGround=freed(p.yx/2.*zoom+spunC);
+          vec2 spunC=coords.yx;
+          
+          if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time,3.1415927410125732*2.));}
+          vec2 backGround=freed(p/2.*zoom+spunC);
           if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time,3.1415927410125732*2.));
-                                backGround=backGround.yx;
 
-                                backGround=spin2(backGround,atan(backGround.y,backGround.x)*petals/6.);
+                                backGround=spin2(backGround,atan(backGround.y,backGround.x)*petals/6.);//omniclover
 
                                                  
                                                  
