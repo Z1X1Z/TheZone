@@ -385,7 +385,7 @@ if( !window.touchMode) {
                            volume = 0.;
                            for(var n=0; n<inputData.length-1;n++)volume+=Math.abs(inputData[n+1]-inputData[n]);
                            volume*=audioX.sampleRate/inputData.length/255;
-                        volume*=2.;
+                        volume*=1.5;
                        }
                 else volume=1.;
                                                               
