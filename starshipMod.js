@@ -12,7 +12,8 @@ window.volumeSpeed = false;
 
 let zoomFrames = 24;
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
-const MR = 1.5/zoomFrames;
+                  const mf = 1.5;
+const MR = mf/zoomFrames;
 window.zoomCageSize = 1.5;//radius of zoom bounding
                   window.uniformsLoaded=false;
 
@@ -226,8 +227,8 @@ yPerp[f] = -Math.cos(-angle+pi/2)*radius*volume;
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
-    cx[n] += d_x*interpolation*6.;
-    cy[n] += d_y*interpolation*6.;
+    cx[n] += d_x*interpolation*6.*mf;
+    cy[n] += d_y*interpolation*6.*mf;
     
            trailWidth[n] *=.997;
 }
