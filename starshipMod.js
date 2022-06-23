@@ -18,7 +18,7 @@ window.zoomCageSize = 1.5;//radius of zoom bounding
                   window.uniformsLoaded=false;
 
 zoomOutRatchetThreshold=.0005;
-let radius = 15.*Math.min(window.innerWidth,window.innerHeight)/Math.max(window.innerWidth,window.innerHeight);
+let radius = 8.;
 var rez=1.;
 let fftSize=2048;
 let trailLength = 576;
@@ -318,8 +318,6 @@ function init() {
 
 
 function onWindowResize() {
-     radius = 15.*Math.min(window.innerWidth,window.innerHeight)/Math.max(window.innerWidth,window.innerHeight);
-
     var m = Math.max(window.innerWidth,window.innerHeight)
     var h=window.innerHeight/m*2.;
     var w=window.innerWidth/m*2.;
