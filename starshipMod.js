@@ -12,12 +12,12 @@ window.volumeSpeed = false;
 
 let zoomFrames = 24;
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
-const MR = 1./zoomFrames;
+const MR = 1.5/zoomFrames;
 window.zoomCageSize = 1.5;//radius of zoom bounding
                   window.uniformsLoaded=false;
 
 zoomOutRatchetThreshold=.0005;
-let radius = 4.;
+let radius = 8.;
 var rez=1.;
 let fftSize=2048;
 let trailLength = 576;
@@ -176,7 +176,7 @@ if (totalAMP>zoomOutRatchetThreshold||on)//this line under revisement
   if(pb>0) pb =audioX.sampleRate/pb;
 on = true;
 if (isFinite(pb) &&pb>0&& Math.abs(Math.floor(pb)-Math.floor((audioX.sampleRate)/1024))>.000001 &&pb!=-1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) { pitch =pb;reset =0;}
-else if (reset>3){on = false;
+else if (reset>3||pitch==1){on = false;
 }
 else reset++
 if (trailDepth<trailLength)trailDepth++;
@@ -199,7 +199,6 @@ angle[f] = angle;
          //d_x = -Math.sin(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
          //d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
 
-
          d_x = -Math.sin(-angle)*volume;
          d_y = -Math.cos(-angle)*volume;
          var spunD = [d_x,d_y];
@@ -207,7 +206,6 @@ angle[f] = angle;
                     if(uniforms.carousel.value!=0.)         spunD=spin(spunD,uniforms.carousel.value*uniforms[ "time" ].value%(Math.PI*2.));
          var d_xS=spunD[0];
          var d_yS=spunD[1];
-         if(zoomAtl41){d_xS*=3;d_yS*=3;}
          
     bx=coordX+d_xS*MR*zoom*interpolation*window.movementRate;
   by=coordY+d_yS*MR*zoom*interpolation*window.movementRate;
@@ -228,8 +226,8 @@ yPerp[f] = -Math.cos(-angle+pi/2)*radius*volume;
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
-    cx[n] += d_x*interpolation*3.5;
-    cy[n] += d_y*interpolation*3.5;
+    cx[n] += d_x*interpolation*6.;
+    cy[n] += d_y*interpolation*6.;
     
            trailWidth[n] *=.997;
 }
@@ -385,7 +383,6 @@ if( !window.touchMode) {
                            volume = 0.;
                            for(var n=0; n<inputData.length-1;n++)volume+=Math.abs(inputData[n+1]-inputData[n]);
                            volume*=audioX.sampleRate/inputData.length/255;
-                        volume*=1.5;
                        }
                 else volume=1.;
                                                               
