@@ -256,8 +256,8 @@ function init() {
     scene = new THREE.Scene();
     inputData = new Float32Array(bufferSize);
     var m = Math.min(window.innerWidth,window.innerHeight)
-    var h=window.innerHeight/m/2.;
-    var w=window.innerWidth/m/2.;
+    var h=window.innerHeight/m;
+    var w=window.innerWidth/m;
 
     camera = new THREE.OrthographicCamera( -w, w, h, -h, 1, -1);
     geometryP = new THREE.PlaneGeometry( 2, 2 );
@@ -319,8 +319,8 @@ function init() {
 
 function onWindowResize() {
     var m = Math.min(window.innerWidth,window.innerHeight)
-    var h=window.innerHeight/m*2.;
-    var w=window.innerWidth/m*2.;
+    var h=window.innerHeight/m;
+    var w=window.innerWidth/m;
 
     camera = new THREE.OrthographicCamera( -w, w, h, -h, 1, -1);
     
@@ -499,7 +499,7 @@ if(!window.touchMode){
     for (var g=0; g<starArms; g++)if(isFinite(testar[g])&&testar[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.) {
         var widt = .02;
         var arm =(mustarD[g]+20)%24./24.*pi*2.;
-        var lengt = (testar[g]-minTestar)/(maxTestar-minTestar)*.9;
+        var lengt = (testar[g]-minTestar)/(maxTestar-minTestar);
 
         var vop = new THREE.Color();
        vop.setHSL(-mustarD[g]%24./24., mustarD[g]/297.,mustarD[g]/297.);//297 is the highest heard note
