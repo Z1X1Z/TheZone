@@ -658,9 +658,6 @@ vec3 xtol(vec2 s, vec2 t){
           vec3 zoomer;
           
           
-          vec2 bg =p/4.;
-          bg=freed(bg*zoom+coords.yx);
-                    
           vec2 spunC=coords.yx;
           
           if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time,3.1415927410125732*2.));}
@@ -702,7 +699,7 @@ vec3 xtol(vec2 s, vec2 t){
           p.x+=.5;
           vec3 bridge=vec3(0.);
                                                          if(helm)bridge=fourCreaturesSmall(p,t);
-          if(fourCreats<0){creatures=fourCreatures((bg)*4.,t);  b=bride((bg-vec2(.125,0.))*12.,vec2(time2dance));}
+          if(fourCreats<0){creatures=fourCreatures((backGround)*4.,t);  b=bride((backGround-vec2(.125,0.))*12.,vec2(time2dance));}
           vec3 mny=vec3(0.);
           vec3 m=vec3(0.);
             if(colorCombo!=17){
