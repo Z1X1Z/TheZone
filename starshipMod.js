@@ -167,7 +167,8 @@ function  move()
 
   totalAMP = 0.;
   if (!trailLoaded) {trailLoaded = true; for(var n = 0; n<trailLength; n++)
-      {xPerp[n]=0;yPerp[n]=0;angle[n]=0;cx[n]=0;cy[n]=0;}trailWidth[n]=0.;}
+  {xPerp[n]=0;yPerp[n]=0;cx[n]=0;cy[n]=0;trailWidth[n]=0.;pitchCol[n]  = new THREE.Color()
+}}
     pitch=1;
     var pb = -1;
    for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
@@ -312,7 +313,6 @@ function init() {
   container.appendChild( renderer.domElement );
   onWindowResize();
   window.addEventListener( 'resize', onWindowResize, false );
-
     startMic();
 }
 
@@ -601,13 +601,14 @@ var z = -1.;
                    scene.add(meshe);
                  var trail=[];
                  var trailColor=[];
+                 
 let r = (f+trailDepth-2)%trailDepth;
 let s = (f+trailDepth-1)%trailDepth;
+
 let loopLimit = trailDepth;
 //if(isFinite(cx[r-1])&&isFinite(cx[s])&&isFinite(cy[r-1])&&isFinite(cy[s]))
 
-while(loopLimit>3){
-  loopLimit--;
+while(loopLimit>0){
   for(var yy=0;yy<6;yy++)   trailColor.push(pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,.75*(1.-(trailDepth-loopLimit)/trailDepth))
   let widtr = .2*(1.-trailWidth[r]);
   let widts = .2*(1.-trailWidth[s]);
@@ -625,7 +626,9 @@ while(loopLimit>3){
 
   s = r;
   r--;
-  if(r<=0)r=trailDepth-1;
+  if(r< 0)r+=trailDepth;
+              loopLimit--;
+
 }
 
                  geomeTrail = new THREE.BufferGeometry();
