@@ -18,7 +18,7 @@ window.zoomCageSize = 1.5;//radius of zoom bounding
                   window.uniformsLoaded=false;
 
 zoomOutRatchetThreshold=.0005;
-let radius = 21.;
+let radius = 14.;
 var rez=1.;
 let fftSize=2048;
 let trailLength = 576;
