@@ -255,7 +255,7 @@ function init() {
 
     scene = new THREE.Scene();
     inputData = new Float32Array(bufferSize);
-    var m = Math.max(window.innerWidth,window.innerHeight)
+    var m = Math.min(window.innerWidth,window.innerHeight)
     var h=window.innerHeight/m/2.;
     var w=window.innerWidth/m/2.;
 
