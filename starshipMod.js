@@ -373,7 +373,7 @@ function animate( timestamp ) {
   onWindowResize();//may need to be taken out someday, just for iOS windowing rotation bug
                                                               
           interpolation = (timestamp-lastFrameTime)/1000.*60.;
-         if (interpolation>500)interpolation=1;
+         if (interpolation>200)interpolation=200;
             lastFrameTime=timestamp;
 if(!window.touchMode)pointerZoom=false;
 else on=false;
