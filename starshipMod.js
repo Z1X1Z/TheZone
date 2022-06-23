@@ -18,7 +18,7 @@ window.zoomCageSize = 1.5;//radius of zoom bounding
                   window.uniformsLoaded=false;
 
 zoomOutRatchetThreshold=.0005;
-let radius = 8.;
+let radius = 15.*Math.min(window.innerWidth,window.innerHeight)/Math.max(window.innerWidth,window.innerHeight);
 var rez=1.;
 let fftSize=2048;
 let trailLength = 576;
@@ -41,7 +41,7 @@ let center = false;
           mobile=true;
       }
       else if(navigator.userAgent.toLowerCase().match(/mobile/i)){
-           rez=.25;
+           rez=.5;
            //fftSize=512;
            //trailLength = 144;
            mobile=true;
@@ -318,6 +318,8 @@ function init() {
 
 
 function onWindowResize() {
+     radius = 15.*Math.min(window.innerWidth,window.innerHeight)/Math.max(window.innerWidth,window.innerHeight);
+
     var m = Math.max(window.innerWidth,window.innerHeight)
     var h=window.innerHeight/m*2.;
     var w=window.innerWidth/m*2.;
