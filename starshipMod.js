@@ -606,7 +606,7 @@ let s = (f+trailDepth-1)%trailDepth;
 let loopLimit = trailDepth;
 //if(isFinite(cx[r-1])&&isFinite(cx[s])&&isFinite(cy[r-1])&&isFinite(cy[s]))
 
-while(loopLimit>15){
+while(loopLimit>3){
   loopLimit--;
   for(var yy=0;yy<6;yy++)   trailColor.push(pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,.75*(1.-(trailDepth-loopLimit)/trailDepth))
   let widtr = .2*(1.-trailWidth[r]);
