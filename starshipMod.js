@@ -18,7 +18,7 @@ window.zoomCageSize = 1.5;//radius of zoom bounding
                   window.uniformsLoaded=false;
 
 zoomOutRatchetThreshold=.0005;
-let radius = 8.;
+let radius = 21.;
 var rez=1.;
 let fftSize=2048;
 let trailLength = 576;
@@ -227,8 +227,8 @@ yPerp[f] = -Math.cos(-angle+pi/2)*radius*volume;
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
-    cx[n] += d_x*interpolation*6.*mf;
-    cy[n] += d_y*interpolation*6.*mf;
+    cx[n] += d_x*interpolation*12.*mf;
+    cy[n] += d_y*interpolation*12.*mf;
     
            trailWidth[n] *=.997;
 }
@@ -373,7 +373,7 @@ function animate( timestamp ) {
   onWindowResize();//may need to be taken out someday, just for iOS windowing rotation bug
                                                               
           interpolation = (timestamp-lastFrameTime)/1000.*60.;
-         if (interpolation>120)interpolation=1;
+         if (interpolation>500)interpolation=1;
             lastFrameTime=timestamp;
 if(!window.touchMode)pointerZoom=false;
 else on=false;
