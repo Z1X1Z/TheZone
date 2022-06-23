@@ -12,7 +12,7 @@ window.volumeSpeed = false;
 
 let zoomFrames = 24;
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
-                  const mf = 1.5;
+                  const mf = 1.;
 const MR = mf/zoomFrames;
 window.zoomCageSize = 1.5;//radius of zoom bounding
                   window.uniformsLoaded=false;
