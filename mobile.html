@@ -47,6 +47,7 @@
             uniform bool colorInverter;
 
             uniform float time;
+            uniform float rate;
             uniform float zoom;
             uniform float metronome;
 
@@ -263,19 +264,18 @@
     void main(){
      vec2 p=-((vUv.yx)-.5)/(resolution.xy/max(resolution.x,resolution.y))*6.;
      
-     vec2 spunC=coords;
-     if(carousel!=0.)spunC=spin2(spunC,-carousel*mod(time,3.1415927410125732*2.));
-     vec2 backGround=freed(p.yx/2.*zoom+spunC);
      
      
+     vec2 spunC=coords.yx;
      
-     
-     if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time,3.1415927410125732*2.));
+     if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time*rate,3.1415927410125732*2.));}
+     vec2 backGround=freed(p/2.*zoom+spunC);
+     if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time*rate,3.1415927410125732*2.));
+
                           backGround=backGround.yx;
                            backGround=spin2(backGround,atan(backGround.y,backGround.x)*petals/6.);
                            p.x+=.5;
-    float rate = 1.;
-    vec2 t =vec2(-sin(rate*time2dance)/50.,-sin(time2dance*(rate*1.618))/30.);
+    vec2 t =vec2(-sin(rate*time2dance)/50.,-sin(time2dance*(1.618))/30.);
     vec2 dance = vec2(0.);
     if (morph>.5) dance = vec2(
                                -abs(length(-freed(coords))/(length(freed(coords))-zoom)) -(length(freed(coords))/(length(freed(coords))+zoom))*2./3.,

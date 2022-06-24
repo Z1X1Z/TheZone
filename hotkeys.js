@@ -106,8 +106,9 @@ function callKey(event){
       }
       else if (key=="W")window.volumeSpeed=!window.volumeSpeed;
 
-      else if (key=="="||key.toLowerCase()=="+")window.movementRate *=1.11111111;
-      else if ( event.keyCode==173||key.toLowerCase()=="-")window.movementRate /=1.11111111;
+      else if (key=="="||key.toLowerCase()=="+"){window.movementRate *=1.11111111;  uniforms[ "rate" ].value= window.movementRate; }
+
+      else if ( event.keyCode==173||key.toLowerCase()=="-"){window.movementRate /=1.11111111; uniforms[ "rate" ].value= window.movementRate;}
 
       if(uniforms[ "free" ].value) window.zoomCageSize=100000000000000000.;
       else window.zoomCageSize=1.5;

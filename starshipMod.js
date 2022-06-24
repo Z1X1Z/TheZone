@@ -270,6 +270,8 @@ function init() {
     {
       micIn : {  value: null }, // float array (vec3)
       time: {value: 1.0 },
+  rate: {value: window.movementRate },
+
       zoom: {value: 1.0 },
       colorCombo: {value: 1 },
         free: {value: false },

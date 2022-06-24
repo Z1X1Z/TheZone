@@ -51,6 +51,7 @@
             uniform bool colorInverter;
 
             uniform float time;
+            uniform float rate;
             uniform float zoom;
             uniform float metronome;
 
@@ -652,17 +653,16 @@ vec3 xtol(vec2 s, vec2 t){
           void main(){
            vec2 p=-((vUv.yx)-.5)/(resolution.xy/max(resolution.x,resolution.y))*6.;
            
-          float rate = 1.;
-          vec2 t =vec2(-sin(rate*time2dance)/25.,-sin(time2dance*(rate*gr))/15.);
+          vec2 t =vec2(-sin(time2dance)/25.,-sin(time2dance*(gr))/15.);
           //vec2 fl=vec2(-1.,-sin(time));//vec2(-sin(rate*time),-sin(time*(rate*gr)*3.));
           vec3 zoomer;
           
           
           vec2 spunC=coords.yx;
           
-          if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time,3.1415927410125732*2.));}
+          if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time*rate,3.1415927410125732*2.));}
           vec2 backGround=freed(p/2.*zoom+spunC);
-          if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time,3.1415927410125732*2.));
+          if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time*rate,3.1415927410125732*2.));
 
                                 backGround=spin2(backGround,atan(backGround.y,backGround.x)*petals/6.);//omniclover
 
