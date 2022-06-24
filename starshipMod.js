@@ -209,8 +209,8 @@ angle[f] = angle;
          var d_xS=spunD[0];
          var d_yS=spunD[1];
          
-    bx=coordX+d_xS*MR*zoom*interpolation*window.movementRate;
-  by=coordY+d_yS*MR*zoom*interpolation*window.movementRate;
+    bx=coordX+d_xS*MR*zoom*interpolation*window.movementRate*window.movementRate;
+  by=coordY+d_yS*MR*zoom*interpolation*window.movementRate*window.movementRate;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold&&on){
 
                coordX=bx;
