@@ -39,7 +39,7 @@ function callKey(event){
       if (x>0)
         {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
       else if (x==0)
-        {window.movementRate=1.}
+        {window.movementRate=1.; uniforms[ "rate" ].value= window.movementRate; }
       else if (key=="À"||key=="`"||key=="~")
         {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
       else if (key=="M") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
@@ -108,7 +108,7 @@ function callKey(event){
 
       else if (key=="="||key.toLowerCase()=="+"){window.movementRate *=1.11111111;  uniforms[ "rate" ].value= window.movementRate; }
 
-      else if ( event.keyCode==173||key.toLowerCase()=="-"){window.movementRate /=1.11111111; uniforms[ "rate" ].value= window.movementRate;}
+      else if (key.toLowerCase()=="-"){window.movementRate /=1.11111111; uniforms[ "rate" ].value= window.movementRate;}
 
       if(uniforms[ "free" ].value) window.zoomCageSize=100000000000000000.;
       else window.zoomCageSize=1.5;
