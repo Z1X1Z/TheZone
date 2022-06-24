@@ -205,7 +205,7 @@ angle[f] = angle;
          d_y = -Math.cos(-angle)*volume*window.movementRate;
          var spunD = [d_x,d_y];
 
-                    if(uniforms.carousel.value!=0.)         spunD=spin(spunD,uniforms.carousel.value*uniforms[ "time" ].value%(Math.PI*2.)*window.movementRate);
+                    if(uniforms.carousel.value!=0.)         spunD=spin(spunD,uniforms.carousel.value*(uniforms[ "time" ].value*window.movementRate)%(Math.PI*2.));
          var d_xS=spunD[0];
          var d_yS=spunD[1];
          
@@ -675,7 +675,7 @@ else {
              var spunTouch = [ (zoom-uniforms[ "zoom" ].value)*screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)*1./d),
                               -(zoom-uniforms[ "zoom" ].value)*screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)*1./d)];
 
-                  if(uniforms.carousel.value!=0.)         spunTouch=spin(spunTouch,uniforms.carousel.value*uniforms[ "time" ].value%(Math.PI*2.)*window.movementRate);
+                  if(uniforms.carousel.value!=0.)         spunTouch=spin(spunTouch,uniforms.carousel.value*(uniforms[ "time" ].value*window.movementRate)%(Math.PI*2.));
             
                       coordX+= spunTouch[0];
                       coordY+= spunTouch[1];
