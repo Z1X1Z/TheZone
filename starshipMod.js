@@ -201,16 +201,16 @@ angle[f] = angle;
          //d_x = -Math.sin(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
          //d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
 
-         d_x = -Math.sin(-angle)*volume;
-         d_y = -Math.cos(-angle)*volume;
+         d_x = -Math.sin(-angle)*volume*window.movementRate;
+         d_y = -Math.cos(-angle)*volume*window.movementRate;
          var spunD = [d_x,d_y];
 
                     if(uniforms.carousel.value!=0.)         spunD=spin(spunD,uniforms.carousel.value*uniforms[ "time" ].value%(Math.PI*2.));
          var d_xS=spunD[0];
          var d_yS=spunD[1];
          
-    bx=coordX+d_xS*MR*zoom*interpolation*window.movementRate*window.movementRate;
-  by=coordY+d_yS*MR*zoom*interpolation*window.movementRate*window.movementRate;
+    bx=coordX+d_xS*MR*zoom*interpolation*window.movementRate;
+  by=coordY+d_yS*MR*zoom*interpolation*window.movementRate;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold&&on){
 
                coordX=bx;
@@ -222,8 +222,8 @@ if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize){
   }
 cx[f] = 0;
 cy[f] = 0;
-xPerp[f] = -Math.sin(-angle+pi/2)*radius*volume;
-yPerp[f] = -Math.cos(-angle+pi/2)*radius*volume;
+xPerp[f] = -Math.sin(-angle+pi/2)*radius*volume*window.movementRate;
+yPerp[f] = -Math.cos(-angle+pi/2)*radius*volume*window.movementRate;
                      trailWidth[f]=1.;
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
