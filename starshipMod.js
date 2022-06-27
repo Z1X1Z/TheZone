@@ -118,7 +118,7 @@ function spiral_compress(){
     let   d = (z[n+1]-z[n-1])/(z[n-1]+z[n+1]);
     let nAdj = n + d*4 ;
     //if (Math.abs(nAdj-n) < 10)
-    if (Math.abs(d)<4+1)freq =((( audioX.sampleRate)*(nAdj))/1024);
+    if (Math.abs(d)<4+1)freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
 
     let g = Math.pow ( 2, (1/24.));
     let aa = freq/440.0;
@@ -176,8 +176,9 @@ function  move()
 if (totalAMP>zoomOutRatchetThreshold||on)//this line under revisement
   pb =    calculatePitch();
   if(pb>0) pb =audioX.sampleRate/pb;
+      console.log(pb);
 on = true;
-if (isFinite(pb) &&pb>0&& Math.abs(Math.floor(pb)-Math.floor((audioX.sampleRate)/1024))>.000001 &&pb!=-1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) { pitch =pb;reset =0;}
+if (isFinite(pb) &&pb>0&& Math.abs(pb-audioX.sampleRate/numberOfBins)<.1 &&pb!=-1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) { pitch =pb;reset =0;}
 else if (reset>3||pitch==1){on = false;
 }
 else reset++
