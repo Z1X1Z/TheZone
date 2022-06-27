@@ -176,9 +176,8 @@ function  move()
 if (totalAMP>zoomOutRatchetThreshold||on)//this line under revisement
   pb =    calculatePitch();
   if(pb>0) pb =audioX.sampleRate/pb;
-      console.log(pb);
 on = true;
-if (isFinite(pb) &&pb>0&& Math.abs(pb-audioX.sampleRate/numberOfBins)<.1 &&pb!=-1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) { pitch =pb;reset =0;}
+if (isFinite(pb) &&pb>0&& Math.abs(pb-audioX.sampleRate/numberOfBins/2.)>1. &&pb!=-1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) { pitch =pb;reset =0;}
 else if (reset>3||pitch==1){on = false;
 }
 else reset++
