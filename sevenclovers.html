@@ -453,6 +453,8 @@
                              float hyperCore=0.;
                              float lfc = length(freed(coords));
                              if(MetaCored)hyperCore=(cored*2./3.+log(lfc)-1.);
+                                                                   //if(MetaCored)hyperCore=(cored*2./3.+log(lfc))*4./3.-1.;//stablest coring leads to clover irrevocably shrinking if not following central clovers
+
                              for (float counter=0.;counter<41.;counter++)if(abs(s.y)<47.){
                                 if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+3.14159);
 
@@ -462,7 +464,7 @@
                                float d = length(s);
                                if(d<1.5&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
 
-                               for(int i=0;i<69; i++)if(MetaCored&&d<2./3.&& loops+counter<hyperCore && lfc<1.5)
+                               for(int i=0;i<69; i++)if(MetaCored&&d<2./3.&& loops+counter<hyperCore &&lfc<1.5)
                             {
                                   float shift=2.;s*=shift;d*=shift;loops++;
 
