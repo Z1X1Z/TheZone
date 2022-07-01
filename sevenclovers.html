@@ -454,7 +454,7 @@
                              float lfc = length(freed(coords));
                              if(MetaCored)hyperCore=(cored*2./3.+log(lfc)-1.);
                              float term=0.;
-                             if(spirated!=0.)term=(coz(time)-1.)/2.*(3.-2.7182818);//if is spirated then oscillate the functions log between e and 3
+                             if(spirated!=0.)term=(coz(1.-lfc)-1.)/2.*length(t)*(3.-2.7182818);//if is spirated then oscillate the functions log between e and 3
                              for (float counter=0.;counter<41.;counter++)if(abs(s.y)<47.){
                                 if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+3.14159);
 
