@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Zone:X - Sonic Starship</title>
+        <title>Zone:X - Mobile</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="main.css">
@@ -212,12 +212,12 @@
                                                                                    
 
                                 s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y-t.x, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y-t.y);//x**3
-                                s.x=log(abs(s.x));
+                                s.x=log(abs(s.x))/log(3.);
 
                                float d = length(s);
                                if(d<1.5&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
 
-                               for(int i=0;i<69; i++)if(MetaCored&&d<2./3.&& loops+counter<hyperCore && length(freed(coords))<1.5)
+                               for(int i=0;i<69; i++)if(MetaCored&&d<2./3.&& loops+counter<hyperCore && length(freed(coords))<1.4)
                                   {
 
                                   float wise;
