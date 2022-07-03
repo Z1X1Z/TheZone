@@ -614,7 +614,7 @@ let loopLimit = trailDepth;
 
 while(loopLimit>0){
   for(var yy=0;yy<3;yy++)   trailColor.push(pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,.75*(1.-(trailDepth-loopLimit)/trailDepth))
-   for(var yy=0;yy<3;yy++)   trailColor.push(pitchCol[(r+1.)%trailDepth].r,pitchCol[(r+1.)%trailDepth].g,pitchCol[(r+1.)%trailDepth].b,.75*(1.-(trailDepth-loopLimit)/trailDepth))
+   for(var yy=0;yy<3;yy++)   trailColor.push(pitchCol[(r)%trailDepth].r,pitchCol[(r)%trailDepth].g,pitchCol[(r)%trailDepth].b,.75*(1.-(trailDepth-loopLimit)/trailDepth))
 
   let widtr = .2*(1.-trailWidth[r]);
   let widts = .2*(1.-trailWidth[s]);
