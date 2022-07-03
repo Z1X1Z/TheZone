@@ -387,7 +387,7 @@ if( !window.touchMode) {
                            volume = 0.;
                            for(var n=0; n<inputData.length-1;n++)volume+=Math.abs(inputData[n+1]-inputData[n]);
                            volume*=audioX.sampleRate/inputData.length/255;
-               volume*=2.;
+                           volume*=2.;
                        }
                 else volume=1.;
                                                               
@@ -613,7 +613,9 @@ let loopLimit = trailDepth;
 //if(isFinite(cx[r-1])&&isFinite(cx[s])&&isFinite(cy[r-1])&&isFinite(cy[s]))
 
 while(loopLimit>0){
-  for(var yy=0;yy<6;yy++)   trailColor.push(pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,.75*(1.-(trailDepth-loopLimit)/trailDepth))
+  for(var yy=0;yy<3;yy++)   trailColor.push(pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,.75*(1.-(trailDepth-loopLimit)/trailDepth))
+   for(var yy=0;yy<3;yy++)   trailColor.push(pitchCol[(r+1.)%trailDepth].r,pitchCol[(r+1.)%trailDepth].g,pitchCol[(r+1.)%trailDepth].b,.75*(1.-(trailDepth-loopLimit)/trailDepth))
+
   let widtr = .2*(1.-trailWidth[r]);
   let widts = .2*(1.-trailWidth[s]);
   let scalar = .005;//mobius mode: let scalar = .07*loopLimit/trailDepth;
