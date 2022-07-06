@@ -198,8 +198,8 @@
                              if(MetaCored)for(int i=1;i<60; i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;}else break;
                              loops=0.;
                              float hyperCore=0.;
-                             if(MetaCored&&morph<.5)hyperCore=(cored*2./3.+log(length(freed(coords)))-1.);
-                             else if(MetaCored)hyperCore=((cored*2./3.+log(length(freed(coords))))*4./3.-1.);
+                             if(MetaCored&&morph<.5)hyperCore=cored*2./3.+log(length(freed(coords))*3./2.);
+                             else if(MetaCored)hyperCore=(cored*2./3.+log(length(freed(coords)))*3./2.)*4./3.;
 
                              float term=0.;
                                if(spirated!=0.)term=(1.-length(freed(coords)))*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
