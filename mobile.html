@@ -187,6 +187,7 @@
                         vec2 jc =vec2(0.);// vec2 jc =vec2(-0.5577,- 0.6099);//you can feed in coordinates for p movement to get different cloverfields
 
                         vec3 tol(vec2 p, vec2 t){
+                                    p=p.yx;
                              float precores = 0.49;
                              if(spirated!=0.) precores = 1.;
                              if(spirated>-.5) p.y*=-1.;
@@ -201,7 +202,7 @@
                              else if(MetaCored)hyperCore=((cored*2./3.+log(length(freed(coords))))*4./3.-1.);
 
                              float term=0.;
-                               if(spirated!=0.)term=(1.-length(freed(coords))*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
+                               if(spirated!=0.)term=(1.-length(freed(coords)))*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
 
                              for (float counter=0.;counter<41.;counter++)if(abs(s.y)<47.){
                                  if(hearTOL){
@@ -277,7 +278,6 @@
      vec2 backGround=freed(p/2.*zoom+spunC);
      if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time*rate,3.1415927410125732*2.));
 
-                          backGround=backGround.yx;
                            backGround=spin2(backGround,atan(backGround.y,backGround.x)*petals/6.);
                            p.x+=.5;
     vec2 t =vec2(-sin(rate*time2dance)/50.,-sin(time2dance*(1.618))/30.);
