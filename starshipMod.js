@@ -17,7 +17,7 @@ const MR = mf/zoomFrames;
 window.zoomCageSize = 1.5;//radius of zoom bounding
                   window.uniformsLoaded=false;
 
-zoomOutRatchetThreshold=.0005;
+zoomOutRatchetThreshold=1.;
 let radius = 7;
 var rez=1.;
 let fftSize=2048;
@@ -165,19 +165,23 @@ function  move()
     if (isNaN(coordX)||(!zoomAtl41&&coordX>4.))coordX=0.;
     if (isNaN(coordY)||(!zoomAtl41&&coordY>4.))coordY=0.;
 
-  totalAMP = 0.;
-  if (!trailLoaded) {trailLoaded = true; for(var n = 0; n<trailLength; n++)
-  {xPerp[n]=0;yPerp[n]=0;cx[n]=0;cy[n]=0;trailWidth[n]=0.;pitchCol[n]  = new THREE.Color()
-}}
+  if (!trailLoaded) {trailLoaded = true;
+      for(var n = 0; n<trailLength; n++)
+        {xPerp[n]=0;yPerp[n]=0;cx[n]=0;cy[n]=0;trailWidth[n]=0.;pitchCol[n]  = new THREE.Color()
+        }
+  }
     pitch=1;
     var pb = -1;
-   for(var b = 0; b<numberOfBins; b++)totalAMP+=Math.abs(inputData[b]);
-    totalAMP/=fftSize
-if (totalAMP>zoomOutRatchetThreshold||on)//this line under revisement
+    
+    totalAMP = 0.;
+    for(var n=0; n<inputData.length-1;n++)totalAMP+=Math.abs(inputData[n+1]-inputData[n]);
+    totalAMP*=audioX.sampleRate/inputData.length;
+    
+if (totalAMP>zoomOutRatchetThreshold||on)
   pb =    calculatePitch();
   if(pb>0) pb =audioX.sampleRate/pb;
 on = true;
-if (isFinite(pb) &&pb>0&& Math.abs(pb-audioX.sampleRate/numberOfBins/2.)>1. &&pb!=-1&&totalAMP*2048./fftSize>zoomOutRatchetThreshold) { pitch =pb;reset =0;}
+if (isFinite(pb) &&pb>0&& Math.abs(pb-audioX.sampleRate/numberOfBins/2.)>1. &&pb!=-1&&totalAMP>zoomOutRatchetThreshold) { pitch =pb;reset =0;}
 else if (reset>3||pitch==1){on = false;
 }
 else reset++
@@ -195,11 +199,7 @@ colorSound = new THREE.Color();
 
 pitchCol[f]  = colorSound;
 angle = ((angle-30+180)/360*2*pi);
-   // angle = (maxInt24/24*2*pi);
 angle[f] = angle;
-
-         //d_x = -Math.sin(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
-         //d_y = -Math.cos(-angle)*(Math.log(totalAMP*2048./fftSize)+4.)**4/300.;
 
          d_x = -Math.sin(-angle)*volume*window.movementRate;
          d_y = -Math.cos(-angle)*volume*window.movementRate;
@@ -381,6 +381,7 @@ function animate( timestamp ) {
 if(!window.touchMode)pointerZoom=false;
 else on=false;
 if( !window.touchMode) {
+                           
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
            if(window.volumeSpeed)
            {
@@ -403,6 +404,8 @@ if( !window.touchMode) {
         if(computeFPS==false){
              finalAverageAmp = 0.;
           for(var l=0.; l<averageFrameTotalAmp.length;l++)finalAverageAmp+=averageFrameTotalAmp[l];
+            
+            volume*=audioX.sampleRate/inputData.length/255;
               finalAverageAmp/=framesLong;
             zoomOutRatchetThreshold= finalAverageAmp;
             averageFrameTotalAmp=[];
@@ -432,13 +435,12 @@ if( !window.touchMode) {
      let n_n = Math.round(noteNumber);
      let cores = Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.);
      let pf = String(pitch!=1);
-     let totalAMP_=totalAMP;
       if(textON)document.getElementById("textWindow").innerHTML =
 
                                 " note: "+note+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
                                 "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
                                 "FPS: "+Math.round(FPS)+", cores: "+cores+", zoom: "+zoom+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
-                                "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+pf+", AMP: "+totalAMP_
+                                "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+pf+", AMP: "+totalAMP
                             //+"<p style='margin : 0px'></p>"+"X: "+String(-coordX)+" Y: "+String(-coordY);
       else document.getElementById("textWindow").innerHTML = "";
 
@@ -480,7 +482,7 @@ if( !window.touchMode) {
 zoomRoutine();
 
             if(zoomAtl41)zoom=.025;
-  uniforms[ "time2dance" ].value += Math.abs(totalAMP)*4.;
+  uniforms[ "time2dance" ].value += Math.abs(totalAMP)/255;
               
                 
               
