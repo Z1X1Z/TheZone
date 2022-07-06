@@ -201,7 +201,8 @@
                              else if(MetaCored)hyperCore=((cored*2./3.+log(length(freed(coords))))*4./3.-1.);
 
                              float term=0.;
-                             if(spirated!=0.)term=(1.-length(freed(coords))*length(t)*3./4.)*(3.-2.7182818);//if is spirated then oscillate the functions log between e and 3
+                               if(spirated!=0.)term=(1.-length(freed(coords))*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
+
                              for (float counter=0.;counter<41.;counter++)if(abs(s.y)<47.){
                                  if(hearTOL){
                                      
