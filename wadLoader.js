@@ -22,28 +22,30 @@ stallTillWad()//lurker
 
 let hyperdriveTUNA = {
 Overdrive:{
-        outputGain: -9.154,           //-42 to 0 in dB
+        outputGain: -1.,           //-42 to 0 in dB
         drive: .2,                 //0 to 1
-        curveAmount: .2,           //0 to 1
-        algorithmIndex: 0,            //0 to 5, selects one of the drive algorithms
-        bypass: 0
+        curveAmount: 5.,           //0 to 1
+        algorithmIndex: 3,            //0 to 5, selects one of the drive algorithms
+        bypass: 2000,
+cutoff: 10000   //cutoff frequency of the built in lowpass-filter. 20 to 22050
+
     },
     Delay:{
-        feedback: .5,    //0 to 1+
-        delayTime: 100,    //1 to 10000 milliseconds
-        wetLevel: 0.25,     //0 to 1+
+        feedback: .4,    //0 to 1+
+        delayTime: 1,    //1 to 10000 milliseconds
+        wetLevel: .5,     //0 to 1+
         dryLevel: .5,       //0 to 1+
         cutoff: 20000,      //cutoff frequency of the built in lowpass-filter. 20 to 22050
-        bypass: 0
+        bypass: 20
     }
 };
-let correction = 11.5 ;
+let correction = 11. ;
 let sound=Array(10);
 let sound2=Array(10);
 function initialize(){
     for(var o=0;o<10;o++){
-    sound[o] =  new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
-     sound2[o] = new Wad({source : 'sine'});//, tuna   : hyperdriveTUNA});
+    sound[o] =  new Wad({source : 'sine', tuna   : hyperdriveTUNA});
+     sound2[o] = new Wad({source : 'sine', tuna   : hyperdriveTUNA});
     }
     try{sound[0].play({wait:1000000});
         sound2[0].play({wait:1000000});
@@ -165,8 +167,15 @@ if(!window.touchMode){ for(var o=0; o<e.changedTouches.length; o++)
 }
 else{
     
- c.addEventListener('mousedown', startSound, false);
- c.addEventListener('mousemove', followSound, false);
+    c.addEventListener('mousedown', function(e){
+        e.preventDefault(); e.stopImmediatePropagation();
+        startSound(e);},
+                       false);
+    
+ c.addEventListener('mousemove', function(e){
+     e.preventDefault(); e.stopImmediatePropagation();
+     followSound(e)},
+            false);
     c.addEventListener('mouseup', function(e){window.pointerZoom=false; if(!window.touchMode){sound[0].stop();sound2[0].stop();}}, false);
 }
 
