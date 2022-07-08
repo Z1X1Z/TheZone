@@ -191,15 +191,15 @@
                              float precores = 0.49;
                              if(spirated!=0.) precores = 1.;
                              if(spirated>-.5) p.y*=-1.;
-                             float cored = log(zoom*3./2.)/log(.5)+1.+precores;
+                             float cored = log(zoom)/log(.5)+1.+precores;
                              float c = length(p);
                              float loops=1.;
                               vec2 s=p;
                              if(MetaCored)for(int i=1;i<60; i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;}else break;
                              loops=0.;
                              float hyperCore=0.;
-                             if(MetaCored&&morph<.5)hyperCore=cored*2./3.+log(length(freed(coords))*3./2.);
-                             else if(MetaCored)hyperCore=(cored*2./3.+log(length(freed(coords)))*3./2.)*4./3.;
+                             if(MetaCored&&morph<.5)hyperCore=cored*2./3.+log(length(freed(coords)));
+                             else if(MetaCored)hyperCore=(cored*2./3.+log(length(freed(coords))))*4./3.;
 
                              float term=0.;
                                if(spirated!=0.)term=(1.-length(freed(coords)))*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
