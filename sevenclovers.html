@@ -453,7 +453,7 @@
                              loops=0.;
                              float hyperCore=0.;
                              float lfc = length(freed(coords));
-                               if(MetaCored&&morph<.5)hyperCore=cored*2./3.+log(lfc);
+                               if(MetaCored&&morph<.5)hyperCore=cored*2./3.+log(lfc)-1.;
                                else if(MetaCored)hyperCore=((cored*2./3.+log(lfc))*4./3.);//engage overstable core if dancing
 
                              float term=0.;
