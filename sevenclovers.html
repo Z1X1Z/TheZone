@@ -445,7 +445,7 @@
                              float precores = 0.49;
                              if(spirated!=0.) precores = 1.;
                              if(spirated>-.5) p.y*=-1.;
-                             float cored = log(zoom)/log(.5)+1.+precores;
+                             float cored = log(zoom*3./2.)/log(.5)+1.+precores;
                              float c = length(p);
                              float loops=1.;
                               vec2 s=p;
@@ -453,8 +453,8 @@
                              loops=0.;
                              float hyperCore=0.;
                              float lfc = length(freed(coords));
-                               if(MetaCored&&morph<.5)hyperCore=cored*2./3.+log(lfc)-1.;
-                               else if(MetaCored)hyperCore=((cored*2./3.+log(lfc))*4./3.);//engage overstable core if dancing
+                               if(MetaCored&&morph<.5)hyperCore=cored*2./3.+log(lfc*3./2.)-1.;//it seems this line is difficult to optimize for stable hyperMetacore
+                               else if(MetaCored)hyperCore=((cored*2./3.+log(lfc*3./2.)-1.)*4./3.)-1.;//engage overstable core if dancing
 
                              float term=0.;
                              if(spirated!=0.)term=(1.-lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
