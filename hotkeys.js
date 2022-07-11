@@ -4,7 +4,9 @@ function stallHash(){if(window.uniformsLoaded)readHash();else setTimeout(stallHa
 stallHash();
 function hk() {
   var x = document.createElement("INPUT");
-  x.setAttribute("type", "text");
+  x.setAttribute("type", "submit");
+    x.setAttribute("value", "");
+
   x.setAttribute("id", "hotkeys");
   x.setAttribute("placeholder", "Hotkeys!");
   x.setAttribute("oninput", "getKey()");
