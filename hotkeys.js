@@ -4,9 +4,7 @@ function stallHash(){if(window.uniformsLoaded)readHash();else setTimeout(stallHa
 stallHash();
 function hk() {
   var x = document.createElement("INPUT");
-  x.setAttribute("type", "submit");
-    x.setAttribute("value", "");
-
+  x.setAttribute("type", "text");
   x.setAttribute("id", "hotkeys");
   x.setAttribute("placeholder", "Hotkeys!");
   x.setAttribute("oninput", "getKey()");
@@ -32,7 +30,7 @@ var key = "";
 }
 
 if(!(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))//if not mobile
-window.addEventListener('keydown', function(event) {callKey(event)}, false);
+window.addEventListener('keydown', function(event) {callKey(event); return true;}, false);
 
 function callKey(event){
     event.preventDefault(); event.stopImmediatePropagation();
