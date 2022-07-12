@@ -1,6 +1,5 @@
 function stallTillTHREE(){
     if(typeof THREE=="object"){
-        document.getElementById( "background_wrap").style = "position: unset;";
         init();
     }else setTimeout(stallTillTHREE,10);}
 stallTillTHREE();//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
@@ -706,6 +705,7 @@ async function startMic() {
   stream = await navigator.mediaDevices.getUserMedia({audio: true}).then(
       function (stream)
       {
+        document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
         micOn = true;
         audioX = new AudioContext();
         analyser = audioX.createAnalyser();
