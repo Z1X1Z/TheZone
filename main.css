@@ -1,10 +1,10 @@
-body {
-	margin: 0;
-	background-color: #000;
-	color: #fff;
-	font-family: Monospace;
-	font-size: 12px;
-	line-height: 1em;
+body, head {
+    margin: 0;
+    background-color: #000;
+    color: #fff;
+    font-family: Monospace;
+    font-size: 12px;
+    line-height: 1em;
     position: absolute;
     overflow: hidden
 }
@@ -50,4 +50,22 @@ canvas {
 	-ms-user-select: none;
 	user-select: none;
 	z-index: 2 !important; /* TODO Solve this in HTML */
+}
+
+
+
+/*https://stackoverflow.com/questions/3011226/using-background-attachmentfixed-in-safari-on-the-ipad*/
+#background_wrap {
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: contain;
+    background-image: url('');
+    background-position:center;
+
 }
