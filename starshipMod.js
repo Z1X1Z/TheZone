@@ -316,7 +316,6 @@ function init() {
         }
 
   renderer.setPixelRatio( rez);
-  container.appendChild( renderer.domElement );
   onWindowResize();
   window.addEventListener( 'resize', onWindowResize, false );
     startMic();
@@ -706,6 +705,7 @@ async function startMic() {
       function (stream)
       {
         document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
+      container.appendChild( renderer.domElement );//engage THREEJS visual out
         micOn = true;
         audioX = new AudioContext();
         analyser = audioX.createAnalyser();
