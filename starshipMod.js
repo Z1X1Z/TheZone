@@ -1,6 +1,6 @@
 function stallTillTHREE(){
     if(typeof THREE=="object"){
-        document.getElementById( "background_wrap").style = "background-image: url('');";
+        document.getElementById( "background_wrap").style = "position: unset;";
         init();
     }else setTimeout(stallTillTHREE,10);}
 stallTillTHREE();//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
