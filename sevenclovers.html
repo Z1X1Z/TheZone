@@ -463,7 +463,7 @@
                              float hyperCore=0.;
                              float lfc = length(freed(coords));
                                if(MetaCored&&morph<.5)hyperCore=cored*2./3.+log(lfc*3./2.)*0.9551195-1.;//.9551195 is based on x=log3(x), x = .910239log*(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
-                               else if(MetaCored)hyperCore=((cored*2./3.+log(lfc*3./2.)-1.)*4./3.)-1.;//engage overstable core if dancing
+                               else if(MetaCored)hyperCore=(cored*2./3.+log(lfc*3./2.)*0.9551195-1.)*4./3.;//engage overstable core if dancing
 
                              float term=0.;
                              if(spirated!=0.)term=(1.-lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
