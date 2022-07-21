@@ -454,7 +454,7 @@
                              float precores = 0.49;
                              if(spirated!=0.) precores = 1.;
                              if(spirated>-.5) p.y*=-1.;
-                             float cored = log(zoom)/log(.5)+1.+precores;
+                             float cored = log(zoom*3./2.)/log(.5)+1.+precores;
                              float c = length(p);
                              float loops=1.;
                               vec2 s=p;
