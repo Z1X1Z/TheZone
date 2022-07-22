@@ -85,6 +85,7 @@ let len=0;
 let spiregulator=0;
 let phase = 0;
 let onO = false;
+                  
 function makeSpirograph(){
       phase = phase % (pi*2);
       len = 0;
@@ -377,8 +378,8 @@ function animate( timestamp ) {
 
   onWindowResize();//may need to be taken out someday, just for iOS windowing rotation bug
                                                               
-          interpolation = (timestamp-lastFrameTime)/1000.*60.;
-         if (interpolation>200)interpolation=200;
+                                                              if(document.hasFocus())interpolation = (timestamp-lastFrameTime)/1000.*60.;
+                                                              else{interpolation=1;}
             lastFrameTime=timestamp;
 if(!window.touchMode)pointerZoom=false;
 else on=false;
