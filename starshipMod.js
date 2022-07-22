@@ -366,7 +366,7 @@ function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coo
                      if (zoom>=1.)zoomOutEngage = false;
                       else if ( zoom<zoomCone||zoom<.000000000000000000000001)zoomOutEngage = true;
                          if (zoomOutEngage == true){
-                            zoom *= ZR*1.44;
+                            zoom *= 1.44/ZR;
                         }
 
                           if(zoom<.0000000000000000000000001)zoom = 1.;
@@ -380,7 +380,6 @@ function animate( timestamp ) {
                        uniforms[ "time" ].value = Math.fround(timestamp/1000.);
 
   onWindowResize();//may need to be taken out someday, just for iOS windowing rotation bug
-                                                              
 
                                                               if(document.visibilityState=="hidden"||lvs=="hidden")lastFrameTime=timestamp;
                                                               lvs=document.visibilityState
