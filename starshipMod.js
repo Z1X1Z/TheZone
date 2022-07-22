@@ -373,14 +373,19 @@ function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coo
 
 }
                                  var volume;
+                                 var skipNext=false;
+                                 var lvs;
+
 function animate( timestamp ) {
                        uniforms[ "time" ].value = Math.fround(timestamp/1000.);
 
   onWindowResize();//may need to be taken out someday, just for iOS windowing rotation bug
                                                               
-                                                              if(document.hasFocus())interpolation = (timestamp-lastFrameTime)/1000.*60.;
-                                                              else{interpolation=1;}
-            lastFrameTime=timestamp;
+
+                                                              if(document.visibilityState=="hidden"||lvs=="hidden")lastFrameTime=timestamp;
+                                                              lvs=document.visibilityState
+                                                              interpolation = (timestamp-lastFrameTime)/1000.*60.;
+                                                              lastFrameTime=timestamp;
 if(!window.touchMode)pointerZoom=false;
 else on=false;
 if( !window.touchMode) {
