@@ -34,14 +34,14 @@ void main(){
     vec2 g=p/3.;
     g.x+=.5;
     vec2 z=g;
-    for (int f=0;f<50;f+=1)if(abs(z.x+z.y)>20.&&f>1)x+=z.y/100.;
+    for (int f=0;f<40;f+=1)if(abs(z.x+z.y)>20.&&f>1)x+=z.y/100.;
     else {z=2.*vec2(-1./((z.x*z.x-1.44*z.y*z.y)-g.x*1.2-sin(time*1.618)/40.),(1.2*z.x*z.y-1.2*g.y-sin(time2/2.)/40.));
           z.x=pow(abs(z.x),.777-sin(time2)/4.);}
 //vv legs vv
     g=p/4.;
     g.x-=.5;
     z=g;
-    for (int f=0;f<50;f+=1)if(abs(z.x+z.y)>200.&&f>4)c=1.;
+    for (int f=0;f<25;f+=1)if(abs(z.x+z.y)>200.&&f>4)c=1.;
     else {z=3.*vec2(-1./((z.x*z.x-z.y*z.y)-g.x),(77.0*z.x*z.y-2.*g.y-sin(time)/40.));
           z.y = -1./z.y;}
 //vv head vv
@@ -54,13 +54,13 @@ void main(){
     g=p/2.;
     g.x-=1.5;
     z=g;
-    for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>2.)n=0.;
+    for (int f=0;f<20;f+=1)if(abs(z.x+z.y)>2.)n=0.;
     else {z=vec2(((z.x*z.x-z.y*z.y)-g.x-sin(time*1.618)/5.),(2.0*z.x*z.y-g.y-sin(time2/2.)/5.));
           }
 //vv eye lights vv
     g=p;
     z=g;
-    for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>20.)break;
+    for (int f=0;f<10;f+=1)if(abs(z.x+z.y)>20.)break;
     else {z=vec2((1./(z.x*z.x-z.y*z.y)-g.x),(4.0*z.x*z.y-g.y));
           n+=0.1;}
 		/*
@@ -87,7 +87,7 @@ void main(){
                                          z=g;
 
                                          float d =0.;
-                                              for (float f=0.;f<100.;f+=1.){
+                                              for (float f=0.;f<75.;f+=1.){
                                                                                     
                                                   z=2.*vec2(-1./(z.x*z.x-z.y*z.y-g.x-sin(time*1.618)/20.), 2.0*z.x*z.y-g.y-sin(time2/2.)/20.);//this is {s=s^2-p;s.real=-1./s.real}
                                           z.x=sqrt(abs(z.x));
