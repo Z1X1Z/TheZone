@@ -559,7 +559,7 @@ else{//start drawing of just twenty four frets here
             for (var g=0; g<24; g++) if(testar[g]>maxTestar){maxTestar=testar[g];}
            for (var g=0; g<24; g++) if(testar[g]<minTestar)minTestar=testar[g];
 
-            for (var g=1; g<25; g++) {
+            for (var g=0; g<24; g++) {
             var widt = .02;
 
             var lengt = (testar[(g+4)%24]-minTestar)/(maxTestar-minTestar);
