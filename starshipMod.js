@@ -366,7 +366,7 @@ function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coo
                      if (zoom>=1.)zoomOutEngage = false;
                       else if ( zoom<zoomCone||zoom<.000000000000000000000001)zoomOutEngage = true;
                          if (zoomOutEngage == true){
-                            zoom *= 1.44/ZR;
+                            zoom *= ZR*1.44;
                         }
 
                           if(zoom<.0000000000000000000000001)zoom = 1.;
@@ -380,6 +380,7 @@ function animate( timestamp ) {
                        uniforms[ "time" ].value = Math.fround(timestamp/1000.);
 
   onWindowResize();//may need to be taken out someday, just for iOS windowing rotation bug
+                                                              
 
                                                               if(document.visibilityState=="hidden"||lvs=="hidden")lastFrameTime=timestamp;
                                                               lvs=document.visibilityState
@@ -558,14 +559,13 @@ else{//start drawing of just twenty four frets here
             for (var g=0; g<24; g++) if(testar[g]>maxTestar){maxTestar=testar[g];}
            for (var g=0; g<24; g++) if(testar[g]<minTestar)minTestar=testar[g];
 
-            for (var g=0; g<24; g++) {
+            for (var g=1; g<25; g++) {
             var widt = .02;
-                var rr= (g+15)%24;
 
-            var lengt = (testar[(rr+4)%24]-minTestar)/(maxTestar-minTestar);
+            var lengt = (testar[(g+4)%24]-minTestar)/(maxTestar-minTestar);
 
                 var vop = new THREE.Color();
-                      vop.setHSL((20-rr)%24/24.,1.,.5);
+                      vop.setHSL((20-g)%24/24.,1.,.5);
 
                              for(var yy=0;yy<6;yy++)   starColors.push(vop.r,vop.g,vop.b,1.)
 
@@ -573,15 +573,15 @@ else{//start drawing of just twenty four frets here
 var vertices;
 var z = -1.;
              star.push(
-                0-widt*-Math.sin(rr*pi*2./24+pi/2.),    0-widt*-Math.cos(rr*pi*2./24+pi/2.), z,
-                0+widt*-Math.sin(rr*pi*2./24+pi/2.),    0+widt*-Math.cos(rr*pi*2./24+pi/2.),  z,
-                (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.)),
-                (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.)),  z,
-                0-widt*-Math.sin(rr*pi*2./24+pi/2.),    0-widt*-Math.cos(rr*pi*2./24+pi/2.),  z,
-                (lengt*-Math.sin(rr*pi*2./24)+widt*-Math.sin(rr*pi*2./24+pi/2.)),
-                (lengt*-Math.cos(rr*pi*2./24)+widt*-Math.cos(rr*pi*2./24+pi/2.)),  z,
-                (lengt*-Math.sin(rr*pi*2./24)-widt*-Math.sin(rr*pi*2./24+pi/2.)),
-                (lengt*-Math.cos(rr*pi*2./24)-widt*-Math.cos(rr*pi*2./24+pi/2.)),  z,
+                0-widt*-Math.sin(g*pi*2./24+pi/2.),    0-widt*-Math.cos(g*pi*2./24+pi/2.), z,
+                0+widt*-Math.sin(g*pi*2./24+pi/2.),    0+widt*-Math.cos(g*pi*2./24+pi/2.),  z,
+                (lengt*-Math.sin(g*pi*2./24)+widt*-Math.sin(g*pi*2./24+pi/2.)),
+                (lengt*-Math.cos(g*pi*2./24)+widt*-Math.cos(g*pi*2./24+pi/2.)),  z,
+                0-widt*-Math.sin(g*pi*2./24+pi/2.),    0-widt*-Math.cos(g*pi*2./24+pi/2.),  z,
+                (lengt*-Math.sin(g*pi*2./24)+widt*-Math.sin(g*pi*2./24+pi/2.)),
+                (lengt*-Math.cos(g*pi*2./24)+widt*-Math.cos(g*pi*2./24+pi/2.)),  z,
+                (lengt*-Math.sin(g*pi*2./24)-widt*-Math.sin(g*pi*2./24+pi/2.)),
+                (lengt*-Math.cos(g*pi*2./24)-widt*-Math.cos(g*pi*2./24+pi/2.)),  z,
                     );
 } }
          /*https://www.youtube.com/watch?v=4SH_-YhN15A&list=WL&index=10&t=2328s  wouldn't this be cool with the equalizer starship, description of process at beginning of video
