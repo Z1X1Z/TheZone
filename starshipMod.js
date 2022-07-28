@@ -353,8 +353,7 @@ let FPS=0.;
 function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
                      if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
 
-
-                   ZR = Math.E**(Math.log(.5)/zoomFrames*interpolation*window.movementRate);
+                   ZR = Math.E**(Math.log(.5)/zoomFrames*window.movementRate*interpolation*(volume/2.+.5));
                    if(!zoomOutEngage){
                      if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&on)||window.pointerZoom)zoom *=ZR;
                      else if(zoom<1.){zoom /= ZR;
@@ -362,7 +361,6 @@ function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coo
                      }
                    }
                      if (zoom>1.)zoom=1.;
-
                      if (zoom>=1.)zoomOutEngage = false;
                       else if ( zoom<zoomCone||zoom<.000000000000000000000001)zoomOutEngage = true;
                          if (zoomOutEngage == true){
@@ -396,7 +394,7 @@ if( !window.touchMode) {
                            volume = 0.;
                            for(var n=0; n<inputData.length-1;n++)volume+=Math.abs(inputData[n+1]-inputData[n]);
                            volume*=audioX.sampleRate/inputData.length/255;
-               volume*=2.;
+               volume*=1.;
                        }
                 else volume=1.;
                                                               
