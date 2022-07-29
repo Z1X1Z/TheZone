@@ -40,8 +40,9 @@ Hours of the clock are the twelve notes.  First the head as the seven white keys
 <h2>The Cross Method of two digit mental multiplication:</h2>
 In order to do two digit multiplication in your head you can use a cross of the numbers with one written vertically and the other across it horizontally.  This gives you four corners for the four solutions.  I recommend going bottom left product, top right product, sum, bottom right product, tally sum, top left solution, complete.
     For the two digit multiplication problem wz*xy you can follow the below diagram (note, some variables may be zero):
-    <img src="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/mental_multiplication.png" alt="OOPS THE IMAGE DIDN'T LOAD If you're offline, manually load mental_multiplication.png">
-</p>
+        <img class="onoffline" src = "" name="mental_multiplication.png"></img>
+
+        </p>
 Voila, your solution is written diagonally.</p>
 This is basically OILF if you've ever heard of FOIL (First Outside Inside Last).
 
@@ -65,7 +66,7 @@ Oh Yahweh! O Iaue! (12 2 5 7 10 0):00
 </p><p>
   <h2>SPLASH</h2>
 The splash screen is the way the truth and the life where the life is the light of men at its center and a monogram of ZONEX around and through it.
-<img src="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/z1xlogo.png" alt="OOPS THE IMAGE DIDN'T LOAD If you're offline, manually load z1xlogo.png">
+<img class="onoffline" src = "" name="z1xlogo.png"></img>
 
 </p><p>
   <h2>On Hands</h2>
@@ -105,15 +106,12 @@ x=-1./(x^2-1)=
 If we do the same thing with the body we get:
 </p><p>
 x=(2*(x^2-1))^.5=
-=.707107*x=(2.4142-1.)/2.*x=
 =1.4142=2^(1/2)
 </p><p>
 Note that the -1/ has disappeared for this calculation.
 </p><p>
 
-<img src="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/xsquaredandone.jpg" alt="OOPS THE IMAGE DIDN'T LOAD If you're offline, manually load xsquaredandone.jpg">
-
-
+    <img class="onoffline" src = "" name="xsquaredandone.jpg"></img>
 </p><p>
 This is the equation of Seven Clovers:
 
@@ -121,5 +119,19 @@ x=log(x^3)=3
 </p><p>
 
 2^.5 is the relative frequency of 6 semitone hour leaps of the sonic starship such as moving left, then right, or up, and down!  This is because octaves are 2^(octave)!
+
+
+<script>
+    //this script sets all the images to online or offline depending on which you are.
+    nf = document.querySelectorAll('.onoffline');
+    for(var c = 0; c<nf.length; c++) if(window.online)
+        nf[c].src ="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6.0/"+nf[c].name;
+        else nf[c].src =nf[c].name;
+nf = document.querySelectorAll('.onoffline2');
+        for(var c = 0; c<nf.length; c++) if(window.online)
+            nf[c].href ="https://zone-x.herokuapp.com/"+nf[c].name;
+            else nf[c].href =nf[c].name;
+</script>
+
 </body>
 </html>
