@@ -353,7 +353,7 @@ let FPS=0.;
 function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
                      if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
 
-                   ZR = Math.E**(Math.log(.5)/zoomFrames*window.movementRate*interpolation*(volume/2.+.5));
+                   ZR = Math.E**(Math.log(.5)/zoomFrames*window.movementRate*interpolation*(Math.sqrt(volume)/2.+.5));//the square root of volume is to make it grow slower than in d_xy
                    if(!zoomOutEngage){
                      if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&on)||window.pointerZoom)zoom *=ZR;
                      else if(zoom<1.){zoom /= ZR;
