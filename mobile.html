@@ -11,10 +11,145 @@
                 <div id="HK"></div>
                 <div id="textWindow"></div>
             </div>
+            <script src="hotkeys.js"></script>
 
+            
+            
+            <div class="navbar">
+                <div class="dropdown">
+                  <button class="dropbtn">Starship
+                    <i class="fa fa-caret-down"></i>
+                  </button>
+                  <div class="dropdown-content">
+                      <input type="checkbox" id="Star Arms" name="t"  onclick= "
+                          key  = ' ';
+                          callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       <label for="Star Arms">Star Arms!</label><br>
+                       <input type="checkbox" id="Fullscreen" name="t"  onclick= "
+                           key  = 'H';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                        <label for="Fullscreen">Fullscreen!</label><br>
+                        <input type="checkbox" id="Verbose" name="t"  onclick= "
+                            key  = 'V';
+                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                         <label for="Verbose">Verbose!</label><br>
+                       <input type="checkbox" id="Volume Speed" name="t"  onclick= "
+                           key  = 'W';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                        <label for="Volume Speed">Volume Speed!</label><br>
+                        
+                      <input type="checkbox" id="Touch" name="t"  onclick= "
+                          key  = 'T';
+                          callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       <label for="Touch">Touch!</label><br>
+                       <a id="Cancel Background Noise" name="t"  onclick= "
+                           
+                           key  = 'P';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                           Cancel Background Noise!</a><br>
+                       <a id="Listen Out" name="t"  onclick= "
+                           key  = 'O';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       listen Out!</a><br>
+                       <a id="Listen In" name="t"  onclick= "
+                           key  = 'I';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       listen In!</a><br>
+                       
+                       
+                       <a id="Faster" name="t"  onclick= "
+                           key  = '+';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       Faster!</a><br>
+                       <a id="Slower" name="t"  onclick= "
+                           key  = '-';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       Slower!</a><br>
+                       <a id="Reset Speed" name="t"  onclick= "
+                           key  = '0';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       Reset Speed!</a><br>
+                       
+                  </div>
+                  </div>
+                
+                
+                  <div class="dropdown">
+                    <button class="dropbtn">SevenClovers
+                      <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                         <input type="checkbox" id="Reverse Rainbow" name="t"  onclick= "
+                             key  = ';';
+                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                          <label for="Reverse Rainbow">Reverse Rainbow</label><br>
+                          <input type="checkbox" id="Center" name="t"  onclick= "
+                              key  = 'C';
+                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                           <label for="Center">Center</label><br>
+                           <input type="checkbox" id="Zoom Static" name="t"  onclick= "
+                               key  = 'L';
+                               callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                            <label for="Zoom Static">Zoom Static</label><br>
+                            <input type="checkbox" id="Clovers Pop" name="t"  onclick= "
+                                key  = 'N';
+                                callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                             <label for="Clovers Pop">Clovers Pop?!</label><br>
+                             <input type="checkbox" id="Dancer" name="t"  onclick= "
+                                 key  = 'S';
+                                 callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                              <label for="Dancer">Dancer!</label><br>
+                              
+                              <input type="checkbox" id="Spirallize" name="t"  onclick= "
+                                  key  = '?';
+                                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                               <label for="Spirallize">Spirallize!</label><br>
+                               
+                            
+                            
+                          <a id="Alternate Colors" name="t"  onclick= "
+                              key  = 'Q';
+                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                          Alternate Colors!</a><br>
+                         <a id="Carousel" name="t"  onclick= "
+                             key  = 'J';
+                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                             Carousel!</a><br>
+                         <a id="Meta-Carousel" name="t"  onclick= "
+                             key  = 'K';
+                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                         Meta-Carousel!</a><br>
+                    
+                         <a id="Add a petal" name="t"  onclick= "
+                             key  = 'U';
+                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                         Add a petal!</a><br>
+                         <a id="Remove a petal" name="t"  onclick= "
+                             key  = 'Y';
+                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                         Remove a petal!</a><br>
+
+                         
+                                </div>
+                  </div>
+
+                    
+                    
+                </div>
+                  
+                  <script>let n = document.getElementsByName('t');
+                      for(var p = 0; p<n.length;p++)n[p].checked  = false; </script>
         <div id="container"></div>
         <script src="OFFLINEonlineSwitch.js"></script>
 
+
+        
+        
+   
+            
+            
+            
+            
         <script src="starshipMod.js"></script>
 
 </head>
@@ -29,7 +164,6 @@
 
 <script id="threeJSscript" async></script>
 <script id="wadJSscript" async></script>
-<script src="hotkeys.js" async></script>
 <script src="wadLoader.js"></script>
 <script src="threeJSLoader.js"async></script>
 

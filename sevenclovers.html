@@ -13,7 +13,8 @@
                 <div id="allText">
                     <div id="HK"></div>
                     <div id="textWindow"></div>
-                    <script src="hotkeys.js"></script>
+                </div>
+                <script src="hotkeys.js"></script>
 
             <div class="navbar">
                 <div class="dropdown">
@@ -37,6 +38,11 @@
                            key  = 'W';
                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                         <label for="Volume Speed">Volume Speed!</label><br>
+                        
+                      <input type="checkbox" id="Touch" name="t"  onclick= "
+                          key  = 'T';
+                          callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       <label for="Touch">Touch!</label><br>
                        <a id="Cancel Background Noise" name="t"  onclick= "
                            
                            key  = 'P';
@@ -65,10 +71,6 @@
                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                        Reset Speed!</a><br>
                        
-                       <a id="Touch" name="t"  onclick= "
-                           key  = 'T';
-                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                       Touch to move!</a><br>
                   </div>
                   </div>
                 
@@ -94,9 +96,16 @@
                                 key  = 'N';
                                 callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                              <label for="Clovers Pop">Clovers Pop?!</label><br>
-                             
-                            
-                            
+                             <input type="checkbox" id="Dancer" name="t"  onclick= "
+                                 key  = 'S';
+                                 callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                              <label for="Dancer">Dancer!</label><br>
+                              
+                              <input type="checkbox" id="Spirallize" name="t"  onclick= "
+                                  key  = '?';
+                                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                               <label for="Spirallize">Spirallize!</label><br>
+                               
                           <a id="Alternate Colors" name="t"  onclick= "
                               key  = 'Q';
                               callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -109,10 +118,7 @@
                              key  = 'K';
                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                          Meta-Carousel!</a><br>
-                         <a id="Dancer" name="t"  onclick= "
-                             key  = 'S';
-                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                         Dancer!</a><br>
+                         
                          <a id="Add a petal" name="t"  onclick= "
                              key  = 'U';
                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -121,10 +127,7 @@
                              key  = 'Y';
                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                          Remove a petal!</a><br>
-                         <a id="Spirallize" name="t"  onclick= "
-                             key  = '?';
-                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                         Spirallize!</a><br>
+                        
 
                          
                                 </div>
@@ -194,12 +197,6 @@
                          callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                          ToLX!</a><br>
                     </div>
-
-                    </div>
-
-            </div>
-
-                    
                 </div>
                 </div>
 
