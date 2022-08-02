@@ -370,7 +370,7 @@ function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coo
                           if(zoom<.0000000000000000000000001)zoom = 1.;
 
 }
-                                 var volume;
+                                 var volume=1;
                                  var skipNext=false;
                                  var lvs;
 
