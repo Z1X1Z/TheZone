@@ -79,10 +79,6 @@
                       <i class="fa fa-caret-down"></i>
                     </button>
                     <div class="dropdown-content">
-                         <input type="checkbox" id="Reverse Rainbow" name="t"  onclick= "
-                             key  = ';';
-                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                          <label for="Reverse Rainbow">Reverse Rainbow</label><br>
                           <input type="checkbox" id="Center" name="t"  onclick= "
                               key  = 'C';
                               callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -100,23 +96,66 @@
                                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                               <label for="Dancer">Dancer!</label><br>
                               
-                          <a id="Alternate Colors" name="t"  onclick= "
-                              key  = '?';
-                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                          Spirallize!</a><br>
-                          <a id="Alternate Colors" name="t"  onclick= "
-                              key  = 'Q';
-                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                          Alternate Colors!</a><br>
-                         <a id="Carousel" name="t"  onclick= "
-                             key  = 'J';
-                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                             Carousel!</a><br>
-                         <a id="Meta-Carousel" name="t"  onclick= "
-                             key  = 'K';
-                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                         Meta-Carousel!</a><br>
-                         
+                                   <input type="checkbox" id="Reverse Colors" name="t"  onclick= "
+                                       key  = ';';
+                                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                                    <label for="Reverse Colors">Reverse Colors!</label><br>
+                              
+                          <form>
+                              
+                                <input type="radio" id="OriginalOrange" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=7;">
+                                <label for="OriginalOrange">Original Orange!</label><br>
+                            <input type="radio" id="GreenAndPink" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=2;">
+                            <label for="GreenAndPink">Green and Pink!</label><br>
+                            <input type="radio" id="OddOrange" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=3;">
+                            <label for="OddOrange">Odd Orange!</label><br>
+                            <input type="radio" id="YellowAndPurple" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=4;">
+                            <label for="YellowAndPurple">Yellow and Purple!</label><br>
+                            
+                            <input type="radio" id="BlueAndPink" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=5;">
+                            <label for="BlueAndPink">Blue and Pink!</label><br>
+                            
+                            <input type="radio" id="Glowing" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=6;">
+                            <label for="Glowing">Glowing!</label><br>
+                            
+                              <input type="radio" id="Rainbow" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=1;">
+                              <label for="Rainbow">Rainbow!</label><br>
+                          </form>
+                          
+                          <br>
+
+                          
+                          <form>
+                            <input type="radio" id="Up" name="carousel" onclick="uniforms[ 'carousel' ].value=-1;">
+                            <label for="Up">Carousel Up!</label><br>
+                            <input type="radio" id="Down" name="carousel" onclick="uniforms[ 'carousel' ].value=1;">
+                            <label for="Down">Carousel Down!</label><br>
+                            <input type="radio" id="Off" name="carousel" onclick="uniforms[ 'carousel' ].value=0;">
+                            <label for="Off">Carousel Off</label>
+                            
+                          </form>
+                          <br>
+
+                          <form>
+                            <input type="radio" id="mUp" name="mcarousel" onclick="uniforms[ 'metaCarousel' ].value=-1;">
+                            <label for="mUp">Meta-Carousel Wise One!</label><br>
+                            <input type="radio" id="mDown" name="mcarousel" onclick="uniforms[ 'metaCarousel' ].value=1;">
+                            <label for="mDown">Meta-Carousel Wise 2!</label><br>
+                            <input type="radio" id="mOff" name="mcarousel" onclick="uniforms[ 'metaCarousel' ].value=0;">
+                            <label for="mOff">Meta-Carousel Off</label>
+                          </form>
+                          <br>
+
+                      <form>
+                        <input type="radio" id="SpirallizeOriginal" name="Spirallize" onclick="uniforms[ 'spirated' ].value=1;">
+                        <label for="SpirallizeOriginal">Spirallize Original!</label><br>
+                        <input type="radio" id="SpirallizeMirror" name="Spirallize" onclick="uniforms[ 'spirated' ].value=-1;">
+                        <label for="SpirallizeMirror">Spirallize Mirror!</label><br>
+                        <input type="radio" id="Off" name="Spirallize" onclick="uniforms[ 'spirated' ].value=0;">
+                        <label for="Off">Spirallize Off</label>
+                        
+                      </form>
+                      <br>
                          <a id="Add a petal" name="t"  onclick= "
                              key  = 'U';
                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -126,7 +165,6 @@
                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                          Remove a petal!</a><br>
                         
-
                          
                                 </div>
                   </div>
@@ -200,9 +238,11 @@
 
                 </div>
 
-              <script>let n = document.getElementsByName('t');
-                  for(var p = 0; p<n.length;p++)n[p].checked  = false; </script>
-              
+                
+                <script>
+                    let h =document.querySelectorAll("input");
+                    for(var p = 0; p<h.length;p++)h[p].checked  = false; </script>
+                
               <div id="container"></div>
 
             <script src="starshipMod.js"></script>
