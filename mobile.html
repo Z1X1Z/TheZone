@@ -20,6 +20,7 @@
                     <i class="fa fa-caret-down"></i>
                   </button>
                   <div class="dropdown-content">
+                      
                       <input type="checkbox" id="Star Arms" name="t"  onclick= "
                           key  = ' ';
                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -76,6 +77,15 @@
                     <i class="fa fa-caret-down"></i>
                   </button>
                   <div class="dropdown-content">
+                      
+                         <a id="Add a petal" name="t"  onclick= "
+                             key  = 'U';
+                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                         Add a petal!</a><br>
+                         <a id="Remove a petal" name="t"  onclick= "
+                             key  = 'Y';
+                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                         Remove a petal!</a><br>
                         <input type="checkbox" id="Center" name="t"  onclick= "
                             key  = 'C';
                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -152,17 +162,7 @@
                       <label for="SpirallizeOff">Spirallize Off</label>
                       
                     </form>
-                    <br>
-                       <a id="Add a petal" name="t"  onclick= "
-                           key  = 'U';
-                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                       Add a petal!</a><br>
-                       <a id="Remove a petal" name="t"  onclick= "
-                           key  = 'Y';
-                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                       Remove a petal!</a><br>
-                      
-                       
+                    
                               </div>
                 </div>
             </div>
