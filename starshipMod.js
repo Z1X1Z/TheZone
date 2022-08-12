@@ -442,12 +442,14 @@ if( !window.touchMode) {
      let cores = Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.);
      let pf = String(pitch!=1);
       if(textON)document.getElementById("textWindow").innerHTML =
+"<div sytle='font-size: 16px;'>"+
 
                                 " note: "+note+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
                                 "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
                                 "FPS: "+Math.round(FPS)+", cores: "+cores+", zoom: "+zoom+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
                                 "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+pf+", AMP: "+totalAMP
                             //+"<p style='margin : 0px'></p>"+"X: "+String(-coordX)+" Y: "+String(-coordY);
++"</div>";
       else document.getElementById("textWindow").innerHTML = "";
 
 
