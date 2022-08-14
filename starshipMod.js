@@ -143,6 +143,7 @@ let pitchCol = Array(trailWidth.length);
 let trailLoaded = false;
 let trailDepth = -1;
 let d_x=0,d_y=0;
+let circleX=0.,circleY=0.;
 let f = 0;
 
 let xPerp= Array(1000);
@@ -210,9 +211,10 @@ angle[f] = angle;
          var spunD = [d_x,d_y];
 
                     if(uniforms.carousel.value!=0.)         spunD=spin(spunD,uniforms.carousel.value*(uniforms[ "time" ].value*window.movementRate)%(Math.PI*2.));
-         var d_xS=spunD[0];
-         var d_yS=spunD[1];
+          let d_xS=spunD[0];
+          let d_yS=spunD[1];
          
+
     bx=coordX+d_xS*MR*zoom*interpolation;
   by=coordY+d_yS*MR*zoom*interpolation;
 if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold&&on){
@@ -256,16 +258,20 @@ let geometry;
 let geometryP;
 let uniforms;
                      let scene;
-
+                     
+                     var minimumDimension=1;
+                     let circle;
+                     var height,width;
 function init() {
-
     scene = new THREE.Scene();
-    inputData = new Float32Array(bufferSize);
-    var m = Math.min(window.innerWidth,window.innerHeight)
-    var h=window.innerHeight/m;
-    var w=window.innerWidth/m;
+    
 
-    camera = new THREE.OrthographicCamera( -w, w, h, -h, 1, -1);
+    inputData = new Float32Array(bufferSize);
+    minimumDimension = Math.min(window.innerWidth,window.innerHeight)
+    height=window.innerHeight/minimumDimension;
+    width=window.innerWidth/minimumDimension;
+
+    camera = new THREE.OrthographicCamera( -width, width, height, -height, 1, -1);
     geometryP = new THREE.PlaneGeometry( 2, 2 );
     geometryP.z=-1.;
 
@@ -324,11 +330,12 @@ function init() {
 
 
 function onWindowResize() {
-    var m = Math.min(window.innerWidth,window.innerHeight)
-    var h=window.innerHeight/m;
-    var w=window.innerWidth/m;
+    
+    minimumDimension = Math.min(window.innerWidth,window.innerHeight)
+    height=window.innerHeight/minimumDimension;
+    width=window.innerWidth/minimumDimension;
 
-    camera = new THREE.OrthographicCamera( -w, w, h, -h, 1, -1);
+    camera = new THREE.OrthographicCamera( -width, width, height, -height, 1, -1);
     
        let correlationForText = document.getElementById("allText").offsetHeight;
     uniforms.resolution.value.x = window.innerWidth;
@@ -451,7 +458,6 @@ if( !window.touchMode) {
                             //+"<p style='margin : 0px'></p>"+"X: "+String(-coordX)+" Y: "+String(-coordY);
 +"</div>";
       else document.getElementById("textWindow").innerHTML = "";
-
 
 
 
@@ -659,11 +665,31 @@ while(loopLimit>0){
                            });
 
                     meshTrail = new THREE.Mesh(geomeTrail , materialTrail );
-
+                                                                                           
+                                                                                           
+                                                                                           
+                                                                                       //      https://threejs.org/docs/index.html?q=circle#api/en/geometries/CircleGeometry
+                                                                                           let circleGeometry = new THREE.CircleGeometry( .88/8, 32,1 );
+                                                                                           circleGeometry.translate(0.,0.,-.9999999999)
+                                                                                           if (circleX>width)circleX=-width;
+                                                                                           else if (circleX<-width)circleX=width;
+                                                                                           if (circleY>height)circleY=-height;
+                                                                                           else if (circleY<-height)circleY=height;
+                                                                                             
+                                                                                             if(isFinite(d_x)&&isFinite(d_y)&&on) {
+                                                                                             circleX-=d_x/minimumDimension*6.*mf*interpolation;
+                                                                                             circleY-=d_y/minimumDimension*6.*mf*interpolation;
+                                                                                                    }
+                                                                                           circleGeometry.translate(circleX,circleY,0.)
+                                                                                           const circleMaterial = new THREE.MeshBasicMaterial( { color: colorSound} );
+                                                                                           circle = new THREE.Mesh( circleGeometry, circleMaterial );
+                                                                                          scene.add( circle );
                    scene.add(meshTrail);
 
                                                                                            }
   renderer.render( scene, camera );
+                                                                                           scene.remove( circle );
+
   scene.remove(line);
   line.geometry.dispose( );
 
