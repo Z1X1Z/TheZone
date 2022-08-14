@@ -364,7 +364,7 @@ function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coo
                      if (zoom>=1.)zoomOutEngage = false;
                       else if ( zoom<zoomCone||zoom<.000000000000000000000001)zoomOutEngage = true;
                          if (zoomOutEngage == true){
-                            zoom *= ZR*1.44;
+                            zoom *= 1.44/ZR;
                         }
 
                           if(zoom<.0000000000000000000000001)zoom = 1.;
