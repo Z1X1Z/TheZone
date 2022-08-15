@@ -138,7 +138,7 @@ c.focus();
         
     }, false);
   container.addEventListener('touchmove', function(e) {
-    //  e.preventDefault(); e.stopImmediatePropagation();
+      e.preventDefault(); e.stopImmediatePropagation();
 
       for(var o=0; o<e.changedTouches.length; o++)
           followSound(e.changedTouches[o]);
