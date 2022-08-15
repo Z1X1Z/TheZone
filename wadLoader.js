@@ -126,7 +126,7 @@ let c = document.getElementById( 'container' );
 if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)){
     container.addEventListener('touchstart', function(e)
                                {
-        e.preventDefault(); e.stopImmediatePropagation();
+        e.stopImmediatePropagation();
 
         c.focus();
         for(var o=0; o<e.changedTouches.length; o++)
