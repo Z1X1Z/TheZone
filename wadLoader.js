@@ -126,9 +126,8 @@ let c = document.getElementById( 'container' );
 if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)){
     container.addEventListener('touchstart', function(e)
                                {
-        e.stopImmediatePropagation();
+        e.stopImmediatePropagation();          //e.preventDefault();
 
-        c.focus();
         for(var o=0; o<e.changedTouches.length; o++)
         {
             touchNumber.set(e.changedTouches[o].identifier,cycle);
@@ -139,6 +138,7 @@ if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 
         
     }, false);
   container.addEventListener('touchmove', function(e) {
+      e.preventDefault(); e.stopImmediatePropagation();
 
       for(var o=0; o<e.changedTouches.length; o++)
           followSound(e.changedTouches[o]);
@@ -148,6 +148,7 @@ if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 
   container.addEventListener('touchend', function(e){
       window.pointerZoom=false;
       if(!window.touchMode){
+          e.preventDefault(); e.stopImmediatePropagation();
 
       for(var o=0; o<e.changedTouches.length; o++)
         {sound[touchNumber.get(e.changedTouches[o].identifier)].stop();sound2[touchNumber.get(e.changedTouches[o].identifier)].stop();}
