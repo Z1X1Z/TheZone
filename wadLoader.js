@@ -126,6 +126,7 @@ let c = document.getElementById( 'container' );
 if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)){
     container.addEventListener('touchstart', function(e)
                                {
+        let b = document.getElementsByClassName(dropdown);
         for (var u = 0; u<b.length; u++)b.blur();
         for(var o=0; o<e.changedTouches.length; o++)
         {
