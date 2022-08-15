@@ -127,6 +127,8 @@ if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 
     container.addEventListener('touchstart', function(e)
                                {
         e.preventDefault(); e.stopImmediatePropagation();
+        let b = document.getElementsByClassName(dropdown-content);
+        for (var u = 0; u<b.length; u++)b.blur();
         for(var o=0; o<e.changedTouches.length; o++)
         {
             touchNumber.set(e.changedTouches[o].identifier,cycle);
