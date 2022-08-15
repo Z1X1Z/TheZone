@@ -96,7 +96,6 @@ canvas {
  background-color: inherit;
  font-family: inherit; /* Important for vertical align on mobile phones */
  margin: 0; /* Important for vertical align on mobile phones */
-
 }
 
 /* Add a red background color to navbar links on hover */
@@ -113,8 +112,6 @@ canvas {
  min-width: auto;
  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
  z-index: 1;
- overflow: hidden;
-
 }
 
 a, form{
@@ -122,7 +119,7 @@ a, form{
 
     float: none;
     color: white;
-    padding: 0px 0px;
+    padding: 10px 0px;
     text-decoration: none;
     display: block;
     text-align: left;
@@ -136,3 +133,6 @@ a:hover {
 .dropdown:hover .dropdown-content {
  display: block;
 }
+#container{
+    display: block;
+   }
