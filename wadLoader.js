@@ -127,7 +127,7 @@ if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 
     container.addEventListener('touchstart', function(e)
                                {
         e.preventDefault(); e.stopImmediatePropagation();
-        let b = document.getElementsByClassName(dropdown-content);
+        let b = document.getElementsByClassName(dropdown);
         for (var u = 0; u<b.length; u++)b.blur();
         for(var o=0; o<e.changedTouches.length; o++)
         {
