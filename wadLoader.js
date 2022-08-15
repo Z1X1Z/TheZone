@@ -138,7 +138,7 @@ c.focus();
         
     }, false);
   container.addEventListener('touchmove', function(e) {
-      e.preventDefault(); e.stopImmediatePropagation();
+    //  e.preventDefault(); e.stopImmediatePropagation();
 
       for(var o=0; o<e.changedTouches.length; o++)
           followSound(e.changedTouches[o]);
@@ -148,7 +148,7 @@ c.focus();
   container.addEventListener('touchend', function(e){
       window.pointerZoom=false;
       if(!window.touchMode){
-          e.preventDefault(); e.stopImmediatePropagation();
+      //    e.preventDefault(); e.stopImmediatePropagation();
 
       for(var o=0; o<e.changedTouches.length; o++)
         {sound[touchNumber.get(e.changedTouches[o].identifier)].stop();sound2[touchNumber.get(e.changedTouches[o].identifier)].stop();}
