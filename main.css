@@ -126,8 +126,8 @@ a, form{
 }
 
 /* Add a grey background color to dropdown links on hover */
-a:hover {
- background-color: #ddd;
+a:hover, input:hover {
+ background-color: blue;
 }
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
