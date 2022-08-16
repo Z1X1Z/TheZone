@@ -685,7 +685,7 @@ while(loopLimit>0){
                                                                                           scene.add( circle );
                    scene.add(meshTrail);
 
-                                                                                           }
+                                                                                           
   renderer.render( scene, camera );
                                                                                            scene.remove( circle );
 
@@ -700,7 +700,7 @@ while(loopLimit>0){
                                             material.dispose();
                                             geomeTrail.dispose();
                                             materialTrail.dispose();
-           }
+                                                                                                                                         }}
 else {
           
         zoomRoutine();
