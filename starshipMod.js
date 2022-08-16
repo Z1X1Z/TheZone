@@ -260,7 +260,6 @@ let uniforms;
                      let scene;
                      
                      var minimumDimension=1;
-                     let circle;
                      var height,width;
 function init() {
     scene = new THREE.Scene();
@@ -682,7 +681,7 @@ while(loopLimit>0){
                                                                                                     }
                                                                                            circleGeometry.translate(circleX,circleY,0.)
                                                                                            const circleMaterial = new THREE.MeshBasicMaterial( { color: colorSound} );
-                                                                                           circle = new THREE.Mesh( circleGeometry, circleMaterial );
+                                                                                           const circle = new THREE.Mesh( circleGeometry, circleMaterial );
                                                                                           scene.add( circle );
                    scene.add(meshTrail);
 
