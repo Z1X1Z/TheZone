@@ -85,7 +85,7 @@ let len=0;
 let spiregulator=0;
 let phase = 0;
 let onO = false;
-                  
+
 function makeSpirograph(){
       phase = phase % (pi*2);
       len = 0;
@@ -177,11 +177,11 @@ function  move()
   }
     pitch=1;
     var pb = -1;
-    
+
     totalAMP = 0.;
     for(var n=0; n<inputData.length-1;n++)totalAMP+=Math.abs(inputData[n+1]-inputData[n]);
     totalAMP*=audioX.sampleRate/inputData.length;
-    
+
 if (totalAMP>zoomOutRatchetThreshold||on)
   pb =    calculatePitch();
   if(pb>0) pb =audioX.sampleRate/pb;
@@ -213,7 +213,7 @@ angle[f] = angle;
                     if(uniforms.carousel.value!=0.)         spunD=spin(spunD,uniforms.carousel.value*(uniforms[ "time" ].value*window.movementRate)%(Math.PI*2.));
           let d_xS=spunD[0];
           let d_yS=spunD[1];
-         
+
 
     bx=coordX+d_xS*MR*zoom*interpolation;
   by=coordY+d_yS*MR*zoom*interpolation;
@@ -234,10 +234,10 @@ yPerp[f] = -Math.cos(-angle+pi/2)*radius*volume*window.movementRate;
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
-    
+
     cx[n] += d_x*interpolation*6*mf;
     cy[n] += d_y*interpolation*6*mf;
-    
+
            trailWidth[n] *=.997;
 }
 
@@ -258,12 +258,12 @@ let geometry;
 let geometryP;
 let uniforms;
                      let scene;
-                     
+
                      var minimumDimension=1;
                      var height,width;
 function init() {
     scene = new THREE.Scene();
-    
+
 
     inputData = new Float32Array(bufferSize);
     minimumDimension = Math.min(window.innerWidth,window.innerHeight)
@@ -329,13 +329,13 @@ function init() {
 
 
 function onWindowResize() {
-    
+
     minimumDimension = Math.min(window.innerWidth,window.innerHeight)
     height=window.innerHeight/minimumDimension;
     width=window.innerWidth/minimumDimension;
 
     camera = new THREE.OrthographicCamera( -width, width, height, -height, 1, -1);
-    
+
        let correlationForText = document.getElementById("allText").offsetHeight;
     uniforms.resolution.value.x = window.innerWidth;
     uniforms.resolution.value.y = window.innerHeight-correlationForText;
@@ -384,7 +384,7 @@ function animate( timestamp ) {
                        uniforms[ "time" ].value = Math.fround(timestamp/1000.);
 
   onWindowResize();//may need to be taken out someday, just for iOS windowing rotation bug
-                                                              
+
 
                                                               if(document.visibilityState=="hidden"||lvs=="hidden")lastFrameTime=timestamp;
                                                               lvs=document.visibilityState
@@ -393,7 +393,7 @@ function animate( timestamp ) {
 if(!window.touchMode)pointerZoom=false;
 else on=false;
 if( !window.touchMode) {
-                           
+
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
            if(window.volumeSpeed)
            {
@@ -403,7 +403,7 @@ if( !window.touchMode) {
                volume*=2.;
                        }
                 else volume=1.;
-                                                              
+
                                                               spiral_compress();
                            move();
                            if(on) makeSpirograph();
@@ -416,7 +416,7 @@ if( !window.touchMode) {
         if(computeFPS==false){
              finalAverageAmp = 0.;
           for(var l=0.; l<averageFrameTotalAmp.length;l++)finalAverageAmp+=averageFrameTotalAmp[l];
-            
+
             volume*=audioX.sampleRate/inputData.length/255;
               finalAverageAmp/=framesLong;
             zoomOutRatchetThreshold= finalAverageAmp;
@@ -496,9 +496,9 @@ zoomRoutine();
 
             if(zoomAtl41)zoom=.025;
   uniforms[ "time2dance" ].value += Math.abs(totalAMP)/255;
-              
-                
-              
+
+
+
               uniforms[ "zoom" ].value = zoom;
               uniforms.coords.value.x = coordX;
               uniforms.coords.value.y = coordY;
@@ -604,7 +604,7 @@ var z = -1.;
                  geome.setAttribute( 'position', new THREE.Float32BufferAttribute( star, 3 ).onUpload( disposeArray ) );
                     geome.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ).onUpload( disposeArray ));
                      geome.computeBoundingSphere();
-                 
+
                   var  opac=1.;
                   if(onO)opac=.3+.7/uniforms[ "metronome" ].value
                    material= new THREE.MeshBasicMaterial({
@@ -619,7 +619,7 @@ var z = -1.;
                    scene.add(meshe);
                  var trail=[];
                  var trailColor=[];
-                 
+
 let r = (f+trailDepth-2)%trailDepth;
 let s = (f+trailDepth-1)%trailDepth;
 
@@ -664,31 +664,30 @@ while(loopLimit>0){
                            });
 
                     meshTrail = new THREE.Mesh(geomeTrail , materialTrail );
-                                                                                           
-                                                                                           
-                                                                                           
-                                                                                       //      https://threejs.org/docs/index.html?q=circle#api/en/geometries/CircleGeometry
-                                                                                           let circleGeometry = new THREE.CircleGeometry( .88/8, 32,1 );
-                                                                                           circleGeometry.translate(0.,0.,-.9999999999)
-                                                                                           if (circleX>width)circleX=-width;
-                                                                                           else if (circleX<-width)circleX=width;
-                                                                                           if (circleY>height)circleY=-height;
-                                                                                           else if (circleY<-height)circleY=height;
-                                                                                             
-                                                                                             if(isFinite(d_x)&&isFinite(d_y)&&on) {
-                                                                                             circleX-=d_x/minimumDimension*6.*mf*interpolation;
-                                                                                             circleY-=d_y/minimumDimension*6.*mf*interpolation;
-                                                                                                    }
-                                                                                           circleGeometry.translate(circleX,circleY,0.)
-                                                                                           const circleMaterial = new THREE.MeshBasicMaterial( { color: colorSound} );
-                                                                                           const circle = new THREE.Mesh( circleGeometry, circleMaterial );
-                                                                                          scene.add( circle );
-                   scene.add(meshTrail);
 
-                                                                                           
-  renderer.render( scene, camera );
-                                                                                           scene.remove( circle );
 
+
+if (circleX>width)circleX=-width;
+else if (circleX<-width)circleX=width;
+if (circleY>height)circleY=-height;
+else if (circleY<-height)circleY=height;
+
+ if(isFinite(d_x)&&isFinite(d_y)&&on) {
+ circleX-=d_x/minimumDimension*6.*mf*interpolation;
+ circleY-=d_y/minimumDimension*6.*mf*interpolation;
+        }
+
+let circleGeometry = new THREE.CircleGeometry( .112, 32,1 );
+circleGeometry.translate(0.,0.,-.5);
+circleGeometry.translate(circleX,circleY,0)
+const circleMaterial = new THREE.MeshBasicMaterial( { color: colorSound} );
+const circle = new THREE.Mesh( circleGeometry, circleMaterial );
+scene.add( circle );
+
+
+renderer.render( scene, camera );
+
+scene.remove( circle );
   scene.remove(line);
   line.geometry.dispose( );
 
@@ -696,13 +695,16 @@ while(loopLimit>0){
 
                  scene.remove(meshTrail);
 
+                                            circleMaterial.dispose();
+                                            circleGeometry.dispose();
+
                                             geome.dispose();
                                             material.dispose();
                                             geomeTrail.dispose();
                                             materialTrail.dispose();
                                                                                                                                          }}
 else {
-          
+
         zoomRoutine();
             var d = 3.;//this is the frame size in the shader: "p=vec2(...."
             if(uniforms.colorCombo.value==15&&window.mandelbrot) d = 10.;//for zonex.html
@@ -711,7 +713,7 @@ else {
                               -(zoom-uniforms[ "zoom" ].value)*screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)*1./d)];
 
                   if(uniforms.carousel.value!=0.)         spunTouch=spin(spunTouch,uniforms.carousel.value*(uniforms[ "time" ].value*window.movementRate)%(Math.PI*2.));
-            
+
                       coordX+= spunTouch[0];
                       coordY+= spunTouch[1];
                   }
@@ -720,9 +722,9 @@ else {
           uniforms.coords.value.x = coordX;
           uniforms.coords.value.y = coordY;
         renderer.render( scene, camera );
-        
+
         }
-                                                                                           
+
                                                                                            window.requestAnimationFrame( animate );
 }
 
