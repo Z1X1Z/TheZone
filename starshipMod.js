@@ -664,18 +664,18 @@ while(loopLimit>0){
                            });
 
                     meshTrail = new THREE.Mesh(geomeTrail , materialTrail );
+scene.add(meshTrail)
 
-
+if(isFinite(d_x)&&isFinite(d_y)&&on) {
+circleX-=d_x/minimumDimension*6.*mf*interpolation;
+circleY-=d_y/minimumDimension*6.*mf*interpolation;
+       }
 
 if (circleX>width)circleX=-width;
 else if (circleX<-width)circleX=width;
 if (circleY>height)circleY=-height;
 else if (circleY<-height)circleY=height;
 
- if(isFinite(d_x)&&isFinite(d_y)&&on) {
- circleX-=d_x/minimumDimension*6.*mf*interpolation;
- circleY-=d_y/minimumDimension*6.*mf*interpolation;
-        }
 
 let circleGeometry = new THREE.CircleGeometry( .112, 32,1 );
 circleGeometry.translate(0.,0.,-.5);
