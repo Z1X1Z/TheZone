@@ -385,7 +385,7 @@ function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coo
                                  let polygons=[];
                                  let level = 0;
                                  let metaLevel=0;
-                                 let polyRad;
+                                 let polyRad=.1;
 
 let targets=[];
 let pG=[];
@@ -714,23 +714,17 @@ if(allCaught)
 
     for(let n = 0; n<metaLevel-level; n++)
     {
-        let pol= {
+        polygons.push({
 
-             centerX:.5,
-             centerY:.5,
+             centerX:Math.cos(-2.*Math.PI/((metaLevel-level+2)-2)*n)/2.,
+             centerY:Math.sin(-2.*Math.PI/((metaLevel-level+2)-2)*n)/2.,
              dx:0,
              dy:0,
              caught:false,
              exited:true,
-             caughtByDot:""
+             caughtByDot:false
 
-        };
-
-        pol.centerX =(Math.cos(-2.*Math.PI/((metaLevel-level+2)-2)*n)/2.);
-        pol.centerY =(Math.sin(-2.*Math.PI/((metaLevel-level+2)-2)*n)/2.);
-        pol.caught=false;
-
-        polygons.push(pol);
+        });
 
 
     }
