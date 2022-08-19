@@ -322,6 +322,7 @@ function init() {
             mesh = new THREE.Mesh( geometryP, materialShader );
             scene.add( mesh );
         }
+        else scene.background = new THREE.Color( 0x808080);
 
   renderer.setPixelRatio( rez);
   onWindowResize();
