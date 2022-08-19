@@ -711,7 +711,7 @@ if(allCaught)
     level +=1;
 
     polygons=[];
-    polyRad = (metaLevel+1)/(metaLevel)/5.;
+    polyRad = (metaLevel+10)/(metaLevel)/25.;
 
     for(let n = 0; n<metaLevel-level; n++)
     {
