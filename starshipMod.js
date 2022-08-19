@@ -794,15 +794,15 @@ if (!on)neutralizer=0.;
 for(var n = 0; n<polygons.length;n++)
 {
  pG[n] = new THREE.CircleGeometry( polyRad, level+1,1 );
-if (polygons[n].caught)pG[n].rotateZ(timestamp/1000.*Math.PI*2.)
-else pG[n].rotateZ(-timestamp/1000.*Math.PI*2.)
+
 let c = new THREE.Color;
 if (polygons[n].caught)c.setStyle("white");
 else c.setStyle ( "black");
  pM[n] = new THREE.MeshBasicMaterial( { color: c} );
 targets[n] = new THREE.Mesh( pG[n], pM[n] );
 targets[n].position.set(polygons[n].centerX,polygons[n].centerY,-.5);
-
+if (polygons[n].caught)targets[n].rotateZ(timestamp/1000.*Math.PI*2.)
+else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
 scene.add( targets[n] );
 }
 renderer.render( scene, camera );
