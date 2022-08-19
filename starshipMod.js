@@ -612,7 +612,7 @@ var z = -1.;
 
                  geome.setAttribute( 'position', new THREE.Float32BufferAttribute( star, 3 ).onUpload( disposeArray ) );
                     geome.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ).onUpload( disposeArray ));
-                     geome.computeBoundingSphere();
+                     geome.computeBoundingBox();
 
                   var  opac=1.;
                   if(onO)opac=.3+.7/uniforms[ "metronome" ].value
@@ -662,7 +662,7 @@ while(loopLimit>0){
 
                                             geomeTrail.setAttribute( 'position', new THREE.Float32BufferAttribute( trail, 3 ).onUpload( disposeArray ) );
                                             geomeTrail.setAttribute( 'color', new THREE.Float32BufferAttribute( trailColor, 4 ).onUpload( disposeArray ));
-                                            geomeTrail.computeBoundingSphere();
+                                            geomeTrail.computeBoundingBox();
 
 
                 materialTrail= new THREE.MeshBasicMaterial({
@@ -687,13 +687,13 @@ else if (circleY<-height)circleY=height;
 
 
 let circleGeometry = new THREE.CircleGeometry( dotSize, 32,1 );
-circleGeometry.translate(0.,0.,-.5);
-circleGeometry.translate(circleX,circleY,0)
+circleGeometry.translate(circleX,circleY,-.5)
+circleGeometry.computeBoundingBox ();
 const circleMaterial = new THREE.MeshBasicMaterial( { color: colorSound} );
 const circle = new THREE.Mesh( circleGeometry, circleMaterial );
 scene.add( circle );
-
-
+circleGeometry.dispose();
+circleMaterial.dispose();
 
 
 
@@ -797,6 +797,7 @@ if (polygons[n].caught)pG.rotateZ(timestamp/1000.*Math.PI*2.)
 else pG.rotateZ(-timestamp/1000.*Math.PI*2.)
 pG.translate(0.,0.,-.5);
 pG.translate(polygons[n].centerX,polygons[n].centerY,0)
+pG.computeBoundingBox ();
 
 let c = new THREE.Color;
 if (polygons[n].caught)c.setStyle("white");
@@ -809,6 +810,7 @@ pM.dispose();
 }
 renderer.render( scene, camera );
 scene.remove( circle );
+circle.geometry.dispose();
 for(var n = 0; n<targets.length;n++){scene.remove( targets[n] );targets[n].geometry.dispose();}
 
   scene.remove(line);
@@ -817,9 +819,6 @@ for(var n = 0; n<targets.length;n++){scene.remove( targets[n] );targets[n].geome
                  scene.remove(meshe);
 
                  scene.remove(meshTrail);
-
-                                            circleMaterial.dispose();
-                                            circleGeometry.dispose();
 
                                             geome.dispose();
                                             material.dispose();
