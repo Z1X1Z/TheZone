@@ -144,6 +144,7 @@ let trailLoaded = false;
 let trailDepth = -1;
 let d_x=0,d_y=0;
 let circleX=0.,circleY=0.;
+let dotSize = .112;
 let f = 0;
 
 let xPerp= Array(1000);
@@ -379,6 +380,14 @@ function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coo
                                  var volume=1;
                                  var skipNext=false;
                                  var lvs;
+
+                                 let polygons=[];
+                                 let level = 0;
+                                 let metaLevel=0;
+                                 let polyRad;
+
+let targets=[];
+
 
 function animate( timestamp ) {
                        uniforms[ "time" ].value = Math.fround(timestamp/1000.);
@@ -677,7 +686,7 @@ if (circleY>height)circleY=-height;
 else if (circleY<-height)circleY=height;
 
 
-let circleGeometry = new THREE.CircleGeometry( .112, 32,1 );
+let circleGeometry = new THREE.CircleGeometry( dotSize, 32,1 );
 circleGeometry.translate(0.,0.,-.5);
 circleGeometry.translate(circleX,circleY,0)
 const circleMaterial = new THREE.MeshBasicMaterial( { color: colorSound} );
@@ -685,9 +694,127 @@ const circle = new THREE.Mesh( circleGeometry, circleMaterial );
 scene.add( circle );
 
 
-renderer.render( scene, camera );
 
+
+
+
+
+
+let allCaught = true;
+for (var n=0; n<polygons.length; n++) if(  polygons[n].caught == false) allCaught = false;
+if(allCaught)
+{
+
+    if(level >= metaLevel){metaLevel +=1; level = 1;}
+    level +=1;
+    console.log("level "+level+" metaLevel"+metaLevel)
+
+    polygons=[];
+    polyRad = (metaLevel+1)/(metaLevel)/5.;
+
+    for(let n = 0; n<metaLevel-level; n++)
+    {
+        let pol= {
+
+             centerX:1,
+             centerY:1,
+             dx:0,
+             dy:0,
+             caught:false,
+             exited:true,
+             caughtByDot:""
+
+        };
+
+        pol.centerX =(Math.cos(-2.*Math.PI/((metaLevel-level+2)-2)*n)/2.);
+        pol.centerY =(Math.sin(-2.*Math.PI/((metaLevel-level+2)-2)*n)/2.);
+        pol.caught=false;
+
+        polygons.push(pol);
+
+        console.log("shape "+(n+1))
+        console.log("y spawn "+polygons[n].centerY+" x spawn "+polygons[n].centerX )
+
+
+    }
+}
+for(let n = 0; n < polygons.length; n++)
+{
+    let xFromCent = polygons[n].centerX;
+    let yFromCent = polygons[n].centerY;
+
+                if (xFromCent>width)polygons[n].centerX = -width;
+                else if (xFromCent<-width)polygons[n].centerX = width;
+                if (yFromCent>height)polygons[n].centerY = -height;
+                else if  (yFromCent<-height)polygons[n].centerY = height;
+
+
+        let angleTarget = Math.atan2(yFromCent,xFromCent);
+        let baseMag=.01*metaLevel+level;
+        let speed = Math.sqrt(polygons[n].dx*polygons[n].dx+polygons[n].dy*polygons[n].dy)
+        let speedLimit = 1.;
+
+
+
+
+        polygons[n].dx*=.985;
+        polygons[n].dy*=.985;
+
+        if (speed<speedLimit)
+        {
+            polygons[n].dx+=baseMag*-Math.cos(angleTarget);
+            polygons[n].dy+=baseMag*-Math.sin(angleTarget);
+        }//console.log(polygons[n].dx+"x y"+polygons[n].dy)
+var neutralizer=1.;
+if (!on)neutralizer=0.;
+                polygons[n].centerX += (6.*d_x*neutralizer-polygons[n].dx)*interpolation/minimumDimension;
+                polygons[n].centerY += (6.*d_y*neutralizer-polygons[n].dy)*interpolation/minimumDimension;
+
+    let distanceFromCenter = Math.pow(xFromCent*xFromCent+yFromCent*yFromCent,.5);
+    let ddX= circleX-polygons[n].centerX;
+    let ddY= circleY-polygons[n].centerY;
+    let distDot = Math.sqrt(ddX*ddX+ddY*ddY);
+
+
+
+    if ( distanceFromCenter<polyRad &&polygons[n].exited){
+        if (!polygons[n].caught)polygons[n].caught = true;
+        else polygons[n].caught = false;
+        polygons[n].caughtByDot=false;
+        polygons[n].exited = false;}
+    else if (distanceFromCenter>polyRad&&polygons[n].caughtByDot==false)polygons[n].exited = true;
+
+
+    if ( distDot<polyRad+dotSize &&polygons[n].exited){
+        if (!polygons[n].caught)polygons[n].caught = true;
+        else polygons[n].caught = false;
+         polygons[n].caughtByDot=true;
+        polygons[n].exited = false;}
+    else if (distDot>polyRad+dotSize&&polygons[n].caughtByDot==true)polygons[n].exited = true;
+
+
+}
+for(var n = 0; n<polygons.length;n++)
+{
+let pG = new THREE.CircleGeometry( polyRad, level+1,1 );
+if (polygons[n].caught)pG.rotateZ(timestamp/1000.*Math.PI*2.)
+else pG.rotateZ(-timestamp/1000.*Math.PI*2.)
+pG.translate(0.,0.,-.5);
+pG.translate(polygons[n].centerX,polygons[n].centerY,0)
+
+let c = new THREE.Color;
+if (polygons[n].caught)c.setStyle("white");
+else c.setStyle ( "black");
+let pM = new THREE.MeshBasicMaterial( { color: c} );
+targets[n] = new THREE.Mesh( pG, pM );
+scene.add( targets[n] );
+pG.dispose();
+pM.dispose();
+}
+renderer.render( scene, camera );
 scene.remove( circle );
+for(var n = 0; n<targets.length;n++){scene.remove( targets[n] );targets[n].geometry.dispose();}
+
   scene.remove(line);
   line.geometry.dispose( );
 
