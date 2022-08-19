@@ -144,6 +144,7 @@ let trailLoaded = false;
 let trailDepth = -1;
 let d_x=0,d_y=0;
 let circleX=0.,circleY=0.;
+let circleGeometry,circleMaterial,circle;
 let dotSize = .112;
 let f = 0;
 
@@ -387,7 +388,8 @@ function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coo
                                  let polyRad;
 
 let targets=[];
-
+let pG=[];
+let pM=[];
 
 function animate( timestamp ) {
                        uniforms[ "time" ].value = Math.fround(timestamp/1000.);
@@ -686,14 +688,13 @@ if (circleY>height)circleY=-height;
 else if (circleY<-height)circleY=height;
 
 
-let circleGeometry = new THREE.CircleGeometry( dotSize, 32,1 );
-circleGeometry.translate(circleX,circleY,-.5)
+circleGeometry = new THREE.CircleGeometry( dotSize, 32,1 );
 circleGeometry.computeBoundingBox ();
-const circleMaterial = new THREE.MeshBasicMaterial( { color: colorSound} );
-const circle = new THREE.Mesh( circleGeometry, circleMaterial );
+circleMaterial = new THREE.MeshBasicMaterial( { color: colorSound} );
+
+circle = new THREE.Mesh( circleGeometry, circleMaterial );
+circle.position.set(circleX,circleY,-.5);
 scene.add( circle );
-circleGeometry.dispose();
-circleMaterial.dispose();
 
 
 
@@ -792,32 +793,37 @@ if (!on)neutralizer=0.;
 }
 for(var n = 0; n<polygons.length;n++)
 {
-let pG = new THREE.CircleGeometry( polyRad, level+1,1 );
-if (polygons[n].caught)pG.rotateZ(timestamp/1000.*Math.PI*2.)
-else pG.rotateZ(-timestamp/1000.*Math.PI*2.)
-pG.translate(0.,0.,-.5);
-pG.translate(polygons[n].centerX,polygons[n].centerY,0)
-pG.computeBoundingBox ();
-
+ pG[n] = new THREE.CircleGeometry( polyRad, level+1,1 );
+if (polygons[n].caught)pG[n].rotateZ(timestamp/1000.*Math.PI*2.)
+else pG[n].rotateZ(-timestamp/1000.*Math.PI*2.)
 let c = new THREE.Color;
 if (polygons[n].caught)c.setStyle("white");
 else c.setStyle ( "black");
-let pM = new THREE.MeshBasicMaterial( { color: c} );
-targets[n] = new THREE.Mesh( pG, pM );
+ pM[n] = new THREE.MeshBasicMaterial( { color: c} );
+targets[n] = new THREE.Mesh( pG[n], pM[n] );
+targets[n].position.set(polygons[n].centerX,polygons[n].centerY,-.5);
+
 scene.add( targets[n] );
-pG.dispose();
-pM.dispose();
 }
 renderer.render( scene, camera );
+
 scene.remove( circle );
+circleGeometry.dispose();
+circleMaterial.dispose();
 circle.geometry.dispose();
-for(var n = 0; n<targets.length;n++){scene.remove( targets[n] );targets[n].geometry.dispose();}
+
+
+for(var n = 0; n<targets.length;n++){
+  scene.remove( targets[n] );
+  pG[n].dispose();
+  pM[n].dispose();
+  targets[n].geometry.dispose();
+}
 
   scene.remove(line);
   line.geometry.dispose( );
 
                  scene.remove(meshe);
-
                  scene.remove(meshTrail);
 
                                             geome.dispose();
