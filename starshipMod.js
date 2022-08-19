@@ -707,7 +707,6 @@ if(allCaught)
 
     if(level >= metaLevel){metaLevel +=1; level = 1;}
     level +=1;
-    console.log("level "+level+" metaLevel"+metaLevel)
 
     polygons=[];
     polyRad = (metaLevel+1)/(metaLevel)/5.;
@@ -716,8 +715,8 @@ if(allCaught)
     {
         let pol= {
 
-             centerX:1,
-             centerY:1,
+             centerX:.5,
+             centerY:.5,
              dx:0,
              dy:0,
              caught:false,
@@ -731,9 +730,6 @@ if(allCaught)
         pol.caught=false;
 
         polygons.push(pol);
-
-        console.log("shape "+(n+1))
-        console.log("y spawn "+polygons[n].centerY+" x spawn "+polygons[n].centerX )
 
 
     }
@@ -764,7 +760,7 @@ for(let n = 0; n < polygons.length; n++)
         {
             polygons[n].dx+=baseMag*-Math.cos(angleTarget);
             polygons[n].dy+=baseMag*-Math.sin(angleTarget);
-        }//console.log(polygons[n].dx+"x y"+polygons[n].dy)
+        }
 var neutralizer=1.;
 if (!on)neutralizer=0.;
                 polygons[n].centerX += (6.*d_x*neutralizer-polygons[n].dx)*interpolation/minimumDimension;
