@@ -38,7 +38,7 @@ function loadScript(url, callback)
                       }
 }
     var cdnSwitchThree="three.js";
-    if (window.online)cdnSwitchThree="https://cdnjs.cloudflare.com/ajax/libs/three.js/r143/three.min.js"
+    if (window.online)cdnSwitchThree="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"
 
 
 load();
