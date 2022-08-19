@@ -807,13 +807,13 @@ circleMaterial.dispose();
 circle.geometry.dispose();
 
 
-for(var n = 0; n<targets.length;n++){
+/*for(var n = 0; n<targets.length;n++){
   scene.remove( targets[n] );
   pG[n].dispose();
   pM[n].dispose();
   targets[n].geometry.dispose();
 }
-
+*/
   scene.remove(line);
   line.geometry.dispose( );
 
