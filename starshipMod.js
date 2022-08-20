@@ -322,7 +322,10 @@ function init() {
             mesh = new THREE.Mesh( geometryP, materialShader );
             scene.add( mesh );
         }
-        else scene.background = new THREE.Color( 0x808080);
+        else{
+           window.gameOn=true;
+           scene.background = new THREE.Color( 0x808080);
+         }
 
   renderer.setPixelRatio( rez);
   onWindowResize();
@@ -711,14 +714,14 @@ if(window.gameOn&&allCaught)
     level +=1;
 
     polygons=[];
-    polyRad = (metaLevel+10)/(metaLevel)/25.;
+    polyRad = 2.*Math.PI/(metaLevel)/minimumDimension*70.;
 
     for(let n = 0; n<metaLevel-level; n++)
     {
         polygons.push({
 
-             centerX:Math.cos(-2.*Math.PI/((metaLevel-level+2)-2)*n)/2.,
-             centerY:Math.sin(-2.*Math.PI/((metaLevel-level+2)-2)*n)/2.,
+             centerX:Math.cos(-2.*Math.PI/((metaLevel-level+2)-2)*n),
+             centerY:Math.sin(-2.*Math.PI/((metaLevel-level+2)-2)*n),
              dx:0,
              dy:0,
              caught:false,
@@ -731,6 +734,8 @@ if(window.gameOn&&allCaught)
     }
 }
 else if(!window.gameOn){polygons=[]; level = 0; metaLevel=0;}
+
+
 for(let n = 0; n < polygons.length; n++)
 {
     let xFromCent = polygons[n].centerX;
@@ -769,14 +774,12 @@ if (!on)neutralizer=0.;
     let distDot = Math.sqrt(ddX*ddX+ddY*ddY);
 
 
-
     if ( distanceFromCenter<polyRad+dotSize &&polygons[n].exited){//here I use dotSize, though it's really the center trigger
         if (!polygons[n].caught)polygons[n].caught = true;
         else polygons[n].caught = false;
         polygons[n].caughtByDot=false;
         polygons[n].exited = false;}
     else if (distanceFromCenter>polyRad+dotSize&&polygons[n].caughtByDot==false)polygons[n].exited = true;
-
 
     if ( distDot<polyRad+dotSize &&polygons[n].exited){
         if (!polygons[n].caught)polygons[n].caught = true;
