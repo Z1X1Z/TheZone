@@ -770,7 +770,7 @@ if (!on)neutralizer=0.;
 
 
 
-    if ( distanceFromCenter<polyRad &&polygons[n].exited){
+    if ( distanceFromCenter<polyRad+dotSize &&polygons[n].exited){//here I use dotSize, though it's really the center trigger
         if (!polygons[n].caught)polygons[n].caught = true;
         else polygons[n].caught = false;
         polygons[n].caughtByDot=false;
