@@ -775,7 +775,7 @@ if (!on)neutralizer=0.;
         else polygons[n].caught = false;
         polygons[n].caughtByDot=false;
         polygons[n].exited = false;}
-    else if (distanceFromCenter>polyRad&&polygons[n].caughtByDot==false)polygons[n].exited = true;
+    else if (distanceFromCenter>polyRad+dotSize&&polygons[n].caughtByDot==false)polygons[n].exited = true;
 
 
     if ( distDot<polyRad+dotSize &&polygons[n].exited){
