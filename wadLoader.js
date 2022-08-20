@@ -113,6 +113,7 @@ let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,
 let angleSound = Math.atan2(y,x);
 angleSound=(angleSound-initialAngleSound[id]+pi/2.+4.*pi)%(2*pi)+initialAngleSound[id];
 let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*220.;
+if(isFinite(frequency)&&frequency>0.)
      sound[id].setPitch(frequency);
      sound2[id].setPitch(2.*frequency);
      sound[id].setVolume(volume*(((angleSound-initialAngleSound[id]))/(2.*pi)));
@@ -127,7 +128,7 @@ if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 
     container.addEventListener('touchstart', function(e)
                                {
         e.stopImmediatePropagation();          //e.preventDefault();
-c.focus();
+c.focus();//this is to make the panel menu go down on android when you press on the container of the game
         for(var o=0; o<e.changedTouches.length; o++)
         {
             touchNumber.set(e.changedTouches[o].identifier,cycle);
@@ -138,7 +139,7 @@ c.focus();
         
     }, false);
   container.addEventListener('touchmove', function(e) {
-      e.preventDefault(); e.stopImmediatePropagation();
+     e.stopImmediatePropagation(); e.preventDefault();
 
       for(var o=0; o<e.changedTouches.length; o++)
           followSound(e.changedTouches[o]);
