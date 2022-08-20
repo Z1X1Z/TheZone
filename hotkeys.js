@@ -109,6 +109,8 @@ function callKey(event){
       else if (key=="="||key.toLowerCase()=="+"){window.movementRate *=1.11111111;  uniforms[ "rate" ].value= window.movementRate; }
 
       else if (key.toLowerCase()=="-"){window.movementRate /=1.11111111; uniforms[ "rate" ].value= window.movementRate;}
+          
+          else if (key=="E")window.gameOn=!window.gameOn;
 
       if(uniforms[ "free" ].value) window.zoomCageSize=100000000000000000.;
       else window.zoomCageSize=1.5;

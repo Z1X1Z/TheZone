@@ -19,7 +19,7 @@ let ZR = Math.E**(Math.log(.5)/zoomFrames);
 const MR = mf/zoomFrames;
 window.zoomCageSize = 1.5;//radius of zoom bounding
                   window.uniformsLoaded=false;
-
+window.gameOn=false;
 zoomOutRatchetThreshold=1.;
 let radius = 7;
 var rez=1.;
@@ -704,7 +704,7 @@ scene.add( circle );
 
 let allCaught = true;
 for (var n=0; n<polygons.length; n++) if(  polygons[n].caught == false) allCaught = false;
-if(allCaught)
+if(window.gameOn&&allCaught)
 {
 
     if(level >= metaLevel){metaLevel +=1; level = 1;}
@@ -723,13 +723,14 @@ if(allCaught)
              dy:0,
              caught:false,
              exited:true,
-             caughtByDot:false
+             caughtByDot:""
 
         });
 
 
     }
 }
+else if(!window.gameOn){polygons=[]; level = 0; metaLevel=0;}
 for(let n = 0; n < polygons.length; n++)
 {
     let xFromCent = polygons[n].centerX;
@@ -749,8 +750,8 @@ for(let n = 0; n < polygons.length; n++)
 
 
 
-        polygons[n].dx*=.985;
-        polygons[n].dy*=.985;
+        polygons[n].dx*=.995;
+        polygons[n].dy*=.995;
 
         if (speed<speedLimit)
         {
@@ -800,6 +801,9 @@ if (polygons[n].caught)targets[n].rotateZ(timestamp/1000.*Math.PI*2.)
 else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
 scene.add( targets[n] );
 }
+
+
+
 renderer.render( scene, camera );
 
 scene.remove( circle );
