@@ -20,7 +20,7 @@ const MR = mf/zoomFrames;
 window.zoomCageSize = 1.5;//radius of zoom bounding
                   window.uniformsLoaded=false;
 window.gameOn=false;
-zoomOutRatchetThreshold=1.;
+zoomOutRatchetThreshold=2.;
 let radius = 7;
 var rez=1.;
 let fftSize=2048;
@@ -193,8 +193,12 @@ else if (reset>3||pitch==1){on = false;
 }
 else reset++
 if (trailDepth<trailLength)trailDepth++;
+    
+    
+    
     if(pitch!=1)lastPitch = pitch;
-    else if (pitch==1)pitch=lastPitch
+    pitch=lastPitch;
+    
 let note = Math.log(Math.sqrt(pitch)/440.0)/Math.log(Math.pow ( 2, (1/24.0)))+49;
 let inc = 8.25 ;
 let t =  (note * 30+30*inc);
@@ -358,7 +362,7 @@ let FPS=0.;
 
                   const interval = 200;
                   let elapsedTimeBetweenFrames = 0.;
-                  let lastPitch = 0;
+                  let lastPitch = 1;
 
                   let lastFrameTime=0.;
                   let interpolation=1.;
@@ -592,7 +596,7 @@ else{//start drawing of just twenty four frets here
 
 
 var vertices;
-var z = -.91;
+var z = -1.;
              star.push(
                 0-widt*-Math.sin(g*pi*2./24+pi/2.),    0-widt*-Math.cos(g*pi*2./24+pi/2.), z,
                 0+widt*-Math.sin(g*pi*2./24+pi/2.),    0+widt*-Math.cos(g*pi*2./24+pi/2.),  z,
@@ -698,7 +702,7 @@ circleGeometry.computeBoundingBox ();
 circleMaterial = new THREE.MeshBasicMaterial( { color: colorSound} );
 
 circle = new THREE.Mesh( circleGeometry, circleMaterial );
-circle.position.set(circleX,circleY,-1.);
+circle.position.set(circleX,circleY,-.5);
 scene.add( circle );
 
 
@@ -800,7 +804,7 @@ if (polygons[n].caught)c.setStyle("white");
 else c.setStyle ( "black");
  pM[n] = new THREE.MeshBasicMaterial( { color: c} );
 targets[n] = new THREE.Mesh( pG[n], pM[n] );
-targets[n].position.set(polygons[n].centerX,polygons[n].centerY,-.5);
+targets[n].position.set(polygons[n].centerX,polygons[n].centerY,-.99);
 if (polygons[n].caught)targets[n].rotateZ(timestamp/1000.*Math.PI*2.)
 else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
 scene.add( targets[n] );
@@ -922,7 +926,7 @@ return quadraticPeakPosition (yinData, minElement(yinData));
 
 
 
-let tolerance=.5; //, confidence;
+let tolerance=.5775; //, confidence;
 let sampleRate=44100;
 function minElement (d)
 {
