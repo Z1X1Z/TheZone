@@ -193,6 +193,8 @@ else if (reset>3||pitch==1){on = false;
 }
 else reset++
 if (trailDepth<trailLength)trailDepth++;
+    if(pitch!=1)lastPitch = pitch;
+    else if (pitch==1)pitch=lastPitch
 let note = Math.log(Math.sqrt(pitch)/440.0)/Math.log(Math.pow ( 2, (1/24.0)))+49;
 let inc = 8.25 ;
 let t =  (note * 30+30*inc);
@@ -438,7 +440,6 @@ if( !window.touchMode) {
             averageFrameTotalAmp=[];
         }
     }
-    if(pitch!=1)lastPitch = pitch;
     let noteNumber =  Math.log(lastPitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
     if(Math.round(noteNumber) ==-854)noteNumber="undefined";
     let noteNameNumber=Math.floor(Math.round(noteNumber))%12;
