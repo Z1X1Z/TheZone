@@ -40,7 +40,7 @@ Hours of the clock are the twelve notes.  First the head as the seven white keys
 <h2>The Cross Method of two digit mental multiplication:</h2>
 In order to do two digit multiplication in your head you can use a cross of the numbers with one written vertically and the other across it horizontally.  This gives you four corners for the four solutions.  I recommend going bottom left product, top right product, sum, bottom right product, tally sum, top left solution, complete.
     For the two digit multiplication problem wz*xy you can follow the below diagram (note, some variables may be zero):
-        <img class="onoffline" src = "" name="mental_multiplication.png"></img>
+        <img class="onoffline" src = "" name="mental_multiplication.png" alt="oh boy!"></img>
 
         </p>
 Voila, your solution is written diagonally.</p>
@@ -66,7 +66,7 @@ Oh Yahweh! O Iaue! (12 2 5 7 10 0):00
 </p><p>
   <h2>SPLASH</h2>
 The splash screen is the way the truth and the life where the life is the light of men at its center and a monogram of ZONEX around and through it.
-<img class="onoffline" src = "" name="z1xlogo.png"></img>
+<img class="onoffline" src = "" name="z1xlogo.png" alt="oh boy!"></img>
 
 </p><p>
   <h2>On Hands</h2>
@@ -111,7 +111,7 @@ x=(2*(x^2-1))^.5=
 Note that the -1/ has disappeared for this calculation.
 </p><p>
 
-    <img class="onoffline" src = "" name="xsquaredandone.jpg"></img>
+    <img class="onoffline" src = "" name="xsquaredandone.jpg" alt="oh boy!">
 </p><p>
 This is the equation of Seven Clovers:
 
@@ -124,9 +124,15 @@ x=log3(x^3)=3
 <script>
     //this script sets all the images to online or offline depending on which you are.
     nf = document.querySelectorAll('.onoffline');
-    for(var c = 0; c<nf.length; c++) if(window.online)
+    for(var c = 0; c<nf.length; c++) {
+        if(window.online)
         nf[c].src ="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6.0/"+nf[c].name;
         else nf[c].src =nf[c].name;
+        nf[c].onerror=function(){    var s = document.createElement("img");//document.getElementById('threeJSscript');
+            s.src = this.name;
+            this.appendChild(s);
+            }
+    }
 nf = document.querySelectorAll('.onoffline2');
         for(var c = 0; c<nf.length; c++) if(window.online)
             nf[c].href ="https://zone-x.herokuapp.com/"+nf[c].name;
