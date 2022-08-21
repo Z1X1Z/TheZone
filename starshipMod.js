@@ -596,7 +596,7 @@ else{//start drawing of just twenty four frets here
 
 
 var vertices;
-var z = -1.;
+var z = -.91;
              star.push(
                 0-widt*-Math.sin(g*pi*2./24+pi/2.),    0-widt*-Math.cos(g*pi*2./24+pi/2.), z,
                 0+widt*-Math.sin(g*pi*2./24+pi/2.),    0+widt*-Math.cos(g*pi*2./24+pi/2.),  z,
@@ -702,7 +702,7 @@ circleGeometry.computeBoundingBox ();
 circleMaterial = new THREE.MeshBasicMaterial( { color: colorSound} );
 
 circle = new THREE.Mesh( circleGeometry, circleMaterial );
-circle.position.set(circleX,circleY,-.5);
+circle.position.set(circleX,circleY,-1.);
 scene.add( circle );
 
 
