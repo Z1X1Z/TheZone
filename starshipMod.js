@@ -270,6 +270,7 @@ let uniforms;
                      var minimumDimension=1;
                      var height,width;
 function init() {
+    navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100]);
     scene = new THREE.Scene();
 
 
