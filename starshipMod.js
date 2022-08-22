@@ -236,8 +236,8 @@ if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize){
   }
 cx[f] = 0;
 cy[f] = 0;
-xPerp[f] = -Math.sin(-angle+pi/2)*radius*volume*window.movementRate*interpolation;//this is the breadth of a trailSegment
-yPerp[f] = -Math.cos(-angle+pi/2)*radius*volume*window.movementRate*interpolation;
+xPerp[f] = -Math.sin(-angle+pi/2)*radius*volume*window.movementRate;
+yPerp[f] = -Math.cos(-angle+pi/2)*radius*volume*window.movementRate;
                      trailWidth[f]=1.;
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
@@ -897,7 +897,8 @@ async function startMic() {
         dataArray = new Uint8Array( bufferSize );
         //init();
       animate();
-      throw(window.navigator.vibrate(1000);)catch{console.log("haptic error")}
+      try{window.navigator.vibrate(1000);}catch(e){console.log(e);}
+
       } );
 }
 //begin MIT license, code from https://github.com/adamski/pitch_detector
