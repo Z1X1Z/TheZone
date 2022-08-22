@@ -501,7 +501,7 @@ if( !window.touchMode) {
     lineMat.opacity = 1.; //opacity has no effect
   }
 
-  let depth = -1.0;
+  let depth = -.97;
   if (on)for (let r= 0; r < bufferSize; r ++) {
     let tx = spirray0[r]/spiregulator;
     let ty =  spirray1[r]/spiregulator;
