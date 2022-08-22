@@ -702,10 +702,24 @@ circleGeometry.computeBoundingBox ();
 circleMaterial = new THREE.MeshBasicMaterial( { color: colorSound} );
 
 circle = new THREE.Mesh( circleGeometry, circleMaterial );
-circle.position.set(circleX,circleY,-1.);
+circle.position.set(circleX,circleY,-.998);
 scene.add( circle );
+                   
+                   let colorBlack= new THREE.Color();
+                   colorBlack.setStyle("black");
+                   
 
+                   
+                   const centerOfDotToEdge = [];
+                   centerOfDotToEdge.push( new THREE.Vector3(circleX+d_x*dotSize, circleY+d_y*dotSize, -1. ) );
+                   centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-1.) );
 
+                   
+                   let radialMaterial=  new THREE.MeshBasicMaterial( { color: colorBlack});
+
+                   const radialLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints( centerOfDotToEdge ), radialMaterial );
+
+scene.add(radialLine);
 
 
 
@@ -818,7 +832,8 @@ scene.remove( circle );
 circleGeometry.dispose();
 circleMaterial.dispose();
 circle.geometry.dispose();
-
+scene.remove(radialLine);
+radialMaterial.dispose();
 
 for(var n = 0; n<targets.length;n++){
   scene.remove( targets[n] );
