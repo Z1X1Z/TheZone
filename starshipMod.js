@@ -236,14 +236,14 @@ if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize){
   }
 cx[f] = 0;
 cy[f] = 0;
-xPerp[f] = -Math.sin(-angle+pi/2)*radius*volume*window.movementRate;
-yPerp[f] = -Math.cos(-angle+pi/2)*radius*volume*window.movementRate;
+xPerp[f] = -Math.sin(-angle+pi/2)*radius*volume*window.movementRate*interpolation;//this is the breadth of a trailSegment
+yPerp[f] = -Math.cos(-angle+pi/2)*radius*volume*window.movementRate*interpolation;
                      trailWidth[f]=1.;
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
 
-    cx[n] += d_x*interpolation*6*mf;
+    cx[n] += d_x*interpolation*6*mf;//this is the width of a trail segment
     cy[n] += d_y*interpolation*6*mf;
 
            trailWidth[n] *=.997;
@@ -270,7 +270,6 @@ let uniforms;
                      var minimumDimension=1;
                      var height,width;
 function init() {
-    navigator.vibrate([100,30,100,30,100,30,200,30,200,30,200,30,100,30,100,30,100]);
     scene = new THREE.Scene();
 
 
@@ -898,7 +897,7 @@ async function startMic() {
         dataArray = new Uint8Array( bufferSize );
         //init();
       animate();
-
+      throw(window.navigator.vibrate(1000);)catch{console.log("haptic error")}
       } );
 }
 //begin MIT license, code from https://github.com/adamski/pitch_detector
