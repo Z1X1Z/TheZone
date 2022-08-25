@@ -177,7 +177,7 @@ function  move()
 
   if (!trailLoaded) {trailLoaded = true;
       for(var n = 0; n<trailLength; n++)
-        {xPerp[n]=0;yPerp[n]=0;cx[n]=0;cy[n]=0;trailWidth[n]=0.;pitchCol[n]  = new THREE.Color()
+        {xPerp[n]=0;yPerp[n]=0;cx[n]=0;cy[n]=0;trailWidth[n]=1.;pitchCol[n]  = new THREE.Color()
         }
   }
     pitch=1;
@@ -195,7 +195,6 @@ if (isFinite(pb) &&pb>0&& Math.abs(pb-audioX.sampleRate/numberOfBins/2.)>1. &&pb
 else if (reset>3||pitch==1){on = false;
 }
 else reset++
-if (trailDepth<trailLength)trailDepth++;
     
     
     
@@ -241,12 +240,15 @@ if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize){//adjust back in if too far from
          
          if(Math.sqrt(coordY*coordY+coordX*coordX)>zoomCageSize*4./3.){coordX=0;coordY=0;}//teleport to center if too far from the center
          
-         
-cx[f] = 0;
-cy[f] = 0;
-xPerp[f] = -Math.sin(-angle+pi/2)*radius*volume*window.movementRate;
-yPerp[f] = -Math.cos(-angle+pi/2)*radius*volume*window.movementRate;
-                     trailWidth[f]=1.;
+            
+            
+            
+            
+            if (trailDepth<trailLength)trailDepth++;
+
+xPerp[f-1] = -Math.sin(-angle+pi/2)*radius*volume*window.movementRate;
+yPerp[f-1] = -Math.cos(-angle+pi/2)*radius*volume*window.movementRate;
+                     trailWidth[f-1]=1.;
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
@@ -256,6 +258,9 @@ if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
 trailWidth[n] *= Math.pow(.997,interpolation);
 }
 
+                     cx[(trailDepth+f-1)%trailDepth] = 0;
+                     cy[(trailDepth+f-1)%trailDepth] = 0;
+                       trailWidth[(trailDepth+f-1)%trailDepth]=1.;
 }
 
 
@@ -689,14 +694,28 @@ let s = (f+trailDepth-1)%trailDepth;
 
 let loopLimit = trailDepth;
 //if(isFinite(cx[r-1])&&isFinite(cx[s])&&isFinite(cy[r-1])&&isFinite(cy[s]))
+                 let scalar = 3./minimumDimension;
+                 
+             
 
-while(loopLimit>0){
-  for(var yy=0;yy<6;yy++)   trailColor.push(pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,.75*(1.-(trailDepth-loopLimit)/trailDepth))
+while(loopLimit>0&&r!=f){
+
+
   let widtr = (1.-trailWidth[r]);
   let widts = (1.-trailWidth[s]);
-  let scalar = 3./minimumDimension;
   let tt = 0.;
   var z = -1.+(trailDepth-loopLimit)/trailDepth;
+                          trailColor.push(
+                                          
+                                          pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,(1.-(trailDepth-loopLimit)/trailDepth),
+                                          pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,(1.-(trailDepth-loopLimit)/trailDepth),
+                                           pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,(1.-(trailDepth-loopLimit)/trailDepth),
+                                                                                      pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,(1.-(trailDepth-loopLimit)/trailDepth),
+
+                                                                                      pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,(1.-(trailDepth-loopLimit)/trailDepth),
+                                                                                                                                 pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,(1.-(trailDepth-loopLimit)/trailDepth)
+                    )
+
  trail.push(
             
             (scalar*cx[r]-widtr*xPerp[r]), (scalar*cy[r]-widtr*yPerp[r]),z, //2//side far//far triangle
@@ -714,7 +733,13 @@ while(loopLimit>0){
               loopLimit--;
 
 }
-
+                                                                                           
+                                                                                 
+                                                                                         
+                                                                                           
+                                                                                           
+                                                                                           
+                                                                                           
                  geomeTrail = new THREE.BufferGeometry();
 
                                             geomeTrail.setAttribute( 'position', new THREE.Float32BufferAttribute( trail, 3 ).onUpload( disposeArray ) );
