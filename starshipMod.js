@@ -463,7 +463,11 @@ if( !window.touchMode) {
            {
                            volume = 0.;
                            for(var n=0; n<inputData.length-1;n++)volume+=Math.abs(inputData[n+1]-inputData[n]);
+               console.log("volume")
                            volume*=audioX.sampleRate/inputData.length/255;
+
+              // volume-=window.zoomOutRatchetThreshold;
+               console.log(volume)
                volume*=2.;
                        }
                 else volume=1.;
@@ -480,8 +484,7 @@ if( !window.touchMode) {
         if(computeFPS==false){
              finalAverageAmp = 0.;
           for(var l=0.; l<averageFrameTotalAmp.length;l++)finalAverageAmp+=averageFrameTotalAmp[l];
-
-            volume*=audioX.sampleRate/inputData.length/255;
+            finalAverageAmp*=audioX.sampleRate/inputData.length/255;
               finalAverageAmp/=framesLong;
             zoomOutRatchetThreshold= finalAverageAmp;
             averageFrameTotalAmp=[];
@@ -810,7 +813,7 @@ for(let n = 0; n < polygons.length; n++)
 
 
         let angleTarget = Math.atan2(yFromCent,xFromCent);
-        let baseMag=.01*metaLevel+level;
+        let baseMag=level;
         let speed = Math.sqrt(polygons[n].dx*polygons[n].dx+polygons[n].dy*polygons[n].dy)
         let speedLimit = 1.;
 
