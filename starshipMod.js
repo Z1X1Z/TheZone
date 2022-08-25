@@ -21,7 +21,7 @@ window.zoomCageSize = 1.5;//radius of zoom bounding
                   window.uniformsLoaded=false;
 window.gameOn=false;
 zoomOutRatchetThreshold=1./255.;
-let radius = 7;
+let radius = 1;
 var rez=1.;
 let fftSize=2048;
 let trailLength = 576;
@@ -253,8 +253,7 @@ if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
 
     cx[n] += d_x*interpolation*6*mf;//this is accumulating the length of a trail segment
     cy[n] += d_y*interpolation*6*mf;
-
-           trailWidth[n] *=.997;
+trailWidth[n] *= Math.pow(.997,interpolation);
 }
 
 }
@@ -693,18 +692,20 @@ let loopLimit = trailDepth;
 
 while(loopLimit>0){
   for(var yy=0;yy<6;yy++)   trailColor.push(pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,.75*(1.-(trailDepth-loopLimit)/trailDepth))
-  let widtr = .2*(1.-trailWidth[r]);
-  let widts = .2*(1.-trailWidth[s]);
+  let widtr = (1.-trailWidth[r]);
+  let widts = (1.-trailWidth[s]);
   let scalar = .005;//mobius mode: let scalar = .07*loopLimit/trailDepth;
   let tt = 0.;
   var z = -1.+(trailDepth-loopLimit)/trailDepth;
  trail.push(
-    (scalar*cx[r]+widtr*xPerp[r]), (scalar*cy[r]+widtr*yPerp[r]),z,
-    (scalar*cx[s]-widts*xPerp[s]), (scalar*cy[s]-widts*yPerp[s]),z,
-    (scalar*cx[s]+widts*xPerp[s]), (scalar*cy[s]+widts*yPerp[s]),z,
-    (scalar*cx[r]-widtr*xPerp[r]), (scalar*cy[r]-widtr*yPerp[r]),z, //2
-    (scalar*cx[s]-widts*xPerp[s]), (scalar*cy[s]-widts*yPerp[s]),z,  //1
-    (scalar*cx[r]+widtr*xPerp[r]), (scalar*cy[r]+widtr*yPerp[r]),z, //3
+            
+            (scalar*cx[r]-widtr*xPerp[r]), (scalar*cy[r]-widtr*yPerp[r]),z, //2//side far//far triangle
+            (scalar*cx[s]-widts*xPerp[s]), (scalar*cy[s]-widts*yPerp[s]),z,  //1//side close
+            (scalar*cx[r]+widtr*xPerp[r]), (scalar*cy[r]+widtr*yPerp[r]),z, //3//side far
+            
+    (scalar*cx[r]+widtr*xPerp[r]), (scalar*cy[r]+widtr*yPerp[r]),z,//3//side far//close triangle
+    (scalar*cx[s]-widts*xPerp[s]), (scalar*cy[s]-widts*yPerp[s]),z,//1//side close
+    (scalar*cx[s]+widts*xPerp[s]), (scalar*cy[s]+widts*yPerp[s]),z,//4//side close
   );
 
   s = r;
