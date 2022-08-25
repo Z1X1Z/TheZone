@@ -20,7 +20,7 @@ const MR = mf/zoomFrames;
 window.zoomCageSize = 1.5;//radius of zoom bounding
                   window.uniformsLoaded=false;
 window.gameOn=false;
-zoomOutRatchetThreshold=2.;
+zoomOutRatchetThreshold=1.;
 let radius = 7;
 var rez=1.;
 let fftSize=2048;
@@ -196,8 +196,8 @@ if (trailDepth<trailLength)trailDepth++;
     
     
     
-    if(pitch!=1)lastPitch = pitch;
-    pitch=lastPitch;
+    if(pitch!=1){lastPitch = pitch;
+        pitch=lastPitch;}
     
 let note = Math.log(Math.sqrt(pitch)/440.0)/Math.log(Math.pow ( 2, (1/24.0)))+49;
 let inc = 8.25 ;
@@ -463,11 +463,7 @@ if( !window.touchMode) {
            {
                            volume = 0.;
                            for(var n=0; n<inputData.length-1;n++)volume+=Math.abs(inputData[n+1]-inputData[n]);
-               console.log("volume")
                            volume*=audioX.sampleRate/inputData.length/255;
-
-              // volume-=window.zoomOutRatchetThreshold;
-               console.log(volume)
                volume*=2.;
                        }
                 else volume=1.;
@@ -509,7 +505,7 @@ if( !window.touchMode) {
 
      let note = notes[noteNameNumber];
      let cents = Math.round((noteNumber-Math.round(noteNumber))*100);
-     let fr = Math.round(lastPitch);
+     let fr = Math.round(pitch);
      let n_n = Math.round(noteNumber);
      let cores = Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.);
      let pf = String(pitch!=1);
