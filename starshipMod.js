@@ -468,6 +468,8 @@ if( !window.touchMode) {
                            volume = 0.;
                            for(var n=0; n<inputData.length-1;n++)volume+=Math.abs(inputData[n+1]-inputData[n]);
                            volume*=audioX.sampleRate/inputData.length/255;
+               volume-=zoomOutRatchetThreshold;
+               if (volume<0)volume=0
                volume*=2.;
                        }
                 else volume=1.;
@@ -484,7 +486,6 @@ if( !window.touchMode) {
         if(computeFPS==false){
              finalAverageAmp = 0.;
           for(var l=0.; l<averageFrameTotalAmp.length;l++)finalAverageAmp+=averageFrameTotalAmp[l];
-            finalAverageAmp*=audioX.sampleRate/inputData.length/255;
               finalAverageAmp/=framesLong;
             zoomOutRatchetThreshold= finalAverageAmp;
             averageFrameTotalAmp=[];
