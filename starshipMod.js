@@ -20,7 +20,7 @@ const MR = mf/zoomFrames;
 window.zoomCageSize = 1.5;//radius of zoom bounding
                   window.uniformsLoaded=false;
 window.gameOn=false;
-zoomOutRatchetThreshold=1.;
+zoomOutRatchetThreshold=1./255.;
 let radius = 7;
 var rez=1.;
 let fftSize=2048;
@@ -185,7 +185,7 @@ function  move()
 
     totalAMP = 0.;
     for(var n=0; n<inputData.length-1;n++)totalAMP+=Math.abs(inputData[n+1]-inputData[n]);
-    totalAMP*=audioX.sampleRate/inputData.length;
+    totalAMP*=audioX.sampleRate/inputData.length/255;
 
 if (totalAMP>zoomOutRatchetThreshold||on)
   pb =    calculatePitch();
