@@ -694,7 +694,7 @@ while(loopLimit>0){
   for(var yy=0;yy<6;yy++)   trailColor.push(pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,.75*(1.-(trailDepth-loopLimit)/trailDepth))
   let widtr = (1.-trailWidth[r]);
   let widts = (1.-trailWidth[s]);
-  let scalar = .005;//mobius mode: let scalar = .07*loopLimit/trailDepth;
+  let scalar = 3./minimumDimension;
   let tt = 0.;
   var z = -1.+(trailDepth-loopLimit)/trailDepth;
  trail.push(
