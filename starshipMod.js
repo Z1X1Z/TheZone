@@ -645,7 +645,7 @@ else{//start drawing of just twenty four frets here
 
 
 var vertices;
-var z = -.91;
+var z = -.99;
              star.push(
                 0-widt*-Math.sin(g*pi*2./24+pi/2.),    0-widt*-Math.cos(g*pi*2./24+pi/2.), z,
                 0+widt*-Math.sin(g*pi*2./24+pi/2.),    0+widt*-Math.cos(g*pi*2./24+pi/2.),  z,
