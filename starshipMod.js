@@ -705,15 +705,16 @@ while(loopLimit>0&&r!=f){
   let widts = (1.-trailWidth[s]);
   let tt = 0.;
   var z = -1.+(trailDepth-loopLimit)/trailDepth;
+                          let transparencyOfTrail=.75*(1.-(trailDepth-loopLimit)/trailDepth);
                           trailColor.push(
                                           
-                                          pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,(1.-(trailDepth-loopLimit)/trailDepth),
-                                          pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,(1.-(trailDepth-loopLimit)/trailDepth),
-                                           pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,(1.-(trailDepth-loopLimit)/trailDepth),
-                                                                                      pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,(1.-(trailDepth-loopLimit)/trailDepth),
+                                          pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
+                                          pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrail,
+                                           pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
+                                                                                      pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
 
-                                                                                      pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,(1.-(trailDepth-loopLimit)/trailDepth),
-                                                                                                                                 pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,(1.-(trailDepth-loopLimit)/trailDepth)
+                                                                                      pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrail,
+                                                                                                                                 pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrail
                     )
 
  trail.push(
