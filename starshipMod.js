@@ -167,6 +167,9 @@ var totalAMP;
                             f[1]=fxb*-Math.sin(-angle)+f[1]*-Math.cos(-angle);
                             return f;
                            }
+                           
+let pitchFound;
+                           
 function  move()
 {
     if (isNaN(coordX)||(!zoomAtl41&&coordX>4.))coordX=0.;
@@ -196,8 +199,9 @@ if (trailDepth<trailLength)trailDepth++;
     
     
     
-    if(pitch!=1){lastPitch = pitch;
-        pitch=lastPitch;}
+    if(pitch!=1){lastPitch = pitch;pitchFound=true;}
+    else pitchFound=false;
+        pitch=lastPitch;
     
 let note = Math.log(Math.sqrt(pitch)/440.0)/Math.log(Math.pow ( 2, (1/24.0)))+49;
 let inc = 8.25 ;
@@ -508,14 +512,13 @@ if( !window.touchMode) {
      let fr = Math.round(pitch);
      let n_n = Math.round(noteNumber);
      let cores = Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.);
-     let pf = String(pitch!=1);
       if(textON)document.getElementById("textWindow").innerHTML =
 "<div sytle='font-size: 16px;'>"+
 
                                 " note: "+note+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
                                 "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
                                 "FPS: "+Math.round(FPS)+", cores: "+cores+", zoom: "+zoom+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
-                                "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+pf+", AMP: "+totalAMP
+                                "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+pitchFound+", AMP: "+totalAMP
                             //+"<p style='margin : 0px'></p>"+"X: "+String(-coordX)+" Y: "+String(-coordY);
 +"</div>";
       else document.getElementById("textWindow").innerHTML = "";
