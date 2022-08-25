@@ -230,10 +230,14 @@ if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold&&on){
                coordX=bx;
                coordY=by;
            }
-if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize){
-               if (Math.abs(by)>window.zoomCageSize)coordY*=1.-(Math.abs(by)-window.zoomCageSize)/25.;
-               if (Math.abs(bx)>window.zoomCageSize)coordX*=1.-(Math.abs(bx)-window.zoomCageSize)/25.;
+if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize){//adjust back in if too far from the cener
+               if (Math.abs(by)>Math.sqrt(window.zoomCageSize))coordY*=1.-(Math.abs(by)-window.zoomCageSize)/35.;
+               if (Math.abs(bx)>Math.sqrt(window.zoomCageSize))coordX*=1.-(Math.abs(bx)-window.zoomCageSize)/35.;
   }
+         
+         if(Math.sqrt(coordY*coordY+coordX*coordX)>zoomCageSize*4./3.){coordX=0;coordY=0;}//teleport to center if too far from the center
+         
+         
 cx[f] = 0;
 cy[f] = 0;
 xPerp[f] = -Math.sin(-angle+pi/2)*radius*volume*window.movementRate;
@@ -243,7 +247,7 @@ f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
 
-    cx[n] += d_x*interpolation*6*mf;//this is the width of a trail segment
+    cx[n] += d_x*interpolation*6*mf;//this is accumulating the length of a trail segment
     cy[n] += d_y*interpolation*6*mf;
 
            trailWidth[n] *=.997;
@@ -364,7 +368,7 @@ let FPS=0.;
                   let elapsedTimeBetweenFrames = 0.;
                   let lastPitch = 1;
 
-                  let lastFrameTime=0.;
+                  let lastFrameTime=-1.;
                   let interpolation=1.;
                   let finalAverageAmp=1.;
                   let averageFrameTotalAmp = [];
@@ -388,6 +392,45 @@ function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coo
                           if(zoom<.0000000000000000000000001)zoom = 1.;
 
 }
+                     
+                     
+                     
+                     let thisChunk=0, lastChunk=0;
+                     
+function mcphrth(){
+    let audioFramesPerMillisecond=audioX.sampleRate*.001;
+    let vibrateArray=[];
+    let thisChunkGreaterThanLastChunk,thisChunkLessThanLastChunk;
+    counter=0.;
+    for(var n=0; n<inputData.length-1;n++)
+    {
+        thisChunk+=Math.abs(inputData[n+1]-inputData[n]);
+
+        if(counter>=audioFramesPerMillisecond) {
+            
+            if(thisChunk>lastChunk){
+                thisChunkGreaterThanLastChunk+=1;
+                if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
+                thisChunkLessThanLastChunk=0;
+                
+            }
+                else {thisChunkLessThanLastChunk+=1;
+                    if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
+                    thisChunkGreaterThanLastChunk=0;
+                }
+
+            lastChunk=thisChunk;
+            thisChunk=0;
+            counter=0;
+        }
+        counter++;
+    }
+        
+    
+    
+    try{window.navigator.vibrate(vibrateArray);}catch(e){console.log(e);}
+}
+
                                  var volume=1;
                                  var skipNext=false;
                                  var lvs;
@@ -710,7 +753,7 @@ scene.add( circle );
                    
 
                    
-                   const centerOfDotToEdge = [];
+                   let centerOfDotToEdge = [];
                    centerOfDotToEdge.push( new THREE.Vector3(circleX+d_x*dotSize, circleY+d_y*dotSize, -1. ) );
                    centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-1.) );
 
@@ -834,6 +877,7 @@ circleMaterial.dispose();
 circle.geometry.dispose();
 scene.remove(radialLine);
 radialMaterial.dispose();
+radialLine.geometry.dispose( );
 
 for(var n = 0; n<targets.length;n++){
   scene.remove( targets[n] );
