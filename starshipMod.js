@@ -252,8 +252,8 @@ f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
     
-    cx[n] += d_x*interpolation/MR/Math.max(window.innerWidth,window.innerHeight);//this is accumulating the length of a trail segment//12 is hopefully based on the size of seven clovers.  Grip is elusive!!!!
-    cy[n] += d_y*interpolation/MR/Math.max(window.innerWidth,window.innerHeight);
+    cx[n] += d_x*interpolation*MR*2./3.;//this is accumulating the length of a trail segment//12 is hopefully based on the size of seven clovers.  Grip is elusive!!!!
+    cy[n] += d_y*interpolation*MR*2./3.;// two thirds seems to fit it to seven clovers neatly on "L"
 trailWidth[n] *= Math.pow(.997,interpolation);
 }
 
