@@ -846,10 +846,10 @@ for(let n = 0; n < polygons.length; n++)
 
 
 
-        polygons[n].dx*=.995;
-        polygons[n].dy*=.995;
+        polygons[n].dx*=Math.pow(.993,interpolation);//resistance to speed
+        polygons[n].dy*=Math.pow(.993,interpolation);
 
-        if (speed<speedLimit)
+        if (speed<=speedLimit)
         {
             polygons[n].dx+=baseMag*-Math.cos(angleTarget);
             polygons[n].dy+=baseMag*-Math.sin(angleTarget);
