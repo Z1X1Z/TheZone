@@ -21,7 +21,7 @@ window.zoomCageSize = 1.5;//radius of zoom bounding
                   window.uniformsLoaded=false;
 window.gameOn=false;
 zoomOutRatchetThreshold=1./255.;
-let radius = 1.5;
+let radius = 1.;
 var rez=1.;
 let fftSize=2048;
 let trailLength = 576;
@@ -563,7 +563,7 @@ if( !window.touchMode) {
 zoomRoutine();
 
             if(zoomAtl41)zoom=.025;
-  uniforms[ "time2dance" ].value += Math.abs(totalAMP)/255;
+  uniforms[ "time2dance" ].value += totalAMP;
 
 
 
@@ -845,8 +845,8 @@ for(let n = 0; n < polygons.length; n++)
 
 
 
-        polygons[n].dx*=Math.pow(.993,interpolation);//resistance to speed
-        polygons[n].dy*=Math.pow(.993,interpolation);
+        polygons[n].dx*=Math.pow(.999,interpolation);//resistance to speed accumulation
+        polygons[n].dy*=Math.pow(.999,interpolation);
 
         if (speed<=speedLimit)
         {
@@ -931,8 +931,8 @@ else {
             var d = 3.;//this is the frame size in the shader: "p=vec2(...."
             if(uniforms.colorCombo.value==15&&window.mandelbrot) d = 10.;//for zonex.html
         if(pointerZoom){
-             var spunTouch = [ (zoom-uniforms[ "zoom" ].value)*screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)*1./d),
-                              -(zoom-uniforms[ "zoom" ].value)*screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)*1./d)];
+             var spunTouch = [ (zoom-uniforms[ "zoom" ].value)*screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d),
+                              -(zoom-uniforms[ "zoom" ].value)*screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d)];
 
                   if(uniforms.carousel.value!=0.)         spunTouch=spin(spunTouch,uniforms.carousel.value*(uniforms[ "time" ].value*window.movementRate)%(Math.PI*2.));
 
