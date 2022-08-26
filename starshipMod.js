@@ -253,8 +253,8 @@ f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
 
-    cx[n] += d_x*interpolation/MR;//this is accumulating the length of a trail segment
-    cy[n] += d_y*interpolation/MR;
+    cx[n] += d_x*interpolation/MR*.001;//this is accumulating the length of a trail segment//can't figure out what's up with that .001
+    cy[n] += d_y*interpolation/MR*.001;
 trailWidth[n] *= Math.pow(.997,interpolation);
 }
 
@@ -694,7 +694,7 @@ let s = (f+trailDepth-1)%trailDepth;
 
 let loopLimit = trailDepth;
 //if(isFinite(cx[r-1])&&isFinite(cx[s])&&isFinite(cy[r-1])&&isFinite(cy[s]))
-                 let scalar = 1./minimumDimension;
+                 let scalar = 1.;
                  
              
 
@@ -719,13 +719,13 @@ while(loopLimit>0&&r!=f){
 
  trail.push(
             
-            (scalar*cx[r]-widtr*xPerp[r]), (scalar*cy[r]-widtr*yPerp[r]),z, //2//side far//far triangle
-            (scalar*cx[s]-widts*xPerp[s]), (scalar*cy[s]-widts*yPerp[s]),z,  //1//side close
-            (scalar*cx[r]+widtr*xPerp[r]), (scalar*cy[r]+widtr*yPerp[r]),z, //3//side far
+            cx[r]-widtr*xPerp[r], cy[r]-widtr*yPerp[r],z, //2//side far//far triangle
+            cx[s]-widts*xPerp[s], cy[s]-widts*yPerp[s],z,  //1//side close
+            cx[r]+widtr*xPerp[r], cy[r]+widtr*yPerp[r],z, //3//side far
             
-    (scalar*cx[r]+widtr*xPerp[r]), (scalar*cy[r]+widtr*yPerp[r]),z,//3//side far//close triangle
-    (scalar*cx[s]-widts*xPerp[s]), (scalar*cy[s]-widts*yPerp[s]),z,//1//side close
-    (scalar*cx[s]+widts*xPerp[s]), (scalar*cy[s]+widts*yPerp[s]),z,//4//side close
+    cx[r]+widtr*xPerp[r], cy[r]+widtr*yPerp[r],z,//3//side far//close triangle
+    cx[s]-widts*xPerp[s], cy[s]-widts*yPerp[s],z,//1//side close
+    cx[s]+widts*xPerp[s], cy[s]+widts*yPerp[s],z,//4//side close
   );
 
   s = r;
