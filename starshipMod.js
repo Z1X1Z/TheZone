@@ -253,8 +253,8 @@ f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
 
-    cx[n] += d_x*interpolation*6*mf;//this is accumulating the length of a trail segment
-    cy[n] += d_y*interpolation*6*mf;
+    cx[n] += d_x*interpolation/MR;//this is accumulating the length of a trail segment
+    cy[n] += d_y*interpolation/MR;
 trailWidth[n] *= Math.pow(.997,interpolation);
 }
 
@@ -694,7 +694,7 @@ let s = (f+trailDepth-1)%trailDepth;
 
 let loopLimit = trailDepth;
 //if(isFinite(cx[r-1])&&isFinite(cx[s])&&isFinite(cy[r-1])&&isFinite(cy[s]))
-                 let scalar = 3./minimumDimension;
+                 let scalar = 1./minimumDimension;
                  
              
 
