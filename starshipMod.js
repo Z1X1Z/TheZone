@@ -20,7 +20,7 @@ const MR = mf/zoomFrames;
 window.zoomCageSize = 1.5;//radius of zoom bounding
                   window.uniformsLoaded=false;
 window.gameOn=false;
-zoomOutRatchetThreshold=1./255.;
+zoomOutRatchetThreshold=3./255.;
 let radius = 1.;
 var rez=1.;
 let fftSize=2048;
@@ -1014,7 +1014,7 @@ return quadraticPeakPosition (yinData, minElement(yinData));
 
 
 
-let tolerance=.5775; //, confidence;
+let tolerance=.5; //, confidence;
 let sampleRate=44100;
 function minElement (d)
 {
