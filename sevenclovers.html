@@ -313,6 +313,8 @@
             uniform float spirated;
 
             uniform bool hearTOL;
+            
+            vec2 spunC=vec2(0.);
 
             float zin(float x){return -sin(x);}
             float coz(float x){return -cos(x);}
@@ -695,13 +697,13 @@
                              if(MetaCored)for(int i=1;i<60; i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;}else break;
                              loops=0.;
                              float hyperCore=0.;
-                             float lfc = length(freed(coords));
+                             float lfc = length(freed(spunC));
                                if(MetaCored)hyperCore=cored*2./3.+log(lfc*3./2.)*0.9551195-1.;//.9551195 is based on x=log3(x), x = .910239log*(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
                                 if(MetaCored&&morph>.5)hyperCore*=4./3.;//engage overstable core if dancing
 
                              float term=0.;
                              if(spirated!=0.)term=(1.-lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
-                             for (float counter=0.;counter<100.;counter++)if(abs(s.y)<47.){
+                             for (float counter=0.;counter<40.;counter++)if(abs(s.y)<47.){
                                 if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+3.14159);
 
                                 s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y-t.x, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y-t.y);//x**3
@@ -777,7 +779,7 @@
                                   if(!MetaCored)for(int i=1;i<60; i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;}else break;
                                   loops=0.;
                                   float hyperCore=0.;
-                                  float lfc = length(freed(coords));
+                                  float lfc = length(freed(spunC));
                                     if(!MetaCored)hyperCore=cored*2./3.+log(lfc*3./2.)*0.9551195-1.;//.9551195 is based on x=log3(x), x = .910239log3(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
                                    // if(MetaCored&&morph>=.5)hyperCore*=4./3.;//engage overstable core if dancing
 
@@ -877,7 +879,7 @@ vec3 xtol(vec2 s, vec2 t){
                                         float c = sqrt(s.y*s.y+s.x*s.x);
                                         //for(int i=0;i<69; i++)if(c<2./3.&&i<int(cored)){p*=2.;c*=2.;}
                                         c/=h;
-                                        if(c<h/2. &&f<int((cored/2.+log(length(freed(coords))*h/2.)+.5)/2.)){float shift=h;s*=shift;c*=shift;}
+                                        if(c<h/2. &&f<int((cored/2.+log(length(freed(spunC))*h/2.)+.5)/2.)){float shift=h;s*=shift;c*=shift;}
                                                                  }
                                                                                       }
                         
@@ -933,7 +935,6 @@ vec3 xtol(vec2 s, vec2 t){
           vec2 pTiltCoord =-vec2(pixeldistance*-cos(pixelangle),pixeldistance*-sin(pixelangle));
           return pTiltCoord;
           }
-
           //function library: manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin x
           void main(){
            vec2 p=-((vUv.yx)-.5)/(resolution.xy/max(resolution.x,resolution.y))*6.;
@@ -943,7 +944,7 @@ vec3 xtol(vec2 s, vec2 t){
           vec3 zoomer;
           
           
-          vec2 spunC=coords.yx;
+           spunC=coords.yx;
           
           if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time*rate,3.1415927410125732*2.));}
           vec2 backGround=freed(p/2.*zoom+spunC);
@@ -958,9 +959,9 @@ vec3 xtol(vec2 s, vec2 t){
                                             vec2 dance2 = vec2(0.);
 
      if (morph>.5 && colorCombo>=10)  dance=vec2(-sin(time+time2dance),
-                                                 -sin((time+time2dance)*-1.618))*zoom+(coords.yx+.5)*log(pow(zoom,1.618))/log(1.618)*zoom*.5;//a lot of these coords should probably be spunC
+                                                 -sin((time+time2dance)*-1.618))*zoom+(spunC.yx+.5)*log(pow(zoom,1.618))/log(1.618)*zoom*.5;//a lot of these coords should probably be spunC
                                             
-    else if (morph>.5&&(colorCombo<10||colorCombo==14)){float lfc=length(freed(coords));
+    else if (morph>.5&&(colorCombo<10||colorCombo==14)){float lfc=length(freed(spunC));
                                             dance2 = vec2(
                                                     -abs(lfc/(lfc-zoom)) -lfc/(lfc+zoom)*2./3.,
                                               -((zoom*lfc)/(lfc+zoom)*sign(coords.y)*sign(coords.x)*(1.-lfc*zoom) )

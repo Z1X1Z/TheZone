@@ -9,18 +9,18 @@ window.pointerZoom=false;
 let zoom=1., coordX=0., coordY=0.;
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
-window.movementRate=1.;
+window.movementRate=2.;
 window.touchMode=false;
 window.volumeSpeed = false;
 
-let zoomFrames = 60;
+let zoomFrames = 60;//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
-                  const mf = 2.;
+                  const mf = 1.;
 const MR = mf/zoomFrames;
 window.zoomCageSize = 1.5;//radius of zoom bounding
                   window.uniformsLoaded=false;
 window.gameOn=false;
-zoomOutRatchetThreshold=3./255.;
+zoomOutRatchetThreshold=1.5/255.;
 let radius = 1.;
 var rez=1.;
 let fftSize=2048;
@@ -246,9 +246,9 @@ if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize){//adjust back in if too far from
             
             if (trailDepth<trailLength)trailDepth++;
 
-xPerp[f-1] = -Math.sin(-angle+pi/2)*radius*volume*window.movementRate;
-yPerp[f-1] = -Math.cos(-angle+pi/2)*radius*volume*window.movementRate;
-                     trailWidth[f-1]=1.;
+xPerp[f-1] = -Math.sin(-angle+pi/2)*radius*volume*window.movementRate*.5;
+yPerp[f-1] = -Math.cos(-angle+pi/2)*radius*volume*window.movementRate*.5;
+                     trailWidth[f-1]=1.;//has to be 1 for trail drawing algorithms
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
@@ -383,7 +383,7 @@ let FPS=0.;
 function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
                      if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
 
-                   ZR = Math.E**(Math.log(.5)*MR*window.movementRate*interpolation*(Math.sqrt(volume)/2.+.5));//the square root of volume is to make it grow slower than in d_xy
+                   ZR = Math.E**(Math.log(.5)/zoomFrames*window.movementRate*interpolation*(Math.sqrt(volume)/2.+.5));//the square root of volume is to make it grow slower than in d_xy
                    if(!zoomOutEngage){
                      if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&on)||window.pointerZoom)zoom *=ZR;
                      else if(zoom<1.){zoom /= ZR;
@@ -759,8 +759,8 @@ while(loopLimit>0&&r!=f){
 scene.add(meshTrail)
 
 if(isFinite(d_x)&&isFinite(d_y)&&on) {
-circleX-=d_x/minimumDimension*6.*mf*interpolation;
-circleY-=d_y/minimumDimension*6.*mf*interpolation;
+circleX-=d_x*interpolation*MR*2./3.;;
+circleY-=d_y*interpolation*MR*2./3.;;
        }
 
 if (circleX>width)circleX=-width;
