@@ -408,10 +408,9 @@ function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coo
                      let v=document.getElementById("Vibrate")
                        v.onclick=
 function mcphrth(){
-    console.log("here")
     let audioFramesPerMillisecond=audioX.sampleRate*.001;
-    let vibrateArray=[];
-    let thisChunkGreaterThanLastChunk,thisChunkLessThanLastChunk;
+    let vibrateArray=[0];
+    let thisChunkGreaterThanLastChunk=0,thisChunkLessThanLastChunk=0;
     counter=0.;
     for(var n=0; n<inputData.length-1;n++)
     {
@@ -438,7 +437,6 @@ function mcphrth(){
     }
         
     
-
     try{navigator.vibrate(vibrateArray);}catch(e){console.log(e);}
     try{navigator.vibrate(1000);}catch(e){console.log(e);}
 
