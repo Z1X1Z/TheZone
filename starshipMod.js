@@ -521,8 +521,9 @@ if( !window.touchMode) {
 
                                 " note: "+note+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
                                 "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
-                                "FPS: "+Math.round(FPS)+", cores: "+cores+", zoom: "+zoom+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
-                                "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+pitchFound+", AMP: "+totalAMP
+                                "cores: "+cores+", zoom: "+zoom+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
+                                "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+pitchFound+"<p style='margin : 0px'></p>"+
+                                "AMP: "+totalAMP+"FPS: "+Math.round(FPS)+"<p style='margin : 0px'></p>"
                             //+"<p style='margin : 0px'></p>"+"X: "+String(-coordX)+" Y: "+String(-coordY);
 +"</div>";
       else document.getElementById("textWindow").innerHTML = "";
