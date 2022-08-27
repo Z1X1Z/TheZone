@@ -438,9 +438,10 @@ function mcphrth(){
     }
         
     
-    try{navigator.vibrate(1000);}catch(e){console.log(e);}
 
     try{navigator.vibrate(vibrateArray);}catch(e){console.log(e);}
+    try{navigator.vibrate(1000);}catch(e){console.log(e);}
+
 }
 
                                  var volume=1;
