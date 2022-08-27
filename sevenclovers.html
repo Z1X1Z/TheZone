@@ -197,7 +197,7 @@
                                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                               <label for="Wheel">Wheel</label><br>
                               <input type="checkbox" id="Vibrate" name="t"  onclick= "
-                                 try{
+                            
                                  
                                  
                                  let audioFramesPerMillisecond=audioX.sampleRate*.001;
@@ -227,7 +227,7 @@
                                      }
                                      counter++;
                                      
-                                 }catch(e){console.log(e)}">
+                                     try{window.navigator.vibrate(vibrateArray);}catch(e){console.log(e);}">
                                <label for="Vibrate">Vibrate</label><br>
         
                             <a id="Metronome Up" name="t"  onclick= "
