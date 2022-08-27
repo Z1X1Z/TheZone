@@ -87,8 +87,8 @@ function callKey(event){
       else if (event.keyCode==190||event.key=="."||event.key==">") uniforms[ "metronome" ].value *= 1.1; //keycode for <
       else if ((event.keyCode==188||event.key==","||event.key=="<")&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
 
-      else if (key=="I") zoomOutRatchetThreshold/= 1.212121;
-      else if (key=="O") zoomOutRatchetThreshold*= 1.212121;
+      else if (key=="I") zoomOutRatchetThreshold/= 1.12121;
+      else if (key=="O") zoomOutRatchetThreshold*= 1.12121;
 
       else if (key=="P"){
                 framesLong=FPS;
