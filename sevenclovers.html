@@ -197,37 +197,37 @@
                                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                               <label for="Wheel">Wheel</label><br>
                               <input type="checkbox" id="Vibrate" name="t"  onclick= "
-                            
-                                 
-                                 
-                                 let audioFramesPerMillisecond=audioX.sampleRate*.001;
-                                 let vibrateArray=[];
-                                 let thisChunkGreaterThanLastChunk,thisChunkLessThanLastChunk;
-                                 counter=0.;
-                                 for(var n=0; n<inputData.length-1;n++)
-                                 {
-                                     thisChunk+=Math.abs(inputData[n+1]-inputData[n]);
+                                  let audioFramesPerMillisecond=audioX.sampleRate*.001;
+                                  let vibrateArray=[];
+                                  let thisChunkGreaterThanLastChunk,thisChunkLessThanLastChunk;
+                                  counter=0.;
+                                  for(var n=0; n<inputData.length-1;n++)
+                                  {
+                                      thisChunk+=Math.abs(inputData[n+1]-inputData[n]);
 
-                                     if(counter>=audioFramesPerMillisecond) {
-                                         
-                                         if(thisChunk>lastChunk){
-                                             thisChunkGreaterThanLastChunk+=1;
-                                             if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
-                                             thisChunkLessThanLastChunk=0;
-                                             
-                                         }
-                                             else {thisChunkLessThanLastChunk+=1;
-                                                 if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
-                                                 thisChunkGreaterThanLastChunk=0;
-                                             }
+                                      if(counter>=audioFramesPerMillisecond) {
+                                          
+                                          if(thisChunk>lastChunk){
+                                              thisChunkGreaterThanLastChunk+=1;
+                                              if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
+                                              thisChunkLessThanLastChunk=0;
+                                              
+                                          }
+                                              else {thisChunkLessThanLastChunk+=1;
+                                                  if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
+                                                  thisChunkGreaterThanLastChunk=0;
+                                              }
 
-                                         lastChunk=thisChunk;
-                                         thisChunk=0;
-                                         counter=0;
-                                     }
-                                     counter++;
-                                     
-                                     try{window.navigator.vibrate(vibrateArray);}catch(e){console.log(e);}">
+                                          lastChunk=thisChunk;
+                                          thisChunk=0;
+                                          counter=0;
+                                      }
+                                      counter++;
+                                  }
+                                      
+                                  
+                                  
+                                  try{window.navigator.vibrate(vibrateArray);}catch(e){console.log(e);}">
                                <label for="Vibrate">Vibrate</label><br>
         
                             <a id="Metronome Up" name="t"  onclick= "
