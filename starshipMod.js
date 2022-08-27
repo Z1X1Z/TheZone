@@ -784,7 +784,7 @@ scene.add( circle );
 
                    
                    let centerOfDotToEdge = [];
-                   centerOfDotToEdge.push( new THREE.Vector3(circleX+-Math.sin(-angle)*dotSize, circleY+-Math.cos(-angle)*dotSize, -1. ) );
+                   centerOfDotToEdge.push( new THREE.Vector3(circleX+-Math.sin(-angle)*dotSize*volume, circleY+-Math.cos(-angle)*dotSize*volume, -1. ) );
                    centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-1.) );
 
                    
