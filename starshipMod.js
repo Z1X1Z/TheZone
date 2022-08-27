@@ -405,7 +405,8 @@ function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coo
                      
                      
                      let thisChunk=0, lastChunk=0;
-                 
+                     let v=document.getElementById("Vibrate")
+                       v.onclick=
 function mcphrth(){
     let audioFramesPerMillisecond=audioX.sampleRate*.001;
     let vibrateArray=[];
@@ -439,7 +440,6 @@ function mcphrth(){
     
     try{window.navigator.vibrate(vibrateArray);}catch(e){console.log(e);}
 }
-                       let v=document.getElementById("vibrate")
 
                                  var volume=1;
                                  var skipNext=false;
@@ -974,7 +974,7 @@ async function startMic() {
         dataArray = new Uint8Array( bufferSize );
         //init();
       animate();
-      v.onclick=mcphrth;
+      try{window.navigator.vibrate(1000);}catch(e){console.log(e);}
 
       } );
 }
