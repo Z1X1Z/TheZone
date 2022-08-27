@@ -168,7 +168,7 @@ var angle;
                            }
                            
 let pitchFound;
-                           
+                           let xAdjusted, yAdjusted;
 function  move()
 {
     if (isNaN(coordX)||(!zoomAtl41&&coordX>4.))coordX=0.;
@@ -250,8 +250,8 @@ yPerp[f-1] = -Math.cos(-angle+pi/2)*radius*volume*window.movementRate*.5;
                      trailWidth[f-1]=1.;//has to be 1 for trail drawing algorithms
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
-let xAdjusted= d_x*interpolation*MR*2./3.
-let yAdjusted= d_y*interpolation*MR*2./3.
+ xAdjusted= d_x*interpolation*MR*2./3.
+ yAdjusted= d_y*interpolation*MR*2./3.
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
     
     cx[n] += xAdjusted;//this is accumulating the length of a trail segment//12 is hopefully based on the size of seven clovers.  Grip is elusive!!!!
@@ -762,7 +762,7 @@ while(loopLimit>0&&r!=f){
 scene.add(meshTrail)
 
 if(isFinite(d_x)&&isFinite(d_y)&&on) {
-circleX-=xAdjusted;
+circleX-=xAdjusted;//xadjusted should mean this moves with the same screen scale as the trail
 circleY-=yAdjusted;
        }
 
