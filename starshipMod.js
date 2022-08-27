@@ -168,7 +168,7 @@ var angle;
                            }
                            
 let pitchFound;
-                           
+                    let       xAdjusted,yAdjusted;
 function  move()
 {
     if (isNaN(coordX)||(!zoomAtl41&&coordX>4.))coordX=0.;
@@ -250,10 +250,12 @@ yPerp[f-1] = -Math.cos(-angle+pi/2)*radius*volume*window.movementRate*.5;
                      trailWidth[f-1]=1.;//has to be 1 for trail drawing algorithms
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
+ xAdjusted= d_x*interpolation*MR*2./3.;
+ yAdjusted= d_y*interpolation*MR*2./3.;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
     
-    cx[n] += d_x*interpolation*MR*2./3.;//this is accumulating the length of a trail segment//12 is hopefully based on the size of seven clovers.  Grip is elusive!!!!
-    cy[n] += d_y*interpolation*MR*2./3.;// two thirds seems to fit it to seven clovers neatly on "L"
+    cx[n] += xAdjusted;//this is accumulating the length of a trail segment//12 is hopefully based on the size of seven clovers.  Grip is elusive!!!!
+    cy[n] += yAdjusted;// two thirds seems to fit it to seven clovers neatly on "L"
 trailWidth[n] *= Math.pow(.997,interpolation);
 }
 
@@ -760,8 +762,8 @@ while(loopLimit>0&&r!=f){
 scene.add(meshTrail)
 
 if(isFinite(d_x)&&isFinite(d_y)&&on) {
-circleX-=d_x*interpolation*MR*2./3.;;
-circleY-=d_y*interpolation*MR*2./3.;;
+circleX-=xAdjusted;
+circleY-=yAdjusted;
        }
 
 if (circleX>width)circleX=-width;
@@ -842,7 +844,7 @@ for(let n = 0; n < polygons.length; n++)
         let angleTarget = Math.atan2(yFromCent,xFromCent);
         let baseMag=level;
         let speed = Math.sqrt(polygons[n].dx*polygons[n].dx+polygons[n].dy*polygons[n].dy)
-        let speedLimit = 1.;
+        let speedLimit = xAdjusted;
 
 
 
@@ -852,13 +854,13 @@ for(let n = 0; n < polygons.length; n++)
 
         if (speed<=speedLimit)
         {
-            polygons[n].dx+=baseMag*-Math.cos(angleTarget);
-            polygons[n].dy+=baseMag*-Math.sin(angleTarget);
+            polygons[n].dx+=baseMag*-Math.cos(angleTarget)*interpolation*2./3.;
+            polygons[n].dy+=baseMag*-Math.sin(angleTarget)*interpolation*MR*2./3.;
         }
 var neutralizer=1.;
 if (!on)neutralizer=0.;
-                polygons[n].centerX += (6.*d_x*neutralizer-polygons[n].dx)*interpolation/minimumDimension;
-                polygons[n].centerY += (6.*d_y*neutralizer-polygons[n].dy)*interpolation/minimumDimension;
+                polygons[n].centerX += (d_x*neutralizer-polygons[n].dx)*interpolation/minimumDimension;
+                polygons[n].centerY += (d_y*neutralizer-polygons[n].dy)*interpolation/minimumDimension;
 
     let distanceFromCenter = Math.pow(xFromCent*xFromCent+yFromCent*yFromCent,.5);
     let ddX= circleX-polygons[n].centerX;
