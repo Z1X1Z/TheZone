@@ -150,7 +150,6 @@ let f = 0;
 
 let xPerp= Array(1000);
 let yPerp = Array(1000);
-let angle=Array(1000);
 
 let pitch = 1;
 
@@ -158,7 +157,7 @@ let reset = 6;
 let on;
 let spirafreq=1;
 var totalAMP;
-
+var angle;
                            function spin(f, t)
                            {    //https://en.wikipedia.org/wiki/Rotation_matrix
                                var angle =t;
@@ -522,8 +521,9 @@ if( !window.touchMode) {
                                 " note: "+note+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
                                 "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
                                 "cores: "+cores+", zoom: "+zoom+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
-                                "InOutThresh: "+zoomOutRatchetThreshold+", pitch found: "+pitchFound+"<p style='margin : 0px'></p>"+
-                                "AMP: "+totalAMP+"FPS: "+Math.round(FPS)+"<p style='margin : 0px'></p>"
+                                "InOutThresh: "+zoomOutRatchetThreshold+"<p style='margin : 0px'></p>"+
+                                "AMP: "+totalAMP+"<p style='margin : 0px'></p>"+
+                                "pitch found: "+pitchFound+", FPS: "+Math.round(FPS)+"<p style='margin : 0px'></p>"
                             //+"<p style='margin : 0px'></p>"+"X: "+String(-coordX)+" Y: "+String(-coordY);
 +"</div>";
       else document.getElementById("textWindow").innerHTML = "";
@@ -784,7 +784,7 @@ scene.add( circle );
 
                    
                    let centerOfDotToEdge = [];
-                   centerOfDotToEdge.push( new THREE.Vector3(circleX+d_x*dotSize, circleY+d_y*dotSize, -1. ) );
+                   centerOfDotToEdge.push( new THREE.Vector3(circleX+-Math.sin(-angle)*dotSize, circleY+-Math.cos(-angle)*dotSize, -1. ) );
                    centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-1.) );
 
                    
