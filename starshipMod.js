@@ -435,12 +435,10 @@ function mcphrth(){
         }
         counter++;
     }
-        
-    
-    try{navigator.vibrate(vibrateArray);}catch(e){console.log(e);}
+            try{navigator.vibrate(vibrateArray);}catch(e){console.log(e);}
 
 }
-
+//this doesn't work, and it only would work on android not on firefox
                                  var volume=1;
                                  var skipNext=false;
                                  var lvs;
