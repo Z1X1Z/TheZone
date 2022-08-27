@@ -438,6 +438,7 @@ function mcphrth(){
     
     
     try{window.navigator.vibrate(vibrateArray);}catch(e){console.log(e);}
+    setTimeout(mcphrth,inputData.length);
 }
 
                                  var volume=1;
