@@ -440,7 +440,6 @@ function mcphrth(){
     try{window.navigator.vibrate(vibrateArray);}catch(e){console.log(e);}
 }
                        let v=document.getElementById("vibrate")
-                         v.onclick=mcphrth;
 
                                  var volume=1;
                                  var skipNext=false;
@@ -975,7 +974,7 @@ async function startMic() {
         dataArray = new Uint8Array( bufferSize );
         //init();
       animate();
-      try{window.navigator.vibrate(1000);}catch(e){console.log(e);}
+      v.onclick=mcphrth;
 
       } );
 }
