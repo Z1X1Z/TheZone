@@ -403,9 +403,10 @@ function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coo
 }
                      
                      
-                     
+                       /*
+
                      let thisChunk=0, lastChunk=0;
-                     let v=document.getElementById("Vibrate")
+                      let v=document.getElementById("Vibrate")
                        v.onclick=
 function mcphrth(){
     let audioFramesPerMillisecond=audioX.sampleRate*.001;
@@ -439,6 +440,7 @@ function mcphrth(){
 
 }
 //this doesn't work, and it only would work on android not on firefox
+                        */
                                  var volume=1;
                                  var skipNext=false;
                                  var lvs;
