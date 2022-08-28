@@ -45,8 +45,8 @@ function callKey(event){
       else if (key=="M") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
 
       else if (key=="Q") {
-          if          ( uniforms[ "colorCombo" ].value >7)          uniforms[ "colorCombo" ].value = 1;
-          else uniforms[ "colorCombo" ].value = (uniforms[ "colorCombo" ].value+1)%8;
+          if          ( uniforms[ "colorCombo" ].value >8)          uniforms[ "colorCombo" ].value = 1;
+          else uniforms[ "colorCombo" ].value = (uniforms[ "colorCombo" ].value+1)%9;
       }
       else if (key==";") uniforms[ "colorInverter" ].value = !uniforms[ "colorInverter" ].value;
       else if (key=="T") window.touchMode = !window.touchMode;

@@ -688,25 +688,30 @@
                         
                         vec2 jc =vec2(0.);// vec2 jc =vec2(-0.5577,- 0.6099);//you can feed in coordinates for p movement to get different cloverfields
                         vec3 tol(vec2 p, vec2 t){
-                                p=-p.yx;
+                              p=-p;
                              float precores = 0.49;
+                             vec2 colorAccumulator =vec2(0.);
+
                              if(spirated!=0.) precores = 1.;
                              if(spirated>-.5) p.y*=-1.;
                              float cored = log(zoom*3./2.)/log(.5)+1.+precores;
                              float c = length(p);
                              float loops=1.;
                               vec2 s=p;
-                             if(MetaCored)for(int i=1;i<60; i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;}else break;
+                              float coresIn = 1.;
+                             if(MetaCored)for(int i=1;i<60; i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
                              loops=0.;
                              float hyperCore=0.;
-                             float lfc = length(freed(spunC));
+                             float lfc = length(freed(coords));
                                if(MetaCored)hyperCore=cored*2./3.+log(lfc*3./2.)*0.9551195-1.;//.9551195 is based on x=log3(x), x = .910239log*(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
                                 if(MetaCored&&morph>.5)hyperCore*=4./3.;//engage overstable core if dancing
 
                              float term=0.;
                              if(spirated!=0.)term=(1.-lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
-                             for (float counter=0.;counter<40.;counter++)if(abs(s.y)<47.){
+                                               const float iterations = 41.;
+                             for (float counter=0.;counter<iterations;counter++)if(abs(s.y)<47.){
                                 if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+3.14159);
+                                   colorAccumulator-=s;
 
                                 s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y-t.x, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y-t.y);//x**3
                                 s.x=log(abs(s.x))/log(3.-term);
@@ -729,6 +734,7 @@
                                 else break;
 
                           }else break;
+                                                                                        if(colorCombo==8) s=-colorAccumulator*(coresIn/(60.+1.)-.5)*10.;
 
                              vec3 o=vec3(s.y);
                              if(colorCombo==7) o=vec3(s.y,s.x/9.5,1.-s.x/12.);
@@ -737,7 +743,7 @@
                              else if(colorCombo==4) o= vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.);
                              else if(colorCombo==5)  o=vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.);
                              else if(colorCombo==6) o=  vec3(-sin(time*1.)*s.y/100.-sin(time*gr)*s.x*s.y/888.,s.x/8.-sin(time*(-gr+1.))*s.y/s.x/2000.,1.-sin(time*(gr+1.))*s.x/20.);
-                            else if(colorCombo==1) {
+                            else if(colorCombo==1||colorCombo==8) {
                                       o= (1.-(vec3(s.y/125.-s.x*s.y/888.+s.y/25000.,s.x/8.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
                                                    *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
                                                    *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
@@ -781,7 +787,7 @@
                                   if(!MetaCored)for(int i=1;i<60; i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;}else break;
                                   loops=0.;
                                   float hyperCore=0.;
-                                  float lfc = length(freed(spunC));
+                                  float lfc = length(freed(coords));
                                     if(!MetaCored)hyperCore=cored*2./3.+log(lfc*3./2.)*0.9551195-1.;//.9551195 is based on x=log3(x), x = .910239log3(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
                                    // if(MetaCored&&morph>=.5)hyperCore*=4./3.;//engage overstable core if dancing
 
@@ -881,7 +887,7 @@ vec3 xtol(vec2 s, vec2 t){
                                         float c = sqrt(s.y*s.y+s.x*s.x);
                                         //for(int i=0;i<69; i++)if(c<2./3.&&i<int(cored)){p*=2.;c*=2.;}
                                         c/=h;
-                                        if(c<h/2. &&f<int((cored/2.+log(length(freed(spunC))*h/2.)+.5)/2.)){float shift=h;s*=shift;c*=shift;}
+                                        if(c<h/2. &&f<int((cored/2.+log(length(freed(coords))*h/2.)+.5)/2.)){float shift=h;s*=shift;c*=shift;}
                                                                  }
                                                                                       }
                         
@@ -963,7 +969,7 @@ vec3 xtol(vec2 s, vec2 t){
      if (morph>.5 && colorCombo>=10)  dance=vec2(-sin(time+time2dance),
                                                  -sin((time+time2dance)*-1.618))*zoom+(spunC.yx+.5)*log(pow(zoom,1.618))/log(1.618)*zoom*.5;//a lot of these coords should probably be spunC
                                             
-    else if (morph>.5&&(colorCombo<10||colorCombo==14)){float lfc=length(freed(spunC));
+    else if (morph>.5&&(colorCombo<10||colorCombo==14)){float lfc=length(freed(coords));
                                             dance2 = vec2(
                                                     -abs(lfc/(lfc-zoom)) -lfc/(lfc+zoom)*2./3.,
                                               -((zoom*lfc)/(lfc+zoom)*sign(coords.y)*sign(coords.x)*(1.-lfc*zoom) )
