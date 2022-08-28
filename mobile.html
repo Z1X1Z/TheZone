@@ -418,8 +418,12 @@ const float iterations = 100.;
 
                           }
                             else break;
-                                if(colorCombo==8) s=-colorAccumulator*(coresIn/(60.+1.)-.5)*10.;
-                             vec3 o=vec3(s.y);
+
+                                                                                             
+                                     
+                                     if(colorCombo==8) s=-colorAccumulator*coresIn*(coresIn/(60.+1.)-.5);
+
+                                    vec3 o=vec3(s.y);
                              if(colorCombo==7) o=vec3(s.y,s.x/9.5,1.-s.x/12.);
                              else if(colorCombo==2) o=vec3(s.y/100.-s.x*s.y/888.+s.y/50000.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.+s.y/50000.);
                              else if(colorCombo==3) o= vec3(s.x/8.-s.y/s.x/7000.,1.-s.x/16.,s.y/100.);

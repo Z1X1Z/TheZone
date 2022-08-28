@@ -734,7 +734,7 @@
                                 else break;
 
                           }else break;
-                                                                                        if(colorCombo==8) s=-colorAccumulator*(coresIn/(60.+1.)-.5)*10.;
+                                                                                        if(colorCombo==8) s=-colorAccumulator*coresIn*(coresIn/(60.+1.)-.5);
 
                              vec3 o=vec3(s.y);
                              if(colorCombo==7) o=vec3(s.y,s.x/9.5,1.-s.x/12.);
