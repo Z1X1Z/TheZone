@@ -757,13 +757,12 @@
                                                     o= (1.-(vec3(abs(s.y)-s.x*s.y/888.+s.y/25000.,s.x/20.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
                                                                  *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
                                                                  *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
-                                                               // o.b/=1.25;
                                                                
                                       }
                   if(colorInverter==true){
-                              o.x*=-sin(time);
-                              o.y*=-sin(time*gr);
-                              o.z*=-sin(time*1./gr);
+                              o.r*=-sin(time);
+                              o.g*=abs(-sin(time*gr));
+                              o.b*=-sin(time*1./gr);
                                 }
                                                                               
     return clamp(o,0.,1.);}

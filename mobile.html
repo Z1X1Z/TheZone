@@ -445,9 +445,9 @@ const float iterations = 100.;
                                                                  *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
                                                                       }
                   if(colorInverter==true){
-                              o.x*=-sin(time);
-                              o.y*=-sin(time*gr);
-                              o.z*=-sin(time*1./gr);
+                              o.r*=-sin(time);
+                              o.g*=abs(-sin(time*gr));
+                              o.b*=-sin(time*1./gr);
                                 }
                                                                               
     return clamp(o,0.,1.);}
