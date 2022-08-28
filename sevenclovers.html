@@ -740,17 +740,24 @@
                                                                                         if(colorCombo==8) s=-colorAccumulator*coresIn*(coresIn/(60.+1.)-.5);
 
                              vec3 o=vec3(s.y);
-                             if(colorCombo==7) o=vec3(s.y,s.x/9.5,1.-s.x/12.);
+                             if(colorCombo==7) o=vec3(s.y,s.x/9.,1.-s.x/12.);
                              else if(colorCombo==2) o=vec3(s.y/100.-s.x*s.y/888.+s.y/50000.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.+s.y/50000.);
                              else if(colorCombo==3) o= vec3(s.x/8.-s.y/s.x/7000.,1.-s.x/16.,s.y/100.);
                              else if(colorCombo==4) o= vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.);
                              else if(colorCombo==5)  o=vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.);
                              else if(colorCombo==6) o=  vec3(-sin(time*1.)*s.y/100.-sin(time*gr)*s.x*s.y/888.,s.x/8.-sin(time*(-gr+1.))*s.y/s.x/2000.,1.-sin(time*(gr+1.))*s.x/20.);
-                            else if(colorCombo==1||colorCombo==8) {
+                            else if(colorCombo==1) {
                                       o= (1.-(vec3(s.y/125.-s.x*s.y/888.+s.y/25000.,s.x/8.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
                                                    *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
                                                    *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
                                                         }
+                                     else if(colorCombo==8) {
+                                                    o= (1.-(vec3(abs(s.y)-s.x*s.y/888.+s.y/25000.,s.x/20.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
+                                                                 *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
+                                                                 *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
+                                                               // o.b/=1.25;
+                                                               
+                                      }
                   if(colorInverter==true){
                               o.x*=-sin(time);
                               o.y*=-sin(time*gr);
