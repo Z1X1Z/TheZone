@@ -215,7 +215,6 @@ colorSound = new THREE.Color();
 
 pitchCol[f]  = colorSound;
 angle = ((angle-30+180)/360*2*pi);
-angle[f] = angle;
 
          d_x = -Math.sin(-angle)*volume*window.movementRate;
          d_y = -Math.cos(-angle)*volume*window.movementRate;
@@ -974,7 +973,7 @@ async function startMic() {
         dataArray = new Uint8Array( bufferSize );
         //init();
       animate();
-      try{window.navigator.vibrate(1000);}catch(e){console.log(e);}
+      //try{window.navigator.vibrate(1000);}catch(e){console.log(e);}
 
       } );
 }
