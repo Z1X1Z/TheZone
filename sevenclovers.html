@@ -703,20 +703,27 @@
                               vec2 s=p;
                               float coresIn = 1.;
                              if(MetaCored)for(int i=1;i<60; i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
+                                                                   float lfc = length(freed(coords));
+
                              loops=0.;
                              float hyperCore=0.;
-                             float lfc = length(freed(coords));
                                if(MetaCored)hyperCore=cored*2./3.+log(lfc*3./2.)*0.9551195-1.;//.9551195 is based on x=log3(x), x = .910239log*(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
                                 if(MetaCored&&morph>.5)hyperCore*=4./3.;//engage overstable core if dancing
 
                              float term=0.;
                              if(spirated!=0.)term=(1.-lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
-                                               const float iterations = 41.;
+                                               vec2 m=vec2(0.);
+                                                if(wheel) m =(vec2(p.x,p.y)/(lfc+zoom)-coords.yx);//this is essentiall just p as in the mandelbrot
+                                                            
+                                                            const float iterations = 41.;
+
                              for (float counter=0.;counter<iterations;counter++)if(abs(s.y)<47.){
                                 if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+3.14159);
-                                   colorAccumulator-=s;
-
-                                s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y-t.x, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y-t.y);//x**3
+                                   
+                                   colorAccumulator+=s;
+                                s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y-t.x-m.x,
+                                       -s.y*s.y*s.y+ 3.*s.x*s.x*s.y-t.y-m.y
+                                       );//x**3
                                 s.x=log(abs(s.x))/log(3.-term);
 
                                float d = length(s);
