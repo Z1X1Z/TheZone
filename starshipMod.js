@@ -220,7 +220,7 @@ angle = ((angle-30+180)/360*2*pi);
          d_y = -Math.cos(-angle)*volume*window.movementRate;
          var spunD = [d_x,d_y];
 
-                    if(uniforms.carousel.value!=0.)         spunD=spin(spunD,uniforms.carousel.value*(uniforms[ "time" ].value*window.movementRate)%(Math.PI*2.));
+                    if(uniforms.carousel.value!=0.)         spunD=spin(spunD,uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value)%(Math.PI*2.));
           let d_xS=spunD[0];
           let d_yS=spunD[1];
 
@@ -938,7 +938,7 @@ else {
              var spunTouch = [ (zoom-uniforms[ "zoom" ].value)*screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d),
                               -(zoom-uniforms[ "zoom" ].value)*screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d)];
 
-                  if(uniforms.carousel.value!=0.)         spunTouch=spin(spunTouch,uniforms.carousel.value*(uniforms[ "time" ].value*window.movementRate)%(Math.PI*2.));
+                  if(uniforms.carousel.value!=0.)         spunTouch=spin(spunTouch,uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value)%(Math.PI*2.));
 
                       coordX+= spunTouch[0];
                       coordY+= spunTouch[1];
@@ -973,7 +973,7 @@ async function startMic() {
         dataArray = new Uint8Array( bufferSize );
         //init();
       animate();
-      //try{window.navigator.vibrate(1000);}catch(e){console.log(e);}
+      try{window.navigator.vibrate(1000);}catch(e){console.log(e);}
 
       } );
 }
