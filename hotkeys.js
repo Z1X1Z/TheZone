@@ -39,7 +39,7 @@ function callKey(event){
       if (x>0)
         {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
       else if (x==0)
-        {window.movementRate=1.; uniforms[ "rate" ].value= window.movementRate; }
+        {window.movementRate=1.; uniforms[ "rate" ].value= 1.; }
       else if (key=="À"||key=="`"||key=="~")
         {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
       else if (key=="M") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
@@ -106,9 +106,9 @@ function callKey(event){
       }
       else if (key=="W")window.volumeSpeed=!window.volumeSpeed;
 
-      else if (key=="="||key.toLowerCase()=="+"){window.movementRate *=1.11111111;  uniforms[ "rate" ].value= window.movementRate; }
+      else if (key=="="||key.toLowerCase()=="+"){window.movementRate *=1.11111111;  uniforms[ "rate" ].value*=1.11111111;}
 
-      else if (key.toLowerCase()=="-"){window.movementRate /=1.11111111; uniforms[ "rate" ].value= window.movementRate;}
+      else if (key.toLowerCase()=="-"){window.movementRate /=1.11111111; uniforms[ "rate" ].value/=1.11111111;}
           
           else if (key=="E")window.gameOn=!window.gameOn;
 

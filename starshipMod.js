@@ -300,7 +300,7 @@ function init() {
     {
       micIn : {  value: null }, // float array (vec3)
       time: {value: 1.0 },
-  rate: {value: window.movementRate },
+  rate: {value: 1. },
 
       zoom: {value: 1.0 },
       colorCombo: {value: 1 },
