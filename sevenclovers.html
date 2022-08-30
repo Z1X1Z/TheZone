@@ -712,7 +712,7 @@
                              float term=0.;
                              if(spirated!=0.)term=(1.-lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
                                                vec2 m=vec2(0.);
-                                                if(wheel) m =  (p/(lfc+zoom)-coords.yx*2.)  *(.5-coresIn/60.);//this is essentially just p as in the mandelbrot x <== x^2+p
+                                                if(wheel) m =  (p/(lfc+zoom)-coords.yx/zoom)  *(.5-coresIn/60.)*2.;//this is essentially just p as in the mandelbrot x <== x^2+p
                                                             
                                                             const float iterations = 41.;
 
