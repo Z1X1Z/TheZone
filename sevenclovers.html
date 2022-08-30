@@ -691,6 +691,7 @@
                         
                         vec2 jc =vec2(0.);// vec2 jc =vec2(-0.5577,- 0.6099);//you can feed in coordinates for p movement to get different cloverfields
                         vec3 tol(vec2 p, vec2 t){
+                  p=-p;
                              float precores = 0.49;
                              vec2 colorAccumulator =vec2(0.);
 
@@ -712,7 +713,7 @@
                              float term=0.;
                              if(spirated!=0.)term=(1.-lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
                                                vec2 m=vec2(0.);
-                                                if(wheel) m =  (p/(lfc+zoom)-coords.yx/zoom)  *(.5-coresIn/60.)*2.;//this is essentially just p as in the mandelbrot x <== x^2+p
+                                                if(wheel) m =  p/lfc+coords.yx;//this is essentially just p as in the mandelbrot x <== x^2+p
                                                             
                                                             const float iterations = 41.;
 
@@ -720,8 +721,8 @@
                                 if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+3.14159);
                                    
                                    colorAccumulator-=s;
-                                   s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y  +t.x+m.x,
-                                       -s.y*s.y*s.y+ 3.*s.x*s.x*s.y     +t.y+m.y
+                                   s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y  +t.x-m.x,
+                                       -s.y*s.y*s.y+ 3.*s.x*s.x*s.y     +t.y-m.y
                                        );//x**3
                                 s.x=log(abs(s.x))/log(3.-term);
 
