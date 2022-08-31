@@ -765,8 +765,8 @@
                                                    *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
                                                         }
                                      else if(colorCombo==8) {
-                                           s=colorAccumulator*
-                                           (abs(coresIn*(coresIn/crs*2.-1.))-1.);
+                                           s=colorAccumulator*(coresIn-30.)*
+                                           (abs((coresIn/crs*2.-1.))-1.);
                                                     o= (1.-(vec3(abs(s.y)-s.x*s.y/888.+s.y/25000.,s.x/20.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
                                                                  *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
                                                                  *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
