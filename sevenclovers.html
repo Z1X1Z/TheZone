@@ -702,7 +702,8 @@
                              float loops=1.;
                               vec2 s=p;
                               float coresIn = 1.;
-                             if(MetaCored)for(int i=1;i<60; i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
+                              const float crs = 60.;
+                             if(MetaCored)for(int i=1;i<int(crs); i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
                                                                    float lfc = length(freed(coords));
 
                              loops=0.;
@@ -713,7 +714,7 @@
                              float term=0.;
                              if(spirated!=0.)term=(1.-lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
                                                vec2 m=vec2(0.);
-                                                if(wheel)m =  (p/lfc-coords.yx)*1./(coresIn/60.*2.-1.);
+                                                if(wheel)m =  (p/lfc-coords.yx)*abs(abs(coresIn/crs*2.-1.)-1.);
                                                 //this is essentially just p as in the mandelbrot x <== x^2+
 
                                                             const float iterations = 41.;
@@ -723,8 +724,8 @@
 
                                    colorAccumulator-=s;
                                    s=vec2(
-                                        s.x*s.x*s.x  - 3.*s.x*s.y*s.y  +t.x+m.x,
-                                       -s.y*s.y*s.y+ 3.*s.x*s.x*s.y     +t.y+m.y
+                                        s.x*s.x*s.x  - 3.*s.x*s.y*s.y  +t.x-m.x,
+                                       -s.y*s.y*s.y+ 3.*s.x*s.x*s.y     +t.y-m.y
                                        );//x**3+dance+c
 
                                    if(wheel&&colorCombo==8)s.x=-1./s.x;//inheritance is the only colorMode that works with manny inverter
@@ -764,7 +765,7 @@
                                                    *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
                                                         }
                                      else if(colorCombo==8) {
-                                           s=-colorAccumulator*(coresIn+1.)*((coresIn+2.)/(60.+1.)-.5);
+                                           s=colorAccumulator*abs(abs((coresIn+1.)/(crs+2.)*2.-1.)-1.)*sign(coresIn-crs/2.)*10.;
 
                                                     o= (1.-(vec3(abs(s.y)-s.x*s.y/888.+s.y/25000.,s.x/20.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
                                                                  *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
