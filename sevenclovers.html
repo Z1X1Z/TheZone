@@ -714,10 +714,10 @@
                              float term=0.;
                              if(spirated!=0.)term=(1.-lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
                                                vec2 m=vec2(0.);
-                                                if(wheel)m =  (p/lfc-coords.yx)*abs(abs(coresIn/crs*2.-1.)-1.);
+                                                if(wheel)m =  (p/lfc*crs/(crs-coresIn)-coords.yx)*abs(abs(coresIn/crs*2.-1.)-1.);
                                                 //this is essentially just p as in the mandelbrot x <== x^2+
 
-                                                            const float iterations = 41.;
+                                                            const float iterations = 100.;
 
                              for (float counter=0.;counter<iterations;counter++)if(abs(s.y)<50.){
                                 if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+3.14159);
@@ -765,8 +765,8 @@
                                                    *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
                                                         }
                                      else if(colorCombo==8) {
-                                           s=colorAccumulator*abs(abs((coresIn+1.)/(crs+2.)*2.-1.)-1.)*sign(coresIn-crs/2.)*10.;
-
+                                           s=colorAccumulator*abs(abs(coresIn/crs*2.-1.)-1.)*sign(coresIn-crs/2.);
+                                           s*=9.;
                                                     o= (1.-(vec3(abs(s.y)-s.x*s.y/888.+s.y/25000.,s.x/20.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
                                                                  *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
                                                                  *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
