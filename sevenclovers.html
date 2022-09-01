@@ -691,10 +691,8 @@
 
                         vec2 jc =vec2(0.);// vec2 jc =vec2(-0.5577,- 0.6099);//you can feed in coordinates for p movement to get different cloverfields
                         vec3 tol(vec2 p, vec2 t){
-                  p=-p;
                              float precores = 0.49;
                              vec2 colorAccumulator =vec2(0.);
-
                              if(spirated!=0.) precores = 1.;
                              if(spirated>-.5) p.y*=-1.;
                              float cored = log(zoom*3./2.)/log(.5)+1.+precores;
