@@ -691,7 +691,7 @@
 
                         vec2 jc =vec2(0.);// vec2 jc =vec2(-0.5577,- 0.6099);//you can feed in coordinates for p movement to get different cloverfields
                         vec3 tol(vec2 p, vec2 t){
-                            p*=-1.;//this seemingly unimportant line callibrates dancing mandelbrot mode seal mode #ms?
+                            //p*=-1.;//this seemingly unimportant line callibrates dancing mandelbrot mode seal mode #ms?
                              float precores = 0.49;
                              vec2 colorAccumulator =vec2(0.);
                              if(spirated!=0.) precores = 1.;
@@ -721,13 +721,13 @@
                              for (float counter=0.;counter<iterations;counter++)if(abs(s.y)<50.){
                                 if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+3.14159);
 
-                                   colorAccumulator+=s*sign(mod(counter,2.)-.5);
+                                   colorAccumulator-=s;
                                    s=vec2(
                                         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
                                        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
                                        );//x**3
                                        s+=t-m;//plus t is lobes, -t is circles
-                                   if(wheel&&colorCombo==8)s.x=-1./s.x;//inheritance is the only colorMode that works with manny inverter
+                                   if(colorCombo==8)s.x=-1./s.x;//inheritance is the only colorMode that works with manny inverter
 
                                 s.x=log(abs(s.x))/log(3.-term);
 
@@ -764,9 +764,9 @@
                                                    *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
                                                         }
                                      else if(colorCombo==8) {
-                                           s=colorAccumulator*coresIn*(coresIn/crs-.5)*(crs/2.-coresIn);
+                                           s=colorAccumulator*coresIn*(coresIn/crs*2.-1.);
 
-                                                    o= 1.-(vec3(abs(s.y)/120.-s.x*s.y/888.,s.x/70.-s.y/s.x/20.-s.y/100.,1.-s.x/20.+s.y/25000.)
+                                                    o= vec3((s.y,s.x/10.,1.-s.x/20.)
                                                                  *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/20.,s.y/35.-s.x*s.y/888.)
                                                                  *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.));
 
