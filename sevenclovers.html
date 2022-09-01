@@ -691,6 +691,7 @@
 
                         vec2 jc =vec2(0.);// vec2 jc =vec2(-0.5577,- 0.6099);//you can feed in coordinates for p movement to get different cloverfields
                         vec3 tol(vec2 p, vec2 t){
+                            p*=-1;//this seemingly unimportant line callibrates dancing mandelbrot mode seal mode #ms?
                              float precores = 0.49;
                              vec2 colorAccumulator =vec2(0.);
                              if(spirated!=0.) precores = 1.;
@@ -712,7 +713,7 @@
                              float term=0.;
                              if(spirated!=0.)term=(1.-lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
                                                vec2 m=vec2(0.);
-                                                if(wheel)m =  (p/lfc-coords.yx)*abs(abs(coresIn/crs*2.-1.)-1.);
+                                                if(wheel)m =  (p/lfc+coords.yx)*abs(abs(coresIn/crs*2.-1.)-1.);
                                                 //this is essentially just p as in the mandelbrot x <== x^2+
 
                                                             const float iterations = 100.;
