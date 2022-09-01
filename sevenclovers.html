@@ -691,7 +691,7 @@
 
                         vec2 jc =vec2(0.);// vec2 jc =vec2(-0.5577,- 0.6099);//you can feed in coordinates for p movement to get different cloverfields
                         vec3 tol(vec2 p, vec2 t){
-                            p*=-1.;//this seemingly unimportant line callibrates dancing mandelbrot mode seal mode #ms?
+                            p*=-1;//this seemingly unimportant line callibrates dancing mandelbrot mode seal mode  sevenclovers.html#ms?
                              float precores = 0.49;
                              vec2 colorAccumulator =vec2(0.);
                              if(spirated!=0.) precores = 1.;
@@ -713,7 +713,7 @@
                              float term=0.;
                              if(spirated!=0.)term=(1.-lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
                                                vec2 m=vec2(0.);
-                                                if(wheel)m =  (p/lfc-coords.yx)*abs(abs(coresIn/crs*2.-1.)-1.);
+                                                if(wheel)m =  (p/lfc+coords.yx)*abs(abs(coresIn/crs*2.-1.)-1.);
                                                 //this is essentially just p as in the mandelbrot x <== x^2+
 
                                                             const float iterations = 100.;
@@ -766,9 +766,9 @@
                                      else if(colorCombo==8) {
                                            s=colorAccumulator*(coresIn-30.)*
                                            (abs((coresIn/crs*2.-1.))-1.);
-                                                    o= 1.-(vec3(abs(s.y)-s.x*s.y/888.+s.y/90.,s.x/40.-s.y/s.x/20.-s.y/90.,1.-s.x/20.+s.y/90.)
+                                                    o= (1.-(vec3(abs(s.y)-s.x*s.y/888.+s.y/25000.,s.x/20.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
                                                                  *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
-                                                                 *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.));
+                                                                 *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
 
                                       }
                   if(colorInverter==true){
