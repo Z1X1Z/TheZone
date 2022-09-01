@@ -774,14 +774,14 @@
                                      float colorFlip=coresIn*-(coresIn/crs*2.-1.);
 
                                            s=colorAccumulator*colorFlip;
-                                           heartColors*=colorFlip;
+                                           //heartColors*=colorFlip;
                                                     o= vec3(abs(s.y),s.x/10.,1.-s.x/12.)
                                                                  *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/20.,-abs(s.y)/35.-s.x*s.y/100.)
                                                                  *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/200.)
                                                                ;
                                                                       o/= max(max(o.r,o.g),o.b);
                                                                        o=o*.5+.5;
-                                                               o=o+heartColors/max(max(heartColors.r,heartColors.g),heartColors.b);
+                                                               o=o+heartColors/iterations;
 
 
                                       }
