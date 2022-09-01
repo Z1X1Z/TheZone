@@ -721,7 +721,7 @@
                              for (float counter=0.;counter<iterations;counter++)if(abs(s.y)<50.){
                                 if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+3.14159);
 
-                                   colorAccumulator-=s;
+                                   colorAccumulator+=s*sign(mod(counter,2.)-.5);
                                    s=vec2(
                                         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
                                        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
@@ -764,9 +764,10 @@
                                                    *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
                                                         }
                                      else if(colorCombo==8) {
-                                           s=colorAccumulator*(coresIn-30.)*(coresIn/crs*2.-1.)*sign(coresIn-crs/2.);
-                                                    o= 1.-(vec3(abs(s.y)/200.-s.x*s.y/8888.,s.x/35.-s.y/s.x/20.-s.y/100.,1.-s.x/20.+s.y/100.)
-                                                                 *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
+                                           s=colorAccumulator*coresIn*(coresIn/crs-.5)*(crs/2.-coresIn);
+
+                                                    o= 1.-(vec3(abs(s.y)/120.-s.x*s.y/888.,s.x/70.-s.y/s.x/20.-s.y/100.,1.-s.x/20.+s.y/25000.)
+                                                                 *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/20.,s.y/35.-s.x*s.y/888.)
                                                                  *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.));
 
                                       }
