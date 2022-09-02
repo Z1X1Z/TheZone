@@ -729,9 +729,8 @@
                                        );//x**3
                                        s+=t-m;//plus t is lobes, -t is circles
 
-                                   if(colorCombo==8){
-                                     s.x=-1./s.x;//inheritance is the only colorMode that works with manny inverter
-}
+                                   if(colorCombo==8)s.x=-1./s.x;//inheritance is the only colorMode that works with manny inverter
+
                                 s.x=log(abs(s.x))/log(3.-term);
 
                                float d = length(s);
@@ -773,7 +772,7 @@
                                      else if(colorCombo==8) {
                                        if(wheel)heartColors=(vec3(s.x*s.y,s.x+.2,s.y-.3*(1.-s.x))+.3)/length(s);
 
-                                     float colorFlip=coresIn*-(coresIn/crs*2.-1.);
+                                     float colorFlip=abs(coresIn)*-(coresIn/crs*2.-1.);
                                            s=colorAccumulator*colorFlip;
 
                                                     o=
