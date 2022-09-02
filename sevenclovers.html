@@ -766,8 +766,9 @@
                                                    *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
                                                    *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
 
-                                                 o/= max(max(o.r,o.g),o.b);
-                                                  o=o*.5+.5;
+                                                /* o/= max(max(o.r,o.g),o.b);
+                                                 o=o*.5+.5; */
+                                                o=1.-o;
                                                         }
                                      else if(colorCombo==8) {
                                        if(wheel)heartColors=(vec3(s.x*s.y,s.x+.2,s.y-.3*(1.-s.x))+.3)/length(s);
