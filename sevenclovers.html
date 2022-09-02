@@ -773,11 +773,11 @@
                                     //   if(wheel)heartColors=(vec3(s.x*s.y,s.x+.2,s.y-.3*(1.-s.x))+.3)/length(s);
 
                                      float colorFlip=-abs(coresIn-crs/2.)*sign(coresIn/crs*2.-1.);
-                                           s=colorAccumulator*sign(coresIn/crs*2.-1.);//*colorFlip;
+                                           s=colorAccumulator*(coresIn/crs*2.-1.);
 
                                                     o=((coresIn-(crs/2.))/(crs/2.)-vec3(-s.x,s.y,-s.x*s.y).zxy//try swizzling these
                                                     *sign(crs/2.-coresIn))
-                                                    *(1.-vec3(s.y-s.x*s.y/888.+s.y/25000.,s.x/8.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
+                                                    *(1.-vec3(abs(s.y)-s.x*s.y/888.+s.y/25000.,s.x/8.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
                                                                  *vec3(1.-s.x/15.,s.x/8.-s.y/s.x/20.,-abs(s.y)/35.-s.x*s.y/100.)
                                                                  *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/200.))
                                                                ;
