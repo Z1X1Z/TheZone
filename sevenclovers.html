@@ -777,14 +777,12 @@
 
                                                     o=((coresIn-(crs/2.))/(crs/2.)-vec3(-s.x,s.y,s.x*s.y)*sign(crs/2.-coresIn))
                                                     *(1.-vec3(s.y/200.-s.x*s.y/888.+s.y/25000.,s.x/8.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
-
-                                                                 //*vec3(s.y,s.x/10.,1.-s.x/12.)
                                                                  *vec3(1.-s.x/15.,s.x/8.-s.y/s.x/20.,-abs(s.y)/35.-s.x*s.y/100.)
                                                                  *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/200.))
                                                                ;
-                                                                    //  o/= max(max(o.r,o.g),o.b);
-                                                                    //   o=1.-o;
-                                                                    //   o=.5-o/2.;
+                                                                if(wheel){     o/= max(max(o.r,o.g),o.b);
+                                                                       o=.5+o/2.;
+                                                                     }
                                                           //    o+=heartColors/iterations;
 
 
