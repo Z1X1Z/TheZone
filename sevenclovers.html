@@ -730,7 +730,6 @@
                                        s+=t-m;//plus t is lobes, -t is circles
 
                                    if(colorCombo==8){
-                                     heartColors+=vec3(s.x*s.y,s.x,s.y)/length(s);
                                      s.x=-1./s.x;//inheritance is the only colorMode that works with manny inverter
 }
                                 s.x=log(abs(s.x))/log(3.-term);
@@ -771,17 +770,19 @@
                                                   o=o*.5+.5;
                                                         }
                                      else if(colorCombo==8) {
-                                     float colorFlip=coresIn*-(coresIn/crs*2.-1.);
+                                       if(wheel)heartColors=(vec3(s.x*s.y,s.x+.2,s.y-.3*(1.-s.x))+.3)/length(s);
 
+                                     float colorFlip=coresIn*-(coresIn/crs*2.-1.);
                                            s=colorAccumulator*colorFlip;
-                                           //heartColors*=colorFlip;
-                                                    o= vec3(abs(s.y),s.x/10.,1.-s.x/12.)
+
+                                                    o=
+                                                    vec3(s.y/125.-s.x*s.y/888.+s.y/25000.,s.x/8.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
                                                                  *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/20.,-abs(s.y)/35.-s.x*s.y/100.)
                                                                  *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/200.)
                                                                ;
                                                                       o/= max(max(o.r,o.g),o.b);
-                                                                       o=o*.5+.5;
-                                                               o=o+heartColors/iterations;
+                                                                       o=1.-o;
+                                                              if(wheel) o+=heartColors/iterations;
 
 
                                       }
