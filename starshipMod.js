@@ -166,7 +166,7 @@ var angle;
                             f[1]=fxb*-Math.sin(-angle)+f[1]*-Math.cos(-angle);
                             return f;
                            }
-                           
+
 let pitchFound;
                            let xAdjusted, yAdjusted;
 function  move()
@@ -194,14 +194,14 @@ if (isFinite(pb) &&pb>0&& Math.abs(pb-audioX.sampleRate/numberOfBins/2.)>1. &&pb
 else if (reset>3||pitch==1){on = false;
 }
 else reset++
-    
-    
-    
+
+
+
     if(pitch!=1){lastPitch = pitch;pitchFound=true;}
     else pitchFound=false;
-     
+
     pitch=lastPitch;
-    
+
 let note = Math.log(Math.sqrt(pitch)/440.0)/Math.log(Math.pow ( 2, (1/24.0)))+49;
 let inc = 8.25 ;
 let t =  (note * 30+30*inc);
@@ -236,12 +236,12 @@ if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize){//adjust back in if too far from
                if (Math.abs(by)>Math.sqrt(window.zoomCageSize))coordY*=1.-(Math.abs(by)-window.zoomCageSize)/35.;
                if (Math.abs(bx)>Math.sqrt(window.zoomCageSize))coordX*=1.-(Math.abs(bx)-window.zoomCageSize)/35.;
   }
-         
+
          if(Math.sqrt(coordY*coordY+coordX*coordX)>zoomCageSize*4./3.){coordX=0;coordY=0;}//teleport to center if too far from the center
-         
-            
-            
-            
+
+
+
+
             if (trailDepth<trailLength)trailDepth++;
 
 xPerp[f-1] = -Math.sin(-angle+pi/2)*radius*volume*window.movementRate*.5;
@@ -252,7 +252,7 @@ if (f>=trailDepth)f=0;
  xAdjusted= d_x*interpolation*MR*2./3.
  yAdjusted= d_y*interpolation*MR*2./3.
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
-    
+
     cx[n] += xAdjusted;//this is accumulating the length of a trail segment//12 is hopefully based on the size of seven clovers.  Grip is elusive!!!!
     cy[n] += yAdjusted;// two thirds seems to fit it to seven clovers neatly on "L"
 trailWidth[n] *= Math.pow(.997,interpolation);
@@ -310,6 +310,7 @@ function init() {
       fourCreats: {value: 1 },
   helm: {value: false },
   wheel: {value: false },
+  Refractelate: {value: false },
   petals: {value:  .0 },
 
   carousel: {value: 0.0 },
@@ -400,8 +401,8 @@ function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coo
                           if(zoom<.0000000000000000000000001)zoom = 1.;
 
 }
-                     
-                     
+
+
                        /*
 
                      let thisChunk=0, lastChunk=0;
@@ -417,12 +418,12 @@ function mcphrth(){
         thisChunk+=Math.abs(inputData[n+1]-inputData[n]);
 
         if(counter>=audioFramesPerMillisecond) {
-            
+
             if(thisChunk>lastChunk){
                 thisChunkGreaterThanLastChunk+=1;
                 if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
                 thisChunkLessThanLastChunk=0;
-                
+
             }
                 else {thisChunkLessThanLastChunk+=1;
                     if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
@@ -698,8 +699,8 @@ let s = (f+trailDepth-1)%trailDepth;
 let loopLimit = trailDepth;
 //if(isFinite(cx[r-1])&&isFinite(cx[s])&&isFinite(cy[r-1])&&isFinite(cy[s]))
                  let scalar = 1.;
-                 
-             
+
+
 
 while(loopLimit>0&&r!=f){
 
@@ -710,7 +711,7 @@ while(loopLimit>0&&r!=f){
   var z = -1.+(trailDepth-loopLimit)/trailDepth;
                           let transparencyOfTrail=.75*(1.-(trailDepth-loopLimit)/trailDepth);
                           trailColor.push(
-                                          
+
                                           pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
                                           pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrail,
                                            pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
@@ -721,11 +722,11 @@ while(loopLimit>0&&r!=f){
                     )
 
  trail.push(
-            
+
             cx[r]-widtr*xPerp[r], cy[r]-widtr*yPerp[r],z, //2//side far//far triangle
             cx[s]-widts*xPerp[s], cy[s]-widts*yPerp[s],z,  //1//side close
             cx[r]+widtr*xPerp[r], cy[r]+widtr*yPerp[r],z, //3//side far
-            
+
     cx[r]+widtr*xPerp[r], cy[r]+widtr*yPerp[r],z,//3//side far//close triangle
     cx[s]-widts*xPerp[s], cy[s]-widts*yPerp[s],z,//1//side close
     cx[s]+widts*xPerp[s], cy[s]+widts*yPerp[s],z,//4//side close
@@ -737,13 +738,13 @@ while(loopLimit>0&&r!=f){
               loopLimit--;
 
 }
-                                                                                           
-                                                                                 
-                                                                                         
-                                                                                           
-                                                                                           
-                                                                                           
-                                                                                           
+
+
+
+
+
+
+
                  geomeTrail = new THREE.BufferGeometry();
 
                                             geomeTrail.setAttribute( 'position', new THREE.Float32BufferAttribute( trail, 3 ).onUpload( disposeArray ) );
@@ -779,17 +780,17 @@ circleMaterial = new THREE.MeshBasicMaterial( { color: colorSound} );
 circle = new THREE.Mesh( circleGeometry, circleMaterial );
 circle.position.set(circleX,circleY,-.998);
 scene.add( circle );
-                   
+
                    let colorBlack= new THREE.Color();
                    colorBlack.setStyle("black");
-                   
 
-                   
+
+
                    let centerOfDotToEdge = [];
                    centerOfDotToEdge.push( new THREE.Vector3(circleX+-Math.sin(-angle)*dotSize*volume, circleY+-Math.cos(-angle)*dotSize*volume, -1. ) );
                    centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-1.) );
 
-                   
+
                    let radialMaterial=  new THREE.MeshBasicMaterial( { color: colorBlack});
 
                    const radialLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints( centerOfDotToEdge ), radialMaterial );

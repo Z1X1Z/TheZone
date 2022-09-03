@@ -35,7 +35,8 @@ window.addEventListener('keydown', function(event) {callKey(event); return true;
 function callKey(event){
     event.preventDefault(); event.stopImmediatePropagation();
       let key = event.key.toUpperCase();
-      var x = parseInt(String.fromCharCode( event.keyCode));
+      var x=null;
+      if(!event.shiftKey)x = parseInt(String.fromCharCode( event.keyCode));
       if (x>0)
         {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
       else if (x==0)
@@ -43,6 +44,7 @@ function callKey(event){
       else if (key=="À"||key=="`"||key=="~")
         {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
       else if (key=="M") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
+      else if (key=="!")uniforms[ "Refractelate" ].value=!uniforms[ "Refractelate" ].value;
 
       else if (key=="Q") {
           if          ( uniforms[ "colorCombo" ].value >8)          uniforms[ "colorCombo" ].value = 1;
@@ -109,13 +111,12 @@ function callKey(event){
       else if (key=="="||key.toLowerCase()=="+"){window.movementRate *=1.11111111;  uniforms[ "rate" ].value*=1.11111111;}
 
       else if (key.toLowerCase()=="-"){window.movementRate /=1.11111111; uniforms[ "rate" ].value/=1.11111111;}
-          
+
           else if (key=="E")window.gameOn=!window.gameOn;
 
       if(uniforms[ "free" ].value) window.zoomCageSize=100000000000000000.;
       else window.zoomCageSize=1.5;
     }
-
 
 
             //https://www.w3schools.com/howto/howto_js_fullscreen.asp
