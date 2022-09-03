@@ -305,6 +305,9 @@ function init() {
       colorCombo: {value: 1 },
         free: {value: false },
         MetaCored: {value: true },
+        externalCores: {value: 0. },
+        centralCores: {value: 0. },
+
         morph: {value: 0.0 },
 
       fourCreats: {value: 1 },
@@ -456,7 +459,12 @@ let pM=[];
 
 function animate( timestamp ) {
                        uniforms[ "time" ].value = Math.fround(timestamp/1000.);
-
+if (uniforms["MetaCored"].value){
+    let precores = .5;
+    uniforms[ "centralCores" ].value = Math.log(zoom*3./2.)/Math.log(.5)+1.+precores;
+    uniforms[ "externalCores" ].value =uniforms[ "centralCores" ].value*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY)*3./2.)*0.9551195-1.;
+  }
+console.log(uniforms[ "centralCores" ].value )
   onWindowResize();//may need to be taken out someday, just for iOS windowing rotation bug
 
 
