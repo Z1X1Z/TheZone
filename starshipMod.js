@@ -1,5 +1,8 @@
 function stallTillTHREE(){
-    if(typeof THREE=="object"){
+
+    if(typeof THREE=="object"&& document.visibilityState=="visible"){
+
+
         init();
     }else setTimeout(stallTillTHREE,10);}
 stallTillTHREE();//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
