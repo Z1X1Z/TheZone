@@ -352,7 +352,13 @@ function init() {
   renderer.setPixelRatio( rez);
   onWindowResize();
   window.addEventListener( 'resize', onWindowResize, false );
-    startMic();
+    if(location.hash.includes("t"))
+  {
+    document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
+    container.appendChild( renderer.domElement );//engage THREEJS visual out
+    animate();
+  }
+    else startMic();
 }
 
 
@@ -980,12 +986,14 @@ async function startMic() {
       analyser.fftSize = fftSize;
       dataArray = new Uint8Array( bufferSize );
       //init();
-  }).catch((err) => {})
+  }).catch((err) => {
+                    if(!location.hash.includes("t")) location.hash+="t";
+                    window.touchMode = true;
+                    })
   .finally((err) => {
     /* engage touch only mode */
     document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
     container.appendChild( renderer.domElement );//engage THREEJS visual out
-    console.log("Touch Mode only Engaged")
     animate();
   });
 
