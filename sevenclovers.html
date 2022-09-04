@@ -718,7 +718,8 @@
                              float term=0.;
                              if(spirated!=0.)term=(1.-lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
                                                vec2 m=vec2(0.);
-                                                if(wheel)m =  (p/lfc-coords.yx)*abs(coresIn/crs*2.-1.);
+                                                if(wheel)m =  (p/lfc-abs(coords.yx)//try with for ring pairing #syyym
+                                                )*abs(coresIn/crs*2.-1.);
                                                 //this is essentially just p as in the mandelbrot x <== x^2+
 
                                                             const float iterations = 40.;

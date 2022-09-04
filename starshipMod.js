@@ -993,6 +993,7 @@ async function startMic() {
       dataArray = new Uint8Array( bufferSize );
       //init();
   }).catch((err) => {
+                    console.log("Touch only mode!")
                     touchOnlyMode=true;
                     window.touchMode = true;
                     })
