@@ -473,7 +473,7 @@ if (uniforms["MetaCored"].value){
                                                               lastFrameTime=timestamp;
 if(!window.touchMode)pointerZoom=false;
 else on=false;
-if( !window.touchMode) {
+if( !window.touchMode&&!location.hash.includes("t")) {
 
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
            if(window.volumeSpeed)
@@ -937,7 +937,7 @@ for(var n = 0; n<targets.length;n++){
                                             geomeTrail.dispose();
                                             materialTrail.dispose();
                                                                                                                                          }}
-else {
+else {//begin touch frame
 
         zoomRoutine();
             var d = 3.;//this is the frame size in the shader: "p=vec2(...."
@@ -966,24 +966,29 @@ else {
 let audioX;
 let micOn = false;
 async function startMic() {
-  let stream = null;
-  stream = await navigator.mediaDevices.getUserMedia({audio: true}).then(
-      function (stream)
-      {
-        document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
-      container.appendChild( renderer.domElement );//engage THREEJS visual out
-        micOn = true;
-        audioX = new AudioContext();
-        analyser = audioX.createAnalyser();
-        source = audioX.createMediaStreamSource( stream );
-        source.connect(analyser);
-        analyser.fftSize = fftSize;
-        dataArray = new Uint8Array( bufferSize );
-        //init();
-      animate();
-      try{window.navigator.vibrate(1000);}catch(e){console.log(e);}
+  //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
+    navigator.mediaDevices.getUserMedia({audio: true})
+  .then((stream) => {
+    /* use the stream */
 
-      } );
+
+      micOn = true;
+      audioX = new AudioContext();
+      analyser = audioX.createAnalyser();
+      source = audioX.createMediaStreamSource( stream );
+      source.connect(analyser);
+      analyser.fftSize = fftSize;
+      dataArray = new Uint8Array( bufferSize );
+      //init();
+  }).catch((err) => {})
+  .finally((err) => {
+    /* engage touch only mode */
+    document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
+    container.appendChild( renderer.domElement );//engage THREEJS visual out
+    console.log("Touch Mode only Engaged")
+    animate();
+  });
+
 }
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
