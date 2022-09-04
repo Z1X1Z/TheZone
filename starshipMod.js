@@ -354,6 +354,7 @@ function init() {
   window.addEventListener( 'resize', onWindowResize, false );
     if(location.hash.includes("t"))
   {
+    touchOnlyMode=true;
     document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
     container.appendChild( renderer.domElement );//engage THREEJS visual out
     animate();
@@ -479,7 +480,7 @@ if (uniforms["MetaCored"].value){
                                                               lastFrameTime=timestamp;
 if(!window.touchMode)pointerZoom=false;
 else on=false;
-if( !window.touchMode&&!location.hash.includes("t")) {
+if( !window.touchMode&&!touchOnlyMode) {
 
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
            if(window.volumeSpeed)
@@ -971,6 +972,8 @@ else {//begin touch frame
 
 let audioX;
 let micOn = false;
+let touchOnlyMode=false;
+
 async function startMic() {
   //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
     navigator.mediaDevices.getUserMedia({audio: true})
@@ -987,7 +990,7 @@ async function startMic() {
       dataArray = new Uint8Array( bufferSize );
       //init();
   }).catch((err) => {
-                    if(!location.hash.includes("t")) location.hash+="t";
+                    touchOnlyMode=true;
                     window.touchMode = true;
                     })
   .finally((err) => {
