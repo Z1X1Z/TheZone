@@ -15,71 +15,68 @@
         <script src="hotkeys.js" ></script>
 
         <div class="navbar">
-            <div class="dropdown">
-              <button class="dropbtn">Starship
-                <i class="fa fa-caret-down"></i>
-              </button>
-              <div class="dropdown-content">
-                  <input type="checkbox" id="Game On" name="t"  onclick= "
-                      key  = 'E';
-                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                   <label for="Game On">Game On!</label><br>
-                  <input type="checkbox" id="Star Arms" name="t"  onclick= "
-                      key  = ' ';
-                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                   <label for="Star Arms">Star Arms!</label><br>
-                   <input type="checkbox" id="Fullscreen" name="t"  onclick= "
-                       key  = 'H';
-                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                    <label for="Fullscreen">Fullscreen!</label><br>
-                    <input type="checkbox" id="Verbose" name="t"  onclick= "
-                        key  = 'V';
-                        callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                     <label for="Verbose">Verbose!</label><br>
-                   <input type="checkbox" id="Volume Speed" name="t"  onclick= "
-                       key  = 'W';
-                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                    <label for="Volume Speed">Volume Speed!</label><br>
-                    
-                  <input type="checkbox" id="Touch" name="t"  onclick= "
-                      key  = 'T';
-                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                   <label for="Touch">Touch!</label><br>
-                   
-                    
-                    
-                   <a id="Cancel Background Noise" name="t"  onclick= "
-                       
-                       key  = 'P';
-                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                       Cancel Background Noise!</a><br>
-                   <a id="Listen Out" name="t"  onclick= "
-                       key  = 'O';
-                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                   listen Out!</a><br>
-                   <a id="Listen In" name="t"  onclick= "
-                       key  = 'I';
-                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                   listen In!</a><br>
-                   
-                   
-                   <a id="Faster" name="t"  onclick= "
-                       key  = '+';
-                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                   Faster!</a><br>
-                   <a id="Slower" name="t"  onclick= "
-                       key  = '-';
-                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                   Slower!</a><br>
-                   <a id="Reset Speed" name="t"  onclick= "
-                       key  = '0';
-                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                   Reset Speed!</a><br>
-                   
-              </div>
-              </div>
-            
-            
+					<div class="dropdown">
+						<button class="dropbtn">Starship
+							<i class="fa fa-caret-down"></i>
+						</button>
+						<div class="dropdown-content">
+								<input type="checkbox" id="Game On" name="t"  onclick= "
+										key  = 'e';
+										callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+								 <label for="Game On">Game On!</label><br>
+								<input type="checkbox" id="Star Arms" name="t"  onclick= "
+										key  = ' ';
+										callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+								 <label for="Star Arms">Star Arms!</label><br>
+								 <input type="checkbox" id="Fullscreen" name="t"  onclick= "
+										 key  = 'h';
+										 callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+									<label for="Fullscreen">Fullscreen!</label><br>
+									<input type="checkbox" id="Verbose" name="t"  onclick= "
+											key  = 'v';
+											callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+									 <label for="Verbose">Verbose!</label><br>
+								 <input type="checkbox" id="Volume Speed" name="t"  onclick= "
+										 key  = 'w';
+										 callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+									<label for="Volume Speed">Volume Speed!</label><br>
+
+								<input type="checkbox" id="Touch" name="t"  onclick= "
+										key  = 't';
+										callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+								 <label for="Touch">Touch!</label><br>
+								 <a id="Cancel Background Noise" name="t"  onclick= "
+
+										 key  = 'p';
+										 callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+										 Cancel Background Noise!</a><br>
+								 <a id="Listen Out" name="t"  onclick= "
+										 key  = 'o';
+										 callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+								 listen Out!</a><br>
+								 <a id="Listen In" name="t"  onclick= "
+										 key  = 'i';
+										 callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+								 listen In!</a><br>
+
+
+								 <a id="Faster" name="t"  onclick= "
+										 key  = '+';
+										 callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+								 Faster!</a><br>
+								 <a id="Slower" name="t"  onclick= "
+										 key  = '-';
+										 callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+								 Slower!</a><br>
+								 <a id="Reset Speed" name="t"  onclick= "
+										 key  = '0';
+										 callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+								 Reset Speed!</a><br>
+
+						</div>
+						</div>
+
+
               <div class="dropdown">
                 <button class="dropbtn">Mandelbrot
                   <i class="fa fa-caret-down"></i>
@@ -87,37 +84,37 @@
                 <div class="dropdown-content">
                        <label for="Center">Center</label><br>
                        <input type="checkbox" id="Zoom Static" name="t"  onclick= "
-                           key  = 'L';
+                           key  = 'l';
                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                         <label for="Zoom Static">Zoom Static</label><br>
                         <input type="checkbox" id="Color Iteration Flux" name="t"  onclick= "
-                            key  = 'A';
+                            key  = 'a';
                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                          <label for="Color Iteration Flux">Color Iteration Flux</label><br>
                          <input type="checkbox" id="Dancer" name="t"  onclick= "
-                             key  = 'S';
+                             key  = 's';
                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                           <label for="Dancer">Dancer!</label><br>
-                          
-                        
-                     
+
+
+
                             </div>
               </div>
 
-              
-              
+
+
           </div>
         </div>
 
-                
-                
-        
-          
+
+
+
+
           <script>let n = document.getElementsByName('t');
               for(var p = 0; p<n.length;p++)n[p].checked  = false; </script>
-          
-        
-        
+
+
+
         <div id="container"></div>
         <script src="starshipMod.js"></script>
 
@@ -131,7 +128,7 @@
         if(window.online)nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6/z1xlogo.png');"
         else nf[0].style = "background-image: url('z1xlogo.png');"
     </script>
-    
+
 <script id="threeJSscript" async></script>
 <script id="wadJSscript" async></script>
 <script src="wadLoader.js"></script>
@@ -169,7 +166,7 @@ void main(){
             vec2 t=vec2(0.);
             if (morph>.5)t=vec2(-sin(time2dance/10.),-sin((time2dance/10.)*-1.618))*zoom+(coords.yx+.5)*log(pow(zoom,1.618))/log(1.618)*zoom*.25;
 
-      
+
                               float c=3.58;
                               p+=coords.yx;
                               p.x+=.5;
@@ -185,17 +182,17 @@ void main(){
               if(colorCombo==15)z=vec2(-1./(z.x*z.x-z.y*z.y-p.x+t.x), 2.0*z.x*z.y-p.y+t.y);//this is {s=s^2-p;s.real=-1./s.real}
               else z=vec2((z.x*z.x-z.y*z.y-p.x+t.x), 2.0*z.x*z.y-p.y+t.y);//this is {s=s^2-p}
       }}
-                                       
+
           gl_FragColor= (vec4(z.x*z.y,z.x+.2,z.y-.3*(1.-p.x),1.)+.3)/length(z);
 
-            
-            
+
+
     }
 
 		</script>
         <script>window.zoomCageSize=2; window.spiroRainbow = true; window.mandelbrot=true;
 </script>
-        
+
 
 
 	</body>
