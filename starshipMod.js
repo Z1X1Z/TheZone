@@ -956,8 +956,8 @@ if(!zoomAtl41)
             var d = 3.;//this is the frame size in the shader: "p=vec2(...."
             if(uniforms.colorCombo.value==15&&window.mandelbrot) d = 10.;//for zonex.html
         if(pointerZoom){
-             var spunTouch = [ (zoom-lastZoom)*screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d),
-                              -(zoom-lastZoom)*screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d)];
+             var spunTouch = [-Math.abs(zoom-lastZoom)*screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d),
+                              Math.abs(zoom-lastZoom)*screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d)];
 
                   if(uniforms.carousel.value!=0.)         spunTouch=spin(spunTouch,uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value)%(Math.PI*2.));
 
