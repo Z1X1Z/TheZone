@@ -394,10 +394,13 @@ let FPS=0.;
                   let interpolation=1.;
                   let finalAverageAmp=1.;
                   let averageFrameTotalAmp = [];
+                  function zoomRate(){
+                    return Math.E**(Math.log(.5)/zoomFrames*window.movementRate*interpolation*(Math.sqrt(volume)/2.+.5));//the square root of volume is to make it grow slower than in d_xy
+                  }
 function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
                      if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
 
-                   ZR = Math.E**(Math.log(.5)/zoomFrames*window.movementRate*interpolation*(Math.sqrt(volume)/2.+.5));//the square root of volume is to make it grow slower than in d_xy
+                   ZR = zoomRate();
                    if(!zoomOutEngage){
                      if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&on)||window.pointerZoom)zoom *=ZR;
                      else if(zoom<1.){zoom /= ZR;
@@ -950,9 +953,10 @@ else {//begin touch frame
 
 if(!zoomAtl41)
     {
-      lastZoom = zoom;
+      lastZoom = zoom
       zoomRoutine();
     }
+    else lastZoom=zoom/zoomRate();
             var d = 3.;//this is the frame size in the shader: "p=vec2(...."
             if(uniforms.colorCombo.value==15&&window.mandelbrot) d = 10.;//for zonex.html
         if(pointerZoom){
