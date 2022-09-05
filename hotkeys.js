@@ -1,6 +1,6 @@
 function readHash(){for(var n = location.hash.length;n>0;n--)callKey(new KeyboardEvent('keydown', {'key': location.hash[n],"keyCode":location.hash.charCodeAt(n)}));
 }
-function stallHash(){if(window.uniformsLoaded)readHash();else setTimeout(stallHash,10);}
+function stallHash(){if(window.uniformsLoaded)readHash();else setTimeout(stallHash,10);}//uniforms are only loaded if mic is enabled
 stallHash();
 function hk() {
   var x = document.createElement("INPUT");
@@ -34,7 +34,7 @@ window.addEventListener('keydown', function(event) {callKey(event); return true;
 
 function callKey(event){
     event.preventDefault(); event.stopImmediatePropagation();
-      let key = event.key.toUpperCase();
+      let key = event.key;
       var x=null;
       if(!event.shiftKey)x = parseInt(String.fromCharCode( event.keyCode));
       if (x>0)
@@ -43,42 +43,43 @@ function callKey(event){
         {window.movementRate=2.; uniforms[ "rate" ].value= 1.; }
       else if (key=="À"||key=="`"||key=="~")
         {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
-      else if (key=="M") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
+      else if (key=="m") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
       else if (key=="!")uniforms[ "Refractelate" ].value=!uniforms[ "Refractelate" ].value;
 
-      else if (key=="Q") {
+      else if (key=="q") {
           if          ( uniforms[ "colorCombo" ].value >8)          uniforms[ "colorCombo" ].value = 1;
           else uniforms[ "colorCombo" ].value = (uniforms[ "colorCombo" ].value+1)%9;
       }
       else if (key==";") uniforms[ "colorInverter" ].value = !uniforms[ "colorInverter" ].value;
-      else if (key=="T") window.touchMode = !window.touchMode;
-      else if (key=="F") uniforms[ "fourCreats" ].value *= -1;
-      else if (key=="A") uniforms[ "colorCombo" ].value = 11;
+      else if (key=="t") window.touchMode = !window.touchMode;
+      else if (key=="f") uniforms[ "fourCreats" ].value *= -1;
+      else if (key=="a") uniforms[ "colorCombo" ].value = 11;
       else if (key=="\'"||key=="\"") uniforms[ "colorCombo" ].value = 13;
-      else if (key=="D") uniforms[ "colorCombo" ].value = 14;
-      else if (key=="X") uniforms[ "colorCombo" ].value = 15;
-      else if (key=="B") uniforms[ "colorCombo" ].value = 16;
-      else if (key=="G") uniforms[ "colorCombo" ].value = 17;
-      else if (key=="R")uniforms[ "colorCombo" ].value = 18;
-      else if (key=="S"){ if(uniforms[ "morph" ].value == 0.)uniforms[ "morph" ].value = 1.;else uniforms[ "morph" ].value = 0.; }
-      else if (key=="N") uniforms[ "MetaCored" ].value = !uniforms[ "MetaCored" ].value;
-      else if (key=="L"){if(zoomAtl41){zoom=1.;coordX=0.; coordY=0.;}zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
-      else if (key=="C")center=!center;
-      else if (key=="V")textON=!textON;
-      else if (key=="Z")uniforms[ "helm" ].value = !uniforms[ "helm" ].value;
-      else if (key=="J"){
+      else if (key=="d") uniforms[ "colorCombo" ].value = 14;
+      else if (key=="x") uniforms[ "colorCombo" ].value = 15;
+      else if (key=="b") uniforms[ "colorCombo" ].value = 16;
+      else if (key=="g") uniforms[ "colorCombo" ].value = 17;
+      else if (key=="r")uniforms[ "colorCombo" ].value = 18;
+      else if (key=="s"){ if(uniforms[ "morph" ].value == 0.)uniforms[ "morph" ].value = 1.;else uniforms[ "morph" ].value = 0.; }
+      else if (key=="n") uniforms[ "MetaCored" ].value = !uniforms[ "MetaCored" ].value;
+      else if (key=="l"){zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
+      else if (key=="L")zoom=1.;
+      else if (key=="c")center=!center;
+      else if (key=="v")textON=!textON;
+      else if (key=="z")uniforms[ "helm" ].value = !uniforms[ "helm" ].value;
+      else if (key=="j"){
           if(uniforms[ "carousel" ].value==0)uniforms[ "carousel" ].value=1;
           else if(uniforms[ "carousel" ].value==1)uniforms[ "carousel" ].value=-1;
           else if(uniforms[ "carousel" ].value==-1)uniforms[ "carousel" ].value=0;
       }
-      else if (key=="K"){
+      else if (key=="k"){
             if(uniforms[ "metaCarousel" ].value==0)uniforms[ "metaCarousel" ].value=1;
             else if(uniforms[ "metaCarousel" ].value==1)uniforms[ "metaCarousel" ].value=-1;
             else if(uniforms[ "metaCarousel" ].value==-1)uniforms[ "metaCarousel" ].value=0;
         }
 
-      else if (key=="Y") uniforms[ "petals" ].value -= 1.;
-      else if (key=="U") uniforms[ "petals" ].value += 1.;
+      else if (key=="y") uniforms[ "petals" ].value -= 1.;
+      else if (key=="u") uniforms[ "petals" ].value += 1.;
       else if (key=="/"||key=="?"){
             if(uniforms[ "spirated" ].value==0)uniforms[ "spirated" ].value=1;
             else if(uniforms[ "spirated" ].value==1)uniforms[ "spirated" ].value=-1;
@@ -89,14 +90,14 @@ function callKey(event){
       else if (event.keyCode==190||event.key=="."||event.key==">") uniforms[ "metronome" ].value *= 1.1; //keycode for <
       else if ((event.keyCode==188||event.key==","||event.key=="<")&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
 
-      else if (key=="I") zoomOutRatchetThreshold/= 1.12121;
-      else if (key=="O") zoomOutRatchetThreshold*= 1.12121;
+      else if (key=="i") zoomOutRatchetThreshold/= 1.12121;
+      else if (key=="o") zoomOutRatchetThreshold*= 1.12121;
 
-      else if (key=="P"){
+      else if (key=="p"){
                 framesLong=FPS;
                 computeFPS=true;
             }
-      else if (key=="H"){
+      else if (key=="h"){
                 fullscreen=!fullscreen
                 if(fullscreen)openFullscreen();
                 else closeFullscreen();
@@ -106,13 +107,13 @@ function callKey(event){
         if (onO)onO=false;
         else onO = true;
       }
-      else if (key=="W")window.volumeSpeed=!window.volumeSpeed;
+      else if (key=="w")window.volumeSpeed=!window.volumeSpeed;
 
       else if (key=="="||key.toLowerCase()=="+"){window.movementRate *=1.11111111;  uniforms[ "rate" ].value*=1.11111111;}
 
       else if (key.toLowerCase()=="-"){window.movementRate /=1.11111111; uniforms[ "rate" ].value/=1.11111111;}
 
-          else if (key=="E")window.gameOn=!window.gameOn;
+          else if (key=="e")window.gameOn=!window.gameOn;
 
       if(uniforms[ "free" ].value) window.zoomCageSize=100000000000000000.;
       else window.zoomCageSize=1.5;
