@@ -582,9 +582,7 @@ if( !window.touchMode&&!touchOnlyMode) {
   if (on)scene.add(line);
 
 
-zoomRoutine();
-
-            if(zoomAtl41)zoom=.025;
+if(!zoomAtl41)zoomRoutine();//  zoomAtl41 is zoom freeze
   uniforms[ "time2dance" ].value += totalAMP;
 
 
