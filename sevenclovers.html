@@ -696,7 +696,6 @@
                              float precores = 0.49;
                              vec2 colorAccumulator =vec2(0.);
                              vec3 heartColors = vec3(0.);
-                             if(spirated!=0.) precores = 1.;
                              if(spirated>-.5) p.y*=-1.;
                              float cored =0.;
                              if(MetaCored)cored= log(zoom*3./2.)/log(.5)+1.+precores;
@@ -735,7 +734,8 @@
                                         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
                                        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
                                        );//x**3
-                                       s+=t-m;//plus t is lobes, -t is circles
+                                       if(spirated!=0.) s+=m-t;//this is to give the semi-dissipated clovers
+                                       else s+=t-m;//plus t is lobes, -t is circles with dance
 
                                    if(colorCombo==8)s.x=-1./s.x;//inheritance is the only colorMode that works with manny inverter
 
