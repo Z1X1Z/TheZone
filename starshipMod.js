@@ -524,7 +524,7 @@ if("osmd" in window){
             for(var n = 0.; n< nts.length; n++){
               //console.log(nts[n])
 
-              if( (true||Math.round(noteNumber)==(nts[n].halfTone-8))&& noteExpired){//-8 should callibrate from a halfstep count of 48 == C4 natural into concert pitch of A# == 49
+              if(Math.round(noteNumber)==(nts[n].halfTone-8)&& noteExpired){//-8 should callibrate from a halfstep count of 48 == C4 natural into concert pitch of A# == 49
                 noteHit=true;
                 timeStampLastNoteEnded=timestamp;
                 }
@@ -543,7 +543,7 @@ if("osmd" in window){
 osmd.cursor.cursorOptions.color="#"+colorSound.getHexString();//this is a frame behind if it is above colorSounds definition
 osmd.cursor.show();
 
-if(true||noteHit  && noteExpired){
+if(noteHit  && noteExpired){
 
                         //below we are concerned with executing the end of score reset
 
