@@ -559,16 +559,14 @@ if("osmd" in window){
 
 //https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/issues/710
 
-//osmd.setOptions({darkMode: true}); // or false. sets defaultColorMusic and PageBackgroundColor.
-osmd.cursor.cursorOptions.color="#"+colorSound.getHexString();//this is a frame behind if it is above colorSounds definition
-osmd.cursor.show();
+
 
 if(noteHit  && noteExpired){
 
 
-
+  takeNextScoreSlice(cursorMeasure);//
   osmd.cursor.next(); // advance the cursor one note
-//  takeNextScoreSlice(osmd.cursor.Iterator.currentMeasureIndex+1);
+  takeNextScoreSlice(osmd.cursor.Iterator.currentMeasureIndex+1);
 
 
 if(osmd.cursor.Iterator.endReached){
@@ -595,11 +593,13 @@ if(osmd.cursor.Iterator.endReached){
 
 
 
-
-
-
 }
 
+
+
+                  osmd.setOptions({darkMode: true}); // or false. sets defaultColorMusic and PageBackgroundColor.
+                  osmd.cursor.cursorOptions.color="#"+colorSound.getHexString();//this is a frame behind if it is above colorSounds definition
+                  osmd.cursor.show();
 
 cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
 
