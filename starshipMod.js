@@ -514,7 +514,7 @@ let lastNoteTimeInScore=0;
 let noteHit=false;
 let timeStampLastNoteEnded=0.;
 let currentMeasure=1;
-let cursorMeasure=0;
+let cursorMeasure=1;
 function takeNextScoreSlice(start){
                     window.osmd.setOptions({
                       drawFromMeasureNumber: start,
