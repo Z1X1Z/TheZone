@@ -526,7 +526,7 @@ adjustThreeJSWindow();//mostly for ios here
 
 
 if("osmd" in window){
-  takeNextScoreSlice(cursorMeasure);//this secures single note bar stepping so long as there are at least two bars.  Really it seems difficult without two bars which is a difficulty of rendering with the osmd.cursor utility and my limited knowledge
+  takeNextScoreSlice(cursorMeasure);
   cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
   takeNextScoreSlice(cursorMeasure);
             //https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/issues/746
@@ -564,7 +564,6 @@ if(noteHit  && noteExpired){
 
 
 if(osmd.cursor.Iterator.endReached){
-  takeNextScoreSlice(1);
   osmd.cursor.reset();
   takeNextScoreSlice(1);
 
@@ -591,7 +590,9 @@ if(osmd.cursor.Iterator.endReached){
 
 
 }
-lastCursorMeasure=cursorMeasure;
+
+
+cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
 
 }//end osmd
 
