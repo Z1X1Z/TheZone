@@ -566,7 +566,7 @@ if(osmd.cursor.Iterator.endReached){
                                         notesUnderCursor[n].noteheadColor="#"+noteToHitColor.getHexString();;
                                   }
 
-                      osmdResize();
+                      onWindowResize();//this calls osmd.render();
 
 
                   noteHit=false;
