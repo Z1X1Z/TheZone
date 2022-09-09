@@ -406,7 +406,7 @@ let correlationForText;
 console.log(correlationForText=document.getElementById("score").offsetHeight)
 console.log(correlationForText+=document.getElementById("allText").offsetHeight)
 
-    if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glit
+    if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
        {
 
 
