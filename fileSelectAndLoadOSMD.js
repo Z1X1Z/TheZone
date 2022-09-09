@@ -41,7 +41,7 @@ function handleFileSelect(evt) {
               drawMetronomeMarks:false, drawPartNames:false, drawPartAbbreviations:true,
               drawMeasureNumbers:true, drawMeasureNumbersOnlyAtSystemStart:true, drawTimeSignatures:true,
               autoResize: false,
-            backend: "canvas",//changed from svg trying to fix mobile bug
+            backend: "svg",
             drawFromMeasureNumber: 1,
             drawUpToMeasureNumber: 1.+Math.floor(window.innerWidth/window.innerHeight*2)// draw all measures, up to the end of the sample
           });
