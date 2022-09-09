@@ -98,6 +98,7 @@ function startSound(e){
 
 function followSound(e){
             let correlationForText=document.getElementById("allText").offsetHeight;
+            correlationForText-=document.getElementById("score").offsetHeight;//bottom
             let y = e.clientY-(window.innerHeight+correlationForText)/2.;
             let x = e.clientX-window.innerWidth/2.;
 
