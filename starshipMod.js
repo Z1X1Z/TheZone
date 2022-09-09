@@ -515,7 +515,7 @@ adjustThreeJSWindow();//mostly for ios here
 
 if("osmd" in window){
   cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
-  //takeNextScoreSlice(cursorMeasure);
+  takeNextScoreSlice(cursorMeasure);
             //https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/issues/746
             var nts = osmd.cursor.NotesUnderCursor(0);//the argument 0 hopefully specifies first instrument
             let noteLength=nts[0].length.realValue
@@ -566,7 +566,7 @@ if(osmd.cursor.Iterator.endReached){
                                         notesUnderCursor[n].noteheadColor="#"+noteToHitColor.getHexString();;
                                   }
 
-                      window.osmd.render();
+                      osmdResize();
 
 
                   noteHit=false;
