@@ -1,15 +1,6 @@
 function osmdResize()
         {
-        osmdHeight=document.getElementById("score").style.height;
-        /*if(window.innerHeight>window.innerWidth) {//if taller than wide do this
-          osmdHeight="auto";
-          osmd.zoom=2./3.;
-          }
-        else {
-          //osmdHeight=String(window.innerHeight/.5)+"px";//set height to one third of screen
-        }*/
           osmd.zoom=Math.min(window.innerHeight,window.innerWidth)/743.;
-
     window.osmd.render();
         }
 function handleFileSelect(evt) {
