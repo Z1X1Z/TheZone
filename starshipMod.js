@@ -378,6 +378,8 @@ function adjustThreeJSWindow()
 {
          let correlationForText = document.getElementById("allText").offsetHeight;
          correlationForText+=document.getElementById("score").offsetHeight;
+
+
          height=window.innerHeight-correlationForText;
          width=window.innerWidth;
 
@@ -392,10 +394,22 @@ function adjustThreeJSWindow()
   renderer.setSize( uniforms.resolution.value.x, uniforms.resolution.value.y);
   camera = new THREE.OrthographicCamera( -width, width, height, -height, 1, -1);
 
+
 }
 window.addEventListener( 'resize', onWindowResize, false );
 
 function onWindowResize() {
+
+
+let correlationForText;
+
+console.log(correlationForText=document.getElementById("score").offsetHeight)
+console.log(correlationForText+=document.getElementById("allText").offsetHeight)
+
+    if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
+           {
+
+
   if("osmd" in window)
   {
       takeNextScoreSlice(cursorMeasure);
@@ -404,6 +418,7 @@ function onWindowResize() {
   }
 
 adjustThreeJSWindow();
+}
 }
 let point = [];
 
@@ -566,7 +581,7 @@ if(osmd.cursor.Iterator.endReached){
                                         notesUnderCursor[n].noteheadColor="#"+noteToHitColor.getHexString();;
                                   }
 
-                      onWindowResize();//this calls osmd.render();
+                      onWindowResize();//this calls window.osmd.render() by osmdRender()
 
 
                   noteHit=false;
