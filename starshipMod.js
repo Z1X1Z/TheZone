@@ -564,6 +564,7 @@ if(noteHit  && noteExpired){
 
 
 if(osmd.cursor.Iterator.endReached){
+  takeNextScoreSlice(1);
   osmd.cursor.reset();
   takeNextScoreSlice(1);
 
