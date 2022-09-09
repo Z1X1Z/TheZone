@@ -507,7 +507,7 @@ let lastCursorMeasure =0;
 function takeNextScoreSlice(){
                     window.osmd.setOptions({
                       drawFromMeasureNumber: currentMeasure,
-                      drawUpToMeasureNumber:currentMeasure+Math.floor(window.innerWidth/window.innerHeight*3.)
+                      drawUpToMeasureNumber:currentMeasure+Math.floor(window.innerWidth/window.innerHeight*2.)
                       }) // requires re-render
 }
 function animate( timestamp ) {

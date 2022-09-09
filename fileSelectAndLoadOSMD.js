@@ -8,7 +8,7 @@ function osmdResize()
         else {
           //osmdHeight=String(window.innerHeight/.5)+"px";//set height to one third of screen
         }*/
-          osmd.zoom=Math.min(window.innerHeight,window.innerWidth)/1000.;
+          osmd.zoom=Math.min(window.innerHeight,window.innerWidth)/743.;
 
     window.osmd.render();
         }
@@ -43,7 +43,7 @@ function handleFileSelect(evt) {
               autoResize: false,
             backend: "svg",
             drawFromMeasureNumber: 1,
-            drawUpToMeasureNumber: 1+Math.floor(window.innerWidth/window.innerHeight*3)// draw all measures, up to the end of the sample
+            drawUpToMeasureNumber: 2+Math.floor(window.innerWidth/window.innerHeight*2)// draw all measures, up to the end of the sample
           });
           osmd
             .load(e.target.result)
