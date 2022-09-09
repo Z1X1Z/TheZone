@@ -27,11 +27,11 @@ function handleFileSelect(evt) {
           var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvas", {
             // set options here
 //https://wordpress.org/plugins/opensheetmusicdisplay/
-              // height:window.innerHeight/2.,//doesn't seem to work
+               width:window.width,//doesn't seem to work
               drawTitle:false, drawSubtitle:false, drawComposer:false, drawLyricist:false,
               drawMetronomeMarks:false, drawPartNames:false, drawPartAbbreviations:true,
               drawMeasureNumbers:true, drawMeasureNumbersOnlyAtSystemStart:true, drawTimeSignatures:true,
-              autoResize: false,
+              autoResize: true,
             backend: "svg",
             drawFromMeasureNumber: 1,
             drawUpToMeasureNumber: 1.+Math.floor(window.innerWidth/window.innerHeight*2)// draw all measures, up to the end of the sample
