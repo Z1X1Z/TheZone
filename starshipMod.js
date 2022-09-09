@@ -415,7 +415,7 @@ correlationForText+=document.getElementById("allText").offsetHeight
 
             }
         }
-        else//solution to iOS freeze glitch rare 
+        else//solution to iOS freeze glitch rare
         {document.getElementById("score").offsetHeight=0;
         document.getElementById("allText").offsetHeight=0;
         }
@@ -563,13 +563,12 @@ if("osmd" in window){
 osmd.cursor.cursorOptions.color="#"+colorSound.getHexString();//this is a frame behind if it is above colorSounds definition
 osmd.cursor.show();
 
-if(noteHit  && noteExpired){
+if(true||noteHit  && noteExpired){
 
 
 
-  takeNextScoreSlice(osmd.cursor.Iterator.currentMeasureIndex+2);
   osmd.cursor.next(); // advance the cursor one note
-  takeNextScoreSlice(osmd.cursor.Iterator.currentMeasureIndex+1);
+//  takeNextScoreSlice(osmd.cursor.Iterator.currentMeasureIndex+1);
 
 
 if(osmd.cursor.Iterator.endReached){
