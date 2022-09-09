@@ -581,7 +581,13 @@ if(osmd.cursor.Iterator.endReached){
                                         notesUnderCursor[n].noteheadColor="#"+noteToHitColor.getHexString();;
                                   }
                       cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1//this has to be set for osmdRender()
-                      onWindowResize();//this calls window.osmd.render() by osmdRender()
+
+                      let correlationForText;
+                      correlationForText=document.getElementById("score").offsetHeight
+                      correlationForText+=document.getElementById("allText").offsetHeight
+
+                          if(!isNaN(correlationForText) )
+                          onWindowResize();//this calls window.osmd.render() by osmdRender()
 
 
                   noteHit=false;
