@@ -406,26 +406,26 @@ let correlationForText;
 console.log(correlationForText=document.getElementById("score").offsetHeight)
 console.log(correlationForText+=document.getElementById("allText").offsetHeight)
 
-    if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
-           {
+    if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glit
+       {
 
 
-  if("osmd" in window)
-  {
-      takeNextScoreSlice(cursorMeasure);
-      osmdResize();//osmdResize defined in fileSelectAndLoadOSMD.js
+            if("osmd" in window)
+            {
+                takeNextScoreSlice(cursorMeasure);
+                osmdResize();//osmdResize defined in fileSelectAndLoadOSMD.js
 
-  }
+            }
 
-adjustThreeJSWindow();
-}
-}
-let point = [];
+            adjustThreeJSWindow();
+          }
+        }
+            let point = [];
 
-let textON=false;
-let lastTime=0.;
-let ticker = 0;
-let FPS=0.;
+            let textON=false;
+            let lastTime=0.;
+            let ticker = 0;
+            let FPS=0.;
 
                   const interval = 200;
                   let elapsedTimeBetweenFrames = 0.;
