@@ -563,7 +563,7 @@ if("osmd" in window){
 osmd.cursor.cursorOptions.color="#"+colorSound.getHexString();//this is a frame behind if it is above colorSounds definition
 osmd.cursor.show();
 
-if(true||noteHit  && noteExpired){
+if(noteHit  && noteExpired){
 
 
 
