@@ -414,8 +414,9 @@ correlationForText+=document.getElementById("allText").offsetHeight
                 osmdResize();//osmdResize defined in fileSelectAndLoadOSMD.js
 
             }
-            adjustThreeJSWindow();
         }
+            adjustThreeJSWindow();
+
   }
             let point = [];
 
@@ -581,13 +582,7 @@ if(osmd.cursor.Iterator.endReached){
                                         notesUnderCursor[n].noteheadColor="#"+noteToHitColor.getHexString();;
                                   }
                       cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1//this has to be set for osmdRender()
-
-                      let correlationForText;
-                      correlationForText=document.getElementById("score").offsetHeight
-                      correlationForText+=document.getElementById("allText").offsetHeight
-
-                          if(!isNaN(correlationForText) )
-                          onWindowResize();//this calls window.osmd.render() by osmdRender()
+                      onWindowResize();//this calls window.osmd.render() by osmdRender()
 
 
                   noteHit=false;
