@@ -251,14 +251,38 @@
 
                 <script>
                     let h =document.querySelectorAll("input");
-                    for(var p = 0; p<h.length;p++)h[p].checked  = false; </script>
+                    for(var p = 0; p<h.length;p++)h[p].checked  = false; </script><!--uncheck all the boxes in the menu!-->
 
               <div id="container"></div>
 
+
+
+
+<div id="score">
+
+<script src="opensheetmusicdisplay.min.js"></script> <!-- you need to provide the .js file, see README.md-->
+<div id="osmdCanvas"/>
+
+<input type="file" id="files"/>
+
+<output id="list"></output>
+
+<script src="fileSelectAndLoadOSMD.js"></script>
+
+</div id="score">
+
+
+
+
+
+
             <script src="starshipMod.js"></script>
+
 
     </head>
     <body>
+
+
 
         <!--SPLASH-->
         <div class=onofflineBG id="background_wrap"></div>
@@ -1056,6 +1080,9 @@ vec3 xtol(vec2 s, vec2 t){
                             clamp((zoomer)-(m.r+m.b+m.g+creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*100.,.0,1.)
                     ,1.);}
         </script>
+
+
+
 
     </body>
 </html>
