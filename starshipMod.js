@@ -544,7 +544,7 @@ if("osmd" in window){
             for(var n = 0.; n< nts.length; n++){
               //console.log(nts[n])
 
-              if(  Math.round(noteNumber) == nts[n].halfTone-8   && noteExpired){//-8 should callibrate from a halfstep count of 48 == C4 natural into concert pitch of A# == 49
+              if(  (Math.round(noteNumber))%12 == (nts[n].halfTone-8)%12   && noteExpired){//-8 should callibrate from a halfstep count of 48 == C4 natural into concert pitch of A# == 49
                 noteHit=true;
                 timeStampLastNoteEnded=timestamp;
                 }
