@@ -408,18 +408,15 @@ console.log(correlationForText+=document.getElementById("allText").offsetHeight)
 
     if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
        {
-
-
             if("osmd" in window)
             {
                 takeNextScoreSlice(cursorMeasure);
                 osmdResize();//osmdResize defined in fileSelectAndLoadOSMD.js
 
             }
-
             adjustThreeJSWindow();
-          }
         }
+  }
             let point = [];
 
             let textON=false;
@@ -529,6 +526,7 @@ adjustThreeJSWindow();//mostly for ios here
 
 
 if("osmd" in window){
+  takeNextScoreSlice(cursorMeasure);//this secures single note bar stepping so long as there are at least two bars.  Really it seems difficult without two bars which is a difficulty of rendering with the osmd.cursor utility and my limited knowledge
   cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
   takeNextScoreSlice(cursorMeasure);
             //https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/issues/746
@@ -560,16 +558,15 @@ osmd.cursor.show();
 
 if(noteHit  && noteExpired){
 
-                        //below we are concerned with executing the end of score reset
-
 
   osmd.cursor.next(); // advance the cursor one note
-  takeNextScoreSlice(osmd.cursor.Iterator.currentMeasureIndex+1);
+  takeNextScoreSlice(osmd.cursor.Iterator.currentMeasureIndex);//took out a +1 don't know why it was there
 
 
 if(osmd.cursor.Iterator.endReached){
-  takeNextScoreSlice(1);
   osmd.cursor.reset();
+  takeNextScoreSlice(1);
+
                         }
 
                       var notesUnderCursor = osmd.cursor.NotesUnderCursor(0);//the argument 0 hopefully specifies first instrument
