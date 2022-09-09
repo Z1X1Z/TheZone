@@ -64,11 +64,13 @@ loadScript(cdnSwitch,initialize);
 let initialAngleSound = Array(10);
 initialAngleSound[0]=0;
 function startSound(e){
-    let correlationForText=document.getElementById("allText").offsetHeight;
+    let correlationForText=document.getElementById("allText").offsetHeight;//top
+    correlationForText-=document.getElementById("score").offsetHeight;//bottom
 
    let y = e.clientY-(window.innerHeight+correlationForText)/2.;
     let x = e.clientX- window.innerWidth/2.;
-    
+    console.log("y: "+y+" x: "+x)
+
     if(window.touchMode)window.pointerZoom=true
 
     screenPressCoordX=x;
@@ -81,7 +83,7 @@ function startSound(e){
     sound[id].stop();
     sound2[id].stop();
 
-    
+
        let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
         initialAngleSound[id] = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi);
         let frequency = Math.pow(2.,((initialAngleSound[id])/pi/2*12+correction)/12.)*220.;
@@ -93,12 +95,12 @@ function startSound(e){
                                  sound2[id].play({env:{attack: .1, release:.02,hold:-1},pitch:frequency*2.,volume:volume});
                                  }
 }
-                                 
+
 function followSound(e){
             let correlationForText=document.getElementById("allText").offsetHeight;
             let y = e.clientY-(window.innerHeight+correlationForText)/2.;
             let x = e.clientX-window.innerWidth/2.;
-                        
+
                         screenPressCoordX=x;
                         screenPressCoordY=y;
 
@@ -107,7 +109,7 @@ function followSound(e){
             var id = 0;
             if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
                 id = touchNumber.get(e.identifier);
-            
+
 
 let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
 let angleSound = Math.atan2(y,x);
@@ -119,7 +121,7 @@ if(isFinite(frequency)&&frequency>0.)
      sound[id].setVolume(volume*(((angleSound-initialAngleSound[id]))/(2.*pi)));
      sound2[id].setVolume(volume*(1.-((angleSound-initialAngleSound[id]))/(2.*pi)));
                                   }
-                                                          
+
 
 }
                                                              let cycle=0;
@@ -134,9 +136,9 @@ c.focus();//this is to make the panel menu go down on android when you press on 
             touchNumber.set(e.changedTouches[o].identifier,cycle);
             cycle=(cycle+1)%10
             startSound(e.changedTouches[o]);
-            
+
         }
-        
+
     }, false);
   container.addEventListener('touchmove', function(e) {
      e.stopImmediatePropagation(); e.preventDefault();
@@ -145,7 +147,7 @@ c.focus();//this is to make the panel menu go down on android when you press on 
           followSound(e.changedTouches[o]);
   }
       , false);
-      
+
   container.addEventListener('touchend', function(e){
       window.pointerZoom=false;
       if(!window.touchMode){
@@ -164,22 +166,20 @@ if(!window.touchMode){ for(var o=0; o<e.changedTouches.length; o++)
         sound[touchNumber.get(e.changedTouches[o].identifier)].stop();
         sound2[touchNumber.get(e.changedTouches[o].identifier)].stop();}
     }
-        
+
     }, false);
 
 }
 else{
-    
+
     c.addEventListener('mousedown', function(e){
         e.preventDefault(); e.stopImmediatePropagation();
         startSound(e);},
                        false);
-    
+
  c.addEventListener('mousemove', function(e){
      e.preventDefault(); e.stopImmediatePropagation();
      followSound(e)},
             false);
     c.addEventListener('mouseup', function(e){window.pointerZoom=false; if(!window.touchMode){sound[0].stop();sound2[0].stop();}}, false);
 }
-
-
