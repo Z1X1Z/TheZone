@@ -43,7 +43,7 @@ function handleFileSelect(evt) {
               autoResize: false,
             backend: "svg",
             drawFromMeasureNumber: 1,
-            drawUpToMeasureNumber: 2+Math.floor(window.innerWidth/window.innerHeight*2)// draw all measures, up to the end of the sample
+            drawUpToMeasureNumber: 1.+Math.floor(window.innerWidth/window.innerHeight*2)// draw all measures, up to the end of the sample
           });
           osmd
             .load(e.target.result)
