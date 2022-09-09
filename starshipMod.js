@@ -415,6 +415,12 @@ correlationForText+=document.getElementById("allText").offsetHeight
 
             }
         }
+        else//solution to iOS freeze glitch rare 
+        {document.getElementById("score").offsetHeight=0;
+        document.getElementById("allText").offsetHeight=0;
+        }
+
+
             adjustThreeJSWindow();
 
   }
