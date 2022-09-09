@@ -12,193 +12,191 @@
                 <div id="textWindow"></div>
             <script src="hotkeys.js"></script>
 
-
-
+            
+            
             <div class="navbar">
                 <div class="dropdown">
                   <button class="dropbtn">Starship
                     <i class="fa fa-caret-down"></i>
                   </button>
-                  <div class="dropdown">
-                                    <button class="dropbtn">Starship
-                                      <i class="fa fa-caret-down"></i>
-                                    </button>
-                                    <div class="dropdown-content">
-                                        <input type="checkbox" id="Game On" name="t"  onclick= "
-                                            key  = 'e';
-                                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                         <label for="Game On">Game On!</label><br>
-                                        <input type="checkbox" id="Star Arms" name="t"  onclick= "
-                                            key  = ' ';
-                                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                         <label for="Star Arms">Star Arms!</label><br>
-                                         <input type="checkbox" id="Fullscreen" name="t"  onclick= "
-                                             key  = 'h';
-                                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                          <label for="Fullscreen">Fullscreen!</label><br>
-                                          <input type="checkbox" id="Verbose" name="t"  onclick= "
-                                              key  = 'v';
-                                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                           <label for="Verbose">Verbose!</label><br>
-                                         <input type="checkbox" id="Volume Speed" name="t"  onclick= "
-                                             key  = 'w';
-                                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                          <label for="Volume Speed">Volume Speed!</label><br>
+                  <div class="dropdown-content">
+                      <input type="checkbox" id="Game On" name="t"  onclick= "
+                          key  = 'e';
+                          callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       <label for="Game On">Game On!</label><br>
+                      <input type="checkbox" id="Star Arms" name="t"  onclick= "
+                          key  = '_';
+                          callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       <label for="Star Arms">Star Arms!</label><br>
+                       <input type="checkbox" id="Fullscreen" name="t"  onclick= "
+                           key  = 'h';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                        <label for="Fullscreen">Fullscreen!</label><br>
+                        <input type="checkbox" id="Verbose" name="t"  onclick= "
+                            key  = 'v';
+                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                         <label for="Verbose">Verbose!</label><br>
+                       <input type="checkbox" id="Volume Speed" name="t"  onclick= "
+                           key  = 'w';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                        <label for="Volume Speed">Volume Speed!</label><br>
+                        
+                      <input type="checkbox" id="Touch" name="t"  onclick= "
+                          key  = 't';
+                          callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       <label for="Touch">Touch!</label><br>
+                       <a id="Cancel Background Noise" name="t"  onclick= "
+                           
+                           key  = 'p';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                           Cancel Background Noise!</a><br>
+                       <a id="Listen Out" name="t"  onclick= "
+                           key  = 'o';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       listen Out!</a><br>
+                       <a id="Listen In" name="t"  onclick= "
+                           key  = 'i';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       listen In!</a><br>
+                       
+                       
+                       <a id="Faster" name="t"  onclick= "
+                           key  = '+';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       Faster!</a><br>
+                       <a id="Slower" name="t"  onclick= "
+                           key  = '-';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       Slower!</a><br>
+                       <a id="Reset Speed" name="t"  onclick= "
+                           key  = '0';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       Reset Speed!</a><br>
+                       
+                  </div>
+                  </div>
+                <div class="dropdown">
+                  <button class="dropbtn">Clovers
+                    <i class="fa fa-caret-down"></i>
+                  </button>
+                  <div class="dropdown-content">
+                      
+                         <a id="Add a petal" name="t"  onclick= "
+                             key  = 'u';
+                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                         Add a petal!</a><br>
+                         <a id="Remove a petal" name="t"  onclick= "
+                             key  = 'y';
+                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                         Remove a petal!</a><br>
+                        <input type="checkbox" id="Center" name="t"  onclick= "
+                            key  = 'c';
+                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                         <label for="Center">Center</label><br>
+                         <input type="checkbox" id="Zoom Static" name="t"  onclick= "
+                             key  = 'l';
+                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                          <label for="Zoom Static">Zoom Static</label><br>
+                          <input type="checkbox" id="Clovers Pop" name="t"  onclick= "
+                              key  = 'n';
+                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                           <label for="Clovers Pop">Clovers Pop?!</label><br>
+                           <input type="checkbox" id="Dancer" name="t"  onclick= "
+                               key  = 's';
+                               callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                            <label for="Dancer">Dancer!</label><br>
+                            
+                                 <input type="checkbox" id="Reverse Colors" name="t"  onclick= "
+                                     key  = ';';
+                                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                                  <label for="Reverse Colors">Reverse Colors!</label><br>
 
-                                        <input type="checkbox" id="Touch" name="t"  onclick= "
-                                            key  = 't';
-                                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                         <label for="Touch">Touch!</label><br>
-                                         <a id="Cancel Background Noise" name="t"  onclick= "
+                        <form>
+                            
+                              <input type="radio" id="OriginalOrange" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=7;">
+                              <label for="OriginalOrange">Original Orange!</label><br>
+                          <input type="radio" id="GreenAndPink" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=2;">
+                          <label for="GreenAndPink">Green and Pink!</label><br>
+                          <input type="radio" id="OddOrange" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=3;">
+                          <label for="OddOrange">Odd Orange!</label><br>
+                          <input type="radio" id="YellowAndPurple" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=4;">
+                          <label for="YellowAndPurple">Yellow and Purple!</label><br>
+                          
+                          <input type="radio" id="BlueAndPink" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=5;">
+                          <label for="BlueAndPink">Blue and Pink!</label><br>
+                          
+                          <input type="radio" id="Glowing" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=6;">
+                          <label for="Glowing">Glowing!</label><br>
+                          
+                            <input type="radio" id="Rainbow" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=1;">
+                            <label for="Rainbow">Rainbow!</label><br>
+                            
+                              <input type="radio" id="Inheritance" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=8;">
+                              <label for="Inheritance">Inheritance!</label><br>
+                        </form>
+                        
+                        <br>
 
-                                             key  = 'p';
-                                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                             Cancel Background Noise!</a><br>
-                                         <a id="Listen Out" name="t"  onclick= "
-                                             key  = 'o';
-                                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                         listen Out!</a><br>
-                                         <a id="Listen In" name="t"  onclick= "
-                                             key  = 'i';
-                                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                         listen In!</a><br>
+                        
+                        <form>
+                          <input type="radio" id="Up" name="carousel" onclick="uniforms[ 'carousel' ].value=-1;">
+                          <label for="Up">Carousel Up!</label><br>
+                          <input type="radio" id="Down" name="carousel" onclick="uniforms[ 'carousel' ].value=1;">
+                          <label for="Down">Carousel Down!</label><br>
+                          <input type="radio" id="Off" name="carousel" onclick="uniforms[ 'carousel' ].value=0;">
+                          <label for="Off">Carousel Off</label>
+                          
+                        </form>
+                        <br>
 
+                        <form>
+                          <input type="radio" id="mUp" name="mcarousel" onclick="uniforms[ 'metaCarousel' ].value=-1;">
+                          <label for="mUp">Meta-Carousel Wise One!</label><br>
+                          <input type="radio" id="mDown" name="mcarousel" onclick="uniforms[ 'metaCarousel' ].value=1;">
+                          <label for="mDown">Meta-Carousel Wise 2!</label><br>
+                          <input type="radio" id="mOff" name="mcarousel" onclick="uniforms[ 'metaCarousel' ].value=0;">
+                          <label for="mOff">Meta-Carousel Off</label>
+                        </form>
+                        <br>
 
-                                         <a id="Faster" name="t"  onclick= "
-                                             key  = '+';
-                                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                         Faster!</a><br>
-                                         <a id="Slower" name="t"  onclick= "
-                                             key  = '-';
-                                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                         Slower!</a><br>
-                                         <a id="Reset Speed" name="t"  onclick= "
-                                             key  = '0';
-                                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                         Reset Speed!</a><br>
-
-                                    </div>
-                                    </div>
-
-
-                                                      <div class="dropdown">
-                                                        <button class="dropbtn">Clovers
-                                                          <i class="fa fa-caret-down"></i>
-                                                        </button>
-                                                        <div class="dropdown-content">
-
-                                                               <a id="Add a petal" name="t"  onclick= "
-                                                                   key  = 'u';
-                                                                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                                               Add a petal!</a><br>
-                                                               <a id="Remove a petal" name="t"  onclick= "
-                                                                   key  = 'y';
-                                                                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                                               Remove a petal!</a><br>
-
-                                                              <input type="checkbox" id="Center" name="t"  onclick= "
-                                                                  key  = 'c';
-                                                                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                                               <label for="Center">Center</label><br>
-                                                               <input type="checkbox" id="Zoom Static" name="t"  onclick= "
-                                                                   key  = 'l';
-                                                                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                                                <label for="Zoom Static">Zoom Static</label><br>
-                                                                <input type="checkbox" id="Clovers Pop" name="t"  onclick= "
-                                                                    key  = 'n';
-                                                                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                                                 <label for="Clovers Pop">Clovers Pop?!</label><br>
-                                                                 <input type="checkbox" id="Dancer" name="t"  onclick= "
-                                                                     key  = 's';
-                                                                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                                                  <label for="Dancer">Dancer!</label><br>
-
-                                                                       <input type="checkbox" id="Reverse Colors" name="t"  onclick= "
-                                                                           key  = ';';
-                                                                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                                                        <label for="Reverse Colors">Reverse Colors!</label><br>
-
-                                                              <form>
-
-                                                                    <input type="radio" id="OriginalOrange" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=7;">
-                                                                    <label for="OriginalOrange">Original Orange!</label><br>
-                                                                <input type="radio" id="GreenAndPink" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=2;">
-                                                                <label for="GreenAndPink">Green and Pink!</label><br>
-                                                                <input type="radio" id="OddOrange" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=3;">
-                                                                <label for="OddOrange">Odd Orange!</label><br>
-                                                                <input type="radio" id="YellowAndPurple" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=4;">
-                                                                <label for="YellowAndPurple">Yellow and Purple!</label><br>
-
-                                                                <input type="radio" id="BlueAndPink" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=5;">
-                                                                <label for="BlueAndPink">Blue and Pink!</label><br>
-
-                                                                <input type="radio" id="Glowing" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=6;">
-                                                                <label for="Glowing">Glowing!</label><br>
-
-                                                                  <input type="radio" id="Rainbow" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=1;">
-                                                                  <label for="Rainbow">Rainbow!</label><br>
-
-                                                                    <input type="radio" id="Inheritance" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=8;">
-                                                                    <label for="Inheritance">Inheritance!</label><br>
-                                                              </form>
-
-                                                              <br>
-
-
-                                                              <form>
-                                                                <input type="radio" id="Up" name="carousel" onclick="uniforms[ 'carousel' ].value=-1;">
-                                                                <label for="Up">Carousel Up!</label><br>
-                                                                <input type="radio" id="Down" name="carousel" onclick="uniforms[ 'carousel' ].value=1;">
-                                                                <label for="Down">Carousel Down!</label><br>
-                                                                <input type="radio" id="Off" name="carousel" onclick="uniforms[ 'carousel' ].value=0;">
-                                                                <label for="Off">Carousel Off</label>
-
-                                                              </form>
-                                                              <br>
-
-                                                              <form>
-                                                                <input type="radio" id="mUp" name="mcarousel" onclick="uniforms[ 'metaCarousel' ].value=-1;">
-                                                                <label for="mUp">Meta-Carousel Wise One!</label><br>
-                                                                <input type="radio" id="mDown" name="mcarousel" onclick="uniforms[ 'metaCarousel' ].value=1;">
-                                                                <label for="mDown">Meta-Carousel Wise 2!</label><br>
-                                                                <input type="radio" id="mOff" name="mcarousel" onclick="uniforms[ 'metaCarousel' ].value=0;">
-                                                                <label for="mOff">Meta-Carousel Off</label>
-                                                              </form>
-                                                              <br>
-
-                                                          <form>
-                                                            <input type="radio" id="SpirallizeOriginal" name="Spirallize" onclick="uniforms[ 'spirated' ].value=1;">
-                                                            <label for="SpirallizeOriginal">Spirallize Original!</label><br>
-                                                            <input type="radio" id="SpirallizeMirror" name="Spirallize" onclick="uniforms[ 'spirated' ].value=-1;">
-                                                            <label for="SpirallizeMirror">Spirallize Mirror!</label><br>
-                                                            <input type="radio" id="SpirallizeOff" name="Spirallize" onclick="uniforms[ 'spirated' ].value=0;">
-                                                            <label for="SpirallizeOff">Spirallize Off</label>
-
-                                                          </form>
-                                                          <br>
-
-                                                                    </div>
-                                                      </div>
-                                                      
+                    <form>
+                      <input type="radio" id="SpirallizeOriginal" name="Spirallize" onclick="uniforms[ 'spirated' ].value=1;">
+                      <label for="SpirallizeOriginal">Spirallize Original!</label><br>
+                      <input type="radio" id="SpirallizeMirror" name="Spirallize" onclick="uniforms[ 'spirated' ].value=-1;">
+                      <label for="SpirallizeMirror">Spirallize Mirror!</label><br>
+                      <input type="radio" id="SpirallizeOff" name="Spirallize" onclick="uniforms[ 'spirated' ].value=0;">
+                      <label for="SpirallizeOff">Spirallize Off</label>
+                      
+                    </form>
+                    
+                              </div>
+                </div>
             </div>
 
-
+                    
                 </div>
-
+                  
                   <script>let n = document.getElementsByName('t');
                       for(var p = 0; p<n.length;p++)n[p].checked  = false; </script>
         <div id="container"></div>
         <script src="OFFLINEonlineSwitch.js"></script>
 
-
-
-
-
-
-
-
-
+            
         <script src="starshipMod.js"></script>
+
+        
+        <div id="score">
+
+        <script src="opensheetmusicdisplay.min.js"></script> <!-- you need to provide the .js file, see README.md-->
+        <div id="osmdCanvas"/>
+
+        <input type="file" id="files"/>
+
+        <output id="list"></output>
+
+        <script src="fileSelectAndLoadOSMD.js"></script>
+
+        </div id="score">
 
 </head>
 <body>
@@ -220,7 +218,7 @@
                 varying vec2 vUv;
 
             void main()    {
-
+  
                 vUv = uv;
                 gl_Position = vec4( position, 1.0 );
             }
@@ -233,7 +231,7 @@
             vec2 spunC=vec2(0.);
 
             uniform vec2 resolution;
-
+               
             uniform int colorCombo;
             uniform bool colorInverter;
 
@@ -245,18 +243,18 @@
             uniform float time2dance;
             uniform int fourCreats;
 
-
+            
             uniform bool MetaCored;
             uniform bool free;
-
+            
             uniform float morph;
-
+            
             uniform float carousel;
             uniform float metaCarousel;
             uniform float petals;
-
+            
             uniform float spirated;
-
+            
             uniform bool hearTOL;
 
             const float gr = 1.6180339;
@@ -321,7 +319,7 @@
                             }
                             return p;
                             }
-
+                        
                             vec3 torso(vec2 g, vec2 t){
                             float b = 0.;
                             vec2 z=g.xy;
@@ -365,8 +363,8 @@
                             return vec3(b/2.,b,b/2.);
                             }
 
-
-
+                                          
+                                          
                         vec2 spin2(vec2 f, float t)
                         {    //https://en.wikipedia.org/wiki/Rotation_matrix
                             float angle =t;
@@ -397,20 +395,16 @@
 
                              float term=0.;
                                if(spirated!=0.)term=(1.-length(freed(coords)))*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
-                               vec2 m=vec2(0.);
-                                if(wheel)m =  (p/lfc-coords.yx)*abs(coresIn/crs*2.-1.);
-                                //this is essentially just p as in the mandelbrot x <== x^2+-p
-
-                                            const float iterations = 100.;
-                                            for (float counter=0.;counter<iterations;counter++)if(abs(s.y)<47.){
+const float iterations = 100.;
+                             for (float counter=0.;counter<iterations;counter++)if(abs(s.y)<47.){
 
                                 if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+3.14159);
                                    colorAccumulator-=s;
 
 
-                                s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y-t.x+m.x, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y-t.y+m.x);//x**3
+                                s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y-t.x, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y-t.y);//x**3
                                 s.x=log(abs(s.x))/log(3.-term);
-
+                                   
                                float d = length(s);
                                if(d<4./3.&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
 
@@ -422,11 +416,11 @@
                                   else if(mod(float(i),4.)==1.)wise=-1.;
                                   else  if(mod(float(i),4.)==2.)wise= -1.;
                                   else  if(mod(float(i),4.)==3.)wise=1.;
-
+                                  
                                   float shift=2.;s*=shift;d*=shift;loops++;
 
                                   if(metaCarousel!=0.)s=spin2(s,time*rate*wise*metaCarousel*(1.+petals/6.));
-
+                                                                                             
 
                                }
                             else break;
@@ -435,8 +429,8 @@
                           }
                             else break;
 
-
-
+                                                                                             
+                                     
 
                                     vec3 o=vec3(s.y);
                              if(colorCombo==7) o=vec3(s.y,s.x/9.5,1.-s.x/12.);
@@ -462,9 +456,9 @@
                               o.g*=abs(-sin(time*gr));
                               o.b*=-sin(time*1./gr);
                                 }
-
+                                                                              
     return clamp(o,0.,1.);}
-
+ 
           vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t);}
           vec3 bod(vec2 p, vec2 t){t*=zoom;return body(p,t)+heart(p,t);}
           vec3 manny(vec2 p, vec2 t){return body(p,t)+heart(p/1.5,t)+face(p,vec2(time,0.))*1.4+shiny(p,vec2(time,0.))/9.;}
@@ -472,11 +466,11 @@
           //function library: manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin
     void main(){
      vec2 p=-((vUv.yx)-.5)/(resolution.xy/max(resolution.x,resolution.y))*3.;
-
-
-
+     
+     
+     
       spunC=coords.yx;
-
+     
      if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time*rate,3.1415927410125732*2.));}
      vec2 backGround=freed(p*zoom+spunC);
      if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time*rate,3.1415927410125732*2.));
@@ -491,13 +485,13 @@ if (morph>.5){float lfc=length(freed(coords));
                                                                                       -((zoom*lfc)/(lfc+zoom)*sign(coords.y)*sign(coords.x)*(1.-lfc*zoom) )
                                                                                         )
                                                                                         ;}
-
+    
     vec3 zoomer=tol(backGround,dance);
     vec3 mny=manny(p*2.+vec2(.5,0.),t);
     gl_FragColor=vec4(mny+
                       clamp(zoomer-(mny.r+mny.b+mny.g)*100.,.0,1.)
               ,1.);}
         </script>
-
+        
     </body>
 </html>
