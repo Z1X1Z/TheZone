@@ -289,13 +289,9 @@ function init() {
 
 
     inputData = new Float32Array(bufferSize);
-    minimumDimension = Math.min(window.innerWidth,window.innerHeight)
-    height=window.innerHeight/minimumDimension;
-    width=window.innerWidth/minimumDimension;
 
-    camera = new THREE.OrthographicCamera( -width, width, height, -height, 1, -1);
-    geometryP = new THREE.PlaneGeometry( 2, 2 );
-    geometryP.z=-1.;
+        renderer = new THREE.WebGLRenderer();
+
 
   uniforms = THREE.UniformsUtils.merge([
   THREE.UniformsLib.lights,
@@ -342,7 +338,19 @@ function init() {
         vertexShader: document.getElementById( 'vertexShader' ).textContent,
         fragmentShader: document.getElementById( 'fragmentShader' ).textContent
       } );
+
+
+
+
+
+
   renderer = new THREE.WebGLRenderer();
+      geometryP = new THREE.PlaneGeometry( 2, 2 );
+      geometryP.z=-1.;
+
+
+
+
       if(window.shaderOn){
             mesh = new THREE.Mesh( geometryP, materialShader );
             scene.add( mesh );
@@ -353,8 +361,8 @@ function init() {
          }
 
   renderer.setPixelRatio( rez);
-  onWindowResize();
-  window.addEventListener( 'resize', onWindowResize, false );
+
+
     if(location.hash.includes("t"))
   {
     touchOnlyMode=true;
@@ -363,21 +371,39 @@ function init() {
     animate();
   }
     else startMic();
-}
+    onWindowResize()
 
+}
+function adjustThreeJSWindow()
+{
+         let correlationForText = document.getElementById("allText").offsetHeight;
+         correlationForText+=document.getElementById("score").offsetHeight;
+         height=window.innerHeight-correlationForText;
+         width=window.innerWidth;
+
+         uniforms.resolution.value.x = width;
+         uniforms.resolution.value.y = height;
+
+      minimumDimension = Math.min(width,height);
+
+      height/=minimumDimension;
+      width/=minimumDimension;
+
+  renderer.setSize( uniforms.resolution.value.x, uniforms.resolution.value.y);
+  camera = new THREE.OrthographicCamera( -width, width, height, -height, 1, -1);
+
+}
+window.addEventListener( 'resize', onWindowResize, false );
 
 function onWindowResize() {
+  if("osmd" in window)
+  {
+      takeNextScoreSlice();
+      osmdResize();//osmdResize defined in fileSelectAndLoadOSMD.js
 
-    minimumDimension = Math.min(window.innerWidth,window.innerHeight)
-    height=window.innerHeight/minimumDimension;
-    width=window.innerWidth/minimumDimension;
+  }
 
-    camera = new THREE.OrthographicCamera( -width, width, height, -height, 1, -1);
-
-       let correlationForText = document.getElementById("allText").offsetHeight;
-    uniforms.resolution.value.x = window.innerWidth;
-    uniforms.resolution.value.y = window.innerHeight-correlationForText;
-    renderer.setSize( window.innerWidth, window.innerHeight-correlationForText);
+adjustThreeJSWindow();
 }
 let point = [];
 
@@ -470,15 +496,124 @@ let targets=[];
 let pG=[];
 let pM=[];
 let lastZoom=1.;
+let lastTimeStamp=0.;
+let noteNumber;
+let lastNoteTimeInScore=0;
+let noteHit=false;
+let timeStampLastNoteEnded=0.;
+let currentMeasure=1;
+let lastCursorMeasure =0;
 
+function takeNextScoreSlice(){
+                    window.osmd.setOptions({
+                      drawFromMeasureNumber: currentMeasure,
+                      drawUpToMeasureNumber:currentMeasure+Math.floor(window.innerWidth/window.innerHeight*3.)
+                      }) // requires re-render
+}
 function animate( timestamp ) {
-                       uniforms[ "time" ].value = Math.fround(timestamp/1000.);
+adjustThreeJSWindow();//mostly for ios here
+
+
+if("osmd" in window){
+
+            //https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/issues/746
+            var nts = osmd.cursor.NotesUnderCursor(0);//the argument 0 hopefully specifies first instrument
+            let noteLength=nts[0].length.realValue
+            let noteExpired =  noteLength<(timestamp-timeStampLastNoteEnded)/1000./4;
+
+            for(var n = 0.; n< nts.length; n++){
+              //console.log(nts[n])
+
+              if( Math.round(noteNumber)==(nts[n].halfTone-8) && noteExpired){//-8 should callibrate from a halfstep count of 48 == C4 natural into concert pitch of A# == 49
+                noteHit=true;
+                timeStampLastNoteEnded=timestamp;
+                }
+
+
+                  let noteToHitColor = new THREE.Color();
+                  noteToHitColor.setHSL((-nts[n].halfTone)%12/12.,1.,.5);
+                  osmd.cursor.NotesUnderCursor()[n].noteheadColor="#"+noteToHitColor.getHexString();;
+            }
+
+
+
+if(currentMeasure<window.osmd.Sheet.SourceMeasures.length)
+  cursorMeasure=window.osmd.cursor.VoicesUnderCursor()[0]
+              .parentSourceStaffEntry.VerticalContainerParent.ParentMeasure.MeasureNumber;//this is the measure number of the cursor
+//else cursorMeasure=window.osmd.Sheet.SourceMeasures.length;
+
+if(cursorMeasure>lastCursorMeasure)  currentMeasure++; //if cursor has moved past a measure mark add 1
+//https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/issues/710
+
+
+
+
+
+//osmd.setOptions({darkMode: true}); // or false. sets defaultColorMusic and PageBackgroundColor.
+osmd.cursor.cursorOptions.color="#"+colorSound.getHexString();//this is a frame behind if it is above colorSounds definition
+osmd.cursor.show();
+
+if(noteHit  && noteExpired){
+  osmd.cursor.next(); // advance the cursor one note
+  //below we are concerned with executing the end of score reset
+  if(cursorMeasure==window.osmd.Sheet.SourceMeasures.length-1
+      &&osmd.cursor.Iterator.EndReached){//-1 cuts of last measure methinks
+  currentMeasure = 1;
+  osmd.cursor.reset();
+  }
+
+
+
+  var notesUnderCursor = osmd.cursor.NotesUnderCursor(0);//the argument 0 hopefully specifies first instrument
+
+              for(var n = 0.; n< notesUnderCursor.length; n++){
+
+                    let noteToHitColor = new THREE.Color();
+                    noteToHitColor.setHSL((-notesUnderCursor[n].halfTone)%12/12.,1.,.5);
+                    notesUnderCursor[n].noteheadColor="#"+noteToHitColor.getHexString();;
+              }
+              takeNextScoreSlice();
+
+  window.osmd.render();
+
+
+                  noteHit=false;
+
+
+
+
+
+
+
+}
+lastCursorMeasure=cursorMeasure;
+
+}//end osmd
+
+
+
+
+
+
+
+
+
+
+
+
+
+    uniforms[ "time" ].value = Math.fround(timestamp/1000.);
+
+
+
+
+
 if (uniforms["MetaCored"].value){
     let precores = .5;
     uniforms[ "centralCores" ].value = Math.log(zoom*3./2.)/Math.log(.5)+1.+precores;
     uniforms[ "externalCores" ].value =uniforms[ "centralCores" ].value*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY)*3./2.)*0.9551195-1.;
   }
-  onWindowResize();//may need to be taken out someday, just for iOS windowing rotation bug
+
 
 
                                                               if(document.visibilityState=="hidden"||lvs=="hidden")lastFrameTime=timestamp;
@@ -517,7 +652,7 @@ if( !window.touchMode&&!touchOnlyMode) {
             averageFrameTotalAmp=[];
         }
     }
-    let noteNumber =  Math.log(lastPitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
+     noteNumber =  Math.log(lastPitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
     if(Math.round(noteNumber) ==-854)noteNumber="undefined";
     let noteNameNumber=Math.floor(Math.round(noteNumber))%12;
     let hour =Math.floor(Math.floor(noteNumber))%12;
