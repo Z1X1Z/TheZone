@@ -412,11 +412,12 @@ correlationForText+=document.getElementById("allText").offsetHeight
             {
                 takeNextScoreSlice(cursorMeasure);
                 osmdResize();//osmdResize defined in fileSelectAndLoadOSMD.js
-
             }
         }
         else//solution to iOS freeze glitch rare
-        {document.getElementById("score").offsetHeight=0;
+        {
+          if("osmd" in window)osmd.render();
+          document.getElementById("score").offsetHeight=0;
         document.getElementById("allText").offsetHeight=0;
         }
 
