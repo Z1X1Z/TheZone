@@ -403,8 +403,8 @@ function onWindowResize() {
 
 let correlationForText;
 
-console.log(correlationForText=document.getElementById("score").offsetHeight)
-console.log(correlationForText+=document.getElementById("allText").offsetHeight)
+correlationForText=document.getElementById("score").offsetHeight
+correlationForText+=document.getElementById("allText").offsetHeight
 
     if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
        {
@@ -526,7 +526,7 @@ adjustThreeJSWindow();//mostly for ios here
 
 
 if("osmd" in window){
-  takeNextScoreSlice(cursorMeasure);
+  takeNextScoreSlice(window.osmd.cursor.Iterator.currentMeasureIndex+1);
   cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
   takeNextScoreSlice(cursorMeasure);
             //https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/issues/746
@@ -537,7 +537,7 @@ if("osmd" in window){
             for(var n = 0.; n< nts.length; n++){
               //console.log(nts[n])
 
-              if(Math.round(noteNumber)==(nts[n].halfTone-8)&& noteExpired){//-8 should callibrate from a halfstep count of 48 == C4 natural into concert pitch of A# == 49
+              if(  Math.round(noteNumber) == nts[n].halfTone-8   && noteExpired){//-8 should callibrate from a halfstep count of 48 == C4 natural into concert pitch of A# == 49
                 noteHit=true;
                 timeStampLastNoteEnded=timestamp;
                 }
@@ -559,8 +559,10 @@ osmd.cursor.show();
 if(noteHit  && noteExpired){
 
 
+
+  takeNextScoreSlice(osmd.cursor.Iterator.currentMeasureIndex+2);
   osmd.cursor.next(); // advance the cursor one note
-  takeNextScoreSlice(osmd.cursor.Iterator.currentMeasureIndex);//took out a +1 don't know why it was there
+  takeNextScoreSlice(osmd.cursor.Iterator.currentMeasureIndex+1);
 
 
 if(osmd.cursor.Iterator.endReached){
@@ -578,7 +580,7 @@ if(osmd.cursor.Iterator.endReached){
                                         noteToHitColor.setHSL((-notesUnderCursor[n].halfTone)%12/12.,1.,.5);
                                         notesUnderCursor[n].noteheadColor="#"+noteToHitColor.getHexString();;
                                   }
-
+                      cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1//this has to be set for osmdRender()
                       onWindowResize();//this calls window.osmd.render() by osmdRender()
 
 
