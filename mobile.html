@@ -256,6 +256,11 @@
             uniform float spirated;
             
             uniform bool hearTOL;
+            
+            uniform bool wheel;
+            uniform bool Refractelate;
+            uniform float centralCores;
+            uniform float externalCores;
 
             const float gr = 1.6180339;
             float zin(float x){return -sin(x);}
@@ -374,61 +379,72 @@
                          return f;
                         }
                         vec2 jc =vec2(0.);// vec2 jc =vec2(-0.5577,- 0.6099);//you can feed in coordinates for p movement to get different cloverfields
+                                          vec3 tol(vec2 p, vec2 t){
+                                               vec2 colorAccumulator =vec2(0.);
+                                               vec3 heartColors = vec3(0.);
+                                               if(spirated>-.5) p.y*=-1.;
+                                               float cored =0.;
+                                               if(MetaCored)cored= log(zoom*3./2.)/log(.5)+1.;
+                                              else cored = centralCores;
+                                               float c = length(p);
+                                               float loops=1.;
+                                                vec2 s=p;
+                                                float coresIn = 1.;
+                                                const float crs = 60.;
+                                               for(int i=1;i<int(crs); i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
+                                                                                     float lfc = length(freed(coords));
 
-                        vec3 tol(vec2 p, vec2 t){
-                                   p= p.yx;
-                             vec2 colorAccumulator =vec2(0.);
+                                               loops=0.;
+                                               float hyperCore=0.;
+                                                 if(MetaCored)hyperCore=cored*2./3.+log(lfc*3./2.)*0.9551195-1.;//.9551195 is based on x=log3(x), x = .910239log*(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
+                                                else hyperCore=externalCores;
+                                                  if(MetaCored&&morph>.5)hyperCore*=4./3.;//engage overstable core if dancing
 
-                             float precores = 0.49;
-                             if(spirated!=0.) precores = 1.;
-                             if(spirated>-.5) p.y*=-1.;
-                             float cored = log(zoom*3./2.)/log(.5)+1.+precores;
-                             float c = length(p);
-                             float loops=1.;
-                              vec2 s=p;
-                                               float coresIn = 1.;
-                             if(MetaCored)for(int i=1;i<60; i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
-                             loops=0.;
-                             float hyperCore=0.;
-                             if(MetaCored&&morph<.5)hyperCore=cored*2./3.+log(length(freed(coords))*3./2.)*0.9551195-1.;
-                             else if(MetaCored)hyperCore=(cored*2./3.+log(length(freed(coords))*3./2.)*0.9551195)*4./3.-1.;
+                                               float term=0.;
+                                               if(spirated!=0.)term=(1.-lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
+                                                                 vec2 m=vec2(0.);
+                                                                  if(wheel)m =  (p/lfc-abs(coords.yx)//try signs with for fibonacci ring pairing and movement distortion #syyym
+                                                                  )*abs(coresIn/crs*2.-1.);
+                                                                  //this is essentially just p as in the mandelbrot x <== x^2+
 
-                             float term=0.;
-                               if(spirated!=0.)term=(1.-length(freed(coords)))*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
-const float iterations = 100.;
-                             for (float counter=0.;counter<iterations;counter++)if(abs(s.y)<47.){
+                                                                              const float iterations = 40.;
+                                                                              float refractelC=1.5;
+                                                                          //  p*=2.*refractelC;
+                                               for (float counter=0.;counter<iterations;counter++)if(abs(s.y)<50.){
+                                                  if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+3.14159);
 
-                                if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+3.14159);
-                                   colorAccumulator-=s;
+                                                     if(colorCombo==8)colorAccumulator+=s;
+                                                     if(Refractelate&&length(s)>refractelC){s/=refractelC;} //refractelC/=4./3.;}
 
+                                                     s=vec2(
+                                                          s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
+                                                         -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
+                                                         );//x**3
+                                                         if(spirated!=0.) s+=m-t;//this is to give the semi-dissipated clovers
+                                                         else s+=t-m;//plus t is lobes, -t is circles with dance
 
-                                s=vec2(s.x*s.x*s.x  - 3.*s.x*s.y*s.y-t.x, -s.y*s.y*s.y+ 3.*s.x*s.x*s.y-t.y);//x**3
-                                s.x=log(abs(s.x))/log(3.-term);
-                                   
-                               float d = length(s);
-                               if(d<4./3.&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
+                                                     if(colorCombo==8)s.x=-1./s.x;//inheritance is the only colorMode that works with manny inverter
 
-                               for(int i=0;i<69; i++)if(MetaCored&&d<2./3.&& loops+counter<hyperCore)
-                                  {
+                                                  s.x=log(abs(s.x))/log(3.-term);
 
-                                  float wise;
-                                  if(mod(float(i),4.)==0.)wise=1.;
-                                  else if(mod(float(i),4.)==1.)wise=-1.;
-                                  else  if(mod(float(i),4.)==2.)wise= -1.;
-                                  else  if(mod(float(i),4.)==3.)wise=1.;
-                                  
-                                  float shift=2.;s*=shift;d*=shift;loops++;
+                                                 float d = length(s);
+                                                 if(d<4./3.&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
+                                                 for(int i=0;i<69; i++)if(d<2./3.&& loops+counter<hyperCore)
+                                              {
+                                                    float shift=2.;s*=shift;d*=shift;loops++;
 
-                                  if(metaCarousel!=0.)s=spin2(s,time*rate*wise*metaCarousel*(1.+petals/6.));
-                                                                                             
+                                                    float wise;
+                                                    if(mod(float(i),4.)==0.)wise=1.;
+                                                    else if(mod(float(i),4.)==1.)wise=-1.;
+                                                    else  if(mod(float(i),4.)==2.)wise= -1.;
+                                                    else  if(mod(float(i),4.)==3.)wise=1.;
 
-                               }
-                            else break;
+                                                    if(metaCarousel!=0.)s=spin2(s,time*wise*metaCarousel*(1.+petals/6.)*rate);
 
+                                                 }
+                                                  else break;
 
-                          }
-                            else break;
-
+                                            }else break;
                                                                                              
                                      
 

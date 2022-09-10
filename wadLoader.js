@@ -69,7 +69,6 @@ function startSound(e){
 
    let y = e.clientY-(window.innerHeight+correlationForText)/2.;
     let x = e.clientX- window.innerWidth/2.;
-    console.log("y: "+y+" x: "+x)
 
     if(window.touchMode)window.pointerZoom=true
 
@@ -127,10 +126,12 @@ if(isFinite(frequency)&&frequency>0.)
 }
                                                              let cycle=0;
 let c = document.getElementById( 'container' );
+
 if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)){
     container.addEventListener('touchstart', function(e)
                                {
         e.stopImmediatePropagation();          //e.preventDefault();
+
 c.focus();//this is to make the panel menu go down on android when you press on the container of the game
         for(var o=0; o<e.changedTouches.length; o++)
         {
