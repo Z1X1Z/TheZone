@@ -410,7 +410,7 @@ correlationForText+=document.getElementById("allText").offsetHeight;
        {
             if("osmd" in window)
             {
-                takeNextScoreSlice(cursorMeasure);
+
                 osmdResize();//osmdResize defined in fileSelectAndLoadOSMD.js
             }
         }
@@ -537,7 +537,7 @@ adjustThreeJSWindow();//mostly for ios here
 
 
 if("osmd" in window){
-  takeNextScoreSlice(window.osmd.cursor.Iterator.currentMeasureIndex+1);
+  //takeNextScoreSlice(window.osmd.cursor.Iterator.currentMeasureIndex+1);
   cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
   takeNextScoreSlice(cursorMeasure);
             //https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/issues/746
@@ -546,7 +546,6 @@ if("osmd" in window){
             let noteExpired =  noteLength<(timestamp-timeStampLastNoteEnded)/1000./4;
 
             for(var n = 0.; n< nts.length; n++){
-              console.log(osmd.cursor.NotesUnderCursor()[0])
 
           if(
               noteExpired&&
@@ -576,18 +575,18 @@ if("osmd" in window){
 
 
 
-if(noteHit  && noteExpired){
+if(true||noteHit  && noteExpired){
 
 
-  takeNextScoreSlice(cursorMeasure);//
+  //takeNextScoreSlice(cursorMeasure);//
   osmd.cursor.next(); // advance the cursor one note
-  takeNextScoreSlice(osmd.cursor.Iterator.currentMeasureIndex+1);
+  //takeNextScoreSlice(osmd.cursor.Iterator.currentMeasureIndex+1);
 
 
 if(osmd.cursor.Iterator.endReached){
   takeNextScoreSlice(1);
   osmd.cursor.reset();
-  takeNextScoreSlice(1);
+  //takeNextScoreSlice(1);
 
                         }
 
@@ -599,8 +598,9 @@ if(osmd.cursor.Iterator.endReached){
                                         noteToHitColor.setHSL((-notesUnderCursor[n].halfTone)%12/12.,1.,.5);
                                         notesUnderCursor[n].noteheadColor="#"+noteToHitColor.getHexString();;
                                   }
-                      cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1//this has to be set for osmdRender()
-                      onWindowResize();//this calls window.osmd.render() by osmdRender()
+                      cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1//this has to be set for osmdResize()
+                                                              takeNextScoreSlice(cursorMeasure);
+                                                              onWindowResize();//this calls window.osmd.render() by osmdResize()
 
 
                   noteHit=false;
