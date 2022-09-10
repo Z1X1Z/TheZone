@@ -525,6 +525,7 @@ let noteHit=false;
 let timeStampLastNoteEnded=0.;
 let currentMeasure=1;
 let cursorMeasure=1;
+let scoreColorInversion = false;
 function takeNextScoreSlice(start){
                     window.osmd.setOptions({
                       drawFromMeasureNumber: start,
@@ -546,7 +547,7 @@ if("osmd" in window){
             for(var n = 0.; n< nts.length; n++){
 
           if(
-              noteExpired&&
+
               (Math.round(noteNumber)%12 == (nts[n].halfTone-8)%12
                 //-8 should callibrate from a halfstep count of 48 == C4 natural into concert pitch of A# == 49
                     ||osmd.cursor.NotesUnderCursor()[0].isRestFlag//exempt from having to hit the note if rest or cue
@@ -555,7 +556,6 @@ if("osmd" in window){
             )
                     {
                       noteHit=true;
-                      timeStampLastNoteEnded=timestamp;
                     }
 
 
@@ -572,13 +572,16 @@ if("osmd" in window){
 //https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/issues/710
 
 
-
-if(noteHit){
+if(noteExpired&&noteHit){
 
 
   osmd.cursor.next(); // advance the cursor one note
 
 if(osmd.cursor.Iterator.endReached){
+
+  osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
+  scoreColorInversion= !scoreColorInversion;
+
   takeNextScoreSlice(1);
   osmd.cursor.reset();
                         }
@@ -598,6 +601,7 @@ if(osmd.cursor.Iterator.endReached){
 
 
                   noteHit=false;
+                  timeStampLastNoteEnded=timestamp;
 
 
 
@@ -606,15 +610,12 @@ if(osmd.cursor.Iterator.endReached){
 
 
 
-                  osmd.setOptions({darkMode: true}); // or false. sets defaultColorMusic and PageBackgroundColor.
                   osmd.cursor.cursorOptions.color="#"+colorSound.getHexString();//this is a frame behind if it is above colorSounds definition
                   osmd.cursor.show();
 
 cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
 
 }//end osmd
-
-
 
 
 
