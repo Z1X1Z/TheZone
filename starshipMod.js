@@ -403,8 +403,8 @@ function onWindowResize() {
 
 let correlationForText;
 
-correlationForText=document.getElementById("score").offsetHeight
-correlationForText+=document.getElementById("allText").offsetHeight
+correlationForText=document.getElementById("score").offsetHeight;
+correlationForText+=document.getElementById("allText").offsetHeight;
 
     if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
        {
@@ -421,7 +421,10 @@ correlationForText+=document.getElementById("allText").offsetHeight
         document.getElementById("allText").offsetHeight=0;
         }
 
-
+        //reset correlation for osmd adjusted size
+        correlationForText=document.getElementById("score").offsetHeight;
+        correlationForText+=document.getElementById("allText").offsetHeight;
+        if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
             adjustThreeJSWindow();
 
   }
