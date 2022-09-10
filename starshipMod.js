@@ -634,8 +634,7 @@ cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the me
 
 
 if (uniforms["MetaCored"].value){
-    let precores = .5;
-    uniforms[ "centralCores" ].value = Math.log(zoom*3./2.)/Math.log(.5)+1.+precores;
+    uniforms[ "centralCores" ].value = Math.log(zoom*3./2.)/Math.log(.5)+1.;
     uniforms[ "externalCores" ].value =uniforms[ "centralCores" ].value*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY)*3./2.)*0.9551195-1.;
   }
 
