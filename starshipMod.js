@@ -4,7 +4,7 @@ function stallTillTHREE(){
 
 
         init();
-    }else setTimeout(stallTillTHREE,10);}
+    }else setTimeout(stallTillTHREE,10);}//setTimeout waits for 10ms then runs stallTillTHREE();
 stallTillTHREE();//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
 //document.head.addEventListener('beforeunload', event => { cancelAnimationFrame();});
 let screenPressCoordX, screenPressCoordY;
@@ -371,8 +371,8 @@ function init() {
     animate();
   }
     else startMic();
-    onWindowResize()
 
+    onWindowResize()
 }
 function adjustThreeJSWindow()
 {
@@ -410,7 +410,6 @@ correlationForText+=document.getElementById("allText").offsetHeight;
        {
             if("osmd" in window)
             {
-
                 osmdResize();//osmdResize defined in fileSelectAndLoadOSMD.js
             }
         }
@@ -424,7 +423,7 @@ correlationForText+=document.getElementById("allText").offsetHeight;
         //reset correlation for osmd adjusted size
         correlationForText=document.getElementById("score").offsetHeight;
         correlationForText+=document.getElementById("allText").offsetHeight;
-        if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
+        //if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
             adjustThreeJSWindow();
 
   }
@@ -541,10 +540,9 @@ if("osmd" in window){
   cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
   takeNextScoreSlice(cursorMeasure);
             //https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/issues/746
-            var nts = osmd.cursor.NotesUnderCursor(0);//the argument 0 hopefully specifies first instrument
+            var nts = osmd.cursor.NotesUnderCursor();//the argument 0 hopefully specifies first instrument
             let noteLength=nts[0].length.realValue
             let noteExpired =  noteLength<(timestamp-timeStampLastNoteEnded)/1000./4;
-
             for(var n = 0.; n< nts.length; n++){
 
           if(
@@ -575,22 +573,18 @@ if("osmd" in window){
 
 
 
-if(noteHit  && noteExpired){
+if(noteHit){
 
 
-  //takeNextScoreSlice(cursorMeasure);//
   osmd.cursor.next(); // advance the cursor one note
-  //takeNextScoreSlice(osmd.cursor.Iterator.currentMeasureIndex+1);
-
 
 if(osmd.cursor.Iterator.endReached){
   takeNextScoreSlice(1);
   osmd.cursor.reset();
-  //takeNextScoreSlice(1);
-
                         }
 
-                      var notesUnderCursor = osmd.cursor.NotesUnderCursor(0);//the argument 0 hopefully specifies first instrument
+
+                      var notesUnderCursor = osmd.cursor.NotesUnderCursor();//the argument 0 hopefully specifies first instrument
 
                                   for(var n = 0.; n< notesUnderCursor.length; n++){
 
@@ -598,9 +592,9 @@ if(osmd.cursor.Iterator.endReached){
                                         noteToHitColor.setHSL((-notesUnderCursor[n].halfTone)%12/12.,1.,.5);
                                         notesUnderCursor[n].noteheadColor="#"+noteToHitColor.getHexString();;
                                   }
-                      cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1//this has to be set for osmdResize()
-                                                              takeNextScoreSlice(cursorMeasure);
-                                                              onWindowResize();//this calls window.osmd.render() by osmdResize()
+                      cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1;
+                      takeNextScoreSlice(cursorMeasure);
+                      onWindowResize();//this calls window.osmd.render() by osmdResize()
 
 
                   noteHit=false;
