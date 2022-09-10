@@ -575,7 +575,7 @@ if("osmd" in window){
 
 
 
-if(true||noteHit  && noteExpired){
+if(noteHit  && noteExpired){
 
 
   //takeNextScoreSlice(cursorMeasure);//
