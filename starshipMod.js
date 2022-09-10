@@ -200,7 +200,7 @@ else reset++
 
 
 
-    if(pitch!=1){lastPitch = pitch;pitchFound=true;}
+    if(pitch!=1){lastPitch = pitch;pitchFound=true;}//here we update lastPitch but only if!
     else pitchFound=false;
 
     pitch=lastPitch;
@@ -416,9 +416,9 @@ correlationForText+=document.getElementById("allText").offsetHeight;
         }
         else//solution to iOS freeze glitch rare
         {
-          if("osmd" in window)osmd.render();
           document.getElementById("score").offsetHeight=0;
         document.getElementById("allText").offsetHeight=0;
+        if("osmd" in window)osmd.render();
         }
 
         //reset correlation for osmd adjusted size
@@ -546,12 +546,23 @@ if("osmd" in window){
             let noteExpired =  noteLength<(timestamp-timeStampLastNoteEnded)/1000./4;
 
             for(var n = 0.; n< nts.length; n++){
-              //console.log(nts[n])
+              console.log(osmd.cursor.NotesUnderCursor()[0])
 
-              if(  (Math.round(noteNumber))%12 == (nts[n].halfTone-8)%12   && noteExpired){//-8 should callibrate from a halfstep count of 48 == C4 natural into concert pitch of A# == 49
-                noteHit=true;
-                timeStampLastNoteEnded=timestamp;
-                }
+          if(
+              noteExpired&&
+              (Math.round(noteNumber)%12 == (nts[n].halfTone-8)%12
+                //-8 should callibrate from a halfstep count of 48 == C4 natural into concert pitch of A# == 49
+                    ||osmd.cursor.NotesUnderCursor()[0].isRestFlag//exempt from having to hit the note if rest or cue
+                    ||osmd.cursor.NotesUnderCursor()[0].isCueNote
+                )
+            )
+                    {
+                      noteHit=true;
+                      timeStampLastNoteEnded=timestamp;
+                    }
+
+
+
 
 
                   let noteToHitColor = new THREE.Color();
@@ -947,11 +958,11 @@ else if (circleY<-height)circleY=height;
 
 
 circleGeometry = new THREE.CircleGeometry( dotSize, 32,1 );
-circleGeometry.computeBoundingBox ();
+//circleGeometry.computeBoundingBox ();
 circleMaterial = new THREE.MeshBasicMaterial( { color: colorSound} );
 
 circle = new THREE.Mesh( circleGeometry, circleMaterial );
-circle.position.set(circleX,circleY,-.998);
+circle.position.set(circleX,circleY,-1.);
 scene.add( circle );
 
                    let colorBlack= new THREE.Color();
