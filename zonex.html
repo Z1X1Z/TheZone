@@ -194,7 +194,7 @@ void main(){
                               vec2 z=p;
                               vec2 lz;
       const float iterations =  21.*21.;
-          for (float f=0.;f<iterations;f+=1.)if(f>(-sin(time2dance/iterations*2.)+1.)/2.*iterations*.25+.75||colorCombo!=11){if(length(z)>thresh&&colorCombo!=18)break;
+          for (float f=0.;f<iterations;f+=1.)if(f>(-sin(time/4.)+1.)/2.*iterations*.25+.75||colorCombo!=11){if(length(z)>thresh&&colorCombo!=18)break;
           else{
               lz=z;
               if(colorCombo==18)if(length(z)>c)z/=c;
