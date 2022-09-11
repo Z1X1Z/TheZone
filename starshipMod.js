@@ -1049,7 +1049,7 @@ if(!zoomAtl41)
 
       }//end touch mode centerOfDotToEdge
 
-
+let thelastnotehit;
 
 //Here starts OPEN SHEET MUSIC DISPLAY score code
 if("osmd" in window){
