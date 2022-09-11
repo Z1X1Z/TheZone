@@ -536,92 +536,6 @@ function animate( timestamp ) {
 adjustThreeJSWindow();//mostly for ios here
 
 
-if("osmd" in window){
-  //takeNextScoreSlice(window.osmd.cursor.Iterator.currentMeasureIndex+1);
-  cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
-  takeNextScoreSlice(cursorMeasure);
-            //https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/issues/746
-            var nts = osmd.cursor.NotesUnderCursor();//the argument 0 hopefully specifies first instrument
-            let noteLength=nts[0].length.realValue
-            let noteExpired =  noteLength<(timestamp-timeStampLastNoteEnded)/1000./4;
-            for(var n = 0.; n< nts.length; n++){
-
-          if(
-
-              (Math.round(noteNumber)%12 == (nts[n].halfTone-8)%12
-                //-8 should callibrate from a halfstep count of 48 == C4 natural into concert pitch of A# == 49
-                    ||osmd.cursor.NotesUnderCursor()[0].isRestFlag//exempt from having to hit the note if rest or cue
-                    ||osmd.cursor.NotesUnderCursor()[0].isCueNote
-                )
-            )
-                    {
-                      noteHit=true;
-                    }
-
-
-
-
-
-                  let noteToHitColor = new THREE.Color();
-                  noteToHitColor.setHSL((-nts[n].halfTone)%12/12.,1.,.5);
-                  osmd.cursor.NotesUnderCursor()[n].noteheadColor="#"+noteToHitColor.getHexString();;
-            }
-
-
-
-//https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/issues/710
-
-
-if(noteExpired&&noteHit){
-
-
-  osmd.cursor.next(); // advance the cursor one note
-
-if(osmd.cursor.Iterator.endReached){
-
-  osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
-  scoreColorInversion= !scoreColorInversion;
-
-  takeNextScoreSlice(1);
-  osmd.cursor.reset();
-                        }
-
-
-                      var notesUnderCursor = osmd.cursor.NotesUnderCursor();//the argument 0 hopefully specifies first instrument
-
-                                  for(var n = 0.; n< notesUnderCursor.length; n++){
-
-                                        let noteToHitColor = new THREE.Color();
-                                        noteToHitColor.setHSL((-notesUnderCursor[n].halfTone)%12/12.,1.,.5);
-                                        notesUnderCursor[n].noteheadColor="#"+noteToHitColor.getHexString();;
-                                  }
-                      cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1;
-                      takeNextScoreSlice(cursorMeasure);
-                      onWindowResize();//this calls window.osmd.render() by osmdResize()
-
-
-                  noteHit=false;
-                  timeStampLastNoteEnded=timestamp;
-
-
-
-
-}
-
-
-
-                  osmd.cursor.cursorOptions.color="#"+colorSound.getHexString();//this is a frame behind if it is above colorSounds definition
-                  osmd.cursor.show();
-
-cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
-
-}//end osmd
-
-
-
-
-
-
 
 
 
@@ -1133,7 +1047,101 @@ if(!zoomAtl41)
           uniforms.coords.value.y = coordY;
         renderer.render( scene, camera );
 
-        }
+      }//end touch mode centerOfDotToEdge
+
+
+
+//Here starts OPEN SHEET MUSIC DISPLAY score code
+if("osmd" in window){
+        //takeNextScoreSlice(window.osmd.cursor.Iterator.currentMeasureIndex+1);
+        cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
+        takeNextScoreSlice(cursorMeasure);
+                  //https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/issues/746
+                  var nts = osmd.cursor.NotesUnderCursor();//the argument 0 hopefully specifies first instrument
+                  let noteLength=nts[0].length.realValue
+                  let noteExpired =  noteLength<(timestamp-timeStampLastNoteEnded)/1000./4;
+                  for(var n = 0.; n< nts.length; n++){
+                    let noteOfScore=(nts[n].halfTone-8)%12;
+                    let  notesDifferent = (noteOfScore != thelastnotehit);
+                if(
+
+                    (noteExpired|| !notesDifferent) //let you hit the next note before the last note finishes unless the notes are the same just once
+                  &&  (Math.round(noteNumber)%12 ==noteOfScore
+                      //-8 should callibrate from a halfstep count of 48 == C4 natural into concert pitch of A# == 49
+                          ||osmd.cursor.NotesUnderCursor()[0].isRestFlag//exempt from having to hit the note if rest or cue
+                          ||osmd.cursor.NotesUnderCursor()[0].isCueNote
+                      )
+                  )
+                          {
+                            thelastnotehit = nts[n].halfTone-8;
+                            noteHit=true;
+                            break;
+                          }
+
+
+
+
+
+                        let noteToHitColor = new THREE.Color();
+                        noteToHitColor.setHSL((-nts[n].halfTone)%12/12.,1.,.5);
+                        osmd.cursor.NotesUnderCursor()[n].noteheadColor="#"+noteToHitColor.getHexString();;
+                  }
+
+
+
+      //https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/issues/710
+
+
+      if(noteExpired&&noteHit){
+
+
+        osmd.cursor.next(); // advance the cursor one note
+
+      if(osmd.cursor.Iterator.endReached){
+
+        osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
+        scoreColorInversion= !scoreColorInversion;
+
+        takeNextScoreSlice(1);
+        osmd.cursor.reset();
+                              }
+
+
+                            var notesUnderCursor = osmd.cursor.NotesUnderCursor();//the argument 0 hopefully specifies first instrument
+
+                                        for(var n = 0.; n< notesUnderCursor.length; n++){
+
+                                              let noteToHitColor = new THREE.Color();
+                                              noteToHitColor.setHSL((-notesUnderCursor[n].halfTone)%12/12.,1.,.5);
+                                              notesUnderCursor[n].noteheadColor="#"+noteToHitColor.getHexString();;
+                                        }
+                            cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1;
+                            takeNextScoreSlice(cursorMeasure);
+                            onWindowResize();//this calls window.osmd.render() by osmdResize()
+
+
+                        noteHit=false;
+                        timeStampLastNoteEnded=timestamp;
+
+
+
+
+      }
+
+
+
+                        osmd.cursor.cursorOptions.color="#"+colorSound.getHexString();//this is a frame behind if it is above colorSounds definition
+                        osmd.cursor.show();
+
+      cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
+
+      }//end osmd
+
+
+
+
+
+
 
                                                                                            window.requestAnimationFrame( animate );
 }

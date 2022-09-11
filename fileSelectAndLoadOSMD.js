@@ -1,10 +1,10 @@
 function osmdResize()
         {
-          osmd.zoom=Math.min(window.innerHeight,window.innerWidth)/743.;
-    window.osmd.render();
+          osmd.zoom=Math.min(window.innerHeight,window.innerWidth)/700;
+          window.osmd.render();
         }
 function handleFileSelect(evt) {
-    var maxOSMDDisplays = 10; // how many scores can be displayed at once (in a vertical layout)
+    var maxOSMDDisplays = 1; // how many scores can be displayed at once (in a vertical layout)
     var files = evt.target.files; // FileList object
     var osmdDisplays = Math.min(files.length, maxOSMDDisplays);
 
@@ -27,11 +27,11 @@ function handleFileSelect(evt) {
           var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvas", {
             // set options here
 //https://wordpress.org/plugins/opensheetmusicdisplay/
-               width:window.width,//doesn't seem to work
+              // width:window.innerWidth,
               drawTitle:false, drawSubtitle:false, drawComposer:false, drawLyricist:false,
               drawMetronomeMarks:false, drawPartNames:false, drawPartAbbreviations:true,
               drawMeasureNumbers:true, drawMeasureNumbersOnlyAtSystemStart:true, drawTimeSignatures:true,
-              autoResize: true,
+              autoResize: false,
             backend: "svg",
             drawFromMeasureNumber: 1,
             drawUpToMeasureNumber: 1.+Math.floor(window.innerWidth/window.innerHeight*2)// draw all measures, up to the end of the sample
@@ -50,7 +50,7 @@ function handleFileSelect(evt) {
 
                 window.osmd = osmd; // give access to osmd object in Browser console, e.g. for osmd.setOptions()
                 //osmdResize();
-                onWindowResize()//this is from starshipMod.js
+                onWindowResize()//this calls osmdResize() who calls osmd.render(). It is from starshipMod.js so we need it to load after that is loaded in x.html
 
                 //console.log("e.target.result: " + e.target.result);
                  osmd.cursor.show(); // this would show the cursor on the first note

@@ -14,8 +14,8 @@ body, head {
 #textWindow{    line-height: .878;}
 #score{
     background-color: #fff;
-    line-height: 1.;//does nothing
-    height:auto;
+    touch-action: none;
+    /*height:100px;*/
   }
 
 button {
