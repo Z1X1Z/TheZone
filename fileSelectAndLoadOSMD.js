@@ -1,3 +1,9 @@
+document.getElementById("score").onpointerdown=
+function(event){
+  event.stopImmediatePropagation();
+  event.preventDefault();
+};
+
 function osmdResize()
         {
           osmd.zoom=Math.min(window.innerHeight,window.innerWidth)/700;
