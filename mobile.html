@@ -384,7 +384,7 @@ vec3 tol(vec2 p, vec2 t){
      vec3 heartColors = vec3(0.);
      if(spirated>-.5) p.y*=-1.;
      float cored =0.;
-     if(MetaCored)cored= log(zoom)/log(.5);
+     if(MetaCored)cored= log(zoom)/log(.5)+1.;
      else cored = centralCores;
      float c = length(p);
      float loops=1.;
