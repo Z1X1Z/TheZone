@@ -548,8 +548,8 @@ adjustThreeJSWindow();//mostly for ios here
 
 
 if (uniforms["MetaCored"].value){
-    uniforms[ "centralCores" ].value = Math.log(zoom*3./2.)/Math.log(.5)+1.;
-    uniforms[ "externalCores" ].value =uniforms[ "centralCores" ].value*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY)*3./2.)*0.9551195-1.;
+    uniforms[ "centralCores" ].value = Math.log(zoom)/Math.log(.5);
+    uniforms[ "externalCores" ].value =uniforms[ "centralCores" ].value*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*0.9551195;
   }
 
 
