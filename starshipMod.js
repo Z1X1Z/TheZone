@@ -324,7 +324,7 @@ function init() {
       time2dance: {value: 0.0 },
       resolution: {value: new THREE.Vector2() },
       coords: {value: new THREE.Vector2() },
-
+Clovoid:{value:false}
     }
   ]);
   uniforms.resolution.value.x = window.innerWidth;
