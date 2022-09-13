@@ -345,6 +345,7 @@
             uniform float centralCores;
             uniform float externalCores;
 
+            uniform bool Clovoid;
             vec2 spunC=vec2(0.);
 
             float zin(float x){return -sin(x);}
@@ -759,8 +760,8 @@
                                        );//x**3
                                        if(spirated!=0.) s+=m-t;//this is to give the semi-dissipated clovers
                                        else s+=t-m;//plus t is lobes, -t is circles with dance
-                                       if(colorCombo==8)s.x=-1./s.x;
-                                   //if(Clovoid)s.x=-(sqrt(2.*abs(1./s.x)));//inheritance is the only colorMode that works with manny inverter
+                                   if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the face then body steps
+                                   else if(colorCombo==8)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only colorMode that works (well) with manny inverter so far
 
                                 s.x=log(abs(s.x))/log(3.-term);
 

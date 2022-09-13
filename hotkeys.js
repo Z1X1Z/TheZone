@@ -45,6 +45,7 @@ function callKey(event){
         {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
       else if (key=="m") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
       else if (key=="!")uniforms[ "Refractelate" ].value=!uniforms[ "Refractelate" ].value;
+      else if (key=="@")uniforms[ "Clovoid" ].value=!uniforms[ "Clovoid" ].value;
 
       else if (key=="q") {
           if          ( uniforms[ "colorCombo" ].value >8)          uniforms[ "colorCombo" ].value = 1;
