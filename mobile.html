@@ -261,7 +261,7 @@
             uniform bool Refractelate;
             uniform float centralCores;
             uniform float externalCores;
-
+uniform bool Clovoid;
             const float gr = 1.6180339;
             float zin(float x){return -sin(x);}
             float coz(float x){return -cos(x);}
@@ -424,7 +424,7 @@ vec3 tol(vec2 p, vec2 t){
                else s+=t-m;//plus t is lobes, -t is circles with dance
 
 
-               if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the face then body steps
+               if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the body steps on the clover
                else if(colorCombo==8)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only colorMode that works (well) with manny inverter so far
 
 
