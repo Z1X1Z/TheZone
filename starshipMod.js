@@ -611,7 +611,7 @@ if( !window.touchMode&&!touchOnlyMode) {
      let cents = Math.round((noteNumber-Math.round(noteNumber))*100);
      let fr = Math.round(pitch);
      let n_n = Math.round(noteNumber);
-     let cores = Math.floor(Math.log(zoom*3./2.)/Math.log(.5)+1.);
+     let cores = Math.floor(uniforms["centralCores"].value);
       if(textON)document.getElementById("textWindow").innerHTML =
 "<div sytle='font-size: 16px;'>"+
 
