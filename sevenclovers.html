@@ -347,10 +347,9 @@
 
             uniform bool Clovoid;
             vec2 spunC=vec2(0.);
-
+            const float gr=-cos(216.)/-cos(612.)-1.;
             float zin(float x){return -sin(x);}
             float coz(float x){return -cos(x);}
-                      const float gr=-cos(216.)/-cos(612.)-1.;
         vec2 freed(vec2 p){
             if(free){
                 float shift = 3.;
@@ -726,15 +725,15 @@
                             else cored = centralCores;
                              float c = length(p);
                              float loops=1.;
-                              vec2 s=p;
+                              vec2 o=p;
                               float coresIn = 1.;
                               const float crs = 60.;
-                             for(int i=1;i<int(crs); i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
+                             for(int i=1;i<int(crs); i++)if(c<2./3.&&loops<cored){o*=2.;c*=2.;loops++;coresIn++;}else break;
                                                                    float lfc = length(freed(coords));
 
                              loops=0.;
                              float hyperCore=0.;
-                               if(MetaCored)hyperCore=cored*2./3.+log(lfc)*0.9551195;//.9551195 is based on x=log3(x), x = .910239log*(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
+                               if(MetaCored)hyperCore=cored*2./3.+log(lfc)*0.9551195-1.;//.9551195 is based on x=log3(x), x = .910239log*(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
                               else hyperCore=externalCores;
                                 if(MetaCored&&morph>.5)hyperCore*=4./3.;//engage overstable core if dancing
 
@@ -748,28 +747,28 @@
                                                             const float iterations = 200.;
                                                             float refractelC=1.5;
                                                         //  p*=2.*refractelC;
-                             for (float counter=0.;counter<iterations;counter++)if(abs(s.y)<50.){
-                                if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+3.14159);
+                             for (float counter=0.;counter<iterations;counter++)if(abs(o.y)<50.){
+                                if(spirated!=0.&&length(o)<2./3.)   o*=length(o)*6.28/(atan(o.y,o.x)+3.14159);
 
-                                   if(colorCombo==8)colorAccumulator+=s;
-                                   if(Refractelate&&length(s)>refractelC){s/=refractelC;} //refractelC/=4./3.;}
+                                   if(colorCombo==8)colorAccumulator+=o;
+                                   if(Refractelate&&length(o)>refractelC){o/=refractelC;} //refractelC/=4./3.;}
 
-                                   s=vec2(
-                                        s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
-                                       -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
+                                   o=vec2(
+                                        o.x*o.x*o.x  - 3.*o.x*o.y*o.y,
+                                       -o.y*o.y*o.y+ 3.*o.x*o.x*o.y
                                        );//x**3
-                                       if(spirated!=0.) s+=m-t;//this is to give the semi-dissipated clovers
-                                       else s+=t-m;//plus t is lobes, -t is circles with dance
-                                   if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the face then body steps
-                                   else if(colorCombo==8)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only colorMode that works (well) with manny inverter so far
+                                       if(spirated!=0.) o+=m-t;//this is to give the semi-dissipated clovers
+                                       else o+=t-m;//plus t is lobes, -t is circles with dance
+                                   if(Clovoid)o.x=(sqrt(2.*abs(1./o.x)));//this is the face then body steps
+                                   else if(colorCombo==8)o.x=-1./o.x;//this is just the face (without or with +c), inheritance is the only colorMode that works (well) with manny inverter so far
 
-                                s.x=log(abs(s.x))/log(3.-term);
+                                o.x=log(abs(o.x))/log(3.-term);
 
-                               float d = length(s);
-                               if(d<4./3.&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
+                               float d = length(o);
+                               if(d<4./3.&&petals!=0.)o=spin2(o,atan(o.y,o.x)*petals/6.);
                                for(int i=0;i<69; i++)if(d<2./3.&& loops+counter<hyperCore)
                             {
-                                  float shift=2.;s*=shift;d*=shift;loops++;
+                                  float shift=2.;o*=shift;d*=shift;loops++;
 
                                   float wise;
                                   if(mod(float(i),4.)==0.)wise=1.;
@@ -777,29 +776,30 @@
                                   else  if(mod(float(i),4.)==2.)wise= -1.;
                                   else  if(mod(float(i),4.)==3.)wise=1.;
 
-                                  if(metaCarousel!=0.)s=spin2(s,time*wise*metaCarousel*(1.+petals/6.)*rate);
+                                  if(metaCarousel!=0.)o=spin2(o,time*wise*metaCarousel*(1.+petals/6.)*rate);
 
                                }
                                 else break;
 
                           }else break;
 
-                             vec3 o=vec3(s.y);
-                             if(colorCombo==7) o=vec3(s.y,s.x/10.,1.-s.x/12.);
-                             else if(colorCombo==2) o=vec3(s.y/100.-s.x*s.y/888.+s.y/50000.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.+s.y/50000.);
-                             else if(colorCombo==3) o= vec3(s.x/8.-s.y/s.x/7000.,1.-s.x/16.,s.y/100.);
-                             else if(colorCombo==4) o= vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.);
-                             else if(colorCombo==5)  o=vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.);
-                             else if(colorCombo==6) o=  vec3(-sin(time*1.)*s.y/100.-sin(time*gr)*s.x*s.y/888.,s.x/8.-sin(time*(-gr+1.))*s.y/s.x/2000.,1.-sin(time*(gr+1.))*s.x/20.);
+                            vec2 s = o;
+                             vec3 a=vec3(s.y);
+                             if(colorCombo==7) a=vec3(s.y,s.x/10.,1.-s.x/12.);
+                             else if(colorCombo==2) a=vec3(s.y/100.-s.x*s.y/888.+s.y/50000.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.+s.y/50000.);
+                             else if(colorCombo==3) a= vec3(s.x/8.-s.y/s.x/7000.,1.-s.x/16.,s.y/100.);
+                             else if(colorCombo==4) a= vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.);
+                             else if(colorCombo==5) a=vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.);
+                             else if(colorCombo==6) a=  vec3(-sin(time*1.)*s.y/100.-sin(time*gr)*s.x*s.y/888.,s.x/8.-sin(time*(-gr+1.))*s.y/s.x/2000.,1.-sin(time*(gr+1.))*s.x/20.);
                             else if(colorCombo==1) {
 
-                                      o= ((vec3(s.y/125.-s.x*s.y/888.+s.y/25000.,s.x/8.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
+                                      a= ((vec3(s.y/125.-s.x*s.y/888.+s.y/25000.,s.x/8.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
                                                    *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
                                                    *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
 
                                                 /* o/= max(max(o.r,o.g),o.b);
                                                  o=o*.5+.5; */
-                                                o=1.-o;
+                                                a=1.-a;
                                                         }
                                      else if(colorCombo==8) {
                                     //   if(wheel)heartColors=(vec3(s.x*s.y,s.x+.2,s.y-.3*(1.-s.x))+.3)/length(s);
@@ -807,27 +807,27 @@
                                      float colorFlip=-abs(coresIn-crs/2.)*sign(coresIn/crs*2.-1.);
                                            s=colorAccumulator*(coresIn/crs*2.-1.);
 
-                                                    o=((coresIn-(crs/2.))/(crs/2.)-vec3(-s.x,s.y,-s.x*s.y).zxy//try swizzling these
+                                                    a=((coresIn-(crs/2.))/(crs/2.)-vec3(-s.x,s.y,-s.x*s.y).zxy//try swizzling these
                                                     *sign(crs/2.-coresIn))
                                                     *(1.-vec3(s.y-s.x*s.y/888.+s.y/25000.,s.x/8.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
                                                                  *vec3(1.-s.x/15.,s.x/8.-s.y/s.x/20.,-abs(s.y)/35.-s.x*s.y/100.)
                                                                  *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/200.))
                                                                ;
-                                                              /*  if(wheel){     o/= max(max(o.r,o.g),o.b);
-                                                                       o=.5+o/2.;
+                                                              /*  if(wheel){     a/= max(max(a.r,a.g),a.b);
+                                                                       a=.5+a/2.;
                                                                         }
                                                                         */
-                                                          //    o+=heartColors/iterations;
+                                                          //    a+=heartColors/iterations;
 
 
                                       }
                   if(colorInverter==true){
-                              o.r*=-sin(time);
-                              o.g*=abs(-sin(time*gr));
-                              o.b*=-sin(time*1./gr);
+                              a.r*=-sin(time);
+                              a.g*=abs(-sin(time*gr));
+                              a.b*=-sin(time*1./gr);
                                 }
 
-    return clamp(o,0.,1.);}
+    return clamp(a,0.,1.);}
 
 
 

@@ -396,7 +396,7 @@ vec3 tol(vec2 p, vec2 t){
 
      loops=0.;
      float hyperCore=0.;
-       if(MetaCored)hyperCore=cored*2./3.+log(lfc)*0.9551195;//.9551195 is based on x=log3(x), x = .910239log*(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
+       if(MetaCored)hyperCore=cored*2./3.+log(lfc)*0.9551195-1.;//.9551195 is based on x=log3(x), x = .910239log*(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
       else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
         if(MetaCored&&morph>.5)hyperCore*=4./3.;//engage overstable core if dancing
 
