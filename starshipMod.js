@@ -562,6 +562,7 @@ if (uniforms["MetaCored"].value){
                                                               if(document.visibilityState=="hidden"||lvs=="hidden")lastFrameTime=timestamp;
                                                               lvs=document.visibilityState
                                                               interpolation = (timestamp-lastFrameTime)/1000.*60.;
+                                                              if(interpolation>60)interpolation=60;//this is to prevent frame time leak on mobile
                                                               lastFrameTime=timestamp;
 if(!window.touchMode)pointerZoom=false;
 else on=false;
