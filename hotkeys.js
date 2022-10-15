@@ -110,6 +110,12 @@ function callKey(event){
       }
       else if (key=="w")window.volumeSpeed=!window.volumeSpeed;
 
+      else if (key=="W") window.twist+=2;
+      else if (key=="S") window.twist-=2;
+      else if (key=="A")window.flip = -1;
+      else if (key=="D")window.flip = 1;
+
+
       else if (key=="="||key.toLowerCase()=="+"){window.movementRate *=1.11111111;  uniforms[ "rate" ].value*=1.11111111;}
 
       else if (key.toLowerCase()=="-"){window.movementRate /=1.11111111; uniforms[ "rate" ].value/=1.11111111;}

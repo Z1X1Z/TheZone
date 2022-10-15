@@ -24,6 +24,9 @@ window.zoomCageSize = 1.5;//radius of zoom bounding
                   window.uniformsLoaded=false;
 window.gameOn=false;
 zoomOutRatchetThreshold=1.5/255.;
+window.twist = 0;
+window.flip = 1;
+
 let radius = 1.;
 var rez=1.;
 let fftSize=2048;
@@ -206,18 +209,20 @@ else reset++
     pitch=lastPitch;
 
 let note = Math.log(Math.sqrt(pitch)/440.0)/Math.log(Math.pow ( 2, (1/24.0)))+49;
-let inc = 8.25 ;
-let t =  (note * 30+30*inc);
+let inc = 8.25 +twist/2. ;
+let t =  (flip*note * 30+30*inc);
 angle = t%360;
-angle = -angle;
+angle = -angle-30;
 
 colorSound = new THREE.Color();
              //          colorSound.setHSL((angle+90)/360.,(180+note)/297,(180+note)/297);
-
-    colorSound.setHSL((angle+90)/360.,1.,.5);
+let reversableColor=0.;
+if(flip>0)reversableColor=(angle+120)/360.+twist/24.*flip;
+else if (flip<0)reversableColor=1.-(angle+60)/360.+twist/24.*flip;
+    colorSound.setHSL(reversableColor,1.,.5);
 
 pitchCol[f]  = colorSound;
-angle = ((angle-30+180)/360*2*pi);
+angle = ((angle+180)/360*2*pi);
 
          d_x = -Math.sin(-angle)*volume*window.movementRate;
          d_y = -Math.cos(-angle)*volume*window.movementRate;
@@ -682,7 +687,7 @@ if(!window.touchMode){
 
     for (var g=0; g<starArms; g++)if(isFinite(testar[g])&&testar[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.) {
         var widt = .02;
-        var arm =(mustarD[g]+20)%24./24.*pi*2.;
+        var arm =(flip*(mustarD[g]+1.)+19+twist)%24./24.*pi*2.;
         var lengt = (testar[g]-minTestar)/(maxTestar-minTestar);
 
         var vop = new THREE.Color();
@@ -731,6 +736,7 @@ else{//start drawing of just twenty four frets here
 
             for (var g=0; g<24; g++) {
             var widt = .02;
+            var arm =(flip*(g+6.)+18+twist)%24./24.*pi*2.;
 
             var lengt = (testar[(g+4)%24]-minTestar)/(maxTestar-minTestar);
 
@@ -742,17 +748,26 @@ else{//start drawing of just twenty four frets here
 
 var vertices;
 var z = -.99;
-             star.push(
-                0-widt*-Math.sin(g*pi*2./24+pi/2.),    0-widt*-Math.cos(g*pi*2./24+pi/2.), z,
-                0+widt*-Math.sin(g*pi*2./24+pi/2.),    0+widt*-Math.cos(g*pi*2./24+pi/2.),  z,
-                (lengt*-Math.sin(g*pi*2./24)+widt*-Math.sin(g*pi*2./24+pi/2.)),
-                (lengt*-Math.cos(g*pi*2./24)+widt*-Math.cos(g*pi*2./24+pi/2.)),  z,
-                0-widt*-Math.sin(g*pi*2./24+pi/2.),    0-widt*-Math.cos(g*pi*2./24+pi/2.),  z,
-                (lengt*-Math.sin(g*pi*2./24)+widt*-Math.sin(g*pi*2./24+pi/2.)),
-                (lengt*-Math.cos(g*pi*2./24)+widt*-Math.cos(g*pi*2./24+pi/2.)),  z,
-                (lengt*-Math.sin(g*pi*2./24)-widt*-Math.sin(g*pi*2./24+pi/2.)),
-                (lengt*-Math.cos(g*pi*2./24)-widt*-Math.cos(g*pi*2./24+pi/2.)),  z,
-                    );
+//var arm =(flip*(mustarD[g]+1.)+19+twist/2.)%24./24.*pi*2.;
+
+//var arm = (-flip*g+1)-1)*pi*2./24+twist;
+rpio2 =arm+pi/2.;
+let x = widt*-Math.sin(rpio2);
+let y = widt*-Math.cos(rpio2);
+let xr = lengt*-Math.sin(arm);
+let yr = lengt*-Math.cos(arm);
+let depth = -1.+lengt;//this depth should draw the back around the middle up towards the top.
+
+star.push(
+
+-x,    -y,  depth,
+x,    y,  depth,
+(xr+x), (yr+y),  depth,
+-x, -y,  depth,
+(xr+x), (yr+y),  depth,
+(xr-x), (yr-y),  depth,
+) ;
+
 } }
          /*https://www.youtube.com/watch?v=4SH_-YhN15A&list=WL&index=10&t=2328s  wouldn't this be cool with the equalizer starship, description of process at beginning of video
                  const quaternion = new THREE.Quaternion();
