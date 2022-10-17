@@ -209,7 +209,7 @@ else reset++
     pitch=lastPitch;
 
 let note = Math.log(Math.sqrt(pitch)/440.0)/Math.log(Math.pow ( 2, (1/24.0)))+49;
-let inc = 8.25 +twist/2. ;
+let inc = (8+.25*flip) +twist/2. ;
 let t =  (flip*note * 30+30*inc);
 angle = t%360;
 angle = -angle-30;
