@@ -530,7 +530,7 @@ let noteHit=false;
 let timeStampLastNoteEnded=0.;
 let currentMeasure=1;
 let cursorMeasure=1;
-let scoreColorInversion = false;
+let scoreColorInversion = true;
 function takeNextScoreSlice(start){
                     window.osmd.setOptions({
                       drawFromMeasureNumber: start,
