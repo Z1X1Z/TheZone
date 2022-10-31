@@ -361,7 +361,6 @@ Clovoid:{value:false}
             scene.add( mesh );
         }
         else{
-           window.gameOn=true;
            scene.background = new THREE.Color( 0x808080);
          }
 
