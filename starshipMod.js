@@ -687,7 +687,7 @@ if(!window.touchMode){
 
     for (var g=0; g<starArms; g++)if(isFinite(testar[g])&&testar[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.) {
         var widt = .02;
-        var arm =(flip*(mustarD[g]+1.)+19+twist)%24./24.*pi*2.;
+        var arm =(flip*(mustarD[g]+1.)+18+twist)%24./24.*pi*2.;
         var lengt = (testar[g]-minTestar)/(maxTestar-minTestar);
 
         var vop = new THREE.Color();
