@@ -84,6 +84,7 @@ a = a+a and a = 2*a
 Nothing is twice itself so a = 0, and b=0, but they also resonate if done repeatedly in a loop growing according to Fibonacci numbers.
 </p><p>
 <h2>The answers in simplified number form:</h2>
+
 Mandelbrot:
 x=x^2+c
 </p><p>
@@ -100,8 +101,7 @@ This has 2 solutions:
 Note that 1.618=-1/.618
 </p><p>
 So if we put this simplified golden Manny equation together we get:
-x=-1./(x^2-1)=
-=-1.3247
+x=-1./(x^2-1)=-1.3247
 </p><p>
 If we do the same thing with the body we get:
 </p><p>
@@ -114,9 +114,15 @@ Note that the -1/ has disappeared for this calculation.
     <img class="onoffline" src = "" name="xsquaredandone.jpg" alt="oh boy!">
 </p><p>
 This is the equation of Seven Clovers:
-
+</p><p>
 x=log3(x^3)=3
 </p><p>
+The mandelbrot clover is:</p><p>
+
+x=log3(x^3-c) so using the value 1 for c and ignoring the log we get:</p><p>
+x=x^3-1=1.3247</p><p>
+
+this is the positive of Manny's face's solution</p><p>
 
 2^.5 is the relative frequency of 6 semitone hour leaps of the sonic starship such as moving left, then right, or up, and down!  This is because octaves are 2^(octave)!
 
@@ -135,7 +141,9 @@ x=log3(x^3)=3
     }
 nf = document.querySelectorAll('.onoffline2');
         for(var c = 0; c<nf.length; c++) if(window.online)
-            nf[c].href ="https://zone-x.herokuapp.com/"+nf[c].name;
+            nf[c].href =
+            //"https://zone-x.herokuapp.com/"+
+            nf[c].name;
             else nf[c].href =nf[c].name;
 </script>
 

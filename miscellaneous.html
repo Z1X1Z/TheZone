@@ -76,12 +76,13 @@ These are all derived from Manny the Lamb's code.
         }
 nf = document.querySelectorAll('.onoffline2');
 for(var c = 0; c<nf.length; c++)
-        if(window.online) nf[c].href ="https://zone-x.herokuapp.com/"+nf[c].name;
+        if(window.online) nf[c].href =
+        //"https://zone-x.herokuapp.com/"+
+        nf[c].name;
         else nf[c].href =nf[c].name;
- 
+
 </script>
 
 
 </body>
 </html>
-
