@@ -167,6 +167,7 @@ and they will reign on the earth.”<p></p></i></b>
              alt="heart">
         <figcaption>Mandelbrot</figcaption></a>
     </figure>
+    
     <a href="tol.html">
     <figure>
         <img class="onoffline" src = "" name="clover.png"
@@ -174,6 +175,7 @@ and they will reign on the earth.”<p></p></i></b>
         <figcaption>Clovers</figcaption></a>
     </figure>
     </ul>
+
     <ul>
 
 <a href="bride.html">
@@ -222,7 +224,7 @@ Email me: z1x1z@protonmail.com<p></p>
     //this script sets all the images to online or offline depending on which you are.
     nf = document.querySelectorAll('.onoffline');
     for(var c = 0; c<nf.length; c++) {
-        if(window.online)nf[c].src ="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@3.0/"+nf[c].name;
+        if(window.online)nf[c].src ="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@7/"+nf[c].name;
         else nf[c].src =nf[c].name;
         nf[c].onerror=function(){    var s = document.createElement("img");//document.getElementById('threeJSscript');
             s.src = this.name;
