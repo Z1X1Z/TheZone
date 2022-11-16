@@ -346,6 +346,10 @@
             uniform float externalCores;
 
             uniform bool Clovoid;
+            
+            
+            uniform vec2 d;
+
             vec2 spunC=vec2(0.);
             const float gr=-cos(216.)/-cos(612.)-1.;
             float zin(float x){return -sin(x);}
@@ -1073,7 +1077,7 @@ vec3 xtol(vec2 s, vec2 t){
           vec3 mny=vec3(0.);
           vec3 m=vec3(0.);
             if(colorCombo!=17){
-                                                if(metronome<1.) {mny = MannyWoManny(p*2.,vec2(time2dance,time2dance*gr))+robeL(p,vec2(time2dance,time2dance*gr))*.95;m=mny;}
+                                                if(metronome<1.) {mny = MannyWoManny(p*2.,-d.yx*(time2dance+1.))+robeL(p,-d/12.*(time2dance+1.))*.95;m=mny;}
               else   mny = mannyX(p,t);
               }
           gl_FragColor=vec4(mny+creatures+b+bridge+heart((p+vec2(.5,0.))/2.,t)+

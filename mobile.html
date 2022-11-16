@@ -229,6 +229,7 @@
             varying vec2 vUv;
             uniform vec2 coords;
             vec2 spunC=vec2(0.);
+            uniform vec2 d;
 
             uniform vec2 resolution;
 
@@ -506,7 +507,7 @@ if (morph>.5){float lfc=length(freed(coords));
                                                                                         ;}
 
     vec3 zoomer=tol(backGround,dance);
-    vec3 mny=manny(p*2.+vec2(.5,0.),t);
+    vec3 mny=manny(p*2.+vec2(.5,0.),-d.yx*(time2dance+1.)/7.);
     gl_FragColor=vec4(mny+
                       clamp(zoomer-(mny.r+mny.b+mny.g)*100.,.0,1.)
               ,1.);}

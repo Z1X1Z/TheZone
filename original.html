@@ -138,6 +138,9 @@
             uniform float time2dance;
 
             uniform float time;
+            
+            uniform vec2 d;
+
             float zin(float x){return -sin(x);}
             float coz(float x){return -cos(x);}
 
@@ -165,7 +168,7 @@
                         vec3 h=vec3(0.);
                             for (int f=0;f<60;f+=1)if(abs(z.y+z.x)>2.){h=vec3(0.);break;}
                             else {z=vec2(((z.x*z.x-z.y*z.y)-g.x+t.x),(2.0*z.x*z.y-g.y+t.y*4.));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
-                              h+=vec3(z.x*z.y+.1,z.x+.1,z.y)/21.;}
+                              h+=vec3(z.x*z.y,z.x,z.y)/21.;}
                         return h;
                         }
                                           vec3 torso(vec2 g, vec2 t){
@@ -218,8 +221,7 @@
 
     void main(){
      vec2 p=-((vUv.yx)-.5)/(resolution.xy/max(resolution.x,resolution.y))*5.;
-     vec2 t =vec2(-sin(time2dance/2.)/10.,-sin(time2dance/2.*(.618))/10.);
-     vec3 m = manny(p,t);
+     vec3 m = manny(p,-d.yx/12.*(time2dance+1.));
     gl_FragColor=vec4(m+clamp(.5-(m.r+m.g+m.b),0.,1.),1.);}
         </script>
         <script>window.overFace=true;</script>
