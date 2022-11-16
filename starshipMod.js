@@ -341,7 +341,10 @@ Clovoid:{value:false}
       materialShader = new THREE.ShaderMaterial( {
         uniforms: uniforms,
         vertexShader: document.getElementById( 'vertexShader' ).textContent,
-        fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+        fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
+          transparent: true,
+          opacity:.5
+
       } );
 
 
@@ -351,10 +354,7 @@ Clovoid:{value:false}
 
   renderer = new THREE.WebGLRenderer();
       geometryP = new THREE.PlaneGeometry( 2, 2 );
-      geometryP.z=-1.;
-
-
-
+      //geometryP.translate(0,0,-1.);
 
       if(window.shaderOn){
             mesh = new THREE.Mesh( geometryP, materialShader );
@@ -661,7 +661,6 @@ if( !window.touchMode&&!touchOnlyMode) {
   }
   const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), lineMat );
 
-  if (on)scene.add(line);
 
 
 if(!zoomAtl41)zoomRoutine();//  zoomAtl41 is zoom freeze
@@ -756,7 +755,7 @@ let x = widt*-Math.sin(rpio2);
 let y = widt*-Math.cos(rpio2);
 let xr = lengt*-Math.sin(arm);
 let yr = lengt*-Math.cos(arm);
-let depth = -1.+lengt;//this depth should draw the back around the middle up towards the top.
+let depth = -.77;//this depth should mean that half the trail is above and half below
 
 star.push(
 
@@ -786,7 +785,7 @@ x,    y,  depth,
                      geome.computeBoundingBox();
 
                   var  opac=1.;
-                  if(onO)opac=.3+.7/uniforms[ "metronome" ].value
+                  if(window.overFace)opac=.32;
                    material= new THREE.MeshBasicMaterial({
                                opacity: opac,
                              transparent: true,
@@ -796,7 +795,6 @@ x,    y,  depth,
 
                     meshe = new THREE.Mesh(geome , material );
 
-                   scene.add(meshe);
                  var trail=[];
                  var trailColor=[];
 
@@ -867,7 +865,6 @@ while(loopLimit>0&&r!=f){
                            });
 
                     meshTrail = new THREE.Mesh(geomeTrail , materialTrail );
-scene.add(meshTrail)
 
 if(isFinite(d_x)&&isFinite(d_y)&&on) {
 circleX-=xAdjusted;//xadjusted should mean this moves with the same screen scale as the trail
@@ -886,7 +883,6 @@ circleMaterial = new THREE.MeshBasicMaterial( { color: colorSound} );
 
 circle = new THREE.Mesh( circleGeometry, circleMaterial );
 circle.position.set(circleX,circleY,-1.);
-scene.add( circle );
 
                    let colorBlack= new THREE.Color();
                    colorBlack.setStyle("black");
@@ -902,7 +898,6 @@ scene.add( circle );
 
                    const radialLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints( centerOfDotToEdge ), radialMaterial );
 
-scene.add(radialLine);
 
 
 
@@ -1008,6 +1003,11 @@ scene.add( targets[n] );
 }
 
 
+if (on)scene.add(line);
+scene.add(meshe);
+scene.add( circle );
+scene.add(radialLine);
+scene.add(meshTrail)
 
 renderer.render( scene, camera );
 
@@ -1077,11 +1077,11 @@ if("osmd" in window){
                   let noteExpired =  noteLength<(timestamp-timeStampLastNoteEnded)/1000./4;
                   for(var n = 0.; n< nts.length; n++){
                     let noteOfScore=(nts[n].halfTone-8)%12;
-                    let  notesDifferent = (noteOfScore != thelastnotehit);
+                    let  notesDifferent = (nts[n].halfTone-8 != thelastnotehit);
                 if(
 
                     (noteExpired|| !notesDifferent) //let you hit the next note before the last note finishes unless the notes are the same just once
-                  &&  (Math.round(noteNumber)%12 ==noteOfScore
+                  &&  (Math.round(noteNumber)%12 ==noteOfScore && on
                       //-8 should callibrate from a halfstep count of 48 == C4 natural into concert pitch of A# == 49
                           ||osmd.cursor.NotesUnderCursor()[0].isRestFlag//exempt from having to hit the note if rest or cue
                           ||osmd.cursor.NotesUnderCursor()[0].isCueNote

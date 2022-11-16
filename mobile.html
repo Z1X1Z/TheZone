@@ -267,7 +267,7 @@ uniform bool Clovoid;
             float coz(float x){return -cos(x);}
 
           vec3 heart(vec2 g, vec2 t){
-              g.x-=.5;
+              //g.x-=.5;
               g.y*=-1.;
               vec2 z=g.xy;
           vec3 h=vec3(0.);
@@ -496,7 +496,7 @@ vec3 tol(vec2 p, vec2 t){
 
                            backGround=spin2(backGround,atan(backGround.y,backGround.x)*petals/6.);
                            //p.x+=.5;
-    vec2 t =vec2(-sin(rate*time2dance)/50.,-sin(time2dance*(.618))/30.);
+    vec2 t =vec2(-sin(time2dance)/50.,-sin(time2dance*(.618))/30.);
     vec2 dance = vec2(0.);
 if (morph>.5){float lfc=length(freed(coords));
                                                                                     dance = vec2(
