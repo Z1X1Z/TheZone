@@ -481,7 +481,7 @@ vec3 tol(vec2 p, vec2 t){
 
           vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t);}
           vec3 bod(vec2 p, vec2 t){t*=zoom;return body(p,t)+heart(p,t);}
-          vec3 manny(vec2 p, vec2 t){return body(p,t)+heart(p/1.5,t)+face(p,vec2(time,0.))*1.4+shiny(p,vec2(time,0.))/9.;}
+          vec3 manny(vec2 p, vec2 t){return body(p,t)+heart(p/1.5,-t)+face(p,vec2(time,0.))*1.4+shiny(p,vec2(time,0.))/9.;}
 
           //function library: manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin
     void main(){
@@ -507,7 +507,7 @@ if (morph>.5){float lfc=length(freed(coords));
                                                                                         ;}
 
     vec3 zoomer=tol(backGround,dance);
-    vec3 mny=manny(p*2.+vec2(.5,0.),d.yx*(time2dance+1.)/12.);
+    vec3 mny=manny(p*2.+vec2(.5,0.),-d.yx*(time2dance+1.)/12.);
     gl_FragColor=vec4(mny+
                       clamp(zoomer-(mny.r+mny.b+mny.g)*100.,.0,1.)
               ,1.);}

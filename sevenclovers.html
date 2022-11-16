@@ -451,6 +451,7 @@
                                                      if(f>2)k+=0.005;}
 
                }
+                                                              
                                     return vec3(l)+vec3(c,x+c/2.,0.)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
 
 
@@ -1079,11 +1080,11 @@ vec3 xtol(vec2 s, vec2 t){
                                                                                      //vec2(time2dance,time2dance*gr)*11.+
                                                                                      d.yx
                                                                                      )+robeL(p,//vec2(time2dance,time2dance*gr)
-                                                                                             -d.yx
+                                                                                             d.yx
                                                                                              )*.95;m=mny;}
               else   mny = mannyX(p,t);
               }
-          gl_FragColor=vec4(mny+creatures+b+bridge+heart((p+vec2(.5,0.))/2.,t)+
+          gl_FragColor=vec4(mny+creatures+b+bridge+heart((p+vec2(.5,0.))/2.,d.yx/12.)+
                             clamp((zoomer)-(m.r+m.b+m.g+creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*100.,.0,1.)
                     ,1.);}
         </script>
