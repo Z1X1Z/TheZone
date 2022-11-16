@@ -1076,8 +1076,11 @@ vec3 xtol(vec2 s, vec2 t){
           vec3 m=vec3(0.);
             if(colorCombo!=17){
                                                 if(metronome<1.) {mny = MannyWoManny(p*2.,
-                                                                                     vec2(time2dance,time2dance*gr)*11.+d.yx
-                                                                                     )+robeL(p,vec2(time2dance,time2dance*gr))*.95;m=mny;}
+                                                                                     //vec2(time2dance,time2dance*gr)*11.+
+                                                                                     d.yx
+                                                                                     )+robeL(p,//vec2(time2dance,time2dance*gr)
+                                                                                             d.yx
+                                                                                             )*.95;m=mny;}
               else   mny = mannyX(p,t);
               }
           gl_FragColor=vec4(mny+creatures+b+bridge+heart((p+vec2(.5,0.))/2.,t)+
