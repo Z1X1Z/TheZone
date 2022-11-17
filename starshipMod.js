@@ -226,6 +226,10 @@ angle = ((angle+180)/360*2*pi);
 
          d_x = -Math.sin(-angle)*volume*window.movementRate;
          d_y = -Math.cos(-angle)*volume*window.movementRate;
+         
+         uniforms.d.value.x=d_x;
+         uniforms.d.value.y=d_y;
+         
          var spunD = [d_x,d_y];
 
                     if(uniforms.carousel.value!=0.)         spunD=spin(spunD,uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value)%(Math.PI*2.));
@@ -327,8 +331,12 @@ function init() {
   colorInverter: {value:false},
       metronome: {value: .99 },
       time2dance: {value: 0.0 },
+  volume: {value: 0.0 },
+
       resolution: {value: new THREE.Vector2() },
       coords: {value: new THREE.Vector2() },
+  d: {value: new THREE.Vector2() },
+
 Clovoid:{value:false}
     }
   ]);
@@ -665,6 +673,7 @@ if( !window.touchMode&&!touchOnlyMode) {
 
 if(!zoomAtl41)zoomRoutine();//  zoomAtl41 is zoom freeze
   uniforms[ "time2dance" ].value += totalAMP;
+         uniforms["volume" ].value = totalAMP;
 
 
 
