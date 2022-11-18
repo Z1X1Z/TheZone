@@ -1156,6 +1156,8 @@ if("osmd" in window){
 
 
                         osmd.cursor.show();
+                                                                    console.log(osmd.cursor.cursorOptions.color)
+                                                                    console.log(colorSound.getHexString())
                         osmd.cursor.cursorOptions.color="#"+colorSound.getHexString();//this is a frame behind if it is above colorSounds definition
 
       cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
