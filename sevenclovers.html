@@ -115,6 +115,10 @@
                                        callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                                     <label for="Reverse Colors">Reverse Colors!</label><br>
 
+                                    <input type="checkbox" id="Remediate Colors" name="t"  onclick= "
+                                        key  = 'R';
+                                        callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                                     <label for="Remediate Colors">Remediate Colors!!</label><br>
                           <form>
 
                                 <input type="radio" id="OriginalOrange" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=7;">
@@ -344,7 +348,7 @@
             uniform bool Refractelate;
             uniform float centralCores;
             uniform float externalCores;
-
+            uniform bool remediatedColors;
             uniform bool Clovoid;
             
             uniform vec2 d;
@@ -800,8 +804,6 @@
                                                    *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
                                                    *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
 
-                                                /* o/= max(max(o.r,o.g),o.b);
-                                                 o=o*.5+.5; */
                                                 a=1.-a;
                                                         }
                                      else if(colorCombo==8) {
@@ -824,11 +826,21 @@
 
 
                                       }
+                                                          
+                                                          
+                                                          
                   if(colorInverter==true){
                               a.r*=-sin(time);
                               a.g*=abs(-sin(time*gr));
                               a.b*=-sin(time*1./gr);
                                 }
+                                        
+                                        
+                                        if(remediatedColors)
+                                        {
+                                        a/= max(max(a.r,a.g),a.b);
+                                         a=a*.5+.5;
+                                         }
 
     return clamp(a,0.,1.);}
 
@@ -1077,10 +1089,8 @@ vec3 xtol(vec2 s, vec2 t){
           vec3 m=vec3(0.);
             if(colorCombo!=17){
                                                 if(metronome<1.) {mny = MannyWoManny(p*2.,
-                                                                                     //vec2(time2dance,time2dance*gr)*11.+
-                                                                                     d.yx
-                                                                                     )+robeL(p,//vec2(time2dance,time2dance*gr)
-                                                                                             d.yx
+                                                                                     vec2(time2dance,time2dance*gr)
+                                                                                     )+robeL(p,vec2(time2dance,time2dance*gr)
                                                                                              )*.95;m=mny;}
               else   mny = mannyX(p,t);
               }

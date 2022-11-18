@@ -110,6 +110,11 @@
                                      key  = ';';
                                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                                   <label for="Reverse Colors">Reverse Colors!</label><br>
+                                  
+                                  <input type="checkbox" id="Remediate Colors" name="t"  onclick= "
+                                      key  = 'R';
+                                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                                   <label for="Remediate Colors">Remediate Colors!!</label><br>
 
                         <form>
 
@@ -265,6 +270,8 @@
             uniform float centralCores;
             uniform float externalCores;
 uniform bool Clovoid;
+uniform bool remediatedColors;
+
             const float gr = 1.6180339;
             float zin(float x){return -sin(x);}
             float coz(float x){return -cos(x);}
@@ -478,6 +485,12 @@ vec3 tol(vec2 p, vec2 t){
                               o.g*=abs(-sin(time*gr));
                               o.b*=-sin(time*1./gr);
                                 }
+                                        
+                                        if(remediatedColors)
+                                        {
+                                        o/= max(max(o.r,o.g),o.b);
+                                         o=o*.5+.5;
+                                         }
 
     return clamp(o,0.,1.);}
 
@@ -509,7 +522,7 @@ if (morph>.5){float lfc=length(freed(coords));
                                                                                         ;}
 
     vec3 zoomer=tol(backGround,dance);
-    vec3 mny=manny(p*2.+vec2(.5,0.),-d.yx*(volume+1.)/12.);
+    vec3 mny=manny(p*2.+vec2(.5,0.),-d.yx*volume/3.);
     gl_FragColor=vec4(mny+
                       clamp(zoomer-(mny.r+mny.b+mny.g)*100.,.0,1.)
               ,1.);}

@@ -336,6 +336,7 @@ function init() {
       resolution: {value: new THREE.Vector2() },
       coords: {value: new THREE.Vector2() },
   d: {value: new THREE.Vector2() },
+  remediatedColors: {value: false },
 
 Clovoid:{value:false}
     }
