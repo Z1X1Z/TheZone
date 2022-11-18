@@ -245,8 +245,8 @@ if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold&&on){
                coordY=by;
            }
 if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize){//adjust back in if too far from the cener
-               if (Math.abs(by)>Math.sqrt(window.zoomCageSize))coordY*=1.-(Math.abs(by)-window.zoomCageSize)/35.;
-               if (Math.abs(bx)>Math.sqrt(window.zoomCageSize))coordX*=1.-(Math.abs(bx)-window.zoomCageSize)/35.;
+               if (Math.abs(by)>Math.sqrt(window.zoomCageSize))coordY*=1.-(Math.abs(by)-window.zoomCageSize)/40.;//note this has something guessy about it
+               if (Math.abs(bx)>Math.sqrt(window.zoomCageSize))coordX*=1.-(Math.abs(bx)-window.zoomCageSize)/40.;
   }
 
          if(Math.sqrt(coordY*coordY+coordX*coordX)>zoomCageSize*4./3.){coordX=0;coordY=0;}//teleport to center if too far from the center
@@ -1155,8 +1155,8 @@ if("osmd" in window){
 
 
 
-                        osmd.cursor.cursorOptions.color="#"+colorSound.getHexString();//this is a frame behind if it is above colorSounds definition
                         osmd.cursor.show();
+                        osmd.cursor.cursorOptions.color="#"+colorSound.getHexString();//this is a frame behind if it is above colorSounds definition
 
       cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
 
