@@ -7,7 +7,7 @@ function loadScript(element, url, offlineURL)
     var scr = document.getElementById(element);//document.createElement("script");//
     scr.type = 'text/javascript';
     scr.src = url;
-    // Then bind the event to the callback function.
+    // Then bind the event to the callback function.  or at least that's how it goes without the stallLurker in the sonicstarship.  it's stabler. maybe
     // There are several events for cross browser compatibility.
     //script.onreadystatechange = callback;
     //script.onload = callback;
@@ -44,7 +44,7 @@ function loadScript(element, url, offlineURL)
 
 
         var cdnOSMD="opensheetmusicdisplay.min.js";
-        if (window.online)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@0.8.3/build/opensheetmusicdisplay.min.js";
+        if (window.online)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.6.1/build/opensheetmusicdisplay.min.js";;
 
 
 load();
