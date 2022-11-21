@@ -589,7 +589,7 @@ if( !window.touchMode&&!touchOnlyMode) {
 
                                                               spiral_compress();
                            move();
-                           if(on) makeSpirograph();
+                           if(reset==0) makeSpirograph();
 
 
     if (computeFPS)
