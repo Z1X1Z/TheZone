@@ -663,7 +663,7 @@ if( !window.touchMode&&!touchOnlyMode) {
   }
 
   let depth = -.97;
-  if (on)for (let r= 0; r < bufferSize; r ++) {
+  if (reset==0)for (let r= 0; r < bufferSize; r ++) {
     let tx = spirray0[r]/spiregulator;
     let ty =  spirray1[r]/spiregulator;
     point[r]=new THREE.Vector3( tx, ty, depth );
