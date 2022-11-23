@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Zone:X - Original</title>
+        <title>Zone:X - Original Exploding Manny!</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="main.css">
@@ -222,7 +222,7 @@
 
     void main(){
      vec2 p=-((vUv.yx)-.5)/(resolution.xy/max(resolution.x,resolution.y))*5.;
-     vec3 m = manny(p,-d.yx/12.*(volume+1.));
+     vec3 m = manny(p,-d.yx*volume/5.);
     gl_FragColor=vec4(m+clamp(.5-(m.r+m.g+m.b),0.,1.),1.);}
         </script>
         <script>window.overFace=true;</script>
