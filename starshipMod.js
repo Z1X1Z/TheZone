@@ -876,7 +876,7 @@ while(loopLimit>0&&r!=f){
 
                     meshTrail = new THREE.Mesh(geomeTrail , materialTrail );
 
-if(isFinite(d_x)&&isFinite(d_y)&&reset==0) {
+if(isFinite(d_x)&&isFinite(d_y)&&reset==0&&on) {
 circleX-=xAdjusted;//xadjusted should mean this moves with the same screen scale as the trail
 circleY-=yAdjusted;
        }
