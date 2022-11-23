@@ -197,11 +197,11 @@ if (totalAMP>zoomOutRatchetThreshold||on)
   if(pb>0) pb =audioX.sampleRate/pb;
 on = true;
 if (isFinite(pb) &&pb>0&& Math.abs(pb-audioX.sampleRate/numberOfBins/2.)>1. &&pb!=-1&&totalAMP>zoomOutRatchetThreshold) { pitch =pb;reset =0;}
-else if (reset>3||pitch==1){on = false;
+else if (reset>3){on = false;
 }
 else reset++
 
-
+if(pitch==1) on = false;
 
     if(pitch!=1){lastPitch = pitch;pitchFound=true;}//here we update lastPitch but only if!
     else pitchFound=false;
@@ -589,7 +589,7 @@ if( !window.touchMode&&!touchOnlyMode) {
 
                                                               spiral_compress();
                            move();
-                           if(reset==0) makeSpirograph();
+                           if(on) makeSpirograph();
 
 
     if (computeFPS)
@@ -663,7 +663,7 @@ if( !window.touchMode&&!touchOnlyMode) {
   }
 
   let depth = -.97;
-  if (reset==0)for (let r= 0; r < bufferSize; r ++) {
+  if (on)for (let r= 0; r < bufferSize; r ++) {
     let tx = spirray0[r]/spiregulator;
     let ty =  spirray1[r]/spiregulator;
     point[r]=new THREE.Vector3( tx, ty, depth );
@@ -876,7 +876,7 @@ while(loopLimit>0&&r!=f){
 
                     meshTrail = new THREE.Mesh(geomeTrail , materialTrail );
 
-if(isFinite(d_x)&&isFinite(d_y)&&reset==0&&on) {
+if(isFinite(d_x)&&isFinite(d_y)&&on) {
 circleX-=xAdjusted;//xadjusted should mean this moves with the same screen scale as the trail
 circleY-=yAdjusted;
        }
@@ -971,7 +971,7 @@ for(let n = 0; n < polygons.length; n++)
             polygons[n].dy+=baseMag*-Math.sin(angleTarget);
         }
 var neutralizer=1.;
-if (!reset==0)neutralizer=0.;
+if (!on)neutralizer=0.;
                 polygons[n].centerX += (6.*d_x*neutralizer-polygons[n].dx)*interpolation/minimumDimension;
                 polygons[n].centerY += (6.*d_y*neutralizer-polygons[n].dy)*interpolation/minimumDimension;
 
@@ -1013,7 +1013,7 @@ scene.add( targets[n] );
 }
 
 
-if (reset==0)scene.add(line);
+if (on)scene.add(line);
 scene.add(meshe);
 scene.add( circle );
 scene.add(radialLine);
