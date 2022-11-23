@@ -876,7 +876,7 @@ while(loopLimit>0&&r!=f){
 
                     meshTrail = new THREE.Mesh(geomeTrail , materialTrail );
 
-if(isFinite(d_x)&&isFinite(d_y)&&on) {
+if(isFinite(d_x)&&isFinite(d_y)&&reset==0) {
 circleX-=xAdjusted;//xadjusted should mean this moves with the same screen scale as the trail
 circleY-=yAdjusted;
        }
@@ -971,7 +971,7 @@ for(let n = 0; n < polygons.length; n++)
             polygons[n].dy+=baseMag*-Math.sin(angleTarget);
         }
 var neutralizer=1.;
-if (!on)neutralizer=0.;
+if (!reset==0)neutralizer=0.;
                 polygons[n].centerX += (6.*d_x*neutralizer-polygons[n].dx)*interpolation/minimumDimension;
                 polygons[n].centerY += (6.*d_y*neutralizer-polygons[n].dy)*interpolation/minimumDimension;
 
@@ -1013,7 +1013,7 @@ scene.add( targets[n] );
 }
 
 
-if (on)scene.add(line);
+if (reset==0)scene.add(line);
 scene.add(meshe);
 scene.add( circle );
 scene.add(radialLine);
