@@ -674,7 +674,7 @@ if( !window.touchMode&&!touchOnlyMode) {
 
 if(!zoomAtl41)zoomRoutine();//  zoomAtl41 is zoom freeze
   uniforms[ "time2dance" ].value += totalAMP;
-         uniforms["volume" ].value = totalAMP;
+         uniforms["volume" ].value = totalAMP/(1.+zoomOutRatchetThreshold);
 
 
 
