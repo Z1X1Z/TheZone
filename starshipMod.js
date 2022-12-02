@@ -208,11 +208,10 @@ if(pitch==1) on = false;
 
     pitch=lastPitch;
 
-let note = Math.log(Math.sqrt(pitch)/440.0)/Math.log(Math.pow ( 2, (1/24.0)))+49;
-let inc = (8+.5*flip) +twist/2. ;
-let t =  (flip*note * 30+30*inc);
-angle = t%360;
-angle = -angle-30;
+let note = 12*Math.log(pitch/440)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
+let t =  (note -3)*flip+3+twist/2;
+angle = -(30*t)%360;
+
 
 colorSound = new THREE.Color();
              //          colorSound.setHSL((angle+90)/360.,(180+note)/297,(180+note)/297);
@@ -226,10 +225,10 @@ angle = ((angle+180)/360*2*pi);
 
          d_x = -Math.sin(-angle)*volume*window.movementRate;
          d_y = -Math.cos(-angle)*volume*window.movementRate;
-         
+
          uniforms.d.value.x=d_x;
          uniforms.d.value.y=d_y;
-         
+
          var spunD = [d_x,d_y];
 
                     if(uniforms.carousel.value!=0.)         spunD=spin(spunD,uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value)%(Math.PI*2.));
@@ -338,7 +337,9 @@ function init() {
   d: {value: new THREE.Vector2() },
   remediatedColors: {value: false },
 
-Clovoid:{value:false}
+Clovoid:{value:false},
+dotted:{value:false}
+
     }
   ]);
   uniforms.resolution.value.x = window.innerWidth;

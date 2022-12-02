@@ -46,6 +46,7 @@ function callKey(event){
       else if (key=="m") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
       else if (key=="!")uniforms[ "Refractelate" ].value=!uniforms[ "Refractelate" ].value;
       else if (key=="@")uniforms[ "Clovoid" ].value=!uniforms[ "Clovoid" ].value;
+      else if (key=="#")uniforms[ "dotted" ].value=!uniforms[ "dotted" ].value;
 
       else if (key=="q") {
           if          ( uniforms[ "colorCombo" ].value >8)          uniforms[ "colorCombo" ].value = 1;
@@ -114,7 +115,7 @@ function callKey(event){
       else if (key=="S") window.twist-=2;
       else if (key=="A")window.flip = -1;
       else if (key=="D")window.flip = 1;
-            
+
       else if (key=="R")   uniforms[ "remediatedColors" ].value=!uniforms[ "remediatedColors" ].value  ;
 
 
