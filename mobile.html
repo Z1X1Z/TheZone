@@ -470,7 +470,7 @@ vec3 tol(vec2 p, vec2 t){
 
                if(spirated!=0.) s+=m-t;//this is to give the semi-dissipated clovers
                else s+=t-m;//plus t is lobes, -t is circles with dance
-               s=FRACTALIZE((t+m)/s,time);
+
 
 
                if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the body steps on the clover
