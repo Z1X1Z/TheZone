@@ -27,7 +27,7 @@ zoomOutRatchetThreshold=1.5/255.;
 window.twist = 0;
 window.flip = 1;
 
-let radius = 1.;
+let radius = .5;
 var rez=1.;
 let fftSize=2048;
 let trailLength = 576;
@@ -255,8 +255,8 @@ if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize){//adjust back in if too far from
 
             if (trailDepth<trailLength)trailDepth++;
 
-xPerp[f-1] = -Math.sin(-angle+pi/2)*radius*volume*window.movementRate*.5;
-yPerp[f-1] = -Math.cos(-angle+pi/2)*radius*volume*window.movementRate*.5;
+xPerp[f-1] = -Math.sin(-angle+pi/2)*radius*volume*window.movementRate;
+yPerp[f-1] = -Math.cos(-angle+pi/2)*radius*volume*window.movementRate;
                      trailWidth[f-1]=1.;//has to be 1 for trail drawing algorithms
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
@@ -457,7 +457,7 @@ correlationForText+=document.getElementById("allText").offsetHeight;
                   let finalAverageAmp=1.;
                   let averageFrameTotalAmp = [];
                   function zoomRate(){
-                    return Math.E**(Math.log(.5)/zoomFrames*window.movementRate*interpolation*(Math.sqrt(volume)/2.+.5));//the square root of volume is to make it grow slower than in d_xy
+                    return Math.E**(Math.log(.5)/zoomFrames*window.movementRate*interpolation);//the square root of volume is to make it grow slower than in d_xy
                   }
 function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
                      if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
@@ -584,7 +584,8 @@ if( !window.touchMode&&!touchOnlyMode) {
                            for(var n=0; n<inputData.length-1;n++)volume+=Math.abs(inputData[n+1]-inputData[n]);
                            volume*=audioX.sampleRate/inputData.length/255;
 
-               volume*=2.;
+               volume*=5./(1.+zoomOutRatchetThreshold);
+
                        }
                 else volume=1.;
 
