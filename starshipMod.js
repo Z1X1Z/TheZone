@@ -457,7 +457,7 @@ correlationForText+=document.getElementById("allText").offsetHeight;
                   let finalAverageAmp=1.;
                   let averageFrameTotalAmp = [];
                   function zoomRate(){
-                    return Math.E**(Math.log(.5)/zoomFrames*window.movementRate*interpolation);//the square root of volume is to make it grow slower than in d_xy
+                    return Math.E**(Math.log(.5)/zoomFrames*window.movementRate*interpolation*(Math.sqrt(volume)/2.+.5));//the square root of volume is to make it grow slower than in d_xy
                   }
 function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
                      if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
@@ -584,8 +584,7 @@ if( !window.touchMode&&!touchOnlyMode) {
                            for(var n=0; n<inputData.length-1;n++)volume+=Math.abs(inputData[n+1]-inputData[n]);
                            volume*=audioX.sampleRate/inputData.length/255;
 
-               volume*=5./(1.+zoomOutRatchetThreshold);
-
+                           volume*=4./(1.+zoomOutRatchetThreshold);
                        }
                 else volume=1.;
 
