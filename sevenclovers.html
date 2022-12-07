@@ -119,6 +119,18 @@
                                         key  = 'R';
                                         callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                                      <label for="Remediate Colors">Remediate Colors!!</label><br>
+
+                                     <input type="checkbox" id="Refractelate" name="t"  onclick= "
+                                         key  = '!';
+                                         callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                                      <label for="Refractelate">Refractelate!</label><br>
+
+
+                                      <input type="checkbox" id="Clovoid" name="t"  onclick= "
+                                          key  = '@';
+                                          callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                                       <label for="Clovoid">Clovoid!</label><br>
+
                           <form>
 
                                 <input type="radio" id="OriginalOrange" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=7;">
@@ -350,7 +362,7 @@
             uniform float externalCores;
             uniform bool remediatedColors;
             uniform bool Clovoid;
-            
+
             uniform vec2 d;
             vec2 spunC=vec2(0.);
             const float gr=-cos(216.)/-cos(612.)-1.;
@@ -455,7 +467,7 @@
                                                      if(f>2)k+=0.005;}
 
                }
-                                                              
+
                                     return vec3(l)+vec3(c,x+c/2.,0.)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
 
 
@@ -826,16 +838,16 @@
 
 
                                       }
-                                                          
-                                                          
-                                                          
+
+
+
                   if(colorInverter==true){
                               a.r*=-sin(time);
                               a.g*=abs(-sin(time*gr));
                               a.b*=-sin(time*1./gr);
                                 }
-                                        
-                                        
+
+
                                         if(remediatedColors)
                                         {
                                         a/= max(max(a.r,a.g),a.b);
@@ -999,7 +1011,17 @@ vec3 xtol(vec2 s, vec2 t){
                 }
                 return  (vec3(z.x*z.y,z.x,z.y-.2*(1.-p.x))+.3);}
 
+    vec3 acrostic(vec2 t){
+      float c=1.44;
 
+        for (int f=0;f<101;f+=1)if(abs(t.x)<20.){
+          if(length(t)>c)t/=c;
+
+        t=vec2(1./(t.x*t.x-t.y*t.y), 2.0*t.x*t.y);//this is {s=s^2;s.real=-1./s.real}}
+    }
+    return vec3(t.x,1./t.y,t.x/t.y);
+
+}
           vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t);}
         vec3 bodySmall(vec2 p, vec2 t){return torso(p*2.,t)+musculature(p*2.,t)+robe(p*2.,t)+legs(p*4.,t)+heart(p,t);}
 
@@ -1078,6 +1100,7 @@ vec3 xtol(vec2 s, vec2 t){
           else if (colorCombo==16)zoomer=xtol(backGround,vec2(0.));
           else if (colorCombo==17)zoomer=body(backGround,vec2(-sin(time*20.)/50.,-sin(time*gr*20.)/30.)*zoom)+robe(backGround,vec2(0.))/2.+faceHeights(backGround,t*zoom)+                                                   heartZoom(backGround-vec2(.5,0.)+driftCanceller,dance);
          else if (colorCombo==18)zoomer=refractelbrot(backGround,dance);
+         else if (colorCombo==19)zoomer=acrostic(backGround);
 
 
           vec3 creatures,b;

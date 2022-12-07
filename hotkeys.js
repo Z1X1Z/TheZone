@@ -62,6 +62,8 @@ function callKey(event){
       else if (key=="b") uniforms[ "colorCombo" ].value = 16;
       else if (key=="g") uniforms[ "colorCombo" ].value = 17;
       else if (key=="r")uniforms[ "colorCombo" ].value = 18;
+      else if (key=="$")uniforms[ "colorCombo" ].value = 19;
+
       else if (key=="s"){ if(uniforms[ "morph" ].value == 0.)uniforms[ "morph" ].value = 1.;else uniforms[ "morph" ].value = 0.; }
       else if (key=="n") uniforms[ "MetaCored" ].value = !uniforms[ "MetaCored" ].value;
       else if (key=="l"){zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
