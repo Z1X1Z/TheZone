@@ -1,3 +1,4 @@
+window.zoom=1.;
 function readHash(){for(var n = location.hash.length;n>0;n--)callKey(new KeyboardEvent('keydown', {'key': location.hash[n],"keyCode":location.hash.charCodeAt(n)}));
 }
 function stallHash(){if(window.uniformsLoaded)readHash();else setTimeout(stallHash,10);}//uniforms are only loaded if mic is enabled
@@ -67,7 +68,9 @@ function callKey(event){
       else if (key=="s"){ if(uniforms[ "morph" ].value == 0.)uniforms[ "morph" ].value = 1.;else uniforms[ "morph" ].value = 0.; }
       else if (key=="n") uniforms[ "MetaCored" ].value = !uniforms[ "MetaCored" ].value;
       else if (key=="l"){zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
-      else if (key=="L")zoom=1.;
+      else if (key=="L")window.zoom=1.;
+      else if (key=="C")window.zoom=.00005;
+
       else if (key=="c")center=!center;
       else if (key=="v")textON=!textON;
       else if (key=="z")uniforms[ "helm" ].value = !uniforms[ "helm" ].value;

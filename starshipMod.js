@@ -9,7 +9,7 @@ stallTillTHREE();//this is a lurker. it waits for the three.js loader to resolve
 //document.head.addEventListener('beforeunload', event => { cancelAnimationFrame();});
 let screenPressCoordX, screenPressCoordY;
 window.pointerZoom=false;
-let zoom=1., coordX=0., coordY=0.;
+let coordX=0., coordY=0.;
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
 window.movementRate=2.;
