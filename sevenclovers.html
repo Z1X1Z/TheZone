@@ -349,6 +349,8 @@
 
             uniform bool free;
             uniform bool MetaCored;
+            uniform bool outerCoresOff;
+
             uniform float morph;
 
             uniform float carousel;
@@ -741,6 +743,7 @@
                              if(spirated>-.5) p.y*=-1.;
                              float cored =0.;
                              if(MetaCored)cored= log(zoom)/log(.5)+1.;
+
                             else cored = centralCores;
                              float c = length(p);
                              float loops=1.;
@@ -754,6 +757,8 @@
                              float hyperCore=0.;
                                if(MetaCored)hyperCore=cored*2./3.+log(lfc)*0.9551195-1.;//.9551195 is based on x=log3(x), x = .910239log*(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
                               else hyperCore=externalCores;
+                              if(outerCoresOff) hyperCore=0.;//this is so that you can engage 7^4*60+1=144001 or turn off all but the central core.
+
                                 if(MetaCored&&morph>.5)hyperCore*=4./3.;//engage overstable core if dancing
 
                              float term=0.;
@@ -888,7 +893,8 @@
                                   loops=0.;
                                   float hyperCore=0.;
                                   float lfc = length(freed(coords));
-                                    if(!MetaCored)hyperCore=cored*2./3.+log(lfc*3./2.)*0.9551195-1.;//.9551195 is based on x=log3(x), x = .910239log3(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
+                                  if(outerCoresOff) hyperCore=0.;
+                                  else if(!MetaCored)hyperCore=cored*2./3.+log(lfc*3./2.)*0.9551195-1.;//.9551195 is based on x=log3(x), x = .910239log3(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
                                    // if(MetaCored&&morph>=.5)hyperCore*=4./3.;//engage overstable core if dancing
 
                                   float term=0.;
@@ -1014,8 +1020,8 @@ vec3 xtol(vec2 s, vec2 t){
     vec3 acrostic(vec2 t){
       float c=1.44;
 
-        for (int f=0;f<101;f+=1)if(abs(t.x)<20.){
-          if(length(t)>c)t/=c;
+        for (int f=0;f<40;f+=1)if(abs(t.x)<1./sqrt(zoom)){
+        //  if(length(t)>c)t/=c;
 
         t=vec2(1./(t.x*t.x-t.y*t.y), 2.0*t.x*t.y);//this is {s=s^2;s.real=-1./s.real}}
     }
