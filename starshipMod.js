@@ -314,6 +314,7 @@ function init() {
         MetaCored: {value: true },
         externalCores: {value: 0. },
         centralCores: {value: 0. },
+        outerCoresOff: {value: false},
 
         morph: {value: 0.0 },
 
@@ -553,7 +554,7 @@ adjustThreeJSWindow();//mostly for ios here
 
 
 
-
+if(starSpin!=0)twist=timestamp/1000.*flip*window.movementRate*starSpin;
 
     uniforms[ "time" ].value = Math.fround(timestamp/1000.);
 
@@ -565,7 +566,6 @@ if (uniforms["MetaCored"].value){
     uniforms[ "centralCores" ].value = Math.log(zoom)/Math.log(.5)+1;
     uniforms[ "externalCores" ].value =uniforms[ "centralCores" ].value*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*0.9551195-1;
   }
-
 
 
                                                               if(document.visibilityState=="hidden"||lvs=="hidden")lastFrameTime=timestamp;

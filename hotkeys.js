@@ -1,4 +1,7 @@
+
+
 window.zoom=1.;
+window.starSpin=0.;
 function readHash(){for(var n = location.hash.length;n>0;n--)callKey(new KeyboardEvent('keydown', {'key': location.hash[n],"keyCode":location.hash.charCodeAt(n)}));
 }
 function stallHash(){if(window.uniformsLoaded)readHash();else setTimeout(stallHash,10);}//uniforms are only loaded if mic is enabled
@@ -53,6 +56,13 @@ function callKey(event){
           if          ( uniforms[ "colorCombo" ].value >8)          uniforms[ "colorCombo" ].value = 1;
           else uniforms[ "colorCombo" ].value = (uniforms[ "colorCombo" ].value+1)%9;
       }
+
+            else if (key=="Q") {
+              twist = 0;
+              if(starSpin==0)starSpin=1;
+              else if(starSpin==1)starSpin=-1;
+              else if(starSpin==-1)starSpin=0;
+            }
       else if (key==";") uniforms[ "colorInverter" ].value = !uniforms[ "colorInverter" ].value;
       else if (key=="t") window.touchMode = !window.touchMode;
       else if (key=="f") uniforms[ "fourCreats" ].value *= -1;
@@ -67,6 +77,8 @@ function callKey(event){
 
       else if (key=="s"){ if(uniforms[ "morph" ].value == 0.)uniforms[ "morph" ].value = 1.;else uniforms[ "morph" ].value = 0.; }
       else if (key=="n") uniforms[ "MetaCored" ].value = !uniforms[ "MetaCored" ].value;
+      else if (key=="N") uniforms[ "outerCoresOff" ].value = !uniforms[ "outerCoresOff" ].value ;
+
       else if (key=="l"){zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
       else if (key=="L")window.zoom=1.;
       else if (key=="C")window.zoom=.00005;
@@ -75,14 +87,14 @@ function callKey(event){
       else if (key=="v")textON=!textON;
       else if (key=="z")uniforms[ "helm" ].value = !uniforms[ "helm" ].value;
       else if (key=="j"){
-          if(uniforms[ "carousel" ].value==0)uniforms[ "carousel" ].value=1;
-          else if(uniforms[ "carousel" ].value==1)uniforms[ "carousel" ].value=-1;
-          else if(uniforms[ "carousel" ].value==-1)uniforms[ "carousel" ].value=0;
+          if(uniforms[ "carousel" ].value==0)uniforms[ "carousel" ].value=.5;//.5 is used instead of one to synchronize with starSpin (twist is through 24 not 12)
+          else if(uniforms[ "carousel" ].value==.5)uniforms[ "carousel" ].value=-.5;
+          else if(uniforms[ "carousel" ].value==-.5)uniforms[ "carousel" ].value=0;
       }
       else if (key=="k"){
-            if(uniforms[ "metaCarousel" ].value==0)uniforms[ "metaCarousel" ].value=1;
-            else if(uniforms[ "metaCarousel" ].value==1)uniforms[ "metaCarousel" ].value=-1;
-            else if(uniforms[ "metaCarousel" ].value==-1)uniforms[ "metaCarousel" ].value=0;
+            if(uniforms[ "metaCarousel" ].value==0)uniforms[ "metaCarousel" ].value=.5;
+            else if(uniforms[ "metaCarousel" ].value==.5)uniforms[ "metaCarousel" ].value=-.5;
+            else if(uniforms[ "metaCarousel" ].value==-.5)uniforms[ "metaCarousel" ].value=0;
         }
 
       else if (key=="y") uniforms[ "petals" ].value -= 1.;
