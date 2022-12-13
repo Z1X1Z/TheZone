@@ -306,7 +306,7 @@ function init() {
     {
       micIn : {  value: null }, // float array (vec3)
       time: {value: 1.0 },
-  rate: {value: 1. },
+  rate: {value: .5 },
 
       zoom: {value: 1.0 },
       colorCombo: {value: 1 },
@@ -554,10 +554,10 @@ adjustThreeJSWindow();//mostly for ios here
 
 
 
-if(starSpin!=0)twist=timestamp/1000.*flip*window.movementRate*starSpin;
 
     uniforms[ "time" ].value = Math.fround(timestamp/1000.);
 
+    if(starSpin!=0)twist=uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*2.*starSpin*2.;
 
 
 

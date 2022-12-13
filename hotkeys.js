@@ -44,7 +44,7 @@ function callKey(event){
       if (x>0)
         {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
       else if (x==0)
-        {window.movementRate=2.; uniforms[ "rate" ].value= 1.; }
+        {window.movementRate=2.; uniforms[ "rate" ].value= .5; }
       else if (key=="À"||key=="`"||key=="~")
         {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
       else if (key=="m") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
@@ -87,14 +87,14 @@ function callKey(event){
       else if (key=="v")textON=!textON;
       else if (key=="z")uniforms[ "helm" ].value = !uniforms[ "helm" ].value;
       else if (key=="j"){
-          if(uniforms[ "carousel" ].value==0)uniforms[ "carousel" ].value=.5;//.5 is used instead of one to synchronize with starSpin (twist is through 24 not 12)
-          else if(uniforms[ "carousel" ].value==.5)uniforms[ "carousel" ].value=-.5;
-          else if(uniforms[ "carousel" ].value==-.5)uniforms[ "carousel" ].value=0;
+          if(uniforms[ "carousel" ].value==0)uniforms[ "carousel" ].value=-1.;
+          else if(uniforms[ "carousel" ].value==-1.)uniforms[ "carousel" ].value=1.;
+          else if(uniforms[ "carousel" ].value==1.)uniforms[ "carousel" ].value=0;
       }
       else if (key=="k"){
-            if(uniforms[ "metaCarousel" ].value==0)uniforms[ "metaCarousel" ].value=.5;
-            else if(uniforms[ "metaCarousel" ].value==.5)uniforms[ "metaCarousel" ].value=-.5;
-            else if(uniforms[ "metaCarousel" ].value==-.5)uniforms[ "metaCarousel" ].value=0;
+            if(uniforms[ "metaCarousel" ].value==0)uniforms[ "metaCarousel" ].value=-1.;
+            else if(uniforms[ "metaCarousel" ].value==-1.)uniforms[ "metaCarousel" ].value=1.;
+            else if(uniforms[ "metaCarousel" ].value==1.)uniforms[ "metaCarousel" ].value=0;
         }
 
       else if (key=="y") uniforms[ "petals" ].value -= 1.;
