@@ -7,6 +7,10 @@ function stallTillTHREE(){
     }else setTimeout(stallTillTHREE,10);}//setTimeout waits for 10ms then runs stallTillTHREE();
 stallTillTHREE();//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
 //document.head.addEventListener('beforeunload', event => { cancelAnimationFrame();});
+let xyStarParticleArray=Array();
+
+
+
 let screenPressCoordX, screenPressCoordY;
 window.pointerZoom=false;
 let coordX=0., coordY=0.;
@@ -129,17 +133,47 @@ function spiral_compress(){
     let nAdj = n + d*4 ;
     //if (Math.abs(nAdj-n) < 10)
     if (Math.abs(d)<4+1)freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
-
+        else freq = audioX.sampleRate*n/numberOfBins
+        //    freq = 440; //check for concert A
     let g = Math.pow ( 2, (1/24.));
     let aa = freq/440.0;
     let note = Math.log(aa)/Math.log(g)+69*2;
     if (!onO)testar[(Math.round(note))%24] += Math.abs(z[n]);
-    else{
+    else{//if constinuous star is engaged pipe directly through avoiding the 24 modulo
       testar[n] = Math.abs(z[n]);
-      mustarD[n] = note;
     }
+        mustarD[n] = note;
+
   }
 };
+
+
+
+
+var twelve = Array(12);
+var smoothTwelve =false;
+function fiveAndSeven(){
+    
+    for(let n = 0; n<12; n++){twelve[n] = Array(10);
+        for(let m = 0; m<10; m++)twelve[n][m]=0;
+    }
+    
+      let finger = 0 //ranges up to
+      let  star = 0 //ranges up to 12
+        for(let n = 0; n<numberOfBins; n++)        {
+            //mustard is in 24ths, here we want 12ths so we divide by two
+            let twelfths = (mustarD[n]-57)/2.//adjusted to c3  = 0 I hope
+           
+                if( twelfths>=0){
+                    star = Math.round(twelfths)%12;
+                    finger = Math.floor(twelfths/10);
+                    if (finger<10&&!isNaN(star)&&!isNaN(dataArray[n])) twelve[star][finger] += dataArray[n];
+                }
+                        
+            
+            }
+console.log(twelve)
+}
 
 let trail = Array(1000);
 let cx = Array(1000);
@@ -691,42 +725,109 @@ if(!zoomAtl41)zoomRoutine();//  zoomAtl41 is zoom freeze
    var star=[];
    const starColors=[];
 if(!window.touchMode){
-   if(onO){
-    for (var g=0; g<starArms; g++) if(testar[g]>maxTestar) maxTestar=testar[g];
-      for (var g=0; g<starArms; g++) if(testar[g]<minTestar) minTestar=testar[g];
+         if(onO){
+             for (var g=0; g<starArms; g++) if(testar[g]>maxTestar) maxTestar=testar[g];
+             for (var g=0; g<starArms; g++) if(testar[g]<minTestar) minTestar=testar[g];
+             
+             
+             
+             
+             const fill = 38;
+             const starCount = starArms*5.;
+             
+             for (var g=0; g<starArms; g++)
+                 
+             {
+                 if(isFinite(testar[g])&&testar[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.){
+                     
+                     var widt = 1./fill;
+                     var arm =(flip*(mustarD[g]+2.)+18+twist)%24./24.*pi*2.;
+                     var lengt =testar[g]/255./fill*3.;//
+                     let lengtOriginal=(testar[g]-minTestar)/(maxTestar-minTestar);
+                     
+                     var vop = new THREE.Color();
+                     vop.setHSL(-mustarD[g]%24./24., mustarD[g]/297.,mustarD[g]/297.);//297 is the highest heard note
+                     material = new THREE.MeshBasicMaterial({
+                     color:vop,
+                     opacity: 1.,
+                     transparent: true,
+                     });
+                     
+                     rpio2 =arm+pi/2.;
 
-    for (var g=0; g<starArms; g++)if(isFinite(testar[g])&&testar[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.) {
-        var widt = .02;
-        var arm =(flip*(mustarD[g]+2.)+18+twist)%24./24.*pi*2.;
-        var lengt = (testar[g]-minTestar)/(maxTestar-minTestar);
-
-        var vop = new THREE.Color();
-       vop.setHSL(-mustarD[g]%24./24., mustarD[g]/297.,mustarD[g]/297.);//297 is the highest heard note
-        material = new THREE.MeshBasicMaterial({
-        color:vop,
-        opacity: 1.,
-        transparent: true,
-      });
-
-                  for(var yy=0;yy<6;yy++)   starColors.push(vop.r,vop.g,vop.b,1.)
-
-            rpio2 =arm+pi/2.;
-            let x = widt*-Math.sin(rpio2);
-            let y = widt*-Math.cos(rpio2);
-            let xr = lengt*-Math.sin(arm);
-            let yr = lengt*-Math.cos(arm);
-    let depth = -1.+lengt;//shortest bar on top
-
-     star.push(
-
-       -x,    -y,  depth,
-        x,    y,  depth,
-        (xr+x), (yr+y),  depth,
-        -x, -y,  depth,
-        (xr+x), (yr+y),  depth,
-        (xr-x), (yr-y),  depth,
-    ) ;
-
+        if(RockInTheWater==0||RockInTheWater==1)
+        {
+            for(var yy=0;yy<6;yy++)   starColors.push(vop.r,vop.g,vop.b,1.)
+                
+            let x = .02*-Math.sin(rpio2);
+            let y = .02*-Math.cos(rpio2);
+            let xr = lengtOriginal*-Math.sin(arm);
+            let yr = lengtOriginal*-Math.cos(arm);
+            let depth = -1.+lengtOriginal;//shortest bar on top
+            
+            star.push(
+                      
+                      -x,    -y,  depth,
+                      x,    y,  depth,
+                      (xr+x), (yr+y),  depth,
+                      -x, -y,  depth,
+                      (xr+x), (yr+y),  depth,
+                      (xr-x), (yr-y),  depth,
+                      ) ;
+        }
+                     if(RockInTheWater==1||RockInTheWater==2)
+                     {
+                         var xyStarParticle={};
+                         xyStarParticle.x=lengt*-Math.sin(rpio2);;
+                         xyStarParticle.xr=widt*-Math.sin(arm);;
+                         xyStarParticle.y=lengt*-Math.cos(rpio2);;
+                         xyStarParticle.yr=widt*-Math.cos(arm);;
+                         xyStarParticle.vop=vop;
+                         xyStarParticle.lengt=lengt
+                         xyStarParticle.widt=widt
+                         xyStarParticle.time = uniforms["time"].value;
+                         xyStarParticle.interpolation = interpolation;
+                         xyStarParticle.amp=testar[g]/255.;
+                         xyStarParticleArray.push(xyStarParticle);
+                         if(xyStarParticleArray.length>starCount)xyStarParticleArray.shift();
+                     }
+                 }}
+             
+             
+             
+             if (RockInTheWater==1||RockInTheWater==2)
+             {
+                 for(let starMoment=0; starMoment<xyStarParticleArray.length; starMoment++)
+                     
+                 {
+                     for(var yy=0;yy<6;yy++)   starColors.push(
+                                                               
+                                                               xyStarParticleArray[starMoment].vop.r,
+                                                               xyStarParticleArray[starMoment].vop.g,
+                                                               xyStarParticleArray[starMoment].vop.b,1.)
+                         
+                         
+                         
+                         let m = xyStarParticleArray[starMoment];
+                     
+                     let w = -(m.time-uniforms["time"].value)/m.widt;
+                     let depth = -1.+m.amp;//-1.+(uniforms["time"].value-m.time);
+                     
+                     m.outSetX = w*m.xr;
+                     m.outSetY = w*m.yr;
+                     star.push(
+                               
+                               -m.x+m.outSetX,    -m.y+m.outSetY,  depth,
+                               m.x+m.outSetX,    m.y+m.outSetY,  depth,
+                               (m.xr+m.x)+m.outSetX, (m.yr+m.y)+m.outSetY,  depth,
+                               -m.x+m.outSetX, -m.y+m.outSetY,  depth,
+                               (m.xr+m.x)+m.outSetX, (m.yr+m.y)+m.outSetY,  depth,
+                               (m.xr-m.x)+m.outSetX, (m.yr-m.y)+m.outSetY,  depth,
+                               ) ;
+                 }
+             }
+         }
+             
 /*
       0-widt*-Math.sin(rpio2),    0-widt*-Math.cos(rpio2),  -0.05,
       (lengt*-Math.sin(yy)+widt*-Math.sin(rpio2)),
@@ -736,9 +837,9 @@ if(!window.touchMode){
       */
     // itemSize = 3 because there are 3 values (components) per vertex
 
-        }
+        
 
-}
+
 else{//start drawing of just twenty four frets here
             var maxTestar=1.;
             for (var g=0; g<24; g++) if(testar[g]>maxTestar){maxTestar=testar[g];}
@@ -779,32 +880,112 @@ x,    y,  depth,
 ) ;
 
 } }
-         /*https://www.youtube.com/watch?v=4SH_-YhN15A&list=WL&index=10&t=2328s  wouldn't this be cool with the equalizer starship, description of process at beginning of video
-                 const quaternion = new THREE.Quaternion();
-                 quaternion.setFromAxisAngle( new THREE.Vector3( 0, 0, 1 ), Math.PI / 2 );
-                                             for(var n=0.; n<star.length;n+=3){
-                                             const a= new THREE.Vector3(star[n],star[n+1],star[n+2])
-                 const b = a.applyQuaternion(quaternion);
-                                             star[n]=b.x;
-                                             star[n+1]=b.y
-                                             }
-                       */
-                 geome = new THREE.BufferGeometry();
+      
+         
+         if(window.octaveStars)
+         {
+             fiveAndSeven();
 
-                 geome.setAttribute( 'position', new THREE.Float32BufferAttribute( star, 3 ).onUpload( disposeArray ) );
-                    geome.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ).onUpload( disposeArray ));
-                     geome.computeBoundingBox();
+         let maxFinger = 0
+         let minFinger = 10000000000000000;
+         for (var t=0; t<12; t++) {
+             for (var g=0; g<10; g++) {
+                 if (twelve[t][g]>maxFinger)maxFinger = twelve[t][g];
+                 if (twelve[t][g]<minFinger)minFinger = twelve[t][g];
 
-                  var  opac=1.;
-                  if(window.overFace)opac=.32;
-                   material= new THREE.MeshBasicMaterial({
-                               opacity: opac,
-                             transparent: true,
-                               vertexColors: true,
-                              // side: THREE.DoubleSide
-                           });
+             }}
+    
+         for (var t=0; t<12; t++) {
+             
+             for (var g=0; g<10; g++) {
+                 var widt = .02;
+                 var finger = twelve[t][g];
+                 var arm =g/10.*pi*2.;
+                 
+                 var lengt = (finger-minFinger)/(maxFinger-minFinger)/2.;
+                 if(lengt>0){
+                     var vop = new THREE.Color();
+                     let BlackOrWhite;
+                     if (t==11||t==9||t==6||t==4||t==2)
+                         BlackOrWhite=0;
+                     else
+                         BlackOrWhite=1;
+                     vop.setRGB(BlackOrWhite,BlackOrWhite,BlackOrWhite);
+                     
+                     for(var yy=0;yy<6;yy++)   starColors.push(vop.r,vop.g,vop.b,1.)
+                         
+                         
+                         var vertices;
+                     var z = -.99;
+                     //var arm =(flip*(mustarD[g]+1.)+19+twist/2.)%24./24.*pi*2.;
+                     //var arm = (-flip*g+1)-1)*pi*2./24+twist;
+                     rpio2 =arm+pi/2.;
+                     let number = 5;
+                     fingerTwist=(flip*(t+number)-number-10+twist/2.+12)/12.*2.*pi
+                     let x = widt*-Math.sin(rpio2+fingerTwist+pi);
+                     let y = widt*-Math.cos(rpio2+fingerTwist+pi);
+                     let xr = lengt*-Math.sin(arm+fingerTwist+pi);
+                     let yr = lengt*-Math.cos(arm+fingerTwist+pi);
+                     let offsetX=-Math.sin(fingerTwist)/2.;
+                     let offsetY=-Math.cos(fingerTwist)/2.;
+                     let depth = -.98;//this depth should mean that half the trail is above and half below
+                     
+                     star.push(
+                               
+                               -x+offsetX,    -y+offsetY,  depth,
+                               x+offsetX,    y+offsetY,  depth,
+                               (xr+x)+offsetX, (yr+y)+offsetY,  depth,
+                               -x+offsetX, -y+offsetY,  depth,
+                               (xr+x)+offsetX, (yr+y)+offsetY,  depth,
+                               (xr-x)+offsetX, (yr-y)+offsetY,  depth,
+                               ) ;
+                 }
+             }
+         }
+                                  }
+      /*https://www.youtube.com/watch?v=4SH_-YhN15A&list=WL&index=10&t=2328s  wouldn't this be cool with the equalizer starship, description of process at beginning of video
+              const quaternion = new THREE.Quaternion();
+              quaternion.setFromAxisAngle( new THREE.Vector3( 0, 0, 1 ), Math.PI / 2 );
+                                          for(var n=0.; n<star.length;n+=3){
+                                          const a= new THREE.Vector3(star[n],star[n+1],star[n+2])
+              const b = a.applyQuaternion(quaternion);
+                                          star[n]=b.x;
+                                          star[n+1]=b.y
+                                          }
+                    */
+              geome = new THREE.BufferGeometry();
 
-                    meshe = new THREE.Mesh(geome , material );
+              geome.setAttribute( 'position', new THREE.Float32BufferAttribute( star, 3 ).onUpload( disposeArray ) );
+                 geome.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ).onUpload( disposeArray ));
+                  geome.computeBoundingBox();
+
+               var  opac=1.;
+               if(window.overFace)opac=.32;
+                material= new THREE.MeshBasicMaterial({
+                            opacity: opac,
+                          transparent: true,
+                            vertexColors: true,
+                           // side: THREE.DoubleSide
+                        });
+
+                 meshe = new THREE.Mesh(geome , material );
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
 
                  var trail=[];
                  var trailColor=[];

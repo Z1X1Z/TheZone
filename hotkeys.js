@@ -2,6 +2,9 @@
 
 window.zoom=1.;
 window.starSpin=0.;
+window.RockInTheWater=0;
+window.octaveStars=true;
+
 function readHash(){for(var n = location.hash.length;n>0;n--)callKey(new KeyboardEvent('keydown', {'key': location.hash[n],"keyCode":location.hash.charCodeAt(n)}));
 }
 function stallHash(){if(window.uniformsLoaded)readHash();else setTimeout(stallHash,10);}//uniforms are only loaded if mic is enabled
@@ -85,6 +88,8 @@ function callKey(event){
 
       else if (key=="c")center=!center;
       else if (key=="v")textON=!textON;
+      else if (key=="V"){RockInTheWater+=1;RockInTheWater=RockInTheWater%3;}
+
       else if (key=="z")uniforms[ "helm" ].value = !uniforms[ "helm" ].value;
       else if (key=="j"){
           if(uniforms[ "carousel" ].value==0)uniforms[ "carousel" ].value=-1.;
@@ -116,6 +121,7 @@ function callKey(event){
                 framesLong=FPS;
                 computeFPS=true;
             }
+      else if (key=="P"){octaveStars=!octaveStars;}
       else if (key=="h"){
                 fullscreen=!fullscreen
                 if(fullscreen)openFullscreen();
