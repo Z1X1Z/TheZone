@@ -733,7 +733,7 @@ if(!window.touchMode){
              
              
              const fill = 38;
-             const starCount = starArms*5.;
+             const starCount = starArms*fill/2.;
              
              for (var g=0; g<starArms; g++)
                  
@@ -742,7 +742,7 @@ if(!window.touchMode){
                      
                      var widt = 1./fill;
                      var arm =(flip*(mustarD[g]+2.)+18+twist)%24./24.*pi*2.;
-                     var lengt =testar[g]/255./fill*3.;//
+                     var lengt =testar[g]/255./fill*1.5;//
                      let lengtOriginal=(testar[g]-minTestar)/(maxTestar-minTestar);
                      
                      var vop = new THREE.Color();
@@ -759,8 +759,8 @@ if(!window.touchMode){
         {
             for(var yy=0;yy<6;yy++)   starColors.push(vop.r,vop.g,vop.b,1.)
                 
-            let x = .02*-Math.sin(rpio2);
-            let y = .02*-Math.cos(rpio2);
+            let x = widt*-Math.sin(rpio2);
+            let y = widt*-Math.cos(rpio2);
             let xr = lengtOriginal*-Math.sin(arm);
             let yr = lengtOriginal*-Math.cos(arm);
             let depth = -1.+lengtOriginal;//shortest bar on top
@@ -794,36 +794,45 @@ if(!window.touchMode){
                  }}
              
              
+             let s = fill*Math.max(innerHeight,innerWidth)/Math.min(innerHeight,innerWidth);
+             
              
              if (RockInTheWater==1||RockInTheWater==2)
              {
                  for(let starMoment=0; starMoment<xyStarParticleArray.length; starMoment++)
-                     
+               
                  {
-                     for(var yy=0;yy<6;yy++)   starColors.push(
-                                                               
-                                                               xyStarParticleArray[starMoment].vop.r,
-                                                               xyStarParticleArray[starMoment].vop.g,
-                                                               xyStarParticleArray[starMoment].vop.b,1.)
-                         
                          
                          
                          let m = xyStarParticleArray[starMoment];
                      
                      let w = -(m.time-uniforms["time"].value)/m.widt;
-                     let depth = -1.+m.amp;//-1.+(uniforms["time"].value-m.time);
                      
-                     m.outSetX = w*m.xr;
-                     m.outSetY = w*m.yr;
-                     star.push(
-                               
-                               -m.x+m.outSetX,    -m.y+m.outSetY,  depth,
-                               m.x+m.outSetX,    m.y+m.outSetY,  depth,
-                               (m.xr+m.x)+m.outSetX, (m.yr+m.y)+m.outSetY,  depth,
-                               -m.x+m.outSetX, -m.y+m.outSetY,  depth,
-                               (m.xr+m.x)+m.outSetX, (m.yr+m.y)+m.outSetY,  depth,
-                               (m.xr-m.x)+m.outSetX, (m.yr-m.y)+m.outSetY,  depth,
-                               ) ;
+                     if(w<s)
+                     {
+                         let depth = -.987;//-1.+(uniforms["time"].value-m.time);
+                         
+                         m.outSetX = w*m.xr;
+                         m.outSetY = w*m.yr;
+                         
+                             
+                             for(var yy=0;yy<6;yy++)   starColors.push(
+                                                                       
+                                                                       m.vop.r,
+                                                                       m.vop.g,
+                                                                       m.vop.b,1.)
+                                 
+                         star.push(
+                                   
+                                   -m.x+m.outSetX,    -m.y+m.outSetY,  depth,
+                                   m.x+m.outSetX,    m.y+m.outSetY,  depth,
+                                   (m.xr+m.x)+m.outSetX, (m.yr+m.y)+m.outSetY,  depth,
+                                   -m.x+m.outSetX, -m.y+m.outSetY,  depth,
+                                   (m.xr+m.x)+m.outSetX, (m.yr+m.y)+m.outSetY,  depth,
+                                   (m.xr-m.x)+m.outSetX, (m.yr-m.y)+m.outSetY,  depth,
+                                   ) ;
+                     }
+                   //  else break;
                  }
              }
          }
