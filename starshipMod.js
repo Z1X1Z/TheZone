@@ -732,7 +732,7 @@ if(!window.touchMode){
              
              
              
-             const fill = 38;
+             const fill = 38.;
              const starCount = starArms*fill/2.;
              
              for (var g=0; g<starArms; g++)
@@ -742,7 +742,7 @@ if(!window.touchMode){
                      
                      var widt = 1./fill;
                      var arm =(flip*(mustarD[g]+2.)+18+twist)%24./24.*pi*2.;
-                     var lengt =testar[g]/255./fill*1.5;//
+                     var lengt =(testar[g]/255./fill*.5);//
                      let lengtOriginal=(testar[g]-minTestar)/(maxTestar-minTestar);
                      
                      var vop = new THREE.Color();
@@ -808,9 +808,9 @@ if(!window.touchMode){
                      
                      let w = -(m.time-uniforms["time"].value)/m.widt;
                      
-                     if(w<s)
+                     if(w<=s)
                      {
-                         let depth = -.987;//-1.+(uniforms["time"].value-m.time);
+                         let depth = -1.+m.widt/101;//-1.+(uniforms["time"].value-m.time);
                          
                          m.outSetX = w*m.xr;
                          m.outSetY = w*m.yr;
