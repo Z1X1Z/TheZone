@@ -423,6 +423,7 @@ dotted:{value:false}
 
     onWindowResize()
 }
+       let correlationForText= document.getElementById("allText").offsetHeight;;
 function adjustThreeJSWindow()
 {
          let correlationForText = document.getElementById("allText").offsetHeight;
@@ -794,7 +795,7 @@ if(!window.touchMode){
                  }}
              
              
-             let s = fill*Math.max(innerHeight,innerWidth)/Math.min(innerHeight,innerWidth);
+             let s = fill*Math.max(innerHeight-correlationForText,innerWidth)/Math.min(innerHeight-correlationForText,innerWidth);
              
              
              if (RockInTheWater==1||RockInTheWater==2)
