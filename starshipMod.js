@@ -811,7 +811,7 @@ if(!window.touchMode){
                      
                      if(w<s)
                      {
-                         let depth = -1.+m.widt/101;//-1.+(uniforms["time"].value-m.time);
+                         let depth = -.9+m.widt/101;//-1.+(uniforms["time"].value-m.time);
                          
                          m.outSetX = w*m.xr;
                          m.outSetY = w*m.yr;
