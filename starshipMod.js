@@ -741,9 +741,9 @@ if(!window.touchMode){
              {
                  if(isFinite(testar[g])&&testar[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.){
                      
-                     var widt = .0441;
+                     var widt = 1./60.;
                      var arm =(flip*(mustarD[g]+2.)+18+twist)%24./24.*pi*2.;
-                     var lengt =(testar[g]/255./60.*1.);//
+                     var lengt =(testar[g]/255./60.*1.5);//
                      let lengtOriginal=(testar[g]-minTestar)/(maxTestar-minTestar);
                      
                      var vop = new THREE.Color();
@@ -908,7 +908,7 @@ x,    y,  depth,
          for (var t=0; t<12; t++) {
              
              for (var g=0; g<10; g++) {
-                 var widt = .02;
+                 var widt = 1./60.;
                  var finger = twelve[t][g];
                  var arm =g/10.*pi*2.;
                  
