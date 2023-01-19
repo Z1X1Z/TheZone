@@ -821,7 +821,7 @@ if(!window.touchMode){
                                                                        
                                                                        m.vop.r,
                                                                        m.vop.g,
-                                                                       m.vop.b,1.)
+                                                                       m.vop.b,.72)
                                  
                          star.push(
                                    
