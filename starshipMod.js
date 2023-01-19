@@ -733,7 +733,7 @@ if(!window.touchMode){
              
              
              
-             const fill =sampleRate/fftSize;//This should be set to either sampleRate/fftSize or by predicted FPS
+             let fill =FPS;//This should be set to either sampleRate/fftSize or by predicted FPS
              const starCount = starArms*fill;
              
              for (var g=0; g<starArms; g++)
