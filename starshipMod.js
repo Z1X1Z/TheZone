@@ -741,7 +741,7 @@ if(!window.touchMode){
              {
                  if(isFinite(testar[g])&&testar[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.){
                      
-                     var widt = 1./fill;
+                     var widt = .0441;
                      var arm =(flip*(mustarD[g]+2.)+18+twist)%24./24.*pi*2.;
                      var lengt =(testar[g]/255./fill*.5);//
                      let lengtOriginal=(testar[g]-minTestar)/(maxTestar-minTestar);
@@ -779,13 +779,13 @@ if(!window.touchMode){
                      if(RockInTheWater==1||RockInTheWater==2)
                      {
                          var xyStarParticle={};
-                         xyStarParticle.x=lengt*-Math.sin(rpio2);;
-                         xyStarParticle.xr=widt*-Math.sin(arm);;
-                         xyStarParticle.y=lengt*-Math.cos(rpio2);;
-                         xyStarParticle.yr=widt*-Math.cos(arm);;
+                         xyStarParticle.x=lengt*-Math.sin(rpio2);
+                         xyStarParticle.xr=-Math.sin(arm)/fill;
+                         xyStarParticle.y=lengt*-Math.cos(rpio2);
+                         xyStarParticle.yr=-Math.cos(arm)/fill;
                          xyStarParticle.vop=vop;
                          xyStarParticle.lengt=lengt
-                         xyStarParticle.widt=widt
+                         xyStarParticle.widt=1./fill
                          xyStarParticle.time = uniforms["time"].value;
                          xyStarParticle.interpolation = interpolation;
                          xyStarParticle.amp=testar[g]/255.;
