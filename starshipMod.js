@@ -484,7 +484,7 @@ correlationForText+=document.getElementById("allText").offsetHeight;
             let ticker = 0;
             let FPS=0.;
 
-                  const interval = 200;
+                  const interval = 1000./60.;//sample time of FPS meter
                   let elapsedTimeBetweenFrames = 0.;
                   let lastPitch = 1;
 
@@ -795,7 +795,7 @@ if(!window.touchMode){
                  }}
              
              
-             let s = fill*Math.max(innerHeight-correlationForText,innerWidth)/Math.min(innerHeight-correlationForText,innerWidth);
+             let s = Math.max(innerHeight-correlationForText,innerWidth)/Math.min(innerHeight-correlationForText,innerWidth);
              
              
              if (RockInTheWater==1||RockInTheWater==2)
@@ -809,7 +809,7 @@ if(!window.touchMode){
                      
                      let w = -(m.time-uniforms["time"].value)/m.widt;
                      
-                     if(w<s)
+                     if(w<s/m.widt)
                      {
                          let depth = -.9+m.widt/101;//-1.+(uniforms["time"].value-m.time);
                          
