@@ -733,8 +733,8 @@ if(!window.touchMode){
              
              
              
-             const fill = 38.;
-             const starCount = starArms*fill/2.;
+             const fill =sampleRate/fftSize;//This should be set to either sampleRate/fftSize or by predicted FPS
+             const starCount = starArms*fill;
              
              for (var g=0; g<starArms; g++)
                  
@@ -809,7 +809,7 @@ if(!window.touchMode){
                      
                      let w = -(m.time-uniforms["time"].value)/m.widt;
                      
-                     if(w<=s)
+                     if(w<s)
                      {
                          let depth = -1.+m.widt/101;//-1.+(uniforms["time"].value-m.time);
                          
