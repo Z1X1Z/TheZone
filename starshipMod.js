@@ -484,7 +484,7 @@ correlationForText+=document.getElementById("allText").offsetHeight;
             let ticker = 0;
             let FPS=0.;
 
-                  const interval = 1000./60.;//sample time of FPS meter
+                  const interval = 1000./60.;//sample window of FPS meter
                   let elapsedTimeBetweenFrames = 0.;
                   let lastPitch = 1;
 
@@ -743,7 +743,7 @@ if(!window.touchMode){
                      
                      var widt = .0441;
                      var arm =(flip*(mustarD[g]+2.)+18+twist)%24./24.*pi*2.;
-                     var lengt =(testar[g]/255./fill*.5);//
+                     var lengt =(testar[g]/255./60.*1.);//
                      let lengtOriginal=(testar[g]-minTestar)/(maxTestar-minTestar);
                      
                      var vop = new THREE.Color();
