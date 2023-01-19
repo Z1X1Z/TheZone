@@ -793,8 +793,9 @@ if(!window.touchMode){
                          if(xyStarParticleArray.length>starCount)xyStarParticleArray.shift();
                      }
                  }}
+             adjustThreeJSWindow();
              
-             let s = Math.max(height,width)/Math.min(height,width);
+             let s =Math.max(height,width)/Math.min(height,width);
              
              
              if (RockInTheWater==1||RockInTheWater==2)
@@ -808,7 +809,7 @@ if(!window.touchMode){
                      
                      let w = -(m.time-uniforms["time"].value)/m.widt;
                      
-                     if(w<s*60./2.)
+                     if( (uniforms["time"].value-m.time) < s)//s)
                      {
                          let depth = -.9+m.widt/101;//-1.+(uniforms["time"].value-m.time);
                          
