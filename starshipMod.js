@@ -794,8 +794,7 @@ if(!window.touchMode){
                      }
                  }}
              
-             
-             let s = Math.max(innerHeight-correlationForText,innerWidth)/Math.min(innerHeight-correlationForText,innerWidth);
+             let s = Math.max(height,width)/Math.min(height,width);
              
              
              if (RockInTheWater==1||RockInTheWater==2)
@@ -809,7 +808,7 @@ if(!window.touchMode){
                      
                      let w = -(m.time-uniforms["time"].value)/m.widt;
                      
-                     if(w<s/m.widt)
+                     if(w<s*60./2.)
                      {
                          let depth = -.9+m.widt/101;//-1.+(uniforms["time"].value-m.time);
                          
