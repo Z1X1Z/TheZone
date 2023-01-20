@@ -183,6 +183,8 @@ let pitchCol = Array(trailWidth.length);
 let trailLoaded = false;
 let trailDepth = -1;
 let d_x=0,d_y=0;
+let staticX=0,staticY=0;
+
 let circleX=0.,circleY=0.;
 let circleGeometry,circleMaterial,circle;
 let dotSize = .112;
@@ -259,7 +261,7 @@ angle = ((angle+180)/360*2*pi);
 
          d_x = -Math.sin(-angle)*volume*window.movementRate;
          d_y = -Math.cos(-angle)*volume*window.movementRate;
-
+                       
          uniforms.d.value.x=d_x;
          uniforms.d.value.y=d_y;
 
@@ -276,6 +278,8 @@ if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold&&on){
 
                coordX=bx;
                coordY=by;
+    staticX+=d_xS;
+    staticY+=d_yS;
            }
 if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize){//adjust back in if too far from the cener
                if (Math.abs(by)>Math.sqrt(window.zoomCageSize))coordY*=1.-(Math.abs(by)-window.zoomCageSize)/40.;
@@ -745,7 +749,7 @@ if(!window.touchMode){
                      
                      var widt = 1.5/60.;
                      var arm =(flip*(mustarD[g]+2.)+18+twist)%24./24.*pi*2.;
-                     var lengt =(testar[g]/255./60.*1.5);//
+                     var lengt =(testar[g]/255./60.*1.5);//twice applied
                      let lengtOriginal=(testar[g]-minTestar)/(maxTestar-minTestar);
                      
                      var vop = new THREE.Color();
@@ -791,6 +795,9 @@ if(!window.touchMode){
                          xyStarParticle.time = timestamp/1000.;
                          xyStarParticle.interpolation = interpolation;
                          xyStarParticle.amp=testar[g]/255.;
+                         xyStarParticle.staticX=staticX;
+                         xyStarParticle.staticY=staticY;
+
                          xyStarParticleArray.push(xyStarParticle);
                          if(xyStarParticleArray.length>starCount)xyStarParticleArray.shift();
                      }
@@ -811,12 +818,12 @@ if(!window.touchMode){
                      
                      let w = -(m.time-uniforms["time"].value)/m.widt;
                      
-                     if( (uniforms["time"].value-m.time) < s)//s)
+                     if( (uniforms["time"].value-m.time) +m.widt< s)//s)
                      {
                          let depth = (m.time-uniforms["time"].value)/s*.99;
                          
-                         m.outSetX = w*m.xr;
-                         m.outSetY = w*m.yr;
+                         m.outSetX = w*m.xr;//-(m.staticX-staticX)/60.*2.;//remove comments to engage relative streamstar movement
+                         m.outSetY = w*m.yr;//-(m.staticY-staticY)/60.*2.;
                          
                              
                              for(var yy=0;yy<6;yy++)   starColors.push(
@@ -879,7 +886,7 @@ let x = widt*-Math.sin(rpio2);
 let y = widt*-Math.cos(rpio2);
 let xr = lengt*-Math.sin(arm);
 let yr = lengt*-Math.cos(arm);
-let depth = -.77;//this depth should mean that half the trail is above and half below
+let depth = -.99;//this depth should mean that half the trail is above and half below
 
 star.push(
 
@@ -928,7 +935,6 @@ x,    y,  depth,
                          
                          
                          var vertices;
-                     var z = -.99;
                      //var arm =(flip*(mustarD[g]+1.)+19+twist/2.)%24./24.*pi*2.;
                      //var arm = (-flip*g+1)-1)*pi*2./24+twist;
                      rpio2 =arm+pi/2.;
@@ -1017,7 +1023,7 @@ while(loopLimit>0&&r!=f){
   let widtr = (1.-trailWidth[r]);
   let widts = (1.-trailWidth[s]);
   let tt = 0.;
-  var z = (-1.+(trailDepth-loopLimit)/trailDepth/window.movementRate*2.);
+  var z = (-1.+(trailDepth-loopLimit)/trailDepth)/window.movementRate*2.;
                           let transparencyOfTrail=.75*(1.-(trailDepth-loopLimit)/trailDepth);
                           trailColor.push(
 
