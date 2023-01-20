@@ -34,7 +34,7 @@ window.flip = 1;
 let radius = .5;
 var rez=1.;
 let fftSize=2048;
-let trailLength = 576;
+let trailLength = 100;
 let colorSound;
 let center = false;
                   let geome;
@@ -484,7 +484,7 @@ correlationForText+=document.getElementById("allText").offsetHeight;
             let ticker = 0;
             let FPS=0.;
 
-                  const interval = 1000./60.;//sample window of FPS meter
+                  const interval = 333;//sample window of FPS meter
                   let elapsedTimeBetweenFrames = 0.;
                   let lastPitch = 1;
 
@@ -582,6 +582,7 @@ function takeNextScoreSlice(start){
                       drawUpToMeasureNumber:start+Math.floor(window.innerWidth/window.innerHeight*2.)
                       }) // requires re-render
 }
+                       let timestamplast=0;
 function animate( timestamp ) {
 adjustThreeJSWindow();//mostly for ios here
 
@@ -732,9 +733,10 @@ if(!window.touchMode){
              
              
              
-             
-             let fill =FPS;//This should be set to either sampleRate/fftSize or by predicted FPS
-             const starCount = starArms*fill;
+             let fill =1000./(timestamp - timestamplast);//This should be set to either sampleRate/fftSize or by predicted FPS
+             timestamplast = timestamp;
+
+             const starCount = starArms*60;
              
              for (var g=0; g<starArms; g++)
                  
@@ -786,7 +788,7 @@ if(!window.touchMode){
                          xyStarParticle.vop=vop;
                          xyStarParticle.lengt=lengt
                          xyStarParticle.widt=1./fill
-                         xyStarParticle.time = uniforms["time"].value;
+                         xyStarParticle.time = timestamp/1000.;
                          xyStarParticle.interpolation = interpolation;
                          xyStarParticle.amp=testar[g]/255.;
                          xyStarParticleArray.push(xyStarParticle);
@@ -811,7 +813,7 @@ if(!window.touchMode){
                      
                      if( (uniforms["time"].value-m.time) < s)//s)
                      {
-                         let depth = -.9+m.widt/101;//-1.+(uniforms["time"].value-m.time);
+                         let depth = (m.time-uniforms["time"].value)/s*.99;
                          
                          m.outSetX = w*m.xr;
                          m.outSetY = w*m.yr;
@@ -1015,7 +1017,7 @@ while(loopLimit>0&&r!=f){
   let widtr = (1.-trailWidth[r]);
   let widts = (1.-trailWidth[s]);
   let tt = 0.;
-  var z = -1.+(trailDepth-loopLimit)/trailDepth;
+  var z = (-1.+(trailDepth-loopLimit)/trailDepth/window.movementRate*2.);
                           let transparencyOfTrail=.75*(1.-(trailDepth-loopLimit)/trailDepth);
                           trailColor.push(
 
