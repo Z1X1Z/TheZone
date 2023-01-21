@@ -16,7 +16,7 @@ window.pointerZoom=false;
 let coordX=0., coordY=0.;
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
-window.movementRate=1.5;
+window.movementRate=1.5;//value of 1.5 moves trail to edge of screen in 1 second
 window.touchMode=false;
 window.volumeSpeed = false;
 
@@ -349,7 +349,7 @@ function init() {
     {
       micIn : {  value: null }, // float array (vec3)
       time: {value: 1.0 },
-  rate: {value: .5 },
+  rate: {value: 1./window.movementRate },
 
       zoom: {value: 1.0 },
       colorCombo: {value: 1 },
@@ -741,7 +741,8 @@ if(!window.touchMode){
              for (var g=0; g<starArms; g++) if(testar[g]<minTestar) minTestar=testar[g];
              
              
-             let secondsToEdge=1.5/movementRate;
+             let secondsToEdge=1;
+             secondsToEdge*=1.5/movementRate;
              let fill =1000./(timestamp - timestamplast)*secondsToEdge;//This should be set to either sampleRate/fftSize or by predicted FPS
              timestamplast = timestamp;
 
