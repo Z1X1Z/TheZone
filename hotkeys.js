@@ -88,7 +88,9 @@ function callKey(event){
 
       else if (key=="c")center=!center;
       else if (key=="v")textON=!textON;
-      else if (key=="V"){RockInTheWater+=1;RockInTheWater=RockInTheWater%3;}
+      else if (key=="V"){        if (!onO)onO=true;
+
+          RockInTheWater+=1;RockInTheWater=RockInTheWater%3;}
 
       else if (key=="z")uniforms[ "helm" ].value = !uniforms[ "helm" ].value;
       else if (key=="j"){
@@ -129,8 +131,7 @@ function callKey(event){
             }
       else if (key==" "||key=="_")
       {
-        if (onO)onO=false;
-        else onO = true;
+        onO=!onO;
       }
       else if (key=="w")window.volumeSpeed=!window.volumeSpeed;
 

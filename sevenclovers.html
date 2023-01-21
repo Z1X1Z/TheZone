@@ -46,6 +46,45 @@
                           key  = 't';
                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                        <label for="Touch">Touch!</label><br>
+                       
+                       
+                       
+                       
+                       <input type="checkbox" id="Note Stars" name="t"  onclick= "
+                           key  = 'P';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                        <label for="Note Stars">Note Stars!</label><br>
+                        
+                       <a id="Star Stream" name="t"  onclick= "
+
+                           key  = 'V';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                           Star Stream!</a><br>
+                       
+                       <a id="Clockwise Spin" name="t"  onclick= "
+
+                           key  = 'D';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                           Clockwise Spin!</a><br>
+                       
+                       <a id="Counter Clockwise Spin" name="t"  onclick= "
+
+                           key  = 'A';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                           Counter Clockwise Spin!</a><br>
+                       
+                       <a id="Shift Up" name="t"  onclick= "
+
+                           key  = 'W';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                           Shift Up!</a><br>
+                       <a id="Shift Down" name="t"  onclick= "
+
+                           key  = 'S';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                           Shift Down!</a><br>
+                       
+                       
                        <a id="Cancel Background Noise" name="t"  onclick= "
 
                            key  = 'p';
@@ -234,6 +273,11 @@
                                   Manny!</a><br>
 
 
+                              <a id="Acrostic" name="t"  onclick= "
+                                  key  = '$';
+                                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                                  Acrostic!</a><br>
+
                                <a id="ToLToK" name="t"  onclick= "
                                    key  = 'd';
                                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -265,9 +309,10 @@
                 </div>
 
 
-                <script>
+                <script>//uncheck all menu boxes
                     let h =document.querySelectorAll("input");
                     for(var p = 0; p<h.length;p++)h[p].checked  = false; </script><!--uncheck all the boxes in the menu!-->
+
 
               <div id="container"></div>
 
@@ -1024,6 +1069,7 @@ vec3 xtol(vec2 s, vec2 t){
         //  if(length(t)>c)t/=c;
 
         t=vec2(1./(t.x*t.x-t.y*t.y), 2.0*t.x*t.y);//this is {s=s^2;s.real=-1./s.real}}
+//t.x=log(abs(t.x)
     }
     return vec3(t.x,1./t.y,t.x/t.y);
 
