@@ -137,7 +137,7 @@ function spiral_compress(){
         //    freq = 440; //check for concert A
     let g = Math.pow ( 2, (1/24.));
     let aa = freq/440.0;
-    let note = Math.log(aa)/Math.log(g)+69*2;
+    let note = Math.log(aa)/Math.log(g)+69*2;//I would like this 69 to be a 49 as it is it centers around e6
     if (!onO)testar[(Math.round(note))%24] += Math.abs(z[n]);
     else{//if constinuous star is engaged pipe directly through avoiding the 24 modulo
       testar[n] = Math.abs(z[n]);
@@ -162,7 +162,7 @@ function fiveAndSeven(){
       let  star = 0 //ranges up to 12
         for(let n = 0; n<numberOfBins; n++)        {
             //mustard is in 24ths, here we want 12ths so we divide by two
-            let twelfths = (mustarD[n]-57)/2.//adjusted to c3  = 0 I hope
+            let twelfths = (mustarD[n]-69-12*3.)/2.
            
                 if( twelfths>=0){
                     star = Math.round(twelfths)%12;
@@ -736,11 +736,11 @@ if(!window.touchMode){
              for (var g=0; g<starArms; g++) if(testar[g]<minTestar) minTestar=testar[g];
              
              
-             
-             let fill =1000./(timestamp - timestamplast);//This should be set to either sampleRate/fftSize or by predicted FPS
+             let secondsToEdge=1.;
+             let fill =1000./(timestamp - timestamplast)*secondsToEdge;//This should be set to either sampleRate/fftSize or by predicted FPS
              timestamplast = timestamp;
 
-             const starCount = starArms*60;
+             const starCount = starArms*60*secondsToEdge;
              
              for (var g=0; g<starArms; g++)
                  
@@ -804,7 +804,7 @@ if(!window.touchMode){
                  }}
              adjustThreeJSWindow();
              
-             let s =Math.max(height,width)/Math.min(height,width);
+             let s =Math.max(height,width)/Math.min(height,width)*secondsToEdge*.99;
              
              
              if (RockInTheWater==1||RockInTheWater==2)
@@ -812,51 +812,46 @@ if(!window.touchMode){
                  for(let starMoment=0; starMoment<xyStarParticleArray.length; starMoment++)
                
                  {
-                         
-                         
-                         let m = xyStarParticleArray[starMoment];
+                     let m = xyStarParticleArray[starMoment];
+                     let timeShift = m.time-uniforms["time"].value
                      
-                     let w = -(m.time-uniforms["time"].value)/m.widt;
-                     
-                     if( (uniforms["time"].value-m.time) +m.widt< s)//s)
+                     if( -timeShift +m.widt<s)//s)
                      {
-                         let depth = (m.time-uniforms["time"].value)/s*.99;
+                         let w = -(timeShift)/m.widt/secondsToEdge;
+
+                         let depth = (timeShift)/s;
                          
-                         m.outSetX = w*m.xr;//-(m.staticX-staticX)/60.*2.;//remove comments to engage relative streamstar movement
-                         m.outSetY = w*m.yr;//-(m.staticY-staticY)/60.*2.;
+                         let outSetX = w*m.xr;//-(m.staticX-staticX)/60.*2.;//remove comments to engage relative streamstar movement
+                         let outSetY = w*m.yr;//-(m.staticY-staticY)/60.*2.;
+
+                         for(var yy=0;yy<6;yy++)   starColors.push(
+                                                           m.vop.r,
+                                                           m.vop.g,
+                                                           m.vop.b,.72)
+                         let nx =-m.x+outSetX
+                         let ny =-m.y+outSetY
+                         let xShift=m.x+outSetX;
+                         let yShift=m.y+outSetY;
+                         let xrShifted = m.xr+xShift;
+                         let yrShifted = m.yr+yShift;
+
+
+                 star.push(
+                           
+                           nx,    ny,  depth,
+                           xShift,    yShift,  depth,
+                           xrShifted, yrShifted,  depth,
+                           nx, ny,  depth,
+                           xrShifted, yrShifted,  depth,
+                           m.xr+nx, m.yr+ny,  depth,
+                           )
                          
-                             
-                             for(var yy=0;yy<6;yy++)   starColors.push(
-                                                                       
-                                                                       m.vop.r,
-                                                                       m.vop.g,
-                                                                       m.vop.b,.72)
-                                 
-                         star.push(
-                                   
-                                   -m.x+m.outSetX,    -m.y+m.outSetY,  depth,
-                                   m.x+m.outSetX,    m.y+m.outSetY,  depth,
-                                   (m.xr+m.x)+m.outSetX, (m.yr+m.y)+m.outSetY,  depth,
-                                   -m.x+m.outSetX, -m.y+m.outSetY,  depth,
-                                   (m.xr+m.x)+m.outSetX, (m.yr+m.y)+m.outSetY,  depth,
-                                   (m.xr-m.x)+m.outSetX, (m.yr-m.y)+m.outSetY,  depth,
-                                   ) ;
                      }
-                   //  else break;
+                    //else break;
                  }
              }
          }
              
-/*
-      0-widt*-Math.sin(rpio2),    0-widt*-Math.cos(rpio2),  -0.05,
-      (lengt*-Math.sin(yy)+widt*-Math.sin(rpio2)),
-      (lengt*-Math.cos(yy)+widt*-Math.cos(rpio2)),  -0.05,
-      (lengt*-Math.sin(yy)-widt*-Math.sin(rpio2)),
-      (lengt*-Math.cos(yy)-widt*-Math.cos(rpio2)),  -0.05,
-      */
-    // itemSize = 3 because there are 3 values (components) per vertex
-
-        
 
 
 else{//start drawing of just twenty four frets here
@@ -917,7 +912,7 @@ x,    y,  depth,
          for (var t=0; t<12; t++) {
              
              for (var g=0; g<10; g++) {
-                 var widt = 1.5/60.;
+                 var widt = 1.5/60./2.;
                  var finger = twelve[t][g];
                  var arm =g/10.*pi*2.;
                  
@@ -942,8 +937,8 @@ x,    y,  depth,
                      fingerTwist=(flip*(t+number)-number-10+twist/2.+12)/12.*2.*pi
                      let x = widt*-Math.sin(rpio2+fingerTwist+pi);
                      let y = widt*-Math.cos(rpio2+fingerTwist+pi);
-                     let xr = lengt*-Math.sin(arm+fingerTwist+pi);
-                     let yr = lengt*-Math.cos(arm+fingerTwist+pi);
+                     let xr = pi/12.*lengt*-Math.sin(arm+fingerTwist+pi);
+                     let yr = pi/12.*lengt*-Math.cos(arm+fingerTwist+pi);
                      let offsetX=-Math.sin(fingerTwist)/2.;
                      let offsetY=-Math.cos(fingerTwist)/2.;
                      let depth = -.98;//this depth should mean that half the trail is above and half below
