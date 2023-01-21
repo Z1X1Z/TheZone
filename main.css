@@ -9,12 +9,13 @@ body, head {
     position: absolute;
     overflow: auto;
     -webkit-user-select: none;
-    user-select: none;
+    user-select: none;//prevent selection of menus
+    touch-action: none;//prevent zooming and panning
+
 }
 #textWindow{    line-height: .878;}
 #score{
     background-color: #fff;
-    touch-action: none;
     /*height:100px;*/
   }
 
@@ -76,6 +77,9 @@ canvas {
  overflow: hidden;
  background-color: #333;
  font-family: Arial;
+ 
+
+ 
 
 }
 
@@ -87,12 +91,14 @@ canvas {
  text-align: center;
  padding: 0px 0px;
  text-decoration: none;
+
 }
 
 /* The dropdown container */
 .dropdown {
  float: left;
  overflow: hidden;
+
 }
 
 /* Dropdown button */
@@ -112,7 +118,9 @@ canvas {
 
 /* Dropdown content (hidden by default) */
 .dropdown-content {
-
+    column-count:2;
+    column-gap: 5px;
+    column-rule: 1px solid white;
  display: none;
  position: absolute;
  background-color: black;

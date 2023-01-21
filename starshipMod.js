@@ -755,8 +755,7 @@ if(!window.touchMode){
                      
                      var widt = 1.5/60.;
                      var arm =(flip*(mustarD[g]+2.)+18+twist)%24./24.*pi*2.;
-                     var lengt =(testar[g]/255./60.*1.5);//twice applied
-                     let lengtOriginal=(testar[g]-minTestar)/(maxTestar-minTestar);
+                     let lengtOriginal=(testar[g]-minTestar)/(maxTestar-minTestar);//twice applied
                      
                      var vop = new THREE.Color();
                      vop.setHSL(-mustarD[g]%24./24., mustarD[g]/297.,mustarD[g]/297.);//297 is the highest heard note
@@ -790,6 +789,7 @@ if(!window.touchMode){
         }
                      if(RockInTheWater==1||RockInTheWater==2)
                      {
+                         var lengt =(testar[g]/255./60.*1.5);//twice applied
                          var xyStarParticle={};
                          xyStarParticle.x=lengt*-Math.sin(rpio2);
                          xyStarParticle.xr=-Math.sin(arm)/fill;
