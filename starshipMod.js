@@ -16,7 +16,7 @@ window.pointerZoom=false;
 let coordX=0., coordY=0.;
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
-window.movementRate=2.;
+window.movementRate=1.5;
 window.touchMode=false;
 window.volumeSpeed = false;
 
@@ -24,7 +24,7 @@ let zoomFrames = 60;//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   const mf = 1.;
 const MR = mf/zoomFrames;
-window.zoomCageSize = 1.5;//radius of zoom bounding
+window.zoomCageSize = 1.7;//radius of zoom bounding
                   window.uniformsLoaded=false;
 window.gameOn=false;
 zoomOutRatchetThreshold=1.5/255.;
@@ -172,7 +172,6 @@ function fiveAndSeven(){
                         
             
             }
-console.log(twelve)
 }
 
 let trail = Array(1000);
@@ -211,6 +210,7 @@ var angle;
 
 let pitchFound;
                            let xAdjusted, yAdjusted;
+let pushBackCounter = 0;
 function  move()
 {
     if (isNaN(coordX)||(!zoomAtl41&&coordX>4.))coordX=0.;
@@ -274,20 +274,25 @@ angle = ((angle+180)/360*2*pi);
 
     bx=coordX+d_xS*MR*zoom*interpolation;
   by=coordY+d_yS*MR*zoom*interpolation;
-if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold&&on){
+                       
+    let sqC = Math.sqrt(bx*bx+by*by);
 
-               coordX=bx;
-               coordY=by;
-    staticX+=d_xS;
-    staticY+=d_yS;
-           }
-if(Math.sqrt(by*by+bx*bx)>=window.zoomCageSize){//adjust back in if too far from the cener
-               if (Math.abs(by)>Math.sqrt(window.zoomCageSize))coordY*=1.-(Math.abs(by)-window.zoomCageSize)/40.;
-               if (Math.abs(bx)>Math.sqrt(window.zoomCageSize))coordX*=1.-(Math.abs(bx)-window.zoomCageSize)/40.;
-  }
+     if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold&&on){
 
-         if(Math.sqrt(coordY*coordY+coordX*coordX)>zoomCageSize*4./3.){coordX=0;coordY=0;}//teleport to center if too far from the center
+                    coordX=bx;
+                    coordY=by;
+         staticX+=d_xS;
+         staticY+=d_yS;
+                }
 
+   if(sqC>=window.zoomCageSize){//adjust back in if too far from the center
+        coordX*=window.zoomCageSize/sqC;
+        coordY*=window.zoomCageSize/sqC;
+        pushBackCounter++;
+    }
+    else pushBackCounter = 0
+                       
+    if(pushBackCounter>FPS/2.){coordX=0;coordY=0;}//teleport to center if continuously flying into perimeter
 
 
 
@@ -302,8 +307,8 @@ if (f>=trailDepth)f=0;
  yAdjusted= d_y*interpolation*MR*2./3.
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
 
-    cx[n] += xAdjusted;//this is accumulating the length of a trail segment//12 is hopefully based on the size of seven clovers.  Grip is elusive!!!!
-    cy[n] += yAdjusted;// two thirds seems to fit it to seven clovers neatly on "L"
+    cx[n] += xAdjusted;
+    cy[n] += yAdjusted;// two thirds seems to fit it to seven clovers neatly on "l"
 trailWidth[n] *= Math.pow(.997,interpolation);
 }
 
@@ -736,7 +741,7 @@ if(!window.touchMode){
              for (var g=0; g<starArms; g++) if(testar[g]<minTestar) minTestar=testar[g];
              
              
-             let secondsToEdge=1.;
+             let secondsToEdge=1.5/movementRate;
              let fill =1000./(timestamp - timestamplast)*secondsToEdge;//This should be set to either sampleRate/fftSize or by predicted FPS
              timestamplast = timestamp;
 
@@ -1018,7 +1023,7 @@ while(loopLimit>0&&r!=f){
   let widtr = (1.-trailWidth[r]);
   let widts = (1.-trailWidth[s]);
   let tt = 0.;
-  var z = (-1.+(trailDepth-loopLimit)/trailDepth)/window.movementRate*2.;
+  var z = (-1.+(trailDepth-loopLimit)/trailDepth);
                           let transparencyOfTrail=.75*(1.-(trailDepth-loopLimit)/trailDepth);
                           trailColor.push(
 
