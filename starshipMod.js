@@ -288,11 +288,11 @@ angle = ((angle+180)/360*2*pi);
    if(sqC>=window.zoomCageSize){//adjust back in if too far from the center
         coordX*=window.zoomCageSize/sqC;
         coordY*=window.zoomCageSize/sqC;
-        pushBackCounter++;
+        pushBackCounter+=FPS/60.;
     }
     else pushBackCounter = 0
                        
-    if(pushBackCounter>FPS/2.){coordX=0;coordY=0;}//teleport to center if continuously flying into perimeter
+    if(pushBackCounter>.5){coordX=0;coordY=0;}//teleport to center if continuously flying into perimeter
 
 
 
@@ -694,7 +694,7 @@ if( !window.touchMode&&!touchOnlyMode) {
 
   let lineMat =
   new THREE.LineBasicMaterial( {
-        color: 0xffffff,
+        color: 0x000000,
         opacity: .5,
         linewidth: 2,
         linecap: 'round', //ignored by WebGLRenderer
@@ -702,13 +702,13 @@ if( !window.touchMode&&!touchOnlyMode) {
   } );
   if (uniforms[ "metronome" ].value>1.)
     lineMat.color = new THREE.Color(-Math.sin(uniforms[ "time" ].value*uniforms[ "metronome" ].value))
-  if(onO||window.spiroRainbow)
+  if(window.spiroRainbow)
   {
     lineMat.color = colorSound;
     lineMat.opacity = 1.; //opacity has no effect
   }
 
-  let depth = -.97;
+  let depth = -.991;
   if (on)for (let r= 0; r < bufferSize; r ++) {
     let tx = spirray0[r]/spiregulator;
     let ty =  spirray1[r]/spiregulator;
@@ -805,7 +805,7 @@ if(!window.touchMode){
                          xyStarParticle.staticY=staticY;
 
                          xyStarParticleArray.push(xyStarParticle);
-                         if(xyStarParticleArray.length>starCount)xyStarParticleArray.shift();
+                         while(xyStarParticleArray.length>starCount)xyStarParticleArray.shift();
                      }
                  }}
              adjustThreeJSWindow();
