@@ -1,4 +1,6 @@
 body, head {
+    touch-action: none;
+
     margin: 0;
     background-color: #000;
     color: #fff;
@@ -15,6 +17,7 @@ body, head {
 }
 #textWindow{    line-height: .878;}
 #score{
+    
     background-color: #fff;
     /*height:100px;*/
   }
