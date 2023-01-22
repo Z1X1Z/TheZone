@@ -719,7 +719,7 @@ if( !window.touchMode&&!touchOnlyMode) {
 
 
 if(!zoomAtl41)zoomRoutine();//  zoomAtl41 is zoom freeze
-  uniforms[ "time2dance" ].value += totalAMP;
+  uniforms[ "time2dance" ].value += audioX.sampleRate/bufferSize*totalAMP;
          uniforms["volume" ].value = audioX.sampleRate/bufferSize*totalAMP/(1.+zoomOutRatchetThreshold)*4.;
 
 
