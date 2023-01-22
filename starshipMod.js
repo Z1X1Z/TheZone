@@ -137,7 +137,7 @@ function spiral_compress(){
         else freq = audioX.sampleRate*n/numberOfBins
         //    freq = 440; //check for concert A
  
-    let note =24*Math.log(freq/440)/Math.log(2.)+69*2;//I would like this 69 to be a 49 as it is it centers around e6
+    let note =24*Math.log(freq/440)/Math.log(2.)+49*2;//I would like this 69 to be a 49 as it is it centers around e6
     if (!onO)testar[(Math.round(note))%24] += Math.abs(z[n]);
     else{//if constinuous star is engaged pipe directly through avoiding the 24 modulo
       testar[n] = Math.abs(z[n]);
@@ -162,9 +162,9 @@ function fiveAndSeven(){
       let  star = 0 //ranges up to 12
         for(let n = 0; n<numberOfBins; n++)        {
             //mustard is in 24ths, here we want 12ths so we divide by two
-            let twelfths = (mustarD[n]-69-12*3.)/2.
+            let twelfths = (mustarD[n]-49*2)/2.+12//A1 is 1 with +12
            
-                if( twelfths>=0){
+                if( twelfths>=-.5){
                     star = Math.round(twelfths)%12;
                     finger = Math.floor(twelfths/10);
                     if (finger<10&&!isNaN(star)&&!isNaN(dataArray[n])) twelve[star][finger] += dataArray[n];
@@ -245,15 +245,15 @@ if(pitch==1) on = false;
     pitch=lastPitch;
 
 let note = 12*Math.log(pitch/440)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
-let t =  (note -3)*flip+3+twist/2;
+let t =  (note )*flip+twist/2;
 angle = -(30*t)%360;
 
 
 colorSound = new THREE.Color();
              //          colorSound.setHSL((angle+90)/360.,(180+note)/297,(180+note)/297);
 let reversableColor=0.;
-if(flip>0)reversableColor=(angle+120)/360.+twist/24.*flip;
-else if (flip<0)reversableColor=1.-(angle+60)/360.+twist/24.*flip;
+                       let j = 0;
+reversableColor=(angle/360.+twist/24.)*flip+120/360.;
     colorSound.setHSL(reversableColor,1.,.5);
 
 pitchCol[f]  = colorSound;
@@ -754,11 +754,11 @@ if(!window.touchMode){
                  if(isFinite(testar[g])&&testar[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.){
                      
                      var widt = 1.5/60.;
-                     var arm =(flip*(mustarD[g]+2.)+18+twist)%24./24.*pi*2.;
+                     var arm =(flip*(mustarD[g])+twist+12)%24./24.*pi*2.;
                      let lengtOriginal=(testar[g]-minTestar)/(maxTestar-minTestar);//twice applied
                      
                      var vop = new THREE.Color();
-                     vop.setHSL(-mustarD[g]%24./24., mustarD[g]/297.,mustarD[g]/297.);//297 is the highest heard note
+                     vop.setHSL((-mustarD[g]+8)%24./24., mustarD[g]/297.,mustarD[g]/297.);//297 is the highest heard note
                      material = new THREE.MeshBasicMaterial({
                      color:vop,
                      opacity: 1.,
@@ -820,13 +820,13 @@ if(!window.touchMode){
                
                  {
                      let m = xyStarParticleArray[starMoment];
-                     let timeShift = m.time-uniforms["time"].value
+                     let timeShift = uniforms["time"].value-m.time
                      
-                     if( -timeShift +m.widt<s)//s)
+                     if( timeShift +m.widt<s)//s)
                      {
-                         let w = -(timeShift)/m.widt/secondsToEdge;
+                         let w = timeShift/m.widt/secondsToEdge;
 
-                         let depth = (timeShift)/s;
+                         let depth = -timeShift/s;
                          
                          let outSetX = w*m.xr;//-(m.staticX-staticX)/60.*2.;//remove comments to engage relative streamstar movement
                          let outSetY = w*m.yr;//-(m.staticY-staticY)/60.*2.;
@@ -834,7 +834,7 @@ if(!window.touchMode){
                          for(var yy=0;yy<6;yy++)   starColors.push(
                                                            m.vop.r,
                                                            m.vop.g,
-                                                           m.vop.b,.8)
+                                                           m.vop.b,.7777777)
                          let nx =-m.x+outSetX
                          let ny =-m.y+outSetY
                          let xShift=m.x+outSetX;
@@ -868,9 +868,9 @@ else{//start drawing of just twenty four frets here
 
             for (var g=0; g<24; g++) {
             var widt = 1.5/60;
-            var arm =(flip*(g+6.)+18+twist)%24./24.*pi*2.;
+            var arm =(flip*g+twist)%24./24.*pi*2.;
 
-            var lengt = (testar[(g+4)%24]-minTestar)/(maxTestar-minTestar);
+            var lengt = (testar[(g+12)%24]-minTestar)/(maxTestar-minTestar);
 
                 var vop = new THREE.Color();
                       vop.setHSL((20-g)%24/24.,1.,.5);
@@ -888,7 +888,7 @@ let x = widt*-Math.sin(rpio2);
 let y = widt*-Math.cos(rpio2);
 let xr = lengt*-Math.sin(arm);
 let yr = lengt*-Math.cos(arm);
-let depth = -.99;//this depth should mean that half the trail is above and half below
+let depth = -.97;//this depth should mean that half the trail is above and half below
 
 star.push(
 
@@ -927,7 +927,7 @@ x,    y,  depth,
                  if(lengt>0){
                      var vop = new THREE.Color();
                      let BlackOrWhite;
-                     if (t==11||t==9||t==6||t==4||t==2)
+                     if (t==7||t==5||t==2||t==0||t==10)
                          BlackOrWhite=0;
                      else
                          BlackOrWhite=1;
@@ -940,8 +940,7 @@ x,    y,  depth,
                      //var arm =(flip*(mustarD[g]+1.)+19+twist/2.)%24./24.*pi*2.;
                      //var arm = (-flip*g+1)-1)*pi*2./24+twist;
                      rpio2 =arm+pi/2.;
-                     let number = 5;
-                     fingerTwist=(flip*(t+number)-number-10+twist/2.+12)/12.*2.*pi
+                     fingerTwist=(flip*(t-6)+twist/2.+12)/12.*2.*pi
                      let x = widt*-Math.sin(rpio2+fingerTwist+pi);
                      let y = widt*-Math.cos(rpio2+fingerTwist+pi);
                      let xr = pi/12.*lengt*-Math.sin(arm+fingerTwist+pi);
