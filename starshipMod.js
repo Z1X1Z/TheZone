@@ -816,17 +816,30 @@ if(!window.touchMode){
              
              if (RockInTheWater==1||RockInTheWater==2)
              {
-                 for(let starMoment=0; starMoment<xyStarParticleArray.length; starMoment++)
+                             let m = xyStarParticleArray[xyStarParticleArray.length-1];
+                             let lastLoopTime=m.time;
+                             let timeShift = uniforms["time"].value-m.time;
+                             let w = timeShift/m.widt/secondsToEdge;
+                             let radialDelimiter = timeShift +m.widt
+                             let depth = -timeShift/s;
+                             
+                 for(let starMoment=xyStarParticleArray.length-1; starMoment>0; starMoment--)
                
                  {
-                     let m = xyStarParticleArray[starMoment];
-                     let timeShift = uniforms["time"].value-m.time
                      
-                     if( timeShift +m.widt<s)//s)
-                     {
-                         let w = timeShift/m.widt/secondsToEdge;
+                      m = xyStarParticleArray[starMoment];
+                     if (lastLoopTime!=m.time) {
+                         timeShift = uniforms["time"].value-m.time;
+                          w = timeShift/m.widt/secondsToEdge;
+                          radialDelimiter = timeShift +m.widt
+                         depth = -timeShift/s;
+                         lastLoopTime=m.time;
+                     }
+                     
 
-                         let depth = -timeShift/s;
+                     
+                     if( radialDelimiter<s)//s)
+                     {
                          
                          let outSetX = w*m.xr;//-(m.staticX-staticX)/60.*2.;//remove comments to engage relative streamstar movement
                          let outSetY = w*m.yr;//-(m.staticY-staticY)/60.*2.;
@@ -854,8 +867,10 @@ if(!window.touchMode){
                            )
                          
                      }
-                    //else break;
+                     else break ;
+
                  }
+
              }
          }
              
