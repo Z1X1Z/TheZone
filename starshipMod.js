@@ -27,7 +27,6 @@ const MR = mf/zoomFrames;
 window.zoomCageSize = 1.7;//radius of zoom bounding
                   window.uniformsLoaded=false;
 window.gameOn=false;
-zoomOutRatchetThreshold=1.5/255.;
 window.twist = 0;
 window.flip = 1;
 
@@ -84,6 +83,8 @@ let pi = Math.PI;
 let inputData;
 let dataArray;
 let bufferSize = fftSize;
+window.zoomOutRatchetThreshold=1./bufferSize;
+
 let numberOfBins = fftSize/2.;
 let spirray0 = new Float32Array(bufferSize);
 let spirray1 = new Float32Array(bufferSize);
@@ -135,9 +136,8 @@ function spiral_compress(){
     if (Math.abs(d)<4+1)freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
         else freq = audioX.sampleRate*n/numberOfBins
         //    freq = 440; //check for concert A
-    let g = Math.pow ( 2, (1/24.));
-    let aa = freq/440.0;
-    let note = Math.log(aa)/Math.log(g)+69*2;//I would like this 69 to be a 49 as it is it centers around e6
+ 
+    let note =24*Math.log(freq/440)/Math.log(2.)+69*2;//I would like this 69 to be a 49 as it is it centers around e6
     if (!onO)testar[(Math.round(note))%24] += Math.abs(z[n]);
     else{//if constinuous star is engaged pipe directly through avoiding the 24 modulo
       testar[n] = Math.abs(z[n]);
@@ -225,8 +225,8 @@ function  move()
     var pb = -1;
 
     totalAMP = 0.;
-    for(var n=0; n<inputData.length-1;n++)totalAMP+=Math.abs(inputData[n+1]-inputData[n]);
-    totalAMP*=audioX.sampleRate/inputData.length/255;
+    for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
+    totalAMP/=inputData.length*2.;//*2 for range -1 to 1
 
 if (totalAMP>zoomOutRatchetThreshold||on)
   pb =    calculatePitch();
@@ -720,7 +720,7 @@ if( !window.touchMode&&!touchOnlyMode) {
 
 if(!zoomAtl41)zoomRoutine();//  zoomAtl41 is zoom freeze
   uniforms[ "time2dance" ].value += totalAMP;
-         uniforms["volume" ].value = totalAMP/(1.+zoomOutRatchetThreshold);
+         uniforms["volume" ].value = audioX.sampleRate/bufferSize*totalAMP/(1.+zoomOutRatchetThreshold)*4.;
 
 
 
@@ -740,7 +740,7 @@ if(!window.touchMode){
              for (var g=0; g<starArms; g++) if(testar[g]>maxTestar) maxTestar=testar[g];
              for (var g=0; g<starArms; g++) if(testar[g]<minTestar) minTestar=testar[g];
              
-             
+             let maxToMin = Math.max(height,width)/Math.min(height,width);
              let secondsToEdge=1;
              secondsToEdge*=1.5/movementRate;
              let fill =1000./(timestamp - timestamplast)*secondsToEdge;//This should be set to either sampleRate/fftSize or by predicted FPS
@@ -775,7 +775,7 @@ if(!window.touchMode){
             let y = widt*-Math.cos(rpio2);
             let xr = lengtOriginal*-Math.sin(arm);
             let yr = lengtOriginal*-Math.cos(arm);
-            let depth = -1.+lengtOriginal;//shortest bar on top
+            let depth = -1.+lengtOriginal/maxToMin;//shortest bar on top
             
             star.push(
                       
@@ -789,8 +789,9 @@ if(!window.touchMode){
         }
                      if(RockInTheWater==1||RockInTheWater==2)
                      {
-                         var lengt =(testar[g]/255./60.*1.5);//twice applied
-                         var xyStarParticle={};
+                         var lengt =(testar[g]/255-totalAMP)/60.*1.5;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
+                         if(lengt<0)lengt=0;
+                                     var xyStarParticle={};
                          xyStarParticle.x=lengt*-Math.sin(rpio2);
                          xyStarParticle.xr=-Math.sin(arm)/fill;
                          xyStarParticle.y=lengt*-Math.cos(rpio2);
@@ -810,7 +811,7 @@ if(!window.touchMode){
                  }}
              adjustThreeJSWindow();
              
-             let s =Math.max(height,width)/Math.min(height,width)*secondsToEdge*.99;
+             let s =maxToMin*secondsToEdge*.99;
              
              
              if (RockInTheWater==1||RockInTheWater==2)
@@ -833,7 +834,7 @@ if(!window.touchMode){
                          for(var yy=0;yy<6;yy++)   starColors.push(
                                                            m.vop.r,
                                                            m.vop.g,
-                                                           m.vop.b,.72)
+                                                           m.vop.b,.8)
                          let nx =-m.x+outSetX
                          let ny =-m.y+outSetY
                          let xShift=m.x+outSetX;
