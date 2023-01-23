@@ -98,6 +98,8 @@ function callKey(event){
           else if(uniforms[ "carousel" ].value==-1.)uniforms[ "carousel" ].value=1.;
           else if(uniforms[ "carousel" ].value==1.)uniforms[ "carousel" ].value=0;
       }
+      else if (key=="J")uniforms[ "onehundredfortyfourthousand" ].value=!uniforms[ "onehundredfortyfourthousand" ].value;
+
       else if (key=="k"){
             if(uniforms[ "metaCarousel" ].value==0)uniforms[ "metaCarousel" ].value=-1.;
             else if(uniforms[ "metaCarousel" ].value==-1.)uniforms[ "metaCarousel" ].value=1.;

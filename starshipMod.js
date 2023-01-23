@@ -382,7 +382,8 @@ function init() {
   remediatedColors: {value: false },
 
 Clovoid:{value:false},
-dotted:{value:false}
+dotted:{value:false},
+    onehundredfortyfourthousand:{value:false}
 
     }
   ]);
@@ -831,14 +832,14 @@ if(!window.touchMode){
                      if (lastLoopTime!=m.time) {
                          timeShift = uniforms["time"].value-m.time;
                           w = timeShift/m.widt/secondsToEdge;
-                          radialDelimiter = timeShift +m.widt
+                          radialDelimiter = timeShift +m.widt<s
                          depth = -timeShift/s;
                          lastLoopTime=m.time;
                      }
                      
 
                      
-                     if( radialDelimiter<s)//s)
+                     if( radialDelimiter)//s)
                      {
                          
                          let outSetX = w*m.xr;//-(m.staticX-staticX)/60.*2.;//remove comments to engage relative streamstar movement

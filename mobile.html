@@ -173,6 +173,11 @@
                                         key  = '@';
                                         callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                                      <label for="Clovoid">Clovoid!</label><br>
+                                     
+                                     <input type="checkbox" id="144000" name="t"  onclick= "
+                                         key  = 'J';
+                                         callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                                      <label for="Clovoid">144000!</label><br>
 
 
                         <form>
@@ -333,6 +338,7 @@
 uniform bool Clovoid;
 uniform bool remediatedColors;
 uniform bool dotted;
+uniform bool onehundredfortyfourthousand;
 
             const float gr = 1.6180339;
             float zin(float x){return -sin(x);}
@@ -450,8 +456,79 @@ uniform bool dotted;
                          f.y=fxb*sin(angle)+f.y*cos(angle);
                          return f;
                         }
+vec3 sealedMan(vec2 p,vec2 t)
+{
+    p.x+=2.;
+    float r, b, l;
+    float q=-sin(time*2.)/50.;//(un)comment this line to toggle dancing
 
-
+            //person--a body derived to have a head of its own
+                vec2 z=p;
+                for(int f=0;f<20;f+=1)if(abs(z.y)>50.&&f>4)l=1.;
+                else{z=2.*vec2(1./(z.x*z.x-z.y*z.y-p.x),(2.0*z.x*z.y-p.y-sin(time)/20.));
+                         z.x=pow(abs(z.x),.59);}
+                        
+            //robe--came from the body as soon as I looked for clothing
+                vec2 g=p;
+                g.x+=.05;
+                g.y/=1.14;
+                z=g;
+                if(g.x>.5)for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7)r=clamp(1.4-abs(g.x-2.3)
+                                                 *(1.-abs(g.y*g.x))-.07//(un)comment this line to toggle sleeves
+                                                ,0.,1.);
+                else{
+                    z=1.1*vec2(-2./((z.x*z.x-1.8*z.y*z.y)-g.x),(3.*z.x*z.y-1.3*g.y+q));;
+                    z.x=pow(abs(z.x),.8);}
+            //horse
+                g=p;
+                g.x-=3.5;
+                g.y/=1.14;
+                 z=g;
+                if(g.x*g.x+g.y*g.y<3.)for(int f=0;f<23;f+=1)if(abs(z.y)>11.&&f>7)r=1.;
+                else{
+                    z=1.0*vec2(1./((z.x*z.x-3.*z.y*z.y)-g.x),2.*(z.x*z.y-g.y+q));;
+                    z.x=pow(abs(z.x),.8);}
+            //legs--I found these about hours before finding the body but left them, recovering them from memory
+                g=p/2.;
+                z=g;
+                if(g.x>.75&&g.x<1.7&&abs(g.y*g.x)<.54)for(int f=0;f<8;f+=1)if(abs(z.x)>52.&&f>1)b=abs(z.x)/100.;
+                else{
+                    z=3.*vec2(-1./(z.x*z.x-z.y*z.y-g.x),77.*z.x*z.y-g.y+q);
+                    z.y=-1./z.y;}
+                    return vec3(l+b+r);}
+            vec3 sealedWoman(vec2 p,vec2 t){
+                p.x-=.5;
+               vec2 g=p*.5;
+               vec2 s=g;
+               float l=0., o=-sin(time)/20.;
+               float n, c, r, x;
+               p/=2.;
+               p.x+=.5;
+               s=p;
+               //vv legs vv
+               if (p.x<1.8 &&p.x>.5 &&abs(p.x*p.y)<.5)for (int f=0;f<10;f+=1)if(abs(s.x+s.y)>200.&&f>4)c=1.;
+                 else {s=vec2(-1./((s.x*s.x-s.y*s.y)-p.x+t.x/3.),(67.0*s.x*s.y-.7*p.y+t.y/3.));s*=3.; s.y = -1./s.y; }
+                   p.x+=.25;
+               p*=2.;
+               s=p;
+               if(p.x*p.x+p.y*p.y*4.<2.||p.x>0.){
+               //vv body vv
+                   for (int f=0;f<21;f+=1)if(abs(s.x+s.y)>12.&&f>7)l=1.;
+                      else {s=vec2(-1.5/((s.x*s.x-2.*s.y*s.y)-p.x+t.x),(1.7*s.x*s.y-1.2*p.y+t.y));s*=1.3; s.x=pow(abs(s.x),.6125 );  }
+                    s=p;
+               //vv body vv
+                   for (int f=0;f<30;f+=1)if(abs(s.x+s.y)>20.&&f>4)x=1.;
+                   else {s=vec2(-1.5/((s.x*s.x-2.*s.y*s.y)-p.x+t.x),(1.7*s.x*s.y-1.34*p.y+t.y));s*=1.7; s.x=pow(abs(s.x),.549 );  }
+                 }
+                     //vv robe vv
+               g=p;
+               g.x+=-.3;
+               s=g;
+               if (g.x>.50)for (int f=0;f<20;f+=1)if(abs(s.x+s.y)>11.&&f>7)r=.6;
+               else {s=vec2(-2./((s.x*s.x-2.4*s.y*s.y)-g.x+t.x),(3.*s.x*s.y-1.3*g.y +t.y));s*=1.11; s.x=pow(abs(s.x),.8 );
+                   }
+               return clamp(vec3(l+x+r+c),0.,1.);
+           }
 vec2 jc =vec2(0.);// vec2 jc =vec2(-0.5577,- 0.6099);//you can feed in coordinates for p movement to get different cloverfields
 vec3 tol(vec2 p, vec2 t){
      vec2 colorAccumulator =vec2(0.);
@@ -486,8 +563,19 @@ vec3 tol(vec2 p, vec2 t){
                                     const float iterations = 40.;
                                     float refractelC=1.5;
                                 //  p*=2.*refractelC;
-
+vec3 oo = vec3(0.);
      for (float counter=0.;counter<iterations;counter++)if(abs(s.y)<50.){
+     if(onehundredfortyfourthousand)
+     {
+         float color = 1.;
+         if (int(hyperCore)%4>1)color = -1.;
+         if(length(s)<2./3.)
+         {
+             if(int(hyperCore)%2==0)oo+=color*sealedMan(s*5.,vec2(zin(time2dance)/40.));
+             else oo+=color*sealedWoman(s*5.,vec2(zin(time2dance)/40.));
+         }
+                                  
+    }
         if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+3.14159);
 
            if(colorCombo==8)colorAccumulator+=s;
@@ -530,8 +618,7 @@ vec3 tol(vec2 p, vec2 t){
   }else break;
 
 
-
-                                    vec3 o=vec3(s.y);
+vec3 o = vec3(s.y);
                              if(colorCombo==7) o=vec3(s.y,s.x/9.5,1.-s.x/12.);
                              else if(colorCombo==2) o=vec3(s.y/100.-s.x*s.y/888.+s.y/50000.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.+s.y/50000.);
                              else if(colorCombo==3) o= vec3(s.x/8.-s.y/s.x/7000.,1.-s.x/16.,s.y/100.);
@@ -562,6 +649,7 @@ vec3 tol(vec2 p, vec2 t){
                                          o=o*.5+.5;
                                          }
 
+o=clamp(o-100000.*oo,0.,1.)+oo;
     return clamp(o,0.,1.);}
 
           vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t);}
