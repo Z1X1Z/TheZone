@@ -16,7 +16,8 @@ window.pointerZoom=false;
 let coordX=0., coordY=0.;
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
-window.movementRate=1.5;//value of 1.5 moves trail to edge of screen in 1 second
+window.pixelShaderSize = 7;
+window.movementRate=pixelShaderSize/4.;//value of 1.5 moves trail to edge of screen in 1 second
 window.touchMode=false;
 window.volumeSpeed = false;
 
@@ -24,7 +25,7 @@ let zoomFrames = 60;//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   const mf = 1.;
 const MR = mf/zoomFrames;
-window.zoomCageSize = 1.7;//radius of zoom bounding
+window.zoomCageSize = 7./4.;//radius of zoom bounding
                   window.uniformsLoaded=false;
 window.gameOn=false;
 window.twist = 0;
@@ -286,13 +287,14 @@ angle = ((angle+180)/360*2*pi);
                 }
 
    if(sqC>=window.zoomCageSize){//adjust back in if too far from the center
+        pushBackCounter+=FPS/60.;
+
         coordX*=window.zoomCageSize/sqC;
         coordY*=window.zoomCageSize/sqC;
-        pushBackCounter+=FPS/60.;
     }
     else pushBackCounter = 0
                        
-    if(pushBackCounter>.5){coordX=0;coordY=0;}//teleport to center if continuously flying into perimeter
+    if(pushBackCounter>14){coordX=0;coordY=0;}//teleport to center if continuously flying into perimeter
 
 
 
@@ -303,8 +305,9 @@ yPerp[f-1] = -Math.cos(-angle+pi/2)*radius*volume*window.movementRate;
                      trailWidth[f-1]=1.;//has to be 1 for trail drawing algorithms
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
- xAdjusted= d_x*interpolation*MR*2./3.
- yAdjusted= d_y*interpolation*MR*2./3.
+ xAdjusted= d_x*interpolation*MR*4./window.pixelShaderSize;
+ yAdjusted= d_y*interpolation*MR*4./window.pixelShaderSize;
+
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
 
     cx[n] += xAdjusted;
@@ -383,7 +386,8 @@ function init() {
 
 Clovoid:{value:false},
 dotted:{value:false},
-    onehundredfortyfourthousand:{value:false}
+    onehundredfortyfourthousand:{value:false},
+    shaderScale:{value:window.pixelShaderSize}
 
     }
   ]);
@@ -611,6 +615,7 @@ adjustThreeJSWindow();//mostly for ios here
 if (uniforms["MetaCored"].value){
     uniforms[ "centralCores" ].value = Math.log(zoom)/Math.log(.5)+1;
     uniforms[ "externalCores" ].value =uniforms[ "centralCores" ].value*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*0.9551195-1;
+    
   }
 
 
@@ -672,7 +677,7 @@ if( !window.touchMode&&!touchOnlyMode) {
      let cents = Math.round((noteNumber-Math.round(noteNumber))*100);
      let fr = Math.round(pitch);
      let n_n = Math.round(noteNumber);
-     let cores = Math.floor(uniforms["centralCores"].value);
+     let cores = Math.floor(uniforms["centralCores"].value)-1.;
       if(textON)document.getElementById("textWindow").innerHTML =
 "<div sytle='font-size: 16px;'>"+
 
@@ -743,7 +748,7 @@ if(!window.touchMode){
              
              let maxToMin = Math.max(height,width)/Math.min(height,width);
              let secondsToEdge=1;
-             secondsToEdge*=1.5/movementRate;
+             secondsToEdge*=window.pixelShaderSize/4./movementRate;
              let fill =1000./(timestamp - timestamplast)*secondsToEdge;//This should be set to either sampleRate/fftSize or by predicted FPS
              timestamplast = timestamp;
 

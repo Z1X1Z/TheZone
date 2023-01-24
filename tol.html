@@ -82,9 +82,7 @@
             
             uniform float time;
             
-            
-          
-          
+            bool fullModeOn = false;//set to true to engage these settings and use below function instead of above
             float zoom = 1.;
             vec2 coords = vec2(0.,0.);
 
@@ -134,7 +132,7 @@
                         vec2 o=p;
                         float coresIn = 1.;
                         const float crs = 60.;
-                       for(int i=1;i<int(crs); i++)if(c<2./3.&&loops<cored){o*=2.;c*=2.;loops++;coresIn++;}else break;
+                       for(int i=0;i<int(crs); i++)if(c<2./3.&&loops<cored){o*=2.;c*=2.;loops++;coresIn++;}else break;
                                                              float lc = length(coords);
 
                        loops=0.;
@@ -245,7 +243,7 @@
             return clamp(a,0.,1.);}
 
 
-            void main(){vec2 p=-(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,resolution.y)*6.;
+            void main(){vec2 p=-(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,resolution.y)*7.;
          
                                 vec2 spunC=coords.yx;
 
@@ -254,11 +252,13 @@
                                 if(carousel!=0.)backGround=spin(backGround,carousel*mod(time*rate,3.1415927410125732*2.));
 
                                                       backGround=spin(backGround,atan(backGround.y,backGround.x)*petals/6.);//omniclover
+                                 
+                                vec3 mode;
+                                if(!fullModeOn) mode = tol(p,vec2(0.));
+                                else mode = tolFull(backGround,spunC);
 
-          gl_FragColor=vec4(
-                      tol(p,vec2(0.))
-                      //tolFull(backGround,spunC)//uncomment this line and comment above to switch functions
-                      ,1.);
+
+          gl_FragColor=vec4(mode,1.);
                          }
 </script>
 

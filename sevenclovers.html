@@ -421,6 +421,7 @@
 
             uniform bool onehundredfortyfourthousand;
             uniform bool dotted;
+            uniform float shaderScale;
 
             uniform vec2 d;
             vec2 spunC=vec2(0.);
@@ -886,7 +887,7 @@ vec3 sealedMan(vec2 p,vec2 t)
                               vec2 o=p;
                               float coresIn = 1.;
                               const float crs = 60.;
-                             for(int i=1;i<int(crs); i++)if(c<2./3.&&loops<cored){o*=2.;c*=2.;loops++;coresIn++;}else break;
+                             for(int i=0;i<int(crs); i++)if(c<2./3.&&loops<cored){o*=2.;c*=2.;loops++;coresIn++;}else break;
                                                                    float lfc = length(freed(coords));
 
                              loops=0.;
