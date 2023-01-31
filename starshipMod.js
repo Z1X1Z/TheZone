@@ -10,7 +10,7 @@ stallTillTHREE();//this is a lurker. it waits for the three.js loader to resolve
 let xyStarParticleArray=Array();
 
 
-
+let starshipSize = 1.5/60
 let screenPressCoordX, screenPressCoordY;
 window.pointerZoom=false;
 let coordX=0., coordY=0.;
@@ -20,12 +20,12 @@ window.pixelShaderSize = 7;
 window.movementRate=pixelShaderSize/4.;//value of 1.5 moves trail to edge of screen in 1 second
 window.touchMode=false;
 window.volumeSpeed = false;
-
 let zoomFrames = 60;//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   const mf = 1.;
 const MR = mf/zoomFrames;
-window.zoomCageSize = 7./4.;//radius of zoom bounding
+window.zoomCageSize = window.pixelShaderSize/4.;//radius of zoom bounding
+
                   window.uniformsLoaded=false;
 window.gameOn=false;
 window.twist = 0;
@@ -199,10 +199,9 @@ let reset = 6;
 let on;
 let spirafreq=1;
 var totalAMP;
-var angle;
-                           function spin(f, t)
+var angle=0.;
+                           function spin(f, angle)
                            {    //https://en.wikipedia.org/wiki/Rotation_matrix
-                               var angle =t;
                                var fxb=f[0];
                                f[0]=f[0]*-Math.cos(-angle)-f[1]*-Math.sin(-angle);
                             f[1]=fxb*-Math.sin(-angle)+f[1]*-Math.cos(-angle);
@@ -247,7 +246,7 @@ if(pitch==1) on = false;
 
 let note = 12*Math.log(pitch/440)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
 let t =  (note )*flip+twist/2;
-angle = -(30*t)%360;
+if(isFinite(t))angle = -(30*t)%360;
 
 
 colorSound = new THREE.Color();
@@ -334,27 +333,41 @@ let geometry;
 
 let geometryP;
 let uniforms;
-                     let scene;
+                     let scene, shaderScene;
 
                      var minimumDimension=1;
-                     var height,width;
+                     var height=window.innerHeight,width=window.innerWidth;
+                       let texture;
+                       let renderTarget;
 function init() {
+    
+    renderTarget = new THREE.WebGLRenderTarget(window.innerWidth,window.innerHeight );
+
+
+
     scene = new THREE.Scene();
+    shaderScene = new THREE.Scene();
 
 
     inputData = new Float32Array(bufferSize);
 
         renderer = new THREE.WebGLRenderer();
 
-
+                renderer.autoClear=true;//so the starship can be isolated
+                renderer.setClearAlpha ( 0. )
+    
+    
   uniforms = THREE.UniformsUtils.merge([
   THREE.UniformsLib.lights,
-    {
+  {
+      STAR:{value: null    },
+  Spoker:{value: true    },
+
       micIn : {  value: null }, // float array (vec3)
       time: {value: 1.0 },
   rate: {value: 1./window.movementRate },
 
-      zoom: {value: 1.0 },
+      zoom: {value: window.zoom },
       colorCombo: {value: 1 },
         free: {value: false },
         MetaCored: {value: true },
@@ -409,15 +422,11 @@ dotted:{value:false},
 
 
 
-
-
-  renderer = new THREE.WebGLRenderer();
       geometryP = new THREE.PlaneGeometry( 2, 2 );
       //geometryP.translate(0,0,-1.);
 
       if(window.shaderOn){
             mesh = new THREE.Mesh( geometryP, materialShader );
-            scene.add( mesh );
         }
         else{
            scene.background = new THREE.Color( 0x808080);
@@ -440,12 +449,14 @@ dotted:{value:false},
        let correlationForText= document.getElementById("allText").offsetHeight;;
 function adjustThreeJSWindow()
 {
+    
          let correlationForText = document.getElementById("allText").offsetHeight;
          correlationForText+=document.getElementById("score").offsetHeight;
 
 
          height=window.innerHeight-correlationForText;
          width=window.innerWidth;
+    
 
          uniforms.resolution.value.x = width;
          uniforms.resolution.value.y = height;
@@ -509,7 +520,27 @@ correlationForText+=document.getElementById("allText").offsetHeight;
                   function zoomRate(){
                     return Math.E**(Math.log(.5)/zoomFrames*window.movementRate*interpolation*(Math.sqrt(volume)/2.+.5));//the square root of volume is to make it grow slower than in d_xy
                   }
-function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coordY);
+                       let cloverSuperCores = 0;
+                       var singleHyperCoreDepth = 60.;
+       function infinicore(){
+            if(zoom<=1./2.**63&&(coordY*coordY+coordX*coordX)**.5/zoom<2.){
+                zoom*=2.**singleHyperCoreDepth;coordY*=2.**singleHyperCoreDepth;coordX*=2.**singleHyperCoreDepth;
+                cloverSuperCores++;
+            }
+            
+            if(zoom>1./2**3&&cloverSuperCores>0){
+                zoom/=2.**singleHyperCoreDepth;coordY/=2.**singleHyperCoreDepth;coordX/=2.**singleHyperCoreDepth;
+                cloverSuperCores--;
+            }
+            if(!isFinite(cloverSuperCores))
+            {cloverSuperCores=0;
+            zoom=1.;
+            }
+    }
+function zoomRoutine(){
+    let metaDepth=.000001;//due to pixelization limits
+    if(uniforms.Spoker.value)metaDepth=.0000000001;
+        let zoomCone=metaDepth*Math.sqrt(coordX*coordX+coordY*coordY);
                      if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
 
                    ZR = zoomRate();
@@ -521,12 +552,15 @@ function zoomRoutine(){  let zoomCone=.000001*Math.sqrt(coordX*coordX+coordY*coo
                    }
                      if (zoom>1.)zoom=1.;
                      if (zoom>=1.)zoomOutEngage = false;
-                      else if ( zoom<zoomCone||zoom<.000000000000000000000001)zoomOutEngage = true;
+    //.000000000000000000000001
+                      else if ( zoom<zoomCone||zoom<1./2**63.*.000001)zoomOutEngage = true;
                          if (zoomOutEngage == true){
-                            zoom *= 1.44/ZR;
+                            zoom *= 1.44*ZR
+                             ;
                         }
 
-                          if(zoom<.0000000000000000000000001)zoom = 1.;
+                          if(zoom<1./2**63.*.000001)zoom = 1.;
+    
 
 }
 
@@ -597,14 +631,16 @@ function takeNextScoreSlice(start){
                       }) // requires re-render
 }
                        let timestamplast=0;
+                       
+                       let STARSHIPMAP;
 function animate( timestamp ) {
 adjustThreeJSWindow();//mostly for ios here
 
 
-
-
-
-
+    
+    
+    
+    
     uniforms[ "time" ].value = Math.fround(timestamp/1000.);
 
     if(starSpin!=0)twist=uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*2.*starSpin*2.;
@@ -613,8 +649,8 @@ adjustThreeJSWindow();//mostly for ios here
 
 
 if (uniforms["MetaCored"].value){
-    uniforms[ "centralCores" ].value = Math.log(zoom)/Math.log(.5)+1;
-    uniforms[ "externalCores" ].value =uniforms[ "centralCores" ].value*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*0.9551195-1;
+    uniforms[ "centralCores" ].value = Math.log(zoom)/Math.log(.5);
+    uniforms[ "externalCores" ].value =uniforms[ "centralCores" ].value*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*0.9551195;
     
   }
 
@@ -640,6 +676,10 @@ if( !window.touchMode&&!touchOnlyMode) {
                 else volume=1.;
 
                                                               spiral_compress();
+    if(!zoomAtl41){
+        infinicore();
+        zoomRoutine();//  zoomAtl41 is zoom freeze
+    }
                            move();
                            if(on) makeSpirograph();
 
@@ -677,13 +717,13 @@ if( !window.touchMode&&!touchOnlyMode) {
      let cents = Math.round((noteNumber-Math.round(noteNumber))*100);
      let fr = Math.round(pitch);
      let n_n = Math.round(noteNumber);
-     let cores = Math.floor(uniforms["centralCores"].value)-1.;
+     let cores = Math.floor(uniforms["centralCores"].value)+cloverSuperCores*singleHyperCoreDepth;
       if(textON)document.getElementById("textWindow").innerHTML =
 "<div sytle='font-size: 16px;'>"+
 
                                 " note: "+note+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
                                 "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
-                                "cores: "+cores+", zoom: "+zoom+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
+                                "cores: "+cores+", zoom: "+zoom/2.**(singleHyperCoreDepth*cloverSuperCores)+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
                                 "InOutThresh: "+zoomOutRatchetThreshold+"<p style='margin : 0px'></p>"+
                                 "AMP: "+totalAMP+"<p style='margin : 0px'></p>"+
                                 "pitch found: "+pitchFound+", FPS: "+Math.round(FPS)+"<p style='margin : 0px'></p>"
@@ -724,7 +764,6 @@ if( !window.touchMode&&!touchOnlyMode) {
 
 
 
-if(!zoomAtl41)zoomRoutine();//  zoomAtl41 is zoom freeze
   uniforms[ "time2dance" ].value += audioX.sampleRate/bufferSize*totalAMP;
          uniforms["volume" ].value = audioX.sampleRate/bufferSize*totalAMP/(1.+zoomOutRatchetThreshold)*4.;
 
@@ -743,8 +782,10 @@ if(!zoomAtl41)zoomRoutine();//  zoomAtl41 is zoom freeze
    const starColors=[];
 if(!window.touchMode){
          if(onO){
-             for (var g=0; g<starArms; g++) if(testar[g]>maxTestar) maxTestar=testar[g];
-             for (var g=0; g<starArms; g++) if(testar[g]<minTestar) minTestar=testar[g];
+             for (var g=0; g<starArms; g++) {
+                 if(testar[g]>maxTestar)  maxTestar=testar[g];
+                 if(testar[g]<minTestar) minTestar=testar[g];
+             }
              
              let maxToMin = Math.max(height,width)/Math.min(height,width);
              let secondsToEdge=1;
@@ -759,7 +800,7 @@ if(!window.touchMode){
              {
                  if(isFinite(testar[g])&&testar[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.){
                      
-                     var widt = 1.5/60.;
+                     var widt = 1.5*starshipSize;
                      var arm =(flip*(mustarD[g])+twist+12)%24./24.*pi*2.;
                      let lengtOriginal=(testar[g]-minTestar)/(maxTestar-minTestar);//twice applied
                      
@@ -775,13 +816,19 @@ if(!window.touchMode){
 
         if(RockInTheWater==0||RockInTheWater==1)
         {
-            for(var yy=0;yy<6;yy++)   starColors.push(vop.r,vop.g,vop.b,1.)
+           // for(var yy=0;yy<6;yy++)
+                starColors.push(vop.r,vop.g,vop.b,1.,
+                                vop.r,vop.g,vop.b,1.,
+                                vop.r,vop.g,vop.b,1.,
+                                vop.r,vop.g,vop.b,1.,
+                                vop.r,vop.g,vop.b,1.,
+                                vop.r,vop.g,vop.b,1.)
                 
             let x = widt*-Math.sin(rpio2);
             let y = widt*-Math.cos(rpio2);
             let xr = lengtOriginal*-Math.sin(arm);
             let yr = lengtOriginal*-Math.cos(arm);
-            let depth = -1.+lengtOriginal/maxToMin;//shortest bar on top
+            let depth = (-1.+lengtOriginal/maxToMin);//shortest bar on top
             
             star.push(
                       
@@ -795,8 +842,8 @@ if(!window.touchMode){
         }
                      if(RockInTheWater==1||RockInTheWater==2)
                      {
-                         var lengt =(testar[g]/255-totalAMP)/60.*1.5;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
-                         if(lengt<0)lengt=0;
+                         var lengt =(testar[g]/255-totalAMP/2.)*starshipSize*1.5;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
+                         if(lengt<=0)lengt=1./255.*starshipSize*1.5;
                                      var xyStarParticle={};
                          xyStarParticle.x=lengt*-Math.sin(rpio2);
                          xyStarParticle.xr=-Math.sin(arm)/fill;
@@ -807,6 +854,7 @@ if(!window.touchMode){
                          xyStarParticle.widt=1./fill
                          xyStarParticle.time = timestamp/1000.;
                          xyStarParticle.interpolation = interpolation;
+                         xyStarParticle.interpolationFramesScaled = interpolation/60./4.;
                          xyStarParticle.amp=testar[g]/255.;
                          xyStarParticle.staticX=staticX;
                          xyStarParticle.staticY=staticY;
@@ -817,19 +865,20 @@ if(!window.touchMode){
                  }}
              adjustThreeJSWindow();
              
-             let s =maxToMin*secondsToEdge*.99;
+             let OUTERSHELL =maxToMin*secondsToEdge;
              
              
-             if (RockInTheWater==1||RockInTheWater==2)
+             if ((RockInTheWater==1||RockInTheWater==2)&&xyStarParticleArray.length>0)
              {
                              let m = xyStarParticleArray[xyStarParticleArray.length-1];
                              let lastLoopTime=m.time;
-                             let timeShift = uniforms["time"].value-m.time;
+                             let timeShift = 0.;
                              let w = timeShift/m.widt/secondsToEdge;
-                             let radialDelimiter = timeShift +m.widt
-                             let depth = -timeShift/s;
-                             
-                 for(let starMoment=xyStarParticleArray.length-1; starMoment>0; starMoment--)
+                             let withinRadialDelimiter = timeShift +m.widt<OUTERSHELL;
+                             let depthINNER = (-1.+timeShift/OUTERSHELL);
+                             let depthOUTER = depthINNER+m.widt;
+
+                 for(let starMoment=xyStarParticleArray.length-1; starMoment>=0; starMoment--)
                
                  {
                      
@@ -837,23 +886,36 @@ if(!window.touchMode){
                      if (lastLoopTime!=m.time) {
                          timeShift = uniforms["time"].value-m.time;
                           w = timeShift/m.widt/secondsToEdge;
-                          radialDelimiter = timeShift +m.widt<s
-                         depth = -timeShift/s;
+                         withinRadialDelimiter = timeShift +m.widt<OUTERSHELL;
+                         depthINNER = (-1.+timeShift/OUTERSHELL);
+                         depthOUTER = depthINNER+m.widt;
+
                          lastLoopTime=m.time;
                      }
                      
 
                      
-                     if( radialDelimiter)//s)
+                     if( withinRadialDelimiter)
                      {
-                         
-                         let outSetX = w*m.xr;//-(m.staticX-staticX)/60.*2.;//remove comments to engage relative streamstar movement
-                         let outSetY = w*m.yr;//-(m.staticY-staticY)/60.*2.;
+                         let bulletY=0;
+                         let bulletX=0;
+                         if(window.BulletMine!=0)
+                         {
+                             let blt= m.interpolationFramesScaled*BulletMine;
+                             bulletY = (m.staticY-staticY)*blt;
+                             bulletX = (m.staticX-staticX)*blt;
+                         }
+                         let outSetX = w*m.xr-bulletX;//apparently something is flipped
+                         let outSetY = w*m.yr-bulletY;
+               
 
-                         for(var yy=0;yy<6;yy++)   starColors.push(
-                                                           m.vop.r,
-                                                           m.vop.g,
-                                                           m.vop.b,.7777777)
+                         for(var yy=0;yy<6;yy++)
+                         
+                             starColors.push(
+                                           m.vop.r,
+                                           m.vop.g,
+                                           m.vop.b,1.+depthOUTER*.777,
+                                           )
                          let nx =-m.x+outSetX
                          let ny =-m.y+outSetY
                          let xShift=m.x+outSetX;
@@ -864,12 +926,12 @@ if(!window.touchMode){
 
                  star.push(
                            
-                           nx,    ny,  depth,
-                           xShift,    yShift,  depth,
-                           xrShifted, yrShifted,  depth,
-                           nx, ny,  depth,
-                           xrShifted, yrShifted,  depth,
-                           m.xr+nx, m.yr+ny,  depth,
+                           nx,    ny,  depthINNER,
+                           xShift,    yShift,  depthINNER,
+                           xrShifted, yrShifted,  depthOUTER,
+                           nx, ny,  depthINNER,
+                           xrShifted, yrShifted,  depthOUTER,
+                           m.xr+nx, m.yr+ny,  depthOUTER,
                            )
                          
                      }
@@ -883,12 +945,14 @@ if(!window.touchMode){
 
 
 else{//start drawing of just twenty four frets here
-            var maxTestar=1.;
-            for (var g=0; g<24; g++) if(testar[g]>maxTestar){maxTestar=testar[g];}
-           for (var g=0; g<24; g++) if(testar[g]<minTestar)minTestar=testar[g];
+             maxTestar=.000000000000000001;
+                             for (var g=0; g<24; g++) {
+                                 if(testar[g]>maxTestar){maxTestar=testar[g];}
+                                 if(testar[g]<minTestar)minTestar=testar[g];
+                             }
 
             for (var g=0; g<24; g++) {
-            var widt = 1.5/60;
+            var widt = 1.5*starshipSize;
             var arm =(flip*g+twist)%24./24.*pi*2.;
 
             var lengt = (testar[(g+12)%24]-minTestar)/(maxTestar-minTestar);
@@ -900,7 +964,6 @@ else{//start drawing of just twenty four frets here
 
 
 var vertices;
-var z = -.99;
 //var arm =(flip*(mustarD[g]+1.)+19+twist/2.)%24./24.*pi*2.;
 
 //var arm = (-flip*g+1)-1)*pi*2./24+twist;
@@ -909,7 +972,7 @@ let x = widt*-Math.sin(rpio2);
 let y = widt*-Math.cos(rpio2);
 let xr = lengt*-Math.sin(arm);
 let yr = lengt*-Math.cos(arm);
-let depth = -.97;//this depth should mean that half the trail is above and half below
+let depth = -.97;
 
 star.push(
 
@@ -940,7 +1003,7 @@ x,    y,  depth,
          for (var t=0; t<12; t++) {
              
              for (var g=0; g<10; g++) {
-                 var widt = 1.5/60./2.;
+                 var widt = 1.5*starshipSize/2.;
                  var finger = twelve[t][g];
                  var arm =g/10.*pi*2.;
                  
@@ -949,7 +1012,7 @@ x,    y,  depth,
                      var vop = new THREE.Color();
                      let BlackOrWhite;
                      if (t==7||t==5||t==2||t==0||t==10)
-                         BlackOrWhite=0;
+                         BlackOrWhite=-1.;
                      else
                          BlackOrWhite=1;
                      vop.setRGB(BlackOrWhite,BlackOrWhite,BlackOrWhite);
@@ -1120,9 +1183,8 @@ circle.position.set(circleX,circleY,-1.);
                    colorBlack.setStyle("black");
 
 
-
                    let centerOfDotToEdge = [];
-                   centerOfDotToEdge.push( new THREE.Vector3(circleX+-Math.sin(-angle)*dotSize*volume, circleY+-Math.cos(-angle)*dotSize*volume, -1. ) );
+                   centerOfDotToEdge.push( new THREE.Vector3(circleX-Math.sin(-angle)*dotSize*volume, circleY-Math.cos(-angle)*dotSize*volume, -1. ) );
                    centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-1.) );
 
 
@@ -1194,8 +1256,8 @@ for(let n = 0; n < polygons.length; n++)
         }
 var neutralizer=1.;
 if (!on)neutralizer=0.;
-                polygons[n].centerX += (6.*d_x*neutralizer-polygons[n].dx)*interpolation/minimumDimension;
-                polygons[n].centerY += (6.*d_y*neutralizer-polygons[n].dy)*interpolation/minimumDimension;
+                polygons[n].centerX += (d_x*neutralizer-polygons[n].dx)*interpolation/minimumDimension;
+                polygons[n].centerY += (d_y*neutralizer-polygons[n].dy)*interpolation/minimumDimension;
 
     let distanceFromCenter = Math.pow(xFromCent*xFromCent+yFromCent*yFromCent,.5);
     let ddX= circleX-polygons[n].centerX;
@@ -1241,7 +1303,92 @@ scene.add( circle );
 scene.add(radialLine);
 scene.add(meshTrail)
 
-renderer.render( scene, camera );
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                 
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+                                  
+   if(window.starClover)
+                                  {
+                         
+                         renderer.setRenderTarget (renderTarget)
+                         renderer.render( scene, camera );
+                         uniforms.STAR.value=renderTarget.texture;
+                         
+                         
+                         //renderTarget.texture.needsUpdate=true;
+                         
+                         
+                         // renderTarget.texture.onUpdate=function()
+                         // {
+                         
+                        /*
+                         const materialSprite = new THREE.SpriteMaterial( { map: renderTarget.texture, color: 0xffffff,transparent : true } );
+                         
+                         const sprite = new THREE.Sprite( materialSprite );
+                         sprite.scale.set(2*width/height, 2, 1)
+                         shaderScene.add( sprite );
+                         */
+                         
+                         
+                         renderer.setRenderTarget (null)
+                         shaderScene.add( mesh );
+                         renderer.render( shaderScene, camera )
+                         shaderScene.remove( mesh );
+
+                         
+                         // };
+                         
+                         //shaderScene.remove( sprite );
+                         //materialSprite.dispose()
+                         //sprite.dispose()
+                     }
+                  else{
+                         uniforms.STAR.value=null;
+                         renderer.setRenderTarget (null);
+                         scene.add(mesh);
+                         renderer.render( scene, camera );
+                         scene.remove(mesh);
+
+                     }
+                                  
+                                  
+                                  
 
 scene.remove( circle );
 circleGeometry.dispose();
@@ -1273,11 +1420,12 @@ else {//begin touch frame
 
 if(!zoomAtl41)
     {
-      lastZoom = zoom
+      infinicore();
+      lastZoom = zoom;
       zoomRoutine();
     }
     else lastZoom=zoom/zoomRate();
-            var d = 3.;//this is the frame size in the shader: "p=vec2(...."
+            var d = pixelShaderSize/2.;//this is the frame size in the shader: "p=vec2(...."
             if(uniforms.colorCombo.value==15&&window.mandelbrot) d = 10.;//for zonex.html
         if(pointerZoom){
              var spunTouch = [-Math.abs(zoom-lastZoom)*screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d),
@@ -1292,7 +1440,10 @@ if(!zoomAtl41)
           uniforms[ "zoom" ].value = zoom;
           uniforms.coords.value.x = coordX;
           uniforms.coords.value.y = coordY;
-        renderer.render( scene, camera );
+                         shaderScene.add( mesh );
+        renderer.render( shaderScene, camera );
+                         shaderScene.remove( mesh );
+
 
       }//end touch mode centerOfDotToEdge
 

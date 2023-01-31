@@ -4,6 +4,8 @@ window.zoom=1.;
 window.starSpin=0.;
 window.RockInTheWater=0;
 window.octaveStars=true;
+window.BulletMine=0;
+window.starClover=true;
 
 function readHash(){for(var n = location.hash.length;n>0;n--)callKey(new KeyboardEvent('keydown', {'key': location.hash[n],"keyCode":location.hash.charCodeAt(n)}));
 }
@@ -68,12 +70,18 @@ function callKey(event){
             }
       else if (key==";") uniforms[ "colorInverter" ].value = !uniforms[ "colorInverter" ].value;
       else if (key=="t") window.touchMode = !window.touchMode;
+      else if (key=="T") uniforms.Spoker.value=!uniforms.Spoker.value;
       else if (key=="f") uniforms[ "fourCreats" ].value *= -1;
       else if (key=="a") uniforms[ "colorCombo" ].value = 11;
       else if (key=="\'"||key=="\"") uniforms[ "colorCombo" ].value = 13;
       else if (key=="d") uniforms[ "colorCombo" ].value = 14;
       else if (key=="x") uniforms[ "colorCombo" ].value = 15;
       else if (key=="b") uniforms[ "colorCombo" ].value = 16;
+      else if (key=="B") {
+          if(BulletMine == 0) BulletMine = 1;
+          else if(BulletMine==1) BulletMine = -.5;
+          else if(BulletMine==-1) BulletMine = 0;
+      }
       else if (key=="g") uniforms[ "colorCombo" ].value = 17;
       else if (key=="r")uniforms[ "colorCombo" ].value = 18;
       else if (key=="$")uniforms[ "colorCombo" ].value = 19;
@@ -120,6 +128,7 @@ function callKey(event){
 
       else if (key=="i") zoomOutRatchetThreshold/= 1.12121;
       else if (key=="o") zoomOutRatchetThreshold*= 1.12121;
+      else if (key=="O") window.starClover=!window.starClover;
 
       else if (key=="p"){
                 framesLong=FPS;
