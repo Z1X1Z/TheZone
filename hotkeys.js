@@ -58,8 +58,8 @@ function callKey(event){
       else if (key=="#")uniforms[ "dotted" ].value=!uniforms[ "dotted" ].value;
 
       else if (key=="q") {
-          if          ( uniforms[ "colorCombo" ].value >8)          uniforms[ "colorCombo" ].value = 1;
-          else uniforms[ "colorCombo" ].value = (uniforms[ "colorCombo" ].value+1)%9;
+          if          ( uniforms[ "colorCombo" ].value >9)          uniforms[ "colorCombo" ].value = 1;
+          else uniforms[ "colorCombo" ].value = (uniforms[ "colorCombo" ].value+1)%10;
       }
 
             else if (key=="Q") {
@@ -72,6 +72,8 @@ function callKey(event){
       else if (key=="t") window.touchMode = !window.touchMode;
       else if (key=="T") uniforms.Spoker.value=!uniforms.Spoker.value;
       else if (key=="f") uniforms[ "fourCreats" ].value *= -1;
+      else if (key=="F") uniforms[ "spokelover" ].value=!uniforms[ "spokelover" ].value ;
+
       else if (key=="a") uniforms[ "colorCombo" ].value = 11;
       else if (key=="\'"||key=="\"") uniforms[ "colorCombo" ].value = 13;
       else if (key=="d") uniforms[ "colorCombo" ].value = 14;

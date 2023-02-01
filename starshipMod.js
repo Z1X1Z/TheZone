@@ -24,7 +24,7 @@ let zoomFrames = 60;//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   const mf = 1.;
 const MR = mf/zoomFrames;
-window.zoomCageSize = window.pixelShaderSize/4.;//radius of zoom bounding
+window.zoomCageSize = window.pixelShaderSize/4.;//radius of zoom bounding,
 
                   window.uniformsLoaded=false;
 window.gameOn=false;
@@ -34,7 +34,7 @@ window.flip = 1;
 let radius = .5;
 var rez=1.;
 let fftSize=2048;
-let trailLength = 100;
+let trailLength = 576;
 let colorSound;
 let center = false;
                   let geome;
@@ -284,12 +284,13 @@ angle = ((angle+180)/360*2*pi);
          staticX+=d_xS;
          staticY+=d_yS;
                 }
-
-   if(sqC>=window.zoomCageSize){//adjust back in if too far from the center
+let expandedZoomCage=1.;
+   if (uniforms.Spoker.value)expandedZoomCage=4./3.
+   if(sqC>=window.zoomCageSize*expandedZoomCage){//adjust back in if too far from the center
         pushBackCounter+=FPS/60.;
 
-        coordX*=window.zoomCageSize/sqC;
-        coordY*=window.zoomCageSize/sqC;
+        coordX*=window.zoomCageSize/sqC*expandedZoomCage;
+        coordY*=window.zoomCageSize/sqC*expandedZoomCage;
     }
     else pushBackCounter = 0
                        
@@ -362,6 +363,7 @@ function init() {
   {
       STAR:{value: null    },
   Spoker:{value: true    },
+  spokelover:{value: false    },
 
       micIn : {  value: null }, // float array (vec3)
       time: {value: 1.0 },
@@ -539,7 +541,7 @@ correlationForText+=document.getElementById("allText").offsetHeight;
     }
 function zoomRoutine(){
     let metaDepth=.000001;//due to pixelization limits
-    if(uniforms.Spoker.value)metaDepth=.0000000001;
+    if(uniforms.Spoker.value)metaDepth=.0000001;
         let zoomCone=metaDepth*Math.sqrt(coordX*coordX+coordY*coordY);
                      if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
 
@@ -555,7 +557,7 @@ function zoomRoutine(){
     //.000000000000000000000001
                       else if ( zoom<zoomCone||zoom<1./2**63.*.000001)zoomOutEngage = true;
                          if (zoomOutEngage == true){
-                            zoom *= 1.44*ZR
+                            zoom *= 1.44/ZR
                              ;
                         }
 
@@ -658,7 +660,7 @@ if (uniforms["MetaCored"].value){
                                                               if(document.visibilityState=="hidden"||lvs=="hidden")lastFrameTime=timestamp;
                                                               lvs=document.visibilityState
                                                               interpolation = (timestamp-lastFrameTime)/1000.*60.;
-                                                              if(interpolation>60)interpolation=60;//this is to prevent frame time leak on mobile
+                                                              if(interpolation>60)interpolation=60;//this is to prevent frametime leak on mobile
                                                               lastFrameTime=timestamp;
 if(!window.touchMode)pointerZoom=false;
 else on=false;
@@ -1109,7 +1111,8 @@ while(loopLimit>0&&r!=f){
   let widts = (1.-trailWidth[s]);
   let tt = 0.;
   var z = (-1.+(trailDepth-loopLimit)/trailDepth);
-                          let transparencyOfTrail=.75*(1.-(trailDepth-loopLimit)/trailDepth);
+                          let transparencyOfTrail=z**2;
+                         
                           trailColor.push(
 
                                           pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
@@ -1305,78 +1308,18 @@ scene.add(meshTrail)
 
                                   
                                   
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                 
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
-                                  
+                       
                                   
    if(window.starClover)
-                                  {
-                         
+        {
                          renderer.setRenderTarget (renderTarget)
                          renderer.render( scene, camera );
                          uniforms.STAR.value=renderTarget.texture;
-                         
-                         
-                         //renderTarget.texture.needsUpdate=true;
-                         
-                         
-                         // renderTarget.texture.onUpdate=function()
-                         // {
-                         
-                        /*
-                         const materialSprite = new THREE.SpriteMaterial( { map: renderTarget.texture, color: 0xffffff,transparent : true } );
-                         
-                         const sprite = new THREE.Sprite( materialSprite );
-                         sprite.scale.set(2*width/height, 2, 1)
-                         shaderScene.add( sprite );
-                         */
-                         
                          
                          renderer.setRenderTarget (null)
                          shaderScene.add( mesh );
                          renderer.render( shaderScene, camera )
                          shaderScene.remove( mesh );
-
-                         
-                         // };
-                         
-                         //shaderScene.remove( sprite );
-                         //materialSprite.dispose()
-                         //sprite.dispose()
                      }
                   else{
                          uniforms.STAR.value=null;
@@ -1384,7 +1327,6 @@ scene.add(meshTrail)
                          scene.add(mesh);
                          renderer.render( scene, camera );
                          scene.remove(mesh);
-
                      }
                                   
                                   
