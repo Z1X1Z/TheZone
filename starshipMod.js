@@ -17,7 +17,8 @@ let coordX=0., coordY=0.;
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
 window.pixelShaderSize = 7;
-window.movementRate=pixelShaderSize/4.;//value of 1.5 moves trail to edge of screen in 1 second
+let pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
+window.movementRate=pixelShaderToStarshipRATIO;//value of 1.5 moves trail to edge of screen in 1 second
 window.touchMode=false;
 window.volumeSpeed = false;
 let zoomFrames = 60;//frames to double zoom
@@ -210,6 +211,7 @@ var angle=0.;
 let pitchFound;
                            let xAdjusted, yAdjusted;
 let pushBackCounter = 0;
+                          let flatline = pixelShaderToStarshipRATIO;
 function  move()
 {
     if (isNaN(coordX)||(!zoomAtl41&&coordX>4.))coordX=0.;
@@ -257,9 +259,11 @@ reversableColor=(angle/360.+twist/24.)*flip+120/360.;
 
 pitchCol[f]  = colorSound;
 angle = ((angle+180)/360*2*pi);
-
-         d_x = -Math.sin(-angle)*volumeBoosted*window.movementRate;
-         d_y = -Math.cos(-angle)*volumeBoosted*window.movementRate;
+                        flatline = pixelShaderToStarshipRATIO;
+                       if(window.movementRate>pixelShaderToStarshipRATIO) flatline = window.movementRate;
+         
+         d_x = -Math.sin(-angle)*volumeBoosted*flatline;
+         d_y = -Math.cos(-angle)*volumeBoosted*flatline;
                        
          uniforms.d.value.x=d_x;
          uniforms.d.value.y=d_y;
@@ -299,8 +303,8 @@ let expandedZoomCage=1.;
                        
             if (trailDepth<trailLength)trailDepth++;
 
-xPerp[f-1] = -Math.sin(-angle+pi/2)*volumeBoosted*window.movementRate;
-yPerp[f-1] = -Math.cos(-angle+pi/2)*volumeBoosted*window.movementRate;
+xPerp[f-1] = -Math.sin(-angle+pi/2)*volumeBoosted*flatline;
+yPerp[f-1] = -Math.cos(-angle+pi/2)*volumeBoosted*flatline;
                      trailWidth[f-1]=0.;
 f++;//this is the primary drive chain for the trail. it should be a global
 let radius = interpolation*MR*4./window.pixelShaderSize;
