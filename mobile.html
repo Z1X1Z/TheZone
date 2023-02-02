@@ -706,7 +706,7 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                               
                               float isBlack =1.;
                               if (starship.x+starship.y+starship.z==0.&&starship.w!=0.)isBlack=0.;
-o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+starship.z)*starship.w),0.,1.)+starship.xyz*isBlack);
+o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+starship.z)*(starship.w*starship.w)),0.,1.)+starship.xyz*isBlack);
     return clamp(o,0.,1.);}
 
           vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t/33.3);}
@@ -744,7 +744,7 @@ if (morph>.5){float lfc=length(freed(coords));
     float isBlack =1.;
     if (starship.x+starship.y+starship.z==0.&&starship.w!=0.)isBlack=0.;
     gl_FragColor=vec4(mny+starship.xyz+
-                      clamp(clamp(zoomer+2.*heart(p,-move)-vec3((starship.x+starship.y+starship.z)*starship.w),0.,1.)-(mny.r+mny.b+mny.g)*100.,.0,1.)
+                      clamp(clamp(zoomer+2.*heart(p,-move)-vec3((starship.x+starship.y+starship.z)*(starship.w*starship.w)),0.,1.)-(mny.r+mny.b+mny.g)*100.,.0,1.)
               ,1.
                       )*isBlack;}
         </script>
