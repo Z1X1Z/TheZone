@@ -258,8 +258,8 @@ reversableColor=(angle/360.+twist/24.)*flip+120/360.;
 pitchCol[f]  = colorSound;
 angle = ((angle+180)/360*2*pi);
 
-         d_x = -Math.sin(-angle)*volume*window.movementRate;
-         d_y = -Math.cos(-angle)*volume*window.movementRate;
+         d_x = -Math.sin(-angle)*volumeBoosted*window.movementRate;
+         d_y = -Math.cos(-angle)*volumeBoosted*window.movementRate;
                        
          uniforms.d.value.x=d_x;
          uniforms.d.value.y=d_y;
@@ -299,8 +299,8 @@ let expandedZoomCage=1.;
                        
             if (trailDepth<trailLength)trailDepth++;
 
-xPerp[f-1] = -Math.sin(-angle+pi/2)*volume*window.movementRate;
-yPerp[f-1] = -Math.cos(-angle+pi/2)*volume*window.movementRate;
+xPerp[f-1] = -Math.sin(-angle+pi/2)*volumeBoosted*window.movementRate;
+yPerp[f-1] = -Math.cos(-angle+pi/2)*volumeBoosted*window.movementRate;
                      trailWidth[f-1]=0.;
 f++;//this is the primary drive chain for the trail. it should be a global
 let radius = interpolation*MR*4./window.pixelShaderSize;
@@ -524,7 +524,7 @@ correlationForText+=document.getElementById("allText").offsetHeight;
                        
 let lastVolume = 1.;
         function zoomRate(){
-        let volumeProcessed =volume/lastVolume;
+        let volumeProcessed =volume/lastVolume;//should be volume not volumeBoosted
         if(!isFinite(volumeProcessed))volumeProcessed=1.;
             return Math.E**(Math.log(.5)/zoomFrames*window.movementRate*interpolation*(volumeProcessed));//the square root of volume is to make it grow slower than in d_xy
         }
@@ -650,6 +650,8 @@ function takeNextScoreSlice(start){
                        let timestamplast=0;
                        
                        let STARSHIPMAP;
+                  let     volumeBooster = 1.;
+
 function animate( timestamp ) {
 adjustThreeJSWindow();//mostly for ios here
 
@@ -686,13 +688,15 @@ if( !window.touchMode&&!touchOnlyMode) {
            if(window.volumeSpeed)
            {
                     lastVolume=volume;
+                    volumeBoosted = volume*3.;
 
                            volume = 0.;
                            for(var n=0; n<inputData.length-1;n++)volume+=Math.abs(inputData[n+1]-inputData[n]);
                            volume*=audioX.sampleRate/inputData.length/255;
                           // volume*=4./(1.+zoomOutRatchetThreshold);
                        }
-           else {volume=1.; lastVolume=1.;}
+           else {volume=1.; lastVolume=1.;  volumeBoosted = 1.;
+}
     move();
     infinicore();
     zoomRoutine();
@@ -1213,7 +1217,7 @@ circle.position.set(circleX,circleY,-1.);
 
 
                    let centerOfDotToEdge = [];
-                   centerOfDotToEdge.push( new THREE.Vector3(circleX-Math.sin(-angle)*dotSize*volume, circleY-Math.cos(-angle)*dotSize*volume, -1. ) );
+                   centerOfDotToEdge.push( new THREE.Vector3(circleX-Math.sin(-angle)*dotSize*volumeBoosted, circleY-Math.cos(-angle)*dotSize*volumeBoosted, -1. ) );
                    centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-1.) );
 
 
