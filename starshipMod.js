@@ -8,6 +8,7 @@ function stallTillTHREE(){
 stallTillTHREE();//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
 //document.head.addEventListener('beforeunload', event => { cancelAnimationFrame();});
 let xyStarParticleArray=Array();
+window.zoom=1.;
 
 
 let starshipSize = 1.5/60
@@ -24,14 +25,13 @@ let zoomFrames = 60;//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   const mf = 1.;
 const MR = mf/zoomFrames;
-window.zoomCageSize = window.pixelShaderSize/4.;//radius of zoom bounding,
+window.zoomCageSize = window.pixelShaderSize/2.;//radius of zoom bounding,
 
                   window.uniformsLoaded=false;
 window.gameOn=false;
 window.twist = 0;
 window.flip = 1;
 
-let radius = .5;
 var rez=1.;
 let fftSize=2048;
 let trailLength = 576;
@@ -218,7 +218,7 @@ function  move()
 
   if (!trailLoaded) {trailLoaded = true;
       for(var n = 0; n<trailLength; n++)
-        {xPerp[n]=0;yPerp[n]=0;cx[n]=0;cy[n]=0;trailWidth[n]=1.;pitchCol[n]  = new THREE.Color()
+        {xPerp[n]=0;yPerp[n]=0;cx[n]=0;cy[n]=0;trailWidth[n]=0.;pitchCol[n]  = new THREE.Color()
         }
   }
     pitch=1;
@@ -285,7 +285,7 @@ angle = ((angle+180)/360*2*pi);
          staticY+=d_yS;
                 }
 let expandedZoomCage=1.;
-   if (uniforms.Spoker.value)expandedZoomCage=4./3.
+   if (uniforms.Spoker.value)expandedZoomCage*=4./3.
    if(sqC>=window.zoomCageSize*expandedZoomCage){//adjust back in if too far from the center
         pushBackCounter+=FPS/60.;
 
@@ -300,24 +300,25 @@ let expandedZoomCage=1.;
 
             if (trailDepth<trailLength)trailDepth++;
 
-xPerp[f-1] = -Math.sin(-angle+pi/2)*radius*volume*window.movementRate;
-yPerp[f-1] = -Math.cos(-angle+pi/2)*radius*volume*window.movementRate;
-                     trailWidth[f-1]=1.;//has to be 1 for trail drawing algorithms
+xPerp[f-1] = -Math.sin(-angle+pi/2)*volume*window.movementRate;
+yPerp[f-1] = -Math.cos(-angle+pi/2)*volume*window.movementRate;
+                     trailWidth[f-1]=0.;//has to be 1 for trail drawing algorithms
 f++;//this is the primary drive chain for the trail. it should be a global
+let radius = interpolation*MR*4./window.pixelShaderSize;
 if (f>=trailDepth)f=0;
- xAdjusted= d_x*interpolation*MR*4./window.pixelShaderSize;
- yAdjusted= d_y*interpolation*MR*4./window.pixelShaderSize;
+ xAdjusted= d_x*radius;
+ yAdjusted= d_y*radius;
 
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
 
     cx[n] += xAdjusted;
     cy[n] += yAdjusted;// two thirds seems to fit it to seven clovers neatly on "l"
-trailWidth[n] *= Math.pow(.997,interpolation);
+trailWidth[n] += radius/Math.sqrt(2.)/Math.E;
 }
 
                      cx[(trailDepth+f-1)%trailDepth] = 0;
                      cy[(trailDepth+f-1)%trailDepth] = 0;
-                       trailWidth[(trailDepth+f-1)%trailDepth]=1.;
+                       trailWidth[(trailDepth+f-1)%trailDepth]=0.;
 }
 
 
@@ -519,9 +520,13 @@ correlationForText+=document.getElementById("allText").offsetHeight;
                   let interpolation=1.;
                   let finalAverageAmp=1.;
                   let averageFrameTotalAmp = [];
-                  function zoomRate(){
-                    return Math.E**(Math.log(.5)/zoomFrames*window.movementRate*interpolation*(Math.sqrt(volume)/2.+.5));//the square root of volume is to make it grow slower than in d_xy
-                  }
+                       
+
+        function zoomRate(){
+            return Math.E**(Math.log(.5)/zoomFrames*window.movementRate*interpolation*(Math.sqrt(volume)/2.+.5));//the square root of volume is to make it grow slower than in d_xy
+        }
+                       
+                       
                        let cloverSuperCores = 0;
                        var singleHyperCoreDepth = 60.;
        function infinicore(){
@@ -539,20 +544,28 @@ correlationForText+=document.getElementById("allText").offsetHeight;
             zoom=1.;
             }
     }
-function zoomRoutine(){
+                       function zoomRoutine(){
     let metaDepth=.000001;//due to pixelization limits
     if(uniforms.Spoker.value)metaDepth=.0000001;
-        let zoomCone=metaDepth*Math.sqrt(coordX*coordX+coordY*coordY);
-                     if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
+    let zoomCone=metaDepth*Math.sqrt(coordX*coordX+coordY*coordY);
+    if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
+    
+    ZR = zoomRate();
+    if(!isFinite(ZR))ZR=1;
+    if(!zoomOutEngage){
+        if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&on)||window.pointerZoom)zoom *=ZR;
+        else //if(zoom<1.)
+        {
+            zoom /= ZR;
+            if(center){coordX*=(1-zoom)*ZR*2./3.; coordY*=(1-zoom)*ZR*2./3.;}
+        }
+    }
+    //if(zoom>=2.&&(on||pointerZoom)){zoom=zoom/=2.;coordX/=2.; coordY/=2.;}
+   // else
+        if(zoom>=2.){zoom/=2.;coordX/=2.; coordY/=2.;}//infini UpWell
+    //if (zoom>1.)zoom=1.;//disengage upcore
 
-                   ZR = zoomRate();
-                   if(!zoomOutEngage){
-                     if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&on)||window.pointerZoom)zoom *=ZR;
-                     else if(zoom<1.){zoom /= ZR;
-                     if(center){coordX*=(1-zoom)*ZR*2./3.; coordY*=(1-zoom)*ZR*2./3.;}
-                     }
-                   }
-                     if (zoom>1.)zoom=1.;
+    
                      if (zoom>=1.)zoomOutEngage = false;
     //.000000000000000000000001
                       else if ( zoom<zoomCone||zoom<1./2**63.*.000001)zoomOutEngage = true;
@@ -916,7 +929,7 @@ if(!window.touchMode){
                              starColors.push(
                                            m.vop.r,
                                            m.vop.g,
-                                           m.vop.b,1.+depthOUTER*.777,
+                                           m.vop.b,1.-depthOUTER**2.*.5,
                                            )
                          let nx =-m.x+outSetX
                          let ny =-m.y+outSetY
@@ -1107,8 +1120,8 @@ let loopLimit = trailDepth;
 while(loopLimit>0&&r!=f){
 
 
-  let widtr = (1.-trailWidth[r]);
-  let widts = (1.-trailWidth[s]);
+  let widtr = trailWidth[r];
+  let widts = trailWidth[s];
   let tt = 0.;
   var z = (-1.+(trailDepth-loopLimit)/trailDepth);
                           let transparencyOfTrail=z**2;
@@ -1175,12 +1188,13 @@ if (circleY>height)circleY=-height;
 else if (circleY<-height)circleY=height;
 
 
-circleGeometry = new THREE.CircleGeometry( dotSize, 32,1 );
+circleGeometry = new THREE.CircleGeometry( dotSize, Math.round(9.*(1.-(timestamp/1000./9.)%1.**2.)+3.),1 );
 //circleGeometry.computeBoundingBox ();
 circleMaterial = new THREE.MeshBasicMaterial( { color: colorSound} );
 
 circle = new THREE.Mesh( circleGeometry, circleMaterial );
 circle.position.set(circleX,circleY,-1.);
+                                  circle.rotateZ(Math.PI*2.*-Math.cos(timestamp/1000.));
 
                    let colorBlack= new THREE.Color();
                    colorBlack.setStyle("black");
@@ -1242,27 +1256,27 @@ for(let n = 0; n < polygons.length; n++)
 
 
         let angleTarget = Math.atan2(yFromCent,xFromCent);
-        let baseMag=level;
+        let baseMag=(1.-(metaLevel-level)/(metaLevel))/2.;
         let speed = Math.sqrt(polygons[n].dx*polygons[n].dx+polygons[n].dy*polygons[n].dy)
         let speedLimit = 1.;
 
+                         let distanceFromCenter = Math.pow(xFromCent*xFromCent+yFromCent*yFromCent,.5);
+
+                       // polygons[n].dx*=1.-baseMag;//resistance to speed accumulation
+                        // polygons[n].dy*=1.-baseMag;
 
 
-
-        polygons[n].dx*=Math.pow(.999,interpolation);//resistance to speed accumulation
-        polygons[n].dy*=Math.pow(.999,interpolation);
-
-        if (speed<=speedLimit)
+        if (distanceFromCenter<=1.)
         {
-            polygons[n].dx+=baseMag*-Math.cos(angleTarget);
-            polygons[n].dy+=baseMag*-Math.sin(angleTarget);
+            polygons[n].dx+=-Math.cos(angleTarget)*interpolation*baseMag/60.;
+            polygons[n].dy+=-Math.sin(angleTarget)*interpolation*baseMag/60.;
         }
+                         
 var neutralizer=1.;
 if (!on)neutralizer=0.;
-                polygons[n].centerX += (d_x*neutralizer-polygons[n].dx)*interpolation/minimumDimension;
-                polygons[n].centerY += (d_y*neutralizer-polygons[n].dy)*interpolation/minimumDimension;
+                polygons[n].centerX += (d_x*neutralizer-polygons[n].dx)*MR;
+                polygons[n].centerY += (d_y*neutralizer-polygons[n].dy)*MR;
 
-    let distanceFromCenter = Math.pow(xFromCent*xFromCent+yFromCent*yFromCent,.5);
     let ddX= circleX-polygons[n].centerX;
     let ddY= circleY-polygons[n].centerY;
     let distDot = Math.sqrt(ddX*ddX+ddY*ddY);

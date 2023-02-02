@@ -46,13 +46,17 @@
                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                        <label for="Touch">Touch!</label><br>
                        
-                       
-                       
-                       
                        <input type="checkbox" id="Note Stars" name="t"  onclick= "
                            key  = 'P';
                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                         <label for="Note Stars">Note Stars!</label><br>
+                        
+                        <input type="checkbox" id="StarClover" name="t"  onclick= "
+                            key  = 'O';
+                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                         <label for="StarClover">Star in Clover!</label><br>
+                         
+                        
                         
                        <a id="Star Stream" name="t"  onclick= "
 
@@ -178,7 +182,14 @@
                                          key  = 'J';
                                          callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                                       <label for="Clovoid">144000!</label><br>
-
+                                      <input type="checkbox" id="Spoker" name="t"  onclick= "
+                                          key  = 'T';
+                                          callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                                       <label for="Spoker">Spoker!</label><br>
+                                       <input type="checkbox" id="SpokeLove" name="t"  onclick= "
+                                           key  = 'F';
+                                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                                        <label for="SpokeLove">Spoke Love!</label><br>
 
                         <form>
 
@@ -423,7 +434,7 @@ uniform float shaderScale;
                             vec2 z=g.xy;
                             if(g.x>1.25&&abs(g.y)<2.5)for(int f=0;f<15;f+=1)if(abs(z.y)>15.&&f>7&&f!=15){m=abs(z.y)/25.;break;}
                             else {
-                                z=1.3*vec2(-1.5/((z.x*z.x-2.*z.y*z.y)-g.x+t.x),(1.9*z.x*z.y-1.87*g.y+t.y/4.));
+                                z=1.3*vec2(-1.5/((z.x*z.x-2.*z.y*z.y)-g.x+t.x),(1.9*z.x*z.y-1.87*g.y+t.y));
                                 z.x=pow(abs(z.x),.57);}
                             return vec3(m,m,m/2.);
                             }
@@ -432,7 +443,7 @@ uniform float shaderScale;
                             g.x+=.05;
                             g.y/=1.14;
                             vec2 z=g.xy;
-                            if(g.x>.5 &&abs(g.y)<1.)for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7){r=clamp(1.4-abs(g.x-2.3)
+                            if(abs(g.y)<3.)for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7){r=clamp(1.7-abs(g.x-2.3)
                                              //*(1.-abs(g.y*g.x))-.07//(un)comment this line to toggle sleeves
                                             ,0.,1.);break;}
                             else{
@@ -444,9 +455,9 @@ uniform float shaderScale;
                             float b=0.;
                             g/=2.;
                             vec2 z=g.xy;
-                            if(g.x>.75&&g.x<1.7&&abs(g.y*g.x)<.54)for(int f=0;f<8;f+=1)if(abs(z.x)>52.&&f>1){b=abs(z.x)/70.;break;}
+                            if(g.x>.75&&g.x<1.7&&abs(g.y*g.x)<.57)for(int f=0;f<8;f+=1)if(abs(z.x)>52.&&f>1){b=abs(z.x)/70.;break;}
                             else{
-                                z=3.*vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),77.*z.x*z.y-g.y+t.y);
+                                z=3.*vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x*sign(-g.y)),77.*z.x*z.y-g.y+t.y);
                                 z.y=-1./z.y;}
                             return vec3(b/2.,b,b/2.);
                             }
@@ -476,7 +487,7 @@ vec3 sealedMan(vec2 p,vec2 t)
                 g.x+=.05;
                 g.y/=1.14;
                 z=g;
-                if(g.x>.5)for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7)r=clamp(1.4-abs(g.x-2.3)
+                if(g.x>.5)for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7)r=clamp(1.44-abs(g.x-2.3)
                                                  *(1.-abs(g.y*g.x))-.07//(un)comment this line to toggle sleeves
                                                 ,0.,1.);
                 else{
@@ -545,16 +556,21 @@ vec3 tol(vec2 p, vec2 t){
       vec2 s=p;
       float coresIn = 1.;
       const float crs = 63.;
-     for(int i=0;i<int(crs); i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
+      if(c>4./3. ){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
+
+   if (zoom<1.)  for(int i=0;i<int(crs); i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
+     else if(zoom>1.)for(int i=0;i<int(crs); i++)if(c>4./3.&&loops<-cored){s/=2.;c/=2.;loops++;coresIn++;}else break;//UpCore not in use here, but rather in the starshipMod
+    for(int i=0;i<int(crs); i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
      float lfc = length(freed(coords));
 
      loops=0.;
      float hyperCore=0.;
-       if(MetaCored)hyperCore=cored*2./3.+log(lfc)*0.9551195;//.9551195 is based on x=log3(x), x = .910239log*(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
+     float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
+       if(MetaCored)hyperCore=cored*2./3.+log(lfc)*logStabilizationConstant;
       else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
       if(outerCoresOff)hyperCore=0.;
 
-        if(Spoker||MetaCored&&morph>.5)hyperCore*=4./3.;//engage overstable core if dancing
+        if(Spoker&&MetaCored)hyperCore*=4./3./logStabilizationConstant;//engage overstable core if dancing
 
      float term=0.;
      if(spirated!=0.)term=(1.-lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
@@ -565,15 +581,21 @@ vec3 tol(vec2 p, vec2 t){
     )*abs(coresIn/crs*2.-1.);
     //this is essentially just p as in the mandelbrot x <== x^2+
 
-                                    const float iterations = 20.;
+                                    const float iterations = 40.;
                                     float refractelC=1.5;
                                 //  p*=2.*refractelC;
 vec3 oo = vec3(0.);
 vec4 starship=vec4(0.);
 
      for (float counter=0.;counter<iterations;counter++)if(abs(s.y)<50.){
-         float minimumResolution = min(resolution.x,resolution.y);
-         if(length(s)<2./3.)starship+= texture2D(STAR,(vec2(s.y,-s.x)*3./2.)/2.+.5);
+                   
+         if(length(s)<2./3.){
+             
+          //if(petals!=0.)
+          starship+= texture2D(STAR,(spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+3.14159
+            )*3./2.)/2.+.5);//doesn't remap clovers 8+
+        // else starship+= texture2D(STAR,  ((   vec2(s.y,-s.x)      )*3./2.)/2.+.5 );
+                                 }
          
      if(onehundredfortyfourthousand)
      {
@@ -591,7 +613,7 @@ vec4 starship=vec4(0.);
     }
         if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+3.14159);
 
-           if(colorCombo==8||colorCombo==9)colorAccumulator+=s;
+           colorAccumulator+=s;
            if(Refractelate&&length(s)>refractelC){s/=refractelC;} //refractelC/=4./3.;}
 
            s=vec2(
@@ -611,8 +633,8 @@ vec4 starship=vec4(0.);
         s.x=log(abs(s.x))/log(3.-term);
            
 
-            if(Spoker&&loops+counter<hyperCore) s/=2.;//engage spokelover
-             if(spokelover&&counter+1.<hyperCore) s/=sqrt(2.);//engage shiny spokelover
+            if(Spoker&&loops+counter+1.<hyperCore) s/=2.;//engage spokelover
+             if(spokelover&&counter<hyperCore) s/=sqrt(2.);//engage shiny spokelover
 
 
        float distance = length(s);
@@ -636,7 +658,7 @@ vec4 starship=vec4(0.);
   }else break;
 
 
-vec3 o = vec3(s.y);
+vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                              if(colorCombo==7) o=vec3(s.y,s.x/9.5,1.-s.x/12.);
                              else if(colorCombo==2) o=vec3(s.y/100.-s.x*s.y/888.+s.y/50000.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.+s.y/50000.);
                              else if(colorCombo==3) o= vec3(s.x/8.-s.y/s.x/7000.,1.-s.x/16.,s.y/100.);
@@ -671,7 +693,7 @@ vec3 o = vec3(s.y);
                               
                               
                               
-                              
+
                               
                   if(colorInverter==true){
                               o.r*=-sin(time);
@@ -684,11 +706,13 @@ vec3 o = vec3(s.y);
                                         o/= max(max(o.r,o.g),o.b);
                                          o=o*.5+.5;
                                          }
-
-o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+starship.z)*starship.w),0.,1.)+starship.xyz;
+                              
+                              float isBlack =1.;
+                              if (starship.x+starship.y+starship.z==0.&&starship.w!=0.)isBlack=0.;
+o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+starship.z)*starship.w),0.,1.)+starship.xyz)*isBlack;
     return clamp(o,0.,1.);}
 
-          vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t);}
+          vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t/33.3);}
           vec3 bod(vec2 p, vec2 t){t*=zoom;return body(p,t)+heart(p,t);}
           vec3 manny(vec2 p, vec2 t){
             return +body(p,t)+face(p,0.*t)+shiny(p,t);}
@@ -716,13 +740,14 @@ if (morph>.5){float lfc=length(freed(coords));
                                                                                         ;}
 
     vec3 zoomer=tol(backGround,dance);
+    vec2 move = -d.yx*volume/14.;
     vec3 mny=manny(p*2.//+vec2(.5,0.)
-                   ,-d.yx*volume/4.);
+                   ,move*2.);
     vec4 starship = texture2D(STAR,vUv);
     float isBlack =1.;
     if (starship.x+starship.y+starship.z==0.&&starship.w!=0.)isBlack=0.;
     gl_FragColor=vec4(mny+starship.xyz+
-                      clamp(clamp(zoomer+2.*heart(p,-t)-vec3((starship.x+starship.y+starship.z)*starship.w),0.,1.)-(mny.r+mny.b+mny.g)*100.,.0,1.)
+                      clamp(clamp(zoomer+2.*heart(p,-move)-vec3((starship.x+starship.y+starship.z)*starship.w),0.,1.)-(mny.r+mny.b+mny.g)*100.,.0,1.)
               ,1.
                       )*isBlack;}
         </script>
