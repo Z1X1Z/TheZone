@@ -10,7 +10,7 @@ stallTillTHREE();//this is a lurker. it waits for the three.js loader to resolve
 let xyStarParticleArray=Array();
 window.zoom=1.;
 
-let starshipSize = Math.E**-1.3247;
+let starshipSize = Math.E**-1.3247/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are size
 let screenPressCoordX, screenPressCoordY;
 window.pointerZoom=false;
 let coordX=0., coordY=0.;
@@ -24,7 +24,7 @@ let zoomFrames = 60;//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   const mf = 1.;
 const MR = mf/zoomFrames;
-window.zoomCageSize = window.pixelShaderSize/2.;//radius of zoom bounding,
+window.zoomCageSize =100000.* window.pixelShaderSize/4.;//radius of zoom bounding
 
                   window.uniformsLoaded=false;
 window.gameOn=false;
@@ -33,7 +33,7 @@ window.flip = 1;
 
 var rez=1.;
 let fftSize=2048;
-let trailLength = 288;
+let trailLength = 144;
 let colorSound;
 let center = false;
                   let geome;
@@ -283,6 +283,7 @@ angle = ((angle+180)/360*2*pi);
          staticX+=d_xS;
          staticY+=d_yS;
                 }
+                       /*disable zoomcage instead relying on upcore
 let expandedZoomCage=1.;
    if (uniforms.Spoker.value)expandedZoomCage*=4./3.
    if(sqC>=window.zoomCageSize*expandedZoomCage){//adjust back in if too far from the center
@@ -292,11 +293,10 @@ let expandedZoomCage=1.;
         coordY*=window.zoomCageSize/sqC*expandedZoomCage;
     }
     else pushBackCounter = 0
-                       
     if(pushBackCounter>14){coordX=0;coordY=0;}//teleport to center if continuously flying into perimeter
-
-
-
+*/
+                       
+                       
             if (trailDepth<trailLength)trailDepth++;
 
 xPerp[f-1] = -Math.sin(-angle+pi/2)*volume*window.movementRate;
@@ -312,7 +312,7 @@ if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
 
     cx[n] += xAdjusted;
     cy[n] += yAdjusted;
-trailWidth[n] += radius/Math.sqrt(2.)*starshipSize;
+trailWidth[n] += radius*starshipSize;
 }
 
                      cx[(trailDepth+f-1)%trailDepth] = 0;
@@ -342,7 +342,8 @@ let uniforms;
                        let renderTarget;
 function init() {
     
-    renderTarget = new THREE.WebGLRenderTarget(window.innerWidth,window.innerHeight );
+    renderTarget = new THREE.WebGLRenderTarget(Math.max(window.innerWidth,window.innerHeight),
+                                               Math.max(window.innerWidth,window.innerHeight));
 
 
 
@@ -362,9 +363,10 @@ function init() {
   THREE.UniformsLib.lights,
   {
       STAR:{value: null    },
+      spokesVisualizeColors: {value: false    },
+
   Spoker:{value: true    },
   spokelover:{value: false    },
-
       micIn : {  value: null }, // float array (vec3)
       time: {value: 1.0 },
   rate: {value: 1./window.movementRate },
@@ -544,6 +546,9 @@ let lastVolume = 1.;
             {cloverSuperCores=0;
             zoom=1.;
             }
+    
+    
+    if(Math.sqrt(coordX*coordX+coordY*coordY)>4.||zoom>4.){coordX=(coordX/2.)%4.; coordY=(coordY/2.)%4.;zoom=(zoom/2.)%4.;}
     }
                        function zoomRoutine(){
     let metaDepth=.000001;//due to pixelization limits
@@ -558,13 +563,9 @@ let lastVolume = 1.;
         else //if(zoom<1.)
         {
             zoom /= ZR;
-            if(center){coordX*=(1-zoom)*ZR*2./3.; coordY*=(1-zoom)*ZR*2./3.;}
+            if(center){coordX*=(2-zoom)*ZR*2./3.; coordY*=(2-zoom)*ZR*2./3.;}
         }
     }
-    //if(zoom>=2.&&(on||pointerZoom)){zoom=zoom/=2.;coordX/=2.; coordY/=2.;}
-   // else
-        if(zoom>=2.){zoom=(zoom/2.)%2.;coordX=(coordX/2.)%2.; coordY=(coordY/2.)%2.;}//infini UpWell
-    //if (zoom>1.)zoom=1.;//disengage upcore
 
     
                      if (zoom>=1.)zoomOutEngage = false;
@@ -820,7 +821,8 @@ if(!window.touchMode){
                      var arm =(flip*(mustarD[g])+twist+12)%24./24.*pi*2.;
                      let lengtOriginal=(testar[g]-minTestar)/(maxTestar-minTestar);//twice applied
                      var widt = (1.-lengtOriginal)*starshipSize;
-
+                     if (widt==0)widt=starshipSize;
+                     //var widt =starshipSize;
                      var vop = new THREE.Color();
                      vop.setHSL((-mustarD[g]+8)%24./24., mustarD[g]/297.,mustarD[g]/297.);//297 is the highest heard note
                      material = new THREE.MeshBasicMaterial({
@@ -840,12 +842,12 @@ if(!window.touchMode){
             let yr = lengtOriginal*-Math.cos(arm);
             let depth = (-1.+lengtOriginal/maxToMin);//shortest bar on top
             
-            let starshipseethrough = (1.+lengtOriginal)**2.;
+            let starshipseethrough = lengtOriginal;
             //for(var yy=0;yy<3;yy++)
                  starColors.push(
-                                 vop.r,vop.g,vop.b,starshipseethrough,
-                                 vop.r,vop.g,vop.b,starshipseethrough,
-                                 vop.r,vop.g,vop.b,starshipseethrough)
+                                 vop.r,vop.g,vop.b,1.,
+                                 vop.r,vop.g,vop.b,.5,
+                                 vop.r,vop.g,vop.b,1.)
                  
             star.push(
                       (xr-x), (yr-y),  depth,
@@ -853,12 +855,22 @@ if(!window.touchMode){
                       (xr+x), (yr+y),  depth,
                       ) ;
         }
+                 /* rectangular star    star.push(
+                               
+                               -x,    -y,  depth,
+                               x,    y,  depth,
+                               (xr+x), (yr+y),  depth,
+                               -x, -y,  depth,
+                               (xr+x), (yr+y),  depth,
+                               (xr-x), (yr-y),  depth,
+                               ) ;
+                  */
                      
                      
                      if(RockInTheWater==1||RockInTheWater==2)
                      {
-                         var lengt =(testar[g]/255-totalAMP/2.)*starshipSize*1.5;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
-                         if(lengt<=0)lengt=1./255.*starshipSize*1.5;
+                         var lengt =(testar[g]/255-totalAMP/2.)*starshipSize;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
+                         if(lengt<=0)lengt=1./255.*starshipSize;
                                      var xyStarParticle={};
                          xyStarParticle.x=lengt*-Math.sin(rpio2);
                          xyStarParticle.xr=-Math.sin(arm)/fill;
@@ -929,7 +941,7 @@ if(!window.touchMode){
                              starColors.push(
                                            m.vop.r,
                                            m.vop.g,
-                                           m.vop.b,1.-depthOUTER**2.*.5,
+                                           m.vop.b,1.+depthOUTER,
                                            )
                          let nx =-m.x+outSetX
                          let ny =-m.y+outSetY
@@ -967,7 +979,7 @@ else{//start drawing of just twenty four frets here
                              }
 
             for (var g=0; g<24; g++) {
-            var widt = starshipSize/2.;
+            var widt = starshipSize;
             var arm =(flip*g+twist)%24./24.*pi*2.;
 
             var lengt = (testar[(g+12)%24]-minTestar)/(maxTestar-minTestar);
@@ -1018,7 +1030,7 @@ x,    y,  depth,
          for (var t=0; t<12; t++) {
              
              for (var g=0; g<10; g++) {
-                 var widt = starshipSize**Math.E;
+                 var widt = starshipSize**(2.41421);
                  var finger = twelve[t][g];
                  var arm =g/10.*pi*2.;
                  
@@ -1187,8 +1199,8 @@ else if (circleX<-width)circleX=width;
 if (circleY>height)circleY=-height;
 else if (circleY<-height)circleY=height;
 
-
-circleGeometry = new THREE.CircleGeometry( dotSize, Math.round(noteNumber*12.)%12+2.,1 );//
+                                  dotSize=starshipSize;
+circleGeometry = new THREE.CircleGeometry( dotSize, Math.round((Math.abs((noteNumber+.5)%1.-.5))*12.)%12+2.,1 );//
 //circleGeometry.computeBoundingBox ();
 circleMaterial = new THREE.MeshBasicMaterial( { color: colorSound} );
 

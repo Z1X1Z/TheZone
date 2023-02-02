@@ -311,7 +311,7 @@
             uniform sampler2D STAR;
             uniform bool Spoker;
             uniform bool spokelover;
-
+            uniform bool spokesVisualizeColors;
             uniform vec2 coords;
             vec2 spunC=vec2(0.);
             uniform vec2 d;
@@ -557,7 +557,7 @@ vec3 tol(vec2 p, vec2 t){
       vec2 s=p;
       float coresIn = 1.;
       const float crs = 63.;
-      if(c>4./3. ){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
+      if(c>4./3.){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
 
    if (zoom<1.)  for(int i=0;i<int(crs); i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
      else if(zoom>1.)for(int i=0;i<int(crs); i++)if(c>4./3.&&loops<-cored){s/=2.;c/=2.;loops++;coresIn++;}else break;//UpCore not in use here, but rather in the starshipMod
@@ -587,16 +587,12 @@ vec3 tol(vec2 p, vec2 t){
                                 //  p*=2.*refractelC;
 vec3 oo = vec3(0.);
 vec4 starship=vec4(0.);
-
+float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
      for (float counter=0.;counter<iterations;counter++)if(abs(s.y)<50.){
                    
-         if(length(s)<2./3.){
-             
-          //if(petals!=0.)
-          starship+= texture2D(STAR,(spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+PI
+         if(length(s)<2./3.||(spokesVisualizeColors&&length(s)<1.)) starship+= texture2D(STAR,minToMax*(spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+PI
             )*3./2.)/2.+.5);//doesn't remap clovers 8+
-        // else starship+= texture2D(STAR,  ((   vec2(s.y,-s.x)      )*3./2.)/2.+.5 );
-                                 }
+                                 
          
      if(onehundredfortyfourthousand)
      {

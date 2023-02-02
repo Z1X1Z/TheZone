@@ -103,6 +103,8 @@ function callKey(event){
           RockInTheWater+=1;RockInTheWater=RockInTheWater%3;}
 
       else if (key=="z")uniforms[ "helm" ].value = !uniforms[ "helm" ].value;
+      else if (key=="Z")uniforms[ "spokesVisualizeColors" ].value = !uniforms[ "spokesVisualizeColors" ].value;
+
       else if (key=="j"){
           if(uniforms[ "carousel" ].value==0)uniforms[ "carousel" ].value=-1.;
           else if(uniforms[ "carousel" ].value==-1.)uniforms[ "carousel" ].value=1.;
