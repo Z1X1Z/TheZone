@@ -356,7 +356,8 @@ uniform bool remediatedColors;
 uniform bool dotted;
 uniform bool onehundredfortyfourthousand;
 uniform float shaderScale;
-            const float gr = 1.6180339;
+            const float PI = 3.1415927410125732;
+            const float gr = 1.618033988749;
             float zin(float x){return -sin(x);}
             float coz(float x){return -cos(x);}
 
@@ -405,7 +406,7 @@ uniform float shaderScale;
                      d+=length(s)/10.;
                  }
                  if (l>.54) negator = 0.;
-                 return vec3(-sin(d *3.+6.28318/3.),-sin(d*3.+6.28318*5./3.),-sin(d*3.))*5.*negator;
+                 return vec3(-sin(d *3.+PI*2./3.),-sin(d*3.+PI*2.*5./3.),-sin(d*3.))*5.*negator;
          }
 
 
@@ -592,7 +593,7 @@ vec4 starship=vec4(0.);
          if(length(s)<2./3.){
              
           //if(petals!=0.)
-          starship+= texture2D(STAR,(spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+3.14159
+          starship+= texture2D(STAR,(spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+PI
             )*3./2.)/2.+.5);//doesn't remap clovers 8+
         // else starship+= texture2D(STAR,  ((   vec2(s.y,-s.x)      )*3./2.)/2.+.5 );
                                  }
@@ -611,7 +612,7 @@ vec4 starship=vec4(0.);
          }
                                   
     }
-        if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+3.14159);
+        if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*PI/(atan(s.y,s.x)+PI);
 
            colorAccumulator+=s;
            if(Refractelate&&length(s)>refractelC){s/=refractelC;} //refractelC/=4./3.;}
@@ -709,7 +710,7 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                               
                               float isBlack =1.;
                               if (starship.x+starship.y+starship.z==0.&&starship.w!=0.)isBlack=0.;
-o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+starship.z)*starship.w),0.,1.)+starship.xyz)*isBlack;
+o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+starship.z)*starship.w),0.,1.)+starship.xyz*isBlack);
     return clamp(o,0.,1.);}
 
           vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t/33.3);}
@@ -724,9 +725,9 @@ o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+stars
 
       spunC=coords.yx;
 
-     if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time*rate,3.1415927410125732*2.));}
+     if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time*rate,PI*2.));}
      vec2 backGround=freed(p*zoom+spunC);
-     if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time*rate,3.1415927410125732*2.));
+     if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time*rate,PI*2.));
 
                            backGround=spin2(backGround,atan(backGround.y,backGround.x)*petals/6.);
                            //p.x+=.5;

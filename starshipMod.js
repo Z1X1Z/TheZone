@@ -10,8 +10,7 @@ stallTillTHREE();//this is a lurker. it waits for the three.js loader to resolve
 let xyStarParticleArray=Array();
 window.zoom=1.;
 
-
-let starshipSize = 1.5/60
+let starshipSize = Math.E**-1.3247;
 let screenPressCoordX, screenPressCoordY;
 window.pointerZoom=false;
 let coordX=0., coordY=0.;
@@ -34,7 +33,7 @@ window.flip = 1;
 
 var rez=1.;
 let fftSize=2048;
-let trailLength = 576;
+let trailLength = 288;
 let colorSound;
 let center = false;
                   let geome;
@@ -226,7 +225,7 @@ function  move()
 
     totalAMP = 0.;
     for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
-    totalAMP/=inputData.length*2.;//*2 for range -1 to 1
+    totalAMP/=inputData.length;
 
 if (totalAMP>zoomOutRatchetThreshold||on)
   pb =    calculatePitch();
@@ -302,7 +301,7 @@ let expandedZoomCage=1.;
 
 xPerp[f-1] = -Math.sin(-angle+pi/2)*volume*window.movementRate;
 yPerp[f-1] = -Math.cos(-angle+pi/2)*volume*window.movementRate;
-                     trailWidth[f-1]=0.;//has to be 1 for trail drawing algorithms
+                     trailWidth[f-1]=0.;
 f++;//this is the primary drive chain for the trail. it should be a global
 let radius = interpolation*MR*4./window.pixelShaderSize;
 if (f>=trailDepth)f=0;
@@ -312,8 +311,8 @@ if (f>=trailDepth)f=0;
 if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
 
     cx[n] += xAdjusted;
-    cy[n] += yAdjusted;// two thirds seems to fit it to seven clovers neatly on "l"
-trailWidth[n] += radius/Math.sqrt(2.)/Math.E;
+    cy[n] += yAdjusted;
+trailWidth[n] += radius/Math.sqrt(2.)*starshipSize;
 }
 
                      cx[(trailDepth+f-1)%trailDepth] = 0;
@@ -521,9 +520,11 @@ correlationForText+=document.getElementById("allText").offsetHeight;
                   let finalAverageAmp=1.;
                   let averageFrameTotalAmp = [];
                        
-
+let lastVolume = 1.;
         function zoomRate(){
-            return Math.E**(Math.log(.5)/zoomFrames*window.movementRate*interpolation*(Math.sqrt(volume)/2.+.5));//the square root of volume is to make it grow slower than in d_xy
+        let volumeProcessed =volume/lastVolume;
+        if(!isFinite(volumeProcessed))volumeProcessed=1.;
+            return Math.E**(Math.log(.5)/zoomFrames*window.movementRate*interpolation*(volumeProcessed));//the square root of volume is to make it grow slower than in d_xy
         }
                        
                        
@@ -562,7 +563,7 @@ correlationForText+=document.getElementById("allText").offsetHeight;
     }
     //if(zoom>=2.&&(on||pointerZoom)){zoom=zoom/=2.;coordX/=2.; coordY/=2.;}
    // else
-        if(zoom>=2.){zoom/=2.;coordX/=2.; coordY/=2.;}//infini UpWell
+        if(zoom>=2.){zoom=(zoom/2.)%2.;coordX=(coordX/2.)%2.; coordY=(coordY/2.)%2.;}//infini UpWell
     //if (zoom>1.)zoom=1.;//disengage upcore
 
     
@@ -677,26 +678,25 @@ if (uniforms["MetaCored"].value){
                                                               lastFrameTime=timestamp;
 if(!window.touchMode)pointerZoom=false;
 else on=false;
+
 if( !window.touchMode&&!touchOnlyMode) {
 
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
            if(window.volumeSpeed)
            {
+                    lastVolume=volume;
+
                            volume = 0.;
                            for(var n=0; n<inputData.length-1;n++)volume+=Math.abs(inputData[n+1]-inputData[n]);
                            volume*=audioX.sampleRate/inputData.length/255;
-
-                           volume*=4./(1.+zoomOutRatchetThreshold);
+                          // volume*=4./(1.+zoomOutRatchetThreshold);
                        }
-                else volume=1.;
-
-                                                              spiral_compress();
-    if(!zoomAtl41){
-        infinicore();
-        zoomRoutine();//  zoomAtl41 is zoom freeze
-    }
-                           move();
-                           if(on) makeSpirograph();
+           else {volume=1.; lastVolume=1.;}
+    move();
+    infinicore();
+    zoomRoutine();
+    spiral_compress();
+    if(on) makeSpirograph();
 
 
     if (computeFPS)
@@ -780,7 +780,7 @@ if( !window.touchMode&&!touchOnlyMode) {
 
 
   uniforms[ "time2dance" ].value += audioX.sampleRate/bufferSize*totalAMP;
-         uniforms["volume" ].value = audioX.sampleRate/bufferSize*totalAMP/(1.+zoomOutRatchetThreshold)*4.;
+         uniforms["volume" ].value = audioX.sampleRate/bufferSize*totalAMP/(1.+zoomOutRatchetThreshold);
 
 
 
@@ -795,6 +795,9 @@ if( !window.touchMode&&!touchOnlyMode) {
 
    var star=[];
    const starColors=[];
+
+                            let maxToMin = Math.max(height,width)/Math.min(height,width);
+
 if(!window.touchMode){
          if(onO){
              for (var g=0; g<starArms; g++) {
@@ -802,7 +805,6 @@ if(!window.touchMode){
                  if(testar[g]<minTestar) minTestar=testar[g];
              }
              
-             let maxToMin = Math.max(height,width)/Math.min(height,width);
              let secondsToEdge=1;
              secondsToEdge*=window.pixelShaderSize/4./movementRate;
              let fill =1000./(timestamp - timestamplast)*secondsToEdge;//This should be set to either sampleRate/fftSize or by predicted FPS
@@ -815,10 +817,10 @@ if(!window.touchMode){
              {
                  if(isFinite(testar[g])&&testar[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.){
                      
-                     var widt = 1.5*starshipSize;
                      var arm =(flip*(mustarD[g])+twist+12)%24./24.*pi*2.;
                      let lengtOriginal=(testar[g]-minTestar)/(maxTestar-minTestar);//twice applied
-                     
+                     var widt = (1.-lengtOriginal)*starshipSize;
+
                      var vop = new THREE.Color();
                      vop.setHSL((-mustarD[g]+8)%24./24., mustarD[g]/297.,mustarD[g]/297.);//297 is the highest heard note
                      material = new THREE.MeshBasicMaterial({
@@ -831,30 +833,28 @@ if(!window.touchMode){
 
         if(RockInTheWater==0||RockInTheWater==1)
         {
-           // for(var yy=0;yy<6;yy++)
-                starColors.push(vop.r,vop.g,vop.b,1.,
-                                vop.r,vop.g,vop.b,1.,
-                                vop.r,vop.g,vop.b,1.,
-                                vop.r,vop.g,vop.b,1.,
-                                vop.r,vop.g,vop.b,1.,
-                                vop.r,vop.g,vop.b,1.)
-                
+       
             let x = widt*-Math.sin(rpio2);
             let y = widt*-Math.cos(rpio2);
             let xr = lengtOriginal*-Math.sin(arm);
             let yr = lengtOriginal*-Math.cos(arm);
             let depth = (-1.+lengtOriginal/maxToMin);//shortest bar on top
             
+            let starshipseethrough = (1.+lengtOriginal)**2.;
+            //for(var yy=0;yy<3;yy++)
+                 starColors.push(
+                                 vop.r,vop.g,vop.b,starshipseethrough,
+                                 vop.r,vop.g,vop.b,starshipseethrough,
+                                 vop.r,vop.g,vop.b,starshipseethrough)
+                 
             star.push(
-                      
-                      -x,    -y,  depth,
-                      x,    y,  depth,
-                      (xr+x), (yr+y),  depth,
-                      -x, -y,  depth,
-                      (xr+x), (yr+y),  depth,
                       (xr-x), (yr-y),  depth,
+                      0., 0.,  depth,
+                      (xr+x), (yr+y),  depth,
                       ) ;
         }
+                     
+                     
                      if(RockInTheWater==1||RockInTheWater==2)
                      {
                          var lengt =(testar[g]/255-totalAMP/2.)*starshipSize*1.5;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
@@ -967,7 +967,7 @@ else{//start drawing of just twenty four frets here
                              }
 
             for (var g=0; g<24; g++) {
-            var widt = 1.5*starshipSize;
+            var widt = starshipSize/2.;
             var arm =(flip*g+twist)%24./24.*pi*2.;
 
             var lengt = (testar[(g+12)%24]-minTestar)/(maxTestar-minTestar);
@@ -987,7 +987,7 @@ let x = widt*-Math.sin(rpio2);
 let y = widt*-Math.cos(rpio2);
 let xr = lengt*-Math.sin(arm);
 let yr = lengt*-Math.cos(arm);
-let depth = -.97;
+let depth = lengt;;
 
 star.push(
 
@@ -1018,7 +1018,7 @@ x,    y,  depth,
          for (var t=0; t<12; t++) {
              
              for (var g=0; g<10; g++) {
-                 var widt = 1.5*starshipSize/2.;
+                 var widt = starshipSize**Math.E;
                  var finger = twelve[t][g];
                  var arm =g/10.*pi*2.;
                  
@@ -1123,8 +1123,8 @@ while(loopLimit>0&&r!=f){
   let widtr = trailWidth[r];
   let widts = trailWidth[s];
   let tt = 0.;
-  var z = (-1.+(trailDepth-loopLimit)/trailDepth);
-                          let transparencyOfTrail=z**2;
+  var z = -1.*(1.-(trailDepth-loopLimit)/trailLength/maxToMin)**2.;
+                          let transparencyOfTrail=-z;
                          
                           trailColor.push(
 
@@ -1188,13 +1188,13 @@ if (circleY>height)circleY=-height;
 else if (circleY<-height)circleY=height;
 
 
-circleGeometry = new THREE.CircleGeometry( dotSize, Math.round(9.*(1.-(timestamp/1000./9.)%1.**2.)+3.),1 );
+circleGeometry = new THREE.CircleGeometry( dotSize, Math.round(noteNumber*12.)%12+2.,1 );//
 //circleGeometry.computeBoundingBox ();
 circleMaterial = new THREE.MeshBasicMaterial( { color: colorSound} );
 
 circle = new THREE.Mesh( circleGeometry, circleMaterial );
 circle.position.set(circleX,circleY,-1.);
-                                  circle.rotateZ(Math.PI*2.*-Math.cos(timestamp/1000.));
+                                  circle.rotateZ(pitch);
 
                    let colorBlack= new THREE.Color();
                    colorBlack.setStyle("black");
