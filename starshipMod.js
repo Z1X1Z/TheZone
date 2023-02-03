@@ -563,9 +563,9 @@ let lastVolume = 1.;
             }
     
     
-    if(Math.sqrt(coordX*coordX+coordY*coordY)>4.||zoom>4.){coordX=(coordX/2.)%4.; coordY=(coordY/2.)%4.;zoom=(zoom/2.)%4.;}
+    if(Math.sqrt(coordX*coordX+coordY*coordY)>=4.||zoom>=4.){coordX=(coordX/2.)%4.; coordY=(coordY/2.)%4.;zoom=(zoom/2.)%4.;}
     }
-                       function zoomRoutine(){
+function zoomRoutine(){
     let metaDepth=.000001;//due to pixelization limits
     let zoomCone=metaDepth*Math.sqrt(coordX*coordX+coordY*coordY);
     if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
@@ -584,13 +584,13 @@ let lastVolume = 1.;
     
                      if (zoom>=1.)zoomOutEngage = false;
     //.000000000000000000000001
-                      else if ( zoom<zoomCone||zoom<1./2**63.*.000001)zoomOutEngage = true;
+                      else if ( zoom<zoomCone||zoom<1./2**63.*metaDepth)zoomOutEngage = true;
                          if (zoomOutEngage == true){
                             zoom *= 1.44/ZR
                              ;
                         }
 
-                          if(zoom<1./2**63.*.000001)zoom = 1.;
+                          if(zoom<1./2**63.*metaDepth)zoom = 1.;
     
 
 }
@@ -663,10 +663,11 @@ function takeNextScoreSlice(start){
 }
                        let timestamplast=0;
                        
+                       
                        let STARSHIPMAP;
                   let     volumeBooster = 1.;
                        let date = Date.now();
-                       let startTimeSecondMantissa = date/1000.-(Math.round(date)/1000.);//for orienting the dance to time
+                       let startTimeSecondMantissa = date/1000.-Math.round(date)/1000.;//for orienting the dance to time
 function animate( timestamp ) {
 adjustThreeJSWindow();//mostly for ios here
 
@@ -676,7 +677,6 @@ adjustThreeJSWindow();//mostly for ios here
     
     
     uniforms[ "time" ].value = timestamp/1000.+startTimeSecondMantissa;
-console.log(uniforms[ "time" ].value );
     if(starSpin!=0)twist=uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*2.*starSpin*2.;
 
 
@@ -1018,7 +1018,7 @@ let x = widt*-Math.sin(rpio2);
 let y = widt*-Math.cos(rpio2);
 let xr = lengt*-Math.sin(arm);
 let yr = lengt*-Math.cos(arm);
-let depth = lengt;;
+let depth = -1.+lengt;
 
 star.push(
 
@@ -1156,7 +1156,7 @@ while(loopLimit>0&&r!=f)if(timeElapsedSinceRecording<trailSecondsLong){
   let widtr = trailWidth[r];
   let widts = trailWidth[s];
   let tt = 0.;
-  var z = -depthTranslucencyTrail;
+  var z = -(depthTranslucencyTrail**2.);
                           let transparencyOfTrail= depthTranslucencyTrail;
                          
                           trailColor.push(
