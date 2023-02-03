@@ -590,8 +590,8 @@ vec4 starship=vec4(0.);
 float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
      for (float counter=0.;counter<iterations;counter++)if(abs(s.y)<50.){
                    
-         if(length(s)<2./3.||(spokesVisualizeColors&&length(s)<1.)) starship+= texture2D(STAR,minToMax*(spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+PI
-            )*3./2.)/2.+.5);//doesn't remap clovers 8+
+         if(length(s)<2./3.||(spokesVisualizeColors&&length(s)<4./3.)) starship+= texture2D(STAR,(spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+PI
+            ))/2.+.5);//doesn't remap clovers 8+
                                  
          
      if(onehundredfortyfourthousand)
@@ -727,7 +727,7 @@ o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+stars
 
                            backGround=spin2(backGround,atan(backGround.y,backGround.x)*petals/6.);
                            //p.x+=.5;
-    vec2 t =vec2(-sin(time2dance)/50.,-sin(time2dance*(.618))/30.);
+    vec2 t =vec2(-sin(time),-sin(time*.618));
     vec2 dance = vec2(0.);
 if (morph>.5){float lfc=length(freed(coords));
                                                                                     dance = vec2(
@@ -737,9 +737,9 @@ if (morph>.5){float lfc=length(freed(coords));
                                                                                         ;}
 
     vec3 zoomer=tol(backGround,dance);
-    vec2 move = -d.yx*volume/14.;
+    vec2 move = -d.yx*volume;
     vec3 mny=manny(p*2.//+vec2(.5,0.)
-                   ,move*2.);
+                   ,(move/2.+t/4.)/2.);
     vec4 starship = texture2D(STAR,vUv);
     float isBlack =1.;
     if (starship.x+starship.y+starship.z==0.&&starship.w!=0.)isBlack=0.;

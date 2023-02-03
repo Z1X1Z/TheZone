@@ -34,7 +34,6 @@ window.flip = 1;
 
 var rez=1.;
 let fftSize=2048;
-let trailLength = 187;
 let colorSound;
 let center = false;
                   let geome;
@@ -175,13 +174,20 @@ function fiveAndSeven(){
             }
 }
 
-let trail = Array(1000);
-let cx = Array(1000);
-let cy = Array(1000);
-let trailWidth = Array(1000);
+                          const trailSecondsLong = 14;
+                          const trailLength = zoomFrames*trailSecondsLong;
+let trail = Array(trailLength);
+let cx = Array(trailLength);//c is the center of the frame moved from the origin
+let cy = Array(trailLength);
+let xPerp= Array(trailLength);//perp is the perpendicular from c
+let yPerp = Array(trailLength);
+let trailWidth = Array(trailLength);
+let trailTimeOfRecording = Array(trailLength);
+
 let pitchCol = Array(trailWidth.length);
 let trailLoaded = false;
 let trailDepth = -1;
+
 let d_x=0,d_y=0;
 let staticX=0,staticY=0;
 
@@ -190,8 +196,7 @@ let circleGeometry,circleMaterial,circle;
 let dotSize = .112;
 let f = 0;
 
-let xPerp= Array(1000);
-let yPerp = Array(1000);
+
 
 let pitch = 1;
 
@@ -219,7 +224,7 @@ function  move()
 
   if (!trailLoaded) {trailLoaded = true;
       for(var n = 0; n<trailLength; n++)
-        {xPerp[n]=0;yPerp[n]=0;cx[n]=0;cy[n]=0;trailWidth[n]=0.;pitchCol[n]  = new THREE.Color()
+        {trailTimeOfRecording[n]=0;xPerp[n]=0;yPerp[n]=0;cx[n]=0;cy[n]=0;trailWidth[n]=0.;pitchCol[n]  = new THREE.Color()
         }
   }
     pitch=1;
@@ -306,6 +311,12 @@ let expandedZoomCage=1.;
 xPerp[f-1] = -Math.sin(-angle+pi/2)*volumeBoosted*flatline;
 yPerp[f-1] = -Math.cos(-angle+pi/2)*volumeBoosted*flatline;
                      trailWidth[f-1]=0.;
+                       trailTimeOfRecording[f-1]=uniforms["time"].value;
+
+if(trailDepth<trailLength||on)//||on
+                       
+                      {
+    
 f++;//this is the primary drive chain for the trail. it should be a global
 let radius = interpolation*MR*4./window.pixelShaderSize;
 if (f>=trailDepth)f=0;
@@ -324,7 +335,7 @@ trailWidth[n] += radius*starshipSize;
                        trailWidth[(trailDepth+f-1)%trailDepth]=0.;
 }
 
-
+                       }
 let material;
     let camera, renderer;
 let mesh;
@@ -346,8 +357,8 @@ let uniforms;
                        let renderTarget;
 function init() {
     
-    renderTarget = new THREE.WebGLRenderTarget(Math.max(window.innerWidth,window.innerHeight),
-                                               Math.max(window.innerWidth,window.innerHeight));
+    renderTarget = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
+                                               Math.min(window.innerWidth,window.innerHeight)*4./3.);
 
 
 
@@ -556,7 +567,6 @@ let lastVolume = 1.;
     }
                        function zoomRoutine(){
     let metaDepth=.000001;//due to pixelization limits
-    if(uniforms.Spoker.value)metaDepth=.0000001;
     let zoomCone=metaDepth*Math.sqrt(coordX*coordX+coordY*coordY);
     if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
     
@@ -655,7 +665,8 @@ function takeNextScoreSlice(start){
                        
                        let STARSHIPMAP;
                   let     volumeBooster = 1.;
-
+                       let date = Date.now();
+                       let startTimeSecondMantissa = date/1000.-(Math.round(date)/1000.);//for orienting the dance to time
 function animate( timestamp ) {
 adjustThreeJSWindow();//mostly for ios here
 
@@ -664,8 +675,8 @@ adjustThreeJSWindow();//mostly for ios here
     
     
     
-    uniforms[ "time" ].value = Math.fround(timestamp/1000.);
-
+    uniforms[ "time" ].value = timestamp/1000.+startTimeSecondMantissa;
+console.log(uniforms[ "time" ].value );
     if(starSpin!=0)twist=uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*2.*starSpin*2.;
 
 
@@ -1136,15 +1147,17 @@ let loopLimit = trailDepth;
                  let scalar = 1.;
 
 
+                             let     timeElapsedSinceRecording=     uniforms["time"].value-trailTimeOfRecording[r];
+while(loopLimit>0&&r!=f)if(timeElapsedSinceRecording<trailSecondsLong){
 
-while(loopLimit>0&&r!=f){
-
-
+                         timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
+                             let depthTranslucencyTrail =1.-timeElapsedSinceRecording/trailSecondsLong;
+                         
   let widtr = trailWidth[r];
   let widts = trailWidth[s];
   let tt = 0.;
-  var z = -1.*(1.-(trailDepth-loopLimit)/trailLength/maxToMin)**2.;
-                          let transparencyOfTrail=-z;
+  var z = -depthTranslucencyTrail;
+                          let transparencyOfTrail= depthTranslucencyTrail;
                          
                           trailColor.push(
 
@@ -1175,6 +1188,14 @@ while(loopLimit>0&&r!=f){
 
 }
 
+                                  else {
+                         s = r;
+                         r--;
+                         if(r< 0)r+=trailDepth;
+                                     loopLimit--;
+                         timeElapsedSinceRecording=     uniforms["time"].value-trailTimeOfRecording[r];
+
+                     }
 
 
 
