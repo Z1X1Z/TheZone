@@ -25,7 +25,7 @@ Overdrive:{
         outputGain: -1.,           //-42 to 0 in dB
         drive: .2,                 //0 to 1
         curveAmount: 5.,           //0 to 1
-        algorithmIndex: 3,            //0 to 5, selects one of the drive algorithms
+        algorithmIndex: 5,            //0 to 5, selects one of the drive algorithms
         bypass: 2000,
 cutoff: 10000   //cutoff frequency of the built in lowpass-filter. 20 to 22050
 
@@ -90,7 +90,7 @@ function startSound(e){
         //sound2[id].pitch=frequency*2.;
         //sound[id].volume=0.;
         //sound2[id].volume=volume;
-        if(isFinite(volume)&&isFinite(frequency)){
+        if(isFinite(volume)&&isFinite(frequency)&&frequency>0){
             sound[id].play({env:{attack: .1, release:.02,hold:-1},pitch:frequency,volume:0.});
             sound2[id].play({env:{attack: .1, release:.02,hold:-1},pitch:frequency*2.,volume:volume});
             }
@@ -117,7 +117,8 @@ function followSound(e){
         let angleSound = Math.atan2(y,x);
         angleSound=(angleSound-initialAngleSound[id]+pi/2.+4.*pi)%(2*pi)+initialAngleSound[id];
         let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*220.;
-        if(isFinite(frequency)&&frequency>0.&&isFinite(angleSound)&&isFinite(initialAngleSound[id])){
+        if(isFinite(frequency)&&frequency>0.&&isFinite(angleSound)&&isFinite(initialAngleSound[id])&&
+           angleSound-initialAngleSound[id]!=0&&angleSound-initialAngleSound[id]!=1){
             sound[id].setPitch(frequency);
             sound2[id].setPitch(2.*frequency);
             sound[id].setVolume(volume*(((angleSound-initialAngleSound[id]))/(2.*pi)));
