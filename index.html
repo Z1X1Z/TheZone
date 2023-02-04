@@ -47,17 +47,17 @@ Sonic Starship (if it's laggy try refreshing!):
 
 
 
-<a class="onoffline2" href = "" name="zonex.html"><figure>
+<a class="onoffline2" href = "" name="zonex.html#O"><figure>
     <img  class="onoffline" src = "" name="1.png"
          alt="fly">
     <figcaption>Mandelbrot</figcaption></a>
 </figure>
-<a class="onoffline2" href = "" name="pared.html"><figure>
+<a class="onoffline2" href = "" name="pared.html#O"><figure>
     <img class="onoffline" src = "" name="2.png"
          alt="fly">
     <figcaption>Essential</figcaption></a>
 </figure>
-<a class="onoffline2" href = "" name="original.html"><figure>
+<a class="onoffline2" href = "" name="original.html#O"><figure>
     <img class="onoffline" src = "" name="original.png"
          alt="fly">
     <figcaption>Origin(s?)</figcaption></a>
@@ -228,7 +228,7 @@ Email me: z1x1z@protonmail.com<p></p>
 nf = document.querySelectorAll('.onoffline2');
     for(var c = 0; c<nf.length; c++)
         if(window.online)nf[c].href =
-        //"https://zone-x.herokuapp.com/"+//now that we have https we don't need to do this!!
+        //"https://zone-x.herokuapp.com/"+//this allows for a redirect, now that we have https instead of http we bypass it we don't need to do this!!
         nf[c].name;
         else nf[c].href =nf[c].name;
 

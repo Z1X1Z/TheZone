@@ -75,24 +75,26 @@ function startSound(e){
     screenPressCoordX=x;
     screenPressCoordY=y;
 
- if(!window.touchMode){
-    var id = 0;
-    if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
-        id = touchNumber.get(e.identifier);
-    sound[id].stop();
-    sound2[id].stop();
-
-
-       let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
+    if(!window.touchMode){
+        var id = 0;
+        if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
+            id = touchNumber.get(e.identifier);
+        sound[id].stop();
+        sound2[id].stop();
+        
+        
+        let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
         initialAngleSound[id] = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi);
         let frequency = Math.pow(2.,((initialAngleSound[id])/pi/2*12+correction)/12.)*220.;
-                                 //sound[id].pitch=frequency;
-                                 //sound2[id].pitch=frequency*2.;
-                                 //sound[id].volume=0.;
-                                 //sound2[id].volume=volume;
-                                 sound[id].play({env:{attack: .1, release:.02,hold:-1},pitch:frequency,volume:0.});
-                                 sound2[id].play({env:{attack: .1, release:.02,hold:-1},pitch:frequency*2.,volume:volume});
-                                 }
+        //sound[id].pitch=frequency;
+        //sound2[id].pitch=frequency*2.;
+        //sound[id].volume=0.;
+        //sound2[id].volume=volume;
+        if(isFinite(volume)&&isFinite(frequency)){
+            sound[id].play({env:{attack: .1, release:.02,hold:-1},pitch:frequency,volume:0.});
+            sound2[id].play({env:{attack: .1, release:.02,hold:-1},pitch:frequency*2.,volume:volume});
+            }
+    }
 }
 
 function followSound(e){
