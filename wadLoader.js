@@ -22,7 +22,7 @@ stallTillWad()//lurker
 
 let hyperdriveTUNA = {
 Overdrive:{
-        outputGain: 1.,           //-42 to 0 in dB
+        outputGain: -1.,           //-42 to 0 in dB
         drive: .2,                 //0 to 1
         curveAmount: 1.,           //0 to 1
         algorithmIndex: 5,            //0 to 5, selects one of the drive algorithms
@@ -31,7 +31,7 @@ cutoff: 10000   //cutoff frequency of the built in lowpass-filter. 20 to 22050
 
     },
     Delay:{
-        feedback: .4,    //0 to 1+
+        feedback: .0,    //0 to 1+
         delayTime: 1,    //1 to 10000 milliseconds
         wetLevel: .5,     //0 to 1+
         dryLevel: .5,       //0 to 1+
@@ -83,7 +83,7 @@ function startSound(e){
         sound2[id].stop();
         
         
-        let volume= Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
+        let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
         initialAngleSound[id] = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi);
         let frequency = Math.pow(2.,((initialAngleSound[id])/pi/2*12+correction)/12.)*220.;
         //sound[id].pitch=frequency;
@@ -113,7 +113,7 @@ function followSound(e){
             id = touchNumber.get(e.identifier);
         
         
-        let volume= Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
+        let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
         let angleSound = Math.atan2(y,x);
         angleSound=(angleSound-initialAngleSound[id]+pi/2.+4.*pi)%(2*pi)+initialAngleSound[id];
         let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*220.;
