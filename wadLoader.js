@@ -149,7 +149,7 @@ c.focus();//this is to make the panel menu go down on android when you press on 
      e.stopImmediatePropagation(); e.preventDefault();
 
       for(var o=0; o<e.changedTouches.length; o++)
-          followSound(e.changedTouches[o]);
+          followSound(touchNumber.get(e.changedTouches[o].identifier));
   }
       , false);
 
