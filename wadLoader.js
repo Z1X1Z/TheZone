@@ -24,7 +24,7 @@ let hyperdriveTUNA = {
 Overdrive:{
         outputGain: -1.,           //-42 to 0 in dB
         drive: .2,                 //0 to 1
-        curveAmount: 5.,           //0 to 1
+        curveAmount: 1.,           //0 to 1
         algorithmIndex: 5,            //0 to 5, selects one of the drive algorithms
         bypass: 2000,
 cutoff: 10000   //cutoff frequency of the built in lowpass-filter. 20 to 22050
@@ -161,8 +161,6 @@ c.focus();//this is to make the panel menu go down on android when you press on 
             for(var o=0; o<e.changedTouches.length; o++)
             {   let tn = touchNumber.get(e.changedTouches[o].identifier);
                 sound[tn].stop();sound2[tn].stop();
-                sound[tn] =  new Wad({source : 'square', tuna   : hyperdriveTUNA});//shouldn't be necessary but the sounds are deteriorating on multitouch mobile
-                sound2[tn] = new Wad({source : 'square', tuna   : hyperdriveTUNA});
             }
         }
     }
@@ -176,8 +174,6 @@ c.focus();//this is to make the panel menu go down on android when you press on 
             e.preventDefault(); e.stopImmediatePropagation();
             sound[tn].stop();
             sound2[tn].stop();
-            sound[tn] =  new Wad({source : 'square', tuna   : hyperdriveTUNA});//shouldn't be necessary but the sounds are deteriorating on multitouch mobile
-            sound2[tn] = new Wad({source : 'square', tuna   : hyperdriveTUNA});
             
         }
             
