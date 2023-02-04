@@ -650,13 +650,12 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
            
            if(spokelover&&counter<hyperCore){
                 if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
-                else s/=sqrt(2.);
+                else {s/=sqrt(2.);}
                 }
            
            if(continuumClover){//engage continualization
                float continuumCore=(loops-counter-1.)*zoom/(zoom-lfc);
                if(loops+counter<hyperCore) s/=pow(2.,pow(.5,continuumCore));
-               //loops+=pow(.5,continuumCore);
                continuumCounter++;
             }
           
@@ -664,7 +663,7 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
            
        if(distance<4./3.&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
            
-       for(int i=0;i<20; i++)if(distance<2./3.&& loops+counter-continuumCounter<hyperCore)
+       for(int i=0;i<100; i++)if(distance<2./3.&& loops+counter-continuumCounter<hyperCore)//not sure if i is 20 or >20
     {
           s*=2.;distance*=2.;loops++;
           float wise;

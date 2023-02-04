@@ -568,7 +568,7 @@ let lastVolume = 1.;
     if(Math.sqrt(coordX*coordX+coordY*coordY)>=4.||zoom>=4.){coordX=(coordX/2.)%4.; coordY=(coordY/2.)%4.;zoom=(zoom/2.)%4.;}
     }
 function zoomRoutine(){
-    let metaDepth=.000001;//due to pixelization limits
+    let metaDepth=.00000075;//due to pixelization limits
     let zoomCone=metaDepth*Math.sqrt(coordX*coordX+coordY*coordY);
     if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
     
@@ -705,7 +705,7 @@ if( !window.touchMode&&!touchOnlyMode) {
            if(window.volumeSpeed)
            {
                     lastVolume=volume;
-                    volumeBoosted = volume*3.;
+                    volumeBoosted = volume*2.;
 
                            volume = 0.;
                            for(var n=0; n<inputData.length-1;n++)volume+=Math.abs(inputData[n+1]-inputData[n]);
