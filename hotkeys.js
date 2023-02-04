@@ -56,6 +56,7 @@ function callKey(event){
       else if (key=="!")uniforms[ "Refractelate" ].value=!uniforms[ "Refractelate" ].value;
       else if (key=="@")uniforms[ "Clovoid" ].value=!uniforms[ "Clovoid" ].value;
       else if (key=="#")uniforms[ "dotted" ].value=!uniforms[ "dotted" ].value;
+      else if (key=="&")uniforms[ "continuumClover" ].value=!uniforms[ "continuumClover" ].value;
 
       else if (key=="q") {
           if          ( uniforms[ "colorCombo" ].value >9)          uniforms[ "colorCombo" ].value = 1;

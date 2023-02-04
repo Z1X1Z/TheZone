@@ -319,6 +319,8 @@
             uniform sampler2D STAR;
             uniform bool Spoker;
             uniform bool spokelover;
+            uniform bool continuumClover;
+
             uniform bool spokesVisualizeColors;
             uniform vec2 coords;
             vec2 spunC=vec2(0.);
@@ -594,6 +596,7 @@ vec3 tol(vec2 p, vec2 t){
                                     float refractelC=1.5;
                                 //  p*=2.*refractelC;
 vec3 oo = vec3(0.);
+         float continuumCounter=0.;
 vec4 starship=vec4(0.);
 float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
      for (float counter=0.;counter<iterations;counter++)if(abs(s.y)<50.){
@@ -639,14 +642,19 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
            
 
             if(Spoker&&loops+counter+1.<hyperCore) s/=2.;//engage spokelover
-             if(spokelover&&counter<hyperCore) s/=sqrt(2.);//engage shiny spokelover
-
-
+            if(spokelover&&counter<hyperCore) s/=sqrt(2.);//engage shiny spokelover
+           if(continuumClover){//engage continualization
+               float continuumCore=(loops-counter-1.)*zoom/(zoom-lfc);
+               if(loops+counter<hyperCore) s/=pow(2.,pow(.5,continuumCore));
+               //loops+=pow(.5,continuumCore);
+               continuumCounter++;
+            }
+          
        float distance = length(s);
            
        if(distance<4./3.&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
            
-       for(int i=0;i<20; i++)if(distance<2./3.&& loops+counter<hyperCore)
+       for(int i=0;i<20; i++)if(distance<2./3.&& loops+counter-continuumCounter<hyperCore)
     {
           s*=2.;distance*=2.;loops++;
           float wise;

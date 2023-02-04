@@ -382,6 +382,8 @@ function init() {
 
   Spoker:{value: true    },
   spokelover:{value: false    },
+  continuumClover:{value: false    },
+
       micIn : {  value: null }, // float array (vec3)
       time: {value: 1.0 },
   rate: {value: 1./window.movementRate },
