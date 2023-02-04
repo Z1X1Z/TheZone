@@ -44,8 +44,8 @@ let sound=Array(10);
 let sound2=Array(10);
 function initialize(){
     for(var o=0;o<10;o++){
-    sound[o] =  new Wad({source : 'square', tuna   : hyperdriveTUNA});
-     sound2[o] = new Wad({source : 'square', tuna   : hyperdriveTUNA});
+        sound[o] =  new Wad({source : 'square'})//, tuna   : hyperdriveTUNA});
+     sound2[o] = new Wad({source : 'square'})//, tuna   : hyperdriveTUNA});
     }
     try{sound[0].play({wait:1000000});
         sound2[0].play({wait:1000000});
