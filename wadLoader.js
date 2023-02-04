@@ -44,8 +44,8 @@ let sound=Array(10);
 let sound2=Array(10);
 function initialize(){
     for(var o=0;o<10;o++){
-    sound[o] =  new Wad({source : 'sine', tuna   : hyperdriveTUNA});
-     sound2[o] = new Wad({source : 'sine', tuna   : hyperdriveTUNA});
+    sound[o] =  new Wad({source : 'square', tuna   : hyperdriveTUNA});
+     sound2[o] = new Wad({source : 'square', tuna   : hyperdriveTUNA});
     }
     try{sound[0].play({wait:1000000});
         sound2[0].play({wait:1000000});
@@ -153,25 +153,35 @@ c.focus();//this is to make the panel menu go down on android when you press on 
   }
       , false);
 
-  container.addEventListener('touchend', function(e){
-      window.pointerZoom=false;
-      if(!window.touchMode){
-      //    e.preventDefault(); e.stopImmediatePropagation();
-
-      for(var o=0; o<e.changedTouches.length; o++)
-        {sound[touchNumber.get(e.changedTouches[o].identifier)].stop();sound2[touchNumber.get(e.changedTouches[o].identifier)].stop();}
-      }}
-                             , false);
+    container.addEventListener('touchend', function(e){
+        window.pointerZoom=false;
+        if(!window.touchMode){
+            //    e.preventDefault(); e.stopImmediatePropagation();
+            
+            for(var o=0; o<e.changedTouches.length; o++)
+            {   let tn = touchNumber.get(e.changedTouches[o].identifier);
+                sound[tn].stop();sound2[tn].stop();
+                sound[tn] =  new Wad({source : 'square', tuna   : hyperdriveTUNA});//shouldn't be necessary but the sounds are deteriorating on multitouch mobile
+                sound2[tn] = new Wad({source : 'square', tuna   : hyperdriveTUNA});
+            }
+        }
+    }
+        , false);
 
     container.addEventListener('touchcancel', function(e){
         window.pointerZoom=false;
-if(!window.touchMode){ for(var o=0; o<e.changedTouches.length; o++)
-    {
-        e.preventDefault(); e.stopImmediatePropagation();
-        sound[touchNumber.get(e.changedTouches[o].identifier)].stop();
-        sound2[touchNumber.get(e.changedTouches[o].identifier)].stop();}
-    }
-
+        if(!window.touchMode){ for(var o=0; o<e.changedTouches.length; o++)
+        {
+            let tn = touchNumber.get(e.changedTouches[o].identifier)
+            e.preventDefault(); e.stopImmediatePropagation();
+            sound[tn].stop();
+            sound2[tn].stop();
+            sound[tn] =  new Wad({source : 'square', tuna   : hyperdriveTUNA});//shouldn't be necessary but the sounds are deteriorating on multitouch mobile
+            sound2[tn] = new Wad({source : 'square', tuna   : hyperdriveTUNA});
+            
+        }
+            
+        }
     }, false);
 
 }
