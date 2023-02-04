@@ -117,7 +117,7 @@ function followSound(e){
         let angleSound = Math.atan2(y,x);
         angleSound=(angleSound-initialAngleSound[id]+pi/2.+4.*pi)%(2*pi)+initialAngleSound[id];
         let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*220.;
-        if(isFinite(frequency)&&frequency>0.&&isFinite(angleSound)&&isFinite(initialAngleSound[id])&&
+        if(isFinite(frequency)&&frequency>0.&&isFinite(angleSound)&&isFinite(volume)&&isFinite(initialAngleSound[id])&&
            angleSound-initialAngleSound[id]!=0&&angleSound-initialAngleSound[id]!=1){
             sound[id].setPitch(frequency);
             sound2[id].setPitch(2.*frequency);
