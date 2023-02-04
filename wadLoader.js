@@ -106,24 +106,24 @@ function followSound(e){
                         screenPressCoordX=x;
                         screenPressCoordY=y;
 
- if(!window.touchMode){
-
-            var id = 0;
-            if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
-                id = touchNumber.get(e.identifier);
-
-
-let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
-let angleSound = Math.atan2(y,x);
-angleSound=(angleSound-initialAngleSound[id]+pi/2.+4.*pi)%(2*pi)+initialAngleSound[id];
-let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*220.;
-if(isFinite(frequency)&&frequency>0.)
-     sound[id].setPitch(frequency);
-     sound2[id].setPitch(2.*frequency);
-     sound[id].setVolume(volume*(((angleSound-initialAngleSound[id]))/(2.*pi)));
-     sound2[id].setVolume(volume*(1.-((angleSound-initialAngleSound[id]))/(2.*pi)));
-                                  }
-
+    if(!window.touchMode){
+        
+        var id = 0;
+        if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
+            id = touchNumber.get(e.identifier);
+        
+        
+        let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
+        let angleSound = Math.atan2(y,x);
+        angleSound=(angleSound-initialAngleSound[id]+pi/2.+4.*pi)%(2*pi)+initialAngleSound[id];
+        let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*220.;
+        if(isFinite(frequency)&&frequency>0.&&isFinite(angleSound)&&isFinite(initialAngleSound[id])){
+            sound[id].setPitch(frequency);
+            sound2[id].setPitch(2.*frequency);
+            sound[id].setVolume(volume*(((angleSound-initialAngleSound[id]))/(2.*pi)));
+            sound2[id].setVolume(volume*(1.-((angleSound-initialAngleSound[id]))/(2.*pi)));
+        }
+}
 
 }
                                                              let cycle=0;
