@@ -91,8 +91,8 @@ function startSound(e){
         //sound[id].volume=0.;
         //sound2[id].volume=volume;
         if(isFinite(volume)&&isFinite(frequency)&&frequency>0){
-            sound[id].play({env:{attack: .1, release:.02,hold:-1},pitch:frequency,volume:0.});
-            sound2[id].play({env:{attack: .1, release:.02,hold:-1},pitch:frequency*2.,volume:volume});
+            sound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:0.});
+            sound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2.,volume:volume});
             }
     }
 }
