@@ -258,8 +258,25 @@
 
                   <script>let n = document.getElementsByName('t');
                       for(var p = 0; p<n.length;p++)n[p].checked  = false; </script>
-        <div id="container">
-</div>
+                  
+                  <div class=onofflineBG id="background_wrap">
+                      <script>
+                          let nf = document.querySelectorAll('.onofflineBG');
+                          if(window.online)
+                          {
+                              if(Date.now()%2==1) nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6/z1xlogo.png');"
+                              else nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/pentaloctalwtTtlzonexmonogram.jpeg');"
+                         }
+                          else
+                          {
+                              if(Date.now()%2==1)nf[0].style = "background-image: url('z1xlogo.png');"
+                              else nf[0].style = "background-image: url('pentaloctalwtTtlzonexmonogram.jpeg');"
+                              }
+                      </script>
+                  </div>
+
+        <div id="container"></div>
+
         <script src="OFFLINEonlineSwitch.js"></script>
 
 
@@ -282,20 +299,8 @@
 </head>
 <body>
     <!--SPLASH-->
-    <div class=onofflineBG id="background_wrap"></div>
-    <script>
-        nf = document.querySelectorAll('.onofflineBG');
-        if(window.online)
-        {
-            if(Date.now()%2==1) nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6/z1xlogo.png');"
-            else nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/pentaloctalwtTtlzonexmonogram.jpeg');"
-       }
-        else
-        {
-            if(Date.now()%2==1)nf[0].style = "background-image: url('z1xlogo.png');"
-            else nf[0].style = "background-image: url('pentaloctalwtTtlzonexmonogram.jpeg');"
-            }
-    </script>
+
+
 
 <script id="threeJSscript" async></script>
 <script id="wadJSscript" async></script>
@@ -642,7 +647,12 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
            
 
             if(Spoker&&loops+counter+1.<hyperCore) s/=2.;//engage spokelover
-            if(spokelover&&counter<hyperCore) s/=sqrt(2.);//engage shiny spokelover
+           
+           if(spokelover&&counter<hyperCore){
+                if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
+                else s/=sqrt(2.);
+                }
+           
            if(continuumClover){//engage continualization
                float continuumCore=(loops-counter-1.)*zoom/(zoom-lfc);
                if(loops+counter<hyperCore) s/=pow(2.,pow(.5,continuumCore));
