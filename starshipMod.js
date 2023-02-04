@@ -705,12 +705,11 @@ if( !window.touchMode&&!touchOnlyMode) {
            if(window.volumeSpeed)
            {
                     lastVolume=volume;
-                    volumeBoosted = volume*2.;
 
                            volume = 0.;
                            for(var n=0; n<inputData.length-1;n++)volume+=Math.abs(inputData[n+1]-inputData[n]);
                            volume*=audioX.sampleRate/inputData.length/255;
-                          // volume*=4./(1.+zoomOutRatchetThreshold);
+                            volumeBoosted = volume*2.;
                        }
            else {volume=1.; lastVolume=1.;  volumeBoosted = 1.;
 }
