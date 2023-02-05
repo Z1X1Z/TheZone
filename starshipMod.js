@@ -961,7 +961,7 @@ if(!window.touchMode){
                              starColors.push(
                                            m.vop.r,
                                            m.vop.g,
-                                           m.vop.b,1.+depthOUTER,
+                                           m.vop.b,-depthOUTER,
                                            )
                          let nx =-m.x+outSetX
                          let ny =-m.y+outSetY
