@@ -145,24 +145,21 @@ c.focus();//this is to make the panel menu go down on android when you press on 
         }
 
     }, false);
-  container.addEventListener('touchmove', function(e) {
-     e.stopImmediatePropagation(); e.preventDefault();
+container.addEventListener('touchmove', function(e) {
+    for(var o=0; o<e.changedTouches.length; o++)followSound(e.changedTouches[o]);
+    e.stopImmediatePropagation(); e.preventDefault();
+}, false);
 
-      for(var o=0; o<e.changedTouches.length; o++)
-          followSound(e.changedTouches[o]);
-  }
-      , false);
-
-    container.addEventListener('touchend', function(e){
+container.addEventListener('touchend', function(e){
         window.pointerZoom=false;
         if(!window.touchMode){
-            //    e.preventDefault(); e.stopImmediatePropagation();
             
             for(var o=0; o<e.changedTouches.length; o++)
             {   let tn = touchNumber.get(e.changedTouches[o].identifier);
                 sound[tn].stop();sound2[tn].stop();
             }
         }
+        e.preventDefault(); e.stopImmediatePropagation();
     }
         , false);
 
@@ -171,26 +168,30 @@ c.focus();//this is to make the panel menu go down on android when you press on 
         if(!window.touchMode){ for(var o=0; o<e.changedTouches.length; o++)
         {
             let tn = touchNumber.get(e.changedTouches[o].identifier)
-            e.preventDefault(); e.stopImmediatePropagation();
             sound[tn].stop();
             sound2[tn].stop();
             
         }
-            
+            e.preventDefault(); e.stopImmediatePropagation();
+
         }
     }, false);
 
 }
 else{
 
-    c.addEventListener('mousedown', function(e){
-        e.preventDefault(); e.stopImmediatePropagation();
-        startSound(e);},
-                       false);
+c.addEventListener('mousedown', function(e){
+    startSound(e);
+    e.preventDefault(); e.stopImmediatePropagation();
+},
+                   false);
 
  c.addEventListener('mousemove', function(e){
+     followSound(e)
      e.preventDefault(); e.stopImmediatePropagation();
-     followSound(e)},
+ },
             false);
-    c.addEventListener('mouseup', function(e){window.pointerZoom=false; if(!window.touchMode){sound[0].stop();sound2[0].stop();}}, false);
+    c.addEventListener('mouseup', function(e){window.pointerZoom=false; if(!window.touchMode){sound[0].stop();sound2[0].stop();}
+        e.preventDefault(); e.stopImmediatePropagation();
+    }, false);
 }
