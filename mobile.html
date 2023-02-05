@@ -666,8 +666,8 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
                 }
            
            if(continuumClover){//engage continualization
-               float continuumCore=(loops-counter+-1.)*zoom/(zoom-lfc);
-               if(loops+counter<hyperCore) s/=pow(2.,pow(.5,continuumCore));
+               float continuumCore=(loops-counter+-continuumCounter)*zoom/(zoom-lfc);
+               if(loops+counter-continuumCounter<hyperCore) s/=pow(2.,pow(.5,continuumCore));
                 continuumCounter+=1.;
             }
           
