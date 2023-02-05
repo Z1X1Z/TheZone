@@ -118,6 +118,7 @@ function callKey(event){
             else if(uniforms[ "metaCarousel" ].value==-1.)uniforms[ "metaCarousel" ].value=1.;
             else if(uniforms[ "metaCarousel" ].value==1.)uniforms[ "metaCarousel" ].value=0;
         }
+      else if (key=="K")uniforms.Inherited.value=!uniforms.Inherited.value;
 
       else if (key=="y") uniforms[ "petals" ].value -= 1.;
       else if (key=="u") uniforms[ "petals" ].value += 1.;
