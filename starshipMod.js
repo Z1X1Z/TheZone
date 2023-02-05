@@ -383,6 +383,7 @@ function init() {
   Spoker:{value: true    },
   spokelover:{value: false    },
   continuumClover:{value: false    },
+  Inherited:{value: true    },
 
       micIn : {  value: null }, // float array (vec3)
       time: {value: 1.0 },
@@ -907,6 +908,7 @@ if(!window.touchMode){
                          var lengt =(testar[g]/255-totalAMP/2.)*starshipSize;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
                          if(lengt<=0)lengt=1./255.*starshipSize;
                                      var xyStarParticle={};
+                         xyStarParticle.amp = testar[g];
                          xyStarParticle.x=lengt*-Math.sin(rpio2);
                          xyStarParticle.xr=-Math.sin(arm)/fill;
                          xyStarParticle.y=lengt*-Math.cos(rpio2);
@@ -984,7 +986,6 @@ if(!window.touchMode){
                          let yShift=m.y+outSetY;
                          let xrShifted = m.xr+xShift;
                          let yrShifted = m.yr+yShift;
-
 
                  star.push(
                            
