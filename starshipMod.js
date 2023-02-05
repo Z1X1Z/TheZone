@@ -565,8 +565,23 @@ let lastVolume = 1.;
             }
     
     
-    if(Math.sqrt(coordX*coordX+coordY*coordY)>=4.||zoom>=4.){coordX=(coordX/2.)%4.; coordY=(coordY/2.)%4.;zoom=(zoom/2.)%4.;}
+    
+    
+    
+    if (on||zoom<4.||preserveOuterCore)preserveOuterCore=true;
+    else preserveOuterCore = false
+    if((Math.sqrt(coordX*coordX+coordY*coordY)>=4.||zoom>=4.)&&!(preserveOuterCore)){coordX=(coordX/2.)%4.; coordY=(coordY/2.)%4.;zoom=(zoom/2.)%4.;}
     }
+                       
+                       
+                       
+                       
+let       preserveOuterCore = true;
+                       
+                       
+                       
+                       
+                       
 function zoomRoutine(){
     let metaDepth=.00000075;//due to pixelization limits
     let zoomCone=metaDepth*Math.sqrt(coordX*coordX+coordY*coordY);
@@ -579,7 +594,7 @@ function zoomRoutine(){
         else //if(zoom<1.)
         {
             zoom /= ZR;
-            if(center){coordX*=(2-zoom)*ZR*2./3.; coordY*=(2-zoom)*ZR*2./3.;}
+            if(center){coordX*=(1-zoom)/ZR*2./3.; coordY*=(1-zoom)/ZR*2./3.;}
         }
     }
 
@@ -961,7 +976,7 @@ if(!window.touchMode){
                              starColors.push(
                                            m.vop.r,
                                            m.vop.g,
-                                           m.vop.b,-depthOUTER,
+                                           m.vop.b,-depthINNER,
                                            )
                          let nx =-m.x+outSetX
                          let ny =-m.y+outSetY
@@ -1060,7 +1075,9 @@ x,    y,  depth,
                      let BlackOrWhite;
                      if (t==7||t==5||t==2||t==0||t==10)
                          BlackOrWhite=-1.;
-                     else
+                     else if (t==6)
+                         BlackOrWhite=.5;
+                    else
                          BlackOrWhite=1;
                      vop.setRGB(BlackOrWhite,BlackOrWhite,BlackOrWhite);
                      

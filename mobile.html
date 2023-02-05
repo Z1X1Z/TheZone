@@ -56,7 +56,11 @@
                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                          <label for="StarClover">Star in Clover!</label><br>
                          
-                        
+                         
+                         <input type="checkbox" id="TrailOverflowsClover" name="t"  onclick= "
+                             key  = 'Z';
+                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                          <label for="TrailOverflowsClover">Trail overflows clover!</label><br>
                         
                        <a id="Star Stream" name="t"  onclick= "
 
@@ -662,9 +666,9 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
                 }
            
            if(continuumClover){//engage continualization
-               float continuumCore=(loops-counter-1.)*zoom/(zoom-lfc);
+               float continuumCore=(loops-counter+-1.)*zoom/(zoom-lfc);
                if(loops+counter<hyperCore) s/=pow(2.,pow(.5,continuumCore));
-               continuumCounter++;
+                continuumCounter+=1.;
             }
           
        float distance = length(s);
@@ -736,9 +740,10 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                                         o/= max(max(o.r,o.g),o.b);
                                          o=o*.5+.5;
                                          }
-                              
-                              float isBlack =1.;
-                              if (starship.x+starship.y+starship.z==0.&&starship.w!=0.)isBlack=0.;
+          
+          float isBlack =1.;
+          if (starship.x+starship.y+starship.z==0.&&starship.w!=0.)isBlack=0.;
+          else if(starship.x==starship.y&&starship.x==starship.z&&abs(starship.z-.5)<.1&&starship.w!=0.) isBlack=.5;
 o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+starship.z)*(starship.w*starship.w)),0.,1.)+starship.xyz*isBlack);
     return clamp(o,0.,1.);}
 
@@ -771,15 +776,17 @@ if (morph>.5){float lfc=length(freed(coords));
 
     vec3 zoomer=tol(backGround,dance);
     vec2 move = -d.yx*volume;
-    vec3 mny=manny(p*2.//+vec2(.5,0.)
-                   ,(move/2.+t/4.)/2.);
+    vec3 mny=clamp(manny(p*2.//+vec2(.5,0.)
+                   ,(move/2.+t/4.)/2.),0.,1.);
     vec4 starship = texture2D(STAR,vUv);
     float isBlack =1.;
     if (starship.x+starship.y+starship.z==0.&&starship.w!=0.)isBlack=0.;
-    gl_FragColor=vec4(mny+starship.xyz+
-                      clamp(clamp(zoomer+2.*heart(p,-move)-vec3((starship.x+starship.y+starship.z)*(starship.w*starship.w)),0.,1.)-(mny.r+mny.b+mny.g)*100.,.0,1.)
+     else if(starship.x==starship.y&&starship.x==starship.z&&abs(starship.z-.5)<.1&&starship.w!=0.) isBlack=.5;
+
+    gl_FragColor=vec4((mny+starship.xyz+
+                      clamp(clamp(zoomer+2.*heart(p,-move)-vec3((starship.x+starship.y+starship.z)*(starship.w*starship.w)),0.,1.)-(mny.r+mny.b+mny.g)*100.,.0,1.))*isBlack
               ,1.
-                      )*isBlack;}
+                      );}
         </script>
 
     </body>
