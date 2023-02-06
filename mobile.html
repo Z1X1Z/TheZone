@@ -413,7 +413,7 @@ uniform float shaderScale;
           }
               vec3 face(vec2 g, vec2 t){
               float l = 1.;
-              g*=2.;
+              g*=gr;
               vec2 z=g.xy;
               if(g.x*g.x+g.y*g.y<40.)for (int f=0;f<21;f+=1)if(abs(z.y)>21.&&(f==1||f>3)){
                   if (f==1){l=1.;break;}
@@ -427,7 +427,7 @@ uniform float shaderScale;
               }
 
          vec3 shiny(vec2 p,vec2 t){
-            p*=2.;
+            p*=gr;
              vec2 s = p;
              float l=0., d = 0., negator = 1.;
                  for (int f=0;f<21;f+=1)
@@ -595,13 +595,14 @@ vec3 tol(vec2 p, vec2 t){
      float c = length(p);
      float loops=1.;
       vec2 s=p;
-      float coresIn = 1.;
+      float coresIn = log(2.);
       const float crs = 63.;
       if(c>4./3.){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
-
-   if (zoom<1.)  for(int i=0;i<int(crs); i++)if(c<2./3.&&loops<cored){
-          if (cloverSlide)  loops-=length(s);
-          s*=2.;c*=2.;loops++;coresIn++;}else break;
+         float centerslide = 0.;
+   if (zoom<1.)  for(int i=0;i<int(crs); i++)if(c<2./3.&&loops+centerslide<cored){
+          if (cloverSlide)  centerslide-=length(s);
+          s*=2.;c*=2.;loops++;coresIn++;}
+         else break;
      else if(zoom>1.)for(int i=0;i<int(crs); i++)if(c>4./3.&&loops<-cored){s/=2.;c/=2.;loops++;coresIn++;}else break;//UpCore not in use here, but rather in the starshipMod
     for(int i=0;i<int(crs); i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
      float lfc = length(freed(coords));
@@ -628,7 +629,7 @@ vec3 tol(vec2 p, vec2 t){
                                     float refractelC=1.5;
                                 //  p*=2.*refractelC;
 vec3 oo = vec3(0.);
-         float continuumCounter=-log(2.);
+         float continuumCounter=0.;-log(2.);
 vec4 starship=vec4(0.);
 float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
      for (float counter=0.;counter<iterations;counter++)if(abs(s.y)<50.){
@@ -696,7 +697,7 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
            float mcc=-1./log(.5);//cycle frequency mudulated loop counter
 
            
-       for(int i=0;i<40; i++)
+       for(int i=0;i<41; i++)
 if(distance<2./3.&& loops+counter-continuumCounter<hyperCore)//not sure if i is 20 or >20
     {
             bool energyField=false;

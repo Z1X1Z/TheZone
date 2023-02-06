@@ -1024,7 +1024,7 @@ else{//start drawing of just twenty four frets here
                 var vop = new THREE.Color();
                       vop.setHSL((20-g)%24/24.,1.,.5);
 
-                             for(var yy=0;yy<6;yy++)   starColors.push(vop.r,vop.g,vop.b,1.)
+                             for(var yy=0;yy<6;yy++)   starColors.push(vop.r,vop.g,vop.b,lengt)
 
 
 var vertices;
