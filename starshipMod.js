@@ -384,6 +384,7 @@ function init() {
   spokelover:{value: false    },
   continuumClover:{value: false    },
   Inherited:{value: true    },
+  cloverSlide:{value: false    },
 
       micIn : {  value: null }, // float array (vec3)
       time: {value: 1.0 },

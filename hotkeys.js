@@ -146,6 +146,8 @@ function callKey(event){
                 if(fullscreen)openFullscreen();
                 else closeFullscreen();
             }
+      else if (key=="H")uniforms.cloverSlide.value=!uniforms.cloverSlide.value;
+
       else if (key==" "||key=="_")
       {
         onO=!onO;

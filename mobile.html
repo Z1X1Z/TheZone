@@ -156,6 +156,11 @@
                               callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                            <label for="Clovers Pop">Clovers Pop?!</label><br>
                            
+                           <input type="checkbox" id="Clovers Slide" name="t"  onclick= "
+                               key  = 'H';
+                               callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                            <label for="Clovers Slide">Clovers Slide!</label><br>
+                            
                             <input type="checkbox" id="Dancer" name="t"  onclick= "
                                key  = 's';
                                callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -343,6 +348,8 @@
             uniform bool Spoker;
             uniform bool spokelover;
             uniform bool continuumClover;
+            uniform bool cloverSlide;
+            
             uniform bool Inherited;
             uniform bool spokesVisualizeColors;
             uniform vec2 coords;
@@ -592,7 +599,9 @@ vec3 tol(vec2 p, vec2 t){
       const float crs = 63.;
       if(c>4./3.){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
 
-   if (zoom<1.)  for(int i=0;i<int(crs); i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
+   if (zoom<1.)  for(int i=0;i<int(crs); i++)if(c<2./3.&&loops<cored){
+          if (cloverSlide)  loops-=length(s);
+          s*=2.;c*=2.;loops++;coresIn++;}else break;
      else if(zoom>1.)for(int i=0;i<int(crs); i++)if(c>4./3.&&loops<-cored){s/=2.;c/=2.;loops++;coresIn++;}else break;//UpCore not in use here, but rather in the starshipMod
     for(int i=0;i<int(crs); i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
      float lfc = length(freed(coords));
@@ -671,32 +680,28 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
                 else {s/=sqrt(2.);}
                 }
            
+           
            if(continuumClover){//engage continualization
-               float continuumCore=(loops-counter+-continuumCounter-hyperCore)*zoom/(zoom-lfc);
+               float continuumCore=(loops+-continuumCounter-hyperCore)*zoom/(zoom-lfc);
                if(loops+counter-continuumCounter<hyperCore) s/=pow(2.,pow(.5,continuumCore));
-                continuumCounter+=1.;
+                continuumCounter+=continuumCore;
             }
           
-       float distance = length(s);
+           float mcc =-1./log(.5);
+           float distance = length(s);
            
+
        if(distance<4./3.&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
            
-       for(int i=0;i<20; i++)if(distance<2./3.&& loops+counter-continuumCounter<hyperCore)//not sure if i is 20 or >20
+           
+       for(int i=0;i<20; i++)
+if(distance<2./3.&& loops+counter-continuumCounter<hyperCore)//not sure if i is 20 or >20
     {
-            
-            if(continuumClover){//engage continualization
-                float continuumCore=(hyperCore+1./log(.5))*zoom/(zoom-lfc);
-                if(counter-continuumCounter<hyperCore+1./log(.5)){ s*=pow(2.,pow(.5,continuumCore));
-                distance*=pow(2.,pow(.5,continuumCore));}
-                loops++;
+           
+         if (cloverSlide)  loops-=distance;
+         s*=2.;distance*=2.;loops++;
 
-             }
-            
-       else{ s*=2.;
-         distance*=2.;
-         loops++;
-
-         }
+       
           float wise;
           if(mod(float(i),4.)==0.)wise=1.;
           else if(mod(float(i),4.)==1.)wise=-1.;
