@@ -624,11 +624,11 @@ vec3 tol(vec2 p, vec2 t){
     )*abs(coresIn/crs*2.-1.);
     //this is essentially just p as in the mandelbrot x <== x^2+
 
-                                    const float iterations = 40.;
+                                    const float iterations = 100.;
                                     float refractelC=1.5;
                                 //  p*=2.*refractelC;
 vec3 oo = vec3(0.);
-         float continuumCounter=0.;
+         float continuumCounter=-log(2.);
 vec4 starship=vec4(0.);
 float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
      for (float counter=0.;counter<iterations;counter++)if(abs(s.y)<50.){
@@ -677,7 +677,7 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
            
            if(spokelover&&counter<hyperCore){
                 if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
-                else {s/=sqrt(2.);}
+                else s/=sqrt(2.);
                 }
            
            
@@ -687,17 +687,31 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
                 continuumCounter+=continuumCore;
             }
           
-           float mcc =-1./log(.5);
            float distance = length(s);
            
 
        if(distance<4./3.&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
            
            
-       for(int i=0;i<20; i++)
+           float mcc=-1./log(.5);//cycle frequency mudulated loop counter
+
+           
+       for(int i=0;i<40; i++)
 if(distance<2./3.&& loops+counter-continuumCounter<hyperCore)//not sure if i is 20 or >20
     {
-           
+            bool energyField=false;
+                   if(energyField){//meta continualization
+                      //  float continuumCore=pow(2.718,hyperCore-mcc);//(hyperCore-mcc)*zoom/(zoom-lfc));
+                         float continuumCore = (hyperCore-mcc)*distance*zoom/(zoom-lfc);
+                        if(counter-continuumCounter<=hyperCore-mcc)
+                        {
+                                   s*=pow(2.,pow(.5,continuumCore));
+                            distance*=pow(2.,pow(.5,continuumCore));
+                            mcc+=1.;
+                        }
+                     }
+                   
+                   
          if (cloverSlide)  loops-=distance;
          s*=2.;distance*=2.;loops++;
 
