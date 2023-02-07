@@ -593,11 +593,11 @@ vec3 tol(vec2 p, vec2 t){
      if(MetaCored)cored= log(zoom)/log(.5);
      else cored = centralCores;
      float c = length(p);
-     float loops=1.;
+     float loops=0.;
       vec2 s=p;
-      float coresIn = log(2.);
+      float coresIn = 0.;
       const float crs = 63.;
-      if(c>4./3.){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
+     // if(c>4./3.){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
          float centerslide = 0.;
    if (zoom<1.)  for(int i=0;i<int(crs); i++)if(c<2./3.&&loops+centerslide<cored){
           if (cloverSlide)  centerslide-=length(s);
@@ -615,7 +615,12 @@ vec3 tol(vec2 p, vec2 t){
       if(outerCoresOff)hyperCore=0.;
 
         if(Spoker&&MetaCored)hyperCore*=4./3./logStabilizationConstant;//engage overstable core if dancing
-
+         
+         
+         
+         
+         
+         
      float term=0.;
      if(spirated!=0.)term=(1.-lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
    vec2 m=vec2(0.);
@@ -629,7 +634,8 @@ vec3 tol(vec2 p, vec2 t){
                                     float refractelC=1.5;
                                 //  p*=2.*refractelC;
 vec3 oo = vec3(0.);
-         float continuumCounter=0.;-log(2.);
+         float continuumCounter=0.;
+
 vec4 starship=vec4(0.);
 float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
      for (float counter=0.;counter<iterations;counter++)if(abs(s.y)<50.){
@@ -683,7 +689,7 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
            
            
            if(continuumClover){//engage continualization
-               float continuumCore=(loops+-continuumCounter-hyperCore)*zoom/(zoom-lfc);
+               float continuumCore=(loops+counter-continuumCounter-hyperCore)*zoom/(zoom-lfc);
                if(loops+counter-continuumCounter<hyperCore) s/=pow(2.,pow(.5,continuumCore));
                 continuumCounter+=continuumCore;
             }
@@ -695,25 +701,25 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
            
            
            float mcc=-1./log(.5);//cycle frequency mudulated loop counter
-
            
-       for(int i=0;i<41; i++)
-if(distance<2./3.&& loops+counter-continuumCounter<hyperCore)//not sure if i is 20 or >20
+       for(int i=0;i<40; i++)
+if(distance<2./3.&& loops+counter-continuumCounter+log(2.)<hyperCore)//not sure if i is 20 or >20
     {
+            
             bool energyField=false;
                    if(energyField){//meta continualization
-                      //  float continuumCore=pow(2.718,hyperCore-mcc);//(hyperCore-mcc)*zoom/(zoom-lfc));
-                         float continuumCore = (hyperCore-mcc)*distance*zoom/(zoom-lfc);
+                        float continuumCore=pow(2.718,1./(hyperCore-mcc));//(hyperCore-mcc)*zoom/(zoom-lfc));
+                       //  float continuumCore = (hyperCore-mcc)*distance*zoom/(zoom-lfc);
                         if(counter-continuumCounter<=hyperCore-mcc)
                         {
                                    s*=pow(2.,pow(.5,continuumCore));
                             distance*=pow(2.,pow(.5,continuumCore));
-                            mcc+=1.;
+                            //mcc+=1.;
                         }
                      }
                    
-                   
-         if (cloverSlide)  loops-=distance;
+                   if (cloverSlide)  loops-=distance;
+
          s*=2.;distance*=2.;loops++;
 
        
