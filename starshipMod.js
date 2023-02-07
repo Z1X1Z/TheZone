@@ -732,7 +732,7 @@ if( !window.touchMode&&!touchOnlyMode) {
 }
     move();
     infinicore();
-    zoomRoutine();
+    if(!zoomAtl41)zoomRoutine();
     spiral_compress();
     if(on) makeSpirograph();
 
