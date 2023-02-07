@@ -402,6 +402,7 @@ function init() {
 
   fourCreats: {value: 1 },
   Character: {value: 0 },
+  articles: {value: false },
   helm: {value: false },
   wheel: {value: false },
   Refractelate: {value: false },

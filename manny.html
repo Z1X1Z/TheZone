@@ -274,6 +274,82 @@
 
                               </div>
                 </div>
+                
+                <div class="dropdown">
+                  <button class="dropbtn">Extras
+                    <i class="fa fa-caret-down"></i>
+                  </button>
+                  <div class="dropdown-content">
+                       <input type="checkbox" id="Friends" name="t"  onclick= "
+                           key  = 'f';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                        <label for="Friends">Friends!</label><br>
+                        <input type="checkbox" id="Bridge" name="t"  onclick= "
+                            key  = 'z';
+                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                         <label for="Bridge">Bridge!</label><br>
+                         <input type="checkbox" id="Wheel" name="t"  onclick= "
+                             key  = 'm';
+                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                          <label for="Wheel">Wheel!</label><br>
+                          
+                          <input type="checkbox" id="Articles" name="t"  onclick= "
+                              key  = 'G';
+                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                           <label for="Articles">Articles!</label><br>
+                           
+                         <a id="Cycle Character" name="t"  onclick= "
+                             key  = 'U';
+                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                             Cycle character!</a><br>
+                         
+                         <a id="Metronome Up" name="t"  onclick= "
+                             key  = '.';
+                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                             Metronome Up!</a><br>
+
+                         <a id="Metronome Down" name="t"  onclick= "
+                             key  = ',';
+                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                             Metronome Down!</a><br>
+
+                          <a id="Manny" name="t"  onclick= "
+                              key  = 'g';
+                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                              Manny!</a><br>
+
+
+                          <a id="Acrostic" name="t"  onclick= "
+                              key  = '$';
+                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                              Acrostic!</a><br>
+
+                           <a id="ToLToK" name="t"  onclick= "
+                               key  = 'd';
+                               callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                               ToLToK!</a><br>
+
+                            <a id="Mandelbrot" name="t"  onclick= "
+                                key  = 'a';
+                                callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                                Mandelbrot!</a><br>
+
+                             <a id="Refractelbrot" name="t"  onclick= "
+                                 key  = 'r';
+                                 callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                                 Refractelbrot!</a><br>
+
+                   <a id="XSquared" name="t"  onclick= "
+                       key  = 'x';
+                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       XSquared!</a><br>
+
+                 <a id="ToLX" name="t"  onclick= "
+                     key  = 'b';
+                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                     ToLX!</a><br>
+                </div>
+            </div>
             </div>
 
 
@@ -372,6 +448,7 @@
             uniform float time2dance;
             uniform int fourCreats;
             uniform int Character;
+            uniform bool articles;
 
 
             uniform bool MetaCored;//used for freezing current zoom level
@@ -417,7 +494,8 @@ uniform float shaderScale;
               float l = 1.;
               g*=gr;
               vec2 z=g.xy;
-              if(g.x*g.x+g.y*g.y<40.)for (int f=0;f<21;f+=1)if(abs(z.y)>21.&&(f==1||f>3)){
+              if(g.x*g.x+g.y*g.y<40.)
+              for (int f=0;f<21;f+=1)if(abs(z.y)>21.&&(f==1||f>3)){
                   if (f==1){l=1.;break;}
                   l=1.-length(z)/40.;//clouds and face
                   break;}
@@ -426,6 +504,22 @@ uniform float shaderScale;
                   l=abs(z.y)*6.;//smooths middle horn, removes some clouds
                   if(z.x>-.1)l=z.x*50.;}//face with closed small holes
               return vec3(clamp(1.-l,0.,1.));
+              }
+            
+              vec3 clouds(vec2 g, vec2 t){
+              float d = 0., negator = 1.;
+              g*=gr;
+              vec2 z=g.xy;
+              //if(g.x*g.x+g.y*g.y<40.)
+              if(abs(z.y)<21.)
+                  z=vec2(-1./(z.x*z.x-z.y*z.y-g.x),2.0*z.x*z.y-g.y);
+              if(abs(z.y)>21.) {
+                 // z=vec2((z.x*z.x-z.y*z.y-g.x),2.0*z.x*z.y-g.y);
+                  d=length(z)*441.144;
+                  }
+              else negator = 0.;
+             return vec3(-sin(d +time*3.+6.28318/3.),-sin(d+time*3.+6.28318*2./3.),-sin(d+time*3.))*negator;
+
               }
 
          vec3 shiny(vec2 p,vec2 t){
@@ -849,7 +943,7 @@ o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+stars
                          //vv head vv
                                                g=p*1.618;
                                                z=g;
-                                  if(abs(p.y)<4.)for (int f=0;f<21;f+=1)if(abs(z.y)>19.&&(f==int(floor(.8-(coz(t.y)-1.)/2.*.4)))){l=0.;break;}
+                                  if(abs(p.y)<4.)for (int f=0;f<21;f+=1)if(abs(z.y)>21.&&(f==int(floor(.8-(coz(t.y)-1.)/2.*.4)))){l=0.;break;}
                                        else if(abs(z.y)>19.&&(f>4))l=1.;
                                                else{z=vec2(-1./((z.x*z.x-z.y*z.y)-g.x),2.0*z.x*z.y-g.y);
                                     z*=pow(z.x,(z.x-(coz(t.y)-1.)/2.*-z.x));
@@ -897,7 +991,7 @@ o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+stars
                               
                               vec3 excelsior(vec2 p,vec2 t){
                                                   t.x*=-1.;
-                                                   p*=2.;
+                                                   p*=gr;
                                                    vec2 s=p;
                                                    vec3 l=vec3(.1,.5,1.1);
                                                        for (int f=0;f<21;f+=1)
@@ -912,7 +1006,7 @@ o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+stars
                                        }
 
              vec3 man(vec2 p,vec2 t) {
-                 p*=-2.;
+                 p*=-1.75;
                  vec2 s = p;
                  float d = 1.0, l;
                  float flip=-t.x;
@@ -954,7 +1048,7 @@ o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+stars
                 }
 
               vec3 eaglePerched(vec2 p, vec2 t){
-                    p*=3.;
+                    p*=2.5;
                     vec2 s=p;
                             float l = 0.;
 
@@ -994,7 +1088,7 @@ o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+stars
             return vec3(.0);
             }
          vec3 ox(vec2 p,vec2 t) {
-            p*=2.;
+            p*=1.25;
                vec2 s = p;
                float d = 0.0, l;
                  float flip=-t.x;
@@ -1076,7 +1170,7 @@ o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+stars
 
                        //if(length(z)>c)z/=c;//this refracts the Mandelbrot outwards
 
-                   z=2.*vec2(-1./(z.x*z.x-z.y*z.y-p.x-sin(t.x*gr)/20.), 2.0*z.x*z.y-p.y-sin(t.x/2.)/20.);//this is {s=s^2-p;s.real=-1./s.real}
+                   z=2.*vec2(-1./(z.x*z.x-z.y*z.y-p.x+t.x), 2.0*z.x*z.y-p.y+t.y);//this is {s=s^2-p;s.real=-1./s.real}
            z.x=sqrt(abs(z.x));
            if ((p.x-1.)*(p.x-1.)+p.y*p.y*3.<1.5)l=z.x;
           }
@@ -1262,8 +1356,84 @@ o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+stars
 
         }
 
+                              vec3 sword(vec2 p,vec2 t){
+                                         //sword
+                                             vec2 g=p*3.;
+                                             g.x+=-sin(time)*20.+12.;
+                                             g.x/=1.5;
+                                             vec2 z=g;
+                                             float d = 0.0;
+                                             float u=0.;
+                                             vec3 h;
+                                             if (p.x>.7&&g.x>-2.5 && abs(g.y*g.x) <1.77 &&abs(g.y)<2.11111111)for (int i = 0; i < 14; i++) {
+                                                   z = vec2(1.1/(1.-pow((z.x * z.x - z.y * z.y +1.+ g.x),2.)), -1.77/(2.0 * z.x * z.y + g.y));
+                                                 u = length(z);
+                                                 d +=z.x+z.y+20.;
+                                                 if (u >5.4 && ( i==4||( i==13 )))  h=vec3(-sin(-d*0.0061),-sin(-d * 0.0063),-sin(-d * 0.0069));
+                                                 
+                                           }
+                                         return h;
+                                         }
                               
-                              
+                                          vec3 flames (vec2 p){
+                                              p.x = -p.x;
+                                              p*=1.5;
+                                              p.y*=3.;
+                                          vec2 s=p;
+                                          float l=0.;
+                                                  float m = 0.;
+                                                  float k = 0.;
+                                                  if(abs((p.x)*(p.x)+(p.y*p.y))<50.)
+                                          for (int f=0;f<20;f+=1)if(abs(s.x+s.y)>20. && f>1)l=1.;
+                                              else{ s=vec2(-1./(s.x*s.x+s.y*s.y+p.x),-(2.0*s.x/s.y+p.y));
+                                                  m += abs(s.x+s.y);
+                                                  }
+                                              
+                                          return vec3(m*l, m*l/400.,-sin(m*1.618)*l);}
+
+
+                                  vec3 scroll(vec2 p,    vec2 unleashed) {
+                                           p=-p*2.;
+                                           float flip=unleashed.x;
+                                           if (flip<0.) p = -p;
+                                           float r = 0.;
+
+                                      vec2 s = p;
+                                      float d = 0.0, l=0.;
+                                     if(length(p)<2.) for (int t = 0; t < 20; t++)if (l < 20.||t<4)
+                                      {
+                                          s = vec2(((s.x * s.x - s.y * s.y) +flip* p.x*p.x), (2.0* s.x * s.y + flip*p.y*p.y));
+                                          if(flip==-1.)s.x = -1./s.x;
+                                          else s.x = pow(s.x,flip)*sign(s.x*flip);
+                                          l = length(s);
+                                          d += l/40.;
+                                      }
+                                      else { r=d ;return vec3(r);}
+                                      r=0.;
+                                      return vec3(r);
+                                  }
+                                                                                              
+                                  
+                                  vec3 lamp(vec2 p,vec2 unleash) {
+                                    p.x-=3.;
+                                    p*=3.;
+                                    vec2 s = p;
+                                    float d = 0.0, l;
+                                      if (!(p.x<-4.)&&abs(p.y)<1.789||unleash.x!=-1.)
+                                    for (int i = 0; i < 5; i++) {
+                                      s = vec2(-1./(s.x * s.x - s.y * s.y + p.x),-1./( 2.0 * s.x * s.y + p.y));
+                                      l = length(s);
+                                     d +=s.x+s.y+20.;
+                                       
+                                      if (l >7.)  return vec3(1.-sin(d * 0.001),1.- sin(d * 0.0015),1.- sin(d * 0.0069));
+                                    }
+                                      
+                                    return vec3(0.0);
+                                                                                              }
+
+
+                                                                                              
+                                                                                              
           vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t/33.3);}
           vec3 bod(vec2 p, vec2 t){t*=zoom;return body(p,t)+heart(p,t);}
           vec3 manny(vec2 p, vec2 t){
@@ -1281,15 +1451,14 @@ o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+stars
                     man(p-spacing,vec2(inversion,0.))+bod(p-spacing,t)  ;
         }
                     vec3 fourCreaturesSmall(vec2 p, vec2 t){
-                                p+=vec2(.5,0.);
                             float inversion = -1.;
                            if (wheel)inversion=coz(time);
-                              vec2 spacing = vec2(resolution.y/min(resolution.x,resolution.y),resolution.x/min(resolution.x,resolution.y))*1.25;
-                              //p.x+=1.;
-                              return eaglePerched(p+spacing,vec2(inversion,0.))+body((p+spacing)*2.,t)+
-                              lion(p+vec2(-spacing.x,spacing.y),vec2(inversion,0.))+body((p+vec2(-spacing.x,spacing.y))*2.,t)+
-                              ox(p+vec2(spacing.x,-spacing.y),vec2(inversion,0.))+body((p+vec2(spacing.x,-spacing.y))*2.,t)+
-                              man(p-spacing,vec2(inversion,0.))+body((p-spacing)*2.,t)  ;
+                              vec2 spacing = vec2(resolution.y/min(resolution.x,resolution.y),resolution.x/min(resolution.x,resolution.y))*2.24;
+                             // spacing.x+=resolution.x/min(resolution.x,resolution.y)*.15;
+                              return eaglePerched(p+spacing,vec2(inversion,0.))+body((p+spacing)*3.,t)+
+                              lion( spin2(p+vec2(-spacing.x,spacing.y),-sin(time)/4.),vec2(inversion,0.))+body((p+vec2(-spacing.x,spacing.y))*3.,t)+
+                              ox(p+vec2(spacing.x,-spacing.y),vec2(inversion,0.))+body((p+vec2(spacing.x,-spacing.y))*3.,t)+
+                              man(p-spacing,vec2(inversion,0.))+body((p-spacing)*3.,t)  ;
                   }
      
           //function library: manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin x
@@ -1353,43 +1522,54 @@ o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+stars
              vec3 creatures,b;
              vec3 bridge=vec3(0.);
                                                   
+            vec3 cloud= vec3(0.);
+                                                         float swordSkew = 0.;
                                                          
-                                                         
-                                                         if(helm)bridge=fourCreaturesSmall(characterP/1.25,moveDynamic*1.25);
+                                                         if(helm)
+                                                         {bridge=fourCreaturesSmall(characterP,moveDynamic);
+                                                             cloud=clamp(clouds(characterP,moveDynamic),0.,1.);
+                                                             }
              if(fourCreats<0){creatures=fourCreatures(backGround*8.,moveDynamic/4.);  if(length(p)>4./3./brideSize)b=bride(backGround*brideSize,10.*zoom*vec2(-sin(time2dance*gr),-sin(time2dance)))+heart(backGround*brideSize/1.5-vec2(.25,0.)+driftCanceller,dance);}
                                     
-                                                         
-                                                         
+                                                         float inversion = -1.;
+                                                         if (wheel)inversion=coz(time);
+
                                vec3 mny=vec3(0.);
         if(colorCombo!=17){
-                       if(metronome>1.) mny = mannyX(p,t);
+                       if(metronome>1.) mny = mannyX(characterP,moveDynamic);
                        else if (Character==0)mny=clamp(manny(characterP, moveDynamic),0.,1.);
                        else if (Character==1){mny = MannyWoManny(characterP,
                                                             vec2(time2dance,time2dance*gr)
                                                             )+robeL(characterP,vec2(time2dance,time2dance*gr)
                                                                     )*.95;}
-                       else if (Character==2)mny=bride(characterP*2.,moveDynamic/2.)+dress(characterP*3./2.,moveDynamic*2./3.)*2.;
-                       else if (Character==3)mny=lion(fourcreaturePlayerP,vec2(-1.))+body(characterP,moveDynamic);
-                       else if (Character==4)mny=eaglePerched(fourcreaturePlayerP,vec2(-1.))+body(characterP,moveDynamic);
-                       else if (Character==5)mny=ox(fourcreaturePlayerP,vec2(-1.))+body(characterP,moveDynamic);
-                       else if (Character==6)mny=man(fourcreaturePlayerP,vec2(-1.))+body(characterP,moveDynamic);
+                       else if (Character==2){
+                           mny=bride(characterP*2.,moveDynamic/2.)+dress(characterP*3./2.,moveDynamic*2./3.)*2.;
+                           swordSkew+=.5;}
+                       else if (Character==3)mny=lion(fourcreaturePlayerP,vec2(inversion,0.))+body(characterP,moveDynamic);
+                       else if (Character==4){
+                           mny=eaglePerched(fourcreaturePlayerP,vec2(inversion,0.))+body(characterP,moveDynamic);
+                           swordSkew+=1.;}
+                       else if (Character==5)mny=ox(fourcreaturePlayerP,vec2(inversion,0.))+body(characterP,moveDynamic);
+                       else if (Character==6)mny=man(fourcreaturePlayerP,vec2(inversion,0.))+body(characterP,moveDynamic);
 
         }
-
-             
-                                                                                                 
-                                                                                                 
-                                                                                                 
+ vec3 ARTICLES=vec3(0.);
+            if(articles){
+                    ARTICLES += sword(characterP+vec2(swordSkew,0.),vec2(0.));
+                    ARTICLES+=scroll(characterP+1.5*vec2(0.,resolution.x/min(resolution.x,resolution.y)),vec2(-1.));
+                    ARTICLES+=lamp(characterP,vec2(-1.));
+            }
+                                                         mny=clamp(mny,0.,1.);
     vec4 starship = texture2D(STAR,vUv);
     float isBlack =1.;
     if (starship.x+starship.y+starship.z==0.&&starship.w!=0.)isBlack=0.;
      else if(starship.x==starship.y&&starship.x==starship.z&&abs(starship.z-.5)<.1&&starship.w!=0.) isBlack=.5;
-
-    gl_FragColor=vec4((mny+starship.xyz+creatures+b+bridge+
-                      clamp(clamp(zoomer+2.*heart(p,-move)
+    gl_FragColor=vec4((clamp(mny+starship.xyz-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge+
+                      clamp(clamp(cloud+
+                                        zoomer+2.*heart(p,-move)
                                   -vec3((starship.x+starship.y+starship.z)*(starship.w*starship.w)
                                   -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)
-                                                                ),0.,1.)-(mny.r+mny.b+mny.g)*100.,.0,1.))*isBlack
+                                                                ),0.,1.)-(mny.r+mny.b+mny.g)*2.,.0,1.))*isBlack
               ,1.
                       );}
                                                          

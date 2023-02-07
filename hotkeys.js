@@ -86,6 +86,8 @@ function callKey(event){
           else if(BulletMine==-1) BulletMine = 0;
       }
       else if (key=="g") uniforms[ "colorCombo" ].value = 17;
+      else if (key=="G") uniforms[ "articles" ].value = !uniforms[ "articles" ].value;
+
       else if (key=="r")uniforms[ "colorCombo" ].value = 18;
       else if (key=="$")uniforms[ "colorCombo" ].value = 19;
 
@@ -121,7 +123,6 @@ function callKey(event){
       else if (key=="K")uniforms.Inherited.value=!uniforms.Inherited.value;
 
       else if (key=="y") uniforms[ "petals" ].value -= 1.;
-      else if (key=="Y") uniforms[ "Character" ].value =  (uniforms[ "Character" ].value-1.)%7;
       else if (key=="u") uniforms[ "petals" ].value += 1.;
       else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%7;
 
