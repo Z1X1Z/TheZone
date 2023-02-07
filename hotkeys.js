@@ -121,7 +121,10 @@ function callKey(event){
       else if (key=="K")uniforms.Inherited.value=!uniforms.Inherited.value;
 
       else if (key=="y") uniforms[ "petals" ].value -= 1.;
+      else if (key=="Y") uniforms[ "Character" ].value =  (uniforms[ "Character" ].value-1.)%7;
       else if (key=="u") uniforms[ "petals" ].value += 1.;
+      else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%7;
+
       else if (key=="/"||key=="?"){
             if(uniforms[ "spirated" ].value==0)uniforms[ "spirated" ].value=1;
             else if(uniforms[ "spirated" ].value==1)uniforms[ "spirated" ].value=-1;

@@ -400,7 +400,8 @@ function init() {
 
         morph: {value: 0.0 },
 
-      fourCreats: {value: 1 },
+  fourCreats: {value: 1 },
+  Character: {value: 0 },
   helm: {value: false },
   wheel: {value: false },
   Refractelate: {value: false },
