@@ -610,7 +610,7 @@ vec3 tol(vec2 p, vec2 t){
      loops=0.;
      float hyperCore=0.;
      float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
-       if(MetaCored)hyperCore=cored*2./3.+log(lfc)*logStabilizationConstant;
+       if(MetaCored)hyperCore=cored*2./3.+log(lfc)*logStabilizationConstant-log(2.);
       else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
       if(outerCoresOff)hyperCore=0.;
 
@@ -622,7 +622,7 @@ vec3 tol(vec2 p, vec2 t){
          
          
      float term=0.;
-     if(spirated!=0.)term=(1.-lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
+     if(spirated!=0.)term=(lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
    vec2 m=vec2(0.);
    
    //Maendel clover
@@ -630,7 +630,7 @@ vec3 tol(vec2 p, vec2 t){
     )*abs(coresIn/crs*2.-1.);
     //this is essentially just p as in the mandelbrot x <== x^2+
 
-                                    const float iterations = 100.;
+                                    const float iterations = 40.;
                                     float refractelC=1.5;
                                 //  p*=2.*refractelC;
 vec3 oo = vec3(0.);
@@ -689,8 +689,8 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
            
            
            if(continuumClover){//engage continualization
-               float continuumCore=(loops+counter-continuumCounter-hyperCore)*zoom/(zoom-lfc);
-               if(loops+counter-continuumCounter<hyperCore) s/=pow(2.,pow(.5,continuumCore));
+               float continuumCore=(-loops-counter+continuumCounter+hyperCore)*zoom/(lfc-zoom);
+               if(loops+counter<hyperCore+continuumCounter) s/=pow(2.,pow(.5,continuumCore));
                 continuumCounter+=continuumCore;
             }
           
@@ -702,8 +702,8 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
            
            float mcc=-1./log(.5);//cycle frequency mudulated loop counter
            
-       for(int i=0;i<40; i++)
-if(distance<2./3.&& loops+counter-continuumCounter+log(2.)<hyperCore)//not sure if i is 20 or >20
+       for(int i=0;i<50; i++)
+if(distance<2./3.&& loops+counter-continuumCounter<hyperCore)//not sure if i is 20 or >20
     {
             
             bool energyField=false;

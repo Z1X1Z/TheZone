@@ -590,24 +590,21 @@ function zoomRoutine(){
     if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
     
     ZR = zoomRate();
+    if (zoom>=1.)zoomOutEngage = false;
     if(!isFinite(ZR))ZR=1;
     if(!zoomOutEngage){
         if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&on)||window.pointerZoom)zoom *=ZR;
-        else //if(zoom<1.)
-        {
+        else{
             zoom /= ZR;
-            if(center){coordX*=(1-zoom)/ZR*2./3.; coordY*=(1-zoom)/ZR*2./3.;}
+            if(center&&zoom<1.){coordX*=(1-zoom)/ZR*2./3.; coordY*=(1-zoom)/ZR*2./3.;}
         }
     }
 
     
-                     if (zoom>=1.)zoomOutEngage = false;
     //.000000000000000000000001
-                      else if ( zoom<zoomCone||zoom<1./2**63.*metaDepth)zoomOutEngage = true;
-                         if (zoomOutEngage == true){
-                            zoom *= 1.44/ZR
-                             ;
-                        }
+                       if ( zoom<zoomCone||zoom<1./2**63.*metaDepth)zoomOutEngage = true;
+                         if (zoomOutEngage == true) zoom *= 1.44/ZR;
+                    
 
                           if(zoom<1./2**63.*metaDepth)zoom = 1.;
     
@@ -703,7 +700,7 @@ adjustThreeJSWindow();//mostly for ios here
 
 if (uniforms["MetaCored"].value){
     uniforms[ "centralCores" ].value = Math.log(zoom)/Math.log(.5);
-    uniforms[ "externalCores" ].value =uniforms[ "centralCores" ].value*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*0.9551195;
+    uniforms[ "externalCores" ].value =uniforms[ "centralCores" ].value*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*0.9551195-Math.log(2.);
     
   }
 
@@ -1024,7 +1021,14 @@ else{//start drawing of just twenty four frets here
                 var vop = new THREE.Color();
                       vop.setHSL((20-g)%24/24.,1.,.5);
 
-                             for(var yy=0;yy<6;yy++)   starColors.push(vop.r,vop.g,vop.b,lengt)
+               // for(var yy=0;yy<1;yy++)
+                    starColors.push(vop.r,vop.g,vop.b,0.,
+                                    vop.r,vop.g,vop.b,0.,
+                                    vop.r,vop.g,vop.b,1,
+                                    vop.r,vop.g,vop.b,0,
+                                    vop.r,vop.g,vop.b,1.,
+                                    vop.r,vop.g,vop.b,1
+                                    )
 
 
 var vertices;
