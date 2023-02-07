@@ -1386,7 +1386,7 @@ o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+stars
      else if(starship.x==starship.y&&starship.x==starship.z&&abs(starship.z-.5)<.1&&starship.w!=0.) isBlack=.5;
 
     gl_FragColor=vec4((mny+starship.xyz+creatures+b+bridge+
-                      clamp(clamp(zoomer+2.*heart(p-vec2(.5,0.),-move)
+                      clamp(clamp(zoomer+2.*heart(p,-move)
                                   -vec3((starship.x+starship.y+starship.z)*(starship.w*starship.w)
                                   -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)
                                                                 ),0.,1.)-(mny.r+mny.b+mny.g)*100.,.0,1.))*isBlack
