@@ -24,7 +24,6 @@ function loadScript(element, url, offlineURL)
 //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
 
                   var load = function() {
-                      window.sessionStorage.setItem('alreadyReset', "t");//disable reloader, remove this line to re-enable
 
                   //https://stackfame.com/auto-refresh-page-first-load-javascript-jquery
                       if ( window.sessionStorage.getItem("alreadyReset")!="t"){
