@@ -1526,6 +1526,22 @@ gl_FragColor=vec4((clamp(mny+starship.xyz-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,
       */
     </script>
 
+    
+<div id="container"></div>
+<script src="OFFLINEonlineSwitch.js"></script>
+<script src="starshipMod.js"></script>
+<div id="score">
+<script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
+<div id="osmdCanvas"/>
+
+<input type="file" id="files"/>
+
+<output id="list"></output>
+
+<script src="fileSelectAndLoadOSMD.js"></script>
+
+</div id="score">
+
 
     </head>
     <body>
@@ -1554,22 +1570,6 @@ gl_FragColor=vec4((clamp(mny+starship.xyz-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,
           </script>
       </div>
       
-<div id="container"></div>
-<script src="OFFLINEonlineSwitch.js"></script>
-<script src="starshipMod.js"></script>
-<div id="score">
-<script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
-<div id="osmdCanvas"/>
-
-<input type="file" id="files"/>
-
-<output id="list"></output>
-
-<script src="fileSelectAndLoadOSMD.js"></script>
-
-</div id="score">
-
-
 
 <!-- starship mod reloads the application, must be called before loading these -->
 <script id="threeJSscript"></script>
