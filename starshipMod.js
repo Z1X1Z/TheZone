@@ -1387,23 +1387,21 @@ scene.add(meshTrail)
 
                                   
                                   
-                       
-                                  
    if(window.starClover)
         {
+            if(!window.blankBackground){
+                scene.background = null;
+            }
+            else   shaderScene.background = new THREE.Color( 0x808080);
+
                          renderer.setRenderTarget (renderTarget)
                          renderer.render( scene, camera );
+            
                          uniforms.STAR.value=renderTarget.texture;
                          
                          renderer.setRenderTarget (null)
-                                shaderScene.add( mesh );
-                            
-                        if(!window.blankBackground){
-                            shaderScene.background = null;
+            
                         shaderScene.add( mesh );
-                        }
-                        else   shaderScene.background = new THREE.Color( 0x808080);
-
                          renderer.render( shaderScene, camera )
                          shaderScene.remove( mesh );
                      }
@@ -1416,7 +1414,6 @@ scene.add(meshTrail)
                         scene.add( mesh );
                     }
                     else   scene.background = new THREE.Color( 0x808080);
-            
         renderer.render( scene, camera );
                  scene.remove(mesh);
              }
