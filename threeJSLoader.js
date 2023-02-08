@@ -34,7 +34,8 @@ function loadScript(element, url, offlineURL)
                           window.location.reload();
                                           }
                       else{
-                          window.sessionStorage.setItem('alreadyReset', "f");
+                          //window.sessionStorage.setItem('alreadyReset', "f");//
+                          //disabled reloader, replace this line to re-eneble
                           loadScript("threeJSscript",cdnSwitchThree,"three.js")
                           loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")
 
