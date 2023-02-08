@@ -174,7 +174,7 @@ function fiveAndSeven(){
             }
 }
 
-                          const trailSecondsLong = 14;
+                          const trailSecondsLong = 12;
                           const trailLength = zoomFrames*trailSecondsLong;
 let trail = Array(trailLength);
 let cx = Array(trailLength);//c is the center of the frame moved from the origin
@@ -696,8 +696,8 @@ adjustThreeJSWindow();//mostly for ios here
 
 
 if (uniforms["MetaCored"].value){
-    uniforms[ "centralCores" ].value = Math.log(zoom)/Math.log(.5);
-    uniforms[ "externalCores" ].value =uniforms[ "centralCores" ].value*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*0.9551195-Math.log(2.);
+    uniforms[ "centralCores" ].value = Math.log(zoom)/Math.log(.5)-1.;
+    uniforms[ "externalCores" ].value =uniforms[ "centralCores" ].value*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*0.9551195;
     
   }
 
@@ -1180,7 +1180,7 @@ while(loopLimit>0&&r!=f)if(timeElapsedSinceRecording<trailSecondsLong){
   let widtr = trailWidth[r];
   let widts = trailWidth[s];
   let tt = 0.;
-  var z = -(depthTranslucencyTrail**2.);
+  var z = -(Math.abs(depthTranslucencyTrail)**2.5);
                           let transparencyOfTrail= depthTranslucencyTrail;
                          
                           trailColor.push(
