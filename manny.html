@@ -363,10 +363,6 @@
                   <script>let n = document.getElementsByName('t');
                       for(var p = 0; p<n.length;p++)n[p].checked  = false; </script>
                   
-                  
-                  
-                  <!--SPLASH-->
-
                   <div class=onofflineBG id="background_wrap">
                       <script>
                           let nf = document.querySelectorAll('.onofflineBG');
@@ -383,30 +379,31 @@
                       </script>
                   </div>
                   
+        <div id="container"></div>
+        <script src="OFFLINEonlineSwitch.js"></script>
+        <script src="starshipMod.js"></script>
+        <div id="score">
+        <script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
+        <div id="osmdCanvas"/>
+
+        <input type="file" id="files"/>
+
+        <output id="list"></output>
+
+        <script src="fileSelectAndLoadOSMD.js"></script>
+
+        </div id="score">
 
 </head>
 <body>
-
-    <div id="container"></div>
-    <script src="OFFLINEonlineSwitch.js"></script>
-    <script src="starshipMod.js"></script>
-    <div id="score">
-    <script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
-    <div id="osmdCanvas"/>
-
-    <input type="file" id="files"/>
-
-    <output id="list"></output>
-
-    <script src="fileSelectAndLoadOSMD.js"></script>
-
-    </div id="score">
+    <!--SPLASH-->
 
 
-<script id="threeJSscript" async></script>
-<script id="wadJSscript" async></script>
+
+<script id="threeJSscript" ></script>
+<script id="wadJSscript" ></script>
 <script src="wadLoader.js"></script>
-<script src="threeJSLoader.js"async></script>
+<script src="threeJSLoader.js"></script>
 
         <script id="vertexShader" type="x-shader/x-vertex">
 
