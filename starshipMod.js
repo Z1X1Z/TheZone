@@ -1,15 +1,17 @@
 function stallTillTHREE(){
 
     if(typeof THREE=="object"&& document.visibilityState=="visible"){
+        document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
+
                 if(location.hash.includes("t"))
               {
                 touchOnlyMode=true;
-                document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
                   init();
               }
-                else startMic();
+        else init();
+            
     }else setTimeout(stallTillTHREE,10);}//setTimeout waits for 10ms then runs stallTillTHREE();
-stallTillTHREE();//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
+startMic()//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
 //document.head.addEventListener('beforeunload', event => { cancelAnimationFrame();});
 let xyStarParticleArray=Array();
 window.zoom=1.;
@@ -1604,8 +1606,8 @@ async function startMic() {
                     })
   .finally((err) => {
     /* engage touch only mode */
-    document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
-    init();
+      stallTillTHREE();
+      
   });
 
 }
