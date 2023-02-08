@@ -1,4 +1,4 @@
-function stallTillTHREE(){
+function stallTillTHREE(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
 
     if(typeof THREE=="object"&& document.visibilityState=="visible"){
         document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
@@ -6,12 +6,13 @@ function stallTillTHREE(){
                 if(location.hash.includes("t"))
               {
                 touchOnlyMode=true;
+                  pointerZoom=true;
                   init();
               }
         else init();
             
     }else setTimeout(stallTillTHREE,10);}//setTimeout waits for 10ms then runs stallTillTHREE();
-startMic()//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
+if ( window.sessionStorage.getItem("alreadyReset")=="t")startMic();
 //document.head.addEventListener('beforeunload', event => { cancelAnimationFrame();});
 let xyStarParticleArray=Array();
 window.zoom=1.;
@@ -1582,7 +1583,7 @@ if("osmd" in window){
 
 let audioX;
 let micOn = false;
-let touchOnlyMode=false;
+window.touchOnlyMode=false;
 
 async function startMic() {
   //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
