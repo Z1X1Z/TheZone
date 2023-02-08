@@ -11,7 +11,8 @@ function stallTillTHREE(){//this is a lurker. it waits for the three.js loader t
          init();
             
     }else setTimeout(stallTillTHREE,10);}//setTimeout waits for 10ms then runs stallTillTHREE();
-if ( window.sessionStorage.getItem("alreadyReset")=="t")startMic();
+//if ( window.sessionStorage.getItem("alreadyReset")=="t")
+startMic();
 //document.head.addEventListener('beforeunload', event => { cancelAnimationFrame();});
 let xyStarParticleArray=Array();
 window.zoom=1.;
