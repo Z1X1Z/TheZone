@@ -359,7 +359,7 @@
             </div>
 
 
-    <script id="vertexShader" type="x-shader/x-vertex" async>
+    <script id="vertexShader" type="x-shader/x-vertex">
 
             varying vec2 vUv;
 
@@ -370,7 +370,7 @@
         }
     </script>
 
-    <script id="fragmentShader" type="x-shader/x-fragment" async>
+    <script id="fragmentShader" type="x-shader/x-fragment">
 
         varying vec2 vUv;
         uniform bool helm;
@@ -1544,7 +1544,7 @@ gl_FragColor=vec4((clamp(mny+starship.xyz-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,
 
     <output id="list"></output>
 
-    <script src="fileSelectAndLoadOSMD.js" async></script>
+    <script src="fileSelectAndLoadOSMD.js"></script>
 
     </div id="score">
     
@@ -1573,10 +1573,10 @@ gl_FragColor=vec4((clamp(mny+starship.xyz-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,
 
 
 
-<script id="threeJSscript" async></script>
-<script id="wadJSscript" async></script>
+<script id="threeJSscript"></script>
+<script id="wadJSscript"></script>
 <script src="wadLoader.js"></script>
-<script src="threeJSLoader.js" async></script>
+<script src="threeJSLoader.js"></script>
 
 
     </body>
