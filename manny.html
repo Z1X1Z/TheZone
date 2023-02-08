@@ -705,7 +705,7 @@ vec3 tol(vec2 p, vec2 t){
      vec2 colorAccumulator =vec2(0.);
      vec3 heartColors = vec3(0.);
      float cored =0.;
-     if(MetaCored)cored= log(zoom)/log(.5)-1.;
+     if(MetaCored)cored= log(zoom)/log(.5);
      else cored = centralCores;
      float c = length(p);
      float loops=0.;
@@ -725,7 +725,7 @@ vec3 tol(vec2 p, vec2 t){
      loops=0.;
      float hyperCore=0.;
      float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
-       if(MetaCored)hyperCore=cored*2./3.+log(lfc)*logStabilizationConstant;
+       if(MetaCored)hyperCore=(cored-1.)*2./3.+log(lfc)*logStabilizationConstant;
       else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
       if(outerCoresOff)hyperCore=0.;
 
