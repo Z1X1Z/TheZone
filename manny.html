@@ -801,7 +801,7 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
            
            if(continuumClover){//engage continualization
                float continuumCore=(-loops-counter+continuumCounter+hyperCore)*zoom/(lfc-zoom);
-               if(loops+counter<=hyperCore+continuumCounter) s/=pow(2.,pow(.5,continuumCore));
+               if(loops+counter<hyperCore+continuumCounter) s/=pow(2.,pow(.5,continuumCore));
                 continuumCounter+=continuumCore;
             }
           
@@ -814,7 +814,7 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
            float mcc=-1./log(.5);//cycle frequency mudulated loop counter
            
        for(int i=0;i<20; i++)
-if(distance<2./3.&& loops+counter-continuumCounter<=hyperCore)//not sure if i is 20 or >20
+if(distance<2./3.&& loops+counter-continuumCounter<hyperCore)//not sure if i is 20 or >20
     {
             
             bool energyField=false;
