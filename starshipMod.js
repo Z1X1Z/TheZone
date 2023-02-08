@@ -3,7 +3,15 @@ function stallTillTHREE(){
     if(typeof THREE=="object"&& document.visibilityState=="visible"){
 
 
-        init();
+        
+        if(location.hash.includes("t"))
+      {
+        touchOnlyMode=true;
+        document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
+          init();
+      }
+        else startMic();
+        
     }else setTimeout(stallTillTHREE,10);}//setTimeout waits for 10ms then runs stallTillTHREE();
 stallTillTHREE();//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
 //document.head.addEventListener('beforeunload', event => { cancelAnimationFrame();});
@@ -355,8 +363,12 @@ let uniforms;
                      var height=window.innerHeight,width=window.innerWidth;
                        let texture;
                        let renderTarget;
+                       
+                       
+                     
+                       
+                       
 function init() {
-    
     renderTarget = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
                                                Math.min(window.innerWidth,window.innerHeight)*4./3.);
 
@@ -369,6 +381,7 @@ function init() {
     inputData = new Float32Array(bufferSize);
 
         renderer = new THREE.WebGLRenderer();
+    container.appendChild( renderer.domElement );//engage THREEJS visual out
 
                 renderer.autoClear=true;//so the starship can be isolated
                 renderer.setClearAlpha ( 0. )
@@ -455,14 +468,7 @@ dotted:{value:false},
   renderer.setPixelRatio( rez);
 
 
-    if(location.hash.includes("t"))
-  {
-    touchOnlyMode=true;
-    document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
-    container.appendChild( renderer.domElement );//engage THREEJS visual out
     animate();
-  }
-    else startMic();
 
     onWindowResize()
 }
@@ -1603,8 +1609,7 @@ async function startMic() {
   .finally((err) => {
     /* engage touch only mode */
     document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
-    container.appendChild( renderer.domElement );//engage THREEJS visual out
-    animate();
+    init();
   });
 
 }
