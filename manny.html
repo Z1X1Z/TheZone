@@ -358,8 +358,13 @@
             </div>
             </div>
 
+            <script src="OFFLINEonlineSwitch.js"></script>
+            <div id="container"></div>
 
-    <script id="vertexShader" type="x-shader/x-vertex">
+            <script src="starshipMod.js"></script>
+
+
+    <script id="vertexShader" type="x-shader/x-vertex" async>
 
             varying vec2 vUv;
 
@@ -370,7 +375,7 @@
         }
     </script>
 
-    <script id="fragmentShader" type="x-shader/x-fragment">
+    <script id="fragmentShader" type="x-shader/x-fragment" async>
 
         varying vec2 vUv;
         uniform bool helm;
@@ -1526,11 +1531,6 @@ gl_FragColor=vec4((clamp(mny+starship.xyz-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,
       
       */
     </script>
-
-    <script src="OFFLINEonlineSwitch.js"></script>
-    <div id="container"></div>
-
-    <script src="starshipMod.js"></script>
 
     </head>
     <body>
