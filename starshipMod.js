@@ -450,13 +450,8 @@ dotted:{value:false},
       geometryP = new THREE.PlaneGeometry( 2, 2 );
       //geometryP.translate(0,0,-1.);
 
-      if(window.shaderOn){
-            mesh = new THREE.Mesh( geometryP, materialShader );
-        }
-        else{
-           scene.background = new THREE.Color( 0x808080);
-         }
-
+           mesh = new THREE.Mesh( geometryP, materialShader );
+              
   renderer.setPixelRatio( rez);
 
 
@@ -800,7 +795,7 @@ if( !window.touchMode&&!touchOnlyMode) {
   } );
   if (uniforms[ "metronome" ].value>1.)
     lineMat.color = new THREE.Color(-Math.sin(uniforms[ "time" ].value*uniforms[ "metronome" ].value))
-  if(window.spiroRainbow)
+  if(window.blankBackground)
   {
     lineMat.color = colorSound;
     lineMat.opacity = 1.; //opacity has no effect
@@ -1084,7 +1079,10 @@ x,    y,  depth,
                      if (t==7||t==5||t==2||t==0||t==10)
                          BlackOrWhite=-1.;
                      else if (t==6)
-                         BlackOrWhite=.5;
+                     {
+                         if(!window.blankBackground) BlackOrWhite=.5;
+                         else BlackOrWhite=1.;
+                     }
                     else
                          BlackOrWhite=1;
                      vop.setRGB(BlackOrWhite,BlackOrWhite,BlackOrWhite);
@@ -1398,18 +1396,31 @@ scene.add(meshTrail)
                          uniforms.STAR.value=renderTarget.texture;
                          
                          renderer.setRenderTarget (null)
-                         shaderScene.add( mesh );
+                                shaderScene.add( mesh );
+                            
+                        if(!window.blankBackground){
+                            shaderScene.background = null;
+                        shaderScene.add( mesh );
+                        }
+                        else   shaderScene.background = new THREE.Color( 0x808080);
+
                          renderer.render( shaderScene, camera )
                          shaderScene.remove( mesh );
                      }
-                  else{
-                         uniforms.STAR.value=null;
-                         renderer.setRenderTarget (null);
-                         scene.add(mesh);
-                         renderer.render( scene, camera );
-                         scene.remove(mesh);
-                     }
-                                  
+          else{
+            
+                 uniforms.STAR.value=null;
+                 renderer.setRenderTarget (null);
+                    if(!window.blankBackground) {
+                        scene.background = null;
+                        scene.add( mesh );
+                    }
+                    else   scene.background = new THREE.Color( 0x808080);
+            
+        renderer.render( scene, camera );
+                 scene.remove(mesh);
+             }
+                          
                                   
                                   
 

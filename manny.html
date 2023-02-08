@@ -298,6 +298,11 @@
                               callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                            <label for="Articles">Articles!</label><br>
                            
+                           <input type="checkbox" id="Blank Background" name="t"  onclick= "
+                               key  = 'Y';
+                               callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                            <label for="Blank Background">Blank Background!</label><br>
+                           
                          <a id="Cycle Character" name="t"  onclick= "
                              key  = 'U';
                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -699,7 +704,6 @@ vec2 jc =vec2(0.);// vec2 jc =vec2(-0.5577,- 0.6099);//you can feed in coordinat
 vec3 tol(vec2 p, vec2 t){
      vec2 colorAccumulator =vec2(0.);
      vec3 heartColors = vec3(0.);
-     if(spirated>-.5) p.y*=-1.;
      float cored =0.;
      if(MetaCored)cored= log(zoom)/log(.5);
      else cored = centralCores;
@@ -726,14 +730,9 @@ vec3 tol(vec2 p, vec2 t){
       if(outerCoresOff)hyperCore=0.;
 
         if(Spoker&&MetaCored)hyperCore*=4./3./logStabilizationConstant;//engage overstable core if dancing
-         
-         
-         
-         
-         
-         
-     float term=0.;
-     if(spirated!=0.)term=(lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
+         if(morph>.5)hyperCore+=3.;
+         float term=0.;
+     if (spirated!=0.)term=(lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
    vec2 m=vec2(0.);
    
    //Maendel clover
@@ -749,7 +748,7 @@ vec3 oo = vec3(0.);
 
 vec4 starship=vec4(0.);
 float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
-     for (float counter=0.;counter<iterations;counter++)if(abs(s.y)<50.){
+     for (float counter=0.;counter<iterations;counter++)if(length(s)<50.){
                    
          if(length(s)<2./3.||(spokesVisualizeColors&&length(s)<4./3.)) starship+= texture2D(STAR,(spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+PI
             ))/2.+.5);//doesn't remap clovers 8+
@@ -769,7 +768,7 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
          }
                                   
     }
-        if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*PI/(atan(s.y,s.x)+PI);
+        if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*PI/(atan(s.y,s.x)-PI*spirated);
 
            colorAccumulator+=s;
            if(Refractelate&&length(s)>refractelC){s/=refractelC;} //refractelC/=4./3.;}
@@ -781,8 +780,9 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
            
                if(dotted)s/=dot(-m,t)*dot(m,-t);
 
-               if(spirated!=0.) s+=m-t;//this is to give the semi-dissipated clovers
-               else s+=t-m;//plus t is lobes, -t is circles with dance
+              // if(spirated!=0.)
+           s+=m-t;
+       //    else s+=t-m;//plus t is lobes, -t is circles with dance
            
                if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the body steps on the clover
                else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only
@@ -813,7 +813,7 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
            
            float mcc=-1./log(.5);//cycle frequency mudulated loop counter
            
-       for(int i=0;i<50; i++)
+       for(int i=0;i<20; i++)
 if(distance<2./3.&& loops+counter-continuumCounter<hyperCore)//not sure if i is 20 or >20
     {
             
@@ -973,17 +973,22 @@ o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+stars
 
 
              vec3 heartZoom(vec2 p, vec2 t){
-                 //p.x+=.5;
-                 //p+=coords.yx;
-                 p.y=-p.y;
+         
+         float c=3.58;
+         p.y*=-1.;
+         if(colorCombo==18) p*=2.*c;
+         vec2 z=p;
+const float iterations =  21.*21.;
+for (float f=0.;f<iterations;f+=1.)
+if(f>(-sin(time/4.)+1.)/2.*iterations*.25+.75){if(length(z)>5.&&colorCombo!=18)break;
+else{
+if(colorCombo==18)if(length(z)>c)z/=c;
+z=vec2(z.x*z.x-z.y*z.y-p.x+t.x, 2.0*z.x*z.y-p.y+t.y);//this is {s=s^2-p}
+}}
+      
+return (vec3(z.x*z.y,z.x+.2,z.y-.3*(1.-p.x))+.3)/length(z);
 
-                 vec2 z=p;
-                 vec3 h=vec3(0.);
-                 const int cycles = 300;
-                 for (int f=0;f<cycles;f+=1)if(abs(z.y)>10.)h=vec3(0.);
-                 else {z=vec2(((z.x*z.x-z.y*z.y)-p.x+t.x),(2.0*z.x*z.y-p.y+t.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
-                     h+=(vec3(z.x*z.y,z.x,z.y-.2*(1.-p.x))+.3)*2./float(cycles);}
-         return h;
+         
          }
           
           
@@ -1008,21 +1013,21 @@ o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+stars
              vec3 man(vec2 p,vec2 t) {
                  p*=-1.75;
                  vec2 s = p;
-                 float d = 1.0, l;
+                 float l;
                  float flip=-t.x;
                  if (flip<0.) p = -p;
-                 if (abs(p.x*p.x+p.y*p.y)<2.0)for (int t = 0; t < 30; t++) {
+                 if (abs(p.x*p.x+p.y*p.y)<2.0){for (int t = 0; t < 30; t++) {
                          s = vec2(((s.x * s.x - s.y * s.y) +flip* p.x), (s.x * s.y + flip*p.y));
                          if(flip<1.)
                          s.x = 1./pow(s.x,flip)*sign(s.x*flip);
                          else s.x = 1./s.x;
                    l = length(s);
-                   d += l/25.;
-                     if (l >20.0&&t!=0)return vec3(-1.);}
 
-                    if (abs(p.x*p.x+p.y*p.y)<2.0)return vec3(1.);
-                    else return vec3(0.0);
-             }
+                 if (l >20.0&&t!=0)
+                      return vec3(-2.*zin(time));}
+                              return vec3(2.*zin(time));}
+                 return vec3(0.);
+         }
 
 
              vec3 eagle(vec2 p,vec2 t) {
@@ -1330,19 +1335,6 @@ o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+stars
 
                                 }
 
-                vec3 refractelbrot(vec2 p, vec2 t){
-                                  p.y*=-1.;
-                                                float c=3.58;
-                                                p.x+=.5;
-                    p*=2.*c;
-                                                vec2 z=p;
-                        const float iterations =  50.;
-                            for (float f=0.;f<iterations;f+=1.){
-                                if(length(z)>c)z/=c;
-                                z=vec2((z.x*z.x-z.y*z.y-p.x+t.x), 2.0*z.x*z.y-p.y+t.y);//this is {s=s^2-p;s.real=-1./s.real}
-                        }
-                        return  (vec3(z.x*z.y,z.x,z.y-.2*(1.-p.x))+.3);}
-
             vec3 acrostic(vec2 t){
               float c=1.44;
 
@@ -1499,13 +1491,12 @@ o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+stars
                                                          vec2 t =vec2(-sin(time),-sin(time*.618));
 
              if(colorCombo<10)zoomer=tol(backGround, dance2);
-             else if (colorCombo==11)zoomer=heartZoom(backGround+vec2(.5,0.)+driftCanceller, dance);
+             else if (colorCombo==11||colorCombo==18)zoomer=heartZoom(backGround+driftCanceller, dance);
              else if (colorCombo==13)zoomer=tokogae(backGround,vec2(zoom));
              else if (colorCombo==14)zoomer=TOLTOK(backGround,dance2);
              else if (colorCombo==15)zoomer=xx(backGround,dance2);
              else if (colorCombo==16)zoomer=xtol(backGround,vec2(0.));
              else if (colorCombo==17)zoomer=body(backGround,vec2(-sin(time*20.)/50.,-sin(time*gr*20.)/30.)*zoom)+robe(backGround,vec2(0.))/2.+faceHeights(backGround,t*zoom)+                                                   heartZoom(backGround-vec2(.5,0.)+driftCanceller,dance);
-            else if (colorCombo==18)zoomer=refractelbrot(backGround,dance);
             else if (colorCombo==19)zoomer=acrostic(backGround);
 
                                                          
@@ -1569,7 +1560,7 @@ o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+stars
                                         zoomer+2.*heart(p,-move)
                                   -vec3((starship.x+starship.y+starship.z)*(starship.w*starship.w)
                                   -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)
-                                                                ),0.,1.)-(mny.r+mny.b+mny.g)*2.,.0,1.))*isBlack
+                                                                ),0.,1.)-(mny.r+mny.b+mny.g)*10000.,.0,1.))*isBlack
               ,1.
                       );}
                                                          

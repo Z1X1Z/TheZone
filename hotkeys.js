@@ -6,7 +6,7 @@ window.RockInTheWater=0;
 window.octaveStars=true;
 window.BulletMine=0;
 window.starClover=true;
-
+window.blankBackground=false;
 function readHash(){for(var n = location.hash.length;n>0;n--)callKey(new KeyboardEvent('keydown', {'key': location.hash[n],"keyCode":location.hash.charCodeAt(n)}));
 }
 function stallHash(){if(window.uniformsLoaded)readHash();else setTimeout(stallHash,10);}//uniforms are only loaded if mic is enabled
@@ -123,6 +123,10 @@ function callKey(event){
       else if (key=="K")uniforms.Inherited.value=!uniforms.Inherited.value;
 
       else if (key=="y") uniforms[ "petals" ].value -= 1.;
+      else if (key=="Y"){
+          window.blankBackground = !window.blankBackground;
+          if(window.blankBackground)window.starClover=false;
+      }
       else if (key=="u") uniforms[ "petals" ].value += 1.;
       else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%7;
 
