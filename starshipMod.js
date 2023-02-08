@@ -569,7 +569,7 @@ let lastVolume = 1.;
     
     if (on||zoom<1.)preserveOuterCore=true;
     else preserveOuterCore = false
-    if((Math.sqrt(coordX*coordX+coordY*coordY)>=2.||zoom>=2.)&&!(preserveOuterCore)){coordX=(coordX/2.)%4.; coordY=(coordY/2.)%2.;zoom=(zoom/2.)%2.;}
+    if((Math.sqrt(coordX*coordX+coordY*coordY)>=1.||zoom>=1.)&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;}
     }
                        
                        
