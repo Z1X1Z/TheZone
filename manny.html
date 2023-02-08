@@ -725,7 +725,7 @@ vec3 tol(vec2 p, vec2 t){
      loops=0.;
      float hyperCore=0.;
      float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
-       if(MetaCored)hyperCore=(cored-1.)*2./3.+log(lfc)*logStabilizationConstant;
+       if(MetaCored)hyperCore=cored*2./3.+log(lfc)*logStabilizationConstant;
       else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
       if(outerCoresOff)hyperCore=0.;
 
@@ -791,7 +791,7 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
         s.x=log(abs(s.x))/log(3.-term);
            
 
-            if(Spoker&&loops+counter+1.<hyperCore) s/=2.;//engage spokelover
+            if(Spoker&&loops+counter+1.<=hyperCore) s/=2.;//engage spokelover
            
            if(spokelover&&counter<hyperCore){
                 if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
@@ -801,7 +801,7 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
            
            if(continuumClover){//engage continualization
                float continuumCore=(-loops-counter+continuumCounter+hyperCore)*zoom/(lfc-zoom);
-               if(loops+counter<hyperCore+continuumCounter) s/=pow(2.,pow(.5,continuumCore));
+               if(loops+counter<=hyperCore+continuumCounter) s/=pow(2.,pow(.5,continuumCore));
                 continuumCounter+=continuumCore;
             }
           
