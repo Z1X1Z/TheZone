@@ -359,10 +359,53 @@
             </div>
 
             
+            <script src="OFFLINEonlineSwitch.js" ></script>
+            <div id="container"></div>
             
-    
-    <script src="OFFLINEonlineSwitch.js" ></script>
-    <div id="container"></div>
+        <div id="score">
+        <script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
+        <div id="osmdCanvas"/>
+
+        <input type="file" id="files"/>
+
+        <output id="list"></output>
+
+        <script src="fileSelectAndLoadOSMD.js"></script>
+
+        </div id="score">
+        
+
+          <script>let n = document.getElementsByName('t');
+              for(var p = 0; p<n.length;p++)n[p].checked  = false; </script>
+          
+          <div class=onofflineBG id="background_wrap">
+              <script>
+                  //splash
+                  let nf = document.querySelectorAll('.onofflineBG');
+                  if(window.online)
+                  {
+                      if(Date.now()%2==1) nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6/z1xlogo.png');"
+                      else nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/pentaloctalwtTtlzonexmonogram.jpeg');"
+                 }
+                  else
+                  {
+                      if(Date.now()%2==1)nf[0].style = "background-image: url('z1xlogo.png');"
+                      else nf[0].style = "background-image: url('pentaloctalwtTtlzonexmonogram.jpeg');"
+                      }
+              </script>
+          </div>
+          
+
+    <script>
+        //disable reloader
+          window.sessionStorage.setItem('alreadyReset', "t");//disable reloader, remove this line to re-eneble
+    </script>
+
+    <script id="threeJSscript" async></script>
+    <script id="wadJSscript" async></script>
+    <script src="wadLoader.js"></script>
+    <script src="threeJSLoader.js" async></script>
+
 
     <script src="starshipMod.js"></script>
     
@@ -1538,51 +1581,6 @@
     
     
         
-        
-    <div id="score">
-    <script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
-    <div id="osmdCanvas"/>
-
-    <input type="file" id="files"/>
-
-    <output id="list"></output>
-
-    <script src="fileSelectAndLoadOSMD.js"></script>
-
-    </div id="score">
-    
-
-      <script>let n = document.getElementsByName('t');
-          for(var p = 0; p<n.length;p++)n[p].checked  = false; </script>
-      
-      <div class=onofflineBG id="background_wrap">
-          <script>
-              //splash
-              let nf = document.querySelectorAll('.onofflineBG');
-              if(window.online)
-              {
-                  if(Date.now()%2==1) nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6/z1xlogo.png');"
-                  else nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/pentaloctalwtTtlzonexmonogram.jpeg');"
-             }
-              else
-              {
-                  if(Date.now()%2==1)nf[0].style = "background-image: url('z1xlogo.png');"
-                  else nf[0].style = "background-image: url('pentaloctalwtTtlzonexmonogram.jpeg');"
-                  }
-          </script>
-      </div>
-      
-
-<script>
-    //disable reloader
-      window.sessionStorage.setItem('alreadyReset', "t");//disable reloader, remove this line to re-eneble
-</script>
-
-<script id="threeJSscript" async></script>
-<script id="wadJSscript" async></script>
-<script src="wadLoader.js"></script>
-<script src="threeJSLoader.js" async></script>
-
 
 
     </body>
