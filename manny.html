@@ -359,11 +359,6 @@
             </div>
 
             
-            <script src="OFFLINEonlineSwitch.js" ></script>
-            <div id="container"></div>
-
-            <script src="starshipMod.js" dynamic></script>
-
             
 
     <script id="vertexShader" type="x-shader/x-vertex" defer>
@@ -1528,6 +1523,11 @@ gl_FragColor=vec4((clamp(mny+starship.xyz-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,
                                                      
     </script>
     
+    <script src="OFFLINEonlineSwitch.js" ></script>
+    <div id="container"></div>
+
+    <script src="starshipMod.js" async></script>
+
     </head>
     <body>
     
@@ -1571,10 +1571,10 @@ gl_FragColor=vec4((clamp(mny+starship.xyz-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,
       window.sessionStorage.setItem('alreadyReset', "t");//disable reloader, remove this line to re-eneble
 </script>
 
-<script id="threeJSscript"></script>
-<script id="wadJSscript"></script>
+<script id="threeJSscript" async></script>
+<script id="wadJSscript" async></script>
 <script src="wadLoader.js"></script>
-<script src="threeJSLoader.js"></script>
+<script src="threeJSLoader.js" async></script>
 
 
     </body>
