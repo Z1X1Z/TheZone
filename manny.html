@@ -43,7 +43,27 @@
     if (window.online)cdnSwitchThree="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js";
     loadScript("threeJSscript",cdnSwitchThree,"three.js")</script>
 
-    
+
+<script id="wadJSscript" async></script>
+<script>
+var cdnSwitchWAD="wad.min.js";
+if (window.online)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0";
+loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")</script>
+
+    </script>
+<script src="wadLoader.js" defer> </script>
+
+
+
+<script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
+<script>
+    var cdnOSMD="opensheetmusicdisplay.min.js";
+    if (window.online)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.6.1/build/opensheetmusicdisplay.min.js";
+    loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")</script>
+<script src="fileSelectAndLoadOSMD.js" defer></script>
+
+
+
     <div id="allText">
         <div id="HK"></div>
         <div id="textWindow"></div>
@@ -395,32 +415,13 @@
     </div>
     </div>
     
-    
-    
-    
-    
-    
     <script>let n = document.getElementsByName('t');
         for(var p = 0; p<n.length;p++)n[p].checked  = false; </script>
     
     
     <div id="container"></div>
     
-<script id="wadJSscript" async></script>
-<script>
-    var cdnSwitchWAD="wad.min.js";
-    if (window.online)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0";
-    loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")</script>
 
-        </script>
-<script src="wadLoader.js" dynamic> </script>
-
-
-<script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
-<script>
-    var cdnOSMD="opensheetmusicdisplay.min.js";
-    if (window.online)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.6.1/build/opensheetmusicdisplay.min.js";
-    loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")</script>
 
     <div id="score">
     <div id="osmdCanvas"/>
@@ -429,7 +430,6 @@
 
     <output id="list"></output>
 
-    <script src="fileSelectAndLoadOSMD.js" async></script>
 
     </div id="score">
     
