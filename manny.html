@@ -17,6 +17,8 @@
     <body>
         
         
+
+    
     <div id="allText">
         <div id="HK"></div>
         <div id="textWindow"></div>
@@ -382,27 +384,25 @@
     <script src="OFFLINEonlineSwitch.js"></script>
 
 
+
       <script>window.sessionStorage.setItem("alreadyReset","t");//disable reloader,to renable remove this line and restore one in threeJSloader.js
       </script>
-      
-      <div id="score">
-      <script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
-      <div id="osmdCanvas"/>
-
-      <input type="file" id="files"/>
-
-      <output id="list"></output>
-      <script src="fileSelectAndLoadOSMD.js" async></script>
-
-      </div id="score">
-      
 <script id="threeJSscript" async></script>
+<script id="wadJSscript" async></script>
+<script src="wadLoader.js" dynamic> </script>
 <script src="threeJSLoader.js" async></script>
+    
+    <div id="score">
+    <script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
+    <div id="osmdCanvas"/>
 
+    <input type="file" id="files"/>
 
-    <script id="wadJSscript" async></script>
-    <script src="wadLoader.js" dynamic> </script>
+    <output id="list"></output>
 
+    <script src="fileSelectAndLoadOSMD.js" async></script>
+
+    </div id="score">
     
     
 <script id="vertexShader" type="x-shader/x-vertex" defer>
