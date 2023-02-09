@@ -55,12 +55,11 @@ loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")</script>
 
 
 
-<script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
+<script id="osmdJS" async></script> <!-- you need to provide the .js file, see README.md-->
 <script>
     var cdnOSMD="opensheetmusicdisplay.min.js";
     if (window.online)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.6.1/build/opensheetmusicdisplay.min.js";
     loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")</script>
-<script src="fileSelectAndLoadOSMD.js" defer></script>
 
 
 
@@ -430,6 +429,7 @@ loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")</script>
 
     <output id="list"></output>
 
+    <script src="fileSelectAndLoadOSMD.js"></script>
 
     </div id="score">
     
