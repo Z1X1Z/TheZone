@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="main.css">
            
-           <script async>
+           <script>
                let micOn = false;
                let audioX;
 
@@ -49,28 +49,30 @@
     </head>
     
     <body>
+        
+        <div class=onofflineBG id="background_wrap">
+            <script>
+                //splash
+                let nf = document.querySelectorAll('.onofflineBG');
+                if(window.online)
+                {
+                    if(Date.now()%2==1) nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6/z1xlogo.png');"
+                    else nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/pentaloctalwtTtlzonexmonogram.jpeg');"
+               }
+                else
+                {
+                    if(Date.now()%2==1)nf[0].style = "background-image: url('z1xlogo.png');"
+                    else nf[0].style = "background-image: url('pentaloctalwtTtlzonexmonogram.jpeg');"
+                    }
+            </script>
+        </div>
+        
         <script src="OFFLINEonlineSwitch.js"></script>
 
         <script src="starshipMod.js" async></script>
         
         
 
-    <div class=onofflineBG id="background_wrap">
-        <script>
-            //splash
-            let nf = document.querySelectorAll('.onofflineBG');
-            if(window.online)
-            {
-                if(Date.now()%2==1) nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6/z1xlogo.png');"
-                else nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/pentaloctalwtTtlzonexmonogram.jpeg');"
-           }
-            else
-            {
-                if(Date.now()%2==1)nf[0].style = "background-image: url('z1xlogo.png');"
-                else nf[0].style = "background-image: url('pentaloctalwtTtlzonexmonogram.jpeg');"
-                }
-        </script>
-    </div>
 
     
         <script>
@@ -93,12 +95,6 @@
             }
           </script>
         
-<script id="threeJSscript" async></script>
-<script async>
-    var cdnSwitchThree="three.js";
-    if (window.online)cdnSwitchThree="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js";
-    loadScript("threeJSscript",cdnSwitchThree,"three.js")
-</script>
 
 <script id="osmdJS" async></script> <!-- you need to provide the .js file, see README.md-->
 <script async>
@@ -1649,6 +1645,13 @@ gl_FragColor=vec4((clamp(mny+starship.xyz-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,
             ,1.);}
   
   */
+</script>
+
+<script id="threeJSscript"></script>
+<script async>
+var cdnSwitchThree="three.js";
+if (window.online)cdnSwitchThree="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js";
+loadScript("threeJSscript",cdnSwitchThree,"three.js")
 </script>
 
     </body>
