@@ -374,7 +374,7 @@
 
     <output id="list"></output>
 
-    <script src="fileSelectAndLoadOSMD.js"></script>
+    <script src="fileSelectAndLoadOSMD.js" async></script>
 
     </div id="score">
     
@@ -408,7 +408,7 @@
 <script id="threeJSscript"></script>
 <script id="wadJSscript"></script>
 <script src="wadLoader.js"></script>
-<script src="threeJSLoader.js"></script>
+<script src="threeJSLoader.js" async></script>
 
 
 
@@ -421,7 +421,7 @@
         
         
         
-    <script id="vertexShader" type="x-shader/x-vertex">
+    <script id="vertexShader" type="x-shader/x-vertex" defer>
 
     varying vec2 vUv;
 
@@ -433,7 +433,7 @@
     </script>
 
 
-    <script id="fragmentShader" type="x-shader/x-fragment">
+    <script id="fragmentShader" type="x-shader/x-fragment" defer>
 
         varying vec2 vUv;
         uniform bool helm;
