@@ -401,21 +401,21 @@
           window.sessionStorage.setItem('alreadyReset', "t");//disable reloader, remove this line to re-eneble
     </script>
 
-    <script id="threeJSscript" async></script>
-    <script id="wadJSscript" async></script>
+    <script id="threeJSscript"></script>
+    <script id="wadJSscript"></script>
     <script src="wadLoader.js"></script>
-    <script src="threeJSLoader.js" async></script>
+    <script src="threeJSLoader.js"></script>
 
 
-    <script src="starshipMod.js" defer></script>
     
     
     
         </head>
         <body>
         
-    
-    <script id="vertexShader" type="x-shader/x-vertex" async>
+        <script src="starshipMod.js" defer></script>
+
+    <script id="vertexShader" type="x-shader/x-vertex" defer>
 
     varying vec2 vUv;
 
@@ -427,7 +427,7 @@
     </script>
 
 
-    <script id="fragmentShader" type="x-shader/x-fragment" async>
+    <script id="fragmentShader" type="x-shader/x-fragment" defer>
 
         varying vec2 vUv;
         uniform bool helm;
