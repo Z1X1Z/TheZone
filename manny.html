@@ -411,7 +411,7 @@
 <script src="wadLoader.js"> </script>
 <script src="threeJSLoader.js" async></script>
 
-<script id="vertexShader" type="x-shader/x-vertex" async>
+<script id="vertexShader" type="x-shader/x-vertex" defer>
 
         varying vec2 vUv;
 
@@ -422,7 +422,7 @@
     }
 </script>
 
-<script id="fragmentShader" type="x-shader/x-fragment" async>
+<script id="fragmentShader" type="x-shader/x-fragment" defer>
 
     varying vec2 vUv;
     uniform bool helm;
