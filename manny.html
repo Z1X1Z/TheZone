@@ -51,7 +51,7 @@
     <body>
         <script src="OFFLINEonlineSwitch.js"></script>
 
-        <script src="starshipMod.js"></script>
+        <script src="starshipMod.js" async></script>
         
         
 
@@ -100,6 +100,13 @@
     loadScript("threeJSscript",cdnSwitchThree,"three.js")
 </script>
 
+<script id="osmdJS" async></script> <!-- you need to provide the .js file, see README.md-->
+<script async>
+    var cdnOSMD="opensheetmusicdisplay.min.js";
+    if (window.online)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.6.1/build/opensheetmusicdisplay.min.js";
+    loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")
+ </script>
+
 <script id="wadJSscript"></script>
 <script>
     var cdnSwitchWAD="wad.min.js";
@@ -108,21 +115,12 @@
 </script>
 
 
-<script id="osmdJS" async></script> <!-- you need to provide the .js file, see README.md-->
-<script async>
-    var cdnOSMD="opensheetmusicdisplay.min.js";
-    if (window.online)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.6.1/build/opensheetmusicdisplay.min.js";
-    loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")
- </script>
-
 
 
     <div id="allText">
         <div id="HK"></div>
         <div id="textWindow"></div>
     <script src="hotkeys.js" defer></script>
-
-
 
     <div class="navbar">
         <div class="dropdown">
