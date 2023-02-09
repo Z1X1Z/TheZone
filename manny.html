@@ -38,14 +38,14 @@
           </script>
         
 <script id="threeJSscript" async></script>
-<script>
+<script async>
     var cdnSwitchThree="three.js";
     if (window.online)cdnSwitchThree="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js";
     loadScript("threeJSscript",cdnSwitchThree,"three.js")</script>
 
 
 <script id="wadJSscript" async></script>
-<script>
+<script async>
 var cdnSwitchWAD="wad.min.js";
 if (window.online)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0";
 loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")</script>
@@ -56,7 +56,7 @@ loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")</script>
 
 
 <script id="osmdJS" async></script> <!-- you need to provide the .js file, see README.md-->
-<script>
+<script async>
     var cdnOSMD="opensheetmusicdisplay.min.js";
     if (window.online)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.6.1/build/opensheetmusicdisplay.min.js";
     loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")</script>
@@ -423,14 +423,10 @@ loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")</script>
 
 
     <div id="score">
-    <div id="osmdCanvas"/>
-
-    <input type="file" id="files"/>
-
-    <output id="list"></output>
-
-    <script src="fileSelectAndLoadOSMD.js"></script>
-
+        <div id="osmdCanvas"/>
+        <input type="file" id="files"/>
+        <output id="list"></output>
+        <script src="fileSelectAndLoadOSMD.js" async></script>
     </div id="score">
     
     
