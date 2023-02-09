@@ -15,15 +15,8 @@
 
     </head>
     <body>
-        <script src="OFFLINEonlineSwitch.js"></script>
     
     
-    <script>window.sessionStorage.setItem("alreadyReset","t");//disable reloader,to renable remove this line and restore one in threeJSloader.js</script>
-    <script id="threeJSscript" async></script>
-    <script id="wadJSscript" async></script>
-    <script src="wadLoader.js" dynamic> </script>
-    <script src="threeJSLoader.js" async></script>
-
     <div id="allText">
         <div id="HK"></div>
         <div id="textWindow"></div>
@@ -386,7 +379,8 @@
     
     
     
-    
+    <script src="OFFLINEonlineSwitch.js"></script>
+
     <div id="container"></div>
 
     <div id="score">
@@ -423,7 +417,13 @@
       </div>
       
 
-<script id="vertexShader" type="x-shader/x-vertex" defer>
+<script>window.sessionStorage.setItem("alreadyReset","t");//disable reloader,to renable remove this line and restore one in threeJSloader.js</script>
+<script id="threeJSscript" async></script>
+<script id="wadJSscript" async></script>
+<script src="wadLoader.js" dynamic> </script>
+<script src="threeJSLoader.js" async></script>
+
+<script id="vertexShader" type="x-shader/x-vertex" dynamic>
 
         varying vec2 vUv;
 
@@ -434,7 +434,7 @@
     }
 </script>
 
-<script id="fragmentShader" type="x-shader/x-fragment" defer>
+<script id="fragmentShader" type="x-shader/x-fragment" dynamic>
 
     varying vec2 vUv;
     uniform bool helm;
