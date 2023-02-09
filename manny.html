@@ -3,17 +3,14 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-
         <title>Manny~Zone:X</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="main.css">
             
-            <script src="starshipMod.js" dynamic></script>
-
-
-
+            <script src="starshipMod.js" async></script>
     </head>
+    
     <body>
         <script src="OFFLINEonlineSwitch.js"></script>
 
@@ -38,13 +35,13 @@
           </script>
         
 <script id="threeJSscript" async></script>
-<script async>
+<script>
     var cdnSwitchThree="three.js";
     if (window.online)cdnSwitchThree="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js";
     loadScript("threeJSscript",cdnSwitchThree,"three.js")</script>
 
 <script id="wadJSscript" async></script>
-<script async>
+<script>
 var cdnSwitchWAD="wad.min.js";
 if (window.online)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0";
 loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")</script>
@@ -52,7 +49,7 @@ loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")</script>
 
 
 <script id="osmdJS" async></script> <!-- you need to provide the .js file, see README.md-->
-<script async>
+<script>
     var cdnOSMD="opensheetmusicdisplay.min.js";
     if (window.online)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.6.1/build/opensheetmusicdisplay.min.js";
     loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")
