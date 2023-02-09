@@ -32,7 +32,7 @@ function loadScript(element, url, offlineURL)
                           window.location.reload();
                                           }
                       else{
-                          window.sessionStorage.setItem('alreadyReset', "f");
+                          //window.sessionStorage.setItem('alreadyReset', "f");//uncomment to restore reloader functionality
                           loadScript("threeJSscript",cdnSwitchThree,"three.js")
                           loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")
 
