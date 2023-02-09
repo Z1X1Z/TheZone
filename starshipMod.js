@@ -1,6 +1,6 @@
 function stallTillTHREE(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
 
-    if(typeof THREE=="object"&& document.visibilityState=="visible"){
+    if(typeof THREE=="object"&& document.visibilityState=="visible"&&micOn){
         document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
 
                 if(location.hash.includes("t"))
@@ -10,10 +10,8 @@ function stallTillTHREE(){//this is a lurker. it waits for the three.js loader t
               }
          init();
             
-    }else setTimeout(stallTillTHREE,10);}//setTimeout waits for 10ms then runs stallTillTHREE();
-//if ( window.sessionStorage.getItem("alreadyReset")=="t")
-startMic();
-//document.head.addEventListener('beforeunload', event => { cancelAnimationFrame();});
+    }else setTimeout(stallTillTHREE,10);}//setTimeout waits for 10ms then runs init()
+stallTillTHREE();
 let xyStarParticleArray=Array();
 window.zoom=1.;
 
@@ -88,7 +86,6 @@ var rez = window.devicePixelRatio*rez;
 var zoomOutEngage=false;
 let pi = Math.PI;
 let inputData;
-let dataArray;
 let bufferSize = fftSize;
 window.zoomOutRatchetThreshold=1./bufferSize;
 
@@ -346,8 +343,6 @@ trailWidth[n] += radius*starshipSize;
 let material;
     let camera, renderer;
 let mesh;
-let analyser;
-let source;
 let materials;
 let materialShader;
 let geometry;
@@ -1581,43 +1576,9 @@ if("osmd" in window){
 }
 
 
-let audioX;
-let micOn = false;
 window.touchOnlyMode=false;
 
-async function startMic() {
-  //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
-    navigator.mediaDevices.getUserMedia({
-    audio: true,
-        
-    autoGainControl: false,
-    echoCancellation: false,
-    noiseSuppression: false//https://stackoverflow.com/questions/71978189/lag-when-playing-mic-audio-directly-to-output-using-web-audio-api
-    })
-  .then((stream) => {
-    /* use the stream */
 
-
-      micOn = true;
-      audioX = new AudioContext();
-      analyser = audioX.createAnalyser();
-      source = audioX.createMediaStreamSource( stream );
-      source.connect(analyser);
-      analyser.fftSize = fftSize;
-      dataArray = new Uint8Array( bufferSize );
-      //init();
-  }).catch((err) => {
-                    console.log("Touch only mode!")
-                    touchOnlyMode=true;
-                    window.touchMode = true;
-                    })
-  .finally((err) => {
-    /* engage touch only mode */
-      stallTillTHREE();
-      
-  });
-
-}
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
 function calculatePitch ()
