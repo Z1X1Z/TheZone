@@ -69,7 +69,6 @@
         
         <script src="OFFLINEonlineSwitch.js"></script>
 
-        <script src="starshipMod.js" async></script>
         
         
 
@@ -468,7 +467,7 @@
     
     <div id="container"></div>
     
-    <script src="wadLoader.js"> </script>
+    <script src="wadLoader.js" dynamic> </script>
 
     <div id="score">
         <div id="osmdCanvas"/>
@@ -1653,6 +1652,7 @@ var cdnSwitchThree="three.js";
 if (window.online)cdnSwitchThree="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js";
 loadScript("threeJSscript",cdnSwitchThree,"three.js")
 </script>
+<script src="starshipMod.js" defer></script>
 
     </body>
 </html>
