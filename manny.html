@@ -367,8 +367,12 @@
     <script src="starshipMod.js" async></script>
     
     
+        </head>
+        <body>
+        
+
     
-    <script id="vertexShader" type="x-shader/x-vertex" async>
+    <script id="vertexShader" type="x-shader/x-vertex">
 
     varying vec2 vUv;
 
@@ -380,7 +384,7 @@
     </script>
 
 
-    <script id="fragmentShader" type="x-shader/x-fragment" async>
+    <script id="fragmentShader" type="x-shader/x-fragment">
 
         varying vec2 vUv;
         uniform bool helm;
@@ -1530,10 +1534,6 @@
                   );}
                                                      
     </script>
-
-    </head>
-    <body>
-    
 
     <div id="score">
     <script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
