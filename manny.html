@@ -1570,13 +1570,15 @@ gl_FragColor=vec4((clamp(mny+starship.xyz-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,
       </div>
       
 
-
-
+<script>
+    //disable reloader
+      window.sessionStorage.setItem('alreadyReset', "t");//disable reloader, remove this line to re-eneble
+</script>
 
 <script id="threeJSscript" async></script>
 <script id="wadJSscript" async></script>
 <script src="wadLoader.js"></script>
-<script src="threeJSLoader.js"async></script>
+<script src="threeJSLoader.js"></script>
 
 
     </body>

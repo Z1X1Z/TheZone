@@ -24,8 +24,6 @@ function loadScript(element, url, offlineURL)
 //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
 
                   var load = function() {
-                      window.sessionStorage.setItem('alreadyReset', "t");//disable reloader, remove this line to re-eneble
-
                   //https://stackfame.com/auto-refresh-page-first-load-javascript-jquery
                       if ( window.sessionStorage.getItem("alreadyReset")!="t"){
                           //setting window location
@@ -34,8 +32,7 @@ function loadScript(element, url, offlineURL)
                           window.location.reload();
                                           }
                       else{
-                          //window.sessionStorage.setItem('alreadyReset', "f");//
-                          //disabled reloader, replace this line to re-eneble
+                          window.sessionStorage.setItem('alreadyReset', "f");
                           loadScript("threeJSscript",cdnSwitchThree,"three.js")
                           loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")
 
