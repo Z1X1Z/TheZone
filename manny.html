@@ -3,19 +3,14 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-
         <title>Manny~Zone:X</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="main.css">
-            
-            <script src="starshipMod.js"></script>
-
-            
             <div id="allText">
                 <div id="HK"></div>
                 <div id="textWindow"></div>
-            <script src="hotkeys.js" async></script>
+            <script src="hotkeys.js"></script>
 
 
 
@@ -362,43 +357,20 @@
             </div>
             </div>
             </div>
-            <script src="OFFLINEonlineSwitch.js"></script>
-            <div id="container"></div>
-
-            <script>
-                //disable reloader
-                  window.sessionStorage.setItem('alreadyReset', "t");//disable reloader, remove this line to re-eneble
-            </script>
-
-            <script id="threeJSscript"></script>
-            <script id="wadJSscript"></script>
-            <script src="wadLoader.js"></script>
-            <script src="threeJSLoader.js"></script>
 
 
+    <script id="vertexShader" type="x-shader/x-vertex">
 
+            varying vec2 vUv;
 
-        
-        
-        
-        
-        
-        
-        
-        
-    <script id="vertexShader" type="x-shader/x-vertex" defer>
+        void main()    {
 
-    varying vec2 vUv;
-
-    void main()    {
-
-    vUv = uv;
-    gl_Position = vec4( position, 1.0 );
-    }
+            vUv = uv;
+            gl_Position = vec4( position, 1.0 );
+        }
     </script>
 
-
-    <script id="fragmentShader" type="x-shader/x-fragment" defer>
+    <script id="fragmentShader" type="x-shader/x-fragment">
 
         varying vec2 vUv;
         uniform bool helm;
@@ -451,11 +423,11 @@
         uniform bool Refractelate;
         uniform float centralCores;
         uniform float externalCores;
-    uniform bool Clovoid;
-    uniform bool remediatedColors;
-    uniform bool dotted;
-    uniform bool onehundredfortyfourthousand;
-    uniform float shaderScale;
+uniform bool Clovoid;
+uniform bool remediatedColors;
+uniform bool dotted;
+uniform bool onehundredfortyfourthousand;
+uniform float shaderScale;
         const float PI = 3.1415927410125732;
         const float gr = 1.618033988749;
         float zin(float x){return -sin(x);}
@@ -605,10 +577,10 @@
                      f.y=fxb*sin(angle)+f.y*cos(angle);
                      return f;
                     }
-    vec3 sealedMan(vec2 p,vec2 t)
-    {
-    p.x+=2.;
-    float r, b, l;
+vec3 sealedMan(vec2 p,vec2 t)
+{
+p.x+=2.;
+float r, b, l;
         //person--a body derived to have a head of its own
             vec2 z=p;
             for(int f=0;f<20;f+=1)if(abs(z.y)>50.&&f>4)l=1.;
@@ -676,62 +648,62 @@
                            }
                        return clamp(vec3(l+x+r+c),0.,1.);
                    }
-    vec2 jc =vec2(0.);// vec2 jc =vec2(-0.5577,- 0.6099);//you can feed in coordinates for p movement to get different cloverfields
-    vec3 tol(vec2 p, vec2 t){
-    vec2 colorAccumulator =vec2(0.);
-    vec3 heartColors = vec3(0.);
-    float cored =0.;
-    if(MetaCored)cored= log(zoom)/log(.5);
-    else cored = centralCores;
-    float c = length(p);
-    float loops=0.;
-    vec2 s=p;
-    float coresIn = 0.;
-    const float crs = 63.;
-    // if(c>4./3.){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
+vec2 jc =vec2(0.);// vec2 jc =vec2(-0.5577,- 0.6099);//you can feed in coordinates for p movement to get different cloverfields
+vec3 tol(vec2 p, vec2 t){
+ vec2 colorAccumulator =vec2(0.);
+ vec3 heartColors = vec3(0.);
+ float cored =0.;
+ if(MetaCored)cored= log(zoom)/log(.5);
+ else cored = centralCores;
+ float c = length(p);
+ float loops=0.;
+  vec2 s=p;
+  float coresIn = 0.;
+  const float crs = 63.;
+ // if(c>4./3.){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
      float centerslide = 0.;
-    if (zoom<1.)  for(int i=0;i<int(crs); i++)if(c<2./3.&&loops+centerslide<cored){
+if (zoom<1.)  for(int i=0;i<int(crs); i++)if(c<2./3.&&loops+centerslide<cored){
       if (cloverSlide)  centerslide-=length(s);
       s*=2.;c*=2.;loops++;coresIn++;}
      else break;
-    //  else if(zoom>1.)for(int i=0;i<int(crs); i++)if(c>4./3.&&loops<-cored){s/=2.;c/=2.;loops++;coresIn++;}else break;//UpCore not in use here, but rather in the starshipMod
-    for(int i=0;i<int(crs); i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
-    float lfc = length(freed(coords));
+//  else if(zoom>1.)for(int i=0;i<int(crs); i++)if(c>4./3.&&loops<-cored){s/=2.;c/=2.;loops++;coresIn++;}else break;//UpCore not in use here, but rather in the starshipMod
+for(int i=0;i<int(crs); i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
+ float lfc = length(freed(coords));
 
-    loops=0.;
-    float hyperCore=0.;
-    float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
-    if(MetaCored)hyperCore=cored*2./3.+log(lfc)*logStabilizationConstant;
-    else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
-    if(outerCoresOff)hyperCore=0.;
+ loops=0.;
+ float hyperCore=0.;
+ float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
+   if(MetaCored)hyperCore=cored*2./3.+log(lfc)*logStabilizationConstant;
+  else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
+  if(outerCoresOff)hyperCore=0.;
 
     if(Spoker&&MetaCored)hyperCore*=4./3./logStabilizationConstant;//engage overstable core if dancing
      if(morph>.5)hyperCore+=3.;
      float term=0.;
-    if (spirated!=0.)term=(lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
-    vec2 m=vec2(0.);
+ if (spirated!=0.)term=(lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
+vec2 m=vec2(0.);
 
-    //Maendel clover
-    if(wheel)m =  (p/lfc-abs(coords.yx)//try signs with for fibonacci ring pairing and movement distortion #syyym
-    )*abs(coresIn/crs*2.-1.);
-    //this is essentially just p as in the mandelbrot x <== x^2+
+//Maendel clover
+if(wheel)m =  (p/lfc-abs(coords.yx)//try signs with for fibonacci ring pairing and movement distortion #syyym
+)*abs(coresIn/crs*2.-1.);
+//this is essentially just p as in the mandelbrot x <== x^2+
 
                                 const float iterations = 40.;
                                 float refractelC=1.5;
                             //  p*=2.*refractelC;
-    vec3 oo = vec3(0.);
+vec3 oo = vec3(0.);
      float continuumCounter=0.;
 
-    vec4 starship=vec4(0.);
-    float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
-    for (float counter=0.;counter<iterations;counter++)if(length(s)<50.){
+vec4 starship=vec4(0.);
+float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
+ for (float counter=0.;counter<iterations;counter++)if(length(s)<50.){
                
      if(length(s)<2./3.||(spokesVisualizeColors&&length(s)<4./3.)) starship+= texture2D(STAR,(spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+PI
         ))/2.+.5);//doesn't remap clovers 8+
                              
      
-    if(onehundredfortyfourthousand)
-    {
+ if(onehundredfortyfourthousand)
+ {
      
      int march= int(hyperCore)%4;
      float color = 1.;
@@ -743,7 +715,7 @@
          else oo+=color*sealedWoman(s*5.,move);
      }
                               
-    }
+}
     if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*PI/(atan(s.y,s.x)-PI*spirated);
 
        colorAccumulator+=s;
@@ -758,7 +730,7 @@
 
           // if(spirated!=0.)
        s+=m-t;
-    //    else s+=t-m;//plus t is lobes, -t is circles with dance
+   //    else s+=t-m;//plus t is lobes, -t is circles with dance
        
            if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the body steps on the clover
            else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only
@@ -784,14 +756,14 @@
        float distance = length(s);
        
 
-    if(distance<4./3.&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
+   if(distance<4./3.&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
        
        
        float mcc=-1./log(.5);//cycle frequency mudulated loop counter
        
-    for(int i=0;i<20; i++)
-    if(distance<2./3.&& loops+counter-continuumCounter<hyperCore)//not sure if i is 20 or >20
-    {
+   for(int i=0;i<20; i++)
+if(distance<2./3.&& loops+counter-continuumCounter<hyperCore)//not sure if i is 20 or >20
+{
         
         bool energyField=false;
                if(energyField){//meta continualization
@@ -809,7 +781,7 @@
 
      s*=2.;distance*=2.;loops++;
 
-
+   
       float wise;
       if(mod(float(i),4.)==0.)wise=1.;
       else if(mod(float(i),4.)==1.)wise=-1.;
@@ -818,13 +790,13 @@
 
       if(metaCarousel!=0.)s=spin2(s,time*wise*metaCarousel*(1.+petals/6.)*rate);
 
-    }
+   }
     else break;
 
-    }else break;
+}else break;
 
 
-    vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
+vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                          if(colorCombo==7) o=vec3(s.y,s.x/9.5,1.-s.x/12.);
                          else if(colorCombo==2) o=vec3(s.y/100.-s.x*s.y/888.+s.y/50000.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.+s.y/50000.);
                          else if(colorCombo==3) o= vec3(s.x/8.-s.y/s.x/7000.,1.-s.x/16.,s.y/100.);
@@ -875,8 +847,8 @@
       float isBlack =1.;
       if (starship.x+starship.y+starship.z==0.&&starship.w!=0.)isBlack=0.;
       else if(starship.x==starship.y&&starship.x==starship.z&&abs(starship.z-.5)<.1&&starship.w!=0.) isBlack=.5;
-    o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+starship.z)*(starship.w*starship.w)),0.,1.)+starship.xyz*isBlack);
-    return clamp(o,0.,1.);}
+o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+starship.z)*(starship.w*starship.w)),0.,1.)+starship.xyz*isBlack);
+return clamp(o,0.,1.);}
 
                           
                           
@@ -932,7 +904,7 @@
                                return vec3(l)+vec3(c,x+c/2.,0.)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
 
 
-    vec3 robeL(vec2 g, vec2 t){
+   vec3 robeL(vec2 g, vec2 t){
          float r=0.;
          g.x*=(1.2+(coz(t.y)-1.)/2.*.2);
          g.x+=(-.45-(coz(t.y)-1.)/2.*.5);
@@ -954,15 +926,15 @@
      p.y*=-1.;
      if(colorCombo==18) p*=2.*c;
      vec2 z=p;
-    const float iterations =  21.*21.;
-    for (float f=0.;f<iterations;f+=1.)
-    if(f>(-sin(time/4.)+1.)/2.*iterations*.25+.75){if(length(z)>5.&&colorCombo!=18)break;
-    else{
-    if(colorCombo==18)if(length(z)>c)z/=c;
-    z=vec2(z.x*z.x-z.y*z.y-p.x+t.x, 2.0*z.x*z.y-p.y+t.y);//this is {s=s^2-p}
-    }}
-
-    return (vec3(z.x*z.y,z.x+.2,z.y-.3*(1.-p.x))+.3)/length(z);
+const float iterations =  21.*21.;
+for (float f=0.;f<iterations;f+=1.)
+if(f>(-sin(time/4.)+1.)/2.*iterations*.25+.75){if(length(z)>5.&&colorCombo!=18)break;
+else{
+if(colorCombo==18)if(length(z)>c)z/=c;
+z=vec2(z.x*z.x-z.y*z.y-p.x+t.x, 2.0*z.x*z.y-p.y+t.y);//this is {s=s^2-p}
+}}
+  
+return (vec3(z.x*z.y,z.x+.2,z.y-.3*(1.-p.x))+.3)/length(z);
 
      
      }
@@ -1091,7 +1063,7 @@
 
 
 
-    const float brideSize = 12.;
+const float brideSize = 12.;
 
 
             vec3 bride(vec2 p,vec2 t){
@@ -1132,7 +1104,7 @@
                        for (int f=0;f<4;f+=1)if(abs(z.x+z.y)>20.)break;
                        else {z=vec2((1./(z.x*z.x-z.y*z.y)-g.x-t.x/4.),(4.0*z.x*z.y-g.y-t.y/4.));
                              if(f>2)e+=0.3;}
-    }
+}
 
       return vec3(l+c,l+x+c,l+c)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
 
@@ -1428,31 +1400,31 @@
                           ox(p+vec2(spacing.x,-spacing.y),vec2(inversion,0.))+body((p+vec2(spacing.x,-spacing.y))*3.,t)+
                           man(p-spacing,vec2(inversion,0.))+body((p-spacing)*3.,t)  ;
               }
-
+ 
       //function library: manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin x
 
       //function library: manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin
-    void main(){
-    vec2 p=-((vUv.yx)-.5)/(resolution.xy/max(resolution.x,resolution.y))*shaderScale/2.;
+void main(){
+ vec2 p=-((vUv.yx)-.5)/(resolution.xy/max(resolution.x,resolution.y))*shaderScale/2.;
 
 
-    spunC=coords.yx;
+  spunC=coords.yx;
 
-    if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time*rate,PI*2.));}
-    vec2 backGround=freed(p*zoom+spunC);
-    if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time*rate,PI*2.));
+ if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time*rate,PI*2.));}
+ vec2 backGround=freed(p*zoom+spunC);
+ if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time*rate,PI*2.));
 
                        backGround=spin2(backGround,atan(backGround.y,backGround.x)*petals/6.);
                        //p.x+=.5;
 
 
-    vec2 dance = vec2(0.);
+vec2 dance = vec2(0.);
                                        vec2 dance2 = vec2(0.);
 
-    if (morph>.5 && colorCombo>=10)  dance=vec2(-sin(time+time2dance),
+if (morph>.5 && colorCombo>=10)  dance=vec2(-sin(time+time2dance),
                                             -sin((time+time2dance)*-1.618))*zoom+(spunC.yx+.5)*log(pow(zoom,1.618))/log(1.618)*zoom*.5;//a lot of these coords should probably be spunC
 
-    else if (morph>.5&&(colorCombo<10||colorCombo==14)){float lfc=length(freed(coords));
+else if (morph>.5&&(colorCombo<10||colorCombo==14)){float lfc=length(freed(coords));
                                        dance2 = vec2(
                                                -abs(lfc/(lfc-zoom)) -lfc/(lfc+zoom)*2./3.,
                                          -((zoom*lfc)/(lfc+zoom)*sign(coords.y)*sign(coords.x)*(1.-lfc*zoom) )
@@ -1526,7 +1498,7 @@
                    else if (Character==6)mny=man(fourcreaturePlayerP,vec2(inversion,0.))+body(characterP,moveDynamic);
 
     }
-    vec3 ARTICLES=vec3(0.);
+vec3 ARTICLES=vec3(0.);
         if(articles){
                 ARTICLES += sword(characterP+vec2(swordSkew,0.),vec2(0.));
                 ARTICLES+=scroll(characterP+1.5*vec2(0.,resolution.x/min(resolution.x,resolution.y)),vec2(-1.));
@@ -1534,11 +1506,11 @@
                 ARTICLES+=clamp(lamp(characterP,vec2(-1.))-(SWORD.r+SWORD.g+SWORD.b)*1000000.,0.,1.);
         }
                                                      mny=clamp(mny,0.,1.);
-    vec4 starship = texture2D(STAR,vUv);
-    float isBlack =1.;
-    if (starship.x+starship.y+starship.z==0.&&starship.w!=0.)isBlack=0.;
-    else if(starship.x==starship.y&&starship.x==starship.z&&abs(starship.z-.5)<.1&&starship.w!=0.) isBlack=.5;
-    gl_FragColor=vec4((clamp(mny+starship.xyz-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge+
+vec4 starship = texture2D(STAR,vUv);
+float isBlack =1.;
+if (starship.x+starship.y+starship.z==0.&&starship.w!=0.)isBlack=0.;
+ else if(starship.x==starship.y&&starship.x==starship.z&&abs(starship.z-.5)<.1&&starship.w!=0.) isBlack=.5;
+gl_FragColor=vec4((clamp(mny+starship.xyz-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge+
                   clamp(clamp(cloud+
                                     zoomer+2.*heart(p,-move)
                               -(starship.x+starship.y+starship.z)*(starship.w*starship.w)
@@ -1547,39 +1519,23 @@
           ,1.
                   );}
                                                      
+     /*
+      gl_FragColor=vec4(mny+creatures+b+bridge+heart((p+vec2(.5,0.))/2.,move)+
+                        clamp((zoomer)-(m.r+m.b+m.g+creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*100.,.0,1.)
+                ,1.);}
+      
+      */
     </script>
 
-    
-    
-        
-        
-        </head>
-        <body>
-        
-        
+    <script src="OFFLINEonlineSwitch.js"></script>
+    <div id="container"></div>
 
-        
-        <script>let n = document.getElementsByName('t');
-            for(var p = 0; p<n.length;p++)n[p].checked  = false; </script>
-        
-        <div class=onofflineBG id="background_wrap">
-            <script>
-                //splash
-                let nf = document.querySelectorAll('.onofflineBG');
-                if(window.online)
-                {
-                    if(Date.now()%2==1) nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6/z1xlogo.png');"
-                    else nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/pentaloctalwtTtlzonexmonogram.jpeg');"
-               }
-                else
-                {
-                    if(Date.now()%2==1)nf[0].style = "background-image: url('z1xlogo.png');"
-                    else nf[0].style = "background-image: url('pentaloctalwtTtlzonexmonogram.jpeg');"
-                    }
-            </script>
-        </div>
-        
-        
+    <script src="starshipMod.js"></script>
+
+    </head>
+    <body>
+    
+
     <div id="score">
     <script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
     <div id="osmdCanvas"/>
@@ -1593,7 +1549,35 @@
     </div id="score">
     
 
+      <script>let n = document.getElementsByName('t');
+          for(var p = 0; p<n.length;p++)n[p].checked  = false; </script>
       
+      <div class=onofflineBG id="background_wrap">
+          <script>
+              //splash
+              let nf = document.querySelectorAll('.onofflineBG');
+              if(window.online)
+              {
+                  if(Date.now()%2==1) nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6/z1xlogo.png');"
+                  else nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/pentaloctalwtTtlzonexmonogram.jpeg');"
+             }
+              else
+              {
+                  if(Date.now()%2==1)nf[0].style = "background-image: url('z1xlogo.png');"
+                  else nf[0].style = "background-image: url('pentaloctalwtTtlzonexmonogram.jpeg');"
+                  }
+          </script>
+      </div>
+      
+
+
+
+
+<!-- starship mod reloads the application, must be called before loading these -->
+<script id="threeJSscript" async></script>
+<script id="wadJSscript"></script>
+<script src="wadLoader.js"></script>
+<script src="threeJSLoader.js" async></script>
 
 
     </body>
