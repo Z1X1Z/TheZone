@@ -366,9 +366,6 @@
         </head>
         <body>
         
-
-        
-        
     <div id="score">
     <script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
     <div id="osmdCanvas"/>
@@ -377,7 +374,7 @@
 
     <output id="list"></output>
 
-    <script src="fileSelectAndLoadOSMD.js"></script>
+    <script src="fileSelectAndLoadOSMD.js" async></script>
 
     </div id="score">
     
@@ -424,7 +421,7 @@
         
         
         
-    <script id="vertexShader" type="x-shader/x-vertex" defer>
+    <script id="vertexShader" type="x-shader/x-vertex">
 
     varying vec2 vUv;
 
@@ -436,7 +433,7 @@
     </script>
 
 
-    <script id="fragmentShader" type="x-shader/x-fragment" defer>
+    <script id="fragmentShader" type="x-shader/x-fragment">
 
         varying vec2 vUv;
         uniform bool helm;
