@@ -359,14 +359,14 @@
             </div>
 
             
-            <script src="OFFLINEonlineSwitch.js"></script>
+            <script src="OFFLINEonlineSwitch.js" ></script>
             <div id="container"></div>
 
-            <script src="starshipMod.js" async></script>
+            <script src="starshipMod.js" dynamic></script>
 
             
 
-    <script id="vertexShader" type="x-shader/x-vertex">
+    <script id="vertexShader" type="x-shader/x-vertex" dynamic>
 
             varying vec2 vUv;
 
@@ -377,7 +377,7 @@
         }
     </script>
 
-    <script id="fragmentShader" type="x-shader/x-fragment">
+    <script id="fragmentShader" type="x-shader/x-fragment" dynamic>
 
         varying vec2 vUv;
         uniform bool helm;
