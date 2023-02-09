@@ -82,7 +82,7 @@ var rez = window.devicePixelRatio*rez;
                                 this.array = null;
 
                             }
-            let container = document.getElementById( 'container' );
+            let container;
 
 
 var zoomOutEngage=false;
@@ -368,6 +368,7 @@ let uniforms;
                        
                        
 function init() {
+    container = document.getElementById( 'container' );
     renderTarget = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
                                                Math.min(window.innerWidth,window.innerHeight)*4./3.);
 
@@ -471,7 +472,6 @@ dotted:{value:false},
 
     onWindowResize()
 }
-       let correlationForText= document.getElementById("allText").offsetHeight;;
 function adjustThreeJSWindow()
 {
     
