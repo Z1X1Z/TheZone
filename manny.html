@@ -43,13 +43,12 @@
     if (window.online)cdnSwitchThree="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js";
     loadScript("threeJSscript",cdnSwitchThree,"three.js")</script>
 
-
+<div id = "soundTouchArea">
 <script id="wadJSscript" async></script>
 <script async>
 var cdnSwitchWAD="wad.min.js";
 if (window.online)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0";
 loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")</script>
-
     </script>
 <script src="wadLoader.js" dynamic> </script>
 
@@ -418,7 +417,7 @@ loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")</script>
         for(var p = 0; p<n.length;p++)n[p].checked  = false; </script>
     
     
-    <div id="container"></div>
+    <div id="container"></div></div id = "soundTouchArea">
     
 
 
