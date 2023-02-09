@@ -1587,7 +1587,13 @@ window.touchOnlyMode=false;
 
 async function startMic() {
   //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
-    navigator.mediaDevices.getUserMedia({audio: true})
+    navigator.mediaDevices.getUserMedia({
+    audio: true,
+        
+    autoGainControl: false,
+    echoCancellation: false,
+    noiseSuppression: false//https://stackoverflow.com/questions/71978189/lag-when-playing-mic-audio-directly-to-output-using-web-audio-api
+    })
   .then((stream) => {
     /* use the stream */
 
