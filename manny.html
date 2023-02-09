@@ -15,7 +15,47 @@
 
     </head>
     <body>
-    
+        
+        
+        <script src="OFFLINEonlineSwitch.js"></script>
+
+        <div id="score">
+        <script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
+        <div id="osmdCanvas"/>
+
+        <input type="file" id="files"/>
+
+        <output id="list"></output>
+
+        <script src="fileSelectAndLoadOSMD.js" async></script>
+
+        </div id="score">
+        
+
+          <div class=onofflineBG id="background_wrap">
+              <script>
+                  //splash
+                  let nf = document.querySelectorAll('.onofflineBG');
+                  if(window.online)
+                  {
+                      if(Date.now()%2==1) nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6/z1xlogo.png');"
+                      else nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/pentaloctalwtTtlzonexmonogram.jpeg');"
+                 }
+                  else
+                  {
+                      if(Date.now()%2==1)nf[0].style = "background-image: url('z1xlogo.png');"
+                      else nf[0].style = "background-image: url('pentaloctalwtTtlzonexmonogram.jpeg');"
+                      }
+              </script>
+          </div>
+          
+
+    <script>window.sessionStorage.setItem("alreadyReset","t");//disable reloader,to renable remove this line and restore one in threeJSloader.js</script>
+    <script id="threeJSscript" async></script>
+    <script id="wadJSscript" async></script>
+    <script src="wadLoader.js" dynamic> </script>
+    <script src="threeJSLoader.js" async></script>
+
     
     <div id="allText">
         <div id="HK"></div>
@@ -373,57 +413,16 @@
     
     
     
+    <script>let n = document.getElementsByName('t');
+        for(var p = 0; p<n.length;p++)n[p].checked  = false; </script>
     
     
-    
-    
-    
-    
-    <script src="OFFLINEonlineSwitch.js"></script>
-
     <div id="container"></div>
 
-    <div id="score">
-    <script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
-    <div id="osmdCanvas"/>
-
-    <input type="file" id="files"/>
-
-    <output id="list"></output>
-
-    <script src="fileSelectAndLoadOSMD.js" async></script>
-
-    </div id="score">
     
-
-      <script>let n = document.getElementsByName('t');
-          for(var p = 0; p<n.length;p++)n[p].checked  = false; </script>
-      
-      <div class=onofflineBG id="background_wrap">
-          <script>
-              //splash
-              let nf = document.querySelectorAll('.onofflineBG');
-              if(window.online)
-              {
-                  if(Date.now()%2==1) nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6/z1xlogo.png');"
-                  else nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/pentaloctalwtTtlzonexmonogram.jpeg');"
-             }
-              else
-              {
-                  if(Date.now()%2==1)nf[0].style = "background-image: url('z1xlogo.png');"
-                  else nf[0].style = "background-image: url('pentaloctalwtTtlzonexmonogram.jpeg');"
-                  }
-          </script>
-      </div>
-      
-
-<script>window.sessionStorage.setItem("alreadyReset","t");//disable reloader,to renable remove this line and restore one in threeJSloader.js</script>
-<script id="threeJSscript" async></script>
-<script id="wadJSscript" async></script>
-<script src="wadLoader.js" dynamic> </script>
-<script src="threeJSLoader.js" async></script>
-
-<script id="vertexShader" type="x-shader/x-vertex" dynamic>
+    
+    
+<script id="vertexShader" type="x-shader/x-vertex" defer>
 
         varying vec2 vUv;
 
@@ -434,7 +433,7 @@
     }
 </script>
 
-<script id="fragmentShader" type="x-shader/x-fragment" dynamic>
+<script id="fragmentShader" type="x-shader/x-fragment" defer>
 
     varying vec2 vUv;
     uniform bool helm;
