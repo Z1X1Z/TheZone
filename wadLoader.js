@@ -107,7 +107,7 @@ function followSound(e){
 
 }
                                                              let cycle=0;
-let c = document.getElementById("soundTouchArea");
+let c = document.getElementById("container");
 
 if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)){
     container.addEventListener('touchstart', function(e)
