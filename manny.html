@@ -34,20 +34,22 @@
             }
           </script>
         
-<script id="threeJSscript" dynamic></script>
+<script id="threeJSscript"></script>
 <script>
     var cdnSwitchThree="three.js";
     if (window.online)cdnSwitchThree="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js";
-    loadScript("threeJSscript",cdnSwitchThree,"three.js")</script>
+    loadScript("threeJSscript",cdnSwitchThree,"three.js")
+</script>
 
-<script id="wadJSscript" dynamic></script>
+<script id="wadJSscript"></script>
 <script>
-var cdnSwitchWAD="wad.min.js";
-if (window.online)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0";
-loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")</script>
+    var cdnSwitchWAD="wad.min.js";
+    if (window.online)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0";
+    loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")
+</script>
 
 
-<script id="osmdJS" dynamic></script> <!-- you need to provide the .js file, see README.md-->
+<script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
 <script>
     var cdnOSMD="opensheetmusicdisplay.min.js";
     if (window.online)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.6.1/build/opensheetmusicdisplay.min.js";
