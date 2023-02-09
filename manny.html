@@ -407,12 +407,12 @@
     
 <script>                      window.sessionStorage.setItem('alreadyReset', "t");//turn off reloader</script>
 
-<script id="threeJSscript"></script>
-<script id="wadJSscript"></script>
-<script src="wadLoader.js"></script>
+<script id="threeJSscript" defer></script>
+<script id="wadJSscript" defer></script>
+<script src="wadLoader.js" dynamic></script>
 <script src="threeJSLoader.js" async></script>
 
-<script id="vertexShader" type="x-shader/x-vertex">
+<script id="vertexShader" type="x-shader/x-vertex" defer>
 
         varying vec2 vUv;
 
@@ -423,7 +423,7 @@
     }
 </script>
 
-<script id="fragmentShader" type="x-shader/x-fragment">
+<script id="fragmentShader" type="x-shader/x-fragment" defer>
 
     varying vec2 vUv;
     uniform bool helm;
