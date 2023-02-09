@@ -472,7 +472,7 @@
     
     <div id="container"></div>
     
-    <script src="wadLoader.js" dynamic> </script>
+    <script src="wadLoader.js"> </script>
 
     <div id="score">
         <div id="osmdCanvas"/>
@@ -483,7 +483,7 @@
     
     
     
-<script id="vertexShader" type="x-shader/x-vertex">
+<script id="vertexShader" type="x-shader/x-vertex" defer>
 
         varying vec2 vUv;
 
@@ -494,7 +494,7 @@
     }
 </script>
 
-<script id="fragmentShader" type="x-shader/x-fragment">
+<script id="fragmentShader" type="x-shader/x-fragment" defer>
 
     varying vec2 vUv;
     uniform bool helm;
