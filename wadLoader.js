@@ -1,21 +1,5 @@
 
 let touchNumber=new Map();
-let unerrored = true;
-function loadScript(url, callback)
-{
-    var script = document.getElementById('wadJSscript');//document.createElement("script");//
-    script.type = 'application/javascript';
-    script.src = url;
-    // Then bind the event to the callback function.
-    // There are several events for cross browser compatibility.
-    //script.onreadystatechange =  callback;
-    //script.onload = callback;
-    script.onerror=function(){    var s = document.createElement("script");//document.getElementById('threeJSscript');
-        s.type = 'text/javascript';
-        s.src = "wad.min.js";
-        document.body.appendChild(s);
-        }
-}
 
 function stallTillWad(){if(typeof Wad=="function"){initialize();} else  setTimeout(stallTillWad,10);}
 stallTillWad()//lurker
@@ -54,11 +38,6 @@ function initialize(){
        }
     catch{
 }
-}
-
-var cdnSwitch="wad.min.js";
-if ( window.sessionStorage.getItem("alreadyReset")=="t"){if (window.online)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0";
-loadScript(cdnSwitch,initialize);
 }
 
 let initialAngleSound = Array(10);
