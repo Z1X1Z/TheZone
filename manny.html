@@ -3,371 +3,394 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <script src="starshipMod.js" async></script>
 
         <title>Manny~Zone:X</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="main.css">
-            <div id="allText">
-                <div id="HK"></div>
-                <div id="textWindow"></div>
-            <script src="hotkeys.js"></script>
-
-
-
-            <div class="navbar">
-                <div class="dropdown">
-                  <button class="dropbtn">Starship
-                    <i class="fa fa-caret-down"></i>
-                  </button>
-                  <div class="dropdown-content">
-                      <input type="checkbox" id="Game On" name="t"  onclick= "
-                          key  = 'e';
-                          callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                       <label for="Game On">Game On!</label><br>
-                      <input type="checkbox" id="Star Arms" name="t"  onclick= "
-                          key  = '_';
-                          callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                       <label for="Star Arms">Star Arms!</label><br>
-                       <input type="checkbox" id="Fullscreen" name="t"  onclick= "
-                           key  = 'h';
-                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                        <label for="Fullscreen">Fullscreen!</label><br>
-                        <input type="checkbox" id="Verbose" name="t"  onclick= "
-                            key  = 'v';
-                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                         <label for="Verbose">Verbose!</label><br>
-                       <input type="checkbox" id="Volume Speed" name="t"  onclick= "
-                           key  = 'w';
-                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                        <label for="Volume Speed">Volume Speed!</label><br>
-
-                      <input type="checkbox" id="Touch" name="t"  onclick= "
-                          key  = 't';
-                          callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                       <label for="Touch">Touch!</label><br>
-                       
-                       <input type="checkbox" id="Note Stars" name="t"  onclick= "
-                           key  = 'P';
-                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                        <label for="Note Stars">Note Stars!</label><br>
-                        
-                        <input type="checkbox" id="StarClover" name="t"  onclick= "
-                            key  = 'O';
-                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                         <label for="StarClover">Star in Clover!</label><br>
-                         
-                         
-                         <input type="checkbox" id="TrailOverflowsClover" name="t"  onclick= "
-                             key  = 'Z';
-                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                          <label for="TrailOverflowsClover">Trail overflows clover!</label><br>
-                        
-                       <a id="Star Stream" name="t"  onclick= "
-
-                           key  = 'V';
-                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                           Star Stream!</a><br>
-                       
-                       <a id="Clockwise Spin" name="t"  onclick= "
-
-                           key  = 'D';
-                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                           Clockwise Spin!</a><br>
-                       
-                       <a id="Counter Clockwise Spin" name="t"  onclick= "
-
-                           key  = 'A';
-                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                           Counter Clockwise Spin!</a><br>
-                       
-                       <a id="Shift Up" name="t"  onclick= "
-
-                           key  = 'W';
-                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                           Shift Up!</a><br>
-                       <a id="Shift Down" name="t"  onclick= "
-
-                           key  = 'S';
-                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                           Shift Down!</a><br>
-                       <a id="Star Spin" name="t"  onclick= "
-
-                           key  = 'Q';
-                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                           Star Spin!</a><br>
-                       
-                       
-                       <a id="Cancel Background Noise" name="t"  onclick= "
-
-                           key  = 'p';
-                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                           Cancel Background Noise!</a><br>
-                       
-                       
-                       <a id="Listen Out" name="t"  onclick= "
-                           key  = 'o';
-                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                       listen Out!</a><br>
-                       <a id="Listen In" name="t"  onclick= "
-                           key  = 'i';
-                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                       listen In!</a><br>
-
-
-                       <a id="Faster" name="t"  onclick= "
-                           key  = '+';
-                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                       Faster!</a><br>
-                       <a id="Slower" name="t"  onclick= "
-                           key  = '-';
-                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                       Slower!</a><br>
-                       <a id="Reset Speed" name="t"  onclick= "
-                           key  = '0';
-                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                       Reset Speed!</a><br>
-
-                  </div>
-                  </div>
-                <div class="dropdown">
-                  <button class="dropbtn">Clovers
-                    <i class="fa fa-caret-down"></i>
-                  </button>
-                  <div class="dropdown-content">
-
-                         <a id="Add a petal" name="t"  onclick= "
-                             key  = 'u';
-                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                         Add a petal!</a><br>
-                         <a id="Remove a petal" name="t"  onclick= "
-                             key  = 'y';
-                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                         Remove a petal!</a><br>
-                        <input type="checkbox" id="Center" name="t"  onclick= "
-                            key  = 'c';
-                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                         <label for="Center">Center</label><br>
-                         <input type="checkbox" id="Zoom Static" name="t"  onclick= "
-                             key  = 'l';
-                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                          <label for="Zoom Static">Zoom Static</label><br>
-                          <input type="checkbox" id="Clovers Pop" name="t"  onclick= "
-                              key  = 'n';
-                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                           <label for="Clovers Pop">Clovers Pop?!</label><br>
-                           
-                           <input type="checkbox" id="Clovers Slide" name="t"  onclick= "
-                               key  = 'H';
-                               callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                            <label for="Clovers Slide">Clovers Slide!</label><br>
-                            
-                            <input type="checkbox" id="Dancer" name="t"  onclick= "
-                               key  = 's';
-                               callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                            <label for="Dancer">Dancer!</label><br>
-
-                                 <input type="checkbox" id="Reverse Colors" name="t"  onclick= "
-                                     key  = ';';
-                                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                  <label for="Reverse Colors">Reverse Colors!</label><br>
-
-                                  <input type="checkbox" id="Remediate Colors" name="t"  onclick= "
-                                      key  = 'R';
-                                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                   <label for="Remediate Colors">Remediate Colors!</label><br>
-
-                                   <input type="checkbox" id="Inherited Colors" name="t"  onclick= "
-                                       key  = 'K';
-                                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                    <label for="Inherited Colors">Inherited Colors!</label><br>
-
-
-
-                                   <input type="checkbox" id="Refractelate" name="t"  onclick= "
-                                       key  = '!';
-                                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                    <label for="Refractelate">Refractelate!</label><br>
-
-
-                                    <input type="checkbox" id="Clovoid" name="t"  onclick= "
-                                        key  = '@';
-                                        callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                     <label for="Clovoid">Clovoid!</label><br>
-                                     
-                                     <input type="checkbox" id="144000" name="t"  onclick= "
-                                         key  = 'J';
-                                         callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                      <label for="Clovoid">144000!</label><br>
-                                      <input type="checkbox" id="Spoker" name="t"  onclick= "
-                                          key  = 'T';
-                                          callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                       <label for="Spoker">Spoker!</label><br>
-                                       <input type="checkbox" id="SpokeLove" name="t"  onclick= "
-                                           key  = 'F';
-                                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                        <label for="SpokeLove">Spoke Love!</label><br>
-                                        
-                                        <input type="checkbox" id="Continuum Clover" name="t"  onclick= "
-                                            key  = '&';
-                                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                         <label for="Continuum Clover">Continuum Clover!</label><br>
-                                         
-                                         
-                                         
-                        <form>
-
-                              <input type="radio" id="OriginalOrange" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=7;">
-                              <label for="OriginalOrange">Original Orange!</label><br>
-                          <input type="radio" id="GreenAndPink" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=2;">
-                          <label for="GreenAndPink">Green and Pink!</label><br>
-                          <input type="radio" id="OddOrange" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=3;">
-                          <label for="OddOrange">Odd Orange!</label><br>
-                          <input type="radio" id="YellowAndPurple" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=4;">
-                          <label for="YellowAndPurple">Yellow and Purple!</label><br>
-
-                          <input type="radio" id="BlueAndPink" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=5;">
-                          <label for="BlueAndPink">Blue and Pink!</label><br>
-
-                          <input type="radio" id="Glowing" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=6;">
-                          <label for="Glowing">Glowing!</label><br>
-
-                            <input type="radio" id="Rainbow" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=1;">
-                            <label for="Rainbow">Rainbow!</label><br>
-
-                              <input type="radio" id="Inheritance" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=8;">
-                              <label for="Inheritance">Inheritance!</label><br>
-                        </form>
-
-                        <br>
-
-
-                        <form>
-                          <input type="radio" id="Up" name="carousel" onclick="uniforms[ 'carousel' ].value=-1;">
-                          <label for="Up">Carousel Up!</label><br>
-                          <input type="radio" id="Down" name="carousel" onclick="uniforms[ 'carousel' ].value=1;">
-                          <label for="Down">Carousel Down!</label><br>
-                          <input type="radio" id="Off" name="carousel" onclick="uniforms[ 'carousel' ].value=0;">
-                          <label for="Off">Carousel Off</label>
-
-                        </form>
-                        <br>
-
-                        <form>
-                          <input type="radio" id="mUp" name="mcarousel" onclick="uniforms[ 'metaCarousel' ].value=-1;">
-                          <label for="mUp">Meta-Carousel Wise One!</label><br>
-                          <input type="radio" id="mDown" name="mcarousel" onclick="uniforms[ 'metaCarousel' ].value=1;">
-                          <label for="mDown">Meta-Carousel Wise 2!</label><br>
-                          <input type="radio" id="mOff" name="mcarousel" onclick="uniforms[ 'metaCarousel' ].value=0;">
-                          <label for="mOff">Meta-Carousel Off</label>
-                        </form>
-                        <br>
-
-                    <form>
-                      <input type="radio" id="SpirallizeOriginal" name="Spirallize" onclick="uniforms[ 'spirated' ].value=1;">
-                      <label for="SpirallizeOriginal">Spirallize Original!</label><br>
-                      <input type="radio" id="SpirallizeMirror" name="Spirallize" onclick="uniforms[ 'spirated' ].value=-1;">
-                      <label for="SpirallizeMirror">Spirallize Mirror!</label><br>
-                      <input type="radio" id="SpirallizeOff" name="Spirallize" onclick="uniforms[ 'spirated' ].value=0;">
-                      <label for="SpirallizeOff">Spirallize Off</label>
-
-                    </form>
-
-                              </div>
-                </div>
-                
-                <div class="dropdown">
-                  <button class="dropbtn">Extras
-                    <i class="fa fa-caret-down"></i>
-                  </button>
-                  <div class="dropdown-content">
-                       <input type="checkbox" id="Friends" name="t"  onclick= "
-                           key  = 'f';
-                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                        <label for="Friends">Friends!</label><br>
-                        <input type="checkbox" id="Bridge" name="t"  onclick= "
-                            key  = 'z';
-                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                         <label for="Bridge">Bridge!</label><br>
-                         <input type="checkbox" id="Wheel" name="t"  onclick= "
-                             key  = 'm';
-                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                          <label for="Wheel">Wheel!</label><br>
-                          
-                          <input type="checkbox" id="Articles" name="t"  onclick= "
-                              key  = 'G';
-                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                           <label for="Articles">Articles!</label><br>
-                           
-                           <input type="checkbox" id="Blank Background" name="t"  onclick= "
-                               key  = 'Y';
-                               callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                            <label for="Blank Background">Blank Background!</label><br>
-                           
-                         <a id="Cycle Character" name="t"  onclick= "
-                             key  = 'U';
-                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                             Cycle character!</a><br>
-                         
-                         <a id="Metronome Up" name="t"  onclick= "
-                             key  = '.';
-                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                             Metronome Up!</a><br>
-
-                         <a id="Metronome Down" name="t"  onclick= "
-                             key  = ',';
-                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                             Metronome Down!</a><br>
-
-                          <a id="Manny" name="t"  onclick= "
-                              key  = 'g';
-                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                              Manny!</a><br>
-
-
-                          <a id="Acrostic" name="t"  onclick= "
-                              key  = '$';
-                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                              Acrostic!</a><br>
-
-                           <a id="ToLToK" name="t"  onclick= "
-                               key  = 'd';
-                               callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                               ToLToK!</a><br>
-
-                            <a id="Mandelbrot" name="t"  onclick= "
-                                key  = 'a';
-                                callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                Mandelbrot!</a><br>
-
-                             <a id="Refractelbrot" name="t"  onclick= "
-                                 key  = 'r';
-                                 callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                 Refractelbrot!</a><br>
-
-                   <a id="XSquared" name="t"  onclick= "
-                       key  = 'x';
-                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                       XSquared!</a><br>
-
-                 <a id="ToLX" name="t"  onclick= "
-                     key  = 'b';
-                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                     ToLX!</a><br>
-                </div>
-            </div>
-            </div>
-            </div>
-
-
-
+            
+            <script src="starshipMod.js" async></script>
 
     <script src="OFFLINEonlineSwitch.js"></script>
 
 
     </head>
     <body>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div id="allText">
+        <div id="HK"></div>
+        <div id="textWindow"></div>
+    <script src="hotkeys.js"></script>
+
+
+
+    <div class="navbar">
+        <div class="dropdown">
+          <button class="dropbtn">Starship
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+              <input type="checkbox" id="Game On" name="t"  onclick= "
+                  key  = 'e';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+               <label for="Game On">Game On!</label><br>
+              <input type="checkbox" id="Star Arms" name="t"  onclick= "
+                  key  = '_';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+               <label for="Star Arms">Star Arms!</label><br>
+               <input type="checkbox" id="Fullscreen" name="t"  onclick= "
+                   key  = 'h';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                <label for="Fullscreen">Fullscreen!</label><br>
+                <input type="checkbox" id="Verbose" name="t"  onclick= "
+                    key  = 'v';
+                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                 <label for="Verbose">Verbose!</label><br>
+               <input type="checkbox" id="Volume Speed" name="t"  onclick= "
+                   key  = 'w';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                <label for="Volume Speed">Volume Speed!</label><br>
+
+              <input type="checkbox" id="Touch" name="t"  onclick= "
+                  key  = 't';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+               <label for="Touch">Touch!</label><br>
+               
+               <input type="checkbox" id="Note Stars" name="t"  onclick= "
+                   key  = 'P';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                <label for="Note Stars">Note Stars!</label><br>
+                
+                <input type="checkbox" id="StarClover" name="t"  onclick= "
+                    key  = 'O';
+                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                 <label for="StarClover">Star in Clover!</label><br>
+                 
+                 
+                 <input type="checkbox" id="TrailOverflowsClover" name="t"  onclick= "
+                     key  = 'Z';
+                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                  <label for="TrailOverflowsClover">Trail overflows clover!</label><br>
+                
+               <a id="Star Stream" name="t"  onclick= "
+
+                   key  = 'V';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                   Star Stream!</a><br>
+               
+               <a id="Clockwise Spin" name="t"  onclick= "
+
+                   key  = 'D';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                   Clockwise Spin!</a><br>
+               
+               <a id="Counter Clockwise Spin" name="t"  onclick= "
+
+                   key  = 'A';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                   Counter Clockwise Spin!</a><br>
+               
+               <a id="Shift Up" name="t"  onclick= "
+
+                   key  = 'W';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                   Shift Up!</a><br>
+               <a id="Shift Down" name="t"  onclick= "
+
+                   key  = 'S';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                   Shift Down!</a><br>
+               <a id="Star Spin" name="t"  onclick= "
+
+                   key  = 'Q';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                   Star Spin!</a><br>
+               
+               
+               <a id="Cancel Background Noise" name="t"  onclick= "
+
+                   key  = 'p';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                   Cancel Background Noise!</a><br>
+               
+               
+               <a id="Listen Out" name="t"  onclick= "
+                   key  = 'o';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+               listen Out!</a><br>
+               <a id="Listen In" name="t"  onclick= "
+                   key  = 'i';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+               listen In!</a><br>
+
+
+               <a id="Faster" name="t"  onclick= "
+                   key  = '+';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+               Faster!</a><br>
+               <a id="Slower" name="t"  onclick= "
+                   key  = '-';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+               Slower!</a><br>
+               <a id="Reset Speed" name="t"  onclick= "
+                   key  = '0';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+               Reset Speed!</a><br>
+
+          </div>
+          </div>
+        <div class="dropdown">
+          <button class="dropbtn">Clovers
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+
+                 <a id="Add a petal" name="t"  onclick= "
+                     key  = 'u';
+                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                 Add a petal!</a><br>
+                 <a id="Remove a petal" name="t"  onclick= "
+                     key  = 'y';
+                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                 Remove a petal!</a><br>
+                <input type="checkbox" id="Center" name="t"  onclick= "
+                    key  = 'c';
+                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                 <label for="Center">Center</label><br>
+                 <input type="checkbox" id="Zoom Static" name="t"  onclick= "
+                     key  = 'l';
+                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                  <label for="Zoom Static">Zoom Static</label><br>
+                  <input type="checkbox" id="Clovers Pop" name="t"  onclick= "
+                      key  = 'n';
+                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                   <label for="Clovers Pop">Clovers Pop?!</label><br>
+                   
+                   <input type="checkbox" id="Clovers Slide" name="t"  onclick= "
+                       key  = 'H';
+                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                    <label for="Clovers Slide">Clovers Slide!</label><br>
+                    
+                    <input type="checkbox" id="Dancer" name="t"  onclick= "
+                       key  = 's';
+                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                    <label for="Dancer">Dancer!</label><br>
+
+                         <input type="checkbox" id="Reverse Colors" name="t"  onclick= "
+                             key  = ';';
+                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                          <label for="Reverse Colors">Reverse Colors!</label><br>
+
+                          <input type="checkbox" id="Remediate Colors" name="t"  onclick= "
+                              key  = 'R';
+                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                           <label for="Remediate Colors">Remediate Colors!</label><br>
+
+                           <input type="checkbox" id="Inherited Colors" name="t"  onclick= "
+                               key  = 'K';
+                               callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                            <label for="Inherited Colors">Inherited Colors!</label><br>
+
+
+
+                           <input type="checkbox" id="Refractelate" name="t"  onclick= "
+                               key  = '!';
+                               callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                            <label for="Refractelate">Refractelate!</label><br>
+
+
+                            <input type="checkbox" id="Clovoid" name="t"  onclick= "
+                                key  = '@';
+                                callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                             <label for="Clovoid">Clovoid!</label><br>
+                             
+                             <input type="checkbox" id="144000" name="t"  onclick= "
+                                 key  = 'J';
+                                 callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                              <label for="Clovoid">144000!</label><br>
+                              <input type="checkbox" id="Spoker" name="t"  onclick= "
+                                  key  = 'T';
+                                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                               <label for="Spoker">Spoker!</label><br>
+                               <input type="checkbox" id="SpokeLove" name="t"  onclick= "
+                                   key  = 'F';
+                                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                                <label for="SpokeLove">Spoke Love!</label><br>
+                                
+                                <input type="checkbox" id="Continuum Clover" name="t"  onclick= "
+                                    key  = '&';
+                                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                                 <label for="Continuum Clover">Continuum Clover!</label><br>
+                                 
+                                 
+                                 
+                <form>
+
+                      <input type="radio" id="OriginalOrange" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=7;">
+                      <label for="OriginalOrange">Original Orange!</label><br>
+                  <input type="radio" id="GreenAndPink" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=2;">
+                  <label for="GreenAndPink">Green and Pink!</label><br>
+                  <input type="radio" id="OddOrange" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=3;">
+                  <label for="OddOrange">Odd Orange!</label><br>
+                  <input type="radio" id="YellowAndPurple" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=4;">
+                  <label for="YellowAndPurple">Yellow and Purple!</label><br>
+
+                  <input type="radio" id="BlueAndPink" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=5;">
+                  <label for="BlueAndPink">Blue and Pink!</label><br>
+
+                  <input type="radio" id="Glowing" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=6;">
+                  <label for="Glowing">Glowing!</label><br>
+
+                    <input type="radio" id="Rainbow" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=1;">
+                    <label for="Rainbow">Rainbow!</label><br>
+
+                      <input type="radio" id="Inheritance" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=8;">
+                      <label for="Inheritance">Inheritance!</label><br>
+                </form>
+
+                <br>
+
+
+                <form>
+                  <input type="radio" id="Up" name="carousel" onclick="uniforms[ 'carousel' ].value=-1;">
+                  <label for="Up">Carousel Up!</label><br>
+                  <input type="radio" id="Down" name="carousel" onclick="uniforms[ 'carousel' ].value=1;">
+                  <label for="Down">Carousel Down!</label><br>
+                  <input type="radio" id="Off" name="carousel" onclick="uniforms[ 'carousel' ].value=0;">
+                  <label for="Off">Carousel Off</label>
+
+                </form>
+                <br>
+
+                <form>
+                  <input type="radio" id="mUp" name="mcarousel" onclick="uniforms[ 'metaCarousel' ].value=-1;">
+                  <label for="mUp">Meta-Carousel Wise One!</label><br>
+                  <input type="radio" id="mDown" name="mcarousel" onclick="uniforms[ 'metaCarousel' ].value=1;">
+                  <label for="mDown">Meta-Carousel Wise 2!</label><br>
+                  <input type="radio" id="mOff" name="mcarousel" onclick="uniforms[ 'metaCarousel' ].value=0;">
+                  <label for="mOff">Meta-Carousel Off</label>
+                </form>
+                <br>
+
+            <form>
+              <input type="radio" id="SpirallizeOriginal" name="Spirallize" onclick="uniforms[ 'spirated' ].value=1;">
+              <label for="SpirallizeOriginal">Spirallize Original!</label><br>
+              <input type="radio" id="SpirallizeMirror" name="Spirallize" onclick="uniforms[ 'spirated' ].value=-1;">
+              <label for="SpirallizeMirror">Spirallize Mirror!</label><br>
+              <input type="radio" id="SpirallizeOff" name="Spirallize" onclick="uniforms[ 'spirated' ].value=0;">
+              <label for="SpirallizeOff">Spirallize Off</label>
+
+            </form>
+
+                      </div>
+        </div>
+        
+        <div class="dropdown">
+          <button class="dropbtn">Extras
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+               <input type="checkbox" id="Friends" name="t"  onclick= "
+                   key  = 'f';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                <label for="Friends">Friends!</label><br>
+                <input type="checkbox" id="Bridge" name="t"  onclick= "
+                    key  = 'z';
+                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                 <label for="Bridge">Bridge!</label><br>
+                 <input type="checkbox" id="Wheel" name="t"  onclick= "
+                     key  = 'm';
+                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                  <label for="Wheel">Wheel!</label><br>
+                  
+                  <input type="checkbox" id="Articles" name="t"  onclick= "
+                      key  = 'G';
+                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                   <label for="Articles">Articles!</label><br>
+                   
+                   <input type="checkbox" id="Blank Background" name="t"  onclick= "
+                       key  = 'Y';
+                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                    <label for="Blank Background">Blank Background!</label><br>
+                   
+                 <a id="Cycle Character" name="t"  onclick= "
+                     key  = 'U';
+                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                     Cycle character!</a><br>
+                 
+                 <a id="Metronome Up" name="t"  onclick= "
+                     key  = '.';
+                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                     Metronome Up!</a><br>
+
+                 <a id="Metronome Down" name="t"  onclick= "
+                     key  = ',';
+                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                     Metronome Down!</a><br>
+
+                  <a id="Manny" name="t"  onclick= "
+                      key  = 'g';
+                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                      Manny!</a><br>
+
+
+                  <a id="Acrostic" name="t"  onclick= "
+                      key  = '$';
+                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                      Acrostic!</a><br>
+
+                   <a id="ToLToK" name="t"  onclick= "
+                       key  = 'd';
+                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       ToLToK!</a><br>
+
+                    <a id="Mandelbrot" name="t"  onclick= "
+                        key  = 'a';
+                        callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                        Mandelbrot!</a><br>
+
+                     <a id="Refractelbrot" name="t"  onclick= "
+                         key  = 'r';
+                         callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                         Refractelbrot!</a><br>
+
+           <a id="XSquared" name="t"  onclick= "
+               key  = 'x';
+               callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+               XSquared!</a><br>
+
+         <a id="ToLX" name="t"  onclick= "
+             key  = 'b';
+             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+             ToLX!</a><br>
+        </div>
+    </div>
+    </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     <div id="container"></div>
 
