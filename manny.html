@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="main.css">
             
-            <script src="starshipMod.js" async></script>
+            <script src="starshipMod.js"></script>
 
             
             <div id="allText">
@@ -365,6 +365,19 @@
             <script src="OFFLINEonlineSwitch.js"></script>
             <div id="container"></div>
 
+            <script>
+                //disable reloader
+                  window.sessionStorage.setItem('alreadyReset', "t");//disable reloader, remove this line to re-eneble
+            </script>
+
+            <script id="threeJSscript"></script>
+            <script id="wadJSscript"></script>
+            <script src="wadLoader.js"></script>
+            <script src="threeJSLoader.js"></script>
+
+
+
+                    
         </head>
         <body>
         
@@ -405,19 +418,6 @@
       </div>
       
 
-<script>
-    //disable reloader
-      window.sessionStorage.setItem('alreadyReset', "t");//disable reloader, remove this line to re-eneble
-</script>
-
-<script id="threeJSscript"></script>
-<script id="wadJSscript"></script>
-<script src="wadLoader.js"></script>
-<script src="threeJSLoader.js" async></script>
-
-
-
-        
         
         
         
