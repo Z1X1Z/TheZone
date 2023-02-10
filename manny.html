@@ -1503,7 +1503,7 @@ vec3 xtol(vec2 s, vec2 t){
 
                                                                                       
                                                                                       
-  vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t/33.3)+heart(p/gr,-t);}
+  vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t/33.3)+heart(p/gr,-t.yx);}
   vec3 bod(vec2 p, vec2 t){t*=zoom;return body(p,t)+heart(p,t);}
   vec3 manny(vec2 p, vec2 t){
     return +body(p,t)+face(p,0.*t)+shiny(p,t);}
