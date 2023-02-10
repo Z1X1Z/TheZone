@@ -570,7 +570,7 @@ uniform float shaderScale;
     const float iterations = 40.;
         for (float f=0.;f<iterations;f++)if(abs(z.y+z.x)>2.){h=vec3(0.);break;}
         else {z=vec2(((z.x*z.x-z.y*z.y)-g.x+t.x),(2.0*z.x*z.y-g.y+t.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
-          h+=(vec3(z.x*z.y,z.x+.2,z.y)+.3)/length(z)/iterations/gr;}
+          h+=(vec3(z.x*z.y,z.x+.1,z.y)+.3)/length(z)/iterations/gr;}
     return h;
     }
       vec3 face(vec2 g, vec2 t){
