@@ -49,7 +49,9 @@
        loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")
    </script>
 
-            
+   
+ </head>
+<body>
         <div class=onofflineBG id="background_wrap">
             <script>
                 //splash
@@ -441,10 +443,7 @@
     </div id="score">
     
     
-    
-  </head>
-<body>
-<script id="vertexShader" type="x-shader/x-vertex">
+    <script id="vertexShader" type="x-shader/x-vertex" defer>
 
         varying vec2 vUv;
 
@@ -455,7 +454,7 @@
     }
 </script>
 
-<script id="fragmentShader" type="x-shader/x-fragment">
+<script id="fragmentShader" type="x-shader/x-fragment" defer>
 
     varying vec2 vUv;
     uniform bool helm;
