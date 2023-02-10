@@ -31,6 +31,7 @@ async function startMic() {
                     window.touchMode = true;
                     })
   .finally((err) => {
+      document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
     micOn = true;
       init();
 
@@ -40,7 +41,6 @@ async function startMic() {
 function stallTillTHREE(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
 
     if(typeof THREE=="object"&& document.visibilityState=="visible"){
-        document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
 
                 if(location.hash.includes("t"))
               {
