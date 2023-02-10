@@ -1081,9 +1081,9 @@ x,    y,  depth,
                      let BlackOrWhite;
                      if (t==7||t==5||t==2||t==0||t==10)
                          BlackOrWhite=-1.;
-                     else if (t==6)
+                     else if (t==6-twist/2.*flip)
                      {
-                         if(!window.blankBackground) BlackOrWhite=.5;
+                         if(!window.blankBackground||starClover) BlackOrWhite=.5;
                          else BlackOrWhite=1.;
                      }
                     else

@@ -43,127 +43,128 @@ window.addEventListener('keydown', function(event) {callKey(event); return true;
 
 function callKey(event){
     event.preventDefault(); event.stopImmediatePropagation();
-      let key = event.key;
-      var x=null;
-      if(!event.shiftKey)x = parseInt(String.fromCharCode( event.keyCode));
-      if (x>0)
-        {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
-      else if (x==0)
-        {window.movementRate=pixelShaderSize/4.; uniforms[ "rate" ].value=window.movementRate; }
-      else if (key=="À"||key=="`"||key=="~")
-        {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
-      else if (key=="m") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
-      else if (key=="!")uniforms[ "Refractelate" ].value=!uniforms[ "Refractelate" ].value;
-      else if (key=="@")uniforms[ "Clovoid" ].value=!uniforms[ "Clovoid" ].value;
-      else if (key=="#")uniforms[ "dotted" ].value=!uniforms[ "dotted" ].value;
-      else if (key=="&")uniforms[ "continuumClover" ].value=!uniforms[ "continuumClover" ].value;
-
-      else if (key=="q") {
-          if          ( uniforms[ "colorCombo" ].value >9)          uniforms[ "colorCombo" ].value = 1;
-          else uniforms[ "colorCombo" ].value = (uniforms[ "colorCombo" ].value+1)%10;
-      }
-
-            else if (key=="Q") {
-              twist = 0;
-              if(starSpin==0)starSpin=1;
-              else if(starSpin==1)starSpin=-1;
-              else if(starSpin==-1)starSpin=0;
-            }
-      else if (key==";") uniforms[ "colorInverter" ].value = !uniforms[ "colorInverter" ].value;
-      else if (key=="t") window.touchMode = !window.touchMode;
-      else if (key=="T") uniforms.Spoker.value=!uniforms.Spoker.value;
-      else if (key=="f") uniforms[ "fourCreats" ].value *= -1;
-      else if (key=="F") uniforms[ "spokelover" ].value=!uniforms[ "spokelover" ].value ;
-
-      else if (key=="a") uniforms[ "colorCombo" ].value = 11;
-      else if (key=="\'"||key=="\"") uniforms[ "colorCombo" ].value = 13;
-      else if (key=="d") uniforms[ "colorCombo" ].value = 14;
-      else if (key=="x") uniforms[ "colorCombo" ].value = 15;
-      else if (key=="b") uniforms[ "colorCombo" ].value = 16;
-      else if (key=="B") {
-          if(BulletMine == 0) BulletMine = 1;
-          else if(BulletMine==1) BulletMine = -.5;
-          else if(BulletMine==-1) BulletMine = 0;
-      }
-      else if (key=="g") uniforms[ "colorCombo" ].value = 17;
-      else if (key=="G") uniforms[ "articles" ].value = !uniforms[ "articles" ].value;
-
-      else if (key=="r")uniforms[ "colorCombo" ].value = 18;
-      else if (key=="$")uniforms[ "colorCombo" ].value = 19;
-
-      else if (key=="s"){ if(uniforms[ "morph" ].value == 0.)uniforms[ "morph" ].value = 1.;else uniforms[ "morph" ].value = 0.; }
-      else if (key=="n") uniforms[ "MetaCored" ].value = !uniforms[ "MetaCored" ].value;
-      else if (key=="N") uniforms[ "outerCoresOff" ].value = !uniforms[ "outerCoresOff" ].value ;
-
-      else if (key=="l"){zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
-      else if (key=="L")window.zoom=1.;
-      else if (key=="C")window.zoom=.00005;
-
-      else if (key=="c")center=!center;
-      else if (key=="v")textON=!textON;
-      else if (key=="V"){        if (!onO)onO=true;
-
-          RockInTheWater+=1;RockInTheWater=RockInTheWater%3;}
-
-      else if (key=="z")uniforms[ "helm" ].value = !uniforms[ "helm" ].value;
-      else if (key=="Z")uniforms[ "spokesVisualizeColors" ].value = !uniforms[ "spokesVisualizeColors" ].value;
-
-      else if (key=="j"){
-          if(uniforms[ "carousel" ].value==0)uniforms[ "carousel" ].value=-1.;
-          else if(uniforms[ "carousel" ].value==-1.)uniforms[ "carousel" ].value=1.;
-          else if(uniforms[ "carousel" ].value==1.)uniforms[ "carousel" ].value=0;
-      }
-      else if (key=="J")uniforms[ "onehundredfortyfourthousand" ].value=!uniforms[ "onehundredfortyfourthousand" ].value;
-
-      else if (key=="k"){
-            if(uniforms[ "metaCarousel" ].value==0)uniforms[ "metaCarousel" ].value=-1.;
-            else if(uniforms[ "metaCarousel" ].value==-1.)uniforms[ "metaCarousel" ].value=1.;
-            else if(uniforms[ "metaCarousel" ].value==1.)uniforms[ "metaCarousel" ].value=0;
-        }
-      else if (key=="K")uniforms.Inherited.value=!uniforms.Inherited.value;
-
-      else if (key=="y") uniforms[ "petals" ].value -= 1.;
-      else if (key=="Y"){
-          window.blankBackground = !window.blankBackground;
-          if(window.blankBackground)window.starClover=false;
-      }
-      else if (key=="u") uniforms[ "petals" ].value += 1.;
-      else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%7;
-
-      else if (key=="/"||key=="?"){
-            if(uniforms[ "spirated" ].value==0)uniforms[ "spirated" ].value=1;
-            else if(uniforms[ "spirated" ].value==1)uniforms[ "spirated" ].value=-1;
-            else if(uniforms[ "spirated" ].value==-1)uniforms[ "spirated" ].value=0;
-        }
-      else if (key=="\\"||key=="|")uniforms[ "hearTOL" ].value = !uniforms[ "hearTOL" ].value;
-
-      else if (event.keyCode==190||event.key=="."||event.key==">") uniforms[ "metronome" ].value *= 1.1; //keycode for <
-      else if ((event.keyCode==188||event.key==","||event.key=="<")&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
-
-      else if (key=="i") zoomOutRatchetThreshold/= 1.12121;
-      else if (key=="o") zoomOutRatchetThreshold*= 1.12121;
-      else if (key=="O") window.starClover=!window.starClover;
-
-      else if (key=="p"){
-                framesLong=FPS;
-                computeFPS=true;
-            }
-      else if (key=="P"){octaveStars=!octaveStars;}
-      else if (key=="h"){
-                fullscreen=!fullscreen
-                if(fullscreen)openFullscreen();
-                else closeFullscreen();
-            }
-      else if (key=="H")uniforms.cloverSlide.value=!uniforms.cloverSlide.value;
-
-      else if (key==" "||key=="_")
-      {
+    let key = event.key;
+    var x=null;
+    if(!event.shiftKey)x = parseInt(String.fromCharCode( event.keyCode));
+    if (x>0)
+    {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
+    else if (x==0)
+    {window.movementRate=pixelShaderSize/4.; uniforms[ "rate" ].value=window.movementRate; }
+    else if (key=="À"||key=="`"||key=="~")
+    {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
+    else if (key=="m") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
+    else if (key=="!")uniforms[ "Refractelate" ].value=!uniforms[ "Refractelate" ].value;
+    else if (key=="@")uniforms[ "Clovoid" ].value=!uniforms[ "Clovoid" ].value;
+    else if (key=="#")uniforms[ "dotted" ].value=!uniforms[ "dotted" ].value;
+    else if (key=="&")uniforms[ "continuumClover" ].value=!uniforms[ "continuumClover" ].value;
+    
+    else if (key=="q") {
+        if          ( uniforms[ "colorCombo" ].value >9)          uniforms[ "colorCombo" ].value = 1;
+        else uniforms[ "colorCombo" ].value = (uniforms[ "colorCombo" ].value+1)%10;
+    }
+    
+    else if (key=="Q") {
+        twist = 0;
+        if(starSpin==0)starSpin=1;
+        else if(starSpin==1)starSpin=-1;
+        else if(starSpin==-1)starSpin=0;
+    }
+    else if (key==";") uniforms[ "colorInverter" ].value = !uniforms[ "colorInverter" ].value;
+    else if (key=="t") window.touchMode = !window.touchMode;
+    else if (key=="T") uniforms.Spoker.value=!uniforms.Spoker.value;
+    else if (key=="f") uniforms[ "fourCreats" ].value *= -1;
+    else if (key=="F") uniforms[ "spokelover" ].value=!uniforms[ "spokelover" ].value ;
+    
+    else if (key=="a") uniforms[ "colorCombo" ].value = 11;
+    else if (key=="\'"||key=="\"") uniforms[ "colorCombo" ].value = 13;
+    else if (key=="d") uniforms[ "colorCombo" ].value = 14;
+    else if (key=="x") uniforms[ "colorCombo" ].value = 15;
+    else if (key=="b") uniforms[ "colorCombo" ].value = 16;
+    else if (key=="B") {
+        if(BulletMine == 0) BulletMine = 1;
+        else if(BulletMine==1) BulletMine = -.5;
+        else if(BulletMine==-1) BulletMine = 0;
+    }
+    else if (key=="g") uniforms[ "colorCombo" ].value = 17;
+    else if (key=="G") uniforms[ "articles" ].value = !uniforms[ "articles" ].value;
+    
+    else if (key=="r")uniforms[ "colorCombo" ].value = 18;
+    else if (key=="$")uniforms[ "colorCombo" ].value = 19;
+    
+    else if (key=="s"){ if(uniforms[ "morph" ].value == 0.)uniforms[ "morph" ].value = 1.;else uniforms[ "morph" ].value = 0.; }
+    else if (key=="n") uniforms[ "MetaCored" ].value = !uniforms[ "MetaCored" ].value;
+    else if (key=="N") uniforms[ "outerCoresOff" ].value = !uniforms[ "outerCoresOff" ].value ;
+    
+    else if (key=="l"){zoomAtl41=!zoomAtl41; uniforms[ "free" ].value = !uniforms[ "free" ].value ;}
+    else if (key=="L")window.zoom=1.;
+    else if (key=="C")window.zoom=.00005;
+    
+    else if (key=="c")center=!center;
+    else if (key=="v")textON=!textON;
+    else if (key=="V"){        if (!onO)onO=true;
+        
+        RockInTheWater+=1;RockInTheWater=RockInTheWater%3;}
+    
+    else if (key=="z")uniforms[ "helm" ].value = !uniforms[ "helm" ].value;
+    else if (key=="Z")uniforms[ "spokesVisualizeColors" ].value = !uniforms[ "spokesVisualizeColors" ].value;
+    
+    else if (key=="j"){
+        if(uniforms[ "carousel" ].value==0)uniforms[ "carousel" ].value=-1.;
+        else if(uniforms[ "carousel" ].value==-1.)uniforms[ "carousel" ].value=1.;
+        else if(uniforms[ "carousel" ].value==1.)uniforms[ "carousel" ].value=0;
+    }
+    else if (key=="J")uniforms[ "onehundredfortyfourthousand" ].value=!uniforms[ "onehundredfortyfourthousand" ].value;
+    
+    else if (key=="k"){
+        if(uniforms[ "metaCarousel" ].value==0)uniforms[ "metaCarousel" ].value=-1.;
+        else if(uniforms[ "metaCarousel" ].value==-1.)uniforms[ "metaCarousel" ].value=1.;
+        else if(uniforms[ "metaCarousel" ].value==1.)uniforms[ "metaCarousel" ].value=0;
+    }
+    else if (key=="K")uniforms.Inherited.value=!uniforms.Inherited.value;
+    
+    else if (key=="y") uniforms[ "petals" ].value -= 1.;
+    else if (key=="Y"){
+        window.blankBackground = !window.blankBackground;
+        if(window.blankBackground)window.starClover=false;
+        else window.starClover=true;
+    }
+    else if (key=="u") uniforms[ "petals" ].value += 1.;
+    else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%7;
+    
+    else if (key=="/"||key=="?"){
+        if(uniforms[ "spirated" ].value==0)uniforms[ "spirated" ].value=1;
+        else if(uniforms[ "spirated" ].value==1)uniforms[ "spirated" ].value=-1;
+        else if(uniforms[ "spirated" ].value==-1)uniforms[ "spirated" ].value=0;
+    }
+    else if (key=="\\"||key=="|")uniforms[ "hearTOL" ].value = !uniforms[ "hearTOL" ].value;
+    
+    else if (event.keyCode==190||event.key=="."||event.key==">") uniforms[ "metronome" ].value *= 1.1; //keycode for <
+    else if ((event.keyCode==188||event.key==","||event.key=="<")&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
+    
+    else if (key=="i") zoomOutRatchetThreshold/= 1.12121;
+    else if (key=="o") zoomOutRatchetThreshold*= 1.12121;
+    else if (key=="O") window.starClover=!window.starClover;
+    
+    else if (key=="p"){
+        framesLong=FPS;
+        computeFPS=true;
+    }
+    else if (key=="P"){octaveStars=!octaveStars;}
+    else if (key=="h"){
+        fullscreen=!fullscreen
+        if(fullscreen)openFullscreen();
+        else closeFullscreen();
+    }
+    else if (key=="H")uniforms.cloverSlide.value=!uniforms.cloverSlide.value;
+    
+    else if (key==" "||key=="_")
+    {
         onO=!onO;
-      }
-      else if (key=="w")window.volumeSpeed=!window.volumeSpeed;
-
-      else if (key=="W") window.twist+=2;
-      else if (key=="S") window.twist-=2;
+    }
+    else if (key=="w")window.volumeSpeed=!window.volumeSpeed;
+    
+    else if (key=="W"){ window.twist+=2; window.twist = window.twist%12;}
+    else if (key=="S"){ window.twist-=2; window.twist = (window.twist+12)%12;}
       else if (key=="A")window.flip = -1;
       else if (key=="D")window.flip = 1;
 
