@@ -272,12 +272,13 @@ angle = ((angle+180)/360*2*pi);
                         flatline = pixelShaderToStarshipRATIO;
                        if(window.movementRate>pixelShaderToStarshipRATIO) flatline = window.movementRate;
          
-         d_x = -Math.sin(-angle)*volumeBoosted*flatline;
-         d_y = -Math.cos(-angle)*volumeBoosted*flatline;
+         d_x = -Math.sin(-angle)*flatline;
+         d_y = -Math.cos(-angle)*flatline;
                        
          uniforms.d.value.x=d_x;
          uniforms.d.value.y=d_y;
-
+         d_x*=volumeBoosted;
+         d_y*=volumeBoosted;
          var spunD = [d_x,d_y];
 
                     if(uniforms.carousel.value!=0.)         spunD=spin(spunD,uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value)%(Math.PI*2.));
@@ -727,7 +728,7 @@ if( !window.touchMode&&!touchOnlyMode) {
                            volume = 0.;
                            for(var n=0; n<inputData.length-1;n++)volume+=Math.abs(inputData[n+1]-inputData[n]);
                            volume*=audioX.sampleRate/inputData.length/255;
-                            volumeBoosted = volume*2.;
+                            volumeBoosted = volume*1.5;
                        }
            else {volume=1.; lastVolume=1.;  volumeBoosted = 1.;
 }
