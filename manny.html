@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="main.css">
             
-            <script src="loadMicrophone.js"></script>
+            <script src="loadMicrophone.js" async></script>
+            <script src="starshipMod.js" defer></script>
 
         </head>
        <body>
@@ -444,7 +445,7 @@
     </div id="score">
     
     
-    <script id="vertexShader" type="x-shader/x-vertex" defer>
+    <script id="vertexShader" type="x-shader/x-vertex">
 
         varying vec2 vUv;
 
@@ -455,7 +456,7 @@
     }
 </script>
 
-<script id="fragmentShader" type="x-shader/x-fragment" defer>
+<script id="fragmentShader" type="x-shader/x-fragment">
 
     varying vec2 vUv;
     uniform bool helm;
@@ -1608,7 +1609,6 @@ gl_FragColor=vec4((clamp(mny+starship.xyz-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,
 
 </script>
 
-<script src="starshipMod.js" defer></script>
 
     </body>
 </html>
