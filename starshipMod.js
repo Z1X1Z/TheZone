@@ -1,5 +1,5 @@
 
-
+/*
 let touchOnlyMode = false;
 let micOn = false;
 let audioX;
@@ -17,7 +17,6 @@ async function startMic() {
     noiseSuppression: false//https://stackoverflow.com/questions/71978189/lag-when-playing-mic-audio-directly-to-output-using-web-audio-api
     })
   .then((stream) => {
-    /* use the stream */
       audioX = new AudioContext();
       analyser = audioX.createAnalyser();
       source = audioX.createMediaStreamSource( stream );
@@ -37,18 +36,19 @@ async function startMic() {
 
   });
 }
-
+*/
 function stallTillTHREE(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
 
-    if(typeof THREE=="object"&& document.visibilityState=="visible"){
+    if(typeof THREE=="object"&& document.visibilityState=="visible"&&(micOn||location.hash.includes("t"))){
+        document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
 
                 if(location.hash.includes("t"))
               {
                 touchOnlyMode=true;
                   pointerZoom=true;
               }
-        startMic();
-            
+     //   startMic();
+            init();
     }else setTimeout(stallTillTHREE,10);}//setTimeout waits for 10ms then runs init()
 stallTillTHREE();
 let xyStarParticleArray=Array();

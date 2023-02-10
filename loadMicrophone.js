@@ -32,10 +32,6 @@
                         })
       .finally((err) => {
         micOn = true;
-        
-        
-        
-        
       });
     }
     if(!location.hash.includes("t"))startMic();
