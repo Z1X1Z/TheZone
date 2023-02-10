@@ -7,7 +7,11 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="main.css">
-          
+           
+           <script src="loadMicrophone.js">
+           </script>
+
+           
            
            <script>
                function loadScript(element, url, offlineURL)
@@ -441,10 +445,10 @@
     </div id="score">
     
     
-    
-  </head>
+    </head>
 <body>
-<script id="vertexShader" type="x-shader/x-vertex">
+    
+<script id="vertexShader" type="x-shader/x-vertex" defer>
 
         varying vec2 vUv;
 
@@ -455,7 +459,7 @@
     }
 </script>
 
-<script id="fragmentShader" type="x-shader/x-fragment">
+<script id="fragmentShader" type="x-shader/x-fragment" defer>
 
     varying vec2 vUv;
     uniform bool helm;
