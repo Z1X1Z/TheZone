@@ -1,6 +1,7 @@
 function stallTillTHREE(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
 
-    if(typeof THREE=="object"&& document.visibilityState=="visible"&&micOn){
+    if(typeof THREE=="object"&& document.visibilityState=="visible"&&
+       (micOn||location.hash.includes("t"))){
         document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
 
                 if(location.hash.includes("t"))
@@ -1577,7 +1578,6 @@ if("osmd" in window){
 }
 
 
-window.touchOnlyMode=false;
 
 
 //begin MIT license, code from https://github.com/adamski/pitch_detector

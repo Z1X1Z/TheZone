@@ -9,6 +9,7 @@
         <link type="text/css" rel="stylesheet" href="main.css">
            
            <script>
+               let touchOnlyMode = false;
                let micOn = false;
                let audioX;
 
@@ -42,7 +43,11 @@
                    micOn = true;
                  });
                }
-               startMic();
+               if(!location.hash.includes("t"))startMic();
+               else{
+                   console.log("Touch only mode!")
+                   touchOnlyMode=true;
+                   window.touchMode = true;}
            </script>
 
            
@@ -802,7 +807,7 @@ else hyperCore=externalCores;//hyperCore is really better thought of as hyperMet
 if(outerCoresOff)hyperCore=0.;
 
 if(Spoker&&MetaCored)hyperCore*=4./3./logStabilizationConstant;//engage overstable core if dancing
- if(morph>.5)hyperCore+=3.;
+ if(morph>.5&&!wheel)hyperCore+=3.;
  float term=0.;
 if (spirated!=0.)term=(lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
 vec2 m=vec2(0.);
