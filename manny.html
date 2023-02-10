@@ -7,8 +7,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="main.css">
-            </head>
-<body>
+          
            <script>
                let touchOnlyMode = false;
                let micOn = false;
@@ -22,7 +21,6 @@
                  //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
                    navigator.mediaDevices.getUserMedia({
                    audio: true,
-                   MIDI: false,
                    autoGainControl: false,
                    echoCancellation: false,
                    noiseSuppression: false//https://stackoverflow.com/questions/71978189/lag-when-playing-mic-audio-directly-to-output-using-web-audio-api
@@ -52,7 +50,8 @@
                    window.touchMode = true;}
            </script>
 
-           
+        </head>
+<body>
            
            <script>
                function loadScript(element, url, offlineURL)
