@@ -695,12 +695,17 @@ adjustThreeJSWindow();//mostly for ios here
 
 
 
+    elapsedTimeBetweenFrames = (timestamp-lastTime);
+    if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
+        ticker++;
 
-if (uniforms["MetaCored"].value){
-    uniforms[ "centralCores" ].value = Math.log(zoom)/Math.log(.5);
-    uniforms[ "externalCores" ].value =(uniforms[ "centralCores" ].value)*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*0.9551195;
-    
-  }
+
+
+    if (uniforms["MetaCored"].value){
+        uniforms[ "centralCores" ].value = Math.log(zoom)/Math.log(.5);
+        uniforms[ "externalCores" ].value =(uniforms[ "centralCores" ].value)*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*0.9551195;
+        
+      }
 
 
   if(document.visibilityState=="hidden"||lvs=="hidden")lastFrameTime=timestamp;
@@ -754,11 +759,6 @@ if( !window.touchMode&&!touchOnlyMode) {
     let second =(minute-Math.floor(minute))*60
     let timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
     let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","F#","G"];
-
-              elapsedTimeBetweenFrames = (timestamp-lastTime);
-              if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
-                  ticker++;
-
 
 
 
@@ -1477,7 +1477,20 @@ if(!zoomAtl41)
         renderer.render( shaderScene, camera );
                          shaderScene.remove( mesh );
 
+    if(textON)document.getElementById("textWindow").innerHTML =
+        "<div sytle='font-size: 16px;'>"+
+        "cores:"+(Math.floor(uniforms["centralCores"].value)+
+        cloverSuperCores*singleHyperCoreDepth)+
+        ", zoom: "+(zoom/2.**(singleHyperCoreDepth*cloverSuperCores))+"<p style='margin : 0px'></p>"+
+        "real part: "+ coordY +"<p style='margin : 0px'></p>"+
+        "imaginary part: "+ coordX+"<p style='margin : 0px'></p>"+
+        "FPS: "+Math.round(FPS)
+    +"</div>";
+    else document.getElementById("textWindow").innerHTML = "";
 
+
+
+            
       }//end touch mode centerOfDotToEdge
 
 let thelastnotehit;

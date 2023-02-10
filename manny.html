@@ -807,7 +807,7 @@ else hyperCore=externalCores;//hyperCore is really better thought of as hyperMet
 if(outerCoresOff)hyperCore=0.;
 
 if(Spoker&&MetaCored)hyperCore*=4./3./logStabilizationConstant;//engage overstable core if dancing
- if(morph>.5&&!wheel)hyperCore+=3.;
+ if(morph>.5&&!wheel)hyperCore+=4.;
  float term=0.;
 if (spirated!=0.)term=(lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
 vec2 m=vec2(0.);
@@ -878,7 +878,7 @@ s.x=log(abs(s.x))/log(3.-term);
    
    if(continuumClover){//engage continualization
        float continuumCore=(-loops-counter+continuumCounter+hyperCore)*zoom/(lfc-zoom);
-       if(loops+counter<hyperCore+continuumCounter) s/=pow(2.,pow(.5,continuumCore));
+       if(loops+counter<=hyperCore+continuumCounter) s/=pow(2.,pow(.5,continuumCore));
         continuumCounter+=continuumCore;
     }
   
@@ -891,7 +891,7 @@ if(distance<4./3.&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
    float mcc=-1./log(.5);//cycle frequency mudulated loop counter
    
 for(int i=0;i<20; i++)
-if(distance<2./3.&& loops+counter-continuumCounter<hyperCore)//not sure if i is 20 or >20
+if(distance<2./3.&& loops+counter-continuumCounter<=hyperCore)//not sure if i is 20 or >20
 {
     
     bool energyField=false;
@@ -1503,7 +1503,7 @@ vec3 xtol(vec2 s, vec2 t){
 
                                                                                       
                                                                                       
-  vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t/33.3);}
+  vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t/33.3)+heart(p/gr,-t);}
   vec3 bod(vec2 p, vec2 t){t*=zoom;return body(p,t)+heart(p,t);}
   vec3 manny(vec2 p, vec2 t){
     return +body(p,t)+face(p,0.*t)+shiny(p,t);}
@@ -1641,19 +1641,14 @@ if (starship.x+starship.y+starship.z==0.&&starship.w!=0.)isBlack=0.;
 else if(starship.x==starship.y&&starship.x==starship.z&&abs(starship.z-.5)<.1&&starship.w!=0.) isBlack=.5;
 gl_FragColor=vec4((clamp(mny+starship.xyz-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge+
               clamp(clamp(cloud+
-                                zoomer+2.*heart(p,-move)
+                                zoomer
                           -(starship.x+starship.y+starship.z)*(starship.w*starship.w)
                           -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*1000.
                                                         ,0.,1.)-(mny.r+mny.b+mny.g)*10000.,.0,1.))*isBlack
       ,1.
               );}
                                                  
- /*
-  gl_FragColor=vec4(mny+creatures+b+bridge+heart((p+vec2(.5,0.))/2.,move)+
-                    clamp((zoomer)-(m.r+m.b+m.g+creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*100.,.0,1.)
-            ,1.);}
-  
-  */
+
 </script>
 
 <script src="starshipMod.js" defer></script>
