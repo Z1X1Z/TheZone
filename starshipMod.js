@@ -1,6 +1,6 @@
 
 function stallTillLibrariesLoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
-    if(typeof THREE=="object"&&"osmd" in window &&Wad=="function"
+    if(typeof THREE=="object" && typeof opensheetmusicdisplay=="object" && typeof Wad=="function"
        && document.visibilityState=="visible"
        &&(micOn||location.hash.includes("t"))){
         document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
@@ -11,7 +11,11 @@ function stallTillLibrariesLoaded(){//this is a lurker. it waits for the three.j
                   pointerZoom=true;
               }
             init();
-    }else setTimeout(stallTillLibrariesLoaded,10);}//setTimeout waits for 10ms then runs init()
+    }else
+    { console.log(typeof opensheetmusicdisplay)
+        setTimeout(stallTillLibrariesLoaded,10);
+    }
+    }//setTimeout waits for 10ms then runs stallTillLibrariesLoaded()
 stallTillLibrariesLoaded();
 let xyStarParticleArray=Array();
 window.zoom=1.;
