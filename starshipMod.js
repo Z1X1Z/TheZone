@@ -1,7 +1,6 @@
 
-function stallTillTHREE(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
-
-    if(typeof THREE=="object"&& document.visibilityState=="visible"&&(micOn||location.hash.includes("t"))){
+function stallTillLibrariesLoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
+    if(typeof THREE=="object"&&"osmd" in window && document.visibilityState=="visible"&&Wad=="function"&&(micOn||location.hash.includes("t"))){
         document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
 
                 if(location.hash.includes("t"))
@@ -9,10 +8,9 @@ function stallTillTHREE(){//this is a lurker. it waits for the three.js loader t
                 touchOnlyMode=true;
                   pointerZoom=true;
               }
-     //   startMic();
             init();
-    }else setTimeout(stallTillTHREE,10);}//setTimeout waits for 10ms then runs init()
-stallTillTHREE();
+    }else setTimeout(stallTillLibrariesLoaded,10);}//setTimeout waits for 10ms then runs init()
+stallTillLibrariesLoaded();
 let xyStarParticleArray=Array();
 window.zoom=1.;
 
