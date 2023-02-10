@@ -7,6 +7,7 @@ window.octaveStars=true;
 window.BulletMine=0;
 window.starClover=true;
 window.blankBackground=false;
+window.twist = 0.;
 function readHash(){for(var n = location.hash.length;n>0;n--)callKey(new KeyboardEvent('keydown', {'key': location.hash[n],"keyCode":location.hash.charCodeAt(n)}));
 }
 function stallHash(){if(window.uniformsLoaded)readHash();else setTimeout(stallHash,10);}//uniforms are only loaded if mic is enabled
@@ -163,8 +164,8 @@ function callKey(event){
     }
     else if (key=="w")window.volumeSpeed=!window.volumeSpeed;
     
-    else if (key=="W"){ window.twist+=2; window.twist = window.twist%12;}
-    else if (key=="S"){ window.twist-=2; window.twist = (window.twist+12)%12;}
+    else if (key=="W"){ window.twist+=2; window.twist = window.twist%24;}
+    else if (key=="S"){ window.twist-=2; window.twist = (window.twist+24)%24;}
       else if (key=="A")window.flip = -1;
       else if (key=="D")window.flip = 1;
 

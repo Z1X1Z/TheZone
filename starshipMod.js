@@ -692,7 +692,7 @@ adjustThreeJSWindow();//mostly for ios here
     
     
     uniforms[ "time" ].value = timestamp/1000.+startTimeSecondMantissa;
-    if(starSpin!=0)twist=(uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*2.*starSpin*2.+12)%12.;
+    if(starSpin!=0)twist=(uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*2.*starSpin*2.+24)%24.;
 
 
 
@@ -1079,9 +1079,10 @@ x,    y,  depth,
                  if(lengt>0){
                      var vop = new THREE.Color();
                      let BlackOrWhite;
+                     let noteGrey = Math.abs(t-(6-twist/2.)+12)%12;
                      if (t==7||t==5||t==2||t==0||t==10)
                          BlackOrWhite=-1.;
-                     else if (Math.abs(t-(6-twist/2.*flip))<=1.)
+                     else if( noteGrey<.5 || noteGrey>11.5)
                      {
                          if(!window.blankBackground||starClover) BlackOrWhite=.5;
                          else BlackOrWhite=1.;
