@@ -1,7 +1,6 @@
 
 function stallTillLibrariesLoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
-    if(typeof THREE=="object" && typeof opensheetmusicdisplay=="object" && typeof Wad=="function"
-       && document.visibilityState=="visible"
+    if(typeof THREE=="object" && document.visibilityState=="visible"
        &&(micOn||location.hash.includes("t"))){
         document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
         document.getElementById( "load message").innerHTML = "";//turn off splash!
