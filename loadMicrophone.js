@@ -34,8 +34,16 @@
         micOn = true;
       });
     }
-    if(!location.hash.includes("t"))startMic();
-    else{
+if(location.hash.includes("t")){
         console.log("Touch only mode!")
         touchOnlyMode=true;
         window.touchMode = true;}
+
+document.body.addEventListener('touchstart', function(e){
+    if(!micOn&&!location.hash.includes("t"))
+        startMic();
+        })
+document.body.addEventListener('mousedown', function(e){
+    if(!micOn&&!location.hash.includes("t"))
+        startMic();
+        })
