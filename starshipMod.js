@@ -881,10 +881,8 @@ if(!window.touchMode){
             let starshipseethrough = lengtOriginal;
             //for(var yy=0;yy<3;yy++)
             if (RockInTheWater==1)
-                //for(var yy=0;yy<3;yy++)
-                    starColors.push(1,1,1,1.,
-                                    .5,.5,.5,1.,
-                                    1,1,1,1.)
+                for(var yy=0;yy<3;yy++)
+                    starColors.push( mustarD[g]/297., mustarD[g]/297., mustarD[g]/297.,1.)
             else
                  starColors.push(
                                  vop.r,vop.g,vop.b,1.,
