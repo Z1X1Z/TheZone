@@ -7,11 +7,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="main.css">
-            
-        </head>
-       <body>
-           
-            <script src="loadMicrophone.js"></script>
+            <script src="loadMicrophone.js" defer></script>
+     
 
         <div class=onofflineBG id="background_wrap">
             <script>
@@ -36,12 +33,33 @@
 
 
 
+        <script src="OFFLINEonlineSwitch.js"></script>
+        <script id="threeJSscript"></script>
+        <script>
+        var cdnSwitchThree="three.js";
+        if (window.useCDN)cdnSwitchThree="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js";
+        loadScript("threeJSscript",cdnSwitchThree,"three.js")
+        </script>
+        <script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
+        <script>
+        var cdnOSMD="opensheetmusicdisplay.min.js";
+        if (window.useCDN)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.6.1/build/opensheetmusicdisplay.min.js";
+        loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")
+        </script>
+        <script id="wadJSscript"></script>
+        <script>
+        var cdnSwitchWAD="wad.min.js";
+        if (window.useCDN)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0";
+        loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")
+        </script>
 
-
+        </head>
+       <body>
+           
     <div id="allText">
         <div id="HK"></div>
         <div id="textWindow"></div>
-    <script src="hotkeys.js" ></script>
+    <script src="hotkeys.js" async></script>
 
     <div class="navbar">
         <div class="dropdown">
@@ -393,13 +411,13 @@
     
     <div id="container"></div>
     
-    <script src="wadLoader.js"> </script>
+    <script src="wadLoader.js" dynamic> </script>
 
     <div id="score">
         <div id="osmdCanvas"/>
         <input type="file" id="files"/>
         <output id="list"></output>
-        <script src="fileSelectAndLoadOSMD.js"></script>
+        <script src="fileSelectAndLoadOSMD.js" async></script>
     </div id="score">
     
     
@@ -1588,25 +1606,6 @@ gl_FragColor=vec4((clamp(mny+starship.xyz-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,
     }
   </script>
 
-<script src="OFFLINEonlineSwitch.js"></script>
-<script id="threeJSscript"></script>
-<script>
-var cdnSwitchThree="three.js";
-if (window.useCDN)cdnSwitchThree="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js";
-loadScript("threeJSscript",cdnSwitchThree,"three.js")
-</script>
-<script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
-<script>
-var cdnOSMD="opensheetmusicdisplay.min.js";
-if (window.useCDN)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.6.1/build/opensheetmusicdisplay.min.js";
-loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")
-</script>
-<script id="wadJSscript"></script>
-<script>
-var cdnSwitchWAD="wad.min.js";
-if (window.useCDN)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0";
-loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")
-</script>
 
 
 <script src="starshipMod.js" defer></script>
