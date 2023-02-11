@@ -51,6 +51,9 @@
    </script>
 
 
+        </head>
+       <body>
+           
         <div class=onofflineBG id="background_wrap">
             <script>
                 //splash
@@ -79,7 +82,7 @@
     <div id="allText">
         <div id="HK"></div>
         <div id="textWindow"></div>
-    <script src="hotkeys.js" async></script>
+    <script src="hotkeys.js" ></script>
 
     <div class="navbar">
         <div class="dropdown">
@@ -437,7 +440,7 @@
         <div id="osmdCanvas"/>
         <input type="file" id="files"/>
         <output id="list"></output>
-        <script src="fileSelectAndLoadOSMD.js" async></script>
+        <script src="fileSelectAndLoadOSMD.js"></script>
     </div id="score">
     
     
@@ -1604,10 +1607,6 @@ gl_FragColor=vec4((clamp(mny+starship.xyz-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,
                                                  
 
 </script>
-    </head>
-   <body>
-       
-<script src="starshipMod.js"></script>
-<script>stallTillLibrariesLoaded()</script>
+<script src="starshipMod.js" defer></script>
     </body>
 </html>
