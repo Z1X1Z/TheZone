@@ -880,6 +880,12 @@ if(!window.touchMode){
             
             let starshipseethrough = lengtOriginal;
             //for(var yy=0;yy<3;yy++)
+            if (RockInTheWater==1)
+                //for(var yy=0;yy<3;yy++)
+                    starColors.push(1,1,1,1.,
+                                    .5,.5,.5,1.,
+                                    1,1,1,1.)
+            else
                  starColors.push(
                                  vop.r,vop.g,vop.b,1.,
                                  vop.r,vop.g,vop.b,.5,
@@ -1084,11 +1090,8 @@ x,    y,  depth,
                      let noteGrey = Math.abs(t-(6-twist/2.)+12)%12;
                      if (t==7||t==5||t==2||t==0||t==10)
                          BlackOrWhite=-1.;
-                     else if( noteGrey<.5 || noteGrey>11.5)
-                     {
-                         if(!window.blankBackground||starClover) BlackOrWhite=.5;
-                         else BlackOrWhite=1.;
-                     }
+                     else if( (noteGrey<.5 || noteGrey>11.5) &&starClover)
+                        BlackOrWhite=.5;
                     else
                          BlackOrWhite=1;
                      vop.setRGB(BlackOrWhite,BlackOrWhite,BlackOrWhite);

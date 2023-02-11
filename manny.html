@@ -662,10 +662,12 @@ return vec3(clamp(1.-l,0.,1.));
                 {    //https://en.wikipedia.org/wiki/Rotation_matrix
                     float angle =t;
                     float fxb=f.x;
-                    f.x=f.x*cos(angle)-f.y*sin(angle);
-                 f.y=fxb*sin(angle)+f.y*cos(angle);
+                    f.x=f.x*coz(-angle)-f.y*zin(-angle);
+                 f.y=fxb*zin(-angle)+f.y*coz(-angle);
                  return f;
                 }
+    float lerp(float a) {return -abs(mod(a,2.)-1.);}
+
 vec3 sealedMan(vec2 p,vec2 t)
 {
 p.x+=2.;
@@ -948,7 +950,7 @@ return clamp(o,0.,1.);}
   
   
   
-  vec3 MannyWoManny(vec2 p,vec2 t){
+  vec3 MannyWoManny(vec2 p,vec2 t,vec2 d){
 
                                float time2 = t.x;
                                float c=0.,k=0.,l=0.,x=0.,e=0.;
@@ -959,14 +961,14 @@ return clamp(o,0.,1.);}
                                vec2 g=p;
                                 ///g.x+=(coz(t.y)-1.)/2.*.5;
                                vec2 z=g;
-                               if(abs(p.y)<6.)for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>(20.-(coz(t.y)-1.)/2.*50.)&&f>4)x+=z.y/20000000.;
-                               else {z=2.*vec2(-1./((z.x*z.x-(1.44+(coz(t.x)-1.)/2.*.44)*z.y*z.y)
-                            -g.x*(1.2+(coz(t.y)-1.)/2.*.2)),
-                       ((1.2-(coz(t.y)-1.)/2.*.8)*z.x*z.y-(1.2+(coz(t.y)-1.)/2.*.2)*g.y));
+                               if(abs(p.y)<6.)for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>(20.-t.y*50.)&&f>4)x+=z.y/20000000.;
+                               else {z=2.*vec2(-1./((z.x*z.x-(1.44+t.x*.44)*z.y*z.y)
+                            -g.x*(1.2+t.y*.2)+d.x),
+                       ((1.2-t.y*.8)*z.x*z.y-(1.2+t.y*.2)*g.y+d.y));
   //The Holy Bible Revelation 21:16 "The city was laid out like a square, as long as it was wide.
   //He measured the city with the rod and found it to be 12,000 stadia in length,
    //and as wide and high as it is long. The angel measured the wall using human measurement, and it was 144 cubits thick.
-                                                         z.x=pow(abs(z.x),(.777+(coz(t.y)-1.)/2.*.277));}
+                                                         z.x=pow(abs(z.x),(.777+t.y*.277));}
 
 
 
@@ -975,15 +977,15 @@ return clamp(o,0.,1.);}
                               // g.x-=.5;
                                z=g;
                                if(g.x>.75&&g.x<1.7&&abs(g.y*g.x)<.54)for(int f=0;f<8;f+=1)if(abs(z.x)>52.&&f>1)c=abs(z.x)/1000000.;
-                               else {z=3.*vec2(-1./((z.x*z.x-z.y*z.y)-g.x),(77.0*z.x*z.y-(2.+(coz(t.y)-1.)/2.)*g.y));
+                               else {z=3.*vec2(-1./((z.x*z.x-z.y*z.y)-g.x+d.x),(77.0*z.x*z.y-(2.+t.y)*g.y+d.y));
                                      z.y = -1./z.y;}
                  //vv head vv
                                        g=p*1.618;
                                        z=g;
-                          if(abs(p.y)<4.)for (int f=0;f<21;f+=1)if(abs(z.y)>21.&&(f==int(floor(.8-(coz(t.y)-1.)/2.*.4)))){l=0.;break;}
+                          if(abs(p.y)<4.)for (int f=0;f<21;f+=1)if(abs(z.y)>21.&&(f==int(floor(.8-t.y*.4)))){l=0.;break;}
                                else if(abs(z.y)>19.&&(f>4))l=1.;
                                        else{z=vec2(-1./((z.x*z.x-z.y*z.y)-g.x),2.0*z.x*z.y-g.y);
-                            z*=pow(z.x,(z.x-(coz(t.y)-1.)/2.*-z.x));
+                            z*=pow(z.x,(z.x-t.y*-z.x));
                             l = clamp(1.-abs(z.y)*6.,0.,1.);
                             if(z.x>-.1&&f!=0)l=clamp(1.-z.x*49.,0.,1.);
                                }
@@ -993,17 +995,17 @@ return clamp(o,0.,1.);}
                            return vec3(l)+vec3(c,x+c/2.,0.)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
 
 
-vec3 robeL(vec2 g, vec2 t){
+vec3 robeL(vec2 g, vec2 t, vec2 d){
      float r=0.;
-     g.x*=(1.2+(coz(t.y)-1.)/2.*.2);
-     g.x+=(-.45-(coz(t.y)-1.)/2.*.5);
+     g.x*=(1.2+t.y*.2);
+     g.x+=(-.45-t.y*.5);
      g.y/=1.14;
      vec2 z=g.xy;
-     if(g.x>.5 &&abs(g.y)<(.8-(coz(t.y)-1.)/2.*1.0))for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7)r=clamp(1.4-abs(g.x-2.3)
+     if(g.x>.5 &&abs(g.y)<(.8-t.y*1.0))for(int f=0;f<70;f+=1)if(abs(z.y)>11.&&f>7)r=clamp(1.4-abs(g.x-2.3)
                       *(1.-abs(g.y*g.x))-.07//(un)comment this line to toggle sleeves
                      ,0.,1.);
      else{
-         z=1.1*vec2(-2./(((1.2+(coz(t.y)-1.)/2.*.1)*z.x*z.x-1.8*z.y*z.y)-g.x),(3.*z.x*z.y-(1.4+(coz(t.x)-1.)/2.*.1)*g.y));;
+         z=1.1*vec2(-2./(((1.2+t.x*.1)*z.x*z.x-1.8*z.y*z.y)-g.x+d.x),(3.*z.x*z.y-(1.4+t.y*.1)*g.y+d.y));;
          z.x=pow(abs(z.x),.8);}
      return vec3(r);
      }
@@ -1569,12 +1571,13 @@ else if (morph>.5&&(colorCombo<10||colorCombo==14)){float lfc=length(freed(coord
                                                  if (wheel)inversion=coz(time);
 
                        vec3 mny=vec3(0.);
+                                                 vec2 lerper = vec2(lerp(time2dance/12.),lerp(time2dance*gr/12.));
 if(colorCombo!=17){
                if(metronome>1.) mny = mannyX(characterP,moveDynamic);
                else if (Character==0)mny=manny(characterP, moveDynamic);
                else if (Character==1){mny = MannyWoManny(characterP,
-                                                    vec2(time2dance,time2dance*gr)
-                                                    )+robeL(characterP,vec2(time2dance,time2dance*gr)
+                                                    lerper,move/5.
+                                                    )+robeL(characterP,lerper,move/5.
                                                             )*.95;}
                else if (Character==2){
                    mny=bride(characterP*2.,moveDynamic/2.)+dress(characterP*3./2.,moveDynamic*2./3.)*2.;
