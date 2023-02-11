@@ -7,32 +7,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="main.css">
-            <script src="loadMicrophone.js" async></script>
-     
-
-        </head>
-       <body>
+            <script src="loadMicrophone.js"></script>
            
-        <div class=onofflineBG id="background_wrap">
-            <script>
-                //splash
-                let nf = document.querySelectorAll('.onofflineBG');
-                if(window.online)
-                {
-                    if(Date.now()%2==1) nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6/z1xlogo.png');"
-                    else nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/pentaloctalwtTtlzonexmonogram.jpeg');"
-               }
-                else
-                {
-                    if(Date.now()%2==1)nf[0].style = "background-image: url('z1xlogo.png');"
-                    else nf[0].style = "background-image: url('pentaloctalwtTtlzonexmonogram.jpeg');"
-                    }
-            </script>
-        </div>
-        
 
-        
-        
         <script>
             function loadScript(element, url, offlineURL)
             {
@@ -78,6 +55,30 @@
         loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")
         </script>
 
+        </head>
+       <body>
+           
+           <div class=onofflineBG id="background_wrap">
+               <script>
+                   //splash
+                   let nf = document.querySelectorAll('.onofflineBG');
+                   if(window.online)
+                   {
+                       if(Date.now()%2==1) nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6/z1xlogo.png');"
+                       else nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/pentaloctalwtTtlzonexmonogram.jpeg');"
+                  }
+                   else
+                   {
+                       if(Date.now()%2==1)nf[0].style = "background-image: url('z1xlogo.png');"
+                       else nf[0].style = "background-image: url('pentaloctalwtTtlzonexmonogram.jpeg');"
+                       }
+               </script>
+           </div>
+           
+
+           
+           
+           
     <div id="allText">
         <div id="HK"></div>
         <div id="textWindow"></div>
