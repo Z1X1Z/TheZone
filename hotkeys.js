@@ -1,5 +1,5 @@
 
-
+window.rez = window.devicePixelRatio;
 window.zoom=1.;
 window.starSpin=0.;
 window.RockInTheWater=0;
@@ -36,11 +36,11 @@ var key = "";
         if(androidGetKey[scan]!=androidGetKeyLast[scan])key=androidGetKey[scan];
         scan--;
         }
-    callKey(new KeyboardEvent('keydown', {'key': key, "keyCode":key.charCodeAt(0)}));
+    if(window.uniformsLoaded) callKey(new KeyboardEvent('keydown', {'key': key, "keyCode":key.charCodeAt(0)}));
 }
 
 if(!(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))//if not mobile
-window.addEventListener('keydown', function(event) {callKey(event); return true;}, false);
+window.addEventListener('keydown', function(event) {if(window.uniformsLoaded)callKey(event); return true;}, false);
 
 function callKey(event){
     event.preventDefault(); event.stopImmediatePropagation();
