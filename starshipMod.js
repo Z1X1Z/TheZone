@@ -14,7 +14,6 @@ function stallTillLibrariesLoaded(){//this is a lurker. it waits for the three.j
      }
     else setTimeout(stallTillLibrariesLoaded,10);
     }//setTimeout waits for 10ms then runs stallTillLibrariesLoaded()
-stallTillLibrariesLoaded();
 let xyStarParticleArray=Array();
 window.zoom=1.;
 
