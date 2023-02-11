@@ -60,10 +60,10 @@ canvas {
 #background_wrap {
     z-index: -1;
     position: fixed;
-    top: 57px;
-    right:5%;
-    height: 90%;
-    width: 90%;
+    top: 100px;
+    right:10%;
+    height: 80%;
+    width: 80%;
     background-repeat: no-repeat;
     #background-attachment: scroll;
     background-size: contain;

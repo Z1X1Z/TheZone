@@ -6,7 +6,7 @@
    let analyser;
     let source;
     let dataArray;
-
+    let userHasGestured = false;
     async function startMic() {
       //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
         navigator.mediaDevices.getUserMedia({
@@ -23,7 +23,6 @@
           source.connect(analyser);
           analyser.fftSize = fftSize;
           dataArray = new Uint8Array( bufferSize );
-          
       }
       ).catch((err) => {// engage touch only mode
                         console.log("Touch only mode!")
@@ -34,16 +33,19 @@
         micOn = true;
       });
     }
+function route(){
+    userHasGestured=true;
+    if(!micOn&&!location.hash.includes("t"))
+        startMic();
+
+}
 if(location.hash.includes("t")){
         console.log("Touch only mode!")
         touchOnlyMode=true;
         window.touchMode = true;}
 
-document.body.addEventListener('touchstart', function(e){
-    if(!micOn&&!location.hash.includes("t"))
-        startMic();
-        })
-document.body.addEventListener('mousedown', function(e){
-    if(!micOn&&!location.hash.includes("t"))
-        startMic();
-        })
+document.body.addEventListener('touchstart', function(e){route();})
+document.body.addEventListener('mousedown', function(e){route();})
+document.body.addEventListener('keydown', function(e){route();})
+
+

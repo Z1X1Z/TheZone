@@ -1,7 +1,7 @@
 
 let touchNumber=new Map();
 
-function stallTillWad(){if(typeof Wad=="function"){initialize();} else  setTimeout(stallTillWad,10);}
+function stallTillWad(){if(typeof Wad=="function"&&userHasGestured){initialize();} else  setTimeout(stallTillWad,10);}
 stallTillWad()//lurker
 
 let hyperdriveTUNA = {
@@ -110,7 +110,7 @@ function followSound(e){
 let c = document.getElementById("container");
 
 if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)){
-    container.addEventListener('touchstart', function(e)
+    c.addEventListener('touchstart', function(e)
                                {
         e.stopImmediatePropagation();          //e.preventDefault();
 
@@ -124,12 +124,12 @@ c.focus();//this is to make the panel menu go down on android when you press on 
         }
 
     }, false);
-container.addEventListener('touchmove', function(e) {
+c.addEventListener('touchmove', function(e) {
     for(var o=0; o<e.changedTouches.length; o++)followSound(e.changedTouches[o]);
     e.stopImmediatePropagation(); e.preventDefault();
 }, false);
 
-container.addEventListener('touchend', function(e){
+c.addEventListener('touchend', function(e){
         window.pointerZoom=false;
         if(!window.touchMode){
             
@@ -142,7 +142,7 @@ container.addEventListener('touchend', function(e){
     }
         , false);
 
-    container.addEventListener('touchcancel', function(e){
+    c.addEventListener('touchcancel', function(e){
         window.pointerZoom=false;
         if(!window.touchMode){ for(var o=0; o<e.changedTouches.length; o++)
         {

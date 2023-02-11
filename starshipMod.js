@@ -4,6 +4,7 @@ function stallTillLibrariesLoaded(){//this is a lurker. it waits for the three.j
        && document.visibilityState=="visible"
        &&(micOn||location.hash.includes("t"))){
         document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
+        document.getElementById( "load message").innerHTML = "";//turn off splash!
 
                 if(location.hash.includes("t"))
               {
