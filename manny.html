@@ -8,48 +8,6 @@
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="main.css">
             <script src="loadMicrophone.js"></script>
-   
-           <script>
-               function loadScript(element, url, offlineURL)
-               {
-
-                   // Adding the script tag to the head as suggested before
-                   var scriptElement = document.getElementById(element);//document.createElement("script");//
-                   scriptElement.type = 'text/javascript';
-                   scriptElement.src = url;
-                   // Then bind the event to the callback function.  or at least that's how it goes without the stallLurker in the sonicstarship.  it's stabler. maybe
-                   // There are several events for cross browser compatibility.
-                   //script.onreadystatechange = callback;
-                   //script.onload = callback;
-                   scriptElement.onerror=function(){
-                       var s = document.createElement("script");//document.getElementById('threeJSscript');
-                       s.type = 'text/javascript';
-                       s.src = offlineURL;
-                       document.body.appendChild(s);
-                       }
-               }
-             </script>
-           
-           <script src="OFFLINEonlineSwitch.js"></script>
-   <script id="threeJSscript"></script>
-   <script>
-   var cdnSwitchThree="three.js";
-   if (window.useCDN)cdnSwitchThree="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js";
-   loadScript("threeJSscript",cdnSwitchThree,"three.js")
-   </script>
-   <script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
-   <script>
-       var cdnOSMD="opensheetmusicdisplay.min.js";
-       if (window.useCDN)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.6.1/build/opensheetmusicdisplay.min.js";
-       loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")
-    </script>
-   <script id="wadJSscript"></script>
-   <script>
-       var cdnSwitchWAD="wad.min.js";
-       if (window.useCDN)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0";
-       loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")
-   </script>
-
 
         </head>
        <body>
@@ -1607,6 +1565,49 @@ gl_FragColor=vec4((clamp(mny+starship.xyz-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,
                                                  
 
 </script>
+
+<script>
+    function loadScript(element, url, offlineURL)
+    {
+
+        // Adding the script tag to the head as suggested before
+        var scriptElement = document.getElementById(element);//document.createElement("script");//
+        scriptElement.type = 'text/javascript';
+        scriptElement.src = url;
+        // Then bind the event to the callback function.  or at least that's how it goes without the stallLurker in the sonicstarship.  it's stabler. maybe
+        // There are several events for cross browser compatibility.
+        //script.onreadystatechange = callback;
+        //script.onload = callback;
+        scriptElement.onerror=function(){
+            var s = document.createElement("script");//document.getElementById('threeJSscript');
+            s.type = 'text/javascript';
+            s.src = offlineURL;
+            document.body.appendChild(s);
+            }
+    }
+  </script>
+
+<script src="OFFLINEonlineSwitch.js"></script>
+<script id="threeJSscript"></script>
+<script>
+var cdnSwitchThree="three.js";
+if (window.useCDN)cdnSwitchThree="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js";
+loadScript("threeJSscript",cdnSwitchThree,"three.js")
+</script>
+<script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
+<script>
+var cdnOSMD="opensheetmusicdisplay.min.js";
+if (window.useCDN)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.6.1/build/opensheetmusicdisplay.min.js";
+loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")
+</script>
+<script id="wadJSscript"></script>
+<script>
+var cdnSwitchWAD="wad.min.js";
+if (window.useCDN)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0";
+loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")
+</script>
+
+
 <script src="starshipMod.js" defer></script>
     </body>
 </html>
