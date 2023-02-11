@@ -7,6 +7,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="main.css">
+            <script src="loadMicrophone.js" async></script>
         </head>
        <body>
            <script>
@@ -79,7 +80,7 @@
     <div id="allText">
         <div id="HK"></div>
         <div id="textWindow"></div>
-    <script src="hotkeys.js"></script>
+    <script src="hotkeys.js" async></script>
 
     <div class="navbar">
         <div class="dropdown">
@@ -431,13 +432,13 @@
     
     <div id="container"></div>
     
-    <script src="wadLoader.js"> </script>
+    <script src="wadLoader.js" dynamic> </script>
 
     <div id="score">
         <div id="osmdCanvas"/>
         <input type="file" id="files"/>
         <output id="list"></output>
-        <script src="fileSelectAndLoadOSMD.js"></script>
+        <script src="fileSelectAndLoadOSMD.js" async></script>
     </div id="score">
     
     
@@ -1604,7 +1605,6 @@ gl_FragColor=vec4((clamp(mny+starship.xyz-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,
                                                  
 
 </script>
-<script src="loadMicrophone.js" async></script>
 <script src="starshipMod.js" defer></script>
     </body>
 </html>
