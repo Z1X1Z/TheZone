@@ -1,5 +1,5 @@
 
-function stallTillLibrariesLoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
+function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
     if(typeof THREE=="object" && document.visibilityState=="visible"
        &&(micOn||location.hash.includes("t"))){
         document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
@@ -12,9 +12,9 @@ function stallTillLibrariesLoaded(){//this is a lurker. it waits for the three.j
               }
             init();
      }
-    else setTimeout(stallTillLibrariesLoaded,10);
-    }//setTimeout waits for 10ms then runs stallTillLibrariesLoaded()
-stallTillLibrariesLoaded();
+    else setTimeout(stallTillTHREELoaded,10);
+    }//setTimeout waits for 10ms then runs stallTillTHREELoaded()
+stallTillTHREELoaded();
 let xyStarParticleArray=Array();
 window.zoom=1.;
 
@@ -133,14 +133,17 @@ function spiral_compress(){
     let z = dataArray;
 
     for(let n = 0; n<starArms; n++){testar[n] = 0;mustarD[n] = 1;}
-    for(let t=1; t<numberOfBins; t+=1)
+    
+    for(let n=0; n<numberOfBins; n++)
     {
-    let n =t;
     //if ( z[n]>z[n-1] && z[n] > z[n+1] ){
-    let   d = (z[n+1]-z[n-1])/(z[n-1]+z[n+1]);
+    let d =1.;
+    if(n!=0)   d = (z[n+1]-z[n-1])/(z[n-1]+z[n+1]);
+    else d = (z[n+1])/(z[n]+z[n+1])/2.;
     let nAdj = n + d*4 ;
     //if (Math.abs(nAdj-n) < 10)
-    if (Math.abs(d)<4+1)freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
+    if (Math.abs(d)<4+1.)
+        freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
         else freq = audioX.sampleRate*n/numberOfBins
         //    freq = 440; //check for concert A
  
@@ -158,12 +161,15 @@ function spiral_compress(){
 
 
 var twelve = Array(12);
+for(let n = 0; n<12; n++)twelve[n] = Array(10);
+
 var smoothTwelve =false;
 function fiveAndSeven(){
     
-    for(let n = 0; n<12; n++){twelve[n] = Array(10);
-        for(let m = 0; m<10; m++)twelve[n][m]=0;
-    }
+    for(let n = 0; n<12; n++)
+        for(let m = 0; m<10; m++)
+            twelve[n][m]=0;
+    
     
       let finger = 0 //ranges up to
       let  star = 0 //ranges up to 12
@@ -909,17 +915,17 @@ if(!window.touchMode){
                      
                      if(RockInTheWater==1||RockInTheWater==2)
                      {
-                         var lengt =(testar[g]/255-totalAMP/2.)*starshipSize;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
-                         if(lengt<=0)lengt=1./255.*starshipSize;
+                         var widt =(testar[g]/255-totalAMP/2.)*starshipSize;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
+                         if(widt<=0)lengt=1./255.*starshipSize;
                                      var xyStarParticle={};
                          xyStarParticle.amp = testar[g];
-                         xyStarParticle.x=lengt*-Math.sin(rpio2);
-                         xyStarParticle.xr=-Math.sin(arm)/fill;
-                         xyStarParticle.y=lengt*-Math.cos(rpio2);
+                         xyStarParticle.x=widt*-Math.sin(rpio2);//this is the
+                         xyStarParticle.xr=-Math.sin(arm)/fill;//this is the outwards length of each pulse
+                         xyStarParticle.y=widt*-Math.cos(rpio2);
                          xyStarParticle.yr=-Math.cos(arm)/fill;
                          xyStarParticle.vop=vop;
-                         xyStarParticle.lengt=lengt
-                         xyStarParticle.widt=1./fill
+                         xyStarParticle.widt=widt;
+                         xyStarParticle.lengt=1./fill
                          xyStarParticle.time = timestamp/1000.;
                          xyStarParticle.interpolation = interpolation;
                          xyStarParticle.interpolationFramesScaled = interpolation/60./4.;
@@ -941,10 +947,10 @@ if(!window.touchMode){
                              let m = xyStarParticleArray[xyStarParticleArray.length-1];
                              let lastLoopTime=m.time;
                              let timeShift = 0.;
-                             let w = timeShift/m.widt/secondsToEdge;
-                             let withinRadialDelimiter = timeShift +m.widt<OUTERSHELL;
+                             let w = timeShift/m.lengt/secondsToEdge;
+                             let withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL;
                              let depthINNER = (-1.+timeShift/OUTERSHELL);
-                             let depthOUTER = depthINNER+m.widt;
+                             let depthOUTER = depthINNER+m.lengt;
 
                  for(let starMoment=xyStarParticleArray.length-1; starMoment>=0; starMoment--)
                
@@ -953,10 +959,10 @@ if(!window.touchMode){
                       m = xyStarParticleArray[starMoment];
                      if (lastLoopTime!=m.time) {
                          timeShift = uniforms["time"].value-m.time;
-                          w = timeShift/m.widt/secondsToEdge;
-                         withinRadialDelimiter = timeShift +m.widt<OUTERSHELL;
+                          w = timeShift/m.lengt/secondsToEdge;
+                         withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL;
                          depthINNER = (-1.+timeShift/OUTERSHELL);
-                         depthOUTER = depthINNER+m.widt;
+                         depthOUTER = depthINNER+m.lengt;
 
                          lastLoopTime=m.time;
                      }
@@ -976,7 +982,7 @@ if(!window.touchMode){
                          let outSetX = w*m.xr-bulletX;//apparently something is flipped
                          let outSetY = w*m.yr-bulletY;
                
-
+                         let outSet = new THREE.Vector2(outSetX,outSetY)
                          for(var yy=0;yy<6;yy++)
                          
                              starColors.push(
@@ -990,16 +996,17 @@ if(!window.touchMode){
                          let yShift=m.y+outSetY;
                          let xrShifted = m.xr+xShift;
                          let yrShifted = m.yr+yShift;
-
-                 star.push(
-                           
-                           nx,    ny,  depthINNER,
-                           xShift,    yShift,  depthINNER,
-                           xrShifted, yrShifted,  depthOUTER,
-                           nx, ny,  depthINNER,
-                           xrShifted, yrShifted,  depthOUTER,
-                           m.xr+nx, m.yr+ny,  depthOUTER,
-                           )
+                         
+                         star.push(
+                                   
+                                   nx,    ny,  depthINNER,
+                                   xShift,    yShift,  depthINNER,
+                                   xrShifted, yrShifted,  depthOUTER,
+                                   nx, ny,  depthINNER,
+                                   xrShifted, yrShifted,  depthOUTER,
+                                   m.xr+nx, m.yr+ny,  depthOUTER,
+                                   )
+                         
                          
                      }
                      else break ;
@@ -1037,10 +1044,6 @@ else{//start drawing of just twenty four frets here
                                     )
 
 
-var vertices;
-//var arm =(flip*(mustarD[g]+1.)+19+twist/2.)%24./24.*pi*2.;
-
-//var arm = (-flip*g+1)-1)*pi*2./24+twist;
 rpio2 =arm+pi/2.;
 let x = widt*-Math.sin(rpio2);
 let y = widt*-Math.cos(rpio2);
@@ -1095,11 +1098,7 @@ x,    y,  depth,
                      vop.setRGB(BlackOrWhite,BlackOrWhite,BlackOrWhite);
                      
                      for(var yy=0;yy<6;yy++)   starColors.push(vop.r,vop.g,vop.b,1.)
-                         
-                         
-                         var vertices;
-                     //var arm =(flip*(mustarD[g]+1.)+19+twist/2.)%24./24.*pi*2.;
-                     //var arm = (-flip*g+1)-1)*pi*2./24+twist;
+
                      rpio2 =arm+pi/2.;
                      fingerTwist=(flip*(t-6)+twist/2.+12)/12.*2.*pi
                      let x = widt*-Math.sin(rpio2+fingerTwist+pi);
@@ -1464,16 +1463,19 @@ if(!zoomAtl41)
     }
     else lastZoom=zoom/zoomRate();
             var d = pixelShaderSize/2.;//this is the frame size in the shader: "p=vec2(...."
-            if(uniforms.colorCombo.value==15&&window.mandelbrot) d = 10.;//for zonex.html
+
         if(pointerZoom){
-             var spunTouch = [-Math.abs(zoom-lastZoom)*screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d),
-                              Math.abs(zoom-lastZoom)*screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d)];
-
-                  if(uniforms.carousel.value!=0.)         spunTouch=spin(spunTouch,uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value)%(Math.PI*2.));
-
+            let xTouch = screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d);
+            let yTouch = screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d);
+             var touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
+            uniforms.d.value.x=xTouch;
+            uniforms.d.value.y=yTouch;
+            uniforms[ "volume" ].value=1.;
+            let spunTouch=touchMovement;
+                  if(uniforms.carousel.value!=0.)         spunTouch=spin(touchMovement,uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value)%(Math.PI*2.));
                       coordX+= spunTouch[0];
                       coordY+= spunTouch[1];
-                  }
+          }
 
           uniforms[ "zoom" ].value = zoom;
           uniforms.coords.value.x = coordX;

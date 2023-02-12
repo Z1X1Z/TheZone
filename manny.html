@@ -579,6 +579,7 @@ uniform float shaderScale;
     float coz(float x){return -cos(x);}
 
     vec3 heart(vec2 g, vec2 t){
+        
         //g.x-=.5;
         g.y*=-1.;
         vec2 z=g.xy;
@@ -647,17 +648,17 @@ uniform float shaderScale;
     
 vec3 faceHeights(vec2 g, vec2 t){
 float l = 1.;
-g*=2.;
+g*=4.;
 vec2 z=g.xy;
-if(g.x*g.x+g.y*g.y<40.)for (int f=0;f<21+6*5;f+=1)if(abs(z.y)>19.&&(f==1||f>3)){
-    if (f==1){l=1.;break;}
+for (int f=0;f<21+6*5;f+=1)if(abs(z.y)>19.&&(f==1||f>3)){
+    //if (f==1){l=0.;break;}
     l=1.-length(z)/40.;//clouds and face
     break;}
 else{
-    z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),2.0*z.x*z.y-g.y+t.y);
+    z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x/3.),2.0*z.x*z.y-g.y+t.y/3.);
     l=abs(z.y)*5.;//smooths middle horn, removes some clouds
     if(z.x>-.1)l=z.x*50.;}//face with closed small holes
-return vec3(clamp(1.-l,0.,1.));
+return vec3(clamp(l,0.,1.));
 }
     
                 vec2 freed(vec2 p){
@@ -876,9 +877,8 @@ if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*PI/(atan(s.y,s.x)-PI*spirated);
    
        if(dotted)s/=dot(-m,t)*dot(m,-t);
 
-      // if(spirated!=0.)
-   s+=m-t;
-//    else s+=t-m;//plus t is lobes, -t is circles with dance
+       if(spirated!=0.)s+=m-t;
+    else s+=t-m;//plus t is lobes, -t is circles with dance
    
        if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the body steps on the clover
        else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only
@@ -992,10 +992,10 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                                 o/= max(max(o.r,o.g),o.b);
                                  o=o*.5+.5;
                                  }
-  float isBlack =1.;
-  if (starship.x+starship.y+starship.z==0.&&starship.w!=0.)isBlack=0.;
-  else if(starship.x==starship.y&&starship.x==starship.z&&abs(starship.z-.5)<.1&&starship.w!=0.) isBlack=.5;
-o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+starship.z)*(starship.w*starship.w)),0.,1.)+starship.xyz*isBlack);
+  float isGrey =1.;
+  if (starship.x==starship.y&& starship.y==starship.z&&starship.w!=0.)isGrey=starship.x;
+ // else if(starship.x==starship.y&&starship.x==starship.z&&abs(starship.z-.5)<.1&&starship.w!=0.) isBlack=.5;
+o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+starship.z)*starship.w),0.,1.)+starship.xyz)*isGrey;
 return clamp(o,0.,1.);}
 
                       
@@ -1211,7 +1211,6 @@ return (vec3(z.x*z.y,z.x+.2,z.y-.3*(1.-p.x))+.3)/length(z);
 
 
 
-const float brideSize = 12.;
 
 
         vec3 bride(vec2 p,vec2 t){
@@ -1226,7 +1225,7 @@ const float brideSize = 12.;
                    else {z=2.*vec2(-1./((z.x*z.x-1.44*z.y*z.y)-g.x*1.2+t.x),(1.2*z.x*z.y-1.2*g.y+t.y));
                          z.x=pow(abs(z.x),.777-t.x/49.);}
                //vv legs vv
-                   g=p/4.;
+                   g=p/3.5;
                    //g.x-=.5;
                    z=g;
                    for (int f=0;f<70;f+=1)if(abs(z.x+z.y)>200.&&f>4){c=1.;break;}
@@ -1234,6 +1233,7 @@ const float brideSize = 12.;
                          z.y = -1./z.y;}
                //vv head vv
                    g=p;
+                   g.x-=.1;
                    z=g;
                    for (int f=0;f<10;f+=1)if(abs(z.x+abs(z.y))>27.&&f>4){l=1.;break;}
                    else{z=vec2(-1./((z.x*z.x-z.y*z.y)-g.x+t.x/8.),(2.0*z.x*z.y-g.y+t.y/8.));
@@ -1533,8 +1533,8 @@ vec3 horse(vec2 p, vec2 t){ //horse
 
                                                                                       
                                                                                       
-  vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t/33.3)+heart(p/gr,vec2(t.y,-t.x));}
-  vec3 bod(vec2 p, vec2 t){t*=zoom;return body(p,t)+heart(p,t);}
+  vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t/33.3)+heart(p/gr,-t);}
+  vec3 bod(vec2 p, vec2 t){t;return body(p,t);}
   vec3 manny(vec2 p, vec2 t){
     return +body(p,t)+face(p,0.*t)+shiny(p,t);}
   vec3 mannyX(vec2 p, vec2 t){return body(p,t)+excelsior(p,vec2(time*metronome,0.));}
@@ -1579,16 +1579,14 @@ if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time*rate,PI*2.));
 
 vec2 dance = vec2(0.);
                                    vec2 dance2 = vec2(0.);
-
-if (morph>.5 && colorCombo>=10)  dance=vec2(-sin(time+time2dance),
-                                        -sin((time+time2dance)*-1.618))*zoom+(spunC.yx+.5)*log(pow(zoom,1.618))/log(1.618)*zoom*.5;//a lot of these coords should probably be spunC
-
-else if (morph>.5&&(colorCombo<10||colorCombo==14)){float lfc=length(freed(coords));
-                                   dance2 = vec2(
-                                           -abs(lfc/(lfc-zoom)) -lfc/(lfc+zoom)*2./3.,
+           if (morph>.5){
+                dance = vec2(-sin(time+time2dance), -sin((time+time2dance)*-1.618))*zoom+(spunC.yx+.5)*log(pow(zoom,1.618))/log(1.618)*zoom*.5;
+                //heart dance
+                float lfc=length(freed(coords));
+                   dance2 = vec2(   -abs(lfc/(lfc-zoom)) -lfc/(lfc+zoom)*2./3.,
                                      -((zoom*lfc)/(lfc+zoom)*sign(coords.y)*sign(coords.x)*(1.-lfc*zoom) )
-                                       )
-                                       ;}
+                                       );//clover dance
+             }
 
  vec2 driftCanceller=vec2(dance.x,-dance.y);
                                                                                          
@@ -1598,12 +1596,12 @@ else if (morph>.5&&(colorCombo<10||colorCombo==14)){float lfc=length(freed(coord
                                                  vec2 t =vec2(-sin(time),-sin(time*.618));
 
      if(colorCombo<10)zoomer=tol(backGround, dance2);
-     else if (colorCombo==11||colorCombo==18)zoomer=heartZoom(backGround+driftCanceller, dance);
+     else if (colorCombo==11||colorCombo==18)zoomer=heartZoom(-backGround+driftCanceller, dance);
      else if (colorCombo==13)zoomer=tokogae(backGround,vec2(zoom));
      else if (colorCombo==14)zoomer=TOLTOK(backGround,dance2);
      else if (colorCombo==15)zoomer=xx(backGround,dance2);
      else if (colorCombo==16)zoomer=xtol(backGround,vec2(0.));
-     else if (colorCombo==17)zoomer=body(backGround,vec2(-sin(time*20.)/50.,-sin(time*gr*20.)/30.)*zoom)+robe(backGround,vec2(0.))/2.+faceHeights(backGround,t*zoom)+                                                   heartZoom(backGround-vec2(.5,0.)+driftCanceller,dance);
+     else if (colorCombo==17)zoomer=faceHeights(-backGround,t*zoom);
     else if (colorCombo==19)zoomer=acrostic(backGround);
 
                                                  
@@ -1627,55 +1625,56 @@ else if (morph>.5&&(colorCombo<10||colorCombo==14)){float lfc=length(freed(coord
                                                  {bridge=fourCreaturesSmall(characterP,moveDynamic);
                                                      cloud=clamp(clouds(characterP,moveDynamic),0.,1.);
                                                      }
-     if(fourCreats<0){creatures=fourCreatures(backGround*8.,moveDynamic/4.);
-         
-        if(length(backGround*brideSize)>4./3./brideSize)
-         
-         b=bride(backGround*brideSize,10.*zoom*vec2(-sin(time2dance*gr),-sin(time2dance)))+heart(backGround*brideSize/1.5-vec2(.25,0.)+driftCanceller,dance);
-         
+     if(fourCreats<0){
+                       const float brideSize = 24.;
+                       creatures=fourCreatures(-backGround*8.,t);
+                       if(length(backGround*brideSize)>4./3./brideSize)
+                            b=bride(-backGround*brideSize,brideSize*zoom*t)+heart((-backGround/gr-vec2(.5,0.))*brideSize,-zoom*t);
      }
-                            
-                                                 float inversion = -1.;
-                                                 if (wheel)inversion=coz(time);
 
-                       vec3 mny=vec3(0.);
-                                                 vec2 lerper = vec2(lerp(time2dance/12.),lerp(time2dance*gr/12.));
-if(colorCombo!=17){
-               if(metronome>1.) mny = mannyX(characterP,moveDynamic);
-               else if (Character==0)mny=manny(characterP, moveDynamic);
-               else if (Character==1){mny = MannyWoManny(characterP,
-                                                    lerper,move/5.
-                                                    )+robeL(characterP,lerper,move/5.
-                                                            )*.95;}
-               else if (Character==2){
-                   mny=bride(characterP*2.,moveDynamic/2.)+dress(characterP*1.5,-moveDynamic/1.5)*2.;
-                   swordSkew+=.5;}
-               else if (Character==3)mny=lion(fourcreaturePlayerP,vec2(inversion,0.))+body(characterP,moveDynamic);
-               else if (Character==4){
-                   mny=eaglePerched(fourcreaturePlayerP,vec2(inversion,0.))+body(characterP,moveDynamic);
-                   swordSkew+=1.;}
-               else if (Character==5)mny=ox(fourcreaturePlayerP,vec2(inversion,0.))+body(characterP,moveDynamic);
-               else if (Character==6)mny=man(fourcreaturePlayerP,vec2(inversion,0.))+body(characterP,moveDynamic);
+                 float inversion = -1.;
+                 if (wheel)inversion=coz(time);
 
-}
-vec3 ARTICLES=vec3(0.);
+                   vec3 mny=vec3(0.);
+             vec2 lerper = vec2(lerp(time2dance/12.),lerp(time2dance*gr/12.));
+            if(colorCombo!=17){
+                   if(metronome>1.) mny = mannyX(characterP,moveDynamic);
+                   else if (Character==0)mny=manny(characterP, moveDynamic);
+                   else if (Character==1){mny = MannyWoManny(characterP,
+                                                        lerper,move/5.
+                                                        )+robeL(characterP,lerper,move/5.
+                                                                )*.95+heart(characterP/gr-vec2(.25,.0),    -moveDynamic);}
+                   else if (Character==2){
+                       mny=bride(characterP*gr,moveDynamic/gr)+dress(characterP*1.5,-moveDynamic/1.5)*2.+heart(characterP/gr-vec2(.5,.0),-moveDynamic);
+                       swordSkew+=.5;}
+                   else if (Character==3)mny=lion(fourcreaturePlayerP,vec2(inversion,0.))+body(characterP,moveDynamic);
+                   else if (Character==4){
+                       mny=eaglePerched(fourcreaturePlayerP,vec2(inversion,0.))+body(characterP,moveDynamic);
+                       swordSkew+=1.;}
+                   else if (Character==5)mny=ox(fourcreaturePlayerP,vec2(inversion,0.))+body(characterP,moveDynamic);
+                   else if (Character==6)mny=man(fourcreaturePlayerP,vec2(inversion,0.))+body(characterP,moveDynamic);
+
+            }
+     mny=clamp(mny,0.,1.);
+
+    vec3 ARTICLES=vec3(0.);
     if(articles){
             vec3 HORSE=horse(characterP, moveDynamic);
             ARTICLES+=scroll(characterP+1.5*vec2(0.,resolution.x/min(resolution.x,resolution.y)),vec2(-1.));
             vec3 SWORD = sword(characterP+vec2(swordSkew,0.),vec2(0.));;
             ARTICLES+=clamp(lamp(characterP,vec2(-1.))-(SWORD.r+SWORD.g+SWORD.b+HORSE.r*3.)*1000000.,0.,1.)+SWORD+HORSE;
     }
-                                                 mny=clamp(mny,0.,1.);
-vec4 starship = texture2D(STAR,vUv);
-float isBlack =1.;
-if (starship.x+starship.y+starship.z==0.&&starship.w!=0.)isBlack=0.;
-else if(starship.x==starship.y&&starship.x==starship.z&&abs(starship.z-.5)<.1&&starship.w!=0.) isBlack=.5;
+                                                 
+    vec4 starship = texture2D(STAR,vUv);
+    float isGrey =1.;
+    if (starship.x==starship.y&& starship.y==starship.z&&starship.w!=0.)isGrey=starship.x;
+
 gl_FragColor=vec4((clamp(mny+starship.xyz-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge+
               clamp(clamp(cloud+
                                 zoomer
-                          -(starship.x+starship.y+starship.z)*(starship.w*starship.w)
+                          -(starship.x+starship.y+starship.z)*starship.w
                           -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*1000.
-                                                        ,0.,1.)-(mny.r+mny.b+mny.g)*10000.,.0,1.))*isBlack
+                                                        ,0.,1.)-(mny.r+mny.b+mny.g)*10000.,.0,1.))*isGrey
       ,1.
               );}
                                                  
