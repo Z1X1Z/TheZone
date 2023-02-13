@@ -90,7 +90,7 @@ var zoomOutEngage=false;
 let pi = Math.PI;
 let inputData;
 let bufferSize = fftSize;
-window.zoomOutRatchetThreshold=.1/255.;
+window.zoomOutRatchetThreshold=.1/bufferSize;
 
 let numberOfBins = fftSize/2.;
 let spirray0 = new Float32Array(bufferSize);
@@ -196,7 +196,7 @@ let xPerp= Array(trailLength);//perp is the perpendicular from c
 let yPerp = Array(trailLength);
 let trailWidth = Array(trailLength);
 let trailTimeOfRecording = Array(trailLength);
-
+let trailSegmentExpired = Array(trailLength).fill(false);
 let pitchCol = Array(trailWidth.length);
 let trailLoaded = false;
 let trailDepth = -1;
@@ -337,12 +337,13 @@ if (f>=trailDepth)f=0;
  xAdjusted= d_x*radius;
  yAdjusted= d_y*radius;
 
-if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) {
+if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) if(!trailSegmentExpired){
 
     cx[n] += xAdjusted;
     cy[n] += yAdjusted;
 trailWidth[n] += radius*starshipSize;
 }
+    
 
                      cx[(trailDepth+f-1)%trailDepth] = 0;
                      cy[(trailDepth+f-1)%trailDepth] = 0;
@@ -689,7 +690,7 @@ function takeNextScoreSlice(start){
                        let STARSHIPMAP;
                   let     volumeBooster = 1.;
                        let date = Date.now();
-                       let startTimeSecondMantissa = date/1000.-Math.round(date)/1000.;//for orienting the dance to time
+                       let startTimeSecondMantissaMagnified = ((date/1000.-Math.round(date)/1000.)-.5)*144000;//for orienting the dance to time
 function animate( timestamp ) {
 adjustThreeJSWindow();//mostly for ios here
 
@@ -698,7 +699,7 @@ adjustThreeJSWindow();//mostly for ios here
     
     
     
-    uniforms[ "time" ].value = timestamp/1000.+startTimeSecondMantissa;
+    uniforms[ "time" ].value = timestamp/1000.+startTimeSecondMantissaMagnified;
     if(starSpin!=0)twist=(uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*2.*starSpin*2.+24)%24.;
 
 
@@ -819,7 +820,7 @@ else if(blankBackground) {
      tx = spirray0[r]/spiregulator;
      ty =  spirray1[r]/spiregulator;
          greynessLast = greyness
-         greyness = 1.-(tx*tx+ty*ty)**1.3247
+         greyness = 1.-Math.sqrt(tx*tx+ty*ty)**1.3247
          pointColor.push(
                          greynessLast, greynessLast, greynessLast,
                          greyness, greyness, greyness
@@ -827,9 +828,10 @@ else if(blankBackground) {
 
     point.push( new THREE.Vector3(txlast,tylast, depth),new THREE.Vector3( tx, ty, depth));
   }
-  let lineGeometry = new THREE.BufferGeometry().setFromPoints( point );
-                lineGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( pointColor, 3 ).onUpload( disposeArray ));
-
+  let lineGeometry = new THREE.BufferGeometry()
+                            if(on){lineGeometry.setFromPoints( point );
+         lineGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( pointColor, 3 ).onUpload( disposeArray ));
+     }
   const line = new THREE.LineSegments(lineGeometry, lineMat );
 
 
@@ -1188,37 +1190,48 @@ let loopLimit = trailDepth;
 
 
                              let     timeElapsedSinceRecording=     uniforms["time"].value-trailTimeOfRecording[r];
-while(loopLimit>0&&r!=f)if(timeElapsedSinceRecording<trailSecondsLong){
-
+while(loopLimit>0&&r!=f)if(timeElapsedSinceRecording<=trailSecondsLong){
+                         trailSegmentExpired=false;
                          timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
                              let depthTranslucencyTrail =1.-timeElapsedSinceRecording/trailSecondsLong;
-                         
-  let widtr = trailWidth[r];
-  let widts = trailWidth[s];
-  let tt = 0.;
-  var z = -(Math.abs(depthTranslucencyTrail)**2.5);
+                           var z = -(Math.abs(depthTranslucencyTrail)**2.5);
                           let transparencyOfTrail= depthTranslucencyTrail;
                          
                           trailColor.push(
-
                                           pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
                                           pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrail,
-                                           pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
-                                                                                      pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
+                                          pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
+                                          pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
+                                          pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrail,
+                                          pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrail
+                                          )
+                         let widtr = trailWidth[r];
+                         let widts = trailWidth[s];
+                         let widtXperpR=widtr*xPerp[r];
+                         let widtYperpR=widtr*yPerp[r];
+                         let widtXperpS=widtr*xPerp[s];
+                         let widtYperpS=widtr*yPerp[s];
+                         
+                         let xrFinalNegatived = cx[r]-widtXperpR;
+                         let xrFinalPositived = cx[r]+widtXperpR;
+                         let xsFinalNegatived = cx[s]-widtXperpS;
+                         let xsFinalPositived = cx[s]+widtXperpS;
+                         
+                         let yrFinalNegatived = cy[r]-widtYperpR;
+                         let yrFinalPositived = cy[r]+widtYperpR;
+                         let ysFinalNegatived = cy[s]-widtYperpS;
+                         let ysFinalPositived = cy[s]+widtYperpS;
 
-                                                                                      pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrail,
-                                                                                                                                 pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrail
-                    )
+
 
  trail.push(
 
-            cx[r]-widtr*xPerp[r], cy[r]-widtr*yPerp[r],z, //2//side far//far triangle
-            cx[s]-widts*xPerp[s], cy[s]-widts*yPerp[s],z,  //1//side close
-            cx[r]+widtr*xPerp[r], cy[r]+widtr*yPerp[r],z, //3//side far
-
-    cx[r]+widtr*xPerp[r], cy[r]+widtr*yPerp[r],z,//3//side far//close triangle
-    cx[s]-widts*xPerp[s], cy[s]-widts*yPerp[s],z,//1//side close
-    cx[s]+widts*xPerp[s], cy[s]+widts*yPerp[s],z,//4//side close
+            xrFinalNegatived, yrFinalNegatived,z, //2//side far//far triangle
+            xsFinalNegatived, ysFinalNegatived,z,  //1//side close
+            xrFinalPositived, yrFinalPositived,z, //3//side far
+            xrFinalPositived, yrFinalPositived,z,//3//side far//close triangle
+            xsFinalNegatived, ysFinalNegatived,z,//1//side close
+            xsFinalPositived, ysFinalPositived,z,//4//side close
   );
 
   s = r;
@@ -1228,14 +1241,15 @@ while(loopLimit>0&&r!=f)if(timeElapsedSinceRecording<trailSecondsLong){
 
 }
 
-                                  else {
-                         s = r;
-                         r--;
-                         if(r< 0)r+=trailDepth;
-                                     loopLimit--;
+      else {
+             trailSegmentExpired[r] = true;
+             s = r;
+             r--;
+             if(r< 0)r+=trailDepth;
+                         loopLimit--;
                          timeElapsedSinceRecording=     uniforms["time"].value-trailTimeOfRecording[r];
-
-                     }
+                         
+         }
 
 
 

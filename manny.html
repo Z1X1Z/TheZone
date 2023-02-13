@@ -1597,12 +1597,12 @@ vec2 dance = vec2(0.);
                                                  vec2 t =vec2(-sin(time),-sin(time*.618));
 
      if(colorCombo<10)zoomer=tol(backGround, dance2);
-     else if (colorCombo==11||colorCombo==18)zoomer=heartZoom(-backGround+driftCanceller, dance);
+     else if (colorCombo==11||colorCombo==18)zoomer=heartZoom(backGround+driftCanceller, dance);
      else if (colorCombo==13)zoomer=tokogae(backGround,vec2(zoom));
      else if (colorCombo==14)zoomer=TOLTOK(backGround,dance2);
      else if (colorCombo==15)zoomer=xx(backGround,dance2);
      else if (colorCombo==16)zoomer=xtol(backGround,vec2(0.));
-     else if (colorCombo==17)zoomer=faceHeights(-backGround,t*zoom);
+     else if (colorCombo==17)zoomer=faceHeights(backGround,t*zoom);
     else if (colorCombo==19)zoomer=acrostic(backGround);
 
                                                  
@@ -1628,9 +1628,9 @@ vec2 dance = vec2(0.);
                                                      }
      if(fourCreats<0){
                        const float brideSize = 24.;
-                       creatures=fourCreatures(-backGround*8.,t);
+                       creatures=fourCreatures(backGround*8.,t);
                        if(length(backGround*brideSize)>4./3./brideSize)
-                            b=bride(-backGround*brideSize,brideSize*zoom*t)+heart((-backGround/gr-vec2(.5,0.))*brideSize,-zoom*t);
+                            b=bride(backGround*brideSize,brideSize*zoom*t)+heart((backGround/gr-vec2(.5,0.))*brideSize,-zoom*t);
      }
 
                  float inversion = -1.;
