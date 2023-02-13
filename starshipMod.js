@@ -829,11 +829,13 @@ else if(blankBackground) {
 
     point.push( new THREE.Vector3(txlast,tylast, depth),new THREE.Vector3( tx, ty, depth));
   }
+                            let line;
   let lineGeometry = new THREE.BufferGeometry()
                             if(on){lineGeometry.setFromPoints( point );
          lineGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( pointColor, 3 ).onUpload( disposeArray ));
+         line = new THREE.LineSegments(lineGeometry, lineMat );
+
      }
-  const line = new THREE.LineSegments(lineGeometry, lineMat );
 
 
 
@@ -1461,10 +1463,10 @@ for(var n = 0; n<targets.length;n++){
   pM[n].dispose();
   targets[n].geometry.dispose();
 }
-
-  scene.remove(line);
-  line.geometry.dispose( );
-
+     if(on){
+            scene.remove(line);
+            line.geometry.dispose( );
+        }
                  scene.remove(meshe);
                  scene.remove(meshTrail);
 
