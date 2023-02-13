@@ -93,11 +93,11 @@ let bufferSize = fftSize;
 window.zoomOutRatchetThreshold=.1/bufferSize;
 
 let numberOfBins = fftSize/2.;
-let spirray0 = new Float32Array(bufferSize);
-let spirray1 = new Float32Array(bufferSize);
+const spirray0 = Array(bufferSize);
+const spirray1 = Array(bufferSize);
 const starArms = numberOfBins;
-var testar = Array(starArms);
-var mustarD = Array(starArms);
+const testar = Array(starArms);
+const mustarD = Array(starArms);
 let averagedAmp =  0;
 let len=0;
 let spiregulator=0;
@@ -189,15 +189,15 @@ function fiveAndSeven(){
 
                           const trailSecondsLong = 12;
                           const trailLength = zoomFrames*trailSecondsLong;
-let trail = Array(trailLength);
-let cx = Array(trailLength);//c is the center of the frame moved from the origin
-let cy = Array(trailLength);
-let xPerp= Array(trailLength);//perp is the perpendicular from c
-let yPerp = Array(trailLength);
-let trailWidth = Array(trailLength);
-let trailTimeOfRecording = Array(trailLength);
-let trailSegmentExpired = Array(trailLength).fill(false);
-let pitchCol = Array(trailWidth.length);
+const trail = Array(trailLength);
+const cx = Array(trailLength);//c is the center of the frame moved from the origin
+const cy = Array(trailLength);
+const xPerp= Array(trailLength);//perp is the perpendicular from c
+const yPerp = Array(trailLength);
+const trailWidth = Array(trailLength);
+const trailTimeOfRecording = Array(trailLength);
+const trailSegmentExpired = Array(trailLength).fill(false);
+const pitchCol = Array(trailLength);
 let trailLoaded = false;
 let trailDepth = -1;
 
@@ -326,7 +326,7 @@ xPerp[f-1] = -Math.sin(-angle+pi/2)*volumeBoosted*flatline;
 yPerp[f-1] = -Math.cos(-angle+pi/2)*volumeBoosted*flatline;
                      trailWidth[f-1]=0.;
                        trailTimeOfRecording[f-1]=uniforms["time"].value;
-
+                       trailSegmentExpired[f-1]=false;
 if(trailDepth<trailLength||on)//||on
                        
                       {
@@ -337,7 +337,7 @@ if (f>=trailDepth)f=0;
  xAdjusted= d_x*radius;
  yAdjusted= d_y*radius;
 
-if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) if(!trailSegmentExpired){
+if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) if(!trailSegmentExpired[n]){
 
     cx[n] += xAdjusted;
     cy[n] += yAdjusted;
@@ -929,18 +929,18 @@ if(!window.touchMode){
                      
                      if(RockInTheWater==1||RockInTheWater==2)
                      {
-                         var widt =(testar[g]/255-totalAMP/2.)*starshipSize;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
-                         if(widt<=0)lengt=1./255.*starshipSize;
+                         var wideness =(testar[g]/255-totalAMP/2.)*starshipSize;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
+                         if(wideness<=0)wideness=1./255.*starshipSize;
                                      var xyStarParticle={};
                          xyStarParticle.amp = testar[g];
-                         xyStarParticle.x=widt*-Math.sin(rpio2);//this is the
+                         xyStarParticle.x=wideness*-Math.sin(rpio2);//this is the
                          xyStarParticle.xr=-Math.sin(arm)/fill;//this is the outwards length of each pulse
-                         xyStarParticle.y=widt*-Math.cos(rpio2);
+                         xyStarParticle.y=wideness*-Math.cos(rpio2);
                          xyStarParticle.yr=-Math.cos(arm)/fill;
                          xyStarParticle.vop=vop;
-                         xyStarParticle.widt=widt;
+                         xyStarParticle.widt=wideness;
                          xyStarParticle.lengt=1./fill
-                         xyStarParticle.time = timestamp/1000.;
+                         xyStarParticle.time = uniforms[ "time" ].value;
                          xyStarParticle.interpolation = interpolation;
                          xyStarParticle.interpolationFramesScaled = interpolation/60./4.;
                          xyStarParticle.amp=testar[g]/255.;
@@ -1190,27 +1190,29 @@ let loopLimit = trailDepth;
 
 
                              let     timeElapsedSinceRecording=     uniforms["time"].value-trailTimeOfRecording[r];
-while(loopLimit>0&&r!=f)if(timeElapsedSinceRecording<=trailSecondsLong){
-                         trailSegmentExpired=false;
+                                  let transparencyOfTrail = 1.;
+          while(loopLimit>0&&r!=f){
+                 if(timeElapsedSinceRecording<=trailSecondsLong){
                          timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
                              let depthTranslucencyTrail =1.-timeElapsedSinceRecording/trailSecondsLong;
                            var z = -(Math.abs(depthTranslucencyTrail)**2.5);
-                          let transparencyOfTrail= depthTranslucencyTrail;
+                            transparencyOfTrailLast =transparencyOfTrail;
+                           transparencyOfTrail= depthTranslucencyTrail;
                          
                           trailColor.push(
                                           pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
-                                          pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrail,
+                                          pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrailLast,
                                           pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
                                           pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
-                                          pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrail,
-                                          pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrail
+                                          pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrailLast,
+                                          pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrailLast
                                           )
                          let widtr = trailWidth[r];
                          let widts = trailWidth[s];
                          let widtXperpR=widtr*xPerp[r];
                          let widtYperpR=widtr*yPerp[r];
-                         let widtXperpS=widtr*xPerp[s];
-                         let widtYperpS=widtr*yPerp[s];
+                         let widtXperpS=widts*xPerp[s];
+                         let widtYperpS=widts*yPerp[s];
                          
                          let xrFinalNegatived = cx[r]-widtXperpR;
                          let xrFinalPositived = cx[r]+widtXperpR;
@@ -1222,27 +1224,17 @@ while(loopLimit>0&&r!=f)if(timeElapsedSinceRecording<=trailSecondsLong){
                          let ysFinalNegatived = cy[s]-widtYperpS;
                          let ysFinalPositived = cy[s]+widtYperpS;
 
+                         trail.push(
 
-
- trail.push(
-
-            xrFinalNegatived, yrFinalNegatived,z, //2//side far//far triangle
-            xsFinalNegatived, ysFinalNegatived,z,  //1//side close
-            xrFinalPositived, yrFinalPositived,z, //3//side far
-            xrFinalPositived, yrFinalPositived,z,//3//side far//close triangle
-            xsFinalNegatived, ysFinalNegatived,z,//1//side close
-            xsFinalPositived, ysFinalPositived,z,//4//side close
-  );
-
-  s = r;
-  r--;
-  if(r< 0)r+=trailDepth;
-              loopLimit--;
-
-}
-
-      else {
-             trailSegmentExpired[r] = true;
+                                    xrFinalNegatived, yrFinalNegatived,z, //2//side far//far triangle
+                                    xsFinalNegatived, ysFinalNegatived,z,  //1//side close
+                                    xrFinalPositived, yrFinalPositived,z, //3//side far
+                                    xrFinalPositived, yrFinalPositived,z,//3//side far//close triangle
+                                    xsFinalNegatived, ysFinalNegatived,z,//1//side close
+                                    xsFinalPositived, ysFinalPositived,z,//4//side close
+                          );
+            }
+            else trailSegmentExpired[r] = true;
              s = r;
              r--;
              if(r< 0)r+=trailDepth;
