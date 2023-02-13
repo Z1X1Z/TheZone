@@ -18,18 +18,18 @@ stallTillTHREELoaded();
 let xyStarParticleArray=Array();
 window.zoom=1.;
 
-let starshipSize = Math.E**-1.3247/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are size
+const starshipSize = Math.E**-1.3247/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are size
 let screenPressCoordX, screenPressCoordY;
 window.pointerZoom=false;
 let coordX=0., coordY=0.;
 if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
 window.pixelShaderSize = 7;
-let pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
+const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
 window.movementRate=pixelShaderToStarshipRATIO;//value of 1.5 moves trail to edge of screen in 1 second
 window.touchMode=false;
 window.volumeSpeed = false;
-let zoomFrames = 60;//frames to double zoom
+const zoomFrames = 60;//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   const mf = 1.;
 const MR = mf/zoomFrames;
@@ -87,12 +87,12 @@ var rez = window.devicePixelRatio*rez;
 
 
 var zoomOutEngage=false;
-let pi = Math.PI;
-let inputData;
-let bufferSize = fftSize;
+const pi = Math.PI;
+const bufferSize = fftSize;
+let inputData = new Float32Array(bufferSize);
 window.zoomOutRatchetThreshold=.1/bufferSize;
 
-let numberOfBins = fftSize/2.;
+const numberOfBins = fftSize/2.;
 const spirray0 = Array(bufferSize);
 const spirray1 = Array(bufferSize);
 const starArms = numberOfBins;
@@ -121,7 +121,7 @@ function makeSpirograph(){
       len -= 1;
       largest_loop = 0;
       spiregulator = 0;
-      for(let j = 0; j<inputData.length-24; j++)
+      for(let j = 0; j<inputData.length; j++)
       {
           if (Math.abs(spirray0[j])>largest_loop)largest_loop = Math.abs(spirray0[j]);
           if (Math.abs(spirray1[j])>largest_loop)largest_loop = Math.abs(spirray1[j]);
@@ -226,7 +226,7 @@ var angle=0.;
                             return f;
                            }
 
-let pitchFound;
+let aboveThreshold;
                            let xAdjusted, yAdjusted;
 let pushBackCounter = 0;
                           let flatline = pixelShaderToStarshipRATIO;
@@ -240,28 +240,19 @@ function  move()
         {trailTimeOfRecording[n]=0;xPerp[n]=0;yPerp[n]=0;cx[n]=0;cy[n]=0;trailWidth[n]=0.;pitchCol[n]  = new THREE.Color()
         }
   }
-    pitch=1;
-    var pb = -1;
 
     totalAMP = 0.;
     for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
     totalAMP/=inputData.length;
+        
+//if (totalAMP>zoomOutRatchetThreshold)
+  pitch =    audioX.sampleRate/calculatePitch();
+    if (isFinite(pitch) &&pitch>0&& Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>.1 &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
+        aboveThreshold = true;
+        on = true;
 
-if (totalAMP>zoomOutRatchetThreshold||on)
-  pb =    calculatePitch();
-  if(pb>0) pb =audioX.sampleRate/pb;
-on = true;
-if (isFinite(pb) &&pb>0&& Math.abs(pb-audioX.sampleRate/numberOfBins/2.)>1. &&pb!=-1&&totalAMP>zoomOutRatchetThreshold) { pitch =pb;reset =0;}
-else if (reset>3){on = false;
-}
-else reset++
-
-if(pitch==1) on = false;
-
-    if(pitch!=1){lastPitch = pitch;pitchFound=true;}//here we update lastPitch but only if!
-    else pitchFound=false;
-
-    pitch=lastPitch;
+    }
+    else{aboveThreshold = false; on = false}
 
 let note = 12*Math.log(pitch/440)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
 let t =  (note )*flip+twist/2;
@@ -384,7 +375,6 @@ function init() {
     shaderScene = new THREE.Scene();
 
 
-    inputData = new Float32Array(bufferSize);
 
         renderer = new THREE.WebGLRenderer();
     container.appendChild( renderer.domElement );//engage THREEJS visual out
@@ -759,7 +749,7 @@ if( !window.touchMode&&!touchOnlyMode) {
             averageFrameTotalAmp=[];
         }
     }
-     noteNumber =  Math.log(lastPitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
+     noteNumber =  Math.log(pitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
     if(Math.round(noteNumber) ==-854)noteNumber="undefined";
     let noteNameNumber=Math.floor(Math.round(noteNumber))%12;
     let hour =Math.floor(Math.floor(noteNumber))%12;
@@ -782,9 +772,9 @@ if( !window.touchMode&&!touchOnlyMode) {
                                 " note: "+note+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
                                 "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
                                 "cores: "+cores+", zoom: "+zoom/2.**(singleHyperCoreDepth*cloverSuperCores)+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
-                                "InOutThresh: "+zoomOutRatchetThreshold+"<p style='margin : 0px'></p>"+
-                                "AMP: "+totalAMP+"<p style='margin : 0px'></p>"+
-                                "pitch found: "+pitchFound+", FPS: "+Math.round(FPS)+"<p style='margin : 0px'></p>"
+                                "InOutThresh:"+zoomOutRatchetThreshold+"<p style='margin : 0px'></p>"+
+                                "amplitude : "+totalAMP+"<p style='margin : 0px'></p>"+
+                                "above threshold: "+aboveThreshold+", FPS: "+Math.round(FPS)+"<p style='margin : 0px'></p>"
                             //+"<p style='margin : 0px'></p>"+"X: "+String(-coordX)+" Y: "+String(-coordY);
 +"</div>";
       else document.getElementById("textWindow").innerHTML = "";
@@ -1626,7 +1616,7 @@ if("osmd" in window){
 /** Full YIN algorithm */
 function calculatePitch ()
 {
-let yinData = Array(bufferSize/2);
+const yinData = Array(bufferSize);
 let period;
 let delta = 0.0, runningSum = 0.0;
 yinData[0] = 1.0;
@@ -1659,12 +1649,13 @@ for (let tau = 1; tau < yinData.length; tau++)
 }
 return quadraticPeakPosition (yinData, minElement(yinData));
 }
-
-
-
-
-let tolerance=.5; //, confidence;
-let sampleRate=44100;
+                   
+                    
+let tolerance=1.; //, confidence;
+                    
+                    
+                    
+                    
 function minElement (d)
 {
 

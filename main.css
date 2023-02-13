@@ -5,7 +5,7 @@ body, head {
     background-color: #000;
     color: #fff;
     font-family: Monospace;
-    font-size: 16px;
+    font-size: 24px;
     width: 100%;
     line-height: 1.;
     position: absolute;
@@ -121,7 +121,7 @@ canvas {
 
 /* Dropdown content (hidden by default) */
 .dropdown-content {
-    column-count:2;
+    column-count:3;
     column-gap: 5px;
     column-rule: 1px solid white;
  display: none;
