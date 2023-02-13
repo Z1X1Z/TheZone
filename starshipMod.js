@@ -41,7 +41,7 @@ window.twist = 0;
 window.flip = 1;
 
 var rez=1.;
-let fftSize=2048;
+const fftSize=2048;
 let colorSound;
 let center = false;
                   let geome;
@@ -90,7 +90,7 @@ var zoomOutEngage=false;
 let pi = Math.PI;
 let inputData;
 let bufferSize = fftSize;
-window.zoomOutRatchetThreshold=1./bufferSize;
+window.zoomOutRatchetThreshold=.1/255.;
 
 let numberOfBins = fftSize/2.;
 let spirray0 = new Float32Array(bufferSize);
@@ -221,8 +221,8 @@ var angle=0.;
                            function spin(f, angle)
                            {    //https://en.wikipedia.org/wiki/Rotation_matrix
                                var fxb=f[0];
-                               f[0]=f[0]*-Math.cos(-angle)-f[1]*-Math.sin(-angle);
-                            f[1]=fxb*-Math.sin(-angle)+f[1]*-Math.cos(-angle);
+                               f[0]=-f[0]*-Math.cos(-angle)-f[1]*-Math.sin(-angle);
+                            f[1]=fxb*-Math.sin(-angle)-f[1]*-Math.cos(-angle);
                             return f;
                            }
 
@@ -289,7 +289,7 @@ angle = ((angle+180)/360*2*pi);
          d_y*=volumeBoosted;
          var spunD = [d_x,d_y];
 
-                    if(uniforms.carousel.value!=0.)         spunD=spin(spunD,uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value)%(Math.PI*2.));
+                    if(uniforms.carousel.value!=0.)         spunD=spin(spunD,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
           let d_xS=spunD[0];
           let d_yS=spunD[1];
 
@@ -532,7 +532,6 @@ correlationForText+=document.getElementById("allText").offsetHeight;
             adjustThreeJSWindow();
 
   }
-            let point = [];
 
             let textON=false;
             let lastTime=0.;
@@ -794,31 +793,44 @@ if( !window.touchMode&&!touchOnlyMode) {
 
 
 
-
-
   let lineMat =
   new THREE.LineBasicMaterial( {
-        color: 0x000000,
-        opacity: .5,
+     vertexColors: true,
+         color: 0xffffff,
+       // opacity: .5,
         linewidth: 2,
         linecap: 'round', //ignored by WebGLRenderer
         linejoin:  'round' //ignored by WebGLRenderer
   } );
   if (uniforms[ "metronome" ].value>1.)
     lineMat.color = new THREE.Color(-Math.sin(uniforms[ "time" ].value*uniforms[ "metronome" ].value))
-  if(window.blankBackground)
-  {
+else if(blankBackground) {
     lineMat.color = colorSound;
-    lineMat.opacity = 1.; //opacity has no effect
   }
 
   let depth = -.991;
+                            let pointColor = [];
+                            let point = [];
+                            let tx = 0, ty = 0, txlast = 0, tylast=0,greyness,greynessLast;
+                            
   if (on)for (let r= 0; r < bufferSize; r ++) {
-    let tx = spirray0[r]/spiregulator;
-    let ty =  spirray1[r]/spiregulator;
-    point[r]=new THREE.Vector3( tx, ty, depth );
+         txlast=tx;
+         tylast=ty;
+     tx = spirray0[r]/spiregulator;
+     ty =  spirray1[r]/spiregulator;
+         greynessLast = greyness
+         greyness = 1.-(tx*tx+ty*ty)**1.3247
+         pointColor.push(
+                         greynessLast, greynessLast, greynessLast,
+                         greyness, greyness, greyness
+                         );
+
+    point.push( new THREE.Vector3(txlast,tylast, depth),new THREE.Vector3( tx, ty, depth));
   }
-  const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints( point ), lineMat );
+  let lineGeometry = new THREE.BufferGeometry().setFromPoints( point );
+                lineGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( pointColor, 3 ).onUpload( disposeArray ));
+
+  const line = new THREE.LineSegments(lineGeometry, lineMat );
 
 
 
@@ -1138,10 +1150,8 @@ x,    y,  depth,
                  geome.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ).onUpload( disposeArray ));
                   geome.computeBoundingBox();
 
-               var  opac=1.;
-               if(window.overFace)opac=.32;
                 material= new THREE.MeshBasicMaterial({
-                            opacity: opac,
+                            opacity: 1.,
                           transparent: true,
                             vertexColors: true,
                            // side: THREE.DoubleSide
@@ -1394,23 +1404,21 @@ scene.add(meshTrail)
                                   
                                   
    if(window.starClover)
-        {
-            if(!window.blankBackground){
-                scene.background = null;
-            }
-            else   shaderScene.background = new THREE.Color( 0x808080);
+    {
+            if(window.blankBackground) shaderScene.background = new THREE.Color( 0x808080);
+            else  scene.background = null;
 
-                         renderer.setRenderTarget (renderTarget)
-                         renderer.render( scene, camera );
-            
-                         uniforms.STAR.value=renderTarget.texture;
-                         
-                         renderer.setRenderTarget (null)
-            
-                        shaderScene.add( mesh );
-                         renderer.render( shaderScene, camera )
-                         shaderScene.remove( mesh );
-                     }
+             renderer.setRenderTarget (renderTarget)
+             renderer.render( scene, camera );
+
+             uniforms.STAR.value=renderTarget.texture;
+             
+             renderer.setRenderTarget (null)
+
+            shaderScene.add( mesh );
+             renderer.render( shaderScene, camera )
+             shaderScene.remove( mesh );
+     }
           else{
             
                  uniforms.STAR.value=null;
