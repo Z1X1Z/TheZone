@@ -187,7 +187,7 @@ function fiveAndSeven(){
             }
 }
 
-                          const trailSecondsLong = 12;
+                          const trailSecondsLong = 8;
                           const trailLength = zoomFrames*trailSecondsLong;
 const trail = Array(trailLength);
 const cx = Array(trailLength);//c is the center of the frame moved from the origin
@@ -322,11 +322,11 @@ let expandedZoomCage=1.;
                        
             if (trailDepth<trailLength)trailDepth++;
 
-xPerp[f-1] = -Math.sin(-angle+pi/2)*volumeBoosted*flatline;
-yPerp[f-1] = -Math.cos(-angle+pi/2)*volumeBoosted*flatline;
-                     trailWidth[f-1]=0.;
-                       trailTimeOfRecording[f-1]=uniforms["time"].value;
-                       trailSegmentExpired[f-1]=false;
+xPerp[f] = -Math.sin(-angle+pi/2)*volumeBoosted*flatline;
+yPerp[f] = -Math.cos(-angle+pi/2)*volumeBoosted*flatline;
+                     trailWidth[f]=0.;
+                       trailTimeOfRecording[f]=uniforms["time"].value;
+                       trailSegmentExpired[f]=false;
 if(trailDepth<trailLength||on)//||on
                        
                       {
@@ -345,9 +345,9 @@ trailWidth[n] += radius*starshipSize;
 }
     
 
-                     cx[(trailDepth+f-1)%trailDepth] = 0;
-                     cy[(trailDepth+f-1)%trailDepth] = 0;
-                       trailWidth[(trailDepth+f-1)%trailDepth]=0.;
+                     cx[(trailDepth+f)%trailDepth] = 0;
+                     cy[(trailDepth+f)%trailDepth] = 0;
+                       trailWidth[(trailDepth+f)%trailDepth]=0.;
 }
 
                        }
@@ -810,8 +810,9 @@ else if(blankBackground) {
   }
 
   let depth = -.991;
-                            let pointColor = [];
-                            let point = [];
+                            
+                                                      let pointColor = [0,0,0];
+                                                      let point = [new THREE.Vector3(0,0,0)];
                             let tx = 0, ty = 0, txlast = 0, tylast=0,greyness,greynessLast;
                             
   if (on)for (let r= 0; r < bufferSize; r ++) {
@@ -1180,9 +1181,10 @@ x,    y,  depth,
 
                  var trail=[];
                  var trailColor=[];
+                                  
 
-let r = (f+trailDepth-2)%trailDepth;
-let s = (f+trailDepth-1)%trailDepth;
+let r = (f+trailDepth-1)%trailDepth;
+let s = f;
 
 let loopLimit = trailDepth;
 //if(isFinite(cx[r-1])&&isFinite(cx[s])&&isFinite(cy[r-1])&&isFinite(cy[s]))
@@ -1190,12 +1192,16 @@ let loopLimit = trailDepth;
 
 
                              let     timeElapsedSinceRecording=     uniforms["time"].value-trailTimeOfRecording[r];
-                                  let transparencyOfTrail = 1.;
+                                  let transparencyOfTrail = 1., z = -1;
+                                  let transparencyOfTrailLast = 1, zlast = -1;
+                                  
           while(loopLimit>0&&r!=f){
-                 if(timeElapsedSinceRecording<=trailSecondsLong){
-                         timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
+                 if(!trailSegmentExpired[r]&&timeElapsedSinceRecording<=trailSecondsLong){
+                        // timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
                              let depthTranslucencyTrail =1.-timeElapsedSinceRecording/trailSecondsLong;
-                           var z = -(Math.abs(depthTranslucencyTrail)**2.5);
+                            let zlast = z;
+                            z = -1.+timeElapsedSinceRecording**2./maxToMin;
+                           if (z>=-.1)z=-.1+timeElapsedSinceRecording*.1;
                             transparencyOfTrailLast =transparencyOfTrail;
                            transparencyOfTrail= depthTranslucencyTrail;
                          
@@ -1227,17 +1233,17 @@ let loopLimit = trailDepth;
                          trail.push(
 
                                     xrFinalNegatived, yrFinalNegatived,z, //2//side far//far triangle
-                                    xsFinalNegatived, ysFinalNegatived,z,  //1//side close
+                                    xsFinalNegatived, ysFinalNegatived,zlast,  //1//side close
                                     xrFinalPositived, yrFinalPositived,z, //3//side far
                                     xrFinalPositived, yrFinalPositived,z,//3//side far//close triangle
-                                    xsFinalNegatived, ysFinalNegatived,z,//1//side close
-                                    xsFinalPositived, ysFinalPositived,z,//4//side close
+                                    xsFinalNegatived, ysFinalNegatived,zlast,//1//side close
+                                    xsFinalPositived, ysFinalPositived,zlast,//4//side close
                           );
             }
             else trailSegmentExpired[r] = true;
              s = r;
              r--;
-             if(r< 0)r+=trailDepth;
+             if(r<0)r+=trailDepth;
                          loopLimit--;
                          timeElapsedSinceRecording=     uniforms["time"].value-trailTimeOfRecording[r];
                          
