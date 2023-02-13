@@ -90,7 +90,7 @@ var zoomOutEngage=false;
 const pi = Math.PI;
 const bufferSize = fftSize;
 let inputData = new Float32Array(bufferSize);
-window.zoomOutRatchetThreshold=.1/bufferSize;
+window.zoomOutRatchetThreshold=.5/bufferSize;
 
 const numberOfBins = fftSize/2.;
 const spirray0 = Array(bufferSize);
@@ -724,7 +724,7 @@ if( !window.touchMode&&!touchOnlyMode) {
                     lastVolume=volume;
 
                            volume = 0.;
-                           for(var n=0; n<inputData.length-1;n++)volume+=Math.abs(inputData[n+1]-inputData[n]);
+                           for(var n=0; n<inputData.length-1;n++)volume+=Math.abs(inputData[n]);
                            volume*=audioX.sampleRate/inputData.length/255;
                             volumeBoosted = volume*1.5;
                        }
