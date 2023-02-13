@@ -245,8 +245,8 @@ function  move()
     for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
     totalAMP/=inputData.length;
         
-//if (totalAMP>zoomOutRatchetThreshold)
-  pitch =    audioX.sampleRate/calculatePitch();
+if (totalAMP>zoomOutRatchetThreshold) pitch =    audioX.sampleRate/calculatePitch();
+        else pitch = -1;
     if (isFinite(pitch) &&pitch>0&& Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>.1 &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
         aboveThreshold = true;
         on = true;
@@ -1614,17 +1614,20 @@ if("osmd" in window){
 
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
+let fractionOfFrame = 2.;
+let tolerance=.01; //, confidence;
 function calculatePitch ()
 {
+tolerance = totalAMP;
 const yinData = Array(bufferSize);
 let period;
 let delta = 0.0, runningSum = 0.0;
 yinData[0] = 1.0;
-for (let tau = 1; tau < yinData.length; tau++)
+for (let tau = 1; tau < yinData.length/fractionOfFrame; tau++)
 {
 
     yinData[tau] = 0.0;
-    for (let j = 0; j < yinData.length; j++)
+    for (let j = 0; j < yinData.length/fractionOfFrame; j++)
     {
         delta = inputData[j] - inputData[j + tau];
        if(isFinite(delta)) yinData[tau] += (delta * delta);
@@ -1651,9 +1654,6 @@ return quadraticPeakPosition (yinData, minElement(yinData));
 }
                    
                     
-let tolerance=1.; //, confidence;
-                    
-                    
                     
                     
 function minElement (d)
@@ -1661,7 +1661,7 @@ function minElement (d)
 
 let j, pos = 0;
 let tmp = d[0];
-for (j = 0; j < bufferSize; j++)
+for (j = 0; j < bufferSize/fractionOfFrame; j++)
 {
     pos = (tmp < d[j]) ? pos : j;
     tmp = (tmp < d[j]) ? tmp : d[j];
@@ -1676,7 +1676,7 @@ function quadraticPeakPosition (d, pos)
 
 let s0, s1, s2;
 let x0, x2;
-if (pos == 0 || pos == bufferSize - 1) return pos;
+if (pos == 0 || pos == bufferSize/fractionOfFrame - 1) return pos;
 x0 = (pos < 1) ? pos : pos - 1;
 x2 = (pos + 1 < bufferSize) ? pos + 1 : pos;
 if (x0 == pos) return (d[pos] <= d[x2]) ? pos : x2;

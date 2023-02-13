@@ -61,9 +61,9 @@ canvas {
     z-index: -1;
     position: fixed;
     top: 100px;
-    right:10%;
+    right:0%;
     height: 80%;
-    width: 80%;
+    width: 100%;
     background-repeat: no-repeat;
     #background-attachment: scroll;
     background-size: contain;
