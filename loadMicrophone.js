@@ -34,10 +34,10 @@
       });
     }
 function route(){
+    document.getElementById( "load message").innerHTML = "";
     userHasGestured=true;
     if(!micOn&&!location.hash.includes("t"))
         startMic();
-
 }
 if(location.hash.includes("t")){
         console.log("Touch only mode!")
