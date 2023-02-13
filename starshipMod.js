@@ -811,8 +811,8 @@ else if(blankBackground) {
 
   let depth = -.991;
                             
-                                                      let pointColor = [0,0,0];
-                                                      let point = [new THREE.Vector3(0,0,0)];
+                                                      let pointColor = [];
+                                                      let point = [];
                             let tx = 0, ty = 0, txlast = 0, tylast=0,greyness,greynessLast;
                             
   if (on)for (let r= 0; r < bufferSize; r ++) {
