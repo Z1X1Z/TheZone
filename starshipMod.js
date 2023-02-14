@@ -109,7 +109,7 @@ function makeSpirograph(){
       len = 0;
       let adjConstant = 1./(pitch)*Math.PI*2.;
     var maxSamp=0.;
-    for(var t=0; t<inputData.length;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
+    for(var t=0; t<bufferSize;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
       if(Math.abs(inputData[0])>.0    )
       for(var m = 0; m < bufferSize; m++)
       {
@@ -121,7 +121,7 @@ function makeSpirograph(){
       len -= 1;
       largest_loop = 0;
       spiregulator = 0;
-      for(let j = 0; j<inputData.length; j++)
+      for(let j = 0; j<bufferSize; j++)
       {
           if (Math.abs(spirray0[j])>largest_loop)largest_loop = Math.abs(spirray0[j]);
           if (Math.abs(spirray1[j])>largest_loop)largest_loop = Math.abs(spirray1[j]);
@@ -242,12 +242,13 @@ function  move()
   }
 
     totalAMP = 0.;
-    for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
+    for(var n=0; n<bufferSize;n++)totalAMP+=Math.abs(inputData[n]);
     totalAMP/=inputData.length;
         lastPitch = pitch;
-        let notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>.1;
-if (totalAMP>zoomOutRatchetThreshold&&notNyquist) pitch =    audioX.sampleRate/calculatePitch();
-        else pitch = lastPitch;
+        
+if (totalAMP>zoomOutRatchetThreshold) pitch =    audioX.sampleRate/calculatePitch();
+        let notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
+        if(!notNyquist) pitch = lastPitch;
     if (isFinite(pitch) &&pitch>0&& notNyquist &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
         aboveThreshold = true;
         on = true;
@@ -1616,7 +1617,7 @@ const yinData = Array(fractionOfFrame);
 
 function calculatePitch ()
 {
-tolerance = totalAMP*.75;
+tolerance = totalAMP**.5;
 let period;
 let delta = 0.0, runningSum = 0.0;
 yinData[0] = 1.0;
