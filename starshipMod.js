@@ -90,7 +90,7 @@ var zoomOutEngage=false;
 const pi = Math.PI;
 const bufferSize = fftSize;
 let inputData = new Float32Array(bufferSize);
-window.zoomOutRatchetThreshold=.5/bufferSize;
+window.zoomOutRatchetThreshold=1./bufferSize;
 
 const numberOfBins = fftSize/2.;
 const spirray0 = Array(bufferSize);
@@ -1617,7 +1617,7 @@ const yinData = Array(fractionOfFrame);
 
 function calculatePitch ()
 {
-tolerance = totalAMP**.5;
+tolerance = totalAMP*2;
 let period;
 let delta = 0.0, runningSum = 0.0;
 yinData[0] = 1.0;
