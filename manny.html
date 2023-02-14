@@ -638,7 +638,7 @@ uniform float shaderScale;
              d+=length(s)/10.;
          }
          if (l>.54) negator = 0.;
-         return vec3(-sin(d *3.+PI*2./3.),-sin(d*3.+PI*2.*5./3.),-sin(d*3.))*5.*negator;
+         return vec3(-sin(d *3.+PI*2./3.+time2dance),-sin(d*3.+PI*2.*5./3.+time2dance),-sin(d*3.+time2dance))*5.*negator;
  }
 
     

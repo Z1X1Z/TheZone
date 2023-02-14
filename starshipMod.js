@@ -160,7 +160,7 @@ function spiral_compress(){
 
 
 
-var twelve = Array(12);
+const twelve = Array(12);
 for(let n = 0; n<12; n++)twelve[n] = Array(10);
 
 var smoothTwelve =false;
@@ -244,9 +244,9 @@ function  move()
     totalAMP = 0.;
     for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
     totalAMP/=inputData.length;
-        
+        lastPitch = pitch;
 if (totalAMP>zoomOutRatchetThreshold) pitch =    audioX.sampleRate/calculatePitch();
-        else pitch = -1;
+        else pitch = lastPitch;
     if (isFinite(pitch) &&pitch>0&& Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>.1 &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
         aboveThreshold = true;
         on = true;
@@ -276,8 +276,8 @@ angle = ((angle+180)/360*2*pi);
                        
          uniforms.d.value.x=d_x;
          uniforms.d.value.y=d_y;
-         d_x*=volumeBoosted;
-         d_y*=volumeBoosted;
+         d_x*=volume;
+         d_y*=volume;
          var spunD = [d_x,d_y];
 
                     if(uniforms.carousel.value!=0.)         spunD=spin(spunD,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
@@ -313,8 +313,8 @@ let expandedZoomCage=1.;
                        
             if (trailDepth<trailLength)trailDepth++;
 
-xPerp[f] = -Math.sin(-angle+pi/2)*volumeBoosted*flatline;
-yPerp[f] = -Math.cos(-angle+pi/2)*volumeBoosted*flatline;
+xPerp[f] = -Math.sin(-angle+pi/2)*volume*flatline;
+yPerp[f] = -Math.cos(-angle+pi/2)*volume*flatline;
                      trailWidth[f]=0.;
                        trailTimeOfRecording[f]=uniforms["time"].value;
                        trailSegmentExpired[f]=false;
@@ -678,7 +678,6 @@ function takeNextScoreSlice(start){
                        
                        
                        let STARSHIPMAP;
-                  let     volumeBooster = 1.;
                        let date = Date.now();
                        let startTimeSecondMantissaMagnified = ((date/1000.-Math.round(date)/1000.)-.5)*144000;//for orienting the dance to time
 function animate( timestamp ) {
@@ -722,14 +721,9 @@ if( !window.touchMode&&!touchOnlyMode) {
            if(window.volumeSpeed)
            {
                     lastVolume=volume;
-
-                           volume = 0.;
-                           for(var n=0; n<inputData.length-1;n++)volume+=Math.abs(inputData[n]);
-                           volume*=audioX.sampleRate/inputData.length/255;
-                            volumeBoosted = volume*1.5;
+                    volume =totalAMP*audioX.sampleRate/bufferSize;
                        }
-           else {volume=1.; lastVolume=1.;  volumeBoosted = 1.;
-}
+           else {volume=1.; lastVolume=1.; }
     move();
     infinicore();
     if(!zoomAtl41)zoomRoutine();
@@ -830,6 +824,7 @@ else if(blankBackground) {
 
 
   uniforms[ "time2dance" ].value += audioX.sampleRate/bufferSize*totalAMP;
+                            
          uniforms["volume" ].value = audioX.sampleRate/bufferSize*totalAMP/(1.+zoomOutRatchetThreshold);
 
 
@@ -1286,7 +1281,7 @@ circle.position.set(circleX,circleY,-1.);
 
 
                    let centerOfDotToEdge = [];
-                   centerOfDotToEdge.push( new THREE.Vector3(circleX-Math.sin(-angle)*dotSize*volumeBoosted, circleY-Math.cos(-angle)*dotSize*volumeBoosted, -1. ) );
+                   centerOfDotToEdge.push( new THREE.Vector3(circleX-Math.sin(-angle)*dotSize*volume, circleY-Math.cos(-angle)*dotSize*volume, -1. ) );
                    centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-1.) );
 
 
@@ -1614,20 +1609,21 @@ if("osmd" in window){
 
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
-let fractionOfFrame = 2.;
-let tolerance=.01; //, confidence;
+const fractionOfFrame = bufferSize/2;
+let tolerance; //, confidence;
+const yinData = Array(fractionOfFrame);
+
 function calculatePitch ()
 {
-tolerance = totalAMP;
-const yinData = Array(bufferSize);
+tolerance = totalAMP*.75;
 let period;
 let delta = 0.0, runningSum = 0.0;
 yinData[0] = 1.0;
-for (let tau = 1; tau < yinData.length/fractionOfFrame; tau++)
+for (let tau = 1; tau < fractionOfFrame; tau++)
 {
 
     yinData[tau] = 0.0;
-    for (let j = 0; j < yinData.length/fractionOfFrame; j++)
+    for (let j = 0; j < fractionOfFrame; j++)
     {
         delta = inputData[j] - inputData[j + tau];
        if(isFinite(delta)) yinData[tau] += (delta * delta);
@@ -1661,7 +1657,7 @@ function minElement (d)
 
 let j, pos = 0;
 let tmp = d[0];
-for (j = 0; j < bufferSize/fractionOfFrame; j++)
+for (j = 0; j < fractionOfFrame; j++)
 {
     pos = (tmp < d[j]) ? pos : j;
     tmp = (tmp < d[j]) ? tmp : d[j];
@@ -1676,7 +1672,7 @@ function quadraticPeakPosition (d, pos)
 
 let s0, s1, s2;
 let x0, x2;
-if (pos == 0 || pos == bufferSize/fractionOfFrame - 1) return pos;
+if (pos == 0 || pos == fractionOfFrame - 1) return pos;
 x0 = (pos < 1) ? pos : pos - 1;
 x2 = (pos + 1 < bufferSize) ? pos + 1 : pos;
 if (x0 == pos) return (d[pos] <= d[x2]) ? pos : x2;
