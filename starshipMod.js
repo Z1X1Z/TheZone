@@ -1617,7 +1617,7 @@ const yinData = Array(fractionOfFrame);
 
 function calculatePitch ()
 {
-tolerance = totalAMP*2;
+tolerance = totalAMP**.92;//**.9: a balance between low range consistency and high range speed
 let period;
 let delta = 0.0, runningSum = 0.0;
 yinData[0] = 1.0;
