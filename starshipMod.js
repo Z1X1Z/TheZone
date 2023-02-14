@@ -1187,12 +1187,11 @@ let loopLimit = trailDepth;
           while(loopLimit>0&&r!=f){
                  if(!trailSegmentExpired[r]&&timeElapsedSinceRecording<=trailSecondsLong){
                         // timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
-                             let depthTranslucencyTrail =1.-timeElapsedSinceRecording/trailSecondsLong;
                             let zlast = z;
                             z = -1.+timeElapsedSinceRecording**2./maxToMin;
-                           if (z>=-.1)z=-.1+timeElapsedSinceRecording*.1;
+                           if (z>=-.1)z=.0153*(-1.+timeElapsedSinceRecording/trailSecondsLong/maxToMin);
                             transparencyOfTrailLast =transparencyOfTrail;
-                           transparencyOfTrail= depthTranslucencyTrail;
+                            transparencyOfTrail =1.-timeElapsedSinceRecording/trailSecondsLong;
                          
                           trailColor.push(
                                           pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
