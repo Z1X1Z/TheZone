@@ -123,13 +123,13 @@ function callKey(event){
     }
     else if (key=="K")uniforms.Inherited.value=!uniforms.Inherited.value;
     
-    else if (key=="y") uniforms[ "petals" ].value += 1.;
+    else if (key=="y") uniforms[ "petals" ].value -= 1.;
     else if (key=="Y"){
         window.blankBackground = !window.blankBackground;
         if(window.blankBackground)window.starClover=false;
         else window.starClover=true;
     }
-    else if (key=="u") uniforms[ "petals" ].value -= 1.;
+    else if (key=="u") uniforms[ "petals" ].value += 1.;
     else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%7;
     
     else if (key=="/"||key=="?"){

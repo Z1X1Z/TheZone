@@ -245,9 +245,10 @@ function  move()
     for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
     totalAMP/=inputData.length;
         lastPitch = pitch;
-if (totalAMP>zoomOutRatchetThreshold) pitch =    audioX.sampleRate/calculatePitch();
+        let notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>.1;
+if (totalAMP>zoomOutRatchetThreshold&&notNyquist) pitch =    audioX.sampleRate/calculatePitch();
         else pitch = lastPitch;
-    if (isFinite(pitch) &&pitch>0&& Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>.1 &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
+    if (isFinite(pitch) &&pitch>0&& notNyquist &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
         aboveThreshold = true;
         on = true;
 
