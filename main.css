@@ -121,7 +121,9 @@ canvas {
 
 /* Dropdown content (hidden by default) */
 .dropdown-content {
-    column-count:3;
+    width:100%;
+    left:0%;
+    column-count:4;
     column-gap: 5px;
     column-rule: 1px solid white;
  display: none;
