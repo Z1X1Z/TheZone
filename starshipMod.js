@@ -1189,7 +1189,7 @@ let loopLimit = trailDepth;
                         // timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
                             let zlast = z;
                             z = -1.+timeElapsedSinceRecording**2./maxToMin;
-                           if (z>=-.1)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong/maxToMin);
+                           if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong/maxToMin);
                             transparencyOfTrailLast =transparencyOfTrail;
                             transparencyOfTrail =1.-timeElapsedSinceRecording/trailSecondsLong;
                          

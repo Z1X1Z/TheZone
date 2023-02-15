@@ -77,6 +77,7 @@
 
     <div id="allText">
         <div id="HK"></div>
+        <div id="textWindow"></div>
     <script src="hotkeys.js"></script>
 
     <div class="navbar">
@@ -428,7 +429,7 @@
           <button class="dropbtn">Resolution
             <i class="fa fa-caret-down"></i>
           </button>
-          <div class="dropdown-content">
+          <div class="dropdown-content" style="column-count: 1">
               
                   <input type="radio" id=".5rez" name="colorMode" onclick="
                   key  = '~';
@@ -477,10 +478,10 @@
                       Reduce resolution!</a><br>
               </div>
                   </div>
-              
-    </div>
-    <div id="textWindow"></div>
+        <div id="textWindow"></div>
 
+    </div>
+    
     </div>
     <div id="load message" style="font-size:40px; background-color:blue;">            Tap the screen or a key to load! </div>
     <script> if(location.hash.includes("t"))document.getElementById( "load message").innerHTML = "";//turn off splash!</script>
