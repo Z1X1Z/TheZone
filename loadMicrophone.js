@@ -1,3 +1,4 @@
+const fftSize=2048;
 
     let touchOnlyMode = false;
     let micOn = false;
