@@ -41,7 +41,6 @@ window.twist = 0;
 window.flip = 1;
 
 var rez=1.;
-const fftSize=2048;
 let colorSound;
 let center = false;
                   let geome;
@@ -1616,7 +1615,7 @@ const yinData = Array(fractionOfFrame);
 
 function calculatePitch ()
 {
-tolerance = totalAMP**.88;//**.9: a balance between low range consistency and high range speed
+tolerance = totalAMP-zoomOutRatchetThreshold;//**.9: a balance between low range consistency and high range speed
 let period;
 let delta = 0.0, runningSum = 0.0;
 yinData[0] = 1.0;
