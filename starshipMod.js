@@ -1188,7 +1188,7 @@ let loopLimit = trailDepth;
                  if(!trailSegmentExpired[r]&&timeElapsedSinceRecording<=trailSecondsLong){
                         // timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
                             let zlast = z;
-                            z = -1.+timeElapsedSinceRecording**2./maxToMin;
+                            z = -1.+timeElapsedSinceRecording**2./maxToMin*.33333;//*.33333 is three seconds long
                            if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong/maxToMin);
                             transparencyOfTrailLast =transparencyOfTrail;
                             transparencyOfTrail =1.-timeElapsedSinceRecording/trailSecondsLong;
@@ -1616,7 +1616,7 @@ const yinData = Array(fractionOfFrame);
 
 function calculatePitch ()
 {
-tolerance = totalAMP**.92;//**.9: a balance between low range consistency and high range speed
+tolerance = totalAMP**.88;//**.9: a balance between low range consistency and high range speed
 let period;
 let delta = 0.0, runningSum = 0.0;
 yinData[0] = 1.0;

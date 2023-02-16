@@ -77,7 +77,6 @@
 
     <div id="allText">
         <div id="HK"></div>
-        <div id="textWindow"></div>
     <script src="hotkeys.js"></script>
 
     <div class="navbar">
@@ -478,10 +477,9 @@
                       Reduce resolution!</a><br>
               </div>
                   </div>
-        <div id="textWindow"></div>
 
     </div>
-    
+
     </div>
     <div id="load message" style="font-size:40px; background-color:blue;">            Tap the screen or a key to load! </div>
     <script> if(location.hash.includes("t"))document.getElementById( "load message").innerHTML = "";//turn off splash!</script>
@@ -494,6 +492,8 @@
     <script src="wadLoader.js"> </script>
 
     <div id="score">
+        <div id="textWindow">V</div>
+
         <div id="osmdCanvas"/>
         <input type="file" id="files"/>
         <output id="list"></output>

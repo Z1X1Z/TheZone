@@ -15,7 +15,9 @@ body, head {
     touch-action: none;//prevent zooming and panning
 
 }
-#textWindow{    line-height: .878;}
+#textWindow{    line-height: .878;
+    color:black
+}
 #score{
     
     background-color: #fff;
