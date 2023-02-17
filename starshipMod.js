@@ -1615,7 +1615,7 @@ const yinData = Array(fractionOfFrame);
 
 function calculatePitch ()
 {
-tolerance = totalAMP-zoomOutRatchetThreshold;//**.9: a balance between low range consistency and high range speed
+tolerance = totalAMP-.5/fractionOfFrame;
 let period;
 let delta = 0.0, runningSum = 0.0;
 yinData[0] = 1.0;
