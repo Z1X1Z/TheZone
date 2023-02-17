@@ -324,8 +324,9 @@ if(trailDepth<trailLength||on)//||on
                       {
     
 f++;//this is the primary drive chain for the trail. it should be a global
-let radius = interpolation*MR*4./window.pixelShaderSize;
 if (f>=trailDepth)f=0;
+    
+let radius = interpolation*MR*4./window.pixelShaderSize;
  xAdjusted= d_x*radius;
  yAdjusted= d_y*radius;
 
@@ -1615,7 +1616,12 @@ const yinData = Array(fractionOfFrame);
 
 function calculatePitch ()
 {
-tolerance = totalAMP-.5/fractionOfFrame;
+            
+tolerance = totalAMP-(1./bufferSize)**1.5;//uses totalAMP hence bufferSize not fractionOfFrame
+            
+            
+            
+            
 let period;
 let delta = 0.0, runningSum = 0.0;
 yinData[0] = 1.0;
