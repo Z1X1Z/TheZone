@@ -50,7 +50,7 @@ function callKey(event){
     if (x>0)
     {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
     else if (x==0)
-    {window.movementRate=pixelShaderSize/4.; uniforms[ "rate" ].value=window.movementRate; }
+    {window.movementRate=pixelShaderSize/4.; uniforms[ "rate" ].value=1./window.movementRate; }
     else if (key=="À"||key=="`"||key=="~")
     {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
     else if (key=="m") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
