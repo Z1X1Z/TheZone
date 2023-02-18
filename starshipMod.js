@@ -723,7 +723,8 @@ if( !window.touchMode&&!touchOnlyMode) {
            if(window.volumeSpeed)
            {
                     lastVolume=volume;
-                    volume =totalAMP*audioX.sampleRate/bufferSize;
+               volume = totalAMP+(1./bufferSize);//uses totalAMP hence bufferSize not fractionOfFrame
+               volume =volume*audioX.sampleRate/bufferSize;
                        }
            else {volume=1.; lastVolume=1.; }
     move();
