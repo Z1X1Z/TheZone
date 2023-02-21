@@ -467,8 +467,6 @@ dotted:{value:false},
 
 
     animate();
-
-    onWindowResize()
 }
 function adjustThreeJSWindow()
 {
@@ -683,7 +681,7 @@ function takeNextScoreSlice(start){
                        let date = Date.now();
                        let startTimeSecondMantissaMagnified = ((date/1000.-Math.round(date)/1000.)-.5)*144000;//for orienting the dance to time
 function animate( timestamp ) {
-adjustThreeJSWindow();//mostly for ios here
+adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
 
 
     
@@ -942,7 +940,6 @@ if(!window.touchMode){
                          while(xyStarParticleArray.length>starCount)xyStarParticleArray.shift();
                      }
                  }}
-             adjustThreeJSWindow();
              
              let OUTERSHELL =maxToMin*secondsToEdge;
              
