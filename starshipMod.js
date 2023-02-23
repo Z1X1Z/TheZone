@@ -174,7 +174,7 @@ function fiveAndSeven(){
       let  star = 0 //ranges up to 12
         for(let n = 0; n<numberOfBins; n++)        {
             //mustard is in 24ths, here we want 12ths so we divide by two
-            let twelfths = (mustarD[n]-49*2)/2.+12//A1 is 1 with +12
+            let twelfths = (mustarD[n])/2.+12//A1 is 1 with +12
            
                 if( twelfths>=-.5){
                     star = Math.round(twelfths)%12;
@@ -492,7 +492,7 @@ function adjustThreeJSWindow()
 
 
 }
-window.addEventListener( 'resize', onWindowResize, false );
+//window.addEventListener( 'resize', onWindowResize, false );
 
 function onWindowResize() {
 
@@ -1084,7 +1084,7 @@ x,    y,  depth,
              for (var g=0; g<10; g++) {
                  var widt = starshipSize**(2.41421);
                  var finger = twelve[t][g];
-                 var arm =g/10.*pi*2.;
+                 var arm =(g+9)/10.*pi*2.;
                  
                  var lengt = (finger-minFinger)/(maxFinger-minFinger)/2.;
                  if(lengt>0){
