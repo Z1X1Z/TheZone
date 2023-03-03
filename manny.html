@@ -276,8 +276,7 @@
                                     key  = '&';
                                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                                  <label for="Continuum Clover">Continuum Clover!</label><br>
-                                 
-                                 
+                      
                                  
                 <form>
 
@@ -519,6 +518,7 @@
     uniform bool Spoker;
     uniform bool spokelover;
     uniform bool continuumClover;
+    uniform bool fourthirdsoverlogbase3ofoneOFMETACORE;
     uniform bool cloverSlide;
     
     uniform bool Inherited;
@@ -574,32 +574,51 @@ uniform float shaderScale;
     float zin(float x){return -sin(x);}
     float coz(float x){return -cos(x);}
 
+
+    
     vec3 heart(vec2 g, vec2 t){
-        
+        g/=gr+1.;
         //g.x-=.5;
         g.y*=-1.;
+        t.y*=-1.;
+
         vec2 z=g.xy;
     vec3 h=vec3(0.);
     const float iterations = 40.;
         for (float f=0.;f<iterations;f++)if(abs(z.y+z.x)>2.){h=vec3(0.);break;}
         else {z=vec2(((z.x*z.x-z.y*z.y)-g.x+t.x),(2.0*z.x*z.y-g.y+t.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
-          h+=(vec3(z.x*z.y,z.x+.1,z.y)+.3)/length(z)/iterations/gr;}
+          h+=(vec3(z.x*z.y,z.x,z.y)+.12)/length(z)/iterations;}
     return h;
     }
+    vec3 heartsOSOS(vec2 g, vec2 t){
+        g/=gr+1.;
+        //g.x-=.5;
+        g.y*=-1.;
+        t.y*=-1.;
+        vec2 z=g.xy;
+    vec3 h=vec3(0.);
+    const float iterations = 40.;
+        for (float f=0.;f<iterations;f++)if(abs(z.y+z.x)>2.){h=vec3(0.);break;}
+        else {z=vec2(((z.x*z.x-z.y*z.y)-g.x+t.x),(2.0*z.x*z.y-g.y+t.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
+          h+=(vec3(z.x*z.y,(1.-z.y)/z.x,(1.-z.x)/z.y)
+                                    )/length(z)/iterations;}
+    return h;
+    }
+    
       vec3 face(vec2 g, vec2 t){
       float l = 1.;
       g*=gr;
       vec2 z=g.xy;
-      if(g.x*g.x+g.y*g.y<40.)
+      //if(g.x*g.x+g.y*g.y<40.)
       for (int f=0;f<21;f+=1)if(abs(z.y)>21.&&(f==1||f>3)){
           if (f==1){l=1.;break;}
-          l=1.-length(z)/40.;//clouds and face
+          l=length(z)/40.;//clouds and face
           break;}
       else{
-          z=vec2(-1./(z.x*z.x-z.y*z.y-g.x),2.0*z.x*z.y-g.y);
+          z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x/7.),2.0*z.x*z.y-g.y+t.y/7.);
           l=abs(z.y)*6.;//smooths middle horn, removes some clouds
           if(z.x>-.1)l=z.x*50.;}//face with closed small holes
-      return vec3(clamp(l,-100000.,0.));
+      return vec3(1.-l);
       }
     
       vec3 clouds(vec2 g, vec2 t){
@@ -670,17 +689,21 @@ return vec3(clamp(l,0.,1.));
                     vec3 torso(vec2 g, vec2 t){
                     float b = 0.;
                     vec2 z=g.xy;
-                    if(g.x*g.x+g.y*g.y<40.)if (g.x>0.)for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;break;}
+                    if(g.x*g.x+g.y*g.y<40.)
+                    if (g.x>0.|| (Character==0||Character==7) )
+                    for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;break;}
                     else{
                         z=2.*vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),(2.0*z.x*z.y-g.y+t.y));
                         z.x=sqrt(abs(z.x));}
                     return vec3(b,b/2.5,0.);
                     }
+    
                     vec3 musculature(vec2 g, vec2 t){
                     float m=0.;
                     g.x+=.54;
                     vec2 z=g.xy;
-                    if(g.x>1.25&&abs(g.y)<2.5)for(int f=0;f<15;f+=1)if(abs(z.y)>15.&&f>7&&f!=15){m=abs(z.y)/25.;break;}
+                    if( ((g.x>0.|| (Character==0||Character==7) )) &&
+                       abs(g.y)<2.5)for(int f=0;f<15;f+=1)if(abs(z.y)>15.&&f>7&&f!=15){m=abs(z.y)/25.;break;}
                     else {
                         z=1.3*vec2(-1.5/((z.x*z.x-2.*z.y*z.y)-g.x+t.x),(1.9*z.x*z.y-1.87*g.y+t.y));
                         z.x=pow(abs(z.x),.57);}
@@ -817,13 +840,16 @@ float lfc = length(freed(coords));
 
 loops=0.;
 float hyperCore=0.;
+
 float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
+//log stabalization constant seems to be 1./log(3.)+(1.-1./log(3.))/1.5 from 1./log(3.)+(1.-1./log(3.))/2.
 if(MetaCored)hyperCore=cored*2./3.+log(lfc)*logStabilizationConstant;
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 if(outerCoresOff)hyperCore=0.;
 
-if(Spoker&&MetaCored)hyperCore*=4./3./logStabilizationConstant;//engage overstable core if dancing
- if(morph>.5&&!wheel)hyperCore+=4.;
+if(Spoker&&MetaCored)
+hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
+ //if(morph>.5&&!wheel)hyperCore+=4.;
  float term=0.;
 if (spirated!=0.)term=(lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
 vec2 m=vec2(0.);
@@ -873,8 +899,9 @@ if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*PI/(atan(s.y,s.x)-PI*spirated);
    
        if(dotted)s/=dot(-m,t)*dot(m,-t);
 
-       if(spirated!=0.)s+=m-t;
-    else s+=t-m;//plus t is lobes, -t is circles with dance
+       if(spirated!=0.&&wheel)s+=m-t;
+   else
+    s+=t-m;//plus t is lobes, -t is circles with dance
    
        if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the body steps on the clover
        else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only
@@ -1212,13 +1239,13 @@ return (vec3(z.x*z.y,z.x+.2,z.y-.3*(1.-p.x))+.3)/length(z);
         vec3 bride(vec2 p,vec2 t){
                    float c=0.,k=0.,l=0.,x=0.,e=0.;
   if(abs(p.y*p.y)+abs(p.x*p.x)<49.){
-    p+= vec2(.77777,0.);
+    p+= vec2(.8787878787878,0.);
                //vv body vv
                    vec2 g=p/2.;
                   // g.x+=.5;
                    vec2 z=g;
                    for (int f=0;f<70;f+=1)if(abs(z.x+z.y)>20.&&f>4){x+=z.y;break;}
-                   else {z=2.*vec2(-1./((z.x*z.x-1.44*z.y*z.y)-g.x*1.2+t.x),(1.2*z.x*z.y-1.2*g.y+t.y));
+                   else {z=2.*vec2(-1./((z.x*z.x-1.44*z.y*z.y)-g.x*1.2+t.x),(1.21212121212121*z.x*z.y-1.212121212121*g.y+t.y));
                          z.x=pow(abs(z.x),.777-t.x/49.);}
                //vv legs vv
                    g=p/3.5;
@@ -1529,10 +1556,10 @@ vec3 horse(vec2 p, vec2 t){ //horse
 
                                                                                       
                                                                                       
-  vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t/33.3)+heart(p/gr,-t);}
+  vec3 body(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t/33.3)+heart(p,t);}
   vec3 bod(vec2 p, vec2 t){return torso(p,t)+musculature(p,t)+robe(p,t)+legs(p,t/33.3);}
   vec3 manny(vec2 p, vec2 t){
-    return +body(p,t)+face(p,0.*t)+shiny(p,t)
+    return shiny(p,t)+body(p,t)
     ;}
   vec3 mannyX(vec2 p, vec2 t){return bod(p,t)+excelsior(p,vec2(time*metronome,0.));}
   vec3 fourCreatures(vec2 p, vec2 t){
@@ -1626,23 +1653,25 @@ vec2 dance = vec2(0.);
                        const float brideSize = 24.;
                        creatures=fourCreatures(backGround*8.,t);
                        if(length(backGround*brideSize)>4./3./brideSize)
-                            b=bride(backGround*brideSize,brideSize*zoom*t)+heart((backGround/gr-vec2(.5,0.))*brideSize,-zoom*t);
+                            b=bride(backGround*brideSize,brideSize*zoom*t)+heart((backGround-vec2(.5,0.))*brideSize,zoom*t);
      }
 
                  float inversion = -1.;
                  if (wheel)inversion=coz(time);
 
                    vec3 mny=vec3(0.),mnyX = vec3(0.);
-             vec2 lerper = vec2(lerp(time2dance/12.),lerp(time2dance*gr/12.));
+             vec2 lerper = vec2(lerp(time2dance/20.),lerp(time2dance*gr/20.));
             if(colorCombo!=17){
                    if(metronome>1.) mnyX = mannyX(characterP,moveDynamic);
-                   else if (Character==0)mny=manny(characterP, moveDynamic);
+                   else if (Character==0)
+                   mny=body(characterP,moveDynamic)+clamp(face(characterP,moveDynamic),0.,1.)+shiny(characterP,moveDynamic);
+                   
                    else if (Character==1){mny = MannyWoManny(characterP,
-                                                        lerper,move/5.
+                                                        lerper,move/10.
                                                         )+robeL(characterP,lerper,move/5.
-                                                                )*.95+heart(characterP/gr-vec2(.25,.0),    -moveDynamic);}
+                                                                )*.95+heart(characterP-vec2(.25,.0),    moveDynamic);}
                    else if (Character==2){
-                       mny=bride(characterP*gr,moveDynamic/gr)+dress(characterP*1.5,-moveDynamic/1.5)*2.+heart(characterP/gr-vec2(.5,.0),-moveDynamic);
+                       mny=bride(characterP*gr,moveDynamic/gr)+dress(characterP*1.5,-moveDynamic/1.5)*2.+heart(characterP-vec2(.5,.0),moveDynamic);
                        swordSkew+=.5;}
                    else if (Character==3)mny=lion(fourcreaturePlayerP,vec2(inversion,0.))+body(characterP,moveDynamic);
                    else if (Character==4){
@@ -1650,8 +1679,10 @@ vec2 dance = vec2(0.);
                        swordSkew+=1.;}
                    else if (Character==5)mny=ox(fourcreaturePlayerP,vec2(inversion,0.))+body(characterP,moveDynamic);
                    else if (Character==6)mny=man(fourcreaturePlayerP,vec2(inversion,0.))+body(characterP,moveDynamic);
-
-            }
+                   else if (Character==7)mny=bod(characterP,moveDynamic)+clamp(face(characterP,moveDynamic)+heart(characterP,moveDynamic),0.,1.);;
+                       
+           }
+            
      mny=clamp(mny,0.,1.);
 
     vec3 ARTICLES=vec3(0.);
@@ -1666,7 +1697,7 @@ vec2 dance = vec2(0.);
     float isGrey =1.;
     if (starship.x==starship.y&& starship.y==starship.z&&starship.w!=0.)isGrey=starship.x;
 
-gl_FragColor=vec4((clamp(mny+mnyX+starship.xyz-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge+
+gl_FragColor=vec4(mnyX+(clamp(mny+clamp(starship.xyz-(mny.r+mny.g+mny.b)*.5,0.,1.)-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge+
               clamp(clamp(cloud+
                                 zoomer
                           -(starship.x+starship.y+starship.z)*starship.w

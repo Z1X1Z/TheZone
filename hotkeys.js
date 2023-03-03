@@ -130,7 +130,7 @@ function callKey(event){
         else window.starClover=true;
     }
     else if (key=="u") uniforms[ "petals" ].value += 1.;
-    else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%7;
+    else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%8;
     
     else if (key=="/"||key=="?"){
         if(uniforms[ "spirated" ].value==0)uniforms[ "spirated" ].value=1;
