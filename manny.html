@@ -1697,7 +1697,7 @@ vec2 dance = vec2(0.);
     float isGrey =1.;
     if (starship.x==starship.y&& starship.y==starship.z&&starship.w!=0.)isGrey=starship.x;
 
-gl_FragColor=vec4(mnyX+(clamp(mny+clamp(starship.xyz-(mny.r+mny.g+mny.b)*.5,0.,1.)-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge+
+gl_FragColor=vec4(mnyX+(clamp(mny+clamp(starship.xyz-(mny.r+mny.g+mny.b)*.333,0.,1.)-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge+
               clamp(clamp(cloud+
                                 zoomer
                           -(starship.x+starship.y+starship.z)*starship.w
