@@ -1689,7 +1689,9 @@ vec2 dance = vec2(0.);
                        swordSkew+=1.;}
                    else if (Character==5)mny=ox(fourcreaturePlayerP,vec2(inversion,0.))+body(characterP,moveDynamic);
                    else if (Character==6)mny=man(fourcreaturePlayerP,vec2(inversion,0.))+body(characterP,moveDynamic);
-                   else if (Character==7)mny=bod(characterP,moveDynamic)+clamp(face(characterP,moveDynamic)+heart(characterP/2.618/1.3247,moveDynamic),0.,1.);;
+                   else if (Character==7)mny=bod(characterP,moveDynamic)+heart(characterP*2.618*1.3247,moveDynamic)+clamp(face(characterP,moveDynamic)+heart(characterP*min(resolution.x,resolution.y)/max(resolution.x,resolution.y)
+                                                                                                                                                            
+                                                                                                                                                                            /2.,moveDynamic),0.,1.);;
                        
            }
             
