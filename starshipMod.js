@@ -431,6 +431,7 @@ function init() {
       resolution: {value: new THREE.Vector2() },
       coords: {value: new THREE.Vector2() },
   d: {value: new THREE.Vector2() },
+  dynamicDance: {value: false},
   remediatedColors: {value: false },
 
 Clovoid:{value:false},
@@ -678,8 +679,8 @@ function takeNextScoreSlice(start){
                        
                        
                        let STARSHIPMAP;
-                       let date = Date.now();
-                       let startTimeSecondMantissaMagnified = ((date/1000.-Math.round(date)/1000.)-.5)*144000;//for orienting the dance to time
+                      window.date = Date.now();
+                      window.startTimeSecondMantissaMagnified = ((date/1000.-Math.round(date)/1000.)-.5)*144000;//for orienting the dance to time
 function animate( timestamp ) {
 adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
 
@@ -688,7 +689,7 @@ adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dim
     
     
     
-    uniforms[ "time" ].value = timestamp/1000.+startTimeSecondMantissaMagnified;
+    uniforms[ "time" ].value = timestamp/1000.+window.startTimeSecondMantissaMagnified;
     if(starSpin!=0)twist=(uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*2.*starSpin*2.+24)%24.;
 
 
@@ -1475,7 +1476,7 @@ if(!zoomAtl41)
             let yTouch = screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d);
              var touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
             uniforms.d.value.x=xTouch;
-            uniforms.d.value.y=yTouch;
+            uniforms.d.value.y=-yTouch;
             uniforms[ "volume" ].value=1.;
             let spunTouch=touchMovement;
                   if(uniforms.carousel.value!=0.)         spunTouch=spin(touchMovement,uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));

@@ -80,6 +80,11 @@ function callKey(event){
     else if (key=="\'"||key=="\"") uniforms[ "colorCombo" ].value = 13;
     else if (key=="d") uniforms[ "colorCombo" ].value = 14;
     else if (key=="x") uniforms[ "colorCombo" ].value = 15;
+    else if (key=="X"){
+        uniforms[ "dynamicDance" ].value = !uniforms[ "dynamicDance" ].value;
+        window.date = Date.now();
+        window.startTimeSecondMantissaMagnified = ((date/1000.-Math.round(date)/1000.)-.5)*144000;//for orienting the dance to time
+    }
     else if (key=="b") uniforms[ "colorCombo" ].value = 16;
     else if (key=="B") {
         if(BulletMine == 0) BulletMine = 1;
