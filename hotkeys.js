@@ -56,12 +56,14 @@ function callKey(event){
     else if (key=="m") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
     else if (key=="!")uniforms[ "Refractelate" ].value=!uniforms[ "Refractelate" ].value;
     else if (key=="@")uniforms[ "Clovoid" ].value=!uniforms[ "Clovoid" ].value;
+    else if (key=="#")uniforms[ "base3" ].value=!uniforms[ "base3" ].value;
     else if (key=="#")uniforms[ "dotted" ].value=!uniforms[ "dotted" ].value;
+
     else if (key=="&")uniforms[ "continuumClover" ].value=!uniforms[ "continuumClover" ].value;
     
     else if (key=="q") {
-        if          ( uniforms[ "colorCombo" ].value >9)          uniforms[ "colorCombo" ].value = 1;
-        else uniforms[ "colorCombo" ].value = (uniforms[ "colorCombo" ].value+1)%10;
+        if          ( uniforms[ "colorCombo" ].value >10)          uniforms[ "colorCombo" ].value = 1;
+        else uniforms[ "colorCombo" ].value = (uniforms[ "colorCombo" ].value+1)%11;
     }
     
     else if (key=="Q") {

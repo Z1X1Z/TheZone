@@ -436,6 +436,8 @@ function init() {
 
 Clovoid:{value:false},
 dotted:{value:false},
+  base3:{value:false},
+
     onehundredfortyfourthousand:{value:false},
     shaderScale:{value:window.pixelShaderSize}
 
@@ -1087,7 +1089,7 @@ x,    y,  depth,
                  var finger = twelve[t][g];
                  var arm =(g+9)/10.*pi*2.;
                  
-                 var lengt = (finger-minFinger)/(maxFinger-minFinger)/2.;
+                 var lengt = (finger-minFinger)/(maxFinger-minFinger)/1.5;
                  if(lengt>0){
                      var vop = new THREE.Color();
                      let BlackOrWhite;
@@ -1108,8 +1110,8 @@ x,    y,  depth,
                      let y = widt*-Math.cos(rpio2+fingerTwist+pi);
                      let xr = pi/12.*lengt*-Math.sin(arm+fingerTwist+pi);
                      let yr = pi/12.*lengt*-Math.cos(arm+fingerTwist+pi);
-                     let offsetX=-Math.sin(fingerTwist)/2.;
-                     let offsetY=-Math.cos(fingerTwist)/2.;
+                     let offsetX=-Math.sin(fingerTwist)/1.5;
+                     let offsetY=-Math.cos(fingerTwist)/1.5;
                      let depth = -.98;//this depth should mean that half the trail is above and half below
                      
                      star.push(
