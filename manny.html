@@ -545,6 +545,7 @@
 
     uniform float time;
     uniform float volume;
+    uniform float totalAmp;
 
     uniform float rate;
     uniform float zoom;
@@ -1592,15 +1593,16 @@ vec3 horse(vec2 p, vec2 t){ //horse
 
   //function library: manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin
 vec3 sevenPillars(vec2 p){
-    float pillarHeight = .04;
-    float screenBase = 7./4.*(1.-pillarHeight/2.);
+    float pillarHeight = 50./resolution.x;
+    float screenBase = pillarHeight;
 
     p.x-=screenBase;
-    if(p.x>-pillarHeight)
+    if(p.x<pillarHeight)
     {
        float pillars;
-       if (p.x>0.) pillars = 1000.*(1.-volume);
-       else pillars = 1000.*volume;
+       if (p.x>0.) pillars = totalAmp*3.;
+       else pillars = (1.-totalAmp*3.);
+        if (pillars<0.) pillars=0.;
       p.y*=pillars;
       vec2 s=p;
                       float l=0.;
@@ -1727,7 +1729,7 @@ vec2 dance = vec2(0.);
     if (starship.x==starship.y&& starship.y==starship.z&&starship.w!=0.)isGrey=starship.x;
 
                                  vec3 Pillars = vec3(0.);
-                                 Pillars = sevenPillars(p);
+                                 Pillars = sevenPillars(vUv.yx-vec2(0.,.5));
                                  
 gl_FragColor=vec4(Pillars+mnyX+(clamp(mny+clamp(starship.xyz-(mny.r+mny.g+mny.b)*.333,0.,1.)-(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge+
               clamp(clamp(cloud+
