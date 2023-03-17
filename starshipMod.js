@@ -243,6 +243,7 @@ function  move()
     totalAMP = 0.;
     for(var n=0; n<bufferSize;n++)totalAMP+=Math.abs(inputData[n]);
     totalAMP/=inputData.length;
+        uniforms["totalAmp" ].value=totalAMP;
         lastPitch = pitch;
         
 if (totalAMP>zoomOutRatchetThreshold) pitch =    audioX.sampleRate/calculatePitch();
@@ -427,6 +428,7 @@ function init() {
       metronome: {value: .99 },
       time2dance: {value: 0.0 },
   volume: {value: 0.0 },
+  totalAmp: {value: 1.0 },
 
       resolution: {value: new THREE.Vector2() },
       coords: {value: new THREE.Vector2() },
@@ -830,7 +832,6 @@ else if(blankBackground) {
   uniforms[ "time2dance" ].value += audioX.sampleRate/bufferSize*totalAMP;
                             
          uniforms["volume" ].value = audioX.sampleRate/bufferSize*totalAMP/(1.+zoomOutRatchetThreshold);
-
 
 
               uniforms[ "zoom" ].value = zoom;
