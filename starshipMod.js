@@ -1,13 +1,13 @@
 
 function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
     if(typeof THREE=="object" && document.visibilityState=="visible"
-       &&(micOn||location.hash.includes("t"))){
+       &&(window.micOn||location.hash.includes("t"))){
         document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
         document.getElementById( "load message").innerHTML = "";//turn off splash!
 
                 if(location.hash.includes("t"))
               {
-                touchOnlyMode=true;
+                window.touchOnlyMode=true;
                   pointerZoom=true;
               }
             init();
@@ -720,7 +720,7 @@ adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dim
 if(!window.touchMode)pointerZoom=false;
 else on=false;
 
-if( !window.touchMode&&!touchOnlyMode) {
+if( !window.touchMode&&!window.touchOnlyMode) {
 
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
            if(window.volumeSpeed)

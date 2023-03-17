@@ -1,7 +1,7 @@
 const fftSize=2048;
 
-    let touchOnlyMode = false;
-    let micOn = false;
+    window.touchOnlyMode = false;
+    window.micOn = false;
     let audioX;
 
    let analyser;
