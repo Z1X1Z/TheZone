@@ -1478,8 +1478,8 @@ if(!zoomAtl41)
             let xTouch = screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d);
             let yTouch = screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d);
              var touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
-            uniforms.d.value.x=xTouch;
-            uniforms.d.value.y=-yTouch;
+            uniforms.d.value.x=-xTouch;
+            uniforms.d.value.y=yTouch;
             uniforms[ "volume" ].value=1.;
             let spunTouch=touchMovement;
                   if(uniforms.carousel.value!=0.)         spunTouch=spin(touchMovement,uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
