@@ -2,12 +2,12 @@ const fftSize=2048;
 
     window.touchOnlyMode = false;
     window.micOn = false;
-    let audioX;
+    window.audioX;
 
-   let analyser;
-    let source;
-    let dataArray;
-    let userHasGestured = false;
+window.analyser;
+window.source;
+window.dataArray;
+window.userHasGestured = false;
     async function startMic() {
       //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
         navigator.mediaDevices.getUserMedia({
