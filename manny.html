@@ -927,7 +927,8 @@ if(onehundredfortyfourthousand)
    
 
    if(!base3)s.x=log(abs(s.x));
-   else s.x=log(abs(s.x))/log(3.);//try log base (2.7390263401441512059468682584473451539340711563445495817956319050) or halfway between log3s tow solutions
+   else s.x=log(abs(s.x))/log(2.7286540843015982206535778649000038258456591250222545783812997663);//half way between e and log base (2.7390263401441512059468682584473451539340711563445495817956319050) or halfway between log3s two solutions
+   
 
    if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*2.*PI/(atan(s.y,s.x)-PI*spirated);
 
