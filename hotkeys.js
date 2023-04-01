@@ -56,8 +56,7 @@ function callKey(event){
     else if (key=="m") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
     else if (key=="!")uniforms[ "Refractelate" ].value=!uniforms[ "Refractelate" ].value;
     else if (key=="@")uniforms[ "Clovoid" ].value=!uniforms[ "Clovoid" ].value;
-    else if (key=="#")uniforms[ "base3" ].value=!uniforms[ "base3" ].value;
-    else if (key=="#")uniforms[ "dotted" ].value=!uniforms[ "dotted" ].value;
+    else if (key=="#")uniforms[ "baseOfLog" ].value=(uniforms[ "baseOfLog" ].value+1)%3;
 
     else if (key=="&")uniforms[ "continuumClover" ].value=!uniforms[ "continuumClover" ].value;
     
@@ -82,6 +81,8 @@ function callKey(event){
     else if (key=="\'"||key=="\"") uniforms[ "colorCombo" ].value = 13;
     else if (key=="d") uniforms[ "colorCombo" ].value = 14;
     else if (key=="x") uniforms[ "colorCombo" ].value = 15;
+    else if (key=="*") uniforms[ "colorCombo" ].value = 20;
+
     else if (key=="X"){
         uniforms[ "dynamicDance" ].value = !uniforms[ "dynamicDance" ].value;
         window.date = Date.now();

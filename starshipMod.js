@@ -22,7 +22,6 @@ const starshipSize = Math.E**-1.3247/Math.sqrt(2.);//divided by Math.sqrt(2.) to
 let screenPressCoordX, screenPressCoordY;
 window.pointerZoom=false;
 let coordX=0., coordY=0.;
-if(!("shaderOn" in window))window.shaderOn=true;
 if(!("spiroRainbow" in window))window.spiroRainbow = false;
 window.pixelShaderSize = 7;
 const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
@@ -450,14 +449,14 @@ dotted:{value:false},
   uniforms.coords.value.x = coordX;
   uniforms.coords.value.y = coordY;
     window.uniformsLoaded=true;
-  if(window.shaderOn)
-      materialShader = new THREE.ShaderMaterial( {
+
+    materialShader = new THREE.ShaderMaterial( {
         uniforms: uniforms,
         vertexShader: document.getElementById( 'vertexShader' ).textContent,
         fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
           transparent: true,
           opacity:.5
-
+          
       } );
 
 
@@ -694,7 +693,7 @@ adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dim
     
     
     uniforms[ "time" ].value = timestamp/1000.+window.startTimeSecondMantissaMagnified;
-    if(starSpin!=0)twist=(uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*2.*starSpin*2.+24)%24.;
+    if(starSpin!=0)twist=(uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*starSpin*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel
 
 
 
@@ -867,7 +866,7 @@ if(!window.touchMode){
              {
                  if(isFinite(testar[g])&&testar[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.){
                      
-                     var arm =(flip*(mustarD[g])+twist+12)%24./24.*pi*2.;
+                     var arm =(flip*mustarD[g]+twist+12)%24./24.*pi*2.;
                      let lengtOriginal=(testar[g]-minTestar)/(maxTestar-minTestar);//twice applied
                      var widt = (1.-lengtOriginal)*starshipSize;
                      if (widt==0)widt=starshipSize;
@@ -1096,8 +1095,11 @@ x,    y,  depth,
                      let BlackOrWhite;
                      let noteGrey = Math.abs(t-(6-twist/2.)+12)%12;
                      if (t==7||t==5||t==2||t==0||t==10)
+                         if(uniforms.colorCombo.value!=20)
                          BlackOrWhite=-1.;
-                     else if( (noteGrey<.5 || noteGrey>11.5) &&starClover)
+                     else BlackOrWhite =.5;
+                     
+                     else if( (noteGrey<.5 || noteGrey>11.5) &&starClover&&uniforms.colorCombo.value!=20)
                         BlackOrWhite=.5;
                     else
                          BlackOrWhite=1;
@@ -1482,7 +1484,7 @@ if(!zoomAtl41)
             uniforms.d.value.y=yTouch;
             uniforms[ "volume" ].value=1.;
             let spunTouch=touchMovement;
-                  if(uniforms.carousel.value!=0.)         spunTouch=spin(touchMovement,uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
+                  if(uniforms.carousel.value!=0.)         spunTouch=spin(touchMovement,uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value*Math.PI*2.+Math.PI)%(Math.PI*2.));
                       coordX+= spunTouch[0];
                       coordY+= spunTouch[1];
           }
