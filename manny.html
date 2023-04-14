@@ -583,11 +583,16 @@
     uniform bool Refractelate;
     uniform float centralCores;
     uniform float externalCores;
+    uniform float upCoreCycler;
+
 uniform bool Clovoid;
 uniform bool remediatedColors;
 uniform bool dotted;
 uniform bool onehundredfortyfourthousand;
 uniform float shaderScale;
+
+uniform float starSpin;
+
     const float PI = 3.1415927410125732;
     const float gr = 1.618033988749;
     float zin(float x){return -sin(x);}
@@ -838,29 +843,31 @@ float r, b, l;
                    return clamp(vec3(l+x+r+c),0.,1.);
                }
 vec2 jc =vec2(0.);// vec2 jc =vec2(-0.5577,- 0.6099);//you can feed in coordinates for p movement to get different cloverfields
+                                  
 vec3 tol(vec2 p, vec2 t){
 vec2 colorAccumulator =vec2(0.);
 vec3 heartColors = vec3(0.);
-float precores =0.;
-            if (spirated!=0.)
-            {
-                if (morph==0.&&!wheel) precores+=2.;
-                else precores+=1.;
-            }
+float precores = 0.;
+
+if(morph!=0.)precores=-2./log(.5);
+else if(!wheel)precores=.5/log(.5);
+
 float cored =0.;
-if(MetaCored)cored= log(zoom)/log(.5)+precores;
+if(MetaCored)cored= log(zoom)/log(.5);
 else cored = centralCores;
 float c = length(p);
 float loops=0.;
 vec2 s=p;
 float coresIn = 0.;
-const float crs = 63.;
+float crs = 60.;//this is the mandelbrot and original inheritance colormode core range
 // if(c>4./3.){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
  float centerslide = 0.;
-if (zoom<1.)  for(int i=0;i<int(crs); i++)if(c<2./3.&&loops+centerslide<cored){
+if (zoom<1.)  for(int i=0;i<int(crs+3.);//crs+3=63
+                  i++)if(c<2./3.&&loops+centerslide<cored){
   if (cloverSlide)  centerslide-=length(s);
   s*=2.;c*=2.;loops++;coresIn++;}
  else break;
+ coresIn+=60.+upCoreCycler;
 //  else if(zoom>1.)for(int i=0;i<int(crs); i++)if(c>4./3.&&loops<-cored){s/=2.;c/=2.;loops++;coresIn++;}else break;//UpCore not in use here, but rather in the starshipMod
 for(int i=0;i<int(crs); i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
 float lfc = length(freed(coords));
@@ -870,7 +877,7 @@ float hyperCore=0.;
 
 float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
 //log stabalization constant seems to be 1./log(3.)+(1.-1./log(3.))/1.5 from 1./log(3.)+(1.-1./log(3.))/2.
-if(MetaCored)hyperCore=cored*2./3.+log(lfc)*logStabilizationConstant;
+if(MetaCored)hyperCore=cored*2./3.+log(lfc)*logStabilizationConstant+precores;
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 if(outerCoresOff)hyperCore=0.;
 
@@ -1497,7 +1504,7 @@ vec3 horse(vec2 p, vec2 t){ //horse
                       vec3 sword(vec2 p,vec2 t){
                                  //sword
                                      vec2 g=p*3.;
-                                     g.x+=-sin(time)*20.+12.;
+                                     g.x+=-sin(time2dance/3.)*20.+12.;
                                      g.x/=1.5;
                                      vec2 z=g;
                                      float d = 0.0;
@@ -1708,9 +1715,11 @@ vec2 dance = vec2(0.);
              vec2 lerper = vec2(lerp(time2dance/20.),lerp(time2dance*gr/20.));
             if(colorCombo!=17&&colorCombo!=20){
                    if(metronome>1.) mnyX = mannyX(characterP,moveDynamic);
-                   else if (Character==0)
-                   mny=bod(characterP,moveDynamic)+heart(characterP,moveDynamic)+clamp(face(characterP,moveDynamic),0.,1.)+shiny(characterP,moveDynamic);
-                   
+                   else if (Character==0){
+                       vec2 characterPSpun =characterP;
+                       if(starSpin!=0.)characterPSpun=spin2(p,-starSpin*mod(time*rate,PI*2.))*2.;
+                       mny=bod(characterP,moveDynamic)+heart(characterPSpun,moveDynamic)+clamp(face(characterPSpun,moveDynamic),0.,1.)+shiny(characterPSpun,moveDynamic);
+                   }
                    else if (Character==1){mny = MannyWoManny(characterP,
                                                         lerper,move/10.
                                                         )+robeL(characterP,lerper,move/5.

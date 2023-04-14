@@ -59,7 +59,8 @@ function callKey(event){
     else if (key=="#")uniforms[ "baseOfLog" ].value=(uniforms[ "baseOfLog" ].value+1)%3;
 
     else if (key=="&")uniforms[ "continuumClover" ].value=!uniforms[ "continuumClover" ].value;
-    
+    else if (key=="&")uniforms[ "colorCombo" ].value=31;
+
     else if (key=="q") {
         if          ( uniforms[ "colorCombo" ].value >10)          uniforms[ "colorCombo" ].value = 1;
         else uniforms[ "colorCombo" ].value = (uniforms[ "colorCombo" ].value+1)%11;
@@ -70,6 +71,7 @@ function callKey(event){
         if(starSpin==0)starSpin=1;
         else if(starSpin==1)starSpin=-1;
         else if(starSpin==-1)starSpin=0;
+        uniforms.starSpin.value = starSpin;
     }
     else if (key==";") uniforms[ "colorInverter" ].value = !uniforms[ "colorInverter" ].value;
     else if (key=="t") window.touchMode = !window.touchMode;

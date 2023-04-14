@@ -2,7 +2,8 @@
 function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
     if(typeof THREE=="object" && document.visibilityState=="visible"
        &&(window.micOn||location.hash.includes("t"))){
-        document.getElementById( "background_wrap").style = "position: unset;";//turn off splash!
+        document.getElementById( "background_wrap").style = "background-image: none;";//turn off splash!
+
         document.getElementById( "load message").innerHTML = "";//turn off splash!
 
                 if(location.hash.includes("t"))
@@ -408,6 +409,7 @@ function init() {
         externalCores: {value: 0. },
         centralCores: {value: 0. },
         outerCoresOff: {value: false},
+    upCoreCycler: {value: 0 },
 
         morph: {value: 0.0 },
 
@@ -440,8 +442,8 @@ dotted:{value:false},
   base3:{value:false},
 
     onehundredfortyfourthousand:{value:false},
-    shaderScale:{value:window.pixelShaderSize}
-
+    shaderScale:{value:window.pixelShaderSize},
+  starSpin:{value:0.}
     }
   ]);
   uniforms.resolution.value.x = window.innerWidth;
@@ -556,12 +558,15 @@ let lastVolume = 1.;
             if(zoom<=1./2.**63&&(coordY*coordY+coordX*coordX)**.5/zoom<2.){
                 zoom*=2.**singleHyperCoreDepth;coordY*=2.**singleHyperCoreDepth;coordX*=2.**singleHyperCoreDepth;
                 cloverSuperCores++;
+
             }
             
             if(zoom>1./2**3&&cloverSuperCores>0){
                 zoom/=2.**singleHyperCoreDepth;coordY/=2.**singleHyperCoreDepth;coordX/=2.**singleHyperCoreDepth;
                 cloverSuperCores--;
+                
             }
+    
             if(!isFinite(cloverSuperCores))
             {cloverSuperCores=0;
             zoom=1.;
@@ -573,7 +578,11 @@ let lastVolume = 1.;
     
     if (on||zoom<1.)preserveOuterCore=true;
     else preserveOuterCore = false
-    if((Math.sqrt(coordX*coordX+coordY*coordY)>=1.||zoom>=1.&&!zoomOutEngage&&uniforms.MetaCored.value)&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;}
+    if((Math.sqrt(coordX*coordX+coordY*coordY)>=1.||zoom>=1.&&!zoomOutEngage&&uniforms.MetaCored.value)&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
+        
+        if(uniforms.wheel.value)uniforms.upCoreCycler.value=(uniforms.upCoreCycler.value-1)%60;//does modulo -60%60=0?-0 it seems
+        else uniforms.upCoreCycler.value = 0.;
+    }
     }
                        
                        
@@ -730,8 +739,9 @@ if( !window.touchMode&&!window.touchOnlyMode) {
                        }
            else {volume=1.; lastVolume=1.; }
     move();
-    infinicore();
     if(!zoomAtl41)zoomRoutine();
+    infinicore();
+
     spiral_compress();
     if(on) makeSpirograph();
 
@@ -764,7 +774,7 @@ if( !window.touchMode&&!window.touchOnlyMode) {
      let cents = Math.round((noteNumber-Math.round(noteNumber))*100);
      let fr = Math.round(pitch);
      let n_n = Math.round(noteNumber);
-     let cores = Math.floor(uniforms["centralCores"].value)+cloverSuperCores*singleHyperCoreDepth;
+     let cores = Math.floor(uniforms["centralCores"].value)+cloverSuperCores*singleHyperCoreDepth+uniforms.upCoreCycler.value;
       if(textON)document.getElementById("textWindow").innerHTML =
 "<div sytle='font-size: 16px;'>"+
 
@@ -1469,9 +1479,10 @@ else {//begin touch frame
 
 if(!zoomAtl41)
     {
-      infinicore();
       lastZoom = zoom;
       zoomRoutine();
+        infinicore();
+
     }
     else lastZoom=zoom/zoomRate();
             var d = pixelShaderSize/2.;//this is the frame size in the shader: "p=vec2(...."
@@ -1492,14 +1503,17 @@ if(!zoomAtl41)
           uniforms[ "zoom" ].value = zoom;
           uniforms.coords.value.x = coordX;
           uniforms.coords.value.y = coordY;
+            
+            
                          shaderScene.add( mesh );
         renderer.render( shaderScene, camera );
                          shaderScene.remove( mesh );
 
+            
     if(textON)document.getElementById("textWindow").innerHTML =
         "<div sytle='font-size: 16px;'>"+
         "cores:"+(Math.floor(uniforms["centralCores"].value)+
-        cloverSuperCores*singleHyperCoreDepth)+
+        cloverSuperCores*singleHyperCoreDepth+uniforms.upCoreCycler.value)+
         ", zoom: "+(zoom/2.**(singleHyperCoreDepth*cloverSuperCores))+"<p style='margin : 0px'></p>"+
         "real part: "+ coordY +"<p style='margin : 0px'></p>"+
         "imaginary part: "+ coordX+"<p style='margin : 0px'></p>"+
