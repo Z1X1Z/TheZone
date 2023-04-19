@@ -1635,7 +1635,7 @@ const yinData = Array(fractionOfFrame);
 function calculatePitch ()
 {
             
-tolerance = totalAMP-(1./bufferSize)**1.5;//uses totalAMP hence bufferSize not fractionOfFrame
+tolerance = .5;//try with tolerance=totalAMP-(1./bufferSize)**1.5 for smoother pickup but less accuracy(presumably since it called everything my harmonica played a C, whereas it picks up fine at tolerance=.5)//if using totalAMP use bufferSize not fractionOfFrame
             
             
             
