@@ -52,20 +52,26 @@ let center = false;
 
       //vvvvbelow line partly from https://code-boxx.com/detect-mobile-device-javascript/
 
-    if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
+    /*if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
       {
           rez=.5;
           //fftSize=512;
           //trailLength = 144;
           mobile=true;
       }
-      else if(navigator.userAgent.toLowerCase().match(/mobile/i)){
+      else if(navigator.navigator.userAgentData.brands.toLowerCase().match(/mobile/i)){//https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgentData
            rez=.5;
            //fftSize=512;
            //trailLength = 144;
            mobile=true;
        }
+*/
 
+//may have been the mobile check causing mobile error, testing now
+rez=.5;
+//fftSize=512;
+//trailLength = 144;
+//mobile=true;
 
 //key press handling vvvv
 var pointed=false;
