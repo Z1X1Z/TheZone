@@ -1637,11 +1637,8 @@ const yinData = Array(fractionOfFrame);
 function calculatePitch ()
 {
             
-tolerance = .5;//try with tolerance=totalAMP-(1./bufferSize)**1.5 for smoother pickup but less accuracy(presumably since it called everything my harmonica played a C, whereas it picks up fine at tolerance=.5)//if using totalAMP use bufferSize not fractionOfFrame
-            
-            
-            
-            
+if(highORlow==1)tolerance=totalAMP-(1./bufferSize)**1.5//works well for smoothly and quickly determining sung notes especially low ones
+else if (highORlow==2)tolerance = .5;//when I play different notes on harmonica it mostly hears C, this clears up the distinction of the notes
 let period;
 let delta = 0.0, runningSum = 0.0;
 yinData[0] = 1.0;

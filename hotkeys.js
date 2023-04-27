@@ -8,6 +8,7 @@ window.BulletMine=0;
 window.starClover=true;
 window.blankBackground=false;
 window.twist = 0.;
+window.highORlow=1.;
 function readHash(){for(var n = location.hash.length;n>0;n--)callKey(new KeyboardEvent('keydown', {'key': location.hash[n],"keyCode":location.hash.charCodeAt(n)}));
 }
 function stallHash(){if(window.uniformsLoaded)readHash();else setTimeout(stallHash,10);}//uniforms are only loaded if mic is enabled
@@ -84,6 +85,8 @@ function callKey(event){
     else if (key=="d") uniforms[ "colorCombo" ].value = 14;
     else if (key=="x") uniforms[ "colorCombo" ].value = 15;
     else if (key=="*") uniforms[ "colorCombo" ].value = 20;
+    else if (key=="(") highORlow = 1;
+    else if (key==")") highORlow = 2;
 
     else if (key=="X"){
         uniforms[ "dynamicDance" ].value = !uniforms[ "dynamicDance" ].value;

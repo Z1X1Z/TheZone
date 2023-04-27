@@ -182,6 +182,12 @@
                listen In!</a><br>
 
 
+               <input type="radio" id="High Tolerance" name="tolerance" onclick="window.highORlow = 2">
+               <label for="High Tolerance">High Tolerance</label><br>
+           <input type="radio" id="Low Tolerance" name="tolerance" onclick="uniforms[ 'colorCombo' ].value=1;">
+           <label for="Low Tolerance">Low Tolerance</label><br>
+           
+           
                <a id="Faster" name="t"  onclick= "
                    key  = '+';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -852,7 +858,7 @@ vec3 heartColors = vec3(0.);
 float precores = 0.;
 
 if(morph!=0.)precores=-2./log(.5);
-else if(!wheel)precores=.5/log(.5);
+else if(!wheel)precores=.25/log(.5);
 
 float cored =0.;
 if(MetaCored)cored= log(zoom)/log(.5);
@@ -1616,7 +1622,7 @@ vec3 horse(vec2 p, vec2 t){ //horse
 
   //function library: manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin
 vec3 sevenPillars(vec2 p){
-    float pillarHeight = 50./resolution.x;
+    float pillarHeight = 25./resolution.x;
     float screenBase = pillarHeight;
 
     p.x-=screenBase;
