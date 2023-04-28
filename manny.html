@@ -54,9 +54,8 @@
         loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")
         </script>
 
-           
-           <div id="background_wrap">
-               <!-- removing this script may fix android no load bug, but I'm testing z ordering in css -->
+        <!-- removing this script may fix android no load bug, but I'm testing z ordering in css
+        <div id="background_wrap">
                <script>
                    //splash
                    let nf = document.getElementById('background_wrap');
@@ -72,8 +71,10 @@
                        }
                    
                </script>
+               
            </div>
-           
+        -->
+
 
            
 
@@ -209,6 +210,10 @@
           </button>
           <div class="dropdown-content">
 
+              <a id="Add a petal" name="t"  onclick= "
+                  key  = '|';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+              Add a petal!</a><br>
                  <a id="Add a petal" name="t"  onclick= "
                      key  = 'u';
                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -458,44 +463,23 @@
                   <input type="radio" id=".5rez" name="colorMode" onclick="
                   key  = '~';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                  <label for=".5rez">.5 of a pixel</label><br>
+                  <label for=".5rez">.5 of a pixel per pixel (Apple Only)</label><br>
                   <input type="radio" id="1rez" name="colorMode" onclick="
                   key  = '1';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                  <label for="1rez">1 pixel</label><br>
+                  <label for="1rez">1 pixel per pixel</label><br>
                   <input type="radio" id="2rez" name="colorMode" onclick="
                   key  = '2';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                  <label for="2rez">2 pixels</label><br>
+                  <label for="2rez">2 pixels per pixel</label><br>
                   <input type="radio" id="3rez" name="colorMode" onclick="
                   key  = '3';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                  <label for="3rez">3 pixels</label><br>
+                  <label for="3rez">3 pixels per pixel</label><br>
                   <input type="radio" id="4rez" name="colorMode" onclick="
                   key  = '4';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                  <label for="4rez">4 pixels</label><br>
-                  <input type="radio" id="5rez" name="colorMode" onclick="
-                  key  = '5';
-                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                  <label for="5rez">5 pixels</label><br>
-                  <input type="radio" id="6rez" name="colorMode" onclick="
-                  key  = '6';
-                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                  <label for="6rez">6 pixels</label><br>
-                  <input type="radio" id="7rez" name="colorMode" onclick="
-                  key  = '7';
-                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                  <label for="7rez">7 pixels</label><br>
-                  <input type="radio" id="8rez" name="colorMode" onclick="
-                  key  = '8';
-                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                  <label for="8rez">8 pixels</label><br>
-                  <input type="radio" id="9rez" name="colorMode" onclick="
-                  key  = '9';
-                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                  <label for="9rez">9 pixels</label><br>
-                      
+                  <label for="4rez">4 pixels per pixel</label><br>
                   <a id="Incrementally Increase Resolution" name="t"  onclick= "window.rez*=1.1;renderer.setPixelRatio(window.rez);">
                       Refine resolution!</a><br>
                   <a id="Incrementally Decrease Resolution" name="t"  onclick= "window.rez/=1.1;renderer.setPixelRatio(window.rez);">
@@ -600,7 +584,7 @@ uniform bool onehundredfortyfourthousand;
 uniform float shaderScale;
 
 uniform float starSpin;
-
+uniform int chirality;
     const float PI = 3.1415927410125732;
     const float gr = 1.618033988749;
     float zin(float x){return -sin(x);}
@@ -853,6 +837,7 @@ float r, b, l;
 vec2 jc =vec2(0.);// vec2 jc =vec2(-0.5577,- 0.6099);//you can feed in coordinates for p movement to get different cloverfields
                                   
 vec3 tol(vec2 p, vec2 t){
+                         if(chirality==-1)p.yx=p;
 vec2 colorAccumulator =vec2(0.);
 vec3 heartColors = vec3(0.);
 float precores = 0.;
