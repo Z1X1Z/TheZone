@@ -2,7 +2,7 @@
 function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
     if(typeof THREE=="object" && document.visibilityState=="visible"
        &&(window.micOn||location.hash.includes("t"))){
-      // document.getElementById( "background_wrap").style =  "height: 0px; width: 0px;"
+       document.getElementById( "background_wrap").style =  "height: 0px; width: 0px;"
         
         //"background-image: none;";//turn off splash!
 
