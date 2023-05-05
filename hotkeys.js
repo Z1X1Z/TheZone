@@ -58,10 +58,10 @@ function callKey(event){
     else if (key=="!")uniforms[ "Refractelate" ].value=!uniforms[ "Refractelate" ].value;
     else if (key=="@")uniforms[ "Clovoid" ].value=!uniforms[ "Clovoid" ].value;
     else if (key=="#")uniforms[ "baseOfLog" ].value=(uniforms[ "baseOfLog" ].value+1)%3;
-
+    
     else if (key=="&")uniforms[ "continuumClover" ].value=!uniforms[ "continuumClover" ].value;
     else if (key=="&")uniforms[ "colorCombo" ].value=31;
-
+    
     else if (key=="q") {
         if          ( uniforms[ "colorCombo" ].value >10)          uniforms[ "colorCombo" ].value = 1;
         else uniforms[ "colorCombo" ].value = (uniforms[ "colorCombo" ].value+1)%11;
@@ -87,7 +87,7 @@ function callKey(event){
     else if (key=="*") uniforms[ "colorCombo" ].value = 20;
     else if (key=="(") highORlow = 1;
     else if (key==")") highORlow = 2;
-
+    
     else if (key=="X"){
         uniforms[ "dynamicDance" ].value = !uniforms[ "dynamicDance" ].value;
         window.date = Date.now();
@@ -145,13 +145,14 @@ function callKey(event){
     else if (key=="u") uniforms[ "petals" ].value += 1.;
     else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%8;
     
-    else if (key=="/"||key=="?"){
+    else if (key=="/"){
         if(uniforms[ "spirated" ].value==0)uniforms[ "spirated" ].value=1;
         else if(uniforms[ "spirated" ].value==1)uniforms[ "spirated" ].value=-1;
         else if(uniforms[ "spirated" ].value==-1)uniforms[ "spirated" ].value=0;
     }
-    else if (key=="\\"||key=="|")uniforms[ "hearTOL" ].value = !uniforms[ "hearTOL" ].value;
-    
+    else if (key=="|") {if(uniforms.chirality.value!=-1)uniforms.chirality.value=-1;else uniforms.chirality.value=1;}
+    else if (key=="\\")uniforms[ "hearTOL" ].value = !uniforms[ "hearTOL" ].value;
+    else if (key=="{")uniforms.eden.value=(uniforms.eden.value+1)%3;
     else if (event.keyCode==190||event.key=="."||event.key==">") uniforms[ "metronome" ].value *= 1.1; //keycode for <
     else if ((event.keyCode==188||event.key==","||event.key=="<")&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
     
