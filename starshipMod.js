@@ -21,7 +21,7 @@ stallTillTHREELoaded();
 let xyStarParticleArray=Array();
 window.zoom=1.;
 
-const starshipSize = Math.E**-1.3247/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are size
+const starshipSize = Math.E**-1.3247/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
 let screenPressCoordX, screenPressCoordY;
 window.pointerZoom=false;
 let coordX=0., coordY=0.;
@@ -42,7 +42,7 @@ window.gameOn=false;
 window.twist = 0;
 window.flip = 1;
 
-var rez=1.;
+var rez=.5;
 let colorSound;
 let center = false;
                   let geome;
@@ -50,7 +50,8 @@ let center = false;
                   let meshe;
                   let materialTrail;
 
-      let mobile = false;
+     
+/*let mobile = false;
 
       //vvvvbelow line partly from https://code-boxx.com/detect-mobile-device-javascript/
 
@@ -66,7 +67,8 @@ let center = false;
            //fftSize=512;
            //trailLength = 144;
            mobile=true;
-       }
+       }*/
+
 
 
 //key press handling vvvv
@@ -277,17 +279,18 @@ angle = ((angle+180)/360*2*pi);
          
          d_x = -Math.sin(-angle)*flatline;
          d_y = -Math.cos(-angle)*flatline;
-                       
+                     //  console.log("x"+d_x)
+                    //   console.log("y"+d_y)
+
          uniforms.d.value.x=d_x;
          uniforms.d.value.y=d_y;
          d_x*=volume;
          d_y*=volume;
          var spunD = [d_x,d_y];
-
+                       
                     if(uniforms.carousel.value!=0.)         spunD=spin(spunD,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
           let d_xS=spunD[0];
           let d_yS=spunD[1];
-
 
     bx=coordX+d_xS*MR*zoom*interpolation;
   by=coordY+d_yS*MR*zoom*interpolation;
@@ -350,20 +353,30 @@ trailWidth[n] += radius*starshipSize;
 let material;
     let camera, renderer;
 let mesh;
+let feedbackStarshipmesh, feedbackStarshipmeshFlip;
+
 let materials;
+let feedbackStarshipmaterials, feedbackStarshipmaterialsFlip;
+
 let materialShader;
+let feedbackStarshipmaterialShader, feedbackStarshipmaterialShaderFlip;
+
 let geometry;
 
 
 
 let geometryP;
-let uniforms;
-                     let scene, shaderScene;
+                       let feedbackStarshipgeometryP, feedbackStarshipgeometryPFlip;
+
+let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
+                     let scene, shaderScene,feedbackScene, feedbackSceneFlip;
 
                      var minimumDimension=1;
                      var height=window.innerHeight,width=window.innerWidth;
                        let texture;
                        let renderTarget;
+                       let backBufferFlip=false;
+                      let FeedbackrenderTarget,FeedbackrenderTargetFlipSide;
                        
                        
                      
@@ -374,9 +387,17 @@ function init() {
     renderTarget = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
                                                Math.min(window.innerWidth,window.innerHeight)*4./3.);
 
+    FeedbackrenderTarget = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
+                                                Math.min(window.innerWidth,window.innerHeight)*4./3.);
+
+
+    FeedbackrenderTargetFlipSide = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
+                                                Math.min(window.innerWidth,window.innerHeight)*4./3.);
 
 
     scene = new THREE.Scene();
+    feedbackScene = new THREE.Scene();
+    feedbackSceneFlip= new THREE.Scene();
     shaderScene = new THREE.Scene();
 
 
@@ -388,10 +409,30 @@ function init() {
                 renderer.setClearAlpha ( 0. )
     
     
+  FEEDBACKuniforms = THREE.UniformsUtils.merge([
+  THREE.UniformsLib.lights,
+  {
+      STAR:{value: null    },
+        EDEN:{value: null    },
+
+  }])
+    
+    FEEDBACKuniformsFlip
+    
+    = THREE.UniformsUtils.merge([
+    THREE.UniformsLib.lights,
+    {
+        STAR:{value: null    },
+          EDEN:{value: null    },
+
+    }])
+    
   uniforms = THREE.UniformsUtils.merge([
   THREE.UniformsLib.lights,
   {
       STAR:{value: null    },
+  EDEN:{value: null    },
+  eden:{value: 0},
       spokesVisualizeColors: {value: false    },
 
   Spoker:{value: true    },
@@ -472,7 +513,51 @@ dotted:{value:false},
       //geometryP.translate(0,0,-1.);
 
            mesh = new THREE.Mesh( geometryP, materialShader );
+    
+    
+    //repeat PixelShader loader for The four Rivers
+
               
+    feedbackStarshipmaterialShader = new THREE.ShaderMaterial( {
+        uniforms: FEEDBACKuniforms,
+        vertexShader: document.getElementById( 'vertexShader' ).textContent,
+        fragmentShader: document.getElementById( 'FourRiversfragmentShader' ).textContent,
+          transparent: true,
+          opacity:.5
+          
+      } );
+
+
+
+    feedbackStarshipgeometryP = new THREE.PlaneGeometry( 2, 2 );
+      //geometryP.translate(0,0,-1.);
+
+    feedbackStarshipmesh = new THREE.Mesh( feedbackStarshipgeometryP, feedbackStarshipmaterialShader );
+              
+    
+    //repeat PixelShader loader for The four Rivers second fold
+
+              
+    feedbackStarshipmaterialShaderFlip = new THREE.ShaderMaterial( {
+        uniforms: FEEDBACKuniformsFlip,
+        vertexShader: document.getElementById( 'vertexShader' ).textContent,
+        fragmentShader: document.getElementById( 'FourRiversfragmentShader' ).textContent,
+          transparent: true,
+          opacity:.5
+          
+      } );
+
+
+
+    feedbackStarshipgeometryPFlip = new THREE.PlaneGeometry( 2, 2 );
+      //geometryP.translate(0,0,-1.);
+
+    feedbackStarshipmeshFlip = new THREE.Mesh( feedbackStarshipgeometryPFlip, feedbackStarshipmaterialShaderFlip );
+    //and now for the flip frame for the feedback buffer
+              
+    feedbackScene.add( feedbackStarshipmesh );
+    feedbackSceneFlip.add( feedbackStarshipmeshFlip );
+    
   renderer.setPixelRatio( rez);
 
 
@@ -935,7 +1020,7 @@ if(!window.touchMode){
                      
                      if(RockInTheWater==1||RockInTheWater==2)
                      {
-                         var wideness =(testar[g]/255-totalAMP/2.)*starshipSize;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
+                         var wideness =(testar[g]/255/2.-totalAMP-zoomOutRatchetThreshold**.5)*starshipSize;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
                          if(wideness<=0)wideness=1./255.*starshipSize;
                                      var xyStarParticle={};
                          xyStarParticle.amp = testar[g];
@@ -1209,7 +1294,7 @@ let loopLimit = trailDepth;
                             z = -1.+timeElapsedSinceRecording**2./maxToMin*.33333;//*.33333 is three seconds long
                            if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong/maxToMin);
                             transparencyOfTrailLast =transparencyOfTrail;
-                            transparencyOfTrail =1.-timeElapsedSinceRecording/trailSecondsLong;
+                            transparencyOfTrail =1.-timeElapsedSinceRecording/trailSecondsLong/maxToMin;
                          
                           trailColor.push(
                                           pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
@@ -1422,16 +1507,68 @@ scene.add(meshTrail)
                                   
                                   
    if(window.starClover)
-    {
+                     {
             if(window.blankBackground) shaderScene.background = new THREE.Color( 0x808080);
             else  scene.background = null;
+            
+            renderer.setRenderTarget (renderTarget)
+                
+                
+                
+                
+                
+                renderer.render( scene, camera );
+            
+            //begin the feedback of the starRivers of eden
+                    if( uniforms.eden.value>=1.)
+                    {
 
-             renderer.setRenderTarget (renderTarget)
-             renderer.render( scene, camera );
+                                                var firStaRivers =  true;
+                                                FEEDBACKuniforms.STAR.value=renderTarget.texture;
+                                                FEEDBACKuniformsFlip.STAR.value=renderTarget.texture;
+                   
+                                                backBufferFlip=false;
+                                                for(var i = 0; i <7; i++){
+                                                    if(!backBufferFlip)
+                                                    {
+                                                        renderer.setRenderTarget (FeedbackrenderTarget)
+                                                        
+                                                        if(firStaRivers==true)
+                                                            firStaRivers=false;
+                                                        else FEEDBACKuniforms.STAR.value=FeedbackrenderTargetFlipSide.texture;
+                                                        renderer.render( feedbackScene, camera );
 
-             uniforms.STAR.value=renderTarget.texture;
-             
+                                                    }
+                                                    else
+                                                    {
+                                                        renderer.setRenderTarget (FeedbackrenderTargetFlipSide)
+                                                        
+                                                        
+                                                        FEEDBACKuniformsFlip.STAR.value=FeedbackrenderTarget.texture;
+                                                        renderer.render( feedbackSceneFlip, camera );
+                                                    }
+                                                    backBufferFlip=!backBufferFlip;
+                                                    
+                                                }
+                                                
+                                                if(!backBufferFlip)
+                                                {
+                                                    uniforms.EDEN.value=FeedbackrenderTarget.texture;//should be flip if i is odd
+                                                }
+                                                    
+                                                else
+                                                {
+                                                    uniforms.EDEN.value=FeedbackrenderTargetFlipSide.texture;//should be flip if i is odd
+                                                }
+                       
+                    }
+                    else uniforms.EDEN.value=null;
+            
+            uniforms.STAR.value=renderTarget.texture;
+        
              renderer.setRenderTarget (null)
+            //  uniforms.STAR.value=renderTarget.texture;
+
 
             shaderScene.add( mesh );
              renderer.render( shaderScene, camera )
@@ -1628,7 +1765,8 @@ if("osmd" in window){
 }
 
 
-
+                    
+                    
 
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */

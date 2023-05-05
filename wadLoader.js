@@ -56,7 +56,7 @@ function startSound(e){
 
     if(!window.touchMode){
         var id = 0;
-        if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
+        if (navigator.maxTouchPoints > 1) //navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' ))
             id = touchNumber.get(e.identifier);
         sound[id].stop();
         sound2[id].stop();

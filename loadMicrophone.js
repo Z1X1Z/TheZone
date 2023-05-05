@@ -40,20 +40,16 @@ function route(){
     if(!micOn&&!location.hash.includes("t"))
         startMic();
 }
+
 if(location.hash.includes("t")){
     
         console.log("Touch only mode!")
         touchOnlyMode=true;
         window.touchMode = true;}
 
-if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
-||navigator.userAgent.toLowerCase().match(/mobile/i))//check for mobile platforms, they may work better if a userGesture is logged first
 
-{
     document.getElementById( "load message").innerHTML = "Tap the screen or a key to load!";
     document.body.addEventListener('touchstart', function(e){route();})
     document.body.addEventListener('mousedown', function(e){route();})
     document.body.addEventListener('keydown', function(e){route();})
-}
-else route();
 
