@@ -34,6 +34,7 @@
 
 
         <script src="OFFLINEonlineSwitch.js"></script>
+        
         <script id="threeJSscript"></script>
         <script>
         var cdnSwitchThree="three.js";
@@ -41,17 +42,24 @@
         if (window.useCDN)cdnSwitchThree="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/three.min.js";
         loadScript("threeJSscript",cdnSwitchThree,"three.js")
         </script>
+        
         <script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
         <script>
         var cdnOSMD="opensheetmusicdisplay.min.js";
         if (window.useCDN)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.6.1/build/opensheetmusicdisplay.min.js";
         loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")
         </script>
+        
         <script id="wadJSscript"></script>
         <script>
         var cdnSwitchWAD="wad.min.js";
         if (window.useCDN)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0";
-        loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")
+        
+        function wrapperLurker(){
+            if (userHasGestured)        loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")
+            else        setTimeout(wrapperLurker,100);
+        }
+            wrapperLurker();
         </script>
 
         <!-- removing this script may fix android no load bug, but I'm testing z ordering in css        -->
