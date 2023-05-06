@@ -43,7 +43,7 @@ window.twist = 0;
 window.flip = 1;
 
 var rez=.5;
-if (navigator.maxTouchPoints <1) rez = 1;
+//if (navigator.maxTouchPoints <1) rez = 1;
 let colorSound;
 let center = false;
                   let geome;

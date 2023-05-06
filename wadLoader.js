@@ -88,7 +88,8 @@ function followSound(e){
     if(!window.touchMode){
         
         var id = 0;
-        if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
+        if (//navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' &&)
+            navigator.maxTouchPoints > 1)
             id = touchNumber.get(e.identifier);
         
         
@@ -109,7 +110,8 @@ function followSound(e){
                                                              let cycle=0;
 let c = document.getElementById("container");
 
-if (navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)){
+if (//navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' &&)
+navigator.maxTouchPoints > 1){
     c.addEventListener('touchstart', function(e)
                                {
         e.stopImmediatePropagation();          //e.preventDefault();

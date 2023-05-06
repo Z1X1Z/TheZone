@@ -22,7 +22,8 @@ function hk() {
   document.getElementById("HK").appendChild(x);
 
 }
-if(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+if(//navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' &&
+   navigator.maxTouchPoints > 1)
     hk();
 
 let androidGetKey="";
@@ -40,7 +41,8 @@ var key = "";
     if(window.uniformsLoaded) callKey(new KeyboardEvent('keydown', {'key': key, "keyCode":key.charCodeAt(0)}));
 }
 
-if(!(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))//if not mobile
+if(//!(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' &&
+   navigator.maxTouchPoints < 1)//)//if not mobile
 window.addEventListener('keydown', function(event) {if(window.uniformsLoaded)callKey(event); return true;}, false);
 
 function callKey(event){
