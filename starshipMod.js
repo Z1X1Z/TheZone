@@ -1638,7 +1638,7 @@ if(!zoomAtl41)
             uniforms.d.value.y=yTouch;
             uniforms[ "volume" ].value=1.;
             let spunTouch=touchMovement;
-                  if(uniforms.carousel.value!=0.)         spunTouch=spin(touchMovement,uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value*Math.PI*2.+Math.PI)%(Math.PI*2.));
+                  if(uniforms.carousel.value!=0.)         spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                       coordX+= spunTouch[0];
                       coordY+= spunTouch[1];
           }
