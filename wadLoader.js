@@ -1,7 +1,7 @@
 
 let touchNumber=new Map();
 
-function stallTillWad(){if(typeof Wad=="function"&&userHasGestured){initialize();} else  setTimeout(stallTillWad,10);}
+function stallTillWad(){if(typeof(Wad)=="function"&&userHasGestured){initialize();} else  setTimeout(stallTillWad,10);}
 stallTillWad()//lurker
 
 let hyperdriveTUNA = {
@@ -99,10 +99,12 @@ function followSound(e){
         let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*220.;
         if(isFinite(frequency)&&frequency>0.&&isFinite(angleSound)&&isFinite(volume)&&isFinite(initialAngleSound[id])&&
            angleSound-initialAngleSound[id]!=0&&angleSound-initialAngleSound[id]!=1){
-            sound[id].setPitch(frequency);
-            sound2[id].setPitch(2.*frequency);
-            sound[id].setVolume(volume*(((angleSound-initialAngleSound[id]))/(2.*pi)));
-            sound2[id].setVolume(volume*(1.-((angleSound-initialAngleSound[id]))/(2.*pi)));
+            if(typeof sound[id]=="object"){
+                sound[id].setPitch(frequency);
+                sound2[id].setPitch(2.*frequency);
+                sound[id].setVolume(volume*(((angleSound-initialAngleSound[id]))/(2.*pi)));
+                sound2[id].setVolume(volume*(1.-((angleSound-initialAngleSound[id]))/(2.*pi)));
+            }
         }
 }
 
@@ -172,7 +174,10 @@ c.addEventListener('mousedown', function(e){
      e.preventDefault(); e.stopImmediatePropagation();
  },
             false);
-    c.addEventListener('mouseup', function(e){window.pointerZoom=false; if(!window.touchMode){sound[0].stop();sound2[0].stop();}
+    
+    c.addEventListener('mouseup', function(e){
+        window.pointerZoom=false;
+        if(!window.touchMode&& typeof(Wad)=="function"){sound[0].stop();sound2[0].stop();}
         e.preventDefault(); e.stopImmediatePropagation();
     }, false);
 }
