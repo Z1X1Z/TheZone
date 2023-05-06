@@ -562,7 +562,8 @@ vec4 Pishon=vec4(0.),Gihon=vec4(0.),Tigris=vec4(0.),Euphrates=vec4(0.);
                  min(vUvLion.x,vUvLion.y)>0.)Euphrates+=texture2D(STAR,vUvLion);
    vec4  TheFifthRiver = texture2D(STAR,vUv);
    
-gl_FragColor=(Pishon+Gihon+Tigris+Euphrates)/2.+TheFifthRiver;}//the divisor of the rivers is seemingly open to interpretation
+gl_FragColor=clamp(Pishon+Gihon+Tigris+Euphrates-TheFifthRiver,0.,1.)/vec4(vec3(1.5),1.)+TheFifthRiver;//vec4(vec3(2.),1.); //the divisor of the rivers is seemingly open to interpretation
+        ;}
     </script>
 
 <script id="fragmentShader" type="x-shader/x-fragment">
@@ -949,8 +950,10 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
 for (float counter=0.;counter<iterations;counter++)if(length(s)<50.){
            
            vec2 cloverMAP = (spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+PI))/2.+.5;
- if(length(s)<2./3.||(spokesVisualizeColors&&length(s)<4./3.)) starship+=texture2D(STAR,cloverMAP)+texture2D(EDEN,cloverMAP);//+texture2D(STAR,cloverMAP);
-    
+ if(length(s)<2./3.||(spokesVisualizeColors&&length(s)<4./3.)) {
+               if(eden==0)starship+=texture2D(STAR,cloverMAP);
+               else starship+=texture2D(EDEN,cloverMAP);//+texture2D(STAR,cloverMAP);
+           }
     //alpha cancellation vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
                       if  (starship.x<starship.y && starship.z<starship.y)starship/=starship.y;
                       else if  (starship.y<starship.x && starship.z<starship.x)starship/=starship.x;
@@ -1088,9 +1091,9 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                                  o=o*.5+.5;
                                  }
   float isGrey =1.;//or black
-  if (starship.x==starship.y&& starship.y==starship.z&&starship.w!=0.)isGrey=starship.x;
+ // if (starship.x==starship.y&& starship.y==starship.z&&starship.w!=0.)isGrey=starship.x;
  // else if(starship.x==starship.y&&starship.x==starship.z&&abs(starship.z-.5)<.1&&starship.w!=0.) isBlack=.5;
-o=(clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-vec3((starship.x+starship.y+starship.z)*starship.w),0.,1.)+starship.xyz)*isGrey;
+o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z)*1000000000000.,0.,1.)+starship.xyz;//*isGrey;
 return clamp(o,0.,1.);}
 
                       
@@ -1823,8 +1826,12 @@ vec2 dance = vec2(0.);
     if (starship.x==starship.y&& starship.y==starship.z&&starship.w!=0.)isGrey=starship.x;
 
                                  vec4 StaRivers=vec4(0.);
-                                 if(eden==2)StaRivers=texture2D(EDEN,vUv);
-
+                                 if(eden==2)
+                                 {
+                                StaRivers=texture2D(EDEN,vUv);
+                                starship *= vec4(0.);
+                                }
+                                 
                                  vec3 Pillars = vec3(0.);
                                  Pillars = sevenPillars(vUv.yx-vec2(0.,.5));
 
@@ -1834,7 +1841,7 @@ gl_FragColor=(StaRivers+starship+
               clamp(clamp(cloud+
                                 zoomer-(bridge.x+bridge.y+bridge.z)*10000000.
                           -(starship.x+starship.y+starship.z)*starship.w
-                        +(-StaRivers.r-StaRivers.g-StaRivers.b)*StaRivers.w//uncomment for thicker rivers
+                        +(-StaRivers.r-StaRivers.g-StaRivers.b)//uncomment for thicker rivers
                           -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*1000.
                                                         ,0.,1.)-(mny.r+mny.b+mny.g)*10000.,.0,1.))
       ,1.
