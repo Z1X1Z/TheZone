@@ -202,13 +202,13 @@
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                Reset Speed!</a><br>
 
-               <input type="radio" id="1 Rivers" name="eden" onclick="uniform.eden.value = 0">
+               <input type="radio" id="1 Rivers" name="eden" onclick="uniforms.eden.value = 0">
                <label for="1 Rivers">1 Rivers</label><br>
                
-               <input type="radio" id="5 Rivers in Clover" name="eden" onclick="uniform.eden .value= 1">
+               <input type="radio" id="5 Rivers in Clover" name="eden" onclick="uniforms.eden .value= 1">
                <label for="5 Rivers in Clover">5 Rivers in Clover</label><br>
                
-               <input type="radio" id="5 Rivers" name="eden" onclick="uniform.eden.value = 2">
+               <input type="radio" id="5 Rivers" name="eden" onclick="uniforms.eden.value = 2">
                <label for="5 Rivers">5 Rivers Up Top</label><br>
           </div>
           </div>
@@ -1825,7 +1825,7 @@ gl_FragColor=(StaRivers+starship+
                                                           -(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge+
               clamp(clamp(cloud+
                                 zoomer-(bridge.x+bridge.y+bridge.z)*10000000.
-                         // -(starship.x+starship.y+starship.z)*starship.w
+                          -(starship.x+starship.y+starship.z)*starship.w
                           //+(-StaRivers.r-StaRivers.g-StaRivers.b)*StaRivers.w//uncomment for thicker rivers
                           -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*1000.
                                                         ,0.,1.)-(mny.r+mny.b+mny.g)*10000.,.0,1.))
