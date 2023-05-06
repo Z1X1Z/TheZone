@@ -625,7 +625,7 @@ correlationForText+=document.getElementById("allText").offsetHeight;
             let ticker = 0;
             let FPS=0.;
 
-                  const interval = 333;//sample window of FPS meter
+                  const interval = 1.;//sample window of FPS meter for FPS frame averaging, think 1000/FPS. 1 is more or less off. Used to keep off jitter. Think 200ms maybe
                   let elapsedTimeBetweenFrames = 0.;
                   let lastPitch = 1;
 
@@ -797,7 +797,8 @@ adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dim
 
 
     elapsedTimeBetweenFrames = (timestamp-lastTime);
-    if(elapsedTimeBetweenFrames>interval){FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
+    if(elapsedTimeBetweenFrames>interval)
+    {FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
         ticker++;
 
 
@@ -1021,7 +1022,7 @@ if(!window.touchMode){
                      
                      if(RockInTheWater==1||RockInTheWater==2)
                      {
-                         var wideness =(testar[g]/255/2.-totalAMP-zoomOutRatchetThreshold**.5)*starshipSize;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
+                         var wideness =(testar[g]/255*totalAMP**.5-zoomOutRatchetThreshold)*starshipSize;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
                          if(wideness<=0)wideness=1./255.*starshipSize;
                                      var xyStarParticle={};
                          xyStarParticle.amp = testar[g];
