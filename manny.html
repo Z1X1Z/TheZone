@@ -552,7 +552,8 @@ vec4 Pishon=vec4(0.),Gihon=vec4(0.),Tigris=vec4(0.),Euphrates=vec4(0.);
         vec2 vUvOx=vUv2+vec2(0.,-1.);
         vec2 vUvLion=vUv2+vec2(-1.,0.);
         
-        if(min(vUvEagle.x,vUvEagle.y)>0.
+        if(abs(max(vUvEagle.x,vUvEagle.y))<1.&&
+           min(vUvEagle.x,vUvEagle.y)>0.
            )Pishon += texture2D(STAR,vUvEagle);
          if(abs(max(vUvOx.x,vUvOx.y))<1.&&
              min(vUvOx.x,vUvOx.y)>0.)Gihon+=texture2D(STAR,vUvOx);
@@ -562,7 +563,11 @@ vec4 Pishon=vec4(0.),Gihon=vec4(0.),Tigris=vec4(0.),Euphrates=vec4(0.);
                  min(vUvLion.x,vUvLion.y)>0.)Euphrates+=texture2D(STAR,vUvLion);
    vec4  TheFifthRiver = texture2D(STAR,vUv);
    
-gl_FragColor=clamp((Pishon+Gihon+Tigris+Euphrates)-TheFifthRiver.xyzw,0.,1.)/vec4(vec3(1.5),1.)+TheFifthRiver;//vec4(vec3(2.),1.); //the divisor of the rivers is seemingly open to interpretation
+gl_FragColor=clamp((Pishon+Gihon+Tigris+Euphrates)
+                   //-TheFifthRiver//
+                   -vec4(TheFifthRiver.xyz,0.)// removing alpha blending removes transparency
+                   ,0.,1.)
+/vec4(vec3(1.5),1.)+TheFifthRiver;//vec4(vec3(2.),1.); //the divisor of the rivers is seemingly open to interpretation
         ;}
     </script>
 
@@ -952,13 +957,9 @@ for (float counter=0.;counter<iterations;counter++)if(length(s)<50.){
            vec2 cloverMAP = (spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+PI))/2.+.5;
  if(length(s)<2./3.||(spokesVisualizeColors&&length(s)<4./3.)) {
                if(eden==0)starship+=texture2D(STAR,cloverMAP);
-               else starship+=texture2D(EDEN,cloverMAP);//+texture2D(STAR,cloverMAP);
+               else if(eden==1)starship+=texture2D(EDEN,cloverMAP);//+texture2D(STAR,cloverMAP);
            }
-    //alpha cancellation vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-                      if  (starship.x<starship.y && starship.z<starship.y)starship/=starship.y;
-                      else if  (starship.y<starship.x && starship.z<starship.x)starship/=starship.x;
-                      else if(starship.z!=0.)starship/=starship.z;
-    //alpha cancellation ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 if(onehundredfortyfourthousand)
 {
  
@@ -1093,7 +1094,7 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
   float isGrey =1.;//or black
  // if (starship.x==starship.y&& starship.y==starship.z&&starship.w!=0.)isGrey=starship.x;
  // else if(starship.x==starship.y&&starship.x==starship.z&&abs(starship.z-.5)<.1&&starship.w!=0.) isBlack=.5;
-o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z)*1000000000000.,0.,1.)+starship.xyz;//*isGrey;
+o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z)*7.,0.,1.)+starship.xyz;//*isGrey;
 return clamp(o,0.,1.);}
 
                       

@@ -94,6 +94,7 @@ var zoomOutEngage=false;
 const pi = Math.PI;
 const bufferSize = fftSize;
 let inputData = new Float32Array(bufferSize);
+
 window.zoomOutRatchetThreshold=1./bufferSize;
 
 const numberOfBins = fftSize/2.;
@@ -191,7 +192,7 @@ function fiveAndSeven(){
             }
 }
 
-                          const trailSecondsLong = 8;
+                          const trailSecondsLong = 7;
                           const trailLength = zoomFrames*trailSecondsLong;
 const trail = Array(trailLength);
 const cx = Array(trailLength);//c is the center of the frame moved from the origin
@@ -1293,10 +1294,10 @@ let loopLimit = trailDepth;
                  if(!trailSegmentExpired[r]&&timeElapsedSinceRecording<=trailSecondsLong){
                         // timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
                             let zlast = z;
-                            z = -1.+timeElapsedSinceRecording**2./maxToMin*.33333;//*.33333 is three seconds long
-                           if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong/maxToMin);
+                            z = -1.+timeElapsedSinceRecording**2.*.33333;//*.33333 is three seconds long over star
+                           if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong);
                             transparencyOfTrailLast =transparencyOfTrail;
-                            transparencyOfTrail =1.-timeElapsedSinceRecording/trailSecondsLong/maxToMin;
+                            transparencyOfTrail =1.-timeElapsedSinceRecording/trailSecondsLong;
                          
                           trailColor.push(
                                           pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
@@ -1530,7 +1531,7 @@ scene.add(meshTrail)
                                                 FEEDBACKuniformsFlip.STAR.value=renderTarget.texture;
                         
                                                 backBufferFlip=false;
-                                                for(var i = 0; i <15; i++){
+                                                for(var i = 0; i <9; i++){
                                                     if(!backBufferFlip)
                                                     {
                                                         renderer.setRenderTarget (FeedbackrenderTarget)
