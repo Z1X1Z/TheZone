@@ -1530,7 +1530,7 @@ scene.add(meshTrail)
                                                 FEEDBACKuniformsFlip.STAR.value=renderTarget.texture;
                         
                                                 backBufferFlip=false;
-                                                for(var i = 0; i <13; i++){
+                                                for(var i = 0; i <15; i++){
                                                     if(!backBufferFlip)
                                                     {
                                                         renderer.setRenderTarget (FeedbackrenderTarget)

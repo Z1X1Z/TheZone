@@ -562,7 +562,7 @@ vec4 Pishon=vec4(0.),Gihon=vec4(0.),Tigris=vec4(0.),Euphrates=vec4(0.);
                  min(vUvLion.x,vUvLion.y)>0.)Euphrates+=texture2D(STAR,vUvLion);
    vec4  TheFifthRiver = texture2D(STAR,vUv);
    
-gl_FragColor=clamp(Pishon+Gihon+Tigris+Euphrates-TheFifthRiver,0.,1.)/vec4(vec3(1.5),1.)+TheFifthRiver;//vec4(vec3(2.),1.); //the divisor of the rivers is seemingly open to interpretation
+gl_FragColor=clamp((Pishon+Gihon+Tigris+Euphrates)-TheFifthRiver.xyzw,0.,1.)/vec4(vec3(1.5),1.)+TheFifthRiver;//vec4(vec3(2.),1.); //the divisor of the rivers is seemingly open to interpretation
         ;}
     </script>
 
