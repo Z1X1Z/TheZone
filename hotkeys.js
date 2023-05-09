@@ -154,7 +154,11 @@ function callKey(event){
     }
     else if (key=="|") {if(uniforms.chirality.value!=-1)uniforms.chirality.value=-1;else uniforms.chirality.value=1;}
     else if (key=="\\")uniforms[ "hearTOL" ].value = !uniforms[ "hearTOL" ].value;
-    else if (key=="{")uniforms.eden.value=(uniforms.eden.value+1)%3;
+    else if (key=="{"){
+        if(uniforms.eden.value!=4)uniforms.eden.value=(uniforms.eden.value+1)%3;
+        else uniforms.eden.value=1;}
+    else if (key=="}"){if(uniforms.eden.value==4)uniforms.eden.value=0;else uniforms.eden.value=4;}
+
     else if (event.keyCode==190||event.key=="."||event.key==">") uniforms[ "metronome" ].value *= 1.1; //keycode for <
     else if ((event.keyCode==188||event.key==","||event.key=="<")&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
     

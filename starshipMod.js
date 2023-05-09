@@ -11,7 +11,6 @@ function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js lo
                 if(location.hash.includes("t"))
               {
                 window.touchOnlyMode=true;
-                  pointerZoom=true;
               }
             init();
      }
@@ -101,8 +100,53 @@ const numberOfBins = fftSize/2.;
 const spirray0 = Array(bufferSize);
 const spirray1 = Array(bufferSize);
 const starArms = numberOfBins;
+let Fret = {x:null,y:null,index:null,volume:0.,note:null};
+let loudestFret=Array(4).fill(Fret);
+function vectorize4(){
+    for(var g = 0;g<loudestFret.length;g++)loudestFret[g]=Object.assign({},Fret);
+    let fretCount;
+    if(onO) fretCount=starArms
+        else fretCount=24;
+    for (var g=0; g<fretCount; g++)if(isFinite(testar[g]))
+    {
+        
+        if (testar[g]>loudestFret[0].volume)
+        {
+            if (Math.abs(loudestFret[0].note-loudestFret[1].note)>.25){
+                loudestFret[3]=Object.assign({},loudestFret[2]); loudestFret[2]=Object.assign({},loudestFret[1]);
+                loudestFret[1]=Object.assign({},loudestFret[0]);loudestFret[0].index=g;
+            }
+                loudestFret[0].volume=testar[g];loudestFret[0].note = mustarD[g];
+        }
+        else if (testar[g]>loudestFret[1].volume)
+        {
+            if (Math.abs(loudestFret[1].note-loudestFret[2].note)>.25)
+            {
+            
+            loudestFret[3]=Object.assign({},loudestFret[2]); loudestFret[2]=Object.assign({},loudestFret[1]);
+            }
+            loudestFret[1].index=g;
+            loudestFret[1].volume=testar[g];
+        }
+        else if(testar[g]>loudestFret[2].volume)
+        {
+            if (Math.abs(loudestFret[2].note-loudestFret[3].note)>.25) loudestFret[3]=Object.assign({},loudestFret[2]);
+            loudestFret[2].index=g;loudestFret[2].volume=testar[g];}
+        else if (testar[g]>loudestFret[3].volume){loudestFret[3].index=g;loudestFret[3].volume=testar[g];}
+    }
+    for(var g = 0;g<loudestFret.length;g++)
+    {
+        var arm =(flip*mustarD[loudestFret[g].index]+twist+12)%24./24.*pi*2.;
+        //var rpio2 = arm+pi;
+        loudestFret[g].x = -Math.sin(arm);//*loudestFret[g].volume;
+        loudestFret[g].y = -Math.cos(arm);//*loudestFret[g].volume;
+
+    }
+}
+
 const testar = Array(starArms);
 const mustarD = Array(starArms);
+const mustarDAverager= Array(24);
 let averagedAmp =  0;
 let len=0;
 let spiregulator=0;
@@ -138,7 +182,7 @@ function spiral_compress(){
     let z = dataArray;
 
     for(let n = 0; n<starArms; n++){testar[n] = 0;mustarD[n] = 1;}
-    
+    mustarDAverager.fill(0);
     for(let n=0; n<numberOfBins; n++)
     {
     //if ( z[n]>z[n-1] && z[n] > z[n+1] ){
@@ -153,13 +197,19 @@ function spiral_compress(){
         //    freq = 440; //check for concert A
  
     let note =24*Math.log(freq/440)/Math.log(2.)+49*2;//I would like this 69 to be a 49 as it is it centers around e6
-    if (!onO)testar[(Math.round(note))%24] += Math.abs(z[n]);
+                          if (!onO){
+        testar[(Math.round(note))%24] += Math.abs(z[n]);
+        mustarD[(Math.round(note))%24]+=(Math.round(note))%24;//for Stegasaurus tail
+        mustarDAverager[(Math.round(note))%24]+=1;
+    }
     else{//if constinuous star is engaged pipe directly through avoiding the 24 modulo
       testar[n] = Math.abs(z[n]);
-    }
         mustarD[n] = note;
-
+    }
+                          
   }
+                          if(!onO)  for(var a = 0; a<24; a++)mustarD[a]=mustarD[a]/mustarDAverager[a]
+
 };
 
 
@@ -283,9 +333,11 @@ angle = ((angle+180)/360*2*pi);
          d_y = -Math.cos(-angle)*flatline;
                      //  console.log("x"+d_x)
                     //   console.log("y"+d_y)
-
-         uniforms.d.value.x=d_x;
-         uniforms.d.value.y=d_y;
+         uniforms.d.value=[d_x,d_y];
+      
+                       
+                       FEEDBACKuniforms.d.value=[d_x,d_y]
+                       FEEDBACKuniformsFlip.d.value=[d_x,d_y]
          d_x*=volume;
          d_y*=volume;
          var spunD = [d_x,d_y];
@@ -416,18 +468,25 @@ function init() {
   {
       STAR:{value: null    },
         EDEN:{value: null    },
+  eden:{value: 0    },
+      
+      fretVector:{value: null    },
+  loudestFret1:{value:null},
+  loudestFret2:{value:null},
+  loudestFret3:{value:null},
+  loudestFret4:{value:null},
+      
+  volumeFret1:{value:null},
+  volumeFret2:{value:null},
+  volumeFret3:{value:null},
+  volumeFret4:{value:null},
+      
+  resolution: {value: new THREE.Vector2() },
+  d:{value: new THREE.Vector2() },
 
   }])
     
-    FEEDBACKuniformsFlip
-    
-    = THREE.UniformsUtils.merge([
-    THREE.UniformsLib.lights,
-    {
-        STAR:{value: null    },
-          EDEN:{value: null    },
-
-    }])
+    FEEDBACKuniformsFlip=Object.assign({},FEEDBACKuniforms);
     
   uniforms = THREE.UniformsUtils.merge([
   THREE.UniformsLib.lights,
@@ -495,8 +554,13 @@ dotted:{value:false},
   ]);
   uniforms.resolution.value.x = window.innerWidth;
   uniforms.resolution.value.y = window.innerHeight;
+    
+    FEEDBACKuniforms.resolution.value.x = window.innerWidth;
+    FEEDBACKuniforms.resolution.value.y = window.innerHeight;
+    
   uniforms.coords.value.x = coordX;
   uniforms.coords.value.y = coordY;
+    
     window.uniformsLoaded=true;
 
     materialShader = new THREE.ShaderMaterial( {
@@ -578,6 +642,9 @@ function adjustThreeJSWindow()
 
          uniforms.resolution.value.x = width;
          uniforms.resolution.value.y = height;
+
+    FEEDBACKuniforms.resolution.value.x = width;
+    FEEDBACKuniforms.resolution.value.y = height;
 
       minimumDimension = Math.min(width,height);
 
@@ -784,41 +851,41 @@ function takeNextScoreSlice(start){
                        let STARSHIPMAP;
                       window.date = Date.now();
                       window.startTimeSecondMantissaMagnified = ((date/1000.-Math.round(date)/1000.)-.5)*144000;//for orienting the dance to time
-function animate( timestamp ) {
-adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
-
-
+                       function animate( timestamp ) {
+    adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
+    
+    
     
     
     
     
     uniforms[ "time" ].value = timestamp/1000.+window.startTimeSecondMantissaMagnified;
     if(starSpin!=0)twist=(uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*starSpin*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel
-
-
-
+    
+    
+    
     elapsedTimeBetweenFrames = (timestamp-lastTime);
     if(elapsedTimeBetweenFrames>interval)
     {FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
-        ticker++;
-
-
-
+    ticker++;
+    
+    
+    
     if (uniforms["MetaCored"].value){
         uniforms[ "centralCores" ].value = Math.log(zoom)/Math.log(.5);
         uniforms[ "externalCores" ].value =(uniforms[ "centralCores" ].value)*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*0.9551195;
         
-      }
-
-
-  if(document.visibilityState=="hidden"||lvs=="hidden")lastFrameTime=timestamp;
-  lvs=document.visibilityState
-  interpolation = (timestamp-lastFrameTime)/1000.*60.;
-  if(interpolation>60)interpolation=60;//this is to prevent frametime leak on mobile
+    }
+    
+    
+    if(document.visibilityState=="hidden"||lvs=="hidden")lastFrameTime=timestamp;
+    lvs=document.visibilityState
+    interpolation = (timestamp-lastFrameTime)/1000.*60.;
+    if(interpolation>60)interpolation=60;//this is to prevent frametime leak on mobile
     if (!isFinite(interpolation))interpolation = 1.;
-  lastFrameTime=timestamp;
-if(!window.touchMode)pointerZoom=false;
-else on=false;
+    lastFrameTime=timestamp;
+    if(!window.touchMode)pointerZoom=false;
+    else on=false;
 
 if( !window.touchMode&&!window.touchOnlyMode) {
 
@@ -936,8 +1003,7 @@ else if(blankBackground) {
 
 
               uniforms[ "zoom" ].value = zoom;
-              uniforms.coords.value.x = coordX;
-              uniforms.coords.value.y = coordY;
+              uniforms.coords.value = [coordX,coordY];
 
   if (micOn)analyser.getByteFrequencyData(  dataArray);
 
@@ -948,14 +1014,16 @@ else if(blankBackground) {
    const starColors=[];
 
                             let maxToMin = Math.max(height,width)/Math.min(height,width);
-
+let index;
 if(!window.touchMode){
          if(onO){
              for (var g=0; g<starArms; g++) {
-                 if(testar[g]>maxTestar)  maxTestar=testar[g];
-                 if(testar[g]<minTestar) minTestar=testar[g];
+                 if(isFinite(testar[g])){
+                     if(testar[g]>maxTestar) { maxTestar=testar[g];index = g;}
+                     if(testar[g]<minTestar) minTestar=testar[g];
+                 }
              }
-             
+
              let secondsToEdge=1;
              secondsToEdge*=window.pixelShaderSize/4./movementRate;
              let fill =1000./(timestamp - timestamplast)*secondsToEdge;//This should be set to either sampleRate/fftSize or by predicted FPS
@@ -1509,7 +1577,7 @@ scene.add(meshTrail)
 
                                   
                                   
-   if(window.starClover)
+   if(window.starClover&&!(touchMode||touchOnlyMode))
                      {
             if(window.blankBackground) shaderScene.background = new THREE.Color( 0x808080);
             else  scene.background = null;
@@ -1528,10 +1596,37 @@ scene.add(meshTrail)
 
                                                 var firStaRivers =  true;
                                                 FEEDBACKuniforms.STAR.value=renderTarget.texture;
-                                                FEEDBACKuniformsFlip.STAR.value=renderTarget.texture;
+
+                            FEEDBACKuniforms.eden.value=uniforms.eden.value;
                         
+                        if(uniforms.eden.value==4)
+                        {
+                            
+                            vectorize4();
+                            FEEDBACKuniforms.loudestFret1.value=[loudestFret[0].x,loudestFret[0].y];
+                            FEEDBACKuniforms.loudestFret2.value=[loudestFret[1].x,loudestFret[1].y];
+                            FEEDBACKuniforms.loudestFret3.value=[loudestFret[2].x,loudestFret[2].y];
+                            FEEDBACKuniforms.loudestFret4.value=[loudestFret[3].x,loudestFret[3].y];
+                            
+                            FEEDBACKuniforms.volumeFret1.value=loudestFret[0].volume/maxTestar;
+                            FEEDBACKuniforms.volumeFret2.value=loudestFret[1].volume/maxTestar;
+                            FEEDBACKuniforms.volumeFret3.value=loudestFret[2].volume/maxTestar;
+                            FEEDBACKuniforms.volumeFret4.value=loudestFret[3].volume/maxTestar;
+                              }
+                        else
+                        {FEEDBACKuniforms.loudestFret1.value=[0,0];
+                            FEEDBACKuniforms.loudestFret2.value=[0,0];
+                            FEEDBACKuniforms.loudestFret3.value=[0,0];
+                            FEEDBACKuniforms.loudestFret4.value=[0,0];
+                            
+                            FEEDBACKuniforms.volumeFret1.value=0;
+                            FEEDBACKuniforms.volumeFret2.value=0;
+                            FEEDBACKuniforms.volumeFret3.value=0;
+                            FEEDBACKuniforms.volumeFret4.value=0;
+                            }
+                        FEEDBACKuniformsFlip=Object.assign({},FEEDBACKuniforms)
                                                 backBufferFlip=false;
-                                                for(var i = 0; i <9; i++){
+                                                for(var i = 0; i <7; i++){
                                                     if(!backBufferFlip)
                                                     {
                                                         renderer.setRenderTarget (FeedbackrenderTarget)
@@ -1587,7 +1682,7 @@ scene.add(meshTrail)
                     }
                     else   scene.background = new THREE.Color( 0x808080);
         renderer.render( scene, camera );
-                 scene.remove(mesh);
+            if(!window.blankBackground)scene.remove(mesh);
              }
                           
                                   
@@ -1618,57 +1713,59 @@ for(var n = 0; n<targets.length;n++){
                                             material.dispose();
                                             geomeTrail.dispose();
                                             materialTrail.dispose();
-                                                                                                                                         }}
-else {//begin touch frame
-
-if(!zoomAtl41)
-    {
-      lastZoom = zoom;
-      zoomRoutine();
-        infinicore();
-
-    }
-    else lastZoom=zoom/zoomRate();
-            var d = pixelShaderSize/2.;//this is the frame size in the shader: "p=vec2(...."
-
-        if(pointerZoom){
-            let xTouch = screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d);
-            let yTouch = screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d);
-             var touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
-            uniforms.d.value.x=-xTouch;
-            uniforms.d.value.y=yTouch;
-            uniforms[ "volume" ].value=1.;
-            let spunTouch=touchMovement;
-                  if(uniforms.carousel.value!=0.)         spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
-                      coordX+= spunTouch[0];
-                      coordY+= spunTouch[1];
-          }
-
-          uniforms[ "zoom" ].value = zoom;
-          uniforms.coords.value.x = coordX;
-          uniforms.coords.value.y = coordY;
+                                                                                                                                        
+                     }}else {//begin touch frame
             
-            
-                         shaderScene.add( mesh );
-        renderer.render( shaderScene, camera );
-                         shaderScene.remove( mesh );
+            if(!zoomAtl41)
+                {
+                  lastZoom = zoom;
+                  zoomRoutine();
+                    infinicore();
 
-            
-    if(textON)document.getElementById("textWindow").innerHTML =
-        "<div sytle='font-size: 16px;'>"+
-        "cores:"+(Math.floor(uniforms["centralCores"].value)+
-        cloverSuperCores*singleHyperCoreDepth+uniforms.upCoreCycler.value)+
-        ", zoom: "+(zoom/2.**(singleHyperCoreDepth*cloverSuperCores))+"<p style='margin : 0px'></p>"+
-        "real part: "+ coordY +"<p style='margin : 0px'></p>"+
-        "imaginary part: "+ coordX+"<p style='margin : 0px'></p>"+
-        "FPS: "+Math.round(FPS)
-    +"</div>";
-    else document.getElementById("textWindow").innerHTML = "";
+                }
+                else lastZoom=zoom/zoomRate();
+                        var d = pixelShaderSize/2.;//this is the frame size in the shader: "p=vec2(...."
+
+                    if(pointerZoom){
+                        let xTouch = screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d);
+                        let yTouch = screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d);
+                         var touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
+                        uniforms.d.value.x=-xTouch;
+                        uniforms.d.value.y=yTouch;
+                        uniforms[ "volume" ].value=1.;
+                        let spunTouch=touchMovement;
+                              if(uniforms.carousel.value!=0.)         spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
+                                  coordX+= spunTouch[0];
+                                  coordY+= spunTouch[1];
+                      }
+
+                      uniforms[ "zoom" ].value = zoom;
+                      uniforms.coords.value.x = coordX;
+                      uniforms.coords.value.y = coordY;
+                        
+            uniforms.STAR.value=null;
+            uniforms.EDEN.value=null;
+
+                                     shaderScene.add( mesh );
+                    renderer.render( shaderScene, camera );
+                                     shaderScene.remove( mesh );
+
+                        
+                if(textON)document.getElementById("textWindow").innerHTML =
+                    "<div sytle='font-size: 16px;'>"+
+                    "cores:"+(Math.floor(uniforms["centralCores"].value)+
+                    cloverSuperCores*singleHyperCoreDepth+uniforms.upCoreCycler.value)+
+                    ", zoom: "+(zoom/2.**(singleHyperCoreDepth*cloverSuperCores))+"<p style='margin : 0px'></p>"+
+                    "real part: "+ coordY +"<p style='margin : 0px'></p>"+
+                    "imaginary part: "+ coordX+"<p style='margin : 0px'></p>"+
+                    "FPS: "+Math.round(FPS)
+                +"</div>";
+                else document.getElementById("textWindow").innerHTML = "";
 
 
 
-            
-      }//end touch mode centerOfDotToEdge
+                        
+                  }//end touch mode centerOfDotToEdge
 
 let thelastnotehit;
 

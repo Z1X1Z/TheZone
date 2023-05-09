@@ -218,6 +218,11 @@
                
                <input type="radio" id="5 Rivers" name="eden" onclick="uniforms.eden.value = 2">
                <label for="5 Rivers">5 Rivers Up Top</label><br>
+               <a id="Stegosaurus" name="t"  onclick= "
+                   key  = '}';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                   Stegasaurus!</a><br>
+
           </div>
           </div>
         <div class="dropdown">
@@ -536,41 +541,78 @@
 
 
 
-<script id="FourRiversfragmentShader" type="x-shader/x-fragment">
-    varying vec2 vUv;
-    uniform sampler2D STAR;
-    uniform sampler2D EDEN;
-    void main(){
-
-
-
-vec4 Pishon=vec4(0.),Gihon=vec4(0.),Tigris=vec4(0.),Euphrates=vec4(0.);
-
-        vec2 vUv2 = vUv*2.;
-        vec2 vUvEagle=vUv2-1.;
-        vec2 vUvMan=vUv2;
-        vec2 vUvOx=vUv2+vec2(0.,-1.);
-        vec2 vUvLion=vUv2+vec2(-1.,0.);
+    <script id="FourRiversfragmentShader" type="x-shader/x-fragment">
+        varying vec2 vUv;
+        uniform sampler2D STAR;
+        uniform sampler2D EDEN;
+        uniform sampler2D fretVector;
+        uniform vec2 loudestFret1;
+        uniform vec2 loudestFret2;
+        uniform vec2 loudestFret3;
+        uniform vec2 loudestFret4;
+        uniform vec2 d;
+        uniform vec2 resolution;
         
-        if(abs(max(vUvEagle.x,vUvEagle.y))<1.&&
-           min(vUvEagle.x,vUvEagle.y)>0.
-           )Pishon += texture2D(STAR,vUvEagle);
-         if(abs(max(vUvOx.x,vUvOx.y))<1.&&
-             min(vUvOx.x,vUvOx.y)>0.)Gihon+=texture2D(STAR,vUvOx);
-          if(abs(max(vUvMan.x,vUvMan.y))<1.&&
-             min(vUvMan.x,vUvMan.y)>0.) Tigris+=texture2D(STAR,vUvMan);
-          if(abs(max(vUvLion.x,vUvLion.y))<1.&&
-                 min(vUvLion.x,vUvLion.y)>0.)Euphrates+=texture2D(STAR,vUvLion);
-   vec4  TheFifthRiver = texture2D(STAR,vUv);
-   
-gl_FragColor=clamp((Pishon+Gihon+Tigris+Euphrates)
-                   //-TheFifthRiver//
-                   -vec4(TheFifthRiver.xyz,0.)// removing alpha blending removes transparency
-                   ,0.,1.)
-/vec4(vec3(1.5),1.)+TheFifthRiver;//vec4(vec3(2.),1.); //the divisor of the rivers is seemingly open to interpretation
-        ;}
-    </script>
+        uniform float volumeFret1;
+        uniform float volumeFret2;
+        uniform float volumeFret3;
+        uniform float volumeFret4;
+        
+        uniform int eden;
 
+        const float PI = 3.1415927410125732;
+        const float gr = 1.618033988749;
+        float zin(float x){return -sin(x);}
+        float coz(float x){return -cos(x);}
+        
+
+        vec2 spin2(vec2 f, float t)
+        {    //https://en.wikipedia.org/wiki/Rotation_matrix
+            float angle =t;
+            float fxb=f.x;
+            f.x=-f.x*coz(-angle)-f.y*zin(-angle);
+         f.y=fxb*zin(-angle)-f.y*coz(-angle);
+         return f;
+        }
+        
+        void main(){
+    vec4 Pishon=vec4(0.),Gihon=vec4(0.),Tigris=vec4(0.),Euphrates=vec4(0.);
+    vec2 vUvEagle=vec2(0.),vUvMan=vec2(0.),vUvOx=vec2(0.),vUvLion=vec2(0.);
+            float cutOutDegree=1.;
+            float atanD = atan(d.y,d.x);
+            if(eden!=4)
+       {
+           vec2 vUv2 = vUv*2.;
+
+                vUvEagle=vUv2-1.;
+                vUvMan=vUv2;
+                vUvOx=vUv2+vec2(0.,-1.);
+                vUvLion=vUv2+vec2(-1.,0.);
+       }
+       else
+       {
+           cutOutDegree=2.;
+           vec2 scale = max(resolution.x,resolution.y)/resolution.yx;
+           vec2 vUvScaled =(vUv-.5)*scale;
+             vUvEagle = (vUvScaled*volumeFret1-loudestFret1/3.)/scale*2.+.5;
+             vUvMan = (vUvScaled*volumeFret2-loudestFret2/3.)/scale*2.+.5;
+             vUvOx = (vUvScaled*volumeFret3-loudestFret3/3.)/scale*2.+.5;
+             vUvLion = (vUvScaled*volumeFret4-loudestFret4/3.)/scale*2.+.5;
+    }
+            if(abs(max(vUvEagle.x,vUvEagle.y))<1.&&min(vUvEagle.x,vUvEagle.y)>0.)
+                        Pishon += texture2D(STAR,vUvEagle);
+            if(abs(max(vUvOx.x,vUvOx.y))<1.&&min(vUvOx.x,vUvOx.y)>0.)Gihon+=texture2D(STAR,vUvOx);
+            if(abs(max(vUvMan.x,vUvMan.y))<1.&&min(vUvMan.x,vUvMan.y)>0.) Tigris+=texture2D(STAR,vUvMan);
+            if(abs(max(vUvLion.x,vUvLion.y))<1.&&min(vUvLion.x,vUvLion.y)>0.)Euphrates+=texture2D(STAR,vUvLion);
+            vec4  TheFifthRiver = texture2D(STAR,vUv);
+
+             gl_FragColor=clamp((Pishon+Gihon+Tigris+Euphrates)
+                      // -TheFifthRiver//
+                       -vec4(TheFifthRiver.xyz,0.)*cutOutDegree// removing alpha blending removes transparency
+                       ,0.,1.)
+    /vec4(vec3(1.5),1.)+TheFifthRiver;//vec4(vec3(2.),1.); //the divisor of the rivers is seemingly open to interpretation
+    ;}
+        </script>
 <script id="fragmentShader" type="x-shader/x-fragment">
 
     varying vec2 vUv;
@@ -1828,7 +1870,7 @@ vec2 dance = vec2(0.);
     if (starship.x==starship.y&& starship.y==starship.z&&starship.w!=0.)isGrey=starship.x;
 
                                  vec4 StaRivers=vec4(0.);
-                                 if(eden==2)
+                                 if(eden==2||eden==4)
                                  {
                                 StaRivers=texture2D(EDEN,vUv);
                                 starship *= vec4(0.);
