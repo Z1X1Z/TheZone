@@ -158,7 +158,7 @@ function callKey(event){
         if(uniforms.eden.value!=4)uniforms.eden.value=(uniforms.eden.value+1)%3;
         else uniforms.eden.value=1;}
     else if (key=="}"){if(uniforms.eden.value==4)uniforms.eden.value=0;else uniforms.eden.value=4;}
-
+    
     else if (event.keyCode==190||event.key=="."||event.key==">") uniforms[ "metronome" ].value *= 1.1; //keycode for <
     else if ((event.keyCode==188||event.key==","||event.key=="<")&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
     
@@ -184,10 +184,12 @@ function callKey(event){
     }
     else if (key=="w")window.volumeSpeed=!window.volumeSpeed;
     
-    else if (key=="W"){ window.twist+=2; window.twist = window.twist%24;}
-    else if (key=="S"){ window.twist-=2; window.twist = (window.twist+24)%24;}
-      else if (key=="A")window.flip = -1;
-      else if (key=="D")window.flip = 1;
+    else if (key=="W"){ window.twist+=2; window.twist = window.twist%24;
+        uniforms.twistStar.value=window.twist/24.*2.*Math.PI;}
+    else if (key=="S"){ window.twist-=2; window.twist = (window.twist+24)%24;
+        uniforms.twistStar.value=window.twist/24.*2.*Math.PI;}
+    else if (key=="A"){window.flip = -1;uniforms.flipStar.value=-1.;}
+    else if (key=="D"){window.flip = 1;uniforms.flip.value=1.;}
 
       else if (key=="R")   uniforms[ "remediatedColors" ].value=!uniforms[ "remediatedColors" ].value  ;
 
@@ -197,6 +199,7 @@ function callKey(event){
       else if (key.toLowerCase()=="-"){window.movementRate /=1.11111111; uniforms[ "rate" ].value/=1.11111111;}
 
           else if (key=="e")window.gameOn=!window.gameOn;
+          else if (key=="E")uniforms.MannyONtrail.value=uniforms.MannyONtrail.value=(1+uniforms.MannyONtrail.value)%2;
 
       if(uniforms[ "free" ].value) window.zoomCageSize=100000000000000000.;
       else window.zoomCageSize=1.5;
