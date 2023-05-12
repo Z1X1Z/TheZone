@@ -548,8 +548,10 @@ dotted:{value:false},
     onehundredfortyfourthousand:{value:false},
     shaderScale:{value:window.pixelShaderSize},
   starSpin:{value:0.},
-  chirality:{value:0}
-
+  chirality:{value:0},
+  MannyONtrail:{value:1},
+  twistStar:{value:0.},
+  flipStar:{value:1.},
     }
   ]);
   uniforms.resolution.value.x = window.innerWidth;
