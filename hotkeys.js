@@ -189,7 +189,7 @@ function callKey(event){
     else if (key=="S"){ window.twist-=2; window.twist = (window.twist+24)%24;
         uniforms.twistStar.value=window.twist/24.*2.*Math.PI;}
     else if (key=="A"){window.flip = -1;uniforms.flipStar.value=-1.;}
-    else if (key=="D"){window.flip = 1;uniforms.flip.value=1.;}
+    else if (key=="D"){window.flip = 1;uniforms.flipStar.value=1.;}
 
       else if (key=="R")   uniforms[ "remediatedColors" ].value=!uniforms[ "remediatedColors" ].value  ;
 
