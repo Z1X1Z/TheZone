@@ -1810,7 +1810,7 @@ vec2 dance = vec2(0.);
          
          vec2 characterP = p*2.;
                                  
-         vec2 characterPSpunToKey=spin2(characterP*flipStar,-starSpin*mod(time*rate,PI*2.)-twistStar);
+         vec2 characterPSpunToKey=spin2(characterP*vec2(1.,flipStar),-starSpin*(mod(time*rate,PI*2.)-twistStar*flipStar));
                                  
          vec2 characterOnTrailP = characterP;
          if(MannyONtrail==0) characterOnTrailP=spin2(characterOnTrailP,atan(d.y,d.x)-PI*3./2.);//put manny on trail
