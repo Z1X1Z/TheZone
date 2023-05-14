@@ -227,15 +227,15 @@ function fiveAndSeven(){
     
     
       let finger = 0 //ranges up to
-      let  star = 0 //ranges up to 12
+      let  starNote = 0 //ranges up to 12
         for(let n = 0; n<numberOfBins; n++)        {
             //mustard is in 24ths, here we want 12ths so we divide by two
             let twelfths = (mustarD[n])/2.+12//A1 is 1 with +12
            
                 if( twelfths>=-.5){
-                    star = Math.round(twelfths)%12;
+                    starNote = Math.round(twelfths)%12;
                     finger = Math.floor(twelfths/10);
-                    if (finger<10&&!isNaN(star)&&!isNaN(dataArray[n])) twelve[star][finger] += dataArray[n];
+                    if (finger<10&&!isNaN(starNote)&&!isNaN(dataArray[n])) twelve[starNote][finger] += dataArray[n];
                 }
                         
             
@@ -1012,8 +1012,8 @@ else if(blankBackground) {
    var maxTestar=0.;
    var minTestar=100000000000000;
 
-   var star=[];
-   const starColors=[];
+   var star=Array();
+   const starColors=Array(starArms);
 
                             let maxToMin = Math.max(height,width)/Math.min(height,width);
 let index;
@@ -1463,9 +1463,9 @@ circle.position.set(circleX,circleY,-1.);
 
 
                    let radialMaterial=  new THREE.MeshBasicMaterial( { color: colorBlack});
-
-                   const radialLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints( centerOfDotToEdge ), radialMaterial );
-
+                                  
+                   let radialLine;
+                                  if(isFinite(circleX)&&isFinite(circleY))radialLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints( centerOfDotToEdge ), radialMaterial );
 
 
 
