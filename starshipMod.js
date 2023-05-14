@@ -458,7 +458,7 @@ function init() {
 
         renderer = new THREE.WebGLRenderer();
     container.appendChild( renderer.domElement );//engage THREEJS visual out
-    renderer.debug.checkShaderErrors = true;//https://stackoverflow.com/questions/65948642/not-seeing-lower-level-shader-syntax-errors
+
                 renderer.autoClear=true;//so the starship can be isolated
                 renderer.setClearAlpha ( 0. )
     
@@ -552,6 +552,8 @@ dotted:{value:false},
   MannyONtrail:{value:1},
   twistStar:{value:0.},
   flipStar:{value:1.},
+  NightAndDay:{value:false},
+
     }
   ]);
   uniforms.resolution.value.x = window.innerWidth;
@@ -1012,8 +1014,8 @@ else if(blankBackground) {
    var maxTestar=0.;
    var minTestar=100000000000000;
 
-   var star=Array();
-   const starColors=Array(starArms);
+   var star=[];
+   const starColors=[];
 
                             let maxToMin = Math.max(height,width)/Math.min(height,width);
 let index;
@@ -1464,7 +1466,7 @@ circle.position.set(circleX,circleY,-1.);
 
                    let radialMaterial=  new THREE.MeshBasicMaterial( { color: colorBlack});
                                   
-                   let radialLine;
+                   let radialLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints( centerOfDotToEdge ), radialMaterial );
                                   if(isFinite(circleX)&&isFinite(circleY))radialLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints( centerOfDotToEdge ), radialMaterial );
 
 
@@ -1872,7 +1874,7 @@ if("osmd" in window){
 
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
-const fractionOfFrame = Math.floor(bufferSize/1.5);
+const fractionOfFrame = Math.floor(bufferSize/1.44);
 let tolerance; //, confidence;
 const yinData = Array(fractionOfFrame);
 
