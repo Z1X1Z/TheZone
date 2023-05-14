@@ -1872,7 +1872,7 @@ if("osmd" in window){
 
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
-const fractionOfFrame = Math.floor(bufferSize/1.44);
+const fractionOfFrame = Math.floor(bufferSize/1.5);
 let tolerance; //, confidence;
 const yinData = Array(fractionOfFrame);
 
