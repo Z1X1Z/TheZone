@@ -458,7 +458,7 @@ function init() {
 
         renderer = new THREE.WebGLRenderer();
     container.appendChild( renderer.domElement );//engage THREEJS visual out
-
+    renderer.debug.checkShaderErrors = true;//https://stackoverflow.com/questions/65948642/not-seeing-lower-level-shader-syntax-errors
                 renderer.autoClear=true;//so the starship can be isolated
                 renderer.setClearAlpha ( 0. )
     
