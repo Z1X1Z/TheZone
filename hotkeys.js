@@ -57,6 +57,7 @@ function callKey(event){
     else if (key=="À"||key=="`"||key=="~")
     {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
     else if (key=="m") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
+    else if (key=="M") uniforms[ "NightAndDay" ].value = !uniforms[ "NightAndDay" ].value;
     else if (key=="!")uniforms[ "Refractelate" ].value=!uniforms[ "Refractelate" ].value;
     else if (key=="@")uniforms[ "Clovoid" ].value=!uniforms[ "Clovoid" ].value;
     else if (key=="#")uniforms[ "baseOfLog" ].value=(uniforms[ "baseOfLog" ].value+1)%3;
