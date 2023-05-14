@@ -1872,7 +1872,7 @@ if("osmd" in window){
 
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
-const fractionOfFrame = bufferSize/2;
+const fractionOfFrame = Math.floor(bufferSize/1.44);
 let tolerance; //, confidence;
 const yinData = Array(fractionOfFrame);
 
@@ -1880,7 +1880,7 @@ function calculatePitch ()
 {
             
 if(highORlow==1)tolerance=totalAMP-(1./bufferSize)**1.5//works well for smoothly and quickly determining sung notes especially low ones
-else if (highORlow==2)tolerance = .5;//when I play different notes on harmonica it mostly hears C, this clears up the distinction of the notes
+else if (highORlow==2)tolerance = .49;//when I play different notes on harmonica it mostly hears C, this clears up the distinction of the notes
 let period;
 let delta = 0.0, runningSum = 0.0;
 yinData[0] = 1.0;
