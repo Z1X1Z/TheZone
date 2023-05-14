@@ -36,9 +36,9 @@ const fftSize=2048;
     }
 function route(){
     document.getElementById( "load message").innerHTML = "";
+    if(!micOn&&!location.hash.includes("t")&&!userHasGestured)startMic();
     userHasGestured=true;
-    if(!micOn&&!location.hash.includes("t"))
-        startMic();
+
 }
 
 if(location.hash.includes("t")){
