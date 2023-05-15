@@ -1031,9 +1031,20 @@ for (float counter=0.;counter<iterations;counter++)if(length(s)<50.){
            vec2 cloverMAP = (spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+PI))/2.+.5;
                                    
                                    vec2 ColorWheelClover;
+                                   float cycleShiftChiral = 0.;
+                                   
                                 if(NightAndDay){
-                                            if(chirality!=-1)ColorWheelClover= (spin2(vec2(s.y,-s.x),atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+PI))/2.;
-                                            else ColorWheelClover = (spin2(-vec2(s.x,-s.y),-atan(s.x,s.y)*petals/(6.+petals)-atan(d.y,d.x)))/2.;
+                                            if(chirality!=-1){
+                                                
+                                                    if (flipStar!=0.)cycleShiftChiral=0.;
+                                                    else cycleShiftChiral=PI;
+                                                ColorWheelClover=spin2(vec2(-s.y,-s.x)*flipStar,(atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar);
+                                                }
+                                            else {
+                                                
+                                                    if (flipStar!=0.)cycleShiftChiral=PI/4.;
+                                                    else cycleShiftChiral=-PI;                                                ColorWheelClover = (spin2(vec2(-s.x,-  s.y)*flipStar,(atan(s.x,s.y)*petals/(6.+petals)-atan(d.y,d.x)+cycleShiftChiral))-(1.-abs(starSpin))*twistStar*flipStar);
+                                                }
                                             if(length(s)<4./3.)    beta   =  hsv2rgb(vec3((atan(ColorWheelClover.y,ColorWheelClover.x))/(2.*PI)*.5+.5,1.,1.));
                                 }
  if(length(s)<2./3.||(spokesVisualizeColors&&length(s)<4./3.)) {
