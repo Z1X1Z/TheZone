@@ -1,6 +1,8 @@
 const fftSize=2048;
 
     window.touchOnlyMode = false;
+window.touchMode = false;
+
     window.micOn = false;
     window.audioX;
 
@@ -35,20 +37,22 @@ const fftSize=2048;
       });
     }
 function route(){
-    document.getElementById( "load message").innerHTML = "";
-    if(!micOn&&!location.hash.includes("t")&&!userHasGestured)startMic();
+    if(!micOn&&!location.hash.includes("t")&&!userHasGestured){
+        document.getElementById( "load message").innerHTML = "";
+        startMic();
+    }
     userHasGestured=true;
 
 }
+document.getElementById( "load message").innerHTML = "Tap the screen or a key to load!";
 
 if(location.hash.includes("t")){
-    
+        document.getElementById( "load message").innerHTML = "";
         console.log("Touch only mode!")
         touchOnlyMode=true;
         window.touchMode = true;}
 
 
-    document.getElementById( "load message").innerHTML = "Tap the screen or a key to load!";
     document.body.addEventListener('touchstart', function(e){route();})
     document.body.addEventListener('mousedown', function(e){route();})
     document.body.addEventListener('keydown', function(e){route();})
