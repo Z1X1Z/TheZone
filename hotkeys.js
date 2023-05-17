@@ -46,14 +46,16 @@ if(//!(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform ==
 window.addEventListener('keydown', function(event) {if(window.uniformsLoaded)callKey(event); return true;}, false);
 
 function callKey(event){
-    event.preventDefault(); event.stopImmediatePropagation();
+  //  event.preventDefault(); event.stopImmediatePropagation();
     let key = event.key;
     var x=null;
     if(!event.shiftKey)x = parseInt(String.fromCharCode( event.keyCode));
-    if (x>0)
+    if (x>0&&x<=4&& document.activeElement.className!="num")
     {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
     else if (x==0)
     {window.movementRate=pixelShaderSize/4.; uniforms[ "rate" ].value=1./window.movementRate; }
+    
+
     else if (key=="À"||key=="`"||key=="~")
     {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
     else if (key=="m") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
@@ -139,7 +141,8 @@ function callKey(event){
     }
     else if (key=="K")uniforms.Inherited.value=!uniforms.Inherited.value;
     
-    else if (key=="y") uniforms[ "petals" ].value -= 1.;
+    else if (key=="y") //uniforms[ "petals" ].value = 3.7082039325-6;//
+        uniforms[ "petals" ].value -= 1.;
     else if (key=="Y"){
         window.blankBackground = !window.blankBackground;
         if(window.blankBackground)window.starClover=false;
@@ -147,7 +150,7 @@ function callKey(event){
     }
     else if (key=="u") uniforms[ "petals" ].value += 1.;
     else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%8;
-    
+
     else if (key=="/"){
         if(uniforms[ "spirated" ].value==0)uniforms[ "spirated" ].value=1;
         else if(uniforms[ "spirated" ].value==1)uniforms[ "spirated" ].value=-1;
