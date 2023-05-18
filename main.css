@@ -1,19 +1,26 @@
 body, head {
-    touch-action: none;
 
     margin: 0;
     background-color: #000;
     color: #fff;
     font-family: Monospace;
-    font-size: 15px;
+    font-size: 20px;
     width: 100%;
     line-height: 1.;
     position: absolute;
     overflow: auto;
+    /*
+    -webkit-user-select: none;
+    user-select: none;//prevent selection of menus
+     */
     touch-action: none;//prevent zooming and panning
 
 }
 #container{
+    z-index: 3; 
+    width: 100%;
+    height: 100%;
+
 
 }
 #textWindow{    line-height: .878;
@@ -80,8 +87,6 @@ canvas {
 /*the dropdown panels  https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp*/
 /* Navbar container */
 .navbar {
-    -webkit-user-select: none;
-    user-select: none;//prevent selection of menus
  overflow: hidden;
  background-color: #333;
  font-family: Arial;
