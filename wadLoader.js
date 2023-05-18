@@ -117,7 +117,7 @@ navigator.maxTouchPoints > 0){
     c.addEventListener('touchstart', function(e)
                                {
      //   e.stopImmediatePropagation();  // e.preventDefault();
-document.body.focus();//this is to make the panel menu go down on android when you press on the container of the game
+        c.focus();//this is to make the panel menu go down on android when you press on the container of the game
         for(var o=0; o<e.changedTouches.length; o++)
         {
             touchNumber.set(e.changedTouches[o].identifier,cycle);
