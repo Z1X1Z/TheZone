@@ -5,13 +5,13 @@ body, head {
     background-color: #000;
     color: #fff;
     font-family: Monospace;
-    font-size: 20px;
+    font-size: 15px;
     width: 100%;
     line-height: 1.;
     position: absolute;
     overflow: auto;
     -webkit-user-select: none;
-    user-select: none;//prevent selection of menus
+    /*user-select: none;//prevent selection of menus*/
     touch-action: none;//prevent zooming and panning
 
 }
