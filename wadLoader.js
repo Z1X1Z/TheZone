@@ -116,8 +116,10 @@ if (//navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform ==
 navigator.maxTouchPoints > 0){
     c.addEventListener('touchstart', function(e)
                                {
-     //   e.stopImmediatePropagation();  // e.preventDefault();
-        c.focus();//this is to make the panel menu go down on android when you press on the container of the game
+     //   e.stopImmediatePropagation();  //        e.preventDefault();
+
+       // c.focus();//this is to make the panel menu go down on android when you press on the container of the game
+
         for(var o=0; o<e.changedTouches.length; o++)
         {
             touchNumber.set(e.changedTouches[o].identifier,cycle);
@@ -125,7 +127,6 @@ navigator.maxTouchPoints > 0){
             startSound(e.changedTouches[o]);
 
         }
-
     }, false);
 c.addEventListener('touchmove', function(e) {
     for(var o=0; o<e.changedTouches.length; o++)followSound(e.changedTouches[o]);
