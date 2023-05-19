@@ -97,6 +97,10 @@
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
+              <!--https://www.w3schools.com/tags/att_input_type_number.asp this is the link for the below number code profile-->
+              <label for="pitch Sample Size">pitch detection frames (1-2048):</label>
+             <input type="number" id="pitch Sample Size" name="pitch Sample Size" class="num" min="1" max = "2048" onkeydown="Math.floor(fractionOfFrame=document.getElementById('pitch Sample Size').value)">
+                 </p>
               <input type="checkbox" id="Game On" name="t"  onclick= "
                   key  = 'e';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -1053,7 +1057,7 @@ for (float counter=0.;counter<iterations;counter++)if(length(s)<50.){
                                                     if (flipStar!=0.)cycleShiftChiral=PI/4.;
                                                     else cycleShiftChiral=-PI;                                                ColorWheelClover = (spin2(vec2(-s.x,-  s.y)*flipStar,(atan(s.x,s.y)*petals/(6.+petals)-atan(d.y,d.x)+cycleShiftChiral))-(1.-abs(starSpin))*twistStar*flipStar);
                                                 }
-                                            if(length(s)<4./3.)    beta   =  hsv2rgb(vec3((atan(ColorWheelClover.y,ColorWheelClover.x))/(2.*PI),1.,1.))*.75+.25;
+                                            if(length(s)<4./3.)    beta   =  hsv2rgb(vec3((atan(ColorWheelClover.y,ColorWheelClover.x))/(2.*PI),1.,1.));
                                 }
  if(length(s)<2./3.||(spokesVisualizeColors&&length(s)<4./3.)) {
                if(eden==0)starship+=texture2D(STAR,cloverMAP);
@@ -1185,7 +1189,7 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                       o.g*=abs(-sin(time*gr));
                       o.b*=-sin(time*1./gr);
                         }
-
+                            o=beta*o;
                                 if(remediatedColors)
                                 {
                                 o/= max(max(o.r,o.g),o.b);
@@ -1195,7 +1199,7 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
  // if (starship.x==starship.y&& starship.y==starship.z&&starship.w!=0.)isGrey=starship.x;
  // else if(starship.x==starship.y&&starship.x==starship.z&&abs(starship.z-.5)<.1&&starship.w!=0.) isBlack=.5;
 o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z)*1.5,0.,1.)+starship.xyz;//*isGrey;
-return clamp(beta*o,0.,1.);}
+return clamp(o,0.,1.);}
 
                       
                       
@@ -1962,7 +1966,7 @@ gl_FragColor=(StaRivers+
                           
                           
                           -(bridge.x+bridge.y+bridge.z)*10000000.
-                          -(starship.x+starship.y+starship.z)*starship.w
+                          -(starship.x+starship.y+starship.z)
                         +(-StaRivers.r-StaRivers.g-StaRivers.b)//uncomment for thicker rivers
                           -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*1000.
                           
