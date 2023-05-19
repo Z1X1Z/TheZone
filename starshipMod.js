@@ -266,7 +266,7 @@ let f = 0;
 
 
 
-let pitch = 1;
+let pitch = -1;
 
 let reset = 6;
 let on;
@@ -285,6 +285,9 @@ let aboveThreshold;
                            let xAdjusted, yAdjusted;
 let pushBackCounter = 0;
                           let flatline = pixelShaderToStarshipRATIO;
+                          
+                       const   lightingScaleTrail = 72;//note range for color scheme
+                         const  lightingScaleStar = lightingScaleTrail*2.*2.;//convert 12 to 24 and expand by factor of 2 for a divide between the octaves of the voice (trail) and the hearing (star)
 function  move()
 {
     if (isNaN(coordX)||(!zoomAtl41&&coordX>4.))coordX=0.;
@@ -322,7 +325,8 @@ colorSound = new THREE.Color();
 let reversableColor=0.;
                        let j = 0;
 reversableColor=(angle/360.+twist/24.)*flip+120/360.;
-    colorSound.setHSL(reversableColor,1.,.5);
+                       
+    colorSound.setHSL(reversableColor,1.,note/lightingScaleTrail);//lighting {note/x} should be 120 but it's out of the vocal range
 
 pitchCol[f]  = colorSound;
 angle = ((angle+180)/360*2*pi);
@@ -499,7 +503,7 @@ function init() {
   Spoker:{value: true    },
   spokelover:{value: false    },
   continuumClover:{value: false    },
-  Inherited:{value: true    },
+  Inherited:{value: false    },
   cloverSlide:{value: false    },
 
       micIn : {  value: null }, // float array (vec3)
@@ -518,7 +522,7 @@ function init() {
         morph: {value: 0.0 },
 
   fourCreats: {value: 1 },
-  Character: {value: 0 },
+  Character: {value: Date.now()%3 },
   articles: {value: false },
   helm: {value: false },
   wheel: {value: false },
@@ -697,7 +701,7 @@ correlationForText+=document.getElementById("allText").offsetHeight;
             let ticker = 0;
             let FPS=0.;
 
-                  const interval = 1.;//sample window of FPS meter for FPS frame averaging, think 1000/FPS. 1 is more or less off. Used to keep off jitter. Think 200ms maybe
+                  const interval = 250.;//sample window of FPS meter for FPS frame averaging, think 1000/FPS. 1 is more or less off. Used to keep off jitter. Think 200ms maybe
                   let elapsedTimeBetweenFrames = 0.;
                   let lastPitch = 1;
 
@@ -1009,7 +1013,7 @@ else if(blankBackground) {
               uniforms[ "zoom" ].value = zoom;
               uniforms.coords.value = [coordX,coordY];
 
-  if (micOn)analyser.getByteFrequencyData(  dataArray);
+  if (window.micOn)analyser.getByteFrequencyData(  dataArray);
 
    var maxTestar=0.;
    var minTestar=100000000000000;
@@ -1046,7 +1050,7 @@ if(!window.touchMode){
                      if (widt==0)widt=starshipSize;
                      //var widt =starshipSize;
                      var vop = new THREE.Color();
-                     vop.setHSL((-mustarD[g]+8)%24./24., mustarD[g]/297.,mustarD[g]/297.);//297 is the highest heard note
+                     vop.setHSL((-mustarD[g]+8)%24./24., mustarD[g]/lightingScaleStar,mustarD[g]/lightingScaleStar);//297 is around the highest heard note
                      material = new THREE.MeshBasicMaterial({
                      color:vop,
                      opacity: 1.,
@@ -1068,7 +1072,7 @@ if(!window.touchMode){
             //for(var yy=0;yy<3;yy++)
             if (RockInTheWater==1)
                 for(var yy=0;yy<3;yy++)
-                    starColors.push( mustarD[g]/297., mustarD[g]/297., mustarD[g]/297.,1.)
+                    starColors.push( mustarD[g]/lightingScaleStar, mustarD[g]/lightingScaleStar, mustarD[g]/lightingScaleStar,1.)
             else
                  starColors.push(
                                  vop.r,vop.g,vop.b,1.,
@@ -1874,13 +1878,12 @@ if("osmd" in window){
 
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
-const fractionOfFrame = Math.floor(bufferSize/1.44);
+let fractionOfFrame = Math.floor(bufferSize/2.);
 let tolerance; //, confidence;
 const yinData = Array(fractionOfFrame);
 
 function calculatePitch ()
 {
-            
 if(highORlow==1)tolerance=totalAMP-(1./bufferSize)**1.5//works well for smoothly and quickly determining sung notes especially low ones
 else if (highORlow==2)tolerance = .49;//when I play different notes on harmonica it mostly hears C, this clears up the distinction of the notes
 let period;
