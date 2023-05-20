@@ -483,7 +483,7 @@ function init() {
   volumeFret3:{value:0.},
   volumeFret4:{value:0.},
       
-  resolution: {value: new THREE.Vector2() },
+  resolution: {value: [ window.innerWidth,window.innerHeight] },
   d:{value: new THREE.Vector2() },
 
   }])
@@ -515,7 +515,7 @@ function init() {
         externalCores: {value: 0. },
         centralCores: {value: 0. },
         outerCoresOff: {value: false},
-    upCoreCycler: {value: 0 },
+    upCoreCycler: {value: 0. },
 
         morph: {value: 0.0 },
 
@@ -537,8 +537,8 @@ function init() {
   volume: {value: 0.0 },
   totalAmp: {value: 1.0 },
 
-      resolution: {value: new THREE.Vector2() },
-      coords: {value: new THREE.Vector2() },
+      resolution: {value: [ window.innerWidth, window.innerHeight] },
+      coords: {value: [coordX,coordY] },
   d: {value: new THREE.Vector2() },
   dynamicDance: {value: false},
   remediatedColors: {value: false },
@@ -558,14 +558,6 @@ dotted:{value:false},
 
     }
   ]);
-  uniforms.resolution.value.x = window.innerWidth;
-  uniforms.resolution.value.y = window.innerHeight;
-    
-    FEEDBACKuniforms.resolution.value.x = window.innerWidth;
-    FEEDBACKuniforms.resolution.value.y = window.innerHeight;
-    
-  uniforms.coords.value.x = coordX;
-  uniforms.coords.value.y = coordY;
     
     window.uniformsLoaded=true;
 
