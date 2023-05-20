@@ -424,7 +424,6 @@ let geometry;
 
 
 let geometryP;
-                       let feedbackStarshipgeometryP, feedbackStarshipgeometryPFlip;
 
 let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                      let scene, shaderScene,feedbackScene, feedbackSceneFlip;
@@ -471,7 +470,7 @@ function init() {
   THREE.UniformsLib.lights,
   {
       STAR:{value: renderTarget.texture    },
-        EDEN:{value: FeedbackrenderTarget.texture    },
+        EDEN:{value: FeedbackrenderTargetFlipSide.texture    },
   eden:{value: 0    },
     loudestFret1:{value:[0.,0.]},
   loudestFret2:{value:[0.,0.]},
@@ -592,31 +591,13 @@ dotted:{value:false},
       } );
 
 
-
-    feedbackStarshipgeometryP = new THREE.PlaneGeometry( 2, 2 );
-      //geometryP.translate(0,0,-1.);
-
-    feedbackStarshipmesh = new THREE.Mesh( feedbackStarshipgeometryP, feedbackStarshipmaterialShader );
+    feedbackStarshipmesh = new THREE.Mesh( geometryP, feedbackStarshipmaterialShader );
               
     
     //repeat PixelShader loader for The four Rivers second fold
 
-              
-    feedbackStarshipmaterialShaderFlip = new THREE.ShaderMaterial( {
-        uniforms: FEEDBACKuniformsFlip,
-        vertexShader: document.getElementById( 'vertexShader' ).textContent,
-        fragmentShader: document.getElementById( 'FourRiversfragmentShader' ).textContent,
-          transparent: true,
-          opacity:.5
-          
-      } );
 
-
-
-    feedbackStarshipgeometryPFlip = new THREE.PlaneGeometry( 2, 2 );
-      //geometryP.translate(0,0,-1.);
-
-    feedbackStarshipmeshFlip = new THREE.Mesh( feedbackStarshipgeometryPFlip, feedbackStarshipmaterialShaderFlip );
+    feedbackStarshipmeshFlip = new THREE.Mesh( geometryP, feedbackStarshipmaterialShader );
     //and now for the flip frame for the feedback buffer
               
     feedbackScene.add( feedbackStarshipmesh );
