@@ -470,8 +470,8 @@ function init() {
   FEEDBACKuniforms = THREE.UniformsUtils.merge([
   THREE.UniformsLib.lights,
   {
-      STAR:{value: null    },
-        EDEN:{value: null    },
+      STAR:{value: renderTarget.texture    },
+        EDEN:{value: FeedbackrenderTarget.texture    },
   eden:{value: 0    },
       
       fretVector:{value: null    },
@@ -495,8 +495,8 @@ function init() {
   uniforms = THREE.UniformsUtils.merge([
   THREE.UniformsLib.lights,
   {
-      STAR:{value: null    },
-  EDEN:{value: null    },
+  STAR:{value: renderTarget.texture    },
+    EDEN:{value: FeedbackrenderTarget.texture    },
   eden:{value: 0},
       spokesVisualizeColors: {value: false    },
 
