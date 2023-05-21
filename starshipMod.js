@@ -107,7 +107,7 @@ function vectorize4(){
     let fretCount;
     if(onO) fretCount=starArms
         else fretCount=24;
-    for (var g=0; g<fretCount; g++)if(isFinite(testar[g]))
+    for (var g=0; g<fretCount; g++)if(isFinite(dataArray[g]))
     {
         
         if (dataArray[g]>loudestFret[0].volume)
@@ -146,7 +146,6 @@ function vectorize4(){
 
 const testar = Array(starArms);
 const mustarD = Array(starArms);
-const mustarDAverager= Array(24);
 let averagedAmp =  0;
 let len=0;
 let spiregulator=0;
@@ -182,7 +181,6 @@ function spiral_compress(){
     let z = dataArray;
 
     for(let n = 0; n<starArms; n++){testar[n] = 0;mustarD[n] = 1;}
-    mustarDAverager.fill(0);
     for(let n=0; n<numberOfBins; n++)
     {
     //if ( z[n]>z[n-1] && z[n] > z[n+1] ){
@@ -199,8 +197,7 @@ function spiral_compress(){
     let note =24*Math.log(freq/440)/Math.log(2.)+49*2;//I would like this 69 to be a 49 as it is it centers around e6
                           if (!onO){
         testar[(Math.round(note))%24] += Math.abs(z[n]);
-        mustarD[(Math.round(note))%24]+=(Math.round(note))%24;//for Stegasaurus tail
-        mustarDAverager[(Math.round(note))%24]+=1;
+  
     }
     else{//if constinuous star is engaged pipe directly through avoiding the 24 modulo
       testar[n] = Math.abs(z[n]);
@@ -208,7 +205,6 @@ function spiral_compress(){
                           mustarD[n] = note;
 
   }
-                         // if(!onO)  for(var a = 0; a<24; a++)mustarD[a]=mustarD[a]/mustarDAverager[a]
 
 };
 
@@ -1591,6 +1587,16 @@ scene.add(meshTrail)
                             FEEDBACKuniforms.volumeFret2.value=loudestFret[1].volume/maxTestar;
                             FEEDBACKuniforms.volumeFret3.value=loudestFret[2].volume/maxTestar;
                             FEEDBACKuniforms.volumeFret4.value=loudestFret[3].volume/maxTestar;
+                            
+                            FEEDBACKuniformsFlip.loudestFret1.value=[loudestFret[0].x,loudestFret[0].y];
+                            FEEDBACKuniformsFlip.loudestFret2.value=[loudestFret[1].x,loudestFret[1].y];
+                            FEEDBACKuniformsFlip.loudestFret3.value=[loudestFret[2].x,loudestFret[2].y];
+                            FEEDBACKuniformsFlip.loudestFret4.value=[loudestFret[3].x,loudestFret[3].y];
+                            
+                            FEEDBACKuniformsFlip.volumeFret1.value=loudestFret[0].volume/maxTestar;
+                            FEEDBACKuniformsFlip.volumeFret2.value=loudestFret[1].volume/maxTestar;
+                            FEEDBACKuniformsFlip.volumeFret3.value=loudestFret[2].volume/maxTestar;
+                            FEEDBACKuniformsFlip.volumeFret4.value=loudestFret[3].volume/maxTestar;
                               }
                         else
                         {FEEDBACKuniforms.loudestFret1.value=[0,0];
@@ -1603,7 +1609,7 @@ scene.add(meshTrail)
                             FEEDBACKuniforms.volumeFret3.value=0;
                             FEEDBACKuniforms.volumeFret4.value=0;
                             }
-                        FEEDBACKuniformsFlip=Object.assign({},FEEDBACKuniforms)
+
                                                 backBufferFlip=false;
                                                 for(var i = 0; i <7; i++){
                                                     if(!backBufferFlip)
