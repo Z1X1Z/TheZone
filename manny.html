@@ -703,7 +703,6 @@ uniform int MannyONtrail;
 uniform float twistStar;
 uniform float flipStar;
 uniform bool NightAndDay;
-vec2 spunC=vec2(0.);
 
 
     const float PI = 3.1415927410125732;
@@ -1811,7 +1810,7 @@ vec3 sevenPillars(vec2 p){
       void main(){
 vec2 p=-(vUv.yx-.5)/(resolution.xy/max(resolution.x,resolution.y))*shaderScale/2.;
 
-spunC=coords.yx;
+vec2 spunC=coords.yx;
 
 
 if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time*rate,PI*2.));}
