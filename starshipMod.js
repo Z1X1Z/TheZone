@@ -465,8 +465,8 @@ function init() {
   FEEDBACKuniforms = THREE.UniformsUtils.merge([
   THREE.UniformsLib.lights,
   {
-      STAR:{value: renderTarget.texture    },
-        EDEN:{value: FeedbackrenderTargetFlipSide.texture    },
+      STAR:{value: null   },
+        EDEN:{value: null  },
   eden:{value: 0    },
     loudestFret1:{value:[0.,0.]},
   loudestFret2:{value:[0.,0.]},
