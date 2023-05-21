@@ -1554,17 +1554,12 @@ scene.add(meshTrail)
                                   
    if(window.starClover&&!(touchMode||touchOnlyMode))
                      {
-            if(window.blankBackground) shaderScene.background = new THREE.Color( 0x808080);
-            else  scene.background = null;
             
-            renderer.setRenderTarget (renderTarget)
-                
-                
-                
-                
-                
+            if(!window.blankBackground)
+            {
+                renderer.setRenderTarget (renderTarget)
                 renderer.render( scene, camera );
-            
+            }
             //begin the feedback of the starRivers of eden
                     if( uniforms.eden.value>=1.)
                     {
@@ -1635,22 +1630,22 @@ scene.add(meshTrail)
                     }
                     else uniforms.EDEN.value=null;
             
-            uniforms.STAR.value=renderTarget.texture;
-        
-             renderer.setRenderTarget (null)
-            //  uniforms.STAR.value=renderTarget.texture;
-
-
-             renderer.render( shaderScene, camera )
+     
      }
-          else if(!window.blankBackground)
-                     {
-                 uniforms.STAR.value=null;
-                 renderer.setRenderTarget (null);
-        renderer.render( scene, camera );
-             }
                           
-                                  
+                     renderer.setRenderTarget (null)
+
+                     if(!window.blankBackground) {
+                        scene.background = null;
+                         uniforms.STAR.value=renderTarget.texture;
+                         renderer.render( shaderScene, camera )
+                     }
+                     else
+                     { scene.background = new THREE.Color( 0x808080);
+                         console.log('here')
+                         uniforms.STAR.value=null;
+                         renderer.render( scene, camera )
+                     }
                                   
 
 scene.remove( circle );
