@@ -110,15 +110,15 @@ function vectorize4(){
     for (var g=0; g<fretCount; g++)if(isFinite(testar[g]))
     {
         
-        if (testar[g]>loudestFret[0].volume)
+        if (dataArray[g]>loudestFret[0].volume)
         {
             if (Math.abs(loudestFret[0].note-loudestFret[1].note)>.25){
                 loudestFret[3]=Object.assign({},loudestFret[2]); loudestFret[2]=Object.assign({},loudestFret[1]);
                 loudestFret[1]=Object.assign({},loudestFret[0]);loudestFret[0].index=g;
             }
-                loudestFret[0].volume=testar[g];loudestFret[0].note = mustarD[g];
+                loudestFret[0].volume=dataArray[g];loudestFret[0].note = mustarD[g];
         }
-        else if (testar[g]>loudestFret[1].volume)
+        else if (dataArray[g]>loudestFret[1].volume)
         {
             if (Math.abs(loudestFret[1].note-loudestFret[2].note)>.25)
             {
@@ -126,13 +126,13 @@ function vectorize4(){
             loudestFret[3]=Object.assign({},loudestFret[2]); loudestFret[2]=Object.assign({},loudestFret[1]);
             }
             loudestFret[1].index=g;
-            loudestFret[1].volume=testar[g];
+            loudestFret[1].volume=dataArray[g];
         }
-        else if(testar[g]>loudestFret[2].volume)
+        else if(dataArray[g]>loudestFret[2].volume)
         {
             if (Math.abs(loudestFret[2].note-loudestFret[3].note)>.25) loudestFret[3]=Object.assign({},loudestFret[2]);
-            loudestFret[2].index=g;loudestFret[2].volume=testar[g];}
-        else if (testar[g]>loudestFret[3].volume){loudestFret[3].index=g;loudestFret[3].volume=testar[g];}
+            loudestFret[2].index=g;loudestFret[2].volume=dataArray[g];}
+        else if (dataArray[g]>loudestFret[3].volume){loudestFret[3].index=g;loudestFret[3].volume=dataArray[g];}
     }
     for(var g = 0;g<loudestFret.length;g++)
     {
@@ -204,11 +204,11 @@ function spiral_compress(){
     }
     else{//if constinuous star is engaged pipe directly through avoiding the 24 modulo
       testar[n] = Math.abs(z[n]);
-        mustarD[n] = note;
     }
-                          
+                          mustarD[n] = note;
+
   }
-                          if(!onO)  for(var a = 0; a<24; a++)mustarD[a]=mustarD[a]/mustarDAverager[a]
+                         // if(!onO)  for(var a = 0; a<24; a++)mustarD[a]=mustarD[a]/mustarDAverager[a]
 
 };
 
