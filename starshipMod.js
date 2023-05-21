@@ -488,8 +488,8 @@ function init() {
   uniforms = THREE.UniformsUtils.merge([
   THREE.UniformsLib.lights,
   {
-  STAR:{value: renderTarget.texture    },
-    EDEN:{value: FeedbackrenderTarget.texture    },
+  STAR:{value: null    },
+    EDEN:{value: null   },
   eden:{value: 0},
       spokesVisualizeColors: {value: false    },
 
