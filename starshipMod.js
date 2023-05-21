@@ -1341,11 +1341,11 @@ let loopLimit = trailDepth;
                  if(!trailSegmentExpired[r]&&timeElapsedSinceRecording<=trailSecondsLong){
                         // timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
                             let zlast = z;
-                            z = -1.+timeElapsedSinceRecording**2.*.33333;//*.33333 is three seconds long over star
-                           if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong);
+                            z = -1.+timeElapsedSinceRecording/trailSecondsLong;
+                        //   if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong);
                             transparencyOfTrailLast =transparencyOfTrail;
                             transparencyOfTrail =1.-timeElapsedSinceRecording/trailSecondsLong;
-                         
+                           if(transparencyOfTrail>.01)transparencyOfTrail==.01;
                           trailColor.push(
                                           pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
                                           pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrailLast,

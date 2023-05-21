@@ -1942,7 +1942,10 @@ vec2 dance = vec2(0.);
     float isGrey =1.;
 
     if (starship.x==starship.y&& starship.y==starship.z&&starship.w!=0.)isGrey=starship.x;
-
+                                 float starShipAlphaEmpty=1.;
+                                 if( starship.w==0.01) starShipAlphaEmpty= starship.w;
+                                 
+                                 
                                  vec4 StaRivers=vec4(0.);
                                  if(eden==2||eden==4)
                                  {
@@ -1963,7 +1966,7 @@ gl_FragColor=(StaRivers+
                           
                           
                           -(bridge.x+bridge.y+bridge.z)*10000000.
-                          -(starship.x+starship.y+starship.z)
+                          -(starship.x+starship.y+starship.z)*starShipAlphaEmpty
                         +(-StaRivers.r-StaRivers.g-StaRivers.b)//uncomment for thicker rivers
                           -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*1000.
                           
