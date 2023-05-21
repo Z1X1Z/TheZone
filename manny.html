@@ -593,9 +593,10 @@
          return f;
         }
         
-        void main(){
-    vec4 Pishon=vec4(0.),Gihon=vec4(0.),Tigris=vec4(0.),Euphrates=vec4(0.);
-    vec2 vUvEagle=vec2(0.),vUvMan=vec2(0.),vUvOx=vec2(0.),vUvLion=vec2(0.);
+void main(){
+        vec4 Pishon=vec4(0.),Gihon=vec4(0.),Tigris=vec4(0.),Euphrates=vec4(0.);
+        vec2 vUvEagle=vec2(0.),vUvMan=vec2(0.),vUvOx=vec2(0.),vUvLion=vec2(0.);
+        
             float cutOutDegree=1.;
             float atanD = atan(d.y,d.x);
             if(eden!=4)
@@ -972,7 +973,6 @@ float r, b, l;
                        }
                    return clamp(vec3(l+x+r+c),0.,1.);
                }
-vec2 jc =vec2(0.);// vec2 jc =vec2(-0.5577,- 0.6099);//you can feed in coordinates for p movement to get different cloverfields
                                   
 vec3 tol(vec2 p, vec2 t){
                          if(chirality==-1)p=p.yx;
@@ -1811,7 +1811,6 @@ vec3 sevenPillars(vec2 p){
 vec2 p=-(vUv.yx-.5)/(resolution.xy/max(resolution.x,resolution.y))*shaderScale/2.;
 
 vec2 spunC=coords.yx;
-
 
 if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time*rate,PI*2.));}
 vec2 backGround=p;
