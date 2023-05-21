@@ -573,7 +573,8 @@ dotted:{value:false},
 
            mesh = new THREE.Mesh( geometryP, materialShader );
     
-    
+    shaderScene.add( mesh );
+
     //repeat PixelShader loader for The four Rivers
 
               
@@ -588,19 +589,17 @@ dotted:{value:false},
 
 
     feedbackStarshipmesh = new THREE.Mesh( geometryP, feedbackStarshipmaterialShader );
-              
+    feedbackScene.add(feedbackStarshipmesh);
     
     //repeat PixelShader loader for The four Rivers second fold
 
 
     feedbackStarshipmeshFlip = new THREE.Mesh( geometryP, feedbackStarshipmaterialShader );
     //and now for the flip frame for the feedback buffer
-              
-    feedbackScene.add( feedbackStarshipmesh );
-    feedbackSceneFlip.add( feedbackStarshipmeshFlip );
+    feedbackSceneFlip.add(feedbackStarshipmeshFlip)
     
   renderer.setPixelRatio( rez);
-renderer.compile(scene);
+
 
     animate();
     
@@ -1642,21 +1641,13 @@ scene.add(meshTrail)
             //  uniforms.STAR.value=renderTarget.texture;
 
 
-            shaderScene.add( mesh );
              renderer.render( shaderScene, camera )
-             shaderScene.remove( mesh );
      }
-          else{
-            
+          else if(!window.blankBackground)
+                     {
                  uniforms.STAR.value=null;
                  renderer.setRenderTarget (null);
-                    if(!window.blankBackground) {
-                        scene.background = null;
-                        scene.add( mesh );
-                    }
-                    else   scene.background = new THREE.Color( 0x808080);
         renderer.render( scene, camera );
-            if(!window.blankBackground)scene.remove(mesh);
              }
                           
                                   
@@ -1720,9 +1711,7 @@ for(var n = 0; n<targets.length;n++){
             uniforms.STAR.value=null;
             uniforms.EDEN.value=null;
 
-                                     shaderScene.add( mesh );
                     renderer.render( shaderScene, camera );
-                                     shaderScene.remove( mesh );
 
                         
                 if(textON)document.getElementById("textWindow").innerHTML =
