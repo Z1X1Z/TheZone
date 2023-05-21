@@ -600,9 +600,10 @@ dotted:{value:false},
     feedbackSceneFlip.add( feedbackStarshipmeshFlip );
     
   renderer.setPixelRatio( rez);
-
+renderer.compile(scene);
 
     animate();
+    
 }
 function adjustThreeJSWindow()
 {
@@ -1572,7 +1573,6 @@ scene.add(meshTrail)
                                                 var firStaRivers =  true;
                                                 FEEDBACKuniforms.STAR.value=renderTarget.texture;
 
-                            FEEDBACKuniforms.eden.value=uniforms.eden.value;
                         
                         if(uniforms.eden.value==4)
                         {
@@ -1598,17 +1598,6 @@ scene.add(meshTrail)
                             FEEDBACKuniformsFlip.volumeFret3.value=loudestFret[2].volume/maxTestar;
                             FEEDBACKuniformsFlip.volumeFret4.value=loudestFret[3].volume/maxTestar;
                               }
-                        else
-                        {FEEDBACKuniforms.loudestFret1.value=[0,0];
-                            FEEDBACKuniforms.loudestFret2.value=[0,0];
-                            FEEDBACKuniforms.loudestFret3.value=[0,0];
-                            FEEDBACKuniforms.loudestFret4.value=[0,0];
-                            
-                            FEEDBACKuniforms.volumeFret1.value=0;
-                            FEEDBACKuniforms.volumeFret2.value=0;
-                            FEEDBACKuniforms.volumeFret3.value=0;
-                            FEEDBACKuniforms.volumeFret4.value=0;
-                            }
 
                                                 backBufferFlip=false;
                                                 for(var i = 0; i <7; i++){
