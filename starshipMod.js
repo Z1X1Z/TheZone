@@ -42,7 +42,7 @@ window.twist = 0;
 window.flip = 1;
 
 var rez=.5;
-if (navigator.maxTouchPoints <1) rez = 1;
+////if (navigator.maxTouchPoints <1) rez = 1;
 let colorSound;
 let center = false;
                   let geome;
@@ -257,7 +257,7 @@ let staticX=0,staticY=0;
 
 let circleX=0.,circleY=0.;
 let circleGeometry,circleMaterial,circle;
-let dotSize = .112;
+let dotSize = starshipSize;
 let f = 0;
 
 
@@ -435,6 +435,8 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                        
                      let meshTrail;
                        
+
+                       let radialMaterial, radialLine;
                        
 function init() {
     container = document.getElementById( 'container' );
@@ -454,7 +456,6 @@ function init() {
     feedbackSceneFlip= new THREE.Scene();
     shaderScene = new THREE.Scene();
     
-    geome = new THREE.BufferGeometry();
     geomeTrail = new THREE.BufferGeometry();
 
     lineMat =
@@ -469,6 +470,8 @@ function init() {
 
     lineGeometry = new THREE.BufferGeometry()
     line = new THREE.LineSegments();
+    line.material =  lineMat ;
+    line.geometry=lineGeometry;
 
     material= new THREE.MeshBasicMaterial({
                 opacity: 1.,
@@ -478,7 +481,20 @@ function init() {
             });
 
      meshe = new THREE.Mesh( );
+    geome = new THREE.BufferGeometry();
+    meshe.material = material;
+    meshe.geometry=geome;
+
     meshTrail = new THREE.Mesh( );
+
+    materialTrail= new THREE.MeshBasicMaterial({
+                   opacity: 1.,
+                 transparent: true,
+                   vertexColors: true,
+                  // side: THREE.DoubleSide
+               });
+    meshTrail.material = materialTrail;
+    meshTrail.geometry = geomeTrail;
 
         renderer = new THREE.WebGLRenderer();
     container.appendChild( renderer.domElement );//engage THREEJS visual out
@@ -486,6 +502,19 @@ function init() {
                 renderer.autoClear=true;//so the starship can be isolated
                 renderer.setClearAlpha ( 0. )
     
+    
+    circle = new THREE.Mesh(  );
+    circleMaterial = new THREE.MeshBasicMaterial( );
+   circle.material = circleMaterial;
+    
+     radialMaterial=  new THREE.MeshBasicMaterial( { color: 0x000000});
+     radialLine = new THREE.Line();
+                   radialLine.material=radialMaterial
+    scene.add(meshTrail)
+                         scene.add(meshe);
+    scene.add( circle );
+    scene.add(radialLine);
+
     
   FEEDBACKuniforms = THREE.UniformsUtils.merge([
   THREE.UniformsLib.lights,
@@ -509,6 +538,9 @@ function init() {
   }])
     
     FEEDBACKuniformsFlip=Object.assign({},FEEDBACKuniforms);
+    var charactarCheck;
+  if(location.hash.includes("U")) charactarCheck = 0;
+   else  charactarCheck= Date.now()%3;
     
   uniforms = THREE.UniformsUtils.merge([
   THREE.UniformsLib.lights,
@@ -540,7 +572,7 @@ function init() {
         morph: {value: 0.0 },
 
   fourCreats: {value: 1 },
-  Character: {value: Date.now()%3 },
+  Character: {value: charactarCheck },
   articles: {value: false },
   helm: {value: false },
   wheel: {value: false },
@@ -621,6 +653,7 @@ dotted:{value:false},
     
   renderer.setPixelRatio( rez);
 
+    feedbackSceneFlip.remove(feedbackStarshipmeshFlip)
 
     animate();
     
@@ -978,8 +1011,7 @@ else if(blankBackground) {
                             
                             if(on){lineGeometry.setFromPoints( point );
          lineGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( pointColor, 3 ).onUpload( disposeArray ));
-         line.geometry=lineGeometry;
-         line.material =  lineMat ;
+         
 
      }
 
@@ -1296,10 +1328,8 @@ x,    y,  depth,
 
               geome.setAttribute( 'position', new THREE.Float32BufferAttribute( star, 3 ).onUpload( disposeArray ) );
                  geome.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ).onUpload( disposeArray ));
-                  geome.computeBoundingBox();
+                 // geome.computeBoundingBox();
 
-                 meshe.geometry=geome;
-                 meshe.material = material;
          
          
          
@@ -1397,15 +1427,7 @@ let loopLimit = trailDepth;
                                             geomeTrail.computeBoundingBox();
 
 
-                materialTrail= new THREE.MeshBasicMaterial({
-                               opacity: 1.,
-                             transparent: true,
-                               vertexColors: true,
-                              // side: THREE.DoubleSide
-                           });
 
-                                  meshTrail.geometry = geomeTrail;
-                                  meshTrail.material = materialTrail;
 if(isFinite(d_x)&&isFinite(d_y)&&on) {
 circleX-=xAdjusted;//xadjusted should mean this moves with the same screen scale as the trail
 circleY-=yAdjusted;
@@ -1415,15 +1437,13 @@ if (circleX>width)circleX=-width;
 else if (circleX<-width)circleX=width;
 if (circleY>height)circleY=-height;
 else if (circleY<-height)circleY=height;
-
-                                  dotSize=starshipSize;
-circleGeometry = new THREE.CircleGeometry( dotSize, Math.round((Math.abs((noteNumber+.5)%1.-.5))*12.)%12+2.,1 );//
+                                  circleMaterial.color=colorSound;
+                                  let sides = Math.round((Math.abs((noteNumber+.5)%1.-.5))*12.)%12+2.;
+                                  circle.geometry=new THREE.CircleGeometry(dotSize,sides,0.);
 //circleGeometry.computeBoundingBox ();
-circleMaterial = new THREE.MeshBasicMaterial( { color: colorSound} );
 
-circle = new THREE.Mesh( circleGeometry, circleMaterial );
 circle.position.set(circleX,circleY,-1.);
-                                  circle.rotateZ(pitch);
+                                  circle.rotateZ(pitch-lastPitch);
 
                    let colorBlack= new THREE.Color();
                    colorBlack.setStyle("black");
@@ -1433,13 +1453,7 @@ circle.position.set(circleX,circleY,-1.);
                    centerOfDotToEdge.push( new THREE.Vector3(circleX-Math.sin(-angle)*dotSize*volume, circleY-Math.cos(-angle)*dotSize*volume, -1. ) );
                    centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-1.) );
 
-
-                   let radialMaterial=  new THREE.MeshBasicMaterial( { color: colorBlack});
-                                  
-                   let radialLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints( centerOfDotToEdge ), radialMaterial );
-                                  if(isFinite(circleX)&&isFinite(circleY))radialLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints( centerOfDotToEdge ), radialMaterial );
-
-
+                                  radialLine.geometry=new THREE.BufferGeometry().setFromPoints( centerOfDotToEdge )
 
 
 let allCaught = true;
@@ -1544,11 +1558,6 @@ scene.add( targets[n] );
 
 
 if (on)scene.add(line);
-scene.add(meshe);
-scene.add( circle );
-scene.add(radialLine);
-scene.add(meshTrail)
-
                                   
                                   
    if(window.starClover)
@@ -1650,12 +1659,12 @@ scene.add(meshTrail)
 
                               
 
-scene.remove( circle );
-circleGeometry.dispose();
-circleMaterial.dispose();
+//scene.remove( circle );
+//circleGeometry.dispose();
+//circleMaterial.dispose();
+//scene.remove(radialLine);
+//radialMaterial.dispose();
 circle.geometry.dispose();
-scene.remove(radialLine);
-radialMaterial.dispose();
 radialLine.geometry.dispose( );
 
 for(var n = 0; n<targets.length;n++){
@@ -1664,10 +1673,12 @@ for(var n = 0; n<targets.length;n++){
   pM[n].dispose();
   targets[n].geometry.dispose();
 }
+                     
      if(on){
             scene.remove(line);
-            line.geometry.dispose( );
+          //  line.geometry.dispose( );
         }
+                     /*
                  scene.remove(meshe);
                  scene.remove(meshTrail);
 
@@ -1675,7 +1686,7 @@ for(var n = 0; n<targets.length;n++){
                                             material.dispose();
                                             geomeTrail.dispose();
                                             materialTrail.dispose();
-                                                                                                                                        
+                                   */
                      }}else {//begin touch frame
             
             if(!zoomAtl41)
