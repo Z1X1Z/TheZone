@@ -156,8 +156,8 @@ function makeSpirograph(){
       for(var m = 0; m < bufferSize; m++)
       {
               phase += adjConstant;//spira_pitch;
-              spirray0[m]=-Math.sin(phase)*(inputData[m]/maxSamp+1.)*m;
-              spirray1[m]=-Math.cos(phase)*(inputData[m]/maxSamp+1.)*m;
+              spirray0[m]=-Math.sin(phase)*(inputData[m]);
+              spirray1[m]=-Math.cos(phase)*(inputData[m]);
              // len++;
       }
       len -= 1;
@@ -401,10 +401,6 @@ trailWidth[n] += radius*starshipSize;
                        }
     let camera, renderer;
                        
-                       let geomeTrail;
-                       let starMesh;
-                       let starGeometry;
-                       let materialTrail;
 
 let mesh;
 let feedbackStarshipmesh, feedbackStarshipmeshFlip;
@@ -415,7 +411,14 @@ let materialShader;
 
 let lineMat, lineGeometry, line;
  let circleGeometry,circleMaterial,circle;
-
+                    
+                  let meshTrail;
+                    let geomeTrail;
+                    let starMesh;
+                    let starGeometry;
+                    let materialTrail;
+                    let radialMaterial, radialLine, radialGeometry;
+                    
 let geometryP;
 
 let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
@@ -428,11 +431,6 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                        let backBufferFlip=false;
                       let FeedbackrenderTarget,FeedbackrenderTargetFlipSide;
                        
-                       
-                     let meshTrail;
-                       
-
-                       let radialMaterial, radialLine;
                        
 function init() {
     renderTarget = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
@@ -457,7 +455,6 @@ function init() {
     feedbackSceneFlip= new THREE.Scene();
     shaderScene = new THREE.Scene();
     
-    geomeTrail = new THREE.BufferGeometry();
 
     lineMat =
     new THREE.LineBasicMaterial( {
@@ -468,25 +465,20 @@ function init() {
           linecap: 'round', //ignored by WebGLRenderer
           linejoin:  'round' //ignored by WebGLRenderer
     } );
-
     lineGeometry = new THREE.BufferGeometry()
-    line = new THREE.LineSegments();
-    line.material =  lineMat ;
-    line.geometry=lineGeometry;
+    line = new THREE.LineSegments(lineGeometry,lineMat);
 
+     
     starMaterial= new THREE.MeshBasicMaterial({
                 opacity: 1.,
               transparent: true,
                 vertexColors: true,
                // side: THREE.DoubleSide
             });
-
-     starMesh = new THREE.Mesh( );
     starGeometry = new THREE.BufferGeometry();
-    starMesh.material = starMaterial;
-    starMesh.geometry=starGeometry;
+    starMesh = new THREE.Mesh(starGeometry, starMaterial);
 
-    meshTrail = new THREE.Mesh( );
+
 
     materialTrail= new THREE.MeshBasicMaterial({
                    opacity: 1.,
@@ -494,18 +486,19 @@ function init() {
                    vertexColors: true,
                   // side: THREE.DoubleSide
                });
-    meshTrail.material = materialTrail;
-    meshTrail.geometry = geomeTrail;
+     geomeTrail = new THREE.BufferGeometry();
+     meshTrail = new THREE.Mesh(geomeTrail, materialTrail);
 
     
-    circle = new THREE.Mesh(  );
     circleMaterial = new THREE.MeshBasicMaterial( );
-   circle.material = circleMaterial;
-    
+     circle = new THREE.Mesh(new THREE.CircleGeometry(dotSize,3,0.),circleMaterial);
+
+     
      radialMaterial=  new THREE.MeshBasicMaterial( { color: 0x000000});
-     radialLine = new THREE.Line();
-                   radialLine.material=radialMaterial
-    
+     radialGeometry=new THREE.BufferGeometry()
+     radialLine = new THREE.Line(radialGeometry,radialMaterial);
+     
+
     scene.add(line);
     scene.add(meshTrail)
     scene.add(starMesh);
@@ -858,7 +851,6 @@ let pG=[];
 let pM=[];
 let lastZoom=1.;
 let lastTimeStamp=0.;
-let noteNumber;
 let lastNoteTimeInScore=0;
 let noteHit=false;
 let timeStampLastNoteEnded=0.;
@@ -943,12 +935,11 @@ if( !window.touchMode&&!window.touchOnlyMode) {
             averageFrameTotalAmp=[];
         }
     }
-     noteNumber =  Math.log(pitch/440)/Math.log(Math.pow ( 2, (1/12.0)))+49;
-    if(Math.round(noteNumber) ==-854)noteNumber="undefined";
-    let noteNameNumber=Math.floor(Math.round(noteNumber))%12;
-    let hour =Math.floor(Math.floor(noteNumber))%12;
+    if(Math.round(note) ==-854)note="undefined";
+    let noteNameNumber=Math.floor(Math.round(note))%12;
+    let hour =Math.floor(Math.floor(note))%12;
     if (hour==0)hour = 12;
-    let minute =(noteNumber-Math.floor(noteNumber))*60;
+    let minute =(note-Math.floor(note))*60;
     let second =(minute-Math.floor(minute))*60
     let timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
     let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","F#","G"];
@@ -956,9 +947,9 @@ if( !window.touchMode&&!window.touchOnlyMode) {
 
 
      let noteName = notes[noteNameNumber];
-     let cents = Math.round((noteNumber-Math.round(noteNumber))*100);
+     let cents = Math.round((note-Math.round(note))*100);
      let fr = Math.round(pitch);
-     let n_n = Math.round(noteNumber);
+     let n_n = Math.round(note);
      let cores = Math.floor(uniforms["centralCores"].value)+cloverSuperCores*singleHyperCoreDepth+uniforms.upCoreCycler.value;
       if(textON)document.getElementById("textWindow").innerHTML =
 "<div sytle='font-size: 16px;'>"+
@@ -1420,7 +1411,7 @@ let loopLimit = trailDepth;
 
                                             geomeTrail.setAttribute( 'position', new THREE.Float32BufferAttribute( trail, 3 ).onUpload( disposeArray ) );
                                             geomeTrail.setAttribute( 'color', new THREE.Float32BufferAttribute( trailColor, 4 ).onUpload( disposeArray ));
-                                            geomeTrail.computeBoundingBox();
+                                            //geomeTrail.computeBoundingBox();
 
 
 
@@ -1434,7 +1425,7 @@ else if (circleX<-width)circleX=width;
 if (circleY>height)circleY=-height;
 else if (circleY<-height)circleY=height;
                                   circleMaterial.color=colorSound;
-                                  let sides = Math.round((Math.abs((noteNumber+.5)%1.-.5))*12.)%12+2.;
+                                  let sides = (isFinite(note))? Math.round((Math.abs((note+.5)%1.-.5))*12.)%12+2. : 0.;
                                   circle.geometry=new THREE.CircleGeometry(dotSize,sides,0.);
 //circleGeometry.computeBoundingBox ();
 
@@ -1449,7 +1440,7 @@ circle.position.set(circleX,circleY,-1.);
                    centerOfDotToEdge.push( new THREE.Vector3(circleX-Math.sin(-angle)*dotSize*volume, circleY-Math.cos(-angle)*dotSize*volume, -1. ) );
                    centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-1.) );
 
-                                  radialLine.geometry=new THREE.BufferGeometry().setFromPoints( centerOfDotToEdge )
+                                  radialLine.geometry.setFromPoints( centerOfDotToEdge )
 
 
 let allCaught = true;
@@ -1661,6 +1652,9 @@ scene.add( targets[n] );
 //scene.remove(radialLine);
 //radialMaterial.dispose();
 
+                     
+                     
+                     
 circle.geometry.dispose();
 radialLine.geometry.dispose( );
 
@@ -1751,7 +1745,7 @@ if("osmd" in window){
                 if(
 
                     (noteExpired|| !notesDifferent) //let you hit the next note before the last note finishes unless the notes are the same just once
-                  &&  (Math.round(noteNumber)%12 ==noteOfScore && on
+                  &&  (Math.round(note)%12 ==noteOfScore && on
                       //-8 should callibrate from a halfstep count of 48 == C4 natural into concert pitch of A# == 49
                           ||osmd.cursor.NotesUnderCursor()[0].isRestFlag//exempt from having to hit the note if rest or cue
                           ||osmd.cursor.NotesUnderCursor()[0].isCueNote
