@@ -510,6 +510,7 @@ function init() {
      radialMaterial=  new THREE.MeshBasicMaterial( { color: 0x000000});
      radialLine = new THREE.Line();
                    radialLine.material=radialMaterial
+    scene.add(line);
     scene.add(meshTrail)
                          scene.add(meshe);
     scene.add( circle );
@@ -1555,7 +1556,7 @@ scene.add( targets[n] );
 }
 
 
-if (on)scene.add(line);
+
                                   
                                   
    if(window.starClover)
