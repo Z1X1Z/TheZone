@@ -404,19 +404,15 @@ trailWidth[n] += radius*starshipSize;
 
 let mesh;
 let feedbackStarshipmesh, feedbackStarshipmeshFlip;
-let feedbackStarshipmaterialShader, feedbackStarshipmaterialShaderFlip;
-let feedbackStarshipmaterials, feedbackStarshipmaterialsFlip;
+let feedbackStarshipmaterialShader;
 
 let materialShader;
 
 let lineMat, lineGeometry, line;
  let circleGeometry,circleMaterial,circle;
                     
-                  let meshTrail;
-                    let geomeTrail;
-                    let starMesh;
-                    let starGeometry;
-                    let materialTrail;
+                    let meshTrail, materialTrail, geomeTrail;
+                    let starMesh,starGeometry,starMaterial;
                     let radialMaterial, radialLine, radialGeometry;
                     
 let geometryP;
@@ -642,8 +638,6 @@ dotted:{value:false},
     feedbackSceneFlip.add(feedbackStarshipmeshFlip)
     
   renderer.setPixelRatio( rez);
-
-    feedbackSceneFlip.remove(feedbackStarshipmeshFlip)
 
     animate();
     
