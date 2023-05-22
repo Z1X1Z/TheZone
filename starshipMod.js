@@ -41,15 +41,10 @@ window.gameOn=false;
 window.twist = 0;
 window.flip = 1;
 
-var rez=.5;
-if (navigator.maxTouchPoints <1) rez = 1;
+let rez=.5;
+//if (navigator.maxTouchPoints <1) rez = 1;
 let colorSound;
 let center = false;
-                  let geome;
-                  let geomeTrail;
-                  let meshe;
-                  let materialTrail;
-
      
 /*let mobile = false;
 
@@ -74,7 +69,6 @@ let center = false;
 //key press handling vvvv
 var pointed=false;
 let zoomAtl41=false;//watch for the 1 and the l
-var rez = window.devicePixelRatio*rez;
 
 
                   var framesLong;
@@ -86,13 +80,13 @@ var rez = window.devicePixelRatio*rez;
                                 this.array = null;
 
                             }
-            let container;
+            const container=document.getElementById( 'container' );
 
 
 var zoomOutEngage=false;
 const pi = Math.PI;
 const bufferSize = fftSize;
-let inputData = new Float32Array(bufferSize);
+const inputData = new Float32Array(bufferSize);
 
 window.zoomOutRatchetThreshold=1./bufferSize;
 
@@ -100,8 +94,8 @@ const numberOfBins = fftSize/2.;
 const spirray0 = Array(bufferSize);
 const spirray1 = Array(bufferSize);
 const starArms = numberOfBins;
-let Fret = {x:null,y:null,index:null,volume:0.,note:null};
-let loudestFret=Array(4).fill(Fret);
+const Fret = {x:null,y:null,index:null,volume:0.,note:null};
+const loudestFret=Array(4).fill(Fret);
 function vectorize4(){
     for(var g = 0;g<loudestFret.length;g++)loudestFret[g]=Object.assign({},Fret);
     let fretCount;
@@ -238,7 +232,7 @@ function fiveAndSeven(){
             }
 }
 
-                          const trailSecondsLong = 7;
+                          const trailSecondsLong = 5.;
                           const trailLength = zoomFrames*trailSecondsLong;
 const trail = Array(trailLength);
 const cx = Array(trailLength);//c is the center of the frame moved from the origin
@@ -256,7 +250,6 @@ let d_x=0,d_y=0;
 let staticX=0,staticY=0;
 
 let circleX=0.,circleY=0.;
-let circleGeometry,circleMaterial,circle;
 let dotSize = starshipSize;
 let f = 0;
 
@@ -284,6 +277,7 @@ let pushBackCounter = 0;
                           
                        const   lightingScaleTrail = 72;//note range for color scheme
                          const  lightingScaleStar = lightingScaleTrail*2.*2.;//convert 12 to 24 and expand by factor of 2 for a divide between the octaves of the voice (trail) and the hearing (star)
+                          let note,lastNote;
 function  move()
 {
     if (isNaN(coordX)||(!zoomAtl41&&coordX>4.))coordX=0.;
@@ -310,8 +304,8 @@ if (totalAMP>zoomOutRatchetThreshold) pitch =    audioX.sampleRate/calculatePitc
 
     }
     else{aboveThreshold = false; on = false}
-
-let note = 12*Math.log(pitch/440)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
+lastNote = note;
+ note = 12*Math.log(pitch/440)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
 let t =  (note )*flip+twist/2;
 if(isFinite(t))angle = -(30*t)%360;
 
@@ -405,20 +399,22 @@ trailWidth[n] += radius*starshipSize;
 }
 
                        }
-let material;
     let camera, renderer;
+                       
+                       let geomeTrail;
+                       let starMesh;
+                       let starGeometry;
+                       let materialTrail;
+
 let mesh;
 let feedbackStarshipmesh, feedbackStarshipmeshFlip;
-
-let materials;
+let feedbackStarshipmaterialShader, feedbackStarshipmaterialShaderFlip;
 let feedbackStarshipmaterials, feedbackStarshipmaterialsFlip;
 
 let materialShader;
-let feedbackStarshipmaterialShader, feedbackStarshipmaterialShaderFlip;
-
-let geometry;
 
 let lineMat, lineGeometry, line;
+ let circleGeometry,circleMaterial,circle;
 
 let geometryP;
 
@@ -439,7 +435,6 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                        let radialMaterial, radialLine;
                        
 function init() {
-    container = document.getElementById( 'container' );
     renderTarget = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
                                                Math.min(window.innerWidth,window.innerHeight)*4./3.);
 
@@ -450,6 +445,12 @@ function init() {
     FeedbackrenderTargetFlipSide = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
                                                 Math.min(window.innerWidth,window.innerHeight)*4./3.);
 
+
+    renderer = new THREE.WebGLRenderer();
+    container.appendChild( renderer.domElement );//engage THREEJS visual out
+
+    renderer.autoClear=true;//so the starship can be isolated
+    renderer.setClearAlpha ( 0. )
 
     scene = new THREE.Scene();
     feedbackScene = new THREE.Scene();
@@ -473,17 +474,17 @@ function init() {
     line.material =  lineMat ;
     line.geometry=lineGeometry;
 
-    material= new THREE.MeshBasicMaterial({
+    starMaterial= new THREE.MeshBasicMaterial({
                 opacity: 1.,
               transparent: true,
                 vertexColors: true,
                // side: THREE.DoubleSide
             });
 
-     meshe = new THREE.Mesh( );
-    geome = new THREE.BufferGeometry();
-    meshe.material = material;
-    meshe.geometry=geome;
+     starMesh = new THREE.Mesh( );
+    starGeometry = new THREE.BufferGeometry();
+    starMesh.material = starMaterial;
+    starMesh.geometry=starGeometry;
 
     meshTrail = new THREE.Mesh( );
 
@@ -496,12 +497,6 @@ function init() {
     meshTrail.material = materialTrail;
     meshTrail.geometry = geomeTrail;
 
-        renderer = new THREE.WebGLRenderer();
-    container.appendChild( renderer.domElement );//engage THREEJS visual out
-
-                renderer.autoClear=true;//so the starship can be isolated
-                renderer.setClearAlpha ( 0. )
-    
     
     circle = new THREE.Mesh(  );
     circleMaterial = new THREE.MeshBasicMaterial( );
@@ -510,9 +505,10 @@ function init() {
      radialMaterial=  new THREE.MeshBasicMaterial( { color: 0x000000});
      radialLine = new THREE.Line();
                    radialLine.material=radialMaterial
+    
     scene.add(line);
     scene.add(meshTrail)
-                         scene.add(meshe);
+    scene.add(starMesh);
     scene.add( circle );
     scene.add(radialLine);
 
@@ -959,7 +955,7 @@ if( !window.touchMode&&!window.touchOnlyMode) {
 
 
 
-     let note = notes[noteNameNumber];
+     let noteName = notes[noteNameNumber];
      let cents = Math.round((noteNumber-Math.round(noteNumber))*100);
      let fr = Math.round(pitch);
      let n_n = Math.round(noteNumber);
@@ -967,7 +963,7 @@ if( !window.touchMode&&!window.touchOnlyMode) {
       if(textON)document.getElementById("textWindow").innerHTML =
 "<div sytle='font-size: 16px;'>"+
 
-                                " note: "+note+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
+                                " note: "+noteName+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
                                 "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
                                 "cores: "+cores+", zoom: "+zoom/2.**(singleHyperCoreDepth*cloverSuperCores)+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
                                 "InOutThresh:"+zoomOutRatchetThreshold+"<p style='margin : 0px'></p>"+
@@ -1010,9 +1006,10 @@ else if(blankBackground) {
     point.push( new THREE.Vector3(txlast,tylast, depth),new THREE.Vector3( tx, ty, depth));
   }
                             
-                            if(on){lineGeometry.setFromPoints( point );
+       if(on){lineGeometry.setFromPoints( point );
          lineGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( pointColor, 3 ).onUpload( disposeArray ));
-     }
+        }
+      else lineGeometry.setFromPoints( [] );
 
 
 
@@ -1325,9 +1322,9 @@ x,    y,  depth,
                                           }
                     */
 
-              geome.setAttribute( 'position', new THREE.Float32BufferAttribute( star, 3 ).onUpload( disposeArray ) );
-                 geome.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ).onUpload( disposeArray ));
-                 // geome.computeBoundingBox();
+              starGeometry.setAttribute( 'position', new THREE.Float32BufferAttribute( star, 3 ).onUpload( disposeArray ) );
+            starGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ).onUpload( disposeArray ));
+                 // starGeometry.computeBoundingBox();
 
          
          
@@ -1442,7 +1439,7 @@ else if (circleY<-height)circleY=height;
 //circleGeometry.computeBoundingBox ();
 
 circle.position.set(circleX,circleY,-1.);
-                                  circle.rotateZ(pitch-lastPitch);
+                              if(isFinite(note)&&isFinite(lastNote))    circle.rotateZ(note-lastNote);
 
                    let colorBlack= new THREE.Color();
                    colorBlack.setStyle("black");
@@ -1663,6 +1660,7 @@ scene.add( targets[n] );
 //circleMaterial.dispose();
 //scene.remove(radialLine);
 //radialMaterial.dispose();
+
 circle.geometry.dispose();
 radialLine.geometry.dispose( );
 
@@ -1672,17 +1670,16 @@ for(var n = 0; n<targets.length;n++){
   pM[n].dispose();
   targets[n].geometry.dispose();
 }
-                     
+    /*
      if(on){
-          //  scene.remove(line);
-          //  line.geometry.dispose( );
+            scene.remove(line);
+            line.geometry.dispose( );
         }
-                     /*
-                 scene.remove(meshe);
+                     
+                 scene.remove(starMesh);
                  scene.remove(meshTrail);
 
-                                            geome.dispose();
-                                            material.dispose();
+                                            starGeometry.dispose();
                                             geomeTrail.dispose();
                                             materialTrail.dispose();
                                    */
@@ -1840,14 +1837,15 @@ if("osmd" in window){
 
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
-let fractionOfFrame = Math.floor(bufferSize/2.);
-let tolerance; //, confidence;
+const fractionOfFrame = Math.floor(bufferSize/2.);
 const yinData = Array(fractionOfFrame);
 
 function calculatePitch ()
 {
+let tolerance; //, confidence;
 if(highORlow==1)tolerance=totalAMP-(1./bufferSize)**1.5//works well for smoothly and quickly determining sung notes especially low ones
-else if (highORlow==2)tolerance = .49;//when I play different notes on harmonica it mostly hears C, this clears up the distinction of the notes
+else if (highORlow==2)tolerance = .5;//when I play different notes on harmonica it mostly hears C, this clears up the distinction of the notes
+                        
 let period;
 let delta = 0.0, runningSum = 0.0;
 yinData[0] = 1.0;
@@ -1887,9 +1885,9 @@ return quadraticPeakPosition (yinData, minElement(yinData));
 function minElement (d)
 {
 
-let j, pos = 0;
+let pos = 0;
 let tmp = d[0];
-for (j = 0; j < fractionOfFrame; j++)
+for (let j = 0; j < fractionOfFrame; j++)
 {
     pos = (tmp < d[j]) ? pos : j;
     tmp = (tmp < d[j]) ? tmp : d[j];
@@ -1906,7 +1904,7 @@ let s0, s1, s2;
 let x0, x2;
 if (pos == 0 || pos == fractionOfFrame - 1) return pos;
 x0 = (pos < 1) ? pos : pos - 1;
-x2 = (pos + 1 < bufferSize) ? pos + 1 : pos;
+x2 = (pos + 1 < fractionOfFrame) ? pos + 1 : pos;
 if (x0 == pos) return (d[pos] <= d[x2]) ? pos : x2;
 if (x2 == pos) return (d[pos] <= d[x0]) ? pos : x0;
 s0 = d[x0];
