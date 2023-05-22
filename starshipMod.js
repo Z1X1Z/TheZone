@@ -34,7 +34,7 @@ const zoomFrames = 60;//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   const mf = 1.;
 const MR = mf/zoomFrames;
-window.zoomCageSize =100000.* window.pixelShaderSize/4.;//radius of zoom bounding
+window.zoomCageSize = window.pixelShaderSize/4.;//radius of zoom bounding
 
                   window.uniformsLoaded=false;
 window.gameOn=false;
@@ -358,18 +358,19 @@ angle = ((angle+180)/360*2*pi);
          staticX+=d_xS;
          staticY+=d_yS;
                 }
-                       /*disable zoomcage instead relying on upcore
-let expandedZoomCage=1.;
+
+                       
+    let expandedZoomCage=1.;
    if (uniforms.Spoker.value)expandedZoomCage*=4./3.
    if(sqC>=window.zoomCageSize*expandedZoomCage){//adjust back in if too far from the center
-        pushBackCounter+=FPS/60.;
+        pushBackCounter+=60./FPS;
 
         coordX*=window.zoomCageSize/sqC*expandedZoomCage;
         coordY*=window.zoomCageSize/sqC*expandedZoomCage;
     }
     else pushBackCounter = 0
-    if(pushBackCounter>14){coordX=0;coordY=0;}//teleport to center if continuously flying into perimeter
-*/
+    if(pushBackCounter>0.){coordX=0;coordY=0;}//teleport to center if continuously flying into perimeter, set to 0 for off
+
                        
                        
             if (trailDepth<trailLength)trailDepth++;
