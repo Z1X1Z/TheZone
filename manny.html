@@ -1047,12 +1047,13 @@ for (float counter=0.;counter<iterations;counter++)if(length(s)<50.){
                                                 
                                                     if (flipStar!=0.)cycleShiftChiral=0.;
                                                     else cycleShiftChiral=PI;
-                                                ColorWheelClover=spin2(vec2(-s.y,-s.x)*flipStar,(atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar);
+                                                ColorWheelClover=spin2(vec2(-s.y,-s.x)*flipStar,(atan(s.y,s.x)*petals/(6.+petals)+atan(d.x,d.y)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar+PI/3.);//clover actually seems to have down to the right hence +PI/3.
                                                 }
                                             else {
                                                 
                                                     if (flipStar!=0.)cycleShiftChiral=PI/4.;
-                                                    else cycleShiftChiral=-PI;                                                ColorWheelClover = (spin2(vec2(-s.x,-  s.y)*flipStar,(atan(s.x,s.y)*petals/(6.+petals)-atan(d.y,d.x)+cycleShiftChiral))-(1.-abs(starSpin))*twistStar*flipStar);
+                                                    else cycleShiftChiral=-PI;
+                                                    ColorWheelClover = spin2(vec2(-s.x,-  s.y)*flipStar,(atan(s.x,s.y)*petals/(6.+petals)-atan(d.y,d.x)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar+PI/3.);
                                                 }
                                             if(length(s)<4./3.)    beta   =  hsv2rgb(vec3((atan(ColorWheelClover.y,ColorWheelClover.x))/(2.*PI),1.,1.));
                                 }
@@ -1908,7 +1909,7 @@ vec2 dance = vec2(0.);
                        mny=bod(characterOnTrailP,moveDynamic)+heart(characterPSpunToKey,moveDynamic)+shiny(characterOnTrailP,moveDynamic)+mannyFace;
                    }
                    else if (Character==1){mny = MannyWoManny(characterOnTrailP,
-                                                        lerper,move/10.
+                                                        lerper,move/8.
                                                         )+robeL(characterOnTrailP,lerper,move/5.
                                                                 )*.95+heart(characterPSpunToKey,    moveDynamic);}
                    else if (Character==2){
@@ -1956,9 +1957,11 @@ vec2 dance = vec2(0.);
                                  Pillars = sevenPillars(vUv.yx-vec2(0.,.5));
                         //         vec2 ColorWheel = vUv-.5;/// in clover now remove once working
                          //   vec3 beta   =  hsv2rgb(vec3((atan(ColorWheel.y,ColorWheel.x)+PI)/(2.*PI),1.,1.));
-gl_FragColor=(StaRivers+
+
+                                 if (starship.x==starship.y&& starship.y==starship.z&&starship.w!=0.)gl_FragColor=vec4(starship.x);
+                                 else gl_FragColor=(StaRivers+
               starship*1.23+//the overal 1.23 boost is optional but with alpha blending on it's nice
-                                 vec4(Pillars+mnyX+(clamp((mny+mannyFace)*isGrey+//clamp(starship.xyz*starship.w-(mny.r+mny.g+mny.b)*.333-mannyFace*100.,0.,1.)
+                                 vec4(Pillars+mnyX+(clamp(clamp((mny+mannyFace),0.,1.)*isGrey+//clamp(starship.xyz*starship.w-(mny.r+mny.g+mny.b)*.333-mannyFace*100.,0.,1.)
                                                           -(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge+
               clamp(clamp(cloud+
                                 zoomer*isGrey
