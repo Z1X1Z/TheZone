@@ -417,7 +417,7 @@ let feedbackStarshipmaterialShader, feedbackStarshipmaterialShaderFlip;
 
 let geometry;
 
-
+let lineMat, lineGeometry, line;
 
 let geometryP;
 
@@ -432,7 +432,7 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                       let FeedbackrenderTarget,FeedbackrenderTargetFlipSide;
                        
                        
-                     
+                     let meshTrail;
                        
                        
 function init() {
@@ -452,8 +452,32 @@ function init() {
     feedbackScene = new THREE.Scene();
     feedbackSceneFlip= new THREE.Scene();
     shaderScene = new THREE.Scene();
+    
+    geome = new THREE.BufferGeometry();
+    geomeTrail = new THREE.BufferGeometry();
 
+    lineMat =
+    new THREE.LineBasicMaterial( {
+       vertexColors: true,
+           color: 0xffffff,
+         // opacity: .5,
+          linewidth: 2,
+          linecap: 'round', //ignored by WebGLRenderer
+          linejoin:  'round' //ignored by WebGLRenderer
+    } );
 
+    lineGeometry = new THREE.BufferGeometry()
+    line = new THREE.LineSegments();
+
+    material= new THREE.MeshBasicMaterial({
+                opacity: 1.,
+              transparent: true,
+                vertexColors: true,
+               // side: THREE.DoubleSide
+            });
+
+     meshe = new THREE.Mesh( );
+    meshTrail = new THREE.Mesh( );
 
         renderer = new THREE.WebGLRenderer();
     container.appendChild( renderer.domElement );//engage THREEJS visual out
@@ -560,8 +584,6 @@ dotted:{value:false},
         uniforms: uniforms,
         vertexShader: document.getElementById( 'vertexShader' ).textContent,
         fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
-          transparent: true,
-          opacity:.5
           
       } );
 
@@ -582,9 +604,7 @@ dotted:{value:false},
         uniforms: FEEDBACKuniforms,
         vertexShader: document.getElementById( 'vertexShader' ).textContent,
         fragmentShader: document.getElementById( 'FourRiversfragmentShader' ).textContent,
-          transparent: true,
-          opacity:.5
-          
+
       } );
 
 
@@ -927,15 +947,7 @@ if( !window.touchMode&&!window.touchOnlyMode) {
 
 
 
-  let lineMat =
-  new THREE.LineBasicMaterial( {
-     vertexColors: true,
-         color: 0xffffff,
-       // opacity: .5,
-        linewidth: 2,
-        linecap: 'round', //ignored by WebGLRenderer
-        linejoin:  'round' //ignored by WebGLRenderer
-  } );
+   
   if (uniforms[ "metronome" ].value>1.)
     lineMat.color = new THREE.Color(-Math.sin(uniforms[ "time" ].value*uniforms[ "metronome" ].value))
 else if(blankBackground) {
@@ -962,11 +974,11 @@ else if(blankBackground) {
 
     point.push( new THREE.Vector3(txlast,tylast, depth),new THREE.Vector3( tx, ty, depth));
   }
-                            let line;
-  let lineGeometry = new THREE.BufferGeometry()
+                            
                             if(on){lineGeometry.setFromPoints( point );
          lineGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( pointColor, 3 ).onUpload( disposeArray ));
-         line = new THREE.LineSegments(lineGeometry, lineMat );
+         line.geometry=lineGeometry;
+         line.material =  lineMat ;
 
      }
 
@@ -1005,7 +1017,7 @@ if(!window.touchMode){
              timestamplast = timestamp;
 
              const starCount = starArms*60*secondsToEdge;
-             
+      
              for (var g=0; g<starArms; g++)
                  
              {
@@ -1018,11 +1030,7 @@ if(!window.touchMode){
                      //var widt =starshipSize;
                      var vop = new THREE.Color();
                      vop.setHSL((-mustarD[g]+8)%24./24., mustarD[g]/lightingScaleStar,mustarD[g]/lightingScaleStar);//297 is around the highest heard note
-                     material = new THREE.MeshBasicMaterial({
-                     color:vop,
-                     opacity: 1.,
-                     transparent: true,
-                     });
+               
                      
                      rpio2 =arm+pi/2.;
 
@@ -1132,7 +1140,6 @@ if(!window.touchMode){
                          let outSetX = w*m.xr-bulletX;//apparently something is flipped
                          let outSetY = w*m.yr-bulletY;
                
-                         let outSet = new THREE.Vector2(outSetX,outSetY)
                          for(var yy=0;yy<6;yy++)
                          
                              starColors.push(
@@ -1285,21 +1292,13 @@ x,    y,  depth,
                                           star[n+1]=b.y
                                           }
                     */
-              geome = new THREE.BufferGeometry();
 
               geome.setAttribute( 'position', new THREE.Float32BufferAttribute( star, 3 ).onUpload( disposeArray ) );
                  geome.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ).onUpload( disposeArray ));
                   geome.computeBoundingBox();
 
-                material= new THREE.MeshBasicMaterial({
-                            opacity: 1.,
-                          transparent: true,
-                            vertexColors: true,
-                           // side: THREE.DoubleSide
-                        });
-
-                 meshe = new THREE.Mesh(geome , material );
-         
+                 meshe.geometry=geome;
+                 meshe.material = material;
          
          
          
@@ -1391,7 +1390,6 @@ let loopLimit = trailDepth;
 
 
 
-                 geomeTrail = new THREE.BufferGeometry();
 
                                             geomeTrail.setAttribute( 'position', new THREE.Float32BufferAttribute( trail, 3 ).onUpload( disposeArray ) );
                                             geomeTrail.setAttribute( 'color', new THREE.Float32BufferAttribute( trailColor, 4 ).onUpload( disposeArray ));
@@ -1405,8 +1403,8 @@ let loopLimit = trailDepth;
                               // side: THREE.DoubleSide
                            });
 
-                    meshTrail = new THREE.Mesh(geomeTrail , materialTrail );
-
+                                  meshTrail.geometry = geomeTrail;
+                                  meshTrail.material = materialTrail;
 if(isFinite(d_x)&&isFinite(d_y)&&on) {
 circleX-=xAdjusted;//xadjusted should mean this moves with the same screen scale as the trail
 circleY-=yAdjusted;
@@ -1552,14 +1550,12 @@ scene.add(meshTrail)
 
                                   
                                   
-   if(window.starClover&&!(touchMode||touchOnlyMode))
+   if(window.starClover)
                      {
             
-            if(!window.blankBackground)
-            {
                 renderer.setRenderTarget (renderTarget)
                 renderer.render( scene, camera );
-            }
+            
             //begin the feedback of the starRivers of eden
                     if( uniforms.eden.value>=1.)
                     {
@@ -1635,18 +1631,23 @@ scene.add(meshTrail)
                           
                      renderer.setRenderTarget (null)
 
-                     if(!window.blankBackground) {
-                        scene.background = null;
-                         uniforms.STAR.value=renderTarget.texture;
-                         renderer.render( shaderScene, camera )
-                     }
-                     else
-                     { scene.background = new THREE.Color( 0x808080);
-                         console.log('here')
-                         uniforms.STAR.value=null;
-                         renderer.render( scene, camera )
-                     }
-                                  
+                 if(!window.blankBackground) scene.background = null;
+                 else scene.background = new THREE.Color( 0x808080);
+                     
+                                 if(starClover) {
+                                         uniforms.STAR.value=renderTarget.texture;
+                                         renderer.render( shaderScene, camera )
+                                 }
+                                 else if(!window.blankBackground){
+                                      uniforms.STAR.value=null;
+                                      let shaderMeshClone = mesh.clone();
+                                      scene.add(shaderMeshClone);
+                                      renderer.render( scene, camera );
+                                      scene.remove(shaderMeshClone);
+                                     }
+                                 else   renderer.render( scene, camera );
+
+                              
 
 scene.remove( circle );
 circleGeometry.dispose();
