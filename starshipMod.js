@@ -42,7 +42,7 @@ window.twist = 0;
 window.flip = 1;
 
 var rez=.5;
-////if (navigator.maxTouchPoints <1) rez = 1;
+if (navigator.maxTouchPoints <1) rez = 1;
 let colorSound;
 let center = false;
                   let geome;
@@ -1011,8 +1011,6 @@ else if(blankBackground) {
                             
                             if(on){lineGeometry.setFromPoints( point );
          lineGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( pointColor, 3 ).onUpload( disposeArray ));
-         
-
      }
 
 
@@ -1675,7 +1673,7 @@ for(var n = 0; n<targets.length;n++){
 }
                      
      if(on){
-            scene.remove(line);
+          //  scene.remove(line);
           //  line.geometry.dispose( );
         }
                      /*
