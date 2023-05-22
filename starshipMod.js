@@ -188,15 +188,15 @@ function spiral_compress(){
         else freq = audioX.sampleRate*n/numberOfBins
         //    freq = 440; //check for concert A
  
-    let note =24*Math.log(freq/440)/Math.log(2.)+49*2;//I would like this 69 to be a 49 as it is it centers around e6
+    let note24 =24*Math.log(freq/440)/Math.log(2.)+49*2;//I would like this 69 to be a 49 as it is it centers around e6
                           if (!onO){
-        testar[(Math.round(note))%24] += Math.abs(z[n]);
+        testar[(Math.round(note24))%24] += Math.abs(z[n]);
   
     }
     else{//if constinuous star is engaged pipe directly through avoiding the 24 modulo
       testar[n] = Math.abs(z[n]);
     }
-                          mustarD[n] = note;
+                          mustarD[n] = note24;
 
   }
 
@@ -315,8 +315,8 @@ colorSound = new THREE.Color();
 let reversableColor=0.;
                        let j = 0;
 reversableColor=(angle/360.+twist/24.)*flip+120/360.;
-                       
-    colorSound.setHSL(reversableColor,1.,note/lightingScaleTrail);//lighting {note/x} should be 120 but it's out of the vocal range
+                       let colortone = note/lightingScaleTrail;
+    colorSound.setHSL(reversableColor,1.,(colortone<=.75)?colortone:.75);//lighting {note/x} should be 120 but it's out of the vocal range
 
 pitchCol[f]  = colorSound;
 angle = ((angle+180)/360*2*pi);
