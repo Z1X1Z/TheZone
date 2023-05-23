@@ -433,8 +433,8 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                                             const point = new Float32Array(bufferSize*3*2);
                                               const pointColor = new Float32Array(bufferSize*4*2);
                     
-                    const star= new Float32Array(starArms*3);
-                    const starColors= new Float32Array(starArms*4);
+                    const star= new Float32Array(fftSize/2*3);
+                    const starColors= new Float32Array(fftSize/2*4);
                     
                     const trail=new Float32Array(trailLength*3*6);
                     const trailColor=new Float32Array(trailLength*4*6);
@@ -530,8 +530,8 @@ function init() {
                });
      geomeTrail = new THREE.BufferGeometry();
      geomeTrail.dynamic = true;
-     geomeTrail.setAttribute( 'position', new THREE.Float32BufferAttribute( trail, 3 ).onUpload( disposeArray ) );
-      geomeTrail.setAttribute( 'color', new THREE.Float32BufferAttribute( trailColor, 4 ).onUpload( disposeArray ));
+     geomeTrail.setAttribute( 'position', new THREE.Float32BufferAttribute( trail, 3 ) );
+      geomeTrail.setAttribute( 'color', new THREE.Float32BufferAttribute( trailColor, 4 ));
      meshTrail = new THREE.Mesh(geomeTrail, materialTrail);
 
     
@@ -1019,8 +1019,8 @@ else if(blankBackground) {
                             
     const linePositionAttribute = lineGeometry.getAttribute( 'position' );
     const lineColorAttribute = lineGeometry.getAttribute( 'color' );
-
-  if (on)for (let r= 0; r < bufferSize*2; r +=2) {
+  var lineStride=0;
+  if (on)for (let r= 0; r < bufferSize; r +=1) {
       scene.add(line)
          txlast=tx;
          tylast=ty;
@@ -1029,12 +1029,11 @@ else if(blankBackground) {
          greynessLast = greyness
          greyness = 1.-Math.sqrt(tx*tx+ty*ty)**1.3247
         // pointColor.push( greynessLast, greynessLast, greynessLast,greyness, greyness, greyness );
-      linePositionAttribute.setXYZ(r,txlast,tylast, d)
-      linePositionAttribute.setXYZ(r+1,tx, ty, d)
-      lineColorAttribute.setXYZ(r,greynessLast, greynessLast, greynessLast)
-      lineColorAttribute.setXYZ(r+1,greyness, greyness, greyness )
-  //  point.push( new THREE.Vector3(txlast,tylast, depth),new THREE.Vector3( tx, ty, depth));
-  }
+      linePositionAttribute.setXYZ(lineStride,txlast,tylast, d)
+      linePositionAttribute.setXYZ(lineStride+1,tx, ty, d)
+      lineColorAttribute.setXYZ(lineStride,greynessLast, greynessLast, greynessLast)
+      lineColorAttribute.setXYZ(lineStride+1,greyness, greyness, greyness )
+      lineStride+=2  }
     else scene.remove(line)
     linePositionAttribute.needsUpdate = true; // required after the first render
     lineColorAttribute.needsUpdate = true; // required after the first render
@@ -1065,12 +1064,11 @@ else if(blankBackground) {
 
   if (window.micOn)analyser.getByteFrequencyData(  dataArray);
 
-   var maxTestar=0.;
+   var maxTestar=0.0000001;
    var minTestar=100000000000000;
 
 
                             let maxToMin = Math.max(height,width)/Math.min(height,width);
-let index;
     
 
 if(!window.touchMode){
@@ -1083,7 +1081,7 @@ if(!window.touchMode){
     if(onO){
         for (var g=0; g<starArms; g++) {
             if(isFinite(testar[g])){
-                if(testar[g]>maxTestar) { maxTestar=testar[g];index = g;}
+                if(testar[g]>maxTestar) { maxTestar=testar[g];}
                 if(testar[g]<minTestar) minTestar=testar[g];
             }
         }
@@ -1273,7 +1271,6 @@ else{//start drawing of just twenty four frets here
     }
 
 
-             maxTestar=.000000000000000001;
                              for (var g=0; g<24; g++) {
                                  if(testar[g]>maxTestar){maxTestar=testar[g];}
                                  if(testar[g]<minTestar)minTestar=testar[g];
@@ -1423,8 +1420,8 @@ var fingerStride = 0;
          
          
 
-    const trailPositionAttribute = starGeometry.getAttribute( 'position' );
-    const trailColorAttribute = starGeometry.getAttribute( 'color' );
+    const trailPositionAttribute = geomeTrail.getAttribute( 'position' );
+    const trailColorAttribute = geomeTrail.getAttribute( 'color' );
 
 let r = (f+trailDepth-1)%trailDepth;
 let s = f;
@@ -1479,9 +1476,18 @@ let loopLimit = trailDepth;
                      trailPositionAttribute.setXYZ(strideTrail+3,xrFinalPositived, yrFinalPositived,z)//3//side far//close triangle
                      trailPositionAttribute.setXYZ(strideTrail+4, xsFinalNegatived, ysFinalNegatived,zlast)//1//side close
                      trailPositionAttribute.setXYZ(strideTrail+5,xsFinalPositived, ysFinalPositived,zlast)//4//side close
-                     strideTrail+=6;
             }
-            else trailSegmentExpired[r] = true;
+            else
+            {
+                for(var v = 0; v<6;v++){
+                    trailPositionAttribute.setXYZ(strideTrail+v,0,0,0);
+                    trailColorAttribute.setXYZW(strideTrail+v, 0,0,0,0);
+                }
+
+                trailSegmentExpired[r] = true;
+            }
+                         strideTrail+=6;
+
              s = r;
              r--;
              if(r<0)r+=trailDepth;
@@ -1493,8 +1499,8 @@ let loopLimit = trailDepth;
 
 
     
-      linePositionAttribute.needsUpdate = true; // required after the first render
-      lineColorAttribute.needsUpdate = true; // required after the first render
+      trailPositionAttribute.needsUpdate = true; // required after the first render
+      trailColorAttribute.needsUpdate = true; // required after the first render
 
 
                                             //let geomeTrail= new THREE.BufferGeometry();
