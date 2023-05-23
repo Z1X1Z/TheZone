@@ -1153,7 +1153,7 @@ if(!window.touchMode){
                     
                     xyStarParticleArray.push(xyStarParticle);
                     let loopOfCulling =0;
-                    while(xyStarParticleArray.length>starCount||uniforms[ "time" ].value-xyStarParticleArray[loopOfCulling].time>maxToMin)
+                    while(xyStarParticleArray.length>starCount||uniforms[ "time" ].value-xyStarParticleArray[loopOfCulling].time>maxToMin&&loopOfCulling>0)
                     {
                         xyStarParticleArray.shift();
                         loopOfCulling++;
