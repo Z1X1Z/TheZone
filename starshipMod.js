@@ -1157,6 +1157,12 @@ if(!window.touchMode){
                     {
                         xyStarParticleArray.shift();
                         loopOfCulling++;
+                        
+                            for(var e = 0; e<6; e++){
+                                starStreamPositionAttribute.setXYZ(loopOfCulling+e,0,0,0)
+                                starStreamColorAttribute.setXYZW(starStreamStride+e,0,0,0,0)
+                            }
+
                     }
                 }
                 starStride+=3;
@@ -1192,7 +1198,7 @@ if(!window.touchMode){
             let depthINNER = (-1.+timeShift/OUTERSHELL);
             let depthOUTER = depthINNER+m.lengt;
             let starStreamStride = 0;
-            for(let starMoment=xyStarParticleArray.length-1; starMoment>=0; starMoment--)
+            for(let starMoment=xyStarParticleArray.length-1; starMoment>0; starMoment--)
                 
             {
                 
@@ -1200,7 +1206,7 @@ if(!window.touchMode){
                 if (lastLoopTime!=m.time) {
                     timeShift = uniforms["time"].value-m.time;
                     w = timeShift/m.lengt/secondsToEdge;
-                    withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL;
+                    withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL*1.1;// OUTERSHELL times 1.1 to prevent remnant pieces around edge
                     depthINNER = (-1.+timeShift/OUTERSHELL);
                     depthOUTER = depthINNER+m.lengt;
                     
@@ -1222,9 +1228,7 @@ if(!window.touchMode){
                     let outSetX = w*m.xr-bulletX;//apparently something is flipped
                     let outSetY = w*m.yr-bulletY;
                     
-                     for(var yy=0;yy<6;yy++)
-                     
-                         starStreamColorAttribute.setXYZW(starStreamStride+yy, m.vop.r, m.vop.g, m.vop.b,-depthINNER)
+                     for(var yy=0;yy<6;yy++) starStreamColorAttribute.setXYZW(starStreamStride+yy, m.vop.r, m.vop.g, m.vop.b,-depthINNER)
                      
                      let nx =-m.x+outSetX
                      let ny =-m.y+outSetY
@@ -1242,6 +1246,7 @@ if(!window.touchMode){
                     
                 }
                 else break ;
+                
                 starStreamStride+=6
 
             }
@@ -1768,11 +1773,11 @@ for(var n = 0; n<targets.length;n++){
 
                 }
                 else lastZoom=zoom/zoomRate();
-                        var d = pixelShaderSize/2.;//this is the frame size in the shader: "p=vec2(...."
+                        var coordinator = pixelShaderSize/2.;//this is the frame size in the shader: "p=vec2(...."
 
                     if(pointerZoom){
-                        let xTouch = screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d);
-                        let yTouch = screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/d);
+                        let xTouch = screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/coordinator);
+                        let yTouch = screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/coordinator);
                          var touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
                         uniforms.d.value.x=-xTouch;
                         uniforms.d.value.y=yTouch;
