@@ -550,7 +550,7 @@ function init() {
       
     scene.add(starMesh);//20+ minutes error free
      scene.add(starsANDwitnessesMesh)
-     scene.add(starStreamMesh)
+    // scene.add(starStreamMesh)
      
      
   FEEDBACKuniforms = THREE.UniformsUtils.merge([
@@ -1034,24 +1034,8 @@ else if(blankBackground) {
       lineColorAttribute.setXYZ(lineStride,greynessLast, greynessLast, greynessLast)
       lineColorAttribute.setXYZ(lineStride+1,greyness, greyness, greyness )
       lineStride+=2  }
-    else scene.remove(line)
     linePositionAttribute.needsUpdate = true; // required after the first render
     lineColorAttribute.needsUpdate = true; // required after the first render
-   //  lineGeometry= new THREE.BufferGeometry();
-   /* positionAttribute.needsUpdate = true;
-       if(on){
-           lineGeometry.setFromPoints( point );
-         lineGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( pointColor, 3 ).onUpload( disposeArray ));
-        }
-       else {
-           
-           lineGeometry.setFromPoints(  [[0,0,0],[0,0,0]] );
-           lineGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( [0,0,0,0,0,0], 3 ).onUpload( disposeArray ));
-       }
-    */
-    
-  //  line.geometry.dispose();
-  //  line.geometry=lineGeometry;
 
 
   uniforms[ "time2dance" ].value += audioX.sampleRate/bufferSize*totalAMP;
@@ -1193,6 +1177,7 @@ if(!window.touchMode){
         
         if ((RockInTheWater==1||RockInTheWater==2)&&xyStarParticleArray.length>0)
         {
+            scene.add(starStreamMesh)
             let m = xyStarParticleArray[xyStarParticleArray.length-1];
             let lastLoopTime=m.time;
             let timeShift = 0.;
@@ -1254,6 +1239,7 @@ if(!window.touchMode){
                 starStreamStride+=6
 
             }
+
             
         }
   
@@ -1503,14 +1489,7 @@ let loopLimit = trailDepth;
       trailColorAttribute.needsUpdate = true; // required after the first render
 
 
-                                            //let geomeTrail= new THREE.BufferGeometry();
-                                           // geomeTrail.setAttribute( 'position', new THREE.Float32BufferAttribute( trail, 3 ).onUpload( disposeArray ) );
-                                          //  geomeTrail.setAttribute( 'color', new THREE.Float32BufferAttribute( trailColor, 4 ).onUpload( disposeArray ));
-                                            //geomeTrail.computeBoundingBox();
-                                           // meshTrail.geometry.dispose();
-                                           // meshTrail.geometry=geomeTrail;
-
-
+                                           
 
 if(isFinite(d_x)&&isFinite(d_y)&&on) {
 circleX-=xAdjusted;//xadjusted should mean this moves with the same screen scale as the trail
@@ -1754,7 +1733,8 @@ scene.add( targets[n] );
                      
 circle.geometry.dispose();
 radialLine.geometry.dispose( );
-
+scene.remove(starStreamMesh);
+scene.remove(line);
 for(var n = 0; n<targets.length;n++){
   scene.remove( targets[n] );
   pG[n].dispose();
