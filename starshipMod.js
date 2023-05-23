@@ -1198,7 +1198,7 @@ if(!window.touchMode){
             let depthINNER = (-1.+timeShift/OUTERSHELL);
             let depthOUTER = depthINNER+m.lengt;
             let starStreamStride = 0;
-            for(let starMoment=xyStarParticleArray.length-1; starMoment>0; starMoment--)
+            for(let starMoment=xyStarParticleArray.length-1; starMoment>=0; starMoment--)
                 
             {
                 
