@@ -1072,7 +1072,8 @@ if(!window.touchMode){
         
         let fill =1000./(timestamp - timestamplast)*secondsToEdge;//This should be set to either sampleRate/fftSize or by predicted FPS
         timestamplast = timestamp;
-        
+        let waterRadiusScalar = 7./8.;
+
         
         
         
@@ -1094,7 +1095,6 @@ if(!window.touchMode){
                 
                 
                 rpio2 =arm+pi/2.;
-                
                 if(RockInTheWater==0||RockInTheWater==1)
                 {
                     
@@ -1102,7 +1102,7 @@ if(!window.touchMode){
                     let y = widt*-Math.cos(rpio2);
                     let xr = lengtOriginal*-Math.sin(arm);
                     let yr = lengtOriginal*-Math.cos(arm);
-                    let depth = (-1.+lengtOriginal);//shortest bar on top
+                    let depth = -1.+lengtOriginal/maxToMin*waterRadiusScalar;//shortest bar on top
                     
                     let starshipseethrough = lengtOriginal;
                     //for(var yy=0;yy<3;yy++)
@@ -1114,9 +1114,9 @@ if(!window.touchMode){
                         starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,.5)
                         starColorAttribute.setXYZW(starStride+2,vop.r,vop.g,vop.b,1.)
                     }
-                    starPositionAttribute.setXYZ(starStride,(xr-x), (yr-y),  1.)
-                    starPositionAttribute.setXYZ(starStride+1, 0., 0.,  .5)
-                    starPositionAttribute.setXYZ(starStride+2,(xr+x), (yr+y),  1.)
+                    starPositionAttribute.setXYZ(starStride,(xr-x), (yr-y),  depth)
+                    starPositionAttribute.setXYZ(starStride+1, 0., 0.,  0.)
+                    starPositionAttribute.setXYZ(starStride+2,(xr+x), (yr+y),  depth)
                     
                 }
                 /* rectangular star    star.push(
@@ -1152,7 +1152,12 @@ if(!window.touchMode){
                     xyStarParticle.staticY=staticY;
                     
                     xyStarParticleArray.push(xyStarParticle);
-                    while(xyStarParticleArray.length>starCount)xyStarParticleArray.shift();
+                    let loopOfCulling =0;
+                    while(xyStarParticleArray.length>starCount||uniforms[ "time" ].value-xyStarParticleArray[loopOfCulling].time>maxToMin)
+                    {
+                        xyStarParticleArray.shift();
+                        loopOfCulling++;
+                    }
                 }
                 starStride+=3;
 
@@ -1170,7 +1175,7 @@ if(!window.touchMode){
         }
         }
         
-        let OUTERSHELL =maxToMin*secondsToEdge;
+        let OUTERSHELL =maxToMin* secondsToEdge;
         
         const starStreamPositionAttribute = starStreamGeometry.getAttribute( 'position' );
         const starStreamColorAttribute = starStreamGeometry.getAttribute( 'color' );
@@ -1178,6 +1183,7 @@ if(!window.touchMode){
         if ((RockInTheWater==1||RockInTheWater==2)&&xyStarParticleArray.length>0)
         {
             scene.add(starStreamMesh)
+            
             let m = xyStarParticleArray[xyStarParticleArray.length-1];
             let lastLoopTime=m.time;
             let timeShift = 0.;
