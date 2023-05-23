@@ -1102,7 +1102,7 @@ if(!window.touchMode){
                     let y = widt*-Math.cos(rpio2);
                     let xr = lengtOriginal*-Math.sin(arm);
                     let yr = lengtOriginal*-Math.cos(arm);
-                    let depth = (-1.+lengtOriginal/maxToMin);//shortest bar on top
+                    let depth = (-1.+lengtOriginal);//shortest bar on top
                     
                     let starshipseethrough = lengtOriginal;
                     //for(var yy=0;yy<3;yy++)
@@ -1329,9 +1329,7 @@ var fingerStride = 0;
                  var widt = starshipSize**(2.41421);
                  var finger = twelve[t][g];
                  var arm =(g+9)/10.*pi*2.;
-                 
                  var lengt = (finger-minFinger)/(maxFinger-minFinger)/1.5;
-                 if(lengt>0){
                      var vop = new THREE.Color();
                      let BlackOrWhite;
                      let noteGrey = Math.abs(t-(6-twist/2.)+12)%12;
@@ -1368,7 +1366,7 @@ var fingerStride = 0;
 
                    fingerStride +=6;
                  }
-             }
+             
          }
                                   }
                                                               
