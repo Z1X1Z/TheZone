@@ -86,11 +86,12 @@ let zoomAtl41=false;//watch for the 1 and the l
 var zoomOutEngage=false;
 const pi = Math.PI;
 const bufferSize = fftSize;
+const numberOfBins = fftSize/2.;
+
 const inputData = new Float32Array(bufferSize);
 
 window.zoomOutRatchetThreshold=1./bufferSize;
 
-const numberOfBins = fftSize/2.;
 const spirray0 = Array(bufferSize);
 const spirray1 = Array(bufferSize);
 const starArms = numberOfBins;
@@ -234,7 +235,6 @@ function fiveAndSeven(){
 
                           const trailSecondsLong = 5.;
                           const trailLength = zoomFrames*trailSecondsLong;
-const trail = Array(trailLength);
 const cx = Array(trailLength);//c is the center of the frame moved from the origin
 const cy = Array(trailLength);
 const xPerp= Array(trailLength);//perp is the perpendicular from c
@@ -414,6 +414,9 @@ let lineMat, lineGeometry, line;
                     let meshTrail, materialTrail, geomeTrail;
                     let starMesh,starGeometry,starMaterial;
                     let radialMaterial, radialLine, radialGeometry;
+                    let starsANDwitnessesMesh,starsANDwitnessesGeometry;
+                    let starStreamMesh,starStreamGeometry;
+
                     
 let geometryP;
 
@@ -427,7 +430,28 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                        let backBufferFlip=false;
                       let FeedbackrenderTarget,FeedbackrenderTargetFlipSide;
                        
-                       
+                                            const point = new Float32Array(bufferSize*3*2);
+                                              const pointColor = new Float32Array(bufferSize*4*2);
+                    
+                    const star= new Float32Array(starArms*3);
+                    const starColors= new Float32Array(starArms*4);
+                    
+                    const trail=new Float32Array(trailLength*3*6);
+                    const trailColor=new Float32Array(trailLength*4*6);
+       
+                    const starsANDwitnessesPoints=new Float32Array(120*3*6);
+                    const starsANDwitnessesColors=new Float32Array(120*3*6);
+
+                    
+                    
+                    const secondsToEdge=window.pixelShaderSize/4./pixelShaderToStarshipRATIO;
+                    const starCount = starArms*60*secondsToEdge;
+                    
+                                 const starStreamPoints=new Float32Array(starCount*3*6);
+                                 const starStreamColors=new Float32Array(starCount*4*6);
+
+                    
+                    
 function init() {
     renderTarget = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
                                                Math.min(window.innerWidth,window.innerHeight)*4./3.);
@@ -461,10 +485,15 @@ function init() {
           linecap: 'round', //ignored by WebGLRenderer
           linejoin:  'round' //ignored by WebGLRenderer
     } );
-    lineGeometry = new THREE.BufferGeometry()
-    line = new THREE.LineSegments(lineGeometry,lineMat);
 
-     
+     lineGeometry=new THREE.BufferGeometry();
+     lineGeometry.dynamic = true;
+    //line.geometry.verticesNeedUpdate=true
+         lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute( point,3 ));
+       lineGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( pointColor, 3 ));
+     line = new THREE.LineSegments(lineGeometry,lineMat);
+
+
     starMaterial= new THREE.MeshBasicMaterial({
                 opacity: 1.,
               transparent: true,
@@ -472,10 +501,27 @@ function init() {
                // side: THREE.DoubleSide
             });
     starGeometry = new THREE.BufferGeometry();
+     starGeometry.dynamic = true;
+     
+     starGeometry.setAttribute('position', new THREE.Float32BufferAttribute( star,3 ));
+     starGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ));
     starMesh = new THREE.Mesh(starGeometry, starMaterial);
 
+     starsANDwitnessesGeometry = new THREE.BufferGeometry();
+     
+     starsANDwitnessesGeometry.dynamic = true;
+     starsANDwitnessesGeometry.setAttribute('position', new THREE.Float32BufferAttribute( starsANDwitnessesPoints,3 ));
+     starsANDwitnessesGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( starsANDwitnessesColors, 3 ));
+     starsANDwitnessesMesh = new THREE.Mesh(starsANDwitnessesGeometry, starMaterial);
+     
+     
+     starStreamGeometry = new THREE.BufferGeometry();
+     starStreamGeometry.dynamic = true;
+     starStreamGeometry.setAttribute('position', new THREE.Float32BufferAttribute( starStreamPoints,3 ));
+     starStreamGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( starStreamColors, 4 ));
+     starStreamMesh = new THREE.Mesh(starStreamGeometry, starMaterial);
 
-
+     
     materialTrail= new THREE.MeshBasicMaterial({
                    opacity: 1.,
                  transparent: true,
@@ -483,25 +529,30 @@ function init() {
                   // side: THREE.DoubleSide
                });
      geomeTrail = new THREE.BufferGeometry();
+     geomeTrail.dynamic = true;
+     geomeTrail.setAttribute( 'position', new THREE.Float32BufferAttribute( trail, 3 ).onUpload( disposeArray ) );
+      geomeTrail.setAttribute( 'color', new THREE.Float32BufferAttribute( trailColor, 4 ).onUpload( disposeArray ));
      meshTrail = new THREE.Mesh(geomeTrail, materialTrail);
 
     
-    circleMaterial = new THREE.MeshBasicMaterial( );
+     circleMaterial = new THREE.MeshBasicMaterial( );
      circle = new THREE.Mesh(new THREE.CircleGeometry(dotSize,3,0.),circleMaterial);
 
-     
      radialMaterial=  new THREE.MeshBasicMaterial( { color: 0x000000});
      radialGeometry=new THREE.BufferGeometry()
      radialLine = new THREE.Line(radialGeometry,radialMaterial);
      
+     scene.add(meshTrail)
+   //  scene.add(line);
 
-    scene.add(line);
-    scene.add(meshTrail)
-    scene.add(starMesh);
     scene.add( circle );
     scene.add(radialLine);
-
-    
+      
+    scene.add(starMesh);//20+ minutes error free
+     scene.add(starsANDwitnessesMesh)
+     scene.add(starStreamMesh)
+     
+     
   FEEDBACKuniforms = THREE.UniformsUtils.merge([
   THREE.UniformsLib.lights,
   {
@@ -605,16 +656,10 @@ dotted:{value:false},
         fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
           
       } );
-
-
-
-
-      geometryP = new THREE.PlaneGeometry( 2, 2 );
+     geometryP = new THREE.PlaneGeometry( 2, 2 );
       //geometryP.translate(0,0,-1.);
-
-           mesh = new THREE.Mesh( geometryP, materialShader );
-    
-    shaderScene.add( mesh );
+     mesh = new THREE.Mesh( geometryP, materialShader );
+     shaderScene.add( mesh );
 
     //repeat PixelShader loader for The four Rivers
 
@@ -625,16 +670,11 @@ dotted:{value:false},
         fragmentShader: document.getElementById( 'FourRiversfragmentShader' ).textContent,
 
       } );
-
-
     feedbackStarshipmesh = new THREE.Mesh( geometryP, feedbackStarshipmaterialShader );
     feedbackScene.add(feedbackStarshipmesh);
     
-    //repeat PixelShader loader for The four Rivers second fold
-
-
+     //and now for the flip frame for the feedback buffer
     feedbackStarshipmeshFlip = new THREE.Mesh( geometryP, feedbackStarshipmaterialShader );
-    //and now for the flip frame for the feedback buffer
     feedbackSceneFlip.add(feedbackStarshipmeshFlip)
     
   renderer.setPixelRatio( rez);
@@ -858,13 +898,16 @@ function takeNextScoreSlice(start){
                       }) // requires re-render
 }
                        let timestamplast=0;
-                       
-                       
-                       let STARSHIPMAP;
-                      window.date = Date.now();
-                      window.startTimeSecondMantissaMagnified = ((date/1000.-Math.round(date)/1000.)-.5)*144000;//for orienting the dance to time
-                       function animate( timestamp ) {
-    adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
+           
+           
+          window.date = Date.now();
+          window.startTimeSecondMantissaMagnified = ((date/1000.-Math.round(date)/1000.)-.5)*144000;//for orienting the dance to time
+                    
+                    
+                    
+                    
+   function animate( timestamp ) {
+     adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
     
     
     
@@ -970,32 +1013,46 @@ else if(blankBackground) {
     lineMat.color = colorSound;
   }
 
-  let depth = -.991;
+  let d = -.991;
                             
-                                                      let pointColor = [];
-                                                      let point = [];
                             let tx = 0, ty = 0, txlast = 0, tylast=0,greyness,greynessLast;
                             
-  if (on)for (let r= 0; r < bufferSize; r ++) {
+    const linePositionAttribute = lineGeometry.getAttribute( 'position' );
+    const lineColorAttribute = lineGeometry.getAttribute( 'color' );
+
+  if (on)for (let r= 0; r < bufferSize*2; r +=2) {
+      scene.add(line)
          txlast=tx;
          tylast=ty;
      tx = spirray0[r]/spiregulator;
      ty =  spirray1[r]/spiregulator;
          greynessLast = greyness
          greyness = 1.-Math.sqrt(tx*tx+ty*ty)**1.3247
-         pointColor.push(
-                         greynessLast, greynessLast, greynessLast,
-                         greyness, greyness, greyness
-                         );
-
-    point.push( new THREE.Vector3(txlast,tylast, depth),new THREE.Vector3( tx, ty, depth));
+        // pointColor.push( greynessLast, greynessLast, greynessLast,greyness, greyness, greyness );
+      linePositionAttribute.setXYZ(r,txlast,tylast, d)
+      linePositionAttribute.setXYZ(r+1,tx, ty, d)
+      lineColorAttribute.setXYZ(r,greynessLast, greynessLast, greynessLast)
+      lineColorAttribute.setXYZ(r+1,greyness, greyness, greyness )
+  //  point.push( new THREE.Vector3(txlast,tylast, depth),new THREE.Vector3( tx, ty, depth));
   }
-                            
-       if(on){lineGeometry.setFromPoints( point );
+    else scene.remove(line)
+    linePositionAttribute.needsUpdate = true; // required after the first render
+    lineColorAttribute.needsUpdate = true; // required after the first render
+   //  lineGeometry= new THREE.BufferGeometry();
+   /* positionAttribute.needsUpdate = true;
+       if(on){
+           lineGeometry.setFromPoints( point );
          lineGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( pointColor, 3 ).onUpload( disposeArray ));
         }
-      else lineGeometry.setFromPoints( [] );
-
+       else {
+           
+           lineGeometry.setFromPoints(  [[0,0,0],[0,0,0]] );
+           lineGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( [0,0,0,0,0,0], 3 ).onUpload( disposeArray ));
+       }
+    */
+    
+  //  line.geometry.dispose();
+  //  line.geometry=lineGeometry;
 
 
   uniforms[ "time2dance" ].value += audioX.sampleRate/bufferSize*totalAMP;
@@ -1011,185 +1068,211 @@ else if(blankBackground) {
    var maxTestar=0.;
    var minTestar=100000000000000;
 
-   var star=[];
-   const starColors=[];
 
                             let maxToMin = Math.max(height,width)/Math.min(height,width);
 let index;
+    
+
 if(!window.touchMode){
-         if(onO){
-             for (var g=0; g<starArms; g++) {
-                 if(isFinite(testar[g])){
-                     if(testar[g]>maxTestar) { maxTestar=testar[g];index = g;}
-                     if(testar[g]<minTestar) minTestar=testar[g];
-                 }
-             }
+    
+    
+    const starPositionAttribute = starGeometry.getAttribute( 'position' );
+    const starColorAttribute = starGeometry.getAttribute( 'color' );
+    let starStride = 0;
 
-             let secondsToEdge=1;
-             secondsToEdge*=window.pixelShaderSize/4./movementRate;
-             let fill =1000./(timestamp - timestamplast)*secondsToEdge;//This should be set to either sampleRate/fftSize or by predicted FPS
-             timestamplast = timestamp;
-
-             const starCount = starArms*60*secondsToEdge;
-      
-             for (var g=0; g<starArms; g++)
-                 
-             {
-                 if(isFinite(testar[g])&&testar[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.){
-                     
-                     var arm =(flip*mustarD[g]+twist+12)%24./24.*pi*2.;
-                     let lengtOriginal=(testar[g]-minTestar)/(maxTestar-minTestar);//twice applied
-                     var widt = (1.-lengtOriginal)*starshipSize;
-                     if (widt==0)widt=starshipSize;
-                     //var widt =starshipSize;
-                     var vop = new THREE.Color();
-                     vop.setHSL((-mustarD[g]+8)%24./24., mustarD[g]/lightingScaleStar,mustarD[g]/lightingScaleStar);//297 is around the highest heard note
-               
-                     
-                     rpio2 =arm+pi/2.;
-
-        if(RockInTheWater==0||RockInTheWater==1)
-        {
-       
-            let x = widt*-Math.sin(rpio2);
-            let y = widt*-Math.cos(rpio2);
-            let xr = lengtOriginal*-Math.sin(arm);
-            let yr = lengtOriginal*-Math.cos(arm);
-            let depth = (-1.+lengtOriginal/maxToMin);//shortest bar on top
-            
-            let starshipseethrough = lengtOriginal;
-            //for(var yy=0;yy<3;yy++)
-            if (RockInTheWater==1)
-                for(var yy=0;yy<3;yy++)
-                    starColors.push( mustarD[g]/lightingScaleStar, mustarD[g]/lightingScaleStar, mustarD[g]/lightingScaleStar,1.)
-            else
-                 starColors.push(
-                                 vop.r,vop.g,vop.b,1.,
-                                 vop.r,vop.g,vop.b,.5,
-                                 vop.r,vop.g,vop.b,1.)
-                 
-            star.push(
-                      (xr-x), (yr-y),  depth,
-                      0., 0.,  depth,
-                      (xr+x), (yr+y),  depth,
-                      ) ;
+    if(onO){
+        for (var g=0; g<starArms; g++) {
+            if(isFinite(testar[g])){
+                if(testar[g]>maxTestar) { maxTestar=testar[g];index = g;}
+                if(testar[g]<minTestar) minTestar=testar[g];
+            }
         }
-                 /* rectangular star    star.push(
-                               
-                               -x,    -y,  depth,
-                               x,    y,  depth,
-                               (xr+x), (yr+y),  depth,
-                               -x, -y,  depth,
-                               (xr+x), (yr+y),  depth,
-                               (xr-x), (yr-y),  depth,
-                               ) ;
-                  */
+        
+        let fill =1000./(timestamp - timestamplast)*secondsToEdge;//This should be set to either sampleRate/fftSize or by predicted FPS
+        timestamplast = timestamp;
+        
+        
+        
+        
+        
+        
+        for (var g=0; g<starArms; g++)
+            
+        {
+            
+            if(isFinite(testar[g])&&testar[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.){
+                
+                var arm =(flip*mustarD[g]+twist+12)%24./24.*pi*2.;
+                let lengtOriginal=(testar[g]-minTestar)/(maxTestar-minTestar);//twice applied
+                var widt = (1.-lengtOriginal)*starshipSize;
+                if (widt==0)widt=starshipSize;
+                //var widt =starshipSize;
+                var vop = new THREE.Color();
+                vop.setHSL((-mustarD[g]+8)%24./24., mustarD[g]/lightingScaleStar,mustarD[g]/lightingScaleStar);//297 is around the highest heard note
+                
+                
+                rpio2 =arm+pi/2.;
+                
+                if(RockInTheWater==0||RockInTheWater==1)
+                {
+                    
+                    let x = widt*-Math.sin(rpio2);
+                    let y = widt*-Math.cos(rpio2);
+                    let xr = lengtOriginal*-Math.sin(arm);
+                    let yr = lengtOriginal*-Math.cos(arm);
+                    let depth = (-1.+lengtOriginal/maxToMin);//shortest bar on top
+                    
+                    let starshipseethrough = lengtOriginal;
+                    //for(var yy=0;yy<3;yy++)
+                    if (RockInTheWater==1)
+                        for(var yy=0;yy<3;yy++)
+                            starColorAttribute.setXYZW(starStride+yy,mustarD[g]/lightingScaleStar, mustarD[g]/lightingScaleStar, mustarD[g]/lightingScaleStar,1.)
+                    else{
+                        starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
+                        starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,.5)
+                        starColorAttribute.setXYZW(starStride+2,vop.r,vop.g,vop.b,1.)
+                    }
+                    starPositionAttribute.setXYZ(starStride,(xr-x), (yr-y),  1.)
+                    starPositionAttribute.setXYZ(starStride+1, 0., 0.,  .5)
+                    starPositionAttribute.setXYZ(starStride+2,(xr+x), (yr+y),  1.)
+                    
+                }
+                /* rectangular star    star.push(
+                 
+                 -x,    -y,  depth,
+                 x,    y,  depth,
+                 (xr+x), (yr+y),  depth,
+                 -x, -y,  depth,
+                 (xr+x), (yr+y),  depth,
+                 (xr-x), (yr-y),  depth,
+                 ) ;
+                 */
+                
+                
+                if(RockInTheWater==1||RockInTheWater==2)
+                {
+                    var wideness =(testar[g]/255*totalAMP**.5-zoomOutRatchetThreshold)*starshipSize;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
+                    if(wideness<=0)wideness=1./255.*starshipSize;
+                    var xyStarParticle={};
+                    xyStarParticle.amp = testar[g];
+                    xyStarParticle.x=wideness*-Math.sin(rpio2);//this is the
+                    xyStarParticle.xr=-Math.sin(arm)/fill;//this is the outwards length of each pulse
+                    xyStarParticle.y=wideness*-Math.cos(rpio2);
+                    xyStarParticle.yr=-Math.cos(arm)/fill;
+                    xyStarParticle.vop=vop;
+                    xyStarParticle.widt=wideness;
+                    xyStarParticle.lengt=1./fill
+                    xyStarParticle.time = uniforms[ "time" ].value;
+                    xyStarParticle.interpolation = interpolation;
+                    xyStarParticle.interpolationFramesScaled = interpolation/60./4.;
+                    xyStarParticle.amp=testar[g]/255.;
+                    xyStarParticle.staticX=staticX;
+                    xyStarParticle.staticY=staticY;
+                    
+                    xyStarParticleArray.push(xyStarParticle);
+                    while(xyStarParticleArray.length>starCount)xyStarParticleArray.shift();
+                }
+                starStride+=3;
+
+            }
+            else{
+                starColorAttribute.setXYZW(starStride,0,0,0,0)
+                starColorAttribute.setXYZW(starStride+1,0,0,0,0)
+                starColorAttribute.setXYZW(starStride+2,0,0,0,0)
+            
+            starPositionAttribute.setXYZ(starStride,0,0,0)
+            starPositionAttribute.setXYZ(starStride+1,0,0,0)
+            starPositionAttribute.setXYZ(starStride+2,0,0,0)
+                starStride+=3;
+
+        }
+        }
+        
+        let OUTERSHELL =maxToMin*secondsToEdge;
+        
+        const starStreamPositionAttribute = starStreamGeometry.getAttribute( 'position' );
+        const starStreamColorAttribute = starStreamGeometry.getAttribute( 'color' );
+        
+        if ((RockInTheWater==1||RockInTheWater==2)&&xyStarParticleArray.length>0)
+        {
+            let m = xyStarParticleArray[xyStarParticleArray.length-1];
+            let lastLoopTime=m.time;
+            let timeShift = 0.;
+            let w = timeShift/m.lengt/secondsToEdge;
+            let withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL;
+            let depthINNER = (-1.+timeShift/OUTERSHELL);
+            let depthOUTER = depthINNER+m.lengt;
+            let starStreamStride = 0;
+            for(let starMoment=xyStarParticleArray.length-1; starMoment>=0; starMoment--)
+                
+            {
+                
+                m = xyStarParticleArray[starMoment];
+                if (lastLoopTime!=m.time) {
+                    timeShift = uniforms["time"].value-m.time;
+                    w = timeShift/m.lengt/secondsToEdge;
+                    withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL;
+                    depthINNER = (-1.+timeShift/OUTERSHELL);
+                    depthOUTER = depthINNER+m.lengt;
+                    
+                    lastLoopTime=m.time;
+                }
+                
+                
+                
+                if( withinRadialDelimiter)
+                {
+                    let bulletY=0;
+                    let bulletX=0;
+                    if(window.BulletMine!=0)
+                    {
+                        let blt= m.interpolationFramesScaled*BulletMine;
+                        bulletY = (m.staticY-staticY)*blt;
+                        bulletX = (m.staticX-staticX)*blt;
+                    }
+                    let outSetX = w*m.xr-bulletX;//apparently something is flipped
+                    let outSetY = w*m.yr-bulletY;
+                    
+                     for(var yy=0;yy<6;yy++)
                      
+                         starStreamColorAttribute.setXYZW(starStreamStride+yy, m.vop.r, m.vop.g, m.vop.b,-depthINNER)
                      
-                     if(RockInTheWater==1||RockInTheWater==2)
-                     {
-                         var wideness =(testar[g]/255*totalAMP**.5-zoomOutRatchetThreshold)*starshipSize;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
-                         if(wideness<=0)wideness=1./255.*starshipSize;
-                                     var xyStarParticle={};
-                         xyStarParticle.amp = testar[g];
-                         xyStarParticle.x=wideness*-Math.sin(rpio2);//this is the
-                         xyStarParticle.xr=-Math.sin(arm)/fill;//this is the outwards length of each pulse
-                         xyStarParticle.y=wideness*-Math.cos(rpio2);
-                         xyStarParticle.yr=-Math.cos(arm)/fill;
-                         xyStarParticle.vop=vop;
-                         xyStarParticle.widt=wideness;
-                         xyStarParticle.lengt=1./fill
-                         xyStarParticle.time = uniforms[ "time" ].value;
-                         xyStarParticle.interpolation = interpolation;
-                         xyStarParticle.interpolationFramesScaled = interpolation/60./4.;
-                         xyStarParticle.amp=testar[g]/255.;
-                         xyStarParticle.staticX=staticX;
-                         xyStarParticle.staticY=staticY;
-
-                         xyStarParticleArray.push(xyStarParticle);
-                         while(xyStarParticleArray.length>starCount)xyStarParticleArray.shift();
-                     }
-                 }}
-             
-             let OUTERSHELL =maxToMin*secondsToEdge;
-             
-             
-             if ((RockInTheWater==1||RockInTheWater==2)&&xyStarParticleArray.length>0)
-             {
-                             let m = xyStarParticleArray[xyStarParticleArray.length-1];
-                             let lastLoopTime=m.time;
-                             let timeShift = 0.;
-                             let w = timeShift/m.lengt/secondsToEdge;
-                             let withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL;
-                             let depthINNER = (-1.+timeShift/OUTERSHELL);
-                             let depthOUTER = depthINNER+m.lengt;
-
-                 for(let starMoment=xyStarParticleArray.length-1; starMoment>=0; starMoment--)
-               
-                 {
+                     let nx =-m.x+outSetX
+                     let ny =-m.y+outSetY
+                     let xShift=m.x+outSetX;
+                     let yShift=m.y+outSetY;
+                     let xrShifted = m.xr+xShift;
+                     let yrShifted = m.yr+yShift;
                      
-                      m = xyStarParticleArray[starMoment];
-                     if (lastLoopTime!=m.time) {
-                         timeShift = uniforms["time"].value-m.time;
-                          w = timeShift/m.lengt/secondsToEdge;
-                         withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL;
-                         depthINNER = (-1.+timeShift/OUTERSHELL);
-                         depthOUTER = depthINNER+m.lengt;
+                     starStreamPositionAttribute.setXYZ( starStreamStride, nx,    ny,  depthINNER)
+                    starStreamPositionAttribute.setXYZ(starStreamStride+1,xShift,    yShift,  depthINNER)
+                    starStreamPositionAttribute.setXYZ(starStreamStride+2,xrShifted, yrShifted,  depthOUTER)
+                    starStreamPositionAttribute.setXYZ(starStreamStride+3,nx, ny,  depthINNER)
+                    starStreamPositionAttribute.setXYZ(starStreamStride+4,xrShifted, yrShifted,  depthOUTER)
+                    starStreamPositionAttribute.setXYZ(starStreamStride+5,m.xr+nx, m.yr+ny,  depthOUTER)
+                    
+                }
+                else break ;
+                starStreamStride+=6
 
-                         lastLoopTime=m.time;
-                     }
-                     
-
-                     
-                     if( withinRadialDelimiter)
-                     {
-                         let bulletY=0;
-                         let bulletX=0;
-                         if(window.BulletMine!=0)
-                         {
-                             let blt= m.interpolationFramesScaled*BulletMine;
-                             bulletY = (m.staticY-staticY)*blt;
-                             bulletX = (m.staticX-staticX)*blt;
-                         }
-                         let outSetX = w*m.xr-bulletX;//apparently something is flipped
-                         let outSetY = w*m.yr-bulletY;
-               
-                         for(var yy=0;yy<6;yy++)
-                         
-                             starColors.push(
-                                           m.vop.r,
-                                           m.vop.g,
-                                           m.vop.b,-depthINNER,
-                                           )
-                         let nx =-m.x+outSetX
-                         let ny =-m.y+outSetY
-                         let xShift=m.x+outSetX;
-                         let yShift=m.y+outSetY;
-                         let xrShifted = m.xr+xShift;
-                         let yrShifted = m.yr+yShift;
-                         
-                         star.push(
-                                   
-                                   nx,    ny,  depthINNER,
-                                   xShift,    yShift,  depthINNER,
-                                   xrShifted, yrShifted,  depthOUTER,
-                                   nx, ny,  depthINNER,
-                                   xrShifted, yrShifted,  depthOUTER,
-                                   m.xr+nx, m.yr+ny,  depthOUTER,
-                                   )
-                         
-                         
-                     }
-                     else break ;
-
-                 }
-
-             }
+            }
+            
+        }
+  
+        
+        starStreamPositionAttribute.needsUpdate = true;
+        starStreamColorAttribute.needsUpdate = true;
          }
              
 
 
 else{//start drawing of just twenty four frets here
+    for (var g=0; g<starArms*3; g++) {//wipe out the after image of the 1024 frets
+        starColorAttribute.setXYZW(g,0,0,0,0.)
+        starPositionAttribute.setXYZ(g,0,0,0)
+    }
+
+
              maxTestar=.000000000000000001;
                              for (var g=0; g<24; g++) {
                                  if(testar[g]>maxTestar){maxTestar=testar[g];}
@@ -1205,15 +1288,13 @@ else{//start drawing of just twenty four frets here
                 var vop = new THREE.Color();
                       vop.setHSL((20-g)%24/24.,1.,.5);
 
-               // for(var yy=0;yy<1;yy++)
-                    starColors.push(vop.r,vop.g,vop.b,0.,
-                                    vop.r,vop.g,vop.b,0.,
-                                    vop.r,vop.g,vop.b,1,
-                                    vop.r,vop.g,vop.b,0,
-                                    vop.r,vop.g,vop.b,1.,
-                                    vop.r,vop.g,vop.b,1
-                                    )
-
+                  
+                  starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,0.)
+                  starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,0.)
+                  starColorAttribute.setXYZW(starStride+2,vop.r,vop.g,vop.b,1.)
+                  starColorAttribute.setXYZW(starStride+3,vop.r,vop.g,vop.b,0.)
+                  starColorAttribute.setXYZW(starStride+4,vop.r,vop.g,vop.b,1.)
+                  starColorAttribute.setXYZW(starStride+5,vop.r,vop.g,vop.b,1.)
 
 rpio2 =arm+pi/2.;
 let x = widt*-Math.sin(rpio2);
@@ -1222,21 +1303,32 @@ let xr = lengt*-Math.sin(arm);
 let yr = lengt*-Math.cos(arm);
 let depth = -1.+lengt;
 
-star.push(
-
--x,    -y,  depth,
-x,    y,  depth,
-(xr+x), (yr+y),  depth,
--x, -y,  depth,
-(xr+x), (yr+y),  depth,
-(xr-x), (yr-y),  depth,
-) ;
-
-} }
+                
+                starPositionAttribute.setXYZ(starStride,-x,    -y,  depth)
+                starPositionAttribute.setXYZ(starStride+1,x,    y,  depth)
+                starPositionAttribute.setXYZ(starStride+2,(xr+x), (yr+y),  depth)
+                
+                starPositionAttribute.setXYZ(starStride+3,-x, -y,  depth)
+                starPositionAttribute.setXYZ(starStride+4,(xr+x), (yr+y),  depth)
+                starPositionAttribute.setXYZ(starStride+5,(xr-x), (yr-y),  depth)
+                
+                
+                
+            
+                starStride+=6;
+}
+    
+}
       
-         
+      starPositionAttribute.needsUpdate = true; // required after the first render
+      starColorAttribute.needsUpdate = true; // required after the first render
+    
+const starsANDwitnessesPositionAttribute = starsANDwitnessesGeometry.getAttribute( 'position' );
+const starsANDwitnessesColorAttribute = starsANDwitnessesGeometry.getAttribute( 'color' );
          if(window.octaveStars)
          {
+             
+var fingerStride = 0;
              fiveAndSeven();
 
          let maxFinger = 0
@@ -1271,7 +1363,8 @@ x,    y,  depth,
                          BlackOrWhite=1;
                      vop.setRGB(BlackOrWhite,BlackOrWhite,BlackOrWhite);
                      
-                     for(var yy=0;yy<6;yy++)   starColors.push(vop.r,vop.g,vop.b,1.)
+
+                     for(var yy=0;yy<6;yy++)   starsANDwitnessesColorAttribute.setXYZ(fingerStride+yy,vop.r,vop.g,vop.b)
 
                      rpio2 =arm+pi/2.;
                      fingerTwist=(flip*(t-6)+twist/2.+12)/12.*2.*pi
@@ -1282,55 +1375,56 @@ x,    y,  depth,
                      let offsetX=-Math.sin(fingerTwist)/1.5;
                      let offsetY=-Math.cos(fingerTwist)/1.5;
                      let depth = -.98;//this depth should mean that half the trail is above and half below
-                     
-                     star.push(
                                
-                               -x+offsetX,    -y+offsetY,  depth,
-                               x+offsetX,    y+offsetY,  depth,
-                               (xr+x)+offsetX, (yr+y)+offsetY,  depth,
-                               -x+offsetX, -y+offsetY,  depth,
-                               (xr+x)+offsetX, (yr+y)+offsetY,  depth,
-                               (xr-x)+offsetX, (yr-y)+offsetY,  depth,
-                               ) ;
+                      starsANDwitnessesPositionAttribute.setXYZ(fingerStride,  -x+offsetX,    -y+offsetY,  depth)
+                        starsANDwitnessesPositionAttribute.setXYZ(fingerStride+1,   x+offsetX,    y+offsetY,  depth)
+                          starsANDwitnessesPositionAttribute.setXYZ(fingerStride+2, (xr+x)+offsetX, (yr+y)+offsetY,  depth)
+                            starsANDwitnessesPositionAttribute.setXYZ(fingerStride+3, -x+offsetX, -y+offsetY,  depth)
+                      starsANDwitnessesPositionAttribute.setXYZ(fingerStride+4,  (xr+x)+offsetX, (yr+y)+offsetY,  depth)
+                    starsANDwitnessesPositionAttribute.setXYZ(fingerStride+5,   (xr-x)+offsetX, (yr-y)+offsetY,  depth)
+
+                   fingerStride +=6;
                  }
              }
          }
                                   }
-      /*https://www.youtube.com/watch?v=4SH_-YhN15A&list=WL&index=10&t=2328s  wouldn't this be cool with the equalizer starship, description of process at beginning of video
-              const quaternion = new THREE.Quaternion();
-              quaternion.setFromAxisAngle( new THREE.Vector3( 0, 0, 1 ), Math.PI / 2 );
-                                          for(var n=0.; n<star.length;n+=3){
-                                          const a= new THREE.Vector3(star[n],star[n+1],star[n+2])
-              const b = a.applyQuaternion(quaternion);
-                                          star[n]=b.x;
-                                          star[n+1]=b.y
-                                          }
-                    */
+                                                              
+          starsANDwitnessesPositionAttribute.needsUpdate = true; // required after the first render
+          starsANDwitnessesColorAttribute.needsUpdate = true; // required after the first render
+                                                              
+                                                              
+                                                              
+                                                              
+                                                              
+      //https://www.youtube.com/watch?v=4SH_-YhN15A&list=WL&index=10&t=2328s  wouldn't this be cool  with the equalizer starship, description of process at beginning of video (now implemented with feedback buffer
+              
+                             //      starGeometry = new THREE.BufferGeometry();
 
-              starGeometry.setAttribute( 'position', new THREE.Float32BufferAttribute( star, 3 ).onUpload( disposeArray ) );
-            starGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ).onUpload( disposeArray ));
+          //    starGeometry.setAttribute( 'position', new THREE.Float32BufferAttribute( star, 3 ).onUpload( disposeArray ) );
+          //  starGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ).onUpload( disposeArray ));
                  // starGeometry.computeBoundingBox();
-
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
-
-                 var trail=[];
-                 var trailColor=[];
                                   
+                                 // starMesh.geometry.dispose();
+                                  //starMesh.geometry=starGeometry;
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+
+    const trailPositionAttribute = starGeometry.getAttribute( 'position' );
+    const trailColorAttribute = starGeometry.getAttribute( 'color' );
 
 let r = (f+trailDepth-1)%trailDepth;
 let s = f;
@@ -1343,6 +1437,7 @@ let loopLimit = trailDepth;
                              let     timeElapsedSinceRecording=     uniforms["time"].value-trailTimeOfRecording[r];
                                   let transparencyOfTrail = 1., z = -1;
                                   let transparencyOfTrailLast = 1, zlast = -1;
+     let strideTrail = 0;
                                   
           while(loopLimit>0&&r!=f){
                  if(!trailSegmentExpired[r]&&timeElapsedSinceRecording<=trailSecondsLong){
@@ -1352,15 +1447,14 @@ let loopLimit = trailDepth;
                         //   if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong);
                             transparencyOfTrailLast =transparencyOfTrail;
                             transparencyOfTrail =1.-timeElapsedSinceRecording/trailSecondsLong;
-                           if(transparencyOfTrail>.01)transparencyOfTrail==.01;
-                          trailColor.push(
-                                          pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
-                                          pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrailLast,
-                                          pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
-                                          pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail,
-                                          pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrailLast,
-                                          pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrailLast
-                                          )
+                           if(transparencyOfTrail<.01)transparencyOfTrail=.01;
+                                          trailColorAttribute.setXYZW(strideTrail, pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail)
+                                            trailColorAttribute.setXYZW(strideTrail+1, pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrailLast)
+                                             trailColorAttribute.setXYZW(strideTrail+2,   pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail)
+                                             trailColorAttribute.setXYZW(strideTrail+3, pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail)
+                                             trailColorAttribute.setXYZW(strideTrail+4, pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrailLast)
+                                             trailColorAttribute.setXYZW(strideTrail+5, pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrailLast)
+                                          
                          let widtr = trailWidth[r];
                          let widts = trailWidth[s];
                          let widtXperpR=widtr*xPerp[r];
@@ -1378,15 +1472,14 @@ let loopLimit = trailDepth;
                          let ysFinalNegatived = cy[s]-widtYperpS;
                          let ysFinalPositived = cy[s]+widtYperpS;
 
-                         trail.push(
 
-                                    xrFinalNegatived, yrFinalNegatived,z, //2//side far//far triangle
-                                    xsFinalNegatived, ysFinalNegatived,zlast,  //1//side close
-                                    xrFinalPositived, yrFinalPositived,z, //3//side far
-                                    xrFinalPositived, yrFinalPositived,z,//3//side far//close triangle
-                                    xsFinalNegatived, ysFinalNegatived,zlast,//1//side close
-                                    xsFinalPositived, ysFinalPositived,zlast,//4//side close
-                          );
+                                    trailPositionAttribute.setXYZ(strideTrail,xrFinalNegatived, yrFinalNegatived,z)
+                     trailPositionAttribute.setXYZ(strideTrail+1,xsFinalNegatived, ysFinalNegatived,zlast)  //1//side close
+                     trailPositionAttribute.setXYZ(strideTrail+2,xrFinalPositived, yrFinalPositived,z) //3//side far
+                     trailPositionAttribute.setXYZ(strideTrail+3,xrFinalPositived, yrFinalPositived,z)//3//side far//close triangle
+                     trailPositionAttribute.setXYZ(strideTrail+4, xsFinalNegatived, ysFinalNegatived,zlast)//1//side close
+                     trailPositionAttribute.setXYZ(strideTrail+5,xsFinalPositived, ysFinalPositived,zlast)//4//side close
+                     strideTrail+=6;
             }
             else trailSegmentExpired[r] = true;
              s = r;
@@ -1399,13 +1492,17 @@ let loopLimit = trailDepth;
 
 
 
+    
+      linePositionAttribute.needsUpdate = true; // required after the first render
+      lineColorAttribute.needsUpdate = true; // required after the first render
 
 
-
-
-                                            geomeTrail.setAttribute( 'position', new THREE.Float32BufferAttribute( trail, 3 ).onUpload( disposeArray ) );
-                                            geomeTrail.setAttribute( 'color', new THREE.Float32BufferAttribute( trailColor, 4 ).onUpload( disposeArray ));
+                                            //let geomeTrail= new THREE.BufferGeometry();
+                                           // geomeTrail.setAttribute( 'position', new THREE.Float32BufferAttribute( trail, 3 ).onUpload( disposeArray ) );
+                                          //  geomeTrail.setAttribute( 'color', new THREE.Float32BufferAttribute( trailColor, 4 ).onUpload( disposeArray ));
                                             //geomeTrail.computeBoundingBox();
+                                           // meshTrail.geometry.dispose();
+                                           // meshTrail.geometry=geomeTrail;
 
 
 
