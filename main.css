@@ -13,6 +13,8 @@ body, head {
     -webkit-user-select: none;
     user-select: none;//prevent selection of menus
      */
+    touch-action: none;//prevent zooming and panning
+
 
 }
 #container{
