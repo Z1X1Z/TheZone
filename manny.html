@@ -520,9 +520,13 @@
                   key  = '4';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                   <label for="4rez">4 pixels per pixel</label><br>
-                  <a id="Incrementally Increase Resolution" name="t"  onclick= "window.rez*=1.1;renderer.setPixelRatio(window.rez);">
+                  <a id="Incrementally Increase Resolution" name="t"  onclick="
+                  key  = '+';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">">
                       Refine resolution!</a><br>
-                  <a id="Incrementally Decrease Resolution" name="t"  onclick= "window.rez/=1.1;renderer.setPixelRatio(window.rez);">
+                  <a id="Incrementally Decrease Resolution" name="t"  onclick="
+                  key  = '-';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">>
                       Reduce resolution!</a><br>
               </div>
                   </div>
