@@ -13,10 +13,16 @@ body, head {
     -webkit-user-select: none;
     user-select: none;//prevent selection of menus
      */
-    touch-action: none;//prevent zooming and panning
 
 }
 #container{
+    
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-action: none;//prevent zooming and panning
+
     z-index: 3; 
     width: 100%;
     height: 100%;
