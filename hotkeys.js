@@ -52,9 +52,11 @@ function callKey(event){
     if(!event.shiftKey)x = parseInt(String.fromCharCode( event.keyCode));
     if (x>0&&x<=4&& document.activeElement.className!="num")
     {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
+    else if (key=="+"){rez /=1.01; renderer.setPixelRatio( rez);}
+    else if (key=="+"){rez *=1.01; renderer.setPixelRatio( rez);}
+
     else if (x==0)
     {window.movementRate=pixelShaderSize/4.; uniforms[ "rate" ].value=1./window.movementRate; }
-    
 
     else if (key=="À"||key=="`"||key=="~")
     {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
@@ -198,9 +200,9 @@ function callKey(event){
       else if (key=="R")   uniforms[ "remediatedColors" ].value=!uniforms[ "remediatedColors" ].value  ;
 
 
-      else if (key=="="||key.toLowerCase()=="+"){window.movementRate *=1.11111111;  uniforms[ "rate" ].value*=1.11111111;}
+      else if (key=="="){window.movementRate *=1.11111111;  uniforms[ "rate" ].value*=1.11111111;}
 
-      else if (key.toLowerCase()=="-"){window.movementRate /=1.11111111; uniforms[ "rate" ].value/=1.11111111;}
+      else if (key=="-"){window.movementRate /=1.11111111; uniforms[ "rate" ].value/=1.11111111;}
 
           else if (key=="e")window.gameOn=!window.gameOn;
           else if (key=="E")uniforms.MannyONtrail.value=uniforms.MannyONtrail.value=(1+uniforms.MannyONtrail.value)%2;

@@ -17,7 +17,7 @@ function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js lo
     else setTimeout(stallTillTHREELoaded,100);
     }//setTimeout waits for 10ms then runs stallTillTHREELoaded()
 stallTillTHREELoaded();
-let xyStarParticleArray=Array();
+const xyStarParticleArray=Array();
 window.zoom=1.;
 
 const starshipSize = Math.E**-1.3247/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
@@ -1583,8 +1583,9 @@ for(let n = 0; n < polygons.length; n++)
 
         if (distanceFromCenter<=1.)
         {
-            polygons[n].dx+=-Math.cos(angleTarget)*interpolation*baseMag/60.;
-            polygons[n].dy+=-Math.sin(angleTarget)*interpolation*baseMag/60.;
+            let compound = interpolation*baseMag/60.*window.movementRate;
+            polygons[n].dx+=-Math.cos(angleTarget)*compound;
+            polygons[n].dy+=-Math.sin(angleTarget)*interpolation*compound;
         }
                          
 var neutralizer=1.;
