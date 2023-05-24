@@ -647,7 +647,6 @@ dotted:{value:false},
 
     }
   ]);
-    
     window.uniformsLoaded=true;
 
     materialShader = new THREE.ShaderMaterial( {
@@ -916,7 +915,11 @@ function takeNextScoreSlice(start){
     
     uniforms[ "time" ].value = timestamp/1000.+window.startTimeSecondMantissaMagnified;
     if(starSpin!=0)twist=(uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*starSpin*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel
-    
+     
+     
+     
+     uniforms.rate.value= 1.*(uniforms.externalCores.value+uniforms.centralCores.value)*timestamp/1000.;//this step is Decrypto Cristo it may not need timestamp
+     console.log(uniforms.rate.value)
     
     
     elapsedTimeBetweenFrames = (timestamp-lastTime);
