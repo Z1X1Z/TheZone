@@ -207,7 +207,7 @@ function spiral_compress(){
 
 
 const twelve = Array(12);
-for(let n = 0; n<12; n++)twelve[n] = Array(10);
+for(let n = 0; n<12; n++)twelve[n] = Array(10).fill(0);
 
 var smoothTwelve =false;
 function fiveAndSeven(){
@@ -226,7 +226,7 @@ function fiveAndSeven(){
                 if( twelfths>=-.5){
                     starNote = Math.round(twelfths)%12;
                     finger = Math.floor(twelfths/10);
-                    if (finger<10&&!isNaN(starNote)&&!isNaN(dataArray[n])) twelve[starNote][finger] += dataArray[n];
+                    if (finger<10&&isFinite(finger)&&isFinite(starNote)&&isFinite(dataArray[n])) twelve[starNote][finger] += dataArray[n];
                 }
                         
             
@@ -1326,11 +1326,13 @@ var fingerStride = 0;
              fiveAndSeven();
 
          let maxFinger = 0
-         let minFinger = 10000000000000000;
+         let minFinger = 100000000;
          for (var t=0; t<12; t++) {
              for (var g=0; g<10; g++) {
-                 if (twelve[t][g]>maxFinger)maxFinger = twelve[t][g];
-                 if (twelve[t][g]<minFinger)minFinger = twelve[t][g];
+                 if(isFinite(twelve[t][g])){
+                     if (twelve[t][g]>maxFinger)maxFinger = twelve[t][g];
+                     if (twelve[t][g]<minFinger)minFinger = twelve[t][g];
+                 }
 
              }}
     
@@ -1338,17 +1340,20 @@ var fingerStride = 0;
              
              for (var g=0; g<10; g++) {
                  var widt = starshipSize**(2.41421);
-                 var finger = twelve[t][g];
+                 var finger =twelve[t][g];
                  var arm =(g+9)/10.*pi*2.;
-                 var lengt = (finger-minFinger)/(maxFinger-minFinger)/1.5;
+
+                 var lengt = (finger)/maxFinger/1.5;
+                 if (!isFinite(lengt))lengt =0;
+
+
                      var vop = new THREE.Color();
                      let BlackOrWhite;
                      let noteGrey = Math.abs(t-(6-twist/2.)+12)%12;
                      if (t==7||t==5||t==2||t==0||t==10)
                          if(uniforms.colorCombo.value!=20)
                          BlackOrWhite=-1.;
-                     else BlackOrWhite =.5;
-                     
+                         else BlackOrWhite =.5;
                      else if( (noteGrey<.5 || noteGrey>11.5) &&starClover&&uniforms.colorCombo.value!=20)
                         BlackOrWhite=.5;
                     else
@@ -1359,7 +1364,8 @@ var fingerStride = 0;
                      for(var yy=0;yy<6;yy++)   starsANDwitnessesColorAttribute.setXYZ(fingerStride+yy,vop.r,vop.g,vop.b)
 
                      rpio2 =arm+pi/2.;
-                     fingerTwist=(flip*(t-6)+twist/2.+12)/12.*2.*pi
+                     fingerTwist=(flip*(t-6)+twist/2.+12)/12.*2.*pi;
+
                      let x = widt*-Math.sin(rpio2+fingerTwist+pi);
                      let y = widt*-Math.cos(rpio2+fingerTwist+pi);
                      let xr = pi/12.*lengt*-Math.sin(arm+fingerTwist+pi);
@@ -1367,7 +1373,7 @@ var fingerStride = 0;
                      let offsetX=-Math.sin(fingerTwist)/1.5;
                      let offsetY=-Math.cos(fingerTwist)/1.5;
                      let depth = -.98;//this depth should mean that half the trail is above and half below
-                               
+
                       starsANDwitnessesPositionAttribute.setXYZ(fingerStride,  -x+offsetX,    -y+offsetY,  depth)
                         starsANDwitnessesPositionAttribute.setXYZ(fingerStride+1,   x+offsetX,    y+offsetY,  depth)
                           starsANDwitnessesPositionAttribute.setXYZ(fingerStride+2, (xr+x)+offsetX, (yr+y)+offsetY,  depth)
@@ -1581,7 +1587,7 @@ for(let n = 0; n < polygons.length; n++)
                         // polygons[n].dy*=1.-baseMag;
 
 
-        if (distanceFromCenter<=1.)
+        if (distanceFromCenter<=1)
         {
             let compound = interpolation*baseMag/60.*window.movementRate;
             polygons[n].dx+=-Math.cos(angleTarget)*compound;
