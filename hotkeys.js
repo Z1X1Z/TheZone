@@ -46,11 +46,29 @@ if(//!(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform ==
 window.addEventListener('keydown', function(event) {if(window.uniformsLoaded)callKey(event); return true;}, false);
 
 function callKey(event){
-  //  event.preventDefault(); event.stopImmediatePropagation();
     let key = event.key;
+    if(key=="/"&&!event.shiftKey){  event.preventDefault(); event.stopImmediatePropagation();}
+
     var x=null;
     if(!event.shiftKey)x = parseInt(String.fromCharCode( event.keyCode));
-    if (x>0&&x<=4&& document.activeElement.className!="num")
+
+
+    //meta keys like ctrlKey must be processed first and should have symbol preferably
+    if(key == "k" && event.ctrlKey)
+    {
+        window.timeRESET= window.TIMESTAMP;
+        if(window.ChristoDecrypto==0.)
+        {
+            window.ChristoDecrypto = -1.3247179572447460259609088544780973407344040569017333645340150503028278512455475940546993479817872803299109209947422074251089026390458977955943147570967234717541668390388674187517369315842535499082466223545337273504589879909568150627745509802486213012169894157524574548625075626524610368938904839932269952074975962828868556908150704513696109853352577281586033441141927828273765296032993584674231028483241695239006108543338219;
+            if(uniforms.metaCarousel.value==0)uniforms.metaCarousel.value=-1;
+        }
+        else
+        {
+            window.ChristoDecrypto = 0 ;
+            uniforms.metaCarousel.value=0.;
+        }
+    }
+    else if (x>0&&x<=4&& document.activeElement.className!="num")
     {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
     else if (key=="+"){rez /=1.01; renderer.setPixelRatio( rez);}
     else if (key=="+"){rez *=1.01; renderer.setPixelRatio( rez);}
@@ -153,7 +171,7 @@ function callKey(event){
     else if (key=="u") uniforms[ "petals" ].value += 1.;
     else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%8;
 
-    else if (key=="/"){
+    else if (key=="?"){
         if(uniforms[ "spirated" ].value==0)uniforms[ "spirated" ].value=1;
         else if(uniforms[ "spirated" ].value==1)uniforms[ "spirated" ].value=-1;
         else if(uniforms[ "spirated" ].value==-1)uniforms[ "spirated" ].value=0;
