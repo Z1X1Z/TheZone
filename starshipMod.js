@@ -595,7 +595,7 @@ function init() {
 
       micIn : {  value: null }, // float array (vec3)
       time: {value: 1.0 },
-  rate: {value: 1./window.movementRate },
+  rate: {value: 1.},
 
       zoom: {value: window.zoom },
       colorCombo: {value: 1 },
@@ -903,9 +903,11 @@ function takeNextScoreSlice(start){
           window.startTimeSecondMantissaMagnified = ((date/1000.-Math.round(date)/1000.)-.5)*144000;//for orienting the dance to time
                     
                     
-                    
-                    
+                    window.ChristoDecrypto = 0.;
+                    window.timeRESET =0;
+                    window.TIMESTAMP;
    function animate( timestamp ) {
+
      adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
     
     
@@ -917,11 +919,15 @@ function takeNextScoreSlice(start){
     if(starSpin!=0)twist=(uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*starSpin*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel
      
      
-     
-     uniforms.rate.value= 1.*(uniforms.externalCores.value+uniforms.centralCores.value)*timestamp/1000.;//this step is Decrypto Cristo it may not need timestamp
-     console.log(uniforms.rate.value)
-    
-    
+     window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
+    if(window.ChristoDecrypto!=0) uniforms.rate.value=            window.ChristoDecrypto*uniforms.externalCores.value*(timestamp-window.timeRESET)/1000
+     else uniforms.rate.value=1.;
+     //console.log(uniforms.rate.value)
+         
+         
+         
+         
+
     elapsedTimeBetweenFrames = (timestamp-lastTime);
     if(elapsedTimeBetweenFrames>interval)
     {FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
@@ -1810,9 +1816,11 @@ for(var n = 0; n<targets.length;n++){
                         
                 if(textON)document.getElementById("textWindow").innerHTML =
                     "<div sytle='font-size: 16px;'>"+
-                    "cores:"+(Math.floor(uniforms["centralCores"].value)+
-                    cloverSuperCores*singleHyperCoreDepth+uniforms.upCoreCycler.value)+
-                    ", zoom: "+(zoom/2.**(singleHyperCoreDepth*cloverSuperCores))+"<p style='margin : 0px'></p>"+
+                    
+                    "cores:"+(Math.floor(uniforms["centralCores"].value)+cloverSuperCores*singleHyperCoreDepth+uniforms.upCoreCycler.value)+
+                    " outerCores: "+Math.floor(uniforms["externalCores"].value)+", <p style='margin : 0px'></p>"+
+
+                    "zoom: "+(zoom/2.**(singleHyperCoreDepth*cloverSuperCores))+"<p style='margin : 0px'></p>"+
                     "real part: "+ coordY +"<p style='margin : 0px'></p>"+
                     "imaginary part: "+ coordX+"<p style='margin : 0px'></p>"+
                     "FPS: "+Math.round(FPS)
