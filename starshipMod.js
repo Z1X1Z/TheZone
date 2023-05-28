@@ -920,7 +920,7 @@ function takeNextScoreSlice(start){
      
      
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
-    if(window.ChristoDecrypto!=0) uniforms.rate.value=            window.ChristoDecrypto*uniforms.externalCores.value*(timestamp-window.timeRESET)/1000
+    if(window.ChristoDecrypto!=0) uniforms.rate.value=          1./(  window.ChristoDecrypto*uniforms.externalCores.value)*(timestamp-window.timeRESET)/10.;
      else uniforms.rate.value=1.;
      //console.log(uniforms.rate.value)
          
@@ -935,10 +935,24 @@ function takeNextScoreSlice(start){
     
     
     
-    if (uniforms["MetaCored"].value){
-        uniforms[ "centralCores" ].value = Math.log(zoom)/Math.log(.5);
-        uniforms[ "externalCores" ].value =(uniforms[ "centralCores" ].value)*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*0.9551195;
+    if (uniforms["MetaCored"].value)
+     {
         
+        var precores = -.75;
+        if(uniforms.morph.value!=0.)precores-=.75;
+        if(uniforms.wheel.value)precores-=.25;
+        if(uniforms.cloverSlide.value)precores-=.25;
+        if(uniforms.spirated.value!=0.)precores+=.25;
+        var logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
+
+        
+        uniforms[ "centralCores" ].value = Math.log(zoom)/Math.log(.5)+precores    ;
+         if(uniforms[ "morph" ].value!=0.)uniforms[ "centralCores" ].value*=3./2.;//stabilize morph dance collaboration
+
+        uniforms[ "externalCores" ].value =(uniforms[ "centralCores" ].value)*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*logStabilizationConstant;
+        
+        if(uniforms[ "Spoker" ].value&&uniforms[ "MetaCored" ].value)
+            uniforms[ "externalCores" ].value*=4./3./(1./Math.log(3.)+(1.-1./Math.log(3.))/1.75);
     }
     
     
