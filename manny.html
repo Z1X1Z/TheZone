@@ -978,18 +978,21 @@ float r, b, l;
                        }
                    return clamp(vec3(l+x+r+c),0.,1.);
                }
-                                  
+                                   
 vec3 tol(vec2 p, vec2 t){
                          if(chirality==-1)p=p.yx;
 vec2 colorAccumulator =vec2(0.);
 vec3 heartColors = vec3(0.);
-/*
-float precores = 0.;
-if(false&&morph!=0.)precores=-3./log(.5);
-else if(!wheel)precores=-1.;
-*/
+
+float precores = -.75;
+if(morph!=0.)precores-=.75;
+if(wheel)precores-=.25;
+if(cloverSlide)precores-=.25;
+if(spirated!=0.)precores+=.25;
+
+
 float cored =0.;
-if(MetaCored)cored= log(zoom)/log(.5)-1.;
+if(MetaCored)cored= log(zoom)/log(.5)+precores;
 else cored = centralCores;
 float c = length(p);
 float loops=0.;
@@ -1041,7 +1044,8 @@ float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
 vec3 beta =vec3(1.);
 for (float counter=0.;counter<iterations;counter++)if(length(s)<50.){
     
-    
+    if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*2.*PI/(atan(s.y,s.x)-PI*spirated);
+
            vec2 cloverMAP = (spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+PI))/2.+.5;
                                    
                                    vec2 ColorWheelClover;
@@ -1084,7 +1088,6 @@ if(onehundredfortyfourthousand)
 
    colorAccumulator+=s;
    if(Refractelate&&length(s)>refractelC){s/=refractelC;} //refractelC/=4./3.;}
-                             if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*2.*PI/(atan(s.y,s.x)-PI*spirated);
 
    s=vec2(
         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
@@ -1093,7 +1096,7 @@ if(onehundredfortyfourthousand)
    
        if(dotted)s/=dot(-m,t)*dot(m,-t);
 
-       if(spirated!=0.&&wheel)s+=m-t;
+       if(spirated!=0.&&morph!=0.)s+=m-t;
    else s+=t-m;//plus t is lobes, -t is circles with dance
    
        if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the body steps on the clover
@@ -1143,7 +1146,7 @@ if(dstnce<2./3.&& loops+counter-continuumCounter<=hyperCore)//not sure if i is 2
   else  if(mod(float(i),4.)==3.)wise=1.;
   
   if(metaCarousel!=0.
-     &&float(i)>=hyperCore-loops-counter+continuumCounter-.5&&!continuumClover)     //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
+     &&(float(i)>=hyperCore-loops-counter-.5||continuumClover))     //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
         s=spin2(s,time*wise*metaCarousel*(1.+petals/6.)*rate);
 
 }
@@ -1849,7 +1852,8 @@ vec2 dance = vec2(0.);
                                                  vec2 t =vec2(lerp(time/2.),lerp(time*.618/2.));
                                  vec3 mannyFace = vec3(0.);
 
-     if(colorCombo<=10)zoomer=tol(backGround, dance2);
+         if(colorCombo<=10)zoomer=tol(backGround, dance2);
+
      else if (colorCombo==11||colorCombo==18)zoomer=heartZoom(backGround+driftCanceller, dance);
      else if (colorCombo==13)zoomer=tokogae(backGround,vec2(zoom));
      else if (colorCombo==14)zoomer=TOLTOK(backGround,dance2);
