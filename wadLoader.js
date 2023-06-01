@@ -99,7 +99,6 @@ function followSound(e){
         angleSound=((angleSound-initialAngleSound[id])+pi/2.+4.*pi)%(2*pi)*window.flip+initialAngleSound[id];
    
         let frequency = Math.pow(2.,((angleSound/pi/2*12)-window.twist*window.flip/2.+correction)/12.)*window.ConcertKey/2.;
-                                 console.log(frequency)
         if(isFinite(frequency)&&frequency>0.&&
            angleSound-initialAngleSound[id]!=0){
             if(typeof sound[id]=="object"){
