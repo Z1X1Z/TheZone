@@ -1,10 +1,16 @@
+var THREE;
+if(window.useCDN)import("three").then(module => { THREE=module}).catch((err) => {}).finally((err) => {});
+else{
+    console.log("load old Threejs for offline")
+    document.getElementById("threeJSscript").src="three.js";
+}
+
+
 function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
     if(typeof THREE=="object" && document.visibilityState=="visible"
        &&(window.micOn||location.hash.includes("t"))){
        document.getElementById( "background_wrap").style =  "height: 0px; width: 0px;"
-        
         //"background-image: none;";//turn off splash!
-
         document.getElementById( "load message").innerHTML = "";//turn off splash!
 
                 if(location.hash.includes("t"))
@@ -14,6 +20,7 @@ function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js lo
             init();
      }
     else setTimeout(stallTillTHREELoaded,100);
+
     }//setTimeout waits for 10ms then runs stallTillTHREELoaded()
 stallTillTHREELoaded();
 
