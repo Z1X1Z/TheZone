@@ -1,4 +1,3 @@
-
 function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
     if(typeof THREE=="object" && document.visibilityState=="visible"
        &&(window.micOn||location.hash.includes("t"))){
@@ -17,6 +16,7 @@ function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js lo
     else setTimeout(stallTillTHREELoaded,100);
     }//setTimeout waits for 10ms then runs stallTillTHREELoaded()
 stallTillTHREELoaded();
+
 const xyStarParticleArray=Array();
 window.zoom=1.;
 
@@ -42,7 +42,7 @@ window.twist = 0;
 window.flip = 1;
 
 let rez=.5;
-//if (navigator.maxTouchPoints <1) rez = 1;
+if (navigator.maxTouchPoints <1) rez = 1;
 let colorSound;
 let center = false;
      
@@ -95,7 +95,7 @@ window.zoomOutRatchetThreshold=1./bufferSize;
 const spirray0 = Array(bufferSize);
 const spirray1 = Array(bufferSize);
 const starArms = numberOfBins;
-const Fret = {x:null,y:null,index:null,volume:0.,note:null};
+let Fret = {x:null,y:null,index:null,volume:0.,note:null};
 const loudestFret=Array(4).fill(Fret);
 function vectorize4(){
     for(var g = 0;g<loudestFret.length;g++)loudestFret[g]=Object.assign({},Fret);
@@ -146,11 +146,12 @@ let len=0;
 let spiregulator=0;
 let phase = 0;
 let onO = false;
+let largest_loop = 0;
 
 function makeSpirograph(){
       phase = phase % (pi*2);
       len = 0;
-      let adjConstant = 1./(pitch)*Math.PI*2.;
+      const adjConstant = 1./(pitch)*Math.PI*2.;
     var maxSamp=0.;
     for(var t=0; t<bufferSize;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
       if(Math.abs(inputData[0])>.0    )
@@ -173,7 +174,7 @@ function makeSpirograph(){
 }
 function spiral_compress(){
     let freq = 0;
-    let z = dataArray;
+    const z = dataArray;
 
     for(let n = 0; n<starArms; n++){testar[n] = 0;mustarD[n] = 1;}
     for(let n=0; n<numberOfBins; n++)
@@ -182,14 +183,14 @@ function spiral_compress(){
     let d =1.;
     if(n!=0)   d = (z[n+1]-z[n-1])/(z[n-1]+z[n+1]);
     else d = (z[n+1])/(z[n]+z[n+1])/2.;
-    let nAdj = n + d*4 ;
+    const nAdj = n + d*4 ;
     //if (Math.abs(nAdj-n) < 10)
     if (Math.abs(d)<4+1.)
         freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
         else freq = audioX.sampleRate*n/numberOfBins
         //    freq = 440; //check for concert A
  
-    let note24 =24*Math.log(freq/440)/Math.log(2.)+49*2;//I would like this 69 to be a 49 as it is it centers around e6
+    const note24 =24*Math.log(freq/window.ConcertKey)/Math.log(2.)+49*2;//I would like this 69 to be a 49 as it is it centers around e6
                           if (!onO){
         testar[(Math.round(note24))%24] += Math.abs(z[n]);
   
@@ -202,7 +203,7 @@ function spiral_compress(){
   }
 
 };
-
+window.ConcertKey = 440;
 
 
 
@@ -221,7 +222,7 @@ function fiveAndSeven(){
       let  starNote = 0 //ranges up to 12
         for(let n = 0; n<numberOfBins; n++)        {
             //mustard is in 24ths, here we want 12ths so we divide by two
-            let twelfths = (mustarD[n])/2.+12//A1 is 1 with +12
+            const twelfths = (mustarD[n])/2.+12//A1 is 1 with +12
            
                 if( twelfths>=-.5){
                     starNote = Math.round(twelfths)%12;
@@ -264,7 +265,7 @@ var totalAMP;
 var angle=0.;
                            function spin(f, angle)
                            {    //https://en.wikipedia.org/wiki/Rotation_matrix
-                               var fxb=f[0];
+                               const fxb=f[0];
                                f[0]=-f[0]*-Math.cos(-angle)-f[1]*-Math.sin(-angle);
                             f[1]=fxb*-Math.sin(-angle)-f[1]*-Math.cos(-angle);
                             return f;
@@ -296,7 +297,7 @@ function  move()
         lastPitch = pitch;
         
 if (totalAMP>zoomOutRatchetThreshold) pitch =    audioX.sampleRate/calculatePitch();
-        let notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
+        const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
         if(!notNyquist) pitch = lastPitch;
     if (isFinite(pitch) &&pitch>0&& notNyquist &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
         aboveThreshold = true;
@@ -305,17 +306,15 @@ if (totalAMP>zoomOutRatchetThreshold) pitch =    audioX.sampleRate/calculatePitc
     }
     else{aboveThreshold = false; on = false}
 lastNote = note;
- note = 12*Math.log(pitch/440)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
-let t =  (note )*flip+twist/2;
+ note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
+const t =  (note )*flip+twist/2;
 if(isFinite(t))angle = -(30*t)%360;
 
 
 colorSound = new THREE.Color();
              //          colorSound.setHSL((angle+90)/360.,(180+note)/297,(180+note)/297);
-let reversableColor=0.;
-                       let j = 0;
-reversableColor=(angle/360.+twist/24.)*flip+120/360.;
-                       let colortone = note/lightingScaleTrail;
+const reversableColor=(angle/360.+twist/24.)*flip+120/360.;
+                       const colortone = note/lightingScaleTrail;
     colorSound.setHSL(reversableColor,1.,(colortone<=.75)?colortone:.75);//lighting {note/x} should be 120 but it's out of the vocal range
 
 pitchCol[f]  = colorSound;
@@ -334,16 +333,16 @@ angle = ((angle+180)/360*2*pi);
                        FEEDBACKuniformsFlip.d.value=[d_x,d_y]
          d_x*=volume;
          d_y*=volume;
-         var spunD = [d_x,d_y];
+         const spunD = [d_x,d_y];
                        
                     if(uniforms.carousel.value!=0.)         spunD=spin(spunD,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
-          let d_xS=spunD[0];
-          let d_yS=spunD[1];
+          const d_xS=spunD[0];
+          const d_yS=spunD[1];
 
-    bx=coordX+d_xS*MR*zoom*interpolation;
-  by=coordY+d_yS*MR*zoom*interpolation;
+   const bx=coordX+d_xS*MR*zoom*interpolation;
+  const by=coordY+d_yS*MR*zoom*interpolation;
                        
-    let sqC = Math.sqrt(bx*bx+by*by);
+    const sqC = Math.sqrt(bx*bx+by*by);
 
      if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold&&on){
 
@@ -381,7 +380,7 @@ if(trailDepth<trailLength||on)//||on
 f++;//this is the primary drive chain for the trail. it should be a global
 if (f>=trailDepth)f=0;
     
-let radius = interpolation*MR*4./window.pixelShaderSize;
+const radius = interpolation*MR*4./window.pixelShaderSize;
  xAdjusted= d_x*radius;
  yAdjusted= d_y*radius;
 
@@ -550,6 +549,8 @@ function init() {
       
     scene.add(starMesh);//20+ minutes error free
      scene.add(starsANDwitnessesMesh)
+     
+     
     // scene.add(starStreamMesh)
      
      
@@ -805,7 +806,7 @@ let       preserveOuterCore = true;
                        
                        
 function zoomRoutine(){
-    let metaDepth=.00000075;//due to pixelization limits
+    const metaDepth=.00000075;//due to pixelization limits
     let zoomCone=metaDepth*Math.sqrt(coordX*coordX+coordY*coordY);
     if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
     
@@ -939,11 +940,11 @@ function takeNextScoreSlice(start){
      {
         
         var precores = -.75;
-        if(uniforms.morph.value!=0.)precores-=.75;
+        if(uniforms.morph.value!=0.)precores-=2.25;
         if(uniforms.wheel.value)precores-=.25;
         if(uniforms.cloverSlide.value)precores-=.25;
         if(uniforms.spirated.value!=0.)precores+=.25;
-        var logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
+        const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
 
         
         uniforms[ "centralCores" ].value = Math.log(zoom)/Math.log(.5)+precores    ;
@@ -996,21 +997,21 @@ if( !window.touchMode&&!window.touchOnlyMode) {
         }
     }
     if(Math.round(note) ==-854)note="undefined";
-    let noteNameNumber=Math.floor(Math.round(note))%12;
-    let hour =Math.floor(Math.floor(note))%12;
+    const noteNameNumber=Math.floor(Math.round(note))%12;
+    var hour =Math.floor(Math.floor(note))%12;
     if (hour==0)hour = 12;
-    let minute =(note-Math.floor(note))*60;
-    let second =(minute-Math.floor(minute))*60
-    let timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
-    let notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","F#","G"];
+    const minute =(note-Math.floor(note))*60;
+    const second =(minute-Math.floor(minute))*60
+    const timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
+    const notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","F#","G"];
 
 
 
-     let noteName = notes[noteNameNumber];
-     let cents = Math.round((note-Math.round(note))*100);
-     let fr = Math.round(pitch);
-     let n_n = Math.round(note);
-     let cores = Math.floor(uniforms["centralCores"].value)+cloverSuperCores*singleHyperCoreDepth+uniforms.upCoreCycler.value;
+     const noteName = notes[noteNameNumber];
+     const cents = Math.round((note-Math.round(note))*100);
+     const fr = Math.round(pitch);
+     const n_n = Math.round(note);
+     const cores = Math.floor(uniforms["centralCores"].value)+cloverSuperCores*singleHyperCoreDepth+uniforms.upCoreCycler.value;
       if(textON)document.getElementById("textWindow").innerHTML =
 "<div sytle='font-size: 16px;'>"+
 
@@ -1036,20 +1037,20 @@ else if(blankBackground) {
     lineMat.color = colorSound;
   }
 
-  let d = -.991;
+  const d = -.991;
                             
-                            let tx = 0, ty = 0, txlast = 0, tylast=0,greyness,greynessLast;
+                            let tx = 0, ty = 0,greyness;
                             
     const linePositionAttribute = lineGeometry.getAttribute( 'position' );
     const lineColorAttribute = lineGeometry.getAttribute( 'color' );
   var lineStride=0;
   if (on)for (let r= 0; r < bufferSize; r +=1) {
       scene.add(line)
-         txlast=tx;
-         tylast=ty;
+       const  txlast=tx;
+       const  tylast=ty;
      tx = spirray0[r]/spiregulator;
      ty =  spirray1[r]/spiregulator;
-         greynessLast = greyness
+        const greynessLast = greyness
          greyness = 1.-Math.sqrt(tx*tx+ty*ty)**1.3247
         // pointColor.push( greynessLast, greynessLast, greynessLast,greyness, greyness, greyness );
       linePositionAttribute.setXYZ(lineStride,txlast,tylast, d)
@@ -1075,7 +1076,7 @@ else if(blankBackground) {
    var minTestar=100000000000000;
 
 
-                            let maxToMin = Math.max(height,width)/Math.min(height,width);
+                            const maxToMin = Math.max(height,width)/Math.min(height,width);
     
 
 if(!window.touchMode){
@@ -1093,9 +1094,9 @@ if(!window.touchMode){
             }
         }
         
-        let fill =1000./(timestamp - timestamplast)*secondsToEdge;//This should be set to either sampleRate/fftSize or by predicted FPS
+        const fill =1000./(timestamp - timestamplast)*secondsToEdge;//This should be set to either sampleRate/fftSize or by predicted FPS
         timestamplast = timestamp;
-        let waterRadiusScalar = 7./8.;
+        const waterRadiusScalar = 7./8.;
 
         
         
@@ -1108,26 +1109,26 @@ if(!window.touchMode){
             
             if(isFinite(testar[g])&&testar[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.){
                 
-                var arm =(flip*mustarD[g]+twist+12)%24./24.*pi*2.;
-                let lengtOriginal=(testar[g]-minTestar)/(maxTestar-minTestar);//twice applied
+                const arm =(flip*mustarD[g]+twist+12)%24./24.*pi*2.;
+                const lengtOriginal=(testar[g]-minTestar)/(maxTestar-minTestar);//twice applied
                 var widt = (1.-lengtOriginal)*starshipSize;
                 if (widt==0)widt=starshipSize;
                 //var widt =starshipSize;
-                var vop = new THREE.Color();
+                const vop = new THREE.Color();
                 vop.setHSL((-mustarD[g]+8)%24./24., mustarD[g]/lightingScaleStar,mustarD[g]/lightingScaleStar);//297 is around the highest heard note
                 
                 
-                rpio2 =arm+pi/2.;
+                const rpio2 =arm+pi/2.;
                 if(RockInTheWater==0||RockInTheWater==1)
                 {
                     
-                    let x = widt*-Math.sin(rpio2);
-                    let y = widt*-Math.cos(rpio2);
-                    let xr = lengtOriginal*-Math.sin(arm);
-                    let yr = lengtOriginal*-Math.cos(arm);
-                    let depth = -1.+lengtOriginal/maxToMin*waterRadiusScalar;//shortest bar on top
+                    const x = widt*-Math.sin(rpio2);
+                    const y = widt*-Math.cos(rpio2);
+                    const xr = lengtOriginal*-Math.sin(arm);
+                    const yr = lengtOriginal*-Math.cos(arm);
+                    const depth = -1.+lengtOriginal/maxToMin*waterRadiusScalar;//shortest bar on top
                     
-                    let starshipseethrough = lengtOriginal;
+                    const starshipseethrough = lengtOriginal;
                     //for(var yy=0;yy<3;yy++)
                     if (RockInTheWater==1)
                         for(var yy=0;yy<3;yy++)
@@ -1248,17 +1249,17 @@ if(!window.touchMode){
                         bulletY = (m.staticY-staticY)*blt;
                         bulletX = (m.staticX-staticX)*blt;
                     }
-                    let outSetX = w*m.xr-bulletX;//apparently something is flipped
-                    let outSetY = w*m.yr-bulletY;
+                    const outSetX = w*m.xr-bulletX;//apparently something is flipped
+                    const outSetY = w*m.yr-bulletY;
                     
                      for(var yy=0;yy<6;yy++) starStreamColorAttribute.setXYZW(starStreamStride+yy, m.vop.r, m.vop.g, m.vop.b,-depthINNER)
                      
-                     let nx =-m.x+outSetX
-                     let ny =-m.y+outSetY
-                     let xShift=m.x+outSetX;
-                     let yShift=m.y+outSetY;
-                     let xrShifted = m.xr+xShift;
-                     let yrShifted = m.yr+yShift;
+                     const nx =-m.x+outSetX
+                     const ny =-m.y+outSetY
+                     const xShift=m.x+outSetX;
+                     const yShift=m.y+outSetY;
+                     const xrShifted = m.xr+xShift;
+                     const yrShifted = m.yr+yShift;
                      
                      starStreamPositionAttribute.setXYZ( starStreamStride, nx,    ny,  depthINNER)
                     starStreamPositionAttribute.setXYZ(starStreamStride+1,xShift,    yShift,  depthINNER)
@@ -1297,12 +1298,12 @@ else{//start drawing of just twenty four frets here
                              }
 
             for (var g=0; g<24; g++) {
-            var widt = starshipSize;
-            var arm =(flip*g+twist)%24./24.*pi*2.;
+            const widt = starshipSize;
+            const arm =(flip*g+twist)%24./24.*pi*2.;
 
-            var lengt = (testar[(g+12)%24]-minTestar)/(maxTestar-minTestar);
+            const lengt = (testar[(g+12)%24]-minTestar)/(maxTestar-minTestar);
 
-                var vop = new THREE.Color();
+                const vop = new THREE.Color();
                       vop.setHSL((20-g)%24/24.,1.,.5);
 
                   
@@ -1313,12 +1314,12 @@ else{//start drawing of just twenty four frets here
                   starColorAttribute.setXYZW(starStride+4,vop.r,vop.g,vop.b,1.)
                   starColorAttribute.setXYZW(starStride+5,vop.r,vop.g,vop.b,1.)
 
-rpio2 =arm+pi/2.;
-let x = widt*-Math.sin(rpio2);
-let y = widt*-Math.cos(rpio2);
-let xr = lengt*-Math.sin(arm);
-let yr = lengt*-Math.cos(arm);
-let depth = -1.+lengt;
+const rpio2 =arm+pi/2.;
+const x = widt*-Math.sin(rpio2);
+const y = widt*-Math.cos(rpio2);
+const xr = lengt*-Math.sin(arm);
+const yr = lengt*-Math.cos(arm);
+const depth = -1.+lengt;
 
                 
                 starPositionAttribute.setXYZ(starStride,-x,    -y,  depth)
@@ -1348,7 +1349,7 @@ const starsANDwitnessesColorAttribute = starsANDwitnessesGeometry.getAttribute( 
 var fingerStride = 0;
              fiveAndSeven();
 
-         let maxFinger = 0
+         let maxFinger = 0;
          let minFinger = 100000000;
          for (var t=0; t<12; t++) {
              for (var g=0; g<10; g++) {
@@ -1362,17 +1363,16 @@ var fingerStride = 0;
          for (var t=0; t<12; t++) {
              
              for (var g=0; g<10; g++) {
-                 var widt = starshipSize**(2.41421);
-                 var finger =twelve[t][g];
-                 var arm =(g+9)/10.*pi*2.;
+                 const widt = starshipSize**(2.41421);
+                 const finger = (isFinite(twelve[t][g]))?twelve[t][g]:0;
+                 const arm =(g+9)/10.*pi*2.;
 
-                 var lengt = (finger)/maxFinger/1.5;
-                 if (!isFinite(lengt))lengt =0;
+                 const lengt =(isFinite(maxFinger)&&maxFinger!=0)? (finger)/maxFinger/1.5 : 0;
 
 
                      var vop = new THREE.Color();
                      let BlackOrWhite;
-                     let noteGrey = Math.abs(t-(6-twist/2.)+12)%12;
+                     const noteGrey = Math.abs(t-(6-twist/2.)+12)%12;
                      if (t==7||t==5||t==2||t==0||t==10)
                          if(uniforms.colorCombo.value!=20)
                          BlackOrWhite=-1.;
@@ -1386,16 +1386,15 @@ var fingerStride = 0;
 
                      for(var yy=0;yy<6;yy++)   starsANDwitnessesColorAttribute.setXYZ(fingerStride+yy,vop.r,vop.g,vop.b)
 
-                     rpio2 =arm+pi/2.;
-                     fingerTwist=(flip*(t-6)+twist/2.+12)/12.*2.*pi;
-
-                     let x = widt*-Math.sin(rpio2+fingerTwist+pi);
-                     let y = widt*-Math.cos(rpio2+fingerTwist+pi);
-                     let xr = pi/12.*lengt*-Math.sin(arm+fingerTwist+pi);
-                     let yr = pi/12.*lengt*-Math.cos(arm+fingerTwist+pi);
-                     let offsetX=-Math.sin(fingerTwist)/1.5;
-                     let offsetY=-Math.cos(fingerTwist)/1.5;
-                     let depth = -.98;//this depth should mean that half the trail is above and half below
+                     const rpio2 =arm+pi/2.;
+                     const fingerTwist=(flip*(t-6)+twist/2.+12)/12.*2.*pi;
+                                        const x = widt*-Math.sin(rpio2+fingerTwist+pi);
+                                        const y = widt*-Math.cos(rpio2+fingerTwist+pi);
+                                        const xr = pi/12.*lengt*-Math.sin(arm+fingerTwist+pi);
+                                        const yr = pi/12.*lengt*-Math.cos(arm+fingerTwist+pi);
+                                        const offsetX=-Math.sin(fingerTwist)/1.5;
+                                        const offsetY=-Math.cos(fingerTwist)/1.5;
+                                        const depth = -.98;//this depth should mean that half the trail is above and half below
 
                       starsANDwitnessesPositionAttribute.setXYZ(fingerStride,  -x+offsetX,    -y+offsetY,  depth)
                         starsANDwitnessesPositionAttribute.setXYZ(fingerStride+1,   x+offsetX,    y+offsetY,  depth)
@@ -1450,23 +1449,22 @@ var fingerStride = 0;
 let r = (f+trailDepth-1)%trailDepth;
 let s = f;
 
-let loopLimit = trailDepth;
+var loopLimit = trailDepth;
 //if(isFinite(cx[r-1])&&isFinite(cx[s])&&isFinite(cy[r-1])&&isFinite(cy[s]))
-                 let scalar = 1.;
+                 const scalar = 1.;
 
 
                              let     timeElapsedSinceRecording=     uniforms["time"].value-trailTimeOfRecording[r];
                                   let transparencyOfTrail = 1., z = -1;
-                                  let transparencyOfTrailLast = 1, zlast = -1;
      let strideTrail = 0;
                                   
           while(loopLimit>0&&r!=f){
                  if(!trailSegmentExpired[r]&&timeElapsedSinceRecording<=trailSecondsLong){
                         // timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
-                            let zlast = z;
+                            const zlast = z;
                             z = -1.+timeElapsedSinceRecording/trailSecondsLong;
                         //   if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong);
-                            transparencyOfTrailLast =transparencyOfTrail;
+                            const transparencyOfTrailLast =transparencyOfTrail;
                             transparencyOfTrail =1.-timeElapsedSinceRecording/trailSecondsLong;
                            if(transparencyOfTrail<.01)transparencyOfTrail=.01;
                                           trailColorAttribute.setXYZW(strideTrail, pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail)
@@ -1476,22 +1474,22 @@ let loopLimit = trailDepth;
                                              trailColorAttribute.setXYZW(strideTrail+4, pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrailLast)
                                              trailColorAttribute.setXYZW(strideTrail+5, pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrailLast)
                                           
-                         let widtr = trailWidth[r];
-                         let widts = trailWidth[s];
-                         let widtXperpR=widtr*xPerp[r];
-                         let widtYperpR=widtr*yPerp[r];
-                         let widtXperpS=widts*xPerp[s];
-                         let widtYperpS=widts*yPerp[s];
+                         const widtr = trailWidth[r];
+                     const widts = trailWidth[s];
+                     const widtXperpR=widtr*xPerp[r];
+                     const widtYperpR=widtr*yPerp[r];
+                     const widtXperpS=widts*xPerp[s];
+                     const widtYperpS=widts*yPerp[s];
                          
-                         let xrFinalNegatived = cx[r]-widtXperpR;
-                         let xrFinalPositived = cx[r]+widtXperpR;
-                         let xsFinalNegatived = cx[s]-widtXperpS;
-                         let xsFinalPositived = cx[s]+widtXperpS;
+                     const xrFinalNegatived = cx[r]-widtXperpR;
+                     const xrFinalPositived = cx[r]+widtXperpR;
+                     const xsFinalNegatived = cx[s]-widtXperpS;
+                     const xsFinalPositived = cx[s]+widtXperpS;
                          
-                         let yrFinalNegatived = cy[r]-widtYperpR;
-                         let yrFinalPositived = cy[r]+widtYperpR;
-                         let ysFinalNegatived = cy[s]-widtYperpS;
-                         let ysFinalPositived = cy[s]+widtYperpS;
+                     const yrFinalNegatived = cy[r]-widtYperpR;
+                     const yrFinalPositived = cy[r]+widtYperpR;
+                     const ysFinalNegatived = cy[s]-widtYperpS;
+                     const ysFinalPositived = cy[s]+widtYperpS;
 
 
                                     trailPositionAttribute.setXYZ(strideTrail,xrFinalNegatived, yrFinalNegatived,z)
@@ -1539,7 +1537,7 @@ else if (circleX<-width)circleX=width;
 if (circleY>height)circleY=-height;
 else if (circleY<-height)circleY=height;
                                   circleMaterial.color=colorSound;
-                                  let sides = (isFinite(note))? Math.round((Math.abs((note+.5)%1.-.5))*12.)%12+2. : 0.;
+                                        const sides = (isFinite(note))? Math.round((Math.abs((note+.5)%1.-.5))*12.)%12+2. : 0.;
                                   circle.geometry=new THREE.CircleGeometry(dotSize,sides,0.);
 //circleGeometry.computeBoundingBox ();
 
@@ -1586,12 +1584,14 @@ if(window.gameOn&&allCaught)
     }
 }
 else if(!window.gameOn){polygons=[]; level = 0; metaLevel=0;}
-
+                                        
+                                        const baseMag=(1.-(metaLevel-level)/(metaLevel))/2.;
+                                        const compound = interpolation*baseMag/60.*window.movementRate;
 
 for(let n = 0; n < polygons.length; n++)
 {
-    let xFromCent = polygons[n].centerX;
-    let yFromCent = polygons[n].centerY;
+                         const xFromCent = polygons[n].centerX;
+                         const yFromCent = polygons[n].centerY;
 
                 if (xFromCent>width)polygons[n].centerX = -width;
                 else if (xFromCent<-width)polygons[n].centerX = width;
@@ -1599,12 +1599,11 @@ for(let n = 0; n < polygons.length; n++)
                 else if  (yFromCent<-height)polygons[n].centerY = height;
 
 
-        let angleTarget = Math.atan2(yFromCent,xFromCent);
-        let baseMag=(1.-(metaLevel-level)/(metaLevel))/2.;
-        let speed = Math.sqrt(polygons[n].dx*polygons[n].dx+polygons[n].dy*polygons[n].dy)
-        let speedLimit = 1.;
+                         const angleTarget = Math.atan2(yFromCent,xFromCent);
+                                        const speed = Math.sqrt(polygons[n].dx*polygons[n].dx+polygons[n].dy*polygons[n].dy)
+                                        const speedLimit = 1.;
 
-                         let distanceFromCenter = Math.pow(xFromCent*xFromCent+yFromCent*yFromCent,.5);
+                                        const distanceFromCenter = Math.pow(xFromCent*xFromCent+yFromCent*yFromCent,.5);
 
                        // polygons[n].dx*=1.-baseMag;//resistance to speed accumulation
                         // polygons[n].dy*=1.-baseMag;
@@ -1612,7 +1611,6 @@ for(let n = 0; n < polygons.length; n++)
 
         if (distanceFromCenter<=1)
         {
-            let compound = interpolation*baseMag/60.*window.movementRate;
             polygons[n].dx+=-Math.cos(angleTarget)*compound;
             polygons[n].dy+=-Math.sin(angleTarget)*interpolation*compound;
         }
@@ -1622,9 +1620,9 @@ if (!on)neutralizer=0.;
                 polygons[n].centerX += (d_x*neutralizer-polygons[n].dx)*MR;
                 polygons[n].centerY += (d_y*neutralizer-polygons[n].dy)*MR;
 
-    let ddX= circleX-polygons[n].centerX;
-    let ddY= circleY-polygons[n].centerY;
-    let distDot = Math.sqrt(ddX*ddX+ddY*ddY);
+    const ddX= circleX-polygons[n].centerX;
+    const ddY= circleY-polygons[n].centerY;
+    const distDot = Math.sqrt(ddX*ddX+ddY*ddY);
 
 
     if ( distanceFromCenter<polyRad+dotSize &&polygons[n].exited){//here I use dotSize, though it's really the center trigger
@@ -1674,7 +1672,10 @@ scene.add( targets[n] );
 
                                                 var firStaRivers =  true;
                                                 FEEDBACKuniforms.STAR.value=renderTarget.texture;
-
+                        
+                        FEEDBACKuniforms.eden.value=uniforms.eden.value;
+                        FEEDBACKuniformsFlip.eden.value=uniforms.eden.value;
+                         
                         
                         if(uniforms.eden.value==4)
                         {
@@ -1685,20 +1686,20 @@ scene.add( targets[n] );
                             FEEDBACKuniforms.loudestFret3.value=[loudestFret[2].x,loudestFret[2].y];
                             FEEDBACKuniforms.loudestFret4.value=[loudestFret[3].x,loudestFret[3].y];
                             
-                            FEEDBACKuniforms.volumeFret1.value=loudestFret[0].volume/maxTestar;
-                            FEEDBACKuniforms.volumeFret2.value=loudestFret[1].volume/maxTestar;
-                            FEEDBACKuniforms.volumeFret3.value=loudestFret[2].volume/maxTestar;
-                            FEEDBACKuniforms.volumeFret4.value=loudestFret[3].volume/maxTestar;
+                            FEEDBACKuniforms.volumeFret1.value=1;
+                            FEEDBACKuniforms.volumeFret2.value=loudestFret[1].volume/loudestFret[0].volume;
+                            FEEDBACKuniforms.volumeFret3.value=loudestFret[2].volume/loudestFret[0].volume;
+                            FEEDBACKuniforms.volumeFret4.value=loudestFret[3].volume/loudestFret[0].volume;
                             
                             FEEDBACKuniformsFlip.loudestFret1.value=[loudestFret[0].x,loudestFret[0].y];
                             FEEDBACKuniformsFlip.loudestFret2.value=[loudestFret[1].x,loudestFret[1].y];
                             FEEDBACKuniformsFlip.loudestFret3.value=[loudestFret[2].x,loudestFret[2].y];
                             FEEDBACKuniformsFlip.loudestFret4.value=[loudestFret[3].x,loudestFret[3].y];
                             
-                            FEEDBACKuniformsFlip.volumeFret1.value=loudestFret[0].volume/maxTestar;
-                            FEEDBACKuniformsFlip.volumeFret2.value=loudestFret[1].volume/maxTestar;
-                            FEEDBACKuniformsFlip.volumeFret3.value=loudestFret[2].volume/maxTestar;
-                            FEEDBACKuniformsFlip.volumeFret4.value=loudestFret[3].volume/maxTestar;
+                            FEEDBACKuniformsFlip.volumeFret1.value=1.;
+                            FEEDBACKuniformsFlip.volumeFret2.value=loudestFret[1].volume/loudestFret[0].volume;
+                            FEEDBACKuniformsFlip.volumeFret3.value=loudestFret[2].volume/loudestFret[0].volume;
+                            FEEDBACKuniformsFlip.volumeFret4.value=loudestFret[3].volume/loudestFret[0].volume;
                               }
 
                                                 backBufferFlip=false;
@@ -1752,7 +1753,7 @@ scene.add( targets[n] );
                                  }
                                  else if(!window.blankBackground){
                                       uniforms.STAR.value=null;
-                                      let shaderMeshClone = mesh.clone();
+                                      const shaderMeshClone = mesh.clone();
                                       scene.add(shaderMeshClone);
                                       renderer.render( scene, camera );
                                       scene.remove(shaderMeshClone);
@@ -1803,16 +1804,16 @@ for(var n = 0; n<targets.length;n++){
 
                 }
                 else lastZoom=zoom/zoomRate();
-                        var coordinator = pixelShaderSize/2.;//this is the frame size in the shader: "p=vec2(...."
+                        const coordinator = pixelShaderSize/2.;//this is the frame size in the shader: "p=vec2(...."
 
                     if(pointerZoom){
-                        let xTouch = screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/coordinator);
-                        let yTouch = screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/coordinator);
-                         var touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
+                        const xTouch = screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/coordinator);
+                        const yTouch = screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/coordinator);
+                         const touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
                         uniforms.d.value.x=-xTouch;
                         uniforms.d.value.y=yTouch;
                         uniforms[ "volume" ].value=1.;
-                        let spunTouch=touchMovement;
+                        const spunTouch=touchMovement;
                               if(uniforms.carousel.value!=0.)         spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                                   coordX+= spunTouch[0];
                                   coordY+= spunTouch[1];

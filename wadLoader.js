@@ -1,7 +1,7 @@
 
 let touchNumber=new Map();
 
-function stallTillWad(){if(typeof(Wad)=="function"&&userHasGestured){initialize();} else  setTimeout(stallTillWad,10);}
+function stallTillWad(){if(typeof(Wad)=="function"&&userHasGestured){initialize();} else  setTimeout(stallTillWad,100);}
 stallTillWad()//lurker
 
 let hyperdriveTUNA = {
@@ -69,6 +69,7 @@ function startSound(e){
         //sound2[id].pitch=frequency*2.;
         //sound[id].volume=0.;
         //sound2[id].volume=volume;
+        if(typeof sound[id]=="object")
         if(isFinite(volume)&&isFinite(frequency)&&frequency>0){
             sound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:0.});
             sound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2.,volume:volume});
