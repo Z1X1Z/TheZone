@@ -102,6 +102,9 @@
              <input type="number" id="pitch Sample Size" name="pitch Sample Size" class="num" min="1" max = "2048" onkeydown="Math.floor(fractionOfFrame=document.getElementById('pitch Sample Size').value)">
                  </p>
             -->
+            <label for="ConcertKey">THE A Key Frequency (Should probably be "Concert A" 440 hz):</label>
+           <input type="number" id="ConcertKey" name="ConcertKey" class="num" onkeydown="window.ConcertKey=document.getElementById('ConcertKey').value">
+               </p>
               <input type="checkbox" id="Game On" name="t"  onclick= "
                   key  = 'e';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -615,13 +618,13 @@ void main(){
        }
        else
        {
-           cutOutDegree=2.;
-           vec2 scale = max(resolution.x,resolution.y)/resolution.yx;
+           cutOutDegree=40.;
+           vec2 scale = min(resolution.x,resolution.y)/resolution.yx;
            vec2 vUvScaled =(vUv-.5)*scale;
-             vUvEagle = (vUvScaled*volumeFret1-loudestFret1/3.)/scale*2.+.5;
-             vUvMan = (vUvScaled*volumeFret2-loudestFret2/3.)/scale*2.+.5;
-             vUvOx = (vUvScaled*volumeFret3-loudestFret3/3.)/scale*2.+.5;
-             vUvLion = (vUvScaled*volumeFret4-loudestFret4/3.)/scale*2.+.5;
+             vUvEagle = (vUvScaled*volumeFret1-loudestFret1/8.)/scale*2.+.5;
+             vUvMan = (vUvScaled*volumeFret2-loudestFret2/8.)/scale*2.+.5;
+             vUvOx = (vUvScaled*volumeFret3-loudestFret3/8.)/scale*2.+.5;
+             vUvLion = (vUvScaled*volumeFret4-loudestFret4/8.)/scale*2.+.5;
     }
             if(abs(max(vUvEagle.x,vUvEagle.y))<1.&&min(vUvEagle.x,vUvEagle.y)>0.)
                         Pishon += texture2D(STAR,vUvEagle);
@@ -985,9 +988,9 @@ vec2 colorAccumulator =vec2(0.);
 vec3 heartColors = vec3(0.);
 
 float precores = -.75;
-if(morph!=0.)precores-=.75;
-if(wheel)precores-=.25;
-if(cloverSlide)precores-=.25;
+if(morph!=0.)precores+=2.25;
+    if(wheel)precores-=.25;
+    if(cloverSlide)precores-=.25;
 if(spirated!=0.)precores+=.25;
 
 
@@ -1016,7 +1019,7 @@ float hyperCore=0.;
 
 float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
 //log stabalization constant seems to be 1./log(3.)+(1.-1./log(3.))/1.5 from 1./log(3.)+(1.-1./log(3.))/2.
-if(morph!=0.)cored*=3./2.;//stabilize morph dance collaboration
+//if(morph!=0.)cored*=3./2.;//stabilize morph dance collaboration
 if(MetaCored)hyperCore=cored*2./3.+log(lfc)*logStabilizationConstant;
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 if(outerCoresOff)hyperCore=0.;
@@ -1096,7 +1099,7 @@ if(onehundredfortyfourthousand)
    
        if(dotted)s/=dot(-m,t)*dot(m,-t);
 
-       if(spirated!=0.&&morph!=0.)s+=m-t;
+       if(morph!=0.)s+=m-t;
    else s+=t-m;//plus t is lobes, -t is circles with dance
    
        if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the body steps on the clover
