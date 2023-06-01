@@ -64,15 +64,15 @@ function startSound(e){
         
         let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
         initialAngleSound[id] = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi);
-        let frequency = Math.pow(2.,((initialAngleSound[id])/pi/2*12+correction)/12.)*220.;
+        let frequency = Math.pow(2.,((((initialAngleSound[id]*window.flip)/pi/2*12+correction)*window.flip-window.flip*window.twist/2.))/12.)*window.ConcertKey/2.;
         //sound[id].pitch=frequency;
         //sound2[id].pitch=frequency*2.;
         //sound[id].volume=0.;
         //sound2[id].volume=volume;
         if(typeof sound[id]=="object")
         if(isFinite(volume)&&isFinite(frequency)&&frequency>0){
+            sound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2,volume:volume});
             sound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:0.});
-            sound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2.,volume:volume});
             }
     }
 }
@@ -96,15 +96,17 @@ function followSound(e){
         
         let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
         let angleSound = Math.atan2(y,x);
-        angleSound=(angleSound-initialAngleSound[id]+pi/2.+4.*pi)%(2*pi)+initialAngleSound[id];
-        let frequency = Math.pow(2.,((angleSound)/pi/2*12+correction)/12.)*220.;
-        if(isFinite(frequency)&&frequency>0.&&isFinite(angleSound)&&isFinite(volume)&&isFinite(initialAngleSound[id])&&
-           angleSound-initialAngleSound[id]!=0&&angleSound-initialAngleSound[id]!=1){
+        angleSound=((angleSound-initialAngleSound[id])+pi/2.+4.*pi)%(2*pi)*window.flip+initialAngleSound[id];
+   
+        let frequency = Math.pow(2.,((angleSound/pi/2*12)-window.twist*window.flip/2.+correction)/12.)*window.ConcertKey/2.;
+                                 console.log(frequency)
+        if(isFinite(frequency)&&frequency>0.&&
+           angleSound-initialAngleSound[id]!=0){
             if(typeof sound[id]=="object"){
-                sound[id].setPitch(frequency);
-                sound2[id].setPitch(2.*frequency);
-                sound[id].setVolume(volume*(((angleSound-initialAngleSound[id]))/(2.*pi)));
-                sound2[id].setVolume(volume*(1.-((angleSound-initialAngleSound[id]))/(2.*pi)));
+                sound2[id].setPitch(frequency);
+                sound[id].setPitch(2.*frequency);
+                sound2[id].setVolume(volume*(angleSound - initialAngleSound[id])/(2.*pi));
+                sound[id].setVolume(volume*(1.-(angleSound-initialAngleSound[id])/(2.*pi)));
             }
         }
 }
