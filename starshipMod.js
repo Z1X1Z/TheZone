@@ -840,45 +840,48 @@ function zoomRoutine(){
 }
 
 
-                       /*
+                       
 
                      let thisChunk=0, lastChunk=0;
-                      let v=document.getElementById("Vibrate")
-                       v.onclick=
-function mcphrth(){
-    let audioFramesPerMillisecond=audioX.sampleRate*.001;
-    let vibrateArray=[0];
-    let thisChunkGreaterThanLastChunk=0,thisChunkLessThanLastChunk=0;
-    counter=0.;
-    for(var n=0; n<inputData.length-1;n++)
-    {
-        thisChunk+=Math.abs(inputData[n+1]-inputData[n]);
-
-        if(counter>=audioFramesPerMillisecond) {
-
-            if(thisChunk>lastChunk){
-                thisChunkGreaterThanLastChunk+=1;
-                if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
-                thisChunkLessThanLastChunk=0;
-
-            }
-                else {thisChunkLessThanLastChunk+=1;
-                    if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
-                    thisChunkGreaterThanLastChunk=0;
-                }
-
-            lastChunk=thisChunk;
-            thisChunk=0;
-            counter=0;
-        }
-        counter++;
-    }
-            try{navigator.vibrate(vibrateArray);}catch(e){console.log(e);}
+                    window.chunkSize = 0;
+                    function mcphrth(){
+     if(window.chunkSize!=0)
+     {
+         let audioFramesPerMillisecond=audioX.sampleRate*.001*window.chunkSize;
+     let vibrateArray=[0];
+     let thisChunkGreaterThanLastChunk=0,thisChunkLessThanLastChunk=0;
+     counter=0.;
+     for(var n=0; n<inputData.length-1;n++)
+     {
+         thisChunk+=Math.abs(inputData[n+1]-inputData[n]);
+         
+         if(counter>=audioFramesPerMillisecond) {
+             
+             if(thisChunk>lastChunk){
+                 thisChunkGreaterThanLastChunk+=1;
+                 if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
+                 thisChunkLessThanLastChunk=0;
+                 
+             }
+             else {thisChunkLessThanLastChunk+=1;
+                 if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
+                 thisChunkGreaterThanLastChunk=0;
+             }
+             
+             lastChunk=thisChunk;
+             thisChunk=0;
+             counter=0;
+         }
+         counter++;
+     }
+     try{navigator.vibrate(vibrateArray);}catch(e){console.log(e);}
+ }
+    mcphrth();
 
 }
 //this doesn't work, and it only would work on android not on firefox
-                        */
-                                 var volume=1;
+
+                    var volume=1;
                                  var skipNext=false;
                                  var lvs;
 
