@@ -340,7 +340,7 @@ angle = ((angle+180)/360*2*pi);
                        FEEDBACKuniformsFlip.d.value=[d_x,d_y]
          d_x*=volume;
          d_y*=volume;
-         const spunD = [d_x,d_y];
+         var spunD = [d_x,d_y];
                        
                     if(uniforms.carousel.value!=0.)         spunD=spin(spunD,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
           const d_xS=spunD[0];
@@ -933,10 +933,7 @@ function takeNextScoreSlice(start){
      
      
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
-    if(window.ChristoDecrypto!=0) uniforms.rate.value=          1./(  window.ChristoDecrypto*uniforms.externalCores.value)*(timestamp-window.timeRESET)/10.;
-     else uniforms.rate.value=1.;
-     //console.log(uniforms.rate.value)
-         
+    if(window.ChristoDecrypto!=0) uniforms.metaCarousel.value=          1./(  window.ChristoDecrypto*uniforms.externalCores.value)*(timestamp-window.timeRESET)/10.;
          
          
          
@@ -1825,7 +1822,7 @@ for(var n = 0; n<targets.length;n++){
                         uniforms.d.value.x=-xTouch;
                         uniforms.d.value.y=yTouch;
                         uniforms[ "volume" ].value=1.;
-                        const spunTouch=touchMovement;
+                        var spunTouch=touchMovement;
                               if(uniforms.carousel.value!=0.)         spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                                   coordX+= spunTouch[0];
                                   coordY+= spunTouch[1];
