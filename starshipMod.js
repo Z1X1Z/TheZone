@@ -844,9 +844,12 @@ function zoomRoutine(){
 
                      let thisChunk=0, lastChunk=0;
                     window.chunkSize = 0;
+                    let error = "no error";
+                    let vibrateArray=[0];
+
                     function mcphrth(){
-         let audioFramesPerMillisecond=audioX.sampleRate*.001*window.chunkSize;
-     let vibrateArray=[0];
+         let audioFramesPerMillisecond=audioX.sampleRate*.001;
+      vibrateArray=[0];
      let thisChunkGreaterThanLastChunk=0,thisChunkLessThanLastChunk=0;
      counter=0.;
      for(var n=0; n<inputData.length-1;n++)
@@ -856,23 +859,25 @@ function zoomRoutine(){
          if(counter>=audioFramesPerMillisecond) {
              
              if(thisChunk>lastChunk){
-                 thisChunkGreaterThanLastChunk+=1;
+                 thisChunkGreaterThanLastChunk+=audioFramesPerMillisecond;
                  if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
                  thisChunkLessThanLastChunk=0;
                  
              }
-             else {thisChunkLessThanLastChunk+=1;
+             else {thisChunkLessThanLastChunk+=audioFramesPerMillisecond;
                  if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
                  thisChunkGreaterThanLastChunk=0;
              }
-             
              lastChunk=thisChunk;
              thisChunk=0;
              counter=0;
          }
          counter++;
      }
-     try{navigator.vibrate(vibrateArray);}catch(e){console.log(e);}
+     
+     try{error = navigator.vibrate(vibrateArray
+     );}
+     catch(e){ error+=e;}
  
      if(window.chunkSize!=0)  setTimeout(mcphrth,bufferSize/audioX.sampleRate);
 
@@ -1022,7 +1027,7 @@ if( !window.touchMode&&!window.touchOnlyMode) {
      const cores = Math.floor(uniforms["centralCores"].value)+cloverSuperCores*singleHyperCoreDepth+uniforms.upCoreCycler.value;
       if(textON)document.getElementById("textWindow").innerHTML =
 "<div sytle='font-size: 16px;'>"+
-
+          error+vibrateArray+"<p style='margin : 0px'></p>"+
                                 " note: "+noteName+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
                                 "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
                                 "cores: "+cores+", zoom: "+zoom/2.**(singleHyperCoreDepth*cloverSuperCores)+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
