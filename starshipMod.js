@@ -845,8 +845,6 @@ function zoomRoutine(){
                      let thisChunk=0, lastChunk=0;
                     window.chunkSize = 0;
                     function mcphrth(){
-     if(window.chunkSize!=0)
-     {
          let audioFramesPerMillisecond=audioX.sampleRate*.001*window.chunkSize;
      let vibrateArray=[0];
      let thisChunkGreaterThanLastChunk=0,thisChunkLessThanLastChunk=0;
@@ -875,8 +873,8 @@ function zoomRoutine(){
          counter++;
      }
      try{navigator.vibrate(vibrateArray);}catch(e){console.log(e);}
- }
-     else setTimeout(mcphrth,bufferSize/audioX.sampleRate);
+ 
+     if(window.chunkSize!=0)  setTimeout(mcphrth,bufferSize/audioX.sampleRate);
 
 }
 //this doesn't work, and it only would work on android not on firefox
