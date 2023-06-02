@@ -876,7 +876,7 @@ function zoomRoutine(){
      }
      try{navigator.vibrate(vibrateArray);}catch(e){console.log(e);}
  }
-    mcphrth();
+     else setTimeout(mcphrth,bufferSize/audioX.sampleRate);
 
 }
 //this doesn't work, and it only would work on android not on firefox
