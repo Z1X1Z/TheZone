@@ -58,8 +58,7 @@ function startSound(e){
         var id = 0;
         if (navigator.maxTouchPoints > 0) //navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' ))
             id = touchNumber.get(e.identifier);
-        sound[id].stop();
-        sound2[id].stop();
+       
         
         
         let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
@@ -71,12 +70,17 @@ function startSound(e){
         //sound2[id].volume=volume;
         if(typeof sound[id]=="object")
         if(isFinite(volume)&&isFinite(frequency)&&frequency>0){
+            
+            sound[id].stop();
+            sound2[id].stop();
+            
             sound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2,volume:volume});
             sound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:0.});
             }
     }
 }
 
+                                     
 function followSound(e){
             let correlationForText=document.getElementById("allText").offsetHeight;
             correlationForText-=document.getElementById("score").offsetHeight;//bottom
