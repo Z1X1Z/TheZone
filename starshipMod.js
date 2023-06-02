@@ -197,7 +197,7 @@ function spiral_compress(){
         else freq = audioX.sampleRate*n/numberOfBins
         //    freq = 440; //check for concert A
  
-    const note24 =24*Math.log(freq/window.ConcertKey)/Math.log(2.)+49*2;//I would like this 69 to be a 49 as it is it centers around e6
+    var note24 =24*Math.log(freq/window.ConcertKey)/Math.log(2.)+49*2;//I would like this 69 to be a 49 as it is it centers around e6
                           if (!onO){
         testar[(Math.round(note24))%24] += Math.abs(z[n]);
   
@@ -843,11 +843,10 @@ function zoomRoutine(){
                        
 
                      let thisChunk=0, lastChunk=0;
-                    window.chunkSize = 0;
                     let error = "no error";
                     let vibrateArray=[0];
-
-                    function mcphrth(){
+                     window.haptic = false;
+                        function mcphrth(){
          let audioFramesPerMillisecond=audioX.sampleRate*.001;
       vibrateArray=[0];
      let thisChunkGreaterThanLastChunk=0,thisChunkLessThanLastChunk=0;
@@ -859,13 +858,13 @@ function zoomRoutine(){
          if(counter>=audioFramesPerMillisecond) {
              
              if(thisChunk>lastChunk){
-                 thisChunkGreaterThanLastChunk+=audioFramesPerMillisecond;
-                 if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
+                 thisChunkGreaterThanLastChunk+=counter;
+                 if(thisChunkLessThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
                  thisChunkLessThanLastChunk=0;
                  
              }
-             else {thisChunkLessThanLastChunk+=audioFramesPerMillisecond;
-                 if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
+             else {thisChunkLessThanLastChunk+=counter;
+                 if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkGreaterThanLastChunk);
                  thisChunkGreaterThanLastChunk=0;
              }
              lastChunk=thisChunk;
@@ -879,7 +878,7 @@ function zoomRoutine(){
      );}
      catch(e){ error+=e;}
  
-     if(window.chunkSize!=0)  setTimeout(mcphrth,bufferSize/audioX.sampleRate);
+     if(window.haptic)  setTimeout(mcphrth,bufferSize/audioX.sampleRate);
 
 }
 //this doesn't work, and it only would work on android not on firefox
