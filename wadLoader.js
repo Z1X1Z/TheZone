@@ -23,10 +23,16 @@ cutoff: 10000   //cutoff frequency of the built in lowpass-filter. 20 to 22050
         bypass: 20
     }
 };
-let correction = 11. ;
-let sound=Array(10);
-let sound2=Array(10);
+const correction = 11. ;
+const sound=Array(10);
+const sound2=Array(10);
+const feedbackPitchsound=Array(5); //updated in starshipMod
+let wadLOADED=false;
 function initialize(){
+    feedbackPitchsound[0] =  new Wad({source : 'triangle'})
+    for(var o=1;o<5;o++)feedbackPitchsound[o] =  new Wad({source : 'square'})//, tuna   : hyperdriveTUNA});
+
+   // feedbackPitchsound.play({env:{attack: 0, release:0,hold:-1},pitch:1,volume:0})
     for(var o=0;o<10;o++){
         sound[o] =  new Wad({source : 'square'})//, tuna   : hyperdriveTUNA});
      sound2[o] = new Wad({source : 'square'})//, tuna   : hyperdriveTUNA});
@@ -38,6 +44,7 @@ function initialize(){
        }
     catch{
 }
+    wadLOADED=true;
 }
 
 let initialAngleSound = Array(10);
