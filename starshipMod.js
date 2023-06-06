@@ -1,9 +1,11 @@
 var THREE;
 if(window.useCDN)import("three").then(module => { THREE=module})
 .catch((err) => {
-    console.log("Error loading threeJS module;load old Threejs instead")
-    THREE = "https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/three.min.js")//iOS needs a local module, so we give it this instead})
-.[finally((err) => {});
+    console.log("Error loading threeJS module;load old Threejs instead");
+    THREE = "https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/three.min.js"//iOS needs a local module, so we give it this instead
+    
+})
+.finally((err) => {});
 else{
     console.log("load old Threejs for offline")
     document.getElementById("threeJSscript").src="three.js";
