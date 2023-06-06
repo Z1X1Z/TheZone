@@ -4,6 +4,7 @@ else{
     console.log("load old Threejs for offline")
     document.getElementById("threeJSscript").src="three.js";
 }
+document.getElementById("threeJSscript").src="three.js";//ios flunking from the update on the update this was added on
 
 
 function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
@@ -331,7 +332,7 @@ if (totalAMP>zoomOutRatchetThreshold) pitch =    audioX.sampleRate/calculatePitc
             {
                 
                     feedbackPitchsound[v].stop();
-                    feedbackPitchsound[v].play({env:{attack: interpolation/4.,hold:interpolation*3./4., release:interpolation/2.},pitch:loudestFret[v].frequency,volume://loudestFret[v].volume
+                    feedbackPitchsound[v].play({env:{attack: interpolation/4.,hold:interpolation*3./4., release:interpolation/4.},pitch:loudestFret[v].frequency,volume://loudestFret[v].volume
                         1./feedBackReduction/(4-v)})
                     
             }
