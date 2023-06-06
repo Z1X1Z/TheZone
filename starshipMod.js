@@ -331,7 +331,7 @@ if (totalAMP>zoomOutRatchetThreshold) pitch =    audioX.sampleRate/calculatePitc
         const feedBackReduction = 4;
         if(wadLOADED&&aboveThreshold) {
             feedbackPitchsound[0].stop();
-            feedbackPitchsound[0].play({env:{attack: interpolation/4.,hold:interpolation*3./4., release:interpolation/2.},pitch:pitch,volume:totalAMP/feedBackReduction})
+            feedbackPitchsound[0].play({env:{attack: interpolation/8.,hold:interpolation*3./4., release:interpolation/8.},pitch:pitch,volume:totalAMP/feedBackReduction})
             
             for (var v = 0; v < 4; v++)
             {
