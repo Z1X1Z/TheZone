@@ -1,10 +1,9 @@
 var THREE;
-if(window.useCDN)import("three").then(module => { THREE=module}).catch((err) => {}).finally((err) => {});
+if(window.useCDN)import("three").then(module => { THREE=module}).catch((err) => {console.log(err)}).finally((err) => {console.log("+"+err)});
 else{
     console.log("load old Threejs for offline")
     document.getElementById("threeJSscript").src="three.js";
 }
-document.getElementById("threeJSscript").src="three.js";//ios flunking from the update on the update this was added on
 
 
 function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
