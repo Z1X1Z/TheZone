@@ -9,6 +9,7 @@ window.starClover=true;
 window.blankBackground=false;
 window.twist = 0.;
 window.highORlow=1.;
+window.FeedbackSound = false;
 function readHash(){for(var n = location.hash.length;n>0;n--)callKey(new KeyboardEvent('keydown', {'key': location.hash[n],"keyCode":location.hash.charCodeAt(n)}));
 }
 function stallHash(){if(window.uniformsLoaded)readHash();else setTimeout(stallHash,10);}//uniforms are only loaded if mic is enabled
@@ -68,6 +69,8 @@ function callKey(event){
             uniforms.metaCarousel.value=0.;
         }
     }
+    if(key == "v" && event.ctrlKey) window.FeedbackSound =  !window.FeedbackSound;
+
     else if (x>0&&x<=4&& document.activeElement.className!="num")
     {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
     else if (key=="+"){rez /=1.01; renderer.setPixelRatio( rez);}

@@ -109,7 +109,7 @@ function vectorize4(){
     let fretCount;
     if(onO) fretCount=starArms
         else fretCount=24;
-    for (var g=0; g<fretCount; g++)if(isFinite(dataArray[g]))
+    for (var g=0; g<fretCount; g++)if(isFinite(mustarD[g]))
     {
         
         if (dataArray[g]>loudestFret[0].volume)
@@ -119,6 +119,7 @@ function vectorize4(){
                 loudestFret[1]=Object.assign({},loudestFret[0]);loudestFret[0].index=g;
             }
                 loudestFret[0].volume=dataArray[g];loudestFret[0].note = mustarD[g];
+            loudestFret[0].frequency = mustarD[g]
         }
         else if (dataArray[g]>loudestFret[1].volume)
         {
@@ -129,12 +130,13 @@ function vectorize4(){
             }
             loudestFret[1].index=g;
             loudestFret[1].volume=dataArray[g];
+            loudestFret[1].frequency = mustarD[g]
         }
         else if(dataArray[g]>loudestFret[2].volume)
         {
             if (Math.abs(loudestFret[2].note-loudestFret[3].note)>.25) loudestFret[3]=Object.assign({},loudestFret[2]);
-            loudestFret[2].index=g;loudestFret[2].volume=dataArray[g];}
-        else if (dataArray[g]>loudestFret[3].volume){loudestFret[3].index=g;loudestFret[3].volume=dataArray[g];}
+            loudestFret[2].index=g;loudestFret[2].volume=dataArray[g];loudestFret[2].frequency = mustarD[g]}
+        else if (dataArray[g]>loudestFret[3].volume){loudestFret[3].index=g;loudestFret[3].volume=dataArray[g];loudestFret[3].frequency = mustarD[g]}
     }
     for(var g = 0;g<loudestFret.length;g++)
     {
@@ -191,8 +193,7 @@ function spiral_compress(){
     if(n!=0)   d = (z[n+1]-z[n-1])/(z[n-1]+z[n+1]);
     else d = (z[n+1])/(z[n]+z[n+1])/2.;
     const nAdj = n + d*4 ;
-    //if (Math.abs(nAdj-n) < 10)
-    if (Math.abs(d)<4+1.)
+    if (Math.abs(d)<4+1.&&isFinite(d))
         freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
         else freq = audioX.sampleRate*n/numberOfBins
         //    freq = 440; //check for concert A
@@ -302,16 +303,63 @@ function  move()
     totalAMP/=inputData.length;
         uniforms["totalAmp" ].value=totalAMP;
         lastPitch = pitch;
-        
 if (totalAMP>zoomOutRatchetThreshold) pitch =    audioX.sampleRate/calculatePitch();
         const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
         if(!notNyquist) pitch = lastPitch;
+        
+        
+        
     if (isFinite(pitch) &&pitch>0&& notNyquist &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
         aboveThreshold = true;
         on = true;
-
     }
-    else{aboveThreshold = false; on = false}
+    else{aboveThreshold = false; on = false;}
+        
+        
+        
+        
+        
+        
+    if(window.FeedbackSound)
+    {
+        const feedBackReduction = 4;
+        if(wadLOADED&&aboveThreshold) {
+            feedbackPitchsound[0].stop();
+            feedbackPitchsound[0].play({env:{attack: interpolation/4.,hold:interpolation*3./4., release:interpolation/2.},pitch:pitch,volume:totalAMP/feedBackReduction})
+            
+            for (var v = 0; v < 4; v++)
+            {
+                
+                    feedbackPitchsound[v].stop();
+                    feedbackPitchsound[v].play({env:{attack: interpolation/4.,hold:interpolation*3./4., release:interpolation/2.},pitch:loudestFret[v].frequency,volume://loudestFret[v].volume
+                        1./feedBackReduction/(4-v)})
+                    
+            }
+        }
+            else if (wadLOADED) {
+                
+                feedbackPitchsound[0].play({env:{attack: 0,                   release:0,hold:0}, pitch:0,volume:0});
+                feedbackPitchsound[0].stop();
+                
+                for (var v = 0; v < 4; v++)
+                {
+                    feedbackPitchsound[v].play({env:{attack: 0,                   release:0,hold:0},pitch:0, volume:0});
+                    feedbackPitchsound[v].stop();
+                        
+                }
+
+            }
+                                       }
+                    //wadaw webaudiodaw code
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
 lastNote = note;
  note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
 const t =  (note )*flip+twist/2;
@@ -843,7 +891,6 @@ function zoomRoutine(){
                        
 
                      let thisChunk=0, lastChunk=0;
-                    let error = "no error";
                     let vibrateArray=[0];
                      window.haptic = false;
                         function mcphrth(){
@@ -959,7 +1006,7 @@ function takeNextScoreSlice(start){
         uniforms[ "centralCores" ].value = Math.log(zoom)/Math.log(.5)+precores    ;
          if(uniforms[ "morph" ].value!=0.)uniforms[ "centralCores" ].value*=3./2.;//stabilize morph dance collaboration
 
-        uniforms[ "externalCores" ].value =(uniforms[ "centralCores" ].value)*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*logStabilizationConstant;
+        uniforms[ "externalCores" ].value =(uniforms[ "centralCores" ].value)*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*logStabilizationConstant+.25/Math.log(.5);
         
         if(uniforms[ "Spoker" ].value&&uniforms[ "MetaCored" ].value)
             uniforms[ "externalCores" ].value*=4./3./(1./Math.log(3.)+(1.-1./Math.log(3.))/1.75);
@@ -989,7 +1036,11 @@ if( !window.touchMode&&!window.touchOnlyMode) {
     if(!zoomAtl41)zoomRoutine();
     infinicore();
 
+    
     spiral_compress();
+    
+    vectorize4();
+    
     if(on) makeSpirograph();
 
 
@@ -1019,14 +1070,16 @@ if( !window.touchMode&&!window.touchOnlyMode) {
      const noteName = notes[noteNameNumber];
      const cents = Math.round((note-Math.round(note))*100);
      const fr = Math.round(pitch);
+    
      const n_n = Math.round(note);
      const cores = Math.floor(uniforms["centralCores"].value)+cloverSuperCores*singleHyperCoreDepth+uniforms.upCoreCycler.value;
       if(textON)document.getElementById("textWindow").innerHTML =
 "<div sytle='font-size: 16px;'>"+
-          error+vibrateArray+"<p style='margin : 0px'></p>"+
+          "<p style='margin : 0px'></p>"+
                                 " note: "+noteName+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
                                 "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
-                                "cores: "+cores+", zoom: "+zoom/2.**(singleHyperCoreDepth*cloverSuperCores)+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
+                                "cores: "+cores+", metaCores:"+ uniforms.externalCores.value + "<p style='margin : 0px'></p>"+
+          "zoom: "+zoom/2.**(singleHyperCoreDepth*cloverSuperCores)+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
                                 "InOutThresh:"+zoomOutRatchetThreshold+"<p style='margin : 0px'></p>"+
                                 "amplitude : "+totalAMP+"<p style='margin : 0px'></p>"+
                                 "above threshold: "+aboveThreshold+", FPS: "+Math.round(FPS)+"<p style='margin : 0px'></p>"
@@ -1685,11 +1738,10 @@ scene.add( targets[n] );
                         FEEDBACKuniforms.eden.value=uniforms.eden.value;
                         FEEDBACKuniformsFlip.eden.value=uniforms.eden.value;
                          
-                        
+
                         if(uniforms.eden.value==4)
                         {
                             
-                            vectorize4();
                             FEEDBACKuniforms.loudestFret1.value=[loudestFret[0].x,loudestFret[0].y];
                             FEEDBACKuniforms.loudestFret2.value=[loudestFret[1].x,loudestFret[1].y];
                             FEEDBACKuniforms.loudestFret3.value=[loudestFret[2].x,loudestFret[2].y];

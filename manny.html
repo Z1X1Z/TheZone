@@ -444,6 +444,8 @@
                         callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                      <label for="Dynamic Dance">Dynamic Dance!</label><br>
                      
+                     <input type="checkbox" id="Feedback Voice" name="t"  onclick= "window.FeedbackSound =  !window.FeedbackSound;">
+                      <label for="Feedback Voice">Feedback Voice!(regulated by System Volume)</label><br>
                      
                      <input type="checkbox" id="Blank Background" name="t"  onclick= "
                          key  = 'Y';
@@ -1224,7 +1226,7 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
   float isGrey =1.;//or black
  // if (starship.x==starship.y&& starship.y==starship.z&&starship.w!=0.)isGrey=starship.x;
  // else if(starship.x==starship.y&&starship.x==starship.z&&abs(starship.z-.5)<.1&&starship.w!=0.) isBlack=.5;
-o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z)*1.5,0.,1.)+starship.xyz;//*isGrey;
+o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z),0.,1.)+starship.xyz*starship.w;//*isGrey;
 return clamp(o,0.,1.);}
 
                       
@@ -1552,7 +1554,7 @@ return (vec3(z.x*z.y,z.x+.2,z.y)+.3)/length(z);
                                   float hyperCore=0.;
                                   float lfc = length(freed(coords));
                                   if(outerCoresOff) hyperCore=0.;
-                                  else if(!MetaCored)hyperCore=cored*2./3.+log(lfc*3./2.)*0.9551195-1.;//.9551195 is based on x=log3(x), x = .910239log3(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
+                                  else if(!MetaCored)hyperCore=cored*2./3.+log(lfc*3./2.)*0.9551195+.25/log(.5);//.9551195 is based on x=log3(x), x = .910239log3(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
                                    // if(MetaCored&&morph>=.5)hyperCore*=4./3.;//engage overstable core if dancing
 
                                   float term=0.;
