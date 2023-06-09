@@ -50,7 +50,6 @@ function initialize(){
 let initialAngleSound = Array(10);
 initialAngleSound[0]=0;
 function startSound(e){
-    mcphrth();//reproc vibrate
     let correlationForText=document.getElementById("allText").offsetHeight;//top
     correlationForText-=document.getElementById("score").offsetHeight;//bottom
 
@@ -90,7 +89,6 @@ function startSound(e){
 
                                      
 function followSound(e){
-            mcphrth();//reproc vibrate
             let correlationForText=document.getElementById("allText").offsetHeight;
             correlationForText-=document.getElementById("score").offsetHeight;//bottom
             let y = e.clientY-(window.innerHeight+correlationForText)/2.;
@@ -131,6 +129,8 @@ if (//navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform ==
 navigator.maxTouchPoints > 0){
     c.addEventListener('touchstart', function(e)
                                {
+        mcphrth();//reproc vibrate
+
      //   e.stopImmediatePropagation();          //e.preventDefault();
 c.focus();//this is to make the panel menu go down on android when you press on the container of the game
         for(var o=0; o<e.changedTouches.length; o++)
@@ -143,6 +143,8 @@ c.focus();//this is to make the panel menu go down on android when you press on 
 
     }, false);
 c.addEventListener('touchmove', function(e) {
+    mcphrth();//reproc vibrate
+
     for(var o=0; o<e.changedTouches.length; o++)followSound(e.changedTouches[o]);
    // e.stopImmediatePropagation();// e.preventDefault();
 }, false);
