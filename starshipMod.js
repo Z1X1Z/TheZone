@@ -331,13 +331,13 @@ if (totalAMP>zoomOutRatchetThreshold) pitch =    audioX.sampleRate/calculatePitc
         const feedBackReduction = 4;
         if(wadLOADED&&aboveThreshold) {
             feedbackPitchsound[0].stop();
-            feedbackPitchsound[0].play({env:{attack: interpolation/8.,hold:interpolation*3./4., release:interpolation/8.},pitch:pitch,volume:totalAMP/feedBackReduction})
+            feedbackPitchsound[0].play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:pitch,volume:totalAMP/feedBackReduction})
             
             for (var v = 0; v < 4; v++)
             {
                 
                     feedbackPitchsound[v].stop();
-                    feedbackPitchsound[v].play({env:{attack: interpolation/4.,hold:interpolation*3./4., release:interpolation/4.},pitch:loudestFret[v].frequency,volume://loudestFret[v].volume
+                    feedbackPitchsound[v].play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:loudestFret[v].frequency,volume://loudestFret[v].volume
                         1./feedBackReduction/(4-v)})
                     
             }
@@ -899,9 +899,10 @@ function zoomRoutine(){
                      let thisChunk=0, lastChunk=0;
                     let vibrateArray=[0];
                      window.haptic = false;
-                        function mcphrth(){
-         let audioFramesPerMillisecond=audioX.sampleRate*.001;
-      vibrateArray=[0];
+                    function mcphrth(){
+     if(window.haptic){
+     let audioFramesPerMillisecond=audioX.sampleRate*.001;
+     vibrateArray=[0];
      let thisChunkGreaterThanLastChunk=0,thisChunkLessThanLastChunk=0;
      counter=0.;
      for(var n=0; n<inputData.length-1;n++)
@@ -928,11 +929,11 @@ function zoomRoutine(){
      }
      
      try{error = navigator.vibrate(vibrateArray
-     );}
+                                   );}
      catch(e){ error+=e;}
- 
-     if(window.haptic)  setTimeout(mcphrth,bufferSize/audioX.sampleRate);
-
+     
+     setTimeout(mcphrth,bufferSize/audioX.sampleRate);
+ }
 }
 //this doesn't work, and it only would work on android not on firefox
 
@@ -1225,6 +1226,12 @@ if(!window.touchMode){
                 
                 if(RockInTheWater==1||RockInTheWater==2)
                 {
+                    if(RockInTheWater==2){
+                        
+                        starPositionAttribute.setXYZ(starStride,0,0,0)
+                        starPositionAttribute.setXYZ(starStride+1, 0., 0.,  0.)
+                        starPositionAttribute.setXYZ(starStride+2,0,0,0)
+                    }
                     var wideness =(testar[g]/255*totalAMP**.5-zoomOutRatchetThreshold)*starshipSize;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
                     if(wideness<=0)wideness=1./255.*starshipSize;
                     var xyStarParticle={};

@@ -50,6 +50,7 @@ function initialize(){
 let initialAngleSound = Array(10);
 initialAngleSound[0]=0;
 function startSound(e){
+    mcphrth();//reproc vibrate
     let correlationForText=document.getElementById("allText").offsetHeight;//top
     correlationForText-=document.getElementById("score").offsetHeight;//bottom
 
@@ -89,6 +90,7 @@ function startSound(e){
 
                                      
 function followSound(e){
+            mcphrth();//reproc vibrate
             let correlationForText=document.getElementById("allText").offsetHeight;
             correlationForText-=document.getElementById("score").offsetHeight;//bottom
             let y = e.clientY-(window.innerHeight+correlationForText)/2.;
