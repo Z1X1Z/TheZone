@@ -248,7 +248,7 @@ function fiveAndSeven(){
             }
 }
 
-                          const trailSecondsLong = 5.;
+                          const trailSecondsLong = 4.;
                           const trailLength = zoomFrames*trailSecondsLong;
 const cx = Array(trailLength);//c is the center of the frame moved from the origin
 const cy = Array(trailLength);
@@ -605,8 +605,8 @@ function init() {
      scene.add(meshTrail)
    //  scene.add(line);
 
-    scene.add( circle );
-    scene.add(radialLine);
+    shaderScene.add( circle );
+     shaderScene.add(radialLine);
       
     scene.add(starMesh);//20+ minutes error free
      scene.add(starsANDwitnessesMesh)
@@ -706,6 +706,9 @@ dotted:{value:false},
   twistStar:{value:0.},
   flipStar:{value:1.},
   NightAndDay:{value:false},
+  dotCoord:{value:[0,0]},
+  starOnDot:{value:false},
+
 
     }
   ]);
@@ -901,39 +904,39 @@ function zoomRoutine(){
                      window.haptic = false;
                     function mcphrth(){
      if(window.haptic){
-     let audioFramesPerMillisecond=audioX.sampleRate*.001;
-     vibrateArray=[0];
-     let thisChunkGreaterThanLastChunk=0,thisChunkLessThanLastChunk=0;
-     counter=0.;
-     for(var n=0; n<inputData.length-1;n++)
-     {
-         thisChunk+=Math.abs(inputData[n+1]-inputData[n]);
-         
-         if(counter>=audioFramesPerMillisecond) {
-             
-             if(thisChunk>lastChunk){
-                 thisChunkGreaterThanLastChunk+=counter;
-                 if(thisChunkLessThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
-                 thisChunkLessThanLastChunk=0;
+             let audioFramesPerMillisecond=audioX.sampleRate*.001;
+             vibrateArray=[0];
+             let thisChunkGreaterThanLastChunk=0,thisChunkLessThanLastChunk=0;
+             counter=0.;
+             for(var n=0; n<inputData.length-1;n++)
+             {
+                 thisChunk+=Math.abs(inputData[n+1]-inputData[n]);
                  
+                 if(counter>=audioFramesPerMillisecond) {
+                     
+                     if(thisChunk>lastChunk){
+                         thisChunkGreaterThanLastChunk+=counter;
+                         if(thisChunkLessThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
+                         thisChunkLessThanLastChunk=0;
+                         
+                     }
+                     else {thisChunkLessThanLastChunk+=counter;
+                         if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkGreaterThanLastChunk);
+                         thisChunkGreaterThanLastChunk=0;
+                     }
+                     lastChunk=thisChunk;
+                     thisChunk=0;
+                     counter=0;
+                 }
+                 counter++;
              }
-             else {thisChunkLessThanLastChunk+=counter;
-                 if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkGreaterThanLastChunk);
-                 thisChunkGreaterThanLastChunk=0;
-             }
-             lastChunk=thisChunk;
-             thisChunk=0;
-             counter=0;
+             
+             try{error = navigator.vibrate(vibrateArray
+                                           );}
+             catch(e){ error+=e;}
+             
+           //  setTimeout(mcphrth,bufferSize/audioX.sampleRate); may work on touch instead of recursive calls which seems to bug
          }
-         counter++;
-     }
-     
-     try{error = navigator.vibrate(vibrateArray
-                                   );}
-     catch(e){ error+=e;}
-     
-     setTimeout(mcphrth,bufferSize/audioX.sampleRate);
- }
 }
 //this doesn't work, and it only would work on android not on firefox
 
@@ -1628,7 +1631,7 @@ circle.position.set(circleX,circleY,-1.);
                    centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-1.) );
 
                                   radialLine.geometry.setFromPoints( centerOfDotToEdge )
-
+                                        uniforms.dotCoord.value =[circleX,circleY] ;
 
 let allCaught = true;
 for (var n=0; n<polygons.length; n++) if(  polygons[n].caught == false) allCaught = false;
