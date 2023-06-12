@@ -1731,7 +1731,7 @@ targets[n] = new THREE.Mesh( pG[n], pM[n] );
 targets[n].position.set(polygons[n].centerX,polygons[n].centerY,-.99);
 if (polygons[n].caught)targets[n].rotateZ(timestamp/1000.*Math.PI*2.)
 else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
-scene.add( targets[n] );
+shaderScene.add( targets[n] );
 }
 
 
@@ -1853,7 +1853,7 @@ radialLine.geometry.dispose( );
 scene.remove(starStreamMesh);
 scene.remove(line);
 for(var n = 0; n<targets.length;n++){
-  scene.remove( targets[n] );
+  shaderScene.remove( targets[n] );
   pG[n].dispose();
   pM[n].dispose();
   targets[n].geometry.dispose();
