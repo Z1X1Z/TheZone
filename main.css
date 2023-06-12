@@ -13,6 +13,11 @@ body, head {
     -webkit-user-select: none;
     user-select: none;//prevent selection of menus
      */
+    
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     touch-action: none;//prevent zooming and panning
 
 
