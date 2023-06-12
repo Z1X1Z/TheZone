@@ -70,7 +70,7 @@ function callKey(event){
         }
     }
     if(key == "v" && event.ctrlKey) window.FeedbackSound =  !window.FeedbackSound;
-
+    if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=!uniforms.starOnDot.value;
     else if (x>0&&x<=4&& document.activeElement.className!="num")
     {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
     else if (key=="+"){rez /=1.01; renderer.setPixelRatio( rez);}
