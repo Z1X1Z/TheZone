@@ -922,7 +922,7 @@ function zoomRoutine(){
              else {
                  vibrateArrayNew.push(0.);
                  vibrateArrayNew.push(interpolation/60.*1000.);
-=             }
+             }
          thisChunk=0.;
          
        //  vibrateArray =         vibrateArrayNew.concat(vibrateArray);
