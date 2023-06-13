@@ -900,29 +900,30 @@ function zoomRoutine(){
                        
 
                      let thisChunk=0, lastChunk=0;
-                    let vibrateArray=[0];
                      window.haptic = false;
                     function mcphrth(){
      if(window.haptic){
              let audioFramesPerMillisecond=audioX.sampleRate*.001;
-             vibrateArray=[0];
+             let millisecondsPer = 10;
+             let vibrateArray=[];
              let thisChunkGreaterThanLastChunk=0,thisChunkLessThanLastChunk=0;
              counter=0.;
+         
              for(var n=0; n<inputData.length-1;n++)
              {
                  thisChunk+=Math.abs(inputData[n+1]-inputData[n]);
                  
-                 if(counter>=audioFramesPerMillisecond) {
+                 if(counter>=audioFramesPerMillisecond*millisecondsPer) {
                      
-                     if(thisChunk>lastChunk ){
-                         thisChunkGreaterThanLastChunk+=1.;
+                     if(thisChunk>=lastChunk ){
+                         thisChunkGreaterThanLastChunk+=millisecondsPer;
                          if(thisChunkLessThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
                          thisChunkLessThanLastChunk=0;
                          
                      }
                      else {
                          
-                         thisChunkLessThanLastChunk+=1.;
+                         thisChunkLessThanLastChunk+=millisecondsPer;
                          if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkGreaterThanLastChunk);
                          thisChunkGreaterThanLastChunk=0;
                      }
@@ -932,7 +933,7 @@ function zoomRoutine(){
                  }
                  counter++;
              }
-             
+             console.log(vibrateArray)
              try{error = navigator.vibrate(vibrateArray
                                            );}
              catch(e){ error+=e;}
