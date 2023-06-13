@@ -908,23 +908,22 @@ function zoomRoutine(){
          let vibrateArrayNew=[];
              
              if(on){
-                     vibrateArrayNew.push(1000.);
+                     vibrateArrayNew.push(250);
                  vibrateArrayNew.push(0);
              }
              else {
-                 vibrateArrayNew.push(0.);
-                 vibrateArrayNew.push(1.);
+                 vibrateArrayNew.push(0);
+                 vibrateArrayNew.push(1);
              }
          thisChunk=0.;
          
        //  vibrateArray =         vibrateArrayNew.concat(vibrateArray);
        //  console.log(vibrateArray)
        //  while (vibrateArray.length>10)vibrateArray.pop();
-             try{error = navigator.vibrate(vibrateArrayNew
-                                           );}
+             try{error = navigator.vibrate(vibrateArrayNew );}
              catch(e){ error+=e;}
              
-             setTimeout(mcphrth,500);// may work on touch instead of recursive calls which seems to bug
+             setTimeout(mcphrth,250);// may work on touch instead of recursive calls which seems to bug
          }
 }
 //this doesn't work, and it only would work on android not on firefox
