@@ -932,7 +932,7 @@ function zoomRoutine(){
                                            );}
              catch(e){ error+=e;}
              
-             setTimeout(mcphrth,interpolation/60.*1000./4.);// may work on touch instead of recursive calls which seems to bug
+             setTimeout(mcphrth,250);// may work on touch instead of recursive calls which seems to bug
          }
 }
 //this doesn't work, and it only would work on android not on firefox
