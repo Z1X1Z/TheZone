@@ -909,7 +909,8 @@ function zoomRoutine(){
              let millisecondsPer = bufferSize/audioX.sampleRate*1000./2.;
              let thisChunkGreaterThanLastChunk=0,thisChunkLessThanLastChunk=0;
              counter=0.;
-         
+         let vibrateArrayNew=[];
+
              for(var n=0; n<inputData.length-1;n++)
              {
                  thisChunk+=Math.abs(inputData[n+1]-inputData[n]);
@@ -919,7 +920,7 @@ function zoomRoutine(){
                      if(thisChunk>=lastChunk ){
                          console.log("on")
                          thisChunkGreaterThanLastChunk+=millisecondsPer;
-                         if(thisChunkLessThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
+                         if(thisChunkLessThanLastChunk!=0)vibrateArrayNew.push(thisChunkLessThanLastChunk);
                          thisChunkLessThanLastChunk=0;
                          
                      }
@@ -927,7 +928,7 @@ function zoomRoutine(){
                          console.log("off")
 
                          thisChunkLessThanLastChunk+=millisecondsPer;
-                         if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkGreaterThanLastChunk);
+                         if(thisChunkGreaterThanLastChunk!=0)vibrateArrayNew.push(thisChunkGreaterThanLastChunk);
                          thisChunkGreaterThanLastChunk=0;
                      }
                      lastChunk=thisChunk;
@@ -936,6 +937,8 @@ function zoomRoutine(){
                  }
                  counter++;
              }
+         vibrateArrayNew.concat(vibrateArray)
+         vibrateArray =vibrateArrayNew;
          while (vibrateArray.length>1000)vibrateArray.shift();
              try{error = navigator.vibrate(vibrateArray
                                            );}
