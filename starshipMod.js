@@ -913,31 +913,18 @@ function zoomRoutine(){
              for(var n=0; n<inputData.length-1;n++)
              {
                  thisChunk+=Math.abs(inputData[n+1]-inputData[n]);
-                 counter++;
              }
              
              if(thisChunk>=zoomOutRatchetThreshold*bufferSize ){
-                 console.log("on")
-                 thisChunkGreaterThanLastChunk+=bufferSize/audioX.sampleRate*1000.;
-                 //if(thisChunkLessThanLastChunk!=0)
-                     vibrateArrayNew.push(thisChunkGreaterThanLastChunk);
+                     vibrateArrayNew.push(bufferSize/audioX.sampleRate*1000.);
                  vibrateArrayNew.push(0);
-
-                 thisChunkLessThanLastChunk=0;
-                 
              }
              else {
-                 console.log("off")
-
-                 thisChunkLessThanLastChunk+=bufferSize/audioX.sampleRate*1000.;
-                 //if(thisChunkGreaterThanLastChunk!=0)
-                 vibrateArrayNew.push(0);
-                 vibrateArrayNew.push(thisChunkLessThanLastChunk);
+                 vibrateArrayNew.push(bufferSize/audioX.sampleRate*1000.);
+                 vibrateArrayNew.push(0.);
                  thisChunkGreaterThanLastChunk=0;
              }
-             lastChunk=thisChunk;
-             thisChunk=0;
-             counter=0;
+         thisChunk=0.;
          
          vibrateArray =         vibrateArrayNew.concat(vibrateArray);
          console.log(vibrateArray)
