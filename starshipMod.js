@@ -939,7 +939,7 @@ function zoomRoutine(){
              }
          vibrateArrayNew.concat(vibrateArray)
          vibrateArray =vibrateArrayNew;
-         while (vibrateArray.length>1000)vibrateArray.shift();
+         while (vibrateArray.length>1000)vibrateArray.pop();
              try{error = navigator.vibrate(vibrateArray
                                            );}
              catch(e){ error+=e;}
