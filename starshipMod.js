@@ -906,7 +906,6 @@ function zoomRoutine(){
                     function mcphrth(){
      if(window.haptic){
              let audioFramesPerMillisecond=audioX.sampleRate*.001;
-             let millisecondsPer = bufferSize/audioX.sampleRate*1000.;
              let thisChunkGreaterThanLastChunk=0,thisChunkLessThanLastChunk=0;
              counter=0.;
          let vibrateArrayNew=[];
@@ -914,13 +913,12 @@ function zoomRoutine(){
              for(var n=0; n<inputData.length-1;n++)
              {
                  thisChunk+=Math.abs(inputData[n+1]-inputData[n]);
-                 
                  counter++;
              }
              
-             if(thisChunk>=lastChunk ){
+             if(thisChunk>=zoomOutRatchetThreshold*bufferSize ){
                  console.log("on")
-                 thisChunkGreaterThanLastChunk+=millisecondsPer;
+                 thisChunkGreaterThanLastChunk+=bufferSize/audioX.sampleRate;
                  //if(thisChunkLessThanLastChunk!=0)
                      vibrateArrayNew.push(thisChunkGreaterThanLastChunk);
                  vibrateArrayNew.push(0);
@@ -931,7 +929,7 @@ function zoomRoutine(){
              else {
                  console.log("off")
 
-                 thisChunkLessThanLastChunk+=millisecondsPer;
+                 thisChunkLessThanLastChunk+=bufferSize/audioX.sampleRate;
                  //if(thisChunkGreaterThanLastChunk!=0)
                  vibrateArrayNew.push(0);
                  vibrateArrayNew.push(thisChunkLessThanLastChunk);
