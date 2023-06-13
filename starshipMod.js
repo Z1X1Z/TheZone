@@ -916,12 +916,12 @@ function zoomRoutine(){
              }
              
              if(thisChunk>=zoomOutRatchetThreshold*bufferSize ){
-                     vibrateArrayNew.push(interpolation/60.*1000.);
+                     vibrateArrayNew.push(1000.);
                  vibrateArrayNew.push(0);
              }
              else {
                  vibrateArrayNew.push(0.);
-                 vibrateArrayNew.push(interpolation/60.*1000.);
+                 vibrateArrayNew.push(1000.);
              }
          thisChunk=0.;
          
@@ -932,7 +932,7 @@ function zoomRoutine(){
                                            );}
              catch(e){ error+=e;}
              
-             setTimeout(mcphrth,interpolation/60.*1000.*4.);// may work on touch instead of recursive calls which seems to bug
+             setTimeout(mcphrth,interpolation/60.*1000./4.);// may work on touch instead of recursive calls which seems to bug
          }
 }
 //this doesn't work, and it only would work on android not on firefox
