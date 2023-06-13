@@ -914,13 +914,16 @@ function zoomRoutine(){
                  
                  if(counter>=audioFramesPerMillisecond) {
                      
-                     if(thisChunk>lastChunk){
+                     if(thisChunk/audioFramesPerMillisecond>zoomOutRatchetThreshold// thisChunk>lastChunk
+                        ){
                          thisChunkGreaterThanLastChunk+=counter;
                          if(thisChunkLessThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
                          thisChunkLessThanLastChunk=0;
                          
                      }
-                     else {thisChunkLessThanLastChunk+=counter;
+                     else {
+
+                         thisChunkLessThanLastChunk+=counter;
                          if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkGreaterThanLastChunk);
                          thisChunkGreaterThanLastChunk=0;
                      }
