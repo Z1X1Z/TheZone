@@ -937,8 +937,11 @@ function zoomRoutine(){
                  }
                  counter++;
              }
+         if(thisChunkLessThanLastChunk!=0)vibrateArrayNew.push(thisChunkLessThanLastChunk);
+         if(thisChunkGreaterThanLastChunk!=0)vibrateArrayNew.push(thisChunkGreaterThanLastChunk);
          vibrateArrayNew.concat(vibrateArray)
          vibrateArray =vibrateArrayNew;
+         console.log(vibrateArrayNew)
          while (vibrateArray.length>1000)vibrateArray.pop();
              try{error = navigator.vibrate(vibrateArray
                                            );}
