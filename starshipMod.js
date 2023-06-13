@@ -926,10 +926,10 @@ function zoomRoutine(){
              }
          thisChunk=0.;
          
-         vibrateArray =         vibrateArrayNew.concat(vibrateArray);
+       //  vibrateArray =         vibrateArrayNew.concat(vibrateArray);
        //  console.log(vibrateArray)
-         while (vibrateArray.length>10)vibrateArray.pop();
-             try{error = navigator.vibrate(vibrateArray
+       //  while (vibrateArray.length>10)vibrateArray.pop();
+             try{error = navigator.vibrate(vibrateArrayNew
                                            );}
              catch(e){ error+=e;}
              
