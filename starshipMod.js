@@ -906,7 +906,7 @@ function zoomRoutine(){
                     function mcphrth(){
      if(window.haptic){
              let audioFramesPerMillisecond=audioX.sampleRate*.001;
-             let millisecondsPer = bufferSize/audioX.sampleRate*1000./2.;
+             let millisecondsPer = bufferSize/audioX.sampleRate*1000.;
              let thisChunkGreaterThanLastChunk=0,thisChunkLessThanLastChunk=0;
              counter=0.;
          let vibrateArrayNew=[];
