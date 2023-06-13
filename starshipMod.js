@@ -918,7 +918,7 @@ function zoomRoutine(){
              
              if(thisChunk>=zoomOutRatchetThreshold*bufferSize ){
                  console.log("on")
-                 thisChunkGreaterThanLastChunk+=bufferSize/audioX.sampleRate;
+                 thisChunkGreaterThanLastChunk+=bufferSize/audioX.sampleRate*1000.;
                  //if(thisChunkLessThanLastChunk!=0)
                      vibrateArrayNew.push(thisChunkGreaterThanLastChunk);
                  vibrateArrayNew.push(0);
@@ -929,7 +929,7 @@ function zoomRoutine(){
              else {
                  console.log("off")
 
-                 thisChunkLessThanLastChunk+=bufferSize/audioX.sampleRate;
+                 thisChunkLessThanLastChunk+=bufferSize/audioX.sampleRate*1000.;
                  //if(thisChunkGreaterThanLastChunk!=0)
                  vibrateArrayNew.push(0);
                  vibrateArrayNew.push(thisChunkLessThanLastChunk);
