@@ -920,10 +920,9 @@ function zoomRoutine(){
                  vibrateArrayNew.push(0);
              }
              else {
-                 vibrateArrayNew.push(interpolation/60.*1000.);
                  vibrateArrayNew.push(0.);
-                 thisChunkGreaterThanLastChunk=0;
-             }
+                 vibrateArrayNew.push(interpolation/60.*1000.);
+=             }
          thisChunk=0.;
          
        //  vibrateArray =         vibrateArrayNew.concat(vibrateArray);
