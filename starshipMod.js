@@ -914,16 +914,15 @@ function zoomRoutine(){
                  
                  if(counter>=audioFramesPerMillisecond) {
                      
-                     if(thisChunk/audioFramesPerMillisecond>zoomOutRatchetThreshold// thisChunk>lastChunk
-                        ){
-                         thisChunkGreaterThanLastChunk+=counter;
+                     if(thisChunk>lastChunk ){
+                         thisChunkGreaterThanLastChunk+=1.;
                          if(thisChunkLessThanLastChunk!=0)vibrateArray.push(thisChunkLessThanLastChunk);
                          thisChunkLessThanLastChunk=0;
                          
                      }
                      else {
-
-                         thisChunkLessThanLastChunk+=counter;
+                         
+                         thisChunkLessThanLastChunk+=1.;
                          if(thisChunkGreaterThanLastChunk!=0)vibrateArray.push(thisChunkGreaterThanLastChunk);
                          thisChunkGreaterThanLastChunk=0;
                      }
