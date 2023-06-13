@@ -915,33 +915,34 @@ function zoomRoutine(){
              {
                  thisChunk+=Math.abs(inputData[n+1]-inputData[n]);
                  
-                 if(counter/audioFramesPerMillisecond>=millisecondsPer*.99) {
-                     
-                     if(thisChunk>=lastChunk ){
-                         console.log("on")
-                         thisChunkGreaterThanLastChunk+=millisecondsPer;
-                         if(thisChunkLessThanLastChunk!=0)vibrateArrayNew.push(thisChunkLessThanLastChunk);
-                         thisChunkLessThanLastChunk=0;
-                         
-                     }
-                     else {
-                         console.log("off")
-
-                         thisChunkLessThanLastChunk+=millisecondsPer;
-                         if(thisChunkGreaterThanLastChunk!=0)vibrateArrayNew.push(thisChunkGreaterThanLastChunk);
-                         thisChunkGreaterThanLastChunk=0;
-                     }
-                     lastChunk=thisChunk;
-                     thisChunk=0;
-                     counter=0;
-                 }
                  counter++;
              }
-         if(thisChunkLessThanLastChunk!=0)vibrateArrayNew.push(thisChunkLessThanLastChunk);
-         if(thisChunkGreaterThanLastChunk!=0)vibrateArrayNew.push(thisChunkGreaterThanLastChunk);
-         vibrateArrayNew.concat(vibrateArray)
-         vibrateArray =vibrateArrayNew;
-         console.log(vibrateArrayNew)
+             
+             if(thisChunk>=lastChunk ){
+                 console.log("on")
+                 thisChunkGreaterThanLastChunk+=millisecondsPer;
+                 //if(thisChunkLessThanLastChunk!=0)
+                     vibrateArrayNew.push(thisChunkGreaterThanLastChunk);
+                 vibrateArrayNew.push(0);
+
+                 thisChunkLessThanLastChunk=0;
+                 
+             }
+             else {
+                 console.log("off")
+
+                 thisChunkLessThanLastChunk+=millisecondsPer;
+                 //if(thisChunkGreaterThanLastChunk!=0)
+                 vibrateArrayNew.push(0);
+                 vibrateArrayNew.push(thisChunkLessThanLastChunk);
+                 thisChunkGreaterThanLastChunk=0;
+             }
+             lastChunk=thisChunk;
+             thisChunk=0;
+             counter=0;
+         
+         vibrateArray =         vibrateArrayNew.concat(vibrateArray);
+         console.log(vibrateArray)
          while (vibrateArray.length>1000)vibrateArray.pop();
              try{error = navigator.vibrate(vibrateArray
                                            );}
