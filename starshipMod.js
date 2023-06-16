@@ -1717,7 +1717,7 @@ if (polygons[n].caught)c.setStyle("white");
 else c.setStyle ( "black");
  pM[n] = new THREE.MeshBasicMaterial( { color: c} );
 targets[n] = new THREE.Mesh( pG[n], pM[n] );
-targets[n].position.set(polygons[n].centerX,polygons[n].centerY,-.99);
+targets[n].position.set(polygons[n].centerX,polygons[n].centerY,-1.);
 if (polygons[n].caught)targets[n].rotateZ(timestamp/1000.*Math.PI*2.)
 else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
 shaderScene.add( targets[n] );
