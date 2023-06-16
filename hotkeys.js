@@ -73,8 +73,8 @@ function callKey(event){
     if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=!uniforms.starOnDot.value;
     else if (x>0&&x<=4&& document.activeElement.className!="num")
     {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
-    else if (key=="+"){rez /=1.01; renderer.setPixelRatio( rez);}
-    else if (key=="+"){rez *=1.01; renderer.setPixelRatio( rez);}
+    else if (key=="+"){rez /=1.1; renderer.setPixelRatio( rez);}
+    else if (key=="_"){rez *=1.1; renderer.setPixelRatio( rez);}
 
     else if (x==0)
     {window.movementRate=pixelShaderSize/4.; uniforms[ "rate" ].value=1./window.movementRate; }

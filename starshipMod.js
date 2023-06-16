@@ -1653,7 +1653,7 @@ if(window.gameOn&&allCaught)
 else if(!window.gameOn){polygons=[]; level = 0; metaLevel=0;}
                                         
                                         const baseMag=(1.-(metaLevel-level)/(metaLevel))/2.;
-                                        const compound = interpolation*baseMag/60.*window.movementRate/2.;
+                                        const compound = interpolation*baseMag/60.*window.movementRate/pixelShaderToStarshipRATIO;
 
 for(let n = 0; n < polygons.length; n++)
 {
