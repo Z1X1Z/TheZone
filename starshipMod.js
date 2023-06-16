@@ -721,7 +721,7 @@ dotted:{value:false},
           
       } );
      geometryP = new THREE.PlaneGeometry( 2, 2 );
-      //geometryP.translate(0,0,-1.);
+      geometryP.translate(0,0,0.);
      mesh = new THREE.Mesh( geometryP, materialShader );
      shaderScene.add( mesh );
 
@@ -1819,10 +1819,10 @@ shaderScene.add( targets[n] );
                                  }
                                  else if(!window.blankBackground){
                                       uniforms.STAR.value=null;
-                                      const shaderMeshClone = mesh.clone();
-                                      scene.add(shaderMeshClone);
+                                      const shaderSceneMeshClone = mesh.clone();
+                                      scene.add(shaderSceneMeshClone);
                                       renderer.render( scene, camera );
-                                      scene.remove(shaderMeshClone);
+                                      scene.remove(shaderSceneMeshClone);
                                      }
                                  else   renderer.render( scene, camera );
 
