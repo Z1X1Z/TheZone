@@ -30,7 +30,6 @@ function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js lo
     }//setTimeout waits for 10ms then runs stallTillTHREELoaded()
 stallTillTHREELoaded();
 
-const xyStarParticleArray=Array();
 window.zoom=1.;
 
 const starshipSize = Math.E**-1.3247/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
@@ -189,7 +188,7 @@ function makeSpirograph(){
 }
 function spiral_compress(){
     let freq = 0;
-    const z = dataArray;
+    const z = [...dataArray];
 
     for(let n = 0; n<starArms; n++){testar[n] = 0;mustarD[n] = 1;}
     for(let n=0; n<numberOfBins; n++)
@@ -248,7 +247,7 @@ function fiveAndSeven(){
             }
 }
 
-                          const trailSecondsLong = 4.;
+                          const trailSecondsLong = 8.;
                           const trailLength = zoomFrames*trailSecondsLong;
 const cx = Array(trailLength);//c is the center of the frame moved from the origin
 const cy = Array(trailLength);
@@ -369,17 +368,17 @@ if (totalAMP>zoomOutRatchetThreshold) pitch =    audioX.sampleRate/calculatePitc
 lastNote = note;
  note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
 const t =  (note )*flip+twist/2;
-if(isFinite(t))angle = -(30*t)%360;
+if(isFinite(t))angle = -t%12;
 
 
 colorSound = new THREE.Color();
              //          colorSound.setHSL((angle+90)/360.,(180+note)/297,(180+note)/297);
-const reversableColor=(angle/360.+twist/24.)*flip+120/360.;
+const reversableColor=(angle/12.+twist/24.)*flip+1./3.;
                        const colortone = note/lightingScaleTrail;
-    colorSound.setHSL(reversableColor,1.,(colortone<=.75)?colortone:.75);//lighting {note/x} should be 120 but it's out of the vocal range
+    colorSound.setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
 
 pitchCol[f]  = colorSound;
-angle = ((angle+180)/360*2*pi);
+angle = ((angle+6)/12.*2*pi);
                         flatline = pixelShaderToStarshipRATIO;
                        if(window.movementRate>pixelShaderToStarshipRATIO) flatline = window.movementRate;
          
@@ -509,6 +508,7 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                     
                                  const starStreamPoints=new Float32Array(starCount*3*6);
                                  const starStreamColors=new Float32Array(starCount*4*6);
+                    const xyStarParticleArray=Array(starCount);
 
                     
                     
@@ -1437,16 +1437,17 @@ var fingerStride = 0;
 
 
                      var vop = new THREE.Color();
-                     let BlackOrWhite;
+                     let BlackOrWhite=1;
                      const noteGrey = Math.abs(t-(6-twist/2.)+12)%12;
                      if (t==7||t==5||t==2||t==0||t==10)
-                         if(uniforms.colorCombo.value!=20)
+                     {
                          BlackOrWhite=-1.;
-                         else BlackOrWhite =.5;
-                     else if( (noteGrey<.5 || noteGrey>11.5) &&starClover&&uniforms.colorCombo.value!=20)
+                         if(uniforms.colorCombo.value==20&&((t<7.5&&t>6.5)||(t>4.5&&t<5.5)))
+                             BlackOrWhite =.5;
+                         
+                     }
+                     else if( (noteGrey<.5 || noteGrey>11.5) &&uniforms.colorCombo.value!=20)
                         BlackOrWhite=.5;
-                    else
-                         BlackOrWhite=1;
                      vop.setRGB(BlackOrWhite,BlackOrWhite,BlackOrWhite);
                      
 
@@ -1652,7 +1653,7 @@ if(window.gameOn&&allCaught)
 else if(!window.gameOn){polygons=[]; level = 0; metaLevel=0;}
                                         
                                         const baseMag=(1.-(metaLevel-level)/(metaLevel))/2.;
-                                        const compound = interpolation*baseMag/60.*window.movementRate;
+                                        const compound = interpolation*baseMag/60.*window.movementRate/2.;
 
 for(let n = 0; n < polygons.length; n++)
 {
