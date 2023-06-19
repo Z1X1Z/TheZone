@@ -555,6 +555,21 @@
               </div>
                   </div>
 
+
+        <script src="fileSelectAndLoadOSMD.js"></script>
+
+        <label for="song">Song:</label>
+          <select name="song" id="song" >
+              <option onclick='document.getElementById("osmdCanvas").innerHTML="";'>
+                  None
+              </option>
+            <option onclick='loadScore("https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/JesusChristisRisenToday.xml")'>
+                Jesus Christ is Risen Today
+            </option>
+            <option onclick='loadScore("https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/Amazing_Grace.mxl")'>
+                Amazing Grace
+            </option>
+          </select>
     </div>
 
     </div>
@@ -562,17 +577,39 @@
         for(var p = 0; p<n.length;p++)n[p].checked  = false; </script>
     
     
+    
+    
+
+    
+    
     <div id="container"> </div>
     
     <script src="wadLoader.js"> </script>
 
     <div id="score">
+
+
         <div id="textWindow">LOVE</div>
         <div id="osmdCanvas"/>
-        <input type="file" id="files"/>
-        <output id="list"></output>
-        <script src="fileSelectAndLoadOSMD.js"></script>
     </div id="score">
+    
+    <input type="file" id="files"/>
+    <output id="list"></output>
+
+    <script>
+        document.getElementById("files").addEventListener("change", handleFileSelect, false);
+
+        document.getElementById("score").onpointerdown=
+        function(event){
+          event.stopImmediatePropagation();
+          event.preventDefault();
+        };
+        </script>
+    
+    
+    
+    
+    
     
     
     <script id="vertexShader" type="x-shader/x-vertex" >
