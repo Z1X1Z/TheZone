@@ -560,7 +560,7 @@
 
         <label for="song">Song:</label>
           <select name="song" id="song" >
-              <option onclick='document.getElementById("osmdCanvas").innerHTML="";'>
+              <option onclick='document.getElementById("osmdCanvas").innerHTML=""; window.osmd=null;'>
                   None
               </option>
             <option onclick='loadScore("https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/JesusChristisRisenToday.xml")'>
