@@ -46,7 +46,7 @@ function loadScore(e) {
       // set options here
 //https://wordpress.org/plugins/opensheetmusicdisplay/
         // width:window.innerWidth,
-    drawingParameters: "compacttight",//turns off title, reduces margins, etc.
+    //drawingParameters: "compacttight",//turns off title, reduces margins, etc.
         drawTitle:false, drawSubtitle:false, drawComposer:false, drawLyricist:false,
         drawMetronomeMarks:false, drawPartNames:false, drawPartAbbreviations:true,
         drawMeasureNumbers:true, drawMeasureNumbersOnlyAtSystemStart:true, drawTimeSignatures:true,
