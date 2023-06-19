@@ -1979,7 +1979,7 @@ vec2 dance = vec2(0.);
             vec3 HORSE=horse(characterP, moveDynamic);
             ARTICLES+=scroll(characterP+1.5*vec2(0.,resolution.x/min(resolution.x,resolution.y)),vec2(-1.));
             vec3 SWORD = sword(characterP+vec2(swordSkew,0.),vec2(0.));;
-            ARTICLES+=clamp(lamp(characterP,vec2(-1.))-(SWORD.r+SWORD.g+SWORD.b+HORSE.r*3.)*1000000.,0.,1.)+SWORD+HORSE;
+            ARTICLES+=clamp(lamp(characterP,vec2(-1.))+flames(characterP-vec2(1.,0.))-(SWORD.r+SWORD.g+SWORD.b+HORSE.r*3.)*1000000.,0.,1.)+SWORD+HORSE;
           
     }
                                  float recenter = 0.;

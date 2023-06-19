@@ -68,7 +68,7 @@ function startSound(e){
        
         
         
-        let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
+        let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth));
         initialAngleSound[id] = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi);
         let frequency = Math.pow(2.,((((initialAngleSound[id]*window.flip)/pi/2*12+correction)*window.flip-window.flip*window.twist/2.))/12.)*window.ConcertKey/2.;
         //sound[id].pitch=frequency;
@@ -81,8 +81,8 @@ function startSound(e){
             sound[id].stop();
             sound2[id].stop();
             
-            sound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2,volume:volume});
-            sound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:0.});
+            sound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:0.});
+            sound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2.,volume:volume});
             }
     }
 }
@@ -105,7 +105,7 @@ function followSound(e){
             id = touchNumber.get(e.identifier);
         
         
-        let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth)/2.);
+        let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth));
         let angleSound = Math.atan2(y,x);
         angleSound=((angleSound-initialAngleSound[id])+pi/2.+4.*pi)%(2*pi)*window.flip+initialAngleSound[id];
    
