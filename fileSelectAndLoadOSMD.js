@@ -46,7 +46,7 @@ function loadScore(e) {
       // set options here
 //https://wordpress.org/plugins/opensheetmusicdisplay/
         // width:window.innerWidth,
-    //drawingParameters: "compacttight",//turns off title, reduces margins, etc.
+    //drawingParameters: "compacttight",//turns off title, reduces margins, etc.; breaks osmd.cursor when used online, so don't use
         drawTitle:false, drawSubtitle:false, drawComposer:false, drawLyricist:false,
         drawMetronomeMarks:false, drawPartNames:false, drawPartAbbreviations:true,
         drawMeasureNumbers:true, drawMeasureNumbersOnlyAtSystemStart:true, drawTimeSignatures:true,
@@ -69,11 +69,11 @@ function loadScore(e) {
 
           window.osmd = osmd; // give access to osmd object in Browser console, e.g. for osmd.setOptions()
           //osmdResize();
+            osmd.render();
 
           onWindowResize()//this calls osmdResize() who calls osmd.render(). It is from starshipMod.js so we need it to load after that is loaded in x.html
           //console.log("e.target.result: " + e.target.result);
            osmd.cursor.show(); // this would show the cursor on the first note
-            osmd.render();
 
           //osmd.cursor.reset();
         }
