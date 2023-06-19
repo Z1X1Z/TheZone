@@ -1914,9 +1914,9 @@ for(var n = 0; n<targets.length;n++){
                   }//end touch mode centerOfDotToEdge
 
 let thelastnotehit;
-
 //Here starts OPEN SHEET MUSIC DISPLAY score code
-if("osmd" in window){
+if("osmd" in window&&typeof window.osmd.cursor == "object"){
+
         //takeNextScoreSlice(window.osmd.cursor.Iterator.currentMeasureIndex+1);
         cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
         takeNextScoreSlice(cursorMeasure);
