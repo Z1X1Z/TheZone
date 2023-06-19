@@ -66,14 +66,14 @@ function loadScore(e) {
 
 
         //osmd.updateGraphic();
-            
-            window.osmd.cursor.show(); // this would show the cursor on the first note
+
           window.osmd = osmd; // give access to osmd object in Browser console, e.g. for osmd.setOptions()
           //osmdResize();
             osmd.render();
 
           onWindowResize()//this calls osmdResize() who calls osmd.render(). It is from starshipMod.js so we need it to load after that is loaded in x.html
           //console.log("e.target.result: " + e.target.result);
+           window.osmd.cursor.show(); // this would show the cursor on the first note
 
           //osmd.cursor.reset();
         }
