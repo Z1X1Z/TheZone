@@ -1,8 +1,4 @@
-document.getElementById("score").onpointerdown=
-function(event){
-  event.stopImmediatePropagation();
-  event.preventDefault();
-};
+
 
 function osmdResize()
         {
@@ -21,6 +17,10 @@ function handleFileSelect(evt) {
     }
     document.getElementById("list").innerHTML = "<ul>" + output.join("") + "</ul>";
 
+    
+    
+
+    
     for (var i=0, file = files[i]; i < osmdDisplays; i++) {
       if (!file.name.match('.*\.xml') && !file.name.match('.*\.musicxml') && false) {
         alert('You selected a non-xml file. Please select only music xml files.');
@@ -29,42 +29,7 @@ function handleFileSelect(evt) {
 
       var reader = new FileReader();
 
-      reader.onload = function(e) {
-          var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvas", {
-            // set options here
-//https://wordpress.org/plugins/opensheetmusicdisplay/
-              // width:window.innerWidth,
-              drawTitle:false, drawSubtitle:false, drawComposer:false, drawLyricist:false,
-              drawMetronomeMarks:false, drawPartNames:false, drawPartAbbreviations:true,
-              drawMeasureNumbers:true, drawMeasureNumbersOnlyAtSystemStart:true, drawTimeSignatures:true,
-              autoResize: false,
-            backend: "svg",
-            drawFromMeasureNumber: 1,
-            drawUpToMeasureNumber: 1.+Math.floor(window.innerWidth/window.innerHeight*2)// draw all measures, up to the end of the sample
-          });
-          osmd
-            .load(e.target.result)
-            .then(
-              function() {
-
-
-              for(var instrumentsOFF = 1;instrumentsOFF<osmd.sheet.Instruments.length;instrumentsOFF++)
-              osmd.sheet.Instruments[instrumentsOFF].Visible = false;//turn off all instruments but the first
-
-
-              //osmd.updateGraphic();
-
-                window.osmd = osmd; // give access to osmd object in Browser console, e.g. for osmd.setOptions()
-                //osmdResize();
-                onWindowResize()//this calls osmdResize() who calls osmd.render(). It is from starshipMod.js so we need it to load after that is loaded in x.html
-
-                //console.log("e.target.result: " + e.target.result);
-                 osmd.cursor.show(); // this would show the cursor on the first note
-
-                //osmd.cursor.reset();
-              }
-            );
-      };
+      reader.onload = loadScore;
       if (file.name.match('.*\.mxl')) {
         // have to read as binary, otherwise JSZip will throw ("corrupted zip: missing 37 bytes" or similar)
         reader.readAsBinaryString(file);
@@ -73,5 +38,46 @@ function handleFileSelect(evt) {
       }
     }
   }
+function loadScore(e) {
+    let toLoad = e;
+    if(typeof e.target != "undefined") toLoad=e.target.result;
 
-document.getElementById("files").addEventListener("change", handleFileSelect, false);
+    var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvas", {
+      // set options here
+//https://wordpress.org/plugins/opensheetmusicdisplay/
+        // width:window.innerWidth,
+    drawingParameters: "compacttight",//turns off title, reduces margins, etc.
+        drawTitle:false, drawSubtitle:false, drawComposer:false, drawLyricist:false,
+        drawMetronomeMarks:false, drawPartNames:false, drawPartAbbreviations:true,
+        drawMeasureNumbers:true, drawMeasureNumbersOnlyAtSystemStart:true, drawTimeSignatures:true,
+        autoResize: false,
+      backend: "svg",
+      drawFromMeasureNumber: 1,
+      drawUpToMeasureNumber: 1.+Math.floor(window.innerWidth/window.innerHeight*2)// draw all measures, up to the end of the sample
+    });
+    osmd
+      .load(toLoad)
+      .then(
+        function() {
+
+
+        for(var instrumentsOFF = 1;instrumentsOFF<osmd.sheet.Instruments.length;instrumentsOFF++)
+        osmd.sheet.Instruments[instrumentsOFF].Visible = false;//turn off all instruments but the first
+
+
+        //osmd.updateGraphic();
+
+          window.osmd = osmd; // give access to osmd object in Browser console, e.g. for osmd.setOptions()
+          //osmdResize();
+            osmd.render();
+
+          onWindowResize()//this calls osmdResize() who calls osmd.render(). It is from starshipMod.js so we need it to load after that is loaded in x.html
+          //console.log("e.target.result: " + e.target.result);
+           osmd.cursor.show(); // this would show the cursor on the first note
+
+          //osmd.cursor.reset();
+        }
+      );
+
+};
+//document.getElementById("files").addEventListener("change", handleFileSelect, false);
