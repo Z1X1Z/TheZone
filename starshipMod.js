@@ -951,7 +951,7 @@ let scoreColorInversion = true;
 function takeNextScoreSlice(start){
                     window.osmd.setOptions({
                       drawFromMeasureNumber: start,
-                      drawUpToMeasureNumber:start+Math.floor(window.innerWidth/window.innerHeight*1.25)
+                      drawUpToMeasureNumber:start+Math.floor(window.innerWidth/window.innerHeight*2.)
                       }) // requires re-render
 }
                        let timestamplast=0;
@@ -1918,8 +1918,9 @@ let thelastnotehit;
 //Here starts OPEN SHEET MUSIC DISPLAY score code
 if("osmd" in window&&window.osmd!=null){
         //takeNextScoreSlice(window.osmd.cursor.Iterator.currentMeasureIndex+1);
+                        takeNextScoreSlice(cursorMeasure);
+
         cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
-        takeNextScoreSlice(cursorMeasure);
                   //https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/issues/746
                   var nts = osmd.cursor.NotesUnderCursor();//the argument 0 hopefully specifies first instrument
                   let noteLength=nts[0].length.realValue
