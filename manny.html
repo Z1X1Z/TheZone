@@ -559,7 +559,7 @@
         <script src="fileSelectAndLoadOSMD.js"></script>
 
         <label for="song">Song:</label>
-          <select name="song" id="song" >
+          <select name="song" id="song" class="songMenu">
               <option onclick='document.getElementById("osmdCanvas").innerHTML=""; window.osmd=null;'>
                   None
               </option>
@@ -577,7 +577,7 @@
           <script>
               let song = document.getElementsByName('s');
               console.log(song[0].value)
-                  for(var j = 0; j<song.length;j++) song[j].addEventListener("touchstart",function() {loadScore(this.value); console.log("here"});
+                  for(var j = 0; j<song.length;j++) song[j].addEventListener("touchend",function() {loadScore(this.value); console.log("here"});
                   </script>
 
     </div>
