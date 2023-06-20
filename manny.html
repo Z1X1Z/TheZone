@@ -564,11 +564,8 @@
                   None
               </option>
             <option name = "s"
-                value="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/JesusChristisRisenToday.xml"
-                ontouchstart  = "console.log('here2')";
+                value="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/JesusChristisRisenToday.xml">
 
-                ontap="console.log('here1')";
-                >
                 Jesus Christ is Risen Today
             </option>
             <option
@@ -580,9 +577,7 @@
           <script>
               let song = document.getElementsByName('s');
               console.log(song[0].value)
-                  for(var j = 0; j<song.length;j++) song[j].addEventListener("click touchstart",function() {loadScore(this.value)
-                      console.log('here');
-                  });
+                  for(var j = 0; j<song.length;j++) song[j].addEventListener("touchstart",function() {loadScore(this.value)});
                   </script>
 
     </div>
