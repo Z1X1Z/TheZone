@@ -2,7 +2,7 @@
 
 function osmdResize()
         {
-          osmd.zoom=Math.min(window.innerHeight,window.innerWidth)/600;
+          osmd.zoom=Math.min(window.innerHeight,window.innerWidth)/800;
           window.osmd.render();
         }
 function handleFileSelect(evt) {
