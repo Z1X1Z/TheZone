@@ -560,13 +560,15 @@
 
         <label for="song">Song:</label>
           <select name="song" id="song" style="cursor: pointer" >
-              <option onclick='document.getElementById("osmdCanvas").innerHTML="";'>
+              <option onclick='document.getElementById("osmdCanvas").innerHTML=""; window.osmd=null;'>
                   None
               </option>
-            <option style="cursor: pointer" onclick='loadScore("https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/JesusChristisRisenToday.xml")'>
+            <option style="cursor: pointer" onclick='loadScore("https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/JesusChristisRisenToday.xml")'
+                ontouchstart='loadScore("https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/JesusChristisRisenToday.xml")'>
                 Jesus Christ is Risen Today
             </option>
-            <option onclick='loadScore("https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/Amazing_Grace.mxl")'>
+            <option onclick='loadScore("https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/Amazing_Grace.mxl")'
+                ontouchstart='loadScore("https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/Amazing_Grace.mxl")'>
                 Amazing Grace
             </option>
           </select>
