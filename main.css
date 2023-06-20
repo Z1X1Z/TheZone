@@ -22,6 +22,14 @@ body, head {
 
 
 }
+#songMenu{
+    
+    -moz-user-select: auto;
+    -webkit-user-select: auto;
+    -ms-user-select: auto;
+    user-select: auto;
+    touch-action: auto;
+}
 #container{
     
     -moz-user-select: none;
