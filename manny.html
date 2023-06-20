@@ -559,17 +559,17 @@
         <script src="fileSelectAndLoadOSMD.js"></script>
 
         <label for="song">Song:</label>
-          <select name="song" id="song" onchange="loadScore(this.value)">
-              <option onclick='document.getElementById("osmdCanvas").innerHTML=""; window.osmd=null;'>
+          <select name="song" id="song"
+              onchange='
+                if(this.value!="none")loadScore(this.value)
+                    else{ document.getElementById("osmdCanvas").innerHTML=""; window.osmd=null;}'>
+              <option value='none'>
                   None
               </option>
-            <option
-                value="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/JesusChristisRisenToday.xml">
-
+            <option value="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/JesusChristisRisenToday.xml">
                 Jesus Christ is Risen Today
             </option>
-            <option
-                value="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/Amazing_Grace.mxl">
+            <option value="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/Amazing_Grace.mxl">
                 Amazing Grace
             </option>
           </select>
