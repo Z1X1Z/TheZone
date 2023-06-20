@@ -559,17 +559,19 @@
         <script src="fileSelectAndLoadOSMD.js"></script>
 
         <label for="song">Song:</label>
-          <select name="song" id="song" style="cursor: pointer" >
+          <select name="song" id="song" >
               <option onclick='document.getElementById("osmdCanvas").innerHTML=""; window.osmd=null;'>
                   None
               </option>
-            <a><option style="cursor: pointer" onclick='loadScore("https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/JesusChristisRisenToday.xml")'
-                ontouchstart='loadScore("https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/JesusChristisRisenToday.xml")'>
+            <option
+                ontap='loadScore("https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/JesusChristisRisenToday.xml")'
+                onclick='loadScore("https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/JesusChristisRisenToday.xml")'>
+
                 Jesus Christ is Risen Today
-            </option></a>
-            <a><option onclick='loadScore("https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/Amazing_Grace.mxl")'></a>
-                Amazing Grace
             </option>
+            <button><option onclick='loadScore("https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/Amazing_Grace.mxl")'>
+                Amazing Grace
+            </option></button>
           </select>
     </div>
 
