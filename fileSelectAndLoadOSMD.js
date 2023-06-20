@@ -40,12 +40,7 @@ function handleFileSelect(evt) {
   }
 function loadScore(e) {
     let toLoad = e;
-    console.log("1")
-    if(typeof e.target != "undefined"){
-        console.log("2")
-        
-        toLoad=e.target.result;
-    }
+    if(typeof e.target != "undefined") toLoad=e.target.result;
 
     var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvas", {
       // set options here
@@ -64,7 +59,6 @@ function loadScore(e) {
       .load(toLoad)
       .then(
         function() {
-            console.log("4")
 
             
         for(var instrumentsOFF = 1;instrumentsOFF<osmd.sheet.Instruments.length;instrumentsOFF++)
