@@ -563,16 +563,23 @@
               <option onclick='document.getElementById("osmdCanvas").innerHTML=""; window.osmd=null;'>
                   None
               </option>
-            <a href = ""><option
-                ontap='loadScore("https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/JesusChristisRisenToday.xml")'
-                onclick='loadScore("https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/JesusChristisRisenToday.xml")'>
+            <option name = "s"
+                value="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/JesusChristisRisenToday.xml">
 
                 Jesus Christ is Risen Today
-            </option><a>
-            <button type = "button"><option onclick='loadScore("https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/Amazing_Grace.mxl")'>
+            </option>
+            <option
+                name = "s"
+                value="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/Amazing_Grace.mxl">
                 Amazing Grace
-            </option></button>
+            </option>
           </select>
+          <script>
+              let song = document.getElementsByName('s');
+              console.log(song[0].value)
+                  for(var j = 0; j<song.length;j++) song[j].addEventListener("click",function() {loadScore(this.value)});
+                  </script>
+
     </div>
 
     </div>
