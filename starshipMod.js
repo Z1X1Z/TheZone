@@ -970,7 +970,7 @@ function runOSMD (){
      let thelastnotehit;
 
      //Here starts OPEN SHEET MUSIC DISPLAY score code
-     if("osmd" in window){
+     if("osmd" in window&&osmd!=null){
              //takeNextScoreSlice(window.osmd.cursor.Iterator.currentMeasureIndex+1);
              //cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
              //takeNextScoreSlice(cursorMeasure);
