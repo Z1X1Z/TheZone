@@ -952,7 +952,7 @@ let scoreColorInversion = true;
 function takeNextScoreSlice(start){
                     window.osmd.setOptions({
                       drawFromMeasureNumber: start,
-                      drawUpToMeasureNumber:start+Math.floor(window.innerWidth/window.innerHeight*2.)
+                      drawUpToMeasureNumber:start+3.+Math.floor(window.innerWidth/window.innerHeight*2.)//remove +3 if not renderSingleHorizontalStaffline
                       }) // requires re-render
 }
                        let timestamplast=0;
