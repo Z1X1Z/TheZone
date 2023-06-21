@@ -1024,9 +1024,10 @@ function runOSMD (){
 
            if(noteExpired&&noteHit){
 
-               osmd.createOrRefreshRenderBackend();
 
              osmd.cursor.next(); // advance the cursor one note
+               osmd.createOrRefreshRenderBackend();
+
            if(osmd.cursor.Iterator.endReached){
 
              osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
