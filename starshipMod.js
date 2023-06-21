@@ -950,7 +950,6 @@ let currentMeasure=1;
 let cursorMeasure=1;
 let scoreColorInversion = true;
 function takeNextScoreSlice(start){
-     document.getElementById("osmdCanvas").innerHTML=""
                     window.osmd.setOptions({
                       drawFromMeasureNumber: start,
                       drawUpToMeasureNumber:start+3.+Math.floor(window.innerWidth/window.innerHeight*2.)//remove +3 if not renderSingleHorizontalStaffline set to true in osmd settings
@@ -1054,8 +1053,8 @@ function runOSMD (){
 
      cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1;
      takeNextScoreSlice(cursorMeasure);
+               osmd.createOrRefreshRenderBackend();
                onWindowResize();//this calls window.osmd.render() by osmdResize()
-
 
 
 
