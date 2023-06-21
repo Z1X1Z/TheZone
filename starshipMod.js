@@ -752,7 +752,7 @@ function adjustThreeJSWindow()
          let correlationForText = document.getElementById("allText").offsetHeight;
          correlationForText+=document.getElementById("score").offsetHeight;
 
-
+     console.log(correlationForText)
          height=window.innerHeight-correlationForText;
          width=window.innerWidth;
     
