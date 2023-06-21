@@ -1043,7 +1043,7 @@ function runOSMD (){
 
      cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1;
      takeNextScoreSlice(cursorMeasure);
-               osmd.render();//onWindowResize();//this calls window.osmd.render() by osmdResize()
+               onWindowResize();//this calls window.osmd.render() by osmdResize()
 
 
 
