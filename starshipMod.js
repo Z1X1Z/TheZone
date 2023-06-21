@@ -776,7 +776,6 @@ function adjustThreeJSWindow()
 
 }
 //window.addEventListener( 'resize', onWindowResize, false );
-
 function onWindowResize() {
 
 
@@ -784,10 +783,10 @@ let correlationForText;
 
 correlationForText=document.getElementById("score").offsetHeight;
 correlationForText+=document.getElementById("allText").offsetHeight;
-console.log(correlationForText)
-    if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
+
+     if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
        {
-            if(osmd!=null)
+            if(typeof(osmd)!="undefined"&&osmd!=null)
             {
                 osmdResize();//osmdResize defined in fileSelectAndLoadOSMD.js
             }
@@ -796,7 +795,7 @@ console.log(correlationForText)
         {
           document.getElementById("score").offsetHeight=0;
         document.getElementById("allText").offsetHeight=0;
-        if("osmd"!=null)osmd.render();
+        if(typeof(osmd)!="undefined"&&osmd!=null)osmd.render();
         }
 
         //reset correlation for osmd adjusted size
@@ -982,7 +981,7 @@ function runOSMD (){
      let thelastnotehit;
 
      //Here starts OPEN SHEET MUSIC DISPLAY score code
-     if(osmd!=null){
+     if(typeof(osmd)!="undefined"&&osmd!=null){
              //takeNextScoreSlice(window.osmd.cursor.Iterator.currentMeasureIndex+1);
              //cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
              //takeNextScoreSlice(cursorMeasure);
