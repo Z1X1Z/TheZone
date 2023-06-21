@@ -511,8 +511,9 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                     const xyStarParticleArray=Array(starCount);
 
                     
-                    
+                   let animateLoopStarted = false;
 function init() {
+     contextLost=false;
     renderTarget = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
                                                Math.min(window.innerWidth,window.innerHeight)*4./3.);
 
@@ -525,6 +526,8 @@ function init() {
 
 
     renderer = new THREE.WebGLRenderer();
+     
+     
     container.appendChild( renderer.domElement );//engage THREEJS visual out
 
     renderer.autoClear=true;//so the starship can be isolated
@@ -966,14 +969,19 @@ function takeNextScoreSlice(start){
                     window.ChristoDecrypto = 0.;
                     window.timeRESET =0;
                     window.TIMESTAMP;
-                    
+                    let contextLost = false;
                     //https://www.khronos.org/webgl/wiki/HandlingContextLost
                     container.addEventListener("webglcontextlost", function(event) {
+     console.log("here")
+     contextLost=true;
                         event.preventDefault();
                     }, false);
 
                     container.addEventListener(
                         "webglcontextrestored", init, false);
+                    
+                    
+
 
 function runOSMD (){
      
@@ -2022,7 +2030,7 @@ for(var n = 0; n<targets.length;n++){
                         
                   }//end touch mode centerOfDotToEdge
 
-                                                                                           window.requestAnimationFrame( animate );
+                                                                       if(!contextLost)                    window.requestAnimationFrame( animate );
 }
 
 
