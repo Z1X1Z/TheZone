@@ -971,10 +971,9 @@ function takeNextScoreSlice(start){
                     window.TIMESTAMP;
                     //https://www.khronos.org/webgl/wiki/HandlingContextLost
                     container.addEventListener("webglcontextlost", function(event) {
-     console.log("here")
-     cancelRequestAnimationFrame(animateLoopId);
                         event.preventDefault();
-                    }, false);
+     console.log("here")
+     cancelAnimationFrame(animateLoopId);               }, false);
 
                     container.addEventListener(
                         "webglcontextrestored", init, false);
@@ -1082,7 +1081,6 @@ function runOSMD (){
 
  }
    function animate( timestamp ) {
-    
     
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
 
@@ -2030,6 +2028,8 @@ for(var n = 0; n<targets.length;n++){
                   }//end touch mode centerOfDotToEdge
 
                                                                        animateLoopId=                   window.requestAnimationFrame( animate );
+                            //  renderer.forceContextLoss ()
+                            //  renderer.forceContextRestore ( )
 }
 
 
