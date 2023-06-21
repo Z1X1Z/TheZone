@@ -946,7 +946,6 @@ let targets=[];
 let pG=[];
 let pM=[];
 let lastZoom=1.;
-let lastTimeStamp=0.;
 let lastNoteTimeInScore=0;
 let noteHit=false;
 let timeStampLastNoteEnded=0.;
@@ -1068,9 +1067,9 @@ function runOSMD (){
 
 
                              osmd.cursor.cursorOptions.color="#"+colorSound.getHexString();//this is a frame behind if it is above colorSounds definition
+         
                              osmd.cursor.show();
-
-           cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
+         osmd.cursor.wantedZIndex="0";
 
            }//end osmd
 
