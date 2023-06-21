@@ -52,7 +52,7 @@ function loadScore(e) {
         drawMeasureNumbers:true, drawMeasureNumbersOnlyAtSystemStart:true, drawTimeSignatures:true,
         //autoResize: false,
       backend: "canvas",
-    preferredSkyBottomLineBatchCalculatorBackend:0,//0 Plain or 1 Webgl
+    preferredSkyBottomLineBatchCalculatorBackend:1,//0 Plain or 1 Webgl
         skyBottomLineBatchMinMeasures:100000000000000000,//high number to disable
       drawFromMeasureNumber: 1,
       drawUpToMeasureNumber: 1+Math.floor(window.innerWidth/window.innerHeight*2.)// draw all measures, up to the end of the sample
@@ -75,6 +75,9 @@ function loadScore(e) {
 
           onWindowResize()//this calls osmdResize() who calls osmd.render(). It is from starshipMod.js so we need it to load after that is loaded in x.html
           //console.log("e.target.result: " + e.target.result);
+            osmd.cursor.wantedZIndex="0";
+            
+
            osmd.cursor.show(); // this would show the cursor on the first note
 
           //osmd.cursor.reset();
