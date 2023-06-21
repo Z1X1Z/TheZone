@@ -1987,7 +1987,7 @@ if("osmd" in window){
 
 cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1;
 takeNextScoreSlice(cursorMeasure);
-onWindowResize();//this calls window.osmd.render() by osmdResize()
+          osmd.render();//onWindowResize();//this calls window.osmd.render() by osmdResize()
 
 
 
