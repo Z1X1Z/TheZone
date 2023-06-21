@@ -1024,6 +1024,7 @@ function runOSMD (){
 
            if(noteExpired&&noteHit){
 
+               osmd.createOrRefreshRenderBackend();
 
              osmd.cursor.next(); // advance the cursor one note
            if(osmd.cursor.Iterator.endReached){
@@ -1053,7 +1054,6 @@ function runOSMD (){
 
      cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1;
      takeNextScoreSlice(cursorMeasure);
-               osmd.createOrRefreshRenderBackend();
                onWindowResize();//this calls window.osmd.render() by osmdResize()
 
 
