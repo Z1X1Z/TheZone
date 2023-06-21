@@ -776,6 +776,7 @@ function adjustThreeJSWindow()
 
 }
 //window.addEventListener( 'resize', onWindowResize, false );
+
 function onWindowResize() {
 
 
@@ -783,10 +784,10 @@ let correlationForText;
 
 correlationForText=document.getElementById("score").offsetHeight;
 correlationForText+=document.getElementById("allText").offsetHeight;
-
-     if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
+console.log(correlationForText)
+    if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
        {
-            if(osmdLOADED&&osmd!=null)
+            if("osmd" in window)
             {
                 osmdResize();//osmdResize defined in fileSelectAndLoadOSMD.js
             }
@@ -795,7 +796,7 @@ correlationForText+=document.getElementById("allText").offsetHeight;
         {
           document.getElementById("score").offsetHeight=0;
         document.getElementById("allText").offsetHeight=0;
-        if(osmdLOADED&&osmd!=null)osmd.render();
+        if("osmd" in window)osmd.render();
         }
 
         //reset correlation for osmd adjusted size
@@ -949,6 +950,7 @@ let currentMeasure=1;
 let cursorMeasure=1;
 let scoreColorInversion = true;
 function takeNextScoreSlice(start){
+     
                     osmd.setOptions({
                       drawFromMeasureNumber: start,
                       drawUpToMeasureNumber:start+3.+Math.floor(window.innerWidth/window.innerHeight*2.)//remove +3 if not renderSingleHorizontalStaffline set to true in osmd settings
@@ -981,10 +983,6 @@ function runOSMD (){
      let thelastnotehit;
 
      //Here starts OPEN SHEET MUSIC DISPLAY score code
-     if(osmdLOADED&&osmd!=null){
-             //takeNextScoreSlice(window.osmd.cursor.Iterator.currentMeasureIndex+1);
-             //cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
-             //takeNextScoreSlice(cursorMeasure);
                        //https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/issues/746
                        var nts = osmd.cursor.NotesUnderCursor();//the argument 0 hopefully specifies first instrument
                        let noteLength=nts[0].length.realValue
@@ -1033,21 +1031,21 @@ function runOSMD (){
            }
 
 
-                                 var notesUnderCursor = osmd.cursor.NotesUnderCursor();//the argument 0 hopefully specifies first instrument
+         var notesUnderCursor = osmd.cursor.NotesUnderCursor();//the argument 0 hopefully specifies first instrument
 
-                                             for(var n = 0.; n< notesUnderCursor.length; n++){
-
-                                                   let noteToHitColor = new THREE.Color();
-                                                   noteToHitColor.setHSL((-notesUnderCursor[n].halfTone)%12/12.,1.,.5);
-                                                   notesUnderCursor[n].noteheadColor="#"+noteToHitColor.getHexString();;
-                                             }
+               for(var n = 0.; n< notesUnderCursor.length; n++)
+               {
+                   let noteToHitColor = new THREE.Color();
+                   noteToHitColor.setHSL((-notesUnderCursor[n].halfTone)%12/12.,1.,.5);
+                   notesUnderCursor[n].noteheadColor="#"+noteToHitColor.getHexString();;
+                }
 
                              noteHit=false;
                              timeStampLastNoteEnded=window.TIMESTAMP;
 
-     cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1;
-     takeNextScoreSlice(cursorMeasure);
-               onWindowResize();//this calls window.osmd.render() by osmdResize()
+         cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1;
+         takeNextScoreSlice(cursorMeasure);
+                   onWindowResize();//this calls window.osmd.render() by osmdResize()
 
 
 
@@ -1062,15 +1060,14 @@ function runOSMD (){
          osmd.cursor.wantedZIndex="0";
 
 
-           }//end osmd
-
     }
-        function    OSMDUPDATER(){   runOSMD();  setTimeout(OSMDUPDATER,1000/60.);}
-        OSMDUPDATER();
+        //function    OSMDUPDATER(){   runOSMD();  setTimeout(OSMDUPDATER,1000/60.);}
+        //OSMDUPDATER();
 
    function animate( timestamp ) {
     
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
+     if("osmd" in window&&osmd!=null)runOSMD();
 
     
      
