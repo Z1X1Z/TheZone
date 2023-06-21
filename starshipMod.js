@@ -950,9 +950,10 @@ let currentMeasure=1;
 let cursorMeasure=1;
 let scoreColorInversion = true;
 function takeNextScoreSlice(start){
+     document.getElementById("osmdCanvas").innerHTML=""
                     window.osmd.setOptions({
                       drawFromMeasureNumber: start,
-                      drawUpToMeasureNumber:start+3.+Math.floor(window.innerWidth/window.innerHeight*2.)//remove +3 if not renderSingleHorizontalStaffline
+                      drawUpToMeasureNumber:start+3.+Math.floor(window.innerWidth/window.innerHeight*2.)//remove +3 if not renderSingleHorizontalStaffline set to true in osmd settings
                       }) // requires re-render
 }
                        let timestamplast=0;
