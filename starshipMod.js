@@ -1021,11 +1021,11 @@ function runOSMD (){
 
              osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
              scoreColorInversion= !scoreColorInversion;
-               osmd.updateGraphic()
 
              takeNextScoreSlice(1);
                osmd.cursor.hide();
                osmd.render();
+               osmd.updateGraphic()
                osmd.cursor.reset();
                osmd.cursor.show();
            }
