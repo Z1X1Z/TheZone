@@ -50,8 +50,8 @@ function loadScore(e) {
         drawTitle:false, drawSubtitle:false, drawComposer:false, drawLyricist:false,
         drawMetronomeMarks:false, drawPartNames:false, drawPartAbbreviations:true,
         drawMeasureNumbers:true, drawMeasureNumbersOnlyAtSystemStart:true, drawTimeSignatures:true,
-        autoResize: false,
-      backend: "png",
+        //autoResize: false,
+      backend: "svg",
     preferredSkyBottomLineBatchCalculatorBackend:0,//0 Plain or 1 Webgl
       drawFromMeasureNumber: 1,
       drawUpToMeasureNumber: 1+Math.floor(window.innerWidth/window.innerHeight*2.)// draw all measures, up to the end of the sample
