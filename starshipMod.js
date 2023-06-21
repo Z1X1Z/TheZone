@@ -757,7 +757,6 @@ function adjustThreeJSWindow()
          let correlationForText = document.getElementById("allText").offsetHeight;
          correlationForText+=document.getElementById("score").offsetHeight;
 
-     console.log(correlationForText)
          height=window.innerHeight-correlationForText;
          width=window.innerWidth;
      lastWidth=window.innerWidth;
@@ -787,7 +786,7 @@ let correlationForText;
 
 correlationForText=document.getElementById("score").offsetHeight;
 correlationForText+=document.getElementById("allText").offsetHeight;
-
+console.log(correlationForText)
     if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
        {
             if("osmd" in window)
@@ -1070,6 +1069,7 @@ function runOSMD (){
          
                              osmd.cursor.show();
          osmd.cursor.wantedZIndex="0";
+
 
            }//end osmd
 
