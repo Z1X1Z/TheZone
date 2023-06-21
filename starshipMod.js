@@ -980,6 +980,8 @@ function takeNextScoreSlice(start){
 
 function runOSMD (){
      
+     osmd.drawer.clear();
+
      let thelastnotehit;
 
      //Here starts OPEN SHEET MUSIC DISPLAY score code
@@ -1025,7 +1027,7 @@ function runOSMD (){
              takeNextScoreSlice(1);
                osmd.cursor.hide();
                osmd.render();
-               osmd.updateGraphic()
+               osmd.updateGraphic();
                osmd.cursor.reset();
                osmd.cursor.show();
            }
