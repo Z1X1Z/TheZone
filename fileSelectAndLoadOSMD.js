@@ -1,5 +1,6 @@
 
 var osmd = null;
+var osmdLOADED = false;
 
 function osmdResize()
         {
@@ -76,7 +77,7 @@ function loadScore(e) {
             osmd.cursor.wantedZIndex="0";
 
            osmd.cursor.show(); // this would show the cursor on the first note
-
+            osmdLOADED = true;
           //osmd.cursor.reset();
         }
       );
