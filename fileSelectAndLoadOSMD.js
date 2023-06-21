@@ -45,8 +45,8 @@ function loadScore(e) {
     var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvas", {
       // set options here
 //https://wordpress.org/plugins/opensheetmusicdisplay/
-        // width:window.innerWidth,
-    //drawingParameters: "compacttight",//turns off title, reduces margins, etc.; breaks osmd.cursor when used online, so don't use
+         width:window.innerWidth,
+    drawingParameters: "compacttight",//turns off title, reduces margins, etc.; breaks osmd.cursor when used online, so don't use
         drawTitle:false, drawSubtitle:false, drawComposer:false, drawLyricist:false,
         drawMetronomeMarks:false, drawPartNames:false, drawPartAbbreviations:true,
         drawMeasureNumbers:true, drawMeasureNumbersOnlyAtSystemStart:true, drawTimeSignatures:true,
