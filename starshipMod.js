@@ -1916,11 +1916,10 @@ for(var n = 0; n<targets.length;n++){
 let thelastnotehit;
 
 //Here starts OPEN SHEET MUSIC DISPLAY score code
-if("osmd" in window&&window.osmd!=null){
+if("osmd" in window){
         //takeNextScoreSlice(window.osmd.cursor.Iterator.currentMeasureIndex+1);
-                        takeNextScoreSlice(cursorMeasure);
-
-        cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
+        //cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
+        //takeNextScoreSlice(cursorMeasure);
                   //https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/issues/746
                   var nts = osmd.cursor.NotesUnderCursor();//the argument 0 hopefully specifies first instrument
                   let noteLength=nts[0].length.realValue
@@ -1961,15 +1960,18 @@ if("osmd" in window&&window.osmd!=null){
 
 
         osmd.cursor.next(); // advance the cursor one note
-
+          console.log(osmd.cursor.Iterator.endReached)
       if(osmd.cursor.Iterator.endReached){
 
         osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
         scoreColorInversion= !scoreColorInversion;
 
         takeNextScoreSlice(1);
-        osmd.cursor.reset();
-                              }
+          osmd.cursor.hide();
+          osmd.render();
+          osmd.cursor.reset();
+          osmd.cursor.show();
+      }
 
 
                             var notesUnderCursor = osmd.cursor.NotesUnderCursor();//the argument 0 hopefully specifies first instrument
@@ -1980,13 +1982,14 @@ if("osmd" in window&&window.osmd!=null){
                                               noteToHitColor.setHSL((-notesUnderCursor[n].halfTone)%12/12.,1.,.5);
                                               notesUnderCursor[n].noteheadColor="#"+noteToHitColor.getHexString();;
                                         }
-                            cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1;
-                            takeNextScoreSlice(cursorMeasure);
-                            onWindowResize();//this calls window.osmd.render() by osmdResize()
-
 
                         noteHit=false;
                         timeStampLastNoteEnded=timestamp;
+
+cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1;
+takeNextScoreSlice(cursorMeasure);
+onWindowResize();//this calls window.osmd.render() by osmdResize()
+
 
 
 
