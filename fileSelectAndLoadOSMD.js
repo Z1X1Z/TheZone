@@ -1,6 +1,4 @@
 
-var osmd = null;
-var osmdLOADED = false;
 
 function osmdResize()
         {
@@ -44,7 +42,7 @@ function loadScore(e) {
     let toLoad = e;
     if(typeof e.target != "undefined") toLoad=e.target.result;
 
-     osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvas", {
+    var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvas", {
       // set options here
 //https://wordpress.org/plugins/opensheetmusicdisplay/
          width:window.innerWidth,
@@ -52,13 +50,13 @@ function loadScore(e) {
         drawTitle:false, drawSubtitle:false, drawComposer:false, drawLyricist:false,
         drawMetronomeMarks:false, drawPartNames:false, drawPartAbbreviations:true,
         drawMeasureNumbers:true, drawMeasureNumbersOnlyAtSystemStart:true, drawTimeSignatures:true,
-        autoResize: false,
+        //autoResize: false,
       backend: "canvas",
     preferredSkyBottomLineBatchCalculatorBackend:0,//0 Plain or 1 Webgl
         skyBottomLineBatchMinMeasures:100,//high number to disable
         renderSingleHorizontalStaffline:true,
     //  drawFromMeasureNumber: 1,
-    //  drawUpToMeasureNumber: 1.+Math.floor(window.innerWidth/window.innerHeight*2.)
+    //  drawUpToMeasureNumber: 4.+Math.floor(window.innerWidth/window.innerHeight*2.)
     });
     osmd
       .load(toLoad)
@@ -69,16 +67,14 @@ function loadScore(e) {
         for(var instrumentsOFF = 1;instrumentsOFF<osmd.sheet.Instruments.length;instrumentsOFF++)
         osmd.sheet.Instruments[instrumentsOFF].Visible = false;//turn off all instruments but the first
         //osmd.updateGraphic();
-         // window.osmd = osmd; // give access to osmd object in Browser console, e.g. for osmd.setOptions()
+          window.osmd = osmd; // give access to osmd object in Browser console, e.g. for osmd.setOptions()
           //osmdResize();
            // osmd.render();
-            osmdLOADED = true;
-
           onWindowResize()//this calls osmdResize() who calls osmd.render(). It is from starshipMod.js so we need it to load after that is loaded in x.html
           //console.log("e.target.result: " + e.target.result);
-            osmd.cursor.show(); // this would show the cursor on the first note
-
             osmd.cursor.wantedZIndex="0";
+
+           osmd.cursor.show(); // this would show the cursor on the first note
 
           //osmd.cursor.reset();
         }
