@@ -800,7 +800,7 @@ correlationForText+=document.getElementById("allText").offsetHeight;
         //reset correlation for osmd adjusted size
         correlationForText=document.getElementById("score").offsetHeight;
         correlationForText+=document.getElementById("allText").offsetHeight;
-        //if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
+        if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
             adjustThreeJSWindow();
 
   }
@@ -1960,7 +1960,6 @@ if("osmd" in window){
 
 
         osmd.cursor.next(); // advance the cursor one note
-          console.log(osmd.cursor.Iterator.endReached)
       if(osmd.cursor.Iterator.endReached){
 
         osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
