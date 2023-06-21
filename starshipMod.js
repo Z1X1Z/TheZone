@@ -980,7 +980,6 @@ function takeNextScoreSlice(start){
 
 function runOSMD (){
      
-     osmd.drawer.clear();
 
      let thelastnotehit;
 
@@ -1016,6 +1015,7 @@ function runOSMD (){
 
 
            if(noteExpired&&noteHit){
+               osmd.drawer.clear();
 
              osmd.cursor.next(); // advance the cursor one note
 
