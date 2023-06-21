@@ -511,9 +511,7 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                     const xyStarParticleArray=Array(starCount);
 
                     
-                   let animateLoopStarted = false;
 function init() {
-     contextLost=false;
     renderTarget = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
                                                Math.min(window.innerWidth,window.innerHeight)*4./3.);
 
@@ -970,7 +968,7 @@ function takeNextScoreSlice(start){
                     //https://www.khronos.org/webgl/wiki/HandlingContextLost
                     container.addEventListener("webglcontextlost", function(event) {
                         event.preventDefault();
-     console.log("here")
+     console.log("context lost")
      cancelAnimationFrame(animateLoopId);               }, false);
 
                     container.addEventListener(
