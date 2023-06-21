@@ -52,6 +52,7 @@ function loadScore(e) {
         drawMeasureNumbers:true, drawMeasureNumbersOnlyAtSystemStart:true, drawTimeSignatures:true,
         autoResize: false,
       backend: "png",
+        SkyBottomLineBatchCalculatorBackendType:"Plain",
       drawFromMeasureNumber: 1,
       drawUpToMeasureNumber: 1+Math.floor(window.innerWidth/window.innerHeight*2.)// draw all measures, up to the end of the sample
     });
