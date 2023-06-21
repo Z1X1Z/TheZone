@@ -1,4 +1,5 @@
 
+var osmd = null;
 
 function osmdResize()
         {
@@ -42,7 +43,7 @@ function loadScore(e) {
     let toLoad = e;
     if(typeof e.target != "undefined") toLoad=e.target.result;
 
-    var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvas", {
+     osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvas", {
       // set options here
 //https://wordpress.org/plugins/opensheetmusicdisplay/
          width:window.innerWidth,
@@ -56,7 +57,7 @@ function loadScore(e) {
         skyBottomLineBatchMinMeasures:100,//high number to disable
         renderSingleHorizontalStaffline:true,
     //  drawFromMeasureNumber: 1,
-    //  drawUpToMeasureNumber: 4.+Math.floor(window.innerWidth/window.innerHeight*2.)
+    //  drawUpToMeasureNumber: 1.+Math.floor(window.innerWidth/window.innerHeight*2.)
     });
     osmd
       .load(toLoad)
@@ -67,7 +68,7 @@ function loadScore(e) {
         for(var instrumentsOFF = 1;instrumentsOFF<osmd.sheet.Instruments.length;instrumentsOFF++)
         osmd.sheet.Instruments[instrumentsOFF].Visible = false;//turn off all instruments but the first
         //osmd.updateGraphic();
-          window.osmd = osmd; // give access to osmd object in Browser console, e.g. for osmd.setOptions()
+         // window.osmd = osmd; // give access to osmd object in Browser console, e.g. for osmd.setOptions()
           //osmdResize();
            // osmd.render();
           onWindowResize()//this calls osmdResize() who calls osmd.render(). It is from starshipMod.js so we need it to load after that is loaded in x.html

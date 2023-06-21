@@ -562,7 +562,7 @@
           <select name="song" id="song"
               onchange='
                 if(this.value!="none")loadScore(this.value)
-                    else{ document.getElementById("osmdCanvas").innerHTML=""; window.osmd=null;}'>
+                    else{ document.getElementById("osmdCanvas").innerHTML=""; osmd=null; adjustThreeJSWindow();}'>
               <option value='none'>
                   None
               </option>
@@ -598,8 +598,7 @@
         <div id="textWindow">LOVE</div>
         <div id="osmdCanvas"/>
     </div id="score">
-    
-    <input type="file" id="files"/>
+    <input type="file" id="files">
     <output id="list"></output>
 
     <script>

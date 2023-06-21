@@ -787,7 +787,7 @@ correlationForText+=document.getElementById("allText").offsetHeight;
 console.log(correlationForText)
     if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
        {
-            if("osmd" in window)
+            if(osmd!=null)
             {
                 osmdResize();//osmdResize defined in fileSelectAndLoadOSMD.js
             }
@@ -796,7 +796,7 @@ console.log(correlationForText)
         {
           document.getElementById("score").offsetHeight=0;
         document.getElementById("allText").offsetHeight=0;
-        if("osmd" in window)osmd.render();
+        if("osmd"!=null)osmd.render();
         }
 
         //reset correlation for osmd adjusted size
@@ -950,7 +950,7 @@ let currentMeasure=1;
 let cursorMeasure=1;
 let scoreColorInversion = true;
 function takeNextScoreSlice(start){
-                    window.osmd.setOptions({
+                    osmd.setOptions({
                       drawFromMeasureNumber: start,
                       drawUpToMeasureNumber:start+3.+Math.floor(window.innerWidth/window.innerHeight*2.)//remove +3 if not renderSingleHorizontalStaffline set to true in osmd settings
                       }) // requires re-render
@@ -982,7 +982,7 @@ function runOSMD (){
      let thelastnotehit;
 
      //Here starts OPEN SHEET MUSIC DISPLAY score code
-     if("osmd" in window&&osmd!=null){
+     if(osmd!=null){
              //takeNextScoreSlice(window.osmd.cursor.Iterator.currentMeasureIndex+1);
              //cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
              //takeNextScoreSlice(cursorMeasure);
@@ -1009,12 +1009,6 @@ function runOSMD (){
                                }
 
 
-
-
-
-                             let noteToHitColor = new THREE.Color();
-                             noteToHitColor.setHSL((-nts[n].halfTone)%12/12.,1.,.5);
-                             osmd.cursor.NotesUnderCursor()[n].noteheadColor="#"+noteToHitColor.getHexString();;
                        }
 
 
@@ -1026,7 +1020,6 @@ function runOSMD (){
 
 
              osmd.cursor.next(); // advance the cursor one note
-               osmd.createOrRefreshRenderBackend();
 
            if(osmd.cursor.Iterator.endReached){
 
