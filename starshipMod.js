@@ -744,8 +744,10 @@ dotted:{value:false},
   renderer.setPixelRatio( rez);
      adjustThreeJSWindow();
     animate();
-    
+     adjustThreeJSWindow();
+
 }
+                    let lastWidth;
 function adjustThreeJSWindow()
 {
     
@@ -755,7 +757,7 @@ function adjustThreeJSWindow()
      console.log(correlationForText)
          height=window.innerHeight-correlationForText;
          width=window.innerWidth;
-    
+     lastWidth=window.innerWidth;
 
          uniforms.resolution.value.x = width;
          uniforms.resolution.value.y = height;
@@ -1072,7 +1074,7 @@ function runOSMD (){
      runOSMD();
     
      
-     if(width!=window.innerWidth) adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
+     if(lastWidth!=window.innerWidth&&lastWidth!=window.innerHeight) adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
     uniforms[ "time" ].value = timestamp/1000.+window.startTimeSecondMantissaMagnified;
     if(starSpin!=0)twist=(uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*starSpin*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel
      
