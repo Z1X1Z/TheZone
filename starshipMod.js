@@ -965,12 +965,11 @@ function takeNextScoreSlice(start){
                     window.timeRESET =0;
                     window.TIMESTAMP;
                     
-                    function runOSMD (){
+function runOSMD (){
      
      let thelastnotehit;
 
      //Here starts OPEN SHEET MUSIC DISPLAY score code
-     if("osmd" in window){
              //takeNextScoreSlice(window.osmd.cursor.Iterator.currentMeasureIndex+1);
              //cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
              //takeNextScoreSlice(cursorMeasure);
@@ -1021,9 +1020,6 @@ function takeNextScoreSlice(start){
 
              takeNextScoreSlice(1);
                osmd.cursor.hide();
-               osmd.render();
-               osmd.cursor.reset();
-               osmd.cursor.show();
            }
 
 
@@ -1044,8 +1040,11 @@ function takeNextScoreSlice(start){
                osmd.render();//onWindowResize();//this calls window.osmd.render() by osmdResize()
 
 
+               if(osmd.cursor.Iterator.endReached){
 
-
+               osmd.cursor.reset();
+               osmd.cursor.show();
+                   }
 
            }
 
@@ -1056,13 +1055,10 @@ function takeNextScoreSlice(start){
 
            cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
 
-           }//end osmd
 
 
 
 
-
-                                   adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
 
 
  }
@@ -1071,8 +1067,10 @@ function takeNextScoreSlice(start){
     
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
 
-     runOSMD();
+     if("osmd" in window) runOSMD();
     
+     
+     adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
     uniforms[ "time" ].value = timestamp/1000.+window.startTimeSecondMantissaMagnified;
     if(starSpin!=0)twist=(uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*starSpin*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel
      
