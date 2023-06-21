@@ -965,9 +965,6 @@ function takeNextScoreSlice(start){
                     window.timeRESET =0;
                     window.TIMESTAMP;
    function animate( timestamp ) {
-
-     adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
-    
     
     
     
@@ -2008,6 +2005,7 @@ takeNextScoreSlice(cursorMeasure);
 
 
 
+                              adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
 
 
                                                                                            window.requestAnimationFrame( animate );
