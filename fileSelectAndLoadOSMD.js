@@ -53,7 +53,7 @@ function loadScore(e) {
         //autoResize: false,
       backend: "svg",
     preferredSkyBottomLineBatchCalculatorBackend:opensheetmusicdisplay.SkyBottomLineBatchCalculatorBackendType.Plain,//0 Plain or 1 Webgl
-        skyBottomLineBatchMinMeasures:100,//high number to disable
+        skyBottomLineBatchMinMeasures:100000000000000000,//high number to disable
       drawFromMeasureNumber: 1,
       drawUpToMeasureNumber: 1+Math.floor(window.innerWidth/window.innerHeight*2.)// draw all measures, up to the end of the sample
     });
