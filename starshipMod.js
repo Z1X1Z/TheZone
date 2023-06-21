@@ -967,6 +967,14 @@ function takeNextScoreSlice(start){
                     window.timeRESET =0;
                     window.TIMESTAMP;
                     
+                    //https://www.khronos.org/webgl/wiki/HandlingContextLost
+                    container.addEventListener("webglcontextlost", function(event) {
+                        event.preventDefault();
+                    }, false);
+
+                    container.addEventListener(
+                        "webglcontextrestored", init, false);
+
 function runOSMD (){
      
      let thelastnotehit;
