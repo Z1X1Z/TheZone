@@ -969,11 +969,10 @@ function takeNextScoreSlice(start){
                     window.ChristoDecrypto = 0.;
                     window.timeRESET =0;
                     window.TIMESTAMP;
-                    let contextLost = false;
                     //https://www.khronos.org/webgl/wiki/HandlingContextLost
                     container.addEventListener("webglcontextlost", function(event) {
      console.log("here")
-     contextLost=true;
+     cancelRequestAnimationFrame(animateLoopId);
                         event.preventDefault();
                     }, false);
 
@@ -2030,11 +2029,11 @@ for(var n = 0; n<targets.length;n++){
                         
                   }//end touch mode centerOfDotToEdge
 
-                                                                       if(!contextLost)                    window.requestAnimationFrame( animate );
+                                                                       animateLoopId=                   window.requestAnimationFrame( animate );
 }
 
 
-                    
+                    let animateLoopId;
                     
 
 //begin MIT license, code from https://github.com/adamski/pitch_detector
