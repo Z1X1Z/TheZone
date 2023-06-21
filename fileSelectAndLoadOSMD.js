@@ -54,8 +54,9 @@ function loadScore(e) {
       backend: "canvas",
     preferredSkyBottomLineBatchCalculatorBackend:1,//0 Plain or 1 Webgl
         skyBottomLineBatchMinMeasures:0,//high number to disable
+        renderSingleHorizontalStaffline:true,
       drawFromMeasureNumber: 1,
-      drawUpToMeasureNumber: 1+Math.floor(window.innerWidth/window.innerHeight*2.)// draw all measures, up to the end of the sample
+      drawUpToMeasureNumber: 4.+Math.floor(window.innerWidth/window.innerHeight*2.)
     });
     osmd
       .load(toLoad)
