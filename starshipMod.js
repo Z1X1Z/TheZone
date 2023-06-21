@@ -742,7 +742,7 @@ dotted:{value:false},
     feedbackSceneFlip.add(feedbackStarshipmeshFlip)
     
   renderer.setPixelRatio( rez);
-
+     adjustThreeJSWindow();
     animate();
     
 }
@@ -1072,7 +1072,7 @@ function runOSMD (){
      runOSMD();
     
      
-     adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
+     if(width!=window.innerWidth) adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
     uniforms[ "time" ].value = timestamp/1000.+window.startTimeSecondMantissaMagnified;
     if(starSpin!=0)twist=(uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*starSpin*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel
      
