@@ -51,9 +51,9 @@ function loadScore(e) {
         drawMetronomeMarks:false, drawPartNames:false, drawPartAbbreviations:true,
         drawMeasureNumbers:true, drawMeasureNumbersOnlyAtSystemStart:true, drawTimeSignatures:true,
         autoResize: false,
-      backend: "svg",
+      backend: "png",
       drawFromMeasureNumber: 1,
-      drawUpToMeasureNumber: 1.+Math.floor(window.innerWidth/window.innerHeight*2.)// draw all measures, up to the end of the sample
+      drawUpToMeasureNumber: 1+Math.floor(window.innerWidth/window.innerHeight*2.)// draw all measures, up to the end of the sample
     });
     osmd
       .load(toLoad)
