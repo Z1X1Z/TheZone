@@ -1015,13 +1015,13 @@ function runOSMD (){
 
            if(noteExpired&&noteHit){
 
-
              osmd.cursor.next(); // advance the cursor one note
 
            if(osmd.cursor.Iterator.endReached){
 
              osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
              scoreColorInversion= !scoreColorInversion;
+               osmd.updateGraphic()
 
              takeNextScoreSlice(1);
                osmd.cursor.hide();
@@ -1045,6 +1045,7 @@ function runOSMD (){
 
          cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1;
          takeNextScoreSlice(cursorMeasure);
+
                    onWindowResize();//this calls window.osmd.render() by osmdResize()
 
 
