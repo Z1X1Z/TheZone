@@ -970,6 +970,7 @@ function runOSMD (){
      let thelastnotehit;
 
      //Here starts OPEN SHEET MUSIC DISPLAY score code
+     if("osmd" in window){
              //takeNextScoreSlice(window.osmd.cursor.Iterator.currentMeasureIndex+1);
              //cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
              //takeNextScoreSlice(cursorMeasure);
@@ -1020,6 +1021,9 @@ function runOSMD (){
 
              takeNextScoreSlice(1);
                osmd.cursor.hide();
+               osmd.render();
+               osmd.cursor.reset();
+               osmd.cursor.show();
            }
 
 
@@ -1040,11 +1044,8 @@ function runOSMD (){
                osmd.render();//onWindowResize();//this calls window.osmd.render() by osmdResize()
 
 
-               if(osmd.cursor.Iterator.endReached){
 
-               osmd.cursor.reset();
-               osmd.cursor.show();
-                   }
+
 
            }
 
@@ -1055,6 +1056,7 @@ function runOSMD (){
 
            cursorMeasure=window.osmd.cursor.Iterator.currentMeasureIndex+1;//this is the measure number of the cursor
 
+           }//end osmd
 
 
 
@@ -1067,7 +1069,7 @@ function runOSMD (){
     
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
 
-     if("osmd" in window) runOSMD();
+     runOSMD();
     
      
      adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
