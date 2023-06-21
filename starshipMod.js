@@ -1074,17 +1074,14 @@ function runOSMD (){
 
            }//end osmd
 
+    }
+        function    OSMDUPDATER(){   runOSMD();  setTimeout(OSMDUPDATER,1000/60.);}
+        OSMDUPDATER();
 
-
-
-
-
- }
    function animate( timestamp ) {
     
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
 
-     runOSMD();
     
      
      if(lastWidth!=window.innerWidth&&lastWidth!=window.innerHeight) adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
