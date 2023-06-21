@@ -562,7 +562,7 @@
           <select name="song" id="song"
               onchange='
                 if(this.value!="none")loadScore(this.value)
-                    else{ document.getElementById("osmdCanvas").innerHTML=""; osmd=null; adjustThreeJSWindow();}'>
+                    else{ document.getElementById("osmdCanvas").innerHTML=""; osmd=null; osmdLOADED=false; adjustThreeJSWindow();}'>
               <option value='none'>
                   None
               </option>
