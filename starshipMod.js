@@ -1020,11 +1020,18 @@ function runOSMD (){
 
 
            if(noteExpired&&noteHit){
-
-             osmd.cursor.next(); // advance the cursor one note
+               osmd.cursor.next(); // advance the cursor one note
 
            if(osmd.cursor.Iterator.endReached){
-
+               
+                 ScoreDiv.remove();
+                 ScoreDiv.innerHTML="";
+                 ScoreDiv=null;
+                  ScoreDiv=document.createElement("div");
+                  document.getElementById("score").append(ScoreDiv);
+                  osmd.container = ScoreDiv;
+                
+                
              osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
              scoreColorInversion= !scoreColorInversion;
 
@@ -2004,7 +2011,7 @@ for(var n = 0; n<targets.length;n++){
                     "<div sytle='font-size: 16px;'>"+
                     
                     "cores:"+(Math.floor(uniforms["centralCores"].value)+cloverSuperCores*singleHyperCoreDepth+uniforms.upCoreCycler.value)+
-                    " outerCores: "+Math.floor(uniforms["externalCores"].value)+", <p style='margin : 0px'></p>"+
+                    " metaCores: "+Math.floor(uniforms["externalCores"].value)+", <p style='margin : 0px'></p>"+
 
                     "zoom: "+(zoom/2.**(singleHyperCoreDepth*cloverSuperCores))+"<p style='margin : 0px'></p>"+
                     "real part: "+ coordY +"<p style='margin : 0px'></p>"+
