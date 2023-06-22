@@ -1020,11 +1020,6 @@ function runOSMD (){
 
            if(noteExpired&&noteHit){
 
-               let leakingElement = document.getElementById("osmdCanvasVexFlowBackendCanvas1");
-               leakingElement.parentNode.removeChild(leakingElement)
-               leakingElement = null;
-               delete leakingElement;
-               
              osmd.cursor.next(); // advance the cursor one note
 
            if(osmd.cursor.Iterator.endReached){
@@ -1033,6 +1028,12 @@ function runOSMD (){
              scoreColorInversion= !scoreColorInversion;
 
              takeNextScoreSlice(1);
+               
+               let leakingElement = document.getElementById("osmdCanvasVexFlowBackendCanvas1");
+               leakingElement.parentNode.removeChild(leakingElement)
+               leakingElement = null;
+               delete leakingElement;
+               
                osmd.cursor.hide();
                osmd.render();
                osmd.cursor.reset();
@@ -1055,6 +1056,11 @@ function runOSMD (){
          cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1;
          takeNextScoreSlice(cursorMeasure);
 
+               let leakingElement = document.getElementById("osmdCanvasVexFlowBackendCanvas1");
+               leakingElement.parentNode.removeChild(leakingElement)
+               leakingElement = null;
+               delete leakingElement;
+               
                    onWindowResize();//this calls window.osmd.render() by osmdResize()
 
 
