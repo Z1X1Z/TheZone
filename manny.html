@@ -1353,16 +1353,21 @@ vec3 robeL(vec2 g, vec2 t, vec2 d){
  float c=3.58;
  p.y*=-1.;
  if(colorCombo==18) p*=2.*c;
+ vec3 h=vec3(0.);
  vec2 z=p;
-const float iterations =  21.*21.;
-for (float f=0.;f<iterations;f+=1.)
-if(f>(-sin(time/4.)+1.)/2.*iterations*.25+.75){if(length(z)>5.&&colorCombo!=18)break;
+const float iterations =  100.;
+for (float f=0.;f<iterations;f+=1.){if(length(z)>5.&&colorCombo!=18){h=(vec3(z.x*z.y/4.,z.x+.144,z.y-.0333*(1.-z.y))+.1)
+    /length(z)/5.;;break;}
 else{
 if(colorCombo==18)if(length(z)>c)z/=c;
 z=vec2(z.x*z.x-z.y*z.y-p.x+t.x, 2.0*z.x*z.y-p.y+t.y);//this is {s=s^2-p}
+
+h+=(vec3(z.x*z.y,z.x+.144,z.y-.0333*(1.-z.y))+.1)
+/length(z)/iterations;
+
 }}
 
-return (vec3(z.x*z.y,z.x+.2,z.y)+.3)/length(z);
+return h;
 
  
  }
