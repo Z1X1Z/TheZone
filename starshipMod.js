@@ -1023,6 +1023,7 @@ function runOSMD (){
                let leakingElement = document.getElementById("osmdCanvasVexFlowBackendCanvas1");
                leakingElement.parentNode.removeChild(leakingElement)
                leakingElement = null;
+               delete leakingElement;
                
              osmd.cursor.next(); // advance the cursor one note
 
