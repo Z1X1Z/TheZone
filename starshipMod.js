@@ -957,7 +957,7 @@ function takeNextScoreSlice(start){
      
                     osmd.setOptions({
                       drawFromMeasureNumber: start,
-                      drawUpToMeasureNumber:start+3.+Math.floor(window.innerWidth/window.innerHeight*2.)//remove +3 if not renderSingleHorizontalStaffline set to true in osmd settings
+                      //drawUpToMeasureNumber:start+3.+Math.floor(window.innerWidth/window.innerHeight*2.)//remove +3 if not renderSingleHorizontalStaffline set to true in osmd settings
                       }) // requires re-render
 }
                        let timestamplast=0;
