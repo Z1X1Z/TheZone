@@ -779,7 +779,7 @@ function adjustThreeJSWindow()
 
 
 }
-//window.addEventListener( 'resize', onWindowResize, false );
+window.addEventListener( 'resize', onWindowResize, false );
 
 function onWindowResize() {
 
@@ -1082,8 +1082,8 @@ function runOSMD (){
 
     
      
-     if((lastHeight!=window.innerWidth&&lastHeight!=window.innerHeight)||  bottomOfScreenHeight != document.getElementById("score").offsetHeight)
-         adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
+    // if((lastHeight!=window.innerWidth&&lastHeight!=window.innerHeight)||  bottomOfScreenHeight != document.getElementById("score").offsetHeight)
+     //    adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
     uniforms[ "time" ].value = timestamp/1000.+window.startTimeSecondMantissaMagnified;
     if(starSpin!=0)twist=(uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*starSpin*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel
      
