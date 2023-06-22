@@ -749,12 +749,16 @@ dotted:{value:false},
 
 }
                     let lastWidth;
+                    let bottomOfScreenHeight = 0;
 function adjustThreeJSWindow()
 {
     
          let correlationForText = document.getElementById("allText").offsetHeight;
          correlationForText+=document.getElementById("score").offsetHeight;
-
+     
+        bottomOfScreenHeight = document.getElementById("score").offsetHeight;
+     
+     
          height=window.innerHeight-correlationForText;
          width=window.innerWidth;
      lastWidth=window.innerWidth;
@@ -966,16 +970,18 @@ function takeNextScoreSlice(start){
                     window.ChristoDecrypto = 0.;
                     window.timeRESET =0;
                     window.TIMESTAMP;
+                    
+                    /*
                     //https://www.khronos.org/webgl/wiki/HandlingContextLost
-                    container.addEventListener("webglcontextlost", function(event) {
-                        event.preventDefault();
-     console.log("context lost")
-     cancelAnimationFrame(animateLoopId);               }, false);
+    container.addEventListener("webglcontextlost", function(event) {
+            event.preventDefault();
+            console.log("context lost")
+            cancelAnimationFrame(animateLoopId);               }, false);
 
-                    container.addEventListener(
-                        "webglcontextrestored", init, false);
-                    
-                    
+    container.addEventListener(
+            "webglcontextrestored", init, false);
+                
+                    */
 
 
 function runOSMD (){
@@ -1071,7 +1077,8 @@ function runOSMD (){
 
     
      
-     if(lastWidth!=window.innerWidth&&lastWidth!=window.innerHeight) adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
+     if((lastWidth!=window.innerWidth&&lastWidth!=window.innerHeight)||  bottomOfScreenHeight != document.getElementById("score").offsetHeight)
+         adjustThreeJSWindow();//mostly for ios here, so the screen readjusts to fill dimensions after rotation
     uniforms[ "time" ].value = timestamp/1000.+window.startTimeSecondMantissaMagnified;
     if(starSpin!=0)twist=(uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*starSpin*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel
      
