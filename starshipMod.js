@@ -1029,12 +1029,9 @@ function runOSMD (){
 
              takeNextScoreSlice(1);
                
-               let leakingElement = document.getElementById("osmdCanvasVexFlowBackendCanvas1");
-               leakingElement.parentNode.removeChild(leakingElement)
-               leakingElement = null;
-               delete leakingElement;
                
                osmd.cursor.hide();
+               osmd.canvas=null;
                osmd.render();
                osmd.cursor.reset();
                osmd.cursor.show();
@@ -1055,12 +1052,8 @@ function runOSMD (){
 
          cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1;
          takeNextScoreSlice(cursorMeasure);
+               osmd.canvas=null;
 
-               let leakingElement = document.getElementById("osmdCanvasVexFlowBackendCanvas1");
-               leakingElement.parentNode.removeChild(leakingElement)
-               leakingElement = null;
-               delete leakingElement;
-               
                    onWindowResize();//this calls window.osmd.render() by osmdResize()
 
 
