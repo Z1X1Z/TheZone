@@ -957,7 +957,7 @@ function takeNextScoreSlice(start){
      
                     osmd.setOptions({
                       drawFromMeasureNumber: start,
-                      //drawUpToMeasureNumber:start+3.+Math.floor(window.innerWidth/window.innerHeight*2.)//remove +3 if not renderSingleHorizontalStaffline set to true in osmd settings
+                      drawUpToMeasureNumber:start+3.+Math.floor(window.innerWidth/window.innerHeight*2.)//remove +3 if not renderSingleHorizontalStaffline set to true in osmd settings
                       }) // requires re-render
 }
                        let timestamplast=0;
@@ -1018,9 +1018,11 @@ function runOSMD (){
 
            //https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/issues/710
 
-
            if(noteExpired&&noteHit){
 
+               let leakingElement = document.getElementById("osmdCanvasVexFlowBackendCanvas1");
+               leakingElement = null;
+               
              osmd.cursor.next(); // advance the cursor one note
 
            if(osmd.cursor.Iterator.endReached){
