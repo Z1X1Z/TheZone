@@ -38,11 +38,14 @@ function handleFileSelect(evt) {
       }
     }
   }
+let ScoreDiv;
 function loadScore(e) {
+    ScoreDiv=document.createElement("div");
+    document.getElementById("score").append(ScoreDiv);
     let toLoad = e;
     if(typeof e.target != "undefined") toLoad=e.target.result;
 
-    var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvas", {
+    var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay(ScoreDiv, {
       // set options here
 //https://wordpress.org/plugins/opensheetmusicdisplay/
          width:window.innerWidth,
