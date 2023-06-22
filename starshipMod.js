@@ -1020,18 +1020,11 @@ function runOSMD (){
 
 
            if(noteExpired&&noteHit){
-               osmd.cursor.next(); // advance the cursor one note
+
+             osmd.cursor.next(); // advance the cursor one note
 
            if(osmd.cursor.Iterator.endReached){
-               
-                 ScoreDiv.remove();
-                 ScoreDiv.innerHTML="";
-                 ScoreDiv=null;
-                  ScoreDiv=document.createElement("div");
-                  document.getElementById("score").append(ScoreDiv);
-                  osmd.container = ScoreDiv;
-                
-                
+
              osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
              scoreColorInversion= !scoreColorInversion;
 

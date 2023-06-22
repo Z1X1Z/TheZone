@@ -38,14 +38,11 @@ function handleFileSelect(evt) {
       }
     }
   }
-let ScoreDiv;
 function loadScore(e) {
-    ScoreDiv=document.createElement("div");
-    document.getElementById("score").append(ScoreDiv);
     let toLoad = e;
     if(typeof e.target != "undefined") toLoad=e.target.result;
 
-    var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay(ScoreDiv, {
+    var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvas", {
       // set options here
 //https://wordpress.org/plugins/opensheetmusicdisplay/
          width:window.innerWidth,
@@ -55,8 +52,8 @@ function loadScore(e) {
         drawMeasureNumbers:true, drawMeasureNumbersOnlyAtSystemStart:true, drawTimeSignatures:true,
         //autoResize: false,
       backend: "canvas",
-    preferredSkyBottomLineBatchCalculatorBackend:0,//0 Plain or 1 Webgl
-        skyBottomLineBatchMinMeasures:100,//high number to disable
+    preferredSkyBottomLineBatchCalculatorBackend:1,//0 Plain or 1 Webgl
+        skyBottomLineBatchMinMeasures:0,//high number to disable
         renderSingleHorizontalStaffline:true,
       drawFromMeasureNumber: 1,
       drawUpToMeasureNumber: 4.+Math.floor(window.innerWidth/window.innerHeight*2.)
