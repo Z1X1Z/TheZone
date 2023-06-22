@@ -56,7 +56,7 @@ function loadScore(e) {
         skyBottomLineBatchMinMeasures:0,//high number to disable
         renderSingleHorizontalStaffline:true,
       drawFromMeasureNumber: 1,
-      drawUpToMeasureNumber: 4.+Math.floor(window.innerWidth/window.innerHeight*2.)
+      drawUpToMeasureNumber: 0//4.+Math.floor(window.innerWidth/window.innerHeight*2.)
     });
     osmd
       .load(toLoad)
