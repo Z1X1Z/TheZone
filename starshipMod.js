@@ -1020,6 +1020,19 @@ function runOSMD (){
 
            if(noteExpired&&noteHit){
 
+               
+               
+               let leakingElement = document.getElementById("osmdCanvasVexFlowBackendCanvas1");
+               while(leakingElement.parentNode.hasChildNodes())
+               {
+                   leakingElement.parentNode.removeChild(leakingElement)
+                   leakingElement = null;
+                   delete leakingElement;
+                   leakingElement = document.getElementById("osmdCanvasVexFlowBackendCanvas1");
+                   if (leakingElement==null)break;
+               }
+               
+               
              osmd.cursor.next(); // advance the cursor one note
 
            if(osmd.cursor.Iterator.endReached){
@@ -1031,7 +1044,6 @@ function runOSMD (){
                
                
                osmd.cursor.hide();
-               osmd.canvas=null;
                osmd.render();
                osmd.cursor.reset();
                osmd.cursor.show();
@@ -1052,9 +1064,7 @@ function runOSMD (){
 
          cursorMeasure=osmd.cursor.Iterator.currentMeasureIndex+1;
          takeNextScoreSlice(cursorMeasure);
-               osmd.canvas.remove();
-               osmd.canvas=null;
-
+               
                    onWindowResize();//this calls window.osmd.render() by osmdResize()
 
 
