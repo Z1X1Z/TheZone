@@ -1021,6 +1021,7 @@ function runOSMD (){
            if(noteExpired&&noteHit){
 
                let leakingElement = document.getElementById("osmdCanvasVexFlowBackendCanvas1");
+               leakingElement.parentNode.removeChild(leakingElement)
                leakingElement = null;
                
              osmd.cursor.next(); // advance the cursor one note
