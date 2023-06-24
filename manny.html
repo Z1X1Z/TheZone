@@ -1111,7 +1111,7 @@ for (float counter=0.;counter<iterations;counter++)if(length(s)<50.){
     
     if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*2.*PI/(atan(s.y,s.x)-PI*spirated);
 
-           vec2 cloverMAP = (spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+PI))/2.+.5;
+           vec2 cloverMAP = (spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+PI))*2./3.+.5;
                                    
                                    vec2 ColorWheelClover;
                                    float cycleShiftChiral = 0.;
