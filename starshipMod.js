@@ -508,7 +508,7 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                     
                                  const starStreamPoints=new Float32Array(starCount*3*6);
                                  const starStreamColors=new Float32Array(starCount*4*6);
-                    const xyStarParticleArray=Array(starCount);
+                    let xyStarParticleArray=Array();
 
                     
 function init() {
@@ -1305,7 +1305,7 @@ if(!window.touchMode){
                             starColorAttribute.setXYZW(starStride+yy,mustarD[g]/lightingScaleStar, mustarD[g]/lightingScaleStar, mustarD[g]/lightingScaleStar,1.)
                     else{
                         starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
-                        starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,.5)
+                        starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,.0)
                         starColorAttribute.setXYZW(starStride+2,vop.r,vop.g,vop.b,1.)
                     }
                     starPositionAttribute.setXYZ(starStride,(xr-x), (yr-y),  depth)
@@ -1352,18 +1352,7 @@ if(!window.touchMode){
                     xyStarParticle.staticY=staticY;
                     
                     xyStarParticleArray.push(xyStarParticle);
-                    let loopOfCulling =0;
-                    while((xyStarParticleArray.length>starCount||uniforms[ "time" ].value-xyStarParticleArray[loopOfCulling].time>maxToMin)&&loopOfCulling>0)
-                    {
-                        xyStarParticleArray.shift();
-                        loopOfCulling++;
-                        
-                            for(var e = 0; e<6; e++){
-                                starStreamPositionAttribute.setXYZ(loopOfCulling+e,0,0,0)
-                                starStreamColorAttribute.setXYZW(starStreamStride+e,0,0,0,0)
-                            }
-
-                    }
+               
                 }
                 starStride+=3;
 
@@ -1381,10 +1370,29 @@ if(!window.touchMode){
         }
         }
         
-        let OUTERSHELL =maxToMin* secondsToEdge;
+        
+        
+        
+        
         
         const starStreamPositionAttribute = starStreamGeometry.getAttribute( 'position' );
         const starStreamColorAttribute = starStreamGeometry.getAttribute( 'color' );
+        
+        let loopOfCulling =xyStarParticleArray.length-1;
+        
+        while((xyStarParticleArray.length>starCount||uniforms[ "time" ].value-xyStarParticleArray[loopOfCulling].time>maxToMin)&&loopOfCulling>0)
+        {
+            xyStarParticleArray.shift();
+            loopOfCulling--;
+            
+                for(var e = 0; e<3; e++){
+                    starStreamPositionAttribute.setXYZ(loopOfCulling*3+e,0,0,0)
+                    starStreamColorAttribute.setXYZW(loopOfCulling*3+e,0,0,0,0)
+                }
+
+        }
+        
+        let OUTERSHELL =maxToMin* secondsToEdge;
         
         if ((RockInTheWater==1||RockInTheWater==2)&&xyStarParticleArray.length>0)
         {
@@ -1642,9 +1650,9 @@ var loopLimit = trailDepth;
                             z = -1.+timeElapsedSinceRecording/trailSecondsLong;
                         //   if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong);
                             const transparencyOfTrailLast =transparencyOfTrail;
-                            transparencyOfTrail =1.-timeElapsedSinceRecording/trailSecondsLong;
-                           //if(transparencyOfTrail<10./255.)transparencyOfTrail=.0;
-                                          trailColorAttribute.setXYZW(strideTrail, pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail)
+                            transparencyOfTrail =-z;
+
+                     trailColorAttribute.setXYZW(strideTrail, pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail)
                                             trailColorAttribute.setXYZW(strideTrail+1, pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrailLast)
                                              trailColorAttribute.setXYZW(strideTrail+2,   pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail)
                                              trailColorAttribute.setXYZW(strideTrail+3, pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail)
