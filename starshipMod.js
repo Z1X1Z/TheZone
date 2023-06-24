@@ -985,7 +985,8 @@ function takeNextScoreSlice(start){
 
 
 function runOSMD (){
-
+     
+ 
      let thelastnotehit;
 
      //Here starts OPEN SHEET MUSIC DISPLAY score code
@@ -1642,7 +1643,7 @@ var loopLimit = trailDepth;
                         //   if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong);
                             const transparencyOfTrailLast =transparencyOfTrail;
                             transparencyOfTrail =1.-timeElapsedSinceRecording/trailSecondsLong;
-                           if(transparencyOfTrail<.01)transparencyOfTrail=.01;
+                           //if(transparencyOfTrail<10./255.)transparencyOfTrail=.0;
                                           trailColorAttribute.setXYZW(strideTrail, pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail)
                                             trailColorAttribute.setXYZW(strideTrail+1, pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrailLast)
                                              trailColorAttribute.setXYZW(strideTrail+2,   pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail)
@@ -1679,7 +1680,7 @@ var loopLimit = trailDepth;
             {
                 for(var v = 0; v<6;v++){
                     trailPositionAttribute.setXYZ(strideTrail+v,0,0,0);
-                    trailColorAttribute.setXYZW(strideTrail+v, 0,0,0,0);
+                    trailColorAttribute.setXYZW(strideTrail+v, 0,0,0,0.);
                 }
 
                 trailSegmentExpired[r] = true;
