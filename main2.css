@@ -7,12 +7,6 @@ body {
 	line-height: 24px;
 }
 
-a {
-	color: #ff0;
-	text-decoration: none;
-	pointer-events: auto;
-}
-
 a:hover {
 	text-decoration: underline;
 }
@@ -20,31 +14,4 @@ a:hover {
 button {
 	cursor: pointer;
 	text-transform: uppercase;
-}
-
-canvas {
-	display: block;
-}
-
-#info {
-	position: absolute;
-	top: 0px;
-	width: 100%;
-	padding: 10px;
-	box-sizing: border-box;
-	text-align: center;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	pointer-events: none;
-	z-index: 1; /* TODO Solve this in HTML */
-}
-
-.dg.ac {
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	z-index: 2 !important; /* TODO Solve this in HTML */
 }
