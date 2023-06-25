@@ -5,13 +5,5 @@ body {
 	font-family: Monospace;
 	font-size: 1em;
 	line-height: 24px;
-}
-
-a:hover {
-	text-decoration: underline;
-}
-
-button {
-	cursor: pointer;
-	text-transform: uppercase;
+    touch-action: auto;
 }
