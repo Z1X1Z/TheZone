@@ -1375,28 +1375,31 @@ if(!window.touchMode){
         
         
         
+        let OUTERSHELL =maxToMin* secondsToEdge;
+        
         const starStreamPositionAttribute = starStreamGeometry.getAttribute( 'position' );
         const starStreamColorAttribute = starStreamGeometry.getAttribute( 'color' );
         
-        let loopOfCulling =xyStarParticleArray.length-1;
-        
-        while((xyStarParticleArray.length>starCount||uniforms[ "time" ].value-xyStarParticleArray[loopOfCulling].time>maxToMin)&&loopOfCulling>0)
-        {
-            xyStarParticleArray.shift();
-            loopOfCulling--;
-            
-                for(var e = 0; e<3; e++){
-                    starStreamPositionAttribute.setXYZ(loopOfCulling*3+e,0,0,0)
-                    starStreamColorAttribute.setXYZW(loopOfCulling*3+e,0,0,0,0)
-                }
-
-        }
-        
-        let OUTERSHELL =maxToMin* secondsToEdge;
         
         if ((RockInTheWater==1||RockInTheWater==2)&&xyStarParticleArray.length>0)
         {
             scene.add(starStreamMesh)
+            
+            
+            
+            let loopOfCulling =xyStarParticleArray.length-1;
+            
+            while((xyStarParticleArray.length>starCount||uniforms[ "time" ].value-xyStarParticleArray[loopOfCulling].time>maxToMin)&&loopOfCulling>0)
+            {
+                xyStarParticleArray.shift();
+                loopOfCulling--;
+                
+                    for(var e = 0; e<3; e++){
+                        starStreamPositionAttribute.setXYZ(loopOfCulling*3+e,0,0,0)
+                        starStreamColorAttribute.setXYZW(loopOfCulling*3+e,0,0,0,0)
+                    }
+
+            }
             
             let m = xyStarParticleArray[xyStarParticleArray.length-1];
             let lastLoopTime=m.time;
