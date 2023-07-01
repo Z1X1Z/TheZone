@@ -165,7 +165,7 @@ let largest_loop = 0;
 function makeSpirograph(){
       phase = phase % (pi*2);
       len = 0;
-      const adjConstant = 1./(pitch)*Math.PI*2.;
+      const adjConstant = 1./(pitch)*Math.PI*audioX.sampleRate/bufferSize/(2**1.5);
     var maxSamp=0.;
     for(var t=0; t<bufferSize;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
       if(Math.abs(inputData[0])>.0    )
@@ -697,12 +697,12 @@ function init() {
 
 Clovoid:{value:false},
 dotted:{value:false},
-  base3:{value:false},
+  baseN:{value: 2.71828182845904523536028747135266249775724709369995},
 
     onehundredfortyfourthousand:{value:false},
     shaderScale:{value:window.pixelShaderSize},
   starSpin:{value:0.},
-  chirality:{value:0},
+  chirality:{value:-1},
   MannyONtrail:{value:1},
   twistStar:{value:0.},
   flipStar:{value:1.},
