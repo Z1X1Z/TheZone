@@ -10,6 +10,7 @@ window.blankBackground=false;
 window.twist = 0.;
 window.highORlow=1.;
 window.FeedbackSound = false;
+let osmdStaffsVisible = 0;
 function readHash(){for(var n = location.hash.length;n>0;n--)callKey(new KeyboardEvent('keydown', {'key': location.hash[n],"keyCode":location.hash.charCodeAt(n)}));
 }
 function stallHash(){if(window.uniformsLoaded)readHash();else setTimeout(stallHash,10);}//uniforms are only loaded if mic is enabled
@@ -71,6 +72,33 @@ function callKey(event){
     }
     if(key == "v" && event.ctrlKey) window.FeedbackSound =  !window.FeedbackSound;
     if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=!uniforms.starOnDot.value;
+    /*if(key == "k" && event.ctrlKey)
+    {
+        osmdStaffsVisible=(osmdStaffsVisible+1)%3;
+        if("osmd" in window&&osmd!=null&&osmd.sheet.Instruments.length>=2)
+        {
+                if(osmdStaffsVisible==0)
+                {
+                        osmd.sheet.Instruments[0].Visible = true;
+                        osmd.sheet.Instruments[1].Visible = false;
+                }
+                else if(osmdStaffsVisible==1)
+                {
+                    osmd.sheet.Instruments[0].Visible = false;
+                    osmd.sheet.Instruments[1].Visible = true;
+                }
+                else if(osmdStaffsVisible==2)
+                {
+                    
+                        osmd.sheet.Instruments[0].Visible = true;
+                        osmd.sheet.Instruments[1].Visible = true;
+                }
+     
+                osmd.render();
+        }
+    } the bass staff doesn't include the lyrics so it's not included
+     */
+
     else if (x>0&&x<=4&& document.activeElement.className!="num")
     {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
     else if (key=="+"){rez /=1.1; renderer.setPixelRatio( rez);}
@@ -85,7 +113,7 @@ function callKey(event){
     else if (key=="M") uniforms[ "NightAndDay" ].value = !uniforms[ "NightAndDay" ].value;
     else if (key=="!")uniforms[ "Refractelate" ].value=!uniforms[ "Refractelate" ].value;
     else if (key=="@")uniforms[ "Clovoid" ].value=!uniforms[ "Clovoid" ].value;
-    else if (key=="#")uniforms[ "baseOfLog" ].value=(uniforms[ "baseOfLog" ].value+1)%3;
+   // else if (key=="#"){uniforms[ "base3" ].value=!uniforms[ "base3" ].value;console.log(uniforms[ "base3" ].value)}
     
     else if (key=="&")uniforms[ "continuumClover" ].value=!uniforms[ "continuumClover" ].value;
     else if (key=="&")uniforms[ "colorCombo" ].value=31;
@@ -101,6 +129,7 @@ function callKey(event){
         else if(starSpin==1)starSpin=-1;
         else if(starSpin==-1)starSpin=0;
         uniforms.starSpin.value = starSpin;
+        
     }
     else if (key==";") uniforms[ "colorInverter" ].value = !uniforms[ "colorInverter" ].value;
     else if (key=="t") window.touchMode = !window.touchMode;
@@ -179,7 +208,13 @@ function callKey(event){
         else if(uniforms[ "spirated" ].value==1)uniforms[ "spirated" ].value=-1;
         else if(uniforms[ "spirated" ].value==-1)uniforms[ "spirated" ].value=0;
     }
-    else if (key=="|") {if(uniforms.chirality.value!=-1)uniforms.chirality.value=-1;else uniforms.chirality.value=1;}
+
+    else if (key=="|") {
+        if(uniforms.chirality.value==3)uniforms.chirality.value=-1;
+        else if(uniforms.chirality.value==-1)uniforms.chirality.value=1;
+        else if(uniforms.chirality.value==1)uniforms.chirality.value=3;
+
+    }
     else if (key=="\\")uniforms[ "hearTOL" ].value = !uniforms[ "hearTOL" ].value;
     else if (key=="{"){
         if(uniforms.eden.value!=4)uniforms.eden.value=(uniforms.eden.value+1)%3;
@@ -212,9 +247,24 @@ function callKey(event){
     else if (key=="w")window.volumeSpeed=!window.volumeSpeed;
     
     else if (key=="W"){ window.twist+=2; window.twist = window.twist%24;
-        uniforms.twistStar.value=window.twist/24.*2.*Math.PI;}
+        uniforms.twistStar.value=window.twist/24.*2.*Math.PI;
+        if("osmd" in window&&osmd!=null)
+        {
+            osmd.Sheet.Transpose = twist/2.;
+            osmd.updateGraphic();
+            osmd.render();
+        }
+    }
+    
     else if (key=="S"){ window.twist-=2; window.twist = (window.twist+24)%24;
-        uniforms.twistStar.value=window.twist/24.*2.*Math.PI;}
+        uniforms.twistStar.value=window.twist/24.*2.*Math.PI;
+        if("osmd" in window&&osmd!=null)
+        {
+            osmd.Sheet.Transpose = twist/2.;
+            osmd.updateGraphic();
+            osmd.render();
+        }
+    }
     else if (key=="A"){window.flip = -1;uniforms.flipStar.value=-1.;}
     else if (key=="D"){window.flip = 1;uniforms.flipStar.value=1.;}
 

@@ -353,10 +353,9 @@
                                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                                  <label for="Continuum Clover">Continuum Clover!</label><br>
                                  
-                                 <input type="checkbox" id="Base Three" name="t"  onclick= "
-                                     key  = '#';
-                                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                  <label for="Base Three">Base Three!</label><br>
+                                  <label for="Base Number">Log this of x^3 (maybe 1.5-4:</label>
+                                 <input type="number" id="Base Number" name="Base Number" class="num" onkeydown="uniforms.baseN.value=document.getElementById('Base Number').value">
+                                     </p>
                        
                                  
                 <form>
@@ -715,7 +714,7 @@ void main(){
     uniform bool spokelover;
     uniform bool continuumClover;
     uniform bool cloverSlide;
-    uniform bool base3;
+    uniform float baseN;
     
     uniform bool Inherited;
     uniform bool spokesVisualizeColors;
@@ -1168,10 +1167,8 @@ if(onehundredfortyfourthousand)
        else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only
    
 
-   if(base3)s.x=log(abs(s.x))/log(3.);
-   else
-  s.x=log(abs(s.x));//half way between e and log base (2.7390263401441512059468682584473451539340711563445495817956319050): that's halfway between log3s two solutions
-   
+   s.x=log(abs(s.x))/log(baseN);
+   //traditionally be e or 3 probably 1.5 to 4
 
     if(Spoker&&loops+counter+1.<=hyperCore) s/=2.;//engage spokelover
    
@@ -1253,7 +1250,7 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                       }
                       
                       
-                      
+
                       if(Inherited)o*=1.-colorAccumulator.x/colorAccumulator.y*3.;
 
                       
@@ -1272,7 +1269,7 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
   if (starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=starship.x;
                       
                       float spirographTranslucer = 1.;
-                      if (starship.x!=0.&&starship.x!=1.&&starship.x==starship.y&& starship.y==starship.z&&starship.w==1.)spirographTranslucer=.75-starship.x/2.;
+                      if (starship.x!=0.&&starship.x!=1.&&starship.x!=.5&&starship.x==starship.y&& starship.y==starship.z&&starship.w==1.)spirographTranslucer=.75-starship.x/2.;
                       
                       
                       
@@ -1928,8 +1925,15 @@ vec2 dance = vec2(0.);
                                                  vec2 t =vec2(lerp(time/2.),lerp(time*.618/2.));
 
                                  vec3 backgroundFace = vec3(0.);
-         if(colorCombo<=10)zoomer=tol(backGround, dance2);
-
+         if(colorCombo<=10){
+                       zoomer=tol(backGround, dance2);
+                       if(chirality==3){
+                           zoomer+=tol(backGround.yx,dance2);
+                           zoomer/=2.;
+                           
+                       }
+                       
+                   }
      else if (colorCombo==11||colorCombo==18)zoomer=heartZoom(backGround+driftCanceller, dance);
      else if (colorCombo==13)zoomer=tokogae(backGround,vec2(zoom));
      else if (colorCombo==14)zoomer=TOLTOK(backGround,dance2);
@@ -2044,7 +2048,7 @@ vec2 dance = vec2(0.);
                                 float maxColorOfStarship=1.;
     if (starship.x!=0.||starship.y!=0.||starship.z!=0.)maxColorOfStarship=max(max(starship.x,starship.y),starship.z);
      float spirographTranslucer = 1.;
-     if (starship.x!=0.&&starship.x!=1.&&starship.x==starship.y&&starship.y==starship.z&&starship.w==1.)spirographTranslucer=.75-starship.x/2.;
+     if (starship.x!=0.&&starship.x!=1.&&starship.x!=.5&&starship.x==starship.y&&starship.y==starship.z&&starship.w==1.)spirographTranslucer=.75-starship.x/2.;
                                  
                                  
                                  vec4 DOTstarship=vec4(0.);
