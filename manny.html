@@ -1870,7 +1870,7 @@ return b+robe(p,t)+legs(p,t/33.3);}
 
   //function library: manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin
 vec3 sevenPillars(vec2 p){
-    float pillarHeight = 25./resolution.x;
+    float pillarHeight = 25./max(resolution.x,resolution.y);
     float screenBase = pillarHeight;
 
     p.x-=screenBase;
@@ -2034,7 +2034,7 @@ vec2 dance = vec2(0.);
                                  float recenter = 0.;
                                   float rescale = 1.;
                                  if (colorCombo==20)
-                                 {recenter=2./1.75/(shaderScale/2.)/2.;//may not be exactly centered
+                                 {recenter=2./1.75/(shaderScale)/(resolution.y/min(resolution.x,resolution.y));//may not be exactly centered
                                     rescale = 2.;
                        }
 
