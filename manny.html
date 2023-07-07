@@ -1942,7 +1942,7 @@ vec2 dance = vec2(0.);
      else if (colorCombo==17)zoomer=faceHeights(backGround,t*zoom)+bod(backGround*2.,t*zoom);
      else if (colorCombo==20){
                        zoomer=vec3(0.);
-                       backgroundFace = clamp(face(backGround*1.75-vec2(1.,0.),vec2(0.))+.75,0.,1.);
+                       backgroundFace = clamp(face(backGround*1.75-vec2(1.,0.),vec2(0.))+1.,0.,1.);
                        }
     else if (colorCombo==19)zoomer=acrostic(backGround);
 
@@ -2034,7 +2034,7 @@ vec2 dance = vec2(0.);
                                  float recenter = 0.;
                                   float rescale = 1.;
                                  if (colorCombo==20)
-                                 {recenter=1.125/(shaderScale/2.)/2.;//may not be exactly centered
+                                 {recenter=2./1.75/(shaderScale/2.)/2.;//may not be exactly centered
                                     rescale = 2.;
                        }
 
