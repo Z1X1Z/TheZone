@@ -210,9 +210,9 @@ function callKey(event){
     }
 
     else if (key=="|") {
-        if(uniforms.chirality.value==3)uniforms.chirality.value=-1;
-        else if(uniforms.chirality.value==-1)uniforms.chirality.value=1;
-        else if(uniforms.chirality.value==1)uniforms.chirality.value=3;
+        if(uniforms.chirality.value==3)uniforms.chirality.value=1;
+        else if(uniforms.chirality.value==1)uniforms.chirality.value=-1;
+        else if(uniforms.chirality.value==-1)uniforms.chirality.value=3;
 
     }
     else if (key=="\\")uniforms[ "hearTOL" ].value = !uniforms[ "hearTOL" ].value;
