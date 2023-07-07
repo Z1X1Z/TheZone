@@ -1138,7 +1138,7 @@ for (float counter=0.;counter<iterations;counter++)if(length(s)<50.){
 if(onehundredfortyfourthousand)
 {
  
- int march= int(hyperCore)%4;
+ int march= int(mod(hyperCore,4.));
  float color = 1.;
  if (march==1||march==3)color = -1.;
  if(length(s)<2./3.)
