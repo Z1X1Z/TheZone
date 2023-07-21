@@ -107,7 +107,7 @@ function callKey(event){
     else if (x==0)
     {window.movementRate=pixelShaderSize/4.; uniforms[ "rate" ].value=1./window.movementRate; }
 
-    else if (key=="À"||key=="`"||key=="~")
+    else if (key=="À"||key=="`")
     {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
     else if (key=="m") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
     else if (key=="M") uniforms[ "NightAndDay" ].value = !uniforms[ "NightAndDay" ].value;
@@ -240,7 +240,7 @@ function callKey(event){
     }
     else if (key=="H")uniforms.cloverSlide.value=!uniforms.cloverSlide.value;
     
-    else if (key==" "||key=="_")
+    else if (key==" "||key=="~")
     {
         onO=!onO;
     }
