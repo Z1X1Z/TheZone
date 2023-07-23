@@ -8,7 +8,10 @@ body
     margin-top: 5%;
     text-indent: 3.4%;
 }
-
+.onofflinescaled{
+    
+    width: 100%;
+}
 
 /*https://stackoverflow.com/questions/3011226/using-background-attachmentfixed-in-safari-on-the-ipad*/
 #background_wrap {
