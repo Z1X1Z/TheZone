@@ -1049,10 +1049,10 @@ vec2 colorAccumulator =vec2(0.);
 vec3 heartColors = vec3(0.);
 
 float precores = -.75;
-if(morph!=0.)precores+=2.25;
+if(morph!=0.)precores-=1.;
     if(wheel)precores-=.25;
     if(cloverSlide)precores-=.25;
-if(spirated!=0.)precores+=.25;
+//if(spirated!=0.)precores+=.25;
 
 
 float cored =0.;
@@ -2008,7 +2008,7 @@ vec2 dance = vec2(0.);
                                                         )+robeL(characterOnTrailP,lerper,move/5.
                                                                 )*.95+heart(characterPSpunToKey,    moveDynamic);}
                    else if (Character==2){
-                       mny=bride(characterOnTrailP*gr,moveDynamic/gr)+dress(characterOnTrailP*1.5,-moveDynamic/1.5)*2.+heart(characterPSpunToKey,moveDynamic);
+                       mny=bride(characterOnTrailP*gr,moveDynamic/7.)+dress(characterOnTrailP*1.5,-moveDynamic/7.)*2.+heart(characterPSpunToKey,moveDynamic);
                        swordSkew+=.5;}
                    else if (Character==3)mny=lion(fourcreaturePlayerP,vec2(inversion,0.))+bodyFourCreatureCharacter(characterOnTrailP,moveDynamic)+heart(characterPSpunToKey,moveDynamic);
                    else if (Character==4){
