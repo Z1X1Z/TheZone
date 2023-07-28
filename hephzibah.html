@@ -405,7 +405,21 @@ man(p-spacing,vec2(-1.,-sin(time)))+bod(p-spacing,t)  ;
 }
             
             
-            
+            vec3 seat(vec2 g){
+                g.x-=.30;
+                g*=.54;
+                vec2 s=g;
+                vec3 chair= vec3(0.);
+                float v=0.;
+                for (int t = 0; t < 9; t++)  {
+                        s = vec2(1./((s.x * s.x - s.y * s.y) - g.x), (2.0* s.x * s.y *g.y));
+                    v += length(s)/15.;
+                    if((t==3||t==6||t==8)&&length(s)>2.22 )   chair = vec3(v/4.);
+                    (-sin(v *.618+time*.618*1.),-sin(v*1.618 +time*1.618*1.),-sin(v +time*1.));
+                }
+                return chair;
+            }
+
     vec3 Uncle(vec2 p,vec2 t){
         p.x+=1.;
     //vv body vv
@@ -568,7 +582,7 @@ gl_FragColor=vec4(bride(p,vec2(time,0.))+dress(p/2.,vec2(time,0.))/3.+manny(p/2.
 
 			// Greetings to Iq/RGBA! ;)
 
-			var quality = 2, quality_levels = [ 0.5, 1, 2, 4, 8 ];
+			var quality = 1, quality_levels = [ 0.5, 1, 2, 4, 8 ];
 			var toolbar, compileButton, fullscreenButton, compileTimer, errorLines = [];
 			var code, canvas, gl, buffer, currentProgram, vertexPosition, screenVertexPosition, panButton,
 			parameters = { startTime: Date.now(), time: 0, mouseX: 0.5, mouseY: 0.5, screenWidth: 0, screenHeight: 0 },
