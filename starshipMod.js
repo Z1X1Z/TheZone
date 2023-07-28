@@ -304,7 +304,7 @@ function  move()
   }
 
     totalAMP = 0.;
-    for(var n=0; n<bufferSize;n++)totalAMP+=Math.abs(inputData[n]);
+    for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
     totalAMP/=inputData.length;
         uniforms["totalAmp" ].value=totalAMP;
         lastPitch = pitch;
@@ -329,13 +329,14 @@ if (totalAMP>zoomOutRatchetThreshold) pitch =    audioX.sampleRate/calculatePitc
     {
         const feedBackReduction = 4;
         if(wadLOADED&&aboveThreshold) {
-            feedbackPitchsound[0].stop();
-            feedbackPitchsound[0].play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:pitch,volume:totalAMP/feedBackReduction})
+            //feedbackPitchsound[4].stop();
+            
+            feedbackPitchsound[4].play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:pitch,volume:totalAMP/feedBackReduction})
             
             for (var v = 0; v < 4; v++)
             {
                 
-                    feedbackPitchsound[v].stop();
+                 //   feedbackPitchsound[v].stop();
                     feedbackPitchsound[v].play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:loudestFret[v].frequency,volume://loudestFret[v].volume
                         1./feedBackReduction/(4-v)})
                     
@@ -343,8 +344,8 @@ if (totalAMP>zoomOutRatchetThreshold) pitch =    audioX.sampleRate/calculatePitc
         }
             else if (wadLOADED) {
                 
-                feedbackPitchsound[0].play({env:{attack: 0,                   release:0,hold:0}, pitch:0,volume:0});
-                feedbackPitchsound[0].stop();
+                feedbackPitchsound[4].play({env:{attack: 0,                   release:0,hold:0}, pitch:0,volume:0});
+                feedbackPitchsound[4].stop();
                 
                 for (var v = 0; v < 4; v++)
                 {
@@ -509,7 +510,8 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                                  const starStreamPoints=new Float32Array(starCount*3*6);
                                  const starStreamColors=new Float32Array(starCount*4*6);
                     let xyStarParticleArray=Array();
-
+                    
+                    
                     
 function init() {
     renderTarget = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
@@ -1181,18 +1183,21 @@ if( !window.touchMode&&!window.touchOnlyMode) {
     
      const n_n = Math.round(note);
      const cores = Math.floor(uniforms["centralCores"].value)+cloverSuperCores*singleHyperCoreDepth+uniforms.upCoreCycler.value;
-      if(textON)document.getElementById("textWindow").innerHTML =
-"<div sytle='font-size: 16px;'>"+
+
+      if(textON)
+      {document.getElementById("textWindow").innerHTML =
+          "<div sytle='font-size: 16px;'>"+
           "<p style='margin : 0px'></p>"+
-                                " note: "+noteName+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
-                                "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
-                                "cores: "+cores+", metaCores:"+ uniforms.externalCores.value + "<p style='margin : 0px'></p>"+
+          " note: "+noteName+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
+          "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
+          "cores: "+cores+", metaCores:"+ uniforms.externalCores.value + "<p style='margin : 0px'></p>"+
           "zoom: "+zoom/2.**(singleHyperCoreDepth*cloverSuperCores)+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
-                                "InOutThresh:"+zoomOutRatchetThreshold+"<p style='margin : 0px'></p>"+
-                                "amplitude : "+totalAMP+"<p style='margin : 0px'></p>"+
-                                "above threshold: "+aboveThreshold+", FPS: "+Math.round(FPS)+"<p style='margin : 0px'></p>"
-                            //+"<p style='margin : 0px'></p>"+"X: "+String(-coordX)+" Y: "+String(-coordY);
-+"</div>";
+          "InOutThresh:"+zoomOutRatchetThreshold+"<p style='margin : 0px'></p>"+
+          "amplitude : "+totalAMP+"<p style='margin : 0px'></p>"+
+          "above threshold: "+aboveThreshold+", FPS: "+Math.round(FPS)+"<p style='margin : 0px'></p>"
+          //+"<p style='margin : 0px'></p>"+"X: "+String(-coordX)+" Y: "+String(-coordY);
+          +"</div>";
+      }
       else document.getElementById("textWindow").innerHTML = "";
 
 

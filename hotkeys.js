@@ -70,8 +70,8 @@ function callKey(event){
             uniforms.metaCarousel.value=0.;
         }
     }
-    if(key == "v" && event.ctrlKey) window.FeedbackSound =  !window.FeedbackSound;
-    if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=!uniforms.starOnDot.value;
+    else if(key == "v" && event.ctrlKey) window.FeedbackSound =  !window.FeedbackSound;
+    else if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=!uniforms.starOnDot.value;
     /*if(key == "k" && event.ctrlKey)
     {
         osmdStaffsVisible=(osmdStaffsVisible+1)%3;
