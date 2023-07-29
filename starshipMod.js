@@ -161,19 +161,43 @@ let spiregulator=0;
 let phase = 0;
 let onO = false;
 let largest_loop = 0;
-
+let spirColors = Array(bufferSize)
 function makeSpirograph(){
       phase = phase % (pi*2);
       len = 0;
       const adjConstant = 1./(pitch)*Math.PI*audioX.sampleRate/bufferSize/(2**1.5);
     var maxSamp=0.;
     for(var t=0; t<bufferSize;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
-      if(Math.abs(inputData[0])>.0    )
-      for(var m = 0; m < bufferSize; m++)
+    var colorInstant=0.;
+        if(Math.abs(inputData[0])>.0    )
+      for(var m = 0; m < bufferSize-1; m++)
       {
               phase += adjConstant;//spira_pitch;
               spirray0[m]=-Math.sin(phase)*(inputData[m]);
               spirray1[m]=-Math.cos(phase)*(inputData[m]);
+          if(instantanousFreqSpirographColoring>0){
+        
+          
+          var instantaneousFrequency=Math.abs(dataArray[m]-dataArray[m+1])/audioX.sampleRate*4.
+          
+          
+                                           var noteInstant = 12*Math.log(instantaneousFrequency/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
+                                                                   
+                                                                       if(isFinite(noteInstant))
+                                                                        {
+                                                                           var angleInstant = -noteInstant%12;
+                                                                                
+                                                                          colorInstant=(angleInstant/12.)+1./3.;
+                                                                                           
+                                                                                spirColors[m].setHSL(colorInstant,1.,.5);
+                                              //   console.log(m+" "+colorInstant+"note "+noteInstant)
+                                                 }
+                                                                                           else                                 {                                                spirColors[m].setHSL(colorInstant,1.,.5);
+                                                                          //   console.log(instantaneousFrequency);
+                                                                             
+                                                                         }
+                                                 }
+          
              // len++;
       }
       len -= 1;
@@ -514,6 +538,8 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                     
                     
 function init() {
+     for(var i = 0; i<bufferSize-1;i++)spirColors[i]=new THREE.Color("black");
+
     renderTarget = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
                                                Math.min(window.innerWidth,window.innerHeight)*4./3.);
 
@@ -1219,20 +1245,34 @@ else if(blankBackground) {
     const linePositionAttribute = lineGeometry.getAttribute( 'position' );
     const lineColorAttribute = lineGeometry.getAttribute( 'color' );
   var lineStride=0;
-  if (on)for (let r= 0; r < bufferSize; r +=1) {
-      scene.add(line)
-       const  txlast=tx;
-       const  tylast=ty;
-     tx = spirray0[r]/spiregulator;
-     ty =  spirray1[r]/spiregulator;
-        const greynessLast = greyness
-         greyness = 1.-Math.sqrt(tx*tx+ty*ty)**1.3247
-        // pointColor.push( greynessLast, greynessLast, greynessLast,greyness, greyness, greyness );
-      linePositionAttribute.setXYZ(lineStride,txlast,tylast, d)
-      linePositionAttribute.setXYZ(lineStride+1,tx, ty, d)
-      lineColorAttribute.setXYZ(lineStride,greynessLast, greynessLast, greynessLast)
-      lineColorAttribute.setXYZ(lineStride+1,greyness, greyness, greyness )
-      lineStride+=2  }
+    if (on){
+        scene.add(line)
+        for (let r= 0; r < spirray0.length-2; r +=1) {
+            const  txlast=tx;
+            const  tylast=ty;
+            tx = spirray0[r]/spiregulator;
+            ty =  spirray1[r]/spiregulator;
+            const greynessLast = greyness
+            greyness = 1.-Math.sqrt(tx*tx+ty*ty)**1.3247
+            // pointColor.push( greynessLast, greynessLast, greynessLast,greyness, greyness, greyness );
+            linePositionAttribute.setXYZ(lineStride,txlast,tylast, d)
+            linePositionAttribute.setXYZ(lineStride+1,tx, ty, d)
+            if(instantanousFreqSpirographColoring==1)
+            {
+                lineColorAttribute.setXYZ(lineStride, spirColors[r].b,spirColors[r].g,spirColors[r].b);
+                lineColorAttribute.setXYZ(lineStride+1, spirColors[r+1].r,spirColors[r+1].g,spirColors[r+1].b);
+            }
+            else if(instantanousFreqSpirographColoring==2)
+            {
+                lineColorAttribute.setXYZ(lineStride, greynessLast*spirColors[r].r,greynessLast*spirColors[r].g,greynessLast*spirColors[r].b);
+                lineColorAttribute.setXYZ(lineStride+1, greyness*spirColors[r+1].r,greyness*spirColors[r+1].g,greyness*spirColors[r+1].b);
+            }
+            else
+            {lineColorAttribute.setXYZ(lineStride,greynessLast, greynessLast, greynessLast);
+                lineColorAttribute.setXYZ(lineStride+1,greyness, greyness, greyness );
+            }
+            lineStride+=2; }
+    }
     linePositionAttribute.needsUpdate = true; // required after the first render
     lineColorAttribute.needsUpdate = true; // required after the first render
 
@@ -2055,6 +2095,8 @@ const yinData = Array(fractionOfFrame);
 
 function calculatePitch ()
 {
+                       // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
+
 let tolerance; //, confidence;
 if(highORlow==1)tolerance=totalAMP-(1./bufferSize)**1.5//works well for smoothly and quickly determining sung notes especially low ones
 else if (highORlow==2)tolerance = .5;//when I play different notes on harmonica it mostly hears C, this clears up the distinction of the notes
