@@ -10,6 +10,7 @@ window.blankBackground=false;
 window.twist = 0.;
 window.highORlow=1.;
 window.FeedbackSound = false;
+window.instantanousFreqSpirographColoring = 0;
 let osmdStaffsVisible = 0;
 function readHash(){for(var n = location.hash.length;n>0;n--)callKey(new KeyboardEvent('keydown', {'key': location.hash[n],"keyCode":location.hash.charCodeAt(n)}));
 }
@@ -72,6 +73,7 @@ function callKey(event){
     }
     else if(key == "v" && event.ctrlKey) window.FeedbackSound =  !window.FeedbackSound;
     else if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=!uniforms.starOnDot.value;
+    else if (key==" " && event.ctrlKey)instantanousFreqSpirographColoring = (instantanousFreqSpirographColoring+1)%3;
     /*if(key == "k" && event.ctrlKey)
     {
         osmdStaffsVisible=(osmdStaffsVisible+1)%3;
