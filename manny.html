@@ -888,22 +888,21 @@ return vec3(clamp(1.-l,0.,1.));
 }
     
 vec3 faceFORWARD(vec2 p,vec2 t){
-    t/=9.;
     
+    t/=9.;
     vec2 s=p;
         float l=0.;
         for (int f=0;f<3+6*52;f+=1)
-        {
-            if( f<3+6*int(log(zoom)/log(.3247)))//turn f<15 or f<21 for alternative just seven eyedfullness
-            s=vec2(-1./(s.x*s.x-s.y*s.y-p.x+t.x), 2.0*s.x*s.y-p.y+t.y);//this is {s=s^2-p;s.real=-1./s.real}
-                       else break;
-               }
+            if( f<3+6*int(log(zoom)/log(.3247/2.)))//turn f<15 or f<21 for alternative just seven eyedfullness
+                s=vec2(-1./(s.x*s.x-s.y*s.y-p.x+t.x), 2.0*s.x*s.y-p.y+t.y);//this is {s=s^2-p;s.real=-1./s.real}
+            else break;
+               
         float centralPowerInverter=(s.x/s.y)*sign(s.x*s.y)*1.5;
             //I was studying this function without the face and a power short ocurred and on firefox window restore and caused a semi-reversion hybridization
         l=
             centralPowerInverter;
             //l*=l*l;
-            if(l<.75)l=0.;
+            if(l<.5)l=0.;
          return vec3(l);
     }
     vec3 faceFORWARDstatic(vec2 p,vec2 t){
@@ -1958,6 +1957,7 @@ vec2 dance = vec2(0.);
                                                                                          
                                                                                          
                                                  vec3 zoomer;
+                                 vec3 justFace = vec3(0.);
                                                  vec2 t =vec2(lerp(time/2.),lerp(time*.618/2.));
 
                                  vec3 backgroundFace = vec3(0.);
@@ -1976,7 +1976,7 @@ vec2 dance = vec2(0.);
      else if (colorCombo==15)zoomer=xx(backGround,dance2);
      else if (colorCombo==16)zoomer=xtol(backGround,vec2(0.));
      else if (colorCombo==17){
-                       if(Character == 3)zoomer=faceFORWARD(backGround,t*zoom);
+                       if(Character == 3)zoomer=faceFORWARD(backGround*3.,t*zoom);
                        else zoomer=faceHeights(backGround,t*zoom);
                        zoomer = clamp(bod(backGround*2.,t*zoom)-zoomer*50.,.0,1.)+zoomer;
                        }
