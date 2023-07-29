@@ -162,41 +162,22 @@ let phase = 0;
 let onO = false;
 let largest_loop = 0;
 let spirColors = Array(bufferSize)
+var colorInstant=0.;
+let nextPeak = 0.;
+let updateInstant = false;
 function makeSpirograph(){
       phase = phase % (pi*2);
       len = 0;
       const adjConstant = 1./(pitch)*Math.PI*audioX.sampleRate/bufferSize/(2**1.5);
     var maxSamp=0.;
     for(var t=0; t<bufferSize;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
-    var colorInstant=0.;
         if(Math.abs(inputData[0])>.0    )
-      for(var m = 0; m < bufferSize-1; m++)
+      for(var m = 1; m < bufferSize-1; m++)
       {
               phase += adjConstant;//spira_pitch;
               spirray0[m]=-Math.sin(phase)*(inputData[m]);
               spirray1[m]=-Math.cos(phase)*(inputData[m]);
-          if(instantanousFreqSpirographColoring>0){
-        
-          
-          var instantaneousFrequency=Math.abs(dataArray[m]-dataArray[m+1])/audioX.sampleRate*4.
-          
-          
-                                           var noteInstant = 12*Math.log(instantaneousFrequency/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
-                                                                   
-                                                                       if(isFinite(noteInstant))
-                                                                        {
-                                                                           var angleInstant = -noteInstant%12;
-                                                                                
-                                                                          colorInstant=(angleInstant/12.)+1./3.;
-                                                                                           
-                                                                                spirColors[m].setHSL(colorInstant,1.,.5);
-                                              //   console.log(m+" "+colorInstant+"note "+noteInstant)
-                                                 }
-                                                                                           else                                 {                                                spirColors[m].setHSL(colorInstant,1.,.5);
-                                                                          //   console.log(instantaneousFrequency);
-                                                                             
-                                                                         }
-                                                 }
+  
           
              // len++;
       }
@@ -1231,10 +1212,8 @@ if( !window.touchMode&&!window.touchOnlyMode) {
 
 
 
-   
-  if (uniforms[ "metronome" ].value>1.)
-    lineMat.color = new THREE.Color(-Math.sin(uniforms[ "time" ].value*uniforms[ "metronome" ].value))
-else if(blankBackground) {
+    let metroPhase =-Math.sin(-uniforms[ "time" ].value*uniforms[ "metronome" ].value)
+  if(instantaneousFreqSpirographColoring==1) {
     lineMat.color = colorSound;
   }
 
@@ -1253,24 +1232,14 @@ else if(blankBackground) {
             tx = spirray0[r]/spiregulator;
             ty =  spirray1[r]/spiregulator;
             const greynessLast = greyness
-            greyness = 1.-Math.sqrt(tx*tx+ty*ty)**1.3247
+            if(uniforms[ "metronome" ].value>1.)greyness=1.-Math.sqrt(tx*tx+ty*ty)**1.3247*metroPhase;
+            else greyness = 1.-Math.sqrt(tx*tx+ty*ty)**1.3247
             // pointColor.push( greynessLast, greynessLast, greynessLast,greyness, greyness, greyness );
             linePositionAttribute.setXYZ(lineStride,txlast,tylast, d)
             linePositionAttribute.setXYZ(lineStride+1,tx, ty, d)
-            if(instantanousFreqSpirographColoring==1)
-            {
-                lineColorAttribute.setXYZ(lineStride, spirColors[r].b,spirColors[r].g,spirColors[r].b);
-                lineColorAttribute.setXYZ(lineStride+1, spirColors[r+1].r,spirColors[r+1].g,spirColors[r+1].b);
-            }
-            else if(instantanousFreqSpirographColoring==2)
-            {
-                lineColorAttribute.setXYZ(lineStride, greynessLast*spirColors[r].r,greynessLast*spirColors[r].g,greynessLast*spirColors[r].b);
-                lineColorAttribute.setXYZ(lineStride+1, greyness*spirColors[r+1].r,greyness*spirColors[r+1].g,greyness*spirColors[r+1].b);
-            }
-            else
-            {lineColorAttribute.setXYZ(lineStride,greynessLast, greynessLast, greynessLast);
+          lineColorAttribute.setXYZ(lineStride,greynessLast, greynessLast, greynessLast);
                 lineColorAttribute.setXYZ(lineStride+1,greyness, greyness, greyness );
-            }
+            
             lineStride+=2; }
     }
     linePositionAttribute.needsUpdate = true; // required after the first render
