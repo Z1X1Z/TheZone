@@ -1113,17 +1113,17 @@ function runOSMD (){
      {
         
         var precores = -.75;
-        if(uniforms.morph.value!=0.)precores-=2.25;
+        if(uniforms.morph.value!=0.)precores+=5.;
         if(uniforms.wheel.value)precores-=.25;
         if(uniforms.cloverSlide.value)precores-=.25;
-        if(uniforms.spirated.value!=0.)precores+=.25;
+        if(uniforms.spirated.value!=0.)precores=precores-0.25+.125-.06125;
         const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
 
         
         uniforms[ "centralCores" ].value = Math.log(zoom)/Math.log(.5)+precores    ;
          if(uniforms[ "morph" ].value!=0.)uniforms[ "centralCores" ].value*=3./2.;//stabilize morph dance collaboration
 
-        uniforms[ "externalCores" ].value =(uniforms[ "centralCores" ].value)*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*logStabilizationConstant+.25/Math.log(.5);
+        uniforms[ "externalCores" ].value =(uniforms[ "centralCores" ].value)*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*logStabilizationConstant-.5/Math.log(.5);
         
         if(uniforms[ "Spoker" ].value&&uniforms[ "MetaCored" ].value)
             uniforms[ "externalCores" ].value*=4./3./(1./Math.log(3.)+(1.-1./Math.log(3.))/1.75);

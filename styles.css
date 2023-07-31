@@ -1,18 +1,24 @@
 body
 {
+    font-family: 'Courier New', monospace;
     font-size: 1.2em;
-    color: chartreuse;
+    color:  #3baaff;
     background-color:black;
     margin-left: 7%;
     margin-right: 7%;
     margin-top: 5%;
     text-indent: 3.4%;
 }
+
 .onofflinescaled{
     
     width: 100%;
 }
-
+img{
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 3px;
+}
 /*https://stackoverflow.com/questions/3011226/using-background-attachmentfixed-in-safari-on-the-ipad*/
 #background_wrap {
     z-index: -1;
