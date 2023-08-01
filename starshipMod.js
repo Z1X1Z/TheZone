@@ -36,7 +36,6 @@ const starshipSize = Math.E**-1.3247/Math.sqrt(2.);//divided by Math.sqrt(2.) to
 let screenPressCoordX, screenPressCoordY;
 window.pointerZoom=false;
 let coordX=0., coordY=0.;
-if(!("spiroRainbow" in window))window.spiroRainbow = false;
 window.pixelShaderSize = 7;
 const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
 window.movementRate=pixelShaderToStarshipRATIO;//value of 1.5 moves trail to edge of screen in 1 second
@@ -56,6 +55,7 @@ window.flip = 1;
 let rez=.5;
 if (navigator.maxTouchPoints <1) rez = 1;
 let colorSound;
+let colorSoundPURE;
 let center = false;
      
 /*let mobile = false;
@@ -382,6 +382,7 @@ colorSound = new THREE.Color();
 const reversableColor=(angle/12.+twist/24.)*flip+1./3.;
                        const colortone = note/lightingScaleTrail;
     colorSound.setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
+                    colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);//lighting {note/x} should be 120 but it's out of the vocal range
 
 pitchCol[f]  = colorSound;
 angle = ((angle+6)/12.*2*pi);
@@ -1214,7 +1215,7 @@ if( !window.touchMode&&!window.touchOnlyMode) {
 
     let metroPhase =-Math.sin(-uniforms[ "time" ].value*uniforms[ "metronome" ].value)
   if(instantaneousFreqSpirographColoring==1) {
-    lineMat.color = colorSound;
+    lineMat.color = colorSoundPURE;
   }
 
   const d = -.991;
@@ -1233,7 +1234,7 @@ if( !window.touchMode&&!window.touchOnlyMode) {
             ty =  spirray1[r]/spiregulator;
             const greynessLast = greyness
             if(uniforms[ "metronome" ].value>1.)greyness=1.-Math.sqrt(tx*tx+ty*ty)**1.3247*metroPhase;
-            else greyness = 1.-Math.sqrt(tx*tx+ty*ty)**1.3247
+            else greyness = 1.-Math.sqrt(tx*tx+ty*ty)**2.
             // pointColor.push( greynessLast, greynessLast, greynessLast,greyness, greyness, greyness );
             linePositionAttribute.setXYZ(lineStride,txlast,tylast, d)
             linePositionAttribute.setXYZ(lineStride+1,tx, ty, d)

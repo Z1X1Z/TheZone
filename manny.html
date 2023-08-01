@@ -888,12 +888,12 @@ return vec3(clamp(1.-l,0.,1.));
 }
     
 vec3 faceFORWARD(vec2 p,vec2 t){
-    t*=2.;
+    t*=5.;
     vec2 s=p;
         float l=0.;
         for (int f=0;f<3+6*52;f+=1)
             if( (f<3+6*int(log(zoom)/log(.3247))&&!helm)||(helm&&f<3))//turn f<15 or f<21 for alternative just seven eyedfullness
-                s=vec2(-1./(s.x*s.x-s.y*s.y-p.x+t.x), 2.0*s.x*s.y-p.y-sign(t.y)/(13.-abs(t.y)));//this is {s=s^2-p;s.real=-1./s.real}
+                s=vec2(-1./(s.x*s.x-s.y*s.y-p.x+t.x), 2.0*s.x*s.y-p.y-sign(t.y)/(4.41-abs(t.y)));//this is {s=s^2-p;s.real=-1./s.real}
             else break;
                
         float centralPowerInverter=(s.x/s.y)*sign(s.x*s.y)*1.5;
@@ -1321,7 +1321,7 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
   if (starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=starship.x;
                       
                       float spirographTranslucer = 1.;
-                      if (starship.x!=0.&&starship.x!=1.&&starship.x!=.5&&starship.x==starship.y&& starship.y==starship.z&&starship.w==1.)spirographTranslucer=.75-starship.x/2.;
+                      if (starship.x!=0.&&starship.x!=1.&&starship.x!=.5&&(starship.x!=starship.y||starship.y!=starship.z||starship.z!=starship.x)&&starship.w==1.)spirographTranslucer=.75-(starship.x+starship.y+starship.z)/2.;
                       
                       
                       
@@ -1972,7 +1972,7 @@ vec2 dance = vec2(0.);
  vec2 driftCanceller=vec2(dance.x,-dance.y);
                                                                                          
                                                                                          
-                                                                                         
+                                                     vec3 faceFORWARDbuffer = vec3 (1.);
                                                  vec3 zoomer;
                                                  vec2 t =vec2(lerp(time/2.),lerp(time*.618/2.));
 
@@ -1992,7 +1992,10 @@ vec2 dance = vec2(0.);
      else if (colorCombo==15)zoomer=xx(backGround,dance2);
      else if (colorCombo==16)zoomer=xtol(backGround,vec2(0.));
      else if (colorCombo==17){
-                       if(Character == 3||Character == 4)zoomer=faceFORWARD(backGround*3.,t*zoom);
+                       if(Character == 3||Character == 4){
+                           faceFORWARDbuffer =faceFORWARD(backGround*3.,t*zoom);
+                           zoomer=faceFORWARD(backGround*3.,t*zoom);
+                           }
                        else zoomer=faceHeights(backGround,t*zoom);
                        zoomer = clamp(bod(backGround*2.,t*zoom)-zoomer*50.,.0,1.)+zoomer;
                        }
@@ -2102,13 +2105,19 @@ vec2 dance = vec2(0.);
     vec4 starship;
                                  if (starshipLOOKUP.x<1.&&starshipLOOKUP.y<1.&&starshipLOOKUP.x>0.&&starshipLOOKUP.y>0.)starship = texture2D(STAR,starshipLOOKUP);
                                  
+                      vec3 starshipMultiplier = vec3(1.);
+                      if (Character==4)starshipMultiplier=(starship.xyz*.5*starship.w+.5);
+                      if(starship.w==0.)starshipMultiplier=vec3(1.);
+                                 if(starship.r+starship.b+starship.g<255.-3.5&&starship.w==1.)starshipMultiplier=vec3(1.);
+
+                                 
     float isBlack =1.;
   
     if (starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=starship.x;
                                 float maxColorOfStarship=1.;
     if (starship.x!=0.||starship.y!=0.||starship.z!=0.)maxColorOfStarship=max(max(starship.x,starship.y),starship.z);
      float spirographTranslucer = 1.;
-     if (starship.x!=0.&&starship.x!=1.&&starship.x!=.5&&starship.x==starship.y&&starship.y==starship.z&&starship.w==1.)spirographTranslucer=.75-starship.x/2.;
+     if (starship.x!=0.&&starship.x!=1.&&starship.x!=.5&&(starship.x!=starship.y||starship.y!=starship.z||starship.z!=starship.x)&&starship.w==1.)spirographTranslucer=.75-(starship.x+starship.y+starship.z)/2.;
                                  
                                  vec4 DOTstarship=vec4(0.);
                                  float isBlackDOT =1.;
@@ -2132,7 +2141,7 @@ if(starOnDot){
         if(DOTstarship.x!=0.||DOTstarship.y!=0.||DOTstarship.z!=0.)DOTmaxColorOfStarship=max(max(DOTstarship.x,DOTstarship.y),DOTstarship.z);
         
 
-        if(DOTstarship.x!=0.&&DOTstarship.x!=1.&&DOTstarship.x==DOTstarship.y&&DOTstarship.y==starship.z&&DOTstarship.w==1.)spirographTranslucerDOT=.75-DOTstarship.x/2.;
+        if(DOTstarship.x!=0.&&DOTstarship.x!=1.&&DOTstarship.x!=.5&&(DOTstarship.x!=DOTstarship.y||DOTstarship.y!=DOTstarship.z||DOTstarship.z!=DOTstarship.x)&&DOTstarship.w==1.)spirographTranslucerDOT=.75-(DOTstarship.x+DOTstarship.y+DOTstarship.z)/2.;
            }
                                  vec4 StaRivers=vec4(0.);
                                  if(eden==2||eden==4)
@@ -2142,7 +2151,7 @@ if(starOnDot){
                                 }
                                  
                                  float spirographTranslucerStaRivers = 1.;
-                                 if (StaRivers.x!=0.&&StaRivers.x!=1.&&StaRivers.x==StaRivers.y&& StaRivers.y==StaRivers.z&&StaRivers.w==1.)spirographTranslucerStaRivers=StaRivers.x;
+                                 if (StaRivers.x!=0.&&StaRivers.x!=1.&&StaRivers.x==.5&&(StaRivers.x!=StaRivers.y||StaRivers.y!=StaRivers.z||StaRivers.z!=StaRivers.x)&&StaRivers.w==1.)spirographTranslucerStaRivers=(StaRivers.x+StaRivers.y+StaRivers.z);
                                  
            float isBlackStaRivers =1.;//or black
            if (StaRivers.x==0.&&StaRivers.x==StaRivers.y&& StaRivers.y==StaRivers.z&&StaRivers.w>3.5/255.)isBlackStaRivers=0.;
@@ -2155,7 +2164,7 @@ if(starOnDot){
 
                                  gl_FragColor=((StaRivers*spirographTranslucerStaRivers+
               (starship*spirographTranslucer-vec4(mannyFace-backgroundFace,0.))+DOTstarship*spirographTranslucerDOT//the overal 1.23 boost is optional but with alpha blending on it's nice
-                                 +vec4(Pillars+mnyX+(clamp(mny
+                                 +vec4(Pillars+mnyX+(clamp(mny*starshipMultiplier
 + //-clamp(starship.xyz*starship.w-(mny.r+mny.g+mny.b)*.333-mannyFace*100.,0.,1.)
                                                           -(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge+
               clamp(clamp(cloud+
