@@ -888,13 +888,12 @@ return vec3(clamp(1.-l,0.,1.));
 }
     
 vec3 faceFORWARD(vec2 p,vec2 t){
-    
-    t/=9.;
+    t*=2.;
     vec2 s=p;
         float l=0.;
         for (int f=0;f<3+6*52;f+=1)
-            if( f<3+6*int(log(zoom)/log(.3247)))//turn f<15 or f<21 for alternative just seven eyedfullness
-                s=vec2(-1./(s.x*s.x-s.y*s.y-p.x+t.x), 2.0*s.x*s.y-p.y+t.y);//this is {s=s^2-p;s.real=-1./s.real}
+            if( (f<3+6*int(log(zoom)/log(.3247))&&!helm)||(helm&&f<3))//turn f<15 or f<21 for alternative just seven eyedfullness
+                s=vec2(-1./(s.x*s.x-s.y*s.y-p.x+t.x), 2.0*s.x*s.y-p.y-sign(t.y)/(13.-abs(t.y)));//this is {s=s^2-p;s.real=-1./s.real}
             else break;
                
         float centralPowerInverter=(s.x/s.y)*sign(s.x*s.y)*1.5;
@@ -2069,7 +2068,6 @@ vec2 dance = vec2(0.);
                        mny=bride(characterOnTrailP*gr,moveDynamic/7.)+dress(characterOnTrailP*1.5,-moveDynamic/7.)*2.+heart(characterPSpunToKey,moveDynamic);
                        swordSkew+=.5;}
                    else if (Character==3||Character==4){
-                       vec2 characterPSpun =p*2.;
                        mny=bod(characterOnTrailP,moveDynamic)+heart(characterPSpunToKey*2.4142*2.4142,moveDynamic)+faceFORWARD(characterOnTrailP*1.22112211,moveDynamic);
                    }
                    else if (Character==5)mny=lion(fourcreaturePlayerP,vec2(inversion,0.))+bodyFourCreatureCharacter(characterOnTrailP,moveDynamic)+heart(characterPSpunToKey,moveDynamic);
