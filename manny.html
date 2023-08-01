@@ -888,12 +888,12 @@ return vec3(clamp(1.-l,0.,1.));
 }
     
 vec3 faceFORWARD(vec2 p,vec2 t){
-    t*=5.;
+    t*=2.;
     vec2 s=p;
         float l=0.;
         for (int f=0;f<3+6*52;f+=1)
             if( (f<3+6*int(log(zoom)/log(.3247))&&!helm)||(helm&&f<3))//turn f<15 or f<21 for alternative just seven eyedfullness
-                s=vec2(-1./(s.x*s.x-s.y*s.y-p.x+t.x), 2.0*s.x*s.y-p.y-sign(t.y)/(4.41-abs(t.y)));//this is {s=s^2-p;s.real=-1./s.real}
+                s=vec2(-1./(s.x*s.x-s.y*s.y-p.x+t.x), 2.0*s.x*s.y-p.y-t.y*2.);//this is {s=s^2-p;s.real=-1./s.real}
             else break;
                
         float centralPowerInverter=(s.x/s.y)*sign(s.x*s.y)*1.5;
@@ -1589,7 +1589,7 @@ return
                          if(f>2)e+=0.3;}
 }
 
-  return vec3(l+c,l+x+c,l+c)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
+  return vec3(l+c,l+x+c,c)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
 
 
   vec3 dress(vec2 p,vec2 t){
