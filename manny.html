@@ -1321,7 +1321,7 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
   if (starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=starship.x;
                       
                       float spirographTranslucer = 1.;
-                      if (starship.x!=0.&&starship.x!=1.&&starship.x!=.5&&(starship.x!=starship.y||starship.y!=starship.z||starship.z!=starship.x)&&starship.w==1.)spirographTranslucer=.75-(starship.x+starship.y+starship.z)/2.;
+                    //  if (starship.x!=0.&&starship.x!=1.&&starship.x!=.5&&(starship.x+starship.y>=255.-3.5||starship.y+starship.z>=255.-3.5||starship.z+starship.x>=255.-3.5)&&starship.w==1.)spirographTranslucer=.75-(starship.x+starship.y+starship.z)/2.;
                       
                       
                       
@@ -2117,7 +2117,7 @@ vec2 dance = vec2(0.);
                                 float maxColorOfStarship=1.;
     if (starship.x!=0.||starship.y!=0.||starship.z!=0.)maxColorOfStarship=max(max(starship.x,starship.y),starship.z);
      float spirographTranslucer = 1.;
-     if (starship.x!=0.&&starship.x!=1.&&starship.x!=.5&&(starship.x!=starship.y||starship.y!=starship.z||starship.z!=starship.x)&&starship.w==1.)spirographTranslucer=.75-(starship.x+starship.y+starship.z)/2.;
+     //if (starship.x!=0.&&starship.x!=1.&&starship.x!=.5&&(starship.x+starship.y>=255.-3.5||starship.y+starship.z>=255.-3.5||starship.z+starship.x>=255.-3.5)&&starship.w==1.)spirographTranslucer=.75-(starship.x+starship.y+starship.z)/2.;
                                  
                                  vec4 DOTstarship=vec4(0.);
                                  float isBlackDOT =1.;
@@ -2141,8 +2141,9 @@ if(starOnDot){
         if(DOTstarship.x!=0.||DOTstarship.y!=0.||DOTstarship.z!=0.)DOTmaxColorOfStarship=max(max(DOTstarship.x,DOTstarship.y),DOTstarship.z);
         
 
-        if(DOTstarship.x!=0.&&DOTstarship.x!=1.&&DOTstarship.x!=.5&&(DOTstarship.x!=DOTstarship.y||DOTstarship.y!=DOTstarship.z||DOTstarship.z!=DOTstarship.x)&&DOTstarship.w==1.)spirographTranslucerDOT=.75-(DOTstarship.x+DOTstarship.y+DOTstarship.z)/2.;
-           }
+      //  if(DOTstarship.x!=0.&&DOTstarship.x!=1.&&DOTstarship.x!=.5&&(DOTstarship.x+DOTstarship.y>=255.-3.5||DOTstarship.y+DOTstarship.z>=255.-3.5||DOTstarship.z+DOTstarship.x>=255.-3.5)&&DOTstarship.w==1.)spirographTranslucerDOT=.75-(DOTstarship.x+DOTstarship.y+DOTstarship.z)/2.;
+      
+                   }
                                  vec4 StaRivers=vec4(0.);
                                  if(eden==2||eden==4)
                                  {
@@ -2151,7 +2152,7 @@ if(starOnDot){
                                 }
                                  
                                  float spirographTranslucerStaRivers = 1.;
-                                 if (StaRivers.x!=0.&&StaRivers.x!=1.&&StaRivers.x==.5&&(StaRivers.x!=StaRivers.y||StaRivers.y!=StaRivers.z||StaRivers.z!=StaRivers.x)&&StaRivers.w==1.)spirographTranslucerStaRivers=(StaRivers.x+StaRivers.y+StaRivers.z);
+                                // if (StaRivers.x!=0.&&StaRivers.x!=1.&&StaRivers.x==.5&&(StaRivers.x+StaRivers.y>=255.-3.5||StaRivers.y+StaRivers.z>=255.-3.5||StaRivers.z+StaRivers.x>=255.-3.5)&&StaRivers.w==1.)spirographTranslucerStaRivers=(StaRivers.x+StaRivers.y+StaRivers.z);
                                  
            float isBlackStaRivers =1.;//or black
            if (StaRivers.x==0.&&StaRivers.x==StaRivers.y&& StaRivers.y==StaRivers.z&&StaRivers.w>3.5/255.)isBlackStaRivers=0.;
