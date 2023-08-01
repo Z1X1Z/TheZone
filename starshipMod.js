@@ -1213,11 +1213,11 @@ if( !window.touchMode&&!window.touchOnlyMode) {
 
 
 
-    let metroPhase =-Math.sin(-uniforms[ "time" ].value*uniforms[ "metronome" ].value)
+    let metroPhase =(-Math.sin(-uniforms[ "time" ].value-pi/2.)*uniforms[ "metronome" ].value)
   if(instantaneousFreqSpirographColoring==1) {
     lineMat.color = colorSoundPURE;
   }
-
+// else lineMat.color = new THREE.Color("white")
   const d = -.991;
                             
                             let tx = 0, ty = 0,greyness;
@@ -1233,8 +1233,9 @@ if( !window.touchMode&&!window.touchOnlyMode) {
             tx = spirray0[r]/spiregulator;
             ty =  spirray1[r]/spiregulator;
             const greynessLast = greyness
-            if(uniforms[ "metronome" ].value>1.)greyness=1.-Math.sqrt(tx*tx+ty*ty)**1.3247*metroPhase;
-            else greyness = 1.-Math.sqrt(tx*tx+ty*ty)**2.
+            //if(uniforms[ "metronome" ].value>1.)greyness=.5-.5*Math.sqrt(tx*tx+ty*ty)**1.3247*metroPhase;//seems wrong
+            //else
+                greyness = Math.sqrt(tx*tx+ty*ty)**.5
             // pointColor.push( greynessLast, greynessLast, greynessLast,greyness, greyness, greyness );
             linePositionAttribute.setXYZ(lineStride,txlast,tylast, d)
             linePositionAttribute.setXYZ(lineStride+1,tx, ty, d)
