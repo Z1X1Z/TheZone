@@ -798,7 +798,6 @@ let correlationForText;
 
 correlationForText=document.getElementById("score").offsetHeight;
 correlationForText+=document.getElementById("allText").offsetHeight;
-console.log(correlationForText)
     if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
        {
             if("osmd" in window)
@@ -1579,8 +1578,14 @@ var fingerStride = 0;
                      if (t==7||t==5||t==2||t==0||t==10)
                      {
                          BlackOrWhite=-1.;
-                         if(uniforms.colorCombo.value==20&&((t<7.5&&t>6.5)||(t>4.5&&t<5.5)))
-                             BlackOrWhite =.5;
+                         if(uniforms.colorCombo.value==20){
+                             if(uniforms.helm.value&&(uniforms.Character.value==4||uniforms.Character.value==3)
+                                &&((uniforms.Character.value==3&&(t<.5||t>11.5))||(t<2.5&&t>1.5)||(t<10.5&&t>9.5)||(t<7.5&&t>6.5)||(t>4.5&&t<5.5))) BlackOrWhite =.5;
+                             else if(!uniforms.helm.value&&uniforms.Character.value==3&&(t<.5||t>11.5))BlackOrWhite =.5;
+                             else if (!uniforms.helm.value&&uniforms.Character.value==4&&(t<6.5&&t>5.5));
+                             else if(((t<7.5&&t>6.5)||(t>4.5&&t<5.5))) BlackOrWhite =.5;
+
+                         }
                          
                      }
                      else if( (noteGrey<.5 || noteGrey>11.5) &&uniforms.colorCombo.value!=20)
@@ -1666,10 +1671,10 @@ var loopLimit = trailDepth;
                  if(!trailSegmentExpired[r]&&timeElapsedSinceRecording<=trailSecondsLong){
                         // timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
                             const zlast = z;
-                            z = -1.+timeElapsedSinceRecording/trailSecondsLong;
+                            z = -1.+timeElapsedSinceRecording/trailSecondsLong/5.;
                         //   if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong);
                             const transparencyOfTrailLast =transparencyOfTrail;
-                            transparencyOfTrail =-z;
+                            transparencyOfTrail =1.-timeElapsedSinceRecording/trailSecondsLong;
 
                      trailColorAttribute.setXYZW(strideTrail, pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail)
                                             trailColorAttribute.setXYZW(strideTrail+1, pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrailLast)
