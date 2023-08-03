@@ -1671,7 +1671,7 @@ var loopLimit = trailDepth;
                  if(!trailSegmentExpired[r]&&timeElapsedSinceRecording<=trailSecondsLong){
                         // timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
                             const zlast = z;
-                            z = -1.+timeElapsedSinceRecording/trailSecondsLong/5.;
+                            z = -1.+timeElapsedSinceRecording/trailSecondsLong/2.;
                         //   if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong);
                             const transparencyOfTrailLast =transparencyOfTrail;
                             transparencyOfTrail =1.-timeElapsedSinceRecording/trailSecondsLong;
