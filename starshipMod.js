@@ -1811,10 +1811,19 @@ for(let n = 0; n < polygons.length; n++)
                                         const speed = Math.sqrt(polygons[n].dx*polygons[n].dx+polygons[n].dy*polygons[n].dy)
                                         const speedLimit = 1.;
 
-                                        var distanceFromCenter
-                         if(uniforms.colorCombo.value==20&&!(uniforms.helm.value&&(uniforms.Character.value==3||uniforms.Character.value==4)))distanceFromCenter= Math.pow((xFromCent*xFromCent+(yFromCent+.5)*(yFromCent+.5))/uniforms.shaderScale.value/1.75,.5);
-                         else distanceFromCenter= Math.pow((xFromCent*xFromCent+(yFromCent*yFromCent)),.5);
+                        var distanceFromCenter;
+                         var triggerDistanceAdjustment;
 
+         if(uniforms.colorCombo.value==20&&!(uniforms.helm.value&&(uniforms.Character.value==3||uniforms.Character.value==4))){
+                                distanceFromCenter= Math.pow((xFromCent*xFromCent+(yFromCent+.25)*(yFromCent+.25)),.5)/uniforms.shaderScale.value/1.75/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y));
+                             triggerDistance=distanceFromCenter/(1./uniforms.shaderScale.value/1.75/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y)));
+                         }
+         else {
+             distanceFromCenter= Math.pow((xFromCent*xFromCent+(yFromCent*yFromCent)),.5);
+             triggerDistance=distanceFromCenter;
+         }
+
+                         
                        // polygons[n].dx*=1.-baseMag;//resistance to speed accumulation
                         // polygons[n].dy*=1.-baseMag;
 
@@ -1833,9 +1842,6 @@ if (!on)neutralizer=0.;
     const ddX= circleX-polygons[n].centerX;
     const ddY= circleY-polygons[n].centerY;
     const distDot = Math.sqrt(ddX*ddX+ddY*ddY);
-                        var triggerDistanceAdjustment;
-                         if(uniforms.colorCombo.value==20&&!(uniforms.helm.value&&(uniforms.Character.value==3||uniforms.Character.value==4)))triggerDistance=distanceFromCenter*uniforms.shaderScale.value/1.75;
-                         else triggerDistance=distanceFromCenter
 
     if ( triggerDistance<polyRad+dotSize &&polygons[n].exited){
         if (!polygons[n].caught)polygons[n].caught = true;
