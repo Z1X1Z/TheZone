@@ -203,7 +203,7 @@ function callKey(event){
         else window.starClover=true;
     }
     else if (key=="u") uniforms[ "petals" ].value += 1.;
-    else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%9;
+    else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%10;
 
     else if (key=="?"){
         if(uniforms[ "spirated" ].value==0)uniforms[ "spirated" ].value=1;
@@ -277,7 +277,7 @@ function callKey(event){
 
       else if (key=="-"){window.movementRate /=1.11111111; uniforms[ "rate" ].value/=1.11111111;}
 
-          else if (key=="e")window.gameOn=!window.gameOn;
+          else if (key=="e")uniforms.gameOn.value=!uniforms.gameOn.value;
           else if (key=="E")uniforms.MannyONtrail.value=uniforms.MannyONtrail.value=(1+uniforms.MannyONtrail.value)%2;
 
       if(uniforms[ "free" ].value) window.zoomCageSize=100000000000000000.;

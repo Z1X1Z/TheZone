@@ -727,6 +727,8 @@ void main(){
 
     uniform int colorCombo;
     uniform bool colorInverter;
+    
+    uniform bool gameOn;
 
     uniform float time;
     uniform float volume;
@@ -909,9 +911,8 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                 }
             else
             {
-                
-                    if(Character==3&&l<.05)l=1.;
-                    else if(Character==4&&l<.2)l=0.;
+                    if(Character==3&&l<.04)l=1.;
+                    else if(Character==4&&l<.16)l=0.;
             }
             
             if (l>1.)l=1.;
@@ -2013,12 +2014,15 @@ vec2 dance = vec2(0.);
      else if (colorCombo==20){
                        zoomer=vec3(0.);
                        if(Character!=3&&Character != 4)
-                           backgroundFace =clamp(face(backGround*1.75-vec2(1.,0.),vec2(0.))+1.,0.,1.);
+                           backgroundFace =clamp(face(backGround*1.75-vec2(1.,0.),vec2(0.))+.5,0.,1.);
                        else{
                            if(!helm)backgroundFace =faceFORWARDstatic(backGround*1.75-vec2(1.,0.),vec2(0.));
                            else backgroundFace =faceFORWARDstatic(backGround*2.5,moveDynamic);
                         }
-                       
+                       if(gameOn)
+                       {backgroundFace+=.25;
+                           //if(length(backGround)<.1) backgroundFace = vec3(.5);
+                           }
                        }
     else if (colorCombo==19)zoomer=acrostic(backGround);
 
