@@ -1812,7 +1812,7 @@ for(let n = 0; n < polygons.length; n++)
                                         const speedLimit = 1.;
 
                                         var distanceFromCenter
-                         if(uniforms.colorCombo.value==20)distanceFromCenter= Math.pow((xFromCent*xFromCent+(yFromCent+.5)*(yFromCent+.5))/uniforms.shaderScale.value/1.75,.5);
+                         if(uniforms.colorCombo.value==20&&!(uniforms.helm.value&&(uniforms.Character.value==3||uniforms.Character.value==4)))distanceFromCenter= Math.pow((xFromCent*xFromCent+(yFromCent+.5)*(yFromCent+.5))/uniforms.shaderScale.value/1.75,.5);
                          else distanceFromCenter= Math.pow((xFromCent*xFromCent+(yFromCent*yFromCent)),.5);
 
                        // polygons[n].dx*=1.-baseMag;//resistance to speed accumulation
@@ -1834,7 +1834,7 @@ if (!on)neutralizer=0.;
     const ddY= circleY-polygons[n].centerY;
     const distDot = Math.sqrt(ddX*ddX+ddY*ddY);
                         var triggerDistanceAdjustment;
-                         if(uniforms.colorCombo.value==20)triggerDistance=distanceFromCenter*uniforms.shaderScale.value/1.75;
+                         if(uniforms.colorCombo.value==20&&!(uniforms.helm.value&&(uniforms.Character.value==3||uniforms.Character.value==4)))triggerDistance=distanceFromCenter*uniforms.shaderScale.value/1.75;
                          else triggerDistance=distanceFromCenter
 
     if ( triggerDistance<polyRad+dotSize &&polygons[n].exited){
