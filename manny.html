@@ -2020,8 +2020,8 @@ vec2 dance = vec2(0.);
                            else backgroundFace =faceFORWARDstatic(backGround*2.5,moveDynamic);
                         }
                        if(gameOn)
-                       {backgroundFace+=.25;
-                           //if(length(backGround)<.1) backgroundFace = vec3(.5);
+                       {    if(Character==3||Character==4) backgroundFace/=1.5;
+                           backgroundFace+=.25;
                            }
                        }
     else if (colorCombo==19)zoomer=acrostic(backGround);
