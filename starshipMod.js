@@ -48,7 +48,6 @@ const MR = mf/zoomFrames;
 window.zoomCageSize = window.pixelShaderSize/4.;//radius of zoom bounding
 
                   window.uniformsLoaded=false;
-window.gameOn=false;
 window.twist = 0;
 window.flip = 1;
 
@@ -719,7 +718,7 @@ dotted:{value:false},
   NightAndDay:{value:false},
   dotCoord:{value:[0,0]},
   starOnDot:{value:false},
-
+  gameOn:{value:false}
 
     }
   ]);
@@ -1766,7 +1765,7 @@ circle.position.set(circleX,circleY,-1.);
 
 let allCaught = true;
 for (var n=0; n<polygons.length; n++) if(  polygons[n].caught == false) allCaught = false;
-if(window.gameOn&&allCaught)
+if(uniforms.gameOn.value&&allCaught)
 {
 
     if(level >= metaLevel){metaLevel +=1; level = 1;}
@@ -1792,7 +1791,7 @@ if(window.gameOn&&allCaught)
 
     }
 }
-else if(!window.gameOn){polygons=[]; level = 0; metaLevel=0;}
+else if(!uniforms.gameOn.value){polygons=[]; level = 0; metaLevel=0;}
                                         
                                         const baseMag=(1.-(metaLevel-level)/(metaLevel))/2.;
                                         const compound = interpolation*baseMag/60.*window.movementRate/pixelShaderToStarshipRATIO;
@@ -1812,7 +1811,9 @@ for(let n = 0; n < polygons.length; n++)
                                         const speed = Math.sqrt(polygons[n].dx*polygons[n].dx+polygons[n].dy*polygons[n].dy)
                                         const speedLimit = 1.;
 
-                                        const distanceFromCenter = Math.pow(xFromCent*xFromCent+yFromCent*yFromCent,.5);
+                                        var distanceFromCenter
+                         if(uniforms.colorCombo.value==20)distanceFromCenter= Math.pow((xFromCent*xFromCent+(yFromCent+.5)*(yFromCent+.5))/uniforms.shaderScale.value/1.75,.5);
+                         else distanceFromCenter= Math.pow((xFromCent*xFromCent+(yFromCent*yFromCent)),.5);
 
                        // polygons[n].dx*=1.-baseMag;//resistance to speed accumulation
                         // polygons[n].dy*=1.-baseMag;
@@ -1832,14 +1833,16 @@ if (!on)neutralizer=0.;
     const ddX= circleX-polygons[n].centerX;
     const ddY= circleY-polygons[n].centerY;
     const distDot = Math.sqrt(ddX*ddX+ddY*ddY);
+                        var triggerDistanceAdjustment;
+                         if(uniforms.colorCombo.value==20)triggerDistance=distanceFromCenter*uniforms.shaderScale.value/1.75;
+                         else triggerDistance=distanceFromCenter
 
-
-    if ( distanceFromCenter<polyRad+dotSize &&polygons[n].exited){//here I use dotSize, though it's really the center trigger
+    if ( triggerDistance<polyRad+dotSize &&polygons[n].exited){
         if (!polygons[n].caught)polygons[n].caught = true;
         else polygons[n].caught = false;
         polygons[n].caughtByDot=false;
         polygons[n].exited = false;}
-    else if (distanceFromCenter>polyRad+dotSize&&polygons[n].caughtByDot==false)polygons[n].exited = true;
+    else if (triggerDistance>polyRad+dotSize&&polygons[n].caughtByDot==false)polygons[n].exited = true;
 
     if ( distDot<polyRad+dotSize &&polygons[n].exited){
         if (!polygons[n].caught)polygons[n].caught = true;
