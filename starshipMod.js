@@ -33,7 +33,16 @@ stallTillTHREELoaded();
 window.zoom=1.;
 
 const starshipSize = Math.E**-1.3247/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
-const starShipDepthInSet = .1;//base Z value
+const trailSecondsLong = 8.;
+const starShipDepthInSet = (trailSecondsLong-1.)/trailSecondsLong;//base Z value
+
+const zoomFrames = 60;//frames to double zoom
+let ZR = Math.E**(Math.log(.5)/zoomFrames);
+                  const mf = 1.;
+const MR = mf/zoomFrames;
+const trailLength = zoomFrames*trailSecondsLong;
+const dotSize = starshipSize;
+
 
 let screenPressCoordX, screenPressCoordY;
 window.pointerZoom=false;
@@ -43,10 +52,6 @@ const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. 
 window.movementRate=pixelShaderToStarshipRATIO;//value of 1.5 moves trail to edge of screen in 1 second
 window.touchMode=false;
 window.volumeSpeed = false;
-const zoomFrames = 60;//frames to double zoom
-let ZR = Math.E**(Math.log(.5)/zoomFrames);
-                  const mf = 1.;
-const MR = mf/zoomFrames;
 window.zoomCageSize = window.pixelShaderSize/4.;//radius of zoom bounding
 
                   window.uniformsLoaded=false;
@@ -252,9 +257,6 @@ function fiveAndSeven(){
             
             }
 }
-
-                          const trailSecondsLong = 8.;
-                          const trailLength = zoomFrames*trailSecondsLong;
 const cx = Array(trailLength);//c is the center of the frame moved from the origin
 const cy = Array(trailLength);
 const xPerp= Array(trailLength);//perp is the perpendicular from c
@@ -270,7 +272,6 @@ let d_x=0,d_y=0;
 let staticX=0,staticY=0;
 
 let circleX=0.,circleY=0.;
-let dotSize = starshipSize;
 let f = 0;
 
 
