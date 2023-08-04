@@ -2017,7 +2017,7 @@ vec2 dance = vec2(0.);
                            backgroundFace =clamp(face(backGround*1.75-vec2(1.,0.),vec2(0.))+.5,0.,1.);
                        else{
                            if(!helm)backgroundFace =faceFORWARDstatic(backGround*1.75-vec2(1.,0.),vec2(0.));
-                           else backgroundFace =faceFORWARDstatic(backGround*2.5,moveDynamic);
+                           else backgroundFace =faceFORWARDstatic(backGround*4.,moveDynamic);
                         }
                        if(gameOn)
                        {    if(Character==3||Character==4) backgroundFace/=1.5;
@@ -2052,8 +2052,8 @@ vec2 dance = vec2(0.);
                  
                  if(helm)
                  {bridge=fourCreaturesSmall(characterPStatic,moveDynamic);
-                       if(colorCombo==20&&(helm&&(Character==3||Character==4))) cloud=clouds(p*2.5,moveDynamic);
-                       else if(colorCombo==20)cloud=clouds(p*1.75-vec2(1.,0.),moveDynamic);
+                       if(colorCombo==20&&(helm&&(Character==3||Character==4))) cloud=clouds(backGround*4.,moveDynamic);
+                       else if(colorCombo==20)cloud=clouds(backGround*1.75-vec2(1.,0.),moveDynamic);
                        else  cloud=clouds(characterPStatic*1.2,moveDynamic);
                                     
                                                      cloud=clamp(cloud,0.,1.);
@@ -2089,7 +2089,11 @@ vec2 dance = vec2(0.);
                    else if (Character==3||Character==4){
                        float heartSize = 1.;
                        if (!helm&&Character!=4) heartSize=5.;
-                       mny=bod(characterOnTrailP,moveDynamic)+heart(characterPSpunToKey*heartSize,moveDynamic)+faceFORWARD(characterOnTrailP*1.22112211,moveDynamic);
+                       else if (Character==4) heartSize=2.;
+
+                       float angelSize = 1.22112211;
+                       if (helm) angelSize=2.5;
+                       mny=bod(characterOnTrailP,moveDynamic)+heart(characterPSpunToKey*heartSize,moveDynamic)+faceFORWARD(characterOnTrailP*angelSize,moveDynamic);
                    }
                    else if (Character==5)mny=lion(fourcreaturePlayerP,vec2(inversion,0.))+bodyFourCreatureCharacter(characterOnTrailP,moveDynamic)+heart(characterPSpunToKey,moveDynamic);
                    else if (Character==6){
