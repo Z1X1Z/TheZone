@@ -1813,14 +1813,22 @@ for(let n = 0; n < polygons.length; n++)
 
                         var distanceFromCenter;
                          var triggerDistanceAdjustment;
+                         
+var neutralizer=1.;
+if (!on)neutralizer=0.;
+                         polygons[n].centerX += (d_x*neutralizer-polygons[n].dx)*MR;
 
          if(uniforms.colorCombo.value==20&&!(uniforms.helm.value&&(uniforms.Character.value==3||uniforms.Character.value==4))){
                                 distanceFromCenter= Math.pow((xFromCent*xFromCent+(yFromCent+.25)*(yFromCent+.25)),.5)/uniforms.shaderScale.value/1.75/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y));
                              triggerDistance=distanceFromCenter/(1./uniforms.shaderScale.value/1.75/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y)));
+             polygons[n].centerY += ((d_y+.25)*neutralizer-polygons[n].dy)*MR;
+
                          }
          else {
              distanceFromCenter= Math.pow((xFromCent*xFromCent+(yFromCent*yFromCent)),.5);
              triggerDistance=distanceFromCenter;
+             
+             polygons[n].centerY += (d_y*neutralizer-polygons[n].dy)*MR;
          }
 
                          
@@ -1830,14 +1838,10 @@ for(let n = 0; n < polygons.length; n++)
 
         if (distanceFromCenter<=1)
         {
-            polygons[n].dx+=-Math.cos(angleTarget)*compound;
+            polygons[n].dx+=-Math.cos(angleTarget)*interpolation*compound;
             polygons[n].dy+=-Math.sin(angleTarget)*interpolation*compound;
         }
                          
-var neutralizer=1.;
-if (!on)neutralizer=0.;
-                polygons[n].centerX += (d_x*neutralizer-polygons[n].dx)*MR;
-                polygons[n].centerY += (d_y*neutralizer-polygons[n].dy)*MR;
 
     const ddX= circleX-polygons[n].centerX;
     const ddY= circleY-polygons[n].centerY;
