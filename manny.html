@@ -802,7 +802,7 @@ uniform bool NightAndDay;
         else {z=vec2(((z.x*z.x-z.y*z.y)-g.x+t.x/2.),(2.0*z.x*z.y-g.y+t.y/2.));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
         
         h+=(vec3(z.x*z.y,z.x+.144,z.y-.0333*(1.-z.y))+.1)
-        /length(z)/iterations;
+        /length(z)/iterations*2./3.;
         }
     return h;
     }
@@ -2131,7 +2131,7 @@ vec2 dance = vec2(0.);
                      starshipMultiplier=(starship.xyz*.5*starship.w+.5);
                       if(starship.w==0.)starshipMultiplier=vec3(1.);
                                  
-                     if(mannyFace.x+mannyFace.y+mannyFace.z>-7.)starshipMultiplier-=mannyFace;
+                     if(mannyFace.x+mannyFace.y+mannyFace.z>0.)starshipMultiplier-=mannyFace;
                                  
     float isBlack =1.;
   
