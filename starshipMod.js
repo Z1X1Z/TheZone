@@ -34,7 +34,7 @@ window.zoom=1.;
 
 const starshipSize = Math.E**-1.3247/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
 const trailSecondsLong = 8.;
-const starShipDepthInSet = (trailSecondsLong-1.)/trailSecondsLong;//base Z value
+const starShipDepthInSet = (trailSecondsLong-.5)/trailSecondsLong;//base Z value
 
 const zoomFrames = 60;//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
