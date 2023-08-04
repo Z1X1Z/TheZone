@@ -1311,7 +1311,7 @@ if(!window.touchMode){
                     const y = widt*-Math.cos(rpio2);
                     const xr = lengtOriginal*-Math.sin(arm);
                     const yr = lengtOriginal*-Math.cos(arm);
-                    const depth = (-1.+lengtOriginal/maxToMin*waterRadiusScalar)*starShipDepthInSet;//shortest bar on top
+                    const depth = -1.+lengtOriginal/maxToMin*waterRadiusScalar*starShipDepthInSet;//shortest bar on top
                     
                     const starshipseethrough = lengtOriginal;
                     //for(var yy=0;yy<3;yy++)
@@ -1421,7 +1421,7 @@ if(!window.touchMode){
             let timeShift = 0.;
             let w = timeShift/m.lengt/secondsToEdge;
             let withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL;
-            let depthINNER = (-1.+timeShift/OUTERSHELL)*starShipDepthInSet;
+            let depthINNER = -1.+timeShift/OUTERSHELL*starShipDepthInSet;
             let depthOUTER = depthINNER+m.lengt;
             let starStreamStride = 0;
             for(let starMoment=xyStarParticleArray.length-1; starMoment>=0; starMoment--)
@@ -1433,7 +1433,7 @@ if(!window.touchMode){
                     timeShift = uniforms["time"].value-m.time;
                     w = timeShift/m.lengt/secondsToEdge;
                     withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL*1.1;// OUTERSHELL times 1.1 to prevent remnant pieces around edge
-                    depthINNER = (-1.+timeShift/OUTERSHELL)*starShipDepthInSet;
+                    depthINNER = -1.+timeShift/OUTERSHELL*starShipDepthInSet;
                     depthOUTER = depthINNER+m.lengt;
                     
                     lastLoopTime=m.time;
@@ -1521,7 +1521,7 @@ const x = widt*-Math.sin(rpio2);
 const y = widt*-Math.cos(rpio2);
 const xr = lengt*-Math.sin(arm);
 const yr = lengt*-Math.cos(arm);
-const depth = (-1.+lengt)*starShipDepthInSet;
+const depth = -1.+lengt*starShipDepthInSet;
 
                 
                 starPositionAttribute.setXYZ(starStride,-x,    -y,  depth)
