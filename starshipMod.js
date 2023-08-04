@@ -33,6 +33,8 @@ stallTillTHREELoaded();
 window.zoom=1.;
 
 const starshipSize = Math.E**-1.3247/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
+const starShipDepthInSet = .1;//base Z value
+
 let screenPressCoordX, screenPressCoordY;
 window.pointerZoom=false;
 let coordX=0., coordY=0.;
@@ -377,7 +379,6 @@ if(isFinite(t))angle = -t%12;
 
 
 colorSound = new THREE.Color();
-             //          colorSound.setHSL((angle+90)/360.,(180+note)/297,(180+note)/297);
 const reversableColor=(angle/12.+twist/24.)*flip+1./3.;
                        const colortone = note/lightingScaleTrail;
     colorSound.setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
@@ -1074,7 +1075,7 @@ function runOSMD (){
 
 
 
-                             osmd.cursor.cursorOptions.color="#"+colorSound.getHexString();//this is a frame behind if it is above colorSounds definition
+                             osmd.cursor.cursorOptions.color="#"+colorSoundPURE.getHexString();//this is a frame behind if it is above colorSounds definition
          
                              osmd.cursor.show();
          osmd.cursor.wantedZIndex="0";
@@ -1216,7 +1217,7 @@ if( !window.touchMode&&!window.touchOnlyMode) {
     lineMat.color = colorSoundPURE;
   }
 // else lineMat.color = new THREE.Color("white")
-  const d = -.991;
+  const d = -starShipDepthInSet;
                             
                             let tx = 0, ty = 0,greyness;
                             
@@ -1269,7 +1270,6 @@ if(!window.touchMode){
     const starPositionAttribute = starGeometry.getAttribute( 'position' );
     const starColorAttribute = starGeometry.getAttribute( 'color' );
     let starStride = 0;
-
     if(onO){
         for (var g=0; g<starArms; g++) {
             if(isFinite(testar[g])){
@@ -1310,7 +1310,7 @@ if(!window.touchMode){
                     const y = widt*-Math.cos(rpio2);
                     const xr = lengtOriginal*-Math.sin(arm);
                     const yr = lengtOriginal*-Math.cos(arm);
-                    const depth = -1.+lengtOriginal/maxToMin*waterRadiusScalar;//shortest bar on top
+                    const depth = (-1.+lengtOriginal/maxToMin*waterRadiusScalar)*starShipDepthInSet;//shortest bar on top
                     
                     const starshipseethrough = lengtOriginal;
                     //for(var yy=0;yy<3;yy++)
@@ -1420,7 +1420,7 @@ if(!window.touchMode){
             let timeShift = 0.;
             let w = timeShift/m.lengt/secondsToEdge;
             let withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL;
-            let depthINNER = (-1.+timeShift/OUTERSHELL);
+            let depthINNER = (-1.+timeShift/OUTERSHELL)*starShipDepthInSet;
             let depthOUTER = depthINNER+m.lengt;
             let starStreamStride = 0;
             for(let starMoment=xyStarParticleArray.length-1; starMoment>=0; starMoment--)
@@ -1432,7 +1432,7 @@ if(!window.touchMode){
                     timeShift = uniforms["time"].value-m.time;
                     w = timeShift/m.lengt/secondsToEdge;
                     withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL*1.1;// OUTERSHELL times 1.1 to prevent remnant pieces around edge
-                    depthINNER = (-1.+timeShift/OUTERSHELL);
+                    depthINNER = (-1.+timeShift/OUTERSHELL)*starShipDepthInSet;
                     depthOUTER = depthINNER+m.lengt;
                     
                     lastLoopTime=m.time;
@@ -1520,7 +1520,7 @@ const x = widt*-Math.sin(rpio2);
 const y = widt*-Math.cos(rpio2);
 const xr = lengt*-Math.sin(arm);
 const yr = lengt*-Math.cos(arm);
-const depth = -1.+lengt;
+const depth = (-1.+lengt)*starShipDepthInSet;
 
                 
                 starPositionAttribute.setXYZ(starStride,-x,    -y,  depth)
@@ -1670,7 +1670,7 @@ var loopLimit = trailDepth;
                  if(!trailSegmentExpired[r]&&timeElapsedSinceRecording<=trailSecondsLong){
                         // timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
                             const zlast = z;
-                            z = -1.+timeElapsedSinceRecording/trailSecondsLong/2.;
+                            z = -1.+timeElapsedSinceRecording/trailSecondsLong;
                         //   if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong);
                             const transparencyOfTrailLast =transparencyOfTrail;
                             transparencyOfTrail =1.-timeElapsedSinceRecording/trailSecondsLong;
