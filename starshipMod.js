@@ -1578,7 +1578,10 @@ var fingerStride = 0;
                      if (t==7||t==5||t==2||t==0||t==10)
                      {
                          BlackOrWhite=-1.;
-                         if(uniforms.colorCombo.value==20){
+                     }
+                    if( (noteGrey<.5 || noteGrey>11.5||(uniforms.Character.value==0&&(noteGrey<6.5&&noteGrey>5.5))) &&uniforms.colorCombo.value!=20) BlackOrWhite=.5;
+
+                    else if(uniforms.colorCombo.value==20){
                              if(uniforms.helm.value&&(uniforms.Character.value==4||uniforms.Character.value==3)
                                 &&((uniforms.Character.value==3&&(t<.5||t>11.5))||(t<2.5&&t>1.5)||(t<10.5&&t>9.5)||(t<7.5&&t>6.5)||(t>4.5&&t<5.5))) BlackOrWhite =.5;
                              else if(!uniforms.helm.value&&uniforms.Character.value==3&&(t<.5||t>11.5))BlackOrWhite =.5;
@@ -1586,10 +1589,6 @@ var fingerStride = 0;
                              else if(((t<7.5&&t>6.5)||(t>4.5&&t<5.5))) BlackOrWhite =.5;
 
                          }
-                         
-                     }
-                     else if( (noteGrey<.5 || noteGrey>11.5) &&uniforms.colorCombo.value!=20)
-                        BlackOrWhite=.5;
                      vop.setRGB(BlackOrWhite,BlackOrWhite,BlackOrWhite);
                      
 
@@ -1603,7 +1602,7 @@ var fingerStride = 0;
                                         const yr = pi/12.*lengt*-Math.cos(arm+fingerTwist+pi);
                                         const offsetX=-Math.sin(fingerTwist)/1.5;
                                         const offsetY=-Math.cos(fingerTwist)/1.5;
-                                        const depth = -.98;//this depth should mean that half the trail is above and half below
+                                        const depth = -1.;//this depth should mean that half the trail is above and half below
 
                       starsANDwitnessesPositionAttribute.setXYZ(fingerStride,  -x+offsetX,    -y+offsetY,  depth)
                         starsANDwitnessesPositionAttribute.setXYZ(fingerStride+1,   x+offsetX,    y+offsetY,  depth)
