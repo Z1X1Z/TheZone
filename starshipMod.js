@@ -649,9 +649,9 @@ function init() {
   }])
     
     FEEDBACKuniformsFlip=Object.assign({},FEEDBACKuniforms);
-    var charactarCheck;
-  if(location.hash.includes("U")) charactarCheck = 0;
-   else  charactarCheck= Date.now()%3;
+    var characterCheck=0.;
+  //if(location.hash.includes("U")) characterCheck = -1;
+  // else  characterCheck= Date.now()%3;
     
   uniforms = THREE.UniformsUtils.merge([
   THREE.UniformsLib.lights,
@@ -683,7 +683,7 @@ function init() {
         morph: {value: 0.0 },
 
   fourCreats: {value: 1 },
-  Character: {value: charactarCheck },
+  Character: {value: 0 },
   articles: {value: false },
   helm: {value: false },
   wheel: {value: false },
