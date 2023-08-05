@@ -2128,14 +2128,19 @@ vec2 dance = vec2(0.);
                                  if (starshipLOOKUP.x<1.&&starshipLOOKUP.y<1.&&starshipLOOKUP.x>0.&&starshipLOOKUP.y>0.)starship = texture2D(STAR,starshipLOOKUP);
                                  
                       vec3 starshipMultiplier = vec3(1.);
-                     starshipMultiplier=(starship.xyz*.5*starship.w+.5);
-                      if(starship.w==0.)starshipMultiplier=vec3(1.);
+                     starshipMultiplier=(starship.xyz*starship.w*.5+.5);
+                     if(starship.w<0.5)starshipMultiplier=vec3(1.);
                                  
-                     if(mannyFace.x+mannyFace.y+mannyFace.z>0.)starshipMultiplier-=mannyFace;
+                    if(mannyFace.z>0.)starshipMultiplier*=mannyFace;
+                   if(mannyFace.z>0.)starshipMultiplier-=mannyFace;
+
                                  
     float isBlack =1.;
   
     if (starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=starship.x;
+                                 float isGrey =0.;
+                                 if (starship.x==starship.y&& starship.y==starship.z&&starship.x<.51&&starship.x>.49)isGrey=starship.x;
+
                                 float maxColorOfStarship=1.;
     if (starship.x!=0.||starship.y!=0.||starship.z!=0.)maxColorOfStarship=max(max(starship.x,starship.y),starship.z);
      float spirographTranslucer = 1.;
@@ -2203,7 +2208,7 @@ if(starOnDot){
                     
                     -(mny.r+mny.b+mny.g)*10000.,.0,1.))
       
-                                      ,1.)))*isBlack*isBlackStaRivers*isBlackDOT;}
+                                      ,1.)))*isBlack*isBlackStaRivers*isBlackDOT+isGrey;}
                                                  
 
 </script>
