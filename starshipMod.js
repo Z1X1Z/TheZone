@@ -58,7 +58,7 @@ window.zoomCageSize = window.pixelShaderSize/4.;//radius of zoom bounding
 window.twist = 0;
 window.flip = 1;
 
-let rez=window.devicePixelRatio/.5;
+let rez=window.devicePixelRatio/2.;
 if (navigator.maxTouchPoints <1) rez = window.devicePixelRatio;
 let colorSound;
 let colorSoundPURE;
