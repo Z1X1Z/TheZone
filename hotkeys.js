@@ -1,5 +1,4 @@
 
-window.rez = window.devicePixelRatio;
 window.zoom=1.;
 window.starSpin=0.;
 window.RockInTheWater=0;
@@ -102,7 +101,7 @@ function callKey(event){
      */
 
     else if (x>0&&x<=4&& document.activeElement.className!="num")
-    {rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
+    {rez = 1./x; renderer.setPixelRatio( rez);}//window.devicePixelRatio 
     else if (key=="+"){rez /=1.1; renderer.setPixelRatio( rez);}
     else if (key=="_"){rez *=1.1; renderer.setPixelRatio( rez);}
 
