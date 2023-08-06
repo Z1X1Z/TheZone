@@ -101,7 +101,7 @@ function callKey(event){
      */
 
     else if (x>0&&x<=4&& document.activeElement.className!="num")
-    {rez = 1./x; renderer.setPixelRatio( rez);}//window.devicePixelRatio 
+    {rez = window.devicePixelRatio/x; renderer.setPixelRatio( rez);}
     else if (key=="+"){rez /=1.1; renderer.setPixelRatio( rez);}
     else if (key=="_"){rez *=1.1; renderer.setPixelRatio( rez);}
 
