@@ -32,9 +32,12 @@ stallTillTHREELoaded();
 
 window.zoom=1.;
 
+window.pixelShaderSize = 7;
+const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
+window.movementRate=pixelShaderToStarshipRATIO;//this value of pixelShaderToStarshipRATIO sticks the trail on the clover, but it's not 1 second to the edge of the screen; I think it's 7/8th's of a second
 const starshipSize = Math.E**-1.3247/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
 const trailSecondsLong = 8.;
-const starShipDepthInSet = (trailSecondsLong-.5)/trailSecondsLong;//base Z value
+const starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;//base Z value
 
 const zoomFrames = 60;//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
@@ -47,9 +50,6 @@ const dotSize = starshipSize;
 let screenPressCoordX, screenPressCoordY;
 window.pointerZoom=false;
 let coordX=0., coordY=0.;
-window.pixelShaderSize = 7;
-const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
-window.movementRate=pixelShaderToStarshipRATIO;//value of 1.5 moves trail to edge of screen in 1 second
 window.touchMode=false;
 window.volumeSpeed = false;
 window.zoomCageSize = window.pixelShaderSize/4.;//radius of zoom bounding
@@ -58,8 +58,8 @@ window.zoomCageSize = window.pixelShaderSize/4.;//radius of zoom bounding
 window.twist = 0;
 window.flip = 1;
 
-let rez=window.devicePixelRatio/2.;
-if (navigator.maxTouchPoints <1) rez = window.devicePixelRatio;
+let rez=window.devicePixelRatio/2.;//define mobile resolution
+if (navigator.maxTouchPoints <1) rez = window.devicePixelRatio;//redefine resolution for desktop
 let colorSound;
 let colorSoundPURE;
 let center = false;
@@ -385,7 +385,7 @@ const reversableColor=(angle/12.+twist/24.)*flip+1./3.;
     colorSound.setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
                     colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);//lighting {note/x} should be 120 but it's out of the vocal range
 
-pitchCol[f]  = colorSound;
+pitchCol[f]  = colorSoundPURE;
 angle = ((angle+6)/12.*2*pi);
                         flatline = pixelShaderToStarshipRATIO;
                        if(window.movementRate>pixelShaderToStarshipRATIO) flatline = window.movementRate;
