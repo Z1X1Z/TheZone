@@ -271,7 +271,7 @@ let trailDepth = -1;
 let d_x=0,d_y=0;
 let staticX=0,staticY=0;
 
-let circleX=0.,circleY=0.;
+let circleX=0.,circleY=.5;
 let f = 0;
 
 
