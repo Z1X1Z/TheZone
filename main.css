@@ -45,9 +45,9 @@ body, head {
     
     background-color: rgba(127.5,127.5,127.5,0.);
 
-    position: -webkit-sticky; /* Safari */
     position: fixed;
     bottom: 0;
+    pointer-events: none;
     /*height:100px;*/
   }
 
