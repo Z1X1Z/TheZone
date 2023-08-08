@@ -1212,7 +1212,7 @@ if( !window.touchMode&&!window.touchOnlyMode) {
           "amplitude : "+totalAMP+"<p style='margin : 0px'></p>"+
           "above threshold: "+aboveThreshold+", FPS: "+Math.round(FPS)+"<p style='margin : 0px'></p>"
           //+"<p style='margin : 0px'></p>"+"X: "+String(-coordX)+" Y: "+String(-coordY);
-          +"</div>";
+          +"<p></div>";
       }
       else document.getElementById("textWindow").innerHTML = "";
 
@@ -2068,7 +2068,7 @@ for(var n = 0; n<targets.length;n++){
                     "real part: "+ coordY +"<p style='margin : 0px'></p>"+
                     "imaginary part: "+ coordX+"<p style='margin : 0px'></p>"+
                     "FPS: "+Math.round(FPS)
-                +"</div>";
+                +"<p></div>";
                 else document.getElementById("textWindow").innerHTML = "";
 
 
