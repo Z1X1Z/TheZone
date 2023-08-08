@@ -1348,7 +1348,7 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                                  o=o*.5+.5;
                                  }
   float isBlack =1.;//or black
-  if (starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=pow(starship.x,10.);
+  if (starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=starship.x;
                       
                       float isGrey =0.;
 
@@ -2164,7 +2164,7 @@ vec2 dance = vec2(0.);
                                  
     float isBlack =1.;
   
-    if (starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=pow(starship.x,10.);
+    if (starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=starship.x;
                                  float isGrey =0.;
                                  if (starship.x==starship.y&& starship.y==starship.z&&starship.x<.51&&starship.x>.49)isGrey=starship.x;
 
@@ -2191,7 +2191,7 @@ if(starOnDot){
         
 
 
-        if (DOTstarship.x==DOTstarship.y&& DOTstarship.y==DOTstarship.z&&DOTstarship.w>3.5/255.)isBlackDOT=pow(DOTstarship.x,10.);
+        if (DOTstarship.x==DOTstarship.y&& DOTstarship.y==DOTstarship.z&&DOTstarship.w>3.5/255.)isBlackDOT=DOTstarship.x;
         
         if (DOTstarship.x==DOTstarship.y&& DOTstarship.y==DOTstarship.z&&DOTstarship.x<.51&&DOTstarship.x>.49)isGreyDOT=DOTstarship.x;
 
@@ -2213,7 +2213,7 @@ if(starOnDot){
                                 // if (StaRivers.x!=0.&&StaRivers.x!=1.&&StaRivers.x==.5&&(StaRivers.x+StaRivers.y>=255.-3.5||StaRivers.y+StaRivers.z>=255.-3.5||StaRivers.z+StaRivers.x>=255.-3.5)&&StaRivers.w==1.)spirographTranslucerStaRivers=(StaRivers.x+StaRivers.y+StaRivers.z);
                                  
            float isBlackStaRivers =1.;//or black
-           if (StaRivers.x==StaRivers.y&& StaRivers.y==StaRivers.z&&StaRivers.w>3.5/255.)isBlackStaRivers=pow(StaRivers.x,10.);
+           if (StaRivers.x==StaRivers.y&& StaRivers.y==StaRivers.z&&StaRivers.w>3.5/255.)isBlackStaRivers=StaRivers.x;
                                  
                                  float isGreyStaRivers =0.;
 
@@ -2243,7 +2243,7 @@ if(starOnDot){
                     
                     -(mny.r+mny.b+mny.g)*10000.,.0,1.))
       
-                                      ,1.))*isBlack*isBlackStaRivers*isBlackDOT+isGrey+isGreyStaRivers+isGreyDOT;}
+                                      ,1.))*isBlack*isBlackStaRivers*isBlackDOT+isGrey+isGreyStaRivers+isGreyDOT+  (isBlack-1.);}
                                                  
 
 </script>

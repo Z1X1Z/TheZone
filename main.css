@@ -38,7 +38,7 @@ body, head {
 }
 #textWindow{    line-height: .878;
     color:black;
-    background-color:white;
+    background-color:rgba(127.5,127.5,127.5,0.5);
     font-size:20px;
 }
 #score{
