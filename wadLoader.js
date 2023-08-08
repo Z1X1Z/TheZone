@@ -124,7 +124,7 @@ function followSound(e){
 
 }
                                                              let cycle=0;
-let c = document.getElementById("consolidator");
+let c = document.getElementById("container");
 
 if (//navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' &&)
 navigator.maxTouchPoints > 0){
