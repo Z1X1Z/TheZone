@@ -560,8 +560,15 @@
         <label for="song">Song:</label>
           <select name="song" id="song"
               onchange='
-                if(this.value!="none")loadScore(this.value)
-                    else{ document.getElementById("osmdCanvas").innerHTML=""; osmd=null; adjustThreeJSWindow();}'>
+                if(this.value!="none"){
+                    loadScore(this.value)
+                    uniforms.scoreLoaded.value=true;
+                }
+                else{
+                    document.getElementById("osmdCanvas").innerHTML=""; osmd=null; adjustThreeJSWindow();
+                        uniforms.scoreLoaded.value=false;
+                    }'
+                    >
               <option value='none'>
                   None
               </option>
@@ -574,7 +581,17 @@
           </select>
           <script> document.getElementById('song').value = "none";</script>
              
-
+             <input type="checkbox" id="ScoreTranslucent" name="t"  onclick= '
+         if("osmd" in window && typeof osmd != null)
+   {
+        sheetTranslucent=!sheetTranslucent;
+        if (sheetTranslucent) osmd.EngravingRules.PageBackgroundColor = "#ffffff00";//translucent background
+        else osmd.EngravingRules.PageBackgroundColor = "#ffffff";
+        osmdResize();
+        adjustThreeJSWindow();
+   }
+   '>
+              <label for="ScoreTranslucent">Score Translucency</label><br>
     </div>
 
     </div>
@@ -585,7 +602,7 @@
     
     
 
-    
+    <div id = "consolidator">
     
     <div id="container"> </div>
     
@@ -594,21 +611,25 @@
     <div id="score">
 
 
-        <div id="textWindow">LOVE</div>
-        <div id="osmdCanvas"/>
-    </div id="score">
-    <input type="file" id="files">
-    <output id="list"></output>
+        <div id="osmdCanvas"> </div>
+        <div id="textWindow"> </div>
 
+        <input type="file" id="files">
+        <output id="list"></output>
+
+    </div id="score">
+    </div>
     <script>
         document.getElementById("files").addEventListener("change", handleFileSelect, false);
-
+/*
         document.getElementById("score").onpointerdown=
         function(event){
           event.stopImmediatePropagation();
           event.preventDefault();
         };
+ */
         </script>
+    
     
     
     
@@ -729,6 +750,7 @@ void main(){
     uniform bool colorInverter;
     
     uniform bool gameOn;
+    uniform bool scoreLoaded;
 
     uniform float time;
     uniform float volume;
@@ -830,7 +852,7 @@ uniform bool NightAndDay;
           l=length(z)/40.;//clouds and face
           break;}
       else{
-          z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x/14.4*0.),2.0*z.x*z.y-g.y+t.y/14.4*0.);
+          z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x/7.),2.0*z.x*z.y-g.y+t.y/7.);
           l=abs(z.y)*6.;//smooths middle horn, removes some clouds
           if(z.x>-.1)l=z.x*200.;}//face with closed small holes
       return vec3(1.-l);
@@ -1141,7 +1163,7 @@ float hyperCore=0.;
 float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
 //log stabalization constant seems to be 1./log(3.)+(1.-1./log(3.))/1.5 from 1./log(3.)+(1.-1./log(3.))/2.
 //if(morph!=0.)cored*=3./2.;//stabilize morph dance collaboration
-if(MetaCored)hyperCore=cored*2./3.+log(lfc)*logStabilizationConstant-.5/log(.5);
+if(MetaCored)hyperCore=cored*2./3.+log(lfc)*logStabilizationConstant-.25/log(.5);
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 if(outerCoresOff)hyperCore=0.;
 
@@ -1326,7 +1348,12 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                                  o=o*.5+.5;
                                  }
   float isBlack =1.;//or black
-  if (starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=starship.x;
+  if (starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=pow(starship.x,10.);
+                      
+                      float isGrey =0.;
+
+                      if (starship.x==starship.y&& starship.y==starship.z&&starship.x<.51&&starship.x>.49)isGrey=starship.x;
+
                       
                       float spirographTranslucer = 1.;
                     //  if (starship.x!=0.&&starship.x!=1.&&starship.x!=.5&&(starship.x+starship.y>=255.-3.5||starship.y+starship.z>=255.-3.5||starship.z+starship.x>=255.-3.5)&&starship.w==1.)spirographTranslucer=.75-(starship.x+starship.y+starship.z)/2.;
@@ -1335,6 +1362,7 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                       
 o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z)*1.5*starship.w,0.,1.)+starship.xyz*starship.w*spirographTranslucer;
                       o*=isBlack;
+                      o+=isGrey;
 return clamp(o,0.,1.);}
 
                       
@@ -2019,7 +2047,7 @@ vec2 dance = vec2(0.);
                            if(!helm)backgroundFace =faceFORWARDstatic(backGround*1.75-vec2(1.,0.),vec2(0.));
                            else backgroundFace =faceFORWARDstatic(backGround*4.,moveDynamic);
                         }
-                       if(gameOn)
+                       if(gameOn||scoreLoaded)
                        {    if(Character==3||Character==4) backgroundFace/=1.5;
                            backgroundFace+=.25;
                            }
@@ -2130,14 +2158,13 @@ vec2 dance = vec2(0.);
                       vec3 starshipMultiplier = vec3(1.);
                      starshipMultiplier=(starship.xyz*starship.w*.5+.5);
                      if(starship.w<0.5)starshipMultiplier=vec3(1.);
-                                 
+                                 if(mannyFace.z>0.)starshipMultiplier+=mannyFace;
                     if(mannyFace.z>0.)starshipMultiplier*=mannyFace;
-                   if(mannyFace.z>0.)starshipMultiplier-=mannyFace;
 
                                  
     float isBlack =1.;
   
-    if (starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=starship.x;
+    if (starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=pow(starship.x,10.);
                                  float isGrey =0.;
                                  if (starship.x==starship.y&& starship.y==starship.z&&starship.x<.51&&starship.x>.49)isGrey=starship.x;
 
@@ -2152,6 +2179,7 @@ vec2 dance = vec2(0.);
                                  float DOTmaxColorOfStarship=1.;
 
 
+                                 float isGreyDOT =0.;
 
 if(starOnDot){
                        float dotstarscale = 1.;
@@ -2163,7 +2191,10 @@ if(starOnDot){
         
 
 
-        if (DOTstarship.x==DOTstarship.y&& DOTstarship.y==DOTstarship.z&&DOTstarship.w>3.5/255.)isBlackDOT=DOTstarship.x;
+        if (DOTstarship.x==DOTstarship.y&& DOTstarship.y==DOTstarship.z&&DOTstarship.w>3.5/255.)isBlackDOT=pow(DOTstarship.x,10.);
+        
+        if (DOTstarship.x==DOTstarship.y&& DOTstarship.y==DOTstarship.z&&DOTstarship.x<.51&&DOTstarship.x>.49)isGreyDOT=DOTstarship.x;
+
         
         if(DOTstarship.x!=0.||DOTstarship.y!=0.||DOTstarship.z!=0.)DOTmaxColorOfStarship=max(max(DOTstarship.x,DOTstarship.y),DOTstarship.z);
         
@@ -2182,15 +2213,19 @@ if(starOnDot){
                                 // if (StaRivers.x!=0.&&StaRivers.x!=1.&&StaRivers.x==.5&&(StaRivers.x+StaRivers.y>=255.-3.5||StaRivers.y+StaRivers.z>=255.-3.5||StaRivers.z+StaRivers.x>=255.-3.5)&&StaRivers.w==1.)spirographTranslucerStaRivers=(StaRivers.x+StaRivers.y+StaRivers.z);
                                  
            float isBlackStaRivers =1.;//or black
-           if (StaRivers.x==0.&&StaRivers.x==StaRivers.y&& StaRivers.y==StaRivers.z&&StaRivers.w>3.5/255.)isBlackStaRivers=0.;
-                      
+           if (StaRivers.x==StaRivers.y&& StaRivers.y==StaRivers.z&&StaRivers.w>3.5/255.)isBlackStaRivers=pow(StaRivers.x,10.);
+                                 
+                                 float isGreyStaRivers =0.;
+
+                                 if (StaRivers.x==StaRivers.y&& StaRivers.y==StaRivers.z&&StaRivers.x<.51&&StaRivers.x>.49)isGreyStaRivers=StaRivers.x;
+
                                  
                                  vec3 Pillars = vec3(0.);
                                  Pillars = sevenPillars(vUv.yx-vec2(0.,.5));
                         //         vec2 ColorWheel = vUv-.5;/// in clover now remove once working
                          //   vec3 beta   =  hsv2rgb(vec3((atan(ColorWheel.y,ColorWheel.x)+PI)/(2.*PI),1.,1.));
 
-                                 gl_FragColor=((StaRivers*spirographTranslucerStaRivers+
+                                 gl_FragColor=(StaRivers*spirographTranslucerStaRivers+
               (starship*spirographTranslucer-vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.))+DOTstarship*spirographTranslucerDOT//the overal 1.23 boost is optional but with alpha blending on it's nice
                                  +vec4(Pillars+mnyX+(clamp(mny*starshipMultiplier
 + //-clamp(starship.xyz*starship.w-(mny.r+mny.g+mny.b)*.333-mannyFace*100.,0.,1.)
@@ -2208,7 +2243,7 @@ if(starOnDot){
                     
                     -(mny.r+mny.b+mny.g)*10000.,.0,1.))
       
-                                      ,1.)))*isBlack*isBlackStaRivers*isBlackDOT+isGrey;}
+                                      ,1.))*isBlack*isBlackStaRivers*isBlackDOT+isGrey+isGreyStaRivers+isGreyDOT;}
                                                  
 
 </script>

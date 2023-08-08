@@ -22,7 +22,7 @@ body, head {
 
 
 }
-#container{
+#container, #consolidator{
     
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -37,11 +37,17 @@ body, head {
 
 }
 #textWindow{    line-height: .878;
-    color:black
+    
+    color:chartreuse;
+    
 }
 #score{
     
-    background-color: #fff;
+    background-color: rgba(127.5,127.5,127.5,0.);
+
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    bottom: 0;
     /*height:100px;*/
   }
 
@@ -151,7 +157,7 @@ canvas {
     column-rule: 1px solid white;
  display: none;
  position: absolute;
- background-color: black;
+ background-color: rgba(127.5,127.5,127.5,.5);
  min-width: auto;
  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
  z-index: 1;

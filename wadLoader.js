@@ -29,8 +29,8 @@ const sound2=Array(10);
 const feedbackPitchsound=Array(5); //updated in starshipMod
 let wadLOADED=false;
 function initialize(){
-    feedbackPitchsound[0] =  new Wad({source : 'triangle'})
-    for(var o=1;o<5;o++)feedbackPitchsound[o] =  new Wad({source : 'square'})//, tuna   : hyperdriveTUNA});
+    feedbackPitchsound[4] =  new Wad({source : 'triangle'})
+    for(var o=0;o<4;o++)feedbackPitchsound[o] =  new Wad({source : 'square'})//, tuna   : hyperdriveTUNA});
 
    // feedbackPitchsound.play({env:{attack: 0, release:0,hold:-1},pitch:1,volume:0})
     for(var o=0;o<10;o++){
@@ -51,7 +51,8 @@ let initialAngleSound = Array(10);
 initialAngleSound[0]=0;
 function startSound(e){
     let correlationForText=document.getElementById("allText").offsetHeight;//top
-    correlationForText-=document.getElementById("score").offsetHeight;//bottom
+    if (!sheetTranslucent)correlationForText-=document.getElementById("score").offsetHeight;//bottom
+
 
    let y = e.clientY-(window.innerHeight+correlationForText)/2.;
     let x = e.clientX- window.innerWidth/2.;
@@ -90,7 +91,7 @@ function startSound(e){
                                      
 function followSound(e){
             let correlationForText=document.getElementById("allText").offsetHeight;
-            correlationForText-=document.getElementById("score").offsetHeight;//bottom
+            if (!sheetTranslucent)correlationForText-=document.getElementById("score").offsetHeight;//bottom
             let y = e.clientY-(window.innerHeight+correlationForText)/2.;
             let x = e.clientX-window.innerWidth/2.;
 
@@ -123,7 +124,7 @@ function followSound(e){
 
 }
                                                              let cycle=0;
-let c = document.getElementById("container");
+let c = document.getElementById("consolidator");
 
 if (//navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' &&)
 navigator.maxTouchPoints > 0){
