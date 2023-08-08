@@ -174,15 +174,16 @@ let updateInstant = false;
 function makeSpirograph(){
       phase = phase % (pi*2);
       len = 0;
-      const adjConstant = 1./(pitch)*Math.PI*audioX.sampleRate/bufferSize/(2**1.5);
+      const adjConstant = 1./pitch/4.*Math.PI*audioX.sampleRate/bufferSize/(2**1.5);
     var maxSamp=0.;
     for(var t=0; t<bufferSize;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
         if(Math.abs(inputData[0])>.0    )
       for(var m = 1; m < bufferSize-1; m++)
       {
               phase += adjConstant;//spira_pitch;
-              spirray0[m]=-Math.sin(phase)*(inputData[m]);
-              spirray1[m]=-Math.cos(phase)*(inputData[m]);
+
+              spirray0[m]=-Math.sin(phase)*(.5+inputData[m]/4./maxSamp);
+              spirray1[m]=-Math.cos(phase)*(.5+inputData[m]/4./maxSamp);
   
           
              // len++;
@@ -720,7 +721,8 @@ dotted:{value:false},
   NightAndDay:{value:false},
   dotCoord:{value:[0,0]},
   starOnDot:{value:false},
-  gameOn:{value:false}
+  gameOn:{value:false},
+  scoreLoaded:{value:false}
 
     }
   ]);
@@ -765,8 +767,8 @@ function adjustThreeJSWindow()
 {
     
          let correlationForText = document.getElementById("allText").offsetHeight;
-         correlationForText+=document.getElementById("score").offsetHeight;
-     
+     if (!sheetTranslucent)  correlationForText+=document.getElementById("score").offsetHeight;
+
         bottomOfScreenHeight = document.getElementById("score").offsetHeight;
      
      
@@ -995,8 +997,10 @@ function takeNextScoreSlice(start){
 
 
 function runOSMD (){
-     
- 
+     /*
+     if (sheetTranslucent) osmd.EngravingRules.PageBackgroundColor = "#ffffff00";//translucent background
+     else osmd.EngravingRules.PageBackgroundColor = "#ffffffff";
+*/
      let thelastnotehit;
 
      //Here starts OPEN SHEET MUSIC DISPLAY score code
@@ -1037,10 +1041,14 @@ function runOSMD (){
                
              osmd.cursor.next(); // advance the cursor one note
 
-           if(osmd.cursor.Iterator.endReached){
-
-             osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
-             scoreColorInversion= !scoreColorInversion;
+               if(osmd.cursor.Iterator.endReached){
+                   
+                   if(!sheetTranslucent){
+                       
+                    osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
+                   scoreColorInversion= !scoreColorInversion;
+                       
+                   }
 
              takeNextScoreSlice(1);
                
@@ -1124,7 +1132,7 @@ function runOSMD (){
         uniforms[ "centralCores" ].value = Math.log(zoom)/Math.log(.5)+precores    ;
          if(uniforms[ "morph" ].value!=0.)uniforms[ "centralCores" ].value*=3./2.;//stabilize morph dance collaboration
 
-        uniforms[ "externalCores" ].value =(uniforms[ "centralCores" ].value)*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*logStabilizationConstant-.5/Math.log(.5);
+        uniforms[ "externalCores" ].value =(uniforms[ "centralCores" ].value)*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*logStabilizationConstant-.25/Math.log(.5);
         
         if(uniforms[ "Spoker" ].value&&uniforms[ "MetaCored" ].value)
             uniforms[ "externalCores" ].value*=4./3./(1./Math.log(3.)+(1.-1./Math.log(3.))/1.75);
@@ -1217,10 +1225,10 @@ if( !window.touchMode&&!window.touchOnlyMode) {
   if(instantaneousFreqSpirographColoring==1) {
     lineMat.color = colorSoundPURE;
   }
-// else lineMat.color = new THREE.Color("white")
+lineMat.color = new THREE.Color("black")
   const d = -starShipDepthInSet;
                             
-                            let tx = 0, ty = 0,greyness;
+                            let tx = 0, ty = 0,greyness=1.;
                             
     const linePositionAttribute = lineGeometry.getAttribute( 'position' );
     const lineColorAttribute = lineGeometry.getAttribute( 'color' );
@@ -1232,10 +1240,10 @@ if( !window.touchMode&&!window.touchOnlyMode) {
             const  tylast=ty;
             tx = spirray0[r]/spiregulator;
             ty =  spirray1[r]/spiregulator;
-            const greynessLast = greyness
+            const greynessLast = 1.-greyness
             //if(uniforms[ "metronome" ].value>1.)greyness=.5-.5*Math.sqrt(tx*tx+ty*ty)**1.3247*metroPhase;//seems wrong
             //else
-                greyness = Math.sqrt(tx*tx+ty*ty)**.5
+                greyness = greynessLast;
             // pointColor.push( greynessLast, greynessLast, greynessLast,greyness, greyness, greyness );
             linePositionAttribute.setXYZ(lineStride,txlast,tylast, d)
             linePositionAttribute.setXYZ(lineStride+1,tx, ty, d)
@@ -1821,7 +1829,7 @@ if (!on)neutralizer=0.;
          if(uniforms.colorCombo.value==20&&!(uniforms.helm.value&&(uniforms.Character.value==3||uniforms.Character.value==4))){
                                 distanceFromCenter= Math.pow((xFromCent*xFromCent+(yFromCent+.25)*(yFromCent+.25)),.5)/uniforms.shaderScale.value/1.75/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y));
                              triggerDistance=distanceFromCenter/(1./uniforms.shaderScale.value/1.75/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y)));
-             polygons[n].centerY += ((d_y+.25)*neutralizer-polygons[n].dy)*MR;
+             polygons[n].centerY += (d_y*neutralizer-polygons[n].dy)*MR;
 
                          }
          else {

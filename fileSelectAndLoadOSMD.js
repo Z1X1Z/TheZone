@@ -1,8 +1,10 @@
-
+var sheetTranslucent = true;
 
 function osmdResize()
         {
-          osmd.zoom=Math.min(window.innerHeight,window.innerWidth)/700;
+          if(sheetTranslucent) osmd.zoom=Math.min(window.innerHeight,window.innerWidth)/400;
+            else osmd.zoom=Math.min(window.innerHeight,window.innerWidth)/700;
+
           window.osmd.render();
         }
 function handleFileSelect(evt) {
@@ -46,24 +48,25 @@ function loadScore(e) {
       // set options here
 //https://wordpress.org/plugins/opensheetmusicdisplay/
          width:window.innerWidth,
-    drawingParameters: "compacttight",//turns off title, reduces margins, etc.; breaks osmd.cursor when used online, so don't use (fixed by z ordering)
+    //drawingParameters: "compacttight",//turns off title, reduces margins, etc.; breaks osmd.cursor when used online, so don't use (fixed by z ordering)
         drawTitle:false, drawSubtitle:false, drawComposer:false, drawLyricist:false,
         drawMetronomeMarks:false, drawPartNames:false, drawPartAbbreviations:true,
         drawMeasureNumbers:true, drawMeasureNumbersOnlyAtSystemStart:true, drawTimeSignatures:true,
         //autoResize: false,
       backend: "canvas",
     preferredSkyBottomLineBatchCalculatorBackend:1,//0 Plain or 1 Webgl
-        skyBottomLineBatchMinMeasures:0,//high number to disable
+        //skyBottomLineBatchMinMeasures:0,//high number to disable
         renderSingleHorizontalStaffline:true,
       drawFromMeasureNumber: 1,
-      drawUpToMeasureNumber: 4.+Math.floor(window.innerWidth/window.innerHeight*2.)
+      drawUpToMeasureNumber: 2.+Math.floor(window.innerWidth/window.innerHeight*2.)
     });
+    osmd.TransposeCalculator = new opensheetmusicdisplay.TransposeCalculator();
+
     osmd
       .load(toLoad)
       .then(
         function() {
 
-            
         for(var instrumentsOFF = 1;instrumentsOFF<osmd.sheet.Instruments.length;instrumentsOFF++)
         osmd.sheet.Instruments[instrumentsOFF].Visible = false;//turn off all instruments but the first
         //osmd.updateGraphic();
