@@ -602,24 +602,24 @@
     
     
 
-    <div id = "consolidator">
     
     <div id="container"> </div>
     
     <script src="wadLoader.js"> </script>
+    <div style="
+    position: fixed;
+    bottom: 0;
+    ">
+    <input type="file" id="files">
+    <output id="list"></output>
+    </div>
+    <div id="score" style=>
+            <div id="textWindow"> </div>
+            <div id="osmdCanvas"> </div>
 
-    <div id="score">
-
-        <div id="textWindow"> </div>
-
-        <div id="osmdCanvas"> </div>
-
-        <input type="file" id="files">
-        <output id="list"></output>
 
     </div id="score">
-    </div>
-    <script>
+        <script>
         document.getElementById("files").addEventListener("change", handleFileSelect, false);
 /*
         document.getElementById("score").onpointerdown=
