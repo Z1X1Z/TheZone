@@ -36,10 +36,15 @@ body, head {
 
 
 }
+.onBottom{
+    position: fixed;
+    bottom: 0;
+    z-index:2;
+}
 #textWindow{
     line-height: .878;
-    color:black;
-    background-color:rgba(127.5,127.5,127.5,0.0);
+    color:chartreuse;
+    background-color:rgba(127.5,127.5,127.5,0.5);
     font-size:20px;
 }
 #osmdCanvas{
@@ -47,7 +52,8 @@ body, head {
 #score{
     pointer-events:none;
     background-color: rgba(127.5,127.5,127.5,0.);
-    
+   
+
     position: fixed;
     bottom: 0;
     /*height:100px;*/
@@ -109,7 +115,8 @@ canvas {
 /* Navbar container */
 .navbar {
  overflow: hidden;
- background-color: #333;
+ background-color:rgba(127.5,127.5,127.5,0.5);
+ position: fixed;
  font-family: Arial;
  
 
@@ -121,7 +128,7 @@ canvas {
 .navbar t {
  float: left;
  font-size: 16px;
- color: black;
+ background-color:rgba(127.5,127.5,127.5,0.5);
  text-align: center;
  padding: 0px 0px;
  text-decoration: none;
@@ -140,6 +147,8 @@ canvas {
  font-size: inherit;
  border: solid;
  color: white;
+ background-color:rgba(127.5,127.5,127.5,0.0);
+
  background-color: inherit;
  font-family: inherit; /* Important for vertical align on mobile phones */
  margin: 0; /* Important for vertical align on mobile phones */
