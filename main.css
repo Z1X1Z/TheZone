@@ -44,9 +44,8 @@ body, head {
 #textWindow{
     line-height: .878;
     color:white;
-    
     background-color:rgba(127.5,127.5,127.5,0.5);
-    font-size:35px;
+    font-size:1em;
 }
 #osmdCanvas{
 }
