@@ -764,14 +764,15 @@ dotted:{value:false},
                     let lastHeight;
                     let bottomOfScreenHeight = 0;
 function adjustThreeJSWindow()
-{
-    
-         let correlationForText = document.getElementById("allText").offsetHeight;
-     if (!sheetTranslucent)  correlationForText+=document.getElementById("score").offsetHeight;
+                    {
+     
+     let correlationForText = 0;
+     if (!sheetTranslucent)
+     {
+         correlationForText+=document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight;
+         bottomOfScreenHeight = correlationForText;
+     }
 
-        bottomOfScreenHeight = document.getElementById("score").offsetHeight;
-     
-     
          height=window.innerHeight-correlationForText;
          width=window.innerWidth;
      lastHeight=window.innerheight;
@@ -1801,7 +1802,7 @@ if(uniforms.gameOn.value&&allCaught)
 }
 else if(!uniforms.gameOn.value){polygons=[]; level = 0; metaLevel=0;}
                                         
-                                        const baseMag=(1.-(metaLevel-level)/(metaLevel))/2.;
+                                        const baseMag=(1.-(metaLevel-level)/(metaLevel))/4.;
                                         const compound = interpolation*baseMag/60.*window.movementRate/pixelShaderToStarshipRATIO;
 
 for(let n = 0; n < polygons.length; n++)
