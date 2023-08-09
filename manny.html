@@ -563,6 +563,7 @@
                 if(this.value!="none"){
                     loadScore(this.value)
                     uniforms.scoreLoaded.value=true;
+                            sheetTranslucent=true;
                 }
                 else{
                     document.getElementById("osmdCanvas").innerHTML=""; osmd=null; adjustThreeJSWindow();
@@ -585,8 +586,13 @@
          if("osmd" in window && typeof osmd != null)
    {
         sheetTranslucent=!sheetTranslucent;
-        if (sheetTranslucent) osmd.EngravingRules.PageBackgroundColor = "#ffffff00";//translucent background
-        else osmd.EngravingRules.PageBackgroundColor = "#ffffff";
+        if (sheetTranslucent) {
+                   document.getElementById("textWindow").style.position="fixed";
+                osmd.EngravingRules.PageBackgroundColor = "#ffffff00";//translucent background
+   }
+        else {   document.getElementById("textWindow").style.position="static";
+   osmd.EngravingRules.PageBackgroundColor = "#ffffff";
+   }
         osmdResize();
         adjustThreeJSWindow();
    }
@@ -606,16 +612,14 @@
     <div id="container"> </div>
     
     <script src="wadLoader.js"> </script>
-    <div style="
-    position: fixed;
-    bottom: 0;
-    ">
-    <input type="file" id="files">
-    <output id="list"></output>
+    <div class="onBottom">
+        <input type="file" id="files">
+            <output id="list"></output>
     </div>
-    <div id="score" style=>
+    <div id="textWindow" class="onBottom"> </div>
+
+    <div id="score">
         
-       <div id="textWindow" class="onBottom"> </div>
             <div id="osmdCanvas" class="onBottom"> </div>
             </div>
 
