@@ -767,7 +767,7 @@ function adjustThreeJSWindow()
                     {
      
      let correlationForText = 0;
-     if (!sheetTranslucent)
+     if (!sheetTranslucent&&osmd!=null)
      {
          correlationForText+=document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight;
          bottomOfScreenHeight = correlationForText;
@@ -798,13 +798,11 @@ window.addEventListener("orientationchange", onWindowResize, false);
 function onWindowResize() {
 
 
-let correlationForText;
-
-correlationForText=document.getElementById("score").offsetHeight;
-correlationForText+=document.getElementById("allText").offsetHeight;
+let correlationForText=0;
+     if (!sheetTranslucent&&osmd!=null)correlationForText+=document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight;
     if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
        {
-            if("osmd" in window)
+            if("osmd" in window&&osmd!=null)
             {
                 osmdResize();//osmdResize defined in fileSelectAndLoadOSMD.js
             }
@@ -813,7 +811,7 @@ correlationForText+=document.getElementById("allText").offsetHeight;
         {
           document.getElementById("score").offsetHeight=0;
         document.getElementById("allText").offsetHeight=0;
-        if("osmd" in window)osmd.render();
+        if("osmd" in window&&osmd!=null)osmd.render();
         }
 
         //reset correlation for osmd adjusted size
@@ -1044,7 +1042,7 @@ function runOSMD (){
 
                if(osmd.cursor.Iterator.endReached){
                    
-                   if(!sheetTranslucent){
+                   if(!sheetTranslucent&&osmd!=null){
                        
                     osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
                    scoreColorInversion= !scoreColorInversion;

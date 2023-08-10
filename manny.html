@@ -566,8 +566,16 @@
                             sheetTranslucent=true;
                 }
                 else{
-                    document.getElementById("osmdCanvas").innerHTML=""; osmd=null; adjustThreeJSWindow();
+                      const myNode = document.getElementById("osmdCanvas");
+                      while (myNode.firstChild) {
+                        myNode.removeChild(myNode.lastChild);
+                      }//https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
+                    
+                                          //myNode.innerHTML="";
+                    osmd.clear(); osmd=null; adjustThreeJSWindow();
                         uniforms.scoreLoaded.value=false;
+                                        scoreTranslucent = true;
+
                     }'
                     >
               <option value='none'>
