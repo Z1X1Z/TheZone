@@ -2,7 +2,7 @@ var sheetTranslucent = true;
 
 function osmdResize()
         {
-          if(sheetTranslucent) osmd.zoom=Math.min(window.innerHeight,window.innerWidth)/400;
+          if(sheetTranslucent) osmd.zoom=Math.min(window.innerHeight,window.innerWidth)/333.;
             else osmd.zoom=Math.min(window.innerHeight,window.innerWidth)/700;
 
           window.osmd.render();
