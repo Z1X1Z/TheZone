@@ -1352,7 +1352,7 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                                  o=o*.5+.5;
                                  }
   float isBlack =1.;//or black
-  if (starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=starship.x;
+  if (starship.x==0.0&&starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=0.;
                       
                       float isGrey =0.;
 

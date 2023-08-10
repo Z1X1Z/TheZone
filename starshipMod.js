@@ -337,14 +337,14 @@ if (totalAMP>zoomOutRatchetThreshold) pitch =    audioX.sampleRate/calculatePitc
     {
         const feedBackReduction = 4;
         if(wadLOADED&&aboveThreshold) {
-            //feedbackPitchsound[4].stop();
+           //    feedbackPitchsound[4].stop();
             
-            feedbackPitchsound[4].play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:pitch,volume:totalAMP/feedBackReduction})
+            feedbackPitchsound[4].play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:pitch,volume:(totalAMP<1.)?totalAMP/feedBackReduction:1.})
             
             for (var v = 0; v < 4; v++)
             {
                 
-                 //   feedbackPitchsound[v].stop();
+                 ///  feedbackPitchsound[v].stop();
                     feedbackPitchsound[v].play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:loudestFret[v].frequency,volume://loudestFret[v].volume
                         1./feedBackReduction/(4-v)})
                     
@@ -352,13 +352,13 @@ if (totalAMP>zoomOutRatchetThreshold) pitch =    audioX.sampleRate/calculatePitc
         }
             else if (wadLOADED) {
                 
-                feedbackPitchsound[4].play({env:{attack: 0,                   release:0,hold:0}, pitch:0,volume:0});
-                feedbackPitchsound[4].stop();
+                //feedbackPitchsound[4].play({env:{attack: 0,                   release:0,hold:0}, pitch:0,volume:0});
+               // feedbackPitchsound[4].stop();
                 
                 for (var v = 0; v < 4; v++)
                 {
-                    feedbackPitchsound[v].play({env:{attack: 0,                   release:0,hold:0},pitch:0, volume:0});
-                    feedbackPitchsound[v].stop();
+                   // feedbackPitchsound[v].play({env:{attack: 0,                   release:0,hold:0},pitch:0, volume:0});
+                    //feedbackPitchsound[v].stop();
                         
                 }
 
@@ -665,7 +665,7 @@ function init() {
   Spoker:{value: true    },
   spokelover:{value: false    },
   continuumClover:{value: false    },
-  Inherited:{value: false    },
+  Inherited:{value: true    },
   cloverSlide:{value: false    },
 
       micIn : {  value: null }, // float array (vec3)
