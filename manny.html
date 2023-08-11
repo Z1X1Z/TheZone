@@ -566,16 +566,9 @@
                             sheetTranslucent=true;
                 }
                 else{
-                      const myNode = document.getElementById("osmdCanvas");
-                      while (myNode.firstChild) {
-                        myNode.removeChild(myNode.lastChild);
-                      }//https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
                     
-                                          //myNode.innerHTML="";
-                    osmd.clear(); osmd=null; adjustThreeJSWindow();
+                    document.getElementById("osmdCanvas").innerHTML=""; osmd=null; adjustThreeJSWindow();
                         uniforms.scoreLoaded.value=false;
-                                        scoreTranslucent = true;
-
                     }'
                     >
               <option value='none'>
@@ -1143,10 +1136,7 @@ vec2 colorAccumulator =vec2(0.);
 vec3 heartColors = vec3(0.);
 
 float precores = -.75;
-if(morph!=0.)precores+=5.;
-    if(wheel)precores-=.25;
-    if(cloverSlide)precores-=.25;
-if(spirated!=0.)precores=precores-0.25+.125-.06125;
+if(spirated!=0.&&morph!=0.)precores=precores+2.;
 
 
 float cored =0.;

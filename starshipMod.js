@@ -798,15 +798,14 @@ window.addEventListener("orientationchange", onWindowResize, false);
 function onWindowResize() {
 
 
-let correlationForText=0;
+let correlationForText;
      if (!sheetTranslucent&&osmd!=null)correlationForText+=document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight;
-    if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
-       {
+ 
             if("osmd" in window&&osmd!=null)
             {
                 osmdResize();//osmdResize defined in fileSelectAndLoadOSMD.js
             }
-        }
+        
         else//solution to iOS freeze glitch rare
         {
           document.getElementById("score").offsetHeight=0;
@@ -815,9 +814,8 @@ let correlationForText=0;
         }
 
         //reset correlation for osmd adjusted size
-        correlationForText=document.getElementById("score").offsetHeight;
-        correlationForText+=document.getElementById("allText").offsetHeight;
-        if(!isNaN(correlationForText) )//this was added with the "score" osmd to prevent rare iOs glitch
+        correlationForText=document.getElementById("osmdCanvas").offsetHeight;
+        correlationForText+=document.getElementById("textWindow").offsetHeight;
             adjustThreeJSWindow();
 
   }
@@ -1121,10 +1119,8 @@ function runOSMD (){
      {
         
         var precores = -.75;
-        if(uniforms.morph.value!=0.)precores+=5.;
-        if(uniforms.wheel.value)precores-=.25;
-        if(uniforms.cloverSlide.value)precores-=.25;
-        if(uniforms.spirated.value!=0.)precores=precores-0.25+.125-.06125;
+         if(uniforms.spirated.value!=0.&&uniforms.morph.value!=0.)precores=precores+2.;
+
         const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
 
         
@@ -1428,7 +1424,7 @@ if(!window.touchMode){
             let timeShift = 0.;
             let w = timeShift/m.lengt/secondsToEdge;
             let withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL;
-            let depthINNER = -starShipDepthInSet+timeShift/OUTERSHELL*(1.-starShipDepthInSet);
+            let depthINNER = -starShipDepthInSet+timeShift/OUTERSHELL*starShipDepthInSet;
             let depthOUTER = depthINNER+m.lengt;
             let starStreamStride = 0;
             for(let starMoment=xyStarParticleArray.length-1; starMoment>=0; starMoment--)
