@@ -796,11 +796,11 @@ function adjustThreeJSWindow()
 window.addEventListener( 'resize', onWindowResize, false );
 window.addEventListener("orientationchange", onWindowResize, false);
 function onWindowResize() {
-     let correlationForText;
-     if (!sheetTranslucent&&osmd!=null)correlationForText+=document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight;
  
             if("osmd" in window&&osmd!=null)
+            {
                 osmdResize();//osmdResize defined in fileSelectAndLoadOSMD.js
+            }
         
             adjustThreeJSWindow();
 
