@@ -796,26 +796,12 @@ function adjustThreeJSWindow()
 window.addEventListener( 'resize', onWindowResize, false );
 window.addEventListener("orientationchange", onWindowResize, false);
 function onWindowResize() {
-
-
-let correlationForText;
+     let correlationForText;
      if (!sheetTranslucent&&osmd!=null)correlationForText+=document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight;
  
             if("osmd" in window&&osmd!=null)
-            {
                 osmdResize();//osmdResize defined in fileSelectAndLoadOSMD.js
-            }
         
-        else//solution to iOS freeze glitch rare
-        {
-          document.getElementById("score").offsetHeight=0;
-        document.getElementById("allText").offsetHeight=0;
-        if("osmd" in window&&osmd!=null)osmd.render();
-        }
-
-        //reset correlation for osmd adjusted size
-        correlationForText=document.getElementById("osmdCanvas").offsetHeight;
-        correlationForText+=document.getElementById("textWindow").offsetHeight;
             adjustThreeJSWindow();
 
   }
