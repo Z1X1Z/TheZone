@@ -177,14 +177,14 @@ function makeSpirograph(){
       const adjConstant = 1./pitch/4.*Math.PI*audioX.sampleRate/bufferSize/(2**1.5);
     var maxSamp=0.;
     for(var t=0; t<bufferSize;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
-        if(Math.abs(inputData[0])>.0    )
-      for(var m = 1; m < bufferSize-1; m++)
+        if(isFinite(maxSamp)&&isFinite(inputData[0])    )
+      for(var m = 1; m < bufferSize; m++)
       {
               phase += adjConstant;//spira_pitch;
 
               spirray0[m]=-Math.sin(phase)*(.5+inputData[m]/4./maxSamp);
               spirray1[m]=-Math.cos(phase)*(.5+inputData[m]/4./maxSamp);
-  
+       
           
              // len++;
       }
@@ -621,7 +621,7 @@ function init() {
     shaderScene.add( circle );
      shaderScene.add(radialLine);
       
-    scene.add(starMesh);//20+ minutes error free
+    scene.add(starMesh);
      scene.add(starsANDwitnessesMesh)
      
      
@@ -1084,7 +1084,7 @@ function runOSMD (){
 
     
      
-     if(bottomOfScreenHeight != document.getElementById("score").offsetHeight)adjustThreeJSWindow();//readjust for verbose
+     if(bottomOfScreenHeight != document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight)adjustThreeJSWindow();//readjust for verbose
     uniforms[ "time" ].value = timestamp/1000.+window.startTimeSecondMantissaMagnified;
     if(starSpin!=0)twist=(uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*starSpin*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel
      
@@ -1221,17 +1221,19 @@ lineMat.color = new THREE.Color("black")
             const  tylast=ty;
             tx = spirray0[r]/spiregulator;
             ty =  spirray1[r]/spiregulator;
-            const greynessLast = 1.-greyness
+            const greynessLast = greyness
             //if(uniforms[ "metronome" ].value>1.)greyness=.5-.5*Math.sqrt(tx*tx+ty*ty)**1.3247*metroPhase;//seems wrong
             //else
                 greyness = greynessLast;
             // pointColor.push( greynessLast, greynessLast, greynessLast,greyness, greyness, greyness );
-            linePositionAttribute.setXYZ(lineStride,txlast,tylast, d)
-            linePositionAttribute.setXYZ(lineStride+1,tx, ty, d)
-          lineColorAttribute.setXYZ(lineStride,greynessLast, greynessLast, greynessLast);
+            if(isFinite(tx)&&isFinite(ty)&&isFinite(txlast)&isFinite(tylast))
+            {
+                linePositionAttribute.setXYZ(lineStride,txlast,tylast, d)
+                linePositionAttribute.setXYZ(lineStride+1,tx, ty, d)
+                lineColorAttribute.setXYZ(lineStride,greynessLast, greynessLast, greynessLast);
                 lineColorAttribute.setXYZ(lineStride+1,greyness, greyness, greyness );
-            
-            lineStride+=2; }
+                
+                lineStride+=2;} }
     }
     linePositionAttribute.needsUpdate = true; // required after the first render
     lineColorAttribute.needsUpdate = true; // required after the first render
@@ -1738,7 +1740,7 @@ else if (circleY<-height)circleY=height;
                                   circle.geometry=new THREE.CircleGeometry(dotSize,sides,0.);
 //circleGeometry.computeBoundingBox ();
 
-circle.position.set(circleX,circleY,-1.);
+circle.position.set(circleX,circleY,-.99);
                               if(isFinite(note)&&isFinite(lastNote))    circle.rotateZ(note-lastNote);
 
                    let colorBlack= new THREE.Color();
@@ -1746,8 +1748,8 @@ circle.position.set(circleX,circleY,-1.);
 
 
                    let centerOfDotToEdge = [];
-                   centerOfDotToEdge.push( new THREE.Vector3(circleX-Math.sin(-angle)*dotSize*volume, circleY-Math.cos(-angle)*dotSize*volume, -1. ) );
-                   centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-1.) );
+                   centerOfDotToEdge.push( new THREE.Vector3(circleX-Math.sin(-angle)*dotSize*volume, circleY-Math.cos(-angle)*dotSize*volume, -.99 ) );
+                   centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-.99) );
 
                                   radialLine.geometry.setFromPoints( centerOfDotToEdge )
                                         uniforms.dotCoord.value =[circleX,circleY] ;
