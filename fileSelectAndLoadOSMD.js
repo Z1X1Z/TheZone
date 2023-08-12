@@ -1,8 +1,12 @@
 var sheetTranslucent = true;
 
 function osmdResize()
-        {
-          if(sheetTranslucent) osmd.zoom=Math.min(window.innerHeight,window.innerWidth)/400.;
+{
+    if(sheetTranslucent){
+        var minDim = Math.min(window.innerHeight,window.innerWidth);
+        if(window.innerWidth/window.innerHeight>1) osmd.zoom=minDim/312.;
+        else osmd.zoom=minDim/420.;//so as to keep a whole measure on portrait orientation phone
+        }
             else osmd.zoom=Math.min(window.innerHeight,window.innerWidth)/700;
 
           window.osmd.render();
@@ -48,7 +52,7 @@ function loadScore(e) {
       // set options here
 //https://wordpress.org/plugins/opensheetmusicdisplay/
          width:window.innerWidth,
-    //drawingParameters: "compacttight",//turns off title, reduces margins, etc.; breaks osmd.cursor when used online, so don't use (fixed by z ordering)
+    drawingParameters: "compacttight",//turns off title, reduces margins, etc.; breaks osmd.cursor when used online, so don't use (fixed by z ordering)
         drawTitle:false, drawSubtitle:false, drawComposer:false, drawLyricist:false,
         drawMetronomeMarks:false, drawPartNames:false, drawPartAbbreviations:true,
         drawMeasureNumbers:true, drawMeasureNumbersOnlyAtSystemStart:true, drawTimeSignatures:true,
@@ -72,7 +76,8 @@ function loadScore(e) {
         //osmd.updateGraphic();
           window.osmd = osmd; // give access to osmd object in Browser console, e.g. for osmd.setOptions()
           //osmdResize();
-           // osmd.render();
+           //  osmd.render();
+
           onWindowResize()//this calls osmdResize() who calls osmd.render(). It is from starshipMod.js so we need it to load after that is loaded in x.html
           //console.log("e.target.result: " + e.target.result);
             osmd.cursor.wantedZIndex="0";

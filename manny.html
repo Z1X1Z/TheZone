@@ -562,6 +562,7 @@
               onchange='
                 if(this.value!="none"){
                     loadScore(this.value)
+                    if (uniforms.scoreLoaded.value) osmd.clear();
                     uniforms.scoreLoaded.value=true;
                             sheetTranslucent=true;
                 }
@@ -590,9 +591,12 @@
         if (sheetTranslucent) {
                    document.getElementById("textWindow").style.position="fixed";
                 osmd.EngravingRules.PageBackgroundColor = "#ffffff00";//translucent background
+                                  document.getElementById("osmdCanvas").style.bottom="40px"
    }
         else {   document.getElementById("textWindow").style.position="static";
    osmd.EngravingRules.PageBackgroundColor = "#ffffff";
+                                     document.getElementById("osmdCanvas").style.bottom="0px"
+
    }
         osmdResize();
         adjustThreeJSWindow();
@@ -621,7 +625,7 @@
 
     <div id="score">
         
-            <div id="osmdCanvas" class="onBottom"> </div>
+            <div id="osmdCanvas" class="onBottom" style = "bottom:40px;"></div>
 
     </div id="score">
         <script>
