@@ -722,7 +722,9 @@ dotted:{value:false},
   dotCoord:{value:[0,0]},
   starOnDot:{value:false},
   gameOn:{value:false},
-  scoreLoaded:{value:false}
+  scoreLoaded:{value:false},
+  musicAngelMan:{value:0}
+
 
     }
   ]);
@@ -767,7 +769,7 @@ function adjustThreeJSWindow()
                     {
      
      let correlationForText = 0;
-     if (!sheetTranslucent&&osmd!=null)
+     if (!sheetTranslucent)
      {
          correlationForText+=document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight;
          bottomOfScreenHeight = correlationForText;
@@ -1307,8 +1309,10 @@ if(!window.touchMode){
                     const starshipseethrough = lengtOriginal;
                     //for(var yy=0;yy<3;yy++)
                     if (RockInTheWater==1)
+                    {    let greyTone=(mustarD[g]+72)/lightingScaleStar;//may not be an exact value
                         for(var yy=0;yy<3;yy++)
-                            starColorAttribute.setXYZW(starStride+yy,mustarD[g]/lightingScaleStar, mustarD[g]/lightingScaleStar, mustarD[g]/lightingScaleStar,1.)
+                            starColorAttribute.setXYZW(starStride+yy,greyTone, greyTone, greyTone,1.)
+                            }
                     else{
                         starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
                         starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,.0)
@@ -1381,7 +1385,7 @@ if(!window.touchMode){
         
         
         
-        let OUTERSHELL =maxToMin* secondsToEdge;
+        let OUTERSHELL =maxToMin* secondsToEdge/starShipDepthInSet;
         
         const starStreamPositionAttribute = starStreamGeometry.getAttribute( 'position' );
         const starStreamColorAttribute = starStreamGeometry.getAttribute( 'color' );
@@ -1445,7 +1449,7 @@ if(!window.touchMode){
                     const outSetX = w*m.xr-bulletX;//apparently something is flipped
                     const outSetY = w*m.yr-bulletY;
                     
-                     for(var yy=0;yy<6;yy++) starStreamColorAttribute.setXYZW(starStreamStride+yy, m.vop.r, m.vop.g, m.vop.b,-depthINNER)
+                     for(var yy=0;yy<6;yy++) starStreamColorAttribute.setXYZW(starStreamStride+yy, m.vop.r, m.vop.g, m.vop.b,timeShift*starShipDepthInSet)//alpha is beta
                      
                      const nx =-m.x+outSetX
                      const ny =-m.y+outSetY
@@ -1573,10 +1577,10 @@ var fingerStride = 0;
                     if( (noteGrey<.5 || noteGrey>11.5||(uniforms.Character.value==0&&(noteGrey<6.5&&noteGrey>5.5))) &&uniforms.colorCombo.value!=20) BlackOrWhite=.5;
 
                     else if(uniforms.colorCombo.value==20){
-                             if(uniforms.helm.value&&(uniforms.Character.value==4||uniforms.Character.value==3)
+                             if(uniforms.musicAngelMan.value>0&&(uniforms.Character.value==4||uniforms.Character.value==3)
                                 &&((uniforms.Character.value==3&&(t<.5||t>11.5))||(t<2.5&&t>1.5)||(t<10.5&&t>9.5)||(t<7.5&&t>6.5)||(t>4.5&&t<5.5))) BlackOrWhite =.5;
-                             else if(!uniforms.helm.value&&uniforms.Character.value==3&&(t<.5||t>11.5))BlackOrWhite =.5;
-                             else if (!uniforms.helm.value&&uniforms.Character.value==4&&(t<6.5&&t>5.5));
+                             else if(uniforms.musicAngelMan.value==0&&uniforms.Character.value==3&&(t<.5||t>11.5))BlackOrWhite =.5;
+                             else if (uniforms.musicAngelMan.value==0&&uniforms.Character.value==4&&(t<6.5&&t>5.5));
                              else if(((t<7.5&&t>6.5)||(t>4.5&&t<5.5))) BlackOrWhite =.5;
 
                          }
@@ -1809,7 +1813,7 @@ var neutralizer=1.;
 if (!on)neutralizer=0.;
                          polygons[n].centerX += (d_x*neutralizer-polygons[n].dx)*MR;
 
-         if(uniforms.colorCombo.value==20&&!(uniforms.helm.value&&(uniforms.Character.value==3||uniforms.Character.value==4))){
+         if(uniforms.colorCombo.value==20&&!(uniforms.musicAngelMan.value>0&&(uniforms.Character.value==3||uniforms.Character.value==4))){
                                 distanceFromCenter= Math.pow((xFromCent*xFromCent+(yFromCent+.25)*(yFromCent+.25)),.5)/uniforms.shaderScale.value/1.75/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y));
                              triggerDistance=distanceFromCenter/(1./uniforms.shaderScale.value/1.75/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y)));
              polygons[n].centerY += (d_y*neutralizer-polygons[n].dy)*MR;
@@ -2078,7 +2082,7 @@ function calculatePitch ()
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 
 let tolerance; //, confidence;
-if(highORlow==1)tolerance=totalAMP-(1./bufferSize)**1.5//works well for smoothly and quickly determining sung notes especially low ones
+if(highORlow==1)tolerance=totalAMP;//-(1./bufferSize)**1.5;
 else if (highORlow==2)tolerance = .5;//when I play different notes on harmonica it mostly hears C, this clears up the distinction of the notes
                         
 let period;

@@ -107,7 +107,9 @@ function callKey(event){
 
     else if (x==0)
     {window.movementRate=pixelShaderSize/4.; uniforms[ "rate" ].value=1./window.movementRate; }
-
+    else if(x == 7)uniforms.musicAngelMan.value=(uniforms.musicAngelMan.value+1)%3;
+    
+    
     else if (key=="À"||key=="`")
     {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
     else if (key=="m") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
@@ -172,7 +174,7 @@ function callKey(event){
     else if (key=="C")window.zoom=.00005;
     
     else if (key=="c")center=!center;
-    else if (key=="v")textON=!textON;
+    else if (key=="v"){textON=!textON;}
     else if (key=="V"){        if (!onO)onO=true;
         
         RockInTheWater+=1;RockInTheWater=RockInTheWater%3;}
@@ -287,7 +289,7 @@ function callKey(event){
             //https://www.w3schools.com/howto/howto_js_fullscreen.asp
             var fullscreen=false;
             function openFullscreen() {
-
+                
               if (document.documentElement.requestFullscreen) {
                   document.documentElement.requestFullscreen();
               } else if (document.documentElement.webkitRequestFullscreen) { /* Safari */
