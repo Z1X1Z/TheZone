@@ -98,10 +98,11 @@
            
 
 
-    <div id="allText">
+    <div  class="navbar" >
+        
+            <div id="menu" style="display:none;">
 
-    <div class="navbar">
-        <div>
+        <div >
         <div class="dropdown">
           <button class="dropbtn">Starship
             <i class="fa fa-caret-down"></i>
@@ -554,6 +555,7 @@
                   key  = '+';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                       Reduce resolution!</a><br>
+                  
               </div>
                   </div>
         
@@ -562,9 +564,8 @@
         <script src="fileSelectAndLoadOSMD.js"></script>
         
 <div>
-    <br>
+    <p>
         <div id="hotkeyHolder">
-        <label for="song"> Song:</label>
           <select name="song" id="song"
               onchange='
                 if(this.value!="none"){
@@ -589,6 +590,8 @@
                 Amazing Grace
             </option>
           </select>
+          <label for="song"> :song</label>
+
           <script> document.getElementById('song').value = "none";</script>
              
              <input type="checkbox" id="ScoreTranslucent" name="t"  onclick= '
@@ -616,9 +619,10 @@
    
    '>
               <label for="ScoreTranslucent">Score Translucent</label>
+              <input type="file" id="files" >
+                  <output id="list"></output>
               
-              
-        </div>
+              </div>
 </div>
               <script src="hotkeys.js"></script>
               
@@ -636,9 +640,12 @@
     <div id="container"> </div>
     
     <script src="wadLoader.js"> </script>
-    <div class="onBottom" style="margin-left:75%;">
-        <input type="file" id="files" >
-            <output id="list"></output>
+    <div class="onBottom">
+        
+            <button onclick='
+                let menu=document.getElementById("menu")
+                if( menu.style.display=="block")  menu.style.display="none"
+                else if( menu.style.display=="none")menu.style.display="block";'>Menu</button>
     </div>
     <div id="textWindow" class="onBottom"> </div>
 
