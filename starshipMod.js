@@ -59,7 +59,7 @@ window.twist = 0;
 window.flip = 1;
 
 let rez=window.devicePixelRatio/2.;//define mobile resolution
-if (navigator.maxTouchPoints <1) rez = window.devicePixelRatio;//redefine resolution for desktop
+//if (navigator.maxTouchPoints <1) rez = window.devicePixelRatio;//redefine resolution for desktop
 let colorSound;
 let colorSoundPURE;
 let center = false;
@@ -778,6 +778,7 @@ function adjustThreeJSWindow()
          width=window.innerWidth;
      lastHeight=window.innerheight;
 
+        
          uniforms.resolution.value.x = width;
          uniforms.resolution.value.y = height;
 
@@ -1503,10 +1504,10 @@ else{//start drawing of just twenty four frets here
                       vop.setHSL((20-g)%24/24.,1.,.5);
 
                   
-                  starColorAttribute.setXYZW(starStride,1.,1.,1.,0.)
-                  starColorAttribute.setXYZW(starStride+1,1.,1.,1.,0.)
+                  starColorAttribute.setXYZW(starStride,1.,1.,1.,0.1)//.1 alpha to avoid black lines
+                  starColorAttribute.setXYZW(starStride+1,1.,1.,1.,0.1)
                   starColorAttribute.setXYZW(starStride+2,vop.r,vop.g,vop.b,1.)
-                  starColorAttribute.setXYZW(starStride+3,1.,1.,1.,0.)
+                  starColorAttribute.setXYZW(starStride+3,1.,1.,1.,0.1)
                   starColorAttribute.setXYZW(starStride+4,vop.r,vop.g,vop.b,1.)
                   starColorAttribute.setXYZW(starStride+5,vop.r,vop.g,vop.b,1.)
 
@@ -2081,7 +2082,7 @@ function calculatePitch ()
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 
 let tolerance; //, confidence;
-if(highORlow==1)tolerance=totalAMP;//-(1./bufferSize)**1.5;
+if(highORlow==1)tolerance=(totalAMP-1./bufferSize)**2.;
 else if (highORlow==2)tolerance = .5;//when I play different notes on harmonica it mostly hears C, this clears up the distinction of the notes
                         
 let period;
