@@ -51,8 +51,8 @@ let initialAngleSound = Array(10);
 initialAngleSound[0]=0;
 function startSound(e){
     let correlationForText = 0.;
-    if (!sheetTranslucent&&osmd!=null) correlationForText += document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight;
-                    
+    if (!sheetTranslucent&&osmd!=null) correlationForText += document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight+20;
+                    correlationForText+=document.getElementById("HK").offsetHeight;
     
 
    let y = e.clientY-(window.innerHeight+correlationForText)/2.;
@@ -93,7 +93,8 @@ function startSound(e){
 function followSound(e){
             let correlationForText = 0.;
 if (!sheetTranslucent&&osmd!=null) correlationForText += document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight;
-                
+            correlationForText+=document.getElementById("HK").offsetHeight;
+
             let y = e.clientY-(window.innerHeight+correlationForText)/2.;
             let x = e.clientX-window.innerWidth/2.;
 
