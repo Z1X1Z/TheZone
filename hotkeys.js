@@ -21,16 +21,14 @@ function hk() {
   x.setAttribute("id", "hotkeys");
   x.setAttribute("placeholder", "Hotkeys!");
   x.setAttribute("oninput", "getKey()");
-  document.getElementById("HK").appendChild(x);
+  document.getElementById("TopMenu").appendChild(x);
 
 }
 let hotkeyInputWindowActive = false;
 if(//navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' &&
    navigator.maxTouchPoints > 1)
-{
     hk();
-    hotkeyInputWindowActive = true;
-}
+
 let androidGetKey="";
 let androidGetKeyLast="";
 
