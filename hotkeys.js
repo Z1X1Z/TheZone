@@ -24,10 +24,13 @@ function hk() {
   document.getElementById("HK").appendChild(x);
 
 }
+let hotkeyInputWindowActive = false;
 if(//navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' &&
    navigator.maxTouchPoints > 1)
+{
     hk();
-
+    hotkeyInputWindowActive = true;
+}
 let androidGetKey="";
 let androidGetKeyLast="";
 

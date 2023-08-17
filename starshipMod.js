@@ -771,10 +771,10 @@ function adjustThreeJSWindow()
      let correlationForText = 0;
      if (!sheetTranslucent)
      {
-         correlationForText+=document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight+document.getElementById("HK").offsetHeight;
+         correlationForText+=document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight
          bottomOfScreenHeight = correlationForText;
      }
-
+     if(   hotkeyInputWindowActive)correlationForText+=document.getElementById("hotkeys").offsetHeight;
          height=window.innerHeight-correlationForText;
          width=window.innerWidth;
      lastHeight=window.innerheight;
