@@ -21,7 +21,7 @@ function hk() {
   x.setAttribute("id", "hotkeys");
   x.setAttribute("placeholder", "Hotkeys!");
   x.setAttribute("oninput", "getKey()");
-  document.getElementById("TopMenu").appendChild(x);
+  document.getElementById("hotkeyHolder").appendChild(x);
 
 }
 let hotkeyInputWindowActive = false;
