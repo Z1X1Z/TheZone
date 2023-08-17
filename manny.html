@@ -99,11 +99,9 @@
 
 
     <div id="allText">
-        <div id="HK"></div>
 
-    <div id="TopMenu" class="navbar">
-        <script src="hotkeys.js"></script>
-
+    <div class="navbar">
+        <div>
         <div class="dropdown">
           <button class="dropbtn">Starship
             <i class="fa fa-caret-down"></i>
@@ -558,11 +556,15 @@
                       Reduce resolution!</a><br>
               </div>
                   </div>
+        
 
-        <br>
+        </div>
         <script src="fileSelectAndLoadOSMD.js"></script>
-
-        <label for="song">Song:</label>
+        
+<div>
+    <br>
+        <div id="hotkeyHolder">
+        <label for="song"> Song:</label>
           <select name="song" id="song"
               onchange='
                 if(this.value!="none"){
@@ -614,6 +616,12 @@
    
    '>
               <label for="ScoreTranslucent">Score Translucent</label>
+              
+              
+        </div>
+</div>
+              <script src="hotkeys.js"></script>
+              
     </div>
 
     </div>
