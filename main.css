@@ -122,17 +122,16 @@ canvas {
  background-color:rgba(127.5,127.5,127.5,0.5);
  position: fixed;
  font-family: Arial;
-
-
  
 
 }
 
 /* Links inside the navbar */
-.navbar t{
+t{ text-align: center;
+}
+.navbar {
  float: left;
  background-color:rgba(127.5,127.5,127.5,0.5);
- text-align: center;
  padding: 0px 0px;
  text-decoration: none;
 
@@ -165,7 +164,7 @@ canvas {
 .dropdown-content {
     width:100%;
     left:0%;
-    column-count:4;
+    column-count:8;
     column-gap: 5px;
     column-rule: 1px solid white;
  display: none;
