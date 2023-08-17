@@ -1504,10 +1504,10 @@ else{//start drawing of just twenty four frets here
                       vop.setHSL((20-g)%24/24.,1.,.5);
 
                   
-                  starColorAttribute.setXYZW(starStride,1.,1.,1.,0.1)//.1 alpha to avoid black lines
-                  starColorAttribute.setXYZW(starStride+1,1.,1.,1.,0.1)
+                  starColorAttribute.setXYZW(starStride,1.,1.,1.,0.)
+                  starColorAttribute.setXYZW(starStride+1,1.,1.,1.,0.)
                   starColorAttribute.setXYZW(starStride+2,vop.r,vop.g,vop.b,1.)
-                  starColorAttribute.setXYZW(starStride+3,1.,1.,1.,0.1)
+                  starColorAttribute.setXYZW(starStride+3,1.,1.,1.,0.)
                   starColorAttribute.setXYZW(starStride+4,vop.r,vop.g,vop.b,1.)
                   starColorAttribute.setXYZW(starStride+5,vop.r,vop.g,vop.b,1.)
 
