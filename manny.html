@@ -2196,8 +2196,8 @@ vec2 dance = vec2(0.);
                                  if (starshipLOOKUP.x<1.&&starshipLOOKUP.y<1.&&starshipLOOKUP.x>0.&&starshipLOOKUP.y>0.)starship = texture2D(STAR,starshipLOOKUP);
                                  
                       vec3 starshipMultiplier = vec3(1.);
-                     starshipMultiplier=(starship.xyz*starship.w*.5+.5);
-                     if(starship.w<0.5)starshipMultiplier=vec3(1.);
+                     starshipMultiplier=starship.xyz+(1.-starship.w);
+                     if(starship.w>0.)starshipMultiplier=vec3(1.);
                                  if(mannyFace.z>0.)starshipMultiplier+=mannyFace;
                     if(mannyFace.z>0.)starshipMultiplier*=mannyFace;
 
