@@ -1029,7 +1029,7 @@ function runOSMD (){
                if(osmd.cursor.Iterator.endReached){
                    
                    if(!sheetTranslucent&&osmd!=null){
-                       
+                     osmd.EngravingRules.PageBackgroundColor = "#ffffffff";
                     osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
                    scoreColorInversion= !scoreColorInversion;
                        

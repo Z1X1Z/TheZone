@@ -526,7 +526,14 @@
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content" style="column-count: 1">
-              
+              <br>
+              <label for="rez">Pixels per pixel</label>
+             <input type="number" id="rez" name="rez" class="num" onkeydown="
+                            rez=window.devicePixelRatio/document.getElementById('rez').value
+                            renderer.setPixelRatio( rez);
+                            ">
+                 <br>
+                 
                   <input type="radio" id=".5rez" name="colorMode" onclick="
                   key  = '`';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -613,7 +620,7 @@
             }
    
                 if("osmd" in window && typeof osmd != null){
-                        osmd.render();
+                        osmdResize();
                         adjustThreeJSWindow();
                     }
    
@@ -640,6 +647,7 @@
     <div id="container"> </div>
     
     <script src="wadLoader.js"> </script>
+    
     <div class="onBottom" style="text-align:right; width:100%;">
         
             <button onclick='
@@ -647,7 +655,7 @@
                 if( menu.style.display=="block")  menu.style.display="none"
                 else if( menu.style.display=="none")menu.style.display="block";'>Menu</button>
     </div>
-    <div id="textWindow" class="onBottom"> </div>
+    <div id="textWindow" class="onBottom" style="bottom:1em;"> </div>
 
     <div id="score">
         
@@ -2273,11 +2281,11 @@ if(starOnDot){
               clamp(clamp(cloud+
                                 zoomer
                           
-                          -(bridge.x+bridge.y+bridge.z)*10000000.
+                          -(bridge.x+bridge.y+bridge.z)*4.
                           -(starship.x+starship.y+starship.z)/maxColorOfStarship*starship.w*.5
                           -(DOTstarship.x+DOTstarship.y+DOTstarship.z)/DOTmaxColorOfStarship*.5*DOTstarship.w
                         +(-StaRivers.r-StaRivers.g-StaRivers.b)*StaRivers.w//uncomment for thicker rivers
-                          -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*1000.
+                          -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*4.
                           
                                                         ,0.,1.)
                     
