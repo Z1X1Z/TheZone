@@ -108,8 +108,13 @@ function callKey(event){
 
     else if (x==0)
     {window.movementRate=pixelShaderSize/4.; uniforms[ "rate" ].value=1./window.movementRate; }
-    else if(x == 7)uniforms.musicAngelMan.value=(uniforms.musicAngelMan.value+1)%3;
-    
+    else if(x == 7&&!event.shiftKey)uniforms.musicAngelMan.value=(uniforms.musicAngelMan.value+1)%3;
+    else if(x == 8&&!event.shiftKey)
+    {
+        if(uniforms.refactorCores.value==2)uniforms.refactorCores.value=1;
+        else if(uniforms.refactorCores.value==1)uniforms.refactorCores.value=0;
+        else uniforms.refactorCores.value=2;
+    }
     
     else if (key=="À"||key=="`")
     {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
@@ -120,7 +125,7 @@ function callKey(event){
    // else if (key=="#"){uniforms[ "base3" ].value=!uniforms[ "base3" ].value;console.log(uniforms[ "base3" ].value)}
     
     else if (key=="&")uniforms[ "continuumClover" ].value=!uniforms[ "continuumClover" ].value;
-    else if (key=="&")uniforms[ "colorCombo" ].value=31;
+                        
     
     else if (key=="q") {
         if          ( uniforms[ "colorCombo" ].value >10)          uniforms[ "colorCombo" ].value = 1;
