@@ -723,7 +723,8 @@ dotted:{value:false},
   starOnDot:{value:false},
   gameOn:{value:false},
   scoreLoaded:{value:false},
-  musicAngelMan:{value:0}
+  musicAngelMan:{value:0},
+  refactorCores:{value:1.}
 
 
     }
