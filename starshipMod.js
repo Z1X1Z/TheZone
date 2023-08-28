@@ -798,14 +798,23 @@ function adjustThreeJSWindow()
 }
 window.addEventListener( 'resize', onWindowResize, false );
 window.addEventListener("orientationchange", onWindowResize, false);
+
 function onWindowResize() {
- 
+     
             if("osmd" in window&&osmd!=null)
             {
                 osmdResize();//osmdResize defined in fileSelectAndLoadOSMD.js
             }
         
             adjustThreeJSWindow();
+     
+     
+     //menuBoxes declared in manny.html
+    for(var box=0.;box<menuBoxes.length;box++)
+    {
+        menuBoxes[box].style.columnCount=Math.round(window.innerWidth/window.innerHeight*4.);
+        console.log(menuBoxes[box].style.columnCount);
+    }
 
   }
 
