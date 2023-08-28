@@ -55,9 +55,8 @@ function callKey(event){
     var x=null;
     if(!event.shiftKey)x = parseInt(String.fromCharCode( event.keyCode));
 
-
     //meta keys like ctrlKey must be processed first and should have symbol preferably
-    if(key == "k" && event.ctrlKey)
+    else if(key == "k" && event.ctrlKey)
     {
         window.timeRESET= window.TIMESTAMP;
         if(window.ChristoDecrypto==0.)
@@ -100,22 +99,23 @@ function callKey(event){
         }
     } the bass staff doesn't include the lyrics so it's not included
      */
-
-    else if (x>0&&x<=4&& document.activeElement.className!="num")
-    {rez = window.devicePixelRatio/x; renderer.setPixelRatio( rez);}
-    else if (key=="+"){rez /=1.1; renderer.setPixelRatio( rez);}
-    else if (key=="_"){rez *=1.1; renderer.setPixelRatio( rez);}
-
-    else if (x==0)
-    {window.movementRate=pixelShaderSize/4.; uniforms[ "rate" ].value=1./window.movementRate; }
-    else if(x == 7&&!event.shiftKey)uniforms.musicAngelMan.value=(uniforms.musicAngelMan.value+1)%3;
-    else if(x == 8&&!event.shiftKey)
+    else if (document.activeElement.className!="num")
     {
-        if(uniforms.refactorCores.value==2)uniforms.refactorCores.value=1;
-        else if(uniforms.refactorCores.value==1)uniforms.refactorCores.value=0;
-        else uniforms.refactorCores.value=2;
+        if (x>0&&x<=4&& )
+        {rez = window.devicePixelRatio/x; renderer.setPixelRatio( rez);}
+        else if (key=="+"){rez /=1.1; renderer.setPixelRatio( rez);}
+        else if (key=="_"){rez *=1.1; renderer.setPixelRatio( rez);}
+        
+        else if (x==0)
+        {window.movementRate=pixelShaderSize/4.; uniforms[ "rate" ].value=1./window.movementRate; }
+        else if(x == 7&&!event.shiftKey)uniforms.musicAngelMan.value=(uniforms.musicAngelMan.value+1)%3;
+        else if(x == 8&&!event.shiftKey)
+        {
+            if(uniforms.refactorCores.value==2)uniforms.refactorCores.value=1;
+            else if(uniforms.refactorCores.value==1)uniforms.refactorCores.value=0;
+            else uniforms.refactorCores.value=2;
+        }
     }
-    
     else if (key=="À"||key=="`")
     {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
     else if (key=="m") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;

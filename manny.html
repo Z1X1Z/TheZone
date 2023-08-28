@@ -529,7 +529,7 @@
           <button class="dropbtn">Resolution
             <i class="fa fa-caret-down"></i>
           </button>
-          <div class="dropdown-content" style="column-count: 1">
+          <div id="resolutionDropContent" class="dropdown-content" style="column-count: 1">
               <br>
               <label for="rez">Pixels per pixel</label>
              <input type="number" id="rez" name="rez" class="num" onkeydown="
@@ -570,7 +570,10 @@
               </div>
                   </div>
         
-       <script> var menuBoxes = document.getElementsByClassName("dropdown-content") </script>
+        <script>//used for resetting column counts for screen porportion in onWindowResize in starshipMod
+            var menuBoxes = document.getElementsByClassName("dropdown-content")
+            var rezBox = document.getElementById("resolutionDropContent");
+        </script>
 
         </div>
         <script src="fileSelectAndLoadOSMD.js"></script>
