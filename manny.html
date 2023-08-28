@@ -570,6 +570,7 @@
               </div>
                   </div>
         
+       <script> var menuBoxes = document.getElementsByClassName("dropdown-content") </script>
 
         </div>
         <script src="fileSelectAndLoadOSMD.js"></script>
@@ -1228,10 +1229,10 @@ const float crs = 60.;//this is the mandelbrot and original inheritance colormod
  else break;
 // if(refactorCores!=1.){s*=(1.+lfc/2.);c*=(1.+lfc/2.);}
 
-float fieldCoreshift;
+
 if(refactorCores>1.){
-    float fieldCoreshift = (1.25+.5*zoom/(zoom+lfc));//centered at 1.5
-    s*=fieldCoreshift;c*=fieldCoreshift;
+    float shift = (1.25+.5*zoom/(zoom+lfc));//centered at 1.5, just a guess really
+    s*=shift;c*=shift;
 }
 else if (refactorCores==0.){//for double slide core
     s*=1.5;c*=1.5;
@@ -1251,7 +1252,7 @@ float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;//.9551195 is bas
 if(MetaCored)hyperCore=cored*2./3.+log(lfc)*logStabilizationConstant-.25/log(.5);
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 
-if(cloverSlide&&!continuumClover)hyperCore+=.75/log(.5)*fieldCoreshift;
+if(cloverSlide&&!continuumClover)hyperCore+=.75/log(.5);
 
 if(outerCoresOff)hyperCore=0.;
 
