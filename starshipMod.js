@@ -759,7 +759,7 @@ dotted:{value:false},
     feedbackSceneFlip.add(feedbackStarshipmeshFlip)
     
   renderer.setPixelRatio( rez);
-     adjustThreeJSWindow();
+     onWindowResize();
     animate();
      adjustThreeJSWindow();
 
