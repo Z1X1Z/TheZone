@@ -1190,7 +1190,7 @@ float lfc = length(freed(coords));
 
 float precores = -.75;
 
-if(spirated!=0.&&morph!=0.)precores=precores+2.;
+if(morph!=0.)precores=precores+4.;
 if(refactorCores!=1.)precores=-.0;
 
 float cored =0.;
@@ -1255,7 +1255,7 @@ float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;//.9551195 is bas
 if(MetaCored)hyperCore=cored*2./3.+log(lfc)*logStabilizationConstant-.25/log(.5);
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 
-if(cloverSlide&&!continuumClover)hyperCore+=.75/log(.5);
+if(cloverSlide)hyperCore+=.75/log(.5);
 
 if(outerCoresOff)hyperCore=0.;
 
@@ -1344,7 +1344,7 @@ if(onehundredfortyfourthousand)
    s.x=log(abs(s.x))/log(baseN);
    //traditionally be e or 3 probably 1.5 to 4
 
-    if(Spoker&&loops+counter+1.<=hyperCore) s/=2.;//engage spokelover
+    if(Spoker&&loops+counter+1.<=hyperCore) s/=2./3.+2.*zoom/lfc;//engage spokelover s/=2.+superspokes
    
    if(spokelover&&counter<hyperCore){
         if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
