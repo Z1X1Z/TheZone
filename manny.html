@@ -1376,10 +1376,11 @@ if(dstnce<2./3.&& loops+counter-continuumCounter<=hyperCore)//not sure if i is 2
  s*=2.;dstnce*=2.;loops++;
  if (cloverSlide)
    {
-       if(float(i)>=hyperCore-loops-counter+continuumCounter)
-       loops-=1.5*dstnce;
+       if(float(i)>hyperCore-loops-counter+continuumCounter)
+       loops-=2.*dstnce;
        else
-       loops-=dstnce/2.;
+       loops-=dstnce/4.;
+       
        
    }
        
