@@ -109,7 +109,7 @@ function callKey(event){
     else if (key=="_"){rez *=1.1; renderer.setPixelRatio( rez);}
 
     else if (x==0)
-    {window.movementRate=pixelShaderSize/4.; uniforms[ "rate" ].value=1./window.movementRate; }
+    {window.movementRate=1.618033988749; uniforms[ "rate" ].value=window.movementRate; }
     else if(x == 7&&!event.shiftKey)uniforms.musicAngelMan.value=(uniforms.musicAngelMan.value+1)%3;
     else if(x == 8&&!event.shiftKey)
     {

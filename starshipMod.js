@@ -34,14 +34,15 @@ window.zoom=1.;
 
 window.pixelShaderSize = 7;
 const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
-window.movementRate=pixelShaderToStarshipRATIO;//this value of pixelShaderToStarshipRATIO sticks the trail on the clover, but it's not 1 second to the edge of the screen; I think it's 7/8th's of a second
+window.movementRate=1.618033988749;
+
 const starshipSize = Math.E**-1.3247/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
 const trailSecondsLong = 8.;
 const starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;//base Z value
 
 const zoomFrames = 60;//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
-                  const mf = 1.;
+                  const mf = 1.75;
 const MR = mf/zoomFrames;
 const trailLength = zoomFrames*trailSecondsLong;
 const dotSize = starshipSize;
@@ -389,7 +390,7 @@ const reversableColor=(angle/12.+twist/24.)*flip+1./3.;
 pitchCol[f]  = colorSoundPURE;
 angle = ((angle+6)/12.*2*pi);
                         flatline = pixelShaderToStarshipRATIO;
-                       if(window.movementRate>pixelShaderToStarshipRATIO) flatline = window.movementRate;
+                       if(window.movementRate>1.) flatline = window.movementRate;
          
          d_x = -Math.sin(-angle)*flatline;
          d_y = -Math.cos(-angle)*flatline;
@@ -1113,17 +1114,21 @@ function runOSMD (){
     if (uniforms["MetaCored"].value)
      {
         
-        var precores = -.75;
+        var precores = .25/Math.log(.5);
          if(uniforms.spirated.value!=0.&&uniforms.morph.value!=0.)precores=precores+2.;
 
         const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
+         var equillibrator = 1.;
+         let distC=(d_x*d_x+d_y*d_y)**.5
+         if(distC>2./3.)equillibrator=distC/(distC-zoom);
 
         
         uniforms[ "centralCores" ].value = Math.log(zoom)/Math.log(.5)+precores    ;
          if(uniforms[ "morph" ].value!=0.)uniforms[ "centralCores" ].value*=3./2.;//stabilize morph dance collaboration
 
-        uniforms[ "externalCores" ].value =(uniforms[ "centralCores" ].value)*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*logStabilizationConstant-.25/Math.log(.5);
-        
+        uniforms[ "externalCores" ].value =(uniforms[ "centralCores" ].value)*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*logStabilizationConstant*equillibrator+equillibrator;
+         if(uniforms.cloverSlide.value)uniforms[ "externalCores" ].value +=1./Math.log(.5);
+
         if(uniforms[ "Spoker" ].value&&uniforms[ "MetaCored" ].value)
             uniforms[ "externalCores" ].value*=4./3./(1./Math.log(3.)+(1.-1./Math.log(3.))/1.75);
     }
