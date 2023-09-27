@@ -10,9 +10,19 @@ window.twist = 0.;
 window.highORlow=1.;
 window.FeedbackSound = false;
 window.instantaneousFreqSpirographColoring = 1;
+window.pzyghthe=0;
 let osmdStaffsVisible = 0;
-function readHash(){for(var n = location.hash.length;n>0;n--)callKey(new KeyboardEvent('keydown', {'key': location.hash[n],"keyCode":location.hash.charCodeAt(n)}));
+
+function readHash(){
+    for(var n = location.hash.length;n>0;n--)
+        callKey(new KeyboardEvent('keydown',
+                                  {
+            'key': location.hash[n],"keyCode":location.hash.charCodeAt(n),
+            "ctrlKey":location.hash[n-1]==",","altKey":location.hash[n-1]=="."
+                                    }
+            ));
 }
+    
 function stallHash(){if(window.uniformsLoaded)readHash();else setTimeout(stallHash,10);}//uniforms are only loaded if mic is enabled
 stallHash();
 function hk() {
@@ -47,9 +57,19 @@ var key = "";
 if(//!(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' &&
    navigator.maxTouchPoints < 1)//)//if not mobile
 window.addEventListener('keydown', function(event) {if(window.uniformsLoaded)callKey(event); return true;}, false);
-
+let lastKey = "";
+let key = "";
 function callKey(event){
-    let key = event.key;
+
+    if(key==",")//key here is the last key
+        event=new KeyboardEvent('keydown',
+                                            {"key":event.key,"keyCode":event.keyCode,"ctrlKey":true}
+                  );
+    else if(key==".")event=new KeyboardEvent('keydown',
+                                                 {"key":event.key,"keyCode":event.keyCode,"altKey":true}//creating a new keypress because it's readonly
+                       );
+
+     key = event.key;
     if(key=="/"&&!event.shiftKey){  event.preventDefault(); event.stopImmediatePropagation();}
 
     var x=null;
@@ -76,6 +96,7 @@ function callKey(event){
     else if(key == "v" && event.ctrlKey) window.FeedbackSound =  !window.FeedbackSound;
     else if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=!uniforms.starOnDot.value;
     else if (key==" " && event.ctrlKey)instantaneousFreqSpirographColoring = (instantaneousFreqSpirographColoring+1)%2;//color mode 3 seems obsolete
+    else if(event.ctrlKey);//swallow remaining possibilities, muting keypress
     /*if(key == "k" && event.ctrlKey)
     {
         osmdStaffsVisible=(osmdStaffsVisible+1)%3;
@@ -117,7 +138,14 @@ function callKey(event){
         else if(uniforms.refactorCores.value==1)uniforms.refactorCores.value=0;
         else uniforms.refactorCores.value=2;
     }
-    
+    else if(x == 9&&!event.shiftKey)
+    {
+        window.pzyghthe = (window.pzyghthe+1.)%5;
+        if(pzyghthe==0) scene.remove(harmonicPzyghtheMesh);
+        else if (pzyghthe==1) scene.add(harmonicPzyghtheMesh)
+
+
+    }
     else if (key=="À"||key=="`")
     {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
     else if (key=="m") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
@@ -232,8 +260,10 @@ function callKey(event){
         else uniforms.eden.value=1;}
     else if (key=="}"){if(uniforms.eden.value==4)uniforms.eden.value=0;else uniforms.eden.value=4;}
     
-    else if (event.keyCode==190||event.key=="."||event.key==">") uniforms[ "metronome" ].value *= 1.1; //keycode for <
-    else if ((event.keyCode==188||event.key==","||event.key=="<")&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
+    else if (//event.keyCode==190||
+             event.key==">") uniforms[ "metronome" ].value *= 1.1; //keycode for <
+    else if ((//event.keyCode==188||
+              event.key=="<")&&uniforms[ "metronome" ].value>1.) uniforms[ "metronome" ].value /= 1.1; //keycode for >
     
     else if (key=="i") zoomOutRatchetThreshold/= 1.12121;
     else if (key=="o") zoomOutRatchetThreshold*= 1.12121;
@@ -243,7 +273,18 @@ function callKey(event){
         framesLong=FPS;
         computeFPS=true;
     }
-    else if (key=="P"){octaveStars=!octaveStars;}
+    else if (key=="P"){octaveStars=!octaveStars;
+        /*
+        if(!octaveStars)
+        {
+            scene.remove(starsANDwitnessesMesh)
+        }
+        else
+        {
+            scene.add(starsANDwitnessesMesh)
+        }
+         */
+    }
     else if (key=="h"){
         fullscreen=!fullscreen
         if(fullscreen)openFullscreen();

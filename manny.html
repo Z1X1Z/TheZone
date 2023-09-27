@@ -166,6 +166,13 @@
                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                   <label for="TrailOverflowsClover">Trail overflows clover!</label><br>
                 
+                
+               <a id="pzyghthe" name="t"  onclick= "
+
+                   key  = '9';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                   Harmonic Scale!</a><br>
+               
                <a id="Star Stream" name="t"  onclick= "
 
                    key  = 'V';
@@ -1267,8 +1274,9 @@ float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;//.9551195 is bas
 //if(morph!=0.)cored*=3./2.;//stabilize morph dance collaboration
 
 //2.47805268028830 and 3 are solutions to x=log3(x**3)
+float dif = 3.-.47805268028830;
 float equilibriator = 1.;
-if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/3.);
+if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
 if(MetaCored)hyperCore=cored*2./3.+(log(lfc))*equilibriator*logStabilizationConstant+1.;
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 
@@ -1322,8 +1330,12 @@ for (float counter=0.;counter<iterations;counter++)if(length(s)<35.){
                                             if(length(s)<4./3.)    beta   =  hsv2rgb(vec3((atan(ColorWheelClover.y,ColorWheelClover.x))/(2.*PI),1.,1.));
                                 }
  if(length(s)<2./3.||(spokesVisualizeColors&&length(s)<4./3.)) {
-               if(eden==0)starship+=texture2D(STAR,cloverMAP);
-               else if(eden==1)starship+=texture2D(EDEN,cloverMAP);//+texture2D(STAR,cloverMAP);
+            float decayCanceller=1.;
+            if(spokesVisualizeColors)decayCanceller = 2.;
+            //if(morph!=0.)decayCanceller=decayCanceller*decayCanceller;
+               if(eden==0)starship+=texture2D(STAR,cloverMAP)/decayCanceller;
+               else if(eden==1)starship+=texture2D(EDEN,cloverMAP)/decayCanceller;//*length((vUv-.5)*max(resolution.x,resolution.y)/min(resolution.x,resolution.y));//+texture2D(STAR,cloverMAP);
+            
            }
 
 if(onehundredfortyfourthousand)

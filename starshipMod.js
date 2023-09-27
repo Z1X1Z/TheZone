@@ -469,7 +469,8 @@ trailWidth[n] += radius*starshipSize;
 
                        }
     let camera, renderer;
-                       
+let harmonicPzyghtheGeometry,harmonicPzyghtheMaterial,harmonicPzyghtheMesh;
+                       //this section could use some naming clearing up
 
 let mesh;
 let feedbackStarshipmesh, feedbackStarshipmeshFlip;
@@ -477,6 +478,16 @@ let feedbackStarshipmaterialShader;
 
 let materialShader;
 
+                    
+                    let geometryP;
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    
 let lineMat, lineGeometry, line;
  let circleGeometry,circleMaterial,circle;
                     
@@ -487,7 +498,6 @@ let lineMat, lineGeometry, line;
                     let starStreamMesh,starStreamGeometry;
 
                     
-let geometryP;
 
 let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                      let scene, shaderScene,feedbackScene, feedbackSceneFlip;
@@ -508,6 +518,10 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                     const trail=new Float32Array(trailLength*3*6);
                     const trailColor=new Float32Array(trailLength*4*6);
        
+                    const xenOctaveFactor = 8;
+                    const harmonicPzyghtheVertices = new Float32Array(xenOctaveFactor*12*3*6)
+                    const harmonicPzyghtheColor = new Float32Array(xenOctaveFactor*12*4*6)
+                    
                     const starsANDwitnessesPoints=new Float32Array(120*3*6);
                     const starsANDwitnessesColors=new Float32Array(120*3*6);
 
@@ -607,15 +621,28 @@ function init() {
      geomeTrail.setAttribute( 'position', new THREE.Float32BufferAttribute( trail, 3 ) );
       geomeTrail.setAttribute( 'color', new THREE.Float32BufferAttribute( trailColor, 4 ));
      meshTrail = new THREE.Mesh(geomeTrail, materialTrail);
-
-    
+     
+     
+     harmonicPzyghtheMaterial= new THREE.MeshBasicMaterial({
+                   opacity: 1.,
+                 transparent: true,
+                   vertexColors: true,
+                  // side: THREE.DoubleSide
+               });
+     harmonicPzyghtheGeometry = new THREE.BufferGeometry();
+     harmonicPzyghtheGeometry.dynamic = true;
+     harmonicPzyghtheGeometry.setAttribute( 'position', new THREE.Float32BufferAttribute( harmonicPzyghtheVertices, 3 ) );
+     harmonicPzyghtheGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( harmonicPzyghtheColor, 4 ));
+     harmonicPzyghtheMesh= new THREE.Mesh( harmonicPzyghtheGeometry,  harmonicPzyghtheMaterial);
+     
      circleMaterial = new THREE.MeshBasicMaterial( );
      circle = new THREE.Mesh(new THREE.CircleGeometry(dotSize,3,0.),circleMaterial);
 
      radialMaterial=  new THREE.MeshBasicMaterial( { color: 0x000000});
      radialGeometry=new THREE.BufferGeometry()
      radialLine = new THREE.Line(radialGeometry,radialMaterial);
-     
+     scene.add(harmonicPzyghtheMesh)
+
      scene.add(meshTrail)
    //  scene.add(line);
 
@@ -624,7 +651,7 @@ function init() {
       
     scene.add(starMesh);
      scene.add(starsANDwitnessesMesh)
-     
+
      
     // scene.add(starStreamMesh)
      
@@ -1087,6 +1114,7 @@ function runOSMD (){
         //function    OSMDUPDATER(){   runOSMD();  setTimeout(OSMDUPDATER,1000/60.);}
         //OSMDUPDATER();
 
+                 let   upOrDown = 1;
    function animate( timestamp ) {
     
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
@@ -1221,7 +1249,7 @@ if( !window.touchMode&&!window.touchOnlyMode) {
     lineMat.color = colorSoundPURE;
   }
 lineMat.color = new THREE.Color("black")
-  const d = -starShipDepthInSet;
+  const d = -1.;
                             
                             let tx = 0, ty = 0,greyness=1.;
                             
@@ -1629,7 +1657,94 @@ var fingerStride = 0;
                                                               
                                                               
                                                               
-                                                              
+                       
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        let hpStride = 0;
+                                        
+                                    const harmonicPositionAttribute = harmonicPzyghtheGeometry.getAttribute( 'position' );
+                                    const harmonicColorAttribute = harmonicPzyghtheGeometry.getAttribute( 'color' );
+                                             if(window.pzyghthe!=0)
+                                             {
+                                                 
+                         if(window.pzyghthe>=3&&pitch-lastPitch!=0) upOrDown =  Math.sign(pitch-lastPitch);
+
+                                             for (var t=0; t<xenOctaveFactor; t++) {
+                                                 for (var g=0; g<12; g++) {
+                                                     const widt = 1./3.;
+                                                     const lengt =starshipSize/(t+g/12)**.5/7.;
+
+
+                                                         var vop = new THREE.Color();
+                                                     vop.setHSL((-note-g+5)%12/12.
+                                                                ,1.,.5);
+
+                                                      //   for(var yy=0;yy<6;yy++)   harmonicColorAttribute.setXYZW(hpStride+yy,vop.r,vop.g,vop.b,1.)
+                                                                                   harmonicColorAttribute.setXYZW(hpStride+0,vop.r,vop.g,vop.b,0.333)
+                                                                                   harmonicColorAttribute.setXYZW(hpStride+1,vop.r,vop.g,vop.b,0.333)
+                                                                                   harmonicColorAttribute.setXYZW(hpStride+2,vop.r,vop.g,vop.b,1.)
+                                                                                   harmonicColorAttribute.setXYZW(hpStride+3,vop.r,vop.g,vop.b,0.333)
+                                                                                   harmonicColorAttribute.setXYZW(hpStride+4,vop.r,vop.g,vop.b,1.)
+                                                                                   harmonicColorAttribute.setXYZW(hpStride+5,vop.r,vop.g,vop.b,1.)
+                                                     let wisdom;
+                                                     if (window.pzyghthe==1) wisdom=1;
+                                                     else if (window.pzyghthe==2) wisdom=-1;
+                                                     else if (window.pzyghthe==3) wisdom= upOrDown;
+                                                     else if (window.pzyghthe==4) wisdom= -upOrDown;
+                                                     
+                                                          let   radialHarmonicInterval =wisdom*
+                                                     2.*Math.PI*2**(xenOctaveFactor-( t+(g-1.)/12.))/2**xenOctaveFactor+angle;
+                                                     const xr = widt*-Math.sin(-radialHarmonicInterval);
+                                                     const yr = widt*-Math.cos(-radialHarmonicInterval);
+                                                     const x = lengt*-Math.cos(radialHarmonicInterval);
+                                                     const y = lengt*-Math.sin(radialHarmonicInterval);
+                                                     const depth = -.99;
+
+                                                     
+                                                     
+                                                     const outSetX = xr*2.;
+                                                     const outSetY = yr*2.;
+
+                                                     const nx =-x+outSetX
+                                                     const ny =-y+outSetY
+                                                     const xShift=x+outSetX;
+                                                     const yShift=y+outSetY;
+                                                     const xrShifted = xr+xShift;
+                                                     const yrShifted = yr+yShift;
+                                                     
+                                                     harmonicPositionAttribute.setXYZ( hpStride, nx,    ny,  depth)
+                                                     harmonicPositionAttribute.setXYZ(hpStride+1,xShift,    yShift,  depth)
+                                                     harmonicPositionAttribute.setXYZ(hpStride+2,xrShifted, yrShifted,  depth)
+                                                     harmonicPositionAttribute.setXYZ(hpStride+3,nx, ny,  depth)
+                                                     harmonicPositionAttribute.setXYZ(hpStride+4,xrShifted, yrShifted,  depth)
+                                                     harmonicPositionAttribute.setXYZ(hpStride+5,xr+nx, yr+ny,  depth)
+                                                     
+                                                     hpStride+=6;
+                                                     }
+                                                 
+                                             }
+                                                                      }
+                                                                                                  
+                                              harmonicPositionAttribute.needsUpdate = true; // required after the first render
+                                              harmonicColorAttribute.needsUpdate = true; // required after the first render
+                                                            
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                                               
       //https://www.youtube.com/watch?v=4SH_-YhN15A&list=WL&index=10&t=2328s  wouldn't this be cool  with the equalizer starship, description of process at beginning of video (now implemented with feedback buffer
               
