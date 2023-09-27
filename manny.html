@@ -788,7 +788,7 @@ void main(){
     uniform int eden;
 
     uniform int musicAngelMan;
-
+    uniform bool fieldPowerBoost;
     uniform bool helm;
     uniform float refactorCores;
 
@@ -1252,7 +1252,6 @@ const float crs = 60.;//this is the mandelbrot and original inheritance colormod
  else break;
 // if(refactorCores!=1.){s*=(1.+lfc/2.);c*=(1.+lfc/2.);}
 
-
 if(refactorCores>1.){
     float shift = (1.25+.5*zoom/(zoom+lfc));//centered at 1.5, just a guess really
     s*=shift;c*=shift;
@@ -1261,6 +1260,11 @@ else if (refactorCores==0.){//for double slide core
     s*=1.5;c*=1.5;
 }
 
+
+if(fieldPowerBoost){
+    float powerBoost =2.71828*(log(.5)/length(s));
+    s=s*pow(length(s),powerBoost);
+}
 
  coresIn+=60.+upCoreCycler;
 //  else if(zoom>1.)for(int i=0;i<int(crs); i++)if(c>4./3.&&loops<-cored){s/=2.;c/=2.;loops++;coresIn++;}else break;//UpCore not in use here, but rather in the starshipMod
@@ -1277,11 +1281,13 @@ float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;//.9551195 is bas
 float dif = 3.-(1.-.47805268028830)/3.;
 float equilibriator = 1.;
 if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
-if(MetaCored)hyperCore=cored*2./3.+(log(lfc))*equilibriator*logStabilizationConstant+1.;
+if(MetaCored)hyperCore=cored*2./3.+
+                    ((log(lfc))*logStabilizationConstant+1./ log(length(s)/zoom))*equilibriator;
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 
-if(cloverSlide)hyperCore+=1./log(.5);
-
+//if(cloverSlide)hyperCore+=1./log(.5);
+//if(fieldPowerBoost)hyperCore+=1./log(.5);
+   
 if(outerCoresOff)hyperCore=0.;
 
 if(Spoker&&MetaCored)

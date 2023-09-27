@@ -78,7 +78,7 @@ function callKey(event){
 
     //meta keys like ctrlKey must be processed first and should have symbol preferably
     if (document.activeElement.className=="num");//don't take hotkey's while menu number selector engaged
-
+    else if(key == "x" && event.ctrlKey)uniforms.fieldPowerBoost.value=!uniforms.fieldPowerBoost.value;
     else if(key == "k" && event.ctrlKey)
     {
         window.timeRESET= window.TIMESTAMP;
