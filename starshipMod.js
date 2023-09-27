@@ -518,7 +518,7 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                     const trail=new Float32Array(trailLength*3*6);
                     const trailColor=new Float32Array(trailLength*4*6);
        
-                    const xenOctaveFactor = 8;
+                    const xenOctaveFactor = 12;
                     const harmonicPzyghtheVertices = new Float32Array(xenOctaveFactor*12*3*6)
                     const harmonicPzyghtheColor = new Float32Array(xenOctaveFactor*12*4*6)
                     
@@ -752,9 +752,9 @@ dotted:{value:false},
   gameOn:{value:false},
   scoreLoaded:{value:false},
   musicAngelMan:{value:0},
-  refactorCores:{value:1.}
+  refactorCores:{value:1.},
 
-
+  fieldPowerBoost:{value:false}
     }
   ]);
     window.uniformsLoaded=true;
@@ -1683,7 +1683,7 @@ var fingerStride = 0;
                                              for (var t=0; t<xenOctaveFactor; t++) {
                                                  for (var g=0; g<12; g++) {
                                                      const widt = 1./3.;
-                                                     const lengt =starshipSize/(t+g/12)**.5/7.;
+                                                     //const lengt =starshipSize/(t+(g+1.)/12)**.5/7.;
 
 
                                                          var vop = new THREE.Color();
@@ -1702,19 +1702,21 @@ var fingerStride = 0;
                                                      else if (window.pzyghthe==2) wisdom=-1;
                                                      else if (window.pzyghthe==3) wisdom= upOrDown;
                                                      else if (window.pzyghthe==4) wisdom= -upOrDown;
-                                                     
                                                           let   radialHarmonicInterval =wisdom*
-                                                     2.*Math.PI*2**(xenOctaveFactor-( t+(g-1.)/12.))/2**xenOctaveFactor+angle;
+                                                     2.*Math.PI*2**(xenOctaveFactor-( t+(g-1.)/12.))/2**xenOctaveFactor;
+                                                                                     const lengt = radialHarmonicInterval/144.;
+                                                                                    radialHarmonicInterval+=angle;
                                                      const xr = widt*-Math.sin(-radialHarmonicInterval);
                                                      const yr = widt*-Math.cos(-radialHarmonicInterval);
                                                      const x = lengt*-Math.cos(radialHarmonicInterval);
                                                      const y = lengt*-Math.sin(radialHarmonicInterval);
                                                      const depth = -.99;
 
-                                                     
-                                                     
-                                                     const outSetX = xr*2.;
-                                                     const outSetY = yr*2.;
+                                                     let hollowCenterSize = 2.;
+                                                     if(g==1)hollowCenterSize = 1.75;
+
+                                                     const outSetX = xr*hollowCenterSize;
+                                                     const outSetY = yr*hollowCenterSize;
 
                                                      const nx =-x+outSetX
                                                      const ny =-y+outSetY
