@@ -1274,7 +1274,7 @@ float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;//.9551195 is bas
 //if(morph!=0.)cored*=3./2.;//stabilize morph dance collaboration
 
 //2.47805268028830 and 3 are solutions to x=log3(x**3)
-float dif = 3.-.47805268028830;
+float dif = 3.-(1.-.47805268028830)/3.;
 float equilibriator = 1.;
 if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
 if(MetaCored)hyperCore=cored*2./3.+(log(lfc))*equilibriator*logStabilizationConstant+1.;
