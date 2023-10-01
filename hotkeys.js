@@ -12,8 +12,9 @@ window.FeedbackSound = false;
 window.instantaneousFreqSpirographColoring = 1;
 window.pzyghthe=0;
 let osmdStaffsVisible = 0;
-
+let runningHash = true;
 function readHash(){
+    
     for(var n = location.hash.length;n>0;n--)
         callKey(new KeyboardEvent('keydown',
                                   {
@@ -21,6 +22,7 @@ function readHash(){
             "ctrlKey":location.hash[n-1]==",","altKey":location.hash[n-1]=="."
                                     }
             ));
+    runningHash=false;
 }
     
 function stallHash(){if(window.uniformsLoaded)readHash();else setTimeout(stallHash,10);}//uniforms are only loaded if mic is enabled
@@ -61,11 +63,11 @@ let lastKey = "";
 let key = "";
 function callKey(event){
 
-    if(key==",")//key here is the last key
+    if(key==","&&!runningHash)//key here is the last key
         event=new KeyboardEvent('keydown',
                                             {"key":event.key,"keyCode":event.keyCode,"ctrlKey":true}
                   );
-    else if(key==".")event=new KeyboardEvent('keydown',
+    else if(key=="."&&!runningHash)event=new KeyboardEvent('keydown',
                                                  {"key":event.key,"keyCode":event.keyCode,"altKey":true}//creating a new keypress because it's readonly
                        );
 
@@ -79,6 +81,8 @@ function callKey(event){
     //meta keys like ctrlKey must be processed first and should have symbol preferably
     if (document.activeElement.className=="num");//don't take hotkey's while menu number selector engaged
     else if(key == "x" && event.ctrlKey)uniforms.fieldPowerBoost.value=!uniforms.fieldPowerBoost.value;
+    else if(key == "z" && event.ctrlKey)uniforms.fieldPowerBoostMeta.value=!uniforms.fieldPowerBoostMeta.value;
+
     else if(key == "k" && event.ctrlKey)
     {
         window.timeRESET= window.TIMESTAMP;

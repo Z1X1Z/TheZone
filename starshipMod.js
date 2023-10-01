@@ -35,7 +35,7 @@ window.zoom=1.;
 window.pixelShaderSize = 7;
 const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
 window.movementRate=1.618033988749;
-
+window.radialWarp=1.;
 const starshipSize = Math.E**-1.3247/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
 const trailSecondsLong = 8.;
 const starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;//base Z value
@@ -218,7 +218,7 @@ function spiral_compress(){
  
     var note24 =24*Math.log(freq/window.ConcertKey)/Math.log(2.)+49*2;//I would like this 69 to be a 49 as it is it centers around e6
                           if (!onO){
-        testar[(Math.round(note24))%24] += Math.abs(z[n]);
+        testar[(Math.round(note24))%24] += Math.abs(z[n])*radialWarp;
   
     }
     else{//if constinuous star is engaged pipe directly through avoiding the 24 modulo
@@ -248,7 +248,7 @@ function fiveAndSeven(){
       let  starNote = 0 //ranges up to 12
         for(let n = 0; n<numberOfBins; n++)        {
             //mustard is in 24ths, here we want 12ths so we divide by two
-            const twelfths = (mustarD[n])/2.+12//A1 is 1 with +12
+            const twelfths = (mustarD[n]/2.+12)*radialWarp//A1 is 1 with +12
            
                 if( twelfths>=-.5){
                     starNote = Math.round(twelfths)%12;
@@ -378,20 +378,23 @@ if (totalAMP>zoomOutRatchetThreshold) pitch =    audioX.sampleRate/calculatePitc
 lastNote = note;
  note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
 const t =  (note )*flip+twist/2;
-if(isFinite(t))angle = -t%12;
-
+if(isFinite(t))angle = -(t*radialWarp);
+//angle-=1/radialWarp;
+                    const reversableColor=((angle/12./radialWarp+twist/24.)*flip+1./3.)%1.;
 
 colorSound = new THREE.Color();
-const reversableColor=(angle/12.+twist/24.)*flip+1./3.;
                        const colortone = note/lightingScaleTrail;
     colorSound.setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
                     colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);//lighting {note/x} should be 120 but it's out of the vocal range
-
 pitchCol[f]  = colorSoundPURE;
-angle = ((angle+6)/12.*2*pi);
+                    
+                    
+                    
                         flatline = pixelShaderToStarshipRATIO;
                        if(window.movementRate>1.) flatline = window.movementRate;
-         
+                    
+                    
+         angle = ((angle+6*radialWarp)/12.)%1*2*pi;
          d_x = -Math.sin(-angle)*flatline;
          d_y = -Math.cos(-angle)*flatline;
                      //  console.log("x"+d_x)
@@ -754,8 +757,10 @@ dotted:{value:false},
   musicAngelMan:{value:0},
   refactorCores:{value:1.},
 
-  fieldPowerBoost:{value:false}
-    }
+  fieldPowerBoost:{value:false},
+  fieldPowerBoostMeta:{value:false}
+
+  }
   ]);
     window.uniformsLoaded=true;
 
@@ -1327,14 +1332,13 @@ if(!window.touchMode){
             
             if(isFinite(testar[g])&&testar[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.){
                 
-                const arm =(flip*mustarD[g]+twist+12)%24./24.*pi*2.;
+                let arm =((flip*mustarD[g]+twist+12)*radialWarp)%24./24.*pi*2.;
                 const lengtOriginal=(testar[g]-minTestar)/(maxTestar-minTestar);//twice applied
                 var widt = (1.-lengtOriginal)*starshipSize;
                 if (widt==0)widt=starshipSize;
                 //var widt =starshipSize;
                 const vop = new THREE.Color();
                 vop.setHSL((-mustarD[g]+8)%24./24., mustarD[g]/lightingScaleStar,mustarD[g]/lightingScaleStar);//297 is around the highest heard note
-                
                 
                 const rpio2 =arm+pi/2.;
                 if(RockInTheWater==0||RockInTheWater==1)
@@ -1350,8 +1354,14 @@ if(!window.touchMode){
                     //for(var yy=0;yy<3;yy++)
                     if (RockInTheWater==1)
                     {    let greyTone=(mustarD[g]+72)/lightingScaleStar;//may not be an exact value
-                        for(var yy=0;yy<3;yy++)
-                            starColorAttribute.setXYZW(starStride+yy,greyTone, greyTone, greyTone,1.)
+                        let maxVop = Math.max(vop.r,Math.max(vop.g,vop.b))*2.
+                        let vopr=vop.r/maxVop;
+                        let vopg=vop.g/maxVop;
+                        let vopb=vop.b/maxVop;
+                        //for(var yy=0;yy<3;yy++)
+                            starColorAttribute.setXYZW(starStride+0,vopr, vopg, vopb,1.)
+                        starColorAttribute.setXYZW(starStride+1,greyTone,greyTone,greyTone,1.)
+                        starColorAttribute.setXYZW(starStride+2,vopr, vopg, vopb,1.)
                             }
                     else{
                         starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
@@ -1533,10 +1543,11 @@ else{//start drawing of just twenty four frets here
                                  if(testar[g]>maxTestar){maxTestar=testar[g];}
                                  if(testar[g]<minTestar)minTestar=testar[g];
                              }
-
-            for (var g=0; g<24; g++) {
+let fretMultiplied = Math.round(24./((radialWarp<1)?radialWarp:1));
+    
+            for (var g=0; g<fretMultiplied; g++) {
             const widt = starshipSize;
-            const arm =(flip*g+twist)%24./24.*pi*2.;
+            let arm =(flip*g*radialWarp+twist)%24./24.*pi*2.;
 
             const lengt = (testar[(g+12)%24]-minTestar)/(maxTestar-minTestar);
 
@@ -1550,7 +1561,7 @@ else{//start drawing of just twenty four frets here
                   starColorAttribute.setXYZW(starStride+3,1.,1.,1.,0.)
                   starColorAttribute.setXYZW(starStride+4,vop.r,vop.g,vop.b,1.)
                   starColorAttribute.setXYZW(starStride+5,vop.r,vop.g,vop.b,1.)
-
+                
 const rpio2 =arm+pi/2.;
 const x = widt*-Math.sin(rpio2);
 const y = widt*-Math.cos(rpio2);
@@ -1602,7 +1613,7 @@ var fingerStride = 0;
              for (var g=0; g<10; g++) {
                  const widt = starshipSize**(2.41421);
                  const finger = (isFinite(twelve[t][g]))?twelve[t][g]:0;
-                 const arm =(g+9)/10.*pi*2.;
+                 let arm =(g+9)/10.*pi*2.;
 
                  const lengt =(isFinite(maxFinger)&&maxFinger!=0)? (finger)/maxFinger/1.5 : 0;
 
@@ -1628,7 +1639,7 @@ var fingerStride = 0;
                      
 
                      for(var yy=0;yy<6;yy++)   starsANDwitnessesColorAttribute.setXYZ(fingerStride+yy,vop.r,vop.g,vop.b)
-
+                    
                      const rpio2 =arm+pi/2.;
                      const fingerTwist=(flip*(t-6)+twist/2.+12)/12.*2.*pi;
                                         const x = widt*-Math.sin(rpio2+fingerTwist+pi);
