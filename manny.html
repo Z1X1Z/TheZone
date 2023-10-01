@@ -44,7 +44,12 @@
         loadScript("threeJSscript",cdnSwitchThree,"three.js")
         </script>
         -->
-        <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js" ></script>
+        <script id="shim"></script> <!-- you need to provide the .js file, see README.md-->
+        <script>
+        var cdnSHIM="opensheetmusicdisplay.min.js";
+        if (window.useCDN)cdnSHIM="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js";
+        loadScript("shim",cdnSHIM,"")
+        </script>
        
         <script type="importmap">
           {
@@ -116,7 +121,11 @@
             <label for="ConcertKey">THE A Key Frequency (Should probably be "Concert A" 440 hz):</label>
            <input type="number" id="ConcertKey" name="ConcertKey" class="num" onkeydown="window.ConcertKey=document.getElementById('ConcertKey').value">
                <br>
-               
+               <label for="RadialWarp">Magnify rate of the octave, radially by 1/</label>
+              <input type="number" id="RadialWarp" name="RadialWarp" class="num" onkeydown="
+                    let b=document.getElementById('RadialWarp').value;
+                    if(!isNaN(b)&&b>0)radialWarp=b;">
+                  <br>
                <input type="checkbox" id="DotStar" name="t"  onclick= "uniforms.starOnDot.value=!uniforms.starOnDot.value;">
                <label for="DotStar">Dot has Starship!?</label>
                <br>
@@ -789,6 +798,7 @@ void main(){
 
     uniform int musicAngelMan;
     uniform bool fieldPowerBoost;
+    uniform bool fieldPowerBoostMeta;
     uniform bool helm;
     uniform float refactorCores;
 
@@ -1188,8 +1198,15 @@ float r, b, l;
                        }
                    return clamp(vec3(l+x+r+c),0.,1.);
                }
-                                   
+            
+                                  
+                                  
+                                  
+                            
 vec3 tol(vec2 p, vec2 t){
+                         
+                                 
+                                 
                          vec2 pWithoutChiralizer = p;
                          if(chirality==-1)p=p.yx;
 vec2 colorAccumulator =vec2(0.);
@@ -1198,7 +1215,7 @@ float lfc = length(freed(coords));
 
 float precores = .25/log(.5);
 
-if(morph!=0.)precores=precores+4.;
+if(morph!=0.&&!wheel)precores=precores+2.*log(2.);
 if(refactorCores!=1.)precores=-.0;
 
 float cored =0.;
@@ -1263,7 +1280,7 @@ else if (refactorCores==0.){//for double slide core
 
 if(fieldPowerBoost){
     float powerBoost =2.71828*(log(.5)/length(s));
-    s=s*pow(length(s),powerBoost);
+    s*=pow(length(s),powerBoost);
 }
 
  coresIn+=60.+upCoreCycler;
@@ -1282,10 +1299,14 @@ float dif = 3.-(1.-.47805268028830)/3.;
 float equilibriator = 1.;
 if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
 if(MetaCored)hyperCore=cored*2./3.+
-                    ((log(lfc))*logStabilizationConstant+1./ log(length(s)/zoom))*equilibriator;
+                    (
+                     (log(lfc))*logStabilizationConstant
+                      +length(s)
+                     )*equilibriator;
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
-
-//if(cloverSlide)hyperCore+=1./log(.5);
+   hyperCore+=1.125/log(.5);
+if(cloverSlide&&!wheel)hyperCore+=1./log(.5);
+   else if(cloverSlide&&wheel)hyperCore+=.5/log(.5);
 //if(fieldPowerBoost)hyperCore+=1./log(.5);
    
 if(outerCoresOff)hyperCore=0.;
@@ -1311,9 +1332,21 @@ vec3 oo = vec3(0.);
 vec4 starship=vec4(0.);
 float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
 vec3 beta =vec3(1.);
-for (float counter=0.;counter<iterations;counter++)if(length(s)<35.){
+
+
+
+
+
+float dstnce = length(s);//"distance" may be reserved keyword
+
+float CORE_DELIMITER;
+if(morph==0.)CORE_DELIMITER=1./1.3247179572447460259609088544780973407344040569;
+else {CORE_DELIMITER=2./3.;t/=1.5;}
+
+for (float counter=0.;counter<iterations;counter++)if(dstnce<35.){
     
-    if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*2.*PI/(atan(s.y,s.x)-PI*spirated);
+    if(spirated!=0.&&dstnce<CORE_DELIMITER)  //works well<(n-1)/n
+    s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
 
            vec2 cloverMAP = (spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+PI))*2./3.+.5;
                                    
@@ -1333,9 +1366,9 @@ for (float counter=0.;counter<iterations;counter++)if(length(s)<35.){
                                                     else cycleShiftChiral=-PI;
                                                     ColorWheelClover = spin2(vec2(-s.x,-  s.y)*flipStar,(atan(s.x,s.y)*petals/(6.+petals)-atan(d.y,d.x)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar);
                                                 }
-                                            if(length(s)<4./3.)    beta   =  hsv2rgb(vec3((atan(ColorWheelClover.y,ColorWheelClover.x))/(2.*PI),1.,1.));
+                                            if(dstnce<4./3.)    beta   =  hsv2rgb(vec3((atan(ColorWheelClover.y,ColorWheelClover.x))/(2.*PI),1.,1.));
                                 }
- if(length(s)<2./3.||(spokesVisualizeColors&&length(s)<4./3.)) {
+ if(dstnce<2./3.||(spokesVisualizeColors&&dstnce<4./3.)) {
             float decayCanceller=1.;
             if(spokesVisualizeColors)decayCanceller = 2.;
             //if(morph!=0.)decayCanceller=decayCanceller*decayCanceller;
@@ -1350,7 +1383,7 @@ if(onehundredfortyfourthousand)
  int march= int(mod(hyperCore,4.));
  float color = 1.;
  if (march==1||march==3)color = -1.;
- if(length(s)<2./3.)
+ if(dstnce<2./3.)
  {
      vec2 move =-d.yx*volume/8.;
      if(march==0||march==3)oo+=color*sealedMan(s*5.,move);
@@ -1360,9 +1393,8 @@ if(onehundredfortyfourthousand)
 }
 
    colorAccumulator+=s;
-   if(Refractelate&&length(s)>refractelC){s/=refractelC;} //refractelC/=4./3.;}
+   if(Refractelate&&dstnce>refractelC){s/=refractelC;} //refractelC/=4./3.;}
 
-                             
    s=vec2(
         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
@@ -1382,7 +1414,6 @@ if(onehundredfortyfourthousand)
 
    s.x=log(abs(s.x))/log(baseN);
    //traditionally be e or 3 probably 1.5 to 4
-
     if(Spoker&&loops+counter+1.<=hyperCore) s/=2.+1.5*zoom/lfc;//engage spokelover s/=2.+superspokes
    
    if(spokelover&&counter<hyperCore){
@@ -1397,19 +1428,16 @@ if(onehundredfortyfourthousand)
         continuumCounter+=continuumCore;
     }
   
-   float dstnce = length(s);//"distance" may be reserved keyword
    
 
 if(dstnce<4./3.&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
    
                              //              s*=refactorCores;c*=refactorCores;
+                             dstnce = length(s);
 
 for(int i=0;i<20; i++)
-if(dstnce<2./3.&& loops+counter-continuumCounter<=hyperCore)//not sure if i is 20 or >20
+if(dstnce<CORE_DELIMITER&& loops+counter-continuumCounter<=hyperCore)//not sure if i is 20 or >20
 {
-
-           
-      
 
 
  s*=2.;dstnce*=2.;loops++;
@@ -1422,7 +1450,13 @@ if(dstnce<2./3.&& loops+counter-continuumCounter<=hyperCore)//not sure if i is 2
        
        
    }
-       
+   
+   if(fieldPowerBoostMeta&&(float(i)>=hyperCore-loops-counter+continuumCounter)){
+       float powerBoost =2.71828*(log(.5)*dstnce*(sqrt(2.))/1.5);
+       s*=pow(dstnce,powerBoost);
+       dstnce*=pow(dstnce,powerBoost);
+
+   }
 
   float wise = 1.;
   
@@ -1431,13 +1465,13 @@ if(dstnce<2./3.&& loops+counter-continuumCounter<=hyperCore)//not sure if i is 2
   else  if(mod(float(i),4.)==2.)wise= -1.;
   else  if(mod(float(i),4.)==3.)wise=1.;
   
+  
   if(metaCarousel!=0.
      &&(float(i)>=hyperCore-loops-counter+continuumCounter+1.))     //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
         s=spin2(s,time*wise*metaCarousel*(1.+petals/6.)*rate);
 
 }
 else break;
-
 }else break;
 
 
@@ -1912,7 +1946,8 @@ vec3 xx(vec2 s, vec2 t){
                                    if(wheel) m =  s/length(freed(coords))+coords.yx;//this is essentially just p as in the mandelbrot x <== x^2+p
 
       for (int f=0;f<40;f+=1)if(abs(s.y)<19.){
-          s=vec2((s.x*s.x-s.y*s.y)-t.x-m.x, 2.0*s.x*s.y-t.y-m.y);//this is {s^2}
+          s=vec2((s.x*s.x-s.y*s.y)-t.x-m.x, 2.0*s.x*s.y-t.y-m.y);//this is {s^2} (try dividing by 2)
+          
   s.x=log(abs(s.x));
 }
 

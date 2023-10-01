@@ -69,7 +69,7 @@ function startSound(e){
        
         
         
-        let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth));
+        let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth));
         initialAngleSound[id] = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi);
         let frequency = Math.pow(2.,((((initialAngleSound[id]*window.flip)/pi/2*12+correction)*window.flip-window.flip*window.twist/2.))/12.)*window.ConcertKey/2.;
         //sound[id].pitch=frequency;
@@ -107,7 +107,7 @@ if (!sheetTranslucent&&osmd!=null) correlationForText += document.getElementById
             id = touchNumber.get(e.identifier);
         
         
-        let volume= -Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth));
+        let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth));
         let angleSound = Math.atan2(y,x);
         angleSound=((angleSound-initialAngleSound[id])+pi/2.+4.*pi)%(2*pi)*window.flip+initialAngleSound[id];
    
@@ -126,7 +126,31 @@ if (!sheetTranslucent&&osmd!=null) correlationForText += document.getElementById
 }
                                                              let cycle=0;
 let c = document.getElementById("container");
-
+                                 
+                                 
+                                var pressure = 1.;
+                                function getPressure(event){
+                                   if (event.pressure === 0) {
+                                     // No pressure
+                                       pressure=1;
+                                   } else if (event.pressure === 1) {
+                                     pressure = 1;
+                                   } else {
+                                     // Default
+                                     pressure = event.pressure;
+                                   }
+                                }
+             c.addEventListener(
+               "pointerdown",getPressure
+               ,
+               false,
+             );
+                                 c.addEventListener(
+                                   "pointermove",getPressure
+                                   ,
+                                   false,
+                                 );
+                                 
 if (//navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' &&)
 navigator.maxTouchPoints > 0){
     c.addEventListener('touchstart', function(e)
