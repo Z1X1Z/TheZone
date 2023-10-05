@@ -80,6 +80,7 @@ function callKey(event){
 
     //meta keys like ctrlKey must be processed first and should have symbol preferably
     if (document.activeElement.className=="num");//don't take hotkey's while menu number selector engaged
+    else if(key == "q" && event.ctrlKey)uniforms.squareClover.value=!uniforms.squareClover.value;
     else if(key == "x" && event.ctrlKey)uniforms.fieldPowerBoost.value=!uniforms.fieldPowerBoost.value;
     else if(key == "z" && event.ctrlKey)uniforms.fieldPowerBoostMeta.value=!uniforms.fieldPowerBoostMeta.value;
 
@@ -89,7 +90,7 @@ function callKey(event){
         if(window.ChristoDecrypto==0.)
         {
             window.ChristoDecrypto = -1.3247179572447460259609088544780973407344040569017333645340150503028278512455475940546993479817872803299109209947422074251089026390458977955943147570967234717541668390388674187517369315842535499082466223545337273504589879909568150627745509802486213012169894157524574548625075626524610368938904839932269952074975962828868556908150704513696109853352577281586033441141927828273765296032993584674231028483241695239006108543338219;
-            if(uniforms.metaCarousel.value==0)uniforms.metaCarousel.value=-1;
+            if(uniforms.metaCarousel.value==0)uniforms.metaCarousel.value=0;
         }
         else
         {
@@ -99,7 +100,8 @@ function callKey(event){
     }
     else if(key == "v" && event.ctrlKey) window.FeedbackSound =  !window.FeedbackSound;
     else if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=!uniforms.starOnDot.value;
-    else if (key==" " && event.ctrlKey)instantaneousFreqSpirographColoring = (instantaneousFreqSpirographColoring+1)%2;//color mode 3 seems obsolete
+    //else if (key=="" && event.ctrlKey)instantaneousFreqSpirographColoring = (instantaneousFreqSpirographColoring+1)%2;//color mode 3 seems obsolete
+    else if (key=="m" && event.ctrlKey) uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value;
     else if(event.ctrlKey);//swallow remaining possibilities, muting keypress
     /*if(key == "k" && event.ctrlKey)
     {
@@ -134,7 +136,7 @@ function callKey(event){
     else if (key=="_"){rez *=1.1; renderer.setPixelRatio( rez);}
 
     else if (x==0)
-    {window.movementRate=1.618033988749; uniforms[ "rate" ].value=window.movementRate; }
+    {window.movementRate=1.618033988749; uniforms[ "rate" ].value=1.; }
     else if(x == 7&&!event.shiftKey)uniforms.musicAngelMan.value=(uniforms.musicAngelMan.value+1)%3;
     else if(x == 8&&!event.shiftKey)
     {
@@ -162,8 +164,8 @@ function callKey(event){
                         
     
     else if (key=="q") {
-        if          ( uniforms[ "colorCombo" ].value >10)          uniforms[ "colorCombo" ].value = 1;
-        else uniforms[ "colorCombo" ].value = (uniforms[ "colorCombo" ].value+1)%11;
+        if          ( uniforms[ "colorCombo" ].value >1)          uniforms[ "colorCombo" ].value = -1;
+        else uniforms[ "colorCombo" ].value = -(Math.abs(uniforms[ "colorCombo" ].value-1))%17;
     }
     
     else if (key=="Q") {
