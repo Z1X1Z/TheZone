@@ -704,7 +704,7 @@ function init() {
   rate: {value: 1.},
 
       zoom: {value: window.zoom },
-      colorCombo: {value: 1 },
+      colorCombo: {value: -1 },
         free: {value: false },
         MetaCored: {value: true },
         externalCores: {value: 0. },
@@ -758,7 +758,10 @@ dotted:{value:false},
   refactorCores:{value:1.},
 
   fieldPowerBoost:{value:false},
-  fieldPowerBoostMeta:{value:false}
+  fieldPowerBoostMeta:{value:false},
+
+  multiplicatorNexus:{value:false},//has problems may be discontinued
+  squareClover:{value:false}
 
   }
   ]);
@@ -1546,7 +1549,7 @@ else{//start drawing of just twenty four frets here
 let fretMultiplied = Math.round(24./((radialWarp<1)?radialWarp:1));
     
             for (var g=0; g<fretMultiplied; g++) {
-            const widt = starshipSize;
+            const widt = starshipSize/2.;
             let arm =(flip*g*radialWarp+twist)%24./24.*pi*2.;
 
             const lengt = (testar[(g+12)%24]-minTestar)/(maxTestar-minTestar);
@@ -1555,14 +1558,18 @@ let fretMultiplied = Math.round(24./((radialWarp<1)?radialWarp:1));
                       vop.setHSL((20-g)%24/24.,1.,.5);
 
                   
-                  starColorAttribute.setXYZW(starStride,1.,1.,1.,0.)
-                  starColorAttribute.setXYZW(starStride+1,1.,1.,1.,0.)
+                  starColorAttribute.setXYZW(starStride,1.,1.,1.,0.75)
+                  starColorAttribute.setXYZW(starStride+1,1.,1.,1.,0.75)
                   starColorAttribute.setXYZW(starStride+2,vop.r,vop.g,vop.b,1.)
-                  starColorAttribute.setXYZW(starStride+3,1.,1.,1.,0.)
+                  starColorAttribute.setXYZW(starStride+3,1.,1.,1.,0.75)
                   starColorAttribute.setXYZW(starStride+4,vop.r,vop.g,vop.b,1.)
                   starColorAttribute.setXYZW(starStride+5,vop.r,vop.g,vop.b,1.)
                 
 const rpio2 =arm+pi/2.;
+                
+const xBoost = -Math.sin(arm)*(1.+widt)/4./1.3247;
+const yBoost = -Math.cos(arm)*(1.+widt)/4./1.3247;
+                
 const x = widt*-Math.sin(rpio2);
 const y = widt*-Math.cos(rpio2);
 const xr = lengt*-Math.sin(arm);
@@ -1570,11 +1577,12 @@ const yr = lengt*-Math.cos(arm);
 const depth = -starShipDepthInSet+lengt*(1.-starShipDepthInSet);
 
                 
-                starPositionAttribute.setXYZ(starStride,-x,    -y,  depth)
-                starPositionAttribute.setXYZ(starStride+1,x,    y,  depth)
+                
+                starPositionAttribute.setXYZ(starStride,-x+xBoost,    -y+yBoost,  depth)
+                starPositionAttribute.setXYZ(starStride+1,x+xBoost,    y+yBoost,  depth)
                 starPositionAttribute.setXYZ(starStride+2,(xr+x), (yr+y),  depth)
                 
-                starPositionAttribute.setXYZ(starStride+3,-x, -y,  depth)
+                starPositionAttribute.setXYZ(starStride+3,-x+xBoost, -y+yBoost,  depth)
                 starPositionAttribute.setXYZ(starStride+4,(xr+x), (yr+y),  depth)
                 starPositionAttribute.setXYZ(starStride+5,(xr-x), (yr-y),  depth)
                 

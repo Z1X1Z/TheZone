@@ -316,7 +316,11 @@
                     <input type="checkbox" id="Dancer" name="t"  onclick= "
                        key  = 's';
                        callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       
                     <label for="Dancer">Dancer!</label><br>
+                    
+                    <input type="checkbox" id="multiplicatorNexus" name="t"  onclick= "uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value">
+                        <label for="multiplicatorNexus">Slippery Spokes!</label><br>
 
                          <input type="checkbox" id="Reverse Colors" name="t"  onclick= "
                              key  = ';';
@@ -380,25 +384,25 @@
                                  
                 <form>
 
-                      <input type="radio" id="OriginalOrange" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=7;">
+                      <input type="radio" id="OriginalOrange" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=-7;">
                       <label for="OriginalOrange">Original Orange!</label><br>
-                  <input type="radio" id="GreenAndPink" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=2;">
+                  <input type="radio" id="GreenAndPink" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=-2;">
                   <label for="GreenAndPink">Green and Pink!</label><br>
-                  <input type="radio" id="OddOrange" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=3;">
+                  <input type="radio" id="OddOrange" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=-3;">
                   <label for="OddOrange">Odd Orange!</label><br>
-                  <input type="radio" id="YellowAndPurple" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=4;">
+                  <input type="radio" id="YellowAndPurple" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=-4;">
                   <label for="YellowAndPurple">Yellow and Purple!</label><br>
 
-                  <input type="radio" id="BlueAndPink" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=5;">
+                  <input type="radio" id="BlueAndPink" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=-5;">
                   <label for="BlueAndPink">Blue and Pink!</label><br>
 
-                  <input type="radio" id="Glowing" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=6;">
+                  <input type="radio" id="Glowing" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=-6;">
                   <label for="Glowing">Glowing!</label><br>
 
-                    <input type="radio" id="Rainbow" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=1;">
+                    <input type="radio" id="Rainbow" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=-1;">
                     <label for="Rainbow">Rainbow!</label><br>
 
-                      <input type="radio" id="Inheritance" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=8;">
+                      <input type="radio" id="Inheritance" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=-8;">
                       <label for="Inheritance">Inheritance!</label><br>
                 </form>
 
@@ -796,6 +800,9 @@ void main(){
     uniform sampler2D EDEN;
     uniform int eden;
 
+    uniform bool multiplicatorNexus;
+    uniform bool squareClover;
+
     uniform int musicAngelMan;
     uniform bool fieldPowerBoost;
     uniform bool fieldPowerBoostMeta;
@@ -895,8 +902,11 @@ uniform bool NightAndDay;
         for (float f=0.;f<iterations;f++)if(abs(z.y+z.x)>2.){h=vec3(0.);break;}
         else {z=vec2(((z.x*z.x-z.y*z.y)-g.x+t.x/2.),(2.0*z.x*z.y-g.y+t.y/2.));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
         
-        h+=(vec3(z.x*z.y,z.x+.144,z.y-.0333*(1.-z.y))+.1)
-        /length(z)/iterations*2./3.;
+        h+=vec3(
+                17.*(z.x*z.y-clamp(z.x,0.,10000.)),
+                2.*(z.x+abs(z.y)),
+                z.y)
+        /length(z)/iterations*2./3.;//*(1.-length(g));
         }
     return h;
     }
@@ -924,7 +934,7 @@ uniform bool NightAndDay;
           l=length(z)/40.;//clouds and face
           break;}
       else{
-          z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x/7.),2.0*z.x*z.y-g.y+t.y/7.);
+          z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x/7.),2.0*z.x*z.y-g.y-t.y/7.);
           l=abs(z.y)*6.;//smooths middle horn, removes some clouds
           if(z.x>-.1)l=z.x*200.;}//face with closed small holes
       return vec3(1.-l);
@@ -958,7 +968,7 @@ uniform bool NightAndDay;
              break;
          }
          else{
-             s=vec2(-1./(s.x*s.x-s.y*s.y-p.x+t.x/7.), 2.0*s.x*s.y-p.y+t.y/7.);
+             s=vec2(-1./(s.x*s.x-s.y*s.y-p.x+t.x/7.), 2.0*s.x*s.y-p.y-t.y/7.);
              l=abs(s.y)*3.5;//refines middle horn, optional
              if(s.x>-.1)l=s.x*50.;//closes small holes
              d+=length(s)/10.;
@@ -1204,18 +1214,16 @@ float r, b, l;
                                   
                             
 vec3 tol(vec2 p, vec2 t){
-                         
-                                 
-                                 
+
                          vec2 pWithoutChiralizer = p;
-                         if(chirality==-1)p=p.yx;
+                         if(chirality==-1){p=p.yx;}
 vec2 colorAccumulator =vec2(0.);
 vec3 heartColors = vec3(0.);
 float lfc = length(freed(coords));
 
 float precores = .25/log(.5);
 
-if(morph!=0.&&!wheel)precores=precores+2.*log(2.);
+if(morph!=0.)precores=precores+2.718*log(2.);
 if(refactorCores!=1.)precores=-.0;
 
 float cored =0.;
@@ -1230,7 +1238,6 @@ if(refactorCores>1.)
     }
 else if (refactorCores==0.) p/=3.;
 vec2 s=p;
-
 
 
 float c = length(s);
@@ -1287,10 +1294,37 @@ if(fieldPowerBoost){
 //  else if(zoom>1.)for(int i=0;i<int(crs); i++)if(c>4./3.&&loops<-cored){s/=2.;c/=2.;loops++;coresIn++;}else break;//UpCore not in use here, but rather in the starshipMod
 //for(int i=0;i<int(crs); i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
 
+
+if(squareClover)s/=vec2(sqrt(2.-s.x*s.x),sqrt(2.-s.y*s.y))/s;
+
+
+
+
+
+
+
+
+
+
+
+
+float CORE_DELIMITER;
+if(true||morph<.5)CORE_DELIMITER=1./1.32471795724474;//try different truncations of  -1.3247179572447460259609088544780973407344040569017333645340150503028278512455475940546993479817872803299109209947422074251089026390458977955943147570967234717541668390388674187517369315842535499082466223545337273504589879909568150627745509802486213012169894157524574548625075626524610368938904839932269952074975962828868556908150704513696109853352577281586033441141927828273765296032993584674231028483241695239006108543338219;
+else {
+CORE_DELIMITER=2./3.;//t*=1.5;
+}
+
 loops=0.;
 float hyperCore=0.;
 
-float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
+
+
+
+
+
+float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;
+
+//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
 //log stabalization constant seems to be 1./log(3.)+(1.-1./log(3.))/1.5 from 1./log(3.)+(1.-1./log(3.))/2.
 //if(morph!=0.)cored*=3./2.;//stabilize morph dance collaboration
 
@@ -1298,15 +1332,26 @@ float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;//.9551195 is bas
 float dif = 3.-(1.-.47805268028830)/3.;
 float equilibriator = 1.;
 if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
-if(MetaCored)hyperCore=cored*2./3.+
-                    (
-                     (log(lfc))*logStabilizationConstant
-                      +length(s)
-                     )*equilibriator;
+   
+   
+   
+if(MetaCored)hyperCore=
+   cored*2./3.+
+    log(lfc*1.5/CORE_DELIMITER
+        )*logStabilizationConstant*equilibriator+1.;
+   
+   
+   
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
-   hyperCore+=1.125/log(.5);
-if(cloverSlide&&!wheel)hyperCore+=1./log(.5);
+
+   
+      hyperCore+=1.25/log(.5);
+if(cloverSlide&&!wheel)hyperCore+=.75/log(.5);
    else if(cloverSlide&&wheel)hyperCore+=.5/log(.5);
+
+   if(multiplicatorNexus)hyperCore-=.5/log(.5);
+   if(continuumClover)hyperCore-=.75/log(.5);
+
 //if(fieldPowerBoost)hyperCore+=1./log(.5);
    
 if(outerCoresOff)hyperCore=0.;
@@ -1339,14 +1384,33 @@ vec3 beta =vec3(1.);
 
 float dstnce = length(s);//"distance" may be reserved keyword
 
-float CORE_DELIMITER;
-if(morph==0.)CORE_DELIMITER=1./1.3247179572447460259609088544780973407344040569;
-else {CORE_DELIMITER=2./3.;t/=1.5;}
+float coreBooster=0.;
+float hyperCoreBoosted = hyperCore;
+float colorShift = 0.;
 
-for (float counter=0.;counter<iterations;counter++)if(dstnce<35.){
+vec2 multCrossTwist;
+if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
+{
+     multCrossTwist=spin2(s,atan(s.x,s.y)*1.5*petals/(6.+petals))*sign(.5-morph)//*equilibriator/CORE_DELIMITER
+     /dstnce;
+            multCrossTwist*=multCrossTwist;
+                          coreBooster=length(multCrossTwist)/log(.5)*length(coords);
+
     
+}
+                          
+                          
+                          
+                          
+for (float counter=0.;counter<iterations;counter++)if(dstnce<40.){
+         
+         if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
+
+                           // if(!true&&morph<.5)CORE_DELIMITER=1./dstnce*pow(2.,4./12.)*equilibriator;
+                            
     if(spirated!=0.&&dstnce<CORE_DELIMITER)  //works well<(n-1)/n
     s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
+    dstnce = length(s);
 
            vec2 cloverMAP = (spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+PI))*2./3.+.5;
                                    
@@ -1380,7 +1444,7 @@ for (float counter=0.;counter<iterations;counter++)if(dstnce<35.){
 if(onehundredfortyfourthousand)
 {
  
- int march= int(mod(hyperCore,4.));
+ int march= int(mod(hyperCoreBoosted,4.));
  float color = 1.;
  if (march==1||march==3)color = -1.;
  if(dstnce<2./3.)
@@ -1414,36 +1478,35 @@ if(onehundredfortyfourthousand)
 
    s.x=log(abs(s.x))/log(baseN);
    //traditionally be e or 3 probably 1.5 to 4
-    if(Spoker&&loops+counter+1.<=hyperCore) s/=2.+1.5*zoom/lfc;//engage spokelover s/=2.+superspokes
+    if(Spoker&&loops+counter+1.<=hyperCoreBoosted) s/=(2.+CORE_DELIMITER/1.5*zoom/lfc);//engage spokelover s/=2.+'superspokes'
    
-   if(spokelover&&counter<hyperCore){
+   if(spokelover&&counter<hyperCoreBoosted){
         if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
         else s/=sqrt(2.);
         }
    
    
    if(continuumClover){//engage continualization
-       float continuumCore=(-loops-counter+continuumCounter+hyperCore)*zoom/(lfc-zoom);
-       if(loops+counter<=hyperCore+continuumCounter) s/=pow(2.,pow(.5,continuumCore));
+       float continuumCore=(-loops-counter+continuumCounter+hyperCoreBoosted)*zoom/(lfc-zoom);
+       if(loops+counter<=hyperCoreBoosted+continuumCounter) s/=pow(2.,pow(.5,continuumCore));
         continuumCounter+=continuumCore;
     }
   
-   
+dstnce = length(s);
 
 if(dstnce<4./3.&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
    
                              //              s*=refactorCores;c*=refactorCores;
-                             dstnce = length(s);
-
-for(int i=0;i<20; i++)
-if(dstnce<CORE_DELIMITER&& loops+counter-continuumCounter<=hyperCore)//not sure if i is 20 or >20
+                          float   dstnce = length(s);
+for(int i=0;i<200; i++)//not sure if i is 20 or >20
+if(dstnce<CORE_DELIMITER&& loops+counter-continuumCounter<=hyperCoreBoosted)
 {
 
 
  s*=2.;dstnce*=2.;loops++;
  if (cloverSlide)
    {
-       if(float(i)>hyperCore-loops-counter+continuumCounter)
+       if(float(i)>hyperCoreBoosted-loops-counter+continuumCounter)
        loops-=2.*dstnce;
        else
        loops-=dstnce/4.;
@@ -1451,13 +1514,12 @@ if(dstnce<CORE_DELIMITER&& loops+counter-continuumCounter<=hyperCore)//not sure 
        
    }
    
-   if(fieldPowerBoostMeta&&(float(i)>=hyperCore-loops-counter+continuumCounter)){
+   if(fieldPowerBoostMeta&&(float(i)>=hyperCoreBoosted-loops-counter+continuumCounter)){
        float powerBoost =2.71828*(log(.5)*dstnce*(sqrt(2.))/1.5);
        s*=pow(dstnce,powerBoost);
        dstnce*=pow(dstnce,powerBoost);
 
    }
-
   float wise = 1.;
   
   if(mod(float(i),4.)==0.)wise=1.;
@@ -1467,36 +1529,36 @@ if(dstnce<CORE_DELIMITER&& loops+counter-continuumCounter<=hyperCore)//not sure 
   
   
   if(metaCarousel!=0.
-     &&(float(i)>=hyperCore-loops-counter+continuumCounter+1.))     //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
+     &&(float(i)>=hyperCoreBoosted-loops-counter+continuumCounter+1.))     //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
         s=spin2(s,time*wise*metaCarousel*(1.+petals/6.)*rate);
 
 }
 else break;
+                             colorShift+=coreBooster;
 }else break;
-
-
+///if(multiplicatorNexus)s*=colorShift/88.8;
 vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
-                     if(colorCombo==7) o=vec3(s.y,s.x/9.5,1.-s.x/12.);
+                     if(colorCombo==-7) o=vec3(s.y,s.x/9.5,1.-s.x/12.);
                              else if(colorCombo==0) o=vec3(s.x/s.y)*sign(s.x*s.y)*22.;
-   else if (colorCombo==10)o = vec3(0.);
-                     else if(colorCombo==2) o=vec3(s.y/100.-s.x*s.y/888.+s.y/50000.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.+s.y/50000.);
-                     else if(colorCombo==3) o= vec3(s.x/8.-s.y/s.x/7000.,1.-s.x/16.,s.y/100.);
-                     else if(colorCombo==4) o= vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.);
-                     else if(colorCombo==5)  o=vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.);
-                     else if(colorCombo==6) o=  vec3(-sin(time*1.)*s.y/100.-sin(time*gr)*s.x*s.y/888.,s.x/8.-sin(time*(-gr+1.))*s.y/s.x/2000.,1.-sin(time*(gr+1.))*s.x/20.);
-                    else if(colorCombo==1) {
+   else if (colorCombo==-10)o = vec3(0.);
+                     else if(colorCombo==-2) o=vec3(s.y/100.-s.x*s.y/888.+s.y/50000.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.+s.y/50000.);
+                     else if(colorCombo==-3) o= vec3(s.x/8.-s.y/s.x/7000.,1.-s.x/16.,s.y/100.);
+                     else if(colorCombo==-4) o= vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.);
+                     else if(colorCombo==-5)  o=vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.);
+                     else if(colorCombo==-6) o=  vec3(-sin(time*1.)*s.y/100.-sin(time*gr)*s.x*s.y/888.,s.x/8.-sin(time*(-gr+1.))*s.y/s.x/2000.,1.-sin(time*(gr+1.))*s.x/20.);
+                    else if(colorCombo==-1) {
                               o= (1.-(vec3(s.y/125.-s.x*s.y/888.+s.y/25000.,s.x/8.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
                                            *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
                                            *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
                                                 }
-                                else if(colorCombo==8) {
+                                else if(colorCombo==-8) {
                                             s=-colorAccumulator*(coresIn+1.)*((coresIn+2.)/(60.+1.)-.5);
 
                                             o= (1.-(vec3(abs(s.y)-s.x*s.y/888.+s.y/25000.,s.x/20.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
                                                          *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
                                                          *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
                                                               }
-   else if(colorCombo==9) {
+   else if(colorCombo==-9) {
   //   if(wheel)heartColors=(vec3(s.x*s.y,s.x+.2,s.y-.3*(1.-s.x))+.3)/length(s);
 
    float colorFlip=-abs(coresIn-crs/2.)*sign(coresIn/crs*2.-1.);
@@ -1510,10 +1572,39 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                       }
                       
                       
-
+                    
+                      
+                      
+                      
+                      
+                      ///
+                      else if(colorCombo==-11) o=vec3(s.y/100.-s.x*s.y/888.+s.y/50000.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.+s.y/50000.).yxz;
+                      
+                      else if(colorCombo==-12) o=vec3(s.y/100.-s.x*s.y/888.+s.y/50000.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.+s.y/50000.).zxy;
+                      else if(colorCombo==-13){
+                      o=vec3(s.y/100.-s.x*s.y/888.+s.y/50000.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.+s.y/50000.);
+                      o=1.-o.yxz*o.zxy*o.yzx;
+                      }
+                      else if(colorCombo==-14){
+                      o=vec3(s.y/100.-s.x*s.y/888.+s.y/50000.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.+s.y/50000.);
+                      o=1.-o.yxz*o.zxy*o.xyz;
+                      }
+                      else if(colorCombo==-15){
+                      o=vec3(s.y/100.-s.x*s.y/888.+s.y/50000.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.+s.y/50000.);
+                      o=1.-o.yxz*o.zxy*o.xzy;
+                      }
+                      else if(colorCombo==-16){
+                      o=vec3(s.y/100.-s.x*s.y/888.+s.y/50000.,s.x/8.-s.y/s.x/2000.,1.-s.x/20.+s.y/50000.);
+                      o=1.-o.xyz*o.zxy*o.yzx;
+                      }
+                      
+                      /*
+                      (1.-(vec3(s.y/125.-s.x*s.y/888.+s.y/25000.,s.x/8.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
+                                   *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
+                                   *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
+                      */
                       if(Inherited)o*=1.-colorAccumulator.x/colorAccumulator.y*3.;
 
-                      
           if(colorInverter==true){
                       o.r*=-sin(time);
                       o.g*=abs(-sin(time*gr));
@@ -2284,33 +2375,42 @@ vec2 dance = vec2(0.);
                    else if (Character==0){
                        vec2 characterPSpun =p*2.;
                        mannyFace = (face(characterOnTrailP*1.22112211,moveDynamic));//,0.,1.);
-                       mny=bod(characterOnTrailP,moveDynamic)+heart(characterPSpunToKey,moveDynamic)+shiny(characterOnTrailP*1.22112211,moveDynamic)+clamp(mannyFace,0.,1.);
+                       mny=bod(characterOnTrailP,moveDynamic)+shiny(characterOnTrailP*1.22112211,moveDynamic)+clamp(mannyFace,0.,1.);
                    }
                    else if (Character==1){mny = MannyWoManny(characterOnTrailP,
                                                         lerper,move/8.
                                                         )+robeL(characterOnTrailP,lerper,move/5.
-                                                                )*.95+heart(characterPSpunToKey,    moveDynamic);}
+                                                                )*.95;}
                    else if (Character==2){
-                       mny=bride(characterOnTrailP*gr,moveDynamic/7.)+dress(characterOnTrailP*1.5,-moveDynamic/7.)*2.+heart(characterPSpunToKey,moveDynamic);
+                       mny=bride(characterOnTrailP*gr,moveDynamic/7.)+dress(characterOnTrailP*1.5,-moveDynamic/7.)*2.;
                        swordSkew+=.5;}
                    else if (Character==3||Character==4){
-                       float heartSize = 1.;
-                       if (Character==0&&Character!=4) heartSize=5.;
-                       else if (Character==4) heartSize=2.;
-
-                       mny=bod(characterOnTrailP,moveDynamic)+heart(characterPSpunToKey*heartSize,moveDynamic)+faceFORWARDstatic(characterOnTrailP*angelSize,moveDynamic);
+                      
+                       mny=bod(characterOnTrailP,moveDynamic)+faceFORWARDstatic(characterOnTrailP*angelSize,moveDynamic);
                    }
-                   else if (Character==5)mny=lion(fourcreaturePlayerP,vec2(inversion,0.))+bodyFourCreatureCharacter(characterOnTrailP,moveDynamic)+heart(characterPSpunToKey,moveDynamic);
+                   else if (Character==5)mny=lion(fourcreaturePlayerP,vec2(inversion,0.))+bodyFourCreatureCharacter(characterOnTrailP,moveDynamic);
                    else if (Character==6){
-                       mny=eaglePerched(fourcreaturePlayerP,vec2(inversion,0.))+bodyFourCreatureCharacter(characterOnTrailP,moveDynamic)+heart(characterPSpunToKey,moveDynamic);
+                       mny=eaglePerched(fourcreaturePlayerP,vec2(inversion,0.))+bodyFourCreatureCharacter(characterOnTrailP,moveDynamic);
                        swordSkew+=1.;}
-                   else if (Character==7)mny=ox(fourcreaturePlayerP,vec2(inversion,0.))+bodyFourCreatureCharacter(characterOnTrailP,moveDynamic)+heart(characterPSpunToKey,moveDynamic);
-                   else if (Character==8)mny=man(fourcreaturePlayerP,vec2(inversion,0.))+bodyFourCreatureCharacter(characterOnTrailP,moveDynamic)+heart(characterPSpunToKey,moveDynamic);
+                   else if (Character==7)mny=ox(fourcreaturePlayerP,vec2(inversion,0.))+bodyFourCreatureCharacter(characterOnTrailP,moveDynamic);
+                   else if (Character==8)mny=man(fourcreaturePlayerP,vec2(inversion,0.))+bodyFourCreatureCharacter(characterOnTrailP,moveDynamic);
                    else if (Character==9)mny=bod(characterOnTrailP,moveDynamic)+heart(characterPSpunToKey*(2.)*pow(1.3247,3.),moveDynamic*3.)+clamp(face(characterOnTrailP*1.22112211,moveDynamic)+heart(characterPSpunToKey*min(resolution.x,resolution.y)/max(resolution.x,resolution.y)
                                                                             /gr,moveDynamic/2.5),0.,1.);;
                        
            }
 
+                                 
+     float heartSize = gr;
+    if (Character==4) heartSize=2.;
+     if (Character!=9){
+     vec3 HEART = heart(characterPSpunToKey*heartSize,moveDynamic);
+     vec3 heartMultiplier = vec3(1.);
+     heartMultiplier=HEART.xyz+(1.-length(characterPSpunToKey*heartSize));
+    if(length(characterPSpunToKey*heartSize)>0.)heartMultiplier=vec3(1.);
+                if(mannyFace.z>0.)heartMultiplier+=mannyFace;
+   if(mannyFace.z>0.)heartMultiplier*=mannyFace;
+mny+=HEART*heartMultiplier;
+                           }
             if(musicAngelMan>0)
                                  {
                        float divisor = 1.;
