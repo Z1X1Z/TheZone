@@ -1480,7 +1480,11 @@ if(onehundredfortyfourthousand)
 
    s.x=log(abs(s.x))/log(baseN);
    //traditionally be e or 3 probably 1.5 to 4
-    if(Spoker&&loops+counter+1.<=hyperCoreBoosted) s/=(2.+CORE_DELIMITER/1.5*zoom/lfc);//engage spokelover s/=2.+'superspokes'
+    if(Spoker&&loops+counter+1.<=hyperCoreBoosted)
+                             {
+               hyperCore+=1./log(.5);
+                             s/=(2.+CORE_DELIMITER/1.5*zoom/lfc);//engage spokelover s/=2.+'superspokes'
+                             }
    
    if(spokelover&&counter<hyperCoreBoosted){
         if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
