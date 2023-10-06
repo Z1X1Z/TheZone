@@ -1221,13 +1221,19 @@ vec2 colorAccumulator =vec2(0.);
 vec3 heartColors = vec3(0.);
 float lfc = length(freed(coords));
 
+
+float dif = 3.-(1.-.47805268028830)/3.;
+float equilibriator = 1.;
+if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
+   
+   
 float precores = .25/log(.5);
 
 if(morph!=0.)precores=precores+2.718*log(2.);
 if(refactorCores!=1.)precores=-.0;
 
 float cored =0.;
-if(MetaCored)cored= log(zoom)/log(.5)+precores;
+if(MetaCored)cored= log(zoom*equilibriator)/log(.5)+precores;
 else cored = centralCores;
 float loops=0.;
 if(cloverSlide)loops=-1.;
@@ -1329,10 +1335,6 @@ float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;
 //if(morph!=0.)cored*=3./2.;//stabilize morph dance collaboration
 
 //2.47805268028830 and 3 are solutions to x=log3(x**3)
-float dif = 3.-(1.-.47805268028830)/3.;
-float equilibriator = 1.;
-if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
-   
    
    
 if(MetaCored)hyperCore=
@@ -1345,8 +1347,8 @@ if(MetaCored)hyperCore=
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 
    
-      hyperCore+=1.25/log(.5);
-if(cloverSlide&&!wheel)hyperCore+=.75/log(.5);
+      hyperCore+=1./log(.5);
+if(cloverSlide&&!wheel)hyperCore+=1./log(.5);
    else if(cloverSlide&&wheel)hyperCore+=.5/log(.5);
 
    if(multiplicatorNexus)hyperCore-=.5/log(.5);
