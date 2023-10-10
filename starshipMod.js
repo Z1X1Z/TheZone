@@ -111,8 +111,8 @@ const inputData = new Float32Array(bufferSize);
 
 window.zoomOutRatchetThreshold=1./bufferSize;
 
-const spirray0 = Array(bufferSize);
-const spirray1 = Array(bufferSize);
+let spirray0 = Array(bufferSize*2);
+let spirray1 = Array(bufferSize*2);
 const starArms = numberOfBins;
 let Fret = {x:null,y:null,index:null,volume:0.,note:null};
 const loudestFret=Array(4).fill(Fret);
@@ -164,40 +164,40 @@ const testar = Array(starArms);
 const mustarD = Array(starArms);
 let averagedAmp =  0;
 let len=0;
-let spiregulator=0;
 let phase = 0;
 let onO = false;
-let largest_loop = 0;
-let spirColors = Array(bufferSize)
 var colorInstant=0.;
 let nextPeak = 0.;
 let updateInstant = false;
+                            let innerSpirographFractionalSize=0;
 function makeSpirograph(){
       phase = phase % (pi*2);
       len = 0;
       const adjConstant = 1./pitch/4.*Math.PI*audioX.sampleRate/bufferSize/(2**1.5);
     var maxSamp=0.;
     for(var t=0; t<bufferSize;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
-        if(isFinite(maxSamp)&&isFinite(inputData[0])    )
-      for(var m = 1; m < bufferSize; m++)
+  
+    for(var m = 0; m < bufferSize; m++)
       {
               phase += adjConstant;//spira_pitch;
-
-              spirray0[m]=-Math.sin(phase)*(.5+inputData[m]/4./maxSamp);
-              spirray1[m]=-Math.cos(phase)*(.5+inputData[m]/4./maxSamp);
-       
-          
-             // len++;
+                var size = .75+inputData[m]/4./maxSamp;
+              spirray0[m]=-Math.sin(-phase)*size;
+              spirray1[m]=-Math.cos(-phase)*size;
       }
-      len -= 1;
-      largest_loop = 0;
-      spiregulator = 0;
-      for(let j = 0; j<bufferSize; j++)
-      {
-          if (Math.abs(spirray0[j])>largest_loop)largest_loop = Math.abs(spirray0[j]);
-          if (Math.abs(spirray1[j])>largest_loop)largest_loop = Math.abs(spirray1[j]);
-      }
-      spiregulator=largest_loop;//*on;
+    
+    
+     innerSpirographFractionalSize = ((innerSpirographFractionalSize + Math.round(bufferSize/((pitch>1)?pitch:1)))   %bufferSize)*2.;
+    
+    
+    for(var m = bufferSize; m <bufferSize + innerSpirographFractionalSize; m++)
+    {
+            phase += adjConstant;//spira_pitch;
+                var size = (.333+inputData[m-bufferSize]/6./maxSamp);
+            spirray0[m]=-Math.sin(phase*1.5/2.)*size;
+            spirray1[m]=-Math.cos(phase*1.5/2.)*size;
+     
+    }
+    
 }
 function spiral_compress(){
     let freq = 0;
@@ -512,8 +512,8 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                        let backBufferFlip=false;
                       let FeedbackrenderTarget,FeedbackrenderTargetFlipSide;
                        
-                                            const point = new Float32Array(bufferSize*3*2);
-                                              const pointColor = new Float32Array(bufferSize*4*2);
+                                            const point = new Float32Array(bufferSize*2*3*2*1.1);
+                                              const pointColor = new Float32Array(bufferSize*2*4*2*1.1);
                     
                     const star= new Float32Array(fftSize/2*3);
                     const starColors= new Float32Array(fftSize/2*4);
@@ -540,7 +540,6 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                     
                     
 function init() {
-     for(var i = 0; i<bufferSize-1;i++)spirColors[i]=new THREE.Color("black");
 
     renderTarget = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
                                                Math.min(window.innerWidth,window.innerHeight)*4./3.);
@@ -579,6 +578,8 @@ function init() {
 
      lineGeometry=new THREE.BufferGeometry();
      lineGeometry.dynamic = true;
+     lineMat.dynamic = true;
+
     //line.geometry.verticesNeedUpdate=true
          lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute( point,3 ));
        lineGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( pointColor, 3 ));
@@ -1123,6 +1124,7 @@ function runOSMD (){
         //OSMDUPDATER();
 
                  let   upOrDown = 1;
+                        let frameCount = 0;
    function animate( timestamp ) {
     
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
@@ -1198,7 +1200,7 @@ if( !window.touchMode&&!window.touchOnlyMode) {
     
     vectorize4();
     
-    if(on) makeSpirograph();
+   if(on)makeSpirograph();
 
 
     if (computeFPS)
@@ -1256,7 +1258,12 @@ if( !window.touchMode&&!window.touchOnlyMode) {
   if(instantaneousFreqSpirographColoring==1) {
     lineMat.color = colorSoundPURE;
   }
-lineMat.color = new THREE.Color("black")
+    frameCount=(frameCount+1)%2;
+    if(frameCount==0)
+lineMat.color = new THREE.Color("black");
+        else
+            lineMat.color = new THREE.Color("white");
+
   const d = -1.;
                             
                             let tx = 0, ty = 0,greyness=1.;
@@ -1266,11 +1273,11 @@ lineMat.color = new THREE.Color("black")
   var lineStride=0;
     if (on){
         scene.add(line)
-        for (let r= 0; r < spirray0.length-2; r +=1) {
+        for (let r= 0; r < bufferSize*2.; r +=1) {//supports upto r <buffersize*2
             const  txlast=tx;
             const  tylast=ty;
-            tx = spirray0[r]/spiregulator;
-            ty =  spirray1[r]/spiregulator;
+            tx = spirray0[r];
+            ty =  spirray1[r];
             const greynessLast = greyness
             //if(uniforms[ "metronome" ].value>1.)greyness=.5-.5*Math.sqrt(tx*tx+ty*ty)**1.3247*metroPhase;//seems wrong
             //else
@@ -1355,6 +1362,12 @@ if(!window.touchMode){
                     
                     const starshipseethrough = lengtOriginal;
                     //for(var yy=0;yy<3;yy++)
+                    
+                    
+                    
+                    
+                    
+                    
                     if (RockInTheWater==1)
                     {    let greyTone=(mustarD[g]+72)/lightingScaleStar;//may not be an exact value
                         let maxVop = Math.max(vop.r,Math.max(vop.g,vop.b))*2.
@@ -1362,15 +1375,21 @@ if(!window.touchMode){
                         let vopg=vop.g/maxVop;
                         let vopb=vop.b/maxVop;
                         //for(var yy=0;yy<3;yy++)
-                            starColorAttribute.setXYZW(starStride+0,vopr, vopg, vopb,1.)
+                        
+                        starColorAttribute.setXYZW(starStride+0,vopr, vopg, vopb,1.)
                         starColorAttribute.setXYZW(starStride+1,greyTone,greyTone,greyTone,1.)
                         starColorAttribute.setXYZW(starStride+2,vopr, vopg, vopb,1.)
-                            }
+                        
+                    }
+                    
                     else{
+                        
                         starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
                         starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,.0)
                         starColorAttribute.setXYZW(starStride+2,vop.r,vop.g,vop.b,1.)
+                        
                     }
+                    
                     starPositionAttribute.setXYZ(starStride,(xr-x), (yr-y),  depth)
                     starPositionAttribute.setXYZ(starStride+1, 0., 0.,  0.)
                     starPositionAttribute.setXYZ(starStride+2,(xr+x), (yr+y),  depth)
