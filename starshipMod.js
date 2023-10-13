@@ -34,7 +34,7 @@ window.zoom=1.;
 
 window.pixelShaderSize = 7;
 const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
-window.movementRate=1.618033988749;
+window.movementRate=1.32471795724474;
 window.radialWarp=1.;
 const starshipSize = Math.E**-1.3247/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
 const trailSecondsLong = 8.;
@@ -177,9 +177,10 @@ function makeSpirograph(){
       len = 0;
       const adjConstant = 1./pitch/4.*Math.PI*audioX.sampleRate/bufferSize/(2**1.5);
     var maxSamp=0.;
-    for(var t=0; t<bufferSize;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
+    let bufferPortion = Math.round(3./4.*bufferSize);
+    for(var t=0; t<bufferPortion;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
   
-    for(var m = 1; m < bufferSize-1; m++)
+    for(var m = 1; m < bufferPortion-1; m++)
       {
               phase += adjConstant;//spira_pitch;
                 var size = .75+inputData[m]/4./maxSamp;
@@ -188,9 +189,9 @@ function makeSpirograph(){
       }
     
     let lastInnerSpirographFractionalSize =innerSpirographFractionalSize;
-     innerSpirographFractionalSize = (innerSpirographFractionalSize + Math.round(audioX.sampleRate/pitch))   %bufferSize;
+     innerSpirographFractionalSize = (innerSpirographFractionalSize + Math.round(audioX.sampleRate/pitch))   %bufferPortion;
     let frameOfInputData = 0
-    for(var m = bufferSize+lastInnerSpirographFractionalSize; m <bufferSize+ innerSpirographFractionalSize; m++)
+    for(var m = bufferPortion+lastInnerSpirographFractionalSize; m <bufferPortion+ innerSpirographFractionalSize; m++)
     {
             phase2 += adjConstant;//spira_pitch;
         var size = (.333+inputData[frameOfInputData]/6./maxSamp);
@@ -393,8 +394,8 @@ pitchCol[f]  = colorSoundPURE;
                     
                     
                     
-                        flatline = pixelShaderToStarshipRATIO;
-                       if(window.movementRate>1.) flatline = window.movementRate;
+                        flatline = window.movementRate;
+                     //  if(window.movementRate>1.) flatline = window.movementRate;
                     
                     
          angle = ((angle+6*radialWarp)/12.)%1*2*pi;
@@ -1203,7 +1204,7 @@ if( !window.touchMode&&!window.touchOnlyMode) {
     
     vectorize4();
     
-   if(on)makeSpirograph();
+   makeSpirograph();
 
 
     if (computeFPS)
@@ -1274,7 +1275,7 @@ lineMat.color = new THREE.Color("black");
     const linePositionAttribute = lineGeometry.getAttribute( 'position' );
     const lineColorAttribute = lineGeometry.getAttribute( 'color' );
   var lineStride=0;
-    if (on){
+    {
         //scene.add(line)
         for (let r= 0; r < bufferSize*2.; r +=1) {//supports upto r <buffersize*2
             const  txlast=tx;
