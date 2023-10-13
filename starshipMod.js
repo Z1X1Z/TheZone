@@ -164,7 +164,8 @@ const testar = Array(starArms);
 const mustarD = Array(starArms);
 let averagedAmp =  0;
 let len=0;
-let phase = 0;
+                            let phase = 0;
+                            let phase2 = 0;
 let onO = false;
 var colorInstant=0.;
 let nextPeak = 0.;
@@ -172,12 +173,13 @@ let updateInstant = false;
                             let innerSpirographFractionalSize=0;
 function makeSpirograph(){
       phase = phase % (pi*2);
+        phase2 =  phase2 % (pi*2);
       len = 0;
       const adjConstant = 1./pitch/4.*Math.PI*audioX.sampleRate/bufferSize/(2**1.5);
     var maxSamp=0.;
     for(var t=0; t<bufferSize;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
   
-    for(var m = 0; m < bufferSize; m++)
+    for(var m = 1; m < bufferSize-1; m++)
       {
               phase += adjConstant;//spira_pitch;
                 var size = .75+inputData[m]/4./maxSamp;
@@ -185,16 +187,17 @@ function makeSpirograph(){
               spirray1[m]=-Math.cos(-phase)*size;
       }
     
-    
-     innerSpirographFractionalSize = ((innerSpirographFractionalSize + Math.round(bufferSize/((pitch>1)?pitch:1)))   %bufferSize)*2.;
-    
-    
-    for(var m = bufferSize; m <bufferSize + innerSpirographFractionalSize; m++)
+    let lastInnerSpirographFractionalSize =innerSpirographFractionalSize;
+     innerSpirographFractionalSize = (innerSpirographFractionalSize + Math.round(audioX.sampleRate/pitch))   %bufferSize;
+    let frameOfInputData = 0
+    for(var m = bufferSize+lastInnerSpirographFractionalSize; m <bufferSize+ innerSpirographFractionalSize; m++)
     {
-            phase += adjConstant;//spira_pitch;
-                var size = (.333+inputData[m-bufferSize]/6./maxSamp);
-            spirray0[m]=-Math.sin(phase*1.5/2.)*size;
-            spirray1[m]=-Math.cos(phase*1.5/2.)*size;
+            phase2 += adjConstant;//spira_pitch;
+        var size = (.333+inputData[frameOfInputData]/6./maxSamp);
+        frameOfInputData++;
+            spirray0[m]=-Math.sin(phase2)*size;
+            spirray1[m]=-Math.cos(phase2)*size;
+        
      
     }
     
@@ -648,7 +651,7 @@ function init() {
      scene.add(harmonicPzyghtheMesh)
 
      scene.add(meshTrail)
-   //  scene.add(line);
+     scene.add(line);
 
     shaderScene.add( circle );
      shaderScene.add(radialLine);
@@ -657,7 +660,7 @@ function init() {
      scene.add(starsANDwitnessesMesh)
 
      
-    // scene.add(starStreamMesh)
+     scene.add(starStreamMesh)
      
      
   FEEDBACKuniforms = THREE.UniformsUtils.merge([
@@ -1272,7 +1275,7 @@ lineMat.color = new THREE.Color("black");
     const lineColorAttribute = lineGeometry.getAttribute( 'color' );
   var lineStride=0;
     if (on){
-        scene.add(line)
+        //scene.add(line)
         for (let r= 0; r < bufferSize*2.; r +=1) {//supports upto r <buffersize*2
             const  txlast=tx;
             const  tylast=ty;
@@ -1465,7 +1468,7 @@ if(!window.touchMode){
         
         if ((RockInTheWater==1||RockInTheWater==2)&&xyStarParticleArray.length>0)
         {
-            scene.add(starStreamMesh)
+            //scene.add(starStreamMesh)
             
             
             
@@ -1577,10 +1580,10 @@ let fretMultiplied = Math.round(24./((radialWarp<1)?radialWarp:1));
                       vop.setHSL((20-g)%24/24.,1.,.5);
 
                   
-                  starColorAttribute.setXYZW(starStride,1.,1.,1.,0.75)
-                  starColorAttribute.setXYZW(starStride+1,1.,1.,1.,0.75)
+                  starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
+                  starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,1.)
                   starColorAttribute.setXYZW(starStride+2,vop.r,vop.g,vop.b,1.)
-                  starColorAttribute.setXYZW(starStride+3,1.,1.,1.,0.75)
+                  starColorAttribute.setXYZW(starStride+3,vop.r,vop.g,vop.b,1.)
                   starColorAttribute.setXYZW(starStride+4,vop.r,vop.g,vop.b,1.)
                   starColorAttribute.setXYZW(starStride+5,vop.r,vop.g,vop.b,1.)
                 
@@ -2154,10 +2157,11 @@ shaderScene.add( targets[n] );
                      
                      
                      
-circle.geometry.dispose();
-radialLine.geometry.dispose( );
-scene.remove(starStreamMesh);
-scene.remove(line);
+//circle.geometry.dispose();
+//radialLine.geometry.dispose( );
+//scene.remove(starStreamMesh);
+//scene.remove(line);
+if(uniforms.gameOn.value)
 for(var n = 0; n<targets.length;n++){
   shaderScene.remove( targets[n] );
   pG[n].dispose();
@@ -2249,7 +2253,7 @@ function calculatePitch ()
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 
 let tolerance; //, confidence;
-if(highORlow==1)tolerance=(totalAMP-1./bufferSize)**2.;
+if(highORlow==1)tolerance=(totalAMP-1./bufferSize**1.3247);
 else if (highORlow==2)tolerance = .5;//when I play different notes on harmonica it mostly hears C, this clears up the distinction of the notes
                         
 let period;
