@@ -1229,11 +1229,11 @@ if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
    
 float precores = .25/log(.5);
 
-if(morph!=0.)precores=precores+2.718*log(2.);
+if(morph!=0.)precores=precores-3./log(.5);
 if(refactorCores!=1.)precores=-.0;
 
 float cored =0.;
-if(MetaCored)cored= log(zoom*equilibriator)/log(.5)+precores;
+if(MetaCored)cored= log(zoom)/log(.5)+precores;
 else cored = centralCores;
 float loops=0.;
 if(cloverSlide)loops=-1.;
@@ -1244,7 +1244,6 @@ if(refactorCores>1.)
     }
 else if (refactorCores==0.) p/=3.;
 vec2 s=p;
-
 
 float c = length(s);
 
@@ -1314,12 +1313,13 @@ if(squareClover)s/=vec2(sqrt(2.-s.x*s.x),sqrt(2.-s.y*s.y))/s;
 
 
 
-float CORE_DELIMITER;
-if(true||morph<.5)CORE_DELIMITER=1./1.32471795724474;//try different truncations of  -1.3247179572447460259609088544780973407344040569017333645340150503028278512455475940546993479817872803299109209947422074251089026390458977955943147570967234717541668390388674187517369315842535499082466223545337273504589879909568150627745509802486213012169894157524574548625075626524610368938904839932269952074975962828868556908150704513696109853352577281586033441141927828273765296032993584674231028483241695239006108543338219;
+float CORE_DELIMITER=1./1.32471795724474;
+/*if(morph<.5)
+   CORE_DELIMITER=1./1.32471795724474;//try different truncations of  -1.3247179572447460259609088544780973407344040569017333645340150503028278512455475940546993479817872803299109209947422074251089026390458977955943147570967234717541668390388674187517369315842535499082466223545337273504589879909568150627745509802486213012169894157524574548625075626524610368938904839932269952074975962828868556908150704513696109853352577281586033441141927828273765296032993584674231028483241695239006108543338219;
 else {
 CORE_DELIMITER=2./3.;//t*=1.5;
 }
-
+*/
 loops=0.;
 float hyperCore=0.;
 
@@ -1383,7 +1383,6 @@ vec3 beta =vec3(1.);
 
 
 
-
 float dstnce = length(s);//"distance" may be reserved keyword
 
 float coreBooster=0.;
@@ -1405,12 +1404,12 @@ if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
                           
                           
 for (float counter=0.;counter<iterations;counter++)if(dstnce<40.){
-         
+
          if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
 
                            // if(!true&&morph<.5)CORE_DELIMITER=1./dstnce*pow(2.,4./12.)*equilibriator;
                             
-    if(spirated!=0.&&dstnce<CORE_DELIMITER)  //works well<(n-1)/n
+                            if(spirated!=0.&&dstnce<CORE_DELIMITER)  //works well<(n-1)/n
     s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
     dstnce = length(s);
 
@@ -1482,8 +1481,8 @@ if(onehundredfortyfourthousand)
    //traditionally be e or 3 probably 1.5 to 4
     if(Spoker&&loops+counter+1.<=hyperCoreBoosted)
                              {
-               hyperCore+=1./log(.5);
-                             s/=(2.+CORE_DELIMITER/1.5*zoom/lfc);//engage spokelover s/=2.+'superspokes'
+               hyperCore+=.5/log(.5);
+                             s/=2./log(3.);//engage spokelover s/=2.+'superspokes'
                              }
    
    if(spokelover&&counter<hyperCoreBoosted){
@@ -1507,7 +1506,6 @@ if(dstnce<4./3.&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
 for(int i=0;i<200; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER&& loops+counter-continuumCounter<=hyperCoreBoosted)
 {
-
 
  s*=2.;dstnce*=2.;loops++;
  if (cloverSlide)
@@ -1879,7 +1877,7 @@ return
                          z.y = -1./z.y;}
                //vv head vv
                    g=p;
-                   g.x-=.1;
+                  // g.x-=.1;
                    z=g;
                    for (int f=0;f<10;f+=1)if(abs(z.x+abs(z.y))>27.&&f>4){l=1.;break;}
                    else{z=vec2(-1./((z.x*z.x-z.y*z.y)-g.x+t.x/8.),(2.0*z.x*z.y-g.y+t.y/8.));
