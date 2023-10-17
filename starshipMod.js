@@ -567,7 +567,7 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                     
                     
                                            let coreTexture;
-                                           let coreData = new Float32Array(22*4);;
+                                           let coreData = new Float32Array(22*4).fill(1./1.324717);;
                                            
 function init() {
      
@@ -1990,8 +1990,8 @@ if(uniforms.gameOn.value&&allCaught)
     {
         polygons.push({
 
-             centerX:Math.cos(-2.*Math.PI/((metaLevel-level+2)-2)*n),
-             centerY:Math.sin(-2.*Math.PI/((metaLevel-level+2)-2)*n),
+             centerX:Math.cos(-2.*Math.PI/((metaLevel-level+.5))*n),
+             centerY:Math.sin(-2.*Math.PI/((metaLevel-level+.5))*n),
              dx:0,
              dy:0,
              caught:false,
@@ -2003,9 +2003,9 @@ if(uniforms.gameOn.value&&allCaught)
 
     }
 }
-else if(!uniforms.gameOn.value){polygons=[]; level = 0; metaLevel=1;}
+else if(!uniforms.gameOn.value){polygons=[]; level = 1; metaLevel=1;}
                                         
-                                        const baseMag=(1.-(metaLevel-level)/(metaLevel))/8.;
+                                        const baseMag=(1.-(metaLevel-level)/(metaLevel))/8.88;
                                         let compound = interpolation*baseMag/60.*window.movementRate/pixelShaderToStarshipRATIO;
 
 for(let n = 0; n < polygons.length; n++)
