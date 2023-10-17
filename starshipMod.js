@@ -106,7 +106,7 @@ var zoomOutEngage=false;
 const pi = Math.PI;
 const bufferSize = fftSize;
 const numberOfBins = fftSize/2.;
-
+var frequencies= new Float32Array(numberOfBins);
 const inputData = new Float32Array(bufferSize);
 
 window.zoomOutRatchetThreshold=1./bufferSize;
@@ -114,41 +114,57 @@ window.zoomOutRatchetThreshold=1./bufferSize;
 let spirray0 = Array(bufferSize*2);
 let spirray1 = Array(bufferSize*2);
 const starArms = numberOfBins;
-let Fret = {x:null,y:null,index:null,volume:0.,note:null};
+let Fret = {x:null,y:null,index:null,volume:0.,note:-12};
 const loudestFret=Array(4).fill(Fret);
-function vectorize4(){
+                            function vectorize4(){
     for(var g = 0;g<loudestFret.length;g++)loudestFret[g]=Object.assign({},Fret);
     let fretCount;
     if(onO) fretCount=starArms
-        else fretCount=24;
+        else fretCount=1024;
+    
+    let minDifference = 1.7;
     for (var g=0; g<fretCount; g++)if(isFinite(mustarD[g]))
     {
         
-        if (dataArray[g]>loudestFret[0].volume)
+        if (Math.abs(mustarD[g]%24-loudestFret[0].note%24)>minDifference&&dataArray[g]>loudestFret[0].volume)
         {
-            if (Math.abs(loudestFret[0].note-loudestFret[1].note)>.25){
-                loudestFret[3]=Object.assign({},loudestFret[2]); loudestFret[2]=Object.assign({},loudestFret[1]);
-                loudestFret[1]=Object.assign({},loudestFret[0]);loudestFret[0].index=g;
-            }
-                loudestFret[0].volume=dataArray[g];loudestFret[0].note = mustarD[g];
-            loudestFret[0].frequency = mustarD[g]
-        }
-        else if (dataArray[g]>loudestFret[1].volume)
-        {
-            if (Math.abs(loudestFret[1].note-loudestFret[2].note)>.25)
             {
+                loudestFret[3]=Object.assign({},loudestFret[2]);
+                loudestFret[2]=Object.assign({},loudestFret[1]);
+                loudestFret[1]=Object.assign({},loudestFret[0]);
+            }
             
-            loudestFret[3]=Object.assign({},loudestFret[2]); loudestFret[2]=Object.assign({},loudestFret[1]);
+            loudestFret[0].index=g;
+            loudestFret[0].volume=dataArray[g];loudestFret[0].note = mustarD[g];
+            loudestFret[0].frequency = frequencies[g];
+        }
+        
+        else if (Math.abs(mustarD[g]%24-loudestFret[0].note%24)>minDifference&&Math.abs(mustarD[g]%24-loudestFret[1].note%24)>minDifference&&dataArray[g]>loudestFret[1].volume)
+        {
+            {
+                loudestFret[3]=Object.assign({},loudestFret[2]);
+                loudestFret[2]=Object.assign({},loudestFret[1]);
             }
             loudestFret[1].index=g;
             loudestFret[1].volume=dataArray[g];
-            loudestFret[1].frequency = mustarD[g]
+            loudestFret[1].frequency = frequencies[g];
+            loudestFret[1].note = mustarD[g];
+
         }
-        else if(dataArray[g]>loudestFret[2].volume)
+        else if(Math.abs(mustarD[g]%24-loudestFret[0].note%24)>minDifference&&Math.abs(mustarD[g]%24-loudestFret[1].note%24)>minDifference&&Math.abs(mustarD[g]%24-loudestFret[2].note%24)>minDifference&&dataArray[g]>loudestFret[2].volume)
         {
-            if (Math.abs(loudestFret[2].note-loudestFret[3].note)>.25) loudestFret[3]=Object.assign({},loudestFret[2]);
-            loudestFret[2].index=g;loudestFret[2].volume=dataArray[g];loudestFret[2].frequency = mustarD[g]}
-        else if (dataArray[g]>loudestFret[3].volume){loudestFret[3].index=g;loudestFret[3].volume=dataArray[g];loudestFret[3].frequency = mustarD[g]}
+            
+            loudestFret[2].index=g;loudestFret[2].volume=dataArray[g];
+            loudestFret[2].frequency = frequencies[g];
+loudestFret[2].note = mustarD[g]
+        }
+        else if (Math.abs(mustarD[g]%24-loudestFret[0].note%24)>minDifference&&Math.abs(mustarD[g]%24-loudestFret[1].note%24)>minDifference&&Math.abs(mustarD[g]%24-loudestFret[2].note%24)>minDifference&&Math.abs(mustarD[g]%12-loudestFret[3].note%12)>minDifference&&dataArray[g]>loudestFret[3].volume){
+            loudestFret[3].index=g;loudestFret[3].volume=dataArray[g];
+            
+            loudestFret[3].frequency = frequencies[g];
+
+            loudestFret[3].note = mustarD[g];
+        }
     }
     for(var g = 0;g<loudestFret.length;g++)
     {
@@ -161,6 +177,7 @@ function vectorize4(){
 }
 
 const testar = Array(starArms);
+const testarContinuous = Array(starArms);
 const mustarD = Array(starArms);
 let averagedAmp =  0;
 let len=0;
@@ -187,7 +204,10 @@ function makeSpirograph(){
               spirray0[m]=-Math.sin(-phase)*size;
               spirray1[m]=-Math.cos(-phase)*size;
       }
-    
+    spirray0[0]=spirray0[1];//disconnect inner and outer spirograph
+    spirray1[0]=spirray1[1];
+    spirray0[bufferPortion]=spirray0[bufferPortion-1];
+    spirray1[bufferPortion]=spirray1[bufferPortion-1];
     let lastInnerSpirographFractionalSize =innerSpirographFractionalSize;
      innerSpirographFractionalSize = (innerSpirographFractionalSize + Math.round(audioX.sampleRate/pitch))   %bufferPortion;
     let frameOfInputData = 0
@@ -203,8 +223,13 @@ function makeSpirograph(){
     }
     
 }
+                     ///       let notesAverage = 0.;
+
 function spiral_compress(){
     let freq = 0;
+  //  notesAverage = 0.;
+  //  let notesAverageCOUNTER = 0.;
+
     const z = [...dataArray];
 
     for(let n = 0; n<starArms; n++){testar[n] = 0;mustarD[n] = 1;}
@@ -219,19 +244,14 @@ function spiral_compress(){
         freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
         else freq = audioX.sampleRate*n/numberOfBins
         //    freq = 440; //check for concert A
- 
-    var note24 =24*Math.log(freq/window.ConcertKey)/Math.log(2.)+49*2;//I would like this 69 to be a 49 as it is it centers around e6
-                          if (!onO){
+            frequencies[n]=freq;
+    var note24 =24*Math.log(freq/window.ConcertKey)/Math.log(2.)+49*2;
+
+
         testar[(Math.round(note24))%24] += Math.abs(z[n])*radialWarp;
-  
-    }
-    else{//if constinuous star is engaged pipe directly through avoiding the 24 modulo
-      testar[n] = Math.abs(z[n]);
-    }
+      testarContinuous[n] = Math.abs(z[n]);
                           mustarD[n] = note24;
-
-  }
-
+                            }
 };
 window.ConcertKey = 440;
 
@@ -320,11 +340,14 @@ function  move()
     for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
     totalAMP/=inputData.length;
         uniforms["totalAmp" ].value=totalAMP;
+        
+        
+        
         lastPitch = pitch;
-if (totalAMP>zoomOutRatchetThreshold) pitch =    audioX.sampleRate/calculatePitch();
+        pitch =    audioX.sampleRate/calculatePitch();
         const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
         if(!notNyquist) pitch = lastPitch;
-        
+
         
         
     if (isFinite(pitch) &&pitch>0&& notNyquist &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
@@ -509,7 +532,8 @@ let lineMat, lineGeometry, line;
 let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                      let scene, shaderScene,feedbackScene, feedbackSceneFlip;
 
-                     var minimumDimension=1;
+                                           var minimumDimension=1;
+                                           var maximumDimension=1;
                      var height=window.innerHeight,width=window.innerWidth;
                        let texture;
                        let renderTarget;
@@ -542,9 +566,13 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                     let xyStarParticleArray=Array();
                     
                     
-                    
+                                           let coreTexture;
+                                           let coreData = new Float32Array(22*4);;
+                                           
 function init() {
-
+     
+     coreTexture = new THREE.DataTexture( coreData, 22, 1,THREE.RGBAFormat,THREE.FloatType);
+     
     renderTarget = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
                                                Math.min(window.innerWidth,window.innerHeight)*4./3.);
 
@@ -766,7 +794,8 @@ dotted:{value:false},
   fieldPowerBoostMeta:{value:false},
 
   multiplicatorNexus:{value:false},//has problems may be discontinued
-  squareClover:{value:false}
+  squareClover:{value:false},
+  coreTextureSampler:{value:null}
 
   }
   ]);
@@ -828,6 +857,7 @@ function adjustThreeJSWindow()
     FEEDBACKuniforms.resolution.value.y = height;
 
       minimumDimension = Math.min(width,height);
+     maximumDimension = Math.max(width,height);
 
       height/=minimumDimension;
       width/=minimumDimension;
@@ -985,7 +1015,7 @@ function zoomRoutine(){
 
                                  let polygons=[];
                                  let level = 0;
-                                 let metaLevel=0;
+                                 let metaLevel=1;
                                  let polyRad=.1;
 
 let targets=[];
@@ -1129,6 +1159,7 @@ function runOSMD (){
 
                  let   upOrDown = 1;
                         let frameCount = 0;
+
    function animate( timestamp ) {
     
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
@@ -1157,18 +1188,21 @@ function runOSMD (){
      {
         
         var precores = .25/Math.log(.5);
-         if(uniforms.spirated.value!=0.&&uniforms.morph.value!=0.)precores=precores+2.;
-
-        const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
-         var equillibrator = 1.;
-         let distC=(d_x*d_x+d_y*d_y)**.5
-         if(distC>2./3.)equillibrator=distC/(distC-zoom);
+         if(uniforms.morph.value!=0.)precores=precores-3./Math.log(.5);
+         if(uniforms.refactorCores.value!=1.)precores=-.0;
+         
+         const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
+         var equilibriator = 1.;
+        // let distC=(d_x*d_x+d_y*d_y)**.5
+        // if(distC>2./3.)equilibriator=distC/(distC-zoom);
 
         
         uniforms[ "centralCores" ].value = Math.log(zoom)/Math.log(.5)+precores    ;
          if(uniforms[ "morph" ].value!=0.)uniforms[ "centralCores" ].value*=3./2.;//stabilize morph dance collaboration
 
-        uniforms[ "externalCores" ].value =(uniforms[ "centralCores" ].value)*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*logStabilizationConstant*equillibrator+equillibrator;
+        uniforms[ "externalCores" ].value =(uniforms[ "centralCores" ].value)*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*logStabilizationConstant*equilibriator+1;
+            uniforms[ "externalCores" ].value+=1./Math.log(.5)/equilibriator;
+
          if(uniforms.cloverSlide.value)uniforms[ "externalCores" ].value +=1./Math.log(.5);
 
         if(uniforms[ "Spoker" ].value&&uniforms[ "MetaCored" ].value)
@@ -1195,14 +1229,27 @@ if( !window.touchMode&&!window.touchOnlyMode) {
                volume =volume*audioX.sampleRate/bufferSize;
                        }
            else {volume=1.; lastVolume=1.; }
+    
     move();
     if(!zoomAtl41)zoomRoutine();
     infinicore();
 
-    
     spiral_compress();
     
     vectorize4();
+    
+    let coreShift=0;
+    for(var shift = 0.;shift<4;shift++)//find maximally different loudest note
+       if (Math.abs(Math.abs((note*2)%24-loudestFret[shift].note%24)-12)<Math.abs(coreShift-12))
+        coreShift=Math.abs((note*2)%24-loudestFret[shift].note%24)
+    
+    let coreIndex = (uniforms.externalCores.value>0.)?Math.floor(uniforms.externalCores.value):0;
+    if(!isNaN(loudestFret[0].volume)&&window.dynamicCoring)
+        coreData[coreIndex*4]=coreShift/24*2*2/3.;
+
+    coreTexture.needsUpdate=true;
+    uniforms.coreTextureSampler.value=coreTexture;
+    uniforms.coreTextureSampler.needsUpdate = true;
     
    makeSpirograph();
 
@@ -1325,9 +1372,9 @@ if(!window.touchMode){
     let starStride = 0;
     if(onO){
         for (var g=0; g<starArms; g++) {
-            if(isFinite(testar[g])){
-                if(testar[g]>maxTestar) { maxTestar=testar[g];}
-                if(testar[g]<minTestar) minTestar=testar[g];
+            if(isFinite(testarContinuous[g])){
+                if(testarContinuous[g]>maxTestar) { maxTestar=testarContinuous[g];}
+                if(testarContinuous[g]<minTestar) minTestar=testarContinuous[g];
             }
         }
         
@@ -1344,10 +1391,10 @@ if(!window.touchMode){
             
         {
             
-            if(isFinite(testar[g])&&testar[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.){
+            if(isFinite(testarContinuous[g])&&testarContinuous[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.){
                 
                 let arm =((flip*mustarD[g]+twist+12)*radialWarp)%24./24.*pi*2.;
-                const lengtOriginal=(testar[g]-minTestar)/(maxTestar-minTestar);//twice applied
+                const lengtOriginal=(testarContinuous[g]-minTestar)/(maxTestar-minTestar);//twice applied
                 var widt = (1.-lengtOriginal)*starshipSize;
                 if (widt==0)widt=starshipSize;
                 //var widt =starshipSize;
@@ -1419,10 +1466,9 @@ if(!window.touchMode){
                         starPositionAttribute.setXYZ(starStride+1, 0., 0.,  0.)
                         starPositionAttribute.setXYZ(starStride+2,0,0,0)
                     }
-                    var wideness =(testar[g]/255*totalAMP**.5-zoomOutRatchetThreshold)*starshipSize;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
+                    var wideness =(testarContinuous[g]/255*totalAMP**.5-zoomOutRatchetThreshold)*starshipSize;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
                     if(wideness<=0)wideness=1./255.*starshipSize;
                     var xyStarParticle={};
-                    xyStarParticle.amp = testar[g];
                     xyStarParticle.x=wideness*-Math.sin(rpio2);//this is the
                     xyStarParticle.xr=-Math.sin(arm)/fill;//this is the outwards length of each pulse
                     xyStarParticle.y=wideness*-Math.cos(rpio2);
@@ -1957,10 +2003,10 @@ if(uniforms.gameOn.value&&allCaught)
 
     }
 }
-else if(!uniforms.gameOn.value){polygons=[]; level = 0; metaLevel=0;}
+else if(!uniforms.gameOn.value){polygons=[]; level = 0; metaLevel=1;}
                                         
-                                        const baseMag=(1.-(metaLevel-level)/(metaLevel))/4.;
-                                        const compound = interpolation*baseMag/60.*window.movementRate/pixelShaderToStarshipRATIO;
+                                        const baseMag=(1.-(metaLevel-level)/(metaLevel))/8.;
+                                        let compound = interpolation*baseMag/60.*window.movementRate/pixelShaderToStarshipRATIO;
 
 for(let n = 0; n < polygons.length; n++)
 {
@@ -1991,7 +2037,7 @@ if (!on)neutralizer=0.;
 
                          }
          else {
-             distanceFromCenter= Math.pow((xFromCent*xFromCent+(yFromCent*yFromCent)),.5);
+             distanceFromCenter= Math.pow(xFromCent*xFromCent+yFromCent*yFromCent,.5);
              triggerDistance=distanceFromCenter;
              
              polygons[n].centerY += (d_y*neutralizer-polygons[n].dy)*MR;
@@ -2002,10 +2048,11 @@ if (!on)neutralizer=0.;
                         // polygons[n].dy*=1.-baseMag;
 
 
-        if (distanceFromCenter<=1)
+       // if (distanceFromCenter<=1)
         {
-            polygons[n].dx+=-Math.cos(angleTarget)*interpolation*compound;
-            polygons[n].dy+=-Math.sin(angleTarget)*interpolation*compound;
+            compound*=Math.abs(maximumDimension/minimumDimension-distanceFromCenter);
+            polygons[n].dx+=-Math.cos(angleTarget)*compound;
+            polygons[n].dy+=-Math.sin(angleTarget)*compound;
         }
                          
 

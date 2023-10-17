@@ -295,7 +295,17 @@
                  <label for="petalCount">Petal Quantity:</label>
                 <input type="number" id="petalCount" name="petalCount" class="num" onkeydown="uniforms.petals.value=document.getElementById('petalCount').value-6.">
                     </p>
-                <input type="checkbox" id="Center" name="t"  onclick= "
+                    <label for="coringConstant">Coring Constant (.5-2.):</label>
+                   <input type="number" id="coringConstant" name="coringConstant" class="num" onkeydown=
+                       "coreData.fill(document.getElementById('coringConstant').value)">
+                       </p>
+
+                       <input type="checkbox" id="dynamicCoring" name="t"  onclick= "
+                    key  = 'c';
+                    callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                 <label for="dynamicCoring">Dynamic Coring</label><br>
+                 
+                       <input type="checkbox" id="Center" name="t"  onclick= "
                     key  = 'c';
                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                  <label for="Center">Center</label><br>
@@ -725,7 +735,6 @@
         varying vec2 vUv;
         uniform sampler2D STAR;
         uniform sampler2D EDEN;
-
         uniform vec2 loudestFret1;
         uniform vec2 loudestFret2;
         uniform vec2 loudestFret3;
@@ -772,7 +781,6 @@ void main(){
        }
        else
        {
-           cutOutDegree=40.;
            vec2 scale = min(resolution.x,resolution.y)/resolution.yx;
            vec2 vUvScaled =(vUv-.5)*scale;
              vUvEagle = (vUvScaled*volumeFret1-loudestFret1/8.)/scale*2.+.5;
@@ -789,7 +797,7 @@ void main(){
 
              gl_FragColor=clamp((Pishon+Gihon+Tigris+Euphrates)
                       // -TheFifthRiver//alpha blended
-                       -vec4(TheFifthRiver.xyz,0.)*cutOutDegree// removing alpha blending removes transparency
+                       -TheFifthRiver
                        ,0.,1.)
     /vec4(vec3(1.5),1.)+TheFifthRiver;//vec4(vec3(2.),1.); //the divisor of the rivers is seemingly open to interpretation
     ;}
@@ -798,6 +806,8 @@ void main(){
     varying vec2 vUv;
     uniform sampler2D STAR;
     uniform sampler2D EDEN;
+    uniform sampler2D coreTextureSampler;
+
     uniform int eden;
 
     uniform bool multiplicatorNexus;
@@ -1224,7 +1234,7 @@ float lfc = length(freed(coords));
 
 float dif = 1.;//3.-(1.-.47805268028830)/3.;
 float equilibriator = 1.;
-if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
+//if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
    
    
 float precores = .25/log(.5);
@@ -1312,9 +1322,9 @@ if(squareClover)s/=vec2(sqrt(2.-s.x*s.x),sqrt(2.-s.y*s.y))/s;
 
 
 
+//float CORE_DELIMITER=1./1.3247179572447460;// /(1.618033988749+.618033988749);
 
-float CORE_DELIMITER=1./1.3247179572447460;// /(1.618033988749+.618033988749);
-/*if(morph<.5)
+   /*if(morph<.5)
    CORE_DELIMITER=1./1.32471795724474;//try different truncations of  -1.3247179572447460259609088544780973407344040569017333645340150503028278512455475940546993479817872803299109209947422074251089026390458977955943147570967234717541668390388674187517369315842535499082466223545337273504589879909568150627745509802486213012169894157524574548625075626524610368938904839932269952074975962828868556908150704513696109853352577281586033441141927828273765296032993584674231028483241695239006108543338219;
 else {
 CORE_DELIMITER=2./3.;//t*=1.5;
@@ -1339,7 +1349,7 @@ float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;
    
 if(MetaCored)hyperCore=
    cored*2./3.+
-    log(lfc*1.5/CORE_DELIMITER
+    log(lfc
         )*logStabilizationConstant*equilibriator+1.;
    
    
@@ -1405,6 +1415,11 @@ if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
                           
 for (float counter=0.;counter<iterations;counter++)if(dstnce<40.){
 
+    float CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(hyperCore)/22.,0.5)).x;
+
+    
+    
+    
          if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
 
                            // if(!true&&morph<.5)CORE_DELIMITER=1./dstnce*pow(2.,4./12.)*equilibriator;
@@ -1413,7 +1428,7 @@ for (float counter=0.;counter<iterations;counter++)if(dstnce<40.){
     s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
     dstnce = length(s);
 
-           vec2 cloverMAP = (spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+PI))*2./3.+.5;
+           vec2 cloverMAP = (spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+PI))*CORE_DELIMITER+.5;
                                    
                                    vec2 ColorWheelClover;
                                    float cycleShiftChiral = 0.;
@@ -1433,7 +1448,7 @@ for (float counter=0.;counter<iterations;counter++)if(dstnce<40.){
                                                 }
                                             if(dstnce<4./3.)    beta   =  hsv2rgb(vec3((atan(ColorWheelClover.y,ColorWheelClover.x))/(2.*PI),1.,1.));
                                 }
- if(dstnce<2./3.||(spokesVisualizeColors&&dstnce<4./3.)) {
+ if(dstnce<CORE_DELIMITER||(spokesVisualizeColors&&dstnce<4./3.)) {
             float decayCanceller=1.;
             if(spokesVisualizeColors)decayCanceller = 2.;
             //if(morph!=0.)decayCanceller=decayCanceller*decayCanceller;
@@ -2181,7 +2196,7 @@ vec3 xtol(vec2 s, vec2 t){
   vec3 body(vec2 p, vec2 t){
     vec3 b = vec3( 0.);
     if(p.x>0.){b = torso(p,t)+musculature(p,t);}
-    return b+robe(p,t)+legs(p,t/33.3)+heart(p,t);}
+    return b+robe(p,t)+legs(p,t/33.3)+heart(p*2.,t);}
       
 vec3 bodyFourCreatureCharacter(vec2 p, vec2 t){
 vec3 b = vec3( 0.);
@@ -2363,7 +2378,7 @@ vec2 dance = vec2(0.);
                        const float brideSize = 24.;
                        creatures=fourCreatures(backGround*8.,t);
                        if(length(backGround*brideSize)>4./3./brideSize)
-                            b=bride(backGround*brideSize,brideSize*zoom*t)+heart(backGround*brideSize,zoom*t);
+                            b=bride(backGround*brideSize,zoom*t)+heart(backGround*brideSize,zoom*t);
      }
 
                  float inversion = -1.;
