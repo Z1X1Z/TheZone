@@ -11,6 +11,7 @@ window.highORlow=1.;
 window.FeedbackSound = false;
 window.instantaneousFreqSpirographColoring = 1;
 window.pzyghthe=0;
+window.dynamicCoring=false;
 let osmdStaffsVisible = 0;
 let runningHash = true;
 function readHash(){
@@ -80,6 +81,7 @@ function callKey(event){
 
     //meta keys like ctrlKey must be processed first and should have symbol preferably
     if (document.activeElement.className=="num");//don't take hotkey's while menu number selector engaged
+    else if(key == "c" && event.ctrlKey)dynamicCoring=!dynamicCoring;
     else if(key == "q" && event.ctrlKey)uniforms.squareClover.value=!uniforms.squareClover.value;
     else if(key == "x" && event.ctrlKey)uniforms.fieldPowerBoost.value=!uniforms.fieldPowerBoost.value;
     else if(key == "z" && event.ctrlKey)uniforms.fieldPowerBoostMeta.value=!uniforms.fieldPowerBoostMeta.value;
@@ -136,7 +138,7 @@ function callKey(event){
     else if (key=="_"){rez *=1.1; renderer.setPixelRatio( rez);}
 
     else if (x==0)
-    {window.movementRate=1.618033988749; uniforms[ "rate" ].value=1.; }
+    {window.movementRate=1.32471795724474;; uniforms[ "rate" ].value=1.; }
     else if(x == 7&&!event.shiftKey)uniforms.musicAngelMan.value=(uniforms.musicAngelMan.value+1)%3;
     else if(x == 8&&!event.shiftKey)
     {
