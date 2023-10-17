@@ -22,6 +22,9 @@ body, head {
 
 
 }
+number {
+  width: 50%;
+}
 #container{
     
     -moz-user-select: none;
