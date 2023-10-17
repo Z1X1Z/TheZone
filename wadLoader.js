@@ -135,7 +135,11 @@ let c = document.getElementById("container");
                                        pressure=1;
                                    } else if (event.pressure === 1) {
                                      pressure = 1;
-                                   } else {
+                                   }
+            
+         else if (event.pressure === .5) {
+          pressure = 1;
+        }else {
                                      // Default
                                      pressure = event.pressure;
                                    }

@@ -2420,9 +2420,11 @@ vec2 dance = vec2(0.);
 
                                  
      float heartSize = gr;
-    if (Character==4) heartSize=2.;
+     vec2 heartShift = vec2(0);
+
+    if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
      if (Character!=9){
-     vec3 HEART = heart(characterPSpunToKey*heartSize,moveDynamic);
+     vec3 HEART = heart(characterPSpunToKey*heartSize+heartShift,moveDynamic);
      vec3 heartMultiplier = vec3(1.);
      heartMultiplier=HEART.xyz+(1.-length(characterPSpunToKey*heartSize));
     if(length(characterPSpunToKey*heartSize)>0.)heartMultiplier=vec3(1.);
@@ -2545,7 +2547,7 @@ if(starOnDot){
                     
                     -(mny.r+mny.b+mny.g)*4.,.0,1.))
       
-                                      ,1.))*isBlack*isBlackStaRivers*isBlackDOT+isGrey+isGreyStaRivers+isGreyDOT+  (isBlack-1.);}
+                                      ,1.))*isBlack*isBlackStaRivers*isBlackDOT+isGrey*2.+isGreyStaRivers+isGreyDOT+  (isBlack-1.);}
                                                  
 
 </script>
