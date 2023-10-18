@@ -111,8 +111,8 @@ const inputData = new Float32Array(bufferSize);
 
 window.zoomOutRatchetThreshold=1./bufferSize;
 
-const spirray0 = Array(bufferSize*2);
-const spirray1 = Array(bufferSize*2);
+const spirray0 = new Float32Array(bufferSize*2);
+const spirray1 = new Float32Array(bufferSize*2);
 const starArms = numberOfBins;
 let Fret = {x:null,y:null,index:null,volume:0.,note:-12};
 const loudestFret=Array(4).fill(Fret);
@@ -176,9 +176,9 @@ loudestFret[2].note = mustarD[g]
     }
 }
 
-const testar = Array(starArms);
-const testarContinuous = Array(starArms);
-const mustarD = Array(starArms);
+const testar = new Float32Array(starArms);
+const testarContinuous =new Float32Array(starArms);
+const mustarD =new Float32Array(starArms);
 let averagedAmp =  0;
 let len=0;
                             let phase = 0;
@@ -282,12 +282,12 @@ function fiveAndSeven(){
             
             }
 }
-const cx = Array(trailLength);//c is the center of the frame moved from the origin
-const cy = Array(trailLength);
-const xPerp= Array(trailLength);//perp is the perpendicular from c
-const yPerp = Array(trailLength);
-const trailWidth = Array(trailLength);
-const trailTimeOfRecording = Array(trailLength);
+const cx =new Float32Array(trailLength);//c is the center of the frame moved from the origin
+const cy = new Float32Array(trailLength);
+const xPerp= new Float32Array(trailLength);//perp is the perpendicular from c
+const yPerp = new Float32Array(trailLength);
+const trailWidth = new Float32Array(trailLength);
+const trailTimeOfRecording = new Float32Array(trailLength);
 const trailSegmentExpired = Array(trailLength).fill(false);
 const pitchCol = Array(trailLength);
 let trailLoaded = false;
@@ -557,10 +557,10 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                     
                     
                     const secondsToEdge=window.pixelShaderSize/4./pixelShaderToStarshipRATIO;
-                    const starCount = starArms*60*secondsToEdge;
+                    const starCount = Math.ceil(starArms*60*secondsToEdge);
                     
-                                           const starStreamPoints=new Float32Array(starCount*3*6);
-                                           const starStreamColors=new Float32Array(starCount*4*6);
+                                           const starStreamPoints= Array(starCount*3*6).fill(0);
+                                           const starStreamColors= Array(starCount*4*6).fill(0);
                     let xyStarParticleArray=Array();
                     
                     
@@ -639,7 +639,7 @@ function init() {
      starStreamGeometry.setAttribute('position', new THREE.Float32BufferAttribute( starStreamPoints,3 ));
      starStreamGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( starStreamColors, 4 ));
      starStreamMesh = new THREE.Mesh(starStreamGeometry, starMaterial);
-
+     
      
     materialTrail= new THREE.MeshBasicMaterial({
                    opacity: 1.,
@@ -672,16 +672,17 @@ function init() {
      radialMaterial=  new THREE.MeshBasicMaterial( { color: 0x000000});
      radialGeometry=new THREE.BufferGeometry()
      radialLine = new THREE.Line(radialGeometry,radialMaterial);
-     //scene.add(harmonicPzyghtheMesh)
-
+     
+     
+     scene.add(harmonicPzyghtheMesh)
      scene.add(meshTrail)
      scene.add(line);
-    scene.add(starMesh);
+     scene.add(starMesh);
      scene.add(starsANDwitnessesMesh)
-     scene.add(starStreamMesh)
+     //scene.add(starStreamMesh)
      
      shaderScene.add( circle );
-       shaderScene.add(radialLine);
+    shaderScene.add(radialLine);
         
      
   FEEDBACKuniforms = THREE.UniformsUtils.merge([
@@ -887,7 +888,7 @@ function onWindowResize() {
                   let elapsedTimeBetweenFrames = 0.;
                   let lastPitch = 1;
 
-                  let lastFrameTime=-1.;
+                  let lastFrameTime=0.;
                   let interpolation=1.;
                   let finalAverageAmp=1.;
                   let averageFrameTotalAmp = [];
@@ -974,7 +975,7 @@ function zoomRoutine(){
 
                      let thisChunk=0, lastChunk=0;
                      window.haptic = false;
-                    let vibrateArray=[];
+                    let vibrateArray=new Float32Array();
 
                     function mcphrth(){
      if(window.haptic){
@@ -1153,8 +1154,8 @@ function runOSMD (){
                         let frameCount = 0;
                                            const coreData = new Float32Array(22).fill(1./1.324717);;
                                            let     coreTexture;
+                                           let firstAnimation = true;
    function animate( timestamp ) {
-    
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
      if("osmd" in window&&osmd!=null)runOSMD();
 
@@ -1202,11 +1203,11 @@ function runOSMD (){
             uniforms[ "externalCores" ].value*=4./3./(1./Math.log(3.)+(1.-1./Math.log(3.))/1.75);
     }
     
-    
+    if(firstAnimation){lastFrameTime=timestamp;firstAnimation=false;}
     if(document.visibilityState=="hidden"||lvs=="hidden")lastFrameTime=timestamp;
     lvs=document.visibilityState
     interpolation = (timestamp-lastFrameTime)/1000.*60.;
-    if(interpolation>60)interpolation=60;//this is to prevent frametime leak on mobile
+    if(interpolation>60)interpolation=1.;//this is to prevent frametime leak on mobile
     if (!isFinite(interpolation))interpolation = 1.;
     lastFrameTime=timestamp;
     if(!window.touchMode)pointerZoom=false;
@@ -1236,18 +1237,19 @@ if( !window.touchMode&&!window.touchOnlyMode) {
        if (Math.abs(Math.abs((note*2)%24-loudestFret[shift].note%24)-12)<Math.abs(coreShift-12))
         coreShift=Math.abs((note*2)%24-loudestFret[shift].note%24)
     
-           
 
     
     let coreIndex = (uniforms.externalCores.value>0.)?Math.floor(uniforms.externalCores.value):0;
     if(!isNaN(loudestFret[0].volume)&&window.dynamicCoring)
         coreData[coreIndex]=coreShift/24*2*2/3.;
+    /*
+
     coreTexture = new THREE.DataTexture( coreData, 22, 1,THREE.RedFormat,THREE.FloatType);
     coreTexture.unpackAlignment=1
     coreTexture.needsUpdate=true;
     uniforms.coreTextureSampler.value=coreTexture;
     uniforms.coreTextureSampler.needsUpdate = true;
-    
+    */
    makeSpirograph();
 
 
@@ -1504,15 +1506,13 @@ if(!window.touchMode){
         
         
         
-        let OUTERSHELL =maxToMin* secondsToEdge/starShipDepthInSet;
-        
-        let starStreamPositionAttribute = starStreamGeometry.getAttribute( 'position' );
-        let starStreamColorAttribute = starStreamGeometry.getAttribute( 'color' );
-        
         
         if ((RockInTheWater==1||RockInTheWater==2)&&xyStarParticleArray.length>0)
         {
-            //scene.add(starStreamMesh)
+            scene.add(starStreamMesh)
+            
+            let starStreamPositionAttribute = starStreamGeometry.getAttribute( 'position' );
+            let starStreamColorAttribute = starStreamGeometry.getAttribute( 'color' );
             
             
             
@@ -1530,6 +1530,8 @@ if(!window.touchMode){
 
             }
             
+            let OUTERSHELL =maxToMin* secondsToEdge;
+
             let m = xyStarParticleArray[xyStarParticleArray.length-1];
             let lastLoopTime=m.time;
             let timeShift = 0.;
@@ -1588,15 +1590,15 @@ if(!window.touchMode){
                 else break ;
                 
                 starStreamStride+=6
-
-            }
-
-            
-        }
-  
-        
+                
         starStreamPositionAttribute.needsUpdate = true;
         starStreamColorAttribute.needsUpdate = true;
+            }
+            
+            
+        }
+                
+        
          }
              
 
@@ -2204,7 +2206,7 @@ shaderScene.add( targets[n] );
                      
 //circle.geometry.dispose();
 //radialLine.geometry.dispose( );
-//scene.remove(starStreamMesh);
+scene.remove(starStreamMesh);
 //scene.remove(line);
 if(polygons.length>0)
 for(var n = 0; n<targets.length;n++){
