@@ -1077,7 +1077,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                     vec3 torso(vec2 g, vec2 t){
                     float b = 0.;
                     vec2 z=g.xy;
-                    if(g.x*g.x+g.y*g.y<40.)
+                   // if(g.x*g.x+g.y*g.y<40.)
                     for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;break;}
                     else{
                         z=2.*vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),(2.0*z.x*z.y-g.y+t.y));
