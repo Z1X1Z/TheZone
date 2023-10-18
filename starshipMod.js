@@ -1242,14 +1242,14 @@ if( !window.touchMode&&!window.touchOnlyMode) {
     let coreIndex = (uniforms.externalCores.value>0.)?Math.floor(uniforms.externalCores.value):0;
     if(!isNaN(loudestFret[0].volume)&&window.dynamicCoring)
         coreData[coreIndex]=coreShift/24*2*2/3.;
-    /*
+    
 
     coreTexture = new THREE.DataTexture( coreData, 22, 1,THREE.RedFormat,THREE.FloatType);
     coreTexture.unpackAlignment=1
     coreTexture.needsUpdate=true;
     uniforms.coreTextureSampler.value=coreTexture;
     uniforms.coreTextureSampler.needsUpdate = true;
-    */
+    
    makeSpirograph();
 
 
