@@ -106,13 +106,13 @@ var zoomOutEngage=false;
 const pi = Math.PI;
 const bufferSize = fftSize;
 const numberOfBins = fftSize/2.;
-const frequencies= new Float32Array(numberOfBins);
+const frequencies= new Float64Array(numberOfBins);
 const inputData = new Float32Array(bufferSize);
 
 window.zoomOutRatchetThreshold=1./bufferSize;
 
-const spirray0 = new Float32Array(bufferSize*2);
-const spirray1 = new Float32Array(bufferSize*2);
+const spirray0 = new Float64Array(bufferSize*2);
+const spirray1 = new Float64Array(bufferSize*2);
 const starArms = numberOfBins;
 let Fret = {x:null,y:null,index:null,volume:0.,note:-12};
 const loudestFret=Array(4).fill(Fret);
@@ -176,9 +176,9 @@ loudestFret[2].note = mustarD[g]
     }
 }
 
-const testar = new Float32Array(starArms);
-const testarContinuous =new Float32Array(starArms);
-const mustarD =new Float32Array(starArms);
+const testar = new Float64Array(starArms);
+const testarContinuous =new Float64Array(starArms);
+const mustarD =new Float64Array(starArms);
 let averagedAmp =  0;
 let len=0;
                             let phase = 0;
@@ -282,12 +282,12 @@ function fiveAndSeven(){
             
             }
 }
-const cx =new Float32Array(trailLength);//c is the center of the frame moved from the origin
-const cy = new Float32Array(trailLength);
-const xPerp= new Float32Array(trailLength);//perp is the perpendicular from c
-const yPerp = new Float32Array(trailLength);
-const trailWidth = new Float32Array(trailLength);
-const trailTimeOfRecording = new Float32Array(trailLength);
+const cx =new Float64Array(trailLength);//c is the center of the frame moved from the origin
+const cy = new Float64Array(trailLength);
+const xPerp= new Float64Array(trailLength);//perp is the perpendicular from c
+const yPerp = new Float64Array(trailLength);
+const trailWidth = new Float64Array(trailLength);
+const trailTimeOfRecording = new Float64Array(trailLength);
 const trailSegmentExpired = Array(trailLength).fill(false);
 const pitchCol = Array(trailLength);
 let trailLoaded = false;
@@ -975,7 +975,7 @@ function zoomRoutine(){
 
                      let thisChunk=0, lastChunk=0;
                      window.haptic = false;
-                    let vibrateArray=new Float32Array();
+                    let vibrateArray=new Float64Array();
 
                     function mcphrth(){
      if(window.haptic){
@@ -1152,7 +1152,7 @@ function runOSMD (){
 
                  let   upOrDown = 1;
                         let frameCount = 0;
-                                           const coreData = new Float32Array(22).fill(1./1.324717);;
+                                           const coreData = new Float64Array(22).fill(1./1.324717);;
                                            let     coreTexture;
                                            let firstAnimation = true;
    function animate( timestamp ) {
