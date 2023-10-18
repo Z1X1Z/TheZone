@@ -827,7 +827,6 @@ dotted:{value:false},
      adjustThreeJSWindow();
 
 }
-                    let lastHeight;
                     let bottomOfScreenHeight = 0;
 function adjustThreeJSWindow()
                     {
@@ -840,7 +839,6 @@ function adjustThreeJSWindow()
      }
          height=window.innerHeight-correlationForText;
          width=window.innerWidth;
-     lastHeight=window.innerheight;
 
         
          uniforms.resolution.value.x = width;
@@ -975,7 +973,7 @@ function zoomRoutine(){
 
                      let thisChunk=0, lastChunk=0;
                      window.haptic = false;
-                    let vibrateArray=new Float64Array();
+                    let vibrateArray= Array();
 
                     function mcphrth(){
      if(window.haptic){
@@ -1152,7 +1150,7 @@ function runOSMD (){
 
                  let   upOrDown = 1;
                         let frameCount = 0;
-                                           const coreData = new Float64Array(22).fill(1./1.324717);;
+                                           const coreData = new Float32Array(22).fill(1./1.324717);;
                                            let     coreTexture;
                                            let firstAnimation = true;
    function animate( timestamp ) {
@@ -1531,7 +1529,6 @@ if(!window.touchMode){
             }
             
             let OUTERSHELL =maxToMin* secondsToEdge;
-
             let m = xyStarParticleArray[xyStarParticleArray.length-1];
             let lastLoopTime=m.time;
             let timeShift = 0.;
@@ -1548,7 +1545,7 @@ if(!window.touchMode){
                 if (lastLoopTime!=m.time) {
                     timeShift = uniforms["time"].value-m.time;
                     w = timeShift/m.lengt/secondsToEdge;
-                    withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL*1.1;// OUTERSHELL times 1.1 to prevent remnant pieces around edge
+                    withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL;// OUTERSHELL times 1.1 to prevent remnant pieces around edge
                     depthINNER = -starShipDepthInSet+timeShift/OUTERSHELL*(1.-starShipDepthInSet);
                     depthOUTER = depthINNER+m.lengt;
                     
@@ -2293,7 +2290,7 @@ for(var n = 0; n<targets.length;n++){
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
 const fractionOfFrame = Math.floor(bufferSize/2.);
-const yinData = Array(fractionOfFrame);
+const yinData = new Float64Array(fractionOfFrame);
 
 function calculatePitch ()
 {
