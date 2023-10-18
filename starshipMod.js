@@ -1151,7 +1151,7 @@ function runOSMD (){
 
                  let   upOrDown = 1;
                         let frameCount = 0;
-                                           const coreData = new Float32Array(22*4).fill(1./1.324717);;
+                                           const coreData = new Float32Array(22).fill(1./1.324717);;
                                            let     coreTexture;
    function animate( timestamp ) {
     
@@ -1241,9 +1241,9 @@ if( !window.touchMode&&!window.touchOnlyMode) {
     
     let coreIndex = (uniforms.externalCores.value>0.)?Math.floor(uniforms.externalCores.value):0;
     if(!isNaN(loudestFret[0].volume)&&window.dynamicCoring)
-        coreData[coreIndex*4]=coreShift/24*2*2/3.;
-    
-    coreTexture = new THREE.DataTexture( coreData, 22, 1,THREE.RGBAFormat,THREE.FloatType);
+        coreData[coreIndex]=coreShift/24*2*2/3.;
+    coreTexture = new THREE.DataTexture( coreData, 22, 1,THREE.RedFormat,THREE.FloatType);
+    coreTexture.unpackAlignment=1
     coreTexture.needsUpdate=true;
     uniforms.coreTextureSampler.value=coreTexture;
     uniforms.coreTextureSampler.needsUpdate = true;
