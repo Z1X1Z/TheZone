@@ -9,7 +9,8 @@
         <link type="text/css" rel="stylesheet" href="main.css">
 </head>
         
-        <body>
+        <body oncontextmenu="return false;"><!--disable right click solution from
+                                        https://stackoverflow.com/questions/381795/how-to-disable-right-click-context-menu-in-javascript  -->
         <div id="load message" style="font-size:40px; background-color:blue;">     </div>
         <script src="loadMicrophone.js"></script>
         
@@ -1231,10 +1232,6 @@ vec2 colorAccumulator =vec2(0.);
 vec3 heartColors = vec3(0.);
 float lfc = length(freed(coords));
 
-
-float dif = 1.;//3.-(1.-.47805268028830)/3.;
-float equilibriator = 1.;
-//if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
    
    
 float precores = .25/log(.5);
@@ -1243,7 +1240,7 @@ if(morph!=0.)precores=precores-3./log(.5);
 if(refactorCores!=1.)precores=-.0;
 
 float cored =0.;
-if(MetaCored)cored= log(zoom)/log(.5)+precores;
+if(MetaCored)cored= log(zoom)/-log(2.)+precores;
 else cored = centralCores;
 float loops=0.;
 if(cloverSlide)loops=-1.;
@@ -1263,7 +1260,8 @@ const float crs = 60.;//this is the mandelbrot and original inheritance colormod
  float centerslide = 0.;
 
  for(int i=0;i<int(crs+3.);//crs+3=63
-                  i++)if(c<2./3.&&loops+centerslide<cored
+                  i++)if(c<2./3.
+                         &&loops+centerslide<cored
                          )
                         {
   if(i>1||!cloverSlide){s*=2.;c*=2.;}
@@ -1345,15 +1343,17 @@ float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;
 //if(morph!=0.)cored*=3./2.;//stabilize morph dance collaboration
 
 //2.47805268028830 and 3 are solutions to x=log3(x**3)
+float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(hyperCore)/22.,0.5)).x;
+
    
-   
+
+   float dif = 1.;//3.-(1.-.47805268028830)/3.;
+   float equilibriator = 1.;
+   if(lfc>CORE_DELIMITER)equilibriator=lfc/(lfc-zoom/dif)*dif;
+      
 if(MetaCored)hyperCore=
-   cored*2./3.+
-    log(lfc
-        )*logStabilizationConstant*equilibriator+1.;
-   
-   
-   
+   cored/1.5+log(lfc)*logStabilizationConstant*equilibriator+1.;
+    
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 
    
@@ -1415,7 +1415,6 @@ if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
                           
 for (float counter=0.;counter<iterations;counter++)if(dstnce<40.){
 
-    float CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(hyperCore)/22.,0.5)).x;
 
     
     

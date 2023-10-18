@@ -106,13 +106,13 @@ var zoomOutEngage=false;
 const pi = Math.PI;
 const bufferSize = fftSize;
 const numberOfBins = fftSize/2.;
-var frequencies= new Float32Array(numberOfBins);
+const frequencies= new Float32Array(numberOfBins);
 const inputData = new Float32Array(bufferSize);
 
 window.zoomOutRatchetThreshold=1./bufferSize;
 
-let spirray0 = Array(bufferSize*2);
-let spirray1 = Array(bufferSize*2);
+const spirray0 = Array(bufferSize*2);
+const spirray1 = Array(bufferSize*2);
 const starArms = numberOfBins;
 let Fret = {x:null,y:null,index:null,volume:0.,note:-12};
 const loudestFret=Array(4).fill(Fret);
@@ -188,25 +188,24 @@ var colorInstant=0.;
 let nextPeak = 0.;
 let updateInstant = false;
                             let innerSpirographFractionalSize=0;
+                            let bufferPortion = Math.round(3./4.*bufferSize);
+
 function makeSpirograph(){
       phase = phase % (pi*2);
         phase2 =  phase2 % (pi*2);
       len = 0;
-      const adjConstant = 1./pitch/4.*Math.PI*audioX.sampleRate/bufferSize/(2**1.5);
+    const adjConstant = 1./pitch/4.*Math.PI*audioX.sampleRate/bufferSize/(2**1.5);
     var maxSamp=0.;
-    let bufferPortion = Math.round(3./4.*bufferSize);
     for(var t=0; t<bufferPortion;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
   
-    for(var m = 1; m < bufferPortion-1; m++)
+    for(var m = 0; m < bufferPortion; m++)
       {
               phase += adjConstant;//spira_pitch;
                 var size = .75+inputData[m]/4./maxSamp;
               spirray0[m]=-Math.sin(-phase)*size;
               spirray1[m]=-Math.cos(-phase)*size;
       }
-    spirray0[0]=spirray0[1];//disconnect inner and outer spirograph
-    spirray1[0]=spirray1[1];
-    spirray0[bufferPortion]=spirray0[bufferPortion-1];
+    spirray0[bufferPortion]=spirray0[bufferPortion-1];//disconnect inner and outer spirograph
     spirray1[bufferPortion]=spirray1[bufferPortion-1];
     let lastInnerSpirographFractionalSize =innerSpirographFractionalSize;
      innerSpirographFractionalSize = (innerSpirographFractionalSize + Math.round(audioX.sampleRate/pitch))   %bufferPortion;
@@ -535,43 +534,39 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                                            var minimumDimension=1;
                                            var maximumDimension=1;
                      var height=window.innerHeight,width=window.innerWidth;
-                       let texture;
                        let renderTarget;
                        let backBufferFlip=false;
                       let FeedbackrenderTarget,FeedbackrenderTargetFlipSide;
                        
-                                            const point = new Float32Array(bufferSize*2*3*2*1.1);
-                                              const pointColor = new Float32Array(bufferSize*2*4*2*1.1);
+                                           const point = new Float32Array(bufferSize*2*3*2);
+                                           const pointColor = new Float32Array(bufferSize*2*4*2);
                     
-                    const star= new Float32Array(fftSize/2*3);
-                    const starColors= new Float32Array(fftSize/2*4);
+                                           const star= new Float32Array(fftSize/2*3);
+                                           const starColors= new Float32Array(fftSize/2*4);
                     
-                    const trail=new Float32Array(trailLength*3*6);
-                    const trailColor=new Float32Array(trailLength*4*6);
+                                           const trail=new Float32Array(trailLength*3*6);
+                                           const trailColor=new Float32Array(trailLength*4*6);
        
                     const xenOctaveFactor = 12;
-                    const harmonicPzyghtheVertices = new Float32Array(xenOctaveFactor*12*3*6)
-                    const harmonicPzyghtheColor = new Float32Array(xenOctaveFactor*12*4*6)
+                                           const harmonicPzyghtheVertices = new Float32Array(xenOctaveFactor*12*3*6)
+                                           const harmonicPzyghtheColor = new Float32Array(xenOctaveFactor*12*4*6)
                     
-                    const starsANDwitnessesPoints=new Float32Array(120*3*6);
-                    const starsANDwitnessesColors=new Float32Array(120*3*6);
+                                           const starsANDwitnessesPoints=new Float32Array(120*3*6);
+                                           const starsANDwitnessesColors=new Float32Array(120*3*6);
 
                     
                     
                     const secondsToEdge=window.pixelShaderSize/4./pixelShaderToStarshipRATIO;
                     const starCount = starArms*60*secondsToEdge;
                     
-                                 const starStreamPoints=new Float32Array(starCount*3*6);
-                                 const starStreamColors=new Float32Array(starCount*4*6);
+                                           const starStreamPoints=new Float32Array(starCount*3*6);
+                                           const starStreamColors=new Float32Array(starCount*4*6);
                     let xyStarParticleArray=Array();
                     
                     
-                                           let coreTexture;
-                                           let coreData = new Float32Array(22*4).fill(1./1.324717);;
                                            
 function init() {
      
-     coreTexture = new THREE.DataTexture( coreData, 22, 1,THREE.RGBAFormat,THREE.FloatType);
      
     renderTarget = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
                                                Math.min(window.innerWidth,window.innerHeight)*4./3.);
@@ -677,20 +672,17 @@ function init() {
      radialMaterial=  new THREE.MeshBasicMaterial( { color: 0x000000});
      radialGeometry=new THREE.BufferGeometry()
      radialLine = new THREE.Line(radialGeometry,radialMaterial);
-     scene.add(harmonicPzyghtheMesh)
+     //scene.add(harmonicPzyghtheMesh)
 
      scene.add(meshTrail)
      scene.add(line);
-
-    shaderScene.add( circle );
-     shaderScene.add(radialLine);
-      
     scene.add(starMesh);
      scene.add(starsANDwitnessesMesh)
-
-     
      scene.add(starStreamMesh)
      
+     shaderScene.add( circle );
+       shaderScene.add(radialLine);
+        
      
   FEEDBACKuniforms = THREE.UniformsUtils.merge([
   THREE.UniformsLib.lights,
@@ -721,6 +713,7 @@ function init() {
   uniforms = THREE.UniformsUtils.merge([
   THREE.UniformsLib.lights,
   {
+  coreTextureSampler:{value:null},
   STAR:{value: null    },
     EDEN:{value: null   },
   eden:{value: 0},
@@ -795,7 +788,6 @@ dotted:{value:false},
 
   multiplicatorNexus:{value:false},//has problems may be discontinued
   squareClover:{value:false},
-  coreTextureSampler:{value:null}
 
   }
   ]);
@@ -1159,7 +1151,8 @@ function runOSMD (){
 
                  let   upOrDown = 1;
                         let frameCount = 0;
-
+                                           const coreData = new Float32Array(22*4).fill(1./1.324717);;
+                                           let     coreTexture;
    function animate( timestamp ) {
     
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
@@ -1243,10 +1236,14 @@ if( !window.touchMode&&!window.touchOnlyMode) {
        if (Math.abs(Math.abs((note*2)%24-loudestFret[shift].note%24)-12)<Math.abs(coreShift-12))
         coreShift=Math.abs((note*2)%24-loudestFret[shift].note%24)
     
+           
+
+    
     let coreIndex = (uniforms.externalCores.value>0.)?Math.floor(uniforms.externalCores.value):0;
     if(!isNaN(loudestFret[0].volume)&&window.dynamicCoring)
         coreData[coreIndex*4]=coreShift/24*2*2/3.;
-
+    
+    coreTexture = new THREE.DataTexture( coreData, 22, 1,THREE.RGBAFormat,THREE.FloatType);
     coreTexture.needsUpdate=true;
     uniforms.coreTextureSampler.value=coreTexture;
     uniforms.coreTextureSampler.needsUpdate = true;
@@ -1319,12 +1316,12 @@ lineMat.color = new THREE.Color("black");
                             
                             let tx = 0, ty = 0,greyness=1.;
                             
-    const linePositionAttribute = lineGeometry.getAttribute( 'position' );
-    const lineColorAttribute = lineGeometry.getAttribute( 'color' );
+    let linePositionAttribute = lineGeometry.getAttribute( 'position' );
+    let lineColorAttribute = lineGeometry.getAttribute( 'color' );
   var lineStride=0;
-    {
+   {
         //scene.add(line)
-        for (let r= 0; r < bufferSize*2.; r +=1) {//supports upto r <buffersize*2
+        for (let r= 0; r < bufferPortion*2; r +=1) {//supports upto r <buffersize*2
             const  txlast=tx;
             const  tylast=ty;
             tx = spirray0[r];
@@ -1367,8 +1364,8 @@ lineMat.color = new THREE.Color("black");
 if(!window.touchMode){
     
     
-    const starPositionAttribute = starGeometry.getAttribute( 'position' );
-    const starColorAttribute = starGeometry.getAttribute( 'color' );
+    let starPositionAttribute = starGeometry.getAttribute( 'position' );
+    let starColorAttribute = starGeometry.getAttribute( 'color' );
     let starStride = 0;
     if(onO){
         for (var g=0; g<starArms; g++) {
@@ -1509,8 +1506,8 @@ if(!window.touchMode){
         
         let OUTERSHELL =maxToMin* secondsToEdge/starShipDepthInSet;
         
-        const starStreamPositionAttribute = starStreamGeometry.getAttribute( 'position' );
-        const starStreamColorAttribute = starStreamGeometry.getAttribute( 'color' );
+        let starStreamPositionAttribute = starStreamGeometry.getAttribute( 'position' );
+        let starStreamColorAttribute = starStreamGeometry.getAttribute( 'color' );
         
         
         if ((RockInTheWater==1||RockInTheWater==2)&&xyStarParticleArray.length>0)
@@ -1666,8 +1663,8 @@ const depth = -starShipDepthInSet+lengt*(1.-starShipDepthInSet);
       starPositionAttribute.needsUpdate = true; // required after the first render
       starColorAttribute.needsUpdate = true; // required after the first render
     
-const starsANDwitnessesPositionAttribute = starsANDwitnessesGeometry.getAttribute( 'position' );
-const starsANDwitnessesColorAttribute = starsANDwitnessesGeometry.getAttribute( 'color' );
+let starsANDwitnessesPositionAttribute = starsANDwitnessesGeometry.getAttribute( 'position' );
+let starsANDwitnessesColorAttribute = starsANDwitnessesGeometry.getAttribute( 'color' );
          if(window.octaveStars)
          {
              
@@ -1761,8 +1758,8 @@ var fingerStride = 0;
                                         
                                         let hpStride = 0;
                                         
-                                    const harmonicPositionAttribute = harmonicPzyghtheGeometry.getAttribute( 'position' );
-                                    const harmonicColorAttribute = harmonicPzyghtheGeometry.getAttribute( 'color' );
+                                    let harmonicPositionAttribute = harmonicPzyghtheGeometry.getAttribute( 'position' );
+                                    let harmonicColorAttribute = harmonicPzyghtheGeometry.getAttribute( 'color' );
                                              if(window.pzyghthe!=0)
                                              {
                                                  
@@ -1863,8 +1860,8 @@ var fingerStride = 0;
          
          
 
-    const trailPositionAttribute = geomeTrail.getAttribute( 'position' );
-    const trailColorAttribute = geomeTrail.getAttribute( 'color' );
+    let trailPositionAttribute = geomeTrail.getAttribute( 'position' );
+    let trailColorAttribute = geomeTrail.getAttribute( 'color' );
 
 let r = (f+trailDepth-1)%trailDepth;
 let s = f;
@@ -2209,7 +2206,7 @@ shaderScene.add( targets[n] );
 //radialLine.geometry.dispose( );
 //scene.remove(starStreamMesh);
 //scene.remove(line);
-if(uniforms.gameOn.value)
+if(polygons.length>0)
 for(var n = 0; n<targets.length;n++){
   shaderScene.remove( targets[n] );
   pG[n].dispose();
