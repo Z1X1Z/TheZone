@@ -176,7 +176,7 @@ loudestFret[2].note = mustarD[g]
     }
 }
 
-const testar = new Float64Array(starArms);
+const testar = new Float64Array(24);
 const testarContinuous =new Float64Array(starArms);
 const mustarD =new Float64Array(starArms);
 let averagedAmp =  0;
@@ -185,10 +185,9 @@ let len=0;
                             let phase2 = 0;
 let onO = false;
 var colorInstant=0.;
-let nextPeak = 0.;
 let updateInstant = false;
                             let innerSpirographFractionalSize=0;
-                            let bufferPortion = Math.round(3./4.*bufferSize);
+                            const bufferPortion = Math.round(3./4.*bufferSize);
 
 function makeSpirograph(){
       phase = phase % (pi*2);
@@ -257,7 +256,7 @@ window.ConcertKey = 440;
 
 
 const twelve = Array(12);
-for(let n = 0; n<12; n++)twelve[n] = Array(10).fill(0);
+for(let n = 0; n<12; n++)twelve[n] = new Float64Array(10).fill(0);
 
 var smoothTwelve =false;
 function fiveAndSeven(){
@@ -524,7 +523,7 @@ let lineMat, lineGeometry, line;
                     let starMesh,starGeometry,starMaterial;
                     let radialMaterial, radialLine, radialGeometry;
                     let starsANDwitnessesMesh,starsANDwitnessesGeometry;
-                    let starStreamMesh,starStreamGeometry;
+                    let starStreamMesh,starStreamMaterial,starStreamGeometry;
 
                     
 
@@ -559,9 +558,9 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                     const secondsToEdge=window.pixelShaderSize/4./pixelShaderToStarshipRATIO;
                     const starCount = Math.ceil(starArms*60*secondsToEdge);
                     
-                                           const starStreamPoints= Array(starCount*3*6).fill(0);
-                                           const starStreamColors= Array(starCount*4*6).fill(0);
-                    let xyStarParticleArray=Array();
+                                           const starStreamPoints= new Float32Array(starCount*3*6);
+                                           const starStreamColors= new Float32Array(starCount*4*6);
+                    let xyStarParticleArray= Array();
                     
                     
                                            
@@ -634,11 +633,17 @@ function init() {
      starsANDwitnessesMesh = new THREE.Mesh(starsANDwitnessesGeometry, starMaterial);
      
      
+     starStreamMaterial= new THREE.MeshBasicMaterial({
+                 opacity: 1.,
+               transparent: true,
+                 vertexColors: true,
+                // side: THREE.DoubleSide
+             });
      starStreamGeometry = new THREE.BufferGeometry();
      starStreamGeometry.dynamic = true;
      starStreamGeometry.setAttribute('position', new THREE.Float32BufferAttribute( starStreamPoints,3 ));
      starStreamGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( starStreamColors, 4 ));
-     starStreamMesh = new THREE.Mesh(starStreamGeometry, starMaterial);
+     starStreamMesh = new THREE.Mesh(starStreamGeometry, starStreamMaterial);
      
      
     materialTrail= new THREE.MeshBasicMaterial({
@@ -1319,7 +1324,7 @@ lineMat.color = new THREE.Color("black");
     let linePositionAttribute = lineGeometry.getAttribute( 'position' );
     let lineColorAttribute = lineGeometry.getAttribute( 'color' );
   var lineStride=0;
-   {
+   
         //scene.add(line)
         for (let r= 0; r < bufferPortion*2; r +=1) {//supports upto r <buffersize*2
             const  txlast=tx;
@@ -1339,9 +1344,9 @@ lineMat.color = new THREE.Color("black");
                 lineColorAttribute.setXYZ(lineStride+1,greyness, greyness, greyness );
                 
                 lineStride+=2;} }
-    }
-    linePositionAttribute.needsUpdate = true; // required after the first render
-    lineColorAttribute.needsUpdate = true; // required after the first render
+    
+    linePositionAttribute.needsUpdate = true;
+    lineColorAttribute.needsUpdate = true;
 
 
   uniforms[ "time2dance" ].value += audioX.sampleRate/bufferSize*totalAMP;
@@ -1361,7 +1366,6 @@ lineMat.color = new THREE.Color("black");
                             const maxToMin = Math.max(height,width)/Math.min(height,width);
     
 
-if(!window.touchMode){
     
     
     let starPositionAttribute = starGeometry.getAttribute( 'position' );
@@ -1370,7 +1374,7 @@ if(!window.touchMode){
     if(onO){
         for (var g=0; g<starArms; g++) {
             if(isFinite(testarContinuous[g])){
-                if(testarContinuous[g]>maxTestar) { maxTestar=testarContinuous[g];}
+                if(testarContinuous[g]>maxTestar) maxTestar=testarContinuous[g];
                 if(testarContinuous[g]<minTestar) minTestar=testarContinuous[g];
             }
         }
@@ -1408,13 +1412,6 @@ if(!window.touchMode){
                     const yr = lengtOriginal*-Math.cos(arm);
                     const depth = -1.+lengtOriginal/maxToMin*waterRadiusScalar*starShipDepthInSet;//shortest bar on top
                     
-                    const starshipseethrough = lengtOriginal;
-                    //for(var yy=0;yy<3;yy++)
-                    
-                    
-                    
-                    
-                    
                     
                     if (RockInTheWater==1)
                     {    let greyTone=(mustarD[g]+72)/lightingScaleStar;//may not be an exact value
@@ -1423,25 +1420,18 @@ if(!window.touchMode){
                         let vopg=vop.g/maxVop;
                         let vopb=vop.b/maxVop;
                         //for(var yy=0;yy<3;yy++)
-                        
                         starColorAttribute.setXYZW(starStride+0,vopr, vopg, vopb,1.)
                         starColorAttribute.setXYZW(starStride+1,greyTone,greyTone,greyTone,1.)
                         starColorAttribute.setXYZW(starStride+2,vopr, vopg, vopb,1.)
-                        
                     }
-                    
                     else{
-                        
                         starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
                         starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,.0)
                         starColorAttribute.setXYZW(starStride+2,vop.r,vop.g,vop.b,1.)
-                        
                     }
-                    
                     starPositionAttribute.setXYZ(starStride,(xr-x), (yr-y),  depth)
                     starPositionAttribute.setXYZ(starStride+1, 0., 0.,  0.)
                     starPositionAttribute.setXYZ(starStride+2,(xr+x), (yr+y),  depth)
-                    
                 }
                 /* rectangular star    star.push(
                  
@@ -1453,8 +1443,6 @@ if(!window.touchMode){
                  (xr-x), (yr-y),  depth,
                  ) ;
                  */
-                
-                
                 if(RockInTheWater==1||RockInTheWater==2)
                 {
                     if(RockInTheWater==2){
@@ -1476,7 +1464,7 @@ if(!window.touchMode){
                     xyStarParticle.time = uniforms[ "time" ].value;
                     xyStarParticle.interpolation = interpolation;
                     xyStarParticle.interpolationFramesScaled = interpolation/60./4.;
-                    xyStarParticle.amp=testar[g]/255.;
+                    xyStarParticle.amp=testarContinuous[g]/255.;
                     xyStarParticle.staticX=staticX;
                     xyStarParticle.staticY=staticY;
                     
@@ -1566,8 +1554,8 @@ if(!window.touchMode){
                     }
                     const outSetX = w*m.xr-bulletX;//apparently something is flipped
                     const outSetY = w*m.yr-bulletY;
-                    
-                     for(var yy=0;yy<6;yy++) starStreamColorAttribute.setXYZW(starStreamStride+yy, m.vop.r, m.vop.g, m.vop.b,timeShift*starShipDepthInSet)//alpha is beta
+                    let alph = timeShift*starShipDepthInSet;
+                     for(var yy=0;yy<6;yy++) starStreamColorAttribute.setXYZW(starStreamStride+yy, m.vop.r, m.vop.g, m.vop.b,alph)//alpha is beta
                      
                      const nx =-m.x+outSetX
                      const ny =-m.y+outSetY
@@ -1588,11 +1576,12 @@ if(!window.touchMode){
                 
                 starStreamStride+=6
                 
-        starStreamPositionAttribute.needsUpdate = true;
-        starStreamColorAttribute.needsUpdate = true;
             }
             
             
+    starStreamPositionAttribute.needsUpdate = true;
+    starStreamColorAttribute.needsUpdate = true;
+            console.log("here")
         }
                 
         
@@ -1734,6 +1723,7 @@ var fingerStride = 0;
                  }
              
          }
+                                        
                                   }
                                                               
           starsANDwitnessesPositionAttribute.needsUpdate = true; // required after the first render
@@ -1742,17 +1732,7 @@ var fingerStride = 0;
                                                               
                                                               
                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
-                                        
+
                                         
                                         
                                         let hpStride = 0;
@@ -2191,20 +2171,11 @@ shaderScene.add( targets[n] );
                                  else   renderer.render( scene, camera );
 
                               
-
-//scene.remove( circle );
-//circleGeometry.dispose();
-//circleMaterial.dispose();
-//scene.remove(radialLine);
-//radialMaterial.dispose();
-
                      
                      
-                     
-//circle.geometry.dispose();
-//radialLine.geometry.dispose( );
-scene.remove(starStreamMesh);
-//scene.remove(line);
+                                                       circle.geometry.dispose();
+                                                       radialLine.geometry.dispose( );
+if(RockInTheWater==2||RockInTheWater==1)scene.remove(starStreamMesh);
 if(polygons.length>0)
 for(var n = 0; n<targets.length;n++){
   shaderScene.remove( targets[n] );
@@ -2212,20 +2183,8 @@ for(var n = 0; n<targets.length;n++){
   pM[n].dispose();
   targets[n].geometry.dispose();
 }
-    /*
-     if(on){
-            scene.remove(line);
-            line.geometry.dispose( );
-        }
-                     
-                 scene.remove(starMesh);
-                 scene.remove(meshTrail);
-
-                                            starGeometry.dispose();
-                                            geomeTrail.dispose();
-                                            materialTrail.dispose();
-                                   */
-                     }}else {//begin touch frame
+                                   
+                     }else {//begin touch frame
             
             if(!zoomAtl41)
                 {
@@ -2283,7 +2242,7 @@ for(var n = 0; n<targets.length;n++){
                             //  renderer.forceContextRestore ( )
 }
 
-
+                              
                     let animateLoopId;
                     
 
