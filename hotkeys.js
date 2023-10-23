@@ -14,20 +14,37 @@ window.pzyghthe=0;
 window.dynamicCoring=false;
 let osmdStaffsVisible = 0;
 let runningHash = true;
+let number = "";
 function readHash(){
     
-    for(var n = location.hash.length;n>0;n--)
-        callKey(new KeyboardEvent('keydown',
-                                  {
-            'key': location.hash[n],"keyCode":location.hash.charCodeAt(n),
-            "ctrlKey":location.hash[n-1]==",","altKey":location.hash[n-1]=="."
-                                    }
-            ));
+    let hashindex = 0;
+    while (hashindex<location.hash.length-1)
+    {
+        let lasthash = hashindex;
+        if(location.hash[hashindex-1]=="(")
+        {
+            hashindex++;
+
+            while(location.hash[hashindex]!=")")
+            {
+                number += location.hash[hashindex]
+                hashindex++;
+            }
+        }
+    callKey(new KeyboardEvent('keydown',
+                              {
+        'key': location.hash[lasthash],"keyCode":location.hash.charCodeAt(lasthash),
+        "ctrlKey":location.hash[lasthash-1]==",","altKey":location.hash[lasthash-1]=="."
+    }                              ));
+
+                              hashindex++;
+
+                              
+                              
+}
     runningHash=false;
 }
-    
-function stallHash(){if(window.uniformsLoaded)readHash();else setTimeout(stallHash,10);}//uniforms are only loaded if mic is enabled
-stallHash();
+    readHash();
 function hk() {
   var x = document.createElement("INPUT");
   x.setAttribute("type", "text");
@@ -42,37 +59,42 @@ if(//navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 
    navigator.maxTouchPoints > 1)
     hk();
 
+
+
 let androidGetKey="";
 let androidGetKeyLast="";
 
 function getKey(){
     androidGetKeyLast = androidGetKey;
     androidGetKey = document.getElementById("hotkeys").value;
-var key = "";
+    let keyCaught;
  let scan=androidGetKey.length-1;
   while(scan>=0){
-        if(androidGetKey[scan]!=androidGetKeyLast[scan])key=androidGetKey[scan];
+        if(androidGetKey[scan]!=androidGetKeyLast[scan])keyCaught=androidGetKey[scan];
         scan--;
         }
-    if(window.uniformsLoaded) callKey(new KeyboardEvent('keydown', {'key': key, "keyCode":key.charCodeAt(0)}));
+   callKey(new KeyboardEvent('keydown', {'key': keyCaught, "keyCode":keyCaught.charCodeAt(0)}));
 }
+
+
 
 if(//!(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' &&
    navigator.maxTouchPoints < 1)//)//if not mobile
 window.addEventListener('keydown', function(event) {if(window.uniformsLoaded)callKey(event); return true;}, false);
-let lastKey = "";
-let key = "";
-function callKey(event){
 
-    if(key==","&&!runningHash)//key here is the last key
-        event=new KeyboardEvent('keydown',
-                                            {"key":event.key,"keyCode":event.keyCode,"ctrlKey":true}
-                  );
-    else if(key=="."&&!runningHash)event=new KeyboardEvent('keydown',
-                                                 {"key":event.key,"keyCode":event.keyCode,"altKey":true}//creating a new keypress because it's readonly
-                       );
+    let lastKey = "";
+    function callKey(event){
+        let key = "";
 
-     key = event.key;
+        if(key==","&&!runningHash)//key here is the last key
+            event=new KeyboardEvent('keydown',
+                                                {"key":event.key,"keyCode":event.keyCode,"ctrlKey":true}
+                      );
+        else if(key=="."&&!runningHash)event=new KeyboardEvent('keydown',
+                                                     {"key":event.key,"keyCode":event.keyCode,"altKey":true}//creating a new keypress because it's readonly
+                           );
+
+         key = event.key;
     if(key=="/"&&!event.shiftKey){  event.preventDefault(); event.stopImmediatePropagation();}
 
     var x=null;
@@ -81,7 +103,21 @@ function callKey(event){
 
     //meta keys like ctrlKey must be processed first and should have symbol preferably
     if (document.activeElement.className=="num");//don't take hotkey's while menu number selector engaged
-    else if(key == "c" && event.ctrlKey)dynamicCoring=!dynamicCoring;
+    if (key=="a"){
+        EldersLeg=Math.round(number);
+        let minimumFFTfactor = Math.ceil(Math.log(EldersLeg*4.)/Math.log(2.));
+        if(minimumFFTfactor<=15){
+            if(minimumFFTfactor>9)
+                window.fftSize=2**minimumFFTfactor;
+            else
+                window.fftSize = 2**9;
+            console.log(fftSize)
+
+        }
+    }
+        
+        
+    else if(key == "c" && event.ctrlKey){dynamicCoring=!dynamicCoring; if(!dynamicCoring)coreData.fill(1./1.324717);}
     else if(key == "q" && event.ctrlKey)uniforms.squareClover.value=!uniforms.squareClover.value;
     else if(key == "x" && event.ctrlKey)uniforms.fieldPowerBoost.value=!uniforms.fieldPowerBoost.value;
     else if(key == "z" && event.ctrlKey)uniforms.fieldPowerBoostMeta.value=!uniforms.fieldPowerBoostMeta.value;
@@ -100,6 +136,9 @@ function callKey(event){
             uniforms.metaCarousel.value=0.;
         }
     }
+    
+    else if (key=="("&&event.ctrlKey) highORlow = 1;
+    else if (key==")"&&event.ctrlKey ) highORlow = 2;
     else if(key == "v" && event.ctrlKey) window.FeedbackSound =  !window.FeedbackSound;
     else if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=!uniforms.starOnDot.value;
     //else if (key=="" && event.ctrlKey)instantaneousFreqSpirographColoring = (instantaneousFreqSpirographColoring+1)%2;//color mode 3 seems obsolete
@@ -184,13 +223,11 @@ function callKey(event){
     else if (key=="f") uniforms[ "fourCreats" ].value *= -1;
     else if (key=="F") uniforms[ "spokelover" ].value=!uniforms[ "spokelover" ].value ;
     
-    else if (key=="a") uniforms[ "colorCombo" ].value = 11;
+    else if (event.ctrlKey&&key=="a") uniforms[ "colorCombo" ].value = 11;
     else if (key=="\'"||key=="\"") uniforms[ "colorCombo" ].value = 13;
     else if (key=="d") uniforms[ "colorCombo" ].value = 14;
     else if (key=="x") uniforms[ "colorCombo" ].value = 15;
     else if (key=="*") uniforms[ "colorCombo" ].value = 20;
-    else if (key=="(") highORlow = 1;
-    else if (key==")") highORlow = 2;
     
     else if (key=="X"){
         uniforms[ "dynamicDance" ].value = !uniforms[ "dynamicDance" ].value;
