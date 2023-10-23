@@ -23,9 +23,8 @@ window.touchMode = false;
           source = audioX.createMediaStreamSource( stream );
           source.connect(analyser);
           analyser.fftSize = fftSize;
-          console.log(fftSize)
 
-          dataArray = new Uint8Array( bufferSize );
+          dataArray = new Uint8Array( fftSize );
       }
       ).catch((err) => {// engage touch only mode
                         console.log("Touch only mode!")
