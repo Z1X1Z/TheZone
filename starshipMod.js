@@ -103,17 +103,23 @@ let zoomAtl41=false;//watch for the 1 and the l
 
 
 var zoomOutEngage=false;
-const pi = Math.PI;
-const bufferSize = fftSize;
-const numberOfBins = fftSize/2.;
-const frequencies= new Float64Array(numberOfBins);
-const inputData = new Float32Array(bufferSize);
+var pi = Math.PI;
+                            let EldersLeg = 24;
 
-window.zoomOutRatchetThreshold=1./bufferSize;
+var bufferSize,numberOfBins, frequencies, inputData, point, pointColor,fractionOfFrame,yinData,
+                            starArms,
+                          
+                                                        testar,
+                                                        testarContinuous,
+                                                        mustarD,
+                        star,starColors;
+window.zoomOutRatchetThreshold=1./bufferSize
 
-const spirray0 = new Float64Array(bufferSize*2);
-const spirray1 = new Float64Array(bufferSize*2);
-const starArms = numberOfBins;
+
+const spirrayLength = 777;
+const spirray0 = new Float64Array(spirrayLength*2);
+const spirray1 = new Float64Array(spirrayLength*2);
+
 let Fret = {x:null,y:null,index:null,volume:0.,note:-12};
 const loudestFret=Array(4).fill(Fret);
                             function vectorize4(){
@@ -158,7 +164,7 @@ const loudestFret=Array(4).fill(Fret);
             loudestFret[2].frequency = frequencies[g];
 loudestFret[2].note = mustarD[g]
         }
-        else if (Math.abs(mustarD[g]%24-loudestFret[0].note%24)>minDifference&&Math.abs(mustarD[g]%24-loudestFret[1].note%24)>minDifference&&Math.abs(mustarD[g]%24-loudestFret[2].note%24)>minDifference&&Math.abs(mustarD[g]%12-loudestFret[3].note%12)>minDifference&&dataArray[g]>loudestFret[3].volume){
+        else if (Math.abs(mustarD[g]%24-loudestFret[0].note%24)>minDifference&&Math.abs(mustarD[g]%24-loudestFret[1].note%24)>minDifference&&Math.abs(mustarD[g]%24-loudestFret[2].note%24)>minDifference&&Math.abs(mustarD[g]%24-loudestFret[3].note%24)>minDifference&&dataArray[g]>loudestFret[3].volume){
             loudestFret[3].index=g;loudestFret[3].volume=dataArray[g];
             
             loudestFret[3].frequency = frequencies[g];
@@ -175,10 +181,6 @@ loudestFret[2].note = mustarD[g]
 
     }
 }
-
-const testar = new Float64Array(24);
-const testarContinuous =new Float64Array(starArms);
-const mustarD =new Float64Array(starArms);
 let averagedAmp =  0;
 let len=0;
                             let phase = 0;
@@ -187,13 +189,13 @@ let onO = false;
 var colorInstant=0.;
 let updateInstant = false;
                             let innerSpirographFractionalSize=0;
-                            const bufferPortion = Math.round(3./4.*bufferSize);
+                            let bufferPortion = Math.round(spirrayLength);
 
 function makeSpirograph(){
       phase = phase % (pi*2);
         phase2 =  phase2 % (pi*2);
       len = 0;
-    const adjConstant = 1./pitch/4.*Math.PI*audioX.sampleRate/bufferSize/(2**1.5);
+    const adjConstant = 1./pitch/4.*Math.PI*audioX.sampleRate/bufferSize/(2**1.5);//shouldn't be buffersize needs to be revised
     var maxSamp=0.;
     for(var t=0; t<bufferPortion;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
   
@@ -230,7 +232,7 @@ function spiral_compress(){
 
     const z = [...dataArray];
 
-    for(let n = 0; n<starArms; n++){testar[n] = 0;mustarD[n] = 1;}
+    testarContinuous.fill(0); testar.fill(0); mustarD.fill(0);
     for(let n=0; n<numberOfBins; n++)
     {
     //if ( z[n]>z[n-1] && z[n] > z[n+1] ){
@@ -246,7 +248,7 @@ function spiral_compress(){
     var note24 =24*Math.log(freq/window.ConcertKey)/Math.log(2.)+49*2;
 
 
-        testar[(Math.round(note24))%24] += Math.abs(z[n])*radialWarp;
+        testar[Math.round((note24*EldersLeg/24.)%EldersLeg)] += Math.abs(z[n])*radialWarp;
       testarContinuous[n] = Math.abs(z[n]);
                           mustarD[n] = note24;
                             }
@@ -524,11 +526,90 @@ let lineMat, lineGeometry, line;
                     let radialMaterial, radialLine, radialGeometry;
                     let starsANDwitnessesMesh,starsANDwitnessesGeometry;
                     let starStreamMesh,starStreamMaterial,starStreamGeometry;
+                           let scene, shaderScene,feedbackScene, feedbackSceneFlip;
 
                     
 
-let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
-                     let scene, shaderScene,feedbackScene, feedbackSceneFlip;
+let  FEEDBACKuniforms, FEEDBACKuniformsFlip;
+                                           
+       let uniforms = {
+       coreTextureSampler:{value:null},
+       STAR:{value: null    },
+         EDEN:{value: null   },
+       eden:{value: 0},
+           spokesVisualizeColors: {value: false    },
+
+       Spoker:{value: true    },
+       spokelover:{value: false    },
+       continuumClover:{value: false    },
+       Inherited:{value: true    },
+       cloverSlide:{value: false    },
+
+           micIn : {  value: null }, // float array (vec3)
+           time: {value: 1.0 },
+       rate: {value: 1.},
+
+           zoom: {value: 1 },
+           colorCombo: {value: -1 },
+             free: {value: false },
+             MetaCored: {value: true },
+             externalCores: {value: 0. },
+             centralCores: {value: 0. },
+             outerCoresOff: {value: false},
+         upCoreCycler: {value: 0. },
+
+             morph: {value: 0.0 },
+
+       fourCreats: {value: 1 },
+       Character: {value: 0 },
+       articles: {value: false },
+       helm: {value: false },
+       wheel: {value: false },
+       Refractelate: {value: false },
+       petals: {value:  .0 },
+
+       carousel: {value: 0.0 },
+       metaCarousel: {value: 0. },
+       spirated: {value: 0. },
+       hearTOL: {value: false},
+       colorInverter: {value:false},
+           metronome: {value: .99 },
+           time2dance: {value: 0.0 },
+       volume: {value: 0.0 },
+       totalAmp: {value: 1.0 },
+
+           resolution: {value: [0,0] },
+           coords: {value: [0,0] },
+       d: {value: [0,0]},
+       dynamicDance: {value: false},
+       remediatedColors: {value: false },
+
+       Clovoid:{value:false},
+       dotted:{value:false},
+       baseN:{value: 2.71828182845904523536028747135266249775724709369995},
+
+         onehundredfortyfourthousand:{value:false},
+         shaderScale:{value:window.pixelShaderSize},
+       starSpin:{value:0.},
+       chirality:{value:1},
+       MannyONtrail:{value:1},
+       twistStar:{value:0.},
+       flipStar:{value:1.},
+       NightAndDay:{value:false},
+       dotCoord:{value:[0,0]},
+       starOnDot:{value:false},
+       gameOn:{value:false},
+       scoreLoaded:{value:false},
+       musicAngelMan:{value:0},
+       refactorCores:{value:1.},
+
+       fieldPowerBoost:{value:false},
+       fieldPowerBoostMeta:{value:false},
+
+       multiplicatorNexus:{value:false},//has problems may be discontinued
+       squareClover:{value:false},
+
+       }
 
                                            var minimumDimension=1;
                                            var maximumDimension=1;
@@ -537,12 +618,6 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                        let backBufferFlip=false;
                       let FeedbackrenderTarget,FeedbackrenderTargetFlipSide;
                        
-                                           const point = new Float32Array(bufferSize*2*3*2);
-                                           const pointColor = new Float32Array(bufferSize*2*4*2);
-                    
-                                           const star= new Float32Array(fftSize/2*3);
-                                           const starColors= new Float32Array(fftSize/2*4);
-                    
                                            const trail=new Float32Array(trailLength*3*6);
                                            const trailColor=new Float32Array(trailLength*4*6);
        
@@ -561,11 +636,38 @@ let uniforms, FEEDBACKuniforms, FEEDBACKuniformsFlip;
                                            const starStreamPoints= new Float32Array(starCount*3*6);
                                            const starStreamColors= new Float32Array(starCount*4*6);
                     let xyStarParticleArray= Array();
-                    
-                    
                                            
-function init() {
+                                            zoomOutEngage=false;
+                                            pi = Math.PI;
+
+function setFFTdependantSizes(){
      
+      bufferSize = fftSize;
+      numberOfBins = fftSize/2.;
+      frequencies= new Float64Array(numberOfBins);
+      inputData = new Float32Array(bufferSize);
+     window.zoomOutRatchetThreshold=1./bufferSize;
+     
+      point = new Float32Array(bufferSize*2*3*2);
+      pointColor = new Float32Array(bufferSize*2*4*2);
+     
+      star= new Float32Array(fftSize/2*3);
+      starColors= new Float32Array(fftSize/2*4);
+     
+      fractionOfFrame = Math.floor(bufferSize/2.);
+      yinData = new Float64Array(fractionOfFrame);
+     
+      starArms = numberOfBins;
+    
+                                  testar = new Float64Array(EldersLeg);
+                                  testarContinuous =new Float64Array(starArms);
+                                  mustarD =new Float64Array(starArms);
+     
+ }
+                                           setFFTdependantSizes();
+
+function init() {
+     setFFTdependantSizes();
      
     renderTarget = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
                                                Math.min(window.innerWidth,window.innerHeight)*4./3.);
@@ -717,85 +819,7 @@ function init() {
   // else  characterCheck= Date.now()%3;
     
   uniforms = THREE.UniformsUtils.merge([
-  THREE.UniformsLib.lights,
-  {
-  coreTextureSampler:{value:null},
-  STAR:{value: null    },
-    EDEN:{value: null   },
-  eden:{value: 0},
-      spokesVisualizeColors: {value: false    },
-
-  Spoker:{value: true    },
-  spokelover:{value: false    },
-  continuumClover:{value: false    },
-  Inherited:{value: true    },
-  cloverSlide:{value: false    },
-
-      micIn : {  value: null }, // float array (vec3)
-      time: {value: 1.0 },
-  rate: {value: 1.},
-
-      zoom: {value: window.zoom },
-      colorCombo: {value: -1 },
-        free: {value: false },
-        MetaCored: {value: true },
-        externalCores: {value: 0. },
-        centralCores: {value: 0. },
-        outerCoresOff: {value: false},
-    upCoreCycler: {value: 0. },
-
-        morph: {value: 0.0 },
-
-  fourCreats: {value: 1 },
-  Character: {value: 0 },
-  articles: {value: false },
-  helm: {value: false },
-  wheel: {value: false },
-  Refractelate: {value: false },
-  petals: {value:  .0 },
-
-  carousel: {value: 0.0 },
-  metaCarousel: {value: 0. },
-  spirated: {value: 0. },
-  hearTOL: {value: false},
-  colorInverter: {value:false},
-      metronome: {value: .99 },
-      time2dance: {value: 0.0 },
-  volume: {value: 0.0 },
-  totalAmp: {value: 1.0 },
-
-      resolution: {value: [ window.innerWidth, window.innerHeight] },
-      coords: {value: [coordX,coordY] },
-  d: {value: new THREE.Vector2() },
-  dynamicDance: {value: false},
-  remediatedColors: {value: false },
-
-Clovoid:{value:false},
-dotted:{value:false},
-  baseN:{value: 2.71828182845904523536028747135266249775724709369995},
-
-    onehundredfortyfourthousand:{value:false},
-    shaderScale:{value:window.pixelShaderSize},
-  starSpin:{value:0.},
-  chirality:{value:1},
-  MannyONtrail:{value:1},
-  twistStar:{value:0.},
-  flipStar:{value:1.},
-  NightAndDay:{value:false},
-  dotCoord:{value:[0,0]},
-  starOnDot:{value:false},
-  gameOn:{value:false},
-  scoreLoaded:{value:false},
-  musicAngelMan:{value:0},
-  refactorCores:{value:1.},
-
-  fieldPowerBoost:{value:false},
-  fieldPowerBoostMeta:{value:false},
-
-  multiplicatorNexus:{value:false},//has problems may be discontinued
-  squareClover:{value:false},
-
-  }
+  THREE.UniformsLib.lights,uniforms
   ]);
     window.uniformsLoaded=true;
 
@@ -885,7 +909,7 @@ function onWindowResize() {
             let textON=false;
             let lastTime=0.;
             let ticker = 0;
-            let FPS=0.;
+            let FPS=60;
 
                   const interval = 250.;//sample window of FPS meter for FPS frame averaging, think 1000/FPS. 1 is more or less off. Used to keep off jitter. Think 200ms maybe
                   let elapsedTimeBetweenFrames = 0.;
@@ -1237,7 +1261,7 @@ if( !window.touchMode&&!window.touchOnlyMode) {
     
     let coreShift=0;
     for(var shift = 0.;shift<4;shift++)//find maximally different loudest note
-       if (Math.abs(Math.abs((note*2)%24-loudestFret[shift].note%24)-12)<Math.abs(coreShift-12))
+       if (Math.abs(Math.abs((note*2)%24-loudestFret[shift].note%24)-24/2.)<Math.abs(coreShift-24/2.))
         coreShift=Math.abs((note*2)%24-loudestFret[shift].note%24)
     
 
@@ -1394,13 +1418,13 @@ lineMat.color = new THREE.Color("black");
             
             if(isFinite(testarContinuous[g])&&testarContinuous[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.){
                 
-                let arm =((flip*mustarD[g]+twist+12)*radialWarp)%24./24.*pi*2.;
+                let arm =((flip*mustarD[g]+twist+12)*radialWarp)%24/24*pi*2.;
                 const lengtOriginal=(testarContinuous[g]-minTestar)/(maxTestar-minTestar);//twice applied
                 var widt = (1.-lengtOriginal)*starshipSize;
                 if (widt==0)widt=starshipSize;
                 //var widt =starshipSize;
                 const vop = new THREE.Color();
-                vop.setHSL((-mustarD[g]+8)%24./24., mustarD[g]/lightingScaleStar,mustarD[g]/lightingScaleStar);//297 is around the highest heard note
+                vop.setHSL((-mustarD[g]+8)%24/24., mustarD[g]/lightingScaleStar,mustarD[g]/lightingScaleStar);//297 is around the highest heard note
                 
                 const rpio2 =arm+pi/2.;
                 if(RockInTheWater==0||RockInTheWater==1)
@@ -1581,7 +1605,6 @@ lineMat.color = new THREE.Color("black");
             
     starStreamPositionAttribute.needsUpdate = true;
     starStreamColorAttribute.needsUpdate = true;
-            console.log("here")
         }
                 
         
@@ -1596,22 +1619,22 @@ else{//start drawing of just twenty four frets here
     }
 
 
-                             for (var g=0; g<24; g++) {
+                             for (var g=0; g<EldersLeg; g++) {
                                  if(testar[g]>maxTestar){maxTestar=testar[g];}
                                  if(testar[g]<minTestar)minTestar=testar[g];
                              }
-let fretMultiplied = Math.round(24./((radialWarp<1)?radialWarp:1));
-    
-            for (var g=0; g<fretMultiplied; g++) {
-            const widt = starshipSize/2.;
-            let arm =(flip*g*radialWarp+twist)%24./24.*pi*2.;
+let fretMultiplied = Math.round(EldersLeg/((radialWarp<1)?radialWarp:1));
+    console.log(fretMultiplied)
 
-            const lengt = (testar[(g+12)%24]-minTestar)/(maxTestar-minTestar);
+            for (var g=0; g<fretMultiplied; g++) {
+            const widt = starshipSize/(EldersLeg/24.)**.5/2.;
+            let arm =(flip*g*radialWarp+twist)%EldersLeg/EldersLeg*pi*2.;
+
+            const lengt = (testar[(g*2.+EldersLeg)%(EldersLeg*2.)/2.]-minTestar)/(maxTestar-minTestar);
 
                 const vop = new THREE.Color();
-                      vop.setHSL((20-g)%24/24.,1.,.5);
+                      vop.setHSL(((20*EldersLeg/24.-g))%EldersLeg*1./EldersLeg,1.,.5);
 
-                  
                   starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
                   starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,1.)
                   starColorAttribute.setXYZW(starStride+2,vop.r,vop.g,vop.b,1.)
@@ -2248,9 +2271,6 @@ for(var n = 0; n<targets.length;n++){
 
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
-const fractionOfFrame = Math.floor(bufferSize/2.);
-const yinData = new Float64Array(fractionOfFrame);
-
 function calculatePitch ()
 {
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
