@@ -4,7 +4,6 @@
 <html lang="en">
     <head>
         <script>
-            window.fftSize=512;
 
             window.userHasGestured = false;
             </script>
@@ -134,35 +133,23 @@
                   <label for="fretCount">Fruits</label>
 
                   <input type="number" id="fretCount" name="fretCount" class="num" onkeydown="
-                                     let fc=       document.getElementById('fretCount').value;
-                 if(fc>=8){
-                        EldersLeg=Math.round(fc);
-                    minimumFFTfactor = Math.ceil(Math.log(EldersLeg*4.)/Math.log(2.));
-                    if(minimumFFTfactor>9)
-                        fftSize=2**minimumFFTfactor;
-                    else
-                        fftSize = 2**9;
-                    
-                    
-                                          analyser.disconnect();
-                      audioX = new AudioContext();
-                      analyser = audioX.createAnalyser();
-                      source = audioX.createMediaStreamSource( soundStream );
-                      source.connect(analyser);
-                      analyser.fftSize = fftSize;
-                                                              
-                    dataArray = new Uint8Array( fftSize );
-                    
-                    
-                        starGeometry = new THREE.BufferGeometry();
-                         starGeometry.dynamic = true;
-                         
-                         starGeometry.setAttribute('position', new THREE.Float32BufferAttribute( star,3 ));
-                         starGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ));
-                        starMesh = new THREE.Mesh(starGeometry, starMaterial);
-                    scene.add(starMesh);
+                                                      number= document.getElementById('fretCount').value;
+                                                      key  = 'a';
+                    if(!isNaN(number)&&number>1){
+                                                      callKey(new KeyboardEvent('keydown', {'key':key, 'keyCode':key.charCodeAt(0)}));
+                                                scene.remove(starMesh)
+                                                        starGeometry = new THREE.BufferGeometry();
+                                                         starGeometry.dynamic = true;
+                                                         
+                                                         starGeometry.setAttribute('position', new THREE.Float32BufferAttribute( star,3 ));
+                                                         starGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ));
+                                                        starMesh = new THREE.Mesh(starGeometry, starMaterial);
+                                                    scene.add(starMesh)
+}
 
-                    }">
+
+">
+
                       <br>
                <input type="checkbox" id="DotStar" name="t"  onclick= "uniforms.starOnDot.value=!uniforms.starOnDot.value;">
                <label for="DotStar">Dot has Starship!?</label>

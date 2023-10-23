@@ -1,4 +1,4 @@
-
+window.fftSize=512
 window.zoom=1.;
 window.starSpin=0.;
 window.RockInTheWater=0;
@@ -15,6 +15,8 @@ window.dynamicCoring=false;
 let osmdStaffsVisible = 0;
 let runningHash = true;
 let number = "";
+window.EldersLeg = 500;
+
 function readHash(){
     
     let hashindex = 0;
@@ -102,21 +104,19 @@ window.addEventListener('keydown', function(event) {if(window.uniformsLoaded)cal
 
 
     //meta keys like ctrlKey must be processed first and should have symbol preferably
-    if (document.activeElement.className=="num");//don't take hotkey's while menu number selector engaged
-    if (key=="a"){
-        EldersLeg=Math.round(number);
-        let minimumFFTfactor = Math.ceil(Math.log(EldersLeg*4.)/Math.log(2.));
-        if(minimumFFTfactor<=15){
-            if(minimumFFTfactor>9)
-                window.fftSize=2**minimumFFTfactor;
-            else
-                window.fftSize = 2**9;
-            console.log(fftSize)
+        if (key=="a"){
+            EldersLeg=Math.round(number);
+            let minimumFFTfactor = Math.ceil(Math.log(EldersLeg*12.)/Math.log(2.));
+            if(minimumFFTfactor<=15){
+                if(minimumFFTfactor>9)
+                    window.fftSize=2**minimumFFTfactor;
+                else
+                    window.fftSize = 2**9;
+                    setFFTdependantSizes();
 
+            }
         }
-    }
-        
-        
+    else if (document.activeElement.className=="num");//don't take hotkey's while menu number selector engaged
     else if(key == "c" && event.ctrlKey){dynamicCoring=!dynamicCoring; if(!dynamicCoring)coreData.fill(1./1.324717);}
     else if(key == "q" && event.ctrlKey)uniforms.squareClover.value=!uniforms.squareClover.value;
     else if(key == "x" && event.ctrlKey)uniforms.fieldPowerBoost.value=!uniforms.fieldPowerBoost.value;
@@ -402,3 +402,6 @@ window.addEventListener('keydown', function(event) {if(window.uniformsLoaded)cal
                 document.msExitFullscreen();
               }
             }
+
+
+

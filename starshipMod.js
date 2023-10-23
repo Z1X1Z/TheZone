@@ -104,7 +104,6 @@ let zoomAtl41=false;//watch for the 1 and the l
 
 var zoomOutEngage=false;
 var pi = Math.PI;
-                            let EldersLeg = 24;
 
 var bufferSize,numberOfBins, frequencies, inputData, point, pointColor,fractionOfFrame,yinData,
                             starArms,
@@ -663,8 +662,8 @@ function setFFTdependantSizes(){
                                   testarContinuous =new Float64Array(starArms);
                                   mustarD =new Float64Array(starArms);
      
+     
  }
-                                           setFFTdependantSizes();
 
 function init() {
      setFFTdependantSizes();
@@ -1624,13 +1623,12 @@ else{//start drawing of just twenty four frets here
                                  if(testar[g]<minTestar)minTestar=testar[g];
                              }
 let fretMultiplied = Math.round(EldersLeg/((radialWarp<1)?radialWarp:1));
-    console.log(fretMultiplied)
 
             for (var g=0; g<fretMultiplied; g++) {
             const widt = starshipSize/(EldersLeg/24.)**.5/2.;
-            let arm =(flip*g*radialWarp+twist)%EldersLeg/EldersLeg*pi*2.;
+            let arm =(flip*g*radialWarp+twist)%EldersLeg*1./EldersLeg*pi*2.;
 
-            const lengt = (testar[(g*2.+EldersLeg)%(EldersLeg*2.)/2.]-minTestar)/(maxTestar-minTestar);
+            const lengt = (testar[Math.round((g*2.+EldersLeg)%(EldersLeg*2.)/2.)]-minTestar)/(maxTestar-minTestar);
 
                 const vop = new THREE.Color();
                       vop.setHSL(((20*EldersLeg/24.-g))%EldersLeg*1./EldersLeg,1.,.5);
@@ -1643,9 +1641,9 @@ let fretMultiplied = Math.round(EldersLeg/((radialWarp<1)?radialWarp:1));
                   starColorAttribute.setXYZW(starStride+5,vop.r,vop.g,vop.b,1.)
                 
 const rpio2 =arm+pi/2.;
-                
-const xBoost = -Math.sin(arm)*(1.+widt)/4./1.3247;
-const yBoost = -Math.cos(arm)*(1.+widt)/4./1.3247;
+   let centerDisplacement = (1.+widt)/4./1.3247
+const xBoost = -Math.sin(arm)*centerDisplacement;
+const yBoost = -Math.cos(arm)*centerDisplacement;
                 
 const x = widt*-Math.sin(rpio2);
 const y = widt*-Math.cos(rpio2);
