@@ -247,10 +247,11 @@ function spiral_compress(){
     var note24 =24*Math.log(freq/window.ConcertKey)/Math.log(2.)+49*2;
 
 
-        testar[Math.round((note24*EldersLeg/24.)%EldersLeg)] += Math.abs(z[n])*radialWarp;
+        testar[Math.round(note24*EldersLeg/24.)%EldersLeg] += Math.abs(z[n])*radialWarp;
       testarContinuous[n] = Math.abs(z[n]);
                           mustarD[n] = note24;
                             }
+                            
 };
 window.ConcertKey = 440;
 
@@ -1622,14 +1623,15 @@ else{//start drawing of just twenty four frets here
                                  if(testar[g]>maxTestar){maxTestar=testar[g];}
                                  if(testar[g]<minTestar)minTestar=testar[g];
                              }
-let fretMultiplied = Math.round(EldersLeg/((radialWarp<1)?radialWarp:1));
+    let oddSkew =EldersLeg%2/2.;
+let fretMultiplied = oddSkew+Math.round(EldersLeg/((radialWarp<1)?radialWarp:1));
+            for (var g=oddSkew; g<fretMultiplied; g++) {
+                console.log(g)
+                const incrementation = (EldersLeg%2==0)?g%2+1:(g+1)%2+1;
+            const widt = starshipSize/(EldersLeg/24.)**.5/2./incrementation;
+            const arm =((flip*(g)*radialWarp+twist*EldersLeg/24.)%EldersLeg/EldersLeg)*pi*2.;
 
-            for (var g=0; g<fretMultiplied; g++) {
-            const widt = starshipSize/(EldersLeg/24.)**.5/2.;
-            let arm =(flip*g*radialWarp+twist)%EldersLeg*1./EldersLeg*pi*2.;
-
-            const lengt = (testar[Math.round((g*2.+EldersLeg)%(EldersLeg*2.)/2.)]-minTestar)/(maxTestar-minTestar);
-
+            const lengt = (testar[Math.round((g*2+EldersLeg)%(EldersLeg)/2.)]-minTestar)/(maxTestar-minTestar);
                 const vop = new THREE.Color();
                       vop.setHSL(((20*EldersLeg/24.-g))%EldersLeg*1./EldersLeg,1.,.5);
 

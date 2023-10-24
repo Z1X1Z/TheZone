@@ -15,7 +15,7 @@ window.dynamicCoring=false;
 let osmdStaffsVisible = 0;
 let runningHash = true;
 let number = "";
-window.EldersLeg = 500;
+window.EldersLeg = 24;
 
 function readHash(){
     
@@ -108,10 +108,10 @@ window.addEventListener('keydown', function(event) {if(window.uniformsLoaded)cal
             EldersLeg=Math.round(number);
             let minimumFFTfactor = Math.ceil(Math.log(EldersLeg*12.)/Math.log(2.));
             if(minimumFFTfactor<=15){
-                if(minimumFFTfactor>9)
+                if(minimumFFTfactor>10)
                     window.fftSize=2**minimumFFTfactor;
                 else
-                    window.fftSize = 2**9;
+                    window.fftSize = 2**10
                     setFFTdependantSizes();
 
             }
