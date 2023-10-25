@@ -1301,10 +1301,9 @@ if( !window.touchMode&&!window.touchOnlyMode) {
     
            renderer.readRenderTargetPixels (cloverRenderTarget,  Math.floor(window.innerWidth/2.), Math.floor(window.innerHeight/2.),1,1,  hyperCorePixel)
            hyperCorePixel[0]/=4.;
-    let hyperCoreOffset = Math.ceil(hyperCorePixel[0]-.75);
-
+    let hyperCoreOffset = Math.ceil(hyperCorePixel[0]);
     if(!isNaN(loudestFret[0].volume)&&window.dynamicCoring)
-        coreData[hyperCoreOffset]=coreShift*4./3.;//24*1.3247;
+        coreData[hyperCoreOffset]=coreShift*2.*4./3.;//24*1.3247;
     
     coreTexture = new THREE.DataTexture( coreData, 40, 1,THREE.RedFormat,THREE.FloatType);
     coreTexture.unpackAlignment=1
@@ -1316,7 +1315,7 @@ if( !window.touchMode&&!window.touchOnlyMode) {
     
     
     if(!isNaN(loudestFret[0].volume)&&omniDynamicEngaged)
-        omniData[hyperCoreOffset]=coreShift;
+        omniData[hyperCoreOffset]=coreShift*2.;
     omniTexture = new THREE.DataTexture( omniData, 40, 1,THREE.RedFormat,THREE.FloatType);
     omniTexture.unpackAlignment=1
     omniTexture.needsUpdate=true;

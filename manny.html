@@ -1375,7 +1375,7 @@ float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;
 //if(morph!=0.)cored*=3./2.;//stabilize morph dance collaboration
 
 //2.47805268028830 and 3 are solutions to x=log3(x**3)
-float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(hyperCore)/40.,0.)).x;
+//float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(hyperCore)/40.,0.)).x;
 
 
 
@@ -1447,11 +1447,11 @@ if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
                           
                           
 for (float counter=0.;counter<iterations;counter++)if(dstnce<40.){
-    float OmniDynamicPetals =texture2D(omniDynamic,vec2(floor(hyperCore)/40.,0.)).x;
 
-
+    float OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
+    float OmniPetal = petals+OmniDynamicPetalShift*(petals+6./6.);
     
-    CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(hyperCore)/40.,0.)).x;
+  float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(loops+counter)/40.,0.)).x;
     
          if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
 
@@ -1461,7 +1461,7 @@ for (float counter=0.;counter<iterations;counter++)if(dstnce<40.){
     s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
     dstnce = length(s);
 
-           vec2 cloverMAP = (spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*petals/(6.+petals)-atan(d.x,d.y)+PI))*CORE_DELIMITER+.5;
+           vec2 cloverMAP = (spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI))*CORE_DELIMITER+.5;
                                    
                                    vec2 ColorWheelClover;
                                    float cycleShiftChiral = 0.;
@@ -1471,13 +1471,13 @@ for (float counter=0.;counter<iterations;counter++)if(dstnce<40.){
                                                 
                                                     if (flipStar!=0.)cycleShiftChiral=0.;
                                                     else cycleShiftChiral=PI;
-                                                ColorWheelClover=spin2(vec2(-s.y,-s.x)*flipStar,(atan(s.y,s.x)*petals/(6.+petals)+atan(d.x,d.y)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar);//clover actually seems to have down to the right so it may need to be rotated by pi/x
+                                                ColorWheelClover=spin2(vec2(-s.y,-s.x)*flipStar,(atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)+atan(d.x,d.y)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar);//clover actually seems to have down to the right so it may need to be rotated by pi/x
                                                 }
                                             else {
                                                 
                                                     if (flipStar!=0.)cycleShiftChiral=PI/4.;
                                                     else cycleShiftChiral=-PI;
-                                                    ColorWheelClover = spin2(vec2(-s.x,-  s.y)*flipStar,(atan(s.x,s.y)*petals/(6.+petals)-atan(d.y,d.x)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar);
+                                                    ColorWheelClover = spin2(vec2(-s.x,-  s.y)*flipStar,(atan(s.x,s.y)*OmniPetal/(6.+OmniPetal)-atan(d.y,d.x)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar);
                                                 }
                                             if(dstnce<4./3.)    beta   =  hsv2rgb(vec3((atan(ColorWheelClover.y,ColorWheelClover.x))/(2.*PI),1.,1.));
                                 }
@@ -1529,15 +1529,21 @@ vec2 lastS = s;
 
    s.x=log(abs(s.x))/log(baseN);
    //traditionally be e or 3 probably 1.5 to 4
+   
+
+   
     if(Spoker&&loops+counter+1.<=hyperCoreBoosted)
                              {
+                                 
+                                 
                hyperCoreBoosted-=1.;
                              s/=metaCoreDriveFactor;//engage spokelover s/=2.+'superspokes'
                              }
             else  {
+                
+
                 hyperCoreBoosted+=1.;
-                if(dstnce<4./3.)s=spin2(s,atan(s.y,s.x)*(petals+OmniDynamicPetals)/6.);
-                }
+}
    
    if(spokelover&&counter<hyperCoreBoosted){
         if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
@@ -1553,14 +1559,22 @@ vec2 lastS = s;
   
 dstnce = length(s);
 
-   
                              //              s*=refactorCores;c*=refactorCores;
-                          float   dstnce = length(s);
+                             
+                             
+                             if(dstnce<4./3.)s=spin2(s,atan(s.y,s.x)*(OmniPetal)/6.);
+
 for(int i=0;i<40; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER&& loops+counter-continuumCounter<=hyperCoreBoosted)
 {
 //if(i==0){float b = ;s*=b;dstnce*b;}
  s*=metaCoreDriveFactor;dstnce*=metaCoreDriveFactor;loops++;
+ 
+
+OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
+  OmniPetal = petals+OmniDynamicPetalShift*(petals+6./6.);
+  if(dstnce<4./3.)s=spin2(s,atan(s.y,s.x)*OmniPetal/6.);
+
  if (cloverSlide)
    {
        if(float(i)>hyperCoreBoosted-loops-counter+continuumCounter)
@@ -1587,10 +1601,13 @@ if(dstnce<CORE_DELIMITER&& loops+counter-continuumCounter<=hyperCoreBoosted)
   
   if(metaCarousel!=0.
      &&(float(i)>=hyperCoreBoosted-loops-counter+continuumCounter+1.))     //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
-        s=spin2(s,time*wise*metaCarousel*(1.+petals/6.)*rate);
+        s=spin2(s,time*wise*metaCarousel*(1.+OmniPetal/6.)*rate);
 
 }
-else break;
+else{
+ break;
+ }
+
                              colorShift+=hyperCoreBoosted;
 }else break;
 ///if(multiplicatorNexus)s*=colorShift/88.8;
@@ -1689,7 +1706,7 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
 o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z)*1.5*starship.w,0.,1.)+starship.xyz*starship.w*spirographTranslucer;
                       o*=isBlack;
                       o+=isGrey;
-    if(length(p-coords.yx)<.0333*zoom)o=vec3(hyperCore/255.*4.,0.,255.);
+                      if(length(p-coords.yx)<2.*sqrt(2.)/min(resolution.x,resolution.y)*zoom)o=vec3(hyperCoreBoosted/255.*4.,0.,255.);
 return clamp(o,0.,1.);}
 
                       
@@ -2567,7 +2584,7 @@ if(starOnDot){
                          //   vec3 beta   =  hsv2rgb(vec3((atan(ColorWheel.y,ColorWheel.x)+PI)/(2.*PI),1.,1.));
 
                                  
-if(length(p)>.0333)
+if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
 {
                                  gl_FragColor=(StaRivers*spirographTranslucerStaRivers+
               (starship*spirographTranslucer-vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.))+DOTstarship*spirographTranslucerDOT//the overal 1.23 boost is optional but with alpha blending on it's nice
