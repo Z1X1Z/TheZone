@@ -2602,19 +2602,19 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
 + //-clamp(starship.xyz*starship.w-(mny.r+mny.g+mny.b)*.333-mannyFace*100.,0.,1.)
                                                           -(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge+
               clamp(clamp(cloud+
-                                zoomer
-                          
+                                zoomer+
+                          vec3(
                           -(bridge.x+bridge.y+bridge.z)*4.
                           -(starship.x+starship.y+starship.z)/maxColorOfStarship*starship.w*.5
                           -(DOTstarship.x+DOTstarship.y+DOTstarship.z)/DOTmaxColorOfStarship*.5*DOTstarship.w
                         +(-StaRivers.r-StaRivers.g-StaRivers.b)*StaRivers.w//uncomment for thicker rivers
                           -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*4.
-                          
+                          )
                                                         ,0.,1.)
                     
                     -(mny.r+mny.b+mny.g)*4.,.0,1.))
       
-                                      ,1.))*isBlack*isBlackStaRivers*isBlackDOT+isGrey*2.+isGreyStaRivers+isGreyDOT+  (isBlack-1.);}
+                                      ,1.))*vec4(isBlack*isBlackStaRivers*isBlackDOT+isGrey*2.+isGreyStaRivers+isGreyDOT+  (isBlack-1.));}
                                  else gl_FragColor=vec4(zoomer,1.);
 
                                          }
