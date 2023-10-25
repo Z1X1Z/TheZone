@@ -1831,7 +1831,7 @@ return
      vec3 man(vec2 p,vec2 t) {
          p*=-1.75;
          vec2 s = p;
-         float l;
+         float l=0.;
          float flip=-t.x;
          if (flip<0.) p = -p;
          if (abs(p.x*p.x+p.y*p.y)<2.0){for (int t = 0; t < 30; t++) {
