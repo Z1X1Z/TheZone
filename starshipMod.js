@@ -1198,8 +1198,8 @@ function runOSMD (){
 
                  let   upOrDown = 1;
                         let frameCount = 0;
-                                           const coreData = new Float32Array(41).fill(1./1.324717);
-                                           const omniData = new Float32Array(41).fill(0);;
+                                           const coreData = new Float32Array(40).fill(1./1.324717);
+                                           const omniData = new Float32Array(40).fill(0);;
                                            let hyperCorePixel = new Uint8Array(4);
 
                                            
@@ -1677,10 +1677,9 @@ let fretMultiplied = oddSkew+Math.round(EldersLeg/((radialWarp<1)?radialWarp:1))
             for (var g=oddSkew; g<fretMultiplied; g++) {
                 const incrementation = (EldersLeg%2==0)?g%2+1:(g+1)%2+1;
             const widt = starshipSize/(EldersLeg/24.)**.5/2./incrementation;
-            const arm =((flip*(g)*radialWarp+twist*EldersLeg/24.)%EldersLeg/EldersLeg)*pi*2.;
-
-            const lengt = (testar[Math.round((g*2+EldersLeg)%(EldersLeg)/2.)]-minTestar)/(maxTestar-minTestar);
-                const vop = new THREE.Color();
+                const arm =(flip*g*radialWarp+twist)%EldersLeg*1./EldersLeg*pi*2.;
+                
+                const lengt = (testar[(g*2.+EldersLeg)%(EldersLeg*2.)/2.]-minTestar)/(maxTestar-minTestar);                const vop = new THREE.Color();
                       vop.setHSL(((20*EldersLeg/24.-g))%EldersLeg*1./EldersLeg,1.,.5);
 
                   starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
