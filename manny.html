@@ -2424,7 +2424,7 @@ vec2 dance = vec2(0.);
          vec2 fourcreaturePlayerP = p*1.5;
         if(MannyONtrail==0) fourcreaturePlayerP=spin2(fourcreaturePlayerP,atan(d.y,d.x)-PI*3./2.);//put manny on trail
 
-     vec3 creatures=vec3(0.),vec3(0.);
+     vec3 creatures=vec3(0.),b=vec3(0.);
      vec3 bridge=vec3(0.);
                                           
     vec3 cloud= vec3(0.);
@@ -2596,9 +2596,9 @@ if(starOnDot){
                                  
 if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
 {
-                                 gl_FragColor=(StaRivers*spirographTranslucerStaRivers+
-              (starship*spirographTranslucer-vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.))+DOTstarship*spirographTranslucerDOT
-                                               
+                                 gl_FragColor=
+                                 (StaRivers*spirographTranslucerStaRivers +DOTstarship*spirographTranslucerDOT+
+                                  (starship*spirographTranslucer-vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.))
                                  +vec4(Pillars+mnyX+(clamp(mny*starshipMultiplier -(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES
                                                      +creatures+b+bridge+
               clamp(clamp(cloud+
