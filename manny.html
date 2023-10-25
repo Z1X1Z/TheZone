@@ -2598,7 +2598,8 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
 {
                        vec4 ss =StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer;
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
-                       vec4 goodies = vec4(Pillars+mnyX,1.);
+                       vec4 goodies = vec4(Pillars+mnyX+clamp(
+                                                          -vec3(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES,1.);
                         vec4 tree = vec4( clamp(
                                                 clamp(
                                                       cloud+
