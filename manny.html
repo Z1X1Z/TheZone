@@ -2243,7 +2243,7 @@ vec3 xtol(vec2 s, vec2 t){
                             p.x-=3.;
                             p*=3.;
                             vec2 s = p;
-                            float d = 0.0, l;
+                            float d = 0.0, l=0.;
                               if (!(p.x<-4.)&&abs(p.y)<1.789||unleash.x!=-1.)
                             for (int i = 0; i < 5; i++) {
                               s = vec2(-1./(s.x * s.x - s.y * s.y + p.x),-1./( 2.0 * s.x * s.y + p.y));
@@ -2506,11 +2506,11 @@ mny+=HEART*heartMultiplier;
 
     vec3 ARTICLE=vec3(0.);
     if(articles){
-         /*   vec3 HORSE=horse(characterP, moveDynamic);
+           vec3 HORSE=horse(characterP, moveDynamic);
             ARTICLE+=scroll(characterP+1.5*vec2(0.,resolution.x/min(resolution.x,resolution.y)),vec2(-1.));
             vec3 SWORD = sword(characterP+vec2(swordSkew,0.),vec2(0.));;
             ARTICLE+=clamp(lamp(characterP,vec2(-1.))+flames(characterP-vec2(.5,0.))-(SWORD.r+SWORD.g+SWORD.b+HORSE.r*3.)*1000000.,0.,1.)+SWORD+HORSE;
-          */
+          
     }
                                  float recenter = 0.;
                                   float rescale = 1.;
