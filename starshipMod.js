@@ -579,9 +579,13 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
        volume: {value: 0.0 },
        totalAmp: {value: 1.0 },
 
-           resolution: {value: new Float32Array([0,0])},
-           coords: {value: new Float32Array([0,0])},
-       d: {value: new Float32Array([0,0])},
+     
+           resolution: {value: null},//these are the THREE.vec2() uniforms
+           coords: {value: null},
+       d: {value:null},
+ dotCoord:{value:null},
+
+     
        dynamicDance: {value: false},
        remediatedColors: {value: false },
 
@@ -597,7 +601,6 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
        twistStar:{value:0.},
        flipStar:{value:1.},
        NightAndDay:{value:false},
-       dotCoord:{value:new Float32Array([0,0])},
        starOnDot:{value:false},
        gameOn:{value:false},
        scoreLoaded:{value:false},
@@ -668,6 +671,12 @@ function setFFTdependantSizes(){
  }
 console.log(0)
 function init() {
+     
+           uniforms.resolution.value = new THREE.Vector2(0,0);
+     uniforms.coords.value = new THREE.Vector2(0,0);
+     uniforms.d.value = new THREE.Vector2(0,0);
+     uniforms.dotCoord.value = new THREE.Vector2(0,0);
+
      console.log(1)
      setFFTdependantSizes();
      
@@ -799,17 +808,17 @@ function init() {
       STAR:{value: null   },
         EDEN:{value: null  },
   eden:{value: 0    },
-    loudestFret1:{value:[0.,0.]},
-  loudestFret2:{value:[0.,0.]},
-  loudestFret3:{value:[0.,0.]},
-  loudestFret4:{value:[0.,0.]},
+    loudestFret1:{value:new THREE.Vector2( 0.,0.)},
+  loudestFret2:{value:new THREE.Vector2( 0.,0.)},
+  loudestFret3:{value:new THREE.Vector2( 0.,0.)},
+  loudestFret4:{value:new THREE.Vector2( 0.,0.)},
       
   volumeFret1:{value:0.},
   volumeFret2:{value:0.},
   volumeFret3:{value:0.},
   volumeFret4:{value:0.},
       
-  resolution: {value: [ window.innerWidth,window.innerHeight] },
+  resolution: {value:  new THREE.Vector2( window.innerWidth,window.innerHeight) },
   d:{value: new THREE.Vector2() },
 
   }])
