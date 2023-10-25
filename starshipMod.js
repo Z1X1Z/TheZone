@@ -2214,6 +2214,8 @@ shaderScene.add( targets[n] );
                                                         
                                                         FEEDBACKuniformsFlip.STAR.value=FeedbackrenderTarget.texture;
                                                         renderer.render( feedbackSceneFlip, camera );
+                                                        console.log("worked for feedback Shader")
+
                                                     }
                                                     backBufferFlip=!backBufferFlip;
                                                     
