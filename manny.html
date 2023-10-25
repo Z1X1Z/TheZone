@@ -2598,8 +2598,21 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
 {
                                  gl_FragColor=
                                  (StaRivers*spirographTranslucerStaRivers +DOTstarship*spirographTranslucerDOT+
-                                  (starship*spirographTranslucer-vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.)));
-                          }
+                                  (starship*spirographTranslucer-vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.))
+                                 +vec4(Pillars+mnyX+(clamp(mny*starshipMultiplier -(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES
+                                                     +creatures+b+bridge+
+              clamp(clamp(cloud+
+                                zoomer
+                          
+                          -(bridge.x+bridge.y+bridge.z)*4.
+                
+                          
+                                                        ,0.,1.)
+                    
+                    -(mny.r+mny.b+mny.g)*4.,.0,1.))
+      
+                                      ,1.))*isBlack*isBlackStaRivers*isBlackDOT+isGrey*2.+isGreyStaRivers+isGreyDOT+  (isBlack-1.);}
+                                 else gl_FragColor=vec4(zoomer,1.);
 
                                          }
 
