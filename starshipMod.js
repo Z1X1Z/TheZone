@@ -579,9 +579,9 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
        volume: {value: 0.0 },
        totalAmp: {value: 1.0 },
 
-           resolution: {value: [0,0] },
-           coords: {value: [0,0] },
-       d: {value: [0,0]},
+           resolution: {value: new Float32Array([0,0])},
+           coords: {value: new Float32Array([0,0])},
+       d: {value: new Float32Array([0,0])},
        dynamicDance: {value: false},
        remediatedColors: {value: false },
 
@@ -597,7 +597,7 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
        twistStar:{value:0.},
        flipStar:{value:1.},
        NightAndDay:{value:false},
-       dotCoord:{value:[0,0]},
+       dotCoord:{value:new Float32Array([0,0])},
        starOnDot:{value:false},
        gameOn:{value:false},
        scoreLoaded:{value:false},
