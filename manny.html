@@ -754,6 +754,14 @@
 </script>
 
 
+    <script id="wipeFragmentShader" type="x-shader/x-fragment">
+        varying vec2 vUv;
+        uniform sampler2D cloverSampler;
+        
+       void main(){
+            gl_FragColor=texture2D(cloverSampler, vUv);;
+        }
+        </script>
 
     <script id="FourRiversfragmentShader" type="x-shader/x-fragment">
         varying vec2 vUv;
@@ -831,6 +839,7 @@ void main(){
     uniform sampler2D STAR;
     uniform sampler2D EDEN;
     uniform sampler2D coreTextureSampler;
+    uniform sampler2D omniDynamic;
 
     uniform int eden;
 
@@ -1100,7 +1109,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                     vec3 torso(vec2 g, vec2 t){
                     float b = 0.;
                     vec2 z=g.xy;
-                   // if(g.x*g.x+g.y*g.y<40.)
+                    if(g.x*g.x+g.y*g.y<40.)
                     for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;break;}
                     else{
                         z=2.*vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),(2.0*z.x*z.y-g.y+t.y));
@@ -1366,13 +1375,14 @@ float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;
 //if(morph!=0.)cored*=3./2.;//stabilize morph dance collaboration
 
 //2.47805268028830 and 3 are solutions to x=log3(x**3)
-float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(hyperCore)/22.,0.)).x;
+float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(hyperCore)/40.,0.)).x;
 
-   
+
+
 
    float dif = 1.;//3.-(1.-.47805268028830)/3.;
    float equilibriator = 1.;
-   if(lfc>CORE_DELIMITER)equilibriator=lfc/(lfc-zoom/dif)*dif;
+   //if(lfc>CORE_DELIMITER)equilibriator=lfc/(lfc-zoom/dif)*dif;
       
 if(MetaCored)hyperCore=
    cored/1.5+log(lfc)*logStabilizationConstant*equilibriator;
@@ -1437,10 +1447,11 @@ if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
                           
                           
 for (float counter=0.;counter<iterations;counter++)if(dstnce<40.){
+    float OmniDynamicPetals =texture2D(omniDynamic,vec2(floor(hyperCore)/40.,0.)).x;
 
 
     
-    CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(hyperCore)/22.,0.)).x;
+    CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(hyperCore)/40.,0.)).x;
     
          if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
 
@@ -1523,8 +1534,10 @@ vec2 lastS = s;
                hyperCoreBoosted-=1.;
                              s/=metaCoreDriveFactor;//engage spokelover s/=2.+'superspokes'
                              }
-            else  hyperCoreBoosted+=1.;
-
+            else  {
+                hyperCoreBoosted+=1.;
+                if(dstnce<4./3.)s=spin2(s,atan(s.y,s.x)*(petals+OmniDynamicPetals)/6.);
+                }
    
    if(spokelover&&counter<hyperCoreBoosted){
         if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
@@ -1540,7 +1553,6 @@ vec2 lastS = s;
   
 dstnce = length(s);
 
-if(dstnce<4./3.&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
    
                              //              s*=refactorCores;c*=refactorCores;
                           float   dstnce = length(s);
@@ -1677,6 +1689,7 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
 o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z)*1.5*starship.w,0.,1.)+starship.xyz*starship.w*spirographTranslucer;
                       o*=isBlack;
                       o+=isGrey;
+    if(length(p-coords.yx)<.0333*zoom)o=vec3(hyperCore/255.*4.,0.,255.);
 return clamp(o,0.,1.);}
 
                       
@@ -2371,9 +2384,7 @@ vec2 dance = vec2(0.);
                                                  
                                                  
                                                  
-                                                 
-                                                 
-         
+                                 
          vec2 characterP = p*2.;
                                  
          vec2 characterPSpunToKey=spin2(characterP*vec2(1.,flipStar)/.8,-starSpin*mod(time*rate,PI*2.)-(1.-abs(starSpin))*twistStar*flipStar);
@@ -2555,6 +2566,9 @@ if(starOnDot){
                         //         vec2 ColorWheel = vUv-.5;/// in clover now remove once working
                          //   vec3 beta   =  hsv2rgb(vec3((atan(ColorWheel.y,ColorWheel.x)+PI)/(2.*PI),1.,1.));
 
+                                 
+if(length(p)>.0333)
+{
                                  gl_FragColor=(StaRivers*spirographTranslucerStaRivers+
               (starship*spirographTranslucer-vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.))+DOTstarship*spirographTranslucerDOT//the overal 1.23 boost is optional but with alpha blending on it's nice
                                  +vec4(Pillars+mnyX+(clamp(mny*starshipMultiplier
@@ -2574,7 +2588,9 @@ if(starOnDot){
                     -(mny.r+mny.b+mny.g)*4.,.0,1.))
       
                                       ,1.))*isBlack*isBlackStaRivers*isBlackDOT+isGrey*2.+isGreyStaRivers+isGreyDOT+  (isBlack-1.);}
-                                                 
+                                 else gl_FragColor=vec4(zoomer,1.);
+
+                                         }
 
 </script>
 

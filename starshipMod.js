@@ -530,9 +530,10 @@ let lineMat, lineGeometry, line;
 
                     
 
-let  FEEDBACKuniforms, FEEDBACKuniformsFlip;
-                                           
+let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
+                             let   omniDynamicEngaged=false;
        let uniforms = {
+        omniDynamic:{value:null},
        coreTextureSampler:{value:null},
        STAR:{value: null    },
          EDEN:{value: null   },
@@ -614,7 +615,7 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip;
                                            var minimumDimension=1;
                                            var maximumDimension=1;
                      var height=window.innerHeight,width=window.innerWidth;
-                       let renderTarget;
+                       let renderTarget, cloverRenderTarget;
                        let backBufferFlip=false;
                       let FeedbackrenderTarget,FeedbackrenderTargetFlipSide;
                        
@@ -669,15 +670,13 @@ function setFFTdependantSizes(){
 function init() {
      setFFTdependantSizes();
      
-    renderTarget = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
-                                               Math.min(window.innerWidth,window.innerHeight)*4./3.);
+    renderTarget = new THREE.WebGLRenderTarget(window.innerWidth,window.innerHeight);
+     cloverRenderTarget = new THREE.WebGLRenderTarget(window.innerWidth,window.innerHeight);
 
-    FeedbackrenderTarget = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
-                                                Math.min(window.innerWidth,window.innerHeight)*4./3.);
+    FeedbackrenderTarget = new THREE.WebGLRenderTarget(window.innerWidth,window.innerHeight);
 
 
-    FeedbackrenderTargetFlipSide = new THREE.WebGLRenderTarget(Math.min(window.innerWidth,window.innerHeight)*4./3.,
-                                                Math.min(window.innerWidth,window.innerHeight)*4./3.);
+    FeedbackrenderTargetFlipSide = new THREE.WebGLRenderTarget(window.innerWidth,window.innerHeight);
 
 
     renderer = new THREE.WebGLRenderer();
@@ -689,6 +688,7 @@ function init() {
     renderer.setClearAlpha ( 0. )
 
     scene = new THREE.Scene();
+     finalSceneRerenderedering= new THREE.Scene();
     feedbackScene = new THREE.Scene();
     feedbackSceneFlip= new THREE.Scene();
     shaderScene = new THREE.Scene();
@@ -850,6 +850,25 @@ function init() {
     feedbackStarshipmeshFlip = new THREE.Mesh( geometryP, feedbackStarshipmaterialShader );
     feedbackSceneFlip.add(feedbackStarshipmeshFlip)
     
+     
+     wipeUniforms=THREE.UniformsUtils.merge([
+         THREE.UniformsLib.lights,
+         {
+         cloverSampler:{value:null}
+             
+         }
+         ]);
+     
+     wipeMaterialShader = new THREE.ShaderMaterial( {
+         uniforms:wipeUniforms,
+         vertexShader: document.getElementById( 'vertexShader' ).textContent,
+         fragmentShader: document.getElementById( 'wipeFragmentShader' ).textContent,
+
+       } );
+     wipeStarshipMesh = new THREE.Mesh( geometryP, wipeMaterialShader );
+     finalSceneRerenderedering.add(wipeStarshipMesh);
+          
+     
   renderer.setPixelRatio( rez);
      onWindowResize();
     animate();
@@ -1179,8 +1198,13 @@ function runOSMD (){
 
                  let   upOrDown = 1;
                         let frameCount = 0;
-                                           const coreData = new Float32Array(22).fill(1./1.324717);;
+                                           const coreData = new Float32Array(41).fill(1./1.324717);
+                                           const omniData = new Float32Array(41).fill(0);;
+                                           let hyperCorePixel = new Uint8Array(4);
+
+                                           
                                            let     coreTexture;
+                                           let omniTexture;
                                            let firstAnimation = true;
    function animate( timestamp ) {
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
@@ -1215,19 +1239,30 @@ function runOSMD (){
          const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
          var equilibriator = 1.;
         // let distC=(d_x*d_x+d_y*d_y)**.5
-        // if(distC>2./3.)equilibriator=distC/(distC-zoom);
-
+         let distC = Math.sqrt(coordX*coordX+coordY*coordY);
+        /* if(distC>coreTexture[
+            (uniforms[ "externalCores" ].value>0)?
+             Math.round (uniforms[ "externalCores" ].value):0])
+            equilibriator=distC/(distC-zoom);
+*/
         
-        uniforms[ "centralCores" ].value = Math.log(zoom)/Math.log(.5)+precores    ;
-         if(uniforms[ "morph" ].value!=0.)uniforms[ "centralCores" ].value*=3./2.;//stabilize morph dance collaboration
+        uniforms[ "centralCores" ].value = Math.log(zoom)/-Math.log(2.)+precores    ;
+        // if(uniforms[ "morph" ].value!=0.)uniforms[ "centralCores" ].value*=3./2.;//stabilize morph dance collaboration
 
-        uniforms[ "externalCores" ].value =(uniforms[ "centralCores" ].value)*2./3.+Math.log(Math.sqrt(coordX*coordX+coordY*coordY))*logStabilizationConstant*equilibriator+1;
-            uniforms[ "externalCores" ].value+=1./Math.log(.5)/equilibriator;
+        uniforms[ "externalCores" ].value =uniforms[ "centralCores" ].value/1.5+Math.log(distC)*logStabilizationConstant*equilibriator;
+           // uniforms[ "externalCores" ].value+=1./Math.log(.5)/equilibriator;
 
          if(uniforms.cloverSlide.value)uniforms[ "externalCores" ].value +=1./Math.log(.5);
+         else if(uniforms.cloverSlide.value&&uniforms.wheel.value)hyperCore+=.5/Math.log(.5);
 
+         if(uniforms.multiplicatorNexus.value)uniforms[ "externalCores" ].value-=.5/Math.log(.5);
+         if(uniforms.continuumClover.value)uniforms[ "externalCores" ].value-=.75/Math.log(.5);
+         
         if(uniforms[ "Spoker" ].value&&uniforms[ "MetaCored" ].value)
             uniforms[ "externalCores" ].value*=4./3./(1./Math.log(3.)+(1.-1./Math.log(3.))/1.75);
+         
+         var metaCoreDriveFactor =2.3247/1.618033988749;
+         uniforms[ "externalCores" ].value *= Math.log(2.)/Math.log(metaCoreDriveFactor);
     }
     
     if(firstAnimation){lastFrameTime=timestamp;firstAnimation=false;}
@@ -1262,20 +1297,34 @@ if( !window.touchMode&&!window.touchOnlyMode) {
     let coreShift=0;
     for(var shift = 0.;shift<4;shift++)//find maximally different loudest note
        if (Math.abs(Math.abs((note*2)%24-loudestFret[shift].note%24)-24/2.)<Math.abs(coreShift-24/2.))
-        coreShift=Math.abs((note*2)%24-loudestFret[shift].note%24)
+        coreShift=Math.abs((note*2)%24-loudestFret[shift].note%24)/24.
     
+           renderer.readRenderTargetPixels (cloverRenderTarget,  Math.floor(window.innerWidth/2.), Math.floor(window.innerHeight/2.),1,1,  hyperCorePixel)
+           hyperCorePixel[0]/=4.;
+    let hyperCoreOffset = Math.ceil(hyperCorePixel[0]-.75);
 
-    
-    let coreIndex = (uniforms.externalCores.value>0.)?Math.floor(uniforms.externalCores.value):0;
     if(!isNaN(loudestFret[0].volume)&&window.dynamicCoring)
-        coreData[coreIndex]=coreShift/24*2*2/3.;
+        coreData[hyperCoreOffset]=coreShift*4./3.;//24*1.3247;
     
-
-    coreTexture = new THREE.DataTexture( coreData, 22, 1,THREE.RedFormat,THREE.FloatType);
+    coreTexture = new THREE.DataTexture( coreData, 40, 1,THREE.RedFormat,THREE.FloatType);
     coreTexture.unpackAlignment=1
     coreTexture.needsUpdate=true;
     uniforms.coreTextureSampler.value=coreTexture;
     uniforms.coreTextureSampler.needsUpdate = true;
+    
+    
+    
+    
+    if(!isNaN(loudestFret[0].volume)&&omniDynamicEngaged)
+        omniData[hyperCoreOffset]=coreShift;
+    omniTexture = new THREE.DataTexture( omniData, 40, 1,THREE.RedFormat,THREE.FloatType);
+    omniTexture.unpackAlignment=1
+    omniTexture.needsUpdate=true;
+    uniforms.omniDynamic.value=omniTexture;
+    uniforms.omniDynamic.needsUpdate = true;
+    
+    
+    
     
    makeSpirograph();
 
@@ -1626,7 +1675,6 @@ else{//start drawing of just twenty four frets here
     let oddSkew =EldersLeg%2/2.;
 let fretMultiplied = oddSkew+Math.round(EldersLeg/((radialWarp<1)?radialWarp:1));
             for (var g=oddSkew; g<fretMultiplied; g++) {
-                console.log(g)
                 const incrementation = (EldersLeg%2==0)?g%2+1:(g+1)%2+1;
             const widt = starshipSize/(EldersLeg/24.)**.5/2./incrementation;
             const arm =((flip*(g)*radialWarp+twist*EldersLeg/24.)%EldersLeg/EldersLeg)*pi*2.;
@@ -2176,19 +2224,42 @@ shaderScene.add( targets[n] );
      }
                           
                      renderer.setRenderTarget (null)
-
                  if(!window.blankBackground) scene.background = null;
                  else scene.background = new THREE.Color( 0x808080);
                      
                                  if(starClover) {
                                          uniforms.STAR.value=renderTarget.texture;
-                                         renderer.render( shaderScene, camera )
+                                    if(omniDynamicEngaged||dynamicCoring)
+                                    {
+                                        renderer.setRenderTarget (cloverRenderTarget)
+                                        renderer.render( shaderScene, camera);
+                                        
+                                        renderer.setRenderTarget (null)
+                                        wipeUniforms.cloverSampler.value=cloverRenderTarget.texture;
+                                        renderer.render( finalSceneRerenderedering, camera );
+                                    }
+                                    else
+                                    {
+                                        renderer.setRenderTarget (null)
+                                        renderer.render( shaderScene, camera);
+                                    }
                                  }
                                  else if(!window.blankBackground){
                                       uniforms.STAR.value=null;
                                       const shaderMeshClone = mesh.clone();
                                       scene.add(shaderMeshClone);
-                                      renderer.render( scene, camera );
+                                    if(omniDynamicEngaged||dynamicCoring)
+                                    {
+                                        renderer.setRenderTarget (cloverRenderTarget)
+                                        renderer.render( scene, camera );
+                                        renderer.setRenderTarget (null)
+                                        wipeUniforms.cloverSampler.value=cloverRenderTarget.texture;
+                                        renderer.render( finalSceneRerenderedering, camera );
+                                    }
+                                    else{
+                                        renderer.setRenderTarget (null)
+                                        renderer.render( scene, camera );
+                                    }
                                       scene.remove(shaderMeshClone);
                                      }
                                  else   renderer.render( scene, camera );
@@ -2238,10 +2309,13 @@ for(var n = 0; n<targets.length;n++){
                         
             uniforms.STAR.value=null;
             uniforms.EDEN.value=null;
-
+                    renderer.setRenderTarget (cloverRenderTarget)
                     renderer.render( shaderScene, camera );
+                    renderer.setRenderTarget (null)
+                                                         wipeUniforms.cloverSampler.value=cloverRenderTarget.texture;
 
-                        
+                    renderer.render( finalSceneRerenderedering, camera );
+
                 if(textON)document.getElementById("textWindow").innerHTML =
                     "<div sytle='font-size: 16px;'>"+
                     
