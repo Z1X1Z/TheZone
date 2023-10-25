@@ -2319,7 +2319,7 @@ vec3 sevenPillars(vec2 p){
     if(p.x<pillarHeight)
     {
         const float pillarDepth = 333333.;
-       float pillars;
+       float pillars=vec3(0.);
        if (p.x>0.) pillars = totalAmp*pillarDepth;
        else pillars = (1./totalAmp);
     if (pillars<0.) pillars=0.;
