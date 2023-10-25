@@ -580,10 +580,10 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
        totalAmp: {value: 1.0 },
 
      
-           resolution: {value: new Float32Array([0,0]])},//these are later resolved to the THREE.vec2() uniforms
-           coords: {value: new Float32Array([0,0]])},
-       d: {value:new Float32Array([0,0]])},
- dotCoord:{value:new Float32Array([0,0]])},
+           resolution: {value: new Float32Array([0,0])},//these are later resolved to the THREE.vec2() uniforms
+           coords: {value: new Float32Array([0,0])},
+       d: {value:new Float32Array([0,0])},
+ dotCoord:{value:new Float32Array([0,0])},
 
      
        dynamicDance: {value: false},
