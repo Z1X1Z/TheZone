@@ -797,8 +797,8 @@ function init() {
      scene.add(starsANDwitnessesMesh)
      //scene.add(starStreamMesh)
      
-     //shaderScene.add( circle );
-  //  shaderScene.add(radialLine);
+     shaderScene.add( circle );
+    shaderScene.add(radialLine);
         
      
   FEEDBACKuniforms = THREE.UniformsUtils.merge([
@@ -2144,7 +2144,7 @@ targets[n] = new THREE.Mesh( pG[n], pM[n] );
 targets[n].position.set(polygons[n].centerX,polygons[n].centerY,-.99);
 if (polygons[n].caught)targets[n].rotateZ(timestamp/1000.*Math.PI*2.)
 else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
-//shaderScene.add( targets[n] );
+shaderScene.add( targets[n] );
 }
 
 
@@ -2289,7 +2289,7 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
 if(RockInTheWater==2||RockInTheWater==1)scene.remove(starStreamMesh);
 if(polygons.length>0)
 for(var n = 0; n<targets.length;n++){
- // shaderScene.remove( targets[n] );
+  shaderScene.remove( targets[n] );
   pG[n].dispose();
   pM[n].dispose();
   targets[n].geometry.dispose();
