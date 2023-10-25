@@ -667,7 +667,6 @@ function setFFTdependantSizes(){
      
      
  }
-console.log(0)
 function init() {
      
            uniforms.resolution.value = new THREE.Vector2(0,0);
@@ -675,7 +674,6 @@ function init() {
      uniforms.d.value = new THREE.Vector2(0,0);
      uniforms.dotCoord.value = new THREE.Vector2(0,0);
 
-     console.log(1)
      setFFTdependantSizes();
      
     renderTarget = new THREE.WebGLRenderTarget(window.innerWidth,window.innerHeight);
@@ -688,10 +686,8 @@ function init() {
 
 
     renderer = new THREE.WebGLRenderer();
-     console.log(1.5)
      
     container.appendChild( renderer.domElement );//engage THREEJS visual out
-     console.log(1.75)
 
     renderer.autoClear=true;//so the starship can be isolated
     renderer.setClearAlpha ( 0. )
@@ -841,10 +837,8 @@ function init() {
      geometryP = new THREE.PlaneGeometry( 2, 2 );
       geometryP.translate(0,0,0.);
      mesh = new THREE.Mesh( geometryP, materialShader );
-     console.log(2)
 
      shaderScene.add( mesh );
-     console.log(3)
 
 
     //repeat PixelShader loader for The four Rivers
@@ -1217,7 +1211,6 @@ function runOSMD (){
                                            let omniTexture;
                                            let firstAnimation = true;
    function animate( timestamp ) {
-     console.log(4)
 
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
      if("osmd" in window&&osmd!=null)runOSMD();
@@ -2153,10 +2146,8 @@ shaderScene.add( targets[n] );
                                   
    if(window.starClover)
                      {
-            console.log(7)
                 renderer.setRenderTarget (renderTarget)
                 renderer.render( scene, camera );
-                                                         console.log(8)
 
             //begin the feedback of the starRivers of eden
                     if( uniforms.eden.value>=1.)
@@ -2212,13 +2203,11 @@ shaderScene.add( targets[n] );
                                                         
                                                         FEEDBACKuniformsFlip.STAR.value=FeedbackrenderTarget.texture;
                                                         renderer.render( feedbackSceneFlip, camera );
-                                                        console.log("worked for feedback Shader")
 
                                                     }
                                                     backBufferFlip=!backBufferFlip;
                                                     
                                                 }
-                        console.log(9)
 
                                                 if(!backBufferFlip)
                                                 {
@@ -2241,7 +2230,6 @@ shaderScene.add( targets[n] );
                  else scene.background = new THREE.Color( 0x808080);
                      
                                  if(starClover) {
-                                                         console.log(10)
 
                                          uniforms.STAR.value=renderTarget.texture;
                                     if(omniDynamicEngaged||dynamicCoring)
@@ -2258,7 +2246,6 @@ shaderScene.add( targets[n] );
                                         renderer.setRenderTarget (null)
                                         renderer.render( shaderScene, camera);
                                     }
-                                                         console.log(11)
 
                                  }
                                  else if(!window.blankBackground){
