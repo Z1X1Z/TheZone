@@ -2363,7 +2363,7 @@ vec2 dance = vec2(0.);
                                                                                          
                                                                                          
                                                      vec3 faceFORWARDbuffer = vec3 (1.);
-                                                 vec3 zoomer;
+                                                 vec3 zoomer=vec3(0.);
                                                  vec2 t =vec2(lerp(time/2.),lerp(time*.618/2.));
 
                                  vec2 move = d.yx*volume;
@@ -2598,10 +2598,10 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
 {
                                  gl_FragColor=(StaRivers*spirographTranslucerStaRivers+
               (starship*spirographTranslucer-vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.))+DOTstarship*spirographTranslucerDOT//the overal 1.23 boost is optional but with alpha blending on it's nice
-                                 +vec4(Pillars+mnyX+zoomer
-      
-                                      ,1.));}
-                                 else gl_FragColor=vec4(zoomer,1.);
+                                 +vec4(zoomer
+                                       
+                                       ,1.));}
+                                // else gl_FragColor=vec4(zoomer,1.);
 
                                          }
 
