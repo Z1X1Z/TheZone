@@ -580,10 +580,10 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
        totalAmp: {value: 1.0 },
 
      
-           resolution: {value: new Float32Array([0,0])},//these are later resolved to the THREE.vec2() uniforms
-           coords: {value: new Float32Array([0,0])},
-       d: {value:new Float32Array([0,0])},
- dotCoord:{value:new Float32Array([0,0])},
+           resolution: {value:null},//these are later resolved to the THREE.vec2() uniforms
+           coords: {value: null},
+       d: {value:null},
+ dotCoord:{value:null},
 
      
        dynamicDance: {value: false},
@@ -669,7 +669,7 @@ function setFFTdependantSizes(){
  }
 function init() {
      
-           uniforms.resolution.value = new THREE.Vector2(0,0);
+           uniforms.resolution.value = new THREE.Vector2(window.innerWidth,window.innerHeight);
      uniforms.coords.value = new THREE.Vector2(0,0);
      uniforms.d.value = new THREE.Vector2(0,0);
      uniforms.dotCoord.value = new THREE.Vector2(0,0);
@@ -905,7 +905,7 @@ function adjustThreeJSWindow()
       height/=minimumDimension;
       width/=minimumDimension;
 
-  renderer.setSize( uniforms.resolution.value.x, uniforms.resolution.value.y);
+  renderer.setSize(window.innerWidth, window.innerHeight);
   camera = new THREE.OrthographicCamera( -width, width, height, -height, 1, -1);
 
 
