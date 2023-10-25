@@ -2186,10 +2186,10 @@ shaderScene.add( targets[n] );
                             FEEDBACKuniforms.volumeFret3.value=loudestFret[2].volume/loudestFret[0].volume;
                             FEEDBACKuniforms.volumeFret4.value=loudestFret[3].volume/loudestFret[0].volume;
                             
-                            FEEDBACKuniformsFlip.loudestFret1.value=[loudestFret[0].x,loudestFret[0].y];
-                            FEEDBACKuniformsFlip.loudestFret2.value=[loudestFret[1].x,loudestFret[1].y];
-                            FEEDBACKuniformsFlip.loudestFret3.value=[loudestFret[2].x,loudestFret[2].y];
-                            FEEDBACKuniformsFlip.loudestFret4.value=[loudestFret[3].x,loudestFret[3].y];
+                            FEEDBACKuniformsFlip.loudestFret1.value=new THREE.Vector2(loudestFret[0].x,loudestFret[0].y);
+                            FEEDBACKuniformsFlip.loudestFret2.value=new THREE.Vector2(loudestFret[1].x,loudestFret[1].y);
+                            FEEDBACKuniformsFlip.loudestFret3.value=new THREE.Vector2(loudestFret[2].x,loudestFret[2].y);
+                            FEEDBACKuniformsFlip.loudestFret4.value=new THREE.Vector2(loudestFret[3].x,loudestFret[3].y);
                             
                             FEEDBACKuniformsFlip.volumeFret1.value=1.;
                             FEEDBACKuniformsFlip.volumeFret2.value=loudestFret[1].volume/loudestFret[0].volume;
@@ -2220,7 +2220,8 @@ shaderScene.add( targets[n] );
                                                     backBufferFlip=!backBufferFlip;
                                                     
                                                 }
-                                                
+                        console.log(9)
+
                                                 if(!backBufferFlip)
                                                 {
                                                     uniforms.EDEN.value=FeedbackrenderTarget.texture;//should be flip if i is odd
@@ -2242,6 +2243,8 @@ shaderScene.add( targets[n] );
                  else scene.background = new THREE.Color( 0x808080);
                      
                                  if(starClover) {
+                                                         console.log(10)
+
                                          uniforms.STAR.value=renderTarget.texture;
                                     if(omniDynamicEngaged||dynamicCoring)
                                     {
@@ -2257,6 +2260,8 @@ shaderScene.add( targets[n] );
                                         renderer.setRenderTarget (null)
                                         renderer.render( shaderScene, camera);
                                     }
+                                                         console.log(11)
+
                                  }
                                  else if(!window.blankBackground){
                                       uniforms.STAR.value=null;
