@@ -598,8 +598,6 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
        starSpin:{value:0.},
        chirality:{value:1},
        MannyONtrail:{value:1},
-       twistStar:{value:0.},
-       flipStar:{value:1.},
        NightAndDay:{value:false},
        starOnDot:{value:false},
        gameOn:{value:false},
