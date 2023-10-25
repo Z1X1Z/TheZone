@@ -1430,7 +1430,8 @@ float dstnce = length(s);//"distance" may be reserved keyword
 
 float coreBooster=0.;
 float metaCoreDriveFactor =2.3247/gr;
-float hyperCoreBoosted = hyperCore*log(2.)/log(metaCoreDriveFactor);//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
+float hyperCoreOUTPUT =hyperCore*log(2.)/log(metaCoreDriveFactor)+loops;
+float hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
 float colorShift = 0.;
 vec2 multCrossTwist;
 if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
@@ -1447,7 +1448,6 @@ if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
                           
                           
 for (float counter=0.;counter<iterations;counter++)if(dstnce<40.){
-
     float OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
     float OmniPetal =OmniDynamicPetalShift*(petals+6./6.);
     
@@ -1532,17 +1532,18 @@ vec2 lastS = s;
    
 
    
-    if(Spoker&&loops+counter+1.<=hyperCoreBoosted)
+    if(Spoker&&1.<=hyperCoreBoosted)
                              {
                                  
-                                 
-               hyperCoreBoosted-=1.;
+                                 hyperCoreOUTPUT--;
+
+               hyperCoreBoosted--;
                              s/=metaCoreDriveFactor;//engage spokelover s/=2.+'superspokes'
                              }
             else  {
                 
-
-                hyperCoreBoosted+=1.;
+                hyperCoreOUTPUT++;
+                hyperCoreBoosted++;
 }
    
    if(spokelover&&counter<hyperCoreBoosted){
@@ -1552,9 +1553,9 @@ vec2 lastS = s;
    
    
    if(continuumClover){//engage continualization
-       float continuumCore=(-loops-counter+continuumCounter+hyperCoreBoosted)*zoom/(lfc-zoom);
+       float continuumCore=(continuumCounter+hyperCoreOUTPUT)*zoom/(lfc-zoom);
        if(loops+counter<=hyperCoreBoosted+continuumCounter) s/=pow(2.,pow(.5,continuumCore));
-        continuumCounter+=continuumCore;
+       hyperCoreBoosted+=continuumCore;
     }
   
 dstnce = length(s);
@@ -1565,10 +1566,10 @@ dstnce = length(s);
                              if(dstnce<4./3.)s=spin2(s,atan(s.y,s.x)*(petals)/6.);
 
 for(int i=0;i<40; i++)//not sure if i is 20 or >20
-if(dstnce<CORE_DELIMITER&& loops+counter-continuumCounter<=hyperCoreBoosted)
+if(dstnce<CORE_DELIMITER&& 0.<=hyperCoreBoosted)
 {
 //if(i==0){float b = ;s*=b;dstnce*b;}
- s*=metaCoreDriveFactor;dstnce*=metaCoreDriveFactor;loops++;
+ s*=metaCoreDriveFactor;dstnce*=metaCoreDriveFactor;hyperCoreBoosted--;loops++;
  
 
 OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
@@ -1578,15 +1579,21 @@ OmniPetal =OmniDynamicPetalShift*(petals+6./6.);
 
  if (cloverSlide)
    {
-       if(float(i)>hyperCoreBoosted-loops-counter+continuumCounter)
-       loops-=2.*dstnce;
-       else
-       loops-=dstnce/4.;
-       
+       if(float(i)>hyperCoreBoosted)
+       {
+           float b = 2.*dstnce;
+           loops-=b;
+       hyperCoreBoosted+=b;
+       }
+       else{
+           float b =dstnce/4.;
+           loops-=b;
+       hyperCoreBoosted+=b;
+       }
        
    }
    
-   if(fieldPowerBoostMeta&&(float(i)>=hyperCoreBoosted-loops-counter+continuumCounter)){
+   if(fieldPowerBoostMeta&&(float(i)>=hyperCoreBoosted)){
        float powerBoost =2.71828*(log(.5)*dstnce*(sqrt(2.))/1.5);
        s*=pow(dstnce,powerBoost);
        dstnce*=pow(dstnce,powerBoost);
@@ -1601,7 +1608,7 @@ OmniPetal =OmniDynamicPetalShift*(petals+6./6.);
   
   
   if(metaCarousel!=0.
-     &&(float(i)>=hyperCoreBoosted-loops-counter+continuumCounter+1.))     //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
+     &&(float(i)>=hyperCoreBoosted+1.))     //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
         s=spin2(s,time*wise*metaCarousel*(1.+OmniPetal/6.)*rate);
 
 }
@@ -1610,6 +1617,8 @@ else{
  }
 
                              colorShift+=hyperCoreBoosted;
+                             hyperCoreBoosted--;
+
 }else break;
 ///if(multiplicatorNexus)s*=colorShift/88.8;
 vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
@@ -1707,7 +1716,7 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
 o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z)*1.5*starship.w,0.,1.)+starship.xyz*starship.w*spirographTranslucer;
                       o*=isBlack;
                       o+=isGrey;
-                      if(length(p-coords.yx)<2.*sqrt(2.)/min(resolution.x,resolution.y)*zoom)o=vec3(hyperCoreBoosted/255.*4.,0.,255.);
+                      if(length(p-coords.yx)<2.*sqrt(2.)/min(resolution.x,resolution.y)*zoom)o=vec3(hyperCoreOUTPUT/255.*4.,0.,255.);
 return clamp(o,0.,1.);}
 
                       

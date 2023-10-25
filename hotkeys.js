@@ -33,8 +33,6 @@ function readHash(){
             }
 
         }
-        console.log(number)
-        console.log(location.hash[hashindex])
     callKey(new KeyboardEvent('keydown',
                               {
         'key': location.hash[lasthash],"keyCode":location.hash.charCodeAt(lasthash),
@@ -110,10 +108,10 @@ window.addEventListener('keydown', function(event) {if(window.uniformsLoaded)cal
             EldersLeg=Math.round(number);
             let minimumFFTfactor = Math.ceil(Math.log(EldersLeg*12.)/Math.log(2.));
             if(minimumFFTfactor<=15){
-                if(minimumFFTfactor>10)
+                if(minimumFFTfactor>11)
                     window.fftSize=2**minimumFFTfactor;
                 else
-                    window.fftSize = 2**10
+                    window.fftSize = 2**11
                     setFFTdependantSizes();
 
             }
