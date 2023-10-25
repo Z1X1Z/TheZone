@@ -2424,7 +2424,7 @@ vec2 dance = vec2(0.);
          vec2 fourcreaturePlayerP = p*1.5;
         if(MannyONtrail==0) fourcreaturePlayerP=spin2(fourcreaturePlayerP,atan(d.y,d.x)-PI*3./2.);//put manny on trail
 
-     vec3 creatures,b;
+     vec3 creatures=vec3(0.),vec3(0.);
      vec3 bridge=vec3(0.);
                                           
     vec3 cloud= vec3(0.);
@@ -2597,17 +2597,17 @@ if(starOnDot){
 if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
 {
                                  gl_FragColor=(StaRivers*spirographTranslucerStaRivers+
-              (starship*spirographTranslucer-vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.))+DOTstarship*spirographTranslucerDOT//the overal 1.23 boost is optional but with alpha blending on it's nice
-                                 +vec4(Pillars+mnyX+(clamp(mny*starshipMultiplier
-+ //-clamp(starship.xyz*starship.w-(mny.r+mny.g+mny.b)*.333-mannyFace*100.,0.,1.)
-                                                          -(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge+
+              (starship*spirographTranslucer-vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.))+DOTstarship*spirographTranslucerDOT
+                                               
+                                 +vec4(Pillars+mnyX+(clamp(mny*starshipMultiplier -(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES
+                                                     +creatures+b+bridge+
               clamp(clamp(cloud+
                                 zoomer
                           
                           -(bridge.x+bridge.y+bridge.z)*4.
                           -(starship.x+starship.y+starship.z)/maxColorOfStarship*starship.w*.5
                           -(DOTstarship.x+DOTstarship.y+DOTstarship.z)/DOTmaxColorOfStarship*.5*DOTstarship.w
-                        +(-StaRivers.r-StaRivers.g-StaRivers.b)*StaRivers.w//uncomment for thicker rivers
+                        +(-StaRivers.r-StaRivers.g-StaRivers.b)*StaRivers.w
                           -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*4.
                           
                                                         ,0.,1.)
