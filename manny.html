@@ -2596,24 +2596,24 @@ if(starOnDot){
                                  
 if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
 {
-                                 gl_FragColor=(StaRivers*spirographTranslucerStaRivers+
-              starship*spirographTranslucer-vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.)+DOTstarship*spirographTranslucerDOT//the overal 1.23 boost is optional but with alpha blending on it's nice
-                                 +vec4(Pillars+mnyX+(clamp(mny*starshipMultiplier
-                                                          -(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge+
-              clamp(clamp(cloud+
-                                zoomer
-                          
-                          -(bridge.x+bridge.y+bridge.z)*4.
-                          -(starship.x+starship.y+starship.z)/maxColorOfStarship*starship.w*.5
-                          -(DOTstarship.x+DOTstarship.y+DOTstarship.z)/DOTmaxColorOfStarship*.5*DOTstarship.w
-                        +(-StaRivers.r-StaRivers.g-StaRivers.b)*StaRivers.w//uncomment for thicker rivers
-                          -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*4.
-                          
-                                                        ,0.,1.)
-                    
-                    -(mny.r+mny.b+mny.g)*4.,.0,1.))
-      
-                                      ,1.))*isBlack*isBlackStaRivers*isBlackDOT+isGrey*2.+isGreyStaRivers+isGreyDOT+  (isBlack-1.);}
+                       vec4 ss =StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer;
+                       vec4 faceWithoutShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
+                       vec4 goodies = vec4(Pillars+mnyX+(clamp(mny*starshipMultiplier
+                                                          -(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge),1.);
+                        vec4 tree = vec4( clamp(clamp(cloud+
+                                                 zoomer
+                                           -(bridge.x+bridge.y+bridge.z)*4.
+                                           -(starship.x+starship.y+starship.z)/maxColorOfStarship*starship.w*.5
+                                           -(DOTstarship.x+DOTstarship.y+DOTstarship.z)/DOTmaxColorOfStarship*.5*DOTstarship.w
+                                         +(-StaRivers.r-StaRivers.g-StaRivers.b)*StaRivers.w//uncomment for thicker rivers
+                                           -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*4.
+                                           
+                                                                         ,0.,1.)
+                                     
+                                     -(mny.r+mny.b+mny.g)*4.,.0,1.),1.)
+                       
+                                                      ;
+                                 gl_FragColor=(ss-faceWithoutShip+goodies+tree)*isBlack*isBlackStaRivers*isBlackDOT+isGrey*2.+isGreyStaRivers+isGreyDOT+  (isBlack-1.);}
                                  else gl_FragColor=vec4(zoomer,1.);
 
                                          }
