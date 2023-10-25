@@ -666,8 +666,9 @@ function setFFTdependantSizes(){
      
      
  }
-
+console.log(0)
 function init() {
+     console.log(1)
      setFFTdependantSizes();
      
     renderTarget = new THREE.WebGLRenderTarget(window.innerWidth,window.innerHeight);
@@ -832,7 +833,11 @@ function init() {
      geometryP = new THREE.PlaneGeometry( 2, 2 );
       geometryP.translate(0,0,0.);
      mesh = new THREE.Mesh( geometryP, materialShader );
+     console.log(2)
+
      shaderScene.add( mesh );
+     console.log(3)
+
 
     //repeat PixelShader loader for The four Rivers
 
@@ -1207,6 +1212,8 @@ function runOSMD (){
                                            let omniTexture;
                                            let firstAnimation = true;
    function animate( timestamp ) {
+     console.log(4)
+
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
      if("osmd" in window&&osmd!=null)runOSMD();
 
@@ -2334,6 +2341,8 @@ for(var n = 0; n<targets.length;n++){
                                                                        animateLoopId=                   window.requestAnimationFrame( animate );
                             //  renderer.forceContextLoss ()
                             //  renderer.forceContextRestore ( )
+                              console.log(5)
+
 }
 
                               
