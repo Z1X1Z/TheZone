@@ -690,9 +690,10 @@ function init() {
 
 
     renderer = new THREE.WebGLRenderer();
-     
+     console.log(1.5)
      
     container.appendChild( renderer.domElement );//engage THREEJS visual out
+     console.log(1.75)
 
     renderer.autoClear=true;//so the starship can be isolated
     renderer.setClearAlpha ( 0. )
