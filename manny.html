@@ -2600,8 +2600,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
               (starship*spirographTranslucer-vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.))+DOTstarship*spirographTranslucerDOT//the overal 1.23 boost is optional but with alpha blending on it's nice
                                  +vec4(Pillars+mnyX+(clamp(mny*starshipMultiplier
 + //-clamp(starship.xyz*starship.w-(mny.r+mny.g+mny.b)*.333-mannyFace*100.,0.,1.)
-                                                          -(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge+zoomer
-             )
+                                                          -(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge)
       
                                       ,1.))*isBlack*isBlackStaRivers*isBlackDOT+isGrey*2.+isGreyStaRivers+isGreyDOT+  (isBlack-1.);}
                                  else gl_FragColor=vec4(zoomer,1.);
