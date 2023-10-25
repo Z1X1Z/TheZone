@@ -580,10 +580,10 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
        totalAmp: {value: 1.0 },
 
      
-           resolution: {value: null},//these are the THREE.vec2() uniforms
-           coords: {value: null},
-       d: {value:null},
- dotCoord:{value:null},
+           resolution: {value: new Float32Array([0,0]])},//these are later resolved to the THREE.vec2() uniforms
+           coords: {value: new Float32Array([0,0]])},
+       d: {value:new Float32Array([0,0]])},
+ dotCoord:{value:new Float32Array([0,0]])},
 
      
        dynamicDance: {value: false},
@@ -591,7 +591,7 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
 
        Clovoid:{value:false},
        dotted:{value:false},
-       baseN:{value: 2.71828182845904523536028747135266249775724709369995},
+       baseN:{value: 2.718281828},
 
          onehundredfortyfourthousand:{value:false},
          shaderScale:{value:window.pixelShaderSize},
@@ -904,11 +904,8 @@ function adjustThreeJSWindow()
          width=window.innerWidth;
 
         
-         uniforms.resolution.value.x = width;
-         uniforms.resolution.value.y = height;
-
-    FEEDBACKuniforms.resolution.value.x = width;
-    FEEDBACKuniforms.resolution.value.y = height;
+     uniforms.resolution.value =new THREE.Vector2(width,height);
+     FEEDBACKuniforms.resolution.value =new THREE.Vector2(width,height);
 
       minimumDimension = Math.min(width,height);
      maximumDimension = Math.max(width,height);
@@ -1443,7 +1440,7 @@ lineMat.color = new THREE.Color("black");
 
 
               uniforms[ "zoom" ].value = zoom;
-              uniforms.coords.value = [coordX,coordY];
+              uniforms.coords.value = new THREE.Vector2( coordX,coordY);
 
   if (window.micOn)analyser.getByteFrequencyData(  dataArray);
 
@@ -2314,8 +2311,7 @@ for(var n = 0; n<targets.length;n++){
                         const xTouch = screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/coordinator);
                         const yTouch = screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/coordinator);
                          const touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
-                        uniforms.d.value.x=-xTouch;
-                        uniforms.d.value.y=yTouch;
+                        uniforms.d.value=new THREE.Vector2( -xTouch,yTouch);
                         uniforms[ "volume" ].value=1.;
                         var spunTouch=touchMovement;
                               if(uniforms.carousel.value!=0.)         spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
@@ -2324,8 +2320,7 @@ for(var n = 0; n<targets.length;n++){
                       }
 
                       uniforms[ "zoom" ].value = zoom;
-                      uniforms.coords.value.x = coordX;
-                      uniforms.coords.value.y = coordY;
+                      uniforms.coords.value.x = new THREE.Vector2(coordX,coordY);
                         
             uniforms.STAR.value=null;
             uniforms.EDEN.value=null;
