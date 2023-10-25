@@ -426,11 +426,11 @@ pitchCol[f]  = colorSoundPURE;
          d_y = -Math.cos(-angle)*flatline;
                      //  console.log("x"+d_x)
                     //   console.log("y"+d_y)
-         uniforms.d.value=[d_x,d_y];
+         uniforms.d.value=THREE.Vector2( d_x,d_y);
       
                        
-                       FEEDBACKuniforms.d.value=[d_x,d_y]
-                       FEEDBACKuniformsFlip.d.value=[d_x,d_y]
+                       FEEDBACKuniforms.d.value=THREE.Vector2(d_x,d_y);
+                       FEEDBACKuniformsFlip.d.value=THREE.Vector2(d_x,d_y);
          d_x*=volume;
          d_y*=volume;
          var spunD = [d_x,d_y];
@@ -2033,7 +2033,7 @@ circle.position.set(circleX,circleY,-.99);
                    centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-.99) );
 
                                   radialLine.geometry.setFromPoints( centerOfDotToEdge )
-                                        uniforms.dotCoord.value =[circleX,circleY] ;
+                                        uniforms.dotCoord.value =THREE.Vector2(circleX,circleY) ;
 
 let allCaught = true;
 for (var n=0; n<polygons.length; n++) if(  polygons[n].caught == false) allCaught = false;
@@ -2157,10 +2157,11 @@ shaderScene.add( targets[n] );
                                   
    if(window.starClover)
                      {
-            
+            console.log(7)
                 renderer.setRenderTarget (renderTarget)
                 renderer.render( scene, camera );
-            
+                                                         console.log(8)
+
             //begin the feedback of the starRivers of eden
                     if( uniforms.eden.value>=1.)
                     {
@@ -2175,10 +2176,10 @@ shaderScene.add( targets[n] );
                         if(uniforms.eden.value==4)
                         {
                             
-                            FEEDBACKuniforms.loudestFret1.value=[loudestFret[0].x,loudestFret[0].y];
-                            FEEDBACKuniforms.loudestFret2.value=[loudestFret[1].x,loudestFret[1].y];
-                            FEEDBACKuniforms.loudestFret3.value=[loudestFret[2].x,loudestFret[2].y];
-                            FEEDBACKuniforms.loudestFret4.value=[loudestFret[3].x,loudestFret[3].y];
+                            FEEDBACKuniforms.loudestFret1.value=THREE.Vector2( loudestFret[0].x,loudestFret[0].y);
+                            FEEDBACKuniforms.loudestFret2.value=THREE.Vector2(loudestFret[1].x,loudestFret[1].y);
+                            FEEDBACKuniforms.loudestFret3.value=THREE.Vector2(loudestFret[2].x,loudestFret[2].y);
+                            FEEDBACKuniforms.loudestFret4.value=THREE.Vector2(loudestFret[3].x,loudestFret[3].y);
                             
                             FEEDBACKuniforms.volumeFret1.value=1;
                             FEEDBACKuniforms.volumeFret2.value=loudestFret[1].volume/loudestFret[0].volume;
