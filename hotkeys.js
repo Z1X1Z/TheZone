@@ -24,18 +24,20 @@ function readHash(){
     {
         let lasthash = hashindex;
         if(location.hash[hashindex-1]=="(")
-        {
-            hashindex++;
-            while(location.hash[hashindex]!=")"||hashindex!=location.hash.length-1)
+        {            hashindex++;
+
+            while(location.hash[hashindex]!=")"&&hashindex!=location.hash.length-1)
             {
                 number += location.hash[hashindex]
                 hashindex++;
             }
-        }
 
+        }
+        console.log(number)
+        console.log(location.hash[hashindex])
     callKey(new KeyboardEvent('keydown',
                               {
-        'key': location.hash[hashindex],"keyCode":location.hash.charCodeAt(lasthash),
+        'key': location.hash[lasthash],"keyCode":location.hash.charCodeAt(lasthash),
         "ctrlKey":location.hash[lasthash-1]==",","altKey":location.hash[lasthash-1]=="."
     }                              ));
 
