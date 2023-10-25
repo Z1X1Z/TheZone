@@ -1841,10 +1841,9 @@ return
                  else s.x = 1./s.x;
            l = length(s);
 
-         if (l >20.0&&t!=0)
-              return vec3(-1.*zin(time));}
+         if (l >20.0&&t!=0)  return vec3(-1.*zin(time));}
                       return vec3(1.*zin(time));}
-         return vec3(0.);
+        else return vec3(0.);
  }
 
 
