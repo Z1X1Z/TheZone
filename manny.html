@@ -2504,12 +2504,12 @@ mny+=HEART*heartMultiplier;
                        }
      mny=clamp(mny,0.,1.);
 
-    vec3 ARTICLES=vec3(0.);
+    vec3 ARTICLE=vec3(0.);
     if(articles){
          /*   vec3 HORSE=horse(characterP, moveDynamic);
-            ARTICLES+=scroll(characterP+1.5*vec2(0.,resolution.x/min(resolution.x,resolution.y)),vec2(-1.));
+            ARTICLE+=scroll(characterP+1.5*vec2(0.,resolution.x/min(resolution.x,resolution.y)),vec2(-1.));
             vec3 SWORD = sword(characterP+vec2(swordSkew,0.),vec2(0.));;
-            ARTICLES+=clamp(lamp(characterP,vec2(-1.))+flames(characterP-vec2(.5,0.))-(SWORD.r+SWORD.g+SWORD.b+HORSE.r*3.)*1000000.,0.,1.)+SWORD+HORSE;
+            ARTICLE+=clamp(lamp(characterP,vec2(-1.))+flames(characterP-vec2(.5,0.))-(SWORD.r+SWORD.g+SWORD.b+HORSE.r*3.)*1000000.,0.,1.)+SWORD+HORSE;
           */
     }
                                  float recenter = 0.;
@@ -2598,7 +2598,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
 {
                        vec4 ss =StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer;
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
-                       vec4 goodies = vec4(Pillars+mnyX,1.);
+                       vec4 goodies = vec4(Pillars+ARTICLE,1.);
                         vec4 tree = vec4( clamp(
                                                 clamp(
                                                       cloud+
