@@ -20,22 +20,22 @@ window.EldersLeg = 24;
 function readHash(){
     
     let hashindex = 0;
-    while (hashindex<location.hash.length-1)
+    while (hashindex<location.hash.length)
     {
         let lasthash = hashindex;
         if(location.hash[hashindex-1]=="(")
         {
             hashindex++;
-
-            while(location.hash[hashindex]!=")")
+            while(location.hash[hashindex]!=")"||hashindex!=location.hash.length-1)
             {
                 number += location.hash[hashindex]
                 hashindex++;
             }
         }
+
     callKey(new KeyboardEvent('keydown',
                               {
-        'key': location.hash[lasthash],"keyCode":location.hash.charCodeAt(lasthash),
+        'key': location.hash[hashindex],"keyCode":location.hash.charCodeAt(lasthash),
         "ctrlKey":location.hash[lasthash-1]==",","altKey":location.hash[lasthash-1]=="."
     }                              ));
 
@@ -117,6 +117,12 @@ window.addEventListener('keydown', function(event) {if(window.uniformsLoaded)cal
             }
         }
     else if (document.activeElement.className=="num");//don't take hotkey's while menu number selector engaged
+        
+        else if(key == "o" && event.ctrlKey)
+        {
+            omniDynamicEngaged = !omniDynamicEngaged;
+            if(!omniDynamicEngaged)omniData.fill(0);
+        }
     else if(key == "c" && event.ctrlKey){dynamicCoring=!dynamicCoring; if(!dynamicCoring)coreData.fill(1./1.324717);}
     else if(key == "q" && event.ctrlKey)uniforms.squareClover.value=!uniforms.squareClover.value;
     else if(key == "x" && event.ctrlKey)uniforms.fieldPowerBoost.value=!uniforms.fieldPowerBoost.value;
