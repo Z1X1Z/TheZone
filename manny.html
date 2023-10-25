@@ -1730,7 +1730,7 @@ return clamp(o,0.,1.);}
 
                                float time2 = t.x;
                                float c=0.,k=0.,l=0.,x=0.,e=0.;
-                               vec3 head;
+                               vec3 head=vec3(0.);
               if(abs(p.y*p.y)+abs(p.x*p.x)<700.){
                  // t.y=t.x;
                            //vv body vv
@@ -1851,7 +1851,7 @@ return
      vec3 eagle(vec2 p,vec2 t) {
      p*=10.;
          vec2 s = p;
-         float d = 0.0, l;
+         float d = 0.0, l=0.;
          float flip=-t.x;
          if (flip<0.) p = -p;
          if(abs(6.*p.x*p.x+p.y*p.y*2.)<700.0)
@@ -2189,7 +2189,7 @@ vec3 xtol(vec2 s, vec2 t){
                                      vec2 z=g;
                                      float d = 0.0;
                                      float u=0.;
-                                     vec3 h;
+                                     vec3 h=vec3(0.);
                                      if (p.x>.7&&g.x>-2.5 && abs(g.y*g.x) <1.77 &&abs(g.y)<2.11111111)for (int i = 0; i < 14; i++) {
                                            z = vec2(1.1/(1.-pow((z.x * z.x - z.y * z.y +1.+ g.x),2.)), -1.77/(2.0 * z.x * z.y + g.y));
                                          u = length(z);
@@ -2599,7 +2599,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
                        vec4 ss =StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer;
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies = vec4(Pillars+mnyX+clamp(
-                                                          -vec3(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES,1.);
+                                                          ARTICLES-vec3(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+creatures+b+bridge,1.);
                         vec4 tree = vec4( clamp(
                                                 clamp(
                                                       cloud+
