@@ -2599,12 +2599,12 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
                        vec4 ss =StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer;
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies = vec4(Pillars+mnyX+(clamp(mny*starshipMultiplier
-                                                          -(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge),1.);
+                                                          -vec4(ARTICLES.r+ARTICLES.g+ARTICLES.b),0.,1.)+ARTICLES+creatures+b+bridge),1.);
                         vec4 tree = vec4( clamp(
                                                 clamp(
                                                       cloud+
                                                  zoomer+
-                                        (
+                                       vec3(
                                            -(bridge.x+bridge.y+bridge.z)*4.
                                            -(starship.x+starship.y+starship.z)/maxColorOfStarship*starship.w*.5
                                            -(DOTstarship.x+DOTstarship.y+DOTstarship.z)/DOTmaxColorOfStarship*.5*DOTstarship.w
@@ -2613,7 +2613,8 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
                                            )
                                                                          ,0.,1.)
                                      
-                                     -(mny.r+mny.b+mny.g)*4.,.0,1.),1.)
+                                     -vec3((mny.r+mny.b+mny.g)*4.),.0,1.)
+                                         ,1.)
                        
                                                       ;
                                  gl_FragColor=ss-faceFromShip+goodies;}
