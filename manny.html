@@ -1449,7 +1449,7 @@ if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
 for (float counter=0.;counter<iterations;counter++)if(dstnce<40.){
 
     float OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
-    float OmniPetal = petals+OmniDynamicPetalShift*(petals+6./6.);
+    float OmniPetal =OmniDynamicPetalShift*(petals+6./6.);
     
   float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(loops+counter)/40.,0.)).x;
     
@@ -1562,7 +1562,7 @@ dstnce = length(s);
                              //              s*=refactorCores;c*=refactorCores;
                              
                              
-                             if(dstnce<4./3.)s=spin2(s,atan(s.y,s.x)*(OmniPetal)/6.);
+                             if(dstnce<4./3.)s=spin2(s,atan(s.y,s.x)*(petals)/6.);
 
 for(int i=0;i<40; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER&& loops+counter-continuumCounter<=hyperCoreBoosted)
@@ -1572,8 +1572,9 @@ if(dstnce<CORE_DELIMITER&& loops+counter-continuumCounter<=hyperCoreBoosted)
  
 
 OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
-  OmniPetal = petals+OmniDynamicPetalShift*(petals+6./6.);
-  if(dstnce<4./3.)s=spin2(s,atan(s.y,s.x)*OmniPetal/6.);
+OmniPetal =OmniDynamicPetalShift*(petals+6./6.);
+
+  if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spin2(s,atan(s.y,s.x)*OmniPetal);
 
  if (cloverSlide)
    {
