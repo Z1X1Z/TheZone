@@ -1315,13 +1315,12 @@ if( !window.touchMode&&!window.touchOnlyMode) {
     
     
     if(!isNaN(loudestFret[0].volume)&&omniDynamicEngaged)
-        omniData[hyperCoreOffset]=coreShift*2.;
+        omniData[hyperCoreOffset]=coreShift/2.;
     omniTexture = new THREE.DataTexture( omniData, 40, 1,THREE.RedFormat,THREE.FloatType);
     omniTexture.unpackAlignment=1
     omniTexture.needsUpdate=true;
     uniforms.omniDynamic.value=omniTexture;
     uniforms.omniDynamic.needsUpdate = true;
-    
     
     
     
