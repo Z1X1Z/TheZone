@@ -930,7 +930,7 @@ function onWindowResize() {
                 osmdResize();//osmdResize defined in fileSelectAndLoadOSMD.js
             }
         
-            adjustThreeJSWindow();
+           if(typeof THREE=="object") adjustThreeJSWindow();
      
      
      //menuBoxes declared in manny.html
