@@ -1632,9 +1632,9 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                      else if(colorCombo==-5)  o=vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.);
                      else if(colorCombo==-6) o=  vec3(-sin(time*1.)*s.y/100.-sin(time*gr)*s.x*s.y/888.,s.x/8.-sin(time*(-gr+1.))*s.y/s.x/2000.,1.-sin(time*(gr+1.))*s.x/20.);
                     else if(colorCombo==-1) {
-                              o= (1.-(vec3(s.y/125.-s.x*s.y/888.+s.y/25000.,s.x/8.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
-                                           *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
-                                           *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
+                              o=       (1.-(vec3(s.y/125.-s.x*s.y/888.+s.y/25000.,s.x/8.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
+                                                *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
+                                                *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));;
                                                 }
                                 else if(colorCombo==-8) {
                                             s=-colorAccumulator*(coresIn+1.)*((coresIn+2.)/(60.+1.)-.5);
@@ -2428,6 +2428,7 @@ vec2 dance = vec2(0.);
                            }
                        }
     else if (colorCombo==19)zoomer=acrostic(backGround);
+    else if (colorCombo==100)zoomer=vec3(.5);
 
                                                  
                                                  
