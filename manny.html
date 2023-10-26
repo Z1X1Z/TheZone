@@ -1241,8 +1241,9 @@ return vec3(l+b+r);}
                 g=p;
                         s=g;
                    //vv body vv
-                       for (int f=0;f<30;f+=1)if(abs(s.x+s.y)>20.&&f>4)x=1.;
+                       for (int f=0;f<30;f+=1){if(abs(s.x+s.y)>20.&&f>4)x=1.;
                        else {s=vec2(-1.5/((s.x*s.x-2.*s.y*s.y)-g.x+t.x),(1.7*s.x*s.y-1.34*g.y+t.y));s*=1.7; s.x=pow(abs(s.x),.549 );  }
+                       }
                      }
                          //vv robe vv
                    g=p;
@@ -1506,8 +1507,8 @@ if(onehundredfortyfourthousand)
  if(dstnce<2./3.)
  {
      vec2 move =-d.yx*volume/8.;
-     if(march==0||march==3)oo+=color*sealedMan(s*5.,move);
-     else oo+=color*sealedWoman(s*5.,move);
+    // if(march==0||march==3)oo+=color*sealedMan(s*5.,move);
+  //   else oo+=color*sealedWoman(s*5.,move);
  }
                           
 }
