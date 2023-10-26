@@ -1402,7 +1402,7 @@ if( !window.touchMode&&!window.touchOnlyMode) {
         uniforms[ "zoom" ].value = zoom;
         uniforms.coords.value = new THREE.Vector2( coordX,coordY);
 
-   if (EldersLeg>0){
+   if (EldersLeg>=0){
 
 
     let metroPhase =(-Math.sin(-uniforms[ "time" ].value-pi/2.)*uniforms[ "metronome" ].value)
