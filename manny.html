@@ -2041,13 +2041,18 @@ return
                    float l=1.;
                   vec3 digorno=vec3(0.);
 
-                   for (int f=0;f<41;f+=1)if(abs(s.y)<5.){s=vec2(s.x+s.y/(s.x*s.x + s.y*s.y), (1./(s.x*s.x + s.y*s.y))-sin(1.-t.x)/2.);//this equation comes from the equation (x-1/((x - y*i)))=x
-
-
+                   for (int f=0;f<41;f+=1)if(abs(s.y)<5.&&s.x!=0.&&s.y!=0.){
+                       {
+                       float n = 1./(s.x*s.x + s.y*s.y);
+                       s=vec2(s.x+s.y, (1./(s.x*s.x + s.y*s.y))-sin(1.-t.x)/2.);//this equation comes from the equation (x-1/((x - y*i)))=x
                   s.y=s.y-log(dot(s.y,s.y))*-sin((1.-t.x)/2.);
                   digorno+=vec3(s.x,s.x/s.y,(s.y/s.x));
                   }
-                  else         digorno-=vec3(s.x*1.4,(s.y*s.x),s.y)/50.;
+                  else      {
+                           
+                          digorno-=vec3(s.x*1.4,(s.y*s.x),s.y)/50.;
+                          break;
+                          }
 
                   return digorno/4.;
               }
@@ -2402,9 +2407,9 @@ vec2 dance = vec2(0.);
                    }
                             
      else if (colorCombo==11||colorCombo==18)zoomer=heartZoom(backGround+driftCanceller, dance);
-     //else if (colorCombo==13)zoomer=tokogae(backGround,vec2(zoom));
+     else if (colorCombo==13)zoomer=tokogae(backGround,vec2(zoom));
                                  
-     //else if (colorCombo==14)zoomer=TOLTOK(backGround,dance2);
+     else if (colorCombo==14)zoomer=TOLTOK(backGround,dance2);
      else if (colorCombo==15)zoomer=xx(backGround,dance2);
      else if (colorCombo==16)zoomer=xtol(backGround,vec2(0.));
      else if (colorCombo==17){
@@ -2636,7 +2641,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
                                      -vec3((mny.r+mny.b+mny.g)*4.),.0,1.)
                                          ,1.);
                        
-                                     vec4 fin = (ss-faceFromShip+goodies+tree);/*(isBlack*isBlackStaRivers*isBlackDOT+isGrey*2.+isGreyStaRivers+isGreyDOT+(isBlack-1.));*/
+                                     vec4 fin = (ss-faceFromShip+goodies+tree)*isBlack*isBlackStaRivers*isBlackDOT+isGrey*2.+isGreyStaRivers+isGreyDOT+(isBlack-1.)
                                  gl_FragColor=fin;}
                               //   else gl_FragColor=vec4(zoomer,1.);
 
