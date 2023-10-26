@@ -2400,6 +2400,7 @@ vec2 dance = vec2(0.);
                        }
                        
                    }
+                                 /*
      else if (colorCombo==11||colorCombo==18)zoomer=heartZoom(backGround+driftCanceller, dance);
      else if (colorCombo==13)zoomer=tokogae(backGround,vec2(zoom));
      else if (colorCombo==14)zoomer=TOLTOK(backGround,dance2);
@@ -2427,7 +2428,7 @@ vec2 dance = vec2(0.);
                        }
     else if (colorCombo==19)zoomer=acrostic(backGround);
 
-                                                 
+                                                 */
                                                  
                                                  
                                  
@@ -2617,12 +2618,14 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
                        vec4 ss =StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer;
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies = vec4(pillar+mnyX+clamp(mny*starshipMultiplier-(ARTICLE.r+ARTICLE.g+ARTICLE.b),0.,1.)+ARTICLE+b+creatures+bridge,1.);
-                       float awayFromTree =  -(bridge.x+bridge.y+bridge.z)*4.
+                       vec3 awayFromTree =  vec3(
+                       -(bridge.x+bridge.y+bridge.z)*4.
                        -(starship.x+starship.y+starship.z)/maxColorOfStarship*starship.w*.5
                                   
                        -(DOTstarship.x+DOTstarship.y+DOTstarship.z)/DOTmaxColorOfStarship*.5*DOTstarship.w
                       -(StaRivers.r+StaRivers.g+StaRivers.b)*StaRivers.w
-                       -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*4.;
+                       -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*4.
+                                                 );
                        vec4 tree = vec4( clamp(
                                                 clamp(
                                                       cloud+
