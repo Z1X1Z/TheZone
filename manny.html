@@ -1183,7 +1183,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
 vec3 sealedMan(vec2 p,vec2 t)
 {
 p.x+=2.;
-float r, b, l;
+float r=0, b=0, l=0;
     //person--a body derived to have a head of its own
         vec2 z=p;
         for(int f=0;f<20;f+=1)if(abs(z.y)>50.&&f>4)l=1.;
@@ -1224,7 +1224,7 @@ float r, b, l;
                    vec2 g=p/2.2;
                    vec2 s=g;
                    float l=0.;
-                   float n, c, r, x;
+                   float n=0, c=0, r=0, x=0;
                    //vv legs vv
                    if (g.x<1.8 &&g.x>.5 &&abs(g.x*g.y)<.5)for (int f=0;f<10;f+=1)if(abs(s.x+s.y)>200.&&f>4)c=1.;
                      else {s=vec2(-1./((s.x*s.x-s.y*s.y)-g.x+t.x),(67.0*s.x*s.y-.7*g.y+t.y));s*=3.; s.y = -1./s.y; }
