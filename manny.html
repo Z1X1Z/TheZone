@@ -58,31 +58,15 @@
         <script type="importmap">
           {
             "imports": {
-              "three": "https://unpkg.com/three@v0.153.0/build/three.module.js"
+              "three": "https://unpkg.com/three@v0.153.0/build/three.module.js",
+              "opensheetmusicdisplay":"https://unpkg.com/opensheetmusicdisplay@1.7.6/build/opensheetmusicdisplay.min.js",
+              "wad" : "https://unpkg.com/web-audio-daw@4.12.0"
             }
           }
         </script>
-        
-        <script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
-        <script>
-        var cdnOSMD="opensheetmusicdisplay.min.js";
-        if (window.useCDN)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.7.6/build/opensheetmusicdisplay.min.js";
-        loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")
-        </script>
-        
+        <script id="osmdJS"></script>
         <script id="wadJSscript"></script>
-        <script>
-        var cdnSwitchWAD="wad.min.js";
-        if (window.useCDN)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0";
-        
-        function wrapperLurker(){
-            if (userHasGestured)        loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")
-            else        setTimeout(wrapperLurker,100);
-        }
-            wrapperLurker();
-        </script>
-
-        <!-- removing this script may fix android no load bug, but I'm testing z ordering in css        -->
+        <!-- scripts loaded in starshipMod.js -->
 
         <div id="background_wrap">
                <script>
