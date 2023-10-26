@@ -171,7 +171,7 @@ window.addEventListener('keydown', function(event) {if(window.INITIALIZED)callKe
             lastElderLegCount = EldersLeg
             EldersLeg=Math.round(number)*1.;
             let minimumFFTfactor = Math.ceil(Math.log(EldersLeg*12.)/Math.log(2.));
-            if(minimumFFTfactor<=15){
+            if(minimumFFTfactor<=15){//currently a buffersize of 2**15==2048 is required for spirograph
                 if(minimumFFTfactor>11)
                     window.fftSize=2**minimumFFTfactor;
                 else

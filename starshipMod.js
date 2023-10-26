@@ -114,12 +114,7 @@ var bufferSize,numberOfBins, frequencies, inputData, point, pointColor,fractionO
                                                         testarContinuous,
                                                         mustarD,
                         star,starColors;
-window.zoomOutRatchetThreshold=1./bufferSize
-
-
-const spirrayLength = 777;
-const spirray0 = new Float64Array(spirrayLength*2);
-const spirray1 = new Float64Array(spirrayLength*2);
+window.zoomOutRatchetThreshold=1./bufferSize;
 
 let Fret = {x:null,y:null,index:null,volume:0.,note:-12};
 const loudestFret=Array(4).fill(Fret);
@@ -190,29 +185,37 @@ let onO = false;
 var colorInstant=0.;
 let updateInstant = false;
                             let innerSpirographFractionalSize=0;
-                            let bufferPortion = Math.round(spirrayLength);
+
+                            const bufferPortion = 2048;
+                            const spirray0 = new Float64Array(bufferPortion).fill(.5);
+                            const spirray1 = new Float64Array(bufferPortion).fill(.5);
 
 function makeSpirograph(){
       phase = phase % (pi*2);
         phase2 =  phase2 % (pi*2);
       len = 0;
-    const adjConstant = 1./pitch/4.*Math.PI*audioX.sampleRate/bufferSize/(2**1.5);//shouldn't be buffersize needs to be revised
+    const adjConstant =2*Math.PI*window.ConcertKey/pitch/512.*2**(1./3.)/1.5;//shouldn't be buffersize needs to be revised
     var maxSamp=0.;
     for(var t=0; t<bufferPortion;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
   
     for(var m = 0; m < bufferPortion; m++)
       {
               phase += adjConstant;//spira_pitch;
-                var size = .75+inputData[m]/4./maxSamp;
+        let dilation =inputData[m]/maxSamp/2.;
+            let outside = (1+dilation)/2.;
+            let inside  = (1.-dilation)/2.;
+                var size =outside+inputData[m]*inside;// inputData[m]/maxSamp;//.75+inputData[m]/4./maxSamp;
               spirray0[m]=-Math.sin(-phase)*size;
               spirray1[m]=-Math.cos(-phase)*size;
       }
+       /*
     spirray0[bufferPortion]=spirray0[bufferPortion-1];//disconnect inner and outer spirograph
     spirray1[bufferPortion]=spirray1[bufferPortion-1];
+                                                                  
     let lastInnerSpirographFractionalSize =innerSpirographFractionalSize;
-     innerSpirographFractionalSize = (innerSpirographFractionalSize + Math.round(audioX.sampleRate/pitch))   %bufferPortion;
+     innerSpirographFractionalSize = (innerSpirographFractionalSize + Math.round(1./adjConstant))   %bufferPortion;
     let frameOfInputData = 0
-    for(var m = bufferPortion+lastInnerSpirographFractionalSize; m <bufferPortion+ innerSpirographFractionalSize; m++)
+    for(var m = 1+bufferPortion+lastInnerSpirographFractionalSize; m <=bufferPortion+ innerSpirographFractionalSize+2; m++)
     {
             phase2 += adjConstant;//spira_pitch;
         var size = (.333+inputData[frameOfInputData]/6./maxSamp);
@@ -222,9 +225,8 @@ function makeSpirograph(){
         
      
     }
-    
+            */
 }
-                     ///       let notesAverage = 0.;
 
 function spiral_compress(){
     let freq = 0;
@@ -1431,22 +1433,22 @@ lineMat.color = new THREE.Color("black");
 
   const d = -1.;
                             
-                            let tx = 0, ty = 0,greyness=1.;
+                            let tx = spirray0[0], ty = spirray1[1],greyness=1.,greynessLast=-1;
                             
     let linePositionAttribute = lineGeometry.getAttribute( 'position' );
     let lineColorAttribute = lineGeometry.getAttribute( 'color' );
   var lineStride=0;
    
         //scene.add(line)
-        for (let r= 0; r < bufferPortion*2; r +=1) {//supports upto r <buffersize*2
+        for (let r= 0; r < bufferPortion; r +=1) {//spirray size supports upto r <buffersize*2
             const  txlast=tx;
             const  tylast=ty;
             tx = spirray0[r];
             ty =  spirray1[r];
-            const greynessLast = greyness
+             greynessLast = greyness
             //if(uniforms[ "metronome" ].value>1.)greyness=.5-.5*Math.sqrt(tx*tx+ty*ty)**1.3247*metroPhase;//seems wrong
             //else
-                greyness = greynessLast;
+            greyness*=-1;
             // pointColor.push( greynessLast, greynessLast, greynessLast,greyness, greyness, greyness );
             if(isFinite(tx)&&isFinite(ty)&&isFinite(txlast)&isFinite(tylast))
             {
