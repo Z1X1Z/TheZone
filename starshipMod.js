@@ -875,13 +875,28 @@ function init() {
      wipeStarshipMesh = new THREE.Mesh( geometryP, wipeMaterialShader );
      finalSceneRerenderedering.add(wipeStarshipMesh);
           
-     
+     setDynamicSampler2ds();
   renderer.setPixelRatio( rez);
      onWindowResize();
     animate();
      adjustThreeJSWindow();
 
 }
+                                           function setDynamicSampler2ds(){
+     omniTexture = new THREE.DataTexture( omniData, 40, 1,THREE.RedFormat,THREE.FloatType);
+     omniTexture.unpackAlignment=1
+     omniTexture.needsUpdate=true;
+     uniforms.omniDynamic.value=omniTexture;
+     uniforms.omniDynamic.needsUpdate = true;
+     
+     
+     coreTexture = new THREE.DataTexture( coreData, 40, 1,THREE.RedFormat,THREE.FloatType);
+     coreTexture.unpackAlignment=1
+     coreTexture.needsUpdate=true;
+     uniforms.coreTextureSampler.value=coreTexture;
+     uniforms.coreTextureSampler.needsUpdate = true;
+ }
+ 
                     let bottomOfScreenHeight = 0;
 function adjustThreeJSWindow()
                     {
@@ -1310,24 +1325,13 @@ if( !window.touchMode&&!window.touchOnlyMode) {
     if(!isNaN(loudestFret[0].volume)&&window.dynamicCoring)
         coreData[hyperCoreOffset]=coreShift*2.*4./3.;//24*1.3247;
     
-    coreTexture = new THREE.DataTexture( coreData, 40, 1,THREE.RedFormat,THREE.FloatType);
-    coreTexture.unpackAlignment=1
-    coreTexture.needsUpdate=true;
-    uniforms.coreTextureSampler.value=coreTexture;
-    uniforms.coreTextureSampler.needsUpdate = true;
-    
     
     
     
     if(!isNaN(loudestFret[0].volume)&&omniDynamicEngaged)
         omniData[hyperCoreOffset]=coreShift/2.;
-    omniTexture = new THREE.DataTexture( omniData, 40, 1,THREE.RedFormat,THREE.FloatType);
-    omniTexture.unpackAlignment=1
-    omniTexture.needsUpdate=true;
-    uniforms.omniDynamic.value=omniTexture;
-    uniforms.omniDynamic.needsUpdate = true;
-    
-    
+
+        setDynamicSampler2ds();
     
    makeSpirograph();
 
@@ -2307,16 +2311,13 @@ for(var n = 0; n<targets.length;n++){
                       }
 
                       uniforms[ "zoom" ].value = zoom;
-                      uniforms.coords.value.x = new THREE.Vector2(coordX,coordY);
+                      uniforms.coords.value = new THREE.Vector2(coordX,coordY);
                         
             uniforms.STAR.value=null;
             uniforms.EDEN.value=null;
-                    renderer.setRenderTarget (cloverRenderTarget)
-                    renderer.render( shaderScene, camera );
                     renderer.setRenderTarget (null)
-                                                         wipeUniforms.cloverSampler.value=cloverRenderTarget.texture;
 
-                    renderer.render( finalSceneRerenderedering, camera );
+                    renderer.render( shaderScene, camera );
 
                 if(textON)document.getElementById("textWindow").innerHTML =
                     "<div sytle='font-size: 16px;'>"+
