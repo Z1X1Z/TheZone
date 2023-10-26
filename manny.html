@@ -2289,7 +2289,8 @@ return b+robe(p,t)+legs(p,t/33.3);}
             return eaglePerched(eagleCoord,vec2(inversion,0.))+body(p+spacing,t)+
             lion(lionCoord,vec2(inversion,0.))+body(p+vec2(-spacing.x,spacing.y),t)+
             ox(oxCoord,vec2(inversion,0.))+body(p+vec2(spacing.x,-spacing.y),t)+
-            man(manCoord,vec2(inversion,0.))+body(p-spacing,t)  ;
+          //  man(manCoord,vec2(inversion,0.))+body(p-spacing,t)
+          ;
 }
             vec3 fourCreaturesSmall(vec2 p, vec2 t){
                     float inversion = -1.;
@@ -2310,7 +2311,6 @@ return b+robe(p,t)+legs(p,t/33.3);}
 
   //function library: manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin x
 
-  //function library: manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin
 vec3 sevenPillars(vec2 p){
     float pillarHeight = 25./max(resolution.x,resolution.y);
     float screenBase = pillarHeight;
@@ -2599,7 +2599,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
 {
                        vec4 ss =StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer;
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
-                       vec4 goodies = vec4(pillar+mnyX+clamp(mny*starshipMultiplier-(ARTICLE.r+ARTICLE.g+ARTICLE.b),0.,1.)+ARTICLE+b+bridge,1.);
+                       vec4 goodies = vec4(pillar+mnyX+clamp(mny*starshipMultiplier-(ARTICLE.r+ARTICLE.g+ARTICLE.b),0.,1.)+ARTICLE+b+creatures,1.);
                        /* vec4 tree = vec4( clamp(
                                                 clamp(
                                                       cloud+
