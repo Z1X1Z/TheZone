@@ -525,8 +525,10 @@ let lineMat, lineGeometry, line;
                     
                     let meshTrail, materialTrail, geomeTrail;
                     let starMesh,starGeometry,starMaterial;
+
                     let radialMaterial, radialLine, radialGeometry;
                     let starsANDwitnessesMesh,starsANDwitnessesGeometry;
+                    let starStreamColors,starStreamPoints,starCount;
                     let starStreamMesh,starStreamMaterial,starStreamGeometry;
                            let scene, shaderScene,feedbackScene, feedbackSceneFlip;
 
@@ -610,7 +612,7 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
        fieldPowerBoost:{value:false},
        fieldPowerBoostMeta:{value:false},
  flipStar:{value:1},
- twistStar:{value:1},
+ twistStar:{value:0},
        multiplicatorNexus:{value:false},//has problems may be discontinued
        squareClover:{value:false},
 
@@ -636,10 +638,7 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
                     
                     
                     const secondsToEdge=window.pixelShaderSize/4./pixelShaderToStarshipRATIO;
-                    const starCount = Math.ceil(starArms*60*secondsToEdge);
-                    
-                                           const starStreamPoints= new Float32Array(starCount*3*6);
-                                           const starStreamColors= new Float32Array(starCount*4*6);
+                  
                     let xyStarParticleArray= Array();
                                            
                                             zoomOutEngage=false;
@@ -650,15 +649,21 @@ function setFFTdependantSizes(){
       bufferSize = fftSize;
       numberOfBins = fftSize/2.;
       frequencies= new Float64Array(numberOfBins);
-      inputData = new Float32Array(bufferSize);
+     inputData = new Float32Array(bufferSize);
+     dataArray = new Uint8Array( numberOfBins );
      window.zoomOutRatchetThreshold=1./bufferSize;
      
       point = new Float64Array(bufferSize*2*3*2);
       pointColor = new Float64Array(bufferSize*2*4*2);
      
-      star= new Float64Array(fftSize/2*3);
-      starColors= new Float64Array(fftSize/2*4);
+      star= new Float64Array(numberOfBins*3);
+      starColors= new Float64Array(numberOfBins*4);
      
+     
+      starCount = Math.ceil(starArms*60*secondsToEdge);
+
+      starStreamPoints= new Float64Array(starCount*3*6);
+      starStreamColors= new Float64Array(starCount*4*6);
       fractionOfFrame = Math.floor(bufferSize/2.);
       yinData = new Float64Array(fractionOfFrame);
      
@@ -678,6 +683,17 @@ function setFFTdependantSizes(){
          starGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ));
          starMesh = new THREE.Mesh(starGeometry, starMaterial);
          scene.add(starMesh)
+         
+         scene.remove(starStreamMesh);
+         starStreamGeometry.dispose();
+         starStreamGeometry = new THREE.BufferGeometry();
+         starStreamGeometry.dynamic = true;
+         starStreamGeometry.setAttribute('position', new THREE.Float32BufferAttribute( starStreamPoints,3 ));
+         starStreamGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( starStreamColors, 4 ));
+         starStreamMesh = new THREE.Mesh(starStreamGeometry, starStreamMaterial);
+         scene.add(starStreamMesh);
+
+         
      }
      
      
@@ -694,7 +710,6 @@ function init() {
      uniforms.d.value = new THREE.Vector2(0.,0.);
      uniforms.dotCoord.value = new THREE.Vector2(0.,0.);
 
-     setFFTdependantSizes();
      setRenderTargetSize(window.innerWidth,window.innerHeight)
 
     renderer = new THREE.WebGLRenderer();
@@ -739,11 +754,12 @@ function init() {
             });
     starGeometry = new THREE.BufferGeometry();
      starGeometry.dynamic = true;
-     
-     starGeometry.setAttribute('position', new THREE.Float32BufferAttribute( star,3 ));
-     starGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ));
     starMesh = new THREE.Mesh(starGeometry, starMaterial);
-
+     
+     starStreamGeometry = new THREE.BufferGeometry();
+     starStreamMesh = new THREE.Mesh(starStreamGeometry, starMaterial);
+     
+     
      starsANDwitnessesGeometry = new THREE.BufferGeometry();
      
      starsANDwitnessesGeometry.dynamic = true;
@@ -758,13 +774,7 @@ function init() {
                  vertexColors: true,
                 // side: THREE.DoubleSide
              });
-     starStreamGeometry = new THREE.BufferGeometry();
-     starStreamGeometry.dynamic = true;
-     starStreamGeometry.setAttribute('position', new THREE.Float32BufferAttribute( starStreamPoints,3 ));
-     starStreamGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( starStreamColors, 4 ));
-     starStreamMesh = new THREE.Mesh(starStreamGeometry, starStreamMaterial);
-     
-     
+
     materialTrail= new THREE.MeshBasicMaterial({
                    opacity: 1.,
                  transparent: true,
@@ -886,17 +896,17 @@ function init() {
        } );
      wipeStarshipMesh = new THREE.Mesh( geometryP, wipeMaterialShader );
      finalSceneRerenderedering.add(wipeStarshipMesh);
-          
+     window.INITIALIZED =true;
+     setFFTdependantSizes();
      setDynamicSampler2ds();
   renderer.setPixelRatio( rez);
      onWindowResize();
-     window.INITIALIZED =true;
     animate();
      adjustThreeJSWindow();
 
 }
                                            window.INITIALIZED=false;
-                                           function setDynamicSampler2ds(){
+function setDynamicSampler2ds(){
      omniTexture = new THREE.DataTexture( omniData, 40, 1,THREE.RedFormat,THREE.FloatType);
      omniTexture.unpackAlignment=1
      omniTexture.needsUpdate=true;
@@ -953,8 +963,12 @@ function onWindowResize() {
      
      
      //menuBoxes declared in manny.html
-    for(var box=0.;box<menuBoxes.length;box++)menuBoxes[box].style.columnCount=Math.round(window.innerWidth/window.innerHeight*4.);
+     let numberOfColumns=Math.round(window.innerWidth/window.innerHeight*4.)
+    for(var box=0.;box<menuBoxes.length;box++)menuBoxes[box].style.columnCount=numberOfColumns;
      rezBox.style.columnCount=1;//this is a bit repetitious
+     let numberInputElements = document.getElementsByClassName("num")
+     for(var n=0; n<numberInputElements.length;n++)
+         numberInputElements[n].style.width=window.innerWidth/(numberOfColumns+1.)+"px";
 
   }
 
