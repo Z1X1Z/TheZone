@@ -2604,16 +2604,14 @@ if(starOnDot){
                                  
                                  vec3 pillar = vec3(0.);
                                  pillar = sevenPillars(vUv.yx-vec2(0.,.5));
-                        //         vec2 ColorWheel = vUv-.5;/// in clover now remove once working
-                         //   vec3 beta   =  hsv2rgb(vec3((atan(ColorWheel.y,ColorWheel.x)+PI)/(2.*PI),1.,1.));
-
+                       
                                  
 if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
 {
                        vec4 ss =StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer;
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies = vec4(pillar+mnyX+clamp(mny*starshipMultiplier-(ARTICLE.r+ARTICLE.g+ARTICLE.b),0.,1.)+ARTICLE+b+creatures+bridge,1.);
-                       /* vec4 tree = vec4( clamp(
+                       vec4 tree = vec4( clamp(
                                                 clamp(
                                                       cloud+
                                                  zoomer+
@@ -2628,10 +2626,10 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
                                      
                                      -vec3((mny.r+mny.b+mny.g)*4.),.0,1.)
                                          ,1.);
-                       */
-                                     vec4 fin = ss-faceFromShip+goodies;
+                       
+                                     vec4 fin = (ss-faceFromShip+goodies+tree)*isBlack*isBlackStaRivers*isBlackDOT+isGrey*2.+isGreyStaRivers+isGreyDOT+(isBlack-1.);
                                  gl_FragColor=fin;}
-                                 //else gl_FragColor=vec4(zoomer,1.);
+                                 else gl_FragColor=vec4(zoomer,1.);
 
                                          }
 
