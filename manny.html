@@ -16,7 +16,7 @@
         <body oncontextmenu="return false;"><!--disable right click solution from
                                         https://stackoverflow.com/questions/381795/how-to-disable-right-click-context-menu-in-javascript  -->
         <div id="load message" style="font-size:40px; background-color:blue;">     </div>
-        <!--
+        
         <script>
             function loadScript(element, url, offlineURL)
             {
@@ -34,28 +34,55 @@
                     }
             }
           </script>
--->
+
 
 
         <script src="OFFLINEonlineSwitch.js"></script>
         
         <script id="threeJSscript"></script>
-        <script id="osmdJS"></script>
-        <script id="wadJSscript"></script>
-        
-        <!-- scripts loaded in starshipMod.js -->
+        <!--Deprecates with v160 of threejs
+        <script>
+        var cdnSwitchThree="three.js";
+        //if (window.useCDN)cdnSwitchThree="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js";
+        if (window.useCDN)cdnSwitchThree="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/three.min.js";
+        loadScript("threeJSscript",cdnSwitchThree,"three.js")
+        </script>
+        -->
         <script id="shim"></script> <!-- you need to provide the .js file, see README.md-->
-        
+        <script>
+        var cdnSHIM="opensheetmusicdisplay.min.js";
+        if (window.useCDN)cdnSHIM="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js";
+        loadScript("shim",cdnSHIM,"")
+        </script>
        
         <script type="importmap">
           {
             "imports": {
-              "three": "https://unpkg.com/three@v0.153.0/build/three.module.js",
-              "openSheet":"https://unpkg.com/opensheetmusicdisplay@1.7.6/build/opensheetmusicdisplay.min.js",
-              "wadaw" : "https://unpkg.com/web-audio-daw@4.12.0"
+              "three": "https://unpkg.com/three@v0.153.0/build/three.module.js"
             }
           }
         </script>
+        
+        <script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
+        <script>
+        var cdnOSMD="opensheetmusicdisplay.min.js";
+        if (window.useCDN)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.7.6/build/opensheetmusicdisplay.min.js";
+        loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")
+        </script>
+        
+        <script id="wadJSscript"></script>
+        <script>
+        var cdnSwitchWAD="wad.min.js";
+        if (window.useCDN)cdnSwitch="https://unpkg.com/web-audio-daw@4.12.0";
+        
+        function wrapperLurker(){
+            if (userHasGestured)        loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")
+            else        setTimeout(wrapperLurker,100);
+        }
+            wrapperLurker();
+        </script>
+
+        <!-- removing this script may fix android no load bug, but I'm testing z ordering in css        -->
 
         <div id="background_wrap">
                <script>
@@ -678,28 +705,26 @@
     
     
 
-    
-
-    
-
-
     <div class="onBottom" style="text-align:right; width:100%;">
-
-        <button onclick='
-            let menu=document.getElementById("menu")
-            if( menu.style.display=="block")  menu.style.display="none"
-            else if( menu.style.display=="none")menu.style.display="block";'>Menu</button>
-        </div>
-    
-    
-        <div id="container">
-            <script src="wadLoader.js"> </script>
-        <div id="textWindow" class="onBottom" style="bottom:1em;"> </div>
+        
+        
+            <button onclick='
+                let menu=document.getElementById("menu")
+                if( menu.style.display=="block")  menu.style.display="none"
+                else if( menu.style.display=="none")menu.style.display="block";'>Menu</button>
     </div>
-        <div id="score">
+    
+    <div id="container">
+    
+    <script src="wadLoader.js"> </script>
+    
+    <div id="textWindow" class="onBottom" style="bottom:1em;"> </div>
+    </div>
+    <div id="score">
+        
             <div id="osmdCanvas" class="onBottom" style = "bottom:40px;"></div>
-        </div id="score">
 
+    </div id="score">
         <script>
         document.getElementById("files").addEventListener("change", handleFileSelect, false);
 /*

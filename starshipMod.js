@@ -1,4 +1,4 @@
-var THREE,wad, opensheetmusicdisplay;
+var THREE;
 function loadWithShim(variableName,libraryName, elementHost, URL, jsFile)
 {
     if(window.useCDN)
@@ -10,16 +10,13 @@ function loadWithShim(variableName,libraryName, elementHost, URL, jsFile)
         })
         .finally((err) => {});
     else{
-        console.log("load offline "+jsFile)
+        console.log("load old "+libraryName+" for offline ")
         document.getElementById(elementHost).src=jsFile;
     }
     
 }
 
 loadWithShim(THREE,"three","threeJSscript","https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/three.min.js","three.js");
-
-loadWithShim(wad,"wadaw","wadJSscript","https://unpkg.com/web-audio-daw@4.12.0","wad.min.js")
-loadWithShim(opensheetmusicdisplay,"openSheet","osmdJS","https://unpkg.com/opensheetmusicdisplay@1.7.6/build/opensheetmusicdisplay.min.js","opensheetmusicdisplay.min.js");
 
 function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
     if(typeof THREE=="object" && document.visibilityState=="visible"
