@@ -1,22 +1,18 @@
 var THREE;
-function loadWithShim(variableName,libraryName, elementHost, URL, jsFile)
-{
-    if(window.useCDN)
-        import(libraryName).then(module => { variableName=module})
-        .catch((err) => {
-            console.log("Error loading "+jsFile+" module;load offline "+jsFile+" instead");
-            document.getElementById(elementHost).src =URL//iOS needs a local module, so we give it this instead
-            
-        })
-        .finally((err) => {});
-    else{
-        console.log("load old "+libraryName+" for offline ")
-        document.getElementById(elementHost).src=jsFile;
-    }
+
+if(window.useCDN)import("three").then(module => { THREE=module})
+.catch((err) => {
+    console.log("Error loading threeJS module;load old Threejs instead");
+    document.getElementById("threeJSscript").src = "https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/three.min.js"//iOS needs a local module, so we give it this instead
     
+})
+.finally((err) => {});
+else{
+    console.log("load old Threejs for offline")
+    document.getElementById("threeJSscript").src="three.js";
 }
 
-loadWithShim(THREE,"three","threeJSscript","https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/three.min.js","three.js");
+
 
 function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
     if(typeof THREE=="object" && document.visibilityState=="visible"
