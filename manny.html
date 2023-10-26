@@ -1461,25 +1461,6 @@ for (float counter=0.;counter<iterations;counter++)if(dstnce<40.){
     s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
     dstnce = length(s);
 
-           vec2 cloverMAP = (spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI))*CORE_DELIMITER+.5;
-                                   
-                                   vec2 ColorWheelClover=vec2(0.);
-                                   float cycleShiftChiral = 0.;
-                                   
-                                if(NightAndDay){
-                                            if(chirality!=-1){
-                                                
-                                                    if (flipStar!=0.)cycleShiftChiral=0.;
-                                                    else cycleShiftChiral=PI;
-                                                ColorWheelClover=spin2(vec2(-s.y,-s.x)*flipStar,(atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)+atan(d.x,d.y)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar);//clover actually seems to have down to the right so it may need to be rotated by pi/x
-                                                }
-                                            else {
-                                                
-                                                    if (flipStar!=0.)cycleShiftChiral=PI/4.;
-                                                    else cycleShiftChiral=-PI;
-                                                    ColorWheelClover = spin2(vec2(-s.x,-  s.y)*flipStar,(atan(s.x,s.y)*OmniPetal/(6.+OmniPetal)-atan(d.y,d.x)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar);
-                                                }
-                                            if(dstnce<4./3.)    beta   =  hsv2rgb(vec3((atan(ColorWheelClover.y,ColorWheelClover.x))/(2.*PI),1.,1.));
                                 }
 
 }else break;
