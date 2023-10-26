@@ -664,7 +664,8 @@ function setFFTdependantSizes(){
      
       starArms = numberOfBins;
     
-                                  testar = new Float64Array(EldersLeg);
+                                 testar = new Float64Array((EldersLeg>0)?EldersLeg:0);
+     
                                   testarContinuous =new Float64Array(starArms);
                                   mustarD =new Float64Array(starArms);
      if(window.INITIALIZED)
@@ -1395,9 +1396,13 @@ if( !window.touchMode&&!window.touchOnlyMode) {
       }
       else document.getElementById("textWindow").innerHTML = "";
 
+    
+        uniforms[ "time2dance" ].value += audioX.sampleRate/bufferSize*totalAMP;
+        uniforms["volume" ].value = audioX.sampleRate/bufferSize*totalAMP/(1.+zoomOutRatchetThreshold);
+        uniforms[ "zoom" ].value = zoom;
+        uniforms.coords.value = new THREE.Vector2( coordX,coordY);
 
-
-
+   if (EldersLeg>0){
 
 
     let metroPhase =(-Math.sin(-uniforms[ "time" ].value-pi/2.)*uniforms[ "metronome" ].value)
@@ -1441,14 +1446,6 @@ lineMat.color = new THREE.Color("black");
     linePositionAttribute.needsUpdate = true;
     lineColorAttribute.needsUpdate = true;
 
-
-  uniforms[ "time2dance" ].value += audioX.sampleRate/bufferSize*totalAMP;
-                            
-         uniforms["volume" ].value = audioX.sampleRate/bufferSize*totalAMP/(1.+zoomOutRatchetThreshold);
-
-
-              uniforms[ "zoom" ].value = zoom;
-              uniforms.coords.value = new THREE.Vector2( coordX,coordY);
 
   if (window.micOn)analyser.getByteFrequencyData(  dataArray);
 
@@ -2012,7 +2009,7 @@ var loopLimit = trailDepth;
       trailColorAttribute.needsUpdate = true; // required after the first render
 
 
-                                           
+                                                                                     }//end eldersLeg>0
 
 if(isFinite(d_x)&&isFinite(d_y)&&on) {
 circleX-=xAdjusted;//xadjusted should mean this moves with the same screen scale as the trail
@@ -2268,8 +2265,12 @@ shaderScene.add( targets[n] );
                                  }
                                  else if(!window.blankBackground){
                                       uniforms.STAR.value=null;
+                                                         
                                       const shaderMeshClone = mesh.clone();
-                                      scene.add(shaderMeshClone);
+                                                         scene.add(shaderMeshClone);
+                                                         scene.add(radialLine);
+                                                         scene.add(circle);
+
                                     if(omniDynamicEngaged||dynamicCoring)
                                     {
                                         renderer.setRenderTarget (cloverRenderTarget)
@@ -2283,16 +2284,27 @@ shaderScene.add( targets[n] );
                                         renderer.render( scene, camera );
                                     }
                                       scene.remove(shaderMeshClone);
+                                                         scene.remove(radialLine);
+                                                         scene.remove(circle);
                                      }
-                                 else   renderer.render( scene, camera );
+                                 else
+                                    {
 
+                                    scene.add(radialLine);
+                                    scene.add(circle);
+                                                         
+                                    renderer.render( scene, camera );
+
+                                    shaderScene.remove(radialLine);
+                                    shaderScene.remove(circle);
+                                    }
                               
                      
                      
                                                        circle.geometry.dispose();
                                                        radialLine.geometry.dispose( );
 if(RockInTheWater==2||RockInTheWater==1)scene.remove(starStreamMesh);
-if(polygons.length>0)
+if(polygons.length<0)
 for(var n = 0; n<targets.length;n++){
   shaderScene.remove( targets[n] );
   pG[n].dispose();
