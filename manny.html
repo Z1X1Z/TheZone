@@ -40,9 +40,9 @@
         <script src="OFFLINEonlineSwitch.js"></script>
         
         <script id="threeJSscript"></script>
-        
         <script id="osmdJS"></script>
         <script id="wadJSscript"></script>
+        
         <!-- scripts loaded in starshipMod.js -->
         <script id="shim"></script> <!-- you need to provide the .js file, see README.md-->
         
@@ -679,10 +679,10 @@
     
 
     
-    <div id="container">
+
     
-    <script src="wadLoader.js"> </script>
-    
+
+
     <div class="onBottom" style="text-align:right; width:100%;">
 
         <button onclick='
@@ -690,13 +690,16 @@
             if( menu.style.display=="block")  menu.style.display="none"
             else if( menu.style.display=="none")menu.style.display="block";'>Menu</button>
         </div>
+    
+    
+        <div id="container">
+            <script src="wadLoader.js"> </script>
         <div id="textWindow" class="onBottom" style="bottom:1em;"> </div>
-
+    </div>
         <div id="score">
             <div id="osmdCanvas" class="onBottom" style = "bottom:40px;"></div>
         </div id="score">
-            
-    </div>
+
         <script>
         document.getElementById("files").addEventListener("change", handleFileSelect, false);
 /*
