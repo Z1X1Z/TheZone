@@ -1,17 +1,23 @@
 var THREE;
-if(window.useCDN)import("three").then(module => { THREE=module})
-.catch((err) => {
-    console.log("Error loading threeJS module;load old Threejs instead");
-    document.getElementById("threeJSscript").src = "https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/three.min.js"//iOS needs a local module, so we give it this instead
+function loadWithShim(libraryName, elementHost, URL, file)
+{
+    if(window.useCDN)import("libraryName").then(module => { THREE=module})
+        .catch((err) => {
+            console.log("Error loading"+libraryName+" module;load old Threejs instead");
+            document.getElementById("elementHost").src =URL//iOS needs a local module, so we give it this instead
+            
+        })
+        .finally((err) => {});
+    else{
+        console.log("load old Threejs for offline")
+        document.getElementById(elementHost).src=file;
+    }
     
-})
-.finally((err) => {});
-else{
-    console.log("load old Threejs for offline")
-    document.getElementById("threeJSscript").src="three.js";
 }
+loadWithShim("three","threeJSscript","https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/three.min.js","three.js");
+loadWithShim("wad","wadJSscript","https://unpkg.com/web-audio-daw@4.12.0","wad.min.js","https://unpkg.com/opensheetmusicdisplay@1.7.6/build/opensheetmusicdisplay.min.js");
 
-
+loadWithShim("osmd","osmdJS","https://unpkg.com/opensheetmusicdisplay@1.7.6/build/opensheetmusicdisplay.min.js" ,"opensheetmusicdisplay.min.js")
 function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
     if(typeof THREE=="object" && document.visibilityState=="visible"
        &&(window.micOn||location.hash.includes("t"))){
@@ -668,6 +674,12 @@ function setFFTdependantSizes(){
      
      
  }
+                                 function          setRenderTargetSize(w,h){
+    renderTarget = new THREE.WebGLRenderTarget(w,h);
+     cloverRenderTarget = new THREE.WebGLRenderTarget(w,h);
+    FeedbackrenderTarget = new THREE.WebGLRenderTarget(w,h);
+    FeedbackrenderTargetFlipSide = new THREE.WebGLRenderTarget(w,h);
+ }
 function init() {
            uniforms.resolution.value = new THREE.Vector2(window.innerWidth,window.innerHeight);
      uniforms.coords.value = new THREE.Vector2(0.,0.);
@@ -675,15 +687,7 @@ function init() {
      uniforms.dotCoord.value = new THREE.Vector2(0.,0.);
 
      setFFTdependantSizes();
-     
-    renderTarget = new THREE.WebGLRenderTarget(window.innerWidth,window.innerHeight);
-     cloverRenderTarget = new THREE.WebGLRenderTarget(window.innerWidth,window.innerHeight);
-
-    FeedbackrenderTarget = new THREE.WebGLRenderTarget(window.innerWidth,window.innerHeight);
-
-
-    FeedbackrenderTargetFlipSide = new THREE.WebGLRenderTarget(window.innerWidth,window.innerHeight);
-
+     setRenderTargetSize(window.innerWidth,window.innerHeight)
 
     renderer = new THREE.WebGLRenderer();
      
@@ -917,7 +921,7 @@ function adjustThreeJSWindow()
 
       minimumDimension = Math.min(width,height);
      maximumDimension = Math.max(width,height);
-
+     setRenderTargetSize(width,height);
       height/=minimumDimension;
       width/=minimumDimension;
 
