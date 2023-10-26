@@ -2257,10 +2257,7 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
      
      }
                           
-                     renderer.setRenderTarget (null)
-                 if(!window.blankBackground) scene.background = null;
-                 else scene.background = new THREE.Color( 0x808080);
-                     
+                                                       scene.background = null;
                                  if(starClover) {
 
                                          uniforms.STAR.value=renderTarget.texture;
@@ -2285,9 +2282,7 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
                                                          
                                       const shaderMeshClone = mesh.clone();
                                                          scene.add(shaderMeshClone);
-                                                         scene.add(radialLine);
-                                                         scene.add(circle);
-
+                                                         
                                     if(omniDynamicEngaged||dynamicCoring)
                                     {
                                         renderer.setRenderTarget (cloverRenderTarget)
@@ -2306,7 +2301,7 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
                                      }
                                  else
                                     {
-
+                                    scene.background = new THREE.Color( 0x808080);
                                     scene.add(radialLine);
                                     scene.add(circle);
                                                          

@@ -290,8 +290,11 @@ window.addEventListener('keydown', function(event) {if(window.INITIALIZED)callKe
         uniforms[ "petals" ].value -= 1.;
     else if (key=="Y"){
         window.blankBackground = !window.blankBackground;
-        if(window.blankBackground)window.starClover=false;
-        else window.starClover=true;
+        if(window.blankBackground)
+            uniforms[ "colorCombo" ].value = 100;
+        else
+            uniforms[ "colorCombo" ].value = -1;
+       
     }
     else if (key=="u") uniforms[ "petals" ].value += 1.;
     else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%10;
