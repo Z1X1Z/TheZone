@@ -14,14 +14,15 @@ window.pzyghthe=0;
 window.dynamicCoring=false;
 let osmdStaffsVisible = 0;
 let runningHash = true;
-let number = "";
-window.EldersLeg = 24;
+window.number = 24;
+window.EldersLeg = window.number;
 window.lastElderLegCount=window.EldersLeg;
 function readHash(){
     
     let hashindex = 0;
     while (hashindex<location.hash.length)
     {
+        number=""
         let lasthash = hashindex;
         if(location.hash[hashindex-1]=="(")
         {            hashindex++;
@@ -33,6 +34,7 @@ function readHash(){
             }
 
         }
+        number=Number(number);
     callKey(new KeyboardEvent('keydown',
                               {
         'key': location.hash[lasthash],"keyCode":location.hash.charCodeAt(lasthash),
@@ -82,10 +84,11 @@ function getKey(){
 
 if(//!(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' &&
    navigator.maxTouchPoints < 1)//)//if not mobile
-window.addEventListener('keydown', function(event) {if(window.uniformsLoaded)callKey(event); return true;}, false);
+window.addEventListener('keydown', function(event) {if(window.INITIALIZED)callKey(event); return true;}, false);
 
     let lastKey = "";
     function callKey(event){
+        console.log("inKey")
         let key = "";
 
         if(key==","&&!runningHash)//key here is the last key
@@ -97,30 +100,16 @@ window.addEventListener('keydown', function(event) {if(window.uniformsLoaded)cal
                            );
 
          key = event.key;
+        console.log(key)
     if(key=="/"&&!event.shiftKey){  event.preventDefault(); event.stopImmediatePropagation();}
 
     var x=null;
-    if(!event.shiftKey)x = parseInt(String.fromCharCode( event.keyCode));
+    if(!event.shiftKey&&!event.ctrlKey)x = parseInt(String.fromCharCode( event.keyCode));
 
 
     //meta keys like ctrlKey must be processed first and should have symbol preferably
-        if (key=="a"){
-            lastElderLegCount = EldersLeg
-            EldersLeg=Math.round(number);
-            let minimumFFTfactor = Math.ceil(Math.log(EldersLeg*12.)/Math.log(2.));
-            if(minimumFFTfactor<=15){
-                if(minimumFFTfactor>11)
-                    window.fftSize=2**minimumFFTfactor;
-                else
-                    window.fftSize = 2**11
-                    setFFTdependantSizes();
-
-            }
-            
-        }
-    else if (document.activeElement.className=="num");//don't take hotkey's while menu number selector engaged
-        
-        else if(key == "o" && event.ctrlKey)
+    
+         if(key == "o" && event.ctrlKey)
         {
             omniDynamicEngaged = !omniDynamicEngaged;
             if(!omniDynamicEngaged)omniData.fill(0);
@@ -151,6 +140,8 @@ window.addEventListener('keydown', function(event) {if(window.uniformsLoaded)cal
     else if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=!uniforms.starOnDot.value;
     //else if (key=="" && event.ctrlKey)instantaneousFreqSpirographColoring = (instantaneousFreqSpirographColoring+1)%2;//color mode 3 seems obsolete
     else if (key=="m" && event.ctrlKey) uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value;
+    else if (event.ctrlKey&&key=="a")uniforms[ "colorCombo" ].value = 11;
+
     else if(event.ctrlKey);//swallow remaining possibilities, muting keypress
     /*if(key == "k" && event.ctrlKey)
     {
@@ -178,7 +169,20 @@ window.addEventListener('keydown', function(event) {if(window.uniformsLoaded)cal
         }
     } the bass staff doesn't include the lyrics so it's not included
      */
+      else  if (key=="a"){
+            lastElderLegCount = EldersLeg
+            EldersLeg=Math.round(number)*1.;
+            let minimumFFTfactor = Math.ceil(Math.log(EldersLeg*12.)/Math.log(2.));
+            if(minimumFFTfactor<=15){
+                if(minimumFFTfactor>11)
+                    window.fftSize=2**minimumFFTfactor;
+                else
+                    window.fftSize = 2**11
+            }
+          setFFTdependantSizes();
 
+        }
+    else if (document.activeElement.className=="num");//don't take number hotkey's while menu number selector engaged
     else if (x>0&&x<=4&& document.activeElement.className!="num")
     {rez = window.devicePixelRatio/x; renderer.setPixelRatio( rez);}
     else if (key=="+"){rez /=1.1; renderer.setPixelRatio( rez);}
@@ -231,7 +235,6 @@ window.addEventListener('keydown', function(event) {if(window.uniformsLoaded)cal
     else if (key=="f") uniforms[ "fourCreats" ].value *= -1;
     else if (key=="F") uniforms[ "spokelover" ].value=!uniforms[ "spokelover" ].value ;
     
-    else if (event.ctrlKey&&key=="a") uniforms[ "colorCombo" ].value = 11;
     else if (key=="\'"||key=="\"") uniforms[ "colorCombo" ].value = 13;
     else if (key=="d") uniforms[ "colorCombo" ].value = 14;
     else if (key=="x") uniforms[ "colorCombo" ].value = 15;
@@ -376,14 +379,14 @@ window.addEventListener('keydown', function(event) {if(window.uniformsLoaded)cal
       else if (key=="R")   uniforms[ "remediatedColors" ].value=!uniforms[ "remediatedColors" ].value  ;
 
 
-      else if (key=="="){window.movementRate *=1.11111111;  uniforms[ "rate" ].value*=1.11111111;}
+      else if (key=="="){window.movementRate *=1.11111111;  uniforms.rate.value*=1.11111111;}
 
-      else if (key=="-"){window.movementRate /=1.11111111; uniforms[ "rate" ].value/=1.11111111;}
+      else if (key=="-"){window.movementRate /=1.11111111; uniforms.rate.value/=1.11111111;}
 
           else if (key=="e")uniforms.gameOn.value=!uniforms.gameOn.value;
           else if (key=="E")uniforms.MannyONtrail.value=uniforms.MannyONtrail.value=(1+uniforms.MannyONtrail.value)%2;
 
-      if(uniforms[ "free" ].value) window.zoomCageSize=100000000000000000.;
+      if(uniforms.free.value) window.zoomCageSize=100000000000000000.;
       else window.zoomCageSize=1.5;
     }
 
