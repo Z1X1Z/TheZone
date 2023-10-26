@@ -2622,11 +2622,11 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
                                   
                        -(DOTstarship.x+DOTstarship.y+DOTstarship.z)/DOTmaxColorOfStarship*.5*DOTstarship.w
                       -(StaRivers.r+StaRivers.g+StaRivers.b)*StaRivers.w
-                       -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*4.);
+                       -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*4.;
                        vec4 tree = vec4( clamp(
                                                 clamp(
                                                       cloud+
-                                                    zoomer
+                                                      zoomer
                                                       +awayFromTree
                                                                          ,0.,1.)
                                      
