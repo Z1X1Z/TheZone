@@ -1717,7 +1717,9 @@ o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z)
                       o*=isBlack;
                       o+=isGrey;
                       if(length(p-coords.yx)<2.*sqrt(2.)/min(resolution.x,resolution.y)*zoom)o=vec3(hyperCoreOUTPUT/255.*4.,0.,255.);
-return clamp(o,0.,1.);}
+return vec3(1.);//clamp(o,0.,1.);
+                      
+                      }
 
                       
                       
