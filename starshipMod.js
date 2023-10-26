@@ -1,10 +1,11 @@
-var THREE;
-function loadWithShim(libraryName, elementHost, URL, file)
+var THREE,wad,opensheetmusicdisplay;
+function loadWithShim(mod,libraryName, elementHost, URL, file)
 {
-    if(window.useCDN)import(libraryName).then(module => { THREE=module})
+    if(window.useCDN)
+        import(libraryName).then(module => { THREE=module})
         .catch((err) => {
-            console.log("Error loading "+libraryName+" module;load old Threejs instead");
-            document.getElementById("elementHost").src =URL//iOS needs a local module, so we give it this instead
+            console.log("Error loading "+libraryName+" module;load old "+libraryName+" instead");
+            document.getElementById(elementHost).src =URL//iOS needs a local module, so we give it this instead
             
         })
         .finally((err) => {});
@@ -14,9 +15,12 @@ function loadWithShim(libraryName, elementHost, URL, file)
     }
     
 }
-loadWithShim("three","threeJSscript","https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/three.min.js","three.js");
-loadWithShim("wad","wadJSscript","https://unpkg.com/web-audio-daw@4.12.0","https://unpkg.com/opensheetmusicdisplay@1.7.6/build/opensheetmusicdisplay.min.js","wad.min.js");
-loadWithShim("osmd","osmdJS","https://unpkg.com/opensheetmusicdisplay@1.7.6/build/opensheetmusicdisplay.min.js" ,"opensheetmusicdisplay.min.js")
+
+loadWithShim(THREE,"three","threeJSscript","https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/three.min.js","three.js");
+loadWithShim(wad,"wad","wadJSscript","https://unpkg.com/web-audio-daw@4.12.0","https://unpkg.com/opensheetmusicdisplay@1.7.6/build/opensheetmusicdisplay.min.js","wad.min.js");
+loadWithShim(opensheetmusicdisplay,"osmd","osmdJS","https://unpkg.com/opensheetmusicdisplay@1.7.6/build/opensheetmusicdisplay.min.js" ,"opensheetmusicdisplay.min.js")
+
+
 function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
     if(typeof THREE=="object" && document.visibilityState=="visible"
        &&(window.micOn||location.hash.includes("t"))){
