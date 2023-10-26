@@ -1531,40 +1531,6 @@ vec2 lastS = s;
    //traditionally be e or 3 probably 1.5 to 4
    
 
-   
-    if(Spoker&&1.<=hyperCoreBoosted)
-                             {
-                                 
-                                 hyperCoreOUTPUT--;
-
-               hyperCoreBoosted--;
-                             s/=metaCoreDriveFactor;//engage spokelover s/=2.+'superspokes'
-                             }
-            else  {
-                
-                hyperCoreOUTPUT++;
-                hyperCoreBoosted++;
-}
-   
-   if(spokelover&&counter<hyperCoreBoosted){
-        if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
-        else s/=sqrt(2.);
-        }
-   
-   
-   if(continuumClover){//engage continualization
-       float continuumCore=(continuumCounter+hyperCoreOUTPUT)*zoom/(lfc-zoom);
-       if(loops+counter<=hyperCoreBoosted+continuumCounter) s/=pow(2.,pow(.5,continuumCore));
-       hyperCoreBoosted+=continuumCore;
-    }
-  
-dstnce = length(s);
-
-                             //              s*=refactorCores;c*=refactorCores;
-                             
-                             
-                             if(dstnce<4./3.)s=spin2(s,atan(s.y,s.x)*(petals)/6.);
-
 
                              colorShift+=hyperCoreBoosted;
                              hyperCoreBoosted--;
