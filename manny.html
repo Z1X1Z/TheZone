@@ -1221,7 +1221,7 @@ z.y=-1./z.y;}
 }
 return vec3(l+b+r+h);}
     vec3 sealedWoman(vec2 p,vec2 t){
-                    p+=2.;
+                 p.x+=1.;
                     
                    vec2 g=p/2.2;
                    vec2 s=g;
@@ -2406,7 +2406,7 @@ vec2 dance = vec2(0.);
                    }
                             
      else if (colorCombo==11||colorCombo==18)zoomer=heartZoom(backGround+driftCanceller, dance);
-     else if (colorCombo==13)zoomer=tokogae(backGround,vec2(zoom));
+    // else if (colorCombo==13)zoomer=tokogae(backGround,vec2(zoom));
                                  
      else if (colorCombo==14)zoomer=TOLTOK(backGround,dance2);
      else if (colorCombo==15)zoomer=xx(backGround,dance2);
@@ -2503,8 +2503,10 @@ vec2 dance = vec2(0.);
                    else if (Character==7)mny=ox(fourcreaturePlayerP,vec2(inversion,0.))+bodyFourCreatureCharacter(characterOnTrailP,moveDynamic);
                    else if (Character==8)mny=man(fourcreaturePlayerP,vec2(inversion,0.))+bodyFourCreatureCharacter(characterOnTrailP,moveDynamic);
                    else if (Character==9)mny=bod(characterOnTrailP,moveDynamic)+heart(characterPSpunToKey*(2.)*pow(1.3247,3.),moveDynamic*3.)+clamp(face(characterOnTrailP*1.22112211,moveDynamic)+heart(characterPSpunToKey*min(resolution.x,resolution.y)/max(resolution.x,resolution.y)
-                                                                            /gr,moveDynamic/2.5),0.,1.);;
-                       
+                                                                            /gr,moveDynamic/2.5),0.,1.);
+                                                                            else if (Character==10)mny=sealedMan(characterOnTrailP,moveDynamic);
+                                                                            else if (Character==11)mny=sealedWoman(characterOnTrailP/1.44,moveDynamic);
+
            }
 
                                  
