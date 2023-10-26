@@ -133,22 +133,15 @@
                   <label for="fretCount">Fruits</label>
 
                   <input type="number" id="fretCount" name="fretCount" class="num" onkeydown="
-                                                      number= document.getElementById('fretCount').value;
-                                                      key  = 'a';
-                    if(!isNaN(number)&&number>1){
-                                                      callKey(new KeyboardEvent('keydown', {'key':key, 'keyCode':key.charCodeAt(0)}));
-                                                scene.remove(starMesh)
-                                                        starGeometry = new THREE.BufferGeometry();
-                                                         starGeometry.dynamic = true;
-                                                         
-                                                         starGeometry.setAttribute('position', new THREE.Float32BufferAttribute( star,3 ));
-                                                         starGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ));
-                                                        starMesh = new THREE.Mesh(starGeometry, starMaterial);
-                                                    scene.add(starMesh)
-}
+                                                                                                        number= document.getElementById('fretCount').value;
+                                                                                                        key  = 'a';
+                                                                      if(!isNaN(number)&&number>1)
+                                                                                                        callKey(new KeyboardEvent('keydown', {'key':key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));
+                                                             
+
+                                                  ">
 
 
-">
 
                       <br>
                <input type="checkbox" id="DotStar" name="t"  onclick= "uniforms.starOnDot.value=!uniforms.starOnDot.value;">
