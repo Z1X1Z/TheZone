@@ -547,7 +547,7 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
        cloverSlide:{value: false    },
 
            micIn : {  value: null }, // float array (vec3)
-           time: {value: 1.0 },
+           time: {value:.0 },
        rate: {value: 1.},
 
            zoom: {value: 1 },
@@ -607,7 +607,8 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
 
        fieldPowerBoost:{value:false},
        fieldPowerBoostMeta:{value:false},
-
+ flipStar:{value:1},
+ twistStar:{value:1},
        multiplicatorNexus:{value:false},//has problems may be discontinued
        squareClover:{value:false},
 
@@ -668,7 +669,6 @@ function setFFTdependantSizes(){
      
  }
 function init() {
-     
            uniforms.resolution.value = new THREE.Vector2(window.innerWidth,window.innerHeight);
      uniforms.coords.value = new THREE.Vector2(0,0);
      uniforms.d.value = new THREE.Vector2(0,0);
@@ -814,7 +814,7 @@ function init() {
   volumeFret4:{value:0.},
       
   resolution: {value:  new THREE.Vector2( window.innerWidth,window.innerHeight) },
-  d:{value: new THREE.Vector2() },
+  d:{value: new THREE.Vector2(0.,0.) },
 
   }])
     
@@ -894,6 +894,7 @@ function adjustThreeJSWindow()
      }
          height=window.innerHeight-correlationForText;
          width=window.innerWidth;
+     renderer.setSize(width, height);
 
         
      uniforms.resolution.value =new THREE.Vector2(width,height);
@@ -905,7 +906,6 @@ function adjustThreeJSWindow()
       height/=minimumDimension;
       width/=minimumDimension;
 
-  renderer.setSize(window.innerWidth, window.innerHeight);
   camera = new THREE.OrthographicCamera( -width, width, height, -height, 1, -1);
 
 
