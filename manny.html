@@ -1516,24 +1516,6 @@ vec2 lastS = s;
  // s -=coords.yx*coords.yx*coords.yx;
   //s-=p*dstnce;
 
-   
-       if(dotted)s/=dot(-m,t)*dot(m,-t);
-
-       if(morph!=0.&&!wheel)s-=t;
-        else s+=t-m;
-                             
-                             
-       if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the body steps on the clover
-       else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only
-   
-
-   s.x=log(abs(s.x))/log(baseN);
-   //traditionally be e or 3 probably 1.5 to 4
-   
-
-
-                             colorShift+=hyperCoreBoosted;
-                             hyperCoreBoosted--;
 
 }else break;
 ///if(multiplicatorNexus)s*=colorShift/88.8;
