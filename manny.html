@@ -2627,7 +2627,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
                                      -vec3((mny.r+mny.b+mny.g)*4.),.0,1.)
                                          ,1.);
                        
-                                     vec4 fin = (ss-faceFromShip+goodies+tree)*isBlack*isBlackStaRivers*isBlackDOT+isGrey*2.+isGreyStaRivers+isGreyDOT+(isBlack-1.);
+                                     vec4 fin = (ss-faceFromShip+goodies+tree);//*vec4(isBlack*isBlackStaRivers*isBlackDOT+isGrey*2.+isGreyStaRivers+isGreyDOT+(isBlack-1.));
                                  gl_FragColor=fin;}
                                  else gl_FragColor=vec4(zoomer,1.);
 
