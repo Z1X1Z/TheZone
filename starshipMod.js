@@ -1,15 +1,15 @@
 var THREE;
 function loadWithShim(libraryName, elementHost, URL, file)
 {
-    if(window.useCDN)import("libraryName").then(module => { THREE=module})
+    if(window.useCDN)import(libraryName).then(module => { THREE=module})
         .catch((err) => {
-            console.log("Error loading"+libraryName+" module;load old Threejs instead");
+            console.log("Error loading "+libraryName+" module;load old Threejs instead");
             document.getElementById("elementHost").src =URL//iOS needs a local module, so we give it this instead
             
         })
         .finally((err) => {});
     else{
-        console.log("load old Threejs for offline")
+        console.log("load old "+libraryName+" for offline")
         document.getElementById(elementHost).src=file;
     }
     
