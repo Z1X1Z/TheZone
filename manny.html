@@ -1842,6 +1842,7 @@ return
            l = length(s);
 
          if (l >20.0&&t!=0)  return vec3(-1.*zin(time));}
+             
                       return vec3(1.*zin(time));}
         else return vec3(0.);
  }
@@ -2598,7 +2599,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
 {
                        vec4 ss =StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer;
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
-                       vec4 goodies = vec4(pillar+mnyX+(clamp(mny*starshipMultiplier-(ARTICLE.r+ARTICLE.g+ARTICLE.b),0.,1.)+ARTICLE)+man(p,vec2(0.)),1.);
+                       vec4 goodies = vec4(pillar+mnyX+(clamp(mny*starshipMultiplier-(ARTICLE.r+ARTICLE.g+ARTICLE.b),0.,1.)+ARTICLE)+creatures,1.);
                        /* vec4 tree = vec4( clamp(
                                                 clamp(
                                                       cloud+
