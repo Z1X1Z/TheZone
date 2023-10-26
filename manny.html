@@ -2286,7 +2286,7 @@ return b+robe(p,t)+legs(p,t/33.3);}
             vec2 manCoord = p-spacing;
             
             
-            return vec3(1.)//eaglePerched(eagleCoord,vec2(inversion,0.))+body(p+spacing,t)
+            return eaglePerched(eagleCoord,vec2(inversion,0.))+body(p+spacing,t)
            // +lion(lionCoord,vec2(inversion,0.))+body(p+vec2(-spacing.x,spacing.y),t)
            // + ox(oxCoord,vec2(inversion,0.))+body(p+vec2(spacing.x,-spacing.y),t)
           //+  man(manCoord,vec2(inversion,0.))+body(p-spacing,t)
