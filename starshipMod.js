@@ -576,7 +576,7 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
        colorInverter: {value:false},
            metronome: {value: .99 },
            time2dance: {value: 0.0 },
-       volume: {value: 0.0 },
+       volume: {value: 1.0 },
        totalAmp: {value: 1.0 },
 
      
@@ -670,9 +670,9 @@ function setFFTdependantSizes(){
  }
 function init() {
            uniforms.resolution.value = new THREE.Vector2(window.innerWidth,window.innerHeight);
-     uniforms.coords.value = new THREE.Vector2(0,0);
-     uniforms.d.value = new THREE.Vector2(0,0);
-     uniforms.dotCoord.value = new THREE.Vector2(0,0);
+     uniforms.coords.value = new THREE.Vector2(0.,0.);
+     uniforms.d.value = new THREE.Vector2(0.,0.);
+     uniforms.dotCoord.value = new THREE.Vector2(0.,0.);
 
      setFFTdependantSizes();
      
@@ -2339,7 +2339,6 @@ for(var n = 0; n<targets.length;n++){
                                                                        animateLoopId=                   window.requestAnimationFrame( animate );
                             //  renderer.forceContextLoss ()
                             //  renderer.forceContextRestore ( )
-                              console.log(5)
 
 }
 
