@@ -15,8 +15,7 @@ function loadWithShim(libraryName, elementHost, URL, file)
     
 }
 loadWithShim("three","threeJSscript","https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/three.min.js","three.js");
-loadWithShim("wad","wadJSscript","https://unpkg.com/web-audio-daw@4.12.0","wad.min.js","https://unpkg.com/opensheetmusicdisplay@1.7.6/build/opensheetmusicdisplay.min.js");
-
+loadWithShim("wad","wadJSscript","https://unpkg.com/web-audio-daw@4.12.0","https://unpkg.com/opensheetmusicdisplay@1.7.6/build/opensheetmusicdisplay.min.js","wad.min.js");
 loadWithShim("osmd","osmdJS","https://unpkg.com/opensheetmusicdisplay@1.7.6/build/opensheetmusicdisplay.min.js" ,"opensheetmusicdisplay.min.js")
 function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
     if(typeof THREE=="object" && document.visibilityState=="visible"
