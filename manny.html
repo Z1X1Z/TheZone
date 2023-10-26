@@ -2613,21 +2613,20 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
                        vec4 goodies = vec4(pillar+mnyX+clamp(mny*starshipMultiplier-(ARTICLE.r+ARTICLE.g+ARTICLE.b),0.,1.)+ARTICLE+b+creatures+bridge,1.);
                        vec4 tree = vec4( clamp(
                                                 clamp(
-                                                      cloud+
-                                                 zoomer+
-                                       vec3(
+                                                    //  cloud+
+                                                 zoomer
+                                                      /*
                                            -(bridge.x+bridge.y+bridge.z)*4.
                                            -(starship.x+starship.y+starship.z)/maxColorOfStarship*starship.w*.5
                                            -(DOTstarship.x+DOTstarship.y+DOTstarship.z)/DOTmaxColorOfStarship*.5*DOTstarship.w
                                           -(StaRivers.r+StaRivers.g+StaRivers.b)*StaRivers.w
-                                           -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*4.
-                                           )
+                                           -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*4.*/
                                                                          ,0.,1.)
                                      
                                      -vec3((mny.r+mny.b+mny.g)*4.),.0,1.)
                                          ,1.);
                        
-                                     vec4 fin = (ss-faceFromShip+goodies+tree);//*vec4(isBlack*isBlackStaRivers*isBlackDOT+isGrey*2.+isGreyStaRivers+isGreyDOT+(isBlack-1.));
+                                     vec4 fin = (ss-faceFromShip+goodies+tree)*(isBlack*isBlackStaRivers*isBlackDOT+isGrey*2.+isGreyStaRivers+isGreyDOT+(isBlack-1.));
                                  gl_FragColor=fin;}
                                  else gl_FragColor=vec4(zoomer,1.);
 
