@@ -2626,8 +2626,8 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
                        vec4 tree = vec4( clamp(
                                                 clamp(
                                                       cloud+
-                                                      tol(p,vec2(0.))
-                                         +awayFromTree
+                                                    zoomer
+                                                      +awayFromTree
                                                                          ,0.,1.)
                                      
                                      -vec3((mny.r+mny.b+mny.g)*4.),.0,1.)
