@@ -2124,12 +2124,12 @@ if (!on)neutralizer=0.;
     const ddY= circleY-polygons[n].centerY;
     const distDot = Math.sqrt(ddX*ddX+ddY*ddY);
 
-    if ( triggerDistance<polyRad+dotSize &&polygons[n].exited){
+    if ( triggerDistance<polyRad+dotSize &&polygons[n].exited && EldersLeg>=0){
         if (!polygons[n].caught)polygons[n].caught = true;
         else polygons[n].caught = false;
         polygons[n].caughtByDot=false;
         polygons[n].exited = false;}
-    else if (triggerDistance>polyRad+dotSize&&polygons[n].caughtByDot==false)polygons[n].exited = true;
+    else if (triggerDistance>polyRad+dotSize&&polygons[n].caughtByDot==false&& EldersLeg>=0)polygons[n].exited = true;
 
     if ( distDot<polyRad+dotSize &&polygons[n].exited){
         if (!polygons[n].caught)polygons[n].caught = true;
@@ -2152,7 +2152,10 @@ targets[n] = new THREE.Mesh( pG[n], pM[n] );
 targets[n].position.set(polygons[n].centerX,polygons[n].centerY,-.99);
 if (polygons[n].caught)targets[n].rotateZ(timestamp/1000.*Math.PI*2.)
 else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
-shaderScene.add( targets[n] );
+    
+    if(!blankBackground) shaderScene.add( targets[n] );
+     else scene.add( targets[n] );
+
 }
 
 
@@ -2304,9 +2307,10 @@ shaderScene.add( targets[n] );
                                                        circle.geometry.dispose();
                                                        radialLine.geometry.dispose( );
 if(RockInTheWater==2||RockInTheWater==1)scene.remove(starStreamMesh);
-if(polygons.length<0)
+                                                       if(uniforms.gameOn.value)
 for(var n = 0; n<targets.length;n++){
-  shaderScene.remove( targets[n] );
+  if(!blankBackground)shaderScene.remove( targets[n] );
+  else scene.remove( targets[n] );
   pG[n].dispose();
   pM[n].dispose();
   targets[n].geometry.dispose();
