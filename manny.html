@@ -1259,9 +1259,7 @@ return vec3(l+b+r+h);}
                }
             
                                   
-                                  
-                                  
-                                  
+                    
                                   
                             
 vec3 tol(vec2 p, vec2 t){
@@ -1508,12 +1506,11 @@ if(onehundredfortyfourthousand)
  {
      vec2 move =-d.yx*volume/8.;
     // if(march==0||march==3)oo+=color*sealedMan(s*5.,move);
-    // else
-    oo+=color*sealedWoman(s*5.,move);
+    // else oo+=color*sealedWoman(s*5.,move);
  }
                           
 }
-/*
+
    colorAccumulator+=s;
    if(Refractelate&&dstnce>refractelC){s/=refractelC;} //refractelC/=4./3.;}
 vec2 lastS = s;
@@ -1627,7 +1624,7 @@ else{
 
                              colorShift+=hyperCoreBoosted;
                              hyperCoreBoosted--;
-*/
+
 }else break;
 ///if(multiplicatorNexus)s*=colorShift/88.8;
 vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
