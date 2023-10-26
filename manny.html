@@ -1511,7 +1511,61 @@ vec2 lastS = s;
    s=vec2(
         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
-       );
+       );//x**3
+   //  s*=length(lastS);
+ // s -=coords.yx*coords.yx*coords.yx;
+  //s-=p*dstnce;
+
+   
+       if(dotted)s/=dot(-m,t)*dot(m,-t);
+
+       if(morph!=0.&&!wheel)s-=t;
+        else s+=t-m;
+                             
+                             
+       if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the body steps on the clover
+       else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only
+   
+
+   s.x=log(abs(s.x))/log(baseN);
+   //traditionally be e or 3 probably 1.5 to 4
+   
+
+   
+    if(Spoker&&1.<=hyperCoreBoosted)
+                             {
+                                 
+                                 hyperCoreOUTPUT--;
+
+               hyperCoreBoosted--;
+                             s/=metaCoreDriveFactor;//engage spokelover s/=2.+'superspokes'
+                             }
+            else  {
+                
+                hyperCoreOUTPUT++;
+                hyperCoreBoosted++;
+}
+   
+   if(spokelover&&counter<hyperCoreBoosted){
+        if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
+        else s/=sqrt(2.);
+        }
+   
+   
+   if(continuumClover){//engage continualization
+       float continuumCore=(continuumCounter+hyperCoreOUTPUT)*zoom/(lfc-zoom);
+       if(loops+counter<=hyperCoreBoosted+continuumCounter) s/=pow(2.,pow(.5,continuumCore));
+       hyperCoreBoosted+=continuumCore;
+    }
+  
+dstnce = length(s);
+
+                             //              s*=refactorCores;c*=refactorCores;
+                             
+                             
+
+                             colorShift+=hyperCoreBoosted;
+                             hyperCoreBoosted--;
 
 }else break;
 return vec3(1.);//clamp(o,0.,1.);
