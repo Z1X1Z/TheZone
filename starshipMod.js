@@ -1,25 +1,25 @@
-var THREE,wad,opensheetmusicdisplay;
-function loadWithShim(mod,libraryName, elementHost, URL, file)
+var THREE,wad, opensheetmusicdisplay;
+function loadWithShim(variableName,libraryName, elementHost, URL, jsFile)
 {
     if(window.useCDN)
-        import(libraryName).then(module => { THREE=module})
+        import(libraryName).then(module => { variableName=module})
         .catch((err) => {
-            console.log("Error loading "+libraryName+" module;load old "+libraryName+" instead");
+            console.log("Error loading "+jsFile+" module;load offline "+jsFile+" instead");
             document.getElementById(elementHost).src =URL//iOS needs a local module, so we give it this instead
             
         })
         .finally((err) => {});
     else{
-        console.log("load old "+libraryName+" for offline")
-        document.getElementById(elementHost).src=file;
+        console.log("load offline "+jsFile)
+        document.getElementById(elementHost).src=jsFile;
     }
     
 }
 
 loadWithShim(THREE,"three","threeJSscript","https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/three.min.js","three.js");
-loadWithShim(opensheetmusicdisplay,"openSheet","osmdJS","https://unpkg.com/web-audio-daw@4.12.0","https://unpkg.com/opensheetmusicdisplay@1.7.6/build/opensheetmusicdisplay.min.js","opensheetmusicdisplay.min.js");
-loadWithShim(wad,"wadaw","wadJSscript","https://unpkg.com/opensheetmusicdisplay@1.7.6/build/opensheetmusicdisplay.min.js" ,"wad.min.js")
 
+loadWithShim(wad,"wadaw","wadJSscript","https://unpkg.com/web-audio-daw@4.12.0","wad.min.js")
+loadWithShim(opensheetmusicdisplay,"openSheet","osmdJS","https://unpkg.com/opensheetmusicdisplay@1.7.6/build/opensheetmusicdisplay.min.js","opensheetmusicdisplay.min.js");
 
 function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
     if(typeof THREE=="object" && document.visibilityState=="visible"
