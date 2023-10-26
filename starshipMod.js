@@ -653,11 +653,11 @@ function setFFTdependantSizes(){
       inputData = new Float32Array(bufferSize);
      window.zoomOutRatchetThreshold=1./bufferSize;
      
-      point = new Float32Array(bufferSize*2*3*2);
-      pointColor = new Float32Array(bufferSize*2*4*2);
+      point = new Float64Array(bufferSize*2*3*2);
+      pointColor = new Float64Array(bufferSize*2*4*2);
      
-      star= new Float32Array(fftSize/2*3);
-      starColors= new Float32Array(fftSize/2*4);
+      star= new Float64Array(fftSize/2*3);
+      starColors= new Float64Array(fftSize/2*4);
      
       fractionOfFrame = Math.floor(bufferSize/2.);
       yinData = new Float64Array(fractionOfFrame);
@@ -667,6 +667,17 @@ function setFFTdependantSizes(){
                                   testar = new Float64Array(EldersLeg);
                                   testarContinuous =new Float64Array(starArms);
                                   mustarD =new Float64Array(starArms);
+     if(window.INITIALIZED)
+     {
+         scene.remove(starMesh)
+         starGeometry.dispose();
+         starGeometry = new THREE.BufferGeometry();
+         starGeometry.dynamic = true;
+         starGeometry.setAttribute('position', new THREE.Float32BufferAttribute( star,3 ));
+         starGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ));
+         starMesh = new THREE.Mesh(starGeometry, starMaterial);
+         scene.add(starMesh)
+     }
      
      
  }
@@ -878,10 +889,12 @@ function init() {
      setDynamicSampler2ds();
   renderer.setPixelRatio( rez);
      onWindowResize();
+     window.INITIALIZED =true;
     animate();
      adjustThreeJSWindow();
 
 }
+                                           window.INITIALIZED=false;
                                            function setDynamicSampler2ds(){
      omniTexture = new THREE.DataTexture( omniData, 40, 1,THREE.RedFormat,THREE.FloatType);
      omniTexture.unpackAlignment=1
@@ -1444,21 +1457,9 @@ lineMat.color = new THREE.Color("black");
 
 
                             const maxToMin = Math.max(height,width)/Math.min(height,width);
-    if(window.lastEldersLegCount!=window.EldersLeg)
-    {
-        window.lastEldersLegCount=window.EldersLeg
-        scene.remove(starMesh)
-        
-        starGeometry.dispose();
-        starGeometry = new THREE.BufferGeometry();
-        starGeometry.dynamic = true;
-        
-        starGeometry.setAttribute('position', new THREE.Float32BufferAttribute( star,3 ));
-        starGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ));
-        starMesh = new THREE.Mesh(starGeometry, starMaterial);
-        scene.add(starMesh)
-        
-    }
+    
+
+    
     
     let starPositionAttribute = starGeometry.getAttribute( 'position' );
     let starColorAttribute = starGeometry.getAttribute( 'color' );
@@ -1698,7 +1699,8 @@ let fretMultiplied = oddSkew+Math.round(EldersLeg/((radialWarp<1)?radialWarp:1))
             const widt = starshipSize/(EldersLeg/24.)**.5/2./incrementation;
                 const arm =(flip*g*radialWarp+twist)%EldersLeg*1./EldersLeg*pi*2.;
                 
-                const lengt = (testar[(g*2.+EldersLeg)%(EldersLeg*2.)/2.]-minTestar)/(maxTestar-minTestar);                const vop = new THREE.Color();
+                const lengt = (testar[(g*2.+EldersLeg)%(EldersLeg*2.)*1./2.]-minTestar)/(maxTestar-minTestar);
+                                      const vop = new THREE.Color();
                       vop.setHSL(((20*EldersLeg/24.-g))%EldersLeg*1./EldersLeg,1.,.5);
                                 
                   starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
