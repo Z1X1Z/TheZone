@@ -1461,6 +1461,11 @@ for (float counter=0.;counter<iterations;counter++)if(dstnce<40.){
     s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
     dstnce = length(s);
 
+           vec2 cloverMAP = (spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI))*CORE_DELIMITER+.5;
+                                   
+                                   vec2 ColorWheelClover=vec2(0.);
+                                   float cycleShiftChiral = 0.;
+                                   
 
 }else break;
 ///if(multiplicatorNexus)s*=colorShift/88.8;
