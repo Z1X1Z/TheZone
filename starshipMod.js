@@ -17,7 +17,7 @@ function loadWithShim(mod,libraryName, elementHost, URL, file)
 }
 
 loadWithShim(THREE,"three","threeJSscript","https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/three.min.js","three.js");
-loadWithShim(opensheetmusicdisplay,"openSheet,"osmdJS","https://unpkg.com/web-audio-daw@4.12.0","https://unpkg.com/opensheetmusicdisplay@1.7.6/build/opensheetmusicdisplay.min.js","opensheetmusicdisplay.min.js");
+loadWithShim(opensheetmusicdisplay,"openSheet","osmdJS","https://unpkg.com/web-audio-daw@4.12.0","https://unpkg.com/opensheetmusicdisplay@1.7.6/build/opensheetmusicdisplay.min.js","opensheetmusicdisplay.min.js");
 loadWithShim(wad,"wadaw","wadJSscript","https://unpkg.com/opensheetmusicdisplay@1.7.6/build/opensheetmusicdisplay.min.js" ,"wad.min.js")
 
 
