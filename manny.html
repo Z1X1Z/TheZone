@@ -1834,7 +1834,7 @@ return
          float l=0.;
          float flip=-t.x;
          if (flip<0.) p = -p;
-         if (abs(p.x*p.x+p.y*p.y)<2.0){for (int t = 0; t < 30; t++) if(true){
+         if (abs(p.x*p.x+p.y*p.y)<2.0){for (int t = 0; t < 30; t++) {
                  s = vec2(((s.x * s.x - s.y * s.y) +flip* p.x), (s.x * s.y + flip*p.y));
                  if(flip<1.)
                  s.x = 1./pow(s.x,flip)*sign(s.x*flip);
@@ -1843,8 +1843,8 @@ return
 
          if (l >20.0&&t!=0)  return vec3(-1.*zin(time));}
              
-                    else  return vec3(1.*zin(time));}
-        else return vec3(0.);
+                      return vec3(1.*zin(time));}
+         return vec3(0.);
  }
 
 
@@ -2286,8 +2286,8 @@ return b+robe(p,t)+legs(p,t/33.3);}
             vec2 manCoord = p-spacing;
             
             
-            return //eaglePerched(eagleCoord,vec2(inversion,0.))+body(p+spacing,t)
-            +lion(lionCoord,vec2(inversion,0.))+body(p+vec2(-spacing.x,spacing.y),t)
+            return vec3(1.)//eaglePerched(eagleCoord,vec2(inversion,0.))+body(p+spacing,t)
+           // +lion(lionCoord,vec2(inversion,0.))+body(p+vec2(-spacing.x,spacing.y),t)
            // + ox(oxCoord,vec2(inversion,0.))+body(p+vec2(spacing.x,-spacing.y),t)
           //+  man(manCoord,vec2(inversion,0.))+body(p-spacing,t)
           ;
