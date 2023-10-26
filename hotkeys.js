@@ -88,7 +88,6 @@ window.addEventListener('keydown', function(event) {if(window.INITIALIZED)callKe
 
     let lastKey = "";
     function callKey(event){
-        console.log("inKey")
         let key = "";
 
         if(key==","&&!runningHash)//key here is the last key
@@ -100,7 +99,6 @@ window.addEventListener('keydown', function(event) {if(window.INITIALIZED)callKe
                            );
 
          key = event.key;
-        console.log(key)
     if(key=="/"&&!event.shiftKey){  event.preventDefault(); event.stopImmediatePropagation();}
 
     var x=null;
