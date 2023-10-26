@@ -1444,9 +1444,21 @@ lineMat.color = new THREE.Color("black");
 
 
                             const maxToMin = Math.max(height,width)/Math.min(height,width);
-    
-
-    
+    if(window.lastEldersLegCount!=window.EldersLeg)
+    {
+        window.lastEldersLegCount=window.EldersLeg
+        scene.remove(starMesh)
+        
+        starGeometry.dispose();
+        starGeometry = new THREE.BufferGeometry();
+        starGeometry.dynamic = true;
+        
+        starGeometry.setAttribute('position', new THREE.Float32BufferAttribute( star,3 ));
+        starGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( starColors, 4 ));
+        starMesh = new THREE.Mesh(starGeometry, starMaterial);
+        scene.add(starMesh)
+        
+    }
     
     let starPositionAttribute = starGeometry.getAttribute( 'position' );
     let starColorAttribute = starGeometry.getAttribute( 'color' );
@@ -1688,7 +1700,7 @@ let fretMultiplied = oddSkew+Math.round(EldersLeg/((radialWarp<1)?radialWarp:1))
                 
                 const lengt = (testar[(g*2.+EldersLeg)%(EldersLeg*2.)/2.]-minTestar)/(maxTestar-minTestar);                const vop = new THREE.Color();
                       vop.setHSL(((20*EldersLeg/24.-g))%EldersLeg*1./EldersLeg,1.,.5);
-
+                                
                   starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
                   starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,1.)
                   starColorAttribute.setXYZW(starStride+2,vop.r,vop.g,vop.b,1.)

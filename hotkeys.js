@@ -16,7 +16,7 @@ let osmdStaffsVisible = 0;
 let runningHash = true;
 let number = "";
 window.EldersLeg = 24;
-
+window.lastElderLegCount=window.EldersLeg;
 function readHash(){
     
     let hashindex = 0;
@@ -105,6 +105,7 @@ window.addEventListener('keydown', function(event) {if(window.uniformsLoaded)cal
 
     //meta keys like ctrlKey must be processed first and should have symbol preferably
         if (key=="a"){
+            lastElderLegCount = EldersLeg
             EldersLeg=Math.round(number);
             let minimumFFTfactor = Math.ceil(Math.log(EldersLeg*12.)/Math.log(2.));
             if(minimumFFTfactor<=15){
@@ -115,6 +116,7 @@ window.addEventListener('keydown', function(event) {if(window.uniformsLoaded)cal
                     setFFTdependantSizes();
 
             }
+            
         }
     else if (document.activeElement.className=="num");//don't take hotkey's while menu number selector engaged
         
