@@ -518,12 +518,12 @@
                 callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                 Music Angel Man!</a><br>
                  <a id="Metronome Up" name="t"  onclick= "
-                     key  = '.';
+                     key  = '>';
                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                      Metronome Up!</a><br>
 
                  <a id="Metronome Down" name="t"  onclick= "
-                     key  = ',';
+                     key  = '<';
                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                      Metronome Down!</a><br>
 
@@ -1532,7 +1532,7 @@ vec2 lastS = s;
    //traditionally be e or 3 probably 1.5 to 4
    
 
-   
+   if(!wheel){
     if(Spoker&&1.<=hyperCoreBoosted)
                              {
                                  
@@ -1546,7 +1546,7 @@ vec2 lastS = s;
                 hyperCoreOUTPUT++;
                 hyperCoreBoosted++;
 }
-   
+   }
    if(spokelover&&counter<hyperCoreBoosted){
         if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
         else s/=sqrt(2.);
@@ -2291,7 +2291,7 @@ return b+robe(p,t)+legs(p,t/33.3);}
   vec3 manny(vec2 p, vec2 t){
     return shiny(p,t)+body(p,t)
     ;}
-  vec3 mannyX(vec2 p, vec2 t){return bod(p,t)+excelsior(p,vec2(time*metronome,0.));}
+  vec3 mannyX(vec2 p, vec2 t){return excelsior(p,vec2(time*metronome,0.));}
   vec3 fourCreatures(vec2 p, vec2 t){
              float inversion = -1.;
             if (wheel)inversion=coz(time);
@@ -2476,9 +2476,8 @@ vec2 dance = vec2(0.);
 
                                  vec3 mannyFace = vec3(0.);
             if(colorCombo!=17&&colorCombo!=20){
-                   if(metronome>1.) mnyX = mannyX(characterPSpunToKey,moveDynamic);
+                   if(metronome>1.) mnyX = mannyX(characterOnTrailP/2.*1.22112211,moveDynamic)+bod(characterOnTrailP,moveDynamic);
                    else if (Character==0){
-                       vec2 characterPSpun =p*2.;
                        mannyFace = (face(characterOnTrailP*1.22112211,moveDynamic));//,0.,1.);
                        mny=bod(characterOnTrailP,moveDynamic)+shiny(characterOnTrailP*1.22112211,moveDynamic)+clamp(mannyFace,0.,1.);
                    }
