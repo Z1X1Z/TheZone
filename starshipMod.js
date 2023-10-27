@@ -92,7 +92,7 @@ var pointed=false;
 let zoomAtl41=false;//watch for the 1 and the l
 
 
-                  var framesLong;
+                  var framesLong=60;
                   let computeFPS=false;
 
 
