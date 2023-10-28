@@ -92,7 +92,7 @@ var pointed=false;
 let zoomAtl41=false;//watch for the 1 and the l
 
 
-                  var framesLong=60;
+                  var framesLong;
                   let computeFPS=false;
 
 
@@ -106,14 +106,18 @@ let zoomAtl41=false;//watch for the 1 and the l
 
 var zoomOutEngage=false;
 var pi = Math.PI;
-
-var bufferSize,numberOfBins, frequencies, inputData, point, pointColor,fractionOfFrame,yinData,
+var fftSize=2048;
+var bufferSize=fftSize;
+var fractionOfFrame = 1024;
+var numberOfBins=fftSize/2.
+var frequencies, inputData,yinData,
                             starArms,
                           
                                                         testar,
                                                         testarContinuous,
                                                         mustarD,
                         star,starColors;
+                            
 window.zoomOutRatchetThreshold=1./bufferSize;
 
 let Fret = {x:null,y:null,index:null,volume:0.,note:-12};
@@ -186,10 +190,11 @@ var colorInstant=0.;
 let updateInstant = false;
                             let innerSpirographFractionalSize=0;
 
-                            const bufferPortion = 2048;
+                            const bufferPortion = 2048;//should be 2048
                             const spirray0 = new Float64Array(bufferPortion).fill(.5);
                             const spirray1 = new Float64Array(bufferPortion).fill(.5);
-
+                          const   point = new Float64Array(bufferPortion*3*2);
+                          const   pointColor = new Float64Array(bufferPortion*4*2);
 function makeSpirograph(){
       phase = phase % (pi*2);
         phase2 =  phase2 % (pi*2);
@@ -649,14 +654,13 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
 function setFFTdependantSizes(){
      
       bufferSize = fftSize;
+     //fractionOfFrame =fftSize;
       numberOfBins = fftSize/2.;
       frequencies= new Float64Array(numberOfBins);
      inputData = new Float32Array(bufferSize);
      dataArray = new Uint8Array( numberOfBins );
      window.zoomOutRatchetThreshold=1./bufferSize;
      
-      point = new Float64Array(bufferSize*2*3*2);
-      pointColor = new Float64Array(bufferSize*2*4*2);
      
       star= new Float64Array(numberOfBins*3);
       starColors= new Float64Array(numberOfBins*4);
@@ -741,12 +745,9 @@ function init() {
      lineGeometry=new THREE.BufferGeometry();
      lineGeometry.dynamic = true;
      lineMat.dynamic = true;
-
-    //line.geometry.verticesNeedUpdate=true
-         lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute( point,3 ));
-       lineGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( pointColor, 3 ));
+     lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute( point,3 ));
+    lineGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( pointColor, 3 ));
      line = new THREE.LineSegments(lineGeometry,lineMat);
-
 
     starMaterial= new THREE.MeshBasicMaterial({
                 opacity: 1.,
@@ -1454,6 +1455,7 @@ lineMat.color = new THREE.Color("black");
             {
                 linePositionAttribute.setXYZ(lineStride,txlast,tylast, d)
                 linePositionAttribute.setXYZ(lineStride+1,tx, ty, d)
+                
                 lineColorAttribute.setXYZ(lineStride,greynessLast, greynessLast, greynessLast);
                 lineColorAttribute.setXYZ(lineStride+1,greyness, greyness, greyness );
                 
@@ -1705,16 +1707,17 @@ else{//start drawing of just twenty four frets here
                                  if(testar[g]>maxTestar){maxTestar=testar[g];}
                                  if(testar[g]<minTestar)minTestar=testar[g];
                              }
-    let oddSkew =EldersLeg%2/2.;
-let fretMultiplied = oddSkew+Math.round(EldersLeg/((radialWarp<1)?radialWarp:1));
+
+    let oddSkew =EldersLeg%2/2;
+let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
             for (var g=oddSkew; g<fretMultiplied; g++) {
                 const incrementation = (EldersLeg%2==0)?g%2+1:(g+1)%2+1;
-            const widt = starshipSize/(EldersLeg/24.)**.5/2./incrementation;
-                const arm =(flip*g*radialWarp+twist)%EldersLeg*1./EldersLeg*pi*2.;
-                
-                const lengt = (testar[(g*2.+EldersLeg)%(EldersLeg*2.)*1./2.]-minTestar)/(maxTestar-minTestar);
+            const widt = starshipSize/(EldersLeg/24.)**.5*incrementation/2.;
+                const arm =(flip*(g+oddSkew)*radialWarp+twist)%EldersLeg/EldersLeg*pi*2.;
+                console.log(g+EldersLeg/2.-oddSkew)
+                const lengt = (testar[(g+EldersLeg/2.)%EldersLeg]-minTestar)/(maxTestar-minTestar);
                                       const vop = new THREE.Color();
-                      vop.setHSL(((20*EldersLeg/24.-g))%EldersLeg*1./EldersLeg,1.,.5);
+                      vop.setHSL(((20*EldersLeg/24.-g-oddSkew))%EldersLeg/EldersLeg,1.,.5);
                                 
                   starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
                   starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,1.)
