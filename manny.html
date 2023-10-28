@@ -1757,16 +1757,18 @@ return clamp(o,0.,1.);}
                                else {z=3.*vec2(-1./((z.x*z.x-z.y*z.y)-g.x+d.x),(77.0*z.x*z.y-(2.+t.y)*g.y+d.y));
                                      z.y = -1./z.y;}
                  //vv head vv
-                                       g=p*1.618;
+                                       g=p*1.3247;
                                        z=g;
-                          if(abs(p.y)<4.)for (int f=0;f<21;f+=1)if(abs(z.y)>21.&&(f==int(floor(.8-t.y*.4)))){l=0.;break;}
+                          if(abs(p.y)<4.)for (int f=0;f<21;f+=1)if(abs(z.y)>21.&&(f==int(floor(.8+t.y*.4)))){l=0.;break;}
                                else if(abs(z.y)>19.&&(f>4))l=1.;
                                        else{z=vec2(-1./((z.x*z.x-z.y*z.y)-g.x),2.0*z.x*z.y-g.y);
                             z*=pow(z.x,(z.x-t.y*-z.x));
                             l = clamp(1.-abs(z.y)*6.,0.,1.);
                             if(z.x>-.1&&f!=0)l=clamp(1.-z.x*49.,0.,1.);
                                }
+                                      
 
+                                     
       }
 
                            return vec3(l)+vec3(c,x+c/2.,0.)*10000.+clamp(vec3(0.,(k+e)*10.,(k+e)*10.),0.,1.);}
@@ -2645,11 +2647,9 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
                                          }
 
 </script>
-
+<script src="loadMicrophone.js"></script>
 <script src="starshipMod.js"></script>
-
-              <script src="hotkeys.js"></script>
-              <script src="loadMicrophone.js"></script>
+<script src="hotkeys.js"></script>
 
     </body>
 </html>

@@ -16,7 +16,6 @@ let osmdStaffsVisible = 0;
 let runningHash = true;
 window.number = 24;
 window.EldersLeg = window.number;
-window.lastElderLegCount=window.EldersLeg;
 function readHash(){
     
     let hashindex = 0;
@@ -168,7 +167,6 @@ window.addEventListener('keydown', function(event) {if(window.INITIALIZED)callKe
     } the bass staff doesn't include the lyrics so it's not included
      */
       else  if (key=="a"){
-            lastElderLegCount = EldersLeg
             EldersLeg=Math.round(number)*1.;
             let minimumFFTfactor = Math.ceil(Math.log(EldersLeg*12.)/Math.log(2.));
             if(minimumFFTfactor<=15){
