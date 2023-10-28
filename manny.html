@@ -1714,10 +1714,11 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                       
                       
                       
-o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z)*1.5*starship.w,0.,1.)+starship.xyz*starship.w*spirographTranslucer;
+o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z)*1.5*starship.w,0.,1.)+starship.xyz*spirographTranslucer;
                       o*=isBlack;
+                      o+=(isBlack-1.)*100.;
                       o+=isGrey;
-                      if(length(p-coords.yx)<2.*sqrt(2.)/min(resolution.x,resolution.y)*zoom)o=vec3(hyperCoreOUTPUT/255.*4.,0.,255.);
+                      if(length(p-coords.yx)<2.*sqrt(2.)/min(resolution.x,resolution.y)*zoom)o=vec3(hyperCoreOUTPUT/255.*4.,cored/255.*4.,255.);
 return clamp(o,0.,1.);}
 
                       
@@ -2557,7 +2558,7 @@ mny+=HEART*heartMultiplier;
                                  
     float isBlack =1.;
   
-    if (starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=starship.x;
+    if (starship.x==0.&&starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=starship.x;
                                  float isGrey =0.;
                                  if (starship.x==starship.y&& starship.y==starship.z&&starship.x<.51&&starship.x>.49)isGrey=starship.x;
 
@@ -2584,7 +2585,7 @@ if(starOnDot){
         
 
 
-        if (DOTstarship.x==DOTstarship.y&& DOTstarship.y==DOTstarship.z&&DOTstarship.w>3.5/255.)isBlackDOT=DOTstarship.x;
+        if (DOTstarship.x==0.&&DOTstarship.x==DOTstarship.y&& DOTstarship.y==DOTstarship.z&&DOTstarship.w>3.5/255.)isBlackDOT=DOTstarship.x;
         
         if (DOTstarship.x==DOTstarship.y&& DOTstarship.y==DOTstarship.z&&DOTstarship.x<.51&&DOTstarship.x>.49)isGreyDOT=DOTstarship.x;
 
@@ -2640,8 +2641,10 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
                                      -vec3((mny.r+mny.b+mny.g)*4.),.0,1.)
                                          ,1.);
                        
-                                     vec4 fin = (ss-faceFromShip+goodies+tree)*isBlack*isBlackStaRivers*isBlackDOT+isGrey*2.+isGreyStaRivers+isGreyDOT+(isBlack-1.);
-                                 gl_FragColor=fin;}
+                                     vec4 fin = (ss-faceFromShip+goodies+tree)*isBlack*isBlackStaRivers*isBlackDOT+(isBlack-1.)+(isBlackDOT-1.)+(isBlackStaRivers-1.);
+                                     if(fin.r>.9&&fin.g>.9&&fin.b>.9)fin-=(isGrey+isGreyDOT+isGreyStaRivers)*1.5;
+                                     else if(fin.r<.1&&fin.g<.1&&fin.b<.1)fin+=(isGrey+isGreyDOT+isGreyStaRivers)*1.5;
+                       gl_FragColor=fin;}
                                 else gl_FragColor=vec4(zoomer,1.);
 
                                          }

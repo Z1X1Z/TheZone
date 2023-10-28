@@ -1405,6 +1405,7 @@ if( !window.touchMode&&!window.touchOnlyMode) {
   if(instantaneousFreqSpirographColoring==1) {
     lineMat.color = colorSoundPURE;
   }
+       
     frameCount=(frameCount+1)%2;
     if(frameCount==0)
 lineMat.color = new THREE.Color("black");
@@ -1420,22 +1421,23 @@ lineMat.color = new THREE.Color("black");
   var lineStride=0;
    
         //scene.add(line)
-        for (let r= 0; r < bufferPortion; r +=1) {//spirray size supports upto r <buffersize*2
+        for (let r= 0.; r < bufferPortion; r +=1) {//spirray size supports upto r <buffersize*2
             const  txlast=tx;
             const  tylast=ty;
             tx = spirray0[r];
             ty =  spirray1[r];
-             greynessLast = greyness
-            //if(uniforms[ "metronome" ].value>1.)greyness=.5-.5*Math.sqrt(tx*tx+ty*ty)**1.3247*metroPhase;//seems wrong
+           //  greynessLast = greyness
+            if(uniforms[ "metronome" ].value>1.)greyness=.5-.5*Math.sqrt(tx*tx+ty*ty)**1.3247*metroPhase;//seems wrong
             //else
-            greyness*=-1;
+           // if(r%3==0)greyness=-1;
+            // greyness=r/bufferPortion;
             // pointColor.push( greynessLast, greynessLast, greynessLast,greyness, greyness, greyness );
             if(isFinite(tx)&&isFinite(ty)&&isFinite(txlast)&isFinite(tylast))
             {
                 linePositionAttribute.setXYZ(lineStride,txlast,tylast, d)
                 linePositionAttribute.setXYZ(lineStride+1,tx, ty, d)
                 
-                lineColorAttribute.setXYZ(lineStride,greynessLast, greynessLast, greynessLast);
+                lineColorAttribute.setXYZ(lineStride,greyness, greyness, greyness);
                 lineColorAttribute.setXYZ(lineStride+1,greyness, greyness, greyness );
                 
                 lineStride+=2;} }
