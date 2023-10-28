@@ -106,11 +106,14 @@ let zoomAtl41=false;//watch for the 1 and the l
 
 var zoomOutEngage=false;
 var pi = Math.PI;
-var fftSize=2048;
 var bufferSize=fftSize;
-var fractionOfFrame = 1024;
-var numberOfBins=fftSize/2.
-var frequencies, inputData,yinData,
+var numberOfBins=bufferSize/2.
+var fractionOfFrame = bufferSize/2;
+var inputData = new Float32Array(bufferSize)
+var dataArray = new Uint8Array(bufferSize/2)
+const yinData = new Float64Array(fractionOfFrame);
+
+var frequencies,
                             starArms,
                           
                                                         testar,
@@ -190,7 +193,7 @@ var colorInstant=0.;
 let updateInstant = false;
                             let innerSpirographFractionalSize=0;
 
-                            const bufferPortion = 2048;//should be 2048
+                            const bufferPortion = 2048*2;//should be 2048
                             const spirray0 = new Float64Array(bufferPortion).fill(.5);
                             const spirray1 = new Float64Array(bufferPortion).fill(.5);
                           const   point = new Float64Array(bufferPortion*3*2);
@@ -213,24 +216,7 @@ function makeSpirograph(){
               spirray0[m]=-Math.sin(-phase)*size;
               spirray1[m]=-Math.cos(-phase)*size;
       }
-       /*
-    spirray0[bufferPortion]=spirray0[bufferPortion-1];//disconnect inner and outer spirograph
-    spirray1[bufferPortion]=spirray1[bufferPortion-1];
-                                                                  
-    let lastInnerSpirographFractionalSize =innerSpirographFractionalSize;
-     innerSpirographFractionalSize = (innerSpirographFractionalSize + Math.round(1./adjConstant))   %bufferPortion;
-    let frameOfInputData = 0
-    for(var m = 1+bufferPortion+lastInnerSpirographFractionalSize; m <=bufferPortion+ innerSpirographFractionalSize+2; m++)
-    {
-            phase2 += adjConstant;//spira_pitch;
-        var size = (.333+inputData[frameOfInputData]/6./maxSamp);
-        frameOfInputData++;
-            spirray0[m]=-Math.sin(phase2)*size;
-            spirray1[m]=-Math.cos(phase2)*size;
-        
-     
-    }
-            */
+       
 }
 
 function spiral_compress(){
@@ -433,8 +419,6 @@ pitchCol[f]  = colorSoundPURE;
          angle = ((angle+6*radialWarp)/12.)%1*2*pi;
          d_x = -Math.sin(-angle)*flatline;
          d_y = -Math.cos(-angle)*flatline;
-                     //  console.log("x"+d_x)
-                    //   console.log("y"+d_y)
          uniforms.d.value=new THREE.Vector2( d_x,d_y);
       
                        
@@ -652,13 +636,13 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
                                             pi = Math.PI;
 
 function setFFTdependantSizes(){
-     
+     analyser.fftSize=fftSize;
       bufferSize = fftSize;
-     //fractionOfFrame =fftSize;
       numberOfBins = fftSize/2.;
       frequencies= new Float64Array(numberOfBins);
      inputData = new Float32Array(bufferSize);
-     dataArray = new Uint8Array( numberOfBins );
+      dataArray = new Uint8Array( numberOfBins );
+
      window.zoomOutRatchetThreshold=1./bufferSize;
      
      
@@ -670,8 +654,6 @@ function setFFTdependantSizes(){
 
       starStreamPoints= new Float64Array(starCount*3*6);
       starStreamColors= new Float64Array(starCount*4*6);
-      fractionOfFrame = Math.floor(bufferSize/2.);
-      yinData = new Float64Array(fractionOfFrame);
      
       starArms = numberOfBins;
     
@@ -1087,9 +1069,6 @@ function zoomRoutine(){
              }
          thisChunk=0.;
          
-       //  vibrateArray =         vibrateArrayNew.concat(vibrateArray);
-       //  console.log(vibrateArray)
-       //  while (vibrateArray.length>10)vibrateArray.pop();
              try{error = navigator.vibrate(vibrateArrayNew );}
              catch(e){ error+=e;}
              
@@ -1707,16 +1686,18 @@ else{//start drawing of just twenty four frets here
                                  if(testar[g]>maxTestar){maxTestar=testar[g];}
                                  if(testar[g]<minTestar)minTestar=testar[g];
                              }
-
+    if(EldersLeg==1){maxTestar=1;minTestar=0;}
     let oddSkew =EldersLeg%2/2;
 let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
             for (var g=oddSkew; g<fretMultiplied; g++) {
+                console.log("here")
                 const incrementation = (EldersLeg%2==0)?g%2+1:(g+1)%2+1;
-            const widt = starshipSize/(EldersLeg/24.)**.5*incrementation/2.;
+            let widt = starshipSize/(EldersLeg/24.)**.5*incrementation/2.;
                 const arm =(flip*(g+oddSkew)*radialWarp+twist)%EldersLeg/EldersLeg*pi*2.;
-                console.log(g+EldersLeg/2.-oddSkew)
-                const lengt = (testar[(g+EldersLeg/2.)%EldersLeg]-minTestar)/(maxTestar-minTestar);
+                let lengt = (testar[(g+EldersLeg/2.)%EldersLeg]-minTestar)/(maxTestar-minTestar);
+                                     if(EldersLeg==1){lengt/=2.**15.;widt/=2;}
                                       const vop = new THREE.Color();
+                                       
                       vop.setHSL(((20*EldersLeg/24.-g-oddSkew))%EldersLeg/EldersLeg,1.,.5);
                                 
                   starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
@@ -2028,7 +2009,7 @@ var loopLimit = trailDepth;
       trailColorAttribute.needsUpdate = true; // required after the first render
 
 
-                                                                                     }//end eldersLeg>0
+                                                                                     }//end EldersLeg>0
 
 if(isFinite(d_x)&&isFinite(d_y)&&on) {
 circleX-=xAdjusted;//xadjusted should mean this moves with the same screen scale as the trail
