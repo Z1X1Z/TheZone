@@ -1691,12 +1691,14 @@ else{//start drawing of just twenty four frets here
     if(EldersLeg==1){maxTestar=1;minTestar=0;}
     let oddSkew =EldersLeg%2/2;
 let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
+    console.log("1")
             for (var g=oddSkew; g<fretMultiplied; g++) {
                 const incrementation = (EldersLeg%2==0)?g%2+1:(g+1)%2+1;
             let widt = starshipSize/(EldersLeg/24.)**.5*incrementation/2.;
                 const arm =(flip*(g+oddSkew)*radialWarp+twist)%EldersLeg/EldersLeg*pi*2.;
                 let lengt = (testar[(g+EldersLeg/2.)%EldersLeg]-minTestar)/(maxTestar-minTestar);
-                                     if(EldersLeg==1){lengt/=2.**15.;widt/=2;}
+                                     if(EldersLeg==1){lengt/=2.**16.;lengt=lengt**.25;widt/=2;}
+                                     console.log(lengt)
                                       const vop = new THREE.Color();
                                        
                       vop.setHSL(((20*EldersLeg/24.-g-oddSkew))%EldersLeg/EldersLeg,1.,.5);
