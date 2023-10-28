@@ -1776,7 +1776,7 @@ var fingerStride = 0;
                      {
                          BlackOrWhite=-1.;
                      }
-                    if( (noteGrey<.5 || noteGrey>11.5||(uniforms.Character.value==0&&(noteGrey<6.5&&noteGrey>5.5))) &&uniforms.colorCombo.value!=20) BlackOrWhite=.5;
+                    if( (noteGrey<.5 || noteGrey>11.5||(uniforms.Character.value==0&&(noteGrey<6.5&&noteGrey>5.5))) &&uniforms.colorCombo.value!=20&&!blankBackground&&starClover) BlackOrWhite=.5;
 
                     else if(uniforms.colorCombo.value==20){
                              if(uniforms.musicAngelMan.value>0&&(uniforms.Character.value==4||uniforms.Character.value==3)
