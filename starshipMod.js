@@ -1690,7 +1690,6 @@ else{//start drawing of just twenty four frets here
     let oddSkew =EldersLeg%2/2;
 let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
             for (var g=oddSkew; g<fretMultiplied; g++) {
-                console.log("here")
                 const incrementation = (EldersLeg%2==0)?g%2+1:(g+1)%2+1;
             let widt = starshipSize/(EldersLeg/24.)**.5*incrementation/2.;
                 const arm =(flip*(g+oddSkew)*radialWarp+twist)%EldersLeg/EldersLeg*pi*2.;
