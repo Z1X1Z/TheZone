@@ -85,15 +85,15 @@ if(//!(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform ==
    navigator.maxTouchPoints < 1)//)//if not mobile
 window.addEventListener('keydown', function(event) {if(window.INITIALIZED)callKey(event); return true;}, false);
 
-    let lastKey = "";
+    window.lastKey = "";
+window.key = " ";
     function callKey(event){
-        let key = "";
-
-        if(key==","&&!runningHash)//key here is the last key
+        window.lastKey = window.key;
+        if(lastKey==","&&!runningHash)//key here is the last key
             event=new KeyboardEvent('keydown',
                                                 {"key":event.key,"keyCode":event.keyCode,"ctrlKey":true}
                       );
-        else if(key=="."&&!runningHash)event=new KeyboardEvent('keydown',
+        else if(lastKey=="."&&!runningHash)event=new KeyboardEvent('keydown',
                                                      {"key":event.key,"keyCode":event.keyCode,"altKey":true}//creating a new keypress because it's readonly
                            );
 
