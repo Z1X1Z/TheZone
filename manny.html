@@ -199,8 +199,12 @@
 
                    key  = '9';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                   Harmonic Scale!</a><br>
-               
+                   Harmonic Scythe!</a><br>
+               <a id="balloons" name="t"  onclick= "
+
+                   key  = 'b';
+                   callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                   Harmonic Balloons!</a><br>
                <a id="Star Stream" name="t"  onclick= "
 
                    key  = 'V';
@@ -845,6 +849,9 @@ void main(){
     uniform bool fieldPowerBoost;
     uniform bool fieldPowerBoostMeta;
     uniform bool helm;
+    uniform bool balloonsON;
+    uniform float note;
+
     uniform float refactorCores;
 
     uniform bool dynamicDance;
@@ -1165,7 +1172,17 @@ vec3 faceFORWARD(vec2 p,vec2 t){
         vec3 rgb = clamp( abs(mod(c.x*6.0+vec3(0.0,4.0,2.0),6.0)-3.0)-1.0, 0.0, 1.0 );
         return c.z * mix( vec3(1.0), rgb, c.y);
     }
-    
+    vec3 balloons(vec2 p){
+        vec3 balloon=vec3(0.);
+       
+          float x =  length((vUv-.5)*max(resolution.x,resolution.y)/resolution.yx);
+        //  for(float b = 0.; b<24.;b++)
+          {
+            float increment = mod(log(mod(note*flipStar+twistStar,12.)+x*24.)/log(pow(2.,1./12.)),24.);
+           if(abs(mod(increment,1.)-.1)<.1)balloon=hsv2rgb(vec3((-increment+twistStar)/12.,.5,1.));
+            }
+        return balloon;
+    }
                 vec2 spin2(vec2 f, float t)
                 {    //https://en.wikipedia.org/wiki/Rotation_matrix
                     float angle =t;
@@ -2623,13 +2640,15 @@ if(starOnDot>=1){
                                  vec3 pillar = vec3(0.);
                                  pillar = sevenPillars(vUv.yx-vec2(0.,.5));
                        
+                                 vec3 hypnoticHarmonicCircles = vec3(0.);
+                                 if(balloonsON)hypnoticHarmonicCircles=balloons(p);
                                  
-if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
-{
+if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                        vec4 ss =StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer;
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
-                       vec4 goodies = vec4(pillar+mnyX+clamp(mny*starshipMultiplier-(ARTICLE.r+ARTICLE.g+ARTICLE.b),0.,1.)+ARTICLE+b+creatures+bridge,1.);
+                       vec4 goodies = vec4(hypnoticHarmonicCircles+pillar+mnyX+clamp(mny*starshipMultiplier-(ARTICLE.r+ARTICLE.g+ARTICLE.b),0.,1.)+ARTICLE+b+creatures+bridge,1.);
                        vec3 awayFromTree =  vec3(
+                    -(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z)*4.
                        -(bridge.x+bridge.y+bridge.z)*4.
                        -(starship.x+starship.y+starship.z)/maxColorOfStarship*starship.w*.5
                                   
@@ -2646,7 +2665,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y))
                                      
                                      -vec3((mny.r+mny.b+mny.g)*4.),.0,1.)
                                          ,1.);
-                       
+                                   
                                      vec4 fin = (ss-faceFromShip+goodies+tree)*isBlack*isBlackStaRivers*isBlackDOT+(isBlack-1.)+(isBlackDOT-1.)+(isBlackStaRivers-1.);
                                      if(fin.r>.9&&fin.g>.9&&fin.b>.9)fin-=(isGrey+isGreyDOT+isGreyStaRivers)*1.5;
                                      else if(fin.r<.1&&fin.g<.1&&fin.b<.1)fin+=(isGrey+isGreyDOT+isGreyStaRivers)*1.5;
