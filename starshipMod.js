@@ -399,6 +399,7 @@ function  move()
                             
 lastNote = note;
  note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
+ uniforms.note.value=note;
 const t =  (note )*flip+twist/2;
 if(isFinite(t))angle = -(t*radialWarp);
 //angle-=1/radialWarp;
@@ -534,6 +535,8 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
          EDEN:{value: null   },
        eden:{value: 0},
            spokesVisualizeColors: {value: false    },
+ note:{value: 0},
+ balloonsON:{value: false},
 
        Spoker:{value: true    },
        spokelover:{value: false    },
