@@ -130,7 +130,7 @@
                     let b=document.getElementById('RadialWarp').value;
                     if(!isNaN(b)&&b>0)radialWarp=b;">
                   <br>
-                  <label for="fretCount">Fruits</label>
+                  <label for="fretCount">Fruits(max 2730)</label>
 
                   <input type="number" id="fretCount" name="fretCount" class="num" onkeydown="
                           number = document.getElementById('fretCount').value;
@@ -145,9 +145,7 @@
 
 
                       <br>
-               <input type="checkbox" id="DotStar" name="t"  onclick= "uniforms.starOnDot.value=!uniforms.starOnDot.value;">
-               <label for="DotStar">Dot has Starship!?</label>
-               <br>
+         
                
                <input type="checkbox" id="Haptic" name="t"  onclick= "window.haptic = !window.haptic; mcphrth();">
                <label for="Haptic">Haptic(Android only)</label>
@@ -192,8 +190,10 @@
                  <input type="checkbox" id="TrailOverflowsClover" name="t"  onclick= "
                      key  = 'Z';
                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                  <label for="TrailOverflowsClover">Trail overflows clover!</label><br>
-                
+                      <a id="pzyghthe" name="t"  onclick= "
+
+                     key  = 'e';
+                     callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true;'keyCode':key.charCodeAt(0)}));">
                 
                <a id="pzyghthe" name="t"  onclick= "
 
@@ -857,7 +857,7 @@ void main(){
     uniform bool Inherited;
     uniform bool spokesVisualizeColors;
     uniform vec2 coords;
-    uniform bool starOnDot;
+    uniform int starOnDot;
     uniform vec2 dotCoord;
     uniform vec2 d;
 
@@ -2550,26 +2550,29 @@ mny+=HEART*heartMultiplier;
 
                                vec2  starshipLOOKUP = ((vUv-.5)+vec2(0.,recenter))*rescale+.5;
     vec4 starship=vec4(0.);
+                                 float isBlack =1.;
+                                 vec3 starshipMultiplier = vec3(1.);
+                                 float isGrey =0.;
+                                 float maxColorOfStarship=1.;
+                                 float spirographTranslucer = 1.;
+
+
+if(starOnDot!=2){
                                  if (starshipLOOKUP.x<1.&&starshipLOOKUP.y<1.&&starshipLOOKUP.x>0.&&starshipLOOKUP.y>0.)starship = texture2D(STAR,starshipLOOKUP);
                                  
-                      vec3 starshipMultiplier = vec3(1.);
                      starshipMultiplier=starship.xyz+(1.-starship.w);
                      if(starship.w>0.)starshipMultiplier=vec3(1.);
                                  if(mannyFace.z>0.)starshipMultiplier+=mannyFace;
                     if(mannyFace.z>0.)starshipMultiplier*=mannyFace;
 
                                  
-    float isBlack =1.;
   
     if (starship.x==0.&&starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=starship.x;
-                                 float isGrey =0.;
                                  if (starship.x==starship.y&& starship.y==starship.z&&starship.x<.51&&starship.x>.49)isGrey=starship.x;
 
-                                float maxColorOfStarship=1.;
     if (starship.x!=0.||starship.y!=0.||starship.z!=0.)maxColorOfStarship=max(max(starship.x,starship.y),starship.z);
-     float spirographTranslucer = 1.;
      //if (starship.x!=0.&&starship.x!=1.&&starship.x!=.5&&(starship.x+starship.y>=255.-3.5||starship.y+starship.z>=255.-3.5||starship.z+starship.x>=255.-3.5)&&starship.w==1.)spirographTranslucer=.75-(starship.x+starship.y+starship.z)/2.;
-                                 
+                                 }
                                  vec4 DOTstarship=vec4(0.);
                                  float isBlackDOT =1.;
                                  float spirographTranslucerDOT = 1.;
@@ -2578,7 +2581,7 @@ mny+=HEART*heartMultiplier;
 
                                  float isGreyDOT =0.;
 
-if(starOnDot){
+if(starOnDot>=1){
                        float dotstarscale = 1.;
         vec2  DOTstarshipLOOKUP = mod((vUv)-(dotCoord)/2.*resolution.yx/max(resolution.x,resolution.y)-.5+.5/dotstarscale//-.125-.25
                                       ,1.//)*4.

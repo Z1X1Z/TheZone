@@ -594,7 +594,7 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
        chirality:{value:1},
        MannyONtrail:{value:1},
        NightAndDay:{value:false},
-       starOnDot:{value:false},
+       starOnDot:{value:0},
        gameOn:{value:false},
        scoreLoaded:{value:false},
        musicAngelMan:{value:0},
@@ -1695,7 +1695,7 @@ else{//start drawing of just twenty four frets here
 let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
             for (var g=oddSkew; g<fretMultiplied; g++) {
                 const incrementation = (EldersLeg%2==0)?g%2+1:(g+1)%2+1;
-            let widt = starshipSize/(EldersLeg/24.)**.5*incrementation/2.;
+            let widt = starshipSize/(EldersLeg/24.)**.5*incrementation/3.;
                 const arm =(flip*(g+oddSkew)*radialWarp+twist)%EldersLeg/EldersLeg*pi*2.;
                 let lengt = (testar[(g+EldersLeg/2.)%EldersLeg]-minTestar)/(maxTestar-minTestar);
                                      if(twoOr1) {lengt/=2.**16./EldersLeg;lengt=lengt**.25;widt/=2;}
