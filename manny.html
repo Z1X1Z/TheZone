@@ -1175,8 +1175,9 @@ vec3 faceFORWARD(vec2 p,vec2 t){
           float x =  length((vUv-.5)*max(resolution.x,resolution.y)/resolution.yx);
         //  for(float b = 0.; b<24.;b++)
           {
-            float increment = mod(log(mod(note*flipStar+twistStar,12.)+x*24.)/log(pow(2.,1./12.)),24.);
-           if(abs(mod(increment,1.)-.1)<.1)balloon=hsv2rgb(vec3((-increment+twistStar)/12.,.5,1.));
+              float increment = note + x*24.;
+          //  float increment = mod(log(mod(note*flipStar+twistStar,12.)+x*24.)/log(pow(2.,1./12.)),24.);
+           if(abs(mod(increment,1.)-.1)<.1)balloon=hsv2rgb(vec3((4.-increment+twistStar)/12.,.5,1.));
             }
         return balloon;
     }
