@@ -49,8 +49,8 @@ const MR = mf/zoomFrames;
 const trailLength = zoomFrames*trailSecondsLong;
 const dotSize = starshipSize;
 
-
-let screenPressCoordX, screenPressCoordY;
+let coringValue = 1./1.3247/1.618;
+let screenPressCoordX=0, screenPressCoordY=0;
 window.pointerZoom=false;
 let coordX=0., coordY=0.;
 window.touchMode=false;
@@ -1331,9 +1331,10 @@ if( !window.touchMode&&!window.touchOnlyMode) {
     
            renderer.readRenderTargetPixels (cloverRenderTarget,  Math.floor(window.innerWidth/2.), Math.floor(window.innerHeight/2.),1,1,  hyperCorePixel)
            hyperCorePixel[0]/=4.;
+            hyperCorePixel[1]/=4.;
     let hyperCoreOffset = Math.ceil(hyperCorePixel[0]);
     if(!isNaN(loudestFret[0].volume)&&window.dynamicCoring)
-        coreData[hyperCoreOffset]=coreShift*2.*4./3.;//24*1.3247;
+        coreData[hyperCoreOffset]=Math.abs(coreShift)+coringValue;//24*1.3247;
     
     
     
@@ -1688,17 +1689,16 @@ else{//start drawing of just twenty four frets here
                                  if(testar[g]>maxTestar){maxTestar=testar[g];}
                                  if(testar[g]<minTestar)minTestar=testar[g];
                              }
-    if(EldersLeg==1){maxTestar=1;minTestar=0;}
+    let twoOr1= EldersLeg<=2
+    if(twoOr1){maxTestar=1;minTestar=0;}
     let oddSkew =EldersLeg%2/2;
 let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
-    console.log("1")
             for (var g=oddSkew; g<fretMultiplied; g++) {
                 const incrementation = (EldersLeg%2==0)?g%2+1:(g+1)%2+1;
             let widt = starshipSize/(EldersLeg/24.)**.5*incrementation/2.;
                 const arm =(flip*(g+oddSkew)*radialWarp+twist)%EldersLeg/EldersLeg*pi*2.;
                 let lengt = (testar[(g+EldersLeg/2.)%EldersLeg]-minTestar)/(maxTestar-minTestar);
-                                     if(EldersLeg==1){lengt/=2.**16.;lengt=lengt**.25;widt/=2;}
-                                     console.log(lengt)
+                                     if(twoOr1) {lengt/=2.**16./EldersLeg;lengt=lengt**.25;widt/=2;}
                                       const vop = new THREE.Color();
                                        
                       vop.setHSL(((20*EldersLeg/24.-g-oddSkew))%EldersLeg/EldersLeg,1.,.5);
@@ -1778,8 +1778,9 @@ var fingerStride = 0;
                      {
                          BlackOrWhite=-1.;
                      }
-                    if( (noteGrey<.5 || noteGrey>11.5||(uniforms.Character.value==0&&(noteGrey<6.5&&noteGrey>5.5))) &&uniforms.colorCombo.value!=20&&!blankBackground&&starClover) BlackOrWhite=.5;
+                 if  ((noteGrey<.5 || noteGrey>11.5)&&uniforms.Character.value!=2)BlackOrWhite=.5;
 
+                    if( ((uniforms.Character.value==0&&(noteGrey<6.5&&noteGrey>5.5))) &&uniforms.colorCombo.value!=20&&!blankBackground&&starClover) BlackOrWhite=.5;
                     else if(uniforms.colorCombo.value==20){
                              if(uniforms.musicAngelMan.value>0&&(uniforms.Character.value==4||uniforms.Character.value==3)
                                 &&((uniforms.Character.value==3&&(t<.5||t>11.5))||(t<2.5&&t>1.5)||(t<10.5&&t>9.5)||(t<7.5&&t>6.5)||(t>4.5&&t<5.5))) BlackOrWhite =.5;

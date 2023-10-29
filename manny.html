@@ -314,9 +314,10 @@
                  <label for="petalCount">Petal Quantity:</label>
                 <input type="number" id="petalCount" name="petalCount" class="num" onkeydown="uniforms.petals.value=document.getElementById('petalCount').value-6.">
                     </p>
-                    <label for="coringConstant">Coring Constant (.5-2.):</label>
+                    <label for="coringConstant">Coring Value (.5-2.):</label>
                    <input type="number" id="coringConstant" name="coringConstant" class="num" onkeydown=
-                       "coreData.fill(document.getElementById('coringConstant').value)">
+                       "coringValue=document.getElementById('coringConstant').value;
+coreData.fill(coringValue);">
                        </p>
 
                        <input type="checkbox" id="dynamicCoring" name="t"  onclick= "
@@ -1533,18 +1534,19 @@ vec2 lastS = s;
    
 
    if(!wheel){
+       float spoke_delimiter = 1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
     if(Spoker&&1.<=hyperCoreBoosted)
                              {
                                  
-                                 hyperCoreOUTPUT--;
+                                 hyperCoreOUTPUT-=spoke_delimiter;
 
-               hyperCoreBoosted--;
-                             s/=metaCoreDriveFactor;//engage spokelover s/=2.+'superspokes'
+                                 hyperCoreBoosted-=spoke_delimiter;
+                             s/=spoke_delimiter;//engage spokelover s/=2.+'superspokes'
                              }
             else  {
                 
                 hyperCoreOUTPUT++;
-                hyperCoreBoosted++;
+                hyperCoreBoosted+=spoke_delimiter/2.;
 }
    }
    if(spokelover&&counter<hyperCoreBoosted){
@@ -1619,6 +1621,7 @@ else{
 
                              colorShift+=hyperCoreBoosted;
                              hyperCoreBoosted--;
+                             hyperCoreOUTPUT--;
 
 }else break;
 ///if(multiplicatorNexus)s*=colorShift/88.8;
