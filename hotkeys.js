@@ -115,8 +115,11 @@ window.key = " ";
     else if(key == "q" && event.ctrlKey)uniforms.squareClover.value=!uniforms.squareClover.value;
     else if(key == "x" && event.ctrlKey)uniforms.fieldPowerBoost.value=!uniforms.fieldPowerBoost.value;
     else if(key == "z" && event.ctrlKey)uniforms.fieldPowerBoostMeta.value=!uniforms.fieldPowerBoostMeta.value;
-    else if(key == "b" && event.ctrlKey)uniforms.balloonsON.value=!uniforms.balloonsON.value;
-
+    else if(key == "b" && event.ctrlKey){
+        if(uniforms.balloonsON.value==0.)uniforms.balloonsON.value=1.
+            else if(uniforms.balloonsON.value==1.)uniforms.balloonsON.value=-1.
+              else  if(uniforms.balloonsON.value==-1.)uniforms.balloonsON.value=0.
+                    }
     else if(key == "k" && event.ctrlKey)
     {
         window.timeRESET= window.TIMESTAMP;

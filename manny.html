@@ -846,7 +846,7 @@ void main(){
     uniform bool fieldPowerBoost;
     uniform bool fieldPowerBoostMeta;
     uniform bool helm;
-    uniform bool balloonsON;
+    uniform float balloonsON;
     uniform float note;
 
     uniform float refactorCores;
@@ -1173,12 +1173,10 @@ vec3 faceFORWARD(vec2 p,vec2 t){
         vec3 balloon=vec3(0.);
        
           float x =  length((vUv-.5)*max(resolution.x,resolution.y)/resolution.yx);
-        //  for(float b = 0.; b<24.;b++)
-          {
-              float increment = note + x*24.;
+              float increment = mod(note*balloonsON+12.,12.) + twistStar + x*24.;
           //  float increment = mod(log(mod(note*flipStar+twistStar,12.)+x*24.)/log(pow(2.,1./12.)),24.);
-           if(abs(mod(increment,1.)-.1)<length(x)/increment*12.)balloon=hsv2rgb(vec3((4.-increment+twistStar)/12.,.5,1.));
-            }
+           if(abs(mod(increment,1.)-.1)<length(x)/increment*3.)balloon=hsv2rgb(vec3((4.-increment+twistStar)/12.,.5,1.));
+            
         return balloon;
     }
                 vec2 spin2(vec2 f, float t)
@@ -2639,7 +2637,7 @@ if(starOnDot>=1){
                                  pillar = sevenPillars(vUv.yx-vec2(0.,.5));
                        
                                  vec3 hypnoticHarmonicCircles = vec3(0.);
-                                 if(balloonsON)hypnoticHarmonicCircles=balloons(p);
+                                 if(balloonsON!=0.)hypnoticHarmonicCircles=balloons(p);
                                  
 if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer

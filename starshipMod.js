@@ -536,7 +536,7 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
        eden:{value: 0},
            spokesVisualizeColors: {value: false    },
  note:{value: 0},
- balloonsON:{value: false},
+ balloonsON:{value: 0.},
 
        Spoker:{value: true    },
        spokelover:{value: false    },
