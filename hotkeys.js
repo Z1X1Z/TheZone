@@ -134,7 +134,7 @@ window.key = " ";
     else if (key=="("&&event.ctrlKey) highORlow = 1;
     else if (key==")"&&event.ctrlKey ) highORlow = 2;
     else if(key == "v" && event.ctrlKey) window.FeedbackSound =  !window.FeedbackSound;
-    else if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=!uniforms.starOnDot.value;
+    else if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=(uniforms.starOnDot.value+1)%3;
     //else if (key=="" && event.ctrlKey)instantaneousFreqSpirographColoring = (instantaneousFreqSpirographColoring+1)%2;//color mode 3 seems obsolete
     else if (key=="m" && event.ctrlKey) uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value;
     else if (event.ctrlKey&&key=="a")uniforms[ "colorCombo" ].value = 11;

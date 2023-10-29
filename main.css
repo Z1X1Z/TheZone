@@ -67,6 +67,7 @@ number {
   }
 
 button {
+    font-size:1.em;
 	cursor: pointer;
 	text-transform: uppercase;
 }
