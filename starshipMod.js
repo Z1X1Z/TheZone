@@ -785,8 +785,9 @@ function init() {
      harmonicPzyghtheGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( harmonicPzyghtheColor, 4 ));
      harmonicPzyghtheMesh= new THREE.Mesh( harmonicPzyghtheGeometry,  harmonicPzyghtheMaterial);
      
-     circleMaterial = new THREE.MeshBasicMaterial( );
-     circle = new THREE.Mesh(new THREE.CircleGeometry(dotSize,3,0.),circleMaterial);
+     
+     circleMaterial = new THREE.MeshBasicMaterial(    { opacity: .8,
+         transparent: true});     circle = new THREE.Mesh(new THREE.CircleGeometry(dotSize,3,0.),circleMaterial);
 
      radialMaterial=  new THREE.MeshBasicMaterial( { color: 0x000000});
      radialGeometry=new THREE.BufferGeometry()
@@ -800,8 +801,8 @@ function init() {
      scene.add(starsANDwitnessesMesh)
      //scene.add(starStreamMesh)
      
-     shaderScene.add( circle );
-    shaderScene.add(radialLine);
+    // shaderScene.add( circle );
+   // shaderScene.add(radialLine);
         
      
   FEEDBACKuniforms = THREE.UniformsUtils.merge([
@@ -1695,7 +1696,7 @@ else{//start drawing of just twenty four frets here
 let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
             for (var g=oddSkew; g<fretMultiplied; g++) {
                 const incrementation = (EldersLeg%2==0)?g%2+1:(g+1)%2+1;
-            let widt = starshipSize/(EldersLeg/24.)**.5*incrementation/3.;
+            let widt = starshipSize/(EldersLeg/24.)**.5/incrementation/2.;
                 const arm =(flip*(g+oddSkew)*radialWarp+twist)%EldersLeg/EldersLeg*pi*2.;
                 let lengt = (testar[(g+EldersLeg/2.)%EldersLeg]-minTestar)/(maxTestar-minTestar);
                                      if(twoOr1) {lengt/=2.**16./EldersLeg;lengt=lengt**.25;widt/=2;}
@@ -1866,7 +1867,7 @@ var fingerStride = 0;
                                                      const yr = widt*-Math.cos(-radialHarmonicInterval);
                                                      const x = lengt*-Math.cos(radialHarmonicInterval);
                                                      const y = lengt*-Math.sin(radialHarmonicInterval);
-                                                     const depth = -.99;
+                                                     const depth = -1;
 
                                                      let hollowCenterSize = 2.;
                                                      if(g==1)hollowCenterSize = 1.75;
@@ -2029,7 +2030,7 @@ else if (circleY<-height)circleY=height;
                                   circle.geometry=new THREE.CircleGeometry(dotSize,sides,0.);
 //circleGeometry.computeBoundingBox ();
 
-circle.position.set(circleX,circleY,-.99);
+circle.position.set(circleX,circleY,-1);
                               if(isFinite(note)&&isFinite(lastNote))    circle.rotateZ(note-lastNote);
 
                    let colorBlack= new THREE.Color();
@@ -2037,8 +2038,8 @@ circle.position.set(circleX,circleY,-.99);
 
 
                    let centerOfDotToEdge = [];
-                   centerOfDotToEdge.push( new THREE.Vector3(circleX-Math.sin(-angle)*dotSize*volume, circleY-Math.cos(-angle)*dotSize*volume, -.99 ) );
-                   centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-.99) );
+                   centerOfDotToEdge.push( new THREE.Vector3(circleX-Math.sin(-angle)*dotSize*volume, circleY-Math.cos(-angle)*dotSize*volume, -1 ) );
+                   centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-1) );
 
                                   radialLine.geometry.setFromPoints( centerOfDotToEdge )
                                         uniforms.dotCoord.value =new THREE.Vector2(circleX,circleY) ;
@@ -2257,13 +2258,25 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
                                         renderer.render( shaderScene, camera);
                                         
                                         renderer.setRenderTarget (null)
+                                        
+                                        finalSceneRerenderedering.add(radialLine);
+                                        finalSceneRerenderedering.add(circle);
                                         wipeUniforms.cloverSampler.value=cloverRenderTarget.texture;
                                         renderer.render( finalSceneRerenderedering, camera );
+                                        
+                                        finalSceneRerenderedering.remove(radialLine);
+                                        finalSceneRerenderedering.remove(circle);
                                     }
                                     else
                                     {
+                                        
+                                        shaderScene.add(radialLine);
+                                        shaderScene.add(circle);
                                         renderer.setRenderTarget (null)
                                         renderer.render( shaderScene, camera);
+                                        
+                                        shaderScene.remove(radialLine);
+                                        shaderScene.remove(circle);
                                     }
 
                                  }
@@ -2279,15 +2292,24 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
                                         renderer.render( scene, camera );
                                         renderer.setRenderTarget (null)
                                         wipeUniforms.cloverSampler.value=cloverRenderTarget.texture;
+                                        
+                                        finalSceneRerenderedering.add(radialLine);
+                                        finalSceneRerenderedering.add(circle);
                                         renderer.render( finalSceneRerenderedering, camera );
+                                        finalSceneRerenderedering.remove(radialLine);
+                                        finalSceneRerenderedering.remove(circle);
                                     }
                                     else{
                                         renderer.setRenderTarget (null)
+                                        
+                                                           scene.add(radialLine);
+                                                           scene.add(circle);
                                         renderer.render( scene, camera );
+                                        
+                                                           scene.remove(radialLine);
+                                                           scene.remove(circle);
                                     }
                                       scene.remove(shaderMeshClone);
-                                                         scene.remove(radialLine);
-                                                         scene.remove(circle);
                                      }
                                  else
                                     {
@@ -2297,8 +2319,8 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
                                                          
                                     renderer.render( scene, camera );
 
-                                    shaderScene.remove(radialLine);
-                                    shaderScene.remove(circle);
+                                                         scene.remove(radialLine);
+                                                         scene.remove(circle);
                                     }
                               
                      
