@@ -315,7 +315,7 @@ var angle=0.;
 let aboveThreshold;
                            let xAdjusted, yAdjusted;
 let pushBackCounter = 0;
-                          let flatline = pixelShaderToStarshipRATIO;
+                          let flatline = 1.;
                           
                        const   lightingScaleTrail = 72;//note range for color scheme
                          const  lightingScaleStar = lightingScaleTrail*2.*2.;//convert 12 to 24 and expand by factor of 2 for a divide between the octaves of the voice (trail) and the hearing (star)
@@ -414,7 +414,7 @@ pitchCol[f]  = colorSoundPURE;
                     
                     
                         flatline = window.movementRate;
-                     //  if(window.movementRate>1.) flatline = window.movementRate;
+                       if(window.movementRate<1.) flatline = 1.;
                     
                     
          angle = ((angle+6*radialWarp)/12.)%1*2*pi;
@@ -1285,7 +1285,7 @@ function runOSMD (){
 
         uniforms[ "externalCores" ].value =uniforms[ "centralCores" ].value/1.5+Math.log(distC)*logStabilizationConstant*equilibriator;
            // uniforms[ "externalCores" ].value+=1./Math.log(.5)/equilibriator;
-
+         uniforms[ "externalCores" ].value +=.5/Math.log(.5);
          if(uniforms.cloverSlide.value)uniforms[ "externalCores" ].value +=1./Math.log(.5);
          else if(uniforms.cloverSlide.value&&uniforms.wheel.value)hyperCore+=.5/Math.log(.5);
 

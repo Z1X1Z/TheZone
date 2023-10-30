@@ -1405,7 +1405,7 @@ if(MetaCored)hyperCore=
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 
    
-     // hyperCore+=1./log(.5)/equilibriator;
+      hyperCore+=.5/log(.5)/equilibriator;
 if(cloverSlide&&!wheel)hyperCore+=1./log(.5);
    else if(cloverSlide&&wheel)hyperCore+=.5/log(.5);
 
@@ -1424,7 +1424,7 @@ hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if d
 vec2 m=vec2(0.);
 
 //Maendel clover
-if(wheel)m =  (pWithoutChiralizer/lfc-abs(coords.yx)//try signs with for fibonacci ring pairing and movement distortion #syyym
+if(wheel)m =  (pWithoutChiralizer/lfc-coords.yx//try signs with for fibonacci ring pairing and movement distortion #syyym
 )*abs(coresIn/crs*2.-1.);
 //this is essentially just p as in the mandelbrot x <== x^2+
 
@@ -1467,7 +1467,7 @@ for (float counter=0.;counter<iterations;counter++)if(dstnce<40.){
     float OmniPetal =OmniDynamicPetalShift*(petals+6./6.);
     
   float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(loops+counter)/40.,0.)).x;
-    
+
          if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
 
                            // if(!true&&morph<.5)CORE_DELIMITER=1./dstnce*pow(2.,4./12.)*equilibriator;
@@ -1546,22 +1546,22 @@ vec2 lastS = s;
    //traditionally be e or 3 probably 1.5 to 4
    
 
-   if(!wheel){
        float spoke_delimiter = 1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
     if(Spoker&&1.<=hyperCoreBoosted)
                              {
                                  
-                                 hyperCoreOUTPUT-=spoke_delimiter;
+                                 hyperCoreOUTPUT-=-log(spoke_delimiter);
 
-                                 hyperCoreBoosted-=spoke_delimiter;
-                             s/=spoke_delimiter;//engage spokelover s/=2.+'superspokes'
+                                 hyperCoreBoosted-=-log(spoke_delimiter);
+                             if(wheel)s/=2.;
+                             else s/=spoke_delimiter;//engage spokelover s/=2.+'superspokes'
                              }
             else  {
                 
-                hyperCoreOUTPUT++;
-                hyperCoreBoosted+=spoke_delimiter/2.;
+                hyperCoreOUTPUT+=-log(spoke_delimiter);
+                hyperCoreBoosted+=-log(spoke_delimiter);
 }
-   }
+   
    if(spokelover&&counter<hyperCoreBoosted){
         if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
         else s/=sqrt(2.);
