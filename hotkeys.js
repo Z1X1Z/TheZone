@@ -121,9 +121,7 @@ window.key = " ";
               else  if(uniforms.balloonsON.value==-1.)uniforms.balloonsON.value=0.
                     }
     else if(key == "s" && event.ctrlKey)uniforms.sparklesON.value=!uniforms.sparklesON.value;
-    else if(key == "f" && event.ctrlKey){uniforms.SPHEREofTheLORD.value=!uniforms.SPHEREofTheLORD.value;
-        console.log(uniforms.SPHEREofTheLORD.value)
-    }
+    else if(key == "f" && event.ctrlKey)uniforms.SPHEREofTheLORD.value=!uniforms.SPHEREofTheLORD.value;
     else if(key == "k" && event.ctrlKey)
     {
         window.timeRESET= window.TIMESTAMP;
