@@ -120,6 +120,10 @@ window.key = " ";
             else if(uniforms.balloonsON.value==1.)uniforms.balloonsON.value=-1.
               else  if(uniforms.balloonsON.value==-1.)uniforms.balloonsON.value=0.
                     }
+    else if(key == "s" && event.ctrlKey)uniforms.sparklesON.value=!uniforms.sparklesON.value;
+    else if(key == "f" && event.ctrlKey){uniforms.SPHEREofTheLORD.value=!uniforms.SPHEREofTheLORD.value;
+        console.log(uniforms.SPHEREofTheLORD.value)
+    }
     else if(key == "k" && event.ctrlKey)
     {
         window.timeRESET= window.TIMESTAMP;
@@ -183,21 +187,26 @@ window.key = " ";
 
         }
     else if (document.activeElement.className=="num");//don't take number hotkey's while menu number selector engaged
-    else if (x>0&&x<=4&& document.activeElement.className!="num")
-    {rez = window.devicePixelRatio/x; renderer.setPixelRatio( rez);}
+        
+    else if (x>0&&x<=9&& document.activeElement.className!="num"&&!event.shiftKey&&!event.altKey)
+        {rez = window.devicePixelRatio/x; renderer.setPixelRatio( rez);}
+        
+    /*else if (x==0&& document.activeElement.className!="num"&&!event.shiftKey&&!event.altKey)
+        {rez = window.devicePixelRatio/10.; renderer.setPixelRatio( rez);}
+*/
     else if (key=="+"){rez /=1.1; renderer.setPixelRatio( rez);}
     else if (key=="_"){rez *=1.1; renderer.setPixelRatio( rez);}
 
     else if (x==0)
-    {window.movementRate=1.32471795724474;; uniforms[ "rate" ].value=1.; }
-    else if(x == 7&&!event.shiftKey)uniforms.musicAngelMan.value=(uniforms.musicAngelMan.value+1)%3;
-    else if(x == 8&&!event.shiftKey)
+    {window.movementRate=1.;; uniforms[ "rate" ].value=1.; }
+    else if(x == 7&&event.altKey&&!event.shiftKey)uniforms.musicAngelMan.value=(uniforms.musicAngelMan.value+1)%3;
+    else if(x == 8&&event.altKey&&!event.shiftKey)
     {
         if(uniforms.refactorCores.value==2)uniforms.refactorCores.value=1;
         else if(uniforms.refactorCores.value==1)uniforms.refactorCores.value=0;
         else uniforms.refactorCores.value=2;
     }
-    else if(x == 9&&!event.shiftKey)
+    else if(x == 9&&event.altKey&&!event.shiftKey)
     {
         window.pzyghthe = (window.pzyghthe+1.)%5;
         if(pzyghthe==0) scene.remove(harmonicPzyghtheMesh);
