@@ -57,7 +57,7 @@ function loadScore(e) {
         drawMetronomeMarks:false, drawPartNames:false, drawPartAbbreviations:true,
         drawMeasureNumbers:true, drawMeasureNumbersOnlyAtSystemStart:true, drawTimeSignatures:true,
         //autoResize: false,
-      backend: "canvas",
+      backend: "svg",
     preferredSkyBottomLineBatchCalculatorBackend:1,//0 Plain or 1 Webgl
         //skyBottomLineBatchMinMeasures:0,//high number to disable
         renderSingleHorizontalStaffline:true,
@@ -77,6 +77,7 @@ function loadScore(e) {
           window.osmd = osmd; // give access to osmd object in Browser console, e.g. for osmd.setOptions()
           //osmdResize();
            //  osmd.render();
+            if(!sheetTranslucent) osmd.EngravingRules.PageBackgroundColor = "#ffffffff";
 
           onWindowResize()//this calls osmdResize() who calls osmd.render(). It is from starshipMod.js so we need it to load after that is loaded in x.html
           //console.log("e.target.result: " + e.target.result);
