@@ -734,8 +734,8 @@ function init() {
      lineMat.dynamic = true;
      lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute( point,3 ));
     lineGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( pointColor, 3 ));
-     line = new THREE.LineSegments(lineGeometry,lineMat);
-     //line = new THREE.Line(lineGeometry,lineMat);
+    // line = new THREE.LineSegments(lineGeometry,lineMat);
+     line = new THREE.Line(lineGeometry,lineMat);
 
     starMaterial= new THREE.MeshBasicMaterial({
                 opacity: 1.,
@@ -1445,7 +1445,7 @@ lineMat.color = new THREE.Color("black");
                 linePositionAttribute.setXYZ(lineStride,txlast,tylast, d)
               linePositionAttribute.setXYZ(lineStride+1,tx, ty, d)
                 
-             //   lineColorAttribute.setXYZ(lineStride,greyness, greyness, greyness);
+             //  lineColorAttribute.setXYZ(lineStride,greyness, greyness, greyness);
               //  lineColorAttribute.setXYZ(lineStride+1,greyness, greyness, greyness );
                 
                // lineStride+=2;
@@ -1717,24 +1717,26 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                                       const vop = new THREE.Color();
                                        
                       vop.setHSL(((20*EldersLeg/24.-g-oddSkew))%EldersLeg/EldersLeg,1.,.5);
-                                
-                  starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
-                  starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,1.)
-                  starColorAttribute.setXYZW(starStride+2,vop.r,vop.g,vop.b,1.)
-                  starColorAttribute.setXYZW(starStride+3,vop.r,vop.g,vop.b,1.)
-                  starColorAttribute.setXYZW(starStride+4,vop.r,vop.g,vop.b,1.)
-                  starColorAttribute.setXYZW(starStride+5,vop.r,vop.g,vop.b,1.)
+                                  
+                    starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
+                    starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,1.)
+                    starColorAttribute.setXYZW(starStride+2,vop.r,vop.g,vop.b,1.)
+                    starColorAttribute.setXYZW(starStride+3,vop.r,vop.g,vop.b,1.)
+                    starColorAttribute.setXYZW(starStride+4,vop.r,vop.g,vop.b,1.)
+                    starColorAttribute.setXYZW(starStride+5,vop.r,vop.g,vop.b,1.)
+                                  
                 
+                                  //inner Star inspired by https://www.youtube.com/watch?v=_MTbjHKtobY Neffex song
 const rpio2 =arm+pi/2.;
-   let centerDisplacement = (1.+widt)/4./1.3247
-const xBoost = -Math.sin(arm)*centerDisplacement;
-const yBoost = -Math.cos(arm)*centerDisplacement;
+   let centerDisplacement = 3./7.;
+let xBoost = -Math.sin(arm)*centerDisplacement;
+let yBoost = -Math.cos(arm)*centerDisplacement;
                 
-const x = widt*-Math.sin(rpio2);
-const y = widt*-Math.cos(rpio2);
-const xr = lengt*-Math.sin(arm);
-const yr = lengt*-Math.cos(arm);
-const depth = -starShipDepthInSet+lengt*(1.-starShipDepthInSet);
+let x = widt*-Math.sin(rpio2);
+let y = widt*-Math.cos(rpio2);
+let xr = lengt*-Math.sin(arm);
+let yr = lengt*-Math.cos(arm);
+let depth = -starShipDepthInSet+lengt*(1.-starShipDepthInSet);
 
                 
                 
@@ -1747,9 +1749,36 @@ const depth = -starShipDepthInSet+lengt*(1.-starShipDepthInSet);
                 starPositionAttribute.setXYZ(starStride+5,(xr-x), (yr-y),  depth)
                 
                 
-                
-            
+                                  
                 starStride+=6;
+                                 
+                                x *=-centerDisplacement;
+                                y *=-centerDisplacement;
+                                   
+                                   xr = -(lengt-1.)*-Math.sin(arm)*centerDisplacement;
+                                   yr = -(lengt-1.)*-Math.cos(arm)*centerDisplacement;
+                                  
+                                  starPositionAttribute.setXYZ(starStride,-x+xBoost,    -y+yBoost,  depth)
+                                  starPositionAttribute.setXYZ(starStride+1,x+xBoost,    y+yBoost,  depth)
+                                  starPositionAttribute.setXYZ(starStride+2,(xr+x), (yr+y),  depth)
+                                  
+                                  starPositionAttribute.setXYZ(starStride+3,-x+xBoost, -y+yBoost,  depth)
+                                  starPositionAttribute.setXYZ(starStride+4,(xr+x), (yr+y),  depth)
+                                  starPositionAttribute.setXYZ(starStride+5,(xr-x), (yr-y),  depth)
+                                  
+                                  
+                                  
+                    starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
+                    starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,1.)
+                    starColorAttribute.setXYZW(starStride+2,vop.r,vop.g,vop.b,1.)
+                    starColorAttribute.setXYZW(starStride+3,vop.r,vop.g,vop.b,1.)
+                    starColorAttribute.setXYZW(starStride+4,vop.r,vop.g,vop.b,1.)
+                    starColorAttribute.setXYZW(starStride+5,vop.r,vop.g,vop.b,1.)
+                                           
+                                               starStride+=6;
+                                  
+                                  
+                                  
 }
     
 }
@@ -1832,6 +1861,9 @@ var fingerStride = 0;
          }
                                         
                                   }
+                                        else     for(var t=0; t<12*10*3*2;t++)
+                                        {starsANDwitnessesPositionAttribute.setXYZ(t,0,0,0)
+                     }
                                                               
           starsANDwitnessesPositionAttribute.needsUpdate = true; // required after the first render
           starsANDwitnessesColorAttribute.needsUpdate = true; // required after the first render
