@@ -847,6 +847,8 @@ void main(){
     uniform bool fieldPowerBoostMeta;
     uniform bool helm;
     uniform float balloonsON;
+    uniform bool sparklesON;
+    uniform bool SPHEREofTheLORD;
     uniform float note;
 
     uniform float refactorCores;
@@ -1171,14 +1173,46 @@ vec3 faceFORWARD(vec2 p,vec2 t){
     }
     vec3 balloons(vec2 p){
         vec3 balloon=vec3(0.);
-       
+        
+        float sizeReset = 0.;
+        if (balloonsON==-1.)sizeReset=120.;
           float x =  length((vUv-.5)*max(resolution.x,resolution.y)/resolution.yx);
               float increment =note*balloonsON+12. + twistStar + x*24.;
           //  float increment = mod(log(mod(note*flipStar+twistStar,12.)+x*24.)/log(pow(2.,1./12.)),24.);
-           if(abs(mod(increment,1.)-.1)<length(x)/increment*12.)balloon=hsv2rgb(vec3((4.-increment+twistStar)/12.,.5,1.));
+           if(abs(mod(increment,1.)-.1)<length(x)/(increment+sizeReset)*24.)balloon=hsv2rgb(vec3((mod(4.-increment+twistStar,12.))/12.,.5,1.));
             
         return balloon;
     }
+    
+    
+    vec3 sparkles(vec2 p){
+        vec4 starship = vec4(0.);
+        float recenter = 0.;
+        float rescale = 1./3.;
+        vec2  starshipLOOKUP = ((vUv-.5)+vec2(0.,recenter))*rescale+.5;
+          if (starshipLOOKUP.x<1.&&starshipLOOKUP.y<1.&&starshipLOOKUP.x>0.&&starshipLOOKUP.y>0.)starship = texture2D(STAR,starshipLOOKUP);
+          if (starship.x==0.&&starship.y==0.&&starship.z==0.)starship=vec4(1.);
+        float timeDilated = time*10.;
+         p=(mod(timeDilated,1.)-.5)*abs(p)+length(vec2(length(starship.xy),starship.z));
+            p=vec2(p.x,abs(p.y));
+            vec2 s=p;
+
+        float l=0.;
+          float love1 =  mod(timeDilated*.3247,1.);
+                  float love2 =  mod(timeDilated*.618,1.);              float love3 =  mod(timeDilated,1.);
+        for (int f=0;f<15;f+=1){//turn f<21 for just seven eyed
+                    s=love2*vec2(-1./(s.x*s.x-s.y*s.y-p.x), 2.0*s.x*s.y-p.y);//this is {s=s^2-p;s.real=-1./s.real}
+            s=-vec2(s.y/((s.y/(s.y-s.x)*love3-(s.y))), -pow(abs(s.y/(s.y/(s.x-s.y)*love3-s.y*love2)),2.*1./love3));//this is {s=s^2-p;s.real=-1./s.real}
+            //  s           *= vec2(s.y,s.x);
+                  }
+                s=-vec2(s.y/((s.y/(s.y-s.x)*love3-(s.y))), -pow(abs(s.y/(s.y/(s.x-s.y)*love3-s.y*love2)),2.*1./love3));//this is {s=s^2-p;s.real=-1./s.real}
+        float centralPowerInverter=(s.x/s.y)*sign(s.x*s.y)*2.618;
+            //I was studying this function without the face and a power short ocurred and on firefox window restore and caused a semi-reversion hybridization
+        l=1./ //1.-
+            centralPowerInverter;
+        return vec3(vec2((s.x*love1),abs(s.y*love2)),vec2(s.x*s.x*love1)*l);
+    }
+
                 vec2 spin2(vec2 f, float t)
                 {    //https://en.wikipedia.org/wiki/Rotation_matrix
                     float angle =t;
@@ -1272,7 +1306,6 @@ return vec3(l+b+r+h);}
                                   
                             
 vec3 tol(vec2 p, vec2 t){
-
                          vec2 pWithoutChiralizer = p;
                          if(chirality==-1){p=p.yx;}
 vec2 colorAccumulator =vec2(0.);
@@ -1297,6 +1330,7 @@ if(refactorCores>1.)
         p/=2.;
     }
 else if (refactorCores==0.) p/=3.;
+
 vec2 s=p;
 
 float c = length(s);
@@ -1354,6 +1388,7 @@ if(fieldPowerBoost){
 //  else if(zoom>1.)for(int i=0;i<int(crs); i++)if(c>4./3.&&loops<-cored){s/=2.;c/=2.;loops++;coresIn++;}else break;//UpCore not in use here, but rather in the starshipMod
 //for(int i=0;i<int(crs); i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
 
+if(SPHEREofTheLORD)s *= (length(s)-zoom/length(coords.yx)/2.);
 
 if(squareClover)s/=vec2(sqrt(2.-s.x*s.x),sqrt(2.-s.y*s.y))/s;
 
@@ -1550,17 +1585,34 @@ vec2 lastS = s;
     if(Spoker&&1.<=hyperCoreBoosted)
                              {
                                  
-                                 hyperCoreOUTPUT-=-log(spoke_delimiter);
+                             if(wheel){
+                                 s/=2.;
+                                 
+                                 hyperCoreOUTPUT-=log(spoke_delimiter/2.);
 
-                                 hyperCoreBoosted-=-log(spoke_delimiter);
-                             if(wheel)s/=2.;
-                             else s/=spoke_delimiter;//engage spokelover s/=2.+'superspokes'
+                                 hyperCoreBoosted-=log(spoke_delimiter/2.);
+                                 }
+                             else{
+                                 
+                              s/=spoke_delimiter;//engage spokelover s/=2.+'superspokes'
+                             
+                             hyperCoreOUTPUT-=spoke_delimiter;
+
+                             hyperCoreBoosted-=spoke_delimiter;
+                             }
                              }
             else  {
                 
-                hyperCoreOUTPUT+=-log(spoke_delimiter);
-                hyperCoreBoosted+=-log(spoke_delimiter);
-}
+                    if(wheel){
+                hyperCoreOUTPUT+=log(spoke_delimiter/2.);
+                hyperCoreBoosted+=log(spoke_delimiter/2.);
+                }
+                    else{
+                hyperCoreOUTPUT+=spoke_delimiter;
+                hyperCoreBoosted+=spoke_delimiter;
+                }
+                }
+
    
    if(spokelover&&counter<hyperCoreBoosted){
         if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
@@ -1730,7 +1782,7 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                       
                       
                       
-o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z)*1.5*starship.w,0.,1.)+starship.xyz*spirographTranslucer;
+o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z)*7.*starship.w,0.,1.)+starship.xyz*spirographTranslucer;
                       o*=isBlack;
                       o+=(isBlack-1.)*100.;
                       o+=isGrey;
@@ -2562,6 +2614,7 @@ mny+=HEART*heartMultiplier;
                        }
 
                                vec2  starshipLOOKUP = ((vUv-.5)+vec2(0.,recenter))*rescale+.5;
+                                 
     vec4 starship=vec4(0.);
                                  float isBlack =1.;
                                  vec3 starshipMultiplier = vec3(1.);
@@ -2638,7 +2691,7 @@ if(starOnDot>=1){
                        
                                  vec3 hypnoticHarmonicCircles = vec3(0.);
                                  if(balloonsON!=0.)hypnoticHarmonicCircles=balloons(p);
-                                 
+                           
 if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
                                       -vec4(vec3(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z),0.),0.,1.);
@@ -2666,7 +2719,11 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                      vec4 fin = (ss-faceFromShip+goodies+tree)*isBlack*isBlackStaRivers*isBlackDOT+(isBlack-1.)+(isBlackDOT-1.)+(isBlackStaRivers-1.);
                                      if(fin.r>.9&&fin.g>.9&&fin.b>.9)fin-=(isGrey+isGreyDOT+isGreyStaRivers)*1.5;
                                      else if(fin.r<.1&&fin.g<.1&&fin.b<.1)fin+=(isGrey+isGreyDOT+isGreyStaRivers)*1.5;
-                       gl_FragColor=fin;}
+                                     vec3 confraculator = vec3(1.);
+                                     if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
+                                     
+                       gl_FragColor=fin/vec4(confraculator
+                                                      ,1.);}
                                 else gl_FragColor=vec4(zoomer,1.);
 
                                          }

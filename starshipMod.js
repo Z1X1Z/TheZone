@@ -537,6 +537,8 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
            spokesVisualizeColors: {value: false    },
  note:{value: 0},
  balloonsON:{value: 0.},
+ sparklesON:{value: false},
+ SPHEREofTheLORD:{value: false},
 
        Spoker:{value: true    },
        spokelover:{value: false    },
@@ -719,10 +721,10 @@ function init() {
 
     lineMat =
     new THREE.LineBasicMaterial( {
-       vertexColors: true,
+       //vertexColors: true,
            color: 0xffffff,
          // opacity: .5,
-          linewidth: 2,
+          linewidth: 3,//ignored by WebGLRenderer
           linecap: 'round', //ignored by WebGLRenderer
           linejoin:  'round' //ignored by WebGLRenderer
     } );
@@ -733,6 +735,7 @@ function init() {
      lineGeometry.setAttribute('position', new THREE.Float32BufferAttribute( point,3 ));
     lineGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( pointColor, 3 ));
      line = new THREE.LineSegments(lineGeometry,lineMat);
+     //line = new THREE.Line(lineGeometry,lineMat);
 
     starMaterial= new THREE.MeshBasicMaterial({
                 opacity: 1.,
@@ -1440,12 +1443,15 @@ lineMat.color = new THREE.Color("black");
             if(isFinite(tx)&&isFinite(ty)&&isFinite(txlast)&isFinite(tylast))
             {
                 linePositionAttribute.setXYZ(lineStride,txlast,tylast, d)
-                linePositionAttribute.setXYZ(lineStride+1,tx, ty, d)
+              linePositionAttribute.setXYZ(lineStride+1,tx, ty, d)
                 
-                lineColorAttribute.setXYZ(lineStride,greyness, greyness, greyness);
-                lineColorAttribute.setXYZ(lineStride+1,greyness, greyness, greyness );
+             //   lineColorAttribute.setXYZ(lineStride,greyness, greyness, greyness);
+              //  lineColorAttribute.setXYZ(lineStride+1,greyness, greyness, greyness );
                 
-                lineStride+=2;} }
+               // lineStride+=2;
+                lineStride+=2;
+
+                ;} }
     
     linePositionAttribute.needsUpdate = true;
     lineColorAttribute.needsUpdate = true;
@@ -1698,9 +1704,14 @@ else{//start drawing of just twenty four frets here
     let oddSkew =EldersLeg%2/2;
 let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
             for (var g=oddSkew; g<fretMultiplied; g++) {
-                const incrementation = (EldersLeg%2==0)?g%2+1:(g+1)%2+1;
-            let widt = starshipSize/(EldersLeg/24.)**.5/incrementation/2.;
+                let incrementation = (EldersLeg%2==0)?g%2:(g+1)%2;
+                //incrementation/=2.;
+               incrementation++;
+                let widt = starshipSize/(EldersLeg/24.)**.5/incrementation/2.;
+                if (g==0&&EldersLeg==24)widt*=2.;
+
                 const arm =(flip*(g+oddSkew)*radialWarp+twist)%EldersLeg/EldersLeg*pi*2.;
+ 
                 let lengt = (testar[(g+EldersLeg/2.)%EldersLeg]-minTestar)/(maxTestar-minTestar);
                                      if(twoOr1) {lengt/=2.**16./EldersLeg;lengt=lengt**.25;widt/=2;}
                                       const vop = new THREE.Color();
