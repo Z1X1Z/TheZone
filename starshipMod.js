@@ -279,16 +279,16 @@ function fiveAndSeven(){
             
             }
 }
-const cx =new Float64Array(trailLength);//c is the center of the frame moved from the origin
-const cy = new Float64Array(trailLength);
-const xPerp= new Float64Array(trailLength);//perp is the perpendicular from c
-const yPerp = new Float64Array(trailLength);
-const trailWidth = new Float64Array(trailLength);
-const trailTimeOfRecording = new Float64Array(trailLength);
+const cx =new Float64Array(trailLength).fill(0);//c is the center of the frame moved from the origin
+const cy = new Float64Array(trailLength).fill(0);
+const xPerp= new Float64Array(trailLength).fill(0);//perp is the perpendicular from c
+const yPerp = new Float64Array(trailLength).fill(0);
+const trailWidth = new Float64Array(trailLength).fill(0);
+const trailTimeOfRecording = new Float64Array(trailLength).fill(0);
 const trailSegmentExpired = Array(trailLength).fill(false);
 const pitchCol = Array(trailLength);
 let trailLoaded = false;
-let trailDepth = -1;
+let trailDepth = 0;
 
 let d_x=0,d_y=0;
 let staticX=0,staticY=0;
@@ -328,7 +328,7 @@ function  move()
 
   if (!trailLoaded) {trailLoaded = true;
       for(var n = 0; n<trailLength; n++)
-        {trailTimeOfRecording[n]=0;xPerp[n]=0;yPerp[n]=0;cx[n]=0;cy[n]=0;trailWidth[n]=0.;pitchCol[n]  = new THREE.Color()
+        {pitchCol[n]  = new THREE.Color()
         }
   }
 
@@ -479,11 +479,11 @@ const radius = interpolation*MR*4./window.pixelShaderSize;
  xAdjusted= d_x*radius;
  yAdjusted= d_y*radius;
 
-if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) if(!trailSegmentExpired[n]){
-
-    cx[n] += xAdjusted;
-    cy[n] += yAdjusted;
-trailWidth[n] += radius*starshipSize;
+if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) if(!trailSegmentExpired[n]&&n!=f-1){
+        cx[n] += xAdjusted;
+        cy[n] += yAdjusted;
+        trailWidth[n] += radius*starshipSize;
+    
 }
     
 
@@ -1816,11 +1816,11 @@ var fingerStride = 0;
          for (var t=0; t<12; t++) {
              
              for (var g=0; g<10; g++) {
-                 const widt = pi/75.;
+                 const widt = pi/120.;
                  const finger = (isFinite(twelve[t][g]))?twelve[t][g]:0;
                  let arm =(g+9)/10.*pi*2.;
 
-                 const lengt =(isFinite(maxFinger)&&maxFinger!=0)? (finger)/maxFinger*(1.-widt) : 0;
+                 const lengt =(isFinite(maxFinger)&&maxFinger!=0)? (finger)/maxFinger*(1.-pi/12.) : 0;
 
 
                      var vop = new THREE.Color();
@@ -1991,68 +1991,68 @@ var fingerStride = 0;
 
 let r = (f+trailDepth-1)%trailDepth;
 let s = f;
-
+                                                                                     
 var loopLimit = trailDepth;
 //if(isFinite(cx[r-1])&&isFinite(cx[s])&&isFinite(cy[r-1])&&isFinite(cy[s]))
                  const scalar = 1.;
 
                                                                                      
-                                                         let red1=0, green1=0, blue1=0 ,
-                                                         red2=0 , green2=0 , blue2=0;
-                                                                                     let r1, g1, b1,
-                                                                                     r2=0, g2=0, b2=0;
-                                                                                     
-                                                                       var  widts =0;
+                 let red1=0, green1=0, blue1=0 ,
+                 red2=0 , green2=0 , blue2=0;
+                                             let r1, g1, b1,
+                                             r2=0, g2=0, b2=0;
+                                             
+                               var  widts =0;
 
-                                                                  var   widtr = 0;
-                                                                                     
-                                                                                     var widtXperpS=0;
-                                                                                     var widtYperpS=0;
-                                                                                     var widtXperpR=0;
-                                                                                     var widtYperpR=0;
-                                                                                     
-                                                                                         
-                                                                                     var xrFinalNegatived =0;
-                                                                                     var xrFinalPositived =0;
-                                                                                     var xsFinalNegatived =0;
-                                                                                     var xsFinalPositived =0;
-                                                                                         
-                                                                                     var yrFinalNegatived =0;
-                                                                                     var yrFinalPositived =0;
-                                                                                     var ysFinalNegatived =0;
-                                                                                     var ysFinalPositived =0;
+                          var   widtr = 0;
+                                             
+                                             var widtXperpS=0;
+                                             var widtYperpS=0;
+                                             var widtXperpR=0;
+                                             var widtYperpR=0;
+                                             
+                                                 
+                                             var xrFinalNegatived =0;
+                                             var xrFinalPositived =0;
+                                             var xsFinalNegatived =0;
+                                             var xsFinalPositived =0;
+                                                 
+                                             var yrFinalNegatived =0;
+                                             var yrFinalPositived =0;
+                                             var ysFinalNegatived =0;
+                                             var ysFinalPositived =0;
 
-                                                         if(loopLimit>1)
-                                                         {
-                                                              red1  = pitchCol[r].r;
-                                                              green1  = pitchCol[r].g;
-                                                              blue1 = pitchCol[r].b;
-                                                             
-                                                              red2  = pitchCol[s].r;
-                                                              green2  = pitchCol[s].d;
-                                                              blue2  = pitchCol[s].b;
-                                                         
-                                             widts = trailWidth[s];
+                 if(loopLimit>1)
+                 {
+                      red1  = pitchCol[r].r;
+                      green1  = pitchCol[r].g;
+                      blue1 = pitchCol[r].b;
+                     
+                      red2  = pitchCol[s].r;
+                      green2  = pitchCol[s].d;
+                      blue2  = pitchCol[s].b;
+                 
+     widts = trailWidth[s];
 
-                                         widtr = trailWidth[r];
-                                                          widtXperpS=widts*xPerp[s];
-                                                          widtYperpS=widts*yPerp[s];
-                                                          widtXperpR=widtr*xPerp[r];
-                                                          widtYperpR=widtr*yPerp[r];
-                                                         
-                                                             
-                                                          xrFinalNegatived = cx[r]-widtXperpR;
-                                                          xrFinalPositived = cx[r]+widtXperpR;
-                                                          xsFinalNegatived = cx[s]-widtXperpS;
-                                                          xsFinalPositived = cx[s]+widtXperpS;
-                                                             
-                                                          yrFinalNegatived = cy[r]-widtYperpR;
-                                                          yrFinalPositived = cy[r]+widtYperpR;
-                                                          ysFinalNegatived = cy[s]-widtYperpS;
-                                                          ysFinalPositived = cy[s]+widtYperpS;
+ widtr = trailWidth[r];
+                  widtXperpS=widts*xPerp[s];
+                  widtYperpS=widts*yPerp[s];
+                  widtXperpR=widtr*xPerp[r];
+                  widtYperpR=widtr*yPerp[r];
+                 
+                     
+                  xrFinalNegatived = cx[r]-widtXperpR;
+                  xrFinalPositived = cx[r]+widtXperpR;
+                  xsFinalNegatived = cx[s]-widtXperpS;
+                  xsFinalPositived = cx[s]+widtXperpS;
+                     
+                  yrFinalNegatived = cy[r]-widtYperpR;
+                  yrFinalPositived = cy[r]+widtYperpR;
+                  ysFinalNegatived = cy[s]-widtYperpS;
+                  ysFinalPositived = cy[s]+widtYperpS;
 
-                                                         }
-                                                         
+                 }
+                 
                              let     timeElapsedSinceRecording=     uniforms["time"].value-trailTimeOfRecording[r];
                                   let transparencyOfTrail = 1., z = -1;
      let strideTrail = 0;
