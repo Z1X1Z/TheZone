@@ -1816,11 +1816,11 @@ var fingerStride = 0;
          for (var t=0; t<12; t++) {
              
              for (var g=0; g<10; g++) {
-                 const widt = pi/50.;
+                 const widt = pi/75.;
                  const finger = (isFinite(twelve[t][g]))?twelve[t][g]:0;
                  let arm =(g+9)/10.*pi*2.;
 
-                 const lengt =(isFinite(maxFinger)&&maxFinger!=0)? (finger)/maxFinger/(1.-widt) : 0;
+                 const lengt =(isFinite(maxFinger)&&maxFinger!=0)? (finger)/maxFinger*(1.-widt) : 0;
 
 
                      var vop = new THREE.Color();
