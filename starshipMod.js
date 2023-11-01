@@ -39,10 +39,11 @@ const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. 
 window.movementRate=1.;
 window.radialWarp=1.;
 const starshipSize = Math.E**-1.3247/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
-const trailSecondsLong = 8.;
+const trailSecondsLong = 5.;
 const starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;//base Z value
 
-const zoomFrames = 60;//frames to double zoom
+                            const zoomFrames = 60;//frames to double zoom
+                            const inverseZoomFrames = 1./60.;//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   const mf = 1.75;
 const MR = mf/zoomFrames;
@@ -1988,43 +1989,138 @@ var loopLimit = trailDepth;
 //if(isFinite(cx[r-1])&&isFinite(cx[s])&&isFinite(cy[r-1])&&isFinite(cy[s]))
                  const scalar = 1.;
 
+                                                                                     
+                                                         let red1=0, green1=0, blue1=0 ,
+                                                         red2=0 , green2=0 , blue2=0;
+                                                                                     let r1, g1, b1,
+                                                                                     r2=0, g2=0, b2=0;
+                                                                                     
+                                                                       var  widts =0;
 
+                                                                  var   widtr = 0;
+                                                                                     
+                                                                                     var widtXperpS=0;
+                                                                                     var widtYperpS=0;
+                                                                                     var widtXperpR=0;
+                                                                                     var widtYperpR=0;
+                                                                                     
+                                                                                         
+                                                                                     var xrFinalNegatived =0;
+                                                                                     var xrFinalPositived =0;
+                                                                                     var xsFinalNegatived =0;
+                                                                                     var xsFinalPositived =0;
+                                                                                         
+                                                                                     var yrFinalNegatived =0;
+                                                                                     var yrFinalPositived =0;
+                                                                                     var ysFinalNegatived =0;
+                                                                                     var ysFinalPositived =0;
+
+                                                         if(loopLimit>1)
+                                                         {
+                                                              red1  = pitchCol[r].r;
+                                                              green1  = pitchCol[r].g;
+                                                              blue1 = pitchCol[r].b;
+                                                             
+                                                              red2  = pitchCol[s].r;
+                                                              green2  = pitchCol[s].d;
+                                                              blue2  = pitchCol[s].b;
+                                                         
+                                             widts = trailWidth[s];
+
+                                         widtr = trailWidth[r];
+                                                          widtXperpS=widts*xPerp[s];
+                                                          widtYperpS=widts*yPerp[s];
+                                                          widtXperpR=widtr*xPerp[r];
+                                                          widtYperpR=widtr*yPerp[r];
+                                                         
+                                                             
+                                                          xrFinalNegatived = cx[r]-widtXperpR;
+                                                          xrFinalPositived = cx[r]+widtXperpR;
+                                                          xsFinalNegatived = cx[s]-widtXperpS;
+                                                          xsFinalPositived = cx[s]+widtXperpS;
+                                                             
+                                                          yrFinalNegatived = cy[r]-widtYperpR;
+                                                          yrFinalPositived = cy[r]+widtYperpR;
+                                                          ysFinalNegatived = cy[s]-widtYperpS;
+                                                          ysFinalPositived = cy[s]+widtYperpS;
+
+                                                         }
+                                                         
                              let     timeElapsedSinceRecording=     uniforms["time"].value-trailTimeOfRecording[r];
                                   let transparencyOfTrail = 1., z = -1;
      let strideTrail = 0;
-                                  
+                                                                                     let BlackOrWhiteTrail=1;
+                                                                                     const nt = Math.round(note)%12;
+                                                                                     if (nt==7||nt==5||nt==2||nt==0||nt==10)
+                                                                                     {
+                                                         BlackOrWhiteTrail=0.;
+                                                                                     }
+                                                                                     else
+                                                                                     {
+                                                         BlackOrWhiteTrail=1.;
+                                                                                     }
           while(loopLimit>0&&r!=f){
                  if(!trailSegmentExpired[r]&&timeElapsedSinceRecording<=trailSecondsLong){
                         // timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
                             const zlast = z;
-                            z = -1.+timeElapsedSinceRecording/trailSecondsLong;
+                     const seg = timeElapsedSinceRecording/trailSecondsLong;
+                            z = -1.+seg;
                         //   if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong);
                             const transparencyOfTrailLast =transparencyOfTrail;
-                            transparencyOfTrail =1.-timeElapsedSinceRecording/trailSecondsLong;
+                            transparencyOfTrail =1.-seg;
+                     
+                     let stylus=.5;
+                     if(timeElapsedSinceRecording<.25)stylus=BlackOrWhiteTrail;
 
-                     trailColorAttribute.setXYZW(strideTrail, pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail)
-                                            trailColorAttribute.setXYZW(strideTrail+1, pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrailLast)
-                                             trailColorAttribute.setXYZW(strideTrail+2,   pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail)
-                                             trailColorAttribute.setXYZW(strideTrail+3, pitchCol[r].r,pitchCol[r].g,pitchCol[r].b,transparencyOfTrail)
-                                             trailColorAttribute.setXYZW(strideTrail+4, pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrailLast)
-                                             trailColorAttribute.setXYZW(strideTrail+5, pitchCol[s].r,pitchCol[s].g,pitchCol[s].b,transparencyOfTrailLast)
+                      red2  = red1;
+                      green2  = green1;
+                      blue2  = blue1;
+
+                      red1  = pitchCol[r].r;
+                      green1  = pitchCol[r].g;
+                      blue1  = pitchCol[r].b;
+                     
+                      r2 = r1;
+                      g2 = g1;
+                      b2 = b1;
+                     if(stylus!=0.5){
+                         r1=stylus;
+                         g1=stylus;
+                         b1=stylus;
+                     }
+                     else{
+                         r1 = red1;
+                         g1 = green1;
+                         b1 = blue1;
+                     }
+                     trailColorAttribute.setXYZW(strideTrail, r1,g1,b1,transparencyOfTrail)
+                                            trailColorAttribute.setXYZW(strideTrail+1, r2,g2,b2,transparencyOfTrailLast)
+                                             trailColorAttribute.setXYZW(strideTrail+2,   r1,g1,b1,transparencyOfTrail)
+                                             trailColorAttribute.setXYZW(strideTrail+3, r1,g1,b1,transparencyOfTrail)
+                                             trailColorAttribute.setXYZW(strideTrail+4, r2,g2,b2,transparencyOfTrailLast)
+                                             trailColorAttribute.setXYZW(strideTrail+5, r2,g2,b2,transparencyOfTrailLast)
                                           
-                         const widtr = trailWidth[r];
-                     const widts = trailWidth[s];
-                     const widtXperpR=widtr*xPerp[r];
-                     const widtYperpR=widtr*yPerp[r];
-                     const widtXperpS=widts*xPerp[s];
-                     const widtYperpS=widts*yPerp[s];
-                         
-                     const xrFinalNegatived = cx[r]-widtXperpR;
-                     const xrFinalPositived = cx[r]+widtXperpR;
-                     const xsFinalNegatived = cx[s]-widtXperpS;
-                     const xsFinalPositived = cx[s]+widtXperpS;
-                         
-                     const yrFinalNegatived = cy[r]-widtYperpR;
-                     const yrFinalPositived = cy[r]+widtYperpR;
-                     const ysFinalNegatived = cy[s]-widtYperpS;
-                     const ysFinalPositived = cy[s]+widtYperpS;
+                              widts = widtr;
+
+                          widtr = trailWidth[r];
+                     
+                      widtXperpS=widtXperpR;
+                      widtYperpS=widtYperpR;
+                      widtXperpR=widtr*xPerp[r];
+                      widtYperpR=widtr*yPerp[r];
+                     
+                     
+                     xsFinalNegatived = xrFinalNegatived;
+                     xsFinalPositived = xrFinalPositived;
+                      xrFinalNegatived = cx[r]-widtXperpR;
+                      xrFinalPositived = cx[r]+widtXperpR;
+                     
+                     
+                     ysFinalNegatived = yrFinalNegatived;
+                     ysFinalPositived = yrFinalPositived;
+                      yrFinalNegatived = cy[r]-widtYperpR;
+                      yrFinalPositived = cy[r]+widtYperpR;
+                 
 
 
                                     trailPositionAttribute.setXYZ(strideTrail,xrFinalNegatived, yrFinalNegatived,z)
