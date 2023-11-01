@@ -113,7 +113,7 @@
 
         <div >
         <div class="dropdown">
-          <button class="dropbtn">Starship
+          <button class="dropbtn">StrShp
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
@@ -195,7 +195,7 @@
                <a id="pzyghthe" name="t"  onclick= "
 
                    key  = '9';
-                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':'true','keyCode':key.charCodeAt(0)}));">
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
                    Harmonic Scythe!</a><br>
                <a id="balloons" name="t"  onclick= "
 
@@ -207,7 +207,13 @@
                    key  = 'V';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                    Star Stream!</a><br>
-               
+               </div>
+          </div>
+               <div class="dropdown">
+                 <button class="dropbtn">StrShp2
+                   <i class="fa fa-caret-down"></i>
+                 </button>
+                 <div class="dropdown-content">
                <a id="Clockwise Spin" name="t"  onclick= "
 
                    key  = 'D';
@@ -294,11 +300,25 @@
           </div>
           </div>
         <div class="dropdown">
-          <button class="dropbtn">Clovers
+          <button class="dropbtn">Clvr
             <i class="fa fa-caret-down"></i>
           </button>
           <div class="dropdown-content">
 
+              <input type="checkbox"  id="Variant1" name="t"  onclick= "
+                  key  = '1';
+                  callKey(new KeyboardEvent('keydown', {'key': key, altKey':true,'keyCode':key.charCodeAt(0)}));">
+                  <label for="Variant1"> Variant1!</label><br>
+              <input type="checkbox"  id="Variant1" name="t"  onclick= "
+                  key  = '2';
+                  callKey(new KeyboardEvent('keydown', {'key': key, altKey':true,'keyCode':key.charCodeAt(0)}));">
+                  <label for="Variant2">Variant2!</label><br>
+
+              <input type="checkbox"  id="Variant3" name="t"  onclick= "
+                      key  = '3';
+                      callKey(new KeyboardEvent('keydown', {'key': key, altKey':true,'keyCode':key.charCodeAt(0)}));">
+                      <label for="Variant3">  Variant3!</label><br>
+                  
               <a id="Chirality" name="t"  onclick= "
                   key  = '|';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -315,6 +335,12 @@
                  <label for="petalCount">Petal Quantity:</label>
                 <input type="number" id="petalCount" name="petalCount" class="num" onkeydown="uniforms.petals.value=document.getElementById('petalCount').value-6.">
                     </p>
+                    
+                    <input type="checkbox" id="omniCore" name="t"  onclick= "
+                 key  = 'o';
+                 callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+              <label for="dynamicCoring">omniCORE!</label><br>
+              
                     <label for="coringConstant">Coring Value (.5-2.):</label>
                    <input type="number" id="coringConstant" name="coringConstant" class="num" onkeydown=
                        "coringValue=document.getElementById('coringConstant').value;
@@ -407,7 +433,13 @@ coreData.fill(coringValue);">
                                      key  = '8';
                                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                                  ReFactor Clover!</a><br>
-                                  
+                                 </div>
+          </div>
+                               <div class="dropdown">
+                                 <button class="dropbtn">Clvr2
+                                   <i class="fa fa-caret-down"></i>
+                                 </button>
+                                 <div class="dropdown-content">
                                   <label for="Base Number">Log this of x^3 (maybe 1.5-4:</label>
                                  <input type="number" id="Base Number" name="Base Number" class="num" onkeydown="uniforms.baseN.value=document.getElementById('Base Number').value">
                                      </p>
@@ -609,6 +641,18 @@ coreData.fill(coringValue);">
                   key  = '4';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                   <label for="4rez">4 pixels per pixel</label><br>
+                  <input type="radio" id="5rez" name="colorMode" onclick="
+                  key  = '5';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                  <label for="5rez">5 pixels per pixel</label><br>
+                  <input type="radio" id="6rez" name="colorMode" onclick="
+                  key  = '6';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                  <label for="6rez">6 pixels per pixel</label><br>
+                  <input type="radio" id="7rez" name="colorMode" onclick="
+                  key  = '7';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                  <label for="7rez">7 pixels per pixel</label><br>
                   <a id="Incrementally Increase Resolution" name="t"  onclick="
                   key  = '_';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -853,6 +897,9 @@ void main(){
     uniform float note;
 
     uniform float refactorCores;
+    uniform bool clvrVariant1;
+    uniform bool clvrVariant2;
+    uniform bool clvrVariant3;
 
     uniform bool dynamicDance;
     uniform bool Spoker;
@@ -1183,7 +1230,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
               float increment =note*balloonsON+12. + twistStar + x*24.;
               increment*=2.;
           //  float increment = mod(log(mod(note*flipStar+twistStar,12.)+x*24.)/log(pow(2.,1./12.)),24.);
-           if(abs(mod(increment,1.)-.1)<length(x)/(increment+sizeReset)*49.87)balloon=hsv2rgb(vec3((mod(4.-increment+twistStar,12.))/12.,.5,1.));
+           if(abs(mod(increment,1.)-.1)<length(x)/(increment+sizeReset)*43.)balloon=hsv2rgb(vec3((mod(4.-increment+twistStar,12.))/12.,.5,1.));
             
         return balloon;
     }
@@ -1397,7 +1444,7 @@ if(SPHEREofTheLORD)s *= (length(s)-zoom/length(coords.yx)/2.);
 if(squareClover)s/=vec2(sqrt(2.-s.x*s.x),sqrt(2.-s.y*s.y))/s;
 
 
-
+vec2 pCenterCored=s;
 
 
 
@@ -1566,9 +1613,9 @@ vec2 lastS = s;
         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
        );//x**3
-   //  s*=length(lastS);
- // s -=coords.yx*coords.yx*coords.yx;
-  //s-=p*dstnce;
+      if(clvrVariant1)  s*=length(lastS);
+      if(clvrVariant2)s -=zoom/coords.yx;
+      if(clvrVariant3)s-=pCenterCored*dstnce;
 
    
        if(dotted)s/=dot(-m,t)*dot(m,-t);
