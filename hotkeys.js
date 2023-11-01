@@ -197,6 +197,10 @@ window.key = " ";
 
     else if (x==0)
     {window.movementRate=1.;; uniforms[ "rate" ].value=1.; }
+    else if(x == 1&&event.altKey&&!event.shiftKey)uniforms.clvrVariant1.value=!uniforms.clvrVariant1.value;
+    else if(x == 2&&event.altKey&&!event.shiftKey)uniforms.clvrVariant2.value=!uniforms.clvrVariant2.value;
+    else if(x == 3&&event.altKey&&!event.shiftKey)uniforms.clvrVariant3.value=!uniforms.clvrVariant3.value;
+
     else if(x == 7&&event.altKey&&!event.shiftKey)uniforms.musicAngelMan.value=(uniforms.musicAngelMan.value+1)%3;
     else if(x == 8&&event.altKey&&!event.shiftKey)
     {

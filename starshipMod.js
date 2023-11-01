@@ -540,6 +540,9 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
  balloonsON:{value: 0.},
  sparklesON:{value: false},
  SPHEREofTheLORD:{value: false},
+ clvrVariant1:{value: false},
+ clvrVariant2:{value: false},
+ clvrVariant3:{value: false},
 
        Spoker:{value: true    },
        spokelover:{value: false    },
