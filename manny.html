@@ -130,7 +130,7 @@
                     let b=document.getElementById('RadialWarp').value;
                     if(!isNaN(b)&&b>0)radialWarp=b;">
                   <br>
-                  <label for="fretCount">Fruits(max 2730)</label>
+                  <label for="fretCount">Fruits(max 1365)</label>
 
                   <input type="number" id="fretCount" name="fretCount" class="num" onkeydown="
                           number = document.getElementById('fretCount').value;
@@ -778,7 +778,8 @@ coreData.fill(coringValue);">
         uniform int eden;
 
         const float PI = 3.1415927410125732;
-        const float gr = 1.618033988749;
+        const float gr = 1.61803398874989484820458683436563811772030917980576286213544862270526046281890244970720720418939113748475408807538689175212663386222353693179318006076672635443338908659593958290563832266131992829026788067520876689250171169620703222104321626954862629631361443814975870122034080588795445474924618569536486444924104432077134494704956584678850987433944221254487706647;
+        const float leaf = -1.3247179572447460259609088544780973407344040569017333645340150503028278512455475940546993479817872803299109209947422074251089026390458977955943147570967234717541668390388674187517369315842535499082466223545337273504589879909568150627745509802486213012169894157524574548625075626524610368938904839932269952074975962828868556908150704513696109853352577281586033441141927828273765296032993584674231028483241695239006108543338219;
         float zin(float x){return -sin(x);}
         float coz(float x){return -cos(x);}
         
@@ -927,6 +928,8 @@ uniform bool NightAndDay;
 
     const float PI = 3.1415927410125732;
     const float gr = 1.618033988749;
+    const float leaf = -1.32471795724474;
+
     float lerp(float a) {return -abs(mod(a,2.)-1.);}
     float zin(float x){return -sin(x);}
     float coz(float x){return -cos(x);}
@@ -1178,8 +1181,9 @@ vec3 faceFORWARD(vec2 p,vec2 t){
         if (balloonsON==-1.)sizeReset=120.;
           float x =  length((vUv-.5)*max(resolution.x,resolution.y)/resolution.yx);
               float increment =note*balloonsON+12. + twistStar + x*24.;
+              increment*=2.;
           //  float increment = mod(log(mod(note*flipStar+twistStar,12.)+x*24.)/log(pow(2.,1./12.)),24.);
-           if(abs(mod(increment,1.)-.1)<length(x)/(increment+sizeReset)*24.)balloon=hsv2rgb(vec3((mod(4.-increment+twistStar,12.))/12.,.5,1.));
+           if(abs(mod(increment,1.)-.1)<length(x)/(increment+sizeReset)*49.87)balloon=hsv2rgb(vec3((mod(4.-increment+twistStar,12.))/12.,.5,1.));
             
         return balloon;
     }
@@ -1440,7 +1444,7 @@ if(MetaCored)hyperCore=
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 
    
-      hyperCore+=.5/log(.5)/equilibriator;
+   //   hyperCore+=.25/log(.5)/equilibriator;
 if(cloverSlide&&!wheel)hyperCore+=1./log(.5);
    else if(cloverSlide&&wheel)hyperCore+=.5/log(.5);
 
@@ -1826,7 +1830,7 @@ return clamp(o,0.,1.);}
                                else {z=3.*vec2(-1./((z.x*z.x-z.y*z.y)-g.x+d.x),(77.0*z.x*z.y-(2.+t.y)*g.y+d.y));
                                      z.y = -1./z.y;}
                  //vv head vv
-                                       g=p*1.3247;
+                                       g=p*-leaf;
                                        z=g;
                           if(abs(p.y)<4.)for (int f=0;f<21;f+=1)if(abs(z.y)>21.&&(f==int(floor(.8+t.y*.4)))){l=0.;break;}
                                else if(abs(z.y)>19.&&(f>4))l=1.;
@@ -2303,7 +2307,7 @@ vec3 xtol(vec2 s, vec2 t){
                                           m += abs(s.x+s.y);
                                           }
                                       
-                                  return vec3(m*l, m*l/400.,-sin(m*1.618)*l);}
+                                  return vec3(m*l, m*l/400.,-sin(m*gr)*l);}
 
 
                           vec3 scroll(vec2 p,    vec2 unleashed) {
@@ -2440,7 +2444,7 @@ if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time*rate,PI*2.));
 vec2 dance = vec2(0.);
                                    vec2 dance2 = vec2(0.);
            if (morph>.5){
-                dance = vec2(-sin(time+time2dance), -sin((time+time2dance)*-1.618))*zoom+(spunC.yx+.5)*log(pow(zoom,1.618))/log(1.618)*zoom*.5;
+                dance = vec2(-sin(time+time2dance), -sin((time+time2dance)*-gr))*zoom+(spunC.yx+.5)*log(pow(zoom,gr))/log(gr)*zoom*.5;
                 //heart dance
                 float lfc=length(freed(coords));
                    dance2 = vec2(   -abs(lfc/(lfc-zoom)) -lfc/(lfc+zoom)*2./3.,
@@ -2569,7 +2573,7 @@ vec2 dance = vec2(0.);
                        swordSkew+=1.;}
                    else if (Character==7)mny=ox(fourcreaturePlayerP,vec2(inversion,0.))+bodyFourCreatureCharacter(characterOnTrailP,moveDynamic);
                    else if (Character==8)mny=man(fourcreaturePlayerP,vec2(inversion,0.))+bodyFourCreatureCharacter(characterOnTrailP,moveDynamic);
-                   else if (Character==9)mny=bod(characterOnTrailP,moveDynamic)+heart(characterPSpunToKey*(2.)*pow(1.3247,3.),moveDynamic*3.)+clamp(face(characterOnTrailP*1.22112211,moveDynamic)+heart(characterPSpunToKey*min(resolution.x,resolution.y)/max(resolution.x,resolution.y)
+                   else if (Character==9)mny=bod(characterOnTrailP,moveDynamic)+heart(characterPSpunToKey*(2.)*pow(-leaf,3.),moveDynamic*3.)+clamp(face(characterOnTrailP*1.22112211,moveDynamic)+heart(characterPSpunToKey*min(resolution.x,resolution.y)/max(resolution.x,resolution.y)
                                                                             /gr,moveDynamic/2.5),0.,1.);
                                                                            // else if (Character==10)mny=sealedMan(characterOnTrailP,moveDynamic);
                                                                          //   else if (Character==11)mny=sealedWoman(characterOnTrailP/1.44,moveDynamic);
@@ -2577,7 +2581,7 @@ vec2 dance = vec2(0.);
            }
 
                                  
-     float heartSize = gr*gr*1.3247;
+     float heartSize = gr*gr*-leaf;
      vec2 heartShift = vec2(0);
 
     if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}

@@ -1,5 +1,6 @@
 var THREE;
-
+const leaf = -1.3247179572447460259609088544780973407344040569017333645340150503028278512455475940546993479817872803299109209947422074251089026390458977955943147570967234717541668390388674187517369315842535499082466223545337273504589879909568150627745509802486213012169894157524574548625075626524610368938904839932269952074975962828868556908150704513696109853352577281586033441141927828273765296032993584674231028483241695239006108543338219;
+const gr = 1.61803398874989484820458683436563811772030917980576286213544862270526046281890244970720720418939113748475408807538689175212663386222353693179318006076672635443338908659593958290563832266131992829026788067520876689250171169620703222104321626954862629631361443814975870122034080588795445474924618569536486444924104432077134494704956584678850987433944221254487706647
 if(window.useCDN)import("three").then(module => { THREE=module})
 .catch((err) => {
     console.log("Error loading threeJS module;load old Threejs instead");
@@ -38,19 +39,18 @@ window.pixelShaderSize = 7;
 const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
 window.movementRate=1.;
 window.radialWarp=1.;
-const starshipSize = Math.E**-1.3247/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
-const trailSecondsLong = 5.;
+const starshipSize = Math.E**leaf/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
+const trailSecondsLong = 14.4;
 const starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;//base Z value
 
                             const zoomFrames = 60;//frames to double zoom
-                            const inverseZoomFrames = 1./60.;//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   const mf = 1.75;
 const MR = mf/zoomFrames;
-const trailLength = zoomFrames*trailSecondsLong;
+const trailLength = Math.ceil(zoomFrames*trailSecondsLong);
 const dotSize = starshipSize;
 
-let coringValue = 1./1.3247/1.618;
+let coringValue = 1./-leaf/gr;
 let screenPressCoordX=0, screenPressCoordY=0;
 window.pointerZoom=false;
 let coordX=0., coordY=0.;
@@ -1103,7 +1103,7 @@ let noteHit=false;
 let timeStampLastNoteEnded=0.;
 let currentMeasure=1;
 let cursorMeasure=1;
-let scoreColorInversion = true;
+let scoreColorInversion = false;
 function takeNextScoreSlice(start){
      
                     osmd.setOptions({
@@ -1184,11 +1184,17 @@ function runOSMD (){
                    
                    if(!sheetTranslucent&&osmd!=null){
                      osmd.EngravingRules.PageBackgroundColor = "#ffffffff";
-                    osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
-                   scoreColorInversion= !scoreColorInversion;
                        
                    }
+                   let blackWhiteHASH = ""
+                   if(scoreColorInversion)
+                       blackWhiteHASH = "#ffffffff"
+                       else
+                           blackWhiteHASH = "#000000ff"
+                   osmd.EngravingRules.PageBackgroundColor = blackWhiteHASH;
 
+                 // osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
+                 scoreColorInversion= !scoreColorInversion;
              takeNextScoreSlice(1);
                
                
@@ -1224,7 +1230,6 @@ function runOSMD (){
 
 
                              osmd.cursor.cursorOptions.color="#"+colorSoundPURE.getHexString();//this is a frame behind if it is above colorSounds definition
-         
                              osmd.cursor.show();
          osmd.cursor.wantedZIndex="0";
 
@@ -1235,7 +1240,7 @@ function runOSMD (){
 
                  let   upOrDown = 1;
                         let frameCount = 0;
-                                           const coreData = new Float32Array(40).fill(1./1.324717);
+                                           const coreData = new Float32Array(40).fill(1./-leaf);
                                            const omniData = new Float32Array(40).fill(0);;
                                            let hyperCorePixel = new Uint8Array(4);
 
@@ -1289,7 +1294,7 @@ function runOSMD (){
 
         uniforms[ "externalCores" ].value =uniforms[ "centralCores" ].value/1.5+Math.log(distC)*logStabilizationConstant*equilibriator;
            // uniforms[ "externalCores" ].value+=1./Math.log(.5)/equilibriator;
-         uniforms[ "externalCores" ].value +=.5/Math.log(.5);
+       //  uniforms[ "externalCores" ].value +=.25/Math.log(.5);
          if(uniforms.cloverSlide.value)uniforms[ "externalCores" ].value +=1./Math.log(.5);
          else if(uniforms.cloverSlide.value&&uniforms.wheel.value)hyperCore+=.5/Math.log(.5);
 
@@ -1299,7 +1304,7 @@ function runOSMD (){
         if(uniforms[ "Spoker" ].value&&uniforms[ "MetaCored" ].value)
             uniforms[ "externalCores" ].value*=4./3./(1./Math.log(3.)+(1.-1./Math.log(3.))/1.75);
          
-         var metaCoreDriveFactor =2.3247/1.618033988749;
+         var metaCoreDriveFactor =(1.-leaf)/gr;
          uniforms[ "externalCores" ].value *= Math.log(2.)/Math.log(metaCoreDriveFactor);
     }
     
@@ -1436,7 +1441,7 @@ lineMat.color = new THREE.Color("black");
             tx = spirray0[r];
             ty =  spirray1[r];
            //  greynessLast = greyness
-            if(uniforms[ "metronome" ].value>1.)greyness=.5-.5*Math.sqrt(tx*tx+ty*ty)**1.3247*metroPhase;//seems wrong
+            if(uniforms[ "metronome" ].value>1.)greyness=.5-.5*Math.sqrt(tx*tx+ty*ty)**-leaf*metroPhase;//seems wrong
             //else
            // if(r%3==0)greyness=-1;
             // greyness=r/bufferPortion;
@@ -1710,7 +1715,6 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                incrementation++;
                 let widt = starshipSize/(EldersLeg/24.)**.5/incrementation/2.;
                 if (g==0&&EldersLeg==24)widt*=2.;
-
                 const arm =(flip*(g+oddSkew)*radialWarp+twist)%EldersLeg/EldersLeg*pi*2.;
  
                 let lengt = (testar[(g+EldersLeg/2.)%EldersLeg]-minTestar)/(maxTestar-minTestar);
@@ -1809,11 +1813,11 @@ var fingerStride = 0;
          for (var t=0; t<12; t++) {
              
              for (var g=0; g<10; g++) {
-                 const widt = starshipSize**(2.41421);
+                 const widt = pi/50.;
                  const finger = (isFinite(twelve[t][g]))?twelve[t][g]:0;
                  let arm =(g+9)/10.*pi*2.;
 
-                 const lengt =(isFinite(maxFinger)&&maxFinger!=0)? (finger)/maxFinger/1.5 : 0;
+                 const lengt =(isFinite(maxFinger)&&maxFinger!=0)? (finger)/maxFinger/(1.-widt) : 0;
 
 
                      var vop = new THREE.Color();
@@ -2070,7 +2074,7 @@ var loopLimit = trailDepth;
                             transparencyOfTrail =1.-seg;
                      
                      let stylus=.5;
-                     if(timeElapsedSinceRecording<.25)stylus=BlackOrWhiteTrail;
+                     if(timeElapsedSinceRecording<.15)stylus=BlackOrWhiteTrail;
 
                       red2  = red1;
                       green2  = green1;
@@ -2547,7 +2551,7 @@ function calculatePitch ()
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 
 let tolerance; //, confidence;
-if(highORlow==1)tolerance=(totalAMP-1./bufferSize**1.3247);
+if(highORlow==1)tolerance=(totalAMP-1./bufferSize**-leaf);
 else if (highORlow==2)tolerance = .5;//when I play different notes on harmonica it mostly hears C, this clears up the distinction of the notes
                         
 let period;
