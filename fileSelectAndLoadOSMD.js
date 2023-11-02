@@ -64,7 +64,6 @@ function loadScore(e) {
         renderSingleHorizontalStaffline:true,
       drawFromMeasureNumber: 1,
       drawUpToMeasureNumber: 2.+Math.floor(window.innerWidth/window.innerHeight*2.),
-    graphicalMusicPage: false
     });
     osmd.TransposeCalculator = new opensheetmusicdisplay.TransposeCalculator();
 
