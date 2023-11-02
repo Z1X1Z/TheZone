@@ -63,8 +63,7 @@ function loadScore(e) {
         //skyBottomLineBatchMinMeasures:0,//high number to disable
         renderSingleHorizontalStaffline:true,
       drawFromMeasureNumber: 1,
-      drawUpToMeasureNumber: 2.+Math.floor(window.innerWidth/window.innerHeight*2.),
-        graphicalMusicPage: false
+      drawUpToMeasureNumber: 2.+Math.floor(window.innerWidth/window.innerHeight*2.)
     });
     osmd.TransposeCalculator = new opensheetmusicdisplay.TransposeCalculator();
 
@@ -83,6 +82,7 @@ function loadScore(e) {
 
           onWindowResize()//this calls osmdResize() who calls osmd.render(). It is from starshipMod.js so we need it to load after that is loaded in x.html
           //console.log("e.target.result: " + e.target.result);
+            
             osmd.cursor.wantedZIndex="0";
 
            osmd.cursor.show(); // this would show the cursor on the first note
