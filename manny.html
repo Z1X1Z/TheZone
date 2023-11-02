@@ -66,8 +66,8 @@
         <script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
         <script>
         var cdnOSMD="opensheetmusicdisplay.min.js";
-        if (window.useCDN&&false)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.8.4/build/opensheetmusicdisplay.min.js";
-        loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplayMODIFIED.js")//opensheetmusicdisplay.min.js
+        if (window.useCDN)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.8.4/build/opensheetmusicdisplay.min.js";
+        loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")
         </script>
         
         <script id="wadJSscript"></script>
@@ -762,7 +762,6 @@ coreData.fill(coringValue);">
     <div id="score">
         
             <div id="osmdCanvas" class="onBottom" style = "bottom:40px;"></div>
-            <div id="osmdCanvasAnchor" class="onBottom" style = "bottom:40px;"></div>
 
     </div id="score">
         <script>
