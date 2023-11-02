@@ -66,7 +66,7 @@
         <script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
         <script>
         var cdnOSMD="opensheetmusicdisplayMODIFIED.js";
-        if (window.useCDN&&false)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.8.4/build/opensheetmusicdisplay.min.js";
+        if (window.useCDN)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.8.4/build/opensheetmusicdisplay.min.js";
         loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")
         </script>
         
@@ -758,10 +758,10 @@ coreData.fill(coringValue);">
     <div id="score">
         
             <div id="osmdCanvas" class="onBottom" style = "bottom:40px;">
-                <div id="anchorDiv" class="onBottom" style = "bottom:40px;">
-            <canvas id="osmdCanvasAnchor" class="onBottom" style = "bottom:40px;"></div>
+                <div id="anchorDiv" class="onBottom">
+
+            <canvas id="osmdCanvasAnchor" class="onBottom" ></div>
             </div>
-            <canvas id="osmdCanvasCURSOR" class="onBottom" style = "bottom:40px;"></div>
 
     </div>
 
