@@ -1202,9 +1202,14 @@ function runOSMD (){
                    }
                    let blackWhiteHASH = ""
                    if(scoreColorInversion)
-                       blackWhiteHASH = "#ffffffff"
-                       else
-                           blackWhiteHASH = "#000000ff"
+                   {
+                       osmd.setOptions({defaultColorMusic: "#000000"});
+                       blackWhiteHASH = "#FFFFFF"
+                   }
+                   else{
+                       osmd.setOptions({defaultColorMusic: "#FFFFFF"});
+                       blackWhiteHASH = "#000000"
+                   }
                    osmd.EngravingRules.PageBackgroundColor = blackWhiteHASH;
 
                  // osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
