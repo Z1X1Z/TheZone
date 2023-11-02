@@ -1148,7 +1148,35 @@ function takeNextScoreSlice(start){
                 
                     */
 
-
+function setOSMDcolors()
+                                           {
+     if(osmd!=null){
+         if(sheetTranslucent){
+             
+             
+             if(scoreColorInversion)
+                 osmd.setOptions({defaultColorMusic: "#000000FF"});
+             else
+                 osmd.setOptions({defaultColorMusic: "#FFFFFFFF"});
+             
+             
+             osmd.EngravingRules.PageBackgroundColor =  "#00000000";
+         }
+         else{
+             let blackWhiteHASH = ""
+             if(scoreColorInversion)
+             {
+                 osmd.setOptions({defaultColorMusic: "#000000FF"});
+                 blackWhiteHASH = "#FFFFFFFF"
+             }
+             else{
+                 osmd.setOptions({defaultColorMusic: "#FFFFFFFF"});
+                 blackWhiteHASH = "#000000FF"
+             }
+             osmd.EngravingRules.PageBackgroundColor = blackWhiteHASH;
+         }
+     }
+ }
 function runOSMD (){
      /*
      if (sheetTranslucent) osmd.EngravingRules.PageBackgroundColor = "#ffffff00";//translucent background
@@ -1195,23 +1223,7 @@ function runOSMD (){
              osmd.cursor.next(); // advance the cursor one note
 
                if(osmd.cursor.Iterator.endReached){
-                   
-                   if(sheetTranslucent&&osmd!=null){
-                     osmd.EngravingRules.PageBackgroundColor = "#FFFFFFFF";
-                       
-                   }
-                   let blackWhiteHASH = ""
-                   if(scoreColorInversion)
-                   {
-                       osmd.setOptions({defaultColorMusic: "#000000FF"});
-                       blackWhiteHASH = "#FFFFFFFF"
-                   }
-                   else{
-                       osmd.setOptions({defaultColorMusic: "#FFFFFFFF"});
-                       blackWhiteHASH = "#000000FF"
-                   }
-                   osmd.EngravingRules.PageBackgroundColor = blackWhiteHASH;
-
+                   setOSMDcolors()
                  // osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
                  scoreColorInversion= !scoreColorInversion;
              takeNextScoreSlice(1);

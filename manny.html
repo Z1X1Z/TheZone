@@ -710,19 +710,15 @@ coreData.fill(coringValue);">
    
         if (sheetTranslucent) {
                    document.getElementById("textWindow").style="position:fixed; margin-left:50%;";
-
-                       if("osmd" in window && typeof osmd != null)  osmd.EngravingRules.PageBackgroundColor = "#ffffff00";//translucent background
                                   document.getElementById("osmdCanvas").style.bottom="40px"
         }
         else {   document.getElementById("textWindow").style="position:static;margin-left:0%;";
-
-           if("osmd" in window && typeof osmd != null) osmd.EngravingRules.PageBackgroundColor = "#ffffffff";
                                      document.getElementById("osmdCanvas").style.bottom="0px"
                                 bottomOfScreenHeight=0;
-
             }
-   
                 if("osmd" in window && typeof osmd != null){
+                        setOSMDcolors();
+
                         osmdResize();
                         adjustThreeJSWindow();
                     }
@@ -765,6 +761,8 @@ coreData.fill(coringValue);">
                 <div id="anchorDiv" class="onBottom" style = "bottom:40px;">
             <canvas id="osmdCanvasAnchor" class="onBottom" style = "bottom:40px;"></div>
             </div>
+            <canvas id="osmdCanvasCURSOR" class="onBottom" style = "bottom:40px;"></div>
+
     </div>
 
     </div id="score">
