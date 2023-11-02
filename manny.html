@@ -67,8 +67,8 @@
         
         <script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
         <script>
-        var cdnOSMD="opensheetmusicdisplayMODIFIED.min.js";
-        if (window.useCDN)cdnOSMD="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/opensheetmusicdisplayMODIFIED.min.js";
+        var cdnOSMD="opensheetmusicdisplayMODIFIED.js";
+        if (window.useCDN&&false)cdnOSMD="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/opensheetmusicdisplayMODIFIED.min.js";
         loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplayMODIFIED.min.js")
         </script>
         
@@ -762,6 +762,7 @@ coreData.fill(coringValue);">
         
             <div id="osmdCanvas" class="onBottom" style = "bottom:40px;">
                 <div id="anchorDiv" >
+                    <img id="CursorIMG"></img>
                     <canvas id="osmdCanvasAnchor"  >
                         </canvas>
                 </div>
