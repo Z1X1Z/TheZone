@@ -50,7 +50,7 @@
         -->
         <script id="shim"></script> <!-- you need to provide the .js file, see README.md-->
         <script>
-        var cdnSHIM="opensheetmusicdisplay.min.js";
+        var cdnSHIM="";
         if (window.useCDN)cdnSHIM="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js";
         loadScript("shim",cdnSHIM,"")
         </script>
@@ -66,7 +66,7 @@
         <script id="osmdJS"></script> <!-- you need to provide the .js file, see README.md-->
         <script>
         var cdnOSMD="opensheetmusicdisplayMODIFIED.js";
-        if (window.useCDN)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.8.4/build/opensheetmusicdisplay.min.js";
+        //if (window.useCDN)cdnOSMD="https://unpkg.com/opensheetmusicdisplay@1.8.4/build/opensheetmusicdisplay.min.js";
         loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")
         </script>
         
@@ -759,7 +759,6 @@ coreData.fill(coringValue);">
         
             <div id="osmdCanvas" class="onBottom" style = "bottom:40px;">
                 <div id="anchorDiv" class="onBottom">
-
             <canvas id="osmdCanvasAnchor" class="onBottom" ></div>
             </div>
 
