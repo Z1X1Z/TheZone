@@ -17,13 +17,14 @@ function handleFileSelect(evt) {
     var osmdDisplays = Math.min(files.length, maxOSMDDisplays);
 
     var output = [];
-    for (var i=0, file = files[i]; i<osmdDisplays; i++) {
+/*    for (var i=0, file = files[i]; i<osmdDisplays; i++) {
       //output.push("<li><strong>", escape(file.name), "</strong> </li>");
       output.push("<div id='osmdCanvas" + i + "'/>");
     }
     document.getElementById("list").innerHTML = "<ul>" + output.join("") + "</ul>";
 
-    
+ */
+
     
 
     
@@ -48,7 +49,7 @@ function loadScore(e) {
     let toLoad = e;
     if(typeof e.target != "undefined") toLoad=e.target.result;
 
-    var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvas", {
+    var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvasAnchor", {
       // set options here
 //https://wordpress.org/plugins/opensheetmusicdisplay/
          width:window.innerWidth,
