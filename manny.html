@@ -1028,7 +1028,7 @@ uniform bool NightAndDay;
           l=length(z)/40.;//clouds and face
           break;}
       else{
-          z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x/7.),2.0*z.x*z.y-g.y-t.y/7.);
+          z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x/5.),2.0*z.x*z.y-g.y-t.y/5.);
           l=abs(z.y)*6.;//smooths middle horn, removes some clouds
           if(z.x>-.1)l=z.x*200.;}//face with closed small holes
       return vec3(1.-l);
@@ -1062,7 +1062,7 @@ uniform bool NightAndDay;
              break;
          }
          else{
-             s=vec2(-1./(s.x*s.x-s.y*s.y-p.x+t.x/7.), 2.0*s.x*s.y-p.y-t.y/7.);
+             s=vec2(-1./(s.x*s.x-s.y*s.y-p.x+t.x/5.), 2.0*s.x*s.y-p.y-t.y/5.);
              l=abs(s.y)*3.5;//refines middle horn, optional
              if(s.x>-.1)l=s.x*50.;//closes small holes
              d+=length(s)/10.;
@@ -2671,23 +2671,27 @@ mny+=HEART*heartMultiplier;
                                  vec3 starshipMultiplier = vec3(1.);
                                  float isGrey =0.;
                                  float maxColorOfStarship=1.;
+                                 float minColorOfStarship=0.00000001;
                                  float spirographTranslucer = 1.;
 
 
 if(starOnDot!=2){
                                  if (starshipLOOKUP.x<1.&&starshipLOOKUP.y<1.&&starshipLOOKUP.x>0.&&starshipLOOKUP.y>0.)starship = texture2D(STAR,starshipLOOKUP);
                                  
+                                 if (starship.x!=0.||starship.y!=0.||starship.z!=0.)maxColorOfStarship=max(max(starship.x,starship.y),starship.z);
+                                 if (starship.x!=0.||starship.y!=0.||starship.z!=0.)minColorOfStarship=min(min(starship.x,starship.y),starship.z);
+
+                                 if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.&&starship.w>3.5/255.)mny*=starship.xyz+mny.x*(1.-mny.x);
+
                      starshipMultiplier=starship.xyz+(1.-starship.w);
                      if(starship.w>0.)starshipMultiplier=vec3(1.);
                                  if(mannyFace.z>0.)starshipMultiplier+=mannyFace;
                     if(mannyFace.z>0.)starshipMultiplier*=mannyFace;
-
                                  
   
     if (starship.x==0.&&starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=starship.x;
                                  if (starship.x==starship.y&& starship.y==starship.z&&starship.x<.51&&starship.x>.49)isGrey=starship.x;
 
-    if (starship.x!=0.||starship.y!=0.||starship.z!=0.)maxColorOfStarship=max(max(starship.x,starship.y),starship.z);
      //if (starship.x!=0.&&starship.x!=1.&&starship.x!=.5&&(starship.x+starship.y>=255.-3.5||starship.y+starship.z>=255.-3.5||starship.z+starship.x>=255.-3.5)&&starship.w==1.)spirographTranslucer=.75-(starship.x+starship.y+starship.z)/2.;
                                  }
                                  vec4 DOTstarship=vec4(0.);
