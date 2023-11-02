@@ -321,6 +321,8 @@ let pushBackCounter = 0;
                        const   lightingScaleTrail = 72;//note range for color scheme
                          const  lightingScaleStar = lightingScaleTrail*2.*2.;//convert 12 to 24 and expand by factor of 2 for a divide between the octaves of the voice (trail) and the hearing (star)
                           let note,lastNote;
+                            let BlackOrWhiteTrail=1;//also for star
+
 function  move()
 {
     if (isNaN(coordX)||(!zoomAtl41&&coordX>4.))coordX=0.;
@@ -352,8 +354,7 @@ function  move()
     }
     else{aboveThreshold = false; on = false;}
         
-        
-        
+      
         
         
         
@@ -412,6 +413,16 @@ colorSound = new THREE.Color();
                     colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);//lighting {note/x} should be 120 but it's out of the vocal range
 pitchCol[f]  = colorSoundPURE;
                     
+                                           
+                                           const nt = Math.round(note)%12;
+                                           if (nt==7||nt==5||nt==2||nt==0||nt==10)
+                                           {
+                                   BlackOrWhiteTrail=0.;
+                                           }
+                                           else
+                                           {
+                                   BlackOrWhiteTrail=1.;
+                                           }
                     
                     
                         flatline = window.movementRate;
@@ -655,7 +666,7 @@ function setFFTdependantSizes(){
      window.zoomOutRatchetThreshold=1./bufferSize;
      
      
-      star= new Float64Array(numberOfBins*3);
+      star= new Float64Array(numberOfBins*3);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
       starColors= new Float64Array(numberOfBins*4);
      
      
@@ -1424,10 +1435,7 @@ if( !window.touchMode&&!window.touchOnlyMode) {
   }
        
     frameCount=(frameCount+1)%2;
-    if(frameCount==0)
-lineMat.color = new THREE.Color("black");
-        else
-            lineMat.color = new THREE.Color("white");
+       lineMat.color = new THREE.Color("").setRGB(frameCount,frameCount,frameCount);
 
   const d = -1.;
                             
@@ -1718,12 +1726,12 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                incrementation++;
                 let widt = starshipSize/(EldersLeg/24.)**.5/incrementation/2.;
                 if (g==0&&EldersLeg==24)widt*=2.;
-                const arm =(flip*(g+oddSkew)*radialWarp+twist)%EldersLeg/EldersLeg*pi*2.;
+                const arm =(flip*(g+oddSkew+twist*EldersLeg/24.)*radialWarp)%EldersLeg/EldersLeg*pi*2.;
  
                 let lengt = (testar[(g+EldersLeg/2.)%EldersLeg]-minTestar)/(maxTestar-minTestar);
                                      if(twoOr1) {lengt/=2.**16./EldersLeg;lengt=lengt**.25;widt/=2;}
                                       const vop = new THREE.Color();
-                                       
+
                       vop.setHSL(((20*EldersLeg/24.-g-oddSkew))%EldersLeg/EldersLeg,1.,.5);
                                   
                     starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
@@ -2056,16 +2064,7 @@ var loopLimit = trailDepth;
                              let     timeElapsedSinceRecording=     uniforms["time"].value-trailTimeOfRecording[r];
                                   let transparencyOfTrail = 1., z = -1;
      let strideTrail = 0;
-                                                                                     let BlackOrWhiteTrail=1;
-                                                                                     const nt = Math.round(note)%12;
-                                                                                     if (nt==7||nt==5||nt==2||nt==0||nt==10)
-                                                                                     {
-                                                         BlackOrWhiteTrail=0.;
-                                                                                     }
-                                                                                     else
-                                                                                     {
-                                                         BlackOrWhiteTrail=1.;
-                                                                                     }
+                                                                                  
           while(loopLimit>0&&r!=f){
                  if(!trailSegmentExpired[r]&&timeElapsedSinceRecording<=trailSecondsLong){
                         // timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
