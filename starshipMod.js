@@ -1223,9 +1223,10 @@ function runOSMD (){
              osmd.cursor.next(); // advance the cursor one note
 
                if(osmd.cursor.Iterator.endReached){
-                   setOSMDcolors()
                  // osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
                  scoreColorInversion= !scoreColorInversion;
+                   setOSMDcolors()
+
              takeNextScoreSlice(1);
                
                
