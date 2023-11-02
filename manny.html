@@ -69,7 +69,7 @@
         <script>
         var cdnOSMD="opensheetmusicdisplayMODIFIED.min.js";
         if (window.useCDN)cdnOSMD="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/opensheetmusicdisplayMODIFIED.min.js";
-        loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplay.min.js")
+        loadScript("osmdJS",cdnOSMD,"opensheetmusicdisplayMODIFIED.min.js")
         </script>
         
         <script id="wadJSscript"></script>
@@ -688,7 +688,8 @@ coreData.fill(coringValue);">
                 }
                 else{
                     osmd.clear();
-                    document.getElementById("osmdCanvas").innerHTML=""; osmd=null; adjustThreeJSWindow();
+                   // document.getElementById("osmdCanvas").innerHTML="";
+                    osmd=null; adjustThreeJSWindow();
                         uniforms.scoreLoaded.value=false;
                     }'
                     >
