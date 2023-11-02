@@ -49,7 +49,7 @@ function loadScore(e) {
     let toLoad = e;
     if(typeof e.target != "undefined") toLoad=e.target.result;
 
-    var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvasAnchor", {
+    var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvas", {
       // set options here
 //https://wordpress.org/plugins/opensheetmusicdisplay/
          width:window.innerWidth,
@@ -58,7 +58,7 @@ function loadScore(e) {
         drawMetronomeMarks:false, drawPartNames:false, drawPartAbbreviations:true,
         drawMeasureNumbers:true, drawMeasureNumbersOnlyAtSystemStart:true, drawTimeSignatures:true,
         //autoResize: false,
-      backend: "svg",
+      backend: "canvas",
     preferredSkyBottomLineBatchCalculatorBackend:1,//0 Plain or 1 Webgl
         //skyBottomLineBatchMinMeasures:0,//high number to disable
         renderSingleHorizontalStaffline:true,
