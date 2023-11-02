@@ -1260,7 +1260,6 @@ function runOSMD (){
            }
 
 
-     window.osmd.render();//this calls window.osmd.render() by osmdResize()
 
                              osmd.cursor.cursorOptions.color="#"+colorSoundPURE.getHexString();//this is a frame behind if it is above colorSounds definition
                              osmd.cursor.show();
