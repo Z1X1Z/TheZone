@@ -1196,19 +1196,19 @@ function runOSMD (){
 
                if(osmd.cursor.Iterator.endReached){
                    
-                   if(!sheetTranslucent&&osmd!=null){
-                     osmd.EngravingRules.PageBackgroundColor = "#ffffffff";
+                   if(sheetTranslucent&&osmd!=null){
+                     osmd.EngravingRules.PageBackgroundColor = "#FFFFFFFF";
                        
                    }
                    let blackWhiteHASH = ""
                    if(scoreColorInversion)
                    {
-                       osmd.setOptions({defaultColorMusic: "#000000"});
-                       blackWhiteHASH = "#FFFFFF"
+                       osmd.setOptions({defaultColorMusic: "#000000FF"});
+                       blackWhiteHASH = "#FFFFFFFF"
                    }
                    else{
-                       osmd.setOptions({defaultColorMusic: "#FFFFFF"});
-                       blackWhiteHASH = "#000000"
+                       osmd.setOptions({defaultColorMusic: "#FFFFFFFF"});
+                       blackWhiteHASH = "#000000FF"
                    }
                    osmd.EngravingRules.PageBackgroundColor = blackWhiteHASH;
 
