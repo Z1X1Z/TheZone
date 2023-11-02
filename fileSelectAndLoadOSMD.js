@@ -49,7 +49,7 @@ function loadScore(e) {
     let toLoad = e;
     if(typeof e.target != "undefined") toLoad=e.target.result;
 
-    var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvas", {
+    var osmd = new opensheetmusicdisplay.OpenSheetMusicDisplay("osmdCanvasAnchor", {
       // set options here
 //https://wordpress.org/plugins/opensheetmusicdisplay/
          width:window.innerWidth,
