@@ -675,14 +675,14 @@ function setFFTdependantSizes(){
       star= new Float64Array(numberOfBins*3);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
       starColors= new Float64Array(numberOfBins*4);
      
-     
+                        starArms = numberOfBins;
+                      
       starCount = Math.ceil(starArms*60*secondsToEdge);
 
       starStreamPoints= new Float64Array(starCount*3*6);
       starStreamColors= new Float64Array(starCount*4*6);
      
-      starArms = numberOfBins;
-    
+
                                  testar = new Float64Array((EldersLeg>0)?EldersLeg:0);
      
                                   testarContinuous =new Float64Array(starArms);
