@@ -1086,10 +1086,13 @@ function zoomRoutine(){
                     function mcphrth(){
      if(window.haptic){
          let vibrateArrayNew=[];
-             
+             let vibFreq = 50*2**(note%12/12.)
              if(on){
-                     vibrateArrayNew.push(250);
-                 vibrateArrayNew.push(0);
+                 for(var t = 0; t<2; t++)
+                 {
+                     vibrateArrayNew.push(vibFreq);
+                     vibrateArrayNew.push(vibFreq/8.);
+                 }
              }
              else {
                  vibrateArrayNew.push(0);
@@ -1100,7 +1103,7 @@ function zoomRoutine(){
              try{error = navigator.vibrate(vibrateArrayNew );}
              catch(e){ error+=e;}
              
-             setTimeout(mcphrth,250);// may work on touch instead of recursive calls which seems to bug
+             setTimeout(mcphrth,vibFreq);// may work on touch instead of recursive calls which seems to bug
          }
 }
 //this doesn't work, and it only would work on android not on firefox
