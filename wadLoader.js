@@ -129,37 +129,20 @@ let c = document.getElementById("container");
                                  
                                  
                                 var pressure = 1.;
-                                function getPressure(event){
-                                   if (event.pressure === 0) {
-                                     // No pressure
-                                       pressure=1;
-                                   } else if (event.pressure === 1) {
-                                     pressure = 1;
-                                   }
-            
-         else if (event.pressure === .5) {
-          pressure = 1;
-        }else {
-                                     // Default
-                                     pressure = event.pressure;
-                                   }
-                                }
-             c.addEventListener(
-               "pointerdown",getPressure
-               ,
-               false,
-             );
-                                 c.addEventListener(
-                                   "pointermove",getPressure
-                                   ,
-                                   false,
-                                 );
+    function getPressure(event){
+        if (event.pressure === 0) pressure=1;
+        else if (event.pressure === 1) pressure = 1;
+        else if (event.pressure === .5) pressure = 1;
+        else pressure = event.pressure;
+    }
+             c.addEventListener("pointerdown",getPressure,false);
+              c.addEventListener("pointermove",getPressure,false);
+
                                  
 if (//navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' &&)
 navigator.maxTouchPoints > 0){
     c.addEventListener('touchstart', function(e)
-                               {
-        //mcphrth();//reproc vibrate
+    {
 
      //   e.stopImmediatePropagation();          //e.preventDefault();
 c.focus();//this is to make the panel menu go down on android when you press on the container of the game
@@ -181,6 +164,7 @@ c.addEventListener('touchmove', function(e) {
 
 c.addEventListener('touchend', function(e){
         window.pointerZoom=false;
+    
         if(!window.touchMode){
             
             for(var o=0; o<e.changedTouches.length; o++)
@@ -195,6 +179,7 @@ c.addEventListener('touchend', function(e){
 
     c.addEventListener('touchcancel', function(e){
         window.pointerZoom=false;
+        
         if(!window.touchMode){ for(var o=0; o<e.changedTouches.length; o++)
         {
             let tn = touchNumber.get(e.changedTouches[o].identifier)
@@ -224,6 +209,7 @@ c.addEventListener('mousedown', function(e){
     
     c.addEventListener('mouseup', function(e){
         window.pointerZoom=false;
+        
         if(!window.touchMode&& typeof(Wad)=="function"){sound[0].stop();sound2[0].stop();}
         e.preventDefault(); e.stopImmediatePropagation();
     }, false);
