@@ -2107,7 +2107,7 @@ return
                    z=g;
                    for (int f=0;f<10;f+=1)if(abs(z.x+abs(z.y))>27.&&f>4){l=1.;break;}
                    else{z=vec2(-1./((z.x*z.x-z.y*z.y)-g.x+t.x/8.),(2.0*z.x*z.y-g.y+t.y/8.));
-                        z*=pow(z.x,z.x);}
+                        z*=pow(abs(z.x),z.x);}
                    /*
                //vv mandelbrot\heart vv
                    g=p*2.;

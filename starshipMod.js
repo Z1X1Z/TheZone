@@ -68,24 +68,23 @@ let colorSound;
 let colorSoundPURE;
 let center = false;
      
-/*let mobile = false;
+let mobile = false;
 
       //vvvvbelow line partly from https://code-boxx.com/detect-mobile-device-javascript/
 
     if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
       {
-          rez=.5;
+          rez=1./4.;
           //fftSize=512;
           //trailLength = 144;
           mobile=true;
       }
-      else if(navigator.userAgent.toLowerCase().match(/mobile/i)){
-           rez=.5;
+       if(navigator.userAgent.toLowerCase().match(/mobile/i)){
+           rez=1./4.;
            //fftSize=512;
            //trailLength = 144;
            mobile=true;
-       }*/
-
+       }
 
 
 //key press handling vvvv
