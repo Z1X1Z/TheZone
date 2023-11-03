@@ -74,13 +74,13 @@ let mobile = false;
 
     if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
       {
-          rez=1./4.;
+          rez=.5;
           //fftSize=512;
           //trailLength = 144;
           mobile=true;
       }
        if(navigator.userAgent.toLowerCase().match(/mobile/i)){
-           rez=1./4.;
+           rez=.5;
            //fftSize=512;
            //trailLength = 144;
            mobile=true;
