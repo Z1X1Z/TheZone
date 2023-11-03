@@ -196,7 +196,7 @@ window.key = " ";
     else if (key=="_"){rez *=1.1; renderer.setPixelRatio( rez);}
 
     else if (x==0)
-    {window.movementRate=1.;; uniforms[ "rate" ].value=1.; }
+    {window.movementRate=movementRateORIGINAL; uniforms[ "rate" ].value=movementRateORIGINAL; }
     else if(x == 1&&event.altKey&&!event.shiftKey)uniforms.clvrVariant1.value=!uniforms.clvrVariant1.value;
     else if(x == 2&&event.altKey&&!event.shiftKey)uniforms.clvrVariant2.value=!uniforms.clvrVariant2.value;
     else if(x == 3&&event.altKey&&!event.shiftKey)uniforms.clvrVariant3.value=!uniforms.clvrVariant3.value;
