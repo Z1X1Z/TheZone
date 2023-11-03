@@ -322,7 +322,7 @@ let pushBackCounter = 0;
                          const  lightingScaleStar = lightingScaleTrail*2.*2.;//convert 12 to 24 and expand by factor of 2 for a divide between the octaves of the voice (trail) and the hearing (star)
                           let note,lastNote;
                             let BlackOrWhiteTrail=1;//also for star
-
+                            let starMajorMinor=.5;
 function  move()
 {
     if (isNaN(coordX)||(!zoomAtl41&&coordX>4.))coordX=0.;
@@ -403,6 +403,8 @@ lastNote = note;
  note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
  uniforms.note.value=note;
 const t =  (note )*flip+twist/2;
+                    if(on)
+                    {
 if(isFinite(t))angle = -(t*radialWarp);
 //angle-=1/radialWarp;
                     const reversableColor=((angle/12./radialWarp+twist/24.)*flip+1./3.)%1.;
@@ -424,7 +426,11 @@ pitchCol[f]  = colorSoundPURE;
                                    BlackOrWhiteTrail=1.;
                                            }
                     
-                    
+                                           
+                                          const bwPRIMER = .125;
+                                           starMajorMinor = (BlackOrWhiteTrail+bwPRIMER)/(1.+bwPRIMER)/2.+.25
+                                           }
+                                           else starMajorMinor=.5;
                         flatline = window.movementRate;
                        if(window.movementRate<1.) flatline = 1.;
                     
@@ -1273,8 +1279,8 @@ function runOSMD (){
                  let   upOrDown = 1;
                         let frameCount = 0;
                                            const coreData = new Float32Array(40).fill(1./-leaf);
-                                           const omniData = new Float32Array(40).fill(0);;
-                                           let hyperCorePixel = new Uint8Array(4);
+                                           const omniData = new Float32Array(40).fill(0.);;
+                                           let hyperCorePixel = new Uint8Array(4).fill(0.);
 
                                            
                                            let     coreTexture;
@@ -1749,8 +1755,7 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                 let lengt = (testar[(g+EldersLeg/2.)%EldersLeg]-minTestar)/(maxTestar-minTestar);
                                      if(twoOr1) {lengt/=2.**16./EldersLeg;lengt=lengt**.25;widt/=2;}
                                       const vop = new THREE.Color();
-
-                      vop.setHSL(((20*EldersLeg/24.-g-oddSkew))%EldersLeg/EldersLeg,1.,.5);
+                      vop.setHSL(((20/24.*EldersLeg-g-oddSkew))%EldersLeg/EldersLeg,lengt,starMajorMinor);
                                   
                     starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
                     starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,1.)
