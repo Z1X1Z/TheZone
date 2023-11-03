@@ -1103,7 +1103,7 @@ function zoomRoutine(){
              try{error = navigator.vibrate(vibrateArrayNew );}
              catch(e){ error+=e;}
              
-             setTimeout(mcphrth,vibFreq);// may work on touch instead of recursive calls which seems to bug
+             setTimeout(mcphrth,vibFreq*2.);// may work on touch instead of recursive calls which seems to bug
          }
 }
 //this doesn't work, and it only would work on android not on firefox
