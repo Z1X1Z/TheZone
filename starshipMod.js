@@ -2099,7 +2099,9 @@ var loopLimit = trailDepth;
                             transparencyOfTrail =1.-seg;
                      
                      let stylus=.5;
-                     if(timeElapsedSinceRecording<.15)stylus=BlackOrWhiteTrail;
+                     let timeElapsedEXPONENTIAL = Math.log(24.-timeElapsedSinceRecording*12.)/Math.log(2.**(1./12.));
+                    let  timeMinusX = timeElapsedSinceRecording-1.;
+                     if(timeMinusX<0.&&timeElapsedEXPONENTIAL%1.<Math.sign(timeMinusX)*timeMinusX%1.)stylus=BlackOrWhiteTrail;
 
                       red2  = red1;
                       green2  = green1;
@@ -2576,7 +2578,7 @@ function calculatePitch ()
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 
 let tolerance; //, confidence;
-if(highORlow==1)tolerance=(totalAMP-1./bufferSize**-leaf);
+if(highORlow==1)tolerance=(totalAMP-1./bufferSize**(-leaf*gr));
 else if (highORlow==2)tolerance = .5;//when I play different notes on harmonica it mostly hears C, this clears up the distinction of the notes
                         
 let period;
