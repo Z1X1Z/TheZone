@@ -37,7 +37,8 @@ window.zoom=1.;
 
 window.pixelShaderSize = 7;
 const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
-window.movementRate=1.;
+const movementRateORIGINAL = gr/-leaf
+window.movementRate=movementRateORIGINAL;
 window.radialWarp=1.;
 const starshipSize = Math.E**leaf/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
 const trailSecondsLong = 14.4;
@@ -431,7 +432,7 @@ pitchCol[f]  = colorSoundPURE;
                                            }
                                            else starMajorMinor=.5;
                         flatline = window.movementRate;
-                       if(window.movementRate<1.) flatline = 1.;
+                       if(window.movementRate<movementRateORIGINAL) flatline = 1.;
                     
                     
          angle = ((angle+6*radialWarp)/12.)%1*2*pi;
@@ -2083,6 +2084,8 @@ var loopLimit = trailDepth;
 
                  }
                  
+                         const LogTwoPowerOfTwelfth=Math.log(2.**(1./12.))
+
                              let     timeElapsedSinceRecording=     uniforms["time"].value-trailTimeOfRecording[r];
                                   let transparencyOfTrail = 1., z = -1;
      let strideTrail = 0;
@@ -2098,8 +2101,15 @@ var loopLimit = trailDepth;
                             transparencyOfTrail =1.-seg;
                      
                      let stylus=.5;
-                     let timeElapsedEXPONENTIAL = Math.log(24.-timeElapsedSinceRecording*12.)/Math.log(2.**(1./12.));
-                    let  timeMinusX = timeElapsedSinceRecording-1.;
+                 
+                     let timeElapsedEXPONENTIAL = Math.log(24.-timeElapsedSinceRecording*12.)/LogTwoPowerOfTwelfth;
+                     let timeElapsedScaled=timeElapsedSinceRecording;
+
+                     if (timeElapsedEXPONENTIAL<Math.log(23.)/LogTwoPowerOfTwelfth)
+                     {timeElapsedEXPONENTIAL *= 2.;
+                         timeElapsedScaled*=2.;
+                     }
+                    let  timeMinusX = timeElapsedScaled-1.;
                      if(timeMinusX<0.&&timeElapsedEXPONENTIAL%1.<Math.sign(timeMinusX)*timeMinusX%1.)stylus=BlackOrWhiteTrail;
 
                       red2  = red1;
