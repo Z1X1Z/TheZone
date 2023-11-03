@@ -1086,12 +1086,12 @@ function zoomRoutine(){
                     function mcphrth(){
      if(window.haptic){
          let vibrateArrayNew=[];
-             let vibFreq = 50*2**(note%12/12.)
+             let vibFreq = 50*2**(note%48./12.)
              if(on){
-                 for(var t = 0; t<2; t++)
+                 for(var t = 0; t<4; t++)
                  {
                      vibrateArrayNew.push(vibFreq);
-                     vibrateArrayNew.push(vibFreq/8.);
+                     vibrateArrayNew.push(1);
                  }
              }
              else {
