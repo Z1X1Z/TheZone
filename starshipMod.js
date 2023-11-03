@@ -1086,7 +1086,7 @@ function zoomRoutine(){
                     function mcphrth(){
      if(window.haptic){
          let vibrateArrayNew=[];
-             let vibFreq = 50*2**(note%48./12.)
+             let vibFreq = 50.*2.**((note+24)%48./12.)
              if(on){
                  for(var t = 0; t<4; t++)
                  {
