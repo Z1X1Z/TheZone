@@ -802,20 +802,20 @@ coreData.fill(coringValue);">
               }
               else if(!blocked&&onMenuHeader)
               {ae.style.display="block";blocked=true;
-                  document.activeElement.style.backgroundColor="green";
+                  ae.parentElement.style.backgroundColor="green";
 
               }
               else if(ae.style.display=="none"||ae.style.display=="")
               {blocked=true;
 
               ae.style.display="block";
-              document.activeElement.style.backgroundColor="green";
+              ae.parentElement.style.backgroundColor="green";
 
               }
               else {
                   blocked=false;
                   ae.style.display="none";
-                  document.activeElement.style.backgroundColor="rgba(127.5,127.5,127.5,.5)";
+                  ae.parentElement.style.backgroundColor="rgba(127.5,127.5,127.5,.5)";
 
                   }          aeid=ae.id;
 
