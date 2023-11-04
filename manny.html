@@ -115,10 +115,8 @@
 
         <div >
         <div class="dropdown">
-          <button class="dropbtn">StrShp
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-content">
+          <button  class="dropbtn">StrShp
+          <div id="m1" class="dropdown-content">
               <!--https://www.w3schools.com/tags/att_input_type_number.asp this is the link for the below number code profile-->
             <!--  <label for="pitch Sample Size">pitch detection frames (1-2048):</label>
              <input type="number" id="pitch Sample Size" name="pitch Sample Size" class="num" min="1" max = "2048" onkeydown="Math.floor(fractionOfFrame=document.getElementById('pitch Sample Size').value)">
@@ -215,12 +213,12 @@
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                    Star Stream!</a><br>
                </div>
+          </button>
           </div>
                <div class="dropdown">
                  <button class="dropbtn">StrShp2
-                   <i class="fa fa-caret-down"></i>
-                 </button>
-                 <div class="dropdown-content">
+                 
+                 <div id="m2" class="dropdown-content">
                <a id="Clockwise Spin" name="t"  onclick= "
 
                    key  = 'D';
@@ -305,12 +303,11 @@
                    Manny On Trail!</a><br>
 
           </div>
+               </button>
           </div>
         <div class="dropdown">
           <button class="dropbtn">Clvr
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-content">
+          <div  id="m3" class="dropdown-content">
 
               <input type="checkbox"  id="Variant1" name="t"  onclick= "
                   key  = '1';
@@ -441,12 +438,12 @@ coreData.fill(coringValue);">
                                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                                  ReFactor Clover!</a><br>
                                  </div>
+          </button>
+
           </div>
                                <div class="dropdown">
                                  <button class="dropbtn">Clvr2
-                                   <i class="fa fa-caret-down"></i>
-                                 </button>
-                                 <div class="dropdown-content">
+                                 <div  id="m4" class="dropdown-content">
                                   <label for="Base Number">Log this of x^3 (maybe 1.5-4:</label>
                                  <input type="number" id="Base Number" name="Base Number" class="num" onkeydown="uniforms.baseN.value=document.getElementById('Base Number').value">
                                      </p>
@@ -511,13 +508,13 @@ coreData.fill(coringValue);">
             </form>
 
                       </div>
+                                 </button>
+
         </div>
         
         <div class="dropdown">
           <button class="dropbtn">Extras
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-content">
+          <div  id="m5" class="dropdown-content">
                <input type="checkbox" id="Friends" name="t"  onclick= "
                    key  = 'f';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -613,14 +610,13 @@ coreData.fill(coringValue);">
                
                
         </div>
+          </button>
+
     </div>
         
         <div class="dropdown">
           <button class="dropbtn">Resolution
-            <i class="fa fa-caret-down"></i>
-          </button>
           <div id="resolutionDropContent" class="dropdown-content" style="column-count: 1">
-              <br>
               <label for="rez">Pixels per pixel</label>
              <input type="number" id="rez" name="rez" class="num" onkeydown="
                             rez=window.devicePixelRatio/document.getElementById('rez').value
@@ -670,19 +666,14 @@ coreData.fill(coringValue);">
                       Reduce resolution!</a><br>
                   
               </div>
+          </button>
+
                   </div>
         
-        <script>//used for resetting column counts for screen porportion in onWindowResize in starshipMod
-            var menuBoxes = document.getElementsByClassName("dropdown-content")
-            var rezBox = document.getElementById("resolutionDropContent");
-        </script>
-
-        </div>
-        <script src="fileSelectAndLoadOSMD.js"></script>
-        
-<div>
-    <p>
-        <div id="hotkeyHolder">
+        <div class="dropdown">
+          <button class="dropbtn">Score
+          <div id="scoreDropContent" class="dropdown-content" style="font-size:1em; column-count:1;">
+              
           <select name="song" id="song"
               onchange='
                 if(this.value!="none"){
@@ -709,7 +700,7 @@ coreData.fill(coringValue);">
             </option>
           </select>
           <label for="song"> :song</label>
-
+<br>
           <script> document.getElementById('song').value = "none";</script>
              
              <input type="checkbox" id="ScoreTranslucent" name="t"  onclick= '
@@ -733,8 +724,25 @@ coreData.fill(coringValue);">
    
    '>
               <label for="ScoreTranslucent">Score Translucent</label>
+              <br>
               <input type="file" id="files" >
                   <output id="list"></output>
+                  
+                  
+              </div>
+          </button>
+
+                  </div>
+        
+        
+     
+
+        </div>
+        <script src="fileSelectAndLoadOSMD.js"></script>
+        
+<div>
+    <p>
+        <div id="hotkeyHolder">
               
               </div>
 </div>
@@ -751,7 +759,78 @@ coreData.fill(coringValue);">
 
     
     <div id="container"> </div>
-    
+    <script>//used for resetting column counts for screen porportion in onWindowResize in starshipMod
+        var menuBoxes = document.getElementsByClassName("dropdown-content")
+        var rezBox = document.getElementById("resolutionDropContent");
+        var scoreBox = document.getElementById("scoreDropContent");
+
+          let aeid="";
+          let blocked = false;
+          let onMenuHeader = false;
+          function pointerInMenu(e){
+             onMenuHeader = false;
+            if(e.srcElement.className=="dropbtn")
+            {onMenuHeader = true;
+
+                }
+          }
+        function closeMenus()
+        {
+            let allMenus = document.getElementsByClassName("dropdown-content");
+        for(var menus=0; menus<allMenus.length;menus++)
+       
+       allMenus[menus].style.display="none";
+        let allButtons = document.getElementsByClassName("dropbtn");
+    for(var buttons=0; buttons<allButtons.length;buttons++)
+    allButtons[buttons].style.backgroundColor="rgba(127.5,127.5,127.5,.5)";
+        
+            }
+          function toggleMenuCategory ()
+          {
+          let ae= document.activeElement.firstElementChild;
+          
+          if(ae!=null&&!menuJustClosedByBackgroundPress&&ae.id!="load message"){
+              
+              closeMenus();
+               
+                if(ae.id!=aeid)
+                blocked=false;
+            if(blocked&&onMenuHeader)
+              {ae.style.display="none";blocked=false;
+                  document.activeElement.style.backgroundColor="rgba(127.5,127.5,127.5,.5)";
+
+              }
+              else if(!blocked&&onMenuHeader)
+              {ae.style.display="block";blocked=true;
+                  document.activeElement.style.backgroundColor="green";
+
+              }
+              else if(ae.style.display=="none"||ae.style.display=="")
+              {blocked=true;
+
+              ae.style.display="block";
+              document.activeElement.style.backgroundColor="green";
+
+              }
+              else {
+                  blocked=false;
+                  ae.style.display="none";
+                  document.activeElement.style.backgroundColor="rgba(127.5,127.5,127.5,.5)";
+
+                  }
+              aeid=ae.id;
+                              }
+          menuJustClosedByBackgroundPress=false
+
+          }
+        let menuJustClosedByBackgroundPress = false;
+
+        document.getElementById("container").addEventListener("pointerdown",(e)=>{aeid="";menuJustClosedByBackgroundPress=true;closeMenus();})
+
+         addEventListener("pointerover",(e)=>{pointerInMenu(e)})
+
+          addEventListener("pointerup",toggleMenuCategory)
+    </script>
     <script src="wadLoader.js"> </script>
     
     <div class="onBottom" style="text-align:right; width:100%;">
