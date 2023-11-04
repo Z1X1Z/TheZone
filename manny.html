@@ -827,12 +827,12 @@ coreData.fill(coringValue);">
           }
         let menuJustClosedByBackgroundPress = false;
 
-        document.getElementById("container").addEventListener("pointerdown",(e)=>{aeid="";menuJustClosedByBackgroundPress=true;closeMenus();})
+        document.getElementById("container").addEventListener("pointerdown",(e)=>{menuJustClosedByBackgroundPress=true;closeMenus();})
 
          addEventListener("pointerover",(e)=>{pointerInMenu(e)})
 
          //addEventListener("pointerup",(e)=>{)//setTimeout to give android time to notice active element
-         addEventListener("click",(e)=>{ae=e.target.firstElementChild;setTimeout(toggleMenuCategory,50})//setTimeout to give time for menuJustClosedByBackgroundPress
+         addEventListener("click",(e)=>{ae=e.target.firstElementChild;setTimeout(toggleMenuCategory,50)})//setTimeout to give time for menuJustClosedByBackgroundPress
 
     </script>
     <script src="wadLoader.js"> </script>
