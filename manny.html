@@ -87,25 +87,25 @@
         <!-- removing this script may fix android no load bug, but I'm testing z ordering in css        -->
 
         <div id="background_wrap">
-               <script>
-                   //splash
-                   let nf = document.getElementById('background_wrap');
-                   if(window.online)
-                   {
-                       if(Date.now()%2==1) nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6/z1xlogo.png');"
-                       else nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/pentaloctalwtTtlzonexmonogram.jpeg');"
-                  }
-                   else
-                   {
-                       if(Date.now()%2==1)nf.style = "background-image: url('z1xlogo.png');"
-                       else nf.style = "background-image: url('pentaloctalwtTtlzonexmonogram.jpeg');"
-                       }
-                   
-               </script>
+   
                
            </div>
 
-
+        <script>
+            //splash
+            let nf = document.getElementById('background_wrap');
+            if(window.online)
+            {
+                if(Date.now()%2==1) nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6/z1xlogo.png');"
+                else nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/pentaloctalwtTtlzonexmonogram.jpeg');"
+           }
+            else
+            {
+                if(Date.now()%2==1)nf.style = "background-image: url('z1xlogo.png');"
+                else nf.style = "background-image: url('pentaloctalwtTtlzonexmonogram.jpeg');"
+                }
+            
+        </script>
            
 
 
