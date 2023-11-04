@@ -832,7 +832,9 @@ coreData.fill(coringValue);">
 
          addEventListener("pointerover",(e)=>{pointerInMenu(e)})
 
-         addEventListener("pointerup",toggleMenuCategory)
+         if(navigator.userAgent.toLowerCase().match(/mobile/i))         addEventListener("touchend",toggleMenuCategory);
+         else addEventListener("pointerup",toggleMenuCategory);
+
     </script>
     <script src="wadLoader.js"> </script>
     
