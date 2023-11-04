@@ -787,14 +787,16 @@ coreData.fill(coringValue);">
             }
           function toggleMenuCategory ()
           {
-          let ae= document.activeElement.firstElementChild;
+              ae= document.activeElement.firstElementChild;
           
           if(ae!=null&&!menuJustClosedByBackgroundPress&&ae.id!="load message"){
               
               closeMenus();
                
                 if(ae.id!=aeid)
+                {
                 blocked=false;
+                }
             if(blocked&&onMenuHeader)
               {ae.style.display="none";blocked=false;
                   document.activeElement.style.backgroundColor="rgba(127.5,127.5,127.5,.5)";
@@ -817,9 +819,9 @@ coreData.fill(coringValue);">
                   ae.style.display="none";
                   document.activeElement.style.backgroundColor="rgba(127.5,127.5,127.5,.5)";
 
-                  }
+                  }          aeid=ae.id;
+
                               }
-          aeid=ae.id;
 
           menuJustClosedByBackgroundPress=false
 
@@ -830,7 +832,7 @@ coreData.fill(coringValue);">
 
          addEventListener("pointerover",(e)=>{pointerInMenu(e)})
 
-          addEventListener("pointerup",toggleMenuCategory)
+         addEventListener("pointerup",toggleMenuCategory)
     </script>
     <script src="wadLoader.js"> </script>
     
