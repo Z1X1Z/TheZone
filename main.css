@@ -3,7 +3,7 @@ body, head {
     margin: 0;
     background-color: #000;
     color: #fff;
-    font-family: Monospace;
+    font-family: monospace;
     font-size: 17px;
     width: 100%;
     line-height: 1.;
@@ -66,38 +66,10 @@ number {
     /*height:100px;*/
   }
 
-button {
-    font-size:1em;
-	cursor: pointer;
-	text-transform: uppercase;
-}
-
 canvas {
 	display: block;
 }
 
-#info {
-	position: absolute;
-	top: 0px;
-	width: 100%;
-	padding: 1px;
-	box-sizing: border-box;
-	text-align: center;
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	pointer-events: none;
-	z-index: 1; /* TODO Solve this in HTML */
-}
-
-.dg.ac {
-	-moz-user-select: none;
-	-webkit-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	z-index: 2 !important; /* TODO Solve this in HTML */
-}
 
 
 
@@ -131,7 +103,7 @@ canvas {
 }
 
 /* Links inside the navbar */
-t{ text-align: center;
+t{ text-align: left;
 }
 .navbar {
  float: left;
@@ -141,31 +113,50 @@ t{ text-align: center;
 
 }
 
-/* The dropdown container */
-.dropdown {
- float: left;
- overflow: hidden;
 
+button {
+    font-size:31px;
+    cursor: pointer;
 }
 
 /* Dropdown button */
-.dropdown .dropbtn {
-    font-size: 22px;
+ .dropbtn {
+    font-size: 24px;/*reset from button parent*/
  border: solid;
  color: white;
+ text-align: left;
 
+ 
+ background-color: inherit;
+ font-family: monospace; /* Important for vertical align on mobile phones */
+ margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* The dropdown container */
+.dropdown {
+
+ float: left;
+ overflow: hidden;
+ text-transform:none;
+ text-align: left;
  background-color: inherit;
  font-family: inherit; /* Important for vertical align on mobile phones */
  margin: 0; /* Important for vertical align on mobile phones */
 }
-
 /* Add a red background color to navbar links on hover */
+/*
 .navbar t:hover, .dropdown:hover .dropbtn {
  background-color: red;
 }
-
+*/
 /* Dropdown content (hidden by default) */
 .dropdown-content {
+    font-size:.75em;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-color: white;
+
+    
     width:100%;
     left:0%;
     column-count:8;
@@ -194,6 +185,7 @@ a:hover, label:hover {
  background-color: blue;
 }
 /* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
+/*.dropdown:hover .dropdown-content {
  display: block;
-}
+ }
+ */

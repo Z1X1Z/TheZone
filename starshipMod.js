@@ -978,7 +978,8 @@ function onWindowResize() {
      //menuBoxes declared in manny.html
      let numberOfColumns=Math.round(window.innerWidth/window.innerHeight*4.)
     for(var box=0.;box<menuBoxes.length;box++)menuBoxes[box].style.columnCount=numberOfColumns;
-     rezBox.style.columnCount=1;//this is a bit repetitious
+                        rezBox.style.columnCount=1;//this is a bit repetitious
+                        scoreBox.style.columnCount=1;//this is a bit repetitious
      let numberInputElements = document.getElementsByClassName("num")
      for(var n=0; n<numberInputElements.length;n++)
          numberInputElements[n].style.width=window.innerWidth/(numberOfColumns+1.)+"px";
