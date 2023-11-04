@@ -828,11 +828,19 @@ coreData.fill(coringValue);">
           }
         let menuJustClosedByBackgroundPress = false;
 
+         if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
+         {
+             
+             document.getElementById("container").addEventListener("touchstart",(e)=>{aeid="";menuJustClosedByBackgroundPress=true;closeMenus();})
+              addEventListener("touchend",(e)=>{setTimeout(toggleMenuCategory,50)})//setTimeout to give android time to notice active element
+             }
+        else{
         document.getElementById("container").addEventListener("pointerdown",(e)=>{aeid="";menuJustClosedByBackgroundPress=true;closeMenus();})
 
          addEventListener("pointerover",(e)=>{pointerInMenu(e)})
 
          addEventListener("pointerup",(e)=>{setTimeout(toggleMenuCategory,50)})//setTimeout to give android time to notice active element
+         }
          
     </script>
     <script src="wadLoader.js"> </script>
