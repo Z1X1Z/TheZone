@@ -13,7 +13,7 @@
         <link type="text/css" rel="stylesheet" href="main.css">
 </head>
         
-        <body oncontextmenu="return false;"><!--disable right click solution from
+        <body oncontextmenu="return false;" ontouchstart=""><!--disable right click solution from
                                         https://stackoverflow.com/questions/381795/how-to-disable-right-click-context-menu-in-javascript  -->
         <div id="load message" style="font-size:40px; background-color:blue;">     </div>
         
@@ -828,19 +828,11 @@ coreData.fill(coringValue);">
           }
         let menuJustClosedByBackgroundPress = false;
 
-         if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
-         {
-             
-             document.getElementById("container").addEventListener("touchstart",(e)=>{aeid="";menuJustClosedByBackgroundPress=true;closeMenus();})
-              addEventListener("touchend",(e)=>{setTimeout(toggleMenuCategory,50)})//setTimeout to give android time to notice active element
-             }
-        else{
         document.getElementById("container").addEventListener("pointerdown",(e)=>{aeid="";menuJustClosedByBackgroundPress=true;closeMenus();})
 
          addEventListener("pointerover",(e)=>{pointerInMenu(e)})
 
          addEventListener("pointerup",(e)=>{setTimeout(toggleMenuCategory,50)})//setTimeout to give android time to notice active element
-         }
          
     </script>
     <script src="wadLoader.js"> </script>
