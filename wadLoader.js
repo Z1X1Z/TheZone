@@ -129,7 +129,7 @@ let c = document.getElementById("container");
                                  
                                  
                                 var pressure = 1.;
-    function getPressure(event){
+    function getPressure(){
         if (event.pressure === 0) pressure=1;
         else if (event.pressure === 1) pressure = 1;
         else if (event.pressure === .5) pressure = 1;
