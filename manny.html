@@ -832,9 +832,8 @@ coreData.fill(coringValue);">
 
          addEventListener("pointerover",(e)=>{pointerInMenu(e)})
 
-         if(navigator.userAgent.toLowerCase().match(/mobile/i))         addEventListener("touchend",toggleMenuCategory);
-         else addEventListener("pointerup",toggleMenuCategory);
-
+         addEventListener("pointerup",(e)=>{setTimeout(toggleMenuCategory,50)})//setTimeout to give android time to notice active element
+         
     </script>
     <script src="wadLoader.js"> </script>
     
