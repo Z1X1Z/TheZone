@@ -13,7 +13,7 @@
         <link type="text/css" rel="stylesheet" href="main.css">
 </head>
         
-        <body oncontextmenu="return false;" ontouchstart=""><!--disable right click solution from
+        <body oncontextmenu="return false;"><!--disable right click solution from
                                         https://stackoverflow.com/questions/381795/how-to-disable-right-click-context-menu-in-javascript  -->
         <div id="load message" style="font-size:40px; background-color:blue;">     </div>
         
@@ -787,7 +787,6 @@ coreData.fill(coringValue);">
             }
           function toggleMenuCategory ()
           {
-              ae= document.activeElement.firstElementChild;
           
           if(ae!=null&&!menuJustClosedByBackgroundPress&&ae.id!="load message"){
               
@@ -832,8 +831,9 @@ coreData.fill(coringValue);">
 
          addEventListener("pointerover",(e)=>{pointerInMenu(e)})
 
-         addEventListener("pointerup",(e)=>{setTimeout(toggleMenuCategory,50)})//setTimeout to give android time to notice active element
-         
+         //addEventListener("pointerup",(e)=>{)//setTimeout to give android time to notice active element
+         addEventListener("click",(e)=>{ae=e.target.firstElementChild;setTimeout(toggleMenuCategory,50})//setTimeout to give time for menuJustClosedByBackgroundPress
+
     </script>
     <script src="wadLoader.js"> </script>
     
