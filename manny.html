@@ -733,16 +733,19 @@ coreData.fill(coringValue);">
               <label for="ScoreTranslucent">Score Translucent</label>
               <input type="checkbox" id="scoreBlack" name="t"  onclick= '
              scoreColorInversion=true;
-
-setOSMDcolors();
-osmd.render();
-        getElementById("scoreWhite").checked  = false;
+                if("osmd" in window && typeof osmd != null){
+                        setOSMDcolors();
+                        osmd.render();
+                        getElementById("scoreWhite").checked  = false;
+                }
 '>              <label for="scoreBlack">Score Black</label>
 <input type="checkbox" id="scoreWhite" name="t"  onclick= '
 scoreColorInversion=false;
-setOSMDcolors();
-osmd.render();
-getElementById("scoreBlack").checked  = false
+                if("osmd" in window && typeof osmd != null){
+                    setOSMDcolors();
+                    osmd.render();
+                    getElementById("scoreBlack").checked  = false
+                }
 '>              <label for="scoreWhite">Score White</label>
 
               <br>
@@ -2000,7 +2003,7 @@ return clamp(o,0.,1.);}
                           if(abs(p.y)<4.)for (int f=0;f<21;f+=1)if(abs(z.y)>21.&&(f==int(floor(.8+t.y*.4)))){l=0.;break;}
                                else if(abs(z.y)>19.&&(f>4))l=1.;
                                        else{z=vec2(-1./((z.x*z.x-z.y*z.y)-g.x),2.0*z.x*z.y-g.y);
-                            z*=pow(z.x,(z.x-t.y*-z.x));
+                            z*=pow(abs(z.x),(z.x-t.y*-z.x));
                             l = clamp(1.-abs(z.y)*6.,0.,1.);
                             if(z.x>-.1&&f!=0)l=clamp(1.-z.x*49.,0.,1.);
                                }
