@@ -15,8 +15,29 @@
         
         <body oncontextmenu="return false;"><!--disable right click solution from
                                         https://stackoverflow.com/questions/381795/how-to-disable-right-click-context-menu-in-javascript  -->
+            
+            <script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+            
+            <div id="embed-iframe"></div>
+            <script>
+                window.onSpotifyIframeApiReady = (IFrameAPI) => {
+                  //
+                };
+                window.onSpotifyIframeApiReady = (IFrameAPI) => {
+                  const element = document.getElementById('embed-iframe');
+                  const options = {
+                      uri: 'spotify:episode:7makk4oTQel546B0PZlDM5'
+                    };
+                  const callback = (EmbedController) => {};
+                  IFrameAPI.createController(element, options, callback);
+                };
+                </script>
+            
+            
+            
+            
+            
         <div id="load message" style="font-size:40px; background-color:blue;">     </div>
-        
         <script>
             function loadScript(element, url, offlineURL)
             {
