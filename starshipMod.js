@@ -74,19 +74,7 @@ let mobile = false;
 
       //vvvvbelow line partly from https://code-boxx.com/detect-mobile-device-javascript/
 
-    if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
-      {
-          rez=.5;
-          //fftSize=512;
-          //trailLength = 144;
-          mobile=true;
-      }
-       if(navigator.userAgent.toLowerCase().match(/mobile/i)){
-           rez=.5;
-           //fftSize=512;
-           //trailLength = 144;
-           mobile=true;
-       }
+
 
 
 //key press handling vvvv
