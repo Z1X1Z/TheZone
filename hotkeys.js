@@ -12,10 +12,12 @@ window.FeedbackSound = false;
 window.instantaneousFreqSpirographColoring = 1;
 window.pzyghthe=0;
 window.dynamicCoring=false;
+window.rez=window.devicePixelRatio/2.;//define resolution
+
 let osmdStaffsVisible = 0;
 let runningHash = true;
-window.number = 24;
-window.EldersLeg = window.number;
+window.number = "";
+window.EldersLeg = 24;
 function readHash(){
         let hashindex = 0;
         while (hashindex<location.hash.length)
@@ -40,7 +42,6 @@ function readHash(){
             }                              ));
             
             hashindex++;
-            
             
             
         }
@@ -82,34 +83,34 @@ function getKey(){
 
 if(//!(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' &&
    navigator.maxTouchPoints < 1)//)//if not mobile
-window.addEventListener('keydown', function(event) {if(window.INITIALIZED)callKey(event); return true;}, false);
+window.addEventListener('keydown', function(event) {callKey(event); return true;}, false);
 
     window.lastKey = "";
 window.key = " ";
-    function callKey(event){
-        window.lastKey = window.key;
-        if(lastKey==","&&!runningHash)//key here is the last key
-            event=new KeyboardEvent('keydown',
-                                                {"key":event.key,"keyCode":event.keyCode,"ctrlKey":true}
-                      );
-        else if(lastKey=="."&&!runningHash)event=new KeyboardEvent('keydown',
-                                                     {"key":event.key,"keyCode":event.keyCode,"altKey":true}//creating a new keypress because it's readonly
-                           );
-
-         key = event.key;
+function callKey(event){
+    window.lastKey = window.key;
+    if(lastKey==","&&!runningHash)//key here is the last key
+        event=new KeyboardEvent('keydown',
+                                {"key":event.key,"keyCode":event.keyCode,"ctrlKey":true}
+                                );
+    else if(lastKey=="."&&!runningHash)event=new KeyboardEvent('keydown',
+                                                               {"key":event.key,"keyCode":event.keyCode,"altKey":true}//creating a new keypress because it's readonly
+                                                               );
+    
+    key = event.key;
     if(key=="/"&&!event.shiftKey){  event.preventDefault(); event.stopImmediatePropagation();}
-
+    
     var x=null;
     if(!event.shiftKey&&!event.ctrlKey)x = parseInt(String.fromCharCode( event.keyCode));
-
-
+    
+    
     //meta keys like ctrlKey must be processed first and should have symbol preferably
     
-         if(key == "o" && event.ctrlKey)
-        {
-            omniDynamicEngaged = !omniDynamicEngaged;
-            if(!omniDynamicEngaged)omniData.fill(0);
-        }
+    if(key == "o" && event.ctrlKey)
+    {
+        omniDynamicEngaged = !omniDynamicEngaged;
+        if(!omniDynamicEngaged)omniData.fill(0);
+    }
     else if(key == "c" && event.ctrlKey){dynamicCoring=!dynamicCoring; if(!dynamicCoring)coreData.fill(1./1.324717);}
     else if(key == "q" && event.ctrlKey)uniforms.squareClover.value=!uniforms.squareClover.value;
     else if(key == "x" && event.ctrlKey)uniforms.fieldPowerBoost.value=!uniforms.fieldPowerBoost.value;
@@ -117,7 +118,7 @@ window.key = " ";
     else if(key == "b" && event.ctrlKey){
         if(uniforms.balloonsON.value==0.)uniforms.balloonsON.value=1.
             else if(uniforms.balloonsON.value==1.)uniforms.balloonsON.value=-1.
-              else  if(uniforms.balloonsON.value==-1.)uniforms.balloonsON.value=0.
+                else  if(uniforms.balloonsON.value==-1.)uniforms.balloonsON.value=0.
                     }
     else if(key == "s" && event.ctrlKey)uniforms.sparklesON.value=!uniforms.sparklesON.value;
     else if(key == "f" && event.ctrlKey)uniforms.SPHEREofTheLORD.value=!uniforms.SPHEREofTheLORD.value;
@@ -143,65 +144,67 @@ window.key = " ";
     //else if (key=="" && event.ctrlKey)instantaneousFreqSpirographColoring = (instantaneousFreqSpirographColoring+1)%2;//color mode 3 seems obsolete
     else if (key=="m" && event.ctrlKey) uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value;
     else if (event.ctrlKey&&key=="a")uniforms[ "colorCombo" ].value = 11;
-
+    
     else if(event.ctrlKey);//swallow remaining possibilities, muting keypress
     /*if(key == "k" && event.ctrlKey)
-    {
-        osmdStaffsVisible=(osmdStaffsVisible+1)%3;
-        if("osmd" in window&&osmd!=null&&osmd.sheet.Instruments.length>=2)
-        {
-                if(osmdStaffsVisible==0)
-                {
-                        osmd.sheet.Instruments[0].Visible = true;
-                        osmd.sheet.Instruments[1].Visible = false;
-                }
-                else if(osmdStaffsVisible==1)
-                {
-                    osmd.sheet.Instruments[0].Visible = false;
-                    osmd.sheet.Instruments[1].Visible = true;
-                }
-                else if(osmdStaffsVisible==2)
-                {
-                    
-                        osmd.sheet.Instruments[0].Visible = true;
-                        osmd.sheet.Instruments[1].Visible = true;
-                }
+     {
+     osmdStaffsVisible=(osmdStaffsVisible+1)%3;
+     if("osmd" in window&&osmd!=null&&osmd.sheet.Instruments.length>=2)
+     {
+     if(osmdStaffsVisible==0)
+     {
+     osmd.sheet.Instruments[0].Visible = true;
+     osmd.sheet.Instruments[1].Visible = false;
+     }
+     else if(osmdStaffsVisible==1)
+     {
+     osmd.sheet.Instruments[0].Visible = false;
+     osmd.sheet.Instruments[1].Visible = true;
+     }
+     else if(osmdStaffsVisible==2)
+     {
      
-                osmd.render();
-        }
-    } the bass staff doesn't include the lyrics so it's not included
+     osmd.sheet.Instruments[0].Visible = true;
+     osmd.sheet.Instruments[1].Visible = true;
+     }
+     
+     osmd.render();
+     }
+     } the bass staff doesn't include the lyrics so it's not included
      */
-      else  if (key=="a"){
-            EldersLeg=Math.round(number)*1.;
-            let minimumFFTfactor = Math.ceil(Math.log(EldersLeg*12*2)/Math.log(2.));
-            if(minimumFFTfactor<=15){
-                if(minimumFFTfactor>11)//currently a buffersize of 2**11==2048 is required for spirograph
-                    fftSize=2**minimumFFTfactor;
-                else
-                    fftSize = 2**11
-            }
-          setFFTdependantSizes();
-
-        }
+    else  if (key=="a"){
+        EldersLeg=Math.round(number)*1.;
+        let minimumFFTfactor = Math.ceil(Math.log(EldersLeg*12*2)/Math.log(2.));
+        if(minimumFFTfactor<=15){
+            if(minimumFFTfactor>11)//currently a buffersize of 2**11==2048 is required for spirograph
+                fftSize=2**minimumFFTfactor;
+            else
+                fftSize = 2**11
+                }
+        setFFTdependantSizes();
+        
+    }
     else if (document.activeElement.className=="num");//don't take number hotkey's while menu number selector engaged
-        
+    
     else if (x>0&&x<=9&& document.activeElement.className!="num"&&!event.shiftKey&&!event.altKey)
-        {rez = window.devicePixelRatio/x;
-          if(window.INITIALIZED) renderer.setPixelRatio( rez);
-}
-        
+    {rez = window.devicePixelRatio/x;
+        if(window.INITIALIZED) renderer.setPixelRatio( rez);
+    }
+    
     /*else if (x==0&& document.activeElement.className!="num"&&!event.shiftKey&&!event.altKey)
-        {rez = window.devicePixelRatio/10.; renderer.setPixelRatio( rez);}
-*/
+     {rez = window.devicePixelRatio/10.; renderer.setPixelRatio( rez);}
+     */
     else if (key=="+"){rez /=1.1; if(window.INITIALIZED) renderer.setPixelRatio( rez);}
     else if (key=="_"){rez *=1.1; if(window.INITIALIZED) renderer.setPixelRatio( rez);}
-
+    
     else if (x==0)
-    {window.movementRate=movementRateORIGINAL; uniforms[ "rate" ].value=movementRateORIGINAL; }
+    {window.movementRate=movementRateORIGINAL; uniforms[ "rate" ].value=movementRateORIGINAL;
+        if(number!=""){window.movementRate=number; uniforms[ "rate" ].value=number;};
+    }
     else if(x == 1&&event.altKey&&!event.shiftKey)uniforms.clvrVariant1.value=!uniforms.clvrVariant1.value;
     else if(x == 2&&event.altKey&&!event.shiftKey)uniforms.clvrVariant2.value=!uniforms.clvrVariant2.value;
     else if(x == 3&&event.altKey&&!event.shiftKey)uniforms.clvrVariant3.value=!uniforms.clvrVariant3.value;
-
+    
     else if(x == 7&&event.altKey&&!event.shiftKey)uniforms.musicAngelMan.value=(uniforms.musicAngelMan.value+1)%3;
     else if(x == 8&&event.altKey&&!event.shiftKey)
     {
@@ -214,9 +217,9 @@ window.key = " ";
         window.pzyghthe = (window.pzyghthe+1.)%5;
         if(pzyghthe==0) scene.remove(harmonicPzyghtheMesh);
         else if (pzyghthe==1) scene.add(harmonicPzyghtheMesh)
-
-
-    }
+            
+            
+            }
     else if (key=="À"||key=="`")
     {rez=window.devicePixelRatio*2.;
         if(window.INITIALIZED)   renderer.setPixelRatio( rez);}
@@ -224,10 +227,10 @@ window.key = " ";
     else if (key=="M") uniforms[ "NightAndDay" ].value = !uniforms[ "NightAndDay" ].value;
     else if (key=="!")uniforms[ "Refractelate" ].value=!uniforms[ "Refractelate" ].value;
     else if (key=="@")uniforms[ "Clovoid" ].value=!uniforms[ "Clovoid" ].value;
-   // else if (key=="#"){uniforms[ "base3" ].value=!uniforms[ "base3" ].value;console.log(uniforms[ "base3" ].value)}
+    // else if (key=="#"){uniforms[ "base3" ].value=!uniforms[ "base3" ].value;console.log(uniforms[ "base3" ].value)}
     
     else if (key=="&")uniforms[ "continuumClover" ].value=!uniforms[ "continuumClover" ].value;
-                        
+    
     
     else if (key=="q") {
         if          ( uniforms[ "colorCombo" ].value >1)          uniforms[ "colorCombo" ].value = -1;
@@ -248,7 +251,7 @@ window.key = " ";
     else if (key=="f") uniforms[ "fourCreats" ].value *= -1;
     else if (key=="F") uniforms[ "spokelover" ].value=!uniforms[ "spokelover" ].value ;
     
-    else if (key=="\'"||key=="\"") uniforms[ "colorCombo" ].value = 13;
+    else if (key=="\"") uniforms[ "colorCombo" ].value = 13;
     else if (key=="d") uniforms[ "colorCombo" ].value = 14;
     else if (key=="x") uniforms[ "colorCombo" ].value = 15;
     else if (key=="*") uniforms[ "colorCombo" ].value = 20;
@@ -309,29 +312,32 @@ window.key = " ";
             uniforms[ "colorCombo" ].value = 100;
         else
             uniforms[ "colorCombo" ].value = -1;
-       
+        
     }
     else if (key=="u") uniforms[ "petals" ].value += 1.;
     else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%10;
-
+    
     else if (key=="?"){
         if(uniforms[ "spirated" ].value==0)uniforms[ "spirated" ].value=1;
         else if(uniforms[ "spirated" ].value==1)uniforms[ "spirated" ].value=-1;
         else if(uniforms[ "spirated" ].value==-1)uniforms[ "spirated" ].value=0;
     }
-
+    
     else if (key=="|") {
         if(uniforms.chirality.value==3)uniforms.chirality.value=1;
         else if(uniforms.chirality.value==1)uniforms.chirality.value=-1;
         else if(uniforms.chirality.value==-1)uniforms.chirality.value=3;
-
+        
     }
-    else if (key=="\\")uniforms[ "hearTOL" ].value = !uniforms[ "hearTOL" ].value;
     else if (key=="{"){
         if(uniforms.eden.value!=4)uniforms.eden.value=(uniforms.eden.value+1)%3;
         else uniforms.eden.value=1;}
     else if (key=="}"){if(uniforms.eden.value==4)uniforms.eden.value=0;else uniforms.eden.value=4;}
-    
+    else if (key=="]"){zoomRate*=1.11111111;}
+    else if (key=="["){zoomRate/=1.11111111;}
+    else if (key=="\\"){zoomRate=movementRateORIGINAL; if(number!="")zoomRate=number;}
+    else if (key=="/"){if(number!=""){trailSecondsLong=number;setTrailSize()}}
+
     else if (//event.keyCode==190||
              event.key==">") uniforms[ "metronome" ].value *= 1.1; //keycode for <
     else if ((//event.keyCode==188||
@@ -404,6 +410,8 @@ window.key = " ";
 
       if(uniforms.free.value) window.zoomCageSize=100000000000000000.;
       else window.zoomCageSize=1.5;
+        
+        number="";
     }
 
 

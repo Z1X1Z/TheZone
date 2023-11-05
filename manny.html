@@ -131,19 +131,13 @@
                     if(!isNaN(b)&&b>0)radialWarp=b;">
                   <br>
                   <label for="fretCount">Fruits(max 1365)</label>
-
                   <input type="number" id="fretCount" name="fretCount" class="num" onkeydown="
                           number = document.getElementById('fretCount').value;
                           key  = 'a';
                           if(!isNaN(number)){
                               callKey(new KeyboardEvent('keydown', {'key':'a', 'keyCode':key.charCodeAt(0)}));
                           }
-                                                             
-
                                                   ">
-
-
-
                       <br>
          
                
@@ -274,16 +268,56 @@
                <a id="Faster" name="t"  onclick= "
                    key  = '=';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-               Faster!</a><br>
+               Faster Movement!</a><br>
                <a id="Slower" name="t"  onclick= "
                    key  = '-';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-               Slower!</a><br>
-               <a id="Reset Speed" name="t"  onclick= "
+               Slower Movement!</a><br>
+               <a id="Reset Movement Speed" name="t"  onclick= "
                    key  = '0';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-               Reset Speed!</a><br>
-
+               Reset Movement!</a><br>
+               
+               <label for="movementSpeed">Movement Speed</label>
+               <input type="number" id="movementSpeed" name="movementSpeed" class="num" onkeydown="
+                       number = document.getElementById('movementSpeed').value;
+                       key  = '0';
+                       if(!isNaN(number)){
+                           callKey(new KeyboardEvent('keydown', {'key':key, 'keyCode':key.charCodeAt(0)}));
+                       }
+                                               ">
+                   <br>
+                   
+                   <label for="zoomSpeed">Zoom Speed</label>
+                   <input type="number" id="zoomSpeed" name="zoomSpeed" class="num" onkeydown="
+                           number = document.getElementById('zoomSpeed').value;
+                           key  = '\';
+                           if(!isNaN(number)){
+                               callKey(new KeyboardEvent('keydown', {'key':key, 'keyCode':key.charCodeAt(0)}));
+                           }
+                                                   ">
+                       <br>
+                       <a id="FasterZoom" name="t"  onclick= "
+                           key  = ']';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       Faster Zoom!</a><br>
+                       <a id="SlowerZoom" name="t"  onclick= "
+                           key  = '[';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       Slower Zoom!</a><br>
+                       <a id="Reset Zoom Speed" name="t"  onclick= "
+                           key  = '\';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                       Reset Zoom!</a><br>
+                       <label for="Trail Length">Trail Seconds</label>
+                       <input type="number" id="Trail Length" name="Trail Length" class="num" onkeydown="
+                               number = document.getElementById('Trail Length').value;
+                               key  = '/';
+                               if(!isNaN(number)){
+                                   callKey(new KeyboardEvent('keydown', {'key':key, 'keyCode':key.charCodeAt(0)}));
+                               }
+                                                       ">
+                           <br>
                <input type="radio" id="1 Rivers" name="eden" onclick="uniforms.eden.value = 0">
                <label for="1 Rivers">1 Rivers</label><br>
                
@@ -944,7 +978,7 @@ ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
 
         const float PI = 3.1415927410125732;
         const float gr = 1.61803398874989484820458683436563811772030917980576286213544862270526046281890244970720720418939113748475408807538689175212663386222353693179318006076672635443338908659593958290563832266131992829026788067520876689250171169620703222104321626954862629631361443814975870122034080588795445474924618569536486444924104432077134494704956584678850987433944221254487706647;
-        const float leaf = -1.3247179572447460259609088544780973407344040569017333645340150503028278512455475940546993479817872803299109209947422074251089026390458977955943147570967234717541668390388674187517369315842535499082466223545337273504589879909568150627745509802486213012169894157524574548625075626524610368938904839932269952074975962828868556908150704513696109853352577281586033441141927828273765296032993584674231028483241695239006108543338219;
+        const float leaf = -1.324717;//9572447460259609088544780973407344040569017333645340150503028278512455475940546993479817872803299109209947422074251089026390458977955943147570967234717541668390388674187517369315842535499082466223545337273504589879909568150627745509802486213012169894157524574548625075626524610368938904839932269952074975962828868556908150704513696109853352577281586033441141927828273765296032993584674231028483241695239006108543338219;
         float zin(float x){return -sin(x);}
         float coz(float x){return -cos(x);}
         
@@ -1096,7 +1130,7 @@ uniform bool NightAndDay;
 
     const float PI = 3.1415927410125732;
     const float gr = 1.618033988749;
-    const float leaf = -1.32471795724474;
+    const float leaf = -1.3247;//1795724474;
 
     float lerp(float a) {return -abs(mod(a,2.)-1.);}
     float zin(float x){return -sin(x);}

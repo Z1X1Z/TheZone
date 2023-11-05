@@ -1,5 +1,6 @@
 var THREE;
-const leaf = -1.3247179572447460259609088544780973407344040569017333645340150503028278512455475940546993479817872803299109209947422074251089026390458977955943147570967234717541668390388674187517369315842535499082466223545337273504589879909568150627745509802486213012169894157524574548625075626524610368938904839932269952074975962828868556908150704513696109853352577281586033441141927828273765296032993584674231028483241695239006108543338219;
+const leaf = -1.324717;
+//more digits change effect 9572447460259609088544780973407344040569017333645340150503028278512455475940546993479817872803299109209947422074251089026390458977955943147570967234717541668390388674187517369315842535499082466223545337273504589879909568150627745509802486213012169894157524574548625075626524610368938904839932269952074975962828868556908150704513696109853352577281586033441141927828273765296032993584674231028483241695239006108543338219;
 const gr = 1.61803398874989484820458683436563811772030917980576286213544862270526046281890244970720720418939113748475408807538689175212663386222353693179318006076672635443338908659593958290563832266131992829026788067520876689250171169620703222104321626954862629631361443814975870122034080588795445474924618569536486444924104432077134494704956584678850987433944221254487706647
 if(window.useCDN)import("three").then(module => { THREE=module})
 .catch((err) => {
@@ -33,22 +34,23 @@ function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js lo
     }//setTimeout waits for 10ms then runs stallTillTHREELoaded()
 stallTillTHREELoaded();
 
-window.zoom=1.;
 
 window.pixelShaderSize = 7;
 const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
-const movementRateORIGINAL = gr/-leaf
+const movementRateORIGINAL = 1.;
 window.movementRate=movementRateORIGINAL;
+window.zoomRate=movementRateORIGINAL;
 window.radialWarp=1.;
 const starshipSize = Math.E**leaf/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
-const trailSecondsLong = 14.4;
-const starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;//base Z value
+let trailSecondsLong = 7.;
+let starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;//base Z value
 
                             const zoomFrames = 60;//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   const mf = 1.75;
 const MR = mf/zoomFrames;
-const trailLength = Math.ceil(zoomFrames*trailSecondsLong);
+let trailLength = Math.ceil(zoomFrames*trailSecondsLong);
+                          
 const dotSize = starshipSize;
 
 let coringValue = 1./-leaf/gr;
@@ -63,7 +65,6 @@ window.zoomCageSize = window.pixelShaderSize/4.;//radius of zoom bounding
 window.twist = 0;
 window.flip = 1;
 
-let rez=window.devicePixelRatio/2.;//define mobile resolution
 //if (navigator.maxTouchPoints <1) rez = window.devicePixelRatio;//redefine resolution for desktop
 let colorSound;
 let colorSoundPURE;
@@ -279,14 +280,30 @@ function fiveAndSeven(){
             
             }
 }
-const cx =new Float64Array(trailLength).fill(0);//c is the center of the frame moved from the origin
-const cy = new Float64Array(trailLength).fill(0);
-const xPerp= new Float64Array(trailLength).fill(0);//perp is the perpendicular from c
-const yPerp = new Float64Array(trailLength).fill(0);
-const trailWidth = new Float64Array(trailLength).fill(0);
-const trailTimeOfRecording = new Float64Array(trailLength).fill(0);
-const trailSegmentExpired = Array(trailLength).fill(false);
-const pitchCol = Array(trailLength);
+                            var cx =new Float64Array(trailLength).fill(0);//c is the center of the frame moved from the origin
+                            var cy = new Float64Array(trailLength).fill(0);
+                            var xPerp= new Float64Array(trailLength).fill(0);//perp is the perpendicular from c
+                            var yPerp = new Float64Array(trailLength).fill(0);
+                            var trailWidth = new Float64Array(trailLength).fill(0);
+                            var trailTimeOfRecording = new Float64Array(trailLength).fill(0);
+                            var trailSegmentExpired = Array(trailLength).fill(false);
+var pitchCol = Array(trailLength);
+                            
+            function setTrailSize(){
+                             trailLength = Math.ceil(zoomFrames*trailSecondsLong);
+                            starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;//base Z value
+                              cx =new Float64Array(trailLength).fill(0);//c is the center of the frame moved from the origin
+                              cy = new Float64Array(trailLength).fill(0);
+                              xPerp= new Float64Array(trailLength).fill(0);//perp is the perpendicular from c
+                              yPerp = new Float64Array(trailLength).fill(0);
+                              trailWidth = new Float64Array(trailLength).fill(0);
+                              trailTimeOfRecording = new Float64Array(trailLength).fill(0);
+                              trailSegmentExpired = Array(trailLength).fill(false);
+                            pitchCol = Array(trailLength);
+                                       if(window.INITIALIZED)           for(var n = 0; n<trailLength; n++)
+                                                    {pitchCol[n]  = new THREE.Color()
+                                                    }
+                           }
 let trailLoaded = false;
 let trailDepth = 0;
 
@@ -329,11 +346,7 @@ function  move()
     if (isNaN(coordX)||(!zoomAtl41&&coordX>4.))coordX=0.;
     if (isNaN(coordY)||(!zoomAtl41&&coordY>4.))coordY=0.;
 
-  if (!trailLoaded) {trailLoaded = true;
-      for(var n = 0; n<trailLength; n++)
-        {pitchCol[n]  = new THREE.Color()
-        }
-  }
+
 
     totalAMP = 0.;
     for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
@@ -440,7 +453,7 @@ pitchCol[f]  = colorSoundPURE;
                                             }
                                            
                         flatline = window.movementRate;
-                       if(window.movementRate<movementRateORIGINAL) flatline = 1.;
+                   //    if(window.movementRate<movementRateORIGINAL) flatline = 1.;
                     
                     
          angle = ((angle+6*radialWarp)/12.)%1*2*pi;
@@ -554,6 +567,8 @@ let lineMat, lineGeometry, line;
 
 let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
                              let   omniDynamicEngaged=false;
+                                           window.zoom=1.;
+
        let uniforms = {
         omniDynamic:{value:null},
        coreTextureSampler:{value:null},
@@ -579,7 +594,7 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
            time: {value:.0 },
        rate: {value: 1.},
 
-           zoom: {value: 1 },
+           zoom: {value:  window.zoom },
            colorCombo: {value: -1 },
              free: {value: false },
              MetaCored: {value: true },
@@ -917,6 +932,9 @@ function init() {
        } );
      wipeStarshipMesh = new THREE.Mesh( geometryP, wipeMaterialShader );
      finalSceneRerenderedering.add(wipeStarshipMesh);
+                        for(var n = 0; n<trailLength; n++)
+                          {pitchCol[n]  = new THREE.Color()
+                          }
      window.INITIALIZED =true;
      setFFTdependantSizes();
      setDynamicSampler2ds();
@@ -1009,10 +1027,10 @@ function onWindowResize() {
                   let averageFrameTotalAmp = [];
                        
 let lastVolume = 1.;
-        function zoomRate(){
+        function setZoomRate(){
         let volumeProcessed =volume/lastVolume;//should be volume not volumeBoosted
         if(!isFinite(volumeProcessed))volumeProcessed=1.;
-            return Math.E**(Math.log(.5)/zoomFrames*window.movementRate*interpolation*(volumeProcessed));//the square root of volume is to make it grow slower than in d_xy
+            return Math.E**(Math.log(.5)/zoomFrames*zoomRate*interpolation*(volumeProcessed));//the square root of volume is to make it grow slower than in d_xy
         }
                        
                        
@@ -1063,7 +1081,7 @@ function zoomRoutine(){
     let zoomCone=metaDepth*Math.sqrt(coordX*coordX+coordY*coordY);
     if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
     
-    ZR = zoomRate();
+    ZR = setZoomRate();
     if (zoom>=1.)zoomOutEngage = false;
     if(!isFinite(ZR))ZR=1;
     if(!zoomOutEngage){
@@ -1363,7 +1381,7 @@ function runOSMD (){
     if(document.visibilityState=="hidden"||lvs=="hidden")lastFrameTime=timestamp;
     lvs=document.visibilityState
     interpolation = (timestamp-lastFrameTime)/1000.*60.;
-    if(interpolation>10)interpolation=1.;//this is to prevent frametime leak on mobile
+    if(!hasRun)interpolation=1.;//this is to prevent frametime leak on mobile
     if (!isFinite(interpolation))interpolation = 1.;
     lastFrameTime=timestamp;
     if(!window.touchMode)pointerZoom=false;
@@ -2032,11 +2050,10 @@ var fingerStride = 0;
 
     let trailPositionAttribute = geomeTrail.getAttribute( 'position' );
     let trailColorAttribute = geomeTrail.getAttribute( 'color' );
-
-let r = (f+trailDepth-1)%trailDepth;
+var loopLimit = (trailDepth<=trailLength)?trailDepth:trailLength;
+let r = (f+loopLimit-1)%loopLimit;
 let s = f;
                                                                                      
-var loopLimit = trailDepth;
 //if(isFinite(cx[r-1])&&isFinite(cx[s])&&isFinite(cy[r-1])&&isFinite(cy[s]))
                  const scalar = 1.;
 
@@ -2543,7 +2560,8 @@ for(var n = 0; n<targets.length;n++){
                     infinicore();
 
                 }
-                else lastZoom=zoom/zoomRate();
+                else lastZoom=zoom;
+                    setZoomRate();
                         const coordinator = pixelShaderSize/2.;//this is the frame size in the shader: "p=vec2(...."
 
                     if(pointerZoom){
@@ -2584,14 +2602,14 @@ for(var n = 0; n<targets.length;n++){
 
                         
                   }//end touch mode centerOfDotToEdge
-
+hasRun = true;
                                                                        animateLoopId=                   window.requestAnimationFrame( animate );
                             //  renderer.forceContextLoss ()
                             //  renderer.forceContextRestore ( )
 
 }
 
-                              
+               let hasRun=false;
                     let animateLoopId;
                     
 
