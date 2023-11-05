@@ -669,11 +669,14 @@ coreData.fill(coringValue);">
           </button>
 
                   </div>
-        
+        <script>
+            function clearOSMD(){
+            }
+            </script>
         <div class="dropdown">
           <button class="dropbtn">Score
           <div id="scoreDropContent" class="dropdown-content" style="font-size:1em; column-count:1;">
-              
+             
           <select name="song" id="song"
               onchange='
                 if(this.value!="none"){
@@ -683,12 +686,14 @@ coreData.fill(coringValue);">
                     uniforms.scoreLoaded.value=true;
                 }
                 else{
-                    osmd.clear();
-                   // document.getElementById("osmdCanvas").innerHTML="";
-                    osmd=null; adjustThreeJSWindow();
-                        uniforms.scoreLoaded.value=false;
-                    }'
-                    >
+                        osmd.zoom=0.;
+                        osmd.render();
+                        osmd.clear();
+                        osmd=null; adjustThreeJSWindow();
+                            uniforms.scoreLoaded.value=false;
+
+            }'
+        >
               <option value='none'>
                   None
               </option>
@@ -704,9 +709,10 @@ coreData.fill(coringValue);">
           <script> document.getElementById('song').value = "none";</script>
              
              <input type="checkbox" id="ScoreTranslucent" name="t"  onclick= '
-           sheetTranslucent=!sheetTranslucent;
+        if("osmd" in window&&osmd!=null)
+   {
+              sheetTranslucent=!sheetTranslucent;
 
-   
         if (sheetTranslucent) {
                    document.getElementById("textWindow").style="position:fixed; margin-left:50%;";
                                   document.getElementById("osmdCanvas").style.bottom="40px"
@@ -721,9 +727,24 @@ coreData.fill(coringValue);">
                         osmdResize();
                         adjustThreeJSWindow();
                     }
+   }
    
    '>
               <label for="ScoreTranslucent">Score Translucent</label>
+              <input type="checkbox" id="scoreBlack" name="t"  onclick= '
+             scoreColorInversion=true;
+
+setOSMDcolors();
+osmd.render();
+        getElementById("scoreWhite").checked  = false;
+'>              <label for="scoreBlack">Score Black</label>
+<input type="checkbox" id="scoreWhite" name="t"  onclick= '
+scoreColorInversion=false;
+setOSMDcolors();
+osmd.render();
+getElementById("scoreBlack").checked  = false
+'>              <label for="scoreWhite">Score White</label>
+
               <br>
               <input type="file" id="files" >
                   <output id="list"></output>
@@ -832,7 +853,7 @@ coreData.fill(coringValue);">
 
          //addEventListener("pointerup",(e)=>{)//setTimeout to give android time to notice active element
          addEventListener("click",(e)=>{
-ae=(e.target.id!="song")?e.target.firstElementChild:null;
+ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
           setTimeout(toggleMenuCategory,50)})//setTimeout to give time for menuJustClosedByBackgroundPress
 
     </script>
