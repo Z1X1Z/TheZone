@@ -321,7 +321,8 @@ let pushBackCounter = 0;
                        const   lightingScaleTrail = 72;//note range for color scheme
                          const  lightingScaleStar = lightingScaleTrail*2.*2.;//convert 12 to 24 and expand by factor of 2 for a divide between the octaves of the voice (trail) and the hearing (star)
                           let note,lastNote;
-                            let BlackOrWhiteTrail=1;//also for star
+                            let BlackOrWhiteTrail=.5;//also for star
+                            let BlackOrWhiteNOTE = 1.
                             let starMajorMinor=.5;
 function  move()
 {
@@ -419,18 +420,25 @@ pitchCol[f]  = colorSoundPURE;
                                            const nt = Math.round(note)%12;
                                            if (nt==7||nt==5||nt==2||nt==0||nt==10)
                                            {
-                                   BlackOrWhiteTrail=0.;
+                                   BlackOrWhiteNOTE=0.;
                                            }
                                            else
                                            {
-                                   BlackOrWhiteTrail=1.;
+                                   BlackOrWhiteNOTE=1.;
                                            }
                     
                                            
-                                          const bwPRIMER = .125;
-                                           starMajorMinor = (BlackOrWhiteTrail+bwPRIMER)/(1.+bwPRIMER)/2.+.25
+                                          let bwPRIMER = .125;
+                                           starMajorMinor = (BlackOrWhiteNOTE+bwPRIMER)/(1.+bwPRIMER)/2.+bwPRIMER*2.;
+                                           
+                                            bwPRIMER = .5;
+                                            BlackOrWhiteTrail = (BlackOrWhiteNOTE-bwPRIMER)/(1.-bwPRIMER);
                                            }
-                                           else starMajorMinor=.5;
+                                           else {
+                                                starMajorMinor=.5;
+                                                BlackOrWhiteTrail=.5;
+                                            }
+                                           
                         flatline = window.movementRate;
                        if(window.movementRate<movementRateORIGINAL) flatline = 1.;
                     
@@ -2115,7 +2123,7 @@ var loopLimit = trailDepth;
                          timeElapsedScaled*=2.;
                      }
                     let  timeMinusX = timeElapsedScaled-1.;
-                     if(timeMinusX<0.&&timeElapsedEXPONENTIAL%1.<Math.sign(timeMinusX)*timeMinusX%1.)stylus=BlackOrWhiteTrail;
+                     if(timeMinusX<0.&&timeElapsedEXPONENTIAL%1.<Math.sign(timeMinusX)*timeMinusX%1.)stylus=BlackOrWhiteNOTE;
 
                       red2  = red1;
                       green2  = green1;
@@ -2125,15 +2133,22 @@ var loopLimit = trailDepth;
                       green1  = pitchCol[r].g;
                       blue1  = pitchCol[r].b;
                      
-                      r2 = r1;
-                      g2 = g1;
-                      b2 = b1;
                      if(stylus!=0.5){
                          r1=stylus;
                          g1=stylus;
                          b1=stylus;
+                         
+                          r2 = r1;
+                          g2 = g1;
+                          b2 = b1;
+                         
                      }
                      else{
+                         
+                          r2 = r1;
+                          g2 = g1;
+                          b2 = b1;
+                         
                          r1 = red1;
                          g1 = green1;
                          b1 = blue1;
