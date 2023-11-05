@@ -2044,7 +2044,7 @@ var loopLimit = trailDepth;
                  let red1=0, green1=0, blue1=0 ,
                  red2=0 , green2=0 , blue2=0;
                                              let r1=BlackOrWhiteNOTE, g1=BlackOrWhiteNOTE, b1=BlackOrWhiteNOTE,
-                                             r2=BlackOrWhiteNOTE, g2=BlackOrWhiteNOTE b2=BlackOrWhiteNOTE;
+                                             r2=BlackOrWhiteNOTE, g2=BlackOrWhiteNOTE, b2=BlackOrWhiteNOTE;
                                              
                                var  widts =0;
 
