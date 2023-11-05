@@ -13,7 +13,19 @@ window.instantaneousFreqSpirographColoring = 1;
 window.pzyghthe=0;
 window.dynamicCoring=false;
 window.rez=window.devicePixelRatio/2.;//define resolution
-
+if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
+  {
+      rez=window.devicePixelRatio/4.;
+      //fftSize=512;
+      //trailLength = 144;
+      mobile=true;
+  }
+   if(navigator.userAgent.toLowerCase().match(/mobile/i)){
+       rez=window.devicePixelRatio/4.;
+       //fftSize=512;
+       //trailLength = 144;
+       mobile=true;
+   }
 let osmdStaffsVisible = 0;
 let runningHash = true;
 window.number = "";
