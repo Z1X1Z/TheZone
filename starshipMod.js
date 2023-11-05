@@ -2043,8 +2043,8 @@ var loopLimit = trailDepth;
                                                                                      
                  let red1=0, green1=0, blue1=0 ,
                  red2=0 , green2=0 , blue2=0;
-                                             let r1, g1, b1,
-                                             r2=0, g2=0, b2=0;
+                                             let r1=BlackOrWhiteNOTE, g1=BlackOrWhiteNOTE, b1=BlackOrWhiteNOTE,
+                                             r2=BlackOrWhiteNOTE, g2=BlackOrWhiteNOTE b2=BlackOrWhiteNOTE;
                                              
                                var  widts =0;
 
@@ -2133,22 +2133,17 @@ var loopLimit = trailDepth;
                       green1  = pitchCol[r].g;
                       blue1  = pitchCol[r].b;
                      
+                      r2 = r1;
+                      g2 = g1;
+                      b2 = b1;
                      if(stylus!=0.5){
                          r1=stylus;
                          g1=stylus;
                          b1=stylus;
                          
-                          r2 = r1;
-                          g2 = g1;
-                          b2 = b1;
                          
                      }
                      else{
-                         
-                          r2 = r1;
-                          g2 = g1;
-                          b2 = b1;
-                         
                          r1 = red1;
                          g1 = green1;
                          b1 = blue1;
