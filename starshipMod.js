@@ -1234,7 +1234,8 @@ function runOSMD (){
 
                if(osmd.cursor.Iterator.endReached){
                  // osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
-                 scoreColorInversion= !scoreColorInversion;
+                if(getElementById("scoreBlack").checked  == true||getElementById("scoreWhite").checked  == true
+) scoreColorInversion= !scoreColorInversion;
                    setOSMDcolors()
 
              takeNextScoreSlice(1);
