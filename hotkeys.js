@@ -17,37 +17,36 @@ let runningHash = true;
 window.number = 24;
 window.EldersLeg = window.number;
 function readHash(){
-    
-    let hashindex = 0;
-    while (hashindex<location.hash.length)
-    {
-        number=""
-        let lasthash = hashindex;
-        if(location.hash[hashindex-1]=="(")
-        {            hashindex++;
-
-            while(location.hash[hashindex]!=")"&&hashindex!=location.hash.length-1)
-            {
-                number += location.hash[hashindex]
-                hashindex++;
+        let hashindex = 0;
+        while (hashindex<location.hash.length)
+        {
+            number=""
+            let lasthash = hashindex;
+            if(location.hash[hashindex-1]=="(")
+            {            hashindex++;
+                
+                while(location.hash[hashindex]!=")"&&hashindex!=location.hash.length-1)
+                {
+                    number += location.hash[hashindex]
+                    hashindex++;
+                }
+                
             }
-
+            number=Number(number);
+            callKey(new KeyboardEvent('keydown',
+                                      {
+                'key': location.hash[lasthash],"keyCode":location.hash.charCodeAt(lasthash),
+                "ctrlKey":location.hash[lasthash-1]==",","altKey":location.hash[lasthash-1]=="."
+            }                              ));
+            
+            hashindex++;
+            
+            
+            
         }
-        number=Number(number);
-    callKey(new KeyboardEvent('keydown',
-                              {
-        'key': location.hash[lasthash],"keyCode":location.hash.charCodeAt(lasthash),
-        "ctrlKey":location.hash[lasthash-1]==",","altKey":location.hash[lasthash-1]=="."
-    }                              ));
-
-                              hashindex++;
-
-                              
-                              
+        runningHash=false;
 }
-    runningHash=false;
-}
-    readHash();
+readHash();
 function hk() {
   var x = document.createElement("INPUT");
   x.setAttribute("type", "text");
@@ -187,13 +186,15 @@ window.key = " ";
     else if (document.activeElement.className=="num");//don't take number hotkey's while menu number selector engaged
         
     else if (x>0&&x<=9&& document.activeElement.className!="num"&&!event.shiftKey&&!event.altKey)
-        {rez = window.devicePixelRatio/x; renderer.setPixelRatio( rez);}
+        {rez = window.devicePixelRatio/x;
+          if(window.INITIALIZED) renderer.setPixelRatio( rez);
+}
         
     /*else if (x==0&& document.activeElement.className!="num"&&!event.shiftKey&&!event.altKey)
         {rez = window.devicePixelRatio/10.; renderer.setPixelRatio( rez);}
 */
-    else if (key=="+"){rez /=1.1; renderer.setPixelRatio( rez);}
-    else if (key=="_"){rez *=1.1; renderer.setPixelRatio( rez);}
+    else if (key=="+"){rez /=1.1; if(window.INITIALIZED) renderer.setPixelRatio( rez);}
+    else if (key=="_"){rez *=1.1; if(window.INITIALIZED) renderer.setPixelRatio( rez);}
 
     else if (x==0)
     {window.movementRate=movementRateORIGINAL; uniforms[ "rate" ].value=movementRateORIGINAL; }
@@ -217,7 +218,8 @@ window.key = " ";
 
     }
     else if (key=="À"||key=="`")
-    {rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);}
+    {rez=window.devicePixelRatio*2.;
+        if(window.INITIALIZED)   renderer.setPixelRatio( rez);}
     else if (key=="m") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
     else if (key=="M") uniforms[ "NightAndDay" ].value = !uniforms[ "NightAndDay" ].value;
     else if (key=="!")uniforms[ "Refractelate" ].value=!uniforms[ "Refractelate" ].value;
