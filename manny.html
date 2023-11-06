@@ -81,7 +81,7 @@
             if (userHasGestured)        loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")
             else        setTimeout(wrapperLurker,100);
         }
-            wrapperLurker();
+        if(!location.hash.includes(".f"))   wrapperLurker();
         </script>
 
         <!-- removing this script may fix android no load bug, but I'm testing z ordering in css        -->
