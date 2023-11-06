@@ -1327,9 +1327,10 @@ function runOSMD (){
     if(window.ChristoDecrypto!=0) uniforms.metaCarousel.value=          1./(  window.ChristoDecrypto*uniforms.externalCores.value)*(timestamp-window.timeRESET)/10.;
          
          
-    if(loopsRun<1)lastTime = timestamp;
 
     elapsedTimeBetweenFrames = (timestamp-lastTime);
+                        if(loopsRun<1)elapsedTimeBetweenFrames = 0;
+
     if(elapsedTimeBetweenFrames>interval)
     {FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
     ticker++;
