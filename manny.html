@@ -1689,7 +1689,8 @@ vec3 beta =vec3(1.);
 float dstnce = length(s);//"distance" may be reserved keyword
 
 float coreBooster=0.;
-float truncator = log(zoom/lfc);
+float truncator=1.;
+i(lfc!=0.) truncator = log(zoom/lfc);
 float metaCoreDriveFactor =(((1.-leaf)/truncator)*truncator)/gr;//.324717.... number of places changes appearance
 float hyperCoreOUTPUT =hyperCore*log(2.)/log(metaCoreDriveFactor)+loops;
 float hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
