@@ -51,6 +51,8 @@ function initialize(){
         if(!window.touchMode){
             touchNumber.set(e.pointerId,cycle);
             cycle=(cycle+1)%10
+            getPressure();
+
             startSound(e);
 
         }
