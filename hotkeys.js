@@ -156,7 +156,7 @@ function callKey(event){
     //else if (key=="" && event.ctrlKey)instantaneousFreqSpirographColoring = (instantaneousFreqSpirographColoring+1)%2;//color mode 3 seems obsolete
     else if (key=="m" && event.ctrlKey) uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value;
     else if (event.ctrlKey&&key=="a")uniforms[ "colorCombo" ].value = 11;
-    
+    else if (event.altKey&&key=="f");//speakers turned off in manny.html
     else if(event.ctrlKey);//swallow remaining possibilities, muting keypress
     /*if(key == "k" && event.ctrlKey)
      {
