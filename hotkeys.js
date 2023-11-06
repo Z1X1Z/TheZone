@@ -1,3 +1,4 @@
+window.Bible = 1;
 window.fftSize=512
 window.zoom=1.;
 window.starSpin=0.;
