@@ -44,6 +44,63 @@ function initialize(){
        }
     catch{
 }
+    c.addEventListener('pointerdown', function(e)
+    {
+
+     //   e.stopImmediatePropagation();          //e.preventDefault();
+        if(!window.touchMode){
+            touchNumber.set(e.pointerId,cycle);
+            cycle=(cycle+1)%10
+            startSound(e);
+
+        }
+
+    }, false);
+c.addEventListener('pointermove', function(e) {
+    if(!window.touchMode){
+        getPressure();
+        followSound(e);
+    }
+   // e.stopImmediatePropagation();// e.preventDefault();
+}, false);
+
+c.addEventListener('pointerup', function(e){
+        window.pointerZoom=false;
+        if(!window.touchMode){
+            {   getPressure();
+                let tn = touchNumber.get(e.pointerId);
+                sound[tn].stop();sound2[tn].stop();
+            }
+        }
+        //e.preventDefault(); e.stopImmediatePropagation();
+    }
+        , false);
+
+    c.addEventListener('pointercancel', function(e){
+        window.pointerZoom=false;
+        if(!window.touchMode){
+        {
+            let tn = touchNumber.get(e.pointerId)
+            sound[tn].stop();
+            sound2[tn].stop();
+        }
+            //e.preventDefault(); e.stopImmediatePropagation();
+        }
+    }, false);
+    
+    c.addEventListener('pointerleave', function(e){
+        window.pointerZoom=false;
+        if(!window.touchMode){
+        {
+            let tn = touchNumber.get(e.pointerId)
+            sound[tn].stop();
+            sound2[tn].stop();
+        }
+            //e.preventDefault(); e.stopImmediatePropagation();
+        }
+    }, false);
+
+    
     wadLOADED=true;
 }
 
@@ -63,9 +120,7 @@ function startSound(e){
     screenPressCoordY=y;
 
     if(!window.touchMode){
-        var id = 0;
-        if (navigator.maxTouchPoints > 0) //navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' ))
-            id = touchNumber.get(e.identifier);
+        var id = touchNumber.get(e.pointerId);
        
         
         
@@ -101,11 +156,8 @@ if (!sheetTranslucent&&osmd!=null) correlationForText += document.getElementById
 
     if(!window.touchMode){
         
-        var id = 0;
-        if (//navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' &&)
-            navigator.maxTouchPoints > 0)
-            id = touchNumber.get(e.identifier);
-        
+        var id =touchNumber.get(e.pointerId);
+
         
         let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth));
         let angleSound = Math.atan2(y,x);
@@ -135,82 +187,5 @@ let c = document.getElementById("container");
         else if (event.pressure === .5) pressure = 1;
         else pressure = event.pressure;
     }
-             c.addEventListener("pointerdown",getPressure,false);
-              c.addEventListener("pointermove",getPressure,false);
 
-                                 
-if (//navigator.userAgent.toLowerCase().match(/mobile/i)||(navigator.platform === 'MacIntel' &&)
-navigator.maxTouchPoints > 0){
-    c.addEventListener('touchstart', function(e)
-    {
-
-     //   e.stopImmediatePropagation();          //e.preventDefault();
-c.focus();//this is to make the panel menu go down on android when you press on the container of the game
-        for(var o=0; o<e.changedTouches.length; o++)
-        {
-            touchNumber.set(e.changedTouches[o].identifier,cycle);
-            cycle=(cycle+1)%10
-            startSound(e.changedTouches[o]);
-
-        }
-
-    }, false);
-c.addEventListener('touchmove', function(e) {
-    //mcphrth();//reproc vibrate
-
-    for(var o=0; o<e.changedTouches.length; o++)followSound(e.changedTouches[o]);
-   // e.stopImmediatePropagation();// e.preventDefault();
-}, false);
-
-c.addEventListener('touchend', function(e){
-        window.pointerZoom=false;
-    
-        if(!window.touchMode){
-            
-            for(var o=0; o<e.changedTouches.length; o++)
-            {   let tn = touchNumber.get(e.changedTouches[o].identifier);
-                sound[tn].stop();sound2[tn].stop();
-            }
-        }
-        //e.preventDefault();
-    //e.stopImmediatePropagation();
-    }
-        , false);
-
-    c.addEventListener('touchcancel', function(e){
-        window.pointerZoom=false;
-        
-        if(!window.touchMode){ for(var o=0; o<e.changedTouches.length; o++)
-        {
-            let tn = touchNumber.get(e.changedTouches[o].identifier)
-            sound[tn].stop();
-            sound2[tn].stop();
-            
-        }
-            e.preventDefault(); e.stopImmediatePropagation();
-
-        }
-    }, false);
-
-}
-else{
-
-c.addEventListener('mousedown', function(e){
-    startSound(e);
-    e.preventDefault(); e.stopImmediatePropagation();
-},
-                   false);
-
- c.addEventListener('mousemove', function(e){
-     followSound(e)
-     e.preventDefault(); e.stopImmediatePropagation();
- },
-            false);
-    
-    c.addEventListener('mouseup', function(e){
-        window.pointerZoom=false;
-        
-        if(!window.touchMode&& typeof(Wad)=="function"){sound[0].stop();sound2[0].stop();}
-        e.preventDefault(); e.stopImmediatePropagation();
-    }, false);
-}
+                               
