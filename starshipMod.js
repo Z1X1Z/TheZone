@@ -68,7 +68,7 @@ window.flip = 1;
 let colorSound;
 let colorSoundPURE;
 let center = false;
-     
+let loopsRun =0;
 let mobile = false;
 
       //vvvvbelow line partly from https://code-boxx.com/detect-mobile-device-javascript/
@@ -1033,7 +1033,7 @@ let lastVolume = 1.;
                        let cloverSuperCores = 0;
                        var singleHyperCoreDepth = 60.;
        function infinicore(){
-            if(zoom<=1./2.**63&&(coordY*coordY+coordX*coordX)**.5/zoom<2.){
+            if(zoom<=1./2.**60&&(coordY*coordY+coordX*coordX)**.5/zoom<2.){
                 zoom*=2.**singleHyperCoreDepth;coordY*=2.**singleHyperCoreDepth;coordX*=2.**singleHyperCoreDepth;
                 cloverSuperCores++;
 
@@ -1090,11 +1090,11 @@ function zoomRoutine(){
 
     
     //.000000000000000000000001
-                       if ( zoom<zoomCone||zoom<1./2**63.*metaDepth)zoomOutEngage = true;
+                       if ( zoom<zoomCone||zoom<1./2**60.*metaDepth)zoomOutEngage = true;
                          if (zoomOutEngage == true) zoom *= 1.44/ZR;
                     
 
-                          if(zoom<1./2**63.*metaDepth)zoom = 1.;
+                          if(zoom<1./2**60.*metaDepth)zoom = 1.;
     
 
 }
@@ -1304,7 +1304,6 @@ function runOSMD (){
         //OSMDUPDATER();
 
                  let   upOrDown = 1;
-                        let frameCount = 0;
                                            const coreData = new Float32Array(40).fill(1./-leaf);
                                            const omniData = new Float32Array(40).fill(0.);;
                                            let hyperCorePixel = new Uint8Array(4).fill(0.);
@@ -1377,7 +1376,7 @@ function runOSMD (){
     if(document.visibilityState=="hidden"||lvs=="hidden")lastFrameTime=timestamp;
     lvs=document.visibilityState
     interpolation = (timestamp-lastFrameTime)/1000.*60.;
-    if(!hasRun)interpolation=1.;//this is to prevent frametime leak on mobile
+    if(loopsRun>2)interpolation=1.;//this is to prevent frametime leak on mobile
     if (!isFinite(interpolation))interpolation = 1.;
     lastFrameTime=timestamp;
     if(!window.touchMode)pointerZoom=false;
@@ -1484,8 +1483,7 @@ if( !window.touchMode&&!window.touchOnlyMode) {
   if(instantaneousFreqSpirographColoring==1) {
     lineMat.color = colorSoundPURE;
   }
-       
-    frameCount=(frameCount+1)%2;
+       let frameCount=loopsRun%2;
        lineMat.color = new THREE.Color("").setRGB(frameCount,frameCount,frameCount);
 
   const d = -1.;
@@ -2598,7 +2596,7 @@ for(var n = 0; n<targets.length;n++){
 
                         
                   }//end touch mode centerOfDotToEdge
-hasRun = true;
+                              loopsRun++;
                                                                        animateLoopId=                   window.requestAnimationFrame( animate );
                             //  renderer.forceContextLoss ()
                             //  renderer.forceContextRestore ( )
