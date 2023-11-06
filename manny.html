@@ -16,7 +16,7 @@
         <body oncontextmenu="return false;">
           <!--  <iframe id="Bible" src="https://www.biblehub.com/audio/" height="300"  title="Audio Bible"></iframe>
             <script> document.getElementById("Bible").height = 100;</script>
-          --!>
+          -->
             <!--disable right click solution from
                                         https://stackoverflow.com/questions/381795/how-to-disable-right-click-context-menu-in-javascript  -->
         <div id="load message" style="font-size:40px; background-color:blue;">     </div>
@@ -139,7 +139,7 @@
                           number = document.getElementById('fretCount').value;
                           key  = 'a';
                           if(!isNaN(number)){
-                              callKey(new KeyboardEvent('keydown', {'key':'a', 'keyCode':key.charCodeAt(0)}));
+                              callKey(new KeyboardEvent('keydown', {'key':key, 'keyCode':key.charCodeAt(0)}));
                           }
                                                   ">
                       <br>
@@ -295,7 +295,7 @@
                    <label for="zoomSpeed">Zoom Speed</label>
                    <input type="number" id="zoomSpeed" name="zoomSpeed" class="num" onkeydown="
                            number = document.getElementById('zoomSpeed').value;
-                           key  = '\';
+                           key  = '\\';
                            if(!isNaN(number)){
                                callKey(new KeyboardEvent('keydown', {'key':key, 'keyCode':key.charCodeAt(0)}));
                            }
@@ -310,7 +310,7 @@
                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                        Slower Zoom!</a><br>
                        <a id="Reset Zoom Speed" name="t"  onclick= "
-                           key  = '\';
+                           key  = '\\';
                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                        Reset Zoom!</a><br>
                        <label for="Trail Length">Trail Seconds</label>

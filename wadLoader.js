@@ -44,64 +44,7 @@ function initialize(){
        }
     catch{
 }
-    c.addEventListener('pointerdown', function(e)
-    {
-
-     //   e.stopImmediatePropagation();          //e.preventDefault();
-        if(!window.touchMode){
-            touchNumber.set(e.pointerId,cycle);
-            cycle=(cycle+1)%10
-            getPressure();
-
-            startSound(e);
-
-        }
-
-    }, false);
-c.addEventListener('pointermove', function(e) {
-    if(!window.touchMode){
-        getPressure();
-        followSound(e);
-    }
-   // e.stopImmediatePropagation();// e.preventDefault();
-}, false);
-
-c.addEventListener('pointerup', function(e){
-        window.pointerZoom=false;
-        if(!window.touchMode){
-            {   getPressure();
-                let tn = touchNumber.get(e.pointerId);
-                sound[tn].stop();sound2[tn].stop();
-            }
-        }
-        //e.preventDefault(); e.stopImmediatePropagation();
-    }
-        , false);
-
-    c.addEventListener('pointercancel', function(e){
-        window.pointerZoom=false;
-        if(!window.touchMode){
-        {
-            let tn = touchNumber.get(e.pointerId)
-            sound[tn].stop();
-            sound2[tn].stop();
-        }
-            //e.preventDefault(); e.stopImmediatePropagation();
-        }
-    }, false);
-    
-    c.addEventListener('pointerleave', function(e){
-        window.pointerZoom=false;
-        if(!window.touchMode){
-        {
-            let tn = touchNumber.get(e.pointerId)
-            sound[tn].stop();
-            sound2[tn].stop();
-        }
-            //e.preventDefault(); e.stopImmediatePropagation();
-        }
-    }, false);
-
+   
     
     wadLOADED=true;
 }
@@ -115,8 +58,8 @@ function startSound(e){
 
    let y = e.clientY-(window.innerHeight+correlationForText)/2.;
     let x = e.clientX- window.innerWidth/2.;
-
     if(window.touchMode)window.pointerZoom=true
+    
 
     screenPressCoordX=x;
     screenPressCoordY=y;
@@ -183,11 +126,69 @@ let c = document.getElementById("container");
                                  
                                  
                                 var pressure = 1.;
-    function getPressure(){
+    function getPressure(event){
         if (event.pressure === 0) pressure=1;
         else if (event.pressure === 1) pressure = 1;
         else if (event.pressure === .5) pressure = 1;
         else pressure = event.pressure;
     }
-
+let playing =
                                
+                                 c.addEventListener('pointerdown', function(e)
+                                 {
+            
+
+                                  //   e.stopImmediatePropagation();          //e.preventDefault();
+                                         touchNumber.set(e.pointerId,cycle);
+                                         cycle=(cycle+1)%10
+                                         getPressure(e);
+                                         startSound(e);
+
+                                 }, false);
+                             c.addEventListener('pointermove', function(e) {
+            let tn = touchNumber.get(e.pointerId)
+                                 if(typeof tn == "number"){
+                                     getPressure(e);
+                                     followSound(e);
+                                 }
+                                // e.stopImmediatePropagation();// e.preventDefault();
+                             }, false);
+
+                             c.addEventListener('pointerup', function(e){
+                                     window.pointerZoom=false;
+            
+let tn = touchNumber.get(e.pointerId)
+                if(typeof tn == "number" ){                                         {
+                                             let tn = touchNumber.get(e.pointerId);
+                                             sound[tn].stop();sound2[tn].stop();
+                                         }
+                                     }
+                                     //e.preventDefault(); e.stopImmediatePropagation();
+                                 }
+                                     , false);
+
+                                 c.addEventListener('pointercancel', function(e){
+                                     window.pointerZoom=false;
+            
+                                    let tn = touchNumber.get(e.pointerId);
+                                    if(typeof tn == "number" ){
+                                         let tn = touchNumber.get(e.pointerId)
+                                         sound[tn].stop();
+                                         sound2[tn].stop();
+                                     
+                                         //e.preventDefault(); e.stopImmediatePropagation();
+                                     }
+                                 }, false);
+                                 
+                                 c.addEventListener('pointerleave', function(e){
+                                     window.pointerZoom=false;
+            
+let tn = touchNumber.get(e.pointerId)
+                if(typeof tn == "number"){
+                                         let tn = touchNumber.get(e.pointerId)
+                                         sound[tn].stop();
+                                         sound2[tn].stop();
+                                     
+                                         //e.preventDefault(); e.stopImmediatePropagation();
+                                     }
+                                 }, false);
