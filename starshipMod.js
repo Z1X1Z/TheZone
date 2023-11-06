@@ -654,9 +654,11 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
 
        }
 
-                                           var minimumDimension=1;
-                                           var maximumDimension=1;
-                     var height=window.innerHeight,width=window.innerWidth;
+                                           var minimumDimension=Math.min(window.innerHeight,window.innerWidth);
+                                           var maximumDimension=Math.max(window.innerHeight,window.innerWidth);
+                                           var heightPX=window.innerHeight,widthPX=window.innerWidth;
+                                           var height=heightPX/minimumDimension,width=window.innerWidth/minimumDimension;
+
                        let renderTarget, cloverRenderTarget;
                        let backBufferFlip=false;
                       let FeedbackrenderTarget,FeedbackrenderTargetFlipSide;
@@ -957,28 +959,23 @@ function setDynamicSampler2ds(){
  }
  
                     let bottomOfScreenHeight = 0;
+                                           let correlationForTextX = 0;
+                                           let correlationForTextY = 0;
+
 function adjustThreeJSWindow()
                     {
      
-     let correlationForText = 0;
-     if (!sheetTranslucent)
-     {
-         correlationForText+=document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight
-         bottomOfScreenHeight = correlationForText;
-     }
-         height=window.innerHeight-correlationForText;
-         width=window.innerWidth;
-     renderer.setSize(width, height);
+     renderer.setSize(widthPX, heightPX);
 
         
-     uniforms.resolution.value =new THREE.Vector2(width,height);
-     FEEDBACKuniforms.resolution.value =new THREE.Vector2(width,height);
+     uniforms.resolution.value =new THREE.Vector2(widthPX,heightPX);
+     FEEDBACKuniforms.resolution.value =new THREE.Vector2(widthPX,heightPX);
 
-      minimumDimension = Math.min(width,height);
-     maximumDimension = Math.max(width,height);
-     setRenderTargetSize(width,height);
-      height/=minimumDimension;
-      width/=minimumDimension;
+      minimumDimension = Math.min(widthPX,heightPX);
+     maximumDimension = Math.max(widthPX,heightPX);
+     setRenderTargetSize(widthPX,heightPX);
+      height=heightPX/minimumDimension;
+      width=widthPX/minimumDimension;
 
   camera = new THREE.OrthographicCamera( -width, width, height, -height, 1, -1);
 
@@ -988,10 +985,22 @@ window.addEventListener( 'resize', onWindowResize, false );
 window.addEventListener("orientationchange", onWindowResize, false);
 
 function onWindowResize() {
+                        
+                        if (!sheetTranslucent)
+                        {
+                            correlationForTextY=document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight
+                            bottomOfScreenHeight = correlationForTextY;
+                        }
+                                           
+                       if(Bible==0)correlationForTextX=document.getElementById("Bible").offsetWidth
+                                              
+                            heightPX=window.innerHeight-correlationForTextY;
+                            widthPX=window.innerWidth-correlationForTextX;
+                        
                         if(Bible==0)document.getElementById("Bible").height=window.innerHeight/-leaf;
 
             if("osmd" in window&&osmd!=null)
-            {
+            {   osmd.width=widthPX;
                 osmdResize();//osmdResize defined in fileSelectAndLoadOSMD.js
             }
         

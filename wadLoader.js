@@ -52,24 +52,22 @@ function initialize(){
 let initialAngleSound = Array(10);
 initialAngleSound[0]=0;
 function startSound(e){
-    let correlationForText = 0.;
-    if (!sheetTranslucent&&osmd!=null) correlationForText += document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight+20;
 
 
-   let y = e.clientY-(window.innerHeight+correlationForText)/2.;
-    let x = e.clientX- window.innerWidth/2.;
+   let y = e.clientY-heightPX/2.;
+    let x = e.clientX- widthPX/2.;
     if(window.touchMode)window.pointerZoom=true
-    
 
     screenPressCoordX=x;
     screenPressCoordY=y;
-
+   
     if(!window.touchMode){
         var id = touchNumber.get(e.pointerId);
        
         
         
-        let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth));
+        let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
+
         initialAngleSound[id] = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi);
         let frequency = Math.pow(2.,((((initialAngleSound[id]*window.flip)/pi/2*12+correction)*window.flip-window.flip*window.twist/2.))/12.)*window.ConcertKey/2.;
         //sound[id].pitch=frequency;
@@ -82,29 +80,27 @@ function startSound(e){
             sound[id].stop();
             sound2[id].stop();
             
-            sound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:0.});
-            sound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2.,volume:volume});
+            sound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume});
+            sound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:.0000001,volume:.0000001});
+
             }
     }
 }
 
                                      
 function followSound(e){
-            let correlationForText = 0.;
-if (!sheetTranslucent&&osmd!=null) correlationForText += document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight;
-
-            let y = e.clientY-(window.innerHeight+correlationForText)/2.;
-            let x = e.clientX-window.innerWidth/2.;
+            let y = e.clientY-heightPX/2.;
+            let x = e.clientX-widthPX/2.;
 
                         screenPressCoordX=x;
                         screenPressCoordY=y;
-
+         
     if(!window.touchMode){
         
         var id =touchNumber.get(e.pointerId);
 
         
-        let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(window.innerHeight+correlationForText,window.innerWidth));
+        let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
         let angleSound = Math.atan2(y,x);
         angleSound=((angleSound-initialAngleSound[id])+pi/2.+4.*pi)%(2*pi)*window.flip+initialAngleSound[id];
    
