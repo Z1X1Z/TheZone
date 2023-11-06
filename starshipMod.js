@@ -1376,7 +1376,7 @@ function runOSMD (){
     if(document.visibilityState=="hidden"||lvs=="hidden")lastFrameTime=timestamp;
     lvs=document.visibilityState
     interpolation = (timestamp-lastFrameTime)/1000.*60.;
-    if(loopsRun>2)interpolation=1.;//this is to prevent frametime leak on mobile
+    if(loopsRun<2)interpolation=0.;//this is to prevent frametime leak on mobile
     if (!isFinite(interpolation))interpolation = 1.;
     lastFrameTime=timestamp;
     if(!window.touchMode)pointerZoom=false;
