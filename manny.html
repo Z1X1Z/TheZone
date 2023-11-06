@@ -25,11 +25,13 @@
                 {
                 iframe.setAttribute("src", "https://www.biblehub.com/audio/");
                 iframe.setAttribute("height", "0");
-                iframe.setAttribute("width", "0");
+                iframe.setAttribute("width", "50%");
                 iframe.setAttribute("class", "onBottom");
-                iframe.setAttribute("style","margin-left:66.7%;");
+                iframe.setAttribute("style","margin-left:50%;");
                 iframe.setAttribute("Id","Bible");
                 document.body.appendChild(iframe);
+                iframe.setAttribute("width", "0");
+
                 }
                 </script>
         <div id="load message" style="font-size:40px; background-color:blue;">     </div>
@@ -806,12 +808,12 @@ scoreColorInversion=false;
                   <input type="checkbox" id="BibleToggle" name="t"  onclick= '
 window.Bible = (window.Bible+1)%2;
 if(Bible==0)
-{document.getElementById("Bible").height=window.innerHeight/-leaf;
-document.getElementById("Bible").width="33.3%"}
+{document.getElementById("Bible").height="100%";
+document.getElementById("Bible").width="50%"}
 else {
 document.getElementById("Bible").height= 0;
 document.getElementById("Bible").width=0}
-
+onWindowResize();
 '>
                   <label for="BibleToggle">Listen to The Bible</label>
                   <br>
