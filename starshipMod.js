@@ -988,7 +988,8 @@ window.addEventListener( 'resize', onWindowResize, false );
 window.addEventListener("orientationchange", onWindowResize, false);
 
 function onWindowResize() {
-     
+                        if(Bible==0)document.getElementById("Bible").height=window.innerHeight/-leaf;
+
             if("osmd" in window&&osmd!=null)
             {
                 osmdResize();//osmdResize defined in fileSelectAndLoadOSMD.js
