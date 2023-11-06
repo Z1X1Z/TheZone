@@ -198,13 +198,13 @@ function callKey(event){
         
     }
     
-    else if (key=="\\"){zoomRate=movementRateORIGINAL; if(number!="")zoomRate=number;}
+    else if (key=="\\"){zoomRate=movementRateORIGINAL; if(number!="")zoomRate=number*1.;}
 
-    else if (key=="/"){if(number!=""){trailSecondsLong=number;setTrailSize()}}
+    else if (key=="/"){if(number!=""){trailSecondsLong=number*1.;setTrailSize()}}
     
     else if (x==0)
     {window.movementRate=movementRateORIGINAL; uniforms[ "rate" ].value=movementRateORIGINAL;
-        if(number!=""){window.movementRate=number; uniforms[ "rate" ].value=number;};
+        if(number!=""){window.movementRate=number*1.; uniforms[ "rate" ].value=number*1.;};
     }
     
     else if (document.activeElement.className=="num");//don't take number hotkey's while menu number selector engaged
