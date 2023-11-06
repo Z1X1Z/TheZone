@@ -991,9 +991,10 @@ function onWindowResize() {
                             correlationForTextY=document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight
                             bottomOfScreenHeight = correlationForTextY;
                         }
+                        else{correlationForTextY=0;bottomOfScreenHeight=0}
                                            
                        if(Bible==0)correlationForTextX=document.getElementById("Bible").offsetWidth
-                                              
+                                              else correlationForTextX=0.;
                             heightPX=window.innerHeight-correlationForTextY;
                             widthPX=window.innerWidth-correlationForTextX;
                         
