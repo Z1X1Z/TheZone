@@ -1377,7 +1377,7 @@ function runOSMD (){
     lvs=document.visibilityState
     interpolation = (timestamp-lastFrameTime)/1000.*60.;
     if (!isFinite(interpolation))interpolation = 1.;
-    if(loopsRun<2)interpolation=0.;//this is to prevent frametime leak on mobile
+    if(loopsRun<10)interpolation=0.;//this is to prevent frametime leak on mobile
     lastFrameTime=timestamp;
     if(!window.touchMode)pointerZoom=false;
     else on=false;
@@ -2603,7 +2603,6 @@ for(var n = 0; n<targets.length;n++){
 
 }
 
-               let hasRun=false;
                     let animateLoopId;
                     
 
