@@ -1327,7 +1327,7 @@ function runOSMD (){
     if(window.ChristoDecrypto!=0) uniforms.metaCarousel.value=          1./(  window.ChristoDecrypto*uniforms.externalCores.value)*(timestamp-window.timeRESET)/10.;
          
          
-         
+    if(loopsRun<1)lastTime = timestamp;
 
     elapsedTimeBetweenFrames = (timestamp-lastTime);
     if(elapsedTimeBetweenFrames>interval)
@@ -1377,7 +1377,7 @@ function runOSMD (){
     lvs=document.visibilityState
     interpolation = (timestamp-lastFrameTime)/1000.*60.;
     if (!isFinite(interpolation))interpolation = 1.;
-    if(loopsRun<10)interpolation=0.;//this is to prevent frametime leak on mobile
+    if(loopsRun<1)interpolation=0.;//this is to prevent frametime leak on mobile
     lastFrameTime=timestamp;
     if(!window.touchMode)pointerZoom=false;
     else on=false;
