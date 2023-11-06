@@ -1329,7 +1329,7 @@ function runOSMD (){
          
 
     elapsedTimeBetweenFrames = (timestamp-lastTime);
-                        if(loopsRun<1)elapsedTimeBetweenFrames = 0;
+                        if(loopsRun<3)elapsedTimeBetweenFrames = 0;
 
     if(elapsedTimeBetweenFrames>interval)
     {FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
@@ -1378,7 +1378,7 @@ function runOSMD (){
     lvs=document.visibilityState
     interpolation = (timestamp-lastFrameTime)/1000.*60.;
     if (!isFinite(interpolation))interpolation = 1.;
-    if(loopsRun<1)interpolation=0.;//this is to prevent frametime leak on mobile
+    if(loopsRun<3)interpolation=0.;//this is to prevent frametime leak on mobile
     lastFrameTime=timestamp;
     if(!window.touchMode)pointerZoom=false;
     else on=false;
