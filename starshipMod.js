@@ -278,6 +278,7 @@ function fiveAndSeven(){
 var pitchCol = Array(trailLength);
                             
             function setTrailSize(){
+        
                              trailLength = Math.ceil(zoomFrames*trailSecondsLong);
                             starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;//base Z value
                               cx =new Float64Array(trailLength).fill(0);//c is the center of the frame moved from the origin
@@ -288,9 +289,17 @@ var pitchCol = Array(trailLength);
                               trailTimeOfRecording = new Float64Array(trailLength).fill(0);
                               trailSegmentExpired = Array(trailLength).fill(false);
                             pitchCol = Array(trailLength);
-                                       if(window.INITIALIZED)           for(var n = 0; n<trailLength; n++)
-                                                    {pitchCol[n]  = new THREE.Color()
-                                                    }
+                                                  if(window.INITIALIZED){
+                                for(var n = 0; n<trailLength; n++)
+                                {pitchCol[n]  = new THREE.Color()
+                                }
+                                
+                                for(var v = 0; v<6*trailDepth;v++){
+                                    geomeTrail.getAttribute( 'position' ).setXYZ(v,0,0,0);
+                                }
+                            }
+                                                  trailDepth=0.;
+
                            }
 let trailLoaded = false;
 let trailDepth = 0;

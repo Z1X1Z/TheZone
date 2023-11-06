@@ -110,6 +110,7 @@ function callKey(event){
                                                                );
     
     key = event.key;
+    number=Number(number);
     if(key=="/"&&!event.shiftKey){  event.preventDefault(); event.stopImmediatePropagation();}
     
     var x=null;
@@ -196,6 +197,16 @@ function callKey(event){
         setFFTdependantSizes();
         
     }
+    
+    else if (key=="\\"){zoomRate=movementRateORIGINAL; if(number!="")zoomRate=number;}
+
+    else if (key=="/"){if(number!=""){trailSecondsLong=number;setTrailSize()}}
+    
+    else if (x==0)
+    {window.movementRate=movementRateORIGINAL; uniforms[ "rate" ].value=movementRateORIGINAL;
+        if(number!=""){window.movementRate=number; uniforms[ "rate" ].value=number;};
+    }
+    
     else if (document.activeElement.className=="num");//don't take number hotkey's while menu number selector engaged
     
     else if (x>0&&x<=9&& document.activeElement.className!="num"&&!event.shiftKey&&!event.altKey)
@@ -209,10 +220,6 @@ function callKey(event){
     else if (key=="+"){rez /=1.1; if(window.INITIALIZED) renderer.setPixelRatio( rez);}
     else if (key=="_"){rez *=1.1; if(window.INITIALIZED) renderer.setPixelRatio( rez);}
     
-    else if (x==0)
-    {window.movementRate=movementRateORIGINAL; uniforms[ "rate" ].value=movementRateORIGINAL;
-        if(number!=""){window.movementRate=number; uniforms[ "rate" ].value=number;};
-    }
     else if(x == 1&&event.altKey&&!event.shiftKey)uniforms.clvrVariant1.value=!uniforms.clvrVariant1.value;
     else if(x == 2&&event.altKey&&!event.shiftKey)uniforms.clvrVariant2.value=!uniforms.clvrVariant2.value;
     else if(x == 3&&event.altKey&&!event.shiftKey)uniforms.clvrVariant3.value=!uniforms.clvrVariant3.value;
@@ -347,9 +354,6 @@ function callKey(event){
     else if (key=="}"){if(uniforms.eden.value==4)uniforms.eden.value=0;else uniforms.eden.value=4;}
     else if (key=="]"){zoomRate*=1.11111111;}
     else if (key=="["){zoomRate/=1.11111111;}
-    else if (key=="\\"){zoomRate=movementRateORIGINAL; if(number!="")zoomRate=number;}
-    else if (key=="/"){if(number!=""){trailSecondsLong=number;setTrailSize()}}
-
     else if (//event.keyCode==190||
              event.key==">") uniforms[ "metronome" ].value *= 1.1; //keycode for <
     else if ((//event.keyCode==188||
