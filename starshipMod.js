@@ -1049,9 +1049,9 @@ let lastVolume = 1.;
                        
                        
                        let cloverSuperCores = 0;
-                       var singleHyperCoreDepth = 60.;
+                       var singleHyperCoreDepth = 54.;//240/54=4.44444444.. I like this, also 240/48 = 5 that's okay too, since the 60th core is kindof gone to the hypercore dot
        function infinicore(){
-            if(zoom<=1./2.**60&&fromCenter/zoom<2.){
+            if(zoom<=1./2.**(singleHyperCoreDepth+3)&&fromCenter/zoom<2.){
                 zoom*=2.**singleHyperCoreDepth;coordY*=2.**singleHyperCoreDepth;coordX*=2.**singleHyperCoreDepth;
                 cloverSuperCores++;
 
@@ -1074,7 +1074,7 @@ let lastVolume = 1.;
     
     if (on||zoom<1.)preserveOuterCore=true;
     else preserveOuterCore = false
-    if((fromCenter>=1.||zoom>=1.&&!zoomOutEngage&&uniforms.MetaCored.value)&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
+    if((fromCenter>=1.||zoom>=1.)&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
         
         if(uniforms.wheel.value)uniforms.upCoreCycler.value=(uniforms.upCoreCycler.value-1)%60;//does modulo -60%60=0?-0 it seems
         else uniforms.upCoreCycler.value = 0.;
@@ -1102,17 +1102,18 @@ function zoomRoutine(){
         if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&on)||window.pointerZoom)zoom *=ZR;
         else if(uniforms.MetaCored.value||zoom<1.){
             zoom /= ZR;
-            if(center&&zoom<1.){coordX*=(1-zoom)/ZR*2./3.; coordY*=(1-zoom)/ZR*2./3.;}
+            if(center&&zoom<1.){coordX*=1./(ZR*1./-leaf)*(1-zoom); coordY*=1./(ZR/-leaf)**(1-zoom);}
         }
     }
 
     
     //.000000000000000000000001
-                       if ( zoom<zoomCone||zoom<1./2**60.*metaDepth)zoomOutEngage = true;
+                        if (zoom<zoomCone||(zoom<1./2**singleHyperCoreDepth*metaDepth&&cloverSuperCores<-.5)){
+                            zoomOutEngage = true;}
                          if (zoomOutEngage == true) zoom *= 1.44/ZR;
                     
 
-                          if(zoom<1./2**60.*metaDepth)zoom = 1.;
+                          if(zoom<1./2**singleHyperCoreDepth*metaDepth)zoom = 1.;
     
 
 }
@@ -2545,11 +2546,11 @@ for(var n = 0; n<targets.length;n++){
                 }
                 else lastZoom=zoom;
                     setZoomRate();
-                        const coordinator = pixelShaderSize/2.;//this is the frame size in the shader: "p=vec2(...."
+                        const coordinator = pixelShaderSize/2./minimumDimension*movementRate;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
 
                     if(pointerZoom){
-                        const xTouch = screenPressCoordX/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/coordinator);
-                        const yTouch = screenPressCoordY/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/coordinator);
+                        const xTouch = screenPressCoordX*coordinator;
+                        const yTouch = screenPressCoordY*coordinator;
                          const touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
                         uniforms.d.value=new THREE.Vector2( -xTouch,yTouch);
                         uniforms[ "volume" ].value=1.;
