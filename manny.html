@@ -1692,9 +1692,9 @@ if(MetaCored)hyperCore=
     
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 
-float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
+//float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
 
-if(lfc>CORE_DELIMITEReq)equilibriator=lfc/(lfc-zoom/dif)*dif;
+if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
    hyperCore*=equilibriator;
    
    //   hyperCore+=.25/log(.5)/equilibriator;
