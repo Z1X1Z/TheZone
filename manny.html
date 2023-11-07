@@ -2538,7 +2538,8 @@ vec3 xtol(vec2 s, vec2 t){
                       vec3 sword(vec2 p,vec2 t){
                                  //sword
                                      vec2 g=p*3.;
-                                     g.x+=-sin(time2dance/3.)*20.+12.;
+                                     g.x+=(lerp(time2dance/22.)+1.)*21.
+                                     -7.;
                                      g.x/=1.5;
                                      vec2 z=g;
                                      float d = 0.0;
@@ -2598,7 +2599,7 @@ vec3 xtol(vec2 s, vec2 t){
                             p*=3.;
                             vec2 s = p;
                             float d = 0.0, l=0.;
-                              if (!(p.x<-4.)&&abs(p.y)<1.789||unleash.x!=-1.)
+                              if (!(p.x<-5.)&&abs(p.y)<1.789||unleash.x!=-1.)
                             for (int i = 0; i < 5; i++) {
                               s = vec2(-1./(s.x * s.x - s.y * s.y + p.x),-1./( 2.0 * s.x * s.y + p.y));
                               l = length(s);
@@ -2867,9 +2868,13 @@ mny+=HEART*heartMultiplier;
     if(articles){
            vec3 HORSE=horse(characterP, moveDynamic);
             ARTICLE+=scroll(characterP+1.5*vec2(0.,resolution.x/min(resolution.x,resolution.y)),vec2(-1.));
-            vec3 SWORD = sword(characterP+vec2(swordSkew,0.),vec2(0.));;
-            ARTICLE+=clamp(lamp(characterP,vec2(-1.))+flames(characterP-vec2(.5,0.))-(SWORD.r+SWORD.g+SWORD.b+HORSE.r*3.)*10.,0.,1.)+SWORD+HORSE;
-          
+            vec3 SWORD = sword(characterP+vec2(swordSkew,0.),vec2(0.));
+            vec2 c4 = characterP/vec2(1.,4);
+             vec3 LAMP = clamp(lamp(c4,vec2(-1.))-(SWORD.x+SWORD.y+SWORD.x)*10.,0.,1.)+SWORD;
+             float ls = (SWORD.x+SWORD.y+SWORD.z+LAMP.x+LAMP.y+LAMP.z)*10.;
+             mny=clamp(mny-ls*5.,0.,1.)+SWORD+LAMP;
+
+            ARTICLE+=clamp(flames(c4-vec2(.5,0.))-(ls+HORSE.r*3.)*10000.,0.,1.)+SWORD+HORSE+LAMP;
     }
                                  float recenter = 0.;
                                   float rescale = 1.;
@@ -2961,12 +2966,13 @@ if(starOnDot>=1){
                                  vec3 hypnoticHarmonicCircles = vec3(0.);
                                  if(balloonsON!=0.)hypnoticHarmonicCircles=balloons(p);
                            
+                                
 if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
                                       -vec4(vec3(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z),0.),0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies = vec4(hypnoticHarmonicCircles+pillar+mnyX+clamp(mny*starshipMultiplier-(ARTICLE.r+ARTICLE.g+ARTICLE.b),0.,1.)+ARTICLE+b+creatures+bridge,1.);
-                       vec3 awayFromTree =  vec3(
+                       vec3 awayFromTree =  vec3(-(ARTICLE.x+ARTICLE.y+ARTICLE.z)*4.
                     -(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z)*4.
                        -(bridge.x+bridge.y+bridge.z)*4.
                        -(starship.x+starship.y+starship.z)/maxColorOfStarship*starship.w*.5
