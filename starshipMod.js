@@ -448,6 +448,11 @@ pitchCol[f]  = colorSoundPURE;
                                                 BlackOrWhiteTrail=.5;
                                             }
                                            
+                                           if(!Oreo){
+                        starMajorMinor=.5;
+                        BlackOrWhiteTrail=.5;
+                        
+                    }
                         flatline = window.movementRate;
                    //    if(window.movementRate<movementRateORIGINAL) flatline = 1.;
                     
@@ -1433,7 +1438,7 @@ if( !window.touchMode&&!window.touchOnlyMode) {
 
         setDynamicSampler2ds();
     
-   makeSpirograph();
+   if(spirographMODE!=0)makeSpirograph();
 
 
     if (computeFPS)
@@ -1491,13 +1496,16 @@ if( !window.touchMode&&!window.touchOnlyMode) {
    if (EldersLeg>=0){
 
 
-    let metroPhase =(-Math.sin(-uniforms[ "time" ].value-pi/2.)*uniforms[ "metronome" ].value)
-  if(instantaneousFreqSpirographColoring==1) {
+    let metroPhase =-Math.sin(-uniforms[ "time" ].value*uniforms[ "metronome" ].value*pi)
+       let frameCount=loopsRun%2;
+
+    if(spirographMODE==2){
     lineMat.color = colorSoundPURE;
   }
-       let frameCount=loopsRun%2;
-       lineMat.color = new THREE.Color("").setRGB(frameCount,frameCount,frameCount);
-
+       else if (uniforms[ "metronome" ].value>1)lineMat.color  = new THREE.Color("").setRGB(metroPhase,metroPhase,metroPhase)
+    else if(spirographMODE==1) lineMat.color = new THREE.Color("").setRGB(frameCount,frameCount,frameCount);
+    
+       
   const d = -1.;
                             
                             let tx = spirray0[0], ty = spirray1[1],greyness=1.,greynessLast=-1;
@@ -1507,13 +1515,13 @@ if( !window.touchMode&&!window.touchOnlyMode) {
   var lineStride=0;
    
         //scene.add(line)
-        for (let r= 0.; r < bufferPortion; r +=1) {//spirray size supports upto r <buffersize*2
+     if(spirographMODE!=0)   for (let r= 0.; r < bufferPortion; r +=1) {//spirray size supports upto r <buffersize*2
             const  txlast=tx;
             const  tylast=ty;
             tx = spirray0[r];
             ty =  spirray1[r];
            //  greynessLast = greyness
-            if(uniforms[ "metronome" ].value>1.)greyness=.5-.5*Math.sqrt(tx*tx+ty*ty)**-leaf*metroPhase;//seems wrong
+          //  if(uniforms[ "metronome" ].value>1.)greyness=.5-.5*Math.sqrt(tx*tx+ty*ty)**-leaf*metroPhase;//seems wrong
             //else
            // if(r%3==0)greyness=-1;
             // greyness=r/bufferPortion;
@@ -1530,6 +1538,8 @@ if( !window.touchMode&&!window.touchOnlyMode) {
                 lineStride+=2;
 
                 ;} }
+       else  for (let r= 0.; r < bufferPortion*2; r +=1) linePositionAttribute.setXYZ(r,0,0,0)
+
     
     linePositionAttribute.needsUpdate = true;
     lineColorAttribute.needsUpdate = true;
@@ -2146,7 +2156,7 @@ let s = f;
                          timeElapsedScaled*=2.;
                      }
                     let  timeMinusX = timeElapsedScaled-1.;
-                     if(timeMinusX<0.&&timeElapsedEXPONENTIAL%1.<Math.sign(timeMinusX)*timeMinusX%1.)stylus=BlackOrWhiteNOTE;
+                     if(timeMinusX<0.&&timeElapsedEXPONENTIAL%1.<Math.sign(timeMinusX)*timeMinusX%1.&&Oreo)stylus=BlackOrWhiteNOTE;
 
                       red2  = red1;
                       green2  = green1;

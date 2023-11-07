@@ -10,10 +10,11 @@ window.blankBackground=false;
 window.twist = 0.;
 window.highORlow=1.;
 window.FeedbackSound = false;
-window.instantaneousFreqSpirographColoring = 1;
+window.spirographMODE = 1;
 window.pzyghthe=0;
 window.dynamicCoring=false;
 window.rez=window.devicePixelRatio/2.;//define resolution
+window.Oreo=true;
 if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
   {
       rez=window.devicePixelRatio/4.;
@@ -155,9 +156,10 @@ function callKey(event){
     else if (key==")"&&event.ctrlKey ) highORlow = 2;
     else if(key == "v" && event.ctrlKey) window.FeedbackSound =  !window.FeedbackSound;
     else if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=(uniforms.starOnDot.value+1)%3;
-    //else if (key=="" && event.ctrlKey)instantaneousFreqSpirographColoring = (instantaneousFreqSpirographColoring+1)%2;//color mode 3 seems obsolete
+    else if (key=="p" && event.ctrlKey)spirographMODE = (spirographMODE+1)%3;//color mode 3 seems obsolete
     else if (key=="m" && event.ctrlKey) uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value;
     else if (event.ctrlKey&&key=="a")uniforms[ "colorCombo" ].value = 11;
+    else if (event.ctrlKey&&key=="j")window.Oreo=!window.Oreo;
     else if (event.altKey&&key=="f");//speakers turned off in manny.html
     else if(event.ctrlKey);//swallow remaining possibilities, muting keypress
     /*if(key == "k" && event.ctrlKey)
