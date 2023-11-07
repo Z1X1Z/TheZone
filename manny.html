@@ -1439,7 +1439,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
         return balloon;
     }
     
-    
+    //['y/((y/(y*x))-y)+1/(1-(1/(y*x)))', '1/(1-(y/(y-x)))-y/(1-(y/y))', 'y/(y-(y/(y*x)))+1/((1/(y*x))-1)', '1/(1-(y/x))+1/((y/x)-1)', 'y/((1/x)-y)+1/(1-(1/(y*x)))', '1/(x+(1/y))+1/(1-(y/y))', '1/((y/x)-1)+1/(1-(y/x))', 'y/(y-(1/x))+1/((1/(y*x))-1)', 'y/((y/y)+y)-y/((1/(y*x))-1)'] tree of life 5 results
     vec3 sparkles(vec2 p){
         vec4 starship = vec4(0.);
         float recenter = 0.;
@@ -1698,8 +1698,10 @@ if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
    hyperCore*=equilibriator;
    
    //   hyperCore+=.25/log(.5)/equilibriator;
-if(cloverSlide&&!wheel)hyperCore+=1./log(.5);
-   else if(cloverSlide&&wheel)hyperCore+=.5/log(.5);
+    if(cloverSlide&&wheel)hyperCore+=1.75/log(.5);
+
+   else if(cloverSlide||wheel)hyperCore+=1./log(.5);
+ //  else if(wheel)hyperCore+=.25/log(.5);
 
    if(multiplicatorNexus)hyperCore-=.5/log(.5);
    if(continuumClover)hyperCore-=.75/log(.5);
@@ -1843,21 +1845,52 @@ vec2 lastS = s;
        float spoke_delimiter = 1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
     if(Spoker&&1.<=hyperCoreBoosted)
                              {
-                                 
+                                 dstnce = length(s);
+
                              if(wheel){
                                  s/=2.;
-                                 
+                          
                                  hyperCoreOUTPUT-=log(spoke_delimiter/2.);
 
                                  hyperCoreBoosted-=log(spoke_delimiter/2.);
+                                 if (cloverSlide)
+                                   {
+                                       if(1.5>hyperCoreBoosted)
+                                       {
+                                           float b = spoke_delimiter*dstnce;
+                                           loops-=b;
+                                       hyperCoreBoosted+=b;
+                                       }
+                                       else{
+                                           float b =dstnce/pow(spoke_delimiter,2.);
+                                           loops-=b;
+                                       hyperCoreBoosted+=b;
+                                       }
+                                       
+                                   }
                                  }
                              else{
                                  
                               s/=spoke_delimiter;//engage spokelover s/=2.+'superspokes'
-                             
+            
                              hyperCoreOUTPUT-=spoke_delimiter;
 
                              hyperCoreBoosted-=spoke_delimiter;
+                             if (cloverSlide)
+                               {
+                                   if(1.5>hyperCoreBoosted)
+                                   {
+                                       float b = 2.*dstnce;
+                                       loops-=b;
+                                   hyperCoreBoosted+=b;
+                                   }
+                                   else{
+                                       float b =dstnce/4.;
+                                       loops-=b;
+                                   hyperCoreBoosted+=b;
+                                   }
+                                   
+                               }
                              }
                              }
             else  {
@@ -2866,15 +2899,15 @@ mny+=HEART*heartMultiplier;
 
     vec3 ARTICLE=vec3(0.);
     if(articles){
-           vec3 HORSE=horse(characterP, moveDynamic);
-            ARTICLE+=scroll(characterP+1.5*vec2(0.,resolution.x/min(resolution.x,resolution.y)),vec2(-1.));
-            vec3 SWORD = sword(characterP+vec2(swordSkew,0.),vec2(0.));
-            vec2 c4 = characterP/vec2(1.,4);
+           vec3 HORSE=horse(characterOnTrailP, moveDynamic);
+            ARTICLE+=scroll(characterOnTrailP+1.5*vec2(0.,resolution.x/min(resolution.x,resolution.y)),vec2(-1.));
+            vec3 SWORD = sword(characterOnTrailP+vec2(swordSkew,0.),vec2(0.));
+            vec2 c4 = characterOnTrailP/vec2(1.,4);
              vec3 LAMP = clamp(lamp(c4,vec2(-1.))-(SWORD.x+SWORD.y+SWORD.x)*10.,0.,1.)+SWORD;
              float ls = (SWORD.x+SWORD.y+SWORD.z+LAMP.x+LAMP.y+LAMP.z)*10.;
              mny=clamp(mny-ls*5.,0.,1.)+SWORD+LAMP;
 
-            ARTICLE+=clamp(flames(c4-vec2(.5,0.))-(ls+HORSE.r*3.)*10000.,0.,1.)+SWORD+HORSE+LAMP;
+            ARTICLE+=clamp(flames(c4-vec2(.5,0.))-(ls+HORSE.r*3.+clamp(-mannyFace.r-mannyFace.g-mannyFace.b,-2.,.0))*10000.,0.,1.)+SWORD+HORSE+LAMP;
     }
                                  float recenter = 0.;
                                   float rescale = 1.;
