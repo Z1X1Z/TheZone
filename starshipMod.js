@@ -337,6 +337,7 @@ let pushBackCounter = 0;
                             let BlackOrWhiteTrail=.5;//also for star
                             let BlackOrWhiteNOTE = 1.
                             let starMajorMinor=.5;
+                            let fromCenter = 0;
 function  move()
 {
     if (isNaN(coordX)||(!zoomAtl41&&coordX>4.))coordX=0.;
@@ -476,9 +477,10 @@ pitchCol[f]  = colorSoundPURE;
    const bx=coordX+d_xS*MR*zoom*interpolation;
   const by=coordY+d_yS*MR*zoom*interpolation;
                        
-    const sqC = Math.sqrt(bx*bx+by*by);
+                    let preFromCenter= Math.sqrt(bx*bx+by*by);
 
      if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold&&on){
+                  fromCenter = preFromCenter;
 
                     coordX=bx;
                     coordY=by;
@@ -489,11 +491,11 @@ pitchCol[f]  = colorSoundPURE;
                        
     let expandedZoomCage=1.;
    if (uniforms.Spoker.value)expandedZoomCage*=4./3.
-   if(sqC>=window.zoomCageSize*expandedZoomCage){//adjust back in if too far from the center
+   if(preFromCenter>=window.zoomCageSize*expandedZoomCage){//adjust back in if too far from the center
         pushBackCounter+=60./FPS;
 
-        coordX*=window.zoomCageSize/sqC*expandedZoomCage;
-        coordY*=window.zoomCageSize/sqC*expandedZoomCage;
+        coordX*=window.zoomCageSize/fromCenter*expandedZoomCage;
+        coordY*=window.zoomCageSize/fromCenter*expandedZoomCage;
     }
     else pushBackCounter = 0
     if(pushBackCounter>0.){coordX=0;coordY=0;}//teleport to center if continuously flying into perimeter, set to 0 for off
@@ -1049,7 +1051,7 @@ let lastVolume = 1.;
                        let cloverSuperCores = 0;
                        var singleHyperCoreDepth = 60.;
        function infinicore(){
-            if(zoom<=1./2.**60&&(coordY*coordY+coordX*coordX)**.5/zoom<2.){
+            if(zoom<=1./2.**60&&fromCenter/zoom<2.){
                 zoom*=2.**singleHyperCoreDepth;coordY*=2.**singleHyperCoreDepth;coordX*=2.**singleHyperCoreDepth;
                 cloverSuperCores++;
 
@@ -1072,7 +1074,7 @@ let lastVolume = 1.;
     
     if (on||zoom<1.)preserveOuterCore=true;
     else preserveOuterCore = false
-    if((Math.sqrt(coordX*coordX+coordY*coordY)>=1.||zoom>=1.&&!zoomOutEngage&&uniforms.MetaCored.value)&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
+    if((fromCenter>=1.||zoom>=1.&&!zoomOutEngage&&uniforms.MetaCored.value)&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
         
         if(uniforms.wheel.value)uniforms.upCoreCycler.value=(uniforms.upCoreCycler.value-1)%60;//does modulo -60%60=0?-0 it seems
         else uniforms.upCoreCycler.value = 0.;
@@ -1090,7 +1092,7 @@ let       preserveOuterCore = true;
                        
 function zoomRoutine(){
     const metaDepth=.00000075;//due to pixelization limits
-    let zoomCone=metaDepth*Math.sqrt(coordX*coordX+coordY*coordY);
+    let zoomCone=metaDepth*fromCenter;
     if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
     
     ZR = setZoomRate();
@@ -1352,43 +1354,6 @@ function runOSMD (){
     ticker++;
     
     
-    
-    if (uniforms["MetaCored"].value)
-     {
-        
-        var precores = .25/Math.log(.5);
-         if(uniforms.morph.value!=0.)precores=precores-3./Math.log(.5);
-         if(uniforms.refactorCores.value!=1.)precores=-.0;
-         
-         const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
-         var equilibriator = 1.;
-        // let distC=(d_x*d_x+d_y*d_y)**.5
-         let distC = Math.sqrt(coordX*coordX+coordY*coordY);
-        /* if(distC>coreTexture[
-            (uniforms[ "externalCores" ].value>0)?
-             Math.round (uniforms[ "externalCores" ].value):0])
-            equilibriator=distC/(distC-zoom);
-*/
-        
-        uniforms[ "centralCores" ].value = Math.log(zoom)/-Math.log(2.)+precores    ;
-        // if(uniforms[ "morph" ].value!=0.)uniforms[ "centralCores" ].value*=3./2.;//stabilize morph dance collaboration
-
-        uniforms[ "externalCores" ].value =uniforms[ "centralCores" ].value/1.5+Math.log(distC)*logStabilizationConstant*equilibriator;
-           // uniforms[ "externalCores" ].value+=1./Math.log(.5)/equilibriator;
-       //  uniforms[ "externalCores" ].value +=.25/Math.log(.5);
-         if(uniforms.cloverSlide.value)uniforms[ "externalCores" ].value +=1./Math.log(.5);
-         else if(uniforms.cloverSlide.value&&uniforms.wheel.value)hyperCore+=.5/Math.log(.5);
-
-         if(uniforms.multiplicatorNexus.value)uniforms[ "externalCores" ].value-=.5/Math.log(.5);
-         if(uniforms.continuumClover.value)uniforms[ "externalCores" ].value-=.75/Math.log(.5);
-         
-        if(uniforms[ "Spoker" ].value&&uniforms[ "MetaCored" ].value)
-            uniforms[ "externalCores" ].value*=4./3./(1./Math.log(3.)+(1.-1./Math.log(3.))/1.75);
-         
-         var metaCoreDriveFactor =(1.-leaf)/gr;
-         uniforms[ "externalCores" ].value *= Math.log(2.)/Math.log(metaCoreDriveFactor);
-    }
-    
     if(firstAnimation){lastFrameTime=timestamp;firstAnimation=false;}
     if(document.visibilityState=="hidden"||lvs=="hidden")lastFrameTime=timestamp;
     lvs=document.visibilityState
@@ -1422,16 +1387,17 @@ if( !window.touchMode&&!window.touchOnlyMode) {
     for(var shift = 0.;shift<4;shift++)//find maximally different loudest note
        if (Math.abs(Math.abs((note*2)%24-loudestFret[shift].note%24)-24/2.)<Math.abs(coreShift-24/2.))
         coreShift=Math.abs((note*2)%24-loudestFret[shift].note%24)/24.
-    
+
            renderer.readRenderTargetPixels (cloverRenderTarget,  Math.floor(window.innerWidth/2.), Math.floor(window.innerHeight/2.),1,1,  hyperCorePixel)
            hyperCorePixel[0]/=4.;
             hyperCorePixel[1]/=4.;
     let hyperCoreOffset = Math.ceil(hyperCorePixel[0]);
     if(!isNaN(loudestFret[0].volume)&&window.dynamicCoring)
         coreData[hyperCoreOffset]=Math.abs(coreShift)+coringValue;//24*1.3247;
-    
-    
-    
+    else for(var h = 0; h<coreShift.length; h++)
+    {   let truncator = Math.log(zoom/fromCenter);
+        coreData[h]=1./-(((leaf**.5)**2./truncator)*truncator);
+    }
     
     if(!isNaN(loudestFret[0].volume)&&omniDynamicEngaged)
         omniData[hyperCoreOffset]=coreShift/2.;
@@ -2590,6 +2556,7 @@ for(var n = 0; n<targets.length;n++){
                               if(uniforms.carousel.value!=0.)         spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                                   coordX+= spunTouch[0];
                                   coordY+= spunTouch[1];
+                        fromCenter = (coordX*coordX+coordY*coordY)**.5;
                       }
 
                       uniforms[ "zoom" ].value = zoom;
@@ -2597,10 +2564,11 @@ for(var n = 0; n<targets.length;n++){
                         
             uniforms.STAR.value=null;
             uniforms.EDEN.value=null;
-                    renderer.setRenderTarget (null)
-
-                    renderer.render( shaderScene, camera );
-
+                                                 
+                                                             renderer.setRenderTarget (null)
+                                                             renderer.render( shaderScene, camera );
+                                                         
+                                                         
                 if(textON)document.getElementById("textWindow").innerHTML =
                     "<div sytle='font-size: 16px;'>"+
                     
@@ -2618,6 +2586,25 @@ for(var n = 0; n<targets.length;n++){
 
                         
                   }//end touch mode centerOfDotToEdge
+                              
+                              
+                              if (uniforms["MetaCored"].value)
+                               {
+                                  
+                                  var precores = .25/Math.log(.5);
+                                   if(uniforms.morph.value!=0.)precores=precores-3./Math.log(.5);
+                                   if(uniforms.refactorCores.value!=1.)precores=-.0;
+                                   
+                                   const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
+                                   var equilibriator = 1.;
+                               
+                                  uniforms[ "centralCores" ].value = Math.log(zoom)/-Math.log(2.)+precores    ;
+                                  // if(uniforms[ "morph" ].value!=0.)uniforms[ "centralCores" ].value*=3./2.;//stabilize morph dance collaboration
+
+                                  uniforms[ "externalCores" ].value =uniforms[ "centralCores" ].value/1.5+Math.log(fromCenter)*logStabilizationConstant*equilibriator;
+                              }
+                              
+                              
                               loopsRun++;
                                                                        animateLoopId=                   window.requestAnimationFrame( animate );
                             //  renderer.forceContextLoss ()
@@ -2635,7 +2622,7 @@ function calculatePitch ()
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 
 let tolerance; //, confidence;
-if(highORlow==1)tolerance=(totalAMP-1./bufferSize**(-leaf*gr));
+if(highORlow==1)tolerance=totalAMP-1./fractionOfFrame**2.;
 else if (highORlow==2)tolerance = .5;//when I play different notes on harmonica it mostly hears C, this clears up the distinction of the notes
                         
 let period;
