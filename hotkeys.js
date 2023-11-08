@@ -1,4 +1,5 @@
 window.Bible = 1;
+window.muteToggle = false;
 window.fftSize=512
 window.zoom=1.;
 window.starSpin=0.;
@@ -38,10 +39,11 @@ function readHash(){
         {
             number=""
             let lasthash = hashindex;
-            if(location.hash[hashindex-1]=="(")
+            let CTRLorALT = location.hash[hashindex-1]=="."||location.hash[hashindex-1]==","||location.hash[hashindex]=="."||location.hash[hashindex]==",";
+            if((location.hash[hashindex-1]=="("&&!CTRLorALT)||(CTRLorALT&&location.hash[hashindex-2]=="("))
             {            hashindex++;
                 
-                while(location.hash[hashindex]!=")"&&hashindex!=location.hash.length-1)
+                while(location.hash[hashindex]!=")"&&hashindex!=location.hash.length)
                 {
                     number += location.hash[hashindex]
                     hashindex++;
@@ -112,11 +114,13 @@ function callKey(event){
                                                                );
     
     key = event.key;
+
+
     number=Number(number);
     if(key=="/"&&!event.shiftKey){  event.preventDefault(); event.stopImmediatePropagation();}
     
     var x=null;
-    if(!event.shiftKey&&!event.ctrlKey)x = parseInt(String.fromCharCode( event.keyCode));
+    if(!event.shiftKey&&!event.ctrlKey&&!event.altKey)x = parseInt(String.fromCharCode( event.keyCode));
     
     
     //meta keys like ctrlKey must be processed first and should have symbol preferably
@@ -151,7 +155,6 @@ function callKey(event){
             uniforms.metaCarousel.value=0.;
         }
     }
-    
     else if (key=="("&&event.ctrlKey) highORlow = 1;
     else if (key==")"&&event.ctrlKey ) highORlow = 2;
     else if(key == "v" && event.ctrlKey) window.FeedbackSound =  !window.FeedbackSound;
@@ -160,8 +163,46 @@ function callKey(event){
     else if (key=="m" && event.ctrlKey) uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value;
     else if (event.ctrlKey&&key=="a")uniforms[ "colorCombo" ].value = 11;
     else if (event.ctrlKey&&key=="j")window.Oreo=!window.Oreo;
+    else if (event.altKey&&key=="b"){
+                 if(!muteToggle)
+                       window.Bible = (window.Bible+1)%2;
+                    let content = document.getElementsByClassName("dropdown-content");
+        
+        //iframe redirect from https://stackoverflow.com/questions/28159920/how-to-redirect-page-inside-iframe-to-another-one-but-we-must-stay-in-iframe
+        
+        if (number == 8)
+            window.frames["TheBible"].location = "https://openbible.com/audio/gilbert_music/";
+                else if(number ==7) window.frames["TheBible"].location ="https://openbible.com/audio/gilbert_music_books/";
+
+                else if(number == 6)  window.frames["TheBible"].location = "https://openbible.com/audio/hays/";
+                else if(number == 5)  window.frames["TheBible"].location =  "https://openbible.com/audio/souer/";
+                else if(number == 4)  window.frames["TheBible"].location =  "https://openbible.com/audio/gilbert/";
+            else if(number == 3)  window.frames["TheBible"].location = "https://openbible.com/audio/hays_books/";
+            else if(number == 2)  window.frames["TheBible"].location =  "https://openbible.com/audio/souer_books/";
+        else if(number == 1)  window.frames["TheBible"].location =  "https://openbible.com/audio/gilbert_books/";
+         else if(number == 0)  window.frames["TheBible"].location =  "https://www.biblehub.com/audio/";
+                
+                    if(window.Bible==0)
+                    {
+                        document.getElementById("Bible").height="100%";
+                        document.getElementById("Bible").width="50%";
+                        document.getElementById("nav").style.width="50%";
+                        for(var b = 0; b<content.length; b++)content[b].style.width="50%";
+                    }
+                    else {
+                        document.getElementById("Bible").height= "0%";
+                        document.getElementById("Bible").width="0%";
+                        document.getElementById("nav").style.width="100%";
+                        for(var b = 0; b<content.length; b++)content[b].style.width="100%";
+                        
+                    }
+                
+                  onWindowResize();
+                            
+    }//bible iframe loaded in manny.html
     else if (event.altKey&&key=="f");//speakers turned off in manny.html
-    else if(event.ctrlKey);//swallow remaining possibilities, muting keypress
+
+    else if(event.ctrlKey||event.altKey);//swallow remaining possibilities, muting keypress
     /*if(key == "k" && event.ctrlKey)
      {
      osmdStaffsVisible=(osmdStaffsVisible+1)%3;

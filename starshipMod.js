@@ -999,9 +999,11 @@ function onWindowResize() {
                             bottomOfScreenHeight = correlationForTextY;
                         }
                         else{correlationForTextY=0;bottomOfScreenHeight=0}
-                                           
-                       if(Bible==0)correlationForTextX=document.getElementById("Bible").offsetWidth
-                                              else correlationForTextX=0.;
+                               console.log(document.getElementById("reader").value)
+                    if(document.getElementById("reader").value==0&&Bible==0)
+                    correlationForTextX=document.getElementById("Bible").offsetWidth
+                            else correlationForTextX=0.;
+                 
                             heightPX=window.innerHeight-correlationForTextY;
                             widthPX=window.innerWidth-correlationForTextX;
                         
@@ -1397,8 +1399,8 @@ if( !window.touchMode&&!window.touchOnlyMode) {
     if(!isNaN(loudestFret[0].volume)&&window.dynamicCoring)
         coreData[hyperCoreOffset]=Math.abs(coreShift)+coringValue;//24*1.3247;
     else for(var h = 0; h<coreShift.length; h++)
-    {   let truncator = Math.log(zoom/fromCenter);
-        coreData[h]=1./-(((leaf**.5)**2./truncator)*truncator);
+    {   let truncator = 1.;//Math.log(zoom/fromCenter);
+        coreData[h]=1./-((leaf/truncator)*truncator);
     }
     
     if(!isNaN(loudestFret[0].volume)&&omniDynamicEngaged)
