@@ -172,9 +172,9 @@ function followSound(e){
         {
             twistTRIANGLEtoSQUARE= Math.atan(y,x)/Math.PI-event.twist/360;
             //twistSQUAREtoTRIANGLE = 1.-twistTRIANGLEtoSQUARE;
-            
+
             twistZINEtoSAW= (Math.atan(y,x)/Math.PI-event.twist/360+.5)%1;
-           // console.log(twistZINEtoSAW)//this should get tested
+           console.log(twistZINEtoSAW)//this should get tested
         }
         let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
         let angleSound = Math.atan2(y,x);
