@@ -120,7 +120,7 @@ function callKey(event){
     if(key=="/"&&!event.shiftKey){  event.preventDefault(); event.stopImmediatePropagation();}
     
     var x=null;
-    if(!event.shiftKey&&!event.ctrlKey&&!event.altKey)x = parseInt(String.fromCharCode( event.keyCode));
+    if(!event.shiftKey)x = parseInt(String.fromCharCode( event.keyCode));
     
     
     //meta keys like ctrlKey must be processed first and should have symbol preferably
@@ -200,6 +200,34 @@ function callKey(event){
                   onWindowResize();
                             
     }//bible iframe loaded in manny.html
+    
+    
+    else if(x == 1&&event.altKey&&!event.shiftKey)uniforms.clvrVariant1.value=!uniforms.clvrVariant1.value;
+    else if(x == 2&&event.altKey&&!event.shiftKey)uniforms.clvrVariant2.value=!uniforms.clvrVariant2.value;
+    else if(x == 3&&event.altKey&&!event.shiftKey)uniforms.clvrVariant3.value=!uniforms.clvrVariant3.value;
+    else if(x == 4&&event.altKey&&!event.shiftKey)uniforms.clvrVariant4.value=!uniforms.clvrVariant4.value;
+    else if(x == 5&&event.altKey&&!event.shiftKey)uniforms.clvrVariant5.value=!uniforms.clvrVariant5.value;
+    else if(x == 6&&event.altKey&&!event.shiftKey)uniforms.clvrVariant6.value=!uniforms.clvrVariant6.value;
+    else if(x == 7&&event.altKey&&!event.shiftKey)uniforms.clvrVariant7.value=!uniforms.clvrVariant7.value;
+    else if(x == 8&&event.altKey&&!event.shiftKey)uniforms.clvrVariant8.value=!uniforms.clvrVariant8.value;
+    
+    else if(x == 7&&event.altKey&&!event.shiftKey)uniforms.musicAngelMan.value=(uniforms.musicAngelMan.value+1)%3;
+    else if(x == 8&&event.altKey&&!event.shiftKey)
+    {
+        if(uniforms.refactorCores.value==2)uniforms.refactorCores.value=1;
+        else if(uniforms.refactorCores.value==1)uniforms.refactorCores.value=0;
+        else uniforms.refactorCores.value=2;
+    }
+    else if(x == 9&&event.altKey&&!event.shiftKey)
+    {
+        window.pzyghthe = (window.pzyghthe+1.)%5;
+        if(pzyghthe==0) scene.remove(harmonicPzyghtheMesh);
+        else if (pzyghthe==1) scene.add(harmonicPzyghtheMesh)
+            
+            
+            }
+    
+    
     else if (event.altKey&&key=="f");//speakers turned off in manny.html
 
     else if(event.ctrlKey||event.altKey);//swallow remaining possibilities, muting keypress
@@ -264,25 +292,6 @@ function callKey(event){
     else if (key=="+"){rez /=1.1; if(window.INITIALIZED) renderer.setPixelRatio( rez);}
     else if (key=="_"){rez *=1.1; if(window.INITIALIZED) renderer.setPixelRatio( rez);}
     
-    else if(x == 1&&event.altKey&&!event.shiftKey)uniforms.clvrVariant1.value=!uniforms.clvrVariant1.value;
-    else if(x == 2&&event.altKey&&!event.shiftKey)uniforms.clvrVariant2.value=!uniforms.clvrVariant2.value;
-    else if(x == 3&&event.altKey&&!event.shiftKey)uniforms.clvrVariant3.value=!uniforms.clvrVariant3.value;
-    
-    else if(x == 7&&event.altKey&&!event.shiftKey)uniforms.musicAngelMan.value=(uniforms.musicAngelMan.value+1)%3;
-    else if(x == 8&&event.altKey&&!event.shiftKey)
-    {
-        if(uniforms.refactorCores.value==2)uniforms.refactorCores.value=1;
-        else if(uniforms.refactorCores.value==1)uniforms.refactorCores.value=0;
-        else uniforms.refactorCores.value=2;
-    }
-    else if(x == 9&&event.altKey&&!event.shiftKey)
-    {
-        window.pzyghthe = (window.pzyghthe+1.)%5;
-        if(pzyghthe==0) scene.remove(harmonicPzyghtheMesh);
-        else if (pzyghthe==1) scene.add(harmonicPzyghtheMesh)
-            
-            
-            }
     else if (key=="À"||key=="`")
     {rez=window.devicePixelRatio*2.;
         if(window.INITIALIZED)   renderer.setPixelRatio( rez);}

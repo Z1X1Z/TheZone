@@ -388,18 +388,46 @@
 
               <input type="checkbox"  id="Variant1" name="t"  onclick= "
                   key  = '1';
-                  callKey(new KeyboardEvent('keydown', {'key': key, altKey':true,'keyCode':key.charCodeAt(0)}));">
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
                   <label for="Variant1"> Variant1!</label><br>
               <input type="checkbox"  id="Variant2" name="t"  onclick= "
                   key  = '2';
-                  callKey(new KeyboardEvent('keydown', {'key': key, altKey':true,'keyCode':key.charCodeAt(0)}));">
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
                   <label for="Variant2">Variant2!</label><br>
 
-              <input type="checkbox"  id="Variant3" name="t"  onclick= "
-                      key  = '3';
-                      callKey(new KeyboardEvent('keydown', {'key': key, altKey':true,'keyCode':key.charCodeAt(0)}));">
-                      <label for="Variant3">  Variant3!</label><br>
-                  
+                  <input type="checkbox"  id="Variant3" name="t"  onclick= "
+                          key  = '3';
+                          callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                          <label for="Variant3">  Variant3!</label><br>
+                      
+                      <input type="checkbox"  id="Variant4" name="t"  onclick= "
+                              key  = '4';
+                              callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                              <label for="Variant4">  Variant4!</label><br>
+                              
+                              <input type="checkbox"  id="Variant5" name="t"  onclick= "
+                                      key  = '5';
+                                      callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                                      <label for="Variant5">  Variant5!</label><br>
+                                      
+                                      <input type="checkbox"  id="Variant6" name="t"  onclick= "
+                                              key  = '6';
+                                              callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                                              <label for="Variant6">  Variant6!</label><br>
+                                              
+                                              <input type="checkbox"  id="Variant7" name="t"  onclick= "
+                                                      key  = '7';
+                                                      callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                                                      <label for="Variant7">  Variant7!</label><br>
+                                                  
+                                                  <input type="checkbox"  id="Variant8" name="t"  onclick= "
+                                                          key  = '8';
+                                                          callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                                                          <label for="Variant8">  Variant8!</label><br>
+                                                      
+                                          
+                                  
+                          
               <a id="Chirality" name="t"  onclick= "
                   key  = '|';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -1154,6 +1182,11 @@ void main(){
     uniform bool clvrVariant1;
     uniform bool clvrVariant2;
     uniform bool clvrVariant3;
+    uniform bool clvrVariant4;
+    uniform bool clvrVariant5;
+    uniform bool clvrVariant6;
+    uniform bool clvrVariant7;
+    uniform bool clvrVariant8;
 
     uniform bool dynamicDance;
     uniform bool Spoker;
@@ -1701,7 +1734,10 @@ if(squareClover)s/=vec2(sqrt(2.-s.x*s.x),sqrt(2.-s.y*s.y))/s;
 vec2 pCenterCored=s;
 
 
-
+vec2 pcs=vec2(
+           pCenterCored.x*pCenterCored.x*pCenterCored.x  - 3.*pCenterCored.x*pCenterCored.y*pCenterCored.y,
+          -pCenterCored.y*pCenterCored.y*pCenterCored.y+ 3.*pCenterCored.x*pCenterCored.x*pCenterCored.y
+          );
 
 
 
@@ -1868,10 +1904,19 @@ if(onehundredfortyfourthousand)
    colorAccumulator+=s;
    if(Refractelate&&dstnce>refractelC){s/=refractelC;} //refractelC/=4./3.;}
 vec2 lastS = s;
+
    s=vec2(
         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
-       );//x**3
+       );
+      // if (mod(counter,5.) == 4.)s =pCenterCored;
+       //x**3
+       if(clvrVariant4)  s*=1.75;
+       if(clvrVariant5) s = vec2(pow(s.x,-2.),pow(s.y,-2.));
+      if(clvrVariant6)s=s-lastS.yx;
+        if(clvrVariant7)s+=pcs;
+        if(clvrVariant8) if(length(s)<1.)s+=1.;
+
       if(clvrVariant1)  s*=length(lastS);
       if(clvrVariant2)s -=zoom/coords.yx;
       if(clvrVariant3)s-=pCenterCored*dstnce;
