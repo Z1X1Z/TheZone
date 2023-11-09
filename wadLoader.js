@@ -136,17 +136,17 @@ function startSound(e){
             tound[id].stop();
             tound2[id].stop();
             
-            sound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistTRIANGLEtoSQUARE*.5*.5});
+            sound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistTRIANGLEtoSQUARE*.5});
             sound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:.0000001,volume:.0000001});
             
-            zound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistTRIANGLEtoSQUARE*.5*.5});
+            zound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistTRIANGLEtoSQUARE*.5});
             zound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:.0000001,volume:.0000001});
             
             
-            xound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistZINEtoSAW*.5*.5});
+            xound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistZINEtoSAW*.5});
             xound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:.0000001,volume:.0000001});
             
-            tound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistZINEtoSAW*.5*.5});
+            tound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistZINEtoSAW*.5});
             tound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:.0000001,volume:.0000001});
 
 
