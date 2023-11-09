@@ -169,8 +169,8 @@ function callKey(event){
                     let content = document.getElementsByClassName("dropdown-content");
         
         //iframe redirect from https://stackoverflow.com/questions/28159920/how-to-redirect-page-inside-iframe-to-another-one-but-we-must-stay-in-iframe
-        
-        if (number == 8)
+        if(mobile);//dynamic href for iFrame doesn't seem to work on mobile
+        else if (number == 8)
             window.frames["TheBible"].location = "https://openbible.com/audio/gilbert_music/";
                 else if(number ==7) window.frames["TheBible"].location ="https://openbible.com/audio/gilbert_music_books/";
 
