@@ -22,6 +22,8 @@
                 
                     let chapter = "";
                     let book = ""
+                    let bookIndex = "";
+
                     let urlAppend = ""
                     let readerSet = false;
                     let bibleWithText = false;
@@ -115,28 +117,32 @@ let bookOfBooks=[
 if(book.toLowerCase()=="songofsolomon"||book.toLowerCase()=="songofsongs")
 book = "song"
 
-let maxLetterDepth=0;
-let bookChosen = false;
-
+let maxLetterDepth=-1;
     for(var h = 0; h<bookOfBooks.length; h++)
     {
-        let letterDepth=1;
-        while(letterDepth<=bookOfBooks[h].length)
+        let letterDepth=0;
+
+        while(letterDepth<bookOfBooks[h].length&&letterDepth<book.length
+              &&
+              bookOfBooks[h][letterDepth].toLowerCase()==book[letterDepth].toLowerCase())
         {
-            if(bookOfBooks[h].slice(0,letterDepth).toLowerCase().includes(book.toLowerCase())&&maxLetterDepth<letterDepth)
+        
+            if (letterDepth>maxLetterDepth)
             {
-            book=bookOfBooks[h].toLowerCase();
+            bookIndex = h;
             maxLetterDepth = letterDepth
-            bookChosen = true;
-            console.log("here")
+            console.log(bookOfBooks[h][letterDepth])
+            console.log(book+"currentBook")
+
             }
         letterDepth++;
         }
     }
-    console.log(book+"book")
-    console.log(bookChosen+"bookChosen")
-    if (bookChosen==false) book = ""
-    console.log(book+"book2")
+    if (bookIndex=="") book = ""
+    else
+    {
+        book=bookOfBooks[bookIndex].toLowerCase();
+        console.log(book+"bookfromindex")
 
         let place = 0;
         if(book[place]=="i" && book!="isaiah"){
@@ -144,8 +150,8 @@ let bookChosen = false;
             place++
         book=(place-1)+'_'+book.slice(place,book.length)
         }
-        console.log(book+"book3")
-
+        console.log(book+"bookFinal")
+}
          urlAppend = "chapter/"+book+"/"+chapter+".htm"
 }
                      if (location.hash.includes(".b8"))
