@@ -1,4 +1,5 @@
-window.Bible = 1;
+if(!("Bible" in window))window.Bible = 1;
+console.log("B2"+Bible)
 window.muteToggle = false;
 window.fftSize=512
 window.zoom=1.;
@@ -40,8 +41,7 @@ function readHash(){
             number=""
             let lasthash = hashindex;
             let CTRLorALT = location.hash[hashindex-1]=="."||location.hash[hashindex-1]==","||location.hash[hashindex]=="."||location.hash[hashindex]==",";
-            let bibleReaderCode =(location.hash[hashindex-2]=="c"&&location.hash[hashindex-3]==".")||
-                                (location.hash[hashindex-3]=="c"&&location.hash[hashindex-4]==".")
+            let bibleReaderCode =(location.hash[hashindex-2]=="c"&&location.hash[hashindex-3]==".")
             if((location.hash[hashindex-1]=="("&&!CTRLorALT)||(CTRLorALT&&location.hash[hashindex-2]=="("))
             {            hashindex++;
                 
