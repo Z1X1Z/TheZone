@@ -31,7 +31,7 @@ number {
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    touch-action: none;
+    touch-action: none;//prevent zooming and panning
 
     z-index: 3; 
     width: 100%;
@@ -48,8 +48,6 @@ number {
     position: fixed;
     top: 0;
     z-index:2;
-    touch-action: auto;
-
 }
 #textWindow{
     line-height: .878;
