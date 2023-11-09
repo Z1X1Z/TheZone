@@ -166,8 +166,9 @@ function followSound(e){
         
         var id =touchNumber.get(e.pointerId);
         let twistTRIANGLEtoSQUARE=1.;
-        //let twistSQUAREtoTRIANGLE = 1.;
+        let twistSQUAREtoTRIANGLE = 1.;
         let twistZINEtoSAW = 1.;
+        let twistSAWtoZINE = 1.;
         if(event.twist!=0)
         {
             twistTRIANGLEtoSQUARE= Math.atan(y,x)/Math.PI-event.twist/360;
