@@ -167,7 +167,6 @@ function callKey(event){
                  if(!muteToggle)
                        window.Bible = (window.Bible+1)%2;
                     let content = document.getElementsByClassName("dropdown-content");
-        
         //iframe redirect from https://stackoverflow.com/questions/28159920/how-to-redirect-page-inside-iframe-to-another-one-but-we-must-stay-in-iframe
         if(mobile);//dynamic href for iFrame doesn't seem to work on mobile
         else if (number == 8)
@@ -181,7 +180,8 @@ function callKey(event){
             else if(number == 2)  window.frames["TheBible"].location =  "https://openbible.com/audio/souer_books/";
         else if(number == 1)  window.frames["TheBible"].location =  "https://openbible.com/audio/gilbert_books/";
          else if(number == 0)  window.frames["TheBible"].location =  "https://www.biblehub.com/audio/";
-                
+             //   else if(location.hash.includes(".b"))document.getElementById("reader").value = 0.;
+
                     if(window.Bible==0)
                     {
                         document.getElementById("Bible").height="100%";

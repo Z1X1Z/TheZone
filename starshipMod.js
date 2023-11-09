@@ -999,7 +999,7 @@ function onWindowResize() {
                             bottomOfScreenHeight = correlationForTextY;
                         }
                         else{correlationForTextY=0;bottomOfScreenHeight=0}
-                               console.log(document.getElementById("reader").value)
+                              console.log(document.getElementById("reader").value)
                     if(document.getElementById("reader").value==0&&Bible==0)
                     correlationForTextX=document.getElementById("Bible").offsetWidth
                             else correlationForTextX=0.;
