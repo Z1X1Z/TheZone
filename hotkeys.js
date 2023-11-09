@@ -164,11 +164,12 @@ function callKey(event){
     else if (event.ctrlKey&&key=="a")uniforms[ "colorCombo" ].value = 11;
     else if (event.ctrlKey&&key=="j")window.Oreo=!window.Oreo;
     else if (event.altKey&&key=="b"){
+
                  if(!muteToggle)
                        window.Bible = (window.Bible+1)%2;
                     let content = document.getElementsByClassName("dropdown-content");
         //iframe redirect from https://stackoverflow.com/questions/28159920/how-to-redirect-page-inside-iframe-to-another-one-but-we-must-stay-in-iframe
-        if(mobile);//dynamic href for iFrame doesn't seem to work on mobile
+        if(mobile||runningHash);//dynamic href for iFrame doesn't seem to work on mobile
         else if (number == 8)
             window.frames["TheBible"].location = "https://openbible.com/audio/gilbert_music/";
                 else if(number ==7) window.frames["TheBible"].location ="https://openbible.com/audio/gilbert_music_books/";

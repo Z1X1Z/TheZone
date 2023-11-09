@@ -19,9 +19,135 @@
 
             <script>
                 var iframe = document.createElement('iframe');
+                
+                    let chapter = "";
+                    let book = ""
+                    let urlAppend = ""
+                    let readerSet = false;
+                    let bibleWithText = false;
 
                 if(window.useCDN||location.hash.includes(".b"))
                 {
+                    if (location.hash.includes(".c("))
+                    {let c = 0;
+                        while (location.hash.slice(c-3,c)!=".c("&&c<location.hash.length)
+                        {
+                            c++;
+                               }
+                        while (location.hash[c]!=")"&& isNaN(location.hash[c])&&c<location.hash.length)
+                        {
+                        book+=location.hash[c];
+                        c++;}
+                        while (location.hash[c]!=")"&& !isNaN(location.hash[c])&&c<location.hash.length)
+                        {
+                        chapter+=location.hash[c];
+                        c++;}
+                    
+let bookOfBooks=[
+                    "Genesis",
+                    "Exodus",
+                    "Leviticus",
+                    "Numbers",
+                    "Deuteronomy",
+                    "Joshua",
+                    "Judges",
+                    "Ruth",
+                    "iSamuel",
+                    "iiSamuel",
+                    "iKings",
+                    "iiKings",
+                    "iChronicles",
+                    "iiChronicles",
+                    "Ezra",
+                    "Nehemiah",
+                    "Esther",
+                    "Job",
+                    "Psalms",
+                    "Proverbs",
+                    "Ecclesiastes",
+                    "Song",
+                    "Isaiah",
+                    "Jeremiah",
+                    "Lamentations",
+                    "Ezekiel",
+                    "Daniel",
+                    "Hosea",
+                    "Joel",
+                    "Amos",
+                    "Obadiah",
+                    "Jonah",
+                    "Micah",
+                    "Nahum",
+                    "Habakkuk",
+                    "Zephaniah",
+                    "Haggai",
+                    "Zechariah",
+                    "Malachi",
+                    
+                    "Matthew",
+                    "Mark",
+                    "Luke",
+                    "John",
+                    "Acts",
+                    "Romans",
+                    "iCorinthians",
+                    "iiCorinthians",
+                    "Galatians",
+                    "Ephesians",
+                    "Philippians",
+                    "Colossians",
+                    "iThessalonians",
+                    "iiThessalonians",
+                    "iTimothy",
+                    "iiTimothy",
+                    "Titus",
+                    "Philemon",
+                    "Hebrews",
+                    "James",
+                    "iPeter",
+                    "iiPeter",
+                    "iJohn",
+                    "iiJohn",
+                    "iiiJohn",
+                    "Jude",
+                    "Revelation"
+]
+if(book.toLowerCase()=="songofsolomon"||book.toLowerCase()=="songofsongs")
+book = "song"
+
+let maxLetterDepth=0;
+let bookChosen = false;
+
+    for(var h = 0; h<bookOfBooks.length; h++)
+    {
+        let letterDepth=1;
+        while(letterDepth<=bookOfBooks[h].length)
+        {
+            if(bookOfBooks[h].slice(0,letterDepth).toLowerCase().includes(book.toLowerCase())&&maxLetterDepth<letterDepth)
+            {
+            book=bookOfBooks[h].toLowerCase();
+            maxLetterDepth = letterDepth
+            bookChosen = true;
+            console.log("here")
+            }
+        letterDepth++;
+        }
+    }
+    console.log(book+"book")
+    console.log(bookChosen+"bookChosen")
+    if (bookChosen==false) book = ""
+    console.log(book+"book2")
+
+        let place = 0;
+        if(book[place]=="i" && book!="isaiah"){
+           while(book[place]=="i" && book!="isaiah")
+            place++
+        book=(place-1)+'_'+book.slice(place,book.length)
+        }
+        console.log(book+"book3")
+
+         urlAppend = "chapter/"+book+"/"+chapter+".htm"
+}
                      if (location.hash.includes(".b8"))
                     iframe.setAttribute("src", "https://openbible.com/audio/gilbert_music/");
                             else if(location.hash.includes(".b7"))   iframe.setAttribute("src","https://openbible.com/audio/gilbert_music_books/");
@@ -32,8 +158,11 @@
                         else if(location.hash.includes(".b3") )   iframe.setAttribute("src","https://openbible.com/audio/hays_books/");
                         else if(location.hash.includes(".b2")  )   iframe.setAttribute("src","https://openbible.com/audio/souer_books/");
                     else if(location.hash.includes(".b1")    ) iframe.setAttribute("src","https://openbible.com/audio/gilbert_books/");
-                     else iframe.setAttribute("src",  "https://www.biblehub.com/audio/");
-
+                     else
+                     {
+                         iframe.setAttribute("src",  "https://www.biblehub.com/audio/"+urlAppend);
+                         bibleWithText = true;}
+                     console.log(urlAppend);
                 iframe.setAttribute("height", "100%");
                 iframe.setAttribute("width", "100%");
                 iframe.setAttribute("class", "onTOP");
@@ -862,6 +991,8 @@ scoreColorInversion=false;
                   
                   <select name="choose reader"  id="reader"
                       onchange="
+                  readerSet = true;
+
                                     key  = 'b';
                                     number = this.value;
                                     window.muteToggle = true;
@@ -869,7 +1000,8 @@ scoreColorInversion=false;
                                     window.muteToggle = false;
 "
                 >
-                <option value="100" selected="selected">Choose Your Blessed Reader (not available on mobile):</option>
+                <option value="100" selected="selected">Choose Your Blessed Reader (not available on mobile):
+                </option>
                       <option value='0'>
                           Hays (with text)
                       </option>
@@ -901,10 +1033,6 @@ scoreColorInversion=false;
                           </option>
                           
                   </select>
-                  
-                  <script>
-                      document.getElementById("reader").value=100.;
-                      </script>
                   
                   
                   <input type="checkbox" id="BibleToggle" name="t"  onclick= "
