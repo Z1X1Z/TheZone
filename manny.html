@@ -131,8 +131,6 @@ let maxLetterDepth=-1;
             {
             bookIndex = h;
             maxLetterDepth = letterDepth
-            console.log(bookOfBooks[h][letterDepth])
-            console.log(book+"currentBook")
 
             }
         letterDepth++;
@@ -142,7 +140,6 @@ let maxLetterDepth=-1;
     else
     {
         book=bookOfBooks[bookIndex].toLowerCase();
-        console.log(book+"bookfromindex")
 
         let place = 0;
         if(book[place]=="i" && book!="isaiah"){
@@ -150,7 +147,6 @@ let maxLetterDepth=-1;
             place++
         book=(place-1)+'_'+book.slice(place,book.length)
         }
-        console.log(book+"bookFinal")
 }
          urlAppend = "chapter/"+book+"/"+chapter+".htm"
 }
@@ -168,7 +164,6 @@ let maxLetterDepth=-1;
                      {
                          iframe.setAttribute("src",  "https://www.biblehub.com/audio/"+urlAppend);
                          bibleWithText = true;}
-                     console.log(urlAppend);
                 iframe.setAttribute("height", "100%");
                 iframe.setAttribute("width", "100%");
                 iframe.setAttribute("class", "onTOP");
@@ -2070,39 +2065,40 @@ vec2 lastS = s;
    //traditionally be e or 3 probably 1.5 to 4
    
 
-       float spoke_delimiter = 1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
+       float spoke_delimiter = (1.+pow(metaCoreDriveFactor-1.,1./(2.+.47805268028830/2.)))/2.;
+       float spokeShift =spoke_delimiter*logStabilizationConstant;
+
     if(Spoker&&1.<=hyperCoreBoosted)
         {
                                  dstnce = length(s);
-
                      if(wheel){
                                  s/=2.;
                           
-                                 hyperCoreOUTPUT-=log(spoke_delimiter/2.);
+                                 hyperCoreOUTPUT-=log(spoke_delimiter);
 
-                                 hyperCoreBoosted-=log(spoke_delimiter/2.);
+                                 hyperCoreBoosted-=log(spoke_delimiter);
                                 
                                  }
                              
                      else{
                                  
-                              s/=spoke_delimiter;//engage spokelover s/=2.+'superspokes'
+                              s/=spoke_delimiter*logStabilizationConstant;//engage spokelover s/=2.+'superspokes'
             
-                             hyperCoreOUTPUT-=spoke_delimiter*logStabilizationConstant;//the 1.1 is just sort of interesting
+                             hyperCoreOUTPUT-=spokeShift;//the 1.1 is just sort of interesting
 
-                             hyperCoreBoosted-=spoke_delimiter*logStabilizationConstant;
+                             hyperCoreBoosted-=spokeShift;
                             
                      }
             }
             else  {
                 
                     if(wheel){
-                hyperCoreOUTPUT+=log(spoke_delimiter/2.);
-                hyperCoreBoosted+=log(spoke_delimiter/2.);
+                hyperCoreOUTPUT+=log(spoke_delimiter);
+                hyperCoreBoosted+=log(spoke_delimiter);
                 }
                     else{
-                hyperCoreOUTPUT+=spoke_delimiter;
-                hyperCoreBoosted+=spoke_delimiter;
+                hyperCoreOUTPUT+=spokeShift;
+                hyperCoreBoosted+=spokeShift;
                 }
             }
 

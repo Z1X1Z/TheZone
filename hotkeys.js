@@ -40,6 +40,8 @@ function readHash(){
             number=""
             let lasthash = hashindex;
             let CTRLorALT = location.hash[hashindex-1]=="."||location.hash[hashindex-1]==","||location.hash[hashindex]=="."||location.hash[hashindex]==",";
+            let bibleReaderCode =(location.hash[hashindex-2]=="c"&&location.hash[hashindex-3]==".")||
+                                (location.hash[hashindex-3]=="c"&&location.hash[hashindex-4]==".")
             if((location.hash[hashindex-1]=="("&&!CTRLorALT)||(CTRLorALT&&location.hash[hashindex-2]=="("))
             {            hashindex++;
                 
@@ -51,7 +53,7 @@ function readHash(){
                 
             }
             number=Number(number);
-            callKey(new KeyboardEvent('keydown',
+           if(!bibleReaderCode) callKey(new KeyboardEvent('keydown',
                                       {
                 'key': location.hash[lasthash],"keyCode":location.hash.charCodeAt(lasthash),
                 "ctrlKey":location.hash[lasthash-1]==",","altKey":location.hash[lasthash-1]=="."
