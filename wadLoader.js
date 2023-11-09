@@ -106,9 +106,9 @@ function startSound(e){
     if(event.twist!=0)
     {
         twistTRIANGLEtoSQUARE= Math.atan(y,x)/Math.PI-event.twist/360;
-        //twistSQUAREtoTRIANGLE = 1.-twistTRIANGLEtoSQUARE;
+        twistSQUAREtoTRIANGLE = 1.-twistTRIANGLEtoSQUARE;
         twistZINEtoSAW= (Math.atan(y,x)/Math.PI-event.twist/360+.5)%1;
-        //twistSAWtoZINE=1.-twistZINEtoSAW;
+        twistSAWtoZINE=1.-twistZINEtoSAW;
     }
     if(!window.touchMode){
         var id = touchNumber.get(e.pointerId);
@@ -139,14 +139,14 @@ function startSound(e){
             sound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistTRIANGLEtoSQUARE*.5});
             sound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:.0000001,volume:.0000001});
             
-            zound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistTRIANGLEtoSQUARE*.5});
+            zound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistSQUAREtoTRIANGLE*.5});
             zound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:.0000001,volume:.0000001});
             
             
             xound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistZINEtoSAW*.5});
             xound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:.0000001,volume:.0000001});
             
-            tound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistZINEtoSAW*.5});
+            tound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistSAWtoZINE*.5});
             tound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:.0000001,volume:.0000001});
 
 
@@ -171,9 +171,10 @@ function followSound(e){
         if(event.twist!=0)
         {
             twistTRIANGLEtoSQUARE= Math.atan(y,x)/Math.PI-event.twist/360;
-            //twistSQUAREtoTRIANGLE = 1.-twistTRIANGLEtoSQUARE;
+            twistSQUAREtoTRIANGLE = 1.-twistTRIANGLEtoSQUARE;
 
             twistZINEtoSAW= (Math.atan(y,x)/Math.PI-event.twist/360+.5)%1;
+            twistSAWtoZINE= 1.-twistZINEtoSAW;
            console.log(twistZINEtoSAW)//this should get tested
         }
         let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
@@ -192,8 +193,8 @@ function followSound(e){
                 
                     zound2[id].setPitch(frequency);
                     zound[id].setPitch(2.*frequency);
-                    zound2[id].setVolume((volume*(angleSound - initialAngleSound[id])/(2.*pi))*twistTRIANGLEtoSQUARE*.5);
-                    zound[id].setVolume(volume*(1.-(angleSound-initialAngleSound[id])/(2.*pi))*twistTRIANGLEtoSQUARE*.5);
+                    zound2[id].setVolume((volume*(angleSound - initialAngleSound[id])/(2.*pi))*twistSQUAREtoTRIANGLE*.5);
+                    zound[id].setVolume(volume*(1.-(angleSound-initialAngleSound[id])/(2.*pi))*twistSQUAREtoTRIANGLE*.5);
                 
                 xound2[id].setPitch(frequency);
                 xound[id].setPitch(2.*frequency);
@@ -203,8 +204,8 @@ function followSound(e){
                 
                     tound2[id].setPitch(frequency);
                     tound[id].setPitch(2.*frequency);
-                    tound2[id].setVolume((volume*(angleSound - initialAngleSound[id])/(2.*pi))*twistZINEtoSAW*.5);
-                    tound[id].setVolume(volume*(1.-(angleSound-initialAngleSound[id])/(2.*pi))*twistZINEtoSAW*.5);
+                    tound2[id].setVolume((volume*(angleSound - initialAngleSound[id])/(2.*pi))*twistSAWtoZINE*.5);
+                    tound[id].setVolume(volume*(1.-(angleSound-initialAngleSound[id])/(2.*pi))*twistSAWtoZINE*.5);
             }
         }
 }
