@@ -1,5 +1,4 @@
-if(!("Bible" in window))window.Bible = 1;
-console.log("B2"+Bible)
+if(!("BibleON" in window))window.BibleON = 1;
 window.muteToggle = false;
 window.fftSize=512
 window.zoom=1.;
@@ -168,8 +167,9 @@ function callKey(event){
     else if (event.altKey&&key=="b"){
 
                  if(!muteToggle)
-                       window.Bible = (window.Bible+1)%2;
-                    let content = document.getElementsByClassName("dropdown-content");
+                       window.BibleON = (window.BibleON+1)%2;
+
+        let content = document.getElementsByClassName("dropdown-content");
         //iframe redirect from https://stackoverflow.com/questions/28159920/how-to-redirect-page-inside-iframe-to-another-one-but-we-must-stay-in-iframe
         if(mobile||runningHash);//dynamic href for iFrame doesn't seem to work on mobile
         else if (number == 8)
@@ -185,7 +185,7 @@ function callKey(event){
          else if(number == 0)  window.frames["TheBible"].location =  "https://www.biblehub.com/audio/";
              //   else if(location.hash.includes(".b"))document.getElementById("reader").value = 0.;
 
-                    if(window.Bible==0)
+                    if(window.BibleON==0)
                     {
                         document.getElementById("Bible").height="100%";
                         document.getElementById("Bible").width="50%";
