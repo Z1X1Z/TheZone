@@ -2066,44 +2066,42 @@ vec2 lastS = s;
    s.x=log(abs(s.x))/log(baseN);
    //traditionally be e or 3 probably 1.5 to 4
    
+ 
 
-       float spoke_delimiter = (1.+pow(metaCoreDriveFactor-1.,1./(2.+.47805268028830/2.)))/2.;
-       float spokeShift =spoke_delimiter*logStabilizationConstant;
+if(Spoker){
+    float spoke_factor =metaCoreDriveFactor;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
 
-    if(Spoker&&1.<=hyperCoreBoosted)
-        {
-                                 dstnce = length(s);
-                     if(wheel){
-                                 s/=2.;
-                          
-                                 hyperCoreOUTPUT-=log(spoke_delimiter);
-
-                                 hyperCoreBoosted-=log(spoke_delimiter);
-                                
-                                 }
+   if(1.<=hyperCoreBoosted)
+                         {
                              
-                     else{
-                                 
-                              s/=spoke_delimiter*logStabilizationConstant;//engage spokelover s/=2.+'superspokes'
+                         if(wheel){
+                             s/=2.;
+                             
+                             hyperCoreOUTPUT-=log(spoke_factor/2.);
+
+                             hyperCoreBoosted-=log(spoke_factor/2.);
+                             }
+                         else{
+                             
+                          s/=spoke_factor;//engage spokelover s/=2.+'superspokes'
+                         
+                         hyperCoreOUTPUT-=spoke_factor;
+
+                         hyperCoreBoosted-=spoke_factor;
+                         }
+                         }
+        else  {
             
-                             hyperCoreOUTPUT-=spokeShift;//the 1.1 is just sort of interesting
-
-                             hyperCoreBoosted-=spokeShift;
-                            
-                     }
+                if(wheel){
+            hyperCoreOUTPUT+=log(spoke_factor/2.);
+            hyperCoreBoosted+=log(spoke_factor/2.);
             }
-            else  {
-                
-                    if(wheel){
-                hyperCoreOUTPUT+=log(spoke_delimiter);
-                hyperCoreBoosted+=log(spoke_delimiter);
-                }
-                    else{
-                hyperCoreOUTPUT+=spokeShift;
-                hyperCoreBoosted+=spokeShift;
-                }
+                else{
+            hyperCoreOUTPUT+=spoke_factor;
+            hyperCoreBoosted+=spoke_factor;
             }
-
+            }
+}
    
    if(spokelover&&counter<hyperCoreBoosted){
         if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
