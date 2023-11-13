@@ -409,23 +409,25 @@ function  move()
                             
                             
                             
-                            
-lastNote = note;
- note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
- uniforms.note.value=note;
-const t =  (note )*flip+twist/2;
+                     
                     if(on)
                     {
+                        
+lastNote = note;
+note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
+uniforms.note.value=note;
+const t =  (note )*flip+twist/2;
 if(isFinite(t))angle = -(t*radialWarp);
 //angle-=1/radialWarp;
-                    const reversableColor=((angle/12./radialWarp+twist/24.)*flip+1./3.)%1.;
 
-colorSound = new THREE.Color();
-                       const colortone = note/lightingScaleTrail;
-    colorSound.setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
+     const reversableColor=((angle/12./radialWarp+twist/24.)*flip+1./3.)%1.;
+                            const colortone = note/lightingScaleTrail;
+
+
+ 
                     colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);//lighting {note/x} should be 120 but it's out of the vocal range
 pitchCol[f]  = colorSoundPURE;
-                    
+     colorSound = new THREE.Color().setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
                                            
                                            const nt = Math.round(note)%12;
                                            if (nt==7||nt==5||nt==2||nt==0||nt==10)
@@ -452,13 +454,14 @@ pitchCol[f]  = colorSoundPURE;
                                            if(!Oreo){
                         starMajorMinor=.5;
                         BlackOrWhiteTrail=.5;
-                        
+         angle = ((angle+6*radialWarp)/12.)%1*2*pi;
+
                     }
+                                          
                         flatline = window.movementRate;
                    //    if(window.movementRate<movementRateORIGINAL) flatline = 1.;
                     
                     
-         angle = ((angle+6*radialWarp)/12.)%1*2*pi;
          d_x = -Math.sin(-angle)*flatline;
          d_y = -Math.cos(-angle)*flatline;
          uniforms.d.value=new THREE.Vector2( d_x,d_y);
@@ -572,68 +575,72 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
                              let   omniDynamicEngaged=false;
                                            window.zoom=1.;
 
-       let uniforms = {
-        omniDynamic:{value:null},
-       coreTextureSampler:{value:null},
-       STAR:{value: null    },
-         EDEN:{value: null   },
-       eden:{value: 0},
-           spokesVisualizeColors: {value: false    },
- note:{value: 0},
- balloonsON:{value: 0.},
- sparklesON:{value: false},
- SPHEREofTheLORD:{value: false},
-                    clvrVariant1:{value: false},
-                    clvrVariant2:{value: false},
-                    clvrVariant3:{value: false},
-                    clvrVariant4:{value: false},
-                    clvrVariant5:{value: false},
-                    clvrVariant6:{value: false},
-                        
-                        clvrVariant7:{value: false},
-                        clvrVariant8:{value: false},
-       Spoker:{value: true    },
-       spokelover:{value: false    },
-       continuumClover:{value: false    },
-       Inherited:{value: true    },
-       cloverSlide:{value: false    },
-
-           micIn : {  value: null }, // float array (vec3)
-           time: {value:.0 },
-       rate: {value: 1.},
-
-           zoom: {value:  window.zoom },
-           colorCombo: {value: -1 },
-             free: {value: false },
-             MetaCored: {value: true },
-             externalCores: {value: 0. },
-             centralCores: {value: 0. },
-             outerCoresOff: {value: false},
-         upCoreCycler: {value: 0. },
-
-             morph: {value: 0.0 },
-
-       fourCreats: {value: 1 },
-       Character: {value: 0 },
-       articles: {value: false },
-       helm: {value: false },
-       wheel: {value: false },
-       Refractelate: {value: false },
-       petals: {value:  .0 },
-
-       carousel: {value: 0.0 },
-       metaCarousel: {value: 0. },
-       spirated: {value: 0. },
-       hearTOL: {value: false},
-       colorInverter: {value:false},
-           metronome: {value: .99 },
-           time2dance: {value: 0.0 },
-       volume: {value: 1.0 },
-       totalAmp: {value: 1.0 },
-
-     
-           resolution: {value:null},//these are later resolved to the THREE.vec2() uniforms
-           coords: {value: null},
+                            let uniforms = {
+omniDynamic:{value:null},
+coreTextureSampler:{value:null},
+STAR:{value: null    },
+EDEN:{value: null   },
+uberDuper:{value: null   },
+    
+eden:{value: 0},
+spokesVisualizeColors: {value: false    },
+note:{value: 0},
+balloonsON:{value: 0.},
+sparklesON:{value: false},
+SPHEREofTheLORD:{value: false},
+clvrVariant1:{value: false},
+clvrVariant2:{value: false},
+clvrVariant3:{value: false},
+clvrVariant4:{value: false},
+clvrVariant5:{value: false},
+clvrVariant6:{value: false},
+    
+clvrVariant7:{value: false},
+clvrVariant8:{value: false},
+Spoker:{value: true    },
+spokelover:{value: false    },
+continuumClover:{value: false    },
+Inherited:{value: true    },
+cloverSlide:{value: false    },
+    
+    micIn : {  value: null }, // float array (vec3)
+time: {value:.0 },
+rate: {value: 1.},
+    
+zoom: {value:  window.zoom },
+colorCombo: {value: -1 },
+free: {value: false },
+MetaCored: {value: true },
+externalCores: {value: 0. },
+centralCores: {value: 0. },
+outerCoresOff: {value: false},
+upCoreCycler: {value: 0. },
+    
+morph: {value: 0.0 },
+    
+fourCreats: {value: 1 },
+Character: {value: 0 },
+articles: {value: false },
+helm: {value: false },
+wheel: {value: false },
+Refractelate: {value: false },
+petals: {value:  .0 },
+    
+carousel: {value: 0.0 },
+metaCarousel: {value: 0. },
+spirated: {value: 0. },
+hearTOL: {value: false},
+colorInverter: {value:false},
+metronome: {value: .99 },
+time2dance: {value: 0.0 },
+volume: {value: 1.0 },
+totalAmp: {value: 1.0 },
+    
+    
+resolution: {value:null},//these are later resolved to the THREE.vec2() uniforms
+coords: {value: [0,0]},
+coordSHIFT: {value: [0,0]},
+duperZoom: {value:1.},
        d: {value:null},
  dotCoord:{value:null},
 
@@ -740,7 +747,8 @@ function setFFTdependantSizes(){
          starStreamMesh = new THREE.Mesh(starStreamGeometry, starStreamMaterial);
          scene.add(starStreamMesh);
 
-         
+         loadAttributes();
+
      }
      
      
@@ -751,7 +759,49 @@ function setFFTdependantSizes(){
     FeedbackrenderTarget = new THREE.WebGLRenderTarget(w,h);
     FeedbackrenderTargetFlipSide = new THREE.WebGLRenderTarget(w,h);
  }
+                                           
+                   let linePositionAttribute;
+                   let lineColorAttribute;
+                                           
+                                           let starPositionAttribute;
+                                           let starColorAttribute;
+                                           
+                                           let starStreamPositionAttribute;
+                                           let starStreamColorAttribute;
+                                           
+                                       let harmonicPositionAttribute;
+                                       let harmonicColorAttribute;
+                                           
+                                           let trailPositionAttribute;
+                                           let trailColorAttribute;
+                                           
+                                       let starsANDwitnessesPositionAttribute;
+                                       let starsANDwitnessesColorAttribute;
+                                           function loadAttributes(){
+                        
+                        linePositionAttribute = lineGeometry.getAttribute( 'position' );
+                        lineColorAttribute = lineGeometry.getAttribute( 'color' );
+                        
+                        starPositionAttribute = starGeometry.getAttribute( 'position' );
+                        starColorAttribute = starGeometry.getAttribute( 'color' );
+                        
+                        starStreamPositionAttribute = starStreamGeometry.getAttribute( 'position' );
+                        starStreamColorAttribute = starStreamGeometry.getAttribute( 'color' );
+                        
+                        
+                        harmonicPositionAttribute = harmonicPzyghtheGeometry.getAttribute( 'position' );
+                        harmonicColorAttribute = harmonicPzyghtheGeometry.getAttribute( 'color' );
+                        
+                        
+                        trailPositionAttribute = geomeTrail.getAttribute( 'position' );
+                        trailColorAttribute = geomeTrail.getAttribute( 'color' );
+                        
+                     starsANDwitnessesPositionAttribute = starsANDwitnessesGeometry.getAttribute( 'position' );
+                     starsANDwitnessesColorAttribute = starsANDwitnessesGeometry.getAttribute( 'color' );
+                    }
+                                           
 function init() {
+                        uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
            uniforms.resolution.value = new THREE.Vector2(window.innerWidth,window.innerHeight);
      uniforms.coords.value = new THREE.Vector2(0.,0.);
      uniforms.d.value = new THREE.Vector2(0.,0.);
@@ -853,7 +903,8 @@ function init() {
      radialGeometry=new THREE.BufferGeometry()
      radialLine = new THREE.Line(radialGeometry,radialMaterial);
      
-     
+                        loadAttributes();
+                        
      scene.add(harmonicPzyghtheMesh)
      scene.add(meshTrail)
      scene.add(line);
@@ -929,8 +980,8 @@ function init() {
      wipeUniforms=THREE.UniformsUtils.merge([
          THREE.UniformsLib.lights,
          {
-         cloverSampler:{value:null}
-             
+         cloverSampler:{value:null},
+             resolution:{value:null}
          }
          ]);
      
@@ -982,7 +1033,7 @@ function adjustThreeJSWindow()
         
      uniforms.resolution.value =new THREE.Vector2(widthPX,heightPX);
      FEEDBACKuniforms.resolution.value =new THREE.Vector2(widthPX,heightPX);
-
+                        wipeUniforms.resolution.value =new THREE.Vector2(widthPX,heightPX);
       minimumDimension = Math.min(widthPX,heightPX);
      maximumDimension = Math.max(widthPX,heightPX);
      setRenderTargetSize(widthPX,heightPX);
@@ -1010,7 +1061,7 @@ function onWindowResize() {
                             heightPX=window.innerHeight-correlationForTextY;
                             widthPX=window.innerWidth-correlationForTextX;
                         
-                        if(Bible==0)document.getElementById("Bible").height=window.innerHeight/-leaf;
+                        if(BibleON==0)document.getElementById("Bible").height=window.innerHeight/-leaf;
 
             if("osmd" in window&&osmd!=null)
             {   osmd.width=widthPX;
@@ -1093,10 +1144,10 @@ let       preserveOuterCore = true;
                        
                        
                        
-                       
-                       
+                      window.dupered = false;
+                       let zoomCap32 =.00000075;
 function zoomRoutine(){
-    const metaDepth=.00000075;//due to pixelization limits
+    const metaDepth=(!dupered)?zoomCap32:zoomCap32**2;//due to pixelization limits
     let zoomCone=metaDepth*fromCenter;
     if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
     
@@ -1107,7 +1158,7 @@ function zoomRoutine(){
         if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&on)||window.pointerZoom)zoom *=ZR;
         else if(uniforms.MetaCored.value||zoom<1.){
             zoom /= ZR;
-            if(center&&zoom<1.){coordX*=1./(ZR*1./-leaf)*(1-zoom); coordY*=1./(ZR/-leaf)**(1-zoom);}
+            if(center&&zoom<1.){coordX*=ZR*2./3.;; coordY*=ZR*2./3.;}
         }
     }
 
@@ -1367,6 +1418,7 @@ function runOSMD (){
     if (!isFinite(interpolation))interpolation = 1.;
                         if(loopsRun<3)interpolation=0.;//this is to prevent frametime leak on mobile
                         if(interpolation>60)interpolation=1.;//this is to prevent frametime leak on mobile
+    if(!generated||bigCloverGapSync){interpolation=1;bigCloverGapSync=false;}
     lastFrameTime=timestamp;
     if(!window.touchMode)pointerZoom=false;
     else on=false;
@@ -1464,8 +1516,13 @@ if( !window.touchMode&&!window.touchOnlyMode) {
         uniforms[ "time2dance" ].value += audioX.sampleRate/bufferSize*totalAMP;
         uniforms["volume" ].value = audioX.sampleRate/bufferSize*totalAMP/(1.+zoomOutRatchetThreshold);
         uniforms[ "zoom" ].value = zoom;
-        uniforms.coords.value = new THREE.Vector2( coordX,coordY);
-
+    
+    
+    
+    uniforms.coordSHIFT.value.x+=d_x;
+    uniforms.coordSHIFT.value.y+=d_y;
+    
+   uniforms.coords.value = new THREE.Vector2( coordX,coordY);
    if (EldersLeg>=0){
 
 
@@ -1483,8 +1540,6 @@ if( !window.touchMode&&!window.touchOnlyMode) {
                             
                             let tx = spirray0[0], ty = spirray1[1],greyness=1.,greynessLast=-1;
                             
-    let linePositionAttribute = lineGeometry.getAttribute( 'position' );
-    let lineColorAttribute = lineGeometry.getAttribute( 'color' );
   var lineStride=0;
    
         //scene.add(line)
@@ -1529,8 +1584,6 @@ if( !window.touchMode&&!window.touchOnlyMode) {
 
     
     
-    let starPositionAttribute = starGeometry.getAttribute( 'position' );
-    let starColorAttribute = starGeometry.getAttribute( 'color' );
     let starStride = 0;
     if(onO){
         for (var g=0; g<starArms; g++) {
@@ -1657,9 +1710,6 @@ if( !window.touchMode&&!window.touchOnlyMode) {
         if ((RockInTheWater==1||RockInTheWater==2)&&xyStarParticleArray.length>0)
         {
             scene.add(starStreamMesh)
-            
-            let starStreamPositionAttribute = starStreamGeometry.getAttribute( 'position' );
-            let starStreamColorAttribute = starStreamGeometry.getAttribute( 'color' );
             
             
             
@@ -1845,8 +1895,6 @@ let depth = -starShipDepthInSet+lengt*(1.-starShipDepthInSet);
       starPositionAttribute.needsUpdate = true; // required after the first render
       starColorAttribute.needsUpdate = true; // required after the first render
     
-let starsANDwitnessesPositionAttribute = starsANDwitnessesGeometry.getAttribute( 'position' );
-let starsANDwitnessesColorAttribute = starsANDwitnessesGeometry.getAttribute( 'color' );
          if(window.octaveStars)
          {
              
@@ -1935,8 +1983,6 @@ var fingerStride = 0;
                                         
                                         let hpStride = 0;
                                         
-                                    let harmonicPositionAttribute = harmonicPzyghtheGeometry.getAttribute( 'position' );
-                                    let harmonicColorAttribute = harmonicPzyghtheGeometry.getAttribute( 'color' );
                                              if(window.pzyghthe!=0)
                                              {
                                                  
@@ -2037,8 +2083,6 @@ var fingerStride = 0;
          
          
 
-    let trailPositionAttribute = geomeTrail.getAttribute( 'position' );
-    let trailColorAttribute = geomeTrail.getAttribute( 'color' );
 var loopLimit = (trailDepth<=trailLength)?trailDepth:trailLength;
 let r = (f+loopLimit-1)%loopLimit;
 let s = f;
@@ -2218,6 +2262,24 @@ let s = f;
 
 
                                                                                      }//end EldersLeg>0
+         else//clear starship
+            {
+            for(let u= 0.; u < bufferPortion*2; u +=1) linePositionAttribute.setXYZ(u,0,0,0);
+            for(var v = 0; v<6*trailDepth;v++) trailPositionAttribute.setXYZ(v,0,0,0);
+            for(let r = 0.; r<starArms*3; r++)starPositionAttribute.setXYZ(r,0,0,0);
+            for(var g=0; g<12*xenOctaveFactor*6; g++) harmonicPositionAttribute.setXYZ(g,0,0,0);
+            for(var e = 0; e<xyStarParticleArray.length*3*2; e++)starStreamPositionAttribute.setXYZ(e,0,0,0);
+            for(var e = 0; e<120*6; e++)  starsANDwitnessesPositionAttribute.setXYZ(e,0,0,0);
+
+
+            linePositionAttribute.needsUpdate = true;
+            starPositionAttribute.needsUpdate = true;
+            trailPositionAttribute.needsUpdate = true;
+            harmonicPositionAttribute.needsUpdate = true;
+            starStreamPositionAttribute.needsUpdate = true;
+            starsANDwitnessesPositionAttribute.needsUpdate = true;
+        }
+
 
 if(isFinite(d_x)&&isFinite(d_y)&&on) {
 circleX-=xAdjusted;//xadjusted should mean this moves with the same screen scale as the trail
@@ -2233,15 +2295,15 @@ else if (circleY<-height)circleY=height;
                                   circle.geometry=new THREE.CircleGeometry(dotSize,sides,0.);
 //circleGeometry.computeBoundingBox ();
 
-circle.position.set(circleX,circleY,-1);
-                              if(isFinite(note)&&isFinite(lastNote))    circle.rotateZ(note-lastNote);
+circle.position.set(circleX,circleY,-.99);
+                              if(isFinite(note)&&isFinite(lastNote))    circle.rotateZ((on)?note-lastNote:lastNote);
 
                    let colorBlack= new THREE.Color();
                    colorBlack.setStyle("black");
 
 
                    let centerOfDotToEdge = [];
-                   centerOfDotToEdge.push( new THREE.Vector3(circleX-Math.sin(-angle)*dotSize*volume, circleY-Math.cos(-angle)*dotSize*volume, -1 ) );
+                   centerOfDotToEdge.push( new THREE.Vector3(circleX-Math.sin(-angle)*dotSize*volume, circleY-Math.cos(-angle)*dotSize*volume, -1. ) );
                    centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-1) );
 
                                   radialLine.geometry.setFromPoints( centerOfDotToEdge )
@@ -2332,7 +2394,7 @@ if (!on)neutralizer=0.;
     const ddY= circleY-polygons[n].centerY;
     const distDot = Math.sqrt(ddX*ddX+ddY*ddY);
 
-    if ( triggerDistance<polyRad+dotSize &&polygons[n].exited && EldersLeg>=0){
+    if ( triggerDistance<polyRad+dotSize &&polygons[n].exited && starOnDot==2){
         if (!polygons[n].caught)polygons[n].caught = true;
         else polygons[n].caught = false;
         polygons[n].caughtByDot=false;
@@ -2495,7 +2557,7 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
                                         renderer.render( scene, camera );
                                         renderer.setRenderTarget (null)
                                         wipeUniforms.cloverSampler.value=cloverRenderTarget.texture;
-                                        
+
                                         finalSceneRerenderedering.add(radialLine);
                                         finalSceneRerenderedering.add(circle);
                                         renderer.render( finalSceneRerenderedering, camera );
@@ -2563,11 +2625,19 @@ for(var n = 0; n<targets.length;n++){
                               if(uniforms.carousel.value!=0.)         spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                                   coordX+= spunTouch[0];
                                   coordY+= spunTouch[1];
+                        
+                                    uniforms.coordSHIFT.value.x+=spunTouch[0];
+                                    uniforms.coordSHIFT.value.y+=spunTouch[1];
+                                                                
+                                                            
+
+                                                            //else  uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
+
                         fromCenter = (coordX*coordX+coordY*coordY)**.5;
                       }
 
                       uniforms[ "zoom" ].value = zoom;
-                      uniforms.coords.value = new THREE.Vector2(coordX,coordY);
+                                uniforms.coords.value = new THREE.Vector2(coordX,coordY);
                         
             uniforms.STAR.value=null;
             uniforms.EDEN.value=null;
@@ -2575,7 +2645,7 @@ for(var n = 0; n<targets.length;n++){
                                                              renderer.setRenderTarget (null)
                                                              renderer.render( shaderScene, camera );
                                                          
-                                                         
+                                                       
                 if(textON)document.getElementById("textWindow").innerHTML =
                     "<div sytle='font-size: 16px;'>"+
                     
@@ -2613,6 +2683,9 @@ for(var n = 0; n<targets.length;n++){
                               
                               
                               loopsRun++;
+                             if(dupered&&zoom<zoomCap32)
+                              boot();//generate clover in 64 bit, duper Core
+
                                                                        animateLoopId=                   window.requestAnimationFrame( animate );
                             //  renderer.forceContextLoss ()
                             //  renderer.forceContextRestore ( )
@@ -2699,3 +2772,6 @@ s2 = d[x2];
 return pos + 0.5 * (s0 - s2 ) / (s0 - 2.* s1 + s2);
 }
 //end MIT license
+
+
+
