@@ -115,7 +115,8 @@ function callKey(event){
                                                                );
     
     key = event.key;
-
+console.log(event.altKey)
+    console.log(key)
 
     number=Number(number);
     if(key=="/"&&!event.shiftKey){  event.preventDefault(); event.stopImmediatePropagation();}
@@ -164,7 +165,7 @@ function callKey(event){
     else if (key=="m" && event.ctrlKey) uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value;
     else if (event.ctrlKey&&key=="a")uniforms[ "colorCombo" ].value = 11;
     else if (event.ctrlKey&&key=="j")window.Oreo=!window.Oreo;
-    else if (event.altKey&&key=="b"){
+    else if (event.altKey&&(key=="∫"||key=="b")){
 
                  if(!muteToggle)
                        window.BibleON = (window.BibleON+1)%2;
@@ -214,13 +215,6 @@ function callKey(event){
     else if(x == 7&&event.altKey&&!event.shiftKey)uniforms.clvrVariant7.value=!uniforms.clvrVariant7.value;
     else if(x == 8&&event.altKey&&!event.shiftKey)uniforms.clvrVariant8.value=!uniforms.clvrVariant8.value;
     
-    else if(x == 7&&event.altKey&&!event.shiftKey)uniforms.musicAngelMan.value=(uniforms.musicAngelMan.value+1)%3;
-    else if(x == 8&&event.altKey&&!event.shiftKey)
-    {
-        if(uniforms.refactorCores.value==2)uniforms.refactorCores.value=1;
-        else if(uniforms.refactorCores.value==1)uniforms.refactorCores.value=0;
-        else uniforms.refactorCores.value=2;
-    }
     else if(x == 9&&event.altKey&&!event.shiftKey)
     {
         window.pzyghthe = (window.pzyghthe+1.)%5;
@@ -230,9 +224,18 @@ function callKey(event){
             
             }
     
+    else if((key=="å"||key=="a")&&event.altKey&&!event.shiftKey)// is alt+a
+        uniforms.musicAngelMan.value=(uniforms.musicAngelMan.value+1)%3;
+    else if((key=="®"||key=="r")&&event.altKey&&!event.shiftKey)//® is alt+r
+    {
+        if(uniforms.refactorCores.value==2)uniforms.refactorCores.value=1;
+        else if(uniforms.refactorCores.value==1)uniforms.refactorCores.value=0;
+        else uniforms.refactorCores.value=2;
+    }
     
-    else if (event.altKey&&key=="f");//speakers turned off in manny.html
-
+    else if (event.altKey&&(key=="∂"||key=="d"))//∂ is alt+d
+        window.dupered=!window.dupered;
+    else if (event.altKey&&key=="f")console.log("speakers disabled!");//speakers turned off in manny.html
     else if(event.ctrlKey||event.altKey);//swallow remaining possibilities, muting keypress
     /*if(key == "k" && event.ctrlKey)
      {
