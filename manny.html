@@ -415,7 +415,7 @@ let maxLetterDepth=-1;
                <input type="checkbox"  id="oreo" name="t"  onclick= "
                    key  = 'j';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
-                   <label for="oreo"> Oreo!</label><br>
+                   <label for="oreo"> Oreo?!</label><br>
                    
                <a id="Cancel Background Noise" name="t"  onclick= "
 
@@ -898,6 +898,15 @@ coreData.fill(coringValue);">
                   key  = '7';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                   <label for="7rez">7 pixels per pixel</label><br>
+                  
+              <input type="radio" id="8rez" name="colorMode" onclick="
+              key  = '8';
+              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+              <label for="8rez">8 pixels per pixel</label><br>
+                  <a id="Incrementally Increase Resolution" name="t"  onclick="
+                  key  = '_';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                      Refine resolution!</a><br>
                   <a id="Incrementally Increase Resolution" name="t"  onclick="
                   key  = '_';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
