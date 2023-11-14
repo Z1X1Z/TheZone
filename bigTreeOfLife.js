@@ -411,8 +411,8 @@ return new THREE.Vector3(s.x,s.y,hyperCoreOUTPUT);}
                            let coreSwipeData=new Float32Array(window.innerHeight*window.innerWidth*4).fill(0);
                            const can = document.getElementById("CANVAS");
                            
-let generated = false
-                       let    bigCloverGapSync = false;
+let generated = true;
+let    bigCloverGapSync = false;
                            function boot (){
     setUniformsToPlainName()
 
