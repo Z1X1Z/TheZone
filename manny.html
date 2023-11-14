@@ -1664,10 +1664,10 @@ vec3 faceFORWARD(vec2 p,vec2 t){
         float sizeReset = 0.;
         if (balloonsON==-1.)sizeReset=120.;
           float x =  length((vUv-.5)*max(resolution.x,resolution.y)/resolution.yx);
-              float increment =note*balloonsON+12. + twistStar + x*24.;
-              increment*=2.;
+              float increment =note*balloonsON+12.+6. + twistStar + x*24.;
+              //increment*=2.;
           //  float increment = mod(log(mod(note*flipStar+twistStar,12.)+x*24.)/log(pow(2.,1./12.)),24.);
-           if(abs(mod(increment,1.)-.1)<length(x)/(increment+sizeReset)*43.)balloon=hsv2rgb(vec3((mod(4.-increment+twistStar,12.))/12.,.5,1.));
+           if(abs(mod(increment+atan(vUv.x-.5,vUv.y-.5)/(2.*PI),1.)-.1)<length(x)/(increment+sizeReset)*24.)balloon=hsv2rgb(vec3((mod(4.-increment*3.+twistStar,12.))/12.,.5,1.));
             
         return balloon;
     }
