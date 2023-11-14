@@ -115,8 +115,6 @@ function callKey(event){
                                                                );
     
     key = event.key;
-console.log(event.altKey)
-    console.log(key)
 
     number=Number(number);
     if(key=="/"&&!event.shiftKey){  event.preventDefault(); event.stopImmediatePropagation();}
@@ -233,7 +231,7 @@ console.log(event.altKey)
         else uniforms.refactorCores.value=2;
     }
     
-    else if (event.altKey&&(key=="∂"||key=="d"))//∂ is alt+d
+    else if (event.altKey&&(key=="∂"||key=="d")&&!runningHash)//∂ is alt+d
         window.dupered=!window.dupered;
     else if (event.altKey&&key=="f")console.log("speakers disabled!");//speakers turned off in manny.html
     else if(event.ctrlKey||event.altKey);//swallow remaining possibilities, muting keypress
