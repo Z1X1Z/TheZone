@@ -2008,7 +2008,7 @@ if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
                              *4./3./(1./log(3.)+(1.-1./log(3.)  ))/1.75
                              )*log(2.)/log(metaCoreDriveFactor)+loops;
                              */
-if(zoom<.00000075)  s = uber.xy;//engage super duper core!
+if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<50.){
 
     float OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
@@ -3271,6 +3271,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
 
 </script>
 <script src="loadMicrophone.js"></script>
+
 <script src="starshipMod.js"></script>
 <script src="hotkeys.js"></script>
 <script src="bigTreeOfLife.js"></script>
