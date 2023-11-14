@@ -406,7 +406,7 @@ return new THREE.Vector3(s.x,s.y,hyperCoreOUTPUT);}
                                return p;
                                }
                            
-                           let coreTriggered = true;
+                           let coreTriggered = -1.;
                            let coreSwipeTexture;
                            let coreSwipeData=new Float32Array(window.innerHeight*window.innerWidth*4).fill(0);
                            const can = document.getElementById("CANVAS");
