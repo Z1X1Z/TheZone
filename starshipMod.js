@@ -317,7 +317,7 @@ let reset = 6;
 let on;
 let spirafreq=1;
 var totalAMP;
-var angle=0.;
+var angle=0.;//this has nothing to do with the spin function below, it's for the pitch
                            function spin(f, angle)
                            {    //https://en.wikipedia.org/wiki/Rotation_matrix
                                const fxb=f[0];
@@ -410,61 +410,58 @@ function  move()
                             
                             
                      
-                    if(on)
-                    {
-                        
-lastNote = note;
-note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
-uniforms.note.value=note;
-const t =  (note )*flip+twist/2;
-if(isFinite(t))angle = -(t*radialWarp);
-//angle-=1/radialWarp;
+                                lastNote = note;
+                                 note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
+                                 uniforms.note.value=note;
+                                const t =  (note )*flip+twist/2;
+                                                    if(on)
+                                                    {
+                                if(isFinite(t))angle = -(t*radialWarp);
+                                //angle-=1/radialWarp;
+                                                    const reversableColor=((angle/12./radialWarp+twist/24.)*flip+1./3.)%1.;
 
-     const reversableColor=((angle/12./radialWarp+twist/24.)*flip+1./3.)%1.;
-                            const colortone = note/lightingScaleTrail;
-
-
- 
-                    colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);//lighting {note/x} should be 120 but it's out of the vocal range
-pitchCol[f]  = colorSoundPURE;
-     colorSound = new THREE.Color().setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
-                                           
-                                           const nt = Math.round(note)%12;
-                                           if (nt==7||nt==5||nt==2||nt==0||nt==10)
-                                           {
-                                   BlackOrWhiteNOTE=0.;
-                                           }
-                                           else
-                                           {
-                                   BlackOrWhiteNOTE=1.;
-                                           }
-                    
-                                           
-                                          let bwPRIMER = .125;
-                                           starMajorMinor = (BlackOrWhiteNOTE+bwPRIMER)/(1.+bwPRIMER)/2.+bwPRIMER*2.;
-                                           
-                                            bwPRIMER = .5;
-                                            BlackOrWhiteTrail = (BlackOrWhiteNOTE-bwPRIMER)/(1.-bwPRIMER);
-                                           }
-                                           else {
-                                                starMajorMinor=.5;
-                                                BlackOrWhiteTrail=.5;
-                                            }
-                                           
-                                           if(!Oreo){
-                        starMajorMinor=.5;
-                        BlackOrWhiteTrail=.5;
-         angle = ((angle+6*radialWarp)/12.)%1*2*pi;
-
-                    }
-                                          
-                        flatline = window.movementRate;
-                   //    if(window.movementRate<movementRateORIGINAL) flatline = 1.;
-                    
-                    
-         d_x = -Math.sin(-angle)*flatline;
-         d_y = -Math.cos(-angle)*flatline;
-         uniforms.d.value=new THREE.Vector2( d_x,d_y);
+                                colorSound = new THREE.Color();
+                                                       const colortone = note/lightingScaleTrail;
+                                    colorSound.setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
+                                                    colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);//lighting {note/x} should be 120 but it's out of the vocal range
+                                pitchCol[f]  = colorSoundPURE;
+                                                    
+                                                                           
+                                                                           const nt = Math.round(note)%12;
+                                                                           if (nt==7||nt==5||nt==2||nt==0||nt==10)
+                                                                           {
+                                                                   BlackOrWhiteNOTE=0.;
+                                                                           }
+                                                                           else
+                                                                           {
+                                                                   BlackOrWhiteNOTE=1.;
+                                                                           }
+                                                    
+                                                                           
+                                                                          let bwPRIMER = .125;
+                                                                           starMajorMinor = (BlackOrWhiteNOTE+bwPRIMER)/(1.+bwPRIMER)/2.+bwPRIMER*2.;
+                                                                           
+                                                                            bwPRIMER = .5;
+                                                                            BlackOrWhiteTrail = (BlackOrWhiteNOTE-bwPRIMER)/(1.-bwPRIMER);
+                                                                           }
+                                                                           else {
+                                                                                starMajorMinor=.5;
+                                                                                BlackOrWhiteTrail=.5;
+                                                                            }
+                                                                           
+                                                                           if(!Oreo){
+                                                        starMajorMinor=.5;
+                                                        BlackOrWhiteTrail=.5;
+                                                        
+                                                    }
+                                                        flatline = window.movementRate;
+                                                   //    if(window.movementRate<movementRateORIGINAL) flatline = 1.;
+                                                    
+                                                    
+                                         angle = ((angle+6*radialWarp)/12.)%1*2*pi;
+                                         d_x = -Math.sin(-angle)*flatline;
+                                         d_y = -Math.cos(-angle)*flatline;
+                                         uniforms.d.value=new THREE.Vector2( d_x,d_y);
       
                        
                        FEEDBACKuniforms.d.value=new THREE.Vector2(d_x,d_y);
@@ -801,7 +798,6 @@ function setFFTdependantSizes(){
                     }
                                            
 function init() {
-
                         uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
            uniforms.resolution.value = new THREE.Vector2(window.innerWidth,window.innerHeight);
      uniforms.coords.value = new THREE.Vector2(0.,0.);
@@ -2684,7 +2680,8 @@ for(var n = 0; n<targets.length;n++){
                               
                               
                               loopsRun++;
-                            // if(dupered&&zoom<zoomCap32)  boot();//generate clover in 64 bit, duper Core
+                             if(dupered&&zoom<zoomCap32)
+                              boot();//generate clover in 64 bit, duper Core
 
                                                                        animateLoopId=                   window.requestAnimationFrame( animate );
                             //  renderer.forceContextLoss ()
@@ -2693,7 +2690,6 @@ for(var n = 0; n<targets.length;n++){
 }
 
                     let animateLoopId;
-                              
                     
 
 //begin MIT license, code from https://github.com/adamski/pitch_detector
