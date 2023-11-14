@@ -1673,11 +1673,11 @@ vec3 faceFORWARD(vec2 p,vec2 t){
         float sizeReset = 0.;
         if (balloonsON==-1.)sizeReset=120.;
           float x =  length((vUv-.5)*max(resolution.x,resolution.y)/resolution.yx);
-              float increment =note*balloonsON+12.+6. + twistStar + x*24.;
+              float increment =note*balloonsON+12. + twistStar - x*36.;
               //increment*=2.;
           //  float increment = mod(log(mod(note*flipStar+twistStar,12.)+x*24.)/log(pow(2.,1./12.)),24.);
          vec2 spinningSpiraloon  =  spin2(vUv-.5,time*PI*4.);
-           if(abs(mod(increment+atan(spinningSpiraloon.x,spinningSpiraloon.y)/(2.*PI),1.)-.1)<length(x)/(increment+sizeReset)*24.)balloon=hsv2rgb(vec3((mod(4.-increment*3.+twistStar,12.))/12.,.5,1.));
+           if(abs(mod(increment+atan(spinningSpiraloon.x,spinningSpiraloon.y)/(2.*PI),1.)-.1)<length(x)/(increment+sizeReset)*18.)balloon=hsv2rgb(vec3((mod(4.-increment*1.5+twistStar,12.))/12.,.5,1.));
             
         return balloon;
     }
