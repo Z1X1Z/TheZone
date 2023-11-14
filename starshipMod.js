@@ -1419,7 +1419,7 @@ function runOSMD (){
     if (!isFinite(interpolation))interpolation = 1.;
                         if(loopsRun<3)interpolation=0.;//this is to prevent frametime leak on mobile
                         if(interpolation>60)interpolation=1.;//this is to prevent frametime leak on mobile
-  //  if(!generated||bigCloverGapSync){interpolation=1;bigCloverGapSync=false;}
+    if(!generated||bigCloverGapSync){interpolation=1;bigCloverGapSync=false;}
     lastFrameTime=timestamp;
     if(!window.touchMode)pointerZoom=false;
     else on=false;
