@@ -1,4 +1,4 @@
-var zoom,shaderScale, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta;
+var shaderScale, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta;
 function setUniformsToPlainName(){
    // uniforms..value
      chirality = uniforms.chirality.value;
@@ -21,7 +21,6 @@ function setUniformsToPlainName(){
     Clovoid =    uniforms.Clovoid.value
     colorCombo =     uniforms.colorCombo.value
     spokelover =    uniforms.spokelover.value;
-    zoom =     uniforms.zoom.value
     petals =    uniforms.petals.value
     metaCarousel =    uniforms.metaCarousel.value
     rate =    uniforms.rate.value
