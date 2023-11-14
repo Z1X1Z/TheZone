@@ -801,6 +801,7 @@ function setFFTdependantSizes(){
                     }
                                            
 function init() {
+
                         uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
            uniforms.resolution.value = new THREE.Vector2(window.innerWidth,window.innerHeight);
      uniforms.coords.value = new THREE.Vector2(0.,0.);
@@ -2683,8 +2684,7 @@ for(var n = 0; n<targets.length;n++){
                               
                               
                               loopsRun++;
-                             if(dupered&&zoom<zoomCap32)
-                              boot();//generate clover in 64 bit, duper Core
+                            // if(dupered&&zoom<zoomCap32)  boot();//generate clover in 64 bit, duper Core
 
                                                                        animateLoopId=                   window.requestAnimationFrame( animate );
                             //  renderer.forceContextLoss ()
@@ -2693,6 +2693,9 @@ for(var n = 0; n<targets.length;n++){
 }
 
                     let animateLoopId;
+                              
+                              window.generated = true;
+                               window.bigCloverGapSync=false;
                     
 
 //begin MIT license, code from https://github.com/adamski/pitch_detector
