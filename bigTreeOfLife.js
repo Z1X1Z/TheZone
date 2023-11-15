@@ -406,7 +406,7 @@ return new THREE.Vector3(s.x,s.y,hyperCoreOUTPUT);}
                                return p;
                                }
                            
-                           let coreTriggered = -1.;
+                           let coreTriggered = false;
                            let coreSwipeTexture;
                            let coreSwipeData=new Float32Array(window.innerHeight*window.innerWidth*4).fill(0);
                            const can = document.getElementById("CANVAS");
@@ -420,7 +420,7 @@ window.bigCloverGapSync = false;
     
     let strideClover=0;
     //if(loopsRun>2) console.log(Number.MAX_VALUE==new THREE.Vector2(Number.MAX_VALUE,0.).x);
-    if(loopsRun>0){
+    if(loopsRun>1&&dupered){
         if(!generated)
         {
             console.log("swapping");
