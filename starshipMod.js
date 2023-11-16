@@ -100,7 +100,7 @@ var numberOfBins=bufferSize/2.
 var fractionOfFrame = bufferSize/2;
 var inputData = new Float32Array(bufferSize)
 var dataArray = new Uint8Array(bufferSize/2)
-const yinData = new Float64Array(fractionOfFrame);
+const yinData = new Float64Array(fractionOfFrame*2.);
 
 var frequencies,
                             starArms,
@@ -330,210 +330,209 @@ let aboveThreshold;
                            let xAdjusted, yAdjusted;
 let pushBackCounter = 0;
                           let flatline = 1.;
-                          
-                       const   lightingScaleTrail = 72;//note range for color scheme
-                         const  lightingScaleStar = lightingScaleTrail*2.*2.;//convert 12 to 24 and expand by factor of 2 for a divide between the octaves of the voice (trail) and the hearing (star)
-                          let note,lastNote;
-                            let BlackOrWhiteTrail=.5;//also for star
-                            let BlackOrWhiteNOTE = 1.
-                            let starMajorMinor=.5;
-                            let fromCenter = 0;
-function  move()
-{
-    if (isNaN(coordX)||(!zoomAtl41&&coordX>4.))coordX=0.;
-    if (isNaN(coordY)||(!zoomAtl41&&coordY>4.))coordY=0.;
+          const   lightingScaleTrail = 72;//note range for color scheme
+                                 const  lightingScaleStar = lightingScaleTrail*2.*2.;//convert 12 to 24 and expand by factor of 2 for a divide between the octaves of the voice (trail) and the hearing (star)
+                                  let note,lastNote;
+                                    let BlackOrWhiteTrail=.5;//also for star
+                                    let BlackOrWhiteNOTE = 1.
+                                    let starMajorMinor=.5;
+                                    let fromCenter = 0;
+        function  move()
+        {
+            if (isNaN(coordX)||(!zoomAtl41&&coordX>4.))coordX=0.;
+            if (isNaN(coordY)||(!zoomAtl41&&coordY>4.))coordY=0.;
 
 
 
-    totalAMP = 0.;
-    for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
-    totalAMP/=inputData.length;
-        uniforms["totalAmp" ].value=totalAMP;
-        
-        
-        
-        lastPitch = pitch;
-        pitch =    audioX.sampleRate/calculatePitch();
-        const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
-        if(!notNyquist) pitch = lastPitch;
+            totalAMP = 0.;
+            for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
+            totalAMP/=inputData.length;
+                uniforms["totalAmp" ].value=totalAMP;
+                
+                
+                
+                lastPitch = pitch;
+                pitch =    audioX.sampleRate/calculatePitch();
+                const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
+                if(!notNyquist) pitch = lastPitch;
 
-        
-        
-    if (isFinite(pitch) &&pitch>0&& notNyquist &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
-        aboveThreshold = true;
-        on = true;
-    }
-    else{aboveThreshold = false; on = false;}
-        
-      
-        
-        
-        
-    if(window.FeedbackSound)
-    {
-        const feedBackReduction = 4;
-        if(wadLOADED&&aboveThreshold) {
-           //    feedbackPitchsound[4].stop();
-            
-            feedbackPitchsound[4].play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:pitch,volume:(totalAMP<1.)?totalAMP/feedBackReduction:1.})
-            
-            for (var v = 0; v < 4; v++)
+                
+                
+            if (isFinite(pitch) &&pitch>0&& notNyquist &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
+                aboveThreshold = true;
+                on = true;
+            }
+            else{aboveThreshold = false; on = false;}
+                
+              
+                
+                
+                
+            if(window.FeedbackSound)
             {
-                
-                 ///  feedbackPitchsound[v].stop();
-                    feedbackPitchsound[v].play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:loudestFret[v].frequency,volume://loudestFret[v].volume
-                        1./feedBackReduction/(4-v)})
+                const feedBackReduction = 4;
+                if(wadLOADED&&aboveThreshold) {
+                   //    feedbackPitchsound[4].stop();
                     
-            }
-        }
-            else if (wadLOADED) {
-                
-                //feedbackPitchsound[4].play({env:{attack: 0,                   release:0,hold:0}, pitch:0,volume:0});
-               // feedbackPitchsound[4].stop();
-                
-                for (var v = 0; v < 4; v++)
-                {
-                   // feedbackPitchsound[v].play({env:{attack: 0,                   release:0,hold:0},pitch:0, volume:0});
-                    //feedbackPitchsound[v].stop();
+                    feedbackPitchsound[4].play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:pitch,volume:(totalAMP<1.)?totalAMP/feedBackReduction:1.})
+                    
+                    for (var v = 0; v < 4; v++)
+                    {
                         
+                         ///  feedbackPitchsound[v].stop();
+                            feedbackPitchsound[v].play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:loudestFret[v].frequency,volume://loudestFret[v].volume
+                                1./feedBackReduction/(4-v)})
+                            
+                    }
                 }
+                    else if (wadLOADED) {
+                        
+                        //feedbackPitchsound[4].play({env:{attack: 0,                   release:0,hold:0}, pitch:0,volume:0});
+                       // feedbackPitchsound[4].stop();
+                        
+                        for (var v = 0; v < 4; v++)
+                        {
+                           // feedbackPitchsound[v].play({env:{attack: 0,                   release:0,hold:0},pitch:0, volume:0});
+                            //feedbackPitchsound[v].stop();
+                                
+                        }
 
-            }
-                                       }
-                    //wadaw webaudiodaw code
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                     
-                                lastNote = note;
-                                 note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
-                                 uniforms.note.value=note;
-                                const t =  (note )*flip+twist/2;
-                                                    if(on)
-                                                    {
-                                if(isFinite(t))angle = -(t*radialWarp);
-                                //angle-=1/radialWarp;
-                                                    const reversableColor=((angle/12./radialWarp+twist/24.)*flip+1./3.)%1.;
+                    }
+                                               }
+                            //wadaw webaudiodaw code
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+        lastNote = note;
+         note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
+         uniforms.note.value=note;
+        const t =  (note )*flip+twist/2;
+                            if(on)
+                            {
+        if(isFinite(t))angle = -(t*radialWarp);
+        //angle-=1/radialWarp;
+                            const reversableColor=((angle/12./radialWarp+twist/24.)*flip+1./3.)%1.;
 
-                                colorSound = new THREE.Color();
-                                                       const colortone = note/lightingScaleTrail;
-                                    colorSound.setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
-                                                    colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);//lighting {note/x} should be 120 but it's out of the vocal range
-                                pitchCol[f]  = colorSoundPURE;
-                                                    
-                                                                           
-                                                                           const nt = Math.round(note)%12;
-                                                                           if (nt==7||nt==5||nt==2||nt==0||nt==10)
-                                                                           {
-                                                                   BlackOrWhiteNOTE=0.;
-                                                                           }
-                                                                           else
-                                                                           {
-                                                                   BlackOrWhiteNOTE=1.;
-                                                                           }
-                                                    
-                                                                           
-                                                                          let bwPRIMER = .125;
-                                                                           starMajorMinor = (BlackOrWhiteNOTE+bwPRIMER)/(1.+bwPRIMER)/2.+bwPRIMER*2.;
-                                                                           
-                                                                            bwPRIMER = .5;
-                                                                            BlackOrWhiteTrail = (BlackOrWhiteNOTE-bwPRIMER)/(1.-bwPRIMER);
-                                                                           }
-                                                                           else {
-                                                                                starMajorMinor=.5;
-                                                                                BlackOrWhiteTrail=.5;
-                                                                            }
-                                                                           
-                                                                           if(!Oreo){
+        colorSound = new THREE.Color();
+                               const colortone = note/lightingScaleTrail;
+            colorSound.setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
+                            colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);//lighting {note/x} should be 120 but it's out of the vocal range
+        pitchCol[f]  = colorSoundPURE;
+                            
+                                                   
+                                                   const nt = Math.round(note)%12;
+                                                   if (nt==7||nt==5||nt==2||nt==0||nt==10)
+                                                   {
+                                           BlackOrWhiteNOTE=0.;
+                                                   }
+                                                   else
+                                                   {
+                                           BlackOrWhiteNOTE=1.;
+                                                   }
+                            
+                                                   
+                                                  let bwPRIMER = .125;
+                                                   starMajorMinor = (BlackOrWhiteNOTE+bwPRIMER)/(1.+bwPRIMER)/2.+bwPRIMER*2.;
+                                                   
+                                                    bwPRIMER = .5;
+                                                    BlackOrWhiteTrail = (BlackOrWhiteNOTE-bwPRIMER)/(1.-bwPRIMER);
+                                                   }
+                                                   else {
                                                         starMajorMinor=.5;
                                                         BlackOrWhiteTrail=.5;
-                                                        
                                                     }
-                                                        flatline = window.movementRate;
-                                                   //    if(window.movementRate<movementRateORIGINAL) flatline = 1.;
-                                                    
-                                                    
-                                         angle = ((angle+6*radialWarp)/12.)%1*2*pi;
-                                         d_x = -Math.sin(-angle)*flatline;
-                                         d_y = -Math.cos(-angle)*flatline;
-                                         uniforms.d.value=new THREE.Vector2( d_x,d_y);
-      
-                       
-                       FEEDBACKuniforms.d.value=new THREE.Vector2(d_x,d_y);
-                       FEEDBACKuniformsFlip.d.value=new THREE.Vector2(d_x,d_y);
-         d_x*=volume;
-         d_y*=volume;
-         var spunD = [d_x,d_y];
-                       
-                    if(uniforms.carousel.value!=0.)         spunD=spin(spunD,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
-          const d_xS=spunD[0];
-          const d_yS=spunD[1];
+                                                   
+                                                   if(!Oreo){
+                                starMajorMinor=.5;
+                                BlackOrWhiteTrail=.5;
+                                
+                            }
+                                flatline = window.movementRate;
+                           //    if(window.movementRate<movementRateORIGINAL) flatline = 1.;
+                            
+                            
+                 angle = ((angle+6*radialWarp)/12.)%1*2*pi;
+                 d_x = -Math.sin(-angle)*flatline;
+                 d_y = -Math.cos(-angle)*flatline;
+                 uniforms.d.value=new THREE.Vector2( d_x,d_y);
+              
+                               
+                               FEEDBACKuniforms.d.value=new THREE.Vector2(d_x,d_y);
+                               FEEDBACKuniformsFlip.d.value=new THREE.Vector2(d_x,d_y);
+                 d_x*=volume;
+                 d_y*=volume;
+                 var spunD = [d_x,d_y];
+                               
+                            if(uniforms.carousel.value!=0.)         spunD=spin(spunD,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
+                  const d_xS=spunD[0];
+                  const d_yS=spunD[1];
 
-   const bx=coordX+d_xS*MR*zoom*interpolation;
-  const by=coordY+d_yS*MR*zoom*interpolation;
-                       
-                    let preFromCenter= Math.sqrt(bx*bx+by*by);
+           const bx=coordX+d_xS*MR*zoom*interpolation;
+          const by=coordY+d_yS*MR*zoom*interpolation;
+                               
+                            let preFromCenter= Math.sqrt(bx*bx+by*by);
 
-     if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold&&on){
-                  fromCenter = preFromCenter;
+             if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold&&on){
+                          fromCenter = preFromCenter;
 
-                    coordX=bx;
-                    coordY=by;
-         staticX+=d_xS;
-         staticY+=d_yS;
-                }
+                            coordX=bx;
+                            coordY=by;
+                 staticX+=d_xS;
+                 staticY+=d_yS;
+                        }
 
-                       
-    let expandedZoomCage=1.;
-   if (uniforms.Spoker.value)expandedZoomCage*=4./3.
-   if(preFromCenter>=window.zoomCageSize*expandedZoomCage){//adjust back in if too far from the center
-        pushBackCounter+=60./FPS;
+                               
+            let expandedZoomCage=1.;
+           if (uniforms.Spoker.value)expandedZoomCage*=4./3.
+           if(preFromCenter>=window.zoomCageSize*expandedZoomCage){//adjust back in if too far from the center
+                pushBackCounter+=60./FPS;
 
-        coordX*=window.zoomCageSize/fromCenter*expandedZoomCage;
-        coordY*=window.zoomCageSize/fromCenter*expandedZoomCage;
-    }
-    else pushBackCounter = 0
-    if(pushBackCounter>0.){coordX=0;coordY=0;}//teleport to center if continuously flying into perimeter, set to 0 for off
+                coordX*=window.zoomCageSize/fromCenter*expandedZoomCage;
+                coordY*=window.zoomCageSize/fromCenter*expandedZoomCage;
+            }
+            else pushBackCounter = 0
+            if(pushBackCounter>0.){coordX=0;coordY=0;}//teleport to center if continuously flying into perimeter, set to 0 for off
 
-                       
-                       
-            if (trailDepth<trailLength)trailDepth++;
+                               
+                               
+                    if (trailDepth<trailLength)trailDepth++;
 
-xPerp[f] = -Math.sin(-angle+pi/2)*volume*flatline;
-yPerp[f] = -Math.cos(-angle+pi/2)*volume*flatline;
-                     trailWidth[f]=0.;
-                       trailTimeOfRecording[f]=uniforms["time"].value;
-                       trailSegmentExpired[f]=false;
-if(trailDepth<trailLength||on)//||on
-                       
-                      {
-    
-f++;//this is the primary drive chain for the trail. it should be a global
-if (f>=trailDepth)f=0;
-    
-const radius = interpolation*MR*4./window.pixelShaderSize;
- xAdjusted= d_x*radius;
- yAdjusted= d_y*radius;
+        xPerp[f] = -Math.sin(-angle+pi/2)*volume*flatline;
+        yPerp[f] = -Math.cos(-angle+pi/2)*volume*flatline;
+                             trailWidth[f]=0.;
+                               trailTimeOfRecording[f]=uniforms["time"].value;
+                               trailSegmentExpired[f]=false;
+        if(trailDepth<trailLength||on)//||on
+                               
+                              {
+            
+        f++;//this is the primary drive chain for the trail. it should be a global
+        if (f>=trailDepth)f=0;
+            
+        const radius = interpolation*MR*4./window.pixelShaderSize;
+         xAdjusted= d_x*radius;
+         yAdjusted= d_y*radius;
 
-if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) if(!trailSegmentExpired[n]&&n!=f-1){
-        cx[n] += xAdjusted;
-        cy[n] += yAdjusted;
-        trailWidth[n] += radius*starshipSize;
-    
-}
-    
+        if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) if(!trailSegmentExpired[n]&&n!=f-1){
+                cx[n] += xAdjusted;
+                cy[n] += yAdjusted;
+                trailWidth[n] += radius*starshipSize;
+            
+        }
+            
 
-                     cx[(trailDepth+f)%trailDepth] = 0;
-                     cy[(trailDepth+f)%trailDepth] = 0;
-                       trailWidth[(trailDepth+f)%trailDepth]=0.;
-}
+                             cx[(trailDepth+f)%trailDepth] = 0;
+                             cy[(trailDepth+f)%trailDepth] = 0;
+                               trailWidth[(trailDepth+f)%trailDepth]=0.;
+        }
 
-                       }
+                               }
     let camera, renderer;
 let harmonicPzyghtheGeometry,harmonicPzyghtheMaterial,harmonicPzyghtheMesh;
                        //this section could use some naming clearing up
