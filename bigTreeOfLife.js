@@ -274,7 +274,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
 
     if(Spoker){
         
-            var spoke_delimiter =metaCoreDriveFactor;// 1.+Math.pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
+            var spoke_delimiter =metaCoreDriveFactor/logStabilizationConstant;// 1.+Math.pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
             
         if(1.<=hyperCoreBoosted)
         {
