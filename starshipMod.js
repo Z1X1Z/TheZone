@@ -97,10 +97,10 @@ var zoomOutEngage=false;
 var pi = Math.PI;
 var bufferSize=fftSize;
 var numberOfBins=bufferSize/2.
-var fractionOfFrame = bufferSize/2;
+var fractionOfFrame = bufferSize/4;
 var inputData = new Float32Array(bufferSize)
 var dataArray = new Uint8Array(bufferSize/2)
-const yinData = new Float64Array(fractionOfFrame*2.);
+const yinData = new Float64Array(fractionOfFrame);
 
 var frequencies,
                             starArms,
