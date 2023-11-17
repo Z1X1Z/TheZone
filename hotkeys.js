@@ -16,6 +16,8 @@ window.pzyghthe=0;
 window.dynamicCoring=false;
 window.rez=window.devicePixelRatio/2.;//define resolution
 window.Oreo=true;
+window.haptic=false;
+window.haptic2=false;
 if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
   {
       rez=window.devicePixelRatio/4.;

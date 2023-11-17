@@ -97,7 +97,7 @@ var zoomOutEngage=false;
 var pi = Math.PI;
 var bufferSize=fftSize;
 var numberOfBins=bufferSize/2.
-var fractionOfFrame = bufferSize/4;
+var fractionOfFrame = bufferSize/2.;
 var inputData = new Float32Array(bufferSize)
 var dataArray = new Uint8Array(bufferSize/2)
 const yinData = new Float64Array(fractionOfFrame);
@@ -1177,9 +1177,22 @@ function zoomRoutine(){
                      window.haptic = false;
                     let vibrateArray= Array();
 
-                    function mcphrth(){
+function mcphrth(){
+                let vibrateArrayNew=[];
+
+                                
+                                if(window.haptic2){
+                                    let coreImplosion = Math.floor(coreTriggered)-Math.floor(tree.z);
+                                    if(Math.abs(coreImplosion)>1)
+                                        for(var t = 0; t<3; t++)
+                                        {
+                                            vibrateArrayNew.push(coreImplosion);
+                                            vibrateArrayNew.push(coreImplosion);
+                                            
+                                        }
+                                }
      if(window.haptic){
-         let vibrateArrayNew=[];
+         
              let vibFreq = 50.*2.**((note+24)%48./12.)
              if(on){
                  for(var t = 0; t<4; t++)
@@ -1194,11 +1207,16 @@ function zoomRoutine(){
              }
          thisChunk=0.;
          
-             try{error = navigator.vibrate(vibrateArrayNew );}
-             catch(e){ error+=e;}
-             
-             setTimeout(mcphrth,vibFreq*2.);// may work on touch instead of recursive calls which seems to bug
+         
          }
+                                if(window.haptic||window.haptic2)
+                                {
+                                    
+                                        setTimeout(mcphrth,vibrateArrayNew.length);// may work on touch instead of recursive calls which seems to bug
+                                        try{error = navigator.vibrate(vibrateArrayNew );}
+                                        catch(e){ error+=e;}
+                                        
+                                }
 }
 //this doesn't work, and it only would work on android not on firefox
 
