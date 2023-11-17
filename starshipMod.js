@@ -97,7 +97,7 @@ var zoomOutEngage=false;
 var pi = Math.PI;
 var bufferSize=fftSize;
 var numberOfBins=bufferSize/2.
-var fractionOfFrame = bufferSize/2.;
+var fractionOfFrame = bufferSize/2;
 var inputData = new Float32Array(bufferSize)
 var dataArray = new Uint8Array(bufferSize/2)
 const yinData = new Float64Array(fractionOfFrame);
@@ -1175,26 +1175,11 @@ function zoomRoutine(){
 
                      let thisChunk=0, lastChunk=0;
                      window.haptic = false;
-                      window.haptic2=false;
-
                     let vibrateArray= Array();
 
-function mcphrth(){
-                let vibrateArrayNew=[];
-
-                                
-                                if(window.haptic2){
-                                    let coreImplosion = Math.floor(coreTriggered)-Math.floor(tree.z);
-                                    if(Math.abs(coreImplosion)>1)
-                                        for(var t = 0; t<3; t++)
-                                        {
-                                            vibrateArrayNew.push(coreImplosion*50);
-                                            vibrateArrayNew.push(coreImplosion*50);
-                                            
-                                        }
-                                }
+                    function mcphrth(){
      if(window.haptic){
-         
+         let vibrateArrayNew=[];
              let vibFreq = 50.*2.**((note+24)%48./12.)
              if(on){
                  for(var t = 0; t<4; t++)
@@ -1209,17 +1194,11 @@ function mcphrth(){
              }
          thisChunk=0.;
          
-         
+             try{error = navigator.vibrate(vibrateArrayNew );}
+             catch(e){ error+=e;}
+             
+             setTimeout(mcphrth,vibFreq*2.);// may work on touch instead of recursive calls which seems to bug
          }
-                                if(window.haptic||window.haptic2)
-                                {
-                                        try{error = navigator.vibrate(vibrateArrayNew );}
-                                        catch(e){ error+=e;}
-                                    
-                                        
-                                           if (window.haptic) setTimeout(mcphrth,vibFreq);// may work on touch instead of recursive calls which seems to bug
-                                    else if (window.haptic2)setTimeout(mcphrth,vibrateArrayNew.length);
-                                }
 }
 //this doesn't work, and it only would work on android not on firefox
 
@@ -2700,7 +2679,7 @@ for(var n = 0; n<targets.length;n++){
                               
                               
                               loopsRun++;
-                             if(dupered&&zoom<zoomCap32)
+                          //   if(dupered&&zoom<zoomCap32)
                               boot();//generate clover in 64 bit, duper Core
 
                                                                        animateLoopId=                   window.requestAnimationFrame( animate );
