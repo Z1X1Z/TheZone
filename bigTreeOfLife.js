@@ -454,8 +454,27 @@ window.bigCloverGapSync = false;
             // wipeUniforms.cloverSampler.needsUpdate=true;
         }else{
              tree=tol(  new THREE.Vector2(0,0), new THREE.Vector2(0,0) );
-            if(Math.abs(Math.floor(coreTriggered)-Math.floor(tree.z))>1)
-            {generated = false; coreTriggered=tree.z;}
+            let coreImplosion = Math.abs(Math.floor(coreTriggered)-Math.floor(tree.z));
+
+            if(coreImplosion>1)
+            {
+                if(dupered&&zoom<zoomCap32) generated = false;
+                coreTriggered=tree.z;
+
+                if(window.haptic2){
+                    let vibrateArrayNew=[];
+
+                        for(var t = 0; t<3; t++)
+                        {
+                            vibrateArrayNew.push(coreImplosion*50);
+                            vibrateArrayNew.push(coreImplosion*50);
+                            
+                                                           try{error = navigator.vibrate(vibrateArrayNew );}
+                                                           catch(e){ error+=e;}
+                            
+                        }
+                }
+            }
         }
         
         
