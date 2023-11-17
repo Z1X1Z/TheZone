@@ -464,7 +464,7 @@ window.bigCloverGapSync = false;
                 if(window.haptic2){
                     let vibrateArrayNew=[];
 
-                        for(var t = 0; t<3; t++)
+                       // for(var t = 0; t<3; t++)
                         {
                             vibrateArrayNew.push(coreImplosion*50);
                             vibrateArrayNew.push(coreImplosion*50);
