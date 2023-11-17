@@ -2941,7 +2941,7 @@ vec3 sevenPillars(vec2 p){
     p.x-=screenBase;
     if(p.x<pillarHeight)
     {
-        const float pillarDepth = 333333.;
+        const float pillarDepth = 33333.;
        float pillars=0.;
        if (p.x>0.) pillars = totalAmp*pillarDepth;
        else pillars = (1./totalAmp);
@@ -3230,6 +3230,7 @@ if(starOnDot>=1){
                                  
                                  vec3 pillar = vec3(0.);
                                  pillar = sevenPillars(vUv.yx-vec2(0.,.5));
+                                 
                         float shipSUM = starship.x+starship.y+starship.z;
                                  vec3 hypnoticHarmonicCircles = vec3(0.);
                                  if(balloonsON!=0.)
