@@ -420,8 +420,8 @@ window.bigCloverGapSync = false;
     
     let strideClover=0;
     //if(loopsRun>2) console.log(Number.MAX_VALUE==new THREE.Vector2(Number.MAX_VALUE,0.).x);
-    if(loopsRun>1&&dupered){
-        if(!generated)
+    if(loopsRun>1){
+        if(!generated&&dupered&&zoom<zoomCap32)
         {
             console.log("swapping");
             bigCloverGapSync = true;
@@ -453,14 +453,9 @@ window.bigCloverGapSync = false;
             //wipeUniforms.cloverSampler.value=coreSwipe
             // wipeUniforms.cloverSampler.needsUpdate=true;
         }else{
-            let t=tol(  new THREE.Vector2(0,0)
-                , new THREE.Vector2(0,0) );
-            // t= new THREE.Vector2(.5,.5)
-            // if(hei==wi)console.log(t)
-            if(Math.abs(Math.floor(coreTriggered)-Math.floor(t.z))>1)
-            {generated = false; coreTriggered=t.z;
-                
-}
+             tree=tol(  new THREE.Vector2(0,0), new THREE.Vector2(0,0) );
+            if(Math.abs(Math.floor(coreTriggered)-Math.floor(tree.z))>1)
+            {generated = false; coreTriggered=tree.z;}
         }
         
         
