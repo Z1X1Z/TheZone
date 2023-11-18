@@ -1088,7 +1088,15 @@ scoreColorInversion=false;
         for(var p = 0; p<n.length;p++)n[p].checked  = false; </script>
     
     
-    
+    <script>
+     if(!location.hash.includes(".b")){
+        let content = document.getElementsByClassName("dropdown-content");
+
+        document.getElementById("nav").style.width="50%";
+        for(var b = 0; b<content.length; b++)content[b].style.width="50%";
+        }
+     
+     </script>
     
 
     
