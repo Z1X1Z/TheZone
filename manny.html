@@ -68,7 +68,7 @@ let bookOfBooks=[
                     "Psalms",
                     "Proverbs",
                     "Ecclesiastes",
-                    "Song",
+                    "Songs",
                     "Isaiah",
                     "Jeremiah",
                     "Lamentations",
@@ -116,7 +116,7 @@ let bookOfBooks=[
                     "Revelation"
 ]
 if(book.toLowerCase()=="songofsolomon"||book.toLowerCase()=="songofsongs")
-book = "song"
+book = "songs"
 
 let maxLetterDepth=-1;
     for(var h = 0; h<bookOfBooks.length; h++)
@@ -1089,7 +1089,7 @@ scoreColorInversion=false;
     
     
     <script>
-     if(!location.hash.includes(".b")){
+     if(location.hash.includes(".c")){
         let content = document.getElementsByClassName("dropdown-content");
 
         document.getElementById("nav").style.width="50%";
