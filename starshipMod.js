@@ -36,7 +36,7 @@ stallTillTHREELoaded();
 
 window.pixelShaderSize = 7;
 const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
-const movementRateORIGINAL = 1.;
+const movementRateORIGINAL = -leaf;
 window.movementRate=movementRateORIGINAL;
 window.zoomRate=movementRateORIGINAL;
 window.radialWarp=1.;
@@ -1180,7 +1180,7 @@ function zoomRoutine(){
                     function mcphrth(){
      if(window.haptic){
          let vibrateArrayNew=[];
-             let vibFreq = 50.*2.**((note+24)%48./12.)
+             let vibFreq = 51.9130871975*2.**((note+24)%48./12.);//51.9130871975=440*2^(-1/12)/8
              if(on){
                  for(var t = 0; t<4; t++)
                  {
@@ -2675,6 +2675,7 @@ for(var n = 0; n<targets.length;n++){
                                   // if(uniforms[ "morph" ].value!=0.)uniforms[ "centralCores" ].value*=3./2.;//stabilize morph dance collaboration
 
                                   uniforms[ "externalCores" ].value =uniforms[ "centralCores" ].value/1.5+Math.log(fromCenter)*logStabilizationConstant*equilibriator;
+                                
                               }
                               
                               
