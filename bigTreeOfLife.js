@@ -189,8 +189,8 @@ var term=0.;
 var m= new THREE.Vector2(0.,0.);
 
 //Maendel clover
-if(wheel)m =  pWithoutChiralizer.clone().divideScalar(lfc).sub(coords.yx)//try signs with for fibonacci ring pairing and movement distortion #syyym
-.multiplyScalar(abs(coresIn/crs*2.-1.));
+if(wheel)m =  pWithoutChiralizer.clone().divideScalar(lfc).sub(new THREE.Vector2(coords.x,coords.y))//try signs with for fibonacci ring pairing and movement distortion #syyym
+.multiplyScalar(Math.abs(coresIn/crs*2.-1.));
 //this is essentially just p as in the mandelbrot x <== x^2+
 
 var iterations = 100.;//loops all escape delimiter so iterations aren't used unless needed
@@ -205,7 +205,7 @@ var dstnce = s.length();//"distance" may be reserved keyword
 var coreBooster=0.;
 var truncator=1.;
 if(lfc!=0.) truncator = Math.log(zoom/lfc);
-var metaCoreDriveFactor =(((1.-leaf)/truncator)*truncator)/gr;//.324717.... number of places changes appearance
+var metaCoreDriveFactor =(((1.-leaf)**.5/truncator)*truncator)**2./gr;//.324717.... number of places changes appearance
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
 var hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
 var multCrossTwist=new THREE.Vector2(0.,0.);
@@ -274,35 +274,35 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
 
     if(Spoker){
         
-            var spoke_delimiter =metaCoreDriveFactor/logStabilizationConstant;// 1.+Math.pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
+            var spokeFactor =metaCoreDriveFactor*(((2.*gr-2.)**.5/2./truncator)*truncator)**2.;// 1.+Math.pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
             
         if(1.<=hyperCoreBoosted)
         {
             if(wheel){
                 s.divideScalar(2.);
                 
-                hyperCoreOUTPUT-=Math.log(spoke_delimiter/2.);
+                hyperCoreOUTPUT-=Math.log(spokeFactor/2.);
                 
-                hyperCoreBoosted-=Math.log(spoke_delimiter/2.);
+                hyperCoreBoosted-=Math.log(spokeFactor/2.);
             }
             else{
                 
-                s.divideScalar(spoke_delimiter);//engage spokelover s/=2.+'superspokes'
+                s.divideScalar(spokeFactor);//engage spokelover s/=2.+'superspokes'
                 
-                hyperCoreOUTPUT-=spoke_delimiter;
+                hyperCoreOUTPUT-=spokeFactor;
                 
-                hyperCoreBoosted-=spoke_delimiter;
+                hyperCoreBoosted-=spokeFactor;
             }
         }
         else  {
             
             if(wheel){
-                hyperCoreOUTPUT+=Math.log(spoke_delimiter/2.);
-                hyperCoreBoosted+=Math.log(spoke_delimiter/2.);
+                hyperCoreOUTPUT+=Math.log(spokeFactor/2.);
+                hyperCoreBoosted+=Math.log(spokeFactor/2.);
             }
             else{
-                hyperCoreOUTPUT+=spoke_delimiter;
-                hyperCoreBoosted+=spoke_delimiter;
+                hyperCoreOUTPUT+=spokeFactor;
+                hyperCoreBoosted+=spokeFactor;
             }
         }
     }
@@ -406,7 +406,7 @@ return new THREE.Vector3(s.x,s.y,hyperCoreOUTPUT);}
                                return p;
                                }
                            
-                           let coreTriggered = false;
+                           let coreTriggered = 0;
                            let coreSwipeTexture;
                            let coreSwipeData=new Float32Array(window.innerHeight*window.innerWidth*4).fill(0);
                            const can = document.getElementById("CANVAS");
