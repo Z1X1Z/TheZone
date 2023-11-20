@@ -206,6 +206,8 @@ var coreBooster=0.;
 var truncator=1.;
 if(lfc!=0.) truncator = Math.log(zoom/lfc);
 var metaCoreDriveFactor =(((1.-leaf)**.5/truncator)*truncator)**2./gr;//.324717.... number of places changes appearance
+var   spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf)*1.5)/truncator)*truncator;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
+
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
 var hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
 var multCrossTwist=new THREE.Vector2(0.,0.);
@@ -274,35 +276,33 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
 
     if(Spoker){
         
-            var spokeFactor =metaCoreDriveFactor*(((2.*gr-2.)**.5/2./truncator)*truncator)**2.;// 1.+Math.pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
-            
         if(1.<=hyperCoreBoosted)
         {
             if(wheel){
                 s.divideScalar(2.);
                 
-                hyperCoreOUTPUT-=Math.log(spokeFactor/2.);
+                hyperCoreOUTPUT-=Math.log(spoke_factor/2.);
                 
-                hyperCoreBoosted-=Math.log(spokeFactor/2.);
+                hyperCoreBoosted-=Math.log(spoke_factor/2.);
             }
             else{
                 
-                s.divideScalar(spokeFactor);//engage spokelover s/=2.+'superspokes'
+                s.divideScalar(spoke_factor);//engage spokelover s/=2.+'superspokes'
                 
-                hyperCoreOUTPUT-=spokeFactor;
+                hyperCoreOUTPUT-=spoke_factor;
                 
-                hyperCoreBoosted-=spokeFactor;
+                hyperCoreBoosted-=spoke_factor;
             }
         }
         else  {
             
             if(wheel){
-                hyperCoreOUTPUT+=Math.log(spokeFactor/2.);
-                hyperCoreBoosted+=Math.log(spokeFactor/2.);
+                hyperCoreOUTPUT+=Math.log(spoke_factor/2.);
+                hyperCoreBoosted+=Math.log(spoke_factor/2.);
             }
             else{
-                hyperCoreOUTPUT+=spokeFactor;
-                hyperCoreBoosted+=spokeFactor;
+                hyperCoreOUTPUT+=spoke_factor;
+                hyperCoreBoosted+=spoke_factor;
             }
         }
     }
