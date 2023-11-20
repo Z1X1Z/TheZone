@@ -1,6 +1,7 @@
 var shaderScale, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta;
 function setUniformsToPlainName(){
    // uniforms..value
+    time = window.TIMESTAMP;
      chirality = uniforms.chirality.value;
      coords = uniforms.coords.value
      morph=    uniforms.morph.value
@@ -234,7 +235,7 @@ if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
 // if(!true&&morph<.5)CORE_DELIMITER=1./dstnce*pow(2.,4./12.)*equilibriator;
 
 if(spirated!=0.&&dstnce<CORE_DELIMITER)  //works well<(n-1)/n
-s.multiplyScalar( dstnce*2.*PI/(Math.atan(s.y,s.x)-PI*spirated));
+s.multiplyScalar( dstnce*2.*Math.PI/(Math.atan(s.y,s.x)-Math.PI*spirated));
 dstnce = s.length();
 
 
@@ -281,9 +282,9 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
             if(wheel){
                 s.divideScalar(2.);
                 
-                hyperCoreOUTPUT-=Math.log(spoke_factor/2.);
+                hyperCoreOUTPUT-=Math.log(spoke_factor);
                 
-                hyperCoreBoosted-=Math.log(spoke_factor/2.);
+                hyperCoreBoosted-=Math.log(spoke_factor);
             }
             else{
                 
@@ -297,8 +298,8 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
         else  {
             
             if(wheel){
-                hyperCoreOUTPUT+=Math.log(spoke_factor/2.);
-                hyperCoreBoosted+=Math.log(spoke_factor/2.);
+                hyperCoreOUTPUT+=Math.log(spoke_factor);
+                hyperCoreBoosted+=Math.log(spoke_factor);
             }
             else{
                 hyperCoreOUTPUT+=spoke_factor;
