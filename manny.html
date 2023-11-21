@@ -1825,7 +1825,7 @@ float lfc = length(freed(coords));
    
 float precores = .25/log(.5);
 
-if(morph!=0.)precores=precores-3./log(.5);
+//if(morph!=0.)precores=precores-3./log(.5);
 if(refactorCores!=1.)precores=-.0;
 
 float cored =0.;
@@ -1974,8 +1974,10 @@ hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if d
 
 vec2 m=vec2(0.);
 
+float truncator=1.;
+if(lfc!=0.) truncator = log(zoom/lfc);
 //Maendel clover
-if(wheel)m =  (pWithoutChiralizer/lfc-coords.yx//try signs with for fibonacci ring pairing and movement distortion #syyym
+if(wheel)m =  ((pWithoutChiralizer/lfc*(1.-1./leaf)/truncator)*truncator-coords.yx//try signs with for fibonacci ring pairing and movement distortion #syyym
 )*abs(coresIn/crs*2.-1.);
 //this is essentially just p as in the mandelbrot x <== x^2+
 
@@ -1993,10 +1995,8 @@ vec3 beta =vec3(1.);
 
 
 float dstnce = length(s);//"distance" may be reserved keyword
-
+t*=.74;
 float coreBooster=0.;
-float truncator=1.;
-if(lfc!=0.) truncator = log(zoom/lfc);
 float metaCoreDriveFactor =(((1.-leaf)/truncator)*truncator)/gr;//.324717.... number of places changes appearance
 float spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf)*1.5)/truncator)*truncator;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
 
@@ -2225,7 +2225,7 @@ else{
  break;
  }
 
-hyperCoreBoosted-=logStabilizationConstant/4.;//used to be +-=1 before spoker -3*leaf-2*gr
+hyperCoreBoosted-=logStabilizationConstant/4.;//used to be -=1 before spoker -3*leaf-2*gr
 hyperCoreOUTPUT-=logStabilizationConstant/4.;
                              colorShift+=hyperCoreBoosted;
                              

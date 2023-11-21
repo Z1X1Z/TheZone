@@ -191,6 +191,8 @@ var term=0.;
 
 var m= new THREE.Vector2(0.,0.);
 
+    var truncator=1.;
+    if(lfc!=0.) truncator = Math.log(zoom/lfc);
 //Maendel clover
 if(wheel)m =  pWithoutChiralizer.clone().divideScalar(lfc*((1.-1./leaf)/truncator)*truncator).sub(new THREE.Vector2(coords.x,coords.y))//try signs with for fibonacci ring pairing and movement distortion #syyym
 .multiplyScalar(Math.abs(coresIn/crs*2.-1.));
@@ -204,10 +206,8 @@ var continuumCounter=0.;
 var minToMax=Math.min(resolution.x,resolution.y)/Math.max(resolution.x,resolution.y);
 
 var dstnce = s.length();//"distance" may be reserved keyword
-
+t.multiplyScalar(.74);
 var coreBooster=0.;
-var truncator=1.;
-if(lfc!=0.) truncator = Math.log(zoom/lfc);
 var metaCoreDriveFactor =(((1.-leaf)**.5/truncator)*truncator)**2./gr;//.324717.... number of places changes appearance
 var   spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf))/truncator)*truncator*1.5;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
 
@@ -215,7 +215,7 @@ var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
 var hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
 var multCrossTwist=new THREE.Vector2(0.,0.);
 if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
-{     multCrossTwist=spin2(s,Math.atan(s.x,s.y)*1.5*petals/(6.+petals))*sign(.5-morph)//*equilibriator/CORE_DELIMITER
+{     multCrossTwist=spin2(s,Math.atan(s.x,s.y)*1.5*petals/(6.+petals))*Math.sign(.5-morph)//*equilibriator/CORE_DELIMITER
     /dstnce;
 
 multCrossTwist.multiply( multCrossTwist);
