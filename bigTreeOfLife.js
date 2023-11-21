@@ -209,7 +209,7 @@ var coreBooster=0.;
 var truncator=1.;
 if(lfc!=0.) truncator = Math.log(zoom/lfc);
 var metaCoreDriveFactor =(((1.-leaf)**.5/truncator)*truncator)**2./gr;//.324717.... number of places changes appearance
-var   spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf)*1.5)/truncator)*truncator;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
+var   spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf))/truncator)*truncator*1.5;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
 
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
 var hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
@@ -333,7 +333,7 @@ for(var i=0;i<40; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER&& 0.<=hyperCoreBoosted)
 {
 //if(i==0){float b = ;s*=b;dstnce*b;}
-s.multiplyScalar( metaCoreDriveFactor);dstnce*=metaCoreDriveFactor;hyperCoreBoosted--;loops++;
+s.multiplyScalar( metaCoreDriveFactor);dstnce*=metaCoreDriveFactor;hyperCoreBoosted-=logStabilizationConstant;loops+=logStabilizationConstant;
 
 OmniDynamicPetalShift =omniData[(loops+counter-1.)];
 OmniPetal =OmniDynamicPetalShift*(petals+6./6.);
@@ -379,8 +379,8 @@ else{
 break;
 }
 
- hyperCoreBoosted--;
- hyperCoreOUTPUT--;
+ hyperCoreBoosted-=logStabilizationConstant/4.;
+ hyperCoreOUTPUT-=logStabilizationConstant/4.;
 
 }else break;
               
