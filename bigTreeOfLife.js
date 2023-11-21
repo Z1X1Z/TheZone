@@ -192,7 +192,7 @@ var term=0.;
 var m= new THREE.Vector2(0.,0.);
 
 //Maendel clover
-if(wheel)m =  pWithoutChiralizer.clone().divideScalar(lfc).sub(new THREE.Vector2(coords.x,coords.y))//try signs with for fibonacci ring pairing and movement distortion #syyym
+if(wheel)m =  pWithoutChiralizer.clone().divideScalar(lfc*((1.-1./leaf)/truncator)*truncator).sub(new THREE.Vector2(coords.x,coords.y))//try signs with for fibonacci ring pairing and movement distortion #syyym
 .multiplyScalar(Math.abs(coresIn/crs*2.-1.));
 //this is essentially just p as in the mandelbrot x <== x^2+
 
