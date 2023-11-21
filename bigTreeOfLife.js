@@ -30,6 +30,8 @@ function setUniformsToPlainName(){
     baseN =uniforms.baseN.value
     Refractelate = uniforms.Refractelate.value;
     shaderScale =uniforms.shaderScale.value;
+    centralCores=uniforms.centralCores.value;
+    externalCores=uniforms.externalCores.value;
 }
 
 function tol( p,  t){
