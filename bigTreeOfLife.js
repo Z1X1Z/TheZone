@@ -47,7 +47,7 @@ var lfc = coords.length();//freed(coords).length();
 
 var precores = .25/Math.log(.5);
 
-if(morph!=0.)precores=precores-3./Math.log(.5);
+//if(morph!=0.)precores=precores-3./Math.log(.5);
 if(refactorCores!=1.)precores=-.0;
 
 var cored =0.;
@@ -171,7 +171,7 @@ var equilibriator = 1.;
 //if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
 hyperCore*=equilibriator;
 
-//   hyperCore+=.25/Math.log(.5)/equilibriator;
+   hyperCore-=.5/Math.log(.5)/equilibriator;
 if(cloverSlide&&wheel)hyperCore+=1.75/Math.log(.5);
 
 else if(cloverSlide||wheel)hyperCore+=1./Math.log(.5);
@@ -212,8 +212,12 @@ var metaCoreDriveFactor =(((1.-leaf)**.5/truncator)*truncator)**2./gr;//.324717.
 var   spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf))/truncator)*truncator*1.5;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
 
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
+                           hyperCoreOUTPUT-=((petals+6.)/6.)/2.;
+
 var hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
-var multCrossTwist=new THREE.Vector2(0.,0.);
+
+                           
+                           var multCrossTwist=new THREE.Vector2(0.,0.);
 if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
 {     multCrossTwist=spin2(s,Math.atan(s.x,s.y)*1.5*petals/(6.+petals))*Math.sign(.5-morph)//*equilibriator/CORE_DELIMITER
     /dstnce;
@@ -228,7 +232,7 @@ coreBooster=multCrossTwist.length()/Math.log(.5)*lfc;
 
 for (var counter=0.;counter<iterations;counter++)if(dstnce<50.){
 var OmniDynamicPetalShift =omniData[(loops+counter-1.)];
-var OmniPetal =OmniDynamicPetalShift*(petals+6./6.);
+var OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
 
 var  CORE_DELIMITER=coreData[Math.floor(loops+counter)];
 
@@ -333,10 +337,10 @@ for(var i=0;i<40; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER&& 0.<=hyperCoreBoosted)
 {
 //if(i==0){float b = ;s*=b;dstnce*b;}
-s.multiplyScalar( metaCoreDriveFactor);dstnce*=metaCoreDriveFactor;hyperCoreBoosted-=logStabilizationConstant;loops+=logStabilizationConstant;
+s.multiplyScalar( metaCoreDriveFactor);dstnce*=metaCoreDriveFactor;hyperCoreBoosted--;loops++;
 
 OmniDynamicPetalShift =omniData[(loops+counter-1.)];
-OmniPetal =OmniDynamicPetalShift*(petals+6./6.);
+OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
 
 if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spin2(s,Math.atan(s.y,s.x)*OmniPetal);
 
@@ -379,8 +383,8 @@ else{
 break;
 }
 
- hyperCoreBoosted-=logStabilizationConstant/4.;
- hyperCoreOUTPUT-=logStabilizationConstant/4.;
+ hyperCoreBoosted--;
+ hyperCoreOUTPUT--;
 
 }else break;
               
