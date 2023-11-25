@@ -2699,7 +2699,7 @@ function calculatePitch ()
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 
 let tolerance; //, confidence;
-if(highORlow==1)tolerance=totalAMP-1./fractionOfFrame**2.;
+if(highORlow==1)tolerance=totalAMP-(totalAMP/fractionOfFrame)**2.;
 else if (highORlow==2)tolerance = .5;//when I play different notes on harmonica it mostly hears C, this clears up the distinction of the notes
                         
 let period;
