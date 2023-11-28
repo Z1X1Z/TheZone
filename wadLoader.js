@@ -186,27 +186,29 @@ function followSound(e){
         if(isFinite(frequency)&&frequency>0.&&
            angleSound-initialAngleSound[id]!=0){
             if(typeof sound[id]=="object"){
-                sound2[id].setPitch(frequency);
-                sound[id].setPitch(2.*frequency);
-                sound2[id].setVolume(volume*(angleSound - initialAngleSound[id])/(2.*pi)*twistTRIANGLEtoSQUARE*.5);
-                sound[id].setVolume(volume*(1.-(angleSound-initialAngleSound[id])/(2.*pi))*twistTRIANGLEtoSQUARE*.5);
+                let volumePrime=volume*(1.-(angleSound-initialAngleSound[id])/(2.*pi));
+                let volumeTWO =volume*(angleSound - initialAngleSound[id])/(2.*pi);
+                sound2[id].setPitch(2.*frequency);
+                sound[id].setPitch(frequency);
+                sound2[id].setVolume(volumePrime*twistTRIANGLEtoSQUARE*.5);
+                sound[id].setVolume(volumeTWO*twistTRIANGLEtoSQUARE*.5);
                 
                 
-                    zound2[id].setPitch(frequency);
-                    zound[id].setPitch(2.*frequency);
-                    zound2[id].setVolume((volume*(angleSound - initialAngleSound[id])/(2.*pi))*twistSQUAREtoTRIANGLE*.5);
-                    zound[id].setVolume(volume*(1.-(angleSound-initialAngleSound[id])/(2.*pi))*twistSQUAREtoTRIANGLE*.5);
+                    zound2[id].setPitch(2.*frequency);
+                    zound[id].setPitch(frequency);
+                    zound2[id].setVolume(volumePrime*twistSQUAREtoTRIANGLE*.5);
+                    zound[id].setVolume(volumeTWO*twistSQUAREtoTRIANGLE*.5);
                 
-                xound2[id].setPitch(frequency);
-                xound[id].setPitch(2.*frequency);
-                xound2[id].setVolume(volume*(angleSound - initialAngleSound[id])/(2.*pi)*twistZINEtoSAW*.5);
-                xound[id].setVolume(volume*(1.-(angleSound-initialAngleSound[id])/(2.*pi))*twistZINEtoSAW*.5);
+                xound2[id].setPitch(2.*frequency);
+                xound[id].setPitch(frequency);
+                xound2[id].setVolume(volumePrime*twistZINEtoSAW*.5);
+                xound[id].setVolume(volumeTWO*twistZINEtoSAW*.5);
                 
                 
-                    tound2[id].setPitch(frequency);
-                    tound[id].setPitch(2.*frequency);
-                    tound2[id].setVolume((volume*(angleSound - initialAngleSound[id])/(2.*pi))*twistSAWtoZINE*.5);
-                    tound[id].setVolume(volume*(1.-(angleSound-initialAngleSound[id])/(2.*pi))*twistSAWtoZINE*.5);
+                    tound2[id].setPitch(2.*frequency);
+                    tound[id].setPitch(frequency);
+                    tound2[id].setVolume(volumePrime*twistSAWtoZINE*.5);
+                    tound[id].setVolume(volumeTWO*twistSAWtoZINE*.5);
             }
         }
 }
