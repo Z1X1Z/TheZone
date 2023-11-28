@@ -678,8 +678,8 @@ duperZoom: {value:1.},
                        let backBufferFlip=false;
                       let FeedbackrenderTarget,FeedbackrenderTargetFlipSide;
                        
-                                           const trail=new Float32Array(trailLength*3*6*2.);
-                                           const trailColor=new Float32Array(trailLength*4*6*2.);
+                                           const trail=new Float32Array(trailLength*3*6*2);
+                                           const trailColor=new Float32Array(trailLength*4*6*2);
        
                     const xenOctaveFactor = 12;
                                            const harmonicPzyghtheVertices = new Float32Array(xenOctaveFactor*12*3*6)
@@ -1449,10 +1449,7 @@ if( !window.touchMode&&!window.touchOnlyMode) {
     let hyperCoreOffset = Math.ceil(hyperCorePixel[0]);
     if(!isNaN(loudestFret[0].volume)&&window.dynamicCoring)
         coreData[hyperCoreOffset]=Math.abs(coreShift)+coringValue;//24*1.3247;
-    else for(var h = 0; h<coreShift.length; h++)
-    {   let truncator = 1.;//Math.log(zoom/fromCenter);
-        coreData[h]=1./-((leaf/truncator)*truncator);
-    }
+    else for(var h = 0; h<coreShift.length; h++)  coreData[h]=1./-leaf;
     
     if(!isNaN(loudestFret[0].volume)&&omniDynamicEngaged)
         omniData[hyperCoreOffset]=coreShift/2.;
@@ -2699,7 +2696,7 @@ function calculatePitch ()
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 
 let tolerance; //, confidence;
-if(highORlow==1)tolerance=totalAMP-totalAMP/fractionOfFrame**1.44;
+if(highORlow==1)tolerance=totalAMP-totalAMP/(fractionOfFrame*(2**(1./3.)/1.5));
 else if (highORlow==2)tolerance = .5;//when I play different notes on harmonica it mostly hears C, this clears up the distinction of the notes
                         
 let period;
