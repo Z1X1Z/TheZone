@@ -194,7 +194,7 @@ var m= new THREE.Vector2(0.,0.);
     var truncator=1.;
     if(lfc!=0.) truncator = Math.log(zoom/lfc);
 //Maendel clover
-if(wheel)m =  pWithoutChiralizer.clone().divideScalar(lfc*((1.-1./leaf)/truncator)*truncator).sub(new THREE.Vector2(coords.x,coords.y))//try signs with for fibonacci ring pairing and movement distortion #syyym
+if(wheel)m =  pWithoutChiralizer.clone().divideScalar(lfc*((1.-1./leaf)/truncator)*truncator).sub(new THREE.Vector2(coords.y,coords.x))//try signs with for fibonacci ring pairing and movement distortion #syyym
 .multiplyScalar(Math.abs(coresIn/crs*2.-1.));
 //this is essentially just p as in the mandelbrot x <== x^2+
 
@@ -212,7 +212,7 @@ var metaCoreDriveFactor =(((1.-leaf)**.5/truncator)*truncator)**2./gr;//.324717.
 var   spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf))/truncator)*truncator*1.5;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
 
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
-                           hyperCoreOUTPUT-=((petals+6.)/6.)/2.;
+                           hyperCoreOUTPUT-=petals;
 
 var hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
 
@@ -360,7 +360,7 @@ hyperCoreBoosted+=b;
 
 }
 
-if(fieldPowerBoostMeta&&(float(i)>=hyperCoreBoosted)){
+if(fieldPowerBoostMeta&&((i)>=hyperCoreBoosted)){
 var powerBoost =2.71828*(Math.log(.5)*dstnce*(Math.sqrt(2.))/1.5);
 s.multiplyScalar( Math.pow(dstnce,powerBoost));
 dstnce*=Math.pow(dstnce,powerBoost);
