@@ -678,8 +678,8 @@ duperZoom: {value:1.},
                        let backBufferFlip=false;
                       let FeedbackrenderTarget,FeedbackrenderTargetFlipSide;
                        
-                                           const trail=new Float32Array(trailLength*3*6);
-                                           const trailColor=new Float32Array(trailLength*4*6);
+                                           const trail=new Float32Array(trailLength*3*6*2.);
+                                           const trailColor=new Float32Array(trailLength*4*6*2.);
        
                     const xenOctaveFactor = 12;
                                            const harmonicPzyghtheVertices = new Float32Array(xenOctaveFactor*12*3*6)
@@ -2154,7 +2154,7 @@ let s = f;
                         // timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
                             const zlast = z;
                      const seg = timeElapsedSinceRecording/trailSecondsLong;
-                            z = -1.+seg;
+                            z = -1.+seg*.5;
                         //   if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong);
                             const transparencyOfTrailLast =transparencyOfTrail;
                             transparencyOfTrail =1.-seg;
