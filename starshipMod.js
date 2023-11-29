@@ -1435,7 +1435,8 @@ if( !window.touchMode&&!window.touchOnlyMode) {
     
     if(!zoomAtl41)zoomRoutine();
     infinicore();
-
+    move();
+    
     spiral_compress();
     
     vectorize4();
