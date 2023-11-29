@@ -137,17 +137,17 @@ function startSound(e){
             tound2[id].stop();
             
             sound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistTRIANGLEtoSQUARE*.5});
-            sound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:.0000001,volume:.0000001});
+            sound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.,volume:.000000000000001});
             
             zound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistSQUAREtoTRIANGLE*.5});
-            zound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:.0000001,volume:.0000001});
+            zound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.,volume:.000000000000001});
             
             
             xound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistZINEtoSAW*.5});
-            xound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:.0000001,volume:.0000001});
+            xound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.,volume:.000000000000001});
             
             tound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistSAWtoZINE*.5});
-            tound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:.0000001,volume:.0000001});
+            tound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.,volume:.000000000000001});
 
 
             }
@@ -181,8 +181,7 @@ function followSound(e){
         let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
         let angleSound = Math.atan2(y,x);
         angleSound=((angleSound-initialAngleSound[id])+pi/2.+8.*pi)%(2*pi)*window.flip+initialAngleSound[id];
-   console.log(angleSound)
-        let frequency = Math.pow(2.,((angleSound/pi/2*12)-window.twist*window.flip/2.+correction)/12.)*window.ConcertKey/2.;
+        let frequency = Math.pow(2.,((angleSound/pi/2*12)-window.twist*window.flip/2.+correction)/12.)*window.ConcertKey;
                //                  console.log(Math.pow(2.,((angleSound/pi/2*12)-window.twist*window.flip/2.+correction)/12.))
         if(isFinite(frequency)&&frequency>0.&&
            angleSound-initialAngleSound[id]!=0){
