@@ -1433,10 +1433,9 @@ if( !window.touchMode&&!window.touchOnlyMode) {
                        }
            else {volume=1.; lastVolume=1.; }
     
+    move();
     if(!zoomAtl41)zoomRoutine();
     infinicore();
-    move();
-    
     spiral_compress();
     
     vectorize4();
