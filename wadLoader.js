@@ -180,42 +180,43 @@ function followSound(e){
         }
         let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
         let angleSound = Math.atan2(y,x);
-        angleSound=((angleSound-initialAngleSound[id])+pi/2.+4.*pi)%(2*pi)*window.flip+initialAngleSound[id];
-   
+        angleSound=((angleSound-initialAngleSound[id])+pi/2.+8.*pi)%(2*pi)*window.flip+initialAngleSound[id];
+   console.log(angleSound)
         let frequency = Math.pow(2.,((angleSound/pi/2*12)-window.twist*window.flip/2.+correction)/12.)*window.ConcertKey/2.;
+               //                  console.log(Math.pow(2.,((angleSound/pi/2*12)-window.twist*window.flip/2.+correction)/12.))
         if(isFinite(frequency)&&frequency>0.&&
            angleSound-initialAngleSound[id]!=0){
             if(typeof sound[id]=="object"){
-                let volumePrime=volume*(1.-(angleSound-initialAngleSound[id])/(2.*pi));
-                let volumeTWO =volume*(angleSound - initialAngleSound[id])/(2.*pi);
-                sound2[id].setPitch(2.*frequency);
+                let volumePrime=volume*(angleSound - initialAngleSound[id])/(2.*pi)*.5;
+                let volumeTWO =volume*(1.-(angleSound-initialAngleSound[id])/(2.*pi))*.5;
+                sound2[id].setPitch(frequency/2.);
                 sound[id].setPitch(frequency);
-                sound2[id].setVolume(volumePrime*twistTRIANGLEtoSQUARE*.5);
-                sound[id].setVolume(volumeTWO*twistTRIANGLEtoSQUARE*.5);
+                sound2[id].setVolume(volumePrime*twistTRIANGLEtoSQUARE);
+                sound[id].setVolume(volumeTWO*twistTRIANGLEtoSQUARE);
                 
                 
-                    zound2[id].setPitch(2.*frequency);
+                    zound2[id].setPitch(frequency/2.);
                     zound[id].setPitch(frequency);
-                    zound2[id].setVolume(volumePrime*twistSQUAREtoTRIANGLE*.5);
-                    zound[id].setVolume(volumeTWO*twistSQUAREtoTRIANGLE*.5);
+                    zound2[id].setVolume(volumePrime*twistSQUAREtoTRIANGLE);
+                    zound[id].setVolume(volumeTWO*twistSQUAREtoTRIANGLE);
                 
-                xound2[id].setPitch(2.*frequency);
+                xound2[id].setPitch(frequency/2.);
                 xound[id].setPitch(frequency);
-                xound2[id].setVolume(volumePrime*twistZINEtoSAW*.5);
-                xound[id].setVolume(volumeTWO*twistZINEtoSAW*.5);
+                xound2[id].setVolume(volumePrime*twistZINEtoSAW);
+                xound[id].setVolume(volumeTWO*twistZINEtoSAW);
                 
                 
-                    tound2[id].setPitch(2.*frequency);
+                    tound2[id].setPitch(frequency/2.);
                     tound[id].setPitch(frequency);
-                    tound2[id].setVolume(volumePrime*twistSAWtoZINE*.5);
-                    tound[id].setVolume(volumeTWO*twistSAWtoZINE*.5);
+                    tound2[id].setVolume(volumePrime*twistSAWtoZINE);
+                    tound[id].setVolume(volumeTWO*twistSAWtoZINE);
             }
         }
 }
 
 }
                                                              let cycle=0;
-let c = document.getElementById("container");
+let c = document.body;//document.getElementById("container")
                                  
                                  
                                 var pressure = 1.;
