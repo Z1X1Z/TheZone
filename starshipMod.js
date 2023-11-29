@@ -1105,12 +1105,15 @@ let lastVolume = 1.;
        function infinicore(){
             if(zoom<=1./2.**(singleHyperCoreDepth+3)&&fromCenter/zoom<2.){
                 zoom*=2.**singleHyperCoreDepth;coordY*=2.**singleHyperCoreDepth;coordX*=2.**singleHyperCoreDepth;
+                fromCenter*=2.**singleHyperCoreDepth;
+
                 cloverSuperCores++;
 
             }
             
             if(zoom>1./2**3&&cloverSuperCores>0){
                 zoom/=2.**singleHyperCoreDepth;coordY/=2.**singleHyperCoreDepth;coordX/=2.**singleHyperCoreDepth;
+                fromCenter/=2.**singleHyperCoreDepth;
                 cloverSuperCores--;
                 
             }
@@ -1430,7 +1433,6 @@ if( !window.touchMode&&!window.touchOnlyMode) {
                        }
            else {volume=1.; lastVolume=1.; }
     
-    move();
     if(!zoomAtl41)zoomRoutine();
     infinicore();
 
