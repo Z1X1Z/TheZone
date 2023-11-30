@@ -2699,7 +2699,7 @@ function calculatePitch ()
 
 let tolerance; //, confidence;
         if(highORlow==1){
-            tolerance=totalAMP-totalAMP/(fractionOfFrame*(gr*-leaf)**.5);//may be fractionOfFrame*-leaf*gr
+            tolerance=totalAMP-totalAMP/((fractionOfFrame*gr*-leaf)**.5);//may be fractionOfFrame*-leaf*gr
         }
 else if (highORlow==2)tolerance = .5;//when I play different notes on harmonica it mostly hears C, this clears up the distinction of the notes
                         
