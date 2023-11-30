@@ -2,7 +2,6 @@ if(!("BibleON" in window))window.BibleON = 1;
 window.muteToggle = false;
 window.fftSize=512
 window.zoom=1.;
-window.starSpin=0.;
 window.RockInTheWater=0;
 window.octaveStars=true;
 window.BulletMine=0;
@@ -16,8 +15,6 @@ window.pzyghthe=0;
 window.dynamicCoring=false;
 window.rez=window.devicePixelRatio/2.;//define resolution
 window.Oreo=true;
-window.haptic=false;
-window.haptic2=false;
 if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
   {
       rez=window.devicePixelRatio/4.;
@@ -317,10 +314,9 @@ function callKey(event){
     
     else if (key=="Q") {
         twist = 0;
-        if(starSpin==0)starSpin=1;
-        else if(starSpin==1)starSpin=-1;
-        else if(starSpin==-1)starSpin=0;
-        uniforms.starSpin.value = starSpin;
+        if( uniforms.starSpin.value==0) uniforms.starSpin.value=1;
+        else if( uniforms.starSpin.value==1) uniforms.starSpin.value=-1;
+        else if( uniforms.starSpin.value==-1) uniforms.starSpin.value=0;
         
     }
     else if (key==";") uniforms[ "colorInverter" ].value = !uniforms[ "colorInverter" ].value;

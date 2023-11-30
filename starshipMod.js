@@ -1395,7 +1395,7 @@ function runOSMD (){
      
      if(!sheetTranslucent&& bottomOfScreenHeight != document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight)adjustThreeJSWindow();//readjust for verbose
     uniforms[ "time" ].value = timestamp/1000.+window.startTimeSecondMantissaMagnified;
-    if(starSpin!=0)twist=(uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*starSpin*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel
+    if(uniforms.starSpin.value!=0)twist=(uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*uniforms.starSpin.value*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel
      
      
     if(window.ChristoDecrypto!=0) uniforms.metaCarousel.value=          1./(  window.ChristoDecrypto*uniforms.externalCores.value)*(timestamp-window.timeRESET)/10.;
@@ -1815,7 +1815,7 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                incrementation++;
                 let widt = starshipSize/(EldersLeg/24.)**.5/incrementation/2.;
                 if (g==0&&EldersLeg==24)widt*=2.;
-                const arm =(flip*(g+oddSkew+twist*EldersLeg/24.)*radialWarp)%EldersLeg/EldersLeg*pi*2.;
+                const arm =(flip*(g+oddSkew+twist)*EldersLeg/24.*radialWarp)%EldersLeg/EldersLeg*pi*2.;
  
                 let lengt = (testar[(g+EldersLeg/2.)%EldersLeg]-minTestar)/(maxTestar-minTestar);
                                      if(twoOr1) {lengt/=2.**16./EldersLeg;lengt=lengt**.25;widt/=2;}
