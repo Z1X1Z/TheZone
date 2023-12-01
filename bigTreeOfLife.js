@@ -219,8 +219,11 @@ var hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreB
                            
                            var multCrossTwist=new THREE.Vector2(0.,0.);
 if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
-{     multCrossTwist=spin2(s,Math.atan(s.x,s.y)*1.5*petals/(6.+petals))*Math.sign(.5-morph)//*equilibriator/CORE_DELIMITER
-    /dstnce;
+{
+    let spunMCT=spin2(s,Math.atan(s.x,s.y)*1.5*petals/(6.+petals))*Math.sign(.5-morph)//*equilibriator/CORE_DELIMITER
+        /dstnce;
+    
+    multCrossTwist=new THREE.Vector2(spunMCT.x,spunMCT.y);
 
 multCrossTwist.multiply( multCrossTwist);
 coreBooster=multCrossTwist.length()/Math.log(.5)*lfc;
@@ -274,7 +277,7 @@ if(morph!=0.&&!wheel)s.sub(t);
 else s.add(t.clone().sub(m));
    
  
-if(Clovoid)s.x=(sqrt(2.*Math.abs(1./s.x)));//this is the body steps on the clover
+if(Clovoid)s.x=(Math.sqrt(2.*Math.abs(1./s.x)));//this is the body steps on the clover
 else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only
 
 
