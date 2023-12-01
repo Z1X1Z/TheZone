@@ -2141,9 +2141,9 @@ if(Spoker){
                          if(wheel){
                              s/=2.;
                              
-                             hyperCoreOUTPUT-=log(spoke_factor);
+                             hyperCoreOUTPUT-=log(spoke_factor/1.5);
 
-                             hyperCoreBoosted-=log(spoke_factor);
+                             hyperCoreBoosted-=log(spoke_factor/1.5);
                              }
                          else{
                              
@@ -2157,8 +2157,8 @@ if(Spoker){
         else  {
             
                 if(wheel){
-            hyperCoreOUTPUT+=log(spoke_factor);
-            hyperCoreBoosted+=log(spoke_factor);
+            hyperCoreOUTPUT+=log(spoke_factor/1.5);
+            hyperCoreBoosted+=log(spoke_factor/1.5);
             }
                 else{
             hyperCoreOUTPUT+=spoke_factor;
