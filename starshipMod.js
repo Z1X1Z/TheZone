@@ -2699,8 +2699,8 @@ function calculatePitch ()
 
 let tolerance; //, confidence;
         if(highORlow==1){
-            trunc = Math.log(totalAMP);
-            tolerance=totalAMP-totalAMP/(fractionOfFrame*(gr*(-leaf)**.5/trunc)*trunc);//on android pickup is better with truncation
+            trunc = Math.log(1./totalAMP);
+            tolerance=totalAMP-totalAMP/(fractionOfFrame*((gr*-leaf)**.5/trunc)*trunc);//on android pickup is better with truncation
         }
 else if (highORlow==2)tolerance = .5;//when I play different notes on harmonica it mostly hears C, this clears up the distinction of the notes
                         
