@@ -2045,7 +2045,7 @@ else      for (float counter=0.;counter<iterations;counter++)if(dstnce<50.){
     float OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
     float OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
     
-  float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(loops+counter)/40.,0.)).x;
+  float  CORE_DELIMITER=2./3.;//texture2D(coreTextureSampler,vec2(floor(loops+counter)/40.,0.)).x;
 
          if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
 
