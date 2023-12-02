@@ -584,15 +584,16 @@ note:{value: 0},
 balloonsON:{value: 0.},
 sparklesON:{value: false},
 SPHEREofTheLORD:{value: false},
+                                
 clvrVariant1:{value: false},
 clvrVariant2:{value: false},
 clvrVariant3:{value: false},
 clvrVariant4:{value: false},
 clvrVariant5:{value: false},
 clvrVariant6:{value: false},
-    
 clvrVariant7:{value: false},
 clvrVariant8:{value: false},
+                                
 Spoker:{value: true    },
 spokelover:{value: false    },
 continuumClover:{value: false    },
