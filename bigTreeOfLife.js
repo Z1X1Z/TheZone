@@ -171,7 +171,7 @@ var equilibriator = 1.;
 //if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
 hyperCore*=equilibriator;
 
-   hyperCore-=.5/Math.log(.5)/equilibriator;
+  // hyperCore-=.5/Math.log(.5)/equilibriator;
 if(cloverSlide&&wheel)hyperCore+=1.75/Math.log(.5);
 
 else if(cloverSlide||wheel)hyperCore+=1./Math.log(.5);
@@ -192,7 +192,7 @@ var term=0.;
 var m= new THREE.Vector2(0.,0.);
 
     var truncator=1.;
-    if(lfc!=0.) truncator = Math.log(zoom/lfc);
+    if(lfc!=0.) truncator = Math.log(zoom/lfc)*10000.;
 //Maendel clover
 if(wheel)m =  pWithoutChiralizer.clone().divideScalar(lfc*((1.-1./leaf)/truncator)*truncator).sub(new THREE.Vector2(coords.y,coords.x))//try signs with for fibonacci ring pairing and movement distortion #syyym
 .multiplyScalar(Math.abs(coresIn/crs*2.-1.));
