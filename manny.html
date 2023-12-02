@@ -68,7 +68,7 @@ let bookOfBooks=[
                     "Psalms",
                     "Proverbs",
                     "Ecclesiastes",
-                    "Songs",
+                    "Song",
                     "Isaiah",
                     "Jeremiah",
                     "Lamentations",
@@ -116,7 +116,7 @@ let bookOfBooks=[
                     "Revelation"
 ]
 if(book.toLowerCase()=="songofsolomon"||book.toLowerCase()=="songofsongs")
-book = "songs"
+book = "song"
 
 let maxLetterDepth=-1;
     for(var h = 0; h<bookOfBooks.length; h++)
@@ -307,11 +307,7 @@ let maxLetterDepth=-1;
          
                
                <input type="checkbox" id="Haptic" name="t"  onclick= "window.haptic = !window.haptic; mcphrth();">
-               <label for="Haptic">Haptic Song(Android only)</label>
-               <br>
-               
-               <input type="checkbox" id="Haptic2" name="t"  onclick= "window.haptic2 = !window.haptic2; mcphrth();">
-               <label for="Haptic2">Haptic Implosion(Android only)</label>
+               <label for="Haptic">Haptic(Android only)</label>
                <br>
               <input type="checkbox" id="Game On" name="t"  onclick= "
                   key  = 'e';
@@ -419,7 +415,7 @@ let maxLetterDepth=-1;
                <input type="checkbox"  id="oreo" name="t"  onclick= "
                    key  = 'j';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
-                   <label for="oreo"> Oreo?!</label><br>
+                   <label for="oreo"> Oreo!</label><br>
                    
                <a id="Cancel Background Noise" name="t"  onclick= "
 
@@ -584,7 +580,7 @@ let maxLetterDepth=-1;
                     <input type="checkbox" id="omniCore" name="t"  onclick= "
                  key  = 'o';
                  callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
-              <label for="omniCore">omniCORE!</label><br>
+              <label for="dynamicCoring">omniCORE!</label><br>
               
                     <label for="coringConstant">Coring Value (.5-2.):</label>
                    <input type="number" id="coringConstant" name="coringConstant" class="num" onkeydown=
@@ -637,7 +633,7 @@ coreData.fill(coringValue);">
                            <input type="checkbox" id="Inherited Colors" name="t"  onclick= "
                                key  = 'K';
                                callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                            <label for="Inherited Colors">Inherited Colors!?</label><br>
+                            <label for="Inherited Colors">Inherited Colors!</label><br>
 
 
                             <input type="checkbox" id="Radial Rainbow Clover" name="t"  onclick= "
@@ -660,7 +656,7 @@ coreData.fill(coringValue);">
                              <input type="checkbox" id="144000" name="t"  onclick= "
                                  key  = 'J';
                                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                              <label for="144000">144000!</label><br>
+                              <label for="Clovoid">144000!</label><br>
                               <input type="checkbox" id="Spoker" name="t"  onclick= "
                                   key  = 'T';
                                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -674,17 +670,6 @@ coreData.fill(coringValue);">
                                     key  = '&';
                                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                                  <label for="Continuum Clover">Continuum Clover!</label><br>
-                                 
-                                 <input type="checkbox" id="field Power Boost" name="t"  onclick= "
-                                     key  = 'x';
-                                     callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
-                                  <label for="field Power Boost">Field Power Boost!</label><br>
-                                  
-                                  <input type="checkbox" id="meta field Power Boost" name="t"  onclick= "
-                                      key  = 'z';
-                                      callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
-                                   <label for="meta field Power Boost">Meta Field Power Boost!</label><br>
-                                   
                                  <a id="ReFactor" name="t"  onclick= "
                                      key  = 'r';
                                      callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'keyCode':key.charCodeAt(0)}));">
@@ -846,7 +831,7 @@ coreData.fill(coringValue);">
 
                     <a id="Mandelbrot" name="t"  onclick= "
                         key  = 'a';
-                        callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                        callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                         Mandelbrot!</a><br>
 
                      <a id="Refractelbrot" name="t"  onclick= "
@@ -913,15 +898,6 @@ coreData.fill(coringValue);">
                   key  = '7';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                   <label for="7rez">7 pixels per pixel</label><br>
-                  
-              <input type="radio" id="8rez" name="colorMode" onclick="
-              key  = '8';
-              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-              <label for="8rez">8 pixels per pixel</label><br>
-                  <a id="Incrementally Increase Resolution" name="t"  onclick="
-                  key  = '_';
-                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                      Refine resolution!</a><br>
                   <a id="Incrementally Increase Resolution" name="t"  onclick="
                   key  = '_';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -1099,15 +1075,7 @@ scoreColorInversion=false;
         for(var p = 0; p<n.length;p++)n[p].checked  = false; </script>
     
     
-    <script>
-     if(location.hash.includes(".c")){
-        let content = document.getElementsByClassName("dropdown-content");
-
-        document.getElementById("nav").style.width="50%";
-        for(var b = 0; b<content.length; b++)content[b].style.width="50%";
-        }
-     
-     </script>
+    
     
 
     
@@ -1681,26 +1649,16 @@ vec3 faceFORWARD(vec2 p,vec2 t){
         vec3 rgb = clamp( abs(mod(c.x*6.0+vec3(0.0,4.0,2.0),6.0)-3.0)-1.0, 0.0, 1.0 );
         return c.z * mix( vec3(1.0), rgb, c.y);
     }
-    
-    vec2 spin2(vec2 f, float t)
-    {    //https://en.wikipedia.org/wiki/Rotation_matrix
-        float angle =t;
-        float fxb=f.x;
-        f.x=-f.x*coz(-angle)-f.y*zin(-angle);
-     f.y=fxb*zin(-angle)-f.y*coz(-angle);
-     return f;
-    }
     vec3 balloons(vec2 p){
         vec3 balloon=vec3(0.);
-        vec2 vUvCentered =vUv-.5;
+        
         float sizeReset = 0.;
         if (balloonsON==-1.)sizeReset=120.;
-          float x =  length((vUvCentered)*max(resolution.x,resolution.y)/resolution.yx);
-              float increment =note*balloonsON +48.+ twistStar - x*48.;
-              //increment*=2.;
+          float x =  length((vUv-.5)*max(resolution.x,resolution.y)/resolution.yx);
+              float increment =note*balloonsON+12. + twistStar + x*24.;
+              increment*=2.;
           //  float increment = mod(log(mod(note*flipStar+twistStar,12.)+x*24.)/log(pow(2.,1./12.)),24.);
-         vec2 spinningSpiraloon  =  spin2(vUvCentered,time*PI*4.);
-           if(abs(mod(increment+atan(spinningSpiraloon.x,spinningSpiraloon.y)/(2.*PI)*balloonsON,1.)-.1)<length(1.-x)/(increment+sizeReset)*28.)balloon=hsv2rgb(vec3((mod((4.-increment)*balloonsON+twistStar,12.))/12.,.5,1.));
+           if(abs(mod(increment,1.)-.1)<length(x)/(increment+sizeReset)*43.)balloon=hsv2rgb(vec3((mod(4.-increment+twistStar,12.))/12.,.5,1.));
             
         return balloon;
     }
@@ -1710,10 +1668,9 @@ vec3 faceFORWARD(vec2 p,vec2 t){
         vec4 starship = vec4(0.);
         float recenter = 0.;
         float rescale = 1./3.;
-        vec2  starshipLOOKUP = ((vUv-.5)+vec2(0.,recenter))*rescale+.5;//starship may not be an improvement, try with disabled below
-         /* if (starshipLOOKUP.x<1.&&starshipLOOKUP.y<1.&&starshipLOOKUP.x>0.&&starshipLOOKUP.y>0.)starship = texture2D(STAR,starshipLOOKUP);
-          if (starship.x==0.&&starship.y==0.&&starship.z==0.)starship=vec4(1.);//s
-          */
+        vec2  starshipLOOKUP = ((vUv-.5)+vec2(0.,recenter))*rescale+.5;
+          if (starshipLOOKUP.x<1.&&starshipLOOKUP.y<1.&&starshipLOOKUP.x>0.&&starshipLOOKUP.y>0.)starship = texture2D(STAR,starshipLOOKUP);
+          if (starship.x==0.&&starship.y==0.&&starship.z==0.)starship=vec4(1.);
         float timeDilated = time*10.;
          p=(mod(timeDilated,1.)-.5)*abs(p)+length(vec2(length(starship.xy),starship.z));
             p=vec2(p.x,abs(p.y));
@@ -1730,11 +1687,19 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                 s=-vec2(s.y/((s.y/(s.y-s.x)*love3-(s.y))), -pow(abs(s.y/(s.y/(s.x-s.y)*love3-s.y*love2)),2.*1./love3));//this is {s=s^2-p;s.real=-1./s.real}
         float centralPowerInverter=(s.x/s.y)*sign(s.x*s.y)*2.618;
             //I was studying this function without the face and a power short ocurred and on firefox window restore and caused a semi-reversion hybridization
-        l=1.;// / //1.-
-           // centralPowerInverter;
+        l=1./ //1.-
+            centralPowerInverter;
         return vec3(vec2((s.x*love1),abs(s.y*love2)),vec2(s.x*s.x*love1)*l);
     }
 
+                vec2 spin2(vec2 f, float t)
+                {    //https://en.wikipedia.org/wiki/Rotation_matrix
+                    float angle =t;
+                    float fxb=f.x;
+                    f.x=-f.x*coz(-angle)-f.y*zin(-angle);
+                 f.y=fxb*zin(-angle)-f.y*coz(-angle);
+                 return f;
+                }
     
 
 vec3 sealedMan(vec2 p,vec2 t)
@@ -1837,7 +1802,7 @@ float lfc = length(freed(coords));
    
 float precores = .25/log(.5);
 
-//if(morph!=0.)precores=precores-3./log(.5);
+if(morph!=0.)precores=precores-3./log(.5);
 if(refactorCores!=1.)precores=-.0;
 
 float cored =0.;
@@ -1857,7 +1822,7 @@ vec2 s=p;
 float c = length(s);
 
 float coresIn = 0.;
-const float crs = 57.;//this is the mandelbrot and original inheritance colormode core range
+const float crs = 59.;//this is the mandelbrot and original inheritance colormode core range
 // if(c>4./3.){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
  float centerslide = 0.;
 
@@ -1966,7 +1931,7 @@ float equilibriator = 1.;
 //if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
    hyperCore*=equilibriator;
    
-     hyperCore-=.25/log(.5)/equilibriator;
+   //   hyperCore+=.25/log(.5)/equilibriator;
     if(cloverSlide&&wheel)hyperCore+=1.75/log(.5);
 
    else if(cloverSlide||wheel)hyperCore+=1./log(.5);
@@ -1986,10 +1951,8 @@ hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if d
 
 vec2 m=vec2(0.);
 
-float truncator=1.;
-if(lfc!=0.) truncator = log(zoom/lfc)*100.;
 //Maendel clover
-if(wheel)m =  ((pWithoutChiralizer/lfc*(1.-1./leaf)/truncator)*truncator-coords.yx//try signs with for fibonacci ring pairing and movement distortion #syyym
+if(wheel)m =  (pWithoutChiralizer/lfc-coords.yx//try signs with for fibonacci ring pairing and movement distortion #syyym
 )*abs(coresIn/crs*2.-1.);
 //this is essentially just p as in the mandelbrot x <== x^2+
 
@@ -2007,16 +1970,13 @@ vec3 beta =vec3(1.);
 
 
 float dstnce = length(s);//"distance" may be reserved keyword
-t*=.74;
+
 float coreBooster=0.;
+float truncator=1.;
+if(lfc!=0.) truncator = log(zoom/lfc);
 float metaCoreDriveFactor =(((1.-leaf)/truncator)*truncator)/gr;//.324717.... number of places changes appearance
-float spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf))/truncator)*truncator*1.5;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
-
 float hyperCoreOUTPUT =hyperCore*log(2.)/log(metaCoreDriveFactor)+loops;
-                             hyperCoreOUTPUT-=petals;//upcore for higher omniclover counts
-
 float hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
-
 float colorShift = 0.;
 vec2 multCrossTwist=vec2(0.);
 if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
@@ -2039,11 +1999,11 @@ if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
                              *4./3./(1./log(3.)+(1.-1./log(3.)  ))/1.75
                              )*log(2.)/log(metaCoreDriveFactor)+loops;
                              */
-if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
-else      for (float counter=0.;counter<iterations;counter++)if(abs(s.y)<50.){
+if(zoom<.00000075)  s = uber.xy;//engage super duper core!
+else      for (float counter=0.;counter<iterations;counter++)if(dstnce<50.){
 
     float OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
-    float OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
+    float OmniPetal =OmniDynamicPetalShift*(petals+6./6.);
     
   float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(loops+counter)/40.,0.)).x;
 
@@ -2135,15 +2095,17 @@ vec2 lastS = s;
    
 
 if(Spoker){
+    float spoke_factor =metaCoreDriveFactor;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
+
    if(1.<=hyperCoreBoosted)
                          {
                              
                          if(wheel){
                              s/=2.;
                              
-                             hyperCoreOUTPUT-=log(spoke_factor/1.5);
+                             hyperCoreOUTPUT-=log(spoke_factor/2.);
 
-                             hyperCoreBoosted-=log(spoke_factor/1.5);
+                             hyperCoreBoosted-=log(spoke_factor/2.);
                              }
                          else{
                              
@@ -2157,8 +2119,8 @@ if(Spoker){
         else  {
             
                 if(wheel){
-            hyperCoreOUTPUT+=log(spoke_factor/1.5);
-            hyperCoreBoosted+=log(spoke_factor/1.5);
+            hyperCoreOUTPUT+=log(spoke_factor/2.);
+            hyperCoreBoosted+=log(spoke_factor/2.);
             }
                 else{
             hyperCoreOUTPUT+=spoke_factor;
@@ -2184,18 +2146,17 @@ dstnce = length(s);
                              //              s*=refactorCores;c*=refactorCores;
                              
                              
-                             if(petals!=0.&&dstnce<4./3.)s=spin2(s,atan(s.y,s.x)*(petals)/6.);
+                             if(dstnce<4./3.)s=spin2(s,atan(s.y,s.x)*(petals)/6.);
 
 for(int i=0;i<40; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER&& 0.<=hyperCoreBoosted)
 {
 //if(i==0){float b = ;s*=b;dstnce*b;}
- s*=metaCoreDriveFactor;dstnce*=metaCoreDriveFactor;
- hyperCoreBoosted--;loops++;
+ s*=metaCoreDriveFactor;dstnce*=metaCoreDriveFactor;hyperCoreBoosted--;loops++;
  
 
 OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
-OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
+OmniPetal =OmniDynamicPetalShift*(petals+6./6.);
 
   if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spin2(s,atan(s.y,s.x)*OmniPetal);
 
@@ -2238,10 +2199,9 @@ else{
  break;
  }
 
-hyperCoreBoosted--;
-hyperCoreOUTPUT--;
                              colorShift+=hyperCoreBoosted;
-                             
+                             hyperCoreBoosted--;
+                             hyperCoreOUTPUT--;
 
 }else break;
                   
@@ -2970,7 +2930,7 @@ vec3 sevenPillars(vec2 p){
     p.x-=screenBase;
     if(p.x<pillarHeight)
     {
-        const float pillarDepth = 3333.;
+        const float pillarDepth = 333333.;
        float pillars=0.;
        if (p.x>0.) pillars = totalAmp*pillarDepth;
        else pillars = (1./totalAmp);
@@ -3259,14 +3219,11 @@ if(starOnDot>=1){
                                  
                                  vec3 pillar = vec3(0.);
                                  pillar = sevenPillars(vUv.yx-vec2(0.,.5));
-                                 
-                        float shipSUM = starship.x+starship.y+starship.z;
+                       
                                  vec3 hypnoticHarmonicCircles = vec3(0.);
-                                 if(balloonsON!=0.)
-                                 {
-                                    if(maxColorOfStarship!=1.) hypnoticHarmonicCircles=clamp(balloons(p)-shipSUM,0.,1.);
-                                    else hypnoticHarmonicCircles=balloons(p);
-                                }
+                                 if(balloonsON!=0.)hypnoticHarmonicCircles=balloons(p);
+                           
+                                
 if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
                                       -vec4(vec3(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z),0.),0.,1.);
@@ -3275,7 +3232,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                        vec3 awayFromTree =  vec3(-(ARTICLE.x+ARTICLE.y+ARTICLE.z)*4.
                     -(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z)*4.
                        -(bridge.x+bridge.y+bridge.z)*4.
-                       -(shipSUM)/maxColorOfStarship*starship.w*.5
+                       -(starship.x+starship.y+starship.z)/maxColorOfStarship*starship.w*.5
                                   
                        -(DOTstarship.x+DOTstarship.y+DOTstarship.z)/DOTmaxColorOfStarship*.5*DOTstarship.w
                       -(StaRivers.r+StaRivers.g+StaRivers.b)*StaRivers.w
@@ -3305,7 +3262,6 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
 
 </script>
 <script src="loadMicrophone.js"></script>
-
 <script src="starshipMod.js"></script>
 <script src="hotkeys.js"></script>
 <script src="bigTreeOfLife.js"></script>
