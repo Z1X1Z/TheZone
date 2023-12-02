@@ -1966,7 +1966,7 @@ float equilibriator = 1.;
 //if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
    hyperCore*=equilibriator;
    
-    //  hyperCore-=.5/log(.5)/equilibriator;
+     hyperCore-=.25/log(.5)/equilibriator;
     if(cloverSlide&&wheel)hyperCore+=1.75/log(.5);
 
    else if(cloverSlide||wheel)hyperCore+=1./log(.5);
@@ -1987,7 +1987,7 @@ hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if d
 vec2 m=vec2(0.);
 
 float truncator=1.;
-if(lfc!=0.) truncator = log(zoom/lfc)*10000.;
+if(lfc!=0.) truncator = log(zoom/lfc)*100.;
 //Maendel clover
 if(wheel)m =  ((pWithoutChiralizer/lfc*(1.-1./leaf)/truncator)*truncator-coords.yx//try signs with for fibonacci ring pairing and movement distortion #syyym
 )*abs(coresIn/crs*2.-1.);
