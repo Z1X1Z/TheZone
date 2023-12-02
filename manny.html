@@ -671,8 +671,8 @@ coreData.fill(coringValue);">
                                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                                  <label for="Continuum Clover">Continuum Clover!</label><br>
                                  <a id="ReFactor" name="t"  onclick= "
-                                     key  = 'r';
-                                     callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'keyCode':key.charCodeAt(0)}));">
+                                     key  = '8';
+                                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                                  ReFactor Clover!</a><br>
                                  </div>
           </button>
@@ -681,14 +681,9 @@ coreData.fill(coringValue);">
                                <div class="dropdown">
                                  <button class="dropbtn">Clvr2
                                  <div  id="m4" class="dropdown-content">
-                                     <label for="Base Number">Log this of x^3 (maybe 1.5-4:</label>
-                                    <input type="number" id="Base Number" name="Base Number" class="num" onkeydown="uniforms.baseN.value=document.getElementById('Base Number').value">
-                                        </br>
-                                        
-                                             <input type="checkbox" id="duperCore" name="t"  onclick= "
-                                                 key  = 'd';
-                                                 callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
-                                              <label for="duperCore">Duper Core!</label><br>
+                                  <label for="Base Number">Log this of x^3 (maybe 1.5-4:</label>
+                                 <input type="number" id="Base Number" name="Base Number" class="num" onkeydown="uniforms.baseN.value=document.getElementById('Base Number').value">
+                                     </p>
                        
                                  
                 <form>
@@ -794,8 +789,8 @@ coreData.fill(coringValue);">
                      Cycle character!</a><br>
                  
             <a id="Music Angel Man" name="t"  onclick= "
-                key  = 'a';
-                callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                key  = '7';
+                callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                 Music Angel Man!</a><br>
                  <a id="Metronome Up" name="t"  onclick= "
                      key  = '>';
@@ -1215,11 +1210,9 @@ ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
     <script id="wipeFragmentShader" type="x-shader/x-fragment">
         varying vec2 vUv;
         uniform sampler2D cloverSampler;
-        uniform vec2 resolution;
+        
        void main(){
-          //  gl_FragColor=texture2D(cloverSampler, vUv);
-            gl_FragColor=texture(cloverSampler, vUv);
-
+            gl_FragColor=texture2D(cloverSampler, vUv);;
         }
         </script>
 
@@ -1301,7 +1294,6 @@ void main(){
     uniform sampler2D EDEN;
     uniform sampler2D coreTextureSampler;
     uniform sampler2D omniDynamic;
-    uniform sampler2D uberDuper;
 
     uniform int eden;
 
@@ -1340,8 +1332,6 @@ void main(){
     uniform int starOnDot;
     uniform vec2 dotCoord;
     uniform vec2 d;
-    uniform vec2 coordSHIFT;
-    uniform float duperZoom;
 
     uniform vec2 resolution;
 
@@ -1785,16 +1775,9 @@ return vec3(l+b+r+h);}
                                   
                             
 vec3 tol(vec2 p, vec2 t){
-                        vec2 resCale = (resolution.yx/max(resolution.x,resolution.y));
-                     vec3 uber    = texture2D(uberDuper,(
-                        ((vUv-.5)/resCale*zoom/duperZoom
-                         -coordSHIFT)*resCale+.5
-                                              )
-                        ).xyz;
-                        
                          vec2 pWithoutChiralizer = p;
                          if(chirality==-1){p=p.yx;}
-vec2 colorAccumulator =vec2(1.);
+vec2 colorAccumulator =vec2(0.);
 vec3 heartColors = vec3(0.);
 float lfc = length(freed(coords));
 
@@ -1925,7 +1908,6 @@ if(MetaCored)hyperCore=
     
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 
-//cored/1.5+log(length(coordSHIFT))*logStabilizationConstant+uber.z;
 //float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
 float equilibriator = 1.;
 //if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
@@ -1991,17 +1973,8 @@ if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
                           
                           
                           
-                             //if(zoom<.00000075)
-                             //if(zoom<.00000075)
-                        /*  hyperCoreBoosted=uber.z+
-                            (
-                             log(duperZoom)/log(.5)*2./3.+log(length(coordSHIFT))
-                             *4./3./(1./log(3.)+(1.-1./log(3.)  ))/1.75
-                             )*log(2.)/log(metaCoreDriveFactor)+loops;
-                             */
-if(zoom<.00000075)  s = uber.xy;//engage super duper core!
-else      for (float counter=0.;counter<iterations;counter++)if(dstnce<50.){
-
+                          
+for (float counter=0.;counter<iterations;counter++)if(dstnce<50.){
     float OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
     float OmniPetal =OmniDynamicPetalShift*(petals+6./6.);
     
@@ -2094,40 +2067,43 @@ vec2 lastS = s;
    //traditionally be e or 3 probably 1.5 to 4
    
 
-if(Spoker){
-    float spoke_factor =metaCoreDriveFactor;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
+       float spoke_delimiter = (1.+pow(metaCoreDriveFactor-1.,1./(2.+.47805268028830/2.)))/2.;
+       float spokeShift =spoke_delimiter*logStabilizationConstant;
 
-   if(1.<=hyperCoreBoosted)
-                         {
-                             
-                         if(wheel){
-                             s/=2.;
-                             
-                             hyperCoreOUTPUT-=log(spoke_factor/2.);
+    if(Spoker&&1.<=hyperCoreBoosted)
+        {
+                                 dstnce = length(s);
+                     if(wheel){
+                                 s/=2.;
+                          
+                                 hyperCoreOUTPUT-=log(spoke_delimiter);
 
-                             hyperCoreBoosted-=log(spoke_factor/2.);
-                             }
-                         else{
+                                 hyperCoreBoosted-=log(spoke_delimiter);
+                                
+                                 }
                              
-                          s/=spoke_factor;//engage spokelover s/=2.+'superspokes'
-                         
-                         hyperCoreOUTPUT-=spoke_factor;
-
-                         hyperCoreBoosted-=spoke_factor;
-                         }
-                         }
-        else  {
+                     else{
+                                 
+                              s/=spoke_delimiter*logStabilizationConstant;//engage spokelover s/=2.+'superspokes'
             
-                if(wheel){
-            hyperCoreOUTPUT+=log(spoke_factor/2.);
-            hyperCoreBoosted+=log(spoke_factor/2.);
+                             hyperCoreOUTPUT-=spokeShift;//the 1.1 is just sort of interesting
+
+                             hyperCoreBoosted-=spokeShift;
+                            
+                     }
             }
-                else{
-            hyperCoreOUTPUT+=spoke_factor;
-            hyperCoreBoosted+=spoke_factor;
+            else  {
+                
+                    if(wheel){
+                hyperCoreOUTPUT+=log(spoke_delimiter);
+                hyperCoreBoosted+=log(spoke_delimiter);
+                }
+                    else{
+                hyperCoreOUTPUT+=spokeShift;
+                hyperCoreBoosted+=spokeShift;
+                }
             }
-            }
-}
+
    
    if(spokelover&&counter<hyperCoreBoosted){
         if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
@@ -2204,7 +2180,6 @@ else{
                              hyperCoreOUTPUT--;
 
 }else break;
-                  
 ///if(multiplicatorNexus)s*=colorShift/88.8;
 vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                      if(colorCombo==-7) o=vec3(s.y,s.x/9.5,1.-s.x/12.);
@@ -3264,7 +3239,6 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
 <script src="loadMicrophone.js"></script>
 <script src="starshipMod.js"></script>
 <script src="hotkeys.js"></script>
-<script src="bigTreeOfLife.js"></script>
 
     </body>
 </html>
