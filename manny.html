@@ -1829,7 +1829,7 @@ vec3 tol(vec2 p, vec2 t){
                         
                          vec2 pWithoutChiralizer = p;
                          if(chirality==-1){p=p.yx;}
-vec2 colorAccumulator =vec2(0.);
+vec2 colorAccumulator =vec2(1.);
 vec3 heartColors = vec3(0.);
 float lfc = length(freed(coords));
 
@@ -2109,7 +2109,7 @@ vec2 lastS = s;
        );
       // if (mod(counter,5.) == 4.)s =pCenterCored;
        //x**3
-       if(clvrVariant4)  s*=1.75;
+       /*if(clvrVariant4)  s*=1.75;
        if(clvrVariant5) s = vec2(pow(s.x,-2.),pow(s.y,-2.));
       if(clvrVariant6)s=s-lastS.yx;
         if(clvrVariant7)s+=pcs;
@@ -2118,7 +2118,7 @@ vec2 lastS = s;
       if(clvrVariant1)  s*=length(lastS);
       if(clvrVariant2)s -=zoom/coords.yx;
       if(clvrVariant3)s-=pCenterCored*dstnce;
-
+*/
    
        if(dotted)s/=dot(-m,t)*dot(m,-t);
 
