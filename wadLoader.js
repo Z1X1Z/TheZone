@@ -83,7 +83,7 @@ function initialize(){
     catch{
 }
    
-    
+    attachPointerActions();
     wadLOADED=true;
 }
 
@@ -180,7 +180,7 @@ function followSound(e){
         }
         let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
         let angleSound = Math.atan2(y,x);
-        angleSound=((angleSound-initialAngleSound[id])+pi/2.+8.*pi)%(2*pi)*window.flip+initialAngleSound[id];
+        angleSound=(((angleSound-initialAngleSound[id])+8.*pi)%(2*pi)+pi/2.)*window.flip+initialAngleSound[id];
         let frequency = Math.pow(2.,((angleSound/pi/2*12)-window.twist*window.flip/2.+correction)/12.)*window.ConcertKey;
                //                  console.log(Math.pow(2.,((angleSound/pi/2*12)-window.twist*window.flip/2.+correction)/12.))
         if(isFinite(frequency)&&frequency>0.&&
@@ -225,70 +225,50 @@ let c = document.body;//document.getElementById("container")
         else if (event.pressure === .5) pressure = 1;
         else pressure = event.pressure;
     }
-let playing =
                                
-                                 c.addEventListener('pointerdown', function(e)
-                                 {
+                                 function attachPointerActions(){
+            c.addEventListener('pointerdown', function(e)
+                               {
+                
+                
+                //   e.stopImmediatePropagation();          //e.preventDefault();
+                touchNumber.set(e.pointerId,cycle);
+                cycle=(cycle+1)%10
+                getPressure(e);
+                startSound(e);
+                
+            }, false);
+            c.addEventListener('pointermove', function(e) {
+                let tn = touchNumber.get(e.pointerId)
+                if(typeof tn == "number"){
+                    getPressure(e);
+                    followSound(e);
+                }
+                // e.stopImmediatePropagation();// e.preventDefault();
+            }, false);
             
-
-                                  //   e.stopImmediatePropagation();          //e.preventDefault();
-                                         touchNumber.set(e.pointerId,cycle);
-                                         cycle=(cycle+1)%10
-                                         getPressure(e);
-                                         startSound(e);
-
-                                 }, false);
-                             c.addEventListener('pointermove', function(e) {
-            let tn = touchNumber.get(e.pointerId)
-                                 if(typeof tn == "number"){
-                                     getPressure(e);
-                                     followSound(e);
-                                 }
-                                // e.stopImmediatePropagation();// e.preventDefault();
-                             }, false);
-
-                             c.addEventListener('pointerup', function(e){
-                                     window.pointerZoom=false;
-            
-let tn = touchNumber.get(e.pointerId)
+            c.addEventListener('pointerup', function(e){
+                window.pointerZoom=false;
+                
+                let tn = touchNumber.get(e.pointerId)
                 if(typeof tn == "number" ){                                         {
-                                             let tn = touchNumber.get(e.pointerId);
+                    let tn = touchNumber.get(e.pointerId);
                     sound[tn].stop();sound2[tn].stop();
                     zound[tn].stop();zound2[tn].stop();
                     xound[tn].stop();xound2[tn].stop();
                     tound[tn].stop();tound2[tn].stop();
-                                         }
-                                     }
-                                     //e.preventDefault(); e.stopImmediatePropagation();
-                                 }
-                                     , false);
-
-                                 c.addEventListener('pointercancel', function(e){
-                                     window.pointerZoom=false;
+                }
+                }
+                //e.preventDefault(); e.stopImmediatePropagation();
+            }
+                               , false);
             
-                                    let tn = touchNumber.get(e.pointerId);
-                                    if(typeof tn == "number" ){
-                                         let tn = touchNumber.get(e.pointerId)
-                                        sound[tn].stop();
-                                        sound2[tn].stop();
-                                        zound[tn].stop();
-                                        zound2[tn].stop();
-                                        
-                                        xound[tn].stop();
-                                        xound2[tn].stop();
-                                        tound[tn].stop();
-                                        tound2[tn].stop();
-                                     
-                                         //e.preventDefault(); e.stopImmediatePropagation();
-                                     }
-                                 }, false);
-                                 
-                                 c.addEventListener('pointerleave', function(e){
-                                     window.pointerZoom=false;
-            
-let tn = touchNumber.get(e.pointerId)
-                if(typeof tn == "number"){
-                                         let tn = touchNumber.get(e.pointerId)
+            c.addEventListener('pointercancel', function(e){
+                window.pointerZoom=false;
+                
+                let tn = touchNumber.get(e.pointerId);
+                if(typeof tn == "number" ){
+                    let tn = touchNumber.get(e.pointerId)
                     sound[tn].stop();
                     sound2[tn].stop();
                     zound[tn].stop();
@@ -298,7 +278,28 @@ let tn = touchNumber.get(e.pointerId)
                     xound2[tn].stop();
                     tound[tn].stop();
                     tound2[tn].stop();
+                    
+                    //e.preventDefault(); e.stopImmediatePropagation();
+                }
+            }, false);
+            
+            c.addEventListener('pointerleave', function(e){
+                window.pointerZoom=false;
                 
-                                         //e.preventDefault(); e.stopImmediatePropagation();
-                                     }
-                                 }, false);
+                let tn = touchNumber.get(e.pointerId)
+                if(typeof tn == "number"){
+                    let tn = touchNumber.get(e.pointerId)
+                    sound[tn].stop();
+                    sound2[tn].stop();
+                    zound[tn].stop();
+                    zound2[tn].stop();
+                    
+                    xound[tn].stop();
+                    xound2[tn].stop();
+                    tound[tn].stop();
+                    tound2[tn].stop();
+                    
+                    //e.preventDefault(); e.stopImmediatePropagation();
+                }
+            }, false);
+        }
