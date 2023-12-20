@@ -83,7 +83,7 @@ function initialize(){
     catch{
 }
    
-    
+    attachListeners();
     wadLOADED=true;
 }
 
@@ -103,7 +103,7 @@ function startSound(e){
     let twistSQUAREtoTRIANGLE = 1.;
     let twistZINEtoSAW = 1.;
     let twistSAWtoZINE = 1.;
-    if(event.twist!=0)
+    if(event.twist!=0)//untested
     {
         twistTRIANGLEtoSQUARE= Math.atan(y,x)/Math.PI-event.twist/360;
         twistSQUAREtoTRIANGLE = 1.-twistTRIANGLEtoSQUARE;
@@ -226,68 +226,49 @@ let c = document.body;//document.getElementById("container")
         else pressure = event.pressure;
     }
                                
-                                 c.addEventListener('pointerdown', function(e)
-                                 {
+ function attachListeners(){
+            c.addEventListener('pointerdown', function(e)
+                               {
+                
+                
+                //   e.stopImmediatePropagation();          //e.preventDefault();
+                touchNumber.set(e.pointerId,cycle);
+                cycle=(cycle+1)%10
+                getPressure(e);
+                startSound(e);
+                
+            }, false);
+            c.addEventListener('pointermove', function(e) {
+                let tn = touchNumber.get(e.pointerId)
+                if(typeof tn == "number"){
+                    getPressure(e);
+                    followSound(e);
+                }
+                // e.stopImmediatePropagation();// e.preventDefault();
+            }, false);
             
-
-                                  //   e.stopImmediatePropagation();          //e.preventDefault();
-                                         touchNumber.set(e.pointerId,cycle);
-                                         cycle=(cycle+1)%10
-                                         getPressure(e);
-                                         startSound(e);
-
-                                 }, false);
-                             c.addEventListener('pointermove', function(e) {
-            let tn = touchNumber.get(e.pointerId)
-                                 if(typeof tn == "number"){
-                                     getPressure(e);
-                                     followSound(e);
-                                 }
-                                // e.stopImmediatePropagation();// e.preventDefault();
-                             }, false);
-
-                             c.addEventListener('pointerup', function(e){
-                                     window.pointerZoom=false;
-            
-let tn = touchNumber.get(e.pointerId)
+            c.addEventListener('pointerup', function(e){
+                window.pointerZoom=false;
+                
+                let tn = touchNumber.get(e.pointerId)
                 if(typeof tn == "number" ){                                         {
-                                             let tn = touchNumber.get(e.pointerId);
+                    let tn = touchNumber.get(e.pointerId);
                     sound[tn].stop();sound2[tn].stop();
                     zound[tn].stop();zound2[tn].stop();
                     xound[tn].stop();xound2[tn].stop();
                     tound[tn].stop();tound2[tn].stop();
-                                         }
-                                     }
-                                     //e.preventDefault(); e.stopImmediatePropagation();
-                                 }
-                                     , false);
-
-                                 c.addEventListener('pointercancel', function(e){
-                                     window.pointerZoom=false;
+                }
+                }
+                //e.preventDefault(); e.stopImmediatePropagation();
+            }
+                               , false);
             
-                                    let tn = touchNumber.get(e.pointerId);
-                                    if(typeof tn == "number" ){
-                                         let tn = touchNumber.get(e.pointerId)
-                                        sound[tn].stop();
-                                        sound2[tn].stop();
-                                        zound[tn].stop();
-                                        zound2[tn].stop();
-                                        
-                                        xound[tn].stop();
-                                        xound2[tn].stop();
-                                        tound[tn].stop();
-                                        tound2[tn].stop();
-                                     
-                                         //e.preventDefault(); e.stopImmediatePropagation();
-                                     }
-                                 }, false);
-                                 
-                                 c.addEventListener('pointerleave', function(e){
-                                     window.pointerZoom=false;
-            
-let tn = touchNumber.get(e.pointerId)
-                if(typeof tn == "number"){
-                                         let tn = touchNumber.get(e.pointerId)
+            c.addEventListener('pointercancel', function(e){
+                window.pointerZoom=false;
+                
+                let tn = touchNumber.get(e.pointerId);
+                if(typeof tn == "number" ){
+                    let tn = touchNumber.get(e.pointerId)
                     sound[tn].stop();
                     sound2[tn].stop();
                     zound[tn].stop();
@@ -297,7 +278,28 @@ let tn = touchNumber.get(e.pointerId)
                     xound2[tn].stop();
                     tound[tn].stop();
                     tound2[tn].stop();
+                    
+                    //e.preventDefault(); e.stopImmediatePropagation();
+                }
+            }, false);
+            
+            c.addEventListener('pointerleave', function(e){
+                window.pointerZoom=false;
                 
-                                         //e.preventDefault(); e.stopImmediatePropagation();
-                                     }
-                                 }, false);
+                let tn = touchNumber.get(e.pointerId)
+                if(typeof tn == "number"){
+                    let tn = touchNumber.get(e.pointerId)
+                    sound[tn].stop();
+                    sound2[tn].stop();
+                    zound[tn].stop();
+                    zound2[tn].stop();
+                    
+                    xound[tn].stop();
+                    xound2[tn].stop();
+                    tound[tn].stop();
+                    tound2[tn].stop();
+                    
+                    //e.preventDefault(); e.stopImmediatePropagation();
+                }
+            }, false);
+        }

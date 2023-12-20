@@ -194,8 +194,8 @@ var m= new THREE.Vector2(0.,0.);
     var truncator=1.;
     if(lfc!=0.) truncator = Math.log(zoom/lfc)/10000.;
 //Maendel clover
-if(wheel)m =  pWithoutChiralizer.clone().divideScalar(lfc*((1.-1./leaf)/truncator)*truncator).sub(new THREE.Vector2(coords.y,coords.x))//try signs with for fibonacci ring pairing and movement distortion #syyym
-.multiplyScalar(Math.abs(coresIn/crs*2.-1.));
+if(wheel)m =  pWithoutChiralizer.clone().sub(new THREE.Vector2(coords.y,coords.x))//try signs with for fibonacci ring pairing and movement distortion #syyym
+.multiplyScalar(Math.abs(coresIn/crs*2.-1.)).divideScalar(.25);
 //this is essentially just p as in the mandelbrot x <== x^2+
 
 var iterations = 100.;//loops all escape delimiter so iterations aren't used unless needed
@@ -284,7 +284,7 @@ else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (withou
 s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
 //traditionally be e or 3 probably 1.5 to 4
 
-    if(Spoker){
+    if(Spoker&&morph==0.){
         
         if(1.<=hyperCoreBoosted)
         {

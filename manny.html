@@ -1990,8 +1990,9 @@ vec2 m=vec2(0.);
 float truncator=1.;
 if(lfc!=0.) truncator = log(zoom/lfc)/10000.;//log truncation * factor is not known
 //Maendel clover
-if(wheel)m =  ((pWithoutChiralizer/lfc*(1.-1./leaf)/truncator)*truncator-coords.yx//try signs with for fibonacci ring pairing and movement distortion #syyym
-)*abs(coresIn/crs*2.-1.);
+if(wheel)m =  ((pWithoutChiralizer/lfc)-coords.yx//try signs with for fibonacci ring pairing and movement distortion #syyym
+)*abs(coresIn/crs*2.-1.)
+                            *.25;//uncertain term
 //this is essentially just p as in the mandelbrot x <== x^2+
 
                             const float iterations = 100.;//loops all escape delimiter so iterations aren't used unless needed
@@ -2137,7 +2138,7 @@ vec2 lastS = s;
    //traditionally be e or 3 probably 1.5 to 4
    
 
-if(Spoker){
+if(Spoker&&morph==0.){
    if(1.<=hyperCoreBoosted)
                          {
                              
