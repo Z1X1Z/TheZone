@@ -47,7 +47,7 @@ var lfc = coords.length();//freed(coords).length();
 
 var precores = .25/Math.log(.5);
 
-//if(morph!=0.)precores=precores-3./Math.log(.5);
+if(morph!=0.)precores=precores-3./Math.log(.5);
 if(refactorCores!=1.)precores=-.0;
 
 var cored =0.;
@@ -206,7 +206,7 @@ var continuumCounter=0.;
 var minToMax=Math.min(resolution.x,resolution.y)/Math.max(resolution.x,resolution.y);
 
 var dstnce = s.length();//"distance" may be reserved keyword
-t.multiplyScalar(.74);
+//t.multiplyScalar(.74);
 var coreBooster=0.;
 var metaCoreDriveFactor =(((1.-leaf)**.5/truncator)*truncator)**2./gr;//.324717.... number of places changes appearance
 var   spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf))/truncator)*truncator*1.5;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
@@ -243,7 +243,7 @@ if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
 
 // if(!true&&morph<.5)CORE_DELIMITER=1./dstnce*pow(2.,4./12.)*equilibriator;
 
-if(spirated!=0.&&dstnce<CORE_DELIMITER)  //works well<(n-1)/n
+if(spirated!=0.&&dstnce<2./3.)//CORE_DELIMITER)  //works well<(n-1)/n
 s.multiplyScalar( dstnce*2.*Math.PI/(Math.atan(s.y,s.x)-Math.PI*spirated));
 dstnce = s.length();
 
@@ -284,40 +284,46 @@ else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (withou
 s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
 //traditionally be e or 3 probably 1.5 to 4
 
-    if(Spoker&&morph==0.){
-        
-        if(1.<=hyperCoreBoosted)
-        {
-            if(wheel){
-                s.divideScalar(2.);
-                
-                hyperCoreOUTPUT-=Math.log(spoke_factor/1.5);
-                
-                hyperCoreBoosted-=Math.log(spoke_factor/1.5);
+        if(Spoker){
+            if(morph==0.){
+                if(1.<=hyperCoreBoosted)
+                {
+                    if(wheel){
+                        s.divideScalar(2.);
+                        
+                        hyperCoreOUTPUT-=Math.log(spoke_factor/1.5);
+                        
+                        hyperCoreBoosted-=Math.log(spoke_factor/1.5);
+                    }
+                    else{
+                        
+                        s.divideScalar(spoke_factor);//engage spokelover s/=2.+'superspokes'
+                        
+                        hyperCoreOUTPUT-=spoke_factor;
+                        
+                        hyperCoreBoosted-=spoke_factor;
+                    }
+                }
+                else  {
+                    
+                    if(wheel){
+                        hyperCoreOUTPUT+=Math.log(spoke_factor/1.5);
+                        hyperCoreBoosted+=Math.log(spoke_factor/1.5);
+                    }
+                    else{
+                        hyperCoreOUTPUT+=spoke_factor;
+                        hyperCoreBoosted+=spoke_factor;
+                    }
+                }
             }
-            else{
-                
-                s.divideScalar(spoke_factor);//engage spokelover s/=2.+'superspokes'
-                
+            else
+            {
                 hyperCoreOUTPUT-=spoke_factor;
                 
                 hyperCoreBoosted-=spoke_factor;
             }
-        }
-        else  {
             
-            if(wheel){
-                hyperCoreOUTPUT+=Math.log(spoke_factor/1.5);
-                hyperCoreBoosted+=Math.log(spoke_factor/1.5);
-            }
-            else{
-                hyperCoreOUTPUT+=spoke_factor;
-                hyperCoreBoosted+=spoke_factor;
-            }
         }
-    }
-    
-
 if(spokelover&&counter<hyperCoreBoosted){
 if(continuumClover) s.multiplyScalar( Math.sqrt(2.));//engage shiny spokelover
 else s.divideScalar( Math.sqrt(2.));
