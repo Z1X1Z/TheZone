@@ -1426,15 +1426,18 @@ function runOSMD (){
 if( !window.touchMode&&!window.touchOnlyMode) {
 
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
-           if(window.volumeSpeed)
+           if(window.volumeSpeed&&on)
            {
-                    lastVolume=volume;
-               volume = totalAMP+(1./bufferSize);//uses totalAMP hence bufferSize not fractionOfFrame
-               volume =volume*audioX.sampleRate/bufferSize;
+                   if(lastVolume!=0.) lastVolume=volume;
+               volume = totalAMP*audioX.sampleRate/bufferSize/2.;
+               if(lastVolume==0.) lastVolume=volume;
+
                        }
            else {volume=1.; lastVolume=1.; }
     
+    console.log(volume)
     move();
+
     if(!zoomAtl41)zoomRoutine();
     infinicore();
     spiral_compress();
