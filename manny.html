@@ -375,6 +375,11 @@ let maxLetterDepth=-1;
                    key  = 'b';
                    callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
                    Harmonic Balloons!</a><br>
+               <a id="balloonsExponential" name="t"  onclick= "
+
+                   key  = 'n';
+                   callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                   Harmonic Balloons Exponential!</a><br>
                <a id="Star Stream" name="t"  onclick= "
 
                    key  = 'V';
@@ -1345,6 +1350,7 @@ void main(){
     uniform bool fieldPowerBoostMeta;
     uniform bool helm;
     uniform float balloonsON;
+    uniform float balloonsONexponential;
     uniform bool sparklesON;
     uniform bool SPHEREofTheLORD;
     uniform float note;
@@ -1694,14 +1700,18 @@ vec3 faceFORWARD(vec2 p,vec2 t){
         vec3 balloon=vec3(0.);
         vec2 vUvCentered =vUv-.5;
         float sizeReset = 0.;
-        if (balloonsON==-1.)sizeReset=120.;
+        if (balloonsON==-1.||balloonsONexponential==-1.)sizeReset=120.;
           float x =  length((vUvCentered)*max(resolution.x,resolution.y)/resolution.yx);
-              float increment =note*balloonsON +48.+ twistStar - x*48.;
-              //increment*=2.;
-          //  float increment = mod(log(mod(note*flipStar+twistStar,12.)+x*24.)/log(pow(2.,1./12.)),24.);
-         vec2 spinningSpiraloon  =  spin2(vUvCentered,time*PI*4.);
-           if(abs(mod(increment+atan(spinningSpiraloon.x,spinningSpiraloon.y)/(2.*PI)*balloonsON,1.)-.1)<length(1.-x)/(increment+sizeReset)*28.)balloon=hsv2rgb(vec3((mod((4.-increment)*balloonsON+twistStar,12.))/12.,.5,1.));
-            
+          float increment =0.;
+          vec2 spinningSpiraloon  =  spin2(vUvCentered,time*PI*4.);
+
+          if(balloonsON!=0.) increment =note*balloonsON +120.+ twistStar - x*48.;
+          else if(balloonsONexponential!=0.)
+              increment= (note-6.)*flipStar*balloonsONexponential+log(twistStar+x*24.)/log(pow(2.,1./12.));
+        
+               
+                   
+                   if(abs(mod(increment+atan(spinningSpiraloon.x,spinningSpiraloon.y)/(2.*PI)*(balloonsONexponential),1.)-.1)<length(1.)/(increment+sizeReset)*24.)balloon=hsv2rgb(vec3((mod((4.-increment)*(balloonsON+balloonsONexponential)+twistStar,12.))/12.,.5,1.));
         return balloon;
     }
     
@@ -3271,7 +3281,7 @@ if(starOnDot>=1){
                                  
                         float shipSUM = starship.x+starship.y+starship.z;
                                  vec3 hypnoticHarmonicCircles = vec3(0.);
-                                 if(balloonsON!=0.)
+                                 if(balloonsON!=0.||balloonsONexponential!=0.)
                                  {
                                     if(maxColorOfStarship!=1.) hypnoticHarmonicCircles=clamp(balloons(p)-shipSUM,0.,1.);
                                     else hypnoticHarmonicCircles=balloons(p);

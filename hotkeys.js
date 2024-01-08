@@ -134,9 +134,16 @@ function callKey(event){
     else if(key == "x" && event.ctrlKey)uniforms.fieldPowerBoost.value=!uniforms.fieldPowerBoost.value;
     else if(key == "z" && event.ctrlKey)uniforms.fieldPowerBoostMeta.value=!uniforms.fieldPowerBoostMeta.value;
     else if(key == "b" && event.ctrlKey){
+        uniforms.balloonsONexponential.value = 0.;
         if(uniforms.balloonsON.value==0.)uniforms.balloonsON.value=1.
             else if(uniforms.balloonsON.value==1.)uniforms.balloonsON.value=-1.
                 else  if(uniforms.balloonsON.value==-1.)uniforms.balloonsON.value=0.
+                    }
+    else if(key == "n" && event.ctrlKey){
+        uniforms.balloonsON.value=0.;
+        if(uniforms.balloonsONexponential.value==0.)uniforms.balloonsONexponential.value=1.
+            else if(uniforms.balloonsONexponential.value==1.)uniforms.balloonsONexponential.value=-1.
+                else  if(uniforms.balloonsONexponential.value==-1.)uniforms.balloonsONexponential.value=0.;
                     }
     else if(key == "s" && event.ctrlKey)uniforms.sparklesON.value=!uniforms.sparklesON.value;
     else if(key == "f" && event.ctrlKey)uniforms.SPHEREofTheLORD.value=!uniforms.SPHEREofTheLORD.value;
