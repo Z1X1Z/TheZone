@@ -581,7 +581,8 @@ uberDuper:{value: null   },
 eden:{value: 0},
 spokesVisualizeColors: {value: false    },
 note:{value: 0},
-balloonsON:{value: 0.},
+                            balloonsON:{value: 0.},
+                            balloonsONexponential:{value: 0.},
 sparklesON:{value: false},
 SPHEREofTheLORD:{value: false},
                                 
@@ -1435,7 +1436,6 @@ if( !window.touchMode&&!window.touchOnlyMode) {
                        }
            else {volume=1.; lastVolume=1.; }
     
-    console.log(volume)
     move();
 
     if(!zoomAtl41)zoomRoutine();
