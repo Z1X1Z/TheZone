@@ -17,12 +17,12 @@ else{
 
 function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
     if(typeof THREE=="object" && document.visibilityState=="visible"
-       &&(window.micOn||location.hash.includes("t"))){
+       &&(window.micOn||(location.hash.includes("t")&&!location.hash.includes(",t")))){
        document.getElementById( "background_wrap").style =  "height: 0px; width: 0px;"
         //"background-image: none;";//turn off splash!
         document.getElementById( "load message").innerHTML = "";//turn off splash!
 
-                if(location.hash.includes("t"))
+                if(location.hash.includes("t")&&!location.hash.includes(",t"))
               {
                 window.touchOnlyMode=true;
               }
@@ -481,10 +481,13 @@ let pushBackCounter = 0;
              if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold&&on){
                           fromCenter = preFromCenter;
 
-                            coordX=bx;
-                            coordY=by;
-                 staticX+=d_xS;
-                 staticY+=d_yS;
+                                if( !window.touchMode)
+                                {
+                                    coordX=bx;
+                                    coordY=by;
+                                    staticX+=d_xS;
+                                    staticY+=d_yS;
+                                }
                         }
 
                                
@@ -518,7 +521,6 @@ let pushBackCounter = 0;
         const radius = interpolation*MR*4./window.pixelShaderSize;
          xAdjusted= d_x*radius;
          yAdjusted= d_y*radius;
-
         if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) if(!trailSegmentExpired[n]&&n!=f-1){
                 cx[n] += xAdjusted;
                 cy[n] += yAdjusted;
@@ -1129,7 +1131,7 @@ let lastVolume = 1.;
     
     
     
-    if (on||zoom<1.)preserveOuterCore=true;
+    if (ONbypass&&(on||zoom<1.))preserveOuterCore=true;
     else preserveOuterCore = false
     if((fromCenter>=1.||zoom>=1.)&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
         
@@ -1156,7 +1158,7 @@ function zoomRoutine(){
     if (zoom>=1.)zoomOutEngage = false;
     if(!isFinite(ZR))ZR=1;
     if(!zoomOutEngage){
-        if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&on)||window.pointerZoom)zoom *=ZR;
+        if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(on&&!window.touchMode))||window.pointerZoom)zoom *=ZR;
         else if(uniforms.MetaCored.value||zoom<1.){
             zoom /= ZR;
             if(center&&zoom<1.){coordX*=ZR*2./3.;; coordY*=ZR*2./3.;}
@@ -1378,7 +1380,69 @@ function runOSMD (){
     }
         //function    OSMDUPDATER(){   runOSMD();  setTimeout(OSMDUPDATER,1000/60.);}
         //OSMDUPDATER();
+               function executeTouchRegime(){
+                        
+                        if(!zoomAtl41)
+                            {
+                              lastZoom = zoom;
+                              zoomRoutine();
+                                infinicore();
 
+                            }
+                            else lastZoom=zoom;
+                                setZoomRate();
+                                    const coordinator = pixelShaderSize/2./minimumDimension*movementRate;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
+
+                                if(pointerZoom){
+                                    ONbypass = true;
+
+                                    const xTouch = screenPressCoordX*coordinator;
+                                    const yTouch = screenPressCoordY*coordinator;
+                                     const touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
+                                    uniforms.d.value=new THREE.Vector2( -xTouch,yTouch);
+                                    uniforms[ "volume" ].value=1.;
+                                    var spunTouch=touchMovement;
+                                          if(uniforms.carousel.value!=0.)         spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
+                                              coordX+= spunTouch[0];
+                                              coordY+= spunTouch[1];
+                                    
+                                                uniforms.coordSHIFT.value.x+=spunTouch[0];
+                                                uniforms.coordSHIFT.value.y+=spunTouch[1];
+                                                                            
+                                                                        
+
+                                                                        //else  uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
+
+                                    fromCenter = (coordX*coordX+coordY*coordY)**.5;
+                                  }
+
+                                  uniforms[ "zoom" ].value = zoom;
+                                       uniforms.coords.value = new THREE.Vector2(coordX,coordY);
+                                    
+                        uniforms.STAR.value=null;
+                        uniforms.EDEN.value=null;
+                                                             
+                                                                         renderer.setRenderTarget (null)
+                                                                         renderer.render( shaderScene, camera );
+                                                                     
+                                                                   
+                            if(textON)document.getElementById("textWindow").innerHTML =
+                                "<div sytle='font-size: 16px;'>"+
+                                
+                                "cores:"+(Math.floor(uniforms["centralCores"].value)+cloverSuperCores*singleHyperCoreDepth+uniforms.upCoreCycler.value)+
+                                " metaCores: "+Math.floor(uniforms["externalCores"].value)+", <p style='margin : 0px'></p>"+
+
+                                "zoom: "+(zoom/2.**(singleHyperCoreDepth*cloverSuperCores))+"<p style='margin : 0px'></p>"+
+                                "real part: "+ coordY +"<p style='margin : 0px'></p>"+
+                                "imaginary part: "+ coordX+"<p style='margin : 0px'></p>"+
+                                "FPS: "+Math.round(FPS)
+                            +"<p></div>";
+                            else document.getElementById("textWindow").innerHTML = "";
+
+
+
+                                                                    
+ }
                  let   upOrDown = 1;
                                            const coreData = new Float32Array(40).fill(1./-leaf);
                                            const omniData = new Float32Array(40).fill(0.);;
@@ -1388,8 +1452,11 @@ function runOSMD (){
                                            let     coreTexture;
                                            let omniTexture;
                                            let firstAnimation = true;
+                                              let ONbypass;
    function animate( timestamp ) {
-
+    ONbypass = false;
+     if( window.touchMode||window.touchOnlyMode)executeTouchRegime();
+                                    
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
      if("osmd" in window&&osmd!=null)runOSMD();
 
@@ -1424,7 +1491,7 @@ function runOSMD (){
     if(!window.touchMode)pointerZoom=false;
     else on=false;
 
-if( !window.touchMode&&!window.touchOnlyMode) {
+if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
 
   analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
            if(window.volumeSpeed&&on)
@@ -1436,10 +1503,13 @@ if( !window.touchMode&&!window.touchOnlyMode) {
                        }
            else {volume=1.; lastVolume=1.; }
     
-    move();
-
-    if(!zoomAtl41)zoomRoutine();
-    infinicore();
+       move();
+    
+   if( !window.touchMode)
+   {
+       if(!zoomAtl41)zoomRoutine();
+       infinicore();
+   }
     spiral_compress();
     
     vectorize4();
@@ -1521,7 +1591,8 @@ if( !window.touchMode&&!window.touchOnlyMode) {
     uniforms.coordSHIFT.value.x+=d_x;
     uniforms.coordSHIFT.value.y+=d_y;
     
-   uniforms.coords.value = new THREE.Vector2( coordX,coordY);
+    
+   if( !window.touchMode) uniforms.coords.value = new THREE.Vector2( coordX,coordY);
    if (EldersLeg>=0){
 
 
@@ -2601,68 +2672,8 @@ for(var n = 0; n<targets.length;n++){
   targets[n].geometry.dispose();
 }
                                    
-                     }else {//begin touch frame
-            
-            if(!zoomAtl41)
-                {
-                  lastZoom = zoom;
-                  zoomRoutine();
-                    infinicore();
-
-                }
-                else lastZoom=zoom;
-                    setZoomRate();
-                        const coordinator = pixelShaderSize/2./minimumDimension*movementRate;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
-
-                    if(pointerZoom){
-                        const xTouch = screenPressCoordX*coordinator;
-                        const yTouch = screenPressCoordY*coordinator;
-                         const touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
-                        uniforms.d.value=new THREE.Vector2( -xTouch,yTouch);
-                        uniforms[ "volume" ].value=1.;
-                        var spunTouch=touchMovement;
-                              if(uniforms.carousel.value!=0.)         spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
-                                  coordX+= spunTouch[0];
-                                  coordY+= spunTouch[1];
-                        
-                                    uniforms.coordSHIFT.value.x+=spunTouch[0];
-                                    uniforms.coordSHIFT.value.y+=spunTouch[1];
-                                                                
-                                                            
-
-                                                            //else  uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
-
-                        fromCenter = (coordX*coordX+coordY*coordY)**.5;
-                      }
-
-                      uniforms[ "zoom" ].value = zoom;
-                                uniforms.coords.value = new THREE.Vector2(coordX,coordY);
-                        
-            uniforms.STAR.value=null;
-            uniforms.EDEN.value=null;
-                                                 
-                                                             renderer.setRenderTarget (null)
-                                                             renderer.render( shaderScene, camera );
-                                                         
+                     }
                                                        
-                if(textON)document.getElementById("textWindow").innerHTML =
-                    "<div sytle='font-size: 16px;'>"+
-                    
-                    "cores:"+(Math.floor(uniforms["centralCores"].value)+cloverSuperCores*singleHyperCoreDepth+uniforms.upCoreCycler.value)+
-                    " metaCores: "+Math.floor(uniforms["externalCores"].value)+", <p style='margin : 0px'></p>"+
-
-                    "zoom: "+(zoom/2.**(singleHyperCoreDepth*cloverSuperCores))+"<p style='margin : 0px'></p>"+
-                    "real part: "+ coordY +"<p style='margin : 0px'></p>"+
-                    "imaginary part: "+ coordX+"<p style='margin : 0px'></p>"+
-                    "FPS: "+Math.round(FPS)
-                +"<p></div>";
-                else document.getElementById("textWindow").innerHTML = "";
-
-
-
-                        
-                  }//end touch mode centerOfDotToEdge
-                              
                               
                               if (uniforms["MetaCored"].value)
                                {
