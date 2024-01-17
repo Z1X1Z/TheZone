@@ -34,7 +34,7 @@ let analyser={};
       });
     }
 function route(){
-    if(!micOn&&!location.hash.includes("t")&&!userHasGestured){
+    if(!micOn&&(!location.hash.includes("t")||location.hash.includes(",t"))&&!userHasGestured){
         document.getElementById( "load message").innerHTML = "";
         startMic();
     }
@@ -43,9 +43,10 @@ function route(){
 }
 document.getElementById( "load message").innerHTML = "Tap the screen or a key to load!";
 
-if(location.hash.includes("t")){
+if(location.hash.includes("t")&&!location.hash.includes(",t")){
+    
         document.getElementById( "load message").innerHTML = "";
-        console.log("Touch only mode!")
+        console.log("Touch only mode3!")
         touchOnlyMode=true;
         window.touchMode = true;}
 

@@ -15,6 +15,7 @@ window.pzyghthe=0;
 window.dynamicCoring=false;
 window.rez=window.devicePixelRatio/2.;//define resolution
 window.Oreo=true;
+window.shouldShowStar = true;
 if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
   {
       rez=window.devicePixelRatio/4.;
@@ -169,6 +170,7 @@ function callKey(event){
     else if (key=="m" && event.ctrlKey) uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value;
     else if (event.ctrlKey&&key=="a")uniforms[ "colorCombo" ].value = 11;
     else if (event.ctrlKey&&key=="j")window.Oreo=!window.Oreo;
+    else if (event.ctrlKey&&key=="t")window.shouldShowStar=!window.shouldShowStar;
     else if (event.altKey&&(key=="∫"||key=="b")){
 
                  if(!muteToggle)
@@ -327,7 +329,11 @@ function callKey(event){
         
     }
     else if (key==";") uniforms[ "colorInverter" ].value = !uniforms[ "colorInverter" ].value;
-    else if (key=="t") window.touchMode = !window.touchMode;
+    else if (key=="t"){
+        window.touchMode = !window.touchMode;
+        if (window.touchMode)window.shouldShowStar =false;
+        else window.shouldShowStar = true;
+    }
     else if (key=="T") uniforms.Spoker.value=!uniforms.Spoker.value;
     else if (key=="f") uniforms[ "fourCreats" ].value *= -1;
     else if (key=="F") uniforms[ "spokelover" ].value=!uniforms[ "spokelover" ].value ;

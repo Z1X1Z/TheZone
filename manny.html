@@ -339,7 +339,11 @@ let maxLetterDepth=-1;
                   key  = 't';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                <label for="Touch">Touch!</label><br>
-               
+               <a id="stillStar" name="t"  onclick= "
+
+                   key  = 't';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
+                   Touch Star!</a><br>
                <input type="checkbox" id="Note Stars" name="t"  onclick= "
                    key  = 'P';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -1707,7 +1711,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
 
           if(balloonsON!=0.) increment =note*balloonsON +120.+ twistStar - x*48.;
           else if(balloonsONexponential!=0.)
-              increment= (note-6.)*flipStar*balloonsONexponential+log(twistStar+x*24.)/log(pow(2.,1./12.));
+              increment= (note-7.)*flipStar*balloonsONexponential+log(twistStar+x*24.)/log(pow(2.,1./12.));
         
                
                    
