@@ -378,12 +378,12 @@ let maxLetterDepth=-1;
 
                    key  = 'b';
                    callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
-                   Harmonic Balloons!</a><br>
+                   Harmonic Spiraloons!</a><br>
                <a id="balloonsExponential" name="t"  onclick= "
 
                    key  = 'n';
                    callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
-                   Harmonic Balloons Exponential!</a><br>
+                   Harmonic Spiraloons Exponential!</a><br>
                <a id="Star Stream" name="t"  onclick= "
 
                    key  = 'V';
@@ -2472,7 +2472,7 @@ return
                                            if(abs(s.y)<21.){
                                             s=vec2(((s.x*s.x-s.y*s.y)-p.x),(2.0*s.x*s.y-p.y));
 
-                                               s.x=pow(s.x,-sin(t.x*2.+3.14))*sign(-s.x*-sin(-t.x*2.+3.14));
+                                               s.x=pow(abs(s.x),-sin(t.x*2.+3.14))*sign(-s.x*-sin(-t.x*2.+3.14));
                                                                 l=vec3(2.-abs(s.y*-sin(-t.x))*19.)*-sin(-t.x);//middle horn
                                                if(s.x>-.1)l=vec3(-sin(t.x)-(s.x*(100.-100.*-sin(t.x*2.-3.14))*-sin(t.x)));
                                                }
