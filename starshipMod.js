@@ -412,7 +412,7 @@ let pushBackCounter = 0;
         lastNote = note;
          note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
          uniforms.note.value=note;
-        const t =  (note )*flip+twist/2;
+        const t =  (note +twist/2)*flip;
                             if(on)
                             {
         if(isFinite(t))angle = -(t*radialWarp);
