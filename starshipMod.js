@@ -418,7 +418,7 @@ let pushBackCounter = 0;
                             if(on)
                             {
         //angle-=1/radialWarp;
-                            const reversableColor=((angle/12./radialWarp+twist/24.)*flip+1./3.)%1.;
+                            const reversableColor=((angle/12./radialWarp)*flip+twist/24.+1./3.)%1.;
 
         colorSound = new THREE.Color();
                                const colortone = note/lightingScaleTrail;
@@ -1679,7 +1679,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
             
             if(isFinite(testarContinuous[g])&&testarContinuous[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.){
                 
-                let arm =((flip*mustarD[g]+twist+12)*radialWarp)%24/24*pi*2.;
+                let arm =((mustarD[g]+twist+12)*radialWarp)%24/24*pi*2.;
                 const lengtOriginal=(testarContinuous[g]-minTestar)/(maxTestar-minTestar);//twice applied
                 var widt = (1.-lengtOriginal)*starshipSize;
                 if (widt==0)widt=starshipSize;
