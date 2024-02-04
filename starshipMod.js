@@ -97,7 +97,7 @@ var zoomOutEngage=false;
 var pi = Math.PI;
 var bufferSize=fftSize;
 var numberOfBins=bufferSize/2.
-var fractionOfFrame = bufferSize/2;
+const fractionOfFrame = 1024-26;//1024-26=998 seems not to skip much and has nice low ranges
 var inputData = new Float32Array(bufferSize)
 var dataArray = new Uint8Array(bufferSize/2)
 const yinData = new Float64Array(fractionOfFrame);
@@ -337,6 +337,7 @@ let pushBackCounter = 0;
                                     let BlackOrWhiteNOTE = 1.
                                     let starMajorMinor=.5;
                                     let fromCenter = 0;
+                                                  let radius = 0.;
         function  move()
         {
             if (isNaN(coordX)||(!zoomAtl41&&coordX>4.))coordX=0.;
@@ -509,7 +510,8 @@ let pushBackCounter = 0;
 
         xPerp[f] = -Math.sin(-angle+pi/2)*volume*flatline;
         yPerp[f] = -Math.cos(-angle+pi/2)*volume*flatline;
-                             trailWidth[f]=0.;
+                            if(!window.flame)trailWidth[f]=0;
+                            else trailWidth[f]=starshipSize;//0.;
                                trailTimeOfRecording[f]=uniforms["time"].value;
                                trailSegmentExpired[f]=false;
         if(trailDepth<trailLength||on)//||on
@@ -519,13 +521,17 @@ let pushBackCounter = 0;
         f++;//this is the primary drive chain for the trail. it should be a global
         if (f>=trailDepth)f=0;
             
-        const radius = interpolation*MR*4./window.pixelShaderSize;
+         radius = interpolation*MR*4./window.pixelShaderSize;
          xAdjusted= d_x*radius;
          yAdjusted= d_y*radius;
+             let decrement;
+             if(!window.flame)decrement=radius*starshipSize;
+             else decrement=-starshipSize/trailSecondsLong*interpolation*MR;
+             console.log(interpolation)
         if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) if(!trailSegmentExpired[n]&&n!=f-1){
                 cx[n] += xAdjusted;
                 cy[n] += yAdjusted;
-                trailWidth[n] += radius*starshipSize;
+                trailWidth[n] += decrement;
             
         }
             
@@ -2167,7 +2173,7 @@ let s = f;
                                              let r1=BlackOrWhiteNOTE, g1=BlackOrWhiteNOTE, b1=BlackOrWhiteNOTE,
                                              r2=BlackOrWhiteNOTE, g2=BlackOrWhiteNOTE, b2=BlackOrWhiteNOTE;
                                              
-                               var  widts =0;
+                               var  widts =0.;
 
                           var   widtr = 0;
                                              
@@ -2228,7 +2234,8 @@ let s = f;
                  if(!trailSegmentExpired[r]&&timeElapsedSinceRecording<=trailSecondsLong){
                         // timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
                             const zlast = z;
-                     const seg = timeElapsedSinceRecording/trailSecondsLong;
+                     let seg = timeElapsedSinceRecording/trailSecondsLong;
+                     if(window.flame)seg/=2.;
                             z = -1.+seg*.5;
                         //   if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong);
                             const transparencyOfTrailLast =transparencyOfTrail;
@@ -2277,9 +2284,8 @@ let s = f;
                                              trailColorAttribute.setXYZW(strideTrail+5, r2,g2,b2,transparencyOfTrailLast)
                                           
                               widts = widtr;
+                          widtr =  trailWidth[r];
 
-                          widtr = trailWidth[r];
-                     
                       widtXperpS=widtXperpR;
                       widtYperpS=widtYperpR;
                       widtXperpR=widtr*xPerp[r];
