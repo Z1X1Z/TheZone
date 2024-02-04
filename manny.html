@@ -359,11 +359,17 @@ let maxLetterDepth=-1;
                      key  = 'Z';
                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                      <label for="TrailOverflowsClover">Trail Overflows Clover</label><br>
+                     
+                     <input type="checkbox" id="flameOrRiver" name="t"  onclick= "
+                         key  = 'r';
+                         callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                         <label for="flameOrRiver">Flame or River?</label><br>
                      <a id="starOnDot" name="t"  onclick= "
 
                      key  = 'd';
                       callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
                   Star on Dot!</a><br>
+
                      <a id="spirograph" name="t"  onclick= "
                      
                      key  = 'p';
