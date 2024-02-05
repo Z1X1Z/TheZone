@@ -61,8 +61,8 @@ window.volumeSpeed = false;
 window.zoomCageSize = window.pixelShaderSize/4.;//radius of zoom bounding
 
                   window.uniformsLoaded=false;
-window.twist = 0;
-window.flip = 1;
+window.twist = 0.;
+window.flip = 1.;
 
 //if (navigator.maxTouchPoints <1) rez = window.devicePixelRatio;//redefine resolution for desktop
 let colorSound;
@@ -96,10 +96,10 @@ let zoomAtl41=false;//watch for the 1 and the l
 var zoomOutEngage=false;
 var pi = Math.PI;
 var bufferSize=fftSize;
-var numberOfBins=bufferSize/2.
+var numberOfBins=bufferSize/2.;
+var inputData = new Float32Array(bufferSize);
+var dataArray = new Uint8Array(bufferSize/2);
 const fractionOfFrame = 1024-26;//1024-26=998 seems not to skip much and has nice low ranges
-var inputData = new Float32Array(bufferSize)
-var dataArray = new Uint8Array(bufferSize/2)
 const yinData = new Float64Array(fractionOfFrame);
 
 var frequencies,
@@ -2722,7 +2722,7 @@ function calculatePitch ()
 let tolerance; //, confidence;
         if(highORlow==1){
             trunc = Math.log(1.-1./totalAMP)*10000.;
-            tolerance=totalAMP-totalAMP/(fractionOfFrame*((gr*-leaf)**.5/trunc)*trunc);//on android pickup is better with truncation
+            tolerance=(totalAMP-totalAMP/(((gr*-leaf)**.5/trunc)*trunc))/fractionOfFrame;//on android pickup is better with truncation
         }
 else if (highORlow==2)tolerance = .5;//when I play different notes on harmonica it mostly hears C, this clears up the distinction of the notes
                         
