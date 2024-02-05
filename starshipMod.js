@@ -2720,7 +2720,7 @@ function calculatePitch ()
 
 let tolerance; //, confidence;
         if(highORlow==1){
-            const trunc = (Math.log(1.-1./totalAMP**1.1)*10000.);
+            const trunc = (Math.log(1.-1./totalAMP**(1./(1./Math.log(3.)+(1.-1./Math.log(3.))/2.)))*10000.);
          
                        tolerance=totalAMP-totalAMP/(fractionOfFrame*(((gr*-leaf)**.5/trunc)*trunc));//pretty smooth backup
         }
