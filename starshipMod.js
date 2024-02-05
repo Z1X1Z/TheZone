@@ -2235,7 +2235,7 @@ let s = f;
                         // timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
                             const zlast = z;
                      let seg = timeElapsedSinceRecording/trailSecondsLong;
-                     if(window.flame)seg/=2.;
+                     if(window.flame)seg*=seg;
                             z = -1.+seg*.5;
                         //   if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong);
                             const transparencyOfTrailLast =transparencyOfTrail;
