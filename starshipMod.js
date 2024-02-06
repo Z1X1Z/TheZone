@@ -99,7 +99,7 @@ var bufferSize=fftSize;
 var numberOfBins=bufferSize/2.;
 var inputData = new Float32Array(bufferSize);
 var dataArray = new Uint8Array(bufferSize/2);
-const fractionOfFrame = 1024-26;//1024-26=998 seems not to skip much and has nice low ranges
+const fractionOfFrame = 1024;//1024-26=998 seems not to skip much and has nice low ranges
 const yinData = new Float64Array(fractionOfFrame);
 
 var frequencies,
@@ -2718,11 +2718,9 @@ function calculatePitch ()
 {
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 
-let tolerance; //, confidence;
+let tolerance=0; //, confidence;
         if(highORlow==1){
-            const trunc = (Math.log(1.-1./totalAMP**(1./(1./Math.log(3.)+(1.-1./Math.log(3.))/2.)))*10000.);
-         
-                       tolerance=totalAMP-totalAMP/(fractionOfFrame*(((gr*-leaf)**.5/trunc)*trunc));//pretty smooth backup
+                       tolerance=1.-1./Math.log(3);//pretty smooth backup
         }
 else if (highORlow==2)tolerance = .5;//when I play different notes on harmonica it mostly hears C, this clears up the distinction of the notes
                         
@@ -2753,6 +2751,7 @@ for (let tau = 1; tau < fractionOfFrame; tau++)
     if (tau > 4 && (yinData[period] < tolerance) &&
             (yinData[period] < yinData[period + 1]))
     {
+        console.log("y"+(yinData[period] < tolerance))
        return quadraticPeakPosition (yinData, period);
     }
 }
