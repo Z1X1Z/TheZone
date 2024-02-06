@@ -2718,12 +2718,8 @@ function calculatePitch ()
 {
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 
-let tolerance=0; //, confidence;
-        if(highORlow==1){
-                       tolerance=1.-1./Math.log(3);//pretty smooth backup
-        }
-else if (highORlow==2)tolerance = .5;//when I play different notes on harmonica it mostly hears C, this clears up the distinction of the notes
-                        
+let tolerance=.0998;//(1024-26)/10000
+                                                      
 let period;
 let delta = 0.0, runningSum = 0.0;
 yinData[0] = 1.0;
