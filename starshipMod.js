@@ -1459,6 +1459,7 @@ function runOSMD (){
                                            let omniTexture;
                                            let firstAnimation = true;
                                               let ONbypass;
+                                          let lastTIMEUNIFORM = 0.;
    function animate( timestamp ) {
     ONbypass = false;
      if( window.touchMode||window.touchOnlyMode)executeTouchRegime();
@@ -1470,14 +1471,19 @@ function runOSMD (){
      
      if(!sheetTranslucent&& bottomOfScreenHeight != document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight)adjustThreeJSWindow();//readjust for verbose
     uniforms[ "time" ].value = timestamp/1000.+window.startTimeSecondMantissaMagnified;
-    if(uniforms.starSpin.value!=0)twist=(uniforms[ "time" ].value*flip*uniforms[ "rate" ].value*uniforms.starSpin.value*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel
-     
+
+    if(uniforms.starSpin.value!=0)twist+=(( uniforms[ "time" ].value -lastTIMEUNIFORM)*flip*uniforms[ "rate" ].value*uniforms.starSpin.value*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel.
+                                          lastTIMEUNIFORM = timestamp/1000.+window.startTimeSecondMantissaMagnified;
+
      
     if(window.ChristoDecrypto!=0) uniforms.metaCarousel.value=          1./(  window.ChristoDecrypto*uniforms.externalCores.value)*(timestamp-window.timeRESET)/10.;
          
          
 
     elapsedTimeBetweenFrames = (timestamp-lastTime);
+                                    console.log(elapsedTimeBetweenFrames+"elapsed")
+                            //        if(uniforms.starSpin.value!=0)window.twist+=(elapsedTimeBetweenFrames/1000.*flip*uniforms[ "rate" ].value*uniforms.starSpin.value*4.)%24.;//Needs 12/PI to synchronize with carousel
+                                 //    console.log(window.twist);
                         if(loopsRun<3)elapsedTimeBetweenFrames = 0;
 
     if(elapsedTimeBetweenFrames>interval)
