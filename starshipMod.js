@@ -2747,7 +2747,6 @@ for (let tau = 1; tau < fractionOfFrame; tau++)
     if (tau > 4 && (yinData[period] < tolerance) &&
             (yinData[period] < yinData[period + 1]))
     {
-        console.log("y"+(yinData[period] < tolerance))
        return quadraticPeakPosition (yinData, period);
     }
 }
