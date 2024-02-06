@@ -173,6 +173,7 @@ function callKey(event){
     else if (event.ctrlKey&&key=="j")window.Oreo=!window.Oreo;
     else if (event.ctrlKey&&key=="t")window.shouldShowStar=!window.shouldShowStar;
     else if (event.ctrlKey&&key=="r")window.flame=!window.flame;
+    else if (event.altKey&&(key=="©"||key=="g"))window.grabStar=!window.grabStar;
     else if (event.altKey&&(key=="∫"||key=="b")){
 
                  if(!muteToggle)
@@ -359,7 +360,7 @@ function callKey(event){
     else if (key=="g") uniforms[ "colorCombo" ].value = 17;
     else if (key=="G") uniforms[ "articles" ].value = !uniforms[ "articles" ].value;
     
-    else if (key=="r")uniforms[ "colorCombo" ].value = 18;
+    else if (key=="r"){uniforms[ "colorCombo" ].value = 18;}
     else if (key=="$")uniforms[ "colorCombo" ].value = 19;
     
     else if (key=="s"){ if(uniforms[ "morph" ].value == 0.)uniforms[ "morph" ].value = 1.;else uniforms[ "morph" ].value = 0.; }
@@ -462,7 +463,9 @@ function callKey(event){
     }
     else if (key=="w")window.volumeSpeed=!window.volumeSpeed;
     
-    else if (key=="W"){ window.twist+=2; window.twist = window.twist%24;
+    else if (key=="W"){
+        if(window.twist-Math.floor(window.twist)>0.)window.twist=0.;
+        window.twist+=2; window.twist = window.twist%24;
         uniforms.twistStar.value=window.twist/24.*2.*Math.PI;
         if("osmd" in window&&osmd!=null)
         {
@@ -472,7 +475,10 @@ function callKey(event){
         }
     }
     
-    else if (key=="S"){ window.twist-=2; window.twist = (window.twist+24)%24;
+    else if (key=="S"){
+        if(window.twist-Math.floor(window.twist)>0.)window.twist=0.;
+            
+        window.twist-=2; window.twist = (window.twist+24)%24;
         uniforms.twistStar.value=window.twist/24.*2.*Math.PI;
         if("osmd" in window&&osmd!=null)
         {
