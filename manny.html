@@ -338,6 +338,11 @@ let maxLetterDepth=-1;
               <input type="checkbox" id="Touch" name="t"  onclick= "
                   key  = 't';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                  <a id="disableVolume" name="t"  onclick= "
+
+                      key  = 's';
+                      callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                      Toggle Touch Sound!</a><br>
                <label for="Touch">Touch!</label><br>
                <a id="stillStar" name="t"  onclick= "
 
