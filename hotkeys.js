@@ -17,6 +17,8 @@ window.rez=window.devicePixelRatio/2.;//define resolution
 window.Oreo=true;
 window.shouldShowStar = true;
 window.flame = false;
+window.muteTouchTouchVolume = true;
+window.muteVoiceTouchVolume = false;
 if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
   {
       rez=window.devicePixelRatio/4.;
@@ -173,6 +175,11 @@ function callKey(event){
     else if (event.ctrlKey&&key=="j")window.Oreo=!window.Oreo;
     else if (event.ctrlKey&&key=="t")window.shouldShowStar=!window.shouldShowStar;
     else if (event.ctrlKey&&key=="r")window.flame=!window.flame;
+    else if (event.altKey&&(key=="©"||key=="g"))window.grabStar=!window.grabStar;
+    else if (event.altKey&&(key=="ß"||key=="s")){
+        if(window.touchMode)window.muteTouchTouchVolume = !window.muteTouchTouchVolume;
+        else window.muteVoiceTouchVolume = !window.muteVoiceTouchVolume;
+    }
     else if (event.altKey&&(key=="©"||key=="g"))window.grabStar=!window.grabStar;
     else if (event.altKey&&(key=="∫"||key=="b")){
 
