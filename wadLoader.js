@@ -174,7 +174,7 @@ function followSound(e){
                         screenPressCoordY=y;
                     var id =touchNumber.get(e.pointerId);
                     let twistIncrement=0;
-if(window.grabStar&&pressed)
+if(window.grabStar)
 {
     let slip = (Math.atan2(y,x)/(Math.PI*2.)-initialAngle[id])%(2*pi);
      twistIncrement = (slip-lastTwist[id])*24;
@@ -261,7 +261,6 @@ let c = document.body;//document.getElementById("container")
                 
                 
                 //   e.stopImmediatePropagation();          //e.preventDefault();
-                pressed=true;
 
                 touchNumber.set(e.pointerId,cycle);
                 cycle=(cycle+1)%10
@@ -282,7 +281,6 @@ let c = document.body;//document.getElementById("container")
                 window.pointerZoom=false;
                 let tn = touchNumber.get(e.pointerId)
                 if(typeof tn == "number" ){
-                    pressed=false;
                     let tn = touchNumber.get(e.pointerId);
                     sound[tn].stop();sound2[tn].stop();
                     zound[tn].stop();zound2[tn].stop();
@@ -299,7 +297,6 @@ let c = document.body;//document.getElementById("container")
                 
                 let tn = touchNumber.get(e.pointerId);
                 if(typeof tn == "number" ){
-                    pressed=false;
                     let tn = touchNumber.get(e.pointerId)
                     sound[tn].stop();
                     sound2[tn].stop();
@@ -320,7 +317,6 @@ let c = document.body;//document.getElementById("container")
                 
                 let tn = touchNumber.get(e.pointerId)
                 if(typeof tn == "number"){
-                    pressed=false;
                     sound[tn].stop();
                     sound2[tn].stop();
                     zound[tn].stop();
