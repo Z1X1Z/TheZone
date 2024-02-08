@@ -105,9 +105,10 @@ function startSound(e){
     
     if(window.grabStar){
         initialAngle[id]=Math.atan2(y,x)/Math.PI/2.;
-        window.twist=window.twist%24
+        window.twist=(window.twist+48)%24
         initialTwist[id]=window.twist
     }
+    
              if((!window.touchMode&&!window.muteVoiceTouchVolume)||(window.touchMode&&!window.muteTouchTouchVolume)){
                 let twistTRIANGLEtoSQUARE=1.;
                 let twistSQUAREtoTRIANGLE = 1.;
