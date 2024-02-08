@@ -1474,6 +1474,8 @@ function runOSMD (){
 
     if(uniforms.starSpin.value!=0)twist+=(( uniforms[ "time" ].value -lastTIMEUNIFORM)*flip*uniforms[ "rate" ].value*uniforms.starSpin.value*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel.
                                           lastTIMEUNIFORM = timestamp/1000.+window.startTimeSecondMantissaMagnified;
+    
+    uniforms.twistStar.value=window.twist/24.*2.*Math.PI;
 
      
     if(window.ChristoDecrypto!=0) uniforms.metaCarousel.value=          1./(  window.ChristoDecrypto*uniforms.externalCores.value)*(timestamp-window.timeRESET)/10.;
@@ -1481,7 +1483,6 @@ function runOSMD (){
          
 
     elapsedTimeBetweenFrames = (timestamp-lastTime);
-                                    console.log(elapsedTimeBetweenFrames+"elapsed")
                             //        if(uniforms.starSpin.value!=0)window.twist+=(elapsedTimeBetweenFrames/1000.*flip*uniforms[ "rate" ].value*uniforms.starSpin.value*4.)%24.;//Needs 12/PI to synchronize with carousel
                                  //    console.log(window.twist);
                         if(loopsRun<3)elapsedTimeBetweenFrames = 0;

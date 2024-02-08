@@ -473,7 +473,6 @@ function callKey(event){
     else if (key=="W"){
         if(window.twist-Math.floor(window.twist)>0.)window.twist=0.;
         window.twist+=2; window.twist = window.twist%24;
-        uniforms.twistStar.value=window.twist/24.*2.*Math.PI;
         if("osmd" in window&&osmd!=null)
         {
             osmd.Sheet.Transpose = twist/2.;
@@ -486,7 +485,6 @@ function callKey(event){
         if(window.twist-Math.floor(window.twist)>0.)window.twist=0.;
             
         window.twist-=2; window.twist = (window.twist+24)%24;
-        uniforms.twistStar.value=window.twist/24.*2.*Math.PI;
         if("osmd" in window&&osmd!=null)
         {
             osmd.Sheet.Transpose = twist/2.;

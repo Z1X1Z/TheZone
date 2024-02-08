@@ -108,7 +108,6 @@ function startSound(e){
         window.twist=window.twist%24
         initialTwist[id]=window.twist
     }
-    console.log(!window.touchMode&&!window.muteVoiceTouchVolume)
              if((!window.touchMode&&!window.muteVoiceTouchVolume)||(window.touchMode&&!window.muteTouchTouchVolume)){
                 let twistTRIANGLEtoSQUARE=1.;
                 let twistSQUAREtoTRIANGLE = 1.;
@@ -261,9 +260,8 @@ let c = document.body;//document.getElementById("container")
                 
                 
                 //   e.stopImmediatePropagation();          //e.preventDefault();
-
-                touchNumber.set(e.pointerId,cycle);
                 cycle=(cycle+1)%10
+                touchNumber.set(e.pointerId,cycle);
                 getPressure(e);
                 startSound(e);
                 
@@ -274,6 +272,7 @@ let c = document.body;//document.getElementById("container")
                     getPressure(e);
                     followSound(e);
                 }
+
                 // e.stopImmediatePropagation();// e.preventDefault();
             }, false);
             
@@ -281,12 +280,12 @@ let c = document.body;//document.getElementById("container")
                 window.pointerZoom=false;
                 let tn = touchNumber.get(e.pointerId)
                 if(typeof tn == "number" ){
-                    let tn = touchNumber.get(e.pointerId);
                     sound[tn].stop();sound2[tn].stop();
                     zound[tn].stop();zound2[tn].stop();
                     xound[tn].stop();xound2[tn].stop();
                     tound[tn].stop();tound2[tn].stop();
-                
+                    touchNumber.set(e.pointerId,"");
+
                 }
                 //e.preventDefault(); e.stopImmediatePropagation();
             }
@@ -297,7 +296,6 @@ let c = document.body;//document.getElementById("container")
                 
                 let tn = touchNumber.get(e.pointerId);
                 if(typeof tn == "number" ){
-                    let tn = touchNumber.get(e.pointerId)
                     sound[tn].stop();
                     sound2[tn].stop();
                     zound[tn].stop();
@@ -307,7 +305,8 @@ let c = document.body;//document.getElementById("container")
                     xound2[tn].stop();
                     tound[tn].stop();
                     tound2[tn].stop();
-                    
+                    touchNumber.set(e.pointerId,"");
+
                     //e.preventDefault(); e.stopImmediatePropagation();
                 }
             }, false);
@@ -326,7 +325,8 @@ let c = document.body;//document.getElementById("container")
                     xound2[tn].stop();
                     tound[tn].stop();
                     tound2[tn].stop();
-                    
+                    touchNumber.set(e.pointerId,"");
+
                     //e.preventDefault(); e.stopImmediatePropagation();
                 }
             }, false);
