@@ -676,6 +676,7 @@ duperZoom: {value:1.},
  twistStar:{value:0.},
        multiplicatorNexus:{value:false},//has problems may be discontinued
        squareClover:{value:false},
+         mandelCloverFactor:{value:1.75}
 
        }
 
