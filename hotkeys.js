@@ -170,12 +170,15 @@ function callKey(event){
     else if(key == "v" && event.ctrlKey) window.FeedbackSound =  !window.FeedbackSound;
     else if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=(uniforms.starOnDot.value+1)%3;
     else if (key=="p" && event.ctrlKey)spirographMODE = (spirographMODE+1)%3;//color mode 3 seems obsolete
-    else if (key=="m" && event.ctrlKey) uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value;
+    else if (key=="m" && event.ctrlKey)
+    {uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value;
+        if(number!=""&&!runningHash)uniform.mandelCloverFactor.value=number;
+
+    }
     else if (event.ctrlKey&&key=="a")uniforms[ "colorCombo" ].value = 11;
     else if (event.ctrlKey&&key=="j")window.Oreo=!window.Oreo;
     else if (event.ctrlKey&&key=="t")window.shouldShowStar=!window.shouldShowStar;
     else if (event.ctrlKey&&key=="r")window.flame=!window.flame;
-    else if (event.altKey&&(key=="Â"||key=="m")) {if(number!="")uniform.mandelCloverFactor.value=number;console.log(here)}
 
     else if (event.altKey&&(key=="©"||key=="g"))window.grabStar=!window.grabStar;
     else if (event.altKey&&(key=="ß"||key=="s")){
