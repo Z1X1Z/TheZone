@@ -46,7 +46,7 @@ document.getElementById( "load message").innerHTML = "Tap the screen or a key to
 if(location.hash.includes("t")&&!location.hash.includes(",t")){
     
         document.getElementById( "load message").innerHTML = "";
-        console.log("Touch only mode3!")
+        console.log("Touch only mode!")
         touchOnlyMode=true;
         window.touchMode = true;}
 
