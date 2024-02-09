@@ -175,6 +175,8 @@ function callKey(event){
     else if (event.ctrlKey&&key=="j")window.Oreo=!window.Oreo;
     else if (event.ctrlKey&&key=="t")window.shouldShowStar=!window.shouldShowStar;
     else if (event.ctrlKey&&key=="r")window.flame=!window.flame;
+    else if (event.altKey&&(key=="Â"||key=="m")) {if(number!="")uniform.mandelCloverFactor.value=number;console.log(here)}
+
     else if (event.altKey&&(key=="©"||key=="g"))window.grabStar=!window.grabStar;
     else if (event.altKey&&(key=="ß"||key=="s")){
         if(window.touchMode)window.muteTouchTouchVolume = !window.muteTouchTouchVolume;

@@ -811,7 +811,11 @@ coreData.fill(coringValue);">
                      key  = 'm';
                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                   <label for="Wheel">Wheel!</label><br>
-                  
+                  <label for="mandelCloverSize">Wheel Degree:</label>
+                  <input type="number" id="mandelCloverSize" name="mandelCloverSize" class="num" onkeydown="
+                                 uniforms.mandelCloverFactor.value=document.getElementById('mandelCloverSize').value
+                                 ">
+                      
                   <input type="checkbox" id="Articles" name="t"  onclick= "
                       key  = 'G';
                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -1460,7 +1464,7 @@ uniform float twistStar;
 uniform float flipStar;
 uniform bool NightAndDay;
 
-
+uniform float mandelCloverFactor;
     const float PI = 3.1415927410125732;
     const float gr = 1.618033988749;
     const float leaf = -1.3247;//1795724474;
@@ -2022,9 +2026,11 @@ vec2 m=vec2(0.);
 float truncator=1.;
 if(lfc!=0.) truncator = log(zoom/lfc)/10000.;//log truncation * factor is not known
 //Maendel clover
-if(wheel)m =  ((pWithoutChiralizer/lfc)-coords.yx//try signs with for fibonacci ring pairing and movement distortion #syyym
-)*abs(coresIn/crs*2.-1.)
-                            *.25;//uncertain term
+if(wheel)m =  ((pWithoutChiralizer/lfc)
+                                         -coords.yx)*abs(coresIn/crs*2.-1.)
+                            *mandelCloverFactor//(1.-1./(leaf/truncator)*truncator)//uncertain term
+
+                            ;
 //this is essentially just p as in the mandelbrot x <== x^2+
 
                             const float iterations = 100.;//loops all escape delimiter so iterations aren't used unless needed
@@ -3185,6 +3191,7 @@ vec2 dance = vec2(0.);
      vec2 heartShift = vec2(0);
 
     if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
+                                                                 else if(Character==2)heartSize=gr;
      if (Character!=9&&colorCombo!=20&&colorCombo!=17){
      vec3 HEART = heart(characterPSpunToKey*heartSize+heartShift,moveDynamic);
      vec3 heartMultiplier = vec3(1.);
