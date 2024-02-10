@@ -1,7 +1,6 @@
 let pressId=new Map();
 
 let touchNumber=new Map();
-for(var h=0;h<10;h++)touchNumber.set(h,"")
 function stallTillWad(){if(typeof(Wad)=="function"&&userHasGestured){initialize();} else  setTimeout(stallTillWad,100);}
 stallTillWad()//lurker
 
@@ -267,21 +266,14 @@ let c = document.body;//document.getElementById("container")
                 
                 //   e.stopImmediatePropagation();          //e.preventDefault();
                 
-
-                //if(cycle==0)cycle=1;
-                let cycleLimit = 0;
-               // while(touchNumber.get((e.pointerId+cycleLimit)%10)!=""&&cycleLimit<10)
-                {
-                    console.log(cycle)
-                    cycle=(cycle+1)%10;
-
-                    cycleLimit=(cycleLimit+1)%10;
-                    cycleLimit++;
-                }
-                totalPresses++
+                
                 pressId.set(e.pointerId,totalPresses)
+                totalPresses++
                 touchNumber.set(totalPresses,cycle);
+                cycle=(cycle+1)%10;
+
                 console.log(touchNumber)
+                console.log(pressId)
 
                 getPressure(e);
                 startSound(e);
