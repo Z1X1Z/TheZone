@@ -266,14 +266,12 @@ let c = document.body;//document.getElementById("container")
                 //   e.stopImmediatePropagation();          //e.preventDefault();
                 
                 let testCycleLimit = 1;
-                console.log(touchNumber)
+                touchNumber.set(cycle,cycle);
                 while(touchNumber.get(e.pointerId+testCycleLimit)!=""&&testCycleLimit<10)
                 {
-                    console.log(touchNumber.get(e.pointerId+testCycleLimit));
                     cycle=(cycle+1)%10;
                     testCycleLimit++;
                 }
-                touchNumber.set(e.pointerId,cycle);
 
                 getPressure(e);
                 startSound(e);
