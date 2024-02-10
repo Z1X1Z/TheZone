@@ -1473,7 +1473,7 @@ function runOSMD (){
      if(!sheetTranslucent&& bottomOfScreenHeight != document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight)adjustThreeJSWindow();//readjust for verbose
     uniforms[ "time" ].value = timestamp/1000.+window.startTimeSecondMantissaMagnified;
 
-    if(uniforms.starSpin.value!=0)twist+=(( uniforms[ "time" ].value -lastTIMEUNIFORM)*flip*uniforms[ "rate" ].value*uniforms.starSpin.value*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel.
+    if(uniforms.starSpin.value!=0)twist-=(( uniforms[ "time" ].value -lastTIMEUNIFORM)*flip*uniforms[ "rate" ].value*uniforms.starSpin.value*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel.
                                           lastTIMEUNIFORM = timestamp/1000.+window.startTimeSecondMantissaMagnified;
     
     uniforms.twistStar.value=window.twist/24.*2.*Math.PI;
@@ -2030,7 +2030,7 @@ var fingerStride = 0;
                      for(var yy=0;yy<6;yy++)   starsANDwitnessesColorAttribute.setXYZ(fingerStride+yy,vop.r,vop.g,vop.b)
                     
                      const rpio2 =arm+pi/2.;
-                     const fingerTwist=(flip*(t-6)+twist/2.+12)/12.*2.*pi;
+                     const fingerTwist=(flip*(t-6)+twist/2.*flip+12)/12.*2.*pi;
                                         const x = widt*-Math.sin(rpio2+fingerTwist+pi);
                                         const y = widt*-Math.cos(rpio2+fingerTwist+pi);
                                         const xr = pi/12.*lengt*-Math.sin(arm+fingerTwist+pi);
