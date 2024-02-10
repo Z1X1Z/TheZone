@@ -265,10 +265,13 @@ let c = document.body;//document.getElementById("container")
                 
                 //   e.stopImmediatePropagation();          //e.preventDefault();
                 
-                let testCycleLimit = 1;
-                touchNumber.set(cycle,cycle);
-                while(touchNumber.get(e.pointerId+testCycleLimit)!=""&&testCycleLimit<10)
+                let testCycleLimit = 0 ;
+                touchNumber.set(e.pointerId,cycle);
+               // console.log(e.pointerId)
+               // console.log(cycle)
+                while((touchNumber.get(e.pointerId+testCycleLimit+1)+10)%10!=""&&testCycleLimit<11)
                 {
+                   // console.log(touchNumber.get(e.pointerId+testCycleLimit))
                     cycle=(cycle+1)%10;
                     testCycleLimit++;
                 }
