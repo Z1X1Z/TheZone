@@ -1473,10 +1473,9 @@ function runOSMD (){
      if(!sheetTranslucent&& bottomOfScreenHeight != document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight)adjustThreeJSWindow();//readjust for verbose
     uniforms[ "time" ].value = timestamp/1000.+window.startTimeSecondMantissaMagnified;
 
-    if(uniforms.starSpin.value!=0)twist-=(( uniforms[ "time" ].value -lastTIMEUNIFORM)*flip*uniforms[ "rate" ].value*uniforms.starSpin.value*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel.
+    if(uniforms.starSpin.value!=0)twist-=(( uniforms[ "time" ].value -lastTIMEUNIFORM)*uniforms[ "rate" ].value*-uniforms.starSpin.value*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel.
                                           lastTIMEUNIFORM = timestamp/1000.+window.startTimeSecondMantissaMagnified;
-    
-    uniforms.twistStar.value=window.twist/24.*2.*Math.PI;
+    uniforms.twistStar.value=-window.twist/24.*2.*Math.PI;
 
      
     if(window.ChristoDecrypto!=0) uniforms.metaCarousel.value=          1./(  window.ChristoDecrypto*uniforms.externalCores.value)*(timestamp-window.timeRESET)/10.;
