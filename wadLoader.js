@@ -92,6 +92,7 @@ initialAngleSound[0]=0;
 let initialAngle = Array(10);
 let lastTwist  = Array(10).fill(0);
 let pressed = false;
+var id;
 function startSound(e){
     
     
@@ -101,12 +102,12 @@ function startSound(e){
         
         screenPressCoordX=x;
     screenPressCoordY=y;
-    var id = touchNumber.get(e.pointerId);
+    id = touchNumber.get(e.pointerId);
     
     if(window.grabStar){
         initialAngle[id]=Math.atan2(y,x)/Math.PI/2.;
         window.twist=(window.twist+24*100)%24
-        initialTwist[id]=window.twist
+        initialTwist[id]=window.twist*flip
         lastTwist[id] =0;
     }
     
@@ -128,7 +129,7 @@ function startSound(e){
 
                 initialAngleSound[id] = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi)*flip;
                  angleSound[id] =initialAngleSound[id];
-                let frequency = Math.pow(2.,((((initialAngleSound[id]*window.flip)/pi/2*12+12-1*flip)*window.flip-window.twist/2.))/12.)*window.ConcertKey;
+                let frequency = Math.pow(2.,((((initialAngleSound[id]*window.flip)/pi/2*12+correction)*window.flip-window.flip*window.twist/2.))/12.)*window.ConcertKey;
                 //sound[id].pitch=frequency;
                 //sound2[id].pitch=frequency*2.;
                 //sound[id].volume=0.;
@@ -173,7 +174,7 @@ function followSound(e){
 
                         screenPressCoordX=x;
                         screenPressCoordY=y;
-                    var id =touchNumber.get(e.pointerId);
+                     id =touchNumber.get(e.pointerId);
                     let twistIncrement=0;
 if(window.grabStar)
 {
@@ -213,7 +214,7 @@ if(window.grabStar)
              }
             // let frequency = Math.pow(2.,((angleSound[id]/pi/2*12)-window.twist*window.flip/2.+correction)/12.)*window.ConcertKey;
                  
-                let frequency = Math.pow(2.,((((angleSound[id]*window.flip)/pi/2*12+12-1.*flip)*window.flip-window.twist/2.))/12.)*window.ConcertKey;
+                let frequency = Math.pow(2.,((((angleSound[id]*window.flip)/pi/2*12+correction)*window.flip-window.twist/2.))/12.)*window.ConcertKey;
         if(isFinite(frequency)&&frequency>0.&&
            angleSound[id]-initialAngleSound[id]!=0){
                  if(typeof sound[id]=="object"){
