@@ -207,9 +207,8 @@ if(window.grabStar)
              if(!window.grabStar) angleSound[id]=(((Math.atan2(y,x)-initialAngleSound[id])+pi/2.+8.*pi)%(2*pi)+initialAngleSound[id])*window.flip;
              
              else {
-                 angleSound[id]+=  twistIncrement/24*(Math.PI*2.);//redundant operations done and undone to twistIncrement
+                 angleSound[id]-=  twistIncrement/24*(Math.PI*2.);//redundant operations done and undone to twistIncrement
                  angleSound[id]=(angleSound[id]+8.*pi-initialAngleSound[id])%(Math.PI*2.)+initialAngleSound[id];
-
              }
             // let frequency = Math.pow(2.,((angleSound[id]/pi/2*12)-window.twist*window.flip/2.+correction)/12.)*window.ConcertKey;
                  
