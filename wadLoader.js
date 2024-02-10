@@ -265,19 +265,20 @@ let c = document.body;//document.getElementById("container")
                 
                 //   e.stopImmediatePropagation();          //e.preventDefault();
                 
-             //   console.log(e.pointerId)
-             //   console.log(cycle)
-                let cycleLimit = 10;
-                while(touchNumber.get((e.pointerId+cycle)+1)%10!=""&&cycleLimit>0)
-                {
-
-                  //  console.log(touchNumber.get(e.pointerId+cycle))
-                    cycle=(cycle+1)%10;
-                    cycleLimit--;
-                }
+                console.log(e.pointerId)
+                console.log(cycle)
                 touchNumber.set(e.pointerId,cycle);
 
-             //   console.log(touchNumber)
+                let cycleLimit = 0;
+                while(touchNumber.get((e.pointerId+cycleLimit)+10+1)%10!=""&&cycleLimit<10)
+                {
+
+                    console.log(touchNumber.get(e.pointerId+cycle))
+                    cycle=(cycle+1)%10;
+                    cycleLimit++;
+                }
+
+                console.log(touchNumber)
 
                 getPressure(e);
                 startSound(e);
