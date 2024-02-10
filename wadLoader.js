@@ -104,7 +104,7 @@ function startSound(e){
     let id = touchNumber.get(pressId.get(e.pointerId));
 
     if(window.grabStar){
-        initialAngle[id]=Math.atan2(y,x)/Math.PI/2.;
+        initialAngle[id]=(Math.atan2(y,x)/Math.PI/2.+pi*2)%(2*pi);
         window.twist=(window.twist+24*100)%24
         initialTwist[id]=window.twist*flip
         lastTwist[id] =0;
@@ -115,7 +115,7 @@ function startSound(e){
                 let twistSQUAREtoTRIANGLE = 1.;
                 let twistZINEtoSAW = 1.;
                 let twistSAWtoZINE = 1.;
-                if(event.twist!=0)//untested
+                if(event.twist!=0 && 0==1 )//untested
                 {
                     twistTRIANGLEtoSQUARE= Math.atan2(y,x)/Math.PI-event.twist/360;
                     twistSQUAREtoTRIANGLE = 1.-twistTRIANGLEtoSQUARE;
@@ -128,7 +128,7 @@ function startSound(e){
 
                 initialAngleSound[id] = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi)*flip;
                  angleSound[id] =initialAngleSound[id];
-                let frequency = Math.pow(2.,((((initialAngleSound[id]*window.flip)/pi/2*12+correction)*window.flip-window.flip*window.twist/2.))/12.)*window.ConcertKey;
+                let frequency = Math.pow(2.,((((initialAngleSound[id]*window.flip)/pi/2*12+12-flip)*window.flip-window.twist/2.))/12.)*window.ConcertKey;
                 //sound[id].pitch=frequency;
                 //sound2[id].pitch=frequency*2.;
                 //sound[id].volume=0.;
@@ -192,7 +192,7 @@ if(window.grabStar)
         let twistSQUAREtoTRIANGLE = 1.;
         let twistZINEtoSAW = 1.;
         let twistSAWtoZINE = 1.;
-        if(event.twist!=0)
+        if(event.twist!=0 && 0==1 )
         {
             twistTRIANGLEtoSQUARE= Math.atan2(y,x)/Math.PI-event.twist/360;
             twistSQUAREtoTRIANGLE = 1.-twistTRIANGLEtoSQUARE;
@@ -214,7 +214,7 @@ if(window.grabStar)
              }
             // let frequency = Math.pow(2.,((angleSound[id]/pi/2*12)-window.twist*window.flip/2.+correction)/12.)*window.ConcertKey;
                  
-                let frequency = Math.pow(2.,((((angleSound[id]*window.flip)/pi/2*12+correction)*window.flip-window.twist/2.))/12.)*window.ConcertKey;
+                let frequency = Math.pow(2.,((((angleSound[id]*window.flip)/pi/2*12+12-flip)*window.flip-window.twist/2.))/12.)*window.ConcertKey;
         if(isFinite(frequency)&&frequency>0.&&
            angleSound[id]-initialAngleSound[id]!=0){
                  if(typeof sound[id]=="object"){
@@ -268,12 +268,9 @@ let c = document.body;//document.getElementById("container")
                 
                 
                 pressId.set(e.pointerId,totalPresses)
-                totalPresses++
                 touchNumber.set(totalPresses,cycle);
+                totalPresses++
                 cycle=(cycle+1)%10;
-
-                console.log(touchNumber)
-                console.log(pressId)
 
                 getPressure(e);
                 startSound(e);
@@ -297,7 +294,7 @@ let c = document.body;//document.getElementById("container")
                     zound[tn].stop();zound2[tn].stop();
                     xound[tn].stop();xound2[tn].stop();
                     tound[tn].stop();tound2[tn].stop();
-                    touchNumber.set(e.pointerId,"");
+                    touchNumber.set(pressId.get(e.pointerId),"");
 
                 }
                 //e.preventDefault(); e.stopImmediatePropagation();
@@ -318,7 +315,7 @@ let c = document.body;//document.getElementById("container")
                     xound2[tn].stop();
                     tound[tn].stop();
                     tound2[tn].stop();
-                    touchNumber.set(e.pointerId,"");
+                    touchNumber.set(pressId.get(e.pointerId),"");
 
                     //e.preventDefault(); e.stopImmediatePropagation();
                 }
@@ -338,7 +335,7 @@ let c = document.body;//document.getElementById("container")
                     xound2[tn].stop();
                     tound[tn].stop();
                     tound2[tn].stop();
-                    touchNumber.set(e.pointerId,"");
+                    touchNumber.set(pressId.get(e.pointerId),"");
 
                     //e.preventDefault(); e.stopImmediatePropagation();
                 }
