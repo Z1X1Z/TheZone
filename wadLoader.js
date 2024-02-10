@@ -128,7 +128,9 @@ function startSound(e){
 
                 initialAngleSound[id] = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi)*flip;
                  angleSound[id] =initialAngleSound[id];
-                let frequency = Math.pow(2.,((((initialAngleSound[id]*window.flip)/pi/2*12+12-flip)*window.flip-window.twist/2.))/12.)*window.ConcertKey;
+                let frequency = Math.pow(2.,((((initialAngleSound[id]*window.flip)/pi/2*12+12-flip)*window.flip-window.twist/2.))/12.
+                                              +((flip==-1)?2:-1)
+                                              )*window.ConcertKey;
                 //sound[id].pitch=frequency;
                 //sound2[id].pitch=frequency*2.;
                 //sound[id].volume=0.;
@@ -214,7 +216,9 @@ if(window.grabStar)
              }
             // let frequency = Math.pow(2.,((angleSound[id]/pi/2*12)-window.twist*window.flip/2.+correction)/12.)*window.ConcertKey;
                  
-                let frequency = Math.pow(2.,((((angleSound[id]*window.flip)/pi/2*12+12-flip)*window.flip-window.twist/2.))/12.)*window.ConcertKey;
+                let frequency = Math.pow(2.,((((angleSound[id]*window.flip)/pi/2*12+12-flip)*window.flip-window.twist/2.))/12.
+                                              +((flip==-1)?2:-1)
+                                              )*window.ConcertKey;
         if(isFinite(frequency)&&frequency>0.&&
            angleSound[id]-initialAngleSound[id]!=0){
                  if(typeof sound[id]=="object"){
