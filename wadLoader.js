@@ -106,7 +106,7 @@ function startSound(e){
     if(window.grabStar){
         initialAngle[id]=Math.atan2(y,x)/Math.PI/2.;
         window.twist=(window.twist+24*100)%24
-        initialTwist[id]=window.twist
+        initialTwist[id]=window.twist*flip
         lastTwist[id] =0;
     }
     
@@ -265,15 +265,12 @@ let c = document.body;//document.getElementById("container")
                 
                 //   e.stopImmediatePropagation();          //e.preventDefault();
                 
-                console.log(e.pointerId)
-                console.log(cycle)
                 touchNumber.set(e.pointerId,cycle);
 
                 let cycleLimit = 0;
                 while(touchNumber.get((e.pointerId+cycleLimit)%10)!=""&&cycleLimit<10)
                 {
 
-                    console.log(touchNumber.get(e.pointerId+cycleLimit))
                     cycle=(cycle+1)%10;
                     cycleLimit++;
                 }
