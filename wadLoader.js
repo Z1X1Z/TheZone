@@ -266,9 +266,9 @@ let c = document.body;//document.getElementById("container")
                 //   e.stopImmediatePropagation();          //e.preventDefault();
                 
                 touchNumber.set(e.pointerId,cycle);
-
+                if(cycle==0)cycle=1;
                 let cycleLimit = 0;
-             //   while(cycle==0||touchNumber.get((e.pointerId+cycleLimit)%10)!=""&&cycleLimit<10)
+                while(touchNumber.get((e.pointerId+cycleLimit)%10)!=""&&cycleLimit<10)
                 {
 
                     cycle=(cycle+1)%10;
