@@ -1,6 +1,6 @@
 
 let touchNumber=new Map();
-
+for(var h=0;h<10;h++)touchNumber.set(h,"")
 function stallTillWad(){if(typeof(Wad)=="function"&&userHasGestured){initialize();} else  setTimeout(stallTillWad,100);}
 stallTillWad()//lurker
 
@@ -270,6 +270,7 @@ let c = document.body;//document.getElementById("container")
                 touchNumber.set(e.pointerId,cycle);
 
                 let cycleLimit = 0;
+                    
                 while(touchNumber.get((e.pointerId+cycleLimit)+10+1)%10!=""&&cycleLimit<10)
                 {
 
