@@ -271,7 +271,7 @@ let c = document.body;//document.getElementById("container")
 
                 let cycleLimit = 0;
                     
-                while(touchNumber.get((e.pointerId+cycleLimit)+10)%10!=""&&cycleLimit<9)
+                while(touchNumber.get((e.pointerId+cycle)+10+1)%10!=""&&cycleLimit<9)
                 {
 
                     console.log(touchNumber.get(e.pointerId+cycleLimit))
