@@ -246,7 +246,7 @@ if(window.grabStar)
 }
 
 }
-                                                             let cycle=0;
+                                                             let cycle=1;
 let c = document.body;//document.getElementById("container")
                                  
                                  
@@ -270,8 +270,7 @@ let c = document.body;//document.getElementById("container")
                 touchNumber.set(e.pointerId,cycle);
 
                 let cycleLimit = 0;
-                    
-                while(touchNumber.get((e.pointerId+cycleLimit)+1)%10!=""&&cycleLimit<10)
+                while(touchNumber.get((e.pointerId+cycleLimit)%10)!=""&&cycleLimit<10)
                 {
 
                     console.log(touchNumber.get(e.pointerId+cycleLimit))
