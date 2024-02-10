@@ -92,7 +92,6 @@ initialAngleSound[0]=0;
 let initialAngle = Array(10);
 let lastTwist  = Array(10).fill(0);
 let pressed = false;
-var id;
 function startSound(e){
     
     
@@ -102,7 +101,7 @@ function startSound(e){
         
         screenPressCoordX=x;
     screenPressCoordY=y;
-    id = touchNumber.get(e.pointerId);
+    var id = touchNumber.get(e.pointerId);
     
     if(window.grabStar){
         initialAngle[id]=Math.atan2(y,x)/Math.PI/2.;
@@ -174,7 +173,7 @@ function followSound(e){
 
                         screenPressCoordX=x;
                         screenPressCoordY=y;
-                     id =touchNumber.get(e.pointerId);
+                    var id =touchNumber.get(e.pointerId);
                     let twistIncrement=0;
 if(window.grabStar)
 {
@@ -269,7 +268,7 @@ let c = document.body;//document.getElementById("container")
                 touchNumber.set(e.pointerId,cycle);
 
                 let cycleLimit = 0;
-                while(touchNumber.get((e.pointerId+cycleLimit)%10)!=""&&cycleLimit<10)
+             //   while(cycle==0||touchNumber.get((e.pointerId+cycleLimit)%10)!=""&&cycleLimit<10)
                 {
 
                     cycle=(cycle+1)%10;
