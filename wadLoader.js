@@ -264,7 +264,6 @@ let c = document.body;//document.getElementById("container")
                 
                 
                 //   e.stopImmediatePropagation();          //e.preventDefault();
-                touchNumber.set(e.pointerId,cycle);
                 
                 let testCycleLimit = 1;
                 console.log(touchNumber)
@@ -274,6 +273,8 @@ let c = document.body;//document.getElementById("container")
                     cycle=(cycle+1)%10;
                     testCycleLimit++;
                 }
+                touchNumber.set(e.pointerId,cycle);
+
                 getPressure(e);
                 startSound(e);
                 
