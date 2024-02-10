@@ -213,7 +213,7 @@ if(window.grabStar)
              }
             // let frequency = Math.pow(2.,((angleSound[id]/pi/2*12)-window.twist*window.flip/2.+correction)/12.)*window.ConcertKey;
                  
-                let frequency = Math.pow(2.,((((angleSound[id]*window.flip)/pi/2*12+correction)*window.flip-window.flip*window.twist/2.))/12.)*window.ConcertKey;
+                let frequency = Math.pow(2.,((((angleSound[id]*window.flip)/pi/2*12+correction)*window.flip-window.twist/2.))/12.)*window.ConcertKey;
         if(isFinite(frequency)&&frequency>0.&&
            angleSound[id]-initialAngleSound[id]!=0){
                  if(typeof sound[id]=="object"){
