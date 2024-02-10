@@ -266,9 +266,11 @@ let c = document.body;//document.getElementById("container")
                 //   e.stopImmediatePropagation();          //e.preventDefault();
                 touchNumber.set(e.pointerId,cycle);
                 
-                let testCycleLimit = 0;
+                let testCycleLimit = 1;
+                console.log(touchNumber)
                 while(touchNumber.get(e.pointerId+testCycleLimit)!=""&&testCycleLimit<10)
                 {
+                    console.log(touchNumber.get(e.pointerId+testCycleLimit));
                     cycle=(cycle+1)%10;
                     testCycleLimit++;
                 }
