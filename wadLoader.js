@@ -126,7 +126,7 @@ function startSound(e){
                 
                 let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
 
-                initialAngleSound[id] = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi);
+                initialAngleSound[id] = (Math.atan2(y,x)+pi/2.+4*pi)%(2*pi)*flip;
                  angleSound[id] =initialAngleSound[id];
                 let frequency = Math.pow(2.,((((initialAngleSound[id]*window.flip)/pi/2*12+correction)*window.flip-window.flip*window.twist/2.))/12.)*window.ConcertKey;
                 //sound[id].pitch=frequency;
@@ -178,8 +178,8 @@ function followSound(e){
 if(window.grabStar)
 {
     let slip = (Math.atan2(y,x)/(Math.PI*2.)-initialAngle[id])%(2*pi);
-     twistIncrement = (slip-lastTwist[id])*24*window.flip;
-    window.twist+=twistIncrement*window.flip;
+     twistIncrement = (slip-lastTwist[id])*24;
+    window.twist+=twistIncrement*flip;
 
     window.twist=(window.twist+initialTwist[id]+24*100)%(24)-initialTwist[id];
      lastTwist[id] =slip;
@@ -204,7 +204,7 @@ if(window.grabStar)
              {
         let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
         
-             if(!window.grabStar) angleSound[id]=((Math.atan2(y,x)-initialAngleSound[id])+pi/2.+8.*pi)%(2*pi)+initialAngleSound[id];
+             if(!window.grabStar) angleSound[id]=(((Math.atan2(y,x)-initialAngleSound[id])+pi/2.+8.*pi)%(2*pi)+initialAngleSound[id])*window.flip;
              
              else {
                  angleSound[id]+=  twistIncrement/24*(Math.PI*2.);//redundant operations done and undone to twistIncrement
