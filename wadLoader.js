@@ -1,4 +1,8 @@
 let touchNumber=new Map();
+for(var v = 0; v<10;v++)touchNumber.set(v,"off")
+let pressIndex=new Map();
+//for(var v = 0; v<10;v++)pressIndex.set(v,v)
+
 function stallTillWad(){if(typeof(Wad)=="function"&&userHasGestured){initialize();} else  setTimeout(stallTillWad,100);}
 stallTillWad()//lurker
 
@@ -99,7 +103,7 @@ function startSound(e){
         
         screenPressCoordX=x;
     screenPressCoordY=y;
-    let id = touchNumber.get(e.pointerId);
+    let id = touchNumber.get(pressIndex.get(e.pointerId));
 
     if(window.grabStar){
         initialAngle[id]=(Math.atan2(y,x)/Math.PI/2.+1.)%1.;
@@ -173,7 +177,7 @@ function followSound(e){
 
                         screenPressCoordX=x;
                         screenPressCoordY=y;
-                    let id = touchNumber.get(e.pointerId);
+                    let id = touchNumber.get(pressIndex.get(e.pointerId));
 
                     let twistIncrement=0;
 if(window.grabStar)
@@ -260,6 +264,7 @@ let c = document.body;//document.getElementById("container")
         else if (event.pressure === .5) pressure = 1;
         else pressure = event.pressure;
     }
+                                             let cycler = 0;
  function attachListeners(){
             c.addEventListener('pointerdown', function(e)
                                {
@@ -267,22 +272,25 @@ let c = document.body;//document.getElementById("container")
                 
                 //   e.stopImmediatePropagation();          //e.preventDefault();
                 
-                
-                touchNumber.set(e.pointerId,cycle)
-                let touchLimit=10;
-                while (touchNumber.get(e.pointerId)!=""&&touchLimit<10)
+
+                let touchLimit=0;
+                while (touchNumber.get(cycler)!="off"&&touchLimit<10)
                 {
                     cycle=(cycle+1)%10;
+                    cycler=(cycler+1)%10;
+
                     touchLimit++;
                 }
-                console.log(touchNumber)
+                
+                pressIndex.set (e.pointerId,cycler)
+                touchNumber.set(cycler,cycle)
                  *///needs to be sorted out to allow for more consecutive uninterrupted touches
                 getPressure(e);
                 startSound(e);
                 
             }, false);
             c.addEventListener('pointermove', function(e) {
-                let tn = touchNumber.get(e.pointerId);
+                let tn = touchNumber.get(pressIndex.get(e.pointerId));
                 if(typeof tn == "number"){
                     getPressure(e);
                     followSound(e);
@@ -293,13 +301,13 @@ let c = document.body;//document.getElementById("container")
             
             c.addEventListener('pointerup', function(e){
                 window.pointerZoom=false;
-                let tn = touchNumber.get(e.pointerId);
+                let tn = touchNumber.get(pressIndex.get(e.pointerId));
                 if(typeof tn == "number" ){
                     sound[tn].stop();sound2[tn].stop();
                     zound[tn].stop();zound2[tn].stop();
                     xound[tn].stop();xound2[tn].stop();
                     tound[tn].stop();tound2[tn].stop();
-                    touchNumber.set(e.pointerId,"");
+                    touchNumber.set(pressIndex.get(e.pointerId),"off");
 
                 }
                 //e.preventDefault(); e.stopImmediatePropagation();
@@ -309,7 +317,7 @@ let c = document.body;//document.getElementById("container")
             c.addEventListener('pointercancel', function(e){
                 window.pointerZoom=false;
                 
-                let tn = touchNumber.get(e.pointerId);
+                let tn = touchNumber.get(pressIndex.get(e.pointerId));
                 if(typeof tn == "number" ){
                     sound[tn].stop();
                     sound2[tn].stop();
@@ -320,7 +328,7 @@ let c = document.body;//document.getElementById("container")
                     xound2[tn].stop();
                     tound[tn].stop();
                     tound2[tn].stop();
-                    touchNumber.set(e.pointerId,"");
+                    touchNumber.set(pressIndex.get(e.pointerId),"off");
 
                     //e.preventDefault(); e.stopImmediatePropagation();
                 }
@@ -329,7 +337,7 @@ let c = document.body;//document.getElementById("container")
             c.addEventListener('pointerleave', function(e){
                 window.pointerZoom=false;
                 
-                let tn = touchNumber.get(e.pointerId);
+                let tn = touchNumber.get(pressIndex.get(e.pointerId));
                 if(typeof tn == "number"){
                     sound[tn].stop();
                     sound2[tn].stop();
@@ -340,7 +348,7 @@ let c = document.body;//document.getElementById("container")
                     xound2[tn].stop();
                     tound[tn].stop();
                     tound2[tn].stop();
-                    touchNumber.set(e.pointerId,"");
+                    touchNumber.set(pressIndex.get(e.pointerId),"off");
 
                     //e.preventDefault(); e.stopImmediatePropagation();
                 }
