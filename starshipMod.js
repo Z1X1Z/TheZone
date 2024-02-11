@@ -1476,7 +1476,7 @@ function runOSMD (){
     if(uniforms.starSpin.value!=0)
     {let timeTwistIncrement=(( uniforms[ "time" ].value -lastTIMEUNIFORM)*uniforms[ "rate" ].value*-uniforms.starSpin.value*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel.
         twist-=timeTwistIncrement;
-        for(var v = 0; v<10;v++)initialTwist[v]-=timeTwistIncrement;
+        for(var v = 0; v<maxTouchSoundCount;v++)initialTwist[v]-=timeTwistIncrement;
     }
                                           lastTIMEUNIFORM = timestamp/1000.+window.startTimeSecondMantissaMagnified;
     uniforms.twistStar.value=-window.twist/24.*2.*Math.PI;

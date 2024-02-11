@@ -1,7 +1,7 @@
+const maxTouchSoundCount = 24;
 let touchNumber=new Map();
-for(var v = 0; v<10;v++)touchNumber.set(v,"off")
+for(var v = 0; v<maxTouchSoundCount;v++)touchNumber.set(v,"off")
 let pressIndex=new Map();
-//for(var v = 0; v<10;v++)pressIndex.set(v,v)
 
 function stallTillWad(){if(typeof(Wad)=="function"&&userHasGestured){initialize();} else  setTimeout(stallTillWad,100);}
 stallTillWad()//lurker
@@ -25,20 +25,19 @@ cutoff: 10000   //cutoff frequency of the built in lowpass-filter. 20 to 22050
         bypass: 20
     }
 };
-const correction = 11. ;
-const sound=Array(10);
-const sound2=Array(10);
+const sound=Array(maxTouchSoundCount);
+const sound2=Array(maxTouchSoundCount);
 
-const zound=Array(10);
-const zound2=Array(10);
-
-
-const xound=Array(10);
-const xound2=Array(10);
+const zound=Array(maxTouchSoundCount);
+const zound2=Array(maxTouchSoundCount);
 
 
-const tound=Array(10);
-const tound2=Array(10);
+const xound=Array(maxTouchSoundCount);
+const xound2=Array(maxTouchSoundCount);
+
+
+const tound=Array(maxTouchSoundCount);
+const tound2=Array(maxTouchSoundCount);
 
 
 const feedbackPitchsound=Array(5); //updated in starshipMod
@@ -48,7 +47,7 @@ function initialize(){
     for(var o=0;o<4;o++)feedbackPitchsound[o] =  new Wad({source : 'square'})//, tuna   : hyperdriveTUNA});
 
    // feedbackPitchsound.play({env:{attack: 0, release:0,hold:-1},pitch:1,volume:0})
-    for(var o=0;o<10;o++){
+    for(var o=0;o<maxTouchSoundCount;o++){
         sound[o] =  new Wad({source : 'square'})//, tuna   : hyperdriveTUNA});
      sound2[o] = new Wad({source : 'square'})//, tuna   : hyperdriveTUNA});
         
@@ -89,10 +88,10 @@ function initialize(){
     wadLOADED=true;
 }
 
-let initialAngleSound = Array(10);
+let initialAngleSound = Array(maxTouchSoundCount);
 initialAngleSound[0]=0;
-let initialAngle = Array(10);
-let lastTwist  = Array(10).fill(0);
+let initialAngle = Array(maxTouchSoundCount);
+let lastTwist  = Array(maxTouchSoundCount).fill(0);
 let pressed = false;
 function startSound(e){
     
@@ -169,8 +168,8 @@ function startSound(e){
                                              
 }
 
-let   angleSound  = Array(10);
-let initialTwist= Array(10);
+let   angleSound  = Array(maxTouchSoundCount);
+let initialTwist= Array(maxTouchSoundCount);
 function followSound(e){
             let y = e.clientY-heightPX/2.;
             let x = e.clientX-widthPX/2.;
@@ -274,10 +273,10 @@ let c = document.body;//document.getElementById("container")
                 
 
                 let touchLimit=0;
-                while (touchNumber.get(cycler)!="off"&&touchLimit<10)
+                while (touchNumber.get(cycler)!="off"&&touchLimit<maxTouchSoundCount)
                 {
-                    cycle=(cycle+1)%10;
-                    cycler=(cycler+1)%10;
+                    cycle=(cycle+1)%maxTouchSoundCount;
+                    cycler=(cycler+1)%maxTouchSoundCount;
 
                     touchLimit++;
                 }
