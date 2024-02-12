@@ -149,18 +149,30 @@ function startSound(e){
                     tound[id].stop();
                     tound2[id].stop();
                     
-                    sound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistTRIANGLEtoSQUARE*.5});
-                    sound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.,volume:.000000000000001});
+                    let cascadeSwitch1;
+                    let cascadeSwitch2;
+                    if(grabStar&&flip==1)
+                    {
+                         cascadeSwitch2=1*volume*.5
+                         cascadeSwitch1=0.00000000000001
+                    }
+                    else
+                    {
+                         cascadeSwitch2=0.00000000000001
+                         cascadeSwitch1=1*volume*.5
+                    }
+                    sound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:cascadeSwitch1*twistTRIANGLEtoSQUARE});
+                    sound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.,volume:cascadeSwitch2*twistTRIANGLEtoSQUARE});
                     
-                    zound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistSQUAREtoTRIANGLE*.5});
-                    zound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.,volume:.000000000000001});
+                    zound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:cascadeSwitch1*twistSQUAREtoTRIANGLE});
+                    zound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.,volume:cascadeSwitch2});
                     
                     
-                    xound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistZINEtoSAW*.5});
-                    xound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.,volume:.000000000000001});
+                    xound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:cascadeSwitch1*volume*twistZINEtoSAW});
+                    xound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.,volume:cascadeSwitch2});
                     
-                    tound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:volume*twistSAWtoZINE*.5});
-                    tound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.,volume:.000000000000001});
+                    tound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:cascadeSwitch1*twistSAWtoZINE});
+                    tound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.,volume:cascadeSwitch2});
 
 
                     }
@@ -225,6 +237,16 @@ if(window.grabStar)
                  if(typeof sound[id]=="object"){
                      let volumePrime=volume*(angleSound[id] - initialAngleSound[id])/(2.*pi)*.5;
                      let volumeTWO =volume*(1.-(angleSound[id]-initialAngleSound[id])/(2.*pi))*.5;
+                     if(grabStar&&flip==1)
+                     {
+                         let vpBuf=volumePrime
+                         volumePrime=volumeTWO
+                         volumeTWO=vpBuf
+                     }
+                     console.log("as"+angleSound[id])
+
+                     console.log(volumeTWO)
+                     console.log("twist"+twist)
                      sound2[id].setPitch(frequency/2.);
                      sound[id].setPitch(frequency);
                      sound2[id].setVolume(volumePrime*twistTRIANGLEtoSQUARE);
