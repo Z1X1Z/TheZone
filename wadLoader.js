@@ -151,7 +151,7 @@ function startSound(e){
                     
                     let cascadeSwitch1;
                     let cascadeSwitch2;
-                    if(grabStar&&flip==1)
+                    if(window.grabStar&&flip==1)
                     {
                          cascadeSwitch2=1*volume*.5
                          cascadeSwitch1=0.00000000000001
@@ -237,16 +237,13 @@ if(window.grabStar)
                  if(typeof sound[id]=="object"){
                      let volumePrime=volume*(angleSound[id] - initialAngleSound[id])/(2.*pi)*.5;
                      let volumeTWO =volume*(1.-(angleSound[id]-initialAngleSound[id])/(2.*pi))*.5;
-                     if(grabStar&&flip==1)
+                     if(window.grabStar&&flip==1)
                      {
                          let vpBuf=volumePrime
                          volumePrime=volumeTWO
                          volumeTWO=vpBuf
                      }
-                     console.log("as"+angleSound[id])
 
-                     console.log(volumeTWO)
-                     console.log("twist"+twist)
                      sound2[id].setPitch(frequency/2.);
                      sound[id].setPitch(frequency);
                      sound2[id].setVolume(volumePrime*twistTRIANGLEtoSQUARE);
