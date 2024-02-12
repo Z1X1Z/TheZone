@@ -8,6 +8,7 @@ window.BulletMine=0;
 window.starClover=true;
 window.blankBackground=false;
 window.twist = 0.;
+window.flip = 1.;
 window.highORlow=1.;
 window.FeedbackSound = false;
 window.spirographMODE = 1;
@@ -19,6 +20,7 @@ window.shouldShowStar = true;
 window.flame = false;
 window.muteTouchTouchVolume = true;
 window.muteVoiceTouchVolume = false;
+window.grabStar = false;
 if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
   {
       rez=window.devicePixelRatio/4.;
