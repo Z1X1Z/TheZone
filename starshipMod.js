@@ -1900,13 +1900,15 @@ else{//start drawing of just twenty four frets here
     let twoOr1= EldersLeg<=2
     if(twoOr1){maxTestar=1;minTestar=0;}
     let oddSkew =EldersLeg%2/2;
+    let bottomNote = Math.round(-twist+24)%24;
+    console.log(bottomNote)
 let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
             for (var g=oddSkew; g<fretMultiplied; g++) {
                 let incrementation = (EldersLeg%2==0)?g%2:(g+1)%2;
                 //incrementation/=2.;
                incrementation++;
                 let widt = starshipSize/(EldersLeg/24.)**.5/incrementation/2.;
-                if (g==0&&EldersLeg==24)widt*=2.;
+                if (g==bottomNote&&EldersLeg==24)widt*=2.;
                 const arm =(flip*(g+oddSkew+twist)*EldersLeg/24.*radialWarp)%EldersLeg/EldersLeg*pi*2.;
  
                 let lengt = (testar[(g+EldersLeg/2.)%EldersLeg]-minTestar)/(maxTestar-minTestar);
