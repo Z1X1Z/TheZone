@@ -1901,7 +1901,6 @@ else{//start drawing of just twenty four frets here
     if(twoOr1){maxTestar=1;minTestar=0;}
     let oddSkew =EldersLeg%2/2;
     let bottomNote = Math.round(-twist+24)%24;
-    console.log(bottomNote)
 let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
             for (var g=oddSkew; g<fretMultiplied; g++) {
                 let incrementation = (EldersLeg%2==0)?g%2:(g+1)%2;
