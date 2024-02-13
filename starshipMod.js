@@ -1802,7 +1802,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
             
             let loopOfCulling =xyStarParticleArray.length-1;
             
-            while((xyStarParticleArray.length>starCount||uniforms[ "time" ].value-xyStarParticleArray[loopOfCulling].time>maxToMin)&&loopOfCulling>0)
+            while((xyStarParticleArray.length>starCount||uniforms[ "time" ].value-xyStarParticleArray[loopOfCulling].time>maxToMin*secondsToEdge)&&loopOfCulling>0)
             {
                 xyStarParticleArray.shift();
                 loopOfCulling--;
@@ -1831,7 +1831,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
                 if (lastLoopTime!=m.time) {
                     timeShift = uniforms["time"].value-m.time;
                     w = timeShift/m.lengt/secondsToEdge;
-                    withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL*1.5;// OUTERSHELL times 1.1 to prevent remnant pieces around edge
+                    withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL*1.2;// OUTERSHELL times 1.1 to prevent remnant pieces around edge
                     depthINNER = -starShipDepthInSet+timeShift/OUTERSHELL*(1.-starShipDepthInSet);
                     depthOUTER = depthINNER+m.lengt;
                     
