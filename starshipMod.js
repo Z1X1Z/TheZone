@@ -725,7 +725,7 @@ function setFFTdependantSizes(){
                         starArms = numberOfBins;
                       
       starCount = Math.ceil(starArms*60*secondsToEdge);
-             xyStarParticleArray= Array(starCount).fill({})
+             xyStarParticleArray= Array(starCount).fill(null)
       starStreamPoints= new Float64Array(starCount*3*6);
       starStreamColors= new Float64Array(starCount*4*6);
      
@@ -1802,7 +1802,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
             
             
             let loopsToCull = starCount;
-            let loopOfCulling =starStreamIndex-1;
+            let loopOfCulling =starStreamIndex;
             let shellBoost = 1.5;
            if(xyStarParticleArray[loopOfCulling]!=null) while(xyStarParticleArray[loopOfCulling-1]!=null&&uniforms[ "time" ].value-xyStarParticleArray[loopOfCulling].time>maxToMin*secondsToEdge*shellBoost&&loopsToCull>0)
             {
