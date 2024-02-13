@@ -1475,7 +1475,7 @@ uniform float mandelCloverFactor;
     const float leaf = -1.3247;//1795724474;
 
     float lerp(float a) {return -abs(mod(a,2.)-1.);}
-    float lerp2(float a) {return -mod(a,2.)+1.;}
+    float lerp2(float a) {return -abs(mod(a,2.)-1.)+.5;}
 
     float zin(float x){return -sin(x);}
     float coz(float x){return -cos(x);}
