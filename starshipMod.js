@@ -1795,7 +1795,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
         
         
         
-        if ((RockInTheWater==1||RockInTheWater==2)&&xyStarParticleArray.length>0)
+        if ((RockInTheWater==1||RockInTheWater==2)&&xyStarParticleArray[starStreamIndex]!=null&&xyStarParticleArray[starStreamIndex-1]!=null)
         {
             
             scene.add(starStreamMesh)
