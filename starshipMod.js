@@ -703,7 +703,7 @@ duperZoom: {value:1.},
                     
                     const secondsToEdge=window.pixelShaderSize/4./pixelShaderToStarshipRATIO;
                   
-                    let xyStarParticleArray= Array();
+                            let xyStarParticleArray= Array();
                                            
                                             zoomOutEngage=false;
                                             pi = Math.PI;
@@ -725,7 +725,7 @@ function setFFTdependantSizes(){
                         starArms = numberOfBins;
                       
       starCount = Math.ceil(starArms*60*secondsToEdge);
-
+             xyStarParticleArray= Array(starCount).fill({})
       starStreamPoints= new Float64Array(starCount*3*6);
       starStreamColors= new Float64Array(starCount*4*6);
      
@@ -775,7 +775,7 @@ function setFFTdependantSizes(){
                                            
                                            let starStreamPositionAttribute;
                                            let starStreamColorAttribute;
-                                           
+                           let starStreamIndex=0;
                                        let harmonicPositionAttribute;
                                        let harmonicColorAttribute;
                                            
@@ -808,6 +808,7 @@ function setFFTdependantSizes(){
                     }
                                            
 function init() {
+             setFFTdependantSizes();
                         uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
            uniforms.resolution.value = new THREE.Vector2(window.innerWidth,window.innerHeight);
      uniforms.coords.value = new THREE.Vector2(0.,0.);
@@ -1769,8 +1770,8 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
                     xyStarParticle.staticX=staticX;
                     xyStarParticle.staticY=staticY;
                     
-                    xyStarParticleArray.push(xyStarParticle);
-               
+                    starStreamIndex=(starStreamIndex+1)%starCount;
+                    xyStarParticleArray[starStreamIndex]=xyStarParticle;
                 }
                 starStride+=3;
 
@@ -1790,27 +1791,31 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
         
         
         
-        
+
         
         
         
         if ((RockInTheWater==1||RockInTheWater==2)&&xyStarParticleArray.length>0)
         {
+            
             scene.add(starStreamMesh)
             
             
-            
-            let loopOfCulling =xyStarParticleArray.length-1;
-            
-            while((xyStarParticleArray.length>starCount||uniforms[ "time" ].value-xyStarParticleArray[loopOfCulling].time>maxToMin*secondsToEdge)&&loopOfCulling>0)
+            let loopsToCull = starCount;
+            let loopOfCulling =starStreamIndex-1;
+            let shellBoost = 1.5;
+            while(xyStarParticleArray[loopOfCulling]!=null&&uniforms[ "time" ].value-xyStarParticleArray[loopOfCulling].time>maxToMin*secondsToEdge*shellBoost&&loopsToCull>0)
             {
-                xyStarParticleArray.shift();
-                loopOfCulling--;
-                
+               // xyStarParticleArray.shift();
+                xyStarParticleArray[loopOfCulling]=null;
+
                     for(var e = 0; e<3; e++){
                         starStreamPositionAttribute.setXYZ(loopOfCulling*3+e,0,0,0)
                         starStreamColorAttribute.setXYZW(loopOfCulling*3+e,0,0,0,0)
                     }
+                loopOfCulling=(loopOfCulling-1+starCount)%starCount;
+
+                loopsToCull--;
 
             }
             
@@ -1823,10 +1828,10 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
             let depthINNER = -starShipDepthInSet+timeShift/OUTERSHELL*starShipDepthInSet;
             let depthOUTER = depthINNER+m.lengt;
             let starStreamStride = 0;
-            for(let starMoment=xyStarParticleArray.length-1; starMoment>=0; starMoment--)
-                
-            {
-                
+            
+            let starMoment=starStreamIndex;
+            while(xyStarParticleArray[starMoment]!=null)
+         {
                 m = xyStarParticleArray[starMoment];
                 if (lastLoopTime!=m.time) {
                     timeShift = uniforms["time"].value-m.time;
@@ -1872,8 +1877,9 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
                 }
                 else break ;
                 
-                starStreamStride+=6
-                
+                starStreamStride+=6;
+             starMoment = (starMoment-1+starCount)%starCount;
+
             }
             
             
