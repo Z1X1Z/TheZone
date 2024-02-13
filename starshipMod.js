@@ -1795,7 +1795,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
         
         
         
-        if ((RockInTheWater==1||RockInTheWater==2)&&xyStarParticleArray[starStreamIndex]!=null&&xyStarParticleArray[starStreamIndex-1]!=null)
+        if ((RockInTheWater==1||RockInTheWater==2)&&xyStarParticleArray[starStreamIndex]!=null)
         {
             
             scene.add(starStreamMesh)
@@ -1804,7 +1804,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
             let loopsToCull = starCount;
             let loopOfCulling =starStreamIndex-1;
             let shellBoost = 1.5;
-            while(xyStarParticleArray[loopOfCulling]!=null&&uniforms[ "time" ].value-xyStarParticleArray[loopOfCulling].time>maxToMin*secondsToEdge*shellBoost&&loopsToCull>0)
+           if(xyStarParticleArray[loopOfCulling]!=null) while(xyStarParticleArray[loopOfCulling-1]!=null&&uniforms[ "time" ].value-xyStarParticleArray[loopOfCulling].time>maxToMin*secondsToEdge*shellBoost&&loopsToCull>0)
             {
                // xyStarParticleArray.shift();
                 xyStarParticleArray[loopOfCulling]=null;
