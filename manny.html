@@ -1331,6 +1331,7 @@ void main(){
         
             float cutOutDegree=1.;
             float atanD = atan(d.y,d.x);
+            float stegOrFour = 1.;
             if(eden!=4)
        {
            vec2 vUv2 = vUv*2.;
@@ -1348,6 +1349,7 @@ void main(){
              vUvMan = (vUvScaled*volumeFret2-loudestFret2/8.)/scale*2.+.5;
              vUvOx = (vUvScaled*volumeFret3-loudestFret3/8.)/scale*2.+.5;
              vUvLion = (vUvScaled*volumeFret4-loudestFret4/8.)/scale*2.+.5;
+                        stegOrFour=2.;
     }
             if(abs(max(vUvEagle.x,vUvEagle.y))<1.&&min(vUvEagle.x,vUvEagle.y)>0.)
                         Pishon += texture2D(STAR,vUvEagle);
@@ -1358,7 +1360,7 @@ void main(){
 
              gl_FragColor=clamp((Pishon+Gihon+Tigris+Euphrates)
                       // -TheFifthRiver//alpha blended
-                       -TheFifthRiver
+                       -TheFifthRiver*stegOrFour
                        ,0.,1.)
     /vec4(vec3(1.5),1.)+TheFifthRiver;//vec4(vec3(2.),1.); //the divisor of the rivers is seemingly open to interpretation
     ;}
