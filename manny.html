@@ -3309,7 +3309,7 @@ if(starOnDot>=1){
                                 // if (StaRivers.x!=0.&&StaRivers.x!=1.&&StaRivers.x==.5&&(StaRivers.x+StaRivers.y>=255.-3.5||StaRivers.y+StaRivers.z>=255.-3.5||StaRivers.z+StaRivers.x>=255.-3.5)&&StaRivers.w==1.)spirographTranslucerStaRivers=(StaRivers.x+StaRivers.y+StaRivers.z);
                                  
            float isBlackStaRivers =1.;//or black
-           if (StaRivers.x==StaRivers.y&& StaRivers.y==StaRivers.z&&StaRivers.w>3.5/255.)isBlackStaRivers=StaRivers.x;
+           if (StaRivers.x==StaRivers.y&& StaRivers.y==StaRivers.z&&StaRivers.x<3.5/255.&&StaRivers.w>3.5/255.)isBlackStaRivers=StaRivers.x;
                                  
                                  float isGreyStaRivers =0.;
 
