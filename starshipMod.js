@@ -1821,67 +1821,69 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
             
             let OUTERSHELL =maxToMin* secondsToEdge;
             let m = xyStarParticleArray[starStreamIndex];
-            let lastLoopTime=m.time;
-            let timeShift = 0.;
-            let w = timeShift/m.lengt/secondsToEdge;
-            let withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL;
-            let depthINNER = -starShipDepthInSet+timeShift/OUTERSHELL*starShipDepthInSet;
-            let depthOUTER = depthINNER+m.lengt;
-            let starStreamStride = 0;
-            
-            let starMoment=starStreamIndex;
-            while(xyStarParticleArray[starMoment]!=null)
-         {
-                m = xyStarParticleArray[starMoment];
-                if (lastLoopTime!=m.time) {
-                    timeShift = uniforms["time"].value-m.time;
-                    w = timeShift/m.lengt/secondsToEdge;
-                    withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL*shellBoost;// OUTERSHELL times 1.1 to prevent remnant pieces around edge
-                    depthINNER = -starShipDepthInSet+timeShift/OUTERSHELL*(1.-starShipDepthInSet);
-                    depthOUTER = depthINNER+m.lengt;
-                    
-                    lastLoopTime=m.time;
-                }
+            if(m!=null)
+            {
+                let lastLoopTime=m.time;
+                let timeShift = 0.;
+                let w = timeShift/m.lengt/secondsToEdge;
+                let withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL;
+                let depthINNER = -starShipDepthInSet+timeShift/OUTERSHELL*starShipDepthInSet;
+                let depthOUTER = depthINNER+m.lengt;
+                let starStreamStride = 0;
                 
-                
-                
-                if( withinRadialDelimiter)
+                let starMoment=starStreamIndex;
+                while(xyStarParticleArray[starMoment]!=null)
                 {
-                    let bulletY=0;
-                    let bulletX=0;
-                    if(window.BulletMine!=0)
-                    {
-                        let blt= m.interpolationFramesScaled*BulletMine;
-                        bulletY = (m.staticY-staticY)*blt;
-                        bulletX = (m.staticX-staticX)*blt;
+                    m = xyStarParticleArray[starMoment];
+                    if (lastLoopTime!=m.time) {
+                        timeShift = uniforms["time"].value-m.time;
+                        w = timeShift/m.lengt/secondsToEdge;
+                        withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL*shellBoost;// OUTERSHELL times 1.1 to prevent remnant pieces around edge
+                        depthINNER = -starShipDepthInSet+timeShift/OUTERSHELL*(1.-starShipDepthInSet);
+                        depthOUTER = depthINNER+m.lengt;
+                        
+                        lastLoopTime=m.time;
                     }
-                    const outSetX = w*m.xr-bulletX;//apparently something is flipped
-                    const outSetY = w*m.yr-bulletY;
-                    let alph = timeShift*starShipDepthInSet;
-                     for(var yy=0;yy<6;yy++) starStreamColorAttribute.setXYZW(starStreamStride+yy, m.vop.r, m.vop.g, m.vop.b,alph)//alpha is beta
-                     
-                     const nx =-m.x+outSetX
-                     const ny =-m.y+outSetY
-                     const xShift=m.x+outSetX;
-                     const yShift=m.y+outSetY;
-                     const xrShifted = m.xr+xShift;
-                     const yrShifted = m.yr+yShift;
-                     
-                     starStreamPositionAttribute.setXYZ( starStreamStride, nx,    ny,  depthINNER)
-                    starStreamPositionAttribute.setXYZ(starStreamStride+1,xShift,    yShift,  depthINNER)
-                    starStreamPositionAttribute.setXYZ(starStreamStride+2,xrShifted, yrShifted,  depthOUTER)
-                    starStreamPositionAttribute.setXYZ(starStreamStride+3,nx, ny,  depthINNER)
-                    starStreamPositionAttribute.setXYZ(starStreamStride+4,xrShifted, yrShifted,  depthOUTER)
-                    starStreamPositionAttribute.setXYZ(starStreamStride+5,m.xr+nx, m.yr+ny,  depthOUTER)
+                    
+                    
+                    
+                    if( withinRadialDelimiter)
+                    {
+                        let bulletY=0;
+                        let bulletX=0;
+                        if(window.BulletMine!=0)
+                        {
+                            let blt= m.interpolationFramesScaled*BulletMine;
+                            bulletY = (m.staticY-staticY)*blt;
+                            bulletX = (m.staticX-staticX)*blt;
+                        }
+                        const outSetX = w*m.xr-bulletX;//apparently something is flipped
+                        const outSetY = w*m.yr-bulletY;
+                        let alph = timeShift*starShipDepthInSet;
+                        for(var yy=0;yy<6;yy++) starStreamColorAttribute.setXYZW(starStreamStride+yy, m.vop.r, m.vop.g, m.vop.b,alph)//alpha is beta
+                            
+                            const nx =-m.x+outSetX
+                            const ny =-m.y+outSetY
+                            const xShift=m.x+outSetX;
+                        const yShift=m.y+outSetY;
+                        const xrShifted = m.xr+xShift;
+                        const yrShifted = m.yr+yShift;
+                        
+                        starStreamPositionAttribute.setXYZ( starStreamStride, nx,    ny,  depthINNER)
+                        starStreamPositionAttribute.setXYZ(starStreamStride+1,xShift,    yShift,  depthINNER)
+                        starStreamPositionAttribute.setXYZ(starStreamStride+2,xrShifted, yrShifted,  depthOUTER)
+                        starStreamPositionAttribute.setXYZ(starStreamStride+3,nx, ny,  depthINNER)
+                        starStreamPositionAttribute.setXYZ(starStreamStride+4,xrShifted, yrShifted,  depthOUTER)
+                        starStreamPositionAttribute.setXYZ(starStreamStride+5,m.xr+nx, m.yr+ny,  depthOUTER)
+                        
+                    }
+                    else break ;
+                    
+                    starStreamStride+=6;
+                    starMoment = (starMoment-1+starCount)%starCount;
                     
                 }
-                else break ;
-                
-                starStreamStride+=6;
-             starMoment = (starMoment-1+starCount)%starCount;
-
             }
-            
             
     starStreamPositionAttribute.needsUpdate = true;
     starStreamColorAttribute.needsUpdate = true;
