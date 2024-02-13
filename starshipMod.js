@@ -1804,6 +1804,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
             let loopsToCull = starCount;
             let loopOfCulling =starStreamIndex;
             let shellBoost = 1.5;
+            /*
            if(xyStarParticleArray[loopOfCulling]!=null) while(xyStarParticleArray[(loopOfCulling-1+starCount)%starCount]!=null&&uniforms[ "time" ].value-xyStarParticleArray[loopOfCulling].time>maxToMin*secondsToEdge*shellBoost&&loopsToCull>0)
             {
                // xyStarParticleArray.shift();
@@ -1818,7 +1819,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
                 loopsToCull--;
 
             }
-            
+            */
             let OUTERSHELL =maxToMin* secondsToEdge;
             let m = xyStarParticleArray[starStreamIndex];
             if(m!=null)
