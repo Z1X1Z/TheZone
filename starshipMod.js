@@ -1694,7 +1694,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
             
         {
             
-            if(isFinite(testarContinuous[g])&&testarContinuous[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.){
+            if(isFinite(testarContinuous[g])&&testarContinuous[g]!=0.&&isFinite(mustarD[g])&&isFinite(twist)&&mustarD[g]!=0.){
                 
                 let arm =((mustarD[g]+twist+12)*radialWarp)%24/24*pi*2.;
                 const lengtOriginal=(testarContinuous[g]-minTestar)/(maxTestar-minTestar);//twice applied
