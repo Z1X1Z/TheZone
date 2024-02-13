@@ -1820,7 +1820,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
             }
             
             let OUTERSHELL =maxToMin* secondsToEdge;
-            let m = xyStarParticleArray[xyStarParticleArray.length-1];
+            let m = xyStarParticleArray[(starStreamIndex - 1+starCount)%starCount];
             let lastLoopTime=m.time;
             let timeShift = 0.;
             let w = timeShift/m.lengt/secondsToEdge;
@@ -1836,7 +1836,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
                 if (lastLoopTime!=m.time) {
                     timeShift = uniforms["time"].value-m.time;
                     w = timeShift/m.lengt/secondsToEdge;
-                    withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL*1.2;// OUTERSHELL times 1.1 to prevent remnant pieces around edge
+                    withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL*shellBoost;// OUTERSHELL times 1.1 to prevent remnant pieces around edge
                     depthINNER = -starShipDepthInSet+timeShift/OUTERSHELL*(1.-starShipDepthInSet);
                     depthOUTER = depthINNER+m.lengt;
                     
