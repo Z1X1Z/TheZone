@@ -2738,8 +2738,9 @@ function calculatePitch ()
 {
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 
-let tolerance=.0998;//(1024-26)/10000
-                                                      
+let tolerance;//(1024-26)/10000
+if(window.highORlow==1)tolerance=.0899;
+    else if(window.highORlow==2)tolerance=.5;
 let period;
 let delta = 0.0, runningSum = 0.0;
 yinData[0] = 1.0;
