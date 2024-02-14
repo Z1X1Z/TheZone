@@ -1918,7 +1918,11 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                 if (g==bottomNote&&EldersLeg==24)widt*=2.;
                 let arm =flip*(g*radialWarp+twist*EldersLeg/24.)%EldersLeg/EldersLeg*pi*2.;
                 let lengt = (testar[(g+EldersLeg/2.)%EldersLeg]-minTestar)/(maxTestar-minTestar);
-                                     if(twoOr1) {lengt/=2.**16./EldersLeg;lengt=lengt**.25;widt/=2;}
+                if(twoOr1) {
+                    lengt/=2.**14./EldersLeg;
+                    lengt=lengt**.25;
+                    
+                }
                                       const vop = new THREE.Color();
                       vop.setHSL(((20/24.*EldersLeg-g-oddSkew))%EldersLeg/EldersLeg,lengt,starMajorMinor);
                                   
