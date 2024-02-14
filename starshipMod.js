@@ -1247,9 +1247,10 @@ function takeNextScoreSlice(start){
            
            
           window.date = Date.now();
-          window.startTimeSecondMantissaMagnified = ((date/1000.-Math.round(date)/1000.)-.5)*144000;//for orienting the dance to time
+          window.startTimeSecondMantissaMagnified = ((date/1000.-Math.round(date/1000.)))*144000;//for orienting the dance to time
                     
-                    
+                    console.log(date)
+                                console.log(startTimeSecondMantissaMagnified)
                     window.ChristoDecrypto = 0.;
                     window.timeRESET =0;
                     window.TIMESTAMP;
@@ -1474,12 +1475,12 @@ function runOSMD (){
      if(!sheetTranslucent&& bottomOfScreenHeight != document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight)adjustThreeJSWindow();//readjust for verbose
     uniforms[ "time" ].value = timestamp/1000.+window.startTimeSecondMantissaMagnified;
 
-    if(uniforms.starSpin.value!=0)
+    if(uniforms.starSpin.value!=0&&isFinite(uniforms[ "time" ].value)&&isFinite(lastTIMEUNIFORM))
     {let timeTwistIncrement=(( uniforms[ "time" ].value -lastTIMEUNIFORM)*uniforms[ "rate" ].value*-uniforms.starSpin.value*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel.
-        twist-=timeTwistIncrement;
+        window.twist-=timeTwistIncrement;
         for(var v = 0; v<maxTouchSoundCount;v++)initialTwist[v]-=timeTwistIncrement;
     }
-                                          lastTIMEUNIFORM = timestamp/1000.+window.startTimeSecondMantissaMagnified;
+                                          lastTIMEUNIFORM =uniforms[ "time" ].value;
     uniforms.twistStar.value=-window.twist/24.*2.*Math.PI;
 
      
