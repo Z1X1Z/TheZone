@@ -1249,8 +1249,6 @@ function takeNextScoreSlice(start){
           window.date = Date.now();
           window.startTimeSecondMantissaMagnified = ((date/1000.-Math.round(date/1000.)))*144000;//for orienting the dance to time
                     
-                    console.log(date)
-                                console.log(startTimeSecondMantissaMagnified)
                     window.ChristoDecrypto = 0.;
                     window.timeRESET =0;
                     window.TIMESTAMP;
@@ -1490,7 +1488,6 @@ function runOSMD (){
 
     elapsedTimeBetweenFrames = (timestamp-lastTime);
                             //        if(uniforms.starSpin.value!=0)window.twist+=(elapsedTimeBetweenFrames/1000.*flip*uniforms[ "rate" ].value*uniforms.starSpin.value*4.)%24.;//Needs 12/PI to synchronize with carousel
-                                 //    console.log(window.twist);
                         if(loopsRun<3)elapsedTimeBetweenFrames = 0;
 
     if(elapsedTimeBetweenFrames>interval)
@@ -1918,8 +1915,7 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                incrementation++;
                 let widt = starshipSize/(EldersLeg/24.)**.5/incrementation/2.;
                 if (g==bottomNote&&EldersLeg==24)widt*=2.;
-                const arm =(flip*(g+oddSkew+twist)*EldersLeg/24.*radialWarp)%EldersLeg/EldersLeg*pi*2.;
- 
+                let arm =flip*(g*radialWarp+twist*EldersLeg/24.)%EldersLeg/EldersLeg*pi*2.;
                 let lengt = (testar[(g+EldersLeg/2.)%EldersLeg]-minTestar)/(maxTestar-minTestar);
                                      if(twoOr1) {lengt/=2.**16./EldersLeg;lengt=lengt**.25;widt/=2;}
                                       const vop = new THREE.Color();
