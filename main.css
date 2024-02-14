@@ -166,7 +166,7 @@ button {
     left:0%;
     column-count:8;
     column-gap: 5px;
-    column-rule: 1px solid white;
+    column-rule: 2.5px solid white;
  display: none;
  position: fixed;
  background-color: rgba(127.5,127.5,127.5,.5);
