@@ -676,8 +676,8 @@ duperZoom: {value:1.},
  twistStar:{value:0.},
        multiplicatorNexus:{value:false},//has problems may be discontinued
        squareClover:{value:false},
-         mandelCloverFactor:{value:1.75}
-
+         mandelCloverFactor:{value:1.75},
+         exponentialPetals:{value:0.}
        }
 
                                            var minimumDimension=Math.min(window.innerHeight,window.innerWidth);
@@ -905,7 +905,8 @@ function init() {
      
      
      circleMaterial = new THREE.MeshBasicMaterial(    { opacity: .8,
-         transparent: true});     circle = new THREE.Mesh(new THREE.CircleGeometry(dotSize,3,0.),circleMaterial);
+         transparent: true});
+             circle = new THREE.Mesh(new THREE.CircleGeometry(dotSize,3,0.),circleMaterial);
 
      radialMaterial=  new THREE.MeshBasicMaterial( { color: 0x000000});
      radialGeometry=new THREE.BufferGeometry()
@@ -2689,8 +2690,8 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
                               
                      
                      
-                                                       circle.geometry.dispose();
-                                                       radialLine.geometry.dispose( );
+                                                     //  circle.geometry.dispose();
+                                                     //  radialLine.geometry.dispose( );
 if(RockInTheWater==2||RockInTheWater==1)scene.remove(starStreamMesh);
                                                        if(uniforms.gameOn.value)
 for(var n = 0; n<targets.length;n++){

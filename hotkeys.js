@@ -181,7 +181,12 @@ function callKey(event){
     else if (event.ctrlKey&&key=="j")window.Oreo=!window.Oreo;
     else if (event.ctrlKey&&key=="t")window.shouldShowStar=!window.shouldShowStar;
     else if (event.ctrlKey&&key=="r")window.flame=!window.flame;
-
+    else if (event.ctrlKey&&key=="g") {
+        if( uniforms.exponentialPetals.value==0.) uniforms.exponentialPetals.value=1.;
+        else if( uniforms.exponentialPetals.value==1.) uniforms.exponentialPetals.value=-1.;
+        else if( uniforms.exponentialPetals.value==-1.) uniforms.exponentialPetals.value=0.;
+        
+    }
     else if (event.altKey&&(key=="©"||key=="g"))window.grabStar=!window.grabStar;
     else if (event.altKey&&(key=="ß"||key=="s")){
         if(window.touchMode)window.muteTouchTouchVolume = !window.muteTouchTouchVolume;
