@@ -290,10 +290,10 @@ let maxLetterDepth=-1;
             <label for="ConcertKey">THE A Key Frequency (Should probably be "Concert A" 440 hz):</label>
            <input type="number" id="ConcertKey" name="ConcertKey" class="num" onkeydown="window.ConcertKey=document.getElementById('ConcertKey').value">
                <br>
-               <label for="RadialWarp">Magnify rate of the octave, radially by 1/</label>
+               <label for="RadialWarp">Magnify rate of the octave, radially by</label>
               <input type="number" id="RadialWarp" name="RadialWarp" class="num" onkeydown="
                     let b=document.getElementById('RadialWarp').value;
-                    if(!isNaN(b)&&b>0)radialWarp=b;">
+                    if(!isNaN(b)&&b>0)radialWarp=1./b;">
                   <br>
                   <label for="fretCount">Fruits(max 1365)</label>
                   <input type="number" id="fretCount" name="fretCount" class="num" onkeydown="
@@ -1483,6 +1483,7 @@ uniform float flipStar;
 uniform bool NightAndDay;
 
 uniform float mandelCloverFactor;
+uniform float exponentialPetals;
     const float PI = 3.1415927410125732;
     const float gr = 1.618033988749;
     const float leaf = -1.3247;//1795724474;
@@ -2073,7 +2074,7 @@ float metaCoreDriveFactor =(((1.-leaf)/truncator)*truncator)/gr;//.324717.... nu
 float spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf))/truncator)*truncator*1.5;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
 
 float hyperCoreOUTPUT =hyperCore*log(2.)/log(metaCoreDriveFactor)+loops;
-                             hyperCoreOUTPUT-=petals;//upcore for higher omniclover counts
+                             hyperCoreOUTPUT-=(6.-petals)/6.;//upcore for higher omniclover counts
 
 float hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
 
@@ -2252,6 +2253,11 @@ dstnce = length(s);
                              
                              
                              if(petals!=0.&&dstnce<4./3.)s=spin2(s,atan(s.y,s.x)*(petals)/6.);
+                             
+                             
+                             if(dstnce<4./3. &&exponentialPetals!=0.)               s=spin2(s,pow(2.,.75+atan(s.y,s.x)
+                                                                                      ));
+                             //if(dstnce<4./3.)s=spin2(s,pow(2.,atan(s.y,s.x)));
 
 for(int i=0;i<40; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER&& 0.<=hyperCoreBoosted)
@@ -3064,8 +3070,11 @@ vec2 backGround=p;
 if (colorCombo!=20)backGround=freed(p*zoom+spunC);
 if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time*rate,PI*2.));
 
+
+if(exponentialPetals!=0.)backGround=spin2(vec2(backGround.x,exponentialPetals*backGround.y), pow(2.,atan(exponentialPetals*backGround.y,backGround.x))) ;
+
                    backGround=spin2(backGround,atan(backGround.y,backGround.x)*petals/6.);
-                   //p.x+=.5;
+                   
 
 
 vec2 dance = vec2(0.);
