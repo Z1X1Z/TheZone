@@ -1547,7 +1547,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
     if(!isNaN(loudestFret[0].volume)&&omniDynamicEngaged)
         omniData[hyperCoreOffset]=coreShift/2.;
 
-        setDynamicSampler2ds();
+       if(window.dynamicCoring||omniDynamicEngaged) setDynamicSampler2ds();
     
    if(spirographMODE!=0)makeSpirograph();
 
@@ -2690,8 +2690,8 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
                               
                      
                      
-                                                     //  circle.geometry.dispose();
-                                                     //  radialLine.geometry.dispose( );
+                                                       circle.geometry.dispose();
+                                                       radialLine.geometry.dispose( );
 if(RockInTheWater==2||RockInTheWater==1)scene.remove(starStreamMesh);
                                                        if(uniforms.gameOn.value)
 for(var n = 0; n<targets.length;n++){
