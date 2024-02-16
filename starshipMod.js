@@ -2725,7 +2725,7 @@ for(var n = 0; n<targets.length;n++){
                               
                               loopsRun++;
                           //   if(dupered&&zoom<zoomCap32)
-                              boot();//generate clover in 64 bit, duper Core
+                          //    boot();//generate clover in 64 bit, duper Core
 
                                                                        animateLoopId=                   window.requestAnimationFrame( animate );
                             //  renderer.forceContextLoss ()
