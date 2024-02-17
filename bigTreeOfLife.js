@@ -1,4 +1,4 @@
-var shaderScale, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta;
+var shaderScale, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals;
 function setUniformsToPlainName(){
    // uniforms..value
     time = window.TIMESTAMP;
@@ -32,11 +32,12 @@ function setUniformsToPlainName(){
     shaderScale =uniforms.shaderScale.value;
     centralCores=uniforms.centralCores.value;
     externalCores=uniforms.externalCores.value;
+    exponentialPetals=uniforms.exponentialPetals.value;
 }
 
-function tol( p,  t){
+function tol( j,  t){
   //  return p;
-    p = new THREE.Vector2(p.y,p.x);
+   let p = new THREE.Vector2(j.y,j.x);//
     p = p.clone().multiplyScalar(zoom).add(new THREE.Vector2(-coords.y,-coords.x));
 
     var pWithoutChiralizer = p.clone();
@@ -341,7 +342,9 @@ dstnce = s.length();
  //              s*=refactorCores;c*=refactorCores;
  
  if(dstnce<4./3.)s=spin2(s,Math.atan(s.y,s.x)*(petals)/6.);
-   
+        
+        if(dstnce<4./3. &&exponentialPetals!=0.) s=spin2(s,Math.pow(2.,(Math.atan(s.y,s.x)/Math.PI+1.)*2.));
+        
 for(var i=0;i<40; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER&& 0.<=hyperCoreBoosted)
 {
@@ -424,7 +427,6 @@ return new THREE.Vector3(s.x,s.y,hyperCoreOUTPUT);}
                            
                            let coreTriggered = 0;
                            let coreSwipeTexture;
-                           let coreSwipeData=new Float32Array(window.innerHeight*window.innerWidth*4).fill(0);
                            const can = document.getElementById("CANVAS");
                            
 window.generated = true
@@ -432,8 +434,8 @@ window.bigCloverGapSync = false;
                            function boot (){
     setUniformsToPlainName()
 
-    coreSwipeData=new Float32Array(window.innerHeight*window.innerWidth*4).fill(0.);
-    
+        let coreSwipeData=new Float32Array(window.innerHeight*window.innerWidth*4).fill(0);
+
     let strideClover=0;
     //if(loopsRun>2) console.log(Number.MAX_VALUE==new THREE.Vector2(Number.MAX_VALUE,0.).x);
     if(loopsRun>1){

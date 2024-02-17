@@ -65,6 +65,7 @@ window.twist = 0.;
 window.flip = 1.;
 
 //if (navigator.maxTouchPoints <1) rez = window.devicePixelRatio;//redefine resolution for desktop
+                          
 let colorSound;
 let colorSoundPURE;
 let center = false;
@@ -1480,7 +1481,7 @@ function runOSMD (){
         for(var v = 0; v<maxTouchSoundCount;v++)initialTwist[v]-=timeTwistIncrement;
     }
                                           lastTIMEUNIFORM =uniforms[ "time" ].value;
-    uniforms.twistStar.value=-window.twist/24.*2.*Math.PI;
+    uniforms.twistStar.value=window.twist/24.*2.*Math.PI;
 
      
     if(window.ChristoDecrypto!=0) uniforms.metaCarousel.value=          1./(  window.ChristoDecrypto*uniforms.externalCores.value)*(timestamp-window.timeRESET)/10.;
@@ -2725,14 +2726,30 @@ for(var n = 0; n<targets.length;n++){
                               
                               loopsRun++;
                           //   if(dupered&&zoom<zoomCap32)
-                          //    boot();//generate clover in 64 bit, duper Core
+                                                       
+                                                       
+                     if (!iOS||(iOS&&dupered)) boot();//generate clover in 64 bit, duper Core, there is a bug after maybe half a day on iOS in bigTree.js (maybe also on safari Mac)
 
                                                                        animateLoopId=                   window.requestAnimationFrame( animate );
                             //  renderer.forceContextLoss ()
                             //  renderer.forceContextRestore ( )
 
 }
-
+                                                       
+                                                       //https://stackoverflow.com/questions/9038625/detect-if-device-is-ios
+                                                       function iOSCHECK() {
+                                                         return [
+                                                           'iPad Simulator',
+                                                           'iPhone Simulator',
+                                                           'iPod Simulator',
+                                                           'iPad',
+                                                           'iPhone',
+                                                           'iPod'
+                                                         ].includes(navigator.platform)
+                                                         // iPad on iOS 13 detection
+                                                         || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
+                                                       }
+                                                       let iOS = iOSCHECK();
                     let animateLoopId;
                     
 
