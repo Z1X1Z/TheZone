@@ -2253,10 +2253,12 @@ dstnce = length(s);
                              
                              
                              if(petals!=0.&&dstnce<4./3.)s=spin2(s,atan(s.y,s.x)*(petals)/6.);
+                             //if(exponentialPetals!=0.)s=spin2(vec2(s.x,exponentialPetals*s.y),
+                                //                                                                                             2.*PI*pow(2.,(xenOctaveFactor-atan(s.x,exponentialPetals*s.y)))/pow(2.,xenOctaveFactor));
+
+                            //if(exponentialPetals!=0.)s=spin2(vec2(s.x,s.y*exponentialPetals),log(atan(s.y*exponentialPetals,s.x)/PI));
                              
-                             
-                             if(dstnce<4./3. &&exponentialPetals!=0.)               s=spin2(s,pow(2.,.75+atan(s.y,s.x)
-                                                                                      ));
+                             if(dstnce<4./3. &&exponentialPetals!=0.) s=spin2(s,pow(2.,(atan(s.y,s.x)/PI+1.)*2.));
                              //if(dstnce<4./3.)s=spin2(s,pow(2.,atan(s.y,s.x)));
 
 for(int i=0;i<40; i++)//not sure if i is 20 or >20
@@ -3069,9 +3071,11 @@ if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time*rate,PI*2.));}
 vec2 backGround=p;
 if (colorCombo!=20)backGround=freed(p*zoom+spunC);
 if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time*rate,PI*2.));
+float xenOctaveFactor =4.;
 
-
-if(exponentialPetals!=0.)backGround=spin2(vec2(backGround.x,exponentialPetals*backGround.y), pow(2.,atan(exponentialPetals*backGround.y,backGround.x))) ;
+if(exponentialPetals!=0.)backGround=spin2(vec2(backGround.x,exponentialPetals*backGround.y),
+                                                                                                2.*PI*pow(2.,(xenOctaveFactor-(atan(backGround.x,exponentialPetals*backGround.y)/
+                                                                                                              PI)*xenOctaveFactor-(petals)/6.))/pow(2.,xenOctaveFactor));
 
                    backGround=spin2(backGround,atan(backGround.y,backGround.x)*petals/6.);
                    
@@ -3146,7 +3150,8 @@ vec2 dance = vec2(0.);
                                  
          vec2 characterP = p*2.;
                                  
-         vec2 characterPSpunToKey=spin2(characterP*vec2(1.,flipStar)/.8,-(starSpin*mod(time*rate,PI*2.)-twistStar));
+         vec2 characterPSpunToKey=spin2(characterP*vec2(1.,flipStar)/.8,-(//starSpin*mod(time*rate,PI*2.)-
+                                                                          twistStar));
                                  
          vec2 characterOnTrailP = characterP;
          if(MannyONtrail==0) characterOnTrailP=spin2(characterOnTrailP,atan(d.y,d.x)-PI*3./2.);//put manny on trail
