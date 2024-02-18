@@ -33,6 +33,7 @@ function setUniformsToPlainName(){
     centralCores=uniforms.centralCores.value;
     externalCores=uniforms.externalCores.value;
     exponentialPetals=uniforms.exponentialPetals.value;
+    mandelCloverFactor=uniforms.mandelCloverFactor.value
 }
 
 function tol( j,  t){
@@ -196,7 +197,8 @@ var m= new THREE.Vector2(0.,0.);
     if(lfc!=0.) truncator = Math.log(zoom/lfc)/10000.;
 //Maendel clover
 if(wheel)m =  pWithoutChiralizer.clone().sub(new THREE.Vector2(coords.y,coords.x))//try signs with for fibonacci ring pairing and movement distortion #syyym
-.multiplyScalar(Math.abs(coresIn/crs*2.-1.)).divideScalar(.25);
+.multiplyScalar(Math.abs(coresIn/crs*2.-1.)).multiplyScalar(mandelCloverFactor);
+                                     
 //this is essentially just p as in the mandelbrot x <== x^2+
 
 var iterations = 100.;//loops all escape delimiter so iterations aren't used unless needed
@@ -275,8 +277,10 @@ if(dotted)s/=dot(-m,t)*dot(m,-t);
 */
    
 if(morph!=0.&&!wheel)s.sub(t);
-else s.add(t.clone().sub(m));
-   
+else {
+    let y = t.clone().sub(m);
+    s.add(y);
+}
  
 if(Clovoid)s.x=(Math.sqrt(2.*Math.abs(1./s.x)));//this is the body steps on the clover
 else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only
