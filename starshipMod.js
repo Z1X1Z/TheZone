@@ -1548,7 +1548,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
     if(!isNaN(loudestFret[0].volume)&&omniDynamicEngaged)
         omniData[hyperCoreOffset]=coreShift/2.;
 
-       if(window.dynamicCoring||omniDynamicEngaged) setDynamicSampler2ds();
+       setDynamicSampler2ds();
     
    if(spirographMODE!=0)makeSpirograph();
 
@@ -2015,6 +2015,27 @@ var fingerStride = 0;
     
          for (var t=0; t<12; t++) {
              
+             var vop = new THREE.Color();
+             let BlackOrWhite=1;
+             const noteGrey = Math.abs(t-(6-twist/2.)+12)%12;
+             if (t==7||t==5||t==2||t==0||t==10)
+             {
+                 BlackOrWhite=-1.;
+             }
+         if  ((noteGrey<.5 || noteGrey>11.5)&&uniforms.Character.value!=2&&BlackOrWhite!=-1.)BlackOrWhite=.5;
+
+            if( ((uniforms.Character.value==0&&(noteGrey<6.5&&noteGrey>5.5))) &&uniforms.colorCombo.value!=20&&!blankBackground&&starClover) BlackOrWhite=.5;
+            else if(uniforms.colorCombo.value==20){
+                     if(uniforms.musicAngelMan.value>0&&(uniforms.Character.value==4||uniforms.Character.value==3)
+                        &&((uniforms.Character.value==3&&(t<.5||t>11.5))||(t<2.5&&t>1.5)||(t<10.5&&t>9.5)||(t<7.5&&t>6.5)||(t>4.5&&t<5.5))) BlackOrWhite =.5;
+                     else if(uniforms.musicAngelMan.value==0&&uniforms.Character.value==3&&(t<.5||t>11.5))BlackOrWhite =.5;
+                     else if (uniforms.musicAngelMan.value==0&&uniforms.Character.value==4&&(t<6.5&&t>5.5));
+                     else if(((t<7.5&&t>6.5)||(t>4.5&&t<5.5))) BlackOrWhite =.5;
+
+                 }
+             vop.setRGB(BlackOrWhite,BlackOrWhite,BlackOrWhite);
+             
+
              for (var g=0; g<10; g++) {
                  const widt = pi/120.;
                  const finger = (isFinite(twelve[t][g]))?twelve[t][g]:0;
@@ -2022,27 +2043,6 @@ var fingerStride = 0;
 
                  const lengt =(isFinite(maxFinger)&&maxFinger!=0)? (finger)/maxFinger*(1.-pi/12.) : 0;
 
-
-                     var vop = new THREE.Color();
-                     let BlackOrWhite=1;
-                     const noteGrey = Math.abs(t-(6-twist/2.)+12)%12;
-                     if (t==7||t==5||t==2||t==0||t==10)
-                     {
-                         BlackOrWhite=-1.;
-                     }
-                 if  ((noteGrey<.5 || noteGrey>11.5)&&uniforms.Character.value!=2)BlackOrWhite=.5;
-
-                    if( ((uniforms.Character.value==0&&(noteGrey<6.5&&noteGrey>5.5))) &&uniforms.colorCombo.value!=20&&!blankBackground&&starClover) BlackOrWhite=.5;
-                    else if(uniforms.colorCombo.value==20){
-                             if(uniforms.musicAngelMan.value>0&&(uniforms.Character.value==4||uniforms.Character.value==3)
-                                &&((uniforms.Character.value==3&&(t<.5||t>11.5))||(t<2.5&&t>1.5)||(t<10.5&&t>9.5)||(t<7.5&&t>6.5)||(t>4.5&&t<5.5))) BlackOrWhite =.5;
-                             else if(uniforms.musicAngelMan.value==0&&uniforms.Character.value==3&&(t<.5||t>11.5))BlackOrWhite =.5;
-                             else if (uniforms.musicAngelMan.value==0&&uniforms.Character.value==4&&(t<6.5&&t>5.5));
-                             else if(((t<7.5&&t>6.5)||(t>4.5&&t<5.5))) BlackOrWhite =.5;
-
-                         }
-                     vop.setRGB(BlackOrWhite,BlackOrWhite,BlackOrWhite);
-                     
 
                      for(var yy=0;yy<6;yy++)   starsANDwitnessesColorAttribute.setXYZ(fingerStride+yy,vop.r,vop.g,vop.b)
                     
