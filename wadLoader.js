@@ -127,7 +127,7 @@ function startSound(e){
                 
                 let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
 
-                initialAngleSound[id] = (Math.atan2(y,x)+pi/2.+8*pi)%(2*pi)*flip;
+                initialAngleSound[id] = (Math.atan2(y,x)+pi/2.)*flip;
                  angleSound[id] =initialAngleSound[id];
                 let frequency = Math.pow(2.,((((initialAngleSound[id]*window.flip)/pi/2*12+12-flip)*window.flip-window.twist/2.))/12.
                                               +((flip==-1)?2:-1)
@@ -235,8 +235,8 @@ if(window.grabStar)
         if(isFinite(frequency)&&frequency>0.&&
            angleSound[id]-initialAngleSound[id]!=0){
                  if(typeof sound[id]=="object"){
-                     let volumePrime=volume*((angleSound[id] - initialAngleSound[id])/(2.*pi))%1*.5;
-                     let volumeTWO =volume*(1.-(angleSound[id]-initialAngleSound[id])/(2.*pi))%1*.5;
+                     let volumePrime=volume*(angleSound[id] - initialAngleSound[id])/(2.*pi)*.5;
+                     let volumeTWO =volume*(1.-(angleSound[id]-initialAngleSound[id])/(2.*pi))*.5;
                      if(window.grabStar&&flip==-1)
                      {
                          let vpBuf=volumePrime
