@@ -105,7 +105,7 @@ function startSound(e){
     let id = touchNumber.get(pressIndex.get(e.pointerId));
 
     if(window.grabStar){
-        initialAngle[id]=(Math.atan2(y,x)/Math.PI/2.+1.)%1.;
+        initialAngle[id]=Math.atan2(y,x)/Math.PI/2.;
         window.twist=(window.twist)%24
         initialTwist[id]=window.twist
         lastTwist[id] =0;
