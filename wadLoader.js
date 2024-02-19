@@ -106,7 +106,7 @@ function startSound(e){
 
     if(window.grabStar){
         initialAngle[id]=(Math.atan2(y,x)/Math.PI/2.+1.)%1.;
-        window.twist=(window.twist+24*100)%24
+       // window.twist=(window.twist+24)%24
         initialTwist[id]=window.twist
         lastTwist[id] =0;
     }
@@ -193,11 +193,13 @@ function followSound(e){
                     let twistIncrement=0;
 if(window.grabStar)
 {
-    let slip = (Math.atan2(y,x)/Math.PI/2.-initialAngle[id])%1;
+    let slip = Math.atan2(y,x)/Math.PI/2.-initialAngle[id];
+   // if(lastTwist==0)lastTwist=slip;
      twistIncrement = (slip-lastTwist[id])*24*flip;
+    //if(twistIncrement>12)twistIncrement=-twistIncrement;
     window.twist+=twistIncrement;
 
-    window.twist=(window.twist+initialTwist[id]+24*100)%(24)-initialTwist[id];
+    window.twist=(window.twist+initialTwist[id])%24-initialTwist[id];
      lastTwist[id] =slip;
 
 }
