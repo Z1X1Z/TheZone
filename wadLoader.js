@@ -195,7 +195,7 @@ function followSound(e){
                     let twistIncrement=0;
 if(window.grabStar)
 {
-    let slip = (Math.atan2(y,x)/Math.PI/2.-initialAngle[id]+1)%1.;
+    let slip = (Math.atan2(y,x)/Math.PI/2.-initialAngle[id]);
    // if(lastTwist==0)lastTwist=slip;
      twistIncrement = (slip-lastTwist[id])*24*flip;
     //if(twistIncrement>12)twistIncrement=-twistIncrement;
