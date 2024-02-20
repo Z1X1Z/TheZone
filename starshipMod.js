@@ -581,6 +581,8 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
                                            window.zoom=1.;
 
                             let uniforms = {
+         micIn:{value:null},
+         pixelSTARon:{value:true},
 omniDynamic:{value:null},
 coreTextureSampler:{value:null},
 STAR:{value: null    },
@@ -1017,20 +1019,32 @@ function init() {
 }
                                            window.INITIALIZED=false;
 function setDynamicSampler2ds(){
-     omniTexture = new THREE.DataTexture( omniData, 40, 1,THREE.RedFormat,THREE.FloatType);
+     let omniTexture = new THREE.DataTexture( omniData, 40, 1,THREE.RedFormat,THREE.FloatType);
      omniTexture.unpackAlignment=1
      omniTexture.needsUpdate=true;
      uniforms.omniDynamic.value=omniTexture;
      uniforms.omniDynamic.needsUpdate = true;
      
      
-     coreTexture = new THREE.DataTexture( coreData, 40, 1,THREE.RedFormat,THREE.FloatType);
+     let coreTexture = new THREE.DataTexture( coreData, 40, 1,THREE.RedFormat,THREE.FloatType);
      coreTexture.unpackAlignment=1
      coreTexture.needsUpdate=true;
      uniforms.coreTextureSampler.value=coreTexture;
      uniforms.coreTextureSampler.needsUpdate = true;
  }
- 
+                            function setMicInputToPIXEL(){
+            let dataArrayBuffer =new Float32Array( bufferSize );
+             for (var x = 0; x < bufferSize; x++) dataArrayBuffer [x]= dataArray[x]/255.;
+
+              
+             let micTexBuf = new THREE.DataTexture( dataArrayBuffer, bufferSize, 1, THREE.RedFormat,THREE.FloatType);
+             micTexBuf.needsUpdate=true;
+
+             uniforms[ "micIn" ].value = micTexBuf;
+             uniforms.micIn.needsUpdate = true;
+
+         }
+         
                     let bottomOfScreenHeight = 0;
                                            let correlationForTextX = 0;
                                            let correlationForTextY = 0;
@@ -1458,12 +1472,16 @@ function runOSMD (){
                                            let hyperCorePixel = new Uint8Array(4).fill(0.);
 
                                            
-                                           let     coreTexture;
-                                           let omniTexture;
                                            let firstAnimation = true;
                                               let ONbypass;
                                           let lastTIMEUNIFORM = 0.;
+                                          
+                                          
    function animate( timestamp ) {
+
+                                    
+                                    
+                                    
     ONbypass = false;
      if( window.touchMode||window.touchOnlyMode)executeTouchRegime();
                                     
@@ -1662,7 +1680,8 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
 
 
   if (window.micOn)analyser.getByteFrequencyData(  dataArray);
-
+setMicInputToPIXEL();
+       
    var maxTestar=0.0000001;
    var minTestar=100000000000000;
 
