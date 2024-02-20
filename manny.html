@@ -1538,8 +1538,8 @@ uniform float exponentialPetals;
                         //angle=mod(angle,1.);
                         
         float frAmp=0.;
-
         for (float n = -4.; n<4.;n+=1.0)//not sure why it has negative range
+        //if (twistStar<24.)
          {
              float b =nyq*pow(2.,angle+n);
 
@@ -1561,7 +1561,8 @@ uniform float exponentialPetals;
         //if(frampDIVlend>255.)
         return  vec4(clamp(hsv2rgb(
                                       vec3(
-                                           mod((-angle+(4.+3.*flipStar-twistStar*flipStar)/12.)//+3.-flipStar/12.
+                                           mod((-angle+(4.-3.*flipStar
+                                                       )/12.)//+3.-flipStar/12.
                                                ,1.),1.,1.
                                            ))
                               ,.0,1.), 1.)/d;
@@ -1587,14 +1588,13 @@ uniform float exponentialPetals;
             angle += 2.*PI*noteOfStar/12.;
         angle /= 2.*PI;
          angle = mod(angle,1.);
-        float frAmp=0.;
         float oct = floor(angle*10.);
         float note0 = 1.-angle+oct-noteOfStar/12.;
         float note1  =1.024/44.1/4.*pow(note0,2.);
         float noteAmp =16.* texture2D(micIn,
         vec2(note1
         ,0.)).r;
-                
+        noteAmp/=255.;
         float d = length( uv);
         //fr=(fr)*(fr)/3.;
       //  float power = 5.;
@@ -1602,7 +1602,7 @@ uniform float exponentialPetals;
         float rote = 2.;
      if ((noteAmp/d>3.5&&(noteAmp/d<7.||noteAmp/d>14.))
 ||
-frAmp*d>7.
+noteAmp*d>9.
 ){
            if(
               noteOfStar==mod(0. +rote,12.)||
