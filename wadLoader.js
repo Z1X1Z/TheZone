@@ -200,7 +200,7 @@ if(window.grabStar)
      twistIncrement = (slip-lastTwist[id])*24*flip;
     //if(twistIncrement>12)twistIncrement=-twistIncrement;
     window.twist+=twistIncrement;
-   // for(var t=0; t<maxTouchSoundCount;t++)if(t!=id)initialTwist[t]+=twistIncrement;
+    for(var t=0; t<maxTouchSoundCount;t++)if(t!=id)initialTwist[t]+=twistIncrement;
 
     window.twist=(window.twist-initialTwist[id]+48.)%24+initialTwist[id];
      lastTwist[id] =slip;
