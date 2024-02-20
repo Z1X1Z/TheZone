@@ -200,6 +200,7 @@ if(window.grabStar)
      twistIncrement = (slip-lastTwist[id])*24*flip;
     //if(twistIncrement>12)twistIncrement=-twistIncrement;
     window.twist+=twistIncrement;
+   // for(var t=0; t<maxTouchSoundCount;t++)if(t!=id)initialTwist[t]+=twistIncrement;
 
     window.twist=(window.twist-initialTwist[id]+48.)%24+initialTwist[id];
      lastTwist[id] =slip;
@@ -232,13 +233,23 @@ if(window.grabStar)
                 //  angleSound[id]=(angleSound[id]+2*pi)%(Math.PI*2.);
 
              }
-                // console.log("as"+(angleSound[id]-initialAngleSound[id]))
-                 //console.log("twist"+twist)
+                 //console.log("as"+(angleSound[id]-initialAngleSound[id]))
+                // console.log("twist"+twist)
                  
                  let soundTouchComponent;
-                 if(!grabStar)soundTouchComponent=angleSound[id]
-                     else soundTouchComponent = initialAngleSound[id]
-                let frequency = Math.pow(2.,((((soundTouchComponent*window.flip)/pi/2*12+12-flip)*window.flip-window.twist/2.))/12.
+                 let twistFeed;
+                 if(!grabStar)
+                 {soundTouchComponent=angleSound[id]
+                     twistFeed = twist;
+                 }
+                 else {
+                    // soundTouchComponent=angleSound[id]
+                    soundTouchComponent = (initialAngleSound[id]+angleSound[id])%(2*pi)-angleSound[id];
+                    //initialTwist[id]=(initialTwist[id]-twist+24)%(24.)+twist;
+                     twistFeed = (initialTwist[id]-twist)%(24.)+twist;
+
+                 }
+                let frequency = Math.pow(2.,((((soundTouchComponent*window.flip)/pi/2*12+12-flip)*window.flip-twistFeed/2.))/12.
                                               +((flip==-1)?2:-1)
                                               )*window.ConcertKey;
         if(isFinite(frequency)&&frequency>0.&&
