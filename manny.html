@@ -1585,8 +1585,8 @@ uniform float exponentialPetals;
        if(length(uv)<starnSize){
        //uv *=    26.5;
 
-            float angle = mod((atan(uv.y,uv.x)+5./12.*PI2),PI2)-twistStar*flipStar;//
-                 if(angle<0.)angle = PI2+angle;
+            float angle = (atan(uv.y,uv.x)+5./12.*PI2)-twistStar*flipStar;//
+               //  if(angle<0.)angle = PI2+angle;
             angle += PI2*noteOfStar/12.;
         angle /= PI2;
          angle = mod(angle,1.);
