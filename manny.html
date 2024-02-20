@@ -1591,7 +1591,7 @@ uniform float exponentialPetals;
         angle /= PI2;
          angle = mod(angle+2.,1.);
         float oct = floor(angle*10.);
-        float note0 = 1.+oct-mod(noteOfStar/12.+angle,1.);
+        float note0 = 1.+oct-noteOfStar/12.-angle;
         note0-=5.;
         float note1  =1.024/44.1*pow(2.,note0);
         float noteAmp =16.* texture2D(micIn,
