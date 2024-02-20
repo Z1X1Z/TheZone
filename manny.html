@@ -1589,7 +1589,7 @@ uniform float exponentialPetals;
                //  if(angle<0.)angle = PI2+angle;
             angle += PI2*noteOfStar/12.;
         angle /= PI2;
-         angle = mod(angle,1.);
+         angle = mod(angle+2.,1.);
         float oct = floor(angle*10.);
         float note0 = 1.-angle+oct-noteOfStar/12.;
         float note1  =1.024/44.1*pow(2.,note0);
