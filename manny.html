@@ -1527,30 +1527,38 @@ uniform float exponentialPetals;
      return f;
     }
     
+    
+    float nyq =  1024./44100.;
+
     vec4 audioEq( vec2 uv )//Shekina Glory
     {
-       // float cutoff = 4.;
         uv=uv.yx;
-        float angle = ((-atan(uv.y,uv.x)-twistStar*flipStar//*(.5-abs(starSpin)/2.)
+        float angle = ((-atan(uv.y,uv.x)-twistStar*flipStar/
                         -PI)/2./PI)*flipStar;
                         //angle=mod(angle,1.);
-        // if(angle<0.)angle = 1.+angle;
-        // angle = mod(angle+1.,1.);
+                        
         float frAmp=0.;
-        float b = 1.024/44.1*pow(2.,angle);
 
-        for (float n = 0.; n<10.;n+=1.0)
+        for (float n = -4.; n<5.;n+=1.0)//not sure why it has negative range
          {
-                frAmp += texture2D(micIn, vec2(b ,0.)).r;
-        }
+             float b =nyq*pow(2.,angle+n);
 
+                frAmp += texture2D(micIn, vec2(b,0.)).r;
+        }
+         frAmp/=255.;
         float d = length( uv);
         float frampDIVlend = frAmp/d;
-        if ((frampDIVlend>2.//outer shell
-             &&(frampDIVlend<3.||frampDIVlend>4.))
+       //
+       
+         if ((frampDIVlend>1.//outer shell
+             &&(frampDIVlend<2.||frampDIVlend>3.))
             ||
-            frAmp*d>7.
+            frAmp*d>5.
             )
+        //
+        
+       // return vec4(frAmp);
+        //if(frampDIVlend>255.)
         return  vec4(clamp(hsv2rgb(
                                       vec3(
                                            mod(-angle+(4.-3.*flipStar-twistStar*flipStar)/12.//+3.-flipStar/12.
@@ -3458,7 +3466,8 @@ if(starOnDot>=1){
                                                                  
                                                                  
          vec4 pixelStarship=vec4(0.);
-                                                                 float pixelShipGrey = 0.;
+         float pixelShipGrey = 0.;
+                                                                 
          if (pixelSTARon)
     {
              pixelStarship = audioEq(p);
