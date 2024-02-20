@@ -1539,7 +1539,7 @@ uniform float exponentialPetals;
                         
         float frAmp=0.;
 
-        for (float n = -4.; n<5.;n+=1.0)//not sure why it has negative range
+        for (float n = -4.; n<4.;n+=1.0)//not sure why it has negative range
          {
              float b =nyq*pow(2.,angle+n);
 
@@ -1551,7 +1551,7 @@ uniform float exponentialPetals;
        //
        
          if ((frampDIVlend>1.//outer shell
-             &&(frampDIVlend<2.||frampDIVlend>3.))
+             &&(frampDIVlend<2.||frampDIVlend>4.))
             ||
             frAmp*d>5.
             )
@@ -1561,7 +1561,7 @@ uniform float exponentialPetals;
         //if(frampDIVlend>255.)
         return  vec4(clamp(hsv2rgb(
                                       vec3(
-                                           mod(-angle+(4.-3.*flipStar-twistStar*flipStar)/12.//+3.-flipStar/12.
+                                           mod((-angle+(4.+3.*flipStar-twistStar*flipStar)/12.)//+3.-flipStar/12.
                                                ,1.),1.,1.
                                            ))
                               ,.0,1.), 1.)/d;
