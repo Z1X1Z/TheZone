@@ -354,7 +354,7 @@ let pushBackCounter = 0;
                 
                 
                 lastPitch = pitch;
-                pitch =    audioX.sampleRate/calculatePitch();
+                pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
                 const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
                 if(!notNyquist) pitch = lastPitch;
 
@@ -1034,7 +1034,7 @@ function setDynamicSampler2ds(){
  }
                             function setMicInputToPIXEL(){
             let dataArrayBuffer =new Float32Array( bufferSize );
-             for (var x = 0; x < bufferSize; x++) dataArrayBuffer [x]= dataArray[x];
+             for (var x = 0; x < bufferSize; x++) dataArrayBuffer [x]= dataArray[x]/255.;
 
               
              let micTexBuf = new THREE.DataTexture( dataArrayBuffer, bufferSize, 1, THREE.RedFormat,THREE.FloatType);

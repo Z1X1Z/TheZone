@@ -1498,7 +1498,8 @@ uniform float exponentialPetals;
 
                                   
                                   
-    const float PI = 3.1415927410125732;
+                                  const float PI = 3.1415927410125732;
+                                  const float PI2 = PI*2.;
     const float gr = 1.618033988749;
     const float leaf = -1.3247;//1795724474;
 
@@ -1534,7 +1535,7 @@ uniform float exponentialPetals;
     {
         uv=uv.yx;
         float angle = ((-atan(uv.y,uv.x)-twistStar*flipStar
-                        -PI)/2./PI)*flipStar;
+                        )/PI2-.5)*flipStar;
                         //angle=mod(angle,1.);
                         
         float frAmp=0.;
@@ -1545,7 +1546,7 @@ uniform float exponentialPetals;
 
                 frAmp += texture2D(micIn, vec2(b,0.)).r;
         }
-         frAmp/=255.;
+       //  frAmp/=255.;
         float d = length( uv);
         float frampDIVlend = frAmp/d;
        //
@@ -1571,36 +1572,38 @@ uniform float exponentialPetals;
 
 
 
+    float starnSize = PI2/120.*7.;
     vec4 starns( vec2 uv,float noteOfStar)//Seven stars, two witnesses
     {
         //uv=vec2(-uv.x,uv.y);
         float scalar =8./7.;
         float shifter = 5.;//2.;
-        float angle1 = ((noteOfStar+2.+shifter)/12.)*2.*PI-twistStar*flipStar;//this is for the position from centerVV;
+        float angle1 = ((noteOfStar+2.+shifter)/12.)*PI2-twistStar*flipStar;//this is for the position from centerVV;
         uv.x += -sin(angle1)*scalar;
        uv.y += -cos(angle1)*scalar;//^^
        vec4 ret = vec4(0.);
-       if(length(uv)<PI/120.*7.*2.){
+       if(length(uv)<starnSize){
        //uv *=    26.5;
 
-            float angle = (atan(uv.y,uv.x)+5./12.*PI*2.)-twistStar*flipStar;//
-                 if(angle<0.)angle = 2.*PI+angle;
-            angle += 2.*PI*noteOfStar/12.;
-        angle /= 2.*PI;
+            float angle = (atan(uv.y,uv.x)+5./12.*PI2)-twistStar*flipStar;//
+                 if(angle<0.)angle = PI2+angle;
+            angle += PI2*noteOfStar/12.;
+        angle /= PI2;
          angle = mod(angle,1.);
         float oct = floor(angle*10.);
         float note0 = 1.-angle+oct-noteOfStar/12.;
-        float note1  =1.024/44.1/4.*pow(note0,2.);
+        float note1  =1.024/44.1*pow(2.,note0);
         float noteAmp =16.* texture2D(micIn,
         vec2(note1
         ,0.)).r;
-        noteAmp/=255.;
-        float d = length( uv);
+       // noteAmp/=255.;
+        float d = length( uv)*starnSize*4.;///16.;
         //fr=(fr)*(fr)/3.;
       //  float power = 5.;
       // float b = pow(noteAmp,power)/pow(d*6.,power*.5);
         float rote = 2.;
-     if ((noteAmp/d>3.5&&(noteAmp/d<7.||noteAmp/d>14.))
+        float noteAmpToLength=noteAmp/d;
+     if ((noteAmpToLength>3.5&&(noteAmpToLength<7.||noteAmpToLength>14.))
 ||
 noteAmp*d>9.
 ){
@@ -1614,10 +1617,10 @@ noteAmp*d>9.
               noteOfStar== mod(7. +rote,12.)||
               noteOfStar== mod(10. +rote,12.))
               {
-            ret= vec4(-noteAmp/d);
+            ret= vec4(-noteAmp/d*.75);
             }
         else{
-           ret=vec4(noteAmp/d);
+           ret=vec4(noteAmp/d*.75);
            }
            }
 }
@@ -1710,7 +1713,7 @@ noteAmp*d>9.
              d+=length(s)/10.;
          }
          if (l>.54) negator = 0.;
-         return vec3(-sin(d *3.+PI*2./3.+time2dance),-sin(d*3.+PI*2.*5./3.+time2dance),-sin(d*3.+time2dance))*5.*negator;
+         return vec3(-sin(d *3.+PI2/3.+time2dance),-sin(d*3.+PI2*5./3.+time2dance),-sin(d*3.+time2dance))*5.*negator;
  }
 
     
@@ -3179,15 +3182,18 @@ vec2 p=-(vUv.yx-.5)/(resolution.xy/max(resolution.x,resolution.y))*shaderScale/2
 
 vec2 spunC=coords.yx;
 
-if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time*rate,PI*2.));}
+if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time*rate,PI2));}
 vec2 backGround=p;
 if (colorCombo!=20)backGround=freed(p*zoom+spunC);
-if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time*rate,PI*2.));
+if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time*rate,PI2));
 float xenOctaveFactor =4.;
 
 if(exponentialPetals!=0.)backGround=spin2(vec2(backGround.x,exponentialPetals*backGround.y),
-                                                                                                2.*PI*pow(2.,(xenOctaveFactor-(atan(backGround.x,exponentialPetals*backGround.y)/
-                                                                                                              PI)*xenOctaveFactor-(petals)/6.))/pow(2.,xenOctaveFactor));
+                                                                                                
+                                          PI2*pow(2.,
+                                                  (xenOctaveFactor-(atan(backGround.x,exponentialPetals*backGround.y)/
+                                                                    PI)*xenOctaveFactor-(petals)/
+                                                    6.))/pow(2.,xenOctaveFactor));
 
                    backGround=spin2(backGround,atan(backGround.y,backGround.x)*petals/6.);
                    
