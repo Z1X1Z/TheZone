@@ -1378,6 +1378,9 @@ void main(){
         </script>
 <script id="fragmentShader" type="x-shader/x-fragment">
     varying vec2 vUv;
+    
+    uniform sampler2D micIn;
+    uniform bool pixelSTARon;
     uniform sampler2D STAR;
     uniform sampler2D EDEN;
     uniform sampler2D coreTextureSampler;
@@ -1484,6 +1487,11 @@ uniform bool NightAndDay;
 
 uniform float mandelCloverFactor;
 uniform float exponentialPetals;
+
+
+
+                                  
+                                  
     const float PI = 3.1415927410125732;
     const float gr = 1.618033988749;
     const float leaf = -1.3247;//1795724474;
@@ -1494,6 +1502,111 @@ uniform float exponentialPetals;
     float zin(float x){return -sin(x);}
     float coz(float x){return -cos(x);}
 
+    
+    //The below hsv2rgb function is:
+    // The MIT License
+    // Copyright © 2014 Inigo Quilez
+    vec3 hsv2rgb( vec3 c )//https://www.shadertoy.com/view/lsS3Wc
+    {
+        vec3 rgb = clamp( abs(mod(c.x*6.0+vec3(0.0,4.0,2.0),6.0)-3.0)-1.0, 0.0, 1.0 );
+        return c.z * mix( vec3(1.0), rgb, c.y);
+    }
+    
+    vec2 spin2(vec2 f, float t)
+    {    //https://en.wikipedia.org/wiki/Rotation_matrix
+        float angle =t;
+        float fxb=f.x;
+        f.x=-f.x*coz(-angle)-f.y*zin(-angle);
+     f.y=fxb*zin(-angle)-f.y*coz(-angle);
+     return f;
+    }
+    
+    vec4 audioEq( vec2 uv )//Shekina Glory
+    {
+       // float cutoff = 4.;
+        uv=uv.yx;
+        float angle = (-atan(uv.y,uv.x))/2./PI*flipStar-.5;
+        // if(angle<0.)angle = 1.+angle;
+        // angle = mod(angle+1.,1.);
+        float frAmp=0.;
+        float b = 1.024/44.1*pow(2.,angle);
+
+        for (float n = 0.; n<10.;n+=1.0)
+         {
+                frAmp += texture2D(micIn, vec2(b ,0.)).r;
+        }
+
+        float d = length( uv);
+        float frampDIVlend = frAmp/d;
+        if ((frampDIVlend>2.//outer shell
+             &&(frampDIVlend<3.||frampDIVlend>4.))
+            ||
+            frAmp*d>7.
+            )
+        return  vec4(clamp(hsv2rgb(
+                                      vec3(
+                                           mod(-angle+1./12.//+3.-flipStar/12.
+                                               ,1.),1.,1.
+                                           ))
+                              ,.0,1.), 1.)/d;
+        else return vec4(.0);
+    }
+
+
+
+    vec4 starns( vec2 uv,float noteOfStar)//Seven stars, two witnesses
+    {
+        //uv=vec2(-uv.x,uv.y);
+        float scalar =8./7.;
+        float shifter = 5.;//2.;
+        float angle1 = (noteOfStar+2.+shifter)/12.*2.*PI;//this is for the position from centerVV;
+        uv.x += -sin(angle1)*scalar;
+       uv.y += -cos(angle1)*scalar;//^^
+       vec4 ret = vec4(0.);
+       if(length(uv)<PI/120.*7.*2.){
+       //uv *=    26.5;
+
+            float angle = atan(uv.y,uv.x)+5./12.*PI*2.;//
+                 if(angle<0.)angle = 2.*PI+angle;
+            angle += 2.*PI*noteOfStar/12.;
+        angle /= 2.*PI;
+         angle = mod(angle,1.);
+        float frAmp=0.;
+        float oct = floor(angle*10.);
+        float note0 = 1.-angle+oct-noteOfStar/12.;
+        float note1  =1.024/44.1/4.*pow(note0,2.);
+        float noteAmp =16.* texture2D(micIn,
+        vec2(note1
+        ,0.)).r;
+                
+        float d = length( uv);
+        //fr=(fr)*(fr)/3.;
+      //  float power = 5.;
+      // float b = pow(noteAmp,power)/pow(d*6.,power*.5);
+        float rote = 2.;
+     if ((noteAmp/d>3.5&&(noteAmp/d<7.||noteAmp/d>14.))
+||
+frAmp*d>7.
+){
+           if(
+              noteOfStar==mod(0. +rote,12.)||
+              noteOfStar==mod(6. +rote,12.))
+              ret=vec4(.5);
+              else if(
+              noteOfStar==mod(2. +rote,12.) ||
+              noteOfStar==mod(5.  +rote,12.)||
+              noteOfStar== mod(7. +rote,12.)||
+              noteOfStar== mod(10. +rote,12.))
+              {
+            ret= vec4(-noteAmp/d);
+            }
+        else{
+           ret=vec4(noteAmp/d);
+           }
+           }
+}
+        return ret;
+    }
 
     
     vec3 heart(vec2 g, vec2 t){
@@ -1726,23 +1839,6 @@ vec3 faceFORWARD(vec2 p,vec2 t){
     
     
     
-    //The below hsv2rgb function is:
-    // The MIT License
-    // Copyright © 2014 Inigo Quilez
-    vec3 hsv2rgb( vec3 c )//https://www.shadertoy.com/view/lsS3Wc
-    {
-        vec3 rgb = clamp( abs(mod(c.x*6.0+vec3(0.0,4.0,2.0),6.0)-3.0)-1.0, 0.0, 1.0 );
-        return c.z * mix( vec3(1.0), rgb, c.y);
-    }
-    
-    vec2 spin2(vec2 f, float t)
-    {    //https://en.wikipedia.org/wiki/Rotation_matrix
-        float angle =t;
-        float fxb=f.x;
-        f.x=-f.x*coz(-angle)-f.y*zin(-angle);
-     f.y=fxb*zin(-angle)-f.y*coz(-angle);
-     return f;
-    }
     vec3 balloons(vec2 p){
         vec3 balloon=vec3(0.);
         vec2 vUvCentered =vUv-.5;
@@ -3351,6 +3447,21 @@ if(starOnDot>=1){
                                     if(maxColorOfStarship!=1.) hypnoticHarmonicCircles=clamp(balloons(p)-shipSUM,0.,1.);
                                     else hypnoticHarmonicCircles=balloons(p);
                                 }
+                                                                 
+                                                                 
+         vec4 pixelStarship=vec4(0.);
+                                                                 float pixelShipGrey = 0.;
+         if (pixelSTARon)
+    {
+             pixelStarship = audioEq(p);
+             vec4 starBuffer = vec4(0.);
+             for (float x = 0.; x<12.;x++) starBuffer+=starns(p,x);
+             
+             if (starBuffer.x==starBuffer.y&& starBuffer.y==starBuffer.z&&starBuffer.x==.5)pixelShipGrey=starBuffer.x;
+
+             pixelStarship += starBuffer;
+         }
+                                                                     
 if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
                                       -vec4(vec3(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z),0.),0.,1.);
@@ -3364,6 +3475,9 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                        -(DOTstarship.x+DOTstarship.y+DOTstarship.z)/DOTmaxColorOfStarship*.5*DOTstarship.w
                       -(StaRivers.r+StaRivers.g+StaRivers.b)*StaRivers.w
                        -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*4.
+                                                 
+                                                 -pixelStarship.r-pixelStarship.g-pixelStarship.b
+                                                 
                                                  );
                        vec4 tree = vec4( clamp(
                                                 clamp(
@@ -3371,18 +3485,20 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                                       zoomer
                                                       +awayFromTree
                                                                          ,0.,1.)
-                                     
-                                     -vec3((mny.r+mny.b+mny.g)*4.),.0,1.)
+                                               +   pixelStarship.xyz
+                                     -vec3((mny.r+mny.b+mny.g)),.0,1.)
                                          ,1.);
                                    
                                      vec4 fin = (ss-faceFromShip+goodies+tree)*isBlack*isBlackStaRivers*isBlackDOT+(isBlack-1.)+(isBlackDOT-1.)+(isBlackStaRivers-1.);
-                                     if(fin.r>.9&&fin.g>.9&&fin.b>.9)fin-=(isGrey+isGreyDOT+isGreyStaRivers)*1.5;
+                                     if(fin.r>.9&&fin.g>.9&&fin.b>.9)fin-=(isGrey+isGreyDOT+pixelShipGrey+isGreyStaRivers)*1.5;
                                      else if(fin.r<.1&&fin.g<.1&&fin.b<.1)fin+=(isGrey+isGreyDOT+isGreyStaRivers)*1.5;
                                      vec3 confraculator = vec3(1.);
                                      if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
                                      
-                       gl_FragColor=fin/vec4(confraculator
-                                                      ,1.);}
+                       gl_FragColor=+fin/vec4(confraculator
+                                                      ,1.);
+                                             
+                   }
                                 else gl_FragColor=vec4(zoomer,1.);
 
                                          }
