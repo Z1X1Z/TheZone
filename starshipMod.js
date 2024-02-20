@@ -1034,7 +1034,7 @@ function setDynamicSampler2ds(){
  }
                             function setMicInputToPIXEL(){
             let dataArrayBuffer =new Float32Array( bufferSize );
-             for (var x = 0; x < bufferSize; x++) dataArrayBuffer [x]= dataArray[x]/255.;
+             for (var x = 0; x < bufferSize; x++) dataArrayBuffer [x]= dataArray[x];
 
               
              let micTexBuf = new THREE.DataTexture( dataArrayBuffer, bufferSize, 1, THREE.RedFormat,THREE.FloatType);
