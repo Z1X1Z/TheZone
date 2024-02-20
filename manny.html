@@ -364,12 +364,18 @@ let maxLetterDepth=-1;
                  <input type="checkbox" id="TrailOverflowsClover" name="t"  onclick= "
                      key  = 'Z';
                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                     <label for="TrailOverflowsClover">Trail Overflows Clover[Z]</label><br>
+                     <label for="TrailOverflowsClover">Trail Overflows Clover![Z]</label><br>
                      
                      <input type="checkbox" id="flameOrRiver" name="t"  onclick= "
                          key  = 'r';
                          callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
                          <label for="flameOrRiver">Flame or River?[,r]</label><br>
+                         
+                         <input type="checkbox" id="PixelStar" name="t"  onclick= "
+                             key  = 'p';
+                             callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                             <label for="PixelStar">PixelStar![.p]</label><br>
+                             
                      <a id="starOnDot" name="t"  onclick= "
 
                      key  = 'd';
@@ -1525,7 +1531,7 @@ uniform float exponentialPetals;
     {
        // float cutoff = 4.;
         uv=uv.yx;
-        float angle = (-atan(uv.y,uv.x))/2./PI*flipStar-.5;
+        float angle = ((-atan(uv.y,uv.x)-twistStar*flipStar-PI)/2./PI)*flipStar;
         // if(angle<0.)angle = 1.+angle;
         // angle = mod(angle+1.,1.);
         float frAmp=0.;
@@ -1545,7 +1551,7 @@ uniform float exponentialPetals;
             )
         return  vec4(clamp(hsv2rgb(
                                       vec3(
-                                           mod(-angle+1./12.//+3.-flipStar/12.
+                                           mod(-angle+(4.-3.*flipStar)/12.//+3.-flipStar/12.
                                                ,1.),1.,1.
                                            ))
                               ,.0,1.), 1.)/d;
@@ -1559,14 +1565,14 @@ uniform float exponentialPetals;
         //uv=vec2(-uv.x,uv.y);
         float scalar =8./7.;
         float shifter = 5.;//2.;
-        float angle1 = (noteOfStar+2.+shifter)/12.*2.*PI;//this is for the position from centerVV;
+        float angle1 = ((noteOfStar+2.+shifter)/12.)*2.*PI-twistStar*flipStar;//this is for the position from centerVV;
         uv.x += -sin(angle1)*scalar;
        uv.y += -cos(angle1)*scalar;//^^
        vec4 ret = vec4(0.);
        if(length(uv)<PI/120.*7.*2.){
        //uv *=    26.5;
 
-            float angle = atan(uv.y,uv.x)+5./12.*PI*2.;//
+            float angle = (atan(uv.y,uv.x)+5./12.*PI*2.)-twistStar*flipStar;//
                  if(angle<0.)angle = 2.*PI+angle;
             angle += 2.*PI*noteOfStar/12.;
         angle /= 2.*PI;
@@ -3457,7 +3463,7 @@ if(starOnDot>=1){
              vec4 starBuffer = vec4(0.);
              for (float x = 0.; x<12.;x++) starBuffer+=starns(p,x);
              
-             if (starBuffer.x==starBuffer.y&& starBuffer.y==starBuffer.z&&starBuffer.x==.5)pixelShipGrey=starBuffer.x;
+             if (starBuffer.x==starBuffer.y&& starBuffer.y==starBuffer.z&&starBuffer.x==.5&&(isGrey==0.||p.x<0.))pixelShipGrey=starBuffer.x;
 
              pixelStarship += starBuffer;
          }
@@ -3486,10 +3492,10 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                                       +awayFromTree
                                                                          ,0.,1.)
                                                +   pixelStarship.xyz
-                                     -vec3((mny.r+mny.b+mny.g)),.0,1.)
+                                     -vec3((mny.r+mny.b+mny.g)*4.),.0,1.)
                                          ,1.);
                                    
-                                     vec4 fin = (ss-faceFromShip+goodies+tree)*isBlack*isBlackStaRivers*isBlackDOT+(isBlack-1.)+(isBlackDOT-1.)+(isBlackStaRivers-1.);
+                                     vec4 fin = (ss-faceFromShip+goodies+tree+pixelShipGrey)*isBlack*isBlackStaRivers*isBlackDOT+(isBlack-1.)+(isBlackDOT-1.)+(isBlackStaRivers-1.);
                                      if(fin.r>.9&&fin.g>.9&&fin.b>.9)fin-=(isGrey+isGreyDOT+pixelShipGrey+isGreyStaRivers)*1.5;
                                      else if(fin.r<.1&&fin.g<.1&&fin.b<.1)fin+=(isGrey+isGreyDOT+isGreyStaRivers)*1.5;
                                      vec3 confraculator = vec3(1.);
