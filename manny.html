@@ -1592,13 +1592,13 @@ uniform float exponentialPetals;
          angle = mod(angle+2.,1.);
         float oct = floor(angle*10.);
         float note0 = 1.-angle+oct-noteOfStar/12.;
-        note0=mod(note0,1.);
+        note0=note0-4.;
         float note1  =1.024/44.1*pow(2.,note0);
         float noteAmp =16.* texture2D(micIn,
         vec2(note1
         ,0.)).r;
        // noteAmp/=255.;
-        float d = length( uv)*starnSize*4.;///16.;
+        float d = length( uv)*starnSize*8.;///16.;
         //fr=(fr)*(fr)/3.;
       //  float power = 5.;
       // float b = pow(noteAmp,power)/pow(d*6.,power*.5);
