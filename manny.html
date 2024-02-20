@@ -1531,7 +1531,9 @@ uniform float exponentialPetals;
     {
        // float cutoff = 4.;
         uv=uv.yx;
-        float angle = ((-atan(uv.y,uv.x)-twistStar*flipStar-PI)/2./PI)*flipStar;
+        float angle = ((-atan(uv.y,uv.x)-twistStar*flipStar//*(.5-abs(starSpin)/2.)
+                        -PI)/2./PI)*flipStar;
+                        //angle=mod(angle,1.);
         // if(angle<0.)angle = 1.+angle;
         // angle = mod(angle+1.,1.);
         float frAmp=0.;
@@ -1551,7 +1553,7 @@ uniform float exponentialPetals;
             )
         return  vec4(clamp(hsv2rgb(
                                       vec3(
-                                           mod(-angle+(4.-3.*flipStar)/12.//+3.-flipStar/12.
+                                           mod(-angle+(4.-3.*flipStar-twistStar*flipStar)/12.//+3.-flipStar/12.
                                                ,1.),1.,1.
                                            ))
                               ,.0,1.), 1.)/d;
@@ -3463,7 +3465,7 @@ if(starOnDot>=1){
              vec4 starBuffer = vec4(0.);
              for (float x = 0.; x<12.;x++) starBuffer+=starns(p,x);
              
-             if (starBuffer.x==starBuffer.y&& starBuffer.y==starBuffer.z&&starBuffer.x==.5&&(isGrey==0.||p.x<0.))pixelShipGrey=starBuffer.x;
+             if (starBuffer.x==starBuffer.y&& starBuffer.y==starBuffer.z&&starBuffer.x==.5&&isGrey==0.)pixelShipGrey=starBuffer.x;
 
              pixelStarship += starBuffer;
          }

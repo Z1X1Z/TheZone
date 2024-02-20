@@ -1499,7 +1499,7 @@ function runOSMD (){
         for(var v = 0; v<maxTouchSoundCount;v++)initialTwist[v]-=timeTwistIncrement;
     }
                                           lastTIMEUNIFORM =uniforms[ "time" ].value;
-    uniforms.twistStar.value=window.twist/24.*2.*Math.PI;
+    uniforms.twistStar.value=(window.twist/24.+1.)%1.*2.*Math.PI;
 
      
     if(window.ChristoDecrypto!=0) uniforms.metaCarousel.value=          1./(  window.ChristoDecrypto*uniforms.externalCores.value)*(timestamp-window.timeRESET)/10.;
