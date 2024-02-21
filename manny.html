@@ -1553,7 +1553,7 @@ uniform float exponentialPetals;
        //
        
          if (frampDIVlend>.25//outer shell
-             &&(frampDIVlend<1.||(frampDIVlend>2.&&(frampDIVlend<3.||frampDIVlend>4.)))
+             &&(frampDIVlend<1.||(frampDIVlend>2.&&(frampDIVlend<4.||frampDIVlend>8.)))
             ||
               frampMultlen>2.
             )
@@ -1578,7 +1578,6 @@ uniform float exponentialPetals;
     {
         //uv=vec2(-uv.x,uv.y);
         float scalar =1./1.5/2.;
-        float shifter = 5.;//2.;
         float octaveSpin = 4./12.;
     
         float angle1 = (noteOfStar/12.-octaveSpin)*PI2-twistStar*flipStar;//this is for the position from centerVV;
@@ -1602,7 +1601,7 @@ uniform float exponentialPetals;
         vec2(note1
         ,0.)).r;
        // noteAmp/=255.;
-        float d = length( uv)*starnSize*8.;///16.;
+        float d = length( uv);///16.;
         //fr=(fr)*(fr)/3.;
       //  float power = 5.;
       // float b = pow(noteAmp,power)/pow(d*6.,power*.5);
@@ -1610,7 +1609,7 @@ uniform float exponentialPetals;
         float noteAmpToLength=noteAmp/d*starnSize;
        // if(noteOfStar==0.)return vec4(1.);
        // else return vec4(0.);
-     if ((noteAmpToLength>.5&&(noteAmpToLength<1.||noteAmpToLength>2.))
+     if ((noteAmpToLength>.25&&(noteAmpToLength<.5||noteAmpToLength>1.))
 ||
 noteAmp*d>2.
 ){
@@ -1624,10 +1623,17 @@ noteAmp*d>2.
               noteOfStar== mod(7. +rote,12.)||
               noteOfStar== mod(10. +rote,12.))
               {
-            ret= vec4(clamp(noteAmp/d,0.,1.)*.75);
+                  ret=vec4(-clamp(
+                           noteAmp/d
+                           ,0.,1.)*.75
+                           );
             }
         else{
-           ret=vec4(-clamp(noteAmp/d,0.,1.)*.25);
+            
+ret= vec4(clamp(
+             noteAmp/d
+            ,0. ,1.)*.875
+       );
            }
            }
 }
