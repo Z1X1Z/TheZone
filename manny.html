@@ -1586,7 +1586,7 @@ uniform float exponentialPetals;
        vec4 ret = vec4(0.);
        if(length(uv)<starnSize){
        //uv *=    26.5;
-            float angle = (atan(uv.y,uv.x)+4./12.*PI2)-twistStar*flipStar;//
+            float angle = (atan(uv.y,uv.x)+5./12.*PI2)-twistStar*flipStar;//
                //  if(angle<0.)angle = PI2+angle;
             angle += PI2*(noteOfStar
                           +octaveSpin//this value is uncertain
