@@ -1533,7 +1533,7 @@ uniform float exponentialPetals;
 
     vec4 audioEq( vec2 uv )//Shekina Glory
     {
-        uv=uv.yx;
+        uv=uv.yx*2.;
         float angle = ((-atan(uv.y,uv.x)-twistStar*flipStar
                         )/PI2-.5)*flipStar;
                         //angle=mod(angle,1.);
