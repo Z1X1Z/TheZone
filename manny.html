@@ -1554,7 +1554,7 @@ uniform float exponentialPetals;
          if (frampDIVlend>1.//outer shell
              &&(frampDIVlend<2.||frampDIVlend>4.)
             ||
-            frAmp*d>5.
+            frAmp*d>6.5
             )
         //
         
@@ -1578,9 +1578,9 @@ uniform float exponentialPetals;
         //uv=vec2(-uv.x,uv.y);
         float scalar =8./7.;
         float shifter = 5.;//2.;
-        float octaveSpin = 0.;
-
-        float angle1 = ((noteOfStar-5.)/12.)*PI2-twistStar*flipStar;//this is for the position from centerVV;
+        float octaveSpin = 5./12.;
+    
+        float angle1 = (noteOfStar/12.-octaveSpin-5.)*PI2-twistStar*flipStar;//this is for the position from centerVV;
         uv.x += -sin(angle1)*scalar;
        uv.y += -cos(angle1)*scalar;//^^
        vec4 ret = vec4(0.);
