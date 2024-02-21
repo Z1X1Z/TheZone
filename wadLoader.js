@@ -128,11 +128,10 @@ function startSound(e){
                 
                 let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
 
-                initialAngleSound[id] =(Math.atan2(y,x)+pi/2.)*flip;
+                initialAngleSound[id] =(Math.atan2(y,x))*flip;
                  angleSound[id] =initialAngleSound[id] ;
 
-                let frequency = Math.pow(2.,((((initialAngleSound[id]*window.flip)/pi/2*12+12-flip)*window.flip-window.twist/2.))/12.
-                                              +((flip==-1)?2:-1)
+                let frequency = Math.pow(2.,((((initialAngleSound[id]*window.flip)/pi/2*12+3-flip)*window.flip-window.twist/2.))/12.
                                               )*window.ConcertKey;
                 //sound[id].pitch=frequency;
                 //sound2[id].pitch=frequency*2.;
@@ -195,7 +194,7 @@ function followSound(e){
                     let twistIncrement=0;
 if(window.grabStar)
 {
-    let slip = (Math.atan2(y,x)/Math.PI/2.-initialAngle[id]);
+    let slip = (Math.atan2(y,x)/Math.PI/2.-initialAngle[id]+1.)%1;
    // if(lastTwist==0)lastTwist=slip;
      twistIncrement = (slip-lastTwist[id])*24*flip;
     //if(twistIncrement>12)twistIncrement=-twistIncrement;
@@ -225,16 +224,14 @@ if(window.grabStar)
              {
         let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
         
-             if(!window.grabStar) angleSound[id]=(((Math.atan2(y,x)*flip-initialAngleSound[id])+pi/2.*flip+8.*pi)%(2*pi)+initialAngleSound[id]);
+             if(!window.grabStar) angleSound[id]=(((Math.atan2(y,x)*flip-initialAngleSound[id])*flip+8.*pi)%(2*pi)+initialAngleSound[id]);
              
              else {
                  angleSound[id]+=  twistIncrement/24*(Math.PI*2.);//redundant operations done and undone to twistIncrement
-                  angleSound[id]=(angleSound[id]-initialAngleSound[id]+4*pi+pi/2.)%(Math.PI*2.)+initialAngleSound[id]-pi/2.;
-                //  angleSound[id]=(angleSound[id]+2*pi)%(Math.PI*2.);
+                  angleSound[id]=(angleSound[id]-initialAngleSound[id]+4*pi)%(Math.PI*2.)+initialAngleSound[id];
+                 // angleSound[id]=(angleSound[id]+2*pi)%(Math.PI*2.);
 
              }
-                 //console.log("as"+(angleSound[id]-initialAngleSound[id]))
-                // console.log("twist"+twist)
                  
                  let soundTouchComponent;
                  let twistFeed;
@@ -244,20 +241,24 @@ if(window.grabStar)
                  }
                  else {
                     // soundTouchComponent=angleSound[id]
-                    soundTouchComponent = (initialAngleSound[id]+angleSound[id])%(2*pi)-angleSound[id];
+                    soundTouchComponent = angleSound[id];//(initialAngleSound[id]-angleSound[id]+2.*pi)%(2*pi)+angleSound[id];
                     //initialTwist[id]=(initialTwist[id]-twist+24)%(24.)+twist;
                      twistFeed = (initialTwist[id]-twist)%(24.)+twist;
 
                  }
-                let frequency = Math.pow(2.,((((soundTouchComponent*window.flip)/pi/2*12+12-flip)*window.flip-twistFeed/2.))/12.
-                                              +((flip==-1)?2:-1)
+                                  
+                                      console.log("as"+soundTouchComponent)
+                                    console.log("twist"+twistFeed)
+                let frequency = Math.pow(2.,((((soundTouchComponent*window.flip)/pi/2*12+3-flip)*window.flip-twistFeed/2.))/12.
                                               )*window.ConcertKey;
         if(isFinite(frequency)&&frequency>0.&&
            angleSound[id]-initialAngleSound[id]!=0){
                  if(typeof sound[id]=="object"){
                      let volumePrime=volume*(angleSound[id] - initialAngleSound[id])/(2.*pi)*.5;
                      let volumeTWO =volume*(1.-(angleSound[id]-initialAngleSound[id])/(2.*pi))*.5;
-                     if(window.grabStar)
+                     if(window.grabStar
+                        &&2==1
+                        )
                      {
                          let vpBuf=volumePrime
                          volumePrime=volumeTWO
