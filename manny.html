@@ -1549,12 +1549,13 @@ uniform float exponentialPetals;
        //  frAmp/=255.;
         float d = length( uv);
         float frampDIVlend = frAmp/d;
+        float frampMultlen = frAmp*d;
        //
        
-         if (frampDIVlend>1.//outer shell
-             &&(frampDIVlend<2.||frampDIVlend>4.)
+         if (frampDIVlend>.25//outer shell
+             &&(frampDIVlend<1.||(frampDIVlend>2.&&(frampDIVlend<3.||frampDIVlend>4.)))
             ||
-            frAmp*d>6.5
+              frampMultlen>2.
             )
         //
         
@@ -1572,11 +1573,11 @@ uniform float exponentialPetals;
 
 
 
-    float starnSize = PI2/120.*7.*8./7.;
+    float starnSize = PI2/120.*2.;
     vec4 starns( vec2 uv,float noteOfStar)//Seven stars, two witnesses
     {
         //uv=vec2(-uv.x,uv.y);
-        float scalar =8./7.;
+        float scalar =1./1.5/2.;
         float shifter = 5.;//2.;
         float octaveSpin = 4./12.;
     
@@ -1597,7 +1598,7 @@ uniform float exponentialPetals;
         float note0 = oct-noteOfStar/12.-angle;
         //note0-=1.;
         float note1  =1.024/44.1*pow(2.,note0);
-        float noteAmp =16.* texture2D(micIn,
+        float noteAmp = texture2D(micIn,
         vec2(note1
         ,0.)).r;
        // noteAmp/=255.;
@@ -1606,12 +1607,12 @@ uniform float exponentialPetals;
       //  float power = 5.;
       // float b = pow(noteAmp,power)/pow(d*6.,power*.5);
         float rote = 1.;
-        float noteAmpToLength=noteAmp/d;
+        float noteAmpToLength=noteAmp/d*starnSize;
        // if(noteOfStar==0.)return vec4(1.);
        // else return vec4(0.);
-     if ((noteAmpToLength>3.5&&(noteAmpToLength<7.||noteAmpToLength>14.))
+     if ((noteAmpToLength>.5&&(noteAmpToLength<1.||noteAmpToLength>2.))
 ||
-noteAmp*d>9.
+noteAmp*d>2.
 ){
            if(
               noteOfStar==mod(0. +rote,12.)||
@@ -1626,7 +1627,7 @@ noteAmp*d>9.
             ret= vec4(clamp(noteAmp/d,0.,1.)*.75);
             }
         else{
-           ret=vec4(-clamp(noteAmp/d,0.,1.)*.75);
+           ret=vec4(-clamp(noteAmp/d,0.,1.)*.25);
            }
            }
 }
@@ -3483,11 +3484,13 @@ if(starOnDot>=1){
                                                                  
          if (pixelSTARon)
     {
-             pixelStarship = audioEq(p);
+                       vec2 uVu=-(vUv.yx-.5)/(resolution.xy/max(resolution.x,resolution.y));
+
+             pixelStarship = audioEq(uVu);
              vec4 starBuffer = vec4(0.);
-             for (float x = 0.; x<12.;x++) starBuffer+=starns(p,x);
+             for (float x = 0.; x<12.;x++) starBuffer+=starns(uVu,x);
              
-             if (starBuffer.x==starBuffer.y&& starBuffer.y==starBuffer.z&&starBuffer.x==.5&&isGrey==0.)pixelShipGrey=starBuffer.x;
+             if (starBuffer.x==starBuffer.y&& starBuffer.y==starBuffer.z&&isGrey==0.)pixelShipGrey=starBuffer.x;
 
              pixelStarship += starBuffer;
          }
