@@ -1578,15 +1578,15 @@ uniform float exponentialPetals;
         //uv=vec2(-uv.x,uv.y);
         float scalar =8./7.;
         float shifter = 5.;//2.;
-        float octaveSpin = 5./12.;
+        float octaveSpin = 4./12.;
     
-        float angle1 = (noteOfStar/12.-octaveSpin-5.)*PI2-twistStar*flipStar;//this is for the position from centerVV;
+        float angle1 = (noteOfStar/12.-octaveSpin)*PI2-twistStar*flipStar;//this is for the position from centerVV;
         uv.x += -sin(angle1)*scalar;
        uv.y += -cos(angle1)*scalar;//^^
        vec4 ret = vec4(0.);
        if(length(uv)<starnSize){
        //uv *=    26.5;
-            float angle = (atan(uv.y,uv.x)+5./12.*PI2)-twistStar*flipStar;//
+            float angle = (atan(uv.y,uv.x)+(octaveSpin+1./12.)*PI2)-twistStar*flipStar;//
                //  if(angle<0.)angle = PI2+angle;
             angle += PI2*(noteOfStar
                           +octaveSpin//this value is uncertain
@@ -1595,7 +1595,7 @@ uniform float exponentialPetals;
          angle = mod(angle+2.,1.);
         float oct = floor(angle*10.);
         float note0 = oct-noteOfStar/12.-angle;
-        note0-=1.;
+        //note0-=1.;
         float note1  =1.024/44.1*pow(2.,note0);
         float noteAmp =16.* texture2D(micIn,
         vec2(note1
@@ -1605,8 +1605,10 @@ uniform float exponentialPetals;
         //fr=(fr)*(fr)/3.;
       //  float power = 5.;
       // float b = pow(noteAmp,power)/pow(d*6.,power*.5);
-        float rote = 2.;
+        float rote = 1.;
         float noteAmpToLength=noteAmp/d;
+       // if(noteOfStar==0.)return vec4(1.);
+       // else return vec4(0.);
      if ((noteAmpToLength>3.5&&(noteAmpToLength<7.||noteAmpToLength>14.))
 ||
 noteAmp*d>9.
@@ -1621,10 +1623,10 @@ noteAmp*d>9.
               noteOfStar== mod(7. +rote,12.)||
               noteOfStar== mod(10. +rote,12.))
               {
-            ret= vec4(-noteAmp/d);
+            ret= vec4(-clamp(noteAmp/d,0.,1.)*.75);
             }
         else{
-           ret=vec4(noteAmp/d);
+           ret=vec4(clamp(noteAmp/d,0.,1.)*.75);
            }
            }
 }
