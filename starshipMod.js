@@ -224,7 +224,7 @@ function spiral_compress(){
     if(n!=0)   d = (z[n+1]-z[n-1])/(z[n-1]+z[n+1]);
     else d = (z[n+1])/(z[n]+z[n+1])/2.;
     const nAdj = n + d*4 ;
-   if (Math.abs(d)<4+1.&&isFinite(d))
+        if (Math.abs(d)<4+1.&&isFinite(d))
         freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
         else
         freq = audioX.sampleRate*n/numberOfBins
@@ -232,7 +232,7 @@ function spiral_compress(){
             frequencies[n]=freq;
     var note24 =24*Math.log(freq/window.ConcertKey)/Math.log(2.)+49*2;
                             
-                    //        if(Math.abs(note24/2.-72)<.5){ callibratorArray[n]=255.;console.log(note24);} test witness in pixel shader
+                           // if(Math.abs(note24/2.-72.)<.5){ callibratorArray[n]=255.;console.log(note24);}// test witness in pixel shader, add to setMicInputToPIXEL()
 
                             
         testar[Math.round(note24*EldersLeg/24.)%EldersLeg] += Math.abs(z[n])*radialWarp;
