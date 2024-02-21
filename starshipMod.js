@@ -208,7 +208,7 @@ function makeSpirograph(){
       }
        
 }
-
+let callibratorArray = new Float32Array(1024).fill(0);
 function spiral_compress(){
     let freq = 0;
   //  notesAverage = 0.;
@@ -224,14 +224,17 @@ function spiral_compress(){
     if(n!=0)   d = (z[n+1]-z[n-1])/(z[n-1]+z[n+1]);
     else d = (z[n+1])/(z[n]+z[n+1])/2.;
     const nAdj = n + d*4 ;
-    if (Math.abs(d)<4+1.&&isFinite(d))
+   if (Math.abs(d)<4+1.&&isFinite(d))
         freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
-        else freq = audioX.sampleRate*n/numberOfBins
+        else
+        freq = audioX.sampleRate*n/numberOfBins
         //    freq = 440; //check for concert A
             frequencies[n]=freq;
     var note24 =24*Math.log(freq/window.ConcertKey)/Math.log(2.)+49*2;
+                            
+                    //        if(Math.abs(note24/2.-72)<.5){ callibratorArray[n]=255.;console.log(note24);} test witness in pixel shader
 
-
+                            
         testar[Math.round(note24*EldersLeg/24.)%EldersLeg] += Math.abs(z[n])*radialWarp;
       testarContinuous[n] = Math.abs(z[n]);
                           mustarD[n] = note24;
@@ -1032,12 +1035,12 @@ function setDynamicSampler2ds(){
      uniforms.coreTextureSampler.value=coreTexture;
      uniforms.coreTextureSampler.needsUpdate = true;
  }
-                            function setMicInputToPIXEL(){
-            let dataArrayBuffer =new Float32Array( bufferSize );
+function setMicInputToPIXEL(){
+            let dataArrayBuffer =new Float32Array( numberOfBins );
              for (var x = 0; x < bufferSize; x++) dataArrayBuffer [x]= dataArray[x]/255.;
 
               
-             let micTexBuf = new THREE.DataTexture( dataArrayBuffer, bufferSize, 1, THREE.RedFormat,THREE.FloatType);
+             let micTexBuf = new THREE.DataTexture( dataArrayBuffer, numberOfBins, 1, THREE.RedFormat,THREE.FloatType);
              micTexBuf.needsUpdate=true;
 
              uniforms[ "micIn" ].value = micTexBuf;
