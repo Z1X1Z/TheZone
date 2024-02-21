@@ -229,7 +229,7 @@ if(window.grabStar)
              
              else {
                  angleSound[id]+=  twistIncrement/24*(Math.PI*2.);//redundant operations done and undone to twistIncrement
-                  angleSound[id]=(angleSound[id]-initialAngleSound[id]+4*pi)%(Math.PI*2.)+initialAngleSound[id];
+                  angleSound[id]=(angleSound[id]-initialAngleSound[id]+4*pi+pi/2.)%(Math.PI*2.)+initialAngleSound[id]-pi/2.;
                 //  angleSound[id]=(angleSound[id]+2*pi)%(Math.PI*2.);
 
              }

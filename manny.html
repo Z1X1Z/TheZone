@@ -1600,6 +1600,7 @@ uniform float exponentialPetals;
         float noteAmp = texture2D(micIn,
         vec2(note1
         ,0.)).r;
+       // noteAmp=pow(noteAmp,.5);
        // noteAmp/=255.;
         float d = length( uv);///16.;
         //fr=(fr)*(fr)/3.;
@@ -1624,15 +1625,15 @@ noteAmp*d>2.
               noteOfStar== mod(10. +rote,12.))
               {
                   ret=vec4(-clamp(
-                           noteAmp/d
-                           ,0.,1.)*.75
+                                  noteAmpToLength
+                           ,0.,1.)*.5
                            );
             }
         else{
             
 ret= vec4(clamp(
-             noteAmp/d
-            ,0. ,1.)*.875
+                noteAmpToLength
+            ,0. ,1.)*.5
        );
            }
            }
@@ -3515,7 +3516,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                       -(StaRivers.r+StaRivers.g+StaRivers.b)*StaRivers.w
                        -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*4.
                                                  
-                                                 -pixelStarship.r-pixelStarship.g-pixelStarship.b
+                                                -abs( -pixelStarship.r-pixelStarship.g-pixelStarship.b)
                                                  
                                                  );
                        vec4 tree = vec4( clamp(
@@ -3528,7 +3529,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                      -vec3((mny.r+mny.b+mny.g)*4.),.0,1.)
                                          ,1.);
                                    
-                                     vec4 fin = (ss-faceFromShip+goodies+tree+pixelShipGrey)*isBlack*isBlackStaRivers*isBlackDOT+(isBlack-1.)+(isBlackDOT-1.)+(isBlackStaRivers-1.);
+                                     vec4 fin = (ss-faceFromShip+goodies+tree+pixelShipGrey*1.5)*isBlack*isBlackStaRivers*isBlackDOT+(isBlack-1.)+(isBlackDOT-1.)+(isBlackStaRivers-1.);
                                      if(fin.r>.9&&fin.g>.9&&fin.b>.9)fin-=(isGrey+isGreyDOT+pixelShipGrey+isGreyStaRivers)*1.5;
                                      else if(fin.r<.1&&fin.g<.1&&fin.b<.1)fin+=(isGrey+isGreyDOT+isGreyStaRivers)*1.5;
                                      vec3 confraculator = vec3(1.);
