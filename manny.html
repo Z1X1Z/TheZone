@@ -1623,10 +1623,10 @@ noteAmp*d>9.
               noteOfStar== mod(7. +rote,12.)||
               noteOfStar== mod(10. +rote,12.))
               {
-            ret= vec4(-clamp(noteAmp/d,0.,1.)*.75);
+            ret= vec4(clamp(noteAmp/d,0.,1.)*.75);
             }
         else{
-           ret=vec4(clamp(noteAmp/d,0.,1.)*.75);
+           ret=vec4(-clamp(noteAmp/d,0.,1.)*.75);
            }
            }
 }
