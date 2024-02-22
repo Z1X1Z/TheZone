@@ -219,7 +219,7 @@ if(window.grabStar)
     for(var t=0; t<maxTouchSoundCount;t++)
     {
         let lastTwistSign=signTwist[t];
-        let twisteR=(twist-initialTwist[id])%24+initialTwist[id];
+        let twisteR=(twist-initialTwist[id]-permanentInitialTwist[id])%24+initialTwist[id]+permanentInitialTwist[id];
        // console.log("aaaa"+permanentInitialTwist[t])
 
         signTwist[t] =Math.sign(twisteR-12.);
