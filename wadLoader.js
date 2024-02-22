@@ -215,18 +215,17 @@ if(window.grabStar)
     {initialTwist[t]+=twistIncrement;
     }
   //  window.twist=(window.twist-initialTwist[id]+48.)%24+initialTwist[id];
-    let twisteR=(twist-initialTwist[id]+48)%24+initialTwist[id];
 //console.log("twisteR"+permanentInitialTwist[id])
     for(var t=0; t<maxTouchSoundCount;t++)
     {
         let lastTwistSign=signTwist[t];
-        let ticker =twisteR;
+        let twisteR=(twist-initialTwist[id])%24+initialTwist[id];
        // console.log("aaaa"+permanentInitialTwist[t])
 
-        signTwist[t] =Math.sign(ticker-12.);
+        signTwist[t] =Math.sign(twisteR-12.);
      //   if(t==0)console.log("st"+ ticker)
         if (lastTwistSign!=signTwist[t]&&(
-                                           Math.abs(ticker)<6.||Math.abs(ticker)>18.)
+                                           Math.abs(twisteR)<6.||Math.abs(twisteR)>18.)
             ){
             octavesBoosted[t]+=24*signTwist[t]
         }
