@@ -186,10 +186,10 @@ function startSound(e){
                                              let soundTouchComponent= Array(maxTouchSoundCount).fill(0);
                                              let octavesBoosted = Array(maxTouchSoundCount).fill(0);
 let   angleSound  = Array(maxTouchSoundCount);
-                                             let initialTwist= Array(maxTouchSoundCount);
-                                             let permanentInitialTwist= Array(maxTouchSoundCount);
+                                             let initialTwist= Array(maxTouchSoundCount).fill(0.);
+                                             let permanentInitialTwist= Array(maxTouchSoundCount).fill(0.);
                                              
-                                             let signTwist= Array(maxTouchSoundCount);
+                                             let signTwist= Array(maxTouchSoundCount).fill(0.);
 
                                              
 function followSound(e){
@@ -207,24 +207,29 @@ if(window.grabStar)
    // if(lastSlip==0)lastSlip=slip;
      twistIncrement = (slip-lastSlip[id])*24*flip;
     //if(twistIncrement>12)twistIncrement=-twistIncrement;
+    lastSlip[id] =slip;
 
     window.twist+=twistIncrement;
     for(var t=0; t<maxTouchSoundCount;t++)if(t!=id)
     {initialTwist[t]+=twistIncrement;
     }
+    window.twist=(window.twist-initialTwist[id]+48.)%24+initialTwist[id];
+    let twisteR=(twist-permanentInitialTwist[id]+48.)%24+permanentInitialTwist[id];
+//console.log("twisteR"+permanentInitialTwist[id])
     for(var t=0; t<maxTouchSoundCount;t++)
     {
         let lastTwistSign=signTwist[t];
-        signTwist[t] =Math.sign(twist-permanentInitialTwist[t]-12.);
-        console.log("st"+ (twist-permanentInitialTwist[t]))
+        let ticker =twisteR-permanentInitialTwist[t]
+       // console.log("aaaa"+permanentInitialTwist[t])
+
+        signTwist[t] =Math.sign(ticker-12.);
+     //   if(t==0)console.log("st"+ ticker)
         if (lastTwistSign!=signTwist[t]&&(
-                                           Math.abs(twist-permanentInitialTwist[t])<6.||Math.abs(twist-permanentInitialTwist[t])>18.)
+                                           Math.abs(ticker)<6.||Math.abs(ticker)>18.)
             ){
             octavesBoosted[t]+=24*signTwist[t]
         }
     }
-    window.twist=(window.twist-initialTwist[id]+48.)%24+initialTwist[id];
-    lastSlip[id] =slip;
 
 }
          if(!window.muteTouchVolume){
@@ -271,7 +276,7 @@ if(window.grabStar)
                      //  else if(dif<-2)octavesBoosted[id]-=24;
                      twistFeed = initialTwist[id]+octavesBoosted[id];//
                    //  (initialTwist[id]-twist)%(24.)+twist+octavesBoosted[id];
-                     console.log(octavesBoosted[id])
+                   //  console.log(octavesBoosted[id])
 
                  }
                                   
