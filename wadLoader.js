@@ -214,7 +214,7 @@ if(window.grabStar)
     {initialTwist[t]+=twistIncrement;
     }
   //  window.twist=(window.twist-initialTwist[id]+48.)%24+initialTwist[id];
-    let twisteR=(twist-initialTwist[id]-permanentInitialTwist[id]+48.)%24+permanentInitialTwist[id]+initialTwist[id];
+    let twisteR=(twist-initialTwist[id]+permanentInitialTwist[id]+48.)%24-permanentInitialTwist[id]+initialTwist[id];
 //console.log("twisteR"+permanentInitialTwist[id])
     for(var t=0; t<maxTouchSoundCount;t++)
     {
