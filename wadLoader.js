@@ -215,20 +215,7 @@ if(window.grabStar)
     {initialTwist[t]+=twistIncrement;
     }
 //console.log("twisteR"+permanentInitialTwist[id])
-    for(var t=0; t<maxTouchSoundCount;t++)
-    {
-        let lastTwistSign=signTwist[t];
-        let twisteR=((twist-initialTwist[t]+24*100)%24+initialTwist[t]+24*100.)%24;
-       // console.log("aaaa"+permanentInitialTwist[t])
 
-        signTwist[t] =Math.sign(twisteR-12.);
-     //   if(t==0)console.log("st"+ ticker)
-        if (lastTwistSign!=signTwist[t]&&(
-                                           twisteR<6.*Math.sign(twisteR)||twisteR>18.*Math.sign(twisteR))
-            ){
-            octavesBoosted[t]+=24*signTwist[t]
-        }
-    }
    // window.twist=(window.twist-initialTwist[id]+24*100)%24+initialTwist[id];
 
 }
@@ -256,9 +243,22 @@ if(window.grabStar)
              
              else {
                  angleSound[id]+=  twistIncrement/24*(Math.PI*2.);//redundant operations done and undone to twistIncrement
-                  angleSound[id]=(angleSound[id]-initialAngleSound[id]+4*pi)%(Math.PI*2.)+initialAngleSound[id];
+                
                  // angleSound[id]=(angleSound[id]+2*pi)%(Math.PI*2.);
-
+                 for(var t=0; t<maxTouchSoundCount;t++)
+                 {
+                     let lastTwistSign=signTwist[t];
+                     let twisteR=((angleSound[t]-initialAngleSound[t])*24/(2*pi)+24*100)%24+initialAngleSound[t];
+                    // console.log("aaaa"+permanentInitialTwist[t])
+if(t==0)console.log(twisteR)
+                     signTwist[t] =Math.sign(twisteR-6.);
+                  //   if(t==0)console.log("st"+ ticker)
+                     if (lastTwistSign!=signTwist[t]&&(
+                            twisteR<4.*Math.sign(twisteR)||twisteR>8.*Math.sign(twisteR))
+                         ){
+                         octavesBoosted[t]+=24*signTwist[t]
+                     }
+                 }
              }
                  
                  let twistFeed;
@@ -268,15 +268,17 @@ if(window.grabStar)
                  }
                  else {
                     // soundTouchComponent=angleSound[id]
-                    soundTouchComponent[id] = (initialAngleSound[id]-angleSound[id])%(2*pi)+angleSound[id];//angleSound[id];//
+                     soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id]+4*pi)%(Math.PI*2.)+initialAngleSound[id];
+
+                    //soundTouchComponent[id] = (initialAngleSound[id]-angleSound[id])%(2*pi)+angleSound[id];//angleSound[id];//
               
                     // let dif = angleSound[id]-lastAngleSound;
                    //  console.log(dif)
                     // if(dif>2)octavesBoosted[id]+=24;
                      //  else if(dif<-2)octavesBoosted[id]-=24;
-                     twistFeed = initialTwist[id]+octavesBoosted[id];//
+                     twistFeed = (window.twist-initialTwist[id]+24*100)%24+initialTwist[id]+octavesBoosted[id];//
                    //  (initialTwist[id]-twist)%(24.)+twist+octavesBoosted[id];
-                   //  console.log(octavesBoosted[id])
+                     console.log(octavesBoosted[id])
 
                  }
                                   
@@ -287,8 +289,8 @@ if(window.grabStar)
         if(isFinite(frequency)&&frequency>0.&&
            angleSound[id]-initialAngleSound[id]!=0){
                  if(typeof sound[id]=="object"){
-                     let volumePrime=volume*(angleSound[id] - initialAngleSound[id])/(2.*pi)*.5;
-                     let volumeTWO =volume*(1.-(angleSound[id]-initialAngleSound[id])/(2.*pi))*.5;
+                     let volumePrime=volume*(soundTouchComponent[id] - initialAngleSound[id])/(2.*pi)*.5;
+                     let volumeTWO =volume*(1.-(soundTouchComponent[id]-initialAngleSound[id])/(2.*pi))*.5;
                      if(window.grabStar
                         //&&2==1
                         )
