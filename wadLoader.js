@@ -303,28 +303,30 @@ if(t==0)console.log(twisteR)
                          volumePrime=volumeTWO
                          volumeTWO=vpBuf
                      }
-
-                     sound2[id].setPitch(frequency/2.);
-                     sound[id].setPitch(frequency);
-                     sound2[id].setVolume(volumePrime*twistTRIANGLEtoSQUARE);
-                     sound[id].setVolume(volumeTWO*twistTRIANGLEtoSQUARE);
-                     
-                     
-                     zound2[id].setPitch(frequency/2.);
-                     zound[id].setPitch(frequency);
-                     zound2[id].setVolume(volumePrime*twistSQUAREtoTRIANGLE);
-                     zound[id].setVolume(volumeTWO*twistSQUAREtoTRIANGLE);
-                     
-                     xound2[id].setPitch(frequency/2.);
-                     xound[id].setPitch(frequency);
-                     xound2[id].setVolume(volumePrime*twistZINEtoSAW);
-                     xound[id].setVolume(volumeTWO*twistZINEtoSAW);
-                     
-                     
-                     tound2[id].setPitch(frequency/2.);
-                     tound[id].setPitch(frequency);
-                     tound2[id].setVolume(volumePrime*twistSAWtoZINE);
-                     tound[id].setVolume(volumeTWO*twistSAWtoZINE);
+                     if (frequency>2)
+                     {
+                         sound2[id].setPitch(frequency/2.);
+                         sound[id].setPitch(frequency);
+                         sound2[id].setVolume(volumePrime*twistTRIANGLEtoSQUARE);
+                         sound[id].setVolume(volumeTWO*twistTRIANGLEtoSQUARE);
+                         
+                         
+                         zound2[id].setPitch(frequency/2.);
+                         zound[id].setPitch(frequency);
+                         zound2[id].setVolume(volumePrime*twistSQUAREtoTRIANGLE);
+                         zound[id].setVolume(volumeTWO*twistSQUAREtoTRIANGLE);
+                         
+                         xound2[id].setPitch(frequency/2.);
+                         xound[id].setPitch(frequency);
+                         xound2[id].setVolume(volumePrime*twistZINEtoSAW);
+                         xound[id].setVolume(volumeTWO*twistZINEtoSAW);
+                         
+                         
+                         tound2[id].setPitch(frequency/2.);
+                         tound[id].setPitch(frequency);
+                         tound2[id].setVolume(volumePrime*twistSAWtoZINE);
+                         tound[id].setVolume(volumeTWO*twistSAWtoZINE);
+                     }
                  }
             }
         }
