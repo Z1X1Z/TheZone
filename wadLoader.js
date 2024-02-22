@@ -247,10 +247,10 @@ if(window.grabStar)
                     soundTouchComponent[id] = (initialAngleSound[id]-angleSound[id])%(2*pi)+angleSound[id];//angleSound[id];//
               
                      let dif = angleSound[id]-lastAngleSound;
-                     console.log(dif)
+                   //  console.log(dif)
                      if(dif>2)octavesBoosted[id]+=24;
                        else if(dif<-2)octavesBoosted[id]-=24;
-                     twistFeed = (initialTwist[id]-twist)%(24.)+twist+octavesBoosted[id];
+                     twistFeed = initialTwist[id]+octavesBoosted[id];//(initialTwist[id]-twist)%(24.)+twist+octavesBoosted[id];
                    //  console.log(octavesBoosted[id])
 
                  }
