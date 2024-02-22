@@ -224,9 +224,9 @@ if(window.grabStar)
         signTwist[t] =Math.sign(twisteR-12.);
      //   if(t==0)console.log("st"+ ticker)
         if (lastTwistSign!=signTwist[t]&&(
-                                           Math.abs(twisteR)<6.*Math.sign(twisteR)||Math.abs(twisteR)>18.*Math.sign(twisteR))
+                                           twisteR<6.*Math.sign(twisteR)||twisteR>18.*Math.sign(twisteR))
             ){
-            octavesBoosted[t]+=24*signTwist[t]*Math.sign(twisteR)
+            octavesBoosted[t]+=24*signTwist[t]
         }
     }
     window.twist=(window.twist-initialTwist[id]+24*100)%24+initialTwist[id];
