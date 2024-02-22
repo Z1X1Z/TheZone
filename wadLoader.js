@@ -218,10 +218,10 @@ if(window.grabStar)
     for(var t=0; t<maxTouchSoundCount;t++)
     {
         let lastTwistSign=signTwist[t];
-        let twisteR=(twist-initialTwist[t]+24*100.)%24+initialTwist[t];
+        let twisteR=(twist-initialTwist[t]+24*100)%24+initialTwist[t];
        // console.log("aaaa"+permanentInitialTwist[t])
 
-        signTwist[t] =Math.sign(twisteR-12.)*Math.sign(twisteR);
+        signTwist[t] =Math.sign(twisteR-12.);
      //   if(t==0)console.log("st"+ ticker)
         if (lastTwistSign!=signTwist[t]&&(
                                            twisteR<6.*Math.sign(twisteR)||twisteR>18.*Math.sign(twisteR))
