@@ -218,18 +218,18 @@ if(window.grabStar)
     for(var t=0; t<maxTouchSoundCount;t++)
     {
         let lastTwistSign=signTwist[t];
-        let twisteR=(twist-permanentInitialTwist[t])%24+permanentInitialTwist[t];
+        let twisteR=(twist-initialTwist[t])%24+initialTwist[t];
        // console.log("aaaa"+permanentInitialTwist[t])
 
         signTwist[t] =Math.sign(twisteR-12.);
      //   if(t==0)console.log("st"+ ticker)
         if (lastTwistSign!=signTwist[t]&&(
-                                           Math.abs(twisteR)<6.||Math.abs(twisteR)>18.)
+                                           Math.abs(twisteR)<6.*Math.sign(twisteR)||Math.abs(twisteR)>18.*Math.sign(twisteR))
             ){
             octavesBoosted[t]+=24*signTwist[t]
         }
     }
-    window.twist=(window.twist-initialTwist[id]+48.)%24+initialTwist[id];
+    window.twist=(window.twist-initialTwist[id]+24*100)%24+initialTwist[id];
 
 }
          if(!window.muteTouchVolume){
