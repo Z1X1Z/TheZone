@@ -214,6 +214,7 @@ if(window.grabStar)
     for(var t=0; t<maxTouchSoundCount;t++)if(t!=id)
     {initialTwist[t]+=twistIncrement;
     }
+    window.twist=(window.twist-initialTwist[id])%24+initialTwist[id];
 //console.log("twisteR"+permanentInitialTwist[id])
     for(var t=0; t<maxTouchSoundCount;t++)
     {
@@ -229,7 +230,6 @@ if(window.grabStar)
             octavesBoosted[t]+=24*signTwist[t]
         }
     }
-    window.twist=(window.twist-initialTwist[id]+48.)%24+initialTwist[id];
 
 }
          if(!window.muteTouchVolume){
