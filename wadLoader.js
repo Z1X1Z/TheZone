@@ -209,15 +209,17 @@ if(window.grabStar)
     for(var t=0; t<maxTouchSoundCount;t++)if(t!=id)
     {initialTwist[t]+=twistIncrement;
     }
-    
-    let lastTwistSign=signTwist[id];
-    signTwist[id] =Math.sign(twist-initialTwist[id]-12.);
-    console.log("st"+ (twist-initialTwist[id]))
-    if (lastTwistSign!=signTwist[id]&&(
-                                        Math.abs(twist-initialTwist[id])<6.||Math.abs(twist-initialTwist[id])>18.)
-                                        ){
-        octavesBoosted[id]+=24*signTwist[id]
-            }
+    for(var t=0; t<maxTouchSoundCount;t++)
+    {
+        let lastTwistSign=signTwist[t];
+        signTwist[t] =Math.sign(twist-initialTwist[t]-12.);
+        console.log("st"+ (twist-initialTwist[t]))
+        if (lastTwistSign!=signTwist[t]&&(
+                                           Math.abs(twist-initialTwist[t])<6.||Math.abs(twist-initialTwist[t])>18.)
+            ){
+            octavesBoosted[t]+=24*signTwist[t]
+        }
+    }
     window.twist=(window.twist-initialTwist[id]+48.)%24+initialTwist[id];
     lastSlip[id] =slip;
 
