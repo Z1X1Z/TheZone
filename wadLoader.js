@@ -291,7 +291,7 @@ if(t==0)console.log(twisteR)
                 let frequency = Math.pow(2.,((((soundTouchComponent[id]*window.flip)/pi/2*12+3-flip)*window.flip-twistFeed/2.))/12.
                                                 )*window.ConcertKey;
         if(isFinite(frequency)&&frequency>0.&&
-           angleSound[id]-initialAngleSound[id]!=0&&frequency>2&&typeof sound[id]=="object"){
+           angleSound[id]-initialAngleSound[id]!=0&&frequency>20&&typeof sound[id]=="object"){
                     let volumePrime=volume*(soundTouchComponent[id] - initialAngleSound[id])/(2.*pi)*.5;
                     let volumeTWO =volume*(1.-(soundTouchComponent[id]-initialAngleSound[id])/(2.*pi))*.5;
                     if(window.grabStar
