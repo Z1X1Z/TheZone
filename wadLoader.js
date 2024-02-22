@@ -291,44 +291,41 @@ if(t==0)console.log(twisteR)
                 let frequency = Math.pow(2.,((((soundTouchComponent[id]*window.flip)/pi/2*12+3-flip)*window.flip-twistFeed/2.))/12.
                                                 )*window.ConcertKey;
         if(isFinite(frequency)&&frequency>0.&&
-           angleSound[id]-initialAngleSound[id]!=0){
-                 if(typeof sound[id]=="object"){
-                     let volumePrime=volume*(soundTouchComponent[id] - initialAngleSound[id])/(2.*pi)*.5;
-                     let volumeTWO =volume*(1.-(soundTouchComponent[id]-initialAngleSound[id])/(2.*pi))*.5;
-                     if(window.grabStar
-                        //&&2==1
-                        )
-                     {
-                         let vpBuf=volumePrime
-                         volumePrime=volumeTWO
-                         volumeTWO=vpBuf
-                     }
-                     if (frequency>2)
-                     {
-                         sound2[id].setPitch(frequency/2.);
-                         sound[id].setPitch(frequency);
-                         sound2[id].setVolume(volumePrime*twistTRIANGLEtoSQUARE);
-                         sound[id].setVolume(volumeTWO*twistTRIANGLEtoSQUARE);
-                         
-                         
-                         zound2[id].setPitch(frequency/2.);
-                         zound[id].setPitch(frequency);
-                         zound2[id].setVolume(volumePrime*twistSQUAREtoTRIANGLE);
-                         zound[id].setVolume(volumeTWO*twistSQUAREtoTRIANGLE);
-                         
-                         xound2[id].setPitch(frequency/2.);
-                         xound[id].setPitch(frequency);
-                         xound2[id].setVolume(volumePrime*twistZINEtoSAW);
-                         xound[id].setVolume(volumeTWO*twistZINEtoSAW);
-                         
-                         
-                         tound2[id].setPitch(frequency/2.);
-                         tound[id].setPitch(frequency);
-                         tound2[id].setVolume(volumePrime*twistSAWtoZINE);
-                         tound[id].setVolume(volumeTWO*twistSAWtoZINE);
-                     }
-                 }
-            }
+           angleSound[id]-initialAngleSound[id]!=0&&frequency>2&&typeof sound[id]=="object"){
+                    let volumePrime=volume*(soundTouchComponent[id] - initialAngleSound[id])/(2.*pi)*.5;
+                    let volumeTWO =volume*(1.-(soundTouchComponent[id]-initialAngleSound[id])/(2.*pi))*.5;
+                    if(window.grabStar
+                       //&&2==1
+                       )
+                    {
+                        let vpBuf=volumePrime
+                        volumePrime=volumeTWO
+                        volumeTWO=vpBuf
+                    }
+                    
+                    sound2[id].setPitch(frequency/2.);
+                    sound[id].setPitch(frequency);
+                    sound2[id].setVolume(volumePrime*twistTRIANGLEtoSQUARE);
+                    sound[id].setVolume(volumeTWO*twistTRIANGLEtoSQUARE);
+                    
+                    
+                    zound2[id].setPitch(frequency/2.);
+                    zound[id].setPitch(frequency);
+                    zound2[id].setVolume(volumePrime*twistSQUAREtoTRIANGLE);
+                    zound[id].setVolume(volumeTWO*twistSQUAREtoTRIANGLE);
+                    
+                    xound2[id].setPitch(frequency/2.);
+                    xound[id].setPitch(frequency);
+                    xound2[id].setVolume(volumePrime*twistZINEtoSAW);
+                    xound[id].setVolume(volumeTWO*twistZINEtoSAW);
+                    
+                    
+                    tound2[id].setPitch(frequency/2.);
+                    tound[id].setPitch(frequency);
+                    tound2[id].setVolume(volumePrime*twistSAWtoZINE);
+                    tound[id].setVolume(volumeTWO*twistSAWtoZINE);
+                    
+                }
         }
 }
 
