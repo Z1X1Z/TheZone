@@ -108,6 +108,7 @@ function startSound(e){
         initialAngle[id]=Math.atan2(y,x)/Math.PI/2.;
         window.twist=(window.twist+24)%24
         initialTwist[id]=window.twist
+        permanentInitialTwist[id]=window.twist
         lastSlip[id] =0;
         octavesBoosted[id]=0
 
@@ -185,7 +186,9 @@ function startSound(e){
                                              let soundTouchComponent= Array(maxTouchSoundCount).fill(0);
                                              let octavesBoosted = Array(maxTouchSoundCount).fill(0);
 let   angleSound  = Array(maxTouchSoundCount);
-let initialTwist= Array(maxTouchSoundCount);
+                                             let initialTwist= Array(maxTouchSoundCount);
+                                             let permanentInitialTwist= Array(maxTouchSoundCount);
+                                             
                                              let signTwist= Array(maxTouchSoundCount);
 
                                              
@@ -212,10 +215,10 @@ if(window.grabStar)
     for(var t=0; t<maxTouchSoundCount;t++)
     {
         let lastTwistSign=signTwist[t];
-        signTwist[t] =Math.sign(twist-initialTwist[t]-12.);
-        console.log("st"+ (twist-initialTwist[t]))
+        signTwist[t] =Math.sign(twist-permanentInitialTwist[t]-12.);
+        console.log("st"+ (twist-permanentInitialTwist[t]))
         if (lastTwistSign!=signTwist[t]&&(
-                                           Math.abs(twist-initialTwist[t])<6.||Math.abs(twist-initialTwist[t])>18.)
+                                           Math.abs(twist-permanentInitialTwist[t])<6.||Math.abs(twist-permanentInitialTwist[t])>18.)
             ){
             octavesBoosted[t]+=24*signTwist[t]
         }
