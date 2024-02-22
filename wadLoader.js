@@ -243,22 +243,26 @@ if(window.grabStar)
              
              else {
                  angleSound[id]+=  twistIncrement/24*(Math.PI*2.);//redundant operations done and undone to twistIncrement
-                
-                 // angleSound[id]=(angleSound[id]+2*pi)%(Math.PI*2.);
+                 angleSound[id]=(angleSound[id]-initialAngleSound[id]+4*pi)%(Math.PI*2.)+initialAngleSound[id];
+
+                 
                  for(var t=0; t<maxTouchSoundCount;t++)
                  {
                      let lastTwistSign=signTwist[t];
-                     let twisteR=((angleSound[t]-initialAngleSound[t])*24/(2*pi)+24*100)%24+initialAngleSound[t];
+                     let twisteR=(angleSound[t]-initialAngleSound[t])*24/(2*pi);//((angleSound[t]-initialAngleSound[t])*24/
+                                 //  (2*pi)+24*100)%24+initialAngleSound[t]*24/(2*pi);
                     // console.log("aaaa"+permanentInitialTwist[t])
 if(t==0)console.log(twisteR)
-                     signTwist[t] =Math.sign(twisteR-6.);
+                     signTwist[t] =Math.sign(twisteR-12.);
                   //   if(t==0)console.log("st"+ ticker)
                      if (lastTwistSign!=signTwist[t]&&(
-                            twisteR<4.*Math.sign(twisteR)||twisteR>8.*Math.sign(twisteR))
+                            twisteR<6.*Math.sign(twisteR)||twisteR>18.*Math.sign(twisteR))
                          ){
                          octavesBoosted[t]+=24*signTwist[t]
                      }
                  }
+                 
+
              }
                  
                  let twistFeed;
