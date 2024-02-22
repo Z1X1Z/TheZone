@@ -111,6 +111,7 @@ function startSound(e){
         permanentInitialTwist[id]=window.twist
         lastSlip[id] =0;
         octavesBoosted[id]=0
+        signTwist[id]=false;
 
     }
     
@@ -214,7 +215,7 @@ if(window.grabStar)
     {initialTwist[t]+=twistIncrement;
     }
   //  window.twist=(window.twist-initialTwist[id]+48.)%24+initialTwist[id];
-    let twisteR=(twist+initialTwist[id]-permanentInitialTwist[id]+48.)%24+permanentInitialTwist[id]-initialTwist[id];
+    let twisteR=(twist-initialTwist[id]+48)%24+initialTwist[id];
 //console.log("twisteR"+permanentInitialTwist[id])
     for(var t=0; t<maxTouchSoundCount;t++)
     {
