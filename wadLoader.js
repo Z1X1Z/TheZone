@@ -221,7 +221,7 @@ if(window.grabStar)
         let twisteR=(twist-initialTwist[t])%24+initialTwist[t];
        // console.log("aaaa"+permanentInitialTwist[t])
 
-        signTwist[t] =Math.sign(twisteR-12.);
+        signTwist[t] =Math.sign(twisteR-12.)*Math.sign(twisteR);
      //   if(t==0)console.log("st"+ ticker)
         if (lastTwistSign!=signTwist[t]&&(
                                            twisteR<6.*Math.sign(twisteR)||twisteR>18.*Math.sign(twisteR))
