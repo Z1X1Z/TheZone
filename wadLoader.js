@@ -214,7 +214,7 @@ if(window.grabStar)
     for(var t=0; t<maxTouchSoundCount;t++)if(t!=id)
     {initialTwist[t]+=twistIncrement;
     }
-    window.twist=(window.twist-initialTwist[id])%24+initialTwist[id];
+    window.twist=(window.twist-initialTwist[id]+24*100)%24+initialTwist[id];
 //console.log("twisteR"+permanentInitialTwist[id])
     for(var t=0; t<maxTouchSoundCount;t++)
     {
