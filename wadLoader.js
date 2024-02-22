@@ -107,8 +107,8 @@ function startSound(e){
     if(window.grabStar){
         initialAngle[id]=Math.atan2(y,x)/Math.PI/2.;
        // window.twist=
-        initialTwist[id]=(window.twist+24)%24
-        permanentInitialTwist[id]=(window.twist+24)%24
+        initialTwist[id]=window.twist;//(window.twist+24)%24
+        permanentInitialTwist[id]=window.twist;//(window.twist+24)%24
         lastSlip[id] =0;
         octavesBoosted[id]=0
         signTwist[id]=false;
