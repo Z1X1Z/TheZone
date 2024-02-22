@@ -226,7 +226,7 @@ if(window.grabStar)
         if (lastTwistSign!=signTwist[t]&&(
                                            twisteR<6.*Math.sign(twisteR)||twisteR>18.*Math.sign(twisteR))
             ){
-            octavesBoosted[t]+=24*signTwist[t]
+            octavesBoosted[t]+=24*signTwist[t]*Math.sign(twisteR)
         }
     }
    // window.twist=(window.twist-initialTwist[id]+24*100)%24+initialTwist[id];
