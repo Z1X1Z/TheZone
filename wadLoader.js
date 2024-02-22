@@ -229,7 +229,7 @@ if(window.grabStar)
             octavesBoosted[t]+=24*signTwist[t]
         }
     }
-    window.twist=(window.twist-initialTwist[id]+24*100)%24+initialTwist[id];
+    window.twist=(window.twist-initialTwist[id])%24+initialTwist[id];
 
 }
          if(!window.muteTouchVolume){
