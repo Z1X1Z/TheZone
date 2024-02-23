@@ -3542,14 +3542,10 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                      if(fin.r>.9&&fin.g>.9&&fin.b>.9)fin-=(isGrey+isGreyDOT+pixelShipGrey+isGreyStaRivers)*1.5;
                                      else if(fin.r<.1&&fin.g<.1&&fin.b<.1)fin+=(isGrey+isGreyDOT+isGreyStaRivers)*1.5;
                                      vec3 confraculator = vec3(1.);
-                                     /*
-                                    // if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
                                      
-                       gl_FragColor= fin/vec4(confraculator
-                                                      ,1.);
-                                             */
-                       
-         gl_FragColor= vec4(.5);
+                                     
+                      // gl_FragColor= fin/vec4(confraculator ,1.);
+                                          
                    }
                                 else gl_FragColor=vec4(zoomer,1.);
 
