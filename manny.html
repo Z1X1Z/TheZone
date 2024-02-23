@@ -2662,7 +2662,8 @@ return
                                                                 l=vec3(2.-abs(s.y*-sin(-t.x))*19.)*-sin(-t.x);//middle horn
                                                if(s.x>-.1)l=vec3(-sin(t.x)-(s.x*(100.-100.*-sin(t.x*2.-3.14))*-sin(t.x)));
                                                }
-                                       return vec3(1./l);
+                                           vec3 ret =  vec3(clamp(1./l,0.,1.));
+                                       return ret;
                                }
 
      vec3 man(vec2 p,vec2 t) {
@@ -3517,7 +3518,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                       -vec4(vec3(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z),0.),0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies = vec4(
-                                           //mnyX+
+                                           mnyX+
                                            hypnoticHarmonicCircles+pillar
                                                     
                     +clamp(mny*starshipMultiplier
