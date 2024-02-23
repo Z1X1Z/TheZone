@@ -3528,7 +3528,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                                  
                                                  );
                                                 
-                       vec4 tree = vec4(0.);/*vec4( clamp(
+                       vec4 tree =vec4( clamp(
                                                 clamp(
                                                       cloud+
                                                       zoomer
@@ -3537,7 +3537,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                                +   pixelStarship.xyz
                                      -vec3((mny.r+mny.b+mny.g)*4.),.0,1.)
                                          ,1.);
-                                         */
+                                         
                                      vec4 fin = (//ss-faceFromShip+goodies
                                                  +tree
                                                  +pixelShipGrey*1.5
