@@ -3510,6 +3510,7 @@ if(starOnDot>=1){
          }
                                                                      
 if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
+                       /*
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
                                       -vec4(vec3(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z),0.),0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
@@ -3526,7 +3527,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                                 -abs( -pixelStarship.r-pixelStarship.g-pixelStarship.b)
                                                  
                                                  );
-                       vec4 tree = vec4(.5);vec4( clamp(
+                       vec4 tree = vec4( clamp(
                                                 clamp(
                                                       cloud+
                                                       zoomer
@@ -3544,7 +3545,9 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                      
                        gl_FragColor= fin/vec4(confraculator
                                                       ,1.);
-                                             
+                                             */
+                       
+         gl_FragColor= vec4(.5);
                    }
                                 else gl_FragColor=vec4(zoomer,1.);
 
