@@ -3382,7 +3382,8 @@ mny+=HEART*heartMultiplier;
      mny=clamp(mny,0.,1.);
 
     vec3 ARTICLE=vec3(0.);
-    /*if(articles){
+                                                                 /*
+    if(articles){
            vec3 HORSE=horse(characterOnTrailP, moveDynamic);
             ARTICLE+=scroll(characterOnTrailP+1.5*vec2(0.,resolution.x/min(resolution.x,resolution.y)),vec2(-1.));
             vec3 SWORD = sword(characterOnTrailP+vec2(swordSkew,0.),vec2(0.));
@@ -3392,8 +3393,7 @@ mny+=HEART*heartMultiplier;
              mny=clamp(mny-ls*5.,0.,1.)+SWORD+LAMP;
 
             ARTICLE+=clamp(flames(c4-vec2(.5,0.))-(ls+HORSE.r*3.+clamp(-mannyFace.r-mannyFace.g-mannyFace.b,-2.,.0))*10000.,0.,1.)+SWORD+HORSE+LAMP;
-    }
-     */
+    }*/
                                  float recenter = 0.;
                                   float rescale = 1.;
                                  if (colorCombo==20&&!(musicAngelMan>0&&(Character==3||Character==4)))
@@ -3483,13 +3483,12 @@ if(starOnDot>=1){
                                  
                         float shipSUM = starship.x+starship.y+starship.z;
                                  vec3 hypnoticHarmonicCircles = vec3(0.);
-                                                                 /*
                                  if(balloonsON!=0.||balloonsONexponential!=0.)
                                  {
                                     if(maxColorOfStarship!=1.) hypnoticHarmonicCircles=clamp(balloons(p)-shipSUM,0.,1.);
                                     else hypnoticHarmonicCircles=balloons(p);
                                 }
-                                                                 */
+                                                                 
                                                                  
          vec4 pixelStarship=vec4(0.);
          float pixelShipGrey = 0.;
@@ -3500,22 +3499,20 @@ if(starOnDot>=1){
                        vec2 uVu=-(vUvCentered)/(resolution.xy/max(resolution.x,resolution.y));
                        vec2 uVuMinCenter=-vUvCentered/(min(resolution.x,resolution.y)/resolution.yx);
 
-             /*pixelStarship = audioEq(uVuMinCenter);
+             pixelStarship = audioEq(uVuMinCenter);
              vec4 starBuffer = vec4(0.);
              for (float x = 0.; x<12.;x++) starBuffer+=starns(uVu,x);
              
              if (starBuffer.x==starBuffer.y&& starBuffer.y==starBuffer.z&&isGrey==0.)pixelShipGrey=starBuffer.x;
 
              pixelStarship += starBuffer;
-              */
          }
                                                                      
 if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
-                  
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
                                       -vec4(vec3(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z),0.),0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
-                       vec4 goodies =vec4(0.); vec4(hypnoticHarmonicCircles+pillar+mnyX+clamp(mny*starshipMultiplier-(ARTICLE.r+ARTICLE.g+ARTICLE.b),0.,1.)+ARTICLE+b+creatures+bridge,1.);
+                       vec4 goodies = vec4(hypnoticHarmonicCircles+pillar+mnyX+clamp(mny*starshipMultiplier-(ARTICLE.r+ARTICLE.g+ARTICLE.b),0.,1.)+ARTICLE+b+creatures+bridge,1.);
                        vec3 awayFromTree =  vec3(-(ARTICLE.x+ARTICLE.y+ARTICLE.z)*4.
                     -(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z)*4.
                        -(bridge.x+bridge.y+bridge.z)*4.
@@ -3528,8 +3525,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                                 -abs( -pixelStarship.r-pixelStarship.g-pixelStarship.b)
                                                  
                                                  );
-                                                
-                       vec4 tree =vec4( clamp(
+                       vec4 tree = vec4( clamp(
                                                 clamp(
                                                       cloud+
                                                       zoomer
@@ -3538,24 +3534,18 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                                +   pixelStarship.xyz
                                      -vec3((mny.r+mny.b+mny.g)*4.),.0,1.)
                                          ,1.);
-                                         
-                                     vec4 fin = (ss
-                                                 -faceFromShip
-                                                 +goodies//error
-                                                 +tree
-                                                 +pixelShipGrey*1.5
-                                                 
-                                   )*isBlack*isBlackStaRivers*isBlackDOT+(isBlack-1.)+(isBlackDOT-1.)+(isBlackStaRivers-1.);
+                                   
+                                     vec4 fin = (ss-faceFromShip
+                                                 +goodies
+                                                 +tree+pixelShipGrey*1.5)*isBlack*isBlackStaRivers*isBlackDOT+(isBlack-1.)+(isBlackDOT-1.)+(isBlackStaRivers-1.);
                                      if(fin.r>.9&&fin.g>.9&&fin.b>.9)fin-=(isGrey+isGreyDOT+pixelShipGrey+isGreyStaRivers)*1.5;
                                      else if(fin.r<.1&&fin.g<.1&&fin.b<.1)fin+=(isGrey+isGreyDOT+isGreyStaRivers)*1.5;
-                                      
                                      vec3 confraculator = vec3(1.);
+                                     if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
                                      
-                                     
-                       gl_FragColor= fin/vec4(confraculator
+                       gl_FragColor=+fin/vec4(confraculator
                                                       ,1.);
-                       
-       //  gl_FragColor= vec4(.5);
+                                             
                    }
                                 else gl_FragColor=vec4(zoomer,1.);
 
