@@ -3544,8 +3544,10 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                      vec3 confraculator = vec3(1.);
                                      
                                      
-                      // gl_FragColor= fin/vec4(confraculator ,1.);
-                                          
+                       gl_FragColor= fin/vec4(confraculator
+                                                      ,1.);
+                       
+       //  gl_FragColor= vec4(.5);
                    }
                                 else gl_FragColor=vec4(zoomer,1.);
 
