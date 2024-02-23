@@ -1533,7 +1533,7 @@ uniform float exponentialPetals;
 
     vec4 audioEq( vec2 uv )//Shekina Glory
     {
-        uv=uv.yx;
+        uv=uv.yx*.5;
         float angle = ((-atan(uv.y,uv.x)-twistStar*flipStar
                         )/PI2-.5)*flipStar;
                         //angle=mod(angle,1.);
@@ -1552,8 +1552,8 @@ uniform float exponentialPetals;
         float frampMultlen = frAmp*d;
        //
        
-         if (frampDIVlend>.25//outer shell
-             &&(frampDIVlend<.5||(frampDIVlend>1.&&(frampDIVlend<2.||frampDIVlend>4.)))
+         if (frampDIVlend>.5//outer shell
+             &&(frampDIVlend<1.||(frampDIVlend>2.&&(frampDIVlend<4.||frampDIVlend>8.)))
             ||
               frampMultlen>.5
             )
@@ -1567,7 +1567,7 @@ uniform float exponentialPetals;
                                                        )/12.)//+3.-flipStar/12.
                                                ,1.),1.,1.
                                            ))
-                              ,.0,1.), 1.)/pow(3.,d);
+                              ,.0,1.), 1.)/pow(3.,d*3.);
         else return vec4(.0);
     }
 
