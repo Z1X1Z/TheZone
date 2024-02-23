@@ -3382,7 +3382,7 @@ mny+=HEART*heartMultiplier;
      mny=clamp(mny,0.,1.);
 
     vec3 ARTICLE=vec3(0.);
-                                                                 /*
+                                                                 
     if(articles){
            vec3 HORSE=horse(characterOnTrailP, moveDynamic);
             ARTICLE+=scroll(characterOnTrailP+1.5*vec2(0.,resolution.x/min(resolution.x,resolution.y)),vec2(-1.));
@@ -3393,7 +3393,7 @@ mny+=HEART*heartMultiplier;
              mny=clamp(mny-ls*5.,0.,1.)+SWORD+LAMP;
 
             ARTICLE+=clamp(flames(c4-vec2(.5,0.))-(ls+HORSE.r*3.+clamp(-mannyFace.r-mannyFace.g-mannyFace.b,-2.,.0))*10000.,0.,1.)+SWORD+HORSE+LAMP;
-    }*/
+    }
                                  float recenter = 0.;
                                   float rescale = 1.;
                                  if (colorCombo==20&&!(musicAngelMan>0&&(Character==3||Character==4)))
@@ -3536,7 +3536,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                          ,1.);
                                    
                                      vec4 fin = (ss-faceFromShip
-                                                 +goodies
+                                               //  +goodies
                                                  +tree+pixelShipGrey*1.5)*isBlack*isBlackStaRivers*isBlackDOT+(isBlack-1.)+(isBlackDOT-1.)+(isBlackStaRivers-1.);
                                      if(fin.r>.9&&fin.g>.9&&fin.b>.9)fin-=(isGrey+isGreyDOT+pixelShipGrey+isGreyStaRivers)*1.5;
                                      else if(fin.r<.1&&fin.g<.1&&fin.b<.1)fin+=(isGrey+isGreyDOT+isGreyStaRivers)*1.5;
