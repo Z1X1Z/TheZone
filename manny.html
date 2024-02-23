@@ -3527,7 +3527,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                                 -abs( -pixelStarship.r-pixelStarship.g-pixelStarship.b)
                                                  
                                                  );
-                                                 /*
+                                                
                        vec4 tree = vec4( clamp(
                                                 clamp(
                                                       cloud+
@@ -3537,7 +3537,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                                +   pixelStarship.xyz
                                      -vec3((mny.r+mny.b+mny.g)*4.),.0,1.)
                                          ,1.);
-                                   
+                                         /*
                                      vec4 fin = (ss-faceFromShip+goodies+tree+pixelShipGrey*1.5)*isBlack*isBlackStaRivers*isBlackDOT+(isBlack-1.)+(isBlackDOT-1.)+(isBlackStaRivers-1.);
                                      if(fin.r>.9&&fin.g>.9&&fin.b>.9)fin-=(isGrey+isGreyDOT+pixelShipGrey+isGreyStaRivers)*1.5;
                                      else if(fin.r<.1&&fin.g<.1&&fin.b<.1)fin+=(isGrey+isGreyDOT+isGreyStaRivers)*1.5;
