@@ -3322,7 +3322,8 @@ vec2 dance = vec2(0.);
                  float inversion = -1.;
                  if (wheel)inversion=coz(time);
 
-                   vec3 mny=vec3(0.),mnyX = vec3(0.);
+                   vec3 mny=vec3(0.);
+                    vec4 mnyX = vec3(0.);
                                  float angelSize = 1.22112211;
 
                                  vec3 mannyFace = vec3(0.);
@@ -3516,14 +3517,14 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                       -vec4(vec3(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z),0.),0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies = vec4(
-                                    //       +mnyX
+                                           +mnyX
                                            hypnoticHarmonicCircles+pillar
                                                     
                     +clamp(mny*starshipMultiplier
                    //     -(ARTICLE.r+ARTICLE.g+ARTICLE.b)
                            ,0.,1.)
                                                     //+ARTICLE
-                                                    //+b+creatures+bridge
+                                                    +b+creatures+bridge
                                                     ,1.);
                        vec3 awayFromTree =  vec3(
                         //-(ARTICLE.x+ARTICLE.y+ARTICLE.z)*4.
