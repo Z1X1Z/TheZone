@@ -1602,7 +1602,7 @@ uniform float exponentialPetals;
         ,0.)).r;
        // noteAmp=pow(noteAmp,.5);
        // noteAmp/=255.;
-        float d = length( uv);///16.;
+        float d = length( uv)/2.;///16.;
         //fr=(fr)*(fr)/3.;
       //  float power = 5.;
       // float b = pow(noteAmp,power)/pow(d*6.,power*.5);
@@ -1610,10 +1610,13 @@ uniform float exponentialPetals;
         float noteAmpToLength=noteAmp/d*starnSize;
        // if(noteOfStar==0.)return vec4(1.);
        // else return vec4(0.);
-     if ((noteAmpToLength>.25&&(noteAmpToLength<.5||noteAmpToLength>1.))
-||
-noteAmp*d>2.
-){
+       
+         if (noteAmpToLength>.5//outer shell
+             &&(noteAmpToLength<1.||(noteAmpToLength>2.&&(noteAmpToLength<4.||noteAmpToLength>8.)))
+            ||
+             noteAmp*d>.5
+            )
+              {
            if(
               noteOfStar==mod(0. +rote,12.)||
               noteOfStar==mod(6. +rote,12.))
@@ -1626,14 +1629,14 @@ noteAmp*d>2.
               {
                   ret=vec4(-clamp(
                                   noteAmpToLength
-                           ,0.,1.)*.5
+                           ,0.,1.)*.441
                            );
             }
         else{
             
 ret= vec4(clamp(
                 noteAmpToLength
-            ,0. ,1.)*.5
+            ,0. ,1.)*.441
        );
            }
            }

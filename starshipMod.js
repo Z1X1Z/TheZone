@@ -611,7 +611,7 @@ clvrVariant7:{value: false},
 clvrVariant8:{value: false},
                                 
 Spoker:{value: true    },
-spokelover:{value: false    },
+spokelover:{value: true    },
 continuumClover:{value: false    },
 Inherited:{value: true    },
 cloverSlide:{value: false    },
