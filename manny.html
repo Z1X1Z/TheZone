@@ -1533,7 +1533,7 @@ uniform float exponentialPetals;
 
     vec4 audioEq( vec2 uv )//Shekina Glory
     {
-        uv=uv.yx*1.5;
+        uv=uv.yx;
         float angle = ((-atan(uv.y,uv.x)-twistStar*flipStar
                         )/PI2-.5)*flipStar;
                         //angle=mod(angle,1.);
@@ -1553,9 +1553,9 @@ uniform float exponentialPetals;
        //
        
          if (frampDIVlend>.25//outer shell
-             &&(frampDIVlend<1.||(frampDIVlend>2.&&(frampDIVlend<4.||frampDIVlend>8.)))
+             &&(frampDIVlend<.5||(frampDIVlend>1.&&(frampDIVlend<2.||frampDIVlend>4.)))
             ||
-              frampMultlen>2.
+              frampMultlen>.5
             )
         //
         
@@ -1567,7 +1567,7 @@ uniform float exponentialPetals;
                                                        )/12.)//+3.-flipStar/12.
                                                ,1.),1.,1.
                                            ))
-                              ,.0,1.), 1.)/pow(2.,d);
+                              ,.0,1.), 1.)/pow(3.,d);
         else return vec4(.0);
     }
 
@@ -3491,9 +3491,11 @@ if(starOnDot>=1){
                                                                  
          if (pixelSTARon)
     {
-                       vec2 uVu=-(vUv.yx-.5)/(resolution.xy/max(resolution.x,resolution.y));
+                       vec2 vUvCentered = (vUv.yx-.5);
+                       vec2 uVu=-(vUvCentered)/(resolution.xy/max(resolution.x,resolution.y));
+                       vec2 uVuMinCenter=-vUvCentered/(min(resolution.x,resolution.y)/resolution.yx);
 
-             pixelStarship = audioEq(uVu);
+             pixelStarship = audioEq(uVuMinCenter);
              vec4 starBuffer = vec4(0.);
              for (float x = 0.; x<12.;x++) starBuffer+=starns(uVu,x);
              
