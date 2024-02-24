@@ -1561,7 +1561,7 @@ uniform float exponentialPetals;
                         //angle=mod(angle,1.);
                         
         float frAmp=0.;
-        for (float n = -2.; n<9.;n+=1.0)//not sure why it has negative range
+        for (float n = -1.; n<10.;n+=1.0)//not sure why it has negative range
         //if (twistStar<24.)
          {
              float b =nyq*pow(2.,angle+n);
@@ -1573,24 +1573,23 @@ uniform float exponentialPetals;
         float frampDIVlend = frAmp/d;
         float frampMultlen = frAmp*d;
        //
-       
-         if (frampDIVlend>.5//outer shell
+       vec4 ret =vec4(0.);
+         if ((frampDIVlend>.5|| frampMultlen>.125)
+//outer shell
              &&(frampDIVlend<1.||(frampDIVlend>2.&&(frampDIVlend<4.||frampDIVlend>8.)))
             ||
-              frampMultlen>.5
+              (frampMultlen>.5)
             )
-        //
-        
-       // return vec4(frAmp);
-        //if(frampDIVlend>255.)
-        return  vec4(clamp(hsv2rgb(
+     
+        ret=  vec4(clamp(hsv2rgb(
                                       vec3(
                                            mod((-angle+(4.-3.*flipStar
                                                        )/12.)//+3.-flipStar/12.
                                                ,1.),1.,1.
                                            ))
                               ,.0,1.), 1.)/pow(2.71,d*2.71);
-        else return vec4(.0);
+        else ret= vec4(.0);
+        return ret;
     }
 
 
