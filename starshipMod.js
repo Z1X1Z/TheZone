@@ -1166,7 +1166,7 @@ let lastVolume = 1.;
         
         expandedZoomCage=1;
         if (uniforms.Spoker.value)expandedZoomCage*=4./3.
-    if (!(uniforms.Spoker.value||uniforms.spokelover.value))expandedZoomCage = 1.;
+    else expandedZoomCage = 1.;
              
              
     if((fromCenter>=zoomCageSize*expandedZoomCage||zoom>=1.)&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
