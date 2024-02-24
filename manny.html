@@ -1537,13 +1537,18 @@ uniform float exponentialPetals;
     
     
     
-   vec4 waveForm(vec2 uv){
+   vec4 waveForm(){
        vec4 ret=vec4(0.);//1.,.5,1.,1.);
-       if(uv.x<nyq){
-    float frAmp = texture2D(audioBuffer, vec2(uv.y,0.)).r;
-   if (log(abs(frAmp)/uv.x)>1.) ret = vec4(sign(frAmp));
-   // else ret = vec4(0.);
+       if(1.-vUv.y<nyq*2.5){
+           
+           vec2 flatScreen=1.-vUv;
+
+    float frAmp = texture2D(audioBuffer, vec2(flatScreen.x,0.)).r;
+    
+   if (log(abs(frAmp)/flatScreen.y)>1.) ret = vec4(sign(frAmp));
+   
    }
+       
     return ret;
     }
     
@@ -3523,9 +3528,8 @@ if(starOnDot>=1){
                        vec2 vUvCentered = (vUv.yx-.5);
                        vec2 uVu=-(vUvCentered)/(resolution.xy/max(resolution.x,resolution.y));
                        vec2 uVuMinCenter=-vUvCentered/(min(resolution.x,resolution.y)/resolution.yx);
-                       vec2 uVuFromSide=(1.-vUv.yx);
              pixelStarship = audioEq(uVuMinCenter);
-             pixelStarship += waveForm(uVuFromSide);
+             pixelStarship += waveForm();
              vec4 starBuffer = vec4(0.);
              for (float x = 0.; x<12.;x++) starBuffer+=starns(uVu,x);
              
