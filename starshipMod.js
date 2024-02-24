@@ -1685,7 +1685,6 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
     else if(spirographMODE==1) lineMat.color = new THREE.Color("").setRGB(frameCount,frameCount,frameCount);
     
        
-  const d = -1.;
                             
                             let tx = spirray0[0], ty = spirray1[1],greyness=1.,greynessLast=-1;
                             
@@ -1705,8 +1704,9 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
             // pointColor.push( greynessLast, greynessLast, greynessLast,greyness, greyness, greyness );
             if(isFinite(tx)&&isFinite(ty)&&isFinite(txlast)&isFinite(tylast))
             {
-                linePositionAttribute.setXYZ(lineStride,txlast,tylast, d)
-              linePositionAttribute.setXYZ(lineStride+1,tx, ty, d)
+                let depthSpirograph = (-.5+r/bufferPortion/2.)*starShipDepthInSet;
+                linePositionAttribute.setXYZ(lineStride,txlast,tylast, depthSpirograph)
+              linePositionAttribute.setXYZ(lineStride+1,tx, ty, depthSpirograph)
                 
              //  lineColorAttribute.setXYZ(lineStride,greyness, greyness, greyness);
               //  lineColorAttribute.setXYZ(lineStride+1,greyness, greyness, greyness );
@@ -2819,7 +2819,7 @@ function calculatePitch ()
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 
 let tolerance;//(1024-26)/10000
-if(window.highORlow==1)tolerance=.02134356;
+if(window.highORlow==1)tolerance=.02134356;//.02134356
     else if(window.highORlow==2)tolerance=.49;
 let period;
 let delta = 0.0, runningSum = 0.0;
