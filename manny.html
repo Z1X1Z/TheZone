@@ -1385,8 +1385,14 @@ void main(){
 <script id="fragmentShader" type="x-shader/x-fragment">
     varying vec2 vUv;
     
-    uniform sampler2D micIn;
     uniform bool pixelSTARon;
+    uniform float fftSize;
+    uniform float sampleRate;
+    uniform float nyq;
+    uniform sampler2D audioBuffer;
+    uniform sampler2D micIn;
+    
+    
     uniform sampler2D STAR;
     uniform sampler2D EDEN;
     uniform sampler2D coreTextureSampler;
@@ -1529,10 +1535,21 @@ uniform float exponentialPetals;
     }
     
     
-    float nyq =  1024./44100.;
-
+    
+    
+   vec4 waveForm(vec2 uv){
+       vec4 ret=vec4(0.);//1.,.5,1.,1.);
+       if(uv.x<nyq){
+    float frAmp = texture2D(audioBuffer, vec2(uv.y,0.)).r;
+   if (log(abs(frAmp)/uv.x)>1.) ret = vec4(sign(frAmp));
+   // else ret = vec4(0.);
+   }
+    return ret;
+    }
+    
     vec4 audioEq( vec2 uv )//Shekina Glory
     {
+
         uv=uv.yx*.5;
         float angle = ((-atan(uv.y,uv.x)-twistStar*flipStar
                         )/PI2-.5)*flipStar;
@@ -1576,6 +1593,8 @@ uniform float exponentialPetals;
     float starnSize = PI2/120.*2.;
     vec4 starns ( vec2 uv,float noteOfStar)//Seven stars, two witnesses
     {
+      //  float nyq =  fftSize/sampleRate/2.;
+
         //uv=vec2(-uv.x,uv.y);
         float scalar =1./1.5/2.;
         float octaveSpin = 4./12.;
@@ -3504,8 +3523,9 @@ if(starOnDot>=1){
                        vec2 vUvCentered = (vUv.yx-.5);
                        vec2 uVu=-(vUvCentered)/(resolution.xy/max(resolution.x,resolution.y));
                        vec2 uVuMinCenter=-vUvCentered/(min(resolution.x,resolution.y)/resolution.yx);
-
+                       vec2 uVuFromSide=(1.-vUv.yx);
              pixelStarship = audioEq(uVuMinCenter);
+             pixelStarship += waveForm(uVuFromSide);
              vec4 starBuffer = vec4(0.);
              for (float x = 0.; x<12.;x++) starBuffer+=starns(uVu,x);
              
