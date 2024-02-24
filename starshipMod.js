@@ -498,8 +498,7 @@ let pushBackCounter = 0;
                         }
 
                                
-            let expandedZoomCage=1.;
-           if (uniforms.Spoker.value)expandedZoomCage*=4./3.
+          // if (uniforms.Spoker.value)expandedZoomCage=4./3.
            if(preFromCenter>=window.zoomCageSize*expandedZoomCage){//adjust back in if too far from the center
                 pushBackCounter+=60./FPS;
 
@@ -1038,7 +1037,8 @@ function setDynamicSampler2ds(){
  }
 function setMicInputToPIXEL(){
             let dataArrayBuffer =new Float32Array( numberOfBins ).fill(0);
-             for (var x = 0; x < bufferSize; x++) dataArrayBuffer [x]= dataArray[x]/255.;
+             if(!touchMode)
+                 for (var x = 0; x < bufferSize; x++) dataArrayBuffer [x]= dataArray[x]/255.;
 
               
              let micTexBuf = new THREE.DataTexture( dataArrayBuffer, numberOfBins, 1, THREE.RedFormat,THREE.FloatType);
@@ -1134,6 +1134,8 @@ let lastVolume = 1.;
                        
                        let cloverSuperCores = 0;
                        var singleHyperCoreDepth = 54.;//240/54=4.44444444.. I like this, also 240/48 = 5 that's okay too, since the 60th core is kindof gone to the hypercore dot
+                            let expandedZoomCage=1.;
+
        function infinicore(){
             if(zoom<=1./2.**(singleHyperCoreDepth+3)&&fromCenter/zoom<2.){
                 zoom*=2.**singleHyperCoreDepth;coordY*=2.**singleHyperCoreDepth;coordX*=2.**singleHyperCoreDepth;
@@ -1161,7 +1163,13 @@ let lastVolume = 1.;
     
     if (ONbypass||(on&&zoom<1.))preserveOuterCore=true;
     else preserveOuterCore = false
-    if((fromCenter>=2.5||zoom>=1.)&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
+        
+        expandedZoomCage=1;
+        if (uniforms.Spoker.value)expandedZoomCage*=4./3.
+    if (!(uniforms.Spoker.value||uniforms.spokelover.value))expandedZoomCage = 1.;
+             
+             
+    if((fromCenter>=zoomCageSize*expandedZoomCage||zoom>=1.)&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
         
         if(uniforms.wheel.value)uniforms.upCoreCycler.value=(uniforms.upCoreCycler.value-1)%60;//does modulo -60%60=0?-0 it seems
         else uniforms.upCoreCycler.value = 0.;
@@ -1487,7 +1495,11 @@ function runOSMD (){
                                     
                                     
     ONbypass = false;
-     if( window.touchMode||window.touchOnlyMode)executeTouchRegime();
+     if( window.touchMode||window.touchOnlyMode)
+     {
+         setMicInputToPIXEL();
+         executeTouchRegime();
+     }
                                     
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
      if("osmd" in window&&osmd!=null)runOSMD();
