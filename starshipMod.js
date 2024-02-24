@@ -584,7 +584,9 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
                                            window.zoom=1.;
 
                             let uniforms = {
-         micIn:{value:null},
+         fftSize:{value:2048},sampleRate:{value:44100},
+         micIn:{value:null},audioBuffer:{value:null},
+             
          pixelSTARon:{value:true},
 omniDynamic:{value:null},
 coreTextureSampler:{value:null},
@@ -1035,17 +1037,33 @@ function setDynamicSampler2ds(){
      uniforms.coreTextureSampler.value=coreTexture;
      uniforms.coreTextureSampler.needsUpdate = true;
  }
-function setMicInputToPIXEL(){
+function setMicInputToStarPIXEL(){
             let dataArrayBuffer =new Float32Array( numberOfBins ).fill(0);
-             if(!touchMode)
-                 for (var x = 0; x < bufferSize; x++) dataArrayBuffer [x]= dataArray[x]/255.;
-
-              
-             let micTexBuf = new THREE.DataTexture( dataArrayBuffer, numberOfBins, 1, THREE.RedFormat,THREE.FloatType);
+             let inputDataBuffer =new Float32Array( fftSize ).fill(0);
+             let withinMaxsafeSize=(fftSize<=16384)//(EldersLeg<=682);
+            // console.log(fftSize)
+             if(withinMaxsafeSize&&(!touchMode||window.shouldShowStar))
+             {
+                 
+                 uniforms.sampleRate.value =            audioX.sampleRate;
+                 uniforms.fftSize.value =            audioX.fftSize;
+                 for (var x = 0; x < numberOfBins; x++)dataArrayBuffer[x]=dataArray[x]/255.;
+                 for (var x = 0; x < fftSize; x++)inputDataBuffer[x]=inputData[x];
+             }
+             let micTexBuf = new THREE.DataTexture( dataArrayBuffer, (withinMaxsafeSize)?numberOfBins:1, 1, THREE.RedFormat,THREE.FloatType);
+             micTexBuf.needsUpdate=true;
+             
+             
+             let RAWaudioTexBuf = new THREE.DataTexture(inputDataBuffer , (withinMaxsafeSize)?fftSize:1, 1, THREE.RedFormat,THREE.FloatType);
+             
+             
              micTexBuf.needsUpdate=true;
 
              uniforms[ "micIn" ].value = micTexBuf;
              uniforms.micIn.needsUpdate = true;
+             uniforms["audioBuffer"].value = RAWaudioTexBuf;
+             uniforms.audioBuffer.needsUpdate = true;
+
 
          }
          
@@ -1493,11 +1511,10 @@ function runOSMD (){
 
                                     
                                     
-                                    
     ONbypass = false;
      if( window.touchMode||window.touchOnlyMode)
      {
-         setMicInputToPIXEL();
+         setMicInputToStarPIXEL();
          executeTouchRegime();
      }
                                     
@@ -1696,7 +1713,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
 
 
   if (window.micOn)analyser.getByteFrequencyData(  dataArray);
-setMicInputToPIXEL();
+       setMicInputToStarPIXEL();
        
    var maxTestar=0.0000001;
    var minTestar=100000000000000;
