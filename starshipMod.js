@@ -595,7 +595,7 @@ uberDuper:{value: null   },
     
 eden:{value: 0},
 spokesVisualizeColors: {value: false    },
-note:{value: 0},
+note:{value: 0.},
                             balloonsON:{value: 0.},
                             balloonsONexponential:{value: 0.},
 sparklesON:{value: false},
@@ -1037,7 +1037,7 @@ function setDynamicSampler2ds(){
      uniforms.coreTextureSampler.needsUpdate = true;
  }
 function setMicInputToPIXEL(){
-            let dataArrayBuffer =new Float32Array( numberOfBins );
+            let dataArrayBuffer =new Float32Array( numberOfBins ).fill(0);
              for (var x = 0; x < bufferSize; x++) dataArrayBuffer [x]= dataArray[x]/255.;
 
               
@@ -1159,9 +1159,9 @@ let lastVolume = 1.;
     
     
     
-    if (ONbypass&&(on||zoom<1.))preserveOuterCore=true;
+    if (ONbypass||(on&&zoom<1.))preserveOuterCore=true;
     else preserveOuterCore = false
-    if((fromCenter>=1.||zoom>=1.)&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
+    if((fromCenter>=2.5||zoom>=1.)&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
         
         if(uniforms.wheel.value)uniforms.upCoreCycler.value=(uniforms.upCoreCycler.value-1)%60;//does modulo -60%60=0?-0 it seems
         else uniforms.upCoreCycler.value = 0.;
@@ -1883,9 +1883,9 @@ setMicInputToPIXEL();
                         }
                         const outSetX = w*m.xr-bulletX;//apparently something is flipped
                         const outSetY = w*m.yr-bulletY;
-                        let alph = timeShift*starShipDepthInSet;
-                        for(var yy=0;yy<6;yy++) starStreamColorAttribute.setXYZW(starStreamStride+yy, m.vop.r, m.vop.g, m.vop.b,alph)//alpha is beta
-                            
+                        //let alph = timeShift*starShipDepthInSet;
+                        for(var yy=0;yy<6;yy++) starStreamColorAttribute.setXYZW(starStreamStride+yy, m.vop.r, m.vop.g, m.vop.b,1.-timeShift/OUTERSHELL*.5)//alpha is beta
+                            //if(xyStarParticleArray[(starMoment-1+starCount)%starCount])console.log(timeShift)
                             const nx =-m.x+outSetX
                             const ny =-m.y+outSetY
                             const xShift=m.x+outSetX;
