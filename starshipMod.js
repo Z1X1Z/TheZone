@@ -584,7 +584,7 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
                                            window.zoom=1.;
 
                             let uniforms = {
-         fftSize:{value:2048},sampleRate:{value:44100},
+         fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:2048./44100.},
          micIn:{value:null},audioBuffer:{value:null},
              
          pixelSTARon:{value:true},
@@ -1038,32 +1038,37 @@ function setDynamicSampler2ds(){
      uniforms.coreTextureSampler.needsUpdate = true;
  }
 function setMicInputToStarPIXEL(){
+             //let fftSizeLocal = INITIALIZED?  fftSize:1;
             let dataArrayBuffer =new Float32Array( numberOfBins ).fill(0);
              let inputDataBuffer =new Float32Array( fftSize ).fill(0);
-             let withinMaxsafeSize=(fftSize<=16384)//(EldersLeg<=682);
+             
+             let withinMaxsafeSizeBins=(numberOfBins<=16384)//(EldersLeg<=682);
+             let withinMaxsafeSizeFFT=(fftSize<=16384/2)//(EldersLeg<=682);
             // console.log(fftSize)
-             if(withinMaxsafeSize&&(!touchMode||window.shouldShowStar))
+            // console.log(fftSize)
+             if(!touchMode||window.shouldShowStar)
              {
+                 uniforms.sampleRate.value =       audioX.sampleRate     ;
+                 uniforms.fftSize.value =             analyser.fftSize;
+                 uniforms.nyq.value =            analyser.fftSize/audioX.sampleRate/2.;
                  
-                 uniforms.sampleRate.value =            audioX.sampleRate;
-                 uniforms.fftSize.value =            audioX.fftSize;
-                 for (var x = 0; x < numberOfBins; x++)dataArrayBuffer[x]=dataArray[x]/255.;
-                 for (var x = 0; x < fftSize; x++)inputDataBuffer[x]=inputData[x];
+                 //console.log(nyq)
+                 if(withinMaxsafeSizeBins)for (var x = 0; x < numberOfBins; x++)dataArrayBuffer[x]=dataArray[x]/255.;
+                if(withinMaxsafeSizeFFT) for (var x = 0; x < fftSize; x++)inputDataBuffer[x]=inputData[x];
              }
-             let micTexBuf = new THREE.DataTexture( dataArrayBuffer, (withinMaxsafeSize)?numberOfBins:1, 1, THREE.RedFormat,THREE.FloatType);
+             let micTexBuf = new THREE.DataTexture( dataArrayBuffer, (withinMaxsafeSizeBins)?numberOfBins:1, 1, THREE.RedFormat,THREE.FloatType);
              micTexBuf.needsUpdate=true;
              
              
-             let RAWaudioTexBuf = new THREE.DataTexture(inputDataBuffer , (withinMaxsafeSize)?fftSize:1, 1, THREE.RedFormat,THREE.FloatType);
-             
-             
-             micTexBuf.needsUpdate=true;
+             let RAWaudioTexBuf = new THREE.DataTexture(inputDataBuffer , (withinMaxsafeSizeFFT)?fftSize:1, 1, THREE.RedFormat,THREE.FloatType);
+             RAWaudioTexBuf.needsUpdate=true;
 
              uniforms[ "micIn" ].value = micTexBuf;
              uniforms.micIn.needsUpdate = true;
              uniforms["audioBuffer"].value = RAWaudioTexBuf;
              uniforms.audioBuffer.needsUpdate = true;
 
+             //console.log(uniforms.micIn.value[0])
 
          }
          
@@ -1562,7 +1567,12 @@ function runOSMD (){
 
 if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
 
-  analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
+    if (window.micOn){
+        analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
+        analyser.getByteFrequencyData(  dataArray);
+        setMicInputToStarPIXEL();
+    }
+         
            if(window.volumeSpeed&&on)
            {
                    if(lastVolume!=0.) lastVolume=volume;
@@ -1712,9 +1722,6 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
     lineColorAttribute.needsUpdate = true;
 
 
-  if (window.micOn)analyser.getByteFrequencyData(  dataArray);
-       setMicInputToStarPIXEL();
-       
    var maxTestar=0.0000001;
    var minTestar=100000000000000;
 
@@ -2812,7 +2819,7 @@ function calculatePitch ()
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 
 let tolerance;//(1024-26)/10000
-if(window.highORlow==1)tolerance=.021344;
+if(window.highORlow==1)tolerance=.021343;
     else if(window.highORlow==2)tolerance=.49;
 let period;
 let delta = 0.0, runningSum = 0.0;
