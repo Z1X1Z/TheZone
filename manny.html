@@ -1609,7 +1609,7 @@ uniform float exponentialPetals;
         float scalar =1./1.5/2.;
         float octaveSpin = 5./12.;
     
-        float angle1 = (-noteOfStar/12.)*PI2*flipStar-twistStar*flipStar+PI*flipStar;//this is for the position from centerVV;
+        float angle1 = (-noteOfStar/12.)*PI2*flipStar+twistStar*flipStar+PI*flipStar;//this is for the position from centerVV;
         uv.x += coz(angle1)*scalar;
        uv.y += zin(angle1)*scalar;//^^
        uv=spin2(uv,-angle1+PI/2.
@@ -1633,7 +1633,7 @@ uniform float exponentialPetals;
       //               ,1.);
         float oct = floor(angle*10.+.5-3.);
         
-        float note0 = oct+angle1/PI2*flipStar+3./12.-twistStar/PI2;
+        float note0 = oct+angle1/PI2*flipStar+3./12.+twistStar/PI2;
       //  return vec4(note0/72.);
        // return vec4(note0/144.);
        note0-=1.;
