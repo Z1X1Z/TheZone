@@ -330,8 +330,9 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
             
         }
 if(spokelover&&counter<hyperCoreBoosted){
-if(continuumClover) s.multiplyScalar( Math.sqrt(2.));//engage shiny spokelover
-else s.divideScalar( Math.sqrt(2.));
+//if(continuumClover) s.multiplyScalar( Math.sqrt(2.));//engage shiny spokelover
+//else
+    s.divideScalar( Math.sqrt(2.));
 }
 
 
