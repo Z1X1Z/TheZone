@@ -1602,16 +1602,16 @@ uniform float exponentialPetals;
 
 
 
-    float starnSize = PI/120.*1.5*2.*1.25;
+    float starnSize = PI/120.*2.*1.5*4./3.;
     vec4 starns ( vec2 uv,float noteOfStar)//Seven stars, two witnesses
     {
       //  float nyq =  fftSize/sampleRate/2.;
         
         //uv=vec2(-uv.x,uv.y);
-        float scalar =2./5.;
+        float scalar =1./2.*3./4.;
       //  float octaveSpin = 5./12.;
     
-        float angle1 = (-noteOfStar/12.)*PI2*flipStar+twistStar*flipStar+PI*flipStar;//this is for the position from centerVV;
+        float angle1 = (noteOfStar/12.)*PI2*flipStar+twistStar*flipStar+PI*flipStar;//this is for the position from centerVV;
         uv.x += coz(angle1)*scalar;
        uv.y += zin(angle1)*scalar;//^^
        uv=spin2(uv,-angle1+PI/2.
@@ -1633,12 +1633,12 @@ uniform float exponentialPetals;
         //             vec3(angle)
       //            length(uv)
       //               ,1.);
-        float oct = floor(angle*10.+.5-2.);
+        float oct = floor(angle*10.+.5-5.);
         
-        float note0 = oct+angle1/PI2*flipStar+3./12.+twistStar/PI2;
+        float note0 = -oct+angle1/PI2*flipStar+3./12.-twistStar/PI2;
       //  return vec4(note0/72.);
        // return vec4(note0/144.);
-       note0-=1.;
+     //  note0-=1.;
         float note1  =nyq*pow(2.,note0);
         float noteAmp = texture2D(micIn,
         vec2(note1
@@ -1666,7 +1666,7 @@ uniform float exponentialPetals;
                )
                
               {
-                  
+                  /*
            if(noteOfStar==mod(0. +rote,12.))
            ret=vec4(clamp(
                            noteAmpToLength
@@ -1675,7 +1675,9 @@ uniform float exponentialPetals;
                     else if(      noteOfStar==mod(6. +rote,12.))
                     ret=vec4(.25
                              );
-              else if(
+                   */
+               if(
+                  noteOfStar==mod(0. +rote,12.)||
               noteOfStar==mod(2. +rote,12.) ||
               noteOfStar==mod(5.  +rote,12.)||
               noteOfStar== mod(7. +rote,12.)||
@@ -3566,6 +3568,7 @@ if(starOnDot>=1){
              
              if (starBuffer.x==starBuffer.y&& starBuffer.y==starBuffer.z&&starBuffer.z!=0.&&isGrey==0.)pixelShipGrey=starBuffer.x;
              if(isBlack==0.)pixelShipGrey=(.5+pixelShipGrey);
+             if(isGrey>0.)pixelShipGrey=-1.;;
              pixelStarship += starBuffer;
               
          }
@@ -3579,7 +3582,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                            //mnyX+
                                           ( hypnoticHarmonicCircles+pillar+icicles.xyz)*(1.-pixelShipGrey*40.)
                                                     
-                    +clamp(mny*starshipMultiplier
+                    +clamp(mny*starshipMultiplier*(1.-isGrey-pixelShipGrey)
                         -(ARTICLE.r+ARTICLE.g+ARTICLE.b)
                            ,0.,1.)
                                                     +ARTICLE
