@@ -1539,14 +1539,14 @@ uniform float exponentialPetals;
     
    vec4 waveForm(){
        vec4 ret=vec4(0.);//1.,.5,1.,1.);
-       if((1.-vUv.y)<.5){
+       if((1.-vUv.y)<.75){
            
           // vec2 flatScreen=1.-vUv;
           // flatScreen*=2.;
     float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*2.,2.)/2.,0.)).r;
     
    if (log(abs(frAmp)/(1.-vUv.y)*(resolution.x/max(
-                                                     resolution.x,resolution.y)))*8.>1.) ret = vec4(sign(frAmp));
+                                                     resolution.x,resolution.y)))*2.>1.) ret = vec4(sign(frAmp));
    
    }
                //           else ret=vec4(1.);
