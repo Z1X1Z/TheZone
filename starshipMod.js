@@ -224,15 +224,15 @@ function spiral_compress(){
     if(n!=0)   d = (z[n+1]-z[n-1])/(z[n-1]+z[n+1]);
     else d = (z[n+1])/(z[n]+z[n+1])/2.;
     const nAdj = n + d*4 ;
-        if (Math.abs(d)<4+1.&&isFinite(d))
+       if (Math.abs(d)<4+1.&&isFinite(d))
         freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
-        else
+      else
         freq = audioX.sampleRate*n/numberOfBins
-        //    freq = 440; //check for concert A
+        //   freq = 440; //check for concert A
             frequencies[n]=freq;
     var note24 =24*Math.log(freq/window.ConcertKey)/Math.log(2.)+49*2;
                             
-                           // if(Math.abs(note24/2.-72.)<.5){ callibratorArray[n]=255.;console.log(note24);}// test witness in pixel shader, add to setMicInputToPIXEL()
+                          // if(Math.abs(note24/2.-72.)<.5){ //callibratorArray[n]=255.;console.log(note24);}// test witness in pixel shader, add to setMicInputToPIXEL()
 
                             
         testar[Math.round(note24*EldersLeg/24.)%EldersLeg] += Math.abs(z[n])*radialWarp;
@@ -1042,8 +1042,8 @@ function setMicInputToStarPIXEL(){
             let dataArrayBuffer =new Float32Array( numberOfBins ).fill(0);
              let inputDataBuffer =new Float32Array( fftSize ).fill(0);
              
-             let withinMaxsafeSizeBins=(numberOfBins<=16384)//(EldersLeg<=682);
-             let withinMaxsafeSizeFFT=(fftSize<=16384/2)//(EldersLeg<=682);
+             let withinMaxsafeSizeBins=(numberOfBins<=2**13)//(EldersLeg<=682);
+             let withinMaxsafeSizeFFT=(fftSize<=2**13)//(EldersLeg<=682);
             // console.log(fftSize)
             // console.log(fftSize)
              if(!touchMode||window.shouldShowStar)
@@ -1053,6 +1053,7 @@ function setMicInputToStarPIXEL(){
                  uniforms.nyq.value =            analyser.fftSize/audioX.sampleRate/2.;
                  
                  //console.log(nyq)
+                // callibratorArray
                  if(withinMaxsafeSizeBins)for (var x = 0; x < numberOfBins; x++)dataArrayBuffer[x]=dataArray[x]/255.;
                 if(withinMaxsafeSizeFFT) for (var x = 0; x < fftSize; x++)inputDataBuffer[x]=inputData[x];
              }
@@ -1704,7 +1705,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
             // pointColor.push( greynessLast, greynessLast, greynessLast,greyness, greyness, greyness );
             if(isFinite(tx)&&isFinite(ty)&&isFinite(txlast)&isFinite(tylast))
             {
-                let depthSpirograph = (-.5+r/bufferPortion/2.)*starShipDepthInSet;
+                let depthSpirograph = Math.sqrt(tx*tx+ty*ty)*starShipDepthInSet-1.+starShipDepthInSet;
                 linePositionAttribute.setXYZ(lineStride,txlast,tylast, depthSpirograph)
               linePositionAttribute.setXYZ(lineStride+1,tx, ty, depthSpirograph)
                 
@@ -1887,7 +1888,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
                 let timeShift = 0.;
                 let w = timeShift/m.lengt/secondsToEdge;
                 let withinRadialDelimiter = timeShift +m.lengt<OUTERSHELL;
-                let depthINNER = -starShipDepthInSet+timeShift/OUTERSHELL*starShipDepthInSet;
+                let depthINNER = (-starShipDepthInSet+timeShift/OUTERSHELL)*starShipDepthInSet;
                 let depthOUTER = depthINNER+m.lengt;
                 let starStreamStride = 0;
                 
@@ -2005,7 +2006,7 @@ let x = widt*-Math.sin(rpio2);
 let y = widt*-Math.cos(rpio2);
 let xr = lengt*-Math.sin(arm);
 let yr = lengt*-Math.cos(arm);
-let depth = -starShipDepthInSet+lengt*(1.-starShipDepthInSet);
+let depth = -1.+starShipDepthInSet;//-starShipDepthInSet+lengt*(1.-starShipDepthInSet);
 
                 
                 

@@ -1569,7 +1569,7 @@ uniform float exponentialPetals;
                 frAmp += texture2D(micIn, vec2(b,0.)).r;
         }
        //  frAmp/=255.;
-        float d = length( uv);
+        float d = length( uv)*1.06125;
         float frampDIVlend = frAmp/d;
         float frampMultlen = frAmp*d;
        //
