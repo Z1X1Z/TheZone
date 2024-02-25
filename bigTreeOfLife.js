@@ -296,9 +296,9 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
                     if(wheel){
                         s.divideScalar(2.);
                         
-                        hyperCoreOUTPUT-=Math.log(spoke_factor/1.5);
+                        hyperCoreOUTPUT-=Math.log(spoke_factor);
                         
-                        hyperCoreBoosted-=Math.log(spoke_factor/1.5);
+                        hyperCoreBoosted-=Math.log(spoke_factor);
                     }
                     else{
                         
@@ -312,8 +312,8 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
                 else  {
                     
                     if(wheel){
-                        hyperCoreOUTPUT+=Math.log(spoke_factor/1.5);
-                        hyperCoreBoosted+=Math.log(spoke_factor/1.5);
+                        hyperCoreOUTPUT+=Math.log(spoke_factor);
+                        hyperCoreBoosted+=Math.log(spoke_factor);
                     }
                     else{
                         hyperCoreOUTPUT+=spoke_factor;

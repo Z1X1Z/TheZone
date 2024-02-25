@@ -2255,7 +2255,6 @@ float dstnce = length(s);//"distance" may be reserved keyword
 float coreBooster=0.;
 float metaCoreDriveFactor =(((1.-leaf)/truncator)*truncator)/gr;//.324717.... number of places changes appearance
 float spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf))/truncator)*truncator*1.;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
-
 float hyperCoreOUTPUT =hyperCore*log(2.)/log(metaCoreDriveFactor)+loops;
                              hyperCoreOUTPUT-=(6.-petals)/6.;//upcore for higher omniclover counts
 
@@ -2388,9 +2387,9 @@ if(Spoker){
                          if(wheel){
                              s/=2.;
                              
-                             hyperCoreOUTPUT-=log(spoke_factor/1.5);
+                             hyperCoreOUTPUT-=log(spoke_factor);
 
-                             hyperCoreBoosted-=log(spoke_factor/1.5);
+                             hyperCoreBoosted-=log(spoke_factor);
                              }
                          else{
                              
@@ -2404,8 +2403,8 @@ if(Spoker){
         else  {
             
                 if(wheel){
-            hyperCoreOUTPUT+=log(spoke_factor/1.5);
-            hyperCoreBoosted+=log(spoke_factor/1.5);
+            hyperCoreOUTPUT+=log(spoke_factor);
+            hyperCoreBoosted+=log(spoke_factor);
             }
                 else{
             hyperCoreOUTPUT+=spoke_factor;
@@ -2415,9 +2414,10 @@ if(Spoker){
 }
 else//for dancer only
 {
+   
 hyperCoreOUTPUT-=spoke_factor;
 hyperCoreBoosted-=spoke_factor;}
-   
+
    }
 
 if(spokelover&&counter<hyperCoreBoosted){
