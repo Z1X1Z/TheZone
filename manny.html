@@ -1543,7 +1543,7 @@ uniform float exponentialPetals;
            
            vec2 flatScreen=1.-vUv;
 
-    float frAmp = texture2D(audioBuffer, vec2(flatScreen.x,0.)).r;
+    float frAmp = texture2D(audioBuffer, vec2(pow(abs(flatScreen.x-.5)*2.,2.),0.)).r;
     
    if (log(abs(frAmp)/flatScreen.y)>1.) ret = vec4(sign(frAmp));
    
@@ -1557,7 +1557,7 @@ uniform float exponentialPetals;
 
         uv=uv.yx*.5;
         float angle = ((-atan(uv.y,uv.x)-twistStar*flipStar
-                        )/PI2-7./12.)*flipStar;
+                        )/PI2-PI/2.)*flipStar;
                         //angle=mod(angle,1.);
                         
         float frAmp=0.;
