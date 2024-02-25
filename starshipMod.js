@@ -1705,7 +1705,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
             // pointColor.push( greynessLast, greynessLast, greynessLast,greyness, greyness, greyness );
             if(isFinite(tx)&&isFinite(ty)&&isFinite(txlast)&isFinite(tylast))
             {
-                let depthSpirograph =-Math.sqrt(tx*tx+ty*ty)*(1.-starShipDepthInSet);
+                let depthSpirograph =-1.;
                 linePositionAttribute.setXYZ(lineStride,txlast,tylast, depthSpirograph)
               linePositionAttribute.setXYZ(lineStride+1,tx, ty, depthSpirograph)
                 
@@ -2006,7 +2006,7 @@ let x = widt*-Math.sin(rpio2);
 let y = widt*-Math.cos(rpio2);
 let xr = lengt*-Math.sin(arm);
 let yr = lengt*-Math.cos(arm);
-let depth = -starShipDepthInSet;//-starShipDepthInSet+lengt*(1.-starShipDepthInSet);
+let depth = -starShipDepthInSet+lengt*(1.-starShipDepthInSet);
 
                 
                 
@@ -2320,7 +2320,7 @@ let s = f;
                             const zlast = z;
                      let seg = timeElapsedSinceRecording/trailSecondsLong;
                      if(window.flame)seg*=seg;
-                            z = -1.+seg*.5;
+                            z = (-1.+seg*.5);
                         //   if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong);
                             const transparencyOfTrailLast =transparencyOfTrail;
                             transparencyOfTrail =1.-seg;
