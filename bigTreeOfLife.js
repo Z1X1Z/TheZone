@@ -213,7 +213,7 @@ var dstnce = s.length();//"distance" may be reserved keyword
 var coreBooster=0.;
 var metaCoreDriveFactor =(((1.-leaf)**.5/truncator)*truncator)**2./gr;//.324717.... number of places changes appearance
 var   spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf))/truncator)*truncator*1.;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
-
+var      spoke_factorLarge=spoke_factor*1.5
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
                            hyperCoreOUTPUT-=petals;
 
@@ -302,11 +302,11 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
                     }
                     else{
                         
-                        s.divideScalar(spoke_factor);//engage spokelover s/=2.+'superspokes'
+                        s.divideScalar(spoke_factorLarge);//engage spokelover s/=2.+'superspokes'
                         
-                        hyperCoreOUTPUT-=spoke_factor;
+                       // hyperCoreOUTPUT-=spoke_factor;
                         
-                        hyperCoreBoosted-=spoke_factor;
+                        //hyperCoreBoosted-=spoke_factor;
                     }
                 }
                 else  {
@@ -316,8 +316,8 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
                         hyperCoreBoosted+=Math.log(spoke_factor);
                     }
                     else{
-                        hyperCoreOUTPUT+=spoke_factor;
-                        hyperCoreBoosted+=spoke_factor;
+                        hyperCoreOUTPUT+=spoke_factorLarge;
+                        hyperCoreBoosted+=spoke_factorLarge;
                     }
                 }
             }
