@@ -1605,30 +1605,31 @@ uniform float exponentialPetals;
         float angle1 = (-noteOfStar/12.)*PI2*flipStar-twistStar*flipStar+PI*flipStar;//this is for the position from centerVV;
         uv.x += coz(angle1)*scalar;
        uv.y += zin(angle1)*scalar;//^^
-       uv=spin2(uv,-angle1+PI/2.);
+       uv=spin2(uv,-angle1+PI/2.
+                );
        vec4 ret = vec4(0.);
        if(length(uv)<starnSize){
        //uv *=    26.5;
    // return vec4(angle1/PI2+.5  );
-            float angle = -atan(uv.x,uv.y);//
+            float angle = atan(uv.x,uv.y);//
           //       if(angle<0.)angle = PI-angle;
           //  angle += (PI2*(noteOfStar
 //this value is uncertain
                //           )/12. );
                
         angle /= PI2;
-        //angle = angle+1.;
+        angle = angle+.5;
        //  angle = mod(angle+1.,1.);
       //   return vec4(uv*10.,
         //             vec3(angle)
       //            length(uv)
       //               ,1.);
-        float oct = floor(angle*10.);
+        float oct = floor(angle*10.+.5-3.);
         
         float note0 = oct+angle1/PI2*flipStar+3./12.-twistStar/PI2;
       //  return vec4(note0/72.);
        // return vec4(note0/144.);
-       //note0+=1.;
+       note0-=1.;
         float note1  =nyq*pow(2.,note0);
         float noteAmp = texture2D(micIn,
         vec2(note1
@@ -1641,7 +1642,7 @@ uniform float exponentialPetals;
         //fr=(fr)*(fr)/3.;
       //  float power = 5.;
       // float b = pow(noteAmp,power)/pow(d*6.,power*.5);
-        float rote = 0.;
+        float rote = -0.;
         float noteAmpToLength=noteAmp/d;
        float noteAmpByLength = noteAmp*d;
        // if(noteOfStar==0.)return vec4(1.);
