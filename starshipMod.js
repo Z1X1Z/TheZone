@@ -2101,7 +2101,7 @@ var fingerStride = 0;
                  const finger = (isFinite(twelve[t][g]))?twelve[t][g]:0;
                  let arm =(g+9)/10.*pi*2.;
 
-                 const lengt =(isFinite(maxFinger)&&maxFinger!=0)? (finger)/maxFinger*(1.-pi/12.) : 0;
+                 const lengt =(isFinite(maxFinger)&&maxFinger!=0)? (finger)/maxFinger*(1.-pi/12.) *1.25: 0;
 
 
                      for(var yy=0;yy<6;yy++)   starsANDwitnessesColorAttribute.setXYZ(fingerStride+yy,vop.r,vop.g,vop.b)
@@ -2112,8 +2112,8 @@ var fingerStride = 0;
                                         const y = widt*-Math.cos(rpio2+fingerTwist+pi);
                                         const xr = pi/12.*lengt*-Math.sin(arm+fingerTwist+pi);
                                         const yr = pi/12.*lengt*-Math.cos(arm+fingerTwist+pi);
-                                        const offsetX=-Math.sin(fingerTwist)/1.5;
-                                        const offsetY=-Math.cos(fingerTwist)/1.5;
+                                        const offsetX=-Math.sin(fingerTwist)/1.25;
+                                        const offsetY=-Math.cos(fingerTwist)/1.25;
                                         const depth = -1.;//this depth should mean that half the trail is above and half below
 
                       starsANDwitnessesPositionAttribute.setXYZ(fingerStride,  -x+offsetX,    -y+offsetY,  depth)
