@@ -1539,7 +1539,8 @@ uniform float exponentialPetals;
     
    vec4 waveForm(){
        vec4 ret=vec4(0.);//1.,.5,1.,1.);
-       if((1.-vUv.y)<nyq*8.){
+       if((1.-vUv.y)<nyq*8.*(min(
+                                            resolution.x,resolution.y)/resolution.y)){
            
            vec2 flatScreen=1.-vUv;
            flatScreen*=2.;
@@ -1549,7 +1550,7 @@ uniform float exponentialPetals;
                                                      resolution.x,resolution.y)))*8.>1.) ret = vec4(sign(frAmp));
    
    }
-                          else ret=vec4(1.);
+               //           else ret=vec4(1.);
        
     return ret;
     }
