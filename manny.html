@@ -1539,15 +1539,17 @@ uniform float exponentialPetals;
     
    vec4 waveForm(){
        vec4 ret=vec4(0.);//1.,.5,1.,1.);
-       if(1.-vUv.y<nyq*6.){
+       if((1.-vUv.y)<nyq*8.){
            
            vec2 flatScreen=1.-vUv;
-
-    float frAmp = texture2D(audioBuffer, vec2(pow(abs(flatScreen.x-.5)*2.,2.),0.)).r;
+           flatScreen*=2.;
+    float frAmp = texture2D(audioBuffer, vec2(pow(abs(flatScreen.x-1.),2.),0.)).r;
     
-   if (log(abs(frAmp)/flatScreen.y)>1.) ret = vec4(sign(frAmp));
+   if (log(abs(frAmp)/flatScreen.y*(resolution.x/max(
+                                                     resolution.x,resolution.y)))*8.>1.) ret = vec4(sign(frAmp));
    
    }
+                          else ret=vec4(1.);
        
     return ret;
     }
@@ -3546,14 +3548,15 @@ if(starOnDot>=1){
                                                                  
          vec4 pixelStarship=vec4(0.);
          float pixelShipGrey = 0.;
-                                                                 
+         vec4 icicles=vec4(0.);
+
          if (pixelSTARon)
     {
                        vec2 vUvCentered = (vUv.yx-.5);
                        vec2 uVu=-(vUvCentered)/(resolution.xy/max(resolution.x,resolution.y));
                        vec2 uVuMinCenter=-vUvCentered/(min(resolution.x,resolution.y)/resolution.yx);
              pixelStarship = audioEq(uVuMinCenter);
-             pixelStarship += waveForm();
+             icicles = waveForm();
              vec4 starBuffer = vec4(0.);
              for (float x = 0.; x<12.;x++) starBuffer+=starns(uVu,x);
              
@@ -3599,7 +3602,7 @@ vec4 tree = vec4( clamp(
                            +awayFromTree
                                               ,0.,1.)
                     +   pixelStarship.xyz
-          -vec3((mny.r+mny.b+mny.g)*4.),.0,1.)
+          -vec3((mny.r+mny.b+mny.g)*4.),.0,1.)+icicles.xyz
               ,1.);
         
           vec4 fin = (ss-faceFromShip+goodies+tree+pixelShipGrey*1.5)*isBlack*isBlackStaRivers*isBlackDOT+(isBlack-1.)+(isBlackDOT-1.)+(isBlackStaRivers-1.);
