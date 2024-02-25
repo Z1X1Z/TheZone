@@ -1602,14 +1602,14 @@ uniform float exponentialPetals;
 
 
 
-    float starnSize = PI/120.*1.5*2.;
+    float starnSize = PI/120.*1.5*2.*1.25;
     vec4 starns ( vec2 uv,float noteOfStar)//Seven stars, two witnesses
     {
       //  float nyq =  fftSize/sampleRate/2.;
         
         //uv=vec2(-uv.x,uv.y);
-        float scalar =1./1.5/2.;
-        float octaveSpin = 5./12.;
+        float scalar =2./5.;
+      //  float octaveSpin = 5./12.;
     
         float angle1 = (-noteOfStar/12.)*PI2*flipStar+twistStar*flipStar+PI*flipStar;//this is for the position from centerVV;
         uv.x += coz(angle1)*scalar;
@@ -1633,7 +1633,7 @@ uniform float exponentialPetals;
         //             vec3(angle)
       //            length(uv)
       //               ,1.);
-        float oct = floor(angle*10.+.5-3.);
+        float oct = floor(angle*10.+.5-2.);
         
         float note0 = oct+angle1/PI2*flipStar+3./12.+twistStar/PI2;
       //  return vec4(note0/72.);
@@ -1667,26 +1667,30 @@ uniform float exponentialPetals;
                
               {
                   
-           if(
-              noteOfStar==mod(0. +rote,12.)||
-              noteOfStar==mod(6. +rote,12.))
-              ret=vec4(.5);
+           if(noteOfStar==mod(0. +rote,12.))
+           ret=vec4(clamp(
+                           noteAmpToLength
+                    ,0.,1.)*.25
+                    );
+                    else if(      noteOfStar==mod(6. +rote,12.))
+                    ret=vec4(.25
+                             );
               else if(
               noteOfStar==mod(2. +rote,12.) ||
               noteOfStar==mod(5.  +rote,12.)||
               noteOfStar== mod(7. +rote,12.)||
               noteOfStar== mod(10. +rote,12.))
               {
-                  ret=vec4(-clamp(
+                  ret=vec4(clamp(
                                   noteAmpToLength
-                           ,0.,1.)*.441
+                           ,0.,1.)*.5
                            );
             }
         else{
             
 ret= vec4(clamp(
                 noteAmpToLength
-            ,0. ,1.)*.441
+            ,0. ,1.)*.25
        );
            }
            }
@@ -3560,8 +3564,8 @@ if(starOnDot>=1){
              vec4 starBuffer = vec4(0.);
              for (float x = 0.; x<12.;x++) starBuffer+=starns(uVu,x);
              
-             if (starBuffer.x==starBuffer.y&& starBuffer.y==starBuffer.z&&isGrey==0.)pixelShipGrey=starBuffer.x;
-
+             if (starBuffer.x==starBuffer.y&& starBuffer.y==starBuffer.z&&starBuffer.z!=0.&&isGrey==0.)pixelShipGrey=starBuffer.x;
+             if(isBlack==0.)pixelShipGrey=(.5+pixelShipGrey);
              pixelStarship += starBuffer;
               
          }
@@ -3573,7 +3577,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies = vec4(
                                            //mnyX+
-                                           hypnoticHarmonicCircles+pillar
+                                          ( hypnoticHarmonicCircles+pillar+icicles.xyz)*(1.-pixelShipGrey*40.)
                                                     
                     +clamp(mny*starshipMultiplier
                         -(ARTICLE.r+ARTICLE.g+ARTICLE.b)
@@ -3600,14 +3604,15 @@ vec4 tree = vec4( clamp(
                            cloud+
                            zoomer
                            +awayFromTree
+                           
                                               ,0.,1.)
                     +   pixelStarship.xyz
-          -vec3((mny.r+mny.b+mny.g)*4.),.0,1.)+icicles.xyz
+          -vec3((mny.r+mny.b+mny.g)),.0,1.)
               ,1.);
         
-          vec4 fin = (ss-faceFromShip+goodies+tree+pixelShipGrey*1.5)*isBlack*isBlackStaRivers*isBlackDOT+(isBlack-1.)+(isBlackDOT-1.)+(isBlackStaRivers-1.);
-          if(fin.r>.9&&fin.g>.9&&fin.b>.9)fin-=(isGrey+isGreyDOT+pixelShipGrey+isGreyStaRivers)*1.5;
-          else if(fin.r<.1&&fin.g<.1&&fin.b<.1)fin+=(isGrey+isGreyDOT+isGreyStaRivers)*1.5;
+          vec4 fin = (ss-faceFromShip+goodies+tree+pixelShipGrey)*isBlack*isBlackStaRivers*isBlackDOT+(isBlack-1.)+(isBlackDOT-1.)+(isBlackStaRivers-1.);
+          if(fin.r>.9&&fin.g>.9&&fin.b>.9)fin-=(isGrey+isGreyDOT+pixelShipGrey+isGreyStaRivers+pixelShipGrey)*1.5;
+          else if(fin.r<.1&&fin.g<.1&&fin.b<.1)fin+=(isGrey+isGreyDOT+isGreyStaRivers+pixelShipGrey)*1.5;
           vec3 confraculator = vec3(1.);
           if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
           
