@@ -1561,15 +1561,22 @@ uniform float exponentialPetals;
                         //angle=mod(angle,1.);
                         
         float frAmp=0.;
-        for (float n = -1.; n<10.;n+=1.0)//not sure why it has negative range
+        //return vec4(angle);
+        const float octBoost = 17.;
+      //  float b =nyq*pow(2.,angle+octBoost);
+//starts -3, full -2
+        for (float n = -3.; n<3.;n+=1.0)//the range seems small
+       // if(b>=.5/nyq&&b<sampleRate/2.)
+//not sure why it has negative range
         //if (twistStar<24.)
          {
-             float b =nyq*pow(2.,angle+n);
+              float b =nyq*pow(2.,angle+n);
 
                 frAmp += texture2D(micIn, vec2(b,0.)).r;
         }
-       //  frAmp/=255.;
-        float d = length( uv)*(1.+1./32.);
+         //  frAmp/=255.;
+           frAmp/=2.;
+        float d = length( uv)*1.25;
         float frampDIVlend = frAmp/d;
         float frampMultlen = frAmp*d;
        //
@@ -1586,14 +1593,14 @@ uniform float exponentialPetals;
                                            mod((-angle+1./12.)//+3.-flipStar/12.
                                                ,1.),1.,1.
                                            ))
-                              ,.0,1.), 1.)/pow(2.71,d*2.71);
+                              ,.0,1.), 1.)/pow(2.71828,d*2.);
         else ret= vec4(.0);
         return ret;
     }
 
 
 
-    float starnSize = PI2/120.*1.5;
+    float starnSize = PI/120.*1.5*2.;
     vec4 starns ( vec2 uv,float noteOfStar)//Seven stars, two witnesses
     {
       //  float nyq =  fftSize/sampleRate/2.;
