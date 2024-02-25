@@ -1705,7 +1705,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
             // pointColor.push( greynessLast, greynessLast, greynessLast,greyness, greyness, greyness );
             if(isFinite(tx)&&isFinite(ty)&&isFinite(txlast)&isFinite(tylast))
             {
-                let depthSpirograph = Math.sqrt(tx*tx+ty*ty)*(1.-starShipDepthInSet)-1.;
+                let depthSpirograph =-Math.sqrt(tx*tx+ty*ty)*(1.-starShipDepthInSet);
                 linePositionAttribute.setXYZ(lineStride,txlast,tylast, depthSpirograph)
               linePositionAttribute.setXYZ(lineStride+1,tx, ty, depthSpirograph)
                 
