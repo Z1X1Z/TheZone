@@ -2082,9 +2082,17 @@ var fingerStride = 0;
              {
                  BlackOrWhite=-1.;
              }
-         if  ((noteGrey<.5 || noteGrey>11.5)&&uniforms.Character.value!=2&&BlackOrWhite!=-1.)BlackOrWhite=.5;
-
-            if( ((uniforms.Character.value==0&&(noteGrey<6.5&&noteGrey>5.5))) &&uniforms.colorCombo.value!=20&&!blankBackground&&starClover) BlackOrWhite=.5;
+         if  ((noteGrey<.5 || noteGrey>11.5)&&uniforms.Character.value!=2&&BlackOrWhite!=-1.)
+         {
+             if(!uniforms.pixelSTARon.value)BlackOrWhite=.5;
+             else BlackOrWhite=.75
+        }
+         else if( ((uniforms.Character.value==0&&(noteGrey<6.5&&noteGrey>5.5))) &&uniforms.colorCombo.value!=20&&!blankBackground&&starClover)
+         {
+            if(!uniforms.pixelSTARon.value)BlackOrWhite=.5;
+             else BlackOrWhite=-1.;
+         }
+             
             else if(uniforms.colorCombo.value==20){
                      if(uniforms.musicAngelMan.value>0&&(uniforms.Character.value==4||uniforms.Character.value==3)
                         &&((uniforms.Character.value==3&&(t<.5||t>11.5))||(t<2.5&&t>1.5)||(t<10.5&&t>9.5)||(t<7.5&&t>6.5)||(t>4.5&&t<5.5))) BlackOrWhite =.5;
@@ -2101,7 +2109,7 @@ var fingerStride = 0;
                  const finger = (isFinite(twelve[t][g]))?twelve[t][g]:0;
                  let arm =(g+9)/10.*pi*2.;
 
-                 const lengt =(isFinite(maxFinger)&&maxFinger!=0)? (finger)/maxFinger*(1.-pi/12.) *1.25: 0;
+                 const lengt =(isFinite(maxFinger)&&maxFinger!=0)? (finger)/maxFinger*(1.-pi/12.) : 0;
 
 
                      for(var yy=0;yy<6;yy++)   starsANDwitnessesColorAttribute.setXYZ(fingerStride+yy,vop.r,vop.g,vop.b)
@@ -2112,8 +2120,8 @@ var fingerStride = 0;
                                         const y = widt*-Math.cos(rpio2+fingerTwist+pi);
                                         const xr = pi/12.*lengt*-Math.sin(arm+fingerTwist+pi);
                                         const yr = pi/12.*lengt*-Math.cos(arm+fingerTwist+pi);
-                                        const offsetX=-Math.sin(fingerTwist)/1.25;
-                                        const offsetY=-Math.cos(fingerTwist)/1.25;
+                                        const offsetX=-Math.sin(fingerTwist)*(3./4.);//1.25
+                                        const offsetY=-Math.cos(fingerTwist)*(3./4.);//1.25
                                         const depth = -1.;//this depth should mean that half the trail is above and half below
 
                       starsANDwitnessesPositionAttribute.setXYZ(fingerStride,  -x+offsetX,    -y+offsetY,  depth)
