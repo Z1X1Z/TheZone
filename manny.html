@@ -1556,8 +1556,8 @@ uniform float exponentialPetals;
     {
 
         uv=uv.yx*.5;
-        float angle = ((-atan(uv.y,uv.x)-twistStar*flipStar
-                        )/PI2-PI/2.)*flipStar;
+        float angle = ((-atan(uv.y,uv.x)*flipStar-twistStar
+                        +PI/2.+PI/2.*flipStar)/PI2);
                         //angle=mod(angle,1.);
                         
         float frAmp=0.;
@@ -1583,8 +1583,7 @@ uniform float exponentialPetals;
      
         ret=  vec4(clamp(hsv2rgb(
                                       vec3(
-                                           mod((-angle+(4.-3.*flipStar
-                                                       )/12.)//+3.-flipStar/12.
+                                           mod((-angle+1./12.)//+3.-flipStar/12.
                                                ,1.),1.,1.
                                            ))
                               ,.0,1.), 1.)/pow(2.71,d*2.71);
@@ -1603,7 +1602,7 @@ uniform float exponentialPetals;
         float scalar =1./1.5/2.;
         float octaveSpin = 5./12.;
     
-        float angle1 = (-noteOfStar/12.)*PI2-twistStar*flipStar+PI;//this is for the position from centerVV;
+        float angle1 = (-noteOfStar/12.)*PI2*flipStar-twistStar*flipStar+PI*flipStar;//this is for the position from centerVV;
         uv.x += coz(angle1)*scalar;
        uv.y += zin(angle1)*scalar;//^^
        uv=spin2(uv,-angle1+PI/2.);
@@ -1611,7 +1610,7 @@ uniform float exponentialPetals;
        if(length(uv)<starnSize){
        //uv *=    26.5;
    // return vec4(angle1/PI2+.5  );
-            float angle = -atan(uv.x,uv.y);//-twistStar*flipStar;//
+            float angle = -atan(uv.x,uv.y);//
           //       if(angle<0.)angle = PI-angle;
           //  angle += (PI2*(noteOfStar
 //this value is uncertain
@@ -1620,13 +1619,13 @@ uniform float exponentialPetals;
         angle /= PI2;
         //angle = angle+1.;
        //  angle = mod(angle+1.,1.);
-        // return vec4(//uv,
+      //   return vec4(uv*10.,
         //             vec3(angle)
-                  // length(uv)
-               //      ,1.);
+      //            length(uv)
+      //               ,1.);
         float oct = floor(angle*10.);
         
-        float note0 = oct+angle1/PI2+3./12.;
+        float note0 = oct+angle1/PI2*flipStar+3./12.-twistStar/PI2;
       //  return vec4(note0/72.);
        // return vec4(note0/144.);
        //note0+=1.;
