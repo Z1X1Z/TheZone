@@ -1539,7 +1539,7 @@ uniform float exponentialPetals;
     
    vec4 waveForm(){
        vec4 ret=vec4(0.);//1.,.5,1.,1.);
-       if(1.-vUv.y<nyq*4.){
+       if(1.-vUv.y<nyq*5.){
            
            vec2 flatScreen=1.-vUv;
 
@@ -1569,7 +1569,7 @@ uniform float exponentialPetals;
                 frAmp += texture2D(micIn, vec2(b,0.)).r;
         }
        //  frAmp/=255.;
-        float d = length( uv)*1.06125;
+        float d = length( uv)*(1.+1./32.);
         float frampDIVlend = frAmp/d;
         float frampMultlen = frAmp*d;
        //
