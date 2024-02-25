@@ -212,7 +212,7 @@ var dstnce = s.length();//"distance" may be reserved keyword
 //t.multiplyScalar(.74);
 var coreBooster=0.;
 var metaCoreDriveFactor =(((1.-leaf)**.5/truncator)*truncator)**2./gr;//.324717.... number of places changes appearance
-var   spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf))/truncator)*truncator*1.5;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
+var   spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf))/truncator)*truncator*1.;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
 
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
                            hyperCoreOUTPUT-=petals;
