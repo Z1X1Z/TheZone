@@ -174,7 +174,7 @@ function callKey(event){
     else if (key=="p" && event.ctrlKey)spirographMODE = (spirographMODE+1)%3;//color mode 3 seems obsolete
     else if (key=="m" && event.ctrlKey)
     {uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value;
-        if(number!=""&&!runningHash)uniform.mandelCloverFactor.value=number;
+        if(number!="")uniform.mandelCloverFactor.value=number;
 
     }
     else if (event.ctrlKey&&key=="a")uniforms[ "colorCombo" ].value = 11;
