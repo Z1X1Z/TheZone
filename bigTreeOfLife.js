@@ -496,8 +496,8 @@ window.bigCloverGapSync = false;
 
                        // for(var t = 0; t<3; t++)
                         {
-                            vibrateArrayNew.push(coreImplosion*100);
-                            vibrateArrayNew.push(coreImplosion*100);
+                            vibrateArrayNew.push(50);//coreImplosion*
+                            vibrateArrayNew.push(50);//coreImplosion*
                             
                                                            try{error = navigator.vibrate(vibrateArrayNew );}
                                                            catch(e){ error+=e;}
