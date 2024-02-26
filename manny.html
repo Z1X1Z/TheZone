@@ -3609,8 +3609,11 @@ if(starOnDot>=1){
              for (float x = 0.; x<12.;x++) starBuffer+=starns(uVu,x);
              
              if (starBuffer.x==starBuffer.y&& starBuffer.y==starBuffer.z&&starBuffer.z!=0.&&isGrey==0.)pixelShipGrey=starBuffer.x;
+             if(pixelShipGrey!=0.)
+             {
              if(isBlack==0.)pixelShipGrey=(.5+pixelShipGrey);
              if(isGrey>0.)pixelShipGrey=-1.;;
+             }
              pixelStarship += starBuffer;
               
          }
