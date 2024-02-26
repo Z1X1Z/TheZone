@@ -256,16 +256,16 @@ function fiveAndSeven(){
             twelve[n][m]=0;
     
     
-      let finger = 0 //ranges up to
-      let  starNote = 0 //ranges up to 12
+      let finger = 0 //ranges up to <10
+      let  starNote = 0 //ranges up to <12
         for(let n = 0; n<numberOfBins; n++)        {
             //mustard is in 24ths, here we want 12ths so we divide by two
-            const twelfths = (mustarD[n]/2.)*radialWarp//A1 is 1 with +12
-           
+            let twelfths = (mustarD[n]/2.+12.)*radialWarp//A1 is 1 with +12
+          // twelfths = 60.;
                 if( twelfths>=-.5){
-                    starNote = Math.round(twelfths)%12;
+                    starNote = Math.round(twelfths)%(12);
                     finger = Math.floor(twelfths/10);
-                    if (finger<10&&isFinite(finger)&&isFinite(starNote)&&isFinite(dataArray[n])) twelve[starNote][finger] +=1.;// dataArray[n];
+                    if (finger<10&&isFinite(finger)&&isFinite(starNote)&&isFinite(dataArray[n])) twelve[starNote][finger] +=dataArray[n];
                 }
                         
             
@@ -1057,10 +1057,11 @@ function setMicInputToStarPIXEL(){
                  uniforms.nyq.value =            analyser.fftSize/audioX.sampleRate/2.;
                  
                  //console.log(nyq)
-                // callibratorArray
                  if(withinMaxsafeSizeBins)for (var x = 0; x < numberOfBins; x++)dataArrayBuffer[x]=dataArray[x]/255.;
                 if(withinMaxsafeSizeFFT) for (var x = 0; x < fftSize; x++)inputDataBuffer[x]=inputData[x];
              }
+             // callibratorArray
+
              let micTexBuf = new THREE.DataTexture( dataArrayBuffer, (withinMaxsafeSizeBins)?numberOfBins:1, 1, THREE.RedFormat,THREE.FloatType);
              micTexBuf.needsUpdate=true;
              

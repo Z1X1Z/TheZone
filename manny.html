@@ -1642,7 +1642,7 @@ uniform float exponentialPetals;
        if(length(uv)<starnSize){
        //uv *=    26.5;
    // return vec4(angle1/PI2+.5  );
-            float angle =witnessFlip* atan(uv.x,uv.y);//
+            float angle =witnessFlip* atan(uv.x,uv.y)*radialWarp;//
           //       if(angle<0.)angle = PI-angle;
           //  angle += (PI2*(noteOfStar
 //this value is uncertain
