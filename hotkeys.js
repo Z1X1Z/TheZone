@@ -187,6 +187,8 @@ function callKey(event){
         else if( uniforms.exponentialPetals.value==-1.) uniforms.exponentialPetals.value=0.;
         
     }
+    else if (event.altKey&&(key=="≈"||key=="x")){ if(!runningHash) uniforms.brelued.value*=-1;}
+    else if (event.altKey&&(key=="Ω"||key=="z"))uniforms.witnessFlip.value*=-1.;
     else if (event.altKey&&(key=="π"||key=="p"))uniforms.pixelSTARon.value=!uniforms.pixelSTARon.value;
     else if (event.altKey&&(key=="©"||key=="g"))window.grabStar=!window.grabStar;
     else if (event.altKey&&(key=="ß"||key=="s")){

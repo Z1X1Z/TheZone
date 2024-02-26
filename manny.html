@@ -453,7 +453,19 @@ let maxLetterDepth=-1;
                    key  = 'g';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
                    Manual Star![.g]</a><br>
-               
+       
+                
+               <input type="checkbox"  id="witnessFlip" name="t"  onclick= "
+                   key  = 'z';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                   <label for="witnessFlip"> Witness Flip![.z]</label><br>
+                   
+                   <a id="Brelued" name="t"  onclick= "
+
+                       key  = 'x';
+                       callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                       Brelued![.x]</a><br>
+                   
                <input type="checkbox"  id="oreo" name="t"  onclick= "
                    key  = 'j';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
@@ -1495,6 +1507,8 @@ uniform int chirality;
 uniform int MannyONtrail;
 uniform float twistStar;
 uniform float flipStar;
+uniform float witnessFlip;
+uniform float brelued;
 uniform bool NightAndDay;
 
 uniform float mandelCloverFactor;
@@ -1582,6 +1596,9 @@ uniform float exponentialPetals;
         float frampDIVlend = frAmp/d;
         float frampMultlen = frAmp*d;
        //
+     //  if(brelued==-1.)angle=(-angle);
+     
+       if(brelued==-1.)angle = atan(uv.y,uv.x)/PI2;
        vec4 ret =vec4(0.);
          if ((frampDIVlend>.5|| frampMultlen>.125)
 //outer shell
@@ -1589,7 +1606,6 @@ uniform float exponentialPetals;
             ||
               (frampMultlen>.5)
             )
-     
         ret=  vec4(clamp(hsv2rgb(
                                       vec3(
                                            mod((-angle+1./12.)//+3.-flipStar/12.
@@ -1620,7 +1636,7 @@ uniform float exponentialPetals;
        if(length(uv)<starnSize){
        //uv *=    26.5;
    // return vec4(angle1/PI2+.5  );
-            float angle = atan(uv.x,uv.y);//
+            float angle =witnessFlip* atan(uv.x,uv.y);//
           //       if(angle<0.)angle = PI-angle;
           //  angle += (PI2*(noteOfStar
 //this value is uncertain
@@ -1635,7 +1651,7 @@ uniform float exponentialPetals;
       //               ,1.);
         float oct = floor(angle*10.+.5-5.);
         
-        float note0 = -oct+angle1/PI2*flipStar+3./12.-twistStar/PI2;
+        float note0 = (-oct+angle1/PI2*flipStar)+3./12.-twistStar/PI2;
       //  return vec4(note0/72.);
        // return vec4(note0/144.);
      //  note0-=1.;
@@ -1935,15 +1951,22 @@ vec3 faceFORWARD(vec2 p,vec2 t){
     vec3 balloons(vec2 p){
         vec3 balloon=vec3(0.);
         vec2 vUvCentered =vUv-.5;
-        float sizeReset = 0.;
-        if (balloonsON==-1.||balloonsONexponential==-1.)sizeReset=120.;
+        float sizeReset = 120.;
+        if(balloonsON==-1.||balloonsONexponential==-1.)
+           {if(brelued==1.)sizeReset=120.;
+            else sizeReset=0.;
+            }
+           else{
+            if(brelued==1.)sizeReset=0.;
+             else sizeReset=120.;
+        }
           float x =  length(vUvCentered*resolution/min(resolution.x,resolution.y));
           float increment =0.;
           vec2 spinningSpiraloon  =  spin2(vUvCentered,time*PI*4.);
 
-          if(balloonsON!=0.) increment =note*balloonsON +120.+ twistStar - x*48.;
+          if(balloonsON!=0.) increment =(note*balloonsON+( 120.+ twistStar)*brelued - x*48.)*brelued;
           else if(balloonsONexponential!=0.)
-              increment= (note-4.-3.*balloonsONexponential)*balloonsONexponential+log(twistStar+x*24.)/log(pow(2.,1./12.));
+              increment= (note+(-4.-3.*balloonsONexponential)*brelued)*brelued*balloonsONexponential+log(twistStar+x*24.)/log(pow(2.,1./12.));
         
                
                    
@@ -2297,7 +2320,7 @@ else      for (float counter=0.;counter<iterations;counter++)if(dstnce<50.){
     
   float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(loops+counter)/40.,0.)).x;
 
-         if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
+   //      if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
 
                            // if(!true&&morph<.5)CORE_DELIMITER=1./dstnce*pow(2.,4./12.)*equilibriator;
                             
@@ -2305,9 +2328,9 @@ else      for (float counter=0.;counter<iterations;counter++)if(dstnce<50.){
     s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
     dstnce = length(s);
 
-           vec2 cloverMAP = (spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI))*CORE_DELIMITER+.5;
+           vec2 cloverMAP = (spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI))*2./3.+.5;
                                    
-                                   vec2 ColorWheelClover;
+                                   vec2 ColorWheelClover=vec2(0.);
                                    float cycleShiftChiral = 0.;
                                    
                                 if(NightAndDay){
@@ -2315,16 +2338,22 @@ else      for (float counter=0.;counter<iterations;counter++)if(dstnce<50.){
                                                 
                                                     if (flipStar!=0.)cycleShiftChiral=0.;
                                                     else cycleShiftChiral=PI;
-                                                ColorWheelClover=spin2(vec2(-s.y,-s.x)*flipStar,(atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)+atan(d.x,d.y)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar);//clover actually seems to have down to the right so it may need to be rotated by pi/x
+                                                ColorWheelClover=spin2(vec2(-s.y,-s.x)*flipStar,(atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)+atan(d.x,d.y)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar)/2.;//clover actually seems to have down to the right so it may need to be rotated by pi/x
                                                 }
-                                            else {
-                                                
-                                                    if (flipStar!=0.)cycleShiftChiral=PI/4.;
-                                                    else cycleShiftChiral=-PI;
-                                                    ColorWheelClover = spin2(vec2(-s.x,-  s.y)*flipStar,(atan(s.x,s.y)*OmniPetal/(6.+OmniPetal)-atan(d.y,d.x)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar);
-                                                }
-                                            if(dstnce<4./3.)    beta   =  hsv2rgb(vec3((atan(ColorWheelClover.y,ColorWheelClover.x))/(2.*PI),1.,1.));
-                                }
+        else {
+                if (flipStar!=0.)cycleShiftChiral=PI/4.;
+                else cycleShiftChiral=-PI;
+                ColorWheelClover = spin2(vec2(-s.x,-  s.y)*flipStar,(atan(s.x,s.y)*OmniPetal/(6.+OmniPetal)-atan(d.y,d.x)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar/2.);
+            }
+        
+            float correctionBrueled = 0.;
+            if(brelued==-1.)correctionBrueled=atan(ColorWheelClover.x,-ColorWheelClover.y);
+           else correctionBrueled=atan(ColorWheelClover.y,ColorWheelClover.x)+PI/2.;
+            
+        if(dstnce<4./3.)
+        beta   =  hsv2rgb(vec3(correctionBrueled/(2.*PI),1.,1.));
+        //return beta;
+}
  if(dstnce<CORE_DELIMITER||(spokesVisualizeColors&&dstnce<4./3.)) {
             float decayCanceller=1.;
             if(spokesVisualizeColors)decayCanceller = 2.;
@@ -3346,7 +3375,7 @@ vec2 dance = vec2(0.);
                                  
          vec2 characterP = p*2.;
                                  
-         vec2 characterPSpunToKey=spin2(characterP*vec2(1.,flipStar)/.8,-(//starSpin*mod(time*rate,PI*2.)-
+         vec2 characterPSpunToKey=spin2(characterP*vec2(1.,flipStar*brelued)/.8,-(//starSpin*mod(time*rate,PI*2.)-
                                                                           twistStar));
                                  
          vec2 characterOnTrailP = characterP;
