@@ -224,15 +224,15 @@ function spiral_compress(){
     if(n!=0)   d = (z[n+1]-z[n-1])/(z[n-1]+z[n+1]);
     else d = (z[n+1])/(z[n]+z[n+1])/2.;
     const nAdj = n + d*4 ;
-       if (Math.abs(d)<4+1.&&isFinite(d))
+      if (Math.abs(d)<4+1.&&isFinite(d))
         freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
-      else
+     else
         freq = audioX.sampleRate*n/numberOfBins
         //   freq = 440; //check for concert A
             frequencies[n]=freq;
     var note24 =24*Math.log(freq/window.ConcertKey)/Math.log(2.)+49*2;
                             
-                          // if(Math.abs(note24/2.-72.)<.5){ //callibratorArray[n]=255.;console.log(note24);}// test witness in pixel shader, add to setMicInputToPIXEL()
+                           //if(Math.abs(note24/2.-60.)<.5){ callibratorArray[n]=255.;console.log(note24);}// test witness in pixel shader, add to setMicInputToPIXEL()
 
                             
         testar[Math.round(note24*EldersLeg/24.)%EldersLeg] += Math.abs(z[n])*radialWarp;
@@ -424,7 +424,8 @@ let pushBackCounter = 0;
                             if(on)
                             {
         //angle-=1/radialWarp;
-                            const reversableColor=((angle/12./radialWarp)*flip+twist/24.+1./3.)%1.;
+                            let reversableColor=((uniforms.brelued.value*angle/12./radialWarp)*flip+twist/24.*uniforms.brelued.value+1./3.)%1.;
+             //if(uniforms.brelued.value==-1)reversableColor=.25-reversableColor;
 
         colorSound = new THREE.Color();
                                const colortone = note/lightingScaleTrail;
@@ -596,7 +597,8 @@ uberDuper:{value: null   },
     
 eden:{value: 0},
 spokesVisualizeColors: {value: false    },
-note:{value: 0.},
+         note:{value: 0.},
+         brelued:{value: 1.},
                             balloonsON:{value: 0.},
                             balloonsONexponential:{value: 0.},
 sparklesON:{value: false},
@@ -680,7 +682,8 @@ duperZoom: {value:1.},
 
        fieldPowerBoost:{value:false},
        fieldPowerBoostMeta:{value:false},
- flipStar:{value:1},
+ flipStar:{value:1.},
+         witnessFlip:{value:1.},
  twistStar:{value:0.},
        multiplicatorNexus:{value:false},//has problems may be discontinued
        squareClover:{value:false},
@@ -1762,7 +1765,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
                 if (widt==0)widt=starshipSize;
                 //var widt =starshipSize;
                 const vop = new THREE.Color();
-                vop.setHSL((-mustarD[g]+8)%24/24., mustarD[g]/lightingScaleStar,mustarD[g]/lightingScaleStar);//297 is around the highest heard note
+                vop.setHSL(((-mustarD[g]+8*uniforms.brelued.value)*uniforms.brelued.value)%24/24., mustarD[g]/lightingScaleStar,mustarD[g]/lightingScaleStar);//297 is around the highest heard note
                 
                 const rpio2 =arm+pi/2.;
                 if(RockInTheWater==0||RockInTheWater==1)
@@ -1986,7 +1989,7 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                     
                 }
                                       const vop = new THREE.Color();
-                      vop.setHSL(((20/24.*EldersLeg-g-oddSkew))%EldersLeg/EldersLeg,lengt,starMajorMinor);
+                      vop.setHSL(((20/24.*EldersLeg*uniforms.brelued.value-g-oddSkew)*uniforms.brelued.value)%EldersLeg/EldersLeg,lengt,starMajorMinor);
                                   
                     starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
                     starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,1.)
@@ -2107,7 +2110,7 @@ var fingerStride = 0;
              for (var g=0; g<10; g++) {
                  const widt = pi/120.;
                  const finger = (isFinite(twelve[t][g]))?twelve[t][g]:0;
-                 let arm =(g+9)/10.*pi*2.;
+                 let arm =(g+9)/10.*pi*2.*uniforms.witnessFlip.value;
 
                  const lengt =(isFinite(maxFinger)&&maxFinger!=0)? (finger)/maxFinger*(1.-pi/12.) : 0;
 
