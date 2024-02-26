@@ -2291,6 +2291,7 @@ float coreBooster=0.;
 float metaCoreDriveFactor =(((1.-leaf)/truncator)*truncator)/gr;//.324717.... number of places changes appearance
 float spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf))/truncator)*truncator;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
 float spoke_factorLarge = spoke_factor*1.5;
+            float upSpoke=((-leaf*truncator)/truncator)/3.;
 float hyperCoreOUTPUT =hyperCore*log(2.)/log(metaCoreDriveFactor)+loops;
                              hyperCoreOUTPUT-=(6.-petals)/6.;//upcore for higher omniclover counts
 
@@ -2437,9 +2438,9 @@ if(Spoker){
                              
                           s/=spoke_factorLarge;//engage spokecore s/=2.+'superspokes'
                          
-                         //hyperCoreOUTPUT-=spoke_factor;
+                         hyperCoreOUTPUT-=upSpoke;//uncertain value
 
-                        // hyperCoreBoosted-=spoke_factor;
+                         hyperCoreBoosted-=upSpoke;
                          }
                          }
         else  {
