@@ -260,12 +260,12 @@ function fiveAndSeven(){
       let  starNote = 0 //ranges up to 12
         for(let n = 0; n<numberOfBins; n++)        {
             //mustard is in 24ths, here we want 12ths so we divide by two
-            const twelfths = (mustarD[n]/2.+12)*radialWarp//A1 is 1 with +12
+            const twelfths = (mustarD[n]/2.)*radialWarp//A1 is 1 with +12
            
                 if( twelfths>=-.5){
                     starNote = Math.round(twelfths)%12;
                     finger = Math.floor(twelfths/10);
-                    if (finger<10&&isFinite(finger)&&isFinite(starNote)&&isFinite(dataArray[n])) twelve[starNote][finger] += dataArray[n];
+                    if (finger<10&&isFinite(finger)&&isFinite(starNote)&&isFinite(dataArray[n])) twelve[starNote][finger] +=1.;// dataArray[n];
                 }
                         
             
@@ -585,7 +585,8 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
                                            window.zoom=1.;
 
                             let uniforms = {
-         fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:2048./44100.},
+         fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:1048./44100.},//actually 2/nyquist
+         radialWarp:{value:1.},
          micIn:{value:null},audioBuffer:{value:null},
              
          pixelSTARon:{value:true},
