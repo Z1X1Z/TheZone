@@ -174,10 +174,10 @@ var equilibriator = 1.;
 hyperCore*=equilibriator;
 
   hyperCore-=.25/Math.log(.5)/equilibriator;
-if(cloverSlide&&wheel)hyperCore+=1.75/Math.log(.5);
+//if(cloverSlide&&wheel)hyperCore+=1.75/Math.log(.5);
 
-else if(cloverSlide||wheel)hyperCore+=1./Math.log(.5);
-//  else if(wheel)hyperCore+=.25/Math.log(.5);
+ if(cloverSlide)hyperCore+=1.5/Math.log(.5);
+if(wheel)hyperCore+=.25/Math.log(.5);
 
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
 if(continuumClover)hyperCore-=.75/Math.log(.5);
@@ -214,7 +214,8 @@ var coreBooster=0.;
 var metaCoreDriveFactor =(((1.-leaf)**.5/truncator)*truncator)**2./gr;//.324717.... number of places changes appearance
 var   spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf))/truncator)*truncator*1.;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
 var      spoke_factorLarge=spoke_factor*1.5
-var upSpoke = ((-leaf*truncator)/truncator)/3.;
+                           var upSpoke=spoke_factor*2.;
+var downSpoke = 0.;
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
                            hyperCoreOUTPUT-=petals;
 
@@ -292,7 +293,8 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
 
         if(Spoker){
             if(morph==0.){
-                if(1.<=hyperCoreBoosted)
+                dstnce = s.length();
+                if((!wheel&&dstnce*2./3.<=hyperCoreBoosted)||(wheel&&1.<=hyperCoreBoosted))
                 {
                     if(wheel){
                         s.divideScalar(2.);
@@ -305,9 +307,9 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
                         
                         s.divideScalar(spoke_factorLarge);//engage spokelover s/=2.+'superspokes'
                         
-                        hyperCoreOUTPUT-=upSpoke;
+                        hyperCoreOUTPUT-=downSpoke;
                         
-                        hyperCoreBoosted-=upSpoke;
+                        hyperCoreBoosted-=downSpoke;
                     }
                 }
                 else  {
@@ -317,8 +319,8 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
                         hyperCoreBoosted+=Math.log(spoke_factor);
                     }
                     else{
-                        hyperCoreOUTPUT+=spoke_factorLarge;
-                        hyperCoreBoosted+=spoke_factorLarge;
+                        hyperCoreOUTPUT+=upSpoke;
+                        hyperCoreBoosted+=upSpoke;
                     }
                 }
             }

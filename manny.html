@@ -2243,10 +2243,10 @@ float equilibriator = 1.;
    hyperCore*=equilibriator;
    
      hyperCore-=.5/log(.5)/equilibriator;
-    if(cloverSlide&&wheel)hyperCore+=1.75/log(.5);
+  //  if(cloverSlide&&wheel)hyperCore+=1.75/log(.5);
 
-   else if(cloverSlide||wheel)hyperCore+=1./log(.5);
- //  else if(wheel)hyperCore+=.25/log(.5);
+ if(cloverSlide)hyperCore+=1.5/log(.5);
+  if(wheel)hyperCore+=.25/log(.5);
 
    if(multiplicatorNexus)hyperCore-=.5/log(.5);
    if(continuumClover)hyperCore-=.75/log(.5);
@@ -2289,9 +2289,11 @@ float dstnce = length(s);//"distance" may be reserved keyword
 //t*=.74;
 float coreBooster=0.;
 float metaCoreDriveFactor =(((1.-leaf)/truncator)*truncator)/gr;//.324717.... number of places changes appearance
-float spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf))/truncator)*truncator;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
+float spoke_factor =metaCoreDriveFactor*((-2.*gr-3.*leaf)/truncator)*truncator;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
 float spoke_factorLarge = spoke_factor*1.5;
-            float upSpoke=((-leaf*truncator)/truncator)/3.;
+                             float upSpoke=spoke_factor*2.;//spoke_factor;
+
+            float downSpoke=0.;//1./(((-leaf)*truncator)/truncator)/4.;
 float hyperCoreOUTPUT =hyperCore*log(2.)/log(metaCoreDriveFactor)+loops;
                              hyperCoreOUTPUT-=(6.-petals)/6.;//upcore for higher omniclover counts
 
@@ -2424,7 +2426,9 @@ vec2 lastS = s;
 
 if(Spoker){
     if(morph==0.){
-            if(1.<=hyperCoreBoosted)
+        dstnce = length(s);
+
+        if((!wheel&&dstnce*2./3.<=hyperCoreBoosted)||(wheel&&1.<=hyperCoreBoosted))
                          {
                              
                          if(wheel){
@@ -2438,9 +2442,9 @@ if(Spoker){
                              
                           s/=spoke_factorLarge;//engage spokecore s/=2.+'superspokes'
                          
-                         hyperCoreOUTPUT-=upSpoke;//uncertain value
+                         hyperCoreOUTPUT-=downSpoke;//uncertain value
 
-                         hyperCoreBoosted-=upSpoke;
+                         hyperCoreBoosted-=downSpoke;
                          }
                          }
         else  {
@@ -2450,8 +2454,8 @@ if(Spoker){
             hyperCoreBoosted+=log(spoke_factor);
             }
                 else{
-            hyperCoreOUTPUT+=spoke_factorLarge;
-            hyperCoreBoosted+=spoke_factorLarge;
+            hyperCoreOUTPUT+=upSpoke;
+            hyperCoreBoosted+=upSpoke;
             }
             }
 }
