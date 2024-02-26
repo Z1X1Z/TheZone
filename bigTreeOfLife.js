@@ -214,6 +214,7 @@ var coreBooster=0.;
 var metaCoreDriveFactor =(((1.-leaf)**.5/truncator)*truncator)**2./gr;//.324717.... number of places changes appearance
 var   spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf))/truncator)*truncator*1.;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
 var      spoke_factorLarge=spoke_factor*1.5
+var upSpoke = ((-leaf*truncator)/truncator)/3.;
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
                            hyperCoreOUTPUT-=petals;
 
@@ -242,7 +243,7 @@ var OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
 
 var  CORE_DELIMITER=coreData[Math.floor(loops+counter)];
 
-if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
+//if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
 
 // if(!true&&morph<.5)CORE_DELIMITER=1./dstnce*pow(2.,4./12.)*equilibriator;
 
@@ -304,9 +305,9 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
                         
                         s.divideScalar(spoke_factorLarge);//engage spokelover s/=2.+'superspokes'
                         
-                       // hyperCoreOUTPUT-=spoke_factor;
+                        hyperCoreOUTPUT-=upSpoke;
                         
-                        //hyperCoreBoosted-=spoke_factor;
+                        hyperCoreBoosted-=upSpoke;
                     }
                 }
                 else  {
