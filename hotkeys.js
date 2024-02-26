@@ -249,8 +249,8 @@ function callKey(event){
     else if(x == 9&&event.altKey&&!event.shiftKey)
     {
         window.pzyghthe = (window.pzyghthe+1.)%5;
-        if(pzyghthe==0) scene.remove(harmonicPzyghtheMesh);
-        else if (pzyghthe==1) scene.add(harmonicPzyghtheMesh)
+       // if(pzyghthe==0) scene.remove(harmonicPzyghtheMesh);
+        //else if (pzyghthe==1) scene.add(harmonicPzyghtheMesh)
             
             
             }

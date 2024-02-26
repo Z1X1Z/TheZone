@@ -2157,7 +2157,8 @@ var fingerStride = 0;
                                         
                                              if(window.pzyghthe!=0)
                                              {
-                                                 
+                         scene.add(harmonicPzyghtheMesh)
+
                          if(window.pzyghthe>=3&&pitch-lastPitch!=0) upOrDown =  Math.sign(pitch-lastPitch);
 
                                              for (var t=0; t<xenOctaveFactor; t++) {
@@ -2167,7 +2168,7 @@ var fingerStride = 0;
 
 
                                                          var vop = new THREE.Color();
-                                                     vop.setHSL((-note-g+5)%12/12.
+                                                     vop.setHSL((-note+(-g+6)*uniforms.brelued.value)%12/12.*uniforms.brelued.value
                                                                 ,1.,.5);
 
                                                       //   for(var yy=0;yy<6;yy++)   harmonicColorAttribute.setXYZW(hpStride+yy,vop.r,vop.g,vop.b,1.)
@@ -2765,6 +2766,8 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
                                                        circle.geometry.dispose();
                                                        radialLine.geometry.dispose( );
 if(RockInTheWater==2||RockInTheWater==1)scene.remove(starStreamMesh);
+if (pzyghthe==1) scene.remove(harmonicPzyghtheMesh)
+
                                                        if(uniforms.gameOn.value)
 for(var n = 0; n<targets.length;n++){
   if(!blankBackground)shaderScene.remove( targets[n] );
