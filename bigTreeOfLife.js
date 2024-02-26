@@ -484,9 +484,9 @@ window.bigCloverGapSync = false;
             // wipeUniforms.cloverSampler.needsUpdate=true;
         }else{
              tree=tol(  new THREE.Vector2(0,0), new THREE.Vector2(0,0) );
-            let coreImplosion = Math.abs(Math.floor(coreTriggered)-Math.floor(tree.z));
+            let coreImplosion = Math.abs(Math.floor(coreTriggered)-tree.z);
 
-            if(coreImplosion>.5)
+            if(coreImplosion>.75)
             {
                 if(dupered&&zoom<zoomCap32) generated = false;
                 coreTriggered=tree.z;
@@ -496,8 +496,8 @@ window.bigCloverGapSync = false;
 
                        // for(var t = 0; t<3; t++)
                         {
-                            vibrateArrayNew.push(coreImplosion*50);
-                            vibrateArrayNew.push(coreImplosion*50);
+                            vibrateArrayNew.push(coreImplosion*100);
+                            vibrateArrayNew.push(coreImplosion*100);
                             
                                                            try{error = navigator.vibrate(vibrateArrayNew );}
                                                            catch(e){ error+=e;}
