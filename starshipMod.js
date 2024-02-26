@@ -1632,9 +1632,10 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
     }
     if(Math.round(note) ==-854)note="undefined";
     const noteNameNumber=Math.floor(Math.round(note))%12;
-    var hour =Math.floor(Math.floor(note))%12;
+    const noteTwisted = (note +twist*flip/2.+12*10000)%12
+    var hour =Math.floor(Math.floor(noteTwisted))%12;
     if (hour==0)hour = 12;
-    const minute =(note-Math.floor(note))*60;
+    const minute =(noteTwisted-Math.floor(noteTwisted))*60;
     const second =(minute-Math.floor(minute))*60
     const timeOfTheSound  =  Math.floor(hour)+":"+Math.floor(minute)+":"+Math.floor(second);
     const notes = ["G#","A","A#","B", "C","C#","D","D#","E","F","F#","G"];
