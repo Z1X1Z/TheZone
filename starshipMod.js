@@ -41,7 +41,7 @@ window.movementRate=movementRateORIGINAL;
 window.zoomRate=movementRateORIGINAL;
 window.radialWarp=1.;
 const starshipSize = Math.E**leaf/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
-let trailSecondsLong = 7.;
+let trailSecondsLong = 3.5;
 let starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;//base Z value
 
                             const zoomFrames = 60;//frames to double zoom
