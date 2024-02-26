@@ -1577,7 +1577,7 @@ uniform float exponentialPetals;
                         
         float frAmp=0.;
         //return vec4(angle);
-        const float octBoost = 17.;
+     //   const float octBoost = 17.;
       //  float b =nyq*pow(2.,angle+octBoost);
 //starts -3, full -2
         for (float n = -3.; n<3.;n+=1.0)//the range seems small
@@ -1590,14 +1590,15 @@ uniform float exponentialPetals;
                 frAmp += texture2D(micIn, vec2(b,0.)).r;
         }
          //  frAmp/=255.;
-           frAmp/=2.;
+         frAmp/=2.;
+       //    frAmp=pow(frAmp,.888);
         float d = length( uv);
         float frampDIVlend = frAmp/d;
         float frampMultlen = frAmp*d;
        //
      //  if(brelued==-1.)angle=(-angle);
      
-       if(brelued==-1.)angle = atan(uv.y,uv.x)/PI2;
+       if(brelued==-1.)angle = (atan(uv.y,uv.x)+twistStar)/PI2;
        vec4 ret =vec4(0.);
          if ((frampDIVlend>.5|| frampMultlen>.125)
 //outer shell
@@ -3375,7 +3376,7 @@ vec2 dance = vec2(0.);
          vec2 characterP = p*2.;
                                  
          vec2 characterPSpunToKey=spin2(characterP*vec2(1.,flipStar*brelued)/.8,-(//starSpin*mod(time*rate,PI*2.)-
-                                                                          twistStar));
+                                                                          twistStar*brelued));
                                  
          vec2 characterOnTrailP = characterP;
          if(MannyONtrail==0) characterOnTrailP=spin2(characterOnTrailP,atan(d.y,d.x)-PI*3./2.);//put manny on trail
