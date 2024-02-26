@@ -486,7 +486,7 @@ window.bigCloverGapSync = false;
              tree=tol(  new THREE.Vector2(0,0), new THREE.Vector2(0,0) );
             let coreImplosion = Math.abs(Math.floor(coreTriggered)-Math.floor(tree.z));
 
-            if(coreImplosion==1)
+            if(coreImplosion>=.5&&Math.round(tree.z)-tree.z<0.)//due to the cycling upcore, it triggers twice per core
             {
                 if(dupered&&zoom<zoomCap32) generated = false;
                 coreTriggered=tree.z;
