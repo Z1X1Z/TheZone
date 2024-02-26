@@ -187,7 +187,7 @@ function callKey(event){
         else if( uniforms.exponentialPetals.value==-1.) uniforms.exponentialPetals.value=0.;
         
     }
-    else if (event.altKey&&(key=="≈"||key=="x")){ if(!runningHash) uniforms.brelued.value*=-1;}
+    else if (event.altKey&&(key=="≈"||key=="x")){ if(!runningHash||!window.online) uniforms.brelued.value*=-1;}
     else if (event.altKey&&(key=="Ω"||key=="z"))uniforms.witnessFlip.value*=-1.;
     else if (event.altKey&&(key=="π"||key=="p"))uniforms.pixelSTARon.value=!uniforms.pixelSTARon.value;
     else if (event.altKey&&(key=="©"||key=="g"))window.grabStar=!window.grabStar;
@@ -264,7 +264,7 @@ function callKey(event){
         else uniforms.refactorCores.value=2;
     }
     
-    else if (event.altKey&&(key=="∂"||key=="d")&&!runningHash)//∂ is alt+d
+    else if (event.altKey&&(key=="∂"||key=="d")&&(!runningHash||!window.online))//∂ is alt+d
         window.dupered=!window.dupered;
     else if (event.altKey&&key=="f")console.log("speakers disabled!");//speakers turned off in manny.html
     else if(event.ctrlKey||event.altKey);//swallow remaining possibilities, muting keypress
