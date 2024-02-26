@@ -480,7 +480,7 @@ window.bigCloverGapSync = false;
             // wipeUniforms.cloverSampler.needsUpdate=true;
         }else{
              tree=tol(  new THREE.Vector2(0,0), new THREE.Vector2(0,0) );
-            let coreImplosion = Math.abs(Math.floor(coreTriggered)-Math.floor(tree.z));
+            let coreImplosion = Math.abs(Math.floor(coreTriggered)-tree.z);
 
             if(coreImplosion>1)
             {
