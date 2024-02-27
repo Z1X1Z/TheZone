@@ -114,7 +114,7 @@ uberDuper:{value:null},
         twistStar:{value:0.},
         multiplicatorNexus:{value:false},//has problems may be discontinued
         squareClover:{value:false},
-        mandelCloverFactor:{value:1.75},
+        mandelCloverFactor:{value:2./-leaf},
         exponentialPetals:{value:0.}
         }
 window.uniforms={}
