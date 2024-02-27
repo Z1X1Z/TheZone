@@ -120,7 +120,7 @@ window.uniforms={}
 
 function resetAll(){
     Object.assign(window.uniforms,window.uniformsInitial);
-            if(!("BibleON" in window))window.BibleON = 1;
+            if(!("BibleON" in window)&&!window.INITIALIZED)window.BibleON = 1;
             window.muteToggle = false;
             window.zoom=1.;
             window.RockInTheWater=0;
@@ -139,15 +139,19 @@ function resetAll(){
     
     if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
       {
-          rez=window.devicePixelRatio/3.;
-          mobile=true;
+          window.rez=window.devicePixelRatio/3.;
+          window.mobile=true;
       }
       else if(navigator.userAgent.toLowerCase().match(/mobile/i)){
-           rez=window.devicePixelRatio/7.;
-           mobile=true;
+           windwo.rez=window.devicePixelRatio/7.;
+           window.mobile=true;
        }
-    else           rez=window.devicePixelRatio/2.;
-
+      else       {
+          
+          window.rez=window.devicePixelRatio/2.;
+          window.mobile=false;
+          
+      }
     
     window.Oreo=true;
             window.shouldShowStar = true;
@@ -221,6 +225,7 @@ function readHash(){
             let lasthash = hashindex;
             let CTRLorALT = location.hash[hashindex-1]=="."||location.hash[hashindex-1]==","||location.hash[hashindex]=="."||location.hash[hashindex]==",";
             let bibleReaderCode =(location.hash[hashindex-2]=="c"&&location.hash[hashindex-3]==".")
+                                ||(location.hash[hashindex-1]=="b"&&location.hash[hashindex-2]==".")
             if((location.hash[hashindex-1]=="("&&!CTRLorALT)||(CTRLorALT&&location.hash[hashindex-2]=="("))
             {            hashindex++;
                 
@@ -378,12 +383,20 @@ function callKey(event){
 
         let content = document.getElementsByClassName("dropdown-content");
         //iframe redirect from https://stackoverflow.com/questions/28159920/how-to-redirect-page-inside-iframe-to-another-one-but-we-must-stay-in-iframe
-        if(mobile||runningHash);//dynamic href for iFrame doesn't seem to work on mobile
+        if(mobile
+           ||runningHash
+           );//dynamic href for iFrame doesn't seem to work on mobile
         else if (number == 8)
+        
             window.frames["TheBible"].location = "https://openbible.com/audio/gilbert_music/";
+        
                 else if(number ==7) window.frames["TheBible"].location ="https://openbible.com/audio/gilbert_music_books/";
 
-                else if(number == 6)  window.frames["TheBible"].location = "https://openbible.com/audio/hays/";
+                else if(number == 6) {
+                    
+                    window.frames["TheBible"].location = "https://openbible.com/audio/hays/";
+                    console.log("herehere")
+                }
                 else if(number == 5)  window.frames["TheBible"].location =  "https://openbible.com/audio/souer/";
                 else if(number == 4)  window.frames["TheBible"].location =  "https://openbible.com/audio/gilbert/";
             else if(number == 3)  window.frames["TheBible"].location = "https://openbible.com/audio/hays_books/";
@@ -407,7 +420,7 @@ function callKey(event){
                         
                     }
                 
-                  onWindowResize();
+                 if(window.INITIALIZED) onWindowResize();
                             
     }//bible iframe loaded in manny.html
     
