@@ -1146,7 +1146,7 @@ scoreColorInversion=false;
                   <a id="reset" name="t"  onclick="
                   key  = ' ';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                      Reset![SPACE]</a><br>
+                      Reset Settings![SPACE]</a><br>
               </div>
           
           </button>
@@ -1569,7 +1569,9 @@ uniform float exponentialPetals;
           // vec2 flatScreen=1.-vUv;
           // flatScreen*=2.;
     float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*2.,2.)/2.,0.)).r;
-    
+   // float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*2.,2.)/2./
+                                            //  pow(2.,(note)/12.+4.)*440. ,0.)).r;//adjusted to pitch
+
    if (log(abs(frAmp)/(1.-vUv.y)*(resolution.x/max(
                                                      resolution.x,resolution.y)))*2.>1.) ret = vec4(sign(frAmp));
    
@@ -1606,17 +1608,21 @@ uniform float exponentialPetals;
        //    frAmp=pow(frAmp,.888);
         float d = length( uv);
         float frampDIVlend = frAmp/d;
+        frampDIVlend*=frampDIVlend;
         float frampMultlen = frAmp*d;
+        frampMultlen*=frampMultlen;
+
+       // frampMultlen*=frampMultlen;
        //
      //  if(brelued==-1.)angle=(-angle);
      
        if(brelued==-1.)angle = (atan(uv.y,uv.x)+twistStar)/PI2;
        vec4 ret =vec4(0.);
-         if ((frampDIVlend>.5|| frampMultlen>.125)
+         if ((frampDIVlend>.5|| frampMultlen>.25)
 //outer shell
-             &&(frampDIVlend<1.||(frampDIVlend>2.&&(frampDIVlend<4.||frampDIVlend>8.)))
+             &&((frampDIVlend<1.||(frampDIVlend>2.&&(frampDIVlend<4.||frampDIVlend>8.)))
             ||
-              (frampMultlen>.5)
+              (frampMultlen>.5))
             )
         ret=  vec4(clamp(hsv2rgb(
                                       vec3(

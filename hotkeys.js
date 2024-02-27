@@ -144,11 +144,10 @@ function resetAll(){
     if(!("BibleON" in window))window.BibleON=1;
     else
     {
-        console.log('here')
          if(location.hash.includes(".b")||location.hash.includes(".c"))
          {window.BibleON=1; }
             else window.BibleON=0
-                }
+      }
                           
             window.muteToggle = false;
             window.zoom=1.;
@@ -251,6 +250,8 @@ resetAll();
 
 let osmdStaffsVisible = 0;
 window.number = "";
+                                         
+                               let          hashHasRun = false;
 function readHash(){
         let hashindex = 0;
         while (hashindex<location.hash.length)
@@ -271,7 +272,7 @@ function readHash(){
                 
             }
             number=Number(number);
-           if(!bibleReaderCode) callKey(new KeyboardEvent('keydown',
+           if(!bibleReaderCode||hashHasRun) callKey(new KeyboardEvent('keydown',
                                       {
                 'key': location.hash[lasthash],"keyCode":location.hash.charCodeAt(lasthash),
                 "ctrlKey":location.hash[lasthash-1]==",","altKey":location.hash[lasthash-1]=="."
@@ -282,6 +283,7 @@ function readHash(){
             
         }
         runningHash=false;
+                hashHasRun = true;
 }
 readHash();
 function hk() {
@@ -423,7 +425,7 @@ function callKey(event){
         let content = document.getElementsByClassName("dropdown-content");
         //iframe redirect from https://stackoverflow.com/questions/28159920/how-to-redirect-page-inside-iframe-to-another-one-but-we-must-stay-in-iframe
         if(mobile
-           ||runningHash
+           
            );//dynamic href for iFrame doesn't seem to work on mobile
         else if (number == 8)
         
