@@ -499,6 +499,25 @@ window.bigCloverGapSync = false;
             // wipeUniforms.cloverSampler.needsUpdate=true;
         }else{
              tree=tol(  new THREE.Vector2(0,0), new THREE.Vector2(0,0) );
+            
+            if (uniforms["MetaCored"].value)
+             {
+                
+                var precores = .25/Math.log(.5);
+                 if(uniforms.morph.value!=0.)precores=precores-3./Math.log(.5);
+                 if(uniforms.refactorCores.value!=1.)precores=-.0;
+                 
+                 const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
+                 var equilibriator = 1.;
+             
+                uniforms[ "centralCores" ].value = Math.log(zoom)/-Math.log(2.)+precores    ;
+                // if(uniforms[ "morph" ].value!=0.)uniforms[ "centralCores" ].value*=3./2.;//stabilize morph dance collaboration
+
+                uniforms[ "externalCores" ].value =tree.z;
+              
+            }
+            
+            
             let coreImplosion = Math.abs(Math.floor(coreTriggered)-Math.floor(tree.z));
             if(coreImplosion>.5//&&Math.round(tree.z)-tree.z<0.
                )//due to the cycling upcore, it triggers twice per core
