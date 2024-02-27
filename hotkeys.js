@@ -118,7 +118,7 @@ uberDuper:{value:null},
         exponentialPetals:{value:0.}
         }
 window.uniforms={}
-
+window.settingsSet = false;
 function resetAll(){
     Object.assign(window.uniforms,window.uniformsInitial);
             if(!("BibleON" in window))window.BibleON = 1;
@@ -213,6 +213,7 @@ function resetAll(){
                     tound2[o].stop()
            }
     }
+                                         window.settingsSet = true
 }
 resetAll();
 
