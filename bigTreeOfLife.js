@@ -212,11 +212,11 @@ var dstnce = s.length();//"distance" may be reserved keyword
 //t.multiplyScalar(.74);
 var coreBooster=0.;
 var metaCoreDriveFactor =(((1.-leaf)**.5/truncator)*truncator)**2./gr;//.324717.... number of places changes appearance
-var   spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf))/truncator)*truncator*1.;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
+var   spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator);//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
 var      spoke_factorLarge=spoke_factor*1.5
-                           var upSpoke=spoke_factor*2.;
+                           var upSpoke=spoke_factor*(((gr+1.)/truncator)*truncator);
 var downSpoke = 0.;
-                           
+                          var grOverLeaf=((gr/leaf)/truncator)*truncator
                            var logOfSpoke_Factor = 0.;
                            if (wheel) logOfSpoke_Factor=log(spoke_factor);
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
@@ -323,10 +323,10 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
                         hyperCoreBoosted+=logOfSpoke_Factor;
                     }
                     else{
-                        var correctionSpoke = 1./dstnce*2./3.;
+                        var correctionSpoke =Math.pow(upSpoke/dstnce,grOverLeaf);
 
-                        hyperCoreOUTPUT+=upSpoke*correctionSpoke;
-                        hyperCoreBoosted+=upSpoke*correctionSpoke;
+                        hyperCoreOUTPUT+=correctionSpoke;
+                        hyperCoreBoosted+=correctionSpoke;
                     }
                 }
             }

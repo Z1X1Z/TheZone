@@ -2289,14 +2289,16 @@ float dstnce = length(s);//"distance" may be reserved keyword
 //t*=.74;
 float coreBooster=0.;
 float metaCoreDriveFactor =(((1.-leaf)/truncator)*truncator)/gr;//.324717.... number of places changes appearance
-float spoke_factor =metaCoreDriveFactor*((-2.*gr-3.*leaf)/truncator)*truncator;//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
+float spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator);//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
+                             float   grOverLeaf=-((gr/leaf)/truncator)*truncator;//uncertain term
 float spoke_factorLarge = spoke_factor*1.5;
-                             float upSpoke=spoke_factor*2.;//spoke_factor;
+                             float upSpoke=spoke_factor*(((gr+1.)/truncator)*truncator);//uncertain term, without dstnce spokeCore is spoke_factor*2.
 
             float downSpoke=0.;//1./(((-leaf)*truncator)/truncator)/4.;
-
+    
             float logOfSpoke_Factor = 0.;
             if (wheel) logOfSpoke_Factor=log(spoke_factor);
+                             
 float hyperCoreOUTPUT =hyperCore*log(2.)/log(metaCoreDriveFactor)+loops;
                              hyperCoreOUTPUT-=(6.-petals)/6.;//upcore for higher omniclover counts
 
@@ -2444,7 +2446,7 @@ if(Spoker){
                              
                           s/=spoke_factorLarge;//engage ; s/=2.+'superspokes'
                          
-                         hyperCoreOUTPUT-=downSpoke;//uncertain value
+                         hyperCoreOUTPUT-=downSpoke;
 
                          hyperCoreBoosted-=downSpoke;
                          }
@@ -2455,11 +2457,11 @@ if(Spoker){
             hyperCoreOUTPUT+=logOfSpoke_Factor;
             hyperCoreBoosted+=logOfSpoke_Factor;
             }
-                else{
-                    float correctionSpoke = 1./dstnce*2./3.;
-            hyperCoreOUTPUT+=upSpoke*correctionSpoke
+                else {
+                    float correctionSpoke =pow(upSpoke/dstnce,grOverLeaf);//uncertain value
+            hyperCoreOUTPUT+=correctionSpoke
             ;
-            hyperCoreBoosted+=upSpoke*correctionSpoke;
+            hyperCoreBoosted+=correctionSpoke;
             }
             }
 }
