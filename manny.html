@@ -2245,7 +2245,7 @@ float equilibriator = 1.;
      hyperCore-=.25/log(.5)/equilibriator;
   //  if(cloverSlide&&wheel)hyperCore+=1.75/log(.5);
 
- if(cloverSlide)hyperCore+=1.25/log(.5);
+  if(cloverSlide)hyperCore+=.5/log(.5);
   if(wheel)hyperCore+=.25/log(.5);
 
    if(multiplicatorNexus)hyperCore-=.5/log(.5);
@@ -2294,6 +2294,9 @@ float spoke_factorLarge = spoke_factor*1.5;
                              float upSpoke=spoke_factor*2.;//spoke_factor;
 
             float downSpoke=0.;//1./(((-leaf)*truncator)/truncator)/4.;
+
+            float logOfSpoke_Factor = 0.;
+            if (wheel) logOfSpoke_Factor=log(spoke_factor);
 float hyperCoreOUTPUT =hyperCore*log(2.)/log(metaCoreDriveFactor)+loops;
                              hyperCoreOUTPUT-=(6.-petals)/6.;//upcore for higher omniclover counts
 
@@ -2427,20 +2430,19 @@ vec2 lastS = s;
 if(Spoker){
     if(morph==0.){
         dstnce = length(s);
-
-        if((!wheel&&dstnce<=hyperCoreBoosted)||(wheel&&1.<=hyperCoreBoosted))
+        if((!wheel&&dstnce*sqrt(dstnce)<=hyperCoreBoosted)||(wheel&&1.<=hyperCoreBoosted))
                          {
                              
                          if(wheel){
                              s/=2.;
                              
-                             hyperCoreOUTPUT-=log(spoke_factor);
+                             hyperCoreOUTPUT-=logOfSpoke_Factor;
 
-                             hyperCoreBoosted-=log(spoke_factor);
+                             hyperCoreBoosted-=logOfSpoke_Factor;
                              }
                          else{
                              
-                          s/=spoke_factorLarge;//engage spokecore s/=2.+'superspokes'
+                          s/=spoke_factorLarge;//engage ; s/=2.+'superspokes'
                          
                          hyperCoreOUTPUT-=downSpoke;//uncertain value
 
@@ -2450,12 +2452,14 @@ if(Spoker){
         else  {
             
                 if(wheel){
-            hyperCoreOUTPUT+=log(spoke_factor);
-            hyperCoreBoosted+=log(spoke_factor);
+            hyperCoreOUTPUT+=logOfSpoke_Factor;
+            hyperCoreBoosted+=logOfSpoke_Factor;
             }
                 else{
-            hyperCoreOUTPUT+=upSpoke;
-            hyperCoreBoosted+=upSpoke;
+                    float correctionSpoke = 1./dstnce*2./3.;
+            hyperCoreOUTPUT+=upSpoke*correctionSpoke
+            ;
+            hyperCoreBoosted+=upSpoke*correctionSpoke;
             }
             }
 }
@@ -2508,20 +2512,21 @@ OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
 
  if (cloverSlide)
    {
-      /* if(float(i)>hyperCoreBoosted)
+       if(float(i)>hyperCoreBoosted)
        {
-           float b = 2.*dstnce;
+           float b = dstnce;
            loops-=b;
        hyperCoreBoosted+=b;
        }
        else{
-           float b =dstnce/4.;
+           float b =dstnce/2.;
            loops-=b;
        hyperCoreBoosted+=b;
-       }*/
-       float b =dstnce;//try dstnce/1.5
+       }
+      /* float b =dstnce;//try dstnce/1.5
        loops-=b;
    hyperCoreBoosted+=b;
+       */
        
    }
    
