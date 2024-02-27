@@ -118,12 +118,38 @@ uberDuper:{value:null},
         exponentialPetals:{value:0.}
         }
 window.uniforms={}
-window.settingsSet = false;
-function resetAll(){
-    Object.assign(window.uniforms,window.uniformsInitial);
-            window.coordX=0.; window.coordY=0.;
 
-            if(!("BibleON" in window))window.BibleON = 1;
+let runningHash = true;
+window.settingsSet = false
+
+
+
+
+
+
+
+
+
+
+
+
+function resetAll(){
+    for(var nameOfUniform in uniformsInitial)
+    {
+              window.uniforms[nameOfUniform]={}
+              Object.assign(window.uniforms[nameOfUniform],window.uniformsInitial[nameOfUniform])
+    }
+    window.coordX=0.; window.coordY=0.;
+
+    if(!("BibleON" in window))window.BibleON=1;
+    else
+    {
+        console.log('here')
+         if(location.hash.includes(".b")||location.hash.includes(".c"))
+         {window.BibleON=1; }
+            else window.BibleON=0
+                }
+                          
             window.muteToggle = false;
             window.zoom=1.;
             window.RockInTheWater=0;
@@ -215,13 +241,15 @@ function resetAll(){
                     tound2[o].stop()
            }
     }
+                                         runningHash = true;
+                                         window.number = "";
+                                       if(window.settingsSet)  readHash()
                                          window.settingsSet = true
 }
 resetAll();
 
 
 let osmdStaffsVisible = 0;
-let runningHash = true;
 window.number = "";
 function readHash(){
         let hashindex = 0;
@@ -360,7 +388,6 @@ function callKey(event){
     else if (key=="p" && event.ctrlKey)spirographMODE = (spirographMODE+1)%3;//color mode 3 seems obsolete
     else if (key=="m" && event.ctrlKey)
     {uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value;
-        if(number!="")uniform.mandelCloverFactor.value=number;
 
     }
     else if (event.ctrlKey&&key=="a")uniforms[ "colorCombo" ].value = 11;
@@ -407,7 +434,6 @@ function callKey(event){
                 else if(number == 6) {
                     
                     window.frames["TheBible"].location = "https://openbible.com/audio/hays/";
-                    console.log("herehere")
                 }
                 else if(number == 5)  window.frames["TheBible"].location =  "https://openbible.com/audio/souer/";
                 else if(number == 4)  window.frames["TheBible"].location =  "https://openbible.com/audio/gilbert/";
@@ -532,7 +558,12 @@ function callKey(event){
     else if (key=="À"||key=="`")
     {rez=window.devicePixelRatio*2.;
         if(window.INITIALIZED)   renderer.setPixelRatio( rez);}
-    else if (key=="m") uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
+    else if (key=="m"){
+        
+        uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
+        if(number!="")uniform.mandelCloverFactor.value=number;
+    }
+                
     else if (key=="M") uniforms[ "NightAndDay" ].value = !uniforms[ "NightAndDay" ].value;
     else if (key=="!")uniforms[ "Refractelate" ].value=!uniforms[ "Refractelate" ].value;
     else if (key=="@")uniforms[ "Clovoid" ].value=!uniforms[ "Clovoid" ].value;
