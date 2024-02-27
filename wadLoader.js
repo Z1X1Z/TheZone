@@ -346,7 +346,7 @@ let c = document.body;//document.getElementById("container")
             c.addEventListener('pointerdown', function(e)
                                {
                 //   e.stopImmediatePropagation();          //e.preventDefault();
-                if(e.explicitOriginalTarget.nodeName=="CANVAS"){
+                if(e.originalTarget.nodeName=="CANVAS"){
                     
                     let touchLimit=0;
                     while (touchNumber.get(cycler)!="off"&&touchLimit<maxTouchSoundCount)
@@ -365,7 +365,7 @@ let c = document.body;//document.getElementById("container")
                 }
             }, false);
             c.addEventListener('pointermove', function(e) {
-                if(e.explicitOriginalTarget.nodeName=="CANVAS" ){
+                if(e.originalTarget.nodeName=="CANVAS" ){
 
                     let tn = touchNumber.get(pressIndex.get(e.pointerId));
                     if(typeof tn == "number"){
