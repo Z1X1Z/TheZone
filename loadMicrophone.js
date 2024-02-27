@@ -1,4 +1,4 @@
- let fftSize=2048
+window.fftSize=2048
     window.touchOnlyMode = false;
 window.touchMode = false;
 

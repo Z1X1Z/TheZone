@@ -218,7 +218,7 @@ var      spoke_factorLarge=spoke_factor*1.5
 var downSpoke = 0.;
                           var grOverLeaf=((gr/leaf)/truncator)*truncator
                            var logOfSpoke_Factor = 0.;
-                           if (wheel) logOfSpoke_Factor=log(spoke_factor);
+                           if (wheel) logOfSpoke_Factor=Math.log(spoke_factor);
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
                            hyperCoreOUTPUT-=petals;
 
