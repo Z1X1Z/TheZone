@@ -196,7 +196,7 @@ var m= new THREE.Vector2(0.,0.);
     var truncator=1.;
     if(lfc!=0.) truncator = Math.log(zoom/lfc)/10000.;
 //Maendel clover
-if(wheel)m =  pWithoutChiralizer.clone().sub(new THREE.Vector2(coords.y,coords.x))//try signs with for fibonacci ring pairing and movement distortion #syyym
+if(wheel)m =  pWithoutChiralizer.clone().sub(new THREE.Vector2(coords.y,coords.x).multiplyScalar(2.))//try signs with for fibonacci ring pairing and movement distortion #syyym
 .multiplyScalar(Math.abs(coresIn/crs*2.-1.)).multiplyScalar(mandelCloverFactor);
                                      
 //this is essentially just p as in the mandelbrot x <== x^2+
@@ -212,13 +212,14 @@ var dstnce = s.length();//"distance" may be reserved keyword
 //t.multiplyScalar(.74);
 var coreBooster=0.;
 var metaCoreDriveFactor =(((1.-leaf)**.5/truncator)*truncator)**2./gr;//.324717.... number of places changes appearance
-var   spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator);//1.+pow(metaCoreDriveFactor-1.,1.5/(2.+.47805268028830/2.));
-var      spoke_factorLarge=spoke_factor*1.5
-                           var upSpoke=spoke_factor*(((gr+1.)/truncator)*truncator);
-var downSpoke = 0.;
-                          var grOverLeaf=((gr/leaf)/truncator)*truncator
-                           var logOfSpoke_Factor = 0.;
-                           if (wheel) logOfSpoke_Factor=Math.log(spoke_factor);
+var spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator);//metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator)
+var grOverLeaf=-((gr/leaf)/truncator)*truncator;//uncertain term
+var spoke_factorLarge = spoke_factor*(1.+gr)/(-leaf);
+                            var upSpoke=spoke_factor*(((gr+1./-leaf)/truncator)*truncator);//uncertain term, without dstnce spokeCore is spoke_factor*2.
+
+           var downSpoke=1./leaf;//1./(((-leaf)*truncator)/truncator)/4.;
+  // var logOfSpoke_Factor=0.;
+                          // if (wheel) logOfSpoke_Factor=Math.log(spoke_factor);
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
                            hyperCoreOUTPUT-=petals;
 
@@ -240,8 +241,11 @@ coreBooster=multCrossTwist.length()/Math.log(.5)*lfc;
 }
                          
 
+                                                      
+                                                                                  var colorComputationBoost =7.;//increasing number decreases processing and clarity
+                                                                                  var baseDelimiter =50.;
 
-for (var counter=0.;counter<iterations;counter++)if(dstnce<50.){
+for (var counter=0.;counter<iterations;counter++)if(dstnce<baseDelimiter/colorComputationBoost){
 var OmniDynamicPetalShift =omniData[(loops+counter-1.)];
 var OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
 
@@ -298,16 +302,19 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
             if(morph==0.){
                 dstnce = s.length();
                
-                if((!wheel&&Math.sqrt(dstnce)*dstnce<=hyperCoreBoosted)||(wheel&&1.<=hyperCoreBoosted))
+                if(//(!wheel &&
+                   Math.sqrt(dstnce)*dstnce<=hyperCoreBoosted//)||(wheel&&1.<=hyperCoreBoosted)
+                    )
                 {
-                    if(wheel){
+                   /* if(wheel){
                         s.divideScalar(2.);
                         
                         hyperCoreOUTPUT-=logOfSpoke_Factor;
                         
                         hyperCoreBoosted-=logOfSpoke_Factor;
                     }
-                    else{
+                    else
+                    */{
                         
                         s.divideScalar(spoke_factorLarge);//engage spokelover s/=2.+'superspokes'
                         
@@ -317,12 +324,13 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
                     }
                 }
                 else  {
-                    
+                    /*
                     if(wheel){
                         hyperCoreOUTPUT+=logOfSpoke_Factor;
                         hyperCoreBoosted+=logOfSpoke_Factor;
                     }
-                    else{
+                    else*/
+                     {
                         var correctionSpoke =Math.pow(upSpoke/dstnce,grOverLeaf);
 
                         hyperCoreOUTPUT+=correctionSpoke;

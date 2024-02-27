@@ -2272,7 +2272,7 @@ float truncator=1.;
 if(lfc!=0.) truncator = log(zoom/lfc)/10000.;//log truncation * factor is not known
 //Maendel clover
 if(wheel)m =  ((pWithoutChiralizer/lfc)
-                                         -coords.yx)*abs(coresIn/crs*2.-1.)
+                                         -coords.yx*2.)*abs(coresIn/crs*2.-1.)
                             *mandelCloverFactor//(1.-1./(leaf/truncator)*truncator)//uncertain term
 
                             ;
@@ -2302,8 +2302,8 @@ float spoke_factorLarge = spoke_factor*(1.+gr)/(-leaf);
 
             float downSpoke=1./leaf;//1./(((-leaf)*truncator)/truncator)/4.;
     
-            float logOfSpoke_Factor = 0.;
-            if (wheel) logOfSpoke_Factor=log(spoke_factor);
+       //     float logOfSpoke_Factor = 0.;
+       //     if (wheel) logOfSpoke_Factor=log(spoke_factor);
                              
 float hyperCoreOUTPUT =hyperCore*log(2.)/log(metaCoreDriveFactor)+loops;
                              hyperCoreOUTPUT-=(6.-petals)/6.;//upcore for higher omniclover counts
@@ -2441,9 +2441,10 @@ vec2 lastS = s;
 if(Spoker){
     if(morph==0.){
         dstnce = length(s);
-        if((!wheel&&dstnce*sqrt(dstnce)<=hyperCoreBoosted)||(wheel&&1.<=hyperCoreBoosted))
+        if((//!wheel
+            dstnce*sqrt(dstnce)<=hyperCoreBoosted))//||(wheel&&1.<=hyperCoreBoosted))
                          {
-                             
+                             /*
                          if(wheel){
                              s/=2.;
                              
@@ -2451,7 +2452,8 @@ if(Spoker){
 
                              hyperCoreBoosted-=logOfSpoke_Factor;
                              }
-                         else{
+                         else
+                              */{
                              
                           s/=spoke_factorLarge;//engage ; s/=2.+'superspokes'
                          
@@ -2461,12 +2463,12 @@ if(Spoker){
                          }
                          }
         else  {
-            
+            /*
                 if(wheel){
             hyperCoreOUTPUT+=logOfSpoke_Factor;
             hyperCoreBoosted+=logOfSpoke_Factor;
             }
-                else {
+                else */{
                     float correctionSpoke =pow(upSpoke/dstnce,grOverLeaf);//uncertain value
             hyperCoreOUTPUT+=correctionSpoke
             ;
@@ -2577,8 +2579,7 @@ s/=  pow(colorComputationBoost,1./baseDelimiter);
                                                                        
                                                                        s.y*= pow(colorComputationBoost,2.);
                                                                        s.x*= pow(colorComputationBoost,.5);
-                                                                      // s.z*= pow(2.,colorComputationBoost);
-colorAccumulator*=colorComputationBoost;//  pow(colorComputationBoost,1./50.);
+colorAccumulator*=colorComputationBoost;
 
 vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                      if(colorCombo==-7) o=vec3(s.y,s.x/9.5,1.-s.x/12.);
