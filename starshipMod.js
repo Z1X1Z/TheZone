@@ -599,7 +599,6 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
 
                     
                     
-                    const secondsToEdge=window.pixelShaderSize/4./pixelShaderToStarshipRATIO;
                   
                             let xyStarParticleArray= Array();
                                            

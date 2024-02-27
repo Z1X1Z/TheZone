@@ -8,6 +8,7 @@ const starshipSize = Math.E**leaf/Math.sqrt(2.);//divided by Math.sqrt(2.) to se
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   const mf = 1.75;
 const MR = mf/zoomFrames;
+const secondsToEdge=window.pixelShaderSize/4./pixelShaderToStarshipRATIO;
 
 window.uniformsInitial = {
 fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:1048./44100.},//actually 2/nyquist
