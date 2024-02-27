@@ -136,7 +136,7 @@ function resetAll(){
             window.spirographMODE = 1;
             window.pzyghthe=0;
             window.dynamicCoring=false;
-
+            window.starArms = fftSize/2.
     
     if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
       {

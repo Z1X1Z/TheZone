@@ -82,7 +82,7 @@ const fractionOfFrame = 1024;//1024-26=998 seems not to skip much and has nice l
 const yinData = new Float64Array(fractionOfFrame);
 
 var frequencies,
-                            starArms,
+                            
                           
                                                         testar,
                                                         testarContinuous,
