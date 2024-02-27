@@ -144,7 +144,7 @@ function resetAll(){
           window.mobile=true;
       }
       else if(navigator.userAgent.toLowerCase().match(/mobile/i)){
-           windwo.rez=window.devicePixelRatio/7.;
+           window.rez=window.devicePixelRatio/7.;
            window.mobile=true;
        }
       else       {
