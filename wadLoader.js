@@ -346,7 +346,8 @@ let c = document.body;//document.getElementById("container")
             c.addEventListener('pointerdown', function(e)
                                {
                 //   e.stopImmediatePropagation();          //e.preventDefault();
-                if(e.originalTarget.nodeName=="CANVAS"){
+//console.log(e.srcElement.nodeName=="CANVAS" )
+                if(e.srcElement.nodeName=="CANVAS"  ){
                     
                     let touchLimit=0;
                     while (touchNumber.get(cycler)!="off"&&touchLimit<maxTouchSoundCount)
@@ -365,7 +366,8 @@ let c = document.body;//document.getElementById("container")
                 }
             }, false);
             c.addEventListener('pointermove', function(e) {
-                if(e.originalTarget.nodeName=="CANVAS" ){
+                //let ae=(e.target.className=="dropbtn")?e.target.firstElementChild:"notMenu";
+                if(e.srcElement.nodeName=="CANVAS"  ){
 
                     let tn = touchNumber.get(pressIndex.get(e.pointerId));
                     if(typeof tn == "number"){
