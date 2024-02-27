@@ -8,8 +8,6 @@ const starshipSize = Math.E**leaf/Math.sqrt(2.);//divided by Math.sqrt(2.) to se
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   const mf = 1.75;
 const MR = mf/zoomFrames;
-window.trailLength=100;//set in setTrailSize()
-window.starShipDepthInSet=1.;//set in setTrailSize()
 
 window.uniformsInitial = {
 fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:1048./44100.},//actually 2/nyquist
@@ -164,7 +162,8 @@ function resetAll(){
             window.zoomRate=movementRateORIGINAL;
             window.radialWarp=1.;
             window.trailSecondsLong = 3.5;
-
+            window.trailLength = Math.ceil(zoomFrames*trailSecondsLong);
+            window.starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;
             window.touchMode=false;
             window.volumeSpeed = false;
 

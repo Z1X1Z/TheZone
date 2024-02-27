@@ -162,8 +162,8 @@ let updateInstant = false;
                             const bufferPortion = 2048*2;//should be 2048
                             const spirray0 = new Float64Array(bufferPortion).fill(.5);
                             const spirray1 = new Float64Array(bufferPortion).fill(.5);
-                          const   point = new Float64Array(bufferPortion*3*2);
-                          const   pointColor = new Float64Array(bufferPortion*4*2);
+                          const   point = new Float32Array(bufferPortion*3*2);
+                          const   pointColor = new Float32Array(bufferPortion*4*2);
 function makeSpirograph(){
       phase = phase % (pi*2);
         phase2 =  phase2 % (pi*2);
@@ -255,6 +255,9 @@ function fiveAndSeven(){
                             var trailSegmentExpired = Array(trailLength).fill(false);
 var pitchCol = Array(trailLength);
                             
+                                  var trail=new Float32Array(trailLength*3*6*2);
+                                   var trailColor=new Float32Array(trailLength*4*6*2);
+                                
             function setTrailSize(){
         
                              trailLength = Math.ceil(zoomFrames*trailSecondsLong);
@@ -267,14 +270,31 @@ var pitchCol = Array(trailLength);
                               trailTimeOfRecording = new Float64Array(trailLength).fill(0);
                               trailSegmentExpired = Array(trailLength).fill(false);
                             pitchCol = Array(trailLength);
-                                                  if(window.INITIALIZED){
-                                for(var n = 0; n<trailLength; n++)
-                                {pitchCol[n]  = new THREE.Color()
-                                }
+                                   trail=new Float32Array(trailLength*3*6*2);
+                                    trailColor=new Float32Array(trailLength*4*6*2);
                                 
-                                for(var v = 0; v<6*trailDepth;v++){
+                                if(window.INITIALIZED){
+                                
+                                    scene.remove(meshTrail)
+                                geomeTrail.dispose();
+                                 geomeTrail = new THREE.BufferGeometry();
+                                 geomeTrail.dynamic = true;
+                                 geomeTrail.setAttribute( 'position', new THREE.Float32BufferAttribute( trail, 3 ) );
+                                  geomeTrail.setAttribute( 'color', new THREE.Float32BufferAttribute( trailColor, 4 ));
+                                 meshTrail = new THREE.Mesh(geomeTrail, materialTrail);
+                                scene.add(meshTrail)
+
+                                
+                                trailPositionAttribute = geomeTrail.getAttribute( 'position' );
+                                trailColorAttribute = geomeTrail.getAttribute( 'color' );
+                                
+                                for(var n = 0; n<trailLength; n++)
+                                pitchCol[n]  = new THREE.Color()
+                                
+                                
+                                for(var v = 0; v<6*trailDepth;v++)
                                     geomeTrail.getAttribute( 'position' ).setXYZ(v,0,0,0);
-                                }
+                                
                             }
                                                   trailDepth=0.;
 
@@ -569,8 +589,6 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
                        let backBufferFlip=false;
                       let FeedbackrenderTarget,FeedbackrenderTargetFlipSide;
                        
-                                           const trail=new Float32Array(trailLength*3*6*2);
-                                           const trailColor=new Float32Array(trailLength*4*6*2);
        
                     const xenOctaveFactor = 12;
                                            const harmonicPzyghtheVertices = new Float32Array(xenOctaveFactor*12*3*6)
@@ -599,15 +617,15 @@ function setFFTdependantSizes(){
      window.zoomOutRatchetThreshold=1./bufferSize;
      
      
-      star= new Float64Array(numberOfBins*3);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
-      starColors= new Float64Array(numberOfBins*4);
+      star= new Float32Array(numberOfBins*3);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
+      starColors= new Float32Array(numberOfBins*4);
      
                         starArms = numberOfBins;
                       
       starCount = Math.ceil(starArms*60*secondsToEdge);
              xyStarParticleArray= Array(starCount).fill(null)
-      starStreamPoints= new Float64Array(starCount*3*6);
-      starStreamColors= new Float64Array(starCount*4*6);
+      starStreamPoints= new Float32Array(starCount*3*6);
+      starStreamColors= new Float32Array(starCount*4*6);
      
 
                                  testar = new Float64Array((EldersLeg>0)?EldersLeg:0);
@@ -689,7 +707,7 @@ function setFFTdependantSizes(){
                                            
 function init() {
              setFFTdependantSizes();
-             setTrailSize();
+             //setTrailSize();
                         uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
            uniforms.resolution.value = new THREE.Vector2(window.innerWidth,window.innerHeight);
      uniforms.coords.value = new THREE.Vector2(0.,0.);
@@ -888,11 +906,13 @@ function init() {
                           }
      window.INITIALIZED =true;
      setFFTdependantSizes();
+             setTrailSize();
+
      setDynamicSampler2ds();
   renderer.setPixelRatio( rez);
      onWindowResize();
-    animate();
      adjustThreeJSWindow();
+    animate();
 
 }
                                            window.INITIALIZED=false;
@@ -2108,7 +2128,6 @@ var fingerStride = 0;
                                   
                                  // starMesh.geometry.dispose();
                                   //starMesh.geometry=starGeometry;
-         
          
          
          
