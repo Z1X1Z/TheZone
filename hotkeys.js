@@ -120,7 +120,7 @@ window.uniforms={}
 
 function resetAll(){
     Object.assign(window.uniforms,window.uniformsInitial);
-            if(!("BibleON" in window)&&!window.INITIALIZED)window.BibleON = 1;
+            if(!("BibleON" in window))window.BibleON = 1;
             window.muteToggle = false;
             window.zoom=1.;
             window.RockInTheWater=0;
