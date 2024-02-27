@@ -1,43 +1,219 @@
-if(!("BibleON" in window))window.BibleON = 1;
-window.muteToggle = false;
-window.fftSize=512
-window.zoom=1.;
-window.RockInTheWater=0;
-window.octaveStars=true;
-window.BulletMine=0;
-window.starClover=true;
-window.blankBackground=false;
-window.twist = 0.;
-window.flip = 1.;
-window.highORlow=1.;
-window.FeedbackSound = false;
-window.spirographMODE = 1;
-window.pzyghthe=0;
-window.dynamicCoring=false;
-window.rez=window.devicePixelRatio/2.;//define resolution
-window.Oreo=true;
-window.shouldShowStar = true;
-window.flame = false;
-window.muteTouchTouchVolume = true;
-window.muteVoiceTouchVolume = false;
-window.grabStar = false;
-if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
-  {
-      rez=window.devicePixelRatio/4.;
-      //fftSize=512;
-      //trailLength = 144;
-      mobile=true;
-  }
-   if(navigator.userAgent.toLowerCase().match(/mobile/i)){
-       rez=window.devicePixelRatio/4.;
-       //fftSize=512;
-       //trailLength = 144;
-       mobile=true;
-   }
+const leaf = -1.3247179572447460259609088544780973407344040569017333645340150503028278512455475940546993479817872803299109209947422074251089026390458977955943147570967234717541668390388674187517369315842535499082466223545337273504589879909568150627745509802486213012169894157524574548625075626524610368938904839932269952074975962828868556908150704513696109853352577281586033441141927828273765296032993584674231028483241695239006108543338219;
+const gr = 1.61803398874989484820458683436563811772030917980576286213544862270526046281890244970720720418939113748475408807538689175212663386222353693179318006076672635443338908659593958290563832266131992829026788067520876689250171169620703222104321626954862629631361443814975870122034080588795445474924618569536486444924104432077134494704956584678850987433944221254487706647
+window.pixelShaderSize = 7;
+const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
+const movementRateORIGINAL = -leaf;
+const starshipSize = Math.E**leaf/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
+                            const zoomFrames = 60;//frames to double zoom
+let ZR = Math.E**(Math.log(.5)/zoomFrames);
+                  const mf = 1.75;
+const MR = mf/zoomFrames;
+let trailLength;//set in setTrailSize()
+let starShipDepthInSet;//set in setTrailSize()
+
+window.uniformsInitial = {
+fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:1048./44100.},//actually 2/nyquist
+radialWarp:{value:1.},
+    pixelSTARon:{value:true},
+
+micIn:{value:null},
+    audioBuffer:{value:null},
+    omniDynamic:{value:null},
+coreTextureSampler:{value:null},
+STAR:{value:null},
+EDEN:{value:null},
+uberDuper:{value:null},
+    
+        eden:{value: 0},
+        spokesVisualizeColors: {value: false    },
+        note:{value: 0.},
+        brelued:{value: 1.},
+        balloonsON:{value: 0.},
+        balloonsONexponential:{value: 0.},
+        sparklesON:{value: false},
+        SPHEREofTheLORD:{value: false},
+            
+        clvrVariant1:{value: false},
+        clvrVariant2:{value: false},
+        clvrVariant3:{value: false},
+        clvrVariant4:{value: false},
+        clvrVariant5:{value: false},
+        clvrVariant6:{value: false},
+        clvrVariant7:{value: false},
+        clvrVariant8:{value: false},
+            
+        Spoker:{value: true    },
+        spokelover:{value: true    },
+        continuumClover:{value: false    },
+        Inherited:{value: true    },
+        cloverSlide:{value: false    },
+
+        time: {value:.0 },
+        rate: {value: 1.},
+
+        zoom: {value:  .99},
+        colorCombo: {value: -1 },
+        free: {value: false },
+        MetaCored: {value: true },
+        externalCores: {value: 0. },
+        centralCores: {value: 0. },
+        outerCoresOff: {value: false},
+        upCoreCycler: {value: 0. },
+
+        morph: {value: 0.0 },
+
+        fourCreats: {value: 1 },
+        Character: {value: 0 },
+        articles: {value: false },
+        helm: {value: false },
+        wheel: {value: false },
+        Refractelate: {value: false },
+        petals: {value:  .0 },
+
+        carousel: {value: 0.0 },
+        metaCarousel: {value: 0. },
+        spirated: {value: 0. },
+        hearTOL: {value: false},
+        colorInverter: {value:false},
+        metronome: {value: .99 },
+        time2dance: {value: 0.0 },
+        volume: {value: 1.0 },
+        totalAmp: {value: 1.0 },
+
+
+        resolution: {value:[window.innerWidth,window.innerHeight]},//these are later resolved to the THREE.vec2() uniforms
+        coords: {value: [0.,0.]},
+        coordSHIFT: {value: [0.,0.]},
+        duperZoom: {value:1.},
+        d: {value:[0.,0.]},
+        dotCoord:{value:[0.,0.]},
+
+
+        dynamicDance: {value: 0},
+        remediatedColors: {value: false },
+
+        Clovoid:{value:false},
+        dotted:{value:false},
+        baseN:{value: 2.718281828},
+
+        onehundredfortyfourthousand:{value:false},
+        shaderScale:{value:window.pixelShaderSize},
+        starSpin:{value:0.},
+        chirality:{value:1},
+        MannyONtrail:{value:1},
+        NightAndDay:{value:false},
+        starOnDot:{value:0},
+        gameOn:{value:false},
+        scoreLoaded:{value:false},
+        musicAngelMan:{value:0},
+        refactorCores:{value:1.},
+
+        fieldPowerBoost:{value:false},
+        fieldPowerBoostMeta:{value:false},
+        flipStar:{value:1.},
+        witnessFlip:{value:1.},
+        twistStar:{value:0.},
+        multiplicatorNexus:{value:false},//has problems may be discontinued
+        squareClover:{value:false},
+        mandelCloverFactor:{value:1.75},
+        exponentialPetals:{value:0.}
+        }
+window.uniforms={}
+
+function resetAll(){
+    Object.assign(window.uniforms,window.uniformsInitial);
+            if(!("BibleON" in window))window.BibleON = 1;
+            window.muteToggle = false;
+            window.zoom=1.;
+            window.RockInTheWater=0;
+            window.octaveStars=true;
+            window.BulletMine=0;
+            window.starClover=true;
+            window.blankBackground=false;
+            window.twist = 0.;
+            window.flip = 1.;
+            window.highORlow=1.;
+            window.FeedbackSound = false;
+            window.spirographMODE = 1;
+            window.pzyghthe=0;
+            window.dynamicCoring=false;
+
+    
+    if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
+      {
+          rez=window.devicePixelRatio/7.;
+          mobile=true;
+      }
+      else if(navigator.userAgent.toLowerCase().match(/mobile/i)){
+           rez=window.devicePixelRatio/7.;
+           mobile=true;
+       }
+    else           rez=window.devicePixelRatio/2.;
+
+    
+    window.Oreo=true;
+            window.shouldShowStar = true;
+            window.flame = false;
+            window.muteTouchTouchVolume = true;
+            window.muteVoiceTouchVolume = false;
+            window.grabStar = false;
+
+
+
+            window.movementRate=movementRateORIGINAL;
+            window.zoomRate=movementRateORIGINAL;
+            window.radialWarp=1.;
+            window.trailSecondsLong = 3.5;
+
+            window.touchMode=false;
+            window.volumeSpeed = false;
+
+            window.twist = 0.;
+            window.flip = 1.;
+            window.center = false;
+            window.zoomOutRatchetThreshold=1./fftSize;
+
+            window.ConcertKey = 440;
+
+            window.textON=false;
+            window.dupered = false;
+            window.haptic = false;
+            window.haptic2 = false;
+            window.onO = false;
+    window.EldersLeg = 24;
+    window.fftSize=2048;
+    if(window.INITIALIZED){
+        setFFTdependantSizes();
+        setDynamicSampler2ds();
+        setMicInputToStarPIXEL();
+        setTrailSize()
+        renderer.setPixelRatio( rez)
+    }
+    if(wadLOADED)
+    {
+        for(var o=0;o<maxTouchSoundCount;o++){
+            
+            sound[o].stop()
+            sound2[o].stop()
+            
+                zound[o].stop()
+                zound2[o].stop()
+            
+            
+                xound[o].stop()
+                xound2[o].stop()
+                
+                    tound[o].stop()
+                    tound2[o].stop()
+           }
+    }
+}
+resetAll();
+
+
 let osmdStaffsVisible = 0;
 let runningHash = true;
 window.number = "";
-window.EldersLeg = 24;
 function readHash(){
         let hashindex = 0;
         while (hashindex<location.hash.length)
@@ -365,7 +541,8 @@ function callKey(event){
     
     else if (key=="\"") uniforms[ "colorCombo" ].value = 13;
     else if (key=="d") uniforms[ "colorCombo" ].value = 14;
-    else if (key=="x") uniforms[ "colorCombo" ].value = 15;
+    else if (key=="x")  uniforms[ "colorCombo" ].value = 15;
+    
     else if (key=="*") uniforms[ "colorCombo" ].value = 20;
     
     else if (key=="X"){
@@ -478,8 +655,8 @@ function callKey(event){
         else closeFullscreen();
     }
     else if (key=="H")uniforms.cloverSlide.value=!uniforms.cloverSlide.value;
-    
-    else if (key==" "||key=="~")
+    else if (key==" ")resetAll();
+    else if (key=="~")
     {
         onO=!onO;
     }

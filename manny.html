@@ -1009,6 +1009,7 @@ Reset Zoom![L]</a><br>
             </script>
         <div class="dropdown">
           <button class="dropbtn">Word
+            
           <div id="scoreDropContent" class="dropdown-content" style="font-size:1em; column-count:1;">
              
           <select name="song" id="song"
@@ -1142,7 +1143,12 @@ scoreColorInversion=false;
                   <label for="BibleToggle">Listen to The Bible[.b]</label>
                   
                   <br>
+                  <a id="reset" name="t"  onclick="
+                  key  = ' ';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                      Reset![SPACE]</a><br>
               </div>
+          
           </button>
 
                   </div>
@@ -2368,7 +2374,7 @@ else      for (float counter=0.;counter<iterations;counter++)if(dstnce<50.){
         beta   =  hsv2rgb(vec3(correctionBrueled/(2.*PI),1.,1.));
         //return beta;
 }
- if(dstnce<CORE_DELIMITER||(spokesVisualizeColors&&dstnce<4./3.)) {
+ if(dstnce<2./3.||(spokesVisualizeColors&&dstnce<4./3.)) {
             float decayCanceller=1.;
             if(spokesVisualizeColors)decayCanceller = 2.;
             //if(morph!=0.)decayCanceller=decayCanceller*decayCanceller;
@@ -3685,9 +3691,8 @@ gl_FragColor=fin/vec4(confraculator
 
 </script>
 <script src="loadMicrophone.js"></script>
-
+<script src="hotkeys.js" ></script>
 <script src="starshipMod.js"></script>
-<script src="hotkeys.js"></script>
 <script src="bigTreeOfLife.js"></script>
 
     </body>

@@ -1,6 +1,5 @@
 var THREE;
-const leaf = -1.3247179572447460259609088544780973407344040569017333645340150503028278512455475940546993479817872803299109209947422074251089026390458977955943147570967234717541668390388674187517369315842535499082466223545337273504589879909568150627745509802486213012169894157524574548625075626524610368938904839932269952074975962828868556908150704513696109853352577281586033441141927828273765296032993584674231028483241695239006108543338219;
-const gr = 1.61803398874989484820458683436563811772030917980576286213544862270526046281890244970720720418939113748475408807538689175212663386222353693179318006076672635443338908659593958290563832266131992829026788067520876689250171169620703222104321626954862629631361443814975870122034080588795445474924618569536486444924104432077134494704956584678850987433944221254487706647
+
 if(window.useCDN)import("three").then(module => { THREE=module})
 .catch((err) => {
     console.log("Error loading threeJS module;load old Threejs instead");
@@ -34,41 +33,20 @@ function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js lo
 stallTillTHREELoaded();
 
 
-window.pixelShaderSize = 7;
-const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
-const movementRateORIGINAL = -leaf;
-window.movementRate=movementRateORIGINAL;
-window.zoomRate=movementRateORIGINAL;
-window.radialWarp=1.;
-const starshipSize = Math.E**leaf/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
-let trailSecondsLong = 3.5;
-let starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;//base Z value
-
-                            const zoomFrames = 60;//frames to double zoom
-let ZR = Math.E**(Math.log(.5)/zoomFrames);
-                  const mf = 1.75;
-const MR = mf/zoomFrames;
-let trailLength = Math.ceil(zoomFrames*trailSecondsLong);
-                          
 const dotSize = starshipSize;
 
 let coringValue = 1./-leaf/gr;
 let screenPressCoordX=0, screenPressCoordY=0;
 window.pointerZoom=false;
 let coordX=0., coordY=0.;
-window.touchMode=false;
-window.volumeSpeed = false;
 window.zoomCageSize = window.pixelShaderSize/4.;//radius of zoom bounding
 
                   window.uniformsLoaded=false;
-window.twist = 0.;
-window.flip = 1.;
 
 //if (navigator.maxTouchPoints <1) rez = window.devicePixelRatio;//redefine resolution for desktop
                           
 let colorSound;
 let colorSoundPURE;
-let center = false;
 let loopsRun =0;
 let mobile = false;
 
@@ -111,7 +89,6 @@ var frequencies,
                                                         mustarD,
                         star,starColors;
                             
-window.zoomOutRatchetThreshold=1./bufferSize;
 
 let Fret = {x:null,y:null,index:null,volume:0.,note:-12};
 const loudestFret=Array(4).fill(Fret);
@@ -178,7 +155,6 @@ let averagedAmp =  0;
 let len=0;
                             let phase = 0;
                             let phase2 = 0;
-let onO = false;
 var colorInstant=0.;
 let updateInstant = false;
                             let innerSpirographFractionalSize=0;
@@ -241,7 +217,6 @@ function spiral_compress(){
                             }
                             
 };
-window.ConcertKey = 440;
 
 
 
@@ -584,114 +559,7 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
                              let   omniDynamicEngaged=false;
                                            window.zoom=1.;
 
-                            let uniforms = {
-         fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:1048./44100.},//actually 2/nyquist
-         radialWarp:{value:1.},
-         micIn:{value:null},audioBuffer:{value:null},
-             
-         pixelSTARon:{value:true},
-omniDynamic:{value:null},
-coreTextureSampler:{value:null},
-STAR:{value: null    },
-EDEN:{value: null   },
-uberDuper:{value: null   },
-    
-eden:{value: 0},
-spokesVisualizeColors: {value: false    },
-         note:{value: 0.},
-         brelued:{value: 1.},
-                            balloonsON:{value: 0.},
-                            balloonsONexponential:{value: 0.},
-sparklesON:{value: false},
-SPHEREofTheLORD:{value: false},
-                                
-clvrVariant1:{value: false},
-clvrVariant2:{value: false},
-clvrVariant3:{value: false},
-clvrVariant4:{value: false},
-clvrVariant5:{value: false},
-clvrVariant6:{value: false},
-clvrVariant7:{value: false},
-clvrVariant8:{value: false},
-                                
-Spoker:{value: true    },
-spokelover:{value: true    },
-continuumClover:{value: false    },
-Inherited:{value: true    },
-cloverSlide:{value: false    },
-    
-    micIn : {  value: null }, // float array (vec3)
-time: {value:.0 },
-rate: {value: 1.},
-    
-zoom: {value:  window.zoom },
-colorCombo: {value: -1 },
-free: {value: false },
-MetaCored: {value: true },
-externalCores: {value: 0. },
-centralCores: {value: 0. },
-outerCoresOff: {value: false},
-upCoreCycler: {value: 0. },
-    
-morph: {value: 0.0 },
-    
-fourCreats: {value: 1 },
-Character: {value: 0 },
-articles: {value: false },
-helm: {value: false },
-wheel: {value: false },
-Refractelate: {value: false },
-petals: {value:  .0 },
-    
-carousel: {value: 0.0 },
-metaCarousel: {value: 0. },
-spirated: {value: 0. },
-hearTOL: {value: false},
-colorInverter: {value:false},
-metronome: {value: .99 },
-time2dance: {value: 0.0 },
-volume: {value: 1.0 },
-totalAmp: {value: 1.0 },
-    
-    
-resolution: {value:null},//these are later resolved to the THREE.vec2() uniforms
-coords: {value: [0,0]},
-coordSHIFT: {value: [0,0]},
-duperZoom: {value:1.},
-       d: {value:null},
- dotCoord:{value:null},
-
-     
-       dynamicDance: {value: false},
-       remediatedColors: {value: false },
-
-       Clovoid:{value:false},
-       dotted:{value:false},
-       baseN:{value: 2.718281828},
-
-         onehundredfortyfourthousand:{value:false},
-         shaderScale:{value:window.pixelShaderSize},
-       starSpin:{value:0.},
-       chirality:{value:1},
-       MannyONtrail:{value:1},
-       NightAndDay:{value:false},
-       starOnDot:{value:0},
-       gameOn:{value:false},
-       scoreLoaded:{value:false},
-       musicAngelMan:{value:0},
-       refactorCores:{value:1.},
-
-       fieldPowerBoost:{value:false},
-       fieldPowerBoostMeta:{value:false},
- flipStar:{value:1.},
-         witnessFlip:{value:1.},
- twistStar:{value:0.},
-       multiplicatorNexus:{value:false},//has problems may be discontinued
-       squareClover:{value:false},
-         mandelCloverFactor:{value:1.75},
-         exponentialPetals:{value:0.}
-       }
-
+                        
                                            var minimumDimension=Math.min(window.innerHeight,window.innerWidth);
                                            var maximumDimension=Math.max(window.innerHeight,window.innerWidth);
                                            var heightPX=window.innerHeight,widthPX=window.innerWidth;
@@ -821,6 +689,7 @@ function setFFTdependantSizes(){
                                            
 function init() {
              setFFTdependantSizes();
+             setTrailSize();
                         uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
            uniforms.resolution.value = new THREE.Vector2(window.innerWidth,window.innerHeight);
      uniforms.coords.value = new THREE.Vector2(0.,0.);
@@ -1139,7 +1008,6 @@ function onWindowResize() {
 
   }
 
-            let textON=false;
             let lastTime=0.;
             let ticker = 0;
             let FPS=60;
@@ -1212,8 +1080,7 @@ let       preserveOuterCore = true;
                        
                        
                        
-                      window.dupered = false;
-                       let zoomCap32 =.00000075;
+                       const zoomCap32 =.00000075;
 function zoomRoutine(){
     const metaDepth=(!dupered)?zoomCap32:zoomCap32**2;//due to pixelization limits
     let zoomCone=metaDepth*fromCenter;
@@ -1246,7 +1113,6 @@ function zoomRoutine(){
                        
 
                      let thisChunk=0, lastChunk=0;
-                     window.haptic = false;
                     let vibrateArray= Array();
 
                     function mcphrth(){
@@ -1328,7 +1194,7 @@ function setOSMDcolors()
          if(sheetTranslucent){
              
              
-             if(scoreColorInversion)
+             if(!scoreColorInversion)
                  osmd.setOptions({defaultColorMusic: "#000000FF"});
              else
                  osmd.setOptions({defaultColorMusic: "#FFFFFFFF"});
@@ -1338,7 +1204,7 @@ function setOSMDcolors()
          }
          else{
              let blackWhiteHASH = ""
-             if(scoreColorInversion)
+             if(!scoreColorInversion)
              {
                  osmd.setOptions({defaultColorMusic: "#000000FF"});
                  blackWhiteHASH = "#FFFFFFFF"
