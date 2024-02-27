@@ -140,7 +140,7 @@ function resetAll(){
     
     if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
       {
-          window.rez=window.devicePixelRatio/3.;
+          window.rez=window.devicePixelRatio/4.;
           window.mobile=true;
       }
       else if(navigator.userAgent.toLowerCase().match(/mobile/i)){
@@ -149,7 +149,7 @@ function resetAll(){
        }
       else       {
           
-          window.rez=window.devicePixelRatio/2.;
+          window.rez=window.devicePixelRatio/3.;
           window.mobile=false;
           
       }
