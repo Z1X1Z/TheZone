@@ -140,7 +140,7 @@ function resetAll(){
     
     if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
       {
-          window.rez=window.devicePixelRatio/4.;
+          window.rez=window.devicePixelRatio/5.;
           window.mobile=true;
       }
       else if(navigator.userAgent.toLowerCase().match(/mobile/i)){
@@ -371,6 +371,12 @@ function callKey(event){
         else if( uniforms.exponentialPetals.value==-1.) uniforms.exponentialPetals.value=0.;
         
     }
+    else if (event.altKey&&(key=="œ"||key=="q")){
+            if          ( uniforms[ "colorCombo" ].value >1)          uniforms[ "colorCombo" ].value = -1;
+            else uniforms[ "colorCombo" ].value = -(Math.abs(uniforms[ "colorCombo" ].value+1-17.))%17;
+        
+        }
+
     else if (event.altKey&&(key=="≈"||key=="x")){ if(!runningHash||!window.online) uniforms.brelued.value*=-1;}
     else if (event.altKey&&(key=="Ω"||key=="z"))uniforms.witnessFlip.value*=-1.;
     else if (event.altKey&&(key=="π"||key=="p"))uniforms.pixelSTARon.value=!uniforms.pixelSTARon.value;
