@@ -144,12 +144,12 @@ function resetAll(){
           window.mobile=true;
       }
       else if(navigator.userAgent.toLowerCase().match(/mobile/i)){
-           window.rez=window.devicePixelRatio/7.;
+           window.rez=window.devicePixelRatio/5.;
            window.mobile=true;
        }
       else       {
           
-          window.rez=window.devicePixelRatio/3.;
+          window.rez=window.devicePixelRatio/2.;
           window.mobile=false;
           
       }
