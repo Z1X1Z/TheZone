@@ -569,7 +569,7 @@ let lineMat, lineGeometry, line;
 
                     let radialMaterial, radialLine, radialGeometry;
                     let starsANDwitnessesMesh,starsANDwitnessesGeometry;
-                    let starStreamColors,starStreamPoints,starCount;
+                    let starStreamColors,starStreamPoints;//window.starCount
                     let starStreamMesh,starStreamMaterial,starStreamGeometry;
                            let scene, shaderScene,feedbackScene, feedbackSceneFlip;
 
@@ -620,7 +620,8 @@ function setFFTdependantSizes(){
       starColors= new Float32Array(numberOfBins*4);
      
                         starArms = numberOfBins;
-                      
+             window.starCount = Math.ceil(starArms*60*secondsToEdge);
+
       starCount = Math.ceil(starArms*60*secondsToEdge);
              xyStarParticleArray= Array(starCount).fill(null)
       starStreamPoints= new Float32Array(starCount*3*6);

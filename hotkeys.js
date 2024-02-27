@@ -169,6 +169,8 @@ function resetAll(){
             window.trailSecondsLong = 3.5;
             window.trailLength = Math.ceil(zoomFrames*trailSecondsLong);
             window.starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;
+            window.starCount = Math.ceil(starArms*60*secondsToEdge);
+
             window.touchMode=false;
             window.volumeSpeed = false;
 
