@@ -2805,7 +2805,7 @@ return
          {for (int t = 0; t < 30; t++) {
                  s = vec2(((s.x * s.x - s.y * s.y) +flip* p.x), (s.x * s.y + flip*p.y));
                  if(flip<1.)
-                 s.x = 1./pow(s.x,flip)*sign(s.x*flip);
+                 s.x = 1./pow(abs(s.x),flip)*sign(s.x*flip);
                  else s.x = 1./s.x;
            l = length(s);
 
@@ -3462,9 +3462,9 @@ vec2 dance = vec2(0.);
                        mny=bod(characterOnTrailP,moveDynamic)+shiny(characterOnTrailP*1.22112211,moveDynamic)+clamp(mannyFace,0.,1.);
                    }
                    else if (Character==1){
-                       vec2 lerper = vec2(lerp2(time2dance/13.),lerp2(time2dance*gr/13.));
+                       vec2 lerper = vec2(lerp(time2dance/13.),lerp(time2dance*gr/13.));
                        mny = MannyWoManny(characterOnTrailP,
-                                                        lerper,move/8.
+                                                        lerper,move/5.
                                                         )+robeL(characterOnTrailP,lerper,move/5.
                                                                 )*.95;}
                    else if (Character==2){
