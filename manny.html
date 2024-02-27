@@ -2332,8 +2332,11 @@ if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
                              *4./3./(1./log(3.)+(1.-1./log(3.)  ))/1.75
                              )*log(2.)/log(metaCoreDriveFactor)+loops;
                              */
+                                                         float colorComputationBoost =5.;//increasing number decreases processing and clarity
+                                                         float baseDelimiter =50.;
+
 if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
-else      for (float counter=0.;counter<iterations;counter++)if(dstnce<50.){
+else      for (float counter=0.;counter<iterations;counter++)if(dstnce<baseDelimiter/colorComputationBoost){
 
     float OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
     float OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
@@ -2569,6 +2572,14 @@ hyperCoreOUTPUT--;
 }else break;
                   
 ///if(multiplicatorNexus)s*=colorShift/88.8;
+
+s/=  pow(colorComputationBoost,1./baseDelimiter);
+                                                                       
+                                                                       s.y*= pow(colorComputationBoost,2.);
+                                                                       s.x*= pow(colorComputationBoost,.5);
+                                                                      // s.z*= pow(2.,colorComputationBoost);
+colorAccumulator*=colorComputationBoost;//  pow(colorComputationBoost,1./50.);
+
 vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                      if(colorCombo==-7) o=vec3(s.y,s.x/9.5,1.-s.x/12.);
                              else if(colorCombo==0) o=vec3(s.x/s.y)*sign(s.x*s.y)*22.;
@@ -2581,7 +2592,7 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                     else if(colorCombo==-1) {
                               o=       (1.-(vec3(s.y/125.-s.x*s.y/888.+s.y/25000.,s.x/8.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
                                                 *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
-                                                *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));;
+                                                *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
                                                 }
                                 else if(colorCombo==-8) {
                                             s=-colorAccumulator*(coresIn+1.)*((coresIn+2.)/(60.+1.)-.5);
