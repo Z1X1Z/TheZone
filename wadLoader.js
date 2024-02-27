@@ -345,34 +345,36 @@ let c = document.body;//document.getElementById("container")
  function attachListeners(){
             c.addEventListener('pointerdown', function(e)
                                {
-                
-                
+                console.log(document.activeElement)
+                console.log(document.activeElement.className=="body")
                 //   e.stopImmediatePropagation();          //e.preventDefault();
-                
-
-                let touchLimit=0;
-                while (touchNumber.get(cycler)!="off"&&touchLimit<maxTouchSoundCount)
-                {
-                    cycle=(cycle+1)%maxTouchSoundCount;
-                    cycler=(cycler+1)%maxTouchSoundCount;
-
-                    touchLimit++;
+                if(document.activeElement.className=="body"){
+                    
+                    let touchLimit=0;
+                    while (touchNumber.get(cycler)!="off"&&touchLimit<maxTouchSoundCount)
+                    {
+                        cycle=(cycle+1)%maxTouchSoundCount;
+                        cycler=(cycler+1)%maxTouchSoundCount;
+                        
+                        touchLimit++;
+                    }
+                    
+                    pressIndex.set (e.pointerId,cycler)
+                    touchNumber.set(cycler,cycle)
+                    *///needs to be sorted out to allow for more consecutive uninterrupted touches
+                    getPressure(e);
+                    startSound(e);
                 }
-                
-                pressIndex.set (e.pointerId,cycler)
-                touchNumber.set(cycler,cycle)
-                 *///needs to be sorted out to allow for more consecutive uninterrupted touches
-                getPressure(e);
-                startSound(e);
-                
             }, false);
             c.addEventListener('pointermove', function(e) {
-                let tn = touchNumber.get(pressIndex.get(e.pointerId));
-                if(typeof tn == "number"){
-                    getPressure(e);
-                    followSound(e);
-                }
+                if(document.activeElement.className=="body" ){
 
+                    let tn = touchNumber.get(pressIndex.get(e.pointerId));
+                    if(typeof tn == "number"){
+                        getPressure(e);
+                        followSound(e);
+                    }
+                }
                 // e.stopImmediatePropagation();// e.preventDefault();
             }, false);
             
