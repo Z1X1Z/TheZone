@@ -8,8 +8,8 @@ const starshipSize = Math.E**leaf/Math.sqrt(2.);//divided by Math.sqrt(2.) to se
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   const mf = 1.75;
 const MR = mf/zoomFrames;
-let trailLength;//set in setTrailSize()
-let starShipDepthInSet;//set in setTrailSize()
+window.trailLength=100;//set in setTrailSize()
+window.starShipDepthInSet=1.;//set in setTrailSize()
 
 window.uniformsInitial = {
 fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:1048./44100.},//actually 2/nyquist
@@ -141,7 +141,7 @@ function resetAll(){
     
     if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
       {
-          rez=window.devicePixelRatio/7.;
+          rez=window.devicePixelRatio/3.;
           mobile=true;
       }
       else if(navigator.userAgent.toLowerCase().match(/mobile/i)){
