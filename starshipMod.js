@@ -38,7 +38,6 @@ const dotSize = starshipSize;
 let coringValue = 1./-leaf/gr;
 let screenPressCoordX=0, screenPressCoordY=0;
 window.pointerZoom=false;
-let coordX=0., coordY=0.;
 window.zoomCageSize = window.pixelShaderSize/4.;//radius of zoom bounding
 
                   window.uniformsLoaded=false;

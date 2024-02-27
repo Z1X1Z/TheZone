@@ -121,6 +121,8 @@ window.uniforms={}
 window.settingsSet = false;
 function resetAll(){
     Object.assign(window.uniforms,window.uniformsInitial);
+            window.coordX=0.; window.coordY=0.;
+
             if(!("BibleON" in window))window.BibleON = 1;
             window.muteToggle = false;
             window.zoom=1.;
