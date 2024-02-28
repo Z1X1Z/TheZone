@@ -15,7 +15,7 @@ else{
 
 
 function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
-    if(window.settingsSet&&typeof THREE=="object" && document.visibilityState=="visible"
+    if(!runningHash&&typeof THREE=="object" && document.visibilityState=="visible"
        &&(window.micOn||(location.hash.includes("t")&&!location.hash.includes(",t")))){
        document.getElementById( "background_wrap").style =  "height: 0px; width: 0px;"
         //"background-image: none;";//turn off splash!
@@ -930,37 +930,43 @@ function setDynamicSampler2ds(){
      uniforms.coreTextureSampler.needsUpdate = true;
  }
 function setMicInputToStarPIXEL(){
-             //let fftSizeLocal = INITIALIZED?  fftSize:1;
-            let dataArrayBuffer =new Float32Array( numberOfBins ).fill(0);
-             let inputDataBuffer =new Float32Array( fftSize ).fill(0);
-             
-             let withinMaxsafeSizeBins=(numberOfBins<=2**13)//(EldersLeg<=682);
-             let withinMaxsafeSizeFFT=(fftSize<=2**13)//(EldersLeg<=682);
-            // console.log(fftSize)
-            // console.log(fftSize)
              if(!touchMode||window.shouldShowStar)
              {
+                 
+                    let withinMaxsafeSizeBins=(numberOfBins<=2**13)//(EldersLeg<=682);
+                    let withinMaxsafeSizeFFT=(fftSize<=2**13)//(EldersLeg<=682);
                  uniforms.sampleRate.value =       audioX.sampleRate     ;
                  uniforms.fftSize.value =             analyser.fftSize;
                  uniforms.nyq.value =            analyser.fftSize/audioX.sampleRate/2.;
                  
                  //console.log(nyq)
-                 if(withinMaxsafeSizeBins)for (var x = 0; x < numberOfBins; x++)dataArrayBuffer[x]=dataArray[x]/255.;
-                if(withinMaxsafeSizeFFT) for (var x = 0; x < fftSize; x++)inputDataBuffer[x]=inputData[x];
+                 if(withinMaxsafeSizeBins){
+                     let dataArrayBuff=dataArrayBuffer=new Float32Array( numberOfBins ).fill(0.);
+                     for (var x = 0; x < numberOfBins; x++)dataArrayBuffer[x]=dataArray[x]/255.;
+                     
+                     // callibratorArray
+                     let micTexBuf = new THREE.DataTexture( dataArrayBuffer, (withinMaxsafeSizeBins)?numberOfBins:1, 1, THREE.RedFormat,THREE.FloatType);
+                     micTexBuf.needsUpdate=true;
+                     
+                     uniforms[ "micIn" ].value = micTexBuf;
+                     uniforms.micIn.needsUpdate = true;
+                     
+                 }
+                 if(withinMaxsafeSizeFFT) {
+                     let inputDataBuffer =new Float32Array( fftSize ).fill(0.);
+
+                     for (var x = 0; x < fftSize; x++)inputDataBuffer[x]=inputData[x];
+                     
+                     
+                     
+                     let RAWaudioTexBuf = new THREE.DataTexture(inputDataBuffer , (withinMaxsafeSizeFFT)?fftSize:1, 1, THREE.RedFormat,THREE.FloatType);
+                     RAWaudioTexBuf.needsUpdate=true;
+                     
+                     uniforms["audioBuffer"].value = RAWaudioTexBuf;
+                     uniforms.audioBuffer.needsUpdate = true;
+                 }
+
              }
-             // callibratorArray
-
-             let micTexBuf = new THREE.DataTexture( dataArrayBuffer, (withinMaxsafeSizeBins)?numberOfBins:1, 1, THREE.RedFormat,THREE.FloatType);
-             micTexBuf.needsUpdate=true;
-             
-             
-             let RAWaudioTexBuf = new THREE.DataTexture(inputDataBuffer , (withinMaxsafeSizeFFT)?fftSize:1, 1, THREE.RedFormat,THREE.FloatType);
-             RAWaudioTexBuf.needsUpdate=true;
-
-             uniforms[ "micIn" ].value = micTexBuf;
-             uniforms.micIn.needsUpdate = true;
-             uniforms["audioBuffer"].value = RAWaudioTexBuf;
-             uniforms.audioBuffer.needsUpdate = true;
 
              //console.log(uniforms.micIn.value[0])
 
