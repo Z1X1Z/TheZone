@@ -201,7 +201,7 @@ let maxLetterDepth=-1;
                 iframe.setAttribute("width", "0");
                 iframe.setAttribute("height", "0");
 }
-                if(!location.hash.includes(".b"))
+                if(!location.hash.includes(".b")||window.android)
                window.BibleON=0;
 
                 }
@@ -3754,7 +3754,7 @@ vec4 tree = vec4( clamp(
           vec3 confraculator = vec3(1.);
           if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
           
-gl_FragColor=                                                      //  vec4(         heart(p*2.,vec2(0.)),1.);
+gl_FragColor=   vec4(.5);                                                   //  vec4(         heart(p*2.,vec2(0.)),1.);
 fin/vec4(confraculator
                            ,1.);
                        
