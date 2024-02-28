@@ -1006,7 +1006,7 @@ function onWindowResize() {
                             heightPX=window.innerHeight-correlationForTextY;
                             widthPX=window.innerWidth-correlationForTextX;
                         
-                        if(BibleON==0)document.getElementById("Bible").height=window.innerHeight/-leaf;
+                      //  if(BibleON==0)document.getElementById("Bible").height=window.innerHeight/-leaf;
 
             if("osmd" in window&&osmd!=null)
             {   osmd.width=widthPX;
