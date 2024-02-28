@@ -284,8 +284,7 @@ function hk() {
 
 }
 let hotkeyInputWindowActive = false;
-if(//navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' &&
-   navigator.maxTouchPoints > 1)
+if(mobile)
     hk();
 
 
@@ -307,8 +306,7 @@ function getKey(){
 
 
 
-if(//!(navigator.userAgent.toLowerCase().match(/mobile/i)||navigator.platform === 'MacIntel' &&
-   navigator.maxTouchPoints < 1)//)//if not mobile
+if(!mobile)//)//if not mobile
 window.addEventListener('keydown', function(event) {callKey(event); return true;}, false);
 
     window.lastKey = "";
