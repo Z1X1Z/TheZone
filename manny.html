@@ -2851,7 +2851,8 @@ return
                                 l=vec3(2.-abs(s.y*-sin(-t.x))*19.)*-sin(-t.x);//middle horn
                if(s.x>-.1)l=vec3(-sin(t.x)-(s.x*(100.-100.*-sin(t.x*2.-3.14))*-sin(t.x)));
                }
-           vec3 ret = 1./l;
+          vec3  ret = vec3(0.);
+           if(l!=0.) ret = 1./l;
        return ret;
                                }
 
