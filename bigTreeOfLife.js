@@ -353,17 +353,22 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
                 //else
                 
                 s.divideScalar( Math.sqrt(2.));
-                var b =Math.pow(Math.abs(downSpoke),grOverLeaf);
-                
-                hyperCoreOUTPUT+=b;
-                hyperCoreBoosted+=b;
+                if(!wheel)
+                {
+                    var b =Math.pow(Math.abs(downSpoke),grOverLeaf);
+                    
+                    hyperCoreOUTPUT+=b;
+                    hyperCoreBoosted+=b;
+                }
             }
             
             else //if(  0.>=hyperCoreBoosted)
             {
-                
-                hyperCoreOUTPUT-=upSpoke;
-                hyperCoreBoosted-=upSpoke;
+                if(!wheel)
+                {
+                    hyperCoreOUTPUT-=upSpoke;
+                    hyperCoreBoosted-=upSpoke;
+                }
             }
             
         }

@@ -2530,19 +2530,24 @@ if(counter<hyperCoreBoosted){
    //  if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
      //else
 
+     
      s/=sqrt(2.);
-     float b =pow(abs(downSpoke),grOverLeaf);
+     if(!wheel){
 
+     float b =pow(abs(downSpoke),grOverLeaf);
   hyperCoreOUTPUT+=b;
   hyperCoreBoosted+=b;
+  }
      }
 
 else //if(  0.>=hyperCoreBoosted)
 {
-                 
+    if(!wheel){
+
               hyperCoreOUTPUT-=upSpoke;
               hyperCoreBoosted-=upSpoke;
              }
+    }
  }
 
    if(continuumClover){//engage continualization
