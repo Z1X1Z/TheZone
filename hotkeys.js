@@ -141,7 +141,7 @@ function resetAll(){
     }
     window.coordX=0.; window.coordY=0.;
 
-    if(!("BibleON" in window))  window.BibleON=1;
+    if(window.BibleON=="unset")  window.BibleON=1;
     else if(settingsSet)
     {
         if(location.hash.includes(".b")||location.hash.includes(".c")) window.BibleON=1;
@@ -435,7 +435,7 @@ function callKey(event){
                         document.getElementById("nav").style.width="50%";
                         for(var b = 0; b<content.length; b++)content[b].style.width="50%";
                     }
-                    else {
+                    else if(!mobile&&runningHash) {
                         document.getElementById("Bible").height= "0%";
                         document.getElementById("Bible").width="0%";
                         document.getElementById("nav").style.width="100%";
