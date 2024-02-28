@@ -953,7 +953,7 @@ function setMicInputToStarPIXEL(){
                      uniforms.micIn.needsUpdate = true;
                      
                  }
-                 if(withinMaxsafeSizeFFT&&false) {
+                 if(withinMaxsafeSizeFFT) {
                      let size = (withinMaxsafeSizeFFT)?fftSize:1;
 
                      let inputDataBuffer =new Float32Array( size ).fill(0.);
