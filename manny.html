@@ -22,6 +22,7 @@
             <script>
                 window.iOS = false;
                 window.android=false;
+                window.mobile=false;
                 if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
                   {
                       window.rez=window.devicePixelRatio/5.;
@@ -1198,7 +1199,7 @@ scoreColorInversion=false;
     
     
     <script>
-     if(location.hash.includes(".c")){
+     if(location.hash.includes(".c")||location.hash.includes(".b")){
         let content = document.getElementsByClassName("dropdown-content");
 
         document.getElementById("nav").style.width="50%";
