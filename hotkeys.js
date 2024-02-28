@@ -143,7 +143,7 @@ function resetAll(){
 
     if(!("BibleON" in window))  window.BibleON=1;
     else if(location.hash.includes(".b")||location.hash.includes(".c")) window.BibleON=1;
-    else window.BibleON=0;
+    else window.BibleON=(1+BibleON)%2;
     
     
                           
