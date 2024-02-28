@@ -177,7 +177,7 @@ let maxLetterDepth=-1;
                 iframe.setAttribute("width", "0");
                 iframe.setAttribute("height", "0");
 }
-                if(!location.hash.includes(".b"))
+                if(!location.hash.includes(".b")||navigator.userAgent.toLowerCase().match(/mobile/i))
                window.BibleON=0;
 
                 }
