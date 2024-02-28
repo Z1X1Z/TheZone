@@ -164,15 +164,18 @@ function resetAll(){
             window.pzyghthe=0;
             window.dynamicCoring=false;
             window.starArms = fftSize/2.
-    
+    window.iOS = false;
+    window.android=true;
     if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
       {
           window.rez=window.devicePixelRatio/5.;
           window.mobile=true;
+          window.iOS=true;
       }
       else if(navigator.userAgent.toLowerCase().match(/mobile/i)){
            window.rez=window.devicePixelRatio/7.;
            window.mobile=true;
+          window.android=true;
        }
       else       {
           
