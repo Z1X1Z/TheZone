@@ -428,7 +428,7 @@ function callKey(event){
          else if(number == 0)  window.frames["TheBible"].location =  "https://www.biblehub.com/audio/";
              //   else if(location.hash.includes(".b"))document.getElementById("reader").value = 0.;
 
-                    if(window.BibleON==0)
+                    if(window.BibleON==0||(android&&runningHash))
                     {
                         document.getElementById("Bible").height="100%";
                         document.getElementById("Bible").width="50%";
