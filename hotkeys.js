@@ -428,7 +428,7 @@ function callKey(event){
 
         let content = document.getElementsByClassName("dropdown-content");
         //iframe redirect from https://stackoverflow.com/questions/28159920/how-to-redirect-page-inside-iframe-to-another-one-but-we-must-stay-in-iframe
-        if(mobile||runningHash
+        if(mobile||!runningHash
            
            );//dynamic href for iFrame doesn't seem to work on mobile
         else if (number == 8)
