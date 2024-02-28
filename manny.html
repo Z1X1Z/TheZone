@@ -17,170 +17,6 @@
                                         https://stackoverflow.com/questions/381795/how-to-disable-right-click-context-menu-in-javascript  -->
             <script src="OFFLINEonlineSwitch.js"></script>
 
-            <script>
-                var iframe = document.createElement('iframe');
-                
-                    let chapter = "";
-                    let book = ""
-                    let bookIndex = "";
-
-                    let urlAppend = ""
-                    let readerSet = false;
-                    let bibleWithText = false;
-                    window.muteToggle = false
-
-                if(window.useCDN||location.hash.includes(".b")||location.hash.includes(".c("))
-                {
-                    if (location.hash.includes(".c("))
-                    {let c = 0;
-                        while (location.hash.slice(c-3,c)!=".c("&&c<location.hash.length)
-                        {
-                            c++;
-                               }
-                        while (location.hash[c]!=")"&& isNaN(location.hash[c])&&c<location.hash.length)
-                        {
-                        book+=location.hash[c];
-                        c++;}
-                        while (location.hash[c]!=")"&& !isNaN(location.hash[c])&&c<location.hash.length)
-                        {
-                        chapter+=location.hash[c];
-                        c++;}
-                    
-let bookOfBooks=[
-                    "Genesis",
-                    "Exodus",
-                    "Leviticus",
-                    "Numbers",
-                    "Deuteronomy",
-                    "Joshua",
-                    "Judges",
-                    "Ruth",
-                    "iSamuel",
-                    "iiSamuel",
-                    "iKings",
-                    "iiKings",
-                    "iChronicles",
-                    "iiChronicles",
-                    "Ezra",
-                    "Nehemiah",
-                    "Esther",
-                    "Job",
-                    "Psalms",
-                    "Proverbs",
-                    "Ecclesiastes",
-                    "Songs",
-                    "Isaiah",
-                    "Jeremiah",
-                    "Lamentations",
-                    "Ezekiel",
-                    "Daniel",
-                    "Hosea",
-                    "Joel",
-                    "Amos",
-                    "Obadiah",
-                    "Jonah",
-                    "Micah",
-                    "Nahum",
-                    "Habakkuk",
-                    "Zephaniah",
-                    "Haggai",
-                    "Zechariah",
-                    "Malachi",
-                    
-                    "Matthew",
-                    "Mark",
-                    "Luke",
-                    "John",
-                    "Acts",
-                    "Romans",
-                    "iCorinthians",
-                    "iiCorinthians",
-                    "Galatians",
-                    "Ephesians",
-                    "Philippians",
-                    "Colossians",
-                    "iThessalonians",
-                    "iiThessalonians",
-                    "iTimothy",
-                    "iiTimothy",
-                    "Titus",
-                    "Philemon",
-                    "Hebrews",
-                    "James",
-                    "iPeter",
-                    "iiPeter",
-                    "iJohn",
-                    "iiJohn",
-                    "iiiJohn",
-                    "Jude",
-                    "Revelation"
-]
-if(book.toLowerCase()=="songofsolomon"||book.toLowerCase()=="songofsongs")
-book = "songs"
-
-let maxLetterDepth=-1;
-    for(var h = 0; h<bookOfBooks.length; h++)
-    {
-        let letterDepth=0;
-
-        while(letterDepth<bookOfBooks[h].length&&letterDepth<book.length
-              &&
-              bookOfBooks[h][letterDepth].toLowerCase()==book[letterDepth].toLowerCase())
-        {
-        
-            if (letterDepth>maxLetterDepth)
-            {
-            bookIndex = h;
-            maxLetterDepth = letterDepth
-
-            }
-        letterDepth++;
-        }
-    }
-    if (bookIndex=="") book = ""
-    else
-    {
-        book=bookOfBooks[bookIndex].toLowerCase();
-
-        let place = 0;
-        if(book[place]=="i" && book!="isaiah"){
-           while(book[place]=="i" && book!="isaiah")
-            place++
-        book=(place-1)+'_'+book.slice(place,book.length)
-        }
-}
-         urlAppend = "chapter/"+book+"/"+chapter+".htm"
-}
-                     if (location.hash.includes(".b8"))
-                    iframe.setAttribute("src", "https://openbible.com/audio/gilbert_music/");
-                            else if(location.hash.includes(".b7"))   iframe.setAttribute("src","https://openbible.com/audio/gilbert_music_books/");
-
-                            else if(location.hash.includes(".b6"))     iframe.setAttribute("src", "https://openbible.com/audio/hays/");
-                            else if(location.hash.includes(".b5"))    iframe.setAttribute("src", "https://openbible.com/audio/souer/");
-                            else if(location.hash.includes(".b4"))    iframe.setAttribute("src", "https://openbible.com/audio/gilbert/");
-                        else if(location.hash.includes(".b3") )   iframe.setAttribute("src","https://openbible.com/audio/hays_books/");
-                        else if(location.hash.includes(".b2")  )   iframe.setAttribute("src","https://openbible.com/audio/souer_books/");
-                    else if(location.hash.includes(".b1")    ) iframe.setAttribute("src","https://openbible.com/audio/gilbert_books/");
-                     else
-                     {
-                         iframe.setAttribute("src",  "https://www.biblehub.com/audio/"+urlAppend);
-                         bibleWithText = true;}
-                iframe.setAttribute("height", "100%");
-                iframe.setAttribute("width", "50%");
-                iframe.setAttribute("class", "onTOP");
-                iframe.setAttribute("name", "TheBible");
-                iframe.setAttribute("style","margin-left:50%;");
-               // iframe.setAttribute("style", "position:fixed");
-                iframe.setAttribute("Id","Bible");
-                document.body.appendChild(iframe);
-                if(!location.hash.includes(".c")){
-                iframe.setAttribute("width", "0");
-                iframe.setAttribute("height", "0");
-}
-               else if(!location.hash.includes(".b"))window.BibleON=0;
-
-                }
-                </script>
         <div id="load message" style="font-size:40px; background-color:blue;">     </div>
 
         <script>
@@ -1152,6 +988,196 @@ scoreColorInversion=false;
           </button>
 
                   </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <script>
+            var iframe = document.createElement('iframe');
+            
+                let chapter = "";
+                let book = ""
+                let bookIndex = "";
+
+                let urlAppend = ""
+                let readerSet = false;
+                let bibleWithText = false;
+                window.muteToggle = false
+
+            if(window.useCDN||location.hash.includes(".b")||location.hash.includes(".c("))
+            {
+                if (location.hash.includes(".c("))
+                {let c = 0;
+                    while (location.hash.slice(c-3,c)!=".c("&&c<location.hash.length)
+                    {
+                        c++;
+                           }
+                    while (location.hash[c]!=")"&& isNaN(location.hash[c])&&c<location.hash.length)
+                    {
+                    book+=location.hash[c];
+                    c++;}
+                    while (location.hash[c]!=")"&& !isNaN(location.hash[c])&&c<location.hash.length)
+                    {
+                    chapter+=location.hash[c];
+                    c++;}
+                
+let bookOfBooks=[
+                "Genesis",
+                "Exodus",
+                "Leviticus",
+                "Numbers",
+                "Deuteronomy",
+                "Joshua",
+                "Judges",
+                "Ruth",
+                "iSamuel",
+                "iiSamuel",
+                "iKings",
+                "iiKings",
+                "iChronicles",
+                "iiChronicles",
+                "Ezra",
+                "Nehemiah",
+                "Esther",
+                "Job",
+                "Psalms",
+                "Proverbs",
+                "Ecclesiastes",
+                "Songs",
+                "Isaiah",
+                "Jeremiah",
+                "Lamentations",
+                "Ezekiel",
+                "Daniel",
+                "Hosea",
+                "Joel",
+                "Amos",
+                "Obadiah",
+                "Jonah",
+                "Micah",
+                "Nahum",
+                "Habakkuk",
+                "Zephaniah",
+                "Haggai",
+                "Zechariah",
+                "Malachi",
+                
+                "Matthew",
+                "Mark",
+                "Luke",
+                "John",
+                "Acts",
+                "Romans",
+                "iCorinthians",
+                "iiCorinthians",
+                "Galatians",
+                "Ephesians",
+                "Philippians",
+                "Colossians",
+                "iThessalonians",
+                "iiThessalonians",
+                "iTimothy",
+                "iiTimothy",
+                "Titus",
+                "Philemon",
+                "Hebrews",
+                "James",
+                "iPeter",
+                "iiPeter",
+                "iJohn",
+                "iiJohn",
+                "iiiJohn",
+                "Jude",
+                "Revelation"
+]
+if(book.toLowerCase()=="songofsolomon"||book.toLowerCase()=="songofsongs")
+book = "songs"
+
+let maxLetterDepth=-1;
+for(var h = 0; h<bookOfBooks.length; h++)
+{
+    let letterDepth=0;
+
+    while(letterDepth<bookOfBooks[h].length&&letterDepth<book.length
+          &&
+          bookOfBooks[h][letterDepth].toLowerCase()==book[letterDepth].toLowerCase())
+    {
+    
+        if (letterDepth>maxLetterDepth)
+        {
+        bookIndex = h;
+        maxLetterDepth = letterDepth
+
+        }
+    letterDepth++;
+    }
+}
+if (bookIndex=="") book = ""
+else
+{
+    book=bookOfBooks[bookIndex].toLowerCase();
+
+    let place = 0;
+    if(book[place]=="i" && book!="isaiah"){
+       while(book[place]=="i" && book!="isaiah")
+        place++
+    book=(place-1)+'_'+book.slice(place,book.length)
+    }
+}
+     urlAppend = "chapter/"+book+"/"+chapter+".htm"
+}
+                 if (location.hash.includes(".b8"))
+                iframe.setAttribute("src", "https://openbible.com/audio/gilbert_music/");
+                        else if(location.hash.includes(".b7"))   iframe.setAttribute("src","https://openbible.com/audio/gilbert_music_books/");
+
+                        else if(location.hash.includes(".b6"))     iframe.setAttribute("src", "https://openbible.com/audio/hays/");
+                        else if(location.hash.includes(".b5"))    iframe.setAttribute("src", "https://openbible.com/audio/souer/");
+                        else if(location.hash.includes(".b4"))    iframe.setAttribute("src", "https://openbible.com/audio/gilbert/");
+                    else if(location.hash.includes(".b3") )   iframe.setAttribute("src","https://openbible.com/audio/hays_books/");
+                    else if(location.hash.includes(".b2")  )   iframe.setAttribute("src","https://openbible.com/audio/souer_books/");
+                else if(location.hash.includes(".b1")    ) iframe.setAttribute("src","https://openbible.com/audio/gilbert_books/");
+                 else
+                 {
+
+                     iframe.setAttribute("src",  "https://www.biblehub.com/audio/"+urlAppend);
+                     bibleWithText = true;}
+            iframe.setAttribute("height", "100%");
+            iframe.setAttribute("width", "50%");
+            iframe.setAttribute("class", "onTOP");
+            iframe.setAttribute("name", "TheBible");
+            iframe.setAttribute("style","margin-left:50%;");
+           // iframe.setAttribute("style", "position:fixed");
+            iframe.setAttribute("Id","Bible");
+            document.body.appendChild(iframe);
+            
+            
+            let content = document.getElementsByClassName("dropdown-content");
+            for(var b = 0; b<content.length; b++)content[b].style.width="50%";
+
+            if(!location.hash.includes(".c")&&!location.hash.includes(".b")){
+            iframe.setAttribute("width", "0");
+            iframe.setAttribute("height", "0");
+}
+           else if(!location.hash.includes(".b"))window.BibleON=0;
+
+            }
+            </script>
+        
+        
+        
+        
+        
+        
+        
+        
         
         
      
