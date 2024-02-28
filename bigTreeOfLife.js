@@ -346,6 +346,29 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
             }
             
         }
+        
+        if(spokelover){
+            if(counter<hyperCoreBoosted){
+                //  if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
+                //else
+                
+                s.divideScalar( Math.sqrt(2.));
+                var b =Math.pow(Math.abs(downSpoke),grOverLeaf);
+                
+                hyperCoreOUTPUT+=b;
+                hyperCoreBoosted+=b;
+            }
+            
+            else //if(  0.>=hyperCoreBoosted)
+            {
+                
+                hyperCoreOUTPUT-=upSpoke;
+                hyperCoreBoosted-=upSpoke;
+            }
+            
+        }
+
+
 if(spokelover&&counter<hyperCoreBoosted){
 //if(continuumClover) s.multiplyScalar( Math.sqrt(2.));//engage shiny spokelover
 //else
