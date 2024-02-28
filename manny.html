@@ -3576,7 +3576,7 @@ mny+=HEART*heartMultiplier;
      mny=clamp(mny,0.,1.);
 
     vec3 ARTICLE=vec3(0.);
-                       /*
+                
     if(articles){
            vec3 HORSE=horse(characterOnTrailP, moveDynamic);
             ARTICLE+=scroll(characterOnTrailP+1.5*vec2(0.,resolution.x/min(resolution.x,resolution.y)),vec2(-1.));
@@ -3587,8 +3587,9 @@ mny+=HEART*heartMultiplier;
              mny=clamp(mny-ls*5.,0.,1.)+SWORD+LAMP;
 
             ARTICLE+=clamp(flames(c4-vec2(.5,0.))-(ls+HORSE.r*3.+clamp(-mannyFace.r-mannyFace.g-mannyFace.b,-2.,.0))*10000.,0.,1.)+SWORD+HORSE+LAMP;
+            ARTICLE = SWORD+HORSE+LAMP;
     }
-                      */
+                      
      
                                  float recenter = 0.;
                                   float rescale = 1.;
