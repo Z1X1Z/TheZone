@@ -3,7 +3,7 @@ window.fftSize=2048
 window.touchMode = false;
 
     window.micOn = false;
-    window.audioX;
+window.audioX={};
 
 let analyser={};
     window.source;
