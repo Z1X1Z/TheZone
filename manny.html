@@ -202,8 +202,7 @@ let maxLetterDepth=-1;
                 iframe.setAttribute("height", "0");
 }
         
-        window.BibleON="unset";
-                if(!location.hash.includes(".b")) window.BibleON=0;
+                if(!location.hash.includes(".b")||android) window.BibleON=0;
                 }
                 </script>
         <div id="load message" style="font-size:40px; background-color:blue;">     </div>
@@ -3578,6 +3577,7 @@ mny+=HEART*heartMultiplier;
     vec3 ARTICLE=vec3(0.);
                 
     if(articles){
+                       /*
            vec3 HORSE=horse(characterOnTrailP, moveDynamic);
             ARTICLE+=scroll(characterOnTrailP+1.5*vec2(0.,resolution.x/min(resolution.x,resolution.y)),vec2(-1.));
             vec3 SWORD = sword(characterOnTrailP+vec2(swordSkew,0.),vec2(0.));
@@ -3586,9 +3586,12 @@ mny+=HEART*heartMultiplier;
              float ls = (SWORD.x+SWORD.y+SWORD.z+LAMP.x+LAMP.y+LAMP.z)*10.;
              mny=clamp(mny-ls*5.,0.,1.)+SWORD+LAMP;
 
-            ARTICLE+=clamp(flames(c4-vec2(.5,0.))-(ls+HORSE.r*3.+clamp(-mannyFace.r-mannyFace.g-mannyFace.b,-2.,.0))*10000.,0.,1.)+HORSE+SWORD//+LAMP
+            ARTICLE+=clamp(flames(c4-vec2(.5,0.))-(ls+HORSE.r*3.+clamp(-mannyFace.r-mannyFace.g-mannyFace.b,-2.,.0))*10000.,0.,1.)+HORSE+SWORD+LAMP
             ;
-    }
+                        */
+                   ARTICLE=flames(c4-vec2(.5,0.));
+                   
+                   }
                       
      
                                  float recenter = 0.;
