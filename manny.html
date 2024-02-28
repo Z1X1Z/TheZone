@@ -201,10 +201,10 @@ let maxLetterDepth=-1;
                 iframe.setAttribute("width", "0");
                 iframe.setAttribute("height", "0");
 }
-                if(!location.hash.includes(".b")||window.android)
-               window.BibleON=0;
-
-                }
+        
+        window.BibleON="unset";
+                if(!location.hash.includes(".b")) window.BibleON=0;
+                
                 </script>
         <div id="load message" style="font-size:40px; background-color:blue;">     </div>
 
@@ -2852,7 +2852,7 @@ return
                if(s.x>-.1)l=vec3(-sin(t.x)-(s.x*(100.-100.*-sin(t.x*2.-3.14))*-sin(t.x)));
                }
           vec3  ret = vec3(0.);
-           if(l!=0.) ret = 1./l;
+           if(l.x!=0.&&l.y!=0.&&l.z!=0.) ret = 1./l;
        return ret;
                                }
 
