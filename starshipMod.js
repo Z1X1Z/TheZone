@@ -941,25 +941,28 @@ function setMicInputToStarPIXEL(){
                  
                  //console.log(nyq)
                  if(withinMaxsafeSizeBins){
-                     let dataArrayBuff=dataArrayBuffer=new Float32Array( numberOfBins ).fill(0.);
+                     let size = (withinMaxsafeSizeBins)?numberOfBins:1;
+                     let dataArrayBuff=dataArrayBuffer=new Float32Array( size ).fill(0.);
                      for (var x = 0; x < numberOfBins; x++)dataArrayBuffer[x]=dataArray[x]/255.;
                      
                      // callibratorArray
-                     let micTexBuf = new THREE.DataTexture( dataArrayBuffer, (withinMaxsafeSizeBins)?numberOfBins:1, 1, THREE.RedFormat,THREE.FloatType);
+                     let micTexBuf = new THREE.DataTexture( dataArrayBuffer, size, 1, THREE.RedFormat,THREE.FloatType);
                      micTexBuf.needsUpdate=true;
                      
                      uniforms[ "micIn" ].value = micTexBuf;
                      uniforms.micIn.needsUpdate = true;
                      
                  }
-                 if(withinMaxsafeSizeFFT) {
-                     let inputDataBuffer =new Float32Array( fftSize ).fill(0.);
+                 if(withinMaxsafeSizeFFT&&false) {
+                     let size = (withinMaxsafeSizeFFT)?fftSize:1;
+
+                     let inputDataBuffer =new Float32Array( size ).fill(0.);
 
                      for (var x = 0; x < fftSize; x++)inputDataBuffer[x]=inputData[x];
                      
                      
                      
-                     let RAWaudioTexBuf = new THREE.DataTexture(inputDataBuffer , (withinMaxsafeSizeFFT)?fftSize:1, 1, THREE.RedFormat,THREE.FloatType);
+                     let RAWaudioTexBuf = new THREE.DataTexture(inputDataBuffer , size, 1, THREE.RedFormat,THREE.FloatType);
                      RAWaudioTexBuf.needsUpdate=true;
                      
                      uniforms["audioBuffer"].value = RAWaudioTexBuf;
