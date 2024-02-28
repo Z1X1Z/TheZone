@@ -3586,8 +3586,9 @@ mny+=HEART*heartMultiplier;
              float ls = (SWORD.x+SWORD.y+SWORD.z+LAMP.x+LAMP.y+LAMP.z)*10.;
              mny=clamp(mny-ls*5.,0.,1.)+SWORD+LAMP;
 
-            ARTICLE+=clamp(flames(c4-vec2(.5,0.))-(ls+HORSE.r*3.+clamp(-mannyFace.r-mannyFace.g-mannyFace.b,-2.,.0))*10000.,0.,1.)+SWORD+HORSE+LAMP;
-            ARTICLE = SWORD+HORSE+LAMP;
+            ARTICLE+=clamp(flames(c4-vec2(.5,0.))-(ls+HORSE.r*3.+clamp(-mannyFace.r-mannyFace.g-mannyFace.b,-2.,.0))*10000.,0.,1.)+HORSE+LAMP//SWORD
+            ;
+            //ARTICLE = SWORD+HORSE+LAMP;
     }
                       
      
