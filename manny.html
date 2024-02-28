@@ -173,11 +173,10 @@ let maxLetterDepth=-1;
                // iframe.setAttribute("style", "position:fixed");
                 iframe.setAttribute("Id","Bible");
                 document.body.appendChild(iframe);
-                if(!location.hash.includes(".c")&&!location.hash.includes(".b"))
-                {
-                    iframe.setAttribute("width", "0");
-                    iframe.setAttribute("height", "0");
-                }
+                if(!location.hash.includes(".c")){
+                iframe.setAttribute("width", "0");
+                iframe.setAttribute("height", "0");
+}
                else if(!location.hash.includes(".b"))window.BibleON=0;
 
                 }

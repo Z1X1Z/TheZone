@@ -438,11 +438,8 @@ function callKey(event){
             window.frames["TheBible"].location = "https://openbible.com/audio/gilbert_music/";
         
                 else if(number ==7) window.frames["TheBible"].location ="https://openbible.com/audio/gilbert_music_books/";
-
-                else if(number == 6) {
-                    
-                    window.frames["TheBible"].location = "https://openbible.com/audio/hays/";
-                }
+                else if(number == 6)   window.frames["TheBible"].location =
+                    "https://openbible.com/audio/hays/";
                 else if(number == 5)  window.frames["TheBible"].location =  "https://openbible.com/audio/souer/";
                 else if(number == 4)  window.frames["TheBible"].location =  "https://openbible.com/audio/gilbert/";
             else if(number == 3)  window.frames["TheBible"].location = "https://openbible.com/audio/hays_books/";
@@ -451,7 +448,7 @@ function callKey(event){
          else if(number == 0)  window.frames["TheBible"].location =  "https://www.biblehub.com/audio/";
              //   else if(location.hash.includes(".b"))document.getElementById("reader").value = 0.;
 
-                    if(window.BibleON==0)
+                    if(window.BibleON==0||(mobile&&runningHash))
                     {
                         document.getElementById("Bible").height="100%";
                         document.getElementById("Bible").width="50%";
