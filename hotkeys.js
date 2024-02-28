@@ -514,7 +514,7 @@ function callKey(event){
             else
                 fftSize = 2**11
                 }
-        setFFTdependantSizes();
+        if(!runningHash)setFFTdependantSizes();
         
     }
     
