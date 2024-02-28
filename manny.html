@@ -173,7 +173,7 @@ let maxLetterDepth=-1;
                // iframe.setAttribute("style", "position:fixed");
                 iframe.setAttribute("Id","Bible");
                 document.body.appendChild(iframe);
-                if(!location.hash.includes(".c")||!location.hash.includes(".b"))
+                if(!location.hash.includes(".c")&&!location.hash.includes(".b"))
                 {
                     iframe.setAttribute("width", "0");
                     iframe.setAttribute("height", "0");
