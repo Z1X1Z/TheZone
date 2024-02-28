@@ -1265,9 +1265,9 @@ ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
     </script>
     <script src="wadLoader.js"> </script>
     
-    <div id="menuButton" class="onBottom" style="text-align:right; width:100%;">
+    <div id="menuDivider" class="onBottom" style="text-align:right; width:100%;">
         
-            <button onclick='
+            <button id="menuButton" onclick='
                 let menu=document.getElementById("menu")
                 if( menu.style.display=="block")  menu.style.display="none"
                 else if( menu.style.display=="none")menu.style.display="block";'>Menu</button>
