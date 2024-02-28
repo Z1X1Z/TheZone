@@ -3694,7 +3694,7 @@ if(starOnDot>=1){
                        vec2 uVu=-(vUvCentered)/(resolution.xy/max(resolution.x,resolution.y));
                        vec2 uVuMinCenter=-vUvCentered/(min(resolution.x,resolution.y)/resolution.yx);
              pixelStarship = audioEq(uVuMinCenter);
-            // icicles = waveForm();
+             icicles = waveForm();
              vec4 starBuffer = vec4(0.);
              for (float x = 0.; x<12.;x++) starBuffer+=starns(uVu,x);
              
