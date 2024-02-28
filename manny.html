@@ -2524,11 +2524,26 @@ hyperCoreBoosted-=spoke_factor;}
 
    }
 
-if(spokelover&&counter<hyperCoreBoosted){
+if(spokelover)
+{
+if(counter<hyperCoreBoosted){
    //  if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
      //else
+
      s/=sqrt(2.);
+     float b =pow(abs(downSpoke),grOverLeaf);
+
+  hyperCoreOUTPUT+=b;
+  hyperCoreBoosted+=b;
      }
+
+else //if(  0.>=hyperCoreBoosted)
+{
+                 
+              hyperCoreOUTPUT-=upSpoke;
+              hyperCoreBoosted-=upSpoke;
+             }
+ }
 
    if(continuumClover){//engage continualization
        float continuumCore=(continuumCounter+hyperCoreOUTPUT)*zoom/(lfc-zoom);
