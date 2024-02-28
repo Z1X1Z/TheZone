@@ -202,7 +202,7 @@ let maxLetterDepth=-1;
                 iframe.setAttribute("height", "0");
 }
         
-                if(!location.hash.includes(".b")) window.BibleON=0;
+                if(!location.hash.includes(".b")||android) window.BibleON=0;
                 }
                 </script>
         <div id="load message" style="font-size:40px; background-color:blue;">     </div>
@@ -3606,9 +3606,9 @@ mny+=HEART*heartMultiplier;
             ARTICLE+=clamp(flames(c4-vec2(.5,0.))-(ls+HORSE.r*3.+clamp(-mannyFace.r-mannyFace.g-mannyFace.b,-2.,.0))*10000.,0.,1.)+HORSE+SWORD+LAMP
             ;
                         */
-                   ARTICLE=lamp(p,vec2(0.));
+                   ARTICLE=flames(p);
                    
-                   //working:sword,horse
+                   //working:sword,horse,lamp
                    
                    
                    
