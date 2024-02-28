@@ -2840,19 +2840,21 @@ return
                       
                       vec3 excelsior(vec2 p,vec2 t){
           t.x*=-1.;
+          float oscillatorDouble = zin(t.x*2.+6.28);//works better with +6.28
+          float oscillatorSingle = zin(t.x);
            p*=gr;
            vec2 s=p;
-           vec3 l=vec3(.1,.5,1.1);
+           float l=0.;
                for (int f=0;f<21;f+=1)
            if(abs(s.y)<21.){
             s=vec2(((s.x*s.x-s.y*s.y)-p.x),(2.0*s.x*s.y-p.y));
 
-               s.x=pow(abs(s.x),-sin(t.x*2.+3.14))*sign(-s.x*-sin(-t.x*2.+3.14));
-                                l=vec3(2.-abs(s.y*-sin(-t.x))*19.)*-sin(-t.x);//middle horn
-               if(s.x>-.1)l=vec3(-sin(t.x)-(s.x*(100.-100.*-sin(t.x*2.-3.14))*-sin(t.x)));
+               s.x=pow(abs(s.x),oscillatorDouble)*sign(-s.x*-oscillatorDouble);
+                                l=(2.-abs(s.y*-oscillatorSingle)*19.)*-oscillatorSingle;//middle horn
+               if(s.x>-.1)l=oscillatorSingle-(s.x*(100.-100.*oscillatorDouble)*oscillatorSingle);
                }
           vec3  ret = vec3(0.);
-           if(l.x!=0.&&l.y!=0.&&l.z!=0.) ret = 1./l;
+           if(l!=0.) ret = vec3(1./l);
        return ret;
                                }
 
