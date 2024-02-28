@@ -141,7 +141,7 @@ function resetAll(){
     }
     window.coordX=0.; window.coordY=0.;
 
-    if(window.BibleON=="unset")  window.BibleON=1;
+    if(!("BibleON" in window))  window.BibleON=1;
     else if(settingsSet)
     {
         if(location.hash.includes(".b")||location.hash.includes(".c")) window.BibleON=1;
