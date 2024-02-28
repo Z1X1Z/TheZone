@@ -125,6 +125,14 @@ window.settingsSet = false
 
 
 
+
+
+
+
+
+
+
+
 function resetAll(){
     for(var nameOfUniform in uniformsInitial)
     {
@@ -134,8 +142,9 @@ function resetAll(){
     window.coordX=0.; window.coordY=0.;
 
     if(!("BibleON" in window))  window.BibleON=1;
-    else if(window.settingsSet) window.BibleON=1;
-
+    else if(location.hash.includes(".b")||location.hash.includes(".c")) window.BibleON=1;
+    else window.BibleON=0;
+    
     
                           
             window.muteToggle = false;
