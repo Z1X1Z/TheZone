@@ -348,7 +348,7 @@ let c = document.body;//document.getElementById("container")
                 //   e.stopImmediatePropagation();          //e.preventDefault();
 //console.log(e.srcElement.nodeName=="CANVAS" )
                 if(e.srcElement.nodeName=="CANVAS"  ||
-                   (e.srcElement.id=="menuDivider"||(window.iOS&&e.srcElement.id=="menuButton")  )){
+                   (e.srcElement.id=="menuDivider"||(window.iOS&&e.srcElement.className=="menuButton")  )){
                     
                     let touchLimit=0;
                     while (touchNumber.get(cycler)!="off"&&touchLimit<maxTouchSoundCount)
@@ -370,7 +370,7 @@ let c = document.body;//document.getElementById("container")
                 //let ae=(e.target.className=="dropbtn")?e.target.firstElementChild:"notMenu";
 
                 if(e.srcElement.nodeName=="CANVAS"  ||
-                   (e.srcElement.id=="menuDivider"||(window.iOS&&e.srcElement.id=="menuButton")  )){
+                   (e.srcElement.id=="menuDivider"||(window.iOS&&e.srcElement.className=="menuButton")  )){
                     let tn = touchNumber.get(pressIndex.get(e.pointerId));
                     if(typeof tn == "number"){
                         getPressure(e);
