@@ -143,11 +143,12 @@ function resetAll(){
 
     if(!("BibleON" in window))  window.BibleON=1;
     else if(location.hash.includes(".b")||location.hash.includes(".c")) window.BibleON=1;
-    else window.BibleON=(1+BibleON)%2;
-    
+    else if(BibleON==0){    
+        callKey(new KeyboardEvent('keydown', {'key': "b", 'altKey':true, 'keyCode':key.charCodeAt(0)}));
+        
+    }
     
                           
-            window.muteToggle = false;
             window.zoom=1.;
             window.RockInTheWater=0;
             window.octaveStars=true;
@@ -243,7 +244,9 @@ function resetAll(){
     }
                                          runningHash = true;
                                          window.number = "";
+
                                        if(window.settingsSet)  readHash()
+
                                          window.settingsSet = true
 }
 resetAll();
