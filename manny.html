@@ -15,8 +15,30 @@
         <body oncontextmenu="return false;">
             <!--disable right click solution from
                                         https://stackoverflow.com/questions/381795/how-to-disable-right-click-context-menu-in-javascript  -->
-            <script src="OFFLINEonlineSwitch.js"></script>
+            <script src="OFFLINEonlineSwitch.js">
+            </script>
 
+            
+            <script>
+                window.iOS = false;
+                window.android=true;
+                if (/iPad|iPhone|iPod/.test(navigator.platform) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) )
+                  {
+                      window.rez=window.devicePixelRatio/5.;
+                      window.mobile=true;
+                      window.iOS=true;
+                  }
+                  else if(navigator.userAgent.toLowerCase().match(/mobile/i)){
+                       window.rez=window.devicePixelRatio/7.;
+                       window.mobile=true;
+                      window.android=true;
+                   }
+                  else       {
+                      
+                      window.rez=window.devicePixelRatio/2.;
+                      window.mobile=false;
+                      }
+                </script>
             <script>
                 var iframe = document.createElement('iframe');
                 
@@ -177,7 +199,7 @@ let maxLetterDepth=-1;
                 iframe.setAttribute("width", "0");
                 iframe.setAttribute("height", "0");
 }
-                if(!location.hash.includes(".b")||navigator.userAgent.toLowerCase().match(/mobile/i))
+                if(!location.hash.includes(".b")||mobile)
                window.BibleON=0;
 
                 }
