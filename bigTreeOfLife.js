@@ -220,6 +220,12 @@ var spoke_factorLarge = spoke_factor*(((1.+gr)/-leaf)/truncator)*truncator;
            var downSpoke=((1./leaf)/truncator)*truncator;//1./(((-leaf)*truncator)/truncator)/4.;
   // var logOfSpoke_Factor=0.;
                           // if (wheel) logOfSpoke_Factor=Math.log(spoke_factor);
+                          var powerOfDynamicSokeCore = 2.;
+
+        var spokeloverCoreShiftDown=Math.pow(upSpoke,powerOfDynamicSokeCore)*logStabilizationConstant;            ;//logStabilizationConstant seems to cancel powerOfDynamicSokeCore=2;
+
+           var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),2.)
+                          
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
                            hyperCoreOUTPUT-=petals;
 
@@ -355,10 +361,9 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
                 s.divideScalar( Math.sqrt(2.));
                 if(!wheel)
                 {
-                    var b =Math.pow(Math.abs(downSpoke),grOverLeaf);
                     
-                    hyperCoreOUTPUT+=b;
-                    hyperCoreBoosted+=b;
+                    hyperCoreOUTPUT+=spokeloverCoreShiftDown;
+                    hyperCoreBoosted+=spokeloverCoreShiftDown;
                 }
             }
             
@@ -366,8 +371,8 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
             {
                 if(!wheel)
                 {
-                    hyperCoreOUTPUT-=upSpoke;
-                    hyperCoreBoosted-=upSpoke;
+                    hyperCoreOUTPUT-=spokeloverCoreShiftUp;
+                    hyperCoreBoosted-=spokeloverCoreShiftUp;
                 }
             }
             
