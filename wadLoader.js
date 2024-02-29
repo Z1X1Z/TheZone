@@ -264,8 +264,10 @@ if(window.grabStar)
                             twisteR<6.*Math.sign(twisteR)||twisteR>18.*Math.sign(twisteR))
                          )
                       //   if(following||(signTwist[id]==-1&&lastTwistSign!=1))
-                         octavesBoosted[t]+=24*signTwist[t];
-                           for(var t=0;t<maxTouchSoundCount;t++)if(t!=id)  octavesBoosted[t]-=24*signTwist[t];
+                     {
+                         octavesBoosted[id]+=24*signTwist[id];
+                         for(var t=0;t<maxTouchSoundCount;t++)if(t!=id)  octavesBoosted[t]-=24*signTwist[t];
+                     }
                  //console.log(signTwist[id])
                  //console.log(octavesBoosted[id])
 
