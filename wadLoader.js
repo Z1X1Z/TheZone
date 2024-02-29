@@ -88,8 +88,7 @@ function initialize(){
     wadLOADED=true;
 }
 
-let initialAngleSound = Array(maxTouchSoundCount);
-initialAngleSound[0]=0;
+let initialAngleSound = Array(maxTouchSoundCount).fill(0);
 let initialAngle = Array(maxTouchSoundCount);
 let lastSlip  = Array(maxTouchSoundCount).fill(0);
 let pressed = false;
@@ -132,7 +131,7 @@ function startSound(e){
                 
                 let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
 
-                initialAngleSound[id] =-(Math.atan2(-x,-y))*flip;
+                initialAngleSound[id] =(-(Math.atan2(-x,-y))*flip+pi*2)%(pi*2.);
                  angleSound[id] =initialAngleSound[id] ;
                  soundTouchComponent[id]=initialAngleSound[id];
 
