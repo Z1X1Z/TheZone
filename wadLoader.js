@@ -104,7 +104,7 @@ function startSound(e){
     let id = touchNumber.get(pressIndex.get(e.pointerId));
 
     if(window.grabStar){
-        initialAngle[id]=((-Math.atan2(-x,-y))/Math.PI/2.+1)%1.;
+        initialAngle[id]=(-Math.atan2(-x,-y))/Math.PI/2.;
 
         window.twist=(window.twist+24*100)%24
         permanentInitialTwist[id]=twist;
@@ -137,7 +137,7 @@ function startSound(e){
 
                 let frequency = Math.pow(2.,((((initialAngleSound[id]*window.flip)/pi/2*12)*window.flip-window.twist/2.)-1.)/12.
                                               )*window.ConcertKey;
-                                             console.log(frequency)
+                                           //  console.log(frequency)
                 //sound[id].pitch=frequency;
                 //sound2[id].pitch=frequency*2.;
                 //sound[id].volume=0.;
