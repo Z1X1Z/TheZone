@@ -1443,7 +1443,7 @@ function runOSMD (){
         for(var v = 0; v<maxTouchSoundCount;v++){
             
             initialTwist[v]-=timeTwistIncrement;
-         //   permanentInitialTwist[v]-=timeTwistIncrement;
+            permanentInitialTwist[v]-=timeTwistIncrement;
         }
     }
                                           lastTIMEUNIFORM =uniforms[ "time" ].value;
