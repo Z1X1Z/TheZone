@@ -212,8 +212,11 @@ if(window.grabStar)
     lastSlip[id] =slip;
 
     window.twist+=twistIncrement;
+    permanentInitialTwist[id] +=twistIncrement;
+
     for(var t=0; t<maxTouchSoundCount;t++)if(t!=id)
     {initialTwist[t]+=twistIncrement;
+
     }
 //console.log("twisteR"+permanentInitialTwist[id])
 
