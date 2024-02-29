@@ -3259,7 +3259,7 @@ vec3 xtol(vec2 s, vec2 t){
                                  return h;
                                  }
                       
-                                  vec3 flames (vec2 p){
+                                  vec3 flames(vec2 p){
                                       p*=1.5;
                                       p.y*=3.;
                                   vec2 s=p;
@@ -3606,7 +3606,8 @@ mny+=HEART*heartMultiplier;
             ARTICLE+=clamp(flames(c4-vec2(.5,0.))-(ls+HORSE.r*3.+clamp(-mannyFace.r-mannyFace.g-mannyFace.b,-2.,.0))*10000.,0.,1.)+HORSE+SWORD+LAMP
             ;
                         */
-                   if(p.y!=0.)ARTICLE=flames(p);
+                       if(p.y==0.)p.y=1.;
+                   ARTICLE=flames(p);
                    
                    //working:sword,horse,lamp
                    
