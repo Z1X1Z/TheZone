@@ -202,7 +202,7 @@ let maxLetterDepth=-1;
                 iframe.setAttribute("height", "0");
 }
         
-                if(!location.hash.includes(".b")||android) window.BibleON=0;
+                if(!location.hash.includes(".b")) window.BibleON=0;
                 }
                 </script>
         <div id="load message" style="font-size:40px; background-color:blue;">     </div>
@@ -3260,7 +3260,6 @@ vec3 xtol(vec2 s, vec2 t){
                                  }
                       
                                   vec3 flames (vec2 p){
-                                      p.x = -p.x;
                                       p*=1.5;
                                       p.y*=3.;
                                   vec2 s=p;
@@ -3610,7 +3609,7 @@ mny+=HEART*heartMultiplier;
                    
                    //working:sword,horse,lamp
                    
-                   
+                   //not working:flames
                    
                    }
                       
