@@ -112,7 +112,7 @@ function startSound(e){
         initialTwist[id]=twist;
         lastSlip[id] =0;
         octavesBoosted[id]=0
-        signTwist[id]=true;
+        signTwist[id]=false;
 
     }
     
@@ -255,7 +255,7 @@ if(window.grabStar)
                  let lastTwistSign = "unset";
                      if(following) lastTwistSign=signTwist[id];
                      signTwist[id] =Math.sign(twisteR-12.);
-                    if(!following) lastTwistSign = false;
+                   // if(!following) lastTwistSign = false;
                      
                      if (lastTwistSign!=signTwist[id]&&(
                             twisteR<6.*Math.sign(twisteR)||twisteR>18.*Math.sign(twisteR))
