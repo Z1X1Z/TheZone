@@ -112,7 +112,7 @@ function startSound(e){
         initialTwist[id]=twist;
         lastSlip[id] =0;
         octavesBoosted[id]=0
-        signTwist[id]=false;
+        signTwist[id]=true;
 
     }
     
@@ -184,7 +184,7 @@ function startSound(e){
 
                     }
             }
-                                             
+                                             following = false;
 }
                                              let soundTouchComponent= Array(maxTouchSoundCount).fill(0.);
                                              let octavesBoosted = Array(maxTouchSoundCount).fill(0.);
@@ -194,8 +194,9 @@ let   angleSound  = Array(maxTouchSoundCount).fill(0.);
                                              
                                              let signTwist= Array(maxTouchSoundCount).fill(false);
 
-                                             
+                            let following = false;
 function followSound(e){
+                    following = true;
             let y = e.clientY-heightPX/2.;
             let x = e.clientX-widthPX/2.;
 
@@ -250,21 +251,18 @@ if(window.grabStar)
                  let twistAdj = twistIncrement/24*(Math.PI*2.);
                  angleSound[id]+= twistAdj;
                  
-                 for(var t=0; t<maxTouchSoundCount;t++)
-                 {
-                     let lastTwistSign=signTwist[t];
-                     let twisteR=((angleSound[t]-initialAngleSound[t])*24/(2*pi)+24*100)%24;//((angleSound[t]-initialAngleSound[t])*24/
-                                 //  (2*pi)+24*100)%24+initialAngleSound[t]*24/(2*pi);
-                    // console.log("aaaa"+permanentInitialTwist[t])
-//if(t==0)console.log(twisteR)
-                     signTwist[t] =Math.sign(twisteR-12.);
-                  //   if(t==0)console.log("st"+ ticker)
-                     if (lastTwistSign!=signTwist[t]&&(
+                     let twisteR=((angleSound[id]-initialAngleSound[id])*24/(2*pi)+24*100)%24;
+                 let lastTwistSign = "unset";
+                     if(following) lastTwistSign=signTwist[id];
+                     signTwist[id] =Math.sign(twisteR-12.);
+                    if(!following) lastTwistSign = false;
+                     
+                     if (lastTwistSign!=signTwist[id]&&(
                             twisteR<6.*Math.sign(twisteR)||twisteR>18.*Math.sign(twisteR))
-                         ){
-                         octavesBoosted[t]+=24*signTwist[t]
-                     }
-                 }
+                         )
+                         octavesBoosted[id]+=24*signTwist[id]
+                     
+                 console.log(   octavesBoosted[id])
                  
 
              }
@@ -294,7 +292,6 @@ if(window.grabStar)
                         //            console.log("twist"+twistFeed)
                 let frequency = Math.pow(2.,((((soundTouchComponent[id]*window.flip)/pi/2*12-flip)*window.flip-twistFeed/2.)-1.)/12.
                                                 )*window.ConcertKey;
-                                             console.log(frequency)
         if(isFinite(frequency)&&frequency>0.&&
            angleSound[id]-initialAngleSound[id]!=0&&frequency>20&&typeof sound[id]=="object"){
                     let volumePrime=volume*(soundTouchComponent[id] - initialAngleSound[id])/(2.*pi)*.5;
