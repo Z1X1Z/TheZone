@@ -218,7 +218,7 @@ if(window.grabStar)
 
     for(var t=0; t<maxTouchSoundCount;t++)
     {if(t!=id)initialTwist[t]+=twistIncrement;
-       permanentInitialTwist[t] +=twistIncrement;
+        permanentInitialTwist[t] +=twistIncrement;
 
     }
 //console.log("twisteR"+permanentInitialTwist[id])
@@ -264,10 +264,8 @@ if(window.grabStar)
                             twisteR<6.*Math.sign(twisteR)||twisteR>18.*Math.sign(twisteR))
                          )
                       //   if(following||(signTwist[id]==-1&&lastTwistSign!=1))
-                     {
                          octavesBoosted[id]+=24*signTwist[id];
-                         for(var t=0;t<maxTouchSoundCount;t++)if(t!=id)  octavesBoosted[t]-=24*signTwist[t];
-                     }
+                       //    for(var t=0;t<maxTouchSoundCount;t++)if(t!=id)  octavesBoosted[t]-=24*signTwist[t];
                  //console.log(signTwist[id])
                  //console.log(octavesBoosted[id])
 
@@ -289,8 +287,8 @@ if(window.grabStar)
                     // if(dif>2)octavesBoosted[id]+=24;
                      //  else if(dif<-2)octavesBoosted[id]-=24;
                    // twistFeed =permanentInitialTwist[id]+octavesBoosted[id];
-                    // twistFeed=permanentInitialTwist[id]+octavesBoosted[id];
-                     twistFeed=(permanentInitialTwist[id]-initialTwist[id]+24*100)%24+initialTwist[id]+octavesBoosted[id];//
+                     twistFeed=permanentInitialTwist[id]+octavesBoosted[id];
+                     //(twist-initialTwist[id]+24*100)%24+initialTwist[id]+octavesBoosted[id];//
                    //  (initialTwist[id]-twist)%(24.)+twist+octavesBoosted[id];
                      //console.log(octavesBoosted[id])
 
