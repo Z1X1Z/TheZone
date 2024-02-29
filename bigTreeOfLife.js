@@ -173,7 +173,7 @@ var equilibriator = 1.;
 //if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
 hyperCore*=equilibriator;
 
- // hyperCore-=.25/Math.log(.5)/equilibriator;
+  hyperCore-=.25/Math.log(.5)/equilibriator;
 //if(cloverSlide&&wheel)hyperCore+=1.75/Math.log(.5);
 
  if(cloverSlide)hyperCore+=.5/Math.log(.5);
