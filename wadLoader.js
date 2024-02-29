@@ -291,7 +291,7 @@ if(window.grabStar)
                      //  else if(dif<-2)octavesBoosted[id]-=24;
                    // twistFeed =permanentInitialTwist[id]+octavesBoosted[id];
                     // twistFeed=permanentInitialTwist[id]+octavesBoosted[id];
-                     twistFeed=(permanentInitialTwist[id]-initialTwist[id]+24*100)%24+initialTwist[id]+octavesBoosted[id];//
+                     twistFeed=permanentInitialTwist[id]+octavesBoosted[id];//
                    //  (initialTwist[id]-twist)%(24.)+twist+octavesBoosted[id];
                      //console.log(octavesBoosted[id])
 
