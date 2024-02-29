@@ -105,7 +105,7 @@ function startSound(e){
     let id = touchNumber.get(pressIndex.get(e.pointerId));
 
     if(window.grabStar){
-        initialAngle[id]=(Math.atan2(x,y))/Math.PI/2.;
+        initialAngle[id]=(-Math.atan2(-x,-y))/Math.PI/2.;
 
         window.twist=(window.twist+24*100)%24
         permanentInitialTwist[id]=twist;
@@ -192,7 +192,7 @@ let   angleSound  = Array(maxTouchSoundCount).fill(0.);
                                              let initialTwist= Array(maxTouchSoundCount).fill(0.);
                                              let permanentInitialTwist= Array(maxTouchSoundCount).fill(0.);
                                              
-                                             let signTwist= Array(maxTouchSoundCount).fill(true);
+                                             let signTwist= Array(maxTouchSoundCount).fill(false);
 
                                              
 function followSound(e){
@@ -244,11 +244,12 @@ if(window.grabStar)
         let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
                  let lastAngleSound=angleSound[id];
 
-             if(!window.grabStar) angleSound[id]=(((-Math.atan2(-y,-x)*flip-initialAngleSound[id])*flip+8.*pi)%(2*pi)+initialAngleSound[id]);
+             if(!window.grabStar) angleSound[id]=(((-Math.atan2(-x,-y)*flip-initialAngleSound[id])*flip+8.*pi)%(2*pi)+initialAngleSound[id]);
              
              else {
                  let twistAdj = twistIncrement/24*(Math.PI*2.);
                  angleSound[id]+= twistAdj;
+                 
                  for(var t=0; t<maxTouchSoundCount;t++)
                  {
                      let lastTwistSign=signTwist[t];
@@ -283,7 +284,7 @@ if(window.grabStar)
                    //  console.log(dif)
                     // if(dif>2)octavesBoosted[id]+=24;
                      //  else if(dif<-2)octavesBoosted[id]-=24;
-                     twistFeed =permanentInitialTwist[id]; //(permanentInitialTwist[id]-initialTwist[id]+24*100)%24+initialTwist[id]+octavesBoosted[id];//
+                     twistFeed =permanentInitialTwist[id]+octavesBoosted[id]; //(permanentInitialTwist[id]-initialTwist[id]+24*100)%24+initialTwist[id]+octavesBoosted[id];//
                    //  (initialTwist[id]-twist)%(24.)+twist+octavesBoosted[id];
                      //console.log(octavesBoosted[id])
 
