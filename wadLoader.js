@@ -89,6 +89,8 @@ function initialize(){
 }
 
 let initialAngleSound = Array(maxTouchSoundCount).fill(0);
+let initialAngleUnmodulod = Array(maxTouchSoundCount).fill(0);
+
 let initialAngle = Array(maxTouchSoundCount);
 let lastSlip  = Array(maxTouchSoundCount).fill(0);
 let pressed = false;
@@ -104,14 +106,14 @@ function startSound(e){
     let id = touchNumber.get(pressIndex.get(e.pointerId));
 
     if(window.grabStar){
-        initialAngle[id]=(-Math.atan2(-x,-y))/Math.PI/2.;
+         initialAngleUnmodulod[id]=(-Math.atan2(-x,-y));
 
         window.twist=(window.twist+24*100)%24
         permanentInitialTwist[id]=twist;
         initialTwist[id]=twist;
         lastSlip[id] =0;
         octavesBoosted[id]=0
-        signTwist[id]=-1.;//"off";
+        signTwist[id]=-1;//"off";
 
     }
     
@@ -130,8 +132,9 @@ function startSound(e){
                 
                 
                 let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
-
-                initialAngleSound[id] =(-(Math.atan2(-x,-y))*flip+pi*2)%(pi*2.);
+                 
+                 
+                initialAngleSound[id] =(-Math.atan2(-x,-y)*flip+pi*2)%(pi*2.);
                  angleSound[id] =initialAngleSound[id] ;
                  soundTouchComponent[id]=initialAngleSound[id];
 
@@ -205,21 +208,22 @@ function followSound(e){
                     let id = touchNumber.get(pressIndex.get(e.pointerId));
 
                     let twistIncrement=0;
+                    let twistIncrementPI=0.;
 if(window.grabStar)
 {
-    let slip = (-(Math.atan2(-x,-y))/Math.PI/2.-initialAngle[id]+100.)%1;
+    let slip = (-Math.atan2(-x,-y)-initialAngleUnmodulod[id]+2*pi)%(2*pi);
    // if(lastSlip==0)lastSlip=slip;
-     twistIncrement = (slip-lastSlip[id])*24*flip;
+     twistIncrementPI =(slip-lastSlip[id])*flip
+        
+     twistIncrement = twistIncrementPI*(24./2.)/pi;
     //if(twistIncrement>12)twistIncrement=-twistIncrement;
     lastSlip[id] =slip;
 
     window.twist+=twistIncrement;
     initialTwist[id]+=twistIncrement
-    for(var t=0; t<maxTouchSoundCount;t++)
-    {if(t!=id);
-        permanentInitialTwist[t] +=twistIncrement;
+    for(var t=0; t<maxTouchSoundCount;t++)permanentInitialTwist[t] +=twistIncrement;
 
-    }
+    
 //console.log("twisteR"+permanentInitialTwist[id])
 
    // window.twist=(window.twist-initialTwist[id]+24*100)%24+initialTwist[id];
@@ -243,35 +247,19 @@ if(window.grabStar)
              if((!window.touchMode&&!window.muteVoiceTouchVolume)||(window.touchMode&&!window.muteTouchTouchVolume))
              {
         let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
-                 let lastAngleSound=angleSound[id];
 
              if(!window.grabStar) angleSound[id]=(((-Math.atan2(-x,-y)*flip-initialAngleSound[id])*flip+8.*pi)%(2*pi)+initialAngleSound[id]);
              
              else {
-                 let twistAdj = twistIncrement/24*(Math.PI*2.);
-                 angleSound[id]+= twistAdj;
+                 angleSound[id]+= twistIncrementPI;
                  
-                // for(var t=0;t<maxTouchSoundCount;t++)
-                 {
-                     var t = id;
-                 let twisteR=((angleSound[t]-initialAngleSound[t])*24/(2*pi))%24;
+                 let twisteR=(angleSound[id]-initialAngleSound[id])%(2*pi);
                  
-                 //  if(following)
-                 let   lastTwistSign=signTwist[t];
-                 // else lastTwistSign = "not yet set";
-                 signTwist[t] =Math.sign(twisteR-12.);
-                 
-                 if (lastTwistSign!=signTwist[t]
-                     &&(
-                        twisteR<6.*Math.sign(twisteR)||twisteR>18.*Math.sign(twisteR))
-                     )
-                     //   if(following||(signTwist[id]==-1&&lastTwistSign!=1))
-                     octavesBoosted[t]+=24*signTwist[t];
-                // octavesBoosted[t]-=24*signTwist[t];
-                 //console.log(signTwist[id])
-                 //console.log(octavesBoosted[id])
+                     let   lastTwistSign=signTwist[id];
+                         signTwist[id] =Math.sign(twisteR-pi);
+                     if( lastTwistSign!=signTwist[id] ) octavesBoosted[id]+=24*signTwist[id];
                      
-             }
+                 
              }
                  
                  let twistFeed;
@@ -280,26 +268,13 @@ if(window.grabStar)
                      twistFeed = twist;
                  }
                  else {
-                    // soundTouchComponent=angleSound[id]
-                     soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id]+4*pi)%(Math.PI*2.)+initialAngleSound[id];
+                     soundTouchComponent[id]=(angleSound[id]-initialAngleSound [id]+4*pi)%(Math.PI*2.)+initialAngleSound[id];
 
-                    //soundTouchComponent[id] = (initialAngleSound[id]-angleSound[id])%(2*pi)+angleSound[id];//angleSound[id];//
-              
-                    // let dif = angleSound[id]-lastAngleSound;
-                   //  console.log(dif)
-                    // if(dif>2)octavesBoosted[id]+=24;
-                     //  else if(dif<-2)octavesBoosted[id]-=24;
-                   // twistFeed =permanentInitialTwist[id]+octavesBoosted[id];
-                    // twistFeed=permanentInitialTwist[id]+octavesBoosted[id];
-                     twistFeed= permanentInitialTwist[id]+octavesBoosted[id];//
-                   //  (initialTwist[id]-twist)%(24.)+twist+octavesBoosted[id];
-                     //console.log(octavesBoosted[id])
+                     twistFeed= permanentInitialTwist[id]+octavesBoosted[id];
 
                  }
                                   
-                       //               console.log("as"+angleSound[id])
-                        //            console.log("twist"+twistFeed)
-                let frequency = Math.pow(2.,((((soundTouchComponent[id]*window.flip)/pi/2*12)*window.flip-twistFeed/2.)-1.)/12.
+                let frequency = Math.pow(2.,((((soundTouchComponent[id]*window.flip)/pi*(12/2))*window.flip-twistFeed/2.)-1.)/12.
                                                 )*window.ConcertKey;
         if(isFinite(frequency)&&frequency>0.&&
            angleSound[id]-initialAngleSound[id]!=0&&frequency>20&&typeof sound[id]=="object"){
