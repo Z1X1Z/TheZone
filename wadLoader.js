@@ -112,7 +112,7 @@ function startSound(e){
         initialTwist[id]=twist;
         lastSlip[id] =0;
         octavesBoosted[id]=0
-        signTwist[id]=false;
+        signTwist[id]=-1.;//"off";
 
     }
     
@@ -192,11 +192,12 @@ let   angleSound  = Array(maxTouchSoundCount).fill(0.);
                                              let initialTwist= Array(maxTouchSoundCount).fill(0.);
                                              let permanentInitialTwist= Array(maxTouchSoundCount).fill(0.);
                                              
-                                             let signTwist= Array(maxTouchSoundCount).fill(false);
+                                             let signTwist= Array(maxTouchSoundCount);
 
                             let following = false;
+                                          //   let lastTwistSign;
+
 function followSound(e){
-                    following = true;
             let y = e.clientY-heightPX/2.;
             let x = e.clientX-widthPX/2.;
 
@@ -252,18 +253,20 @@ if(window.grabStar)
                  angleSound[id]+= twistAdj;
                  
                      let twisteR=((angleSound[id]-initialAngleSound[id])*24/(2*pi)+24*100)%24;
-                 let lastTwistSign = "unset";
-                     if(following) lastTwistSign=signTwist[id];
+                 
+               //  if(following)
+                  let   lastTwistSign=signTwist[id];
+                // else lastTwistSign = "not yet set";
                      signTwist[id] =Math.sign(twisteR-12.);
-                   // if(!following) lastTwistSign = false;
                      
-                     if (lastTwistSign!=signTwist[id]&&(
+                     if (lastTwistSign!=signTwist[id]
+                         &&(
                             twisteR<6.*Math.sign(twisteR)||twisteR>18.*Math.sign(twisteR))
                          )
-                         octavesBoosted[id]+=24*signTwist[id]
-                     
-                 console.log(   octavesBoosted[id])
-                 
+                      //   if(following||(signTwist[id]==-1&&lastTwistSign!=1))
+                             octavesBoosted[id]+=24*signTwist[id];
+                 //console.log(signTwist[id])
+                 //console.log(octavesBoosted[id])
 
              }
                  
@@ -282,7 +285,9 @@ if(window.grabStar)
                    //  console.log(dif)
                     // if(dif>2)octavesBoosted[id]+=24;
                      //  else if(dif<-2)octavesBoosted[id]-=24;
-                     twistFeed =permanentInitialTwist[id]+octavesBoosted[id]; //(permanentInitialTwist[id]-initialTwist[id]+24*100)%24+initialTwist[id]+octavesBoosted[id];//
+                   // twistFeed =permanentInitialTwist[id]+octavesBoosted[id];
+                     twistFeed=permanentInitialTwist[id]+octavesBoosted[id];
+                     //(twist-initialTwist[id]+24*100)%24+initialTwist[id]+octavesBoosted[id];//
                    //  (initialTwist[id]-twist)%(24.)+twist+octavesBoosted[id];
                      //console.log(octavesBoosted[id])
 
@@ -330,6 +335,7 @@ if(window.grabStar)
                 }
         }
 }
+                                             following = true;
 
 }
                                                              let cycle=0;
