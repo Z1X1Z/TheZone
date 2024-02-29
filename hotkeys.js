@@ -184,7 +184,7 @@ function resetAll(){
             window.starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;
             window.starCount = Math.ceil(starArms*60*secondsToEdge);
 
-            if(!touchOnlyMode)window.touchMode=false;
+            if(!touchOnlyMode||location.hash.includes("t"))window.touchMode=false;
             window.volumeSpeed = false;
 
             window.twist = 0.;
