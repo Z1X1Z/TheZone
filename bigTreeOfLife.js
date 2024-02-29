@@ -93,7 +93,7 @@ centerslide-=c/4.;
 else if()        centerslide-=c*2.;
 
 */
-centerslide-=c/2.;
+centerslide-=c/1.5;
 
 }
 
@@ -173,10 +173,10 @@ var equilibriator = 1.;
 //if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
 hyperCore*=equilibriator;
 
-  hyperCore-=.25/Math.log(.5)/equilibriator;
+ // hyperCore-=.25/Math.log(.5)/equilibriator;
 //if(cloverSlide&&wheel)hyperCore+=1.75/Math.log(.5);
 
- if(cloverSlide)hyperCore+=1./Math.log(.5);
+ if(cloverSlide)hyperCore+=.5/Math.log(.5);
 if(wheel)hyperCore+=.25/Math.log(.5);
 
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
@@ -348,7 +348,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
         }
         
         if(spokelover){
-            if(counter<hyperCoreBoosted){
+            if(counter+dstnce<hyperCoreBoosted){
                 //  if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
                 //else
                 
@@ -408,6 +408,7 @@ if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spin2(s,Math.atan(s.y,s.x)*OmniPeta
 
 if (cloverSlide)
 {
+    /*
 if((i)>hyperCoreBoosted)
 {
 var b = dstnce;
@@ -419,12 +420,13 @@ var b =dstnce/2.;
 loops-=b;
 hyperCoreBoosted+=b;
 }
-  /*
+     */
+  
 
-    var b =dstnce;
+    var b =dstnce*1.5;
     loops-=b;
     hyperCoreBoosted+=b;
-   */
+   
 }
 
 if(fieldPowerBoostMeta&&((i)>=hyperCoreBoosted)){
