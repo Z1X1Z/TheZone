@@ -405,7 +405,7 @@ function callKey(event){
     else if (event.altKey&&(key=="©"||key=="g"))window.grabStar=!window.grabStar;
     else if (event.altKey&&(key=="∫"||key=="b")){
 
-                 if(!muteToggle)
+                 if(!muteToggle||(!runningHash&&android))
                        window.BibleON = (window.BibleON+1)%2;
 
         let content = document.getElementsByClassName("dropdown-content");
