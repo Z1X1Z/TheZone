@@ -2342,7 +2342,12 @@ float spoke_factorLarge = spoke_factor*(((1.+gr)/-leaf)/truncator)*truncator;
                              float upSpoke=spoke_factorLarge*(((gr+1./-leaf)/truncator)*truncator);//uncertain term, without dstnce spokeCore is spoke_factor*2.
 
             float downSpoke=((1./leaf)/truncator)*truncator;//1./(((-leaf)*truncator)/truncator)/4.;
-    
+                             float powerOfDynamicSokeCore = 2.;
+
+                             float spokeloverCoreShiftDown=pow(upSpoke,powerOfDynamicSokeCore)*logStabilizationConstant;
+                             float       spokeloverCoreShiftUp  =      pow(abs(downSpoke),2.);
+                             
+
        //     float logOfSpoke_Factor = 0.;
        //     if (wheel) logOfSpoke_Factor=log(spoke_factor);
                              
@@ -2478,6 +2483,7 @@ vec2 lastS = s;
    s.x=log(abs(s.x))/log(baseN);
    //traditionally be e or 3 probably 1.5 to 4
    
+   
 
 if(Spoker){
     if(morph==0.){
@@ -2533,19 +2539,17 @@ if(counter+dstnce<hyperCoreBoosted){
      
      s/=sqrt(2.);
      if(!wheel){
-
-     float b =pow(abs(downSpoke),grOverLeaf);
-  hyperCoreOUTPUT+=b;
-  hyperCoreBoosted+=b;
+     //float b =pow(pow(abs(downSpoke),powerOfDynamicSokeCoreUp),grOverLeaf);
+  hyperCoreOUTPUT+=spokeloverCoreShiftUp;
+  hyperCoreBoosted+=spokeloverCoreShiftUp;
   }
      }
 
 else //if(  0.>=hyperCoreBoosted)
 {
     if(!wheel){
-
-              hyperCoreOUTPUT-=upSpoke;
-              hyperCoreBoosted-=upSpoke;
+              hyperCoreOUTPUT-=spokeloverCoreShiftDown;
+              hyperCoreBoosted-=spokeloverCoreShiftDown;
              }
     }
  }
