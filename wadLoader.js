@@ -107,7 +107,7 @@ function startSound(e){
     if(window.grabStar){
         initialAngle[id]=(-Math.atan2(-x,-y))/Math.PI/2.;
 
-       // window.twist=(window.twist+24*100)%24
+        window.twist=(window.twist+24*100)%24
        // permanentInitialTwist[id]=twist;
         initialTwist[id]=twist;
         lastSlip[id] =0;
@@ -218,7 +218,7 @@ if(window.grabStar)
 
     for(var t=0; t<maxTouchSoundCount;t++)
     {if(t!=id)initialTwist[t]+=twistIncrement;
-        permanentInitialTwist[t] +=twistIncrement;
+     //   permanentInitialTwist[t] +=twistIncrement;
 
     }
 //console.log("twisteR"+permanentInitialTwist[id])
