@@ -933,8 +933,8 @@ function setMicInputToStarPIXEL(){
              if(!touchMode||window.shouldShowStar)
              {
                  
-                    let withinMaxsafeSizeBins=(numberOfBins<=2**13)//(EldersLeg<=682);
-                    let withinMaxsafeSizeFFT=(fftSize<=2**13)//(EldersLeg<=682);
+                 let withinMaxsafeSizeBins=(numberOfBins<=2**13)//(EldersLeg<=682);
+                 let withinMaxsafeSizeFFT=(fftSize<=2**13)//(EldersLeg<=682);
                  uniforms.sampleRate.value =       audioX.sampleRate     ;
                  uniforms.fftSize.value =             analyser.fftSize;
                  uniforms.nyq.value =            analyser.fftSize/audioX.sampleRate/2.;
@@ -955,9 +955,9 @@ function setMicInputToStarPIXEL(){
                  }
                  if(withinMaxsafeSizeFFT) {
                      let size = (withinMaxsafeSizeFFT)?fftSize:1;
-
+                     
                      let inputDataBuffer =new Float32Array( size ).fill(0.);
-
+                     
                      for (var x = 0; x < fftSize; x++)inputDataBuffer[x]=inputData[x];
                      
                      
@@ -968,7 +968,13 @@ function setMicInputToStarPIXEL(){
                      uniforms["audioBuffer"].value = RAWaudioTexBuf;
                      uniforms.audioBuffer.needsUpdate = true;
                  }
-
+             }
+                 else{
+                     uniforms["audioBuffer"].value = null;
+                     uniforms.audioBuffer.needsUpdate = true;
+                     
+                     uniforms[ "micIn" ].value = null;
+                     uniforms.micIn.needsUpdate = true;
              }
 
              //console.log(uniforms.micIn.value[0])
