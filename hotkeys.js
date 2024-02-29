@@ -435,7 +435,7 @@ function callKey(event){
                         document.getElementById("nav").style.width="50%";
                         for(var b = 0; b<content.length; b++)content[b].style.width="50%";
                     }
-                    else if(!mobile&&runningHash) {
+                    else {
                         document.getElementById("Bible").height= "0%";
                         document.getElementById("Bible").width="0%";
                         document.getElementById("nav").style.width="100%";
