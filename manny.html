@@ -745,7 +745,7 @@ coreData.fill(coringValue);">
                                <input type="checkbox" id="SpokeLove" name="t"  onclick= "
                                    key  = 'F';
                                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                <label for="SpokeLove">Spoke Love![F]</label><br>
+                                <label for="SpokeLove">Spoke Love?![F]</label><br>
                                 
                                 <input type="checkbox" id="Continuum Clover" name="t"  onclick= "
                                     key  = '&';
@@ -2289,10 +2289,10 @@ float equilibriator = 1.;
 //if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
    hyperCore*=equilibriator;
    
-     hyperCore-=.25/log(.5)/equilibriator;
+    // hyperCore-=.25/log(.5)/equilibriator;
   //  if(cloverSlide&&wheel)hyperCore+=1.75/log(.5);
 
-  if(cloverSlide)hyperCore+=1./log(.5);
+  if(cloverSlide)hyperCore+=.5/log(.5);
   if(wheel)hyperCore+=.25/log(.5);
 
    if(multiplicatorNexus)hyperCore-=.5/log(.5);
@@ -2524,10 +2524,9 @@ hyperCoreOUTPUT-=spoke_factor;
 hyperCoreBoosted-=spoke_factor;}
 
    }
-
 if(spokelover)
 {
-if(counter<hyperCoreBoosted){
+if(counter+dstnce<hyperCoreBoosted){
    //  if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
      //else
 
@@ -2586,6 +2585,7 @@ OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
 
  if (cloverSlide)
    {
+       /*
        if(float(i)>hyperCoreBoosted)
        {
            float b = dstnce;
@@ -2597,10 +2597,11 @@ OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
            loops-=b;
        hyperCoreBoosted+=b;
        }
-      /* float b =dstnce;//try dstnce/1.5
+        */
+      float b =dstnce/1.5;//try dstnce/1.5
        loops-=b;
    hyperCoreBoosted+=b;
-       */
+       
        
    }
    
