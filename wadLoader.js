@@ -252,23 +252,24 @@ if(window.grabStar)
                  let twistAdj = twistIncrement/24*(Math.PI*2.);
                  angleSound[id]+= twistAdj;
                  
-                     let twisteR=((angleSound[id]-initialAngleSound[id])*24/(2*pi)+24*100)%24;
+                 for(var t=0;t<maxTouchSoundCount;t++){
+                 let twisteR=((angleSound[t]-initialAngleSound[t])*24/(2*pi)+24*100)%24;
                  
-               //  if(following)
-                  let   lastTwistSign=signTwist[id];
-                // else lastTwistSign = "not yet set";
-                     signTwist[id] =Math.sign(twisteR-12.);
-                     
-                     if (lastTwistSign!=signTwist[id]
-                         &&(
-                            twisteR<6.*Math.sign(twisteR)||twisteR>18.*Math.sign(twisteR))
-                         )
-                      //   if(following||(signTwist[id]==-1&&lastTwistSign!=1))
-                         octavesBoosted[id]+=24*signTwist[id];
-                           for(var t=0;t<maxTouchSoundCount;t++)if(t!=id)  octavesBoosted[t]-=24*signTwist[t];
+                 //  if(following)
+                 let   lastTwistSign=signTwist[t];
+                 // else lastTwistSign = "not yet set";
+                 signTwist[t] =Math.sign(twisteR-12.);
+                 
+                 if (lastTwistSign!=signTwist[t]
+                     &&(
+                        twisteR<6.*Math.sign(twisteR)||twisteR>18.*Math.sign(twisteR))
+                     )
+                     //   if(following||(signTwist[id]==-1&&lastTwistSign!=1))
+                     octavesBoosted[t]+=24*signTwist[t];
+                // octavesBoosted[t]-=24*signTwist[t];
                  //console.log(signTwist[id])
                  //console.log(octavesBoosted[id])
-
+             }
              }
                  
                  let twistFeed;
