@@ -3606,7 +3606,7 @@ mny+=HEART*heartMultiplier;
             ARTICLE+=clamp(flames(c4-vec2(.5,0.))-(ls+HORSE.r*3.+clamp(-mannyFace.r-mannyFace.g-mannyFace.b,-2.,.0))*10000.,0.,1.)+HORSE+SWORD+LAMP
             ;
                         */
-                   ARTICLE=flames(p);
+                   if(p.y!=0.)p.ARTICLE=flames(p);
                    
                    //working:sword,horse,lamp
                    
