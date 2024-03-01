@@ -104,7 +104,7 @@ function startSound(e){
     let id = touchNumber.get(pressIndex.get(e.pointerId));
 
     if(window.grabStar){
-        initialAngle[id]=(-Math.atan2(-x,-y))/Math.PI/2.;
+        initialAngle[id]=-Math.atan2(-x,-y);
 
         window.twist=(window.twist+24*100)%24
         permanentInitialTwist[id]=twist;
@@ -137,7 +137,6 @@ function startSound(e){
 
                 let frequency = Math.pow(2.,((((initialAngleSound[id]*window.flip)/pi/2*12)*window.flip-window.twist/2.)-1.)/12.
                                               )*window.ConcertKey;
-                                             console.log(frequency)
                 //sound[id].pitch=frequency;
                 //sound2[id].pitch=frequency*2.;
                 //sound[id].volume=0.;
@@ -207,19 +206,13 @@ function followSound(e){
                     let twistIncrement=0;
 if(window.grabStar)
 {
-    let slip = (-(Math.atan2(-x,-y))/Math.PI/2.-initialAngle[id]+100.)%1;
-   // if(lastSlip==0)lastSlip=slip;
-     twistIncrement = (slip-lastSlip[id])*24*flip;
-    //if(twistIncrement>12)twistIncrement=-twistIncrement;
+    let slip = (-Math.atan2(-x,-y)-initialAngle[id]+8*pi)%(2*pi);
+    twistIncrementPI =(slip-lastSlip[id])
+     twistIncrement = twistIncrementPI*(24/2)/pi*flip;
     lastSlip[id] =slip;
 
     window.twist+=twistIncrement;
     permanentInitialTwist[id] +=twistIncrement;
-
- //   for(var t=0; t<maxTouchSoundCount;t++)if(t!=id)initialTwist[id]-=twistIncrement
-//console.log("twisteR"+permanentInitialTwist[id])
-
-   // window.twist=(window.twist-initialTwist[id]+24*100)%24+initialTwist[id];
 
 }
          if(!window.muteTouchVolume){
@@ -245,30 +238,18 @@ if(window.grabStar)
              if(!window.grabStar) angleSound[id]=(((-Math.atan2(-x,-y)*flip-initialAngleSound[id])*flip+8.*pi)%(2*pi)+initialAngleSound[id]);
              
              else {
-                 let twistAdj = twistIncrement/24*(Math.PI*2.);
-                 angleSound[id]+= twistAdj;
+                 angleSound[id]+= twistIncrementPI;
                  
-                // for(var t=0;t<maxTouchSoundCount;t++)
-                 {
-                     var t = id;
-                 let twisteR=(angleSound[t]-initialAngleSound[t])%(2*pi);
+                 let twisteR=(angleSound[id]-initialAngleSound[id])%(2*pi);
                  
-                 //  if(following)
-                 let   lastTwistSign=signTwist[t];
-                 // else lastTwistSign = "not yet set";
-                 signTwist[t] =Math.sign(twisteR-pi);
-                 
-                 if (lastTwistSign!=signTwist[t]
-                     &&(
-                        twisteR<pi/2.*Math.sign(twisteR)||twisteR>3./2.*pi*Math.sign(twisteR))
-                     )
-                     //   if(following||(signTwist[id]==-1&&lastTwistSign!=1))
-                     octavesBoosted[t]+=24*signTwist[t];
-                // octavesBoosted[t]-=24*signTwist[t];
-                 //console.log(signTwist[id])
-                 //console.log(octavesBoosted[id])
+                 let   lastTwistSign=signTwist[id];
+                 signTwist[id] =Math.sign(twisteR-pi);
+                 if (lastTwistSign!=signTwist[id]
+                     &&(twisteR<pi/2.||twisteR>3./2.*pi)
+                    )   octavesBoosted[id]+=24*signTwist[id];
+             
                      
-             }
+             
              }
                  
                  let twistFeed;
@@ -277,25 +258,11 @@ if(window.grabStar)
                      twistFeed = twist;
                  }
                  else {
-                    // soundTouchComponent=angleSound[id]
                      soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id]+4*pi)%(Math.PI*2.)+initialAngleSound[id];
 
-                    //soundTouchComponent[id] = (initialAngleSound[id]-angleSound[id])%(2*pi)+angleSound[id];//angleSound[id];//
-              
-                    // let dif = angleSound[id]-lastAngleSound;
-                   //  console.log(dif)
-                    // if(dif>2)octavesBoosted[id]+=24;
-                     //  else if(dif<-2)octavesBoosted[id]-=24;
-                   // twistFeed =permanentInitialTwist[id]+octavesBoosted[id];
-                    // twistFeed=permanentInitialTwist[id]+octavesBoosted[id];
-                     twistFeed= permanentInitialTwist[id]+octavesBoosted[id];//
-                   //  (initialTwist[id]-twist)%(24.)+twist+octavesBoosted[id];
-                     //console.log(octavesBoosted[id])
+                     twistFeed= permanentInitialTwist[id]+octavesBoosted[id];
 
                  }
-                                  
-                       //               console.log("as"+angleSound[id])
-                        //            console.log("twist"+twistFeed)
                 let frequency = Math.pow(2.,((((soundTouchComponent[id]*window.flip)/pi/2*12)*window.flip-twistFeed/2.)-1.)/12.
                                                 )*window.ConcertKey;
         if(isFinite(frequency)&&frequency>0.&&
@@ -354,8 +321,6 @@ let c = document.body;//document.getElementById("container")
  function attachListeners(){
             c.addEventListener('pointerdown', function(e)
                                {
-                //   e.stopImmediatePropagation();          //e.preventDefault();
-//console.log(e.srcElement.nodeName=="CANVAS" )
                 if(e.srcElement.nodeName=="CANVAS"  ||
                    (e.srcElement.id=="menuDivider"||(window.iOS&&e.srcElement.name=="menuButton")  )){
                     
@@ -370,13 +335,11 @@ let c = document.body;//document.getElementById("container")
                     
                     pressIndex.set (e.pointerId,cycler)
                     touchNumber.set(cycler,cycle)
-                    *///needs to be sorted out to allow for more consecutive uninterrupted touches
                     getPressure(e);
                     startSound(e);
                 }
             }, false);
             c.addEventListener('pointermove', function(e) {
-                //let ae=(e.target.className=="dropbtn")?e.target.firstElementChild:"notMenu";
 
                 if(e.srcElement.nodeName=="CANVAS"  ||
                    (e.srcElement.id=="menuDivider"||(window.iOS&&e.srcElement.name=="menuButton")  )){
