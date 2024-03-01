@@ -137,7 +137,7 @@ function startSound(e){
 
                 let frequency = Math.pow(2.,((((initialAngleSound[id]*window.flip)/pi/2*12)*window.flip-window.twist/2.)-1.)/12.
                                               )*window.ConcertKey;
-                                           //  console.log(frequency)
+                                             console.log(frequency)
                 //sound[id].pitch=frequency;
                 //sound2[id].pitch=frequency*2.;
                 //sound[id].volume=0.;
@@ -254,9 +254,11 @@ if(window.grabStar)
                 // for(var t=0;t<maxTouchSoundCount;t++)
                  {
                      var t = id;
-                 let twisteR=((angleSound[t]-initialAngleSound[t]))%24;
-                
+                 let twisteR=(angleSound[t]-initialAngleSound[t])%(2*pi);
+                 
+                 //  if(following)
                  let   lastTwistSign=signTwist[t];
+                 // else lastTwistSign = "not yet set";
                  signTwist[t] =Math.sign(twisteR-pi);
                  
                  if (lastTwistSign!=signTwist[t]
