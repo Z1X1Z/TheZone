@@ -217,10 +217,9 @@ if(window.grabStar)
 
     window.twist+=twistIncrement;
     initialTwist[id]+=twistIncrement
-    for(var t=0; t<maxTouchSoundCount;t++)
-        permanentInitialTwist[t] +=twistIncrement;
-
-}
+                                             permanentInitialTwist[id] +=twistIncrement;
+   // for(var t=0; t<maxTouchSoundCount;t++) if(t!=id)
+                                             }
          if(!window.muteTouchVolume){
         
         let twistTRIANGLEtoSQUARE=1.;
