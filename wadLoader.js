@@ -249,7 +249,7 @@ function followSound(e){
 
             let y = e.clientY-heightPX/2.;
             let x = e.clientX-widthPX/2.;
-                  //if(window.INITIALIZED&&window.ISdilated)
+                  if(window.INITIALIZED&&window.ISdilated)
                       dilator(x,y);
 
                         screenPressCoordX=x;
