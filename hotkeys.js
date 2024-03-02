@@ -153,7 +153,7 @@ function resetAll(){
     
                           
             window.zoom=1.;
-            window.ISdilated=true;
+            window.ISdilated=false;
             window.RockInTheWater=0;
             window.octaveStars=true;
             window.BulletMine=0;
@@ -209,6 +209,7 @@ function resetAll(){
         setMicInputToStarPIXEL();
         setTrailSize()
         renderer.setPixelRatio( rez)
+                onWindowResize();
     }
     if(wadLOADED)
     {
@@ -477,9 +478,20 @@ function callKey(event){
         else if(uniforms.refactorCores.value==1)uniforms.refactorCores.value=0;
         else uniforms.refactorCores.value=2;
     }
-    
-    else if (event.altKey&&(key=="∂"||key=="d")&&(!runningHash||!window.online))//∂ is alt+d
-        window.dupered=!window.dupered;
+                
+                else if (event.altKey&&(key=="∂"||key=="d")&&(!runningHash||!window.online))//∂ is alt+d
+                    window.dupered=!window.dupered;
+                
+                else if (event.altKey&&(key=="∂"||key=="d")&&(!runningHash||!window.online))//∂ is alt+d
+                    window.dupered=!window.dupered;
+                
+                else if (event.altKey&&(key=="∂"||key=="d")&&(!runningHash||!window.online))//∂ is alt+d
+                    window.dupered=!window.dupered;
+                else if (event.altKey&&(key=="ø"||key=="o")) {
+                    window.ISdilated=!window.ISdilated;
+                    console.log(ISdilated)
+                }
+
     else if (event.altKey&&key=="f")console.log("speakers disabled!");//speakers turned off in manny.html
     else if(event.ctrlKey||event.altKey);//swallow remaining possibilities, muting keypress
     /*if(key == "k" && event.ctrlKey)
@@ -744,6 +756,7 @@ function callKey(event){
       else window.zoomCageSize=1.5;
         
         number="";
+                console.log(key)
     }
 
 
