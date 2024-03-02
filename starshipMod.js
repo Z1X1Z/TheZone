@@ -345,9 +345,12 @@ let pushBackCounter = 0;
 
             totalAMP = 0.;
             for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
-            totalAMP/=inputData.length;
-                uniforms["totalAmp" ].value=totalAMP;
-                
+                totalAMP/=inputData.length;
+            uniforms["totalAmp" ].value=totalAMP;
+             if(volumeSpeed)  uniforms.coreDilation.value=totalAMP**2.*Math.sqrt(24.)*2.;
+                           //     console.log(uniforms.coreDilation.value)
+
+
                 
                 
                 lastPitch = pitch;
@@ -1057,7 +1060,7 @@ function onWindowResize() {
                        
 let lastVolume = 1.;
         function setZoomRate(){
-        let volumeProcessed =volume/lastVolume;//should be volume not volumeBoosted
+        let volumeProcessed =(volume/lastVolume)**.5;//should be volume not volumeBoosted
         if(!isFinite(volumeProcessed))volumeProcessed=1.;
             return Math.E**(Math.log(.5)/zoomFrames*zoomRate*interpolation*(volumeProcessed));//the square root of volume is to make it grow slower than in d_xy
         }
@@ -1419,8 +1422,8 @@ function runOSMD (){
                                           
                                           
    function animate( timestamp ) {
-
                                     
+
                                     
     ONbypass = false;
      if( window.touchMode||window.touchOnlyMode)
@@ -1488,7 +1491,6 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
                    if(lastVolume!=0.) lastVolume=volume;
                volume = totalAMP*audioX.sampleRate/bufferSize/2.;
                if(lastVolume==0.) lastVolume=volume;
-
                        }
            else {volume=1.; lastVolume=1.; }
     

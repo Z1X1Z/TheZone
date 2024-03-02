@@ -1,6 +1,7 @@
-var shaderScale, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals;
+var shaderScale,coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals;
 function setUniformsToPlainName(){
    // uniforms..value
+    coreDilation  = uniforms.coreDilation.value;
     time = window.TIMESTAMP;
      chirality = uniforms.chirality.value;
      coords = uniforms.coords.value
@@ -173,6 +174,7 @@ var equilibriator = 1.;
 //if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
 hyperCore*=equilibriator;
 
+    hyperCore+=coreDilation
   hyperCore-=.25/Math.log(.5)/equilibriator;
 //if(cloverSlide&&wheel)hyperCore+=1.75/Math.log(.5);
 
@@ -248,7 +250,7 @@ coreBooster=multCrossTwist.length()/Math.log(.5)*lfc;
                          
 
                                                       
-                                                                                  var colorComputationBoost =7.;//increasing number decreases processing and clarity
+                                                                                  var colorComputationBoost =3.5;//increasing number decreases processing and clarity
                                                                                   var baseDelimiter =50.;
 
 for (var counter=0.;counter<iterations;counter++)if(dstnce<baseDelimiter/colorComputationBoost){
@@ -535,28 +537,37 @@ window.bigCloverGapSync = false;
         }else{
              tree=tol(  new THREE.Vector2(0,0), new THREE.Vector2(0,0) );
             
-            if (uniforms["MetaCored"].value)
-             {
-                
-                var precores = .25/Math.log(.5);
-                 if(uniforms.morph.value!=0.)precores=precores-3./Math.log(.5);
-                 if(uniforms.refactorCores.value!=1.)precores=-.0;
-                 
-                 const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
-                 var equilibriator = 1.;
-             
-                uniforms[ "centralCores" ].value = Math.log(zoom)/-Math.log(2.)+precores    ;
-                // if(uniforms[ "morph" ].value!=0.)uniforms[ "centralCores" ].value*=3./2.;//stabilize morph dance collaboration
-
-                uniforms[ "externalCores" ].value =tree.z;
-              
-            }
-            
-            
             let coreImplosion = Math.abs(Math.floor(coreTriggered)-Math.floor(tree.z));
             if(coreImplosion>.5//&&Math.round(tree.z)-tree.z<0.
                )//due to the cycling upcore, it triggers twice per core
             {
+                
+                
+                
+                
+                
+                if (uniforms["MetaCored"].value)
+                 {
+                    
+                    var precores = .25/Math.log(.5);
+                     if(uniforms.morph.value!=0.)precores=precores-3./Math.log(.5);
+                     if(uniforms.refactorCores.value!=1.)precores=-.0;
+                     
+                     const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
+                     var equilibriator = 1.;
+                 
+                    uniforms[ "centralCores" ].value = Math.log(zoom)/-Math.log(2.)+precores    ;
+                    // if(uniforms[ "morph" ].value!=0.)uniforms[ "centralCores" ].value*=3./2.;//stabilize morph dance collaboration
+
+                    uniforms[ "externalCores" ].value =tree.z;
+                  
+                }
+                
+                
+                
+                
+                
+                
             //    console.log(Math.round(tree.z)-tree.z)
 
                 if(dupered&&zoom<zoomCap32) generated = false;
@@ -567,8 +578,8 @@ window.bigCloverGapSync = false;
 
                        // for(var t = 0; t<3; t++)
                         {
-                            vibrateArrayNew.push(50);//coreImplosion*
-                            vibrateArrayNew.push(50);//coreImplosion*
+                            vibrateArrayNew.push(50*coreImplosion);//coreImplosion*
+                            vibrateArrayNew.push(50*coreImplosion);//coreImplosion*
                             
                                                            try{error = navigator.vibrate(vibrateArrayNew );}
                                                            catch(e){ error+=e;}

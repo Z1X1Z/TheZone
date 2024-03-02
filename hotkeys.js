@@ -2,7 +2,7 @@ const leaf = -1.3247179572447460259609088544780973407344040569017333645340150503
 const gr = 1.61803398874989484820458683436563811772030917980576286213544862270526046281890244970720720418939113748475408807538689175212663386222353693179318006076672635443338908659593958290563832266131992829026788067520876689250171169620703222104321626954862629631361443814975870122034080588795445474924618569536486444924104432077134494704956584678850987433944221254487706647
 window.pixelShaderSize = 7;
 const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
-const movementRateORIGINAL = gr;
+const movementRateORIGINAL = 2**.5;
 const starshipSize = Math.E**leaf/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
                             const zoomFrames = 60;//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
@@ -11,6 +11,7 @@ const MR = mf/zoomFrames;
 const secondsToEdge=window.pixelShaderSize/4./pixelShaderToStarshipRATIO;
 
 window.uniformsInitial = {
+coreDilation:{value:0.},
 fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:1048./44100.},//actually 2/nyquist
 radialWarp:{value:1.},
     pixelSTARon:{value:true},
@@ -152,6 +153,7 @@ function resetAll(){
     
                           
             window.zoom=1.;
+            window.ISdilated=true;
             window.RockInTheWater=0;
             window.octaveStars=true;
             window.BulletMine=0;
@@ -179,7 +181,7 @@ function resetAll(){
             window.movementRate=movementRateORIGINAL;
             window.zoomRate=movementRateORIGINAL;
             window.radialWarp=1.;
-            window.trailSecondsLong = 3.5;
+            window.trailSecondsLong = secondsToEdge/movementRate*7.;
             window.trailLength = Math.ceil(zoomFrames*trailSecondsLong);
             window.starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;
             window.starCount = Math.ceil(starArms*60*secondsToEdge);
@@ -388,6 +390,7 @@ function callKey(event){
         else if( uniforms.exponentialPetals.value==-1.) uniforms.exponentialPetals.value=0.;
         
     }
+
     else if (event.altKey&&(key=="œ"||key=="q")){
             if          ( uniforms[ "colorCombo" ].value >1)          uniforms[ "colorCombo" ].value = -1;
             else uniforms[ "colorCombo" ].value = -(Math.abs(uniforms[ "colorCombo" ].value+1-17.))%17;
@@ -645,7 +648,7 @@ function callKey(event){
     }
     else if (key=="u") uniforms[ "petals" ].value += 1.;
     else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%10;
-    
+
     else if (key=="?"){
         if(uniforms[ "spirated" ].value==0)uniforms[ "spirated" ].value=1;
         else if(uniforms[ "spirated" ].value==1)uniforms[ "spirated" ].value=-1;
