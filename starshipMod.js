@@ -1423,7 +1423,6 @@ function runOSMD (){
                                           
    function animate( timestamp ) {
                                     
-
                                     
     ONbypass = false;
      if( window.touchMode||window.touchOnlyMode)
@@ -1489,7 +1488,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
            if(window.volumeSpeed&&on)
            {
                    if(lastVolume!=0.) lastVolume=volume;
-               volume = totalAMP*audioX.sampleRate/bufferSize/2.;
+               volume = totalAMP*audioX.sampleRate/bufferSize;
                if(lastVolume==0.) lastVolume=volume;
                        }
            else {volume=1.; lastVolume=1.; }
