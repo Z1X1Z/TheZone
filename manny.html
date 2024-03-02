@@ -1431,7 +1431,8 @@ void main(){
         </script>
 <script id="fragmentShader" type="x-shader/x-fragment">
     varying vec2 vUv;
-    
+    uniform float coreDilation;
+
     uniform bool pixelSTARon;
     uniform float fftSize;
     uniform float sampleRate;
@@ -1594,12 +1595,12 @@ uniform float exponentialPetals;
            
           // vec2 flatScreen=1.-vUv;
           // flatScreen*=2.;
-    float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*2.,2.)/2.,0.)).r;
+    float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*4.,2.)/4.,0.)).r;
    // float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*2.,2.)/2./
                                             //  pow(2.,(note)/12.+4.)*440. ,0.)).r;//adjusted to pitch
 
    if (log(abs(frAmp)/(1.-vUv.y)*(resolution.x/max(
-                                                     resolution.x,resolution.y)))*2.>1.) ret = vec4(sign(frAmp));
+                                                     resolution.x,resolution.y)))>1.) ret = vec4(sign(frAmp));
    
    }
                //           else ret=vec4(1.);
@@ -2290,6 +2291,8 @@ float equilibriator = 1.;
    hyperCore*=equilibriator;
    
      hyperCore-=.25/log(.5)/equilibriator;
+     
+     hyperCore-=coreDilation;
   //  if(cloverSlide&&wheel)hyperCore+=1.75/log(.5);
 
   if(cloverSlide)hyperCore+=.5/log(.5);
