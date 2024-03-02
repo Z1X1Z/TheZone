@@ -88,11 +88,60 @@ function initialize(){
     wadLOADED=true;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function length(x,y){
+return Math.sqrt(x**2+y**2)
+}
+
+let initialX,initialY;
+function dilator(currentCoordX, currentCoordY )
+{
+    let dilation = length(initialX-currentCoordX,initialY-currentCoordY)
+    
+    window.uniforms.coreDilation.value=dilation/length((window.innerHeight*2-1.)/2.,(window.innerWidth*2-1.)/2.)*Math.sqrt(100);
+    //console.log(uniforms.coreDilation.value)
+    
+}
+
+
+
+
+
+
+
+
+
+
+
 let initialAngleSound = Array(maxTouchSoundCount).fill(0);
 let initialAngle = Array(maxTouchSoundCount);
 let lastSlip  = Array(maxTouchSoundCount).fill(0);
 let pressed = false;
+
+
+
+
 function startSound(e){
+    
+    
+    
+    
+    
+    
     
     
     let y = e.clientY-heightPX/2.;
@@ -101,6 +150,8 @@ function startSound(e){
         
         screenPressCoordX=x;
     screenPressCoordY=y;
+     initialX = x
+     initialY = y
     let id = touchNumber.get(pressIndex.get(e.pointerId));
 
     if(window.grabStar){
@@ -182,7 +233,6 @@ function startSound(e){
 
                     }
             }
-                                             following = false;
 }
                                              let soundTouchComponent= Array(maxTouchSoundCount).fill(0.);
                                              let octavesBoosted = Array(maxTouchSoundCount).fill(0.);
@@ -192,12 +242,15 @@ let   angleSound  = Array(maxTouchSoundCount).fill(0.);
                                              
                                              let signTwist= Array(maxTouchSoundCount);
 
-                            let following = false;
                                           //   let lastTwistSign;
 
 function followSound(e){
+                    
+
             let y = e.clientY-heightPX/2.;
             let x = e.clientX-widthPX/2.;
+                  //if(window.INITIALIZED&&window.ISdilated)
+                      dilator(x,y);
 
                         screenPressCoordX=x;
                         screenPressCoordY=y;
@@ -303,7 +356,6 @@ if(window.grabStar)
                 }
         }
 }
-                                             following = true;
 
 }
                                                              let cycle=0;
