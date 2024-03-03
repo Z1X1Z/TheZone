@@ -110,9 +110,9 @@ return Math.sqrt(x**2+y**2)
 let initialX,initialY;
 function dilator(currentCoordX, currentCoordY )
 {
-    let dilation = length(initialX-currentCoordX,initialY-currentCoordY)
+    let dilation = length(currentCoordX,currentCoordY)
     
-    window.uniforms.coreDilation.value=.5+.5*dilation/length((window.innerHeight*2-1.)/2.,(window.innerWidth*2-1.)/2.)*Math.sqrt(100);
+    window.uniforms.coreDilation.value=.5+.5*dilation/length(window.innerHeight,window.innerWidth)*Math.sqrt(24);
     //console.log(uniforms.coreDilation.value)
     
 }
