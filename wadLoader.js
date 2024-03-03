@@ -112,7 +112,7 @@ function dilator(currentCoordX, currentCoordY )
 {
     let dilation = length(initialX-currentCoordX,initialY-currentCoordY)
     
-    window.uniforms.coreDilation.value=dilation/length((window.innerHeight*2-1.)/2.,(window.innerWidth*2-1.)/2.)*Math.sqrt(100);
+    window.uniforms.coreDilation.value=.5+.5*dilation/length((window.innerHeight*2-1.)/2.,(window.innerWidth*2-1.)/2.)*Math.sqrt(100);
     //console.log(uniforms.coreDilation.value)
     
 }
@@ -249,8 +249,11 @@ function followSound(e){
 
             let y = e.clientY-heightPX/2.;
             let x = e.clientX-widthPX/2.;
-                  if(window.INITIALIZED&&window.ISdilated)
-                      dilator(x,y);
+                    if(window.INITIALIZED){
+                        if(window.ISdilated)
+                            dilator(x,y);
+                        else uniforms.coreDilation.value=0
+                            }
 
                         screenPressCoordX=x;
                         screenPressCoordY=y;

@@ -347,10 +347,12 @@ let pushBackCounter = 0;
             for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
                 totalAMP/=inputData.length;
             uniforms["totalAmp" ].value=totalAMP;
-             if(volumeSpeed&&window.ISdilated)
-             {uniforms.coreDilation.value=totalAMP**2.*Math.sqrt(24.)*2.;
+             if(window.ISdilated)
+             uniforms.coreDilation.value=.5+.5*totalAMP**2.*Math.sqrt(24.)*2.;
               //   console.log(uniforms.coreDilation.value)
-             }
+             
+                 else             uniforms.coreDilation.value=0.;
+
 
 
                 
