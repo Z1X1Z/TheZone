@@ -171,11 +171,11 @@ else hyperCore=externalCores;//hyperCore is really better thought of as hyperMet
 
 //float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
 var equilibriator = 1.;
-//if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
+if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
 hyperCore*=equilibriator;
 
     hyperCore+=coreDilation
-  //hyperCore-=1./Math.log(.5)/equilibriator;
+  hyperCore-=.5/Math.log(.5)/equilibriator;
 //if(cloverSlide&&wheel)hyperCore+=1.75/Math.log(.5);
 
  if(cloverSlide)hyperCore+=.5/Math.log(.5);
@@ -229,10 +229,12 @@ var spoke_factorLarge = spoke_factor*(((1.+gr)/-leaf)/truncator)*truncator;
            var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),2.)
                           
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
-                           hyperCoreOUTPUT+=-petals/6.*1.5;
+                           hyperCoreOUTPUT-=petals/6.*1.5;
+                          hyperCoreOUTPUT-=dstnce;
 
 var hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
-                          hyperCoreBoosted+=-petals/6.*1.5;//upcore for higher omniclover counts
+                          hyperCoreBoosted-=petals/6.*1.5;//upcore for higher omniclover counts
+                          hyperCoreOUTPUT-=dstnce;
 
                            var multCrossTwist=new THREE.Vector2(0.,0.);
 if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
