@@ -1215,7 +1215,8 @@ scoreColorInversion=false;
                 if( menu.style.display=="block")  menu.style.display="none"
                 else if( menu.style.display=="none")menu.style.display="block";'>Menu</button>
     </div>
-    
+    <div id="textWindow" class="onBottom" style="bottom:46px;"></div>
+
     <div id="container"> </div>
     <script>//used for resetting column counts for screen porportion in onWindowResize in starshipMod
         var menuBoxes = document.getElementsByClassName("dropdown-content")
@@ -1287,6 +1288,8 @@ scoreColorInversion=false;
         document.getElementById("container").addEventListener("pointerdown",(e)=>{aeid="";menuJustClosedByBackgroundPress=true;closeMenus();})
 
         document.getElementById("menuDivider").addEventListener("pointerdown",(e)=>{aeid="";menuJustClosedByBackgroundPress=true;closeMenus();})
+        
+        document.getElementById("textWindow").addEventListener("pointerdown",(e)=>{aeid="";menuJustClosedByBackgroundPress=true;closeMenus();})
 
          addEventListener("pointerover",(e)=>{pointerInMenu(e)})
 
@@ -1298,7 +1301,6 @@ ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
     </script>
     <script src="wadLoader.js"> </script>
     
-    <div id="textWindow" class="onBottom" style="bottom:46px;"></div>
 
     <div id="score">
         <canvas id="CANVAS"></canvas>
