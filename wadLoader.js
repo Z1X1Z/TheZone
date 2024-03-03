@@ -112,7 +112,7 @@ function dilator(currentCoordX, currentCoordY )
 {
     let dilation = length(initialX-currentCoordX,initialY-currentCoordY)
     
-    window.uniforms.coreDilation.value=.5+.5*dilation/length(window.innerHeight,window.innerWidth)*Math.sqrt(100);
+    window.uniforms.coreDilation.value=dilation/length(window.innerHeight,window.innerWidth)*Math.sqrt(24);
     //console.log(uniforms.coreDilation.value)
     
 }
