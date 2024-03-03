@@ -229,11 +229,11 @@ var spoke_factorLarge = spoke_factor*(((1.+gr)/-leaf)/truncator)*truncator;
            var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),2.)
                           
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
-                           hyperCoreOUTPUT-=petals/6.*1.5;
+                           hyperCoreOUTPUT-=(6.+petals)/6.-1.;
                           hyperCoreOUTPUT-=dstnce;
 
 var hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
-                          hyperCoreBoosted-=petals/6.*1.5;//upcore for higher omniclover counts
+                          hyperCoreBoosted-=(6.+petals)/6.-1.;//upcore for higher omniclover counts
                           hyperCoreOUTPUT-=dstnce;
 
                            var multCrossTwist=new THREE.Vector2(0.,0.);
