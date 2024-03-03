@@ -2355,10 +2355,10 @@ float spoke_factorLarge = spoke_factor*(((1.+gr)/-leaf)/truncator)*truncator;
        //     if (wheel) logOfSpoke_Factor=log(spoke_factor);
                              
 float hyperCoreOUTPUT =hyperCore*log(2.)/log(metaCoreDriveFactor)+loops;
-                             hyperCoreOUTPUT-=(petals)/6.;//upcore for higher omniclover counts
+                             hyperCoreOUTPUT+=-(petals)/6.*1.5;//upcore for higher omniclover counts
 
 float hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if
-                             hyperCoreBoosted+=(petals)/6.;//upcore for higher omniclover counts
+                             hyperCoreBoosted+=-(petals)/6.*1.5;//upcore for higher omniclover counts
 
                              
                              //metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
