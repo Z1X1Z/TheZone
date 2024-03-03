@@ -175,7 +175,7 @@ var equilibriator = 1.;
 hyperCore*=equilibriator;
 
     hyperCore+=coreDilation
-  hyperCore-=.25/Math.log(.5)/equilibriator;
+  //hyperCore-=1./Math.log(.5)/equilibriator;
 //if(cloverSlide&&wheel)hyperCore+=1.75/Math.log(.5);
 
  if(cloverSlide)hyperCore+=.5/Math.log(.5);
@@ -229,11 +229,11 @@ var spoke_factorLarge = spoke_factor*(((1.+gr)/-leaf)/truncator)*truncator;
            var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),2.)
                           
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
-                           hyperCoreOUTPUT-=petals;
+                           hyperCoreOUTPUT-=petals/6.;
 
 var hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
+                          hyperCoreBoosted+=-petals/6.;//upcore for higher omniclover counts
 
-                           
                            var multCrossTwist=new THREE.Vector2(0.,0.);
 if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
 {
@@ -401,7 +401,8 @@ dstnce = s.length();
  if(dstnce<4./3.)s=spin2(s,Math.atan(s.y,s.x)*(petals)/6.);
         
         if(dstnce<4./3. &&exponentialPetals!=0.) s=spin2(s,Math.pow(2.,(Math.atan(s.y,s.x)/Math.PI+1.)*2.));
-        
+        hyperCoreBoosted-=dstnce;
+
 for(var i=0;i<40; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER&& 0.<=hyperCoreBoosted)
 {
@@ -572,9 +573,7 @@ window.bigCloverGapSync = false;
 
                 if(dupered&&zoom<zoomCap32) generated = false;
                 coreTriggered=tree.z;
-
                 if(window.haptic2){
-                    let impact =50*(tree.z-coreImplosion);
                     let vibrateArrayNew=[];
 
                        // for(var t = 0; t<3; t++)
