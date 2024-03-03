@@ -2287,10 +2287,10 @@ else hyperCore=externalCores;//hyperCore is really better thought of as hyperMet
 //cored/1.5+log(length(coordSHIFT))*logStabilizationConstant+uber.z;
 //float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
 float equilibriator = 1.;
-//if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
+if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
    hyperCore*=equilibriator;
    
-     //hyperCore-=1./log(.5)/equilibriator;
+     hyperCore-=.5/log(.5)/equilibriator;
      
      hyperCore-=coreDilation;
   //  if(cloverSlide&&wheel)hyperCore+=1.75/log(.5);
@@ -2355,11 +2355,12 @@ float spoke_factorLarge = spoke_factor*(((1.+gr)/-leaf)/truncator)*truncator;
        //     if (wheel) logOfSpoke_Factor=log(spoke_factor);
                              
 float hyperCoreOUTPUT =hyperCore*log(2.)/log(metaCoreDriveFactor)+loops;
-                             hyperCoreOUTPUT+=-(petals)/6.*1.5;//upcore for higher omniclover counts
+                             hyperCoreOUTPUT-=(petals)/6.*1.5;//upcore for higher omniclover counts
+                             hyperCoreOUTPUT-=dstnce;
 
 float hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if
-                             hyperCoreBoosted+=-(petals)/6.*1.5;//upcore for higher omniclover counts
-
+                             hyperCoreBoosted-=(petals)/6.*1.5;//upcore for higher omniclover counts
+                             hyperCoreBoosted-=dstnce;
                              
                              //metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
 
