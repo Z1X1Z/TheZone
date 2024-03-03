@@ -2290,7 +2290,7 @@ float equilibriator = 1.;
 //if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
    hyperCore*=equilibriator;
    
-     hyperCore-=.25/log(.5)/equilibriator;
+     //hyperCore-=1./log(.5)/equilibriator;
      
      hyperCore-=coreDilation;
   //  if(cloverSlide&&wheel)hyperCore+=1.75/log(.5);
@@ -2357,7 +2357,11 @@ float spoke_factorLarge = spoke_factor*(((1.+gr)/-leaf)/truncator)*truncator;
 float hyperCoreOUTPUT =hyperCore*log(2.)/log(metaCoreDriveFactor)+loops;
                              hyperCoreOUTPUT-=(6.-petals)/6.;//upcore for higher omniclover counts
 
-float hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
+float hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if
+                             hyperCoreBoosted+=(6.-petals)/6.;//upcore for higher omniclover counts
+
+                             
+                             //metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
 
 float colorShift = 0.;
 vec2 multCrossTwist=vec2(0.);
@@ -2576,6 +2580,7 @@ dstnce = length(s);
                              
                              if(dstnce<4./3. &&exponentialPetals!=0.) s=spin2(s,pow(2.,(atan(s.y,s.x)/PI+1.)*2.));
                              //if(dstnce<4./3.)s=spin2(s,pow(2.,atan(s.y,s.x)));
+                             hyperCoreBoosted-=dstnce*4.;
 
 for(int i=0;i<40; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER&& 0.<=hyperCoreBoosted)
@@ -2587,7 +2592,6 @@ if(dstnce<CORE_DELIMITER&& 0.<=hyperCoreBoosted)
 
 OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
 OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
-
   if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spin2(s,atan(s.y,s.x)*OmniPetal);
 
  if (cloverSlide)
@@ -2608,7 +2612,7 @@ OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
       float b =dstnce/1.5;//try dstnce/1.5
        loops-=b;
    hyperCoreBoosted+=b;
-       
+       hyperCoreOUTPUT+=b;
        
    }
    
