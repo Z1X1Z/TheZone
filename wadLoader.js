@@ -376,8 +376,12 @@ let c = document.body;//document.getElementById("container")
  function attachListeners(){
             c.addEventListener('pointerdown', function(e)
                                {
+
+console.log   ( e.srcElement.nodeName)
                 if(e.srcElement.nodeName=="CANVAS"  ||
-                   (e.srcElement.id=="menuDivider"||(window.iOS&&e.srcElement.name=="menuButton")  )){
+                   e.srcElement.id=="menuDivider"||window.iOS&&e.srcElement.name=="menuButton"||
+                   e.srcElement.nodeName=="DIV"//for textWindow as name and id are erased
+                   ){
                     
                     let touchLimit=0;
                     while (touchNumber.get(cycler)!="off"&&touchLimit<maxTouchSoundCount)
@@ -397,7 +401,9 @@ let c = document.body;//document.getElementById("container")
             c.addEventListener('pointermove', function(e) {
 
                 if(e.srcElement.nodeName=="CANVAS"  ||
-                   (e.srcElement.id=="menuDivider"||(window.iOS&&e.srcElement.name=="menuButton")  )){
+                   e.srcElement.id=="menuDivider"||window.iOS&&e.srcElement.name=="menuButton"||
+                   e.srcElement.nodeName=="DIV"//for textWindow as name and id are erased
+                   ){
                     let tn = touchNumber.get(pressIndex.get(e.pointerId));
                     if(typeof tn == "number"){
                         getPressure(e);
