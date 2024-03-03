@@ -401,8 +401,9 @@ dstnce = s.length();
  if(dstnce<4./3.)s=spin2(s,Math.atan(s.y,s.x)*(petals)/6.);
         
         if(dstnce<4./3. &&exponentialPetals!=0.) s=spin2(s,Math.pow(2.,(Math.atan(s.y,s.x)/Math.PI+1.)*2.));
-        hyperCoreBoosted-=dstnce;
-
+        hyperCoreBoosted-=dstnce*1.5;
+        hyperCoreOUTPUT-=dstnce*1.5;
+        
 for(var i=0;i<40; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER&& 0.<=hyperCoreBoosted)
 {
