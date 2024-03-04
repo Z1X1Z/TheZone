@@ -1051,7 +1051,7 @@ function onWindowResize() {
 
             let lastTime=0.;
             let ticker = 0;
-            let FPS=60;
+           // window.FPS=60; declared in hotkeys
 
                   const interval = 250.;//sample window of FPS meter for FPS frame averaging, think 1000/FPS. 1 is more or less off. Used to keep off jitter. Think 200ms maybe
                   let elapsedTimeBetweenFrames = 0.;
