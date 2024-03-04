@@ -44,6 +44,9 @@ uberDuper:{value:null},
             
         Spoker:{value: true    },
         spokelover:{value: true    },
+dilate:{value:false},
+
+    
         continuumClover:{value: false    },
         Inherited:{value: true    },
         cloverSlide:{value: false    },
@@ -488,9 +491,12 @@ function callKey(event){
                 else if (event.altKey&&(key=="∂"||key=="d")&&(!runningHash||!window.online))//∂ is alt+d
                     window.dupered=!window.dupered;
                 else if (event.altKey&&(key=="ø"||key=="o")) {
-                    window.ISdilated=!window.ISdilated;
-                    console.log(ISdilated)
+                    uniforms.dilate.value=!uniforms.dilate.value;
+
+                   // window.ISdilated=!window.ISdilated;//this is for dilator in wadloader which this superceded
+                  //  console.log(ISdilated)
                 }
+
 
     else if (event.altKey&&key=="f")console.log("speakers disabled!");//speakers turned off in manny.html
     else if(event.ctrlKey||event.altKey);//swallow remaining possibilities, muting keypress
