@@ -1148,6 +1148,27 @@ function zoomRoutine(){
                           if(zoom<1./2**singleHyperCoreDepth*metaDepth)zoom = 1.;
     
 
+             
+             
+             
+             if (uniforms["MetaCored"].value)
+              {
+                 
+                 var precores = .25/Math.log(.5);
+                  if(uniforms.morph.value!=0.)precores=precores-3./Math.log(.5);
+                  if(uniforms.refactorCores.value!=1.)precores=-.0;
+                  
+                  const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
+                  var equilibriator = 1.;
+              
+                 uniforms[ "centralCores" ].value = Math.log(zoom)/-Math.log(2.)+precores    ;
+                 // if(uniforms[ "morph" ].value!=0.)uniforms[ "centralCores" ].value*=3./2.;//stabilize morph dance collaboration
+                 
+                 uniforms[ "externalCores" ].value = uniforms[ "centralCores" ].value/1.5+Math.log(fromCenter)*logStabilizationConstant;
+                  ;
+               
+             }
+             
 }
 
 
@@ -1524,7 +1545,6 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
             coreData[h]=-1/leaf;
         else coreData[h]=document.getElementById('coringConstant').value;
     }
-    
     if(!isNaN(loudestFret[0].volume)&&omniDynamicEngaged)
         omniData[hyperCoreOffset]=coreShift/2.;
 
