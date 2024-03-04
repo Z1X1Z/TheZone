@@ -174,9 +174,9 @@ var equilibriator = 1.;
 if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
 hyperCore*=equilibriator;
 
-    hyperCore+=coreDilation
-  hyperCore-=.5/Math.log(.5)/equilibriator;
+  hyperCore+=.75/Math.log(.5)/equilibriator;
 //if(cloverSlide&&wheel)hyperCore+=1.75/Math.log(.5);
+   hyperCore-=coreDilation
 
  if(cloverSlide)hyperCore+=.5/Math.log(.5);
 if(wheel)hyperCore+=.25/Math.log(.5);
@@ -226,15 +226,13 @@ var spoke_factorLarge = spoke_factor*(((1.+gr)/-leaf)/truncator)*truncator;
 
         var spokeloverCoreShiftDown=Math.pow(upSpoke,powerOfDynamicSokeCore)*logStabilizationConstant;            ;//logStabilizationConstant seems to cancel powerOfDynamicSokeCore=2;
 
-           var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),2.)
+           var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),2.)//for spokelover
                           
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
                            hyperCoreOUTPUT-=(6.+petals)/6.-1.;
-                          hyperCoreOUTPUT-=dstnce;
 
 var hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
                           hyperCoreBoosted-=(6.+petals)/6.-1.;//upcore for higher omniclover counts
-                          hyperCoreOUTPUT-=dstnce;
 
                            var multCrossTwist=new THREE.Vector2(0.,0.);
 if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
@@ -256,6 +254,15 @@ coreBooster=multCrossTwist.length()/Math.log(.5)*lfc;
                                                                                   var baseDelimiter =50.;
 
 for (var counter=0.;counter<iterations;counter++)if(dstnce<baseDelimiter/colorComputationBoost){
+        
+        if(dilate){
+          
+            var dstnceOverLeaf =dstnce/leaf;
+            hyperCoreOUTPUT-=dstnceOverLeaf;//dilate clover shift
+            hyperCoreBoosted-=dstnceOverLeaf;//maybe times 1.5
+        }
+
+        
 var OmniDynamicPetalShift =omniData[(loops+counter-1.)];
 var OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
 
@@ -403,8 +410,6 @@ dstnce = s.length();
  if(dstnce<4./3.)s=spin2(s,Math.atan(s.y,s.x)*(petals)/6.);
         
         if(dstnce<4./3. &&exponentialPetals!=0.) s=spin2(s,Math.pow(2.,(Math.atan(s.y,s.x)/Math.PI+1.)*2.));
-        hyperCoreBoosted-=dstnce;
-        hyperCoreOUTPUT-=dstnce;
         
 for(var i=0;i<40; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER&& 0.<=hyperCoreBoosted)
@@ -462,6 +467,7 @@ s=spin2(s,time*wise*metaCarousel*(1.+OmniPetal/6.)*rate);
 else{
 break;
 }
+       // dstnce = s.length();
 
  hyperCoreBoosted--;
  hyperCoreOUTPUT--;
@@ -539,8 +545,25 @@ window.bigCloverGapSync = false;
             //wipeUniforms.cloverSampler.value=coreSwipe
             // wipeUniforms.cloverSampler.needsUpdate=true;
         }else{
-             tree=tol(  new THREE.Vector2(0,0), new THREE.Vector2(0,0) );
+            let tree=tol(  new THREE.Vector2(0,0), new THREE.Vector2(0,0) );
             
+            
+            if (uniforms["MetaCored"].value)
+             {
+                
+                var precores = .25/Math.log(.5);
+                 if(uniforms.morph.value!=0.)precores=precores-3./Math.log(.5);
+                 if(uniforms.refactorCores.value!=1.)precores=-.0;
+                 
+                 const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
+                 var equilibriator = 1.;
+             
+                uniforms[ "centralCores" ].value = Math.log(zoom)/-Math.log(2.)+precores    ;
+                // if(uniforms[ "morph" ].value!=0.)uniforms[ "centralCores" ].value*=3./2.;//stabilize morph dance collaboration
+
+                uniforms[ "externalCores" ].value =tree.z;
+              
+            }
             let coreImplosion = Math.abs(Math.floor(coreTriggered)-Math.floor(tree.z));
             if(coreImplosion>.5//&&Math.round(tree.z)-tree.z<0.
                )//due to the cycling upcore, it triggers twice per core
@@ -549,23 +572,6 @@ window.bigCloverGapSync = false;
                 
                 
                 
-                
-                if (uniforms["MetaCored"].value)
-                 {
-                    
-                    var precores = .25/Math.log(.5);
-                     if(uniforms.morph.value!=0.)precores=precores-3./Math.log(.5);
-                     if(uniforms.refactorCores.value!=1.)precores=-.0;
-                     
-                     const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
-                     var equilibriator = 1.;
-                 
-                    uniforms[ "centralCores" ].value = Math.log(zoom)/-Math.log(2.)+precores    ;
-                    // if(uniforms[ "morph" ].value!=0.)uniforms[ "centralCores" ].value*=3./2.;//stabilize morph dance collaboration
-
-                    uniforms[ "externalCores" ].value =tree.z;
-                  
-                }
                 
                 
                 

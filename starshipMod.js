@@ -1519,7 +1519,11 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
     let hyperCoreOffset = Math.ceil(hyperCorePixel[0]);
     if(!isNaN(loudestFret[0].volume)&&window.dynamicCoring)
         coreData[hyperCoreOffset]=Math.abs(coreShift)+coringValue;//24*1.3247;
-    else for(var h = 0; h<coreShift.length; h++)  coreData[h]=1./-leaf;
+    else for(var h = 0; h<coreShift.length; h++) {
+        if(document.getElementById('coringConstant').value==-1)
+            coreData[h]=-1/leaf;
+        else coreData[h]=document.getElementById('coringConstant').value;
+    }
     
     if(!isNaN(loudestFret[0].volume)&&omniDynamicEngaged)
         omniData[hyperCoreOffset]=coreShift/2.;
@@ -2699,6 +2703,7 @@ for(var n = 0; n<targets.length;n++){
                                                        
                      if (!iOS||(iOS&&dupered)) boot();//generate clover in 64 bit, duper Core, there is a bug after maybe half a day on iOS in bigTree.js (maybe also on safari Mac)
 
+                                                       
                                                                        animateLoopId=                   window.requestAnimationFrame( animate );
                             //  renderer.forceContextLoss ()
                             //  renderer.forceContextRestore ( )
