@@ -154,7 +154,7 @@ function resetAll(){
         
     }
     
-                          
+            window.FPS=60;
             window.zoom=1.;
             window.ISdilated=false;
             window.RockInTheWater=0;
