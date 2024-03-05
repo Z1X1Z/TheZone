@@ -44,7 +44,7 @@ uberDuper:{value:null},
             
         Spoker:{value: true    },
         spokelover:{value: true    },
-dilate:{value:false},
+dilate:{value:true},
 
     
         continuumClover:{value: false    },
