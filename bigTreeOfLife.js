@@ -174,7 +174,7 @@ var equilibriator = 1.;
 if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
 hyperCore*=equilibriator;
 
-  hyperCore+=.75/Math.log(.5)/equilibriator;
+  //hyperCore+=.25/Math.log(.5)/equilibriator;
 //if(cloverSlide&&wheel)hyperCore+=1.75/Math.log(.5);
    hyperCore-=coreDilation
 
@@ -252,16 +252,16 @@ coreBooster=multCrossTwist.length()/Math.log(.5)*lfc;
                                                       
                                                                                   var colorComputationBoost =3.5;//increasing number decreases processing and clarity
                                                                                   var baseDelimiter =50.;
+                          
+                          if(dilate){
+                            
+                              var dstnceOverLeaf =dstnce;// /leaf;
+                              hyperCoreOUTPUT-=dstnceOverLeaf;//dilate clover shift
+                              hyperCoreBoosted-=dstnceOverLeaf;//maybe times 1.5
+                          }
 
 for (var counter=0.;counter<iterations;counter++)if(dstnce<baseDelimiter/colorComputationBoost){
-        
-        if(dilate){
-          
-            var dstnceOverLeaf =dstnce/leaf;
-            hyperCoreOUTPUT-=dstnceOverLeaf;//dilate clover shift
-            hyperCoreBoosted-=dstnceOverLeaf;//maybe times 1.5
-        }
-
+      
         
 var OmniDynamicPetalShift =omniData[(loops+counter-1.)];
 var OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
@@ -411,6 +411,12 @@ dstnce = s.length();
         
         if(dstnce<4./3. &&exponentialPetals!=0.) s=spin2(s,Math.pow(2.,(Math.atan(s.y,s.x)/Math.PI+1.)*2.));
         
+        if(dilate){
+          
+            var dstnceOverLeaf =dstnce;// /leaf;
+            hyperCoreOUTPUT-=dstnceOverLeaf;//dilate clover shift
+            hyperCoreBoosted-=dstnceOverLeaf;//maybe times 1.5
+        }
 for(var i=0;i<40; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER&& 0.<=hyperCoreBoosted)
 {
