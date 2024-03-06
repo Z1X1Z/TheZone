@@ -250,7 +250,7 @@ coreBooster=multCrossTwist.length()/Math.log(.5)*lfc;
                          
 
                                                       
-                                                                                  var colorComputationBoost =3.5;//increasing number decreases processing and clarity
+                                                                                  var colorComputationBoost =4.;//increasing number decreases processing and clarity
                                                                                   var baseDelimiter =50.;
                           
                           if(dilate){
@@ -430,7 +430,6 @@ if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spin2(s,Math.atan(s.y,s.x)*OmniPeta
 
 if (cloverSlide)
 {
-    /*
 if((i)>hyperCoreBoosted)
 {
 var b = dstnce;
@@ -438,17 +437,16 @@ loops-=b;
 hyperCoreBoosted+=b;
 }
 else{
-var b =dstnce/2.;
+var b =dstnce/4.;//may not be core stable
 loops-=b;
 hyperCoreBoosted+=b;
 }
-     */
-  
+    /*
 
-    var b =dstnce*1.5;
+    var b =-dstnce;
     loops-=b;
     hyperCoreBoosted+=b;
-   
+   */
 }
 
 if(fieldPowerBoostMeta&&((i)>=hyperCoreBoosted)){
