@@ -433,7 +433,9 @@ let pushBackCounter = 0;
             colorSound.setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
                             colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);//lighting {note/x} should be 120 but it's out of the vocal range
         pitchCol[f]  = colorSoundPURE;
-                            
+             
+             if("osmd" in window&&osmd!=null)runOSMD();
+
                                                    
                                                    const nt = Math.round(note)%12;
                                                    if (nt==7||nt==5||nt==2||nt==0||nt==10)
@@ -1457,7 +1459,6 @@ function runOSMD (){
      }
                                     
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
-     if("osmd" in window&&osmd!=null)runOSMD();
 
     
      
