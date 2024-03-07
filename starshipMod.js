@@ -1544,7 +1544,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
     else for(var h = 0; h<coreShift.length; h++) {
         if(document.getElementById('coringConstant').value==-1)
             coreData[h]=-1/leaf;
-        else coreData[h]=document.getElementById('coringConstant').value;
+        else coreData[h]=Number(document.getElementById('coringConstant').value);
     }
     if(!isNaN(loudestFret[0].volume)&&omniDynamicEngaged)
         omniData[hyperCoreOffset]=coreShift/2.;
