@@ -217,7 +217,7 @@ var metaCoreDriveFactor =(((1.-leaf)**.5/truncator)*truncator)**2./gr;//.324717.
 var spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator);//metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator)
 var grOverLeaf=-((gr/leaf)/truncator)*truncator;//uncertain term
 var spoke_factorLarge = spoke_factor*(((1.+gr)/-leaf)/truncator)*truncator;
-                            var upSpoke=metaCoreDriveFactor;//uncertain term, without dstnce spokeCore is spoke_factor*2. try times spoke_factorLarge
+                            var upSpoke=Math.pow(spoke_factor,metaCoreDriveFactor)*1.5;//uncertain term, without dstnce spokeCore is spoke_factor*2. try times spoke_factorLarge
 
            var downSpoke=((1./leaf)/truncator)*truncator;//1./(((-leaf)*truncator)/truncator)/4.;
   // var logOfSpoke_Factor=0.;
@@ -348,10 +348,10 @@ s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
                     }
                     else*/
                      {
-                        var correctionSpoke =Math.pow(upSpoke/dstnce,grOverLeaf);
+                      //  var correctionSpoke =Math.pow(upSpoke/dstnce,grOverLeaf);
 
-                        hyperCoreOUTPUT+=correctionSpoke;
-                        hyperCoreBoosted+=correctionSpoke;
+                        hyperCoreOUTPUT+=upSpoke;
+                        hyperCoreBoosted+=upSpoke;
                     }
                 }
             }
