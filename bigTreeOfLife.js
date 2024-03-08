@@ -196,7 +196,7 @@ var term=0.;
 var m= new THREE.Vector2(0.,0.);
 
     var truncator=1.;
-   // if(lfc!=0.) truncator = Math.log(zoom/lfc)/10000.;
+    if(lfc!=0.) truncator = Math.log(zoom/lfc)/10000.;
 //Maendel clover
 if(wheel)m =  pWithoutChiralizer.clone().sub(new THREE.Vector2(coords.y,coords.x).multiplyScalar(2.))//try signs with for fibonacci ring pairing and movement distortion #syyym
 .multiplyScalar(Math.abs(coresIn/crs*2.-1.)).multiplyScalar(mandelCloverFactor);
@@ -217,7 +217,7 @@ var metaCoreDriveFactor =(((1.-leaf)**.5/truncator)*truncator)**2./gr;//.324717.
 var spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator);//metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator)
 var grOverLeaf=-((gr/leaf)/truncator)*truncator;//uncertain term
 var spoke_factorLarge = spoke_factor*(((1.+gr)/-leaf)/truncator)*truncator;
-                            var upSpoke=spoke_factorLarge*(((gr+1./-leaf)/truncator)*truncator);//uncertain term, without dstnce spokeCore is spoke_factor*2.
+                            var upSpoke=metaCoreDriveFactor*(((gr+1./-leaf)/truncator)*truncator);//uncertain term, without dstnce spokeCore is spoke_factor*2. try times spoke_factorLarge
 
            var downSpoke=((1./leaf)/truncator)*truncator;//1./(((-leaf)*truncator)/truncator)/4.;
   // var logOfSpoke_Factor=0.;
