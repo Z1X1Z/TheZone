@@ -2349,10 +2349,11 @@ float dstnce = length(s);//"distance" may be reserved keyword
 //t*=.74;
 float coreBooster=0.;
 float metaCoreDriveFactor =(((1.-leaf)/truncator)*truncator)/gr;//.324717.... number of places changes appearance
-float spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator);//metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator)
-                             float   grOverLeaf=-((gr/leaf)/truncator)*truncator;//uncertain term
+                             float twoGRthreeLeaf=(((-2.*gr-3.*leaf)/truncator)*truncator);
+float spoke_factor =metaCoreDriveFactor*twoGRthreeLeaf;//metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator)
+                            // float   grOverLeaf=-((gr/leaf)/truncator)*truncator;//uncertain term
 float spoke_factorLarge = spoke_factor*(((1.+gr)/-leaf)/truncator)*truncator;
-                             float upSpoke=metaCoreDriveFactor;//may have a times spoke_factor or spoke_factorLarge or metaCoreDriveFactor
+                             float upSpoke=pow(spoke_factor,metaCoreDriveFactor)*1.5;//pow(spoke_factor,leaf);//seems to have many likes
 
             float downSpoke=((1./leaf)/truncator)*truncator;//1./(((-leaf)*truncator)/truncator)/4.;
                              float powerOfDynamicSokeCore = 2.;
@@ -2525,7 +2526,8 @@ if(Spoker){
                              hyperCoreBoosted-=logOfSpoke_Factor;
                              }
                          else
-                              */{
+                              */
+                             {
                              
                           s/=spoke_factorLarge;//engage ; s/=2.+'superspokes'
                          
@@ -2541,10 +2543,10 @@ if(Spoker){
             hyperCoreBoosted+=logOfSpoke_Factor;
             }
                 else */{
-                    float correctionSpoke =pow(upSpoke/dstnce,grOverLeaf);//uncertain value
-            hyperCoreOUTPUT+=correctionSpoke
+                  //  float correctionSpoke =pow(upSpoke/dstnce,grOverLeaf);//uncertain value
+            hyperCoreOUTPUT+=upSpoke
             ;
-            hyperCoreBoosted+=correctionSpoke;
+            hyperCoreBoosted+=upSpoke;
             }
             }
 }
