@@ -196,7 +196,7 @@ var term=0.;
 var m= new THREE.Vector2(0.,0.);
 
     var truncator=1.;
-    if(lfc!=0.) truncator = Math.log(zoom/lfc)/10000.;
+   // if(lfc!=0.) truncator = Math.log(zoom/lfc)/10000.;
 //Maendel clover
 if(wheel)m =  pWithoutChiralizer.clone().sub(new THREE.Vector2(coords.y,coords.x).multiplyScalar(2.))//try signs with for fibonacci ring pairing and movement distortion #syyym
 .multiplyScalar(Math.abs(coresIn/crs*2.-1.)).multiplyScalar(mandelCloverFactor);
