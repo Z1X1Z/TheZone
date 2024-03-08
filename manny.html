@@ -1674,7 +1674,8 @@ uniform float exponentialPetals;
 
 
 
-    float starnSize = PI/120.*2.*7./8.*2.;
+    float starnSize = PI/120.*2.*7./8.*2.
+    ;
     vec4 starns ( vec2 uv,float noteOfStar)//Seven stars, two witnesses
     {
       //  float nyq =  fftSize/sampleRate/2.;
@@ -2322,7 +2323,7 @@ hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if d
 vec2 m=vec2(0.);
 
 float truncator=1.;
-//if(lfc!=0.) truncator = log(zoom/lfc)/10000.;//log truncation * factor is not known, may no longer be necesary
+if(lfc!=0.) truncator = log(zoom/lfc)/10000.;//log truncation * factor is not known, may no longer be necesary
 //Maendel clover
 if(wheel)m =  ((pWithoutChiralizer/lfc)
                                          -coords.yx*2.)*abs(coresIn/crs*2.-1.)
@@ -2351,7 +2352,8 @@ float metaCoreDriveFactor =(((1.-leaf)/truncator)*truncator)/gr;//.324717.... nu
 float spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator);//metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator)
                              float   grOverLeaf=-((gr/leaf)/truncator)*truncator;//uncertain term
 float spoke_factorLarge = spoke_factor*(((1.+gr)/-leaf)/truncator)*truncator;
-                             float upSpoke=spoke_factorLarge*(((gr+1./-leaf)/truncator)*truncator);//uncertain term, without dstnce spokeCore is spoke_factor*2.
+                                                  float spfl=spoke_factor*1.5;
+                             float upSpoke=metaCoreDriveFactor*(((gr+1./-leaf)/truncator)*truncator);//may have a times spoke_factor or spoke_factorLarge or metaCoreDriveFactor
 
             float downSpoke=((1./leaf)/truncator)*truncator;//1./(((-leaf)*truncator)/truncator)/4.;
                              float powerOfDynamicSokeCore = 2.;
