@@ -2352,7 +2352,7 @@ float metaCoreDriveFactor =(((1.-leaf)/truncator)*truncator)/gr;//.324717.... nu
 float spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator);//metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator)
                              float   grOverLeaf=-((gr/leaf)/truncator)*truncator;//uncertain term
 float spoke_factorLarge = spoke_factor*(((1.+gr)/-leaf)/truncator)*truncator;
-                             float upSpoke=3.;//may have a times spoke_factor or spoke_factorLarge or metaCoreDriveFactor
+                             float upSpoke=metaCoreDriveFactor;//may have a times spoke_factor or spoke_factorLarge or metaCoreDriveFactor
 
             float downSpoke=((1./leaf)/truncator)*truncator;//1./(((-leaf)*truncator)/truncator)/4.;
                              float powerOfDynamicSokeCore = 2.;
