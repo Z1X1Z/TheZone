@@ -2238,7 +2238,7 @@ if(fieldPowerBoost){
     s*=pow(length(s),powerBoost);
 }
 
- coresIn+=60.+upCoreCycler;
+ coresIn+=upCoreCycler;
 //  else if(zoom>1.)for(int i=0;i<int(crs); i++)if(c>4./3.&&loops<-cored){s/=2.;c/=2.;loops++;coresIn++;}else break;//UpCore not in use here, but rather in the starshipMod
 //for(int i=0;i<int(crs); i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
 
@@ -2353,7 +2353,7 @@ float metaCoreDriveFactor =(((1.-leaf)/truncator)*truncator)/gr;//.324717.... nu
 float spoke_factor =metaCoreDriveFactor*twoGRthreeLeaf;//metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator)
                             // float   grOverLeaf=-((gr/leaf)/truncator)*truncator;//uncertain term
                              
-                             float upSpoke=pow(spoke_factor,(((-leaf)/(gr))/truncator)*truncator)*(((1.+gr)/-leaf)/truncator)*truncator;;
+                             float upSpoke=pow(spoke_factor,-2.)*(((1.+gr)/(-leaf))/truncator)*truncator;;
                                                
 float spoke_factorLarge =upSpoke; //pow(spoke_factor,(-leaf/gr)/truncator)*truncator)*(((1.+gr)/-leaf)/truncator)*truncator;
                           //   float upSpoke=pow(spoke_factor,((-leaf/gr)/truncator)*truncator)*1.5;//pow(spoke_factor,leaf);//seems to have many likes
