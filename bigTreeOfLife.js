@@ -216,10 +216,10 @@ var coreBooster=0.;
 var metaCoreDriveFactor =(((1.-leaf)**.5/truncator)*truncator)**2./gr;//.324717.... number of places changes appearance
 var spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator);//metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator)
 //var grOverLeaf=-((gr/leaf)/truncator)*truncator;//uncertain term
-var upSpoke= Math.pow(spoke_factor,-2.)*(((1.+gr)/-leaf)/truncator)*truncator;
-var spoke_factorLarge = upSpoke;
-                            //uncertain term, without dstnce spokeCore is spoke_factor*2. try times spoke_factorLarge
-
+                           var grPlusOneOverLeaf=(((1.+gr)/(-leaf))/truncator)*truncator;
+                           var upSpoke=grPlusOneOverLeaf/spoke_factor;
+                                             
+var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
            var downSpoke=((1./leaf)/truncator)*truncator;//1./(((-leaf)*truncator)/truncator)/4.;
   // var logOfSpoke_Factor=0.;
                           // if (wheel) logOfSpoke_Factor=Math.log(spoke_factor);
