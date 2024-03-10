@@ -2353,9 +2353,10 @@ float metaCoreDriveFactor =(((1.-leaf)/truncator)*truncator)/gr;//.324717.... nu
 float spoke_factor =metaCoreDriveFactor*twoGRthreeLeaf;//metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator)
                             // float   grOverLeaf=-((gr/leaf)/truncator)*truncator;//uncertain term
                              float grPlusOneOverLeaf=(((1.+gr)/(-leaf))/truncator)*truncator;
-                             float upSpoke=grPlusOneOverLeaf/spoke_factor;
-                                               
-float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf; //pow(spoke_factor,(-leaf/gr)/truncator)*truncator)*(((1.+gr)/-leaf)/truncator)*truncator;
+float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
+                                                      float upSpoke=spoke_factor* 1.5;
+
+                                                      //pow(spoke_factor,(-leaf/gr)/truncator)*truncator)*(((1.+gr)/-leaf)/truncator)*truncator;
                           //   float upSpoke=pow(spoke_factor,((-leaf/gr)/truncator)*truncator)*1.5;//pow(spoke_factor,leaf);//seems to have many likes
 
             float downSpoke=((1./leaf)/truncator)*truncator;//1./(((-leaf)*truncator)/truncator)/4.;
