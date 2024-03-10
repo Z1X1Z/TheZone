@@ -2354,7 +2354,7 @@ float spoke_factor =metaCoreDriveFactor*twoGRthreeLeaf;//metaCoreDriveFactor*(((
                             // float   grOverLeaf=-((gr/leaf)/truncator)*truncator;//uncertain term
                              float grPlusOneOverLeaf=(((1.+gr)/(-leaf))/truncator)*truncator;
 float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
-                                                      float upSpoke=spoke_factor* 1.5;
+                                                      float upSpoke= 1.5/sqrt(spoke_factor);//somewhat uncertain of a value
 
                                                       //pow(spoke_factor,(-leaf/gr)/truncator)*truncator)*(((1.+gr)/-leaf)/truncator)*truncator;
                           //   float upSpoke=pow(spoke_factor,((-leaf/gr)/truncator)*truncator)*1.5;//pow(spoke_factor,leaf);//seems to have many likes
