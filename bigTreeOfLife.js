@@ -174,7 +174,7 @@ var equilibriator = 1.;
 if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
 hyperCore*=equilibriator;
 
-  hyperCore-=.441/Math.log(.5)/equilibriator;
+//  hyperCore-=.441/Math.log(.5)/equilibriator;
 //if(cloverSlide&&wheel)hyperCore+=1.75/Math.log(.5);
    hyperCore-=coreDilation
 
@@ -217,7 +217,7 @@ var metaCoreDriveFactor =(((1.-leaf)**.5/truncator)*truncator)**2./gr;//.324717.
 var spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator);//metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator)
 //var grOverLeaf=-((gr/leaf)/truncator)*truncator;//uncertain term
                            var grPlusOneOverLeaf=(((1.+gr)/(-leaf))/truncator)*truncator;
-                           var upSpoke=1.5/Math.sqrt(spoke_factor);
+                           var upSpoke=spoke_factor;//1.5/Math.sqrt(spoke_factor);
                                              
 var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
            var downSpoke=((1./leaf)/truncator)*truncator;//1./(((-leaf)*truncator)/truncator)/4.;
