@@ -162,7 +162,7 @@ function startSound(e){
         initialTwist[id]=twist;
         lastSlip[id] =0;
         octavesBoosted[id]=0
-        signTwist[id]=-1.;//"off";
+        signTwist[id]=-1.*flip;//"off";
 
     }
     
@@ -188,6 +188,7 @@ function startSound(e){
 
                 let frequency = Math.pow(2.,((((initialAngleSound[id]*window.flip)/pi/2*12)*window.flip-window.twist/2.)-1.)/12.
                                               )*window.ConcertKey;
+                                             console.log("initial FREQ" + frequency)
                 //sound[id].pitch=frequency;
                 //sound2[id].pitch=frequency*2.;
                 //sound[id].volume=0.;
@@ -262,9 +263,9 @@ function followSound(e){
                     let twistIncrement=0;
 if(window.grabStar)
 {
-    let slip = (-Math.atan2(-x,-y)-initialAngle[id]+8*pi)%(2*pi);
+    let slip = ((-Math.atan2(-x,-y)-initialAngle[id])*flip+8*pi)%(2*pi);
     twistIncrementPI =(slip-lastSlip[id])
-     twistIncrement = twistIncrementPI*(24/2)/pi*flip;
+     twistIncrement = twistIncrementPI*(24/2)/pi;
     lastSlip[id] =slip;
 
     window.twist+=twistIncrement;
@@ -321,10 +322,15 @@ if(window.grabStar)
                  }
                 let frequency = Math.pow(2.,((((soundTouchComponent[id]*window.flip)/pi/2*12)*window.flip-twistFeed/2.)-1.)/12.
                                                 )*window.ConcertKey;
+                                             
+                                            console.log("initial FREQ" + frequency)
         if(isFinite(frequency)&&frequency>0.&&
            angleSound[id]-initialAngleSound[id]!=0&&typeof sound[id]=="object"){
                     let volumePrime=volume*(soundTouchComponent[id] - initialAngleSound[id])/(2.*pi)*.5;
                     let volumeTWO =volume*(1.-(soundTouchComponent[id]-initialAngleSound[id])/(2.*pi))*.5;
+                   // console.log("angleSound"+soundTouchComponent[id])
+                   // console.log("volumePrime"+volumePrime)
+                  //  console.log("volumeTwo"+volumeTWO)
                     if(window.grabStar
                        //&&2==1
                        )
