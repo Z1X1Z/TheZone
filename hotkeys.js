@@ -2,11 +2,11 @@ const leaf = -1.3247179572447460259609088544780973407344040569017333645340150503
 const gr = 1.61803398874989484820458683436563811772030917980576286213544862270526046281890244970720720418939113748475408807538689175212663386222353693179318006076672635443338908659593958290563832266131992829026788067520876689250171169620703222104321626954862629631361443814975870122034080588795445474924618569536486444924104432077134494704956584678850987433944221254487706647
 window.pixelShaderSize = 7;
 const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
-const movementRateORIGINAL = gr;
+const movementRateORIGINAL = 1.5;
 const starshipSize = Math.E**leaf/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
                             const zoomFrames = 60;//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
-                  const mf = 1.75;
+                  const mf = 2.;//advantage of translation over zoom (right?)
 const MR = mf/zoomFrames;
 const secondsToEdge=window.pixelShaderSize/4./pixelShaderToStarshipRATIO;
 
@@ -153,7 +153,9 @@ function resetAll(){
         else if(BibleON==0) callKey(new KeyboardEvent('keydown', {'key': "b", 'altKey':true, 'keyCode':key.charCodeAt(0)}));
         
     }
-    
+    window.twist = 0.;
+    window.flip = 1.;
+
             window.FPS=60;
             window.zoom=1.;
             window.ISdilated=false;
