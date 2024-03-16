@@ -36,7 +36,7 @@ uberDuper:{value:null},
         clvrVariant1:{value: false},
         clvrVariant2:{value: false},
         clvrVariant3:{value: false},
-        clvrVariant4:{value: false},
+        clvrVariant4:{value: true},
         clvrVariant5:{value: false},
         clvrVariant6:{value: false},
         clvrVariant7:{value: false},
@@ -208,6 +208,12 @@ function resetAll(){
             window.onO = false;
     window.EldersLeg = 24;
     window.fftSize=2048;
+                                         
+                                         
+                                             if (   window.iOS )window.rez=window.devicePixelRatio/4.;
+                                               else if(window.android)window.rez=window.devicePixelRatio/7.;
+                                               else   window.rez=window.devicePixelRatio/2.;
+                                                   
     if(window.INITIALIZED){
         setFFTdependantSizes();
         setDynamicSampler2ds();
