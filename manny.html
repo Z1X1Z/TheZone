@@ -616,7 +616,7 @@ radialWarp=b;
                       <input type="checkbox"  id="Variant4" name="t"  onclick= "
                               key  = '4';
                               callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
-                              <label for="Variant4">  Variant4![.4]</label><br>
+                              <label for="Variant4">  Variant4?![.4]</label><br>
                               
                               <input type="checkbox"  id="Variant5" name="t"  onclick= "
                                       key  = '5';
@@ -2169,7 +2169,7 @@ float lfc = length(freed(coords));
    
    
 float precores = .25/log(.5);
-
+if(clvrVariant4) precores=0.;
 if(morph!=0.)precores=precores-3./log(.5);
 if(refactorCores!=1.)precores=-.0;
 
@@ -2178,7 +2178,8 @@ if(MetaCored)cored= log(zoom)/-log(2.)+precores;
 else cored = centralCores;
 float loops=0.;
 if(cloverSlide)loops=-1.;
-if(refactorCores>1.)
+
+if(refactorCores>1.||clvrVariant4)
     {
         if(cloverSlide)p/=2.;
         p/=2.;
@@ -2358,8 +2359,8 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
 
                                                       //pow(spoke_factor,(-leaf/gr)/truncator)*truncator)*(((1.+gr)/-leaf)/truncator)*truncator;
                           //   float upSpoke=pow(spoke_factor,((-leaf/gr)/truncator)*truncator)*1.5;//pow(spoke_factor,leaf);//seems to have many likes
-
-            float downSpoke=((1./leaf)/truncator)*truncator;//1./(((-leaf)*truncator)/truncator)/4.;
+                           float   oneOverLeafTruncated = ((1./leaf)/truncator)*truncator;
+            float downSpoke=oneOverLeafTruncated;//1./(((-leaf)*truncator)/truncator)/4.;
                              float powerOfDynamicSokeCore = 2.;
 
                              float spokeloverCoreShiftDown=pow(upSpoke,powerOfDynamicSokeCore)*logStabilizationConstant;
@@ -2488,7 +2489,7 @@ vec2 lastS = s;
       // if (mod(counter,5.) == 4.)s =pCenterCored;
        //x**3
    
-       if(clvrVariant4)  s*=1.75;
+       if(clvrVariant4)   s*=1.-oneOverLeafTruncated;
        if(clvrVariant5) s = vec2(pow(s.x,-2.),pow(s.y,-2.));
       if(clvrVariant6)s=s-lastS.yx;
         if(clvrVariant7)s+=pcs;
