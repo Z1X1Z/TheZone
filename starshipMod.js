@@ -431,6 +431,7 @@ let pushBackCounter = 0;
         colorSound = new THREE.Color();
                                const colortone = note/lightingScaleTrail;
             colorSound.setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
+             
                             colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);//lighting {note/x} should be 120 but it's out of the vocal range
         pitchCol[f]  = colorSoundPURE;
              
@@ -714,6 +715,9 @@ function setFFTdependantSizes(){
                     }
                                            
 function init() {
+             
+             colorSound = new THREE.Color();
+                  colorSoundPURE =     new THREE.Color()
              setFFTdependantSizes();
              //setTrailSize();
                         uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
