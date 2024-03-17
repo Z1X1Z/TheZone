@@ -421,18 +421,19 @@ let pushBackCounter = 0;
                             
         const t =  (note +twist/2)*flip;
                             if(isFinite(t))angle = -(t*radialWarp);
-
-                            if(on)
-                            {
-        //angle-=1/radialWarp;
                             let reversableColor=((uniforms.brelued.value*angle/12./radialWarp)*flip+twist/24.*uniforms.brelued.value+1./3.)%1.;
              //if(uniforms.brelued.value==-1)reversableColor=.25-reversableColor;
 
-        colorSound = new THREE.Color();
-                               const colortone = note/lightingScaleTrail;
-            colorSound.setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
+                            colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);
+                            
+                            if(on)
+                            {
              
-                            colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);//lighting {note/x} should be 120 but it's out of the vocal range
+                                    const colortone = note/lightingScaleTrail;
+                 colorSound.setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
+                  
+        //angle-=1/radialWarp;
+                         
         pitchCol[f]  = colorSoundPURE;
              
              if("osmd" in window&&osmd!=null)runOSMD();
@@ -717,7 +718,9 @@ function setFFTdependantSizes(){
 function init() {
              
              colorSound = new THREE.Color();
-                  colorSoundPURE =     new THREE.Color()
+                  colorSoundPURE =     new THREE.Color();
+             colorSound = new THREE.Color();
+
              setFFTdependantSizes();
              //setTrailSize();
                         uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
