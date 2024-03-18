@@ -2170,7 +2170,7 @@ float lfc = length(freed(coords));
    
 float precores = .25/log(.5);
 if(clvrVariant4) precores=0.;
-if(morph!=0.)precores=precores-3./log(.5);
+if(morph!=0.)precores=precores-5./log(.5);
 if(refactorCores!=1.)precores=-.0;
 
 float cored =0.;
@@ -2356,7 +2356,7 @@ float spoke_factor =metaCoreDriveFactor*twoGRthreeLeaf;//metaCoreDriveFactor*(((
                             // float   grOverLeaf=-((gr/leaf)/truncator)*truncator;//uncertain term
                              float grPlusOneOverLeaf=(((1.+gr)/(-leaf))/truncator)*truncator;
 float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
-                                                      float upSpoke= grPlusOneOverLeaf/-pow(spoke_factor/-leaf,-leaf-1.);//somewhat uncertain of a value
+                                                      float upSpoke=spoke_factorLarge; //grPlusOneOverLeaf/-pow(spoke_factor/-leaf,-leaf-1.);//somewhat uncertain of a value
 
                                                       //pow(spoke_factor,(-leaf/gr)/truncator)*truncator)*(((1.+gr)/-leaf)/truncator)*truncator;
                           //   float upSpoke=pow(spoke_factor,((-leaf/gr)/truncator)*truncator)*1.5;//pow(spoke_factor,leaf);//seems to have many likes
@@ -2518,7 +2518,8 @@ vec2 lastS = s;
    
 
 if(Spoker){
-    if(morph==0.){
+   // if(morph==0.)
+    {
         dstnce = length(s);
         if((//!wheel
             dstnce*sqrt(dstnce)<=hyperCoreBoosted))//||(wheel&&1.<=hyperCoreBoosted))
@@ -2556,12 +2557,12 @@ if(Spoker){
             }
             }
 }
-else//for dancer only
+/*else//for dancer only
 {
    
 hyperCoreOUTPUT-=spoke_factor;
 hyperCoreBoosted-=spoke_factor;}
-
+ */
    }
 
 if(spokelover)
