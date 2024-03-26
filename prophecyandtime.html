@@ -77,8 +77,32 @@ Of my cousins on my Mom's side: Max, Michelle, Tim, Matthew, Greg, Mark, John, A
 <p>
 And as a Christian I am a son of The Son of David, The Seventh Son.<p>
         <p>
-        2-12-2018 around 4 o’clock in the morning saw a waking vision (in my mind as a dream) of an angel falling into swirling waters who was identified by me as perhaps being the angel Michael, as the red meteor had already depicted satan falling from heaven so I thought maybe Michael was wounded in his battle and had fallen. Then I ended a 5.72ish day fast with water from a creek.  Near the end of the fast water was condensing on my moustache and dripping in what felt like great abundance over my lips. I was in Ann Arbor during much of this time as well as thousands of ravens.<p>
-        
+        2-12-2018 around 4 o’clock in the morning saw a waking vision (in my mind as a dream) of an angel falling into swirling waters who was identified by me as perhaps being the angel Michael, as the red meteor had already depicted satan falling from heaven so I thought maybe Michael was wounded in his battle and had fallen. Then I ended a 5.72ish day fast with water from a creek.  Near the end of the fast water was condensing on my moustache and dripping in what felt like great abundance over my lips. I was in Ann Arbor during much of this time as well as thousands of ravens.<br>
+        <video id="video" width="600" height="600"
+            style="
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 3px;"
+    class=".onoffline2"
+    name="carrion.mp4"
+    controls>
+       </video>
+        <script src="OFFLINEonlineSwitch.js"></script>
+        <script>
+            //https://stackoverflow.com/questions/5235145/changing-source-on-html5-video-tag
+            var video = document.getElementById('video');
+            var source = document.createElement('source');
+            
+            if(online)
+            source.setAttribute('src', 'https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/carrion_compressed.mp4');
+            else
+            source.setAttribute('src', 'carrion_compressed.mp4');
+            
+            source.setAttribute('type', 'video/mp4');
+            video.load();
+            video.appendChild(source);
+            </script>
+        <p>
         Sometime in the time from January to March of 2018 I had a thought, a prophecy, which I kept to myself until after it had been fulfilled.  It was that one of the symbolic meanings of the date 7-18, the Hebrew day after Easter, was my cousin’s death as it would represent the seventh son becoming the eighth.
         <p>
         4-2-2018 or 7-18 on the Hebrew calendar at around nightfall: got the news my cousin Michelle had died from falling from a bridge into a <a href="https://perma.cc/VH6E-P6WU">river</a>.
@@ -108,7 +132,7 @@ And as a Christian I am a son of The Son of David, The Seventh Son.<p>
     nf = document.querySelectorAll('.onoffline');
     for(var c = 0; c<nf.length; c++) {
         if(window.online)
-        nf[c].src ="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6.0/"+nf[c].name;
+        nf[c].src ="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/"+nf[c].name;
         else nf[c].src =nf[c].name;
         nf[c].onerror=function(){    var s = document.createElement("img");//document.getElementById('threeJSscript');
             s.src = this.name;
