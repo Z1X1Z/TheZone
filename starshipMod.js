@@ -2034,7 +2034,7 @@ var fingerStride = 0;
              if(!uniforms.pixelSTARon.value)BlackOrWhite=.5;
              else BlackOrWhite=.75
         }
-         else if( ((uniforms.Character.value==0&&(noteGrey<6.5&&noteGrey>5.5))) &&uniforms.colorCombo.value!=20&&!blankBackground&&starClover)
+         else if( ((uniforms.Character.value==0&&(noteGrey<6.5&&noteGrey>5.5))&&BlackOrWhite!=1.) &&uniforms.colorCombo.value!=20&&!blankBackground&&starClover)
          {
             if(!uniforms.pixelSTARon.value)BlackOrWhite=.5;
              else BlackOrWhite=-1.;
