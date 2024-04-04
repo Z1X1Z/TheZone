@@ -1454,8 +1454,33 @@ function runOSMD (){
                                               let ONbypass;
                                           let lastTIMEUNIFORM = 0.;
                                           
-                                          
-   function animate( timestamp ) {
+                                          function animate( timestamp ) {
+                                    
+                                    if(window.streaming)
+                                    {
+                                        const context = videoCanvas.getContext("2d");
+                                        
+                                        context.drawImage(window.video, 0, 0, window.innerWidth, window.innerHeight);
+                                        
+                                        const myImageData = context.getImageData(0, 0, window.innerWidth, window.innerHeight);
+                                        
+                                        let videoTexture = new THREE.DataTexture( myImageData.data, window.innerWidth, window.innerHeight, THREE.RGBAFormat,THREE.UnsignedByteType);
+                                        videoTexture.needsUpdate=true;
+                                        uniforms.videoTexture.value=videoTexture;
+                                        uniforms.videoTexture.needsUpdate = true;
+                                        
+                                    }
+                                    else
+                                    {
+                                    //https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Pixel_manipulation_with_canvas the eponymous hippopotamus
+                                    let videoTexture = new THREE.DataTexture(  new Uint8Array(window.innerWidth* window.innerHeight*4.), window.innerWidth, window.innerHeight, THREE.RGBAFormat,THREE.UnsignedByteType);
+                                    videoTexture.needsUpdate=true;
+                                    uniforms.videoTexture.value=videoTexture;
+                                    uniforms.videoTexture.needsUpdate = true;
+                                }
+
+                                    
+                                    
                                     
                                     
     ONbypass = false;
