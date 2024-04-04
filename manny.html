@@ -591,6 +591,11 @@ radialWarp=b;
                    key  = 'E';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                    Manny On Trail![E]</a><br>
+               
+               <a id="Seven Angel Sons" name="t"  onclick= "
+                   key  = 'c';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true ,'keyCode':key.charCodeAt(0)}));">
+                   Seven Angel Zons![.c]</a><br>
 
           </div>
                </button>
@@ -1446,7 +1451,9 @@ void main(){
     uniform float radialWarp;
     uniform sampler2D audioBuffer;
     uniform sampler2D micIn;
-    
+
+    uniform sampler2D videoTexture;
+
     
     uniform sampler2D STAR;
     uniform sampler2D EDEN;
@@ -2340,7 +2347,9 @@ if(wheel)m =  ((pWithoutChiralizer/lfc)
 vec3 oo = vec3(0.);
  float continuumCounter=0.;
 
-vec4 starship=vec4(0.);
+                            vec4 starship=vec4(0.);
+                            vec4 sevenSuns=vec4(0.);
+                            
 float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
 vec3 beta =vec3(1.);
 
@@ -2459,6 +2468,10 @@ else      for (float counter=0.;counter<iterations;counter++)if(dstnce<baseDelim
             float decayCanceller=1.;
             if(spokesVisualizeColors)decayCanceller = 2.;
             //if(morph!=0.)decayCanceller=decayCanceller*decayCanceller;
+            
+            sevenSuns+=texture2D(videoTexture,cloverMAP.yx);
+
+            
                if(eden==0)starship+=texture2D(STAR,cloverMAP)/decayCanceller;
                else if(eden==1)starship+=texture2D(EDEN,cloverMAP)/decayCanceller;//*length((vUv-.5)*max(resolution.x,resolution.y)/min(resolution.x,resolution.y));//+texture2D(STAR,cloverMAP);
             
@@ -2780,8 +2793,7 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                     //  if (starship.x!=0.&&starship.x!=1.&&starship.x!=.5&&(starship.x+starship.y>=255.-3.5||starship.y+starship.z>=255.-3.5||starship.z+starship.x>=255.-3.5)&&starship.w==1.)spirographTranslucer=.75-(starship.x+starship.y+starship.z)/2.;
                       
                       
-                      
-o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z)*7.*starship.w,0.,1.)+starship.xyz*spirographTranslucer;
+o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z)*7.*starship.w-(sevenSuns.x+sevenSuns.y+sevenSuns.z)*7.,0.,1.)+starship.xyz*spirographTranslucer+sevenSuns.xyz;
                       o*=isBlack;
                       o+=(isBlack-1.)*100.;
                       o+=isGrey;
@@ -3826,8 +3838,7 @@ vec4 tree = vec4( clamp(
           vec3 confraculator = vec3(1.);
           if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
           
-gl_FragColor=
-fin/vec4(confraculator
+gl_FragColor=fin/vec4(confraculator
                            ,1.);
                        
        //  gl_FragColor= vec4(.5);
@@ -3837,6 +3848,11 @@ fin/vec4(confraculator
                                          }
 
 </script>
+
+  <video id="video" style="display:none">Video stream not available.</video>
+  <canvas id="videoCanvas" style="display:none"> </canvas>
+
+
 <script src="loadMicrophone.js"></script>
 <script src="hotkeys.js" ></script>
 <script src="starshipMod.js"></script>
