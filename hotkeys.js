@@ -472,7 +472,7 @@ function callKey(event){
             window.video = document.getElementById('video');
             window.videoCanvas = document.getElementById('videoCanvas');
             navigator.mediaDevices
-            .getUserMedia({ video: true, audio: false })
+            .getUserMedia({ video: true, audio: false,facingMode: "environment" })
             .then((stream) => {
                 
                 window.video.srcObject = stream;
