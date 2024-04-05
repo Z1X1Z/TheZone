@@ -473,8 +473,8 @@ function callKey(event){
             window.videoCanvas = document.getElementById('videoCanvas');
             navigator.mediaDevices
             .getUserMedia({ video: true, audio: false,
-            facingMode: { exact: "user" },//https://www.webdevdrops.com/en/how-to-access-device-cameras-with-javascript/
-                //https://developer.mozilla.org/en-US/docs/Web/API/MediaTrackConstraints/facingMode
+            facingMode: {exact:"environment"}
+                
             })
             .then((stream) => {
                 
