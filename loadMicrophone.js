@@ -11,10 +11,11 @@ let analyser={};
     async function startMic() {
       //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
         navigator.mediaDevices.getUserMedia({
-        audio: true,
+        audio:{
         autoGainControl: false,
-        echoCancellation: true,
+        echoCancellation: false,
         noiseSuppression:false//https://stackoverflow.com/questions/71978189/lag-when-playing-mic-audio-directly-to-output-using-web-audio-api
+        }
         })
       .then((stream) => {
         /* use the stream */
