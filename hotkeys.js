@@ -504,7 +504,7 @@ function callKey(event){
         
         if (window.front == 1)window.front = -1
          else   if (window.front == -1)window.front = 0
-             else   if (window.front == 0) window.front == 1
+             else   if (window.front == 0) window.front = 1
 
 
     }
