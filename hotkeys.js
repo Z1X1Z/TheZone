@@ -472,8 +472,9 @@ function callKey(event){
             window.video = document.getElementById('video');
             window.videoCanvas = document.getElementById('videoCanvas');
             navigator.mediaDevices
-            .getUserMedia({ video: true, audio: false,
-            facingMode: {exact:"environment"}
+            .getUserMedia({ video: {
+            facingMode: {ideal:"environment"}
+            }//https://stackoverflow.com/questions/64553141/html-usermedia-facingmode-environmentdoesnt-work-on-android-phone
                 
             })
             .then((stream) => {
