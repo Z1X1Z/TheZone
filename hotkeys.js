@@ -197,8 +197,7 @@ function resetAll(){
             if(!touchOnlyMode||location.hash.includes("t"))window.touchMode=false;
             window.volumeSpeed = false;
 
-            window.twist = 0.;
-            window.flip = 1.;
+                                         window.front = 1;
             window.center = false;
             window.zoomOutRatchetThreshold=1./fftSize;
 
@@ -466,15 +465,16 @@ function callKey(event){
     }//bible iframe loaded in manny.html
     else if (event.altKey&&(key=="ç"||key=="c"))
     {
-        if(!streaming)
+        if(window.front!=0)
         {
         //https://developer.mozilla.org/en-US/docs/Web/API/Media_Capture_and_Streams_API/Taking_still_photos//
             window.video = document.getElementById('video');
             window.videoCanvas = document.getElementById('videoCanvas');
             navigator.mediaDevices
             .getUserMedia({ video: {
-            facingMode: {ideal:"environment"}
-            }//https://stackoverflow.com/questions/64553141/html-usermedia-facingmode-environmentdoesnt-work-on-android-phone
+            facingMode: front==1 ? "user" : "environment"
+            }
+                //https://stackoverflow.com/questions/64553141/html-usermedia-facingmode-environmentdoesnt-work-on-android-phone
                 
             })
             .then((stream) => {
@@ -485,8 +485,6 @@ function callKey(event){
             .catch((err) => {
                 console.error(`An error occurred: ${err}`);
             });
-            
-            
             
             video.oncanplay=
                                    (ev) => {
@@ -503,6 +501,12 @@ function callKey(event){
             
         }
         else streaming=false;
+        
+        if (window.front == 1)window.front = -1
+         else   if (window.front == -1)window.front = 0
+             else   if (window.front == 0) window.front == 1
+
+
     }
 
     else if(x == 1&&event.altKey&&!event.shiftKey)uniforms.clvrVariant1.value=!uniforms.clvrVariant1.value;
