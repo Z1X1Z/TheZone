@@ -1005,7 +1005,13 @@ function adjustThreeJSWindow()
                     {
      
      renderer.setSize(widthPX, heightPX);
-
+             if (streaming) {
+                 video.setAttribute("width", window.innerWidth);
+                 video.setAttribute("height", window.innerHeight);
+                 
+                 videoCanvas.setAttribute("width", window.innerWidth);
+                 videoCanvas.setAttribute("height", window.innerHeight);
+             }
         
      uniforms.resolution.value =new THREE.Vector2(widthPX,heightPX);
      FEEDBACKuniforms.resolution.value =new THREE.Vector2(widthPX,heightPX);
@@ -1942,7 +1948,8 @@ else{//start drawing of just twenty four frets here
     if(twoOr1){maxTestar=1;minTestar=0;}
     let oddSkew =EldersLeg%2/2;
     let bottomNote = Math.round(-twist+24)%24;
-    
+    let topNote = Math.round(-twist+12)%24;
+
 let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
             for (var g=oddSkew; g<fretMultiplied; g++) {
                 let incrementation = (EldersLeg%2==0)?g%2:(g+1)%2;
@@ -1950,6 +1957,7 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                incrementation++;
                 let widt = starshipSize/(EldersLeg/24.)**.5/incrementation/2.;
                 if (g==bottomNote&&EldersLeg==24)widt*=2.;
+                else if (g==topNote&&EldersLeg==24)widt*=1.5;
                 let arm =flip*(g*radialWarp+twist*EldersLeg/24.)%EldersLeg/EldersLeg*pi*2.;
                 let lengt = (testar[(g+EldersLeg/2.)%EldersLeg]-minTestar)/(maxTestar-minTestar);
                 if(twoOr1) {
