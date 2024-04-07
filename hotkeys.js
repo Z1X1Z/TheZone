@@ -19,7 +19,8 @@ radialWarp:{value:1.},
 micIn:{value:null},
     audioBuffer:{value:null},
     omniDynamic:{value:null},
-    videoTexture:{value:null},
+videoTexture:{value:null},
+videoTexture2:{value:null},
 coreTextureSampler:{value:null},
 STAR:{value:null},
 EDEN:{value:null},
@@ -173,10 +174,13 @@ function resetAll(){
             window.pzyghthe=0;
             window.dynamicCoring=false;
             window.starArms = fftSize/2.
-      
-    window.video = null;
-    window.videoCanvas = null;
+    
+  window.video = null;
+  window.videoCanvas = null;
+    window.video2 = null;
+    window.videoCanvas2 = null;
     window.streaming=false;
+    window.streaming2=false;
     window.Oreo=true;
             window.shouldShowStar = true;
             window.flame = false;
@@ -465,14 +469,14 @@ function callKey(event){
     }//bible iframe loaded in manny.html
     else if (event.altKey&&(key=="ç"||key=="c"))
     {
-        if(window.front!=0)
+        if(!streaming)
         {
         //https://developer.mozilla.org/en-US/docs/Web/API/Media_Capture_and_Streams_API/Taking_still_photos//
             window.video = document.getElementById('video');
             window.videoCanvas = document.getElementById('videoCanvas');
             navigator.mediaDevices
             .getUserMedia({ video: {
-            facingMode: front==1 ? "user" : "environment"
+            facingMode: "user"
             }
                 //https://stackoverflow.com/questions/64553141/html-usermedia-facingmode-environmentdoesnt-work-on-android-phone
                 
@@ -501,14 +505,41 @@ function callKey(event){
             
         }
         else streaming=false;
-        
-        if (window.front == 1)window.front = -1
-         else   if (window.front == -1)window.front = 0
-             else   if (window.front == 0) window.front = 1
+        }
+    else if (event.altKey&&(key=="√"||key=="v"))
+    {
+        //https://developer.mozilla.org/en-US/docs/Web/API/Media_Capture_and_Streams_API/Taking_still_photos//
+        window.video2 = document.getElementById('video2');
+        window.videoCanvas2 = document.getElementById('videoCanvas2');
+        if(!streaming2){
+        navigator.mediaDevices
+        .getUserMedia({ video: {
+        facingMode: "environment"
+        }
+        })
+        .then((stream) => {
+            window.video2.srcObject = stream;
+            window.video2.play();
+        })
+        .catch((err) => {
+            console.error(`An error occurred: ${err}`);
+        });
+        video2.oncanplay=
+        (ev) => {
+            if (!streaming) {
+                video2.setAttribute("width", window.innerWidth);
+                video2.setAttribute("height", window.innerHeight);
+                
+                videoCanvas2.setAttribute("width", window.innerWidth);
+                videoCanvas2.setAttribute("height", window.innerHeight);
+                streaming2 = true;
+            }
+        }
+    }
+        else streaming2=false;
 
 
     }
-
     else if(x == 1&&event.altKey&&!event.shiftKey)uniforms.clvrVariant1.value=!uniforms.clvrVariant1.value;
     else if(x == 2&&event.altKey&&!event.shiftKey)uniforms.clvrVariant2.value=!uniforms.clvrVariant2.value;
     else if(x == 3&&event.altKey&&!event.shiftKey)uniforms.clvrVariant3.value=!uniforms.clvrVariant3.value;
