@@ -3470,7 +3470,9 @@ vec3 sevenPillars(vec2 p){
     else return vec3(0.);
 }
       void main(){
-vec2 p=-(vUv.yx-.5)/(resolution.xy/max(resolution.x,resolution.y))*shaderScale/2.;
+                      vec2 aspectRatio = resolution/max(resolution.x,resolution.y);
+
+vec2 p=-(vUv.yx-.5)/aspectRatio*shaderScale/2.;
 
 vec2 spunC=coords.yx;
 
@@ -3726,7 +3728,7 @@ if(starOnDot!=2){
 
 if(starOnDot>=1){
                        float dotstarscale = 1.;
-        vec2  DOTstarshipLOOKUP = mod((vUv)-(dotCoord)/2.*resolution.yx/max(resolution.x,resolution.y)-.5+.5/dotstarscale//-.125-.25
+        vec2  DOTstarshipLOOKUP = mod((vUv)-(dotCoord)/2.*aspectRatio-.5+.5/dotstarscale//-.125-.25
                                       ,1.//)*4.
                                       )*dotstarscale;//*-vec2(sign(dotCoord.x),sign(dotCoord.y));
 
@@ -3783,7 +3785,7 @@ if(starOnDot>=1){
          if (pixelSTARon)
     {
                        vec2 vUvCentered = (vUv.yx-.5);
-                       vec2 uVu=-(vUvCentered)/(resolution.xy/max(resolution.x,resolution.y));
+                       vec2 uVu=-(vUvCentered)/aspectRatio;
                        vec2 uVuMinCenter=-vUvCentered/(min(resolution.x,resolution.y)/resolution.yx);
              pixelStarship = audioEq(uVuMinCenter);
              icicles = waveForm();
@@ -3800,9 +3802,10 @@ if(starOnDot>=1){
               
               
          }
-                                                                 vec2 faceDimension = (1.-vUv)*resolution/max(resolution.x,resolution.y);
+                                                                 vec2 faceDimension = (1.-vUv)*aspectRatio;
+                                                                 vec2 faceDimensionReversed =   vec2(vUv.x,1.-vUv.y)*aspectRatio;
                                                               vec4 yourFace=     texture2D(videoTexture,faceDimension).xyzw+
-                                                                 texture2D(videoTexture2,faceDimension).xyzw
+                                                                 texture2D(videoTexture2,faceDimensionReversed).xyzw
                                                                  ;
 if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                   
