@@ -592,10 +592,15 @@ radialWarp=b;
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                    Manny On Trail![E]</a><br>
                
-               <a id="Seven Angel Sons" name="t"  onclick= "
-                   key  = 'c';
-                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true ,'keyCode':key.charCodeAt(0)}));">
-                   Seven Eyes Angel Zons![.c]</a><br>
+              <input type="checkbox"  id="user camera" name="t"  onclick= "
+                  key  = 'c';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                  <label for="user camera"> User Camera![.c]</label><br>
+                  
+                 <input type="checkbox"  id="env camera" name="t"  onclick= "
+                     key  = 'v';
+                     callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                     <label for="env camera"> Environment Camera![.v]</label><br>
 
           </div>
                </button>
@@ -1453,6 +1458,7 @@ void main(){
     uniform sampler2D micIn;
 
     uniform sampler2D videoTexture;
+    uniform sampler2D videoTexture2;
 
     
     uniform sampler2D STAR;
@@ -2469,7 +2475,7 @@ else      for (float counter=0.;counter<iterations;counter++)if(dstnce<baseDelim
             if(spokesVisualizeColors)decayCanceller = 2.;
             //if(morph!=0.)decayCanceller=decayCanceller*decayCanceller;
             
-            sevenSuns+=texture2D(videoTexture,vec2(1.-cloverMAP.x,cloverMAP.y));
+            sevenSuns+=texture2D(videoTexture,vec2(1.-cloverMAP.x,cloverMAP.y))+texture2D(videoTexture2,vec2(1.-cloverMAP.x,cloverMAP.y));
 
             
                if(eden==0)starship+=texture2D(STAR,cloverMAP)/decayCanceller;
@@ -3792,8 +3798,12 @@ if(starOnDot>=1){
              }
              pixelStarship += starBuffer;
               
+              
          }
-                                                              vec4 yourFace=     texture2D(videoTexture,(1.-vUv)*resolution/max(resolution.x,resolution.y)).xyzw;
+                                                                 vec2 faceDimension = (1.-vUv)*resolution/max(resolution.x,resolution.y);
+                                                              vec4 yourFace=     texture2D(videoTexture,faceDimension).xyzw+
+                                                                 texture2D(videoTexture2,faceDimension).xyzw
+                                                                 ;
 if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                   
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
@@ -3856,6 +3866,9 @@ fin/vec4(confraculator
 
   <video id="video" style="display:none">Video stream not available.</video>
   <canvas id="videoCanvas" style="display:none"> </canvas>
+
+  <video id="video2" style="display:none">Video stream not available.</video>
+  <canvas id="videoCanvas2" style="display:none"> </canvas>
 
 
 <script src="loadMicrophone.js"></script>

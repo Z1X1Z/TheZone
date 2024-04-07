@@ -1475,6 +1475,8 @@ function runOSMD (){
                                         uniforms.videoTexture.value=videoTexture;
                                         uniforms.videoTexture.needsUpdate = true;
                                         
+                                        
+                                        
                                     }
                                     else
                                     {
@@ -1485,6 +1487,36 @@ function runOSMD (){
                                     uniforms.videoTexture.needsUpdate = true;
                                 }
 
+                                    
+                                    
+                                    
+                                    
+                                    if(window.streaming2)
+                                    {
+                                        
+                                            const context2 = videoCanvas2.getContext("2d");
+                                            
+                                            context2.drawImage(window.video2, 0, 0, window.innerWidth, window.innerHeight);
+                                            
+                                            const myImageData2 = context2.getImageData(0, 0, window.innerWidth, window.innerHeight);
+                                            
+                                            let videoTexture2 = new THREE.DataTexture( myImageData2.data, window.innerWidth, window.innerHeight, THREE.RGBAFormat,THREE.UnsignedByteType);
+                                            videoTexture2.needsUpdate=true;
+                                            uniforms.videoTexture2.value=videoTexture2;
+                                            uniforms.videoTexture2.needsUpdate = true;
+                                        
+                                        
+                                    }
+                                    else
+                                    {
+                                    //https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Pixel_manipulation_with_canvas the eponymous hippopotamus
+                                    let videoTexture2 = new THREE.DataTexture(  new Uint8Array(window.innerWidth* window.innerHeight*4.), window.innerWidth, window.innerHeight, THREE.RGBAFormat,THREE.UnsignedByteType);
+                                    videoTexture2.needsUpdate=true;
+                                    uniforms.videoTexture2.value=videoTexture2;
+                                    uniforms.videoTexture2.needsUpdate = true;
+                                }
+
+                                    
                                     
                                     
                                     
