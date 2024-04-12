@@ -583,7 +583,13 @@ function callKey(event){
                 }
 
 
+                
+                
+                
+                
+                
     else if (event.altKey&&key=="f")console.log("speakers disabled!");//speakers turned off in manny.html
+                
     else if(event.ctrlKey||event.altKey);//swallow remaining possibilities, muting keypress
     /*if(key == "k" && event.ctrlKey)
      {
