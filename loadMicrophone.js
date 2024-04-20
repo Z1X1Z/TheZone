@@ -12,7 +12,7 @@ let analyser={};
       //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
         navigator.mediaDevices.getUserMedia({
         audio:{
-        autoGainControl: false,
+        autoGainControl: true,
         echoCancellation: false,
         noiseSuppression:true//https://stackoverflow.com/questions/71978189/lag-when-playing-mic-audio-directly-to-output-using-web-audio-api
         }
