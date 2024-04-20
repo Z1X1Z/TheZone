@@ -13,7 +13,7 @@ let analyser={};
         navigator.mediaDevices.getUserMedia({
         audio:{
         autoGainControl: false,
-        echoCancellation: false,
+        echoCancellation: true,
         noiseSuppression:true//https://stackoverflow.com/questions/71978189/lag-when-playing-mic-audio-directly-to-output-using-web-audio-api
         }
         })
