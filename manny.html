@@ -3661,7 +3661,7 @@ mny+=HEART*heartMultiplier;
 
     vec3 ARTICLE=vec3(0.);
                 
-    if(articles){
+    if(0==1&&articles){
                        
            vec3 HORSE=horse(characterOnTrailP, moveDynamic);
             ARTICLE+=scroll(characterOnTrailP+1.5*vec2(0.,resolution.x/min(resolution.x,resolution.y)),vec2(-1.));
@@ -3853,7 +3853,7 @@ vec4 tree = vec4( clamp(
           vec3 confraculator = vec3(1.);
           if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
           
-gl_FragColor= vec4(0.);
+gl_FragColor=
 
 fin/vec4(confraculator
                            ,1.);
