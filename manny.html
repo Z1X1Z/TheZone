@@ -2508,7 +2508,7 @@ vec2 lastS = s;
       // if (mod(counter,5.) == 4.)s =pCenterCored;
        //x**3
    
-      // if(clvrVariant4)   s*=1.-oneOverLeafTruncated;
+       if(clvrVariant4)   s*=1.-oneOverLeafTruncated;
        if(clvrVariant5) s = vec2(pow(s.x,-2.),pow(s.y,-2.));
       if(clvrVariant6)s=s-lastS.yx;
         if(clvrVariant7)s+=pcs;
@@ -2552,14 +2552,14 @@ if(Spoker){
                              }
                          else
                               */
-                             {
+                             
                              
                           s/=spoke_factorLarge;//engage ; s/=2.+'superspokes'
                          
                          hyperCoreOUTPUT-=downSpoke;
 
                          hyperCoreBoosted-=downSpoke;
-                         }
+                         
                          }
         else  {
             /*
@@ -2567,12 +2567,12 @@ if(Spoker){
             hyperCoreOUTPUT+=logOfSpoke_Factor;
             hyperCoreBoosted+=logOfSpoke_Factor;
             }
-                else */{
+                else */
                   //  float correctionSpoke =pow(upSpoke/dstnce,grOverLeaf);//uncertain value
             hyperCoreOUTPUT+=upSpoke
             ;
             hyperCoreBoosted+=upSpoke;
-            }
+            
             }
 }
 /*else//for dancer only
