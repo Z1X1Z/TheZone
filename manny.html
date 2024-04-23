@@ -2474,7 +2474,7 @@ else      for (float counter=0.;counter<iterations;counter++)if(dstnce<baseDelim
             if(spokesVisualizeColors)decayCanceller = 2.;
             //if(morph!=0.)decayCanceller=decayCanceller*decayCanceller;
             
-            sevenSuns+=texture2D(videoTexture,vec2(1.-cloverMAP.x,cloverMAP.y))+texture2D(videoTexture2,vec2(1.-cloverMAP.x,cloverMAP.y));
+          // sevenSuns+=texture2D(videoTexture,vec2(1.-cloverMAP.x,cloverMAP.y))+texture2D(videoTexture2,vec2(1.-cloverMAP.x,cloverMAP.y));
 
             
                if(eden==0)starship+=texture2D(STAR,cloverMAP)/decayCanceller;
@@ -3803,8 +3803,8 @@ if(starOnDot>=1){
          }
                                                                  vec2 faceDimension = (1.-vUv)*aspectRatio;
                                                                  vec2 faceDimensionReversed =   vec2(vUv.x,1.-vUv.y)*aspectRatio;
-                                                              vec4 yourFace=     texture2D(videoTexture,faceDimension).xyzw+
-                                                                 texture2D(videoTexture2,faceDimensionReversed).xyzw
+                                                              vec4 yourFace= vec4(0.);     //yourFace=texture2D(videoTexture,faceDimension).xyzw+
+                                                              //   texture2D(videoTexture2,faceDimensionReversed).xyzw
                                                                  ;
 if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                   
