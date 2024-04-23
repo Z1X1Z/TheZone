@@ -2508,7 +2508,7 @@ vec2 lastS = s;
       // if (mod(counter,5.) == 4.)s =pCenterCored;
        //x**3
    
-       if(clvrVariant4)   s*=1.-oneOverLeafTruncated;
+      // if(clvrVariant4)   s*=1.-oneOverLeafTruncated;
        if(clvrVariant5) s = vec2(pow(s.x,-2.),pow(s.y,-2.));
       if(clvrVariant6)s=s-lastS.yx;
         if(clvrVariant7)s+=pcs;
@@ -3839,7 +3839,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
 vec4 tree = vec4( clamp(
                      clamp(
                            cloud
-                          // +zoomer
+                           +zoomer
                            +awayFromTree
                            
                                               ,0.,1.)
