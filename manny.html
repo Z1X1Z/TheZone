@@ -3661,7 +3661,7 @@ mny+=HEART*heartMultiplier;
 
     vec3 ARTICLE=vec3(0.);
                 
-    if(0==1&&articles){
+    if(articles){
                        
            vec3 HORSE=horse(characterOnTrailP, moveDynamic);
             ARTICLE+=scroll(characterOnTrailP+1.5*vec2(0.,resolution.x/min(resolution.x,resolution.y)),vec2(-1.));
@@ -3838,8 +3838,8 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
 
 vec4 tree = vec4( clamp(
                      clamp(
-                           cloud+
-                           zoomer
+                           cloud
+                          // +zoomer
                            +awayFromTree
                            
                                               ,0.,1.)
