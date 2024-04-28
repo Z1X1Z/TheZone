@@ -3535,11 +3535,11 @@ vec2 dance = vec2(0.);
                                  
      else if (colorCombo==17){
                        if(Character == 3||Character == 4){
-                           faceFORWARDbuffer =faceFORWARD(backGround*3.,t*zoom);
-                           zoomer=faceFORWARD(backGround*3.,t*zoom);
+                           faceFORWARDbuffer =faceFORWARD(backGround*3.,vec2(0.));
+                           zoomer=faceFORWARD(backGround*3.,vec2(0.));
                            }
-                       else zoomer=faceHeights(backGround,t*zoom);
-                       zoomer = clamp(bod(backGround*2.,t*zoom)-zoomer*50.,.0,1.)+zoomer;
+                       else zoomer=faceHeights(backGround,vec2(0.));
+                       zoomer = clamp(bod(backGround*2.,vec2(0.))-zoomer*50.,.0,1.)+zoomer;
                        }
      else if (colorCombo==20){
                        zoomer=vec3(0.);
