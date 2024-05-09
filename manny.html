@@ -3727,10 +3727,7 @@ if(starOnDot!=2){
 
 if(starOnDot>=1){
                        float dotstarscale = 1.;
-        vec2  DOTstarshipLOOKUP = mod((vUv)-(dotCoord)/2.*aspectRatio-.5+.5/dotstarscale//-.125-.25
-                                      ,1.//)*4.
-                                      )*dotstarscale;//*-vec2(sign(dotCoord.x),sign(dotCoord.y));
-
+                       vec2  DOTstarshipLOOKUP = mod((vUv)-(dotCoord)/2.*resolution.yx/max(resolution.x,resolution.y)-.5+.5/dotstarscale,1.);//-.125-.25
         if (DOTstarshipLOOKUP.x<1.&&DOTstarshipLOOKUP.y<1.&&DOTstarshipLOOKUP.x>0.&&DOTstarshipLOOKUP.y>0.)DOTstarship = texture2D(STAR,DOTstarshipLOOKUP);
         
 
