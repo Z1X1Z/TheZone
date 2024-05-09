@@ -916,6 +916,10 @@ Reset Zoom![L]</a><br>
                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                      Cycle character![U]</a><br>
                  
+            <a id="BigEyes" name="t"  onclick= "
+                key  = 'y';
+                callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                BigEyes?![.y]</a><br>
             <a id="Music Angel Man" name="t"  onclick= "
                 key  = 'a';
                 callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
@@ -1447,7 +1451,10 @@ void main(){
 <script id="fragmentShader" type="x-shader/x-fragment">
     varying vec2 vUv;
     uniform float coreDilation;
+    
+    uniform float largeEyeColor;
 
+    
     uniform bool pixelSTARon;
     uniform float fftSize;
     uniform float sampleRate;
@@ -3603,6 +3610,9 @@ vec2 dance = vec2(0.);
                                  float angelSize = 1.22112211;
 
                                  vec3 mannyFace = vec3(0.);
+                                                                 
+                                                                 
+                                                                 
             if(colorCombo!=17&&colorCombo!=20){
                    if(metronome>1.) mnyX = mannyX(characterOnTrailP/2.*1.22112211,vec2(time))+bod(characterOnTrailP,moveDynamic);
                    else if (Character==0){
@@ -3635,6 +3645,16 @@ vec2 dance = vec2(0.);
 
            }
 
+                                                                 
+                                                                 
+                                                                 vec3 bigEyes = vec3(0.);
+  if(largeEyeColor==1.||largeEyeColor==-1.) bigEyes = clamp(face(characterOnTrailP/11.,moveDynamic),0.,1.);//*largeEyeColor;
+ else if (largeEyeColor== 3.) bigEyes = clamp(shiny(characterOnTrailP/11.,moveDynamic),0.,1.);
+                                                                 
+                                                                 
+                                                                 
+                                                                 
+                                                                 
                                  
      float heartSize =gr*gr*-leaf/(1.+volume);//*8.;
      vec2 heartShift = vec2(0);
@@ -3809,7 +3829,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                      -vec4(vec3(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z),0.),0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies = vec4(
-                                           mnyX+
+                                           mnyX+ largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)),0.,1.)*100.+
                                           ( hypnoticHarmonicCircles+pillar+icicles.xyz)*(1.-pixelShipGrey*40.)
                                            +yourFace.xyz
                     +clamp(mny*starshipMultiplier*(1.-isGrey-pixelShipGrey)

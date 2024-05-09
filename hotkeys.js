@@ -46,6 +46,8 @@ uberDuper:{value:null},
             
         Spoker:{value: true    },
         spokelover:{value: true    },
+largeEyeColor:{value:-1.},
+
 dilate:{value:true},
 
     
@@ -407,6 +409,15 @@ function callKey(event){
         else if( uniforms.exponentialPetals.value==1.) uniforms.exponentialPetals.value=-1.;
         else if( uniforms.exponentialPetals.value==-1.) uniforms.exponentialPetals.value=0.;
         
+    }
+    else if (event.altKey&&(key=="¥"||key=="y"))
+    {
+        if(uniforms.largeEyeColor.value==0.)uniforms.largeEyeColor.value = -1.;
+        else if(uniforms.largeEyeColor.value==-1.)uniforms.largeEyeColor.value = 1.;
+        else if(uniforms.largeEyeColor.value==1.)uniforms.largeEyeColor.value = 3.;
+        else if(uniforms.largeEyeColor.value==3.)uniforms.largeEyeColor.value = 0.;
+
+    
     }
 
     else if (event.altKey&&(key=="œ"||key=="q")){
@@ -807,7 +818,7 @@ function callKey(event){
         else closeFullscreen();
     }
     else if (key=="H")uniforms.cloverSlide.value=!uniforms.cloverSlide.value;
-    else if (key==" ")resetAll();
+    else if (key==" ") resetAll();
     else if (key=="~")
     {
         onO=!onO;
