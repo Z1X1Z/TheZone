@@ -1846,7 +1846,7 @@ ret= vec4(clamp(
           l=length(z)/40.;//clouds and face
           break;}
       else{
-          z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x/5.),2.0*z.x*z.y-g.y-t.y/5.);
+          z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),2.0*z.x*z.y-g.y-t.y);
           l=abs(z.y)*6.;//smooths middle horn, removes some clouds
           if(z.x>-.1)l=z.x*200.;}//face with closed small holes
       return vec3(1.-l);
@@ -1880,7 +1880,7 @@ ret= vec4(clamp(
              break;
          }
          else{
-             s=vec2(-1./(s.x*s.x-s.y*s.y-p.x+t.x/5.), 2.0*s.x*s.y-p.y-t.y/5.);
+             s=vec2(-1./(s.x*s.x-s.y*s.y-p.x+t.x), 2.0*s.x*s.y-p.y-t.y);
              l=abs(s.y)*3.5;//refines middle horn, optional
              if(s.x>-.1)l=s.x*50.;//closes small holes
              d+=length(s)/10.;
@@ -3829,7 +3829,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                      -vec4(vec3(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z),0.),0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies = vec4(
-                                           mnyX+ largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)),0.,1.)*100.+
+                                           mnyX+ largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)/2.),0.,1.)*100.+
                                           ( hypnoticHarmonicCircles+pillar+icicles.xyz)*(1.-pixelShipGrey*40.)
                                            +yourFace.xyz
                     +clamp(mny*starshipMultiplier*(1.-isGrey-pixelShipGrey)
