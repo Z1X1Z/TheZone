@@ -42,8 +42,9 @@ uberDuper:{value:null},
         clvrVariant5:{value: false},
         clvrVariant6:{value: false},
         clvrVariant7:{value: false},
-        clvrVariant8:{value: false},
-            
+clvrVariant8:{value: false},
+clvrVariant9:{value: false},
+
         Spoker:{value: true    },
         spokelover:{value: true    },
 largeEyeColor:{value:-1.},
@@ -559,8 +560,8 @@ function callKey(event){
     else if(x == 6&&event.altKey&&!event.shiftKey)uniforms.clvrVariant6.value=!uniforms.clvrVariant6.value;
     else if(x == 7&&event.altKey&&!event.shiftKey)uniforms.clvrVariant7.value=!uniforms.clvrVariant7.value;
     else if(x == 8&&event.altKey&&!event.shiftKey)uniforms.clvrVariant8.value=!uniforms.clvrVariant8.value;
-    
-    else if(x == 9&&event.altKey&&!event.shiftKey)
+    else if(x == 9&&event.altKey&&!event.shiftKey)uniforms.clvrVariant9.value=!uniforms.clvrVariant9.value;
+    else if((key=="†"||key=="t")&&event.altKey&&!event.shiftKey)// is alt+a
     {
         window.pzyghthe = (window.pzyghthe+1.)%5;
        // if(pzyghthe==0) scene.remove(harmonicPzyghtheMesh);
