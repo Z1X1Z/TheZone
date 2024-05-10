@@ -1406,7 +1406,7 @@ function runOSMD (){
                                     const xTouch = screenPressCoordX*coordinator;
                                     const yTouch = screenPressCoordY*coordinator;
                                      const touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
-                                    uniforms.d.value=new THREE.Vector2( -xTouch,yTouch);
+                                    uniforms.d.value=new THREE.Vector2( xTouch,-yTouch);
                                     uniforms[ "volume" ].value=1.;
                                     var spunTouch=touchMovement;
                                           if(uniforms.carousel.value!=0.)         spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
