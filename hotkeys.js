@@ -12,7 +12,7 @@ const secondsToEdge=window.pixelShaderSize/4./pixelShaderToStarshipRATIO;
 
 window.uniformsInitial = {
 coreDilation:{value:0.},
-fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:1048./44100.},//actually 2/nyquist
+fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:1024./44100.},//actually 2/nyquist
 radialWarp:{value:1.},
     pixelSTARon:{value:true},
 
