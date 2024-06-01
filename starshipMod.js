@@ -16,12 +16,12 @@ else{
 
 function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
     if(!runningHash&&typeof THREE=="object" && document.visibilityState=="visible"
-       &&(window.micOn||(location.hash.includes("t")&&!location.hash.includes(",t")))){
+       &&(window.micOn||(location.hash.includes("t")&&!location.hash.includes(",t")&&!location.hash.includes(".t")))){
        document.getElementById( "background_wrap").style =  "height: 0px; width: 0px;"
         //"background-image: none;";//turn off splash!
         document.getElementById( "load message").innerHTML = "";//turn off splash!
 
-                if(location.hash.includes("t")&&!location.hash.includes(",t"))
+                if(location.hash.includes("t")&&!location.hash.includes(",t")&&!location.hash.includes(".t"))
               {
                 window.touchOnlyMode=true;
               }
@@ -2177,7 +2177,7 @@ var fingerStride = 0;
 
 
                                                          var vop = new THREE.Color();
-                                                     vop.setHSL((-note+(-g+6)*uniforms.brelued.value)%12/12.*uniforms.brelued.value
+                                                     vop.setHSL((-note+(-g+4)*uniforms.brelued.value)%12/12.*uniforms.brelued.value
                                                                 ,1.,.5);
 
                                                       //   for(var yy=0;yy<6;yy++)   harmonicColorAttribute.setXYZW(hpStride+yy,vop.r,vop.g,vop.b,1.)
@@ -2193,7 +2193,7 @@ var fingerStride = 0;
                                                      else if (window.pzyghthe==3) wisdom= upOrDown;
                                                      else if (window.pzyghthe==4) wisdom= -upOrDown;
                                                           let   radialHarmonicInterval =wisdom*
-                                                     2.*Math.PI*2**(xenOctaveFactor-( t+(g-1.)/12.))/2**xenOctaveFactor;
+                                                     2.*Math.PI*2**(xenOctaveFactor-( t+(g)/12.))/2**xenOctaveFactor;
                                                                                      const lengt = radialHarmonicInterval/144.;
                                                                                     radialHarmonicInterval+=angle;
                                                      const xr = widt*-Math.sin(-radialHarmonicInterval);
@@ -2203,7 +2203,7 @@ var fingerStride = 0;
                                                      const depth = -1;
 
                                                      let hollowCenterSize = 2.;
-                                                     if(g==1)hollowCenterSize = 1.75;
+                                                     if(g==0)hollowCenterSize = 1.75;
 
                                                      const outSetX = xr*hollowCenterSize;
                                                      const outSetY = yr*hollowCenterSize;
