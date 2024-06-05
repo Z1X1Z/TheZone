@@ -3671,7 +3671,7 @@ vec2 dance = vec2(0.);
   if(largeEyeColor==1.||largeEyeColor==-1.)
                                                                  {
                     if(length(characterOnTrailP)>.25)//for the eyezone on lttle manny, for G and A eyes
-                       bigEyes = clamp(face(characterOnTrailP/3.5*min(resolution.x,resolution.y)/max(resolution.x,resolution.y),moveDynamic/2.),0.,1.);//dimensions seem difficult to manage
+                       bigEyes = clamp(face(characterOnTrailP/3.5*min(resolution.x,resolution.y)/max(resolution.x,resolution.y),vec2(-moveDynamic.x/2.,moveDynamic.y/2.)),0.,1.);//dimensions seem difficult to manage
                    }
  else if (largeEyeColor== 3.) bigEyes = clamp(shiny(characterOnTrailP/3.5*min(resolution.x,resolution.y)/max(resolution.x,resolution.y),moveDynamic)/2.,0.,1.);
                                                                  
@@ -3857,7 +3857,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                            mnyX+ largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)/4.),0.,1.)*2.+
                                           ( hypnoticHarmonicCircles+pillar+icicles.xyz)*(1.-pixelShipGrey*40.)
                                            +yourFace.xyz
-                    +clamp(mny*starshipMultiplier*(1.-isGrey-pixelShipGrey)
+                    +clamp((mny)*starshipMultiplier*(1.-isGrey-pixelShipGrey)
                         -(ARTICLE.r+ARTICLE.g+ARTICLE.b)
                            ,0.,1.)
                                                     +ARTICLE
