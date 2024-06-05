@@ -413,10 +413,10 @@ function callKey(event){
     }
     else if (event.altKey&&(key=="¥"||key=="y"))
     {
-        if(uniforms.largeEyeColor.value==0.)uniforms.largeEyeColor.value = -1.;
-        else if(uniforms.largeEyeColor.value==-1.)uniforms.largeEyeColor.value = 1.;
-        else if(uniforms.largeEyeColor.value==1.)uniforms.largeEyeColor.value = 3.;
-        else if(uniforms.largeEyeColor.value==3.)uniforms.largeEyeColor.value = 0.;
+        if(uniforms.largeEyeColor.value==0.)uniforms.largeEyeColor.value = 3.;
+        else if(uniforms.largeEyeColor.value==1.)uniforms.largeEyeColor.value = -1.;
+        else if(uniforms.largeEyeColor.value==-1.)uniforms.largeEyeColor.value = 0.;
+        else if(uniforms.largeEyeColor.value==3.)uniforms.largeEyeColor.value = 1.;
 
     
     }
