@@ -113,7 +113,7 @@ dilate:{value:true},
         starOnDot:{value:0},
         gameOn:{value:false},
         scoreLoaded:{value:false},
-        musicAngelMan:{value:0},
+        musicAngelMan:{value:2},
         refactorCores:{value:1.},
 
         fieldPowerBoost:{value:false},
