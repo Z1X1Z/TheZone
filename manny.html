@@ -1855,7 +1855,7 @@ ret= vec4(clamp(
           l=length(z)/40.;//clouds and face
           break;}
       else{
-          z=vec2(-1./(z.x*z.x-z.y*z.y-g.x-t.x),2.0*z.x*z.y-g.y-t.y);
+          z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),2.0*z.x*z.y-g.y-t.y);
           l=abs(z.y)*6.;//smooths middle horn, removes some clouds
           if(z.x>-.1)l=z.x*200.;}//face with closed small holes
       return vec3(1.-l);
@@ -1866,7 +1866,7 @@ ret= vec4(clamp(
       vec2 z=g.xy;
       //if(g.x*g.x+g.y*g.y<40.)
       if(abs(z.y)<17.7)
-          z=vec2(-1./(z.x*z.x-z.y*z.y-g.x),2.0*z.x*z.y-g.y);
+          z=vec2(-1./(z.x*z.x-z.y*z.y+g.x),2.0*z.x*z.y-g.y);
       if(abs(z.y)>17.7) {
          // z=vec2((z.x*z.x-z.y*z.y-g.x),2.0*z.x*z.y-g.y);
           d=length(z)*441.144;
@@ -1891,7 +1891,7 @@ ret= vec4(clamp(
              break;
          }
          else{
-             s=vec2(-1./(s.x*s.x-s.y*s.y-p.x-t.x), 2.0*s.x*s.y-p.y-t.y);
+             s=vec2(-1./(s.x*s.x-s.y*s.y-p.x+t.x), 2.0*s.x*s.y-p.y-t.y);
              l=abs(s.y)*3.5;//refines middle horn, optional
              if(s.x>-.1)l=s.x*50.;//closes small holes
              d+=length(s)/10.;
@@ -3671,7 +3671,7 @@ vec2 dance = vec2(0.);
   if(largeEyeColor==1.||largeEyeColor==-1.)
                                                                  {
                     if(length(characterOnTrailP)>.25)//for the eyezone on lttle manny, for G and A eyes
-                       bigEyes = clamp(face(characterOnTrailP/3.5*min(resolution.x,resolution.y)/max(resolution.x,resolution.y),vec2(-moveDynamic.x/2.,moveDynamic.y/2.)),0.,1.);//dimensions seem difficult to manage
+                       bigEyes = clamp(face(characterOnTrailP/3.5*min(resolution.x,resolution.y)/max(resolution.x,resolution.y),moveDynamic/2.),0.,1.);//dimensions seem difficult to manage
                    }
  else if (largeEyeColor== 3.) bigEyes = clamp(shiny(characterOnTrailP/3.5*min(resolution.x,resolution.y)/max(resolution.x,resolution.y),moveDynamic)/2.,0.,1.);
                                                                  
