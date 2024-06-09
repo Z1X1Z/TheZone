@@ -184,7 +184,7 @@ function resetAll(){
     window.videoCanvas2 = null;
     window.streaming=false;
     window.streaming2=false;
-    window.Oreo=true;
+    window.Oreo=false;
             window.shouldShowStar = true;
             window.flame = false;
             window.muteTouchTouchVolume = true;

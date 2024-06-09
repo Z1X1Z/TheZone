@@ -496,7 +496,7 @@ radialWarp=b;
                <input type="checkbox"  id="oreo" name="t"  onclick= "
                    key  = 'j';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
-                   <label for="oreo"> Oreo?![,j]</label><br>
+                   <label for="oreo"> Oreo![,j]</label><br>
                    
                <a id="Cancel Background Noise" name="t"  onclick= "
 
@@ -3700,7 +3700,7 @@ mny+=HEART*heartMultiplier;
                        float divisor = 1.;
                        if(gameOn)divisor=1.5;
                        AM=faceFORWARD(characterOnTrailP*angelSize,moveDynamic)/divisor;
-                       //mny+=AM;
+                       mny+=AM;
                        }
      mny=clamp(mny,0.,1.);
 
@@ -3752,10 +3752,11 @@ if(starOnDot!=2){
                                  if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.&&starship.w>3.5/255.)mny*=starship.xyz-mny.x*.66;
 
                      starshipMultiplier=starship.xyz+(1.-starship.w);
+                     
                      if(starship.w>0.)starshipMultiplier=vec3(1.);
+
                                  if(mannyFace.z>0.)starshipMultiplier+=mannyFace;
                     if(mannyFace.z>0.)starshipMultiplier*=mannyFace;
-                                 
   
     if (starship.x==0.&&starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=starship.x;
                                  if (starship.x==starship.y&& starship.y==starship.z&&starship.x<.51&&starship.x>.49)isGrey=starship.x;
@@ -3861,7 +3862,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                         -(ARTICLE.r+ARTICLE.g+ARTICLE.b)
                            ,0.,1.)
                                                     +ARTICLE
-                                                    +b+creatures+bridge+AM*starshipMultiplier*(1.-isGrey-pixelShipGrey)
+                                                    +b+creatures+bridge//+AM*(1.-isGrey-pixelShipGrey)
                                                     ,1.);
                        vec3 awayFromTree =  vec3(-(AM.x+AM.y+AM.z)*4.
                                                  -(yourFace.x+yourFace.y+yourFace.z)/256./3.
