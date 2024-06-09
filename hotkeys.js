@@ -47,7 +47,7 @@ clvrVariant9:{value: false},
 
         Spoker:{value: true    },
         spokelover:{value: true    },
-largeEyeColor:{value:-1.},
+largeEyeColor:{value:1.},
 
 dilate:{value:true},
 
@@ -414,9 +414,9 @@ function callKey(event){
     else if (event.altKey&&(key=="¥"||key=="y"))
     {
         if(uniforms.largeEyeColor.value==0.)uniforms.largeEyeColor.value = 3.;
-        else if(uniforms.largeEyeColor.value==1.)uniforms.largeEyeColor.value = -1.;
-        else if(uniforms.largeEyeColor.value==-1.)uniforms.largeEyeColor.value = 0.;
-        else if(uniforms.largeEyeColor.value==3.)uniforms.largeEyeColor.value = 1.;
+        else if(uniforms.largeEyeColor.value==-1.)uniforms.largeEyeColor.value = 1.;
+        else if(uniforms.largeEyeColor.value==1.)uniforms.largeEyeColor.value = 0.;
+        else if(uniforms.largeEyeColor.value==3.)uniforms.largeEyeColor.value = -1.;
 
     
     }
