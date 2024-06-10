@@ -47,7 +47,7 @@ clvrVariant9:{value: false},
 
         Spoker:{value: true    },
         spokelover:{value: true    },
-largeEyeColor:{value:1.},
+largeEyeColor:{value:0.},
 
 dilate:{value:true},
 
@@ -184,7 +184,7 @@ function resetAll(){
     window.videoCanvas2 = null;
     window.streaming=false;
     window.streaming2=false;
-    window.Oreo=false;
+    window.Oreo=true;
             window.shouldShowStar = true;
             window.flame = false;
             window.muteTouchTouchVolume = true;
