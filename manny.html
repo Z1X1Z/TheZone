@@ -3842,6 +3842,9 @@ if(starOnDot>=1){
              if(isGrey>0.)pixelShipGrey=-1.;;
              }
              pixelStarship += starBuffer;
+             
+             if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.&&pixelStarship.w>3.5/255.)mny*=pixelStarship.xyz+(1.-pixelStarship.w);//-mny.x*.66;
+
               
               
          }
