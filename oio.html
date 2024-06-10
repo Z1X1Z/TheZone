@@ -72,10 +72,10 @@ uniform vec2 resolution;
 uniform float time;
 void main(){vec2 p=-(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,resolution.y)*21.-vec2(.5,0.),s=p;
     float l=0.;
-    for (int f=0;f<15;f+=1)//turn f<21 for just seven eyed
+    for (int f=0;f<15;f+=1)//try f<2 and f<3 for music forms
         s=vec2(-1./(s.x*s.x-s.y*s.y-p.x), 2.0*s.x*s.y-p.y);//this is {s=s^2-p;s.real=-1./s.real}
                    
-    float centralPowerInverter=(s.x/s.y)*sign(s.x*s.y)*2.618;
+    float centralPowerInverter=(s.x/s.y)*sign(s.x*s.y)*2.;
     l= //1.-
         centralPowerInverter;
     gl_FragColor=vec4(l);
