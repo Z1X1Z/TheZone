@@ -2,8 +2,8 @@ body
 {
     font-family: 'Courier New', monospace;
     font-size: 1.2em;
-    color:  #3baaff;
-    background-color:black;
+    color:  black;
+    background-color:white;
     margin-left: 7%;
     margin-right: 7%;
     margin-top: 5%;
@@ -35,10 +35,10 @@ img{
 
 }
 a {
-  color: red;
+  color: #3baaff;
 }
 a:visited {
-  color: orange;
+  color: purple;
 }
 h1
 {
