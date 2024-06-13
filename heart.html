@@ -65,17 +65,18 @@
 		<script src="js/glsl.js"></script>
 
 		<script id="example" type="x-shader/x-fragment">
-            precision highp float;
-            uniform vec2 resolution;
+precision highp float;
+uniform vec2 resolution;
 
-            void main(){vec2 p=-(gl_FragCoord.yx/resolution.yx-.5)/resolution.xy*min(resolution.x,resolution.y)*7.+vec2(.75,0.),o=p;
-                float l=0.;
-                for (int f=0;f<50;f+=1)if(length(o)<4.){
-                    o=vec2(o.x*o.x-o.y*o.y-p.x, 2.0*o.x*o.y-p.y);//this is o=o^2-p;
-                   }
-                else l=1.;
-                gl_FragColor=vec4(l);
-            }
+void main(){vec2 p=-(gl_FragCoord.yx/resolution.yx-.5)/resolution*max(resolution.x,resolution.y)*3.+vec2(.75,0.),o=p;
+    float l=0.;
+    for (int f=0;f<50;f+=1)if(length(o)<4.){
+        o=vec2(o.x*o.x-o.y*o.y-p.x, 2.0*o.x*o.y-p.y);//this is o=o^2-p;
+       }
+    else l=1.;
+    gl_FragColor=vec4(l);
+}
+
 </script>
 
 		<script id="fragmentShader" type="x-shader/x-fragment">
