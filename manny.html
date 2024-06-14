@@ -3723,7 +3723,7 @@ vec2 dance = vec2(0.);
     if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                                  else if(Character==2)heartSize=gr;
      if (Character!=9&&colorCombo!=20&&colorCombo!=17){
-     vec3 HEART = heart(uVuMinCenterASKEWSpunToKey*heartSize+heartShift, -moveDynamic*frAMP/2.);
+     vec3 HEART = heart(uVuMinCenterASKEWSpunToKey*heartSize+heartShift, -moveDynamic*frAMP/3.);
      vec3 heartMultiplier = vec3(1.);
      heartMultiplier=HEART.xyz+(1.-length(uVuMinCenterASKEWSpunToKey*heartSize));
     if(length(uVuMinCenterASKEWSpunToKey*heartSize)>0.)heartMultiplier=vec3(1.);
