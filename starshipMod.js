@@ -2018,7 +2018,7 @@ let x = widt*-Math.sin(rpio2);
 let y = widt*-Math.cos(rpio2);
 let xr = lengt*-Math.sin(arm);
 let yr = lengt*-Math.cos(arm);
-let depth = -starShipDepthInSet+lengt*(1.-starShipDepthInSet);
+let depth = -.99;//-starShipDepthInSet+lengt*(1.-starShipDepthInSet);
 
                 
                 
