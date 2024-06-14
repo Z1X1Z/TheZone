@@ -496,7 +496,7 @@ radialWarp=b;
                <input type="checkbox"  id="oreo" name="t"  onclick= "
                    key  = 'j';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
-                   <label for="oreo"> Oreo![,j]</label><br>
+                   <label for="oreo"> Oreo?![,j]</label><br>
                    
                <a id="Cancel Background Noise" name="t"  onclick= "
 
@@ -3589,7 +3589,8 @@ vec2 dance = vec2(0.);
                                  
          vec2 characterP = p*2.;
                                  
-         vec2 characterPSpunToKey=spin2(characterP*vec2(1.,flipStar*brelued)/.8,-(//starSpin*mod(time*rate,PI*2.)-
+         vec2 characterPSpunToKey=spin2(characterP*vec2(1.,flipStar*brelued)///.8
+                                        ,-(//starSpin*mod(time*rate,PI*2.)-
                                                                           twistStar*brelued));
                                  
          vec2 characterOnTrailP = characterP;
@@ -3604,7 +3605,7 @@ vec2 dance = vec2(0.);
     vec3 b=vec3(0.);
      vec3 bridge=vec3(0.);
                                           
-    vec3 cloud= vec3(0.);
+                                                                 vec3 cloud= vec3(0.);
                                                  float swordSkew = -0.22;
                  
                  if(helm)
@@ -3682,20 +3683,55 @@ vec2 dance = vec2(0.);
                                                                  
                                                                  
                                                                  
+                                                                 
+                                                                 
+                                                                 
+                                                                 
+                                                                               vec2 vUvCenteredASKEW = (vUv.yx-.5+moveDynamic/4.);
+                                                                               vec2 uVuASKEW=-(vUvCenteredASKEW)/aspectRatio;
+                                                                               vec2 uVuMinCenterASKEW=-vUvCenteredASKEW/(min(resolution.x,resolution.y)/resolution.yx);
                                  
-     float heartSize =gr*gr*-leaf/(1.+volume);//*8.;
+         vec2 uVuMinCenterASKEWSpunToKey=spin2(uVuMinCenterASKEW*vec2(1.,flipStar*brelued)///.8
+                                         , -(//starSpin*mod(time*rate,PI*2.)-
+                                                                          twistStar*brelued))*8.;
+                                 
+                                                                 vec2 uvSwizzled=uVuMinCenterASKEW.yx;
+                                 
+                                 
+                                                                 float angleASKEW = ((-atan(characterPSpunToKey.y,characterPSpunToKey.x)*flipStar*radialWarp-twistStar
+                                                                                 +PI/2.+PI/2.*flipStar)/PI2);
+                                                                                 //angle=mod(angle,1.);
+                                                                                 
+                                                                 float frAMP=0.;
+                                                                 //return vec4(angle);
+                                                              //   const float octBoost = 17.;
+                                                               //  float b =nyq*pow(2.,angle+octBoost);
+                                                         //starts -3, full -2
+                                                                 for (float n = -3.; n<3.;n+=1.0)//the range seems small
+                                                                // if(b>=.5/nyq&&b<sampleRate/2.)
+                                                         //not sure why it has negative range
+                                                                 //if (twistStar<24.)
+                                                                  {
+                                                                       float b =nyq*pow(2.,angleASKEW+n);
+                                                                       frAMP += texture2D(micIn, vec2(b,0.)).r;
+                                                                 }
+                                                                  
+                                                                  
+     float heartSize =gr*gr*-leaf/(1.+frAMP+volume);//*8.;
      vec2 heartShift = vec2(0);
 
     if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                                  else if(Character==2)heartSize=gr;
      if (Character!=9&&colorCombo!=20&&colorCombo!=17){
-     vec3 HEART = heart(characterPSpunToKey*heartSize+heartShift,moveDynamic/4.);
+     vec3 HEART = heart(uVuMinCenterASKEWSpunToKey*heartSize+heartShift, -moveDynamic*frAMP);
      vec3 heartMultiplier = vec3(1.);
-     heartMultiplier=HEART.xyz+(1.-length(characterPSpunToKey*heartSize));
-    if(length(characterPSpunToKey*heartSize)>0.)heartMultiplier=vec3(1.);
+     heartMultiplier=HEART.xyz+(1.-length(uVuMinCenterASKEWSpunToKey*heartSize));
+    if(length(uVuMinCenterASKEWSpunToKey*heartSize)>0.)heartMultiplier=vec3(1.);
                 if(mannyFace.z>0.)heartMultiplier+=mannyFace;
    if(mannyFace.z>0.)heartMultiplier*=mannyFace;
+
 mny+=HEART*heartMultiplier;
+                           
                            }
             if(musicAngelMan>0&&Character!=3&&Character!=4)
                                  {
@@ -3902,7 +3938,6 @@ vec4 tree = vec4( clamp(
           if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
           
 gl_FragColor=
-
 fin/vec4(confraculator
                            ,1.);
                        
