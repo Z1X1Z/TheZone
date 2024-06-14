@@ -3685,10 +3685,9 @@ vec2 dance = vec2(0.);
                                                                  
                                                                  
                                                                  
-                                                                 float heartRate = 1./3.;
                                                                  
                                                                  
-                                                                               vec2 vUvCenteredASKEW = (vUv.yx-.5+moveDynamic*heartRate);
+                                                                               vec2 vUvCenteredASKEW = (vUv.yx-.5+moveDynamic/4.);
                                                                                vec2 uVuASKEW=-(vUvCenteredASKEW)/aspectRatio;
                                                                                vec2 uVuMinCenterASKEW=-vUvCenteredASKEW/(min(resolution.x,resolution.y)/resolution.yx);
                                  
@@ -3696,10 +3695,10 @@ vec2 dance = vec2(0.);
                                          , -(//starSpin*mod(time*rate,PI*2.)-
                                                                           twistStar*brelued))*8.;
                                  
-                                                                 vec2 uvSwizzled=uVuMinCenterASKEW.yx;
+                                                                 vec2 uvSwizzled=uVuMinCenterASKEWSpunToKey.yx;
                                  
                                  
-                                                                 float angleASKEW = ((-atan(characterPSpunToKey.y,characterPSpunToKey.x)*flipStar*radialWarp-twistStar
+                                                                 float angleASKEW = ((-atan(uvSwizzled.y,uvSwizzled.x)*flipStar*radialWarp-twistStar
                                                                                  +PI/2.+PI/2.*flipStar)/PI2);
                                                                                  //angle=mod(angle,1.);
                                                                                  
@@ -3724,7 +3723,7 @@ vec2 dance = vec2(0.);
     if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                                  else if(Character==2)heartSize=gr;
      if (Character!=9&&colorCombo!=20&&colorCombo!=17){
-     vec3 HEART = heart(uVuMinCenterASKEWSpunToKey*heartSize+heartShift, -moveDynamic*frAMP*heartRate);
+     vec3 HEART = heart(uVuMinCenterASKEWSpunToKey*heartSize+heartShift, -moveDynamic*frAMP/2.);
      vec3 heartMultiplier = vec3(1.);
      heartMultiplier=HEART.xyz+(1.-length(uVuMinCenterASKEWSpunToKey*heartSize));
     if(length(uVuMinCenterASKEWSpunToKey*heartSize)>0.)heartMultiplier=vec3(1.);
