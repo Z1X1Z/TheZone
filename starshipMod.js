@@ -1982,6 +1982,9 @@ else{//start drawing of just twenty four frets here
     let bottomNote = Math.round(-twist+24)%24;
     let topNote = Math.round(-twist+12)%24;
 
+    let inset = 14;
+let dep = (-starShipDepthInSet+(1.-starShipDepthInSet))/inset-1.+1./inset;
+    
 let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
             for (var g=oddSkew; g<fretMultiplied; g++) {
                 let incrementation = (EldersLeg%2==0)?g%2:(g+1)%2;
@@ -2018,17 +2021,16 @@ let x = widt*-Math.sin(rpio2);
 let y = widt*-Math.cos(rpio2);
 let xr = lengt*-Math.sin(arm);
 let yr = lengt*-Math.cos(arm);
-let depth = -.99;//-starShipDepthInSet+lengt*(1.-starShipDepthInSet);
 
                 
                 
-                starPositionAttribute.setXYZ(starStride,-x+xBoost,    -y+yBoost,  depth)
-                starPositionAttribute.setXYZ(starStride+1,x+xBoost,    y+yBoost,  depth)
-                starPositionAttribute.setXYZ(starStride+2,(xr+x), (yr+y),  depth)
+                starPositionAttribute.setXYZ(starStride,-x+xBoost,    -y+yBoost,  dep)
+                starPositionAttribute.setXYZ(starStride+1,x+xBoost,    y+yBoost,  dep)
+                starPositionAttribute.setXYZ(starStride+2,(xr+x), (yr+y),  dep)
                 
-                starPositionAttribute.setXYZ(starStride+3,-x+xBoost, -y+yBoost,  depth)
-                starPositionAttribute.setXYZ(starStride+4,(xr+x), (yr+y),  depth)
-                starPositionAttribute.setXYZ(starStride+5,(xr-x), (yr-y),  depth)
+                starPositionAttribute.setXYZ(starStride+3,-x+xBoost, -y+yBoost,  dep)
+                starPositionAttribute.setXYZ(starStride+4,(xr+x), (yr+y),  dep)
+                starPositionAttribute.setXYZ(starStride+5,(xr-x), (yr-y),  dep)
                 
                 
                                   
@@ -2040,13 +2042,13 @@ let depth = -.99;//-starShipDepthInSet+lengt*(1.-starShipDepthInSet);
                                    xr = -(lengt-1.)*-Math.sin(arm)*centerDisplacement;
                                    yr = -(lengt-1.)*-Math.cos(arm)*centerDisplacement;
                                   
-                                  starPositionAttribute.setXYZ(starStride,-x+xBoost,    -y+yBoost,  depth)
-                                  starPositionAttribute.setXYZ(starStride+1,x+xBoost,    y+yBoost,  depth)
-                                  starPositionAttribute.setXYZ(starStride+2,(xr+x), (yr+y),  depth)
+                                  starPositionAttribute.setXYZ(starStride,-x+xBoost,    -y+yBoost,  dep)
+                                  starPositionAttribute.setXYZ(starStride+1,x+xBoost,    y+yBoost,  dep)
+                                  starPositionAttribute.setXYZ(starStride+2,(xr+x), (yr+y),  dep)
                                   
-                                  starPositionAttribute.setXYZ(starStride+3,-x+xBoost, -y+yBoost,  depth)
-                                  starPositionAttribute.setXYZ(starStride+4,(xr+x), (yr+y),  depth)
-                                  starPositionAttribute.setXYZ(starStride+5,(xr-x), (yr-y),  depth)
+                                  starPositionAttribute.setXYZ(starStride+3,-x+xBoost, -y+yBoost,  dep)
+                                  starPositionAttribute.setXYZ(starStride+4,(xr+x), (yr+y),  dep)
+                                  starPositionAttribute.setXYZ(starStride+5,(xr-x), (yr-y),  dep)
                                   
                                   
                                   
