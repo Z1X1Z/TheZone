@@ -2344,7 +2344,7 @@ if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
    if(clvrVariant4) hyperCore+=1./(3.*log(.5));
 
   if(cloverSlide)hyperCore+=.5/log(.5);
-  if(wheel)hyperCore+=.25/log(.5);
+  if(wheel)hyperCore-=1./log(.5);
 
    if(multiplicatorNexus)hyperCore-=.5/log(.5);
    if(continuumClover)hyperCore-=.75/log(.5);

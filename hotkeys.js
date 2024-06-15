@@ -85,7 +85,7 @@ dilate:{value:true},
         colorInverter: {value:false},
         metronome: {value: .99 },
         time2dance: {value: 0.0 },
-        volume: {value: 1.0 },
+        volume: {value: .0 },
         totalAmp: {value: 1.0 },
 
 
@@ -670,7 +670,7 @@ function callKey(event){
     else if (key=="m"){
         
         uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
-        if(number!="")uniform.mandelCloverFactor.value=number;
+        if(number!="")uniforms.mandelCloverFactor.value=number;
     }
                 
     else if (key=="M") uniforms[ "NightAndDay" ].value = !uniforms[ "NightAndDay" ].value;
