@@ -2204,7 +2204,8 @@ float lfc = length(freed(coords));
    
    
 float precores = .25/log(.5);
-if(clvrVariant4) precores=0.;
+if(clvrVariant4&&cloverSlide) precores=precores-1./log(.5);
+else if(clvrVariant4)precores=0.;
 if(morph!=0.)precores=precores-5./log(.5);
 if(refactorCores!=1.)precores=-.0;
 
