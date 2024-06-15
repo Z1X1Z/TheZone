@@ -2069,7 +2069,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
         
                
                    
-                   if(abs(mod(increment+atan(spinningSpiraloon.x,spinningSpiraloon.y)/(2.*PI)*(balloonsONexponential),1.)-.1)<length(1.)/(increment+sizeReset)*24.)balloon=hsv2rgb(vec3((mod((4.-increment)*(balloonsON+balloonsONexponential)+twistStar,12.))/12.,.5,1.));
+                   if(abs(mod(increment+atan(spinningSpiraloon.x,spinningSpiraloon.y)/(2.*PI)*(balloonsONexponential),1.)-.1)<length(1.)/(increment+sizeReset)*20.)balloon=hsv2rgb(vec3((mod((4.-increment)*(balloonsON+balloonsONexponential)+twistStar,12.))/12.,.5,1.));
         return balloon;
     }
     
