@@ -39,6 +39,9 @@ const xound2=Array(maxTouchSoundCount);
 const tound=Array(maxTouchSoundCount);
 const tound2=Array(maxTouchSoundCount);
 
+const screenPressCoordX=Array(maxTouchSoundCount).fill(0);
+const screenPressCoordY=Array(maxTouchSoundCount).fill(0);
+
 
 const feedbackPitchsound=Array(5); //updated in starshipMod
 let wadLOADED=false;
@@ -148,11 +151,12 @@ function startSound(e){
     let x = e.clientX- widthPX/2.;
     if(window.touchMode)window.pointerZoom=true
         
-        screenPressCoordX+=x;
-    screenPressCoordY+=y;
-     initialX = x
-     initialY = y
     let id = touchNumber.get(pressIndex.get(e.pointerId));
+    
+    screenPressCoordX[id]=x;
+    screenPressCoordY[id]=y;
+    initialX = x
+    initialY = y
 
     if(window.grabStar){
         initialAngle[id]=-Math.atan2(-x,-y);
@@ -255,10 +259,10 @@ function followSound(e){
                             dilator(x,y);
                         else uniforms.coreDilation.value=0
                             }
-
-                    screenPressCoordX+=x;
-                        screenPressCoordY+=y;
                     let id = touchNumber.get(pressIndex.get(e.pointerId));
+
+                    screenPressCoordX[id]=x;
+                        screenPressCoordY[id]=y;
 
                     let twistIncrement=0;
 if(window.grabStar)
@@ -405,8 +409,6 @@ console.log   ( e.srcElement.nodeName)
                 }
             }, false);
             c.addEventListener('pointermove', function(e) {
-                screenPressCoordX=0;
-                screenPressCoordY=0;
                 if(e.srcElement.nodeName=="CANVAS"  ||
                    e.srcElement.id=="menuDivider"||window.iOS&&e.srcElement.name=="menuButton"||
                    e.srcElement.nodeName=="DIV"//for textWindow as name and id are erased
@@ -424,6 +426,9 @@ console.log   ( e.srcElement.nodeName)
                 window.pointerZoom=false;
                 let tn = touchNumber.get(pressIndex.get(e.pointerId));
                 if(typeof tn == "number" ){
+                    screenPressCoordX[tn]=0;
+                    screenPressCoordY[tn]=0;
+
                     sound[tn].stop();sound2[tn].stop();
                     zound[tn].stop();zound2[tn].stop();
                     xound[tn].stop();xound2[tn].stop();
@@ -440,6 +445,10 @@ console.log   ( e.srcElement.nodeName)
                 
                 let tn = touchNumber.get(pressIndex.get(e.pointerId));
                 if(typeof tn == "number" ){
+                    
+                        screenPressCoordX[tn]=0;
+                        screenPressCoordY[tn]=0;
+                    
                     sound[tn].stop();
                     sound2[tn].stop();
                     zound[tn].stop();
@@ -460,6 +469,10 @@ console.log   ( e.srcElement.nodeName)
                 
                 let tn = touchNumber.get(pressIndex.get(e.pointerId));
                 if(typeof tn == "number"){
+                    
+                        screenPressCoordX[tn]=0;
+                        screenPressCoordY[tn]=0;
+                    
                     sound[tn].stop();
                     sound2[tn].stop();
                     zound[tn].stop();
