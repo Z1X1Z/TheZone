@@ -1097,14 +1097,15 @@ let lastVolume = 1.;
                 cloverSuperCores++;
 
             }
-            
+             if(cloverSuperCores<0.) cloverSuperCores=0.;
+
             if(zoom>1./2**3&&cloverSuperCores>0){
                 zoom/=2.**singleHyperCoreDepth;coordY/=2.**singleHyperCoreDepth;coordX/=2.**singleHyperCoreDepth;
                 fromCenter/=2.**singleHyperCoreDepth;
                 cloverSuperCores--;
                 
             }
-    
+
             if(!isFinite(cloverSuperCores))
             {cloverSuperCores=0;
             zoom=1.;
@@ -1118,14 +1119,15 @@ let lastVolume = 1.;
     else preserveOuterCore = false
         
         expandedZoomCage=1;
-        if (uniforms.Spoker.value)expandedZoomCage*=4./3.
+        if (uniforms.Spoker.value)expandedZoomCage*=2.
+
     else expandedZoomCage = 1.;
              
              
     if((fromCenter>=zoomCageSize*expandedZoomCage||zoom>=1.)&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
         
-        if(uniforms.wheel.value)uniforms.upCoreCycler.value=(uniforms.upCoreCycler.value-1)%60;//does modulo -60%60=0?-0 it seems
-        else uniforms.upCoreCycler.value = 0.;
+       // if(uniforms.wheel.value)uniforms.upCoreCycler.value=(uniforms.upCoreCycler.value-1)%60;//this is for the heart to expand and contract//does modulo -60%60=0?-0 it seems
+       // else uniforms.upCoreCycler.value = 0.;
     }
     }
                        
@@ -1143,7 +1145,8 @@ function zoomRoutine(){
     if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
     
     ZR = setZoomRate();
-    if (zoom>=1.)zoomOutEngage = false;
+    if (zoom>=.5)
+        zoomOutEngage = false;
     if(!isFinite(ZR))ZR=1;
     if(!zoomOutEngage){
         if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(on&&!window.touchMode))||window.pointerZoom)zoom *=ZR;
@@ -1155,7 +1158,9 @@ function zoomRoutine(){
 
     
     //.000000000000000000000001
-                        if (zoom<zoomCone||(zoom<1./2**singleHyperCoreDepth*metaDepth&&cloverSuperCores<-.5)){
+                        if (zoom<zoomCone||(zoom<1./2**singleHyperCoreDepth*metaDepth&&
+                                            cloverSuperCores<-.5)
+                            ){
                             zoomOutEngage = true;}
                          if (zoomOutEngage == true) zoom *= 1.44/ZR;
                     

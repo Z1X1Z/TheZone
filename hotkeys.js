@@ -47,7 +47,7 @@ clvrVariant9:{value: false},
 
         Spoker:{value: true    },
         spokelover:{value: true    },
-largeEyeColor:{value:3.},
+largeEyeColor:{value:0.},
 
 dilate:{value:true},
 
