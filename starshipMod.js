@@ -36,7 +36,6 @@ stallTillTHREELoaded();
 const dotSize = starshipSize;
 
 let coringValue = 1./-leaf/gr;
-let screenPressCoordX=0, screenPressCoordY=0;
 window.pointerZoom=false;
 window.zoomCageSize = window.pixelShaderSize/4.;//radius of zoom bounding
 
@@ -1407,9 +1406,15 @@ function runOSMD (){
 
                                 if(pointerZoom){
                                     ONbypass = true;
+                                    let xTouch=0;
+                                    let yTouch=0;
 
-                                    const xTouch = screenPressCoordX*coordinator;
-                                    const yTouch = screenPressCoordY*coordinator;
+                                    for(n=0;n<screenPressCoordX.length;n++)
+                                    {xTouch+= screenPressCoordX[n]*coordinator;
+                                        yTouch += screenPressCoordY[n]*coordinator;
+                                    }
+                                 
+
                                      const touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
                                     uniforms.d.value=new THREE.Vector2( xTouch,-yTouch);
                                     uniforms[ "volume" ].value=1.;
