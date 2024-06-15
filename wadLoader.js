@@ -148,8 +148,8 @@ function startSound(e){
     let x = e.clientX- widthPX/2.;
     if(window.touchMode)window.pointerZoom=true
         
-        screenPressCoordX=x;
-    screenPressCoordY=y;
+        screenPressCoordX+=x;
+    screenPressCoordY+=y;
      initialX = x
      initialY = y
     let id = touchNumber.get(pressIndex.get(e.pointerId));
@@ -256,8 +256,8 @@ function followSound(e){
                         else uniforms.coreDilation.value=0
                             }
 
-                        screenPressCoordX=x;
-                        screenPressCoordY=y;
+                    screenPressCoordX+=x;
+                        screenPressCoordY+=y;
                     let id = touchNumber.get(pressIndex.get(e.pointerId));
 
                     let twistIncrement=0;
@@ -405,7 +405,8 @@ console.log   ( e.srcElement.nodeName)
                 }
             }, false);
             c.addEventListener('pointermove', function(e) {
-
+                screenPressCoordX=0;
+                screenPressCoordY=0;
                 if(e.srcElement.nodeName=="CANVAS"  ||
                    e.srcElement.id=="menuDivider"||window.iOS&&e.srcElement.name=="menuButton"||
                    e.srcElement.nodeName=="DIV"//for textWindow as name and id are erased
