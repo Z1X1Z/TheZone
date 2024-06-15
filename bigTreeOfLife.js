@@ -1,5 +1,5 @@
 var shaderScale,dilate, coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals
-,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8;
+,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9;
 function setUniformsToPlainName(){
     clvrVariant1=uniforms.clvrVariant1.value;
     clvrVariant2=uniforms.clvrVariant2.value;
@@ -9,6 +9,7 @@ function setUniformsToPlainName(){
     clvrVariant6=uniforms.clvrVariant6.value;
     clvrVariant7=uniforms.clvrVariant7.value;
     clvrVariant8=uniforms.clvrVariant8.value;
+    clvrVariant9=uniforms.clvrVariant9.value;
     dilate = uniforms.dilate.value
     coreDilation  = uniforms.coreDilation.value;
     time = window.TIMESTAMP;
@@ -59,7 +60,7 @@ var lfc = coords.length();//freed(coords).length();
 
 var precores = .25/Math.log(.5);
 if (clvrVariant4)precores=0.;
-if(morph!=0.)precores=precores-3./Math.log(.5);
+if(morph!=0.)precores=precores-5./Math.log(.5);
 if(refactorCores!=1.)precores=-.0;
 
 var cored =0.;
@@ -226,9 +227,12 @@ var metaCoreDriveFactor =(((1.-leaf)**.5/truncator)*truncator)**2./gr;//.324717.
 var spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator);//metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator)
 //var grOverLeaf=-((gr/leaf)/truncator)*truncator;//uncertain term
                            var grPlusOneOverLeaf=(((1.+gr)/(-leaf))/truncator)*truncator;
-                           var upSpoke=grPlusOneOverLeaf/-Math.pow(spoke_factor/-leaf,-leaf-1.);//1.5/Math.sqrt(spoke_factor);
+                          
                                              
 var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
+                                                  
+                                                  var upSpoke=spoke_factorLarge;//grPlusOneOverLeaf/-Math.pow(spoke_factor/-leaf,-leaf-1.);//1.5/Math.sqrt(spoke_factor);
+                           
                            var oneOverLeafTruncated = ((1./leaf)/truncator)*truncator;
            var downSpoke=((1./leaf)/truncator)*truncator;//1./(((-leaf)*truncator)/truncator)/4.;
   // var logOfSpoke_Factor=0.;
@@ -296,7 +300,13 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
 -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
 );
     
-        if(clvrVariant4)  s=s.multiplyScalar( 1-1/oneOverLeafTruncated);
+        
+        hyperCoreBoosted-=s.length();
+        hyperCoreOUTPUT-=s.length();
+        
+        if(clvrVariant9)  s=THREE.Vector2(s.x+coords.y/gr,s.y+coords.x/gr);
+
+        if(clvrVariant4)  s.multiplyScalar( 1-1/oneOverLeafTruncated);
 
 // if (mod(counter,5.) == 4.)s =pCenterCored;
 //x**3
