@@ -2538,9 +2538,10 @@ vec2 lastS = s;
        //x**3
        dstnce = length(s);
 
+       if(cored!=-1.){//this is to allow top level core freeze for original clover
        hyperCoreBoosted-=dstnce;
        hyperCoreOUTPUT-=dstnce;
-
+       }
        if(clvrVariant9) s+= coordsAltered;
 
        if(clvrVariant4)   s*=1.-oneOverLeafTruncated;
