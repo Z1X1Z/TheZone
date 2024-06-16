@@ -985,6 +985,8 @@ function setMicInputToStarPIXEL(){
                  }
              }
                  else{
+                     uniforms["volume"].value = 0;
+
                      uniforms["audioBuffer"].value = null;
                      uniforms.audioBuffer.needsUpdate = true;
                      
@@ -1404,7 +1406,8 @@ function runOSMD (){
                                 setZoomRate();
                                     const coordinator = pixelShaderSize/2./minimumDimension*movementRate;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
 
-                                if(pointerZoom){
+                                //if(pointerZoom)
+                                {
                                     ONbypass = true;
                                     let xTouch=0;
                                     let yTouch=0;
