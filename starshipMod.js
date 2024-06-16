@@ -1140,6 +1140,9 @@ let       preserveOuterCore = true;
                        
                        
                        const zoomCap32 =.00000075;
+                            
+                            let xTouch=0;
+                            let yTouch=0;
 function zoomRoutine(){
     const metaDepth=(!dupered)?zoomCap32:zoomCap32**2;//due to pixelization limits
     let zoomCone=metaDepth*fromCenter;
@@ -1150,7 +1153,7 @@ function zoomRoutine(){
         zoomOutEngage = false;
     if(!isFinite(ZR))ZR=1;
     if(!zoomOutEngage){
-        if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(on&&!window.touchMode))||window.pointerZoom)zoom *=ZR;
+        if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(on&&!window.touchMode))||xTouch+yTouch!=0)zoom *=ZR;
         else if(uniforms.MetaCored.value||zoom<1.){
             zoom /= ZR;
             if(center&&zoom<1.){coordX*=ZR*2./3.;; coordY*=ZR*2./3.;}
@@ -1394,7 +1397,15 @@ function runOSMD (){
         //function    OSMDUPDATER(){   runOSMD();  setTimeout(OSMDUPDATER,1000/60.);}
         //OSMDUPDATER();
                function executeTouchRegime(){
-                        
+                   
+                   const coordinator = pixelShaderSize/2./minimumDimension*movementRate;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
+                   xTouch=0;
+                   yTouch=0;
+                   for(n=0;n<screenPressCoordX.length;n++)
+                   {xTouch+= screenPressCoordX[n]*coordinator;
+                       yTouch += screenPressCoordY[n]*coordinator;
+                   }
+                   
                         if(!zoomAtl41)
                             {
                               lastZoom = zoom;
@@ -1404,18 +1415,10 @@ function runOSMD (){
                             }
                             else lastZoom=zoom;
                                 setZoomRate();
-                                    const coordinator = pixelShaderSize/2./minimumDimension*movementRate;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
 
                                 //if(pointerZoom)
                                 {
                                     ONbypass = true;
-                                    let xTouch=0;
-                                    let yTouch=0;
-
-                                    for(n=0;n<screenPressCoordX.length;n++)
-                                    {xTouch+= screenPressCoordX[n]*coordinator;
-                                        yTouch += screenPressCoordY[n]*coordinator;
-                                    }
                                  
 
                                      const touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
