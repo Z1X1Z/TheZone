@@ -102,7 +102,7 @@ dilate:{value:true},
 
         Clovoid:{value:false},
         dotted:{value:false},
-        baseN:{value: 2.718281828},
+    baseN:{value: 2.84657807422},//2.718281828},2.84657807422=pi*e/3
 
         onehundredfortyfourthousand:{value:false},
         shaderScale:{value:window.pixelShaderSize},
