@@ -301,10 +301,10 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
 );
     
         dstnce = s.length();
-
-        hyperCoreBoosted-=dstnce;
-        hyperCoreOUTPUT-=dstnce;
-        
+        if(cored!=-1.){
+            hyperCoreBoosted-=dstnce;
+            hyperCoreOUTPUT-=dstnce;
+        }
         if(clvrVariant9)  s=THREE.Vector2(s.x+coords.y/gr,s.y+coords.x/gr);
 
         if(clvrVariant4)  s.multiplyScalar( 1-1/oneOverLeafTruncated);
