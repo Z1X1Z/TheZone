@@ -2283,6 +2283,8 @@ if(SPHEREofTheLORD)s *= (length(s)-zoom/length(coords.yx)/2.);
 
 if(squareClover)s/=vec2(sqrt(2.-s.x*s.x),sqrt(2.-s.y*s.y))/s;
 
+float dstnce = length(s);//"distance" may be reserved keyword
+
 
 vec2 pCenterCored=s;
 
@@ -2361,8 +2363,10 @@ hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if d
 vec2 m=vec2(0.);
 
 float truncator=1.;
+
 if(lfc!=0.) truncator = log(zoom/lfc)/10000.;//log truncation * factor is not known, may no longer be necesary
 //Maendel clover
+
 if(wheel)m =  ((pWithoutChiralizer/lfc)
                                          -coords.yx*2.)*abs(coresIn/crs*2.-1.)
                             *mandelCloverFactor//(1.-1./(leaf/truncator)*truncator)//uncertain term
@@ -2385,7 +2389,6 @@ vec3 beta =vec3(1.);
 
 
 
-float dstnce = length(s);//"distance" may be reserved keyword
 //t*=.74;
 float coreBooster=0.;
 float metaCoreDriveFactor =(((1.-leaf)/truncator)*truncator)/gr;//.324717.... number of places changes appearance
@@ -2533,8 +2536,10 @@ vec2 lastS = s;
        );
       // if (mod(counter,5.) == 4.)s =pCenterCored;
        //x**3
-       hyperCoreBoosted-=length(s);
-       hyperCoreOUTPUT-=length(s);
+       dstnce = length(s);
+
+       hyperCoreBoosted-=dstnce;
+       hyperCoreOUTPUT-=dstnce;
 
        if(clvrVariant9) s+= coordsAltered;
 
@@ -2561,16 +2566,23 @@ vec2 lastS = s;
        if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the body steps on the clover
        else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only
    
-
-   s.x=log(abs(s.x))/log(baseN);
-   //traditionally be e or 3 probably 1.5 to 4
+   dstnce = length(s);
    
+   
+   float trunc=1.;
+   if(lfc!=0.) trunc = log(zoom/dstnce)/100.;
+    float base=baseN;
+                      if(baseN-2.701002244<.00001)base=(baseN/trunc)*trunc;
+    
+   s.x=log(abs(s.x))/log(base);
+   //traditionally be e or 3 probably 1.5 to 4
+   dstnce = length(s);
+
    
 
 if(Spoker){
    // if(morph==0.)
     {
-        dstnce = length(s);
         if((//!wheel
             dstnce*sqrt(dstnce)<=hyperCoreBoosted))//||(wheel&&1.<=hyperCoreBoosted))
                          {

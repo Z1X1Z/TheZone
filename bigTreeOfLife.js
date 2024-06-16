@@ -300,9 +300,10 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
 -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
 );
     
-        
-        hyperCoreBoosted-=s.length();
-        hyperCoreOUTPUT-=s.length();
+        dstnce = s.length();
+
+        hyperCoreBoosted-=dstnce;
+        hyperCoreOUTPUT-=dstnce;
         
         if(clvrVariant9)  s=THREE.Vector2(s.x+coords.y/gr,s.y+coords.x/gr);
 
@@ -333,8 +334,14 @@ else {
 if(Clovoid)s.x=(Math.sqrt(2.*Math.abs(1./s.x)));//this is the body steps on the clover
 else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only
 
+        dstnce = s.length();
 
-s.x=Math.log(Math.abs(s.x))/Math.log(baseN);
+        var trunc=1.;
+        if(lfc!=0.) trunc = Math.log(zoom/dstnce)/100.;
+                                     var base=baseN;
+         if (baseN-2.701002244<.00001)base=(baseN/trunc)*trunc;
+         
+s.x=Math.log(Math.abs(s.x))/Math.log(base);
 //traditionally be e or 3 probably 1.5 to 4
 
         if(Spoker){
