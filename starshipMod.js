@@ -1141,8 +1141,6 @@ let       preserveOuterCore = true;
                        
                        const zoomCap32 =.00000075;
                             
-                            let xTouch=0;
-                            let yTouch=0;
 function zoomRoutine(){
     const metaDepth=(!dupered)?zoomCap32:zoomCap32**2;//due to pixelization limits
     let zoomCone=metaDepth*fromCenter;
