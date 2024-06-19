@@ -158,6 +158,11 @@ function resetAll(){
         else if(BibleON==0) callKey(new KeyboardEvent('keydown', {'key': "b", 'altKey':true, 'keyCode':key.charCodeAt(0)}));
         
     }
+    
+    window.xTouch=0;
+    window.yTouch=0;
+    
+    
     window.twist = 0.;
     window.flip = 1.;
 
