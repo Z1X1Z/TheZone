@@ -2,12 +2,14 @@ body
 {
     font-family: 'Courier New', monospace;
     font-size: 1.2em;
-    color:  black;
-    background-color:white;
+    color:  #3baaff;
+    background-color:black;
     margin-left: 7%;
     margin-right: 7%;
     margin-top: 5%;
     text-indent: 3.4%;
+    text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
+
 }
 
 .onofflinescaled{
@@ -35,10 +37,10 @@ img{
 
 }
 a {
-  color: #3baaff;
+  color: purple;
 }
 a:visited {
-  color: purple;
+  color: orange;
 }
 h1
 {
@@ -65,3 +67,4 @@ figure {
     margin-top: 0%;
     display: inline-block;
     }
+
