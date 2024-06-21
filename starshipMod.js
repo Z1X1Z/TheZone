@@ -2208,14 +2208,15 @@ var fingerStride = 0;
                                                      else if (window.pzyghthe==2) wisdom=-1;
                                                      else if (window.pzyghthe==3) wisdom= upOrDown;
                                                      else if (window.pzyghthe==4) wisdom= -upOrDown;
-                                                          let   radialHarmonicInterval =wisdom*
-                                                     2.*Math.PI*2**(xenOctaveFactor-( t+(g)/12.))/2**xenOctaveFactor;
+
+                                                          let   radialHarmonicInterval =
+                                                     wisdom*2.*Math.PI*2**(xenOctaveFactor-( t+(g)/12.))/2**xenOctaveFactor;
                                                                                      const lengt = radialHarmonicInterval/144.;
                                                                                     radialHarmonicInterval+=angle;
                                                      const xr = widt*-Math.sin(-radialHarmonicInterval);
                                                      const yr = widt*-Math.cos(-radialHarmonicInterval);
-                                                     const x = lengt*-Math.cos(radialHarmonicInterval);
-                                                     const y = lengt*-Math.sin(radialHarmonicInterval);
+                                                     const x = wisdom*lengt*-Math.cos(radialHarmonicInterval);
+                                                     const y = wisdom*lengt*-Math.sin(radialHarmonicInterval);
                                                      const depth = -1;
 
                                                      let hollowCenterSize = 2.;
@@ -2590,7 +2591,7 @@ if (!on)neutralizer=0.;
     const ddX= circleX-polygons[n].centerX;
     const ddY= circleY-polygons[n].centerY;
     const distDot = Math.sqrt(ddX*ddX+ddY*ddY);
-if(EldersLeg>0)
+if(EldersLeg>=0)
 {
     if ( triggerDistance<polyRad+dotSize &&polygons[n].exited){
         if (!polygons[n].caught)polygons[n].caught = true;
@@ -2790,8 +2791,7 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
                                                        circle.geometry.dispose();
                                                        radialLine.geometry.dispose( );
 if(RockInTheWater==2||RockInTheWater==1)scene.remove(starStreamMesh);
-if (pzyghthe==1) scene.remove(harmonicPzyghtheMesh)
-
+if (pzyghthe>=1) scene.remove(harmonicPzyghtheMesh)
                                                        if(uniforms.gameOn.value)
 for(var n = 0; n<targets.length;n++){
   if(!blankBackground)shaderScene.remove( targets[n] );
