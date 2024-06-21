@@ -2591,7 +2591,7 @@ if (!on)neutralizer=0.;
     const ddX= circleX-polygons[n].centerX;
     const ddY= circleY-polygons[n].centerY;
     const distDot = Math.sqrt(ddX*ddX+ddY*ddY);
-if(EldersLeg>=0)
+if(EldersLeg>0)
 {
     if ( triggerDistance<polyRad+dotSize &&polygons[n].exited){
         if (!polygons[n].caught)polygons[n].caught = true;
