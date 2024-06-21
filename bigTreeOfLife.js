@@ -307,7 +307,7 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
             hyperCoreBoosted-=dstnce;
             hyperCoreOUTPUT-=dstnce;
         }
-        if(clvrVariant9)  s=THREE.Vector2(s.x+coords.y/gr,s.y+coords.x/gr);
+        if(clvrVariant9)  s=new THREE.Vector2(s.x+coords.y/gr,s.y+coords.x/gr);
 
         if(clvrVariant4)  s.multiplyScalar( 1-1/oneOverLeafTruncated);
 
