@@ -332,7 +332,11 @@ radialWarp=b;
                           }
                                                   ">
                       <br>
-         
+                      
+                      <input type="checkbox" id="StackOctaves" name="t"  onclick= "
+                          key  = 'k';
+                          callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                       <label for="StackOctaves">Stack Octaves![.k]</label><br>
                
                <input type="checkbox" id="Haptic" name="t"  onclick= "window.haptic = !window.haptic; mcphrth();">
                <label for="Haptic">Haptic Song(Android only)</label>

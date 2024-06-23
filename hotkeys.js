@@ -162,7 +162,7 @@ function resetAll(){
     window.xTouch=0;
     window.yTouch=0;
     
-    
+    window.radialOctaveBoost = false;
     window.twist = 0.;
     window.flip = 1.;
 
@@ -602,7 +602,7 @@ function callKey(event){
 
                 
                 
-                
+                else if((key=="˚"||key=="k")&&event.altKey&&!event.shiftKey) window.radialOctaveBoost=!window.radialOctaveBoost;
                 
                 
     else if (event.altKey&&key=="f")console.log("speakers disabled!");//speakers turned off in manny.html
