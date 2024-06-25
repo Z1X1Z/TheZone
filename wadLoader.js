@@ -184,7 +184,7 @@ function startSound(e){
                 }
                 
                 
-                let volume= 1.5*pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
+                let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
                  if(radialOctaveBoost)volume= pressure;
 
                 initialAngleSound[id] =(-(Math.atan2(-x,-y))*flip+pi*2)%(pi*2.);
@@ -306,7 +306,7 @@ if(window.grabStar)
         }
              if((!window.touchMode&&!window.muteVoiceTouchVolume)||(window.touchMode&&!window.muteTouchTouchVolume))
              {
-        let volume= 1.5*pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
+        let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
                  if(radialOctaveBoost)volume= pressure*.25;
                  let lastAngleSound=angleSound[id];
 
