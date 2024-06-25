@@ -345,10 +345,10 @@ if(window.grabStar)
                                              
         if(isFinite(frequency)&&frequency>0.&&
            angleSound[id]-initialAngleSound[id]!=0&&typeof sound[id]=="object"){
-                    let volumePrime=volume*(soundTouchComponent[id] - initialAngleSound[id])/(2.*pi)*.5
+                    let volumePrime=volume*(soundTouchComponent[id] - initialAngleSound[id])/(2.*pi)
                     
                     ;
-                    let volumeTWO =volume*(1.-(soundTouchComponent[id]-initialAngleSound[id])/(2.*pi))*.5
+                    let volumeTWO =volume*(1.-(soundTouchComponent[id]-initialAngleSound[id])/(2.*pi))
                     
                     ;
                    // console.log("angleSound"+soundTouchComponent[id])
