@@ -3712,7 +3712,7 @@ vec2 dance = vec2(0.);
                                                                          , -(//starSpin*mod(time*rate,PI*2.)-
                                                                                                           twistStar*brelued));
                                                                  
-                                                                               vec2 vUvCenteredASKEW = (vUv.yx-.5+moveDynamicSpunToKey/2.*heartRate);
+                                                                               vec2 vUvCenteredASKEW = (vUv.yx-.5+moveDynamicSpunToKey*heartRate);
                                                                                vec2 uVuASKEW=-(vUvCenteredASKEW)/aspectRatio;
                                                                                vec2 uVuMinCenterASKEW=-vUvCenteredASKEW/(min(resolution.x,resolution.y)/resolution.yx);
                                  
@@ -3741,14 +3741,14 @@ vec2 dance = vec2(0.);
                                                                        frAMP += texture2D(micIn, vec2(b,0.)).r;
                                                                  }
                                                                   
-                                                                  
+                                 frAMP*=1.+frAMP;
      float heartSize =gr*gr*-leaf/(1.+frAMP+volume);//*8.;
      vec2 heartShift = vec2(0);
 
     if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                                  else if(Character==2)heartSize=gr;
      if (Character!=9&&colorCombo!=20&&colorCombo!=17){
-     vec3 HEART = heart(characterPSpunToKey*heartSize+heartShift, -moveDynamicSpunToKey*frAMP*heartRate);
+     vec3 HEART = heart(characterPSpunToKey*heartSize+heartShift, -moveDynamicSpunToKey/2.*frAMP*heartRate);
      vec3 heartMultiplier = vec3(1.);
      heartMultiplier=HEART.xyz+(1.-length(uVuMinCenterASKEWSpunToKey*heartSize));
     if(length(uVuMinCenterASKEWSpunToKey*heartSize)>0.)heartMultiplier=vec3(1.);
