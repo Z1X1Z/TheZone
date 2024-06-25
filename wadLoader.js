@@ -184,8 +184,8 @@ function startSound(e){
                 }
                 
                 
-                let volume= 2.*pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
-                 if(radialOctaveBoost)volume= pressure*.25;
+                let volume= 1.5*pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
+                 if(radialOctaveBoost)volume= pressure;
 
                 initialAngleSound[id] =(-(Math.atan2(-x,-y))*flip+pi*2)%(pi*2.);
                  angleSound[id] =initialAngleSound[id] ;
@@ -228,7 +228,7 @@ function startSound(e){
                     let octaveShift=0;
                     if(window.radialOctaveBoost) {
                         octaveDistance = (x*x+y*y)**.5/minimumDimension*17.;
-                        octaveShift=2.;
+                        octaveShift=4.;
                     }
                     sound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2**Math.floor(octaveDistance-octaveShift),volume:cascadeSwitch1*twistTRIANGLEtoSQUARE*(1.-octaveDistance%1)});
                     sound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.*2**Math.floor(octaveDistance-octaveShift)
@@ -306,7 +306,7 @@ if(window.grabStar)
         }
              if((!window.touchMode&&!window.muteVoiceTouchVolume)||(window.touchMode&&!window.muteTouchTouchVolume))
              {
-        let volume= 2.*pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
+        let volume= 1.5*pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
                  if(radialOctaveBoost)volume= pressure*.25;
                  let lastAngleSound=angleSound[id];
 
@@ -367,8 +367,8 @@ if(window.grabStar)
                     let octaveShift = 0;
                      if(window.radialOctaveBoost)
                      {
-                         octaveDistance = (x*x+y*y)**.5/minimumDimension*15.;
-                          octaveShift = 2;
+                         octaveDistance = (x*x+y*y)**.5/minimumDimension*17.;
+                          octaveShift = 4;
 
                      }
                      
@@ -382,8 +382,6 @@ if(window.grabStar)
                     zound2[id].setVolume(volumePrime*twistTRIANGLEtoSQUARE*octaveDistance%1);
                     zound[id].setVolume(volumeTWO*twistTRIANGLEtoSQUARE*octaveDistance%1);
                     
-                    console.log("soundLower"+(1.-octaveDistance%1))
-                                console.log("soundHigher"+octaveDistance%1)
 /*
  
                     zound2[id].setPitch(frequency/2.);
