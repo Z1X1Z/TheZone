@@ -184,8 +184,8 @@ function startSound(e){
                 }
                 
                 
-                let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
-                 if(radialOctaveBoost)volume= pressure;
+                let volume= .5*pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
+                 if(radialOctaveBoost)volume= .25*pressure;
 
                 initialAngleSound[id] =(-(Math.atan2(-x,-y))*flip+pi*2)%(pi*2.);
                  angleSound[id] =initialAngleSound[id] ;
@@ -237,7 +237,7 @@ function startSound(e){
                     
                     zound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2**Math.ceil(octaveDistance-octaveShift),volume:cascadeSwitch1*twistTRIANGLEtoSQUARE*octaveDistance%1});
                     zound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.*2**Math.ceil(octaveDistance-octaveShift)
-                        ,volume:cascadeSwitch1*twistTRIANGLEtoSQUARE*octaveDistance%1});
+                        ,volume:cascadeSwitch2*twistTRIANGLEtoSQUARE*octaveDistance%1});
                     
         
                     
@@ -306,7 +306,7 @@ if(window.grabStar)
         }
              if((!window.touchMode&&!window.muteVoiceTouchVolume)||(window.touchMode&&!window.muteTouchTouchVolume))
              {
-        let volume= pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
+        let volume= .5*pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
                  if(radialOctaveBoost)volume= pressure*.25;
                  let lastAngleSound=angleSound[id];
 
