@@ -184,8 +184,8 @@ function startSound(e){
                 }
                 
                 
-                let volume= .5*pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
-                 if(radialOctaveBoost)volume= .25*pressure;
+                let volume= .25*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
+                 if(radialOctaveBoost)volume= pressure;
 
                 initialAngleSound[id] =(-(Math.atan2(-x,-y))*flip+pi*2)%(pi*2.);
                  angleSound[id] =initialAngleSound[id] ;
@@ -224,7 +224,7 @@ function startSound(e){
                          cascadeSwitch1=1*volume
                     }
                     
-                    let octaveDistance =0;
+                    let octaveDistance = 0.00000000000001
                     let octaveShift=0;
                     if(window.radialOctaveBoost) {
                         octaveDistance = (x*x+y*y)**.5/minimumDimension*17.;
@@ -239,7 +239,7 @@ function startSound(e){
                     zound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.*2**Math.ceil(octaveDistance-octaveShift)
                         ,volume:cascadeSwitch2*twistTRIANGLEtoSQUARE*octaveDistance%1});
                     
-        
+        console.log(0%1)
                     
                     /*
                     xound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:cascadeSwitch1*volume*twistZINEtoSAW});
