@@ -469,7 +469,7 @@ function callKey(event){
                     if(window.BibleON==0)
                     {
                         document.getElementById("Bible").height="100%";
-                        document.getElementById("Bible").width="50%";
+                        document.getElementById("Bible").width="100%";
                         document.getElementById("nav").style.width="50%";
                         for(var b = 0; b<content.length; b++)content[b].style.width="50%";
                     }
