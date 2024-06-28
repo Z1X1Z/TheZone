@@ -472,8 +472,9 @@ let pushBackCounter = 0;
                  angle = ((angle+6*radialWarp)/12.)%1*2*pi;
                  d_x = -Math.sin(-angle)*flatline;
                  d_y = -Math.cos(-angle)*flatline;
-                 uniforms.d.value=new THREE.Vector2( d_x,d_y);
-              
+                            uniforms.d.value.x+=d_x;
+                                uniforms.d.value.y+=d_y;
+
                                
                                FEEDBACKuniforms.d.value=new THREE.Vector2(d_x,d_y);
                                FEEDBACKuniformsFlip.d.value=new THREE.Vector2(d_x,d_y);
@@ -1420,8 +1421,10 @@ function runOSMD (){
                                  
 
                                      const touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
-                                    uniforms.d.value=new THREE.Vector2( xTouch,-yTouch);
-                                    uniforms[ "volume" ].value=1.;
+                                    if(!window.shouldShowStar)uniforms[ "volume" ].value=1.;
+
+                                    uniforms.d.value.x+=xTouch/uniforms[ "volume" ].value;
+                                    uniforms.d.value.y+=-yTouch/uniforms[ "volume" ].value;
                                     var spunTouch=touchMovement;
                                           if(uniforms.carousel.value!=0.)         spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                                               coordX+= spunTouch[0];
@@ -2813,6 +2816,9 @@ for(var n = 0; n<targets.length;n++){
                      if (!iOS||(iOS&&dupered)) boot();//generate clover in 64 bit, duper Core, there is a bug after maybe half a day on iOS in bigTree.js (maybe also on safari Mac)
 
                                                        
+                                                                                         uniforms.d.value.x = 0.;
+                                                                                         uniforms.d.value.y = 0.;
+                                                                                         
                                                                        animateLoopId=                   window.requestAnimationFrame( animate );
                             //  renderer.forceContextLoss ()
                             //  renderer.forceContextRestore ( )
