@@ -8,7 +8,7 @@
             </script>
         <title>Starship~Zone:X</title>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+       <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <link type="text/css" rel="stylesheet" href="main.css">
 </head>
         
@@ -193,7 +193,13 @@ let maxLetterDepth=-1;
                 iframe.setAttribute("width", "50%");
                 iframe.setAttribute("class", "onTOP");
                 iframe.setAttribute("name", "TheBible");
-                iframe.setAttribute("style","margin-left:50%;");
+                iframe.setAttribute("style","margin-left:50%;\
+                                    -moz-transform: scaleX(0.5);\
+                                    -moz-transform-origin: 0 0;\
+                                    -o-transform: scaleX(0.5);\
+                                    -o-transform-origin: 0 0;\
+                                    -webkit-transform: scaleX(0.5);\
+                                    -webkit-transform-origin: 0 0;");
                // iframe.setAttribute("style", "position:fixed");
                 iframe.setAttribute("Id","Bible");
                 document.body.appendChild(iframe);
