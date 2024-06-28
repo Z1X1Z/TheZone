@@ -308,6 +308,13 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
             hyperCoreOUTPUT-=dstnce;
         }
         if(clvrVariant9)  s=new THREE.Vector2(s.x+coords.y/gr,s.y+coords.x/gr);
+        if(clvrVariant7)s.add(pcs);
+
+        
+        if(clvrVariant1)  s.multiplyScalar( Math.sqrt(lastS.x*lastS.x+lastS.y*lastS.y));
+        if(clvrVariant2)s.sub(new THREE.Vector2( zoom/coords.y,zoom/coords.x));
+        if(clvrVariant3)s.sub(pCenterCored.multiplyScalar( dstnce));
+
 
         if(clvrVariant4)  s.multiplyScalar( 1-1/oneOverLeafTruncated);
 
@@ -316,13 +323,7 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
     
 if(clvrVariant5) new THREE.Vector2(Math.pow(s.x,-2.),Math.pow(s.y,-2.)) ;
 if(clvrVariant6)s.sub(new THREE.Vector2( lastS.y,lastS.x));
-if(clvrVariant7)s.add(pcs);
 if(clvrVariant8) if(Math.sqrt(s.x*s.x+s.y*s.y)<1.)s.addScalar( 1.);
-
-if(clvrVariant1)  s.multiplyScalar( Math.sqrt(lastS.x*lastS.x+lastS.y*lastS.y));
-if(clvrVariant2)s.sub(new THREE.Vector2( zoom/coords.y,zoom/coords.x));
-if(clvrVariant3)s.sub(pCenterCored.multiplyScalar( dstnce));
-
 
 //if(dotted)s/=dot(-m,t)*dot(m,-t);
 
