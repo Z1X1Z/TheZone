@@ -2549,18 +2549,20 @@ vec2 lastS = s;
        }
        if(clvrVariant9) s+= coordsAltered;
 
-       if(clvrVariant4)   s*=1.-oneOverLeafTruncated;
-       if(clvrVariant5) s = vec2(pow(s.x,-2.),pow(s.y,-2.));
-      if(clvrVariant6)s=s-lastS.yx;
         if(clvrVariant7)s+=pcs;
         
-        if(clvrVariant8) if(length(s)<1.)s+=1.;
 ;
 
         
       if(clvrVariant1)  s*=length(lastS);
       if(clvrVariant2)s -=zoom/coords.yx;
       if(clvrVariant3)s-=pCenterCored*dstnce;
+      
+      if(clvrVariant4)   s*=1.-oneOverLeafTruncated;
+      
+      if(clvrVariant5) s = vec2(pow(s.x,-2.),pow(s.y,-2.));
+      if(clvrVariant6)s=s-lastS.yx;
+      if(clvrVariant8) if(length(s)<1.)s+=1.;
 
    
        if(dotted)s/=dot(-m,t)*dot(m,-t);
