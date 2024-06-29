@@ -768,7 +768,7 @@ function callKey(event){
         
     }
     else if (key=="u") uniforms[ "petals" ].value += 1.;
-    else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%10;
+    else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%11;
 
     else if (key=="?"){
         if(uniforms[ "spirated" ].value==0)uniforms[ "spirated" ].value=1;

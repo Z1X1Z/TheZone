@@ -3699,7 +3699,7 @@ vec2 dance = vec2(0.);
                                                                             /gr,moveDynamic/5.),0.,1.);
                                                                            // else if (Character==10)mny=sealedMan(characterOnTrailP,moveDynamic);
                                                                          //   else if (Character==11)mny=sealedWoman(characterOnTrailP/1.44,moveDynamic);
-
+                                                                         else if (Character==10)mny=vec3(0.);
            }
 
                                                                  
@@ -3757,7 +3757,7 @@ vec2 dance = vec2(0.);
 
     if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                                  else if(Character==2)heartSize=gr;
-     if (Character!=9&&colorCombo!=20&&colorCombo!=17){
+     if (Character!=9&&Character!=10&&colorCombo!=20&&colorCombo!=17){
      vec3 HEART = heart(characterPSpunToKey*heartSize+heartShift, moveDynamicSpunToKey/4.*frAMP*heartRate)/2.5
      //*(1.-length(uVuMinCenterASKEW)/8.)
      ;
