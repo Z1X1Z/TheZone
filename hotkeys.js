@@ -484,7 +484,7 @@ function callKey(event){
                  if(window.INITIALIZED) onWindowResize();
                             
     }//bible iframe loaded in manny.html
-    else if (event.altKey&&(key=="ç"||key=="c"))
+    else if (event.altKey&&(key=="¬"||key=="l"))
     {
         if(!streaming)
         {
@@ -587,11 +587,6 @@ function callKey(event){
                 else if (event.altKey&&(key=="∂"||key=="d")&&(!runningHash||!window.online))//∂ is alt+d
                     window.dupered=!window.dupered;
                 
-                else if (event.altKey&&(key=="∂"||key=="d")&&(!runningHash||!window.online))//∂ is alt+d
-                    window.dupered=!window.dupered;
-                
-                else if (event.altKey&&(key=="∂"||key=="d")&&(!runningHash||!window.online))//∂ is alt+d
-                    window.dupered=!window.dupered;
                 else if (event.altKey&&(key=="ø"||key=="o")) {
                     uniforms.dilate.value=!uniforms.dilate.value;
 
