@@ -150,13 +150,15 @@ function resetAll(){
     }
     window.coordX=0.; window.coordY=0.;
 
-    if(!("BibleON" in window))  window.BibleON=1;
-    else if(settingsSet)
+    
+        if(!location.hash.includes(".b")&&!location.hash.includes(".c")) window.BibleON=1;
+        else window.BibleON=0;
+     if(settingsSet)
     {
-        if(location.hash.includes(".b")||location.hash.includes(".c")) window.BibleON=1;
-   
-        else if(BibleON==0) callKey(new KeyboardEvent('keydown', {'key': "b", 'altKey':true, 'keyCode':key.charCodeAt(0)}));
-        
+         if(location.hash.includes(".b")||location.hash.includes(".c")) window.BibleON=1;
+        else window.BibleON=0;
+        callKey(new KeyboardEvent('keydown', {'key': "b", 'altKey':true, 'keyCode':key.charCodeAt(0)}));
+
     }
     
     window.xTouch=0;
@@ -288,7 +290,7 @@ function readHash(){
                 
             }
             number=Number(number);
-           if(!bibleReaderCode||hashHasRun) callKey(new KeyboardEvent('keydown',
+           if(!bibleReaderCode) callKey(new KeyboardEvent('keydown',
                                       {
                 'key': location.hash[lasthash],"keyCode":location.hash.charCodeAt(lasthash),
                 "ctrlKey":location.hash[lasthash-1]==",","altKey":location.hash[lasthash-1]=="."
@@ -442,8 +444,8 @@ function callKey(event){
     }
     else if (event.altKey&&(key=="©"||key=="g"))window.grabStar=!window.grabStar;
     else if (event.altKey&&(key=="∫"||key=="b")){
-
-                 if(!muteToggle||(!runningHash&&android))
+            console.log(BibleON)
+                 if(!muteToggle&&!runningHash)
                        window.BibleON = (window.BibleON+1)%2;
 
         let content = document.getElementsByClassName("dropdown-content");

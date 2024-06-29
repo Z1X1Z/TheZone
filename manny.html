@@ -208,7 +208,6 @@ let maxLetterDepth=-1;
                 iframe.setAttribute("height", "0");
 }
         
-                if(!location.hash.includes(".b")) window.BibleON=0;
                 }
                 </script>
         <div id="load message" style="font-size:40px; background-color:blue;">     </div>
@@ -1230,7 +1229,8 @@ scoreColorInversion=false;
     
     
     <script>
-     if(location.hash.includes(".c")||location.hash.includes(".b")){
+     if(location.hash.includes(".c")||location.hash.includes(".b"))
+     {
         let content = document.getElementsByClassName("dropdown-content");
         document.getElementById("nav").style.width="50%";
         for(var b = 0; b<content.length; b++)content[b].style.width="50%";
