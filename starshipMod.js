@@ -1453,7 +1453,7 @@ function runOSMD (){
                             if(textON)document.getElementById("textWindow").innerHTML =
                                 "<div sytle='font-size: 16px;'>"+
                                 
-                                "cores:"+(Math.floor(uniforms["centralCores"].value)+cloverSuperCores*singleHyperCoreDepth+uniforms.upCoreCycler.value)+
+                                "cores: " +(Math.floor(uniforms["centralCores"].value)+cloverSuperCores*singleHyperCoreDepth+uniforms.upCoreCycler.value)+
                                 " metaCores: "+Math.floor(uniforms["externalCores"].value)+", <p style='margin : 0px'></p>"+
 
                                 "zoom: "+(zoom/2.**(singleHyperCoreDepth*cloverSuperCores))+"<p style='margin : 0px'></p>"+
@@ -1678,10 +1678,10 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
           "<p style='margin : 0px'></p>"+
           " note: "+noteName+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
           "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
-          "cores: "+cores+", metaCores:"+ uniforms.externalCores.value + "<p style='margin : 0px'></p>"+
+          "cores: "+cores+", metaCores: "+ uniforms.externalCores.value + "<p style='margin : 0px'></p>"+
           "zoom: "+zoom/2.**(singleHyperCoreDepth*cloverSuperCores)+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
-          "InOutThresh:"+zoomOutRatchetThreshold+"<p style='margin : 0px'></p>"+
-          "amplitude : "+totalAMP+"<p style='margin : 0px'></p>"+
+          "InOutThresh: "+zoomOutRatchetThreshold+"<p style='margin : 0px'></p>"+
+          "amplitude: "+totalAMP+"<p style='margin : 0px'></p>"+
           "above threshold: "+aboveThreshold+", FPS: "+Math.round(FPS)+"<p style='margin : 0px'></p>"
           //+"<p style='margin : 0px'></p>"+"X: "+String(-coordX)+" Y: "+String(-coordY);
           +"<p></div>";

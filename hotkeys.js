@@ -70,10 +70,10 @@ dilate:{value:true},
 
         morph: {value: 0.0 },
 
-        fourCreats: {value: -1 },
+        fourCreats: {value: 1 },
         Character: {value: 0 },
         articles: {value: false },
-        helm: {value: true },
+        helm: {value: false },
         wheel: {value: false },
         Refractelate: {value: false },
         petals: {value:  .0 },
@@ -225,8 +225,8 @@ function resetAll(){
                                          
                                          
                                              if (   window.iOS )window.rez=window.devicePixelRatio/6.;
-                                               else if(window.android)window.rez=window.devicePixelRatio/6.;
-                                               else   window.rez=window.devicePixelRatio/3.;
+                                               else if(window.android)window.rez=window.devicePixelRatio/8.;
+                                               else   window.rez=window.devicePixelRatio/2.;
                                                    
     if(window.INITIALIZED){
         setFFTdependantSizes();
