@@ -6,7 +6,7 @@ const movementRateORIGINAL = 1.5;
 const starshipSize = Math.E**leaf/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
                             const zoomFrames = 60;//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
-                  const mf = 2.;//advantage of translation over zoom (right?)
+                  const mf = gr;//advantage of translation over zoom (right?)
 const MR = mf/zoomFrames;
 const secondsToEdge=window.pixelShaderSize/4./pixelShaderToStarshipRATIO;
 
