@@ -3720,7 +3720,7 @@ vec2 dance = vec2(0.);
                                                                          , -(//starSpin*mod(time*rate,PI*2.)-
                                                                                                           twistStar*brelued));
                                                                  
-                                                                               vec2 vUvCenteredASKEW = (vUv.yx-.5+moveDynamicSpunToKey*heartRate*aspectRatio);
+                                                                               vec2 vUvCenteredASKEW = (vUv.yx-.5-moveDynamicSpunToKey*heartRate*aspectRatio);
                                                                                vec2 uVuASKEW=-(vUvCenteredASKEW)/aspectRatio;
                                                                                vec2 uVuMinCenterASKEW=-vUvCenteredASKEW/(min(resolution.x,resolution.y)/resolution.yx);
                                  
