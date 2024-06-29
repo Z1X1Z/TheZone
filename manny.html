@@ -1819,7 +1819,7 @@ ret= vec4(clamp(
         vec2 z=g.xy;
         
     vec3 h=vec3(0.);
-    const float iterations = 40.;
+    const float iterations = 70.;
         for (float f=0.;f<iterations;f++)if(abs(z.y+z.x)>2.){h=vec3(0.);break;}
         else {z=vec2(((z.x*z.x-z.y*z.y)-g.x-t.x),(2.0*z.x*z.y-g.y-t.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
         float plusBlue=0.;
@@ -3478,9 +3478,9 @@ return b+robe(p,t)+legs(p,t/33.3);}
             vec2 manCoord = p-spacing;
             
             
-            return eaglePerched(eagleCoord,vec2(inversion,0.))+body(p+spacing,t)
-          +lion(lionCoord,vec2(inversion,0.))+body(p+vec2(-spacing.x,spacing.y),t)
-          +ox(oxCoord,vec2(inversion,0.))+body(p+vec2(spacing.x,-spacing.y),t)
+            return eaglePerched(eagleCoord,vec2(inversion,0.))+body(p+spacing,t)/2.
+          +lion(lionCoord,vec2(inversion,0.))+body(p+vec2(-spacing.x,spacing.y),t)/2.
+          +ox(oxCoord,vec2(inversion,0.))+body(p+vec2(spacing.x,-spacing.y),t)/2.
           +man(manCoord,vec2(inversion,0.))+body(p-spacing,t)
           ;
 }
@@ -3649,7 +3649,8 @@ vec2 dance = vec2(0.);
                                                      }
      if(fourCreats<0){
                        const float brideSize = 24.;
-                       creatures=fourCreatures(backGround*8.,t);
+                       creatures=fourCreatures(backGround*8.,vec2(0.)//t
+                                               );
                        if(length(backGround*brideSize)>4./3./brideSize)
                             b=bride(backGround*brideSize,zoom*t)+heart(backGround*brideSize,zoom*t/2.);
      }
