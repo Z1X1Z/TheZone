@@ -3651,8 +3651,9 @@ vec2 dance = vec2(0.);
                        const float brideSize = 24.;
                        creatures=fourCreatures(backGround*8.,vec2(0.)//t
                                                );
-                       if(length(backGround*brideSize)>4./3./brideSize)
-                            b=bride(backGround*brideSize,zoom*t)+heart(backGround*brideSize*2.,zoom*t/2.)+dress(backGround*brideSize*1.5/gr,-zoom*t/7.);
+                                               vec2 bgBride = backGround*brideSize;
+                       if(length(bgBride)>4./3./brideSize)
+                            b=bride(bgBride,vec2(0.))+heart(bgBride*2.,vec2(0.))+dress(bgBride*1.5/gr,vec2(0.));
      }
 
                  float inversion = -1.;
