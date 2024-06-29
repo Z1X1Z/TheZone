@@ -3111,7 +3111,7 @@ return
                    vec2 g=p/2.;
                   // g.x+=.5;
                    vec2 z=g;
-                   for (int f=0;f<70;f+=1)if(abs(z.x+z.y)>20.&&f>4){x+=z.y;break;}
+                   for (int f=0;f<100;f+=1)if(abs(z.x+z.y)>20.&&f>4){x+=z.y;break;}
                    else {z=2.*vec2(-1./((z.x*z.x-1.44*z.y*z.y)-g.x*1.2+t.x),(1.21212121212121*z.x*z.y-1.212121212121*g.y+t.y));
                          z.x=pow(abs(z.x),.777-t.x/49.);}
                //vv legs vv
@@ -3478,9 +3478,9 @@ return b+robe(p,t)+legs(p,t/33.3);}
             vec2 manCoord = p-spacing;
             
             
-            return eaglePerched(eagleCoord,vec2(inversion,0.))+body(p+spacing,t)/2.
-          +lion(lionCoord,vec2(inversion,0.))+body(p+vec2(-spacing.x,spacing.y),t)/2.
-          +ox(oxCoord,vec2(inversion,0.))+body(p+vec2(spacing.x,-spacing.y),t)/2.
+            return eaglePerched(eagleCoord,vec2(inversion,0.))+body(p+spacing,t)
+          +lion(lionCoord,vec2(inversion,0.))+body(p+vec2(-spacing.x,spacing.y),t)
+          +ox(oxCoord,vec2(inversion,0.))+body(p+vec2(spacing.x,-spacing.y),t)
           +man(manCoord,vec2(inversion,0.))+body(p-spacing,t)
           ;
 }
@@ -3652,7 +3652,7 @@ vec2 dance = vec2(0.);
                        creatures=fourCreatures(backGround*8.,vec2(0.)//t
                                                );
                        if(length(backGround*brideSize)>4./3./brideSize)
-                            b=bride(backGround*brideSize,zoom*t)+heart(backGround*brideSize,zoom*t/2.);
+                            b=bride(backGround*brideSize,zoom*t)+heart(backGround*brideSize*2.,zoom*t/2.)+dress(backGround*brideSize*1.5/gr,-zoom*t/7.);
      }
 
                  float inversion = -1.;
@@ -3938,7 +3938,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                         -(ARTICLE.r+ARTICLE.g+ARTICLE.b)
                            ,0.,1.)
                                                     +ARTICLE
-                                                    +b+creatures+bridge//+AM*(1.-isGrey-pixelShipGrey)
+                                                    +bridge//+AM*(1.-isGrey-pixelShipGrey)
                                                     ,1.);
                        vec3 awayFromTree =  vec3(-(AM.x+AM.y+AM.z)*4.
                                                  +bigEyes.xyz*largeEyeColor
@@ -3963,6 +3963,7 @@ vec4 tree = vec4( clamp(
                            +awayFromTree
                            
                                               ,0.,1.)
+                        +b+creatures
                     +   pixelStarship.xyz
           -vec3((mny.r+mny.b+mny.g)),.0,1.)
               ,1.);
