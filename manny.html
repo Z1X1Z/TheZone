@@ -2416,10 +2416,10 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
             float downSpoke=oneOverLeafTruncated;//1./(((-leaf)*truncator)/truncator)/4.;
                                                            
                                                           vec2 coordsAltered=coords/gr;
-                             float powerOfDynamicSokeCore = 2.;
+                             float powerOfDynamicSokeCore = 3.;
 
                              float spokeloverCoreShiftDown=pow(upSpoke,powerOfDynamicSokeCore)*logStabilizationConstant;
-                             float       spokeloverCoreShiftUp  =      pow(abs(downSpoke),2.);
+                             float       spokeloverCoreShiftUp  =      pow(abs(downSpoke),powerOfDynamicSokeCore)*logStabilizationConstant;
                              
 
        //     float logOfSpoke_Factor = 0.;
