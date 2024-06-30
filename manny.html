@@ -3004,7 +3004,7 @@ return
          float l=0.;
          float flip=-t.x;
          if (flip<0.) p = -p;
-          vec3 ret = vec3(lerp(time+.5)/2.);
+          vec3 ret = vec3(-lerp(time));
 
          if (abs(p.x*p.x+p.y*p.y)<2.0)
          {for (int t = 0; t < 30; t++) {
@@ -3015,7 +3015,7 @@ return
            l = length(s);
 
          if (l >20.0&&t!=0)
-         {ret= vec3(lerp(time)*2.);
+         {ret= vec3(lerp(time));
              break;
              }
          }
@@ -3071,7 +3071,7 @@ return
                         if(flip<1.)s.x = 1./pow(s.x,flip)*sign(s.x*flip);
                         else s.x=1./s.x;
                   l=-1.;}
-            return vec3((lerp(time))*l);
+            return vec3((lerp(time)+1.)*l);
         }
 
       vec3 lion(vec2 p,vec2 t) {
@@ -3958,7 +3958,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                         -(ARTICLE.r+ARTICLE.g+ARTICLE.b)
                            ,0.,1.)
                                                     +ARTICLE
-                                                    +bridge//+AM*(1.-isGrey-pixelShipGrey)
+                                                    +bridge*(1.-isGrey-pixelShipGrey)//+AM*(1.-isGrey-pixelShipGrey)
                                                     ,1.);
                        vec3 awayFromTree =  vec3(-(AM.x+AM.y+AM.z)*4.
                                                  +bigEyes.xyz*largeEyeColor
