@@ -14,7 +14,7 @@ window.uniformsInitial = {
 coreDilation:{value:0.},
 fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:1024./44100.},//actually 2/nyquist
 radialWarp:{value:1.},
-    pixelSTARon:{value:true},
+    pixelSTARon:{value:false},
 
 micIn:{value:null},
     audioBuffer:{value:null},
@@ -260,8 +260,12 @@ function resetAll(){
                                          window.number = "";
 
                                        if(window.settingsSet)  readHash()
-
+                                         
+                                         let n = document.getElementsByName('t');
+                                          for(var p = 0; p<n.length;p++)n[p].checked  = false;
+                                         
                                          window.settingsSet = true
+                                         
 }
 resetAll();
 
