@@ -3765,9 +3765,10 @@ vec2 dance = vec2(0.);
                                                                        float b =nyq*pow(2.,angleASKEW+n);
                                                                        frAMP += texture2D(micIn, vec2(b,0.)).r;
                                                                  }
-                                                                  
                                  frAMP*=1.+frAMP;
      float heartSize =gr*gr*-leaf/(1.+frAMP+volume);//*8.;
+                                 if(frAMP==0.)frAMP=1.;//to prevent cancelling moveDynamic in touchmode
+
      vec2 heartShift = vec2(0);
 
     if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
