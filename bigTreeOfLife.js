@@ -239,7 +239,7 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
            var downSpoke=((1./leaf)/truncator)*truncator;//1./(((-leaf)*truncator)/truncator)/4.;
   // var logOfSpoke_Factor=0.;
                           // if (wheel) logOfSpoke_Factor=Math.log(spoke_factor);
-                          var powerOfDynamicSokeCore = 3.;
+                          var powerOfDynamicSokeCore = 2.;
 
         var spokeloverCoreShiftDown=Math.pow(upSpoke,powerOfDynamicSokeCore)*logStabilizationConstant;            ;//logStabilizationConstant seems to cancel powerOfDynamicSokeCore=2;
 
