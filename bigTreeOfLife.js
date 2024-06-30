@@ -239,12 +239,6 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
            var downSpoke=((1./leaf)/truncator)*truncator;//1./(((-leaf)*truncator)/truncator)/4.;
   // var logOfSpoke_Factor=0.;
                           // if (wheel) logOfSpoke_Factor=Math.log(spoke_factor);
-                          var powerOfDynamicSokeCore = Math.PI;
-
-        var spokeloverCoreShiftDown=Math.pow(upSpoke,powerOfDynamicSokeCore)*logStabilizationConstant;            ;//logStabilizationConstant seems to cancel powerOfDynamicSokeCore=2;
-
-           var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfDynamicSokeCore)*logStabilizationConstant;//for spokelover
-                          
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
                            hyperCoreOUTPUT-=(6.+petals)/6.-1.;
 
@@ -395,8 +389,15 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
             }
             
         }
-        
+        dstnce=s.length();
         if(spokelover){
+            
+            var powerOfSpokeCore = spoke_factorLarge*lfc/dstnce;
+
+var spokeloverCoreShiftDown=Math.pow(upSpoke,powerOfSpokeCore)*logStabilizationConstant;            ;//logStabilizationConstant seems to cancel powerOfDynamicSokeCore=2;
+
+var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpokeCore)*logStabilizationConstant;//for spokelover
+            
             if(counter+dstnce<hyperCoreBoosted){
                 //  if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
                 //else
