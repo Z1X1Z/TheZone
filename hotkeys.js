@@ -157,8 +157,9 @@ function resetAll(){
     {
          if(location.hash.includes(".b")||location.hash.includes(".c")) window.BibleON=1;
         else window.BibleON=0;
-        callKey(new KeyboardEvent('keydown', {'key': "b", 'altKey':true, 'keyCode':key.charCodeAt(0)}));
-
+        
+        if(window.useCDN||location.hash.includes(".b")||location.hash.includes(".c"))
+            callKey(new KeyboardEvent('keydown', {'key': "b", 'altKey':true, 'keyCode':key.charCodeAt(0)}));
     }
     
     window.xTouch=0;
@@ -208,7 +209,8 @@ function resetAll(){
             window.starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;
             window.starCount = Math.ceil(starArms*60*secondsToEdge);
 
-            if(!touchOnlyMode||location.hash.includes("t"))window.touchMode=false;
+           // if(!window.touchOnlyMode||location.hash.includes("t"))
+                                         window.touchMode=false;
             window.volumeSpeed = false;
 
                                          window.front = 1;
@@ -226,7 +228,7 @@ function resetAll(){
     window.fftSize=2048;
                                          
                                          
-                                             if (   window.iOS )window.rez=window.devicePixelRatio/6.;
+                                             if (   window.iOS )window.rez=window.devicePixelRatio/4.;
                                                else if(window.android)window.rez=window.devicePixelRatio/8.;
                                                else   window.rez=window.devicePixelRatio/2.;
                                                    
@@ -448,7 +450,6 @@ function callKey(event){
     }
     else if (event.altKey&&(key=="©"||key=="g"))window.grabStar=!window.grabStar;
     else if (event.altKey&&(key=="∫"||key=="b")){
-            console.log(BibleON)
                  if(!muteToggle&&!runningHash)
                        window.BibleON = (window.BibleON+1)%2;
 
