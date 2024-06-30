@@ -1421,7 +1421,7 @@ function runOSMD (){
                                  
 
                                      const touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
-                                    if(!window.shouldShowStar)uniforms[ "volume" ].value=1.;
+                                    if(!window.shouldShowStar||touchOnlyMode)uniforms[ "volume" ].value=1.;
 
                                     uniforms.d.value.x+=xTouch/uniforms[ "volume" ].value;
                                     uniforms.d.value.y+=-yTouch/uniforms[ "volume" ].value;
