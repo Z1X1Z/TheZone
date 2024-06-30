@@ -1600,11 +1600,11 @@ uniform float exponentialPetals;
 
                                   
                                   
-                                  const float PI = 3.1415927410125732;
+                                  const float PI = 3.14159274;
                                   const float PI2 = PI*2.;
-    const float gr = 1.618033988749;
-    const float leaf = -1.3247;//1795724474;
-
+    const float gr = 1.6180339;
+    const float leaf = -1.3247179;//5724474;
+    const float eConstant = 2.71828182;
     float lerp(float a) {return -abs(mod(a,2.)-1.);}
     float lerp2(float a) {return -abs(mod(a,4.)-2.)+1.;}
 
@@ -1702,7 +1702,7 @@ uniform float exponentialPetals;
                                            mod((-angle+1./12.)//+3.-flipStar/12.
                                                ,1.),1.,1.
                                            ))
-                              ,.0,1.), 1.)/pow(2.,d*2.71828);
+                              ,.0,1.), 1.)/pow(2.,d*eConstant);
         else ret= vec4(.0);
         return ret;
     }
@@ -2297,7 +2297,7 @@ else if (refactorCores==0.){//for double slide core
 
 
 if(fieldPowerBoost){
-    float powerBoost =2.71828*(log(.5)/length(s));
+    float powerBoost =eConstant*(log(.5)/length(s));
     s*=pow(length(s),powerBoost);
 }
 
@@ -2432,7 +2432,7 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
             float downSpoke=oneOverLeafTruncated;//1./(((-leaf)*truncator)/truncator)/4.;
                                                            
                                                           vec2 coordsAltered=coords/gr;
-                             float powerOfDynamicSokeCore = 2.;//uncertain value
+                             float powerOfDynamicSokeCore =  PI;//uncertain value
 
                              float spokeloverCoreShiftDown=pow(upSpoke,powerOfDynamicSokeCore)*logStabilizationConstant;
                              float       spokeloverCoreShiftUp  =      pow(abs(downSpoke),powerOfDynamicSokeCore)*logStabilizationConstant;
@@ -2744,7 +2744,7 @@ OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
    }
    
    if(fieldPowerBoostMeta&&(float(i)>=hyperCoreBoosted)){
-       float powerBoost =2.71828*(log(.5)*dstnce*(sqrt(2.))/1.5);
+       float powerBoost =eConstant*(log(.5)*dstnce*(sqrt(2.))/1.5);
        s*=pow(dstnce,powerBoost);
        dstnce*=pow(dstnce,powerBoost);
 
@@ -3241,12 +3241,12 @@ return
                                    // if(MetaCored&&morph>=.5)hyperCore*=4./3.;//engage overstable core if dancing
 
                                   float term=0.;
-                                  if(spirated!=0.)term=(1.-lfc)*(3.-2.7182818);//if is spirated then oscillate the function's log between e and 3
+                                //  if(spirated!=0.)term=(1.-lfc)*(3.-eConstant);//if is spirated then oscillate the function's log between e and 3
 
                    float l=1.;
                   vec3 digorno=vec3(0.);
                    for (int f=0;f<41;f+=1)if(abs(s.y)<5.){
-                                      if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+3.14159);
+                                      if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+PI);
 
                        if(f>0) s=vec2(s.x+s.y/(s.x*s.x + s.y*s.y), (1./(s.x*s.x + s.y*s.y))+zoom*1.5-1.);//this equation comes from the equation (x-1/((x - y*i)))=x.  This equation has no solutions, but upon feedback it gains solutions (technically this may require other steps too)
                        for (int counter=0;counter<15;counter+=1)if(abs(s.y)<1.5*(1.-zoom*1.5)){
