@@ -14,7 +14,7 @@ window.uniformsInitial = {
 coreDilation:{value:0.},
 fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:1024./44100.},//actually 2/nyquist
 radialWarp:{value:1.},
-    pixelSTARon:{value:false},
+    pixelSTARon:{value:true},
 
 micIn:{value:null},
     audioBuffer:{value:null},
@@ -73,7 +73,7 @@ dilate:{value:true},
         fourCreats: {value: 1 },
         Character: {value: 0 },
         articles: {value: false },
-        helm: {value: false },
+        helm: {value: true },
         wheel: {value: false },
         Refractelate: {value: false },
         petals: {value:  .0 },
