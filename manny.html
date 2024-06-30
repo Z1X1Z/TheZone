@@ -411,7 +411,7 @@ radialWarp=b;
                          <input type="checkbox" id="PixelStar" name="t"  onclick= "
                              key  = 'p';
                              callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
-                             <label for="PixelStar">PixelStar![.p]</label><br>
+                             <label for="PixelStar">PixelStar?![.p]</label><br>
                              
                      <a id="starOnDot" name="t"  onclick= "
 
@@ -897,7 +897,7 @@ Reset Zoom![L]</a><br>
                 <input type="checkbox" id="Bridge" name="t"  onclick= "
                     key  = 'z';
                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                 <label for="Bridge">Bridge![z]</label><br>
+                 <label for="Bridge">Bridge?![z]</label><br>
                  <input type="checkbox" id="Wheel" name="t"  onclick= "
                      key  = 'm';
                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -3004,7 +3004,7 @@ return
          float l=0.;
          float flip=-t.x;
          if (flip<0.) p = -p;
-          vec3 ret = vec3(1.*zin(time));
+          vec3 ret = vec3(lerp(time+.5)/2.);
 
          if (abs(p.x*p.x+p.y*p.y)<2.0)
          {for (int t = 0; t < 30; t++) {
@@ -3015,7 +3015,7 @@ return
            l = length(s);
 
          if (l >20.0&&t!=0)
-         {ret= vec3(-1.*zin(time));
+         {ret= vec3(lerp(time)*2.);
              break;
              }
          }
@@ -3071,7 +3071,7 @@ return
                         if(flip<1.)s.x = 1./pow(s.x,flip)*sign(s.x*flip);
                         else s.x=1./s.x;
                   l=-1.;}
-            return vec3(l);
+            return vec3((lerp(time))*l);
         }
 
       vec3 lion(vec2 p,vec2 t) {
@@ -3769,7 +3769,7 @@ vec2 dance = vec2(0.);
                                                                        frAMP += texture2D(micIn, vec2(b,0.)).r;
                                                                  }
                                  frAMP*=1.+frAMP;
-     float heartSize =gr*gr*-leaf/(1.+frAMP+volume/4.);//*8.;
+     float heartSize =gr*gr*-leaf/(frAMP+volume/2.+.75);//*8.;
                                  if(frAMP==0.)frAMP=1.;//to prevent cancelling moveDynamic in touchmode
 
      vec2 heartShift = vec2(0);
@@ -3777,7 +3777,7 @@ vec2 dance = vec2(0.);
     if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                                  else if(Character==2)heartSize=gr;
      if (Character!=9&&Character!=10&&colorCombo!=20&&colorCombo!=17){
-     vec3 HEART = heart(characterPSpunToKey*heartSize+heartShift, moveDynamicSpunToKey/4.*frAMP*heartRate)/2.5
+     vec3 HEART = heart(characterPSpunToKey*heartSize+heartShift, moveDynamicSpunToKey/4.*frAMP*heartRate)/gr
      //*(1.-length(uVuMinCenterASKEW)/8.)
      ;
      vec3 heartMultiplier = vec3(1.);
