@@ -2432,12 +2432,7 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
             float downSpoke=oneOverLeafTruncated;//1./(((-leaf)*truncator)/truncator)/4.;
                                                            
                                                           vec2 coordsAltered=coords/gr;
-                             float powerOfDynamicSokeCore =  PI;//uncertain value
-
-                             float spokeloverCoreShiftDown=pow(upSpoke,powerOfDynamicSokeCore)*logStabilizationConstant;
-                             float       spokeloverCoreShiftUp  =      pow(abs(downSpoke),powerOfDynamicSokeCore)*logStabilizationConstant;
-                             
-
+                                                         
        //     float logOfSpoke_Factor = 0.;
        //     if (wheel) logOfSpoke_Factor=log(spoke_factor);
                              
@@ -2656,9 +2651,17 @@ hyperCoreOUTPUT-=spoke_factor;
 hyperCoreBoosted-=spoke_factor;}
  */
    }
-
+dstnce=length(s);
 if(spokelover)
 {
+       
+float powerOfSpokeCore =spoke_factorLarge*lfc/dstnce;// uncertain value,takes large range, highly responsive on spkes PI*PI/gr*-leaf has nice outer main spokes
+
+float spokeloverCoreShiftDown=pow(upSpoke,powerOfSpokeCore)*logStabilizationConstant;
+float       spokeloverCoreShiftUp  =      pow(abs(downSpoke),powerOfSpokeCore)*logStabilizationConstant;
+
+
+
 if(counter+dstnce<hyperCoreBoosted){
    //  if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
      //else
@@ -3766,7 +3769,7 @@ vec2 dance = vec2(0.);
                                                                        frAMP += texture2D(micIn, vec2(b,0.)).r;
                                                                  }
                                  frAMP*=1.+frAMP;
-     float heartSize =gr*gr*-leaf/(1.+frAMP+volume);//*8.;
+     float heartSize =gr*gr*-leaf/(1.+frAMP+volume/4.);//*8.;
                                  if(frAMP==0.)frAMP=1.;//to prevent cancelling moveDynamic in touchmode
 
      vec2 heartShift = vec2(0);
