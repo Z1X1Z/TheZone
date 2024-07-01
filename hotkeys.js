@@ -120,7 +120,7 @@ dilate:{value:true},
         fieldPowerBoostMeta:{value:false},
         flipStar:{value:1.},
         witnessFlip:{value:1.},
-        twistStar:{value:49.},
+        twistStar:{value:0.},
         multiplicatorNexus:{value:false},//has problems may be discontinued
         squareClover:{value:false},
         mandelCloverFactor:{value:1.+leaf},
