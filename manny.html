@@ -2079,7 +2079,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
         float sizeReset = 120.;
         if(balloonsONexponential!=-0.)
            {
-               sizeReset=120.;
+               sizeReset=240.;
                }
           float x =  length(vUvCentered*resolution/min(resolution.x,resolution.y));
           float increment =0.;
@@ -2094,7 +2094,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                
                    vec2 dBuffer = d;
                    if (length(d)==0.)dBuffer=vec2(0.);
-                   if(abs(mod(increment+atan(dBuffer.x,dBuffer.y)+atan(vUvCentered.x,vUvCentered.y)/(2.*PI)*(balloonsONexponential),1.))<length(1.)/(increment+sizeReset)*40.)balloon=hsv2rgb(vec3((mod((4.-increment)*(balloonsON+balloonsONexponential)+twistStar,12.))/12.,.5,1.));
+                   if(abs(mod(increment+atan(dBuffer.x,dBuffer.y)+atan(vUvCentered.x,vUvCentered.y)/(2.*PI)*(balloonsONexponential),1.))<length(1.)/(increment+sizeReset)*60.)balloon=hsv2rgb(vec3((mod((4.-increment)*(balloonsON+balloonsONexponential)+twistStar,12.))/12.,.5,1.));
         return balloon;
     }
     
