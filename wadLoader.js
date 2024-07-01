@@ -317,7 +317,9 @@ if(window.grabStar)
              if(!window.grabStar) angleSound[id]=(((-Math.atan2(-x,-y)*flip-initialAngleSound[id])*flip+8.*pi)%(2*pi)+initialAngleSound[id]);
              
              else {
-              for(var i = 0; i<maxTouchSoundCount;i++)   angleSound[i]+= twistIncrementPI;
+                   angleSound[id]+= twistIncrementPI;
+
+              for(var i = 0; i<maxTouchSoundCount;i++) if(i!=id)  angleSound[i]-= twistIncrementPI;
                  
                  let twisteR=(angleSound[id]-initialAngleSound[id])%(2*pi);
                  
