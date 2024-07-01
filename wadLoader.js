@@ -290,7 +290,7 @@ if(window.grabStar)
     lastSlip[id] =slip;
 
     window.twist+=twistIncrement;
-    permanentInitialTwist[id] +=twistIncrement;
+   // permanentInitialTwist[id] +=twistIncrement;
 
 }
          if(!window.muteTouchVolume){
