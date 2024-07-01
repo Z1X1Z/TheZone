@@ -318,29 +318,32 @@ if(window.grabStar)
              
              else {
                  
-              for(var i = 0; i<maxTouchSoundCount;i++)   angleSound[i]+= twistIncrementPI;
-                 
-                 let twisteR=(angleSound[id]-initialAngleSound[id])%(2*pi);
-                 
-                 let   lastTwistSign=signTwist[id];
-                 signTwist[id] =Math.sign(twisteR-pi);
-                 if (lastTwistSign!=signTwist[id]
-                     &&(twisteR<pi/2.||twisteR>3./2.*pi)
-                    )   octavesBoosted[id]+=24*signTwist[id];
-             
+                 for(var i = 0; i<maxTouchSoundCount;i++)  {
                      
+                     angleSound[i]+= twistIncrementPI;
+                     
+                     let twisteR=(angleSound[i]-initialAngleSound[i])%(2*pi);
+                     
+                     let   lastTwistSign=signTwist[i];
+                     signTwist[i] =Math.sign(twisteR-pi);
+                     if (lastTwistSign!=signTwist[i]
+                         &&(twisteR<pi/2.||twisteR>3./2.*pi)
+                         )   octavesBoosted[i]+=24*signTwist[i];
+                     
+                 }
              
              }
                  soundTouchComponent[id]=angleSound[id]
                  let twistFeed;
                  if(!grabStar)
-                 {//soundTouchComponent[id]=angleSound[id]
+                 {soundTouchComponent[id]=angleSound[id]
                      twistFeed = twist;
                  }
                  else {
-                    // soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id]+4*pi)%(Math.PI*2.)+initialAngleSound[id];
+                     soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id]+4*pi)%(Math.PI*2.)+initialAngleSound[id];
 
-                     twistFeed= permanentInitialTwist[id]+octavesBoosted[id];
+                     twistFeed= permanentInitialTwist[id]+
+                     octavesBoosted[id];
 
                  }
                 let frequency = Math.pow(2.,((((soundTouchComponent[id]*window.flip)/pi/2*12)*window.flip-twistFeed/2.)-1.)/12.
