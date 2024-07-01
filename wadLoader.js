@@ -237,8 +237,8 @@ function startSound(e){
                     
                     sound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2**Math.floor(octaveDistance-octaveShift),volume:cascadeSwitch1*twistTRIANGLEtoSQUARE*octaveDistance%1});
                     
-                    zound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2**Math.ceil(octaveDistance-octaveShift),volume:cascadeSwitch1*twistTRIANGLEtoSQUARE*(1.-octaveDistance%1)});
-                    zound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.*2**Math.ceil(octaveDistance-octaveShift)
+                    zound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.*2**Math.ceil(octaveDistance-octaveShift),volume:cascadeSwitch1*twistTRIANGLEtoSQUARE*(1.-octaveDistance%1)});
+                    zound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2**Math.ceil(octaveDistance-octaveShift)
                         ,volume:cascadeSwitch2*twistTRIANGLEtoSQUARE*octaveDistance%1});
                    /*
                     xound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency,volume:cascadeSwitch1*volume*twistZINEtoSAW});
