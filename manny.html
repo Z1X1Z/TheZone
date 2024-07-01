@@ -433,12 +433,12 @@ radialWarp=b;
 
                    key  = 'b';
                    callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
-                   Harmonic Spiraloons![,b]</a><br>
+                   Harmonic Balloons![,b]</a><br>
                <a id="balloonsExponential" name="t"  onclick= "
 
                    key  = 'n';
                    callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
-                   Harmonic Spiraloons Exponential![,n]</a><br>
+                   Harmonic Spiralloons Exponential![,n]</a><br>
                <a id="Star Stream" name="t"  onclick= "
 
                    key  = 'V';
@@ -2087,7 +2087,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
         }
           float x =  length(vUvCentered*resolution/min(resolution.x,resolution.y));
           float increment =0.;
-          vec2 spinningSpiraloon  =  spin2(vUvCentered,time*PI*4.);
+         // vec2 spinningSpiraloon  =  spin2(vUvCentered,time*PI*4.);
 
           if(balloonsON!=0.) increment =(note*balloonsON+( 120.+ twistStar)*brelued - x*48.)*brelued;
           else if(balloonsONexponential!=0.)
@@ -2095,7 +2095,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
         
                
                    
-                   if(abs(mod(increment+atan(spinningSpiraloon.x,spinningSpiraloon.y)/(2.*PI)*(balloonsONexponential),1.)-.1)<length(1.)/(increment+sizeReset)*21.)balloon=hsv2rgb(vec3((mod((4.-increment)*(balloonsON+balloonsONexponential)+twistStar,12.))/12.,.5,1.));
+                   if(abs(mod(increment+atan(d.x,d.y)+atan(vUvCentered.x,vUvCentered.y)/(2.*PI)*(balloonsONexponential),1.)-.1)<length(1.)/(increment+sizeReset)*21.)balloon=hsv2rgb(vec3((mod((4.-increment)*(balloonsON+balloonsONexponential)+twistStar,12.))/12.,.5,1.));
         return balloon;
     }
     
