@@ -290,7 +290,7 @@ if(window.grabStar)
     lastSlip[id] =slip;
 
     window.twist+=twistIncrement;
-    for(var i = 0; i<maxTouchSoundCount;i++) initialTwist[i] +=twistIncrement;
+    permanentInitialTwist[id] +=twistIncrement;
 
 }
          if(!window.muteTouchVolume){
@@ -317,7 +317,7 @@ if(window.grabStar)
              if(!window.grabStar) angleSound[id]=(((-Math.atan2(-x,-y)*flip-initialAngleSound[id])*flip+8.*pi)%(2*pi)+initialAngleSound[id]);
              
              else {
-                 angleSound[id]+= twistIncrementPI;
+              for(var i = 0; i<maxTouchSoundCount;i++)   angleSound[i]+= twistIncrementPI;
                  
                  let twisteR=(angleSound[id]-initialAngleSound[id])%(2*pi);
                  
