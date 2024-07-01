@@ -290,7 +290,7 @@ if(window.grabStar)
     lastSlip[id] =slip;
 
     window.twist+=twistIncrement;
-   // permanentInitialTwist[id] +=twistIncrement;
+    permanentInitialTwist[id] +=twistIncrement;
 
 }
          if(!window.muteTouchVolume){
@@ -330,14 +330,14 @@ if(window.grabStar)
                      
              
              }
-                 
+                 soundTouchComponent[id]=angleSound[id]
                  let twistFeed;
                  if(!grabStar)
-                 {soundTouchComponent[id]=angleSound[id]
+                 {//soundTouchComponent[id]=angleSound[id]
                      twistFeed = twist;
                  }
                  else {
-                     soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id]+4*pi)%(Math.PI*2.)+initialAngleSound[id];
+                     //soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id]+4*pi)%(Math.PI*2.)+initialAngleSound[id];
 
                      twistFeed= permanentInitialTwist[id]+octavesBoosted[id];
 
