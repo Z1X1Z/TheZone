@@ -227,8 +227,8 @@ function startSound(e){
                     let octaveDistance = 0.00000000000001
                     let octaveShift=0;
                     if(window.radialOctaveBoost) {
-                        octaveDistance = (x*x+y*y)**.5/minimumDimension*17.;
-                        octaveShift=4.;
+                        octaveDistance = (x*x+y*y)**.5/minimumDimension*18.;
+                        octaveShift=3.;
                     }
                     
                     
@@ -366,8 +366,8 @@ if(window.grabStar)
                     let octaveShift = 0;
                      if(window.radialOctaveBoost)
                      {
-                         octaveDistance = (x*x+y*y)**.5/minimumDimension*17.;
-                          octaveShift = 4;
+                         octaveDistance = (x*x+y*y)**.5/minimumDimension*18.;
+                          octaveShift = 3;
 
                      }
                      
