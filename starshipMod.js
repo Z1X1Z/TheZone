@@ -329,7 +329,7 @@ let pushBackCounter = 0;
                           let flatline = 1.;
           const   lightingScaleTrail = 72;//note range for color scheme
                                  const  lightingScaleStar = lightingScaleTrail*2.*2.;//convert 12 to 24 and expand by factor of 2 for a divide between the octaves of the voice (trail) and the hearing (star)
-                                  let note,lastNote;
+                                                  let note=0.,lastNote=0.;
                                     let BlackOrWhiteTrail=.5;//also for star
                                     let BlackOrWhiteNOTE = 1.
                                     let starMajorMinor=.5;
