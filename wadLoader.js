@@ -322,7 +322,6 @@ if(window.grabStar)
                      let oppositeWay = 1
                      if (i==id) angleSound[i]+= twistIncrementPI;
                      else{
-                         oppositeWay=-1;
                              angleSound[i]-=twistIncrementPI;
                              initialAngleSound[i]-=twistIncrementPI
                          }
