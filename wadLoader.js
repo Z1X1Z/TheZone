@@ -326,7 +326,7 @@ if(window.grabStar)
                      if (i==id) angleSound[i]+= twistIncrementPI;
                      else{
                          let slipConstrained =twistIncrementPI;
-                         if(twistIncrementPI>pi)slipConstrained-=2*pi;
+                         if(slipConstrained>pi)slipConstrained-=2*pi;
                              angleSound[i]-=slipConstrained;
                          initialAngleSound[i]-=slipConstrained;
                          
