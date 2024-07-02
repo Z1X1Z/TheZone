@@ -334,10 +334,11 @@ if(window.grabStar)
                      if (lastTwistSign!=signTwist[i]
                          &&(twisteR<pi/2.||twisteR>3./2.*pi)
                          )   octavesBoosted[i]+=24*signTwist[i];
-                     if(firstMotion[id]==true&&i!=id&&signTwist[i]==-1)octavesBoosted[i]-=24;
+                     if(firstMotion[id]==true&&i!=id&&signTwist[id]==1)octavesBoosted[i]-=24;
 
                  }
              }
+                 console.log(signTwist[id])
                  firstMotion[id]=false
                  let twistFeed;
                  if(!grabStar)
