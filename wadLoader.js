@@ -133,6 +133,7 @@ function dilator(currentCoordX, currentCoordY )
 let initialAngleSound = Array(maxTouchSoundCount).fill(0);
 let initialAngle = Array(maxTouchSoundCount);
 let lastSlip  = Array(maxTouchSoundCount).fill(0);
+let hasMoved  = Array(maxTouchSoundCount).fill(false)
 let pressed = false;
 
 
@@ -167,7 +168,7 @@ function startSound(e){
         lastSlip[id] =0;
         octavesBoosted[id]=0
         signTwist[id]=-1.*flip;//"off";
-
+        hasMoved[id]=false;
     }
     
              if((!window.touchMode&&!window.muteVoiceTouchVolume)||(window.touchMode&&!window.muteTouchTouchVolume)){
@@ -326,14 +327,17 @@ if(window.grabStar)
                              angleSound[i]-=twistIncrementPI;
                              initialAngleSound[i]-=twistIncrementPI
                          }
-                     let twisteR=(angleSound[i]-initialAngleSound[i]+4*pi)%(2*pi);
-                     
-                     let   lastTwistSign=signTwist[i]*oppositeWay;
+                     let twisteR=(angleSound[i]-initialAngleSound[i])%(2*pi);
+                    
+                     let   lastTwistSign=signTwist[i];
                      signTwist[i] =Math.sign(twisteR-pi);
-                     if (lastTwistSign!=signTwist[i]
-                         &&(twisteR<pi/2.||twisteR>3./2.*pi)
-                         )   octavesBoosted[i]+=24*signTwist[i];
-                     
+                     if(i==id||hasMoved[id]==true)
+                     {
+                         if (lastTwistSign!=signTwist[i]
+                             &&(twisteR<pi/2.||twisteR>3./2.*pi)
+                             )   octavesBoosted[i]+=24*signTwist[i];
+                     }
+                     hasMoved[id]=true
                  }
              
              }
