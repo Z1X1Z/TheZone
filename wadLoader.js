@@ -283,7 +283,6 @@ function followSound(e){
                         screenPressCoordY[id]=y;
 
                     let twistIncrement=0;
-                    let slip = 0;
 if(window.grabStar)
 {
     let slip = ((-Math.atan2(-x,-y)-initialAngle[id])*flip+8*pi)%(2*pi);
@@ -325,10 +324,10 @@ if(window.grabStar)
                      let oppositeWay = 1
                      if (i==id) angleSound[i]+= twistIncrementPI;
                      else{
-                         let slipConstrained =slip-lastSlip[id];
-                         if(slipConstrained>pi)slipConstrained-=2*pi;
-                             angleSound[i]-=slipConstrained;
-                         initialAngleSound[i]-=slipConstrained;
+                         let slipConstrained =twistIncrementPI;
+                         if(twistIncrementPI>pi)twistIncrementPI-=2*pi;
+                             angleSound[i]-=twistIncrementPI;
+                         initialAngleSound[i]-=twistIncrementPI
                          
                          }
                      let twisteR=(angleSound[i]-initialAngleSound[i])%(2*pi);
