@@ -264,7 +264,7 @@ let   angleSound  = Array(maxTouchSoundCount).fill(0.);
                                              
                                              let signTwist= Array(maxTouchSoundCount);
 
-                                             let lastTwistSign= Array(maxTouchSoundCount);
+                                          //   let lastTwistSign;
 
 function followSound(e){
                     
@@ -325,9 +325,9 @@ if(window.grabStar)
                      
                      let twisteR=(angleSound[i]-initialAngleSound[i])%(2*pi);
                      
-                        lastTwistSign[i]=signTwist[i];
-                     signTwist[i] =Math.sign(twisteR-pi)*oppositeWay;
-                     if (lastTwistSign[i]!=signTwist[i]
+                     let   lastTwistSign=signTwist[i];
+                     signTwist[i] =Math.sign(twisteR-pi);
+                     if (lastTwistSign!=signTwist[i]
                          &&(twisteR<pi/2.||twisteR>3./2.*pi)
                          )   octavesBoosted[i]+=24*signTwist[i];
                      
