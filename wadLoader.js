@@ -324,7 +324,8 @@ if(window.grabStar)
                      else{
                          oppositeWay=-1
                              angleSound[i]-=twistIncrementPI;
-                             initialAngleSound[i]-=twistIncrementPI
+                         initialAngleSound[i]-=twistIncrementPI
+                         permanentInitialTwist[i]-=twistIncrementPI
                          }
                      let twisteR=(angleSound[i]-initialAngleSound[i])%(2*pi);
                      
