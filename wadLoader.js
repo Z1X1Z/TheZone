@@ -318,7 +318,7 @@ if(window.grabStar)
              
              else {
                  
-                 for(var i = 0; i<maxTouchSoundCount;i++) if(id==i) {
+                 for(var i = 0; i<maxTouchSoundCount;i++)  {
                      let oppositeWay = 1
                      if (i==id) angleSound[i]+= twistIncrementPI;
                      else{
@@ -326,14 +326,15 @@ if(window.grabStar)
                              angleSound[i]-=twistIncrementPI;
                              initialAngleSound[i]-=twistIncrementPI
                          }
-                     let twisteR=(angleSound[i]-initialAngleSound[i])%(2*pi);
-                     
-                     let   lastTwistSign=signTwist[i];
-                     signTwist[i] =Math.sign(twisteR-pi);
-                     if (lastTwistSign!=signTwist[i]
-                         &&(twisteR<pi/2.||twisteR>3./2.*pi)
-                         )   octavesBoosted[i]+=24*signTwist[i];
-                     
+                     if(id==i){
+                         let twisteR=(angleSound[i]-initialAngleSound[i])%(2*pi);
+                         
+                         let   lastTwistSign=signTwist[i];
+                         signTwist[i] =Math.sign(twisteR-pi);
+                         if (lastTwistSign!=signTwist[i]
+                             &&(twisteR<pi/2.||twisteR>3./2.*pi)
+                             )   octavesBoosted[i]+=24*signTwist[i];
+                     }
                  }
              
              }
