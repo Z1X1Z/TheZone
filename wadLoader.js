@@ -328,11 +328,11 @@ if(window.grabStar)
                          }
                      let twisteR=(angleSound[i]-initialAngleSound[i])%(2*pi);
                      
-                     let   lastTwistSign=signTwist[i]*oppositeWay;
-                     signTwist[i] =Math.sign(twisteR-pi);
-                     if (lastTwistSign!=signTwist[i]
+                     let   lastTwistSign=signTwist[id];
+                     signTwist[id] =Math.sign(twisteR-pi);
+                     if (lastTwistSign!=signTwist[id]
                          &&(twisteR<pi/2.||twisteR>3./2.*pi)
-                         )   octavesBoosted[i]+=24*signTwist[i];
+                         )   octavesBoosted[i]+=24*signTwist[id];
                      
                  }
              
