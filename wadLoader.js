@@ -188,7 +188,7 @@ function startSound(e){
                 let volume= .5*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
                  if(radialOctaveBoost)volume= pressure*.25;
 
-                initialAngleSound[id] =(-(Math.atan2(-x,-y))*flip+pi*2)%(pi*2.);
+                initialAngleSound[id] =(-(Math.atan2(-x,-y))*flip)%(pi*2.);
                  angleSound[id] =initialAngleSound[id] ;
                  soundTouchComponent[id]=initialAngleSound[id];
 
@@ -283,10 +283,12 @@ function followSound(e){
                         screenPressCoordY[id]=y;
 
                     let twistIncrement=0;
+                    let slip = 0;
 if(window.grabStar)
 {
     let slip = ((-Math.atan2(-x,-y)-initialAngle[id])*flip+8*pi)%(2*pi);
     twistIncrementPI =(slip-lastSlip[id])
+    console.log(twistIncrementPI)
      twistIncrement = twistIncrementPI*(24/2)/pi;
     lastSlip[id] =slip;
 
@@ -323,9 +325,11 @@ if(window.grabStar)
                      let oppositeWay = 1
                      if (i==id) angleSound[i]+= twistIncrementPI;
                      else{
-                         oppositeWay=-1
+                         let slipConstrained =slip-lastSlip[id];
+                         if(slipConstrained>pi)slipConstrained-=2*pi;
                              angleSound[i]-=twistIncrementPI;
-                         //initialAngleSound[i]-=twistIncrementPI
+                         initialAngleSound[i]-=twistIncrementPI
+                         
                          }
                      let twisteR=(angleSound[i]-initialAngleSound[i])%(2*pi);
                      
@@ -343,7 +347,9 @@ if(window.grabStar)
                  {soundTouchComponent[id]=angleSound[id]
                      twistFeed = twist;
                  }
-                 else { soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id]+pi*4.)%(Math.PI*2.)+initialAngleSound[id];
+                 else {
+                     //soundTouchComponent[id]=angleSound[id]
+                     soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id]+pi*4.)%(Math.PI*2.)+initialAngleSound[id];
 
                      twistFeed= permanentInitialTwist[id]+octavesBoosted[id];
 
