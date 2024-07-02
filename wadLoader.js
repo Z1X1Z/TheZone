@@ -329,7 +329,7 @@ if(window.grabStar)
                      signTwist[i] =Math.sign(twisteR-pi);
                      if (lastTwistSign!=signTwist[i]
                          &&(twisteR<pi/2.||twisteR>3./2.*pi)
-                         )   octavesBoosted[i]+=24*signTwist[i]*oppositeWay;
+                         )   octavesBoosted[i]+=24*signTwist[i];
                      
                  }
              
