@@ -320,9 +320,11 @@ if(window.grabStar)
                  
                  for(var i = 0; i<maxTouchSoundCount;i++)  {
                      let oppositeWay = 1
-                     if (i!=id)oppositeWay=-1
-                     angleSound[i]+= twistIncrementPI*oppositeWay;
-                     
+                     if (i==id) angleSound[i]+= twistIncrementPI;
+                     else{
+                             angleSound[i]-=twistIncrementPI;
+                             initialAngleSound[i]-=twistIncrementPI
+                         }
                      let twisteR=(angleSound[i]-initialAngleSound[i])%(2*pi);
                      
                      let   lastTwistSign=signTwist[i];
