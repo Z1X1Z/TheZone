@@ -328,17 +328,15 @@ if(window.grabStar)
                          initialAngleSound[i]-=twistIncrementPI
                          }
                      let twisteR=(angleSound[i]-initialAngleSound[i])%(2*pi);
-                     /*
+                     
                      let   lastTwistSign=signTwist[i];
                      signTwist[i] =Math.sign(twisteR-pi);
                      if (lastTwistSign!=signTwist[i]
                          &&(twisteR<pi/2.||twisteR>3./2.*pi)
                          )   octavesBoosted[i]+=24*signTwist[i];
-                      */
                  }
 
              }
-                 console.log(signTwist[id])
                  firstMotion[id]=false
                  let twistFeed;
                  if(!grabStar)
@@ -349,7 +347,7 @@ if(window.grabStar)
                      soundTouchComponent[id]=angleSound[id]
                    // soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id]+pi*4.)%(Math.PI*2.)+initialAngleSound[id];
 
-                     twistFeed= permanentInitialTwist[id]+octavesBoosted[id];
+                     twistFeed= twist+octavesBoosted[id];
 
                  }
                 let frequency = Math.pow(2.,((((soundTouchComponent[id]*window.flip)/pi/2*12)*window.flip-twistFeed/2.)-1.)/12.
