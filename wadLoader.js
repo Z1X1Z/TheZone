@@ -284,14 +284,6 @@ function followSound(e){
                     let twistIncrement=0;
 if(window.grabStar)
 {
-    let slip = ((-Math.atan2(-x,-y)-initialAngle[id])*flip+8*pi)%(2*pi);
-    twistIncrementPI =(slip-lastSlip[id])
-     twistIncrement = twistIncrementPI*(24/2)/pi;
-    lastSlip[id] =slip;
-
-    window.twist+=twistIncrement;
-    permanentInitialTwist[id] +=twistIncrement;
-
 }
          if(!window.muteTouchVolume){
         
@@ -319,8 +311,20 @@ if(window.grabStar)
              else {
                  
                  for(var i = 0; i<maxTouchSoundCount;i++)  {
+                     
+                     let slip = ((-Math.atan2(-x,-y)-initialAngle[i])*flip+8*pi)%(2*pi);
+                     twistIncrementPI =(slip-lastSlip[i])
+                      twistIncrement = twistIncrementPI*(24/2)/pi;
+                     lastSlip[i] =slip;
+
+                                                         
                      let oppositeWay = 1
-                     if (i==id) angleSound[i]+= twistIncrementPI;
+                    if (i==id)
+                    {
+                          angleSound[i]+= twistIncrementPI;
+                          window.twist+=twistIncrement;
+                          permanentInitialTwist[id] +=twistIncrement;
+                      }
                      else{
                              angleSound[i]-=twistIncrementPI;
                              initialAngleSound[i]-=twistIncrementPI
