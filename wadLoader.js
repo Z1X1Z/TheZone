@@ -331,16 +331,19 @@ if(window.grabStar)
                     
                      let   lastTwistSign=signTwist[i];
                      signTwist[i] =Math.sign(twisteR-pi);
+                     
                      if(i==id||hasMoved[id]==true)
                      {
                          if (lastTwistSign!=signTwist[i]
                              &&(twisteR<pi/2.||twisteR>3./2.*pi)
                              )   octavesBoosted[i]+=24*signTwist[i];
                      }
-                     hasMoved[id]=true
+                     
                  }
              
              }
+                 hasMoved[id]=true
+
                  let twistFeed;
                  if(!grabStar)
                  {soundTouchComponent[id]=angleSound[id]
