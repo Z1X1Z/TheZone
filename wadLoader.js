@@ -166,7 +166,7 @@ function startSound(e){
         initialTwist[id]=twist;
         lastSlip[id] =0;
         octavesBoosted[id]=0
-        signTwist[id]=0;//"off";
+        signTwist[id]=1;//"off";
 
     }
     
