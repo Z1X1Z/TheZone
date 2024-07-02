@@ -331,7 +331,7 @@ if(window.grabStar)
                          initialAngleSound[i]-=slipConstrained;
                          
                          }
-                     let twisteR=(angleSound[i]-initialAngleSound[i])%(2*pi);
+                     let twisteR=angleSound[i]-initialAngleSound[i];
                      
                      let   lastTwistSign=signTwist[i];
                      signTwist[i] =Math.sign(twisteR-pi);
@@ -348,7 +348,6 @@ if(window.grabStar)
                      twistFeed = twist;
                  }
                  else {
-                     //soundTouchComponent[id]=angleSound[id]
                      soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id]+pi*4.)%(Math.PI*2.)+initialAngleSound[id];
 
                      twistFeed= permanentInitialTwist[id]+octavesBoosted[id];
