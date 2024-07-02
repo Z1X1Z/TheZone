@@ -324,17 +324,17 @@ if(window.grabStar)
                      else{
                          oppositeWay=-1
                              angleSound[i]-=twistIncrementPI;
-                             initialAngleSound[i]-=twistIncrementPI
+                         permanentInitialTwist[i]-=twistIncrementPI
                          }
-                     if(id==i){
-                         let twisteR=(angleSound[i]-initialAngleSound[i])%(2*pi);
-                         
-                         let   lastTwistSign=signTwist[i];
-                         signTwist[i] =Math.sign(twisteR-pi);
-                         if (lastTwistSign!=signTwist[i]
-                             &&(twisteR<pi/2.||twisteR>3./2.*pi)
-                             )   octavesBoosted[i]+=24*signTwist[i];
-                     }
+                     
+                     let twisteR=(angleSound[i]-initialAngleSound[i])%(2*pi);
+                     
+                     let   lastTwistSign=signTwist[i];
+                     signTwist[i] =Math.sign(twisteR-pi);
+                     if (lastTwistSign!=signTwist[i]
+                         &&(twisteR<pi/2.||twisteR>3./2.*pi)
+                         )   octavesBoosted[i]+=24*signTwist[i];
+                     
                  }
              
              }
