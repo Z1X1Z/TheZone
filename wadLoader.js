@@ -333,10 +333,9 @@ if(window.grabStar)
                  }
              
              }
-                 soundTouchComponent[id]=angleSound[id]
                  let twistFeed;
                  if(!grabStar)
-                 {//soundTouchComponent[id]=angleSound[id]
+                 {soundTouchComponent[id]=angleSound[id]
                      twistFeed = twist;
                  }
                  else {
