@@ -327,7 +327,7 @@ if(window.grabStar)
                              angleSound[i]-=twistIncrementPI;
                          initialAngleSound[i]-=twistIncrementPI
                          }
-                     let twisteR=(angleSound[i]-initialAngleSound[i])%(2*pi);
+                     let twisteR=(angleSound[i]-initialAngleSound[i]+2*pi)%(2*pi);
                      
                      let   lastTwistSign=signTwist[i];
                      signTwist[i] =Math.sign(twisteR-pi);
