@@ -325,7 +325,7 @@ if(window.grabStar)
                      else{
                          oppositeWay=-1
                              angleSound[i]-=twistIncrementPI;
-                         initialAngleSound[i]-=twistIncrementPI
+                         //initialAngleSound[i]-=twistIncrementPI
                          }
                      let twisteR=(angleSound[i]-initialAngleSound[i])%(2*pi);
                      
@@ -343,11 +343,9 @@ if(window.grabStar)
                  {soundTouchComponent[id]=angleSound[id]
                      twistFeed = twist;
                  }
-                 else {
-                     soundTouchComponent[id]=angleSound[id]
-                   // soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id]+pi*4.)%(Math.PI*2.)+initialAngleSound[id];
+                 else { soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id]+pi*4.)%(Math.PI*2.)+initialAngleSound[id];
 
-                     twistFeed= twist+octavesBoosted[id];
+                     twistFeed= permanentInitialTwist[id]+octavesBoosted[id];
 
                  }
                 let frequency = Math.pow(2.,((((soundTouchComponent[id]*window.flip)/pi/2*12)*window.flip-twistFeed/2.)-1.)/12.
