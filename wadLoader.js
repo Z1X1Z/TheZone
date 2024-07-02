@@ -318,7 +318,7 @@ if(window.grabStar)
              
              else {
                  
-                 for(var i = 0; i<maxTouchSoundCount;i++)  {
+                 for(var i = 0; i<maxTouchSoundCount;i++) if(id==i) {
                      let oppositeWay = 1
                      if (i==id) angleSound[i]+= twistIncrementPI;
                      else{
@@ -338,15 +338,12 @@ if(window.grabStar)
              
              }
                  let twistFeed;
-                 
-                 soundTouchComponent[id]=angleSound[id]
-                 
                  if(!grabStar)
-                 {//soundTouchComponent[id]=angleSound[id]
+                 {soundTouchComponent[id]=angleSound[id]
                      twistFeed = twist;
                  }
                  else {
-                   // soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id])%(Math.PI*2.)+initialAngleSound[id];
+                    soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id]+pi*4.)%(Math.PI*2.)+initialAngleSound[id];
 
                      twistFeed= permanentInitialTwist[id]+octavesBoosted[id];
 
