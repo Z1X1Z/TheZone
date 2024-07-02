@@ -133,6 +133,7 @@ function dilator(currentCoordX, currentCoordY )
 let initialAngleSound = Array(maxTouchSoundCount).fill(0);
 let initialAngle = Array(maxTouchSoundCount);
 let lastSlip  = Array(maxTouchSoundCount).fill(0);
+let firstMotion  = Array(maxTouchSoundCount).fill(true);
 let pressed = false;
 
 
@@ -167,7 +168,7 @@ function startSound(e){
         lastSlip[id] =0;
         octavesBoosted[id]=0
         signTwist[id]=-1.*flip;//"off";
-
+        firstMotion[id]=true;
     }
     
              if((!window.touchMode&&!window.muteVoiceTouchVolume)||(window.touchMode&&!window.muteTouchTouchVolume)){
@@ -327,24 +328,24 @@ if(window.grabStar)
                          initialAngleSound[i]-=twistIncrementPI
                          }
                      let twisteR=(angleSound[i]-initialAngleSound[i])%(2*pi);
-                     if(i==id){
-                         let   lastTwistSign=signTwist[i];
-                         signTwist[i] =Math.sign(twisteR-pi);
-                         if (lastTwistSign!=signTwist[i]
-                             &&(twisteR<pi/2.||twisteR>3./2.*pi)
-                             )   octavesBoosted[i]+=24*signTwist[i];
-                     }
+                     
+                     let   lastTwistSign=signTwist[i];
+                     signTwist[i] =Math.sign(twisteR-pi);
+                     if (lastTwistSign!=signTwist[i]
+                         &&(twisteR<pi/2.||twisteR>3./2.*pi)
+                         )   octavesBoosted[i]+=24*signTwist[i];
+                     if(firstMotion[id]==true&&signTwist[id]==-1)octavesBoosted[i]+=24;
                  }
              
              }
-                 soundTouchComponent[id]=angleSound[id]
+                 firstMotion[id]=false
                  let twistFeed;
                  if(!grabStar)
                  {soundTouchComponent[id]=angleSound[id]
                      twistFeed = twist;
                  }
                  else {
-                  //  soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id]+pi*4.)%(Math.PI*2.)+initialAngleSound[id];
+                    soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id]+pi*4.)%(Math.PI*2.)+initialAngleSound[id];
 
                      twistFeed= permanentInitialTwist[id]+octavesBoosted[id];
 
