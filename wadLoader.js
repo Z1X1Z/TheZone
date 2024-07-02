@@ -166,7 +166,7 @@ function startSound(e){
         initialTwist[id]=twist;
         lastSlip[id] =0;
         octavesBoosted[id]=0
-        signTwist[id]=1;//"off";
+        signTwist[id]=-1.*flip;//"off";
 
     }
     
@@ -322,12 +322,13 @@ if(window.grabStar)
                      let oppositeWay = 1
                      if (i==id) angleSound[i]+= twistIncrementPI;
                      else{
+                         oppositeWay=-1
                              angleSound[i]-=twistIncrementPI;
                              initialAngleSound[i]-=twistIncrementPI
                          }
                      let twisteR=(angleSound[i]-initialAngleSound[i]+4*pi)%(2*pi);
                      
-                     let   lastTwistSign=signTwist[i];
+                     let   lastTwistSign=signTwist[i]*oppositeWay;
                      signTwist[i] =Math.sign(twisteR-pi);
                      if (lastTwistSign!=signTwist[i]
                          &&(twisteR<pi/2.||twisteR>3./2.*pi)
