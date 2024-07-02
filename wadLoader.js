@@ -166,7 +166,7 @@ function startSound(e){
         initialTwist[id]=twist;
         lastSlip[id] =0;
         octavesBoosted[id]=0
-        signTwist[id]=1;//"off";
+        signTwist[id]=-1.*flip;//"off";
 
     }
     
@@ -327,7 +327,7 @@ if(window.grabStar)
                              initialAngleSound[i]-=twistIncrementPI
                          }
                      let twisteR=(angleSound[i]-initialAngleSound[i])%(2*pi);
-                    
+                     
                      let   lastTwistSign=signTwist[i];
                      signTwist[i] =Math.sign(twisteR-pi);
                      if (lastTwistSign!=signTwist[i]
@@ -338,12 +338,15 @@ if(window.grabStar)
              
              }
                  let twistFeed;
+                 
+                 soundTouchComponent[id]=angleSound[id]
+                 
                  if(!grabStar)
-                 {soundTouchComponent[id]=angleSound[id]
+                 {//soundTouchComponent[id]=angleSound[id]
                      twistFeed = twist;
                  }
                  else {
-                    soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id])%(Math.PI*2.)+initialAngleSound[id];
+                   // soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id])%(Math.PI*2.)+initialAngleSound[id];
 
                      twistFeed= permanentInitialTwist[id]+octavesBoosted[id];
 
