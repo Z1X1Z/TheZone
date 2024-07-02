@@ -133,7 +133,6 @@ function dilator(currentCoordX, currentCoordY )
 let initialAngleSound = Array(maxTouchSoundCount).fill(0);
 let initialAngle = Array(maxTouchSoundCount);
 let lastSlip  = Array(maxTouchSoundCount).fill(0);
-let hasMoved  = Array(maxTouchSoundCount).fill(false)
 let pressed = false;
 
 
@@ -167,8 +166,8 @@ function startSound(e){
         initialTwist[id]=twist;
         lastSlip[id] =0;
         octavesBoosted[id]=0
-        signTwist[id]=-1.*flip;//"off";
-        hasMoved[id]=false;
+        signTwist[id]=1;//"off";
+
     }
     
              if((!window.touchMode&&!window.muteVoiceTouchVolume)||(window.touchMode&&!window.muteTouchTouchVolume)){
@@ -331,19 +330,13 @@ if(window.grabStar)
                     
                      let   lastTwistSign=signTwist[i];
                      signTwist[i] =Math.sign(twisteR-pi);
-                     
-                     if(i==id||hasMoved[id]==true)
-                     {
-                         if (lastTwistSign!=signTwist[i]
-                             &&(twisteR<pi/2.||twisteR>3./2.*pi)
-                             )   octavesBoosted[i]+=24*signTwist[i];
-                     }
+                     if (lastTwistSign!=signTwist[i]
+                         &&(twisteR<pi/2.||twisteR>3./2.*pi)
+                         )   octavesBoosted[i]+=24*signTwist[i];
                      
                  }
              
              }
-                 hasMoved[id]=true
-
                  let twistFeed;
                  if(!grabStar)
                  {soundTouchComponent[id]=angleSound[id]
