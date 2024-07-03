@@ -334,9 +334,9 @@ else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (withou
         dstnce = s.length();
 
         var trunc=1.;
-        if(lfc!=0.) trunc = Math.log(zoom/dstnce)/100.;
+        //if(lfc!=0.) trunc = Math.log(zoom/dstnce)/100.;
                                      var base=baseN;
-         if (baseN-2.701002244<.00001)base=(baseN/trunc)*trunc;
+         if (Math.abs(baseN-2.701002244)<.00001)base=(baseN/truncator)*truncator;
          
 s.x=Math.log(Math.abs(s.x))/Math.log(base);
 //traditionally be e or 3 probably 1.5 to 4
