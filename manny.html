@@ -2563,6 +2563,7 @@ vec2 lastS = s;
        hyperCoreBoosted-=dstnce;
        hyperCoreOUTPUT-=dstnce;
        }
+       
        if(clvrVariant9) s+= coordsAltered;
 
         if(clvrVariant7)s+=pcs;
@@ -2594,10 +2595,10 @@ vec2 lastS = s;
    
    
    float trunc=1.;
-   if(lfc!=0.) trunc = log(zoom/dstnce)/100.;
+   //if(lfc!=0.) trunc = log(zoom/dstnce)/100.;
     float base=baseN;
-                      if(baseN-2.701002244<.00001)base=(baseN/trunc)*trunc;
-    
+                           if(abs(baseN-2.701002244)<.00001)base=(baseN/truncator)*truncator;
+
    s.x=log(abs(s.x))/log(base);
    //traditionally be e or 3 probably 1.5 to 4
    dstnce = length(s);
