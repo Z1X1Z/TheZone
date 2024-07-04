@@ -188,7 +188,7 @@ function startSound(e){
                 let volume= .5*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
                  if(radialOctaveBoost)volume= pressure*.25;
 
-                initialAngleSound[id] =(-(Math.atan2(-x,-y))*flip)%(pi*2.);
+                initialAngleSound[id] =(-(Math.atan2(-x,-y))*flip+2*pi)%(pi*2.);//taking out +2*pi brings the seam to the bottom, vice versa to top
                  angleSound[id] =initialAngleSound[id] ;
                  soundTouchComponent[id]=initialAngleSound[id];
 
@@ -236,22 +236,22 @@ function startSound(e){
                     
                     
                     sound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.*2**Math.floor(octaveDistance-octaveShift)
-                        ,volume:cascadeSwitch2*twistTRIANGLEtoSQUARE});
+                        ,volume:cascadeSwitch2});
                     
-                    sound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2**Math.floor(octaveDistance-octaveShift),volume:cascadeSwitch1*twistTRIANGLEtoSQUARE});
+                    sound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2**Math.floor(octaveDistance-octaveShift),volume:cascadeSwitch1});
                     
-                    zound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.*2**Math.ceil(octaveDistance-octaveShift),volume:cascadeSwitch2*twistTRIANGLEtoSQUARE});
+                    zound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.*2**Math.ceil(octaveDistance-octaveShift),volume:cascadeSwitch2});
                     zound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2**Math.ceil(octaveDistance-octaveShift)
-                        ,volume:cascadeSwitch1*twistTRIANGLEtoSQUARE});
+                        ,volume:cascadeSwitch1});
                     
                     xound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.*2**Math.floor(octaveDistance-octaveShift)
-                        ,volume:cascadeSwitch2*twistTRIANGLEtoSQUARE});
+                        ,volume:cascadeSwitch2});
                     
-                    xound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2**Math.floor(octaveDistance-octaveShift),volume:cascadeSwitch1*twistTRIANGLEtoSQUARE});
+                    xound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2**Math.floor(octaveDistance-octaveShift),volume:cascadeSwitch1});
                     
                     tound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.*2**Math.ceil(octaveDistance-octaveShift),volume:cascadeSwitch2*twistTRIANGLEtoSQUARE});
                     tound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2**Math.ceil(octaveDistance-octaveShift)
-                        ,volume:cascadeSwitch1*twistTRIANGLEtoSQUARE});
+                        ,volume:cascadeSwitch1});
 
 
                     }
@@ -391,23 +391,23 @@ if(window.grabStar)
                      
                     sound2[id].setPitch(frequency/2.*2**Math.floor(octaveDistance-octaveShift));
                     sound[id].setPitch(frequency*2**Math.floor(octaveDistance-octaveShift));
-                    sound2[id].setVolume(volumePrime*twistTRIANGLEtoSQUARE);
-                    sound[id].setVolume(volumeTWO*twistTRIANGLEtoSQUARE);
+                    sound2[id].setVolume(volumePrime);
+                    sound[id].setVolume(volumeTWO);
                     
                    zound2[id].setPitch(frequency/2.*2**Math.ceil(octaveDistance-octaveShift));
                     zound[id].setPitch(frequency*2**Math.ceil(octaveDistance-octaveShift));
-                    zound2[id].setVolume(volumePrime*twistTRIANGLEtoSQUARE);
-                    zound[id].setVolume(volumeTWO*twistTRIANGLEtoSQUARE);
+                    zound2[id].setVolume(volumePrime);
+                    zound[id].setVolume(volumeTWO);
                     
                    xound2[id].setPitch(frequency/2.*2**Math.floor(octaveDistance-octaveShift));
                    xound[id].setPitch(frequency*2**Math.floor(octaveDistance-octaveShift));
-                   xound2[id].setVolume(volumePrime*twistTRIANGLEtoSQUARE);
-                   xound[id].setVolume(volumeTWO*twistTRIANGLEtoSQUARE);
+                   xound2[id].setVolume(volumePrime);
+                   xound[id].setVolume(volumeTWO);
                    
                   tound2[id].setPitch(frequency/2.*2**Math.ceil(octaveDistance-octaveShift));
                    tound[id].setPitch(frequency*2**Math.ceil(octaveDistance-octaveShift));
-                   tound2[id].setVolume(volumePrime*twistTRIANGLEtoSQUARE);
-                   tound[id].setVolume(volumeTWO*twistTRIANGLEtoSQUARE);
+                   tound2[id].setVolume(volumePrime);
+                   tound[id].setVolume(volumeTWO);
                    
                 }
         }
