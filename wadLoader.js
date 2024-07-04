@@ -319,15 +319,15 @@ function followSound(e){
                          initialAngleSound[i]=(initialAngleSound[i]-slipConstrained+8*pi)%(2*pi);
                          
                      }
-                     let twisteR=(angleSound[i]-initialAngleSound[i]+8*pi)%(2*pi);
-                         let   lastTwistSign=signTwist[i];
-                         signTwist[i] =Math.sign(twisteR-pi);
-                         if (lastTwistSign!=signTwist[i]
-                             &&(twisteR<pi/2.||twisteR>3./2.*pi)
-                             )   octavesBoosted[i]+=24*signTwist[i];
                      
                  }
-
+                                                     
+                                                     let twisteR=(angleSound[id]-initialAngleSound[id]+8*pi)%(2*pi);
+                                                         let   lastTwistSign=signTwist[id];
+                                                         signTwist[id] =Math.sign(twisteR-pi);
+                                                         if (lastTwistSign!=signTwist[id]
+                                                             &&(twisteR<pi/2.||twisteR>3./2.*pi)
+                                                             )   octavesBoosted[id]+=24*signTwist[id];
              }
                  firstMotion[id]=false
                  let twistFeed;
