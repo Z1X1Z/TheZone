@@ -9,6 +9,8 @@ body
     margin-top: 5%;
     text-indent: 3.4%;
 }
+
+
 .textSHADOW
 {
     
@@ -40,7 +42,7 @@ img{
 
 }
 a {
-  color: purple;
+  color: yellow;
 }
 a:visited {
   color: orange;
