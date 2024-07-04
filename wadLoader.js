@@ -188,7 +188,9 @@ function startSound(e){
                 let volume= .5*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
                  if(radialOctaveBoost)volume= pressure*.25;
 
-                initialAngleSound[id] =-Math.atan2(-x,-y)*flip
+                initialAngleSound[id] =-Math.atan2(-x,-y)*flip+pi
+                 
+                 //console.log(initialAngleSound[id])
                  //try with +2*pi)%(2*pi)+2*pi for seam at top
                  angleSound[id] =initialAngleSound[id] ;
                  soundTouchComponent[id]=initialAngleSound[id];
@@ -349,7 +351,7 @@ if(window.grabStar)
                      twistFeed = twist;
                  }
                  else {
-                     soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id]+pi*8.)%(Math.PI*2.)+initialAngleSound[id];
+                     soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id]+pi*8.)%(2*pi)+initialAngleSound[id];
 
                      twistFeed= permanentInitialTwist[id]+octavesBoosted[id];
 
@@ -357,7 +359,7 @@ if(window.grabStar)
                 let frequency = Math.pow(2.,((((soundTouchComponent[id]*window.flip)/pi/2*12)*window.flip-twistFeed/2.)-1.)/12.
                                                 )*window.ConcertKey;
                                              
-                                            console.log("initial FREQ" + frequency)
+                               console.log("FREQ" + frequency)
                                              
         if(isFinite(frequency)&&frequency>0.&&
            angleSound[id]-initialAngleSound[id]!=0&&typeof sound[id]=="object"){
