@@ -188,7 +188,7 @@ function startSound(e){
                 let volume= .5*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
                  if(radialOctaveBoost)volume= pressure*.25;
 
-                initialAngleSound[id] =(-(Math.atan2(-x,-y))*flip+2*pi)%(pi*2.);//taking out +2*pi brings the seam to the bottom, vice versa to top
+                initialAngleSound[id] =-(Math.atan2(-x,-y))*flip;//using -(Math.atan2(-x,-y))*flip+2*pi)%(2*pi) glues seam to G#
                  angleSound[id] =initialAngleSound[id] ;
                  soundTouchComponent[id]=initialAngleSound[id];
 
