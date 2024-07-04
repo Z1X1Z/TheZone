@@ -1809,32 +1809,32 @@ ret= vec4(clamp(
     }
 
 
-    
-    vec3 heart(vec2 g, vec2 t){
-        g/=gr+1.;
-        //g.x-=.5;
-        g.y*=-1.;
-        t.y*=-1.;
+       vec3 heart(vec2 g, vec2 t){
+            g/=gr+1.;
+            //g.x-=.5;
+            g.y*=-1.;
+            t.y*=-1.;
 
-        vec2 z=g.xy;
-        
-    vec3 h=vec3(0.);
-    const float iterations = 70.;
-        for (float f=0.;f<iterations;f++)if(abs(z.y+z.x)>2.){h=vec3(0.);break;}
-        else {z=vec2(((z.x*z.x-z.y*z.y)-g.x-t.x),(2.0*z.x*z.y-g.y-t.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
-        float plusBlue=0.;
-        float timesForBottom =1.;
-        if(g.x<1.)plusBlue=clamp(.2-z.x-abs(z.y)-z.x*z.y*17.,0.,1.);
-        else timesForBottom=3.;
-        h+=vec3(
-                17.*(z.x*z.y-clamp(z.x,0.,10000.)),
-                2.*(z.x+abs(z.y)),
-                z.y+plusBlue)
-        /length(z)/iterations*2./3.*timesForBottom;//*(1.-length(g));
+            vec2 z=g.xy;
+            
+        vec3 h=vec3(0.);
+        const float iterations = 70.;
+            for (float f=0.;f<iterations;f++)if(abs(z.y+z.x)>2.){h=vec3(0.);break;}
+            else {z=vec2(((z.x*z.x-z.y*z.y)-g.x-t.x),(2.0*z.x*z.y-g.y-t.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
+
+
+            float timesForBottom =1.;
+        if(g.x>.75)     timesForBottom=2.;
+
+            h+=vec3(
+                   (6.*z.x*z.y)-2.*z.x*timesForBottom,
+                    3.*(z.x+abs(z.y)),
+                    z.y*timesForBottom+abs(z.x))
+            /length(z)/iterations*2./3.*timesForBottom;//*(1.-length(g));
+            }
+        return h;
         }
-    return h;
-    }
-                       
+       
                        
                        
                        
@@ -3732,6 +3732,14 @@ vec2 dance = vec2(0.);
                                                                  
                                                                  
                                                                  
+                                                  if(musicAngelMan>0&&Character!=3&&Character!=4)
+                                                                       {
+                                                             float divisor = 1.;
+                                                             if(gameOn)divisor=1.5;
+                                                             AM=faceFORWARD(characterOnTrailP*angelSize,moveDynamic)/divisor;
+                                                         //    mny+=AM;
+                                                             }
+                                           mny=clamp(mny,0.,1.);
                                                                  
                                                                  
                                                                  float heartRate = 1./3.;
@@ -3786,17 +3794,13 @@ vec2 dance = vec2(0.);
                 if(mannyFace.z>0.)heartMultiplier+=mannyFace;
    if(mannyFace.z>0.)heartMultiplier*=mannyFace;
 
-mny+=HEART*heartMultiplier;
+                        vec3 heartWarmed = HEART/2.;
+                        if(HEART.x==0.&&HEART.y==0.&&HEART.z==0.)heartWarmed=AM;
+                        else if(AM.x!=0.)heartWarmed=clamp(AM*HEART+AM/2.,0.,1.);
+                        else heartWarmed=HEART;
+mny+=heartWarmed*heartMultiplier;//+HEART*heartMultiplier;
                            
                            }
-            if(musicAngelMan>0&&Character!=3&&Character!=4)
-                                 {
-                       float divisor = 1.;
-                       if(gameOn)divisor=1.5;
-                       AM=faceFORWARD(characterOnTrailP*angelSize,moveDynamic)/divisor;
-                       mny+=AM;
-                       }
-     mny=clamp(mny,0.,1.);
 
     vec3 ARTICLE=vec3(0.);
                 
