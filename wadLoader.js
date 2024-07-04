@@ -294,7 +294,7 @@ function followSound(e){
                  if(radialOctaveBoost)volume= pressure*.25;
                  let lastAngleSound=angleSound[id];
 
-             if(!window.grabStar) angleSound[id]=(((-Math.atan2(-x,-y)*flip-initialAngleSound[id])*flip+8.*pi)%(2*pi)+initialAngleSound[id]);
+             if(!window.grabStar) angleSound[id]=(((-Math.atan2(-x,-y)*flip-initialAngleSound[id])+8.*pi)%(2*pi)+initialAngleSound[id]);
              
              else {
                  
