@@ -1825,11 +1825,17 @@ ret= vec4(clamp(
                            float timesForBottom =1.;
                        if(g.x>.75)     timesForBottom=2.;
 
-                           h+=vec3(
+                         /*  h+=vec3(
                                   (24.*z.x*z.y)-5.*z.x*timesForBottom,
                                    3.5*(z.x+abs(z.y)*timesForBottom),
                                   (z.y+1.75*abs(z.x)))
-                           /length(z)/iterations*.5;//*(1.-length(g));
+                           /length(z)/iterations*.5;//*(1.-length(g));*/
+                         h+=vec3(
+                                     (6.*z.x*z.y)-2.*z.x*timesForBottom,
+                                      3.*(z.x+abs(z.y)),
+                                      z.y*timesForBottom+abs(z.x))
+                              /length(z)/iterations*2./3.*timesForBottom;//*(1.-length(g));
+                              
                            }
                        return h;
                        }
@@ -3774,7 +3780,7 @@ vec2 dance = vec2(0.);
                                                                        frAMP += texture2D(micIn, vec2(b,0.)).r;
                                                                  }
                                  frAMP*=1.+frAMP;
-     float heartSize =gr*gr*-leaf/(frAMP+volume/2.+.75);//*8.;
+     float heartSize =gr*gr*-leaf/(frAMP+volume/2.+.5);//*8.;
                                  if(frAMP==0.)frAMP=1.;//to prevent cancelling moveDynamic in touchmode
 
      vec2 heartShift = vec2(0);
