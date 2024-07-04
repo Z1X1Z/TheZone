@@ -311,12 +311,12 @@ function followSound(e){
                  permanentInitialTwist[id] +=twistIncrement;
                                                      
                  for(var i = 0; i<maxTouchSoundCount;i++)  {
-                     if (i==id) angleSound[i]= (angleSound[i]+twistIncrementPI+2*pi)%(2*pi);
+                     if (i==id) angleSound[i]= (angleSound[i]+twistIncrementPI+8*pi)%(2*pi);
                      else{
                          let slipConstrained =twistIncrementPI;
                          if(slipConstrained>pi)slipConstrained-=2*pi;
-                         angleSound[i]=(angleSound[i]-slipConstrained+2*pi)%(2*pi);
-                         initialAngleSound[i]=(initialAngleSound[i]-slipConstrained+2*pi)%(2*pi);
+                         angleSound[i]=(angleSound[i]-slipConstrained+8*pi)%(2*pi);
+                         initialAngleSound[i]=(initialAngleSound[i]-slipConstrained+8*pi)%(2*pi);
                          
                      }
                      let twisteR=(angleSound[i]-initialAngleSound[i]+8*pi)%(2*pi);
