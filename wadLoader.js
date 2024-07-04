@@ -351,7 +351,8 @@ if(window.grabStar)
                      twistFeed = twist;
                  }
                  else {
-                     soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id]+pi*8.)%(2*pi)+initialAngleSound[id];
+                     soundTouchComponent[id]=angleSound[id]
+                    // soundTouchComponent[id]=(angleSound[id]-initialAngleSound[id]+pi*8.)%(2*pi)+initialAngleSound[id];
 
                      twistFeed= permanentInitialTwist[id]+octavesBoosted[id];
 
