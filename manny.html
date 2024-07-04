@@ -1857,7 +1857,7 @@ ret= vec4(clamp(
     }
     
       vec3 face(vec2 g, vec2 t){
-            t/=gr;
+            t/=2.5;
 
             
       float l = 1.;
@@ -1876,6 +1876,7 @@ ret= vec4(clamp(
       }
     
       vec3 clouds(vec2 g, vec2 t){
+            t/=2.5;
       float d = 0., negator = 1.;
       vec2 z=g.xy;
       //if(g.x*g.x+g.y*g.y<40.)
@@ -1891,7 +1892,7 @@ ret= vec4(clamp(
       }
 
  vec3 shiny(vec2 p,vec2 t){
-            t/=gr;
+            t/=2.5;
 
      vec2 s = p;
      float l=0., d = 0., negator = 1.;
@@ -1916,7 +1917,7 @@ ret= vec4(clamp(
 
     
 vec3 faceHeights(vec2 g, vec2 t){
-            t/=gr;
+           // t/=gr;
 vec2 n=vec2(0.);
 if(!clvrVariant9)n= coords.yx*1.5;
             
