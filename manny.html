@@ -1808,34 +1808,31 @@ ret= vec4(clamp(
         return ret;
     }
 
+                       vec3 heart(vec2 g, vec2 t){
+                           g/=gr+1.;
+                          // g.x-=.5;
+                           g.y*=-1.;
+                           t.y*=-1.;
 
-       vec3 heart(vec2 g, vec2 t){
-            g/=gr+1.;
-            //g.x-=.5;
-            g.y*=-1.;
-            t.y*=-1.;
-
-            vec2 z=g.xy;
-            
-        vec3 h=vec3(0.);
-        const float iterations = 70.;
-            for (float f=0.;f<iterations;f++)if(abs(z.y+z.x)>2.){h=vec3(0.);break;}
-            else {z=vec2(((z.x*z.x-z.y*z.y)-g.x-t.x),(2.0*z.x*z.y-g.y-t.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
+                           vec2 z=g.xy;
+                           
+                       vec3 h=vec3(0.);
+                       const float iterations = 70.;
+                           for (float f=0.;f<iterations;f++)if(abs(z.y+z.x)>2.){h=vec3(0.);break;}
+                           else {z=vec2(((z.x*z.x-z.y*z.y)-g.x-t.x),(2.0*z.x*z.y-g.y-t.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
 
 
-            float timesForBottom =1.;
-        if(g.x>.75)     timesForBottom=2.;
+                           float timesForBottom =1.;
+                       if(g.x>.75)     timesForBottom=2.;
 
-            h+=vec3(
-                   (6.*z.x*z.y)-2.*z.x*timesForBottom,
-                    3.*(z.x+abs(z.y)),
-                    z.y*timesForBottom+abs(z.x))
-            /length(z)/iterations*2./3.*timesForBottom;//*(1.-length(g));
-            }
-        return h;
-        }
-       
-                       
+                           h+=vec3(
+                                  (24.*z.x*z.y)-5.*z.x*timesForBottom,
+                                   3.5*(z.x+abs(z.y)*timesForBottom),
+                                  (z.y+1.75*abs(z.x)))
+                           /length(z)/iterations*.5;//*(1.-length(g));
+                           }
+                       return h;
+                       }
                        
                        
     vec3 heartsRibs(vec2 g, vec2 t){
@@ -3781,11 +3778,11 @@ vec2 dance = vec2(0.);
                                  if(frAMP==0.)frAMP=1.;//to prevent cancelling moveDynamic in touchmode
 
      vec2 heartShift = vec2(0);
-
+     vec3 HEART = vec3(0.);
     if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                                  else if(Character==2)heartSize=gr;
      if (Character!=9&&Character!=10&&colorCombo!=20&&colorCombo!=17){
-     vec3 HEART = heart(characterPSpunToKey*heartSize+heartShift, moveDynamicSpunToKey/4.*frAMP*heartRate)/gr
+      HEART = heart(characterPSpunToKey*heartSize+heartShift, moveDynamicSpunToKey/4.*frAMP*heartRate)/gr
      //*(1.-length(uVuMinCenterASKEW)/8.)
      ;
      vec3 heartMultiplier = vec3(1.);
@@ -3964,7 +3961,8 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                                     +ARTICLE
                                                     +bridge*(1.-isGrey-pixelShipGrey)//+AM*(1.-isGrey-pixelShipGrey)
                                                     ,1.);
-                       vec3 awayFromTree =  vec3(-(AM.x+AM.y+AM.z)*4.
+                       vec3 awayFromTree =  vec3(-HEART.b*5.
+                                                 -(AM.x+AM.y+AM.z)*4.
                                                  +bigEyes.xyz*largeEyeColor
                                                  -(yourFace.x+yourFace.y+yourFace.z)/256./3.
                         -(ARTICLE.x+ARTICLE.y+ARTICLE.z)*4.
