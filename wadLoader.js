@@ -325,6 +325,7 @@ if(window.grabStar)
              else {
                  
                  for(var i = 0; i<maxTouchSoundCount;i++)  {
+                     let oppositeWay = 1
                      if (i==id) angleSound[i]+= twistIncrementPI;
                      else{
                          let slipConstrained =twistIncrementPI;
@@ -333,15 +334,15 @@ if(window.grabStar)
                          initialAngleSound[i]-=slipConstrained;
                          
                      }
+                     let twisteR=(angleSound[i]-initialAngleSound[i]+2*pi)%(2*pi);
+                     if(abs(twisteR)>.000001){
+                         let   lastTwistSign=signTwist[i];
+                         signTwist[id] =Math.sign(twisteR-pi);
+                         if (lastTwistSign!=signTwist[i]
+                             &&(twisteR<pi/2.||twisteR>3./2.*pi)
+                             )   octavesBoosted[i]+=24*signTwist[i];
+                     }
                  }
-                     let twisteR=(angleSound[id]-initialAngleSound[id]+2*pi)%(2*pi);
-                     
-                     let   lastTwistSign=signTwist[id];
-                    signTwist[id] =Math.sign(twisteR-pi);
-                     if (lastTwistSign!=signTwist[id]
-                         &&(twisteR<pi/2.||twisteR>3./2.*pi)
-                         )   octavesBoosted[id]+=24*signTwist[id];
-                 
 
              }
                  firstMotion[id]=false
