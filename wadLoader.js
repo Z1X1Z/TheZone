@@ -172,18 +172,19 @@ function startSound(e){
     }
     
              if((!window.touchMode&&!window.muteVoiceTouchVolume)||(window.touchMode&&!window.muteTouchTouchVolume)){
+                 /*
                 let twistTRIANGLEtoSQUARE=1.;
                 let twistSQUAREtoTRIANGLE = 1.;
                 let twistZINEtoSAW = 1.;
                 let twistSAWtoZINE = 1.;
-                if(event.twist!=0 && 0==1 )//untested
+                if(event.twist!=0)//untested, unimplemented
                 {
                     twistTRIANGLEtoSQUARE= Math.atan2(y,x)/Math.PI-event.twist/360;
                     twistSQUAREtoTRIANGLE = 1.-twistTRIANGLEtoSQUARE;
                     twistZINEtoSAW= (Math.atan2(y,x)/Math.PI-event.twist/360+.5)%1;
                     twistSAWtoZINE=1.-twistZINEtoSAW;
                 }
-                
+                */
                 
                 let volume= .5*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
                  if(radialOctaveBoost)volume= pressure*.25;
@@ -252,7 +253,7 @@ function startSound(e){
                     
                     xound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2**Math.floor(octaveDistance-octaveShift),volume:cascadeSwitch1});
                     
-                    tound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.*2**Math.ceil(octaveDistance-octaveShift),volume:cascadeSwitch2*twistTRIANGLEtoSQUARE});
+                    tound2[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency/2.*2**Math.ceil(octaveDistance-octaveShift),volume:cascadeSwitch2});
                     tound[id].play({env:{attack: .1, release:.1,hold:-1},pitch:frequency*2**Math.ceil(octaveDistance-octaveShift)
                         ,volume:cascadeSwitch1});
 
@@ -285,35 +286,8 @@ function followSound(e){
                     screenPressCoordX[id]=x;
                         screenPressCoordY[id]=y;
 
-                    let twistIncrement=0;
-                    let twistIncrementPI = 0.;
-if(window.grabStar)
-{
-    let slip = ((-Math.atan2(-x,-y)-initialAngle[id])*flip+8*pi)%(2*pi);
-    twistIncrementPI =(slip-lastSlip[id])
-    console.log(twistIncrementPI)
-     twistIncrement = twistIncrementPI*(24/2)/pi;
-    lastSlip[id] =slip;
-
-    window.twist+=twistIncrement;
-    permanentInitialTwist[id] +=twistIncrement;
-
-}
          if(!window.muteTouchVolume){
         
-        let twistTRIANGLEtoSQUARE=1.;
-        let twistSQUAREtoTRIANGLE = 1.;
-        let twistZINEtoSAW = 1.;
-        let twistSAWtoZINE = 1.;
-        if(event.twist!=0 && 0==1 )
-        {
-            twistTRIANGLEtoSQUARE= Math.atan2(y,x)/Math.PI-event.twist/360;
-            twistSQUAREtoTRIANGLE = 1.-twistTRIANGLEtoSQUARE;
-
-            twistZINEtoSAW= (Math.atan2(y,x)/Math.PI-event.twist/360+.5)%1;
-            twistSAWtoZINE= 1.-twistZINEtoSAW;
-           console.log("testing stylus"+twistZINEtoSAW)//this should get tested
-        }
              if((!window.touchMode&&!window.muteVoiceTouchVolume)||(window.touchMode&&!window.muteTouchTouchVolume))
              {
         let volume= .5*pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
@@ -324,6 +298,18 @@ if(window.grabStar)
              
              else {
                  
+                 let twistIncrement=0;
+                 let twistIncrementPI = 0.;
+
+                 let slip = ((-Math.atan2(-x,-y)-initialAngle[id])*flip+8*pi)%(2*pi);
+                 twistIncrementPI =(slip-lastSlip[id])
+                 console.log(twistIncrementPI)
+                  twistIncrement = twistIncrementPI*(24/2)/pi;
+                 lastSlip[id] =slip;
+
+                 window.twist+=twistIncrement;
+                 permanentInitialTwist[id] +=twistIncrement;
+                                                     
                  for(var i = 0; i<maxTouchSoundCount;i++)  {
                      if (i==id) angleSound[i]= (angleSound[i]+twistIncrementPI+2*pi)%(2*pi);
                      else{
