@@ -2100,9 +2100,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
               increment= (-note)*balloonsONexponential+log(x*24.)/log(pow(2.,1./12.))-.25*balloonsONexponential;
         
                
-                   vec2 dBuffer = d;
-                   if (length(d)==0.)dBuffer=vec2(0.);
-                   if(abs(mod(increment+atan(dBuffer.x,dBuffer.y)+atan(vUvCentered.y,vUvCentered.x)*balloonsONexponential/(2.*PI)+.5,1.))<1./(increment+sizeReset)*280.)
+                   if(abs(mod(increment+atan(vUvCentered.y,vUvCentered.x)*balloonsONexponential/(2.*PI),1.))<1./(increment+sizeReset)*280.)
                           {
                        if(balloonsON!=0.)
                        balloon=hsv2rgb(vec3((mod((4.*balloonsON+bruedCorrection*balloonsON+increment*brelued)*balloonsON+24.,12.))/12.,.5,1.));
