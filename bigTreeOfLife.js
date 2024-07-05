@@ -188,11 +188,19 @@ hyperCore*=equilibriator;
 //  hyperCore-=.441/Math.log(.5)/equilibriator;
 //if(cloverSlide&&wheel)hyperCore+=1.75/Math.log(.5);
    hyperCore-=coreDilation
-   if(clvrVariant4) hyperCore+=0.;//1./(7.*Math.log(.5));
-   else hyperCore-=.5/Math.log(.5);
- if(cloverSlide)hyperCore+=.5/Math.log(.5);
-if(wheel)hyperCore+=.25/Math.log(.5);
+   if(clvrVariant4)
+   {
+    hyperCore-=.5/Math.log(.5);//1./(7.*log(.5));
+    if(cloverSlide)hyperCore+=1./Math.log(.5);
+    //if(wheel)hyperCore-=0./Math.log(.5);
 
+}
+   else {
+    hyperCore-=.5/Math.log(.5);
+    if(cloverSlide)hyperCore+=.5/Math.log(.5);
+    if(wheel)hyperCore-=1./Math.log(.5);
+
+}
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
 if(continuumClover)hyperCore-=.75/Math.log(.5);
 
@@ -333,7 +341,7 @@ else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (withou
 
         dstnce = s.length();
 
-        var trunc=1.;
+        //var trunc=1.;
         //if(lfc!=0.) trunc = Math.log(zoom/dstnce)/100.;
                                      var base=baseN;
          if (Math.abs(baseN-2.701002244)<.00001)base=(baseN/truncator)*truncator;
