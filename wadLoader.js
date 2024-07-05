@@ -355,8 +355,8 @@ function followSound(e){
                                              
                                console.log("FREQ" + frequency)
                                              
-        if(isFinite(frequency)&&frequency>0.&&
-           angleSound[id]-initialAngleSound[id]!=0&&typeof sound[id]=="object"){
+       if(isFinite(frequency)
+          &&typeof sound[id]=="object"){
                     let volumePrime=volume*(soundTouchComponent[id] - initialAngleSound[id])/(2.*pi)
                     
                     ;
