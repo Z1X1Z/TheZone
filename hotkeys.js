@@ -28,7 +28,7 @@ uberDuper:{value:null},
     
         eden:{value: 0},
         spokesVisualizeColors: {value: false    },
-        note:{value: 49.},
+        note:{value: 48.},
         brelued:{value: 1.},
         balloonsON:{value: 0.},
         balloonsONexponential:{value: 0.},
