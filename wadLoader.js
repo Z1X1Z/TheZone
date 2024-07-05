@@ -188,7 +188,8 @@ function startSound(e){
                 
                 let volume= .5*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
                  if(radialOctaveBoost)volume= pressure*.25;
-
+                 volume*=.5;//not sure why this is necessary
+                 
                 initialAngleSound[id] =(-Math.atan2(-x,-y)*flip+2.*pi)%(2*pi)
                  
                  //console.log(initialAngleSound[id])
@@ -229,12 +230,12 @@ function startSound(e){
                          cascadeSwitch1=1*volume
                     }
                     
-                    let octaveDistance = 0.00000000000001
+                    let octaveDistance = 0.
                     let octaveShift=0;
                     if(window.radialOctaveBoost) {
                         octaveDistance = (x*x+y*y)**.5/minimumDimension*18.;
                         octaveShift=3.;
-                        cascadeSwitch2*=(1.-octaveDistance%1);
+                        cascadeSwitch2*=(1.-octaveDistance%1);//seems like it would help, only it doesn't seem to
                         cascadeSwitch1*=octaveDistance%1;
                     }
                     
