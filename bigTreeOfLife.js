@@ -271,6 +271,12 @@ coreBooster=multCrossTwist.length()/Math.log(.5)*lfc;
                                                       
                                                                                   var colorComputationBoost =4.;//increasing number decreases processing and clarity
                                                                                   var baseDelimiter =50.;
+                          var delimiter = baseDelimiter;
+                          if(colorCombo==-1)delimiter=baseDelimiter/colorComputationBoost;
+                          
+                                                       var base=baseN;
+                           if (Math.abs(baseN-2.701002244)<.00001)base=(baseN/truncator)*truncator;
+                           
                           
                           if(dilate){
                             
@@ -279,7 +285,7 @@ coreBooster=multCrossTwist.length()/Math.log(.5)*lfc;
                               hyperCoreBoosted-=dstnceOverLeaf;//maybe times 1.5
                           }
 
-for (var counter=0.;counter<iterations;counter++)if(dstnce<baseDelimiter/colorComputationBoost){
+for (var counter=0.;counter<iterations;counter++)if(dstnce<delimiter/colorComputationBoost){
       
         
 var OmniDynamicPetalShift =omniData[(loops+counter-1.)];
@@ -343,9 +349,6 @@ else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (withou
 
         //var trunc=1.;
         //if(lfc!=0.) trunc = Math.log(zoom/dstnce)/100.;
-                                     var base=baseN;
-         if (Math.abs(baseN-2.701002244)<.00001)base=(baseN/truncator)*truncator;
-         
 s.x=Math.log(Math.abs(s.x))/Math.log(base);
 //traditionally be e or 3 probably 1.5 to 4
 
