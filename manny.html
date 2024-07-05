@@ -2373,10 +2373,19 @@ if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
      
      hyperCore-=coreDilation;
   //  if(cloverSlide&&wheel)hyperCore+=1.75/log(.5);
-   if(clvrVariant4) hyperCore+=0.;//1./(7.*log(.5));
-   else hyperCore-=.5/log(.5);
-  if(cloverSlide)hyperCore+=.5/log(.5);
-  if(wheel)hyperCore-=1./log(.5);
+   if(clvrVariant4)
+   {
+    hyperCore-=.5/log(.5);//1./(7.*log(.5));
+    if(cloverSlide)hyperCore+=1./log(.5);
+    //if(wheel)hyperCore-=0./log(.5);
+
+}
+   else {
+    hyperCore-=.5/log(.5);
+    if(cloverSlide)hyperCore+=.5/log(.5);
+    if(wheel)hyperCore-=1./log(.5);
+
+}
 
    if(multiplicatorNexus)hyperCore-=.5/log(.5);
    if(continuumClover)hyperCore-=.75/log(.5);
@@ -2469,8 +2478,6 @@ if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
                              *4./3./(1./log(3.)+(1.-1./log(3.)  ))/1.75
                              )*log(2.)/log(metaCoreDriveFactor)+loops;
                              */
-                                                         float colorComputationBoost =4.;//increasing number decreases processing and clarity
-                                                         float baseDelimiter =50.;
                              
                              if(dilate){
                                  
@@ -2478,9 +2485,15 @@ if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
                              hyperCoreOUTPUT-=dstnceOverLeaf;//dilate clover shift
                              hyperCoreBoosted-=dstnceOverLeaf;//maybe times 1.5
                              }
-
+                                                           
+                                       float colorComputationBoost =7.;//increasing number decreases processing and clarity
+                                       float baseDelimiter =50.;
+       float delimiter = baseDelimiter;
+       if(colorCombo==-1)delimiter=baseDelimiter/colorComputationBoost;
+                                                           
 if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
-else      for (float counter=0.;counter<iterations;counter++)if(dstnce<baseDelimiter/colorComputationBoost){
+
+else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
 
  
     
@@ -2782,10 +2795,11 @@ hyperCoreOUTPUT--;
                   
 ///if(multiplicatorNexus)s*=colorShift/88.8;
 
-s/=  pow(colorComputationBoost,1./baseDelimiter);
-                                                                       
-                                                                       s.y*= pow(colorComputationBoost,2.);
-                                                                       s.x*= pow(colorComputationBoost,.5);
+                                     if(colorCombo==-1){
+                                                    s/=  pow(colorComputationBoost,1./baseDelimiter);
+                                                   s.y*= pow(colorComputationBoost,2.);
+                                                   s.x*= pow(colorComputationBoost,.5);
+                                                                       }
 colorAccumulator*=colorComputationBoost;
 
 vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
