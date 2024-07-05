@@ -257,7 +257,14 @@ function resetAll(){
                     tound[o].stop()
                     tound2[o].stop()
            }
+                
+
     }
+                                         
+                                         window.screenPressCoordX=Array(maxTouchSoundCount).fill(0);
+                                         window.screenPressCoordY=Array(maxTouchSoundCount).fill(0);
+
+                                         
                                          runningHash = true;
                                          window.number = "";
 
