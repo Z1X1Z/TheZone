@@ -1148,7 +1148,7 @@ function zoomRoutine(){
     if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
     
     ZR = setZoomRate();
-    if (zoom>=.5)
+    if (zoom>=1.)
         zoomOutEngage = false;
     if(!isFinite(ZR))ZR=1;
     if(!zoomOutEngage){
