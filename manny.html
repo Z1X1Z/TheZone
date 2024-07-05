@@ -2498,7 +2498,9 @@ if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
                                        float baseDelimiter =50.;
        float delimiter = baseDelimiter;
        if(colorCombo==-1)delimiter=baseDelimiter/colorComputationBoost;
-                                                           
+                                                           float base=baseN;
+  if(abs(baseN-2.701002244)<.00001)base=(baseN/truncator)*truncator;
+
 if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
@@ -2621,8 +2623,6 @@ vec2 lastS = s;
    
    //float trunc=1.;
    //if(lfc!=0.) trunc = log(zoom/dstnce)/100.;
-    float base=baseN;
-                           if(abs(baseN-2.701002244)<.00001)base=(baseN/truncator)*truncator;
 
    s.x=log(abs(s.x))/log(base);
    //traditionally be e or 3 probably 1.5 to 4
