@@ -39,9 +39,6 @@ const xound2=Array(maxTouchSoundCount);
 const tound=Array(maxTouchSoundCount);
 const tound2=Array(maxTouchSoundCount);
 
-const screenPressCoordX=Array(maxTouchSoundCount).fill(0);
-const screenPressCoordY=Array(maxTouchSoundCount).fill(0);
-
 
 const feedbackPitchsound=Array(5); //updated in starshipMod
 let wadLOADED=false;
@@ -234,7 +231,7 @@ function startSound(e){
                     if(window.radialOctaveBoost) {
                         octaveDistance = (x*x+y*y)**.5/minimumDimension*18.;
                         octaveShift=3.;
-                        cascadeSwitch2*=(1.-octaveDistance%1);//seems like it would help, only it doesn't seem to
+                        cascadeSwitch2*=(1.-octaveDistance%1);
                         cascadeSwitch1*=octaveDistance%1;
                     }
                     
