@@ -2077,28 +2077,38 @@ vec3 faceFORWARD(vec2 p,vec2 t){
     
     
     
+                       
+                                             
     vec3 balloons(vec2 p){
         vec3 balloon=vec3(0.);
         vec2 vUvCentered =vUv-.5;
-        float sizeReset = 120.;
-        if(balloonsONexponential!=-0.)
-           {
-               sizeReset=240.;
-               }
+        float sizeReset = 480.;
+        if (balloonsONexponential!=0.)
+        sizeReset = 960.;
           float x =  length(vUvCentered*resolution/min(resolution.x,resolution.y));
           float increment =0.;
          // vec2 spinningSpiraloon  =  spin2(vUvCentered,time*PI*4.);
          float bruedCorrection =0.;
-         if(balloonsON==-1.&&brelued==-1.)bruedCorrection=3.;//a bit awkward
-         
-          if(balloonsON!=0.) increment =(note*balloonsON*brelued-(-3.+4.*balloonsON)*brelued+bruedCorrection+( 120.+ twistStar) - x*48.*brelued);
+         if(brelued==-1.)
+         {
+             if(balloonsON!=0.)bruedCorrection=1.;//a bit awkward
+             else if (balloonsONexponential!=0.)bruedCorrection=4.;
+             }
+          if(balloonsON!=0.) increment =((-note)*balloonsON//-(-3.+4.*balloonsON)*brelued+bruedCorrection
+                                         +480.  - x*48.);
           else if(balloonsONexponential!=0.)
-              increment= (note+(-4.-3.*balloonsONexponential)*brelued)*brelued*balloonsONexponential+log(twistStar+x*24.)/log(pow(2.,1./12.));
+              increment= (-note)*balloonsONexponential+log(x*24.)/log(pow(2.,1./12.))-.25*balloonsONexponential;
         
                
                    vec2 dBuffer = d;
                    if (length(d)==0.)dBuffer=vec2(0.);
-                   if(abs(mod(increment+atan(dBuffer.x,dBuffer.y)+atan(vUvCentered.x,vUvCentered.y)/(2.*PI)*(balloonsONexponential),1.))<length(1.)/(increment+sizeReset)*60.)balloon=hsv2rgb(vec3((mod((4.-increment)*(balloonsON+balloonsONexponential)+twistStar,12.))/12.,.5,1.));
+                   if(abs(mod(increment+atan(dBuffer.x,dBuffer.y)+atan(vUvCentered.y,vUvCentered.x)*balloonsONexponential/(2.*PI)+.5,1.))<1./(increment+sizeReset)*280.)
+                          {
+                       if(balloonsON!=0.)
+                       balloon=hsv2rgb(vec3((mod((4.*balloonsON+bruedCorrection*balloonsON+increment*brelued)*balloonsON+24.,12.))/12.,.5,1.));
+                       else if(balloonsONexponential!=0.)
+                       balloon=hsv2rgb(vec3((mod((-2.-balloonsONexponential+bruedCorrection+increment*balloonsONexponential)*brelued+24.,12.))/12.,.5,1.));
+                       }
         return balloon;
     }
     
