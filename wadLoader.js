@@ -188,7 +188,6 @@ function startSound(e){
                 
                 let volume= .5*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
                  if(radialOctaveBoost)volume= pressure*.25;
-                 volume*=.5;//not sure why this is necessary
                  
                 initialAngleSound[id] =(-Math.atan2(-x,-y)*flip+2.*pi)%(2*pi)
                  
