@@ -54,8 +54,6 @@ let mobile = false;
 
 
 //key press handling vvvv
-var pointed=false;
-let zoomAtl41=false;//watch for the 1 and the l
 
 
                   var framesLong;
