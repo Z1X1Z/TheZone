@@ -355,14 +355,13 @@ function followSound(e){
                                              
                                console.log("FREQ" + frequency)
                                              
-       if(isFinite(frequency)
-          &&typeof sound[id]=="object"){
-                    let volumePrime=volume*(soundTouchComponent[id] - initialAngleSound[id])/(2.*pi)
-                    
-                    ;
-                    let volumeTWO =volume*(1.-(soundTouchComponent[id]-initialAngleSound[id])/(2.*pi))
-                    
-                    ;
+        if(isFinite(frequency)&&typeof sound[id]=="object"){
+                    let volumePrime=volume*(soundTouchComponent[id] - initialAngleSound[id])/(2.*pi);
+                    let volumeTWO =volume*(1.-(soundTouchComponent[id]-initialAngleSound[id])/(2.*pi));
+/*if (volumePrime==0.)
+volumePrime=.00000000001;
+else if (volumeTWO==0.)
+    volumeTWO=.0000000001*/
                    // console.log("angleSound"+soundTouchComponent[id])
                    // console.log("volumePrime"+volumePrime)
                   //  console.log("volumeTwo"+volumeTWO)
