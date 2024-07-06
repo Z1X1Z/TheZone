@@ -3752,9 +3752,9 @@ vec2 dance = vec2(0.);
   if(largeEyeColor==1.||largeEyeColor==-1.)
                                                                  {
                     if(length(characterOnTrailP)>.25)//for the eyezone on lttle manny, for G and A eyes
-                       bigEyes = clamp(face(characterOnTrailP/3.5*min(resolution.x,resolution.y)/max(resolution.x,resolution.y),moveDynamic/2.),0.,1.);//dimensions seem difficult to manage
+                       bigEyes = clamp(face(characterOnTrailP/3.5*min(resolution.x,resolution.y)/max(resolution.x,resolution.y),moveDynamic*1.5),0.,1.);//dimensions seem difficult to manage
                    }
- else if (largeEyeColor== 3.) bigEyes = clamp(shiny(characterOnTrailP/3.5*min(resolution.x,resolution.y)/max(resolution.x,resolution.y),moveDynamic)/2.,0.,1.);
+ else if (largeEyeColor== 3.) bigEyes = clamp(shiny(characterOnTrailP/3.5*min(resolution.x,resolution.y)/max(resolution.x,resolution.y),moveDynamic*1.5),0.,1.);
                                                                  
                                                                  
                                                                  
