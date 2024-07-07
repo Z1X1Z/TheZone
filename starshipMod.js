@@ -2845,10 +2845,11 @@ for(var n = 0; n<targets.length;n++){
 function calculatePitch ()
 {
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
-
 let tolerance;//(1024-26)/10000
-if(window.highORlow==1)tolerance=-leaf/100.;
-//.02134356 first solid guess//.0214284 easier reaching notes//n*2,n,n*2*2,n*2*2/2,n*2*2*2,n*2*2*2/2
+         if(window.highORlow==1){
+             tolerance=volume*Math.log(volume+.0214284);
+                 }
+//tolerance=.02134356 first solid guess//.0214284 easier reaching notes//n*2,n,n*2*2,n*2*2/2,n*2*2*2,n*2*2*2/2
     else if(window.highORlow==2)tolerance=.49;
 let period;
 let delta = 0.0, runningSum = 0.0;
