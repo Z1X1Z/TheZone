@@ -59,9 +59,9 @@ var lfc = coords.length();//freed(coords).length();
 
 
 var precores = .25/Math.log(.5);
-if (clvrVariant4)precores=0.;
-if(morph!=0.)precores=precores-5./Math.log(.5);
-if(refactorCores!=1.)precores=-.0;
+    if(clvrVariant4&&cloverSlide) precores=precores-1./Math.log(.5);
+    else if(clvrVariant4)precores=0.;
+    if(refactorCores!=1.)precores=-.0;
 
 var cored =0.;
 if(MetaCored)cored= Math.log(zoom)/-Math.log(2.)+precores;
@@ -193,12 +193,15 @@ hyperCore*=equilibriator;
     hyperCore-=.5/Math.log(.5);//1./(7.*log(.5));
     if(cloverSlide)hyperCore+=1./Math.log(.5);
     //if(wheel)hyperCore-=0./Math.log(.5);
+    if(morph!=0.)hyperCore-=2.5/log(.5);
 
 }
    else {
     hyperCore-=.5/Math.log(.5);
     if(cloverSlide)hyperCore+=.5/Math.log(.5);
     if(wheel)hyperCore-=1./Math.log(.5);
+    if(morph!=0.) hyperCore-=5./log(.5);
+
 
 }
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
