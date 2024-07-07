@@ -2394,7 +2394,7 @@ if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
     if(wheel)hyperCore-=1./log(.5);
 
 }
-
+   if(clvrVariant2)hyperCore+=1./log(.5);
    if(multiplicatorNexus)hyperCore-=.5/log(.5);
    if(continuumClover)hyperCore-=.75/log(.5);
 
@@ -2582,6 +2582,7 @@ vec2 lastS = s;
         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
        );
+ 
       // if (mod(counter,5.) == 4.)s =pCenterCored;
        //x**3
        dstnce = length(s);
@@ -2599,11 +2600,20 @@ vec2 lastS = s;
 
         
       if(clvrVariant1)  s*=length(lastS);
-      if(clvrVariant2)s -=zoom/coords.yx;
       if(clvrVariant3)s-=pCenterCored*dstnce;
-      
+      if(clvrVariant2){
+          vec2 cb=coords.yx;
+          vec2 coordClover=vec2(
+                                cb.x*cb.x*cb.x         - 3.*cb.x*cb.y*cb.y,
+              -cb.y*cb.y*cb.y+ 3.*cb.x*cb.x*cb.y
+              );
+          vec2 modifier=coords.xy*coords.yx*(1.-abs(coords.yx))*(1.-abs(coords.xy))/abs(s)/coordClover.yx*coords.y;//*abs(coordClover.x);//coords.xy*coords.yx*(1.-oneOverLeafTruncated);
+          s-=modifier;
+         // hyperCoreBoosted-=length(modifier);
+          }
+                                                
       if(clvrVariant4)   s*=1.-oneOverLeafTruncated;
-      
+    
       if(clvrVariant5) s = vec2(pow(s.x,-2.),pow(s.y,-2.));
       if(clvrVariant6)s=s-lastS.yx;
       if(clvrVariant8) if(length(s)<1.)s+=1.;

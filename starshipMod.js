@@ -1995,7 +1995,7 @@ else{//start drawing of just twenty four frets here
     if(twoOr1){maxTestar=1;minTestar=0;}
     let oddSkew =EldersLeg%2/2;
     let bottomNote = Math.round(-twist+24)%24;
-    let topNote = Math.round(-twist+12)%24;
+    let topNote = Math.round(-twist+60)%24;
 
     let inset = 14;
 let dep = (-starShipDepthInSet+(1.-starShipDepthInSet))/inset-1.+1./inset;
@@ -2016,7 +2016,7 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                     
                 }
                                       const vop = new THREE.Color();
-                      vop.setHSL(((20/24.*EldersLeg*uniforms.brelued.value-g-oddSkew)*uniforms.brelued.value)%EldersLeg/EldersLeg,lengt,starMajorMinor);
+                      vop.setHSL(((20/24.*EldersLeg*uniforms.brelued.value-g)*uniforms.brelued.value)%EldersLeg/EldersLeg,lengt,starMajorMinor);
                                   
                     starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
                     starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,1.)

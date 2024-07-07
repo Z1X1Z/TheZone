@@ -320,10 +320,21 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
 
         
         if(clvrVariant1)  s.multiplyScalar( Math.sqrt(lastS.x*lastS.x+lastS.y*lastS.y));
-        if(clvrVariant2)s.sub(new THREE.Vector2( zoom/coords.y,zoom/coords.x));
         if(clvrVariant3)s.sub(pCenterCored.multiplyScalar( dstnce));
 
-
+        if(clvrVariant2){
+            var cb=new THREE.Vector2(coords.y,coords.x);
+            var coordClover=new THREE.Vector2(
+                                  cb.x*cb.x*cb.x         - 3.*cb.x*cb.y*cb.y,
+                -cb.y*cb.y*cb.y+ 3.*cb.x*cb.x*cb.y
+                );
+          var modifier=  new THREE.Vector2(
+                                           coords.x*coords.y*(1.-Math.abs(coords.y))*(1.-Math.abs(coords.x))/Math.abs(s.x)/coordClover.y*coords.y,
+            coords.y*coords.x*(1.-Math.abs(coords.x))*
+            (1.-Math.abs(coords.y))/Math.abs(s.y)/coordClover.x*coords.y);//*abs(coordClover.x);//coords.xy*coords.yx*(1.-oneOverLeafTruncated);
+            s.sub(modifier);
+           // hyperCoreBoosted-=length(modifier);
+            }
         if(clvrVariant4)  s.multiplyScalar( 1-1/oneOverLeafTruncated);
 
 // if (mod(counter,5.) == 4.)s =pCenterCored;
