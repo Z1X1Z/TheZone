@@ -3541,10 +3541,10 @@ return b+robe(p,t)+legs(p,t/33.3);}
             vec2 manCoord = p-spacing;
             
             
-            return eaglePerched(eagleCoord,vec2(inversion,0.))+body(p+spacing,t)
-          +lion(lionCoord,vec2(inversion,0.))+body(p+vec2(-spacing.x,spacing.y),t)
-          +ox(oxCoord,vec2(inversion,0.))+body(p+vec2(spacing.x,-spacing.y),t)
-          +man(manCoord,vec2(inversion,0.))+body(p-spacing,t)
+            return eaglePerched(eagleCoord,vec2(inversion,0.))+body(eagleCoord,t)
+          +lion(lionCoord,vec2(inversion,0.))+body(lionCoord,t)
+          +ox(oxCoord,vec2(inversion,0.))+body(oxCoord,t)
+          +man(manCoord,vec2(inversion,0.))+body(manCoord,t)
           ;
 }
             vec3 fourCreaturesSmall(vec2 p, vec2 t){
@@ -3554,14 +3554,19 @@ return b+robe(p,t)+legs(p,t/33.3);}
                      // spacing.x+=resolution.x/min(resolution.x,resolution.y)*.15;
                      
                      
-                     vec2 eagleCoord = (p+spacing);
+                     vec2 eagleCoord = p+spacing;
                      vec2 lionCoord = p+vec2(-spacing.x,spacing.y);
                      vec2 oxCoord = p+vec2(spacing.x,-spacing.y);
                      vec2 manCoord = p-spacing;
-                          return eaglePerched(eagleCoord,vec2(inversion,0.))+body(eagleCoord*3.,t)+
-                      lion( spin2(p+vec2(-spacing.x,spacing.y),coz(-time)/4.),vec2(inversion,0.))+body((p+vec2(-spacing.x,spacing.y))*3.,t)+
-                      ox(p+vec2(spacing.x,-spacing.y),vec2(inversion,0.))+body((p+vec2(spacing.x,-spacing.y))*3.,t)+
-                      man(p-spacing,vec2(inversion,0.))+body((p-spacing)*3.,t) ;
+                     vec3 OX =  ox(oxCoord,vec2(inversion,0.));
+                     vec3 MAN = man(manCoord,vec2(inversion,0.));
+                     vec3 EAGLE = eaglePerched(eagleCoord,vec2(inversion,0.));
+                          return
+                      lion(spin2(p+vec2(-spacing.x,spacing.y),coz(-time)/4.),vec2(inversion,0.))
+                            +body((p+vec2(-spacing.x,spacing.y))*3.,t)*2.+
+                     clamp(body(eagleCoord*3.,t)-EAGLE,0.,1.)+EAGLE*2.+
+                     clamp(body(oxCoord*2.5,t)-OX/3.,0.,1.)+OX+
+                      clamp(body(manCoord*2.5,t)-MAN,0.,1.)+MAN ;
           }
 
   //function library: manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin x
