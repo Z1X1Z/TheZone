@@ -621,7 +621,7 @@ function setFFTdependantSizes(){
      inputData = new Float32Array(bufferSize);
       dataArray = new Uint8Array( numberOfBins );
 
-     window.zoomOutRatchetThreshold=1./bufferSize;
+     window.zoomOutRatchetThreshold=bufferSize/4096**2*2;
      
      
       star= new Float32Array(numberOfBins*3);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
