@@ -2848,7 +2848,6 @@ function calculatePitch ()
 let tolerance;//(1024-26)/10000
          if(window.highORlow==1){
              tolerance=totalAMP
-             console.log(tolerance)
                  }
 //.02134356 first solid guess//.0214284 easier reaching notes//n*2,n,n*2*2,n*2*2/2,n*2*2*2,n*2*2*2/2
     else if(window.highORlow==2)tolerance=.49;
