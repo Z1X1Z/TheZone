@@ -2243,7 +2243,7 @@ float lfc = length(freed(coords));
 float precores = .25/log(.5);
 if(clvrVariant4&&cloverSlide) precores=precores-1./log(.5);
 else if(clvrVariant4)precores=0.;
-if(morph!=0.)precores=precores-5./log(.5);
+
 if(refactorCores!=1.)precores=-.0;
 
 float cored =0.;
@@ -2386,14 +2386,17 @@ if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
     hyperCore-=.5/log(.5);//1./(7.*log(.5));
     if(cloverSlide)hyperCore+=1./log(.5);
     //if(wheel)hyperCore-=0./log(.5);
+    if(morph!=0.)hyperCore-=2.5/log(.5);
 
 }
    else {
     hyperCore-=.5/log(.5);
     if(cloverSlide)hyperCore+=.5/log(.5);
     if(wheel)hyperCore-=1./log(.5);
+    if(morph!=0.) hyperCore-=5./log(.5);
 
 }
+   
    if(clvrVariant2)hyperCore+=1./log(.5);
    if(multiplicatorNexus)hyperCore-=.5/log(.5);
    if(continuumClover)hyperCore-=.75/log(.5);
