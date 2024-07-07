@@ -3139,7 +3139,7 @@ return
           }
       
  vec3 ox(vec2 p,vec2 t) {
-    p*=1.25;
+    p*=1.5;
        vec2 s = p;
        float d = 0.0, l=0.;
          float flip=-t.x;
@@ -3565,8 +3565,8 @@ return b+robe(p,t)+legs(p,t/33.3);}
                       lion(spin2(p+vec2(-spacing.x,spacing.y),coz(-time)/4.),vec2(inversion,0.))
                             +body((p+vec2(-spacing.x,spacing.y))*3.,t)*2.+
                      clamp(body(eagleCoord*3.,t)-EAGLE,0.,1.)+EAGLE*2.+
-                     clamp(body(oxCoord*2.5,t)-OX/3.,0.,1.)+OX+
-                      clamp(body(manCoord*2.5,t)-MAN,0.,1.)+MAN ;
+                     clamp(body(oxCoord*3.,t)-OX/3.,0.,1.)+OX+
+                      clamp(body(manCoord*3.,t)-MAN,0.,1.)+MAN ;
           }
 
   //function library: manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin x
