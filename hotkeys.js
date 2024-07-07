@@ -215,7 +215,7 @@ function resetAll(){
 
                                          window.front = 1;
             window.center = false;
-            window.zoomOutRatchetThreshold=bufferSize/4096**2*2;
+            window.zoomOutRatchetThreshold= window.fftSize/4096**2*2;
 
             window.ConcertKey = 440;
 
@@ -227,7 +227,6 @@ function resetAll(){
 
             window.onO = false;
     window.EldersLeg = 24;
-    window.fftSize=2048;
                                          
                                          
                                              if (   window.iOS )window.rez=window.devicePixelRatio/4.;
