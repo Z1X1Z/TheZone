@@ -215,7 +215,7 @@ function resetAll(){
 
                                          window.front = 1;
             window.center = false;
-            window.zoomOutRatchetThreshold=1./fftSize;
+            window.zoomOutRatchetThreshold=bufferSize/4096**2*2;
 
             window.ConcertKey = 440;
 
