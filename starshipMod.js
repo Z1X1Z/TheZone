@@ -2847,7 +2847,7 @@ function calculatePitch ()
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance;//(1024-26)/10000
              if(window.highORlow==1){
-                 let tAScaled=totalAMP*bufferSize/2048;
+                 let tAScaled=totalAMP*fractionOfFrame/bufferSize;
                  tolerance=tAScaled**(1.-tAScaled);
              }
                  
