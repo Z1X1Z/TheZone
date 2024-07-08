@@ -2852,13 +2852,13 @@ let tolerance;//(1024-26)/10000
                  let tAScaledPermanent = tAScaled;
                  tAScaled =(tAScaled!=0)? tAScaled:1;
                  let incrementToleranceFeedback = tAScaled*2048**.5;
-                 let b = 0.;
-                                for(var reps=0; reps<1.;reps+=incrementToleranceFeedback)
-                                { tAScaled=(tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaled))/(2.+tAScaled)
-                                    b++
+                // let b = 0.;
+                                for(var reps=0; reps<.5;reps+=incrementToleranceFeedback)
+                                { tAScaled=(tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaled))/(2.-tAScaledPermanent)
+                           //         b++
                                 }
-                 console.log(b)
-                console.log(tAScaled)
+                // console.log(b)
+              //  console.log(tAScaled)
                                tolerance =tAScaled
                            }
 
