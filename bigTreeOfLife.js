@@ -193,14 +193,14 @@ hyperCore*=equilibriator;
     hyperCore-=.5/Math.log(.5);//1./(7.*log(.5));
     if(cloverSlide)hyperCore+=1./Math.log(.5);
     //if(wheel)hyperCore-=0./Math.log(.5);
-    if(morph!=0.)hyperCore-=2.5/log(.5);
+    if(morph!=0.)hyperCore-=2.5/Math.log(.5);
 
 }
    else {
     hyperCore-=.5/Math.log(.5);
     if(cloverSlide)hyperCore+=.5/Math.log(.5);
     if(wheel)hyperCore-=1./Math.log(.5);
-    if(morph!=0.) hyperCore-=5./log(.5);
+    if(morph!=0.) hyperCore-=5./Math.log(.5);
 
 
 }
