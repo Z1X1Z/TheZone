@@ -6,7 +6,7 @@ const movementRateORIGINAL = 1.5;
 const starshipSize = Math.E**leaf/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
                             const zoomFrames = 60;//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
-                  const mf = gr;//advantage of translation over zoom (right?)
+                  const mf = -(leaf-1)/gr;//advantage of translation over zoom (right?)
 const MR = mf/zoomFrames;
 const secondsToEdge=window.pixelShaderSize/4./pixelShaderToStarshipRATIO;
 
@@ -212,7 +212,7 @@ function resetAll(){
            // if(!window.touchOnlyMode||location.hash.includes("t"))
                                          window.touchMode=false;
             window.volumeSpeed = false;
-
+             window.totalAMP=1;
                                          window.front = 1;
             window.center = false;
             window.zoomOutRatchetThreshold= window.fftSize/4096**2*2;
@@ -645,15 +645,16 @@ function callKey(event){
      } the bass staff doesn't include the lyrics so it's not included
      */
     else  if (key=="a"){
-        EldersLeg=Math.floor(number);
-        let minimumFFTfactor = Math.ceil(Math.log(EldersLeg*12*2)/Math.log(2.));
-        if(minimumFFTfactor<=15){
-            if(minimumFFTfactor>11)//currently a buffersize of 2**11==2048 is required for spirograph
-                fftSize=2**minimumFFTfactor;
-            else
-                fftSize = 2**11
-                }
-        if(!runningHash)setFFTdependantSizes();
+       EldersLeg=Math.round(number)*1.;
+        
+            let minimumFFTfactor = Math.ceil(Math.log(EldersLeg*12*2)/Math.log(2.));
+            if(minimumFFTfactor<=15){
+                if(minimumFFTfactor>11)//currently a buffersize of 2**11==2048 is required for spirograph
+                    fftSize=2**minimumFFTfactor;
+                else
+                    fftSize = 2**11
+                    }
+            if(!runningHash)setFFTdependantSizes();
         
     }
     
