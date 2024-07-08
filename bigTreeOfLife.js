@@ -68,7 +68,7 @@ if(MetaCored)cored= Math.log(zoom)/-Math.log(2.)+precores;
 else cored = centralCores;
 var loops=0.;
 if(cloverSlide)loops=-1.;
-if(refactorCores>1.)
+if(refactorCores>1.||clvrVariant4)
 {
 if(cloverSlide)p.divideScalar( 2.);
 p.divideScalar( 2.);
@@ -113,7 +113,7 @@ loops++;coresIn++;
 else break;
 // if(refactorCores!=1.){s*=(1.+lfc/2.);c*=(1.+lfc/2.);}
 
-if(refactorCores>1.||clvrVariant4){
+if(refactorCores>1.){
 var shift = (1.25+.5*zoom/(zoom+lfc));//centered at 1.5, just a guess really
 s.multiplyScalar(shift);c*=shift;
 }
@@ -578,7 +578,7 @@ window.bigCloverGapSync = false;
     let strideClover=0;
     //if(loopsRun>2) console.log(Number.MAX_VALUE==new THREE.Vector2(Number.MAX_VALUE,0.).x);
     if(loopsRun>1){
-        if(!generated&&dupered&&zoom<zoomCap32)
+        if(!generated&&dupered&&zoom<zoomCap32*coords.length())
         {
             console.log("swapping");
             bigCloverGapSync = true;
