@@ -645,7 +645,7 @@ function callKey(event){
      } the bass staff doesn't include the lyrics so it's not included
      */
     else  if (key=="a"){
-        EldersLeg=Math.round(number)*1.;
+        EldersLeg=Math.floor(number);
         let minimumFFTfactor = Math.ceil(Math.log(EldersLeg*12*2)/Math.log(2.));
         if(minimumFFTfactor<=15){
             if(minimumFFTfactor>11)//currently a buffersize of 2**11==2048 is required for spirograph
