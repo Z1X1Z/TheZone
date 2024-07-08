@@ -328,7 +328,7 @@ radialWarp=b;
 }
 ">
                   <br>
-                  <label for="fretCount">Fruits(max 1365)</label>
+                  <label for="fretCount">Fruits(max 1365)[a]</label>
                   <input type="number" id="fretCount" name="fretCount" class="num" onkeydown="
                           number = document.getElementById('fretCount').value;
                           key  = 'a';
@@ -3831,6 +3831,7 @@ vec2 dance = vec2(0.);
 
      vec2 heartShift = vec2(0);
      vec3 HEART = vec3(0.);
+     vec3 heartWarmed = vec3(0.);
     if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                                  else if(Character==2)heartSize=gr;
      if (Character!=9&&Character!=10&&colorCombo!=20&&colorCombo!=17){
@@ -3843,11 +3844,11 @@ vec2 dance = vec2(0.);
                 if(mannyFace.z>0.)heartMultiplier+=mannyFace;
    if(mannyFace.z>0.)heartMultiplier*=mannyFace;
 
-                        vec3 heartWarmed = HEART/2.;
+                         heartWarmed = HEART/2.;
                         if(HEART.x==0.&&HEART.y==0.&&HEART.z==0.)heartWarmed=AM;
                         else if(AM.x!=0.)heartWarmed=clamp(AM*HEART+AM/2.,0.,1.);
                         else heartWarmed=HEART;
-mny+=heartWarmed*heartMultiplier;//+HEART*heartMultiplier;
+//mny+=heartWarmed*heartMultiplier;//+HEART*heartMultiplier;
                            
                            }
 
@@ -4004,17 +4005,18 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                      -vec4(vec3(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z),0.),0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies = vec4(
-                                           mnyX+ largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
+                                           mnyX+ largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)+
                                           ( hypnoticHarmonicCircles+pillar+icicles.xyz)*(1.-pixelShipGrey*40.)
                                            +yourFace.xyz
-                    +clamp((mny+(-hypnoticHarmonicCircles.x-hypnoticHarmonicCircles.y-hypnoticHarmonicCircles.z)*2.)*starshipMultiplier*(1.-isGrey-pixelShipGrey)
+                    +clamp((mny+(-hypnoticHarmonicCircles.x-hypnoticHarmonicCircles.y-hypnoticHarmonicCircles.z)*2.)*starshipMultiplier
+                        +clamp(heartWarmed+(-ss.x-ss.y-ss.z)*ss.w*1.5,0.,1.)
                         -(ARTICLE.r+ARTICLE.g+ARTICLE.b)
-                           ,0.,1.)
+                           ,0.,1.)*(1.-isGrey-pixelShipGrey)
                                                     +ARTICLE
                                                     +bridge*(1.-isGrey-pixelShipGrey)//+AM*(1.-isGrey-pixelShipGrey)
                                                     ,1.);
-                       vec3 awayFromTree =  vec3(-HEART.b*5.
-                                                 -(AM.x+AM.y+AM.z)*4.
+                       vec3 awayFromTree =  vec3(-HEART.b*5.-(heartWarmed.x+heartWarmed.y+heartWarmed.z)*4.
+                                                 //-(AM.x+AM.y+AM.z)*4.
                                                  +bigEyes.xyz*largeEyeColor
                                                  -(yourFace.x+yourFace.y+yourFace.z)/256./3.
                         -(ARTICLE.x+ARTICLE.y+ARTICLE.z)*4.
