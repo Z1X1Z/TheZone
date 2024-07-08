@@ -52,7 +52,7 @@ largeEyeColor:{value:0.},
 dilate:{value:true},
 
     
-        continuumClover:{value: false    },
+        continuumClover:{value: true    },
         Inherited:{value: true    },
         cloverSlide:{value: false    },
 
