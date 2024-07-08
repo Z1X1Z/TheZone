@@ -207,7 +207,7 @@ function spiral_compress(){
                            //if(Math.abs(note24/2.-60.)<.5){ callibratorArray[n]=255.;console.log(note24);}// test witness in pixel shader, add to setMicInputToPIXEL()
 
                             
-        testar[Math.round(note24*EldersLeg/24.)%EldersLeg] += Math.abs(z[n])*radialWarp;
+       if(EldersLeg!=0.) testar[Math.round(note24*EldersLeg/24.)%EldersLeg] += Math.abs(z[n])*radialWarp;
       testarContinuous[n] = Math.abs(z[n]);
                           mustarD[n] = note24;
                             }
@@ -257,7 +257,7 @@ var pitchCol = Array(trailLength);
             function setTrailSize(){
         
                              trailLength = Math.ceil(zoomFrames*trailSecondsLong);
-                            starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;//base Z value
+                            starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/((trailSecondsLong>0)?trailSecondsLong:1);//base Z value
                               cx =new Float64Array(trailLength).fill(0);//c is the center of the frame moved from the origin
                               cy = new Float64Array(trailLength).fill(0);
                               xPerp= new Float64Array(trailLength).fill(0);//perp is the perpendicular from c
@@ -418,7 +418,7 @@ let pushBackCounter = 0;
                             
         const t =  (note +twist/2)*flip;
                             if(isFinite(t))angle = -(t*radialWarp);
-                            let reversableColor=((uniforms.brelued.value*angle/12./radialWarp)*flip+twist/24.*uniforms.brelued.value+1./3.)%1.;
+                            let reversableColor=((uniforms.brelued.value*angle/12./((radialWarp>0)?radialWarp:1))*flip+twist/24.*uniforms.brelued.value+1./3.)%1.;
              //if(uniforms.brelued.value==-1)reversableColor=.25-reversableColor;
 
                             colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);
@@ -534,7 +534,7 @@ let pushBackCounter = 0;
          yAdjusted= d_y*radius;
              let decrement;
              if(!window.flame)decrement=radius*starshipSize;
-             else decrement=-starshipSize/trailSecondsLong*interpolation*MR;
+             else decrement=-starshipSize/((trailSecondsLong>0)?trailSecondsLong:1)*interpolation*MR;
         if(isFinite(d_x)&&isFinite(d_y)&&on)for(let n = 0; n < trailDepth; n++) if(!trailSegmentExpired[n]&&n!=f-1){
                 cx[n] += xAdjusted;
                 cy[n] += yAdjusted;
@@ -636,7 +636,7 @@ function setFFTdependantSizes(){
       starStreamColors= new Float32Array(starCount*4*6);
      
 
-                                 testar = new Float64Array((EldersLeg>0)?EldersLeg:0);
+                                 testar = new Float64Array((EldersLeg>0.)?EldersLeg:0.);
      
                                   testarContinuous =new Float64Array(starArms);
                                   mustarD =new Float64Array(starArms);
@@ -1081,7 +1081,8 @@ let lastVolume = 1.;
         function setZoomRate(){
         let volumeProcessed =(volume/lastVolume)**.5;//should be volume not volumeBoosted
         if(!isFinite(volumeProcessed))volumeProcessed=1.;
-            return Math.E**(Math.log(.5)/zoomFrames*zoomRate*interpolation*(volumeProcessed));//the square root of volume is to make it grow slower than in d_xy
+           if(zoomRate>0) return Math.E**(Math.log(.5)/zoomFrames*zoomRate*interpolation*(volumeProcessed));//the square root of volume is to make it grow slower than in d_xy
+             else return 1;
         }
                        
                        
@@ -1395,7 +1396,7 @@ function runOSMD (){
         //OSMDUPDATER();
                function executeTouchRegime(){
                    
-                   const coordinator = pixelShaderSize/2./minimumDimension*movementRate;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
+                   let coordinator = pixelShaderSize/2./minimumDimension*movementRate;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
                    xTouch=0;
                    yTouch=0;
                    for(n=0;n<screenPressCoordX.length;n++)
@@ -1417,14 +1418,16 @@ function runOSMD (){
                                 {
                                     ONbypass = true;
                                  
-
-                                     const touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
+                                    let touchMovement=[0,0];
+                                     if(zoomRate!=0) touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
+                                        else touchMovement=[-xTouch/zoomFrames,yTouch/zoomFrames]
                                     if(!window.shouldShowStar||touchOnlyMode)uniforms[ "volume" ].value=1.;
 
                                     uniforms.d.value.x+=xTouch/uniforms[ "volume" ].value;
                                     uniforms.d.value.y+=-yTouch/uniforms[ "volume" ].value;
                                     var spunTouch=touchMovement;
-                                          if(uniforms.carousel.value!=0.)         spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
+                                          if(uniforms.carousel.value!=0.)
+                                              spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                                               coordX+= spunTouch[0];
                                               coordY+= spunTouch[1];
                                     
@@ -2005,16 +2008,24 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                 let incrementation = (EldersLeg%2==0)?g%2:(g+1)%2;
                 //incrementation/=2.;
                incrementation++;
-                let widt = starshipSize/(EldersLeg/24.)**.5/incrementation/2.;
-                if (g==bottomNote&&EldersLeg==24)widt*=2.;
-                else if (g==topNote&&EldersLeg==24)widt*=1.5;
-                let arm =flip*(g*radialWarp+twist*EldersLeg/24.)%EldersLeg/EldersLeg*pi*2.;
-                let lengt = (testar[(g+EldersLeg/2.)%EldersLeg]-minTestar)/(maxTestar-minTestar);
+                let arm =0;
+                let lengt =0;
+                let widt =0;
+                if(EldersLeg!=0.)
+                {
+                    widt= starshipSize/(EldersLeg/24.)**.5/incrementation/2.;
+                    if (g==bottomNote&&EldersLeg==24)widt*=2.;
+                    else if (g==topNote&&EldersLeg==24)widt*=1.5;
+
+                 arm =flip*(g*radialWarp+twist*EldersLeg/24.)%EldersLeg/EldersLeg*pi*2.;
+                 lengt = (testar[(g+EldersLeg/2.)%EldersLeg]-minTestar)/(maxTestar-minTestar);
+                                
                 if(twoOr1) {
                     lengt/=2.**14./EldersLeg;
                     lengt=lengt**.25;
                     
                 }
+                                  }
                                       const vop = new THREE.Color();
                       vop.setHSL(((20/24.*EldersLeg*uniforms.brelued.value-g)*uniforms.brelued.value)%EldersLeg/EldersLeg,lengt,starMajorMinor);
                                   
@@ -2356,7 +2367,7 @@ let s = f;
                  if(!trailSegmentExpired[r]&&timeElapsedSinceRecording<=trailSecondsLong){
                         // timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
                             const zlast = z;
-                     let seg = timeElapsedSinceRecording/trailSecondsLong;
+                     let seg = timeElapsedSinceRecording/((trailSecondsLong>0)?trailSecondsLong:1);
                      if(window.flame)seg*=seg;
                             z = (-1.+seg*.5);
                         //   if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong);
@@ -2592,7 +2603,7 @@ if (!on)neutralizer=0.;
     const ddX= circleX-polygons[n].centerX;
     const ddY= circleY-polygons[n].centerY;
     const distDot = Math.sqrt(ddX*ddX+ddY*ddY);
-if(EldersLeg>0)
+if(EldersLeg>0.)
 {
     if ( triggerDistance<polyRad+dotSize &&polygons[n].exited){
         if (!polygons[n].caught)polygons[n].caught = true;

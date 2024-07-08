@@ -317,7 +317,9 @@ let maxLetterDepth=-1;
                  </p>
             -->
             <label for="ConcertKey">THE A Key Frequency (Should probably be "Concert A" 440 hz):</label>
-           <input type="number" id="ConcertKey" name="ConcertKey" class="num" onkeydown="window.ConcertKey=document.getElementById('ConcertKey').value">
+           <input type="number" id="ConcertKey" name="ConcertKey" class="num" onkeydown="
+           if(document.getElementById('ConcertKey').value!=0)
+                window.ConcertKey=document.getElementById('ConcertKey').value">
                <br>
                <label for="RadialWarp">Magnify rate of the octave, radially by</label>
               <input type="number" id="RadialWarp" name="RadialWarp" class="num" onkeydown="
@@ -3837,17 +3839,19 @@ vec2 dance = vec2(0.);
       HEART = heart(characterPSpunToKey*heartSize+heartShift, moveDynamicSpunToKey/4.*frAMP*heartRate)/gr
      //*(1.-length(uVuMinCenterASKEW)/8.)
      ;
+                    
+                    /*
      vec3 heartMultiplier = vec3(1.);
      heartMultiplier=HEART.xyz+(1.-length(characterPSpunToKey*heartSize));
     if(length(characterPSpunToKey*heartSize)>0.)heartMultiplier=vec3(1.);
                 if(mannyFace.z>0.)heartMultiplier+=mannyFace;
    if(mannyFace.z>0.)heartMultiplier*=mannyFace;
-
+*/
                         vec3 heartWarmed = HEART/2.;
                         if(HEART.x==0.&&HEART.y==0.&&HEART.z==0.)heartWarmed=AM;
                         else if(AM.x!=0.)heartWarmed=clamp(AM*HEART+AM/2.,0.,1.);
                         else heartWarmed=HEART;
-mny+=heartWarmed*heartMultiplier;//+HEART*heartMultiplier;
+mny+=clamp(heartWarmed+(-mny.r-mny.g-mny.b),0.,1.);//+HEART*heartMultiplier;
                            
                            }
 
@@ -4007,7 +4011,8 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                            mnyX+ largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
                                           ( hypnoticHarmonicCircles+pillar+icicles.xyz)*(1.-pixelShipGrey*40.)
                                            +yourFace.xyz
-                    +clamp((mny+(-hypnoticHarmonicCircles.x-hypnoticHarmonicCircles.y-hypnoticHarmonicCircles.z)*2.)*starshipMultiplier*(1.-isGrey-pixelShipGrey)
+                    +clamp((mny-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r)-AM.r-HEART.b*3.,0.,1.)+HEART
+                                      +(-hypnoticHarmonicCircles.x-hypnoticHarmonicCircles.y-hypnoticHarmonicCircles.z)*2.)*starshipMultiplier*(1.-isGrey-pixelShipGrey)
                         -(ARTICLE.r+ARTICLE.g+ARTICLE.b)
                            ,0.,1.)
                                                     +ARTICLE
