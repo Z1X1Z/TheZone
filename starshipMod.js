@@ -2390,7 +2390,7 @@ let s = f;
                          r1=stylus;
                          g1=stylus;
                          b1=stylus;
-                         
+                         transparencyOfTrail=1.
                          
                      }
                      else{
@@ -2854,7 +2854,7 @@ let tolerance;//(1024-26)/10000
                  let incrementToleranceFeedback = tAScaled*2048**.5;
                 // let b = 0.;
                                 for(var reps=0; reps<.5;reps+=incrementToleranceFeedback)
-                                { tAScaled=(tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaled))/(2.-tAScaledPermanent)
+                                { tAScaled=(tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaled))/(2.-tAScaled)
                            //         b++
                                 }
                 // console.log(b)
