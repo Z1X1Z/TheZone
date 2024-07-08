@@ -2847,8 +2847,11 @@ function calculatePitch ()
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance;//(1024-26)/10000
              if(window.highORlow==1){
-                 let tAScaled=(totalAMP*fractionOfFrame/bufferSize);
-                 tolerance=(tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaled))
+                 let proportion= fractionOfFrame/bufferSize;
+                 let tAScaled=totalAMP*proportion;
+                 for(var reps=0; reps<tAScaled;reps+=proportion**1.5) tAScaled=(tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaled))/2.
+            
+                 tolerance =tAScaled*2
              }
                  
 //.02134356(7)  solid guess//.0214284 easier reaching notes//n*2,n,n*2*2,n*2*2/2,n*2*2*2,n*2*2*2/2
