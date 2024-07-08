@@ -12,9 +12,9 @@ let analyser={};
       //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
         navigator.mediaDevices.getUserMedia({
         audio:{
-        autoGainControl: false,
+        autoGainControl: true,
         echoCancellation: true,
-        noiseSuppression:true//https://stackoverflow.com/questions/71978189/lag-when-playing-mic-audio-directly-to-output-using-web-audio-api
+        noiseSuppression:false//https://stackoverflow.com/questions/71978189/lag-when-playing-mic-audio-directly-to-output-using-web-audio-api
         }
         })
       .then((stream) => {
@@ -27,7 +27,7 @@ let analyser={};
       }
       ).catch((err) => {// engage touch only mode
                         console.log("Touch only mode!")
-                        touchOnlyMode=true;
+                        window.touchOnlyMode=true;
                         window.touchMode = true;
                         })
       .finally((err) => {
@@ -48,7 +48,7 @@ if(location.hash.includes("t")&&!location.hash.includes(",t")&&!location.hash.in
     
         document.getElementById( "load message").innerHTML = "";
         console.log("Touch only mode!")
-        touchOnlyMode=true;
+        window.touchOnlyMode=true;
         window.touchMode = true;}
 
 
