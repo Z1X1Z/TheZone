@@ -779,7 +779,7 @@ coreData.fill(coringValue);">
                                 <input type="checkbox" id="Continuum Clover" name="t"  onclick= "
                                     key  = '&';
                                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                 <label for="Continuum Clover">Continuum Clover?![&]</label><br>
+                                 <label for="Continuum Clover">Continuum Clover![&]</label><br>
                                  
                                  <input type="checkbox" id="field Power Boost" name="t"  onclick= "
                                      key  = 'x';
@@ -2417,8 +2417,8 @@ hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if d
 vec2 m=vec2(0.);
 
 float truncator=1.;
-
-if(lfc!=0.) truncator = log(zoom/lfc);//log truncation * factor is not known, may no longer be necesary
+bool truncated = false;
+if(lfc!=0.&&truncated) truncator = log(zoom/lfc);//log truncation * factor is not known, may no longer be necesary
 //Maendel clover
 
 if(wheel)m =  ((pWithoutChiralizer/lfc)
