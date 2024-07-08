@@ -2848,19 +2848,21 @@ function calculatePitch ()
 let tolerance;//(1024-26)/10000
              if(window.highORlow==1){
                  let proportion= fractionOfFrame/bufferSize;
-                 let tAScaled=totalAMP*proportion*2.;
-                // tAScaled =(tAScaled!=0)? tAScaled:1;
+                 let tAScaled=totalAMP*proportion;
+                 let tAScaledPermanent = tAScaled;
+                 tAScaled =(tAScaled!=0)? tAScaled:1;
+                 let incrementToleranceFeedback = tAScaled*2048**.5;
+                 let b = 0.;
+                                for(var reps=0; reps<1.;reps+=incrementToleranceFeedback)
+                                { tAScaled=(tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaled))/(2.+tAScaled)
+                                    b++
+                                }
+                 console.log(b)
+                console.log(tAScaled)
+                               tolerance =tAScaled
+                           }
 
-              // let b = 0;
-                // let incrementToleranceFeedback = 1./2048**.5;
-                 //for(var reps=0; reps<(1.-totalAMP*5.)*20;reps++)
-                 { tAScaled=(tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaled))/(2.)
-                 //    b++
-                 }
-           // console.log(b)
-                 tolerance =tAScaled*2
-             }
-                 
+
 //.02134356(7)  solid guess//.0214284 easier reaching notes//n*2,n,n*2*2,n*2*2/2,n*2*2*2,n*2*2*2/2
     else if(window.highORlow==2)tolerance=.49;
 let period;
