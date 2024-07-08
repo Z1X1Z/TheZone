@@ -2849,8 +2849,15 @@ let tolerance;//(1024-26)/10000
              if(window.highORlow==1){
                  let proportion= fractionOfFrame/bufferSize;
                  let tAScaled=totalAMP*proportion;
-                 for(var reps=0; reps<tAScaled;reps+=proportion**1.5) tAScaled=(tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaled))/2.
-            
+                // tAScaled =(tAScaled!=0)? tAScaled:1;
+
+               let b = 0;
+                 let incrementToleranceFeedback = 1./2048**.5;
+                 for(var reps=0; reps<tAScaled;reps+=incrementToleranceFeedback)
+                 { tAScaled=(tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaled))/(2.+totalAMP)
+                     b++
+                 }
+            console.log(b)
                  tolerance =tAScaled*2
              }
                  
