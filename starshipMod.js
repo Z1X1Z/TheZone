@@ -2851,13 +2851,13 @@ let tolerance;//(1024-26)/10000
                  let tAScaled=totalAMP*proportion;
                 // tAScaled =(tAScaled!=0)? tAScaled:1;
 
-               let b = 0;
+              // let b = 0;
                  let incrementToleranceFeedback = 1./2048**.5;
                  for(var reps=0; reps<tAScaled;reps+=incrementToleranceFeedback)
                  { tAScaled=(tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaled))/(2.+totalAMP)
-                     b++
+                   //  b++
                  }
-            console.log(b)
+           // console.log(b)
                  tolerance =tAScaled*2
              }
                  
