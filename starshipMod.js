@@ -621,7 +621,7 @@ function setFFTdependantSizes(){
      inputData = new Float32Array(bufferSize);
       dataArray = new Uint8Array( numberOfBins );
 
-     window.zoomOutRatchetThreshold=bufferSize/4096**2*2;
+     window.zoomOutRatchetThreshold=1./1024;
      
      
       star= new Float32Array(numberOfBins*3);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
@@ -636,7 +636,7 @@ function setFFTdependantSizes(){
       starStreamColors= new Float32Array(starCount*4*6);
      
 
-                                 testar = new Float64Array((EldersLeg>0.)?EldersLeg:0.);
+                                 testar = new Float64Array((EldersLeg>0)?EldersLeg:0.);
      
                                   testarContinuous =new Float64Array(starArms);
                                   mustarD =new Float64Array(starArms);
@@ -714,12 +714,11 @@ function setFFTdependantSizes(){
                     }
                                            
 function init() {
-             
              colorSound = new THREE.Color();
                   colorSoundPURE =     new THREE.Color();
              colorSound = new THREE.Color();
 
-             setFFTdependantSizes();
+            // setFFTdependantSizes();
              //setTrailSize();
                         uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
            uniforms.resolution.value = new THREE.Vector2(window.innerWidth,window.innerHeight);
@@ -2011,7 +2010,7 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                 let arm =0;
                 let lengt =0;
                 let widt =0;
-                if(EldersLeg!=0.)
+                if(EldersLeg>0.)
                 {
                     widt= starshipSize/(EldersLeg/24.)**.5/incrementation/2.;
                     if (g==bottomNote&&EldersLeg==24)widt*=2.;
