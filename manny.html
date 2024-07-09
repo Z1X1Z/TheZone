@@ -2421,11 +2421,6 @@ bool truncated = false;
 if(lfc!=0.&&truncated) truncator = log(zoom/lfc);//log truncation * factor is not known, may no longer be necesary
 //Maendel clover
 
-if(wheel)m =  ((pWithoutChiralizer/lfc)
-                                         -coords.yx*2.)*abs(coresIn/crs*2.-1.)
-                            *mandelCloverFactor//(1.-1./(leaf/truncator)*truncator)//uncertain term
-
-                            ;
 //this is essentially just p as in the mandelbrot x <== x^2+
 
                             const float iterations = 100.;//loops all escape delimiter so iterations aren't used unless needed
@@ -2459,7 +2454,14 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
             float downSpoke=oneOverLeafTruncated;//1./(((-leaf)*truncator)/truncator)/4.;
                                                            
                                                           vec2 coordsAltered=coords/gr;
-                                                         
+                                                           
+                                                               float variant4Correction=1.;
+                                                               if(clvrVariant4)variant4Correction=(1.-oneOverLeafTruncated);
+                                                           if(wheel)m =  ((pWithoutChiralizer/lfc)
+                                                                                                    -coords.yx*2.*variant4Correction)*abs(coresIn/crs*2.-1.)
+                                                                                       *mandelCloverFactor//(1.-1./(leaf/truncator)*truncator)//uncertain term
+
+                                                                                       ;
        //     float logOfSpoke_Factor = 0.;
        //     if (wheel) logOfSpoke_Factor=log(spoke_factor);
                              
@@ -2727,8 +2729,6 @@ else //if(  0.>=hyperCoreBoosted)
  }
 
    if(continuumClover){//engage continualization
-       float variant4Correction=1.;
-       if(clvrVariant4)variant4Correction=(1.-oneOverLeafTruncated);
        float continuumCore=(continuumCounter+hyperCoreOUTPUT)*zoom/(lfc*variant4Correction-zoom);
        if(loops+counter<=hyperCoreBoosted+continuumCounter) s/=pow(2.,pow(.5,continuumCore));
        hyperCoreBoosted+=continuumCore;
