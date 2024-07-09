@@ -281,14 +281,14 @@ resetAll();
 
 
 let osmdStaffsVisible = 0;
-window.number = "";
+window.number = "no number";
                                          
                                let          hashHasRun = false;
 function readHash(){
         let hashindex = 0;
         while (hashindex<location.hash.length)
         {
-            number=""
+            number="no number"
             let lasthash = hashindex;
             let CTRLorALT = location.hash[hashindex-1]=="."||location.hash[hashindex-1]==","||location.hash[hashindex]=="."||location.hash[hashindex]==",";
             let bibleReaderCode =(location.hash[hashindex-2]=="c"&&location.hash[hashindex-3]==".")
@@ -303,7 +303,7 @@ function readHash(){
                 }
                 
             }
-            number=Number(number);
+           // number=Number(number);
            if(!bibleReaderCode) callKey(new KeyboardEvent('keydown',
                                       {
                 'key': location.hash[lasthash],"keyCode":location.hash.charCodeAt(lasthash),
@@ -367,7 +367,7 @@ function callKey(event){
     
     key = event.key;
 
-    number=Number(number);
+    //number=Number(number);
     if(key=="/"&&!event.shiftKey){  event.preventDefault(); event.stopImmediatePropagation();}
     
     var x=null;
@@ -658,14 +658,14 @@ function callKey(event){
         
     }
     
-    else if (key=="\\"){zoomRate=movementRateORIGINAL; if(number!=""||number===0)
+    else if (key=="\\"){zoomRate=movementRateORIGINAL; if(number!="no number")
         zoomRate=number*1.;}
 
-    else if (key=="/"){if(number!=""||number===0){trailSecondsLong=number*1.;setTrailSize()}}
+    else if (key=="/"){if(number!="no number"){trailSecondsLong=number*1.;setTrailSize()}}
     
     else if (x==0)
     {window.movementRate=movementRateORIGINAL; uniforms[ "rate" ].value=movementRateORIGINAL;
-        if(number!=""||number===0){window.movementRate=number*1.; uniforms[ "rate" ].value=number*1.;};
+        if(number!="no number"){window.movementRate=number*1.; uniforms[ "rate" ].value=number*1.;};
     }
     
     else if (document.activeElement.className=="num");//don't take number hotkey's while menu number selector engaged
@@ -687,7 +687,7 @@ function callKey(event){
     else if (key=="m"){
         
         uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
-        if(number!=""||number===0)uniforms.mandelCloverFactor.value=number;
+        if(number!="no number")uniforms.mandelCloverFactor.value=number;
     }
                 
     else if (key=="M") uniforms[ "NightAndDay" ].value = !uniforms[ "NightAndDay" ].value;
@@ -881,7 +881,7 @@ function callKey(event){
       if(uniforms.free.value) window.zoomCageSize=100000000000000000.;
       else window.zoomCageSize=1.5;
         
-        number="";
+        number="no number";
                 console.log(key)
     }
 
