@@ -222,8 +222,6 @@ var m= new THREE.Vector2(0.,0.);
     var truncated = false;
     if(lfc!=0.&&truncated) truncator = Math.log(zoom/lfc);
 //Maendel clover
-if(wheel)m =  pWithoutChiralizer.clone().sub(new THREE.Vector2(coords.y,coords.x).multiplyScalar(2.))//try signs with for fibonacci ring pairing and movement distortion #syyym
-.multiplyScalar(Math.abs(coresIn/crs*2.-1.)).multiplyScalar(mandelCloverFactor);
                                      
 //this is essentially just p as in the mandelbrot x <== x^2+
 
@@ -249,6 +247,13 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
                            
                            var oneOverLeafTruncated = ((1./leaf)/truncator)*truncator;
            var downSpoke=((1./leaf)/truncator)*truncator;//1./(((-leaf)*truncator)/truncator)/4.;
+                          
+                          var variant4Correction=1.;
+                          if(clvrVariant4)variant4Correction=(1.-oneOverLeafTruncated);
+                          
+                          if(wheel)m =  pWithoutChiralizer.clone().sub(new THREE.Vector2(coords.y,coords.x).multiplyScalar(variant4Correction).multiplyScalar(2.))//try signs with for fibonacci ring pairing and movement distortion #syyym
+                          .multiplyScalar(Math.abs(coresIn/crs*2.-1.)).multiplyScalar(mandelCloverFactor);
+
   // var logOfSpoke_Factor=0.;
                           // if (wheel) logOfSpoke_Factor=Math.log(spoke_factor);
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
@@ -457,8 +462,7 @@ if(spokelover&&counter<hyperCoreBoosted){
 
 
 if(continuumClover){//engage continualization
-    var variant4Correction=1.;
-    if(clvrVariant4)variant4Correction=(1.-oneOverLeafTruncated);
+  
 var continuumCore=(continuumCounter+hyperCoreOUTPUT)*zoom/(lfc*variant4Correction-zoom);
 if(loops+counter<=hyperCoreBoosted+continuumCounter) s.divideScalar( Math.pow(2.,Math.pow(.5,continuumCore)));
 hyperCoreBoosted+=continuumCore;
