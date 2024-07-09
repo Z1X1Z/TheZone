@@ -215,7 +215,7 @@ function resetAll(){
              window.totalAMP=1;
                                          window.front = 1;
             window.center = false;
-            window.zoomOutRatchetThreshold= window.fftSize/4096**2*2;
+            window.zoomOutRatchetThreshold= 1./1024;
 
             window.ConcertKey = 440;
 
@@ -267,7 +267,7 @@ function resetAll(){
 
                                          
                                          runningHash = true;
-                                         window.number = "";
+                                         window.number = "no number";
 
                                        if(window.settingsSet)  readHash()
                                          
@@ -288,7 +288,7 @@ function readHash(){
         let hashindex = 0;
         while (hashindex<location.hash.length)
         {
-            number="no number"
+            number=""
             let lasthash = hashindex;
             let CTRLorALT = location.hash[hashindex-1]=="."||location.hash[hashindex-1]==","||location.hash[hashindex]=="."||location.hash[hashindex]==",";
             let bibleReaderCode =(location.hash[hashindex-2]=="c"&&location.hash[hashindex-3]==".")
@@ -303,6 +303,7 @@ function readHash(){
                 }
                 
             }
+            if(number=="")number = "no number"
            // number=Number(number);
            if(!bibleReaderCode) callKey(new KeyboardEvent('keydown',
                                       {
@@ -366,7 +367,6 @@ function callKey(event){
                                                                );
     
     key = event.key;
-
     //number=Number(number);
     if(key=="/"&&!event.shiftKey){  event.preventDefault(); event.stopImmediatePropagation();}
     
@@ -654,7 +654,8 @@ function callKey(event){
                 else
                     fftSize = 2**11
                     }
-            if(!runningHash)setFFTdependantSizes();
+            if(!runningHash)
+                setFFTdependantSizes();
         
     }
     
@@ -882,7 +883,6 @@ function callKey(event){
       else window.zoomCageSize=1.5;
         
         number="no number";
-                console.log(key)
     }
 
 
