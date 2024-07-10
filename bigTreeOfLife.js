@@ -191,7 +191,7 @@ hyperCore*=equilibriator;
    if(clvrVariant4)
    {
    // hyperCore-=.5/Math.log(.5);//1./(7.*log(.5));
-    if(cloverSlide)hyperCore+=.5/Math.log(.5);
+    if(cloverSlide)hyperCore+=1./Math.log(.5);
     if(wheel)hyperCore-=1./Math.log(.5);
     if(morph!=0.)hyperCore-=5./Math.log(.5);
 
@@ -525,23 +525,23 @@ if (cloverSlide)
 if((i)>hyperCoreBoosted)
 {
 var b = dstnce;
-loops-=b;
-hyperCoreBoosted+=b;
-    hyperCoreOUTPUT+=b;
+//loops-=b;
+//hyperCoreBoosted+=b;
+//    hyperCoreOUTPUT+=b;
 
 }
 else{
-var b =dstnce/4.;//may not be core stable
-loops-=b;
-hyperCoreBoosted+=b;
-    hyperCoreOUTPUT+=b;
+//var b =dstnce/4.;//may not be core stable
+//loops-=b;
+//hyperCoreBoosted+=b;//doesn't work with duper core
+ //   hyperCoreOUTPUT+=b;//doesn't work with duper core
 
 }
     /*
 
     var b =-dstnce;
-    loops-=b;
-    hyperCoreBoosted+=b;
+    loops-=b;//doesn't work with duper core
+    hyperCoreBoosted+=b;//doesn't work with duper core
    */
 }
 
@@ -650,7 +650,14 @@ window.bigCloverGapSync = false;
         }else{
             let tree=tol(  new THREE.Vector2(0,0), new THREE.Vector2(0,0) );
             
-            
+            let duperDepth = 2**4;
+                            if(dupered&&zoom<zoomCap32*coords.length()&&zoom<lastDuper/duperDepth)
+                            {   lastDuper = zoom
+                                generated = false;
+                            }
+                            else if(dupered&&zoom>zoomCap32*coords.length())
+                                lastDuper=zoom*duperDepth
+                                    
      
             let coreImplosion = Math.abs(Math.floor(coreTriggered)-Math.floor(tree.z));
             
@@ -669,7 +676,7 @@ window.bigCloverGapSync = false;
                 
             //    console.log(Math.round(tree.z)-tree.z)
 
-                if(dupered&&zoom<zoomCap32*coords.length()) generated = false;
+                        
                 coreTriggered=tree.z;
                 if(window.haptic2){
                     let vibrateArrayNew=[];
@@ -693,3 +700,4 @@ window.bigCloverGapSync = false;
    // console.log(b)
 }
 
+let lastDuper = 1;
