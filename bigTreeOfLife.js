@@ -1,6 +1,7 @@
 var shaderScale,dilate, coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals
-,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9;
+,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited;
 function setUniformsToPlainName(){
+    inherited=uniforms.Inherited.value;
     clvrVariant1=uniforms.clvrVariant1.value;
     clvrVariant2=uniforms.clvrVariant2.value;
     clvrVariant3=uniforms.clvrVariant3.value;
@@ -53,7 +54,7 @@ function tol( j,  t){
     p = p.clone().multiplyScalar(zoom).add(new THREE.Vector2(-coords.y,-coords.x));
 
     var pWithoutChiralizer = p.clone();
-if(chirality==-1){p=new THREE.Vector2(p.y,p.x);}
+if(chirality==-1&&Inherited){p=new THREE.Vector2(p.y,p.x);}
 var lfc = coords.length();//freed(coords).length();
 
 
@@ -190,7 +191,7 @@ hyperCore*=equilibriator;
    hyperCore-=coreDilation
    if(clvrVariant4)
    {
-    hyperCore-=.5/Math.log(.5);//1./(7.*log(.5));
+   // hyperCore-=.5/Math.log(.5);//1./(7.*log(.5));
     if(cloverSlide)hyperCore+=1./Math.log(.5);
     //if(wheel)hyperCore-=0./Math.log(.5);
     if(morph!=0.)hyperCore-=2.5/Math.log(.5);
