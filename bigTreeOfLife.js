@@ -1,7 +1,7 @@
 var shaderScale,dilate, coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals
 ,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited;
 function setUniformsToPlainName(){
-    inherited=uniforms.Inherited.value;
+    Inherited=uniforms.Inherited.value;
     clvrVariant1=uniforms.clvrVariant1.value;
     clvrVariant2=uniforms.clvrVariant2.value;
     clvrVariant3=uniforms.clvrVariant3.value;
@@ -54,7 +54,7 @@ function tol( j,  t){
     p = p.clone().multiplyScalar(zoom).add(new THREE.Vector2(-coords.y,-coords.x));
 
     var pWithoutChiralizer = p.clone();
-if(chirality==-1&&Inherited){p=new THREE.Vector2(p.y,p.x);}
+if(chirality==-1){p=new THREE.Vector2(p.y,p.x);}
 var lfc = coords.length();//freed(coords).length();
 
 
@@ -80,7 +80,7 @@ var s= p.clone();
 var c = s.length();
 
 var coresIn = 0.;
-var crs = 59.;//this is the mandelbrot and original inheritance colormode core range
+var crs = 57.;//this is the mandelbrot and original inheritance colormode core range
 // if(c>4./3.){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
 var centerslide = 0.;
 
@@ -105,7 +105,7 @@ centerslide-=c/4.;
 else if()        centerslide-=c*2.;
 
 */
-centerslide-=c/1.5;
+centerslide-=c/2.;
 
 }
 
@@ -127,15 +127,14 @@ var powerBoost =2.71828*(Math.log(.5)/c);
 s.multiplyScalar( Math.pow(c,powerBoost));
 }
 
-coresIn+=60.+upCoreCycler;
+coresIn+=upCoreCycler;
 //  else if(zoom>1.)for(int i=0;i<int(crs); i++)if(c>4./3.&&loops<-cored){s/=2.;c/=2.;loops++;coresIn++;}else break;//UpCore not in use here, but rather in the starshipMod
 //for(int i=0;i<int(crs); i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
 
 if(SPHEREofTheLORD)s.multiplyScalar( (s.length()-zoom/lfc/2.));
 
 if(squareClover)s.divide( new THREE.Vector2(Math.sqrt(2.-s.x*s.x),Math.sqrt(2.-s.y*s.y)).divide(s));
-
-
+    var dstnce = s.length();//"distance" may be reserved keyword
   var  pCenterCored = s.clone();
 
 
@@ -192,19 +191,21 @@ hyperCore*=equilibriator;
    if(clvrVariant4)
    {
    // hyperCore-=.5/Math.log(.5);//1./(7.*log(.5));
-    if(cloverSlide)hyperCore+=1./Math.log(.5);
-    //if(wheel)hyperCore-=0./Math.log(.5);
-    if(morph!=0.)hyperCore-=2.5/Math.log(.5);
+    if(cloverSlide)hyperCore+=.5/Math.log(.5);
+    if(wheel)hyperCore-=1./Math.log(.5);
+    if(morph!=0.)hyperCore-=5./Math.log(.5);
 
 }
    else {
-    hyperCore-=.5/Math.log(.5);
+   // hyperCore-=.5/Math.log(.5);
     if(cloverSlide)hyperCore+=.5/Math.log(.5);
     if(wheel)hyperCore-=1./Math.log(.5);
     if(morph!=0.) hyperCore-=5./Math.log(.5);
 
 
 }
+   
+if(clvrVariant2)hyperCore+=1./log(.5);
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
 if(continuumClover)hyperCore-=.75/Math.log(.5);
 
@@ -233,11 +234,12 @@ var continuumCounter=0.;
 
 var minToMax=Math.min(resolution.x,resolution.y)/Math.max(resolution.x,resolution.y);
 
-var dstnce = s.length();//"distance" may be reserved keyword
 //t.multiplyScalar(.74);
 var coreBooster=0.;
-var metaCoreDriveFactor =(((1.-leaf)**.5/truncator)*truncator)**2./gr;//.324717.... number of places changes appearance
-var spoke_factor =metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator);//metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator)
+var metaCoreDriveFactor =(((1.-leaf)/truncator)*truncator)/gr;//.324717.... number of places changes appearance
+                           var twoGRthreeLeaf=(((-2.*gr-3.*leaf)/truncator)*truncator);
+
+var spoke_factor =metaCoreDriveFactor*twoGRthreeLeaf;//metaCoreDriveFactor*(((-2.*gr-3.*leaf)/truncator)*truncator)
 //var grOverLeaf=-((gr/leaf)/truncator)*truncator;//uncertain term
                            var grPlusOneOverLeaf=(((1.+gr)/(-leaf))/truncator)*truncator;
                           
@@ -247,7 +249,7 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
                                                   var upSpoke=spoke_factorLarge;//grPlusOneOverLeaf/-Math.pow(spoke_factor/-leaf,-leaf-1.);//1.5/Math.sqrt(spoke_factor);
                            
                            var oneOverLeafTruncated = ((1./leaf)/truncator)*truncator;
-           var downSpoke=((1./leaf)/truncator)*truncator;//1./(((-leaf)*truncator)/truncator)/4.;
+           var downSpoke=oneOverLeafTruncated;//1./(((-leaf)*truncator)/truncator)/4.;
                           
                           var variant4Correction=1.;
                           if(clvrVariant4)variant4Correction=(1.-oneOverLeafTruncated);
@@ -261,10 +263,10 @@ var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
                            hyperCoreOUTPUT-=(6.+petals)/6.-1.;
 
 var hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
-                          hyperCoreBoosted-=(6.+petals)/6.-1.;//upcore for higher omniclover counts
-                      var    initialHyperCoreBoosted=hyperCoreBoosted;
+              //            hyperCoreBoosted-=(6.+petals)/6.-1.;//upcore for higher omniclover counts
+                                                       
                            var multCrossTwist=new THREE.Vector2(0.,0.);
-if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
+if(multiplicatorNexus&&dstnce!=0)//doesn't seem to upcore spokes like intended
 {
     let spunMCT=spin2(s,Math.atan(s.x,s.y)*1.5*petals/(6.+petals))*Math.sign(.5-morph)//*equilibriator/CORE_DELIMITER
         /dstnce;
@@ -280,35 +282,44 @@ coreBooster=multCrossTwist.length()/Math.log(.5)*lfc;
 
                                                       
                                                                                   var colorComputationBoost =4.;//increasing number decreases processing and clarity
-                                                                                  var baseDelimiter =50.;
-                          var delimiter = baseDelimiter;
-                          if(colorCombo==-1)delimiter=baseDelimiter/colorComputationBoost;
+                                                                                  
                           
-                                                       var base=baseN;
-                           if (Math.abs(baseN-2.701002244)<.00001)base=(baseN/truncator)*truncator;
-                           
-                          
+                          dstnce=s.length();
                           if(dilate){
                             
-                              var dstnceOverLeaf =dstnce;// /leaf;
-                              hyperCoreOUTPUT-=dstnceOverLeaf;//dilate clover shift
-                              hyperCoreBoosted-=dstnceOverLeaf;//maybe times 1.5
+                              hyperCoreOUTPUT-=dstnce;//dilate clover shift
+                              hyperCoreBoosted-=dstnce;//maybe times 1.5
                           }
-let loopSolid = -1
+                                                       
+                          var    initialHyperCoreBoosted=hyperCoreBoosted;
+                          //var lengthP = p.length(p);
+
+
+let loopSolid = 0.
                           let runTimes = 0;
                           
-for (var counter=0.;counter<iterations;counter++)if(dstnce<delimiter/colorComputationBoost){
-  /*  if( loopSolid>hyperCoreBoosted)
+                          var colorComputationBoost =7.;//increasing number decreases processing and clarity
+                          var baseDelimiter =50.;
+                          var delimiter = baseDelimiter;
+                          if(colorCombo==-1&&Inherited)delimiter=baseDelimiter/colorComputationBoost;
+          
+                          var base=baseN;
+                //    if(Math.abs(baseN-2.701002244)<.00001)base=(baseN/truncator)*truncator;
+                        //  dstnce=s.length();
+
+
+for (var counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
+   /*
+    if( loopSolid>=hyperCoreBoosted+1)
     {runTimes++
         console.log(runTimes)
     }
-    loopSolid++
-*/
+    */
 var OmniDynamicPetalShift =omniData[(loops+counter-1.)];
 var OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
 
 var  CORE_DELIMITER=coreData[Math.floor(loops+counter)];
-
+  
 //if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
 
 // if(!true&&morph<.5)CORE_DELIMITER=1./dstnce*pow(2.,4./12.)*equilibriator;
@@ -327,10 +338,12 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
 );
     
         dstnce = s.length();
+    
         if(cored>0.){//this is to allow top level core freeze for original clover
             hyperCoreBoosted-=dstnce;
             hyperCoreOUTPUT-=dstnce;
         }
+
         if(clvrVariant9)  s=new THREE.Vector2(s.x+coords.y/gr,s.y+coords.x/gr);
         if(clvrVariant7)s.add(pcs);
 
@@ -351,7 +364,7 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
             s.sub(modifier);
            // hyperCoreBoosted-=length(modifier);
             }
-        if(clvrVariant4)  s.multiplyScalar( 1-1/oneOverLeafTruncated);
+        if(clvrVariant4)  s.multiplyScalar( 1.-oneOverLeafTruncated);
 
 // if (mod(counter,5.) == 4.)s =pCenterCored;
 //x**3
@@ -362,29 +375,31 @@ if(clvrVariant8) if(Math.sqrt(s.x*s.x+s.y*s.y)<1.)s.addScalar( 1.);
 
 //if(dotted)s/=dot(-m,t)*dot(m,-t);
 
-   
+   /*
 if(morph!=0.&&!wheel)s.sub(t);
 else {
     let y = t.clone().sub(m);
     s.add(y);
 }
+    */
  
 if(Clovoid)s.x=(Math.sqrt(2.*Math.abs(1./s.x)));//this is the body steps on the clover
 else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only
 
-        dstnce = s.length();
+       // dstnce = s.length();
 
         //var trunc=1.;
         //if(lfc!=0.) trunc = Math.log(zoom/dstnce)/100.;
 s.x=Math.log(Math.abs(s.x))/Math.log(base);
 //traditionally be e or 3 probably 1.5 to 4
+    dstnce = s.length();
 
         if(Spoker){
-            if(morph==0.){
-                dstnce = s.length();
+          //  if(morph==0.)
+            {
                
                 if(//(!wheel &&
-                   Math.sqrt(dstnce)*dstnce<=hyperCoreBoosted//)||(wheel&&1.<=hyperCoreBoosted)
+                   dstnce*Math.sqrt(dstnce)<=hyperCoreBoosted//)||(wheel&&1.<=hyperCoreBoosted)
                     )
                 {
                    /* if(wheel){
@@ -394,15 +409,15 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
                         
                         hyperCoreBoosted-=logOfSpoke_Factor;
                     }
-                    else
-                    */{
+                    else{
+                    */
                         
                         s.divideScalar(spoke_factorLarge);//engage spokelover s/=2.+'superspokes'
                         
                         hyperCoreOUTPUT-=downSpoke;
                         
                         hyperCoreBoosted-=downSpoke;
-                    }
+                   // }
                 }
                 else  {
                     /*
@@ -411,20 +426,20 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
                         hyperCoreBoosted+=logOfSpoke_Factor;
                     }
                     else*/
-                     {
+                 //    {
                   //      var correctionSpoke =Math.pow(upSpoke/dstnce,grOverLeaf);
 
                         hyperCoreOUTPUT+=upSpoke;
                         hyperCoreBoosted+=upSpoke;
-                    }
+                 //   }
                 }
             }
-            else
-            {
+        //    else
+         //   {
              //   hyperCoreOUTPUT-=spoke_factor;
                 
               //  hyperCoreBoosted-=spoke_factor;
-            }
+        //    }
             
         }
         dstnce=s.length();
@@ -444,8 +459,8 @@ var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpo
                 if(!wheel)
                 {
                     
-                    hyperCoreOUTPUT-=spokeloverCoreShiftDown;
-                    hyperCoreBoosted-=spokeloverCoreShiftDown;
+                    hyperCoreOUTPUT+=spokeloverCoreShiftUp;
+                    hyperCoreBoosted+=spokeloverCoreShiftUp;
                 }
             }
             
@@ -453,8 +468,8 @@ var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpo
             {
                 if(!wheel)
                 {
-                    hyperCoreOUTPUT+=spokeloverCoreShiftUp;
-                    hyperCoreBoosted+=spokeloverCoreShiftUp;
+                    hyperCoreOUTPUT-=spokeloverCoreShiftDown;
+                    hyperCoreBoosted-=spokeloverCoreShiftDown;
                 }
             }
             
@@ -468,33 +483,38 @@ var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpo
 //}
 
 
-if(continuumClover){//engage continualization
+if(continuumClover&&lfc!=0){//engage continualization
   
 var continuumCore=(continuumCounter+hyperCoreOUTPUT)*zoom/(lfc*variant4Correction-zoom);
 if(loops+counter<=hyperCoreBoosted+continuumCounter) s.divideScalar( Math.pow(2.,Math.pow(.5,continuumCore)));
-hyperCoreBoosted+=continuumCore;
+    hyperCoreBoosted+=continuumCore;
+    hyperCoreOUTPUT+=continuumCore;
 }
 
 dstnce = s.length();
 
  //              s*=refactorCores;c*=refactorCores;
  
- if(dstnce<4./3.)s=spin2(s,Math.atan(s.y,s.x)*(petals)/6.);
+ if(petals!=0.&&dstnce<4./3.)s=spin2(s,Math.atan(s.y,s.x)*(petals)/6.);
         
-        if(dstnce<4./3. &&exponentialPetals!=0.) s=spin2(s,Math.pow(2.,(Math.atan(s.y,s.x)/Math.PI+1.)*2.));
-        
+        if(dstnce<4./
+           3. &&exponentialPetals!=0.)
+            s= new THREE.Vector2( spin2([s.x,s.y],Math.pow(2.,(Math.atan(s.y,s.x)/Math.PI+1.)*2.)));
+    dstnce=s.length();
         if(dilate){
           
-            var dstnceOverLeaf =dstnce;// /leaf;
-            hyperCoreOUTPUT-=dstnceOverLeaf;//dilate clover shift
-            hyperCoreBoosted-=dstnceOverLeaf;//maybe times 1.5
+            hyperCoreOUTPUT-=dstnce;//dilate clover shift
+            hyperCoreBoosted-=dstnce;//maybe times 1.5
         }
+
 for(var i=0;i<40; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER&& 0.<=hyperCoreBoosted)
 {
 //if(i==0){float b = ;s*=b;dstnce*b;}
-s.multiplyScalar( metaCoreDriveFactor);dstnce*=metaCoreDriveFactor;hyperCoreBoosted--;loops++;
-
+s.multiplyScalar( metaCoreDriveFactor);dstnce*=metaCoreDriveFactor;
+    hyperCoreBoosted--;
+    hyperCoreOUTPUT--;
+    loops++;
 OmniDynamicPetalShift =omniData[(loops+counter-1.)];
 OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
 
@@ -507,11 +527,15 @@ if((i)>hyperCoreBoosted)
 var b = dstnce;
 loops-=b;
 hyperCoreBoosted+=b;
+    hyperCoreOUTPUT+=b;
+
 }
 else{
 var b =dstnce/4.;//may not be core stable
 loops-=b;
 hyperCoreBoosted+=b;
+    hyperCoreOUTPUT+=b;
+
 }
     /*
 
@@ -527,17 +551,19 @@ s.multiplyScalar( Math.pow(dstnce,powerBoost));
 dstnce*=Math.pow(dstnce,powerBoost);
 
 }
-var wise = 1.;
-
-if(i%4.==0.)wise=1.;
-else if(i%4.==1.)wise=-1.;
-else  if(i%4.==2.)wise= -1.;
-else  if(i%4.==3.)wise=1.;
-
-
 if(metaCarousel!=0.
-&&((i)>=hyperCoreBoosted+1.))     //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
-s=spin2(s,time*wise*metaCarousel*(1.+OmniPetal/6.)*rate);
+   &&((i)>=hyperCoreBoosted+1.))  {   //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
+    
+    var wise = 1.;
+    
+    if(i%4.==0.)wise=1.;
+    else if(i%4.==1.)wise=-1.;
+    else  if(i%4.==2.)wise= -1.;
+    else  if(i%4.==3.)wise=1.;
+    
+    
+    s=THREE.Vector2( spin2([s.x,s.y],time*wise*metaCarousel*(1.+OmniPetal/6.)*rate));
+}
 
 }
 else{
@@ -547,10 +573,10 @@ break;
 
  hyperCoreBoosted--;
  hyperCoreOUTPUT--;
+    loopSolid++
 
 }else break;
-            //              console.log("out"+loopSolid)
-
+                    //  console.log("out"+loopSolid)
 return new THREE.Vector3(s.x,s.y,hyperCoreOUTPUT);}
                            
                            function coz( x){return -Math.cos(x);}
@@ -627,6 +653,7 @@ window.bigCloverGapSync = false;
             
      
             let coreImplosion = Math.abs(Math.floor(coreTriggered)-Math.floor(tree.z));
+            
             if(coreImplosion>.5//&&Math.round(tree.z)-tree.z<0.
                )//due to the cycling upcore, it triggers twice per core
             {

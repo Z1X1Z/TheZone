@@ -2300,6 +2300,8 @@ const float crs = 57.;//this is the mandelbrot and original inheritance colormod
                       loops++;coresIn++;
                         }
  else break;
+ bool inCenterCore =c<2./3.;
+
 // if(refactorCores!=1.){s*=(1.+lfc/2.);c*=(1.+lfc/2.);}
 
 if(refactorCores>1.){
@@ -2320,7 +2322,7 @@ if(fieldPowerBoost){
 //  else if(zoom>1.)for(int i=0;i<int(crs); i++)if(c>4./3.&&loops<-cored){s/=2.;c/=2.;loops++;coresIn++;}else break;//UpCore not in use here, but rather in the starshipMod
 //for(int i=0;i<int(crs); i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
 
-if(SPHEREofTheLORD)s *= (length(s)-zoom/length(coords.yx)/2.);
+if(SPHEREofTheLORD)s *= (length(s)-zoom/lfc/2.);
 
 if(squareClover)s/=vec2(sqrt(2.-s.x*s.x),sqrt(2.-s.y*s.y))/s;
 
@@ -2453,15 +2455,15 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
                            float   oneOverLeafTruncated = ((1./leaf)/truncator)*truncator;
             float downSpoke=oneOverLeafTruncated;//1./(((-leaf)*truncator)/truncator)/4.;
                                                            
-                                                          vec2 coordsAltered=coords/gr;
-                                                           
-                                                               float variant4Correction=1.;
-                                                               if(clvrVariant4)variant4Correction=(1.-oneOverLeafTruncated);
-                                                           if(wheel)m =  ((pWithoutChiralizer/lfc)
-                                                                                                    -coords.yx*2.*variant4Correction)*abs(coresIn/crs*2.-1.)
-                                                                                       *mandelCloverFactor//(1.-1./(leaf/truncator)*truncator)//uncertain term
+              vec2 coordsAltered=coords/gr;
+               
+                   float variant4Correction=1.;
+                   if(clvrVariant4)variant4Correction=(1.-oneOverLeafTruncated);
+               if(wheel)m =  ((pWithoutChiralizer/lfc)
+                                                        -coords.yx*2.*variant4Correction)*abs(coresIn/crs*2.-1.)
+                                           *mandelCloverFactor//(1.-1./(leaf/truncator)*truncator)//uncertain term
 
-                                                                                       ;
+                                           ;
        //     float logOfSpoke_Factor = 0.;
        //     if (wheel) logOfSpoke_Factor=log(spoke_factor);
                              
@@ -2469,13 +2471,13 @@ float hyperCoreOUTPUT =hyperCore*log(2.)/log(metaCoreDriveFactor)+loops;
                              hyperCoreOUTPUT-=(6.+petals)/6.-1.;//upcore for higher omniclover counts
 
 float hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if
-                             hyperCoreBoosted-=(6.+petals)/6.-1.;//upcore for higher omniclover counts
+                          //   hyperCoreBoosted-=(6.+petals)/6.-1.;//upcore for higher omniclover counts
                         
                              //metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
 
 float colorShift = 0.;
 vec2 multCrossTwist=vec2(0.);
-if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
+if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
 {
      multCrossTwist=spin2(s,atan(s.x,s.y)*1.5*petals/(6.+petals))*sign(.5-morph)//*equilibriator/CORE_DELIMITER
      /dstnce;
@@ -2495,15 +2497,13 @@ if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
                              *4./3./(1./log(3.)+(1.-1./log(3.)  ))/1.75
                              )*log(2.)/log(metaCoreDriveFactor)+loops;
                              */
-                             
+                             dstnce=length(s);
                              if(dilate){
                                  
-                             float dstnceOverLeaf =dstnce;
-                             hyperCoreOUTPUT-=dstnceOverLeaf;//dilate clover shift
-                             hyperCoreBoosted-=dstnceOverLeaf;//maybe times 1.5
+                             hyperCoreOUTPUT-=dstnce;//dilate clover shift
+                             hyperCoreBoosted-=dstnce;//maybe times 1.5
                              }
                             float initialHyperCoreBoosted = hyperCoreBoosted;
-                            float lengthP = length(p);
 
                                        float colorComputationBoost =7.;//increasing number decreases processing and clarity
                                        float baseDelimiter =50.;
@@ -2512,6 +2512,8 @@ if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
                                                           float base=baseN;
  // if(abs(baseN-2.701002244)<.00001)base=(baseN/truncator)*truncator;
                                                            float loopSolid = 0.;
+                                                           //dstnce=length(s);
+
 if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
@@ -2526,6 +2528,7 @@ else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter
 
                            // if(!true&&morph<.5)CORE_DELIMITER=1./dstnce*pow(2.,4./12.)*equilibriator;
                             
+   if( loopSolid>=hyperCoreBoosted+1.||inCenterCore){//||lengthP<2./3.){//so it doesn't run until it needs to, hopefully working
        
        if(spirated!=0.&&dstnce<2./3.)//CORE_DELIMITER)  //works well<(n-1)/n
 s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
@@ -2581,12 +2584,12 @@ dstnce = length(s);
                  if(dstnce<2./3.)
                  {
                      vec2 move =-d.yx*volume/8.;
-                    // if(march==0||march==3)oo+=color*sealedMan(s*5.,move);
-                   // else oo+=color*sealedWoman(s*5.,move);
+                     if(march==0||march==3)oo+=color*sealedMan(s*5.,move);
+                    else oo+=color*sealedWoman(s*5.,move);
                  }
                                           
             }
-
+}
    colorAccumulator+=s;
    if(Refractelate&&dstnce>refractelC){s/=refractelC;} //refractelC/=4./3.;}
 vec2 lastS = s;
@@ -2641,7 +2644,7 @@ vec2 lastS = s;
        if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the body steps on the clover
        else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only
    
-   dstnce = length(s);
+  // dstnce = length(s);
    
    
    //float trunc=1.;
@@ -2656,8 +2659,8 @@ vec2 lastS = s;
 if(Spoker){
    // if(morph==0.)
     {
-        if((//!wheel
-            dstnce*sqrt(dstnce)<=hyperCoreBoosted))//||(wheel&&1.<=hyperCoreBoosted))
+        if(//!wheel
+            dstnce*sqrt(dstnce)<=hyperCoreBoosted)//||(wheel&&1.<=hyperCoreBoosted))
                          {
                              /*
                          if(wheel){
@@ -2732,10 +2735,11 @@ else //if(  0.>=hyperCoreBoosted)
     }
  }
 
-   if(continuumClover){//engage continualization
+   if(continuumClover&&lfc!=0.){//engage continualization
        float continuumCore=(continuumCounter+hyperCoreOUTPUT)*zoom/(lfc*variant4Correction-zoom);
        if(loops+counter<=hyperCoreBoosted+continuumCounter) s/=pow(2.,pow(.5,continuumCore));
        hyperCoreBoosted+=continuumCore;
+       hyperCoreOUTPUT+=continuumCore;
     }
   
 dstnce = length(s);
@@ -2751,12 +2755,12 @@ dstnce = length(s);
                              
                              if(dstnce<4./3. &&exponentialPetals!=0.) s=spin2(s,pow(2.,(atan(s.y,s.x)/PI+1.)*2.));
                              //if(dstnce<4./3.)s=spin2(s,pow(2.,atan(s.y,s.x)));
-                       
+                             float dstnce =length(s);
+
                        if(dilate){
                            
-                       float dstnceOverLeaf =dstnce;
-                       hyperCoreOUTPUT-=dstnceOverLeaf;//dilate clover shift
-                       hyperCoreBoosted-=dstnceOverLeaf;//maybe times 1.5
+                       hyperCoreOUTPUT-=dstnce;//dilate clover shift
+                       hyperCoreBoosted-=dstnce;//maybe times 1.5
                        }
 
 for(int i=0;i<40; i++)//not sure if i is 20 or >20
@@ -2764,7 +2768,9 @@ if(dstnce<CORE_DELIMITER&& 0.<=hyperCoreBoosted)
 {
 //if(i==0){float b = ;s*=b;dstnce*b;}
  s*=metaCoreDriveFactor;dstnce*=metaCoreDriveFactor;
- hyperCoreBoosted--;loops++;
+ hyperCoreBoosted--;
+ hyperCoreOUTPUT--;
+ loops++;
  
 
 OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
@@ -2778,12 +2784,15 @@ OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
        {
            float b = dstnce;//may not be core stable
            loops-=b;
-       hyperCoreBoosted+=b;
+           hyperCoreBoosted+=b;
+           hyperCoreOUTPUT+=b;
        }
        else{
            float b =dstnce/4.;//may not be core stable
            loops-=b;
        hyperCoreBoosted+=b;
+       hyperCoreOUTPUT+=b;
+
        }
         
        /*
@@ -2813,7 +2822,6 @@ OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
      
         s=spin2(s,time*wise*metaCarousel*(1.+OmniPetal/6.)*rate);
         }
-     loopSolid++;
 
 }
 else break;
@@ -2823,6 +2831,7 @@ hyperCoreOUTPUT--;
                              colorShift+=hyperCoreBoosted;
                 //             dstnce = length(s);
 
+                loopSolid++;
 
 }else break;
                   
