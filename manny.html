@@ -2526,7 +2526,6 @@ else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter
 
                            // if(!true&&morph<.5)CORE_DELIMITER=1./dstnce*pow(2.,4./12.)*equilibriator;
                             
-   if( loopSolid>hyperCoreBoosted){//||lengthP<2./3.){//so it doesn't run until it needs to, hopefully working
        
        if(spirated!=0.&&dstnce<2./3.)//CORE_DELIMITER)  //works well<(n-1)/n
 s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
@@ -2587,7 +2586,7 @@ dstnce = length(s);
                  }
                                           
             }
-}
+
    colorAccumulator+=s;
    if(Refractelate&&dstnce>refractelC){s/=refractelC;} //refractelC/=4./3.;}
 vec2 lastS = s;
