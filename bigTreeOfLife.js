@@ -642,7 +642,7 @@ window.bigCloverGapSync = false;
                 
             //    console.log(Math.round(tree.z)-tree.z)
 
-                if(dupered&&zoom<zoomCap32) generated = false;
+                if(dupered&&zoom<zoomCap32*coords.length()) generated = false;
                 coreTriggered=tree.z;
                 if(window.haptic2){
                     let vibrateArrayNew=[];
