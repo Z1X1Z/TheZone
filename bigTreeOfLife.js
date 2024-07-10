@@ -298,12 +298,12 @@ let loopSolid = -1
                           let runTimes = 0;
                           
 for (var counter=0.;counter<iterations;counter++)if(dstnce<delimiter/colorComputationBoost){
-    if( loopSolid>hyperCoreBoosted)
+  /*  if( loopSolid>hyperCoreBoosted)
     {runTimes++
-     //   console.log(runTimes)
+        console.log(runTimes)
     }
     loopSolid++
-
+*/
 var OmniDynamicPetalShift =omniData[(loops+counter-1.)];
 var OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
 
@@ -549,7 +549,7 @@ break;
  hyperCoreOUTPUT--;
 
 }else break;
-                      //    console.log("out"+loopSolid)
+            //              console.log("out"+loopSolid)
 
 return new THREE.Vector3(s.x,s.y,hyperCoreOUTPUT);}
                            
