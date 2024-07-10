@@ -2387,7 +2387,7 @@ if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
   //  if(cloverSlide&&wheel)hyperCore+=1.75/log(.5);
    if(clvrVariant4)
    {
-    //hyperCore-=.5/log(.5);//1./(7.*log(.5));
+    hyperCore-=.5/log(.5);//1./(7.*log(.5));
     if(cloverSlide)hyperCore+=1./log(.5);
     //if(wheel)hyperCore-=0./log(.5);
     if(morph!=0.)hyperCore-=2.5/log(.5);
@@ -2502,19 +2502,20 @@ if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
                              hyperCoreOUTPUT-=dstnceOverLeaf;//dilate clover shift
                              hyperCoreBoosted-=dstnceOverLeaf;//maybe times 1.5
                              }
-                                                           
+                            float initialHyperCoreBoosted = hyperCoreBoosted;
+                            float lengthP = length(p);
+
                                        float colorComputationBoost =7.;//increasing number decreases processing and clarity
                                        float baseDelimiter =50.;
        float delimiter = baseDelimiter;
        if(colorCombo==-1&&Inherited)delimiter=baseDelimiter/colorComputationBoost;
-                                                           float base=baseN;
-  if(abs(baseN-2.701002244)<.00001)base=(baseN/truncator)*truncator;
-
+                                                          float base=baseN;
+ // if(abs(baseN-2.701002244)<.00001)base=(baseN/truncator)*truncator;
+                                                           float loopSolid = 0.;
 if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
 
- 
     
     float OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
     float OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
@@ -2525,64 +2526,68 @@ else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter
 
                            // if(!true&&morph<.5)CORE_DELIMITER=1./dstnce*pow(2.,4./12.)*equilibriator;
                             
-                            if(spirated!=0.&&dstnce<2./3.)//CORE_DELIMITER)  //works well<(n-1)/n
-    s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
-    dstnce = length(s);
+   if( loopSolid>hyperCoreBoosted){//||lengthP<2./3.){//so it doesn't run until it needs to, hopefully working
+       
+       if(spirated!=0.&&dstnce<2./3.)//CORE_DELIMITER)  //works well<(n-1)/n
+s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
+dstnce = length(s);
 
-           vec2 cloverMAP = (spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI))*2./3.+.5;
-                                   
-                                   vec2 ColorWheelClover=vec2(0.);
-                                   float cycleShiftChiral = 0.;
-                                   
-                                if(NightAndDay){
-                                            if(chirality!=-1){
-                                                
-                                                    if (flipStar!=0.)cycleShiftChiral=0.;
-                                                    else cycleShiftChiral=PI;
-                                                ColorWheelClover=spin2(vec2(-s.y,-s.x)*flipStar,(atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)+atan(d.x,d.y)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar)/2.;//clover actually seems to have down to the right so it may need to be rotated by pi/x
-                                                }
-        else {
-                if (flipStar!=0.)cycleShiftChiral=PI/4.;
-                else cycleShiftChiral=-PI;
-                ColorWheelClover = spin2(vec2(-s.x,-  s.y)*flipStar,(atan(s.x,s.y)*OmniPetal/(6.+OmniPetal)-atan(d.y,d.x)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar/2.);
+                          vec2 cloverMAP = (spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI))*2./3.+.5;
+                                                   
+                                                   vec2 ColorWheelClover=vec2(0.);
+                                                   float cycleShiftChiral = 0.;
+                                        
+                                                if(NightAndDay){
+                                                            if(chirality!=-1){
+                                                                
+                                                                    if (flipStar!=0.)cycleShiftChiral=0.;
+                                                                    else cycleShiftChiral=PI;
+                                                                ColorWheelClover=spin2(vec2(-s.y,-s.x)*flipStar,(atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)+atan(d.x,d.y)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar)/2.;//clover actually seems to have down to the right so it may need to be rotated by pi/x
+                                                                }
+                        else {
+                                if (flipStar!=0.)cycleShiftChiral=PI/4.;
+                                else cycleShiftChiral=-PI;
+                                ColorWheelClover = spin2(vec2(-s.x,-  s.y)*flipStar,(atan(s.x,s.y)*OmniPetal/(6.+OmniPetal)-atan(d.y,d.x)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar/2.);
+                            }
+                        
+                            float correctionBrueled = 0.;
+                            if(brelued==-1.)correctionBrueled=atan(ColorWheelClover.x,-ColorWheelClover.y);
+                           else correctionBrueled=atan(ColorWheelClover.y,ColorWheelClover.x)+PI/2.;
+                            
+                        if(dstnce<4./3.)
+                        beta   =  hsv2rgb(vec3(correctionBrueled/(2.*PI),1.,1.));
+                        //return beta;
+                }
+                                                         
+                 if(dstnce<2./3.||(spokesVisualizeColors&&dstnce<4./3.)) {
+                    float decayCanceller=1.;
+                    if(spokesVisualizeColors)decayCanceller = 2.;
+                    //if(morph!=0.)decayCanceller=decayCanceller*decayCanceller;
+                    
+                   sevenSuns+=texture2D(videoTexture,vec2(1.-cloverMAP.x,cloverMAP.y))+texture2D(videoTexture2,vec2(1.-cloverMAP.x,cloverMAP.y));
+
+                    
+                       if(eden==0)starship+=texture2D(STAR,cloverMAP)/decayCanceller;
+                       else if(eden==1)starship+=texture2D(EDEN,cloverMAP)/decayCanceller;
+                       //*length((vUv-.5)*max(resolution.x,resolution.y)/min(resolution.x,resolution.y));//+texture2D(STAR,cloverMAP);
+                            
+                           }
+
+            if(onehundredfortyfourthousand)
+            {
+                 
+                 int march= int(mod(initialHyperCoreBoosted,4.));
+                 float color = 1.;
+                 if (march==1||march==3)color = -1.;
+                 if(dstnce<2./3.)
+                 {
+                     vec2 move =-d.yx*volume/8.;
+                    // if(march==0||march==3)oo+=color*sealedMan(s*5.,move);
+                   // else oo+=color*sealedWoman(s*5.,move);
+                 }
+                                          
             }
-        
-            float correctionBrueled = 0.;
-            if(brelued==-1.)correctionBrueled=atan(ColorWheelClover.x,-ColorWheelClover.y);
-           else correctionBrueled=atan(ColorWheelClover.y,ColorWheelClover.x)+PI/2.;
-            
-        if(dstnce<4./3.)
-        beta   =  hsv2rgb(vec3(correctionBrueled/(2.*PI),1.,1.));
-        //return beta;
 }
- if(dstnce<2./3.||(spokesVisualizeColors&&dstnce<4./3.)) {
-            float decayCanceller=1.;
-            if(spokesVisualizeColors)decayCanceller = 2.;
-            //if(morph!=0.)decayCanceller=decayCanceller*decayCanceller;
-            
-           sevenSuns+=texture2D(videoTexture,vec2(1.-cloverMAP.x,cloverMAP.y))+texture2D(videoTexture2,vec2(1.-cloverMAP.x,cloverMAP.y));
-
-            
-               if(eden==0)starship+=texture2D(STAR,cloverMAP)/decayCanceller;
-               else if(eden==1)starship+=texture2D(EDEN,cloverMAP)/decayCanceller;//*length((vUv-.5)*max(resolution.x,resolution.y)/min(resolution.x,resolution.y));//+texture2D(STAR,cloverMAP);
-            
-           }
-
-if(onehundredfortyfourthousand)
-{
- 
- int march= int(mod(hyperCoreBoosted,4.));
- float color = 1.;
- if (march==1||march==3)color = -1.;
- if(dstnce<2./3.)
- {
-     vec2 move =-d.yx*volume/8.;
-    // if(march==0||march==3)oo+=color*sealedMan(s*5.,move);
-    // else oo+=color*sealedWoman(s*5.,move);
- }
-                          
-}
-
    colorAccumulator+=s;
    if(Refractelate&&dstnce>refractelC){s/=refractelC;} //refractelC/=4./3.;}
 vec2 lastS = s;
@@ -2796,17 +2801,20 @@ OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
        dstnce*=pow(dstnce,powerBoost);
 
    }
-  float wise = 1.;
-  
-  if(mod(float(i),4.)==0.)wise=1.;
-  else if(mod(float(i),4.)==1.)wise=-1.;
-  else  if(mod(float(i),4.)==2.)wise= -1.;
-  else  if(mod(float(i),4.)==3.)wise=1.;
-  
-  
   if(metaCarousel!=0.
-     &&(float(i)>=hyperCoreBoosted+1.))     //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
+     &&(float(i)>=hyperCoreBoosted+1.))  {   //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
+      
+     float wise = 1.;
+     
+     if(mod(float(i),4.)==0.)wise=1.;
+     else if(mod(float(i),4.)==1.)wise=-1.;
+     else  if(mod(float(i),4.)==2.)wise= -1.;
+     else  if(mod(float(i),4.)==3.)wise=1.;
+     
+     
         s=spin2(s,time*wise*metaCarousel*(1.+OmniPetal/6.)*rate);
+        }
+     loopSolid++;
 
 }
 else break;

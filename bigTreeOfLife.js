@@ -262,7 +262,7 @@ var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
 
 var hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
                           hyperCoreBoosted-=(6.+petals)/6.-1.;//upcore for higher omniclover counts
-
+                      var    initialHyperCoreBoosted=hyperCoreBoosted;
                            var multCrossTwist=new THREE.Vector2(0.,0.);
 if(multiplicatorNexus)//doesn't seem to upcore spokes like intended
 {
@@ -294,10 +294,16 @@ coreBooster=multCrossTwist.length()/Math.log(.5)*lfc;
                               hyperCoreOUTPUT-=dstnceOverLeaf;//dilate clover shift
                               hyperCoreBoosted-=dstnceOverLeaf;//maybe times 1.5
                           }
-
+let loopSolid = -1
+                          let runTimes = 0;
+                          
 for (var counter=0.;counter<iterations;counter++)if(dstnce<delimiter/colorComputationBoost){
-      
-        
+    if( loopSolid>hyperCoreBoosted)
+    {runTimes++
+     //   console.log(runTimes)
+    }
+    loopSolid++
+
 var OmniDynamicPetalShift =omniData[(loops+counter-1.)];
 var OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
 
@@ -415,9 +421,9 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
             }
             else
             {
-                hyperCoreOUTPUT-=spoke_factor;
+             //   hyperCoreOUTPUT-=spoke_factor;
                 
-                hyperCoreBoosted-=spoke_factor;
+              //  hyperCoreBoosted-=spoke_factor;
             }
             
         }
@@ -438,8 +444,8 @@ var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpo
                 if(!wheel)
                 {
                     
-                    hyperCoreOUTPUT+=spokeloverCoreShiftDown;
-                    hyperCoreBoosted+=spokeloverCoreShiftDown;
+                    hyperCoreOUTPUT-=spokeloverCoreShiftDown;
+                    hyperCoreBoosted-=spokeloverCoreShiftDown;
                 }
             }
             
@@ -447,19 +453,19 @@ var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpo
             {
                 if(!wheel)
                 {
-                    hyperCoreOUTPUT-=spokeloverCoreShiftUp;
-                    hyperCoreBoosted-=spokeloverCoreShiftUp;
+                    hyperCoreOUTPUT+=spokeloverCoreShiftUp;
+                    hyperCoreBoosted+=spokeloverCoreShiftUp;
                 }
             }
             
         }
 
 
-if(spokelover&&counter<hyperCoreBoosted){
+//if(spokelover&&counter<hyperCoreBoosted){
 //if(continuumClover) s.multiplyScalar( Math.sqrt(2.));//engage shiny spokelover
 //else
-    s.divideScalar( Math.sqrt(2.));
-}
+//    s.divideScalar( Math.sqrt(2.));
+//}
 
 
 if(continuumClover){//engage continualization
@@ -543,7 +549,8 @@ break;
  hyperCoreOUTPUT--;
 
 }else break;
-              
+                      //    console.log("out"+loopSolid)
+
 return new THREE.Vector3(s.x,s.y,hyperCoreOUTPUT);}
                            
                            function coz( x){return -Math.cos(x);}
