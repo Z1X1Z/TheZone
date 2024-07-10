@@ -2390,7 +2390,7 @@ if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
    if(clvrVariant4)
    {
     hyperCore-=.5/log(.5);//1./(7.*log(.5));
-    if(cloverSlide)hyperCore+=1./log(.5);
+    if(cloverSlide)hyperCore+=1.25/log(.5);
     //if(wheel)hyperCore-=0./log(.5);
     if(morph!=0.)hyperCore-=2.5/log(.5);
 
@@ -2510,7 +2510,7 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
        float delimiter = baseDelimiter;
        if(colorCombo==-1&&Inherited)delimiter=baseDelimiter/colorComputationBoost;
                                                           float base=baseN;
- // if(abs(baseN-2.701002244)<.00001)base=(baseN/truncator)*truncator;
+  if(abs(baseN-2.701002244)<.00001)base=(baseN/truncator)*truncator;
                                                            float loopSolid = 0.;
                                                            //dstnce=length(s);
 
