@@ -3859,6 +3859,7 @@ vec2 dance = vec2(0.);
 
      vec2 heartShift = vec2(0);
      vec3 HEART = vec3(0.);
+     vec3 heartWarmed= vec3(0.);
     if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                                  else if(Character==2)heartSize=gr;
      if (Character!=9&&Character!=10&&colorCombo!=20&&colorCombo!=17){
@@ -3873,11 +3874,11 @@ vec2 dance = vec2(0.);
                 if(mannyFace.z>0.)heartMultiplier+=mannyFace;
    if(mannyFace.z>0.)heartMultiplier*=mannyFace;
 */
-                        vec3 heartWarmed = HEART/2.;
+                         heartWarmed = HEART/2.;
                         if(HEART.x==0.&&HEART.y==0.&&HEART.z==0.)heartWarmed=AM;
                         else if(AM.x!=0.)heartWarmed=clamp(AM*HEART+AM/2.,0.,1.);
                         else heartWarmed=HEART;
-mny+=clamp(heartWarmed+(-mny.r-mny.g-mny.b),0.,1.);//+HEART*heartMultiplier;
+//mny+=clamp(heartWarmed+(-mny.r-mny.g-mny.b),0.,1.);//+HEART*heartMultiplier;
                            
                            }
 
@@ -3996,7 +3997,8 @@ if(starOnDot>=1){
                                 }
                                                                  
                                                                  
-         vec4 pixelStarship=vec4(0.);
+                    vec4 pixelStarship=vec4(0.);
+                    vec4 pixelWitnessAndStars=vec4(0.);
          float pixelShipGrey = 0.;
          vec4 icicles=vec4(0.);
 
@@ -4037,14 +4039,14 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                            mnyX+ largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
                                           ( hypnoticHarmonicCircles+pillar+icicles.xyz)*(1.-pixelShipGrey*40.)
                                            +yourFace.xyz
-                    +clamp((mny-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r)-AM.r/2.,0.,1.)*(1.-pixelShipGrey)
+                    +clamp((mny+heartWarmed*(1.-pixelShipGrey)-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r)-AM.r/2.,0.,1.)*2.
                                       +(-hypnoticHarmonicCircles.x-hypnoticHarmonicCircles.y-hypnoticHarmonicCircles.z)*2.)*starshipMultiplier*(1.-isGrey-pixelShipGrey)
                         -(ARTICLE.r+ARTICLE.g+ARTICLE.b)
-                           ,0.,1.)
+                           ,0.,1.)*(1.-pixelShipGrey)
                                                     +ARTICLE
                                                     +bridge*(1.-isGrey-pixelShipGrey)//+AM*(1.-isGrey-pixelShipGrey)
                                                     ,1.);
-                       vec3 awayFromTree =  vec3(-HEART*5.
+                       vec3 awayFromTree =  vec3(-HEART.r-HEART.b*2.-HEART.g
                                                  -(AM.x+AM.y+AM.z)*4.
                                                  +bigEyes.xyz*largeEyeColor
                                                  -(yourFace.x+yourFace.y+yourFace.z)/256./3.
@@ -4069,7 +4071,7 @@ vec4 tree = vec4( clamp(
                            
                                               ,0.,1.)
                         +b+creatures
-                    +   pixelStarship.xyz
+                    +   pixelStarship.xyz+pixelWitnessAndStars.xyz
           -vec3((mny.r+mny.b+mny.g)),.0,1.)
               ,1.);
         
