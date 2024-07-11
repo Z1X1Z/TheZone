@@ -1696,8 +1696,12 @@ uniform float exponentialPetals;
        vec4 ret =vec4(0.);
        
          if ((frampDIVlend>.5|| frampMultlen>.25)
-             &&((frampDIVlend<1.||(frampDIVlend>2.&&(frampDIVlend<4.||frampDIVlend>8.)))
-                || (frampMultlen>.5))
+             &&(frampDIVlend<1.||(frampDIVlend>2.
+                                   &&frampDIVlend<4.||(frampDIVlend>8.
+                                      &&frampDIVlend<16.||(frampDIVlend>32.
+                                         &&frampDIVlend<64.||(frampDIVlend>128.
+                                         )))))
+                || (frampMultlen>.5)
             )
         ret=  vec4(clamp(hsv2rgb(
                                       vec3(
@@ -1753,6 +1757,7 @@ uniform float exponentialPetals;
         float noteAmp = texture2D(micIn,
         vec2(note1
         ,0.)).r;
+                       noteAmp*=12.;
        // noteAmp=pow(noteAmp,.5);
        // noteAmp/=255.;
       // return vec4(noteAmp);
@@ -1768,12 +1773,15 @@ uniform float exponentialPetals;
        // else return vec4(0.);
        //return vec4(noteAmpToLength);
     
-            if ((noteAmpToLength>.5|| noteAmpByLength>.125)
-   //outer shell
-                &&(noteAmpToLength<1.||(noteAmpToLength>2.&&(noteAmpToLength<4.||noteAmpToLength>8.)))
-               ||
-                 (noteAmpByLength>.5)
-               )
+            if
+                       ((noteAmpToLength>.5|| noteAmpByLength>.25)
+                          &&(noteAmpToLength<1.||(noteAmpToLength>2.
+                                                &&noteAmpToLength<4.||(noteAmpToLength>8.
+                                                   &&noteAmpToLength<16.||(noteAmpToLength>32.
+                                                      &&noteAmpToLength<64.||(noteAmpToLength>128.
+                                                      )))))
+                             || (noteAmpByLength>.5)
+                         )
                
               {
                   /*
@@ -4029,14 +4037,14 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                            mnyX+ largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
                                           ( hypnoticHarmonicCircles+pillar+icicles.xyz)*(1.-pixelShipGrey*40.)
                                            +yourFace.xyz
-                    +clamp((mny-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r)-HEART.b*2.-AM.r/2.,0.,1.)
+                    +clamp((mny-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r)-AM.r/2.,0.,1.)*3.
                                       +(-hypnoticHarmonicCircles.x-hypnoticHarmonicCircles.y-hypnoticHarmonicCircles.z)*2.)*starshipMultiplier*(1.-isGrey-pixelShipGrey)
                         -(ARTICLE.r+ARTICLE.g+ARTICLE.b)
                            ,0.,1.)
                                                     +ARTICLE
                                                     +bridge*(1.-isGrey-pixelShipGrey)//+AM*(1.-isGrey-pixelShipGrey)
                                                     ,1.);
-                       vec3 awayFromTree =  vec3(-HEART.b*5.
+                       vec3 awayFromTree =  vec3(-HEART*5.
                                                  -(AM.x+AM.y+AM.z)*4.
                                                  +bigEyes.xyz*largeEyeColor
                                                  -(yourFace.x+yourFace.y+yourFace.z)/256./3.
@@ -4071,7 +4079,7 @@ vec4 tree = vec4( clamp(
           vec3 confraculator = vec3(1.);
           if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
           
-gl_FragColor=
+gl_FragColor=//vec4(clamp(mny,0.,1.),1.);
 fin/vec4(confraculator
                            ,1.);
                        
