@@ -4036,10 +4036,11 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                      -vec4(vec3(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z),0.),0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies = vec4(
-                                           mnyX+ largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
+                                           mnyX+clamp(heartWarmed-mny,0.,1.)
+                                           +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
                                           ( hypnoticHarmonicCircles+pillar+icicles.xyz)*(1.-pixelShipGrey*40.)
                                            +yourFace.xyz
-                    +clamp((mny+heartWarmed*(1.-pixelShipGrey)-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r)-AM.r/2.,0.,1.)*2.
+                    +clamp((mny-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r),0.,1.)*2.
                                       +(-hypnoticHarmonicCircles.x-hypnoticHarmonicCircles.y-hypnoticHarmonicCircles.z)*2.)*starshipMultiplier*(1.-isGrey-pixelShipGrey)
                         -(ARTICLE.r+ARTICLE.g+ARTICLE.b)
                            ,0.,1.)*(1.-pixelShipGrey)
