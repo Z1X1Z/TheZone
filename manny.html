@@ -2433,7 +2433,7 @@ hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if d
 vec2 m=vec2(0.);
 
 float truncator=1.;
-bool truncated = false;
+bool truncated = true;
 if(lfc!=0.&&truncated) truncator = log(zoom/lfc);//log truncation * factor is not known, may no longer be necesary
 //Maendel clover
 
@@ -4029,14 +4029,15 @@ if(starOnDot>=1){
              
              //if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.&&pixelStarship.w>0.)
             // mny*=pixelStarship.xyz;//-mny.x*.66;
+             vec3 seeThrough = pixelStarship.xyz+(1.-pixelStarship.w*pixelStarship.w);
              
              if(mny.z>0.&&mny.y>0.&&mny.x>0.){
              mnyWhite=0.;//-mny.x*.66;
-             mny*=pixelStarship.xyz;
+             mny*=seeThrough;
              }
              
              if(heartWarmed.z==heartWarmed.y&&heartWarmed.y==heartWarmed.x&&heartWarmed.x!=0.&&pixelStarship.w>0.)
-             heartWarmed*=pixelStarship.xyz;//-mny.x*.66;
+             heartWarmed*=seeThrough;//-mny.x*.66;
 
              
 
@@ -4058,7 +4059,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
                                           ( hypnoticHarmonicCircles+pillar+icicles.xyz)*(1.-pixelShipGrey*40.)
                                            +yourFace.xyz
-                    +clamp((mny-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r)*mnyWhite,0.,1.)*2.
+                    +clamp((mny-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r),0.,1.)*2.*mnyWhite
                                       +(-hypnoticHarmonicCircles.x-hypnoticHarmonicCircles.y-hypnoticHarmonicCircles.z)*2.)*starshipMultiplier*(1.-isGrey-pixelShipGrey)
                         -(ARTICLE.r+ARTICLE.g+ARTICLE.b)
                            ,0.,1.)
