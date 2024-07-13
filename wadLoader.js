@@ -183,8 +183,8 @@ function startSound(e){
                 }
                 */
                 
-                let volume= 2.*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
-                 if(radialOctaveBoost)volume= pressure*.25;
+                let volume= window.touchVolume*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
+                 if(radialOctaveBoost)volume= window.touchVolume*pressure*.25;
                  
                 initialAngleSound[id] =(-Math.atan2(-x,-y)*flip+2.*pi)%(2*pi)
                  
@@ -299,8 +299,8 @@ function followSound(e){
         
              if((!window.touchMode&&!window.muteVoiceTouchVolume)||(window.touchMode&&!window.muteTouchTouchVolume))
              {
-        let volume= 2.*pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
-                 if(radialOctaveBoost)volume= pressure*.25;
+        let volume= window.touchVolume*pressure*-Math.sqrt(y*y+x*x)/(Math.max(heightPX,widthPX));
+                 if(radialOctaveBoost)volume= window.touchVolume*pressure*.25;
                  let lastAngleSound=angleSound[id];
 
              if(!window.grabStar) angleSound[id]=(((-Math.atan2(-x,-y)*flip-initialAngleSound[id])+8.*pi)%(2*pi)+initialAngleSound[id]);
