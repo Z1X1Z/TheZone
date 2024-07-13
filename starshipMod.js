@@ -1628,9 +1628,9 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
     let hyperCoreOffset = Math.ceil(hyperCorePixel[0]);
     if(!isNaN(loudestFret[0].volume)&&window.dynamicCoring)
         coreData[hyperCoreOffset]=Math.abs(coreShift)+coringValue;//24*1.3247;
-    else for(var h = 0; h<coreShift.length; h++) {
+    else for(var h = 0; h<coreData.length; h++) {
         if(document.getElementById('coringConstant').value==-1)
-            coreData[h]=-1/leaf;
+            coreData[h]=1./-leaf/gr;
         else coreData[h]=Number(document.getElementById('coringConstant').value);
     }
     if(!isNaN(loudestFret[0].volume)&&omniDynamicEngaged)
