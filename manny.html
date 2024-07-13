@@ -2751,9 +2751,21 @@ else //if(  0.>=hyperCoreBoosted)
 
    if(continuumClover&&lfc!=0.){//engage continualization
        float continuumCore=(continuumCounter+hyperCoreOUTPUT)*zoom/(lfc*variant4Correction-zoom);
-       if(loops+counter<=hyperCoreBoosted+continuumCounter) s/=pow(2.,pow(.5,continuumCore));
+       if(loops+counter<=hyperCoreBoosted+continuumCounter)
+       {
+       s/=pow(2.,pow(.5,continuumCore));
+      
        hyperCoreBoosted+=continuumCore;
        hyperCoreOUTPUT+=continuumCore;
+       
+       }
+       else
+{
+    hyperCoreBoosted-=continuumCore;
+    hyperCoreOUTPUT-=continuumCore;
+    
+           
+       }
     }
   
 dstnce = length(s);
