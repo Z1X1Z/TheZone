@@ -221,7 +221,7 @@ var term=0.;
 var m= new THREE.Vector2(0.,0.);
 
     var truncator=1.;
-    var truncated = false;
+    var truncated = true;
     if(lfc!=0.&&truncated) truncator = Math.log(zoom/lfc);
 //Maendel clover
                                      
