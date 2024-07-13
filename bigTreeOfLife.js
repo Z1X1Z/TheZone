@@ -486,9 +486,18 @@ var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpo
 if(continuumClover&&lfc!=0){//engage continualization
   
 var continuumCore=(continuumCounter+hyperCoreOUTPUT)*zoom/(lfc*variant4Correction-zoom);
-if(loops+counter<=hyperCoreBoosted+continuumCounter) s.divideScalar( Math.pow(2.,Math.pow(.5,continuumCore)));
-    hyperCoreBoosted+=continuumCore;
-    hyperCoreOUTPUT+=continuumCore;
+if(loops+counter<=hyperCoreBoosted+continuumCounter)
+{
+    s.divideScalar( Math.pow(2.,Math.pow(.5,continuumCore)));
+    
+     hyperCoreBoosted+=continuumCore;
+     hyperCoreOUTPUT+=continuumCore;
+     }
+     else{
+         
+        hyperCoreBoosted-=continuumCore;
+         hyperCoreOUTPUT-=continuumCore;
+     }
 }
 
 dstnce = s.length();
