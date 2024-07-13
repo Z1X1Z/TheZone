@@ -697,7 +697,8 @@ radialWarp=b;
                     <label for="coringConstant">Coring Value (.5-2.):</label>
                    <input type="number" id="coringConstant" name="coringConstant" class="num" onkeydown=
                        "coringValue=document.getElementById('coringConstant').value;
-coreData.fill(coringValue);">
+coreData.fill(coringValue);
+">
                        </p>
 
                        <input type="checkbox" id="dynamicCoring" name="t"  onclick= "
@@ -1233,8 +1234,9 @@ scoreColorInversion=false;
 
     </div>
     <script>let n = document.getElementsByName('t');
-        for(var p = 0; p<n.length;p++)n[p].checked  = false; </script>
-    
+        for(var p = 0; p<n.length;p++)n[p].checked  = false;
+
+    </script>
     
     <script>
      if(location.hash.includes(".c")||location.hash.includes(".b"))

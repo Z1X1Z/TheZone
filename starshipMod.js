@@ -1176,9 +1176,10 @@ function zoomRoutine(){
               {
                  
                  var precores = .25/Math.log(.5);
-                  if(uniforms.morph.value!=0.)precores=precores-3./Math.log(.5);
-                  if(uniforms.refactorCores.value!=1.)precores=-.0;
+                  if(clvrVariant4&&cloverSlide) precores=precores-1./log(.5);
+                  else if(clvrVariant4)precores=0.;
                   
+                  if(refactorCores!=1.)precores=-.0;
                   const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
                   var equilibriator = 1.;
               
@@ -1468,8 +1469,6 @@ function runOSMD (){
                                                                     
  }
                  let   upOrDown = 1;
-                                           const coreData = new Float32Array(40).fill(1./-leaf);
-                                           const omniData = new Float32Array(40).fill(0.);;
                                            let hyperCorePixel = new Uint8Array(4).fill(0.);
 
                                            
@@ -1540,7 +1539,8 @@ function runOSMD (){
                                     
     ONbypass = false;
      if( window.touchMode||window.touchOnlyMode)
-     {
+     {    setDynamicSampler2ds();//normally does nothing
+
          setMicInputToStarPIXEL();
          executeTouchRegime();
      }
@@ -1616,7 +1616,6 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
     spiral_compress();
     
     vectorize4();
-    
     let coreShift=0;
     for(var shift = 0.;shift<4;shift++)//find maximally different loudest note
        if (Math.abs(Math.abs((note*2)%24-loudestFret[shift].note%24)-24/2.)<Math.abs(coreShift-24/2.))
@@ -1628,16 +1627,12 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
     let hyperCoreOffset = Math.ceil(hyperCorePixel[0]);
     if(!isNaN(loudestFret[0].volume)&&window.dynamicCoring)
         coreData[hyperCoreOffset]=Math.abs(coreShift)+2./3.;//24*1.3247;
-    else for(var h = 0; h<coreData.length; h++) {
-        if(document.getElementById('coringConstant').value==-1)
-            coreData[h]=1./-leaf;
-        else coreData[h]=Number(document.getElementById('coringConstant').value);
-    }
+    
     if(!isNaN(loudestFret[0].volume)&&omniDynamicEngaged)
         omniData[hyperCoreOffset]=coreShift/2.;
 
-       setDynamicSampler2ds();
-    
+    setDynamicSampler2ds();
+
    if(spirographMODE!=0)makeSpirograph();
 
 

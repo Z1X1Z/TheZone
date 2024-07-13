@@ -228,6 +228,8 @@ function resetAll(){
             window.onO = false;
     window.EldersLeg = 24;
                                          
+                       window.coreData = new Float32Array(40).fill(1./-leaf);
+                       window.omniData = new Float32Array(40).fill(0.);
                                          
                                              if (   window.iOS )window.rez=window.devicePixelRatio/4.;
                                                else if(window.android)window.rez=window.devicePixelRatio/8.;
@@ -381,7 +383,7 @@ function callKey(event){
         omniDynamicEngaged = !omniDynamicEngaged;
         if(!omniDynamicEngaged)omniData.fill(0);
     }
-    else if(key == "c" && event.ctrlKey){dynamicCoring=!dynamicCoring; if(!dynamicCoring)coreData.fill(1./1.324717);}
+    else if(key == "c" && event.ctrlKey){dynamicCoring=!dynamicCoring; if(!dynamicCoring)coreData.fill(document.getElementById('coringConstant').value);}
     else if(key == "q" && event.ctrlKey)uniforms.squareClover.value=!uniforms.squareClover.value;
     else if(key == "x" && event.ctrlKey)uniforms.fieldPowerBoost.value=!uniforms.fieldPowerBoost.value;
     else if(key == "z" && event.ctrlKey)uniforms.fieldPowerBoostMeta.value=!uniforms.fieldPowerBoostMeta.value;
