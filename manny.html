@@ -3846,7 +3846,7 @@ vec2 dance = vec2(0.);
                                            mny=clamp(mny,0.,1.);
                                                                  
                                                                  
-                                                                 float heartRate = 1./3.;
+                                                                 float heartRate = 1./4.;
                                                                  
                                          vec2 moveDynamicSpunToKey=spin2(moveDynamic*vec2(1.,flipStar*brelued)///.8
                                                                          , -(//starSpin*mod(time*rate,PI*2.)-
@@ -3872,7 +3872,7 @@ vec2 dance = vec2(0.);
                                                               //   const float octBoost = 17.;
                                                                //  float b =nyq*pow(2.,angle+octBoost);
                                                          //starts -3, full -2
-                                                                 for (float n = -3.; n<3.;n+=1.0)//the range seems small
+                                                                 for (float n = -3.; n<6.;n+=1.0)//the range seems small
                                                                 // if(b>=.5/nyq&&b<sampleRate/2.)
                                                          //not sure why it has negative range
                                                                  //if (twistStar<24.)
@@ -3881,7 +3881,9 @@ vec2 dance = vec2(0.);
                                                                        frAMP += texture2D(micIn, vec2(b,0.)).r;
                                                                  }
                                  frAMP*=1.+frAMP;
-     float heartSize =gr*gr*-leaf/(frAMP+volume/4.+.5);//*8.;
+     float heartSize = 1.;
+                                 if(frAMP-volume!=0.&&volume!=1.) heartSize=gr*gr*-leaf/(frAMP-volume*1.5);//*8.;
+                                 else heartSize=gr*gr*-leaf;//for touch mode
                                  if(frAMP==0.)frAMP=1.;//to prevent cancelling moveDynamic in touchmode
 
      vec2 heartShift = vec2(0);
@@ -4087,7 +4089,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                                     +ARTICLE
                                                     +bridge*(1.-isGrey-pixelShipGrey)//+AM*(1.-isGrey-pixelShipGrey)
                                                     ,1.);
-                       vec3 awayFromTree =  vec3(-HEART.r-HEART.b*2.-HEART.g
+                       vec3 awayFromTree =  vec3(-HEART.b//-HEART.r-HEART.g
                                                  -(AM.x+AM.y+AM.z)*4.
                                                  +bigEyes.xyz*largeEyeColor
                                                  -(yourFace.x+yourFace.y+yourFace.z)/256./3.
