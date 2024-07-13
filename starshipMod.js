@@ -1176,7 +1176,7 @@ function zoomRoutine(){
               {
                  
                  var precores = .25/Math.log(.5);
-                  if(clvrVariant4&&cloverSlide) precores=precores-1./log(.5);
+                  if(clvrVariant4&&cloverSlide) precores=precores-1./Math.log(.5);
                   else if(clvrVariant4)precores=0.;
                   
                   if(refactorCores!=1.)precores=-.0;

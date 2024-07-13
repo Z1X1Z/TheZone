@@ -694,10 +694,13 @@ radialWarp=b;
                  callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
               <label for="omniCore">omniCORE![,o]</label><br>
               
-                    <label for="coringConstant">Coring Value (.5-2.):</label>
-                   <input type="number" id="coringConstant" name="coringConstant" class="num" onkeydown=
-                       "coringValue=document.getElementById('coringConstant').value;
-coreData.fill(coringValue);
+                    <label for="coringConstant">Coring Value (.5<>1.):</label>
+                   <input type="number" id="coringConstant" name="coringConstant" class="num" onkeydown="
+                       var coreNUM=document.getElementById('coringConstant').value;
+                       if(coreNUM>.5&&coreNUM<1.)coreData.fill(Number(coreNUM));
+                        else coreData.fill(-1./leaf)
+
+
 ">
                        </p>
 
@@ -2705,6 +2708,7 @@ if(Spoker){
             }
                 else {*/
                   //  float correctionSpoke =pow(upSpoke/dstnce,grOverLeaf);//uncertain value
+                  s*=spoke_factor;
             hyperCoreOUTPUT+=upSpoke
             ;
             hyperCoreBoosted+=upSpoke;
@@ -2744,7 +2748,10 @@ if(counter+dstnce<hyperCoreBoosted){
 
 else //if(  0.>=hyperCoreBoosted)
 {
-    if(!wheel){
+    s*=sqrt(2.)/1.5;
+
+    if(!wheel)
+    {
               hyperCoreOUTPUT-=spokeloverCoreShiftDown;
               hyperCoreBoosted-=spokeloverCoreShiftDown;
              }
