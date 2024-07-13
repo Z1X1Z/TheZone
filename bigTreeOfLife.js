@@ -205,7 +205,7 @@ hyperCore*=equilibriator;
 
 }
    
-if(clvrVariant2)hyperCore+=1./log(.5);
+if(clvrVariant2)hyperCore+=1./Math.log(.5);
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
 if(continuumClover)hyperCore-=.75/Math.log(.5);
 
@@ -428,6 +428,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
                     else*/
                  //    {
                   //      var correctionSpoke =Math.pow(upSpoke/dstnce,grOverLeaf);
+                    s.multiplyScalar(spoke_factor);//engage spokelover s/=2.+'superspokes'
 
                         hyperCoreOUTPUT+=upSpoke;
                         hyperCoreBoosted+=upSpoke;
@@ -466,6 +467,8 @@ var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpo
             
             else //if(  0.>=hyperCoreBoosted)
             {
+                s.multiplyScalar( Math.sqrt(2.)/1.5);
+
                 if(!wheel)
                 {
                     hyperCoreOUTPUT-=spokeloverCoreShiftDown;
