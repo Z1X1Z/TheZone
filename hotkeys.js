@@ -164,7 +164,7 @@ function resetAll(){
     
     window.xTouch=0;
     window.yTouch=0;
-    
+    window.touchVolume = 1;
     window.radialOctaveBoost = false;
     window.twist = 0.;
     window.flip = 1.;
