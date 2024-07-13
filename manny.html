@@ -318,9 +318,15 @@ let maxLetterDepth=-1;
             -->
             <label for="ConcertKey">THE A Key Frequency (Should probably be "Concert A" 440 hz):</label>
            <input type="number" id="ConcertKey" name="ConcertKey" class="num" onkeydown="
-           if(document.getElementById('ConcertKey').value!=0)
+          // if(document.getElementById('ConcertKey').value!=0)
                 window.ConcertKey=document.getElementById('ConcertKey').value">
                <br>
+               
+               <label for="TouchVolume">Touch Volume (0-1?):</label>
+              <input type="number" id="TouchVolume" name="TouchVolume" class="num" onkeydown="
+                   window.touchVolume=document.getElementById('TouchVolume').value">
+                  <br>
+                  
                <label for="RadialWarp">Magnify rate of the octave, radially by</label>
               <input type="number" id="RadialWarp" name="RadialWarp" class="num" onkeydown="
                     let b=document.getElementById('RadialWarp').value;
@@ -3998,7 +4004,7 @@ if(starOnDot>=1){
                                                                  
                                                                  
                     vec4 pixelStarship=vec4(0.);
-                    vec4 pixelWitnessAndStars=vec4(0.);
+                    float mnyWhite=1.;
          float pixelShipGrey = 0.;
          vec4 icicles=vec4(0.);
 
@@ -4020,9 +4026,21 @@ if(starOnDot>=1){
              }
              pixelStarship += starBuffer;
              
-             if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.&&pixelStarship.w>3.5/255.)mny*=pixelStarship.xyz+(1.-pixelStarship.w);//-mny.x*.66;
+             
+             //if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.&&pixelStarship.w>0.)
+            // mny*=pixelStarship.xyz;//-mny.x*.66;
+             
+             if(mny.z>0.&&mny.y>0.&&mny.x>0.){
+             mnyWhite=0.;//-mny.x*.66;
+             mny*=pixelStarship.xyz;
+             }
+             
+             if(heartWarmed.z==heartWarmed.y&&heartWarmed.y==heartWarmed.x&&heartWarmed.x!=0.&&pixelStarship.w>0.)
+             heartWarmed*=pixelStarship.xyz;//-mny.x*.66;
 
-              
+             
+
+             
               
          }
                                                                  vec2 faceDimension = (1.-vUv)*aspectRatio;
@@ -4040,10 +4058,10 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
                                           ( hypnoticHarmonicCircles+pillar+icicles.xyz)*(1.-pixelShipGrey*40.)
                                            +yourFace.xyz
-                    +clamp((mny-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r),0.,1.)*2.
+                    +clamp((mny-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r)*mnyWhite,0.,1.)*2.
                                       +(-hypnoticHarmonicCircles.x-hypnoticHarmonicCircles.y-hypnoticHarmonicCircles.z)*2.)*starshipMultiplier*(1.-isGrey-pixelShipGrey)
                         -(ARTICLE.r+ARTICLE.g+ARTICLE.b)
-                           ,0.,1.)*(1.-pixelShipGrey)
+                           ,0.,1.)
                                                     +ARTICLE
                                                     +bridge*(1.-isGrey-pixelShipGrey)//+AM*(1.-isGrey-pixelShipGrey)
                                                     ,1.);
@@ -4060,7 +4078,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                       -(StaRivers.r+StaRivers.g+StaRivers.b)*StaRivers.w
                        -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*4.
                                                  
-                                                -abs( -pixelStarship.r-pixelStarship.g-pixelStarship.b)
+                                                +( -pixelStarship.r-pixelStarship.g-pixelStarship.b)
                                                  
                                                  );
 
@@ -4072,7 +4090,7 @@ vec4 tree = vec4( clamp(
                            
                                               ,0.,1.)
                         +b+creatures
-                    +   pixelStarship.xyz+pixelWitnessAndStars.xyz
+                    +   pixelStarship.xyz
           -vec3((mny.r+mny.b+mny.g)),.0,1.)
               ,1.);
         
