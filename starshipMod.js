@@ -1627,10 +1627,10 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
             hyperCorePixel[1]/=4.;
     let hyperCoreOffset = Math.ceil(hyperCorePixel[0]);
     if(!isNaN(loudestFret[0].volume)&&window.dynamicCoring)
-        coreData[hyperCoreOffset]=Math.abs(coreShift)+coringValue;//24*1.3247;
+        coreData[hyperCoreOffset]=Math.abs(coreShift)+2./3.;//24*1.3247;
     else for(var h = 0; h<coreData.length; h++) {
         if(document.getElementById('coringConstant').value==-1)
-            coreData[h]=1./-leaf/gr;
+            coreData[h]=1./-leaf;
         else coreData[h]=Number(document.getElementById('coringConstant').value);
     }
     if(!isNaN(loudestFret[0].volume)&&omniDynamicEngaged)
