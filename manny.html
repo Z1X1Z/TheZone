@@ -3880,9 +3880,9 @@ vec2 dance = vec2(0.);
                                                                        float b =nyq*pow(2.,angleASKEW+n);
                                                                        frAMP += texture2D(micIn, vec2(b,0.)).r;
                                                                  }
-                                 frAMP*=1.+frAMP;
+                                 frAMP*=.5+frAMP;
      float heartSize = 1.;
-                                 if(frAMP-volume!=0.&&volume!=1.) heartSize=gr*gr*-leaf/(frAMP-volume*1.5);//*8.;
+                                 if(frAMP-volume!=0.&&volume!=1.) heartSize=gr*gr*-leaf/(frAMP);//*8.;
                                  else heartSize=gr*gr*-leaf;//for touch mode
                                  if(frAMP==0.)frAMP=1.;//to prevent cancelling moveDynamic in touchmode
 
@@ -3903,7 +3903,7 @@ vec2 dance = vec2(0.);
                 if(mannyFace.z>0.)heartMultiplier+=mannyFace;
    if(mannyFace.z>0.)heartMultiplier*=mannyFace;
 */
-                         heartWarmed = HEART/2.;
+                       //  heartWarmed = HEART/2.;
                         if(HEART.x==0.&&HEART.y==0.&&HEART.z==0.)heartWarmed=AM;
                         else if(AM.x!=0.)heartWarmed=clamp(AM*HEART+AM/2.,0.,1.);
                         else heartWarmed=HEART;
