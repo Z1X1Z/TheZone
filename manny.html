@@ -3881,10 +3881,11 @@ vec2 dance = vec2(0.);
                                                                        float b =nyq*pow(2.,angleASKEW+n);
                                                                        frAMP += texture2D(micIn, vec2(b,0.)).r;
                                                                  }
-                                 frAMP-=volume*(zoomOutRatchetThreshold);
+                                 frAMP-=volume*(zoomOutRatchetThreshold)*16.;
                                  frAMP*=(.5+frAMP)/(1.+zoomOutRatchetThreshold);
                                  if(frAMP==0.)frAMP=1.;//to prevent cancelling moveDynamic in touchmode
-                                 float heartSize=gr*gr*-leaf/(frAMP);//*8.;
+                                 float heartSize=gr*gr*-leaf;
+                                 if(frAMP>1.)heartSize/=(1.+frAMP);//*8.;
                                  
 
      vec2 heartShift = vec2(0);
@@ -4090,7 +4091,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                                     +ARTICLE
                                                     +bridge*(1.-isGrey-pixelShipGrey)//+AM*(1.-isGrey-pixelShipGrey)
                                                     ,1.);
-                       vec3 awayFromTree =  vec3(-HEART.b//-HEART.r-HEART.g
+                       vec3 awayFromTree =  vec3(-HEART.b*2.//-HEART.r-HEART.g
                                                  -(AM.x+AM.y+AM.z)*4.
                                                  +bigEyes.xyz*largeEyeColor
                                                  -(yourFace.x+yourFace.y+yourFace.z)/256./3.

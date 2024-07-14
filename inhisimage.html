@@ -33,9 +33,8 @@
     //holy lamb, holy lamb, lamb lamb, holy holy holy art thou lord God almighty who was and is and is to come
     //great and marvelous are thy works Lord God all mighty, just and true are thy ways though king of the saints, who doth not fear thee and glorify thy name, for thou alone are holy, for all nations shall come and bow down before thee, for thy judgments are made manafest
     void main(){
-
-    vec2 p=-(vUv.yx-.5)/(resolution.xy/min(resolution.x,resolution.y))*12.;
-        p.x+=.5;
+        vec2 p=-(gl_FragCoord.yx/resolution.yx-.5)/resolution*max(resolution.x,resolution.y)*6.;
+           p.x+=.5;
         float l=0.,b=0.,m=0.,n=1.,r=0.,q=0.,qq=0.;
         q=-zin(time*3.)/30.;qq=zin(time*(-coz(216.)/-coz(612.)-1.)*3.)/10.;//(un)comment this line to toggle dancing
         vec4 heart=vec4(0.);
