@@ -2475,7 +2475,7 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
                            float   oneOverLeafTruncated = ((1./leaf)/truncator)*truncator;
             float downSpoke=oneOverLeafTruncated;//1./(((-leaf)*truncator)/truncator)/4.;
                                                            
-              vec2 coordsAltered=coords/gr;
+              //vec2 coordsAltered=coords/gr;
                
                    float variant4Correction=1.;
                    if(clvrVariant4)variant4Correction=(1.-oneOverLeafTruncated);
@@ -2628,7 +2628,7 @@ vec2 lastS = s;
        hyperCoreOUTPUT-=dstnce;
        }
        
-     //  if(clvrVariant9) s+= coordsAltered;
+       if(clvrVariant9) s+= coords*gr;
 
         if(clvrVariant7)s+=pcs;
         
