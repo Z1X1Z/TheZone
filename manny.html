@@ -3846,7 +3846,7 @@ vec2 dance = vec2(0.);
                                            mny=clamp(mny,0.,1.);
                                                                  
                                                                  
-                                                                 float heartRate = 1./11.;
+                                                                 float heartRate = 1./12.;
                                                                  
                                          vec2 moveDynamicSpunToKey=spin2(moveDynamic*vec2(1.,flipStar*brelued)///.8
                                                                          , -(//starSpin*mod(time*rate,PI*2.)-
@@ -3881,9 +3881,9 @@ vec2 dance = vec2(0.);
                                                                        frAMP += texture2D(micIn, vec2(b,0.)).r;
                                                                  }
                                  frAMP*=.5+frAMP;
-     float heartSize = 1.;
-                                 if(frAMP-volume!=0.&&volume!=1.) heartSize=gr*gr*-leaf/(frAMP);//*8.;
-                                 else heartSize=gr*gr*-leaf;//for touch mode
+     float heartSize = gr*gr*-leaf;
+                                 if(frAMP&&volume!=1.) heartSize=gr*gr*-leaf/(frAMP);//*8.;
+                                 
                                  if(frAMP==0.)frAMP=1.;//to prevent cancelling moveDynamic in touchmode
 
      vec2 heartShift = vec2(0);
