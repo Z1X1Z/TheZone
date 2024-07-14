@@ -3882,7 +3882,7 @@ vec2 dance = vec2(0.);
                                                                  }
                                  frAMP*=.5+frAMP;
      float heartSize = gr*gr*-leaf;
-                                 if(frAMP&&volume!=1.) heartSize=gr*gr*-leaf/(frAMP);//*8.;
+                                 if(frAMP>0.&&volume!=1.) heartSize=gr*gr*-leaf/(frAMP);//*8.;
                                  
                                  if(frAMP==0.)frAMP=1.;//to prevent cancelling moveDynamic in touchmode
 
