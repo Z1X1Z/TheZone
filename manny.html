@@ -1485,6 +1485,7 @@ void main(){
     
     uniform bool pixelSTARon;
     uniform float fftSize;
+    uniform float zoomOutRatchetThreshold;
     uniform float sampleRate;
     uniform float nyq;//actually 2/nyquist
     uniform float radialWarp;
@@ -3846,7 +3847,7 @@ vec2 dance = vec2(0.);
                                            mny=clamp(mny,0.,1.);
                                                                  
                                                                  
-                                                                 float heartRate =volume;
+                                                                 float heartRate =1./12.;
                                                                  
                                          vec2 moveDynamicSpunToKey=spin2(moveDynamic*vec2(1.,flipStar*brelued)///.8
                                                                          , -(//starSpin*mod(time*rate,PI*2.)-
@@ -3880,11 +3881,11 @@ vec2 dance = vec2(0.);
                                                                        float b =nyq*pow(2.,angleASKEW+n);
                                                                        frAMP += texture2D(micIn, vec2(b,0.)).r;
                                                                  }
-                                 frAMP*=.5+frAMP;
-     float heartSize = gr*gr*-leaf;
-                                 if(frAMP-volume>0.&&volume!=1.) heartSize=gr*gr*-leaf/(frAMP-volume);//*8.;
-                                 
+                                 frAMP-=volume*(zoomOutRatchetThreshold);
+                                 frAMP*=(.5+frAMP)/(1.+zoomOutRatchetThreshold);
                                  if(frAMP==0.)frAMP=1.;//to prevent cancelling moveDynamic in touchmode
+                                 float heartSize=gr*gr*-leaf/(frAMP);//*8.;
+                                 
 
      vec2 heartShift = vec2(0);
      vec3 HEART = vec3(0.);
