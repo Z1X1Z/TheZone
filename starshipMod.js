@@ -1686,6 +1686,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
     
         uniforms[ "time2dance" ].value += audioX.sampleRate/bufferSize*totalAMP;
         uniforms["volume" ].value = audioX.sampleRate/bufferSize*totalAMP/(1.+zoomOutRatchetThreshold);
+    uniforms["zoomOutRatchetThreshold" ].value=zoomOutRatchetThreshold;
         uniforms[ "zoom" ].value = zoom;
     
     
