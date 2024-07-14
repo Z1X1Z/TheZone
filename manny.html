@@ -2637,7 +2637,7 @@ vec2 lastS = s;
      
       if(clvrVariant1)  s*=length(lastS);
       if(clvrVariant3)s-=pCenterCored*dstnce;
-      if(clvrVariant2){
+      if(clvrVariant2)if(length(s.x!=0.&&s.y!=0.&&coords.x!=0.&&coords.y!=0.){
           vec2 cb=coords.yx;
           vec2 coordClover=vec2(
                                 cb.x*cb.x*cb.x         - 3.*cb.x*cb.y*cb.y,
@@ -2650,11 +2650,11 @@ vec2 lastS = s;
                           
       if(clvrVariant4)   s*=1.-oneOverLeafTruncated;
   
-     /* if(clvrVariant5)if(length(s)>0.) s = vec2(pow(s.x,-2.),pow(s.y,-2.));
+      if(clvrVariant5)if(length(s)>0.) s = vec2(pow(s.x,-2.),pow(s.y,-2.));
       if(clvrVariant6)s=s-lastS.yx;
       if(clvrVariant8) if(length(s)<1.)s+=1.;
 
-   */
+   
        //if(dotted)s/=dot(-m,t)*dot(m,-t);
 
        if(morph!=0.&&!wheel)s-=t;
