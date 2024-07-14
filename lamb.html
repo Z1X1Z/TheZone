@@ -27,8 +27,8 @@
         uniform vec2 resolution;
 void main(){
 
-	vec2 p=-(vUv.yx-.5)/(resolution.xy/min(resolution.x,resolution.y))*17.;
-	p.x-=.4;
+    vec2 p=-(gl_FragCoord.yx/resolution.yx-.5)/resolution*max(resolution.x,resolution.y)*9.;
+             p.x-=.5;
 vec2 s=p;
 float l=1.;
 	    for (int f=0;f<21;f+=1)

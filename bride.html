@@ -26,8 +26,8 @@
         uniform vec2 resolution;
         uniform float time;
 void main(){
-    vec2 p=-(vUv.yx-.5)/(resolution.xy/min(resolution.x,resolution.y))*30.;
-    float c=0.,n=.25,l=0.,x=0.;
+    vec2 p=-(gl_FragCoord.yx/resolution.yx-.5)/resolution*max(resolution.x,resolution.y)*15.;
+       p.x+=.5;    float c=0.,n=.25,l=0.,x=0.;
     float time2 = time*2.;
     p.x+=2.;
 //vv body vv
