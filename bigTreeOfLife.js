@@ -190,7 +190,7 @@ hyperCore*=equilibriator;
    hyperCore-=coreDilation
    if(clvrVariant4)
    {
-   // hyperCore-=.5/Math.log(.5);//1./(7.*log(.5));
+    hyperCore+=.0/Math.log(.5);//1./(7.*log(.5));
     if(cloverSlide)hyperCore+=1.25/Math.log(.5);
     if(wheel)hyperCore-=1./Math.log(.5);
     if(morph!=0.)hyperCore-=5./Math.log(.5);
@@ -349,6 +349,7 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
 
         
         if(clvrVariant1)  s.multiplyScalar( Math.sqrt(lastS.x*lastS.x+lastS.y*lastS.y));
+    /*
         if(clvrVariant3)s.sub(pCenterCored.multiplyScalar( dstnce));
 
         if(clvrVariant2){
@@ -357,6 +358,7 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
                                   cb.x*cb.x*cb.x         - 3.*cb.x*cb.y*cb.y,
                 -cb.y*cb.y*cb.y+ 3.*cb.x*cb.x*cb.y
                 );
+     
           var modifier=  new THREE.Vector2(
                                            coords.x*coords.y*(1.-Math.abs(coords.y))*(1.-Math.abs(coords.x))/Math.abs(s.x)/coordClover.y*coords.y,
             coords.y*coords.x*(1.-Math.abs(coords.x))*
@@ -364,13 +366,15 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
             s.sub(modifier);
            // hyperCoreBoosted-=length(modifier);
             }
+     */
         if(clvrVariant4)  s.multiplyScalar( 1.-oneOverLeafTruncated);
 
 // if (mod(counter,5.) == 4.)s =pCenterCored;
 //x**3
-    
+    /*
 if(clvrVariant5) new THREE.Vector2(Math.pow(s.x,-2.),Math.pow(s.y,-2.)) ;
 if(clvrVariant6)s.sub(new THREE.Vector2( lastS.y,lastS.x));
+     */
 if(clvrVariant8) if(Math.sqrt(s.x*s.x+s.y*s.y)<1.)s.addScalar( 1.);
 
 //if(dotted)s/=dot(-m,t)*dot(m,-t);

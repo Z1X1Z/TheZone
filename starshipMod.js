@@ -1423,6 +1423,8 @@ function runOSMD (){
                                         else touchMovement=[-xTouch/zoomFrames,yTouch/zoomFrames]
                                     if(!window.shouldShowStar||touchOnlyMode)uniforms[ "volume" ].value=1.;
 
+                                    uniforms["zoomOutRatchetThreshold" ].value=0.;;
+
                                     uniforms.d.value.x+=xTouch/uniforms[ "volume" ].value;
                                     uniforms.d.value.y+=-yTouch/uniforms[ "volume" ].value;
                                     var spunTouch=touchMovement;
