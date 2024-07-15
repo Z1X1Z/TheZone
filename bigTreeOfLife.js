@@ -286,9 +286,9 @@ coreBooster=multCrossTwist.length()/Math.log(.5)*lfc;
                           
                           dstnce=s.length();
                           if(dilate){
-                            let dilation = dstnce*variant4Correction;
-                              hyperCoreOUTPUT-=dilation;//dilate clover shift
-                              hyperCoreBoosted-=dilation;//maybe times 1.5
+                            
+                              hyperCoreOUTPUT-=dstnce;//dilate clover shift
+                              hyperCoreBoosted-=dstnce;//maybe times 1.5
                           }
                                                        
                           var    initialHyperCoreBoosted=hyperCoreBoosted;
@@ -338,8 +338,8 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
 );
     
         dstnce = s.length();
-    if(dilate){
-       // if(cored>0.){//this is to allow top level core freeze for original clover
+    
+        if(cored>0.){//this is to allow top level core freeze for original clover
             hyperCoreBoosted-=dstnce;
             hyperCoreOUTPUT-=dstnce;
         }
@@ -517,13 +517,12 @@ dstnce = s.length();
            3. &&exponentialPetals!=0.)
             s= new THREE.Vector2( spin2([s.x,s.y],Math.pow(2.,(Math.atan(s.y,s.x)/Math.PI+1.)*2.)));
     dstnce=s.length();
-    /*
         if(dilate){
           
             hyperCoreOUTPUT-=dstnce;//dilate clover shift
             hyperCoreBoosted-=dstnce;//maybe times 1.5
         }
-*/
+
 for(var i=0;i<40; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER&& 0.<=hyperCoreBoosted)
 {
