@@ -3848,13 +3848,13 @@ vec2 dance = vec2(0.);
                                            mny=clamp(mny,0.,1.);
                                                                  
                                                                  
-                                                                 float heartRate =1./12.;
+                                                                 float heartRate =1./6.;
                                                                  
                                          vec2 moveDynamicSpunToKey=spin2(moveDynamic*vec2(1.,flipStar*brelued)///.8
                                                                          , -(//starSpin*mod(time*rate,PI*2.)-
                                                                                                           twistStar*brelued));
                                                                  
-                                                                               vec2 vUvCenteredASKEW = (vUv.yx-.5-moveDynamicSpunToKey*heartRate*aspectRatio);
+                                                                               vec2 vUvCenteredASKEW = (vUv.yx-.5-d.yx*heartRate*aspectRatio);
                                                                                vec2 uVuASKEW=-(vUvCenteredASKEW)/aspectRatio;
                                                                                vec2 uVuMinCenterASKEW=-vUvCenteredASKEW/(min(resolution.x,resolution.y)/resolution.yx);
                                  
@@ -3895,7 +3895,7 @@ vec2 dance = vec2(0.);
     if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                                  else if(Character==2)heartSize=gr;
      if (Character!=9&&Character!=10&&colorCombo!=20&&colorCombo!=17){
-      HEART = heart(characterPSpunToKey*heartSize+heartShift, moveDynamicSpunToKey/4.*frAMP*heartRate)/gr
+      HEART = heart(characterPSpunToKey*heartSize+heartShift, d.yx/4.*frAMP*heartRate)/gr
      //*(1.-length(uVuMinCenterASKEW)/8.)
      ;
                     
