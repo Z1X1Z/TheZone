@@ -50,7 +50,7 @@ clvrVariant9:{value: false},
         spokelover:{value: true    },
 largeEyeColor:{value:0.},
 
-dilate:{value:true},
+dilate:{value:false},
 
     
         continuumClover:{value: false    },
