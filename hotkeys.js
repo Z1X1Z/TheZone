@@ -13,7 +13,7 @@ const secondsToEdge=window.pixelShaderSize/4./pixelShaderToStarshipRATIO;
 window.uniformsInitial = {
 coreDilation:{value:0.},
 fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:1024./44100.},//actually 2/nyquist
-zoomOutRatchetThreshold:{value:1.},
+zoomOutRatchetThreshold:{value:0.},
 radialWarp:{value:1.},
     pixelSTARon:{value:true},
 
@@ -165,7 +165,7 @@ function resetAll(){
     
     window.xTouch=0;
     window.yTouch=0;
-    window.touchVolume = 1;
+    window.touchVolume = .5;
     window.radialOctaveBoost = false;
     window.twist = 0.;
     window.flip = 1.;
