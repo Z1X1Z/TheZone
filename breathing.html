@@ -73,12 +73,15 @@
    uniform vec2 mouse;
    float zin(float x){return -sin(x);}
    float coz(float x){return -cos(x);}
+   
+   const float pi = 3.141592;
+   const float gr = -cos(216.*pi/180.)/-cos(612.*pi/180.)-1.;
 //great and marvelous are thy works Lord God all mighty, just and true are thy ways though king of the saints, who doth not fear thee and glorify thy name, for thou alone are holy, for all nations shall come and bow down before thee, for thy judgments are made manafest
 void main(){vec2 p=-(gl_FragCoord.yx/resolution.yx-.5)/resolution*max(resolution.x,resolution.y)*5.7,s=p;
    p.x+=.5;
    float l=0.,b=0.,m=0.,n=1.,r=0.,q=0.,qq=0.;
- float gr =coz(216.)/coz(612.)-1.;
- q=-zin(time*3.)/30.*zin(time*(gr-1.))-mouse.x+.5;qq=zin(time*(gr)*3.)/10.*zin(time*(gr+1.))-mouse.y+.5;//(un)comment this line to toggle dancing
+
+    q=-zin(time)/12.;qq=zin(time*gr)/12.;//(un)comment this line to toggle dancing
                  vec4 heart=vec4(0.);
 
 //Mandelbrot\heart

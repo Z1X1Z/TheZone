@@ -66,23 +66,24 @@
 
 		<script id="example" type="x-shader/x-fragment">
 
-
-
-//This completes the black key white key musical alternation with the eyes holies: b flat - f and f# - b, with reverse positions and orientations
-
 precision highp float;
 uniform vec2 resolution;
 uniform float time;
+float pi = 3.141592;
+float divineProportion = -cos(216.*pi/180.)/-cos(612.*pi/180.)-1.;
 void main(){vec2 p=-(gl_FragCoord.yx/resolution.yx-.5)/resolution*max(resolution.x,resolution.y)*6.7-vec2(1.618,0.),s=p;
     float l=0.;
     for (int f=0;f<15;f+=1)//turn f<2 or f<3 for diatonic scale 8/5, 8/4
         s=vec2(-1./(s.x*s.x-s.y*s.y-p.x), 2.0*s.x*s.y-p.y);//this is {s=s^2-p;s.real=-1./s.real}
                    
-    float centralPowerInverter=(s.x/s.y)*sign(s.x*s.y)*2.;
+    float centralPowerInverter=1.;
+                if(p.y!=0.)centralPowerInverter=(s.x/s.y)*sign(s.x*s.y)+s.x*divineProportion;
     l= //1.-
-        centralPowerInverter;
+        centralPowerInverter*divineProportion;
+
     gl_FragColor=vec4(l);
 }
+
 
 
 
