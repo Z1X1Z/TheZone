@@ -191,14 +191,14 @@ hyperCore*=equilibriator;
   // hyperCore-=coreDilation
    if(clvrVariant4)
    {
-    hyperCore+=.0/Math.log(.5);//1./(7.*log(.5));
+    hyperCore-=.5/Math.log(.5);//1./(7.*log(.5));
     if(cloverSlide)hyperCore+=1.25/Math.log(.5);
     if(wheel)hyperCore-=1./Math.log(.5);
     if(morph!=0.)hyperCore-=5./Math.log(.5);
 
 }
    else {
-   // hyperCore-=.5/Math.log(.5);
+    hyperCore-=.5/Math.log(.5);
     if(cloverSlide)hyperCore+=.5/Math.log(.5);
     if(wheel)hyperCore-=1./Math.log(.5);
     if(morph!=0.) hyperCore-=5./Math.log(.5);
@@ -286,12 +286,14 @@ coreBooster=multCrossTwist.length()/Math.log(.5)*lfc;
                                                                                   
                           
                           dstnce=s.length();
+                                                       /*
                           if(dilate){
                             
                               hyperCoreOUTPUT-=dstnce;//dilate clover shift
                               hyperCoreBoosted-=dstnce;//maybe times 1.5
                           }
-                                                       
+                                                        */
+
                           var    initialHyperCoreBoosted=hyperCoreBoosted;
                           //var lengthP = p.length(p);
 
