@@ -1422,7 +1422,8 @@ ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
         uniform int eden;
 
         const float PI = 3.14159274;
-        const divineProportion = -cos(216.*pi/180.)/-cos(612.*pi/180.)-1.;        const float leaf = -1.32471795;
+        const float gr = -cos(216.*PI/180.)/-cos(612.*PI/180.)-1.;
+                              const float leaf = -1.32471795;
         float zin(float x){return -sin(x);}
         float coz(float x){return -cos(x);}
         
@@ -1616,7 +1617,7 @@ uniform float exponentialPetals;
                                   
                                   const float PI = 3.14159274;
                                   const float PI2 = PI*2.;
-    const float gr = 1.6180339;
+                                  const float gr = -cos(216.*PI/180.)/-cos(612.*PI/180.)-1.;
     const float leaf = -1.3247179;//5724474;
     const float eConstant = 2.71828182;
     float lerp(float a) {return -abs(mod(a,2.)-1.);}
@@ -2410,14 +2411,14 @@ if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
   //  if(cloverSlide&&wheel)hyperCore+=1.75/log(.5);
    if(clvrVariant4)
    {
-    hyperCore+=.0/log(.5);//1./(7.*log(.5));
+    hyperCore-=.5/log(.5);//1./(7.*log(.5));
     if(cloverSlide)hyperCore+=1.25/log(.5);
     //if(wheel)hyperCore-=0./log(.5);
     if(morph!=0.)hyperCore-=2.5/log(.5);
 
 }
    else {
-    //hyperCore-=.5/log(.5);
+    hyperCore-=.5/log(.5);
     if(cloverSlide)hyperCore+=.5/log(.5);
     if(wheel)hyperCore-=1./log(.5);
     if(morph!=0.) hyperCore-=5./log(.5);
@@ -2519,13 +2520,15 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
                              )*log(2.)/log(metaCoreDriveFactor)+loops;
                              */
                              dstnce=length(s);
+                                                           /*
                              if(dilate){
                                         float dilation = dstnce*variant4Correction;
-                             hyperCoreOUTPUT+=dilation;//dilate clover shift
-                             hyperCoreBoosted+=dilation;//maybe times 1.5
+                             hyperCoreOUTPUT-=dilation;//dilate clover shift
+                             hyperCoreBoosted-=dilation;//maybe times 1.5
                              }
-                            float initialHyperCoreBoosted = hyperCoreBoosted;
+                                                            */
 
+                            float initialHyperCoreBoosted = hyperCoreBoosted;
                                        float colorComputationBoost =7.;//increasing number decreases processing and clarity
                                        float baseDelimiter =50.;
        float delimiter = baseDelimiter;
