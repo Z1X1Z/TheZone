@@ -77,9 +77,9 @@ void main(){vec2 p=-(gl_FragCoord.yx/resolution.yx-.5)/resolution*max(resolution
         s=vec2(-1./(s.x*s.x-s.y*s.y-p.x), 2.0*s.x*s.y-p.y);//this is {s=s^2-p;s.real=-1./s.real}
                    
     float centralPowerInverter=1.;
-                if(p.y!=0.)centralPowerInverter=(s.x/s.y)*sign(s.x*s.y)+s.x*divineProportion;
+                if(p.y!=0.)centralPowerInverter=(s.x/s.y)*sign(s.x*s.y)+s.x*2.;
     l= //1.-
-        centralPowerInverter*divineProportion;
+        centralPowerInverter;
 
     gl_FragColor=vec4(l);
 }
