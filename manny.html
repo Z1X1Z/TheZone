@@ -1975,7 +1975,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
             centralPowerInverter;
 
             if(musicAngelMan>0){
-                if((Character==3||musicAngelMan==1)&&l<.02)l=1.;
+                if((Character==3||musicAngelMan==1)&&l<.01)l=1.;
                 else if((Character==4||musicAngelMan==2)&&l<abs(p.x)*abs(p.y)/9.)l=0.;
                 }
             else
@@ -2584,7 +2584,6 @@ dstnce = length(s);
                         beta   =  hsv2rgb(vec3(correctionBrueled/(2.*PI),1.,1.));
                         //return beta;
                 }
-                                                         
                  if(dstnce<2./3.||(spokesVisualizeColors&&dstnce<4./3.)) {
                     float decayCanceller=1.;
                     if(spokesVisualizeColors)decayCanceller = 2.;
@@ -4075,15 +4074,15 @@ if(starOnDot>=1){
              
               
          }
-                                                                 vec2 faceDimension = (1.-vUv)*aspectRatio;
-                                                                 vec2 faceDimensionReversed =   vec2(vUv.x,1.-vUv.y)*aspectRatio;
+                                                                 vec2 faceDimension = ((1.-vUv));
+                                                                 vec2 faceDimensionReversed =   vec2(vUv.x,1.-vUv.y);
                                                               vec4 yourFace= vec4(0.);     yourFace=texture2D(videoTexture,faceDimension).xyzw+
                                                                texture2D(videoTexture2,faceDimensionReversed).xyzw
                                                                  ;
 if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                   
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
-                                     -vec4(vec3(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z),0.),0.,1.);
+                                     -vec4(vec3(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z)+yourFace.xyz,0.),0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies = vec4(
                                            mnyX+clamp(heartWarmed-mny*2.,0.,1.)
@@ -4097,7 +4096,8 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                                     +ARTICLE
                                                     +bridge*(1.-isGrey-pixelShipGrey)//+AM*(1.-isGrey-pixelShipGrey)
                                                     ,1.);
-                       vec3 awayFromTree =  vec3(-HEART.b*2.//-HEART.r-HEART.g
+                       vec3 awayFromTree =  vec3(-yourFace.xyz
+                                                 -HEART.b*2.//-HEART.r-HEART.g
                                                  -(AM.x+AM.y+AM.z)*8.
                                                  +bigEyes.xyz*largeEyeColor
                                                  -(yourFace.x+yourFace.y+yourFace.z)/256./3.
