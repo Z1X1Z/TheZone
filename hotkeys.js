@@ -205,7 +205,7 @@ function resetAll(){
             window.movementRate=movementRateORIGINAL;
             window.zoomRate=movementRateORIGINAL;
             window.radialWarp=1.;
-            window.trailSecondsLong = secondsToEdge/movementRate*7.;
+            window.trailSecondsLong = secondsToEdge/movementRate*12.;
             window.trailLength = Math.ceil(zoomFrames*trailSecondsLong);
             window.starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;
             window.starCount = Math.ceil(starArms*60*secondsToEdge);
