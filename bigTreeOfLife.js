@@ -269,7 +269,7 @@ var hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreB
                            var multCrossTwist=new THREE.Vector2(0.,0.);
 if(multiplicatorNexus&&dstnce!=0)//doesn't seem to upcore spokes like intended
 {
-    let spunMCT=spin2(s,Math.atan(s.x,s.y)*1.5*petals/(6.+petals))*Math.sign(.5-morph)//*equilibriator/CORE_DELIMITER
+    let spunMCT=spinVector(s,Math.atan(s.x,s.y)*1.5*petals/(6.+petals))*Math.sign(.5-morph)//*equilibriator/CORE_DELIMITER
         /dstnce;
     
     multCrossTwist=new THREE.Vector2(spunMCT.x,spunMCT.y);
@@ -514,11 +514,11 @@ dstnce = s.length();
 
  //              s*=refactorCores;c*=refactorCores;
  
- if(petals!=0.&&dstnce<4./3.)s=spin2(s,Math.atan(s.y,s.x)*(petals)/6.);
+ if(petals!=0.&&dstnce<4./3.)s=spinVector(s,Math.atan(s.y,s.x)*(petals)/6.);
         
         if(dstnce<4./
            3. &&exponentialPetals!=0.)
-            s= new THREE.Vector2( spin2([s.x,s.y],Math.pow(2.,(Math.atan(s.y,s.x)/Math.PI+1.)*2.)));
+            s=  spinVector(s,Math.pow(2.,(Math.atan(s.y,s.x)/Math.PI+1.)*2.));
     dstnce=s.length();
         if(dilate){
           
@@ -537,7 +537,7 @@ s.multiplyScalar( metaCoreDriveFactor);dstnce*=metaCoreDriveFactor;
 OmniDynamicPetalShift =omniData[(loops+counter-1.)];
 OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
 
-if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spin2(s,Math.atan(s.y,s.x)*OmniPetal);
+if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spinVector(s,Math.atan(s.y,s.x)*OmniPetal);
 
 if (cloverSlide)
 {
@@ -581,7 +581,7 @@ if(metaCarousel!=0.
     else  if(i%4.==3.)wise=1.;
     
     
-    s=THREE.Vector2( spin2([s.x,s.y],time*wise*metaCarousel*(1.+OmniPetal/6.)*rate));
+    s= spinVector(s,time*wise*metaCarousel*(1.+OmniPetal/6.)*rate);
 }
 
 }
@@ -601,13 +601,15 @@ return new THREE.Vector3(s.x,s.y,hyperCoreOUTPUT);}
                            function coz( x){return -Math.cos(x);}
                            function zin( x){return -Math.sin(x);}
 
-                           function spin2(f, t)
-                           {    //https://en.wikipedia.org/wiki/Rotation_matrix
+                           function spinVector(b, t)
+                           {
+                        //https://en.wikipedia.org/wiki/Rotation_matrix
+    var f=b.clone();
                                var angle =t;
                                var fxb=f.x;
                                f.x=-f.x*coz(-angle)-f.y*zin(-angle);
                             f.y=fxb*zin(-angle)-f.y*coz(-angle);
-                            return f.clone();
+                            return f;
                            }
                            
                            
