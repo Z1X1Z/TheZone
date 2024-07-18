@@ -2861,15 +2861,15 @@ let tolerance;//(1024-26)/10000
                  tAScaled =(tAScaled!=0)? tAScaled:1;
                  let tAScaledPermanent = tAScaled;
                  let incrementToleranceFeedback =tAScaled;
-                 let b = 0.;
+                // let b = 0.;
                                if(tAScaled>0&&isFinite(tAScaled))
                                    for(var reps=0; reps<tAScaled**tAScaled;reps+=tAScaled)
                                 { tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaledPermanent))/(2.-tAScaledPermanent))
-                                    tAScaled=tAScaled**(((1.-tAScaled)*(1.+tAScaledPermanent))**.75)
-                                    b++
+                                    tAScaled=tAScaled**(((1.-tAScaled)*(1.+tAScaledPermanent))**.74)
+                          //          b++
                                 }
-                 console.log(b)
-                console.log(tAScaled)
+                // console.log(b)
+               // console.log(tAScaled)
                                tolerance =tAScaled*2.
                            }
 
