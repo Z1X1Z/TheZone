@@ -3996,6 +3996,7 @@ vec2 dance = vec2(0.);
                                  float isBlack =1.;
                                  vec3 starshipMultiplier = vec3(1.);
                                  float isGrey =0.;
+                    vec3 isColoredMultiplier = vec3(1.);
                                  float maxColorOfStarship=1.;
                                  float minColorOfStarship=0.00000001;
                                  float spirographTranslucer = 1.;
@@ -4006,7 +4007,8 @@ if(starOnDot!=2){
                                  
                                  if (starship.x!=0.||starship.y!=0.||starship.z!=0.)maxColorOfStarship=max(max(starship.x,starship.y),starship.z);
                                  if (starship.x!=0.||starship.y!=0.||starship.z!=0.)minColorOfStarship=min(min(starship.x,starship.y),starship.z);
-
+                                 if (starship.x!=0.||starship.y!=0.||starship.z!=0.)isColoredMultiplier=starship.xyz+(1.-starship.w);
+                                 
                                  if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.&&starship.w>3.5/255.)mny*=starship.xyz+(1.-starship.w);//-mny.x*.66;
 
                      
@@ -4129,7 +4131,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                      -vec4(vec3(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z)+yourFace.xyz,0.),0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies = vec4(
-                                           mnyX+clamp(heartWarmed-mny*2.-ss.xyz*ss.w*4.-hypnoticHarmonicCircles,0.,1.)
+                                           mnyX+clamp(heartWarmed*isColoredMultiplier-mny*2.-ss.xyz*ss.w*4.-hypnoticHarmonicCircles,0.,1.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
                                           ( hypnoticHarmonicCircles+pillar*(1.-mny)+icicles.xyz)*(1.-pixelShipGrey*40.)
                                            +yourFace.xyz
