@@ -193,15 +193,15 @@ hyperCore*=equilibriator;
    {
     hyperCore-=.5/Math.log(.5);//1./(7.*log(.5));
     if(cloverSlide)hyperCore+=1.25/Math.log(.5);
-    if(wheel)hyperCore-=1./Math.log(.5);
-    if(morph!=0.)hyperCore-=5./Math.log(.5);
+    //if(wheel)hyperCore-=0./Math.log(.5);
+   // if(morph!=0.)hyperCore+=2.5/Math.log(.5);
 
 }
    else {
     hyperCore-=.5/Math.log(.5);
     if(cloverSlide)hyperCore+=.5/Math.log(.5);
     if(wheel)hyperCore-=1./Math.log(.5);
-    if(morph!=0.) hyperCore-=5./Math.log(.5);
+    if(morph!=0.) hyperCore-=1./Math.log(.5);
 
 
 }
@@ -326,6 +326,7 @@ var  CORE_DELIMITER=coreData[Math.floor(loops+counter)];
 //if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
 
 // if(!true&&morph<.5)CORE_DELIMITER=1./dstnce*pow(2.,4./12.)*equilibriator;
+    dstnce = s.length();
 
 if(spirated!=0.&&dstnce<2./3.)//CORE_DELIMITER)  //works well<(n-1)/n
 s.multiplyScalar( dstnce*2.*Math.PI/(Math.atan(s.y,s.x)-Math.PI*spirated));

@@ -1947,12 +1947,12 @@ if(!clvrVariant9)n= coords.yx*1.5;
 float l = 1.;
 g*=4.;
 vec2 z=g.xy;
-for (int f=0;f<21+6*5;f+=1)if(abs(z.y)>17.7&&(f==1||f>3)){
+for (int f=0;f<21+6*int(log(zoom)/log(.3247));f+=1)if(abs(z.y)>17.7&&(f==1||f>3)){
     //if (f==1){l=0.;break;}
     l=1.-length(z)/40.;//clouds and face
     break;}
 else{
-    z=vec2(-1./(z.x*z.x-z.y*z.y-g.x-t.x/3.+n.x),2.0*z.x*z.y-g.y+t.y/3.+n.y);//also try without coords for more classical
+    z=vec2(-1./(z.x*z.x-z.y*z.y-g.x-t.x/3.-n.x),2.0*z.x*z.y-g.y+t.y/3.+n.y);//also try without coords for more classical
     l=abs(z.y)*5.;//smooths middle horn, removes some clouds
     if(z.x>-.1)l=z.x*50.;}//face with closed small holes
 return vec3(clamp(1.-l,0.,1.));
@@ -2162,9 +2162,38 @@ vec3 faceFORWARD(vec2 p,vec2 t){
            // centralPowerInverter;
         return vec3(vec2((s.x*love1),abs(s.y*love2)),vec2(s.x*s.x*love1)*l);
     }
+vec3 kissingEagles(vec2 p){
+                          vec2 g=p*.5;
+                          vec2 s=g;
+                          float l=0.;
+                          g = -p;
+                                  g.x+=.25;
+                          s=g;
+                                              float q = 0.;
+                          for (int f=0;f<10;f+=1)if(abs(s.x)+abs(s.y)>20.&&f>3){q/=2.;}
+                              else {s=vec2(-1./((s.x*s.x-s.y*s.y)-g.x),(2.0*s.x*s.y-g.y)); s.x=pow(abs(s.x),s.x); q+=.1;}
 
-    
+                          
+                                  return vec3(q);
+                              }
+                          
+                          vec3 faceFORWARDTWO(vec2 p,vec2 t){
+                             p.x+=2.;
+                              vec2 s=p;
+                                  for (int f=0;f<2;f+=1) s=vec2(-1./(s.x*s.x-s.y*s.y-p.x+t.x), 2.0*s.x*s.y-p.y-t.y*2.);//this is {s=s^2-p;s.real=-1./s.real}
+                                  float l=(s.x/s.y)*sign(s.x*s.y);
+                                      //I was studying this function without the face and a power short ocurred and on firefox window restore and caused a semi-reversion hybridization
+                         //if(l<abs(p.x)*abs(p.y)/15.)l=0.;
+                                          
+                                      if (l>1.)l=1.;
+                                      
+                                             if(p.y==0.&&t.y==0.)l=1.;
+                                             return vec3(l);
+                                         
+                              }
 
+
+                          
 vec3 sealedMan(vec2 p,vec2 t)
 {
 p.x+=2.;
@@ -2213,12 +2242,14 @@ return vec3(l+b+r+h);}
                    float l=0.;
                    float n=.0, c=.0, r=.0, x=.0;
                    //vv legs vv
-                   if (g.x<1.8 &&g.x>.5 &&abs(g.x*g.y)<.5)for (int f=0;f<10;f+=1){if(abs(s.x+s.y)>200.&&f>4){c=1.;break;}
+                   
+                   if (g.x<1.8 &&g.x>.5 &&abs(g.x*g.y)<.5)for (int f=0;f<10;f+=1)if(abs(s.x+s.y)>200.&&f>4){c=1.;break;}
                      else {s=vec2(-1./((s.x*s.x-s.y*s.y)-g.x+t.x),(67.0*s.x*s.y-.7*g.y+t.y));s*=3.; s.y = -1./s.y; }
-                                  }
+                                  
                     g = p;
                    s=g;
-                   if(g.x*g.x+g.y*g.y*4.<2.||g.x>0.){
+                                  
+                   if((g.x*g.x+g.y*g.y*4.<2.||g.x>0.)&&abs(g.y)<2.){
                    //vv body vv
                        for (int f=0;f<21;f+=1){if(abs(s.x+s.y)>12.&&f>7){l=1.;break;}
                           else {s=vec2(-1.5/((s.x*s.x-2.*s.y*s.y)-g.x+t.x),(1.7*s.x*s.y-1.2*g.y+t.y));s*=1.3; s.x=pow(abs(s.x),.6125 );  }
@@ -2226,15 +2257,17 @@ return vec3(l+b+r+h);}
                 g=p;
                         s=g;
                    //vv body vv
-                       for (int f=0;f<30;f+=1){if(abs(s.x+s.y)>20.&&f>4){x=1.;break;}
+                   
+                     if(abs(g.y)<2.)  for (int f=0;f<10;f+=1){if(abs(s.x)+abs(s.y)>20.&&f>4){x=1.;break;}
                        else {s=vec2(-1.5/((s.x*s.x-2.*s.y*s.y)-g.x+t.x),(1.7*s.x*s.y-1.34*g.y+t.y));s*=1.7; s.x=pow(abs(s.x),.549 );  }
                        }
                      }
                          //vv robe vv
+                                  
                    g=p;
                    g.x+=-.3;
                    s=g;
-                   if (g.x>.50)for (int f=0;f<20;f+=1){if(abs(s.x+s.y)>11.&&f>7){r=clamp(1.4-abs(g.x-2.3)
+                   if (abs(g.y)<2.&&g.x>.50)for (int f=0;f<20;f+=1){if(abs(s.x+s.y)>11.&&f>7){r=clamp(1.4-abs(g.x-2.3)
                                                                                          *(1.-abs(g.y*g.x))-.07
                                                                                         ,0.,1.);
                                                                                         break;}
@@ -2268,6 +2301,7 @@ float lfc = length(freed(coords));
 float precores = .25/log(.5);
 if(clvrVariant4&&cloverSlide) precores=precores-1./log(.5);
 else if(clvrVariant4)precores=0.;
+if(morph!=0.)precores-=5./log(.5);
 
 if(refactorCores!=1.)precores=-.0;
 
@@ -2414,14 +2448,14 @@ if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
     hyperCore-=.5/log(.5);//1./(7.*log(.5));
     if(cloverSlide)hyperCore+=1.25/log(.5);
     //if(wheel)hyperCore-=0./log(.5);
-    if(morph!=0.)hyperCore-=2.5/log(.5);
+   // if(morph!=0.)hyperCore+=2.5/log(.5);
 
 }
    else {
     hyperCore-=.5/log(.5);
     if(cloverSlide)hyperCore+=.5/log(.5);
     if(wheel)hyperCore-=1./log(.5);
-    if(morph!=0.) hyperCore-=5./log(.5);
+    if(morph!=0.) hyperCore-=1./log(.5);
 
 }
    
@@ -2553,7 +2587,8 @@ else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter
                            // if(!true&&morph<.5)CORE_DELIMITER=1./dstnce*pow(2.,4./12.)*equilibriator;
                             
   // if( loopSolid>=hyperCoreBoosted+1.||inCenterCore){//||lengthP<2./3.){//so it doesn't run until it needs to, hopefully working
-       
+  dstnce = length(s);
+
        if(spirated!=0.&&dstnce<2./3.)//CORE_DELIMITER)  //works well<(n-1)/n
 s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
 dstnce = length(s);
@@ -2607,8 +2642,10 @@ dstnce = length(s);
                  if(dstnce<2./3.)
                  {
                      vec2 move =-d.yx*volume/8.;
-                   //  if(march==0||march==3)oo+=color*sealedMan(s*5.,move);
-                  //  else oo+=color*sealedWoman(s*5.,move);
+                     if(march==0||march==3)
+                   {//oo+=color*(sealedMan(s*5.,move)+faceFORWARDTWO(s*5.,vec2(0.))/1.5);
+                                       }
+                  //  else oo+=color*(sealedWoman(s*5.,move)+kissingEagles(s*5.)/1.5);
                  }
                                           
             }
@@ -2712,7 +2749,7 @@ if(Spoker){
             }
                 else {*/
                   //  float correctionSpoke =pow(upSpoke/dstnce,grOverLeaf);//uncertain value
-                  s*=spoke_factor;
+                 s*=spoke_factor;
             hyperCoreOUTPUT+=upSpoke
             ;
             hyperCoreBoosted+=upSpoke;
@@ -3001,7 +3038,7 @@ return clamp(o,0.,1.);}
                                vec2 g=p;
                                 ///g.x+=(coz(t.y)-1.)/2.*.5;
                                vec2 z=g;
-                               if(abs(p.y)<6.)for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>(20.-t.y*50.)&&f>4){x=z.y;break;}
+                               if(abs(p.y)<6.)for (int f=0;f<30;f+=1)if(abs(z.x+z.y)>(20.-t.y*30.)&&f>4){x=z.y;break;}
                                else {z=2.*vec2(-1./((z.x*z.x-(1.44+t.x*.44)*z.y*z.y)
                             -g.x*(1.2+t.y*.2)+d.x),
                        ((1.2-t.y*.8)*z.x*z.y-(1.2+t.y*.2)*g.y+d.y));
@@ -3236,7 +3273,7 @@ return
                   // g.x+=.5;
                    vec2 z=g;
                    for (int f=0;f<100;f+=1)if(abs(z.x+z.y)>20.&&f>4){x+=z.y;break;}
-                   else {z=2.*vec2(-1./((z.x*z.x-1.44*z.y*z.y)-g.x*1.2+t.x),(1.21212121212121*z.x*z.y-1.212121212121*g.y+t.y));
+                   else {z=2.*vec2(-1./((z.x*z.x-1.44*z.y*z.y)-g.x*1.221221+t.x),(1.221221*z.x*z.y-1.221221*g.y+t.y));
                          z.x=pow(abs(z.x),.777-t.x/49.);}
                //vv legs vv
                    g=p/3.5;
@@ -3804,11 +3841,18 @@ vec2 dance = vec2(0.);
                        mny=bod(characterOnTrailP,moveDynamic)+shiny(characterOnTrailP*1.22112211,moveDynamic)+clamp(mannyFace,0.,1.);
                    }
                    else if (Character==1){
-                       vec2 lerper = vec2(lerp(time2dance/13.),lerp(time2dance*gr/13.));
+                       
+                       
+                       vec2 lerper = vec2(lerp(time2dance));//,lerp(time2dance));
+                       
+                       float elbowed = -lerper.y*lerper.y+(-1.+lerper.y*lerper.y)*abs(characterOnTrailP.y*characterOnTrailP.y)/1.5;
+                       if (elbowed<-1.)elbowed=-1.;
                        mny = MannyWoManny(characterOnTrailP,
-                                                        lerper,move/5.
-                                                        )+robeL(characterOnTrailP,lerper,move/5.
-                                                                )*.95;}
+                                          vec2(elbowed),move/5.
+                                                        )+robeL(characterOnTrailP,vec2(elbowed),move/5.)*.95
+                                                        ;
+                                                                if(mny.g<0.)mny=vec3(1.,0.,1.);
+                   }
                    else if (Character==2){
                        mny=bride(characterOnTrailP*gr,moveDynamic/7.)+dress(characterOnTrailP*1.5,-moveDynamic/7.)*2.;
                        swordSkew+=.5;}
@@ -4096,7 +4140,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                                     +ARTICLE
                                                     +bridge*(1.-isGrey-pixelShipGrey)//+AM*(1.-isGrey-pixelShipGrey)
                                                     ,1.);
-                       vec3 awayFromTree =  vec3((-ss.x-ss.y-ss.z)*ss.w
+                       vec3 awayFromTree =  vec3((-ss.xyz)*ss.w
                                                  -yourFace.xyz
                                                  -HEART.b*2.//-HEART.r-HEART.g
                                                  -(AM.x+AM.y+AM.z)*8.
@@ -4133,7 +4177,9 @@ vec4 tree = vec4( clamp(
           vec3 confraculator = vec3(1.);
           if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
           
-gl_FragColor=//vec4(clamp(mny,0.,1.),1.);
+gl_FragColor=
+
+//vec4(clamp(mny,0.,1.),1.);
 fin/vec4(confraculator
                            ,1.);
                        
