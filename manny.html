@@ -4129,7 +4129,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                      -vec4(vec3(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z)+yourFace.xyz,0.),0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies = vec4(
-                                           mnyX+clamp(heartWarmed-mny*2.-ss.xyz*ss.w*2.,0.,1.)
+                                           mnyX+clamp(heartWarmed-mny*2.-ss.xyz*ss.w*4.-hypnoticHarmonicCircles,0.,1.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
                                           ( hypnoticHarmonicCircles+pillar*(1.-mny)+icicles.xyz)*(1.-pixelShipGrey*40.)
                                            +yourFace.xyz
