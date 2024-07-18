@@ -2860,15 +2860,14 @@ let tolerance;//(1024-26)/10000
                  let tAScaled=totalAMP*proportion;
                  tAScaled =(tAScaled!=0)? tAScaled:1;
                  let tAScaledPermanent = tAScaled;
-                // let incrementToleranceFeedback =tAScaled;
-               //  let b = 0.;
+                 let incrementToleranceFeedback =tAScaled;
+                 let b = 0.;
                                if(tAScaled>0&&isFinite(tAScaled))
-                                   for(var reps=0; reps<tAScaledPermanent**tAScaledPermanent;reps+=tAScaled)
-                                       
-                                { tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaled))/(2.-tAScaledPermanent))**((1.-tAScaledPermanent)*(1.+tAScaledPermanent))
-                             //       b++
+                                   for(var reps=0; reps<tAScaled**tAScaled;reps+=tAScaled)
+                                { tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaledPermanent))/(2.-tAScaledPermanent))**((1.-tAScaled)*(1.+tAScaledPermanent))
+                                   b++
                                 }
-                // console.log(b)
+                 console.log(b)
                 console.log(tAScaled)
                                tolerance =tAScaled*2.
                            }
