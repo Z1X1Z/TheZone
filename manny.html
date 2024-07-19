@@ -1899,7 +1899,7 @@ ret= vec4(clamp(
           
       }//face with closed small holes
       if(l<.0&&isEscaped!=-2.)l=0.;
-          if(g.y==0.)l=0.;
+          if(g.y==0.&&t.y==0.)l=0.;
       return vec3(-l);
       }
       vec3 face(vec2 g, vec2 t){
