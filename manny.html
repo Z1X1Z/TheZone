@@ -1889,17 +1889,17 @@ ret= vec4(clamp(
       float isEscaped = 0.;
       for (int f=0;f<21;f+=1)if(abs(z.y)>17.7&&(f>3||f==1)){
           if (f==1){l=0.;break;}
-          l= 1.*z.y*sign(g.y);
+          l= -1.*(z.y)*sign(g.y);
          isEscaped=-2.;//length(z)/40.;//clouds and face
           break;}
       else{
           z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),2.0*z.x*z.y-g.y-t.y);
           l=1.-abs(z.y)*6.;//smooths middle horn, removes some clouds
-          if(z.x>-.1)l=-z.x*9.;
+          if(z.x>-.1)l=-z.x;
           
       }//face with closed small holes
       if(l<.0&&isEscaped!=-2.)l=0.;
-          
+          if(g.y==0.)l=0.;
       return vec3(-l);
       }
       vec3 face(vec2 g, vec2 t){
@@ -1999,7 +1999,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
 
             if(musicAngelMan>0){
                 if((Character==3||musicAngelMan==1)&&l<.01)l=1.;
-                else if((Character==4||musicAngelMan==2)&&l<abs(p.x)*abs(p.y)/9.)l=0.;
+                else if((Character==4||musicAngelMan==2)&&l<abs(p.x)*abs(p.y)/12.)l=0.;
                 }
             else
             {
@@ -2008,7 +2008,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
             }
             
             if (l>1.)l=1.;
-            
+            if(abs(p.y)/p.x>-2.&&p.x<0.&&p.x>-1.&&l<.50&&l>0.)l=0.;//remove black from behind mny's eyes
                if((Character==3||musicAngelMan==1))
                {
                    if(p.y==0.&&t.y==0.)l=0.;
@@ -3996,7 +3996,7 @@ vec2 dance = vec2(0.);
             vec2 c4 = characterOnTrailP/vec2(1.,2);
              vec3 LAMP = clamp(lamp(c4,vec2(-1.))-(SWORD.x+SWORD.y+SWORD.x)*10.,0.,1.)+SWORD;
              float ls = (SWORD.x+SWORD.y+SWORD.z+LAMP.x+LAMP.y+LAMP.z)*10.;
-             mny=clamp(mny-ls*5.,0.,1.)+SWORD+LAMP+HORSE;
+             //mny=clamp(mny-ls*5.,0.,1.)+SWORD+LAMP+HORSE;
 
          //   ARTICLE+=clamp(flames(c4-vec2(.5,0.))-(ls+HORSE.r*3.+clamp(-mannyFace.r-mannyFace.g-mannyFace.b,-2.,.0))*10000.,0.,1.)+HORSE+SWORD+LAMP;
                         
@@ -4155,12 +4155,13 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                     +yourFace.xyzw,0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies = vec4(
-                                           mnyX+clamp(heartWarmed*isColoredMultiplier-hypnoticHarmonicCircles,0.,1.)
+                                           mnyX+clamp(heartWarmed*isColoredMultiplier,0.,1.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
                                           ( pillar+icicles.xyz)*(1.-pixelShipGrey*40.)
                                            +yourFace.xyz
                     +//clamp((
-                           mny//-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r),0.,1.)*2.*mnyWhite
+                           mny
+                                           //-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r),0.,1.)*2.*mnyWhite
                                      // +(-hypnoticHarmonicCircles.x-hypnoticHarmonicCircles.y-hypnoticHarmonicCircles.z)*2.)*starshipMultiplier*(1.-isGrey-pixelShipGrey)
                       //  -(ARTICLE.r+ARTICLE.g+ARTICLE.b)
                         //   ,-1.,1.)
@@ -4205,7 +4206,7 @@ vec4 tree = vec4( clamp(
           if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
           fin=clamp(fin -(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z)*4.,0.,1.)+vec4(hypnoticHarmonicCircles,1.);
 gl_FragColor=
-//vec4(clamp(mny,0.,1.),1.);
+//vec4(clamp(mny+zoomer,0.,1.),1.);
 fin/vec4(confraculator
                            ,1.);
                        
