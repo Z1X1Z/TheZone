@@ -3956,7 +3956,7 @@ vec2 dance = vec2(0.);
 */
                        //  heartWarmed = HEART/2.;
                         if(HEART.x==0.&&HEART.y==0.&&HEART.z==0.)heartWarmed=AM;
-                        else if(AM.x!=0.)heartWarmed=clamp(AM*HEART+AM/2.,0.,1.);
+                        else if(AM.x!=0.)heartWarmed=clamp(AM*HEART+AM,0.,1.);
                         else heartWarmed=HEART;
 //mny+=clamp(heartWarmed+(-mny.r-mny.g-mny.b),0.,1.);//+HEART*heartMultiplier;
                            
@@ -4007,7 +4007,7 @@ if(starOnDot!=2){
                                  
                                  if (starship.x!=0.||starship.y!=0.||starship.z!=0.)maxColorOfStarship=max(max(starship.x,starship.y),starship.z);
                                  if (starship.x!=0.||starship.y!=0.||starship.z!=0.)minColorOfStarship=min(min(starship.x,starship.y),starship.z);
-                                 if (starship.x!=0.||starship.y!=0.||starship.z!=0.)isColoredMultiplier=starship.xyz+(1.-starship.w);
+                                 if (starship.x!=0.||starship.y!=0.||starship.z!=0.)isColoredMultiplier=(starship.xyz+(1.-starship.w)+1.)/2.;
                                  
                                  if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.&&starship.w>3.5/255.)mny*=starship.xyz+(1.-starship.w);//-mny.x*.66;
 
@@ -4131,7 +4131,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                      -vec4(vec3(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z)+yourFace.xyz,0.),0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies = vec4(
-                                           mnyX+clamp(heartWarmed*isColoredMultiplier-mny*2.-ss.xyz*ss.w*4.-hypnoticHarmonicCircles,0.,1.)
+                                           mnyX+clamp(heartWarmed*isColoredMultiplier-mny*2.-hypnoticHarmonicCircles,0.,1.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
                                           ( hypnoticHarmonicCircles+pillar*(1.-mny)+icicles.xyz)*(1.-pixelShipGrey*40.)
                                            +yourFace.xyz
