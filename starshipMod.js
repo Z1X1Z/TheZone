@@ -2855,22 +2855,21 @@ function calculatePitch ()
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance;//(1024-26)/10000
              if(window.highORlow==1){
-                 
                  let proportion= fractionOfFrame/bufferSize;
-                 let tAScaled=totalAMP*proportion;
-                 tAScaled =(tAScaled!=0)? tAScaled:1;
-                 let tAScaledPermanent = tAScaled;
-                 let incrementToleranceFeedback =tAScaled;
-                // let b = 0.;
-                               if(tAScaled>0&&isFinite(tAScaled))
-                                   for(var reps=0; reps<1.;reps+=tAScaled)
-                                { tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaledPermanent))/(2.-tAScaledPermanent))
-                                    tAScaled=tAScaled**((1.-tAScaled)*(1.+tAScaledPermanent))**.7
-                          //          b++
-                                }
-                // console.log(b)
-               // console.log(tAScaled)
-                               tolerance =tAScaled
+                                 let tAScaled=totalAMP*proportion;
+                                 tAScaled =(tAScaled!=0)? tAScaled:1;
+                                 let tAScaledPermanent = tAScaled;
+                                 let incrementToleranceFeedback =tAScaled;
+                                // let b = 0.;
+                                               if(tAScaled>0&&isFinite(tAScaled))
+                                                   for(var reps=0; reps<1.;reps+=tAScaled)
+                                                { tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaledPermanent))/(2.-tAScaledPermanent))
+                                                    tAScaled=tAScaled**((1.-tAScaled)*(1.+tAScaledPermanent))**(.75-tAScaledPermanent)
+                                          //          b++
+                                                }
+                                // console.log(b)
+                               // console.log(tAScaled)
+                                               tolerance =tAScaled
                            }
 
 
