@@ -2008,7 +2008,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
             }
             
             if (l>1.)l=1.;
-            if(abs(p.y)/p.x>-2.&&p.x<0.&&p.x>-1.&&l<.50&&l>0.)l=0.;//remove black from behind mny's eyes
+            if(abs(p.y)/p.x>-2.2&&p.x<0.&&p.x>-1.&&l<.50&&l>0.)l=0.;//remove black from behind mny's eyes
                if((Character==3||musicAngelMan==1))
                {
                    if(p.y==0.&&t.y==0.)l=0.;
@@ -4170,7 +4170,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                                     ,1.);
                        vec3 awayFromTree =  vec3((-ss.xyz)*ss.w
                                                  -yourFace.xyz
-                                                 -HEART.b*2.//-HEART.r-HEART.g
+                                                 -abs(HEART.b)*2.//-HEART.r-HEART.g
                                                  -AM.r*24.
                                                  +bigEyes.xyz*largeEyeColor
                                                  -(yourFace.x+yourFace.y+yourFace.z)/256./3.
