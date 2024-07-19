@@ -1887,8 +1887,8 @@ ret= vec4(clamp(
       // if(g.x*g.x+g.y*g.y<40.)
       //if(abs(g.y)<9.)
       float isEscaped = 0.;
-      for (int f=0;f<21;f+=1)if(abs(z.y)>17.7&&f>3){
-          if (f==1){l=1.;break;}
+      for (int f=0;f<21;f+=1)if(abs(z.y)>17.7&&(f>3||f==1)){
+          if (f==1){l=0.;break;}
           l= 1.*z.y*sign(g.y);
          isEscaped=-2.;//length(z)/40.;//clouds and face
           break;}
