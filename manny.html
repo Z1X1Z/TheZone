@@ -1894,8 +1894,8 @@ ret= vec4(clamp(
           break;}
       else{
           z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),2.0*z.x*z.y-g.y-t.y);
-          //l=1.-abs(z.y)*6.;//smooths middle horn, removes some clouds
-          if(z.x>-.23)l=-z.x*9.;
+          l=1.-abs(z.y)*6.;//smooths middle horn, removes some clouds
+          if(z.x>-.1)l=-z.x*9.;
           
       }//face with closed small holes
       if(l<.0&&isEscaped!=-2.)l=0.;
@@ -3861,7 +3861,7 @@ vec2 dance = vec2(0.);
                    if(metronome>1.) mnyX = mannyX(characterOnTrailP/2.*1.221221,vec2(time))+bod(characterOnTrailP,moveDynamic);
                    else if (Character==0){
                        mannyFace = (faceBlackAndWhite(characterOnTrailP*1.221221,moveDynamic));//,0.,1.);
-                       mny=bod(characterOnTrailP,moveDynamic)//+shiny(characterOnTrailP*1.221221,moveDynamic)
+                       mny=bodyFourCreatureCharacter(characterOnTrailP,moveDynamic)//+shiny(characterOnTrailP*1.221221,moveDynamic)
                        +mannyFace;
                    }
                    else if (Character==1){
