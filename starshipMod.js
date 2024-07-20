@@ -2864,7 +2864,7 @@ let tolerance;//(1024-26)/10000
                                                if(tAScaled>0&&isFinite(tAScaled))
                                                    for(var reps=0; reps<1.;reps+=tAScaled)
                                                 { tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaledPermanent))/(2.-tAScaledPermanent))
-                                                    tAScaled=tAScaled**((1.-tAScaled)*(1.+tAScaledPermanent))**(.75-tAScaledPermanent**(2./3.))
+                                                    tAScaled=tAScaled**((1.-tAScaled)*(1.+tAScaledPermanent))**(.75-tAScaledPermanent**.75)
                                           //          b++
                                                 }
                                 // console.log(b)
