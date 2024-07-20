@@ -943,6 +943,11 @@ Reset Zoom![L]</a><br>
                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                      Cycle character![U]</a><br>
                  
+            <a id="Heart Star" name="t"  onclick= "
+                key  = 'h';
+                callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
+                Heart Star![.h]</a><br>
+                 
             <a id="BigEyes" name="t"  onclick= "
                 key  = 'y';
                 callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
@@ -1485,6 +1490,7 @@ void main(){
 
     
     uniform bool pixelSTARon;
+    uniform int heartStar;
     uniform float fftSize;
     uniform float zoomOutRatchetThreshold;
     uniform float sampleRate;
@@ -3921,55 +3927,67 @@ vec2 dance = vec2(0.);
                                                              }
                                  //          mny=clamp(mny,0.,1.);
                                                                  
-                                                                 
-                                                                 float heartRate =1./6.;
-                                                                 
-                                         vec2 moveDynamicSpunToKey=spin2(moveDynamic*vec2(1.,flipStar*brelued)///.8
-                                                                         , -(//starSpin*mod(time*rate,PI*2.)-
-                                                                                                          twistStar*brelued));
-                                                                 
-                                                                               vec2 vUvCenteredASKEW = (vUv.yx-.5-d.yx*heartRate*aspectRatio);
-                                                                               vec2 uVuASKEW=-(vUvCenteredASKEW)/aspectRatio;
-                                                                               vec2 uVuMinCenterASKEW=-vUvCenteredASKEW/(min(resolution.x,resolution.y)/resolution.yx);
-                                 
-         vec2 uVuMinCenterASKEWSpunToKey=spin2(uVuMinCenterASKEW*vec2(1.,flipStar*brelued)///.8
-                                         , -(//starSpin*mod(time*rate,PI*2.)-
-                                                                          twistStar*brelued))*8.;
-                                 
-                                                                 vec2 uvSwizzled=uVuMinCenterASKEW.yx;
-                                 
-                                 
-                                                                 float angleASKEW = ((-atan(uvSwizzled.y,uvSwizzled.x)*flipStar*radialWarp-twistStar
-                                                                                 +PI/2.+PI/2.*flipStar)/PI2);
-                                                                                 //angle=mod(angle,1.);
-                                                                                 
                                                                  float frAMP=0.;
-                                                                 //return vec4(angle);
-                                                              //   const float octBoost = 17.;
-                                                               //  float b =nyq*pow(2.,angle+octBoost);
-                                                         //starts -3, full -2
-                                                                 for (float n = -3.; n<6.;n+=1.0)//the range seems small
-                                                                // if(b>=.5/nyq&&b<sampleRate/2.)
-                                                         //not sure why it has negative range
-                                                                 //if (twistStar<24.)
-                                                                  {
-                                                                       float b =nyq*pow(2.,angleASKEW+n);
-                                                                       frAMP += texture2D(micIn, vec2(b,0.)).r;
-                                                                 }
-                                 frAMP-=volume*(zoomOutRatchetThreshold)*16.;
-                                 frAMP*=(.5+frAMP)/(1.+zoomOutRatchetThreshold);
-                                 if(frAMP==0.)frAMP=1.;//to prevent cancelling moveDynamic in touchmode
-                                 float heartSize=gr*gr*-leaf;
-                                 if(frAMP>1.)heartSize/=(1.+frAMP);//*8.;
-                                 
+                                                                 float heartRate =1./4.;
+
+if(heartStar==0){
+
+            vec2 moveDynamicSpunToKey=spin2(moveDynamic*vec2(1.,flipStar*brelued)///.8
+            , -(//starSpin*mod(time*rate,PI*2.)-
+            twistStar*brelued));
+
+            vec2 vUvCenteredASKEW = (vUv.yx-.5-d.yx*heartRate*aspectRatio);
+            vec2 uVuASKEW=-(vUvCenteredASKEW)/aspectRatio;
+            vec2 uVuMinCenterASKEW=-vUvCenteredASKEW/(min(resolution.x,resolution.y)/resolution.yx);
+
+            vec2 uVuMinCenterASKEWSpunToKey=spin2(uVuMinCenterASKEW*vec2(1.,flipStar*brelued)///.8
+            , -(//starSpin*mod(time*rate,PI*2.)-
+            twistStar*brelued))*8.;
+
+            vec2 uvSwizzled=uVuMinCenterASKEW.yx;
+
+
+            float angleASKEW = ((-atan(uvSwizzled.y,uvSwizzled.x)*flipStar*radialWarp-twistStar
+            +PI/2.+PI/2.*flipStar)/PI2);
+            //angle=mod(angle,1.);
+
+            //return vec4(angle);
+            //   const float octBoost = 17.;
+            //  float b =nyq*pow(2.,angle+octBoost);
+            //starts -3, full -2
+            for (float n = -3.; n<6.;n+=1.0)//the range seems small
+            // if(b>=.5/nyq&&b<sampleRate/2.)
+            //not sure why it has negative range
+            //if (twistStar<24.)
+            {
+            float b =nyq*pow(2.,angleASKEW+n);
+            frAMP += texture2D(micIn, vec2(b,0.)).r;
+            }
+
+}
+
+
+
 
      vec2 heartShift = vec2(0);
      vec3 HEART = vec3(0.);
      vec3 heartWarmed= vec3(0.);
-    if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
-                                                                 else if(Character==2)heartSize=gr;
      if (Character!=10&&colorCombo!=20&&colorCombo!=17){
-     if(Character!=9) HEART = heart(characterPSpunToKey*heartSize+heartShift, d.yx/4.*frAMP*heartRate)/gr
+                       
+frAMP-=volume*(zoomOutRatchetThreshold)*16.;
+frAMP*=(.5+frAMP)/(1.+zoomOutRatchetThreshold);
+if(frAMP==0.)frAMP=1.;//to prevent cancelling moveDynamic in touchmode
+float heartSize=gr*gr*-leaf;
+if(heartStar==0)heartSize/=(1.+frAMP);//*8.;
+else if(heartStar==1){
+    heartSize/=(1.+volume)*2.;
+    frAMP=volume*4.;
+    }
+else if(heartStar==2) frAMP=1.;
+if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
+                                                            else if(Character==2)heartSize=gr;
+        
+     if(Character!=9) HEART = heart(characterPSpunToKey*heartSize+heartShift,d.yx/4.*frAMP*heartRate )/gr
      //*(1.-length(uVuMinCenterASKEW)/8.)
      ;
                     

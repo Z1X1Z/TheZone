@@ -15,7 +15,8 @@ coreDilation:{value:0.},
 fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:1024./44100.},//actually 2/nyquist
 zoomOutRatchetThreshold:{value:0.},
 radialWarp:{value:1.},
-    pixelSTARon:{value:true},
+pixelSTARon:{value:true},
+heartStar:{value:0},
 
 micIn:{value:null},
     audioBuffer:{value:null},
@@ -444,7 +445,7 @@ function callKey(event){
 
     
     }
-
+    else if (event.altKey&&(key=="˙"||key=="h")) uniforms.heartStar.value=(uniforms.heartStar.value+1)%3;
     else if (event.altKey&&(key=="œ"||key=="q")){
             if          ( uniforms[ "colorCombo" ].value >1)          uniforms[ "colorCombo" ].value = -1;
             else uniforms[ "colorCombo" ].value = -(Math.abs(uniforms[ "colorCombo" ].value+1-17.))%17;
