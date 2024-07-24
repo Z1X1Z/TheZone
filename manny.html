@@ -318,17 +318,20 @@ let maxLetterDepth=-1;
             -->
             <label for="ConcertKey">THE A Key Frequency (Should probably be "Concert A" 440 hz):</label>
            <input type="number" id="ConcertKey" name="ConcertKey" class="num" onkeydown="
+                number = true;
           // if(document.getElementById('ConcertKey').value!=0)
                 window.ConcertKey=document.getElementById('ConcertKey').value">
                <br>
                
                <label for="TouchVolume">Touch Volume (0-1?):</label>
               <input type="number" id="TouchVolume" name="TouchVolume" class="num" onkeydown="
+                                   number = true;
                    window.touchVolume=document.getElementById('TouchVolume').value">
                   <br>
                   
                <label for="RadialWarp">Magnify rate of the octave, radially by</label>
               <input type="number" id="RadialWarp" name="RadialWarp" class="num" onkeydown="
+                number = true;
                     let b=document.getElementById('RadialWarp').value;
                     if(!isNaN(b)&&b>0){
 radialWarp=b;
@@ -500,6 +503,7 @@ radialWarp=b;
                    Manual Star![.g]</a><br>
                <label for="Note Skew">Semitones detuned</label>
                <input type="number" id="Note Skew" name="Note Skew" class="num" onkeydown="
+                                                               number = true;
                        window.twist-=window.skew
                        window.skew = document.getElementById('Note Skew').value*2.;
                        window.twist+=window.skew
@@ -683,6 +687,13 @@ radialWarp=b;
                   key  = '|';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                   Flop Chirality![|]</a><br>
+              
+              <label for="CloverTwist">Twist offset(0-1):</label>
+             <input type="number" id="CloverTwist" name="CloverTwist" class="num" onkeydown="
+                number = true;
+uniforms.cloverOffset.value=document.getElementById('CloverTwist').value">
+                 </p>
+                 
                  <a id="Add a petal" name="t"  onclick= "
                      key  = 'u';
                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -693,19 +704,22 @@ radialWarp=b;
                  Remove a petal![y]</a><br>
                  <!--https://www.w3schools.com/tags/att_input_type_number.asp this is the link for the below number code profile-->
                  <label for="petalCount">Petal Quantity:</label>
-                <input type="number" id="petalCount" name="petalCount" class="num" onkeydown="uniforms.petals.value=document.getElementById('petalCount').value-6.">
+                <input type="number" id="petalCount" name="petalCount" class="num" onkeydown="
+                number = true;
+uniforms.petals.value=document.getElementById('petalCount').value-6.">
                     </p>
-                    
+                       
                     <input type="checkbox" id="omniCore" name="t"  onclick= "
                  key  = 'o';
                  callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
               <label for="omniCore">omniCORE![,o]</label><br>
               
-                    <label for="coringConstant">Coring Value (.5<>1.):</label>
+                    <label for="coringConstant">Coring Value (>0.):</label>
                    <input type="number" id="coringConstant" name="coringConstant" class="num" onkeydown="
+                number = true;
                        var coreNUM=document.getElementById('coringConstant').value;
-                       if(coreNUM>.5&&coreNUM<1.)coreData.fill(Number(coreNUM));
-                        else coreData.fill(-1./leaf)
+                       if(coreNUM>0.)coreData.fill(Number(coreNUM));
+                       else coreData.fill(-1./leaf)
 
 
 ">
@@ -824,7 +838,9 @@ radialWarp=b;
                                  <button class="dropbtn">Clvr2
                                  <div  id="m4" class="dropdown-content">
                                      <label for="Base Number">Log base this of x^3 (maybe 1.5-4):</label>
-                                    <input type="number" id="Base Number" name="Base Number" class="num" onkeydown="uniforms.baseN.value=document.getElementById('Base Number').value">
+                                    <input type="number" id="Base Number" name="Base Number" class="num" onkeydown="
+                number = true;
+uniforms.baseN.value=document.getElementById('Base Number').value">
                                         </br>
                                         
                                              <input type="checkbox" id="duperCore" name="t"  onclick= "
@@ -927,6 +943,7 @@ Reset Zoom![L]</a><br>
                   <label for="Wheel">Wheel![m]</label><br>
                   <label for="mandelCloverSize">Wheel Degree:[m]</label>
                   <input type="number" id="mandelCloverSize" name="mandelCloverSize" class="num" onkeydown="
+                                                 number = true;
                                  uniforms.mandelCloverFactor.value=document.getElementById('mandelCloverSize').value
                                  "><br>
                       
@@ -1499,7 +1516,7 @@ void main(){
     uniform bool superStable;
 
     uniform float largeEyeColor;
-
+    uniform float cloverOffset;
     
     uniform bool pixelSTARon;
     uniform int heartStar;
@@ -2332,6 +2349,7 @@ vec3 tol(vec2 p, vec2 t){
                         
                          vec2 pWithoutChiralizer = p;
                          if(chirality==-1){p=p.yx;}
+                         if(cloverOffset!=0.)p=spin2(p,cloverOffset*PI2);
 vec2 colorAccumulator =vec2(1.);
 vec3 heartColors = vec3(0.);
 float lfc = length(freed(coords));
