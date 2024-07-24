@@ -498,7 +498,13 @@ radialWarp=b;
                    key  = 'g';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
                    Manual Star![.g]</a><br>
-       
+               <label for="Note Skew">Semitones detuned</label>
+               <input type="number" id="Note Skew" name="Note Skew" class="num" onkeydown="
+                       window.twist-=window.skew
+                       window.skew = document.getElementById('Note Skew').value*2.;
+                       window.twist+=window.skew
+                                               ">
+                   <br>
                 
                <input type="checkbox"  id="witnessFlip" name="t"  onclick= "
                    key  = 'z';
