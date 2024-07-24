@@ -1,5 +1,5 @@
 var shaderScale,dilate, coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals
-,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited;
+,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable;
 function setUniformsToPlainName(){
     Inherited=uniforms.Inherited.value;
     clvrVariant1=uniforms.clvrVariant1.value;
@@ -45,7 +45,8 @@ function setUniformsToPlainName(){
     centralCores=uniforms.centralCores.value;
     externalCores=uniforms.externalCores.value;
     exponentialPetals=uniforms.exponentialPetals.value;
-    mandelCloverFactor=uniforms.mandelCloverFactor.value
+    mandelCloverFactor=uniforms.mandelCloverFactor.value;
+    superStable=uniforms.superStable.value;
 }
 
 function tol( j,  t){
@@ -191,8 +192,8 @@ hyperCore*=equilibriator;
   // hyperCore-=coreDilation
    if(clvrVariant4)
    {
-    hyperCore-=.5/Math.log(.5);//1./(7.*log(.5));
-    if(cloverSlide)hyperCore+=1.25/Math.log(.5);
+   // hyperCore-=.5/Math.log(.5);//1./(7.*log(.5));
+    if(cloverSlide)hyperCore+=1.5/Math.log(.5);
     //if(wheel)hyperCore-=0./Math.log(.5);
    // if(morph!=0.)hyperCore+=2.5/Math.log(.5);
 
@@ -202,11 +203,15 @@ hyperCore*=equilibriator;
     if(cloverSlide)hyperCore+=.5/Math.log(.5);
     if(wheel)hyperCore-=1./Math.log(.5);
     if(morph!=0.) hyperCore-=1./Math.log(.5);
-
+    
+    if(Spoker&&spokelover&&dilate) hyperCore-=.5/Math.log(.5);
+    else if (!dilate)hyperCore+=.5/Math.log(.5);
+    
+    if(clvrVariant2)hyperCore+=1./Math.log(.5);
+    
 
 }
    
-if(clvrVariant2)hyperCore+=1./Math.log(.5);
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
 if(continuumClover)hyperCore-=.75/Math.log(.5);
 
@@ -223,7 +228,7 @@ var m= new THREE.Vector2(0.,0.);
 
     var truncator=1.;
     var truncated = true;
-    if(lfc!=0.&&truncated) truncator = Math.log(zoom/lfc);
+    if(lfc!=0.&&truncated) truncator = Math.log(zoom/lfc)*1000.;
 //Maendel clover
                                      
 //this is essentially just p as in the mandelbrot x <== x^2+
@@ -310,7 +315,12 @@ let loopSolid = 0.
                 //    if(Math.abs(baseN-2.701002244)<.00001)base=(baseN/truncator)*truncator;
                         //  dstnce=s.length();
 
-
+                                                       
+                                                    if(clvrVariant2) {
+                                                        s.divideScalar(2.);
+                                                        //hyperCoreBoosted++;
+                                                        //hyperCoreOUTPUT++;
+                                                        }
 for (var counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
    /*
     if( loopSolid>=hyperCoreBoosted+1)
@@ -372,7 +382,15 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
             }
      */
         if(clvrVariant4)  s.multiplyScalar( 1.-oneOverLeafTruncated);
-
+    
+ if(clvrVariant2) {
+     if (clvrVariant4) s.multiplyScalar(1.5);
+    else {
+        s.multiplyScalar(2.);
+         hyperCoreBoosted++;
+         hyperCoreOUTPUT++;
+         }
+     }
 // if (mod(counter,5.) == 4.)s =pCenterCored;
 //x**3
     /*
@@ -407,7 +425,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
             {
                
                 if(//(!wheel &&
-                   dstnce*Math.sqrt(dstnce)<=hyperCoreBoosted//)||(wheel&&1.<=hyperCoreBoosted)
+                   Math.sqrt(dstnce)*dstnce<=hyperCoreBoosted//)||(wheel&&1.<=hyperCoreBoosted)
                     )
                 {
                    /* if(wheel){
@@ -451,7 +469,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
         //    }
             
         }
-        dstnce=s.length();
+        //dstnce=s.length();
         if(spokelover){
             
             var powerOfSpokeCore = spoke_factorLarge*lfc/dstnce;
@@ -460,7 +478,7 @@ var spokeloverCoreShiftDown=Math.pow(upSpoke,powerOfSpokeCore)*logStabilizationC
 
 var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpokeCore)*logStabilizationConstant;//for spokelover
             
-            if(counter+dstnce<hyperCoreBoosted){
+            if(counter+dstnce*dstnce<hyperCoreBoosted){
                 //  if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
                 //else
                 
@@ -528,13 +546,46 @@ dstnce = s.length();
         }
 
 for(var i=0;i<40; i++)//not sure if i is 20 or >20
-if(dstnce<CORE_DELIMITER&& 0.<=hyperCoreBoosted)
+if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.)))
+   && 0.<=hyperCoreBoosted)
 {
+   if(superStable)
+    {
+                if(i==0){
+ if(counter==0.) { s.divideScalar(4.);dstnce/=4.;
+}  else
+     { s.divideScalar(2.);dstnce/=2.;
+}
+        
+                    
+                    hyperCoreBoosted+=.5;
+                    hyperCoreOUTPUT+=.5;
+                  loops-=.5;
+                    
+                }
+            else{
+                s.multiplyScalar(2.);dstnce*=2.;
+                
+                hyperCoreBoosted-=1.;
+                hyperCoreOUTPUT-=1.;
+                loops++;
+            }
+            
+            hyperCoreBoosted-=.5;;
+            hyperCoreOUTPUT-=.5;;
+            loops+=.5;
+
+}
+    
+  else  { s.multiplyScalar( metaCoreDriveFactor);dstnce*=metaCoreDriveFactor;
+      hyperCoreBoosted--;
+      hyperCoreOUTPUT--;
+      loops++;
+    }
+ 
+    
 //if(i==0){float b = ;s*=b;dstnce*b;}
-s.multiplyScalar( metaCoreDriveFactor);dstnce*=metaCoreDriveFactor;
-    hyperCoreBoosted--;
-    hyperCoreOUTPUT--;
-    loops++;
+
 OmniDynamicPetalShift =omniData[(loops+counter-1.)];
 OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
 

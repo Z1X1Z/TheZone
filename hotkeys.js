@@ -17,6 +17,7 @@ zoomOutRatchetThreshold:{value:0.},
 radialWarp:{value:1.},
 pixelSTARon:{value:true},
 heartStar:{value:0},
+superStable:{value:false},
 
 micIn:{value:null},
     audioBuffer:{value:null},
@@ -617,7 +618,8 @@ function callKey(event){
                 
                 
                 else if((key=="˚"||key=="k")&&event.altKey&&!event.shiftKey) window.radialOctaveBoost=!window.radialOctaveBoost;
-                
+                else if((key=="…"||key==";")&&event.altKey&&!event.shiftKey) uniforms.superStable.value=!uniforms.superStable.value;
+
                 
     else if (event.altKey&&key=="f")console.log("speakers disabled!");//speakers turned off in manny.html
                 

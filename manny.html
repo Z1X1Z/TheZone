@@ -786,7 +786,11 @@ radialWarp=b;
                                     key  = 'o';
                                     callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
                                  <label for="Dilate">Dilate?![.o]</label><br>
-                                 
+                                 <input type="checkbox" id="super stability" name="t"  onclick= "
+                                     key  = ';';
+                                     callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
+                                  <label for="super stability">Super Stability![.;]</label><br>
+                                  
                                 <input type="checkbox" id="Continuum Clover" name="t"  onclick= "
                                     key  = '&';
                                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -1486,6 +1490,8 @@ void main(){
     varying vec2 vUv;
     uniform float coreDilation;
     
+    uniform bool superStable;
+
     uniform float largeEyeColor;
 
     
@@ -2473,8 +2479,8 @@ if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
   //  if(cloverSlide&&wheel)hyperCore+=1.75/log(.5);
    if(clvrVariant4)
    {
-    hyperCore-=.5/log(.5);//1./(7.*log(.5));
-    if(cloverSlide)hyperCore+=1.25/log(.5);
+    //hyperCore-=.5/log(.5);//1./(7.*log(.5));
+    if(cloverSlide)hyperCore+=1.5/log(.5);
     //if(wheel)hyperCore-=0./log(.5);
    // if(morph!=0.)hyperCore+=2.5/log(.5);
 
@@ -2484,10 +2490,12 @@ if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
     if(cloverSlide)hyperCore+=.5/log(.5);
     if(wheel)hyperCore-=1./log(.5);
     if(morph!=0.) hyperCore-=1./log(.5);
+    if(Spoker&&spokelover&&dilate) hyperCore-=.5/log(.5);
+    else if (!dilate)hyperCore+=.5/log(.5);
+    if(clvrVariant2)hyperCore+=1./log(.5);
 
 }
    
-   if(clvrVariant2)hyperCore+=1./log(.5);
    if(multiplicatorNexus)hyperCore-=.5/log(.5);
    if(continuumClover)hyperCore-=.75/log(.5);
 
@@ -2504,7 +2512,7 @@ vec2 m=vec2(0.);
 
 float truncator=1.;
 bool truncated = true;
-if(lfc!=0.&&truncated) truncator = log(zoom/lfc);//log truncation * factor is not known, may no longer be necesary
+if(lfc!=0.&&truncated) truncator = log(zoom/lfc)*1000.;//log truncation * factor is not known, may no longer be necesary
 //Maendel clover
 
 //this is essentially just p as in the mandelbrot x <== x^2+
@@ -2542,7 +2550,7 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
               //vec2 coordsAltered=coords/gr;
                
                    float variant4Correction=1.;
-                   if(clvrVariant4)variant4Correction=(1.-oneOverLeafTruncated);
+                                                           if(clvrVariant4)variant4Correction=(1.-oneOverLeafTruncated);
                if(wheel)m =  ((pWithoutChiralizer/lfc)
                                                         -coords.yx*2.*variant4Correction)*abs(coresIn/crs*2.-1.)
                                            *mandelCloverFactor//(1.-1./(leaf/truncator)*truncator)//uncertain term
@@ -2599,7 +2607,19 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
   //if(abs(baseN-2.701002244)<.00001)base=(baseN/truncator)*truncator;
                                                            float loopSolid = 0.;
                                                            //dstnce=length(s);
-
+                                                           
+                                                        if(clvrVariant2) {
+                                                            s/=2.;dstnce/=2.;
+                                                            //hyperCoreBoosted++;
+                                                            //hyperCoreOUTPUT++;
+                                                            }
+                  /* if(superStable)
+                   {
+                              s/=2.;dstnce/=2.;
+                                   
+                                 
+                              }
+                   */
 if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
@@ -2702,7 +2722,9 @@ vec2 lastS = s;
         
 
         if(clvrVariant1)  s*=length(lastS);
+      // if(counter==0.){ s/=2.;dstnce/=2.;}
 
+        
         /*variants 2356 disabled for some android devices to load properly
       if(clvrVariant3)s-=pCenterCored*dstnce;
      if(clvrVariant2)if(s.x!=0.&&s.y!=0.&&coords.x!=0.&&coords.y!=0.){
@@ -2716,8 +2738,20 @@ vec2 lastS = s;
          // hyperCoreBoosted-=length(modifier);
           }
            */
-      if(clvrVariant4)   s*=1.-oneOverLeafTruncated;
-  
+        
+     
+        if(clvrVariant4) s*=1.-oneOverLeafTruncated;
+ 
+        
+     if(clvrVariant2) {
+         if (clvrVariant4) s*=1.5;
+        else {
+            s*=2.;
+            
+             hyperCoreBoosted++;
+             hyperCoreOUTPUT++;
+             }
+         }
      /* if(clvrVariant5)if(length(s)>0.) s = vec2(pow(s.x,-2.),pow(s.y,-2.));
       if(clvrVariant6)s=s-lastS.yx;
 */
@@ -2791,7 +2825,7 @@ hyperCoreOUTPUT-=spoke_factor;
 hyperCoreBoosted-=spoke_factor;}
  */
    }
-dstnce=length(s);
+//dstnce=length(s);
 if(spokelover)
 {
        
@@ -2802,7 +2836,8 @@ float       spokeloverCoreShiftUp  =      pow(abs(downSpoke),powerOfSpokeCore)*l
 
 
 
-if(counter+dstnce<hyperCoreBoosted){
+if(counter+dstnce*dstnce //sqrt(sqrt(dstnce)*dstnce)*dstnce
+   <hyperCoreBoosted){
    //  if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
      //else
 
@@ -2866,15 +2901,51 @@ dstnce = length(s);
                        hyperCoreOUTPUT-=dstnce;//dilate clover shift
                        hyperCoreBoosted-=dstnce;//maybe times 1.5
                        }
-
+                       
+                // if(superStable&&dstnce<1.5)
+               //   {float b = .5;s*=b;dstnce*=b;
+                     // hyperCoreBoosted++;
+                     // hyperCoreOUTPUT++;
+                      
+              //    }
+                  
 for(int i=0;i<40; i++)//not sure if i is 20 or >20
-if(dstnce<CORE_DELIMITER&& 0.<=hyperCoreBoosted)
+if((dstnce<CORE_DELIMITER||(superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.)))
+    && 0.<=hyperCoreBoosted)
 {
-//if(i==0){float b = ;s*=b;dstnce*b;}
- s*=metaCoreDriveFactor;dstnce*=metaCoreDriveFactor;
- hyperCoreBoosted--;
- hyperCoreOUTPUT--;
- loops++;
+    
+    if(superStable)
+    {
+       if(i==0){
+          if(counter==0.) {s/=4.;dstnce/=4.;}  else
+              {s/=2.;dstnce/=2.;}
+                    
+                    hyperCoreBoosted+=.5;
+                    hyperCoreOUTPUT+=.5;
+                  loops-=.5;
+                    
+                }
+            else{
+                s*=2.;dstnce*=2.;
+                
+                hyperCoreBoosted-=1.;
+                hyperCoreOUTPUT-=1.;
+                loops+=1.;
+            }
+            
+            hyperCoreBoosted-=.5;;
+            hyperCoreOUTPUT-=.5;;
+            loops+=.5;;
+
+}
+    
+  else
+    { s*=metaCoreDriveFactor;dstnce*=metaCoreDriveFactor;
+        
+        hyperCoreBoosted--;
+        hyperCoreOUTPUT--;
+        loops++;
+    }
  
 
 OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
