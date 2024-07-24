@@ -170,6 +170,7 @@ function resetAll(){
     window.touchVolume = .5;
     window.radialOctaveBoost = false;
     window.twist = 0.;
+    window.skew = 0.;
     window.flip = 1.;
 
             window.FPS=60;
@@ -711,7 +712,7 @@ function callKey(event){
     }
     
     else if (key=="Q") {
-        twist = 0;
+        window.twist = window.skew;
         if( uniforms.starSpin.value==0) uniforms.starSpin.value=1;
         else if( uniforms.starSpin.value==1) uniforms.starSpin.value=-1;
         else if( uniforms.starSpin.value==-1) uniforms.starSpin.value=0;
@@ -803,8 +804,7 @@ function callKey(event){
     else if (key=="|") {
         if(uniforms.chirality.value==3)uniforms.chirality.value=1;
         else if(uniforms.chirality.value==1)uniforms.chirality.value=-1;
-        else if(uniforms.chirality.value==-1)uniforms.chirality.value=3;
-        
+   
     }
     else if (key=="{"){
         if(uniforms.eden.value!=4)uniforms.eden.value=(uniforms.eden.value+1)%3;
@@ -851,8 +851,11 @@ function callKey(event){
     else if (key=="w")window.volumeSpeed=!window.volumeSpeed;
     
     else if (key=="W"){
-        if(window.twist-Math.floor(window.twist)>0.)window.twist=0.;
+        //window.twist-=window.skew;
+        if(window.twist-Math.floor(window.twist)>0.)window.twist=window.skew;
         window.twist+=2; window.twist = window.twist%24;
+        //window.twist+=window.skew;
+
         if("osmd" in window&&osmd!=null)
         {
             osmd.Sheet.Transpose = twist/2.;
@@ -862,9 +865,11 @@ function callKey(event){
     }
     
     else if (key=="S"){
-        if(window.twist-Math.floor(window.twist)>0.)window.twist=0.;
+
+        if(window.twist-Math.floor(window.twist)>0.)window.twist=window.skew;
             
         window.twist-=2; window.twist = (window.twist+24)%24;
+
         if("osmd" in window&&osmd!=null)
         {
             osmd.Sheet.Transpose = twist/2.;
