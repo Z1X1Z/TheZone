@@ -1,5 +1,5 @@
 var shaderScale,dilate, coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals
-,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable;
+,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset;
 function setUniformsToPlainName(){
     Inherited=uniforms.Inherited.value;
     clvrVariant1=uniforms.clvrVariant1.value;
@@ -15,6 +15,8 @@ function setUniformsToPlainName(){
     coreDilation  = uniforms.coreDilation.value;
     time = window.TIMESTAMP;
      chirality = uniforms.chirality.value;
+    cloverOffset=uniforms.cloverOffset.value;
+
      coords = uniforms.coords.value
      morph=    uniforms.morph.value
      refactorCores=    uniforms.refactorCores.value
@@ -56,6 +58,8 @@ function tol( j,  t){
 
     var pWithoutChiralizer = p.clone();
 if(chirality==-1){p=new THREE.Vector2(p.y,p.x);}
+    if(cloverOffset!=0.)p=spin(p,cloverOffset*Math.PI*2.);
+
 var lfc = coords.length();//freed(coords).length();
 
 

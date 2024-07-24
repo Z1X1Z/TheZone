@@ -127,7 +127,8 @@ dilate:{value:true},
         multiplicatorNexus:{value:false},//has problems may be discontinued
         squareClover:{value:false},
         mandelCloverFactor:{value:.26},
-        exponentialPetals:{value:0.}
+exponentialPetals:{value:0.},
+cloverOffset:{value:0.}
         }
 window.uniforms={}
 
@@ -578,15 +579,18 @@ function callKey(event){
 
 
     }
-    else if(x == 1&&event.altKey&&!event.shiftKey)uniforms.clvrVariant1.value=!uniforms.clvrVariant1.value;
-    else if(x == 2&&event.altKey&&!event.shiftKey)uniforms.clvrVariant2.value=!uniforms.clvrVariant2.value;
-    else if(x == 3&&event.altKey&&!event.shiftKey)uniforms.clvrVariant3.value=!uniforms.clvrVariant3.value;
-    else if(x == 4&&event.altKey&&!event.shiftKey)uniforms.clvrVariant4.value=!uniforms.clvrVariant4.value;
-    else if(x == 5&&event.altKey&&!event.shiftKey)uniforms.clvrVariant5.value=!uniforms.clvrVariant5.value;
-    else if(x == 6&&event.altKey&&!event.shiftKey)uniforms.clvrVariant6.value=!uniforms.clvrVariant6.value;
-    else if(x == 7&&event.altKey&&!event.shiftKey)uniforms.clvrVariant7.value=!uniforms.clvrVariant7.value;
-    else if(x == 8&&event.altKey&&!event.shiftKey)uniforms.clvrVariant8.value=!uniforms.clvrVariant8.value;
-    else if(x == 9&&event.altKey&&!event.shiftKey)uniforms.clvrVariant9.value=!uniforms.clvrVariant9.value;
+    else if(number=="no number"&&Number(x)==x&&event.altKey&&!event.shiftKey)
+    {
+        if(x == 1)uniforms.clvrVariant1.value=!uniforms.clvrVariant1.value;
+        else if(x == 2)uniforms.clvrVariant2.value=!uniforms.clvrVariant2.value;
+        else if(x == 3)uniforms.clvrVariant3.value=!uniforms.clvrVariant3.value;
+        else if(x == 4)uniforms.clvrVariant4.value=!uniforms.clvrVariant4.value;
+        else if(x == 5)uniforms.clvrVariant5.value=!uniforms.clvrVariant5.value;
+        else if(x == 6)uniforms.clvrVariant6.value=!uniforms.clvrVariant6.value;
+        else if(x == 7)uniforms.clvrVariant7.value=!uniforms.clvrVariant7.value;
+        else if(x == 8)uniforms.clvrVariant8.value=!uniforms.clvrVariant8.value;
+        else if(x == 9)uniforms.clvrVariant9.value=!uniforms.clvrVariant9.value;
+    }
     else if((key=="†"||key=="t")&&event.altKey&&!event.shiftKey)// is alt+a
     {
         window.pzyghthe = (window.pzyghthe+1.)%5;
