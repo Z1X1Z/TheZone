@@ -467,6 +467,11 @@ radialWarp=b;
                  <button class="dropbtn">StrShp2
                  
                  <div id="m2" class="dropdown-content">
+                     
+                     <input type="checkbox" id="butterflyHoney" name="t"  onclick= "
+                         key  = 'w';
+                         callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                         <label for="butterflyHoney">Butterfly Honey![.w]</label><br>
                <a id="Clockwise Spin" name="t"  onclick= "
 
                    key  = 'D';
@@ -496,11 +501,13 @@ radialWarp=b;
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                    Star Spin![Q]</a><br>
                
-               <a id="manualStar" name="t"  onclick= "
-
+               
+                   
+               <input type="checkbox" id="manualStar" name="t"  onclick= "
                    key  = 'g';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
-                   Manual Star![.g]</a><br>
+                   <label for="manualStar">Manual Star![.g]</label><br>
+                   
                <label for="Note Skew">Semitones detuned</label>
                <input type="number" id="Note Skew" name="Note Skew" class="num" onkeydown="
                                                                number = true;

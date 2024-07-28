@@ -83,9 +83,9 @@ var frequencies,
                                                         testar,
                                                         testarContinuous,
                                                         mustarD,
-                        star,starColors;
+star,starColors;
                             
-
+var  DAWstar,DAWstarColors;
 let Fret = {x:null,y:null,index:null,volume:0.,note:-12};
 const loudestFret=Array(4).fill(Fret);
                             function vectorize4(){
@@ -492,7 +492,8 @@ let pushBackCounter = 0;
              if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold&&on){
                           fromCenter = preFromCenter;
 
-                                if( !window.touchMode)
+                                if( !window.touchMode//&&!DAW
+                                   )
                                 {
                                     coordX=bx;
                                     coordY=by;
@@ -573,7 +574,8 @@ let lineMat, lineGeometry, line;
  let circleGeometry,circleMaterial,circle;
                     
                     let meshTrail, materialTrail, geomeTrail;
-                    let starMesh,starGeometry,starMaterial;
+                            let starMesh,starGeometry,starMaterial;
+                            let DAWstarMesh,DAWstarGeometry,DAWstarMaterial;
 
                     let radialMaterial, radialLine, radialGeometry;
                     let starsANDwitnessesMesh,starsANDwitnessesGeometry;
@@ -613,6 +615,26 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
                                             zoomOutEngage=false;
                                             pi = Math.PI;
 
+        function setDAWdependantSize()
+        {
+             window.dawNODES = (DAWarray.length)
+             if(dawNODES<0)dawNODES=0;
+             DAWstar= new Float32Array(dawNODES*3*6);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
+             DAWstarColors= new Float32Array(dawNODES*4*6);
+             if(window.INITIALIZED)
+             {
+                 scene.remove(DAWstarMesh)
+                 DAWstarGeometry.dispose();
+                 DAWstarGeometry = new THREE.BufferGeometry();
+                 DAWstarGeometry.dynamic = true;
+                 DAWstarGeometry.setAttribute('position', new THREE.Float32BufferAttribute( DAWstar,3 ));
+                 DAWstarGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( DAWstarColors, 4 ));
+                 DAWstarMesh = new THREE.Mesh(DAWstarGeometry, DAWstarMaterial);
+                 scene.add(DAWstarMesh)
+                 loadAttributes();
+
+             }
+         }
 function setFFTdependantSizes(){
      analyser.fftSize=fftSize;
       bufferSize = fftSize;
@@ -624,8 +646,8 @@ function setFFTdependantSizes(){
      window.zoomOutRatchetThreshold=1./1024;
      
      
-      star= new Float32Array(numberOfBins*3);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
-      starColors= new Float32Array(numberOfBins*4);
+      star= new Float32Array(numberOfBins*3*3);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
+      starColors= new Float32Array(numberOfBins*4*3);
      
                         starArms = numberOfBins;
              window.starCount = Math.ceil(starArms*60*secondsToEdge);
@@ -636,6 +658,7 @@ function setFFTdependantSizes(){
       starStreamColors= new Float32Array(starCount*4*6);
      
 
+             
                                  testar = new Float64Array((EldersLeg>0)?EldersLeg:0.);
      
                                   testarContinuous =new Float64Array(starArms);
@@ -675,10 +698,13 @@ function setFFTdependantSizes(){
                                            
                    let linePositionAttribute;
                    let lineColorAttribute;
-                                           
-                                           let starPositionAttribute;
-                                           let starColorAttribute;
-                                           
+                            
+                            let starPositionAttribute;
+                            let starColorAttribute;
+                            
+                            let DAWstarPositionAttribute;
+                            let DAWstarColorAttribute;
+                            
                                            let starStreamPositionAttribute;
                                            let starStreamColorAttribute;
                            let starStreamIndex=0;
@@ -690,14 +716,19 @@ function setFFTdependantSizes(){
                                            
                                        let starsANDwitnessesPositionAttribute;
                                        let starsANDwitnessesColorAttribute;
-                                           function loadAttributes(){
+                                           
+                            
+            function loadAttributes(){
                         
                         linePositionAttribute = lineGeometry.getAttribute( 'position' );
                         lineColorAttribute = lineGeometry.getAttribute( 'color' );
-                        
-                        starPositionAttribute = starGeometry.getAttribute( 'position' );
-                        starColorAttribute = starGeometry.getAttribute( 'color' );
-                        
+             
+             starPositionAttribute = starGeometry.getAttribute( 'position' );
+             starColorAttribute = starGeometry.getAttribute( 'color' );
+             
+             DAWstarPositionAttribute = DAWstarGeometry.getAttribute( 'position' );
+             DAWstarColorAttribute = DAWstarGeometry.getAttribute( 'color' );
+             
                         starStreamPositionAttribute = starStreamGeometry.getAttribute( 'position' );
                         starStreamColorAttribute = starStreamGeometry.getAttribute( 'color' );
                         
@@ -760,16 +791,30 @@ function init() {
     // line = new THREE.LineSegments(lineGeometry,lineMat);
      line = new THREE.Line(lineGeometry,lineMat);
 
-    starMaterial= new THREE.MeshBasicMaterial({
-                opacity: 1.,
-              transparent: true,
-                vertexColors: true,
-               // side: THREE.DoubleSide
-            });
-    starGeometry = new THREE.BufferGeometry();
-     starGeometry.dynamic = true;
-    starMesh = new THREE.Mesh(starGeometry, starMaterial);
-     
+             starMaterial= new THREE.MeshBasicMaterial({
+                         opacity: 1.,
+                       transparent: true,
+                         vertexColors: true,
+                        // side: THREE.DoubleSide
+                     });
+             starGeometry = new THREE.BufferGeometry();
+              starGeometry.dynamic = true;
+             starMesh = new THREE.Mesh(starGeometry, starMaterial);
+              
+             
+             
+             DAWstarMaterial= new THREE.MeshBasicMaterial({
+                         opacity: 1.,
+                       transparent: true,
+                         vertexColors: true,
+                        // side: THREE.DoubleSide
+                     });
+             DAWstarGeometry = new THREE.BufferGeometry();
+              DAWstarGeometry.dynamic = true;
+             DAWstarMesh = new THREE.Mesh(DAWstarGeometry, DAWstarMaterial);
+              
+             
+             
      starStreamGeometry = new THREE.BufferGeometry();
      starStreamMesh = new THREE.Mesh(starStreamGeometry, starMaterial);
      
@@ -828,7 +873,8 @@ function init() {
      scene.add(harmonicPzyghtheMesh)
      scene.add(meshTrail)
      scene.add(line);
-     scene.add(starMesh);
+             scene.add(starMesh);
+             scene.add(DAWstarMesh);
      scene.add(starsANDwitnessesMesh)
      //scene.add(starStreamMesh)
      
@@ -917,6 +963,8 @@ function init() {
                           {pitchCol[n]  = new THREE.Color()
                           }
      window.INITIALIZED =true;
+             setDAWdependantSize();
+
      setFFTdependantSizes();
              setTrailSize();
 
@@ -943,7 +991,8 @@ function setDynamicSampler2ds(){
      uniforms.coreTextureSampler.needsUpdate = true;
  }
 function setMicInputToStarPIXEL(){
-             if(!touchMode||window.shouldShowStar)
+             if(!touchMode//&&!DAW
+                ||window.shouldShowStar)
              {
                  
                  let withinMaxsafeSizeBins=(numberOfBins<=2**13)//(EldersLeg<=682);
@@ -999,10 +1048,11 @@ function setMicInputToStarPIXEL(){
                     let bottomOfScreenHeight = 0;
                                            let correlationForTextX = 0;
                                            let correlationForTextY = 0;
+                            let maxToMin = 1;
 
 function adjustThreeJSWindow()
                     {
-     
+
      renderer.setSize(widthPX, heightPX);
              if (streaming) {
                  video.setAttribute("width", window.innerWidth);
@@ -1020,6 +1070,7 @@ function adjustThreeJSWindow()
      setRenderTargetSize(widthPX,heightPX);
       height=heightPX/minimumDimension;
       width=widthPX/minimumDimension;
+             maxToMin = Math.max(height,width)/Math.min(height,width);
 
   camera = new THREE.OrthographicCamera( -width, width, height, -height, 1, -1);
 
@@ -1540,12 +1591,150 @@ function runOSMD (){
                                     
                                     
     ONbypass = false;
-     if( window.touchMode||window.touchOnlyMode)
+     if( window.touchMode//&&!DAW
+        ||window.touchOnlyMode)
      {    setDynamicSampler2ds();//normally does nothing
 
          setMicInputToStarPIXEL();
          executeTouchRegime();
      }
+                     
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+           if(window.DAW)
+           {
+               
+               let DAWstarStride=0.;
+               
+               var maxTestar=.5;
+               var minTestar=1.;
+              
+               /*
+               
+               for (var g=0; g<dawNODES; g++) {
+                   if(isFinite(dawAMPLITUDE[g])){
+                       if(dawAMPLITUDE[g]>maxTestar) maxTestar=dawAMPLITUDE[g];
+                       if(dawAMPLITUDE[g]<minTestar) minTestar=dawAMPLITUDE[g];
+                   }
+                   
+               }*/
+                   
+                   
+                   
+                   
+                   for (var g=0; g<DAWarray.length;
+                        g++)
+                       
+                   {
+                       let dawNOTE=DAWarray[g].dawNOTE
+                       let dawAMPLITUDE=DAWarray[g].dawAMPLITUDE
+                       
+                       if(isFinite(dawAMPLITUDE)&&dawAMPLITUDE!=0.&&isFinite(dawNOTE)&&dawNOTE!=0.){
+                           
+                           let arm =flip*((dawNOTE+twist+12)*radialWarp)%24/24*pi*2.;
+                           const lengtOriginal=dawAMPLITUDE;//twice applied
+                           var widt = pi/24.;
+                           //if (widt==0)widt=starshipSize;
+                        //   console.log(arm+"arm DAW widt"+widt+" node"+g)
+                          // console.log(lengtOriginal+"lengtOriginal node"+g)
+                           //var widt =starshipSize;
+                           const vop = new THREE.Color();
+                           //vop.setHSL(((-dawNOTE+8*uniforms.brelued.value)*uniforms.brelued.value)%24/24., dawNOTE/lightingScaleStar,dawNOTE/lightingScaleStar);//297 is around the highest heard note
+                           vop.setHSL(.5, .5,.5);//297 is around the highest heard note
+                           const rpio2 =arm+pi/2.;
+                           const x =widt*-Math.sin(rpio2);
+                           const y = widt*-Math.cos(rpio2);
+                           const xr = lengtOriginal*-Math.sin(arm);
+                           const yr = lengtOriginal*-Math.cos(arm);
+                           const depth = -1.;//+lengtOriginal/maxToMin*starShipDepthInSet;//shortest bar on top
+                 /*          DAWstarColorAttribute.setXYZW(DAWstarStride,.5,.5,.5,1.)
+                           DAWstarColorAttribute.setXYZW(DAWstarStride+1,vop.r,vop.g,vop.b,.0)
+                           DAWstarColorAttribute.setXYZW(DAWstarStride+2,vop.r,vop.g,vop.b,1.)
+                           DAWstarPositionAttribute.setXYZ(DAWstarStride,(xr-x), (yr-y),  depth)
+                           DAWstarPositionAttribute.setXYZ(DAWstarStride+1, 0., 0.,  0.)
+                           DAWstarPositionAttribute.setXYZ(DAWstarStride+2,(xr+x), (yr+y),  depth)
+                           DAWstarStride+=3
+*/
+                          
+
+                           DAWstarColorAttribute.setXYZW(DAWstarStride,.0,.0,.0,1.)
+                           DAWstarColorAttribute.setXYZW(DAWstarStride+1,.0,.0,.0,1.)
+                           DAWstarColorAttribute.setXYZW(DAWstarStride+2,.0,.0,.0,1.)
+                           DAWstarPositionAttribute.setXYZ(DAWstarStride,(xr-x), (yr-y),  -1.)
+                           DAWstarPositionAttribute.setXYZ(DAWstarStride+1, 0., 0.,  -1.)
+                           DAWstarPositionAttribute.setXYZ(DAWstarStride+2,(xr+x), (yr+y),  -1.)
+                           DAWstarStride+=3
+
+                     //      console.log(DAWstarStride)
+                         
+                           const x2 =x*2;
+                           const y2 =y*2;
+                           const xrTIPTRIANGLE = widt*-Math.sin(arm)*2;
+                           const yrTIPTRIANGLE = widt*-Math.cos(arm)*2;
+                           DAWstarColorAttribute.setXYZW(DAWstarStride,1.,1.,1.,1.)
+                           DAWstarColorAttribute.setXYZW(DAWstarStride+1,1.,1.,1.,1.)
+                           DAWstarColorAttribute.setXYZW(DAWstarStride+2,1.,1.,1.,1.)
+                           
+                           DAWstarPositionAttribute.setXYZ(DAWstarStride,(xr+x2)-xrTIPTRIANGLE, (yr +y2)-yrTIPTRIANGLE,  -1.)
+                           DAWstarPositionAttribute.setXYZ(DAWstarStride+1, xr+xrTIPTRIANGLE/4., yr+yrTIPTRIANGLE/4.,  -1.)
+                           DAWstarPositionAttribute.setXYZ(DAWstarStride+2,(xr-x2)-xrTIPTRIANGLE, (yr-y2)-yrTIPTRIANGLE,  -1.)
+                           DAWstarStride+=3
+                           
+                           /*working tip, wrong direction
+                            const xTIPTRIANGLE =widt*-Math.sin(rpio2)/2.;
+                           const yTIPTRIANGLE = widt*-Math.cos(rpio2)/2.;
+                           const xrTIPTRIANGLE = widt*-Math.sin(arm);
+                           const yrTIPTRIANGLE = widt*-Math.cos(arm);
+                           DAWstarColorAttribute.setXYZW(DAWstarStride,.5,.5,.5,1.)
+                           DAWstarColorAttribute.setXYZW(DAWstarStride+1,.5,.5,.5,1.)
+                           DAWstarColorAttribute.setXYZW(DAWstarStride+2,.5,.5,.5,1.)
+                           DAWstarPositionAttribute.setXYZ(DAWstarStride+2,(xr-x), (yr-y),  depth)
+                           DAWstarPositionAttribute.setXYZ(DAWstarStride+1, xr+xrTIPTRIANGLE, yr+yrTIPTRIANGLE,  1.)
+                           
+                           DAWstarPositionAttribute.setXYZ(DAWstarStride,(xr+x), (yr +y),  depth)
+                           DAWstarStride+=3
+*/
+                     //      console.log(DAWstarStride)
+                       }
+                   }
+                   
+               
+               
+               DAWstarPositionAttribute.needsUpdate = true; // required after the first render
+               DAWstarColorAttribute.needsUpdate = true; // required after the first render
+               
+           }
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
                                     
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
 
@@ -1610,7 +1799,8 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
     
        move();
     
-   if( !window.touchMode)
+   if( !window.touchMode//&&!DAW
+      )
    {
        if(!zoomAtl41)zoomRoutine();
        infinicore();
@@ -1633,7 +1823,8 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
     if(!isNaN(loudestFret[0].volume)&&omniDynamicEngaged)
         omniData[hyperCoreOffset]=coreShift/2.;
 
-    setDynamicSampler2ds();
+    if(true//||!DAW
+)setDynamicSampler2ds();
 
    if(spirographMODE!=0)makeSpirograph();
 
@@ -1697,8 +1888,10 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
     uniforms.coordSHIFT.value.y+=d_y;
     
     
-   if( !window.touchMode) uniforms.coords.value = new THREE.Vector2( coordX,coordY);
-   if (EldersLeg>=0){
+   if( !window.touchMode//&&!DAW
+      ) uniforms.coords.value = new THREE.Vector2( coordX,coordY);
+   if (EldersLeg>=0//&&!DAW
+       ){
 
 
     let metroPhase =-Math.sin(-uniforms[ "time" ].value*uniforms[ "metronome" ].value*pi)
@@ -1752,7 +1945,6 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
    var minTestar=100000000000000;
 
 
-                            const maxToMin = Math.max(height,width)/Math.min(height,width);
     
 
     
@@ -1780,12 +1972,14 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
         {
             
             if(isFinite(testarContinuous[g])&&testarContinuous[g]!=0.&&isFinite(mustarD[g])&&mustarD[g]!=0.){
-                
-                let arm =((mustarD[g]+twist+12)*radialWarp)%24/24*pi*2.;
+                //arm =flip*(g*radialWarp+twist*EldersLeg/24.)%EldersLeg/EldersLeg*pi*2.;
+
+                let arm =flip*((mustarD[g]+twist+12)*radialWarp)%24/24*pi*2.;
                 const lengtOriginal=(testarContinuous[g]-minTestar)/(maxTestar-minTestar);//twice applied
                 var widt = (1.-lengtOriginal)*starshipSize;
                 if (widt==0)widt=starshipSize;
                 //var widt =starshipSize;
+
                 const vop = new THREE.Color();
                 vop.setHSL(((-mustarD[g]+8*uniforms.brelued.value)*uniforms.brelued.value)%24/24., mustarD[g]/lightingScaleStar,mustarD[g]/lightingScaleStar);//297 is around the highest heard note
                 

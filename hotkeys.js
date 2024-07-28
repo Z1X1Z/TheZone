@@ -165,6 +165,31 @@ function resetAll(){
         if(window.useCDN||location.hash.includes(".b")||location.hash.includes(".c"))
             callKey(new KeyboardEvent('keydown', {'key': "b", 'altKey':true, 'keyCode':key.charCodeAt(0)}));
     }
+    window.DAW=false;
+    window.DAWobject = {dawNODES: 0,
+        
+        dawAMPLITUDE:null,//testarContinuous;//
+        dawNOTE:null,//mustarD;//
+        
+    DAWsound:null,
+    DAWsound2:null,
+    DAWzound:null,
+        DAWzound2:null,
+        DAWxound:null,
+        DAWxound2:null,
+        DAWtound:null,
+        DAWtound2:null,
+        
+        DAWangleSound:null,
+        DAWinitialAngleSound:null,
+        DAWinitialAngle:null,
+        DAWpermanentInitialTwist:null,
+        DAWlastSlip:null,
+        DAWoctavesBoosted:null,
+        DAWsignTwist:null
+    }
+    window.DAWarray = []
+    window.dawNODES=0;
     
     window.xTouch=0;
     window.yTouch=0;
@@ -242,6 +267,7 @@ function resetAll(){
                                                    
     if(window.INITIALIZED){
         setFFTdependantSizes();
+                setDAWdependantSize();
         setDynamicSampler2ds();
         setMicInputToStarPIXEL();
         setTrailSize()
@@ -439,6 +465,8 @@ function callKey(event){
         else if( uniforms.exponentialPetals.value==-1.) uniforms.exponentialPetals.value=0.;
         
     }
+    else if (event.altKey&&(key=="∑"||key=="w"))window.DAW=!window.DAW;
+
     else if (event.altKey&&(key=="¥"||key=="y"))
     {
         if(uniforms.largeEyeColor.value==0.)uniforms.largeEyeColor.value = -1.;
@@ -673,7 +701,8 @@ function callKey(event){
     else if (key=="\\"){zoomRate=movementRateORIGINAL; if(number!="no number")
         zoomRate=number*1.;}
 
-    else if (key=="/"){if(number!="no number"){trailSecondsLong=number*1.;setTrailSize()}}
+    else if (key=="/"){if(number!="no number"){trailSecondsLong=number*1.;
+        if(window.INITIALIZED) setTrailSize()}}
     
     else if (x==0)
     {window.movementRate=movementRateORIGINAL; uniforms[ "rate" ].value=movementRateORIGINAL;
