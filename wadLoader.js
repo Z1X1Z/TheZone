@@ -510,16 +510,9 @@ function followSound(e){
             }
              twistIncrement = twistIncrementPI*(24/2)/pi;
 
+                                        
                                                 
-                                                if(DAWnodeIndexForTouchBestFitIndex[id]!="not set")
-                for(var d = 0.; d<DAWarray.length;d++)//if(d!=DAWnodeIndexForTouchBestFitIndex[id])
-                                                {
-                //DAWarray[d].DAWpermanentInitialTwist+=twistIncrement;
-               //  if(DAWnodeIndexForTouchBestFitIndex[id]!="not set") DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].dawNOTE+=twistIncrement;
-
-             }
-                                                
-                                                if(DAWnodeIndexForTouchBestFitIndex[id]!="not set"){
+            if(DAWnodeIndexForTouchBestFitIndex[id]!="not set"){
                  twist+=twistIncrement;
 
              DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].DAWpermanentInitialTwist+=twistIncrement;
@@ -629,9 +622,9 @@ function followSound(e){
                                 fi.DAWoctavesBoosted= b.octavesBoosted[d]
                             }
                             
-                            angleSoundX=b.angleSound[DAWnodeIndexForTouchBestFitIndex[id]]
-                            initialAngleSoundX=b.initialAngleSound[DAWnodeIndexForTouchBestFitIndex[id]];
-                            octavesBoostedX=b.octavesBoosted[DAWnodeIndexForTouchBestFitIndex[id]];
+                           // angleSoundX=b.angleSound[DAWnodeIndexForTouchBestFitIndex[id]]
+                           // initialAngleSoundX=b.initialAngleSound[DAWnodeIndexForTouchBestFitIndex[id]];
+                           // octavesBoostedX=b.octavesBoosted[DAWnodeIndexForTouchBestFitIndex[id]];
                                      }
                 
 
@@ -801,9 +794,9 @@ if(grabStar)
                                 if (i==id) angleSoundZ[id]= (angleSoundZ[id]+slipConstrained+8*pi)%(2*pi);
                                 else{
                                     
-                                    angleSoundZ[i]=(angleSoundZ[i]-slipConstrained+8*pi)%(2*pi);
                                     initialAngleSoundZ[i]=(initialAngleSoundZ[i]-slipConstrained+8*pi)%(2*pi);
                                     
+                                    angleSoundZ[i]=(angleSoundZ[i]-slipConstrained-initialAngleSoundZ[i]+8*pi)%(2*pi)+initialAngleSoundZ[i]
                                 }
                                 let twisteR=(angleSoundZ[i]-initialAngleSoundZ[i]+8*pi)%(2*pi);
                                 let   lastTwistSign=signTwistZ[i];
@@ -812,8 +805,7 @@ if(grabStar)
                                     &&(twisteR<pi/2.||twisteR>3./2.*pi)
                                     ) {
                                     
-                                   if(i==id) octavesBoostedZ[i]+=24*signTwistZ[i];
-                                    else octavesBoostedZ[i]+=24*signTwistZ[i];
+                                    octavesBoostedZ[i]+=24*signTwistZ[i];
                                 }
                                 
                             }
