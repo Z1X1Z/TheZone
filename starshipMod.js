@@ -1681,16 +1681,16 @@ function runOSMD (){
 
                      //      console.log(DAWstarStride)
                          
-                           const x2 =x*2;
-                           const y2 =y*2;
-                           const xrTIPTRIANGLE = widt*-Math.sin(arm)*2;
-                           const yrTIPTRIANGLE = widt*-Math.cos(arm)*2;
+                           const x2 =x;
+                           const y2 =y;
+                           const xrTIPTRIANGLE = widt*-Math.sin(arm);
+                           const yrTIPTRIANGLE = widt*-Math.cos(arm);
                            DAWstarColorAttribute.setXYZW(DAWstarStride,1.,1.,1.,1.)
                            DAWstarColorAttribute.setXYZW(DAWstarStride+1,1.,1.,1.,1.)
                            DAWstarColorAttribute.setXYZW(DAWstarStride+2,1.,1.,1.,1.)
                            
                            DAWstarPositionAttribute.setXYZ(DAWstarStride,(xr+x2)-xrTIPTRIANGLE, (yr +y2)-yrTIPTRIANGLE,  -1.)
-                           DAWstarPositionAttribute.setXYZ(DAWstarStride+1, xr+xrTIPTRIANGLE/4., yr+yrTIPTRIANGLE/4.,  -1.)
+                           DAWstarPositionAttribute.setXYZ(DAWstarStride+1, xr+xrTIPTRIANGLE/3., yr+yrTIPTRIANGLE/3.,  -1.)
                            DAWstarPositionAttribute.setXYZ(DAWstarStride+2,(xr-x2)-xrTIPTRIANGLE, (yr-y2)-yrTIPTRIANGLE,  -1.)
                            DAWstarStride+=3
                            
