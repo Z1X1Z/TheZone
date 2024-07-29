@@ -615,39 +615,40 @@ function followSound(e){
                                  {
                                      let bfi = DAWarray[DAWnodeIndexForTouchBestFitIndex[id]];
                                      bfi.dawAMPLITUDE=touchMagnitude;//testarContinuous;//
+if(grabStar)
+   {
+             for(var d = 0;d<DAWarray.length;d++)
+             {
+                                                         
+                     if(!grabStar)
+                     {soundTouchComponent=angleSoundX
+                         twistFeed = twist;
+                     }
+                     else {
+                          soundTouchComponent=( DAWarray[d].DAWangleSound-DAWarray[d].DAWinitialAngleSound+pi*8.)%(2*pi)+DAWarray[d].DAWinitialAngleSound;
 
-                                         for(var d = 0;d<DAWarray.length;d++)
-                                         {
-                                             
-         if(!grabStar)
-         {soundTouchComponent=angleSoundX
-             twistFeed = twist;
-         }
-         else {
-              soundTouchComponent=( DAWarray[d].DAWangleSound-DAWarray[d].DAWinitialAngleSound+pi*8.)%(2*pi)+DAWarray[d].DAWinitialAngleSound;
+                         twistFeed= DAWarray[d].DAWpermanentInitialTwist+DAWarray[d].DAWoctavesBoosted;
 
-             twistFeed= DAWarray[d].DAWpermanentInitialTwist+DAWarray[d].DAWoctavesBoosted;
+                     }
+                         
+                     let    touchNoteSpecified=   soundTouchComponent/pi/2*12;
+                         
+                         DAWarray[d].dawNOTE=touchNoteSpecified*2-twistFeed;
+                         
+                       let   frequencySpecified = Math.pow(2.,((touchNote-twistFeed/2.)-1.)/12.
+                                                         )*window.ConcertKey;
 
-         }
-                                             
-                                         let    touchNoteSpecified=   soundTouchComponent/pi/2*12;
-                                             
-                                             DAWarray[d].dawNOTE=touchNoteSpecified*2-twistFeed;
-                                             
-                                           let   frequencySpecified = Math.pow(2.,((touchNote-twistFeed/2.)-1.)/12.
-                                                                             )*window.ConcertKey;
 
-                                                                          
-             
-             setSounds(id,frequencySpecified,soundTouchComponent,                                             DAWarray[d]
-.DAWinitialAngleSound, DAWarray[d].dawAMPLITUDE/2.,
-                       DAWarray[d].DAWsound2,   DAWarray[d].DAWsound,  DAWarray[d].DAWzound2,      DAWarray[d].DAWzound,        DAWarray[d].DAWxound2,        DAWarray[d].DAWxound,        DAWarray[d].DAWtound2,        DAWarray[d].DAWtound);
+
+                setSounds(id,frequencySpecified,soundTouchComponent,   DAWarray[d].DAWinitialAngleSound, DAWarray[d].dawAMPLITUDE/2., DAWarray[d].DAWsound2,   DAWarray[d].DAWsound,  DAWarray[d].DAWzound2,      DAWarray[d].DAWzound,        DAWarray[d].DAWxound2,        DAWarray[d].DAWxound,        DAWarray[d].DAWtound2,        DAWarray[d].DAWtound);
+
          
-                                             
                                          }
-
-                                     if(!grabStar)
+                                                                                   }
+                               else      if(!grabStar)
                                      {
+                          bfi.dawNOTE=touchNote*2-twistFeed;
+
                                          
                                          setSounds(id,frequency,soundTouchComponent,initialAngleSoundX,volume,
                                                    bfi.DAWsound2,bfi.DAWsound,bfi.DAWzound2,bfi.DAWzound,bfi.DAWxound2,bfi.DAWxound,bfi.DAWtound2,bfi.DAWtound);
