@@ -472,6 +472,53 @@ radialWarp=b;
                          key  = 'w';
                          callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
                          <label for="butterflyHoney">Butterfly Honey![.w]</label><br>
+                         
+                         
+                         
+                         <select name="Choose Instrument One"  id="Choose Instrument One"
+                             onchange="
+       
+                                           instrument1 = this.value;
+       bootSounds(instrument1,instrument2)
+       "
+                       >
+                             <option selected="selected" value='square'>
+                                 Square
+                             </option>
+                             <option value='triangle'>
+                                 Triangle
+                                </option>
+                                   <option value='sawtooth'>
+                                       Sawtooth
+                                   </option>
+                                   <option value='sine'>
+                                       Zine
+                                   </option>
+                         </select>
+                         
+                         <select name="Choose Instrument Two"  id="Choose Instrument Two"
+                             onchange="
+       
+                                           instrument2 = this.value;
+       bootSounds(instrument1,instrument2)
+       "
+                       >
+                             <option selected="selected" value='square'>
+                                 Square
+                             </option>
+                             <option value='triangle'>
+                                 Triangle
+                                </option>
+                                   <option value='sawtooth'>
+                                       Sawtooth
+                                   </option>
+                                   <option value='sine'>
+                                       Zine
+                                   </option>
+                         </select>
+                         
+                         
+                         
                <a id="Clockwise Spin" name="t"  onclick= "
 
                    key  = 'D';
