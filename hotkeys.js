@@ -149,17 +149,17 @@ window.settingsSet = false
 function resetAll(){
     for(var nameOfUniform in uniformsInitial)
     {
-              window.uniforms[nameOfUniform]={}
-              Object.assign(window.uniforms[nameOfUniform],window.uniformsInitial[nameOfUniform])
+        window.uniforms[nameOfUniform]={}
+        Object.assign(window.uniforms[nameOfUniform],window.uniformsInitial[nameOfUniform])
     }
     window.coordX=0.; window.coordY=0.;
-
     
-        if(!location.hash.includes(".b")&&!location.hash.includes(".c")) window.BibleON=1;
-        else window.BibleON=0;
-     if(settingsSet)
+    
+    if(!location.hash.includes(".b")&&!location.hash.includes(".c")) window.BibleON=1;
+    else window.BibleON=0;
+    if(settingsSet)
     {
-         if(location.hash.includes(".b")||location.hash.includes(".c")) window.BibleON=1;
+        if(location.hash.includes(".b")||location.hash.includes(".c")) window.BibleON=1;
         else window.BibleON=0;
         
         if(window.useCDN||location.hash.includes(".b")||location.hash.includes(".c"))
@@ -168,29 +168,27 @@ function resetAll(){
     window.DAW=false;
     window.DAWobject = {dawNODES: 0,
         
-        dawAMPLITUDE:null,//testarContinuous;//
-        dawNOTE:null,//mustarD;//
+    dawAMPLITUDE:null,//testarContinuous;//
+    dawNOTE:null,//mustarD;//
         
     DAWsound:null,
     DAWsound2:null,
     DAWzound:null,
-        DAWzound2:null,
-        DAWxound:null,
-        DAWxound2:null,
-        DAWtound:null,
-        DAWtound2:null,
+    DAWzound2:null,
+    DAWxound:null,
+    DAWxound2:null,
+    DAWtound:null,
+    DAWtound2:null,
         
-        DAWangleSound:null,
-        DAWinitialAngleSound:null,
-        DAWinitialAngle:null,
-        DAWpermanentInitialTwist:null,
-        DAWlastSlip:null,
-        DAWoctavesBoosted:null,
-        DAWsignTwist:null
+    DAWangleSound:null,
+    DAWinitialAngleSound:null,
+    DAWinitialAngle:null,
+    DAWpermanentInitialTwist:null,
+    DAWlastSlip:null,
+    DAWoctavesBoosted:null,
+    DAWsignTwist:null
     }
-    window.DAWarray = []
-    window.dawNODES=0;
-    
+    if(!("DAWarray" in window))window.DAWarray = []
     window.xTouch=0;
     window.yTouch=0;
     window.touchVolume = .5;
@@ -276,24 +274,40 @@ function resetAll(){
     }
     if(wadLOADED)
     {
-        for(var o=0;o<maxTouchSoundCount;o++){
-            
-            sound[o].stop()
-            sound2[o].stop()
-            
-                zound[o].stop()
-                zound2[o].stop()
-            
-            
-                xound[o].stop()
-                xound2[o].stop()
-                
-                    tound[o].stop()
-                    tound2[o].stop()
-           }
-                
+                for(var o=0;o<maxTouchSoundCount;o++){
+                     
+                     sound[o].stop()
+                     sound2[o].stop()
+                     
+                         zound[o].stop()
+                         zound2[o].stop()
+                     
+                     
+                         xound[o].stop()
+                         xound2[o].stop()
+                         
+                             tound[o].stop()
+                             tound2[o].stop()
+                    }
+                for(var o=0;o<DAWarray.length;o++){
+                    DAWarray[o].DAWsound.stop()
+                    DAWarray[o].DAWsound2.stop()
+                    
+                    DAWarray[o].DAWzound.stop()
+                    DAWarray[o].DAWzound2.stop()
+                    
+                    
+                    DAWarray[o].DAWxound.stop()
+                    DAWarray[o].DAWxound2.stop()
+                        
+                    DAWarray[o].DAWtound.stop()
+                    DAWarray[o].DAWtound2.stop()
+                   }
+                        
 
     }
+                                         window.DAWarray = []
+
                                          
                                          window.screenPressCoordX=Array(maxTouchSoundCount).fill(0);
                                          window.screenPressCoordY=Array(maxTouchSoundCount).fill(0);
