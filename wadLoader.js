@@ -370,7 +370,7 @@ function startSound(e){
          let bestFitDAWnote = .5
         for(var h=0;h<DAWarray.length;h++){
             let noteDifference=
-            Math.abs(touchNote24-DAWarray[h].dawNOTE%24)
+            Math.abs(touchNote24%24-DAWarray[h].dawNOTE%24)
             if(noteDifference<=bestFitDAWnote){
                 bestFitDAWnote=noteDifference
                 DAWnodeIndexForTouchBestFitIndex[id]=h
@@ -516,6 +516,7 @@ function followSound(e){
                                                 
             if(DAWnodeIndexForTouchBestFitIndex[id]!="not set"){
                  twist+=twistIncrement;
+                 DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].DAWinitialNOTE+=twistIncrement;//is this right???
 
              DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].DAWpermanentInitialTwist+=twistIncrement;
                                                 }
@@ -680,6 +681,8 @@ function followSound(e){
                                  {
                                      let bfi = DAWarray[DAWnodeIndexForTouchBestFitIndex[id]];
                                      bfi.dawAMPLITUDE=touchMagnitude;//testarContinuous;//
+                                     bfi.dawNOTE=touchNote*2-twistFeed;
+
 if(grabStar)
    {
              for(var d = 0;d<DAWarray.length;d++)
@@ -712,8 +715,6 @@ if(grabStar)
                                                                                    }
                                else      if(!grabStar)
                                      {
-                          bfi.dawNOTE=touchNote*2-twistFeed;
-
                                          
                                          setSounds(id,frequency,soundTouchComponent,initialAngleSoundX,volume,touchMagnitude,
                                                    bfi.DAWsound2,bfi.DAWsound,bfi.DAWzound2,bfi.DAWzound,bfi.DAWxound2,bfi.DAWxound,bfi.DAWtound2,bfi.DAWtound);
