@@ -3,6 +3,9 @@ let touchNumber=new Map();
 for(var v = 0; v<maxTouchSoundCount;v++)touchNumber.set(v,"off")
 let pressIndex=new Map();
 
+let instrument1 = "square"
+let instrument2 = "triangle"
+
 
 
 function stallTillWad(){if(typeof(Wad)=="function"&&userHasGestured){initialize();} else  setTimeout(stallTillWad,100);}
@@ -41,6 +44,82 @@ const xound2=Array(maxTouchSoundCount);
 const tound=Array(maxTouchSoundCount);
 const tound2=Array(maxTouchSoundCount);
 
+function bootSounds(shape1,shape2)
+{
+    for(var o=0;o<maxTouchSoundCount;o++){
+        if(typeof sound[o] =="object")
+        {sound[o].stop()
+            sound2[o].stop()
+            
+            zound[o].stop()
+            zound2[o].stop()
+            
+            
+            xound[o].stop()
+            xound2[o].stop()
+            
+            tound[o].stop()
+            tound2[o].stop()
+        }
+        sound[o] =  new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
+        sound2[o] = new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
+
+        zound[o] =  new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
+        zound2[o] = new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
+        
+        xound[o] =  new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
+        xound2[o] = new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
+        
+        tound[o] =  new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
+        tound2[o] = new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
+    }
+    
+    for(var o=0;o<DAWarray.length;o++){
+        
+        DAWarray[o].DAWsound.stop()
+        DAWarray[o].DAWsound2.stop()
+        
+        DAWarray[o].DAWzound.stop()
+        DAWarray[o].DAWzound2.stop()
+        
+        
+        DAWarray[o].DAWxound.stop()
+        DAWarray[o].DAWxound2.stop()
+            
+        DAWarray[o].DAWtound.stop()
+        DAWarray[o].DAWtound2.stop()
+        DAWarray[o].DAWsound =  new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
+        DAWarray[o].DAWsound2 = new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
+        
+        DAWarray[o].DAWzound =  new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
+        DAWarray[o].DAWzound2 = new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
+        
+        DAWarray[o].DAWxound =  new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
+        DAWarray[o].DAWxound2 = new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
+        
+        DAWarray[o].DAWtound =  new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
+        DAWarray[o].DAWtound2 = new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
+        
+        playSounds(DAWarray[o].DAWsound2,DAWarray[o].DAWsound,DAWarray[o].DAWzound2,DAWarray[o].DAWzound,
+                   0,0,0,
+                   0,
+                   0)
+        
+        playSounds(DAWarray[o].DAWxound2,DAWarray[o].DAWxound,DAWarray[o].DAWtound2,DAWarray[o].DAWtound,
+                   0,0,0,
+                   0,
+                   0)
+         
+    if(window.DAW)
+         soundRoutine(true,o,0,0,
+                         DAWarray[o].DAWangleSound,
+                         DAWarray[o].DAWinitialAngleSound,
+                         DAWarray[o].DAWinitialAngle,
+                         DAWarray[o].DAWpermanentInitialTwist,
+                      DAWarray[o].DAWoctavesBoosted);
+    }
+    
+}
 
 const feedbackPitchsound=Array(5); //updated in starshipMod
 let wadLOADED=false;
@@ -49,19 +128,9 @@ function initialize(){
     for(var o=0;o<4;o++)feedbackPitchsound[o] =  new Wad({source : 'square'})//, tuna   : hyperdriveTUNA});
 
    // feedbackPitchsound.play({env:{attack: 0, release:0,hold:-1},pitch:1,volume:0})
-    for(var o=0;o<maxTouchSoundCount;o++){
-        sound[o] =  new Wad({source : 'square'})//, tuna   : hyperdriveTUNA});
-     sound2[o] = new Wad({source : 'square'})//, tuna   : hyperdriveTUNA});
-        
-            zound[o] =  new Wad({source : 'square'})//, tuna   : hyperdriveTUNA});
-         zound2[o] = new Wad({source : 'square'})//, tuna   : hyperdriveTUNA});
-        
-        xound[o] =  new Wad({source : 'triangle'})//, tuna   : hyperdriveTUNA});
-     xound2[o] = new Wad({source : 'triangle'})//, tuna   : hyperdriveTUNA});
-        
-            tound[o] =  new Wad({source : 'triangle'})//, tuna   : hyperdriveTUNA});
-         tound2[o] = new Wad({source : 'triangle'})//, tuna   : hyperdriveTUNA});
-    }
+        bootSounds("square","triangle")
+
+            
     try{sound[0].play({wait:1000000});
         sound2[0].play({wait:1000000});
         sound[0].stop()
@@ -170,7 +239,7 @@ function startSound(e){
     }
      touchMagnitude=Math.sqrt(y*y+x*x)/(Math.min(heightPX,widthPX))*2;
     let volume= window.touchVolume*-touchMagnitude/2.;
-    if(radialOctaveBoost)volume= window.touchVolume*pressure*.25;
+    if(radialOctaveBoost)volume= -window.touchVolume*pressure*.25;
 
     initialAngleSound[id] =(-Math.atan2(-x,-y)*flip+2.*pi)%(2*pi)
 
@@ -300,7 +369,7 @@ function startSound(e){
         for(var h=0;h<DAWarray.length;h++){
             let noteDifference=
             Math.abs(touchNote24-DAWarray[h].dawNOTE)
-            if(noteDifference<bestFitDAWnote){
+            if(noteDifference<=bestFitDAWnote){
                 bestFitDAWnote=noteDifference
                 DAWnodeIndexForTouchBestFitIndex[id]=h
             }
@@ -309,7 +378,7 @@ function startSound(e){
             
             noteDifference=Math.abs(24-noteDifference)%24
             
-            if(noteDifference<bestFitDAWnote){
+            if(noteDifference<=bestFitDAWnote){
                 bestFitDAWnote=noteDifference
                 DAWnodeIndexForTouchBestFitIndex[id]=h
             }
@@ -374,18 +443,18 @@ function startSound(e){
                                                 cascadeSwitch2){
                     
                     
-                    sound2.play({env:{attack: .1, release:.1,hold:-1},
+                    sound2.play({env:{attack: .1, release:.0,hold:-1},
                         pitch:frequency/2.*2**Math.floor(octaveDistance-octaveShift),
                         volume:cascadeSwitch2*(1.-octaveDistance%1)});
-                    sound.play({env:{attack: .1, release:.1,hold:-1},
+                    sound.play({env:{attack: .1, release:.0,hold:-1},
                         pitch:frequency*2**Math.floor(octaveDistance-octaveShift),
                         volume:cascadeSwitch1*(1.-octaveDistance%1)});
                     if(window.radialOctaveBoost)
                     {
-                        zound2.play({env:{attack: .1, release:.1,hold:-1},
+                        zound2.play({env:{attack: .1, release:.0,hold:-1},
                         pitch:frequency*2**Math.ceil(octaveDistance-octaveShift),
                             volume:cascadeSwitch2*octaveDistance%1});
-                        zound.play({env:{attack: .1, release:.1,hold:-1},
+                        zound.play({env:{attack: .1, release:.0,hold:-1},
                         pitch:frequency*2.*2**Math.ceil(octaveDistance-octaveShift),
                             volume:cascadeSwitch1*octaveDistance%1});
                     }
@@ -470,14 +539,15 @@ function followSound(e){
             {
                 
                 
-                soundRoutine(false,id,x,y,angleSound[id],initialAngleSound[id],initialAngle[id],permanentInitialTwist[id]);
+              soundRoutine(false,id,x,y,angleSound[id],initialAngleSound[id],initialAngle[id],permanentInitialTwist[id],octavesBoosted[id]);
             }
             if(window.DAW)if(DAWnodeIndexForTouchBestFitIndex[id]!="not set")
                  soundRoutine(true,id,x,y,
                                  DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].DAWangleSound,
                                  DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].DAWinitialAngleSound,
                                  DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].DAWinitialAngle,
-                                 DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].DAWpermanentInitialTwist);
+                                 DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].DAWpermanentInitialTwist,
+                              DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].DAWoctavesBoosted);
                 
         }
 
@@ -506,7 +576,7 @@ function followSound(e){
                     touchMagnitude=Math.sqrt(y*y+x*x)/(Math.min(heightPX,widthPX))*2.
                     let volume= window.touchVolume*pressure*-touchMagnitude/2.;
 
-                    if(radialOctaveBoost)volume= window.touchVolume*pressure*.25;
+                    if(radialOctaveBoost)volume= -window.touchVolume*pressure*.25;
                     let lastAngleSound=angleSoundX;
                     
                     if(!window.grabStar)
@@ -723,13 +793,14 @@ if(grabStar)
                                              
                                                     function bump(loops,id,x,y,signTwistZ,angleSoundZ,initialAngleSoundZ,octavesBoostedZ){
                            
-                                                               
+                           
+                           let slipConstrained =twistIncrementPI;
+                           if(slipConstrained>pi)slipConstrained-=2*pi;
+                           
                                                                for(var i = 0; i<loops;i++)  {
-                                if (i==id) angleSoundZ[id]= (angleSoundZ[id]+twistIncrementPI+8*pi)%(2*pi);
+                                if (i==id) angleSoundZ[id]= (angleSoundZ[id]+slipConstrained+8*pi)%(2*pi);
                                 else{
                                     
-                                    let slipConstrained =twistIncrementPI;
-                                    if(slipConstrained>pi)slipConstrained-=2*pi;
                                     angleSoundZ[i]=(angleSoundZ[i]-slipConstrained+8*pi)%(2*pi);
                                     initialAngleSoundZ[i]=(initialAngleSoundZ[i]-slipConstrained+8*pi)%(2*pi);
                                     
@@ -739,7 +810,11 @@ if(grabStar)
                                 signTwistZ[i] =Math.sign(twisteR-pi);
                                 if (lastTwistSign!=signTwistZ[i]
                                     &&(twisteR<pi/2.||twisteR>3./2.*pi)
-                                    )   octavesBoostedZ[i]+=24*signTwistZ[i];
+                                    ) {
+                                    
+                                   if(i==id) octavesBoostedZ[i]+=24*signTwistZ[i];
+                                    else octavesBoostedZ[i]+=24*signTwistZ[i];
+                                }
                                 
                             }
                                                                
