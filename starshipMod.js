@@ -1685,6 +1685,9 @@ function runOSMD (){
                                    colorA.r*=2.;
                                    colorA.g*=2.;
                                    colorA.b*=2.;
+                                   colorB.r*=2.;
+                                   colorB.g*=2.;
+                                   colorB.b*=2.;
                                     
                                }
                            }
@@ -1703,9 +1706,9 @@ function runOSMD (){
                            const y2 =y;
                            const xrTIPTRIANGLE = widt*-Math.sin(arm)*2.;
                            const yrTIPTRIANGLE = widt*-Math.cos(arm)*2.;
-                           DAWstarColorAttribute.setXYZW(DAWstarStride,.5,.5,.5,1.)
-                           DAWstarColorAttribute.setXYZW(DAWstarStride+1,colorB.r,colorB.g,colorB.b,1.)
-                           DAWstarColorAttribute.setXYZW(DAWstarStride+2,.5,.5,.5,1.)
+                           DAWstarColorAttribute.setXYZW(DAWstarStride,colorB.r,colorB.g,colorB.b,1.)
+                           DAWstarColorAttribute.setXYZW(DAWstarStride+1,BlackOrWhite,BlackOrWhite,BlackOrWhite,1.)
+                           DAWstarColorAttribute.setXYZW(DAWstarStride+2,colorB.r,colorB.g,colorB.b,1.)
                            
                            DAWstarPositionAttribute.setXYZ(DAWstarStride,(xr+x2)-xrTIPTRIANGLE, (yr +y2)-yrTIPTRIANGLE,  -1.)
                            DAWstarPositionAttribute.setXYZ(DAWstarStride+1, xr+xrTIPTRIANGLE/3., yr+yrTIPTRIANGLE/3.,  -1.)
