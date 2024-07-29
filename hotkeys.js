@@ -186,7 +186,8 @@ function resetAll(){
     DAWpermanentInitialTwist:null,
     DAWlastSlip:null,
     DAWoctavesBoosted:null,
-    DAWsignTwist:null
+    DAWsignTwist:null,
+        DAWinitialNOTE:null
     }
     if(!("DAWarray" in window))window.DAWarray = []
     window.xTouch=0;

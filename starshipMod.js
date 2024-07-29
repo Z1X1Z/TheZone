@@ -1641,6 +1641,7 @@ function runOSMD (){
                        
                    {
                        let dawNOTE=DAWarray[g].dawNOTE
+                       let dawNOTEbase=DAWarray[g].DAWinitialNOTE
                        let dawAMPLITUDE=DAWarray[g].dawAMPLITUDE
                        
                        if(isFinite(dawAMPLITUDE)&&dawAMPLITUDE!=0.&&isFinite(dawNOTE)&&dawNOTE!=0.){
@@ -1652,9 +1653,10 @@ function runOSMD (){
                         //   console.log(arm+"arm DAW widt"+widt+" node"+g)
                           // console.log(lengtOriginal+"lengtOriginal node"+g)
                            //var widt =starshipSize;
-                           const vop = new THREE.Color();
-                           //vop.setHSL(((-dawNOTE+8*uniforms.brelued.value)*uniforms.brelued.value)%24/24., dawNOTE/lightingScaleStar,dawNOTE/lightingScaleStar);//297 is around the highest heard note
-                           vop.setHSL(.5, .5,.5);//297 is around the highest heard note
+                           const colorNoteCurrent = new THREE.Color();
+                           colorNoteCurrent.setHSL(((-dawNOTE+8*uniforms.brelued.value)*uniforms.brelued.value)%24/24., 1,.5);//297 is around the highest heard note
+                           const colorNoteInitial = new THREE.Color();
+                           colorNoteInitial.setHSL(((-dawNOTEbase+8*uniforms.brelued.value)*uniforms.brelued.value)%24/24., 1,.5);//297 is around the highest heard note
                            const rpio2 =arm+pi/2.;
                            const x =widt*-Math.sin(rpio2);
                            const y = widt*-Math.cos(rpio2);
@@ -1670,10 +1672,26 @@ function runOSMD (){
                            DAWstarStride+=3
 */
                           
+                           let colorA = colorNoteCurrent ;
+                           let colorB = colorNoteInitial ;
+                           let BlackOrWhite=1.;
 
-                           DAWstarColorAttribute.setXYZW(DAWstarStride,.0,.0,.0,1.)
-                           DAWstarColorAttribute.setXYZW(DAWstarStride+1,.0,.0,.0,1.)
-                           DAWstarColorAttribute.setXYZW(DAWstarStride+2,.0,.0,.0,1.)
+                           if(Oreo)
+                           {
+                               let t = Math.round(dawNOTE%24/2.)
+                               if (t==7||t==5||t==2||t==0||t==10)
+                               {
+                                   BlackOrWhite=-.5;
+                                   colorA.r*=2.;
+                                   colorA.g*=2.;
+                                   colorA.b*=2.;
+                                    
+                               }
+                           }
+                           else BlackOrWhite=0.5;
+                           DAWstarColorAttribute.setXYZW(DAWstarStride,colorA.r,colorA.g,colorA.b,1.)
+                           DAWstarColorAttribute.setXYZW(DAWstarStride+1,BlackOrWhite,BlackOrWhite,BlackOrWhite,1.)
+                           DAWstarColorAttribute.setXYZW(DAWstarStride+2,colorA.r,colorA.g,colorA.b,1.)
                            DAWstarPositionAttribute.setXYZ(DAWstarStride,(xr-x), (yr-y),  -1.)
                            DAWstarPositionAttribute.setXYZ(DAWstarStride+1, 0., 0.,  -1.)
                            DAWstarPositionAttribute.setXYZ(DAWstarStride+2,(xr+x), (yr+y),  -1.)
@@ -1683,11 +1701,11 @@ function runOSMD (){
                          
                            const x2 =x;
                            const y2 =y;
-                           const xrTIPTRIANGLE = widt*-Math.sin(arm);
-                           const yrTIPTRIANGLE = widt*-Math.cos(arm);
-                           DAWstarColorAttribute.setXYZW(DAWstarStride,1.,1.,1.,1.)
-                           DAWstarColorAttribute.setXYZW(DAWstarStride+1,1.,1.,1.,1.)
-                           DAWstarColorAttribute.setXYZW(DAWstarStride+2,1.,1.,1.,1.)
+                           const xrTIPTRIANGLE = widt*-Math.sin(arm)*2.;
+                           const yrTIPTRIANGLE = widt*-Math.cos(arm)*2.;
+                           DAWstarColorAttribute.setXYZW(DAWstarStride,.5,.5,.5,1.)
+                           DAWstarColorAttribute.setXYZW(DAWstarStride+1,colorB.r,colorB.g,colorB.b,1.)
+                           DAWstarColorAttribute.setXYZW(DAWstarStride+2,.5,.5,.5,1.)
                            
                            DAWstarPositionAttribute.setXYZ(DAWstarStride,(xr+x2)-xrTIPTRIANGLE, (yr +y2)-yrTIPTRIANGLE,  -1.)
                            DAWstarPositionAttribute.setXYZ(DAWstarStride+1, xr+xrTIPTRIANGLE/3., yr+yrTIPTRIANGLE/3.,  -1.)

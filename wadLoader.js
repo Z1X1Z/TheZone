@@ -118,6 +118,7 @@ function bootSounds(shape1,shape2)
                          DAWarray[o].DAWpermanentInitialTwist,
                       DAWarray[o].DAWoctavesBoosted);
     }
+
     
 }
 
@@ -321,7 +322,8 @@ function startSound(e){
         DAWarray.push(Object.assign({},window.DAWobject))
                                      DAWnodeIndexForTouchBestFitIndex[id]=DAWarray.length-1
         let bfi= DAWarray[DAWnodeIndexForTouchBestFitIndex[id]];
-        //bfi.dawNOTE=(touchNote24);
+        bfi.dawNOTE=(touchNote24);
+        bfi.DAWinitialNOTE=touchNote24
         bfi.dawAMPLITUDE=(touchMagnitude);
         bfi.DAWinitialAngleSound=((-Math.atan2(-x,-y)*flip+2.*pi)%(2*pi))
         bfi.DAWangleSound=(initialAngleSound[id] );
@@ -368,7 +370,7 @@ function startSound(e){
          let bestFitDAWnote = .5
         for(var h=0;h<DAWarray.length;h++){
             let noteDifference=
-            Math.abs(touchNote24-DAWarray[h].dawNOTE)
+            Math.abs(touchNote24-DAWarray[h].dawNOTE%24)
             if(noteDifference<=bestFitDAWnote){
                 bestFitDAWnote=noteDifference
                 DAWnodeIndexForTouchBestFitIndex[id]=h
@@ -796,7 +798,7 @@ if(grabStar)
                                     
                                     initialAngleSoundZ[i]=(initialAngleSoundZ[i]-slipConstrained+8*pi)%(2*pi);
                                     
-                                    angleSoundZ[i]=(angleSoundZ[i]-slipConstrained-initialAngleSoundZ[i]+8*pi)%(2*pi)+initialAngleSoundZ[i]
+                                    angleSoundZ[i]=(angleSoundZ[i]-slipConstrained+8*pi)%(2*pi)
                                 }
                                 let twisteR=(angleSoundZ[i]-initialAngleSoundZ[i]+8*pi)%(2*pi);
                                 let   lastTwistSign=signTwistZ[i];
