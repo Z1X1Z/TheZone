@@ -286,7 +286,7 @@ function startSound(e){
                                  let octaveDistance = 0.
                                  let octaveShift=0;
                                  if(window.radialOctaveBoost) {
-                                     octaveDistance = (x*x+y*y)**.5/minimumDimension*18.;
+                                     octaveDistance = touchMagnitude*9.;
                                      octaveShift=3.;
                                     // cascadeSwitch2*=(1.-octaveDistance%1);
                                     // cascadeSwitch1*=octaveDistance%1;
@@ -622,9 +622,9 @@ function followSound(e){
                                 fi.DAWoctavesBoosted= b.octavesBoosted[d]
                             }
                             
-                           // angleSoundX=b.angleSound[DAWnodeIndexForTouchBestFitIndex[id]]
-                           // initialAngleSoundX=b.initialAngleSound[DAWnodeIndexForTouchBestFitIndex[id]];
-                           // octavesBoostedX=b.octavesBoosted[DAWnodeIndexForTouchBestFitIndex[id]];
+                            angleSoundX=b.angleSound[DAWnodeIndexForTouchBestFitIndex[id]]
+                            initialAngleSoundX=b.initialAngleSound[DAWnodeIndexForTouchBestFitIndex[id]];
+                            octavesBoostedX=b.octavesBoosted[DAWnodeIndexForTouchBestFitIndex[id]];
                                      }
                 
 
@@ -670,7 +670,7 @@ function followSound(e){
                                                     
                                                     if(isFinite(frequency)&&typeof sound[id]=="object"){
                              
-                             setSounds(id,frequency,soundTouchComponent,initialAngleSoundX,volume,sound2[id],sound[id],zound2[id],zound[id],xound2[id],xound[id],tound2[id],tound[id]);
+                             setSounds(id,frequency,soundTouchComponent,initialAngleSoundX,volume,touchMagnitude, sound2[id],sound[id],zound2[id],zound[id],xound2[id],xound[id],tound2[id],tound[id]);
                              
                              if(DAW)
                              {
@@ -703,7 +703,7 @@ if(grabStar)
 
 
 
-                setSounds(id,frequencySpecified,soundTouchComponent,   DAWarray[d].DAWinitialAngleSound, DAWarray[d].dawAMPLITUDE/2., DAWarray[d].DAWsound2,   DAWarray[d].DAWsound,  DAWarray[d].DAWzound2,      DAWarray[d].DAWzound,        DAWarray[d].DAWxound2,        DAWarray[d].DAWxound,        DAWarray[d].DAWtound2,        DAWarray[d].DAWtound);
+                setSounds(id,frequencySpecified,soundTouchComponent,   DAWarray[d].DAWinitialAngleSound, DAWarray[d].dawAMPLITUDE/2., DAWarray[d].dawAMPLITUDE, DAWarray[d].DAWsound2,   DAWarray[d].DAWsound,  DAWarray[d].DAWzound2,      DAWarray[d].DAWzound,        DAWarray[d].DAWxound2,        DAWarray[d].DAWxound,        DAWarray[d].DAWtound2,        DAWarray[d].DAWtound);
 
          
                                          }
@@ -713,7 +713,7 @@ if(grabStar)
                           bfi.dawNOTE=touchNote*2-twistFeed;
 
                                          
-                                         setSounds(id,frequency,soundTouchComponent,initialAngleSoundX,volume,
+                                         setSounds(id,frequency,soundTouchComponent,initialAngleSoundX,volume,touchMagnitude,
                                                    bfi.DAWsound2,bfi.DAWsound,bfi.DAWzound2,bfi.DAWzound,bfi.DAWxound2,bfi.DAWxound,bfi.DAWtound2,bfi.DAWtound);
                                      }
                                      
@@ -728,9 +728,9 @@ if(grabStar)
                                                     
                                              
                                              
-                                                    function setSounds(id,frequency,soundTouchComponent,initialAngleSound,volume,sound2,sound,zound2,zound,xound2,xound,tound2,tound){
-                             let volumePrime=volume*(soundTouchComponent - initialAngleSound)/(2.*pi);
-                             let volumeTWO =volume*(1.-(soundTouchComponent-initialAngleSound)/(2.*pi));
+                                                    function setSounds(id,frequency,soundTouchComponent,initialAngleSound,volume,touchMagnitude,sound2,sound,zound2,zound,xound2,xound,tound2,tound){
+                             let volumePrime=volume*((soundTouchComponent - initialAngleSound)/(2.*pi))%1;
+                             let volumeTWO =volume*(1.-(soundTouchComponent-initialAngleSound)/(2.*pi))%1;
          /*if (volumePrime==0.)
          volumePrime=.00000000001;
          else if (volumeTWO==0.)
