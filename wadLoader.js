@@ -75,8 +75,8 @@ function loadDAW(o,shape1,shape2)
     
     playSounds(DAWarray[o].DAWxound2,DAWarray[o].DAWxound,DAWarray[o].DAWtound2,DAWarray[o].DAWtound,
                DAWarray[o].DAWfrequency,DAWarray[o].dawAMPLITUDE*window.touchVolume/3.)
-    
-    setTimeout(()=>{refreshNoteDAW(o);console.log(o)},100)//timeout helps with volume optimization
+    refreshNoteDAW(o)
+    setTimeout(()=>{refreshNoteDAW(o)},100)//timeout helps with volume optimization
 }
 function bootSounds(shape1,shape2)
 {
@@ -124,10 +124,9 @@ function refreshOldInstruments(){
         let date=Date.now()
         for(var d=0; d<DAWarray.length;d++)
         {
-            if(DAWarray[d].dawStartTime-date>playDuration){
+            if(date-DAWarray[d].dawStartTime>playDuration){
                 loadDAW(d,instrument1,instrument2)
                 DAWarray[d].dawStartTime=date;
-
             }
         }
     }
