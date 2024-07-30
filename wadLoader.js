@@ -311,10 +311,10 @@ function startSound(e){
         bfi.DAWtound2=( new Wad({source : 'triangle'}))//, tuna   : hyperdriveTUNA});
         
             playSounds(bfi.DAWsound2,bfi.DAWsound,bfi.DAWzound2,bfi.DAWzound,
-                       frequency,bfi.dawAMPLITUDE*touchVolume/2.)
+                       frequency,bfi.dawAMPLITUDE*touchVolume/3.)
              
           playSounds(bfi.DAWxound2,bfi.DAWxound,bfi.DAWtound2,bfi.DAWtound
-                     ,frequency,bfi.dawAMPLITUDE*touchVolume/2.)
+                     ,frequency,bfi.dawAMPLITUDE*touchVolume/3.)
         
         
         
@@ -373,7 +373,7 @@ function startSound(e){
         //sound[id].volume=0.;
         //sound2[id].volume=volume;
         if(typeof sound[id]=="object")
-            if(isFinite(volume)&&isFinite(frequency)&&frequency>0){
+            if(isFinite(volume)&&isFinite(frequency)&&frequency>0&&!DAW){
                 
                 sound[id].stop();
                 sound2[id].stop();
@@ -651,8 +651,8 @@ function followSound(e){
                                                     
                                                     if(isFinite(frequency)&&typeof sound[id]=="object"){
                              
-                             setSounds(frequency,soundTouchComponent,initialAngleSoundX,volume,touchMagnitude, sound2[id],sound[id],zound2[id],zound[id],xound2[id],xound[id],tound2[id],tound[id]);
-                             
+                           if(!DAW){setSounds(frequency,soundTouchComponent,initialAngleSoundX,volume,touchMagnitude, sound2[id],sound[id],zound2[id],zound[id],xound2[id],xound[id],tound2[id],tound[id]);
+                           }
                              if(DAW)
                              {
                                  if(DAWnodeIndexForTouchBestFitIndex[id]!="not set")
