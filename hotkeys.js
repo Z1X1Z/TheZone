@@ -167,7 +167,7 @@ function resetAll(){
     }
     window.DAW=false;
     window.DAWobject = {dawNODES: 0,
-        
+    dawStartTime:null,
     dawAMPLITUDE:null,//testarContinuous;//
     dawNOTE:null,//mustarD;//
         
@@ -187,7 +187,11 @@ function resetAll(){
     DAWlastSlip:null,
     DAWoctavesBoosted:null,
     DAWsignTwist:null,
-        DAWinitialNOTE:null
+    DAWinitialNOTE:null,
+    DAWtouchId:null,
+    DAWfrequency:null,
+    DAWx:null,
+    DAWy:null
     }
     if(!("DAWarray" in window))window.DAWarray = []
     window.xTouch=0;
@@ -303,6 +307,7 @@ function resetAll(){
                         
                     DAWarray[o].DAWtound.stop()
                     DAWarray[o].DAWtound2.stop()
+                  //  DAWnodeIndexForTouchBestFitIndex[o]="not set"
                    }
                         
 

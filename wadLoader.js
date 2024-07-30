@@ -76,7 +76,7 @@ function loadDAW(o,shape1,shape2)
     playSounds(DAWarray[o].DAWxound2,DAWarray[o].DAWxound,DAWarray[o].DAWtound2,DAWarray[o].DAWtound,
                DAWarray[o].DAWfrequency,DAWarray[o].dawAMPLITUDE*window.touchVolume/3.)
     
-    refreshNoteDAW(o)
+    setTimeout(()=>{refreshNoteDAW(o);console.log(o)},100)//timeout helps with volume optimization
 }
 function bootSounds(shape1,shape2)
 {
@@ -113,6 +113,7 @@ function bootSounds(shape1,shape2)
     for(var o=0;o<DAWarray.length;o++){
         loadDAW(o,instrument1,instrument2)
     }
+    
 
 }
 let minutesTillRefresh=10;
