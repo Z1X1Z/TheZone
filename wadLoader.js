@@ -7,7 +7,6 @@ let instrument1 = "square"
 let instrument2 = "triangle"
 
 
-
 function stallTillWad(){if(typeof(Wad)=="function"&&userHasGestured){initialize();} else  setTimeout(stallTillWad,100);}
 stallTillWad()//lurker
 
@@ -44,6 +43,41 @@ const xound2=Array(maxTouchSoundCount);
 const tound=Array(maxTouchSoundCount);
 const tound2=Array(maxTouchSoundCount);
 
+function loadDAW(o,shape1,shape2)
+{
+    
+    DAWarray[o].DAWsound.stop()
+    DAWarray[o].DAWsound2.stop()
+    
+    DAWarray[o].DAWzound.stop()
+    DAWarray[o].DAWzound2.stop()
+    
+    
+    DAWarray[o].DAWxound.stop()
+    DAWarray[o].DAWxound2.stop()
+    
+    DAWarray[o].DAWtound.stop()
+    DAWarray[o].DAWtound2.stop()
+    DAWarray[o].DAWsound =  new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
+    DAWarray[o].DAWsound2 = new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
+    
+    DAWarray[o].DAWzound =  new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
+    DAWarray[o].DAWzound2 = new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
+    
+    DAWarray[o].DAWxound =  new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
+    DAWarray[o].DAWxound2 = new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
+    
+    DAWarray[o].DAWtound =  new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
+    DAWarray[o].DAWtound2 = new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
+    
+    playSounds(DAWarray[o].DAWsound2,DAWarray[o].DAWsound,DAWarray[o].DAWzound2,DAWarray[o].DAWzound,
+               DAWarray[o].DAWfrequency,DAWarray[o].dawAMPLITUDE*window.touchVolume/3.)//amplitude actually takes effect for some reason, probably something to do with optimization, seems to be /3 when it "should" be /2
+    
+    playSounds(DAWarray[o].DAWxound2,DAWarray[o].DAWxound,DAWarray[o].DAWtound2,DAWarray[o].DAWtound,
+               DAWarray[o].DAWfrequency,DAWarray[o].dawAMPLITUDE*window.touchVolume/3.)
+    
+    refreshNoteDAW(o)
+}
 function bootSounds(shape1,shape2)
 {
     feedbackPitchsound[4] =  new Wad({source : instrument2})
@@ -77,41 +111,28 @@ function bootSounds(shape1,shape2)
         tound2[o] = new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
     }
     for(var o=0;o<DAWarray.length;o++){
-        
-        DAWarray[o].DAWsound.stop()
-        DAWarray[o].DAWsound2.stop()
-        
-        DAWarray[o].DAWzound.stop()
-        DAWarray[o].DAWzound2.stop()
-        
-        
-        DAWarray[o].DAWxound.stop()
-        DAWarray[o].DAWxound2.stop()
-        
-        DAWarray[o].DAWtound.stop()
-        DAWarray[o].DAWtound2.stop()
-        DAWarray[o].DAWsound =  new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
-        DAWarray[o].DAWsound2 = new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
-        
-        DAWarray[o].DAWzound =  new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
-        DAWarray[o].DAWzound2 = new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
-        
-        DAWarray[o].DAWxound =  new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
-        DAWarray[o].DAWxound2 = new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
-        
-        DAWarray[o].DAWtound =  new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
-        DAWarray[o].DAWtound2 = new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
-        
-        playSounds(DAWarray[o].DAWsound2,DAWarray[o].DAWsound,DAWarray[o].DAWzound2,DAWarray[o].DAWzound,
-                   DAWarray[o].DAWfrequency,DAWarray[o].dawAMPLITUDE*window.touchVolume/3.)//amplitude actually takes effect for some reason, probably something to do with optimization, seems to be /3 when it "should" be /2
-        
-        playSounds(DAWarray[o].DAWxound2,DAWarray[o].DAWxound,DAWarray[o].DAWtound2,DAWarray[o].DAWtound,
-                   DAWarray[o].DAWfrequency,DAWarray[o].dawAMPLITUDE*window.touchVolume/3.)
-        
-        refreshNoteDAW(o)
+        loadDAW(o,instrument1,instrument2)
     }
 
 }
+let minutesTillRefresh=10;
+let playDuration =60*minutesTillRefresh*1000;
+function refreshOldInstruments(){
+    if(window.INITIALIZED)
+    {
+        let date=Date.now()
+        for(var d=0; d<DAWarray.length;d++)
+        {
+            if(DAWarray[d].dawStartTime-date>playDuration){
+                loadDAW(d,instrument1,instrument2)
+                DAWarray[d].dawStartTime=date;
+
+            }
+        }
+    }
+    setTimeout(refreshOldInstruments,playDuration/2.)
+}
+refreshOldInstruments();
 
 const feedbackPitchsound=Array(5); //updated in starshipMod
 let wadLOADED=false;
@@ -282,6 +303,7 @@ function startSound(e){
                                      DAWnodeIndexForTouchBestFitIndex[id]=DAWarray.length-1
         let bfi= DAWarray[DAWnodeIndexForTouchBestFitIndex[id]];
                                      bfi.DAWtouchId=id
+                                     bfi.dawStartTime=Date.now()
         bfi.dawNOTE=(touchNote24);
         bfi.DAWinitialNOTE=touchNote24
         bfi.dawAMPLITUDE=(touchMagnitude);
