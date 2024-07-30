@@ -47,6 +47,7 @@ uberDuper:{value:null},
         clvrVariant7:{value: false},
 clvrVariant8:{value: false},
 clvrVariant9:{value: false},
+clvrVariant0:{value: false},
 
         Spoker:{value: true    },
         spokelover:{value: true    },
@@ -194,6 +195,8 @@ function resetAll(){
     DAWy:null
     }
     if(!("DAWarray" in window))window.DAWarray = []
+        
+        window.osmdSound = false;
     window.xTouch=0;
     window.yTouch=0;
     window.touchVolume = .5;
@@ -309,7 +312,11 @@ function resetAll(){
                     DAWarray[o].DAWtound2.stop()
                   //  DAWnodeIndexForTouchBestFitIndex[o]="not set"
                    }
-                        
+                
+                for(var o=0;o<window.osmdOscillators;o++)
+                {singAlong[o].stop();
+                    singAlong2[o].stop();
+                }
 
     }
                                          window.DAWarray = []
@@ -629,6 +636,7 @@ function callKey(event){
     }
     else if(number=="no number"&&Number(x)==x&&event.altKey&&!event.shiftKey)
     {
+        if(x == 0)uniforms.clvrVariant0.value=!uniforms.clvrVariant0.value;
         if(x == 1)uniforms.clvrVariant1.value=!uniforms.clvrVariant1.value;
         else if(x == 2)uniforms.clvrVariant2.value=!uniforms.clvrVariant2.value;
         else if(x == 3)uniforms.clvrVariant3.value=!uniforms.clvrVariant3.value;

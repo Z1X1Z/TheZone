@@ -1329,7 +1329,7 @@ function setOSMDcolors()
          if(sheetTranslucent){
              
              
-             if(!scoreColorInversion)
+             if(scoreColorInversion)
                  osmd.setOptions({defaultColorMusic: "#000000FF"});
              else
                  osmd.setOptions({defaultColorMusic: "#FFFFFFFF"});
@@ -1366,6 +1366,7 @@ function runOSMD (){
                        let noteExpired =  noteLength<(window.TIMESTAMP-timeStampLastNoteEnded)/1000./4;
                        for(var n = 0.; n< nts.length; n++){
                          let noteOfScore=(nts[n].halfTone-8)%12;
+                           
                          let  notesDifferent = (nts[n].halfTone-8 != thelastnotehit);
                      if(
 
@@ -1377,6 +1378,10 @@ function runOSMD (){
                            )
                        )
                                {
+                             
+                                           // singAlong2[o] =  new Wad({source : instrument2})
+                                       
+                                   
                                  thelastnotehit = nts[n].halfTone-8;
                                  noteHit=true;
                                  break;
@@ -1396,7 +1401,7 @@ function runOSMD (){
                
                
              osmd.cursor.next(); // advance the cursor one note
-
+            
                if(osmd.cursor.Iterator.endReached){
                  // osmd.setOptions({darkMode: scoreColorInversion}); // or false. sets defaultColorMusic and PageBackgroundColor.
                 if(!(document.getElementById("scoreBlack").checked  == true||document.getElementById("scoreWhite").checked  == true)
@@ -1415,6 +1420,28 @@ function runOSMD (){
 
          var notesUnderCursor = osmd.cursor.NotesUnderCursor();//the argument 0 hopefully specifies first instrument
 
+               for(var i=0;i<window.osmdOscillators;i++)  for(var o=0;o<window.osmdOscillators;o++)
+               {singAlong[o].stop();
+                   singAlong2[o].stop();
+               }
+               for(var n = 0.; n< notesUnderCursor.length; n++){
+                   let noteOfScore=(notesUnderCursor[n].halfTone-8)%12;
+                   
+                   if(window.osmdSound){
+                       let frequencyOfNote = Math.pow(2.,(((noteOfScore))-1.)/12.
+                                                      )*window.ConcertKey;
+                       
+                       if(n<osmdOscillators){
+                           singAlong[n].play({env:{attack: .1, release:.0,hold:-1},
+                           pitch:frequencyOfNote,
+                               volume:window.touchVolume})
+                           
+                           singAlong2[n].play({env:{attack: .1, release:.0,hold:-1},
+                           pitch:frequencyOfNote,
+                               volume:window.touchVolume})
+                       }
+                   }
+               }
                for(var n = 0.; n< notesUnderCursor.length; n++)
                {
                    let noteToHitColor = new THREE.Color();
@@ -1767,6 +1794,7 @@ function runOSMD (){
     if(uniforms.starSpin.value!=0&&isFinite(uniforms[ "time" ].value)&&isFinite(lastTIMEUNIFORM))
     {let timeTwistIncrement=(( uniforms[ "time" ].value -lastTIMEUNIFORM)*uniforms[ "rate" ].value*-uniforms.starSpin.value*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel.
         window.twist-=timeTwistIncrement;
+        
         for(var v = 0; v<maxTouchSoundCount;v++){
             
             initialTwist[v]-=timeTwistIncrement;
