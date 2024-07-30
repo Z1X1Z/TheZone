@@ -689,10 +689,14 @@ radialWarp=b;
           <button class="dropbtn">Clvr
           <div  id="m3" class="dropdown-content">
 
-              <input type="checkbox"  id="Variant1" name="t"  onclick= "
-                  key  = '1';
+              <input type="checkbox"  id="Variant0" name="t"  onclick= "
+                  key  = '0';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
-                  <label for="Variant1"> Variant1![.1]</label><br>
+                  <label for="Variant1"> Variant0![.0]</label><br>
+                  <input type="checkbox"  id="Variant1" name="t"  onclick= "
+                      key  = '1';
+                      callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                      <label for="Variant1"> Variant1![.1]</label><br>
                   <!--
               <input type="checkbox"  id="Variant2" name="t"  onclick= "
                   key  = '2';
@@ -1238,7 +1242,22 @@ scoreColorInversion=false;
 '>              <label for="scoreWhite">Score White</label>
 
               <br>
-              <input type="file" id="files" >
+              <input type="checkbox" id="osmdSound" name="t"  onclick= '
+                           window.osmdSound=!window.osmdSound;
+       
+       if(!window.osmdSound) for(var o=0;o<osmdOscillators;o++){
+            if(typeof singAlong[o] =="object")
+            {
+                singAlong[o].stop();
+                singAlong2[o].stop();
+            }
+}
+                
+'>              <label for="osmdSound">Guide sound</label>
+<br>
+Open MusicXML file
+ <input type="file" id="files" >
+
                   <output id="list"></output>
                   <p>
                   
@@ -1617,6 +1636,7 @@ void main(){
     uniform bool clvrVariant7;
     uniform bool clvrVariant8;
     uniform bool clvrVariant9;
+    uniform bool clvrVariant0;
 
     uniform bool dynamicDance;
     
@@ -2779,7 +2799,6 @@ dstnce = length(s);
    colorAccumulator+=s;
    if(Refractelate&&dstnce>refractelC){s/=refractelC;} //refractelC/=4./3.;}
 vec2 lastS = s;
-
    s=vec2(
         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
@@ -2816,11 +2835,18 @@ vec2 lastS = s;
          // hyperCoreBoosted-=length(modifier);
           }
            */
-        
-     
+        if(clvrVariant0)
+        {
+        if(mod(counter,2.)==1.)     s=vec2(pow(s.x,.5)*sign(s.y),pow(s.y,2.)*sign(s.x));
+        else   s=vec2(pow(s.x,2.)*sign(s.y),pow(s.y,.5)*sign(s.x));
+        }
         if(clvrVariant4) s*=1.-oneOverLeafTruncated;
- 
-        
+
+        /*
+  if(mod(counter,2.)==1.)   s=vec2(pow(s.x,2.)*sign(s.x),pow(s.y,.5)*sign(s.y));
+else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
+  */
+
      if(clvrVariant2) {
          if (clvrVariant4) s*=1.5;
         else {

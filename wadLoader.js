@@ -1,4 +1,5 @@
 const maxTouchSoundCount = 24;
+window.osmdOscillators = 15;
 let touchNumber=new Map();
 for(var v = 0; v<maxTouchSoundCount;v++)touchNumber.set(v,"off")
 let pressIndex=new Map();
@@ -29,6 +30,10 @@ cutoff: 10000   //cutoff frequency of the built in lowpass-filter. 20 to 22050
         bypass: 20
     }
 };
+
+const singAlong=Array(osmdOscillators);
+const singAlong2=Array(osmdOscillators);
+
 const sound=Array(maxTouchSoundCount);
 const sound2=Array(maxTouchSoundCount);
 
@@ -43,7 +48,7 @@ const xound2=Array(maxTouchSoundCount);
 const tound=Array(maxTouchSoundCount);
 const tound2=Array(maxTouchSoundCount);
 
-function loadDAW(o,shape1,shape2)
+function loadDAW(o)
 {
     
     DAWarray[o].DAWsound.stop()
@@ -58,17 +63,17 @@ function loadDAW(o,shape1,shape2)
     
     DAWarray[o].DAWtound.stop()
     DAWarray[o].DAWtound2.stop()
-    DAWarray[o].DAWsound =  new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
-    DAWarray[o].DAWsound2 = new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
+    DAWarray[o].DAWsound =  new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
+    DAWarray[o].DAWsound2 = new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
     
-    DAWarray[o].DAWzound =  new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
-    DAWarray[o].DAWzound2 = new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
+    DAWarray[o].DAWzound =  new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
+    DAWarray[o].DAWzound2 = new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
     
-    DAWarray[o].DAWxound =  new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
-    DAWarray[o].DAWxound2 = new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
+    DAWarray[o].DAWxound =  new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
+    DAWarray[o].DAWxound2 = new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
     
-    DAWarray[o].DAWtound =  new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
-    DAWarray[o].DAWtound2 = new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
+    DAWarray[o].DAWtound =  new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
+    DAWarray[o].DAWtound2 = new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
     
     playSounds(DAWarray[o].DAWsound2,DAWarray[o].DAWsound,DAWarray[o].DAWzound2,DAWarray[o].DAWzound,
                DAWarray[o].DAWfrequency,DAWarray[o].dawAMPLITUDE*window.touchVolume/3.)//amplitude actually takes effect for some reason, probably something to do with optimization, seems to be /3 when it "should" be /2
@@ -78,11 +83,20 @@ function loadDAW(o,shape1,shape2)
     refreshNoteDAW(o)
     setTimeout(()=>{refreshNoteDAW(o)},100)//timeout helps with volume optimization
 }
-function bootSounds(shape1,shape2)
+function bootSounds()
 {
     feedbackPitchsound[4] =  new Wad({source : instrument2})
     for(var o=0;o<4;o++)feedbackPitchsound[o] =  new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
-
+       
+        for(var o=0;o<osmdOscillators;o++){
+            if(typeof singAlong[o] =="object")
+            {
+                singAlong[o].stop();
+                singAlong2[o].stop();
+            }
+            singAlong[o] =  new Wad({source : instrument1})
+            singAlong2[o] =  new Wad({source : instrument2})
+        }
     for(var o=0;o<maxTouchSoundCount;o++){
         if(typeof sound[o] =="object")
         {sound[o].stop()
@@ -98,20 +112,20 @@ function bootSounds(shape1,shape2)
             tound[o].stop()
             tound2[o].stop()
         }
-        sound[o] =  new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
-        sound2[o] = new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
+        sound[o] =  new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
+        sound2[o] = new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
 
-        zound[o] =  new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
-        zound2[o] = new Wad({source : shape1})//, tuna   : hyperdriveTUNA});
+        zound[o] =  new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
+        zound2[o] = new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
         
-        xound[o] =  new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
-        xound2[o] = new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
+        xound[o] =  new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
+        xound2[o] = new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
         
-        tound[o] =  new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
-        tound2[o] = new Wad({source : shape2})//, tuna   : hyperdriveTUNA});
+        tound[o] =  new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
+        tound2[o] = new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
     }
     for(var o=0;o<DAWarray.length;o++){
-        loadDAW(o,instrument1,instrument2)
+        loadDAW(o)
     }
     
 
@@ -125,7 +139,7 @@ function refreshOldInstruments(){
         for(var d=0; d<DAWarray.length;d++)
         {
             if(date-DAWarray[d].dawStartTime>playDuration){
-                loadDAW(d,instrument1,instrument2)
+                loadDAW(d)
                 DAWarray[d].dawStartTime=date;
             }
         }
@@ -139,7 +153,7 @@ let wadLOADED=false;
 function initialize(){
     
    // feedbackPitchsound.play({env:{attack: 0, release:0,hold:-1},pitch:1,volume:0})
-        bootSounds(instrument1,instrument2)
+        bootSounds()
 
             
     try{sound[0].play({wait:1000000});
@@ -443,18 +457,18 @@ function startSound(e){
            // cascadeSwitch2*=(1.-octaveDistance%1);
            // cascadeSwitch1*=octaveDistance%1;
         }
-                    sound2.play({env:{attack: .1, release:.0,hold:-1},
+                    sound2.play({env:{attack: .0, release:.0,hold:-1},
                         pitch:frequency/2.*2**Math.floor(octaveDistance-octaveShift),
                         volume:cascadeSwitch2*(1.-octaveDistance%1)});
-                    sound.play({env:{attack: .1, release:.0,hold:-1},
+                    sound.play({env:{attack: .0, release:.0,hold:-1},
                         pitch:frequency*2**Math.floor(octaveDistance-octaveShift),
                         volume:cascadeSwitch1*(1.-octaveDistance%1)});
                     if(window.radialOctaveBoost)
                     {
-                        zound2.play({env:{attack: .1, release:.0,hold:-1},
+                        zound2.play({env:{attack: .0, release:.0,hold:-1},
                         pitch:frequency*2**Math.ceil(octaveDistance-octaveShift),
                             volume:cascadeSwitch2*octaveDistance%1});
-                        zound.play({env:{attack: .1, release:.0,hold:-1},
+                        zound.play({env:{attack: .0, release:.0,hold:-1},
                         pitch:frequency*2.*2**Math.ceil(octaveDistance-octaveShift),
                             volume:cascadeSwitch1*octaveDistance%1});
                     }
