@@ -238,7 +238,7 @@ function startSound(e){
     screenPressCoordY[id]=y;
     
 
-    if(window.grabStar){
+    if(window.grabStar||true){
         initialAngle[id]=-Math.atan2(-x,-y);
 
         window.twist=(window.twist+24*100)%24
@@ -431,7 +431,7 @@ function startSound(e){
                                  if(DAW&&DAWnodeIndexForTouchBestFitIndex[id]!="not set")
                                  {
         DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].DAWfrequency=frequency;
-       refreshNoteDAW(DAWnodeIndexForTouchBestFitIndex[id])
+     for(var v=0;v<DAWarray.length;v++)  refreshNoteDAW(DAWnodeIndexForTouchBestFitIndex[id])
                                  }
 }
                                              
@@ -550,22 +550,18 @@ function followSound(e){
                  if(window.DAW)
                  {
                      if(DAWnodeIndexForTouchBestFitIndex[id]!="not set")
-                     soundRoutine(true,id,x,y,
-                                  DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].DAWangleSound,
-                                  DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].DAWinitialAngleSound,
-                                  DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].DAWinitialAngle,
-                                  DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].DAWpermanentInitialTwist,
-                                  DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].DAWoctavesBoosted);
+                         soundRoutine(true,id,x,y,
+                                      DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].DAWangleSound,
+                                      DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].DAWinitialAngleSound,
+                                      DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].DAWinitialAngle,
+                                      DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].DAWpermanentInitialTwist,
+                                      DAWarray[DAWnodeIndexForTouchBestFitIndex[id]].DAWoctavesBoosted);
                      
                  }
+                 
+                 else soundRoutine(false,id,x,y,angleSound[id],initialAngleSound[id],initialAngle[id],permanentInitialTwist[id],octavesBoosted[id]);
+                 
              }
-           else if((!window.touchMode&&!window.muteVoiceTouchVolume)||(window.touchMode&&!window.muteTouchTouchVolume))
-            {
-                
-                
-              soundRoutine(false,id,x,y,angleSound[id],initialAngleSound[id],initialAngle[id],permanentInitialTwist[id],octavesBoosted[id]);
-            }
-
 }
                                  
                                              
