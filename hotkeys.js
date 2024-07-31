@@ -865,7 +865,8 @@ function callKey(event){
     else if (key=="|") {
         if(uniforms.chirality.value==3)uniforms.chirality.value=1;
         else if(uniforms.chirality.value==1)uniforms.chirality.value=-1;
-   
+        else if(uniforms.chirality.value==-1)uniforms.chirality.value=3;
+
     }
     else if (key=="{"){
         if(uniforms.eden.value!=4)uniforms.eden.value=(uniforms.eden.value+1)%3;
