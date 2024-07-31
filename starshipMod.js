@@ -207,9 +207,11 @@ function spiral_compress(){
                    /*
            freq = audioX.sampleRate*n/numberOfBins //ensures uses n not n adj for test
                      note24 =24*Math.log(freq/window.ConcertKey)/Math.log(2.)+49*2;
-                           if(Math.abs(note24/2.-61.)<.5&&Math.abs(note24/2.-60.)>.25){ callibratorArray[n]=255.;console.log(note24/2.);}// test witness in pixel shader, add to setMicInputToPIXEL()
-*/
-                            
+                                         var noteToTest = 60;
+                           if(Math.abs(note24/2.-noteToTest)<.5//&&Math.abs(note24/2.-noteToTest)>.25
+                              ){ callibratorArray[n]=255.;console.log(note24/2.);}// test witness in pixel shader, add to setMicInputToPIXEL()
+
+                            */
        if(EldersLeg!=0.) testar[Math.round(note24*EldersLeg/24.)%EldersLeg] += Math.abs(z[n])*radialWarp;
       testarContinuous[n] = Math.abs(z[n]);
                           mustarD[n] = note24;

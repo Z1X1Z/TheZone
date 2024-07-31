@@ -1869,12 +1869,12 @@ uniform float exponentialPetals;
         //             vec3(angle)
       //            length(uv)
       //               ,1.);
-        float oct =//floor(
-        angle*10.-3.
-        //+.5);
+        float oct =floor(
+        angle*10.-3.+.5
+        );
         ;
-        
-        float note0 = (-oct+angle1/PI2*flipStar)+3./12.-twistStar/PI2;
+        float noteBend = angle*10.-floor(angle*10.-.5)-.5;//angle*10.-floor(angle*10.-.5)-.5; seems to be the least overflow between notes, thereby seems correct
+        float note0 = (-oct+(noteOfStar-noteBend+9.)/12.);
       //  return vec4(note0/72.);
        // return vec4(note0/144.);
      //  note0-=1.;
