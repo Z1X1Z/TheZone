@@ -1726,6 +1726,7 @@ uniform float exponentialPetals;
                                   
                                   const float PI = 3.14159274;
                                   const float PI2 = PI*2.;
+                                  const float PIdiv2 = PI/2.;
                                   const float gr = -cos(216.*PI/180.)/-cos(612.*PI/180.)-1.;
     const float leaf = -1.3247179;//5724474;
     const float eConstant = 2.71828182;
@@ -1781,7 +1782,7 @@ uniform float exponentialPetals;
 
         uv=uv.yx;
         float angle = ((-atan(uv.y,uv.x)*flipStar*radialWarp-twistStar
-                        +PI/2.+PI/2.*flipStar)/PI2);
+                        +PIdiv2+PIdiv2*flipStar)/PI2);
                         //angle=mod(angle,1.);
                         
         float frAmp=0.;
@@ -1837,20 +1838,21 @@ uniform float exponentialPetals;
 
 
 
-    float starnSize = PI/120.*2.*7./8.*2.
-    ;
+    float starnSize = PI/120.*2.*7./8.*2.;
+    
+    float scalar =1./2.*3./4.;
+
     vec4 starns ( vec2 uv,float noteOfStar)//Seven stars, two witnesses
     {
       //  float nyq =  fftSize/sampleRate/2.;
         
         //uv=vec2(-uv.x,uv.y);
-        float scalar =1./2.*3./4.;
       //  float octaveSpin = 5./12.;
     
-        float angle1 = (noteOfStar/12.)*PI2*flipStar+twistStar*flipStar+PI*flipStar;//this is for the position from centerVV;
+        float angle1 = (noteOfStar/12.*PI2+twistStar+PI)*flipStar;//this is for the position from centerVV;
         uv.x += coz(angle1)*scalar;
        uv.y += zin(angle1)*scalar;//^^
-       uv=spin2(uv,-angle1+PI/2.
+       uv=spin2(uv,-angle1+PIdiv2
                 );
        vec4 ret = vec4(0.);
        if(length(uv)<starnSize){
@@ -1869,11 +1871,12 @@ uniform float exponentialPetals;
         //             vec3(angle)
       //            length(uv)
       //               ,1.);
+      float angleExpanded10 = angle*10.-.5;
         float oct =floor(
-        angle*10.-3.+.5
+          angleExpanded10-2.
         );
         ;
-        float noteBend = angle*10.-floor(angle*10.-.5)-.5;//angle*10.-floor(angle*10.-.5)-.5; seems to be the least overflow between notes, thereby seems correct
+        float noteBend = angleExpanded10-floor(angleExpanded10);//angle*10.-floor(angle*10.-.5)-.5; seems to be the least overflow between notes, thereby seems correct
         float note0 = (-oct+(noteOfStar-noteBend+9.)/12.);
       //  return vec4(note0/72.);
        // return vec4(note0/144.);
@@ -2261,7 +2264,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
               increment= (-note)*balloonsONexponential+log(x*24.)/log(pow(2.,1./12.))-.25*balloonsONexponential;
         
                
-                   if(abs(mod(increment+atan(vUvCentered.y,vUvCentered.x)*balloonsONexponential/(2.*PI),1.))<1./(increment+sizeReset)*280.)
+                   if(abs(mod(increment+atan(vUvCentered.y,vUvCentered.x)*balloonsONexponential/PI2,1.))<1./(increment+sizeReset)*280.)
                           {
                        if(balloonsON!=0.)
                        balloon=hsv2rgb(vec3((mod((4.*balloonsON+bruedCorrection*balloonsON+increment*brelued)*balloonsON+24.,12.))/12.,.5,1.));
@@ -2765,10 +2768,10 @@ dstnce = length(s);
                         
                             float correctionBrueled = 0.;
                             if(brelued==-1.)correctionBrueled=atan(ColorWheelClover.x,-ColorWheelClover.y);
-                           else correctionBrueled=atan(ColorWheelClover.y,ColorWheelClover.x)+PI/2.;
+                           else correctionBrueled=atan(ColorWheelClover.y,ColorWheelClover.x)+PIdiv2;
                             
                         if(dstnce<4./3.)
-                        beta   =  hsv2rgb(vec3(correctionBrueled/(2.*PI),1.,1.));
+                        beta   =  hsv2rgb(vec3(correctionBrueled/PI2,1.,1.));
                         //return beta;
                 }
                  if(dstnce<2./3.||(spokesVisualizeColors&&dstnce<4./3.)) {
@@ -4007,12 +4010,12 @@ vec2 dance = vec2(0.);
                                                                           twistStar*brelued));
                                  
          vec2 characterOnTrailP = characterP;
-         if(MannyONtrail==0) characterOnTrailP=spin2(characterOnTrailP,atan(d.y,d.x)-PI*3./2.);//put manny on trail
+         if(MannyONtrail==0) characterOnTrailP=spin2(characterOnTrailP,atan(d.y,d.x)-PIdiv2*3.);//put manny on trail
 
                                  vec2 characterPStatic = p*2.;
 
          vec2 fourcreaturePlayerP = p*1.5;
-        if(MannyONtrail==0) fourcreaturePlayerP=spin2(fourcreaturePlayerP,atan(d.y,d.x)-PI*3./2.);//put manny on trail
+        if(MannyONtrail==0) fourcreaturePlayerP=spin2(fourcreaturePlayerP,atan(d.y,d.x)-PIdiv2*3.);//put manny on trail
 
      vec3 creatures=vec3(0.);
     vec3 b=vec3(0.);
@@ -4142,7 +4145,7 @@ if(heartStar==0){
 
 
             float angleASKEW = ((-atan(uvSwizzled.y,uvSwizzled.x)*flipStar*radialWarp-twistStar
-            +PI/2.+PI/2.*flipStar)/PI2);
+            +PIdiv2+PIdiv2*flipStar)/PI2);
             //angle=mod(angle,1.);
 
             //return vec4(angle);
