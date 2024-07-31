@@ -50,19 +50,21 @@ const tound2=Array(maxTouchSoundCount);
 
 function loadDAW(o)
 {
-    
-    DAWarray[o].DAWsound.stop()
-    DAWarray[o].DAWsound2.stop()
-    
-    DAWarray[o].DAWzound.stop()
-    DAWarray[o].DAWzound2.stop()
-    
-    
-    DAWarray[o].DAWxound.stop()
-    DAWarray[o].DAWxound2.stop()
-    
-    DAWarray[o].DAWtound.stop()
-    DAWarray[o].DAWtound2.stop()
+    if( DAWarray[o].DAWsound !=null)
+    {
+        DAWarray[o].DAWsound.stop()
+        DAWarray[o].DAWsound2.stop()
+        
+        DAWarray[o].DAWzound.stop()
+        DAWarray[o].DAWzound2.stop()
+        
+        
+        DAWarray[o].DAWxound.stop()
+        DAWarray[o].DAWxound2.stop()
+        
+        DAWarray[o].DAWtound.stop()
+        DAWarray[o].DAWtound2.stop()
+    }
     DAWarray[o].DAWsound =  new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
     DAWarray[o].DAWsound2 = new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
     
@@ -81,7 +83,7 @@ function loadDAW(o)
     playSounds(DAWarray[o].DAWxound2,DAWarray[o].DAWxound,DAWarray[o].DAWtound2,DAWarray[o].DAWtound,
                DAWarray[o].DAWfrequency,DAWarray[o].dawAMPLITUDE*window.touchVolume/3.)
     refreshNoteDAW(o)
-    setTimeout(()=>{refreshNoteDAW(o)},100)//timeout helps with volume optimization
+    setTimeout(()=>{refreshNoteDAW(o)},10)//timeout helps with volume optimization
 }
 function bootSounds()
 {
@@ -130,23 +132,17 @@ function bootSounds()
     
 
 }
-let minutesTillRefresh=10;
+let minutesTillRefresh=2.;
 let playDuration =60*minutesTillRefresh*1000;
-function refreshOldInstruments(){
-    if(window.INITIALIZED)
+function refreshOldInstrument(d){
+        
+    if(typeof DAWarray[d]=="object")
     {
-        let date=Date.now()
-        for(var d=0; d<DAWarray.length;d++)
-        {
-            if(date-DAWarray[d].dawStartTime>playDuration){
-                loadDAW(d)
-                DAWarray[d].dawStartTime=date;
-            }
-        }
+        loadDAW(d)
+        //DAWarray[d].dawStartTime=date;
+        setTimeout(()=>(refreshOldInstrument(d)),playDuration)
     }
-    setTimeout(refreshOldInstruments,playDuration/2.)
 }
-refreshOldInstruments();
 
 const feedbackPitchsound=Array(5); //updated in starshipMod
 let wadLOADED=false;
@@ -317,7 +313,6 @@ function startSound(e){
                                      DAWnodeIndexForTouchBestFitIndex[id]=DAWarray.length-1
         let bfi= DAWarray[DAWnodeIndexForTouchBestFitIndex[id]];
                                      bfi.DAWtouchId=id
-                                     bfi.dawStartTime=Date.now()
         bfi.dawNOTE=(touchNote24);
         bfi.DAWinitialNOTE=touchNote24
         bfi.dawAMPLITUDE=(touchMagnitude);
@@ -333,28 +328,31 @@ function startSound(e){
             bfi.DAWoctavesBoosted=(0)
             bfi.DAWsignTwist=(-1.*flip);//"off";
         }
-        
-        bfi.DAWsound=(new Wad({source : 'square'}))//, tuna   : hyperdriveTUNA});
-        bfi.DAWsound2=(new Wad({source : 'square'}))//, tuna   : hyperdriveTUNA});
+        /*
+        bfi.DAWsound=(new Wad({source : instrument1}))//, tuna   : hyperdriveTUNA});
+        bfi.DAWsound2=(new Wad({source : instrument1}))//, tuna   : hyperdriveTUNA});
             
-        bfi.DAWzound=(new Wad({source : 'square'}))//, tuna   : hyperdriveTUNA});
-        bfi.DAWzound2=( new Wad({source : 'square'}))//, tuna   : hyperdriveTUNA});
+        bfi.DAWzound=(new Wad({source : instrument1}))//, tuna   : hyperdriveTUNA});
+        bfi.DAWzound2=( new Wad({source : instrument1}))//, tuna   : hyperdriveTUNA});
         
-        bfi.DAWxound=(new Wad({source : 'triangle'}))//, tuna   : hyperdriveTUNA});
-        bfi.DAWxound2=( new Wad({source : 'triangle'}))//, tuna   : hyperdriveTUNA});
+        bfi.DAWxound=(new Wad({source : instrument2}))//, tuna   : hyperdriveTUNA});
+        bfi.DAWxound2=( new Wad({source : instrument2}))//, tuna   : hyperdriveTUNA});
         
-        bfi.DAWtound=( new Wad({source : 'triangle'}))//, tuna   : hyperdriveTUNA});
-        bfi.DAWtound2=( new Wad({source : 'triangle'}))//, tuna   : hyperdriveTUNA});
+        bfi.DAWtound=( new Wad({source : instrument2}))//, tuna   : hyperdriveTUNA});
+        bfi.DAWtound2=( new Wad({source : instrument2}))//, tuna   : hyperdriveTUNA});
         
             playSounds(bfi.DAWsound2,bfi.DAWsound,bfi.DAWzound2,bfi.DAWzound,
                        frequency,bfi.dawAMPLITUDE*touchVolume/3.)
              
           playSounds(bfi.DAWxound2,bfi.DAWxound,bfi.DAWtound2,bfi.DAWtound
                      ,frequency,bfi.dawAMPLITUDE*touchVolume/3.)
+        */
         
         
-        
-        
+                                     
+                              //       bfi.dawStartTime=Date.now()
+                                     refreshOldInstrument(DAWnodeIndexForTouchBestFitIndex[id]);//may be better called in batches, but here we're going for individually
+
         
         setDAWdependantSize()
     }
