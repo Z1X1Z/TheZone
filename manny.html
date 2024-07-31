@@ -1869,8 +1869,10 @@ uniform float exponentialPetals;
         //             vec3(angle)
       //            length(uv)
       //               ,1.);
-        float oct =//floor
-        (angle*10.+.5-3.);
+        float oct =//floor(
+        angle*10.-3.
+        //+.5);
+        ;
         
         float note0 = (-oct+angle1/PI2*flipStar)+3./12.-twistStar/PI2;
       //  return vec4(note0/72.);
@@ -1880,6 +1882,8 @@ uniform float exponentialPetals;
         float noteAmp = texture2D(micIn,
         vec2(note1
         ,0.)).r;
+                      // if(floor(oct)!=2.)noteAmp=0.;
+
                        noteAmp*=12.;
        // noteAmp=pow(noteAmp,.5);
        // noteAmp/=255.;

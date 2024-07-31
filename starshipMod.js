@@ -203,9 +203,12 @@ function spiral_compress(){
         //   freq = 440; //check for concert A
             frequencies[n]=freq;
     var note24 =24*Math.log(freq/window.ConcertKey)/Math.log(2.)+49*2;
-                            
-                           //if(Math.abs(note24/2.-60.)<.5){ callibratorArray[n]=255.;console.log(note24);}// test witness in pixel shader, add to setMicInputToPIXEL()
-
+                     
+                   /*
+           freq = audioX.sampleRate*n/numberOfBins //ensures uses n not n adj for test
+                     note24 =24*Math.log(freq/window.ConcertKey)/Math.log(2.)+49*2;
+                           if(Math.abs(note24/2.-61.)<.5&&Math.abs(note24/2.-60.)>.25){ callibratorArray[n]=255.;console.log(note24/2.);}// test witness in pixel shader, add to setMicInputToPIXEL()
+*/
                             
        if(EldersLeg!=0.) testar[Math.round(note24*EldersLeg/24.)%EldersLeg] += Math.abs(z[n])*radialWarp;
       testarContinuous[n] = Math.abs(z[n]);
@@ -1007,7 +1010,7 @@ function setMicInputToStarPIXEL(){
                      let dataArrayBuff=dataArrayBuffer=new Float32Array( size ).fill(0.);
                      for (var x = 0; x < numberOfBins; x++)dataArrayBuffer[x]=dataArray[x]/255.;
                      
-                     // callibratorArray
+                     // callibratorArray //dataArrayBuffer
                      let micTexBuf = new THREE.DataTexture( dataArrayBuffer, size, 1, THREE.RedFormat,THREE.FloatType);
                      micTexBuf.needsUpdate=true;
                      
