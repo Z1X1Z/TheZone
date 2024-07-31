@@ -1869,7 +1869,8 @@ uniform float exponentialPetals;
         //             vec3(angle)
       //            length(uv)
       //               ,1.);
-        float oct = floor(angle*10.+.5-3.);
+        float oct =//floor
+        (angle*10.+.5-3.);
         
         float note0 = (-oct+angle1/PI2*flipStar)+3./12.-twistStar/PI2;
       //  return vec4(note0/72.);
@@ -2074,7 +2075,8 @@ ret= vec4(clamp(
 vec3 faceHeights(vec2 g, vec2 t){
            // t/=gr;
 vec2 n=vec2(0.);
-if(!clvrVariant9)n= coords.yx*1.5;
+if(!clvrVariant4)n= coords.yx/2.;
+else if(clvrVariant9)n= coords.yx*1.5;
             
 float l = 1.;
 g*=4.;
