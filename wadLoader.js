@@ -602,7 +602,7 @@ function followSound(e){
                     else {
                       if(!ISdaw)
                       {
-                          let b= bump(maxTouchSoundCount,id,x,y,signTwist,angleSound,initialAngleSound,octavesBoosted)
+                          let b= bump(maxTouchSoundCount,id,x,y,signTwist,angleSound,initialAngleSound,permanentInitialTwist,octavesBoosted)
                           signTwist=b.signTwist;
                           angleSound=b.angleSound;
                           initialAngleSound=b.initialAngleSound;
@@ -610,6 +610,7 @@ function followSound(e){
                           
                           angleSoundX=b.angleSound[id]
                           initialAngleSoundX=b.initialAngleSound[id];
+                          permanentInitialTwistX=b.permanentInitialTwist[id];
                           octavesBoostedX=b.octavesBoosted[id];
 
                                    }
@@ -619,6 +620,7 @@ function followSound(e){
                             var  LOADEDAWsignTwist=[],
                             LOADEDAWangleSound=[],
                             LOADEDAWinitialAngleSound=[],
+                            LOADEDAWpermanentInitialTwist=[],
                             LOADEDAWoctavesBoosted=[];
                             for(var d = 0; d<DAWarray.length; d++)
                             {
@@ -626,13 +628,15 @@ function followSound(e){
                                 
                                 LOADEDAWsignTwist.push( fi.DAWsignTwist)
                                 LOADEDAWangleSound.push(  fi.DAWangleSound)
-                               LOADEDAWinitialAngleSound.push(  fi.DAWinitialAngleSound)
+                                LOADEDAWinitialAngleSound.push(  fi.DAWinitialAngleSound)
+                                LOADEDAWpermanentInitialTwist.push(  fi.DAWpermanentInitialTwist)
                          LOADEDAWoctavesBoosted.push(  fi.DAWoctavesBoosted)
                             }
                             let b= bump(DAWarray.length, DAWnodeIndexForTouchBestFitIndex[id],x,y,
                                         LOADEDAWsignTwist,
                                         LOADEDAWangleSound,
                                         LOADEDAWinitialAngleSound,
+                                        LOADEDAWpermanentInitialTwist,
                                         LOADEDAWoctavesBoosted)
                             for(var d = 0; d<DAWarray.length; d++)
                             {
@@ -641,11 +645,13 @@ function followSound(e){
                                 fi.DAWsignTwist=b.signTwist[d]
                                 fi.DAWangleSound=b.angleSound[d]
                                 fi.DAWinitialAngleSound=b.initialAngleSound[d]
+                                fi.DAWpermanentInitialTwist=b.permanentInitialTwist[d]
                                 fi.DAWoctavesBoosted= b.octavesBoosted[d]
                             }
                             
                             angleSoundX=b.angleSound[DAWnodeIndexForTouchBestFitIndex[id]]
                             initialAngleSoundX=b.initialAngleSound[DAWnodeIndexForTouchBestFitIndex[id]];
+                            permanentInitialTwistX=b.permanentInitialTwist[DAWnodeIndexForTouchBestFitIndex[id]];
                             octavesBoostedX=b.octavesBoosted[DAWnodeIndexForTouchBestFitIndex[id]];
                                      }
                 
@@ -653,14 +659,8 @@ function followSound(e){
                     }
                         let twistFeed;
                                                             let soundTouchComponent = 0.;
-                        if(!grabStar)
-                        {soundTouchComponent=angleSoundX
-                        }
-                        else {
-                             soundTouchComponent=(angleSoundX-initialAngleSoundX+pi*8.)%(2*pi)+initialAngleSoundX;
-
-
-                        }
+                        if(!grabStar)soundTouchComponent=angleSoundX
+                        else soundTouchComponent=(angleSoundX-initialAngleSoundX+pi*8.)%(2*pi)+initialAngleSoundX;
                  twistFeed= permanentInitialTwistX+octavesBoostedX;
 
                                                         let    touchNote=   soundTouchComponent/pi/2*12;
@@ -679,7 +679,7 @@ function followSound(e){
                        }
                        else if(DAWnodeIndexForTouchBestFitIndex[id]!="not set")
                                                     {
-                              bfi.DAWangleSound=angleSoundX//don't update this with continuous dx anglesound for base slide
+                              bfi.DAWangleSound=angleSoundX
 
                               bfi.DAWinitialAngleSound=initialAngleSoundX
 
@@ -779,34 +779,38 @@ if(grabStar)
                                              
                                                     
                                              
-                                                    function bump(loops,id,x,y,signTwistZ,angleSoundZ,initialAngleSoundZ,octavesBoostedZ){
+                                                    function bump(loops,id,x,y,signTwistZ,angleSoundZ,initialAngleSoundZ,permanentInitialTwistZ,octavesBoostedZ){
                            
                            
                            let slipConstrained =twistIncrementPI;
                            if(slipConstrained>pi)slipConstrained-=2*pi;
-
-                                for(var i = 0; i<loops;i++)  {
-                                if (i==id) angleSoundZ[id]= (angleSoundZ[id]+slipConstrained+8*pi-initialAngleSoundZ[i])%(2*pi)+initialAngleSoundZ[i];
-                                else{
-                                    
-                                    initialAngleSoundZ[i]=(initialAngleSoundZ[i]-slipConstrained+8*pi)%(2*pi);
-                                    
-                                    angleSoundZ[i]=(angleSoundZ[i]+initialAngleSoundZ[i]-slipConstrained+8*pi)%(2*pi)-initialAngleSoundZ[i]
-                                }
-                                let twisteR=(angleSoundZ[i]-initialAngleSoundZ[i]+8*pi)%(2*pi);
-                                let   lastTwistSign=signTwistZ[i];
-                                signTwistZ[i] =Math.sign(twisteR-pi);
-                                if (lastTwistSign!=signTwistZ[i]
+                       
+                           for(var i = 0; i<loops;i++)  {
+                               if (i==id) angleSoundZ[id]= (angleSoundZ[id]+slipConstrained+8*pi)%(2*pi);
+                               else{
+                                   
+                                   //  permanentInitialTwistZ[i]+=twistIncrement;
+                                   initialAngleSoundZ[i]=(initialAngleSoundZ[i]-slipConstrained)%(2*pi);
+                                   
+                                   angleSoundZ[i]=(angleSoundZ[i]-slipConstrained-initialAngleSoundZ[i]+8*pi)%(2*pi)+initialAngleSoundZ[i]
+                                   
+                               }
+                           }
+                                let twisteR=(angleSoundZ[id]-initialAngleSoundZ[id]+8*pi)%(2*pi);
+                                let   lastTwistSign=signTwistZ[id];
+                                signTwistZ[id] =Math.sign(twisteR-pi);
+                                if (lastTwistSign!=signTwistZ[id]
                                     &&(twisteR<pi/2.||twisteR>3./2.*pi)
                                     ) {
                                     
-                                    octavesBoostedZ[i]+=24*signTwistZ[i];
+                                    octavesBoostedZ[id]+=24*signTwistZ[id];
                                 }
                                 
-                            }
+                            
                                                                
                                                   return {
-                                signTwist:signTwistZ,angleSound:angleSoundZ,initialAngleSound:initialAngleSoundZ,octavesBoosted:octavesBoostedZ
+                                signTwist:signTwistZ,angleSound:angleSoundZ,initialAngleSound:initialAngleSoundZ,
+                                                      permanentInitialTwist:permanentInitialTwistZ,octavesBoosted:octavesBoostedZ
                             }
                        }
                                              
