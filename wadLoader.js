@@ -785,28 +785,33 @@ if(grabStar)
                            let slipConstrained =twistIncrementPI;
                            if(slipConstrained>pi)slipConstrained-=2*pi;
                        
-                           for(var i = 0; i<loops;i++)  {
-                               if (i==id) angleSoundZ[id]= (angleSoundZ[id]+slipConstrained+8*pi)%(2*pi);
-                               else{
-                                   
-                                   //  permanentInitialTwistZ[i]+=twistIncrement;
-                                   initialAngleSoundZ[i]=(initialAngleSoundZ[i]-slipConstrained)%(2*pi);
-                                   
-                                   angleSoundZ[i]=(angleSoundZ[i]-slipConstrained-initialAngleSoundZ[i]+8*pi)%(2*pi)+initialAngleSoundZ[i]
-                                   
-                               }
-                           }
-                                let twisteR=(angleSoundZ[id]-initialAngleSoundZ[id]+8*pi)%(2*pi);
-                                let   lastTwistSign=signTwistZ[id];
-                                signTwistZ[id] =Math.sign(twisteR-pi);
-                                if (lastTwistSign!=signTwistZ[id]
+                                                           for(var i = 0; i<loops;i++)  {
+                                                               if (i==id) angleSoundZ[id]= (angleSoundZ[id]+slipConstrained-initialAngleSoundZ[i]+8*pi)%(2*pi)+initialAngleSoundZ[i];
+                            else{
+                            
+                                 //  permanentInitialTwistZ[i]+=twistIncrement;
+                                initialAngleSoundZ[i]=(initialAngleSoundZ[i]-slipConstrained+pi)%(2*pi)-pi;
+
+                                   angleSoundZ[i]=(angleSoundZ[i]-slipConstrained-initialAngleSoundZ[i])%(2*pi)+initialAngleSoundZ[i]
+                                
+                                }
+                                                               
+                                                                      /*  if(i!=id)
+                                                                        {
+                                                                            console.log(initialAngleSoundZ[i]+"initial angle"+angleSoundZ[i])
+                                                                        }
+                                                                       */
+                                let twisteR=(angleSoundZ[i]-initialAngleSoundZ[i]+8*pi)%(2*pi);
+                                let   lastTwistSign=signTwistZ[i];
+                                signTwistZ[i] =Math.sign(twisteR-pi);
+                                if (lastTwistSign!=signTwistZ[i]
                                     &&(twisteR<pi/2.||twisteR>3./2.*pi)
                                     ) {
-                                    
-                                    octavesBoostedZ[id]+=24*signTwistZ[id];
+                                    //console.log(i==id)
+                                    octavesBoostedZ[i]+=24*signTwistZ[i];
                                 }
                                 
-                            
+                            }
                                                                
                                                   return {
                                 signTwist:signTwistZ,angleSound:angleSoundZ,initialAngleSound:initialAngleSoundZ,
