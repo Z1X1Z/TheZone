@@ -1097,7 +1097,9 @@ function onWindowResize() {
                             else correlationForTextX=0.;
                             heightPX=window.innerHeight-correlationForTextY;
                             widthPX=window.innerWidth-correlationForTextX;
-                        
+             
+              mf = Math.sqrt(Math.max(heightPX,widthPX)/Math.min(heightPX,widthPX));//advantage of translation over zoom (right?)
+             MR = mf/zoomFrames;
                       //  if(BibleON==0)document.getElementById("Bible").height=window.innerHeight/-leaf;
 
             if("osmd" in window&&osmd!=null)
