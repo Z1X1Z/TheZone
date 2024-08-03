@@ -4394,7 +4394,8 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                                     ,1.);
                        vec3 awayFromTree =  vec3((-ss.xyz)*ss.w
                                                  -yourFace.xyz
-                                                 -HEART.b*2.-HEART.r-HEART.g
+                                                 -HEART.b
+                                                // +(-HEART.b-HEART.r-HEART.g)/4.
                                                  -AM.r*24.
                                                  +bigEyes.xyz*largeEyeColor
                                                  -(yourFace.x+yourFace.y+yourFace.z)/256./3.
