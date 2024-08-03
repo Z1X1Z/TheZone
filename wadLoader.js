@@ -813,19 +813,20 @@ if(grabStar)
                            let slipConstrainedTwist =twistIncrementPI;
                            if(slipConstrainedTwist>pi)slipConstrainedTwist-=24;
                            for(var i = 0; i<loops;i++)  {
-                               if (i==id)                                   angleSoundZ[i]=(angleSoundZ[i]+slipConstrained-initialAngleSoundZ[i])%(2*pi)+initialAngleSoundZ[i];
+                               if (i==id)                                   angleSoundZ[i]=(angleSoundZ[i]+twistIncrementPI-initialAngleSoundZ[i])%(2*pi)+initialAngleSoundZ[i];
                                else{
                                    
                                        twistModulatedZ[i]=(twistModulatedZ[i]+twistIncrement+24)%24
                                        initialAngleSoundZ[i]=(initialAngleSoundZ[i]-twistIncrementPI-initialAngleZ[i]-pi)%(2*pi)+initialAngleZ[i]-pi;
                                   // initialAngleSoundZ[i]=(initialAngleSoundZ[i]-twistIncrementPI);
                                  // angleSoundZ[i]=(angleSoundZ[i]-slipConstrained);
-                                    if(i!=id)
+                                   /* if(i!=id)
                                     {
                                     console.log("restart")
                                     console.log(twistModulatedZ[i]+"TwistModulated")
                                     console.log(initialAngleSoundZ[i]+"initial angle"+angleSoundZ[i])
                                     }
+                                    */
                                     
                                }
                            }
