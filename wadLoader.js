@@ -102,10 +102,10 @@ function loadDAW(SonicTouchObjectO)
     SonicTouchObjectO.tound2 = new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
     
     playSounds(SonicTouchObjectO.sound2,SonicTouchObjectO.sound,SonicTouchObjectO.zound2,SonicTouchObjectO.zound,
-               SonicTouchObjectO.DAWfrequency,SonicTouchObjectO.dawAMPLITUDE*window.touchVolume/3.)//amplitude actually takes effect for some reason, probably something to do with optimization, seems to be /3 when it "should" be /2
+               SonicTouchObjectO.DAWfrequency,SonicTouchObjectO.dawAMPLITUDE*window.touchVolume/3.,SonicTouchObjectO.dawAMPLITUDE)//amplitude actually takes effect for some reason, probably something to do with optimization, seems to be /3 when it "should" be /2
     
     playSounds(SonicTouchObjectO.xound2,SonicTouchObjectO.xound,SonicTouchObjectO.tound2,SonicTouchObjectO.tound,
-               SonicTouchObjectO.DAWfrequency,SonicTouchObjectO.dawAMPLITUDE*window.touchVolume/3.)
+               SonicTouchObjectO.DAWfrequency,SonicTouchObjectO.dawAMPLITUDE*window.touchVolume/3.,SonicTouchObjectO.dawAMPLITUDE)
     
    refreshNoteDAW(SonicTouchObjectO)
     setTimeout(()=>{refreshNoteDAW(SonicTouchObjectO)},10)//timeout helps with volume optimization
@@ -142,6 +142,7 @@ function refreshOldInstrument(b){
         console.log(typeof DAWSonicTouchArray[b])
     if(typeof DAWSonicTouchArray[b]=="object")
     {
+        console.log("refreshing")
         DAWSonicTouchArray[b]=loadDAW(DAWSonicTouchArray[b])
         //DAWarray[d].dawStartTime=date;
         setTimeout(()=>(refreshOldInstrument(b)),playDuration)
@@ -309,13 +310,13 @@ function startSound(e){
         //sound2[id].volume=volume;
                                  
 if(!window.muteVoiceTouchVolume){
-        if(typeof SonicTouchArray[id].sound=="object"&&(!window.DAW))
+        if(typeof SonicTouchArray[id].sound=="object"&&bfi==null)
         {
             stopSounds(SonicTouchArray[id])
 
             if(isFinite(volume)&&isFinite(frequency)&&frequency>0){
-                playSounds(SonicTouchArray[id].sound2,SonicTouchArray[id].sound,SonicTouchArray[id].zound2,SonicTouchArray[id].zound,frequency,volume)
-                playSounds(SonicTouchArray[id].xound2,SonicTouchArray[id].xound,SonicTouchArray[id].tound2,SonicTouchArray[id].tound,frequency,volume)
+                playSounds(SonicTouchArray[id].sound2,SonicTouchArray[id].sound,SonicTouchArray[id].zound2,SonicTouchArray[id].zound,frequency,volume,touchMagnitude)
+                playSounds(SonicTouchArray[id].xound2,SonicTouchArray[id].xound,SonicTouchArray[id].tound2,SonicTouchArray[id].tound,frequency,volume,touchMagnitude)
             }
         }
         else if(bfi!=null)
@@ -327,7 +328,7 @@ if(!window.muteVoiceTouchVolume){
     }
 }
                                              
-                                             function playSounds(sound2,sound,zound2,zound,frequency,volume){
+                                             function playSounds(sound2,sound,zound2,zound,frequency,volume,touchMagnitude){
                     
         let cascadeSwitch1;
         let cascadeSwitch2;
@@ -400,11 +401,19 @@ function followSound(e, SonicTouchArrayK){
                 if(slipConstrainedPI>pi)slipConstrainedPI-=2*pi;
                 if(slipConstrainedTwist>12)slipConstrainedTwist-=24;
                                                 
-            if(grabStar&&(!window.DAW||bfi!=null)) {
-                 SonicTouchArrayK[id].DAWinitialNOTE+=twistIncrement;//is this right???
-                 SonicTouchArrayK[id].permanentInitialTwist +=twistIncrement;
-                 twist+=twistIncrement;
+            if(grabStar)
+            {
+                 if(bfi!=null) {
+                     SonicTouchArrayK[id].DAWinitialNOTE+=twistIncrement;//is this right???
+                     SonicTouchArrayK[id].permanentInitialTwist +=twistIncrement;
                  }
+                 else  SonicTouchArrayK[id].permanentInitialTwist +=twistIncrement;
+                 if(!window.DAW||bfi!=null)
+                     twist+=twistIncrement;
+                 
+
+             }
+
                if(!window.muteTouchVolume){
 
                     let b = soundRoutine(id,x,y, SonicTouchArrayK);
@@ -440,7 +449,7 @@ function followSound(e, SonicTouchArrayK){
                     let lastAngleSound=SonicTouchArrayX[id].angleSound;
 
                     if(!window.grabStar) SonicTouchArrayX[id].angleSound=((( SonicTouchArrayX[id].angleSound- SonicTouchArrayX[id].initialAngleSound)+8.*pi+slipConstrainedPI)%(2*pi)+SonicTouchArrayX[id].initialAngleSound);
-                    else SonicTouchArrayX= bump(SonicTouchArrayX.length,id,x,y, SonicTouchArrayX)
+                    else if(!window.DAW||bfi!=null)SonicTouchArrayX= bump(SonicTouchArrayX.length,id,x,y, SonicTouchArrayX)
                                    
                     
 
@@ -655,9 +664,8 @@ let c = document.body;//document.getElementById("container")
                     let tn = touchNumber.get(pressIndex.get(e.pointerId));
                     if(typeof tn == "number"){
                         getPressure(e);
-                        if(bfi!=null)followSound(e,DAWSonicTouchArray);
-                      else if(!window.DAW) followSound(e,SonicTouchArray);
-                        
+                       if(bfi==null) followSound(e,SonicTouchArray);
+                        else followSound(e,DAWSonicTouchArray);
                     }
                 }
                 // e.stopImmediatePropagation();// e.preventDefault();
