@@ -817,7 +817,9 @@ if(grabStar)
                                else{
                                    
                                        twistModulatedZ[i]=(twistModulatedZ[i]+twistIncrement+24)%24
-                                       initialAngleSoundZ[i]=(initialAngleSoundZ[i]-twistIncrementPI-initialAngleZ[i]-pi)%(2*pi)+initialAngleZ[i]+pi;
+                                       initialAngleSoundZ[i]=(initialAngleSoundZ[i]-twistIncrementPI-initialAngleZ[i]-pi)%(2*pi)+initialAngleZ[i]-pi;
+                                  // initialAngleSoundZ[i]=(initialAngleSoundZ[i]-twistIncrementPI);
+                                 // angleSoundZ[i]=(angleSoundZ[i]-slipConstrained);
                                     if(i!=id)
                                     {
                                     console.log("restart")
