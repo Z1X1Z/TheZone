@@ -807,20 +807,26 @@ if(grabStar)
                                                     function bump(loops,id,x,y,signTwistZ,angleSoundZ,initialAngleSoundZ,initialAngleZ,twistModulatedZ,permanentInitialTwistZ,octavesBoostedZ,firstMovementZ){
                            
                            
-                           let slipConstrained =twistIncrementPI;
-                           if(slipConstrained>pi)slipConstrained-=2*pi;
+                           let slipConstrainedTwist =twistIncrement;
+                           let slipConstrainedPI =twistIncrementPI;
                            
-                           let slipConstrainedTwist =twistIncrementPI;
-                           if(slipConstrainedTwist>pi)slipConstrainedTwist-=24;
+                           if(firstMovementZ[id])
+                           {
+                               if(slipConstrainedPI>pi)slipConstrainedPI-=2*pi;
+                               console.log("here")
+                               if(slipConstrainedTwist>12)slipConstrainedTwist-=24;
+                           }
+                           
                            for(var i = 0; i<loops;i++)  {
+                               
                                if (i==id)                                   angleSoundZ[i]=(angleSoundZ[i]+twistIncrementPI-initialAngleSoundZ[i])%(2*pi)+initialAngleSoundZ[i];
                                else{
                                    
-                                       twistModulatedZ[i]=(twistModulatedZ[i]+twistIncrement+24)%24
-                                       initialAngleSoundZ[i]=(initialAngleSoundZ[i]-twistIncrementPI-initialAngleZ[i]-pi)%(2*pi)+initialAngleZ[i]-pi;
+                                       twistModulatedZ[i]=(twistModulatedZ[i]+slipConstrainedTwist+24)%24
+                                       initialAngleSoundZ[i]=(initialAngleSoundZ[i]-slipConstrainedPI-initialAngleZ[i]-pi)%(2*pi)+initialAngleZ[i]+pi;
                                   // initialAngleSoundZ[i]=(initialAngleSoundZ[i]-twistIncrementPI);
                                  // angleSoundZ[i]=(angleSoundZ[i]-slipConstrained);
-                                   /* if(i!=id)
+                                    /*if(i!=id)
                                     {
                                     console.log("restart")
                                     console.log(twistModulatedZ[i]+"TwistModulated")
