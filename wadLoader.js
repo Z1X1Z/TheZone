@@ -142,7 +142,6 @@ function refreshOldInstrument(b){
         console.log(typeof DAWSonicTouchArray[b])
     if(typeof DAWSonicTouchArray[b]=="object")
     {
-        console.log("refreshing")
         DAWSonicTouchArray[b]=loadDAW(DAWSonicTouchArray[b])
         //DAWarray[d].dawStartTime=date;
         setTimeout(()=>(refreshOldInstrument(b)),playDuration)
@@ -310,7 +309,7 @@ function startSound(e){
         //sound2[id].volume=volume;
                                  
 if(!window.muteVoiceTouchVolume){
-        if(typeof SonicTouchArray[id].sound=="object"&&bfi==null)
+        if(typeof SonicTouchArray[id].sound=="object"&&(!window.DAW))
         {
             stopSounds(SonicTouchArray[id])
 
@@ -656,8 +655,9 @@ let c = document.body;//document.getElementById("container")
                     let tn = touchNumber.get(pressIndex.get(e.pointerId));
                     if(typeof tn == "number"){
                         getPressure(e);
-                       if(bfi==null) followSound(e,SonicTouchArray);
-                        else followSound(e,DAWSonicTouchArray);
+                        if(bfi!=null)followSound(e,DAWSonicTouchArray);
+                      else if(!window.DAW) followSound(e,SonicTouchArray);
+                        
                     }
                 }
                 // e.stopImmediatePropagation();// e.preventDefault();
