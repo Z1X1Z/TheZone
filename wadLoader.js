@@ -34,56 +34,82 @@ cutoff: 10000   //cutoff frequency of the built in lowpass-filter. 20 to 22050
 const singAlong=Array(osmdOscillators);
 const singAlong2=Array(osmdOscillators);
 
-const sound=Array(maxTouchSoundCount);
-const sound2=Array(maxTouchSoundCount);
+let DAWnodeIndexForTouchBestFitIndex  = Array(maxTouchSoundCount).fill("not set");
 
-const zound=Array(maxTouchSoundCount);
-const zound2=Array(maxTouchSoundCount);
-
-
-const xound=Array(maxTouchSoundCount);
-const xound2=Array(maxTouchSoundCount);
-
-
-const tound=Array(maxTouchSoundCount);
-const tound2=Array(maxTouchSoundCount);
-
-function loadDAW(o)
-{
-    if( DAWarray[o].DAWsound !=null)
+let SonicTouchObject =
     {
-        DAWarray[o].DAWsound.stop()
-        DAWarray[o].DAWsound2.stop()
+        angleSound:.5,
+        initialAngleSound:0.,
+        initialAngle:0.,
+        lastSlip:0,
+        octavesBoosted:0.,
+        twistModulated:0.,
+        initialTwist:0.,
+        permanentInitialTwist:0.,
+        signTwist:null,
+        firstMovement:true,
         
-        DAWarray[o].DAWzound.stop()
-        DAWarray[o].DAWzound2.stop()
+        sound:null,
+        sound2:null,
+         zound:null,
+         zound2:null,
+         xound:null,
+         xound2:null,
+        tound:null,
+        tound2:null,
+        dawAMPLITUDE:.000000000000001,
+        dawNOTE:null,
+        DAWtouchId:null,
+        DAWx:null,
+        DAWy:null,
+        DAWfrequency:1,
+        DAWinitialNOTE:null,
+    dawNODES:0,
+    dawStartTime:null,
         
-        
-        DAWarray[o].DAWxound.stop()
-        DAWarray[o].DAWxound2.stop()
-        
-        DAWarray[o].DAWtound.stop()
-        DAWarray[o].DAWtound2.stop()
     }
-    DAWarray[o].DAWsound =  new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
-    DAWarray[o].DAWsound2 = new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
+let SonicTouchArray  = Array(maxTouchSoundCount).fill(SonicTouchObject);
+
+function stopSounds(SonicTouchObjectN)
+{
+    if(SonicTouchObjectN.sound !=null)
+    {
+        SonicTouchObjectN.sound.stop();
+        SonicTouchObjectN.sound2.stop();
+        SonicTouchObjectN.zound.stop();
+        SonicTouchObjectN.zound2.stop();
+        
+        SonicTouchObjectN.xound.stop();
+        SonicTouchObjectN.xound2.stop();
+        SonicTouchObjectN.tound.stop();
+        SonicTouchObjectN.tound2.stop();
+    }
+}
+
+function loadDAW(SonicTouchObjectO)
+{
+    stopSounds(SonicTouchObjectO)
+    SonicTouchObjectO.sound =  new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
+    SonicTouchObjectO.sound2 = new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
     
-    DAWarray[o].DAWzound =  new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
-    DAWarray[o].DAWzound2 = new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
+    SonicTouchObjectO.zound =  new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
+    SonicTouchObjectO.zound2 = new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
     
-    DAWarray[o].DAWxound =  new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
-    DAWarray[o].DAWxound2 = new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
+    SonicTouchObjectO.xound =  new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
+    SonicTouchObjectO.xound2 = new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
     
-    DAWarray[o].DAWtound =  new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
-    DAWarray[o].DAWtound2 = new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
+    SonicTouchObjectO.tound =  new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
+    SonicTouchObjectO.tound2 = new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
     
-    playSounds(DAWarray[o].DAWsound2,DAWarray[o].DAWsound,DAWarray[o].DAWzound2,DAWarray[o].DAWzound,
-               DAWarray[o].DAWfrequency,DAWarray[o].dawAMPLITUDE*window.touchVolume/3.)//amplitude actually takes effect for some reason, probably something to do with optimization, seems to be /3 when it "should" be /2
+    playSounds(SonicTouchObjectO.sound2,SonicTouchObjectO.sound,SonicTouchObjectO.zound2,SonicTouchObjectO.zound,
+               SonicTouchObjectO.DAWfrequency,SonicTouchObjectO.dawAMPLITUDE*window.touchVolume/3.)//amplitude actually takes effect for some reason, probably something to do with optimization, seems to be /3 when it "should" be /2
     
-    playSounds(DAWarray[o].DAWxound2,DAWarray[o].DAWxound,DAWarray[o].DAWtound2,DAWarray[o].DAWtound,
-               DAWarray[o].DAWfrequency,DAWarray[o].dawAMPLITUDE*window.touchVolume/3.)
-    refreshNoteDAW(o)
-    setTimeout(()=>{refreshNoteDAW(o)},10)//timeout helps with volume optimization
+    playSounds(SonicTouchObjectO.xound2,SonicTouchObjectO.xound,SonicTouchObjectO.tound2,SonicTouchObjectO.tound,
+               SonicTouchObjectO.DAWfrequency,SonicTouchObjectO.dawAMPLITUDE*window.touchVolume/3.)
+    
+   refreshNoteDAW(SonicTouchObjectO)
+    setTimeout(()=>{refreshNoteDAW(SonicTouchObjectO)},10)//timeout helps with volume optimization
+    return SonicTouchObjectO;
 }
 function bootSounds()
 {
@@ -99,48 +125,27 @@ function bootSounds()
             singAlong[o] =  new Wad({source : instrument1})
             singAlong2[o] =  new Wad({source : instrument2})
         }
-    for(var o=0;o<maxTouchSoundCount;o++){
-        if(typeof sound[o] =="object")
-        {sound[o].stop()
-            sound2[o].stop()
-            
-            zound[o].stop()
-            zound2[o].stop()
-            
-            
-            xound[o].stop()
-            xound2[o].stop()
-            
-            tound[o].stop()
-            tound2[o].stop()
-        }
-        sound[o] =  new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
-        sound2[o] = new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
-
-        zound[o] =  new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
-        zound2[o] = new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
-        
-        xound[o] =  new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
-        xound2[o] = new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
-        
-        tound[o] =  new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
-        tound2[o] = new Wad({source : instrument2})//, tuna   : hyperdriveTUNA});
+    
+    
+    for(var o=0;o<maxTouchSoundCount;o++)
+    {SonicTouchArray[o]=loadDAW(SonicTouchArray[o]);
+        stopSounds(SonicTouchArray[o]);
     }
-    for(var o=0;o<DAWarray.length;o++){
-        loadDAW(o)
-    }
+        
+    for(var o=0;o<DAWSonicTouchArray.length;o++)DAWSonicTouchArray[o]=loadDAW(DAWSonicTouchArray[o])
     
 
 }
-let minutesTillRefresh=2.;
+let minutesTillRefresh=2;
 let playDuration =60*minutesTillRefresh*1000;
-function refreshOldInstrument(d){
-        
-    if(typeof DAWarray[d]=="object")
+function refreshOldInstrument(b){
+        console.log(typeof DAWSonicTouchArray[b])
+    if(typeof DAWSonicTouchArray[b]=="object")
     {
-        loadDAW(d)
+        console.log("refreshing")
+        DAWSonicTouchArray[b]=loadDAW(DAWSonicTouchArray[b])
         //DAWarray[d].dawStartTime=date;
-        setTimeout(()=>(refreshOldInstrument(d)),playDuration)
+        setTimeout(()=>(refreshOldInstrument(b)),playDuration)
     }
 }
 
@@ -150,83 +155,22 @@ function initialize(){
     
    // feedbackPitchsound.play({env:{attack: 0, release:0,hold:-1},pitch:1,volume:0})
         bootSounds()
-
-            
-    try{sound[0].play({wait:1000000});
-        sound2[0].play({wait:1000000});
-        sound[0].stop()
-        sound2[0].stop()
-        
-        zound[0].play({wait:1000000});
-            zound2[0].play({wait:1000000});
-            zound[0].stop()
-            zound2[0].stop()
-        
-        
-        xound[0].play({wait:1000000});
-            xound2[0].play({wait:1000000});
-            xound[0].stop()
-            xound2[0].stop()
-            
-            tound[0].play({wait:1000000});
-                tound2[0].play({wait:1000000});
-                tound[0].stop()
-                tound2[0].stop()
-       }
-    catch{
-}
-   
     attachListeners();
     wadLOADED=true;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function length(x,y){
 return Math.sqrt(x**2+y**2)
 }
 
 
-
-
-
-
-
-
-
 let bfi = null
 
-
-let initialAngleSound = Array(maxTouchSoundCount).fill(0);
-let initialAngle = Array(maxTouchSoundCount).fill(0.);
-let lastSlip  = Array(maxTouchSoundCount).fill(0);
-let DAWnodeIndexForTouchBestFitIndex  = Array(maxTouchSoundCount).fill("not set");
 let pressed = false;
-
 
 let touchMagnitude=0.;
 
 function startSound(e){
-    
-    
-    
-    
-    
-    
-    
     
     let y = e.clientY-heightPX/2.;
     let x = e.clientX- widthPX/2.;
@@ -236,125 +180,78 @@ function startSound(e){
     
     screenPressCoordX[id]=x;
     screenPressCoordY[id]=y;
-    firstMovement[id]=true;
-
+    SonicTouchArray[id].firstMovement=true;
     if(window.grabStar||true){
-        initialAngle[id]=-Math.atan2(-x,-y);
-
+        SonicTouchArray[id].initialAngle=-Math.atan2(-x,-y);
         window.twist=(window.twist+24*100)%24
-        permanentInitialTwist[id]=twist;
-        initialTwist[id]=twist;
-        lastSlip[id] =0;
-        octavesBoosted[id]=0
-        twistModulated[id]=0
-        signTwist[id]=-1.*flip;//"off";
+        SonicTouchArray[id].permanentInitialTwist=twist;
+        SonicTouchArray[id].initialTwist=twist;
+        SonicTouchArray[id].lastSlip =0;
+        SonicTouchArray[id].octavesBoosted=0
+        SonicTouchArray[id].twistModulated=0
+        SonicTouchArray[id].signTwist=-1.*flip;//"off";
     }
      touchMagnitude=Math.sqrt(y*y+x*x)/(Math.min(heightPX,widthPX))*2;
     let volume= window.touchVolume*-touchMagnitude/2.;
     if(radialOctaveBoost)volume= -window.touchVolume*pressure*.25;
 
-    initialAngleSound[id] =(-Math.atan2(-x,-y)*flip+2.*pi)%(2*pi)
+    SonicTouchArray[id].initialAngleSound =(-Math.atan2(-x,-y)*flip+2.*pi)%(2*pi)
 
     //try with +2*pi)%(2*pi)+2*pi for seam at top
-    angleSound[id] =initialAngleSound[id] ;
-   
+    SonicTouchArray[id].angleSound =SonicTouchArray[id].initialAngleSound ;
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    let touchNote=(initialAngleSound[id])/pi/2*12
+    let touchNote=(SonicTouchArray[id].initialAngleSound)/pi/2*12
     let touchNote24=touchNote*2.-twist
-    
-    
-    
     
     let frequency = Math.pow(2.,(((touchNote)-window.twist/2.)-1.)/12.
                                   )*window.ConcertKey;
-                                 
-                 
-                                 
-                                 
+                                
+         SonicTouchArray[id].dawAMPLITUDE=(touchMagnitude);
+         SonicTouchArray[id].dawNOTE=(touchNote24);
+         SonicTouchArray[id].DAWtouchId=id
+         SonicTouchArray[id].DAWx=x;
+         SonicTouchArray[id].DAWy=y;
+        
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-                                 
-                                 
-                                 
+        
+                            
                                  
                                  
                                 bfi=null;
-                                 
-                                 
-                                 DAWnodeIndexForTouchBestFitIndex[id] = "not set"
-                                 if(DAW){
-                                 if(touchMagnitude<.25){
-        DAWarray.push(Object.assign({},window.DAWobject))
-                                     DAWnodeIndexForTouchBestFitIndex[id]=DAWarray.length-1
-        bfi= DAWarray[DAWnodeIndexForTouchBestFitIndex[id]];
-                                     bfi.DAWtouchId=id
-        bfi.dawNOTE=(touchNote24);
-        bfi.DAWinitialNOTE=touchNote24
-        bfi.dawAMPLITUDE=(touchMagnitude);
-        bfi.DAWinitialAngleSound=((-Math.atan2(-x,-y)*flip+2.*pi)%(2*pi))
-        bfi.DAWangleSound=(initialAngleSound[id] )
-                                     bfi.DAWx=x;
-                                     bfi.DAWy=y;
-                                     bfi.DAWfirstMovement=true
-        if(window.grabStar||true){
-            bfi.DAWinitialAngle=(-Math.atan2(-x,-y));
-            bfi.DAWpermanentInitialTwist=(twist);
-            bfi.DAWTwistModulated=0
-            bfi.DAWinitialTwist=(twist);
-            bfi.DAWlastSlip=(0);
-            bfi.DAWoctavesBoosted=(0)
-            bfi.DAWsignTwist=(-1.*flip);//"off";
-        }
-        /*
-        bfi.DAWsound=(new Wad({source : instrument1}))//, tuna   : hyperdriveTUNA});
-        bfi.DAWsound2=(new Wad({source : instrument1}))//, tuna   : hyperdriveTUNA});
-            
-        bfi.DAWzound=(new Wad({source : instrument1}))//, tuna   : hyperdriveTUNA});
-        bfi.DAWzound2=( new Wad({source : instrument1}))//, tuna   : hyperdriveTUNA});
-        
-        bfi.DAWxound=(new Wad({source : instrument2}))//, tuna   : hyperdriveTUNA});
-        bfi.DAWxound2=( new Wad({source : instrument2}))//, tuna   : hyperdriveTUNA});
-        
-        bfi.DAWtound=( new Wad({source : instrument2}))//, tuna   : hyperdriveTUNA});
-        bfi.DAWtound2=( new Wad({source : instrument2}))//, tuna   : hyperdriveTUNA});
-        
-            playSounds(bfi.DAWsound2,bfi.DAWsound,bfi.DAWzound2,bfi.DAWzound,
-                       frequency,bfi.dawAMPLITUDE*touchVolume/3.)
              
-          playSounds(bfi.DAWxound2,bfi.DAWxound,bfi.DAWtound2,bfi.DAWtound
-                     ,frequency,bfi.dawAMPLITUDE*touchVolume/3.)
-        */
+             DAWnodeIndexForTouchBestFitIndex[id] = "not set"
+         if(DAW){
+             if(touchMagnitude<.25){
+                 DAWSonicTouchArray.push(Object.assign({},SonicTouchObject))
+                                     DAWnodeIndexForTouchBestFitIndex[id]=DAWSonicTouchArray.length-1
+
+        bfi= DAWSonicTouchArray[DAWnodeIndexForTouchBestFitIndex[id]];
+                 
+        bfi.DAWinitialNOTE=touchNote24
+        bfi.initialAngleSound=((-Math.atan2(-x,-y)*flip+2.*pi)%(2*pi))
+        bfi.angleSound=(SonicTouchArray[id].initialAngleSound )
+                 bfi.initialAngle=-Math.atan2(-x,-y);
+                                     bfi.firstMovement=true
+                
+        if(window.grabStar||true){
+            bfi.initialAngle=(-Math.atan2(-x,-y));
+            bfi.permanentInitialTwist=(twist);
+            bfi.TwistModulated=0
+            bfi.initialTwist=(twist);
+            bfi.lastSlip=(0);
+            bfi.octavesBoosted=(0)
+            bfi.signTwist=(-1.*flip);//"off";
+        }
         
-        
-                                     
+                 bfi.dawAMPLITUDE=(touchMagnitude);
+                 bfi.dawNOTE=(touchNote24);
+                 bfi.DAWtouchId=id
+                 bfi.DAWx=x;
+                 bfi.DAWy=y;
+                 bfi=loadDAW(DAWSonicTouchArray[DAWnodeIndexForTouchBestFitIndex[id]])
                               //       bfi.dawStartTime=Date.now()
-                                     refreshOldInstrument(DAWnodeIndexForTouchBestFitIndex[id]);//may be better called in batches, but here we're going for individually
+                 
+                refreshOldInstrument(DAWnodeIndexForTouchBestFitIndex[id]);//may be better called in batches, but here we're going for individually
 
         
         setDAWdependantSize()
@@ -362,9 +259,9 @@ function startSound(e){
     else{
         
          let bestFitDAWnote = .5
-        for(var h=0;h<DAWarray.length;h++){
+        for(var h=0;h<DAWSonicTouchArray.length;h++){
             let noteDifference=
-            Math.abs(touchNote24%24-DAWarray[h].dawNOTE%24)
+            Math.abs(touchNote24%24-DAWSonicTouchArray[h].dawNOTE%24)
             if(noteDifference<=bestFitDAWnote){
                 bestFitDAWnote=noteDifference
                 DAWnodeIndexForTouchBestFitIndex[id]=h
@@ -381,8 +278,8 @@ function startSound(e){
         }
         
         if(DAWnodeIndexForTouchBestFitIndex[id] != "not set"){
-            bfi =DAWarray[DAWnodeIndexForTouchBestFitIndex[id]]
-         //   bfi.dawNOTE=touchNote24;
+            bfi =DAWSonicTouchArray[DAWnodeIndexForTouchBestFitIndex[id]]
+            bfi.dawNOTE=touchNote24;
             bfi.dawAMPLITUDE=touchMagnitude;//testarContinuous;//
             bfi.DAWx=x
             bfi.DAWy=y
@@ -413,27 +310,19 @@ function startSound(e){
         //sound2[id].volume=volume;
                                  
 if(!window.muteVoiceTouchVolume){
-        if(typeof sound[id]=="object")
-            if(isFinite(volume)&&isFinite(frequency)&&frequency>0&&DAWnodeIndexForTouchBestFitIndex[id]=="not set"){
-                
-                sound[id].stop();
-                sound2[id].stop();
-                zound[id].stop();
-                zound2[id].stop();
-                
-                xound[id].stop();
-                xound2[id].stop();
-                tound[id].stop();
-                tound2[id].stop();
-                
-                playSounds(sound2[id],sound[id],zound2[id],zound[id],frequency,volume)
-                playSounds(xound2[id],xound[id],tound2[id],tound[id],frequency,volume)
-                
+        if(typeof SonicTouchArray[id].sound=="object"&&bfi==null)
+        {
+            stopSounds(SonicTouchArray[id])
+
+            if(isFinite(volume)&&isFinite(frequency)&&frequency>0){
+                playSounds(SonicTouchArray[id].sound2,SonicTouchArray[id].sound,SonicTouchArray[id].zound2,SonicTouchArray[id].zound,frequency,volume)
+                playSounds(SonicTouchArray[id].xound2,SonicTouchArray[id].xound,SonicTouchArray[id].tound2,SonicTouchArray[id].tound,frequency,volume)
             }
-        else if(DAWnodeIndexForTouchBestFitIndex[id]!="not set")
+        }
+        else if(bfi!=null)
             {
-bfi.DAWfrequency=frequency;
-refreshNoteDAW(DAWnodeIndexForTouchBestFitIndex[id])
+                bfi.DAWfrequency=frequency;
+                refreshNoteDAW(bfi)
             }
 
     }
@@ -481,101 +370,48 @@ refreshNoteDAW(DAWnodeIndexForTouchBestFitIndex[id])
                     
                 }
                                          //    let soundTouchComponent= Array(maxTouchSoundCount).fill(0.);
-                                 let octavesBoosted = Array(maxTouchSoundCount).fill(0.);
-                                 let twistModulated = Array(maxTouchSoundCount).fill(0.);
-                                 
-                                 let initialTwist= Array(maxTouchSoundCount).fill(0.);
-let   angleSound  = Array(maxTouchSoundCount).fill(0.);
-                                           
-                                             let permanentInitialTwist= Array(maxTouchSoundCount).fill(0.);
-                                             
-                                 let signTwist= Array(maxTouchSoundCount);
-                                 let firstMovement= Array(maxTouchSoundCount).fill(true);
+                               
 
                                           //   let lastTwistSign;
 
-function followSound(e){
-                    
-
+function followSound(e, SonicTouchArrayK){
             let y = e.clientY-heightPX/2.;
             let x = e.clientX-widthPX/2.;
-                   
-                    let id = touchNumber.get(pressIndex.get(e.pointerId));
-                    if(DAWnodeIndexForTouchBestFitIndex[id]!="not set")
-                    {
-                        bfi =DAWarray[DAWnodeIndexForTouchBestFitIndex[id]]
+        let id = touchNumber.get(pressIndex.get(e.pointerId));
+        screenPressCoordX[id]=x;
+            screenPressCoordY[id]=y;
+        
+        if(bfi!=null)
+            id=DAWnodeIndexForTouchBestFitIndex[id]
 
-                        bfi.DAWtouchId=id
-                        bfi.DAWx=x
-                        bfi.DAWy=y
-                    }
-                    screenPressCoordX[id]=x;
-                        screenPressCoordY[id]=y;
+            SonicTouchArrayK[id].DAWtouchId=id
+            SonicTouchArrayK[id].DAWx=x
+            SonicTouchArrayK[id].DAWy=y
                     
-        
-        
-        if(grabStar||true){
-            
              twistIncrement=0;
              twistIncrementPI = 0.;
-            if(DAWnodeIndexForTouchBestFitIndex[id]=="not set")
-            {
-                let slip = ((-Math.atan2(-x,-y)-initialAngle[id])*flip+8*pi)%(2*pi);
-                twistIncrementPI =(slip-lastSlip[id])
-                lastSlip[id] =slip;
+                let slip = ((-Math.atan2(-x,-y)-SonicTouchArrayK[id].initialAngle)*flip+8*pi)%(2*pi);
+                twistIncrementPI =(slip-SonicTouchArrayK[id].lastSlip)
+                SonicTouchArrayK[id].lastSlip =slip;
 
-            }
-            else
-            {
-                    let slip = ((-Math.atan2(-x,-y)-bfi.DAWinitialAngle)*flip+8*pi)%(2*pi);
-                    twistIncrementPI =(slip-bfi.DAWlastSlip)
-                bfi.DAWlastSlip=slip;
-
-            }
              twistIncrement = twistIncrementPI*(24/2)/pi;
 
-                                        
-            if(grabStar&&
-               (DAWnodeIndexForTouchBestFitIndex[id]!="not set"||!window.DAW)
-               )
-                                                {
-                 if(DAWnodeIndexForTouchBestFitIndex[id]!="not set"){
-                     
-                     bfi.DAWpermanentInitialTwist+=twistIncrement;
-                     bfi.DAWinitialNOTE+=twistIncrement;//is this right???
-                 }
-                 else {
-                     permanentInitialTwist[id] +=twistIncrement;
-                   
-                     
-                 }
-                        twist+=twistIncrement;
-             }
+                slipConstrainedPI=twistIncrementPI;
+                slipConstrainedTwist=twistIncrement;
+                if(slipConstrainedPI>pi)slipConstrainedPI-=2*pi;
+                if(slipConstrainedTwist>12)slipConstrainedTwist-=24;
                                                 
+            if(grabStar&&(!window.DAW||bfi!=null)) {
+                 SonicTouchArrayK[id].DAWinitialNOTE+=twistIncrement;//is this right???
+                 SonicTouchArrayK[id].permanentInitialTwist +=twistIncrement;
+                 twist+=twistIncrement;
+                 }
+               if(!window.muteTouchVolume){
 
-        }
-                    
-                                                              
-                                                
-                                                
-                                                
-                                                if(!window.muteTouchVolume){
-                 
-                    if(DAWnodeIndexForTouchBestFitIndex[id]!="not set")
-                        soundRoutine(true,id,x,y,
-                                      bfi.DAWangleSound,
-                                      bfi.DAWinitialAngleSound,
-                                      bfi.DAWinitialAngle,
-                                      bfi.DAWpermanentInitialTwist,
-                                      bfi.DAWoctavesBoosted,
-                                     bfi.DAWTwistModulated);
-                     
-                 
-                 else soundRoutine(false,id,x,y,angleSound[id],initialAngleSound[id],initialAngle[id],permanentInitialTwist[id],octavesBoosted[id],twistModulated[id]);
-                 
+                    let b = soundRoutine(id,x,y, SonicTouchArrayK);
+                    if(bfi!=null)DAWSonicTouchArray=b;
+                     else SonicTouchArray=b;
              }
-                                                if(DAWnodeIndexForTouchBestFitIndex[id]!="not set") bfi.DAWfirstMovement=false;
-                                                else firstMovement[id]=false;
 }
                                  
                                              
@@ -596,161 +432,59 @@ function followSound(e){
                                              
                                              
                                              
-                                             function soundRoutine(ISdaw,id,x,y,angleSoundX,initialAngleSoundX,initialAngleX,permanentInitialTwistX,octavesBoostedX,twistModulatedX){
-                    
+        function soundRoutine(id,x,y, SonicTouchArrayX){
+                 
                     touchMagnitude=Math.sqrt(y*y+x*x)/(Math.min(heightPX,widthPX))*2.
                     let volume= window.touchVolume*pressure*-touchMagnitude/2.;
 
                     if(radialOctaveBoost)volume= -window.touchVolume*pressure*.25;
-                    let lastAngleSound=angleSoundX;
+                    let lastAngleSound=SonicTouchArrayX[id].angleSound;
+
+                    if(!window.grabStar) SonicTouchArrayX[id].angleSound=((( SonicTouchArrayX[id].angleSound- SonicTouchArrayX[id].initialAngleSound)+8.*pi+slipConstrainedPI)%(2*pi)+SonicTouchArrayX[id].initialAngleSound);
+                    else SonicTouchArrayX= bump(SonicTouchArrayX.length,id,x,y, SonicTouchArrayX)
+                                   
                     
-                    if(!window.grabStar)
-                    {
-                        angleSoundX=(((angleSoundX-initialAngleSoundX)+8.*pi+twistIncrementPI)%(2*pi)+initialAngleSoundX);
-                }
-                    else {
-                      if(!ISdaw)
-                      {
-                          let b= bump(maxTouchSoundCount,id,x,y,signTwist,angleSound,initialAngleSound,initialAngle,twistModulated,permanentInitialTwist,octavesBoosted,firstMovement)
-                          signTwist=b.signTwist;
-                          angleSound=b.angleSound;
-                          initialAngleSound=b.initialAngleSound;
-                          octavesBoosted=b.octavesBoosted;
-                          twistModulated=b.twistModulated;
-                          
-                          
-                          twistModulatedX=b.twistModulated[id];
-                          angleSoundX=b.angleSound[id]
-                          initialAngleSoundX=b.initialAngleSound[id];
-                          permanentInitialTwistX=b.permanentInitialTwist[id];
-                          octavesBoostedX=b.octavesBoosted[id];
 
-                                   }
-                    
-                        else if(DAWnodeIndexForTouchBestFitIndex[id]!="not set")
-                        {
-                            var  LOADEDAWsignTwist=[],
-                            LOADEDAWangleSound=[],
-                            LOADEDAWinitialAngleSound=[],
-                            LOADEDAWinitialAngle=[],
-                            LOADEDAWpermanentInitialTwist=[],
-                            LOADEDAWTwistModulated=[],
-                            LOADEDAWfirstMovement=[],
-                            
-                            LOADEDAWoctavesBoosted=[];
-                            for(var d = 0; d<DAWarray.length; d++)
-                            {
-                                let fi = DAWarray[d];
-                                
-                                LOADEDAWsignTwist.push( fi.DAWsignTwist)
-                                LOADEDAWangleSound.push(  fi.DAWangleSound)
-                                LOADEDAWinitialAngleSound.push(  fi.DAWinitialAngleSound)
-                                LOADEDAWinitialAngle.push(  fi.DAWinitialAngle)
-                                LOADEDAWTwistModulated.push(  fi.DAWTwistModulated)
-                                LOADEDAWfirstMovement.push(  fi.DAWfirstMovement)
-
-                                LOADEDAWpermanentInitialTwist.push(  fi.DAWpermanentInitialTwist)
-                         LOADEDAWoctavesBoosted.push(  fi.DAWoctavesBoosted)
-                            }
-                            let b= bump(DAWarray.length, DAWnodeIndexForTouchBestFitIndex[id],x,y,
-                                        LOADEDAWsignTwist,
-                                        LOADEDAWangleSound,
-                                        LOADEDAWinitialAngleSound,
-                                        LOADEDAWinitialAngle,
-                                        LOADEDAWTwistModulated,
-                                        LOADEDAWpermanentInitialTwist,
-                                        LOADEDAWoctavesBoosted,
-                                        LOADEDAWfirstMovement)
-                            for(var d = 0; d<DAWarray.length; d++)
-                            {
-                                let fi = DAWarray[d];
-                                
-                                fi.DAWsignTwist=b.signTwist[d]
-                                fi.DAWangleSound=b.angleSound[d]
-                                fi.DAWinitialAngleSound=b.initialAngleSound[d]
-                                fi.DAWTwistModulated=b.twistModulated[d]
-                                fi.DAWpermanentInitialTwist=b.permanentInitialTwist[d]
-                                fi.DAWoctavesBoosted= b.octavesBoosted[d]
-                            }
-                            
-                            angleSoundX=b.angleSound[DAWnodeIndexForTouchBestFitIndex[id]]
-                            initialAngleSoundX=b.initialAngleSound[DAWnodeIndexForTouchBestFitIndex[id]];
-                            permanentInitialTwistX=b.permanentInitialTwist[DAWnodeIndexForTouchBestFitIndex[id]];
-                            octavesBoostedX=b.octavesBoosted[DAWnodeIndexForTouchBestFitIndex[id]];
-                            twistModulatedX=b.twistModulated[DAWnodeIndexForTouchBestFitIndex[id]];
-                                     }
-                
-
-                    }
                         let twistFeed;
-                                                            let soundTouchComponent = 0.;
-                        if(!grabStar)soundTouchComponent=angleSoundX
-                        else soundTouchComponent=(angleSoundX-initialAngleSoundX+pi*8.)%(2*pi)+initialAngleSoundX;
-                 twistFeed= permanentInitialTwistX+octavesBoostedX+twistModulatedX;
+                        let soundTouchComponent = 0.;
+                        if(!grabStar) soundTouchComponent= SonicTouchArrayX[id].angleSound
+                        else soundTouchComponent=(SonicTouchArrayX[id].angleSound-SonicTouchArrayX[id].initialAngleSound+pi*8.)%(2*pi)+SonicTouchArrayX[id].initialAngleSound;
+                 
+                        twistFeed= SonicTouchArrayX[id].permanentInitialTwist+SonicTouchArrayX[id].octavesBoosted+SonicTouchArrayX[id].twistModulated;
+                 
+                        let    touchNote=   soundTouchComponent/pi/2*12;
+                        let frequency = Math.pow(2.,((touchNote-twistFeed/2.)-1.)/12.
+                        )*window.ConcertKey;
 
-                                                        let    touchNote=   soundTouchComponent/pi/2*12;
-                       let frequency = Math.pow(2.,((touchNote-twistFeed/2.)-1.)/12.
-                                                       )*window.ConcertKey;
 
-                                                    
-                                                    
-                                                    
-            
-                        if(!ISdaw){
-                           angleSound[id]=angleSoundX
-                           
-                           initialAngleSound[id]=initialAngleSoundX
-                           initialAngle[id]=initialAngleX
-                       }
-                       else if(DAWnodeIndexForTouchBestFitIndex[id]!="not set")
-                                                    {
-                              bfi.DAWangleSound=angleSoundX
-
-                              bfi.DAWinitialAngleSound=initialAngleSoundX
-
-                              bfi.DAWinitialAngle=initialAngleX
-                        
-                       }
-                                                     
-                                                   // soundTouchComponent[id]=soundTouchComponentX
-                                                    
-                                                    if(isFinite(frequency)&&typeof sound[id]=="object"){
-                             
-                           if(DAWnodeIndexForTouchBestFitIndex[id]=="not set"){setSounds(frequency,soundTouchComponent,initialAngle[id],volume,touchMagnitude, sound2[id],sound[id],zound2[id],zound[id],xound2[id],xound[id],tound2[id],tound[id]);
+           if(isFinite(frequency)&&typeof SonicTouchArrayX[id].sound=="object"){
+                           if(bfi==null){
+                               setSounds(frequency,soundTouchComponent,SonicTouchArrayX[id].initialAngle,volume,touchMagnitude, SonicTouchArrayX[id].sound2,SonicTouchArrayX[id].sound,SonicTouchArrayX[id].zound2,SonicTouchArrayX[id].zound,SonicTouchArrayX[id].xound2,SonicTouchArrayX[id].xound,SonicTouchArrayX[id].tound2,SonicTouchArrayX[id].tound);
                            }
                              else
                              {
-                                 if(DAWnodeIndexForTouchBestFitIndex[id]!="not set")
-                                 {
                                      bfi.dawAMPLITUDE=touchMagnitude;//testarContinuous;//
                                      bfi.DAWfrequency=frequency;
-
                                      bfi.dawNOTE=touchNote*2-twistFeed;
+                                 if(grabStar)for(var d = 0;d<SonicTouchArrayX.length;d++) refreshNoteDAW(SonicTouchArrayX[d]);
+                                    else  setSounds(frequency,soundTouchComponent,bfi.initialAngle,bfi.dawAMPLITUDE*window.touchVolume/2.,bfi.dawAMPLITUDE,
+                                                   bfi.sound2,bfi.sound,bfi.zound2,bfi.zound,bfi.xound2,bfi.xound,bfi.tound2,bfi.tound);
 
-if(grabStar)
-   {
-       for(var d = 0;d<DAWarray.length;d++) refreshNoteDAW(d);
-                                                                                   }
-                               else      if(!grabStar)
-                                     {
-                                         setSounds(frequency,soundTouchComponent,bfi.DAWinitialAngle,bfi.dawAMPLITUDE*window.touchVolume/2.,bfi.dawAMPLITUDE,
-                                                   bfi.DAWsound2,bfi.DAWsound,bfi.DAWzound2,bfi.DAWzound,bfi.DAWxound2,bfi.DAWxound,bfi.DAWtound2,bfi.DAWtound);
-                                     }
-                                     
-                                     
-                                     
-                                 }
                              }
                          }
+                                                    SonicTouchArrayX[id].firstMovement=false;
+                                                    return SonicTouchArrayX;
+
                }
                                              
                                              
                                                     
-                                             
-                                             
-                                                    function setSounds(frequency,soundTouchComponent,initialAngleSound,volume,touchMagnitude,sound2,sound,zound2,zound,xound2,xound,tound2,tound){
-                             let volumePrime=volume*((soundTouchComponent - initialAngleSound)/(2.*pi))%1;
-                             let volumeTWO =volume*(1.-((soundTouchComponent-initialAngleSound)/(2.*pi))%1);
+                                                    
+
+    function setSounds(frequency,soundTouchComponent,initialAngleSound,volume,touchMagnitude,sound2,sound,zound2,zound,xound2,xound,tound2,tound){
+                           let volumePrime=volume*((soundTouchComponent - initialAngleSound)%(2*pi)/(2.*pi));
+                           let volumeTWO =volume*(1.-(soundTouchComponent-initialAngleSound)%(2*pi)/(2.*pi));
+
          /*if (volumePrime==0.)
          volumePrime=.00000000001;
          else if (volumeTWO==0.)
@@ -803,89 +537,78 @@ if(grabStar)
                          }
                                              
                                                     
+                                                    let slipConstrainedTwist =0;
+                                                    let slipConstrainedPI =0;
                                              
-                                                    function bump(loops,id,x,y,signTwistZ,angleSoundZ,initialAngleSoundZ,initialAngleZ,twistModulatedZ,permanentInitialTwistZ,octavesBoostedZ,firstMovementZ){
-                           
-                           
-                           let slipConstrainedTwist =twistIncrement;
-                           let slipConstrainedPI =twistIncrementPI;
-                           
-                           if(firstMovementZ[id])
-                           {
-                               if(slipConstrainedPI>pi)slipConstrainedPI-=2*pi;
-                               console.log("here")
-                               if(slipConstrainedTwist>12)slipConstrainedTwist-=24;
-                           }
-                           
-                           for(var i = 0; i<loops;i++)  {
-                               
-                               if (i==id)                                   angleSoundZ[i]=(angleSoundZ[i]+twistIncrementPI-initialAngleSoundZ[i])%(2*pi)+initialAngleSoundZ[i];
-                               else{
+                            function bump(loops,id,x,y,SonicTouchArrayZ){
+                               for(var i = 0; i<loops;i++)  {
                                    
-                                       twistModulatedZ[i]=(twistModulatedZ[i]+slipConstrainedTwist+24)%24
-                                       initialAngleSoundZ[i]=(initialAngleSoundZ[i]-slipConstrainedPI-initialAngleZ[i]-pi)%(2*pi)+initialAngleZ[i]+pi;
-                                  // initialAngleSoundZ[i]=(initialAngleSoundZ[i]-twistIncrementPI);
-                                 // angleSoundZ[i]=(angleSoundZ[i]-slipConstrained);
-                                    /*if(i!=id)
-                                    {
-                                    console.log("restart")
-                                    console.log(twistModulatedZ[i]+"TwistModulated")
-                                    console.log(initialAngleSoundZ[i]+"initial angle"+angleSoundZ[i])
-                                    }
-                                    */
-                                    
+                                   let twistBump,twistBumpPI;
+                                   if(SonicTouchArrayZ[id].firstMovement)
+                                   {
+                                       twistBumpPI=slipConstrainedPI;
+                                       twistBump=slipConstrainedTwist
+                                   }
+                                   else
+                                   {
+                                       twistBumpPI=twistIncrementPI
+                                       twistBump=twistIncrement
+                                   }
+                                   
+                                   if (i==id)                                   SonicTouchArrayZ[id].angleSound=(SonicTouchArrayZ[id].angleSound+twistBumpPI-SonicTouchArrayZ[id].initialAngleSound)%(2*pi)+SonicTouchArrayZ[id].initialAngleSound;
+                                   else{
+                                       
+
+                                       SonicTouchArrayZ[i].twistModulated=(SonicTouchArrayZ[i].twistModulated+twistBump+24)%24
+                                       SonicTouchArrayZ[i].initialAngleSound=(SonicTouchArrayZ[i].initialAngleSound-twistBumpPI-SonicTouchArrayZ[i].initialAngle-pi)%(2*pi)+SonicTouchArrayZ[i].initialAngle+pi;
+                                      // initialAngleSoundZ[i]=(initialAngleSoundZ[i]-twistIncrementPI);
+                                     // angleSoundZ[i]=(angleSoundZ[i]-slipConstrained);
+                                        /*if(i!=id)
+                                        {
+                                        console.log("restart")
+                                        console.log(twistModulatedZ[i]+"TwistModulated")
+                                        console.log(initialAngleSoundZ[i]+"initial angle"+angleSoundZ[i])
+                                        }
+                                        */
+                                        
+                                   }
                                }
+                               let twisteR=(SonicTouchArrayZ[id].angleSound-SonicTouchArrayZ[id].initialAngleSound+8*pi)%(2*pi);
+                               let   lastTwistSign=SonicTouchArrayZ[id].signTwist;
+                               SonicTouchArrayZ[id].signTwist =Math.sign(twisteR-pi);
+                               if (lastTwistSign!=SonicTouchArrayZ[id].signTwist
+                                   &&(twisteR<pi/2.||twisteR>3./2.*pi)
+                                   ) {
+                                   //console.log(true)
+                                   SonicTouchArrayZ[id].octavesBoosted+=24*SonicTouchArrayZ[id].signTwist;
+                               }
+                                return SonicTouchArrayZ
                            }
-                           let twisteR=(angleSoundZ[id]-initialAngleSoundZ[id]+8*pi)%(2*pi);
-                           let   lastTwistSign=signTwistZ[id];
-                           signTwistZ[id] =Math.sign(twisteR-pi);
-                           if (lastTwistSign!=signTwistZ[id]
-                               &&(twisteR<pi/2.||twisteR>3./2.*pi)
-                               ) {
-                              // console.log("boosted")
-                               octavesBoostedZ[id]+=24*signTwistZ[id];
-                           }
-                    return {
-                                signTwist:signTwistZ,angleSound:angleSoundZ,initialAngleSound:initialAngleSoundZ,twistModulated:twistModulatedZ,
-                                                      permanentInitialTwist:permanentInitialTwistZ,octavesBoosted:octavesBoostedZ
-                            }
-                       }
                                              
                                              
-                                              function      refreshNoteDAW(d){
-                        
+      function refreshNoteDAW(SonicTouchObjectD){
+                           
+            let twistFeed;
+            let soundTouchComponent;
+            if(!grabStar)
+            {soundTouchComponent=SonicTouchObjectD.angleSound
+            //  soundTouchComponent=(((-Math.atan2(-SonicTouchObjectD.DAWx,-SonicTouchObjectD.DAWy)*flip-SonicTouchObjectD..DAWinitialAngleSound)+8.*pi)%(2*pi)+SonicTouchObjectD..DAWinitialAngleSound);
+            }
+            else
+            {
+            soundTouchComponent=( SonicTouchObjectD.angleSound-SonicTouchObjectD.initialAngleSound)%(2*pi)+SonicTouchObjectD.initialAngleSound;
+            //    soundTouchComponent=DAWarray[d].DAWangleSound
+            }
 
-                                                    
-                                                        let twistFeed;
-                                                        let soundTouchComponent;
-                                                        
-                                                        if(!grabStar)
-                                                        {soundTouchComponent=DAWarray[d].DAWangleSound
-                                                        //  soundTouchComponent=(((-Math.atan2(-DAWarray[d].DAWx,-DAWarray[d].DAWy)*flip-DAWarray[d].DAWinitialAngleSound)+8.*pi)%(2*pi)+DAWarray[d].DAWinitialAngleSound);
-                                                            
-                                                           // soundTouchComponent=(((DAWarray[d].DAWangleSound-DAWarray[d].DAWinitialAngleSound)+8.*pi)%(2*pi)+DAWarray[d].DAWinitialAngleSound);
-                                                            
-                                                        }
-                                                        else
-                                                             {
-                                                                 soundTouchComponent=( DAWarray[d].DAWangleSound-DAWarray[d].DAWinitialAngleSound)%(2*pi)+DAWarray[d].DAWinitialAngleSound;
-                                                             //    soundTouchComponent=DAWarray[d].DAWangleSound
-                                                            }
-                                                                
-                           twistFeed= DAWarray[d].DAWpermanentInitialTwist+DAWarray[d].DAWoctavesBoosted+DAWarray[d].DAWTwistModulated;
+            twistFeed= SonicTouchObjectD.permanentInitialTwist+SonicTouchObjectD.octavesBoosted+SonicTouchObjectD.twistModulated;
+                                    let    touchNoteSpecified=   soundTouchComponent/pi/2*12;
+            SonicTouchObjectD.dawNOTE=touchNoteSpecified*2-twistFeed;
+                                        
+                                      let   frequencySpecified = Math.pow(2.,((touchNoteSpecified-twistFeed/2.)-1.)/12.
+                                                                        )*window.ConcertKey;
+                               setSounds(frequencySpecified,soundTouchComponent,   SonicTouchObjectD.initialAngle, SonicTouchObjectD.dawAMPLITUDE*window.touchVolume/2., SonicTouchObjectD.dawAMPLITUDE, SonicTouchObjectD.sound2,   SonicTouchObjectD.sound,  SonicTouchObjectD.zound2,      SonicTouchObjectD.zound,        SonicTouchObjectD.xound2,        SonicTouchObjectD.xound,        SonicTouchObjectD.tound2,        SonicTouchObjectD.tound);
 
-                                                            let    touchNoteSpecified=   soundTouchComponent/pi/2*12;
-                                                                
-                                                                DAWarray[d].dawNOTE=touchNoteSpecified*2-twistFeed;
-                                                                
-                                                              let   frequencySpecified = Math.pow(2.,((touchNoteSpecified-twistFeed/2.)-1.)/12.
-                                                                                                )*window.ConcertKey;
-                                                                                                      
-                                                       setSounds(frequencySpecified,soundTouchComponent,   DAWarray[d].DAWinitialAngle, DAWarray[d].dawAMPLITUDE*window.touchVolume/2., DAWarray[d].dawAMPLITUDE, DAWarray[d].DAWsound2,   DAWarray[d].DAWsound,  DAWarray[d].DAWzound2,      DAWarray[d].DAWzound,        DAWarray[d].DAWxound2,        DAWarray[d].DAWxound,        DAWarray[d].DAWtound2,        DAWarray[d].DAWtound);
-
-                                                
-                                             
-                                                                                                      }
+           }
                                              
                                              
                                              let cycle=0;
@@ -933,7 +656,8 @@ let c = document.body;//document.getElementById("container")
                     let tn = touchNumber.get(pressIndex.get(e.pointerId));
                     if(typeof tn == "number"){
                         getPressure(e);
-                        followSound(e);
+                       if(bfi==null) followSound(e,SonicTouchArray);
+                        else followSound(e,DAWSonicTouchArray);
                     }
                 }
                 // e.stopImmediatePropagation();// e.preventDefault();
@@ -947,11 +671,8 @@ let c = document.body;//document.getElementById("container")
                     screenPressCoordY[tn]=0;
                     
                     disengageDAWpetal(tn);
+                    stopSounds(SonicTouchArray[tn])
 
-                    sound[tn].stop();sound2[tn].stop();
-                    zound[tn].stop();zound2[tn].stop();
-                    xound[tn].stop();xound2[tn].stop();
-                    tound[tn].stop();tound2[tn].stop();
                     touchNumber.set(pressIndex.get(e.pointerId),"off");
 
                 }
@@ -969,16 +690,7 @@ let c = document.body;//document.getElementById("container")
 
                         screenPressCoordX[tn]=0;
                         screenPressCoordY[tn]=0;
-                    
-                    sound[tn].stop();
-                    sound2[tn].stop();
-                    zound[tn].stop();
-                    zound2[tn].stop();
-                    
-                    xound[tn].stop();
-                    xound2[tn].stop();
-                    tound[tn].stop();
-                    tound2[tn].stop();
+                    stopSounds(SonicTouchArray[tn])
                     touchNumber.set(pressIndex.get(e.pointerId),"off");
 
                     //e.preventDefault(); e.stopImmediatePropagation();
@@ -994,16 +706,7 @@ let c = document.body;//document.getElementById("container")
 
                        screenPressCoordX[tn]=0;
                         screenPressCoordY[tn]=0;
-                    
-                    sound[tn].stop();
-                    sound2[tn].stop();
-                    zound[tn].stop();
-                    zound2[tn].stop();
-                    
-                    xound[tn].stop();
-                    xound2[tn].stop();
-                    tound[tn].stop();
-                    tound2[tn].stop();
+                    stopSounds(SonicTouchArray[tn])
                     touchNumber.set(pressIndex.get(e.pointerId),"off");
 
                     //e.preventDefault(); e.stopImmediatePropagation();
@@ -1011,24 +714,12 @@ let c = document.body;//document.getElementById("container")
             }, false);
         }
 
-                                                    function disengageDAWpetal(tn){
-                                                    
-                             if(touchMagnitude<.25&&DAWnodeIndexForTouchBestFitIndex[tn]!="not set") {
-                                 DAWarray[DAWnodeIndexForTouchBestFitIndex[tn]].DAWsound2.stop()
-                                 DAWarray[DAWnodeIndexForTouchBestFitIndex[tn]].DAWsound.stop()
-                                 DAWarray[DAWnodeIndexForTouchBestFitIndex[tn]].DAWzound2.stop()
-                                 DAWarray[DAWnodeIndexForTouchBestFitIndex[tn]].DAWzound.stop()
-                                 DAWarray[DAWnodeIndexForTouchBestFitIndex[tn]].DAWxound2.stop()
-                                 DAWarray[DAWnodeIndexForTouchBestFitIndex[tn]].DAWxound.stop()
-                                 DAWarray[DAWnodeIndexForTouchBestFitIndex[tn]].DAWtound2.stop()
-                                 DAWarray[DAWnodeIndexForTouchBestFitIndex[tn]].DAWtound.stop()
-                                 
-                                 
-                                 DAWarray.splice(DAWnodeIndexForTouchBestFitIndex[tn], 1);
-                                 setDAWdependantSize()
-                                 DAWnodeIndexForTouchBestFitIndex[tn] = "not set"
-
-                             }
-                                                                 
-
-                                                    }
+    function disengageDAWpetal(tn){
+            if(touchMagnitude<.25&&DAWnodeIndexForTouchBestFitIndex[tn]!="not set") {
+                stopSounds(DAWSonicTouchArray[DAWnodeIndexForTouchBestFitIndex[tn]])
+                DAWSonicTouchArray.splice(DAWnodeIndexForTouchBestFitIndex[tn], 1);
+                setDAWdependantSize()
+                DAWnodeIndexForTouchBestFitIndex[tn] = "not set"
+            }
+            bfi=null;
+        }

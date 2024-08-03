@@ -622,7 +622,7 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
 
         function setDAWdependantSize()
         {
-             window.dawNODES = (DAWarray.length)
+             window.dawNODES = (DAWSonicTouchArray.length)
              if(dawNODES<0)dawNODES=0;
              DAWstar= new Float32Array(dawNODES*3*6);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
              DAWstarColors= new Float32Array(dawNODES*4*6);
@@ -1670,14 +1670,14 @@ function runOSMD (){
                    
                    
                    
-                   for (var g=0; g<DAWarray.length;
+                   for (var g=0; g<DAWSonicTouchArray.length;
                         g++)
                        
                    {
-                       let dawNOTE=DAWarray[g].dawNOTE
-                       let dawNOTEbase=DAWarray[g].DAWinitialNOTE
-                       let dawAMPLITUDE=DAWarray[g].dawAMPLITUDE
-                       
+                       let dawNOTE=DAWSonicTouchArray[g].dawNOTE
+                       let dawNOTEbase=DAWSonicTouchArray[g].DAWinitialNOTE
+                       let dawAMPLITUDE=DAWSonicTouchArray[g].dawAMPLITUDE
+
                        if(isFinite(dawAMPLITUDE)&&dawAMPLITUDE!=0.&&isFinite(dawNOTE)&&dawNOTE!=0.){
                            
                            let arm =flip*((dawNOTE+twist+12)*radialWarp)%24/24*pi*2.;
@@ -1688,9 +1688,12 @@ function runOSMD (){
                           // console.log(lengtOriginal+"lengtOriginal node"+g)
                            //var widt =starshipSize;
                            const colorNoteCurrent = new THREE.Color();
-                           colorNoteCurrent.setHSL(((-dawNOTE+8*uniforms.brelued.value)*uniforms.brelued.value)%24/24., 1,.5);//297 is around the highest heard note
+                           const colorNoteCurrentOctave = new THREE.Color();
+                         //  const octaveColor = (-DAWarray[g].DAWoctavesBoosted+5.)/24/10./2.;
+                           colorNoteCurrent.setHSL(((-dawNOTE+8*uniforms.brelued.value)*uniforms.brelued.value)%24/24.,1.,.5 );
+                           //colorNoteOctave.setHSL(((-dawNOTE+8*uniforms.brelued.value)*uniforms.brelued.value)%24/24., .5+octaveColor,.25+octaveColor);
                            const colorNoteInitial = new THREE.Color();
-                           colorNoteInitial.setHSL(((-dawNOTEbase+8*uniforms.brelued.value)*uniforms.brelued.value)%24/24., 1,.5);//297 is around the highest heard note
+                           colorNoteInitial.setHSL(((-dawNOTEbase+8*uniforms.brelued.value)*uniforms.brelued.value)%24/24., 1.,.5);//297 is around the highest heard note
                            const rpio2 =arm+pi/2.;
                            const x =widt*-Math.sin(rpio2);
                            const y = widt*-Math.cos(rpio2);

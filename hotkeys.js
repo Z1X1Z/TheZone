@@ -167,37 +167,7 @@ function resetAll(){
             callKey(new KeyboardEvent('keydown', {'key': "b", 'altKey':true, 'keyCode':key.charCodeAt(0)}));
     }
     window.DAW=false;
-    window.DAWobject = {dawNODES: 0,
-    dawStartTime:null,
-    dawAMPLITUDE:null,//testarContinuous;//
-    dawNOTE:null,//mustarD;//
-        
-    DAWsound:null,
-    DAWsound2:null,
-    DAWzound:null,
-    DAWzound2:null,
-    DAWxound:null,
-    DAWxound2:null,
-    DAWtound:null,
-    DAWtound2:null,
-    DAWfirstMovement:null,
-
-    DAWangleSound:null,
-    DAWinitialAngleSound:null,
-    DAWinitialAngle:null,
-    DAWTwistModulated:null,
-    DAWpermanentInitialTwist:null,
-    DAWlastSlip:null,
-    DAWoctavesBoosted:null,
-    DAWsignTwist:null,
-    DAWinitialNOTE:null,
-    DAWtouchId:null,
-    DAWfrequency:null,
-    DAWx:null,
-    DAWy:null
-    }
-    if(!("DAWarray" in window))window.DAWarray = []
-        
+    if(!("DAWSonicTouchArray" in window))    window.DAWSonicTouchArray=[];
         window.osmdSound = false;
     window.xTouch=0;
     window.yTouch=0;
@@ -285,33 +255,12 @@ function resetAll(){
     if(wadLOADED)
     {
                 for(var o=0;o<maxTouchSoundCount;o++){
-                     
-                     sound[o].stop()
-                     sound2[o].stop()
-                     
-                         zound[o].stop()
-                         zound2[o].stop()
-                     
-                     
-                         xound[o].stop()
-                         xound2[o].stop()
-                         
-                             tound[o].stop()
-                             tound2[o].stop()
+                    stopSounds(SonicTouchArray[o])
+
                     }
-                for(var o=0;o<DAWarray.length;o++){
-                    DAWarray[o].DAWsound.stop()
-                    DAWarray[o].DAWsound2.stop()
-                    
-                    DAWarray[o].DAWzound.stop()
-                    DAWarray[o].DAWzound2.stop()
-                    
-                    
-                    DAWarray[o].DAWxound.stop()
-                    DAWarray[o].DAWxound2.stop()
-                        
-                    DAWarray[o].DAWtound.stop()
-                    DAWarray[o].DAWtound2.stop()
+                for(var o=0;o<DAWSonicTouchArray.length;o++){
+                    stopSounds(DAWSonicTouchArray[o])
+
                   //  DAWnodeIndexForTouchBestFitIndex[o]="not set"
                    }
                 
@@ -321,7 +270,7 @@ function resetAll(){
                 }
 
     }
-                                         window.DAWarray = []
+                                         window.DAWSonicTouchArray=[];
 
                                          
                                          window.screenPressCoordX=Array(maxTouchSoundCount).fill(0);
