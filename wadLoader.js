@@ -492,7 +492,6 @@ function followSound(e, SonicTouchArrayK){
                               
 
     function setSounds(frequency,soundTouchComponent,initialAngleSound,volume,touchMagnitude,sound2,sound,zound2,zound,xound2,xound,tound2,tound){
-                            volume=1
                            let volumePrime=volume*((soundTouchComponent - initialAngleSound+8*pi)%(2*pi)/(2.*pi));
                            let volumeTWO =volume*(1.-(soundTouchComponent-initialAngleSound+8*pi)%(2*pi)/(2.*pi));
                           //  console.log(soundTouchComponent)
