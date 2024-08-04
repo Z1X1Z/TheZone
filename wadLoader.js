@@ -68,7 +68,8 @@ let SonicTouchObject =
     dawStartTime:null,
         
     }
-let SonicTouchArray  = Array(maxTouchSoundCount).fill(SonicTouchObject);
+let SonicTouchArray  = Array(maxTouchSoundCount);
+for(var ff=0;ff<SonicTouchArray.length;ff++)SonicTouchArray[ff]=Object.assign({},SonicTouchObject)
 
 function stopSounds(SonicTouchObjectN)
 {
@@ -106,9 +107,7 @@ function loadDAW(SonicTouchObjectO)
     
     playSounds(SonicTouchObjectO.xound2,SonicTouchObjectO.xound,SonicTouchObjectO.tound2,SonicTouchObjectO.tound,
                SonicTouchObjectO.DAWfrequency,SonicTouchObjectO.dawAMPLITUDE*window.touchVolume/3.,SonicTouchObjectO.dawAMPLITUDE)
-    
-   refreshNoteDAW(SonicTouchObjectO)
-    setTimeout(()=>{refreshNoteDAW(SonicTouchObjectO)},10)//timeout helps with volume optimization
+    //timeout helps with volume optimization
     return SonicTouchObjectO;
 }
 function bootSounds()
@@ -129,20 +128,22 @@ function bootSounds()
     
     for(var o=0;o<maxTouchSoundCount;o++)
     {SonicTouchArray[o]=loadDAW(SonicTouchArray[o]);
-        stopSounds(SonicTouchArray[o]);
+       stopSounds(SonicTouchArray[o]);
     }
         
-    for(var o=0;o<DAWSonicTouchArray.length;o++)DAWSonicTouchArray[o]=loadDAW(DAWSonicTouchArray[o])
+    for(var o=0;o<DAWSonicTouchArray.length;o++){
+        DAWSonicTouchArray[o]=loadDAW(DAWSonicTouchArray[o])
+        refreshNoteDAW(DAWSonicTouchArray[o])
+        setTimeout(()=>{refreshNoteDAW(DAWSonicTouchArray[o])},10)
+    }
     
 
 }
 let minutesTillRefresh=2;
 let playDuration =60*minutesTillRefresh*1000;
 function refreshOldInstrument(b){
-        console.log(typeof DAWSonicTouchArray[b])
     if(typeof DAWSonicTouchArray[b]=="object")
     {
-        console.log("refreshing")
         DAWSonicTouchArray[b]=loadDAW(DAWSonicTouchArray[b])
         //DAWarray[d].dawStartTime=date;
         setTimeout(()=>(refreshOldInstrument(b)),playDuration)
@@ -400,15 +401,12 @@ function followSound(e, SonicTouchArrayK){
                 slipConstrainedTwist=twistIncrement;
                 if(slipConstrainedPI>pi)slipConstrainedPI-=2*pi;
                 if(slipConstrainedTwist>12)slipConstrainedTwist-=24;
-                                                
             if(grabStar)
             {
-                 if(bfi!=null) {
+                 
                      SonicTouchArrayK[id].DAWinitialNOTE+=twistIncrement;//is this right???
                      SonicTouchArrayK[id].permanentInitialTwist +=twistIncrement;
-                 }
-                 else  SonicTouchArrayK[id].permanentInitialTwist +=twistIncrement;
-                 if(!window.DAW||bfi!=null)
+                                  if(!window.DAW||bfi!=null)
                      twist+=twistIncrement;
                  
 
@@ -430,16 +428,6 @@ function followSound(e, SonicTouchArrayK){
 
                                              
                                              
-                                             
-                                             
-                                             
-                                             
-                                             
-                                             
-                                             
-                                             
-                                             
-                                             
         function soundRoutine(id,x,y, SonicTouchArrayX){
                  
                     touchMagnitude=Math.sqrt(y*y+x*x)/(Math.min(heightPX,widthPX))*2.
@@ -459,40 +447,37 @@ function followSound(e, SonicTouchArrayK){
                         else soundTouchComponent=(SonicTouchArrayX[id].angleSound-SonicTouchArrayX[id].initialAngleSound+pi*8.)%(2*pi)+SonicTouchArrayX[id].initialAngleSound;
                  
                         twistFeed= SonicTouchArrayX[id].permanentInitialTwist+SonicTouchArrayX[id].octavesBoosted+SonicTouchArrayX[id].twistModulated;
-                 
                         let    touchNote=   soundTouchComponent/pi/2*12;
                         let frequency = Math.pow(2.,((touchNote-twistFeed/2.)-1.)/12.
                         )*window.ConcertKey;
 
 
-           if(isFinite(frequency)&&typeof SonicTouchArrayX[id].sound=="object"){
-                           if(bfi==null){
-                               setSounds(frequency,soundTouchComponent,SonicTouchArrayX[id].initialAngle,volume,touchMagnitude, SonicTouchArrayX[id].sound2,SonicTouchArrayX[id].sound,SonicTouchArrayX[id].zound2,SonicTouchArrayX[id].zound,SonicTouchArrayX[id].xound2,SonicTouchArrayX[id].xound,SonicTouchArrayX[id].tound2,SonicTouchArrayX[id].tound);
-                           }
-                             else
-                             {
-                                     bfi.dawAMPLITUDE=touchMagnitude;//testarContinuous;//
-                                     bfi.DAWfrequency=frequency;
-                                     bfi.dawNOTE=touchNote*2-twistFeed;
-                                 if(grabStar)for(var d = 0;d<SonicTouchArrayX.length;d++) refreshNoteDAW(SonicTouchArrayX[d]);
-                                    else  setSounds(frequency,soundTouchComponent,bfi.initialAngle,bfi.dawAMPLITUDE*window.touchVolume/2.,bfi.dawAMPLITUDE,
-                                                   bfi.sound2,bfi.sound,bfi.zound2,bfi.zound,bfi.xound2,bfi.xound,bfi.tound2,bfi.tound);
+                                                     if(isFinite(frequency)&&typeof SonicTouchArrayX[id].sound=="object"){
+                            if(isFinite(frequency)&&typeof SonicTouchArrayX[id].sound=="object"){
+                                             
+                                             SonicTouchArrayX[id].dawAMPLITUDE=touchMagnitude;//testarContinuous;//
+                                             SonicTouchArrayX[id].DAWfrequency=frequency;
+                                             SonicTouchArrayX[id].dawNOTE=touchNote*2-twistFeed;
+                                             if(grabStar)for(var d = 0;d<SonicTouchArrayX.length;d++) refreshNoteDAW(SonicTouchArrayX[d]);
 
-                             }
-                         }
-                                                    SonicTouchArrayX[id].firstMovement=false;
-                                                    return SonicTouchArrayX;
+                                             else
+                                                setSounds(frequency,soundTouchComponent,SonicTouchArrayX[id].initialAngle,SonicTouchArrayX[id].dawAMPLITUDE*window.touchVolume/2.,SonicTouchArrayX[id].dawAMPLITUDE, SonicTouchArrayX[id].sound2,SonicTouchArrayX[id].sound,SonicTouchArrayX[id].zound2,SonicTouchArrayX[id].zound,SonicTouchArrayX[id].xound2,SonicTouchArrayX[id].xound,SonicTouchArrayX[id].tound2,SonicTouchArrayX[id].tound);
+
+                                          }
+                                                                   }
+                                                                                              SonicTouchArrayX[id].firstMovement=false;
+                                                                                              return SonicTouchArrayX;
+                                           
 
                }
                                              
                                              
-                                                    
-                                                    
+                              
 
     function setSounds(frequency,soundTouchComponent,initialAngleSound,volume,touchMagnitude,sound2,sound,zound2,zound,xound2,xound,tound2,tound){
                            let volumePrime=volume*((soundTouchComponent - initialAngleSound)%(2*pi)/(2.*pi));
                            let volumeTWO =volume*(1.-(soundTouchComponent-initialAngleSound)%(2*pi)/(2.*pi));
-
+                       
          /*if (volumePrime==0.)
          volumePrime=.00000000001;
          else if (volumeTWO==0.)
@@ -549,24 +534,24 @@ function followSound(e, SonicTouchArrayK){
                                                     let slipConstrainedPI =0;
                                              
                             function bump(loops,id,x,y,SonicTouchArrayZ){
+                            
+                            let twistBump,twistBumpPI;
+                            if(SonicTouchArrayZ[id].firstMovement)
+                            {
+                                twistBumpPI=slipConstrainedPI;
+                                twistBump=slipConstrainedTwist
+                            }
+                            else
+                            {
+                                twistBumpPI=twistIncrementPI
+                                twistBump=twistIncrement
+                            }
+                            
                                for(var i = 0; i<loops;i++)  {
                                    
-                                   let twistBump,twistBumpPI;
-                                   if(SonicTouchArrayZ[id].firstMovement)
-                                   {
-                                       twistBumpPI=slipConstrainedPI;
-                                       twistBump=slipConstrainedTwist
+                                   if (i==id)    {                               SonicTouchArrayZ[id].angleSound=(SonicTouchArrayZ[id].angleSound+twistBumpPI-SonicTouchArrayZ[id].initialAngleSound)%(2*pi)+SonicTouchArrayZ[id].initialAngleSound;
                                    }
-                                   else
-                                   {
-                                       twistBumpPI=twistIncrementPI
-                                       twistBump=twistIncrement
-                                   }
-                                   
-                                   if (i==id)                                   SonicTouchArrayZ[id].angleSound=(SonicTouchArrayZ[id].angleSound+twistBumpPI-SonicTouchArrayZ[id].initialAngleSound)%(2*pi)+SonicTouchArrayZ[id].initialAngleSound;
-                                   else{
-                                       
-
+                                   else  {
                                        SonicTouchArrayZ[i].twistModulated=(SonicTouchArrayZ[i].twistModulated+twistBump+24)%24
                                        SonicTouchArrayZ[i].initialAngleSound=(SonicTouchArrayZ[i].initialAngleSound-twistBumpPI-SonicTouchArrayZ[i].initialAngle-pi)%(2*pi)+SonicTouchArrayZ[i].initialAngle+pi;
                                       // initialAngleSoundZ[i]=(initialAngleSoundZ[i]-twistIncrementPI);
@@ -578,7 +563,7 @@ function followSound(e, SonicTouchArrayK){
                                         console.log(initialAngleSoundZ[i]+"initial angle"+angleSoundZ[i])
                                         }
                                         */
-                                        
+
                                    }
                                }
                                let twisteR=(SonicTouchArrayZ[id].angleSound-SonicTouchArrayZ[id].initialAngleSound+8*pi)%(2*pi);
