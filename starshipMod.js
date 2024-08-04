@@ -1564,7 +1564,6 @@ function runOSMD (){
                                           let lastTIMEUNIFORM = 0.;
                                           
                                           function animate( timestamp ) {
-                                    
                                     if(window.streaming)
                                     {
                                         const context = videoCanvas.getContext("2d");
@@ -1807,8 +1806,16 @@ function runOSMD (){
         
         for(var v = 0; v<maxTouchSoundCount;v++){
             
-            initialTwist[v]-=timeTwistIncrement;
-            permanentInitialTwist[v]-=timeTwistIncrement;
+           // SonicTouchArray[v].initialTwist[v]-=timeTwistIncrement;
+           // SonicTouchArray[v].permanentInitialTwist[v]-=timeTwistIncrement;
+            SonicTouchArray[v].twistModulated-=timeTwistIncrement;
+
+        }
+        
+        for(var v = 0; v<DAWSonicTouchArray.length;v++){
+            DAWSonicTouchArray[v].twistModulated-=timeTwistIncrement;
+            //DAWSonicTouchArray[v].initialTwist[v]-=timeTwistIncrement;
+          //  DAWSonicTouchArray[v].permanentInitialTwist[v]-=timeTwistIncrement;
         }
     }
                                           lastTIMEUNIFORM =uniforms[ "time" ].value;

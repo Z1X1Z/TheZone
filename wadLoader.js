@@ -404,7 +404,7 @@ function followSound(e, SonicTouchArrayK){
             if(grabStar)
             {
                  
-                     SonicTouchArrayK[id].DAWinitialNOTE+=twistIncrement;//is this right???
+                     SonicTouchArrayK[id].DAWinitialNOTE+=twistIncrement;//is this right??? with initialAngleSound alteration in bump
                      SonicTouchArrayK[id].permanentInitialTwist +=twistIncrement;
                     if(!window.DAW)for(var i = 0; i<DAWSonicTouchArray.length;i++)
                     DAWSonicTouchArray[i].permanentInitialTwist+=twistIncrement
@@ -570,7 +570,7 @@ function followSound(e, SonicTouchArrayK){
                                    }
                                    else  {
                                        SonicTouchArrayZ[i].twistModulated=(SonicTouchArrayZ[i].twistModulated+twistBump+24)%24
-                                       SonicTouchArrayZ[i].initialAngleSound=(SonicTouchArrayZ[i].initialAngleSound-twistBumpPI-SonicTouchArrayZ[i].initialAngle-pi)%(2*pi)+SonicTouchArrayZ[i].initialAngle+pi;
+                                       SonicTouchArrayZ[i].initialAngleSound=(SonicTouchArrayZ[i].initialAngleSound+twistBumpPI-SonicTouchArrayZ[i].initialAngle-pi)%(2*pi)+SonicTouchArrayZ[i].initialAngle+pi;
                                       // initialAngleSoundZ[i]=(initialAngleSoundZ[i]-twistIncrementPI);
                                      // angleSoundZ[i]=(angleSoundZ[i]-slipConstrained);
                                         /*if(i!=id)
