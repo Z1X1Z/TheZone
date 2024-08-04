@@ -252,7 +252,7 @@ function startSound(e){
                  bfi=loadDAW(DAWSonicTouchArray[DAWnodeIndexForTouchBestFitIndex[id]])
                               //       bfi.dawStartTime=Date.now()
                  
-              //  refreshOldInstrument(DAWnodeIndexForTouchBestFitIndex[id]);//may be better called in batches, but here we're going for individually
+               refreshOldInstrument(DAWnodeIndexForTouchBestFitIndex[id]);//may be better called in batches, but here we're going for individually
 
         
         setDAWdependantSize()
