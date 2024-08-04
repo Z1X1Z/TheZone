@@ -1807,15 +1807,15 @@ function runOSMD (){
         for(var v = 0; v<maxTouchSoundCount;v++){
             
            // SonicTouchArray[v].initialTwist[v]-=timeTwistIncrement;
-           // SonicTouchArray[v].permanentInitialTwist[v]-=timeTwistIncrement;
-            SonicTouchArray[v].twistModulated-=timeTwistIncrement;
+            SonicTouchArray[v].permanentInitialTwist[v]-=timeTwistIncrement;
+           // SonicTouchArray[v].twistModulated-=timeTwistIncrement;
 
         }
         
         for(var v = 0; v<DAWSonicTouchArray.length;v++){
-            DAWSonicTouchArray[v].twistModulated-=timeTwistIncrement;
+          //  DAWSonicTouchArray[v].twistModulated-=timeTwistIncrement;
             //DAWSonicTouchArray[v].initialTwist[v]-=timeTwistIncrement;
-          //  DAWSonicTouchArray[v].permanentInitialTwist[v]-=timeTwistIncrement;
+            DAWSonicTouchArray[v].permanentInitialTwist[v]-=timeTwistIncrement;
         }
     }
                                           lastTIMEUNIFORM =uniforms[ "time" ].value;
