@@ -406,7 +406,7 @@ function followSound(e, SonicTouchArrayK){
                  
                      SonicTouchArrayK[id].DAWinitialNOTE+=twistIncrement;//is this right???
                      SonicTouchArrayK[id].permanentInitialTwist +=twistIncrement;
-                    if(bfi==null)for(var i = 0; i<DAWSonicTouchArray.length;i++)
+                    if(!window.DAW)for(var i = 0; i<DAWSonicTouchArray.length;i++)
                     DAWSonicTouchArray[i].permanentInitialTwist+=twistIncrement
                     
                         if(!window.DAW||bfi!=null)
