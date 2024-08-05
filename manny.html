@@ -326,7 +326,14 @@ let maxLetterDepth=-1;
                <label for="TouchVolume">Touch Volume (0-1?):</label>
               <input type="number" id="TouchVolume" name="TouchVolume" class="num" onkeydown="
                                    number = true;
-                   window.touchVolume=document.getElementById('TouchVolume').value">
+                   window.touchVolume=document.getElementById('TouchVolume').value
+            if(window.wadLOADED)
+                for(var d = 0;d<DAWSonicTouchArray.length;d++)
+                {
+                    DAWSonicTouchArray[d]=refreshNoteDAW(DAWSonicTouchArray[d]);
+                    if(bfi!=null) SonicTouchArrayX=DAWSonicTouchArray
+                }
+">
                   <br>
                   
                <label for="RadialWarp">Magnify rate of the octave, radially by</label>
