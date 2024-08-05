@@ -4368,8 +4368,8 @@ if(starOnDot>=1){
              pixelStarship = audioEq(uVuMinCenter);
              icicles = waveForm();
              vec2 adjustedvUv=vec2(vUv.x,vUv.y-pillarScale*2./max(resolution.x,resolution.y));
-             linearFrequency=linearFrequencyEQ(adjustedvUv);
-             linearFrequency-=linearFrequencyEQ(vec2(1.-adjustedvUv.x,adjustedvUv.y));
+             linearFrequency=linearFrequencyEQ(adjustedvUv)*flipStar*brelued;
+             linearFrequency-=linearFrequencyEQ(vec2(1.-adjustedvUv.x,adjustedvUv.y))*flipStar*brelued;
              linearFrequency/=2.;
              vec4 starBuffer = vec4(0.);
              for (float x = 0.; x<12.;x++) starBuffer+=starns(uVu,x);
