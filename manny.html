@@ -1783,7 +1783,25 @@ uniform float exponentialPetals;
        
     return ret;
     }
-    
+                                                        float linearEQsize = 1./4.;
+    vec4 linearFrequencyEQ(vec2 h)
+                {
+                vec4 ret=vec4(0.);//1.,.5,1.,1.);
+                
+                if(h.x<linearEQsize){
+
+                // vec2 flatScreen=1.-vUv;
+                // flatScreen*=2.;
+                float frAmp = texture2D(micIn, vec2(h.y,0.)).r*linearEQsize;
+                // float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*2.,2.)/2./
+                //  pow(2.,(note)/12.+4.)*440. ,0.)).r;//adjusted to pitch
+
+                if (frAmp>h.x) ret = vec4(sign(frAmp));
+                }
+                //           else ret=vec4(1.);
+
+                return ret;
+              }
     vec4 audioEq( vec2 uv )//Shekina Glory
     {
 
@@ -3894,9 +3912,11 @@ return b+legs(p,t/33.3);}
           }
 
   //function library: manny body legs robe musculature torso face excelsior shiny lion ox man eagle eaglePerched fourCreatures heart anomalyze spin x
+                      float pillarScale = 25.;
 
 vec3 sevenPillars(vec2 p){
-    float pillarHeight = 25./max(resolution.x,resolution.y);
+                      float pillarHeight = pillarScale/max(resolution.x,resolution.y);
+
     float screenBase = pillarHeight;
 
     p.x-=screenBase;
@@ -4338,6 +4358,7 @@ if(starOnDot>=1){
                     float mnyWhite=1.;
          float pixelShipGrey = 0.;
          vec4 icicles=vec4(0.);
+         vec4 linearFrequency=vec4(0.);
 
          if (pixelSTARon)
     {
@@ -4346,6 +4367,10 @@ if(starOnDot>=1){
                        vec2 uVuMinCenter=-vUvCentered/(min(resolution.x,resolution.y)/resolution.yx);
              pixelStarship = audioEq(uVuMinCenter);
              icicles = waveForm();
+             vec2 adjustedvUv=vec2(vUv.x,vUv.y*(1.-pillarScale/max(resolution.x,resolution.y)));
+             linearFrequency=linearFrequencyEQ(adjustedvUv);
+             linearFrequency+=linearFrequencyEQ(vec2(1.-adjustedvUv.x,adjustedvUv.y));
+             linearFrequency/=2.;
              vec4 starBuffer = vec4(0.);
              for (float x = 0.; x<12.;x++) starBuffer+=starns(uVu,x);
              
@@ -4388,7 +4413,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                        vec4 goodies = vec4(
                                            mnyX+clamp(heartWarmed*isColoredMultiplier,0.,1.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
-                                          ( pillar+icicles.xyz)*(1.-pixelShipGrey*40.)
+                                          ( pillar+icicles.xyz+linearFrequency.xyz)*(1.-pixelShipGrey*40.)
                                            +yourFace.xyz
                     +//clamp((
                            mny
