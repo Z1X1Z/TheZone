@@ -310,9 +310,9 @@ function startSound(e){
         //sound[id].volume=0.;
         //sound2[id].volume=volume;
                                  
-if(!window.muteVoiceTouchVolume){
-        if(typeof SonicTouchArray[id].sound=="object"&&bfi==null)
+        if(typeof SonicTouchArray[id].sound=="object"&&bfi==null&&((window.touchMode&&!window.muteTouchTouchVolume)||(!window.touchMode&&!window.muteVoiceTouchVolume)))
         {
+            console.log('there')
             stopSounds(SonicTouchArray[id])
 
             if(isFinite(volume)&&isFinite(frequency)&&frequency>0){
@@ -327,7 +327,7 @@ if(!window.muteVoiceTouchVolume){
             }
 
     }
-}
+
                                              
                                              function playSounds(sound2,sound,zound2,zound,frequency,volume,touchMagnitude){
                     
@@ -444,7 +444,6 @@ function followSound(e, SonicTouchArrayK){
                         SonicTouchArrayX= bump(SonicTouchArrayX.length,id,x,y, SonicTouchArrayX)
                                    
                     
-
                         let twistFeed;
                         let soundTouchComponent = 0.;
                         if(!grabStar) soundTouchComponent= SonicTouchArrayX[id].angleSound
@@ -456,8 +455,8 @@ function followSound(e, SonicTouchArrayK){
                         )*window.ConcertKey;
 
                                                      if(isFinite(frequency)&&typeof SonicTouchArrayX[id].sound=="object"){
-                            if(isFinite(frequency)&&typeof SonicTouchArrayX[id].sound=="object"){
-                                
+                            if(isFinite(frequency)&&typeof SonicTouchArrayX[id].sound=="object"&&((window.touchMode&&!window.muteTouchTouchVolume)||(!window.touchMode&&!window.muteVoiceTouchVolume))){
+                                console.log
                                 SonicTouchArrayX[id].dawAMPLITUDE=touchMagnitude;//testarContinuous;//
                                 SonicTouchArrayX[id].DAWfrequency=frequency;
                                 SonicTouchArrayX[id].dawNOTE=touchNote*2-twistFeed;
