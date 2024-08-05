@@ -13,6 +13,7 @@ const secondsToEdge=window.pixelShaderSize/4./pixelShaderToStarshipRATIO;
 window.uniformsInitial = {
 coreDilation:{value:0.},
 fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:1024./44100.},//actually 2/nyquist
+    
 zoomOutRatchetThreshold:{value:0.},
 radialWarp:{value:1.},
 pixelSTARon:{value:true},
@@ -203,8 +204,8 @@ function resetAll(){
     window.Oreo=true;
             window.shouldShowStar = true;
             window.flame = false;
-            window.muteTouchTouchVolume = true;
-            window.muteVoiceTouchVolume = false;
+            window.muteTouchTouchVolume = false;
+            window.muteVoiceTouchVolume = true;
             window.grabStar = false;
 
 
@@ -429,10 +430,8 @@ function callKey(event){
     else if(key == "v" && event.ctrlKey) window.FeedbackSound =  !window.FeedbackSound;
     else if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=(uniforms.starOnDot.value+1)%3;
     else if (key=="p" && event.ctrlKey)spirographMODE = (spirographMODE+1)%3;//color mode 3 seems obsolete
-    else if (key=="m" && event.ctrlKey)
-    {uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value;
+    //else if (key=="m" && event.ctrlKey)uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value;
 
-    }
     else if (event.ctrlKey&&key=="a")uniforms[ "colorCombo" ].value = 11;
     else if (event.ctrlKey&&key=="j")window.Oreo=!window.Oreo;
     else if (event.ctrlKey&&key=="t")window.shouldShowStar=!window.shouldShowStar;

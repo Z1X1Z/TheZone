@@ -320,11 +320,8 @@ function startSound(e){
                 playSounds(SonicTouchArray[id].xound2,SonicTouchArray[id].xound,SonicTouchArray[id].tound2,SonicTouchArray[id].tound,frequency,volume,touchMagnitude)
             }
         }
-        else if(bfi!=null)
-            {
-                bfi.DAWfrequency=frequency;
-                bfi=refreshNoteDAW(bfi)
-            }
+        else if(bfi!=null) bfi=refreshNoteDAW(bfi)
+            
 
     }
 
