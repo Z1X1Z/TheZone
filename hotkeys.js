@@ -204,8 +204,8 @@ function resetAll(){
     window.Oreo=true;
             window.shouldShowStar = true;
             window.flame = false;
-            window.muteTouchTouchVolume = false;
-            window.muteVoiceTouchVolume = true;
+            window.muteTouchTouchVolume = true;
+            window.muteVoiceTouchVolume = false;
             window.grabStar = false;
 
 
