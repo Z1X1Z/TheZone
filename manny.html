@@ -4460,11 +4460,22 @@ vec4 tree = vec4( clamp(
               ,1.);
         
           vec4 fin = (+goodies+tree+pixelShipGrey)*isBlack*isBlackStaRivers*isBlackDOT+(isBlack-1.)+(isBlackDOT-1.)+(isBlackStaRivers-1.);
-          if(fin.r>.9&&fin.g>.9&&fin.b>.9)fin-=(isGrey+isGreyDOT+pixelShipGrey+isGreyStaRivers+pixelShipGrey)*1.5;
-          else if(fin.r<.1&&fin.g<.1&&fin.b<.1)fin+=(isGrey+isGreyDOT+isGreyStaRivers+pixelShipGrey)*1.5;
+          float greyness=(isGrey+isGreyDOT+pixelShipGrey+isGreyStaRivers+pixelShipGrey)*1.5;
+
+          if(fin.r>.9&&fin.g>.9&&fin.b>.9)
+          {
+              fin-=greyness;
+              
+              }
+          else if(fin.r<.1&&fin.g<.1&&fin.b<.1)
+          {
+              
+                  fin+=greyness;
+          }
+          fin+=(isGrey+isGreyDOT+isGreyStaRivers+pixelShipGrey)*1.5;
           vec3 confraculator = vec3(1.);
           if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
-          fin=clamp(fin -(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z)*4.,0.,1.)+vec4(hypnoticHarmonicCircles,1.)+ss*vec4(starshipMultiplier,1.)-faceFromShip;
+          fin=clamp(fin -(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z)*4.,0.,1.)+vec4(hypnoticHarmonicCircles,1.)+(ss-greyness)*vec4(starshipMultiplier,1.)-faceFromShip;
 gl_FragColor=
 //vec4(clamp(mny+zoomer,0.,1.),1.);
 fin/vec4(confraculator
