@@ -312,7 +312,6 @@ function startSound(e){
                                  
         if(typeof SonicTouchArray[id].sound=="object"&&bfi==null&&((window.touchMode&&!window.muteTouchTouchVolume)||(!window.touchMode&&!window.muteVoiceTouchVolume)))
         {
-            console.log('there')
             stopSounds(SonicTouchArray[id])
 
             if(isFinite(volume)&&isFinite(frequency)&&frequency>0){
@@ -452,7 +451,7 @@ function followSound(e, SonicTouchArrayK){
                         )*window.ConcertKey;
 
                                                      if(isFinite(frequency)&&typeof SonicTouchArrayX[id].sound=="object"){
-                            if(isFinite(frequency)&&typeof SonicTouchArrayX[id].sound=="object"&&((window.touchMode&&!window.muteTouchTouchVolume)||(!window.touchMode&&!window.muteVoiceTouchVolume))){
+                            if(isFinite(frequency)&&typeof SonicTouchArrayX[id].sound=="object"){
                                 console.log
                                 SonicTouchArrayX[id].dawAMPLITUDE=touchMagnitude;//testarContinuous;//
                                 SonicTouchArrayX[id].DAWfrequency=frequency;
@@ -460,7 +459,7 @@ function followSound(e, SonicTouchArrayK){
                                 
                                 if(grabStar)
                                 {
-                                    for(var d = 0;d<SonicTouchArray.length;d++)
+                                    if((window.touchMode&&!window.muteTouchTouchVolume)||(!window.touchMode&&!window.muteVoiceTouchVolume))for(var d = 0;d<SonicTouchArray.length;d++)
                                     {
                                         SonicTouchArray[d]=refreshNoteDAW(SonicTouchArray[d]);
                                         if(bfi==null) SonicTouchArrayX=SonicTouchArray
@@ -473,7 +472,7 @@ function followSound(e, SonicTouchArrayK){
                                     }
                                     
                                 }
-                                             else
+                                             else if (bfi!=null&&(window.touchMode&&!window.muteTouchTouchVolume)||(!window.touchMode&&!window.muteVoiceTouchVolume))
                                                 setSounds(frequency,soundTouchComponent,SonicTouchArrayX[id].initialAngleSound,SonicTouchArrayX[id].dawAMPLITUDE*window.touchVolume/2.,SonicTouchArrayX[id].dawAMPLITUDE, SonicTouchArrayX[id].sound2,SonicTouchArrayX[id].sound,SonicTouchArrayX[id].zound2,SonicTouchArrayX[id].zound,SonicTouchArrayX[id].xound2,SonicTouchArrayX[id].xound,SonicTouchArrayX[id].tound2,SonicTouchArrayX[id].tound);
 
                                           }
