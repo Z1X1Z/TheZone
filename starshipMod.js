@@ -1688,7 +1688,7 @@ function runOSMD (){
                            const y = widt*-Math.cos(rpio2);
                            const xr = lengtOriginal*-Math.sin(arm);
                            const yr = lengtOriginal*-Math.cos(arm);
-                           const depth = -1.;//+lengtOriginal/maxToMin*starShipDepthInSet;//shortest bar on top
+                           const depth = -.0;//+lengtOriginal/maxToMin*starShipDepthInSet;//shortest bar on top
                  /*          DAWstarColorAttribute.setXYZW(DAWstarStride,.5,.5,.5,1.)
                            DAWstarColorAttribute.setXYZW(DAWstarStride+1,vop.r,vop.g,vop.b,.0)
                            DAWstarColorAttribute.setXYZW(DAWstarStride+2,vop.r,vop.g,vop.b,1.)
@@ -2279,12 +2279,12 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                             {
                                 const nt = Math.round(g/EldersLeg*12+6)%12;
                                 if (nt==7||nt==5||nt==2||nt==0||nt==10) BlackOrWhiteFRET=-1.;
-                                else BlackOrWhiteFRET=1.;
+                                else BlackOrWhiteFRET=.875;
                             }
                                   
                                   const vop = new THREE.Color();
                               let h = ((20/24.*EldersLeg*uniforms.brelued.value-g)*uniforms.brelued.value)%EldersLeg/EldersLeg;
-                               vop.setHSL(h,BlackOrWhiteFRET,BlackOrWhiteFRET/2.+.25);
+                               vop.setHSL(h,1.,BlackOrWhiteFRET);
                                            const pureColor = new THREE.Color();
                                        
                                            pureColor.setHSL(h,1.,.5);
