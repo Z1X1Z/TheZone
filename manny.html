@@ -1784,19 +1784,27 @@ uniform float exponentialPetals;
     return ret;
     }
                                                         float linearEQsize = 1./4.;
-    vec4 linearFrequencyEQ(vec2 h)
+    vec3 linearFrequencyEQ(vec2 h)
                 {
-                vec4 ret=vec4(0.);//1.,.5,1.,1.);
+                vec3 ret=vec3(0.);//1.,.5,1.,1.);
                 
                 if(h.x<linearEQsize){
-
+                    
+              float freq =h.y*sampleRate;
+            float note =12.*log(freq)/log(2.)+49.;
+                             
                 // vec2 flatScreen=1.-vUv;
                 // flatScreen*=2.;
                 float frAmp = texture2D(micIn, vec2(h.y,0.)).r*linearEQsize;
                 // float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*2.,2.)/2./
                 //  pow(2.,(note)/12.+4.)*440. ,0.)).r;//adjusted to pitch
+                 if (frAmp>h.x) ret = hsv2rgb(
+                                             vec3(
+                                                  mod((-note-1.)*flipStar*brelued+4.,12.)/12.//+3.-flipStar/12.
+                                                    ,1.,1.
+                                                  ));//vec4(mod(note,12.)/12.);
+                    //                              else if(frAmp*2.>h.x) ret =vec3(sign(vUv.x-.5));
 
-                if (frAmp>h.x) ret = vec4(sign(frAmp));
                 }
                 //           else ret=vec4(1.);
 
@@ -2029,7 +2037,7 @@ ret= vec4(clamp(
       // if(g.x*g.x+g.y*g.y<40.)
       //if(abs(g.y)<9.)
       float isEscaped = 0.;
-      for (int f=0;f<21;f+=1)if(abs(z.y)>17.7&&(f>3||f==1)){
+      if(abs(g.y)<4.)for (int f=0;f<21;f+=1)if(abs(z.y)>17.7&&(f>3||f==1)){
           if (f==1){l=0.;break;}
           l= -1.*(z.y)*sign(g.y);
          isEscaped=-2.;//length(z)/40.;//clouds and face
@@ -4358,7 +4366,7 @@ if(starOnDot>=1){
                     float mnyWhite=1.;
          float pixelShipGrey = 0.;
          vec4 icicles=vec4(0.);
-         vec4 linearFrequency=vec4(0.);
+         vec3 linearFrequency=vec3(0.);
 
          if (pixelSTARon)
     {
@@ -4369,9 +4377,9 @@ if(starOnDot>=1){
              icicles = waveForm();
              float sevenPillarShrink = pillarScale*2./max(resolution.x,resolution.y);
              vec2 adjustedvUv=vec2(vUv.x,vUv.y*(1.-sevenPillarShrink)-sevenPillarShrink);
-             linearFrequency=linearFrequencyEQ(adjustedvUv)*flipStar*brelued;
-             linearFrequency-=linearFrequencyEQ(vec2(1.-adjustedvUv.x,adjustedvUv.y))*flipStar*brelued;
-             linearFrequency/=2.;
+             linearFrequency=linearFrequencyEQ(adjustedvUv);
+             linearFrequency+=linearFrequencyEQ(vec2(1.-adjustedvUv.x,adjustedvUv.y));
+            // linearFrequency/=2.;
              vec4 starBuffer = vec4(0.);
              for (float x = 0.; x<12.;x++) starBuffer+=starns(uVu,x);
              
@@ -4414,7 +4422,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                        vec4 goodies = vec4(
                                            mnyX+clamp(heartWarmed*isColoredMultiplier,0.,1.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
-                                          ( pillar+icicles.xyz+linearFrequency.xyz)*(1.-pixelShipGrey*40.)
+                                          ( pillar+icicles.xyz+linearFrequency)*(1.-pixelShipGrey*40.)
                                            +yourFace.xyz
                     +//clamp((
                            mny
@@ -4430,6 +4438,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                                  -HEART.b
                                                 // +(-HEART.b-HEART.r-HEART.g)/4.
                                                  -AM.r*24.
+                                                 +(-linearFrequency.r-linearFrequency.g-linearFrequency.b)*4.
                                                  +bigEyes.xyz*largeEyeColor
                                                  -(yourFace.x+yourFace.y+yourFace.z)/256./3.
                         -(ARTICLE.x+ARTICLE.y+ARTICLE.z)*4.
