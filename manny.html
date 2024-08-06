@@ -1790,22 +1790,24 @@ uniform float exponentialPetals;
                 
                 if(h.x<linearEQsize){
                     
-              float freq =h.y*sampleRate;
-            float note =12.*log(freq)/log(2.)+49.;
-                             
                 // vec2 flatScreen=1.-vUv;
                 // flatScreen*=2.;
                 float frAmp = texture2D(micIn, vec2(h.y,0.)).r*linearEQsize;
                 // float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*2.,2.)/2./
                 //  pow(2.,(note)/12.+4.)*440. ,0.)).r;//adjusted to pitch
                  if (frAmp>h.x)
+                 {
                  ret = hsv2rgb(
+                               
+                         float freq =h.y*sampleRate;
+                       float note =12.*log(freq)/log(2.)+49.;
+                                        
                                              vec3(
                                                   mod((-note-2.)*flipStar*brelued+4.,12.)/12.//+3.-flipStar/12.
                                                     ,1.,1.
                                                   ));//vec4(mod(note,12.)/12.);
                     //                              else if(frAmp*2.>h.x) ret =vec3(sign(vUv.x-.5));
-
+}
                 }
                 //           else ret=vec4(1.);
 
