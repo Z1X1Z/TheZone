@@ -1,7 +1,9 @@
 var shaderScale,dilate, coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals
-,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset;
+,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta;
 function setUniformsToPlainName(){
     Inherited=uniforms.Inherited.value;
+    twelveGates=uniforms.twelveGates.value;
+    twelveGatesMeta=uniforms.twelveGatesMeta.value;
     clvrVariant1=uniforms.clvrVariant1.value;
     clvrVariant2=uniforms.clvrVariant2.value;
     clvrVariant3=uniforms.clvrVariant3.value;
@@ -59,7 +61,13 @@ function tol( j,  t){
     var pWithoutChiralizer = p.clone();
 if(chirality==-1){p=new THREE.Vector2(p.y,p.x);}
     if(cloverOffset!=0.)p=spin(p,cloverOffset*Math.PI*2.);
-
+    
+    if(twelveGates)
+    {
+    var angle = Math.atan2(p.y,p.x);
+    if(((angle/Math.PI+2.)*6.+.5)%2.>1.)p=spin(p,Math.PI/6.);
+           }
+           
 var lfc = coords.length();//freed(coords).length();
 
 
@@ -553,6 +561,13 @@ for(var i=0;i<40; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.)))
    && 0.<=hyperCoreBoosted)
 {
+    
+    if(twelveGatesMeta)
+    {
+    var angleS = Math.atan2(s.y,s.x);
+    if(((angleS/Math.PI+2.)*6.+.5)%2.>1.)s=spin(s,Math.PI/6.);
+    }
+           
    if(superStable)
     {
                 if(i==0){

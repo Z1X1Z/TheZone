@@ -822,28 +822,6 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                     <input type="checkbox" id="multiplicatorNexus" name="t"  onclick= "uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value">
                         <label for="multiplicatorNexus">Slippery Spokes![,m]</label><br>
 -->
-                         <input type="checkbox" id="Reverse Colors" name="t"  onclick= "
-                             key  = ';';
-                             callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                          <label for="Reverse Colors">Reverse Colors![;]</label><br>
-
-                          <input type="checkbox" id="Remediate Colors" name="t"  onclick= "
-                              key  = 'R';
-                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                           <label for="Remediate Colors">Remediate Colors![R]</label><br>
-
-                           <input type="checkbox" id="Inherited Colors" name="t"  onclick= "
-                               key  = 'K';
-                               callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                            <label for="Inherited Colors">Inherited Colors?![K]</label><br>
-
-
-                            <input type="checkbox" id="Radial Rainbow Clover" name="t"  onclick= "
-                                key  = 'M';
-                                callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                             <label for="Radial Rainbow Clover">Radial Rainbow Clover![M]</label><br>
-
-
                            <input type="checkbox" id="Refractelate" name="t"  onclick= "
                                key  = '!';
                                callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -881,6 +859,16 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                                  <label for="Continuum Clover">Continuum Clover![&]</label><br>
                                  
+                                 <input type="checkbox" id="twelveGates" name="t"  onclick= "
+                                     key  = 'n';
+                                     callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'keyCode':key.charCodeAt(0)}));">
+                                     <label for="twelveGates">Double Gates?![.m]</label><br>
+
+                                     <input type="checkbox" id="twelveGatesMeta" name="t"  onclick= "
+                                         key  = 'm';
+                                         callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'keyCode':key.charCodeAt(0)}));">
+                                         <label for="twelveGatesMeta">Double Gates Meta?![.m]</label><br>
+
                                  <input type="checkbox" id="field Power Boost" name="t"  onclick= "
                                      key  = 'x';
                                      callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
@@ -939,6 +927,28 @@ uniforms.baseN.value=document.getElementById('Base Number').value">
                 [q]
 
                 <br>
+
+                <input type="checkbox" id="Reverse Colors" name="t"  onclick= "
+                    key  = ';';
+                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                 <label for="Reverse Colors">Reverse Colors![;]</label><br>
+
+                 <input type="checkbox" id="Remediate Colors" name="t"  onclick= "
+                     key  = 'R';
+                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                  <label for="Remediate Colors">Remediate Colors![R]</label><br>
+
+                  <input type="checkbox" id="Inherited Colors" name="t"  onclick= "
+                      key  = 'K';
+                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                   <label for="Inherited Colors">Inherited Colors?![K]</label><br>
+
+
+                   <input type="checkbox" id="Radial Rainbow Clover" name="t"  onclick= "
+                       key  = 'M';
+                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                    <label for="Radial Rainbow Clover">Radial Rainbow Clover![M]</label><br>
+
 
 
                 <form>
@@ -1649,6 +1659,8 @@ void main(){
     
     uniform bool Spoker;
     uniform bool spokelover;
+    uniform bool twelveGates;
+    uniform bool twelveGatesMeta;
     uniform bool dilate;
 
     uniform bool continuumClover;
@@ -2465,6 +2477,11 @@ vec3 tol(vec2 p, vec2 t){
                         
                          vec2 pWithoutChiralizer = p;
                          if(chirality==-1){p=p.yx;}
+                         if(twelveGates)
+                         {
+                         float angle = atan(p.y,p.x);
+                         if(mod((angle/PI+2.)*6.+.5,2.)>1.)p=spin2(p,PI/6.);
+                                }
                          if(cloverOffset!=0.)p=spin2(p,cloverOffset*PI2);
 vec2 colorAccumulator =vec2(1.);
 vec3 heartColors = vec3(0.);
@@ -2700,7 +2717,8 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
        //     if (wheel) logOfSpoke_Factor=log(spoke_factor);
                              
 float hyperCoreOUTPUT =hyperCore*log(2.)/log(metaCoreDriveFactor)+loops;
-                             hyperCoreOUTPUT-=(6.+petals)/6.-1.;//upcore for higher omniclover counts
+                                                           hyperCoreOUTPUT-=(6.+petals)/6.-1.;//upcore for higher omniclover counts
+                                                           hyperCoreOUTPUT-=(6.+petals)/6.-1.;//upcore for higher omniclover counts
 
 float hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if
                           //   hyperCoreBoosted-=(6.+petals)/6.-1.;//upcore for higher omniclover counts
@@ -3059,7 +3077,11 @@ for(int i=0;i<40; i++)//not sure if i is 20 or >20
 if((dstnce<CORE_DELIMITER||(superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.)))
     && 0.<=hyperCoreBoosted)
 {
-    
+    if(twelveGatesMeta)
+    {
+    float angleS = atan(s.y,s.x);
+    if(mod((angleS/PI+2.)*6.+.5,2.)>1.)s=spin2(s,PI/6.);
+    }
     if(superStable)
     {
        if(i==0){
