@@ -471,7 +471,7 @@ function callKey(event){
     else if (event.altKey&&(key=="π"||key=="p"))uniforms.pixelSTARon.value=!uniforms.pixelSTARon.value;
     else if (event.altKey&&(key=="©"||key=="g"))window.grabStar=!window.grabStar;
     else if (event.altKey&&(key=="ß"||key=="s")){
-        if(window.touchMode)window.muteTouchTouchVolume = !window.muteTouchTouchVolume;
+        if(window.touchMode||window.touchOnlyMode)window.muteTouchTouchVolume = !window.muteTouchTouchVolume;
         else window.muteVoiceTouchVolume = !window.muteVoiceTouchVolume;
     }
     else if (event.altKey&&(key=="©"||key=="g"))window.grabStar=!window.grabStar;
