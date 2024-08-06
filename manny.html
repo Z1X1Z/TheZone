@@ -818,10 +818,10 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                        callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                        
                     <label for="Dancer">Dancer![s]</label><br>
-                    
+                    <!--
                     <input type="checkbox" id="multiplicatorNexus" name="t"  onclick= "uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value">
                         <label for="multiplicatorNexus">Slippery Spokes![,m]</label><br>
-
+-->
                          <input type="checkbox" id="Reverse Colors" name="t"  onclick= "
                              key  = ';';
                              callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -4367,7 +4367,8 @@ if(starOnDot>=1){
                        vec2 uVuMinCenter=-vUvCentered/(min(resolution.x,resolution.y)/resolution.yx);
              pixelStarship = audioEq(uVuMinCenter);
              icicles = waveForm();
-             vec2 adjustedvUv=vec2(vUv.x,vUv.y-pillarScale*2./max(resolution.x,resolution.y));
+             float sevenPillarShrink = pillarScale*2./max(resolution.x,resolution.y);
+             vec2 adjustedvUv=vec2(vUv.x,vUv.y*(1.-sevenPillarShrink)-sevenPillarShrink);
              linearFrequency=linearFrequencyEQ(adjustedvUv)*flipStar*brelued;
              linearFrequency-=linearFrequencyEQ(vec2(1.-adjustedvUv.x,adjustedvUv.y))*flipStar*brelued;
              linearFrequency/=2.;
