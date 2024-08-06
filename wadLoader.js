@@ -310,7 +310,12 @@ function startSound(e){
         //sound[id].volume=0.;
         //sound2[id].volume=volume;
                                  
-        if(typeof SonicTouchArray[id].sound=="object"&&bfi==null&&((window.touchMode&&!window.muteTouchTouchVolume)||(!window.touchMode&&!window.muteVoiceTouchVolume)))
+        if(typeof SonicTouchArray[id].sound=="object"&&bfi==null&& (
+                                                                    (window.touchMode&&!window.muteTouchTouchVolume)
+                                                               ||(!window.touchMode&&!window.muteVoiceTouchVolume)
+                                                               ||(window.touchOnlyMode&&!window.muteTouchTouchVolume)
+                                                                   )
+           )
         {
             stopSounds(SonicTouchArray[id])
 
@@ -449,17 +454,20 @@ function followSound(e, SonicTouchArrayK){
                         let    touchNote=   soundTouchComponent/pi/2*12;
                         let frequency = Math.pow(2.,((touchNote-twistFeed/2.)-1.)/12.
                         )*window.ConcertKey;
-
                                                      if(isFinite(frequency)&&typeof SonicTouchArrayX[id].sound=="object"){
                             if(isFinite(frequency)&&typeof SonicTouchArrayX[id].sound=="object"){
-                                console.log
                                 SonicTouchArrayX[id].dawAMPLITUDE=touchMagnitude;//testarContinuous;//
                                 SonicTouchArrayX[id].DAWfrequency=frequency;
                                 SonicTouchArrayX[id].dawNOTE=touchNote*2-twistFeed;
                                 
                                 if(grabStar)
                                 {
-                                    if((window.touchMode&&!window.muteTouchTouchVolume)||(!window.touchMode&&!window.muteVoiceTouchVolume))for(var d = 0;d<SonicTouchArray.length;d++)
+                                    if (
+                                   (window.touchMode&&!window.muteTouchTouchVolume)
+                              ||(!window.touchMode&&!window.muteVoiceTouchVolume)
+                              ||(window.touchOnlyMode&&!window.muteTouchTouchVolume)
+                                  )
+                                        for(var d = 0;d<SonicTouchArray.length;d++)
                                     {
                                         SonicTouchArray[d]=refreshNoteDAW(SonicTouchArray[d]);
                                         if(bfi==null) SonicTouchArrayX=SonicTouchArray
@@ -472,8 +480,17 @@ function followSound(e, SonicTouchArrayK){
                                     }
                                     
                                 }
-                                             else if (bfi!=null&&(window.touchMode&&!window.muteTouchTouchVolume)||(!window.touchMode&&!window.muteVoiceTouchVolume))
-                                                setSounds(frequency,soundTouchComponent,SonicTouchArrayX[id].initialAngleSound,SonicTouchArrayX[id].dawAMPLITUDE*window.touchVolume/2.,SonicTouchArrayX[id].dawAMPLITUDE, SonicTouchArrayX[id].sound2,SonicTouchArrayX[id].sound,SonicTouchArrayX[id].zound2,SonicTouchArrayX[id].zound,SonicTouchArrayX[id].xound2,SonicTouchArrayX[id].xound,SonicTouchArrayX[id].tound2,SonicTouchArrayX[id].tound);
+                                             else if (bfi!=null||
+                                                      
+                                                           (
+                                                            (window.touchMode&&!window.muteTouchTouchVolume)
+                                                       ||(!window.touchMode&&!window.muteVoiceTouchVolume)
+                                                       ||(window.touchOnlyMode&&!window.muteTouchTouchVolume)
+                                                           )
+                                                      )
+                                             {
+                                                 setSounds(frequency,soundTouchComponent,SonicTouchArrayX[id].initialAngleSound,SonicTouchArrayX[id].dawAMPLITUDE*window.touchVolume/2.,SonicTouchArrayX[id].dawAMPLITUDE, SonicTouchArrayX[id].sound2,SonicTouchArrayX[id].sound,SonicTouchArrayX[id].zound2,SonicTouchArrayX[id].zound,SonicTouchArrayX[id].xound2,SonicTouchArrayX[id].xound,SonicTouchArrayX[id].tound2,SonicTouchArrayX[id].tound);
+                                             }
 
                                           }
                                                                    }
@@ -583,7 +600,7 @@ function followSound(e, SonicTouchArrayK){
                                if (lastTwistSign!=SonicTouchArrayZ[id].signTwist
                                    &&(twisteR<pi/2.||twisteR>3./2.*pi)
                                    ) {
-                                   console.log(true)
+                                 //  console.log(true)
                                    SonicTouchArrayZ[id].octavesBoosted+=24*SonicTouchArrayZ[id].signTwist;
                                }
                                 return SonicTouchArrayZ
@@ -607,9 +624,10 @@ function followSound(e, SonicTouchArrayK){
             twistFeed= SonicTouchObjectD.permanentInitialTwist+SonicTouchObjectD.octavesBoosted+SonicTouchObjectD.twistModulated;
                                     let    touchNoteSpecified=   soundTouchComponent/pi/2*12;
             SonicTouchObjectD.dawNOTE=touchNoteSpecified*2-twistFeed;
-                                        
-                                      let   frequencySpecified = Math.pow(2.,((touchNoteSpecified-twistFeed/2.)-1.)/12.
-                                                                        )*window.ConcertKey;
+
+                                      let   frequencySpecified = Math.pow(2.,((touchNoteSpecified-twistFeed/2.)-1.)/12.)*window.ConcertKey;
+                                                 //                             console.log(frequencySpecified)
+
                                setSounds(frequencySpecified,soundTouchComponent,   SonicTouchObjectD.initialAngleSound, SonicTouchObjectD.dawAMPLITUDE*window.touchVolume/2., SonicTouchObjectD.dawAMPLITUDE, SonicTouchObjectD.sound2,   SonicTouchObjectD.sound,  SonicTouchObjectD.zound2,      SonicTouchObjectD.zound,        SonicTouchObjectD.xound2,        SonicTouchObjectD.xound,        SonicTouchObjectD.tound2,        SonicTouchObjectD.tound);
             return SonicTouchObjectD
            }
