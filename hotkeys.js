@@ -50,7 +50,9 @@ clvrVariant8:{value: false},
 clvrVariant9:{value: false},
 clvrVariant0:{value: false},
 
-        Spoker:{value: true    },
+twelveGates:{value: true    },
+twelveGatesMeta:{value: true    },
+Spoker:{value: true    },
         spokelover:{value: true    },
 largeEyeColor:{value:0.},
 
@@ -442,6 +444,10 @@ function callKey(event){
         else if( uniforms.exponentialPetals.value==-1.) uniforms.exponentialPetals.value=0.;
         
     }
+    else if (event.altKey&&(key=="˜"||key=="Dead"||key=="n"))uniforms.twelveGates.value=!uniforms.twelveGates.value;
+    
+    else if (event.altKey&&(key=="µ"||key=="m"))uniforms.twelveGatesMeta.value=!uniforms.twelveGatesMeta.value;
+
     else if (event.altKey&&(key=="∑"||key=="w"))window.DAW=!window.DAW;
 
     else if (event.altKey&&(key=="¥"||key=="y"))
