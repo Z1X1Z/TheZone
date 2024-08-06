@@ -1798,9 +1798,10 @@ uniform float exponentialPetals;
                 float frAmp = texture2D(micIn, vec2(h.y,0.)).r*linearEQsize;
                 // float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*2.,2.)/2./
                 //  pow(2.,(note)/12.+4.)*440. ,0.)).r;//adjusted to pitch
-                 if (frAmp>h.x) ret = hsv2rgb(
+                 if (frAmp>h.x)
+                 ret = hsv2rgb(
                                              vec3(
-                                                  mod((-note-1.)*flipStar*brelued+4.,12.)/12.//+3.-flipStar/12.
+                                                  mod((-note-2.)*flipStar*brelued+4.,12.)/12.//+3.-flipStar/12.
                                                     ,1.,1.
                                                   ));//vec4(mod(note,12.)/12.);
                     //                              else if(frAmp*2.>h.x) ret =vec3(sign(vUv.x-.5));
@@ -4438,7 +4439,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                                  -HEART.b
                                                 // +(-HEART.b-HEART.r-HEART.g)/4.
                                                  -AM.r*24.
-                                                 +(-linearFrequency.r-linearFrequency.g-linearFrequency.b)/16.
+                                                 +(-linearFrequency.r-linearFrequency.g-linearFrequency.b)/8.
                                                  +bigEyes.xyz*largeEyeColor
                                                  -(yourFace.x+yourFace.y+yourFace.z)/256./3.
                         -(ARTICLE.x+ARTICLE.y+ARTICLE.z)*4.
