@@ -2048,7 +2048,8 @@ ret= vec4(clamp(
           
       }//face with closed small holes
       if(l<.0&&isEscaped!=-2.)l=0.;
-          if(g.y==0.&&t.y==0.)l=0.;
+          if(g.y==0.&&t.y==0.)l=1.;
+          
       return vec3(-l);
       }
       vec3 face(vec2 g, vec2 t){
@@ -2161,12 +2162,12 @@ vec3 faceFORWARD(vec2 p,vec2 t){
             if(abs(p.y)/p.x>-2.2&&p.x<0.&&p.x>-1.&&l<.50&&l>0.)l=0.;//remove black from behind mny's eyes
                if((Character==3||musicAngelMan==1))
                {
-                   if(p.y==0.&&t.y==0.)l=0.;
+                   if(p.y==0.&&p.x>0.&&t.y==0.)l=1.;
                    return vec3(1.-l);
                }
                else if((Character==4||musicAngelMan==2))
                {
-                   if(p.y==0.&&t.y==0.)l=1.;
+                   if(p.y==0.&&p.x>0.&&t.y==0.)l=.0;
                    return vec3(l);
                }
          return vec3(.5,0.,0.);//return red if run in  error
