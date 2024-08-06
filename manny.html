@@ -1464,7 +1464,9 @@ Open MusicXML file
          //addEventListener("pointerup",(e)=>{)//setTimeout to give android time to notice active element
          addEventListener("click",(e)=>{
 ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
-          setTimeout(toggleMenuCategory,50)})//setTimeout to give time for menuJustClosedByBackgroundPress
+          //setTimeout(toggleMenuCategory,100)//setTimeout to give time for menuJustClosedByBackgroundPress
+          toggleMenuCategory();
+         })
 
     </script>
     <script src="wadLoader.js"> </script>
