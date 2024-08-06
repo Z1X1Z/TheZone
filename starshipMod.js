@@ -334,7 +334,7 @@ let pushBackCounter = 0;
                                  const  lightingScaleStar = lightingScaleTrail*2.*2.;//convert 12 to 24 and expand by factor of 2 for a divide between the octaves of the voice (trail) and the hearing (star)
                                                   let note=0.,lastNote=0.;
                                     let BlackOrWhiteTrail=.5;//also for star
-                                    let BlackOrWhiteNOTE = 1.
+                                    let BlackOrWhiteNOTE = .5
                                     let starMajorMinor=.5;
                                     let fromCenter = 0;
                                                   let radius = 0.;
@@ -428,40 +428,30 @@ let pushBackCounter = 0;
 
                             colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);
                             
-                            if(on)
-                            {
-             
-                                    const colortone = note/lightingScaleTrail;
-                 colorSound.setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
-                  
-        //angle-=1/radialWarp;
-                         
-        pitchCol[f]  = colorSoundPURE;
-             
-             if("osmd" in window&&osmd!=null)runOSMD();
+            if(on)
+            {
+            const colortone = note/lightingScaleTrail;
+            colorSound.setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
+            //angle-=1/radialWarp;
+            pitchCol[f]  = colorSoundPURE;
+            if("osmd" in window&&osmd!=null)runOSMD();
 
-                                                   
-                                                   const nt = Math.round(note)%12;
-                                                   if (nt==7||nt==5||nt==2||nt==0||nt==10)
-                                                   {
-                                           BlackOrWhiteNOTE=0.;
-                                                   }
-                                                   else
-                                                   {
-                                           BlackOrWhiteNOTE=1.;
-                                                   }
-                            
-                                                   
-                                                  let bwPRIMER = .125;
-                                                   starMajorMinor = (BlackOrWhiteNOTE+bwPRIMER)/(1.+bwPRIMER)/2.+bwPRIMER*2.;
-                                                   
-                                                    bwPRIMER = .5;
-                                                    BlackOrWhiteTrail = (BlackOrWhiteNOTE-bwPRIMER)/(1.-bwPRIMER);
-                                                   }
-                                                   else {
-                                                        starMajorMinor=.5;
-                                                        BlackOrWhiteTrail=.5;
-                                                    }
+            const nt = Math.round(note)%12;
+            if (nt==7||nt==5||nt==2||nt==0||nt==10)BlackOrWhiteNOTE=0.;
+            else BlackOrWhiteNOTE=1.;
+
+
+            let bwPRIMER = .125;
+            starMajorMinor = (BlackOrWhiteNOTE+bwPRIMER)/(1.+bwPRIMER)/2.+bwPRIMER*2.;
+
+            bwPRIMER = .5;
+            BlackOrWhiteTrail = (BlackOrWhiteNOTE-bwPRIMER)/(1.-bwPRIMER);
+            }
+            else {
+            starMajorMinor=.5;
+             BlackOrWhiteNOTE=.5
+            BlackOrWhiteTrail=.5;
+            }
                                                    
                                                    if(!Oreo){
                                 starMajorMinor=.5;
@@ -2276,27 +2266,34 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
 
                  arm =flip*(g*radialWarp+twist*EldersLeg/24.)%EldersLeg/EldersLeg*pi*2.;
                  lengt = (testar[(g+EldersLeg/2.)%EldersLeg]-minTestar)/(maxTestar-minTestar);
-                                
                 if(twoOr1) {
                     lengt/=2.**14./EldersLeg;
                     lengt=lengt**.25;
                     
                 }
                                   }
-                                      const vop = new THREE.Color();
-                      vop.setHSL(((20/24.*EldersLeg*uniforms.brelued.value-g)*uniforms.brelued.value)%EldersLeg/EldersLeg,lengt,starMajorMinor);
                                   
-                    starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
-                    starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,1.)
-                    starColorAttribute.setXYZW(starStride+2,vop.r,vop.g,vop.b,1.)
-                    starColorAttribute.setXYZW(starStride+3,vop.r,vop.g,vop.b,1.)
-                    starColorAttribute.setXYZW(starStride+4,vop.r,vop.g,vop.b,1.)
-                    starColorAttribute.setXYZW(starStride+5,vop.r,vop.g,vop.b,1.)
+                            let BlackOrWhiteFRET = .5;
+                                  
+                            if(g%2==0)
+                            {
+                                const nt = Math.round(g/EldersLeg*12+6)%12;
+                                if (nt==7||nt==5||nt==2||nt==0||nt==10) BlackOrWhiteFRET=-1.;
+                                else BlackOrWhiteFRET=1.;
+                            }
+                                  
+                                  const vop = new THREE.Color();
+                              let h = ((20/24.*EldersLeg*uniforms.brelued.value-g)*uniforms.brelued.value)%EldersLeg/EldersLeg;
+                               vop.setHSL(h,BlackOrWhiteFRET,BlackOrWhiteFRET/2.+.25);
+                                           const pureColor = new THREE.Color();
+                                       
+                                           pureColor.setHSL(h,1.,.5);
+
                                   
                 
                                   //inner Star inspired by https://www.youtube.com/watch?v=_MTbjHKtobY Neffex song
 const rpio2 =arm+pi/2.;
-   let centerDisplacement = 3./7.;
+   let centerDisplacement = 4./9.;
 let xBoost = -Math.sin(arm)*centerDisplacement;
 let yBoost = -Math.cos(arm)*centerDisplacement;
                 
@@ -2305,7 +2302,13 @@ let y = widt*-Math.cos(rpio2);
 let xr = lengt*-Math.sin(arm);
 let yr = lengt*-Math.cos(arm);
 
-                
+                                        
+                                                             starColorAttribute.setXYZW(starStride,pureColor.r,pureColor.g,pureColor.b,1.)
+                                                             starColorAttribute.setXYZW(starStride+1,pureColor.r,pureColor.g,pureColor.b,1.)
+                                                             starColorAttribute.setXYZW(starStride+2,vop.r,vop.g,vop.b,1.)
+                                                             starColorAttribute.setXYZW(starStride+3,pureColor.r,pureColor.g,pureColor.b,1.)
+                                                             starColorAttribute.setXYZW(starStride+4,vop.r,vop.g,vop.b,1.)
+                                                             starColorAttribute.setXYZW(starStride+5,vop.r,vop.g,vop.b,1.)
                 
                 starPositionAttribute.setXYZ(starStride,-x+xBoost,    -y+yBoost,  dep)
                 starPositionAttribute.setXYZ(starStride+1,x+xBoost,    y+yBoost,  dep)
@@ -2335,13 +2338,13 @@ let yr = lengt*-Math.cos(arm);
                                   
                                   
                                   
-                    starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
-                    starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,1.)
-                    starColorAttribute.setXYZW(starStride+2,vop.r,vop.g,vop.b,1.)
-                    starColorAttribute.setXYZW(starStride+3,vop.r,vop.g,vop.b,1.)
-                    starColorAttribute.setXYZW(starStride+4,vop.r,vop.g,vop.b,1.)
-                    starColorAttribute.setXYZW(starStride+5,vop.r,vop.g,vop.b,1.)
-                                           
+                                        starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
+                                        starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,1.)
+                                        starColorAttribute.setXYZW(starStride+2,pureColor.r,pureColor.g,pureColor.b,1.)
+                                        starColorAttribute.setXYZW(starStride+3,vop.r,vop.g,vop.b,1.)
+                                        starColorAttribute.setXYZW(starStride+4,pureColor.r,pureColor.g,pureColor.b,1.)
+                                        starColorAttribute.setXYZW(starStride+5,pureColor.r,pureColor.g,pureColor.b,1.)
+                                                                           
                                                starStride+=6;
                                   
                                   
