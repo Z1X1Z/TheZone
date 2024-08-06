@@ -2275,7 +2275,7 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                                   
                             let BlackOrWhiteFRET = .5;
                                   
-                            if(g%2==0)
+                            if(g%2==0&&Oreo)
                             {
                                 const nt = Math.round(g/EldersLeg*12+6)%12;
                                 if (nt==7||nt==5||nt==2||nt==0||nt==10) BlackOrWhiteFRET=-1.;
