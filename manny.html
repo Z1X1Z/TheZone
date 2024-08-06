@@ -1815,7 +1815,7 @@ uniform float exponentialPetals;
                float freq =h.y*sampleRate;
              float note =12.*log(freq)/log(2.)+49.;
                               
-                 ret = hsv2rgb( vec3( mod((-note-2.)*flipStar*brelued+4.,12.)/12. ,1.,1. )); //vec4(mod(note,12.)/12.);
+                 ret = hsv2rgb( vec3( mod((-note-2.)*brelued+4.,12.)/12. ,1.,1. )); //vec4(mod(note,12.)/12.);
                     //                              else if(frAmp*2.>h.x) ret =vec3(sign(vUv.x-.5));
 }
                 }
