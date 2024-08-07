@@ -2479,12 +2479,15 @@ vec3 tol(vec2 p, vec2 t){
                         
                          vec2 pWithoutChiralizer = p;
                          if(chirality==-1){p=p.yx;}
+                         if(cloverOffset!=0.)p=spin2(p,cloverOffset*PI2);
+
                          if(twelveGates)
                          {
                          float angle = atan(p.y,p.x);
                          if(mod((angle/PI+2.)*6.+.5,2.)>1.)p=spin2(p,PI/6.);
                                 }
-                         if(cloverOffset!=0.)p=spin2(p,cloverOffset*PI2);
+
+
 vec2 colorAccumulator =vec2(1.);
 vec3 heartColors = vec3(0.);
 float lfc = length(freed(coords));
@@ -2713,8 +2716,8 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
                if(wheel)m =  ((pWithoutChiralizer/lfc)
                                                         -coords.yx*2.*variant4Correction)*abs(coresIn/crs*2.-1.)
                                            *mandelCloverFactor//(1.-1./(leaf/truncator)*truncator)//uncertain term
-
                                            ;
+                         
        //     float logOfSpoke_Factor = 0.;
        //     if (wheel) logOfSpoke_Factor=log(spoke_factor);
                              
@@ -2865,7 +2868,7 @@ vec2 lastS = s;
         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
        );
- 
+
       // if (mod(counter,5.) == 4.)s =pCenterCored;
        //x**3
        dstnce = length(s);
@@ -2924,7 +2927,6 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
      if(clvrVariant8) if(length(s)<1.)s+=1.;
 
        //if(dotted)s/=dot(-m,t)*dot(m,-t);
-
        if(morph!=0.&&!wheel)s-=t;
         else s+=t-m;
                              

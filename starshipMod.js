@@ -1088,7 +1088,7 @@ function onWindowResize() {
                             heightPX=window.innerHeight-correlationForTextY;
                             widthPX=window.innerWidth-correlationForTextX;
              
-              mf = (Math.max(heightPX,widthPX)/Math.min(heightPX,widthPX))**.75;//advantage of translation over zoom (right?)
+              mf = (Math.max(heightPX,widthPX)/Math.min(heightPX,widthPX));//advantage of translation over zoom (right?)
              MR = mf/zoomFrames;
                       //  if(BibleON==0)document.getElementById("Bible").height=window.innerHeight/-leaf;
 
@@ -2385,7 +2385,7 @@ var fingerStride = 0;
          if  ((noteGrey<.5 || noteGrey>11.5)&&uniforms.Character.value!=2&&BlackOrWhite!=-1.)
          {
              if(!uniforms.pixelSTARon.value)BlackOrWhite=.5;
-             else BlackOrWhite=.75
+             else BlackOrWhite=.25
         }
          else if( ((uniforms.Character.value==0&&(noteGrey<6.5&&noteGrey>5.5))&&BlackOrWhite!=1.) &&uniforms.colorCombo.value!=20&&!blankBackground&&starClover)
          {
