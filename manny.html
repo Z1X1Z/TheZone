@@ -2478,11 +2478,14 @@ vec3 tol(vec2 p, vec2 t){
                         ).xyz;
                         
                          vec2 pWithoutChiralizer = p;
-                         if(chirality==-1){p=p.yx;}
+                         if(chirality==-1&&twelveGates){p=spin2(p,PI2/24.);}
+                         else if(chirality==-1){p=p.yx;}
                          if(cloverOffset!=0.)p=spin2(p,cloverOffset*PI2);
+                    
 
                          if(twelveGates)
                          {
+                             
                          float angle = atan(p.y,p.x);
                          if(mod((angle/PI+2.)*6.+.5,2.)>1.)p=spin2(p,PI/6.);
                                 }
@@ -4023,7 +4026,9 @@ vec2 dance = vec2(0.);
          if(colorCombo<=10){
                        zoomer=tol(backGround, dance2);
                        if(chirality==3){
-                           zoomer+=tol(backGround.yx,dance2);
+                           if(!twelveGates)zoomer+=tol(backGround.yx,dance2);
+                           else zoomer+=tol(spin2(backGround,PI2/24.),dance2);
+
                            zoomer/=2.;
                            
                        }
@@ -4143,6 +4148,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                    }
                    else if (Character==2){
                         mny=bride(characterOnTrailP*gr,moveDynamic/7.);
+                        
                        swordSkew+=.5;}
                    else if (Character==3||Character==4){
                       vec3 overchargeCharacter = faceFORWARDstatic(characterOnTrailP*angelSize,moveDynamic);
@@ -4258,7 +4264,7 @@ if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
 */
                        //  heartWarmed = HEART/2.;
                     if(AM.x!=0.)heartWarmed=clamp((AM*HEART+AM*mny)+(-mny.r-mny.g-mny.b)*4. ,0.,1.);
-                       else heartWarmed=HEART;
+                       else heartWarmed=HEART/2.;
 
 
                         if(HEART.x==0.&&HEART.y==0.&&HEART.z==0.)  heartWarmed=AM;
@@ -4463,7 +4469,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                                  -yourFace.xyz
                                                  -HEART.b
                                                 // +(-HEART.b-HEART.r-HEART.g)/4.
-                                                 -AM.r*24.
+                                                 -AM.r*12.
                                                  +(-linearFrequency.r-linearFrequency.g-linearFrequency.b)/8.
                                                  +bigEyes.xyz*largeEyeColor
                                                  -(yourFace.x+yourFace.y+yourFace.z)/256./3.
