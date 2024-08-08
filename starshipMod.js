@@ -1469,9 +1469,12 @@ function runOSMD (){
     }
         //function    OSMDUPDATER(){   runOSMD();  setTimeout(OSMDUPDATER,1000/60.);}
         //OSMDUPDATER();
+                                
                function executeTouchRegime(){
                    
                    let coordinator = pixelShaderSize/2./minimumDimension*movementRate;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
+                   if(xTouch!=0)xTouchMicroBuffer=xTouch/100000.;
+                   if(yTouch!=0)yTouchMicroBuffer=yTouch/100000.;
                    xTouch=0;
                    yTouch=0;
                    for(n=0;n<screenPressCoordX.length;n++)
@@ -1500,8 +1503,8 @@ function runOSMD (){
 
                                     uniforms["zoomOutRatchetThreshold" ].value=0.;;
 
-                                    uniforms.d.value.x+=xTouch/uniforms[ "volume" ].value;
-                                    uniforms.d.value.y+=-yTouch/uniforms[ "volume" ].value;
+                                    uniforms.d.value.x+=xTouchMicroBuffer/uniforms[ "volume" ].value;
+                                    uniforms.d.value.y+=-yTouchMicroBuffer/uniforms[ "volume" ].value;
                                     var spunTouch=touchMovement;
                                           if(uniforms.carousel.value!=0.)
                                               spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));

@@ -174,6 +174,8 @@ function resetAll(){
         window.osmdSound = false;
     window.xTouch=0;
     window.yTouch=0;
+    window.xTouchMicroBuffer=0;
+    window.yTouchMicroBuffer=0;
     window.touchVolume = .5;
     window.radialOctaveBoost = false;
     window.twist = 0.;
