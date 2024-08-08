@@ -2816,25 +2816,35 @@ dstnce = length(s);
                                                 if(NightAndDay){
                                                             if(chirality!=-1||true){
                                                                 
-                                                                    if (flipStar!=0.)cycleShiftChiral=0.;
-                                                                    else cycleShiftChiral=PI;
+                                                               //     if (flipStar!=0.)cycleShiftChiral=0.;
+                                                                //    else cycleShiftChiral=PI;
                                                                     
-                                                                ColorWheelClover=(spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)*flipStar+PI2*4./12.+chiralAdjustment));//spin2(vec2(-s.y,-s.x)*flipStar,(atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)+atan(d.x,d.y)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar)/2.;//clover actually seems to have down to the right so it may need to be rotated by pi/x
+                                                                ColorWheelClover=(spin2(vec2(s.y*flipStar,-s.x*flipStar),-atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)
+                                                                                        //+PI2*
+                                                                                       // (7.-3.*flipStar)
+                                                                                       // (3.+4.*flipStar)/12.
+                                                                                        +chiralAdjustment))*flipStar;
+                                                                                        
+                                                                                        
+                                                                                        
+                                        ColorWheelClover=(spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI2*(6.-2.*flipStar)/12.+chiralAdjustment));
                                                                 }
+                                                            /*
                         else {
                                 if (flipStar!=0.)cycleShiftChiral=PI/4.;
                                 else cycleShiftChiral=-PI;
                                 ColorWheelClover = spin2(vec2(-s.x,-  s.y)*flipStar,(atan(s.x,s.y)*OmniPetal/(6.+OmniPetal)-atan(d.y,d.x)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar/2.);
                             }
-                        
+                                                             */
                             float correctionBrueled = 0.;
                             if(brelued==-1.)correctionBrueled=atan(-ColorWheelClover.x,-ColorWheelClover.y)-PIdiv2;
                            else correctionBrueled=atan(ColorWheelClover.y,ColorWheelClover.x)+PIdiv2;
                             
                         if(dstnce<4./3.)
-                        beta   =  hsv2rgb(vec3(correctionBrueled/PI2,1.,1.));
+                        beta   =  hsv2rgb(vec3(correctionBrueled/PI2*flipStar,1.,1.));
                         //return beta;
                 }
+                                                          
                  if(dstnce<2./3.||(spokesVisualizeColors&&dstnce<4./3.)) {
                     float decayCanceller=1.;
                     if(spokesVisualizeColors)decayCanceller = 2.;
