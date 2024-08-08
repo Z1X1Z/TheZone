@@ -2806,16 +2806,19 @@ else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter
   // if( loopSolid>=hyperCoreBoosted+1.||inCenterCore){//||lengthP<2./3.){//so it doesn't run until it needs to, hopefully working
   dstnce = length(s);
 
+  vec2 deSplicedS = s;
+  if(gated)deSplicedS=spin2(deSplicedS,-PI/6.);
+
        if(spirated!=0.&&dstnce<2./3.)//CORE_DELIMITER)  //works well<(n-1)/n
 s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
 dstnce = length(s);
 
-vec2 deSplicedS = s;
-if(gated)deSplicedS=spin2(deSplicedS,-PI/6.);
-
        
                                     float chiralAdjustment = 0.;
-                                if(chirality==-1)chiralAdjustment=-PI/2.;
+                                if(chirality==-1)
+                                {   if(twelveGates)chiralAdjustment=-PI2/24.;
+                                    else chiralAdjustment=-PI/2.;
+                                    }
                           vec2 cloverMAP = (spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment))*2./3.+.5;
                                                    
                                                    vec2 ColorWheelClover=vec2(0.);
@@ -2823,14 +2826,14 @@ if(gated)deSplicedS=spin2(deSplicedS,-PI/6.);
 
         if(NightAndDay){
 
-                ColorWheelClover=(spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI2*(6.-2.*flipStar)/12.+chiralAdjustment));
+                ColorWheelClover=(spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)+atan(d.x,d.y)+PI2*(6.+2.*flipStar)/12.+chiralAdjustment));
 
                 float correctionBrueled = 0.;
                 if(brelued==-1.)correctionBrueled=atan(-ColorWheelClover.x,-ColorWheelClover.y)-PIdiv2;
                 else correctionBrueled=atan(ColorWheelClover.y,ColorWheelClover.x)+PIdiv2;
 
                 if(dstnce<4./3.)
-                beta   =  hsv2rgb(vec3(correctionBrueled/PI2*flipStar,1.,1.));
+                beta   =  hsv2rgb(vec3(-correctionBrueled/PI2*flipStar,1.,1.));
                 //return beta;
         }
 
