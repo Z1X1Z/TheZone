@@ -2479,7 +2479,7 @@ vec3 tol(vec2 p, vec2 t){
                         
                          vec2 pWithoutChiralizer = p;
                          if(chirality==-1&&twelveGates){p=spin2(p,PI2/24.);}
-                         else if(chirality==-1){p=p.yx;}
+                         else if(chirality==-1){p=p=spin2(p,PI2/4.);}
                          if(cloverOffset!=0.)p=spin2(p,cloverOffset*PI2);
                     
 
@@ -2806,18 +2806,20 @@ else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter
        if(spirated!=0.&&dstnce<2./3.)//CORE_DELIMITER)  //works well<(n-1)/n
 s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
 dstnce = length(s);
-
-                          vec2 cloverMAP = (spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI))*2./3.+.5;
+                                    float chiralAdjustment = 0.;
+                                if(chirality==-1)chiralAdjustment=-PI/2.;
+                          vec2 cloverMAP = (spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment))*2./3.+.5;
                                                    
                                                    vec2 ColorWheelClover=vec2(0.);
                                                    float cycleShiftChiral = 0.;
                                         
                                                 if(NightAndDay){
-                                                            if(chirality!=-1){
+                                                            if(chirality!=-1||true){
                                                                 
                                                                     if (flipStar!=0.)cycleShiftChiral=0.;
                                                                     else cycleShiftChiral=PI;
-                                                                ColorWheelClover=spin2(vec2(-s.y,-s.x)*flipStar,(atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)+atan(d.x,d.y)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar)/2.;//clover actually seems to have down to the right so it may need to be rotated by pi/x
+                                                                    
+                                                                ColorWheelClover=(spin2(vec2(s.y,-s.x),-atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)*flipStar+PI2*4./12.+chiralAdjustment));//spin2(vec2(-s.y,-s.x)*flipStar,(atan(s.y,s.x)*OmniPetal/(6.+OmniPetal)+atan(d.x,d.y)+cycleShiftChiral)+(1.-abs(starSpin))*twistStar*flipStar)/2.;//clover actually seems to have down to the right so it may need to be rotated by pi/x
                                                                 }
                         else {
                                 if (flipStar!=0.)cycleShiftChiral=PI/4.;
@@ -2826,7 +2828,7 @@ dstnce = length(s);
                             }
                         
                             float correctionBrueled = 0.;
-                            if(brelued==-1.)correctionBrueled=atan(ColorWheelClover.x,-ColorWheelClover.y);
+                            if(brelued==-1.)correctionBrueled=atan(-ColorWheelClover.x,-ColorWheelClover.y)-PIdiv2;
                            else correctionBrueled=atan(ColorWheelClover.y,ColorWheelClover.x)+PIdiv2;
                             
                         if(dstnce<4./3.)
@@ -3065,7 +3067,7 @@ dstnce = length(s);
                              
                              if(dstnce<4./3. &&exponentialPetals!=0.) s=spin2(s,pow(2.,(atan(s.y,s.x)/PI+1.)*2.));
                              //if(dstnce<4./3.)s=spin2(s,pow(2.,atan(s.y,s.x)));
-                             float dstnce =length(s);
+                              dstnce =length(s);
 
                        if(dilate){
                            
