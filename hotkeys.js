@@ -97,7 +97,7 @@ dilate:{value:true},
 
 
         resolution: {value:[window.innerWidth,window.innerHeight]},//these are later resolved to the THREE.vec2() uniforms
-        coords: {value: [0.,0.]},
+        coords: {value: [1./10000.,1./10000.]},//to prevent dividing by zero may be set to small value
         coordSHIFT: {value: [0.,0.]},
         duperZoom: {value:1.},
         d: {value:[0.,0.]},
@@ -174,8 +174,8 @@ function resetAll(){
         window.osmdSound = false;
     window.xTouch=0;
     window.yTouch=0;
-    window.xTouchMicroBuffer=0;
-    window.yTouchMicroBuffer=0;
+    window.xTouchMicroBuffer=1./10000.;
+    window.yTouchMicroBuffer=1./10000.;
     window.touchVolume = .5;
     window.radialOctaveBoost = false;
     window.twist = 0.;
