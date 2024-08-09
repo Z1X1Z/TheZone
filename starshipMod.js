@@ -46,7 +46,6 @@ window.zoomCageSize = window.pixelShaderSize/4.;//radius of zoom bounding
 let colorSound;
 let colorSoundPURE;
 let loopsRun =0;
-let mobile = false;
 
       //vvvvbelow line partly from https://code-boxx.com/detect-mobile-device-javascript/
 
