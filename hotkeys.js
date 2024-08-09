@@ -51,7 +51,7 @@ clvrVariant9:{value: false},
 clvrVariant0:{value: false},
 
 twelveGates:{value: true    },
-twelveGatesMeta:{value: true    },
+twelveGatesMeta:{value: 1    },
 Spoker:{value: true    },
         spokelover:{value: true    },
 largeEyeColor:{value:0.},
@@ -448,7 +448,13 @@ function callKey(event){
     }
     else if (event.altKey&&(key=="˜"||key=="Dead"||key=="n"))uniforms.twelveGates.value=!uniforms.twelveGates.value;
     
-    else if (event.altKey&&(key=="µ"||key=="m"))uniforms.twelveGatesMeta.value=!uniforms.twelveGatesMeta.value;
+    else if (event.altKey&&(key=="µ"||key=="m"))
+    {if(number!="no number")
+        uniforms.twelveGatesMeta.value=number;
+        else if( uniforms.twelveGatesMeta.value>=1.)uniforms.twelveGatesMeta.value=0
+          else  uniforms.twelveGatesMeta.value=1;
+    }
+
 
     else if (event.altKey&&(key=="∑"||key=="w"))window.DAW=!window.DAW;
 
