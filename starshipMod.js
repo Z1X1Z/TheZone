@@ -1469,12 +1469,16 @@ function runOSMD (){
     }
         //function    OSMDUPDATER(){   runOSMD();  setTimeout(OSMDUPDATER,1000/60.);}
         //OSMDUPDATER();
-                                
+                                let TouchMicroizer = false;
                function executeTouchRegime(){
                    
                    let coordinator = pixelShaderSize/2./minimumDimension*movementRate;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
-                   if(xTouch!=0)xTouchMicroBuffer=xTouch/100000.;
-                   if(yTouch!=0)yTouchMicroBuffer=yTouch/100000.;
+                   if(xTouch==0&&yTouch==0&&!TouchMicroizer)
+                   {
+                       xTouchMicroBuffer=xTouchMicroBuffer/10000.;
+                       yTouchMicroBuffer=yTouchMicroBuffer/10000.;
+                       TouchMicroizer=true;
+                   }
                    xTouch=0;
                    yTouch=0;
                    for(n=0;n<screenPressCoordX.length;n++)
@@ -1482,6 +1486,15 @@ function runOSMD (){
                        yTouch += screenPressCoordY[n]*coordinator;
                    }
                    
+                   if(xTouch!=0)
+                   {xTouchMicroBuffer=xTouch;
+                       TouchMicroizer=false;
+                   }
+                   if(yTouch!=0){
+                       yTouchMicroBuffer=yTouch;
+                       TouchMicroizer=false;
+
+                   }
                         if(!zoomAtl41)
                             {
                               lastZoom = zoom;
