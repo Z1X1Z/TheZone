@@ -2825,7 +2825,7 @@ dstnce = length(s);
 
         if(NightAndDay){
 
-                ColorWheelClover=(spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)+atan(d.x,d.y)+PI2*(6.+2.*flipStar)/12.+chiralAdjustment));
+                ColorWheelClover=(spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)+atan(d.x,d.y)+PI2*(6.+2.*flipStar)/12.+chiralAdjustment-twistStar*flipStar));
 
                 float correctionBrueled = 0.;
                 if(brelued==-1.)correctionBrueled=atan(-ColorWheelClover.x,-ColorWheelClover.y)-PIdiv2;
