@@ -216,7 +216,7 @@ hyperCore*=equilibriator;
     if(wheel)hyperCore-=1./Math.log(.5);
     if(morph!=0.) hyperCore-=1./Math.log(.5);
     
-    if(Spoker&&spokelover&&dilate) hyperCore-=.5/Math.log(.5);
+    if(Spoker&&spokelover&&dilate) hyperCore-=.0/Math.log(.5);
     else if (!dilate)hyperCore+=.5/Math.log(.5);
     
     if(clvrVariant2)hyperCore+=1./Math.log(.5);
@@ -562,7 +562,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
    && 0.<=hyperCoreBoosted)
 {
     
-    if(twelveGatesMeta)
+    if(twelveGatesMeta!=0.&&counter%twelveGatesMeta<1.)
     {
     var angleS = Math.atan2(s.y,s.x);
     if(((angleS/Math.PI+2.)*6.+.5)%2.>1.)s=spin(s,Math.PI/6.);

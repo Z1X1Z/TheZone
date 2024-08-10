@@ -2657,7 +2657,7 @@ if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
     if(cloverSlide)hyperCore+=.5/log(.5);
     if(wheel)hyperCore-=1./log(.5);
     if(morph!=0.) hyperCore-=1./log(.5);
-    if(Spoker&&spokelover&&dilate) hyperCore-=.5/log(.5);
+    if(Spoker&&spokelover&&dilate) hyperCore-=.0/log(.5);
     else if (!dilate)hyperCore+=.5/log(.5);
     if(clvrVariant2)hyperCore+=1./log(.5);
 
@@ -3274,12 +3274,13 @@ vec3 o = vec3(colorAccumulator.x*colorAccumulator.y);
                       o.g*=abs(-sin(time*gr));
                       o.b*=-sin(time*1./gr);
                         }
-                            o=beta*o;
                                 if(remediatedColors)
                                 {
                                 o/= max(max(o.r,o.g),o.b);
                                  o=o*.5+.5;
                                  }
+                      o=beta*o;
+
   float isBlack =1.;//or black
   if (starship.x==0.0&&starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=0.;
                       
