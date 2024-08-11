@@ -557,12 +557,12 @@ dstnce = s.length();
             hyperCoreBoosted-=dstnce;//maybe times 1.5
         }
 
-for(var i=0;i<40; i++)//not sure if i is 20 or >20
+for(var i=0;i<100; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.)))
    && 0.<=hyperCoreBoosted)
 {
-    
-    if(twelveGatesMeta!=0.&&counter%twelveGatesMeta<1.)
+   // console.log(i)
+    if(twelveGatesMeta!=0.&&counter%twelveGatesMeta<=1.)
     {
     var angleS = Math.atan2(s.y,s.x);
     if(((angleS/Math.PI+2.)*6.+.5)%2.>1.)s=spin(s,Math.PI/6.);
