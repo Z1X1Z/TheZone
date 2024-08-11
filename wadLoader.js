@@ -584,8 +584,8 @@ function followSound(e, SonicTouchArrayK){
                                    }
                                    else  {
                                        //SonicTouchArrayZ[i].twistModulated=(SonicTouchArrayZ[i].twistModulated+twistBump+24)%24
-                                       SonicTouchArrayZ[i].initialAngleSound=(SonicTouchArrayZ[i].initialAngleSound-twistBumpPI);
-                                     SonicTouchArrayZ[i].angleSound=(SonicTouchArrayZ[i].angleSound-twistBumpPI);
+                                       SonicTouchArrayZ[i].initialAngleSound=(SonicTouchArrayZ[i].initialAngleSound-slipConstrainedPI-SonicTouchArrayZ[i].initialAngle+pi)%(2*pi)+SonicTouchArrayZ[i].initialAngle+pi;
+                                     SonicTouchArrayZ[i].angleSound=(SonicTouchArrayZ[i].angleSound-slipConstrainedPI)
                                        
                                       //  console.log( SonicTouchArrayZ[i].twistModulated+"TwistModulated")
                                       //  console.log( SonicTouchArrayZ[i].initialAngleSound+"initial angle"+ SonicTouchArrayZ[i].angleSound)
