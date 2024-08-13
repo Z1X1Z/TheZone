@@ -849,11 +849,12 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                     key  = 'o';
                                     callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
                                  <label for="Dilate">Dilate?![.o]</label><br>
+                                 <!--
                                  <input type="checkbox" id="super stability" name="t"  onclick= "
                                      key  = ';';
                                      callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
                                   <label for="super stability">Super Stability![.;]</label><br>
-                                  
+                                  -->
                                 <input type="checkbox" id="Continuum Clover" name="t"  onclick= "
                                     key  = '&';
                                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -2483,7 +2484,7 @@ vec3 tol(vec2 p, vec2 t){
                          if(cloverOffset!=0.)p=spin2(p,cloverOffset*PI2);
                     
                     bool gated = false;
-/*
+
                          if(twelveGates)
                          {
                              
@@ -2492,7 +2493,7 @@ vec3 tol(vec2 p, vec2 t){
                                 gated=true;
                                 }
                                 }
-*/
+
 
 vec2 colorAccumulator =vec2(1.);
 vec3 heartColors = vec3(0.);
@@ -2905,13 +2906,13 @@ vec2 lastS = s;
          // hyperCoreBoosted-=length(modifier);
           }
            */
-                                            /*
+                                            
         if(clvrVariant0)
         {
         if(mod(counter,2.)==1.)     s=vec2(pow(s.x,.5)*sign(s.y),pow(s.y,2.)*sign(s.x));
         else   s=vec2(pow(s.x,2.)*sign(s.y),pow(s.y,.5)*sign(s.x));
         }
-                                             */
+                                             
         if(clvrVariant4) s*=1.-oneOverLeafTruncated;
 
         /*
@@ -3089,7 +3090,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<2./
     )
     && 0.<=hyperCoreBoosted)
 {
-    /*
+    
     if(twelveGatesMeta!=0.&&mod(counter,twelveGatesMeta)<1.)
     {
     float angleS = atan(s.y,s.x);
@@ -3099,7 +3100,6 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<2./
            }
 
     }
-     */
     /*
     if(superStable)
     {
