@@ -3086,7 +3086,7 @@ for(int i=0;i<40; i++)//not sure if i is 20 or >20
 if((dstnce<CORE_DELIMITER||(superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.)))
     && 0.<=hyperCoreBoosted)
 {
-    if(twelveGatesMeta!=0.&&mod(counter,twelveGatesMeta)>=1.)
+    if(twelveGatesMeta!=0.&&mod(counter,twelveGatesMeta)<1.)
     {
     float angleS = atan(s.y,s.x);
     if(mod((angleS/PI+2.)*6.+.5,2.)>1.)
