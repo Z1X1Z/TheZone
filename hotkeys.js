@@ -132,7 +132,8 @@ dilate:{value:true},
         squareClover:{value:false},
         mandelCloverFactor:{value:.26},
 exponentialPetals:{value:0.},
-cloverOffset:{value:0.}
+cloverOffset:{value:0.},
+spinTowardsMe:{value:false}
         }
 window.uniforms={}
 
@@ -217,7 +218,7 @@ function resetAll(){
             window.movementRate=movementRateORIGINAL;
             window.zoomRate=movementRateORIGINAL;
             window.radialWarp=1.;
-            window.trailSecondsLong = secondsToEdge/movementRate*12.;
+            window.trailSecondsLong = secondsToEdge/movementRate*7.;
             window.trailLength = Math.ceil(zoomFrames*trailSecondsLong);
             window.starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;
             window.starCount = Math.ceil(starArms*60*secondsToEdge);
@@ -398,6 +399,8 @@ function callKey(event){
         if(!omniDynamicEngaged)omniData.fill(0);
     }
     else if(key == "c" && event.ctrlKey){dynamicCoring=!dynamicCoring; if(!dynamicCoring)coreData.fill(document.getElementById('coringConstant').value);}
+                if(key == "h" && event.ctrlKey)uniforms.spinTowardsMe.value=!uniforms.spinTowardsMe.value
+
     else if(key == "q" && event.ctrlKey)uniforms.squareClover.value=!uniforms.squareClover.value;
     else if(key == "x" && event.ctrlKey)uniforms.fieldPowerBoost.value=!uniforms.fieldPowerBoost.value;
     else if(key == "z" && event.ctrlKey)uniforms.fieldPowerBoostMeta.value=!uniforms.fieldPowerBoostMeta.value;
@@ -471,7 +474,7 @@ function callKey(event){
     else if (event.altKey&&(key=="œ"||key=="q")){
             if          ( uniforms[ "colorCombo" ].value >1)          uniforms[ "colorCombo" ].value = -1;
             else uniforms[ "colorCombo" ].value = -(Math.abs(uniforms[ "colorCombo" ].value+1-17.))%17;
-        
+        console.log( uniforms[ "colorCombo" ].value)
         }
 
     else if (event.altKey&&(key=="≈"||key=="x")){ if(!runningHash||!window.online) uniforms.brelued.value*=-1;}
@@ -482,7 +485,6 @@ function callKey(event){
         if(window.touchMode||window.touchOnlyMode)window.muteTouchTouchVolume = !window.muteTouchTouchVolume;
         else window.muteVoiceTouchVolume = !window.muteVoiceTouchVolume;
     }
-    else if (event.altKey&&(key=="©"||key=="g"))window.grabStar=!window.grabStar;
     else if (event.altKey&&(key=="∫"||key=="b")){
                  if(!muteToggle&&!runningHash)
                        window.BibleON = (window.BibleON+1)%2;

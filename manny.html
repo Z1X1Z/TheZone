@@ -331,7 +331,7 @@ let maxLetterDepth=-1;
                 for(var d = 0;d<DAWSonicTouchArray.length;d++)
                 {
                     DAWSonicTouchArray[d]=refreshNoteDAW(DAWSonicTouchArray[d]);
-                    if(bfi!=null) SonicTouchArrayX=DAWSonicTouchArray
+                   //thread unsafe? Scope unsure// // if(bfi!=null) SonicTouchArrayX=DAWSonicTouchArray
                 }
 ">
                   <br>
@@ -951,6 +951,11 @@ uniforms.baseN.value=document.getElementById('Base Number').value">
                     <label for="Radial Rainbow Clover">Radial Rainbow Clover![M]</label><br>
 
 
+                    <input type="checkbox" id="Spin Towards Me" name="t"  onclick= "
+                        key  = 'h';
+                        callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
+                     <label for="Spin Towards Me">Spin Towards Me![,h]</label><br>
+ 
 
                 <form>
                   <input type="radio" id="Up" name="carousel" onclick="uniforms[ 'carousel' ].value=-1;">
@@ -1607,7 +1612,7 @@ void main(){
     uniform float coreDilation;
     
     uniform bool superStable;
-
+    uniform bool spinTowardsMe;
     uniform float largeEyeColor;
     uniform float cloverOffset;
     
@@ -2106,6 +2111,7 @@ ret= vec4(clamp(
             t/=2.5;
 
      vec2 s = p;
+     
      float l=0., d = 0., negator = 1.;
          for (int f=0;f<21;f+=1)
          if(abs(s.y)>17.7&&(f==1||f>2)){
@@ -2477,7 +2483,6 @@ vec3 tol(vec2 p, vec2 t){
                          -coordSHIFT/duperZoom)*resCale+.5
                                               )
                         ).xyz;
-                        
                          vec2 pWithoutChiralizer = p;
                          if(chirality==-1&&twelveGates){p=spin2(p,PI2/24.);}
                          else if(chirality==-1){p=p=spin2(p,PI2/4.);}
@@ -2522,7 +2527,14 @@ if(refactorCores>1.||clvrVariant4)
 else if (refactorCores==0.) p/=3.;
 
 vec2 s=p;
-
+                                
+                                /*makes for a pretty fractal with odd symmetry
+                                if(true)
+                                {
+                                    s=vec2((s.x+sign(s.x))/2.,(s.y+sign(s.y))/2.);
+                                    
+                                }
+                                 */
 float c = length(s);
 
 float coresIn = 0.;
@@ -2729,14 +2741,14 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
        //     if (wheel) logOfSpoke_Factor=log(spoke_factor);
                              
 float hyperCoreOUTPUT =hyperCore*log(2.)/log(metaCoreDriveFactor)+loops;
-                                                           hyperCoreOUTPUT-=(6.+petals)/6.-1.;//upcore for higher omniclover counts
-                                                           hyperCoreOUTPUT-=(6.+petals)/6.-1.;//upcore for higher omniclover counts
+                                                           hyperCoreOUTPUT-=2.*((6.+petals)/6.-1.);//upcore for higher omniclover counts, multiplied by two!!
 
 float hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if
                           //   hyperCoreBoosted-=(6.+petals)/6.-1.;//upcore for higher omniclover counts
                         
                              //metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
-
+                                                           
+                                                        
 float colorShift = 0.;
 vec2 multCrossTwist=vec2(0.);
 if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
@@ -3090,7 +3102,8 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<2./
     )
     && 0.<=hyperCoreBoosted)
 {
-    
+   if(spinTowardsMe) if(float(i)>=hyperCoreBoosted)s=spin2(s,atan(d.y,d.x));
+
     if(twelveGatesMeta!=0.&&mod(counter,twelveGatesMeta)<1.)
     {
     float angleS = atan(s.y,s.x);
@@ -3176,6 +3189,9 @@ OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
   if(metaCarousel!=0.
      &&(float(i)>=hyperCoreBoosted+1.))  {   //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
       
+      
+      
+      
      float wise = 1.;
      
      if(mod(float(i),4.)==0.)wise=1.;
@@ -3185,8 +3201,12 @@ OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
      
      
         s=spin2(s,time*wise*metaCarousel*(1.+OmniPetal/6.)*rate);
+        
+        
+
         }
 
+     
 }
 else break;
 
