@@ -2246,6 +2246,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                     for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;break;}
                     else{
                         z=2.*vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),(2.0*z.x*z.y-g.y+t.y));
+                       //if(z.x>0.)//likely clipped off headbody 
                         z.x=sqrt(abs(z.x));}
                     return vec3(b,b/2.5,0.);
                     }
@@ -4292,7 +4293,7 @@ else if(heartStar==2) frAMP=1.;
 if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                             //else if(Character==2)heartSize=gr;
         
-     if(Character!=9) HEART = heart(characterPSpunToKey*heartSize+heartShift,d.yx/4.*frAMP*heartRate )
+     if(Character!=9) HEART = heart(characterPSpunToKey*heartSize+heartShift,d.yx/4.*frAMP*heartRate*vec2(1.,flipStar) )
      //*(1.-length(uVuMinCenterASKEW)/8.)
      ;
                     
