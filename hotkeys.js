@@ -50,7 +50,7 @@ clvrVariant8:{value: false},
 clvrVariant9:{value: false},
 clvrVariant0:{value: false},
 
-twelveGates:{value: true    },
+twelveGates:{value: false    },
 twelveGatesMeta:{value: 1    },
 Spoker:{value: true    },
         spokelover:{value: true    },
