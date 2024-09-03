@@ -73,7 +73,7 @@ gl_FragColor=vec4(1.-l);}
 
 
 
-var rez = window.devicePixelRatio;
+var rez = 1;
 window.addEventListener('keydown', function(event) {
 var x = parseInt(String.fromCharCode(event.which || event.keyCode));
 if (x==1){rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
