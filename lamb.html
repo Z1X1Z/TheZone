@@ -76,10 +76,10 @@ gl_FragColor=vec4(1.-l);}
 var rez = window.devicePixelRatio;
 window.addEventListener('keydown', function(event) {
 var x = parseInt(String.fromCharCode(event.which || event.keyCode));
-if (x==1){rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
-else if (String.fromCharCode(event.which || event.keyCode)=="À")	
-	{rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);
-	}
+//if (x==1){rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
+//else if (String.fromCharCode(event.which || event.keyCode)=="À")
+//	{rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);
+//	}
 	animate();
 }, false);
 			function init() {
