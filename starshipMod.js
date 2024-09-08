@@ -167,7 +167,7 @@ function makeSpirograph(){
     var maxSamp=0.;
     for(var t=0; t<bufferPortion;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
   
-    for(var m = 0; m < bufferPortion; m++)
+    for(var m = 0; m < 2048; m++)
       {
               phase += adjConstant;//spira_pitch;
         let dilation =inputData[m]/maxSamp/2.;
@@ -1981,7 +1981,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
   var lineStride=0;
    
         //scene.add(line)
-     if(spirographMODE!=0)   for (let r= 0.; r < bufferPortion; r +=1) {//spirray size supports upto r <buffersize*2
+     if(spirographMODE!=0)   for (let r= 0.; r < 2048; r +=1) {//spirray size supports upto r <buffersize*2
             const  txlast=tx;
             const  tylast=ty;
             tx = spirray0[r];
@@ -3154,7 +3154,7 @@ let tolerance;//(1024-26)/10000
 
 //.02134356(7)  solid guess//.0214284 easier reaching notes//n*2,n,n*2*2,n*2*2/2,n*2*2*2,n*2*2*2/2
              else if(window.highORlow==2)tolerance=.49;
-             else if(window.highORlow==0)tolerance=totalAMP**2.;
+             else if(window.highORlow==0)tolerance=totalAMP-totalAMP**2.;
 let period;
 let delta = 0.0, runningSum = 0.0;
 yinData[0] = 1.0;
