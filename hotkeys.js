@@ -432,8 +432,6 @@ function callKey(event){
             uniforms.metaCarousel.value=0.;
         }
     }
-    else if (key=="("&&event.ctrlKey) highORlow = 1;
-    else if (key==")"&&event.ctrlKey ) highORlow = 2;
     else if(key == "v" && event.ctrlKey) window.FeedbackSound =  !window.FeedbackSound;
     else if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=(uniforms.starOnDot.value+1)%3;
     else if (key=="p" && event.ctrlKey)spirographMODE = (spirographMODE+1)%3;//color mode 3 seems obsolete
@@ -460,6 +458,7 @@ function callKey(event){
 
 
     else if (event.altKey&&(key=="∑"||key=="w"))window.DAW=!window.DAW;
+    else if (event.altKey&&(key=="´"||key=="e"))(window.highORlow=window.highORlow+1)%3;
 
     else if (event.altKey&&(key=="¥"||key=="y"))
     {

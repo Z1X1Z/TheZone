@@ -3153,7 +3153,8 @@ let tolerance;//(1024-26)/10000
 
 
 //.02134356(7)  solid guess//.0214284 easier reaching notes//n*2,n,n*2*2,n*2*2/2,n*2*2*2,n*2*2*2/2
-    else if(window.highORlow==2)tolerance=.49;
+             else if(window.highORlow==2)tolerance=.49;
+             else if(window.highORlow==0)tolerance=totalAMP*fractionOfFrame/bufferSize;
 let period;
 let delta = 0.0, runningSum = 0.0;
 yinData[0] = 1.0;
