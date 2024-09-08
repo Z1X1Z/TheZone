@@ -193,7 +193,7 @@ function resetAll(){
             window.blankBackground=false;
             window.twist = 0.;
             window.flip = 1.;
-            window.highORlow=1.;
+            window.highORlow=0.;
             window.FeedbackSound = false;
             window.spirographMODE = 1;
             window.pzyghthe=0;
