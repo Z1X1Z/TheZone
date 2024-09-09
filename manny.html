@@ -2493,7 +2493,7 @@ vec3 tol(vec2 p, vec2 t){
                          if(cloverOffset!=0.)p=spin2(p,cloverOffset*PI2);
                     
                     bool gated = false;
-
+/*
                          if(twelveGates)
                          {
                              
@@ -2502,7 +2502,7 @@ vec3 tol(vec2 p, vec2 t){
                                 gated=true;
                                 }
                                 }
-
+*/
 
 vec2 colorAccumulator =vec2(1.);
 vec3 heartColors = vec3(0.);
@@ -2837,7 +2837,7 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
                                                              dstnce = length(s);
 
                                                              vec2 deSplicedS = s;
-                                                             if(gated)deSplicedS=spin2(deSplicedS,-PI/6.);
+                                                            // if(gated)deSplicedS=spin2(deSplicedS,-PI/6.);
 
                                                                   if(spirated!=0.&&dstnce<2./3.)//CORE_DELIMITER)  //works well<(n-1)/n
                                                            s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
@@ -3091,6 +3091,7 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
                                                                         )
                                                                         && 0.<=hyperCoreBoosted)
                                                                     {
+                                                                        /*
                                                                        if(spinTowardsMe) if(float(i)>=hyperCoreBoosted)s=spin2(s,atan(d.y,d.x));
 
                                                                         if(twelveGatesMeta!=0.&&mod(counter,twelveGatesMeta)<1.)
@@ -3102,6 +3103,7 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
                                                                                }
 
                                                                         }
+                                                                         */
                                                            //if(i==0){float b = ;s*=b;dstnce*b;}
                                                             s*=metaCoreDriveFactor;dstnce*=metaCoreDriveFactor;
                                                             hyperCoreBoosted--;
