@@ -4549,7 +4549,7 @@ vec4 tree = vec4( clamp(
           vec3 confraculator = vec3(1.);
           if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
           fin=clamp(fin -(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z)*4.,0.,1.)+vec4(hypnoticHarmonicCircles,1.);
-gl_FragColor=
+gl_FragColor=vec4(zoomer,1.);
 //vec4(clamp(mny+zoomer,0.,1.),1.);
 fin/vec4(confraculator
                            ,1.);
