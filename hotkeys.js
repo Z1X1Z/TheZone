@@ -198,7 +198,7 @@ function resetAll(){
             window.spirographMODE = 1;
             window.pzyghthe=0;
             window.dynamicCoring=false;
-            window.fftSize = 1024;
+            window.fftSize = 2048;
             window.starArms = fftSize/2.
     
   window.video = null;
