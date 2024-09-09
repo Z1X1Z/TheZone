@@ -2744,6 +2744,16 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
        //     float logOfSpoke_Factor = 0.;
        //     if (wheel) logOfSpoke_Factor=log(spoke_factor);
                              
+                                                           
+                                                           
+                                         
+                                                           
+                                                           
+                                                           
+                                                           
+                                                           
+                                                           
+                                                           
 float hyperCoreOUTPUT =hyperCore*log(2.)/log(metaCoreDriveFactor)+loops;
                                                            hyperCoreOUTPUT-=2.*((6.+petals)/6.-1.);//upcore for higher omniclover counts, multiplied by two!!
 
@@ -2807,427 +2817,360 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
                                  
                               }
                    */
-if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
+                                                           
+                                                           if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
-else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
+                                                           else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
 
-    
-    float OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
-    float OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
-    
-  float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(loops+counter)/40.,0.)).x;
+                                                               
+                                                               float OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
+                                                               float OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
+                                                               
+                                                             float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(loops+counter)/40.,0.)).x;
 
-   //      if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
+                                                              //      if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
 
-                           // if(!true&&morph<.5)CORE_DELIMITER=1./dstnce*pow(2.,4./12.)*equilibriator;
-                            
-  // if( loopSolid>=hyperCoreBoosted+1.||inCenterCore){//||lengthP<2./3.){//so it doesn't run until it needs to, hopefully working
-  dstnce = length(s);
+                                                                                      // if(!true&&morph<.5)CORE_DELIMITER=1./dstnce*pow(2.,4./12.)*equilibriator;
+                                                                                       
+                                                             // if( loopSolid>=hyperCoreBoosted+1.||inCenterCore){//||lengthP<2./3.){//so it doesn't run until it needs to, hopefully working
+                                                             
+                                                             dstnce = length(s);
 
-  vec2 deSplicedS = s;
-  if(gated)deSplicedS=spin2(deSplicedS,-PI/6.);
+                                                             vec2 deSplicedS = s;
+                                                             if(gated)deSplicedS=spin2(deSplicedS,-PI/6.);
 
-       if(spirated!=0.&&dstnce<2./3.)//CORE_DELIMITER)  //works well<(n-1)/n
-s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
-dstnce = length(s);
+                                                                  if(spirated!=0.&&dstnce<2./3.)//CORE_DELIMITER)  //works well<(n-1)/n
+                                                           s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
+                                                           dstnce = length(s);
 
-       
-                                    float chiralAdjustment = 0.;
-                                if(chirality==-1)
-                                {   if(twelveGates)chiralAdjustment=-PI2/24.;
-                                    else chiralAdjustment=-PI/2.;
-                                    }
-                          vec2 cloverMAP = (spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment))*2./3.+.5;
-                                                   
-                                                   vec2 ColorWheelClover=vec2(0.);
-                                                   float cycleShiftChiral = 0.;
+                                                                  
+                                                                                               float chiralAdjustment = 0.;
+                                                                                           if(chirality==-1)
+                                                                                           {   if(twelveGates)chiralAdjustment=-PI2/24.;
+                                                                                               else chiralAdjustment=-PI/2.;
+                                                                                               }
+                                                                                     vec2 cloverMAP = (spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment))*2./3.+.5;
+                                                                                                              
+                                                                                                              vec2 ColorWheelClover=vec2(0.);
+                                                                                                              float cycleShiftChiral = 0.;
 
-        if(NightAndDay){
+                                                                   if(NightAndDay){
 
-                ColorWheelClover=(spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)+atan(d.x,d.y)+PI2*(6.+2.*flipStar)/12.+chiralAdjustment-twistStar*flipStar));
+                                                                           ColorWheelClover=(spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)+atan(d.x,d.y)+PI2*(6.+2.*flipStar)/12.+chiralAdjustment-twistStar*flipStar));
 
-                float correctionBrueled = 0.;
-                if(brelued==-1.)correctionBrueled=atan(-ColorWheelClover.x,-ColorWheelClover.y)-PIdiv2;
-                else correctionBrueled=atan(ColorWheelClover.y,ColorWheelClover.x)+PIdiv2;
+                                                                           float correctionBrueled = 0.;
+                                                                           if(brelued==-1.)correctionBrueled=atan(-ColorWheelClover.x,-ColorWheelClover.y)-PIdiv2;
+                                                                           else correctionBrueled=atan(ColorWheelClover.y,ColorWheelClover.x)+PIdiv2;
 
-                if(dstnce<4./3.)
-                beta   =  hsv2rgb(vec3(-correctionBrueled/PI2*flipStar,1.,1.));
-                //return beta;
-        }
+                                                                           if(dstnce<4./3.)
+                                                                           beta   =  hsv2rgb(vec3(-correctionBrueled/PI2*flipStar,1.,1.));
+                                                                           //return beta;
+                                                                   }
 
-                 if(dstnce<2./3.||(spokesVisualizeColors&&dstnce<4./3.)) {
-                    float decayCanceller=1.;
-                    if(spokesVisualizeColors)decayCanceller = 2.;
-                    //if(morph!=0.)decayCanceller=decayCanceller*decayCanceller;
-                    
-                   sevenSuns+=texture2D(videoTexture,vec2(1.-cloverMAP.x,cloverMAP.y))+texture2D(videoTexture2,vec2(1.-cloverMAP.x,cloverMAP.y));
+                                                                            if(dstnce<2./3.||(spokesVisualizeColors&&dstnce<4./3.)) {
+                                                                               float decayCanceller=1.;
+                                                                               if(spokesVisualizeColors)decayCanceller = 2.;
+                                                                               //if(morph!=0.)decayCanceller=decayCanceller*decayCanceller;
+                                                                               
+                                                                              sevenSuns+=texture2D(videoTexture,vec2(1.-cloverMAP.x,cloverMAP.y))+texture2D(videoTexture2,vec2(1.-cloverMAP.x,cloverMAP.y));
 
-                    
-                       if(eden==0)starship+=texture2D(STAR,cloverMAP)/decayCanceller;
-                       else if(eden==1)starship+=texture2D(EDEN,cloverMAP)/decayCanceller;
-                       //*length((vUv-.5)*max(resolution.x,resolution.y)/min(resolution.x,resolution.y));//+texture2D(STAR,cloverMAP);
-                            
-                           }
+                                                                               
+                                                                                  if(eden==0)starship+=texture2D(STAR,cloverMAP)/decayCanceller;
+                                                                                  else if(eden==1)starship+=texture2D(EDEN,cloverMAP)/decayCanceller;
+                                                                                  //*length((vUv-.5)*max(resolution.x,resolution.y)/min(resolution.x,resolution.y));//+texture2D(STAR,cloverMAP);
+                                                                                       
+                                                                                      }
 
-            if(onehundredfortyfourthousand)
-            {
-                 
-                 int march= int(mod(initialHyperCoreBoosted,4.));
-                 float color = 1.;
-                 if (march==1||march==3)color = -1.;
-                 if(dstnce<2./3.)
-                 {
-                     vec2 move =-d.yx*volume/8.;
-                  //   if(march==0||march==3)oo+=color*(sealedMan(deSplicedS*5.,move)+faceFORWARDTWO(deSplicedS*5.+vec2(2.,0.),vec2(0.))/1.5);
-                  // else oo+=color*(sealedWoman(deSplicedS*5.,move)+kissingEagles(deSplicedS*5.)/1.5);
-                 }
-                                          
-            }
-//}
-   colorAccumulator+=s;
-   if(Refractelate&&dstnce>refractelC){s/=refractelC;} //refractelC/=4./3.;}
-vec2 lastS = s;
-   s=vec2(
-        s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
-       -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
-       );
+                                                                       if(onehundredfortyfourthousand)
+                                                                       {
+                                                                            
+                                                                            int march= int(mod(initialHyperCoreBoosted,4.));
+                                                                            float color = 1.;
+                                                                            if (march==1||march==3)color = -1.;
+                                                                            if(dstnce<2./3.)
+                                                                            {
+                                                                                vec2 move =-d.yx*volume/8.;
+                                                                             //   if(march==0||march==3)oo+=color*(sealedMan(deSplicedS*5.,move)+faceFORWARDTWO(deSplicedS*5.+vec2(2.,0.),vec2(0.))/1.5);
+                                                                             // else oo+=color*(sealedWoman(deSplicedS*5.,move)+kissingEagles(deSplicedS*5.)/1.5);
+                                                                            }
+                                                                                                     
+                                                                       }
+                                                           //}
+                                                              colorAccumulator+=s;
+                                                              if(Refractelate&&dstnce>refractelC){s/=refractelC;} //refractelC/=4./3.;}
+                                                           vec2 lastS = s;
 
-      // if (mod(counter,5.) == 4.)s =pCenterCored;
-       //x**3
-       dstnce = length(s);
+                                                              s=vec2(
+                                                                   s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
+                                                                  -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
+                                                                  );
+                                                            
+                                                                 // if (mod(counter,5.) == 4.)s =pCenterCored;
+                                                                  //x**3
+                                                                  dstnce = length(s);
 
-       if(dilate){//this is to allow top level core freeze for original clover
-       hyperCoreBoosted-=dstnce;//duplicate dilation
-       hyperCoreOUTPUT-=dstnce;
-       }
-       
-       if(clvrVariant9) s+= coords*gr;
+                                                                  if(dilate){//this is to allow top level core freeze for original clover
+                                                                  hyperCoreBoosted-=dstnce;
+                                                                  hyperCoreOUTPUT-=dstnce;
+                                                                  }
+                                                                  
+                                                                  if(clvrVariant9) s+= coords*gr;
 
-        if(clvrVariant7)s+=pcs;
-        
+                                                                   if(clvrVariant7)s+=pcs;
+                                                                   
 
-        if(clvrVariant1)  s*=length(lastS);
-      // if(counter==0.){ s/=2.;dstnce/=2.;}
 
-        
-        /*variants 2356 disabled for some android devices to load properly
-      if(clvrVariant3)s-=pCenterCored*dstnce;
-     if(clvrVariant2)if(s.x!=0.&&s.y!=0.&&coords.x!=0.&&coords.y!=0.){
-          vec2 cb=coords.yx;
-          vec2 coordClover=vec2(
-                                cb.x*cb.x*cb.x         - 3.*cb.x*cb.y*cb.y,
-              -cb.y*cb.y*cb.y+ 3.*cb.x*cb.x*cb.y
-              );
-          vec2 modifier=coords.xy*coords.yx*(1.-abs(coords.yx))*(1.-abs(coords.xy))/abs(s)/coordClover.yx*coords.y;//*abs(coordClover.x);//coords.xy*coords.yx*(1.-oneOverLeafTruncated);
-          s-=modifier;
-         // hyperCoreBoosted-=length(modifier);
-          }
-           */
-                                       /*
-        if(clvrVariant0)
-        {
-        if(mod(counter,2.)==1.)     s=vec2(pow(s.x,.5)*sign(s.y),pow(s.y,2.)*sign(s.x));
-        else   s=vec2(pow(s.x,2.)*sign(s.y),pow(s.y,.5)*sign(s.x));
-        }
-                                   */
-        if(clvrVariant4) s*=1.-oneOverLeafTruncated;
+                                                                   /*
+                                                                 if(clvrVariant1)  s*=length(lastS);
+                                                                 if(clvrVariant3)s-=pCenterCored*dstnce;
+                                                                if(clvrVariant2)if(s.x!=0.&&s.y!=0.&&coords.x!=0.&&coords.y!=0.){
+                                                                     vec2 cb=coords.yx;
+                                                                     vec2 coordClover=vec2(
+                                                                                           cb.x*cb.x*cb.x         - 3.*cb.x*cb.y*cb.y,
+                                                                         -cb.y*cb.y*cb.y+ 3.*cb.x*cb.x*cb.y
+                                                                         );
+                                                                     vec2 modifier=coords.xy*coords.yx*(1.-abs(coords.yx))*(1.-abs(coords.xy))/abs(s)/coordClover.yx*coords.y;//*abs(coordClover.x);//coords.xy*coords.yx*(1.-oneOverLeafTruncated);
+                                                                     s-=modifier;
+                                                                    // hyperCoreBoosted-=length(modifier);
+                                                                     }
+                                                                      */
+                                                                 if(clvrVariant4)   s*=1.-oneOverLeafTruncated;
+                                                             
+                                                                /* if(clvrVariant5)if(length(s)>0.) s = vec2(pow(s.x,-2.),pow(s.y,-2.));
+                                                                 if(clvrVariant6)s=s-lastS.yx;
+                                                           */
+                                                                if(clvrVariant8) if(length(s)<1.)s+=1.;
 
-        /*
-  if(mod(counter,2.)==1.)   s=vec2(pow(s.x,2.)*sign(s.x),pow(s.y,.5)*sign(s.y));
-else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
-  */
-                                            /*
+                                                                  //if(dotted)s/=dot(-m,t)*dot(m,-t);
 
-     if(clvrVariant2) {
-         if (clvrVariant4) s*=1.5;
-        else {
-            s*=2.;
-            
-             hyperCoreBoosted++;
-             hyperCoreOUTPUT++;
-             }
-         }
-                                             */
-     /* if(clvrVariant5)if(length(s)>0.) s = vec2(pow(s.x,-2.),pow(s.y,-2.));
-      if(clvrVariant6)s=s-lastS.yx;
-*/
-     if(clvrVariant8) if(length(s)<1.)s+=1.;
+                                                                  if(morph!=0.&&!wheel)s-=t;
+                                                                   else s+=t-m;
+                                                                                        
+                                                                                        
+                                                                  if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the body steps on the clover
+                                                                  else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only
+                                                              
+                                                             // dstnce = length(s);
+                                                              
+                                                              
+                                                              //float trunc=1.;
+                                                              //if(lfc!=0.) trunc = log(zoom/dstnce)/100.;
 
-       //if(dotted)s/=dot(-m,t)*dot(m,-t);
-       if(morph!=0.&&!wheel)s-=t;
-        else s+=t-m;
-                             
-                             
-       if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the body steps on the clover
-       else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only
-   
-  // dstnce = length(s);
-   
-   
-   //float trunc=1.;
-   //if(lfc!=0.) trunc = log(zoom/dstnce)/100.;
+                                                              s.x=log(abs(s.x))/log(base);
+                                                              //traditionally be e or 3 probably 1.5 to 4
+                                                              dstnce = length(s);
 
-   s.x=log(abs(s.x))/log(base);
-   //traditionally be e or 3 probably 1.5 to 4
-   dstnce = length(s);
+                                                              
 
-   
+                                                           if(Spoker){
+                                                              // if(morph==0.)
+                                                               {
+                                                                   if(//!wheel
+                                                                       dstnce*sqrt(dstnce)<=hyperCoreBoosted)//||(wheel&&1.<=hyperCoreBoosted))
+                                                                                    {
+                                                                                        /*
+                                                                                    if(wheel){
+                                                                                        s/=2.;
+                                                                                        
+                                                                                        hyperCoreOUTPUT-=logOfSpoke_Factor;
 
-if(Spoker){
-   // if(morph==0.)
-    {
-        if(//!wheel
-            dstnce*sqrt(dstnce)<=hyperCoreBoosted)//||(wheel&&1.<=hyperCoreBoosted))
-                         {
-                             /*
-                         if(wheel){
-                             s/=2.;
-                             
-                             hyperCoreOUTPUT-=logOfSpoke_Factor;
+                                                                                        hyperCoreBoosted-=logOfSpoke_Factor;
+                                                                                        }
+                                                                                    else {
+                                                                                         */
+                                                                                       
+                                                                                        
+                                                                                     s/=spoke_factorLarge;//engage ; s/=2.+'superspokes'
+                                                                                    
+                                                                                    hyperCoreOUTPUT-=downSpoke;
 
-                             hyperCoreBoosted-=logOfSpoke_Factor;
-                             }
-                         else {
-                              */
-                            
-                             
-                          s/=spoke_factorLarge;//engage ; s/=2.+'superspokes'
-                         
-                         hyperCoreOUTPUT-=downSpoke;
+                                                                                    hyperCoreBoosted-=downSpoke;
+                                                                                    //}
+                                                                                    }
+                                                                   else  {
+                                                                       /*
+                                                                           if(wheel){
+                                                                       hyperCoreOUTPUT+=logOfSpoke_Factor;
+                                                                       hyperCoreBoosted+=logOfSpoke_Factor;
+                                                                       }
+                                                                           else {*/
+                                                                             //  float correctionSpoke =pow(upSpoke/dstnce,grOverLeaf);//uncertain value
+                                                                             s*=spoke_factor;
+                                                                       hyperCoreOUTPUT+=upSpoke
+                                                                       ;
+                                                                       hyperCoreBoosted+=upSpoke;
+                                                                      // }
+                                                                       }
+                                                           }
+                                                           /*else//for dancer only
+                                                           {
+                                                              
+                                                           hyperCoreOUTPUT-=spoke_factor;
+                                                           hyperCoreBoosted-=spoke_factor;}
+                                                            */
+                                                              }
+                                                           dstnce=length(s);
+                                                           if(spokelover)
+                                                           {
+                                                                  
+                                                           float powerOfSpokeCore =spoke_factorLarge*lfc/dstnce;// uncertain value,takes large range, highly responsive on spokes PI*PI/gr*-leaf has nice outer main spokes
 
-                         hyperCoreBoosted-=downSpoke;
-                         //}
-                         }
-        else  {
-            /*
-                if(wheel){
-            hyperCoreOUTPUT+=logOfSpoke_Factor;
-            hyperCoreBoosted+=logOfSpoke_Factor;
-            }
-                else {*/
-                  //  float correctionSpoke =pow(upSpoke/dstnce,grOverLeaf);//uncertain value
-                 s*=spoke_factor;
-            hyperCoreOUTPUT+=upSpoke
-            ;
-            hyperCoreBoosted+=upSpoke;
-           // }
-            }
-}
-/*else//for dancer only
-{
-   
-hyperCoreOUTPUT-=spoke_factor;
-hyperCoreBoosted-=spoke_factor;}
- */
-   }
-//dstnce=length(s);
-if(spokelover)
-{
-       
-float powerOfSpokeCore =spoke_factorLarge*lfc/dstnce;// uncertain value,takes large range, highly responsive on spokes PI*PI/gr*-leaf has nice outer main spokes
-
-float spokeloverCoreShiftDown=pow(upSpoke,powerOfSpokeCore)*logStabilizationConstant;
-float       spokeloverCoreShiftUp  =      pow(abs(downSpoke),powerOfSpokeCore)*logStabilizationConstant;
+                                                           float spokeloverCoreShiftDown=pow(upSpoke,powerOfSpokeCore)*logStabilizationConstant;
+                                                           float       spokeloverCoreShiftUp  =      pow(abs(downSpoke),powerOfSpokeCore)*logStabilizationConstant;
 
 
 
-if(counter+dstnce*dstnce //sqrt(sqrt(dstnce)*dstnce)*dstnce
-   <hyperCoreBoosted){
-   //  if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
-     //else
+                                                           if(counter+dstnce<hyperCoreBoosted){
+                                                              //  if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
+                                                                //else
 
-     
-     s/=sqrt(2.);
-     if(!wheel){
-     //float b =pow(pow(abs(downSpoke),powerOfDynamicSokeCoreUp),grOverLeaf);
-  hyperCoreOUTPUT+=spokeloverCoreShiftUp;
-  hyperCoreBoosted+=spokeloverCoreShiftUp;
-  }
-     }
+                                                                
+                                                                s/=sqrt(2.);
+                                                                if(!wheel){
+                                                                //float b =pow(pow(abs(downSpoke),powerOfDynamicSokeCoreUp),grOverLeaf);
+                                                             hyperCoreOUTPUT+=spokeloverCoreShiftUp;
+                                                             hyperCoreBoosted+=spokeloverCoreShiftUp;
+                                                             }
+                                                                }
 
-else //if(  0.>=hyperCoreBoosted)
-{
-    s*=sqrt(2.)/1.5;
+                                                           else //if(  0.>=hyperCoreBoosted)
+                                                           {
+                                                               s*=sqrt(2.)/1.5;
 
-    if(!wheel)
-    {
-              hyperCoreOUTPUT-=spokeloverCoreShiftDown;
-              hyperCoreBoosted-=spokeloverCoreShiftDown;
-             }
-    }
- }
+                                                               if(!wheel)
+                                                               {
+                                                                         hyperCoreOUTPUT-=spokeloverCoreShiftDown;
+                                                                         hyperCoreBoosted-=spokeloverCoreShiftDown;
+                                                                        }
+                                                               }
+                                                            }
 
-   if(continuumClover&&lfc!=0.){//engage continualization
-       float continuumCore=(continuumCounter+hyperCoreOUTPUT)*zoom/(lfc*variant4Correction-zoom);
-       if(loops+counter<=hyperCoreBoosted+continuumCounter)
-       {
-       s/=pow(2.,pow(.5,continuumCore));
-      
-       hyperCoreBoosted+=continuumCore;
-       hyperCoreOUTPUT+=continuumCore;
-       
-       }
-       else
-{
-    hyperCoreBoosted-=continuumCore;
-    hyperCoreOUTPUT-=continuumCore;
-    
-           
-       }
-    }
-  
-dstnce = length(s);
+                                                              if(continuumClover&&lfc!=0.){//engage continualization
+                                                                  float continuumCore=(continuumCounter+hyperCoreOUTPUT)*zoom/(lfc*variant4Correction-zoom);
+                                                                  if(loops+counter<=hyperCoreBoosted+continuumCounter)
+                                                                  {
+                                                                  s/=pow(2.,pow(.5,continuumCore));
+                                                                 
+                                                                  hyperCoreBoosted+=continuumCore;
+                                                                  hyperCoreOUTPUT+=continuumCore;
+                                                                  
+                                                                  }
+                                                                  else
+                                                           {
+                                                               hyperCoreBoosted-=continuumCore;
+                                                               hyperCoreOUTPUT-=continuumCore;
+                                                               
+                                                                      
+                                                                  }
+                                                               }
+                                                             
+                                                           dstnce = length(s);
 
-                             //              s*=refactorCores;c*=refactorCores;
-                             
-                             
-                             if(petals!=0.&&dstnce<4./3.)s=spin2(s,atan(s.y,s.x)*(petals)/6.);
-                             //if(exponentialPetals!=0.)s=spin2(vec2(s.x,exponentialPetals*s.y),
-                                //                                                                                             2.*PI*pow(2.,(xenOctaveFactor-atan(s.x,exponentialPetals*s.y)))/pow(2.,xenOctaveFactor));
+                                                                                        //              s*=refactorCores;c*=refactorCores;
+                                                                                        
+                                                                                        
+                                                                                        if(petals!=0.&&dstnce<4./3.)s=spin2(s,atan(s.y,s.x)*(petals)/6.);
+                                                                                        //if(exponentialPetals!=0.)s=spin2(vec2(s.x,exponentialPetals*s.y),
+                                                                                           //                                                                                             2.*PI*pow(2.,(xenOctaveFactor-atan(s.x,exponentialPetals*s.y)))/pow(2.,xenOctaveFactor));
 
-                            //if(exponentialPetals!=0.)s=spin2(vec2(s.x,s.y*exponentialPetals),log(atan(s.y*exponentialPetals,s.x)/PI));
-                             
-                             if(dstnce<4./3. &&exponentialPetals!=0.) s=spin2(s,pow(2.,(atan(s.y,s.x)/PI+1.)*2.));
-                             //if(dstnce<4./3.)s=spin2(s,pow(2.,atan(s.y,s.x)));
-                              dstnce =length(s);
+                                                                                       //if(exponentialPetals!=0.)s=spin2(vec2(s.x,s.y*exponentialPetals),log(atan(s.y*exponentialPetals,s.x)/PI));
+                                                                                        
+                                                                                        if(dstnce<4./3. &&exponentialPetals!=0.) s=spin2(s,pow(2.,(atan(s.y,s.x)/PI+1.)*2.));
+                                                                                        //if(dstnce<4./3.)s=spin2(s,pow(2.,atan(s.y,s.x)));
+                                                                                        float dstnce =length(s);
 
-                       if(dilate){
-                           
-                       hyperCoreOUTPUT-=dstnce;//dilate clover shift
-                       hyperCoreBoosted-=dstnce;//maybe times 1.5
-                       }
-                       
-                // if(superStable&&dstnce<1.5)
-               //   {float b = .5;s*=b;dstnce*=b;
-                     // hyperCoreBoosted++;
-                     // hyperCoreOUTPUT++;
-                      
-              //    }
-              gated = false;
-for(int i=0;i<40; i++)//not sure if i is 20 or >20
-if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.))
-    )
-    && 0.<=hyperCoreBoosted)
-{
-   if(spinTowardsMe) if(float(i)>=hyperCoreBoosted)s=spin2(s,atan(d.y,d.x));
+                                                                                  if(dilate){
+                                                                                      
+                                                                                  hyperCoreOUTPUT-=dstnce;//dilate clover shift
+                                                                                  hyperCoreBoosted-=dstnce;//maybe times 1.5
+                                                                                  }
+                                                                                  
+                                                                                  gated = false;
+                                                                    for(int i=0;i<40; i++)//not sure if i is 20 or >20
+                                                                    if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.))
+                                                                        )
+                                                                        && 0.<=hyperCoreBoosted)
+                                                                    {
+                                                                       if(spinTowardsMe) if(float(i)>=hyperCoreBoosted)s=spin2(s,atan(d.y,d.x));
 
-    if(twelveGatesMeta!=0.&&mod(counter,twelveGatesMeta)<1.)
-    {
-    float angleS = atan(s.y,s.x);
-    if(mod((angleS/PI+2.)*6.+.5,2.)>1.)
-    {s=spin2(s,PI/6.);
-           gated=true;
-           }
+                                                                        if(twelveGatesMeta!=0.&&mod(counter,twelveGatesMeta)<1.)
+                                                                        {
+                                                                        float angleS = atan(s.y,s.x);
+                                                                        if(mod((angleS/PI+2.)*6.+.5,2.)>1.)
+                                                                        {s=spin2(s,PI/6.);
+                                                                               gated=true;
+                                                                               }
 
-    }
-    /*
-    if(superStable)
-    {
-       if(i==0){
-          if(counter==0.) {s/=4.;dstnce/=4.;}  else
-              {s/=2.;dstnce/=2.;}
-                    
-                    hyperCoreBoosted+=.5;
-                    hyperCoreOUTPUT+=.5;
-                  loops-=.5;
-                    
-                }
-            else{
-                s*=2.;dstnce*=2.;
-                
-                hyperCoreBoosted-=1.;
-                hyperCoreOUTPUT-=1.;
-                loops+=1.;
-            }
-            
-            hyperCoreBoosted-=.5;;
-            hyperCoreOUTPUT-=.5;;
-            loops+=.5;;
+                                                                        }
+                                                           //if(i==0){float b = ;s*=b;dstnce*b;}
+                                                            s*=metaCoreDriveFactor;dstnce*=metaCoreDriveFactor;
+                                                            hyperCoreBoosted--;
+                                                            hyperCoreOUTPUT--;
+                                                            loops++;
+                                                            
 
-}
-    
-  else
-     */
+                                                           OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
+                                                           OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
+                                                             if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spin2(s,atan(s.y,s.x)*OmniPetal);
 
-    { s*=metaCoreDriveFactor;dstnce*=metaCoreDriveFactor;
-        
-        hyperCoreBoosted--;
-        hyperCoreOUTPUT--;
-        loops++;
-    }
- 
+                                                            if (cloverSlide)
+                                                              {
+                                                                  
+                                                                  if(float(i)>hyperCoreBoosted)
+                                                                  {
+                                                                      float b = dstnce;//may not be core stable
+                                                                      loops-=b;
+                                                                      hyperCoreBoosted+=b;
+                                                                      hyperCoreOUTPUT+=b;
+                                                                  }
+                                                                  else{
+                                                                      float b =dstnce/4.;//may not be core stable
+                                                                      loops-=b;
+                                                                  hyperCoreBoosted+=b;
+                                                                  hyperCoreOUTPUT+=b;
 
-OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
-OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
-  if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spin2(s,atan(s.y,s.x)*OmniPetal);
+                                                                  }
+                                                                   
+                                                                  /*
+                                                                 float b =dstnce/1.5;//try dstnce/1.5
+                                                                  loops-=b;
+                                                              hyperCoreBoosted+=b;
+                                                                  hyperCoreOUTPUT+=b;
+                                                                  */
+                                                              }
+                                                              
+                                                              if(fieldPowerBoostMeta&&(float(i)>=hyperCoreBoosted)){
+                                                                  float powerBoost =eConstant*(log(.5)*dstnce*(sqrt(2.))/1.5);
+                                                                  s*=pow(dstnce,powerBoost);
+                                                                  dstnce*=pow(dstnce,powerBoost);
 
- if (cloverSlide)
-   {
-       
-       if(float(i)>hyperCoreBoosted)
-       {
-           float b = dstnce;//may not be core stable
-           loops-=b;
-           hyperCoreBoosted+=b;
-           hyperCoreOUTPUT+=b;
-       }
-       else{
-           float b =dstnce/4.;//may not be core stable
-           loops-=b;
-       hyperCoreBoosted+=b;
-       hyperCoreOUTPUT+=b;
+                                                              }
+                                                             if(metaCarousel!=0.
+                                                                &&(float(i)>=hyperCoreBoosted+1.))  {   //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
+                                                                 
+                                                                float wise = 1.;
+                                                                
+                                                                if(mod(float(i),4.)==0.)wise=1.;
+                                                                else if(mod(float(i),4.)==1.)wise=-1.;
+                                                                else  if(mod(float(i),4.)==2.)wise= -1.;
+                                                                else  if(mod(float(i),4.)==3.)wise=1.;
+                                                                
+                                                                
+                                                                   s=spin2(s,time*wise*metaCarousel*(1.+OmniPetal/6.)*rate);
+                                                                   }
 
-       }
-        
-       /*
-      float b =dstnce/1.5;//try dstnce/1.5
-       loops-=b;
-   hyperCoreBoosted+=b;
-       hyperCoreOUTPUT+=b;
-       */
-   }
-   
-   if(fieldPowerBoostMeta&&(float(i)>=hyperCoreBoosted)){
-       float powerBoost =eConstant*(log(.5)*dstnce*(sqrt(2.))/1.5);
-       s*=pow(dstnce,powerBoost);
-       dstnce*=pow(dstnce,powerBoost);
+                                                           }
+                                                           else break;
+                                                            
+                                                           hyperCoreBoosted--;
+                                                           hyperCoreOUTPUT--;
+                                                                                        colorShift+=hyperCoreBoosted;
+                                                                           //             dstnce = length(s);
 
-   }
-  if(metaCarousel!=0.
-     &&(float(i)>=hyperCoreBoosted+1.))  {   //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
-      
-      
-      
-      
-     float wise = 1.;
-     
-     if(mod(float(i),4.)==0.)wise=1.;
-     else if(mod(float(i),4.)==1.)wise=-1.;
-     else  if(mod(float(i),4.)==2.)wise= -1.;
-     else  if(mod(float(i),4.)==3.)wise=1.;
-     
-     
-        s=spin2(s,time*wise*metaCarousel*(1.+OmniPetal/6.)*rate);
-        
-        
+                                                                           loopSolid++;
 
-        }
-
-     
-}
-else break;
-
-
- 
-hyperCoreBoosted--;
-hyperCoreOUTPUT--;
-                             colorShift+=hyperCoreBoosted;
-                //             dstnce = length(s);
-
-                loopSolid++;
-
-}else break;
-                  
+                                                           }else break;
+                                                       
 ///if(multiplicatorNexus)s*=colorShift/88.8;
 
                                      if(colorCombo==-1&&Inherited){
