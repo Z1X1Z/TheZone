@@ -4225,7 +4225,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
  else if (largeEyeColor== 3.) bigEyes = clamp(shiny(characterOnTrailP/3.5*min(resolution.x,resolution.y)/max(resolution.x,resolution.y),moveDynamic*1.5),0.,1.);
                                                                  
                                                                  
-                                                                 
+                                                      /*
                                                   if(musicAngelMan>0&&Character!=3&&Character!=4)
                                                                        {
                                                              float divisor = 1.;
@@ -4234,6 +4234,9 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                             if(mny.r!=0.||mny.g!=0.||mny.b!=0.) AM*=mny;
                                                          //    mny+=AM;
                                                              }
+                                                       */
+                                                       
+                                                       
                                  //          mny=clamp(mny,0.,1.);
                                                                  
                                                                  float frAMP=0.;
@@ -4496,7 +4499,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
                                     +yourFace.xyzw,0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
-                       vec4 goodies = vec4(0.);vec4(
+                       vec4 goodies = vec4(
                                            mnyX+clamp(heartWarmed*isColoredMultiplier,0.,1.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
                                           ( pillar+icicles.xyz+linearFrequency)*(1.-pixelShipGrey*40.)
@@ -4549,7 +4552,8 @@ vec4 tree = vec4( clamp(
           vec3 confraculator = vec3(1.);
           if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
           fin=clamp(fin -(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z)*4.,0.,1.)+vec4(hypnoticHarmonicCircles,1.);
-gl_FragColor=fin/vec4(confraculator
+gl_FragColor=
+fin/vec4(confraculator
                            ,1.);
                        
        //  gl_FragColor= vec4(.5);
