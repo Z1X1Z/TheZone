@@ -100,7 +100,7 @@ dilate:{value:true},
         coords: {value: [0.,0.]},//to prevent dividing by zero may be set to small value
         coordSHIFT: {value: [0.,0.]},
         duperZoom: {value:1.},
-        d: {value:[0.,0.]},
+        d: {value:[1.,0.]},
         dotCoord:{value:[0.,0.]},
 
 
