@@ -4296,7 +4296,7 @@ else if(heartStar==2) frAMP=1.;
 if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                             //else if(Character==2)heartSize=gr;
         
-     if(Character!=9) HEART = heart(characterPSpunToKey*heartSize+heartShift,d.yx/4.*heartRate*vec2(1.,flipStar) )
+     if(Character!=9) HEART = heart(characterPSpunToKey*heartSize+heartShift,d.yx/4.*vec2(1.,flipStar) )
      //*(1.-length(uVuMinCenterASKEW)/8.)
      ;
                     
