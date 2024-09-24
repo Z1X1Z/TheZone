@@ -4245,7 +4245,7 @@ if(heartStar==0){
             , -(//starSpin*mod(time*rate,PI*2.)-
             twistStar*brelued));
 
-            vec2 vUvCenteredASKEW = (vUv.yx);//-.5-d.yx*heartRate*aspectRatio);
+            vec2 vUvCenteredASKEW = (vUv.yx-.5-d.yx*heartRate*aspectRatio);
             vec2 uVuASKEW=-(vUvCenteredASKEW)/aspectRatio;
             vec2 uVuMinCenterASKEW=-vUvCenteredASKEW/(min(resolution.x,resolution.y)/resolution.yx);
 
@@ -4256,7 +4256,7 @@ if(heartStar==0){
             vec2 uvSwizzled=uVuMinCenterASKEW.yx;
 
 
-            float angleASKEW = ((-atan(uvSwizzled.y,uvSwizzled.x)*flipStar*radialWarp-twistStar
+            float angleASKEW = ((-atan(vUv.y,vUv.x)*flipStar*radialWarp-twistStar
             +PIdiv2+PIdiv2*flipStar)/PI2);
             //angle=mod(angle,1.);
 
