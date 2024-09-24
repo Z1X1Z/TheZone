@@ -4256,7 +4256,7 @@ if(heartStar==0){
             vec2 uvSwizzled=uVuMinCenterASKEW.yx;
 
 
-            float angleASKEW = ((-atan(vUv.y,vUv.x)*flipStar*radialWarp-twistStar
+            float angleASKEW = ((-atan(uvSwizzled.y,uvSwizzled.x)*flipStar*radialWarp-twistStar
             +PIdiv2+PIdiv2*flipStar)/PI2);
             //angle=mod(angle,1.);
 
@@ -4296,7 +4296,7 @@ else if(heartStar==2) frAMP=1.;
 if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                             //else if(Character==2)heartSize=gr;
         
-     if(Character!=9) HEART = heart(characterPSpunToKey*heartSize+heartShift,d.yx/4.*frAMP*heartRate*vec2(1.,flipStar) )
+     if(Character!=9) HEART = heart(characterPSpunToKey*heartSize+heartShift,vec2(0.) )
      //*(1.-length(uVuMinCenterASKEW)/8.)
      ;
                     
