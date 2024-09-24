@@ -4496,7 +4496,8 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
                                     +yourFace.xyzw,0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
-                       vec4 goodies = vec4(
+                       vec4 goodies =vec4(heartWarmed,1.);
+                       vec4(
                                            mnyX+clamp(heartWarmed*isColoredMultiplier,0.,1.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
                                           ( pillar+icicles.xyz+linearFrequency)*(1.-pixelShipGrey*40.)
@@ -4544,7 +4545,7 @@ vec4 tree = vec4( clamp(
               ,1.);
         
           vec4 fin = (clamp(ss*vec4(starshipMultiplier,1.)-faceFromShip,0.,1.)+clamp(
-                                                                                     //goodies+
+                                                                                     goodies+
                                                                                      tree+pixelShipGrey,0.,1.))*isBlack*isBlackStaRivers*isBlackDOT+(isBlack-1.)+(isBlackDOT-1.)+(isBlackStaRivers-1.);
           if(fin.r>.9&&fin.g>.9&&fin.b>.9)fin-=(isGrey+isGreyDOT+pixelShipGrey+isGreyStaRivers+pixelShipGrey)*1.5;
           else if(fin.r<.1&&fin.g<.1&&fin.b<.1)fin+=(isGrey+isGreyDOT+isGreyStaRivers+pixelShipGrey)*1.5;
