@@ -4456,8 +4456,8 @@ if(starOnDot>=1){
              icicles = waveForm();
              float sevenPillarShrink = pillarScale*2./max(resolution.x,resolution.y);
              vec2 adjustedvUv=vec2(vUv.x,vUv.y*(1.-sevenPillarShrink)-sevenPillarShrink);
-             //linearFrequency=linearFrequencyEQ(adjustedvUv);
-             //linearFrequency+=linearFrequencyEQ(vec2(1.-adjustedvUv.x,adjustedvUv.y));
+             linearFrequency=linearFrequencyEQ(adjustedvUv);
+             linearFrequency+=linearFrequencyEQ(vec2(1.-adjustedvUv.x,adjustedvUv.y));
             // linearFrequency/=2.;
              vec4 starBuffer = vec4(0.);
              for (float x = 0.; x<12.;x++) starBuffer+=starns(uVu,x);
