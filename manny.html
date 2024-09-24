@@ -4296,7 +4296,9 @@ else if(heartStar==2) frAMP=1.;
 if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                             //else if(Character==2)heartSize=gr;
         
-     if(Character!=9) HEART = heart(characterPSpunToKey*heartSize+heartShift,d.yx/4.*vec2(1.,flipStar) )
+     if(Character!=9) HEART = heart(characterPSpunToKey*heartSize+heartShift,vec2(0.)
+                                    //d.yx/4.*frAMP*heartRate*vec2(1.,flipStar)//not working on some androids
+                                    )
      //*(1.-length(uVuMinCenterASKEW)/8.)
      ;
                     
