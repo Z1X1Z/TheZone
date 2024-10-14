@@ -4292,15 +4292,15 @@ if(frAMP==0.)frAMP=1.;//to prevent cancelling moveDynamic in touchmode
 float heartSize=gr*gr*-leaf;
 if(heartStar==0)heartSize/=(1.+frAMP);//*8.;
 else if(heartStar==1){
-    heartSize/=(1.+volume);//multiplied by two if heart argument is not vec2(0.)
+    heartSize/=(1.+volume)*.75;//multiplied by two if heart argument is not vec2(0.)
     frAMP=volume*4.;
     }
 else if(heartStar==2) frAMP=1.;
 if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                             //else if(Character==2)heartSize=gr;
         
-     if(Character!=9) HEART = heart(characterPSpunToKey*heartSize+heartShift,//vec2(0.)
-                                    dDUPLICATE.yx/4.//*frAMP*heartRate*vec2(1.,flipStar)// not working on some androids
+     if(Character!=9) HEART = heart(characterPSpunToKey*heartSize+heartShift,vec2(0.)
+                                   // d.yx/4.*frAMP*heartRate*vec2(1.,flipStar)// not working on some androids
                                     )
      //*(1.-length(uVuMinCenterASKEW)/8.)
      ;
