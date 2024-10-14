@@ -2838,8 +2838,8 @@ dstnce = length(s);
                                 {   if(twelveGates)chiralAdjustment=-PI2/24.;
                                     else chiralAdjustment=-PI/2.;
                                     }
-                          vec2 cloverMAP = (spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment))*2./3.+.5;
-                                                   
+                          vec2 cloverMAP = vec2(0.);
+                          if (d.x!=0.&&d.y!=0.) cloverMAP = (spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment))*2./3.+.5;
                                                    vec2 ColorWheelClover=vec2(0.);
                                                    float cycleShiftChiral = 0.;
 
