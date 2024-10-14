@@ -1684,6 +1684,8 @@ void main(){
     uniform int starOnDot;
     uniform vec2 dotCoord;
     uniform vec2 d;
+    uniform vec2 dDUPLICATE;
+
     uniform vec2 coordSHIFT;
     uniform float duperZoom;
 
@@ -2839,13 +2841,13 @@ dstnce = length(s);
                                     else chiralAdjustment=-PI/2.;
                                     }
                           vec2 cloverMAP = vec2(0.);
-                          if (d.x!=0.&&d.y!=0.) cloverMAP = (spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment))*2./3.+.5;
+                          cloverMAP = (spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)-atan(dDUPLICATE.x,dDUPLICATE.y)+PI+chiralAdjustment))*2./3.+.5;
                                                    vec2 ColorWheelClover=vec2(0.);
                                                    float cycleShiftChiral = 0.;
 
         if(NightAndDay){
 
-                ColorWheelClover=(spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)+atan(d.x,d.y)+PI2*(6.+2.*flipStar)/12.+chiralAdjustment-twistStar*flipStar));
+                ColorWheelClover=(spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)+atan(dDUPLICATE.x,dDUPLICATE.y)+PI2*(6.+2.*flipStar)/12.+chiralAdjustment-twistStar*flipStar));
 
                 float correctionBrueled = 0.;
                 if(brelued==-1.)correctionBrueled=atan(-ColorWheelClover.x,-ColorWheelClover.y)-PIdiv2;

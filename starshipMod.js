@@ -466,6 +466,7 @@ let pushBackCounter = 0;
                  d_y = -Math.cos(-angle)*flatline;
                             uniforms.d.value.x+=d_x;
                                 uniforms.d.value.y+=d_y;
+                            uniforms.dDUPLICATE.value = new THREE.Vector2(uniforms.d.value.x,uniforms.d.value.y)
 
                                
                                FEEDBACKuniforms.d.value=new THREE.Vector2(d_x,d_y);
@@ -748,7 +749,8 @@ function init() {
                         uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
            uniforms.resolution.value = new THREE.Vector2(window.innerWidth,window.innerHeight);
      uniforms.coords.value = new THREE.Vector2(0.,0.);
-     uniforms.d.value = new THREE.Vector2(0.,0.);
+             uniforms.d.value = new THREE.Vector2(0.,0.);
+             uniforms.dDUPLICATE.value = new THREE.Vector2(0.,0.);
      uniforms.dotCoord.value = new THREE.Vector2(0.,0.);
 
      setRenderTargetSize(window.innerWidth,window.innerHeight)
@@ -1517,7 +1519,7 @@ function runOSMD (){
 
                                     uniforms.d.value.x+=xTouchMicroBuffer/uniforms[ "volume" ].value;
                                     uniforms.d.value.y+=-yTouchMicroBuffer/uniforms[ "volume" ].value;
-                                    var spunTouch=touchMovement;
+                                    uniforms.dDUPLICATE.value = new THREE.Vector2(uniforms.d.value.x,uniforms.d.value.y)
                                           if(uniforms.carousel.value!=0.)
                                               spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                                               coordX+= spunTouch[0];
@@ -3102,7 +3104,8 @@ for(var n = 0; n<targets.length;n++){
                                                        
                                                                                          uniforms.d.value.x = 0.;
                                                                                          uniforms.d.value.y = 0.;
-                                                                                         
+                                                       uniforms.dDUPLICATE.value = new THREE.Vector2(uniforms.d.value.x,uniforms.d.value.y)
+
                                                                        animateLoopId=                   window.requestAnimationFrame( animate );
                             //  renderer.forceContextLoss ()
                             //  renderer.forceContextRestore ( )
