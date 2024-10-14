@@ -2025,11 +2025,12 @@ ret= vec4(clamp(
                                    3.5*(z.x+abs(z.y)*timesForBottom),
                                   (z.y+1.75*abs(z.x)))
                            /length(z)/iterations*.5;//*(1.-length(g));*/
-                        h+=vec3(
+                        if(length(z)!=0.)h+=vec3(
                                      (6.*z.x*z.y)-2.*z.x*timesForBottom,
                                       3.*(z.x+abs(z.y)),
                                       z.y*timesForBottom+abs(z.x))
                               /length(z)/iterations*2./3.*timesForBottom;//*(1.-length(g));
+                              else break;
                               
                            }
                        return h;
