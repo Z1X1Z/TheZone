@@ -2025,12 +2025,12 @@ ret= vec4(clamp(
                                    3.5*(z.x+abs(z.y)*timesForBottom),
                                   (z.y+1.75*abs(z.x)))
                            /length(z)/iterations*.5;//*(1.-length(g));*/
-                        if(length(z)!=0.)h+=vec3(
+                        h+=vec3(
                                      (6.*z.x*z.y)-2.*z.x*timesForBottom,
                                       3.*(z.x+abs(z.y)),
                                       z.y*timesForBottom+abs(z.x))
                               /length(z)/iterations*2./3.*timesForBottom;//*(1.-length(g));
-                              else break;
+                             
                               
                            }
                        return h;
@@ -4070,7 +4070,7 @@ vec2 dance = vec2(0.);
                                  vec3 backgroundFace = vec3(0.);
 
          if(colorCombo<=10){
-                       zoomer=tol(backGround, dance2);
+                      /* zoomer=tol(backGround, dance2);
                        if(chirality==3){
                            if(!twelveGates)zoomer+=tol(backGround.yx,dance2);
                            else zoomer+=tol(spin2(backGround,PI2/24.),dance2);
@@ -4078,7 +4078,7 @@ vec2 dance = vec2(0.);
                            zoomer/=2.;
                            
                        }
-                       
+                       */
                    }
                             
      else if (colorCombo==11||colorCombo==18)zoomer=heartZoom(backGround+driftCanceller, dance);
