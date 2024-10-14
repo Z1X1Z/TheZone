@@ -3939,7 +3939,7 @@ vec3 xtol(vec2 s, vec2 t){
       
 vec3 bodyPlayer(vec2 p, vec2 t){
 vec3 b = vec3( 0.);
-if(p.x>0.){b = torso(p,t);if(p.x>.25)b+=musculature(p,t);}
+if(p.x>0.){b = torso(p,t);if(p.x>.333)b+=musculature(p,t);}
 return b+legs(p,t/33.3);}
       
                       vec3 bodyFourCreatureCharacter(vec2 p, vec2 t){
@@ -4296,8 +4296,8 @@ else if(heartStar==2) frAMP=1.;
 if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                             //else if(Character==2)heartSize=gr;
         
-     if(Character!=9) HEART = heart(characterPSpunToKey*heartSize+heartShift,vec2(0.)
-                                    //d.yx/4.*frAMP*heartRate*vec2(1.,flipStar) not working on some androids
+     if(Character!=9) HEART = heart(characterPSpunToKey*heartSize+heartShift,//vec2(0.)
+                                    d.yx/4.*frAMP*heartRate*vec2(1.,flipStar)// not working on some androids
                                     )
      //*(1.-length(uVuMinCenterASKEW)/8.)
      ;
@@ -4498,7 +4498,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
                                     +yourFace.xyzw,0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
-                       vec4 goodies =
+                       vec4 goodies =vec4(heartWarmed,1.);
                        vec4(
                                            mnyX+clamp(heartWarmed*isColoredMultiplier,0.,1.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
@@ -4538,7 +4538,7 @@ vec4 tree = vec4( clamp(
                      clamp(
                            cloud
                            +zoomer
-                           +awayFromTree
+                           //+awayFromTree
                            
                                               ,0.,1.)
                         +b+creatures
