@@ -97,10 +97,10 @@ dilate:{value:true},
 
 
         resolution: {value:[window.innerWidth,window.innerHeight]},//these are later resolved to the THREE.vec2() uniforms
-        coords: {value: [0.,0.]},//to prevent dividing by zero may be set to small value
+        coords: {value: [.0005,.0001]},//to prevent dividing by zero may be set to small value
         coordSHIFT: {value: [0.,0.]},
         duperZoom: {value:1.},
-        d: {value:[.4,.7]},
+        d: {value:[.5,.25]},
         dotCoord:{value:[0.,0.]},
 
 
