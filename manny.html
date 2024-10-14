@@ -2841,13 +2841,13 @@ dstnce = length(s);
                                     else chiralAdjustment=-PI/2.;
                                     }
                           vec2 cloverMAP = vec2(0.);
-                          cloverMAP = (spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)-atan(dDUPLICATE.x,dDUPLICATE.y)+PI+chiralAdjustment))*2./3.+.5;
+                          cloverMAP = (spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment))*2./3.+.5;
                                                    vec2 ColorWheelClover=vec2(0.);
                                                    float cycleShiftChiral = 0.;
 
         if(NightAndDay){
 
-                ColorWheelClover=(spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)+atan(dDUPLICATE.x,dDUPLICATE.y)+PI2*(6.+2.*flipStar)/12.+chiralAdjustment-twistStar*flipStar));
+                ColorWheelClover=(spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)+atan(d.x,d.y)+PI2*(6.+2.*flipStar)/12.+chiralAdjustment-twistStar*flipStar));
 
                 float correctionBrueled = 0.;
                 if(brelued==-1.)correctionBrueled=atan(-ColorWheelClover.x,-ColorWheelClover.y)-PIdiv2;
@@ -4300,7 +4300,7 @@ if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                             //else if(Character==2)heartSize=gr;
         
      if(Character!=9) HEART = heart(characterPSpunToKey*heartSize+heartShift,//vec2(0.)
-                                    d.yx/4.//*frAMP*heartRate*vec2(1.,flipStar)// not working on some androids
+                                    dDUPLICATE.yx/4.//*frAMP*heartRate*vec2(1.,flipStar)// not working on some androids
                                     )
      //*(1.-length(uVuMinCenterASKEW)/8.)
      ;
