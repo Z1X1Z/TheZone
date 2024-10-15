@@ -97,11 +97,10 @@ dilate:{value:true},
 
 
         resolution: {value:[window.innerWidth,window.innerHeight]},//these are later resolved to the THREE.vec2() uniforms
-        coords: {value: [.0,.0]},//to prevent dividing by zero may be set to small value
+        coords: {value: [0.,0.]},//to prevent dividing by zero may be set to small value
         coordSHIFT: {value: [0.,0.]},
         duperZoom: {value:1.},
-d: {value:[1.,.5]},
-dDUPLICATE: {value:[0.,.0]},
+        d: {value:[.4,.7]},
         dotCoord:{value:[0.,0.]},
 
 
@@ -248,7 +247,7 @@ function resetAll(){
                        window.omniData = new Float32Array(40).fill(0.);
                                          
                                              if (   window.iOS )window.rez=window.devicePixelRatio/4.;
-                                               else if(window.android)window.rez=window.devicePixelRatio/5.;
+                                               else if(window.android)window.rez=window.devicePixelRatio/8.;
                                                else   window.rez=window.devicePixelRatio/2.;
                                                    
     if(window.INITIALIZED){

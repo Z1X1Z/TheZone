@@ -1684,8 +1684,6 @@ void main(){
     uniform int starOnDot;
     uniform vec2 dotCoord;
     uniform vec2 d;
-    uniform vec2 dDUPLICATE;
-
     uniform vec2 coordSHIFT;
     uniform float duperZoom;
 
@@ -2013,26 +2011,25 @@ ret= vec4(clamp(
 
                            vec2 z=g.xy;
                            
-                           float timesForBottom =1.;
-                       if(g.x>.75)     timesForBottom=2.;
-
                        vec3 h=vec3(0.);
                        const float iterations = 70.;
                            for (float f=0.;f<iterations;f++)if(abs(z.y+z.x)>2.){h=vec3(0.);break;}
                            else {z=vec2(((z.x*z.x-z.y*z.y)-g.x-t.x),(2.0*z.x*z.y-g.y-t.y));//mandelbrot loop factored into real and imaginary components from z<=z^2-g
 
 
+                           float timesForBottom =1.;
+                       if(g.x>.75)     timesForBottom=2.;
+
                          /*  h+=vec3(
                                   (24.*z.x*z.y)-5.*z.x*timesForBottom,
                                    3.5*(z.x+abs(z.y)*timesForBottom),
                                   (z.y+1.75*abs(z.x)))
                            /length(z)/iterations*.5;//*(1.-length(g));*/
-                        h+=vec3(
+                         h+=vec3(
                                      (6.*z.x*z.y)-2.*z.x*timesForBottom,
                                       3.*(z.x+abs(z.y)),
                                       z.y*timesForBottom+abs(z.x))
                               /length(z)/iterations*2./3.*timesForBottom;//*(1.-length(g));
-                             
                               
                            }
                        return h;
@@ -2840,8 +2837,8 @@ dstnce = length(s);
                                 {   if(twelveGates)chiralAdjustment=-PI2/24.;
                                     else chiralAdjustment=-PI/2.;
                                     }
-                          vec2 cloverMAP = vec2(0.);
-                          cloverMAP = (spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment))*2./3.+.5;
+                          vec2 cloverMAP = (spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment))*2./3.+.5;
+                                                   
                                                    vec2 ColorWheelClover=vec2(0.);
                                                    float cycleShiftChiral = 0.;
 
@@ -4292,7 +4289,7 @@ if(frAMP==0.)frAMP=1.;//to prevent cancelling moveDynamic in touchmode
 float heartSize=gr*gr*-leaf;
 if(heartStar==0)heartSize/=(1.+frAMP);//*8.;
 else if(heartStar==1){
-    heartSize/=(1.+volume)*.75;//multiplied by two if heart argument is not vec2(0.)
+    heartSize/=(1.+volume);//multiplied by two if heart argument is not vec2(0.)
     frAMP=volume*4.;
     }
 else if(heartStar==2) frAMP=1.;
@@ -4300,7 +4297,7 @@ if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                             //else if(Character==2)heartSize=gr;
         
      if(Character!=9) HEART = heart(characterPSpunToKey*heartSize+heartShift,vec2(0.)
-                                   // d.yx/4.*frAMP*heartRate*vec2(1.,flipStar)// not working on some androids
+                                    //d.yx/4.*frAMP*heartRate*vec2(1.,flipStar) not working on some androids
                                     )
      //*(1.-length(uVuMinCenterASKEW)/8.)
      ;
@@ -4501,7 +4498,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
                                     +yourFace.xyzw,0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
-                       vec4 goodies =vec4(heartWarmed,1.);
+                       vec4 goodies =
                        vec4(
                                            mnyX+clamp(heartWarmed*isColoredMultiplier,0.,1.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
@@ -4541,7 +4538,7 @@ vec4 tree = vec4( clamp(
                      clamp(
                            cloud
                            +zoomer
-                           //+awayFromTree
+                           +awayFromTree
                            
                                               ,0.,1.)
                         +b+creatures
