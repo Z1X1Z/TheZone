@@ -2839,8 +2839,9 @@ dstnce = length(s);
                                 {   if(twelveGates)chiralAdjustment=-PI2/24.;
                                     else chiralAdjustment=-PI/2.;
                                     }
-                          vec2 cloverMAP = ((spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment))*3./8.*dimensionFix+.5);
-                                                   
+                          vec2 cloverMAPNeutral = ((spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment)));
+                               vec2   cloverMAP = cloverMAPNeutral+.5;
+                                vec2 cloverMAPadj =cloverMAPNeutral*3./8.*dimensionFix+.5;
                                                    vec2 ColorWheelClover=vec2(0.);
                                                    float cycleShiftChiral = 0.;
 
@@ -2865,8 +2866,8 @@ dstnce = length(s);
                    sevenSuns+=texture2D(videoTexture,vec2(1.-cloverMAP.x,cloverMAP.y))+texture2D(videoTexture2,vec2(1.-cloverMAP.x,cloverMAP.y));
 
                     
-                       if(eden==0)starship+=texture2D(STAR,cloverMAP)/decayCanceller;
-                       else if(eden==1)starship+=texture2D(EDEN,cloverMAP)/decayCanceller;
+                       if(eden==0)starship+=texture2D(STAR,cloverMAPadj)/decayCanceller;
+                       else if(eden==1)starship+=texture2D(EDEN,cloverMAPadj)/decayCanceller;
                        //*length((vUv-.5)*max(resolution.x,resolution.y)/min(resolution.x,resolution.y));//+texture2D(STAR,cloverMAP);
                             
                            }

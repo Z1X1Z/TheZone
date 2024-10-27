@@ -60,6 +60,9 @@ function tol( j,  t){
    let p = new THREE.Vector2(j.y,j.x);//
     p = p.clone().multiplyScalar(zoom).add(new THREE.Vector2(-coords.y,-coords.x));
 
+    if(clvrVariant4)p.multiplyScalar(-leaf);
+
+    
     var pWithoutChiralizer = p.clone();
 if(chirality==-1){p=new THREE.Vector2(p.y,p.x);}
     if(cloverOffset!=0.)p=spin(p,cloverOffset*Math.PI*2.);
