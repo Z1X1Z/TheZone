@@ -247,7 +247,7 @@ function resetAll(){
                        window.omniData = new Float32Array(40).fill(0.);
                                          
                                              if (   window.iOS )window.rez=window.devicePixelRatio/4.;
-                                               else if(window.android)window.rez=window.devicePixelRatio/8.;
+                                               else if(window.android)window.rez=window.devicePixelRatio/5.;
                                                else   window.rez=window.devicePixelRatio/2.;
                                                    
     if(window.INITIALIZED){
