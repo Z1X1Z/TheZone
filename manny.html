@@ -1798,8 +1798,7 @@ uniform float exponentialPetals;
    // float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*2.,2.)/2./
                                             //  pow(2.,(note)/12.+4.)*440. ,0.)).r;//adjusted to pitch
 
-   if (log(abs(frAmp)/(1.01-vUv.y)//dividing by 0 may cause crashes on some android
-           *(resolution.x/max(
+   if (log(abs(frAmp)/(1.-vUv.y)*(resolution.x/max(
                                                      resolution.x,resolution.y)))>1.) ret = vec4(sign(frAmp));
    
    }
@@ -4503,21 +4502,20 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
                                     +yourFace.xyzw,0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
-                       vec4 goodies =
+                       vec4 goodies = vec4(heartWarmed,1.);
                        vec4(
-                                          // mnyX+
-                            clamp(heartWarmed*isColoredMultiplier,0.,1.)
-                                          // +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
-                                        //  ( pillar+icicles.xyz +linearFrequency)*(1.-pixelShipGrey*40.)
-                                         //  +yourFace.xyz
-                 //   +//clamp((
-                    //       mny
+                                           mnyX+clamp(heartWarmed*isColoredMultiplier,0.,1.)
+                                           +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
+                                          ( pillar+icicles.xyz+linearFrequency)*(1.-pixelShipGrey*40.)
+                                           +yourFace.xyz
+                    +//clamp((
+                           mny
                                            //-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r),0.,1.)*2.*mnyWhite
                                      // +(-hypnoticHarmonicCircles.x-hypnoticHarmonicCircles.y-hypnoticHarmonicCircles.z)*2.)*starshipMultiplier*(1.-isGrey-pixelShipGrey)
                       //  -(ARTICLE.r+ARTICLE.g+ARTICLE.b)
                         //   ,-1.,1.)
-                                                 //   +ARTICLE
-                                                 //  +bridge*(1.-isGrey-pixelShipGrey)//+AM*(1.-isGrey-pixelShipGrey)
+                                                    +ARTICLE
+                                                    +bridge*(1.-isGrey-pixelShipGrey)//+AM*(1.-isGrey-pixelShipGrey)
                                                     ,1.);
                        vec3 awayFromTree =  vec3((-ss.xyz)*ss.w
                                                  -yourFace.xyz
