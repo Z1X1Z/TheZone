@@ -2029,7 +2029,8 @@ ret= vec4(clamp(
                                      (6.*z.x*z.y)-2.*z.x*timesForBottom,
                                       3.*(z.x+abs(z.y)),
                                       z.y*timesForBottom+abs(z.x))
-                              /length(z)/iterations*2./3.*timesForBottom;//*(1.-length(g));
+                              // /length(z)
+                              /iterations*2./3.*timesForBottom;//*(1.-length(g));
                               
                            }
                        return h;
