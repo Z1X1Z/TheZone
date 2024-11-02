@@ -1798,7 +1798,7 @@ uniform float exponentialPetals;
    // float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*2.,2.)/2./
                                             //  pow(2.,(note)/12.+4.)*440. ,0.)).r;//adjusted to pitch
 
-   if (log(abs(frAmp)/(1.-vUv.y)*(resolution.x/max(
+   if (log(abs(frAmp)/(1.1-vUv.y)*(resolution.x/max(
                                                      resolution.x,resolution.y)))>1.) ret = vec4(sign(frAmp));
    
    }
@@ -4508,7 +4508,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                             clamp(heartWarmed*isColoredMultiplier,0.,1.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier
                                           +( pillar
-                                            //+icicles.xyz
+                                            +icicles.xyz
                                             +linearFrequency
                                             )*(1.-pixelShipGrey*40.)
                                           // +yourFace.xyz
