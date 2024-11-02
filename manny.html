@@ -4502,11 +4502,11 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
                                     +yourFace.xyzw,0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
-                       vec4 goodies = 
+                       vec4 goodies =
                        vec4(
                                            mnyX+clamp(heartWarmed*isColoredMultiplier,0.,1.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
-                                          ( pillar+icicles.xyz+linearFrequency)*(1.-pixelShipGrey*40.)
+                                         // ( pillar+icicles.xyz+linearFrequency)*(1.-pixelShipGrey*40.)
                                            +yourFace.xyz
                     +//clamp((
                            mny
