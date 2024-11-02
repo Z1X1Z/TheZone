@@ -4506,17 +4506,17 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                        vec4 goodies =
                        vec4(
                                            mnyX+clamp(heartWarmed*isColoredMultiplier,0.,1.)
-                                           +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
+                                          // +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier+
                                         //  ( pillar+icicles.xyz +linearFrequency)*(1.-pixelShipGrey*40.)
                                          //  +yourFace.xyz
-                    +//clamp((
-                           mny
+                 //   +//clamp((
+                    //       mny
                                            //-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r),0.,1.)*2.*mnyWhite
                                      // +(-hypnoticHarmonicCircles.x-hypnoticHarmonicCircles.y-hypnoticHarmonicCircles.z)*2.)*starshipMultiplier*(1.-isGrey-pixelShipGrey)
                       //  -(ARTICLE.r+ARTICLE.g+ARTICLE.b)
                         //   ,-1.,1.)
                                                  //   +ARTICLE
-                                                   +bridge*(1.-isGrey-pixelShipGrey)//+AM*(1.-isGrey-pixelShipGrey)
+                                                 //  +bridge*(1.-isGrey-pixelShipGrey)//+AM*(1.-isGrey-pixelShipGrey)
                                                     ,1.);
                        vec3 awayFromTree =  vec3((-ss.xyz)*ss.w
                                                  -yourFace.xyz
