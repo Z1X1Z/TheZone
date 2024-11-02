@@ -1794,7 +1794,7 @@ uniform float exponentialPetals;
            
           // vec2 flatScreen=1.-vUv;
           // flatScreen*=2.;
-    float frAmp = 1.;//texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*4.,2.)/4.,0.)).r;
+    float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*4.,2.)/4.,0.)).r;
    // float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*2.,2.)/2./
                                             //  pow(2.,(note)/12.+4.)*440. ,0.)).r;//adjusted to pitch
 
@@ -4546,7 +4546,7 @@ vec4 tree = vec4( clamp(
                      clamp(
                            cloud
                            +zoomer
-                          // +awayFromTree
+                           +awayFromTree
                            
                                               ,0.,1.)
                         +b+creatures
