@@ -1798,7 +1798,8 @@ uniform float exponentialPetals;
    // float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*2.,2.)/2./
                                             //  pow(2.,(note)/12.+4.)*440. ,0.)).r;//adjusted to pitch
 
-   if (log(abs(frAmp)/(1.-vUv.y)*(resolution.x/max(
+   if (log(abs(frAmp)/(1.001-vUv.y)*(resolution.x//dividing by zero may be causing errors
+                                     /max(
                                                      resolution.x,resolution.y)))>1.) ret = vec4(sign(frAmp));
    
    }
