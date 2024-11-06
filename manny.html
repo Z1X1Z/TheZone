@@ -2714,7 +2714,7 @@ vec3 oo = vec3(0.);
                             vec4 sevenSuns=vec4(0.);
                             
                             float minToMax=min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
-                            vec2 dimensionFix=max(resolution.x,resolution.y)/resolution;
+                            vec2 dimensionFix=min(resolution.x,resolution.y)/resolution;
 vec3 beta =vec3(1.);
 
 
@@ -2841,8 +2841,9 @@ dstnce = length(s);
                                     else chiralAdjustment=-PI/2.;
                                     }
                           vec2 cloverMAPNeutral = ((spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment)));
+                                                    
                                vec2   cloverMAP = cloverMAPNeutral+.5;
-                                vec2 cloverMAPadj =cloverMAPNeutral*3./8.*dimensionFix+.5;
+                                vec2 cloverMAPadj =cloverMAPNeutral*dimensionFix+.5;
                                                    vec2 ColorWheelClover=vec2(0.);
                                                    float cycleShiftChiral = 0.;
 
@@ -2859,7 +2860,7 @@ dstnce = length(s);
                 //return beta;
         }
 
-                 if(dstnce<2./3.||(spokesVisualizeColors&&dstnce<4./3.)) {
+                 if(dstnce<2./3.||(spokesVisualizeColors&&dstnce<4./3.)) if(vUv.x!=0.&&vUv.y!=0.&&vUv.x!=1.&&vUv.y!=1.){
                     float decayCanceller=1.;
                     if(spokesVisualizeColors)decayCanceller = 2.;
                     //if(morph!=0.)decayCanceller=decayCanceller*decayCanceller;
