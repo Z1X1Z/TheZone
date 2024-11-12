@@ -2488,7 +2488,7 @@ vec3 tol(vec2 p, vec2 t){
                          -coordSHIFT/duperZoom)*resCale+.5
                                               )
                         ).xyz;
-                        if(clvrVariant4)p*=-leaf;
+                       // if(clvrVariant4)p*=-leaf;
                          vec2 pWithoutChiralizer = p;
                          if(chirality==-1&&twelveGates){p=spin2(p,PI2/24.);}
                          else if(chirality==-1){p=p=spin2(p,PI2/4.);}
@@ -2513,8 +2513,8 @@ float lfc = length(freed(coords));
    
    
 float precores = .25/log(.5);
-if(clvrVariant4&&cloverSlide) precores=precores-1./log(.5);
-else if(clvrVariant4)precores=0.;
+if(clvrVariant4&&cloverSlide) precores=precores-.25/log(.5);
+//else if(clvrVariant4)precores=0.;
 if(morph!=0.)precores-=5./log(.5);
 
 if(refactorCores!=1.)precores=-.0;
@@ -2525,7 +2525,7 @@ else cored = centralCores;
 float loops=0.;
 if(cloverSlide)loops=-1.;
 
-if(refactorCores>1.||clvrVariant4)
+if(refactorCores>1.)
     {
         if(cloverSlide)p/=2.;
         p/=2.;
