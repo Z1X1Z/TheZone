@@ -2488,7 +2488,7 @@ vec3 tol(vec2 p, vec2 t){
                          -coordSHIFT/duperZoom)*resCale+.5
                                               )
                         ).xyz;
-                       // if(clvrVariant4)p*=-leaf;
+                        if(clvrVariant4)p/=1.5;
                          vec2 pWithoutChiralizer = p;
                          if(chirality==-1&&twelveGates){p=spin2(p,PI2/24.);}
                          else if(chirality==-1){p=p=spin2(p,PI2/4.);}
