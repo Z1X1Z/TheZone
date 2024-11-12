@@ -60,7 +60,7 @@ function tol( j,  t){
    let p = new THREE.Vector2(j.y,j.x);//
     p = p.clone().multiplyScalar(zoom).add(new THREE.Vector2(-coords.y,-coords.x));
 
-    if(clvrVariant4)p.multiplyScalar(-leaf);
+    //if(clvrVariant4)p.multiplyScalar(-leaf);
 
     
     var pWithoutChiralizer = p.clone();
@@ -78,8 +78,8 @@ var lfc = coords.length();//freed(coords).length();
 
 
 var precores = .25/Math.log(.5);
-    if(clvrVariant4&&cloverSlide) precores=precores-1./Math.log(.5);
-    else if(clvrVariant4)precores=0.;
+   // if(clvrVariant4&&cloverSlide) precores=precores-1./Math.log(.5);
+   // else if(clvrVariant4)precores=0.;
     if(refactorCores!=1.)precores=-.0;
 
 var cored =0.;
@@ -87,7 +87,8 @@ if(MetaCored)cored= Math.log(zoom)/-Math.log(2.)+precores;
 else cored = centralCores;
 var loops=0.;
 if(cloverSlide)loops=-1.;
-if(refactorCores>1.||clvrVariant4)
+if(refactorCores>1.//||clvrVariant4
+   )
 {
 if(cloverSlide)p.divideScalar( 2.);
 p.divideScalar( 2.);
@@ -210,7 +211,7 @@ hyperCore*=equilibriator;
    if(clvrVariant4)
    {
     hyperCore-=.25/Math.log(.5);//1./(7.*log(.5));
-    if(cloverSlide)hyperCore+=1.5/Math.log(.5);
+    if(cloverSlide)hyperCore+=.5/Math.log(.5);
     //if(wheel)hyperCore-=0./Math.log(.5);
    // if(morph!=0.)hyperCore+=2.5/Math.log(.5);
 
