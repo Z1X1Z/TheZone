@@ -2207,8 +2207,10 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                            else break;
             float centralPowerInverter=(s.x/s.y)*sign(s.x*s.y);
                 //I was studying this function without the face and a power short ocurred and on firefox window restore and caused a semi-reversion hybridization
+                
                 if(Character==3||musicAngelMan==1)centralPowerInverter*=.5;
-                else if(Character==4||musicAngelMan==2)centralPowerInverter*=2.;
+                else if(Character==4&&musicAngelMan!=2)centralPowerInverter+=s.x*2.;
+                else if(musicAngelMan==2)centralPowerInverter+=s.x;
 
             l=
                 centralPowerInverter;
@@ -4163,6 +4165,7 @@ vec2 dance = vec2(0.);
                    vec3 mny=vec3(0.);
 
                     vec3 mnyX = vec3(0.);
+                    vec3 overchargeCharacter = vec3(0.);
                                  float angelSize = 1.221221;
 
                                  vec3 mannyFace = vec3(0.);
@@ -4201,9 +4204,9 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                         
                        swordSkew+=.5;}
                    else if (Character==3||Character==4){
-                      vec3 overchargeCharacter = faceFORWARDstatic(characterOnTrailP*angelSize,moveDynamic);
-                      AM+= overchargeCharacter;
-                       mny=bodyPlayer(characterOnTrailP,moveDynamic)+overchargeCharacter;
+                    overchargeCharacter = faceFORWARDstatic(characterOnTrailP*angelSize,moveDynamic);
+                     if(musicAngelMan>0) AM+= overchargeCharacter;
+                       mny=bodyPlayer(characterOnTrailP,moveDynamic);
                    }
                    else if (Character==5)mny=lion(fourcreaturePlayerP,vec2(inversion,0.))+bodyPlayer(characterOnTrailP,moveDynamic);
                    else if (Character==6){
@@ -4515,6 +4518,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                         +yourFace.xyz
                     +//clamp((
                            mny
+                            +overchargeCharacter
                                            //-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r),0.,1.)*2.*mnyWhite
                                      // +(-hypnoticHarmonicCircles.x-hypnoticHarmonicCircles.y-hypnoticHarmonicCircles.z)*2.)*starshipMultiplier*(1.-isGrey-pixelShipGrey)
                       //  -(ARTICLE.r+ARTICLE.g+ARTICLE.b)
@@ -4541,6 +4545,7 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                                                  
                                                 +( -pixelStarship.r-pixelStarship.g-pixelStarship.b)
                                                  +(-mny.r-mny.g-mny.b)*12.
+                                                 
                                                  );
 
 vec4 tree = vec4( clamp(
