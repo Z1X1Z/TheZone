@@ -1798,7 +1798,7 @@ uniform float exponentialPetals;
    // float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*2.,2.)/2./
                                             //  pow(2.,(note)/12.+4.)*440. ,0.)).r;//adjusted to pitch
 
-   if (log(abs(frAmp)/(1.-vUv.y)*(resolution.x/max(
+   if (log(abs(frAmp)*(1./(1.-vUv.y))*(resolution.x/max(
                                                      resolution.x,resolution.y)))>1.) ret = vec4(sign(frAmp));
    
    }
@@ -2029,7 +2029,7 @@ ret= vec4(clamp(
                                      (6.*z.x*z.y)-2.*z.x*timesForBottom,
                                       3.*(z.x+abs(z.y)),
                                       z.y*timesForBottom+abs(z.x))
-                               /length(z)
+                               *(1./length(z))
                               /iterations*2./3.*timesForBottom;//*(1.-length(g));
                               
                            }
@@ -4568,12 +4568,9 @@ vec4 tree = vec4( clamp(
           vec3 confraculator = vec3(1.);
           if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
           fin=clamp(fin -(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z)*4.,0.,1.)+vec4(hypnoticHarmonicCircles,1.);
-          vec4 toBeChecked =
-          fin/vec4(confraculator
-                                     ,1.);
-                                     
-       if(isinf(toBeChecked.x)||isnan(toBeChecked.x)||isinf(toBeChecked.y)||isnan(toBeChecked.y)||isinf(toBeChecked.z)||isnan(toBeChecked.z)) toBeChecked = vec4(0.);
-gl_FragColor=toBeChecked;
+gl_FragColor=
+fin/vec4(confraculator
+                           ,1.);
                        
        //  gl_FragColor= vec4(.5);
                    }
