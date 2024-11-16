@@ -4568,9 +4568,12 @@ vec4 tree = vec4( clamp(
           vec3 confraculator = vec3(1.);
           if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
           fin=clamp(fin -(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z)*4.,0.,1.)+vec4(hypnoticHarmonicCircles,1.);
-gl_FragColor=
-fin/vec4(confraculator
-                           ,1.);
+          vec4 toBeChecked =
+          fin/vec4(confraculator
+                                     ,1.);
+                                     
+       if(toBeChecked.x!=toBeChecked.x||toBeChecked.y!=toBeChecked.y||toBeChecked.x!=toBeChecked.x) toBeChecked = vec4(0.);
+gl_FragColor=toBeChecked;
                        
        //  gl_FragColor= vec4(.5);
                    }
