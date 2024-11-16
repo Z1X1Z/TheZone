@@ -4508,14 +4508,14 @@ if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                        vec4 faceFromShip = vec4(clamp(mannyFace,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies =
                        vec4(
-                                         //  mnyX+
-                           // clamp(heartWarmed*isColoredMultiplier,0.,1.)
+                                           mnyX+
+                            clamp(heartWarmed*isColoredMultiplier,0.,1.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier
-                                        //  +(// pillar
-                                        //    +icicles.xyz
-                                        //    +linearFrequency
-                                         //   )*(1.-pixelShipGrey*40.)
-                                       // +yourFace.xyz
+                                          +( pillar
+                                            +icicles.xyz
+                                            +linearFrequency
+                                            )*(1.-pixelShipGrey*40.)
+                                        +yourFace.xyz
                     +//clamp((
                            mny
                             +overchargeCharacter
@@ -4552,7 +4552,7 @@ vec4 tree = vec4( clamp(
                      clamp(
                            cloud
                            +zoomer
-                          // +awayFromTree
+                           +awayFromTree
                            
                                               ,0.,1.)
                         +b+creatures
