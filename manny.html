@@ -4572,7 +4572,7 @@ vec4 tree = vec4( clamp(
           fin/vec4(confraculator
                                      ,1.);
                                      
-       if(toBeChecked.x!=toBeChecked.x||toBeChecked.y!=toBeChecked.y||toBeChecked.x!=toBeChecked.x) toBeChecked = vec4(0.);
+       if(isinf(toBeChecked.x)||isnan(toBeChecked.x)||isinf(toBeChecked.y)||isnan(toBeChecked.y)||isinf(toBeChecked.z)||isnan(toBeChecked.z)) toBeChecked = vec4(0.);
 gl_FragColor=toBeChecked;
                        
        //  gl_FragColor= vec4(.5);
