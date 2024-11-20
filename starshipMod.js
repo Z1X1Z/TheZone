@@ -1223,8 +1223,8 @@ function zoomRoutine(){
               {
                  
                  var precores = .25/Math.log(.5);
-                  if(clvrVariant4&&cloverSlide) precores=precores-1./Math.log(.5);
-                  else if(clvrVariant4)precores=0.;
+                  //if(clvrVariant4&&cloverSlide) precores=precores-1./Math.log(.5);
+                  //else if(clvrVariant4)precores=0.;
                   
                   if(refactorCores!=1.)precores=-.0;
                   const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
