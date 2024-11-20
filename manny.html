@@ -4524,7 +4524,7 @@ if(starOnDot>=1){
                                                               vec4 yourFace= vec4(0.);     yourFace=texture2D(videoTexture,faceDimension).xyzw+
                                                                texture2D(videoTexture2,faceDimensionReversed).xyzw
                                                                  ;
-if(mannyFace.z==mny.y&&mannyFace.y==mny.x&&mannyFace.x==.5)//detect if in eyeHolies, if so output grey
+if(mannyFace.z==mannyFace.y&&mannyFace.y==mannyFace.x&&mannyFace.x==.5)//detect if in eyeHolies, if so output grey
 gl_FragColor=vec4(vec3(.5),1.);
 else if(length(p)>2.*sqrt(2.)/min(resolution.x,resolution.y)){
                   
