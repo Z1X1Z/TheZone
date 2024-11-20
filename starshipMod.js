@@ -2576,8 +2576,8 @@ let s = f;
                  const scalar = 1.;
 
                                                                                      
-                 let red1=0, green1=0, blue1=0 ,
-                 red2=0 , green2=0 , blue2=0;
+                 let red1=BlackOrWhiteNOTE, green1=BlackOrWhiteNOTE, blue1=BlackOrWhiteNOTE ,
+                 red2=BlackOrWhiteNOTE , green2=BlackOrWhiteNOTE , blue2=BlackOrWhiteNOTE;
                                              let r1=BlackOrWhiteNOTE, g1=BlackOrWhiteNOTE, b1=BlackOrWhiteNOTE,
                                              r2=BlackOrWhiteNOTE, g2=BlackOrWhiteNOTE, b2=BlackOrWhiteNOTE;
                                              
@@ -2676,6 +2676,9 @@ let s = f;
                          r1=stylus;
                          g1=stylus;
                          b1=stylus;
+                         r2 = r1;
+                         g2 = g1;
+                         b2 = b1;
                          transparencyOfTrail=1.
                          
                      }
