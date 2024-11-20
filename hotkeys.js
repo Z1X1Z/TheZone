@@ -101,7 +101,8 @@ dilate:{value:true},
         coordSHIFT: {value: [0.,0.]},
         duperZoom: {value:1.},
         d: {value:[.4,.7]},
-        dotCoord:{value:[0.,0.]},
+dotCoord:{value:[0.,0.]},
+pongBallCoords:{value:[0.,0.]},
 
 
         dynamicDance: {value: 0},
@@ -114,7 +115,7 @@ dilate:{value:true},
         onehundredfortyfourthousand:{value:false},
         shaderScale:{value:window.pixelShaderSize},
         starSpin:{value:0.},
-        chirality:{value:1},
+        chirality:{value:-1},
         MannyONtrail:{value:1},
         NightAndDay:{value:false},
         starOnDot:{value:0},
@@ -831,9 +832,9 @@ function callKey(event){
     }
     
     else if (key=="|") {
-        if(uniforms.chirality.value==3)uniforms.chirality.value=1;
-        else if(uniforms.chirality.value==1)uniforms.chirality.value=-1;
-        else if(uniforms.chirality.value==-1)uniforms.chirality.value=3;
+        if(uniforms.chirality.value==3)uniforms.chirality.value=-1;
+        else if(uniforms.chirality.value==-1)uniforms.chirality.value=1;
+        else if(uniforms.chirality.value==1)uniforms.chirality.value=3;
 
     }
     else if (key=="{"){
