@@ -4497,7 +4497,7 @@ if(starOnDot>=1){
              //if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.&&pixelStarship.w>0.)
             // mny*=pixelStarship.xyz;//-mny.x*.66;
             
-            /*
+            
             vec3 seeThrough = pixelStarship.xyz+(1.-pixelStarship.w*pixelStarship.w);
              
             
@@ -4509,7 +4509,7 @@ if(starOnDot>=1){
              if(heartWarmed.z==heartWarmed.y&&heartWarmed.y==heartWarmed.x&&heartWarmed.x!=0.&&pixelStarship.w>0.)
              heartWarmed*=seeThrough;//-mny.x*.66;
 
-             */
+             
 
              
               
@@ -4519,7 +4519,7 @@ if(starOnDot>=1){
                                                               vec4 yourFace= vec4(0.);     yourFace=texture2D(videoTexture,faceDimension).xyzw+
                                                                texture2D(videoTexture2,faceDimensionReversed).xyzw
                                                                  ;
-if(length(p)<=2.*sqrt(2.)/min(resolution.x,resolution.y)) gl_FragColor=vec4(zoomer,1.);
+if(length(p)<4.*sqrt(2.)/min(resolution.x,resolution.y)) gl_FragColor=vec4(zoomer,1.);
                                                                  else if(length(p)<1.&&
                                                                          starship.w>0.&&((starship.x==1.&&starship.y==1.&&starship.z==1.)||(starship.x==0.&&starship.y==0.&&starship.z==0.)))
                                                                          

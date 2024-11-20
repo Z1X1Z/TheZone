@@ -580,8 +580,6 @@ let lineMat, lineGeometry, line;
                     
 
 let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
-                             let   omniDynamicEngaged=false;
-                                           window.zoom=1.;
 
                         
                                            var minimumDimension=Math.min(window.innerHeight,window.innerWidth);
