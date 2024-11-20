@@ -1653,6 +1653,7 @@ void main(){
     uniform bool sparklesON;
     uniform bool SPHEREofTheLORD;
     uniform float note;
+    uniform vec2 pongBallCoords;
 
     uniform float refactorCores;
     uniform bool clvrVariant1;
@@ -1786,8 +1787,18 @@ uniform float exponentialPetals;
     }
     
     
-    
-    
+    vec3 paddles(){
+                                      
+                                      if(abs(.5-vUv.x)>.49&&abs(vUv.y*12.-mod(note,12.))<1.)
+                                      return vec3(1.);
+                                      
+                                      else
+                                      return vec3(0.);
+                                  }
+                                                        vec3 ball(vec2 p){
+                                                                                          if (length(pongBallCoords-p+2.)<1.) return vec3(1.);
+                                                                                          else return vec3(0.);
+                                                                                      }
    vec4 waveForm(){
        vec4 ret=vec4(0.);//1.,.5,1.,1.);
        if((1.-vUv.y)<.25){
@@ -4346,6 +4357,12 @@ if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                            
                            }
 
+                                                                 
+                                                                 vec3 pong = vec3(0.);
+                                                                 if(true){
+                    //   pong += paddles();
+                    //   pong += ball(p);
+                   }
     vec3 ARTICLE=vec3(0.);
                 
     if(articles){
@@ -4541,6 +4558,7 @@ else {
                                           +( pillar
                                             +icicles.xyz
                                             +linearFrequency
+                                            +pong
                                             )*(1.-pixelShipGrey*40.)
                                         +yourFace.xyz
                     +//clamp((
@@ -4559,6 +4577,7 @@ else {
                                                 // +(-HEART.b-HEART.r-HEART.g)/4.
                                                  -AM.r*12.
                                                  +(-linearFrequency.r-linearFrequency.g-linearFrequency.b)/8.
+                                                 -pong.r*3.
                                                  +bigEyes.xyz*largeEyeColor
                                                  -(yourFace.x+yourFace.y+yourFace.z)/256./3.
                         -(ARTICLE.x+ARTICLE.y+ARTICLE.z)*4.

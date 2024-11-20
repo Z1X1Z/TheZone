@@ -464,6 +464,7 @@ let pushBackCounter = 0;
                  angle = ((angle+6*radialWarp)/12.)%1*2*pi;
                  d_x = -Math.sin(-angle)*flatline;
                  d_y = -Math.cos(-angle)*flatline;
+                 //pongRoutine(d_x,d_y);
                             uniforms.d.value.x+=d_x;
                                 uniforms.d.value.y+=d_y;
 
@@ -496,7 +497,7 @@ let pushBackCounter = 0;
                                 }
                         }
 
-                               
+                        
           // if (uniforms.Spoker.value)expandedZoomCage=4./3.
            if(preFromCenter>=window.zoomCageSize*expandedZoomCage){//adjust back in if too far from the center
                 pushBackCounter+=60./FPS;
@@ -748,6 +749,8 @@ function init() {
      uniforms.coords.value = new THREE.Vector2(0.,0.);
      uniforms.d.value = new THREE.Vector2(0.,0.);
      uniforms.dotCoord.value = new THREE.Vector2(0.,0.);
+             
+              uniforms.pongBallCoords.value = new THREE.Vector2(0,0);
 
      setRenderTargetSize(window.innerWidth,window.innerHeight)
 
@@ -1237,8 +1240,21 @@ function zoomRoutine(){
              }
              
 }
+                            let ballVectorX = 0.;
+                            let ballVectorY= 0.;
+                            let ballReleased = false;
+                            function pongRoutine(x,y){
+             console.log(x)
+             if(Math.abs(uniforms.pongBallCoords.value.x-.5)>.5)
+             uniforms.pongBallCoords.value.x+=x
+             uniforms.pongBallCoords.value.y+=y
+           //  uniforms.pongBallCoords.value = new THREE.Vector2(uniforms.pongBallCoords.value.x+x/100.,
+             //                                                  uniforms.pongBallCoords.value.y+y/100.);
 
-
+           //  uniforms.pongBallCoords.value.x=uniforms.pongBallCoords.value.x%1.
+           //  uniforms.pongBallCoords.value.y=uniforms.pongBallCoords.value.y%1.
+             console.log(uniforms.pongBallCoords.value)
+         }
                        
 
                      let thisChunk=0, lastChunk=0;
@@ -1567,6 +1583,7 @@ function runOSMD (){
                                           let lastTIMEUNIFORM = 0.;
                                           
                                           function animate( timestamp ) {
+                                    
                                     if(window.streaming)
                                     {
                                         const context = videoCanvas.getContext("2d");
@@ -2639,7 +2656,7 @@ let s = f;
           while(loopLimit>0&&r!=f){
                  if(!trailSegmentExpired[r]&&timeElapsedSinceRecording<=trailSecondsLong){
                         // timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
-                            const zlast = z;
+                            let zlast = z;
                      let seg = timeElapsedSinceRecording/((trailSecondsLong>0)?trailSecondsLong:1);
                      if(window.flame)seg*=seg;
                             z = (-1.+seg*.5);
@@ -2678,12 +2695,18 @@ let s = f;
                          g2 = g1;
                          b2 = b1;
                          transparencyOfTrail=1.
-                         
+                         z=-1.
+                         zlast=-1.;
                      }
                      else{
                          r1 = red1;
                          g1 = green1;
                          b1 = blue1;
+                         if((r2==0&&g2==0&&b2==0)||(r2==1&&g2==1&&b2==1)){//just to make sure that in the stylus the colored bands are clearly visible
+                             r2=r1;
+                             g2=g1;
+                             b2=b1;
+                         }
                      }
                      trailColorAttribute.setXYZW(strideTrail, r1,g1,b1,transparencyOfTrail)
                                             trailColorAttribute.setXYZW(strideTrail+1, r2,g2,b2,transparencyOfTrailLast)
