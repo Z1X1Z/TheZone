@@ -462,9 +462,11 @@ let pushBackCounter = 0;
                             
                             
                  angle = ((angle+6*radialWarp)/12.)%1*2*pi;
-                 d_x = -Math.sin(-angle)*flatline;
-                 d_y = -Math.cos(-angle)*flatline;
-                 //pongRoutine(d_x,d_y);
+                 d_x = -Math.sin(-angle);
+                 d_y = -Math.cos(-angle);
+                 pongRoutine(d_x,d_y);
+                            d_x*=flatline;
+                            d_y*=flatline
                             uniforms.d.value.x+=d_x;
                                 uniforms.d.value.y+=d_y;
 
@@ -750,7 +752,7 @@ function init() {
      uniforms.d.value = new THREE.Vector2(0.,0.);
      uniforms.dotCoord.value = new THREE.Vector2(0.,0.);
              
-              uniforms.pongBallCoords.value = new THREE.Vector2(0,0);
+              uniforms.pongBallCoords.value = new THREE.Vector2(0.,0.);
 
      setRenderTargetSize(window.innerWidth,window.innerHeight)
 
@@ -1058,6 +1060,10 @@ function adjustThreeJSWindow()
              }
         
      uniforms.resolution.value =new THREE.Vector2(widthPX,heightPX);
+             uniforms.pongBallCoords.value = new THREE.Vector2(
+                                                               uniforms.resolution.value.x/2.,
+                                                               uniforms.resolution.value.y/2.);
+
      FEEDBACKuniforms.resolution.value =new THREE.Vector2(widthPX,heightPX);
                         wipeUniforms.resolution.value =new THREE.Vector2(widthPX,heightPX);
       minimumDimension = Math.min(widthPX,heightPX);
@@ -1075,7 +1081,7 @@ window.addEventListener( 'resize', onWindowResize, false );
 window.addEventListener("orientationchange", onWindowResize, false);
 
 function onWindowResize() {
-                        
+
                         if (!sheetTranslucent)
                         {
                             correlationForTextY=document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight
@@ -1240,20 +1246,38 @@ function zoomRoutine(){
              }
              
 }
-                            let ballVectorX = 0.;
-                            let ballVectorY= 0.;
-                            let ballReleased = false;
-                            function pongRoutine(x,y){
-             console.log(x)
-             if(Math.abs(uniforms.pongBallCoords.value.x-.5)>.5)
-             uniforms.pongBallCoords.value.x+=x
-             uniforms.pongBallCoords.value.y+=y
-           //  uniforms.pongBallCoords.value = new THREE.Vector2(uniforms.pongBallCoords.value.x+x/100.,
-             //                                                  uniforms.pongBallCoords.value.y+y/100.);
+        let ballVectorX = 1.;
+        let ballVectorY= 1.;
+        let ballReleased = false;
+        function pongRoutine(x,y){
+             let diag = (uniforms.resolution.value.x**2+uniforms.resolution.value.y**2)**.5*window.movementRate*interpolation/60./(gr+1);
+             uniforms.pongBallCoords.value.x+=diag*ballVectorX;//-.1*ballVectorX;//
+             uniforms.pongBallCoords.value.y+=diag*ballVectorY//=d_y/minimumDimension*50;//0.;//
 
-           //  uniforms.pongBallCoords.value.x=uniforms.pongBallCoords.value.x%1.
-           //  uniforms.pongBallCoords.value.y=uniforms.pongBallCoords.value.y%1.
-             console.log(uniforms.pongBallCoords.value)
+             let xEdge = widthPX;
+             let yEdge = heightPX;
+             let paddleStrikePosition=uniforms.pongBallCoords.value.y/uniforms.resolution.value.y-(note+twist/2.)%12./12.;
+             
+             let paddleHitBall=(Math.abs(paddleStrikePosition )<1./12.);
+             if(uniforms.pongBallCoords.value.x>xEdge) {
+                    if(paddleHitBall)ballVectorX*=-1;
+                    else uniforms.pongBallCoords.value.x=0.
+                }
+            else if (uniforms.pongBallCoords.value.x<0){
+                if(paddleHitBall) ballVectorX*=-1.;
+                else uniforms.pongBallCoords.value.x=xEdge
+                    
+            }
+                                    
+           if(uniforms.pongBallCoords.value.y<0){
+                    ballVectorY*=-1.;
+                    uniforms.pongBallCoords.value.y=0
+                }
+            else if(uniforms.pongBallCoords.value.y>yEdge){
+                    ballVectorY*=-1.;
+                    uniforms.pongBallCoords.value.y=yEdge
+                }
+                                    
          }
                        
 

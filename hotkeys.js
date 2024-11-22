@@ -55,7 +55,9 @@ twelveGatesMeta:{value: 2    },
 Spoker:{value: true    },
         spokelover:{value: true    },
 largeEyeColor:{value:0.},
-
+holieyes:{value:1},
+    
+    
 dilate:{value:true},
 
     
@@ -445,6 +447,8 @@ function callKey(event){
     else if (event.ctrlKey&&key=="j")window.Oreo=!window.Oreo;
     else if (event.ctrlKey&&key=="t")window.shouldShowStar=!window.shouldShowStar;
     else if (event.ctrlKey&&key=="r")window.flame=!window.flame;
+    else if (event.ctrlKey&&key=="l")         uniforms.holieyes.value=(uniforms.holieyes.value+1)%4;
+
     else if (event.ctrlKey&&key=="g") {
         if( uniforms.exponentialPetals.value==0.) uniforms.exponentialPetals.value=1.;
         else if( uniforms.exponentialPetals.value==1.) uniforms.exponentialPetals.value=-1.;
@@ -649,7 +653,7 @@ function callKey(event){
                 
                 else if((key=="˚"||key=="k")&&event.altKey&&!event.shiftKey) window.radialOctaveBoost=!window.radialOctaveBoost;
                 else if((key=="…"||key==";")&&event.altKey&&!event.shiftKey) uniforms.superStable.value=!uniforms.superStable.value;
-
+       
                 
     else if (event.altKey&&key=="f")console.log("speakers disabled!");//speakers turned off in manny.html
                 
