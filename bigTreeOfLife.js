@@ -246,7 +246,7 @@ var m= new THREE.Vector2(0.,0.);
 
     var truncator=1.;
     var truncated = true;
-    if(lfc!=0.&&truncated) truncator = Math.log(zoom/lfc)*1000.;
+    if(lfc!=0.&&truncated) truncator = Math.log(zoom/lfc)**2.;
 //Maendel clover
                                      
 //this is essentially just p as in the mandelbrot x <== x^2+

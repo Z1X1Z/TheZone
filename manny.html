@@ -1804,18 +1804,18 @@ uniform float exponentialPetals;
                                       {
                                           if ( abs(staff)<incrementSize)
                                           return hsv2rgb( vec3(mod(-vUv.y+(6.*brelued-2.)/12.+twistStar*divideByMultiplyingPi2,1.) ,1.,1. )); //vec4(mod(note,12.)/12.);
-                                          else if ( abs(staff)<incrementSize*2.)shade=-2.;
+                                          else if ( abs(staff)<incrementSize*2.)shade=.25;//(vUvCentered.x/2.-1.25);
                                           
 
 
-                                          else if(abs(vUv.y-mod(note/12.+twistStar*divideByMultiplyingPi2,1.))<1./12.)shade= -25.;
+                                          else if(abs(vUv.y-mod(note/12.+twistStar*divideByMultiplyingPi2,1.))<1./12.)shade= (vUvCentered.x)*17.;
                                           
                                           }
                                       
-                                      return vec3(shade*(vUvCentered.x)*.5);
+                                      return vec3(shade);
                                   }
     vec3 ball(vec2 p){
-    if (length(pongBallCoords-vUv*resolution)<length(resolution.y)/12.*2.) return vec3((vUv.x));
+    if (length(pongBallCoords-vUv*resolution)<length(resolution.y)/12.) return vec3((1.-vUv.x));
     else return vec3(0.);
     }
    vec4 waveForm(){
@@ -2084,7 +2084,7 @@ ret= vec4(clamp(
                        vec4 faceBlackAndWhite(vec2 g, vec2 t){
             t/=2.5;
 
-            
+            bool bfeye= false;
       vec4 l = vec4(0.);
       vec2 p = (vec2(g.x,g.y)-vec2(t.x,-t.y));//vec2(g.x,-g.y);
       if(brelued<0.)p.y*=-1.;
@@ -2121,15 +2121,21 @@ ret= vec4(clamp(
     else if((holieyes==1||holieyes==3)&&s.x<0.)
     {
              if (holieyes==3)eyeColorCycler+=.5;
-             if(MannyONtrail>0)eyeColorCycler-=atan(d.x*flipStar,d.y)*divideByMultiplyingPi2+.5;
-             if (f==16 &&p.x<.3){
+
+             if (f==12 &&p.x<.0){
+             bfeye=true;
+         }
+       // else if(true);
+             else if (f==16 &&p.x<.3){
               if (p.x>.0) {
                   if(p.y<0.)l = vec4( hsv2rgb( vec3(mod(9./12.+eyeColorCycler,1.) ,.5,1. )),.5);
                   else l = vec4( hsv2rgb( vec3(mod(5./12.+eyeColorCycler,1.) ,.5,1. )),.5);
               }
               else if(p.x>-.3){
+    
                   if(p.y>0.)l = vec4( hsv2rgb( vec3(mod(4./12.+eyeColorCycler,1.) ,.5,1. )),.5);
                   else l = vec4( hsv2rgb( vec3(mod(10./12.+eyeColorCycler,1.) ,.5,1. )),.5);
+              
               }
               break;
           }
@@ -2140,8 +2146,16 @@ ret= vec4(clamp(
     }
     else if ((f==15)&&p.x>-.3&&p.x<0.)
     {
+                  if(bfeye)
+              {
         if(p.y>0.)l=vec4( hsv2rgb( vec3(mod(2./12.+eyeColorCycler,1.) ,.5,1. )),.5);
     else l=vec4( hsv2rgb( vec3(mod(0./12.+eyeColorCycler,1.) ,.5,1. )),.5);
+              }
+        else {
+            
+                  if(p.y<0.)l = vec4( hsv2rgb( vec3(mod(4./12.+eyeColorCycler,1.) ,.5,1. )),.5);
+                  else l = vec4( hsv2rgb( vec3(mod(10./12.+eyeColorCycler,1.) ,.5,1. )),.5);
+        }
     break;
     }
     }
@@ -2805,7 +2819,7 @@ vec2 m=vec2(0.);
 
 float truncator=1.;
 bool truncated = true;
-if(lfc!=0.&&truncated) truncator = log(zoom/lfc)*1000.;//log truncation * factor is not known, may no longer be necesary
+if(lfc!=0.&&truncated) truncator = pow(log(zoom/lfc),2.);//log truncation * factor is not known, may no longer be necesary
 //Maendel clover
 
 //this is essentially just p as in the mandelbrot x <== x^2+
@@ -4645,9 +4659,9 @@ else {
                                            mnyX+
                             clamp(heartWarmed*isColoredMultiplier,0.,1.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier
-                                          +( pillar
+                                          +(clamp( pillar
                                             +icicles.xyz
-                                            +clamp(linearFrequency-(pong.x+pong.y+pong.z)/3.,0.,1.)
+                                            +linearFrequency-(pong.x+pong.y+pong.z)/3.,0.,1.)
                                             +pong
                                             )*(1.-pixelShipGrey*40.)
                                         +yourFace.xyz
