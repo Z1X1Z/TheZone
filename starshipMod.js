@@ -1250,7 +1250,7 @@ function zoomRoutine(){
         let ballVectorY= 1.;
         let ballReleased = false;
         function pongRoutine(x,y){
-             let diag = (uniforms.resolution.value.x**2+uniforms.resolution.value.y**2)**.5*window.movementRate*interpolation/60./(gr+1);
+             let diag = (uniforms.resolution.value.x**2+uniforms.resolution.value.y**2)**.5*window.movementRate*interpolation/60./4.;
              uniforms.pongBallCoords.value.x+=diag*ballVectorX;//-.1*ballVectorX;//
              uniforms.pongBallCoords.value.y+=diag*ballVectorY//=d_y/minimumDimension*50;//0.;//
 
@@ -2829,6 +2829,8 @@ else if (circleY<-height)circleY=height;
 //circleGeometry.computeBoundingBox ();
 
 circle.position.set(circleX,circleY,-.99);
+uniforms.dotCoord.value =new THREE.Vector2(circleX,circleY) ;
+
                               if(isFinite(note)&&isFinite(lastNote))    circle.rotateZ((on)?note-lastNote:lastNote);
 
                    let colorBlack= new THREE.Color();
@@ -2840,7 +2842,6 @@ circle.position.set(circleX,circleY,-.99);
                    centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-1) );
 
                                   radialLine.geometry.setFromPoints( centerOfDotToEdge )
-                                        uniforms.dotCoord.value =new THREE.Vector2(circleX,circleY) ;
 
 let allCaught = true;
 for (var n=0; n<polygons.length; n++) if(  polygons[n].caught == false) allCaught = false;
@@ -3057,24 +3058,24 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
                                         
                                         renderer.setRenderTarget (null)
                                         
-                                        finalSceneRerenderedering.add(radialLine);
-                                        finalSceneRerenderedering.add(circle);
+                                        if(uniforms.MannyONtrail.value!=2)  finalSceneRerenderedering.add(radialLine);
+                                        if(uniforms.MannyONtrail.value!=2)  finalSceneRerenderedering.add(circle);
                                         wipeUniforms.cloverSampler.value=cloverRenderTarget.texture;
                                         renderer.render( finalSceneRerenderedering, camera );
                                         
-                                        finalSceneRerenderedering.remove(radialLine);
-                                        finalSceneRerenderedering.remove(circle);
+                                        if(uniforms.MannyONtrail.value!=2) finalSceneRerenderedering.remove(radialLine);
+                                        if(uniforms.MannyONtrail.value!=2) finalSceneRerenderedering.remove(circle);
                                     }
                                     else
                                     {
                                         
-                                        shaderScene.add(radialLine);
-                                        shaderScene.add(circle);
+                                        if(uniforms.MannyONtrail.value!=2)  shaderScene.add(radialLine);
+                                        if(uniforms.MannyONtrail.value!=2) shaderScene.add(circle);
                                         renderer.setRenderTarget (null)
                                         renderer.render( shaderScene, camera);
                                         
-                                        shaderScene.remove(radialLine);
-                                        shaderScene.remove(circle);
+                                        if(uniforms.MannyONtrail.value!=2)  shaderScene.remove(radialLine);
+                                        if(uniforms.MannyONtrail.value!=2) shaderScene.remove(circle);
                                     }
 
                                  }
@@ -3091,34 +3092,34 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
                                         renderer.setRenderTarget (null)
                                         wipeUniforms.cloverSampler.value=cloverRenderTarget.texture;
 
-                                        finalSceneRerenderedering.add(radialLine);
-                                        finalSceneRerenderedering.add(circle);
+                                        if(uniforms.MannyONtrail.value!=2) finalSceneRerenderedering.add(radialLine);
+                                        if(uniforms.MannyONtrail.value!=2) finalSceneRerenderedering.add(circle);
                                         renderer.render( finalSceneRerenderedering, camera );
-                                        finalSceneRerenderedering.remove(radialLine);
-                                        finalSceneRerenderedering.remove(circle);
+                                        if(uniforms.MannyONtrail.value!=2) finalSceneRerenderedering.remove(radialLine);
+                                        if(uniforms.MannyONtrail.value!=2) finalSceneRerenderedering.remove(circle);
                                     }
                                     else{
                                         renderer.setRenderTarget (null)
                                         
-                                                           scene.add(radialLine);
-                                                           scene.add(circle);
+                                        if(uniforms.MannyONtrail.value!=2) scene.add(radialLine);
+                                                           if(uniforms.MannyONtrail.value!=2) scene.add(circle);
                                         renderer.render( scene, camera );
                                         
-                                                           scene.remove(radialLine);
-                                                           scene.remove(circle);
+                                        if(uniforms.MannyONtrail.value!=2) scene.remove(radialLine);
+                                        if(uniforms.MannyONtrail.value!=2) scene.remove(circle);
                                     }
                                       scene.remove(shaderMeshClone);
                                      }
                                  else
                                     {
                                     scene.background = new THREE.Color( 0x808080);
-                                    scene.add(radialLine);
-                                    scene.add(circle);
+                                                         if(uniforms.MannyONtrail.value!=2) scene.add(radialLine);
+                                    if(uniforms.MannyONtrail.value!=2) scene.add(circle);
                                                          
                                     renderer.render( scene, camera );
 
-                                                         scene.remove(radialLine);
-                                                         scene.remove(circle);
+                                                         if(uniforms.MannyONtrail.value!=2) scene.remove(radialLine);
+                                                         if(uniforms.MannyONtrail.value!=2) scene.remove(circle);
                                     }
                               
                      

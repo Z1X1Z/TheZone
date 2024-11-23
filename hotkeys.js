@@ -117,8 +117,8 @@ pongBallCoords:{value:[0.,0.]},
         onehundredfortyfourthousand:{value:false},
         shaderScale:{value:window.pixelShaderSize},
         starSpin:{value:0.},
-        chirality:{value:-1},
-        MannyONtrail:{value:1},
+        chirality:{value:1},
+        MannyONtrail:{value:0},
         NightAndDay:{value:false},
         starOnDot:{value:0},
         gameOn:{value:false},
@@ -836,9 +836,9 @@ function callKey(event){
     }
     
     else if (key=="|") {
-        if(uniforms.chirality.value==3)uniforms.chirality.value=-1;
-        else if(uniforms.chirality.value==-1)uniforms.chirality.value=1;
-        else if(uniforms.chirality.value==1)uniforms.chirality.value=3;
+        if(uniforms.chirality.value==3)uniforms.chirality.value=1;
+        else if(uniforms.chirality.value==1)uniforms.chirality.value=-1;
+        else if(uniforms.chirality.value==-1)uniforms.chirality.value=3;
 
     }
     else if (key=="{"){
@@ -923,7 +923,7 @@ function callKey(event){
       else if (key=="-"){window.movementRate /=1.11111111; uniforms.rate.value/=1.11111111;}
 
           else if (key=="e")uniforms.gameOn.value=!uniforms.gameOn.value;
-          else if (key=="E")uniforms.MannyONtrail.value=uniforms.MannyONtrail.value=(1+uniforms.MannyONtrail.value)%2;
+          else if (key=="E")uniforms.MannyONtrail.value=uniforms.MannyONtrail.value=(1+uniforms.MannyONtrail.value)%3;
 
       if(uniforms.free.value) window.zoomCageSize=100000000000000000.;
       else window.zoomCageSize=1.5;
