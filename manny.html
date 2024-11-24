@@ -4659,7 +4659,7 @@ if(starOnDot>=1){
                                                                  
 else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
 {
-    if(  heartSize>heartInEyeSize*1.5&&HEART.x!=0.&&HEART.y!=0.&&HEART.z!=0.)
+    if(  heartSize>heartInEyeSize*heartInEyeSize*.5&&HEART.x!=0.&&HEART.y!=0.&&HEART.z!=0.)
        gl_FragColor=vec4(clamp(mannyFace.xyz-4.*(HEART.r+HEART.g+HEART.b),0.,1.)+HEART,1.);
     else
     gl_FragColor=vec4(mannyFace.xyz+starship.xyz/4.,1.);
