@@ -1804,12 +1804,12 @@ uniform float exponentialPetals;
                                                         float incrementSize = 1./12.;
                                                         float staff =mod(vUv.y*12.+.5,1.)-.5;
                                           if ( abs(staff)<=incrementSize)
-                                          return hsv2rgb( vec3(mod(-vUv.y+(6.*brelued-2.)/12.+twistStar*divideByMultiplyingPi2,1.) ,1.,1. )); //vec4(mod(note,12.)/12.);
+                                          return hsv2rgb( vec3(mod(-vUv.y+(6.*brelued-2.)/12.+twistStar*divideByMultiplyingPi2+1.,1.) ,1.,1. )); //vec4(mod(note,12.)/12.);
                                           else if ( abs(staff)<=incrementSize*2.)shade=.25;//(vUvCentered.x/2.-1.25);
                                           
 
 
-                                          else if(abs(vUv.y-mod(note/12.+twistStar*divideByMultiplyingPi2,1.))<1./12.)shade= (vUvCentered.x)*17.;
+                                          else if(abs(vUv.y-mod(note/12.+twistStar*divideByMultiplyingPi2,1.))<=1./12.)shade= (vUvCentered.x)*17.;
                                           
                                           }
                                       
@@ -2037,9 +2037,8 @@ ret= vec4(clamp(
                        vec3 heart(vec2 g, vec2 t){
                            g/=gr+1.;
                           // g.x-=.5;
-                           g.y*=-1.;
                            t.y*=-1.;
-
+                            g.y*=-1.;
                            vec2 z=g.xy;
                            
                        vec3 h=vec3(0.);
@@ -2087,7 +2086,7 @@ ret= vec4(clamp(
             if(holieyes==1) t.x*=-1.;
             bool bfeye= false;
       vec4 l = vec4(0.);
-      vec2 p = (vec2(g.x,g.y)-vec2(t.x,t.y));//vec2(g.x,-g.y);
+      vec2 p = (vec2(g.x,g.y)-vec2(t.x,-t.y));//vec2(g.x,-g.y);
       if(brelued<0.)p.y*=-1.;
       if(flipStar<0.)p.y*=-1.;
 
@@ -4177,9 +4176,11 @@ if(exponentialPetals!=0.)backGround=spin2(vec2(backGround.x,exponentialPetals*ba
 vec2 dance = vec2(0.);
                                    vec2 dance2 = vec2(0.);
            if (morph>.5){
-                dance = vec2(-sin(time+time2dance), -sin((time+time2dance)*-gr))*zoom+(spunC.yx+.5)*log(pow(zoom,gr))/log(gr)*zoom*.5;
+               float lfc=length(freed(coords));
+
+                dance = //vec2(-sin(time+time2dance), -sin(time*-gr))*zoom+
+                (spunC.yx)*log(lfc);
                 //heart dance
-                float lfc=length(freed(coords));
                    dance2 = vec2(   -abs(lfc/(lfc-zoom)) -lfc/(lfc+zoom)*2./3.,
                                      -((zoom*lfc)/(lfc+zoom)*sign(coords.y)*sign(coords.x)*(1.-lfc*zoom) )
                                        );//clover dance
@@ -4375,6 +4376,8 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                  
                                                                  float frAMP=0.;
                                                                  float heartRate =1./4.;
+                                                                 const float heartInEyeSize=gr*gr*-leaf;
+                                                                 float heartSize=heartInEyeSize;
 
 if(heartStar==0){
 
@@ -4423,7 +4426,6 @@ if(heartStar==0){
 frAMP-=volume*(zoomOutRatchetThreshold)*16.;
 frAMP*=(.5+frAMP)/(1.+zoomOutRatchetThreshold);
 if(frAMP==0.)frAMP=1.;//to prevent cancelling moveDynamic in touchmode
-float heartSize=gr*gr*-leaf;
 if(heartStar==0)heartSize/=(1.+frAMP);//*8.;
 else if(heartStar==1){
     heartSize/=(1.+volume);//multiplied by two if heart argument is not vec2(0.)
@@ -4432,7 +4434,10 @@ else if(heartStar==1){
 else if(heartStar==2) frAMP=1.;
 if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                             //else if(Character==2)heartSize=gr;
-        
+                                                            
+                                                            
+                                                            if (Character==0&&holieyes==1)heartSize*=5.;
+
      if(Character!=9) HEART = heart(characterPSpunToKey*heartSize+heartShift,//vec2(0.)
                                     d.yx/4.*frAMP*heartRate*vec2(1.,flipStar)// not working on some androids, may work with vec2(0.)
                                     )
@@ -4651,9 +4656,17 @@ if(starOnDot>=1){
                                                                      
                                                                      
                                                              gl_FragColor=vec4(abs(starship.xyz-mannyFace.xyz/2.),1.);
-
+                                                                 
 else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
-gl_FragColor=vec4(mannyFace.xyz+starship.xyz/4.,1.);
+{
+    if(  heartSize>heartInEyeSize*1.5&&HEART.x!=0.&&HEART.y!=0.&&HEART.z!=0.)
+       gl_FragColor=vec4(clamp(mannyFace.xyz-4.*(HEART.r+HEART.g+HEART.b),0.,1.)+HEART,1.);
+    else
+    gl_FragColor=vec4(mannyFace.xyz+starship.xyz/4.,1.);
+}
+                                                                 
+                                                                 else if ( HEART.x!=0.&&HEART.y!=0.&&HEART.z!=0.)gl_FragColor=vec4(HEART,1.);
+
 else {
                   
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
@@ -4682,7 +4695,7 @@ else {
                                                     ,1.);
                        vec3 awayFromTree =  vec3((-ss.xyz)*ss.w
                                                  -yourFace.xyz
-                                                 -HEART.b
+                                                 +7.*(-HEART.b-HEART.r-HEART.g)
                                                 // +(-HEART.b-HEART.r-HEART.g)/4.
                                                  -AM.r*12.
                                                  +(-linearFrequency.r-linearFrequency.g-linearFrequency.b)/8.
