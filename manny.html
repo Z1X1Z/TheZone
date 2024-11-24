@@ -4439,7 +4439,7 @@ if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                             if (Character==0&&holieyes==1)heartSize*=5.;
 
      if(Character!=9) HEART = heart(characterPSpunToKey*heartSize+heartShift,//vec2(0.)
-                                    d.yx/4.*frAMP*heartRate*vec2(1.,flipStar)// not working on some androids, may work with vec2(0.)
+                                    spin2(d.yx,-twistStar)/4.*frAMP*heartRate*vec2(1.,flipStar)// not working on some androids, may work with vec2(0.)
                                     )
      //*(1.-length(uVuMinCenterASKEW)/8.)
      ;
@@ -4659,13 +4659,18 @@ if(starOnDot>=1){
                                                                  
 else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
 {
-    if(  heartSize>heartInEyeSize*heartInEyeSize*.5&&HEART.x!=0.&&HEART.y!=0.&&HEART.z!=0.)
+    if(  heartSize>heartInEyeSize*heartInEyeSize*.5&&
+       
+       
+!((HEART.x==0.&&HEART.y==0.)||(HEART.y==0.&&HEART.z==0.)||(HEART.z==0.&&HEART.x==0.))
+       
+       )
        gl_FragColor=vec4(clamp(mannyFace.xyz-4.*(HEART.r+HEART.g+HEART.b),0.,1.)+HEART,1.);
     else
     gl_FragColor=vec4(mannyFace.xyz+starship.xyz/4.,1.);
 }
                                                                  
-         else if (holieyes==1&& HEART.x!=0.&&HEART.y!=0.&&HEART.z!=0.) gl_FragColor=vec4(HEART,1.);
+         else if (holieyes==1&&Character==0&& !((HEART.x==0.&&HEART.y==0.)||(HEART.y==0.&&HEART.z==0.)||(HEART.z==0.&&HEART.x==0.))) gl_FragColor=vec4(HEART,1.);
 
 else {
                   
@@ -4677,7 +4682,8 @@ else {
                                            mnyX+
                             clamp(heartWarmed*isColoredMultiplier,0.,1.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier
-                                          +(clamp( pillar
+                                          +(pillar+
+                                            clamp(
                                             +icicles.xyz
                                             +linearFrequency-(pong.x+pong.y+pong.z)/3.,0.,1.)
                                             +pong
