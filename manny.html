@@ -2082,10 +2082,10 @@ ret= vec4(clamp(
     }
                        vec4 faceBlackAndWhite(vec2 g, vec2 t){
             t/=2.5;
-
+            if(holieyes==1) t*=-1.;
             bool bfeye= false;
       vec4 l = vec4(0.);
-      vec2 p = (vec2(g.x,g.y)-vec2(t.x,-t.y));//vec2(g.x,-g.y);
+      vec2 p = (vec2(g.x,g.y)-vec2(t.x,t.y));//vec2(g.x,-g.y);
       if(brelued<0.)p.y*=-1.;
       if(flipStar<0.)p.y*=-1.;
 
@@ -2099,7 +2099,7 @@ ret= vec4(clamp(
          isEscaped=-2.;//length(z)/40.;//clouds and face
           break;}
       else{
-          z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),2.0*z.x*z.y-g.y-t.y);
+          z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),2.0*z.x*z.y-g.y+t.y);
           
           l=vec4(vec3(1.-abs(z.y)*6.),1.);//smooths middle horn, removes some clouds
           vec2 s=z;//vec2(z.x,-z.y);
@@ -2125,13 +2125,13 @@ ret= vec4(clamp(
              bfeye=true;
          }
        // else if(true);
-             else if (f==16 &&p.x<.3){
+             else if (f==16 &&p.x<.35){
               if (p.x>.0) {
                   if(p.y<0.)l = vec4( hsv2rgb( vec3(mod(9./12.+eyeColorCycler,1.) ,.5,1. )),.5);
                   else l = vec4( hsv2rgb( vec3(mod(5./12.+eyeColorCycler,1.) ,.5,1. )),.5);
               }
               else if(p.x>-.3){
-    
+                  //squircle eyes orange and steel blue
                   if(p.y>0.)l = vec4( hsv2rgb( vec3(mod(4./12.+eyeColorCycler,1.) ,.5,1. )),.5);
                   else l = vec4( hsv2rgb( vec3(mod(10./12.+eyeColorCycler,1.) ,.5,1. )),.5);
               
@@ -2140,18 +2140,22 @@ ret= vec4(clamp(
           }
           
     else if (f==17 &&p.x>.0&&p.x<.5){
-        l = vec4( hsv2rgb( vec3(mod(7./12.+eyeColorCycler,1.) ,.5,1. )),.5);
+        l = vec4( hsv2rgb( vec3(mod(7./12.+eyeColorCycler,1.) ,.5,1. )),.5);//green nose
         break;
     }
     else if ((f==15)&&p.x>-.3&&p.x<0.)
     {
+
                   if(bfeye)
               {
+                  //diagonal diamond eyes
+
         if(p.y>0.)l=vec4( hsv2rgb( vec3(mod(2./12.+eyeColorCycler,1.) ,.5,1. )),.5);
     else l=vec4( hsv2rgb( vec3(mod(0./12.+eyeColorCycler,1.) ,.5,1. )),.5);
               }
         else {
-            
+            //opening side eyes
+
                   if(p.y<0.)l = vec4( hsv2rgb( vec3(mod(4./12.+eyeColorCycler,1.) ,.5,1. )),.5);
                   else l = vec4( hsv2rgb( vec3(mod(10./12.+eyeColorCycler,1.) ,.5,1. )),.5);
         }
@@ -2206,7 +2210,7 @@ ret= vec4(clamp(
           l=length(z)/40.;//clouds and face
           break;}
       else{
-          z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),2.0*z.x*z.y-g.y-t.y);
+          z=vec2(-1./(z.x*z.x-z.y*z.y-g.x-t.x),2.0*z.x*z.y-g.y-t.y);//this used to be +t.x\-t.y and other code may use those values, I think -t.x\-t.y works well with opposite rainbow eye colors
           l=abs(z.y)*6.;//smooths middle horn, removes some clouds
           if(z.x>-.1)l=z.x*100.;}//face with closed small holes
       return vec3(1.-l);
