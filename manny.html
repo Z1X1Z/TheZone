@@ -1796,14 +1796,16 @@ uniform float exponentialPetals;
     }
     
     vec3 paddles(vec2 vUvCentered){
-                                      float incrementSize = 1./12.;
                                       float shade = 0.;
-                                      float staff =mod(vUv.y*12.+.5,1.)-.5;
+
                                       if(abs(vUvCentered.x)>.47)
                                       {
-                                          if ( abs(staff)<incrementSize)
+                                          
+                                                        float incrementSize = 1./12.;
+                                                        float staff =mod(vUv.y*12.+.5,1.)-.5;
+                                          if ( abs(staff)<=incrementSize)
                                           return hsv2rgb( vec3(mod(-vUv.y+(6.*brelued-2.)/12.+twistStar*divideByMultiplyingPi2,1.) ,1.,1. )); //vec4(mod(note,12.)/12.);
-                                          else if ( abs(staff)<incrementSize*2.)shade=.25;//(vUvCentered.x/2.-1.25);
+                                          else if ( abs(staff)<=incrementSize*2.)shade=.25;//(vUvCentered.x/2.-1.25);
                                           
 
 
@@ -2082,7 +2084,7 @@ ret= vec4(clamp(
     }
                        vec4 faceBlackAndWhite(vec2 g, vec2 t){
             t/=2.5;
-            if(holieyes==1) t*=-1.;
+            if(holieyes==1) t.x*=-1.;
             bool bfeye= false;
       vec4 l = vec4(0.);
       vec2 p = (vec2(g.x,g.y)-vec2(t.x,t.y));//vec2(g.x,-g.y);
@@ -2099,7 +2101,7 @@ ret= vec4(clamp(
          isEscaped=-2.;//length(z)/40.;//clouds and face
           break;}
       else{
-          z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),2.0*z.x*z.y-g.y+t.y);
+          z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),2.0*z.x*z.y-g.y-t.y);
           
           l=vec4(vec3(1.-abs(z.y)*6.),1.);//smooths middle horn, removes some clouds
           vec2 s=z;//vec2(z.x,-z.y);
