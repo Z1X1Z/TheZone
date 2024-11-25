@@ -2845,7 +2845,8 @@ vec2 m=vec2(0.);
 
 float truncator=1.;
 bool truncated = true;
-if(lfc!=0.&&truncated) truncator = pow(log(zoom/lfc),gr*gr);//log truncation * factor is not known, may no longer be necesary
+if(lfc!=0.&&truncated) truncator =log(zoom/lfc)*100000.;
+//pow(abs(log(zoom/lfc),2.);//log truncation * factor is not known, may no longer be necesary
 //Maendel clover
 
 //this is essentially just p as in the mandelbrot x <== x^2+
@@ -4193,7 +4194,8 @@ vec3 sevenPillars(vec2 p){
 vec2 r=-(vUv.yx-.5)/aspectRatio;
 vec2 p=r*shaderScale/2.;
 
-vec4 oopm = oppositeOfPitchMarker(r);
+vec4 oopm = vec4(0.);
+if(volume!=1.)oopm=oppositeOfPitchMarker(r);//seems like volume should be zero if touchmode, it's not, and causes black screen
 
 vec2 spunC=coords.yx;
 
