@@ -1798,11 +1798,11 @@ uniform float exponentialPetals;
           float angle =  atan(r.y,r.x)-atan(d.x,d.y);
           vec4 ret = vec4(0.);
           float wedge = abs(angle*12.*divideByMultiplyingPi2);
-        if((wedge)*9.<1.)
+        if((wedge)*4.<1.)
         {
             float dist = length(r);
             const float chevronCount = 24.;
-          if( dist<.5-.25/chevronCount&&
+          if( dist<.5-.5/chevronCount&&
              
              mod(dist*chevronCount+2./((1.-wedge)),1.)<.5)
          ret =  vec4(hsv2rgb(vec3(mod(-note*brelued+4.,12.)/12.,1.,1.)),1.);
