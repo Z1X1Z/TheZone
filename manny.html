@@ -1794,7 +1794,21 @@ uniform float exponentialPetals;
      f.y=fxb*zin(-angle)-f.y*coz(-angle);
      return f;
     }
-    
+    vec4 oppositeOfPitchMarker (vec2 r){
+          float angle =  atan(r.y,r.x)-atan(d.x,d.y);
+          vec4 ret = vec4(0.);
+          float wedge = abs(angle*12.*divideByMultiplyingPi2);
+        if((wedge)*9.<1.)
+        {
+            float dist = length(r);
+            const float chevronCount = 24.;
+          if( dist<.5-.25/chevronCount&&
+             
+             mod(dist*chevronCount+2./((1.-wedge)),1.)<.5)
+         ret =  vec4(hsv2rgb(vec3(mod(-note*brelued+4.,12.)/12.,1.,1.)),1.);
+         }
+                                      return vec4(ret);
+                                  }
     vec3 paddles(vec2 vUvCentered){
                                       float shade = 0.;
 
@@ -1867,7 +1881,7 @@ uniform float exponentialPetals;
     {
 
         uv=uv.yx;
-        float angle = ((-atan(uv.y,uv.x)*flipStar*radialWarp-twistStar                        +PIdiv2+PIdiv2*flipStar)*divideByMultiplyingPi2
+        float angle = ((-atan(uv.y,uv.x)*flipStar-twistStar                        +PIdiv2+PIdiv2*flipStar)*divideByMultiplyingPi2
 );
                         //angle=mod(angle,1.);
                         
@@ -1944,7 +1958,7 @@ uniform float exponentialPetals;
        if(length(uv)<starnSize){
        //uv *=    26.5;
    // return vec4(angle1*divideByMultiplyingPi2+.5  );
-            float angle =witnessFlip* atan(uv.x,uv.y)*radialWarp;//
+            float angle =witnessFlip* atan(uv.x,uv.y);//
           //       if(angle<0.)angle = PI-angle;
           //  angle += (PI2*(noteOfStar
 //this value is uncertain
@@ -2614,8 +2628,16 @@ vec3 tol(vec2 p, vec2 t){
                         ).xyz;
                         if(clvrVariant4)p/=1.5;
                          vec2 pWithoutChiralizer = p;
-                         if(chirality==-1&&twelveGates){p=spin2(p,PI2/24.);}
-                         else if(chirality==-1){p=p=spin2(p,PI2/4.);}
+                         
+                         
+      float chiralAdjustment = 0.;
+
+                         if(chirality==-1&&twelveGates){
+                         chiralAdjustment=-PI2/24.;
+                         p=spin2(p,-chiralAdjustment);}
+                         else if(chirality==-1){
+                         chiralAdjustment=-PI/2.;
+                         p=spin2(p,-chiralAdjustment/2.);}
                          if(cloverOffset!=0.)p=spin2(p,cloverOffset*PI2);
                     
                     bool gated = false;
@@ -2823,7 +2845,7 @@ vec2 m=vec2(0.);
 
 float truncator=1.;
 bool truncated = true;
-if(lfc!=0.&&truncated) truncator = pow(log(zoom/lfc),2.);//log truncation * factor is not known, may no longer be necesary
+if(lfc!=0.&&truncated) truncator = pow(log(zoom/lfc),gr*gr);//log truncation * factor is not known, may no longer be necesary
 //Maendel clover
 
 //this is essentially just p as in the mandelbrot x <== x^2+
@@ -2903,13 +2925,18 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
                              )*log(2.)/log(metaCoreDriveFactor)+loops;
                              */
                              dstnce=length(s);
-                                                           /*
-                             if(dilate){
-                                        float dilation = dstnce*variant4Correction;
+                                                           
+                             if(0==1&&dilate){
+    /*  float dilation = dstnce*variant4Correction;
                              hyperCoreOUTPUT-=dilation;//dilate clover shift
-                             hyperCoreBoosted-=dilation;//maybe times 1.5
-                             }
-                                                            */
+                             hyperCoreBoosted-=dilation;//maybe times 1.5     */
+     //   float sliceanddiceBoost=mod((atan(p.y,p.x)+chiralAdjustment)*divideByMultiplyingPi2*6.+1.5,1.)*log(dstnce);
+     //  sliceanddiceBoost=sign(sliceanddiceBoost)*pow(abs(sliceanddiceBoost),2.);
+    //hyperCoreBoosted-=sliceanddiceBoost;
+   //  hyperCoreOUTPUT-=sliceanddiceBoost;
+     
+}
+   
 
                             float initialHyperCoreBoosted = hyperCoreBoosted;
                                        float colorComputationBoost =7.;//increasing number decreases processing and clarity
@@ -2958,12 +2985,7 @@ else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter
 s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
 dstnce = length(s);
 
-       
-                                    float chiralAdjustment = 0.;
-                                if(chirality==-1)
-                                {   if(twelveGates)chiralAdjustment=-PI2/24.;
-                                    else chiralAdjustment=-PI/2.;
-                                    }
+        
                           vec2 cloverMAPNeutral = ((spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment)));
                                                     
                                vec2   cloverMAP = cloverMAPNeutral+.5;
@@ -3025,9 +3047,18 @@ vec2 lastS = s;
        //x**3
        dstnce = length(s);
 
-       if(dilate){//this is to allow top level core freeze for original clover
-       hyperCoreBoosted-=dstnce;//duplicate dilation
-       hyperCoreOUTPUT-=dstnce;
+       if(dilate){
+                 /* float sliceanddiceBoost=mod((atan(s.y,s.x)+chiralAdjustment)*divideByMultiplyingPi2*6.+1.,1.)*dstnce*dstnce;
+                  sliceanddiceBoost=sign(sliceanddiceBoost)*pow(abs(sliceanddiceBoost),.5);
+              hyperCoreBoosted-=sliceanddiceBoost;
+               hyperCoreOUTPUT-=sliceanddiceBoost;
+                  */
+               hyperCoreBoosted-=dstnce;
+                hyperCoreOUTPUT-=dstnce;
+              // hyperCoreBoosted-=dstnce;
+               // hyperCoreOUTPUT-=dstnce;
+
+               
        }
        
        if(clvrVariant9) s+= coords*gr;
@@ -3222,10 +3253,17 @@ dstnce = length(s);
 
                        if(dilate){
                            
-                       hyperCoreOUTPUT-=dstnce;//dilate clover shift
-                       hyperCoreBoosted-=dstnce;//maybe times 1.5
+                      // hyperCoreOUTPUT-=dstnce;//dilate clover shift
+                     //  hyperCoreBoosted-=dstnce;//maybe times 1.5
+                   /*  float sliceanddiceBoost=mod((atan(s.y,s.x)+chiralAdjustment)*divideByMultiplyingPi2*6.+1.,1.)*dstnce*dstnce;
+
+                       hyperCoreBoosted-=sliceanddiceBoost;
+                       hyperCoreOUTPUT-=sliceanddiceBoost;
+                     */
+                        hyperCoreBoosted-=dstnce;
+                         hyperCoreOUTPUT-=dstnce;
                        }
-                       
+                    
                 // if(superStable&&dstnce<1.5)
                //   {float b = .5;s*=b;dstnce*=b;
                      // hyperCoreBoosted++;
@@ -4152,7 +4190,10 @@ vec3 sevenPillars(vec2 p){
       void main(){
                       vec2 aspectRatio = resolution/max(resolution.x,resolution.y);
 
-vec2 p=-(vUv.yx-.5)/aspectRatio*shaderScale/2.;
+vec2 r=-(vUv.yx-.5)/aspectRatio;
+vec2 p=r*shaderScale/2.;
+
+vec4 oopm = oppositeOfPitchMarker(r);
 
 vec2 spunC=coords.yx;
 
@@ -4179,7 +4220,7 @@ vec2 dance = vec2(0.);
                float lfc=length(freed(coords));
 
                 dance = //vec2(-sin(time+time2dance), -sin(time*-gr))*zoom+
-                (spunC.yx)*log(lfc);
+                vec2((spunC.x),abs(spunC.y))*log(lfc);
                 //heart dance
                    dance2 = vec2(   -abs(lfc/(lfc-zoom)) -lfc/(lfc+zoom)*2./3.,
                                      -((zoom*lfc)/(lfc+zoom)*sign(coords.y)*sign(coords.x)*(1.-lfc*zoom) )
@@ -4396,7 +4437,7 @@ if(heartStar==0){
             vec2 uvSwizzled=uVuMinCenterASKEW.yx;
 
 
-            float angleASKEW = ((-atan(uvSwizzled.y,uvSwizzled.x)*flipStar*radialWarp-twistStar
+            float angleASKEW = ((-atan(uvSwizzled.y,uvSwizzled.x)*flipStar-twistStar
             +PIdiv2+PIdiv2*flipStar)*divideByMultiplyingPi2);
             //angle=mod(angle,1.);
 
@@ -4651,6 +4692,10 @@ if(starOnDot>=1){
                                                                  ;
                                                                  
                                                              if(length(p)<4.*sqrt(2.)/min(resolution.x,resolution.y)) gl_FragColor=vec4(zoomer,1.);
+                                        else if (oopm.w!=0.){
+                       gl_FragColor=oopm;
+                       }
+                   
                                                              else if(length(p)<1.&&
                                                                      starship.w>3.5/255.&&((starship.x==1.&&starship.y==1.&&starship.z==1.)||(starship.x==0.&&starship.y==0.&&starship.z==0.)))
                                                                      
