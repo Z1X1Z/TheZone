@@ -64,8 +64,16 @@ function tol( j,  t){
 
     
     var pWithoutChiralizer = p.clone();
-if(chirality==-1){p=new THREE.Vector2(p.y,p.x);}
+    var chiralAdjustment = 0.;
+    if(chirality==-1&&twelveGates){
+    chiralAdjustment=-PI2/24.;
+    p=spin(p,-chiralAdjustment);}
+    else if(chirality==-1){
+    chiralAdjustment=-PI/2.;
+    p=spin(p,-chiralAdjustment/2.);}
     if(cloverOffset!=0.)p=spin(p,cloverOffset*Math.PI*2.);
+
+    
     
     if(twelveGates)
     {
@@ -246,7 +254,10 @@ var m= new THREE.Vector2(0.,0.);
 
     var truncator=1.;
     var truncated = true;
-    if(lfc!=0.&&truncated) truncator = Math.log(zoom/lfc)**2.;
+    if(lfc!=0.&&truncated)
+        truncator = Math.log(zoom/lfc)*100000.;
+
+        //truncator = Math.log(zoom/lfc)**2.;
 //Maendel clover
                                      
 //this is essentially just p as in the mandelbrot x <== x^2+
@@ -372,8 +383,9 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
         dstnce = s.length();
     
         if(dilate){//this is to allow top level core freeze for original clover
-            hyperCoreBoosted-=dstnce;
-            hyperCoreOUTPUT-=dstnce;
+         
+             hyperCoreBoosted-=dstnce;
+              hyperCoreOUTPUT-=dstnce;
         }
 
         if(clvrVariant9)  s=new THREE.Vector2(s.x+coords.y/gr,s.y+coords.x/gr);
@@ -561,6 +573,12 @@ dstnce = s.length();
           
             hyperCoreOUTPUT-=dstnce;//dilate clover shift
             hyperCoreBoosted-=dstnce;//maybe times 1.5
+            
+          //      var sliceanddiceBoost=           mod((Math.atan2(s.y,s.x)+chiralAdjustment)*(1./Math.PI/2.)*6.+.5,1.)*dstnce;
+            
+          //  hyperCoreBoosted-=sliceanddiceBoost;
+           //  hyperCoreOUTPUT-=sliceanddiceBoost;
+
         }
 
 for(var i=0;i<100; i++)//not sure if i is 20 or >20
