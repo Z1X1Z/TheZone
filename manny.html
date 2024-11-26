@@ -4527,10 +4527,10 @@ if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
 
 
                         if(HEART.x==0.&&HEART.y==0.&&HEART.z==0.)  heartWarmed=AM;
-                        else   clothes*=HEART;
+                       // else   clothes*=HEART;
 
                             
-                     //   mny+=clothes;
+                       //mny+=clothes/2.;
 
 //mny+=clamp(heartWarmed+(-mny.r-mny.g-mny.b),0.,1.);//+HEART*heartMultiplier;
                            
@@ -4671,7 +4671,7 @@ if(starOnDot>=1){
                        
                                           if(true){//may be useful to seperate pong from pixelStar
                                                pong += paddles(vUvCentered.yx);
-                                //               pong += ball(p);
+                                               pong += ball(p);
                                                }
                                           
              pixelStarship = audioEq(uVuMinCenter);
