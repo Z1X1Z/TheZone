@@ -51,7 +51,7 @@ clvrVariant9:{value: false},
 clvrVariant0:{value: false},
 
 twelveGates:{value: false    },
-twelveGatesMeta:{value: 2    },
+twelveGatesMeta:{value: 2.    },
 Spoker:{value: true    },
         spokelover:{value: true    },
 largeEyeColor:{value:0.},
@@ -64,7 +64,7 @@ dilate:{value:true},
         continuumClover:{value: false    },
         Inherited:{value: true    },
         cloverSlide:{value: false    },
-
+        Pointers:{value:true},
         time: {value:.0 },
         rate: {value: 1.},
 
@@ -455,8 +455,12 @@ function callKey(event){
         else if( uniforms.exponentialPetals.value==-1.) uniforms.exponentialPetals.value=0.;
         
     }
-    else if (event.altKey&&(key=="˜"||key=="Dead"||key=="n"))uniforms.twelveGates.value=!uniforms.twelveGates.value;
-    
+    else if (event.altKey&&(key=="˜"||key=="ñ"||key=="n"))uniforms.twelveGates.value=!uniforms.twelveGates.value;
+    else if (event.altKey&&(key=="∆"||key=="j"))
+    {console.log(key)
+        uniforms.Pointers.value=!uniforms.Pointers.value;
+        console.log(uniforms.Pointers.value)
+    }
     else if (event.altKey&&(key=="µ"||key=="m"))
     {if(number!="no number")
         uniforms.twelveGatesMeta.value=number;

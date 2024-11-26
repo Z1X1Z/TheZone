@@ -1029,7 +1029,7 @@ function setMicInputToStarPIXEL(){
                  }
              }
                  else{
-                     uniforms["volume"].value = 0;
+                     //uniforms["volume"].value = 0.;
 
                      uniforms["audioBuffer"].value = null;
                      uniforms.audioBuffer.needsUpdate = true;
@@ -3151,7 +3151,6 @@ for(var n = 0; n<targets.length;n++){
                                                        
                                                                                          uniforms.d.value.x = 0.;
                                                                                          uniforms.d.value.y = 0.;
-                                                                                         
                                                                        animateLoopId=                   window.requestAnimationFrame( animate );
                             //  renderer.forceContextLoss ()
                             //  renderer.forceContextRestore ( )
