@@ -685,7 +685,7 @@ radialWarp=b;
        <input type="checkbox"  id="pointers" name="t"  onclick= "
            key  = 'j';
            callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
-           <label for="pointers"> Pointer![,j]</label><br>
+           <label for="pointers"> Pointer![.j]</label><br>
            
                      <input type="checkbox"  id="user camera" name="t"  onclick= "
                          key  = 'l';
@@ -2129,7 +2129,11 @@ ret= vec4(clamp(
       vec2 p = (vec2(g.x,g.y)-vec2(t.x,-t.y));//vec2(g.x,-g.y);
       if(brelued<0.)p.y*=-1.;
       if(flipStar<0.)p.y*=-1.;
-
+      float angleColorShift = 0.;
+      if(MannyONtrail>0)
+      {
+          angleColorShift=(-atan(d.x,d.y)*flipStar+PI);
+      }
       vec2 z=g.xy;
       // if(g.x*g.x+g.y*g.y<40.)
       //if(abs(g.y)<9.)
@@ -2144,7 +2148,7 @@ ret= vec4(clamp(
           
           l=vec4(vec3(1.-abs(z.y)*6.),1.);//smooths middle horn, removes some clouds
           vec2 s=z;//vec2(z.x,-z.y);
-          float eyeColorCycler = -3./12.+twistStar*divideByMultiplyingPi2*brelued+10.;
+          float eyeColorCycler = -3./12.+(twistStar+angleColorShift)*divideByMultiplyingPi2*brelued+10.;
           if(f<15&&z.x>-.1)l=vec4(vec3(-z.x),1.);
           if(holieyes==2)
           {
