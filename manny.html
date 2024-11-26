@@ -4221,7 +4221,7 @@ vec2 r=-(vUv.yx-.5)/aspectRatio;
 vec2 p=r*shaderScale/2.;
 
 vec4 oopm = vec4(0.);
-if(Pointers||(volume==1.&&!Pointers))
+if((volume!=1.&&Pointers)||(volume==1.&&!Pointers))
 oopm=oppositeOfPitchMarker(r);//seems like volume should be zero if touchmode, it's not, and causes black screen
 
 vec2 spunC=coords.yx;
