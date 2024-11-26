@@ -4530,7 +4530,7 @@ if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                         else   clothes*=HEART;
 
                             
-                        mny+=clothes;
+                     //   mny+=clothes;
 
 //mny+=clamp(heartWarmed+(-mny.r-mny.g-mny.b),0.,1.);//+HEART*heartMultiplier;
                            
@@ -4671,7 +4671,7 @@ if(starOnDot>=1){
                        
                                           if(true){//may be useful to seperate pong from pixelStar
                                                pong += paddles(vUvCentered.yx);
-                                               pong += ball(p);
+                                //               pong += ball(p);
                                                }
                                           
              pixelStarship = audioEq(uVuMinCenter);
@@ -4701,11 +4701,12 @@ if(starOnDot>=1){
             vec3 seeThrough = pixelStarship.xyz+(1.-pixelStarship.w*pixelStarship.w);
              
             
-             if(mny.z>0.&&mny.y>0.&&mny.x>0.){
+         /*    if(mny.z>0.&&mny.y>0.&&mny.x>0.){
              mnyWhite=0.;//-mny.x*.66;
              mny*=seeThrough;
              }
-             
+          */
+             mny+=clothes;
              if(heartWarmed.z==heartWarmed.y&&heartWarmed.y==heartWarmed.x&&heartWarmed.x!=0.&&pixelStarship.w>0.)
              heartWarmed*=seeThrough;//-mny.x*.66;
 
