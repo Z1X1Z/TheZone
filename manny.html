@@ -1796,20 +1796,25 @@ uniform float exponentialPetals;
     }
                                                         const float chevronCount = 24.;
 
-    vec4 oppositeOfPitchMarker (vec2 r){
-          float angle =  atan(r.y,r.x)-atan(d.x,d.y);
-          vec4 ret = vec4(0.);
-          float angleAsOne = angle*divideByMultiplyingPi2;
-          float wedge = (mod(angleAsOne+2.+.5,1.)-.5)*12.;
-            float dist = length(r);
-if(MannyONtrail<=1&& abs(wedge)< 7./24.&&dist-.5/chevronCount<.5
-&& mod(dist*chevronCount+abs(wedge)*2.,1.)<.5)
-ret =  vec4(hsv2rgb(vec3(mod(-note*brelued+4.,12.)/12.,1.,1.)),1.);
+vec4 oppositeOfPitchMarker (vec2 r){
+    float angle =  atan(r.y,r.x)-atan(d.x,d.y);
+    vec4 ret = vec4(0.);
+    float angleAsOne = angle*divideByMultiplyingPi2;
+    float wedge = (mod(angleAsOne+2.+.5,1.)-.5)*12.;
+    float dist = length(r);
+    if(MannyONtrail<=1&& abs(wedge)< 7./24.&&dist-.5/chevronCount<.5
+    && mod(dist*chevronCount+abs(wedge)*2.,1.)<.5)
+        ret =  vec4(hsv2rgb(vec3(mod(-note*brelued+4.,12.)/12.,1.,1.)),1.);
+    else if(MannyONtrail==0&&abs(mod(angleAsOne+2.,1.)-.5)*12.<1./12.)
+        ret =vec4(vec3(.5),1.);
 
-else if(MannyONtrail==0&&abs(mod(angleAsOne+2.,1.)-.5)*12.<1./12.)ret =vec4(vec3(.5),1.);
-            
-                                      return vec4(ret);
-                                  }
+    return vec4(ret);
+}
+
+                                                        
+                                                        
+                                                        
+                                                        
     vec3 paddles(vec2 vUvCentered){
                                       float shade = 0.;
 
@@ -1817,7 +1822,7 @@ else if(MannyONtrail==0&&abs(mod(angleAsOne+2.,1.)-.5)*12.<1./12.)ret =vec4(vec3
                                       {
                                           
                                                         float incrementSize = 1./12.;
-                                                        float staff =mod(vUv.y*12.+.5,1.)-.5;
+                                                        float staff =mod(vUv.y*12.+.5+12.,1.)-.5;
                                           if ( abs(staff)<=incrementSize)
                                           return hsv2rgb( vec3(mod(-vUv.y+(6.*brelued-2.)/12.+twistStar*divideByMultiplyingPi2+1.,1.) ,1.,1. )); //vec4(mod(note,12.)/12.);
                                           else if ( abs(staff)<=incrementSize*2.)shade=.25;//(vUvCentered.x/2.-1.25);
@@ -4754,7 +4759,7 @@ else {
                                                 // +(-HEART.b-HEART.r-HEART.g)/4.
                                                  -AM.r*12.
                                                  +(-linearFrequency.r-linearFrequency.g-linearFrequency.b)/8.
-                                                 -pong.r*3000.
+                                                 -(pong.r+pong.g+pong.b)
                                                  +bigEyes.xyz*largeEyeColor
                                                  -(yourFace.x+yourFace.y+yourFace.z)/256./3.
                         -(ARTICLE.x+ARTICLE.y+ARTICLE.z)*4.
