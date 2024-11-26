@@ -590,7 +590,7 @@ radialWarp=b;
 
                    key  = 'p';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                   Cancel Background Noise![p]</a><br>
+                   Cancel Noise![p]</a><br>
                
                <a id="Listen Out" name="t"  onclick= "
                    key  = 'o';
@@ -2627,7 +2627,7 @@ vec3 tol(vec2 p, vec2 t){
                          -coordSHIFT/duperZoom)*resCale+.5
                                               )
                         ).xyz;
-                        p/=1.25;
+                        if(clvrVariant4)p/=1.25;
                          vec2 pWithoutChiralizer = p;
                          
                          
