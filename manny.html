@@ -1802,7 +1802,7 @@ uniform float exponentialPetals;
           float angleAsOne = angle*divideByMultiplyingPi2;
           float wedge = (mod(angleAsOne+2.+.5,1.)-.5)*12.;
             float dist = length(r);
-if( abs(wedge)< 7./24.&&dist-.5/chevronCount<.5
+if(MannyONtrail<=1&& abs(wedge)< 7./24.&&dist-.5/chevronCount<.5
 && mod(dist*chevronCount+abs(wedge)*2.,1.)<.5)
 ret =  vec4(hsv2rgb(vec3(mod(-note*brelued+4.,12.)/12.,1.,1.)),1.);
 
@@ -2627,7 +2627,7 @@ vec3 tol(vec2 p, vec2 t){
                          -coordSHIFT/duperZoom)*resCale+.5
                                               )
                         ).xyz;
-                        if(clvrVariant4)p/=1.5;
+                        p/=1.25;
                          vec2 pWithoutChiralizer = p;
                          
                          
@@ -4196,7 +4196,7 @@ vec2 r=-(vUv.yx-.5)/aspectRatio;
 vec2 p=r*shaderScale/2.;
 
 vec4 oopm = vec4(0.);
-//if(volume!=1.)
+if(volume!=1.)
 oopm=oppositeOfPitchMarker(r);//seems like volume should be zero if touchmode, it's not, and causes black screen
 
 vec2 spunC=coords.yx;

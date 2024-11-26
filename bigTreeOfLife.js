@@ -59,7 +59,7 @@ function tol( j,  t){
   //  return p;
    let p = new THREE.Vector2(j.y,j.x);//
     p = p.clone().multiplyScalar(zoom).add(new THREE.Vector2(-coords.y,-coords.x));
-
+    p.divideScalar(1.25)
     //if(clvrVariant4)p.multiplyScalar(-leaf);
 
     
