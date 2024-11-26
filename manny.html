@@ -1836,7 +1836,7 @@ vec4 oppositeOfPitchMarker (vec2 r){
                                       return vec3(shade);
                                   }
     vec3 ball(vec2 p){
-    if (length(pongBallCoords-vUv*resolution)<length(resolution.y)/12.) return vec3((1.-vUv.x));
+    if (length(pongBallCoords-vUv*resolution)<length(resolution.y)/12.) return vec3((.5-vUv.x)*10.);
     else return vec3(0.);
     }
    vec4 waveForm(){
