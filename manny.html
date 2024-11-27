@@ -4496,14 +4496,17 @@ if(heartStar==0){
      vec3 heartWarmed= vec3(0.);
      if (Character!=10&&colorCombo!=20&&colorCombo!=17){
                        
-frAMP-=volume*(zoomOutRatchetThreshold)*16.;
+if(volume!=1.)
+{frAMP-=volume*(zoomOutRatchetThreshold)*16.;
 frAMP*=(.5+frAMP)/(1.+zoomOutRatchetThreshold);
-if(frAMP==0.)frAMP=1.;//to prevent cancelling moveDynamic in touchmode
+}
 if(heartStar==0)heartSize/=(1.+frAMP);//*8.;
+
 else if(heartStar==1){
     heartSize/=(1.+volume);//multiplied by two if heart argument is not vec2(0.)
     frAMP=volume*4.;
     }
+
 else if(heartStar==2) frAMP=1.;
 if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                             //else if(Character==2)heartSize=gr;
