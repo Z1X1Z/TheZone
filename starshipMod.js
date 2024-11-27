@@ -738,7 +738,16 @@ function setFFTdependantSizes(){
                      starsANDwitnessesPositionAttribute = starsANDwitnessesGeometry.getAttribute( 'position' );
                      starsANDwitnessesColorAttribute = starsANDwitnessesGeometry.getAttribute( 'color' );
                     }
-                                           
+                            function setVectors(){
+             uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
+uniforms.resolution.value = new THREE.Vector2(window.innerWidth,window.innerHeight);
+uniforms.coords.value = new THREE.Vector2(0.,0.);
+uniforms.d.value = new THREE.Vector2(0.,0.);
+uniforms.dotCoord.value = new THREE.Vector2(0.,0.);
+  
+   uniforms.pongBallCoords.value = new THREE.Vector2(0.,window.innerHeight/gr);
+
+         }
 function init() {
              colorSound = new THREE.Color();
                   colorSoundPURE =     new THREE.Color();
@@ -746,14 +755,7 @@ function init() {
 
             // setFFTdependantSizes();
              //setTrailSize();
-                        uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
-           uniforms.resolution.value = new THREE.Vector2(window.innerWidth,window.innerHeight);
-     uniforms.coords.value = new THREE.Vector2(0.,0.);
-     uniforms.d.value = new THREE.Vector2(0.,0.);
-     uniforms.dotCoord.value = new THREE.Vector2(0.,0.);
-             
-              uniforms.pongBallCoords.value = new THREE.Vector2(0.,window.innerHeight/gr);
-
+              setVectors();
      setRenderTargetSize(window.innerWidth,window.innerHeight)
 
     renderer = new THREE.WebGLRenderer();
@@ -1243,14 +1245,10 @@ function zoomRoutine(){
              }
              
 }
-        let ballVectorX = 1.;
-        let ballVectorY= 1.;
-        let ballReleased = false;
         function pongRoutine(x,y){
              let diag = (uniforms.resolution.value.x**2+uniforms.resolution.value.y**2)**.5*window.movementRate*interpolation/60./4.;
              uniforms.pongBallCoords.value.x+=diag*ballVectorX;//-.1*ballVectorX;//
              uniforms.pongBallCoords.value.y+=diag*ballVectorY//=d_y/minimumDimension*50;//0.;//
-
              let xEdge = widthPX;
              let yEdge = heightPX;
              let paddleStrikePosition=uniforms.pongBallCoords.value.y/uniforms.resolution.value.y-(note+twist/2.)%12./12.;

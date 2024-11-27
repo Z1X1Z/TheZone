@@ -101,11 +101,11 @@ dilate:{value:true},
         resolution: {value:[window.innerWidth,window.innerHeight]},//these are later resolved to the THREE.vec2() uniforms
         coords: {value: [0.,0.]},//to prevent dividing by zero may be set to small value
         coordSHIFT: {value: [0.,0.]},
-        duperZoom: {value:1.},
         d: {value:[.4,.7]},
 dotCoord:{value:[0.,0.]},
-pongBallCoords:{value:[0.,0.]},
+pongBallCoords:{value:[0.,window.innerWidth/gr]},
 
+duperZoom: {value:1.},
 
         dynamicDance: {value: 0},
         remediatedColors: {value: false },
@@ -203,6 +203,9 @@ function resetAll(){
             window.dynamicCoring=false;
             window.omniDynamicEngaged=false;
 
+    window.ballVectorX = 1.;
+    window.ballVectorY= 1.;
+    
             window.fftSize = 2048;
             window.starArms = fftSize/2.
     
@@ -256,6 +259,7 @@ function resetAll(){
                                                else   window.rez=window.devicePixelRatio/2.;
                                                    
     if(window.INITIALIZED){
+                setVectors();
         setFFTdependantSizes();
                 setDAWdependantSize();
         setDynamicSampler2ds();
