@@ -752,7 +752,7 @@ function init() {
      uniforms.d.value = new THREE.Vector2(0.,0.);
      uniforms.dotCoord.value = new THREE.Vector2(0.,0.);
              
-              uniforms.pongBallCoords.value = new THREE.Vector2(0.,0.);
+              uniforms.pongBallCoords.value = new THREE.Vector2(0.,window.innerHeight/gr);
 
      setRenderTargetSize(window.innerWidth,window.innerHeight)
 
@@ -1060,10 +1060,7 @@ function adjustThreeJSWindow()
              }
         
      uniforms.resolution.value =new THREE.Vector2(widthPX,heightPX);
-             uniforms.pongBallCoords.value = new THREE.Vector2(
-                                                               uniforms.resolution.value.x/2.,
-                                                               uniforms.resolution.value.y/2.);
-
+         
      FEEDBACKuniforms.resolution.value =new THREE.Vector2(widthPX,heightPX);
                         wipeUniforms.resolution.value =new THREE.Vector2(widthPX,heightPX);
       minimumDimension = Math.min(widthPX,heightPX);
