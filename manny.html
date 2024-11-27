@@ -2130,10 +2130,9 @@ ret= vec4(clamp(
       if(brelued<0.)p.y*=-1.;
       if(flipStar<0.)p.y*=-1.;
       float angleColorShift = 0.;
-      if(MannyONtrail>0)
-      {
-          angleColorShift=(-atan(d.x,d.y)*flipStar+PI);
-      }
+      if(MannyONtrail>0) angleColorShift=(-atan(d.x,d.y)*flipStar+PI);
+
+      
       vec2 z=g.xy;
       // if(g.x*g.x+g.y*g.y<40.)
       //if(abs(g.y)<9.)
@@ -4710,7 +4709,6 @@ if(starOnDot>=1){
              mny*=seeThrough;
              }
           */
-             mny+=clothes;
              if(heartWarmed.z==heartWarmed.y&&heartWarmed.y==heartWarmed.x&&heartWarmed.x!=0.&&pixelStarship.w>0.)
              heartWarmed*=seeThrough;//-mny.x*.66;
 
@@ -4719,6 +4717,8 @@ if(starOnDot>=1){
              
               
          }
+                                                                 mny+=clothes;
+
                                                                  vec2 faceDimension = ((1.-vUv));
                                                                  vec2 faceDimensionReversed =   vec2(vUv.x,1.-vUv.y);
                                                               vec4 yourFace= vec4(0.);     yourFace=texture2D(videoTexture,faceDimension).xyzw+
