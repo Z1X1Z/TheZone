@@ -2654,7 +2654,7 @@ return vec3(l+b+r+h);}
                                   
                     
                                   
-                        const float distributorFACTOR=PI*gr;
+                        const float distributorFACTOR=PI/gr;
 vec3 tol(vec2 p, vec2 t){
                         vec2 resCale = (resolution.yx/max(resolution.x,resolution.y));
                      vec3 uber    = texture2D(uberDuper,(
@@ -3187,7 +3187,7 @@ if(Spoker){
                          else {
                               */
                             
-                          if(distributor) s=spin2(s,distributorFACTOR);
+                            if(distributor) s=spin2(s,distributorFACTOR);
 
                           s/=spoke_factorLarge;//engage ; s/=2.+'superspokes'
                          
