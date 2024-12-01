@@ -19,6 +19,7 @@ radialWarp:{value:1.},
 pixelSTARon:{value:true},
 heartStar:{value:0},
 superStable:{value:false},
+distributor:{value:true},
 
 micIn:{value:null},
     audioBuffer:{value:null},
@@ -160,6 +161,7 @@ function resetAll(){
         window.uniforms[nameOfUniform]={}
         Object.assign(window.uniforms[nameOfUniform],window.uniformsInitial[nameOfUniform])
     }
+    if(window.touchOnlyMode)window.uniforms["pixelSTARon"]=false;
     window.coordX=0.; window.coordY=0.;
     
     
@@ -465,6 +467,8 @@ function callKey(event){
         uniforms.Pointers.value=!uniforms.Pointers.value;
         console.log(uniforms.Pointers.value)
     }
+    else if (event.altKey&&(key=="ç"||key=="c"))uniforms.distributor.value = !uniforms.distributor.value;
+
     else if (event.altKey&&(key=="µ"||key=="m"))
     {if(number!="no number")
         uniforms.twelveGatesMeta.value=number;

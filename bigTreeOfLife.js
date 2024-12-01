@@ -467,7 +467,8 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
                     }
                     else{
                     */
-                        
+                    s=  spinVector(s,Math.pow(2.,Math.PI*2./gr));
+
                         s.divideScalar(spoke_factorLarge);//engage spokelover s/=2.+'superspokes'
                         
                         hyperCoreOUTPUT-=downSpoke;
