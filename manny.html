@@ -2655,6 +2655,7 @@ return vec3(l+b+r+h);}
                     
                                   
                         const float distributorFACTOR=PI/gr;
+                                  const float distributorFACTORlove= -distributorFACTOR/sqrt(2.);
 vec3 tol(vec2 p, vec2 t){
                         vec2 resCale = (resolution.yx/max(resolution.x,resolution.y));
                      vec3 uber    = texture2D(uberDuper,(
@@ -3235,6 +3236,7 @@ if(counter+dstnce*dstnce //sqrt(sqrt(dstnce)*dstnce)*dstnce
    //  if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
      //else
 
+     if(distributor) s=spin2(s,distributorFACTORlove);
 
      s/=sqrt(2.);
      if(!wheel){
@@ -3299,8 +3301,8 @@ dstnce = length(s);
                        hyperCoreBoosted-=sliceanddiceBoost;
                        hyperCoreOUTPUT-=sliceanddiceBoost;
                      */
-                        hyperCoreBoosted-=dstnce;
-                         hyperCoreOUTPUT-=dstnce;
+                        hyperCoreBoosted-=dstnce*dstnce;
+                         hyperCoreOUTPUT-=dstnce*dstnce;
                        }
                     
                 // if(superStable&&dstnce<1.5)
@@ -3362,7 +3364,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<2./
         hyperCoreOUTPUT--;
         loops++;
     }
- 
+
 
 OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
 OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);

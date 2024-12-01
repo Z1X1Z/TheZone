@@ -467,7 +467,12 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
                     }
                     else{
                     */
-                    s=  spinVector(s,Math.pow(2.,Math.PI*2./gr));
+                    
+                                  
+                        var distributorFACTOR=Math.PI/gr;
+                    
+                    
+                    s=  spinVector(s,distributorFACTOR);
 
                         s.divideScalar(spoke_factorLarge);//engage spokelover s/=2.+'superspokes'
                         
@@ -513,6 +518,8 @@ var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpo
                 //  if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
                 //else
                 
+                var distributorFACTORlove= -distributorFACTOR/Math.sqrt(2.);
+                s=  spinVector(s,distributorFACTOR);
                 s.divideScalar( Math.sqrt(2.));
                 if(!wheel)
                 {
@@ -572,8 +579,8 @@ dstnce = s.length();
     dstnce=s.length();
         if(dilate){
           
-            hyperCoreOUTPUT-=dstnce;//dilate clover shift
-            hyperCoreBoosted-=dstnce;//maybe times 1.5
+            hyperCoreOUTPUT-=dstnce*dstnce;//dilate clover shift
+            hyperCoreBoosted-=dstnce*dstnce;//maybe times 1.5
             
           //      var sliceanddiceBoost=           mod((Math.atan2(s.y,s.x)+chiralAdjustment)*(1./Math.PI/2.)*6.+.5,1.)*dstnce;
             
