@@ -518,7 +518,7 @@ var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpo
                 //  if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
                 //else
                 
-                var distributorFACTORlove= -distributorFACTOR/Math.sqrt(2.);
+                var distributorFACTORlove= distributorFACTOR*Math.sqrt(2.)/leaf;
                 s=  spinVector(s,distributorFACTOR);
                 s.divideScalar( Math.sqrt(2.));
                 if(!wheel)
