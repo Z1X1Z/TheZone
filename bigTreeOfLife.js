@@ -66,10 +66,10 @@ function tol( j,  t){
     var pWithoutChiralizer = p.clone();
     var chiralAdjustment = 0.;
     if(chirality==-1&&twelveGates){
-    chiralAdjustment=-PI2/24.;
+    chiralAdjustment=-Math.PI2/24.;
     p=spin(p,-chiralAdjustment);}
     else if(chirality==-1){
-    chiralAdjustment=-PI/2.;
+    chiralAdjustment=-Math.PI/2.;
     p=spin(p,-chiralAdjustment/2.);}
     if(cloverOffset!=0.)p=spin(p,cloverOffset*Math.PI*2.);
 

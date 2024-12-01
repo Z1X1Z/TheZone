@@ -1821,7 +1821,7 @@ uniform float exponentialPetals;
     }
                                                         const float chevronCount = 24.;
 
-vec4 oppositeOfPitchMarker (vec2 r){
+vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
     float angle =  atan(r.y,r.x)-atan(d.x,d.y);
     vec4 ret = vec4(0.);
     float angleAsOne = angle*divideByMultiplyingPi2;
@@ -4741,9 +4741,7 @@ if(starOnDot>=1){
                                                                  ;
                                                   vec4 layeredOUT =vec4(0.);
                                                              if(length(p)<4.*sqrt(2.)/min(resolution.x,resolution.y)) layeredOUT=vec4(zoomer,1.);
-                                        else if (oopm.w!=0.){
-                       layeredOUT=oopm;
-                       }
+                                
                    
                                                              else if(length(p)<1.&&
                                                                      starship.w>3.5/255.&&((starship.x==1.&&starship.y==1.&&starship.z==1.)||(starship.x==0.&&starship.y==0.&&starship.z==0.)))
@@ -4765,7 +4763,7 @@ else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
 }
                                                                  
          else if (holieyes==1&&Character==0&& !((HEART.x==0.&&HEART.y==0.)||(HEART.y==0.&&HEART.z==0.)||(HEART.z==0.&&HEART.x==0.))) layeredOUT=vec4(HEART,1.);
-
+                        else if (oopm.w!=0.)layeredOUT=oopm;
 else {
                   
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
