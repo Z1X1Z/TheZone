@@ -540,10 +540,10 @@ function followSound(e, SonicTouchArrayK){
                              sound.setVolume(volumeTWO*(1.-octaveDistance%1));
                                if(window.radialOctaveBoost)
                                {
-                                   zound2.setPitch(frequency*2**Math.ceil(octaveDistance-octaveShift));
-                                   zound.setPitch(frequency*2*2**Math.ceil(octaveDistance-octaveShift));
-                                   zound2.setVolume(volumePrime*octaveDistance%1);
-                                   zound.setVolume(volumeTWO*octaveDistance%1);
+                                   zound.setPitch(frequency*2**Math.ceil(octaveDistance-octaveShift));
+                                   zound2.setPitch(frequency*2*2**Math.ceil(octaveDistance-octaveShift));
+                                   zound.setVolume(volumePrime*octaveDistance%1);
+                                   zound2.setVolume(volumeTWO*octaveDistance%1);
                                }
                                    xound2.setPitch(frequency/2.*2**Math.floor(octaveDistance-octaveShift));
                                    xound.setPitch(frequency*2**Math.floor(octaveDistance-octaveShift));
@@ -551,10 +551,10 @@ function followSound(e, SonicTouchArrayK){
                                    xound.setVolume(volumeTWO*(1.-octaveDistance%1));
                                if(window.radialOctaveBoost)
                                {
-                                   tound2.setPitch(frequency*2**Math.ceil(octaveDistance-octaveShift));
-                                   tound.setPitch(frequency*2*2**Math.ceil(octaveDistance-octaveShift));
-                                   tound2.setVolume(volumePrime*octaveDistance%1);
-                                   tound.setVolume(volumeTWO*octaveDistance%1);
+                                   tound.setPitch(frequency*2**Math.ceil(octaveDistance-octaveShift));
+                                   tound2.setPitch(frequency*2*2**Math.ceil(octaveDistance-octaveShift));
+                                   tound.setVolume(volumePrime*octaveDistance%1);
+                                   tound2.setVolume(volumeTWO*octaveDistance%1);
                                }
                          
                                  
