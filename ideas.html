@@ -154,8 +154,8 @@ x=-1/(x^2-1)=-1.3247
 </p><p>
 If we do the same thing with the body we get:
 </p><p>
-x=(2*(x^2-1))^.5=
-=1.4142=2^(1/2)
+x=(2/(x^2+1))^.5={
+1.4142=2^(1/2) or 1}
 </p><p>
 Note that the -1/ has disappeared for this calculation.
 </p><p>
@@ -179,7 +179,7 @@ This is the positive of Manny's face's solution!
     nf = document.querySelectorAll('.onoffline');
     for(var c = 0; c<nf.length; c++) {
         if(window.online)
-        nf[c].src ="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6.0/"+nf[c].name;
+        nf[c].src ="https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@9.0/"+nf[c].name;
         else nf[c].src =nf[c].name;
         nf[c].onerror=function(){    var s = document.createElement("img");//document.getElementById('threeJSscript');
             s.src = this.name;
