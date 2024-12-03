@@ -1044,6 +1044,10 @@ Reset Zoom![L]</a><br>
                     key  = 'z';
                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                  <label for="Bridge">Bridge?![z]</label><br>
+                 <input type="checkbox" id="cycler" name="t"  onclick= "
+                     key  = 'b';
+                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                  <label for="cycler">Cycler![b]</label><br>
                  <input type="checkbox" id="Wheel" name="t"  onclick= "
                      key  = 'm';
                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -1885,9 +1889,9 @@ vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
     return ret;
     }
                                                         float linearEQsize = 1./4.;
-    vec3 linearFrequencyEQ(vec2 h)
+    vec4 linearFrequencyEQ(vec2 h)
                 {
-                vec3 ret=vec3(0.);//1.,.5,1.,1.);
+                vec4 ret=vec4(0.);//1.,.5,1.,1.);
                 
                 if(h.x<linearEQsize){
                     
@@ -1901,9 +1905,8 @@ vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
                      
                float freq =h.y*sampleRate;
              float note =12.*log(freq)/log(2.)+49.;
-                              
-                 ret = hsv2rgb( vec3( mod((-note-2.)*brelued+4.,12.)/12. ,1.,1. )); //vec4(mod(note,12.)/12.);
-                    //                              else if(frAmp*2.>h.x) ret =vec3(sign(vUv.x-.5));
+              if (frAmp>h.x*1.5)  ret = vec4(hsv2rgb( vec3( mod((-note-2.)*brelued+4.,12.)/12. ,1.,1. )),0.); //vec4(mod(note,12.)/12.);
+                    else if(frAmp>h.x) ret =vec4(-sign(vUv.x-.5)*20.);
 }
                 }
                 //           else ret=vec4(1.);
@@ -4677,7 +4680,7 @@ if(starOnDot>=1){
                                                                  float mnyWhite=1.;
          float pixelShipGrey = 0.;
          vec4 icicles=vec4(0.);
-         vec3 linearFrequency=vec3(0.);
+         vec4 linearFrequency=vec4(0.);
                                                                  vec3 pong = vec3(0.);
                                      
          if (pixelSTARon)
@@ -4774,10 +4777,10 @@ else {
                                            mnyX+
                             clamp(heartWarmed*isColoredMultiplier,0.,1.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier
-                                          +(pillar+
-                                            clamp(
+                                          +(clamp(pillar+
                                             +icicles.xyz
-                                            +linearFrequency-(pong.x+pong.y+pong.z)/3.,0.,1.)
+                                            +linearFrequency.xyz-(pong.r+pong.g+pong.b)/3.,0.,1.)
+                                        +linearFrequency.w
                                             +pong
                                             )*(1.-pixelShipGrey*40.)
                                         +yourFace.xyz
@@ -4796,7 +4799,7 @@ else {
                                                  +7.*(-HEART.b-HEART.r-HEART.g)
                                                 // +(-HEART.b-HEART.r-HEART.g)/4.
                                                  -AM.r*12.
-                                                 +(-linearFrequency.r-linearFrequency.g-linearFrequency.b)/8.
+                                               //  +(-linearFrequency.r-linearFrequency.g-linearFrequency.b)/8.
                                                  -(pong.r+pong.g+pong.b)
                                                  +bigEyes.xyz*largeEyeColor
                                                  -(yourFace.x+yourFace.y+yourFace.z)/256./3.

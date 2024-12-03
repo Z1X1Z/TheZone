@@ -1178,9 +1178,8 @@ let lastVolume = 1.;
              
              
     if((fromCenter>=zoomCageSize*expandedZoomCage||zoom>=1.)&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
-        
-       // if(uniforms.wheel.value)uniforms.upCoreCycler.value=(uniforms.upCoreCycler.value-1)%60;//this is for the heart to expand and contract//does modulo -60%60=0?-0 it seems
-       // else uniforms.upCoreCycler.value = 0.;
+        if(uniforms.wheel.value&&window.cycleCores)uniforms.upCoreCycler.value=(uniforms.upCoreCycler.value-1)%60;//this is for the heart to expand and contract//does modulo -60%60=0?-0 it seems
+        else uniforms.upCoreCycler.value = 0.;
     }
     }
                        

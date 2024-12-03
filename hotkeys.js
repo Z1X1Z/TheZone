@@ -187,6 +187,7 @@ function resetAll(){
     window.twist = 0.;
     window.skew = 0.;
     window.flip = 1.;
+    window.cycleCores = false;
 
             window.FPS=60;
             window.zoom=1.;
@@ -741,6 +742,7 @@ function callKey(event){
     else if (key=="m"){
         
         uniforms[ "wheel" ].value = !uniforms[ "wheel" ].value;
+        if( !uniforms[ "wheel" ].value)  uniforms["upCoreCycler"].value=0;
         if(number!="no number")uniforms.mandelCloverFactor.value=number;
     }
                 
@@ -785,7 +787,7 @@ function callKey(event){
         window.date = Date.now();
         window.startTimeSecondMantissaMagnified = ((date/1000.-Math.round(date)/1000.)-.5)*144000;//for orienting the dance to time
     }
-    else if (key=="b") uniforms[ "colorCombo" ].value = 16;
+    else if (key=="b") window.cycleCores = !window.cycleCores;
     else if (key=="B") {
         if(BulletMine == 0) BulletMine = 1;
         else if(BulletMine==1) BulletMine = -.5;
