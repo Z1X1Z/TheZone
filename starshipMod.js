@@ -777,7 +777,7 @@ function init() {
        //vertexColors: true,
            color: 0xffffff,
          // opacity: .5,
-          linewidth: 3,//ignored by WebGLRenderer
+          linewidth: 1,//ignored by WebGLRenderer
           linecap: 'round', //ignored by WebGLRenderer
           linejoin:  'round' //ignored by WebGLRenderer
     } );
@@ -2004,12 +2004,12 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
     let metroPhase =-Math.sin(-uniforms[ "time" ].value*uniforms[ "metronome" ].value*pi)
        let frameCount=loopsRun%2;
 
-    if(spirographMODE==1){
+    if(spirographMODE==2){
     lineMat.color = colorSoundPURE;
   }
        else if (uniforms[ "metronome" ].value>1)lineMat.color  = new THREE.Color("").setRGB(metroPhase,metroPhase,metroPhase)
-    else if(spirographMODE==2) lineMat.color = new THREE.Color("").setRGB(frameCount,frameCount,frameCount);
-    
+           else if(spirographMODE==1) lineMat.color = new THREE.Color("").setRGB(frameCount,frameCount,frameCount);
+
        
                             
                             let tx = spirray0[0], ty = spirray1[1],greyness=1.,greynessLast=-1;
@@ -2017,6 +2017,8 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
   var lineStride=0;
    
         //scene.add(line)
+       let depthSpirograph =-1.;
+
      if(spirographMODE!=0)   for (let r= 0.; r < 2048; r +=1) {//spirray size supports upto r <buffersize*2
             const  txlast=tx;
             const  tylast=ty;
@@ -2030,7 +2032,6 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
             // pointColor.push( greynessLast, greynessLast, greynessLast,greyness, greyness, greyness );
             if(isFinite(tx)&&isFinite(ty)&&isFinite(txlast)&isFinite(tylast))
             {
-                let depthSpirograph =-1.;
                 linePositionAttribute.setXYZ(lineStride,txlast,tylast, depthSpirograph)
               linePositionAttribute.setXYZ(lineStride+1,tx, ty, depthSpirograph)
                 
