@@ -3,7 +3,7 @@ body, head {
     margin: 0;
     background-color: #000;
     color: #fff;
-    font-family: monospace;
+    font-family: Garamond;
     font-size: 17px;
     width: 100%;
     line-height: 1.;
@@ -41,7 +41,6 @@ number {
 .onBottom{
     position: fixed;
     bottom: 0;
-    z-index:2;
 }
 
 .onTOP{
@@ -102,7 +101,6 @@ canvas {
  overflow: hidden;
  background-color:rgba(127.5,127.5,127.5,0.5);
  position: fixed;
- font-family: Arial;
  
 
 }

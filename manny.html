@@ -1265,7 +1265,6 @@ Reset Zoom![L]</a><br>
 
         if (sheetTranslucent) {
                    document.getElementById("textWindow").style="position:fixed; margin-left:50%;";
-                                  document.getElementById("osmdCanvas").style.bottom="40px"
         }
         else {   document.getElementById("textWindow").style="position:static;margin-left:0%;";
                                      document.getElementById("osmdCanvas").style.bottom="0px"
@@ -1416,16 +1415,51 @@ Open MusicXML file
     
 
     
-    <div id="menuDivider" class="onBottom" style="text-align:right; width:100%;">
+    <div id="menuDivider" class="onBottom" style="text-align:right; width:100%; z-index:4;">
         
             <button name="menuButton" style = "opacity:75%;" onclick='
                 let menu=document.getElementById("menu")
                 if( menu.style.display=="block")  menu.style.display="none"
                 else if( menu.style.display=="none")menu.style.display="block";'>Menu</button>
     </div>
-    <div><div id="textWindow" class="onBottom" style="bottom:46px;"></div></div>
 
     <div id="container"> </div>
+    
+    <script src="wadLoader.js"> </script>
+    <div>
+    <div id="textWindow" class="onBottom" style="z-index:3;font-size:16;"></div>
+
+
+    <div id="score">
+
+        <canvas id="CANVAS"></canvas>
+
+            <div id="osmdCanvas" class="onBottom" style = "    z-index:4;
+">
+
+                <div id="anchorDiv" >
+                    <img id="CursorIMG"></img>
+                    <canvas id="osmdCanvasAnchor"  >
+                        </canvas>
+                </div>
+            </div>
+
+    </div>
+    </div id="score">
+    </div>
+        <script>
+        document.getElementById("files").addEventListener("change", handleFileSelect, false);
+/*
+        document.getElementById("score").onpointerdown=
+        function(event){
+          event.stopImmediatePropagation();
+          event.preventDefault();
+        };
+ */
+        </script>
+    
+    
+    
     <script>//used for resetting column counts for screen porportion in onWindowResize in starshipMod
         var menuBoxes = document.getElementsByClassName("dropdown-content")
         var rezBox = document.getElementById("resolutionDropContent");
@@ -1509,37 +1543,6 @@ ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
          })//setTimeout to give time for menuJustClosedByBackgroundPress
 
     </script>
-    <script src="wadLoader.js"> </script>
-    
-
-    <div id="score">
-        <canvas id="CANVAS"></canvas>
-
-            <div id="osmdCanvas" class="onBottom" style = "bottom:40px;">
-                <div id="anchorDiv" >
-                    <img id="CursorIMG"></img>
-                    <canvas id="osmdCanvasAnchor"  >
-                        </canvas>
-                </div>
-            </div>
-
-    </div>
-
-    </div id="score">
-        <script>
-        document.getElementById("files").addEventListener("change", handleFileSelect, false);
-/*
-        document.getElementById("score").onpointerdown=
-        function(event){
-          event.stopImmediatePropagation();
-          event.preventDefault();
-        };
- */
-        </script>
-    
-    
-    
-    
     
     
     

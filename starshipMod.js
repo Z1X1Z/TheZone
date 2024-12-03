@@ -1575,8 +1575,9 @@ function runOSMD (){
                                                                          renderer.render( shaderScene, camera );
                                                                      
                                                                    
-                            if(textON)document.getElementById("textWindow").innerHTML =
-                                "<div sytle='font-size: 16px;'>"+
+                            if(textON)
+                            {
+                                document.getElementById("textWindow").innerHTML =
                                 
                                 "cores: " +(Math.floor(uniforms["centralCores"].value)+cloverSuperCores*singleHyperCoreDepth+uniforms.upCoreCycler.value)+
                                 " metaCores: "+Math.floor(uniforms["externalCores"].value)+", <p style='margin : 0px'></p>"+
@@ -1585,7 +1586,9 @@ function runOSMD (){
                                 "real part: "+ coordY +"<p style='margin : 0px'></p>"+
                                 "imaginary part: "+ coordX+"<p style='margin : 0px'></p>"+
                                 "FPS: "+Math.round(FPS)
-                            +"<p></div>";
+                            ;
+                                          
+                                          }
                             else document.getElementById("textWindow").innerHTML = "";
 
 
