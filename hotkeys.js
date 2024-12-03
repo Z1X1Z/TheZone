@@ -473,8 +473,8 @@ function callKey(event){
     else if (event.altKey&&(key=="µ"||key=="m"))
     {if(number!="no number")
         uniforms.twelveGatesMeta.value=number;
-        else if( uniforms.twelveGatesMeta.value==1.)uniforms.twelveGatesMeta.value=0
-          else  uniforms.twelveGatesMeta.value=1;
+        else if( uniforms.twelveGatesMeta.value==2.)uniforms.twelveGatesMeta.value=0
+          else  uniforms.twelveGatesMeta.value=2;
     }
 
 

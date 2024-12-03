@@ -56,6 +56,7 @@ function setUniformsToPlainName(){
 }
 
 function tol( j,  t){
+   var inMainSpoke = false;
   //  return p;
    let p = new THREE.Vector2(j.y,j.x);//
     p = p.clone().multiplyScalar(zoom).add(new THREE.Vector2(-coords.y,-coords.x));
@@ -469,10 +470,14 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
                     */
                     
                                   
-                        var distributorFACTOR=Math.PI/gr;
+                    if(counter==0.)inMainSpoke=true;
+                    if(distributor)
+                    {   if (!inMainSpoke)
+                        s=spinVector(s,distributorFACTORorth);
+                        else                                 s=spinVector(s,distributorFACTOR);
+
+                        }
                     
-                    
-                    s=  spinVector(s,distributorFACTOR);
 
                         s.divideScalar(spoke_factorLarge);//engage spokelover s/=2.+'superspokes'
                         
@@ -518,9 +523,11 @@ var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpo
                 //  if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
                 //else
                 
-                var distributorFACTORlove= distributorFACTOR*Math.sqrt(2.)/leaf;
-                s=  spinVector(s,distributorFACTOR);
-                s.divideScalar( Math.sqrt(2.));
+                if(distributor)
+                {   if (!inMainSpoke)
+                    s=spin2(s,distributorFACTORloveORTH);
+                }
+                    s.divideScalar( Math.sqrt(2.));
                 if(!wheel)
                 {
                     
@@ -589,9 +596,9 @@ dstnce = s.length();
 
         }
 
-for(var i=0;i<100; i++)//not sure if i is 20 or >20
+for(var i=0;i<40; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.)))
-   && 0.<=hyperCoreBoosted)
+   && 0.<=hyperCoreBoosted&&MetaCored)
 {
     if(spinTowardsMe) if(i>=hyperCoreBoosted)s=spin(s,Math.atan2(d.y,d.x));
 
@@ -752,6 +759,13 @@ window.bigCloverGapSync = false;
 
             //  const floatSupported = can.getContext("webgl").getExtension("OES_texture_float");
             // console.log(floatSupported)
+            
+            var distributorFACTOR=Math.PI/gr;
+            var distributorFACTORorth =Math.PI/6.
+            
+            var distributorFACTORlove= distributorFACTOR*Math.sqrt(2.)/leaf;
+            var distributorFACTORloveORTH= distributorFACTORorth*Math.sqrt(2.);
+
             for(var hei = 0; hei<window.innerHeight; hei++)  for(var wi = 0; wi<window.innerWidth; wi++){
                 let t = tol(  new  THREE.Vector2(wi,hei).sub(new THREE.Vector2(window.innerWidth/2.,window.innerHeight/2.)).divideScalar(maximumDimension).multiplyScalar( shaderScale*2)
                             , new THREE.Vector2(0,0) );

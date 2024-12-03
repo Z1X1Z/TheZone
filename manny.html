@@ -857,6 +857,11 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                     key  = 'o';
                                     callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
                                  <label for="Dilate">Dilate?![.o]</label><br>
+                                 <input type="checkbox" id="Distributor" name="t"  onclick= "
+                                     key  = 'c';
+                                     callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                                  <label for="Distributor">Distributor?![.c]</label><br>
+
                                  <!--
                                  <input type="checkbox" id="super stability" name="t"  onclick= "
                                      key  = ';';
@@ -976,10 +981,6 @@ uniforms.baseN.value=document.getElementById('Base Number').value">
                         callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
                      <label for="Spin Towards Me">Spin Towards Me![,h]</label><br>
  
- <input type="checkbox" id="Distributor" name="t"  onclick= "
-     key  = 'c';
-     callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
-  <label for="Distributor">Distributor![.c]</label><br>
 
 
 
@@ -2866,12 +2867,11 @@ if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
 
 }
    else {
-    hyperCore-=.5/log(.5);
     if(cloverSlide)hyperCore+=.5/log(.5);
     if(wheel)hyperCore-=1./log(.5);
     if(morph!=0.) hyperCore-=1./log(.5);
     if(Spoker&&spokelover&&dilate) hyperCore-=.0/log(.5);
-    else if (!dilate)hyperCore+=.5/log(.5);
+    else if (dilate)hyperCore-=.5/log(.5);
     if(clvrVariant2)hyperCore+=1./log(.5);
 
 }
@@ -3332,10 +3332,10 @@ dstnce = length(s);
                       
               //    }
               gated = false;
-for(int i=0;i<40; i++)//metacore
+for(int i=0;i<40; i++)//metacoreloop
 if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.))
     )
-    && 0.<=hyperCoreBoosted)
+    && 0.<=hyperCoreBoosted&&MetaCored)
 {
     if(spinTowardsMe) if(float(i)>=hyperCoreBoosted)s=spin2(s,atan(d.y,d.x));
    // if(distributor)s=spin2(s,distributorFACTOR);
