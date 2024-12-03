@@ -1418,7 +1418,7 @@ Open MusicXML file
     
     <div id="menuDivider" class="onBottom" style="text-align:right; width:100%;">
         
-            <button name="menuButton" onclick='
+            <button name="menuButton" style = "opacity:75%;" onclick='
                 let menu=document.getElementById("menu")
                 if( menu.style.display=="block")  menu.style.display="none"
                 else if( menu.style.display=="none")menu.style.display="block";'>Menu</button>
@@ -4791,9 +4791,10 @@ else {
                                            mnyX+
                             clamp(heartWarmed*isColoredMultiplier,0.,1.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier
-                                          +(pillar+
-                                            clamp(
+                                          +(pillar
                                             +icicles.xyz
+                                                +
+                                            clamp(
                                             +linearFrequency.xyz-(pong.r+pong.g+pong.b)/3.,0.,1.)
                                         +linearFrequency.w
                                             +pong
