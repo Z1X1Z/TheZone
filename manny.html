@@ -2659,7 +2659,11 @@ return vec3(l+b+r+h);}
                                   
                         const float distributorFACTOR=PI/gr;
                                   const float distributorFACTORlove= distributorFACTOR*sqrt(2.)/leaf;
+                                  
+                        const float distributorFACTORorth=PI/6.;
+                                  const float distributorFACTORloveORTH= distributorFACTORorth*sqrt(2.);
 vec3 tol(vec2 p, vec2 t){
+                         bool inMainSpoke = false;
                         vec2 resCale = (resolution.yx/max(resolution.x,resolution.y));
                      vec3 uber    = texture2D(uberDuper,(
                         ((vUv-.5)/resCale*zoom/duperZoom
@@ -3190,8 +3194,13 @@ if(Spoker){
                              }
                          else {
                               */
-                            
-                            if(distributor) s=spin2(s,distributorFACTOR);
+                            if(counter==0.)inMainSpoke=true;
+                            if(distributor)
+                            {   if (!inMainSpoke)
+                                s=spin2(s,distributorFACTORorth);
+                                else                                 s=spin2(s,distributorFACTOR);
+
+                                }
 
                           s/=spoke_factorLarge;//engage ; s/=2.+'superspokes'
                          
@@ -3239,8 +3248,13 @@ if(counter+dstnce*dstnce //sqrt(sqrt(dstnce)*dstnce)*dstnce
    //  if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
      //else
 
-     if(distributor) s=spin2(s,distributorFACTORlove);
+    // if(distributor) s=spin2(s,distributorFACTORlove);
+     if(distributor)
+     {   if (!inMainSpoke)
+         s=spin2(s,distributorFACTORloveORTH);
+       //  else s=spin2(s,distributorFACTORlove);
 
+         }
      s/=sqrt(2.);
      if(!wheel){
      //float b =pow(pow(abs(downSpoke),powerOfDynamicSokeCoreUp),grOverLeaf);
@@ -4777,7 +4791,8 @@ else {
                                            mnyX+
                             clamp(heartWarmed*isColoredMultiplier,0.,1.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier
-                                          +(clamp(pillar+
+                                          +(pillar+
+                                            clamp(
                                             +icicles.xyz
                                             +linearFrequency.xyz-(pong.r+pong.g+pong.b)/3.,0.,1.)
                                         +linearFrequency.w
