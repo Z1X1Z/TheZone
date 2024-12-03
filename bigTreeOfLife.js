@@ -53,7 +53,16 @@ function setUniformsToPlainName(){
     exponentialPetals=uniforms.exponentialPetals.value;
     mandelCloverFactor=uniforms.mandelCloverFactor.value;
     superStable=uniforms.superStable.value;
+    distributor=uniforms.distributor.value;
 }
+
+
+var distributorFACTOR=Math.PI/gr;
+var distributorFACTORorth =Math.PI/6.
+
+var distributorFACTORlove= distributorFACTOR*Math.sqrt(2.)/leaf;
+var distributorFACTORloveORTH= distributorFACTORorth*Math.sqrt(2.);
+
 
 function tol( j,  t){
    var inMainSpoke = false;
@@ -525,7 +534,7 @@ var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpo
                 
                 if(distributor)
                 {   if (!inMainSpoke)
-                    s=spin2(s,distributorFACTORloveORTH);
+                    s=spinVector(s,distributorFACTORloveORTH);
                 }
                     s.divideScalar( Math.sqrt(2.));
                 if(!wheel)
@@ -760,12 +769,6 @@ window.bigCloverGapSync = false;
             //  const floatSupported = can.getContext("webgl").getExtension("OES_texture_float");
             // console.log(floatSupported)
             
-            var distributorFACTOR=Math.PI/gr;
-            var distributorFACTORorth =Math.PI/6.
-            
-            var distributorFACTORlove= distributorFACTOR*Math.sqrt(2.)/leaf;
-            var distributorFACTORloveORTH= distributorFACTORorth*Math.sqrt(2.);
-
             for(var hei = 0; hei<window.innerHeight; hei++)  for(var wi = 0; wi<window.innerWidth; wi++){
                 let t = tol(  new  THREE.Vector2(wi,hei).sub(new THREE.Vector2(window.innerWidth/2.,window.innerHeight/2.)).divideScalar(maximumDimension).multiplyScalar( shaderScale*2)
                             , new THREE.Vector2(0,0) );
