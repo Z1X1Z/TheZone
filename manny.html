@@ -1858,7 +1858,7 @@ vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
                                           
 
 
-                                          else if(abs(vUv.y-mod(note/12.+twistStar*divideByMultiplyingPi2,1.))<=1./12.)shade= (vUvCentered.x)*17.;
+                                          else if(abs(vUv.y-mod(note/12.+twistStar*divideByMultiplyingPi2,1.))<=1./12.)shade= (vUvCentered.x)*17.*flipStar*brelued;
                                           
                                           }
                                       
@@ -1906,7 +1906,7 @@ vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
                float freq =h.y*sampleRate;
              float note =12.*log(freq)/log(2.)+49.;
               if (frAmp>h.x*1.5)  ret = vec4(hsv2rgb( vec3( mod((-note-2.)*brelued+4.,12.)/12. ,1.,1. )),0.); //vec4(mod(note,12.)/12.);
-                    else if(frAmp>h.x) ret =vec4(-sign(vUv.x-.5)*20.);
+                    else if(frAmp>h.x) ret =vec4(-sign(vUv.x-.5)*20.*flipStar*brelued);
 }
                 }
                 //           else ret=vec4(1.);
