@@ -17,6 +17,7 @@ fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:1024./44100.},//actu
 zoomOutRatchetThreshold:{value:0.},
 radialWarp:{value:1.},
 pixelSTARon:{value:true},
+pongOn:{value:true},
 heartStar:{value:0},
 superStable:{value:false},
 distributor:{value:true},
@@ -411,6 +412,9 @@ function callKey(event){
         omniDynamicEngaged = !omniDynamicEngaged;
         if(!omniDynamicEngaged)omniData.fill(0);
     }
+                
+                if(key == "u" && event.ctrlKey)
+                    uniforms.pongOn.value = !uniforms.pongOn.value;
     else if(key == "c" && event.ctrlKey){dynamicCoring=!dynamicCoring; if(!dynamicCoring)coreData.fill(document.getElementById('coringConstant').value);}
                 if(key == "h" && event.ctrlKey)uniforms.spinTowardsMe.value=!uniforms.spinTowardsMe.value
 

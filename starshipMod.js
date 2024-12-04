@@ -1250,8 +1250,8 @@ function zoomRoutine(){
              uniforms.pongBallCoords.value.y+=diag*ballVectorY//=d_y/minimumDimension*50;//0.;//
              let xEdge = widthPX;
              let yEdge = heightPX;
-             let paddleStrikePosition=uniforms.pongBallCoords.value.y/uniforms.resolution.value.y-(note+twist/2.)%12./12.;
-             
+             let paddleStrikePosition=uniforms.pongBallCoords.value.y/uniforms.resolution.value.y-((note*flip+twist/2.)+24*100)%12./12.;
+             console.log(paddleStrikePosition)
              let paddleHitBall=(Math.abs(paddleStrikePosition )<1./12.);
              if(uniforms.pongBallCoords.value.x>xEdge) {
                     if(paddleHitBall)ballVectorX*=-1;

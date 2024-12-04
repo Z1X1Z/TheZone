@@ -431,6 +431,11 @@ radialWarp=b;
                              callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
                              <label for="PixelStar">PixelStar?![.p]</label><br>
                              
+                             <input type="checkbox" id="pong" name="t"  onclick= "
+                                 key  = 'u';
+                                 callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
+                                 <label for="pong">Pong?![,u]</label><br>
+                                 
 
                      <a id="spirograph" name="t"  onclick= "
                      
@@ -1167,11 +1172,12 @@ Reset Zoom![L]</a><br>
                             renderer.setPixelRatio( rez);
                             ">
                  <br>
-                 
+                 <!--
                   <input type="radio" id=".5rez" name="colorMode" onclick="
                   key  = '`';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                   <label for=".5rez">.5 of a pixel per pixel (Apple Only)[`]</label><br>
+                 -->
                   <input type="radio" id="1rez" name="colorMode" onclick="
                   key  = '1';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -1657,6 +1663,7 @@ void main(){
     
     uniform bool Pointers;
     uniform bool pixelSTARon;
+    uniform bool pongOn;
     uniform int heartStar;
     uniform int holieyes;
     uniform float fftSize;
@@ -2324,7 +2331,10 @@ else if(clvrVariant9)n= coords.yx*1.5;
 float l = 1.;
 g*=4.;
 vec2 z=g.xy;
-for (int f=0;f<21+6*int(log(zoom)/log(.3247));f+=1)if(abs(z.y)>17.7&&(f==1||f>3)){
+int core = 9+6*int(log(zoom)/log(.3247));
+for (int f=0;f<100;f+=1)
+if(f==core)break;
+else if(abs(z.y)>17.7&&(f==1||f>3)){
     //if (f==1){l=0.;break;}
     l=1.-length(z)/40.;//clouds and face
     break;}
@@ -3334,7 +3344,7 @@ dstnce = length(s);
 for(int i=0;i<40; i++)//metacoreloop
 if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.))
     )
-    && 0.<=hyperCoreBoosted&&MetaCored)
+    && 0.<=hyperCoreBoosted&&externalCores!=0.)
 {
     if(spinTowardsMe) if(float(i)>=hyperCoreBoosted)s=spin2(s,atan(d.y,d.x));
    // if(distributor)s=spin2(s,distributorFACTOR);
@@ -4698,18 +4708,19 @@ if(starOnDot>=1){
          vec4 icicles=vec4(0.);
          vec4 linearFrequency=vec4(0.);
                                                                  vec3 pong = vec3(0.);
-                                     
+                                                                 vec2 vUvCentered = (vUv.yx-.5);
+
+                     if(pongOn){//may be useful to seperate pong from pixelStar
+                          pong += paddles(vUvCentered.yx);
+                          pong += ball(p);
+                          }
          if (pixelSTARon)
     {
                        
-                       vec2 vUvCentered = (vUv.yx-.5);
                        vec2 uVu=-(vUvCentered)/aspectRatio;
                        vec2 uVuMinCenter=-vUvCentered/(min(resolution.x,resolution.y)/resolution.yx);
                        
-                                          if(true){//may be useful to seperate pong from pixelStar
-                                               pong += paddles(vUvCentered.yx);
-                                               pong += ball(p);
-                                               }
+                                        
                                           
              pixelStarship = audioEq(uVuMinCenter);
              icicles = waveForm();
