@@ -1850,19 +1850,18 @@ vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
                                                         
     vec3 paddles(vec2 vUvCentered){
                                       float shade = 0.;
-
                                       if(abs(vUvCentered.x)>.47)
                                       {
                                           
                                                         float incrementSize = 1./12.;
                                                         float staff =mod(vUv.y*12.+.5+12.,1.)-.5;
                                           if ( abs(staff)<=incrementSize)
-                                          return hsv2rgb( vec3(mod(-vUv.y+(6.*brelued-2.)/12.+twistStar*divideByMultiplyingPi2+1.,1.) ,1.,1. )); //vec4(mod(note,12.)/12.);
+                                          return hsv2rgb( vec3(mod((-vUv.y+(6.-2.*brelued*flipStar)/12.+twistStar*divideByMultiplyingPi2)*flipStar*brelued+1.,1.) ,1.,1. )); //vec4(mod(note,12.)/12.);
                                           else if ( abs(staff)<=incrementSize*2.)shade=.25;//(vUvCentered.x/2.-1.25);
                                           
 
 
-                                          else if(abs(vUv.y-mod(note/12.+twistStar*divideByMultiplyingPi2,1.))<=1./12.)shade= (vUvCentered.x)*17.*flipStar*brelued;
+                                          else if(abs(vUv.y-mod(note/12.*flipStar+twistStar*divideByMultiplyingPi2,1.))<=1./12.)shade= (vUvCentered.x)*17.*flipStar*brelued;
                                           
                                           }
                                       
