@@ -4828,7 +4828,7 @@ else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
     layeredOUT=vec4(mannyFace.xyz+starship.xyz/4.,1.);
 }
                                                                  
-         else if (holieyes==1&&Character==0&& !((HEART.x==0.&&HEART.y==0.)||(HEART.y==0.&&HEART.z==0.)||(HEART.z==0.&&HEART.x==0.))) layeredOUT=vec4(HEART,1.);
+         else if (holieyes==1&&Character==0&& !((HEART.x==0.&&HEART.y==0.)||(HEART.y==0.&&HEART.z==0.)||(HEART.z==0.&&HEART.x==0.))) layeredOUT=vec4(clamp(HEART-starship.xyz/3.,0.,1.)+starship.xyz,1.);
                         else if (oopm.w!=0.)layeredOUT=oopm;
 else {
                   
