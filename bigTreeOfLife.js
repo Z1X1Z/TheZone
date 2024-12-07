@@ -535,7 +535,7 @@ var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpo
                 if(distributor)
                 {   if (!inMainSpoke)
                     s=spinVector(s,distributorFACTORloveORTH);
-                    else s=spinVector(s,distributorFACTORlove);
+                    else s=spinVector(s,-distributorFACTORlove);
 
                 }
                     s.divideScalar( Math.sqrt(2.));
