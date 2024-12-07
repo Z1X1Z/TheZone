@@ -3300,8 +3300,8 @@ if(counter+dstnce*dstnce //sqrt(sqrt(dstnce)*dstnce)*dstnce
     // if(distributor) s=spin2(s,distributorFACTORlove);
      if(distributor)
      {   if (!inMainSpoke)
-         s=spin2(s,distributorFACTORloveORTH);
-       //  else s=spin2(s,distributorFACTORlove);
+         s=spin2(s,-distributorFACTORloveORTH);
+         else s=spin2(s,-distributorFACTORlove);
 
          }
      s/=sqrt(2.);
