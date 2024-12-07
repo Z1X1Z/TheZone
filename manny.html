@@ -2119,9 +2119,7 @@ ret= vec4(clamp(
                                      (6.*z.x*z.y)-2.*z.x*timesForBottom,
                                       3.*(z.x+abs(z.y)),
                                       z.y*timesForBottom+abs(z.x))
-                               *(1.
-                                 // /length(z)
-                                 )
+                               *(1./length(z))
                               /iterations*2./3.*timesForBottom;//*(1.-length(g));
                               
                            }
@@ -4838,18 +4836,18 @@ else {
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
                                     +yourFace.xyzw,0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace.xyz,0.,1.)-backgroundFace*starshipMultiplier,0.);
-                       vec4 goodies =vec4(0.);
+                       vec4 goodies =
                        vec4(
                                            mnyX+
                             clamp(heartWarmed*isColoredMultiplier,0.,1.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier
                                           +(pillar
-                                           // +icicles.xyz
+                                            +icicles.xyz
                                                 +
                                             clamp(
-                                            //+linearFrequency.xyz
+                                            +linearFrequency.xyz
                                                   -(pong.r+pong.g+pong.b)/3.,0.,1.)
-                                        //+linearFrequency.w
+                                        +linearFrequency.w
                                             +pong
                                             )*(1.-pixelShipGrey*40.)
                                         +yourFace.xyz
@@ -4890,7 +4888,7 @@ vec4 tree = vec4( clamp(
                      clamp(
                            cloud
                            +zoomer
-                          // +awayFromTree
+                           +awayFromTree
                            
                                               ,0.,1.)
                         +b+creatures
