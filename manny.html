@@ -4838,7 +4838,7 @@ else {
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
                                     +yourFace.xyzw,0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace.xyz,0.,1.)-backgroundFace*starshipMultiplier,0.);
-                       vec4 goodies = vec4(0.);
+                       vec4 goodies =vec4(0.);
                        vec4(
                                            mnyX+
                             clamp(heartWarmed*isColoredMultiplier,0.,1.)
@@ -4863,7 +4863,7 @@ else {
                                                     +ARTICLE
                                                    +bridge*(1.-isGrey-pixelShipGrey)//+AM*(1.-isGrey-pixelShipGrey)
                                                     ,1.);
-                       vec3 awayFromTree = vec3(0.); vec3((-ss.xyz)*ss.w
+                       vec3 awayFromTree =  vec3((-ss.xyz)*ss.w
                                                  -yourFace.xyz
                                                  +7.*(-HEART.b-HEART.r-HEART.g)
                                                 // +(-HEART.b-HEART.r-HEART.g)/4.
