@@ -4842,10 +4842,11 @@ else {
                             clamp(heartWarmed*isColoredMultiplier,0.,1.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier
                                           +(pillar
-                                            +icicles.xyz
+                                           // +icicles.xyz
                                                 +
                                             clamp(
-                                            +linearFrequency.xyz-(pong.r+pong.g+pong.b)/3.,0.,1.)
+                                            //+linearFrequency.xyz
+                                                  -(pong.r+pong.g+pong.b)/3.,0.,1.)
                                         +linearFrequency.w
                                             +pong
                                             )*(1.-pixelShipGrey*40.)
