@@ -520,7 +520,7 @@ let pushBackCounter = 0;
                             else trailWidth[f]=starshipSize;//0.;
                                trailTimeOfRecording[f]=uniforms["time"].value;
                                trailSegmentExpired[f]=false;
-        if(trailDepth<trailLength||on)//||on
+        if(trailSecondsLong!=0&& trailDepth<trailLength||on)//||on
                                
                               {
             
@@ -1134,7 +1134,7 @@ let lastVolume = 1.;
         let volumeProcessed =(volume/lastVolume)**.5;//should be volume not volumeBoosted
         if(!isFinite(volumeProcessed))volumeProcessed=1.;
            if(zoomRate>0) return Math.E**(Math.log(.5)/zoomFrames*zoomRate*interpolation*(volumeProcessed));//the square root of volume is to make it grow slower than in d_xy
-             else return 1;
+             else return 0;
         }
                        
                        
@@ -1915,7 +1915,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
    if( !window.touchMode//&&!DAW
       )
    {
-       if(!zoomAtl41)zoomRoutine();
+       if(!zoomAtl41&&zoomRate!=0.)zoomRoutine();
        infinicore();
    }
     spiral_compress();

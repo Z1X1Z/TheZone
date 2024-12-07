@@ -334,7 +334,10 @@ function readHash(){
                 }
                 
             }
-            if(number=="")number = "no number"
+            
+           if (number === ""&& number!=Number(0))
+               number = "no number"
+           
            // number=Number(number);
            if(!bibleReaderCode) callKey(new KeyboardEvent('keydown',
                                       {
@@ -468,7 +471,7 @@ function callKey(event){
     }
     else if (event.altKey&&(key=="˜"||key=="ñ"||key=="n"))uniforms.twelveGates.value=!uniforms.twelveGates.value;
     else if (event.altKey&&(key=="∆"||key=="j"))
-    {console.log(key)
+    {
         uniforms.Pointers.value=!uniforms.Pointers.value;
         console.log(uniforms.Pointers.value)
     }
@@ -498,7 +501,6 @@ function callKey(event){
     else if (event.altKey&&(key=="œ"||key=="q")){
             if          ( uniforms[ "colorCombo" ].value >1)          uniforms[ "colorCombo" ].value = -1;
             else uniforms[ "colorCombo" ].value = -(Math.abs(uniforms[ "colorCombo" ].value+1-17.))%17;
-        console.log( uniforms[ "colorCombo" ].value)
         }
 
     else if (event.altKey&&(key=="≈"||key=="x")){ if(!runningHash||!window.online) uniforms.brelued.value*=-1;}
@@ -717,7 +719,8 @@ function callKey(event){
     }
     
     else if (key=="\\"){zoomRate=movementRateORIGINAL; if(number!="no number")
-        zoomRate=number*1.;}
+        zoomRate=number*1.;
+    }
 
     else if (key=="/"){if(number!="no number"){trailSecondsLong=number*1.;
         if(window.INITIALIZED) setTrailSize()}}
