@@ -2120,7 +2120,8 @@ ret= vec4(clamp(
                                       3.*(z.x+abs(z.y)),
                                       z.y*timesForBottom+abs(z.x))
                                *(1.
-                                 // /length(z))
+                                 // /length(z)
+                                 )
                               /iterations*2./3.*timesForBottom;//*(1.-length(g));
                               
                            }
