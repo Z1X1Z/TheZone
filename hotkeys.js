@@ -162,7 +162,7 @@ function resetAll(){
         window.uniforms[nameOfUniform]={}
         Object.assign(window.uniforms[nameOfUniform],window.uniformsInitial[nameOfUniform])
     }
-    if(window.touchOnlyMode)window.uniforms["pixelSTARon"]=false;
+    if(window.touchOnlyMode)window.uniforms.pongOn.value=false;
     window.coordX=0.; window.coordY=0.;
     
     
@@ -258,7 +258,7 @@ function resetAll(){
                        window.coreData = new Float32Array(40).fill(1./-leaf);
                        window.omniData = new Float32Array(40).fill(0.);
                                          
-                                             if (   window.iOS )window.rez=window.devicePixelRatio/5.;
+                                             if (   window.iOS )window.rez=window.devicePixelRatio/4.;
                                                else if(window.android)window.rez=window.devicePixelRatio/5.;
                                                else   window.rez=window.devicePixelRatio/2.;
                                                    
