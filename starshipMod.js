@@ -2025,7 +2025,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
         //scene.add(line)
        let depthSpirograph =-1.;
 
-     if(spirographMODE!=0)   for (let r= 0.; r < 2048; r +=1) {//spirray size supports upto r <buffersize*2
+     if(spirographMODE!=0)   for (let r= 0.; r < bufferPortion; r +=1) {//spirray size supports upto r <buffersize*2
             const  txlast=tx;
             const  tylast=ty;
             tx = spirray0[r];

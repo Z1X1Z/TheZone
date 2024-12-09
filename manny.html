@@ -3133,8 +3133,8 @@ dstnce = length(s);
                  if(dstnce<2./3.)
                  {
                      vec2 move =-d.yx*volume/8.;
-                  //   if(march==0||march==3)oo+=color*(sealedMan(deSplicedS*5.,move)+faceFORWARDTWO(deSplicedS*5.+vec2(2.,0.),vec2(0.))/1.5);
-                  // else oo+=color*(sealedWoman(deSplicedS*5.,move)+kissingEagles(deSplicedS*5.)/1.5);
+                   if(march==0||march==3)oo+=color*(sealedMan(deSplicedS*5.,move)+faceFORWARDTWO(deSplicedS*5.+vec2(2.,0.),vec2(0.))/1.5);
+                   else oo+=color*(sealedWoman(deSplicedS*5.,move)+kissingEagles(deSplicedS*5.)/1.5);
                  }
                                           
             }
@@ -4632,25 +4632,7 @@ if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
 
                                                                  
                                                                  
-    vec3 ARTICLE=vec3(0.);
                 
-    if(articles){
-                       
-           vec3 HORSE=horse(characterOnTrailP, moveDynamic);
-            ARTICLE+=scroll(characterOnTrailP+1.5*vec2(0.,resolution.x/min(resolution.x,resolution.y)),vec2(-1.));
-            vec3 SWORD = sword(characterOnTrailP+vec2(swordSkew,0.),vec2(0.));
-            vec2 c4 = characterOnTrailP/vec2(1.,2);
-             vec3 LAMP = clamp(lamp(c4,vec2(-1.))-(SWORD.x+SWORD.y+SWORD.x)*10.,0.,1.)+SWORD;
-             float ls = (SWORD.x+SWORD.y+SWORD.z+LAMP.x+LAMP.y+LAMP.z)*10.;
-             //mny=clamp(mny-ls*5.,0.,1.)+SWORD+LAMP+HORSE;
-
-         //   ARTICLE+=clamp(flames(c4-vec2(.5,0.))-(ls+HORSE.r*3.+clamp(-mannyFace.r-mannyFace.g-mannyFace.b,-2.,.0))*10000.,0.,1.)+HORSE+SWORD+LAMP;
-                        
-                   //working on buggy android:sword,horse,lamp
-                   
-                   //not working:flames
-                   
-                   }
                       
      
                                  float recenter = 0.;
@@ -4809,8 +4791,33 @@ if(starOnDot>=1){
              
               
          }
+                                                         
+                                                                 vec3 ARTICLE=vec3(0.);
+
+                                                                 
+                                                     if(articles){
+                                                                        
+                                                            vec3 HORSE=horse(characterOnTrailP, moveDynamic);
+                                                             ARTICLE+=scroll(characterOnTrailP+1.5*vec2(0.,resolution.x/min(resolution.x,resolution.y)),vec2(-1.));
+                                                             vec3 SWORD = sword(characterOnTrailP+vec2(swordSkew,0.),vec2(0.));
+                                                             vec2 c4 = characterOnTrailP/vec2(1.,2);
+                                                              vec3 LAMP = clamp(lamp(c4,vec2(-1.))-(SWORD.x+SWORD.y+SWORD.x)*10.,0.,1.)+SWORD;
+                                                              float ls = (SWORD.x+SWORD.y+SWORD.z+LAMP.x+LAMP.y+LAMP.z)*1000.;
+                                                         //     clothes=clamp(clothes-ls,0.,1.);
+                                                        //      heartWarmed=clamp(heartWarmed-ls,0.,1.);
+
+                                                            ARTICLE+=clamp(flames(-c4-vec2(.5,0.))-(ls+HORSE.r*3.),0.,1.)+HORSE+SWORD+LAMP;
+                                                                         
+                                                                    //working on buggy android:sword,horse,lamp
+                                                                    
+                                                                    //not working:flames
+                                                                    
+                                                                    }
                                                                  if(colorCombo!=17&&colorCombo!=20)   mny+=clothes;
 
+                                                                 
+                                                                 
+                                                                 
                                                                  vec2 faceDimension = ((1.-vUv));
                                                                  vec2 faceDimensionReversed =   vec2(vUv.x,1.-vUv.y);
                                                               vec4 yourFace= vec4(0.);     yourFace=texture2D(videoTexture,faceDimension).xyzw+
@@ -4844,7 +4851,7 @@ else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
 else {
                   
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
-                                    +yourFace.xyzw,0.,1.);
+                                    +yourFace.xyzw-vec4(ARTICLE,1.),0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace.xyz,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies =
                        vec4(
@@ -4880,7 +4887,7 @@ else {
                                                  -(pong.r+pong.g+pong.b)
                                                  +bigEyes.xyz*largeEyeColor
                                                  -(yourFace.x+yourFace.y+yourFace.z)/256./3.
-                        -(ARTICLE.x+ARTICLE.y+ARTICLE.z)*4.
+                        -(ARTICLE.x+ARTICLE.y+ARTICLE.z)*40.
                    
                        -(bridge.x+bridge.y+bridge.z)*4.
                        -(shipSUM)/maxColorOfStarship*starship.w*.5
@@ -4913,7 +4920,7 @@ vec4 tree = vec4( clamp(
           else if(fin.r<.1&&fin.g<.1&&fin.b<.1)fin+=(isGrey+isGreyDOT+isGreyStaRivers+pixelShipGrey)*1.5;
           vec3 confraculator = vec3(1.);
           if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
-          fin=clamp(fin -(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z)*4.,0.,1.)+vec4(hypnoticHarmonicCircles,1.);
+          fin=clamp(fin -(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z+ARTICLE.x+ARTICLE.y+ARTICLE.z)*4.,0.,1.)+vec4(clamp(hypnoticHarmonicCircles+ARTICLE-(isGrey+pixelShipGrey)*3.,0.,1.),1.);
           layeredOUT=//vec4(mny,1.);
 fin/vec4(confraculator
                            ,1.);
@@ -4923,7 +4930,7 @@ fin/vec4(confraculator
        
                    }
                         gl_FragColor=layeredOUT;
-
+//things known to cause bugs on some android chrome: heart (divides by zero), linear eq,waveform, "144000" men and women in clover, articles
                                                                  
                                          }
 
