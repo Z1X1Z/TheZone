@@ -2479,7 +2479,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
 
                     vec3 torso(vec2 g, vec2 t){
                                               g.x*=-1.;
-                                              t.y*=-1.;
+                                              t*=-1.;
                     float b = 0.;
                     vec2 z=g.xy;
                     if(g.x*g.x+g.y*g.y<40.)
