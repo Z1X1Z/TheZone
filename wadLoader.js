@@ -48,7 +48,9 @@ let SonicTouchObject =
         permanentInitialTwist:0.,
         signTwist:null,
         firstMovement:true,
-        
+        lastFrequency:null,
+        octavesFlippedLastFrame:true,
+        lastOctaveDistance:null,
         sound:null,
         sound2:null,
          zound:null,
@@ -194,7 +196,7 @@ function startSound(e){
     }
      touchMagnitude=Math.sqrt(y*y+x*x)/(Math.min(heightPX,widthPX))*2;
     let volume= window.touchVolume*-touchMagnitude/2.;
-    if(radialOctaveBoost)volume= -window.touchVolume*pressure*.25;
+    if(radialOctaveBoost)volume= -window.touchVolume*pressure*.125;
 
     SonicTouchArray[id].initialAngleSound =(-Math.atan2(-x,-y)*flip+2.*pi)%(2*pi)
 
@@ -206,7 +208,7 @@ function startSound(e){
     
     let frequency = Math.pow(2.,(((touchNote)-window.twist/2.)-1.)/12.
                                   )*window.ConcertKey;
-                                
+                                 SonicTouchArray[id].lastFrequency=frequency;
          SonicTouchArray[id].dawAMPLITUDE=(touchMagnitude);
          SonicTouchArray[id].dawNOTE=(touchNote24);
          SonicTouchArray[id].DAWtouchId=id
@@ -215,7 +217,6 @@ function startSound(e){
         
     
         
-                            
                                  
                                  
                                 bfi=null;
@@ -310,6 +311,11 @@ function startSound(e){
         //sound[id].volume=0.;
         //sound2[id].volume=volume;
                                  
+                                 
+                                 if(window.radialOctaveBoost) {
+                        SonicTouchArray[id].lastOctaveDistance=touchMagnitude*9.;
+                                 }
+                                 
         if(typeof SonicTouchArray[id].sound=="object"&&bfi==null&& (
                                                                     (window.touchMode&&!window.muteTouchTouchVolume)
                                                                ||(!window.touchMode&&!window.muteVoiceTouchVolume)
@@ -321,7 +327,7 @@ function startSound(e){
 
             if(isFinite(volume)&&isFinite(frequency)&&frequency>0){
                 playSounds(SonicTouchArray[id].sound2,SonicTouchArray[id].sound,SonicTouchArray[id].zound2,SonicTouchArray[id].zound,frequency,volume,touchMagnitude)
-                playSounds(SonicTouchArray[id].xound2,SonicTouchArray[id].xound,SonicTouchArray[id].tound2,SonicTouchArray[id].tound,frequency,volume,touchMagnitude)
+              playSounds(SonicTouchArray[id].xound2,SonicTouchArray[id].xound,SonicTouchArray[id].tound2,SonicTouchArray[id].tound,frequency,volume,touchMagnitude)
             }
         }
         else if(bfi!=null) bfi=refreshNoteDAW(bfi)
@@ -349,23 +355,23 @@ function startSound(e){
         let octaveShift=0;
         if(window.radialOctaveBoost) {
             octaveDistance = touchMagnitude*9.;
-            octaveShift=3.;
+            octaveShift=4.;
            // cascadeSwitch2*=(1.-octaveDistance%1);
            // cascadeSwitch1*=octaveDistance%1;
         }
-                    sound2.play({env:{attack: .0, release:.0,hold:-1},
+                    sound.play({env:{attack: .0, release:.0,hold:-1},
                         pitch:frequency/2.*2**Math.floor(octaveDistance-octaveShift),
                         volume:cascadeSwitch2*(1.-octaveDistance%1)});
-                    sound.play({env:{attack: .0, release:.0,hold:-1},
+                    sound2.play({env:{attack: .0, release:.0,hold:-1},
                         pitch:frequency*2**Math.floor(octaveDistance-octaveShift),
                         volume:cascadeSwitch1*(1.-octaveDistance%1)});
                     if(window.radialOctaveBoost)
                     {
                         zound2.play({env:{attack: .0, release:.0,hold:-1},
-                        pitch:frequency*2**Math.ceil(octaveDistance-octaveShift),
+                        pitch:frequency*2**Math.floor(octaveDistance-octaveShift),
                             volume:cascadeSwitch2*octaveDistance%1});
                         zound.play({env:{attack: .0, release:.0,hold:-1},
-                        pitch:frequency*2.*2**Math.ceil(octaveDistance-octaveShift),
+                        pitch:frequency*2.*2**Math.floor(octaveDistance-octaveShift),
                             volume:cascadeSwitch1*octaveDistance%1});
                     }
                     
@@ -454,6 +460,86 @@ function followSound(e, SonicTouchArrayK){
                         let    touchNote=   soundTouchComponent/pi/2*12;
                         let frequency = Math.pow(2.,((touchNote-twistFeed/2.)-1.)/12.
                         )*window.ConcertKey;
+                                                     
+                                                     
+                                                                              let frequencyRatio = frequency/SonicTouchArrayX[id].lastFrequency;
+                                                     SonicTouchArrayX[id].lastFrequency=frequency;
+                                                                            if(frequencyRatio>1.5||frequencyRatio<.75)
+                                                                            {
+                            var soundBuffer = SonicTouchArrayX[id].sound;
+     SonicTouchArrayX[id].sound=SonicTouchArrayX[id].sound2
+     SonicTouchArrayX[id].sound2=soundBuffer
+                            var xoundBuffer = SonicTouchArrayX[id].xound;
+     SonicTouchArrayX[id].xound=SonicTouchArrayX[id].xound2
+     SonicTouchArrayX[id].xound2=xoundBuffer
+                            
+                            var zoundBuffer = SonicTouchArrayX[id].zound;
+     SonicTouchArrayX[id].zound=SonicTouchArrayX[id].zound2
+     SonicTouchArrayX[id].zound2=zoundBuffer
+                            var toundBuffer = SonicTouchArrayX[id].tound;
+     SonicTouchArrayX[id].tound=SonicTouchArrayX[id].tound2
+     SonicTouchArrayX[id].tound2=toundBuffer
+                            SonicTouchArray=SonicTouchArrayX;
+                                                                            }
+                                                     
+                                                     
+                                                     
+                                                     let octaveDistanceChange =0;
+                                                     if(window.radialOctaveBoost)
+                                                     {
+                                                        let octaveDistance = SonicTouchArrayX[id].dawAMPLITUDE*window.touchVolume/2.*9.;
+                           // console.log(octaveDistance)
+                                                        octaveDistanceChange = Math.floor(octaveDistance*4.)-Math.floor( SonicTouchArrayX[id].lastOctaveDistance*4.);
+                            SonicTouchArrayX[id].lastOctaveDistance=octaveDistance;
+                            SonicTouchArray=SonicTouchArrayX;
+
+                                                     }
+                                                     
+                              if(octaveDistanceChange>.0&&!SonicTouchArrayX[id].octavesFlippedLastFrame)
+                                                     {
+                            var zound2Buffer = SonicTouchArrayX[id].zound2;
+                            SonicTouchArrayX[id].zound2=SonicTouchArrayX[id].zound
+                            SonicTouchArrayX[id].zound=SonicTouchArrayX[id].sound
+                            SonicTouchArrayX[id].sound=SonicTouchArrayX[id].sound2
+                            SonicTouchArrayX[id].sound2=zound2Buffer
+                            
+                            
+                            
+                            
+   var tound2Buffer = SonicTouchArrayX[id].tound2;
+   SonicTouchArrayX[id].tound2=SonicTouchArrayX[id].tound
+   SonicTouchArrayX[id].tound=SonicTouchArrayX[id].xound
+   SonicTouchArrayX[id].xound=SonicTouchArrayX[id].xound2
+   SonicTouchArrayX[id].xound2=tound2Buffer
+                            
+                            
+                            SonicTouchArrayX[id].octavesFlippedLastFrame=true
+                            SonicTouchArray=SonicTouchArrayX;
+                        }
+                                                     else if(octaveDistanceChange<.0&&!SonicTouchArrayX[id].octavesFlippedLastFrame)
+                                                     
+                                                     {
+                            var sound2Buffer =  SonicTouchArrayX[id].sound2
+                            SonicTouchArrayX[id].sound2=SonicTouchArrayX[id].sound
+                            SonicTouchArrayX[id].sound=SonicTouchArrayX[id].zound
+                            SonicTouchArrayX[id].zound=SonicTouchArrayX[id].zound2
+                            SonicTouchArrayX[id].zound2=sound2Buffer
+                            
+                            var xound2Buffer =  SonicTouchArrayX[id].xound2
+                            SonicTouchArrayX[id].xound2=SonicTouchArrayX[id].xound
+                            SonicTouchArrayX[id].xound=SonicTouchArrayX[id].tound
+                            SonicTouchArrayX[id].tound=SonicTouchArrayX[id].tound2
+                            SonicTouchArrayX[id].tound2=xound2Buffer
+                            SonicTouchArrayX[id].octavesFlippedLastFrame=true
+                            SonicTouchArray=SonicTouchArrayX;
+                        }
+                                                     
+                else if (SonicTouchArrayX[id].octavesFlippedLastFrame)
+                    {
+                    SonicTouchArrayX[id].octavesFlippedLastFrame=false;
+                    SonicTouchArray=SonicTouchArrayX;
+                    }
+                                                     
                                                      if(isFinite(frequency)&&typeof SonicTouchArrayX[id].sound=="object"){
                             if(isFinite(frequency)&&typeof SonicTouchArrayX[id].sound=="object"){
                                 SonicTouchArrayX[id].dawAMPLITUDE=touchMagnitude;//testarContinuous;//
@@ -528,7 +614,7 @@ function followSound(e, SonicTouchArrayK){
                               if(window.radialOctaveBoost)
                               {
                                   octaveDistance = touchMagnitude*9.;
-                                   octaveShift = 3;
+                                   octaveShift = 4;
                                   //volumePrime*=(1.-octaveDistance%1);
                                   //volumeTWO*=octaveDistance%1
 
@@ -540,8 +626,8 @@ function followSound(e, SonicTouchArrayK){
                              sound.setVolume(volumeTWO*(1.-octaveDistance%1));
                                if(window.radialOctaveBoost)
                                {
-                                   zound.setPitch(frequency*2**Math.ceil(octaveDistance-octaveShift));
-                                   zound2.setPitch(frequency*2*2**Math.ceil(octaveDistance-octaveShift));
+                                   zound.setPitch(frequency*2**Math.floor(octaveDistance-octaveShift));
+                                   zound2.setPitch(frequency*2*2**Math.floor(octaveDistance-octaveShift));
                                    zound.setVolume(volumePrime*octaveDistance%1);
                                    zound2.setVolume(volumeTWO*octaveDistance%1);
                                }
@@ -551,8 +637,8 @@ function followSound(e, SonicTouchArrayK){
                                    xound.setVolume(volumeTWO*(1.-octaveDistance%1));
                                if(window.radialOctaveBoost)
                                {
-                                   tound.setPitch(frequency*2**Math.ceil(octaveDistance-octaveShift));
-                                   tound2.setPitch(frequency*2*2**Math.ceil(octaveDistance-octaveShift));
+                                   tound.setPitch(frequency*2**Math.floor(octaveDistance-octaveShift));
+                                   tound2.setPitch(frequency*2*2**Math.floor(octaveDistance-octaveShift));
                                    tound.setVolume(volumePrime*octaveDistance%1);
                                    tound2.setVolume(volumeTWO*octaveDistance%1);
                                }
