@@ -1255,6 +1255,7 @@ function zoomRoutine(){
              if(uniforms.pongBallCoords.value.x>xEdge) {
                     if(paddleHitBall)
                     {
+                        uniforms.pongBallCoords.value.x=xEdge;
                         ballVectorX*=-1
                         ballVectorY=Math.sign(ballVectorY)*paddleStrikePosition*12.;
                     }
@@ -1263,6 +1264,7 @@ function zoomRoutine(){
             else if (uniforms.pongBallCoords.value.x<0){
                 if(paddleHitBall)
                 {
+                    uniforms.pongBallCoords.value.x=0;
                     ballVectorX*=-1
                     ballVectorY=Math.sign(ballVectorY)*paddleStrikePosition*12.;
                 }                else uniforms.pongBallCoords.value.x=xEdge-1
