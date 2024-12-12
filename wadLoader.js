@@ -479,8 +479,8 @@ function followSound(e, SonicTouchArrayK){
                             var toundBuffer = SonicTouchArrayX[id].tound;
      SonicTouchArrayX[id].tound=SonicTouchArrayX[id].tound2
      SonicTouchArrayX[id].tound2=toundBuffer
-                            SonicTouchArray=SonicTouchArrayX;
-                                                                            }
+
+                        }
                                                      
                                                      
                                                      
@@ -491,7 +491,6 @@ function followSound(e, SonicTouchArrayK){
                            // console.log(octaveDistance)
                                                         octaveDistanceChange = Math.floor(octaveDistance*4.)-Math.floor( SonicTouchArrayX[id].lastOctaveDistance*4.);
                             SonicTouchArrayX[id].lastOctaveDistance=octaveDistance;
-                            SonicTouchArray=SonicTouchArrayX;
 
                                                      }
                                                      
@@ -514,7 +513,6 @@ function followSound(e, SonicTouchArrayK){
                             
                             
                             SonicTouchArrayX[id].octavesFlippedLastFrame=true
-                            SonicTouchArray=SonicTouchArrayX;
                         }
                                                      else if(octaveDistanceChange<.0&&!SonicTouchArrayX[id].octavesFlippedLastFrame)
                                                      
@@ -531,13 +529,11 @@ function followSound(e, SonicTouchArrayK){
                             SonicTouchArrayX[id].tound=SonicTouchArrayX[id].tound2
                             SonicTouchArrayX[id].tound2=xound2Buffer
                             SonicTouchArrayX[id].octavesFlippedLastFrame=true
-                            SonicTouchArray=SonicTouchArrayX;
                         }
                                                      
                 else if (SonicTouchArrayX[id].octavesFlippedLastFrame)
                     {
                     SonicTouchArrayX[id].octavesFlippedLastFrame=false;
-                    SonicTouchArray=SonicTouchArrayX;
                     }
                                                      
                                                      if(isFinite(frequency)&&typeof SonicTouchArrayX[id].sound=="object"){
