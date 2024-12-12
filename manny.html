@@ -888,9 +888,9 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                  <input type="checkbox" id="twelveGates" name="t"  onclick= "
                                      key  = 'n';
                                      callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'keyCode':key.charCodeAt(0)}));">
-                                     <label for="twelveGates">Double Gates?![.n]</label><br>
+                                     <label for="twelveGates">Daisies?![.n]</label><br>
                                      
-                                     <label for="metaGates">Double Gates Every?![.m]:</label>
+                                     <label for="metaGates">Meta Daisies Every?![.m]:</label>
                                      <input type="number" id="metaGates" name="CloverTwist" class="num" onkeydown="
                                         number = false
 ;
@@ -3409,7 +3409,8 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<2./
     if(spinTowardsMe) if(float(i)>=hyperCoreBoosted)s=spin2(s,atan(d.y,d.x));
    // if(distributor)s=spin2(s,distributorFACTOR);
 
-    if(twelveGatesMeta!=0.&&mod(counter,twelveGatesMeta)<1.)
+    if(twelveGatesMeta!=0.&&((twelveGatesMeta<1.&&mod(counter+1.,1./twelveGatesMeta)>1.)||
+                             (twelveGatesMeta>=1.&&mod(counter,twelveGatesMeta)<1.)))
     {
     float angleS = atan(s.y,s.x);
     if(mod((angleS*divideByMultiplyingPi+2.)*6.+.5,2.)>1.)

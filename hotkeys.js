@@ -53,7 +53,7 @@ clvrVariant9:{value: false},
 clvrVariant0:{value: false},
 
 twelveGates:{value: false    },
-twelveGatesMeta:{value: 2.    },
+twelveGatesMeta:{value: .333    },
 Spoker:{value: true    },
         spokelover:{value: true    },
 largeEyeColor:{value:0.},
@@ -321,11 +321,11 @@ function readHash(){
         {
             number=""
             let lasthash = hashindex;
-            let CTRLorALT = location.hash[hashindex-1]=="."||location.hash[hashindex-1]==","||location.hash[hashindex]=="."||location.hash[hashindex]==",";
+            let CTRLorALT = location.hash[hashindex-1]=="."||location.hash[hashindex-1]==",";
             let bibleReaderCode =(location.hash[hashindex-2]=="c"&&location.hash[hashindex-3]==".")
                                 ||(location.hash[hashindex-1]=="b"&&location.hash[hashindex-2]==".")
-            if((location.hash[hashindex-1]=="("&&!CTRLorALT)||(CTRLorALT&&location.hash[hashindex-2]=="("))
-            {            hashindex++;
+            if(location.hash[hashindex+1]=="(")
+            {            hashindex++;hashindex++;
                 
                 while(location.hash[hashindex]!=")"&&hashindex!=location.hash.length)
                 {
@@ -334,11 +334,9 @@ function readHash(){
                 }
                 
             }
-            
-           if (number === ""&& number!=Number(0))
+
+           if (number === ""&& Number(number)!=0)
                number = "no number"
-           
-           // number=Number(number);
            if(!bibleReaderCode) callKey(new KeyboardEvent('keydown',
                                       {
                 'key': location.hash[lasthash],"keyCode":location.hash.charCodeAt(lasthash),
@@ -473,15 +471,15 @@ function callKey(event){
     else if (event.altKey&&(key=="∆"||key=="j"))
     {
         uniforms.Pointers.value=!uniforms.Pointers.value;
-        console.log(uniforms.Pointers.value)
     }
     else if (event.altKey&&(key=="ç"||key=="c"))uniforms.distributor.value = !uniforms.distributor.value;
 
     else if (event.altKey&&(key=="µ"||key=="m"))
     {if(number!="no number")
         uniforms.twelveGatesMeta.value=number;
-        else if( uniforms.twelveGatesMeta.value==2.)uniforms.twelveGatesMeta.value=0
-          else  uniforms.twelveGatesMeta.value=2;
+    else if( uniforms.twelveGatesMeta.value==2.)uniforms.twelveGatesMeta.value=0
+        else  uniforms.twelveGatesMeta.value=2;
+        
     }
 
 
@@ -703,20 +701,20 @@ function callKey(event){
      }
      } the bass staff doesn't include the lyrics so it's not included
      */
-    else  if (key=="a"){
-       EldersLeg=Math.round(number)*1.;
+    else  if (key=="a"){if(number!="no number"){
+        EldersLeg=Math.round(number)*1.;
         
-            let minimumFFTfactor = Math.ceil(Math.log(EldersLeg*12*2)/Math.log(2.));
-            if(minimumFFTfactor<=15){
-                if(minimumFFTfactor>11)//currently a buffersize of 2**11==2048 is required for spirograph
-                    fftSize=2**minimumFFTfactor;
-                else
-                    fftSize = 2**11
-                    }
-            if(!runningHash)
-                setFFTdependantSizes();
+        let minimumFFTfactor = Math.ceil(Math.log(EldersLeg*12*2)/Math.log(2.));
+        if(minimumFFTfactor<=15){
+            if(minimumFFTfactor>11)//currently a buffersize of 2**11==2048 is required for spirograph
+                fftSize=2**minimumFFTfactor;
+            else
+                fftSize = 2**11
+                }
+        if(!runningHash)
+            setFFTdependantSizes();
         
-    }
+    }}
     
     else if (key=="\\"){zoomRate=movementRateORIGINAL; if(number!="no number")
         zoomRate=number*1.;
