@@ -1201,7 +1201,7 @@ function zoomRoutine(){
     if (zoom>=1.)
         zoomOutEngage = false;
     if(!isFinite(ZR))ZR=1;
-    if(!zoomOutEngage){
+    if(!zoomOutEngage&&zoomRate>0.){
         if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(on&&!window.touchMode))||xTouch+yTouch!=0)zoom *=ZR;
         else if(uniforms.MetaCored.value||zoom<1.){
             zoom /= ZR;
