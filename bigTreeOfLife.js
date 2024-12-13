@@ -613,13 +613,12 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
 {
     if(spinTowardsMe) if(i>=hyperCoreBoosted)s=spin(s,Math.atan2(d.y,d.x));
 
-   // console.log(i)
-    if(twelveGatesMeta!=0.&&counter%twelveGatesMeta<1.)
-    {
-    var angleS = Math.atan2(s.y,s.x);
-    if(((angleS/Math.PI+2.)*6.+.5)%2.>1.)s=spin(s,Math.PI/6.);
-    }
-           
+        if(twelveGatesMeta!=0.&&((twelveGatesMeta<1.&&(counter-.5)%(1./twelveGatesMeta)>=1.)||
+                                 (twelveGatesMeta>=1.&&counter%twelveGatesMeta)<1.))
+        {
+        var angleS = Math.atan2(s.y,s.x);
+        if(((angleS/Math.PI+2.)*6.+.5)%2.>1.)s=spin(s,Math.PI/6.);
+        }
    if(superStable)
     {
                 if(i==0){
