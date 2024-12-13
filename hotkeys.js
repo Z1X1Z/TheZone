@@ -53,7 +53,7 @@ clvrVariant9:{value: false},
 clvrVariant0:{value: false},
 
 twelveGates:{value: false    },
-twelveGatesMeta:{value: .333    },
+twelveGatesMeta:{value: .4    },
 Spoker:{value: true    },
         spokelover:{value: true    },
 largeEyeColor:{value:0.},
