@@ -2726,10 +2726,10 @@ return vec3(l+b+r+h);}
                     
                                   
                         const float distributorFACTOR=PI/gr;
-                                  const float distributorFACTORlove= distributorFACTOR*sqrt(2.)/leaf;
+                                  const float distributorFACTORlove= distributorFACTOR/leaf;//*sqrt(2)
                                   
                         const float distributorFACTORorth=PI/6.;
-                                  const float distributorFACTORloveORTH= distributorFACTORorth*sqrt(2.);
+                                  const float distributorFACTORloveORTH= distributorFACTORorth;//*sqrt(2)
 vec3 tol(vec2 p, vec2 t){
                          bool inMainSpoke = false;
                         vec2 resCale = (resolution.yx/max(resolution.x,resolution.y));

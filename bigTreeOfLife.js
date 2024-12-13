@@ -60,8 +60,8 @@ function setUniformsToPlainName(){
 var distributorFACTOR=Math.PI/gr;
 var distributorFACTORorth =Math.PI/6.
 
-var distributorFACTORlove= distributorFACTOR*Math.sqrt(2.)/leaf;
-var distributorFACTORloveORTH= distributorFACTORorth*Math.sqrt(2.);
+var distributorFACTORlove= distributorFACTOR/leaf;//*Math.sqrt(2.)
+var distributorFACTORloveORTH= distributorFACTORorth;//*Math.sqrt(2.)
 
 
 function tol( j,  t){
