@@ -333,10 +333,14 @@ function readHash(){
                     hashindex++;
                 }
                 
-            }
 
-           if (number === ""&& Number(number)!=0)
-               number = "no number"
+                   
+                
+            }
+            
+            if (number === "")
+                number = "no number"
+                console.log("number>>"+number)
            if(!bibleReaderCode) callKey(new KeyboardEvent('keydown',
                                       {
                 'key': location.hash[lasthash],"keyCode":location.hash.charCodeAt(lasthash),
@@ -626,6 +630,7 @@ function callKey(event){
     }
     else if(number=="no number"&&Number(x)==x&&event.altKey&&!event.shiftKey)
     {
+        console.log(number)
         if(x == 0)uniforms.clvrVariant0.value=!uniforms.clvrVariant0.value;
         if(x == 1)uniforms.clvrVariant1.value=!uniforms.clvrVariant1.value;
         else if(x == 2)uniforms.clvrVariant2.value=!uniforms.clvrVariant2.value;
