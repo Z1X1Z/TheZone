@@ -340,7 +340,6 @@ function readHash(){
             
             if (number === "")
                 number = "no number"
-                console.log("number>>"+number)
            if(!bibleReaderCode) callKey(new KeyboardEvent('keydown',
                                       {
                 'key': location.hash[lasthash],"keyCode":location.hash.charCodeAt(lasthash),
