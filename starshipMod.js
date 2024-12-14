@@ -1257,7 +1257,7 @@ function zoomRoutine(){
                     {
                         uniforms.pongBallCoords.value.x=xEdge;
                         ballVectorX*=-1
-                        ballVectorY=Math.sign(ballVectorY)*paddleStrikePosition*12.;
+                        ballVectorY=Math.sign(ballVectorY)*-paddleStrikePosition*12.;
                     }
                     else uniforms.pongBallCoords.value.x=0.
                 }
@@ -1266,7 +1266,7 @@ function zoomRoutine(){
                 {
                     uniforms.pongBallCoords.value.x=0;
                     ballVectorX*=-1
-                    ballVectorY=Math.sign(ballVectorY)*paddleStrikePosition*12.;
+                    ballVectorY=Math.sign(ballVectorY)*-paddleStrikePosition*12.;
                 }                else uniforms.pongBallCoords.value.x=xEdge
                     
             }
