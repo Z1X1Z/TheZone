@@ -498,7 +498,7 @@ function callKey(event){
 
     
     }
-    else if (event.altKey&&(key=="˙"||key=="h")) uniforms.heartStar.value=(uniforms.heartStar.value+1)%3;
+    else if (event.altKey&&(key=="˙"||key=="h")) uniforms.heartStar.value=(uniforms.heartStar.value+1)%4;
     else if (event.altKey&&(key=="œ"||key=="q")){
             if          ( uniforms[ "colorCombo" ].value >1)          uniforms[ "colorCombo" ].value = -1;
             else uniforms[ "colorCombo" ].value = -(Math.abs(uniforms[ "colorCombo" ].value+1-17.))%17;

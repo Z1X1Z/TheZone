@@ -4620,7 +4620,7 @@ if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                             
                                                             if (Character==0&&holieyes==1)heartSize*=5.;
 
-     if(Character!=9) HEART = heart(characterPSpunToKey*heartSize+heartShift,//vec2(0.)
+     if(Character!=9&&(heartStar!=3)) HEART = heart(characterPSpunToKey*heartSize+heartShift,//vec2(0.)
                                     spin2(d.yx,-twistStar)/4.*frAMP*heartRate*vec2(1.,flipStar)// not working on some androids, may work with vec2(0.)
                                     )
      //*(1.-length(uVuMinCenterASKEW)/8.)
