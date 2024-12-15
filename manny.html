@@ -2957,7 +2957,7 @@ vec2 m=vec2(0.);
 
 float truncator=1.;
 bool truncated = true;
-if(lfc!=0.&&truncated) truncator =log(zoom/lfc)*1000.;
+if(zoom!=0.&&lfc!=0.&&truncated) truncator =log(lfc/zoom);
 //pow(abs(log(zoom/lfc),2.);//log truncation * factor is not known, may no longer be necesary
 //Maendel clover
 
