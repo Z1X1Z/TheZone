@@ -3937,7 +3937,8 @@ return
                          }
 }
 
-  return vec3(l+c,l+x+c,c)*10000.+e;}
+  if(x<0.)x+=l*100.;
+  return vec3(l+c,x+c,c)+e;}
 
 
   vec3 dress(vec2 p,vec2 t){

@@ -2343,13 +2343,19 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                             }
                                   
                                   const vop = new THREE.Color();
-                              let h = ((20/24.*EldersLeg*uniforms.brelued.value-g)*uniforms.brelued.value)%EldersLeg/EldersLeg;
-                               vop.setHSL(h,1.,BlackOrWhiteFRET);
-                                           const pureColor = new THREE.Color();
-                                       
-                                           pureColor.setHSL(h,1.,.5);
+                                  const pureColor = new THREE.Color();
 
-                                  
+                              let h = ((20/24.*EldersLeg*uniforms.brelued.value-g)*uniforms.brelued.value)%EldersLeg/EldersLeg;
+                                        if (g==topNote&&uniforms.Character.value==2||uniforms.Character.value==1 )
+                                                {
+                                                pureColor.setRGB(.75,.75,.75);
+                                                vop.setRGB(.75,.75,.75);
+                                                }
+                                        else{ vop.setHSL(h,1.,BlackOrWhiteFRET);
+                                        pureColor.setHSL(h,1.,.5);
+                                        }
+
+
                 
                                   //inner Star inspired by https://www.youtube.com/watch?v=_MTbjHKtobY Neffex song
 const rpio2 =arm+pi/2.;
