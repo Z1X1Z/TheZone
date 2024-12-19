@@ -1149,8 +1149,6 @@ let lastVolume = 1.;
                 fromCenter*=2.**(singleHyperCoreDepth);
                 lastZoom*=2.**singleHyperCoreDepth;
 
-                console.log("outZoom"+zoom)
-                console.log("outCoord"+Math.log(lastCoord/coordX)/Math.log(.5))
                 cloverSuperCores++;
 
             }
@@ -1161,7 +1159,6 @@ let lastVolume = 1.;
                 fromCenter/=2.**singleHyperCoreDepth;
                     lastZoom/=2.**singleHyperCoreDepth;
                 cloverSuperCores--;
-                console.log("in"+zoom)
 
                 
             }
