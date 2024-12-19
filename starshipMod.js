@@ -1143,19 +1143,26 @@ let lastVolume = 1.;
                             let expandedZoomCage=1.;
 
        function infinicore(){
-            if(zoom<=1./2.**(singleHyperCoreDepth+3)&&fromCenter/zoom<2.){
-                zoom*=2.**singleHyperCoreDepth;coordY*=2.**singleHyperCoreDepth;coordX*=2.**singleHyperCoreDepth;
-                fromCenter*=2.**singleHyperCoreDepth;
+            if(zoom<=1./2.**(singleHyperCoreDepth+3)){
+                let lastCoord=coordX
+                zoom*=2.**(singleHyperCoreDepth);coordY*=2.**(singleHyperCoreDepth);coordX*=2.**(singleHyperCoreDepth);
+                fromCenter*=2.**(singleHyperCoreDepth);
+                lastZoom*=2.**singleHyperCoreDepth;
 
+                console.log("outZoom"+zoom)
+                console.log("outCoord"+Math.log(lastCoord/coordX)/Math.log(.5))
                 cloverSuperCores++;
 
             }
              if(cloverSuperCores<0.) cloverSuperCores=0.;
 
-            if(zoom>1./2**3&&cloverSuperCores>0){
+            if(zoom>1./2**2&&cloverSuperCores>0){
                 zoom/=2.**singleHyperCoreDepth;coordY/=2.**singleHyperCoreDepth;coordX/=2.**singleHyperCoreDepth;
                 fromCenter/=2.**singleHyperCoreDepth;
+                    lastZoom/=2.**singleHyperCoreDepth;
                 cloverSuperCores--;
+                console.log("in"+zoom)
+
                 
             }
 
@@ -1218,7 +1225,7 @@ function zoomRoutine(){
                          if (zoomOutEngage == true) zoom *= 1.44/ZR;
                     
 
-                          if(zoom<1./2**singleHyperCoreDepth*metaDepth)zoom = 1.;
+                        //  if(zoom<1./2**singleHyperCoreDepth*metaDepth)zoom = 1.;
     
 
              
@@ -1912,14 +1919,17 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
                        }
            else {volume=1.; lastVolume=1.; }
     
-       move();
     
    if( !window.touchMode//&&!DAW
       )
    {
-       if(!zoomAtl41&&zoomRate!=0.)zoomRoutine();
-       infinicore();
+       if(!zoomAtl41&&zoomRate!=0.)
+       {zoomRoutine();
+           infinicore();
+       }
    }
+    move();
+
     spiral_compress();
     
     vectorize4();
