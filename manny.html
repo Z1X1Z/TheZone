@@ -2438,7 +2438,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
         vec3 rainbowManny =vec3(0.);
             float l=0.;
             for (int f=0;f<3+6*2;f+=1)if(musicAngelMan==0||f<3)
-            { if(f==10&&holieyes==1)rainbowManny=vec3(
+            { if(f==10&&mod(float(holieyes),2.)==0.)rainbowManny=vec3(
                                          (abs(s.x)*(-s.y)*5.),
                                          (s.x*abs(s.y)),//toggle sign on green for reverse colors
                                        abs(s.x)*6.+7.*s.x*s.y-s.x*8.88)/-length(s)
