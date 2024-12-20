@@ -154,7 +154,7 @@ var colorInstant=0.;
 let updateInstant = false;
                             let innerSpirographFractionalSize=0;
 
-                            const bufferPortion = 2048*2;//should be 2048
+                            const bufferPortion = 2048;//should be 2048
                             const spirray0 = new Float64Array(bufferPortion).fill(.5);
                             const spirray1 = new Float64Array(bufferPortion).fill(.5);
                           const   point = new Float32Array(bufferPortion*3*2);
@@ -167,7 +167,7 @@ function makeSpirograph(){
     var maxSamp=0.;
     for(var t=0; t<bufferPortion;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
   
-    for(var m = 0; m < 2048; m++)
+    for(var m = 0; m < bufferPortion; m++)
       {
               phase += adjConstant;//spira_pitch;
         let dilation =inputData[m]/maxSamp/2.;
@@ -177,6 +177,11 @@ function makeSpirograph(){
               spirray0[m]=-Math.sin(-phase)*size;
               spirray1[m]=-Math.cos(-phase)*size;
       }
+                                                                  spirray0[0]=spirray0[1];
+                                                                  spirray1[0]=spirray1[1];//remove line from center
+                                                                  
+                                                                                             //                                 spirray0[bufferPortion-1]=spirray0[bufferPortion-2];
+                                                                                              //                                spirray1[bufferPortion-1]=spirray1[bufferPortion-2];
        
 }
 let callibratorArray = new Float32Array(1024).fill(0);
