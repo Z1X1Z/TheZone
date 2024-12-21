@@ -3204,19 +3204,29 @@ function calculatePitch ()
 {
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance=0;//(1024-26)/10000
-             if(window.highORlow==1){
+             if(window.highORlow==0){
                  let proportion= fractionOfFrame/bufferSize;
-                                 let tAScaled=totalAMP*proportion;
-                                 tAScaled =(tAScaled!=0)? tAScaled:1;
-                                 let tAScaledPermanent = tAScaled;
-                                 let incrementToleranceFeedback =tAScaled;
+                                 let tAScaled=0.;//totalAMP*proportion;
+                 
+  for(n=0;n<111;n++)if(n!=0){
+      let plusOrMinusPowerSeries = totalAMP**n*Math.sign(n%2-.5);//x-x**2+x**3-x**4....
+      if(plusOrMinusPowerSeries!=0.)tAScaled+=plusOrMinusPowerSeries;
+      else break;
+  }
+                 
+                 tAScaled =(tAScaled!=0)? tAScaled:1;
+                 let tAScaledPermanent = tAScaled;
+                 let incrementToleranceFeedback =tAScaled;
+                 
+                 
+                                if(tAScaled>0&&isFinite(tAScaled))
+                                    for(var reps=0; reps<1.;reps+=tAScaled)
+                                 { tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaledPermanent))/(2.-tAScaledPermanent))
+                                     tAScaled=tAScaled**((1.-tAScaled)*(1.+tAScaledPermanent))**(.75-(tAScaled)**(.5+tAScaled))
+                           //          b++
+                                 }
+                                
                                 // let b = 0.;
-                                               if(tAScaled>0&&isFinite(tAScaled))
-                                                   for(var reps=0; reps<1.;reps+=tAScaled)
-                                                { tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaledPermanent))/(2.-tAScaledPermanent))
-                                                    tAScaled=tAScaled**((1.-tAScaled)*(1.+tAScaledPermanent))**(.75-(tAScaled)**(.5+tAScaled))
-                                          //          b++
-                                                }
 
                                 // console.log(b)
                                // console.log(tAScaled)
@@ -3226,13 +3236,16 @@ let tolerance=0;//(1024-26)/10000
 
 //.02134356(7)  solid guess//.0214284 easier reaching notes//n*2,n,n*2*2,n*2*2/2,n*2*2*2,n*2*2*2/2
              else if(window.highORlow==2)tolerance=.49;
-             else if(window.highORlow==0)for(n=0;n<111;n++)if(n!=0){
-                 let plusOrMinusPowerSeries = totalAMP**n*Math.sign(n%2-.5);//x-x**2+x**3-x**4
-                 
-                 if(!isNaN(plusOrMinusPowerSeries)&&isFinite(plusOrMinusPowerSeries)&&plusOrMinusPowerSeries!=0.)tolerance+=plusOrMinusPowerSeries;
+            else if(window.highORlow==1)
+                tolerance=0.;
+                /*
+                 for(n=0;n<111;n++)if(n!=0){
+                 let plusOrMinusPowerSeries = totalAMP**n*Math.sign(n%2-.5);//x-x**2+x**3-x**4....
+                 if(plusOrMinusPowerSeries!=0.)tolerance+=plusOrMinusPowerSeries;
                  else break;
                  };
-                                                         console.log(tolerance)
+                 */
+
 let period;
 let delta = 0.0, runningSum = 0.0;
 yinData[0] = 1.0;
