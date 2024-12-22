@@ -352,6 +352,7 @@ let pushBackCounter = 0;
             totalAMP = 0.;
             for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
                 totalAMP/=inputData.length;
+                                if(window.android)totalAMP=totalAMP**2;//may not work as intended on all platforms, if at all
             uniforms["totalAmp" ].value=totalAMP;
              if(window.ISdilated)
              uniforms.coreDilation.value=.5+.5*totalAMP**2.*Math.sqrt(24.)*2.;
