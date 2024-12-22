@@ -352,7 +352,7 @@ let pushBackCounter = 0;
             totalAMP = 0.;
             for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
                 totalAMP/=inputData.length;
-                                if(window.android)totalAMP=totalAMP/4.;//may not work as intended on all platforms, if at all
+                                if(window.android)totalAMP=totalAMP**.5/8.;//may not work as intended on all platforms, if at all
                              //   else if(iOS)totalAMP=totalAMP*2.;//may not work as intended on all platforms, if at all
             uniforms["totalAmp" ].value=totalAMP;
              if(window.ISdilated)
@@ -3211,7 +3211,7 @@ let tolerance=0;//(1024-26)/10000
                                  let tAScaled=0.;//totalAMP*proportion;
                  
   for(n=0;n<111;n++)if(n!=0){
-      let plusOrMinusPowerSeries = totalAMP**n*Math.sign(n%2-.5);//x-x**2+x**3-x**4....
+      let plusOrMinusPowerSeries = totalAMP**n*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
       if(plusOrMinusPowerSeries!=0.)tAScaled+=plusOrMinusPowerSeries;
       else break;
   }
