@@ -349,17 +349,6 @@ let pushBackCounter = 0;
 
 
 
-            totalAMP = 0.;
-            for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
-                totalAMP/=inputData.length;
-               //                 if(window.android)totalAMP=totalAMP**.5/8.;//may not work as intended on all platforms, if at all
-                             //   else if(iOS)totalAMP=totalAMP*2.;//may not work as intended on all platforms, if at all
-            uniforms["totalAmp" ].value=totalAMP;
-             if(window.ISdilated)
-             uniforms.coreDilation.value=.5+.5*totalAMP**2.*Math.sqrt(24.)*2.;
-              //   console.log(uniforms.coreDilation.value)
-             
-                 else             uniforms.coreDilation.value=0.;
 
 
 
@@ -1907,13 +1896,36 @@ function runOSMD (){
     if(!window.touchMode)pointerZoom=false;
     else on=false;
 
-if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
+                                    if (window.micOn){
+                                        analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
+                                        analyser.getByteFrequencyData(  dataArray);
+                                        setMicInputToStarPIXEL();
+                                    }
+                                    
+                                    totalAMP = 0.;
+                                    for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
+                                        totalAMP/=inputData.length;
+                                       //                 if(window.android)totalAMP=totalAMP**.5/8.;//may not work as intended on all platforms, if at all
+                                                     //   else if(iOS)totalAMP=totalAMP*2.;//may not work as intended on all platforms, if at all
+                                    uniforms["totalAmp" ].value=totalAMP;
+                                     if(window.ISdilated)
+                                     uniforms.coreDilation.value=.5+.5*totalAMP**2.*Math.sqrt(24.)*2.;
+                                      //   console.log(uniforms.coreDilation.value)
+                                     
+                                         else             uniforms.coreDilation.value=0.;
+                                    
+                                    
+                                   if( !window.touchMode//&&!DAW
+                                      )
+                                   {
+                                       if(!zoomAtl41&&zoomRate!=0.)
+                                       {zoomRoutine();
+                                           infinicore();
+                                       }
+                                   }
+                                    
+if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode&&totalAMP>0.) {
 
-    if (window.micOn){
-        analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
-        analyser.getByteFrequencyData(  dataArray);
-        setMicInputToStarPIXEL();
-    }
          
            if(window.volumeSpeed&&on)
            {
@@ -1924,14 +1936,6 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
            else {volume=1.; lastVolume=1.; }
     
     
-   if( !window.touchMode//&&!DAW
-      )
-   {
-       if(!zoomAtl41&&zoomRate!=0.)
-       {zoomRoutine();
-           infinicore();
-       }
-   }
     move();
 
     spiral_compress();
