@@ -349,6 +349,17 @@ let pushBackCounter = 0;
 
 
 
+            totalAMP = 0.;
+            for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
+                totalAMP/=inputData.length;
+               //                 if(window.android)totalAMP=totalAMP**.5/8.;//may not work as intended on all platforms, if at all
+                             //   else if(iOS)totalAMP=totalAMP*2.;//may not work as intended on all platforms, if at all
+            uniforms["totalAmp" ].value=totalAMP;
+             if(window.ISdilated)
+             uniforms.coreDilation.value=.5+.5*totalAMP**2.*Math.sqrt(24.)*2.;
+              //   console.log(uniforms.coreDilation.value)
+             
+                 else             uniforms.coreDilation.value=0.;
 
 
 
@@ -1896,30 +1907,14 @@ function runOSMD (){
     if(!window.touchMode)pointerZoom=false;
     else on=false;
 
-                             
 if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
 
-         
     if (window.micOn){
         analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
         analyser.getByteFrequencyData(  dataArray);
         setMicInputToStarPIXEL();
     }
-    
-    totalAMP = 0.;
-    for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
-        totalAMP/=inputData.length;
-       //                 if(window.android)totalAMP=totalAMP**.5/8.;//may not work as intended on all platforms, if at all
-                     //   else if(iOS)totalAMP=totalAMP*2.;//may not work as intended on all platforms, if at all
-    uniforms["totalAmp" ].value=totalAMP;
-     if(window.ISdilated)
-     uniforms.coreDilation.value=.5+.5*totalAMP**2.*Math.sqrt(24.)*2.;
-      //   console.log(uniforms.coreDilation.value)
-     
-         else             uniforms.coreDilation.value=0.;
-    
-    
-    
+         
            if(window.volumeSpeed&&on)
            {
                    if(lastVolume!=0.) lastVolume=volume;
@@ -1929,6 +1924,14 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
            else {volume=1.; lastVolume=1.; }
     
     
+   if( !window.touchMode//&&!DAW
+      )
+   {
+       if(!zoomAtl41&&zoomRate!=0.)
+       {zoomRoutine();
+           infinicore();
+       }
+   }
     move();
 
     spiral_compress();
@@ -3203,40 +3206,38 @@ function calculatePitch ()
 {
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance=0;//(1024-26)/10000
-             if(window.highORlow==0){
-                 if(totalAMP!=0.)
-                 {
-                     let proportion= fractionOfFrame/bufferSize;
-                     let tAScaled=0.;//totalAMP*proportion;
-                     
-                     for(n=0;n<111;n++)if(n!=0){
-                         let plusOrMinusPowerSeries = totalAMP**n*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
-                         if(plusOrMinusPowerSeries!=0.)tAScaled+=plusOrMinusPowerSeries;
-                         else break;
-                     }
-                     
-                     tAScaled =(tAScaled!=0)? tAScaled:1;
-                     let tAScaledPermanent = tAScaled;
-                     let incrementToleranceFeedback =tAScaled;
-                     
-                     
-                     if(tAScaled>0&&isFinite(tAScaled))
-                         for(var reps=0; reps<1.;reps+=tAScaled)
-                         { tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaledPermanent))/(2.-tAScaledPermanent))
-                             tAScaled=tAScaled**((1.-tAScaled)*(1.+tAScaledPermanent))**(.75-(tAScaled)**(.5+tAScaled))
-                             //          b++
-                         }
-                     
-                     // let b = 0.;
-                     
-                     // console.log(b)
-                     // console.log(tAScaled)
-                     tolerance =tAScaled
-                 }
-                 else tolerance=0.;
-                           }
-
-
+                                                         if(window.highORlow==0){
+                                                             if(totalAMP!=0.)
+                                                             {
+                                                                 let proportion= fractionOfFrame/bufferSize;
+                                                                 let tAScaled=0.;//totalAMP*proportion;
+                                                                 
+                                                                 for(n=0;n<111;n++)if(n!=0){
+                                                                     let plusOrMinusPowerSeries = totalAMP**n*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
+                                                                     if(plusOrMinusPowerSeries!=0.)tAScaled+=plusOrMinusPowerSeries;
+                                                                     else break;
+                                                                 }
+                                                                 
+                                                                 tAScaled =(tAScaled!=0)? tAScaled:1;
+                                                                 let tAScaledPermanent = tAScaled;
+                                                                 let incrementToleranceFeedback =tAScaled;
+                                                                 
+                                                                 
+                                                                 if(tAScaled>0&&isFinite(tAScaled))
+                                                                     for(var reps=0; reps<1.;reps+=tAScaled)
+                                                                     { tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaledPermanent))/(2.-tAScaledPermanent))
+                                                                         tAScaled=tAScaled**((1.-tAScaled)*(1.+tAScaledPermanent))**(.75-(tAScaled)**(.5+tAScaled))
+                                                                         //          b++
+                                                                     }
+                                                                 
+                                                                 // let b = 0.;
+                                                                 
+                                                                 // console.log(b)
+                                                                 // console.log(tAScaled)
+                                                                 tolerance =tAScaled
+                                                             }
+                                                          else tolerance=0.;
+                                                         }
 //.02134356(7)  solid guess//.0214284 easier reaching notes//n*2,n,n*2*2,n*2*2/2,n*2*2*2,n*2*2*2/2
              else if(window.highORlow==2)tolerance=.49;
             else if(window.highORlow==1)
