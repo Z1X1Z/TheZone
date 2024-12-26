@@ -349,18 +349,6 @@ let pushBackCounter = 0;
 
 
 
-            totalAMP = 0.;
-            for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
-                totalAMP/=inputData.length;
-               //                 if(window.android)totalAMP=totalAMP**.5/8.;//may not work as intended on all platforms, if at all
-                             //   else if(iOS)totalAMP=totalAMP*2.;//may not work as intended on all platforms, if at all
-            uniforms["totalAmp" ].value=totalAMP;
-             if(window.ISdilated)
-             uniforms.coreDilation.value=.5+.5*totalAMP**2.*Math.sqrt(24.)*2.;
-              //   console.log(uniforms.coreDilation.value)
-             
-                 else             uniforms.coreDilation.value=0.;
-
 
 
                 
@@ -1213,7 +1201,7 @@ function zoomRoutine(){
         zoomOutEngage = false;
     if(!isFinite(ZR))ZR=1;
     if(!zoomOutEngage&&zoomRate>0.){
-        if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(on&&!window.touchMode))||xTouch+yTouch!=0)zoom *=ZR;
+        if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(totalAMP>zoomOutRatchetThreshold&&!window.touchMode))||xTouch+yTouch!=0)zoom *=ZR;
         else if(uniforms.MetaCored.value||zoom<1.){
             zoom /= ZR;
             if(center&&zoom<1.){coordX*=ZR*2./3.;; coordY*=ZR*2./3.;}
@@ -1915,6 +1903,19 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
         setMicInputToStarPIXEL();
     }
          
+    
+    totalAMP = 0.;
+    for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
+        totalAMP/=inputData.length;
+       //                 if(window.android)totalAMP=totalAMP**.5/8.;//may not work as intended on all platforms, if at all
+                     //   else if(iOS)totalAMP=totalAMP*2.;//may not work as intended on all platforms, if at all
+    uniforms["totalAmp" ].value=totalAMP;
+     if(window.ISdilated)
+     uniforms.coreDilation.value=.5+.5*totalAMP**2.*Math.sqrt(24.)*2.;
+      //   console.log(uniforms.coreDilation.value)
+     
+         else             uniforms.coreDilation.value=0.;
+    
            if(window.volumeSpeed&&on)
            {
                    if(lastVolume!=0.) lastVolume=volume;
