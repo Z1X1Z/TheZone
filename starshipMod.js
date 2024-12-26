@@ -1890,7 +1890,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
     totalAMP = 0.;
     for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
         totalAMP/=inputData.length;
-       //                 if(window.android)totalAMP=totalAMP**.5/8.;//may not work as intended on all platforms, if at all
+                        if(window.android)totalAMP=totalAMP**.5/8.;//may not work as intended on all platforms, if at all
                      //   else if(iOS)totalAMP=totalAMP*2.;//may not work as intended on all platforms, if at all
     uniforms["totalAmp" ].value=totalAMP;
      if(window.ISdilated)
