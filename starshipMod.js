@@ -364,13 +364,12 @@ let pushBackCounter = 0;
 
 
                 
+                    lastPitch = pitch;
+                    // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
+                    pitch = audioX.sampleRate/calculatePitch();
+                    const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
+                    if(!notNyquist&&totalAMP>0.) pitch = lastPitch;
                 
-                lastPitch = pitch;
-               // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
-                pitch = audioX.sampleRate/calculatePitch();
-                const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
-                if(!notNyquist) pitch = lastPitch;
-
                 
                 
             if (isFinite(pitch) &&pitch>0&& notNyquist &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
