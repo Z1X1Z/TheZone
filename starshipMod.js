@@ -3212,18 +3212,18 @@ let tolerance=0;//(1024-26)/10000
                                                              if(totalAMP!=0.)
                                                              {
                                                                  let proportion= fractionOfFrame/bufferSize;
-                                                                 let tAScaled=0;//totalAMP*proportion;
+                                                                 let tAScaled=0.;//totalAMP*proportion;
                                                                  
                                                                  
                                                                  for(n=2;n<4;n++)if(n!=0){
-                                                                     let plusOrMinusPowerSeries = totalAMP**(1./n)*-Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
+                                                                     let plusOrMinusPowerSeries = (totalAMP)**(1./n)*-Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                      if(plusOrMinusPowerSeries!=0.)tAScaled+=plusOrMinusPowerSeries;
                                                                      else break;
                                                                  }
                                                                  
-                                                                 for(n=2;n<111;n++)
+                                                                 for(n=1;n<111;n++)
                                                                  {
-                                                                     let plusOrMinusPowerSeries = totalAMP**n*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
+                                                                     let plusOrMinusPowerSeries = (totalAMP)**n*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                      if(plusOrMinusPowerSeries!=0.)tAScaled+=plusOrMinusPowerSeries;
                                                                      else break;
                                                                  }
@@ -3244,7 +3244,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  
                                                                  // console.log(b)
                                                                  // console.log(tAScaled)
-                                                                 tolerance =tAScaled
+                                                                 tolerance =tAScaled**2
                                                              }
                                                           else tolerance=0.;
                                                          }
