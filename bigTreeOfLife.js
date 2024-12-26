@@ -505,9 +505,10 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
                  //    {
                   //      var correctionSpoke =Math.pow(upSpoke/dstnce,grOverLeaf);
                     s.multiplyScalar(spoke_factor);//engage spokelover s/=2.+'superspokes'
-
-                        hyperCoreOUTPUT+=upSpoke;
-                        hyperCoreBoosted+=upSpoke;
+                    let coreFactor =upSpoke;
+                    if (!inMainSpoke)coreFactor*=dstnce;
+                        hyperCoreOUTPUT+=coreFactor;
+                        hyperCoreBoosted+=coreFactor;
                  //   }
                 }
             }
@@ -553,8 +554,10 @@ var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpo
 
                 if(!wheel)
                 {
-                    hyperCoreOUTPUT-=spokeloverCoreShiftDown;
-                    hyperCoreBoosted-=spokeloverCoreShiftDown;
+                    let coreFactor =spokeloverCoreShiftDown;
+                    if (!inMainSpoke)coreFactor*=spokeloverCoreShiftDown;
+                    hyperCoreOUTPUT-=coreFactor;
+                    hyperCoreBoosted-=coreFactor;
                 }
             }
             

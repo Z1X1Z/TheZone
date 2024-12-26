@@ -3272,7 +3272,9 @@ if(Spoker){
                                 }
 
                           s/=spoke_factorLarge;//engage ; s/=2.+'superspokes'
-                         
+                          
+                         float coreFactor =downSpoke;
+                       //  if(!inMainSpoke) coreFactor/=dstnce;
                          hyperCoreOUTPUT-=downSpoke;
 
                          hyperCoreBoosted-=downSpoke;
@@ -3288,9 +3290,12 @@ if(Spoker){
                 else {*/
                   //  float correctionSpoke =pow(upSpoke/dstnce,grOverLeaf);//uncertain value
                  s*=spoke_factor;
-            hyperCoreOUTPUT+=upSpoke
+                 float coreFactor =upSpoke;
+                 if(!inMainSpoke)
+              coreFactor/=dstnce;
+            hyperCoreOUTPUT+=coreFactor
             ;
-            hyperCoreBoosted+=upSpoke;
+            hyperCoreBoosted+=coreFactor;
            // }
             }
 }
@@ -3307,8 +3312,6 @@ if(spokelover)
        
 float powerOfSpokeCore =spoke_factorLarge*lfc/dstnce;// uncertain value,takes large range, highly responsive on spokes PI*PI/gr*-leaf has nice outer main spokes
 
-float spokeloverCoreShiftDown=pow(upSpoke,powerOfSpokeCore)*logStabilizationConstant;
-float       spokeloverCoreShiftUp  =      pow(abs(downSpoke),powerOfSpokeCore)*logStabilizationConstant;
 
 
 
@@ -3325,21 +3328,34 @@ if(counter+dstnce*dstnce //sqrt(sqrt(dstnce)*dstnce)*dstnce
 
          }
      s/=sqrt(2.);
+     
      if(!wheel){
      //float b =pow(pow(abs(downSpoke),powerOfDynamicSokeCoreUp),grOverLeaf);
-  hyperCoreOUTPUT+=spokeloverCoreShiftUp;
-  hyperCoreBoosted+=spokeloverCoreShiftUp;
+    // dstnce=length(s);
+    float       spokeloverCoreShiftUp  =      pow(abs(downSpoke),powerOfSpokeCore)*logStabilizationConstant;
+
+     float coreFactor =spokeloverCoreShiftUp;
+    // if(!inMainSpoke) coreFactor/=dstnce;
+  hyperCoreOUTPUT+=coreFactor;
+  hyperCoreBoosted+=coreFactor;
   }
      }
 
 else //if(  0.>=hyperCoreBoosted)
 {
     s*=sqrt(2.)/1.5;
+    // dstnce=length(s);
 
     if(!wheel)
     {
-              hyperCoreOUTPUT-=spokeloverCoreShiftDown;
-              hyperCoreBoosted-=spokeloverCoreShiftDown;
+        float spokeloverCoreShiftDown=pow(upSpoke,powerOfSpokeCore)*logStabilizationConstant;
+
+
+        float coreFactor =spokeloverCoreShiftDown;
+        if(!inMainSpoke)
+        coreFactor/=dstnce;
+              hyperCoreOUTPUT-=coreFactor;
+              hyperCoreBoosted-=coreFactor;
              }
     }
  }
