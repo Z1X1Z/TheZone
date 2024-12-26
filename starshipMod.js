@@ -3215,13 +3215,13 @@ let tolerance=0;//(1024-26)/10000
                                                                  let tAScaled=0;//totalAMP**.5;//totalAMP*proportion;
                                                                  
                                                                  
-                                                               /*  for(n=2;n<4;n++)if(n!=0){
-                                                                     let plusOrMinusPowerSeries = totalAMP**(1./n)*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
+                                                                 for(n=2;n<4;n++)if(n!=0){
+                                                                     let plusOrMinusPowerSeries = totalAMP**(1./n)*-Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                      if(plusOrMinusPowerSeries!=0.)tAScaled+=plusOrMinusPowerSeries;
                                                                      else break;
                                                                  }
-                                                                 */
-                                                                 for(n=-1;n<111;n++)//if(n!=0)
+                                                                 
+                                                                 for(n=0;n<111;n++)if(n!=0)
                                                                  {
                                                                      let plusOrMinusPowerSeries = totalAMP**n*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                      if(plusOrMinusPowerSeries!=0.)tAScaled+=plusOrMinusPowerSeries;
