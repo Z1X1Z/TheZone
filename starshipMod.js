@@ -3244,7 +3244,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  
                                                                  // console.log(b)
                                                                  // console.log(tAScaled)
-                                                                 tolerance =tAScaled**2
+                                                                 tolerance =tAScaled**2-tAScaled**3
                                                              }
                                                           else tolerance=0.;
                                                          }
