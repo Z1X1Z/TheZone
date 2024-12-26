@@ -353,23 +353,6 @@ let pushBackCounter = 0;
 
                 
                 
-                lastPitch = pitch;
-               // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
-                pitch = audioX.sampleRate/calculatePitch();
-                const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
-                if(!notNyquist) pitch = lastPitch;
-
-                
-                
-            if (isFinite(pitch) &&pitch>0&& notNyquist &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
-                aboveThreshold = true;
-                on = true;
-            }
-            else{aboveThreshold = false; on = false;}
-                
-              
-                
-                
                 
             if(window.FeedbackSound)
             {
@@ -1201,7 +1184,7 @@ function zoomRoutine(){
         zoomOutEngage = false;
     if(!isFinite(ZR))ZR=1;
     if(!zoomOutEngage&&zoomRate>0.){
-        if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(totalAMP>zoomOutRatchetThreshold&&!window.touchMode))||xTouch+yTouch!=0)zoom *=ZR;
+        if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(on&&!window.touchMode))||xTouch+yTouch!=0)zoom *=ZR;
         else if(uniforms.MetaCored.value||zoom<1.){
             zoom /= ZR;
             if(center&&zoom<1.){coordX*=ZR*2./3.;; coordY*=ZR*2./3.;}
@@ -1913,8 +1896,26 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
      if(window.ISdilated)
      uniforms.coreDilation.value=.5+.5*totalAMP**2.*Math.sqrt(24.)*2.;
       //   console.log(uniforms.coreDilation.value)
-     
          else             uniforms.coreDilation.value=0.;
+    
+    
+    
+    
+    lastPitch = pitch;
+   // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
+    pitch = audioX.sampleRate/calculatePitch();
+    const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
+    if(!notNyquist) pitch = lastPitch;
+
+    
+    
+if (isFinite(pitch) &&pitch>0&& notNyquist &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
+    aboveThreshold = true;
+    on = true;
+}
+else{aboveThreshold = false; on = false;}
+    
+  
     
            if(window.volumeSpeed&&on)
            {
