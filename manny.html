@@ -3272,7 +3272,7 @@ if(Spoker){
 
                                 }
 
-                          s/=spoke_factorLarge;//engage ; s/=2.+'superspokes'
+                         if(!wheel) s/=spoke_factorLarge;//engage ; s/=2.+'superspokes'
                           
                          float coreFactor =downSpoke;
                        //  if(!inMainSpoke) coreFactor/=dstnce;
@@ -3293,7 +3293,7 @@ if(Spoker){
                  s*=spoke_factor;
                  float coreFactor =upSpoke;
                 // if(!inMainSpoke)
-              coreFactor/=dstnce;
+              if(!wheel)coreFactor/=dstnce;
             hyperCoreOUTPUT+=coreFactor
             ;
             hyperCoreBoosted+=coreFactor;
