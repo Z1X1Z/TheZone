@@ -3291,7 +3291,7 @@ if(Spoker){
                   //  float correctionSpoke =pow(upSpoke/dstnce,grOverLeaf);//uncertain value
                  s*=spoke_factor;
                  float coreFactor =upSpoke;
-                 if(!inMainSpoke)
+                // if(!inMainSpoke)
               coreFactor/=dstnce;
             hyperCoreOUTPUT+=coreFactor
             ;
@@ -3352,8 +3352,7 @@ else //if(  0.>=hyperCoreBoosted)
 
 
         float coreFactor =spokeloverCoreShiftDown;
-        if(!inMainSpoke)
-        coreFactor/=dstnce;
+       if(!inMainSpoke)  coreFactor/=dstnce;
               hyperCoreOUTPUT-=coreFactor;
               hyperCoreBoosted-=coreFactor;
              }
