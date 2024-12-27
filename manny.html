@@ -770,11 +770,11 @@ radialWarp=b;
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                   Flop Chirality![|]</a><br>
               
-              <label for="CloverTwist">Twist offset(0-1):</label>
+              <label for="CloverTwist">Twist offset:</label>
              <input type="number" id="CloverTwist" name="CloverTwist" class="num" onkeydown="
                 number = false
 ;
-uniforms.cloverOffset.value=document.getElementById('CloverTwist').value">
+uniforms.cloverOffset.value=document.getElementById('CloverTwist').value/6.">
                  </p>
                  
                  <a id="Add a petal" name="t"  onclick= "
@@ -1336,7 +1336,8 @@ Open MusicXML file
                   <p>
                   
                   
-                  
+                  [#.c(BookChapter)]:
+
                   <select name="choose reader"  id="reader"
                       onchange="
                   window.readerSet = true;
@@ -1348,10 +1349,10 @@ Open MusicXML file
                                     window.muteToggle = false;
 "
                 >
-                <option value="100" selected="selected">Choose Your Blessed Reader[#.c(BookChapter)]:
+                <option value="100" selected="selected">Blessed Reader
                 </option>
                       <option value='0'>
-                          Hays (with text)[#.b0]
+                          Hays (w/ text)[#.b0]
                       </option>
                       <option value='1'>
                           Gilbert by book[#.b1]
@@ -1374,10 +1375,10 @@ Open MusicXML file
                               Hays by chapter[#.b6]
                           </option>
                           <option value='7'>
-                              Gilbert with music by book[#.b7]
+                              Gilbert w/ music by book[#.b7]
                           </option>
                           <option value='8'>
-                              Gilbert with music by chapter[#.b8]
+                              Gilbert w/ music by chapter[#.b8]
                           </option>
                           
                   </select>
