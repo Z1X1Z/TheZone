@@ -3244,7 +3244,14 @@ let tolerance=0;//(1024-26)/10000
                                                                  
                                                                  // console.log(b)
                                                                  // console.log(tAScaled)
-                                                                 tolerance =tAScaled**2-tAScaled**3
+                                                                 
+                                                                 for(n=2;n<111;n++)
+                                                                 {
+                                                                     let plusOrMinusPowerSeries = (tAScaled)**n*-Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
+                                                                     if(plusOrMinusPowerSeries!=0.)tolerance+=plusOrMinusPowerSeries;
+                                                                     else break;
+                                                                 }
+                                                                 //tolerance=tAScaled**2-tAScaled**3
                                                              }
                                                           else tolerance=0.;
                                                          }
