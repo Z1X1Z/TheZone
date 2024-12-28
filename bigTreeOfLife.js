@@ -249,7 +249,7 @@ hyperCore*=equilibriator;
 }
    
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
-if(continuumClover)hyperCore-=.75/Math.log(.5);
+if(continuumClover)hyperCore-=1.5/Math.log(.5);
 
 //if(fieldPowerBoost)hyperCore+=1./Math.log(.5);
 
@@ -298,7 +298,8 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
                           
                           var variant4Correction=1.;
                           if(clvrVariant4)variant4Correction=(1.-oneOverLeafTruncated);
-                          
+                                        
+                                    correction = zoom/(zoom-lfc*variant4Correction);
                           if(wheel)m =  pWithoutChiralizer.clone().sub(new THREE.Vector2(coords.y,coords.x).multiplyScalar(variant4Correction).multiplyScalar(2.))//try signs with for fibonacci ring pairing and movement distortion #syyym
                           .multiplyScalar(Math.abs(coresIn/crs*2.-1.)).multiplyScalar(mandelCloverFactor);
 
@@ -574,16 +575,18 @@ var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpo
 
 if(continuumClover&&lfc!=0){//engage continualization
   
-var continuumCore=(continuumCounter+hyperCoreOUTPUT)*zoom/(lfc*variant4Correction-zoom);
+var continuumCore=(continuumCounter+hyperCoreOUTPUT)*correction;
 if(loops+counter<=hyperCoreBoosted+continuumCounter)
 {
     s.divideScalar( Math.pow(2.,Math.pow(.5,continuumCore)));
-    
+    if(dstnce<2./3.) s.addScalar( coords.yx*correction);
+
      hyperCoreBoosted+=continuumCore;
      hyperCoreOUTPUT+=continuumCore;
      }
      else{
-         
+         if(dstnce<2./3.) s.subScalar(coords.yx*correction);
+
         hyperCoreBoosted-=continuumCore;
          hyperCoreOUTPUT-=continuumCore;
      }
