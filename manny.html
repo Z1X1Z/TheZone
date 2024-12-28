@@ -365,11 +365,11 @@ radialWarp=b;
                        <label for="StackOctaves">Concentric Octaves![.k]</label><br>
                
                <input type="checkbox" id="Haptic" name="t"  onclick= "window.haptic = !window.haptic; mcphrth();">
-               <label for="Haptic">Haptic Song(Android only)</label>
+               <label for="Haptic">Haptic Song(Android)</label>
                <br>
                
                <input type="checkbox" id="Haptic2" name="t"  onclick= "window.haptic2 = !window.haptic2; mcphrth();">
-               <label for="Haptic2">Haptic Implosion(Android only)</label>
+               <label for="Haptic2">Haptic Implosion(Android)</label>
                <br>
               <input type="checkbox" id="Game On" name="t"  onclick= "
                   key  = 'e';
@@ -4889,7 +4889,7 @@ if(starOnDot>=1){
                                                             //   texture2D(videoTexture2,faceDimensionReversed).xyzw//over the top cam
                                                                  ;
                                                   vec4 layeredOUT =vec4(0.);
-                                                             if(length(p)<4.*sqrt(2.)/min(resolution.x,resolution.y)) layeredOUT=vec4(zoomer,1.);
+                                                             if(length(p)<sqrt(2.)/min(resolution.x,resolution.y)) layeredOUT=vec4(zoomer,1.);
                                 
                    
                                                              else if(length(p)<1.&&
