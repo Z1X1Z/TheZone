@@ -1267,7 +1267,7 @@ function zoomRoutine(){
 
                      let thisChunk=0, lastChunk=0;
                     let vibrateArray= Array();
-
+                            let error;
                     function mcphrth(){
      if(window.haptic){
          let vibrateArrayNew=[];
@@ -3221,6 +3221,7 @@ let tolerance=0;//(1024-26)/10000
                                                                      else break;
                                                                  }
                                                                  */
+                                                                 
                                                                  for(n=1;n<111;n++)
                                                                  {
                                                                      let plusOrMinusPowerSeries = (totalAMP)**n*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
