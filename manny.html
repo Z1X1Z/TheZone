@@ -2944,7 +2944,7 @@ if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
 }
    
    if(multiplicatorNexus)hyperCore-=.5/log(.5);
-   if(continuumClover)hyperCore-=.75/log(.5);
+   if(continuumClover)hyperCore-=1.5/log(.5);
 
 //if(fieldPowerBoost)hyperCore+=1./log(.5);
    
@@ -3000,6 +3000,8 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
                
                    float variant4Correction=1.;
                                                            if(clvrVariant4)variant4Correction=(1.-oneOverLeafTruncated);
+                                                           float correction = zoom/(zoom-lfc*variant4Correction);
+
                if(wheel)m =  ((pWithoutChiralizer/lfc)
                                                         -coords.yx*2.*variant4Correction)*abs(coresIn/crs*2.-1.)
                                            *mandelCloverFactor//(1.-1./(leaf/truncator)*truncator)//uncertain term
@@ -3272,7 +3274,7 @@ if(Spoker){
 
                                 }
 
-                        f s/=spoke_factorLarge;//engage ; s/=2.+'superspokes'
+                         if(!wheel) s/=spoke_factorLarge;//engage ; s/=2.+'superspokes'
                           
                          float coreFactor =downSpoke;
                        //  if(!inMainSpoke) coreFactor/=dstnce;
@@ -3359,24 +3361,35 @@ else //if(  0.>=hyperCoreBoosted)
              }
     }
  }
-
+dstnce=length(coords);
    if(continuumClover&&lfc!=0.){//engage continualization
-       float continuumCore=(continuumCounter+hyperCoreOUTPUT)*zoom/(lfc*variant4Correction-zoom);
+       float continuumCore=(continuumCounter+hyperCoreOUTPUT)*correction;
+
        if(loops+counter<=hyperCoreBoosted+continuumCounter)
        {
+          if(dstnce<2./3.) s+=coords.yx*correction;
+
+           //coords.yx*coords.yx*vec2(sign(coords.y),sign(coords.x))
        s/=pow(2.,pow(.5,continuumCore));
-      
+
+
        hyperCoreBoosted+=continuumCore;
        hyperCoreOUTPUT+=continuumCore;
        
        }
        else
 {
+//s+=coords.yx*correction;
+//if(dstnce>2./3.)s+=correction/(coords.yx-vec2(sign(coords.y),sign(coords.x))*2./3.)*2.;
+
+   if(dstnce<2./3.)s-=coords.yx*correction;
+
     hyperCoreBoosted-=continuumCore;
     hyperCoreOUTPUT-=continuumCore;
     
            
        }
+
     }
    
    
@@ -4367,7 +4380,7 @@ if((volume!=1.&&Pointers)||(volume==1.&&!Pointers))
 oopm=oppositeOfPitchMarker(r);//seems like volume should be zero if touchmode, it's not, and causes black screen
 
 vec2 spunC=coords.yx;
-
+//if(continuumClover&&colorCombo<=10)spunC*=1.5;
 if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time*rate,PI2));}
 vec2 backGround=p;
 if (colorCombo!=20)backGround=freed(p*zoom+spunC);
