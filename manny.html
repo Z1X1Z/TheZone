@@ -365,11 +365,11 @@ radialWarp=b;
                        <label for="StackOctaves">Concentric Octaves![.k]</label><br>
                
                <input type="checkbox" id="Haptic" name="t"  onclick= "window.haptic = !window.haptic; mcphrth();">
-               <label for="Haptic">Haptic Song(Android)</label>
+               <label for="Haptic">Haptic Song (Android)</label>
                <br>
                
                <input type="checkbox" id="Haptic2" name="t"  onclick= "window.haptic2 = !window.haptic2; mcphrth();">
-               <label for="Haptic2">Haptic Implosion(Android)</label>
+               <label for="Haptic2">Haptic Implosion (Android)</label>
                <br>
               <input type="checkbox" id="Game On" name="t"  onclick= "
                   key  = 'e';
@@ -918,11 +918,12 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                  <button class="dropbtn">Clvr2
                                  <div  id="m4" class="dropdown-content">
                                      
-                                     
-                                     <input type="checkbox" id="squareClover" name="t"  onclick= "
-                                         key  = 'q';
-                                         callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
-                                      <label for="squareClover">Square Clover![,q]</label><br>
+                                      <input type="checkbox" id="squareClover" name="t"  onclick= "
+                                          key  = 'q';
+                                          callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                                       <label for="squareClover">Square Clover![,q]</label><br>
+                                       
+                                       
                                       <input type="checkbox" id="sphereClover" name="t"  onclick= "
                                           key  = 'f';
                                           callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
@@ -1032,6 +1033,11 @@ uniforms.baseN.value=document.getElementById('Base Number').value">
             </form>
 [?]
 <br>
+
+<a id="whirl" name="t"  onclick= "
+key  = 'i';
+callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
+Whirl![.i]</a><br>
 
 <a id="leapIn" name="t"  onclick= "
 key  = 'C';
@@ -1669,6 +1675,7 @@ void main(){
     
     uniform bool superStable;
     uniform bool spinTowardsMe;
+    uniform float whirlpool;
     uniform bool distributor;
     uniform float largeEyeColor;
     uniform float cloverOffset;
@@ -2744,7 +2751,6 @@ vec3 tol(vec2 p, vec2 t){
                         if(externalCores==0.)p/=1.25;
                          vec2 pWithoutChiralizer = p;
                          
-                         
       float chiralAdjustment = 0.;
 
                          if(chirality==-1&&twelveGates){
@@ -3437,7 +3443,21 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<2./
     )
     && 0.<=hyperCoreBoosted&&externalCores!=0.)
 {
+    
+   float wise = 1.;
+   /*
+   if(whirlpool!=0.){
+       
+       if(mod(float(i),4.)==0.)wise=1.;
+       else if(mod(float(i),4.)==1.)wise=-2.;
+       else  if(mod(float(i),4.)==2.)wise= -1.;
+       else  if(mod(float(i),4.)==3.)wise=2.;
+       s=spin2(s,wise*whirlpool*length(s)*.75/3.*PI);
+       
+}
+   */
     if(spinTowardsMe) if(float(i)>=hyperCoreBoosted)s=spin2(s,atan(d.y,d.x));
+
    // if(distributor)s=spin2(s,distributorFACTOR);
    float cloverOrDaisyOnTop = counter;
    if(twelveGates)cloverOrDaisyOnTop=counter+1.;
@@ -3531,14 +3551,11 @@ OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
       
       
       
+      if(mod(float(i),4.)==0.)wise=1.;
+      else if(mod(float(i),4.)==1.)wise=-1.;
+      else  if(mod(float(i),4.)==2.)wise= -1.;
+      else  if(mod(float(i),4.)==3.)wise=1.;
       
-     float wise = 1.;
-     
-     if(mod(float(i),4.)==0.)wise=1.;
-     else if(mod(float(i),4.)==1.)wise=-1.;
-     else  if(mod(float(i),4.)==2.)wise= -1.;
-     else  if(mod(float(i),4.)==3.)wise=1.;
-     
      
         s=spin2(s,time*wise*metaCarousel*(1.+OmniPetal/6.)*rate);
         
@@ -4382,8 +4399,12 @@ oopm=oppositeOfPitchMarker(r);//seems like volume should be zero if touchmode, i
 vec2 spunC=coords.yx;
 //if(continuumClover&&colorCombo<=10)spunC*=1.5;
 if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time*rate,PI2));}
+
 vec2 backGround=p;
-if (colorCombo!=20)backGround=freed(p*zoom+spunC);
+
+if (colorCombo!=20)backGround=freed(backGround*zoom+spunC);
+if(whirlpool!=0.)backGround=spin2(backGround,whirlpool*length(backGround)*.75/6.*PI/(zoom-length(coords)));
+
 if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time*rate,PI2));
 float xenOctaveFactor =4.;
 

@@ -138,7 +138,8 @@ duperZoom: {value:1.},
         mandelCloverFactor:{value:.26},
 exponentialPetals:{value:0.},
 cloverOffset:{value:0.},
-spinTowardsMe:{value:false}
+spinTowardsMe:{value:false},
+whirlpool:{value:0}
         }
 window.uniforms={}
 
@@ -470,7 +471,15 @@ function callKey(event){
         else if( uniforms.exponentialPetals.value==-1.) uniforms.exponentialPetals.value=0.;
         
     }
-    else if (event.altKey&&(key=="˜"||key=="ñ"||key=="n"))uniforms.twelveGates.value=!uniforms.twelveGates.value;
+    else if (event.altKey&&(key=="i"||key=="ˆ"))//dead
+    {
+       if( uniforms.whirlpool.value==0) uniforms.whirlpool.value=1;
+        else if ( uniforms.whirlpool.value==1) uniforms.whirlpool.value=-1;
+        else if  (uniforms.whirlpool.value==-1) uniforms.whirlpool.value=0;
+    }
+
+    else if (event.altKey&&(key=="˜"||key=="ñ"||key=="n"))//dead
+        uniforms.twelveGates.value=!uniforms.twelveGates.value;
     else if (event.altKey&&(key=="∆"||key=="j"))
     {
         uniforms.Pointers.value=!uniforms.Pointers.value;
