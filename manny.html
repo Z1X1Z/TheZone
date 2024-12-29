@@ -4403,7 +4403,10 @@ if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time*rate,PI2));}
 vec2 backGround=p;
 
 if (colorCombo!=20)backGround=freed(backGround*zoom+spunC);
-if(whirlpool!=0.)backGround=spin2(backGround,whirlpool*length(backGround)*.75/6.*PI/(zoom-length(coords)));
+
+float lfc=length(freed(coords));
+
+if(whirlpool!=0.)backGround=spin2(backGround,whirlpool*length(backGround)*.75/6.*PI/abs(zoom-lfc));
 
 if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time*rate,PI2));
 float xenOctaveFactor =4.;
@@ -4422,8 +4425,6 @@ if(exponentialPetals!=0.)backGround=spin2(vec2(backGround.x,exponentialPetals*ba
 vec2 dance = vec2(0.);
                                    vec2 dance2 = vec2(0.);
            if (morph>.5){
-               float lfc=length(freed(coords));
-
                 dance = //vec2(-sin(time+time2dance), -sin(time*-gr))*zoom+
                 vec2((spunC.x),abs(spunC.y))*log(lfc);
                 //heart dance
