@@ -313,11 +313,11 @@ let maxLetterDepth=-1;
           <div id="m1" class="dropdown-content">
               <!--https://www.w3schools.com/tags/att_input_type_number.asp this is the link for the below number code profile-->
             <!--  <label for="pitch Sample Size">pitch detection frames (1-2048):</label>
-             <input type="number" id="pitch Sample Size" name="pitch Sample Size" class="num" min="1" max = "2048" onkeydown="Math.floor(fractionOfFrame=document.getElementById('pitch Sample Size').value)">
+             <input type="number" id="pitch Sample Size" name="pitch Sample Size" class="num" min="1" max = "2048" onkeyup="Math.floor(fractionOfFrame=document.getElementById('pitch Sample Size').value)">
                  </p>
             -->
             <label for="ConcertKey">THE A Key Frequency (Should probably be "Concert A" 440 hz):</label>
-           <input type="number" id="ConcertKey" name="ConcertKey" class="num" onkeydown="
+           <input type="number" id="ConcertKey" name="ConcertKey" class="num" onkeyup="
                 number = false
 ;
           // if(document.getElementById('ConcertKey').value!=0)
@@ -325,7 +325,7 @@ let maxLetterDepth=-1;
                <br>
                
                <label for="TouchVolume">Touch Volume (0-1?):</label>
-              <input type="number" id="TouchVolume" name="TouchVolume" class="num" onkeydown="
+              <input type="number" id="TouchVolume" name="TouchVolume" class="num" onkeyup="
                                    number = false
 ;
                    window.touchVolume=document.getElementById('TouchVolume').value
@@ -339,7 +339,7 @@ let maxLetterDepth=-1;
                   <br>
                   
                <label for="RadialWarp">Magnify rate of the octave, radially by</label>
-              <input type="number" id="RadialWarp" name="RadialWarp" class="num" onkeydown="
+              <input type="number" id="RadialWarp" name="RadialWarp" class="num" onkeyup="
                 number = false
 ;
                     let b=document.getElementById('RadialWarp').value;
@@ -350,7 +350,7 @@ radialWarp=b;
 ">
                   <br>
                   <label for="fretCount">Fruits(max 1365)[a]</label>
-                  <input type="number" id="fretCount" name="fretCount" class="num" onkeydown="
+                  <input type="number" id="fretCount" name="fretCount" class="num" onkeyup="
                           number = document.getElementById('fretCount').value;
                           key  = 'a';
                           if(!isNaN(number)){
@@ -566,7 +566,7 @@ radialWarp=b;
                    <label for="manualStar">Manual Star![.g]</label><br>
                    
                <label for="Note Skew">Semitones detuned</label>
-               <input type="number" id="Note Skew" name="Note Skew" class="num" onkeydown="
+               <input type="number" id="Note Skew" name="Note Skew" class="num" onkeyup="
                                                                number = false
 ;
                        window.twist-=window.skew
@@ -629,7 +629,7 @@ radialWarp=b;
                Reset Movement![0]</a><br>
                
                <label for="movementSpeed">Movement Speed[0]</label>
-               <input type="number" id="movementSpeed" name="movementSpeed" class="num" onkeydown="
+               <input type="number" id="movementSpeed" name="movementSpeed" class="num" onkeyup="
                        number = document.getElementById('movementSpeed').value;
                        key  = '0';
                        if(!isNaN(number)){
@@ -639,7 +639,7 @@ radialWarp=b;
                    <br>
                    
                    <label for="zoomSpeed">Zoom Speed[\]</label>
-                   <input type="number" id="zoomSpeed" name="zoomSpeed" class="num" onkeydown="
+                   <input type="number" id="zoomSpeed" name="zoomSpeed" class="num" onkeyup="
                            number = document.getElementById('zoomSpeed').value;
                            key  = '\\';
                            if(!isNaN(number)){
@@ -660,7 +660,7 @@ radialWarp=b;
                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                        Reset Zoom![\]</a><br>
                        <label for="Trail Length">Trail Seconds[/]</label>
-                       <input type="number" id="Trail Length" name="Trail Length" class="num" onkeydown="
+                       <input type="number" id="Trail Length" name="Trail Length" class="num" onkeyup="
                                number = document.getElementById('Trail Length').value;
                                key  = '/';
                                if(!isNaN(number)){
@@ -771,7 +771,7 @@ radialWarp=b;
                   Flop Chirality![|]</a><br>
               
               <label for="CloverTwist">Twist offset:</label>
-             <input type="number" id="CloverTwist" name="CloverTwist" class="num" onkeydown="
+             <input type="number" id="CloverTwist" name="CloverTwist" class="num" onkeyup="
                 number = false
 ;
 uniforms.cloverOffset.value=document.getElementById('CloverTwist').value/6.">
@@ -787,7 +787,7 @@ uniforms.cloverOffset.value=document.getElementById('CloverTwist').value/6.">
                  Remove a petal![y]</a><br>
                  <!--https://www.w3schools.com/tags/att_input_type_number.asp this is the link for the below number code profile-->
                  <label for="petalCount">Petal Quantity:</label>
-                <input type="number" id="petalCount" name="petalCount" class="num" onkeydown="
+                <input type="number" id="petalCount" name="petalCount" class="num" onkeyup="
                 number = false
 ;
 uniforms.petals.value=document.getElementById('petalCount').value-6.">
@@ -799,7 +799,7 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
            <label for="omniCore">omniCORE![,o]</label><br>
               
                     <label for="coringConstant">Coring Value (>0.):</label>
-                   <input type="number" id="coringConstant" name="coringConstant" class="num" onkeydown="
+                   <input type="number" id="coringConstant" name="coringConstant" class="num" onkeyup="
                 number = false
 ;
                        var coreNUM=document.getElementById('coringConstant').value;
@@ -891,7 +891,7 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                      <label for="twelveGates">Daisies?![.n]</label><br>
                                      
                                      <label for="metaGates">Meta Daisies Every?![.m]:</label>
-                                     <input type="number" id="metaGates" name="CloverTwist" class="num" onkeydown="
+                                     <input type="number" id="metaGates" name="CloverTwist" class="num" onkeyup="
                                         number = false
 ;
                         uniforms.twelveGatesMeta.value=document.getElementById('metaGates').value">
@@ -931,7 +931,7 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                        
                                        
                                      <label for="Base Number">Log base this of x^3 (maybe 1.5-4):</label>
-                                    <input type="number" id="Base Number" name="Base Number" class="num" onkeydown="
+                                    <input type="number" id="Base Number" name="Base Number" class="num" onkeyup="
                 number = false
 ;
 uniforms.baseN.value=document.getElementById('Base Number').value">
@@ -1074,7 +1074,7 @@ Reset Zoom![L]</a><br>
                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                   <label for="Wheel">Wheel![m]</label><br>
                   <label for="mandelCloverSize">Wheel Degree:[m]</label>
-                  <input type="number" id="mandelCloverSize" name="mandelCloverSize" class="num" onkeydown="
+                  <input type="number" id="mandelCloverSize" name="mandelCloverSize" class="num" onkeyup="
                                                  number = false
 ;
                                  uniforms.mandelCloverFactor.value=document.getElementById('mandelCloverSize').value
@@ -1183,7 +1183,7 @@ Reset Zoom![L]</a><br>
           <button class="dropbtn">Rez
           <div id="resolutionDropContent" class="dropdown-content" style="column-count: 1">
               <label for="rez">Pixels per pixel</label>
-             <input type="number" id="rez" name="rez" class="num" onkeydown="
+             <input type="number" id="rez" name="rez" class="num" onkeyup="
                             rez=window.devicePixelRatio/document.getElementById('rez').value
                             renderer.setPixelRatio( rez);
                             ">
@@ -1613,6 +1613,7 @@ ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
         
         uniform int eden;
 
+
         const float PI = 3.14159274;
         const float gr = -cos(216.*PI/180.)/-cos(612.*PI/180.)-1.;
                               const float leaf = -1.32471795;
@@ -1818,7 +1819,9 @@ uniform float exponentialPetals;
 
 
                                   
-                                  
+                                  const float twoThirds = 2./3.;
+                                  const float sqrt2 = sqrt(2.);
+
                                   const float PI = 3.14159274;
                                   const float PI2 = PI*2.;
                                   const float divideByMultiplyingPi = 1./PI;
@@ -2139,7 +2142,7 @@ ret= vec4(clamp(
                                       3.*(z.x+abs(z.y)),
                                       z.y*timesForBottom+abs(z.x))
                                *(1./length(z))
-                              /iterations*2./3.*timesForBottom;//*(1.-length(g));
+                              /iterations*twoThirds*timesForBottom;//*(1.-length(g));
                               
                            }
                        return h;
@@ -2345,7 +2348,7 @@ return h;
           d=length(z)*441.144;
           }
       else negator = 0.;
-     return vec3(-sin(d +time*3.+6.28318/3.),-sin(d+time*3.+6.28318*2./3.),-sin(d+time*3.))*negator;
+     return vec3(-sin(d +time*3.+PI2/3.),-sin(d+time*3.+PI2*twoThirds),-sin(d+time*3.))*negator;
 
       }
 
@@ -2602,15 +2605,15 @@ vec3 faceFORWARD(vec2 p,vec2 t){
             vec2 s=p;
 
         float l=0.;
-          float love1 =  mod(timeDilated*.3247,1.);
-                  float love2 =  mod(timeDilated*.618,1.);              float love3 =  mod(timeDilated,1.);
+          float love1 =  mod(timeDilated*(-1.-leaf),1.);
+                  float love2 =  mod(timeDilated*(gr-1.),1.);              float love3 =  mod(timeDilated,1.);
         for (int f=0;f<15;f+=1){//turn f<21 for just seven eyed
                     s=love2*vec2(-1./(s.x*s.x-s.y*s.y-p.x), 2.0*s.x*s.y-p.y);//this is {s=s^2-p;s.real=-1./s.real}
             s=-vec2(s.y/((s.y/(s.y-s.x)*love3-(s.y))), -pow(abs(s.y/(s.y/(s.x-s.y)*love3-s.y*love2)),2.*1./love3));//this is {s=s^2-p;s.real=-1./s.real}
             //  s           *= vec2(s.y,s.x);
                   }
                 s=-vec2(s.y/((s.y/(s.y-s.x)*love3-(s.y))), -pow(abs(s.y/(s.y/(s.x-s.y)*love3-s.y*love2)),2.*1./love3));//this is {s=s^2-p;s.real=-1./s.real}
-        float centralPowerInverter=(s.x/s.y)*sign(s.x*s.y)*2.618;
+        float centralPowerInverter=(s.x/s.y)*sign(s.x*s.y)*(gr+1.);
             //I was studying this function without the face and a power short ocurred and on firefox window restore and caused a semi-reversion hybridization
         l=1.;// / //1.-
            // centralPowerInverter;
@@ -2739,6 +2742,9 @@ return vec3(l+b+r+h);}
                                   
                         const float distributorFACTORorth=PI/6.;
                                   const float distributorFACTORloveORTH= distributorFACTORorth;//*sqrt(2)
+                                  
+                              const    float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;
+
 vec3 tol(vec2 p, vec2 t){
                          bool inMainSpoke = false;
                         vec2 resCale = (resolution.yx/max(resolution.x,resolution.y));
@@ -2757,7 +2763,7 @@ vec3 tol(vec2 p, vec2 t){
                          chiralAdjustment=-PI2/24.;
                          p=spin2(p,-chiralAdjustment);}
                          else if(chirality==-1){
-                         chiralAdjustment=-PI/2.;
+                         chiralAdjustment=-PIdiv2;
                          p=spin2(p,-chiralAdjustment);}
                          if(cloverOffset!=0.)p=spin2(p,cloverOffset*PI2);
                     
@@ -2816,7 +2822,7 @@ const float crs = 60.;//this is the mandelbrot and original inheritance colormod
  float centerslide = 0.;
 
  for(int i=0;i<int(crs);//crs+3=63
-                  i++)if(c<2./3.
+                  i++)if(c<twoThirds
                          &&loops+centerslide<cored
                          )
                         {
@@ -2843,7 +2849,7 @@ const float crs = 60.;//this is the mandelbrot and original inheritance colormod
                       loops++;coresIn++;
                         }
  else break;
- bool inCenterCore =c<2./3.;
+ bool inCenterCore =c<twoThirds;
 
 // if(refactorCores!=1.){s*=(1.+lfc/2.);c*=(1.+lfc/2.);}
 
@@ -2863,7 +2869,7 @@ if(fieldPowerBoost){
 
  coresIn+=upCoreCycler;
 //  else if(zoom>1.)for(int i=0;i<int(crs); i++)if(c>4./3.&&loops<-cored){s/=2.;c/=2.;loops++;coresIn++;}else break;//UpCore not in use here, but rather in the starshipMod
-//for(int i=0;i<int(crs); i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
+//for(int i=0;i<int(crs); i++)if(c<twoThirds&&loops<cored){s*=2.;c*=2.;loops++;coresIn++;}else break;
 
 if(SPHEREofTheLORD)s *= (length(s)-zoom/lfc/2.);
 
@@ -2890,7 +2896,7 @@ if(clvrVariant7)pcs=vec2(
    /*if(morph<.5)
    CORE_DELIMITER=1./1.32471795724474;//try different truncations of  -1.3247179572447460259609088544780973407344040569017333645340150503028278512455475940546993479817872803299109209947422074251089026390458977955943147570967234717541668390388674187517369315842535499082466223545337273504589879909568150627745509802486213012169894157524574548625075626524610368938904839932269952074975962828868556908150704513696109853352577281586033441141927828273765296032993584674231028483241695239006108543338219;
 else {
-CORE_DELIMITER=2./3.;//t*=1.5;
+CORE_DELIMITER=twoThirds;//t*=1.5;
 }
 */
 loops=0.;
@@ -2901,7 +2907,6 @@ float hyperCore=0.;
 
 
 
-float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;
 
 //.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
 //log stabalization constant seems to be 1./log(3.)+(1.-1./log(3.))/1.5 from 1./log(3.)+(1.-1./log(3.))/2.
@@ -2915,7 +2920,7 @@ float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;
 
    float dif = 1.;//3.-(1.-.47805268028830)/3.;
 if(MetaCored)hyperCore=
-   cored/1.5+log(lfc)*logStabilizationConstant;
+   cored*twoThirds+log(lfc)*logStabilizationConstant;
     
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 
@@ -2923,7 +2928,7 @@ else hyperCore=externalCores;//hyperCore is really better thought of as hyperMet
 //float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
 float equilibriator = 1.;
 if(dilate){
-if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
+if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
    //this is to allow top level core freeze for original clover
   hyperCore*=equilibriator;
    }
@@ -3043,7 +3048,7 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
                              //if(zoom<.00000075)
                         /*  hyperCoreBoosted=uber.z+
                             (
-                             log(duperZoom)/log(.5)*2./3.+log(length(coordSHIFT))
+                             log(duperZoom)/log(.5)*twoThirds+log(length(coordSHIFT))
                              *4./3./(1./log(3.)+(1.-1./log(3.)  ))/1.75
                              )*log(2.)/log(metaCoreDriveFactor)+loops;
                              */
@@ -3098,13 +3103,13 @@ else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter
 
                            // if(!true&&morph<.5)CORE_DELIMITER=1./dstnce*pow(2.,4./12.)*equilibriator;
                             
-  // if( loopSolid>=hyperCoreBoosted+1.||inCenterCore){//||lengthP<2./3.){//so it doesn't run until it needs to, hopefully working
+  // if( loopSolid>=hyperCoreBoosted+1.||inCenterCore){//||lengthP<twoThirds){//so it doesn't run until it needs to, hopefully working
   dstnce = length(s);
 
   vec2 deSplicedS = s;
   if(gated)deSplicedS=spin2(deSplicedS,-PI/6.);
 
-       if(spirated!=0.&&dstnce<2./3.)//CORE_DELIMITER)  //works well<(n-1)/n
+       if(spirated!=0.&&dstnce<twoThirds)//CORE_DELIMITER)  //works well<(n-1)/n
 s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
 dstnce = length(s);
 
@@ -3129,7 +3134,7 @@ dstnce = length(s);
                 //return beta;
         }
 
-                 if(dstnce<2./3.||(spokesVisualizeColors&&dstnce<4./3.)) if(vUv.x!=0.&&vUv.y!=0.&&vUv.x!=1.&&vUv.y!=1.){
+                 if(dstnce<twoThirds||(spokesVisualizeColors&&dstnce<4./3.)) if(vUv.x!=0.&&vUv.y!=0.&&vUv.x!=1.&&vUv.y!=1.){
                     float decayCanceller=1.;
                     if(spokesVisualizeColors)decayCanceller = 2.;
                     //if(morph!=0.)decayCanceller=decayCanceller*decayCanceller;
@@ -3149,11 +3154,11 @@ dstnce = length(s);
                  int march= int(mod(initialHyperCoreBoosted,4.));
                  float color = 1.;
                  if (march==1||march==3)color = -1.;
-                 if(dstnce<2./3.)
+                 if(dstnce<twoThirds)
                  {
                      vec2 move =-d.yx*volume/8.;
-                   if(march==0||march==3)oo+=color*(sealedMan(deSplicedS*5.,move)+faceFORWARDTWO(deSplicedS*5.+vec2(2.,0.),vec2(0.))/1.5);
-                   else oo+=color*(sealedWoman(deSplicedS*5.,move)+kissingEagles(deSplicedS*5.)/1.5);
+                   if(march==0||march==3)oo+=color*(sealedMan(deSplicedS*5.,move)+faceFORWARDTWO(deSplicedS*5.+vec2(2.,0.),vec2(0.))*twoThirds);
+                   else oo+=color*(sealedWoman(deSplicedS*5.,move)+kissingEagles(deSplicedS*5.)*twoThirds);
                  }
                                           
             }
@@ -3326,7 +3331,7 @@ float powerOfSpokeCore =spoke_factorLarge*lfc/dstnce;// uncertain value,takes la
 
 if(counter+dstnce*dstnce //sqrt(sqrt(dstnce)*dstnce)*dstnce
    <hyperCoreBoosted){
-   //  if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
+   //  if(continuumClover) s*=sqrt2;//engage shiny spokelover
      //else
 
     // if(distributor) s=spin2(s,distributorFACTORlove);
@@ -3336,7 +3341,7 @@ if(counter+dstnce*dstnce //sqrt(sqrt(dstnce)*dstnce)*dstnce
          else s=spin2(s,-distributorFACTORlove);
 
          }
-     s/=sqrt(2.);
+     s/=sqrt2;
      
      if(!wheel){
      //float b =pow(pow(abs(downSpoke),powerOfDynamicSokeCoreUp),grOverLeaf);
@@ -3352,7 +3357,7 @@ if(counter+dstnce*dstnce //sqrt(sqrt(dstnce)*dstnce)*dstnce
 
 else //if(  0.>=hyperCoreBoosted)
 {
-    s*=sqrt(2.)/1.5;
+    s*=sqrt2*twoThirds;
     // dstnce=length(s);
 
     if(!wheel)
@@ -3373,7 +3378,7 @@ dstnce=length(coords);
 
        if(loops+counter<=hyperCoreBoosted+continuumCounter)
        {
-          if(dstnce<2./3.) s+=coords.yx*correction;
+          if(dstnce<twoThirds) s+=coords.yx*correction;
 
            //coords.yx*coords.yx*vec2(sign(coords.y),sign(coords.x))
        s/=pow(2.,pow(.5,continuumCore));
@@ -3386,9 +3391,9 @@ dstnce=length(coords);
        else
 {
 //s+=coords.yx*correction;
-//if(dstnce>2./3.)s+=correction/(coords.yx-vec2(sign(coords.y),sign(coords.x))*2./3.)*2.;
+//if(dstnce>twoThirds)s+=correction/(coords.yx-vec2(sign(coords.y),sign(coords.x))*twoThirds)*2.;
 
-   if(dstnce<2./3.)s-=coords.yx*correction;
+   if(dstnce<twoThirds)s-=coords.yx*correction;
 
     hyperCoreBoosted-=continuumCore;
     hyperCoreOUTPUT-=continuumCore;
@@ -3439,7 +3444,7 @@ dstnce = length(s);
               gated = false;
 
 for(int i=0;i<40; i++)//metacoreloop
-if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.))
+if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<twoThirds))
     )
     && 0.<=hyperCoreBoosted&&externalCores!=0.)
 {
@@ -3541,7 +3546,7 @@ OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
    }
    
    if(fieldPowerBoostMeta&&(float(i)>=hyperCoreBoosted)){
-       float powerBoost =eConstant*(log(.5)*dstnce*(sqrt(2.))/1.5);
+       float powerBoost =eConstant*(log(.5)*dstnce*(sqrt2)*twoThirds);
        s*=pow(dstnce,powerBoost);
        dstnce*=pow(dstnce,powerBoost);
 
@@ -3689,7 +3694,7 @@ o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z)
                       o*=isBlack;
                       o+=(isBlack-1.)*100.;
                       o+=isGrey;
-                      if(length(p-coords.yx)<2.*sqrt(2.)/min(resolution.x,resolution.y)*zoom)o=vec3(hyperCoreOUTPUT/255.*4.,cored/255.*4.,255.);
+                      if(length(p-coords.yx)<2.*sqrt2/min(resolution.x,resolution.y)*zoom)o=vec3(hyperCoreOUTPUT/255.*4.,cored/255.*4.,255.);
 return clamp(o,0.,1.);}
 
                       
@@ -3935,7 +3940,7 @@ return
 
 
 
-const float brideWidth=1.26;
+const float brideWidth=1.27;
         vec3 bride(vec2 p,vec2 t){
                    float c=0.,l=0.,x=0.;
                    vec3 e = vec3(0.);
@@ -4063,12 +4068,12 @@ const float brideWidth=1.26;
                                   float c = length(p);
                                   float loops=1.;
                                                     vec2 s = p*1.5;
-                                  if(!MetaCored)for(int i=1;i<60; i++)if(c<2./3.&&loops<cored){s*=2.;c*=2.;loops++;}else break;
+                                  if(!MetaCored)for(int i=1;i<60; i++)if(c<twoThirds&&loops<cored){s*=2.;c*=2.;loops++;}else break;
                                   loops=0.;
                                   float hyperCore=0.;
                                   float lfc = length(freed(coords));
                                   if(outerCoresOff) hyperCore=0.;
-                                  else if(!MetaCored)hyperCore=cored*2./3.+log(lfc*3./2.)*0.9551195+.25/log(.5);//.9551195 is based on x=log3(x), x = .910239log3(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
+                                  else if(!MetaCored)hyperCore=cored*twoThirds+log(lfc*3./2.)*0.9551195+.25/log(.5);//.9551195 is based on x=log3(x), x = .910239log3(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
                                    // if(MetaCored&&morph>=.5)hyperCore*=4./3.;//engage overstable core if dancing
 
                                   float term=0.;
@@ -4077,7 +4082,7 @@ const float brideWidth=1.26;
                    float l=1.;
                   vec3 digorno=vec3(0.);
                    for (int f=0;f<41;f+=1)if(abs(s.y)<5.){
-                                      if(spirated!=0.&&length(s)<2./3.)   s*=length(s)*6.28/(atan(s.y,s.x)+PI);
+                                      if(spirated!=0.&&length(s)<twoThirds)   s*=length(s)*PI2/(atan(s.y,s.x)+PI);
 
                        if(f>0) s=vec2(s.x+s.y/(s.x*s.x + s.y*s.y), (1./(s.x*s.x + s.y*s.y))+zoom*1.5-1.);//this equation comes from the equation (x-1/((x - y*i)))=x.  This equation has no solutions, but upon feedback it gains solutions (technically this may require other steps too)
                        for (int counter=0;counter<15;counter+=1)if(abs(s.y)<1.5*(1.-zoom*1.5)){
@@ -4087,7 +4092,7 @@ const float brideWidth=1.26;
 
                             float d = length(s);
                             if(d<4./3.&&petals!=0.)s=spin2(s,atan(s.y,s.x)*petals/6.);
-                            for(int i=0;i<69; i++)if(!MetaCored&&d<2./3.&& loops+float(f)<hyperCore)
+                            for(int i=0;i<69; i++)if(!MetaCored&&d<twoThirds&& loops+float(f)<hyperCore)
                          {
                                float shift=2.;s*=shift;d*=shift;loops++;
 
@@ -4169,7 +4174,7 @@ vec3 xtol(vec2 s, vec2 t){
 
                                     if(MetaCored){
                                         float c = sqrt(s.y*s.y+s.x*s.x);
-                                        //for(int i=0;i<69; i++)if(c<2./3.&&i<int(cored)){p*=2.;c*=2.;}
+                                        //for(int i=0;i<69; i++)if(c<twoThirds&&i<int(cored)){p*=2.;c*=2.;}
                                         c/=h;
                                         if(c<h/2. &&f<int((cored/2.+log(length(freed(coords))*h/2.)+.5)/2.)){float shift=h;s*=shift;c*=shift;}
                                                                  }
@@ -4428,7 +4433,7 @@ vec2 dance = vec2(0.);
                 dance = //vec2(-sin(time+time2dance), -sin(time*-gr))*zoom+
                 vec2((spunC.x),abs(spunC.y))*log(lfc);
                 //heart dance
-                   dance2 = vec2(   -abs(lfc/(lfc-zoom)) -lfc/(lfc+zoom)*2./3.,
+                   dance2 = vec2(   -abs(lfc/(lfc-zoom)) -lfc/(lfc+zoom)*twoThirds,
                                      -((zoom*lfc)/(lfc+zoom)*sign(coords.y)*sign(coords.x)*(1.-lfc*zoom) )
                                        );//clover dance
              }
@@ -4438,7 +4443,7 @@ vec2 dance = vec2(0.);
                                                                                          
                                                      vec3 faceFORWARDbuffer = vec3 (1.);
                                                  vec3 zoomer=vec3(0.);
-                                                 vec2 t =vec2(lerp2(time),lerp2(time*.618));
+                                                 vec2 t =vec2(lerp2(time),lerp2(time*(gr-1.)));
                                                 t/=2.;
                                  vec2 move = d.yx*volume;
                                  vec2 moveDynamic=vec2(0.);
@@ -4553,7 +4558,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                        
                        vec2 lerper = vec2(lerp(time2dance));//,lerp(time2dance));
                        
-                        elbowed = -lerper.y*lerper.y+(-1.+lerper.y*lerper.y)*abs(characterOnTrailP.y*characterOnTrailP.y)/1.5;
+                        elbowed = -lerper.y*lerper.y+(-1.+lerper.y*lerper.y)*abs(characterOnTrailP.y*characterOnTrailP.y)*twoThirds;
                        if (elbowed<-1.)elbowed=-1.;
                        
                        clothes=robeL(characterOnTrailP,vec2(elbowed),move/5.)*.95;}
@@ -4911,7 +4916,7 @@ if(starOnDot>=1){
                                                             //   texture2D(videoTexture2,faceDimensionReversed).xyzw//over the top cam
                                                                  ;
                                                   vec4 layeredOUT =vec4(0.);
-                                                             if(length(p)<sqrt(2.)/min(resolution.x,resolution.y)) layeredOUT=vec4(zoomer,1.);
+                                                             if(length(p)<sqrt2/min(resolution.x,resolution.y)) layeredOUT=vec4(zoomer,1.);
                                 
                    
                                                              else if(length(p)<1.&&
