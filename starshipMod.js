@@ -1942,13 +1942,13 @@ else{aboveThreshold = false; on = false;}
        }
    }
     if(on)
-    {
+    
         move();
-        
+    
         spiral_compress();
         
         vectorize4();
-    }
+    
     let coreShift=0;
     for(var shift = 0.;shift<4;shift++)//find maximally different loudest note
        if (Math.abs(Math.abs((note*2)%24-loudestFret[shift].note%24)-24/2.)<Math.abs(coreShift-24/2.))
@@ -3217,7 +3217,7 @@ function calculatePitch ()
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance=0;//(1024-26)/10000
                                                          if(window.highORlow==0){
-                                                             if(totalAMP>0.&&isFinite(totalAMP))
+                                                             if(totalAMP>0.0001&&isFinite(totalAMP))
                                                              {
                                                                  let proportion= fractionOfFrame/bufferSize;
                                                                  let tAScaled=0.;//totalAMP*proportion;
