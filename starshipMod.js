@@ -973,7 +973,7 @@ function setDynamicSampler2ds(){
  }
 function setMicInputToStarPIXEL(){
              if(!touchMode//&&!DAW
-                ||(window.shouldShowStar&&totalAMP>.000001))
+                ||(window.shouldShowStar))
              {
                  
                  let withinMaxsafeSizeBins=(numberOfBins<=2**13)//(EldersLeg<=682);
@@ -1540,7 +1540,7 @@ function runOSMD (){
                                      if(zoomRate!=0&&!zoomAtl41) touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
                                         else touchMovement=[-xTouch/zoomFrames,yTouch/zoomFrames]
                                     if(!window.shouldShowStar||touchOnlyMode)uniforms[ "volume" ].value=1.;
-
+                                        else if (!(totalAMP>.000001))uniforms[ "volume" ].value=1.;
                                     uniforms["zoomOutRatchetThreshold" ].value=0.;;
 
                                     uniforms.d.value.x+=xTouchMicroBuffer/uniforms[ "volume" ].value;
@@ -1905,7 +1905,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
          else             uniforms.coreDilation.value=0.;
     
     
-    if(totalAMP>0.000001)
+    if(totalAMP>.000001)
     {
         lastPitch = pitch;
         // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
