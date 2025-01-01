@@ -393,19 +393,18 @@ let pushBackCounter = 0;
                                     
                                     
                                     
-                                    
+                                if(totalAMP>0){
+
                                 lastNote = note;
                                 note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
+         uniforms.note.value=note;
         const t =  (note +twist/2)*flip;
-                                                   if(isFinite(t))
-                                                   {                                                   uniforms.note.value=note;
-                                    
-                                    angle = -(t*radialWarp);
-                                    reversableColor=((uniforms.brelued.value*angle/12./((radialWarp>0)?radialWarp:1))*flip+twist/24.*uniforms.brelued.value+1./3.)%1.;
-                                    //if(uniforms.brelued.value==-1)reversableColor=.25-reversableColor;
-                                    
-                                    colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);
-                                }
+                            if(isFinite(t))angle = -(t*radialWarp);
+                             reversableColor=((uniforms.brelued.value*angle/12./((radialWarp>0)?radialWarp:1))*flip+twist/24.*uniforms.brelued.value+1./3.)%1.;
+             //if(uniforms.brelued.value==-1)reversableColor=.25-reversableColor;
+
+                            colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);
+                            }
             if(on)
             {
             const colortone = note/lightingScaleTrail;
@@ -1899,17 +1898,17 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
          else             uniforms.coreDilation.value=0.;
     
     
-    
-    
-    lastPitch = pitch;
-   // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
-    pitch = audioX.sampleRate/calculatePitch();
-    const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
-    if(!notNyquist&&totalAMP>0.) pitch = lastPitch;
 
-    
-    
-if (isFinite(pitch) &&pitch>0&& notNyquist &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
+    if(totalAMP>0.)
+    {
+        lastPitch = pitch;
+        // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
+        pitch = audioX.sampleRate/calculatePitch();
+    }
+    const nyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
+    if(!nyquist&&totalAMP>0.) pitch = lastPitch;
+
+if (isFinite(pitch) &&pitch>0&& nyquist &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
     aboveThreshold = true;
     on = true;
 }
