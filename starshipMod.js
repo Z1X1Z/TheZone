@@ -396,7 +396,6 @@ let pushBackCounter = 0;
                                     
                                 lastNote = note;
                                 note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
-                                if(totalAMP>0){
          uniforms.note.value=note;
         const t =  (note +twist/2)*flip;
                             if(isFinite(t))angle = -(t*radialWarp);
@@ -404,7 +403,7 @@ let pushBackCounter = 0;
              //if(uniforms.brelued.value==-1)reversableColor=.25-reversableColor;
 
                             colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);
-                            }
+                            
             if(on)
             {
             const colortone = note/lightingScaleTrail;
@@ -1891,7 +1890,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
         totalAMP/=inputData.length;
                        // if(window.android)totalAMP=totalAMP**.5/8.;//may not work as intended on all platforms, if at all
                      //   else if(iOS)totalAMP=totalAMP*2.;//may not work as intended on all platforms, if at all
-    uniforms["totalAmp" ].value=totalAMP;
+    if(totalAMP!=0.)uniforms["totalAmp" ].value=totalAMP;
      if(window.ISdilated)
      uniforms.coreDilation.value=.5+.5*totalAMP**2.*Math.sqrt(24.)*2.;
       //   console.log(uniforms.coreDilation.value)
@@ -1904,7 +1903,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
    // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
     pitch = audioX.sampleRate/calculatePitch();
     const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
-    if(!notNyquist) pitch = lastPitch;
+    if(!notNyquist&&totalAMP>0.) pitch = lastPitch;
 
     
     
