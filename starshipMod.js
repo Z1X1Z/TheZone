@@ -448,9 +448,11 @@ let pushBackCounter = 0;
                  pongRoutine(d_x,d_y);
                             d_x*=flatline;
                             d_y*=flatline
-                            uniforms.d.value.x+=d_x;
-                                uniforms.d.value.y+=d_y;
-
+                            if(on&&totalAMP>0)
+                            {
+             uniforms.d.value.x=d_x;
+             uniforms.d.value.y=d_y;
+         }
                                
                                FEEDBACKuniforms.d.value=new THREE.Vector2(d_x,d_y);
                                FEEDBACKuniformsFlip.d.value=new THREE.Vector2(d_x,d_y);
@@ -1495,6 +1497,8 @@ function runOSMD (){
                                 let TouchMicroizer = false;
                function executeTouchRegime(){
                    
+                                                     uniforms.d.value.x = 0.;
+                                                     uniforms.d.value.y = 0.;
                    let coordinator = pixelShaderSize/2./minimumDimension*movementRate;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
                    if(xTouch==0&&yTouch==0&&!TouchMicroizer)
                    {
@@ -1901,14 +1905,14 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
          else             uniforms.coreDilation.value=0.;
     
     
-    
-    
-    lastPitch = pitch;
-   // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
-    pitch = audioX.sampleRate/calculatePitch();
-    const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
-    if(!notNyquist&&totalAMP>0.) pitch = lastPitch;
-
+    if(totalAMP>0.)
+    {
+        lastPitch = pitch;
+        // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
+        pitch = audioX.sampleRate/calculatePitch();
+        const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
+        if(!notNyquist&&totalAMP>0.) pitch = lastPitch;
+   
     
     
 if (isFinite(pitch) &&pitch>0&& notNyquist &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
@@ -1916,8 +1920,9 @@ if (isFinite(pitch) &&pitch>0&& notNyquist &&pitch!=-1&&totalAMP>zoomOutRatchetT
     on = true;
 }
 else{aboveThreshold = false; on = false;}
-    
-  
+
+    }else{aboveThreshold = false; on = false;}
+
     
            if(window.volumeSpeed&&on)
            {
@@ -3179,8 +3184,6 @@ for(var n = 0; n<targets.length;n++){
                      if (!iOS||(iOS&&dupered)) boot();//generate clover in 64 bit, duper Core, there is a bug after maybe half a day on iOS in bigTree.js (maybe also on safari Mac)
 
                                                        
-                                                                                         uniforms.d.value.x = 0.;
-                                                                                         uniforms.d.value.y = 0.;
                                                                        animateLoopId=                   window.requestAnimationFrame( animate );
                             //  renderer.forceContextLoss ()
                             //  renderer.forceContextRestore ( )
