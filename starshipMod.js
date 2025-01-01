@@ -1496,6 +1496,9 @@ function runOSMD (){
                                 let TouchMicroizer = false;
                function executeTouchRegime(){
                    
+                                                     uniforms.d.value.x = 0.;
+                                                     uniforms.d.value.y = 0.;
+                   
                    let coordinator = pixelShaderSize/2./minimumDimension*movementRate;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
                    if(xTouch==0&&yTouch==0&&!TouchMicroizer)
                    {
@@ -3180,8 +3183,6 @@ for(var n = 0; n<targets.length;n++){
                      if (!iOS||(iOS&&dupered)) boot();//generate clover in 64 bit, duper Core, there is a bug after maybe half a day on iOS in bigTree.js (maybe also on safari Mac)
 
                                                        
-                                                                                         uniforms.d.value.x = 0.;
-                                                                                         uniforms.d.value.y = 0.;
                                                                        animateLoopId=                   window.requestAnimationFrame( animate );
                             //  renderer.forceContextLoss ()
                             //  renderer.forceContextRestore ( )
