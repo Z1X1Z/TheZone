@@ -1904,12 +1904,11 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
     lastPitch = pitch;
    // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
     pitch = audioX.sampleRate/calculatePitch();
-    const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
-    if(!notNyquist) pitch = lastPitch;
+    const Nyquist = !(Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)<1.||Math.abs(pitch-audioX.sampleRate/numberOfBins)<1.);
+    if(!Nyquist) pitch = lastPitch;
 
     
-    
-if (isFinite(pitch) &&pitch>0&& notNyquist &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
+if (isFinite(pitch) &&pitch>0&& Nyquist &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
     aboveThreshold = true;
     on = true;
 }
