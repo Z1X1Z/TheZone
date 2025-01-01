@@ -391,12 +391,12 @@ let pushBackCounter = 0;
                                     
                                     
                                 
-                lastNote = note;
-                note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
-                                    
             if(on)
             {
                 
+lastNote = note;
+note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
+                    
                     
 
 uniforms.note.value=note;
@@ -1496,9 +1496,6 @@ function runOSMD (){
                                 let TouchMicroizer = false;
                function executeTouchRegime(){
                    
-                                                     uniforms.d.value.x = 0.;
-                                                     uniforms.d.value.y = 0.;
-                   
                    let coordinator = pixelShaderSize/2./minimumDimension*movementRate;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
                    if(xTouch==0&&yTouch==0&&!TouchMicroizer)
                    {
@@ -1539,7 +1536,7 @@ function runOSMD (){
                                     let touchMovement=[0,0];
                                      if(zoomRate!=0&&!zoomAtl41) touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
                                         else touchMovement=[-xTouch/zoomFrames,yTouch/zoomFrames]
-                                    if((!window.shouldShowStar||totalAMP==0.)||touchOnlyMode)uniforms[ "volume" ].value=1.;
+                                    if(!window.shouldShowStar||touchOnlyMode)uniforms[ "volume" ].value=1.;
 
                                     uniforms["zoomOutRatchetThreshold" ].value=0.;;
 
@@ -3183,6 +3180,8 @@ for(var n = 0; n<targets.length;n++){
                      if (!iOS||(iOS&&dupered)) boot();//generate clover in 64 bit, duper Core, there is a bug after maybe half a day on iOS in bigTree.js (maybe also on safari Mac)
 
                                                        
+                                                                                         uniforms.d.value.x = 0.;
+                                                                                         uniforms.d.value.y = 0.;
                                                                        animateLoopId=                   window.requestAnimationFrame( animate );
                             //  renderer.forceContextLoss ()
                             //  renderer.forceContextRestore ( )
