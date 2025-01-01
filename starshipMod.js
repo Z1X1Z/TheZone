@@ -972,7 +972,7 @@ function setDynamicSampler2ds(){
  }
 function setMicInputToStarPIXEL(){
              if(!touchMode//&&!DAW
-                ||window.shouldShowStar)
+                ||(window.shouldShowStar&&totalAMP>0.))
              {
                  
                  let withinMaxsafeSizeBins=(numberOfBins<=2**13)//(EldersLeg<=682);
