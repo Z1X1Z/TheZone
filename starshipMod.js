@@ -3214,7 +3214,7 @@ function calculatePitch ()
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance=0;//(1024-26)/10000
                                                          if(window.highORlow==0){
-                                                             if(totalAMP!=0.)
+                                                             if(totalAMP>0.&&isFinite(totalAMP))
                                                              {
                                                                  let proportion= fractionOfFrame/bufferSize;
                                                                  let tAScaled=0.;//totalAMP*proportion;
