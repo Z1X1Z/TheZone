@@ -1539,7 +1539,7 @@ function runOSMD (){
                                     let touchMovement=[0,0];
                                      if(zoomRate!=0&&!zoomAtl41) touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
                                         else touchMovement=[-xTouch/zoomFrames,yTouch/zoomFrames]
-                                    if((!window.shouldShowStar||totalAMP==0.)||touchOnlyMode)uniforms[ "volume" ].value=1.;
+                                    if((!window.shouldShowStar||totalAMP==0)||touchOnlyMode)uniforms[ "volume" ].value=1.;
 
                                     uniforms["zoomOutRatchetThreshold" ].value=0.;;
 
@@ -1884,21 +1884,21 @@ function runOSMD (){
     if(!window.touchMode)pointerZoom=false;
     else on=false;
 
-                                    if (window.micOn){
-                                        analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
-                                        analyser.getByteFrequencyData(  dataArray);
-                                        setMicInputToStarPIXEL();
-                                    }
-                                         
-                                    
-                                    totalAMP = 0.;
-                                    for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
-                                        totalAMP/=inputData.length;
-                                                       // if(window.android)totalAMP=totalAMP**.5/8.;//may not work as intended on all platforms, if at all
-                                                     //   else if(iOS)totalAMP=totalAMP*2.;//may not work as intended on all platforms, if at all
-                                    
 if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
 
+    if (window.micOn){
+        analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
+        analyser.getByteFrequencyData(  dataArray);
+        setMicInputToStarPIXEL();
+    }
+         
+    
+    totalAMP = 0.;
+    for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
+        totalAMP/=inputData.length;
+                       // if(window.android)totalAMP=totalAMP**.5/8.;//may not work as intended on all platforms, if at all
+                     //   else if(iOS)totalAMP=totalAMP*2.;//may not work as intended on all platforms, if at all
+    uniforms["totalAmp" ].value=totalAMP;
      if(window.ISdilated)
      uniforms.coreDilation.value=.5+.5*totalAMP**2.*Math.sqrt(24.)*2.;
       //   console.log(uniforms.coreDilation.value)
