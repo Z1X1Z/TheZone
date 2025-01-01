@@ -396,14 +396,16 @@ let pushBackCounter = 0;
                                     
                                 lastNote = note;
                                 note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
-         uniforms.note.value=note;
         const t =  (note +twist/2)*flip;
-                            if(isFinite(t))angle = -(t*radialWarp);
-                             reversableColor=((uniforms.brelued.value*angle/12./((radialWarp>0)?radialWarp:1))*flip+twist/24.*uniforms.brelued.value+1./3.)%1.;
-             //if(uniforms.brelued.value==-1)reversableColor=.25-reversableColor;
-
-                            colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);
-                            
+                                                   if(isFinite(t))
+                                                   {                                                   uniforms.note.value=note;
+                                    
+                                    angle = -(t*radialWarp);
+                                    reversableColor=((uniforms.brelued.value*angle/12./((radialWarp>0)?radialWarp:1))*flip+twist/24.*uniforms.brelued.value+1./3.)%1.;
+                                    //if(uniforms.brelued.value==-1)reversableColor=.25-reversableColor;
+                                    
+                                    colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);
+                                }
             if(on)
             {
             const colortone = note/lightingScaleTrail;
