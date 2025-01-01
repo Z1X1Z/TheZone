@@ -973,7 +973,7 @@ function setDynamicSampler2ds(){
  }
 function setMicInputToStarPIXEL(){
              if(!touchMode//&&!DAW
-                ||window.shouldShowStar)
+                ||(window.shouldShowStar&&totalAMP>.000001))
              {
                  
                  let withinMaxsafeSizeBins=(numberOfBins<=2**13)//(EldersLeg<=682);
@@ -1905,7 +1905,7 @@ if( (!window.touchMode||window.shouldShowStar)&&!window.touchOnlyMode) {
          else             uniforms.coreDilation.value=0.;
     
     
-    if(totalAMP>0.00001)
+    if(totalAMP>0.000001)
     {
         lastPitch = pitch;
         // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
