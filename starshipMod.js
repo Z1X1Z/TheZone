@@ -1539,7 +1539,7 @@ function runOSMD (){
                                     let touchMovement=[0,0];
                                      if(zoomRate!=0&&!zoomAtl41) touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
                                         else touchMovement=[-xTouch/zoomFrames,yTouch/zoomFrames]
-                                    if((!window.shouldShowStar||totalAMP==0)||touchOnlyMode)uniforms[ "volume" ].value=1.;
+                                    if((!window.shouldShowStar||totalAMP==0.)||touchOnlyMode)uniforms[ "volume" ].value=1.;
 
                                     uniforms["zoomOutRatchetThreshold" ].value=0.;;
 
