@@ -1941,11 +1941,14 @@ else{aboveThreshold = false; on = false;}
            infinicore();
        }
    }
-    move();
-
-    spiral_compress();
-    
-    vectorize4();
+    if(on)
+    {
+        move();
+        
+        spiral_compress();
+        
+        vectorize4();
+    }
     let coreShift=0;
     for(var shift = 0.;shift<4;shift++)//find maximally different loudest note
        if (Math.abs(Math.abs((note*2)%24-loudestFret[shift].note%24)-24/2.)<Math.abs(coreShift-24/2.))
