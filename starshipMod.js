@@ -1884,6 +1884,14 @@ function runOSMD (){
     else on=false;
 
                                     
+                                    if (window.micOn){
+                                        analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
+                                        analyser.getByteFrequencyData(  dataArray);
+                                        setMicInputToStarPIXEL();
+                                    }
+                                         
+                                    
+                                    
                                     
                                     totalAMP = 0.;
                                     for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
@@ -1899,13 +1907,6 @@ function runOSMD (){
                                     
 if( (!window.touchMode||(window.shouldShowStar&&totalAMP>.000001))&&!window.touchOnlyMode) {
 
-    if (window.micOn){
-        analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
-        analyser.getByteFrequencyData(  dataArray);
-        setMicInputToStarPIXEL();
-    }
-         
-    
     
     if(totalAMP>.000001)
     {
