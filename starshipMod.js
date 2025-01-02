@@ -3202,7 +3202,7 @@ for(var n = 0; n<targets.length;n++){
 
 }
                                                        function waitForOpenWindowToAnimate(){
-                                                         if(document.visibilityState=="hidden") setTimeout(waitForOpenWindow,100);
+                                                         if(document.visibilityState=="hidden") setTimeout(waitForOpenWindowToAnimate,10000);
                                                              else animateLoopId= window.requestAnimationFrame( animate );
                                                      }
                                                        
