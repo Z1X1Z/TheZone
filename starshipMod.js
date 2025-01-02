@@ -25,6 +25,7 @@ function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js lo
               {
                 window.touchOnlyMode=true;
               }
+        requestWakeLock();
             init();
      }
     else setTimeout(stallTillTHREELoaded,100);
@@ -445,7 +446,6 @@ let pushBackCounter = 0;
                  angle = ((angle+6*radialWarp)/12.)%1*2*pi;
                  d_x = -Math.sin(-angle);
                  d_y = -Math.cos(-angle);
-                 pongRoutine(d_x,d_y);
                             d_x*=flatline;
                             d_y*=flatline
                             if(on&&totalAMP>.000001)
@@ -3011,7 +3011,8 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
 
 
 
-                                  
+                                                       pongRoutine(d_x,d_y);
+
                                   
    if(window.starClover)
                      {
@@ -3202,9 +3203,24 @@ for(var n = 0; n<targets.length;n++){
 
 }
                                                        function waitForOpenWindowToAnimate(){
-                                                         if(document.visibilityState=="hidden") setTimeout(waitForOpenWindowToAnimate,10000);
+                                                         if(document.visibilityState=="hidden") setTimeout(waitForOpenWindowToAnimate,100);
                                                              else animateLoopId= window.requestAnimationFrame( animate );
                                                      }
+                                                       
+                                                       
+                                                       let wakeLock;
+
+                                                       async function requestWakeLock() {
+                                                         try {
+                                                           wakeLock = await navigator.wakeLock.request('screen');
+                                                           wakeLock.addEventListener('release', () => {
+                                                             // Screen might be locked or the tab is in the background
+                                                           });
+                                                         } catch (err) {
+                                                           // Wake lock request failed
+                                                         }
+                                                       }
+                                                       
                                                        
                                                        //https://stackoverflow.com/questions/9038625/detect-if-device-is-ios
                                                        function iOSCHECK() {
