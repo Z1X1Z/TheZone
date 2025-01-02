@@ -448,14 +448,15 @@ let pushBackCounter = 0;
                  pongRoutine(d_x,d_y);
                             d_x*=flatline;
                             d_y*=flatline
-                            if(on&&totalAMP>0)
+                            if(on&&totalAMP>.000001)
                             {
              uniforms.d.value.x=d_x;
              uniforms.d.value.y=d_y;
-         }
+      
                                
                                FEEDBACKuniforms.d.value=new THREE.Vector2(d_x,d_y);
                                FEEDBACKuniformsFlip.d.value=new THREE.Vector2(d_x,d_y);
+         }
                  d_x*=volume;
                  d_y*=volume;
                  var spunD = [d_x,d_y];
@@ -1497,8 +1498,11 @@ function runOSMD (){
                                 let TouchMicroizer = false;
                function executeTouchRegime(){
                    
-                                                     uniforms.d.value.x = 0.;
-                                                     uniforms.d.value.y = 0.;
+                   if(!shouldShowStar||touchOnlyMode)
+                   {
+                       uniforms.d.value.x = 0.;
+                       uniforms.d.value.y = 0.;
+                   }
                    let coordinator = pixelShaderSize/2./minimumDimension*movementRate;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
                    if(xTouch==0&&yTouch==0&&!TouchMicroizer)
                    {
@@ -1541,9 +1545,11 @@ function runOSMD (){
                                         else touchMovement=[-xTouch/zoomFrames,yTouch/zoomFrames]
                                     if(!window.shouldShowStar||touchOnlyMode)uniforms[ "volume" ].value=1.;
                                     uniforms["zoomOutRatchetThreshold" ].value=0.;;
-
-                                    uniforms.d.value.x+=xTouchMicroBuffer/uniforms[ "volume" ].value;
-                                    uniforms.d.value.y+=-yTouchMicroBuffer/uniforms[ "volume" ].value;
+                                    if(!shouldShowStar||touchOnlyMode)
+                                    {
+                                        uniforms.d.value.x+=xTouchMicroBuffer/uniforms[ "volume" ].value;
+                                        uniforms.d.value.y+=-yTouchMicroBuffer/uniforms[ "volume" ].value;
+                                    }
                                     var spunTouch=touchMovement;
                                           if(uniforms.carousel.value!=0.)
                                               spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
