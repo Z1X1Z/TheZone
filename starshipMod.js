@@ -3195,12 +3195,16 @@ for(var n = 0; n<targets.length;n++){
                                                        
                      if (!iOS||(iOS&&dupered)) boot();//generate clover in 64 bit, duper Core, there is a bug after maybe half a day on iOS in bigTree.js (maybe also on safari Mac)
 
+                                                       waitForOpenWindowToAnimate();
                                                        
-                                                                       animateLoopId=                   window.requestAnimationFrame( animate );
                             //  renderer.forceContextLoss ()
                             //  renderer.forceContextRestore ( )
 
 }
+                                                       function waitForOpenWindowToAnimate(){
+                                                         if(document.visibilityState=="hidden") setTimeout(waitForOpenWindow,100);
+                                                             else animateLoopId= window.requestAnimationFrame( animate );
+                                                     }
                                                        
                                                        //https://stackoverflow.com/questions/9038625/detect-if-device-is-ios
                                                        function iOSCHECK() {
