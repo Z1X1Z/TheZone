@@ -3166,6 +3166,7 @@ dstnce = length(s);
    colorAccumulator+=s;
    if(Refractelate&&dstnce>refractelC){s/=refractelC;} //refractelC/=4./3.;}
 vec2 lastS = s;
+
    s=vec2(
         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
@@ -3254,6 +3255,7 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
    
    //float trunc=1.;
    //if(lfc!=0.) trunc = log(zoom/dstnce)/100.;
+ //  s=vec2(-1./(s.x*s.x-s.y*s.y-p.x),2.0*s.x*s.y-p.y);
 
    s.x=log(abs(s.x))/log(base);
    //traditionally be e or 3 probably 1.5 to 4
@@ -3306,7 +3308,7 @@ if(Spoker){
                  s*=spoke_factor;
                  float coreFactor =upSpoke;
                 // if(!inMainSpoke)
-              if(!wheel)coreFactor/=dstnce;
+              if(!wheel)coreFactor/=(1.+dstnce);
             hyperCoreOUTPUT+=coreFactor
             ;
             hyperCoreBoosted+=coreFactor;
