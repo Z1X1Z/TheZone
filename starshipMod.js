@@ -446,7 +446,6 @@ let pushBackCounter = 0;
                  angle = ((angle+6*radialWarp)/12.)%1*2*pi;
                  d_x = -Math.sin(-angle);
                  d_y = -Math.cos(-angle);
-                 pongRoutine(d_x,d_y);
                             d_x*=flatline;
                             d_y*=flatline
                             if(on&&totalAMP>.000001)
@@ -1935,7 +1934,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
 
     
     
-           if(window.volumeSpeed&&on&&totalAMP>.000001)
+           if(window.volumeSpeed&&on)
            {
                    if(lastVolume!=0.) lastVolume=volume;
                volume = totalAMP*audioX.sampleRate/bufferSize;
@@ -1952,10 +1951,9 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
            infinicore();
        }
    }
-    if(on)
-    
-        move();
-    
+    if(on)move();
+    pongRoutine(d_x,d_y);
+
         spiral_compress();
         
         vectorize4();
