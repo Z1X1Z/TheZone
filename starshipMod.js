@@ -446,6 +446,7 @@ let pushBackCounter = 0;
                  angle = ((angle+6*radialWarp)/12.)%1*2*pi;
                  d_x = -Math.sin(-angle);
                  d_y = -Math.cos(-angle);
+                 pongRoutine(d_x,d_y);
                             d_x*=flatline;
                             d_y*=flatline
                             if(on&&totalAMP>.000001)
@@ -1911,29 +1912,30 @@ function runOSMD (){
                                          else             uniforms.coreDilation.value=0.;
                                     
                                     
-if( (!window.touchMode||(window.shouldShowStar&&totalAMP>.000001))&&!window.touchOnlyMode) {
+                                    if(totalAMP>.000001)
+                                    {
+                                        lastPitch = pitch;
+                                        // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
+                                        pitch = audioX.sampleRate/calculatePitch();
+                                        const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
+                                        if(!notNyquist&&totalAMP>0.) pitch = lastPitch;
+                                   
+                                    
+                                    
+                                if (isFinite(pitch) &&pitch>0&& notNyquist &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
+                                    aboveThreshold = true;
+                                    on = true;
+                                }
+                                else{aboveThreshold = false; on = false;}
+
+                                    }else{aboveThreshold = false; on = false;}
+
+                                    
+if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
 
     
-    if(totalAMP>.000001)
-    {
-        lastPitch = pitch;
-        // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
-        pitch = audioX.sampleRate/calculatePitch();
-        const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
-        if(!notNyquist&&totalAMP>0.) pitch = lastPitch;
-   
     
-    
-if (isFinite(pitch) &&pitch>0&& notNyquist &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
-    aboveThreshold = true;
-    on = true;
-}
-else{aboveThreshold = false; on = false;}
-
-    }else{aboveThreshold = false; on = false;}
-
-    
-           if(window.volumeSpeed&&on)
+           if(window.volumeSpeed&&on&&totalAMP>.000001)
            {
                    if(lastVolume!=0.) lastVolume=volume;
                volume = totalAMP*audioX.sampleRate/bufferSize;
@@ -3011,8 +3013,7 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
 
 
 
-                                                       pongRoutine(d_x,d_y);
-
+                                  
                                   
    if(window.starClover)
                      {
