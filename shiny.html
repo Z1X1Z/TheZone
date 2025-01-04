@@ -27,8 +27,8 @@
         uniform vec2 resolution;
         uniform float time;
 void main(){
-    vec2 p=-(vUv.yx-.5)/(resolution.xy/min(resolution.x,resolution.y))*15.;
-        p.x-=.75;
+    vec2 p=-(vUv.yx-.5)/resolution*max(resolution.x,resolution.y)*9.;
+        p.x-=.5;
         vec2 s = p;
         float l=0., d = 0., negator = 1.;
         for (int f=0;f<21;f+=1)
