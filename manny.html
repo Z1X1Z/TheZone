@@ -4728,11 +4728,14 @@ else if(heartStar==2) frAMP=1.;
 if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                             //else if(Character==2)heartSize=gr;
                                                             
-                                                            
-                                                            if (Character==0&&holieyes==1)heartSize*=5.;
+                                                            float direction = 1.;
+                                                            if (Character==0&&holieyes==1)
+                                                            {heartSize*=5.;
+                                                                direction=-1.;
+                                                                }
 
      if(Character!=9&&(heartStar!=3)) HEART = heart(characterPSpunToKey*heartSize+heartShift,//vec2(0.)
-                                    spin2(-d.yx,-twistStar)/4.*frAMP*heartRate*vec2(1.,flipStar)// not working on some androids, may work with vec2(0.)
+                                    -direction*spin2(-d.yx,-twistStar)/4.*frAMP*heartRate*vec2(1.,flipStar)// not working on some androids, may work with vec2(0.)
                                     )
      //*(1.-length(uVuMinCenterASKEW)/8.)
      ;
