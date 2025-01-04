@@ -2194,7 +2194,8 @@ return h;
                                 l=vec4(vec3(-z.x),1.);
                                // if( f == 15&&z.x>-.10&&abs(p.y)>.75){l=vec4(vec3(z.x),.5);break;}
                             }
-                            if(holieyes==2)
+                            if(holieyes==0);
+                            else if(holieyes==2)
                             {
                               if (f==17&&s.x<0.&&p.x>0.){
                                   l=vec4(.5);
@@ -3279,7 +3280,7 @@ if(Spoker){
                              }
                          else {
                               */
-                            if(counter==0.)inMainSpoke=true;//this actually seems to be the not spoke part of spoker so boolean should be reversed
+                            if(counter==0.)inMainSpoke=true;//this actually seems to be the not spoke part of spoker so boolean should be reversed to be accurate
                             if(distributor&&counter!=0.)
                             {   if (!inMainSpoke)
                                 s=spin2(s,distributorFACTORorth);
