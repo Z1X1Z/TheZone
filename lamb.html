@@ -124,7 +124,7 @@ var x = parseInt(String.fromCharCode(event.which || event.keyCode));
 			}
 			//
 			function animate( timestamp ) {
-				//requestAnimationFrame( animate );
+				requestAnimationFrame( animate );
 				
 				renderer.render( scene, camera );
 			}
