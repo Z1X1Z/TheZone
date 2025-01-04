@@ -3204,9 +3204,13 @@ for(var n = 0; n<targets.length;n++){
                                                        function waitForOpenWindowToAnimate(){
                                                          if(document.visibilityState=="hidden")
                                                          {audioX.suspend();
+                                                             Wad.audioContext.suspend();
                                                              setTimeout(waitForOpenWindowToAnimate,100);
                                                          }
-                                                         else { if(lvs=="hidden")audioX.resume();
+                                                         else { if(lvs=="hidden"){
+                                                             audioX.resume();
+                                                             Wad.audioContext.resume();
+                                                         }
                                                              animateLoopId= window.requestAnimationFrame( animate );
                                                          }
                                                      }
