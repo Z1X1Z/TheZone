@@ -3202,7 +3202,7 @@ for(var n = 0; n<targets.length;n++){
 }
                                                        function waitForOpenWindowToAnimate(){
                                                          if(document.visibilityState=="hidden")
-                                                         {  wakeLock.release().then(wakeLock=null);
+                                                         {  if(wakeLock!=null)wakeLock.release().then(wakeLock=null);
                                                              audioX.suspend();
                                                              Wad.audioContext.suspend();
                                                              setTimeout(waitForOpenWindowToAnimate,100);

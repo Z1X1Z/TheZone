@@ -739,7 +739,7 @@ let c = document.body;//document.getElementById("container")
  function attachListeners(){
             c.addEventListener('pointerdown', function(e)
                                {
-
+                if(typeof requestWakeLock=="function") requestWakeLock();
 //console.log   ( e.srcElement.nodeName)
                 if(e.srcElement.nodeName=="CANVAS"  ||
                    e.srcElement.id=="menuDivider"||window.iOS&&e.srcElement.name=="menuButton"||
