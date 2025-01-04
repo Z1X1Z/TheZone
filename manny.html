@@ -2165,10 +2165,13 @@ return h;
 }
                   vec4 faceBlackAndWhite(vec2 g, vec2 t){
                               t/=2.5;
+
                               if(holieyes==1) t.x*=-1.;
+                              else if(holieyes==3)t*=-1.;
+                              vec2 p = (vec2(g.x,g.y)-vec2(t.x,-t.y));//vec2(g.x,-g.y);
+
                               bool bfeye= false;
                         vec4 l = vec4(0.);
-                        vec2 p = (vec2(g.x,g.y)-vec2(t.x,-t.y));//vec2(g.x,-g.y);
                         if(brelued<0.)p.y*=-1.;
                         if(flipStar<0.)p.y*=-1.;
                         float angleColorShift = 0.;
