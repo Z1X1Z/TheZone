@@ -481,7 +481,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
                     
                                   
                     if(counter==0.)inMainSpoke=true;
-                    if(distributor)
+                    if(distributor&&counter!=0.)
                     {   if (!inMainSpoke)
                         s=spinVector(s,distributorFACTORorth);
                         else                                 s=spinVector(s,distributorFACTOR);

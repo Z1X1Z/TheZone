@@ -3279,8 +3279,8 @@ if(Spoker){
                              }
                          else {
                               */
-                            if(counter==0.)inMainSpoke=true;
-                            if(distributor)
+                            if(counter==0.)inMainSpoke=true;//this actually seems to be the not spoke part of spoker so boolean should be reversed
+                            if(distributor&&counter!=0.)
                             {   if (!inMainSpoke)
                                 s=spin2(s,distributorFACTORorth);
                                 else                                 s=spin2(s,distributorFACTOR);
