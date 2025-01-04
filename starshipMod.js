@@ -3202,8 +3202,13 @@ for(var n = 0; n<targets.length;n++){
 
 }
                                                        function waitForOpenWindowToAnimate(){
-                                                         if(document.visibilityState=="hidden") setTimeout(waitForOpenWindowToAnimate,100);
-                                                             else animateLoopId= window.requestAnimationFrame( animate );
+                                                         if(document.visibilityState=="hidden")
+                                                         {audioX.suspend();
+                                                             setTimeout(waitForOpenWindowToAnimate,100);
+                                                         }
+                                                         else { if(lvs=="hidden")audioX.resume();
+                                                             animateLoopId= window.requestAnimationFrame( animate );
+                                                         }
                                                      }
                                                        
                                                        
