@@ -106,14 +106,14 @@ var x = parseInt(String.fromCharCode(event.which || event.keyCode));
 
 
 
-
+                renderer.setSize( window.innerWidth, window.innerHeight );
 
 				renderer.setPixelRatio( window.devicePixelRatio );//this will pixelate if changed
 
 				container.appendChild( renderer.domElement );
 				onWindowResize();
 				window.addEventListener( 'resize', onWindowResize, false );
-								renderer.setSize( window.innerWidth, window.innerHeight );
+								
 			}
 			function onWindowResize() {
 
