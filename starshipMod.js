@@ -25,7 +25,6 @@ function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js lo
               {
                 window.touchOnlyMode=true;
               }
-        requestWakeLock();
             init();
      }
     else setTimeout(stallTillTHREELoaded,100);
@@ -3203,14 +3202,18 @@ for(var n = 0; n<targets.length;n++){
 }
                                                        function waitForOpenWindowToAnimate(){
                                                          if(document.visibilityState=="hidden")
-                                                         {audioX.suspend();
+                                                         {  wakeLock.release().then(wakeLock=null);
+                                                             audioX.suspend();
                                                              Wad.audioContext.suspend();
                                                              setTimeout(waitForOpenWindowToAnimate,100);
                                                          }
                                                          else { if(lvs=="hidden"){
+                                                            if(wakeLock==null) requestWakeLock();
+
                                                              audioX.resume();
                                                              Wad.audioContext.resume();
                                                          }
+
                                                              animateLoopId= window.requestAnimationFrame( animate );
                                                          }
                                                      }
@@ -3221,9 +3224,6 @@ for(var n = 0; n<targets.length;n++){
                                                        async function requestWakeLock() {
                                                          try {
                                                            wakeLock = await navigator.wakeLock.request('screen');
-                                                           wakeLock.addEventListener('release', () => {
-                                                             // Screen might be locked or the tab is in the background
-                                                           });
                                                          } catch (err) {
                                                            // Wake lock request failed
                                                          }
