@@ -27,7 +27,7 @@
         uniform vec2 resolution;
 void main(){
 
-    vec2 p=-(gl_FragCoord.yx/resolution.yx-.5)/resolution*max(resolution.x,resolution.y)*9.;
+    vec2 p=-(vUv.yx-.5)/resolution*max(resolution.x,resolution.y)*9.;
              p.x-=.5;
 vec2 s=p;
 float l=1.;
@@ -120,11 +120,11 @@ var x = parseInt(String.fromCharCode(event.which || event.keyCode));
       uniforms.resolution.value.x = window.innerWidth;
       uniforms.resolution.value.y = window.innerHeight;
 				renderer.setSize( window.innerWidth, window.innerHeight );
-               // animate();
+                animate();
 			}
 			//
 			function animate( timestamp ) {
-				requestAnimationFrame( animate );
+			//	requestAnimationFrame( animate );
 				
 				renderer.render( scene, camera );
 			}
