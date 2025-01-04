@@ -3202,14 +3202,16 @@ for(var n = 0; n<targets.length;n++){
 }
                                                        function waitForOpenWindowToAnimate(){
                                                          if(document.visibilityState=="hidden")
-                                                         {  if(wakeLock!=null)wakeLock.release().then(wakeLock=null);
+                                                         {
+
+                                                             if(typeof wakeLock == "object")wakeLock.release();
+                                                         
                                                              audioX.suspend();
                                                              Wad.audioContext.suspend();
                                                              setTimeout(waitForOpenWindowToAnimate,100);
                                                          }
                                                          else { if(lvs=="hidden"){
-                                                            if(wakeLock==null) requestWakeLock();
-
+                                                            requestWakeLock();
                                                              audioX.resume();
                                                              Wad.audioContext.resume();
                                                          }
@@ -3224,9 +3226,13 @@ for(var n = 0; n<targets.length;n++){
                                                        async function requestWakeLock() {
                                                          try {
                                                            wakeLock = await navigator.wakeLock.request('screen');
-                                                         } catch (err) {
+                                                         } catch (err) {}
                                                            // Wake lock request failed
-                                                         }
+                                                          //   wakeLock.addEventListener("release", () => {
+                                                                 // if wake lock is released alter the UI accordingly
+                                                           //    });
+                                                          //   } catch (err) {
+                                                       //  }
                                                        }
                                                        
                                                        
