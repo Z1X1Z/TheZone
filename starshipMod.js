@@ -1069,7 +1069,8 @@ function onWindowResize() {
                             bottomOfScreenHeight = correlationForTextY;
                         }
                         else{correlationForTextY=0;bottomOfScreenHeight=0}
-                    if(((((document.getElementById("reader").value==0&&readerSet)||(bibleWithText&&!readerSet)))||mobile)&&window.BibleON==0)
+                    if(((((document.getElementById("reader").value==0&&readerSet)||(bibleWithText)))||mobile)&&window.BibleON==0)
+                        
                     correlationForTextX=document.getElementById("Bible").offsetWidth*.5
                             else correlationForTextX=0.;
                             heightPX=window.innerHeight-correlationForTextY;
