@@ -494,7 +494,7 @@ function followSound(e, SonicTouchArrayK){
 
                                                      }
                                                      
-                              if(octaveDistanceChange>.0//&&!SonicTouchArrayX[id].octavesFlippedLastFrame
+                              /*if(octaveDistanceChange>.0//&&!SonicTouchArrayX[id].octavesFlippedLastFrame
                                  )
                                                      {
                             var zound2Buffer = SonicTouchArrayX[id].zound2;
@@ -537,7 +537,7 @@ function followSound(e, SonicTouchArrayK){
                     {
                     SonicTouchArrayX[id].octavesFlippedLastFrame=false;
                     }
-                                                     
+                                              */
                                                      if(isFinite(frequency)&&typeof SonicTouchArrayX[id].sound=="object"){
                             if(isFinite(frequency)&&typeof SonicTouchArrayX[id].sound=="object"){
                                 SonicTouchArrayX[id].dawAMPLITUDE=touchMagnitude;//testarContinuous;//
