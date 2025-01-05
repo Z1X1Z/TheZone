@@ -3200,26 +3200,25 @@ for(var n = 0; n<targets.length;n++){
                             //  renderer.forceContextRestore ( )
 
 }
-                                                       function waitForOpenWindowToAnimate(){
-                                                         if(document.visibilityState=="hidden")
-                                                         {
-                                                             if(lvs=="visible")
-                                                             {
-                                                                 if(typeof wakeLock == "object")wakeLock.release();
-                                                                 
-                                                                 if(!window.touchOnlyMode)audioX.suspend();
-                                                                 if(typeof Wad=="function") Wad.audioContext.suspend();
-                                                             }
-                                                             setTimeout(waitForOpenWindowToAnimate,100);
+                                                       document.addEventListener("visibilityChange",()=>{
+                                                         if(document.hidden){
+                                                             
+                                                             if(!window.touchOnlyMode)audioX.suspend();
+                                                             if(typeof Wad=="function") Wad.audioContext.suspend();
+                                                             if(typeof wakeLock == "object")wakeLock.release();
+                                                             
                                                          }
-                                                         else { if(lvs=="hidden"){
-                                                            requestWakeLock();
+                                                         else {
+                                                             requestWakeLock();
                                                              if(!window.touchOnlyMode)audioX.resume();
-                                                             if(typeof Wad=="function")Wad.audioContext.resume();
-                                                         }
-
-                                                             animateLoopId= window.requestAnimationFrame( animate );
-                                                         }
+                                                             if(typeof Wad=="function")Wad.audioContext.resume()
+                                                                 }
+                                                     }
+                                                                                 )
+                                                       function waitForOpenWindowToAnimate(){
+                                                         if(document.visibilityState=="hidden") setTimeout(waitForOpenWindowToAnimate,100);
+                                                         else animateLoopId= window.requestAnimationFrame( animate );
+                                                         
                                                      }
                                                        
                                                        
