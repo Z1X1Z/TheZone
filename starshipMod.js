@@ -3203,17 +3203,19 @@ for(var n = 0; n<targets.length;n++){
                                                        function waitForOpenWindowToAnimate(){
                                                          if(document.visibilityState=="hidden")
                                                          {
-
-                                                             if(typeof wakeLock == "object")wakeLock.release();
-                                                         
-                                                             audioX.suspend();
-                                                             Wad.audioContext.suspend();
+                                                             if(lvs=="visible")
+                                                             {
+                                                                 if(typeof wakeLock == "object")wakeLock.release();
+                                                                 
+                                                                 if(!window.touchOnlyMode)audioX.suspend();
+                                                                 if(typeof Wad=="function") Wad.audioContext.suspend();
+                                                             }
                                                              setTimeout(waitForOpenWindowToAnimate,100);
                                                          }
                                                          else { if(lvs=="hidden"){
                                                             requestWakeLock();
-                                                             audioX.resume();
-                                                             Wad.audioContext.resume();
+                                                             if(!window.touchOnlyMode)audioX.resume();
+                                                             if(typeof Wad=="function")Wad.audioContext.resume();
                                                          }
 
                                                              animateLoopId= window.requestAnimationFrame( animate );

@@ -549,7 +549,7 @@ function followSound(e, SonicTouchArrayK){
                                     if (
                                    (window.touchMode&&!window.muteTouchTouchVolume)
                               ||(!window.touchMode&&!window.muteVoiceTouchVolume)
-                              ||(window.touchOnlyMode&&!window.muteTouchTouchVolume)
+                              ||(window.touchOnlyMode&&!window.muteVoiceTouchVolume)
                                   )
                                         for(var d = 0;d<SonicTouchArray.length;d++)
                                     {
@@ -569,7 +569,7 @@ function followSound(e, SonicTouchArrayK){
                                                            (
                                                             (window.touchMode&&!window.muteTouchTouchVolume)
                                                        ||(!window.touchMode&&!window.muteVoiceTouchVolume)
-                                                       ||(window.touchOnlyMode&&!window.muteTouchTouchVolume)
+                                                       ||(window.touchOnlyMode&&!window.muteVoiceTouchVolume)
                                                            )
                                                       )
                                              {
