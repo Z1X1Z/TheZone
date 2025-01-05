@@ -175,6 +175,7 @@ let maxLetterDepth=-1;
 }
          urlAppend = "chapter/"+book+"/"+chapter+".htm"
 }
+                    if( location.hash.includes(".c")||location.hash.includes(".b"))window.readerSet=true;
                      if (location.hash.includes(".b8"))
                     iframe.setAttribute("src", "https://openbible.com/audio/gilbert_music/");
                             else if(location.hash.includes(".b7"))   iframe.setAttribute("src","https://openbible.com/audio/gilbert_music_books/");
@@ -1447,7 +1448,9 @@ Open MusicXML file
                 if( menu.style.display=="block")  menu.style.display="none"
                 else if( menu.style.display=="none")menu.style.display="block";'>Menu</button>
     </div>
-
+    <script>
+        if(window.readerSet)document.getElementById("menuDivider").style.width="50%"
+    </script>
     <div id="container"> </div>
     
     <script src="wadLoader.js"> </script>

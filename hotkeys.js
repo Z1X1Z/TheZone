@@ -542,14 +542,20 @@ function callKey(event){
             else if(number == 3)  window.frames["TheBible"].location = "https://openbible.com/audio/hays_books/";
             else if(number == 2)  window.frames["TheBible"].location =  "https://openbible.com/audio/souer_books/";
         else if(number == 1)  window.frames["TheBible"].location =  "https://openbible.com/audio/gilbert_books/";
-         else if(number == 0)  window.frames["TheBible"].location =  "https://www.biblehub.com/audio/";
+         else if(number== 0)  window.frames["TheBible"].location =  "https://www.biblehub.com/audio/";
+         else if (!window.readerSet){
+             window.frames["TheBible"].location =  "https://www.biblehub.com/audio/";
+             window.readerSet=true;
+         }
              //   else if(location.hash.includes(".b"))document.getElementById("reader").value = 0.;
-
+       // else if (window.frames["TheBible"].location=="about:blank")window.frames["TheBible"].location="https://www.biblehub.com/audio/"
                     if(window.BibleON==0)
                     {
                         document.getElementById("Bible").height="100%";
                         document.getElementById("Bible").width="100%";
                         document.getElementById("nav").style.width="50%";
+                        document.getElementById("menuDivider").style.width="50%";
+
                         for(var b = 0; b<content.length; b++)content[b].style.width="50%";
                     }
                     else {
@@ -557,6 +563,8 @@ function callKey(event){
                         document.getElementById("Bible").width="0%";
                         document.getElementById("nav").style.width="100%";
                         for(var b = 0; b<content.length; b++)content[b].style.width="100%";
+                        document.getElementById("menuDivider").style.width="100%";
+
                         
                     }
                 
