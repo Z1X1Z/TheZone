@@ -368,11 +368,11 @@ function startSound(e){
                     if(window.radialOctaveBoost)
                     {
                         zound2.play({env:{attack: .0, release:.0,hold:-1},
-                        pitch:frequency*2**Math.ceil(octaveDistance-octaveShift),
-                            volume:cascadeSwitch2*octaveDistance%1});
+                        pitch:frequency*2**Math.floor(octaveDistance-octaveShift),
+                            volume:cascadeSwitch2*(octaveDistance%1)});
                         zound.play({env:{attack: .0, release:.0,hold:-1},
-                        pitch:frequency*2.*2**Math.ceil(octaveDistance-octaveShift),
-                            volume:cascadeSwitch1*octaveDistance%1});
+                        pitch:frequency*2.*2**Math.floor(octaveDistance-octaveShift),
+                            volume:cascadeSwitch1*(octaveDistance%1)});
                     }
                     
                     
@@ -494,7 +494,8 @@ function followSound(e, SonicTouchArrayK){
 
                                                      }
                                                      
-                              if(octaveDistanceChange>.0&&!SonicTouchArrayX[id].octavesFlippedLastFrame)
+                              if(octaveDistanceChange>.0//&&!SonicTouchArrayX[id].octavesFlippedLastFrame
+                                 )
                                                      {
                             var zound2Buffer = SonicTouchArrayX[id].zound2;
                             SonicTouchArrayX[id].zound2=SonicTouchArrayX[id].zound
@@ -512,9 +513,10 @@ function followSound(e, SonicTouchArrayK){
    SonicTouchArrayX[id].xound2=tound2Buffer
                             
                             
-                            SonicTouchArrayX[id].octavesFlippedLastFrame=true
+                          //  SonicTouchArrayX[id].octavesFlippedLastFrame=true
                         }
-                                                     else if(octaveDistanceChange<.0&&!SonicTouchArrayX[id].octavesFlippedLastFrame)
+                                                     else if(octaveDistanceChange<.0 //&&!SonicTouchArrayX[id].octavesFlippedLastFrame
+                                                             )
                                                      
                                                      {
                             var sound2Buffer =  SonicTouchArrayX[id].sound2
@@ -528,7 +530,7 @@ function followSound(e, SonicTouchArrayK){
                             SonicTouchArrayX[id].xound=SonicTouchArrayX[id].tound
                             SonicTouchArrayX[id].tound=SonicTouchArrayX[id].tound2
                             SonicTouchArrayX[id].tound2=xound2Buffer
-                            SonicTouchArrayX[id].octavesFlippedLastFrame=true
+                           // SonicTouchArrayX[id].octavesFlippedLastFrame=true
                         }
                                                      
                 else if (SonicTouchArrayX[id].octavesFlippedLastFrame)
@@ -615,6 +617,7 @@ function followSound(e, SonicTouchArrayK){
                                   //volumeTWO*=octaveDistance%1
 
                               }
+                            
                               
                              sound2.setPitch(frequency/2.*2**Math.floor(octaveDistance-octaveShift));
                              sound.setPitch(frequency*2**Math.floor(octaveDistance-octaveShift));
@@ -622,10 +625,10 @@ function followSound(e, SonicTouchArrayK){
                              sound.setVolume(volumeTWO*(1.-octaveDistance%1));
                                if(window.radialOctaveBoost)
                                {
-                                   zound.setPitch(frequency*2**Math.ceil(octaveDistance-octaveShift));
-                                   zound2.setPitch(frequency*2*2**Math.ceil(octaveDistance-octaveShift));
-                                   zound.setVolume(volumePrime*octaveDistance%1);
-                                   zound2.setVolume(volumeTWO*octaveDistance%1);
+                                   zound.setPitch(frequency*2**Math.floor(octaveDistance-octaveShift));
+                                   zound2.setPitch(frequency*2*2**Math.floor(octaveDistance-octaveShift));
+                                   zound.setVolume(volumePrime*(octaveDistance%1));
+                                   zound2.setVolume(volumeTWO*(octaveDistance%1));
                                }
                                    xound2.setPitch(frequency/2.*2**Math.floor(octaveDistance-octaveShift));
                                    xound.setPitch(frequency*2**Math.floor(octaveDistance-octaveShift));
@@ -633,10 +636,10 @@ function followSound(e, SonicTouchArrayK){
                                    xound.setVolume(volumeTWO*(1.-octaveDistance%1));
                                if(window.radialOctaveBoost)
                                {
-                                   tound.setPitch(frequency*2**Math.ceil(octaveDistance-octaveShift));
-                                   tound2.setPitch(frequency*2*2**Math.ceil(octaveDistance-octaveShift));
-                                   tound.setVolume(volumePrime*octaveDistance%1);
-                                   tound2.setVolume(volumeTWO*octaveDistance%1);
+                                   tound.setPitch(frequency*2**Math.floor(octaveDistance-octaveShift));
+                                   tound2.setPitch(frequency*2*2**Math.floor(octaveDistance-octaveShift));
+                                   tound.setVolume(volumePrime*(octaveDistance%1));
+                                   tound2.setVolume(volumeTWO*(octaveDistance%1));
                                }
                          
                                  
@@ -739,7 +742,7 @@ let c = document.body;//document.getElementById("container")
  function attachListeners(){
             c.addEventListener('pointerdown', function(e)
                                {
-                if(typeof requestWakeLock=="function") requestWakeLock();
+                if(typeof requestWakeLock=="function")requestWakeLock();
 //console.log   ( e.srcElement.nodeName)
                 if(e.srcElement.nodeName=="CANVAS"  ||
                    e.srcElement.id=="menuDivider"||window.iOS&&e.srcElement.name=="menuButton"||
