@@ -185,7 +185,7 @@ let maxLetterDepth=-1;
                         else if(location.hash.includes(".b3") )   iframe.setAttribute("src","https://openbible.com/audio/hays_books/");
                         else if(location.hash.includes(".b2")  )   iframe.setAttribute("src","https://openbible.com/audio/souer_books/");
                     else if(location.hash.includes(".b1")    ) iframe.setAttribute("src","https://openbible.com/audio/gilbert_books/");
-                     else
+                     else if (location.hash.includes(".b"))
                      {
                          iframe.setAttribute("src",  "https://www.biblehub.com/audio/"+urlAppend);
                          bibleWithText = true;}
