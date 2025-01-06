@@ -3287,10 +3287,11 @@ if(Spoker){
                          else {
                               */
                             if(counter==0.)inMainSpoke=true;//this actually seems to be the not spoke part of spoker so boolean should be reversed to be accurate
-                            if(distributor&&counter!=0.)
-                            {   if (!inMainSpoke)
-                                s=spin2(s,distributorFACTORorth);
-                                else                                 s=spin2(s,distributorFACTOR);
+                            if(distributor)//&&counter!=0.
+                            {   if (inMainSpoke)//!inMainSpoke
+                              //  s=spin2(s,distributorFACTORorth);
+                               // else
+                                s=spin2(s,distributorFACTOR);
 
                                 }
 
@@ -3345,9 +3346,10 @@ if(counter+dstnce*dstnce //sqrt(sqrt(dstnce)*dstnce)*dstnce
 
     // if(distributor) s=spin2(s,distributorFACTORlove);
      if(distributor)
-     {   if (!inMainSpoke)
-         s=spin2(s,distributorFACTORloveORTH);
-         else s=spin2(s,-distributorFACTORlove);
+     {   if (inMainSpoke)
+        // s=spin2(s,distributorFACTORloveORTH);
+         //else
+         s=spin2(s,-distributorFACTORlove);
 
          }
      s/=sqrt2;
@@ -3375,7 +3377,8 @@ else //if(  0.>=hyperCoreBoosted)
 
 
         float coreFactor =spokeloverCoreShiftDown;
-       if(!inMainSpoke)  coreFactor/=dstnce;
+       if(!inMainSpoke)
+       coreFactor/=dstnce;
               hyperCoreOUTPUT-=coreFactor;
               hyperCoreBoosted-=coreFactor;
              }
