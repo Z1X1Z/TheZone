@@ -1890,7 +1890,7 @@ function runOSMD (){
     else on=false;
 
                                     
-                                    if (window.micOn){
+                                    if (window.micOn&&!touchOnlyMode){
                                         analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
                                         analyser.getByteFrequencyData(  dataArray);
                                         setMicInputToStarPIXEL();

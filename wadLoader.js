@@ -464,7 +464,7 @@ function followSound(e, SonicTouchArrayK){
                                                      
                                                                               let frequencyRatio = frequency/SonicTouchArrayX[id].lastFrequency;
                                                      SonicTouchArrayX[id].lastFrequency=frequency;
-                                                                            if(frequencyRatio>1.5||frequencyRatio<.75)
+                                                                            if(frequencyRatio>1.5||(!SonicTouchArrayX[id].firstMovement&&frequencyRatio<.75))
                                                                             {
                             var soundBuffer = SonicTouchArrayX[id].sound;
      SonicTouchArrayX[id].sound=SonicTouchArrayX[id].sound2
