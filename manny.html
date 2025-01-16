@@ -2410,8 +2410,7 @@ return vec3(clamp(1.-l,0.,1.));
     
 vec3 faceFORWARD(vec2 p,vec2 t){
     //t*=2.;
-    p.y=abs(p.y);
-    t=vec2(3.*t.x,2.*abs(t.y));
+    t=vec2(3.*t.x,2.*(t.y));
     vec2 s=p;
         float l=0.;
         for (int f=0;f<3+6*52;f+=1)
@@ -2437,7 +2436,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
             }
             
             if (l>1.)l=1.;
-            if(abs(p.y)/p.x>-2.3&&p.x<0.&&p.x>-1.&&l<.50&&l>0.)l=0.;//remove black from behind mny's squircle eyes (removed due to causing a wing to be cut in two on some androids, also seems more consistent between the eyes
+            if(abs(p.y/p.x)*sign(p.x)>-2.2&&p.x<0.&&p.x>-1.&&l<.50&&l>0.)l=0.;//remove black from behind mny's squircle eyes (removed due to causing a wing to be cut in two on some androids, also seems more consistent between the eyes
                if((Character==3||musicAngelMan==1))
                {
                    if(p.y==0.&&p.x>0.&&t.y==0.)l=0.;
