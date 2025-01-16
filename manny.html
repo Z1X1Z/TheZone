@@ -2417,7 +2417,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                 s=vec2(-1./(s.x*s.x-s.y*s.y-p.x+3.*t.x), 2.0*s.x*s.y-p.y-t.y*2.);//this is {s=s^2-p;s.real=-1./s.real}
             else break;
                
-        float centralPowerInverter=(s.x/s.y)*sign(s.x*s.y);
+        float centralPowerInverter=abs(s.x/s.y)*sign(s.x*s.y);
             //I was studying this function without the face and a power short ocurred and on firefox window restore and caused a semi-reversion hybridization
             if(Character==3||musicAngelMan==1)centralPowerInverter*=.5;
             else if(Character==4||musicAngelMan==2)centralPowerInverter+=s.x;
@@ -2477,7 +2477,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                 //l*=l*l;
                 
                     if((Character==3||musicAngelMan==1)&&l<.01)l=1.;
-                    else if((Character==4||musicAngelMan==2)&&abs(l)<abs(p.x)*abs(p.y)/15.)l=0.;
+                    else if((Character==4||musicAngelMan==2)&&l<abs(p.x)*abs(p.y)/15.)l=0.;
                     
                 if (l>1.)l=1.;
                 
