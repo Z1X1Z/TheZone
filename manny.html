@@ -2465,8 +2465,8 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                 s=vec2(-1./(s.x*s.x-s.y*s.y-p.x+t.x), 2.0*s.x*s.y-p.y-t.y*2.);//this is {s=s^2-p;s.real=-1./s.real}
                 }
                            else break;
-            float centralPowerInverter=(s.x/s.y)*sign(s.x*s.y);
-                //I was studying this function without the face and a power short ocurred and on firefox window restore and caused a semi-reversion hybridization
+            float centralPowerInverter=abs(s.x/s.y)*sign(s.x*s.y);
+                //I was studying this function without the face and a power short ocurred and the firefox window restored and caused a semi-reversion hybridization
                 
                 if(Character==3||musicAngelMan==1)centralPowerInverter*=.5;
                 else if(Character==4&&musicAngelMan!=2)centralPowerInverter+=s.x*2.;
@@ -3118,6 +3118,12 @@ else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter
 
        if(spirated!=0.&&dstnce<twoThirds)//CORE_DELIMITER)  //works well<(n-1)/n
 s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
+
+
+//vvvvbelow should be added at some point
+//float whirlpoolMeta=1.;
+//if(counter>0.)s=spin2(s,whirlpoolMeta*dstnce*.75/3.*PI);
+
 dstnce = length(s);
 
         
