@@ -2435,7 +2435,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
             }
             
             if (l>1.)l=1.;
-            if(abs(p.y)/p.x>-2.2&&p.x<0.&&p.x>-1.&&l<.50&&l>0.)l=0.;//remove black from behind mny's eyes
+            if(abs(p.y)/p.x>-2.2&&p.x<0.&&p.x>-1.&&(l)<.50)l=0.;//remove black from behind mny's eyes
                if((Character==3||musicAngelMan==1))
                {
                    if(p.y==0.&&p.x>0.&&t.y==0.)l=0.;
