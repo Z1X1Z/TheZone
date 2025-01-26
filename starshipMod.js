@@ -449,7 +449,7 @@ let pushBackCounter = 0;
                             d_y*=flatline
                             if(on&&totalAMP>.000001)
                             {
-             if(shouldShowStar)
+             if(shouldShowStar&&touchMode)
              {
                  uniforms.d.value.x+=d_x;
                  uniforms.d.value.y+=d_y;
