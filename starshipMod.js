@@ -449,8 +449,16 @@ let pushBackCounter = 0;
                             d_y*=flatline
                             if(on&&totalAMP>.000001)
                             {
-             uniforms.d.value.x=d_x;
-             uniforms.d.value.y=d_y;
+             if(shouldShowStar)
+             {
+                 uniforms.d.value.x+=d_x;
+                 uniforms.d.value.y+=d_y;
+             }
+             else {
+                 
+                     uniforms.d.value.x=d_x;
+                     uniforms.d.value.y=d_y;
+             }
       
                                
                                FEEDBACKuniforms.d.value=new THREE.Vector2(d_x,d_y);
@@ -1539,13 +1547,14 @@ function runOSMD (){
                                 //if(pointerZoom)
                                 {
                                     ONbypass = true;
-                                 
+                                    uniforms.d.value.x=0.;
+                                    uniforms.d.value.y=0.;
                                     let touchMovement=[0,0];
                                      if(zoomRate!=0&&!zoomAtl41) touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
                                         else touchMovement=[-xTouch/zoomFrames,yTouch/zoomFrames]
                                     if(!window.shouldShowStar||touchOnlyMode)uniforms[ "volume" ].value=1.;
                                     uniforms["zoomOutRatchetThreshold" ].value=0.;;
-                                    if(!shouldShowStar||touchOnlyMode)
+                                   // if(!shouldShowStar||touchOnlyMode)
                                     {
                                         uniforms.d.value.x+=xTouchMicroBuffer/uniforms[ "volume" ].value;
                                         uniforms.d.value.y+=-yTouchMicroBuffer/uniforms[ "volume" ].value;
