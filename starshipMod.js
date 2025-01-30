@@ -1553,12 +1553,18 @@ function runOSMD (){
                                      if(zoomRate!=0&&!zoomAtl41) touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
                                         else touchMovement=[-xTouch/zoomFrames,yTouch/zoomFrames]
                                     if(!window.shouldShowStar||touchOnlyMode)uniforms[ "volume" ].value=1.;
-                                    uniforms["zoomOutRatchetThreshold" ].value=0.;;
-                                    if(!shouldShowStar||touchOnlyMode)
+                                    uniforms["zoomOutRatchetThreshold" ].value=0.;
+                                    let dxVolumized =xTouchMicroBuffer
+                                    let dyVolumized =yTouchMicroBuffer
+
+                                    if(uniforms[ "volume" ].value>0.)
                                     {
-                                        uniforms.d.value.x+=xTouchMicroBuffer/uniforms[ "volume" ].value;
-                                        uniforms.d.value.y+=-yTouchMicroBuffer/uniforms[ "volume" ].value;
+                                        dxVolumized /=uniforms[ "volume" ].value
+                                        dyVolumized /=uniforms[ "volume" ].value
                                     }
+                                        uniforms.d.value.x+=dxVolumized;
+                                        uniforms.d.value.y+=dyVolumized;
+                                    
                                     var spunTouch=touchMovement;
                                           if(uniforms.carousel.value!=0.)
                                               spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
