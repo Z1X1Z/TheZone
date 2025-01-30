@@ -1554,7 +1554,7 @@ function runOSMD (){
                                         else touchMovement=[-xTouch/zoomFrames,yTouch/zoomFrames]
                                     if(!window.shouldShowStar||touchOnlyMode)uniforms[ "volume" ].value=1.;
                                     uniforms["zoomOutRatchetThreshold" ].value=0.;;
-                                   // if(!shouldShowStar||touchOnlyMode)
+                                    if(!shouldShowStar||touchOnlyMode)
                                     {
                                         uniforms.d.value.x+=xTouchMicroBuffer/uniforms[ "volume" ].value;
                                         uniforms.d.value.y+=-yTouchMicroBuffer/uniforms[ "volume" ].value;
