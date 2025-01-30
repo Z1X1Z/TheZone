@@ -1563,7 +1563,7 @@ function runOSMD (){
                                         dyVolumized /=uniforms[ "volume" ].value
                                     }
                                         uniforms.d.value.x+=dxVolumized;
-                                        uniforms.d.value.y+=dyVolumized;
+                                        uniforms.d.value.y+=-dyVolumized;
                                     
                                     var spunTouch=touchMovement;
                                           if(uniforms.carousel.value!=0.)
