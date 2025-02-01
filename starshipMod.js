@@ -1562,6 +1562,7 @@ function runOSMD (){
                                         dxVolumized /=uniforms[ "volume" ].value
                                         dyVolumized /=uniforms[ "volume" ].value
                                     }
+                                    else uniforms[ "volume" ].value=1.;
                                         uniforms.d.value.x+=dxVolumized;
                                         uniforms.d.value.y+=-dyVolumized;
                                     
