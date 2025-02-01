@@ -1557,7 +1557,7 @@ function runOSMD (){
                                     let dxVolumized =xTouchMicroBuffer
                                     let dyVolumized =yTouchMicroBuffer
 
-                                    if(uniforms[ "volume" ].value>0.)
+                                    if(uniforms[ "volume" ].value>.001)//a specific value from one platform
                                     {
                                         dxVolumized /=uniforms[ "volume" ].value
                                         dyVolumized /=uniforms[ "volume" ].value
