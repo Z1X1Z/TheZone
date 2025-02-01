@@ -455,7 +455,8 @@ let pushBackCounter = 0;
                  uniforms.d.value.y+=d_y;
              }
              else {
-                 
+                 uniforms["zoomOutRatchetThreshold" ].value=zoomOutRatchetThreshold;
+
                      uniforms.d.value.x=d_x;
                      uniforms.d.value.y=d_y;
              }
@@ -1557,7 +1558,7 @@ function runOSMD (){
                                     let dxVolumized =xTouchMicroBuffer
                                     let dyVolumized =yTouchMicroBuffer
 
-                                    if(uniforms[ "volume" ].value>zoomOutRatchetThreshold)
+                                    if(uniforms[ "volume" ].value>0)
                                     {
                                         dxVolumized /=uniforms[ "volume" ].value
                                         dyVolumized /=uniforms[ "volume" ].value
@@ -2045,7 +2046,6 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
     
         uniforms[ "time2dance" ].value += audioX.sampleRate/bufferSize*totalAMP;
         uniforms["volume" ].value = audioX.sampleRate/bufferSize*totalAMP/(1.+zoomOutRatchetThreshold);
-    uniforms["zoomOutRatchetThreshold" ].value=zoomOutRatchetThreshold;
         uniforms[ "zoom" ].value = zoom;
     
     
