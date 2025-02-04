@@ -190,7 +190,7 @@ function resetAll(){
     window.skew = 0.;
     window.flip = 1.;
     window.cycleCores = false;
-
+    window.sheetTranslucent=false;
             window.FPS=60;
             window.zoom=1.;
             window.ISdilated=false;

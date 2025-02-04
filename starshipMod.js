@@ -1071,7 +1071,7 @@ window.addEventListener("orientationchange", onWindowResize, false);
 
 function onWindowResize() {
 
-                        if (!sheetTranslucent)
+                        if (!sheetTranslucent&&"osmd" in window &&osmd!=null)
                         {
                             correlationForTextY=document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight
                             bottomOfScreenHeight = correlationForTextY;
@@ -1855,7 +1855,7 @@ function runOSMD (){
 
     
      
-     if(!sheetTranslucent&& bottomOfScreenHeight != document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight)adjustThreeJSWindow();//readjust for verbose
+     if(!sheetTranslucent&& bottomOfScreenHeight != document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight)onWindowResize();//readjust for verbose
     uniforms[ "time" ].value = timestamp/1000.+window.startTimeSecondMantissaMagnified;
 
     if(uniforms.starSpin.value!=0&&isFinite(uniforms[ "time" ].value)&&isFinite(lastTIMEUNIFORM))

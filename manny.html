@@ -1243,7 +1243,15 @@ Reset Zoom![L]</a><br>
 
                   </div>
         <script>
-            function clearOSMD(){
+            function setTransparencyCSS(){
+                if (sheetTranslucent) {
+                           document.getElementById("textWindow").style="position:fixed; margin-left:50%;"
+                                             document.getElementById("osmdCanvas").style.bottom="100px"
+                }
+                else {   document.getElementById("textWindow").style="position:static;margin-left:0%;";
+                                             document.getElementById("osmdCanvas").style.bottom="0px"
+                                        bottomOfScreenHeight=0;
+                    }
             }
             </script>
         <div class="dropdown">
@@ -1258,6 +1266,14 @@ Reset Zoom![L]</a><br>
 
                     if (uniforms.scoreLoaded.value) osmd.clear();
                     uniforms.scoreLoaded.value=true;
+            
+            
+            
+                    setTransparencyCSS();
+            
+            
+            
+            
                 }
                 else{
                         osmd.zoom=0.;
@@ -1287,19 +1303,10 @@ Reset Zoom![L]</a><br>
    {
               sheetTranslucent=!sheetTranslucent;
 
-        if (sheetTranslucent) {
-                   document.getElementById("textWindow").style="position:fixed; margin-left:50%;"
-                                     document.getElementById("osmdCanvas").style.bottom="100px"
-        }
-        else {   document.getElementById("textWindow").style="position:static;margin-left:0%;";
-                                     document.getElementById("osmdCanvas").style.bottom="0px"
-                                bottomOfScreenHeight=0;
-            }
+                   setTransparencyCSS();
                 if("osmd" in window && typeof osmd != null){
                         setOSMDcolors();
-
-                        osmdResize();
-                        adjustThreeJSWindow();
+                        onWindowResize();
                     }
    }
    
