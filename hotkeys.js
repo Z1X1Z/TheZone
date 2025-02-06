@@ -57,7 +57,7 @@ twelveGatesMeta:{value: .4    },
 Spoker:{value: true    },
         spokelover:{value: true    },
 largeEyeColor:{value:0.},
-holieyes:{value:1},
+holyeyes:{value:1},
     
     
 dilate:{value:true},
@@ -463,7 +463,7 @@ function callKey(event){
     else if (event.ctrlKey&&key=="j")window.Oreo=!window.Oreo;
     else if (event.ctrlKey&&key=="t")window.shouldShowStar=!window.shouldShowStar;
     else if (event.ctrlKey&&key=="r")window.flame=!window.flame;
-    else if (event.ctrlKey&&key=="l")         uniforms.holieyes.value=(uniforms.holieyes.value+1)%4;
+    else if (event.ctrlKey&&key=="l")         uniforms.holyeyes.value=(uniforms.holyeyes.value+1)%4;
 
     else if (event.ctrlKey&&key=="g") {
         if( uniforms.exponentialPetals.value==0.) uniforms.exponentialPetals.value=1.;
