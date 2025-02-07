@@ -931,6 +931,12 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                        <label for="sphereClover">Sphere Clover![,f]</label><br>
                                        
                                        
+                                      <input type="checkbox" id="chop" name="t"  onclick= "
+                                          key  = 'e';
+                                          callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                                       <label for="chop">Chop![,e]</label><br>
+                                       
+                                       
                                      <label for="Base Number">Log base this of x^3 (maybe 1.5-4):</label>
                                     <input type="number" id="Base Number" name="Base Number" class="num" onkeyup="
                 number = false
@@ -1978,10 +1984,10 @@ float brightness=0.;
               float b =nyq*pow(2.,angle+n);
               float frampBuffer = texture2D(micIn, vec2(b,0.)).r;
                 frAmp += frampBuffer;
-                brightness +=((n+3.))*frampBuffer;
+                brightness +=((n+3.+1.))*frampBuffer;
 
         }
-         brightness/=5.;
+         brightness/=10.;
          //  frAmp/=255.;
          frAmp/=2.;
        //    frAmp=pow(frAmp,.888);
@@ -2014,8 +2020,8 @@ float brightness=0.;
                                            mod((-angle+1./12.)//+3.-flipStar/12.
                                                ,1.),.75,1.
                                            ))
-                              ,.0,1.)/pow(2.,d*1.66)
-                   *brightness
+                              ,.0,1.)/pow(2.,d)
+                   *brightness*brightness
                    , 1.);
         else ret= vec4(.0);
         return ret;
