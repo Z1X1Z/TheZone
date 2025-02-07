@@ -1684,6 +1684,7 @@ void main(){
     varying vec2 vUv;
     uniform float coreDilation;
     
+    uniform bool chop;
     uniform bool superStable;
     uniform bool spinTowardsMe;
     uniform float whirlpool;
@@ -1968,15 +1969,19 @@ vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
      //   const float octBoost = 17.;
       //  float b =nyq*pow(2.,angle+octBoost);
 //starts -3, full -2
+float brightness=0.;
         for (float n = -3.; n<6.;n+=1.)//the range seems small
        // if(b>=.5/nyq&&b<sampleRate/2.)
 //not sure why it has negative range
         //if (twistStar<24.)
          {
               float b =nyq*pow(2.,angle+n);
+              float frampBuffer = texture2D(micIn, vec2(b,0.)).r;
+                frAmp += frampBuffer;
+                brightness +=((n+3.))*frampBuffer;
 
-                frAmp += texture2D(micIn, vec2(b,0.)).r;
         }
+         brightness/=5.;
          //  frAmp/=255.;
          frAmp/=2.;
        //    frAmp=pow(frAmp,.888);
@@ -2009,7 +2014,9 @@ vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
                                            mod((-angle+1./12.)//+3.-flipStar/12.
                                                ,1.),.75,1.
                                            ))
-                              ,.0,1.)/pow(2.,d*3.), 1.);
+                              ,.0,1.)/pow(2.,d*1.66)
+                   *brightness
+                   , 1.);
         else ret= vec4(.0);
         return ret;
     }
@@ -2965,6 +2972,9 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
      
     // hyperCore-=coreDilation;
   //  if(cloverSlide&&wheel)hyperCore+=1.75/log(.5);
+
+ //if(chop) hyperCore-=.25/log(.5);//1./(7.*log(.5));
+
    if(clvrVariant4)
    {
     hyperCore-=.25/log(.5);//1./(7.*log(.5));
@@ -3210,6 +3220,7 @@ vec2 lastS = s;
       // if (mod(counter,5.) == 4.)s =pCenterCored;
        //x**3
        dstnce = length(s);
+       if(chop&&dstnce>2./3.)s=spin2(s,floor(dstnce)*PIdiv2);
 
        if(dilate){
                  /* float sliceanddiceBoost=mod((atan(s.y,s.x)+chiralAdjustment)*divideByMultiplyingPi2*6.+1.,1.)*dstnce*dstnce;
@@ -3224,6 +3235,7 @@ vec2 lastS = s;
 
                
        }
+       
 
        if(clvrVariant9) s+= coords*gr;
 
@@ -3296,7 +3308,6 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
    //traditionally be e or 3 probably 1.5 to 4
    dstnce = length(s);
 
-   
 
 if(Spoker){
    // if(morph==0.)
@@ -3501,6 +3512,9 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
        
 }
    */
+   
+
+
     if(spinTowardsMe) if(float(i)>=hyperCoreBoosted)s=spin2(s,atan(d.y,d.x));
 
    // if(distributor)s=spin2(s,distributorFACTOR);
@@ -3558,6 +3572,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
 OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
 OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
   if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spin2(s,atan(s.y,s.x)*OmniPetal);
+  
 
  if (cloverSlide)
    {
@@ -3611,7 +3626,6 @@ OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
      
 }
 else break;
-
 
  
 hyperCoreBoosted--;

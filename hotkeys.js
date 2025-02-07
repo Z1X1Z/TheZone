@@ -139,6 +139,7 @@ duperZoom: {value:1.},
 exponentialPetals:{value:0.},
 cloverOffset:{value:0.},
 spinTowardsMe:{value:false},
+chop:{value:false},
 whirlpool:{value:0}
         }
 window.uniforms={}
@@ -421,8 +422,8 @@ function callKey(event){
                 if(key == "u" && event.ctrlKey)
                     uniforms.pongOn.value = !uniforms.pongOn.value;
     else if(key == "c" && event.ctrlKey){dynamicCoring=!dynamicCoring; if(!dynamicCoring)coreData.fill(document.getElementById('coringConstant').value);}
-                if(key == "h" && event.ctrlKey)uniforms.spinTowardsMe.value=!uniforms.spinTowardsMe.value
-
+               else if(key == "h" && event.ctrlKey)uniforms.spinTowardsMe.value=!uniforms.spinTowardsMe.value
+                   else if(key == "e" && event.ctrlKey)uniforms.chop.value=!uniforms.chop.value;
     else if(key == "q" && event.ctrlKey)uniforms.squareClover.value=!uniforms.squareClover.value;
     else if(key == "x" && event.ctrlKey)uniforms.fieldPowerBoost.value=!uniforms.fieldPowerBoost.value;
     else if(key == "z" && event.ctrlKey)uniforms.fieldPowerBoostMeta.value=!uniforms.fieldPowerBoostMeta.value;
