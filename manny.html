@@ -2007,13 +2007,14 @@ float brightness=0.;
        
        vec4 ret =vec4(0.);
        
-         if ((frampDIVlend>.5|| frampMultlen>.25)
+         if (
+             (frampDIVlend>.5|| frampMultlen>.25)
              &&(frampDIVlend<1.||(frampDIVlend>2.
                                    &&frampDIVlend<4.||(frampDIVlend>8.
                                       &&frampDIVlend<16.||(frampDIVlend>32.
                                          &&frampDIVlend<64.||(frampDIVlend>128.
                                          )))))
-                || (frampMultlen>.5)
+                || (frampMultlen>.5&&frampMultlen<.75)
             )
         ret=  vec4(clamp(hsv2rgb(
                                       vec3(
