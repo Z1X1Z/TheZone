@@ -2195,6 +2195,7 @@ return h;
                               vec2 p = (vec2(g.x,g.y)-vec2(t.x,-t.y));//vec2(g.x,-g.y);
 
                               bool bfeye= false;
+                              bool notEars= false;
                         vec4 l = vec4(0.);
                         if(brelued<0.)p.y*=-1.;
                         if(flipStar<0.)p.y*=-1.;
@@ -2216,11 +2217,16 @@ return h;
                             
                             l=vec4(vec3(1.-abs(z.y)*6.),1.);//smooths middle horn, removes some clouds
                             vec2 s=z;//vec2(z.x,-z.y);
+                            
+                            if(f==7&&s.x<0.)notEars=true;
+                                                                if((f==16||f==17)&&s.x<0.&&!notEars){l=vec4(vec3(.5),1.);break;}
+                            /*
                             if( (f == 13||f==14)&&s.x<.0&&abs(p.y)>.68&&p.x>0.){l=vec4(vec3(.5),1.);break;}
                             else if(f<=15&&z.x>-.1){
                                 l=vec4(vec3(-z.x),1.);
                                // if( f == 15&&z.x>-.10&&abs(p.y)>.75){l=vec4(vec3(z.x),.5);break;}
                             }
+                             */
                             if(holyeyes==0);
                             else if(holyeyes==2)
                             {
@@ -2256,7 +2262,7 @@ return h;
                                 break;
                             }
                             
-                      else if (f==17 &&p.x>.0&&p.x<.5){
+                      else if (f==17 &&p.x>.0&&p.x<.5&&s.x>-.2){
                           l = vec4( 1.-eyeColorCycler,eyeColorCycler,1.-eyeColorCycler,.5);//green nose
                           break;
                       }
@@ -2308,7 +2314,7 @@ return h;
                                 break;
                             }
                             
-                      else if (f==17 &&p.x>.0&&p.x<.5){
+                      else if (f==17 &&p.x>.0&&p.x<.5&&s.x>-.2){
                           l = vec4( hsv2rgb( vec3(mod(7./12.+eyeColorCycler,1.) ,.5,1. )),.5);//green nose
                           break;
                       }
