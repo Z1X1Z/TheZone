@@ -678,7 +678,7 @@ function callKey(event){
     }
                 
                 else if (event.altKey&&(key=="∂"||key=="d"))//∂ is alt+d
-                    uniforms.armsSpinning.value=           (uniforms.armsSpinning.value+1)%4
+                    uniforms.armsSpinning.value=           (uniforms.armsSpinning.value+1)%2//more modes were found unstably
 
                 else if (event.altKey&&(key=="ø"||key=="o")) {
                     uniforms.dilate.value=!uniforms.dilate.value;

@@ -2553,6 +2553,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
 
                     vec3 torso(vec2 g, vec2 t,bool spinning){
                                               if(armsSpinning==0)spinning=false;
+                                              
                                               g.x*=-1.;
                                               t*=-1.;
                     float b = 0.;
@@ -2560,7 +2561,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                     
                     
                     if((abs(g.y)<1.25||!spinning)&&g.x<0.)
-                    
+
                     {
                     if(g.x*g.x+g.y*g.y<40.)
                     for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;break;}
@@ -2574,13 +2575,14 @@ vec3 faceFORWARD(vec2 p,vec2 t){
         {
               vec2 elbow =vec2(-.5,1.)*1.25;
                     float angle =atan(d.x,d.y);
-                    if(armsSpinning==1){angle*=sign(g.y);}
-                    else if(armsSpinning==2){angle=angle*sign(g.y)+PI;}
-                    else if(armsSpinning==3){angle=-abs(angle);}
-                    angle+=PI/2.;
+                    if(true);else
+                    if(armsSpinning==1){angle*=-1.*sign(-g.y);}
+                   // else if(armsSpinning==2){angle*=-1.*sign(g.y);}
+                   // else if(armsSpinning==3){angle=-abs(angle)*sign(-g.y);}
+                    //angle+=PI/2.;
                                         //angle+=PI/2.;//-pi/4.;
                     vec2 spinningArm=spin2(g-elbow,angle//(atan(d.x,d.)
-                                           )+elbow;//-spin2(elbow,angle);
+                                           )/vec2(4.,2.)+elbow;//-spin2(elbow,angle);
         
 
                     z=spinningArm;
@@ -2596,8 +2598,8 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                     elbow =vec2(-.5,-1.)*1.25;
             //    g=p;
                     // angle = atan(d.x,d.y);//-PI*4./3.;
-                     spinningArm=spin2(g-elbow,-angle//
-                                           )+elbow;//-spin2(elbow,angle);
+                     spinningArm=spin2(g-elbow,angle//
+                                           )/vec2(4.,2.)+elbow;//-spin2(elbow,angle);
 
                     z=spinningArm;
                 if((spinningArm.y)<-1.25)
