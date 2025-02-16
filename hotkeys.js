@@ -140,7 +140,8 @@ exponentialPetals:{value:0.},
 cloverOffset:{value:0.},
 spinTowardsMe:{value:false},
 chop:{value:false},
-whirlpool:{value:0}
+whirlpool:{value:0},
+armsSpinning:{value:0}
         }
 window.uniforms={}
 
@@ -485,7 +486,7 @@ function callKey(event){
     {
         uniforms.Pointers.value=!uniforms.Pointers.value;
     }
-    else if (event.altKey&&(key=="ç"||key=="c"))uniforms.distributor.value = !uniforms.distributor.value;
+    else if (event.altKey&&(key=="ç"||key=="c"))uniforms.distributor.value = !uniforms.distributor.value;//hotkey seems to already be in use for bible chapter
 
     else if (event.altKey&&(key=="µ"||key=="m"))
     {if(number!="no number")
@@ -676,9 +677,9 @@ function callKey(event){
         else uniforms.refactorCores.value=2;
     }
                 
-                else if (event.altKey&&(key=="∂"||key=="d")&&(!runningHash||!window.online))//∂ is alt+d
-                    window.dupered=!window.dupered;
-                
+                else if (event.altKey&&(key=="∂"||key=="d"))//∂ is alt+d
+                    uniforms.armsSpinning.value=           (uniforms.armsSpinning.value+1)%4
+
                 else if (event.altKey&&(key=="ø"||key=="o")) {
                     uniforms.dilate.value=!uniforms.dilate.value;
 
