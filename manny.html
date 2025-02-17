@@ -2551,14 +2551,14 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                     return p;
                     }
 
-                    vec3 torso(vec2 g, vec2 t,bool spinning){
+                    vec4 torso(vec2 g, vec2 t,bool spinning){
                                               if(armsSpinning==0)spinning=false;
                                               
                                               g.x*=-1.;
                                               t*=-1.;
                     float b = 0.;
                     vec2  z=g.xy;
-                    
+                    float arm =0.;
                     
                     if((abs(g.y)<1.25||!spinning)&&g.x<0.)
 
@@ -2588,7 +2588,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                     z=spinningArm;
                 if(spinningArm.y>1.25)
                     {
-                    for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;break;}
+                    for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;arm=1.;break;}
                     else{
                         z=2.*vec2(1./(z.x*z.x-z.y*z.y+spinningArm.x+t.x),(2.0*z.x*z.y+spinningArm.y+t.y));
                        //if(z.x>0.)//likely clipped off headbody
@@ -2604,14 +2604,14 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                     z=spinningArm;
                 if((spinningArm.y)<-1.25)
                     {
-                    for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;break;}
+                    for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;arm=1.;break;}
                     else{
                         z=2.*vec2(1./(z.x*z.x-z.y*z.y+spinningArm.x+t.x),(2.0*z.x*z.y+spinningArm.y+t.y));
                        //if(z.x>0.)//likely clipped off headbody
                         z.x=sqrt(abs(z.x));}
                     }
                 }
-                    return vec3(b,b/2.5,0.);
+                    return vec4(b,b/2.5,0.,arm);
                     }
     
                     vec3 musculature(vec2 g, vec2 t){
@@ -4460,25 +4460,25 @@ vec3 xtol(vec2 s, vec2 t){
           
   vec3 body(vec2 p, vec2 t){
     vec3 b = vec3( 0.);
-    b = torso(p,t,false);
+    b = torso(p,t,false).xyz;
     if(p.x>0.)
     {b+=musculature(p,t);}
     return b+robe(p,t)+legs(p,t/33.3)+heart(p*2.,t);}
       
-vec3 bodyPlayer(vec2 p, vec2 t){
-vec3 b = vec3( 0.);
+vec4 bodyPlayer(vec2 p, vec2 t){
+vec4 b = vec4( 0.);
 b = torso(p,t,true);
-if(p.x>0.){if(p.x>.333)b+=musculature(p,t);}
-return b+legs(p,t/33.3);}
+if(p.x>0.){if(p.x>.333)b+=vec4(musculature(p,t),0.);}
+return b+vec4(legs(p,t/33.3),0.);}
       
                       vec3 bodyFourCreatureCharacter(vec2 p, vec2 t){
                       vec3 b = vec3( 0.);
-                      b = torso(p,t,true);
+                      b = torso(p,t,true).xyz;
                       if(p.x>0.){if(p.x>.25)b+=musculature(p,t);}
                       return b+robe(p,t)+legs(p,t/33.3);}
 
                       
-  vec3 bod(vec2 p, vec2 t){return torso(p,t,false)+musculature(p,t)+robe(p,t)+legs(p,t/33.3);}
+  vec3 bod(vec2 p, vec2 t){return torso(p,t,false).xyz+musculature(p,t)+robe(p,t)+legs(p,t/33.3);}
   vec3 manny(vec2 p, vec2 t){
     return shiny(p,t)+body(p,t)
     ;}
@@ -4713,6 +4713,8 @@ vec2 dance = vec2(0.);
                                                                  vec3 AM =  vec3(0.);//faceFORWARDTWO(characterOnTrailP/2.,vec2(0.));
                                                                  vec3 clothes=vec3(0.);
                                                                  float elbowed = 0.;
+                                                                 vec4 bodyWithArms = vec4( 0.);
+
 if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                  else if(Character==1){
                        
@@ -4722,28 +4724,18 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                        if (elbowed<-1.)elbowed=-1.;
                        
                        clothes=robeL(characterOnTrailP,vec2(elbowed),move/5.)*.95;}
-                                            else if(Character<=9)clothes=robe(characterOnTrailP,moveDynamic);
-                                                                
+                                            else if(Character<=9)
+                                                                 {
+                       bodyWithArms = bodyPlayer(characterOnTrailP,moveDynamic);
+                       clothes=robe(characterOnTrailP,moveDynamic);
+                                                                }
             if(colorCombo!=17&&colorCombo!=20){
-                   if(metronome>1.) mnyX = mannyX(characterOnTrailP/2.*1.221221,vec2(time))+bodyPlayer(characterOnTrailP,moveDynamic);
+                   if(metronome>1.) mnyX = mannyX(characterOnTrailP/2.*1.221221,vec2(time))+bodyWithArms.xyz;
                    else if (Character==0){
                        mannyFace = (faceBlackAndWhite(characterOnTrailP*1.221221,moveDynamic));//,0.,1.);
                        
-                         vec3 b = vec3( 0.);
-                         b = torso(characterOnTrailP,moveDynamic,true);
                          
-                         float notBody=0.;
-                         if(b.x==0.&&b.y==0.&&b.z==0.)
-                         {
-                          notBody=1.;
-                         }
-                         else if( mannyFace.x<0.)notBody=-1.;
-
-                         if(p.x>0.)
-                         {b+=musculature(characterOnTrailP,moveDynamic);}
-                         
-                       mny=b+robe(characterOnTrailP,moveDynamic)+legs(characterOnTrailP,moveDynamic/33.3)+heart(characterOnTrailP*2.,moveDynamic)//+shiny(characterOnTrailP*1.221221,moveDynamic)
-                       +mannyFace.xyz*(b+notBody);
+                       mny=bodyWithArms.xyz+mannyFace.xyz*(1.-bodyWithArms.w);
                    }
                    else if (Character==1){
                        
@@ -4761,15 +4753,15 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                    else if (Character==3||Character==4){
                     overchargeCharacter = faceFORWARDstatic(characterOnTrailP*angelSize,moveDynamic);
                      if(musicAngelMan>0) AM+= overchargeCharacter;
-                       mny=bodyPlayer(characterOnTrailP,moveDynamic);
+                       mny=bodyWithArms.xyz;
                    }
-                   else if (Character==5)mny=lion(fourcreaturePlayerP,vec2(inversion,0.))+bodyPlayer(characterOnTrailP,moveDynamic);
+                   else if (Character==5)mny=lion(fourcreaturePlayerP,vec2(inversion,0.))+bodyWithArms.xyz;
                    else if (Character==6){
-                       mny=eaglePerched(fourcreaturePlayerP,vec2(inversion,0.))+bodyPlayer(characterOnTrailP,moveDynamic);
+                       mny=eaglePerched(fourcreaturePlayerP,vec2(inversion,0.))+bodyWithArms.xyz;
                        swordSkew+=1.;}
-                   else if (Character==7)mny=ox(fourcreaturePlayerP,vec2(inversion,0.))+bodyPlayer(characterOnTrailP,moveDynamic);
-                   else if (Character==8)mny=man(fourcreaturePlayerP,vec2(inversion,0.))+bodyPlayer(characterOnTrailP,moveDynamic);
-                   else if (Character==9)mny=bodyPlayer(characterOnTrailP,moveDynamic)//+heart(characterPSpunToKey*(2.)*pow(-leaf,3.),moveDynamic*1.5)
+                   else if (Character==7)mny=ox(fourcreaturePlayerP,vec2(inversion,0.))+bodyWithArms.xyz;
+                   else if (Character==8)mny=man(fourcreaturePlayerP,vec2(inversion,0.))+bodyWithArms.xyz;
+                   else if (Character==9)mny=bodyWithArms.xyz//+heart(characterPSpunToKey*(2.)*pow(-leaf,3.),moveDynamic*1.5)
                    +clamp(face(characterOnTrailP*1.221221,moveDynamic)+heart(characterPSpunToKey*min(resolution.x,resolution.y)/max(resolution.x,resolution.y)
                                                                             /gr,moveDynamic/5.),0.,1.);
                                                                            // else if (Character==10)mny=sealedMan(characterOnTrailP,moveDynamic);
@@ -5088,7 +5080,7 @@ if(starOnDot>=1){
                                                                     //not working:flames
                                                                     
                                                                     }
-                                                                 if(colorCombo!=17&&colorCombo!=20)   mny+=clothes;
+                                                                 if(colorCombo!=17&&colorCombo!=20)   mny+=clamp(clothes-bodyWithArms.w*100.,0.,1.)+bodyWithArms.xyz*bodyWithArms.w*clamp(clothes*100000.,0.,1.);
 
                                                                  
                                                                  
