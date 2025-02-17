@@ -141,7 +141,7 @@ cloverOffset:{value:0.},
 spinTowardsMe:{value:false},
 chop:{value:false},
 whirlpool:{value:0},
-armsSpinning:{value:0}
+armsSpinning:{value:1}
         }
 window.uniforms={}
 
