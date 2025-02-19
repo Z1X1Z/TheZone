@@ -2581,7 +2581,26 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                    // else if(armsSpinning==3){angle=-abs(angle)*sign(-g.y);}
                     //angle+=PI/2.;
                                         //angle+=PI/2.;//-pi/4.;
-                    vec2 spinningArm=spin2(g-elbow,angle//(atan(d.x,d.)
+                                        float angleOffset1=0.,angleOffset2=0., angleDirection=1.;
+                                        if(armsSpinning==2)
+                                        {
+                                            
+                                                angleOffset1 =  PIdiv2;
+                                                angleOffset2=angleOffset1+PI;
+                                                
+                                            }
+                                        else if(armsSpinning==3)
+                                        {
+                                                angleOffset1 = -PIdiv2;
+                                                angleOffset2=angleOffset1+PI;
+                                            }
+                                        else if(armsSpinning==4)
+                                        {
+                                            angleDirection=-1.;
+                                            angle=-abs(angle)+PIdiv2;
+                                        }
+
+                    vec2 spinningArm=spin2(g-elbow,angle+angleOffset1//(atan(d.x,d.)
                                            )/vec2(4.,2.)+elbow;//-spin2(elbow,angle);
         
 
@@ -2598,7 +2617,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                     elbow =vec2(-.5,-1.)*1.25;
             //    g=p;
                     // angle = atan(d.x,d.y);//-PI*4./3.;
-                     spinningArm=spin2(g-elbow,angle//
+                     spinningArm=spin2(g-elbow,angle*angleDirection+angleOffset2//
                                            )/vec2(4.,2.)+elbow;//-spin2(elbow,angle);
 
                     z=spinningArm;
