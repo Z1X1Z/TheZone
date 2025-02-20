@@ -2575,22 +2575,28 @@ vec3 faceFORWARD(vec2 p,vec2 t){
         {
               vec2 elbow =vec2(-.5,1.)*1.25;
                     float angle =atan(d.x,d.y);
-                    if(true);else
-                    if(armsSpinning==1){angle*=-1.*sign(-g.y);}
+                    float angleOffset1=0.,angleOffset2=0., angleDirection=1.;
+
+                    if(armsSpinning==1){
+                        //t=vec2(0.);
+                        //angle*=-1.*sign(-g.y);
+                        
+                    }
                    // else if(armsSpinning==2){angle*=-1.*sign(g.y);}
                    // else if(armsSpinning==3){angle=-abs(angle)*sign(-g.y);}
                     //angle+=PI/2.;
                                         //angle+=PI/2.;//-pi/4.;
-                                        float angleOffset1=0.,angleOffset2=0., angleDirection=1.;
-                                        if(armsSpinning==2)
+                                       else if(armsSpinning==2)
                                         {
-                                            
+                                                t=vec2(0.);
                                                 angleOffset1 =  PIdiv2;
                                                 angleOffset2=angleOffset1+PI;
                                                 
                                             }
                                         else if(armsSpinning==3)
                                         {
+                                            t=vec2(0.);
+
                                                 angleOffset1 = -PIdiv2;
                                                 angleOffset2=angleOffset1+PI;
                                             }
