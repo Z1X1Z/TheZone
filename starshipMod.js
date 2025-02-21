@@ -2280,7 +2280,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
                 let starStreamStride = 0;
                 
                 let starMoment=starStreamIndex;
-                while(xyStarParticleArray[starMoment]!=null)
+                while(xyStarParticleArray[starMoment]!=null&&starMoment!=(starStreamIndex+1)%starCount)
                 {
                     m = xyStarParticleArray[starMoment];
                     if (lastLoopTime!=m.time) {
@@ -2326,7 +2326,6 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
                         
                     }
                     else break ;
-                    
                     starStreamStride+=6;
                     starMoment = (starMoment-1+starCount)%starCount;
                     
