@@ -184,8 +184,8 @@ function resetAll(){
         window.osmdSound = false;
     window.xTouch=0;
     window.yTouch=0;
-    window.xTouchMicroBuffer=1./10000.;
-    window.yTouchMicroBuffer=1./10000.;
+    window.xTouchMicroBuffer=0./10000.;
+    window.yTouchMicroBuffer=-1./10000.;
     window.touchVolume = .5;
     window.radialOctaveBoost = false;
     window.twist = 0.;
@@ -724,8 +724,9 @@ function callKey(event){
      } the bass staff doesn't include the lyrics so it's not included
      */
     else  if (key=="a"){if(number!="no number"){
+        if(number>=1.)
         EldersLeg=Math.round(number)*1.;
-        
+        else if(number!=0.) EldersLeg=-1;
         let minimumFFTfactor = Math.ceil(Math.log(EldersLeg*12*2)/Math.log(2.));
         if(minimumFFTfactor<=15){
             if(minimumFFTfactor>11)//currently a buffersize of 2**11==2048 is required for spirograph
