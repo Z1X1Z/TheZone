@@ -733,7 +733,7 @@ function setFFTdependantSizes(){
              uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
 uniforms.resolution.value = new THREE.Vector2(window.innerWidth,window.innerHeight);
 uniforms.coords.value = new THREE.Vector2(0.,0.);
-uniforms.d.value = new THREE.Vector2(0.,0.);
+uniforms.d.value = new THREE.Vector2(0.,1./10000.);
 uniforms.dotCoord.value = new THREE.Vector2(0.,0.);
   
    uniforms.pongBallCoords.value = new THREE.Vector2(0.,window.innerHeight/gr);
