@@ -1,8 +1,9 @@
 var shaderScale,dilate, coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals
-,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta,spinTowardsMe,d;
+,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta,spinTowardsMe,d,chop;
 function setUniformsToPlainName(){
     Inherited=uniforms.Inherited.value;
-    d=uniforms.d.value
+    d=uniforms.d.value;
+    chop=uniforms.chop.value;
     spinTowardsMe=uniforms.spinTowardsMe.value;
     twelveGates=uniforms.twelveGates.value;
     twelveGatesMeta=uniforms.twelveGatesMeta.value;
@@ -392,7 +393,8 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
 );
     
         dstnce = s.length();
-    
+            if(chop&&dstnce>2./3.)s=spinVector(s,Math.floor(dstnce)*Math.PI/2.);
+
         if(dilate){//this is to allow top level core freeze for original clover
          
              hyperCoreBoosted-=dstnce;
