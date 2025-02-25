@@ -166,7 +166,7 @@ function makeSpirograph(){
     const adjConstant =2*Math.PI*window.ConcertKey/pitch/512.*2**(1./3.)/1.5;//shouldn't be buffersize needs to be revised
     var maxSamp=0.;
     for(var t=0; t<bufferPortion;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
-  
+                                                                  uniforms.maxSamp.value=maxSamp;
     for(var m = 0; m < bufferPortion; m++)
       {
               phase += adjConstant;//spira_pitch;

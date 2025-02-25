@@ -141,7 +141,8 @@ cloverOffset:{value:0.},
 spinTowardsMe:{value:false},
 chop:{value:false},
 whirlpool:{value:0},
-armsSpinning:{value:1}
+armsSpinning:{value:1},
+maxSamp:{value:0.}
         }
 window.uniforms={}
 
@@ -182,6 +183,7 @@ function resetAll(){
     window.DAW=false;
     if(!("DAWSonicTouchArray" in window))    window.DAWSonicTouchArray=[];
         window.osmdSound = false;
+    
     window.xTouch=0;
     window.yTouch=0;
     window.xTouchMicroBuffer=0./10000.;
