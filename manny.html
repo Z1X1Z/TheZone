@@ -2185,7 +2185,8 @@ ret= vec4(clamp(
                                                       {
                                               vec4 o=vec4(0.);
 
-if(uv.x>2./3.){
+if(uv.x>2./3.)
+{
                                                           uv=uv.yx;
                                                           float sideSegment = mod(mod(3.-uv.x*3.,3.)+noteskew+1.,12.);
                                                 
@@ -2208,14 +2209,14 @@ if(uv.x>2./3.){
                                                                  // brightness +=(n+3.+1.)*frampBuffer;
 
                                                           }
-                                                           frAmp/=maxSamp*2.;
+                                                           frAmp/=maxSamp*4./3.;
                                                          //  brightness/=10.;
-                                                       if(sqrt(frAmp)*uv.y/3.>.5)o=vec4(.5);
+                                                       if(sqrt(frAmp)*uv.y/3.>1.)o=vec4(.5);
                                                        
                                                        
                                                       float sideSegmentMediated = sideSegment-.5;
                                                       
-                                                       if(abs(sideSegmentMediated-8.)<.5)o*=-.5;
+                                                       if(abs(sideSegmentMediated-8.)<.5)o*=-1.;
                                                        else if(abs(sideSegmentMediated-10.)<.5)o*=-1.;
                                                        else if(abs(sideSegmentMediated-1.)<.5)o*=-1.;
                                                        else if(abs(sideSegmentMediated-3.)<.5)o*=-1.;
