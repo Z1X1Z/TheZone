@@ -2197,13 +2197,14 @@ if(uv.x>2./3.)
                                                        //   const float octBoost = 17.;
                                                         //  float b =nyq*pow(2.,angle+octBoost);
                                                   //starts -3, full -2
-                                                  float brightness=0.;
-                                                          for (float n = -3.; n<6.;n+=1.)//the range seems small
+                                                  //float brightness=0.;
+                                                  float note = (sideSegment+.5)/12.+twistStar*flipStar*divideByMultiplyingPi2;
+                                                   for (float n = -3.; n<6.;n+=1.)//the range seems small
                                                          // if(b>=.5/nyq&&b<sampleRate/2.)
                                                   //not sure why it has negative range
                                                           //if (twistStar<24.)
                                                            {
-                                                                float b =nyq*pow(2.,sideSegment/12.+n+twistStar*flipStar*divideByMultiplyingPi2);
+                                                                float b =nyq*pow(2.,note+n);
                                                                 float frampBuffer = texture2D(micIn, vec2(b,0.)).r;
                                                                   frAmp += frampBuffer;
                                                                  // brightness +=(n+3.+1.)*frampBuffer;
