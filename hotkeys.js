@@ -142,7 +142,9 @@ spinTowardsMe:{value:false},
 chop:{value:false},
 whirlpool:{value:0},
 armsSpinning:{value:1},
-maxSamp:{value:0.}
+maxSamp:{value:0.},
+minSamp:{value:0.},
+lownote:{value:0.}
         }
 window.uniforms={}
 

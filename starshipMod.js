@@ -80,14 +80,19 @@ var frequencies,
                             
                           
                                                         testar,
-                                                        testarContinuous,
+                                                        
                                                         mustarD,
 star,starColors;
-                            
+let testarContinuous=[];//
+
 var  DAWstar,DAWstarColors;
 let Fret = {x:null,y:null,index:null,volume:0.,note:-12};
 const loudestFret=Array(4).fill(Fret);
+//uniform.
+
                             function vectorize4(){
+                                
+                                
     for(var g = 0;g<loudestFret.length;g++)loudestFret[g]=Object.assign({},Fret);
     let fretCount;
     if(onO) fretCount=starArms
@@ -167,6 +172,10 @@ function makeSpirograph(){
     var maxSamp=0.;
     for(var t=0; t<bufferPortion;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
                                                                   uniforms.maxSamp.value=maxSamp;
+  
+  var minSamp=100000000.;
+  for(var t=0; t<bufferPortion;t++) if(inputData[t]<maxSamp)minSamp=inputData[t];
+                                                                uniforms.minSamp.value=minSamp;
     for(var m = 0; m < bufferPortion; m++)
       {
               phase += adjConstant;//spira_pitch;
@@ -621,6 +630,7 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
 
              }
          }
+
 function setFFTdependantSizes(){
      analyser.fftSize=fftSize;
       bufferSize = fftSize;
@@ -1974,6 +1984,15 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
         
         vectorize4();
     
+    let lowNote = 10000000.;
+    for(var kappa=0.;kappa<testarContinuous.length;kappa++)if (lowNote>testarContinuous[kappa]&&testarContinuous[kappa]>0.&&isFinite(testarContinuous[kappa])
+                                                               )
+    {lowNote=testarContinuous[kappa]
+        uniforms.lownote.value=mustarD[kappa]/2.;
+    }
+    //uniforms.lownote.value=lowNote;
+    console.log(uniforms.lownote.value%12)
+    
     let coreShift=0;
     for(var shift = 0.;shift<4;shift++)//find maximally different loudest note
        if (Math.abs(Math.abs((note*2)%24-loudestFret[shift].note%24)-24/2.)<Math.abs(coreShift-24/2.))
@@ -2030,6 +2049,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
       {document.getElementById("textWindow").innerHTML =
           "<div sytle='font-size: 16px;'>"+
           "<p style='margin : 0px'></p>"+
+          "quietest: "+notes[Math.round(uniforms.lownote.value)%12] +" _ "+uniforms.lownote.value+"<p style='margin : 0px'></p>"+
           " note: "+noteName+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
           "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
           "cores: "+cores+", metaCores: "+ uniforms.externalCores.value + "<p style='margin : 0px'></p>"+

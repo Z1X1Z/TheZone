@@ -1636,8 +1636,21 @@ ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
 
 
         const float PI = 3.14159274;
-        const float gr = -cos(216.*PI/180.)/-cos(612.*PI/180.)-1.;
-                              const float leaf = -1.32471795;
+        
+        
+        
+        
+       // const float gr = -cos(216.*PI/180.)/-cos(612.*PI/180.)-1.;
+                            ///const float leaf = -1.32471795;
+                              //leafbypass to alternative mode below     https://www.wolframalpha.com/input?i=a%3D%28%281-%28%281-%28%281-a%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29
+                              const float leaf = (1.347296355333/-1.32471795)*4./3.;
+                             const gr = //sqrt
+                                                  ((-1.+2.5320888862379)/1.618033988749*1.5);
+                             //a=1.3472963553338606977034332535386295920007513543681387744724827562641316442780294708430332263148
+                              //    a=2.5320888862379560704047853011108333478716649141607904917080905692843107777137494470564585533611
+                             //     and a=-0.87938524157181676810821855464946293987241626852892926618057332554844242199177891789949177967590
+                              
+                              
         float zin(float x){return -sin(x);}
         float coz(float x){return -cos(x);}
         
@@ -1696,7 +1709,8 @@ void main(){
     uniform float coreDilation;
     
     uniform int armsSpinning;
-    
+    uniform float lownote;
+
     uniform bool chop;
     uniform bool superStable;
     uniform bool spinTowardsMe;
@@ -2210,6 +2224,7 @@ if(uv.x>2./3.)
                                                                  // brightness +=(n+3.+1.)*frampBuffer;
 
                                                           }
+                                                           
                                                            frAmp/=maxSamp*2.;
                                                          //  brightness/=10.;
                                                        if(sqrt(frAmp)*uv.y/3.>1.)o=vec4(.4);
@@ -2242,7 +2257,7 @@ return h;
 }
                   vec4 faceBlackAndWhite(vec2 g, vec2 t){
                               t/=2.5;
-
+                              //g/=4.;
                               if(holyeyes==1) t.x*=-1.;
                               else if(holyeyes==3)t*=-1.;
                               vec2 p = (vec2(g.x,g.y)-vec2(t.x,-t.y));//vec2(g.x,-g.y);
@@ -2272,7 +2287,8 @@ return h;
                             vec2 s=z;//vec2(z.x,-z.y);
                             
                             if(f==7&&s.x<0.)notEars=true;
-                            else if((f==16||f==17)&&p.x>0.&&s.x<0.&&!notEars){l=vec4(vec3(.5),1.);break;}
+                            else if((f==16)&&p.x>0.&&s.x<0.&&!notEars){l=vec4( hsv2rgb( vec3(mod((-lownote*brelued+16.)/12.,1.) ,.5,1. )),.5);break;}
+                            else if((f==17)&&p.x>0.&&s.x<0.&&!notEars){l = vec4( hsv2rgb( vec3(mod((-note*brelued+16.)/12.,1.) ,.5,1. )),.5);break;}
                             /*
                             if( (f == 13||f==14)&&s.x<.0&&abs(p.y)>.68&&p.x>0.){l=vec4(vec3(.5),1.);break;}
                             else if(f<=15&&z.x>-.1){
