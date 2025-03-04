@@ -1,5 +1,8 @@
-const leaf = -1.3247179572447460259609088544780973407344040569017333645340150503028278512455475940546993479817872803299109209947422074251089026390458977955943147570967234717541668390388674187517369315842535499082466223545337273504589879909568150627745509802486213012169894157524574548625075626524610368938904839932269952074975962828868556908150704513696109853352577281586033441141927828273765296032993584674231028483241695239006108543338219;
-const gr = 1.61803398874989484820458683436563811772030917980576286213544862270526046281890244970720720418939113748475408807538689175212663386222353693179318006076672635443338908659593958290563832266131992829026788067520876689250171169620703222104321626954862629631361443814975870122034080588795445474924618569536486444924104432077134494704956584678850987433944221254487706647
+let leaf = -1.3247179572447460259609088544780973407344040569017333645340150503028278512455475940546993479817872803299109209947422074251089026390458977955943147570967234717541668390388674187517369315842535499082466223545337273504589879909568150627745509802486213012169894157524574548625075626524610368938904839932269952074975962828868556908150704513696109853352577281586033441141927828273765296032993584674231028483241695239006108543338219;
+let gr = 1.61803398874989484820458683436563811772030917980576286213544862270526046281890244970720720418939113748475408807538689175212663386222353693179318006076672635443338908659593958290563832266131992829026788067520876689250171169620703222104321626954862629631361443814975870122034080588795445474924618569536486444924104432077134494704956584678850987433944221254487706647
+let leaf2 = - 1.3472963553338606977034332535386295920007513543681387744724827562641316442780294708430332263148;
+let grgr2 = 2.5320888862379560704047853011108333478716649141607904917080905692843107777137494470564585533611;
+//https://www.wolframalpha.com/input?i=a%3D%28%281-%28%281-%28%281-a%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29
 window.pixelShaderSize = 7;
 const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
 const movementRateORIGINAL = 1.;
@@ -144,7 +147,10 @@ whirlpool:{value:0},
 armsSpinning:{value:1},
 maxSamp:{value:0.},
 minSamp:{value:0.},
-lownote:{value:0.}
+lownote:{value:0.},
+gates:{value:true},
+leaf:{value:leaf},
+gr:{value:gr}
         }
 window.uniforms={}
 
@@ -186,6 +192,7 @@ function resetAll(){
     if(!("DAWSonicTouchArray" in window))    window.DAWSonicTouchArray=[];
         window.osmdSound = false;
     
+    window.leafMode=0;
     window.xTouch=0;
     window.yTouch=0;
     window.xTouchMicroBuffer=0./10000.;
@@ -328,7 +335,8 @@ function readHash(){
         {
             number=""
             let lasthash = hashindex;
-            let CTRLorALT = location.hash[hashindex-1]=="."||location.hash[hashindex-1]==",";
+            let ALT = location.hash[hashindex-1]=="."||location.hash[hashindex-2]==".";
+            let CTRL = location.hash[hashindex-1]==","||location.hash[hashindex-2]==",";
             let bibleReaderCode =(location.hash[hashindex-2]=="c"&&location.hash[hashindex-3]==".")
                                 ||(location.hash[hashindex-1]=="b"&&location.hash[hashindex-2]==".")
             if(location.hash[hashindex+1]=="(")
@@ -350,7 +358,7 @@ function readHash(){
            if(!bibleReaderCode) callKey(new KeyboardEvent('keydown',
                                       {
                 'key': location.hash[lasthash],"keyCode":location.hash.charCodeAt(lasthash),
-                "ctrlKey":location.hash[lasthash-1]==",","altKey":location.hash[lasthash-1]=="."
+                "ctrlKey":CTRL,"altKey":ALT
             }                              ));
             
             hashindex++;
@@ -398,33 +406,57 @@ window.addEventListener('keydown', function(event) {callKey(event); return true;
 
     window.lastKey = "";
 window.key = " ";
-function callKey(event){
-    window.lastKey = window.key;
-    if(lastKey==","&&!runningHash)//key here is the last key
-        event=new KeyboardEvent('keydown',
-                                {"key":event.key,"keyCode":event.keyCode,"ctrlKey":true}
-                                );
-    else if(lastKey=="."&&!runningHash)event=new KeyboardEvent('keydown',
-                                                               {"key":event.key,"keyCode":event.keyCode,"altKey":true}//creating a new keypress because it's readonly
-                                                               );
-    
-    key = event.key;
-    //number=Number(number);
-    if(key=="/"&&!event.shiftKey){  event.preventDefault(); event.stopImmediatePropagation();}
-    
-    var x=null;
-    if(!event.shiftKey)x = parseInt(String.fromCharCode( event.keyCode));
-    
-    
-    //meta keys like ctrlKey must be processed first and should have symbol preferably
-    
-    if(key == "o" && event.ctrlKey)
+                                         function callKey(event){
+                window.lastKey = window.key;
+                if(lastKey==","&&!runningHash)//key here is the last key
+                    event=new KeyboardEvent('keydown',
+                                            {"key":event.key,"keyCode":event.keyCode,"ctrlKey":true}
+                                            );
+                else if(lastKey=="."&&!runningHash)event=new KeyboardEvent('keydown',
+                                                                           {"key":event.key,"keyCode":event.keyCode,"altKey":true}//creating a new keypress because it's readonly
+                                                                           );
+                
+                key = event.key;
+                //number=Number(number);
+                if(key=="/"&&!event.shiftKey){  event.preventDefault(); event.stopImmediatePropagation();}
+                
+                var x=null;
+                if(!event.shiftKey)x = parseInt(String.fromCharCode( event.keyCode));
+                
+                
+                //meta keys like ctrlKey must be processed first and should have symbol preferably
+                if(key == "q" && event.altKey&&event.ctrlKey)
+                {
+                    uniforms.gates.value=!uniforms.gates.value
+                    
+                }
+                else if(key == "z" && event.altKey&&event.ctrlKey)
+                {
+                    leafMode=(leafMode+1)%2.
+                    if(leafMode==0)
+                    {
+                        leaf = -1.3247179572447460259609088544780973407344040569017333645340150503028278512455475940546993479817872803299109209947422074251089026390458977955943147570967234717541668390388674187517369315842535499082466223545337273504589879909568150627745509802486213012169894157524574548625075626524610368938904839932269952074975962828868556908150704513696109853352577281586033441141927828273765296032993584674231028483241695239006108543338219;
+                        gr = 1.61803398874989484820458683436563811772030917980576286213544862270526046281890244970720720418939113748475408807538689175212663386222353693179318006076672635443338908659593958290563832266131992829026788067520876689250171169620703222104321626954862629631361443814975870122034080588795445474924618569536486444924104432077134494704956584678850987433944221254487706647
+                        uniforms.leaf.value=leaf;
+                        uniforms.gr.value=gr;
+                    }
+                    else
+                    {
+                        leaf =leaf2;// -leaf2/leaf*4./3.
+                       // gr = grgr2/gr
+                        
+                        uniforms.leaf.value=leaf;
+                        uniforms.gr.value=gr;
+                    }
+                }
+            
+    else if(key == "o" && event.ctrlKey)
     {
         omniDynamicEngaged = !omniDynamicEngaged;
         if(!omniDynamicEngaged)omniData.fill(0);
     }
                 
-                if(key == "u" && event.ctrlKey)
+             else   if(key == "u" && event.ctrlKey)
                     uniforms.pongOn.value = !uniforms.pongOn.value;
     else if(key == "c" && event.ctrlKey){dynamicCoring=!dynamicCoring; if(!dynamicCoring)coreData.fill(document.getElementById('coringConstant').value);}
                else if(key == "h" && event.ctrlKey)uniforms.spinTowardsMe.value=!uniforms.spinTowardsMe.value

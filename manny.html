@@ -440,6 +440,10 @@ radialWarp=b;
                                  callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
                                  <label for="pong">Pong?![,u]</label><br>
                                  
+                                 <input type="checkbox" id="gatesofheaven" name="t"  onclick= "
+                                     key  = 'q';
+                                     callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                                     <label for="gatesofheaven">Gates of Heaven?![,.q]</label><br>
 
                      <a id="spirograph" name="t"  onclick= "
                      
@@ -1045,6 +1049,10 @@ key  = 'i';
 callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
     Whirlpool![.i]</a><br>
 
+<a id="leaf" name="t"  onclick= "
+key  = 'z';
+callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+    leafType![,.z]</a><br>
 <a id="leapIn" name="t"  onclick= "
 key  = 'C';
 callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -1643,9 +1651,9 @@ ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
        // const float gr = -cos(216.*PI/180.)/-cos(612.*PI/180.)-1.;
                             ///const float leaf = -1.32471795;
                               //leafbypass to alternative mode below     https://www.wolframalpha.com/input?i=a%3D%28%281-%28%281-%28%281-a%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29
-                              const float leaf = (1.347296355333/-1.32471795)*4./3.;
-                             const gr = //sqrt
-                                                  ((2.5320888862379)/1.618033988749);
+                            //  const float leaf = (1.347296355333/-1.32471795)*4./3.;
+                            // const gr = //sqrt
+                           //                       ((2.5320888862379)/1.618033988749);
                              //a=1.3472963553338606977034332535386295920007513543681387744724827562641316442780294708430332263148
                               //    a=2.5320888862379560704047853011108333478716649141607904917080905692843107777137494470564585533611
                              //     and a=-0.87938524157181676810821855464946293987241626852892926618057332554844242199177891789949177967590
@@ -1707,7 +1715,7 @@ void main(){
 <script id="fragmentShader" type="x-shader/x-fragment">
     varying vec2 vUv;
     uniform float coreDilation;
-    
+    uniform bool gates;
     uniform int armsSpinning;
     uniform float lownote;
 
@@ -1855,7 +1863,8 @@ uniform bool NightAndDay;
 
 uniform float mandelCloverFactor;
 uniform float exponentialPetals;
-
+uniform float gr;
+uniform float leaf;
 
 
                                   
@@ -1869,9 +1878,10 @@ uniform float exponentialPetals;
                                   const float divideByMultiplyingPi2 = .5/PI;
 
                                   const float PIdiv2 = PI/2.;
-                                  const float gr = -cos(216.*PI/180.)/-cos(612.*PI/180.)-1.;
-    const float leaf = -1.3247179;//5724474;
+                               //   const float gr = -cos(216.*PI/180.)/-cos(612.*PI/180.)-1.;
+  //  const float leaf = -1.3247179;//5724474;
     const float eConstant = 2.71828182;
+                                                        
     float lerp(float a) {return -abs(mod(a,2.)-1.);}
     float lerp2(float a) {return -abs(mod(a,4.)-2.)+1.;}
 
@@ -2927,14 +2937,6 @@ return vec3(l+b+r+h);}
                }
             
                                   
-                    
-                                  
-                        const float distributorFACTOR=PI/gr;
-                                  const float distributorFACTORlove= distributorFACTOR/leaf;//*sqrt(2)
-                                  
-                        const float distributorFACTORorth=PI/6.;
-                                  const float distributorFACTORloveORTH= distributorFACTORorth;//*sqrt(2)
-                                  
                               const    float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;
 
 vec3 tol(vec2 p, vec2 t){
@@ -2945,6 +2947,18 @@ vec3 tol(vec2 p, vec2 t){
                          -coordSHIFT/duperZoom)*resCale+.5
                                               )
                         ).xyz;
+                        
+                        
+          
+                        
+               float distributorFACTOR=PI/gr;
+                         float distributorFACTORlove= distributorFACTOR/leaf;//*sqrt(2)
+                        
+               float distributorFACTORorth=PI/6.;
+                         float distributorFACTORloveORTH= distributorFACTORorth;//*sqrt(2)
+                        
+                        
+                        
                         if(clvrVariant4)p/=1.25;
                         if(externalCores==0.)p/=1.25;
                          vec2 pWithoutChiralizer = p;
@@ -4888,7 +4902,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                  
                                                                  float frAMP=0.;
                                                                  float heartRate =1./4.;
-                                                                 const float heartInEyeSize=gr*gr*-leaf;
+                                                                  float heartInEyeSize=gr*gr*-leaf;
                                                                  float heartSize=heartInEyeSize;
 
 if(heartStar==0){
@@ -5167,6 +5181,18 @@ if(starOnDot>=1){
                                                                     //not working:flames
                                                                     
                                                                     }
+                                                                 
+                                                                 
+                                                                 vec4 GOH =vec4(0.);
+                                                                 if(gates)
+                                                                 {
+                            GOH=
+                   
+                                                                 gatesOfHeaven(vUv,9.)
+                                                                 +gatesOfHeaven(vec2(1.-vUv.y,vUv.x),0.)
+                                                                 +gatesOfHeaven(vec2(vUv.y,1.-vUv.x),6.)
+                                                                 +gatesOfHeaven(vec2(1.-vUv.x,1.-vUv.y),3.);
+                                                                 }
                                                                  if(colorCombo!=17&&colorCombo!=20)   mny+=clamp(clothes-bodyWithArms.w*100.,0.,1.)+bodyWithArms.xyz*bodyWithArms.w*clamp(clothes*100000.,0.,1.);
 
                                                                  
@@ -5222,11 +5248,7 @@ else {
                                         +linearFrequency.w
                                             +pong
                                             
-                                            +gatesOfHeaven(vUv,9.).xyz
-                                            +gatesOfHeaven(vec2(1.-vUv.y,vUv.x),0.).xyz
-                                            +gatesOfHeaven(vec2(vUv.y,1.-vUv.x),6.).xyz
-                                            +gatesOfHeaven(vec2(1.-vUv.x,1.-vUv.y),3.).xyz
-                                            )*(1.-pixelShipGrey*40.)
+                                            +GOH.xyz)*(1.-pixelShipGrey*40.)
                                         +yourFace.xyz
                     +//clamp((
                            mny
