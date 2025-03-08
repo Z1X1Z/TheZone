@@ -2235,9 +2235,9 @@ if(uv.x>2./3.)
                                                                  // brightness +=(n+3.+1.)*frampBuffer;
 
                                                           }
-                                                           frAmp/=(maxSamp)*2.;
+                                                           frAmp/=(maxSamp+minSamp)*2.;
                                                          //  brightness/=10.;
-                                                       if(1.-(sqrt(frAmp-minSamp))*uv.y/3.>.333)o=vec4(.4);
+                                                       if(1.-(sqrt(frAmp))*uv.y/3.>.333)o=vec4(.5);
                                                        
                                                        
                                                       float sideSegmentMediated = sideSegment-.5;
