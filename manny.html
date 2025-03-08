@@ -1733,6 +1733,7 @@ void main(){
     uniform int heartStar;
     uniform int holyeyes;
     uniform float maxSamp;
+    uniform float minSamp;
 
     uniform float fftSize;
     uniform float zoomOutRatchetThreshold;
@@ -2234,10 +2235,9 @@ if(uv.x>2./3.)
                                                                  // brightness +=(n+3.+1.)*frampBuffer;
 
                                                           }
-                                                           
-                                                           frAmp/=maxSamp*2.;
+                                                           frAmp/=(maxSamp)*2.;
                                                          //  brightness/=10.;
-                                                       if(sqrt(frAmp)*uv.y/3.>1.)o=vec4(.4);
+                                                       if(1.-(sqrt(frAmp-minSamp))*uv.y/3.>.333)o=vec4(.4);
                                                        
                                                        
                                                       float sideSegmentMediated = sideSegment-.5;
@@ -4848,7 +4848,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                 if(mny.g<0.)mny=vec3(1.,0.,1.);
                    }
                    else if (Character==2){
-                        mny=bride(characterOnTrailP*gr,moveDynamic/7.);
+                        mny=bride(characterOnTrailP*gr,moveDynamic/4.);
                         
                        swordSkew+=.5;}
                    else if (Character==3||Character==4){
