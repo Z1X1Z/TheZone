@@ -148,7 +148,7 @@ armsSpinning:{value:1},
 maxSamp:{value:0.},
 minSamp:{value:0.},
 lownote:{value:0.},
-gates:{value:true},
+gates:{value:0==1},
 leaf:{value:leaf},
 gr:{value:gr}
         }
