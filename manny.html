@@ -2254,7 +2254,7 @@ else threshSide=uv.x;
                                                          //  brightness/=10.;
                                                      //    if(round(mod(noteOfSide+12.*12.,12.))==-3.)
                      if(frAmp*
-                                                        threshSide/3.<1./8.)
+                                                        threshSide/3.<1./20.)
                                                           o=vec4(.5);
                                                        
                                                        
@@ -5162,7 +5162,7 @@ if(starOnDot>=1){
                        
                                         
                                           
-            // pixelStarship = audioEq(uVuMinCenter);
+             pixelStarship = audioEq(uVuMinCenter);
              icicles = waveForm();
              
              linearFrequency=linearFrequencyEQ(adjustedvUv);
