@@ -2254,7 +2254,7 @@ else threshSide=uv.x;
                                                          //  brightness/=10.;
                                                      //    if(round(mod(noteOfSide+12.*12.,12.))==-3.)
                      if(sqrt(frAmp)*
-                                                        (1.-threshSide*3.)>.5)
+                                                        (threshSide*3.)<1.)
                                                           o=vec4(.5);
                                                        
                                                        
