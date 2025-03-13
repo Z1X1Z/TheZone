@@ -4930,25 +4930,29 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                   float heartInEyeSize=gr*gr*-leaf;
                                                                  float heartSize=heartInEyeSize;
 
+                                                                 
+                                                                 
+                                                                 
+                                                                 vec2 moveDynamicSpunToKey=spin2(moveDynamic*vec2(1.,flipStar*brelued)///.8
+                                                                 , -(//starSpin*mod(time*rate,PI*2.)-
+                                                                 twistStar*brelued));
+
+                                                                 vec2 vUvCenteredASKEW = (vUv.yx-.5-d.yx*heartRate*aspectRatio);
+                                                                 vec2 uVuASKEW=-(vUvCenteredASKEW)/aspectRatio;
+                                                                // vec2 uVuMinCenterASKEW=-vUvCenteredASKEW/(min(resolution.x,resolution.y)/resolution.yx);
+
+                                                                 vec2 uVuCenterASKEWSpunToKey=spin2(uVuASKEW*vec2(1.,flipStar*brelued)///.8
+                                                                 , -(//starSpin*mod(time*rate,PI*2.)-
+                                                                 twistStar*brelued))*8.;
+
+                                                                 vec2 uvSwizzled=uVuCenterASKEWSpunToKey.yx;
+
+
+                                 
+                                 
 if(heartStar==0){
-
-            vec2 moveDynamicSpunToKey=spin2(moveDynamic*vec2(1.,flipStar*brelued)///.8
-            , -(//starSpin*mod(time*rate,PI*2.)-
-            twistStar*brelued));
-
-            vec2 vUvCenteredASKEW = (vUv.yx-.5-d.yx*heartRate*aspectRatio);
-            vec2 uVuASKEW=-(vUvCenteredASKEW)/aspectRatio;
-            vec2 uVuMinCenterASKEW=-vUvCenteredASKEW/(min(resolution.x,resolution.y)/resolution.yx);
-
-            vec2 uVuMinCenterASKEWSpunToKey=spin2(uVuMinCenterASKEW*vec2(1.,flipStar*brelued)///.8
-            , -(//starSpin*mod(time*rate,PI*2.)-
-            twistStar*brelued))*8.;
-
-            vec2 uvSwizzled=uVuMinCenterASKEW.yx;
-
-
             float angleASKEW = ((-atan(uvSwizzled.y,uvSwizzled.x)*flipStar-twistStar
-            +PIdiv2+PIdiv2*flipStar)*divideByMultiplyingPi2);
+            -PI+PIdiv2*flipStar)*divideByMultiplyingPi2);
             //angle=mod(angle,1.);
 
             //return vec4(angle);
@@ -4995,8 +4999,11 @@ if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                                                                 direction=-1.;
                                                                 }
 
-     if(Character!=9&&(heartStar!=3)) HEART = heart(characterPSpunToKey*heartSize+heartShift,//vec2(0.)
-                                    -direction*spin2(-d.yx,-twistStar)/4.*frAMP*heartRate*vec2(1.,flipStar)// not working on some androids, may work with vec2(0.)
+     if(Character!=9&&(heartStar!=3)) HEART = heart(characterPSpunToKey*heartSize
+                                                +heartShift
+                                                    ,//vec2(0.)
+                                    -direction*spin2(-d.yx,-twistStar)/4.*
+                                                    -vec2(characterPSpunToKey.x,characterPSpunToKey.y)* frAMP*heartRate*vec2(1.,flipStar)// not working on some androids, may work with vec2(0.)
                                     )
      //*(1.-length(uVuMinCenterASKEW)/8.)
      ;
