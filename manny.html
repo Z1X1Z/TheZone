@@ -2215,7 +2215,7 @@ ret= vec4(clamp(
                                                       {
                                               vec4 o=vec4(0.);
 
-if(uv.x<.5)//could 1./3. but then the spill over (if any) isn't visible
+if(uv.x<.5&&maxSamp!=0.) //could 1./3. but then the spill over (if any) isn't visible
 {
                                                          // uv=uv.yx;
                                                           float sideSegment = mod(mod(3.-uv.y*3.,3.)+noteskew+12.*12.,12.);
@@ -2244,7 +2244,7 @@ if(uv.x<.5)//could 1./3. but then the spill over (if any) isn't visible
                                                           }
                                                 //        frAmp-=minSamp;
                                                 frAmp/=notesIncludedInPixel;
-if (maxSamp!=0.)   frAmp/=(maxSamp);//-minSamp);
+  frAmp/=(maxSamp);//-minSamp);
 float threshSide = uv.x;//the corners don't seem to match on adjacent sides
 /*
 if(min(resolution.x,resolution.y)==resolution.x)threshSide=uv.x;
@@ -5290,7 +5290,7 @@ else {
                                             +GOH.xyz)*(1.-pixelShipGrey*40.)
                                         +yourFace.xyz
                     +//clamp((
-                           mny
+                           mny*(1.-isGrey)
                             +overchargeCharacter
                                            //-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r),0.,1.)*2.*mnyWhite
                                      // +(-hypnoticHarmonicCircles.x-hypnoticHarmonicCircles.y-hypnoticHarmonicCircles.z)*2.)*starshipMultiplier*(1.-isGrey-pixelShipGrey)

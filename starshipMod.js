@@ -1586,7 +1586,7 @@ function runOSMD (){
                                                 uniforms.coordSHIFT.value.y+=spunTouch[1];
                                                                             
                                                                         
-
+                                    uniforms.maxSamp.value=0.;
                                                                         //else  uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
 
                                     fromCenter = (coordX*coordX+coordY*coordY)**.5;
