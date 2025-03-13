@@ -15,7 +15,7 @@ const secondsToEdge=window.pixelShaderSize/4./pixelShaderToStarshipRATIO;
 
 window.uniformsInitial = {
 coreDilation:{value:0.},
-fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:1024./44100.},//actually 2/nyquist
+fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:44100./1024.},
     
 zoomOutRatchetThreshold:{value:0.},
 radialWarp:{value:1.},
@@ -335,8 +335,13 @@ function readHash(){
         {
             number=""
             let lasthash = hashindex;
-            let ALT = location.hash[hashindex-1]=="."||location.hash[hashindex-2]==".";
-            let CTRL = location.hash[hashindex-1]==","||location.hash[hashindex-2]==",";
+            let ALT = location.hash[hashindex-1]==".";
+            let CTRL = location.hash[hashindex-1]==",";
+            if(ALT||CTRL){
+                
+                 ALT = location.hash[hashindex-1]=="."||location.hash[hashindex-2]==".";
+                 CTRL = location.hash[hashindex-1]==","||location.hash[hashindex-2]==",";
+            }
             let bibleReaderCode =(location.hash[hashindex-2]=="c"&&location.hash[hashindex-3]==".")
                                 ||(location.hash[hashindex-1]=="b"&&location.hash[hashindex-2]==".")
             if(location.hash[hashindex+1]=="(")
@@ -763,6 +768,7 @@ window.key = " ";
         if(number>=1.)
         EldersLeg=Math.round(number)*1.;
         else if(number!=0.) EldersLeg=-1;
+        else EldersLeg=0.;
         let minimumFFTfactor = Math.ceil(Math.log(EldersLeg*12*2)/Math.log(2.));
         if(minimumFFTfactor<=15){
             if(minimumFFTfactor>11)//currently a buffersize of 2**11==2048 is required for spirograph
@@ -990,8 +996,16 @@ window.key = " ";
             osmd.render();
         }
     }
-    else if (key=="A"){window.flip = -1;uniforms.flipStar.value=-1.;}
-    else if (key=="D"){window.flip = 1;uniforms.flipStar.value=1.;}
+    else if (key=="A"){
+        if(flip!=-1)uniforms.witnessFlip.value*=-1.;
+
+        window.flip = -1;uniforms.flipStar.value=-1.;
+    }
+    else if (key=="D"){
+        if(flip!=1)uniforms.witnessFlip.value*=-1.;
+
+        window.flip = 1;uniforms.flipStar.value=1.;
+    }
 
       else if (key=="R")   uniforms[ "remediatedColors" ].value=!uniforms[ "remediatedColors" ].value  ;
 

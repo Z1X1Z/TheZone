@@ -998,7 +998,7 @@ function setMicInputToStarPIXEL(){
                  let withinMaxsafeSizeFFT=(fftSize<=2**13)//(EldersLeg<=682);
                  uniforms.sampleRate.value =       audioX.sampleRate     ;
                  uniforms.fftSize.value =             analyser.fftSize;
-                 uniforms.nyq.value =            analyser.fftSize/audioX.sampleRate/2.;
+                 uniforms.nyq.value =            audioX.sampleRate/analyser.fftSize;
                  
                  //console.log(nyq)
                  if(withinMaxsafeSizeBins){
@@ -1991,7 +1991,6 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
         uniforms.lownote.value=mustarD[kappa]/2.;
     }
     //uniforms.lownote.value=lowNote;
-    console.log(uniforms.lownote.value%12)
     
     let coreShift=0;
     for(var shift = 0.;shift<4;shift++)//find maximally different loudest note
