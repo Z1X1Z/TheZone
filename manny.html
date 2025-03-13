@@ -5136,6 +5136,24 @@ if(starOnDot>=1){
                           pong += paddles(vUvCentered.yx);
                           pong += ball(p);
                           }
+                                                                 
+                                                                 
+                                                                 
+                                                                 
+                 float sevenPillarShrink = pillarScale*2./max(resolution.x,resolution.y);
+                 vec2 adjustedvUv=vec2(vUv.x,vUv.y*(1.-sevenPillarShrink)-sevenPillarShrink);
+                                                                 vec4 GOH =vec4(0.);
+                                                                 if(gates)
+                                                                 {
+                            GOH=
+                   
+                                                            gatesOfHeaven(vec2(vUv.x,1.-vUv.y),9.)
+                                                                 +gatesOfHeaven(vec2(1.-vUv.y,1.-vUv.x),0.)
+                                                                 +gatesOfHeaven(vec2(adjustedvUv.y,adjustedvUv.x),6.)
+                                                                 +gatesOfHeaven(vec2(1.-vUv.x,vUv.y),3.)
+                                                                 ;
+                                                                 }
+                                                                 
          if (pixelSTARon)
     {
                        
@@ -5146,8 +5164,7 @@ if(starOnDot>=1){
                                           
             // pixelStarship = audioEq(uVuMinCenter);
              icicles = waveForm();
-             float sevenPillarShrink = pillarScale*2./max(resolution.x,resolution.y);
-             vec2 adjustedvUv=vec2(vUv.x,vUv.y*(1.-sevenPillarShrink)-sevenPillarShrink);
+             
              linearFrequency=linearFrequencyEQ(adjustedvUv);
              linearFrequency+=linearFrequencyEQ(vec2(1.-adjustedvUv.x,adjustedvUv.y));
             // linearFrequency/=2.;
@@ -5207,18 +5224,7 @@ if(starOnDot>=1){
                                                                     
                                                                     }
                                                                  
-                                                                 
-                                                                 vec4 GOH =vec4(0.);
-                                                                 if(gates)
-                                                                 {
-                            GOH=
-                   
-                                                            gatesOfHeaven(vec2(vUv.x,1.-vUv.y),9.)
-                                                                 +gatesOfHeaven(vec2(1.-vUv.y,1.-vUv.x),0.)
-                                                                 +gatesOfHeaven(vec2(vUv.y,vUv.x),6.)
-                                                                 +gatesOfHeaven(vec2(1.-vUv.x,vUv.y),3.)
-                                                                 ;
-                                                                 }
+                                                                
                                                                  if(colorCombo!=17&&colorCombo!=20)   mny+=clamp(clothes-bodyWithArms.w*100.,0.,1.)+bodyWithArms.xyz*bodyWithArms.w*clamp(clothes*100000.,0.,1.);
 
                                                                  
