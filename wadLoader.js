@@ -80,7 +80,7 @@ else    string = (1.-e.clientX/window.innerWidth)*(noteGuitarStyleStretchCOMBO.l
     console.log("string1 :"+sGAObject.string1)
         sGAObject.string2=( 1. - sGAObject.string1)
          
-    if(window.flip==1)
+    if(window.flip==-1)
         sGAObject.note = 1.-e.clientY/window.innerHeight;
     else  sGAObject.note = e.clientY/window.innerHeight;
     
