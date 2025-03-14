@@ -6,6 +6,7 @@ let pressIndex=new Map();
 
 let instrument1 = "square"
 let instrument2 = "triangle"
+let instrumentGuitar = "triangle"
 
 
 function stallTillWad(){if(typeof(Wad)=="function"&&userHasGestured){initialize();} else  setTimeout(stallTillWad,100);}
@@ -35,6 +36,86 @@ const singAlong=Array(osmdOscillators);
 const singAlong2=Array(osmdOscillators);
 
 let DAWnodeIndexForTouchBestFitIndex  = Array(maxTouchSoundCount).fill("not set");
+let SonicTouchGuitarObject = {
+    x:0,
+    y:0,
+stringNumber:0,
+    stringNumber:0,
+    outputAmplitude:0.,
+    frequency:0.,
+    note:0.,
+    sound1:null,
+    sound2:null,
+    stringInNode:0.,
+    
+    
+}
+
+
+let SonicTouchGuitarArray  = Array(maxTouchSoundCount);
+for(var ff=0;ff<SonicTouchGuitarArray.length;ff++)SonicTouchGuitarArray[ff]=Object.assign({},SonicTouchGuitarObject)
+function guitarGRAB(e){
+    
+        //-correlationForTextY;
+        //widthPX=window.innerWidth-correlationForTextX
+        
+        
+    let id = touchNumber.get(pressIndex.get(e.pointerId));
+       let sGAObject = SonicTouchGuitarArray[id];
+            
+        let y = e.clientY-heightPX/2.;
+        let x = e.clientX-widthPX/2.;
+        screenPressCoordX[id]=x;
+            screenPressCoordY[id]=y;
+   string = e.clientX/window.innerWidth*6.
+        sGAObject.string1=(string)%1.;
+    sGAObject.stringNumber=Math.floor(string);
+    console.log("string1 :"+sGAObject.string1)
+        sGAObject.string2=( 1. - sGAObject.string1)
+         
+        sGAObject.note = e.clientY/window.innerHeight;
+    console.log("note"+sGAObject.note)
+
+        return sGAObject;
+       
+
+}
+
+    function startGuitar(e){
+       let sGAObject= guitarGRAB(e)
+        
+        sGAObject.sound.play({env:{attack: .0, release:.0,hold:-1},
+            pitch:2**(sGAObject.note+5./12.*sGAObject.stringNumber)*440,
+            volume:sGAObject.string1});
+        
+        
+        sGAObject.sound2.play({env:{attack: .0, release:.0,hold:-1},
+            pitch:2**(sGAObject.note+5/12.*(sGAObject.stringNumber+1.))*440,
+            volume:sGAObject.string2});
+    }
+    
+
+    function followGuitar(e){
+        let sGAObject= guitarGRAB(e)
+        
+        sGAObject.sound.setPitch(2**(sGAObject.note+5/12.*sGAObject.stringNumber)*440);
+        sGAObject.sound2.setPitch(2**(sGAObject.note+5/12.*(sGAObject.stringNumber+1))*440);
+        
+        sGAObject.sound2.setVolume(sGAObject.string1);
+        sGAObject.sound.setVolume(sGAObject.string2);
+
+    }
+    
+ 
+
+
+
+
+
+
+
+
+
 
 let SonicTouchObject =
     {
@@ -112,6 +193,26 @@ function loadDAW(SonicTouchObjectO)
     //timeout helps with volume optimization
     return SonicTouchObjectO;
 }
+    
+    
+    
+    function stopGuitar(SonicTouchObjectN)
+    {
+        if(SonicTouchObjectN.sound !=null)
+        {
+            SonicTouchObjectN.sound.stop();
+            SonicTouchObjectN.sound2.stop();
+        }
+    }
+    
+    function loadGuitar(SonicTouchObjectO)
+    {
+        stopGuitar(SonicTouchObjectO)
+        SonicTouchObjectO.sound =  new Wad({source : instrumentGuitar})//, tuna   : hyperdriveTUNA});
+        SonicTouchObjectO.sound2 = new Wad({source : instrumentGuitar})//, tuna   : hyperdriveTUNA});
+        //playsounds
+        return SonicTouchObjectO;
+    }
 function bootSounds()
 {
     feedbackPitchsound[4] =  new Wad({source : instrument2})
@@ -132,6 +233,13 @@ function bootSounds()
     {SonicTouchArray[o]=loadDAW(SonicTouchArray[o]);
        stopSounds(SonicTouchArray[o]);
     }
+    
+    
+    for(var o=0;o<maxTouchSoundCount;o++)
+    {SonicTouchGuitarArray[o]=loadGuitar(SonicTouchGuitarArray[o]);
+       stopGuitar(SonicTouchGuitarArray[o]);
+    }
+    
         
     for(var o=0;o<DAWSonicTouchArray.length;o++){
         DAWSonicTouchArray[o]=loadDAW(DAWSonicTouchArray[o])
@@ -761,7 +869,9 @@ let c = document.body;//document.getElementById("container")
                     pressIndex.set (e.pointerId,cycler)
                     touchNumber.set(cycler,cycle)
                     getPressure(e);
+                    if(!guitarMODE)
                     startSound(e);
+                    else startGuitar(e);
                 }
             }, false);
             c.addEventListener('pointermove', function(e) {
@@ -772,8 +882,13 @@ let c = document.body;//document.getElementById("container")
                     let tn = touchNumber.get(pressIndex.get(e.pointerId));
                     if(typeof tn == "number"){
                         getPressure(e);
-                       if(bfi==null) followSound(e,SonicTouchArray);
-                        else followSound(e,DAWSonicTouchArray);
+                        if(!guitarMODE)
+                        {
+                            if(bfi==null) followSound(e,SonicTouchArray);
+                            else followSound(e,DAWSonicTouchArray);
+                            
+                        }
+                        else followGuitar(e);
                     }
                 }
                 // e.stopImmediatePropagation();// e.preventDefault();
@@ -788,6 +903,7 @@ let c = document.body;//document.getElementById("container")
                     
                     disengageDAWpetal(tn);
                     stopSounds(SonicTouchArray[tn])
+                    stopGuitar(SonicTouchGuitarArray[tn])
 
                     touchNumber.set(pressIndex.get(e.pointerId),"off");
 
@@ -807,6 +923,8 @@ let c = document.body;//document.getElementById("container")
                         screenPressCoordX[tn]=0;
                         screenPressCoordY[tn]=0;
                     stopSounds(SonicTouchArray[tn])
+                    stopGuitar(SonicTouchGuitarArray[tn])
+
                     touchNumber.set(pressIndex.get(e.pointerId),"off");
 
                     //e.preventDefault(); e.stopImmediatePropagation();
@@ -823,6 +941,8 @@ let c = document.body;//document.getElementById("container")
                        screenPressCoordX[tn]=0;
                         screenPressCoordY[tn]=0;
                     stopSounds(SonicTouchArray[tn])
+                    stopGuitar(SonicTouchGuitarArray[tn])
+
                     touchNumber.set(pressIndex.get(e.pointerId),"off");
 
                     //e.preventDefault(); e.stopImmediatePropagation();

@@ -1275,9 +1275,15 @@ Reset Zoom![L]</a><br>
             </script>
         <div class="dropdown">
           <button class="dropbtn">Word
-            
+               
           <div id="scoreDropContent" class="dropdown-content" style="font-size:1em; column-count:1;">
-             
+              
+                  
+                  <input type="checkbox" id="Guitar" name="t"  onclick= "
+                      key  = 'g';
+                      callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                   <label for="Guitar">Guitar?[,.g]</label><br>
+                   
           <select name="song" id="song"
               onchange='
                 if(this.value!="none"){

@@ -191,7 +191,7 @@ function resetAll(){
     window.DAW=false;
     if(!("DAWSonicTouchArray" in window))    window.DAWSonicTouchArray=[];
         window.osmdSound = false;
-    
+    window.guitarMODE=false;
     window.leafMode=0;
     window.xTouch=0;
     window.yTouch=0;
@@ -430,7 +430,9 @@ window.key = " ";
                 
                 
                 //meta keys like ctrlKey must be processed first and should have symbol preferably
-                if(key == "q" && event.altKey&&event.ctrlKey)
+                if(key == "g" && event.altKey&&event.ctrlKey)
+                    window.guitarMODE=!window.guitarMODE;
+                else if(key == "q" && event.altKey&&event.ctrlKey)
                 {
                     uniforms.gates.value=!uniforms.gates.value
                     
