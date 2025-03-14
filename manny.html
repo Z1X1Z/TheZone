@@ -1283,7 +1283,7 @@ Reset Zoom![L]</a><br>
                       key  = 'g';
                       callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
                    <label for="Guitar">Guitar?[,.g]</label><br>
-                   
+                   <input id="strings" value = "8 13 18 23 27 32" type="text" style="height:2em"></input><br>
           <select name="song" id="song"
               onchange='
                 if(this.value!="none"){

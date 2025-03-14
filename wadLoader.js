@@ -42,7 +42,8 @@ let SonicTouchGuitarObject = {
 stringNumber:0,
     stringNumber:0,
     outputAmplitude:0.,
-    frequency:0.,
+frequency1:0.,
+    frequency2:0.,
     note:0.,
     sound1:null,
     sound2:null,
@@ -51,15 +52,17 @@ stringNumber:0,
     
 }
 
-
+let noteGuitarStyleStretchCOMBOString ="8,13,18,23,27,32";
+let noteGuitarStyleStretchCOMBO = noteGuitarStyleStretchCOMBOString.split(",");
 let SonicTouchGuitarArray  = Array(maxTouchSoundCount);
 for(var ff=0;ff<SonicTouchGuitarArray.length;ff++)SonicTouchGuitarArray[ff]=Object.assign({},SonicTouchGuitarObject)
 function guitarGRAB(e){
     
+
         //-correlationForTextY;
         //widthPX=window.innerWidth-correlationForTextX
         
-        
+    noteGuitarStyleStretchCOMBO =document.getElementById("strings").value.split(" ");
     let id = touchNumber.get(pressIndex.get(e.pointerId));
        let sGAObject = SonicTouchGuitarArray[id];
             
@@ -67,30 +70,44 @@ function guitarGRAB(e){
         let x = e.clientX-widthPX/2.;
         screenPressCoordX[id]=x;
             screenPressCoordY[id]=y;
-   string = e.clientX/window.innerWidth*6.
+    
+if (uniforms.brelued.value==1)
+   string = e.clientX/window.innerWidth*(noteGuitarStyleStretchCOMBO.length-1.)
+else    string = (1.-e.clientX/window.innerWidth)*(noteGuitarStyleStretchCOMBO.length-1.)
+
         sGAObject.string1=(string)%1.;
     sGAObject.stringNumber=Math.floor(string);
     console.log("string1 :"+sGAObject.string1)
         sGAObject.string2=( 1. - sGAObject.string1)
          
-        sGAObject.note = e.clientY/window.innerHeight;
+    if(window.flip==1)
+        sGAObject.note = 1.-e.clientY/window.innerHeight;
+    else  sGAObject.note = e.clientY/window.innerHeight;
+    
+    sGAObject.note=( sGAObject.note+window.twist/24)%24
     console.log("note"+sGAObject.note)
+    
+    for(var v=0;v<noteGuitarStyleStretchCOMBO.length;v++)
+        
+        sGAObject.frequency1 = (2**(sGAObject.note+noteGuitarStyleStretchCOMBO[Math.floor(sGAObject.stringNumber)]/12.-1./12.)*440);
+    sGAObject.frequency2 = (2**(sGAObject.note+noteGuitarStyleStretchCOMBO[Math.floor(sGAObject.stringNumber)+1.]/12.-1./12.)*440);
+                                                                          console.log("frequency : "+sGAObject.frequency1)
 
         return sGAObject;
        
 
 }
 
-    function startGuitar(e){
+    function startGuitar(e){h
        let sGAObject= guitarGRAB(e)
         
         sGAObject.sound.play({env:{attack: .0, release:.0,hold:-1},
-            pitch:2**(sGAObject.note+5./12.*sGAObject.stringNumber)*440,
+            pitch:sGAObject.frequency1,
             volume:sGAObject.string1});
         
         
         sGAObject.sound2.play({env:{attack: .0, release:.0,hold:-1},
-            pitch:2**(sGAObject.note+5/12.*(sGAObject.stringNumber+1.))*440,
+            pitch:sGAObject.frequency2,
             volume:sGAObject.string2});
     }
     
@@ -98,8 +115,8 @@ function guitarGRAB(e){
     function followGuitar(e){
         let sGAObject= guitarGRAB(e)
         
-        sGAObject.sound.setPitch(2**(sGAObject.note+5/12.*sGAObject.stringNumber)*440);
-        sGAObject.sound2.setPitch(2**(sGAObject.note+5/12.*(sGAObject.stringNumber+1))*440);
+        sGAObject.sound.setPitch(sGAObject.frequency1);
+        sGAObject.sound2.setPitch(sGAObject.frequency2);
         
         sGAObject.sound2.setVolume(sGAObject.string1);
         sGAObject.sound.setVolume(sGAObject.string2);

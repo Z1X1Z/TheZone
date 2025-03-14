@@ -290,7 +290,7 @@ function resetAll(){
     {
                 for(var o=0;o<maxTouchSoundCount;o++){
                     stopSounds(SonicTouchArray[o])
-
+                    stopGuitar(SonicTouchGuitarArray[o])
                     }
                 for(var o=0;o<DAWSonicTouchArray.length;o++){
                     stopSounds(DAWSonicTouchArray[o])
