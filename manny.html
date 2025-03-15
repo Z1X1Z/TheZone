@@ -1283,7 +1283,7 @@ Reset Zoom![L]</a><br>
                       key  = 'g';
                       callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
                    <label for="Guitar">Guitar?[,.g]</label><br>
-                   <input id="strings"  type="text" style="height:2em"></input><br>
+                   <input id="strings"  type="text"></input><br>
         <script>
             document.getElementById("strings").value = "8 13 18 23 27 32"
             </script>
@@ -2265,8 +2265,8 @@ else threshSide=uv.x;
   
                                                          //  brightness/=10.;
                                                      //    if(round(mod(noteOfSide+12.*12.,12.))==-3.)
-                     if(sqrt(frAmp)*
-                                                        (threshSide*3.)<1.)
+                     if(frAmp*
+                                                        (threshSide*3.)<.5)
                                                           o=vec4(.5);
                                                        
                                                        
