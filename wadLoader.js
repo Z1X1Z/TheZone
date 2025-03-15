@@ -73,7 +73,7 @@ function guitarGRAB(e){
     
 if (uniforms.brelued.value==1)
    string = e.clientX/window.innerWidth*(noteGuitarStyleStretchCOMBO.length-1.)
-else    string = (1.-e.clientX/window.innerWidth)*(noteGuitarStyleStretchCOMBO.length-1.)
+else    string = (e.clientX/window.innerWidth)*(noteGuitarStyleStretchCOMBO.length-1.)
 
         sGAObject.string1=(string)%1.;
     sGAObject.stringNumber=Math.floor(string);
