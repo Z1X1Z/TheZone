@@ -80,7 +80,7 @@ else    string = (e.clientX/window.innerWidth)*(noteGuitarStyleStretchCOMBO.leng
     console.log("string1 :"+sGAObject.string1)
         sGAObject.string2=( 1. - sGAObject.string1)
          
-    if(window.flip==1)
+    if(window.flip==-1)
         sGAObject.note = 1.-e.clientY/window.innerHeight;
     else  sGAObject.note = e.clientY/window.innerHeight;
     
@@ -89,8 +89,8 @@ else    string = (e.clientX/window.innerWidth)*(noteGuitarStyleStretchCOMBO.leng
     
     for(var v=0;v<noteGuitarStyleStretchCOMBO.length;v++)
         
-        sGAObject.frequency1 = (2**(sGAObject.note+noteGuitarStyleStretchCOMBO[Math.floor(sGAObject.stringNumber)]/12.-1./12.)*440);
-    sGAObject.frequency2 = (2**(sGAObject.note+noteGuitarStyleStretchCOMBO[Math.floor(sGAObject.stringNumber)+1.]/12.-1./12.)*440);
+        sGAObject.frequency1 = (2**(sGAObject.note+noteGuitarStyleStretchCOMBO[Math.floor(sGAObject.stringNumber)]/12.-1./12.)*window.ConcertKey);
+    sGAObject.frequency2 = (2**(sGAObject.note+noteGuitarStyleStretchCOMBO[Math.floor(sGAObject.stringNumber)+1.]/12.-1./12.)*window.ConcertKey);
                                                                           console.log("frequency : "+sGAObject.frequency1)
 
         return sGAObject;

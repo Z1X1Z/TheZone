@@ -149,6 +149,7 @@ armsSpinning:{value:1},
 maxSamp:{value:0.},
 minSamp:{value:0.},
 lownote:{value:0.},
+concertKeyTuning:{value:440.},
 gates:{value:true},
 leaf:{value:leaf},
 gr:{value:gr}

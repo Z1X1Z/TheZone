@@ -319,15 +319,19 @@ let maxLetterDepth=-1;
             -->
             <label for="ConcertKey">THE A Key Frequency (Should probably be "Concert A" 440 hz):</label>
            <input type="number" id="ConcertKey" name="ConcertKey" class="num" onkeyup="
-                number = false
+                number = 'no number'
 ;
-          // if(document.getElementById('ConcertKey').value!=0)
-                window.ConcertKey=document.getElementById('ConcertKey').value">
+           if(document.getElementById('ConcertKey').value!=0)
+                {
+                window.ConcertKey=document.getElementById('ConcertKey').value
+uniforms.concertKeyTuning.value=document.getElementById('ConcertKey').value
+}
+">
                <br>
                
                <label for="TouchVolume">Touch Volume (0-1?):</label>
               <input type="number" id="TouchVolume" name="TouchVolume" class="num" onkeyup="
-                                   number = false
+                                   number = 'no number'
 ;
                    window.touchVolume=document.getElementById('TouchVolume').value
             if(window.wadLOADED)
@@ -341,7 +345,7 @@ let maxLetterDepth=-1;
                   
                <label for="RadialWarp">Magnify rate of the octave, radially by</label>
               <input type="number" id="RadialWarp" name="RadialWarp" class="num" onkeyup="
-                number = false
+                number = 'no number'
 ;
                     let b=document.getElementById('RadialWarp').value;
                     if(!isNaN(b)&&b>0){
@@ -572,7 +576,7 @@ radialWarp=b;
                    
                <label for="Note Skew">Semitones detuned</label>
                <input type="number" id="Note Skew" name="Note Skew" class="num" onkeyup="
-                                                               number = false
+                                                               number = 'no number'
 ;
                        window.twist-=window.skew
                        window.skew = document.getElementById('Note Skew').value*2.;
@@ -777,7 +781,7 @@ radialWarp=b;
               
               <label for="CloverTwist">Twist offset:</label>
              <input type="number" id="CloverTwist" name="CloverTwist" class="num" onkeyup="
-                number = false
+                number = 'no number'
 ;
 uniforms.cloverOffset.value=document.getElementById('CloverTwist').value/6.">
                  </p>
@@ -793,7 +797,7 @@ uniforms.cloverOffset.value=document.getElementById('CloverTwist').value/6.">
                  <!--https://www.w3schools.com/tags/att_input_type_number.asp this is the link for the below number code profile-->
                  <label for="petalCount">Petal Quantity:</label>
                 <input type="number" id="petalCount" name="petalCount" class="num" onkeyup="
-                number = false
+                number = 'no number'
 ;
 uniforms.petals.value=document.getElementById('petalCount').value-6.">
                     </p>
@@ -805,7 +809,7 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
               
                     <label for="coringConstant">Coring Value (>0.):</label>
                    <input type="number" id="coringConstant" name="coringConstant" class="num" onkeyup="
-                number = false
+                number = 'no number'
 ;
                        var coreNUM=document.getElementById('coringConstant').value;
                        if(coreNUM>0.)coreData.fill(Number(coreNUM));
@@ -897,7 +901,7 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                      
                                      <label for="metaGates">Meta Daisies Every?![.m]:</label>
                                      <input type="number" id="metaGates" name="CloverTwist" class="num" onkeyup="
-                                        number = false
+                                        number = 'no number'
 ;
                         uniforms.twelveGatesMeta.value=document.getElementById('metaGates').value">
                                          </p>
@@ -943,7 +947,7 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                        
                                      <label for="Base Number">Log base this of x^3 (maybe 1.5-4):</label>
                                     <input type="number" id="Base Number" name="Base Number" class="num" onkeyup="
-                number = false
+                number = 'no number'
 ;
 uniforms.baseN.value=document.getElementById('Base Number').value">
                                         </br>
@@ -1053,7 +1057,7 @@ callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'keyCode':key.ch
 key  = 'z';
 callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
     leafType![,.z]</a><br>
-<a id="goldenRatioType" name="t"  onclick= "
+<a id="goldenRatio Type" name="t"  onclick= "
 key  = 'x';
 callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
     grType![,.x]</a><br>
@@ -1093,7 +1097,7 @@ Reset Zoom![L]</a><br>
                   <label for="Wheel">Wheel![m]</label><br>
                   <label for="mandelCloverSize">Wheel Degree:[m]</label>
                   <input type="number" id="mandelCloverSize" name="mandelCloverSize" class="num" onkeyup="
-                                                 number = false
+                                                 number = 'no number'
 ;
                                  uniforms.mandelCloverFactor.value=document.getElementById('mandelCloverSize').value
                                  "><br>
@@ -1727,6 +1731,7 @@ void main(){
         </script>
 <script id="fragmentShader" type="x-shader/x-fragment">
     varying vec2 vUv;
+    uniform float concertKeyTuning;
     uniform float coreDilation;
     uniform bool gates;
     uniform int armsSpinning;
@@ -2000,7 +2005,7 @@ vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
                  {
                      
                float freq =h.y*nyq;
-             float noteLine =12.*log(freq/440.)/log(2.)+49.;
+             float noteLine =12.*log(freq/concertKeyTuning)/log(2.)+49.;
                               //   if(mod(round(noteLine),12.)==6.)
                                      {
               if (frAmp>h.x*1.5)  ret = vec4(hsv2rgb( vec3( mod((-noteLine)*brelued+4.,12.)/12. ,1.,1. )),0.); //vec4(mod(note,12.)/12.);
@@ -2031,7 +2036,7 @@ float brightness=0.;
 //not sure why it has negative range
         //if (twistStar<24.)
          {
-              float b =1./nyq*pow(2.,angle+n)*415.305;//440hz down one note is 415.305
+              float b =1./nyq*pow(2.,angle+n-1./12.)*concertKeyTuning;//440hz down one note is 415.305
               float frampBuffer = texture2D(micIn, vec2(b,0.)).r;
                //if(round(angle*12.)==1.)
                frAmp += frampBuffer;
@@ -2127,7 +2132,7 @@ float brightness=0.;
       //  return vec4(note0/72.);
        // return vec4(note0/144.);
      //  note0-=1.;
-        float note1 =1./nyq*pow(2.,note0)*440.;
+        float note1 =1./nyq*pow(2.,note0)*concertKeyTuning;
 
         float noteAmp = texture2D(micIn,
         vec2(note1
@@ -2251,7 +2256,7 @@ if(uv.x<1./3.&&maxSamp!=0.) //could 1./3. but then the spill over (if any) isn't
                                                   //not sure why it has negative range
                                                           //if (twistStar<24.)
                                                            {
-                                                                float b =1./nyq*pow(2.,noteOfSide+n)*415.305;//this seems to be missing a 440, also missing in other pixelStar calculations
+                                                                float b =1./nyq*pow(2.,noteOfSide+n-1./12.)*concertKeyTuning;//this seems to be missing a 440, also missing in other pixelStar calculations
                                                                 float frampBuffer = texture2D(micIn, vec2(b,0.)).r;
                                                               frAmp += frampBuffer;
                                                                   notesIncludedInPixel++;
@@ -4984,7 +4989,7 @@ if(heartStar==0){
             //not sure why it has negative range
             //if (twistStar<24.)
             {
-            float b =1./nyq*pow(2.,angleASKEW+n)*415.305;
+            float b =1./nyq*pow(2.,angleASKEW+n-1./12.)*concertKeyTuning;
             frAMP += texture2D(micIn, vec2(b,0.)).r;
             }
 
