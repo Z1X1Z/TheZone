@@ -1053,6 +1053,10 @@ callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'keyCode':key.ch
 key  = 'z';
 callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
     leafType![,.z]</a><br>
+<a id="goldenRatioType" name="t"  onclick= "
+key  = 'x';
+callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+    grType![,.x]</a><br>
 <a id="leapIn" name="t"  onclick= "
 key  = 'C';
 callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -3250,7 +3254,11 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
 
                                                       //pow(spoke_factor,(-leaf/gr)/truncator)*truncator)*(((1.+gr)/-leaf)/truncator)*truncator;
                           //   float upSpoke=pow(spoke_factor,((-leaf/gr)/truncator)*truncator)*1.5;//pow(spoke_factor,leaf);//seems to have many likes
-                           float   oneOverLeafTruncated = ((1./leaf)/truncator)*truncator;
+                           float   oneOverLeafTruncated=
+                                    (-0.748693232289164237654969328);
+                                                      //-0.755558243034340;
+                                                     //((1./leaf)/truncator)*truncator;
+                                                      //https://www.wolframalpha.com/input?i=a%3D%28%281-%28%281-%28%281-%28%281-%28%281-%28%281-%28%281-%28%281-%28%281-%28%281-a%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29
             float downSpoke=oneOverLeafTruncated;//1./(((-leaf)*truncator)/truncator)/4.;
                                                            
               //vec2 coordsAltered=coords/gr;
