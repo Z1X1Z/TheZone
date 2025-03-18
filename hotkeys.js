@@ -153,7 +153,7 @@ minSamp:{value:0.},
 lownote:{value:0.},
 concertKeyTuning:{value:440.},
 gates:{value:true},
-leaf:{value:leaf2},
+leaf:{value:leaf},
 gr:{value:gr}
         }
 window.uniforms={}
