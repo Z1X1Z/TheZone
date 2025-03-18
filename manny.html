@@ -741,10 +741,12 @@ radialWarp=b;
                           callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
                           <label for="Variant3">  Variant3![.3]</label><br>
                       -->
-                      <input type="checkbox"  id="Variant4" name="t"  onclick= "
-                              key  = '4';
-                              callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
-                              <label for="Variant4">  Variant4?![.4]</label><br>
+                  
+      <a id="Chirality" name="t"  onclick= "
+          key  = '4';
+          callKey(new KeyboardEvent('keydown', {'key': key,  'altKey':true,'keyCode':key.charCodeAt(0)}));">
+          Variant4?![.4]</a><br>
+      
                               <!--
                               <input type="checkbox"  id="Variant5" name="t"  onclick= "
                                       key  = '5';
@@ -1791,7 +1793,7 @@ void main(){
     uniform bool clvrVariant1;
     uniform bool clvrVariant2;
     uniform bool clvrVariant3;
-    uniform bool clvrVariant4;
+    uniform float clvrVariant4;
     uniform bool clvrVariant5;
     uniform bool clvrVariant6;
     uniform bool clvrVariant7;
@@ -3005,7 +3007,7 @@ vec3 tol(vec2 p, vec2 t){
                         
                         
                         
-                        if(clvrVariant4)p/=1.25;
+                        if(clvrVariant4!=0.)p/=1.25;
                         if(externalCores==0.)p/=1.25;
                          vec2 pWithoutChiralizer = p;
                          
@@ -3038,8 +3040,8 @@ float lfc = length(freed(coords));
    
    
 float precores = .25/log(.5);
-//if(clvrVariant4&&cloverSlide) precores=precores-.25/log(.5);
-//else if(clvrVariant4)precores=0.;
+//if(clvrVariant4!=0.&&cloverSlide) precores=precores-.25/log(.5);
+//else if(clvrVariant4!=0.)precores=0.;
 if(morph!=0.)precores-=5./log(.5);
 
 if(refactorCores!=1.)precores=-.0;
@@ -3191,7 +3193,7 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
 
  //if(chop) hyperCore-=.25/log(.5);//1./(7.*log(.5));
 
-   if(clvrVariant4)
+   if(clvrVariant4!=0.)
    {
     hyperCore-=.25/log(.5);//1./(7.*log(.5));
     if(cloverSlide)hyperCore+=.5/log(.5);
@@ -3259,8 +3261,8 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
 
                                                       //pow(spoke_factor,(-leaf/gr)/truncator)*truncator)*(((1.+gr)/-leaf)/truncator)*truncator;
                           //   float upSpoke=pow(spoke_factor,((-leaf/gr)/truncator)*truncator)*1.5;//pow(spoke_factor,leaf);//seems to have many likes
-                           float   oneOverLeafTruncated=
-                                    (-0.748693232289164237654969328);
+                           float   oneOverLeafTruncated=(clvrVariant4/truncator)*truncator;
+                                                      //-0.748693232289164237654969328
                                                       //-0.755558243034340;
                                                      //((1./leaf)/truncator)*truncator;
                                                       //https://www.wolframalpha.com/input?i=a%3D%28%281-%28%281-%28%281-%28%281-%28%281-%28%281-%28%281-%28%281-%28%281-%28%281-a%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29
@@ -3269,7 +3271,7 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
               //vec2 coordsAltered=coords/gr;
                
                    float variant4Correction=1.;
-                                                           if(clvrVariant4)variant4Correction=(1.-oneOverLeafTruncated);
+                                                           if(clvrVariant4!=0.)variant4Correction=(1.-oneOverLeafTruncated);
                                                            float correction = zoom/(zoom-lfc*variant4Correction);
 
                if(wheel)m =  ((pWithoutChiralizer/lfc)
@@ -3486,7 +3488,7 @@ vec2 lastS = s;
         else   s=vec2(pow(s.x,2.)*sign(s.y),pow(s.y,.5)*sign(s.x));
         }
                                    */
-        if(clvrVariant4) s*=1.-oneOverLeafTruncated;
+        if(clvrVariant4!=0.) s*=1.-oneOverLeafTruncated;
 
         /*
   if(mod(counter,2.)==1.)   s=vec2(pow(s.x,2.)*sign(s.x),pow(s.y,.5)*sign(s.y));
