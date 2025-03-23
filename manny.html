@@ -2365,6 +2365,9 @@ return h;
                             if(f==7&&s.x<0.)notEars=true;
                             else if((f==16)&&p.x>0.&&s.x<0.&&!notEars){l=vec4( hsv2rgb( vec3(mod((-lownote*brelued+16.)/12.,1.) ,.5,1. )),.5);break;}
                             else if((f==17)&&p.x>0.&&s.x<0.&&!notEars){l = vec4( hsv2rgb( vec3(mod((-note*brelued+16.)/12.,1.) ,.5,1. )),.5);break;}
+                            else if((f==14)&&s.x<-1.)
+                                                    {l=vec4(vec3(.5),.5);
+                                                     break;}
                             /*
                             if( (f == 13||f==14)&&s.x<.0&&abs(p.y)>.68&&p.x>0.){l=vec4(vec3(.5),1.);break;}
                             else if(f<=15&&z.x>-.1){
