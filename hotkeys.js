@@ -22,7 +22,9 @@ fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:44100./1024.},
     
 zoomOutRatchetThreshold:{value:0.},
 radialWarp:{value:1.},
-pixelSTARon:{value:true},
+pixelSTARon:{value:false},
+icicle:{value:true},
+linearEQ:{value:true},
 pongOn:{value:true},
 heartStar:{value:0},
 superStable:{value:false},
@@ -152,10 +154,12 @@ maxSamp:{value:0.},
 minSamp:{value:0.},
 lownote:{value:0.},
 concertKeyTuning:{value:440.},
-gates:{value:true},
+gates:{value:false},
 leaf:{value:leaf},
-gr:{value:gr}
-        }
+gr:{value:gr},
+pixelWitnesses:{value:true}
+
+}
 window.uniforms={}
 
 let runningHash = true;
@@ -438,6 +442,14 @@ window.key = " ";
                 //meta keys like ctrlKey must be processed first and should have symbol preferably
                 if((key == "g"||key=="©") && event.altKey&&event.ctrlKey)
                     window.guitarMODE=!window.guitarMODE;
+                if((key == "w"||key=="∑") && event.altKey&&event.ctrlKey)
+                uniforms.pixelWitnesses.value=!uniforms.pixelWitnesses.value;
+                    
+                if((key == "i"||key=="ˆ") && event.altKey&&event.ctrlKey)
+                uniforms.icicle.value=!uniforms.icicle.value
+                    
+                if((key == "u"||key=="¨") && event.altKey&&event.ctrlKey)
+                uniforms.linearEQ.value=!uniforms.linearEQ.value
                 else if((key == "q"||key=="œ") && event.altKey&&event.ctrlKey)
                 {
                     uniforms.gates.value=!uniforms.gates.value

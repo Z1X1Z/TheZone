@@ -437,7 +437,7 @@ radialWarp=b;
                          <input type="checkbox" id="PixelStar" name="t"  onclick= "
                              key  = 'p';
                              callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
-                             <label for="PixelStar">PixelStar?![.p]</label><br>
+                             <label for="PixelStar">PixelStar![.p]</label><br>
                              
                              <input type="checkbox" id="pong" name="t"  onclick= "
                                  key  = 'u';
@@ -447,7 +447,18 @@ radialWarp=b;
                                  <input type="checkbox" id="gatesofheaven" name="t"  onclick= "
                                      key  = 'q';
                                      callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'altKey':true,'keyCode':key.charCodeAt(0)}));">
-                                     <label for="gatesofheaven">Gates of Heaven?![,.q]</label><br>
+                                     <label for="gatesofheaven">Gates of Heaven![,.q]</label><br>
+                                     
+                                     <input type="checkbox" id="icicles" name="t"  onclick= "
+                                         key  = 'i';
+                                         callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                                         <label for="icicles">Icicles?![,.i]</label><br>
+                                         
+                                         <input type="checkbox" id="lfeq" name="t"  onclick= "
+                                             key  = 'u';
+                                             callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                                             <label for="lfeq">Linear Frequency?![,.q]</label><br>
+
 
                      <a id="spirograph" name="t"  onclick= "
                      
@@ -1749,6 +1760,10 @@ void main(){
     
     uniform bool Pointers;
     uniform bool pixelSTARon;
+    uniform bool pixelWitnesses;
+    uniform bool icicle;
+    uniform bool linearEQ;
+
     uniform bool pongOn;
     uniform int heartStar;
     uniform int holyeyes;
@@ -5191,36 +5206,39 @@ if(starOnDot>=1){
                                                                  ;
                                                                  }
                                                                  
-         if (pixelSTARon)
-    {
-                       
-                       vec2 uVu=-(vUvCentered)/aspectRatio;
-                       vec2 uVuMinCenter=-vUvCentered/(min(resolution.x,resolution.y)/resolution.yx);
-                       
-                                        
-                                          
-             pixelStarship = audioEq(uVuMinCenter);
-             icicles = waveForm();
-             
+                                                                 
+                                                                 
+                                                                 vec2 uVu=-(vUvCentered)/aspectRatio;
+                                                                 vec2 uVuMinCenter=-vUvCentered/(min(resolution.x,resolution.y)/resolution.yx);
+                         
+         if (pixelSTARon) pixelStarship = audioEq(uVuMinCenter);
+            if(linearEQ){
+                                 
              linearFrequency=linearFrequencyEQ(adjustedvUv);
              linearFrequency+=linearFrequencyEQ(vec2(1.-adjustedvUv.x,adjustedvUv.y));
-            // linearFrequency/=2.;
-             vec4 starBuffer = vec4(0.);
-             for (float x = 0.; x<12.;x++) starBuffer+=starns(uVu,x);
-             
-             if (starBuffer.x==starBuffer.y&& starBuffer.y==starBuffer.z&&starBuffer.z!=0.&&isGrey==0.)pixelShipGrey=starBuffer.x;
-             if(pixelShipGrey!=0.)
-             {
-             if(isBlack==0.)pixelShipGrey=(.5+pixelShipGrey);
-             if(isGrey>0.)pixelShipGrey=-1.;;
              }
-             pixelStarship += starBuffer;
-             
-             
+            // linearFrequency/=2.;
+          
+    if ( icicle)icicles = waveForm();
             
              //if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.&&pixelStarship.w>0.)
             // mny*=pixelStarship.xyz;//-mny.x*.66;
-            
+                                 
+ if(pixelWitnesses){
+vec4 starBuffer = vec4(0.);
+for (float x = 0.; x<12.;x++) starBuffer+=starns(uVu,x);
+
+if (starBuffer.x==starBuffer.y&& starBuffer.y==starBuffer.z&&starBuffer.z!=0.&&isGrey==0.)pixelShipGrey=starBuffer.x;
+if(pixelShipGrey!=0.)
+{
+if(isBlack==0.)pixelShipGrey=(.5+pixelShipGrey);
+if(isGrey>0.)pixelShipGrey=-1.;;
+}
+pixelStarship += starBuffer;
+
+
+}
+
             
             vec3 seeThrough = pixelStarship.xyz+(1.-pixelStarship.w*pixelStarship.w);
              
@@ -5235,9 +5253,7 @@ if(starOnDot>=1){
 
              
 
-             
-              
-         }
+    
                                                          
                                                                  vec3 ARTICLE=vec3(0.);
 
