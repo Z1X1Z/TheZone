@@ -442,13 +442,13 @@ window.key = " ";
                 //meta keys like ctrlKey must be processed first and should have symbol preferably
                 if((key == "g"||key=="©") && event.altKey&&event.ctrlKey)
                     window.guitarMODE=!window.guitarMODE;
-                if((key == "w"||key=="∑") && event.altKey&&event.ctrlKey)
+                else if((key == "w"||key=="∑") && event.altKey&&event.ctrlKey)
                 uniforms.pixelWitnesses.value=!uniforms.pixelWitnesses.value;
                     
-                if((key == "i"||key=="ˆ") && event.altKey&&event.ctrlKey)
+                else if((key == "i"||key=="ˆ") && event.altKey&&event.ctrlKey)
                 uniforms.icicle.value=!uniforms.icicle.value
                     
-                if((key == "u"||key=="¨") && event.altKey&&event.ctrlKey)
+                    else if((key == "u"||key=="¨") && event.altKey&&event.ctrlKey)
                 uniforms.linearEQ.value=!uniforms.linearEQ.value
                 else if((key == "q"||key=="œ") && event.altKey&&event.ctrlKey)
                 {
