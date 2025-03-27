@@ -1499,7 +1499,7 @@ Open MusicXML file
     
     <div id="menuDivider" class="onBottom" style="text-align:right; width:100%; z-index:4;">
         
-            <button name="menuButton" style = "opacity:75%;" onclick='
+            <button name="menuButton" style = "background-color:rgba(127.5,127.5,127.5,0.333);" onclick='
                 let menu=document.getElementById("menu")
                 if( menu.style.display=="block")  menu.style.display="none"
                 else if( menu.style.display=="none")menu.style.display="block";'>Menu</button>
@@ -1976,7 +1976,7 @@ vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
                                           
 
 
-                                          else if(abs(vUv.y-mod(note/12.*flipStar+twistStar*divideByMultiplyingPi2,1.))<=1./12.)shade= (vUvCentered.x)*17.*flipStar*brelued;
+                                          else if(abs(vUv.y-mod(note/12.*flipStar+twistStar*divideByMultiplyingPi2,1.))<=1./12.)shade= sign(-vUvCentered.x)*170.*flipStar*brelued;
                                           
                                           }
                                       
@@ -1984,7 +1984,7 @@ vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
                                   }
     vec3 ball(vec2 p){
     if (length(pongBallCoords-vUv*resolution)<length(resolution.y)/12.)
-        if (vUv.x<.5)return vec3(10.);
+        if (vUv.x>.5)return vec3(10.);
         else return vec3(-10.);
     else return vec3(0.);
     }
