@@ -3245,7 +3245,7 @@ for(var n = 0; n<targets.length;n++){
                                                              
                                                          }
                                                          else {
-                                                             requestWakeLock();
+                                                             //requestWakeLock();
                                                              if(!window.touchOnlyMode)audioX.resume();
                                                              if(typeof Wad=="function")Wad.audioContext.resume()
                                                                  }

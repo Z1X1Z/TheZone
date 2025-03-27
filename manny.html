@@ -4918,7 +4918,9 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                           vec2(elbowed),move/5.
                                                         )
                                                         ;
+                                                        
                                                                 if(mny.g<0.)mny=vec3(1.,0.,1.);
+                                                                clothes=clamp(clothes-(mny.r+mny.g+mny.b)*4.,0.,1.);
                    }
                    else if (Character==2){
                         mny=bride(characterOnTrailP*gr,moveDynamic/4.);
