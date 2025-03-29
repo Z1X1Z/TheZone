@@ -2416,13 +2416,23 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                                   const pureColor = new THREE.Color();
 
                               let h = ((20/24.*EldersLeg*uniforms.brelued.value-g)*uniforms.brelued.value)%EldersLeg/EldersLeg;
-                                        if (g==topNote&&(uniforms.Character.value==2||uniforms.Character.value==1) )
                                                 {
-                                                pureColor.setRGB(.75,.75,.75);
-                                                vop.setRGB(.75,.75,.75);
+                     if(g==topNote&&(uniforms.Character.value==2||uniforms.Character.value==1))
+                         {
+                         pureColor.setRGB(.75,.75,.75);
+                         vop.setRGB(.75,.75,.75);
+                     }
+                         else if (g==bottomNote&&(uniforms.Character.value==2||uniforms.Character.value==1))
+                         {
+                             let blackFret = .5;
+                                                    pureColor.setRGB(blackFret,blackFret,blackFret);
+                                                    vop.setRGB(blackFret,blackFret,blackFret);
+                         }
+                     
+             else{ vop.setHSL(h,1.,BlackOrWhiteFRET);
+             pureColor.setHSL(h,1.,.5);
+                 
                                                 }
-                                        else{ vop.setHSL(h,1.,BlackOrWhiteFRET);
-                                        pureColor.setHSL(h,1.,.5);
                                         }
 
 
