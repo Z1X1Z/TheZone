@@ -449,6 +449,11 @@ radialWarp=b;
                                      callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'altKey':true,'keyCode':key.charCodeAt(0)}));">
                                      <label for="gatesofheaven">Gates of Heaven![,.q]</label><br>
                                      
+                                     <input type="checkbox" id="pixelWitness" name="t"  onclick= "
+                                         key  = 'w';
+                                         callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                                         <label for="pixelWitness">Pixel Witnesses![,.w]</label><br>
+                                         
                                      <input type="checkbox" id="icicles" name="t"  onclick= "
                                          key  = 'i';
                                          callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'altKey':true,'keyCode':key.charCodeAt(0)}));">
@@ -2157,11 +2162,13 @@ float brightness=0.;
                       // if(floor(oct)!=2.)noteAmp=0.;
                    //  if(round(mod(note0*12.+12.*12.,12.))!=1.)noteAmp*=0.;
                        noteAmp*=12.;
+                      //  if(round(noteOfStar-noteBend)==0.)noteAmp=100.;incomplete testing and
+                      //  else noteAmp=0.;
+                       
        // noteAmp=pow(noteAmp,.5);
        // noteAmp/=255.;
       // return vec4(noteAmp);
         float d = length( uv);///16.;
-        
         //fr=(fr)*(fr)/3.;
       //  float power = 5.;
       // float b = pow(noteAmp,power)/pow(d*6.,power*.5);
