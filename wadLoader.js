@@ -100,15 +100,21 @@ else    string = (e.clientX/window.innerWidth)*(noteGuitarStyleStretchCOMBO.leng
 
     function startGuitar(e){h
        let sGAObject= guitarGRAB(e)
-        
-        sGAObject.sound.play({env:{attack: .0, release:.0,hold:-1},
+        if(
+            (window.touchMode&&!window.muteTouchTouchVolume)
+       ||(!window.touchMode&&!window.muteVoiceTouchVolume)
+       ||(window.touchOnlyMode&&!window.muteTouchTouchVolume)
+           )
+        {
+            sGAObject.sound.play({env:{attack: .0, release:.0,hold:-1},
             pitch:sGAObject.frequency1,
-            volume:sGAObject.string1});
-        
-        
-        sGAObject.sound2.play({env:{attack: .0, release:.0,hold:-1},
+                volume:sGAObject.string1});
+            
+            
+            sGAObject.sound2.play({env:{attack: .0, release:.0,hold:-1},
             pitch:sGAObject.frequency2,
-            volume:sGAObject.string2});
+                volume:sGAObject.string2});
+        }
     }
     
 
