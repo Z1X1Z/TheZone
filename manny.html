@@ -2439,7 +2439,7 @@ return h;
                                        else l = vec4( eyeColorCycler,eyeColorCycler,1.-eyeColorCycler,.5);
                                     }
                                 }
-                                else if(p.x>-.3){
+                                else if(p.x>-.3&&s.x>-.05){
                                     //squircle eyes orange and steel blue
                                     if(p.y<0.)
                                     {
@@ -2477,7 +2477,7 @@ return h;
                           l = vec4( 1.-eyeColorCycler,eyeColorCycler,1.-eyeColorCycler,.5);//green nose
                           break;
                       }
-                      else if ((f==15)&&p.x>-.3&&p.x<0.&&s.x<-0.2)
+                      else if ((f==15)&&p.x>-.3&&p.x<0.&&s.x<-5.)
                       {
 
                           if(bfeye||wink)
@@ -5408,7 +5408,7 @@ else {
                             clamp(heartWarmed*isColoredMultiplier,0.,1.)
                             -(oneEye)*((isGrey+pixelShipGrey)/2.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier
-                                          +(pillar+
+                                          +(pillar
                                             +icicles.xyz
                                                 +
                                             clamp(
