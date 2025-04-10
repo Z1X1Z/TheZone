@@ -21,6 +21,7 @@ coreDilation:{value:0.},
 fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:44100./1024.},
     
 zoomOutRatchetThreshold:{value:0.},
+eyeSingle:{value:true},
 radialWarp:{value:1.},
 pixelSTARon:{value:false},
 icicle:{value:true},
@@ -442,8 +443,10 @@ window.key = " ";
                 //meta keys like ctrlKey must be processed first and should have symbol preferably
                 if((key == "g"||key=="©") && event.altKey&&event.ctrlKey)
                     window.guitarMODE=!window.guitarMODE;
+                else if((key == "k"||key=="˚") && event.altKey&&event.ctrlKey)
+                uniforms.eyeSingle.value=!uniforms.eyeSingle.value;
                 else if((key == "w"||key=="∑") && event.altKey&&event.ctrlKey)
-                uniforms.pixelWitnesses.value=!uniforms.pixelWitnesses.value;
+                    uniforms.pixelWitnesses.value=!uniforms.pixelWitnesses.value;
                     
                 else if((key == "i"||key=="ˆ") && event.altKey&&event.ctrlKey)
                 uniforms.icicle.value=!uniforms.icicle.value

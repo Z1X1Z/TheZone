@@ -1097,6 +1097,10 @@ Reset Zoom![L]</a><br>
         <div class="dropdown">
           <button class="dropbtn">Xtr
           <div  id="m5" class="dropdown-content">
+              <input type="checkbox" id="wink" name="t"  onclick= "
+                  key  = 'k';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
+               <label for="wink">Wink![,.k]</label><br>
                <input type="checkbox" id="Friends" name="t"  onclick= "
                    key  = 'f';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -1750,6 +1754,7 @@ void main(){
 <script id="fragmentShader" type="x-shader/x-fragment">
     varying vec2 vUv;
     uniform float concertKeyTuning;
+    uniform bool eyeSingle;
     uniform float coreDilation;
     uniform bool gates;
     uniform int armsSpinning;
@@ -2162,8 +2167,8 @@ float brightness=0.;
                       // if(floor(oct)!=2.)noteAmp=0.;
                    //  if(round(mod(note0*12.+12.*12.,12.))!=1.)noteAmp*=0.;
                        noteAmp*=12.;
-                      //  if(round(noteOfStar-noteBend)==0.)noteAmp=100.;incomplete testing and
-                      //  else noteAmp=0.;
+                       // if(round(mod(note0*12.,12.))==0.)noteAmp=100.;//incomplete testing and
+                       // else noteAmp=0.;
                        
        // noteAmp=pow(noteAmp,.5);
        // noteAmp/=255.;
@@ -2338,7 +2343,7 @@ else threshSide=uv.x;
                                     )/length(z)/iterations;}
 return h;
 }
-                  vec4 faceBlackAndWhite(vec2 g, vec2 t){
+                  vec4 faceBlackAndWhite(vec2 g, vec2 t, bool wink){
                               t/=2.5;
                               //g/=4.;
                               if(holyeyes==1) t.x*=-1.;
@@ -2347,6 +2352,8 @@ return h;
 
                               bool bfeye= false;
                               bool notEars= false;
+                              float adjustedNote=0.;
+                              if (wink)adjustedNote = mod(note+twistStar*divideByMultiplyingPi2*12.,12.);
                         vec4 l = vec4(0.);
                         if(brelued<0.)p.y*=-1.;
                         if(flipStar<0.)p.y*=-1.;
@@ -2359,17 +2366,20 @@ return h;
                         //if(abs(g.y)<9.)
                         float isEscaped = 0.;
                         if(abs(g.y)<4.&&g.x<2.)for (int f=0;f<20;f+=1)if(abs(z.y)>17.7&&(f>3||f==1)){
-                            if (f==1){l=vec4(0.);break;}
-                            l= vec4(vec3(-1.*(z.y)*sign(g.y)),1.);
-                           isEscaped=-2.;//length(z)/40.;//clouds and face
+                            if(!wink){
+                                    if (f==1){l=vec4(0.);break;}
+                                    l= vec4(vec3(-1.*(z.y)*sign(g.y)),1.);
+                                    isEscaped=-2.;//length(z)/40.;//clouds and face
+                           }
                             break;}
                         else{
                             z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),2.0*z.x*z.y-g.y-t.y);
                             
-                            l=vec4(vec3(1.-abs(z.y)*6.),1.);//smooths middle horn, removes some clouds
+                           if(!wink) l=vec4(vec3(1.-abs(z.y)*6.),1.);//smooths middle horn, removes some clouds
                             vec2 s=z;//vec2(z.x,-z.y);
                             
                             if(f==7&&s.x<0.)notEars=true;
+                            else if(wink);
                             else if((f==16)&&p.x>0.&&s.x<0.&&!notEars){l=vec4( hsv2rgb( vec3(mod((-lownote*brelued+16.)/12.,1.) ,.5,1. )),.5);break;}
                             else if((f==17)&&p.x>0.&&s.x<0.&&!notEars){l = vec4( hsv2rgb( vec3(mod((-note*brelued+16.)/12.,1.) ,.5,1. )),.5);break;}
                             else if((f==14)&&s.x<-1.)
@@ -2394,7 +2404,7 @@ return h;
                                     break;
                                     }
                                   }
-                      else if(twistStar == 0.&&s.x<0.){
+                      else if((twistStar == 0.||wink)&&s.x<0.){
                                     float eyeColorCycler = 0.;
                            if (holyeyes==1)eyeColorCycler=1.;
 
@@ -2405,31 +2415,84 @@ return h;
                          // else if(true);
                                else if (f==16 &&p.x<.35){
                                 if (p.x>.0) {
-                                    if(p.y<0.)l = vec4( 1.-eyeColorCycler,eyeColorCycler,eyeColorCycler,.5);
-                                    else l = vec4( eyeColorCycler,eyeColorCycler,1.-eyeColorCycler,.5);
+                          
+                                    if(p.y<0.)
+                                    {
+                                        if(wink)
+                                        {
+                                           if( round(adjustedNote)==4.||floor(adjustedNote)==4.)
+                                           l=vec4(vec3(1.),0.);
+                                           }
+                                        else l = vec4( 1.-eyeColorCycler,eyeColorCycler,eyeColorCycler,.5);
+                                    }
+                                    else
+                                    {
+                                        if(wink)
+                                        {                                           if(round(adjustedNote)==8.||ceil(adjustedNote)==8.)
+
+                                            l=vec4(vec3(1.),0.);
+                                            }
+                                       else l = vec4( eyeColorCycler,eyeColorCycler,1.-eyeColorCycler,.5);
+                                    }
                                 }
                                 else if(p.x>-.3){
                                     //squircle eyes orange and steel blue
-                                    if(p.y<0.)l = vec4( 1.-eyeColorCycler,.5,eyeColorCycler,.5);
-                                    else l = vec4( eyeColorCycler,.5,1.-eyeColorCycler,.5);
+                                    if(p.y<0.)
+                                    {
+                                        if(wink)
+                                        {                                           if(round(adjustedNote)==3.||round(adjustedNote)==2.)
+
+                                            l=vec4(vec3(1.),0.);
+                                            }
+                                       else
+                                       {
+                                        l = vec4( 1.-eyeColorCycler,.5,eyeColorCycler,.5);
+                                        
+                                        }
+                                       }
+                                    else {
+                                        if(wink)
+                                        {                                           if(round(adjustedNote)==9.||round(adjustedNote)==10.)
+
+                                            l=vec4(vec3(1.),0.);
+                                            }
+                                        else
+                                        l = vec4( eyeColorCycler,.5,1.-eyeColorCycler,.5);
+                                        }
                                 
                                 }
                                 break;
                             }
                             
                       else if (f==17 &&p.x>.0&&p.x<.5&&s.x>-.2){
+                          if(wink)
+                          {                                           if(round(abs(adjustedNote-6.)/1.5)==0.)                                            l=vec4(vec3(1.),0.);
+                              }
+                          else
+
                           l = vec4( 1.-eyeColorCycler,eyeColorCycler,1.-eyeColorCycler,.5);//green nose
                           break;
                       }
-                      else if ((f==15)&&p.x>-.3&&p.x<0.)
+                      else if ((f==15)&&p.x>-.3&&p.x<0.&&s.x<-0.2)
                       {
 
-                          if(bfeye)
+                          if(bfeye||wink)
                                 {
                                     //diagonal diamond eyes
+                                    if(wink)
+                                    {
+                                        if(p.y>0.){
+                                         if(round(adjustedNote)==11.)                                            l=vec4(vec3(1.),0.);
+                                         }
+                                        else  {  if(round(adjustedNote)==1.)  l=vec4(vec3(1.),0.);}
 
-                          if(p.y*(.5-eyeColorCycler)>0.)l=vec4( eyeColorCycler/2.,1.-eyeColorCycler,eyeColorCycler/2.+.5,.5);
+                                         
+                                    }
+                                    else if(!wink){
+                          if(p.y*(.5-eyeColorCycler)>0.)
+                          l=vec4( eyeColorCycler/2.,1.-eyeColorCycler,eyeColorCycler/2.+.5,.5);
                       else l=vec4(eyeColorCycler/2.+.5,1.-eyeColorCycler, eyeColorCycler/2.,.5);
+                      }
                                 }
                           else {
                               //opening side eyes
@@ -4913,7 +4976,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
             if(colorCombo!=17&&colorCombo!=20){
                    if(metronome>1.) mnyX = mannyX(characterOnTrailP/2.*1.221221,vec2(time))+bodyWithArms.xyz;
                    else if (Character==0){
-                       mannyFace = (faceBlackAndWhite(characterOnTrailP*1.221221,moveDynamic));//,0.,1.);
+                       mannyFace = (faceBlackAndWhite(characterOnTrailP*1.221221,moveDynamic,false));//,0.,1.);
                        
                          
                        mny=bodyWithArms.xyz+mannyFace.xyz*(1.-bodyWithArms.w);
@@ -4951,7 +5014,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                          //   else if (Character==11)mny=sealedWoman(characterOnTrailP/1.44,moveDynamic);
                                                                          else if (Character==10)
                                                                          {
-                                                                             mannyFace = (faceBlackAndWhite(characterOnTrailP*1.221221,moveDynamic));//,0.,1.);
+                                                                             mannyFace = (faceBlackAndWhite(characterOnTrailP*1.221221,moveDynamic,false));//,0.,1.);
                                                                              
                                                                              mny=faceFORWARDTWO(characterOnTrailP/1.75,moveDynamic)+mannyFace.xyz;
                                                                              }
@@ -4959,16 +5022,19 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                          else if (Character==11)mny=vec3(0.);
            }
 
-                                                                 
+                                                                 vec2 eyeSize=vec2(0.);
+                                                                 if(largeEyeColor!=0.)eyeSize = characterOnTrailP/3.5*min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
+                                                                 else if (eyeSingle)eyeSize = characterOnTrailP/4.*min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
                                                                  
                                                                  vec3 bigEyes = vec3(0.);
   if(largeEyeColor==1.||largeEyeColor==-1.)
                                                                  {
                     if(length(characterOnTrailP)>.25)//for the eyezone on lttle manny, for G and A eyes
-                       bigEyes = clamp(face(characterOnTrailP/3.5*min(resolution.x,resolution.y)/max(resolution.x,resolution.y),moveDynamic*1.5),0.,1.);//dimensions seem difficult to manage
+                       bigEyes = clamp(face(eyeSize,moveDynamic*1.5),0.,1.);//dimensions seem difficult to manage
                    }
- else if (largeEyeColor== 3.) bigEyes = clamp(shiny(characterOnTrailP/3.5*min(resolution.x,resolution.y)/max(resolution.x,resolution.y),moveDynamic*1.5),0.,1.);
-                                                                 
+ else if (largeEyeColor== 3.) bigEyes = clamp(shiny(eyeSize,moveDynamic*1.5),0.,1.);
+                                                                 vec3 oneEye = vec3(0.);
+                                                             if(eyeSingle)     oneEye =faceBlackAndWhite(eyeSize,vec2(0.),true).xyz;
                                                                  
                                                                  
                                                   if(musicAngelMan>0&&Character!=3&&Character!=4)
@@ -4976,7 +5042,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                              float divisor = 1.;
                                                              if(gameOn)divisor=1.5;
                                                              AM+=faceFORWARD(characterOnTrailP*angelSize,moveDynamic)/divisor;
-                                                            if(mny.r!=0.||mny.g!=0.||mny.b!=0.) AM*=mny;
+                                                            if(mny.r!=0.||mny.g!=0.||mny.b!=0.) AM*=mny-oneEye;
                                                          //    mny+=AM;
                                                              }
                                                                  
@@ -5329,12 +5395,13 @@ else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
 else {
                   
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
-                                    +yourFace.xyzw-vec4(ARTICLE,1.),0.,1.);
+                                    +yourFace.xyzw-vec4(oneEye,0.)/3.-vec4(ARTICLE,1.),0.,1.);
                        vec4 faceFromShip = vec4(clamp(mannyFace.xyz,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies =
                        vec4(
                                            mnyX+
                             clamp(heartWarmed*isColoredMultiplier,0.,1.)
+                            -oneEye*4.
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier
                                           +(pillar
                                             +icicles.xyz
@@ -5348,7 +5415,7 @@ else {
                                             +GOH.xyz)*(1.-pixelShipGrey*40.)
                                         +yourFace.xyz
                     +//clamp((
-                           mny*(1.-isGrey)
+                           (mny-oneEye*4.)*(1.-isGrey)
                             +overchargeCharacter
                                            //-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r),0.,1.)*2.*mnyWhite
                                      // +(-hypnoticHarmonicCircles.x-hypnoticHarmonicCircles.y-hypnoticHarmonicCircles.z)*2.)*starshipMultiplier*(1.-isGrey-pixelShipGrey)
