@@ -2354,6 +2354,10 @@ return h;
                               bool notEars= false;
                               float adjustedNote=0.;
                               if (wink)adjustedNote = mod(note+twistStar*divideByMultiplyingPi2*12.,12.);
+                              
+                              vec4 pitchColor=vec4(1.);
+                              if (volume!=1.)pitchColor=vec4( hsv2rgb( vec3(mod((-note*brelued-2.)/12.,1.) ,.5,1. )),.5);
+                              
                         vec4 l = vec4(0.);
                         if(brelued<0.)p.y*=-1.;
                         if(flipStar<0.)p.y*=-1.;
@@ -2371,19 +2375,19 @@ return h;
                                     l= vec4(vec3(-1.*(z.y)*sign(g.y)),1.);
                                     isEscaped=-2.;//length(z)/40.;//clouds and face
                            }
+                            
                             break;}
                         else{
                             z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),2.0*z.x*z.y-g.y-t.y);
                             
-                           if(!wink) l=vec4(vec3(1.-abs(z.y)*6.),1.);//smooths middle horn, removes some clouds
+                           if(!wink)l=vec4(pitchColor.xyz*(1.-abs(z.y)*6.),1.);//smooths middle horn, removes some clouds
                             vec2 s=z;//vec2(z.x,-z.y);
                             
                             if(f==7&&s.x<0.)notEars=true;
                             else if(wink);
-                            else if((f==16)&&p.x>0.&&s.x<0.&&!notEars){l=vec4( hsv2rgb( vec3(mod((-lownote*brelued+16.)/12.,1.) ,.5,1. )),.5);break;}
-                            else if((f==17)&&p.x>0.&&s.x<0.&&!notEars){l = vec4( hsv2rgb( vec3(mod((-note*brelued+16.)/12.,1.) ,.5,1. )),.5);break;}
-                            else if((f==14)&&s.x<-1.)
-                                                    {l=vec4(vec3(.5),.5);
+                            else if((f==16)&&p.x>0.&&s.x<0.&&!notEars){l=vec4( hsv2rgb( vec3(mod((-lownote*brelued-2.)/12.,1.) ,.5,1. )),.5);break;}
+                            else if((f==17)&&p.x>0.&&s.x<0.&&!notEars){l = pitchColor;break;}
+                            else if((f==14)&&s.x<-1.){l=vec4(vec3(.5),.5);
                                                      break;}
                             /*
                             if( (f == 13||f==14)&&s.x<.0&&abs(p.y)>.68&&p.x>0.){l=vec4(vec3(.5),1.);break;}
@@ -2559,7 +2563,7 @@ return h;
                             
                         }
                         if((l.r<.0||l.g<0.||l.b<0.)&&isEscaped!=-2.)l=vec4(0.);
-                            if(g.y==0.&&t.y==0.)l=vec4(1.);
+                            if(g.y==0.&&t.y==0.&&!wink)l=vec4(1.);
                           if(l.w==1.)
                         return -l;
                         else if(l.w==.5)return l;
@@ -5034,7 +5038,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                    }
  else if (largeEyeColor== 3.) bigEyes = clamp(shiny(eyeSize,moveDynamic*1.5),0.,1.);
                                                                  vec3 oneEye = vec3(0.);
-                                                             if(eyeSingle)     oneEye =faceBlackAndWhite(eyeSize,vec2(0.),true).xyz;
+                                                             if(eyeSingle&&volume!=1.)     oneEye =faceBlackAndWhite(eyeSize,vec2(0.),true).xyz;
                                                                  
                                                                  
                                                   if(musicAngelMan>0&&Character!=3&&Character!=4)
