@@ -2885,7 +2885,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                     else{
                         z=3.*vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x*sign(-g.y)),77.*z.x*z.y-g.y+t.y);
                         z.y=-1./z.y;}
-                    return vec3(b/2.,b,b/2.);
+                    return vec3(b,b/2.,0.);
                     }
 
     /*
@@ -4794,7 +4794,7 @@ vec3 sevenPillars(vec2 p){
                       for (int f=0;f<11;f+=1)if(abs(s.y)<sqrt(pillarDepth)){
                   s=vec2(-1./s.x, 2.0*s.y);//this is from a thought about y=x
                           }
-                  return vec3(s.y,s.x,-s.y*s.x);
+                  return vec3(s.y/s.x,-s.x*2.,-s.y*s.x);
                   }
     else return vec3(0.);
 }
@@ -5247,7 +5247,7 @@ if(starOnDot>=1){
                                  
                                  vec3 pillar = vec3(0.);
                                  pillar = sevenPillars(vUv.yx-vec2(0.,.5));
-                                 
+                                                     if(pillar.x!=0.||pillar.y!=0.||pillar.z!=0.)         pillar=   clamp(pillar+(-mny.x-mny.y-mny.z)*40.,0.,1.);
                         float shipSUM = starship.x+starship.y+starship.z;
                                  vec3 hypnoticHarmonicCircles = vec3(0.);
                                                                  
@@ -5316,12 +5316,13 @@ if(pixelShipGrey!=0.)
 if(isBlack==0.)pixelShipGrey=(.5+pixelShipGrey);
 if(isGrey>0.)pixelShipGrey=-1.;;
 }
+if(mny.r!=0.||mny.g!=0.||mny.b!=0.)mny-=pixelShipGrey*12.;
 pixelStarship += starBuffer;
 
 
 }
 
-            
+                                 heartWarmed-=(pillar.x+pillar.y+pillar.z)*100.;
             vec3 seeThrough = pixelStarship.xyz+(1.-pixelStarship.w*pixelStarship.w);
              
             
@@ -5407,7 +5408,7 @@ else {
                             clamp(heartWarmed*isColoredMultiplier,0.,1.)
                             -(oneEye)*((isGrey+pixelShipGrey)/2.)
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier
-                                          +(pillar
+                                          +(pillar+
                                             +icicles.xyz
                                                 +
                                             clamp(
@@ -5416,7 +5417,7 @@ else {
                                         +linearFrequency.w
                                             +pong
                                             
-                                            +GOH.xyz)*(1.-pixelShipGrey*40.)
+                                            +GOH.xyz)*(1.-pixelShipGrey)*10.
                                         +yourFace.xyz
                     +//clamp((
                            (mny-oneEye*10.)*(1.-isGrey)
