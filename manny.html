@@ -452,7 +452,7 @@ radialWarp=b;
                                      <input type="checkbox" id="pixelWitness" name="t"  onclick= "
                                          key  = 'w';
                                          callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'altKey':true,'keyCode':key.charCodeAt(0)}));">
-                                         <label for="pixelWitness">Pixel Witnesses![,.w]</label><br>
+                                         <label for="pixelWitness">Pixel Witnesses?![,.w]</label><br>
                                          
                                      <input type="checkbox" id="icicles" name="t"  onclick= "
                                          key  = 'i';
@@ -1100,7 +1100,7 @@ Reset Zoom![L]</a><br>
               <input type="checkbox" id="wink" name="t"  onclick= "
                   key  = 'k';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
-               <label for="wink">Wink![,.k]</label><br>
+               <label for="wink">Wink?![,.k]</label><br>
                <input type="checkbox" id="Friends" name="t"  onclick= "
                    key  = 'f';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -2354,7 +2354,7 @@ return h;
                               bool notEars= false;
                               float adjustedNote=0.;
                               if (wink)adjustedNote = mod(note+twistStar*divideByMultiplyingPi2*12.,12.);
-                              
+                              vec4 lowColor=vec4( hsv2rgb( vec3(mod((-lownote*brelued-2.)/12.,1.) ,.5,1. )),.5);
                               vec4 pitchColor=vec4(1.);
                               if (volume!=1.)pitchColor=vec4( hsv2rgb( vec3(mod((-note*brelued-2.)/12.,1.) ,.5,1. )),.5);
                               
@@ -2385,8 +2385,8 @@ return h;
                             
                             if(f==7&&s.x<0.)notEars=true;
                             else if(wink);
-                            else if((f==16)&&p.x>0.&&s.x<0.&&!notEars){l=vec4( hsv2rgb( vec3(mod((-lownote*brelued-2.)/12.,1.) ,.5,1. )),.5);break;}
-                            else if((f==17)&&p.x>0.&&s.x<0.&&!notEars){l = pitchColor;break;}
+                            else if((f==16)&&p.x>0.&&s.x<0.&&!notEars){l=lowColor;break;}
+                            else if((f==17)&&p.x>0.&&s.x<0.&&!notEars){l = lowColor;break;}
                             else if((f==14)&&s.x<-1.){l=vec4(vec3(.5),.5);
                                                      break;}
                             /*
