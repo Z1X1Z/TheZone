@@ -1308,7 +1308,63 @@ Reset Zoom![L]</a><br>
                
           <div id="scoreDropContent" class="dropdown-content" style="font-size:1em; column-count:1;">
               
+              
+              [#.c(BookChapter)]:
+
+              <select name="choose reader"  id="reader"
+                  onchange="
+              window.readerSet = true;
+
+                                key  = 'b';
+                                number = this.value;
+                                window.muteToggle = true;
+                                callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'keyCode':key.charCodeAt(0)}));
+                                window.muteToggle = false;
+"
+            >
+            <option value="100" selected="selected">Blessed Reader
+            </option>
+                  <option value='0'>
+                      Hays (w/ text)[#.b0]
+                  </option>
+                  <option value='1'>
+                      Gilbert by book[#.b1]
+                  </option>
                   
+                        <option value='2'>
+                            Souer by book[#.b2]
+                        </option>
+                        <option value='3'>
+                            Hays by book[#.b3]
+                        </option>
+                <option value='4'>
+                    Gilbert by chapter[#.b4]
+                </option>
+                
+                      <option value='5'>
+                          Souer by chapter[#.b5]
+                      </option>
+                      <option value='6'>
+                          Hays by chapter[#.b6]
+                      </option>
+                      <option value='7'>
+                          Gilbert w/ music by book[#.b7]
+                      </option>
+                      <option value='8'>
+                          Gilbert w/ music by chapter[#.b8]
+                      </option>
+                      
+              </select>
+              
+              
+              <input type="checkbox" id="BibleToggle" name="t"  onclick= "
+              key  = 'b';
+              callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'keyCode':key.charCodeAt(0)}));
+">
+              <label for="BibleToggle">Listen to The Bible[.b]</label>
+              
+              <br>
+
                   <input type="checkbox" id="Guitar" name="t"  onclick= "
                       key  = 'g';
                       callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
@@ -1405,63 +1461,7 @@ Open MusicXML file
  <input type="file" id="files" >
 
                   <output id="list"></output>
-                  <p>
-                  
-                  
-                  [#.c(BookChapter)]:
-
-                  <select name="choose reader"  id="reader"
-                      onchange="
-                  window.readerSet = true;
-
-                                    key  = 'b';
-                                    number = this.value;
-                                    window.muteToggle = true;
-                                    callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'keyCode':key.charCodeAt(0)}));
-                                    window.muteToggle = false;
-"
-                >
-                <option value="100" selected="selected">Blessed Reader
-                </option>
-                      <option value='0'>
-                          Hays (w/ text)[#.b0]
-                      </option>
-                      <option value='1'>
-                          Gilbert by book[#.b1]
-                      </option>
-                      
-                            <option value='2'>
-                                Souer by book[#.b2]
-                            </option>
-                            <option value='3'>
-                                Hays by book[#.b3]
-                            </option>
-                    <option value='4'>
-                        Gilbert by chapter[#.b4]
-                    </option>
-                    
-                          <option value='5'>
-                              Souer by chapter[#.b5]
-                          </option>
-                          <option value='6'>
-                              Hays by chapter[#.b6]
-                          </option>
-                          <option value='7'>
-                              Gilbert w/ music by book[#.b7]
-                          </option>
-                          <option value='8'>
-                              Gilbert w/ music by chapter[#.b8]
-                          </option>
-                          
-                  </select>
-                  
-                  
-                  <input type="checkbox" id="BibleToggle" name="t"  onclick= "
-                  key  = 'b';
-                  callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'keyCode':key.charCodeAt(0)}));
-">
-                  <label for="BibleToggle">Listen to The Bible[.b]</label>
-                  
+                 
                   <br>
                   <a id="reset" name="t"  onclick="
                   key  = ' ';
