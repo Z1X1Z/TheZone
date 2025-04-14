@@ -2486,9 +2486,9 @@ return h;
                                     if(wink)
                                     {
                                         if(p.y>0.){
-                                         if(round(adjustedNote)==11.)                                            l=vec4(vec3(1.),0.);
+                                         if(round(adjustedNote)==11.||floor(adjustedNote)==11.)                                            l=vec4(vec3(1.),0.);
                                          }
-                                        else  {  if(round(adjustedNote)==1.)  l=vec4(vec3(1.),0.);}
+                                        else  {  if(round(adjustedNote)==1.||ceil(adjustedNote)==1.)  l=vec4(vec3(1.),0.);}
 
                                          
                                     }
