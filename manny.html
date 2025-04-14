@@ -2212,13 +2212,15 @@ float brightness=0.;
               noteOfStar== mod(7. +rote,12.)||
               noteOfStar== mod(10. +rote,12.))
               {
-                  ret=vec4(clamp(
-                                  noteAmpToLength
-                           ,0.,1.)*.5
-                           );
+               ret=vec4(clamp(
+                                                        noteAmpToLength
+                                                 ,0.,1.)
+                                                 )*.5;
             }
         else{
             
+                         if(colorCombo==100)ret=vec4(-15./255.);
+                         else
 ret= vec4(clamp(
                 noteAmpToLength
             ,0. ,1.)*.25
