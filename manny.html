@@ -2398,8 +2398,8 @@ return h;
                                // if( f == 15&&z.x>-.10&&abs(p.y)>.75){l=vec4(vec3(z.x),.5);break;}
                             }
                              */
-                            if(holyeyes==0);
-                            else if(holyeyes==2)
+                            if(holyeyes==0&&!wink);
+                            else if(holyeyes==2&&!wink)
                             {
                               if (f==17&&s.x<0.&&p.x>0.){
                                   l=vec4(.5);
@@ -2410,7 +2410,9 @@ return h;
                                     break;
                                     }
                                   }
-                      else if((twistStar == 0.||wink)&&s.x<0.){
+                            if((holyeyes==0||holyeyes==2)&&!wink);
+
+                    else   if((twistStar == 0.||wink)&&s.x<0.){
                                     float eyeColorCycler = 0.;
                            if (holyeyes==1)eyeColorCycler=1.;
 
@@ -5131,8 +5133,8 @@ if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
      if(Character!=9&&(heartStar!=3)) HEART = heart(characterPSpunToKey*heartSize
                                                 +heartShift
                                                     ,//vec2(0.)
-                                    -direction*spin2(-d.yx,-twistStar)/4.*
-                                                    -vec2(characterPSpunToKey.x,characterPSpunToKey.y)* frAMP*heartRate*vec2(1.,flipStar)// not working on some androids, may work with vec2(0.)
+                                    -direction*spin2(-d.yx,-twistStar)/4.+
+                                                    -vec2(uvSwizzled.x,uvSwizzled.y)/ frAMP*heartRate*vec2(1.,flipStar)// not working on some androids, may work with vec2(0.)
                                     )
      //*(1.-length(uVuMinCenterASKEW)/8.)
      ;
