@@ -5048,7 +5048,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                              float divisor = 1.;
                                                              if(gameOn)divisor=1.5;
                                                              AM+=faceFORWARD(characterOnTrailP*angelSize,moveDynamic)/divisor;
-                                                            if(mny.r!=0.||mny.g!=0.||mny.b!=0.) AM*=mny-oneEye;
+                                                            if(mny.r!=0.||mny.g!=0.||mny.b!=0.) AM*=mny;
                                                          //    mny+=AM;
                                                              }
                                                                  
@@ -5149,7 +5149,11 @@ if (Character==4||Character==3) {heartSize=5.;heartShift=vec2(.5,0.);}
                        else heartWarmed=HEART/2.;
 
 
-                        if(HEART.x==0.&&HEART.y==0.&&HEART.z==0.)  heartWarmed=AM;
+                        if(HEART.x==0.&&HEART.y==0.&&HEART.z==0.)
+                        {heartWarmed=AM;
+                            }
+                        if(heartWarmed.x!=0.&&heartWarmed.y!=0.&&heartWarmed.z!=0.&&oneEye.y!=0.)   oneEye-=heartWarmed;
+
                        // else   clothes*=HEART;
 
                             
