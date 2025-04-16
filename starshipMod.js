@@ -229,6 +229,7 @@ function spiral_compress(){
       testarContinuous[n] = Math.abs(z[n]);
                           mustarD[n] = note24;
                             }
+                       if(window.extremeFrets)     for(var b = 0; b<EldersLeg; b++)if(testar[b]!=0.) testar[b]=(1.-1./testar[b]**.5)**2.//this line is
                             
 };
 
