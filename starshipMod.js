@@ -233,7 +233,7 @@ function spiral_compress(){
                             }
                        if(window.extremeFrets)
                             {
-        for(var b = 0; b<EldersLeg; b++)if(testar[b]!=0.) testar[b]=(1.-1./testar[b]**.5)**2.
+        for(var b = 0; b<EldersLeg; b++)if(testar[b]!=0.) testar[b]=(1.-1./testar[b]**(1./3.))**(3.)
           //  for(var b = 0; b<12; b++)if(testar[b]!=0.) stack12Array[b]=(1.-1./stack12Array[b]**.5)**2.
                 }
                             
