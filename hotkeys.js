@@ -202,6 +202,7 @@ function resetAll(){
         window.osmdSound = false;
     window.guitarMODE=false;
     window.extremeFrets=true;
+    window.orderedStack=true;
     window.clvrVariant4Type=1.;
     window.leafMode=1;
     window.grMode=0;
@@ -446,6 +447,17 @@ window.key = " ";
                     window.guitarMODE=!window.guitarMODE;
                 else if((key == "k"||key=="˚") && event.altKey&&event.ctrlKey)
                 uniforms.eyeSingle.value=!uniforms.eyeSingle.value;
+                
+            else if((key == "s"||key=="ß") && event.altKey&&event.ctrlKey)
+            {
+                window.orderedStack=!window.orderedStack;
+                if (INITIALIZED)
+                {
+                    if(window.orderedStack)shaderScene.add(stackMesh)
+                                                           else             shaderScene.remove(stackMesh)
+
+                        }
+            }
                 else if((key == "e"||key=="´") && event.altKey&&event.ctrlKey)
                     window.extremeFrets=!window.extremeFrets;
                 else if((key == "w"||key=="∑") && event.altKey&&event.ctrlKey)

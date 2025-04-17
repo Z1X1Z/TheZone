@@ -194,6 +194,7 @@ function makeSpirograph(){
        
 }
 let callibratorArray = new Float32Array(1024).fill(0);
+                                                                  let stack12Array = new Float32Array(12).fill(0);
 function spiral_compress(){
     let freq = 0;
   //  notesAverage = 0.;
@@ -201,7 +202,7 @@ function spiral_compress(){
 
     const z = [...dataArray];
 
-    testarContinuous.fill(0); testar.fill(0); mustarD.fill(0);
+    testarContinuous.fill(0); testar.fill(0); mustarD.fill(0);stack12Array.fill(0.);
     for(let n=0; n<numberOfBins; n++)
     {
     //if ( z[n]>z[n-1] && z[n] > z[n+1] ){
@@ -226,10 +227,15 @@ function spiral_compress(){
 
                             */
        if(EldersLeg!=0.) testar[Math.round(note24*EldersLeg/24.)%EldersLeg] += Math.abs(z[n])*radialWarp;
+                            stack12Array[Math.round(note24/2.)%12]+= Math.abs(z[n]);
       testarContinuous[n] = Math.abs(z[n]);
                           mustarD[n] = note24;
                             }
-                       if(window.extremeFrets)     for(var b = 0; b<EldersLeg; b++)if(testar[b]!=0.) testar[b]=(1.-1./testar[b]**.5)**2.//this line is
+                       if(window.extremeFrets)
+                            {
+        for(var b = 0; b<EldersLeg; b++)if(testar[b]!=0.) testar[b]=(1.-1./testar[b]**.5)**2.
+          //  for(var b = 0; b<12; b++)if(testar[b]!=0.) stack12Array[b]=(1.-1./stack12Array[b]**.5)**2.
+                }
                             
 };
 
@@ -571,12 +577,13 @@ let materialShader;
 let lineMat, lineGeometry, line;
  let circleGeometry,circleMaterial,circle;
                     
-                    let meshTrail, materialTrail, geomeTrail;
+                            let meshTrail, materialTrail, geomeTrail;
+                            let stackMesh, stackMaterial, stackGeometry;
                             let starMesh,starGeometry,starMaterial;
                             let DAWstarMesh,DAWstarGeometry,DAWstarMaterial;
 
                     let radialMaterial, radialLine, radialGeometry;
-                    let starsANDwitnessesMesh,starsANDwitnessesGeometry;
+                            let starsANDwitnessesMesh,starsANDwitnessesGeometry;
                     let starStreamColors,starStreamPoints;//window.starCount
                     let starStreamMesh,starStreamMaterial,starStreamGeometry;
                            let scene, shaderScene,feedbackScene, feedbackSceneFlip;
@@ -595,10 +602,14 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
                        let backBufferFlip=false;
                       let FeedbackrenderTarget,FeedbackrenderTargetFlipSide;
                        
-       
-                    const xenOctaveFactor = 12;
-                                           const harmonicPzyghtheVertices = new Float32Array(xenOctaveFactor*12*3*6)
-                                           const harmonicPzyghtheColor = new Float32Array(xenOctaveFactor*12*4*6)
+                            
+                                         const xenOctaveFactor = 12;
+                                                                const harmonicPzyghtheVertices = new Float32Array(xenOctaveFactor*12*3*6)
+                                                                const harmonicPzyghtheColor = new Float32Array(xenOctaveFactor*12*4*6)
+                            
+                                                                const stackVertices = new Float32Array(12*3*6*2)
+                                                                const stackColor = new Float32Array(12*4*6*2)
+                            
                     
                                            const starsANDwitnessesPoints=new Float32Array(120*3*6);
                                            const starsANDwitnessesColors=new Float32Array(120*3*6);
@@ -705,9 +716,11 @@ function setFFTdependantSizes(){
                                            let starStreamPositionAttribute;
                                            let starStreamColorAttribute;
                            let starStreamIndex=0;
-                                       let harmonicPositionAttribute;
-                                       let harmonicColorAttribute;
-                                           
+                            let harmonicPositionAttribute;
+                            let harmonicColorAttribute;
+                            let stackPositionAttribute;
+                            let stackColorAttribute;
+                                
                                            let trailPositionAttribute;
                                            let trailColorAttribute;
                                            
@@ -716,10 +729,13 @@ function setFFTdependantSizes(){
                                            
                             
             function loadAttributes(){
-                        
-                        linePositionAttribute = lineGeometry.getAttribute( 'position' );
-                        lineColorAttribute = lineGeometry.getAttribute( 'color' );
              
+             linePositionAttribute = lineGeometry.getAttribute( 'position' );
+             lineColorAttribute = lineGeometry.getAttribute( 'color' );
+             
+             stackPositionAttribute = stackGeometry.getAttribute( 'position' );
+             stackColorAttribute = stackGeometry.getAttribute( 'color' );
+  
              starPositionAttribute = starGeometry.getAttribute( 'position' );
              starColorAttribute = starGeometry.getAttribute( 'color' );
              
@@ -846,19 +862,33 @@ function init() {
       geomeTrail.setAttribute( 'color', new THREE.Float32BufferAttribute( trailColor, 4 ));
      meshTrail = new THREE.Mesh(geomeTrail, materialTrail);
      
-     
-     harmonicPzyghtheMaterial= new THREE.MeshBasicMaterial({
-                   opacity: 1.,
-                 transparent: true,
-                   vertexColors: true,
-                  // side: THREE.DoubleSide
-               });
-     harmonicPzyghtheGeometry = new THREE.BufferGeometry();
-     harmonicPzyghtheGeometry.dynamic = true;
-     harmonicPzyghtheGeometry.setAttribute( 'position', new THREE.Float32BufferAttribute( harmonicPzyghtheVertices, 3 ) );
-     harmonicPzyghtheGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( harmonicPzyghtheColor, 4 ));
-     harmonicPzyghtheMesh= new THREE.Mesh( harmonicPzyghtheGeometry,  harmonicPzyghtheMaterial);
-     
+             
+             harmonicPzyghtheMaterial= new THREE.MeshBasicMaterial({
+                           opacity: 1.,
+                         transparent: true,
+                           vertexColors: true,
+                          // side: THREE.DoubleSide
+                       });
+             harmonicPzyghtheGeometry = new THREE.BufferGeometry();
+             harmonicPzyghtheGeometry.dynamic = true;
+             harmonicPzyghtheGeometry.setAttribute( 'position', new THREE.Float32BufferAttribute( harmonicPzyghtheVertices, 3 ) );
+             harmonicPzyghtheGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( harmonicPzyghtheColor, 4 ));
+             harmonicPzyghtheMesh= new THREE.Mesh( harmonicPzyghtheGeometry,  harmonicPzyghtheMaterial);
+             
+             
+             stackMaterial= new THREE.MeshBasicMaterial({
+                           opacity: 1.,
+                         transparent: true,
+                           vertexColors: true,
+                          // side: THREE.DoubleSide
+                       });
+             stackGeometry = new THREE.BufferGeometry();
+             stackGeometry.dynamic = true;
+             stackGeometry.setAttribute( 'position', new THREE.Float32BufferAttribute( stackVertices, 3 ) );
+             stackGeometry.setAttribute( 'color', new THREE.Float32BufferAttribute( stackColor, 4 ));
+             stackMesh= new THREE.Mesh( stackGeometry,  stackMaterial);
+             
+             
      
      circleMaterial = new THREE.MeshBasicMaterial(    { opacity: .8,
          transparent: true});
@@ -869,7 +899,8 @@ function init() {
      radialLine = new THREE.Line(radialGeometry,radialMaterial);
      
                         loadAttributes();
-                        
+             shaderScene.add(stackMesh)
+
      scene.add(harmonicPzyghtheMesh)
      scene.add(meshTrail)
      scene.add(line);
@@ -2129,6 +2160,84 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
     lineColorAttribute.needsUpdate = true;
 
 
+       
+       var maxStack=0.0000001;
+       var minStack=100000000000000;
+
+
+        
+
+        
+        
+        if(window.orderedStack)
+            for (var g=0; g<12; g++) {
+                if(isFinite(stack12Array[g])){
+                    if(stack12Array[g]>maxStack) maxStack=stack12Array[g];
+                    if(stack12Array[g]<minStack) minStack=stack12Array[g];
+                }
+            }
+            
+       
+       
+            const incrementHeight = .05;
+            const incrementWidth = starshipSize/1.5;
+        const stackTransparency = .75;
+       
+       
+
+       
+       let stackStride = 0.;
+       if (window.orderedStack)
+            for (var g=0; g<12; g++) {
+                let elevation =(stack12Array[g]-minStack)/(maxStack-minStack);
+                const vop = new THREE.Color();
+                vop.setHSL(((-g+4*uniforms.brelued.value)*uniforms.brelued.value)%12/12., 1.,.5);//297 is around the highest heard note
+                
+                let y1 = (elevation+incrementHeight)/1.5-1.
+                let y2 =  (elevation)/1.5-1.;
+                let depth = -1.+(1.-elevation)/1000.;
+                
+                 
+                     stackColorAttribute.setXYZW(stackStride,vop.r,vop.g,vop.b,stackTransparency)
+                     stackColorAttribute.setXYZW(stackStride+1,vop.r,vop.g,vop.b,stackTransparency)
+                     stackColorAttribute.setXYZW(stackStride+2,vop.r,vop.g,vop.b,stackTransparency)
+                
+                stackColorAttribute.setXYZW(stackStride+3,vop.r,vop.g,vop.b,stackTransparency)
+                stackColorAttribute.setXYZW(stackStride+4,vop.r,vop.g,vop.b,stackTransparency)
+                stackColorAttribute.setXYZW(stackStride+5,vop.r,vop.g,vop.b,stackTransparency)
+        
+            
+                
+                stackPositionAttribute.setXYZ(stackStride,-incrementWidth,y1,  depth)
+                stackPositionAttribute.setXYZ(stackStride+1, incrementWidth, y2,  depth)
+                stackPositionAttribute.setXYZ(stackStride+2,incrementWidth, y1,  depth)
+                
+                
+                
+                 stackPositionAttribute.setXYZ(stackStride+4,-incrementWidth,y1,  depth)
+                 stackPositionAttribute.setXYZ(stackStride+3, incrementWidth, y2,  depth)
+                 stackPositionAttribute.setXYZ(stackStride+5,-incrementWidth, y2,  depth)
+                
+            
+                stackStride+=6;
+            }
+
+       
+            
+            stackPositionAttribute.needsUpdate = true; // required after the first render
+            stackColorAttribute.needsUpdate = true; // required after the first render
+          
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
+       
    var maxTestar=0.0000001;
    var minTestar=100000000000000;
 
@@ -2896,8 +3005,9 @@ let s = f;
             for(var g=0; g<12*xenOctaveFactor*6; g++) harmonicPositionAttribute.setXYZ(g,0,0,0);
             for(var e = 0; e<xyStarParticleArray.length*3*2; e++)starStreamPositionAttribute.setXYZ(e,0,0,0);
             for(var e = 0; e<120*6; e++)  starsANDwitnessesPositionAttribute.setXYZ(e,0,0,0);
+            for(var e = 0; e<12*6; e++)  stackPositionAttribute.setXYZ(e,0,0,0);
 
-
+             stackPositionAttribute.needsUpdate = true;
             linePositionAttribute.needsUpdate = true;
             starPositionAttribute.needsUpdate = true;
             trailPositionAttribute.needsUpdate = true;
