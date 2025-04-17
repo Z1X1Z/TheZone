@@ -5299,7 +5299,7 @@ if(starOnDot>=1){
                                                                  
                                                                  
                  float sevenPillarShrink = pillarScale*2./max(resolution.x,resolution.y);
-                 vec2 adjustedvUv=vec2(vUv.x,vUv.y*(1.-sevenPillarShrink)-sevenPillarShrink);
+                 vec2 adjustedvUv=vec2(vUv.x,vUv.y/(1.-sevenPillarShrink)-sevenPillarShrink);
                                                                  vec4 GOH =vec4(0.);
                                                                  if(gates)
                                                                  {
@@ -5307,7 +5307,8 @@ if(starOnDot>=1){
                    
                                                             gatesOfHeaven(vec2(vUv.x,1.-vUv.y),9.)
                                                                  +gatesOfHeaven(vec2(1.-vUv.y,1.-vUv.x),0.)
-                                                                 +gatesOfHeaven(vec2(adjustedvUv.y,adjustedvUv.x),6.)
+                                                               //   +gatesOfHeaven(vec2(adjustedvUv.y,adjustedvUv.x),6.)
+                                                                  +gatesOfHeaven(vec2(vUv.y,vUv.x),6.)
                                                                  +gatesOfHeaven(vec2(1.-vUv.x,vUv.y),3.)
                                                                  ;
                                                                  }
