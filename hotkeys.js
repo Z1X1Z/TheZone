@@ -105,7 +105,7 @@ dilate:{value:true},
         colorInverter: {value:false},
         metronome: {value: .99 },
         time2dance: {value: 0.0 },
-        volume: {value: .0 },
+        volume: {value: 1. },
         totalAmp: {value: 1.0 },
 
 
