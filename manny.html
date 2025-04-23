@@ -2046,7 +2046,7 @@ vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
                               //   if(mod(round(noteLine),12.)==6.)
                                      {
               if (frAmp>h.x*1.5)  ret = vec4(hsv2rgb( vec3( mod((-noteLine)*brelued+4.,12.)/12. ,1.,1. )),0.); //vec4(mod(note,12.)/12.);
-                    else if(frAmp>h.x) ret =vec4(-sign(vUv.x-.5)*20.*flipStar*brelued);
+                    else if(frAmp>h.x) ret =vec4(sign(vUv.x-.5)*20.*flipStar*brelued);
                     }
 }
                 }
@@ -5324,6 +5324,9 @@ if(starOnDot>=1){
                                  
              linearFrequency=linearFrequencyEQ(adjustedvUv);
              linearFrequency+=linearFrequencyEQ(vec2(1.-adjustedvUv.x,adjustedvUv.y));
+             
+             if (pongOn&&linearFrequency.x==linearFrequency.y&&linearFrequency.y==linearFrequency.z&&linearFrequency.z==linearFrequency.x&&linearFrequency.x!=0.)
+             pong+=linearFrequency.xyz*10.;
              }
             // linearFrequency/=2.;
           
@@ -5426,7 +5429,7 @@ else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
 else {
                   
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
-                                    +yourFace.xyzw-vec4(oneEye,0.)/8.-vec4(ARTICLE,1.),0.,1.);
+                                    +yourFace.xyzw-vec4(oneEye,0.)/3.-vec4(ARTICLE,1.),0.,1.);
                                 
                        vec4 faceFromShip = vec4(clamp(mannyFace.xyz,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies =
