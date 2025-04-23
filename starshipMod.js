@@ -234,7 +234,7 @@ function spiral_compress(){
                        if(window.extremeFrets)
                             {
         for(var b = 0; b<EldersLeg; b++)if(testar[b]!=0.) testar[b]=(1.-1./testar[b]**(1./Math.E))**(Math.E)
-          //  for(var b = 0; b<12; b++)if(testar[b]!=0.) stack12Array[b]=(1.-1./stack12Array[b]**.5)**2.
+        //    for(var b = 0; b<12; b++)if(testar[b]!=0.) stack12Array[b]=(1.-1./stack12Array[b]**(1./Math.E))**(Math.E)
                 }
                             
 };
@@ -2518,7 +2518,7 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                             if(g%2==0&&Oreo)
                             {
                                 const nt = Math.round(g/EldersLeg*12+6)%12;
-                                if (nt==7||nt==5||nt==2||nt==0||nt==10) BlackOrWhiteFRET=-1.;
+                                if (!(nt==7||nt==5||nt==2||nt==0||nt==10)) BlackOrWhiteFRET=-1.;
                                 else BlackOrWhiteFRET=.875;
                             }
                                   

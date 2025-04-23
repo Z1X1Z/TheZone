@@ -3899,6 +3899,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
         loops++;
     }
 
+    //if(float(i)>=hyperCoreBoosted)s-=vec2(-cos(d.y),-cos(d.x))*.5;
 
 OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
 OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
@@ -5212,7 +5213,7 @@ if(starOnDot!=2){
                                  if (starship.x!=0.||starship.y!=0.||starship.z!=0.)minColorOfStarship=min(min(starship.x,starship.y),starship.z);
                                  if (starship.x!=0.||starship.y!=0.||starship.z!=0.)isColoredMultiplier=(starship.xyz+(1.-starship.w)+1.)/2.;
                                  
-                                 if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.&&starship.w>3.5/255.)mny*=starship.xyz+(1.-starship.w);//-mny.x*.66;
+                                 if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.&&starship.w>3.5/255.)mny*=starship.xyz*+(1.-starship.w);//-mny.x*.66;
 
                      
                      if(starship.w>0.)starshipMultiplier=vec3(1.);
@@ -5425,7 +5426,8 @@ else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
 else {
                   
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
-                                    +yourFace.xyzw-vec4(oneEye,0.)/3.-vec4(ARTICLE,1.),0.,1.);
+                                    +yourFace.xyzw-vec4(oneEye,0.)/8.-vec4(ARTICLE,1.),0.,1.);
+                                
                        vec4 faceFromShip = vec4(clamp(mannyFace.xyz,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies =
                        vec4(
@@ -5445,7 +5447,7 @@ else {
                                             +GOH.xyz)*(1.-pixelShipGrey*40.)
                                         +yourFace.xyz
                     +//clamp((
-                           (mny-oneEye*10.)*(1.-isGrey)
+                           (mny-oneEye*100.)*(1.-isGrey)
                             +overchargeCharacter
                                            //-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r),0.,1.)*2.*mnyWhite
                                      // +(-hypnoticHarmonicCircles.x-hypnoticHarmonicCircles.y-hypnoticHarmonicCircles.z)*2.)*starshipMultiplier*(1.-isGrey-pixelShipGrey)
