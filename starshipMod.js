@@ -2179,8 +2179,9 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
             
        
        
-            const incrementHeight = .05;
-            const incrementWidth = starshipSize/1.5;
+            const incrementHeight = .2;
+            const incrementWidthToStart = starshipSize/1.25;
+       
         const stackTransparency = .75;
        
        
@@ -2196,8 +2197,9 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
                 let y1 = (elevation+incrementHeight)/1.5-1.
                 let y2 =  (elevation)/1.5-1.;
                 let depth = -1.+(1.-elevation)/1000.;
-                
-                 
+                let incrementWidth=(incrementWidthToStart*((g+twist/2.+12.)%12))/12.-incrementWidthToStart/2.;
+                           let incrementWidth2=(incrementWidthToStart*((g+twist/2.+12.)%12-1))/12.-incrementWidthToStart/2.;
+
                      stackColorAttribute.setXYZW(stackStride,vop.r,vop.g,vop.b,stackTransparency)
                      stackColorAttribute.setXYZW(stackStride+1,vop.r,vop.g,vop.b,stackTransparency)
                      stackColorAttribute.setXYZW(stackStride+2,vop.r,vop.g,vop.b,stackTransparency)
@@ -2208,15 +2210,15 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
         
             
                 
-                stackPositionAttribute.setXYZ(stackStride,-incrementWidth,y1,  depth)
+                stackPositionAttribute.setXYZ(stackStride,incrementWidth2,y1,  depth)
                 stackPositionAttribute.setXYZ(stackStride+1, incrementWidth, y2,  depth)
                 stackPositionAttribute.setXYZ(stackStride+2,incrementWidth, y1,  depth)
                 
                 
                 
-                 stackPositionAttribute.setXYZ(stackStride+4,-incrementWidth,y1,  depth)
+                 stackPositionAttribute.setXYZ(stackStride+4,incrementWidth2,y1,  depth)
                  stackPositionAttribute.setXYZ(stackStride+3, incrementWidth, y2,  depth)
-                 stackPositionAttribute.setXYZ(stackStride+5,-incrementWidth, y2,  depth)
+                 stackPositionAttribute.setXYZ(stackStride+5,incrementWidth2, y2,  depth)
                 
             
                 stackStride+=6;
