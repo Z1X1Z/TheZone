@@ -4379,6 +4379,10 @@ const float brideWidth=1.27;
                                                                                 *z.x*z.y-1.2*g.y+t.y));
 
                          z.x=pow(abs(z.x),.777-t.x/49.);}
+                   float mingle = 22.5;
+                   
+                         if(x<0.) x+=mingle;
+                          else if(x>0.)x-=mingle;
                //vv legs vv
                    g=p/3.5;
                    //g.x-=.5;
@@ -4429,9 +4433,9 @@ const float brideWidth=1.27;
    p.y/=brideWidth;
    vec2 z=p;
    float l = 0.;
-  const float iterations =  15.;
+  const float iterations =  71.;
   if ((p.x-1.)*(p.x-1.)+p.y*p.y*3.*brideWidth<2.)
-       for (float f=0.;f<50.;f+=1.)
+       for (float f=0.;f<iterations;f+=1.)
 {
                //if(length(z)>c)z/=c;//this refracts the Mandelbrot outwards
 

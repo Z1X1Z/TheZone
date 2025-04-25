@@ -446,7 +446,7 @@ window.key = " ";
                 //meta keys like ctrlKey must be processed first and should have symbol preferably
                 if((key == "g"||key=="©") && event.altKey&&event.ctrlKey)
                     window.guitarMODE=!window.guitarMODE;
-                if((key == "r"||key=="®") && event.altKey&&event.ctrlKey)
+                else if((key == "r"||key=="®") && event.altKey&&event.ctrlKey)
                     window.stylusON=!window.stylusON;
                 else if((key == "k"||key=="˚") && event.altKey&&event.ctrlKey)
                 uniforms.eyeSingle.value=!uniforms.eyeSingle.value;
