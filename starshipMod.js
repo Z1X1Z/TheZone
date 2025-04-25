@@ -451,9 +451,10 @@ let pushBackCounter = 0;
                                                    
                                                    if(!Oreo){
                                 starMajorMinor=.5;
-                                BlackOrWhiteTrail=.5;
                                 
                             }
+                            if(!window.stylusON)  BlackOrWhiteTrail=.5;
+
                                 flatline = window.movementRate;
                            //    if(window.movementRate<movementRateORIGINAL) flatline = 1.;
                             
@@ -1812,7 +1813,7 @@ function runOSMD (){
                            let colorB = colorNoteInitial ;
                            let BlackOrWhite=1.;
 
-                           if(Oreo)
+                           if(Oreo!=0)
                            {
                                let t = Math.round(dawNOTE%24/2.)
                                if (t==7||t==5||t==2||t==0||t==10)
@@ -2517,10 +2518,10 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                                   
                             let BlackOrWhiteFRET = .5;
                                   
-                            if(g%2==0&&Oreo)
+                            if(g%2==0&&Oreo!=0)
                             {
                                 const nt = Math.round(g/EldersLeg*12+6)%12;
-                                if (!(nt==7||nt==5||nt==2||nt==0||nt==10)) BlackOrWhiteFRET=-1.;
+                                if ((nt==7||nt==5||nt==2||nt==0||nt==10)==(Oreo==1)) BlackOrWhiteFRET=-1.;
                                 else BlackOrWhiteFRET=.875;
                             }
                                   
@@ -2902,7 +2903,7 @@ let s = f;
                          timeElapsedScaled*=2.;
                      }
                     let  timeMinusX = timeElapsedScaled-1.;
-                     if(timeMinusX<0.&&timeElapsedEXPONENTIAL%1.<Math.sign(timeMinusX)*timeMinusX%1.&&Oreo)stylus=BlackOrWhiteNOTE;
+                     if(timeMinusX<0.&&timeElapsedEXPONENTIAL%1.<Math.sign(timeMinusX)*timeMinusX%1.&&window.stylusON)stylus=BlackOrWhiteNOTE;
 
                       red2  = red1;
                       green2  = green1;

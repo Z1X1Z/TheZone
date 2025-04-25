@@ -620,11 +620,17 @@ radialWarp=b;
                        key  = 'x';
                        callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
                    <label for="Brelued"> Brued![.x]</label><br>
-               <input type="checkbox"  id="oreo" name="t"  onclick= "
-                   key  = 'j';
-                   callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
-                   <label for="oreo"> Oreo?![,j]</label><br>
-                   
+                       <input type="checkbox"  id="stylus" name="t"  onclick= "
+                           key  = 'r';
+                           callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                           <label for="stylus"> Stylus?![,.r]</label><br>
+                           
+                           
+               <a id="Oreo" name="t"  onclick=" key  = 'j';
+                       callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
+                   Oreo?![,j]</a><br>
+               
+               
                <a id="Cancel Background Noise" name="t"  onclick= "
 
                    key  = 'p';
@@ -2453,7 +2459,7 @@ return h;
                                        else l = vec4( eyeColorCycler,eyeColorCycler,1.-eyeColorCycler,.5);
                                     }
                                 }
-                                else if(p.x>-.3&&s.x>-.05){
+                                else if(p.x>-.3&&s.x>-.1){
                                     //squircle eyes orange and steel blue
                                     if(p.y<0.)
                                     {
@@ -5053,7 +5059,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                    }
  else if (largeEyeColor== 3.) bigEyes = clamp(shiny(eyeSize,moveDynamic*1.5),0.,1.);
                                                                  vec3 oneEye = vec3(0.);
-                                                             if(eyeSingle&&volume!=1.)     oneEye =faceBlackAndWhite(eyeSize,vec2(0.),true).xyz;
+                                                             if(eyeSingle&&volume!=1.)     oneEye =faceBlackAndWhite(characterP/4.,vec2(0.),true).xyz;
                                                                  
                                                                  
                                                   if(musicAngelMan>0&&Character!=3&&Character!=4)
@@ -5171,7 +5177,7 @@ vec2 heartField = characterPSpunToKey*heartSize
                         if(HEART.x==0.&&HEART.y==0.&&HEART.z==0.)
                         {heartWarmed=AM;
                             }
-                        if(heartWarmed.x!=0.&&heartWarmed.y!=0.&&heartWarmed.z!=0.&&oneEye.y!=0.)   oneEye-=heartWarmed;
+                        if(heartWarmed.x!=0.&&heartWarmed.y!=0.&&heartWarmed.z!=0.&&oneEye.y!=0.)   heartWarmed-=oneEye;
 
                        // else   clothes*=HEART;
 
@@ -5429,14 +5435,14 @@ else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
 else {
                   
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
-                                    +yourFace.xyzw-vec4(oneEye,0.)/3.-vec4(ARTICLE,1.),0.,1.);
+                                    +yourFace.xyzw-vec4(oneEye,0.)/2.-vec4(ARTICLE,1.),0.,1.);
                                 
                        vec4 faceFromShip = vec4(clamp(mannyFace.xyz,0.,1.)-backgroundFace*starshipMultiplier,0.);
                        vec4 goodies =
                        vec4(
                                            mnyX+
                             clamp(heartWarmed*isColoredMultiplier,0.,1.)
-                            -(oneEye)*((isGrey+pixelShipGrey)/2.)
+                            -(oneEye)*((isGrey+pixelShipGrey)/2.)*2.
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier
                                           +(pillar
                                             +icicles.xyz
@@ -5450,7 +5456,7 @@ else {
                                             +GOH.xyz)*(1.-pixelShipGrey*40.)
                                         +yourFace.xyz
                     +//clamp((
-                           (mny-oneEye*100.)*(1.-isGrey)
+                           (mny-oneEye*100.*mny)*(1.-isGrey)
                             +overchargeCharacter
                                            //-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r),0.,1.)*2.*mnyWhite
                                      // +(-hypnoticHarmonicCircles.x-hypnoticHarmonicCircles.y-hypnoticHarmonicCircles.z)*2.)*starshipMultiplier*(1.-isGrey-pixelShipGrey)

@@ -246,7 +246,8 @@ function resetAll(){
     window.videoCanvas2 = null;
     window.streaming=false;
     window.streaming2=false;
-    window.Oreo=true;
+    window.Oreo=2;
+    window.stylusON=true;
             window.shouldShowStar = true;
             window.flame = false;
             window.muteTouchTouchVolume = true;
@@ -445,6 +446,8 @@ window.key = " ";
                 //meta keys like ctrlKey must be processed first and should have symbol preferably
                 if((key == "g"||key=="©") && event.altKey&&event.ctrlKey)
                     window.guitarMODE=!window.guitarMODE;
+                if((key == "r"||key=="®") && event.altKey&&event.ctrlKey)
+                    window.stylusON=!window.stylusON;
                 else if((key == "k"||key=="˚") && event.altKey&&event.ctrlKey)
                 uniforms.eyeSingle.value=!uniforms.eyeSingle.value;
                 
@@ -556,7 +559,7 @@ window.key = " ";
     //else if (key=="m" && event.ctrlKey)uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value;
 
     else if (event.ctrlKey&&key=="a")uniforms[ "colorCombo" ].value = 11;
-    else if (event.ctrlKey&&key=="j")window.Oreo=!window.Oreo;
+    else if (event.ctrlKey&&key=="j")window.Oreo=(window.Oreo+1)%3;
     else if (event.ctrlKey&&key=="t")window.shouldShowStar=!window.shouldShowStar;
     else if (event.ctrlKey&&key=="r")window.flame=!window.flame;
     else if (event.ctrlKey&&key=="l")         uniforms.holyeyes.value=(uniforms.holyeyes.value+1)%4;
