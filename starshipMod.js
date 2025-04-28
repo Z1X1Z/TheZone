@@ -2198,8 +2198,8 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
                 let y1 = (elevation+incrementHeight)/1.5-1.
                 let y2 =  (elevation)/1.5-1.;
                 let depth = -1.+(1.-elevation)/1000.;
-                let incrementWidth=(incrementWidthToStart*((g+twist/2.+12.)%12+.5))/12.-incrementWidthToStart/2.;
-                           let incrementWidth2=(incrementWidthToStart*((g+twist/2.+12.)%12-1+.5))/12.-incrementWidthToStart/2.;
+                let incrementWidth=((incrementWidthToStart*((g*window.flip+twist/2.+12.)%12+.5))/12.-incrementWidthToStart/2.);
+                           let incrementWidth2=((incrementWidthToStart*((g*window.flip+twist/2.+12.)%12-1+.5))/12.-incrementWidthToStart/2.);
 
                      stackColorAttribute.setXYZW(stackStride,vop.r,vop.g,vop.b,stackTransparency)
                      stackColorAttribute.setXYZW(stackStride+1,vop.r,vop.g,vop.b,stackTransparency)

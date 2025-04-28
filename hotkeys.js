@@ -158,8 +158,8 @@ concertKeyTuning:{value:440.},
 gates:{value:false},
 leaf:{value:leaf},
 gr:{value:gr},
-pixelWitnesses:{value:true}
-
+pixelWitnesses:{value:true},
+cloverArms:{value:false}
 }
 window.uniforms={}
 
@@ -450,6 +450,8 @@ window.key = " ";
                     window.stylusON=!window.stylusON;
                 else if((key == "k"||key=="˚") && event.altKey&&event.ctrlKey)
                 uniforms.eyeSingle.value=!uniforms.eyeSingle.value;
+                else if((key == "m"||key=="µ") && event.altKey&&event.ctrlKey)
+                uniforms.cloverArms.value=!uniforms.cloverArms.value;
                 
             else if((key == "s"||key=="ß") && event.altKey&&event.ctrlKey)
             {

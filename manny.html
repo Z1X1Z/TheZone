@@ -1144,7 +1144,12 @@ Reset Zoom![L]</a><br>
                       key  = 'G';
                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                    <label for="Articles">Articles![G]</label><br>
-                    
+                   
+               <input type="checkbox" id="cloverArms" name="t"  onclick= "
+                   key  = 'm';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                <label for="cloverArms">Clover Arms![,.m]</label><br>
+                 
                     <input type="checkbox" id="Dynamic Dance" name="t"  onclick= "
                         key  = 'X';
                         callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -1927,6 +1932,7 @@ uniform float mandelCloverFactor;
 uniform float exponentialPetals;
 uniform float gr;
 uniform float leaf;
+uniform bool cloverArms;
 
 
                                   
@@ -3102,7 +3108,7 @@ return vec3(l+b+r+h);}
                                   
                               const    float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;
 
-vec3 tol(vec2 p, vec2 t){
+vec4 tol(vec2 p, vec2 t){
                          bool inMainSpoke = false;
                         vec2 resCale = (resolution.yx/max(resolution.x,resolution.y));
                      vec3 uber    = texture2D(uberDuper,(
@@ -3974,7 +3980,7 @@ hyperCoreOUTPUT--;
                 loopSolid++;
 
 }else break;
-                  
+                  vec2 b = s;
 ///if(multiplicatorNexus)s*=colorShift/88.8;
 
                                      if(colorCombo==-1&&Inherited){
@@ -4087,7 +4093,7 @@ o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z)
                       o+=(isBlack-1.)*100.;
                       o+=isGrey;
                       if(length(p-coords.yx)<2.*sqrt2/min(resolution.x,resolution.y)*zoom)o=vec3(hyperCoreOUTPUT/255.*4.,cored/255.*4.,255.);
-return clamp(o,0.,1.);}
+return vec4(clamp(o,0.,1.),atan(b.y,b.x));}
 
                       
                       
@@ -4880,16 +4886,28 @@ vec2 dance = vec2(0.);
                                                 t/=2.;
                                  vec2 move = d.yx*volume;
                                  vec2 moveDynamic=vec2(0.);
+                                 float angleOfClover = 0.;
                                  if(dynamicDance) moveDynamic = (move/5.+t)/2.;
                                  else  moveDynamic = move/4.;
                                  vec3 backgroundFace = vec3(0.);
 
          if(colorCombo<=10){
-                       zoomer=tol(backGround, dance2);
+                       vec4 tolOUT = vec4(0.);
+                       tolOUT=tol(backGround, dance2);
+                       zoomer=tolOUT.xyz;
+                       
+                       angleOfClover=tolOUT.w;
                        if(chirality==3){
-                           if(!twelveGates)zoomer+=tol(backGround.yx,dance2);
-                           else zoomer+=tol(spin2(backGround,PI2/24.),dance2);
-
+                           if(!twelveGates)
+                           {
+                               tolOUT=tol(backGround.yx,dance2);
+                               zoomer+=tolOUT.xyz;
+                               }
+                           else
+                           { tolOUT=tol(spin2(backGround,PI2/24.),dance2);
+                               zoomer+=tolOUT.xyz;
+                               }
+                           angleOfClover+=tolOUT.w;
                            zoomer/=2.;
                            
                        }
@@ -4999,8 +5017,11 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                        clothes=robeL(characterOnTrailP,vec2(elbowed),move/5.)*.84;}
                                             else if(Character<=9)
                                                                  {
-                       bodyWithArms = bodyPlayer(characterOnTrailP,moveDynamic);
-                       clothes=robe(characterOnTrailP,moveDynamic);
+                       vec2 morphDance = vec2(0.);
+                       if(cloverArms) morphDance = vec2(-sin(-angleOfClover),1.-cos(-angleOfClover));
+                       else morphDance=moveDynamic;
+                       bodyWithArms = bodyPlayer(characterOnTrailP,morphDance);
+                       clothes=robe(characterOnTrailP,morphDance);
                                                                 }
             if(colorCombo!=17&&colorCombo!=20){
                    if(metronome>1.) mnyX = mannyX(characterOnTrailP/2.*1.221221,vec2(time))+bodyWithArms.xyz;
