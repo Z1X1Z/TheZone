@@ -231,6 +231,8 @@ function spiral_compress(){
       testarContinuous[n] = Math.abs(z[n]);
                           mustarD[n] = note24;
                             }
+                            innerFrets = testar;
+
                        if(window.extremeFrets)
                             {
         for(var b = 0; b<EldersLeg; b++)if(testar[b]!=0.) testar[b]=(1.-1./testar[b]**(1./Math.E))**(Math.E)
@@ -238,7 +240,7 @@ function spiral_compress(){
                 }
                             
 };
-
+var innerFrets = new Float64Array((EldersLeg>0)?EldersLeg:0.);
 
 
 const twelve = Array(12);
@@ -668,8 +670,9 @@ function setFFTdependantSizes(){
      
 
              
-                                 testar = new Float64Array((EldersLeg>0)?EldersLeg:0.);
-     
+             testar = new Float64Array((EldersLeg>0)?EldersLeg:0.);
+             innerFrets = new Float64Array((EldersLeg>0)?EldersLeg:0.);
+
                                   testarContinuous =new Float64Array(starArms);
                                   mustarD =new Float64Array(starArms);
      if(window.INITIALIZED)
@@ -2484,6 +2487,14 @@ else{//start drawing of just twenty four frets here
                                  if(testar[g]>maxTestar){maxTestar=testar[g];}
                                  if(testar[g]<minTestar)minTestar=testar[g];
                              }
+                    
+                    let maxFret = -1000000;
+                    let minFret = 10000000;
+                    
+                    for (var g=0; g<EldersLeg; g++) {
+                        if(innerFrets[g]>maxFret){maxFret=innerFrets[g];}
+                        if(innerFrets[g]<minFret)minFret=innerFrets[g];
+                    }
     let twoOr1= EldersLeg<=2
     if(twoOr1){maxTestar=1;minTestar=0;}
     let oddSkew =EldersLeg%2/2;
@@ -2583,7 +2594,15 @@ let yr = lengt*-Math.cos(arm);
                                  
                                 x *=-centerDisplacement;
                                 y *=-centerDisplacement;
-                                   
+                                   if(maxFret-minFret!=0)
+                                        {
+                                        lengt = (innerFrets[(g+EldersLeg/2.)%EldersLeg]-minFret)/(maxFret-minFret);
+                                       if(twoOr1) {
+                                           lengt/=2.**14./EldersLeg;
+                                           lengt=lengt**.25;
+                                           
+                                       }
+                                                         
                                    xr = -(lengt-1.)*-Math.sin(arm)*centerDisplacement;
                                    yr = -(lengt-1.)*-Math.cos(arm)*centerDisplacement;
                                   
@@ -2607,7 +2626,7 @@ let yr = lengt*-Math.cos(arm);
                                                starStride+=6;
                                   
                                   
-                                  
+                                                             }
 }
     
 }
