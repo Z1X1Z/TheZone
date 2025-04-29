@@ -231,7 +231,7 @@ function spiral_compress(){
       testarContinuous[n] = Math.abs(z[n]);
                           mustarD[n] = note24;
                             }
-                            innerFrets = testar;
+                            for (var g=0; g<EldersLeg; g++)   innerFrets[g] = testar[g];
 
                        if(window.extremeFrets)
                             {
