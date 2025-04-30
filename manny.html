@@ -5125,7 +5125,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                  
 if(heartStar==0){
             float angleASKEW = ((-atan(uvSwizzled.y,uvSwizzled.x)*flipStar-twistStar
-            -PI+PIdiv2*flipStar)*divideByMultiplyingPi2);
+                                 +PIdiv2*flipStar)*divideByMultiplyingPi2);
             //angle=mod(angle,1.);
 
             //return vec4(angle);
@@ -5169,17 +5169,20 @@ if (Character==4||Character==3) {heartSize=2.;
                                                             
                                                             float direction = 1.;
                                                             if (Character==0&&holyeyes==1)
-                                                            {heartSize*=5.;
+                                                            {heartSize*=2.;
                                                                 direction=-1.;
                                                                 }
+                                                            vec2 heartPitch = vec2(0.);
+                                                            if(volume!=0.) heartPitch=-direction*spin2(-d.yx,-twistStar)/4.;
+                                                            
 vec2 heartField = characterPSpunToKey*heartSize
 +heartShift;
      if(Character!=9&&(heartStar!=3))
      {  if(volume!=1.)
          HEART = heart(heartField
                                                     ,//vec2(0.)
-                                    -direction*spin2(-d.yx,-twistStar)/4.+
-                                                    -heartField/ frAMP*heartRate*vec2(1.,flipStar)// not working on some androids, may work with vec2(0.)
+                      heartPitch+
+                       heartField/frAMP*heartRate*vec2(1.,flipStar)// not working on some androids, may work with vec2(0.)
                                     );
                                     else         HEART = heart(heartField,vec2(0.));
                                     }
