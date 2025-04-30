@@ -250,7 +250,7 @@ hyperCore*=equilibriator;
 }
    
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
-if(continuumClover)hyperCore-=1.5/Math.log(.5);
+if(continuumClover)hyperCore-=.75/Math.log(.5);
 
 //if(fieldPowerBoost)hyperCore+=1./Math.log(.5);
 
@@ -582,14 +582,15 @@ if(continuumClover&&lfc!=0){//engage continualization
 var continuumCore=(continuumCounter+hyperCoreOUTPUT)*correction;
 if(loops+counter<=hyperCoreBoosted+continuumCounter)
 {
-    s.divideScalar( Math.pow(2.,Math.pow(.5,continuumCore)));
-    if(dstnce<2./3.) s.addScalar( coords.yx*correction);
+  //  if(dstnce<2./3.) s.addScalar( coords.yx*correction);
+
+    s.divideScalar( Math.pow(1./dstnce,Math.pow(.5,continuumCore)));
 
      hyperCoreBoosted+=continuumCore;
      hyperCoreOUTPUT+=continuumCore;
      }
      else{
-         if(dstnce<2./3.) s.subScalar(coords.yx*correction);
+    //     if(dstnce<2./3.) s.subScalar(coords.yx*correction);
 
         hyperCoreBoosted-=continuumCore;
          hyperCoreOUTPUT-=continuumCore;

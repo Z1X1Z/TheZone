@@ -926,7 +926,7 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                 <input type="checkbox" id="Continuum Clover" name="t"  onclick= "
                                     key  = '&';
                                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                 <label for="Continuum Clover">Continuum Clover![&]</label><br>
+                                 <label for="Continuum Clover">Continuum Clover?![&]</label><br>
                                  
                                  <input type="checkbox" id="twelveGates" name="t"  onclick= "
                                      key  = 'n';
@@ -3333,7 +3333,7 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
 }
    
    if(multiplicatorNexus)hyperCore-=.5/log(.5);
-   if(continuumClover)hyperCore-=1.5/log(.5);
+   if(continuumClover)hyperCore-=.75/log(.5);
 
 //if(fieldPowerBoost)hyperCore+=1./log(.5);
    
@@ -3772,11 +3772,10 @@ dstnce=length(coords);
 
        if(loops+counter<=hyperCoreBoosted+continuumCounter)
        {
-          if(dstnce<twoThirds) s+=coords.yx*correction;
-
+       //   if(dstnce<twoThirds) s-=length(coords.yx)*correction;
+       
            //coords.yx*coords.yx*vec2(sign(coords.y),sign(coords.x))
-       s/=pow(2.,pow(.5,continuumCore));
-
+       s/=pow(1./dstnce,pow(.5,continuumCore));
 
        hyperCoreBoosted+=continuumCore;
        hyperCoreOUTPUT+=continuumCore;
@@ -3787,7 +3786,8 @@ dstnce=length(coords);
 //s+=coords.yx*correction;
 //if(dstnce>twoThirds)s+=correction/(coords.yx-vec2(sign(coords.y),sign(coords.x))*twoThirds)*2.;
 
-   if(dstnce<twoThirds)s-=coords.yx*correction;
+//if(dstnce<twoThirds)s-=length(coords.yx)*correction;
+//if(dstnce<twoThirds)s-=dstnce;
 
     hyperCoreBoosted-=continuumCore;
     hyperCoreOUTPUT-=continuumCore;

@@ -72,7 +72,7 @@ holyeyes:{value:1},
 dilate:{value:true},
 
     
-        continuumClover:{value: false    },
+        continuumClover:{value: true    },
         Inherited:{value: true    },
         cloverSlide:{value: false    },
         Pointers:{value:true},
