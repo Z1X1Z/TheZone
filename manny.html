@@ -5342,7 +5342,7 @@ if(starOnDot>=1){
                                                                  
                                                                  
                  float sevenPillarShrink = pillarScale*2./max(resolution.x,resolution.y);
-                 vec2 adjustedvUv=vec2(vUv.x,vUv.y/(1.-sevenPillarShrink)-sevenPillarShrink);
+                 vec2 adjustedvUv=vec2(vUv.x,(vUv.y-sevenPillarShrink)/(1.-sevenPillarShrink));
                                                                  vec4 GOH =vec4(0.);
                                                                  if(gates)
                                                                  {
