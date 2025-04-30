@@ -1987,9 +1987,9 @@ function runOSMD (){
                                     aboveThreshold = true;
                                     on = true;
                                 }
-                                else{aboveThreshold = false; on = false;}
+                                else{aboveThreshold = false; on = false;uniforms.volume.value=0.}
 
-                                    }else{aboveThreshold = false; on = false;}
+                                    }else{aboveThreshold = false; on = false;uniforms.volume.value=0.}
 
                                     
 if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
@@ -2101,7 +2101,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
         uniforms[ "time2dance" ].value += audioX.sampleRate/bufferSize*totalAMP;
     uniforms["zoomOutRatchetThreshold" ].value=zoomOutRatchetThreshold;
 
-        if(!shouldShowStar||totalAMP>zoomOutRatchetThreshold) uniforms["volume" ].value = audioX.sampleRate/bufferSize*totalAMP/(1.+zoomOutRatchetThreshold);
+        if(!shouldShowStar||totalAMP>zoomOutRatchetThreshold&&on) uniforms["volume" ].value = audioX.sampleRate/bufferSize*totalAMP/(1.+zoomOutRatchetThreshold);
         uniforms[ "zoom" ].value = zoom;
     
     
