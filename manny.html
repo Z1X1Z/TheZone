@@ -5247,13 +5247,13 @@ if(starOnDot!=2){
                                  if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.&&starship.w>3.5/255.)
                                  {
                                      if(mny.x>0.)mny*=starship.xyz*+(1.-starship.w);//-mny.x*.66;
-                                     else if(mny.x<0.)mny+=starship.xyz*1.5;
+                                     else if(mny.x<0.)mny+=starship.xyz*2.;
                                      
                                          
                                      
                                      }
 
-                                 if(AM.x>0.)AM=clamp(AM+starship.xyz/4.,0.,1.);//-mny.x*.66;
+                                 if(AM.x>0.)AM=clamp(AM+starship.xyz/2.,0.,1.);//-mny.x*.66;
 
                      if(starship.w>0.)starshipMultiplier=vec3(1.);
 
