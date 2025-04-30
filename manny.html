@@ -3775,7 +3775,7 @@ dstnce=length(coords);
        //   if(dstnce<twoThirds) s-=length(coords.yx)*correction;
        
            //coords.yx*coords.yx*vec2(sign(coords.y),sign(coords.x))
-       s/=pow(1./dstnce,pow(.5,continuumCore));
+       s/=pow(dstnce,-pow(.5,continuumCore));
 
        hyperCoreBoosted+=continuumCore;
        hyperCoreOUTPUT+=continuumCore;
