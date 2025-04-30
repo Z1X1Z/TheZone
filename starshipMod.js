@@ -1987,9 +1987,9 @@ function runOSMD (){
                                     aboveThreshold = true;
                                     on = true;
                                 }
-                                else{aboveThreshold = false; on = false;uniforms.volume.value=0.00001}
+                                else{aboveThreshold = false; on = false;if(!touchMode) uniforms.volume.value=0.00001}
 
-                                    }else{aboveThreshold = false; on = false;uniforms.volume.value=0.00001}
+                                    }else{aboveThreshold = false; on = false;if(!touchMode)uniforms.volume.value=0.00001}
 
                                     
 if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
