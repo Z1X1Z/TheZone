@@ -492,7 +492,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
                         }
                     
 
-                       if(!wheel) s.divideScalar(spoke_factorLarge);//engage spokelover s/=2.+'superspokes'
+                       if(!wheel||1==1) s.divideScalar(spoke_factorLarge);//engage spokelover s/=2.+'superspokes'
                         
                         hyperCoreOUTPUT-=downSpoke;
                         
@@ -511,7 +511,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
                     s.multiplyScalar(spoke_factor);//engage spokelover s/=2.+'superspokes'
                     let coreFactor =upSpoke;
                     //if (!inMainSpoke)
-                      if(!wheel)  coreFactor/=dstnce+1;
+                      if(!wheel||1==1)  coreFactor/=dstnce+1;
                         hyperCoreOUTPUT+=coreFactor;
                         hyperCoreBoosted+=coreFactor;
                  //   }
@@ -546,7 +546,7 @@ var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpo
 
                 }
                     s.divideScalar( Math.sqrt(2.));
-                if(!wheel)
+                if(!wheel||1==1)
                 {
                     
                     hyperCoreOUTPUT+=spokeloverCoreShiftUp;
@@ -558,7 +558,7 @@ var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpo
             {
                 s.multiplyScalar( Math.sqrt(2.)/1.5);
 
-                if(!wheel)
+                if(!wheel||1==1)
                 {
                     let coreFactor =spokeloverCoreShiftDown;
                     if (!inMainSpoke)coreFactor/=spokeloverCoreShiftDown;

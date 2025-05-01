@@ -144,7 +144,7 @@ duperZoom: {value:1.},
         twistStar:{value:0.},
         multiplicatorNexus:{value:false},//has problems may be discontinued
         squareClover:{value:false},
-        mandelCloverFactor:{value:.26},
+        mandelCloverFactor:{value:1.+1./leaf},
 exponentialPetals:{value:0.},
 cloverOffset:{value:0.},
 spinTowardsMe:{value:false},
