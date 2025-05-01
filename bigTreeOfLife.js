@@ -250,7 +250,7 @@ hyperCore*=equilibriator;
 }
    
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
-if(continuumClover)hyperCore-=0./Math.log(.5);
+if(continuumClover)hyperCore-=0.25/Math.log(.5);
 let lpcc = pCenterCored.length();
 //if(fieldPowerBoost)hyperCore+=1./Math.log(.5);
 
