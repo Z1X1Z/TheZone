@@ -584,7 +584,7 @@ if(loops+counter<=hyperCoreBoosted+continuumCounter)
 {
   //  if(dstnce<2./3.) s.addScalar( coords.yx*correction);
 
-    s.divideScalar( Math.pow(dstnce,-Math.pow(.5,continuumCore)));
+    s.divideScalar( Math.pow(1./dstnce,Math.pow(.5,continuumCore)));
 
      hyperCoreBoosted+=continuumCore;
      hyperCoreOUTPUT+=continuumCore;
