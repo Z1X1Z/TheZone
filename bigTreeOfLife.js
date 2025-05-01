@@ -250,8 +250,8 @@ hyperCore*=equilibriator;
 }
    
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
-if(continuumClover)hyperCore-=.75/Math.log(.5);
-
+if(continuumClover)hyperCore-=0./Math.log(.5);
+let lpcc = pCenterCored.length();
 //if(fieldPowerBoost)hyperCore+=1./Math.log(.5);
 
 if(outerCoresOff)hyperCore=0.;
@@ -482,7 +482,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
                     */
                     
                                   
-                    if(counter==0.)inMainSpoke=true;
+                    if(counter<=2.)inMainSpoke=true;
                     if(distributor)
                     {   if (inMainSpoke)
                        // s=spinVector(s,distributorFACTORorth);
@@ -583,8 +583,8 @@ var continuumCore=(continuumCounter+hyperCoreOUTPUT)*correction;
 if(loops+counter<=hyperCoreBoosted+continuumCounter)
 {
   //  if(dstnce<2./3.) s.addScalar( coords.yx*correction);
-    s=new THREE.Vector2(Math.abs(s.x),Math.abs(s.y))
-    s.divideScalar( Math.pow(1./dstnce,Math.pow(.5,continuumCore)));
+    //s=new THREE.Vector2(Math.abs(s.x),Math.abs(s.y))
+    s.divideScalar( Math.pow(1./lpcc,Math.pow(.5,continuumCore)));
 
      hyperCoreBoosted+=continuumCore;
      hyperCoreOUTPUT+=continuumCore;
