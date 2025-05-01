@@ -3768,9 +3768,11 @@ else //if(  0.>=hyperCoreBoosted)
  }
 dstnce=length(coords);
    if(continuumClover&&lfc!=0.){//engage continualization
-       float continuumCore=(continuumCounter+hyperCoreOUTPUT)*correction;
+       float continuumCore=(
+                            //continuumCounter+
+                            hyperCoreOUTPUT)*correction;
 
-       if(loops+counter<=hyperCoreBoosted+continuumCounter)
+       if(loops+counter<hyperCoreBoosted+continuumCounter)
        {
        //   if(dstnce<twoThirds) s-=length(coords.yx)*correction;
        
