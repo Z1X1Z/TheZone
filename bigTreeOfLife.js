@@ -583,7 +583,7 @@ var continuumCore=(continuumCounter+hyperCoreOUTPUT)*correction;
 if(loops+counter<=hyperCoreBoosted+continuumCounter)
 {
   //  if(dstnce<2./3.) s.addScalar( coords.yx*correction);
-
+    s=new THREE.Vector2(Math.abs(s.x),Math.abs(s.y))
     s.divideScalar( Math.pow(1./dstnce,Math.pow(.5,continuumCore)));
 
      hyperCoreBoosted+=continuumCore;
