@@ -516,7 +516,7 @@ window.key = " ";
     else if(key == "o" && event.ctrlKey)
     {
         omniDynamicEngaged = !omniDynamicEngaged;
-        if(!omniDynamicEngaged)omniData.fill(0);
+        if(!omniDynamicEngaged)omniData.fill(uniforms[ "petals" ].value);
     }
                 
              else   if(key == "u" && event.ctrlKey)
