@@ -3102,72 +3102,74 @@ else if(!uniforms.gameOn.value){polygons=[]; level = 1; metaLevel=1;}
                                         let compound = interpolation*baseMag/60.*window.movementRate/pixelShaderToStarshipRATIO;
 
 for(let n = 0; n < polygons.length; n++)
-{
-                         const xFromCent = polygons[n].centerX;
-                         const yFromCent = polygons[n].centerY;
-
-                if (xFromCent>width)polygons[n].centerX = -width;
-                else if (xFromCent<-width)polygons[n].centerX = width;
-                if (yFromCent>height)polygons[n].centerY = -height;
-                else if  (yFromCent<-height)polygons[n].centerY = height;
-
-
-                         const angleTarget = Math.atan2(yFromCent,xFromCent);
-                                        const speed = Math.sqrt(polygons[n].dx*polygons[n].dx+polygons[n].dy*polygons[n].dy)
-                                        const speedLimit = 1.;
-
-                        var distanceFromCenter;
-                         var triggerDistanceAdjustment;
-                         
-var neutralizer=1.;
-if (!on)neutralizer=0.;
-                         polygons[n].centerX += (d_x*neutralizer-polygons[n].dx)*MR;
-
-         if(uniforms.colorCombo.value==20&&!(uniforms.musicAngelMan.value>0&&(uniforms.Character.value==3||uniforms.Character.value==4))){
-                                distanceFromCenter= Math.pow((xFromCent*xFromCent+(yFromCent+.25)*(yFromCent+.25)),.5)/uniforms.shaderScale.value/1.75/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y));
-                             triggerDistance=distanceFromCenter/(1./uniforms.shaderScale.value/1.75/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y)));
-             polygons[n].centerY += (d_y*neutralizer-polygons[n].dy)*MR;
-
-                         }
-         else {
-             distanceFromCenter= Math.pow(xFromCent*xFromCent+yFromCent*yFromCent,.5);
-             triggerDistance=distanceFromCenter;
-             
-             polygons[n].centerY += (d_y*neutralizer-polygons[n].dy)*MR;
-         }
-
-                         
-                       // polygons[n].dx*=1.-baseMag;//resistance to speed accumulation
-                        // polygons[n].dy*=1.-baseMag;
-
-
-       // if (distanceFromCenter<=1)
-        {
-            compound*=Math.abs(maximumDimension/minimumDimension-distanceFromCenter);
-            polygons[n].dx+=-Math.cos(angleTarget)*compound;
-            polygons[n].dy+=-Math.sin(angleTarget)*compound;
-        }
-                         
-
-    const ddX= circleX-polygons[n].centerX;
-    const ddY= circleY-polygons[n].centerY;
-    const distDot = Math.sqrt(ddX*ddX+ddY*ddY);
-if(EldersLeg>0.)
-{
-    if ( triggerDistance<polyRad+dotSize &&polygons[n].exited){
-        if (!polygons[n].caught)polygons[n].caught = true;
-        else polygons[n].caught = false;
-        polygons[n].caughtByDot=false;
-        polygons[n].exited = false;}
-    else if (triggerDistance>polyRad+dotSize&&polygons[n].caughtByDot==false)polygons[n].exited = true;
-}
-    if ( distDot<polyRad+dotSize &&polygons[n].exited){
-        if (!polygons[n].caught)polygons[n].caught = true;
-        else polygons[n].caught = false;
-        polygons[n].caughtByDot=true;
-        polygons[n].exited = false;}
-    else if (distDot>polyRad+dotSize&&polygons[n].caughtByDot==true)polygons[n].exited = true;
-
+                                                       {
+                                                         const xFromCent = polygons[n].centerX;
+                                                         const yFromCent = polygons[n].centerY;
+                                                         
+                                                         if (xFromCent>width)polygons[n].centerX = -width;
+                                                         else if (xFromCent<-width)polygons[n].centerX = width;
+                                                         if (yFromCent>height)polygons[n].centerY = -height;
+                                                         else if  (yFromCent<-height)polygons[n].centerY = height;
+                                                         
+                                                         
+                                                         const angleTarget = Math.atan2(yFromCent,xFromCent);
+                                                         const speed = Math.sqrt(polygons[n].dx*polygons[n].dx+polygons[n].dy*polygons[n].dy)
+                                                         const speedLimit = 1.;
+                                                         
+                                                         var distanceFromCenter;
+                                                         var triggerDistanceAdjustment;
+                                                         
+                                                         var neutralizer=1.;
+                                                         if (!on)neutralizer=0.;
+                                                         polygons[n].centerX += (d_x*neutralizer-polygons[n].dx)*MR;
+                                                         
+                                                         if(uniforms.colorCombo.value==20&&!(uniforms.musicAngelMan.value>0&&(uniforms.Character.value==3||uniforms.Character.value==4))){
+                                                             distanceFromCenter= Math.pow((xFromCent*xFromCent+(yFromCent+.25)*(yFromCent+.25)),.5)/uniforms.shaderScale.value/1.75/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y));
+                                                             triggerDistance=distanceFromCenter/(1./uniforms.shaderScale.value/1.75/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y)));
+                                                             polygons[n].centerY += (d_y*neutralizer-polygons[n].dy)*MR;
+                                                             
+                                                         }
+                                                         else {
+                                                             distanceFromCenter= Math.pow(xFromCent*xFromCent+yFromCent*yFromCent,.5);
+                                                             triggerDistance=distanceFromCenter;
+                                                             
+                                                             polygons[n].centerY += (d_y*neutralizer-polygons[n].dy)*MR;
+                                                         }
+                                                         
+                                                         
+                                                         // polygons[n].dx*=1.-baseMag;//resistance to speed accumulation
+                                                         // polygons[n].dy*=1.-baseMag;
+                                                         
+                                                         
+                                                         // if (distanceFromCenter<=1)
+                                                         {
+                                                             compound*=Math.abs(maximumDimension/minimumDimension-distanceFromCenter);
+                                                             polygons[n].dx+=-Math.cos(angleTarget)*compound;
+                                                             polygons[n].dy+=-Math.sin(angleTarget)*compound;
+                                                         }
+                                                         
+                                                         
+                                                         const ddX= circleX-polygons[n].centerX;
+                                                         const ddY= circleY-polygons[n].centerY;
+                                                         const distDot = Math.sqrt(ddX*ddX+ddY*ddY);
+                                                         if(uniforms.starOnDot.value!=2)
+                                                         {
+                                                             if ( triggerDistance<polyRad+dotSize &&polygons[n].exited){
+                                                                 if (!polygons[n].caught)polygons[n].caught = true;
+                                                                 else polygons[n].caught = false;
+                                                                 polygons[n].caughtByDot=false;
+                                                                 polygons[n].exited = false;}
+                                                             else if (triggerDistance>polyRad+dotSize&&polygons[n].caughtByDot==false)polygons[n].exited = true;
+                                                         }
+                                                        if(true)//disable dot from catching if false
+                                                         {
+                                                             if ( distDot<polyRad+dotSize &&polygons[n].exited){
+                                                                 if (!polygons[n].caught)polygons[n].caught = true;
+                                                                 else polygons[n].caught = false;
+                                                                 polygons[n].caughtByDot=true;
+                                                                 polygons[n].exited = false;}
+                                                             else if (distDot>polyRad+dotSize&&polygons[n].caughtByDot==true)polygons[n].exited = true;
+                                                         }
 }
 for(var n = 0; n<polygons.length;n++)
 {
