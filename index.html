@@ -18,6 +18,30 @@
         if(window.online)nf[0].style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/lionandlamb.png');"
         else nf[0].style = "background-image: url('lionandlamb.png');"
     </script>
+    <h2>
+    <div id="weeks" class="weeks"></div>
+    </h2>
+    <script>
+        //https://stackoverflow.com/questions/8619879/javascript-calculate-the-day-of-the-year-1-366
+        var now = new Date();
+        var start = new Date(now.getFullYear(), 0, 1);
+        var diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
+        var oneDay = 1000 * 60 * 60 * 24;
+        var day = Math.floor(diff / oneDay)+1;
+        
+        
+        let firstDayOfWeekOfTheYear = start.getDay();
+        
+        console.log('Day of year: ' + day);
+        
+        let daysOfWeek = ["Sunday","Monday","Tuesday","Wednsday","Thursday","Friday","Saturday"]
+        
+        let textOut = document.getElementById("weeks");
+        let WeekOfJubilee =firstDayOfWeekOfTheYear+Math.floor(day/49)%7;
+  textOut.innerHTML +="Day of Week of Week of Jubilees: " + daysOfWeek[WeekOfJubilee] + "<p>Day of Week of Weeks: " + daysOfWeek[(WeekOfJubilee+day%7)%7] + "<p>Day of Week: " + daysOfWeek[now.getDay()];
+           
+
+        </script>
 <h1>
 
         Welcome in The Name of the LORD.     <a href="stretchy.html">This is Manny,</a> short for Immanuel.  He appeared face (of God) first from the Mandelbrot fractal while I was developing this singing game.  This website comes with love from and for Jesus who came in the flesh and in the blood and in the spirit.  To play cleave with love to good and hate evil.  Please share this gem of a game paid for by Jesus Christ on the Cross with everyone in the spirit of the gospel: in truth and love and with much good cheer.
@@ -55,7 +79,7 @@
     
 
 <p>
- May not work on all browsers on some Androids indicated by a white or mostly black screen once loaded.  If so try a different browser like Firefox or Opera.  For a barebones starship that should work, try <a href="https://zonex.space/manny.html#YO">this.</a>
+ May not work on all browsers of some Androids indicated by a white or mostly black screen once loaded.  If so try a different browser like Firefox or Opera.  For a barebones starship that should work, try <a href="https://zonex.space/manny.html#YO">this.</a>
     <p><h2> <a href="keys.html">Hotkeys</a></p>
 </p>
 For a musicXML score file to upload you can visit <a href = "https://hymnary.org/browse/popular/tunes"> hymnary.org</a> there are some pretty impressive features @ the <a href="https://hymnary.org/explore">explore page</a> on that site.
