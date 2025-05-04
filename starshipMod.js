@@ -233,7 +233,7 @@ function spiral_compress(){
                             }
                             for (var g=0; g<EldersLeg; g++)   innerFrets[g] = testar[g];
 
-                       if(window.extremeFrets)
+                       if(window.extremeFrets&&EldersLeg>2)
                             {
         for(var b = 0; b<EldersLeg; b++)if(testar[b]!=0.) testar[b]=(1.-1./testar[b]**(1./Math.E))**(Math.E)
         //    for(var b = 0; b<12; b++)if(testar[b]!=0.) stack12Array[b]=(1.-1./stack12Array[b]**(1./Math.E))**(Math.E)
@@ -2495,6 +2495,7 @@ else{//start drawing of just twenty four frets here
                         if(innerFrets[g]>maxFret){maxFret=innerFrets[g];}
                         if(innerFrets[g]<minFret)minFret=innerFrets[g];
                     }
+                    let maxMinDiff  = maxFret-minFret;
     let twoOr1= EldersLeg<=2
     if(twoOr1){maxTestar=1;minTestar=0;}
     let oddSkew =EldersLeg%2/2;
@@ -2519,9 +2520,10 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                     else if (g==topNote&&EldersLeg==24)widt*=1.5;
 
                  arm =flip*(g*radialWarp+twist*EldersLeg/24.)%EldersLeg/EldersLeg*pi*2.;
-                 lengt = (testar[(g+EldersLeg/2.)%EldersLeg]-minTestar)/(maxTestar-minTestar);
+                 lengt = (testar[(g+EldersLeg/2.)%EldersLeg]);
+                           
                 if(twoOr1) {
-                    lengt/=2.**14./EldersLeg;
+                    lengt/=2.**15./EldersLeg;
                     lengt=lengt**.25;
                     
                 }
@@ -2594,15 +2596,21 @@ let yr = lengt*-Math.cos(arm);
                                  
                                 x *=-centerDisplacement;
                                 y *=-centerDisplacement;
-                                   if(maxFret-minFret!=0)
+                                   if(maxMinDiff!=0&&!twoOr1)
                                         {
                                         lengt = (innerFrets[(g+EldersLeg/2.)%EldersLeg]-minFret)/(maxFret-minFret);
-                                       if(twoOr1) {
-                                           lengt/=2.**14./EldersLeg;
-                                           lengt=lengt**.25;
-                                           
-                                       }
-                                                         
+                                 
+                                                             }
+                                                             else{
+                                            lengt = testar[(g+EldersLeg/2.)%EldersLeg];
+                                            //if(twoOr1)
+                                            {
+                                                lengt/=2.**15./EldersLeg;
+                                                lengt=lengt**.25;
+                                            }
+                                        }
+                                       if(maxMinDiff!=0||twoOr1)
+                                                             {
                                    xr = -(lengt-1.)*-Math.sin(arm)*centerDisplacement;
                                    yr = -(lengt-1.)*-Math.cos(arm)*centerDisplacement;
                                   
