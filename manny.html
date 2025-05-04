@@ -3336,6 +3336,7 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
    if(multiplicatorNexus)hyperCore-=.5/log(.5);
    if(continuumClover)hyperCore-=0.25/log(.5);
    float lpcc=length(pCenterCored);
+   float lpcc2=lpcc*lpcc;
 //if(fieldPowerBoost)hyperCore+=1./log(.5);
    
 if(outerCoresOff)hyperCore=0.;
@@ -3767,17 +3768,19 @@ else //if(  0.>=hyperCoreBoosted)
              }
     }
  }
+//dstnce=length(s);
    if(continuumClover&&lfc!=0.){//engage continualization
        float continuumCore=(continuumCounter+hyperCoreOUTPUT)*correction;
+      // float cc2 =(continuumCore);
 
        if(loops+counter<=hyperCoreBoosted+continuumCounter)
        {
        //   if(dstnce<twoThirds) s-=length(coords.yx)*correction;
        
            //coords.yx*coords.yx*vec2(sign(coords.y),sign(coords.x))
-       s/=pow(1./lpcc,pow(.5,continuumCore));
+       s/=pow(1./lpcc,pow(.5,continuumCore));//try lpcc squared, llpc2, unstable on core depth of inner clovers
 
-       hyperCoreBoosted+=continuumCore;
+      hyperCoreBoosted+=continuumCore;
        hyperCoreOUTPUT+=continuumCore;
        
        }
@@ -3788,6 +3791,7 @@ else //if(  0.>=hyperCoreBoosted)
 
 //if(dstnce<twoThirds)s-=length(coords.yx)*correction;
 //if(dstnce<twoThirds)s-=dstnce;
+   // float cc2 =continuumCore*continuumCore*lpcc2;
 
     hyperCoreBoosted-=continuumCore;
     hyperCoreOUTPUT-=continuumCore;
@@ -5508,7 +5512,7 @@ else {
                                                  -yourFace.xyz
                                                  +7.*(-HEART.b-HEART.r-HEART.g)
                                                 // +(-HEART.b-HEART.r-HEART.g)/4.
-                                                 -AM.r*12.
+                                                 -AM.r*7.
                                                  +(-linearFrequency.r-linearFrequency.g-linearFrequency.b)*4.
                                                  -(pong.r+pong.g+pong.b)
                                                  +bigEyes.xyz*largeEyeColor

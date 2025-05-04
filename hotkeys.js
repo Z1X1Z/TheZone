@@ -754,8 +754,8 @@ window.key = " ";
         else if(x == 4)
         {   clvrVariant4Type = (clvrVariant4Type+1)%3
             if (clvrVariant4Type==0)uniforms.clvrVariant4.value=0;
-            else if (clvrVariant4Type==2) uniforms.clvrVariant4.value =-0.748693232289164237654969328
-                else if (clvrVariant4Type==1)uniforms.clvrVariant4.value=1./leaf
+            else if (clvrVariant4Type==2) uniforms.clvrVariant4.value =-0.748693232289164237654969328//1./leaf2;//
+                else if (clvrVariant4Type==1)uniforms.clvrVariant4.value=1./leafPermanent
      
         }
         else if(x == 5)uniforms.clvrVariant5.value=!uniforms.clvrVariant5.value;
