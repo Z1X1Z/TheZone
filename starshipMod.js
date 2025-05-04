@@ -2520,7 +2520,7 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                     else if (g==topNote&&EldersLeg==24)widt*=1.5;
 
                  arm =flip*(g*radialWarp+twist*EldersLeg/24.)%EldersLeg/EldersLeg*pi*2.;
-                 lengt = (testar[(g+EldersLeg/2.)%EldersLeg]);
+                 lengt = ((testar[(g+EldersLeg/2.)%EldersLeg])-minTestar)/(maxTestar-minTestar);;
                            
                 if(twoOr1) {
                     lengt/=2.**15./EldersLeg;
