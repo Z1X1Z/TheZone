@@ -250,8 +250,9 @@ hyperCore*=equilibriator;
 }
    
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
-if(continuumClover)hyperCore-=0.25/Math.log(.5);
+if(continuumClover)hyperCore-=0.5/Math.log(.5);
 let lpcc = pCenterCored.length();
+   let lpcc2=lpcc*lpcc;
 //if(fieldPowerBoost)hyperCore+=1./Math.log(.5);
 
 if(outerCoresOff)hyperCore=0.;
@@ -591,9 +592,10 @@ if(loops+counter<=hyperCoreBoosted+continuumCounter)
      }
      else{
     //     if(dstnce<2./3.) s.subScalar(coords.yx*correction);
+         let cc2 =continuumCore*continuumCore;
 
-        hyperCoreBoosted-=continuumCore;
-         hyperCoreOUTPUT-=continuumCore;
+        hyperCoreBoosted-=cc2;
+         hyperCoreOUTPUT-=cc2;
      }
 }
 
