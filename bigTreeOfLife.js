@@ -250,7 +250,7 @@ hyperCore*=equilibriator;
 }
    
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
-if(continuumClover)hyperCore-=0.5/Math.log(.5);
+if(continuumClover!=0)hyperCore-=0.5/Math.log(.5);
 let lpcc = pCenterCored.length();
    let lpcc2=lpcc*lpcc;
 //if(fieldPowerBoost)hyperCore+=1./Math.log(.5);
@@ -578,14 +578,18 @@ var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpo
 //}
 
 
-if(continuumClover&&lfc!=0){//engage continualization
+if(continuumClover!=0&&lfc!=0){//engage continualization
   
 var continuumCore=(continuumCounter+hyperCoreOUTPUT)*correction;
 if(loops+counter<=hyperCoreBoosted+continuumCounter)
 {
   //  if(dstnce<2./3.) s.addScalar( coords.yx*correction);
     //s=new THREE.Vector2(Math.abs(s.x),Math.abs(s.y))
-    s.divideScalar( Math.pow(1./lpcc,Math.pow(.5,continuumCore)));
+    
+    let superBoostedContinuation = Math.pow(.5,continuumCore);
+    if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation*dstnce;
+    
+    s.divideScalar( Math.pow(1./lpcc,superBoostedContinuation));
 
      hyperCoreBoosted+=continuumCore;
      hyperCoreOUTPUT+=continuumCore;

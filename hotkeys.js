@@ -72,7 +72,7 @@ holyeyes:{value:1},
 dilate:{value:true},
 
     
-        continuumClover:{value: true    },
+        continuumClover:{value: 2    },
         Inherited:{value: true    },
         cloverSlide:{value: false    },
         Pointers:{value:true},
@@ -885,7 +885,7 @@ window.key = " ";
     else if (key=="@")uniforms[ "Clovoid" ].value=!uniforms[ "Clovoid" ].value;
     // else if (key=="#"){uniforms[ "base3" ].value=!uniforms[ "base3" ].value;console.log(uniforms[ "base3" ].value)}
     
-    else if (key=="&")uniforms[ "continuumClover" ].value=!uniforms[ "continuumClover" ].value;
+    else if (key=="&")uniforms[ "continuumClover" ].value=(uniforms[ "continuumClover" ].value+1)%3;
     
     
     else if (key=="q") {

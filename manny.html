@@ -923,11 +923,6 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                      callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
                                   <label for="super stability">Super Stability![.;]</label><br>
                                   -->
-                                <input type="checkbox" id="Continuum Clover" name="t"  onclick= "
-                                    key  = '&';
-                                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                                 <label for="Continuum Clover">Continuum Clover?![&]</label><br>
-                                 
                                  <input type="checkbox" id="twelveGates" name="t"  onclick= "
                                      key  = 'n';
                                      callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'keyCode':key.charCodeAt(0)}));">
@@ -953,6 +948,12 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                      key  = 'r';
                                      callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'keyCode':key.charCodeAt(0)}));">
                                  ReFactor Clover![.r]</a><br>
+                                 
+                               <a id="Continuum Clover" name="t"  onclick= "
+                                   key  = '&';
+                                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'keyCode':key.charCodeAt(0)}));">
+                               ReFactor Clover?![&]</a><br>
+                               
                                  </div>
           </button>
 
@@ -1855,7 +1856,7 @@ void main(){
     uniform float twelveGatesMeta;
     uniform bool dilate;
 
-    uniform bool continuumClover;
+    uniform int continuumClover;
     uniform bool cloverSlide;
     uniform float baseN;
     
@@ -3334,7 +3335,7 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
 }
    
    if(multiplicatorNexus)hyperCore-=.5/log(.5);
-   if(continuumClover)hyperCore-=0.5/log(.5);
+   if(continuumClover!=0)hyperCore-=0.5/log(.5);
    float lpcc=length(pCenterCored);
    float lpcc2=lpcc*lpcc;
 //if(fieldPowerBoost)hyperCore+=1./log(.5);
@@ -3768,17 +3769,18 @@ else //if(  0.>=hyperCoreBoosted)
              }
     }
  }
-//dstnce=length(s);
-   if(continuumClover&&lfc!=0.){//engage continualization
+dstnce=length(s);
+   if(continuumClover!=0&&lfc!=0.){//engage continualization
        float continuumCore=(continuumCounter+hyperCoreOUTPUT)*correction;
       // float cc2 =(continuumCore);
 
        if(loops+counter<=hyperCoreBoosted+continuumCounter)
        {
        //   if(dstnce<twoThirds) s-=length(coords.yx)*correction;
-       
+       float superBoostedContinuation = pow(.5,continuumCore);
+       if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation*dstnce;
            //coords.yx*coords.yx*vec2(sign(coords.y),sign(coords.x))
-       s/=pow(1./lpcc,pow(.5,continuumCore));//try lpcc squared, llpc2, unstable on core depth of inner clovers
+       s/=pow(1./lpcc,superBoostedContinuation);//try lpcc squared, llpc2, unstable on core depth of inner clovers
 
       hyperCoreBoosted+=continuumCore;
        hyperCoreOUTPUT+=continuumCore;
