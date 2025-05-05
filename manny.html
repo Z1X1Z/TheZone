@@ -1158,7 +1158,10 @@ Reset Zoom![L]</a><br>
                      
                      <input type="checkbox" id="Feedback Voice" name="t"  onclick= "window.FeedbackSound =  !window.FeedbackSound;">
                       <label for="Feedback Voice">Feedback Voice!(regulated by System Volume)[,v]</label><br>
-                     
+                      
+                      <input type="checkbox" id="Quiet Sound" name="t"  onclick= "window.playQuietestSound =  !window.playQuietestSound;">
+                       <label for="Quiet Sound">Quietest Sound![,.v]</label><br>
+                      
                      <input type="checkbox" id="Blank Background" name="t"  onclick= "
                          key  = 'Y';
                          callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">

@@ -200,6 +200,7 @@ function resetAll(){
     window.DAW=false;
     if(!("DAWSonicTouchArray" in window))    window.DAWSonicTouchArray=[];
         window.osmdSound = false;
+    window.playQuietestSound = false;
     window.guitarMODE=false;
     window.extremeFrets=true;
     window.orderedStack=true;
@@ -316,6 +317,8 @@ function resetAll(){
                 {singAlong[o].stop();
                     singAlong2[o].stop();
                 }
+                quietestSound.stop()
+                quietestSound2.stop()
 
     }
                                          window.DAWSonicTouchArray=[];
@@ -473,11 +476,16 @@ window.key = " ";
                     
                     else if((key == "u"||key=="¨") && event.altKey&&event.ctrlKey)
                 uniforms.linearEQ.value=!uniforms.linearEQ.value
-                else if((key == "q"||key=="œ") && event.altKey&&event.ctrlKey)
-                {
-                    uniforms.gates.value=!uniforms.gates.value
-                    
-                }
+                        else if((key == "q"||key=="œ") && event.altKey&&event.ctrlKey)
+                        {
+                            uniforms.gates.value=!uniforms.gates.value
+                            
+                        }
+                        else if((key == "v"||key=="√") && event.altKey&&event.ctrlKey)
+                        {
+                            window.playQuietestSound.value=!window.playQuietestSound.value;
+                            
+                        }
                 else if((key == "z"||key == "Ω") && event.altKey&&event.ctrlKey)
                 {
                     leafMode=(leafMode+1)%2.

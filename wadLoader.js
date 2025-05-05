@@ -34,6 +34,8 @@ cutoff: 10000   //cutoff frequency of the built in lowpass-filter. 20 to 22050
 
 const singAlong=Array(osmdOscillators);
 const singAlong2=Array(osmdOscillators);
+let quietestSound=null;
+let quietestSound2=null;
 
 let DAWnodeIndexForTouchBestFitIndex  = Array(maxTouchSoundCount).fill("not set");
 let SonicTouchGuitarObject = {
@@ -238,8 +240,20 @@ function loadDAW(SonicTouchObjectO)
     }
 function bootSounds()
 {
+    if(typeof feedbackPitchsound[4] =="object")
+    {
+        feedbackPitchsound[4].stop();
+    }
     feedbackPitchsound[4] =  new Wad({source : instrument2})
-    for(var o=0;o<4;o++)feedbackPitchsound[o] =  new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
+    for(var o=0;o<4;o++){
+        
+        if(typeof feedbackPitchsound[o] =="object")
+        {
+            feedbackPitchsound[o].stop();
+        }
+        feedbackPitchsound[o] =  new Wad({source : instrument1})//, tuna   : hyperdriveTUNA});
+        
+    }
        
         for(var o=0;o<osmdOscillators;o++){
             if(typeof singAlong[o] =="object")
@@ -250,7 +264,15 @@ function bootSounds()
             singAlong[o] =  new Wad({source : instrument1})
             singAlong2[o] =  new Wad({source : instrument2})
         }
+    if( quietestSound !=null)
+    {
+        quietestSound.stop();
+        quietestSound2.stop();
+    }
     
+    quietestSound =  new Wad({source : instrument1})
+    quietestSound2 =  new Wad({source : instrument2})
+
     
     for(var o=0;o<maxTouchSoundCount;o++)
     {SonicTouchArray[o]=loadDAW(SonicTouchArray[o]);

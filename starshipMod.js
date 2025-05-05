@@ -378,6 +378,9 @@ let pushBackCounter = 0;
                 if(wadLOADED&&aboveThreshold) {
                    //    feedbackPitchsound[4].stop();
                     
+                    
+                    
+                    
                     feedbackPitchsound[4].play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:pitch,volume:(totalAMP<1.)?totalAMP/feedBackReduction:1.})
                     
                     for (var v = 0; v < 4; v++)
@@ -388,6 +391,7 @@ let pushBackCounter = 0;
                                 1./feedBackReduction/(4-v)})
                             
                     }
+                     
                 }
                     else if (wadLOADED) {
                         
@@ -1666,6 +1670,8 @@ function runOSMD (){
                                               let ONbypass;
                                           let lastTIMEUNIFORM = 0.;
                                           
+                                          let lowAmpFreq = 1;
+
                                           function animate( timestamp ) {
                                     
                                     if(window.streaming)
@@ -2021,13 +2027,20 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
         vectorize4();
     
     let lowNote = 10000000.;
+     lowAmpFreq = 1;
+
+     lowAmpFreq = 1;
     for(var kappa=0.;kappa<testarContinuous.length;kappa++)if (lowNote>testarContinuous[kappa]&&testarContinuous[kappa]>0.&&isFinite(testarContinuous[kappa])
                                                                )
     {lowNote=testarContinuous[kappa]
+        lowAmpFreq =  frequencies[kappa]
         uniforms.lownote.value=mustarD[kappa]/2.;
     }
+    if(    window.playQuietestSound){
+        quietestSound.play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:lowAmpFreq,volume:1.})
+        quietestSound2.play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:lowAmpFreq,volume:1.})
+    }
     //uniforms.lownote.value=lowNote;
-    
     let coreShift=0;
     for(var shift = 0.;shift<4;shift++)//find maximally different loudest note
        if (Math.abs(Math.abs((note*2)%24-loudestFret[shift].note%24)-24/2.)<Math.abs(coreShift-24/2.))
