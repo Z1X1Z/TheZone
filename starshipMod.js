@@ -1218,7 +1218,7 @@ let lastVolume = 1.;
         
         expandedZoomCage=1;
              if (uniforms.Spoker.value)expandedZoomCage*=2.
-                 if (uniforms.continuumClover.value)expandedZoomCage/=1.5
+                 if (uniforms.continuumClover.value)expandedZoomCage/=2.
 
     else expandedZoomCage = 1.;
              
