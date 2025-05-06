@@ -3780,9 +3780,9 @@ dstnce=length(s);
        if(loops+counter<=hyperCoreBoosted+continuumCounter)
        {
        //   if(dstnce<twoThirds) s-=length(coords.yx)*correction;
-       float deDistortion = sqrt(dstnce)*dstnce*dstnce*sqrt(lpcc)*lpcc;
+       float deDistortion = sqrt(dstnce)*dstnce*sqrt(lpcc);
        float superBoostedContinuation = pow(.5,continuumCore)*deDistortion;
-       if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation*deDistortion;//different solutions to sqrts squares and number of deDistortions may be viable
+       if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation*deDistortion*dstnce;//different solutions to sqrts squares and number of deDistortions may be viable
            //coords.yx*coords.yx*vec2(sign(coords.y),sign(coords.x))
        s/=pow(1./lpcc,superBoostedContinuation);
 
