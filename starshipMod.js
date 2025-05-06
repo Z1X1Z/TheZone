@@ -1243,12 +1243,12 @@ function zoomRoutine(){
     if(uniforms[ "colorCombo" ].value==16)zoomCone/=1.33333333/2.;
     
     ZR = setZoomRate();
-    if (zoom>=.9)//could work as one (also below) but my phone was partially crashing on continuum clover zoomout
+    if (zoom>=.45)//could work as one (also below) but my phone was partially crashing on continuum clover zoomout
         zoomOutEngage = false;
     if(!isFinite(ZR))ZR=1;
     if(!zoomOutEngage&&zoomRate>0.){
         if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(on&&!window.touchMode))||xTouch+yTouch!=0)zoom *=ZR;
-        else if(uniforms.MetaCored.value||zoom<.9){
+        else if(uniforms.MetaCored.value||zoom<.45){
             zoom /= ZR;
             if(center&&zoom<1.){coordX*=ZR*2./3.;; coordY*=ZR*2./3.;}
         }
