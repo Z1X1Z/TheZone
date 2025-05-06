@@ -3780,8 +3780,9 @@ dstnce=length(s);
        if(loops+counter<=hyperCoreBoosted+continuumCounter)
        {
        //   if(dstnce<twoThirds) s-=length(coords.yx)*correction;
-       float superBoostedContinuation = pow(.5,continuumCore);
-       if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation*dstnce;
+       float deDistortion = sqrt(dstnce)*lpcc;
+       float superBoostedContinuation = pow(.5,continuumCore)*deDistortion;
+       if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation*deDistortion;
            //coords.yx*coords.yx*vec2(sign(coords.y),sign(coords.x))
        s/=pow(1./lpcc,superBoostedContinuation);//try lpcc squared, llpc2, unstable on core depth of inner clovers
 

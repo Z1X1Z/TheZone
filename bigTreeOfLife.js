@@ -577,7 +577,7 @@ var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpo
 //    s.divideScalar( Math.sqrt(2.));
 //}
 
-
+dstnce=s.length();
 if(continuumClover!=0&&lfc!=0){//engage continualization
   
 var continuumCore=(continuumCounter+hyperCoreOUTPUT)*correction;
@@ -585,9 +585,9 @@ if(loops+counter<=hyperCoreBoosted+continuumCounter)
 {
   //  if(dstnce<2./3.) s.addScalar( coords.yx*correction);
     //s=new THREE.Vector2(Math.abs(s.x),Math.abs(s.y))
-    
-    let superBoostedContinuation = Math.pow(.5,continuumCore);
-    if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation*dstnce;
+    let deDistortion = Math.sqrt(dstnce)*lpcc
+    let superBoostedContinuation = Math.pow(.5,continuumCore)*deDistortion;
+    if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation*deDistortion;
     
     s.divideScalar( Math.pow(1./lpcc,superBoostedContinuation));
 
