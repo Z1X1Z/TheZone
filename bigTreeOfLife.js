@@ -586,7 +586,7 @@ if(loops+counter<=hyperCoreBoosted+continuumCounter)
   //  if(dstnce<2./3.) s.addScalar( coords.yx*correction);
     //s=new THREE.Vector2(Math.abs(s.x),Math.abs(s.y))
     let dstlpcc = dstnce*lpcc;
-    let deDistortion = Math.sqrt(dstlpcc)*dstnce*Math.sqrt(lpcc)*lpcc2;
+    let deDistortion = Math.sqrt(dstlpcc)*Math.sqrt(dstnce)*Math.sqrt(lpcc)*lpcc2;
     let superBoostedContinuation = Math.pow(.5,continuumCore)*Math.sqrt(deDistortion);
     if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation*deDistortion*deDistortion;
     
