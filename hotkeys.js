@@ -414,11 +414,16 @@ function getKey(){
     androidGetKeyLast = androidGetKey;
     androidGetKey = document.getElementById("hotkeys").value;
     let keyCaught;
- let scan=androidGetKey.length-1;
-  while(scan>=0){
-        if(androidGetKey[scan]!=androidGetKeyLast[scan])keyCaught=androidGetKey[scan];
-        scan--;
+ let scan=0;
+  while(scan<androidGetKey.length){
+        if(androidGetKey[scan]!=androidGetKeyLast[scan])
+        {keyCaught=androidGetKey[scan];
+            break;
         }
+      scan++;
+
+        }
+                console.log(scan)
                 let alt = false;
                 let ctrl = false;
                 if (androidGetKey[scan-1]==",") ctrl=true;
@@ -427,9 +432,11 @@ function getKey(){
                    {if (androidGetKey[scan-2]==",") ctrl=true;
                        else if (androidGetKey[scan-2]==".")alt=true
                            }
-
+console.log("c "+ctrl+" a "+alt)
                     if(keyCaught!=","&&keyCaught!=".")
-   callKey(new KeyboardEvent('keydown', {'key': keyCaught,'ctrlKey':ctrl, 'altKey':alt, "keyCode":keyCaught.charCodeAt(0)}));
+                    {
+                        callKey(new KeyboardEvent('keydown', {'key': keyCaught,'ctrlKey':ctrl, 'altKey':alt, "keyCode":keyCaught.charCodeAt(0)}));
+                    }
 }
 
 
