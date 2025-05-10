@@ -441,14 +441,14 @@ window.addEventListener('keydown', function(event) {callKey(event); return true;
 window.key = " ";
                                          function callKey(event){
                 window.lastKey = window.key;
-                if(lastKey==","&&!runningHash)//key here is the last key
+             /*   if(lastKey==","&&!runningHash)//key here is the last key
                     event=new KeyboardEvent('keydown',
                                             {"key":event.key,"keyCode":event.keyCode,"ctrlKey":true}
                                             );
                 else if(lastKey=="."&&!runningHash)event=new KeyboardEvent('keydown',
                                                                            {"key":event.key,"keyCode":event.keyCode,"altKey":true}//creating a new keypress because it's readonly
                                                                            );
-                
+                */
                 key = event.key;
                 //number=Number(number);
                 if(key=="/"&&!event.shiftKey){  event.preventDefault(); event.stopImmediatePropagation();}
