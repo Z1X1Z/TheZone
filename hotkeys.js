@@ -80,7 +80,8 @@ dilate:{value:true},
         rate: {value: 1.},
 
         zoom: {value:  .99},
-        colorCombo: {value: -1 },
+colorCombo: {value: -1 },
+colorCombo2: {value: -1 },
         free: {value: false },
         MetaCored: {value: true },
         externalCores: {value: 0. },
@@ -205,7 +206,7 @@ function resetAll(){
     window.extremeFrets=true;
     window.orderedStack=true;
     window.clvrVariant4Type=1.;
-    window.leafMode=1;
+    window.leafMode=0;
     window.grMode=0;
     window.xTouch=0;
     window.yTouch=0;
@@ -451,6 +452,12 @@ window.key = " ";
                     window.guitarMODE=!window.guitarMODE;
                 else if((key == "r"||key=="®") && event.altKey&&event.ctrlKey)
                     window.stylusON=!window.stylusON;
+                
+                    else if((key == "p"||key=="π") && event.altKey&&event.ctrlKey){
+                        if          ( uniforms[ "colorCombo2" ].value >1)          uniforms[ "colorCombo2" ].value = -1;
+                        else uniforms[ "colorCombo2" ].value = -(Math.abs(uniforms[ "colorCombo2" ].value-1))%17;
+                    }
+                    
                 else if((key == "k"||key=="˚") && event.altKey&&event.ctrlKey)
                 uniforms.eyeSingle.value=!uniforms.eyeSingle.value;
                 else if((key == "m"||key=="µ") && event.altKey&&event.ctrlKey)
