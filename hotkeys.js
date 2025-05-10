@@ -419,7 +419,17 @@ function getKey(){
         if(androidGetKey[scan]!=androidGetKeyLast[scan])keyCaught=androidGetKey[scan];
         scan--;
         }
-   callKey(new KeyboardEvent('keydown', {'key': keyCaught, "keyCode":keyCaught.charCodeAt(0)}));
+                let alt = false;
+                let ctrl = false;
+                if (androidGetKey[scan-1]==",") ctrl=true;
+               else if (androidGetKey[scan-1]==".")alt=true;
+                   if(ctrl||alt)
+                   {if (androidGetKey[scan-2]==",") ctrl=true;
+                       else if (androidGetKey[scan-2]==".")alt=true
+                           }
+
+                    if(keyCaught!=","&&keyCaught!=".")
+   callKey(new KeyboardEvent('keydown', {'key': keyCaught,'ctrlKey':ctrl, 'altKey':alt, "keyCode":keyCaught.charCodeAt(0)}));
 }
 
 
