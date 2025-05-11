@@ -272,7 +272,7 @@ function resetAll(){
              window.totalAMP=1;
                                          window.front = 1;
             window.center = false;
-            window.zoomOutRatchetThreshold= 1./1024;
+            window.zoomOutRatchetThreshold= 4./1024;
 
             window.ConcertKey = 440;
 

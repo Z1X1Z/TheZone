@@ -2004,7 +2004,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
 
     
     
-           if(window.volumeSpeed&&on)
+           if(window.volumeSpeed)
            {
                    if(lastVolume!=0.) lastVolume=volume;
                volume = totalAMP*audioX.sampleRate/bufferSize;
