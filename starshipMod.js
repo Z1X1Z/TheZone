@@ -2006,7 +2006,8 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
            if(window.volumeSpeed&&on)
            {
                    if(lastVolume!=0.) lastVolume=volume;
-               volume = totalAMP*audioX.sampleRate/bufferSize;
+               volume = (totalAMP-zoomOutRatchetThreshold)*audioX.sampleRate/bufferSize;
+               if(volume<0.)volume=0.;
                if(lastVolume==0.) lastVolume=volume;
                        }
            else {volume=1.; lastVolume=1.; }
