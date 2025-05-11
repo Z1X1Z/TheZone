@@ -336,7 +336,7 @@ let f = 0;
 let pitch = -1;
 
 let reset = 6;
-let on;
+let on=false;
 let spirafreq=1;
 var totalAMP;
 var angle=0.;//this has nothing to do with the spin function below, it's for the pitch
@@ -1173,8 +1173,7 @@ function onWindowResize() {
 let lastVolume = 1.;
         function setZoomRate(){
         let volumeProcessed =(volume/lastVolume)**.5;//should be volume not volumeBoosted
-             if(!on)volumeProcessed=1.;
-        if(!isFinite(volumeProcessed))volumeProcessed=1.;
+        if(!on||!isFinite(volumeProcessed))volumeProcessed=1.;
            if(zoomRate>0) return Math.E**(Math.log(.5)/zoomFrames*zoomRate*interpolation*(volumeProcessed));//the square root of volume is to make it grow slower than in d_xy
              else return 0;
         }
@@ -2004,7 +2003,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
 
     
     
-           if(window.volumeSpeed)
+           if(window.volumeSpeed&&on)
            {
                    if(lastVolume!=0.) lastVolume=volume;
                volume = totalAMP*audioX.sampleRate/bufferSize;
