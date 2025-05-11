@@ -1173,6 +1173,7 @@ function onWindowResize() {
 let lastVolume = 1.;
         function setZoomRate(){
         let volumeProcessed =(volume/lastVolume)**.5;//should be volume not volumeBoosted
+             if(!on)volumeProcessed=1.;
         if(!isFinite(volumeProcessed))volumeProcessed=1.;
            if(zoomRate>0) return Math.E**(Math.log(.5)/zoomFrames*zoomRate*interpolation*(volumeProcessed));//the square root of volume is to make it grow slower than in d_xy
              else return 0;
@@ -1674,7 +1675,7 @@ function runOSMD (){
                                           let lowAmpFreq = 1;
 
                                           function animate( timestamp ) {
-                                    
+                                   // console.log('colorCombo '+uniforms.colorCombo.value+' colorCombo2 '+uniforms.colorCombo2.value)
                                     if(window.streaming)
                                     {
                                         const context = videoCanvas.getContext("2d");
@@ -2048,8 +2049,8 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
         coreShift=Math.abs((note*2)%24-loudestFret[shift].note%24)/24.
 
            renderer.readRenderTargetPixels (cloverRenderTarget,  Math.floor(window.innerWidth/2.), Math.floor(window.innerHeight/2.),1,1,  hyperCorePixel)
-           hyperCorePixel[0]/=4.;
-            hyperCorePixel[1]/=4.;
+           //hyperCorePixel[0]/=4.;
+           // hyperCorePixel[1]/=4.;
     let hyperCoreOffset = Math.ceil(hyperCorePixel[0]);
     if(!isNaN(loudestFret[0].volume)&&window.dynamicCoring)
         coreData[hyperCoreOffset]=Math.abs(coreShift)+2./3.;//24*1.3247;

@@ -268,7 +268,7 @@ function resetAll(){
 
            // if(!window.touchOnlyMode||location.hash.includes("t"))
                                          window.touchMode=false;
-            window.volumeSpeed = false;
+            window.volumeSpeed = true;
              window.totalAMP=1;
                                          window.front = 1;
             window.center = false;
