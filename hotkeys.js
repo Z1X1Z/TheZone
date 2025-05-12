@@ -160,7 +160,8 @@ gates:{value:false},
 leaf:{value:leaf},
 gr:{value:gr},
 pixelWitnesses:{value:true},
-cloverArms:{value:false}
+cloverArms:{value:false},
+dynamicOvercore:{value:false}
 }
 window.uniforms={}
 
@@ -175,7 +176,7 @@ window.settingsSet = false
 
 
 
-
+const starSHIPVOLUMEdefaultLowVolume = 5./1024.;//used in sstarshipmod
 
 
 function resetAll(){
@@ -272,7 +273,7 @@ function resetAll(){
              window.totalAMP=1;
                                          window.front = 1;
             window.center = false;
-            window.zoomOutRatchetThreshold= 1./1024;
+            window.zoomOutRatchetThreshold= starSHIPVOLUMEdefaultLowVolume;//
 
             window.ConcertKey = 440;
 
@@ -469,6 +470,8 @@ window.key = " ";
                     window.guitarMODE=!window.guitarMODE;
                 else if((key == "r"||key=="®") && event.altKey&&event.ctrlKey)
                     window.stylusON=!window.stylusON;
+                else if((key == "h"||key=="˙") && event.altKey&&event.ctrlKey)
+                        uniforms.dynamicOvercore.value=!uniforms.dynamicOvercore.value;
                 
                     else if((key == "p"||key=="π") && event.altKey&&event.ctrlKey){
                         if          ( uniforms[ "colorCombo2" ].value >1)          uniforms[ "colorCombo2" ].value = -1;

@@ -658,7 +658,7 @@ function setFFTdependantSizes(){
      inputData = new Float32Array(bufferSize);
       dataArray = new Uint8Array( numberOfBins );
 
-     window.zoomOutRatchetThreshold=1./1024;
+     window.zoomOutRatchetThreshold=starSHIPVOLUMEdefaultLowVolume;//5./1024;////or 1/1024.//maybe shouldn't need to be here could be solved away
      
      
       star= new Float32Array(numberOfBins*3*3);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
@@ -1174,6 +1174,7 @@ let lastVolume = 1.;
         function setZoomRate(){
         let volumeProcessed =(volume/lastVolume)**.5;//should be volume not volumeBoosted
         if(!on||!isFinite(volumeProcessed))volumeProcessed=1.;
+             
            if(zoomRate>0) return Math.E**(Math.log(.5)/zoomFrames*zoomRate*interpolation*(volumeProcessed));//the square root of volume is to make it grow slower than in d_xy
              else return 0;
         }

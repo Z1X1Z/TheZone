@@ -943,7 +943,10 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                       key  = 'z';
                                       callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
                                    <label for="meta field Power Boost">Meta Field Power Boost![,z]</label><br>
-                                   
+                                   <input type="checkbox" id="dynamicOvercore" name="t"  onclick= "
+                                       key  = 'h';
+                                       callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
+                                    <label for="dynamicOvercore">dynamic Overcore![,.h]</label><br>
                                  <a id="ReFactor" name="t"  onclick= "
                                      key  = 'r';
                                      callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'keyCode':key.charCodeAt(0)}));">
@@ -1861,6 +1864,7 @@ void main(){
 
     uniform int continuumClover;
     uniform bool cloverSlide;
+    uniform bool dynamicOvercore;
     uniform float baseN;
     
     uniform bool Inherited;
@@ -3929,23 +3933,52 @@ OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
   if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spin2(s,atan(s.y,s.x)*OmniPetal);
   
 
- if (cloverSlide)
+ if (cloverSlide||dynamicOvercore)
    {
-       
+       //float bIs =dstnce*sqrt2;
        if(float(i)>hyperCoreBoosted)
        {
-           float b = dstnce;//may not be core stable
+           float b = 0. ;
+
+           if(cloverSlide) b = dstnce;//may not be core stable try b=dstnce for trad
+           if(dynamicOvercore) b += 1./(dstnce/(lfc/(lfc-zoom)));
            loops-=b;
            hyperCoreBoosted+=b;
            hyperCoreOUTPUT+=b;
        }
        else{
-           float b =dstnce/4.;//may not be core stable
+           
+           if(cloverSlide)
+           {
+               
+           float b = 0. ;
+b =dstnce/4.;;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
            loops-=b;
        hyperCoreBoosted+=b;
        hyperCoreOUTPUT+=b;
-
+}
        }
+        
+       //
+       /*the above before modifications is below
+        if(float(i)>hyperCoreBoosted)
+        {
+            float b = dstnce;//may not be core stable
+            loops-=b;
+            hyperCoreBoosted+=b;
+            hyperCoreOUTPUT+=b;
+        }
+        else{
+            float b =dstnce/4.;//may not be core stable
+            loops-=b;
+        hyperCoreBoosted+=b;
+        hyperCoreOUTPUT+=b;
+
+        }
+        */
+        
+        
+        //this is different
         
        /*
       float b =dstnce/1.5;//try dstnce/1.5

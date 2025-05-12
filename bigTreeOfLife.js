@@ -1,4 +1,4 @@
-var shaderScale,dilate, coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals
+var shaderScale,dilate, coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals
 ,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta,spinTowardsMe,d,chop;
 function setUniformsToPlainName(){
     Inherited=uniforms.Inherited.value;
@@ -27,6 +27,7 @@ function setUniformsToPlainName(){
      refactorCores=    uniforms.refactorCores.value
      MetaCored =    uniforms.MetaCored.value
     cloverSlide =    uniforms.cloverSlide.value
+    dynamicOvercore = uniforms.dynamicOvercore.value
     fieldPowerBoost=    uniforms.fieldPowerBoost.value
     fieldPowerBoostMeta=    uniforms.fieldPowerBoostMeta.value
     upCoreCycler=    uniforms.upCoreCycler.value
@@ -683,22 +684,27 @@ OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
 
 if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spinVector(s,Math.atan(s.y,s.x)*OmniPetal);
 
-if (cloverSlide)
+if (cloverSlide||dynamicOvercore)
 {
 if((i)>hyperCoreBoosted)
 {
-var b = dstnce;
+var b = 0;
+    if(cloverSlide)b+=dstnce;
+    if(dynamicOvercore)b+= 1./(dstnce/(lfc/(lfc-zoom)));
 //loops-=b;
 //hyperCoreBoosted+=b;
 //    hyperCoreOUTPUT+=b;
 
 }
 else{
-//var b =dstnce/4.;//may not be core stable
-//loops-=b;
-//hyperCoreBoosted+=b;//doesn't work with duper core
- //   hyperCoreOUTPUT+=b;//doesn't work with duper core
-
+    if(cloverSlide){
+        var b = 0;
+        
+        b =dstnce/4.;//may not be core stable
+        loops-=b;
+        hyperCoreBoosted+=b;//doesn't work with duper core
+        hyperCoreOUTPUT+=b;//doesn't work with duper core
+    }
 }
     /*
 
