@@ -82,7 +82,7 @@ function loadScore(e) {
 
           onWindowResize()//this calls osmdResize() who calls osmd.render(). It is from starshipMod.js so we need it to load after that is loaded in x.html
           //console.log("e.target.result: " + e.target.result);
-            
+            setTransparencyCSS();//defined in manny.html
             osmd.cursor.wantedZIndex="0";
 
            osmd.cursor.show(); // this would show the cursor on the first note
