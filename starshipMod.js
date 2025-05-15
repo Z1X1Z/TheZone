@@ -661,8 +661,8 @@ function setFFTdependantSizes(){
      window.zoomOutRatchetThreshold=starSHIPVOLUMEdefaultLowVolume;//5./1024;////or 1/1024.//maybe shouldn't need to be here could be solved away
      
      
-      star= new Float32Array(numberOfBins*3*3);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
-      starColors= new Float32Array(numberOfBins*4*3);
+      star= new Float32Array((numberOfBins>EldersLeg)?numberOfBins*3*3:EldersLeg*6*3);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
+      starColors= new Float32Array((numberOfBins>EldersLeg)?numberOfBins*3*4:EldersLeg*6*4);
      
                         starArms = numberOfBins;
              window.starCount = Math.ceil(starArms*60*secondsToEdge);
@@ -1219,7 +1219,7 @@ let lastVolume = 1.;
         
         expandedZoomCage=1;
              if (uniforms.Spoker.value)expandedZoomCage*=2.
-                 if (uniforms.continuumClover.value)expandedZoomCage/=1.7
+                 if (uniforms.continuumClover.value)expandedZoomCage/=1.5
 
     else expandedZoomCage = 1.;
              
@@ -2649,6 +2649,30 @@ let yr = lengt*-Math.cos(arm);
                                                                            
                                                starStride+=6;
                                   
+                                            
+                  x *= 1.35;
+                  y *= 1.35;
+                                           dep/=1.1;
+                 starPositionAttribute.setXYZ(starStride,-x+xBoost,    -y+yBoost,  dep)
+                 starPositionAttribute.setXYZ(starStride+1,x+xBoost,    y+yBoost,  dep)
+                 starPositionAttribute.setXYZ(starStride+2,(xr+x), (yr+y),  dep)
+                 
+                 starPositionAttribute.setXYZ(starStride+3,-x+xBoost, -y+yBoost,  dep)
+                 starPositionAttribute.setXYZ(starStride+4,(xr+x), (yr+y),  dep)
+                 starPositionAttribute.setXYZ(starStride+5,(xr-x), (yr-y),  dep)
+                 
+                 
+                 
+                       starColorAttribute.setXYZW(starStride,.5,.5,.5,1.)
+                       starColorAttribute.setXYZW(starStride+1,.5,.5,.5,1.)
+                       starColorAttribute.setXYZW(starStride+2,.5,.5,.5,1.)
+                       starColorAttribute.setXYZW(starStride+3,.5,.5,.5,1.)
+                       starColorAttribute.setXYZW(starStride+4,.5,.5,.5,1.)
+                       starColorAttribute.setXYZW(starStride+5,.5,.5,.5,1.)
+                                                          
+                              starStride+=6;
+                 
+                                            
                                   
                                                              }
 }
