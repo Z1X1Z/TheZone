@@ -269,7 +269,7 @@ function resetAll(){
 
            // if(!window.touchOnlyMode||location.hash.includes("t"))
                                          window.touchMode=false;
-            window.volumeSpeed = true;
+            window.volumeSpeed = false;//this could be true for creativity, but for beginners and consistency it may be false.
              window.totalAMP=1;
                                          window.front = 1;
             window.center = false;
