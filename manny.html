@@ -3462,7 +3462,7 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
 
                             float initialHyperCoreBoosted = hyperCoreBoosted;
                                        float colorComputationBoost =7.;//increasing number decreases processing and clarity
-                                       float baseDelimiter =50.;
+                                       float baseDelimiter =50.;//colorComputationBoost=7 and baseDelimiter=50
        float delimiter = baseDelimiter;
        if(colorCombo==-1&&Inherited)delimiter=baseDelimiter/colorComputationBoost;
                                                           float base=baseN;
@@ -3788,6 +3788,8 @@ dstnce=length(s);
        //   if(dstnce<twoThirds) s-=length(coords.yx)*correction;
        float dstlpcc = dstnce*lpcc;
        float deDistortion = sqrt(dstlpcc)*sqrt(dstnce)*sqrt(lpcc)*lpcc2;
+       //if(dstlpcc<1.)
+       deDistortion*=(1.-sqrt(dstlpcc*9./16.));
        float superBoostedContinuation = pow(.5,continuumCore)*sqrt(deDistortion);
        if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation*deDistortion*deDistortion;//different solutions to sqrts squares and number of deDistortions may be viable
            //coords.yx*coords.yx*vec2(sign(coords.y),sign(coords.x))
@@ -4051,7 +4053,8 @@ vec3 o = vec3(abs(s.x)/s.y*sign(s.x*s.y));
                     else if(colorCombo==-1) {
                               o=       (1.-(vec3(s.y/125.-s.x*s.y/888.+s.y/25000.,s.x/8.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
                                                 *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
-                                                *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
+                                                *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));//can swizzle this for new colormodes
+                                              
                                                 }
                                 else if(colorCombo==-8) {
                                             s=-colorAccumulator*(coresIn+1.)*((coresIn+2.)/(60.+1.)-.5);
