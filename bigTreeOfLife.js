@@ -588,8 +588,8 @@ if(loops+counter<=hyperCoreBoosted+continuumCounter)
     //s=new THREE.Vector2(Math.abs(s.x),Math.abs(s.y))
     let dstlpcc = dstnce*lpcc;
     let deDistortion = Math.sqrt(dstlpcc)*Math.sqrt(dstnce)*Math.sqrt(lpcc)*lpcc2;
-    //if(lpcc<4./3.)
-        deDistortion*=(1.-Math.sqrt(dstlpcc*9./16.))
+    if(lpcc<4./3.)
+        deDistortion*=(1.-Math.sqrt(lpcc*3./4.))
     let superBoostedContinuation = Math.pow(.5,continuumCore)*Math.sqrt(deDistortion);
     if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation*deDistortion*deDistortion;
     
