@@ -30,7 +30,7 @@ pongOn:{value:true},
 heartStar:{value:0},
 superStable:{value:false},
 distributor:{value:true},
-
+oppositionalCoreFlop:{value:2},
 micIn:{value:null},
     audioBuffer:{value:null},
     omniDynamic:{value:null},
@@ -470,6 +470,10 @@ window.key = " ";
                     window.guitarMODE=!window.guitarMODE;
                 else if((key == "r"||key=="®") && event.altKey&&event.ctrlKey)
                     window.stylusON=!window.stylusON;
+                
+            else if((key == "o"||key=="ø") && event.altKey&&event.ctrlKey)
+                uniforms.oppositionalCoreFlop.value=(uniforms.oppositionalCoreFlop.value+1)%3;
+                
                 else if((key == "h"||key=="˙") && event.altKey&&event.ctrlKey)
                         uniforms.dynamicOvercore.value=!uniforms.dynamicOvercore.value;
                 

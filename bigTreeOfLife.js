@@ -1,6 +1,7 @@
-var shaderScale,dilate, coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals
+var shaderScale,dilate, coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop,
 ,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta,spinTowardsMe,d,chop;
 function setUniformsToPlainName(){
+    oppositionalCoreFlop=uniforms.oppositionalCoreFlop.value
     Inherited=uniforms.Inherited.value;
     d=uniforms.d.value;
     chop=uniforms.chop.value;
@@ -251,7 +252,7 @@ hyperCore*=equilibriator;
 }
    
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
-if(continuumClover!=0)hyperCore-=0.25/Math.log(.5);
+if(continuumClover!=0)hyperCore+=.25/Math.log(.5);
 let lpcc = pCenterCored.length();
    let lpcc2=lpcc*lpcc;
 //if(fieldPowerBoost)hyperCore+=1./Math.log(.5);
@@ -387,6 +388,8 @@ dstnce = s.length();
 
 
 if(Refractelate&&dstnce>refractelC){s.divideScalar( refractelC);} //refractelC/=4./3.;}
+            if((counter==1.&&oppositionalCoreFlop==2)||oppositionalCoreFlop==1)s=spinVector(s,PI);
+
 var lastS = s.clone();
    
 s=new THREE.Vector2(
