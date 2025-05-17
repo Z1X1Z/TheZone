@@ -2566,7 +2566,7 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                      }
                          else if (g==bottomNote&&(uniforms.Character.value==2||uniforms.Character.value==1))
                          {
-                             let blackFret = .5;
+                             let blackFret = .49;
                                                     pureColor.setRGB(blackFret,blackFret,blackFret);
                                                     vop.setRGB(blackFret,blackFret,blackFret);
                          }

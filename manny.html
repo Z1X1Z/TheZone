@@ -5324,7 +5324,7 @@ if(starOnDot!=2){
   
     if (starship.x==0.&&starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=starship.x;
                                  if (starship.x==starship.y&& starship.y==starship.z&&starship.x<.51&&starship.x>.49)isGrey=starship.x;
-                if(starship.x*starship.w>=1./4.&&starship.y*starship.w>=1./4.&&starship.z*starship.w>=1./4.)isGreyISH=.5;
+                if(starship.x*starship.w>=.5&&starship.y*starship.w>=.5&&starship.z*starship.w>=.5)isGreyISH=.5;
                                  
                                  if (isGreyISH!=0.){mny=vec3(.5);starship=vec4(vec3(.5),1.);}
 
