@@ -3016,7 +3016,7 @@ vec3 kissingEagles(vec2 p){
                                   return vec3(q);
                               }
                           
-                          vec3 faceFORWARDTWO(vec2 p,vec2 t){
+                          vec3 faceFORWARDTWO(vec2 p,vec2 t){//tuner crab Rangoon
                                               if(p.x<-1.25)p.x-=2.;
                               vec2 s=p;
                               
@@ -5069,11 +5069,12 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                        if (elbowed<-1.)elbowed=-1.;
                        
                        clothes=robeL(characterOnTrailP,vec2(elbowed),move/5.)*.84;}
-                                            else if(Character<=9)
+                                            else if(Character<=10)
                                                                  {
                        vec2 morphDance = vec2(0.);
                        if(cloverArms) morphDance = vec2(-sin(-angleOfClover),1.-cos(-angleOfClover));
                        else morphDance=moveDynamic;
+                       
                        bodyWithArms = bodyPlayer(characterOnTrailP,morphDance);
                        clothes=robe(characterOnTrailP,morphDance);
                                                                 }
@@ -5120,7 +5121,8 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                          {
                                                                              mannyFace = (faceBlackAndWhite(characterOnTrailP*1.221221,moveDynamic,false));//,0.,1.);
                                                                              
-                                                                             mny=faceFORWARDTWO(characterOnTrailP/1.75,moveDynamic)+mannyFace.xyz;
+                                                                             mny=clamp(faceFORWARDTWO(characterOnTrailP/1.75//+vec2(.5,.0)
+                                                                                                      ,moveDynamic)-(bodyWithArms.x+bodyWithArms.y+bodyWithArms.z)*100.,0.,1.)+bodyWithArms.xyz+mannyFace.xyz;
                                                                              }
 
                                                                          else if (Character==11)mny=vec3(0.);
