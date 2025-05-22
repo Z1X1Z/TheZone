@@ -594,7 +594,7 @@ if(loops+counter<=hyperCoreBoosted+continuumCounter)
     if(dstlpcc<16./9.)
         deDistortion*=(1.-dstlpcc*9./16.)
     let superBoostedContinuation = Math.pow(.5,continuumCore)*Math.sqrt(deDistortion);
-    if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation*deDistortion*deDistortion;
+    if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation*Math.sqrt(deDistortion);//was deDistortion*deDistortion
     
     s.divideScalar( Math.pow(1./lpcc,superBoostedContinuation));
 
