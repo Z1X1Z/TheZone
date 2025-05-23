@@ -597,7 +597,7 @@ if(loops+counter<=hyperCoreBoosted+continuumCounter)
     let superBoostedContinuation = Math.pow(.5,continuumCore)*dstlpcc;
     if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation;
     
-    s.divideScalar( Math.pow(1./lpcc,superBoostedContinuation)*deDistortion);
+    s.divideScalar( Math.pow(1./lpcc,superBoostedContinuation));
 
      hyperCoreBoosted+=continuumCore;
      hyperCoreOUTPUT+=continuumCore;
