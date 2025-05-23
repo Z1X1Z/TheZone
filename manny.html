@@ -3792,11 +3792,12 @@ dstnce=length(s);
        {
        //   if(dstnce<twoThirds) s-=length(coords.yx)*correction;
        float dstlpcc = dstnce*lpcc;
-       float deDistortion = sqrt(dstlpcc)*sqrt(dstnce)*sqrt(lpcc) *lpcc2;
+      /* float deDistortion = sqrt(dstlpcc)*sqrt(dstnce)*sqrt(lpcc) *lpcc2;
        if(dstlpcc<16./9.)
-       deDistortion*=(1.-((dstlpcc*9./16.)));
-       float superBoostedContinuation = pow(.5,continuumCore)*sqrt(deDistortion);//may be (and was) deDistortion**2 (or perhaps under circumstances just deDistortion?)
-       if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation*sqrt(deDistortion);//different solutions to sqrts squares and number of deDistortions may be viable
+       deDistortion*=(1.-((dstlpcc*9./16.)))*2.;
+       */
+       float superBoostedContinuation = pow(.5,continuumCore)*dstlpcc;//was sqrt(deDistortion)
+       if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation;//different solutions to sqrts squares and number of deDistortions may be viable//may be (and was before 1.-dstlpcc*9./16.) deDistortion**2 (or perhaps under circumstances just deDistortion?)
            //coords.yx*coords.yx*vec2(sign(coords.y),sign(coords.x))
        s/=pow(1./lpcc,superBoostedContinuation);
 
