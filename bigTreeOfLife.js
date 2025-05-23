@@ -252,7 +252,7 @@ hyperCore*=equilibriator;
 }
    
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
-if(continuumClover!=0)hyperCore+=.0/Math.log(.5);
+if(continuumClover!=0)hyperCore-=.0/Math.log(.5);
 let lpcc = pCenterCored.length();
    let lpcc2=lpcc*lpcc;
 //if(fieldPowerBoost)hyperCore+=1./Math.log(.5);
@@ -594,7 +594,10 @@ if(loops+counter<=hyperCoreBoosted+continuumCounter)
     if(dstlpcc<16./9.)
         deDistortion*=(1.-dstlpcc*9./16.)
     */
-    let superBoostedContinuation = Math.pow(.5,continuumCore)*Math.sqrt(dstlpcc*9./16.)*Math.sqrt(lpcc*3./4.)
+    let superBoostedContinuation = Math.pow(.5,continuumCore);//*deDistortion//*Math.sqrt(dstlpcc*9./16.)//*Math.sqrt(
+                                                                                                  //lpcc*3./4.
+                                                                        //)
+                                                                        ;
     if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation;
     
     s.divideScalar( Math.pow(1./lpcc,superBoostedContinuation));
