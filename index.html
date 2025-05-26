@@ -37,8 +37,8 @@
         let daysOfWeek = ["Sunday","Monday","Tuesday","Wednsday","Thursday","Friday","Saturday"]
         
         let textOut = document.getElementById("weeks");
-        let WeekOfJubilees =firstDayOfWeekOfTheYear+Math.floor(day/49)%7;
-  textOut.innerHTML +="First Day of Year: "+daysOfWeek[firstDayOfWeekOfTheYear] +"<br>Day of Jubilees: " + daysOfWeek[WeekOfJubilees] + "<br>Day of Weeks: " + daysOfWeek[(WeekOfJubilees+Math.floor((day-firstDayOfWeekOfTheYear)/7))%7] + "<br>Day of Week: " + daysOfWeek[now.getDay()];
+        let WeekOfJubilees =Math.floor(day/49)%7;
+  textOut.innerHTML +="Day of Jubilees: " + daysOfWeek[WeekOfJubilees] + "<br>Day of Weeks: " + daysOfWeek[(WeekOfJubilees+Math.floor((day)/7))%7] + "<br>Day of Week: " + daysOfWeek[now.getDay()];
            
 
         </script>
