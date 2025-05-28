@@ -27,18 +27,21 @@
         var start = new Date(now.getFullYear(), 0, 1);
         var diff = (now - start) + ((start.getTimezoneOffset() - now.getTimezoneOffset()) * 60 * 1000);
         var oneDay = 1000 * 60 * 60 * 24;
-        var day = Math.floor(diff / oneDay)+1;
-        
-        
         let firstDayOfWeekOfTheYear = start.getDay();
+
+        var offset = 0.;//exhibit days from today
+        var day = Math.floor(diff / oneDay)+offset;
+        
+        
         
         console.log('Day of year: ' + day);
+        firstDayOfWeekOfTheYear
         
         let daysOfWeek = ["Sunday","Monday","Tuesday","Wednsday","Thursday","Friday","Saturday"]
         
         let textOut = document.getElementById("weeks");
-        let WeekOfJubilees =Math.floor(day/49)%7;
-  textOut.innerHTML +="Day of Jubilees: " + daysOfWeek[WeekOfJubilees] + "<br>Day of Weeks: " + daysOfWeek[(WeekOfJubilees+Math.floor((day)/7))%7] + "<br>Day of Week: " + daysOfWeek[now.getDay()];
+        let WeekOfJubilees =Math.floor((day+firstDayOfWeekOfTheYear)/49)%7;
+  textOut.innerHTML +="Day of Jubilees: " + daysOfWeek[WeekOfJubilees] + "<br>Day of Weeks: " + daysOfWeek[(Math.floor((day+firstDayOfWeekOfTheYear)/7))%7] + "<br>Day of Week: " + daysOfWeek[(now.getDay()+offset+7*7*7*7)%7];
            
 
         </script>
