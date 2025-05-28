@@ -41,7 +41,7 @@
         
         let textOut = document.getElementById("weeks");
         let WeekOfJubilees =Math.floor((day+firstDayOfWeekOfTheYear)/49)%7;
-  textOut.innerHTML +="Day of Jubilees: " + daysOfWeek[WeekOfJubilees] + "<br>Day of Weeks: " + daysOfWeek[(Math.floor((day+firstDayOfWeekOfTheYear)/7))%7] + "<br>Day of Week: " + daysOfWeek[(now.getDay()+offset+7*7*7*7)%7];
+  textOut.innerHTML +="Day of Jubilees: " + daysOfWeek[WeekOfJubilees] + "<br>Day of Weeks: " + daysOfWeek[(Math.floor((day+firstDayOfWeekOfTheYear)/7))%7] + "<br>Day of Week: " + daysOfWeek[(now.getDay()+offset+7*7*7*7)%7];//PRODuction offset should be 0 (was 1?)
            
 
         </script>
