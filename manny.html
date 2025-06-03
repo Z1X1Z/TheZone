@@ -3348,7 +3348,7 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
 }
    
    if(multiplicatorNexus)hyperCore-=.5/log(.5);
-   if(continuumClover!=0)hyperCore-=.0/log(.5);
+   if(continuumClover!=0)hyperCore-=.33/log(.5);
    float lpcc=length(pCenterCored);
    float lpcc2=lpcc*lpcc;
 //if(fieldPowerBoost)hyperCore+=1./log(.5);
@@ -3792,19 +3792,20 @@ dstnce=length(s);
        {
        //   if(dstnce<twoThirds) s-=length(coords.yx)*correction;
        float dstlpcc = dstnce*lpcc;
+      // float dstADJUSTED = dstnce;
       /* float deDistortion = sqrt(dstlpcc)*sqrt(dstnce)*sqrt(lpcc) *lpcc2;
        if(dstlpcc<16./9.)
        deDistortion*=(1.-((dstlpcc*9./16.)));//*2.?:
        */
       //float deDistortion = sqrt(sqrt(dstlpcc*9./16.)*sqrt(dstnce*3./4.)*sqrt(3./4.*lpcc)*sqrt(1.-3./4.*lpcc));
-       float superBoostedContinuation = pow(.5,continuumCore)*dstlpcc//*dstlpcc
+       float superBoostedContinuation = pow(.5,continuumCore)
                                                                   
  // pow(
   //  sqrt(  dstlpcc*9./16.)//,2.)
   ;//*9./16.;//was sqrt(deDistortion)//why would dstnce*9/16 be right over 3/4? if so wouldn't 5/8 (10/16) be just slightly in recognition that really it should be 3*4 (12/16)? And yet 9/16s on the inner main spoke
        if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation;//different solutions to sqrts squares and number of deDistortions may be viable//may be (and was before 1.-dstlpcc*9./16.) deDistortion**2 (or perhaps under circumstances just deDistortion?)
            //coords.yx*coords.yx*vec2(sign(coords.y),sign(coords.x))
-       s/=pow(1./lpcc,superBoostedContinuation);
+       s/=pow(1./sqrt(dstlpcc),superBoostedContinuation);
 
       hyperCoreBoosted+=continuumCore;
        hyperCoreOUTPUT+=continuumCore;
