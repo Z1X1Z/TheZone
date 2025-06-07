@@ -49,7 +49,8 @@ uberDuper:{value:null},
         balloonsONexponential:{value: 0.},
         sparklesON:{value: false},
         SPHEREofTheLORD:{value: false},
-            
+cellularDivision: {value: 0 },//one is . two is mostly top center core level with norm,
+triogenesis:{value:false},
         clvrVariant1:{value: false},
         clvrVariant2:{value: false},
         clvrVariant3:{value: false},
@@ -476,6 +477,13 @@ window.key = " ";
                 
                 else if((key == "h"||key=="˙") && event.altKey&&event.ctrlKey)
                         uniforms.dynamicOvercore.value=!uniforms.dynamicOvercore.value;
+                
+                else if((key == "b"||key=="∫") && event.altKey&&event.ctrlKey)
+                        uniforms.cellularDivision.value=(uniforms.cellularDivision.value+1.)%3;
+                
+                
+                else if((key == "t"||key=="†") && event.altKey&&event.ctrlKey)
+                        uniforms.triogenesis.value=!uniforms.triogenesis.value;
                 
                     else if((key == "p"||key=="π") && event.altKey&&event.ctrlKey){
                         if          ( uniforms[ "colorCombo2" ].value >1)          uniforms[ "colorCombo2" ].value = -1;

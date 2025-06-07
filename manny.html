@@ -961,6 +961,17 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                    callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
                                Oppositional Flop?![,.o]</a><br>
                                
+                                  <input type="checkbox" id="trioGenesis" name="t"  onclick= "
+                                      key  = 't';
+                                      callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
+                                   <label for="trioGenesis">trioGenesis?![,.t]</label><br>
+                                 
+                                 
+                                 <a id="cellularDivision" name="t"  onclick= "
+                         key  = 'b';
+                         callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
+                                     Biogenesis?![.,b]</a><br>
+                                 
                                  </div>
           </button>
 
@@ -1788,6 +1799,9 @@ void main(){
 <script id="fragmentShader" type="x-shader/x-fragment">
     varying vec2 vUv;
     uniform float concertKeyTuning;
+    uniform int cellularDivision;
+    uniform bool triogenesis;
+
     uniform bool eyeSingle;
     uniform float coreDilation;
     uniform bool gates;
@@ -3123,7 +3137,18 @@ return vec3(l+b+r+h);}
                               const    float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;
 
 vec4 tol(vec2 p, vec2 t){
-    
+    if(triogenesis){
+    p.x-=.5;
+    p= vec2(p.x-sign(p.x)*.5,p.y);
+          p= vec2(p.x-sign(p.x+.5)*.5,p.y);
+            p.x+=.5;
+            }
+   //tricellular division core unstable
+               
+//p.x+=.5;
+          //p=//abs(
+          //      (vec2(p.x+sign(p.x)*.5,p.y));
+          
                          bool inMainSpoke = false;
                         vec2 resCale = (resolution.yx/max(resolution.x,resolution.y));
                      vec3 uber    = texture2D(uberDuper,(
@@ -3571,6 +3596,8 @@ dstnce = length(s);
    if(Refractelate&&dstnce>refractelC){s/=refractelC;} //refractelC/=4./3.;}
    if((counter==1.&&oppositionalCoreFlop==2)||oppositionalCoreFlop==1)s=spin2(s,PI);
 vec2 lastS = s;
+//if(mod(counter,2.)==1.&&colorCombo==0)s =abs(s);//supposed to make clover brighter and nothing else?;
+
 
    s=vec2(
         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
@@ -3666,6 +3693,8 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
 
    s.x=log(abs(s.x))/log(base);
    //traditionally be e or 3 probably 1.5 to 4
+   if(cellularDivision==1||(cellularDivision==2&&counter>1.))s=vec2(s.x,s.y-sign(s.y)/2.);
+
    dstnce = length(s);
 
 
@@ -3872,7 +3901,6 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
     )
     && 0.<=hyperCoreBoosted&&externalCores!=0.)
 {
-    
    float wise = 1.;
    /*
    if(whirlpool!=0.){
@@ -3886,7 +3914,6 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
 }
    */
    
-
 
     if(spinTowardsMe) if(float(i)>=hyperCoreBoosted)s=spin2(s,atan(d.y,d.x));
 
@@ -4030,7 +4057,6 @@ b =dstnce/4.;;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
 }
 else break;
 
- 
 hyperCoreBoosted--;
 hyperCoreOUTPUT--;
                              colorShift+=hyperCoreBoosted;

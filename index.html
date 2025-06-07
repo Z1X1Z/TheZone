@@ -49,8 +49,33 @@
 
         Welcome in The Name of the LORD.     <a href="stretchy.html">This is Manny,</a> short for Immanuel.  He appeared face (of God) first from the Mandelbrot fractal while I was developing this singing game.  This website comes with love from and for Jesus who came in the flesh and in the blood and in the spirit.  To play cleave with love to good and hate evil.  Please share this gem of a game paid for by Jesus Christ on the Cross with everyone in the spirit of the gospel: in truth and love and with much good cheer.
             </div>
+            <br>
+            <script>
+                var hashExtension=""
+
+                function loadStarshipWithHash(mee){
+                    if(document.getElementById("Genesis").checked){
+                    hashExtension +=',.t.,b';
+                    }
+                    else hashExtension=''
+                    //console.log(hashExtension)
+                    //window.location.hash =hashExtension;
+                    let hrefLocal = mee+"#"+hashExtension;
+                    window.location.href=hrefLocal;
+                  //  console.log(hrefLocal+" "+document.location.href)
+                }
+                
+            </script>
+            <input type="checkbox" id="Genesis"style="color:green" name="t"  onclick= "
+             
+
+">
+             <label for="Genesis">Biotriogenesis!</label><br>
+             
+           
+           
             <div id="centered">
-                <a class="onoffline2" href = "" name="manny.html">
+                <a class="onoffline2" name="manny.html" onclick="loadStarshipWithHash(this.name)">
                     <figure>
 
                 <div style="outline-style: double;  "  >
@@ -80,8 +105,12 @@
                 </figure>
             </div>
     
-   <li> <a class="onoffline2" href = "" "" name="manny.html#t">Touch Navigation Only</a></li>
-   <li> <a class="onoffline2" href = "" "" name="manny.html#t,t"> Touch with star</a></li>
+   <li> <a class="onoffline2" onclick=
+"hashExtension+='t'
+loadStarshipWithHash(this.name)"
+       name="manny.html">Touch Navigation Only</a></li>
+   <li> <a class="onoffline2" onclick="hashExtension+='t,t'
+loadStarshipWithHash(this.name)" name="manny.html"> Touch with star</a></li>
 <p>
  May not work on all browsers with some Androids indicated by a white or mostly black screen once loaded.  If so try a different browser like Firefox or Opera.  For a barebones starship that should work, try <a href="https://zonex.space/manny.html#YO">this.</a>
     <p><h2> <a href="keys.html">Hotkeys</a></p>
@@ -236,12 +265,12 @@ and they will reign on the earth.”<p></p></i></b>
         <p><a href="doubles.html">Resolving the Paradox</a></p>
         <p><a href="phenomena.html">Phenomena</a></p>
         
-        <p><a href="miscellaneous.html">Miscellaneous</a></p>
-        
+        <p><a href="thoughts.html">Assorted</a></p>
+
         Email me: z1x1z@protonmail.com<p></p>
-        
         <a href="ideas.html">e^2=emc^2=PVnRT=PVNkT</a><p></p>
         <a href="memorizer.html">Memorizer</a><p></p>
+        <a href="miscellaneous.html">Miscellaneous</a><p></p>
 
         <!--
         <a href="https://teespring.com/stores/zonex">
@@ -270,13 +299,14 @@ and they will reign on the earth.”<p></p></i></b>
             this.appendChild(s);
             }
     }
+    /*
 nf = document.querySelectorAll('.onoffline2');
     for(var c = 0; c<nf.length; c++)
         if(window.online)nf[c].href =
         //"https://zone-x.herokuapp.com/"+//this allows for a redirect, now that we have https instead of http we bypass it we don't need to do this!!
         nf[c].name;
         else nf[c].href =nf[c].name;
-
+*/
 </script>
 
 
