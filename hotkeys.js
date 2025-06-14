@@ -51,6 +51,9 @@ uberDuper:{value:null},
         SPHEREofTheLORD:{value: false},
 cellularDivision: {value: 0 },//one is . two is mostly top center core level with norm,
 triogenesis:{value:false},
+squareGenesis:{value:false},
+nGenesis:{value:0},
+
         clvrVariant1:{value: false},
         clvrVariant2:{value: false},
         clvrVariant3:{value: false},
@@ -471,6 +474,11 @@ window.key = " ";
                     window.guitarMODE=!window.guitarMODE;
                 else if((key == "r"||key=="®") && event.altKey&&event.ctrlKey)
                     window.stylusON=!window.stylusON;
+                else if((key == "p"||key=="π") && event.altKey&&event.ctrlKey)
+                    uniforms.squareGenesis.value=!uniforms.squareGenesis.value;
+                
+                
+                
                 
             else if((key == "o"||key=="ø") && event.altKey&&event.ctrlKey)
                 uniforms.oppositionalCoreFlop.value=(uniforms.oppositionalCoreFlop.value+1)%3;
@@ -483,8 +491,13 @@ window.key = " ";
                 
                 
                 else if((key == "t"||key=="†") && event.altKey&&event.ctrlKey)
-                        uniforms.triogenesis.value=!uniforms.triogenesis.value;
-                
+                {
+                    
+                    if(number!="no number")
+                        uniforms.nGenesis.value=number;
+                    else if(uniforms.nGenesis.value==0) uniforms.nGenesis.value=3;
+                    else if(uniforms.nGenesis.value==3) uniforms.nGenesis.value=0;
+                }
                     else if((key == "p"||key=="π") && event.altKey&&event.ctrlKey){
                         if          ( uniforms[ "colorCombo2" ].value >1)          uniforms[ "colorCombo2" ].value = -1;
                         else uniforms[ "colorCombo2" ].value = -(Math.abs(uniforms[ "colorCombo2" ].value-1))%17;

@@ -753,7 +753,15 @@ radialWarp=b;
         <div class="dropdown">
           <button class="dropbtn">Clvr
           <div  id="m3" class="dropdown-content">
-
+              <label for="Ngenesis">Ngenesis:[,.t]</label>
+             <input type="number" id="Ngenesis" name="Ngenesis" class="num" onkeyup="
+                  number = 'no number'
+  ;
+  uniforms.nGenesis.value=document.getElementById('Ngenesis').value
+  
+  ">
+  
+  
               <input type="checkbox"  id="Variant0" name="t"  onclick= "
                   key  = '0';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
@@ -961,16 +969,21 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                    callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
                                Oppositional Flop?![,.o]</a><br>
                                
-                                  <input type="checkbox" id="trioGenesis" name="t"  onclick= "
-                                      key  = 't';
-                                      callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
-                                   <label for="trioGenesis">trioGenesis?![,.t]</label><br>
-                                 
+                               
+                               
+                               
+                                      <input type="checkbox" id="squareTrioGenesisMeta" name="t"  onclick= "
+                         key  = 'p';
+                         callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
+                                       <label for="squareTrioGenesisMeta">nonaGenesisMeta?![,.p]</label><br>
+                                     
+
                                  
                                  <a id="cellularDivision" name="t"  onclick= "
                          key  = 'b';
                          callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
                                      Biogenesis?![.,b]</a><br>
+                                 
                                  
                                  </div>
           </button>
@@ -1798,10 +1811,14 @@ void main(){
         </script>
 <script id="fragmentShader" type="x-shader/x-fragment">
     varying vec2 vUv;
+    
+    
     uniform float concertKeyTuning;
     uniform int cellularDivision;
     uniform bool triogenesis;
-
+    
+    uniform bool squareGenesis;
+    uniform int nGenesis;
     uniform bool eyeSingle;
     uniform float coreDilation;
     uniform bool gates;
@@ -3137,12 +3154,17 @@ return vec3(l+b+r+h);}
                               const    float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;
 
 vec4 tol(vec2 p, vec2 t){
-    if(triogenesis){
-    p.x-=.5;
-    p= vec2(p.x-sign(p.x)*.5,p.y);
-          p= vec2(p.x-sign(p.x+.5)*.5,p.y);
-            p.x+=.5;
+    
+    
+        for(float x=2.; x<float(nGenesis+2);x+=1.)
+        {
+        float regenerativeshift = 1./x;
+    p.x-=regenerativeshift;
+    p= vec2(p.x-sign(p.x)*regenerativeshift,p.y);
+          p= vec2(p.x-sign(p.x+regenerativeshift)*regenerativeshift,p.y);
+            p.x+=regenerativeshift;
             }
+           
    //tricellular division core unstable
                
 //p.x+=.5;
@@ -3693,7 +3715,29 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
 
    s.x=log(abs(s.x))/log(base);
    //traditionally be e or 3 probably 1.5 to 4
-   if(cellularDivision==1||(cellularDivision==2&&counter>1.))s=vec2(s.x,s.y-sign(s.y)/2.);
+   if(cellularDivision==1||(cellularDivision==2&&counter>1.))      s=vec2(s.x,s.y-sign(s.y)/2.);
+
+   if(squareGenesis){
+
+       float regenerativeLayers = 3.;
+           for(float x=2.; x<3.;x+=1.)
+           {
+           float regenerativeshift = 1./x;
+       s.x-=regenerativeshift;
+       s= vec2(s.x-sign(s.x)*regenerativeshift,s.y);
+             s= vec2(s.x-sign(s.x+regenerativeshift)*regenerativeshift,s.y);
+               s.x+=regenerativeshift;
+               }
+           for(float x=2.; x<regenerativeLayers;x+=1.)
+           {
+           float regenerativeshift = 1./x;
+       s.y-=regenerativeshift;
+       s= vec2(s.x,s.y-sign(s.y)*regenerativeshift);
+             s= vec2(s.x,s.y-sign(s.y+regenerativeshift)*regenerativeshift);
+               s.y+=regenerativeshift;
+               }
+              
+       }
 
    dstnce = length(s);
 
