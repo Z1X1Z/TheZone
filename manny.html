@@ -3156,7 +3156,9 @@ return vec3(l+b+r+h);}
 vec4 tol(vec2 p, vec2 t){
     
     
-        for(float x=2.; x<float(nGenesis+2);x+=1.)
+        for(float x=2.; x<100.;x+=1.)
+        {
+            if (float(nGenesis)+2.>x)
         {
         float regenerativeshift = 1./x;
     p.x-=regenerativeshift;
@@ -3164,6 +3166,8 @@ vec4 tol(vec2 p, vec2 t){
           p= vec2(p.x-sign(p.x+regenerativeshift)*regenerativeshift,p.y);
             p.x+=regenerativeshift;
             }
+        else break;
+        }
            
    //tricellular division core unstable
                

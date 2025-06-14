@@ -495,8 +495,8 @@ window.key = " ";
                     
                     if(number!="no number")
                         uniforms.nGenesis.value=number;
-                    else if(uniforms.nGenesis.value==0) uniforms.nGenesis.value=3;
-                    else if(uniforms.nGenesis.value==3) uniforms.nGenesis.value=0;
+                    else if(uniforms.nGenesis.value==0) uniforms.nGenesis.value=1;
+                    else if(uniforms.nGenesis.value==1) uniforms.nGenesis.value=0;
                 }
                     else if((key == "p"||key=="π") && event.altKey&&event.ctrlKey){
                         if          ( uniforms[ "colorCombo2" ].value >1)          uniforms[ "colorCombo2" ].value = -1;
