@@ -759,7 +759,7 @@ radialWarp=b;
   ;
   uniforms.nGenesis.value=document.getElementById('Ngenesis').value
   
-  ">
+  "><br>
   
   
               <input type="checkbox"  id="Variant0" name="t"  onclick= "
@@ -3155,8 +3155,9 @@ return vec3(l+b+r+h);}
 
 vec4 tol(vec2 p, vec2 t){
     
+  //  p+=vec2(-sign(p.x),-sign(p.y));//two by two division;
     
-        for(float x=2.; x<100.;x+=1.)
+        for(float x=2.; x<102.;x+=1.)
         {
             if (float(nGenesis)+2.>x)
         {
