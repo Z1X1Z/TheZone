@@ -22,6 +22,7 @@ fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:44100./1024.},
     
 zoomOutRatchetThreshold:{value:0.},
 eyeSingle:{value:true},
+constellation:{value:false},
 radialWarp:{value:1.},
 pixelSTARon:{value:false},
 icicle:{value:true},
@@ -37,6 +38,7 @@ micIn:{value:null},
 videoTexture:{value:null},
 videoTexture2:{value:null},
 coreTextureSampler:{value:null},
+constellationDynamic:{value:null},
 STAR:{value:null},
 EDEN:{value:null},
 uberDuper:{value:null},
@@ -115,7 +117,8 @@ colorCombo2: {value: -1 },
 
 
         resolution: {value:[window.innerWidth,window.innerHeight]},//these are later resolved to the THREE.vec2() uniforms
-        coords: {value: [0.,0.]},//to prevent dividing by zero may be set to small value
+coords: {value: [0.,0.]},//to prevent dividing by zero may be set to small value
+constellationCoord: {value: [0.,0.]},//to prevent dividing by zero may be set to small value
         coordSHIFT: {value: [0.,0.]},
         d: {value:[.4,.7]},
 dotCoord:{value:[0.,0.]},
@@ -292,6 +295,11 @@ function resetAll(){
                                          
                        window.coreData = new Float32Array(40).fill(1./-leaf);
                        window.omniData = new Float32Array(40).fill(0.);
+                                         window.constellationData = new Float32Array(200).fill(.0);
+                                         window.cloverConstellation=Array(100)
+                                         if(window.INITIALIZED)
+                                         for(var b = 0; b<cloverConstellation.length; b++)cloverConstellation[b]=new THREE.Vector2(0.,0.);
+
                                          
                                              if (   window.iOS )window.rez=window.devicePixelRatio/4.;
                                                else if(window.android)window.rez=window.devicePixelRatio/5.;
@@ -474,6 +482,11 @@ window.key = " ";
                     window.guitarMODE=!window.guitarMODE;
                 else if((key == "r"||key=="®") && event.altKey&&event.ctrlKey)
                     window.stylusON=!window.stylusON;
+                else if((key == "c"||key=="ç") && event.altKey&&event.ctrlKey)
+                {
+                    uniforms.constellation.value=!uniforms.constellation.value;
+           
+                }
                 else if((key == "p"||key=="π") && event.altKey&&event.ctrlKey)
                     uniforms.squareGenesis.value=!uniforms.squareGenesis.value;
                 

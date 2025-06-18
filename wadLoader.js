@@ -58,6 +58,7 @@ let noteGuitarStyleStretchCOMBOString ="8,13,18,23,27,32";
 let noteGuitarStyleStretchCOMBO = noteGuitarStyleStretchCOMBOString.split(",");
 let SonicTouchGuitarArray  = Array(maxTouchSoundCount);
 for(var ff=0;ff<SonicTouchGuitarArray.length;ff++)SonicTouchGuitarArray[ff]=Object.assign({},SonicTouchGuitarObject)
+let id = 0;
 function guitarGRAB(e){
     
 
@@ -65,7 +66,7 @@ function guitarGRAB(e){
         //widthPX=window.innerWidth-correlationForTextX
         
     noteGuitarStyleStretchCOMBO =document.getElementById("strings").value.split(" ");
-    let id = touchNumber.get(pressIndex.get(e.pointerId));
+     id = touchNumber.get(pressIndex.get(e.pointerId));
        let sGAObject = SonicTouchGuitarArray[id];
             
         let y = e.clientY-heightPX/2.;
@@ -102,6 +103,8 @@ else    string = (e.clientX/window.innerWidth)*(noteGuitarStyleStretchCOMBO.leng
 
     function startGuitar(e){h
        let sGAObject= guitarGRAB(e)
+        if(uniforms.constellation.value)grabConstellation(screenPressCoordX[id],screenPressCoordY[id])
+
         if(
             (window.touchMode&&!window.muteTouchTouchVolume)
        ||(!window.touchMode&&!window.muteVoiceTouchVolume)
@@ -122,7 +125,7 @@ else    string = (e.clientX/window.innerWidth)*(noteGuitarStyleStretchCOMBO.leng
 
     function followGuitar(e){
         let sGAObject= guitarGRAB(e)
-        
+        if(uniforms.constellation.value)followConstellation(screenPressCoordX[id],screenPressCoordY[id])
         sGAObject.sound.setPitch(sGAObject.frequency1);
         sGAObject.sound2.setPitch(sGAObject.frequency2);
         
@@ -330,9 +333,10 @@ function startSound(e){
     
     let y = e.clientY-heightPX/2.;
     let x = e.clientX- widthPX/2.;
+    if(uniforms.constellation.value)grabConstellation(x,y);
     if(window.touchMode)window.pointerZoom=true
         
-    let id = touchNumber.get(pressIndex.get(e.pointerId));
+     id = touchNumber.get(pressIndex.get(e.pointerId));
     
     screenPressCoordX[id]=x;
     screenPressCoordY[id]=y;
@@ -538,7 +542,8 @@ function startSound(e){
 function followSound(e, SonicTouchArrayK){
             let y = e.clientY-heightPX/2.;
             let x = e.clientX-widthPX/2.;
-        let id = touchNumber.get(pressIndex.get(e.pointerId));
+        if(uniforms.constellation.value)followConstellation(x,y)
+         id = touchNumber.get(pressIndex.get(e.pointerId));
         screenPressCoordX[id]=x;
             screenPressCoordY[id]=y;
         
@@ -892,6 +897,51 @@ let c = document.body;//document.getElementById("container")
         else pressure = event.pressure;
     }
                                              let cycler = 0;
+                          
+                                                                              var selectedConstellation=0;
+
+                function  grabConstellation(x,y){
+                                          var min = 100000.;
+                                          //cloverConstellation[1]=new THREE.Vector2(0,.5)
+                                          //cloverConstellation[2]=new THREE.Vector2(0,-.5)
+                                          for(var m=0;m<cloverConstellation.length;m++)
+                                          {
+                                              let proximity = Math.sqrt((x/minimumDimension-cloverConstellation[m].x)**2.+(y/minimumDimension-cloverConstellation[m].y)**2.)
+                                              if(proximity<min){min=proximity; selectedConstellation=m;}
+                                          }
+                                          console.log("caught constellation "+selectedConstellation)
+                                          let f = 0;
+                                          if (selectedConstellation==0)while((cloverConstellation[f].x!=0&&cloverConstellation[f].y!=0||selectedConstellation==0)&&f<cloverConstellation.length-1)
+                                          {
+                                              f++
+                                              console.log(f)
+
+                                              selectedConstellation=f;
+                                          }
+                                          console.log(selectedConstellation)
+
+                }
+                                                                              function followConstellation(x,y){
+                                          
+                //if(selectedConstellation!=0&&Math.sqrt((x/minDimension)**2+(y/minDimension)**2)<2./3.)
+                    {
+                        cloverConstellation[selectedConstellation].x=x*1./minimumDimension;
+                        cloverConstellation[selectedConstellation].y=y*1./minimumDimension;
+                    }
+                                        //  console.log(constellationData)
+
+                                        //  console.log(cloverConstellation[1])
+                                      }
+                                                                              function loadConstellationData()
+                                                                              {
+                                          for (var v=0;v<cloverConstellation.length-1;v++)
+                                          {
+                                              constellationData[v]=cloverConstellation[v].x;
+                                              
+                                              constellationData[(constellationData.length/2.)+v]=cloverConstellation[v].y;
+                                          }
+                                         // console.log(constellationData)
+                                      }
  function attachListeners(){
             c.addEventListener('pointerdown', function(e)
                                {

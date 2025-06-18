@@ -767,7 +767,8 @@ function setFFTdependantSizes(){
                             function setVectors(){
              uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
 uniforms.resolution.value = new THREE.Vector2(window.innerWidth,window.innerHeight);
-uniforms.coords.value = new THREE.Vector2(0.,0.);
+             uniforms.coords.value = new THREE.Vector2(0.,0.);
+             uniforms.constellationCoord.value = new THREE.Vector2(0.,0.);
 uniforms.d.value = new THREE.Vector2(0.,1./10000.);
 uniforms.dotCoord.value = new THREE.Vector2(0.,0.);
   
@@ -775,6 +776,9 @@ uniforms.dotCoord.value = new THREE.Vector2(0.,0.);
 
          }
 function init() {
+             
+             for(var m=0;m<cloverConstellation.length;m++)cloverConstellation[m]=new THREE.Vector2(0.,0.)
+                 
              colorSound = new THREE.Color();
                   colorSoundPURE =     new THREE.Color();
 
@@ -1028,6 +1032,16 @@ function setDynamicSampler2ds(){
      coreTexture.needsUpdate=true;
      uniforms.coreTextureSampler.value=coreTexture;
      uniforms.coreTextureSampler.needsUpdate = true;
+             
+             
+             loadConstellationData();//defined in wad, transfers from Vector2 to array
+             let constellationTexture = new THREE.DataTexture( window.constellationData, 100, 2,THREE.RedFormat,THREE.FloatType);
+            // console.log(constellationTexture)
+             constellationTexture.unpackAlignment=1
+             constellationTexture.needsUpdate=true;
+             uniforms.constellationDynamic.value=constellationTexture;
+             uniforms.constellationDynamic.needsUpdate = true;
+            // console.log(uniforms.constellationDynamic)
  }
 function setMicInputToStarPIXEL(){
              if(!touchMode//&&!DAW
@@ -1636,10 +1650,10 @@ function runOSMD (){
 
                                   uniforms[ "zoom" ].value = zoom;
                                        uniforms.coords.value = new THREE.Vector2(coordX,coordY);
-                                    
+                                    constellationCoordFind();
                         uniforms.STAR.value=null;
                         uniforms.EDEN.value=null;
-                                                             
+                   freezeTop();
                                                                          renderer.setRenderTarget (null)
                                                                          renderer.render( shaderScene, camera );
                                                                      
@@ -2128,6 +2142,8 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
     
    if( !window.touchMode//&&!DAW
       ) uniforms.coords.value = new THREE.Vector2( coordX,coordY);
+    constellationCoordFind();
+    
    if (EldersLeg>=0//&&!DAW
        ){
 
@@ -3238,9 +3254,30 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
 }
 
 
-
-                                  
-                                  
+//if(cellularDivision)
+                                     /*
+                                                       uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.coords.value.x)
+                                                              
+                uniforms.coords.value= new THREE.Vector2( uniforms.coords.value.x+-Math.sign(uniforms.coords.value.x)*.5,uniforms.coords.value.y)//;.multiplyScalar(3./2.);
+                                                       
+                                                       uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.coords.value.x)
+                                                              
+                                           */
+                                                       /*
+                                                uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.coords.value.x)
+                                                       
+                                                       uniforms.coords.value.x-=.5;
+                                                       
+           uniforms.coords.value=                  new THREE.Vector2  ( uniforms.coords.value.x-Math.sign( uniforms.coords.value.x)*.5, uniforms.coords.value.y);
+                                                     
+           uniforms.coords.value=//abs(
+           new THREE.Vector2       ( uniforms.coords.value.x-Math.sign( uniforms.coords.value.x+.5)*.5, uniforms.coords.value.y);
+                                                       uniforms.coords.value.x+=.5;
+                                        uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.coords.value.x)
+                                           */
+   
+                                     freezeTop();
+                                                       
    if(window.starClover)
                      {
                 renderer.setRenderTarget (renderTarget)
@@ -3482,7 +3519,40 @@ for(var n = 0; n<targets.length;n++){
                                                        let iOS = iOSCHECK();
                     let animateLoopId;
                     
+                                                       
+                                                       
+                                                       function freezeTop(){
+                                                         if(uniforms.constellation.value){zoom=1;uniforms.zoom.value=1;uniforms.coords.value.x = 0;uniforms.coords.value.y = 0;coordX=0;coordY=0}
+                                                     }
+function constellationCoordFind(){
+var min = 100000.;
+//cloverConstellation[1]=new THREE.Vector2(0,.5)
+//cloverConstellation[2]=new THREE.Vector2(0,-.5)
 
+                                                         var bestFit=0;
+for(var m=0;m<cloverConstellation.length;m++)
+{
+    let proximity = Math.sqrt((uniforms.coords.value.x-cloverConstellation[m].x)**2.+(uniforms.coords.value.y-cloverConstellation[m].y)**2.)
+    if(proximity<min&&isFinite(proximity)){min=proximity; bestFit=m;}
+}
+         uniforms.constellationCoord.value=cloverConstellation[bestFit].multiplyScalar(2);
+                                                         
+                                                         
+uniforms.constellationCoord.value=new THREE.Vector2( uniforms.constellationCoord.value.x+coordX- uniforms.constellationCoord.value.x,  uniforms.constellationCoord.value.y+coordY- uniforms.constellationCoord.value.y);
+                                                       
+                                                         
+/*
+if(uniforms.coords.value.y<-.5)
+{uniforms.constellationCoord.value.y=uniforms.coords.value.y+1.;
+    console.log("constallationCoord set")
+}
+ */
+                                                     }
+                                                       
+                                                       
+                                                       
+                                                       
+                                                       
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
 function calculatePitch ()

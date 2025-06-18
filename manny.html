@@ -992,7 +992,13 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                <div class="dropdown">
                                  <button class="dropbtn">Clvr2
                                  <div  id="m4" class="dropdown-content">
-                                     
+                                     <input type="checkbox" id="stellarNursery" name="t"  onclick= "
+                                         key  = 'c';
+                                         callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
+                                      <label for="stellarNursery">Stellar Nursery![,.c]</label><br>
+                                      
+                                      
+                                      
                                       <input type="checkbox" id="squareClover" name="t"  onclick= "
                                           key  = 'q';
                                           callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
@@ -1820,6 +1826,7 @@ void main(){
     uniform bool squareGenesis;
     uniform int nGenesis;
     uniform bool eyeSingle;
+    uniform bool constellation;
     uniform float coreDilation;
     uniform bool gates;
     uniform int armsSpinning;
@@ -1861,6 +1868,8 @@ void main(){
     uniform sampler2D EDEN;
     uniform sampler2D coreTextureSampler;
     uniform sampler2D omniDynamic;
+    uniform sampler2D constellationDynamic;
+    
     uniform sampler2D uberDuper;
 
     uniform int eden;
@@ -1907,6 +1916,7 @@ void main(){
     uniform bool Inherited;
     uniform bool spokesVisualizeColors;
     uniform vec2 coords;
+    uniform vec2 constellationCoord;
     uniform int starOnDot;
     uniform vec2 dotCoord;
     uniform vec2 d;
@@ -3156,7 +3166,62 @@ return vec3(l+b+r+h);}
 vec4 tol(vec2 p, vec2 t){
     
   //  p+=vec2(-sign(p.x),-sign(p.y));//two by two division;
+    bool originalClover = true;
+    //if(constellation)
+    for(float cd = 100.;cd>=1.;cd--)
+    {
+    float y =texture2D(constellationDynamic,vec2(cd/100.,0.)).x;//thought the y argument would be 0, seems to be 1
+    float x =texture2D(constellationDynamic,vec2(cd/100.,.5)).x;
+
+   if(originalClover&&(x!=0.||y!=0.))
+   {
+    p=spin2(p,atan(y,x));
+     float farness=length(vec2(x,y));
+     vec2 newClovers = p;
+     if(p.x>0.)newClovers=vec2(p.x-sign(p.x)*farness,p.y);
+
+     if(length(p)<twoThirds)
+       p -= vec2(farness,0.);
+if(length(newClovers)<twoThirds)
+{
+       if(p.x>0.)originalClover=false;
+       p = newClovers;
+}
+   if(originalClover)  p=spin2(p,-atan(y,x));
+   }
+    }
+
+    /*centered and divides right
+     if(originalClover)
+     {
+     float farness=length(vec2(x,y));
+       p -= vec2(farness,0.);
+   p = (vec2(p.x-sign(p.x)*farness,p.y));
+     }
+     */
     
+    /*fully functional?
+     if(originalClover)
+     {
+    //   if(x!=0.&&y!=0.)  p=spin2(p,atan(y,x));
+    if(x!=0.&&y!=0.)  p=spin2(p,atan(y,x));
+
+       float farness=length(vec2(x,y));
+         p -= vec2(farness,0.);
+         if(p.x>0.&&p.y>0.)originalClover=false;
+
+     p = (vec2(p.x-sign(p.x)*farness,p.y));
+
+     if(x!=0.&&y!=0.)  p=spin2(p,-atan(y,x));
+
+    // if(p.x<x&&p.y<y)originalClover=false;
+
+   //  p += vec2(farness,0.);
+
+    // if(x!=0.&&y!=0.&&originalClover)  p=spin2(p,-atan(y,x));
+
+     }
+     */
         for(float x=2.; x<102.;x+=1.)
         {
             if (float(nGenesis)+2.>x)
@@ -3223,7 +3288,7 @@ vec4 tol(vec2 p, vec2 t){
 
 vec2 colorAccumulator =vec2(1.);
 vec3 heartColors = vec3(0.);
-float lfc = length(freed(coords));
+float lfc = length(freed(constellationCoord));
 
    
    
@@ -4982,7 +5047,7 @@ vec2 backGround=p;
 
 if (colorCombo!=20)backGround=freed(backGround*zoom+spunC);
 
-float lfc=length(freed(coords));
+float lfc=length(freed(constellationCoord));
 
 if(whirlpool!=0.) backGround=spin2(backGround,whirlpool*length(backGround)*.75/6.*PI/abs(zoom-lfc));
 
