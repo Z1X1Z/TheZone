@@ -3533,17 +3533,11 @@ var min = 100000.;
 for(var m=0;m<cloverConstellation.length;m++)
 {
     let proximity = Math.sqrt((cloverConstellation[m].x+uniforms.coords.value.x)**2.+(cloverConstellation[m].y-uniforms.coords.value.y)**2.)
-    if(m<3)console.log(m+" m prox"+proximity)
     if(proximity<min&&isFinite(proximity)){min=proximity; bestFit=m;}
 }
-                                                   //      console.log("bf "+bestFit)
-                                                         console.log("center of clover1 "+cloverConstellation[bestFit].y)
-
+                                                   
          uniforms.constellationCoord.value=cloverConstellation[bestFit].clone()//.multiplyScalar(2);
-                                                         console.log("positionx "+coordX)
-                                                         
-                                                                                                         console.log("positionY "+coordY)
-                                                                     console.log("center of clover2 "+uniforms.constellationCoord.value.y)
+                                                      
 
                                                          
 uniforms.constellationCoord.value=new THREE.Vector2( -coordX- uniforms.constellationCoord.value.x,coordY- uniforms.constellationCoord.value.y);

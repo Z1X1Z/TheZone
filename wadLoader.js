@@ -909,28 +909,33 @@ var scaleCorrection = 3.5;
                                               let proximity = Math.sqrt((x/minimumDimension*scaleCorrection-cloverConstellation[m].x)**2.+(y/minimumDimension*scaleCorrection-cloverConstellation[m].y)**2.)
                                               if(proximity<min){min=proximity; selectedConstellation=m;}
                                           }
-                                          console.log("caught constellation "+selectedConstellation)
                                           let f = 0;
                                           if (selectedConstellation==0)while((cloverConstellation[f].x!=0&&cloverConstellation[f].y!=0||selectedConstellation==0)&&f<cloverConstellation.length-1)
                                           {
                                               f++
-                                              console.log(f)
 
                                               selectedConstellation=f;
                                           }
-                                          console.log(selectedConstellation)
 
                 }
+                                                                              let cloverDistanceFromMiddle = 1;
                                                                               function followConstellation(x,y){
                                           
-                //if(selectedConstellation!=0&&Math.sqrt((x/minDimension)**2+(y/minDimension)**2)<2./3.)
                     {
                         cloverConstellation[selectedConstellation].x=x*1./minimumDimension*scaleCorrection;
                         cloverConstellation[selectedConstellation].y=y*1./minimumDimension*scaleCorrection;
+                        
+                        cloverDistanceFromMiddle =  (cloverConstellation[selectedConstellation].x**2+ cloverConstellation[selectedConstellation].y**2)**.5
                     }
-                                        //  console.log(constellationData)
-
-                                        //  console.log(cloverConstellation[1])
+                                      
+                                      }
+                                                                              function setConstellation(){
+                                          if(cloverDistanceFromMiddle<1./3.)
+                                          {
+                                              cloverConstellation[selectedConstellation].x=0;
+                                              cloverConstellation[selectedConstellation].y=0;
+                                          }
+                                          cloverDistanceFromMiddle=1;
                                       }
                                                                               function loadConstellationData()
                                                                               {
@@ -940,7 +945,7 @@ var scaleCorrection = 3.5;
                                               
                                               constellationData[(constellationData.length/2.)+v]=cloverConstellation[v].y;
                                           }
-                                         // console.log(constellationData)
+
                                       }
  function attachListeners(){
             c.addEventListener('pointerdown', function(e)
@@ -997,6 +1002,7 @@ var scaleCorrection = 3.5;
                     screenPressCoordY[tn]=0;
                     
                     disengageDAWpetal(tn);
+                    setConstellation();
                     stopSounds(SonicTouchArray[tn])
                     stopGuitar(SonicTouchGuitarArray[tn])
 
@@ -1013,7 +1019,7 @@ var scaleCorrection = 3.5;
                 let tn = touchNumber.get(pressIndex.get(e.pointerId));
                 if(typeof tn == "number" ){
                     disengageDAWpetal(tn);
-
+                    setConstellation();
 
                         screenPressCoordX[tn]=0;
                         screenPressCoordY[tn]=0;
@@ -1032,7 +1038,7 @@ var scaleCorrection = 3.5;
                 let tn = touchNumber.get(pressIndex.get(e.pointerId));
                 if(typeof tn == "number"){
                    disengageDAWpetal(tn);
-
+                    setConstellation();
                        screenPressCoordX[tn]=0;
                         screenPressCoordY[tn]=0;
                     stopSounds(SonicTouchArray[tn])
