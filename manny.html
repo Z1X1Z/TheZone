@@ -3199,7 +3199,6 @@ return vec3(l+b+r+h);}
 vec4 tol(vec2 p, vec2 t){
     
   //  p+=vec2(-sign(p.x),-sign(p.y));//two by two division;
-p=starBirth(p);
 
     /*centered and divides right
      if(originalClover)
@@ -3244,7 +3243,8 @@ p=starBirth(p);
             }
         else break;
         }
-           
+        p=starBirth(p);
+
    //tricellular division core unstable
                
 //p.x+=.5;
@@ -3818,6 +3818,7 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
                }
               
        }
+   s=starBirth(s);
 
    dstnce = length(s);
 
