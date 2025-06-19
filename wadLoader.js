@@ -935,7 +935,6 @@ var scaleCorrection = 3.5;
                                               cloverConstellation.splice(selectedConstellation, 1)
                                               cloverConstellation.push(new THREE.Vector2(0.,0.));
                                           }
-                                          console.log(cloverConstellation)
                                           cloverDistanceFromMiddle=1;
                                       }
                                                                               function loadConstellationData()
