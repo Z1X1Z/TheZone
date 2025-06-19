@@ -899,14 +899,14 @@ let c = document.body;//document.getElementById("container")
                                              let cycler = 0;
                           
                                                                               var selectedConstellation=0;
-
+var scaleCorrection = 3.5;
                 function  grabConstellation(x,y){
                                           var min = 100000.;
                                           //cloverConstellation[1]=new THREE.Vector2(0,.5)
                                           //cloverConstellation[2]=new THREE.Vector2(0,-.5)
                                           for(var m=0;m<cloverConstellation.length;m++)
                                           {
-                                              let proximity = Math.sqrt((x/minimumDimension-cloverConstellation[m].x)**2.+(y/minimumDimension-cloverConstellation[m].y)**2.)
+                                              let proximity = Math.sqrt((x/minimumDimension*scaleCorrection-cloverConstellation[m].x)**2.+(y/minimumDimension*scaleCorrection-cloverConstellation[m].y)**2.)
                                               if(proximity<min){min=proximity; selectedConstellation=m;}
                                           }
                                           console.log("caught constellation "+selectedConstellation)
@@ -925,8 +925,8 @@ let c = document.body;//document.getElementById("container")
                                           
                 //if(selectedConstellation!=0&&Math.sqrt((x/minDimension)**2+(y/minDimension)**2)<2./3.)
                     {
-                        cloverConstellation[selectedConstellation].x=x*1./minimumDimension;
-                        cloverConstellation[selectedConstellation].y=y*1./minimumDimension;
+                        cloverConstellation[selectedConstellation].x=x*1./minimumDimension*scaleCorrection;
+                        cloverConstellation[selectedConstellation].y=y*1./minimumDimension*scaleCorrection;
                     }
                                         //  console.log(constellationData)
 

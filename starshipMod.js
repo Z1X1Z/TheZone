@@ -3527,18 +3527,26 @@ for(var n = 0; n<targets.length;n++){
 function constellationCoordFind(){
 var min = 100000.;
 //cloverConstellation[1]=new THREE.Vector2(0,.5)
-//cloverConstellation[2]=new THREE.Vector2(0,-.5)
+//cloverConstellation[2]=new THREE.Vector2(.5,0.)
 
                                                          var bestFit=0;
 for(var m=0;m<cloverConstellation.length;m++)
 {
-    let proximity = Math.sqrt((uniforms.coords.value.x-cloverConstellation[m].x)**2.+(uniforms.coords.value.y-cloverConstellation[m].y)**2.)
+    let proximity = Math.sqrt((cloverConstellation[m].x+uniforms.coords.value.x)**2.+(cloverConstellation[m].y-uniforms.coords.value.y)**2.)
+    if(m<3)console.log(m+" m prox"+proximity)
     if(proximity<min&&isFinite(proximity)){min=proximity; bestFit=m;}
 }
-         uniforms.constellationCoord.value=cloverConstellation[bestFit].multiplyScalar(2);
+                                                   //      console.log("bf "+bestFit)
+                                                         console.log("center of clover1 "+cloverConstellation[bestFit].y)
+
+         uniforms.constellationCoord.value=cloverConstellation[bestFit].clone()//.multiplyScalar(2);
+                                                         console.log("positionx "+coordX)
                                                          
+                                                                                                         console.log("positionY "+coordY)
+                                                                     console.log("center of clover2 "+uniforms.constellationCoord.value.y)
+
                                                          
-uniforms.constellationCoord.value=new THREE.Vector2( uniforms.constellationCoord.value.x+coordX- uniforms.constellationCoord.value.x,  uniforms.constellationCoord.value.y+coordY- uniforms.constellationCoord.value.y);
+uniforms.constellationCoord.value=new THREE.Vector2( -coordX- uniforms.constellationCoord.value.x,coordY- uniforms.constellationCoord.value.y);
                                                        
                                                          
 /*
