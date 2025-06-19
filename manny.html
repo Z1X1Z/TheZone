@@ -3180,11 +3180,11 @@ vec4 tol(vec2 p, vec2 t){
      vec2 newClovers = p;
      if(p.x>0.)newClovers=vec2(p.x-sign(p.x)*farness,p.y);
 
-     if(length(p)<twoThirds)
-       p -= vec2(farness,0.);
+    // if(length(p)<twoThirds)
+    //   p -= vec2(farness,0.);
 if(length(newClovers)<twoThirds)
 {
-       if(p.x>0.)originalClover=false;
+       if(newClovers.x>0.)originalClover=false;
        p = newClovers;
 }
    if(originalClover)  p=spin2(p,-atan(y,x));
