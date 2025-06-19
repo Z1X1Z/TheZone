@@ -939,7 +939,7 @@ var scaleCorrection = 3.5;
                                       }
                                                                               function loadConstellationData()
                                                                               {
-                                          for (var v=0;v<cloverConstellation.length-1;v++)
+                                          for (var v=0;v<cloverConstellation.length;v++)
                                           {
                                               constellationData[v]=cloverConstellation[v].x;
                                               

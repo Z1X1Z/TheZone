@@ -3167,14 +3167,17 @@ return vec3(l+b+r+h);}
                              vec2 starBirth(vec2 p){
                               bool originalClover = true;
                               //if(constellation)
-                              for(float cd = 24.;cd>=1.;cd--)
+                              const float constellationSize = 24.;
+                              for(float cd = constellationSize;cd>=1.;cd--)
                               {
-                              float y =texture2D(constellationDynamic,vec2(cd/100.,0.)).x;//thought the y argument would be 0, seems to be 1
-                              float x =texture2D(constellationDynamic,vec2(cd/100.,.5)).x;
+                                  float cdcs=cd/constellationSize;
+                              float y =texture2D(constellationDynamic,vec2(cdcs,0.)).x;//thought the y argument would be 0, seems to be 1
+                              float x =texture2D(constellationDynamic,vec2(cdcs,.5)).x;
 
                              if(originalClover&&(x!=0.||y!=0.))
                              {
-                              p=spin2(p,atan(y,x));
+                                 float atanConstellation = atan(y,x);
+                              p=spin2(p,atanConstellation);
                                float farness=length(vec2(x,y));
                                vec2 newClovers = p;
                                if(p.x>0.)newClovers=vec2(p.x-sign(p.x)*farness,p.y);
@@ -3186,7 +3189,7 @@ return vec3(l+b+r+h);}
                                  if(newClovers.x>0.)originalClover=false;
                                  p = newClovers;
                           }
-                             if(originalClover)  p=spin2(p,-atan(y,x));
+                             if(originalClover)  p=spin2(p,-atanConstellation);
                              }
                               }
                               return p;
