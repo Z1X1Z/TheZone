@@ -3795,6 +3795,7 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
 
    s.x=log(abs(s.x))/log(base);
    //traditionally be e or 3 probably 1.5 to 4
+   s=starBirth(s);
    if(cellularDivision==1||(cellularDivision==2&&counter>1.))      s=vec2(s.x,s.y-sign(s.y)/2.);
 
    if(squareGenesis){
@@ -3818,7 +3819,6 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
                }
               
        }
-   s=starBirth(s);
 
    dstnce = length(s);
 
