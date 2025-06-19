@@ -295,8 +295,9 @@ function resetAll(){
                                          
                        window.coreData = new Float32Array(40).fill(1./-leaf);
                        window.omniData = new Float32Array(40).fill(0.);
-                                         window.constellationData = new Float32Array(200).fill(.0);
-                                         window.cloverConstellation=Array(100)
+                                         window.constellationSize=24;
+                                         window.constellationData = new Float32Array(constellationSize*2).fill(.0);
+                                         window.cloverConstellation=Array(constellationSize)
                                          if(window.INITIALIZED)
                                          for(var b = 0; b<cloverConstellation.length; b++)cloverConstellation[b]=new THREE.Vector2(0.,0.);
 

@@ -3163,33 +3163,40 @@ return vec3(l+b+r+h);}
                                   
                               const    float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;
 
+                              
+                             vec2 starBirth(vec2 p){
+                              bool originalClover = true;
+                              //if(constellation)
+                              for(float cd = 24.;cd>=1.;cd--)
+                              {
+                              float y =texture2D(constellationDynamic,vec2(cd/100.,0.)).x;//thought the y argument would be 0, seems to be 1
+                              float x =texture2D(constellationDynamic,vec2(cd/100.,.5)).x;
+
+                             if(originalClover&&(x!=0.||y!=0.))
+                             {
+                              p=spin2(p,atan(y,x));
+                               float farness=length(vec2(x,y));
+                               vec2 newClovers = p;
+                               if(p.x>0.)newClovers=vec2(p.x-sign(p.x)*farness,p.y);
+
+                              // if(length(p)<twoThirds)
+                              //   p -= vec2(farness,0.);
+                          if(length(newClovers)<twoThirds)
+                          {
+                                 if(newClovers.x>0.)originalClover=false;
+                                 p = newClovers;
+                          }
+                             if(originalClover)  p=spin2(p,-atan(y,x));
+                             }
+                              }
+                              return p;
+                            }
+                              
+                              
 vec4 tol(vec2 p, vec2 t){
     
   //  p+=vec2(-sign(p.x),-sign(p.y));//two by two division;
-    bool originalClover = true;
-    //if(constellation)
-    for(float cd = 100.;cd>=1.;cd--)
-    {
-    float y =texture2D(constellationDynamic,vec2(cd/100.,0.)).x;//thought the y argument would be 0, seems to be 1
-    float x =texture2D(constellationDynamic,vec2(cd/100.,.5)).x;
-
-   if(originalClover&&(x!=0.||y!=0.))
-   {
-    p=spin2(p,atan(y,x));
-     float farness=length(vec2(x,y));
-     vec2 newClovers = p;
-     if(p.x>0.)newClovers=vec2(p.x-sign(p.x)*farness,p.y);
-
-    // if(length(p)<twoThirds)
-    //   p -= vec2(farness,0.);
-if(length(newClovers)<twoThirds)
-{
-       if(newClovers.x>0.)originalClover=false;
-       p = newClovers;
-}
-   if(originalClover)  p=spin2(p,-atan(y,x));
-   }
-    }
+p=starBirth(p);
 
     /*centered and divides right
      if(originalClover)

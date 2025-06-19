@@ -1035,7 +1035,7 @@ function setDynamicSampler2ds(){
              
              
              loadConstellationData();//defined in wad, transfers from Vector2 to array
-             let constellationTexture = new THREE.DataTexture( window.constellationData, 100, 2,THREE.RedFormat,THREE.FloatType);
+             let constellationTexture = new THREE.DataTexture( window.constellationData, window.constellationSize, 2,THREE.RedFormat,THREE.FloatType);
             // console.log(constellationTexture)
              constellationTexture.unpackAlignment=1
              constellationTexture.needsUpdate=true;

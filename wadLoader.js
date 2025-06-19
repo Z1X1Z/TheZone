@@ -932,9 +932,10 @@ var scaleCorrection = 3.5;
                                                                               function setConstellation(){
                                           if(cloverDistanceFromMiddle<1./3.)
                                           {
-                                              cloverConstellation[selectedConstellation].x=0;
-                                              cloverConstellation[selectedConstellation].y=0;
+                                              cloverConstellation.splice(selectedConstellation, 1)
+                                              cloverConstellation.push(new THREE.Vector2(0.,0.));
                                           }
+                                          console.log(cloverConstellation)
                                           cloverDistanceFromMiddle=1;
                                       }
                                                                               function loadConstellationData()
