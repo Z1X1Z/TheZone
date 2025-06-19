@@ -295,7 +295,7 @@ function resetAll(){
                                          
                        window.coreData = new Float32Array(40).fill(1./-leaf);
                        window.omniData = new Float32Array(40).fill(0.);
-                                         window.constellationSize=24;
+                                         window.constellationSize=50;
                                          window.constellationData = new Float32Array(constellationSize*2).fill(.0);
                                          window.cloverConstellation=Array(constellationSize)
                                          if(window.INITIALIZED)
