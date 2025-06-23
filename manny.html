@@ -5697,6 +5697,10 @@ pixelStarship += starBuffer;
                                                                  ;
                                  if(linearFrequency.x!=0.||linearFrequency.y!=0.||linearFrequency.z!=0.)   unrolledEyes=linearFrequency.xyz;
                                  if(pong.x!=0.||pong.y!=0.||pong.z!=0.)   unrolledEyes=pong.xyz;
+                                 if(abs(GOH.x)>.75&&unrolledEyes.x!=0.&&unrolledEyes.z!=0.&&unrolledEyes.y!=0.)   {
+                       unrolledEyes=vec3(.5);
+                       GOH=vec4(0.);
+                       }
                                                   vec4 layeredOUT =vec4(0.);
                                                              if(length(p)<2.*sqrt2/min(resolution.x,resolution.y)) layeredOUT=vec4(zoomer,1.);
                                 
