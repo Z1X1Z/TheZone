@@ -168,7 +168,8 @@ leaf:{value:leaf},
 gr:{value:gr},
 pixelWitnesses:{value:true},
 cloverArms:{value:false},
-dynamicOvercore:{value:false}
+dynamicOvercore:{value:false},
+unroll:{value:0}
 }
 window.uniforms={}
 
@@ -483,6 +484,8 @@ window.key = " ";
                     window.guitarMODE=!window.guitarMODE;
                 else if((key == "r"||key=="®") && event.altKey&&event.ctrlKey)
                     window.stylusON=!window.stylusON;
+                else if((key == "y"||key=="¥") && event.altKey&&event.ctrlKey)
+                    uniforms.unroll.value=(1+uniforms.unroll.value)%2;
                 else if((key == "c"||key=="ç") && event.altKey&&event.ctrlKey)
                 {
                     uniforms.constellation.value=!uniforms.constellation.value;
