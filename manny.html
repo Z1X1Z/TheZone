@@ -2116,9 +2116,9 @@ vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
                  if (frAmp>h.x)
                  {
                      
-               float freq =h.y*nyq;
+               float freq =h.y*sampleRate;
              float noteLine =12.*log(freq/concertKeyTuning)/log(2.)+49.;
-                              //   if(mod(round(noteLine),12.)==6.)
+                            //     if(mod(round(noteLine),12.)==6.)
                                      {
               if (frAmp>h.x*1.5)  ret = vec4(hsv2rgb( vec3( mod((-noteLine)*brelued+4.,12.)/12. ,1.,1. )),0.); //vec4(mod(note,12.)/12.);
                     else if(frAmp>h.x) ret =vec4(sign(vUv.x-.5)*20.*flipStar*brelued);
@@ -2143,12 +2143,12 @@ vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
       //  float b =nyq*pow(2.,angle+octBoost);
 //starts -3, full -2
 float brightness=0.;
-        for (float n = -12.; n<0.;n+=1.)//the range seems small
+        for (float n = -1.; n<11.;n+=1.)//the range seems small
        // if(b>=.5/nyq&&b<sampleRate/2.)
 //not sure why it has negative range
         //if (twistStar<24.)
          {
-              float b =1./nyq*pow(2.,angle+n-1./12.)*concertKeyTuning;//440hz down one note is 415.305
+              float b =1./sampleRate*pow(2.,angle+n-1./12.)*concertKeyTuning;//440hz down one note is 415.305
               float frampBuffer = texture2D(micIn, vec2(b,0.)).r;
                //if(round(angle*12.)==1.)
                frAmp += frampBuffer;
@@ -2158,7 +2158,7 @@ float brightness=0.;
         brightness +=((n+12.+1.))*frampBuffer;
 
         }
-         brightness/=10.;
+         brightness/=20.;
          //  frAmp/=255.;
          frAmp/=2.;
        //    frAmp=pow(frAmp,.888);
@@ -2236,7 +2236,7 @@ float brightness=0.;
       //               ,1.);
       float angleExpanded10 = (angle*10.);
         float oct =floor(
-          angleExpanded10+6.
+          angleExpanded10-6.
         );
         ;
         float noteBend = angleExpanded10-floor(angleExpanded10)+.5;//angle*10.-floor(angle*10.-.5)-.5; seems to be the least overflow between notes, thereby seems correct
@@ -2244,7 +2244,7 @@ float brightness=0.;
       //  return vec4(note0/72.);
        // return vec4(note0/144.);
      //  note0-=1.;
-        float note1 =1./nyq*pow(2.,note0)*concertKeyTuning;
+        float note1 =1./sampleRate*pow(2.,note0)*concertKeyTuning;
 
         float noteAmp = texture2D(micIn,
         vec2(note1
@@ -2367,12 +2367,12 @@ if(uv.x<1./3.&&maxSamp!=0.) //could 1./3. but then the spill over (if any) isn't
                                                   //float brightness=0.;
                                                   float noteOfSide = (sideSegment-2.+.5)/12.+twistStar*flipStar*divideByMultiplyingPi2;
                                                   float notesIncludedInPixel = 0.;
-                                                   for (float n = -12.; n<0.;n+=1.)//the range seems small
+                                                   for (float n = -1.; n<11.;n+=1.)//the range seems small
                                                          // if(b>=.5/nyq&&b<sampleRate/2.)
                                                   //not sure why it has negative range
                                                           //if (twistStar<24.)
                                                            {
-                                                                float b =1./nyq*pow(2.,noteOfSide+n-1./12.)*concertKeyTuning;//this seems to be missing a 440, also missing in other pixelStar calculations
+                                                                float b =1./sampleRate*pow(2.,noteOfSide+n-1./12.)*concertKeyTuning;//this seems to be missing a 440, also missing in other pixelStar calculations
                                                                 float frampBuffer = texture2D(micIn, vec2(b,0.)).r;
                                                               frAmp += frampBuffer;
                                                                   notesIncludedInPixel++;
@@ -5376,12 +5376,12 @@ if(heartStar==0){
             //   const float octBoost = 17.;
             //  float b =nyq*pow(2.,angle+octBoost);
             //starts -3, full -2
-            for (float n = -12.; n<0.;n+=1.0)//the range seems small
+            for (float n = -1.; n<11.;n+=1.0)//the range seems small
             // if(b>=.5/nyq&&b<sampleRate/2.)
             //not sure why it has negative range
             //if (twistStar<24.)
             {
-            float b =1./nyq*pow(2.,angleASKEW+n-1./12.)*concertKeyTuning;
+            float b =1./sampleRate*pow(2.,angleASKEW+n-1./12.)*concertKeyTuning;
             frAMP += texture2D(micIn, vec2(b,0.)).r;
             }
 
