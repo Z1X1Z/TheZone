@@ -39,6 +39,7 @@ videoTexture:{value:null},
 videoTexture2:{value:null},
 coreTextureSampler:{value:null},
 constellationDynamic:{value:null},
+squirgleDynamic:{value:null},
 STAR:{value:null},
 EDEN:{value:null},
 uberDuper:{value:null},
@@ -169,7 +170,9 @@ gr:{value:gr},
 pixelWitnesses:{value:true},
 cloverArms:{value:false},
 dynamicOvercore:{value:false},
-unroll:{value:0}
+unroll:{value:0},
+squirgle:{value:0},
+cards:{value:false}
 }
 window.uniforms={}
 
@@ -299,6 +302,9 @@ function resetAll(){
                                          window.constellationSize=50;
                                          window.constellationData = new Float32Array(constellationSize*2).fill(.0);
                                          window.cloverConstellation=Array(constellationSize)
+                                         window.squirgleSize=12;
+                                         window.squirgleData = new Float32Array(squirgleSize).fill(1.);
+
                                          if(window.INITIALIZED)
                                          for(var b = 0; b<cloverConstellation.length; b++)cloverConstellation[b]=new THREE.Vector2(0.,0.);
 
@@ -484,11 +490,23 @@ window.key = " ";
                     window.guitarMODE=!window.guitarMODE;
                 else if((key == "r"||key=="®") && event.altKey&&event.ctrlKey)
                     window.stylusON=!window.stylusON;
+                else if((key == "n"||key=="˜") && event.altKey&&event.ctrlKey)
+                    uniforms.cards.value=!uniforms.cards.value;
                 else if((key == "y"||key=="¥") && event.altKey&&event.ctrlKey)
                     uniforms.unroll.value=(1+uniforms.unroll.value)%2;
                 else if((key == "c"||key=="ç") && event.altKey&&event.ctrlKey)
                 {
                     uniforms.constellation.value=!uniforms.constellation.value;
+           
+                }
+                else if((key == "s"||key=="ç") && event.altKey&&event.ctrlKey)
+                {
+                    uniforms.constellation.value=!uniforms.constellation.value;
+           
+                } else if((key == "l"||key=="¬") && event.altKey&&event.ctrlKey)
+                {
+                   uniforms.squirgle.value=(uniforms.squirgle.value+=1)%3;
+                    if(uniforms.squirgle.value==0)squirgleData.fill(1.)
            
                 }
                 else if((key == "p"||key=="π") && event.altKey&&event.ctrlKey)

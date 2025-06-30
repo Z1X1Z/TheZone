@@ -984,6 +984,11 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                          callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
                                      Biogenesis?![.,b]</a><br>
                                  
+                                 <a id="Pie" name="t"  onclick= "
+                         key  = 'l';
+                         callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
+                                     Pie![,.l]</a><br>
+                                 
                                  
                                  </div>
           </button>
@@ -1232,6 +1237,14 @@ Reset Zoom![L]</a><br>
                 key  = 'a';
                 callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
                 Music Angel Man![.a]</a><br>
+            <a id="spark" name="t"  onclick= "
+                key  = 's';
+                callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
+                Sparkles![,s]</a><br>
+            <a id="deck" name="t"  onclick= "
+                key  = 'n';
+                callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                Cards![,.n]</a><br>
                  <a id="Metronome Up" name="t"  onclick= "
                      key  = '>';
                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -1834,7 +1847,6 @@ void main(){
     uniform bool eyeSingle;
     uniform int unroll;
 
-    uniform bool constellation;
     uniform float coreDilation;
     uniform bool gates;
     uniform int armsSpinning;
@@ -1877,7 +1889,11 @@ void main(){
     uniform sampler2D coreTextureSampler;
     uniform sampler2D omniDynamic;
     uniform sampler2D constellationDynamic;
-    
+    uniform bool constellation;
+
+    uniform sampler2D squirgleDynamic;
+    uniform int squirgle;
+    uniform bool cards;
     uniform sampler2D uberDuper;
 
     uniform int eden;
@@ -2470,7 +2486,7 @@ return h;
                         else{
                             z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),2.0*z.x*z.y-g.y-t.y);
                             
-                           if(!wink)l=vec4(pitchColor.xyz*(1.-abs(z.y)*6.),1.);//smooths middle horn, removes some clouds
+                           if(!wink)l=vec4(pitchColor.xyz*(1.-abs(z.y)*6.),.25);//smooths middle horn, removes some clouds
                             vec2 s=z;//vec2(z.x,-z.y);
                             
                             if(f==7&&s.x<0.)notEars=true;
@@ -2656,7 +2672,7 @@ return h;
                         }
                         if((l.r<.0||l.g<0.||l.b<0.)&&isEscaped!=-2.)l=vec4(0.);
                             if(g.y==0.&&t.y==0.&&!wink)l=vec4(1.);
-                          if(l.w==1.)
+                          if(l.w==1.||l.w==.25)
                         return -l;
                         else if(l.w==.5)return l;
                         else return l;
@@ -3024,7 +3040,89 @@ vec3 faceFORWARD(vec2 p,vec2 t){
         return balloon;
     }
     
+                                     
+                                     vec3 lamb(vec2 p) {
+                                       vec2 s = p.yx;
+                                         p=p.yx;
+                                       float d = 0.0, l;
+                                                 float flip=-sin(3.14/2.+rate*time);
+                                         if (flip<0.) p = -p;
+                                         const int ITERATION = 21;
+                                         const float b = pow(2.,2.);
+                                          float golden_mean = gr;
+                                       for (int t = 0; t < ITERATION; t++) {
+                                         s = vec2(((s.x * s.x - s.y * s.y) +flip* p.x), (2.0* s.x * s.y + flip*p.y));
+                                           
+                                           //this is a reorientation and riff
+                                           // off of (read inspired by) the feedback loop x <= 1/(1/x-x).  This pattern starts false and generates increasingly many solutions.
+                                           //. essentially the image is the Mandelbrot set only with 1/real-imag in place of the standard complex number as x's argument.
+                                           // 1/real-imag turns out to equate to essentially an identical image to real-1/imag which seems more elegant
+                                           // remove the below line to see that it is the only core difference in the equations of the Mandelbrot and This image.
+                                           if(b==2. ||rate == 0.)
+                                           s.x = -1./s.x;
+                                          else
+                                           s.x = pow(s.x,flip)*sign(s.x*flip);
+
+
+
+                                          
+                                           
+                                           l = 3.+length(s*golden_mean/3.5);
+                                                       d += golden_mean*.0777;
+                                         
+                                         float activate = 8.+-sin(-time)*6.;
+                                           float colorshift = .5+-abs(sin(-time/2.+3.14*.25))/2.;
+                                           float colorshift1 = .5+-abs(sin(-time/2.-3.14*.25))/2.;
+                                           float colorshift2 = .5+-sin(-time-3.14/3.);
+                                           if (l >35.0-activate)
+                                                       if (t != 1 || (p.x>-.1 || abs(p.y)<.3))
+                                             if (t > 3)
+                                                  
+                                                 return 2.*colorshift2*colorshift2*vec3(.5+sin(float(t) * 0.05)-.5,.5-sin(float(t) * 0.2)-.5,sin(d * 0.01)-.5)
+                                                 
+                                                 +2.*colorshift1*colorshift1*vec3(10.)+
+                                                             -2.*colorshift*colorshift*vec3(10.)+
+                                                 2.*vec3(-sin(d+golden_mean +time*1./golden_mean*.7),-sin(d*1. +time*golden_mean*.7),-sin(d+1./golden_mean +time*.7));
+                                             else if( abs(p.y)>2.||( ( p.x>(.8+activate/10.)||p.x<1.)) || rate != 0.0 )
+                                             {
+                                         s = vec2(((p.x * p.x - p.y *p.y) +flip* p.x), (2.0* p.x * p.y + flip*p.y));
+                                                       l = 3.+length(s*golden_mean/3.5);
+                                              return
+                                             // (vec3(1.-sin(100.*d *1.618+time*.618),1.- sin(10.*d *1.0+time*1.618),1.-sin(50.*d * 0.618+ti)me*1.)) )
+                                             vec3(1.-(sin(333.*golden_mean/l*-sin(time*1./golden_mean/5.)*-sin(time*-golden_mean/5.+1.57))-sin(1.1*1./golden_mean*-time))/2.,
+                                                  1.- (sin(333./golden_mean*-l*(-sin(time*-golden_mean/5.+1.57)*-sin(time*golden_mean/5.+1.57/2.)*+2.))-sin(.1*time*golden_mean))/2.
+                                                  ,1.-(sin(333.*l* -(sin(time*golden_mean/5.+1.57/2.)*-sin(time*1./golden_mean/5.)+2.))-sin(1.1* golden_mean*-time))/2.
+                                                 )/2.;
+                                             }
+                                           
+                                           else     if (1.-p.x<-.12)
+                                               //blood from being slain and pierced
+                                                                       return     vec3(1.,0.,0.)/p.x/p.x/p.x*8.*(abs(-sin(-time/2.+3.14/2.))-.5);
+                                               //firebreath! vvvv
+
+                                                   //return     vec3((1.-.5*sin(p.x/2.)),(1.-.9*sin(p.x*1.)),(.1-.7*sin(p.x*2.)))/p.x/p.x/p.x*5.;
+                                                 }
+                                         
+
+                                       return vec3(flip*((-sin(time)-1.)/2.));
+                                     }
+                                     //FRACTALIZE function mostly by c03moz
+                                     vec2 FRACTALIZE(vec2 p) {
+                                         float timeDilated = time*1000.;
+                                         float s = 0.;
+                                         float cs = (-cos(timeDilated));
+                                         float sn = (sin(-timeDilated*1.618));
+                                         mat2 rot = mat2(cs, sn, -sn, cs);
+                                         for (int i = 0; i < 8; i++) {
+                                             p = abs(p) / dot(p, p) - s;
+                                             p *= rot;
+                                             s += .5-abs(sin(-timeDilated*sin(timeDilated)+1.))/2.;
+                                         }
+                                         return p;
+                                     }
+
     //['y/((y/(y*x))-y)+1/(1-(1/(y*x)))', '1/(1-(y/(y-x)))-y/(1-(y/y))', 'y/(y-(y/(y*x)))+1/((1/(y*x))-1)', '1/(1-(y/x))+1/((y/x)-1)', 'y/((1/x)-y)+1/(1-(1/(y*x)))', '1/(x+(1/y))+1/(1-(y/y))', '1/((y/x)-1)+1/(1-(y/x))', 'y/(y-(1/x))+1/((1/(y*x))-1)', 'y/((y/y)+y)-y/((1/(y*x))-1)'] tree of life 5 results
+                                     
     vec3 sparkles(vec2 p){
         vec4 starship = vec4(0.);
         float recenter = 0.;
@@ -3033,14 +3131,14 @@ vec3 faceFORWARD(vec2 p,vec2 t){
          /* if (starshipLOOKUP.x<1.&&starshipLOOKUP.y<1.&&starshipLOOKUP.x>0.&&starshipLOOKUP.y>0.)starship = texture2D(STAR,starshipLOOKUP);
           if (starship.x==0.&&starship.y==0.&&starship.z==0.)starship=vec4(1.);//s
           */
-        float timeDilated = time*10.;
+        float timeDilated = time/10.;
          p=(mod(timeDilated,1.)-.5)*abs(p)+length(vec2(length(starship.xy),starship.z));
             p=vec2(p.x,abs(p.y));
             vec2 s=p;
 
         float l=0.;
-          float love1 =  mod(timeDilated*(-1.-leaf),1.);
-                  float love2 =  mod(timeDilated*(gr-1.),1.);              float love3 =  mod(timeDilated,1.);
+          float love1 =  mod(timeDilated*(-1.-leaf),.25)+.5;
+                  float love2 =  mod(timeDilated*(gr-1.),.25)+.5;              float love3 =  mod(timeDilated,.25)+.5;
         for (int f=0;f<15;f+=1){//turn f<21 for just seven eyed
                     s=love2*vec2(-1./(s.x*s.x-s.y*s.y-p.x), 2.0*s.x*s.y-p.y);//this is {s=s^2-p;s.real=-1./s.real}
             s=-vec2(s.y/((s.y/(s.y-s.x)*love3-(s.y))), -pow(abs(s.y/(s.y/(s.x-s.y)*love3-s.y*love2)),2.*1./love3));//this is {s=s^2-p;s.real=-1./s.real}
@@ -3208,6 +3306,8 @@ return vec3(l+b+r+h);}
                               
                               
 vec4 tol(vec2 p, vec2 t){
+    p /=texture2D(squirgleDynamic,vec2(mod((atan(p.y,p.x)+PIdiv2*3.+PI/12.)/PI2,1.),0.)).x;
+
     
   //  p+=vec2(-sign(p.x),-sign(p.y));//two by two division;
 
@@ -3254,7 +3354,7 @@ vec4 tol(vec2 p, vec2 t){
             }
         else break;
         }
-        p=starBirth(p);
+        if(constellation)p=starBirth(p);
 
    //tricellular division core unstable
                
@@ -3805,6 +3905,7 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
  //  s=vec2(-1./(s.x*s.x-s.y*s.y-p.x),2.0*s.x*s.y-p.y);
 
    s.x=log(abs(s.x))/log(base);
+   s /=texture2D(squirgleDynamic,vec2(mod((atan(s.y,s.x)+PIdiv2*3.+PI/12.)/PI2,1.),0.)).x;
    //traditionally be e or 3 probably 1.5 to 4
    if(cellularDivision==1||(cellularDivision==2&&counter>1.))      s=vec2(s.x,s.y-sign(s.y)/2.);
 
@@ -5112,8 +5213,9 @@ vec2 dance = vec2(0.);
                                  if(dynamicDance) moveDynamic = (move/5.+t)/2.;
                                  else  moveDynamic = move/4.;
                                  vec3 backgroundFace = vec3(0.);
-
+float treeBrightner = 1.;
          if(colorCombo<=10){
+                       if(colorCombo==-1&&!remediatedColors&&Inherited)treeBrightner=-leaf;
                        vec4 tolOUT = vec4(0.);
                        tolOUT=tol(backGround, dance2);
                        zoomer=tolOUT.xyz;
@@ -5494,6 +5596,9 @@ if(starOnDot!=2){
                                  if (starship.x!=0.||starship.y!=0.||starship.z!=0.)isColoredMultiplier=(starship.xyz+(1.-starship.w)+1.)/2.;
                                  if(starship.w>3.5/255.)
                                  {
+                                     
+                                               if(mannyFace.w==-.25)starship/=8.;
+                                               
                                  if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.)
                                  {
                                      if(mny.x>0.)mny*=starship.xyz*+(1.-starship.w);//-mny.x*.66;
@@ -5684,7 +5789,7 @@ pixelStarship += starBuffer;
                                                                     }
                                                                  
                                                                 
-                                                                 if(colorCombo!=17&&colorCombo!=20)   mny+=clamp(clothes-bodyWithArms.w*100.,0.,1.)+bodyWithArms.xyz*bodyWithArms.w*clamp(clothes*100000.,0.,1.);
+                                          
 
                                                                  
                                                                  
@@ -5703,8 +5808,27 @@ pixelStarship += starBuffer;
                        unrolledEyes=vec3(.5);
                        GOH=vec4(0.);
                        }
+                                 heartWarmed=clamp(heartWarmed,-1.5,1.5);
+
+                              // if(heartWarmed.x!=0.)  heartWarmed-=zoomer/4.;
+                               //  mny=clamp(mny,-1.25,1.25);
+                                 if(mny.x>0.&&mny.x==mny.y&&mny.y==mny.z){
+                       mny-=zoomer/1.5;
+                       }
+                                  if(mny.x>0.&&mannyFace.w!=.5)                       starship-=vec4(vec3(mny.x+mny.y+mny.z),0.);
+
+                                  if(mny.x<0.&&mny.x==mny.y&&mny.y==mny.z)
+                       mny+=zoomer/1.5;
+                       
+                                 if(starship.x+starship.y+starship.z!=0.&&AM.r==0.)starship-=vec4(zoomer/2.,0.);
+                                 
+                                 
+                                 if(colorCombo!=17&&colorCombo!=20)   mny+=clamp(clothes-bodyWithArms.w*100.,0.,1.)+bodyWithArms.xyz*bodyWithArms.w*clamp(clothes*100000.,0.,1.);
+                                 
+                                 
                                                   vec4 layeredOUT =vec4(0.);
-                                                             if(length(p)<2.*sqrt2/min(resolution.x,resolution.y)) layeredOUT=vec4(zoomer,1.);
+                    if(constellation||squirgle==1)layeredOUT=vec4(zoomer,1.);
+                                 else if(length(p)<2.*sqrt2/min(resolution.x,resolution.y)) layeredOUT=vec4(zoomer,1.);
                                 
                    
                                                              else if(length(p)<1.&&
@@ -5731,7 +5855,8 @@ else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
 else {
                   
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer
-                                    +yourFace.xyzw-vec4(oneEye,0.)/2.-vec4(ARTICLE,1.),0.,1.);
+                                    +yourFace.xyzw-vec4(oneEye
+                                                        ,0.)/2. -vec4(ARTICLE,1.),0.,1.);
                                 
                        vec4 faceFromShip = vec4(clamp(mannyFace.xyz,0.,1.)-backgroundFace*starshipMultiplier,0.)*(1.-isGreyISH*2.);
                        vec4 goodies =
@@ -5765,9 +5890,9 @@ else {
                        vec3 awayFromTree =  vec3((-ss.xyz)*ss.w
                                                  -oneEye
                                                  -yourFace.xyz
-                                                 +7.*(-HEART.b-HEART.r-HEART.g)
+                                                // +(-HEART.b-HEART.r-HEART.g)/2.
                                                 // +(-HEART.b-HEART.r-HEART.g)/4.
-                                                 -AM.r*7.
+                                                 -clamp(AM.r*12.,0.,1.)
                                                  +(-linearFrequency.r-linearFrequency.g-linearFrequency.b)*4.
                                                  -(pong.r+pong.g+pong.b)
                                                  +bigEyes.xyz*largeEyeColor
@@ -5782,15 +5907,15 @@ else {
                        -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*4.
                                                  
                                                 +( -pixelStarship.r-pixelStarship.g-pixelStarship.b)
-                                                 +(-mny.r-mny.g-mny.b)*12.
+                                                 +(-mny.r-mny.g-mny.b)*2.
                                                  
                                                  );
 
 vec4 tree = vec4( clamp(
                      clamp(
                            cloud
-                           +zoomer
-                           +awayFromTree
+                           +(zoomer
+                           +awayFromTree)*treeBrightner
                            
                                               ,0.,1.)
                         +b+creatures
@@ -5806,7 +5931,20 @@ vec4 tree = vec4( clamp(
           else if(fin.r<.1&&fin.g<.1&&fin.b<.1)fin+=(isGrey+isGreyDOT+isGreyStaRivers+pixelShipGrey)*1.5;
           vec3 confraculator = vec3(1.);
           if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
-          fin=clamp(fin -(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z+ARTICLE.x+ARTICLE.y+ARTICLE.z)*4.,0.,1.)+vec4(clamp(hypnoticHarmonicCircles+ARTICLE-(isGrey+pixelShipGrey)*3.,0.,1.),1.);
+          vec3 card = vec3(1.);
+          if(cards){vec2 fracp = FRACTALIZE(p);
+              
+              card =lamb(fracp)*2.
+              +scroll(min(resolution.x, resolution.y)/max(resolution.x, resolution.y)*4.*vec2(fracp.x,fracp.y+3.),vec2(inversion,0.))*12.;
+              }
+                    /*
+              card+=lamb(fracd);
+              fracd = FRACTALIZE(fracd);
+              card+=lamb(fracd);
+              card/=4.;
+              */
+          
+          fin=clamp(fin/vec4(card,1.) -(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z+ARTICLE.x+ARTICLE.y+ARTICLE.z)*4.,0.,1.)+vec4(clamp(hypnoticHarmonicCircles+ARTICLE-(isGrey+pixelShipGrey)*3.,0.,1.),1.);
           layeredOUT=//vec4(mny,1.);
 fin/vec4(confraculator
                            ,1.);

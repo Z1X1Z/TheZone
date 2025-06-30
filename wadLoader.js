@@ -104,6 +104,7 @@ else    string = (e.clientX/window.innerWidth)*(noteGuitarStyleStretchCOMBO.leng
     function startGuitar(e){h
        let sGAObject= guitarGRAB(e)
         if(uniforms.constellation.value)grabConstellation(screenPressCoordX[id],screenPressCoordY[id])
+            if(uniforms.squirgle.value==1)squirglize(screenPressCoordX[id],screenPressCoordY[id])
 
         if(
             (window.touchMode&&!window.muteTouchTouchVolume)
@@ -126,6 +127,7 @@ else    string = (e.clientX/window.innerWidth)*(noteGuitarStyleStretchCOMBO.leng
     function followGuitar(e){
         let sGAObject= guitarGRAB(e)
         if(uniforms.constellation.value)followConstellation(screenPressCoordX[id],screenPressCoordY[id])
+            if(uniforms.squirgle.value==1)squirglize(screenPressCoordX[id],screenPressCoordY[id])
         sGAObject.sound.setPitch(sGAObject.frequency1);
         sGAObject.sound2.setPitch(sGAObject.frequency2);
         
@@ -334,6 +336,7 @@ function startSound(e){
     let y = e.clientY-heightPX/2.;
     let x = e.clientX- widthPX/2.;
     if(uniforms.constellation.value)grabConstellation(x,y);
+    if(uniforms.squirgle.value==1)squirglize(x,y);
     if(window.touchMode)window.pointerZoom=true
         
      id = touchNumber.get(pressIndex.get(e.pointerId));
@@ -543,6 +546,7 @@ function followSound(e, SonicTouchArrayK){
             let y = e.clientY-heightPX/2.;
             let x = e.clientX-widthPX/2.;
         if(uniforms.constellation.value)followConstellation(x,y)
+            if(uniforms.squirgle.value==1)squirglize(x,y)
          id = touchNumber.get(pressIndex.get(e.pointerId));
         screenPressCoordX[id]=x;
             screenPressCoordY[id]=y;
@@ -900,6 +904,11 @@ let c = document.body;//document.getElementById("container")
                           
                                                                               var selectedConstellation=0;
 var scaleCorrection = 3.5;
+                                                                              function  squirglize(x,y){
+                                          squirgleData[Math.round((Math.atan2(y,x)+Math.PI)/(Math.PI*2.)*squirgleSize)]=((x/minimumDimension*scaleCorrection)**2+(y/minimumDimension*scaleCorrection)**2)**.5*3./2.
+                                          
+                                      }
+
                 function  grabConstellation(x,y){
                                           var min = 100000.;
                                           //cloverConstellation[1]=new THREE.Vector2(0,.5)
@@ -918,6 +927,7 @@ var scaleCorrection = 3.5;
                                           }
 
                 }
+
                                                                               let cloverDistanceFromMiddle = 1;
                                                                               function followConstellation(x,y){
                                           
@@ -937,13 +947,13 @@ var scaleCorrection = 3.5;
                                           }
                                           cloverDistanceFromMiddle=1;
                                       }
-                                                                              function loadConstellationData()
+                                                                              function loadData(vectors,linearArray)
                                                                               {
-                                          for (var v=0;v<cloverConstellation.length;v++)
+                                          for (var v=0;v<vectors.length;v++)
                                           {
-                                              constellationData[v]=cloverConstellation[v].x;
+                                              linearArray[v]=vectors[v].x;
                                               
-                                              constellationData[(constellationData.length/2.)+v]=cloverConstellation[v].y;
+                                              linearArray[(linearArray.length/2.)+v]=vectors[v].y;
                                           }
 
                                       }
@@ -1003,6 +1013,7 @@ var scaleCorrection = 3.5;
                     
                     disengageDAWpetal(tn);
                     setConstellation();
+
                     stopSounds(SonicTouchArray[tn])
                     stopGuitar(SonicTouchGuitarArray[tn])
 

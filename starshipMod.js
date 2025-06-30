@@ -778,6 +778,7 @@ uniforms.dotCoord.value = new THREE.Vector2(0.,0.);
 function init() {
              
              for(var m=0;m<cloverConstellation.length;m++)cloverConstellation[m]=new THREE.Vector2(0.,0.)
+                // for(var m=0;m<cloverSquirgle.length;m++)cloverSquirgle[m]=new THREE.Vector2(0.,0.)
                  
              colorSound = new THREE.Color();
                   colorSoundPURE =     new THREE.Color();
@@ -1034,7 +1035,7 @@ function setDynamicSampler2ds(){
      uniforms.coreTextureSampler.needsUpdate = true;
              
              
-             loadConstellationData();//defined in wad, transfers from Vector2 to array
+             loadData(cloverConstellation,constellationData);//defined in wad, transfers from Vector2 to array
              let constellationTexture = new THREE.DataTexture( window.constellationData, window.constellationSize, 2,THREE.RedFormat,THREE.FloatType);
             // console.log(constellationTexture)
              constellationTexture.unpackAlignment=1
@@ -1042,6 +1043,14 @@ function setDynamicSampler2ds(){
              uniforms.constellationDynamic.value=constellationTexture;
              uniforms.constellationDynamic.needsUpdate = true;
             // console.log(uniforms.constellationDynamic)
+             
+            // loadData(cloverSquirgle,squirgleData);//defined in wad, transfers from Vector2 to array
+             let squirgleTexture = new THREE.DataTexture( window.squirgleData, window.squirgleSize, 1,THREE.RedFormat,THREE.FloatType);
+            // console.log(constellationTexture)
+             squirgleTexture.unpackAlignment=1
+             squirgleTexture.needsUpdate=true;
+             uniforms.squirgleDynamic.value=squirgleTexture;
+             uniforms.squirgleDynamic.needsUpdate = true;
  }
 function setMicInputToStarPIXEL(){
              if(!touchMode//&&!DAW
@@ -2597,7 +2606,7 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                 
                                   //inner Star inspired by https://www.youtube.com/watch?v=_MTbjHKtobY Neffex song
 const rpio2 =arm+pi/2.;
-   let centerDisplacement = 3./7.;
+   let centerDisplacement = 4./7.;
 let xBoost = -Math.sin(arm)*centerDisplacement;
 let yBoost = -Math.cos(arm)*centerDisplacement;
                 
@@ -3120,7 +3129,7 @@ else if (circleY<-height)circleY=height;
 circle.position.set(circleX,circleY,-.99);
 uniforms.dotCoord.value =new THREE.Vector2(circleX,circleY) ;
 
-                              if(isFinite(note)&&isFinite(lastNote))    circle.rotateZ((on)?note-lastNote:lastNote);
+                              if(isFinite(note)&&isFinite(lastNote))    circle.rotateZ(Math.abs((note%1)-1.)*Math.PI*2);
 
                    let colorBlack= new THREE.Color();
                    colorBlack.setStyle("black");
@@ -3522,7 +3531,9 @@ for(var n = 0; n<targets.length;n++){
                                                        
                                                        
                                                        function freezeTop(){
-                                                         if(uniforms.constellation.value){zoom=1;uniforms.zoom.value=1;uniforms.coords.value.x = 0;uniforms.coords.value.y = 0;coordX=0;coordY=0}
+                                                         if(uniforms.constellation.value||uniforms.squirgle.value==1){zoom=1;uniforms.zoom.value=1;uniforms.coords.value.x = 0;uniforms.coords.value.y = 0;
+                                                             uniforms.constellationCoord.value.x = 0;uniforms.constellationCoord.value.y = 0;
+                                                             coordX=0;coordY=0}
                                                      }
 function constellationCoordFind(){
 var min = 100000.;
@@ -3546,7 +3557,7 @@ uniforms.constellationCoord.value=new THREE.Vector2( -coordX- uniforms.constella
 /*
 if(uniforms.coords.value.y<-.5)
 {uniforms.constellationCoord.value.y=uniforms.coords.value.y+1.;
-    console.log("constallationCoord set")
+    console.log("constellationCoord set")
 }
  */
                                                      }
