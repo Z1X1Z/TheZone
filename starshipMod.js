@@ -2606,7 +2606,7 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                 
                                   //inner Star inspired by https://www.youtube.com/watch?v=_MTbjHKtobY Neffex song
 const rpio2 =arm+pi/2.;
-   let centerDisplacement = 2./3.;
+   let centerDisplacement = 9./14.;
 let xBoost = -Math.sin(arm)*centerDisplacement;
 let yBoost = -Math.cos(arm)*centerDisplacement;
                 
