@@ -5810,7 +5810,7 @@ pixelStarship += starBuffer;
                        }
                                  heartWarmed=clamp(heartWarmed,-1.5,1.5);
 
-                              // if(heartWarmed.x!=0.)  heartWarmed-=zoomer/4.;
+                               if(heartWarmed.x!=0.)  heartWarmed-=zoomer/4.;
                                  mny=clamp(mny,-1.25,1.25);
                                  if(mny.x>0.&&mny.x==mny.y&&mny.y==mny.z){
                        mny-=zoomer;
@@ -5818,7 +5818,7 @@ pixelStarship += starBuffer;
                           
 
                                   if(mny.x<0.&&mny.x==mny.y&&mny.y==mny.z)
-                       mny+=zoomer;
+                       mny+=zoomer/2.;
                        
                                  if(starship.x+starship.y+starship.z!=0.&&AM.r==0.)starship-=vec4(zoomer/2.,0.);
                                  
@@ -5892,7 +5892,7 @@ else {
                                                  -yourFace.xyz
                                                 // +(-HEART.b-HEART.r-HEART.g)/2.
                                                 // +(-HEART.b-HEART.r-HEART.g)/4.
-                                                 -clamp(AM.r*12.,0.,1.)
+                                                 -clamp(AM.r*7.,0.,1.)
                                                  +(-linearFrequency.r-linearFrequency.g-linearFrequency.b)*4.
                                                  -(pong.r+pong.g+pong.b)
                                                  +bigEyes.xyz*largeEyeColor
