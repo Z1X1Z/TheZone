@@ -5834,7 +5834,9 @@ pixelStarship += starBuffer;
                                                                      starship.w>3.5/255.&&((starship.x==1.&&starship.y==1.&&starship.z==1.)||(starship.x==0.&&starship.y==0.&&starship.z==0.)))
                                                                      
                                                                      
-                                                                 layeredOUT=vec4(abs(starship.xyz-mannyFace.xyz/2.),1.);
+                                                                 layeredOUT=vec4(abs(starship.xyz
+                                                                                     //-mannyFace.xyz/2.
+                                                                                     ),1.);
                                                                  
 else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
 {
