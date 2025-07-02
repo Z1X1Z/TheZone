@@ -2614,7 +2614,15 @@ let x = widt*-Math.sin(rpio2);
 let y = widt*-Math.cos(rpio2);
 let xr = lengt*-Math.sin(arm);
 let yr = lengt*-Math.cos(arm);
-
+                                        var TransparencyStar = .75;
+                                       /* if(vop.r==vop.g||vop.b==vop.g)TransparencyStar=.875;
+                                        else if(vop.g==0.)
+                                        {
+                     TransparencyStar*=(vop.r+vop.b*2.)/Math.max(vop.g,Math.max(vop.b,vop.r))*12.;
+                                        }*/
+                                        //else TransparencyStar/=2.;
+                                                  
+                                        
                                         
                                                              starColorAttribute.setXYZW(starStride,pureColor.r,pureColor.g,pureColor.b,1.)
                                                              starColorAttribute.setXYZW(starStride+1,pureColor.r,pureColor.g,pureColor.b,1.)
@@ -2665,12 +2673,12 @@ let yr = lengt*-Math.cos(arm);
                                   
                                   
                                   
-                                        starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
-                                        starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,1.)
-                                        starColorAttribute.setXYZW(starStride+2,pureColor.r,pureColor.g,pureColor.b,1.)
-                                        starColorAttribute.setXYZW(starStride+3,vop.r,vop.g,vop.b,1.)
-                                        starColorAttribute.setXYZW(starStride+4,pureColor.r,pureColor.g,pureColor.b,1.)
-                                        starColorAttribute.setXYZW(starStride+5,pureColor.r,pureColor.g,pureColor.b,1.)
+                                        starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,TransparencyStar)
+                                        starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,TransparencyStar)
+                                        starColorAttribute.setXYZW(starStride+2,pureColor.r,pureColor.g,pureColor.b,TransparencyStar)
+                                        starColorAttribute.setXYZW(starStride+3,vop.r,vop.g,vop.b,TransparencyStar)
+                                        starColorAttribute.setXYZW(starStride+4,pureColor.r,pureColor.g,pureColor.b,TransparencyStar)
+                                        starColorAttribute.setXYZW(starStride+5,pureColor.r,pureColor.g,pureColor.b,TransparencyStar)
                                                                            
                                                starStride+=6;
                                   
