@@ -967,7 +967,7 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                <a id="OCF" name="t"  onclick= "
                                    key  = 'o';
                                    callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
-                               Oppositional Flop![,.o]</a><br>
+                               Oppositional Flop?![,.o]</a><br>
                                
                                
                                
@@ -3807,7 +3807,7 @@ dstnce = length(s);
 //}
    colorAccumulator+=s;
    if(Refractelate&&dstnce>refractelC){s/=refractelC;} //refractelC/=4./3.;}
-   if((counter==1.&&oppositionalCoreFlop==2)||oppositionalCoreFlop==1)s=spin2(s,PI);
+   if((counter==1.&&oppositionalCoreFlop==1)||oppositionalCoreFlop==2)s=spin2(s,PI);
 vec2 lastS = s;
 //if(mod(counter,2.)==1.&&colorCombo==0)s =abs(s);//supposed to make clover brighter and nothing else?;
 
@@ -4328,7 +4328,7 @@ vec3 o = vec3(abs(s.x)/s.y*sign(s.x*s.y));
                               o=       (1.-(vec3(s.y/125.-s.x*s.y/888.+s.y/25000.,s.x/8.-s.y/s.x/2000.-s.y/25000.,1.-s.x/20.+s.y/25000.)
                                                 *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
                                                 *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));//can swizzle this for new colormodes
-                                              o.g*=1.2;//seems to need more green
+                                              if(oppositionalCoreFlop==0) o.g*=1.2;//seems to need more green
                                                 }
                                 else if(colorCombo==-8) {
                                             s=-colorAccumulator*(coresIn+1.)*((coresIn+2.)/(60.+1.)-.5);
