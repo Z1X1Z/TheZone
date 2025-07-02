@@ -5825,7 +5825,7 @@ pixelStarship += starBuffer;
                        if(starship.r==starship.g||starship.b==starship.g)zoomerBuffer/=2.;
                        else if(starship.g==0.)
                        {
-                           zoomerBuffer/=(starship.r+starship.b)/maxColorOfStarship/2.;
+                           zoomerBuffer/=(starship.r+starship.b)/maxColorOfStarship*12.;
                        }
                        else zoomerBuffer*=8.;
                        starship-=vec4(zoomerBuffer,0.);
