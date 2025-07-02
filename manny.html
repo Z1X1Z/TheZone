@@ -5822,7 +5822,12 @@ pixelStarship += starBuffer;
                       // float zoomerSum = zoomer.r+zoomer.g+zoomer.b;
 
                                  
-                                 if(colorCombo!=17&&colorCombo!=20)   mny+=clamp(clothes-bodyWithArms.w*100.,0.,1.)+bodyWithArms.xyz*bodyWithArms.w*clamp(clothes*100000.,0.,1.);
+                                 if(colorCombo!=17&&colorCombo!=20)
+                                 {
+                       if (clothes.r>=1.)mny=vec3(0.);
+                       if (clothes.r!=0.&&starship.b!=0.)clothes*=starship.xyz+.25;
+                       mny+=clamp(clothes-bodyWithArms.w*100.,0.,1.)+bodyWithArms.xyz*bodyWithArms.w*clamp(clothes*100000.,0.,1.);
+                       }
                                  
                                  
                                                   vec4 layeredOUT =vec4(0.);
@@ -5904,7 +5909,7 @@ else {
                         -(ARTICLE.x+ARTICLE.y+ARTICLE.z)*40.
                    
                        -(bridge.x+bridge.y+bridge.z)*4.
-                       -(shipSUM)/maxColorOfStarship*starship.w*1.5
+                       -(shipSUM)/maxColorOfStarship*starship.w
                                   
                        -(DOTstarship.x+DOTstarship.y+DOTstarship.z)/DOTmaxColorOfStarship*.5*DOTstarship.w
                       -(StaRivers.r+StaRivers.g+StaRivers.b)*StaRivers.w
