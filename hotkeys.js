@@ -699,7 +699,9 @@ window.key = " ";
         if(uniforms.largeEyeColor.value==0.)uniforms.largeEyeColor.value = -1.;
         else if(uniforms.largeEyeColor.value==-1.)uniforms.largeEyeColor.value = 1.;
         else if(uniforms.largeEyeColor.value==1.)uniforms.largeEyeColor.value = 3.;
-        else if(uniforms.largeEyeColor.value==3.)uniforms.largeEyeColor.value = 0.;
+        else if(uniforms.largeEyeColor.value==3.)uniforms.largeEyeColor.value = 4.;
+        else if(uniforms.largeEyeColor.value==4.)uniforms.largeEyeColor.value = 0.;
+
 
     
     }

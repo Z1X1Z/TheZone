@@ -5397,18 +5397,9 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                          else if (Character==11)mny=vec3(0.);
            }
 
-                                                                 vec2 eyeSize=vec2(0.);
-                                                                 if(largeEyeColor!=0.)eyeSize = characterOnTrailP/3.5*min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
-                                                                 else if (eyeSingle)eyeSize = characterOnTrailP/4.*min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
-                                                                 
-                                                                 vec3 bigEyes = vec3(0.);
-  if(largeEyeColor==1.||largeEyeColor==-1.)
-                                                                 {
-                    if(length(characterOnTrailP)>.25)//for the eyezone on lttle manny, for G and A eyes
-                       bigEyes = clamp(face(eyeSize,moveDynamic*1.5),0.,1.);//dimensions seem difficult to manage
-                   }
- else if (largeEyeColor== 3.) bigEyes = clamp(shiny(eyeSize,moveDynamic*1.5),0.,1.);
-                      float sidle =4.;
+                            
+                                                                 float sidle =4.;
+
                                                                  
             vec3 unrolledEyes = vec3(0.);
                                                if (unroll==1){
@@ -5426,12 +5417,34 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                   */
  //  bigEyes=          faceBlackAndWhite(vec2(sign(vUv.x-.5)*(tan(vUv.x*PI2))*vUv.y*2.,vUv.y),vec2(0.),false).xyz;
                                                                  vec3 oneEye = vec3(0.);
+                                                   
+                                                                 
+                                                                 
+                                                                 vec2 eyeMatch=vec2(0.);
+                                                            float winkColor = 1.;
+                                                             vec2     winkMotion = vec2(0.);
+                                                                 if(largeEyeColor!=0.){
+                       eyeMatch = characterP/3.5*min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
+            winkColor=-1.;
+                       winkMotion=moveDynamic*1.5;
+                       }
+                                                                 else if (eyeSingle)eyeMatch = characterP/4.;
+                                                            
                                                              if(eyeSingle&&volume!=1.)
                                                                  {
-                       oneEye =faceBlackAndWhite(characterP/4.,vec2(0.),true,-1).xyz;
+                       oneEye =faceBlackAndWhite(eyeMatch,winkMotion,true,-1).xyz*winkColor;
                                                                 if(oneEye.x!=0.)mny=oneEye;
                                                                 }
                                                                  
+                                                                 vec3 bigEyes = vec3(0.);
+  if(largeEyeColor==1.||largeEyeColor==-1.)
+                                                                 {
+                   // if(length(characterOnTrailP)>.25)//for the eyezone on lttle manny, for G and A eyes
+                       bigEyes = clamp(face(eyeMatch,moveDynamic*1.5),0.,1.);//dimensions seem difficult to manage
+                   }
+ else if (largeEyeColor== 3.) bigEyes = clamp(shiny(eyeMatch,moveDynamic*1.5),0.,1.);
+    else if(largeEyeColor==4.)
+                        bigEyes=faceBlackAndWhite(eyeMatch,moveDynamic*1.5,false, 0).xyz;
                                                   if(musicAngelMan>0&&Character!=3&&Character!=4)
                                                                        {
                                                              float divisor = 1.;
