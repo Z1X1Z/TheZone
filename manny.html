@@ -5823,6 +5823,10 @@ pixelStarship += starBuffer;
                       // float zoomerSum = zoomer.r+zoomer.g+zoomer.b;
                        vec3 zoomerBuffer = zoomer.xyz;
                        if(starship.r==starship.g||starship.b==starship.g)zoomerBuffer/=2.;
+                       else if(starship.g==0.)
+                       {
+                           zoomerBuffer/=4.;
+                       }
                        else zoomerBuffer*=8.;
                        starship-=vec4(zoomerBuffer,0.);
                                  }
@@ -5907,7 +5911,7 @@ else {
                         -(ARTICLE.x+ARTICLE.y+ARTICLE.z)*40.
                    
                        -(bridge.x+bridge.y+bridge.z)*4.
-                       -(shipSUM+starship.b)/maxColorOfStarship*starship.w/12.
+                       -(shipSUM)/maxColorOfStarship*starship.w/12.
                                   
                        -(DOTstarship.x+DOTstarship.y+DOTstarship.z)/DOTmaxColorOfStarship*.5*DOTstarship.w
                       -(StaRivers.r+StaRivers.g+StaRivers.b)*StaRivers.w
