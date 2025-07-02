@@ -2614,7 +2614,9 @@ let x = widt*-Math.sin(rpio2);
 let y = widt*-Math.cos(rpio2);
 let xr = lengt*-Math.sin(arm);
 let yr = lengt*-Math.cos(arm);
-                                        var TransparencyStar = .375;
+                                        var TransparencyStar = -0.25;
+                                        var TransparencyStar2 = 1.;
+
                                        // if(vop.r==vop.g||vop.b==vop.g)TransparencyStar=.875;
                                       //  else
                                //         if(vop.g==0.)   TransparencyStar*=(vop.r+vop.b*2.)/Math.max(vop.b,vop.r)/3.;
@@ -2674,10 +2676,10 @@ let yr = lengt*-Math.cos(arm);
                                   
                                         starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,TransparencyStar)
                                         starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,TransparencyStar)
-                                        starColorAttribute.setXYZW(starStride+2,pureColor.r,pureColor.g,pureColor.b,TransparencyStar)
+                                        starColorAttribute.setXYZW(starStride+2,pureColor.r,pureColor.g,pureColor.b,TransparencyStar2)
                                         starColorAttribute.setXYZW(starStride+3,vop.r,vop.g,vop.b,TransparencyStar)
-                                        starColorAttribute.setXYZW(starStride+4,pureColor.r,pureColor.g,pureColor.b,TransparencyStar)
-                                        starColorAttribute.setXYZW(starStride+5,pureColor.r,pureColor.g,pureColor.b,TransparencyStar)
+                                        starColorAttribute.setXYZW(starStride+4,pureColor.r,pureColor.g,pureColor.b,TransparencyStar2)
+                                        starColorAttribute.setXYZW(starStride+5,pureColor.r,pureColor.g,pureColor.b,TransparencyStar2)
                                                                            
                                                starStride+=6;
                                   
