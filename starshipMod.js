@@ -2614,12 +2614,11 @@ let x = widt*-Math.sin(rpio2);
 let y = widt*-Math.cos(rpio2);
 let xr = lengt*-Math.sin(arm);
 let yr = lengt*-Math.cos(arm);
-                                        var TransparencyStar = .75;
-                                       /* if(vop.r==vop.g||vop.b==vop.g)TransparencyStar=.875;
-                                        else if(vop.g==0.)
-                                        {
-                     TransparencyStar*=(vop.r+vop.b*2.)/Math.max(vop.g,Math.max(vop.b,vop.r))*12.;
-                                        }*/
+                                        var TransparencyStar = .375;
+                                       // if(vop.r==vop.g||vop.b==vop.g)TransparencyStar=.875;
+                                      //  else
+                               //         if(vop.g==0.)   TransparencyStar*=(vop.r+vop.b*2.)/Math.max(vop.b,vop.r)/3.;
+                                        
                                         //else TransparencyStar/=2.;
                                                   
                                         
