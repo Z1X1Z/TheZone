@@ -1,8 +1,12 @@
 var shaderScale,dilate, coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
-,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta,spinTowardsMe,d,chop;
+,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta,spinTowardsMe,d,chop,cellularDivision,triogenesis,nGenesis,squareGenesis,constellationCoord,cloverso;
 function setUniformsToPlainName(){
     oppositionalCoreFlop=uniforms.oppositionalCoreFlop.value
+    nGenesis=uniforms.nGenesis.value
+    squareGenesis=uniforms.squareGenesis.value
     Inherited=uniforms.Inherited.value;
+    cellularDivision=uniforms.cellularDivision.value;
+    triogenesis=uniforms.triogenesis.value;
     d=uniforms.d.value;
     chop=uniforms.chop.value;
     spinTowardsMe=uniforms.spinTowardsMe.value;
@@ -57,6 +61,8 @@ function setUniformsToPlainName(){
     mandelCloverFactor=uniforms.mandelCloverFactor.value;
     superStable=uniforms.superStable.value;
     distributor=uniforms.distributor.value;
+    cloverso=uniforms.cloverso.value;
+    constellationCoord=uniforms.constellationCoord.value;
 }
 
 
@@ -68,14 +74,30 @@ var distributorFACTORloveORTH= distributorFACTORorth;//*Math.sqrt(2.)
 
 
 function tol( j,  t){
+
+    
    var inMainSpoke = false;
   //  return p;
    let p = new THREE.Vector2(j.y,j.x);//
     p = p.clone().multiplyScalar(zoom).add(new THREE.Vector2(-coords.y,-coords.x));
-    if(clvrVariant4)p.divideScalar(1.25)
-    //if(clvrVariant4)p.multiplyScalar(-leaf);
-
     
+    for(var x=2.; x<102.;x+=1.)
+    {
+        if ((nGenesis)+2.>x)
+    {
+    var regenerativeshift = 1./x;
+p.x-=regenerativeshift;
+p= new THREE.Vector2(p.x-Math.sign(p.x)*regenerativeshift,p.y);
+      p=  new THREE.Vector2(p.x-Math.sign(p.x+regenerativeshift)*regenerativeshift,p.y);
+        p.x+=regenerativeshift;
+        }
+    else break;
+    }
+    
+    if(clvrVariant4)
+        p.divideScalar(1.25)
+        if(cloverso) p.multiplyScalar((2./3.-(p.x*p.x+p.y*p.y)**.5));
+
     var pWithoutChiralizer = p.clone();
     var chiralAdjustment = 0.;
     if(chirality==-1&&twelveGates){
@@ -465,6 +487,29 @@ else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (withou
         //var trunc=1.;
         //if(lfc!=0.) trunc = Math.log(zoom/dstnce)/100.;
 s.x=Math.log(Math.abs(s.x))/Math.log(base);
+            if(cellularDivision==1||(cellularDivision==2&&counter>1.))s=new THREE.Vector2(s.x,s.y-Math.sign(s.y)/2.);
+
+            if(squareGenesis){
+
+                var regenerativeLayers = 3.;
+                    for(var x=2.; x<3.;x+=1.)
+                    {
+                    var regenerativeshift = 1./x;
+                s.x-=regenerativeshift;
+                s= new THREE.Vector2(s.x-Math.sign(s.x)*regenerativeshift,s.y);
+                      s= new THREE.Vector2(s.x-Math.sign(s.x+regenerativeshift)*regenerativeshift,s.y);
+                        s.x+=regenerativeshift;
+                        }
+                    for(var x=2.; x<regenerativeLayers;x+=1.)
+                    {
+                    var regenerativeshift = 1./x;
+                s.y-=regenerativeshift;
+                s= new THREE.Vector2(s.x,s.y-Math.sign(s.y)*regenerativeshift);
+                      s=new THREE.Vector2(s.x,s.y-Math.sign(s.y+regenerativeshift)*regenerativeshift);
+                        s.y+=regenerativeshift;
+                        }
+                       
+                }
 //traditionally be e or 3 probably 1.5 to 4
     dstnce = s.length();
 
