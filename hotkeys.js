@@ -172,7 +172,9 @@ cloverArms:{value:false},
 dynamicOvercore:{value:false},
 unroll:{value:0},
 squirgle:{value:0},
-cards:{value:false}
+cards:{value:false},
+    inseyedOut:{value:1},
+    elderHorns:{value:false}
 }
 window.uniforms={}
 
@@ -486,7 +488,13 @@ window.key = " ";
                 
                 
                 //meta keys like ctrlKey must be processed first and should have symbol preferably
-                if((key == "g"||key=="©") && event.altKey&&event.ctrlKey)
+                
+             if(key == "Y" && event.ctrlKey)
+                uniforms.inseyedOut.value=(1+uniforms.inseyedOut.value)%3;
+                
+             if(key == "U" && event.ctrlKey)
+                uniforms.elderHorns.value=!uniforms.elderHorns.value;
+                else if((key == "g"||key=="©") && event.altKey&&event.ctrlKey)
                     window.guitarMODE=!window.guitarMODE;
                 else if((key == "r"||key=="®") && event.altKey&&event.ctrlKey)
                     window.stylusON=!window.stylusON;
@@ -1072,7 +1080,7 @@ window.key = " ";
         
     }
     else if (key=="u") uniforms[ "petals" ].value += 1.;
-    else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%12;
+    else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%13;
 
     else if (key=="?"){
         if(uniforms[ "spirated" ].value==0)uniforms[ "spirated" ].value=1;
