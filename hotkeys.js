@@ -489,11 +489,12 @@ window.key = " ";
                 
                 //meta keys like ctrlKey must be processed first and should have symbol preferably
                 
-             if(key == "Y" && event.ctrlKey)
+             if(key == "J" && event.ctrlKey)
                 uniforms.inseyedOut.value=(1+uniforms.inseyedOut.value)%3;
-                
-             if(key == "U" && event.ctrlKey)
-                uniforms.elderHorns.value=!uniforms.elderHorns.value;
+             else   if(key == "L" && event.ctrlKey)                uniforms.elderHorns.value=!uniforms.elderHorns.value;
+
+            else if(key == "U" && event.ctrlKey)
+                 uniforms[ "Character" ].value = (uniforms[ "Character" ].value-1.+13)%13;
                 else if((key == "g"||key=="©") && event.altKey&&event.ctrlKey)
                     window.guitarMODE=!window.guitarMODE;
                 else if((key == "r"||key=="®") && event.altKey&&event.ctrlKey)
