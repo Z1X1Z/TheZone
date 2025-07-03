@@ -96,7 +96,11 @@ p= new THREE.Vector2(p.x-Math.sign(p.x)*regenerativeshift,p.y);
     
     if(clvrVariant4)
         p.divideScalar(1.25)
-        if(cloverso) p.multiplyScalar((2./3.-(p.x*p.x+p.y*p.y)**.5));
+        var outerMargin =Math.atan2(p.y,p.x);
+        if(cloverso)p=new THREE.Vector2
+((-Math.cos(outerMargin)-p.x,-Math.sin(outerMargin)-p.y));
+    
+       // if(cloverso) p.multiplyScalar((2./3.-(p.x*p.x+p.y*p.y)**.5));
 
     var pWithoutChiralizer = p.clone();
     var chiralAdjustment = 0.;

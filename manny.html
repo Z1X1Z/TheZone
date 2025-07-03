@@ -3400,7 +3400,10 @@ vec4 tol(vec2 p, vec2 t){
                         //if(clvrVariant4!=0.)
                         p/=1.25;
                         if(externalCores==0.)p/=1.25;
-                        if(cloverso) p=(2./3.-length(p))*p;
+                        float outerMargin =atan(p.y,p.x);
+                        if(cloverso)p=
+       (-vec2(-sin(outerMargin),-cos(outerMargin)).yx-(p));
+                       // if(cloverso) p=(2./3.-length(p))*p;
 
                          vec2 pWithoutChiralizer = p;
                          
@@ -5479,7 +5482,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                   
                                                     (-vec2(-sin(outerMargin),-cos(outerMargin)).yx-(aroundEyes))
                                                     
-                                                    ,-vec2(moveDynamic.x,-moveDynamic.y)*2.,false, 3);
+                                                    ,-vec2(moveDynamic.x,-moveDynamic.y),false, 3);
                         
                        if(insideOut.w==.5){
                           if(oneEye.r!=0.) oneEye/=2.;
