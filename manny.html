@@ -3393,6 +3393,9 @@ vec4 tol(vec2 p, vec2 t){
                         
                         if(clvrVariant4!=0.)p/=1.25;
                         if(externalCores==0.)p/=1.25;
+                        bool cloverso=false;
+                        if(cloverso) p=(2./3.-length(p))*p;
+
                          vec2 pWithoutChiralizer = p;
                          
       float chiralAdjustment = 0.;
@@ -5648,7 +5651,7 @@ if(starOnDot!=2){
                                  if(starship.w>3.5/255.)
                                  {
                                      
-                                               if(mannyFace.w==-.25)starship/=8.;
+                                               if(mannyFace.w==-.25&&starship.x!=starship.y&&starship.x!=starship.z)starship/=8.;
                                                
                                  if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.)
                                  {
@@ -5863,12 +5866,13 @@ pixelStarship += starBuffer;
 
                                if(heartWarmed.x!=0.)  heartWarmed-=zoomer/4.;
                                  mny=clamp(mny,-1.,1.);
-                                 if(mny.x==mny.y&&mny.y==mny.z&&Character==0)
+                                 if(mny.x==mny.y&&mny.y==mny.z&&Character==0&&mannyFace.w!=-.25)
                                  {
                                  if(mny.x>0.)
                        mny-=zoomer;
                                  else if(mny.x<0.)
                        mny+=zoomer/2.;
+                       
                        }
                                
                       // float zoomerSum = zoomer.r+zoomer.g+zoomer.b;
