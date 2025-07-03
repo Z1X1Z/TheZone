@@ -5465,7 +5465,8 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                  if(inseyedOut==2) aroundEyes/=3.;
                                                                  if( length   (aroundEyes)<-leaf*gr)                {
                         insideOut=faceBlackAndWhite((-leaf-length(aroundEyes))*aroundEyes,-vec2(moveDynamic.x,-moveDynamic.y),false, 3);
-                       //insideOut=clamp(insideOut,-.5,.5);
+                       if(insideOut.w==.5)insideOut/=2.;
+                       else insideOut=clamp(insideOut,-.5,.5);
                        }
                                                                  }
                                                                  vec3 moreHorns = vec3(0.);
