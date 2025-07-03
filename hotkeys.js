@@ -174,7 +174,9 @@ unroll:{value:0},
 squirgle:{value:0},
 cards:{value:false},
     inseyedOut:{value:1},
-    elderHorns:{value:false}
+    elderHorns:{value:false},
+cloverso:{value:false}
+
 }
 window.uniforms={}
 
@@ -491,6 +493,8 @@ window.key = " ";
                 
              if(key == "J" && event.ctrlKey)
                 uniforms.inseyedOut.value=(1+uniforms.inseyedOut.value)%3;
+             else   if(key == "G" && event.ctrlKey)                uniforms.cloverso.value=!uniforms.cloverso.value;
+
              else   if(key == "L" && event.ctrlKey)                uniforms.elderHorns.value=!uniforms.elderHorns.value;
 
             else if(key == "U" && event.ctrlKey)

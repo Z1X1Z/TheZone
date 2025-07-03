@@ -942,6 +942,11 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
 ;
                         uniforms.twelveGatesMeta.value=document.getElementById('metaGates').value">
                                          </p>
+                                         
+                                 <input type="checkbox" id="Cloverso" name="t"  onclick= "
+                                     key  = 'G';
+                                     callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                                     <label for="Cloverso">Cloverso![,G]</label><br>
                                  <input type="checkbox" id="field Power Boost" name="t"  onclick= "
                                      key  = 'x';
                                      callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
@@ -2021,6 +2026,7 @@ uniform float leaf;
 uniform bool cloverArms;
 uniform bool elderHorns;
 uniform int inseyedOut;
+uniform bool cloverso;
 
 
                                   
@@ -3391,9 +3397,9 @@ vec4 tol(vec2 p, vec2 t){
                         
                         
                         
-                        if(clvrVariant4!=0.)p/=1.25;
+                        //if(clvrVariant4!=0.)
+                        p/=1.25;
                         if(externalCores==0.)p/=1.25;
-                        bool cloverso=false;
                         if(cloverso) p=(2./3.-length(p))*p;
 
                          vec2 pWithoutChiralizer = p;
