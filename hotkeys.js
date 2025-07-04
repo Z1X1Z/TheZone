@@ -314,7 +314,7 @@ function resetAll(){
 
                                          
                                              if (   window.iOS )window.rez=window.devicePixelRatio/4.;
-                                               else if(window.android)window.rez=window.devicePixelRatio/5.;
+                                               else if(window.android)window.rez=window.devicePixelRatio/2.;
                                                else   window.rez=window.devicePixelRatio/2.;
                                                    
     if(window.INITIALIZED){
