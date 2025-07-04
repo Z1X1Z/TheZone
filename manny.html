@@ -5668,7 +5668,7 @@ if(starOnDot!=2){
                                  if(starship.w>3.5/255.)
                                  {
                                      
-                                               if(mannyFace.w==-.25&&(starship.x!=starship.y&&starship.x!=starship.z)&&!(starship.x>.9&&starship.y>.9&&starship.z>.9)&&!(starship.x<.1&&starship.y<.1&&starship.z<.1))starship/=8.;
+                                             if(mannyFace.w==-.25&&starship.g==1.&&starship.r==0.)starship/=8.;
                                                
                                  if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.)
                                  {
@@ -5905,7 +5905,7 @@ pixelStarship += starBuffer;
                                  
                                                   vec4 layeredOUT =vec4(0.);
                     if(constellation||squirgle==1)layeredOUT=vec4(zoomer,1.);
-                                 else if((starship.x>.9&&starship.y>.9&&starship.z>.9)&&(starship.x<.1&&starship.y<.1&&starship.z<.1))layeredOUT=vec4(vec3(starship.r),1.);
+                                 else if((starship.x>1.&&starship.y>1.&&starship.z>1.)||(starship.x<.0&&starship.y<.0&&starship.z<.0)&&starship.w!=0.)layeredOUT=vec4(vec3(starship.r),1.);
                                  else if(length(p)<2.*sqrt2/min(resolution.x,resolution.y)) layeredOUT=vec4(zoomer,1.);
                                 
                    

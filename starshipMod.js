@@ -2158,14 +2158,14 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
 
 
     let metroPhase =-Math.sin(-uniforms[ "time" ].value*uniforms[ "metronome" ].value*pi)
-       let frameCount=loopsRun%2;
+       let frameCount=((loopsRun%2)*2-1)*2;
 
     if(spirographMODE==2){
     lineMat.color = colorSoundPURE;
   }
        else if (uniforms[ "metronome" ].value>1)lineMat.color  = new THREE.Color("").setRGB(metroPhase,metroPhase,metroPhase)
            else if(spirographMODE==1) lineMat.color = new THREE.Color("").setRGB(frameCount,frameCount,frameCount);
-
+   
        
                             
                             let tx = spirray0[0], ty = spirray1[1],greyness=1.,greynessLast=-1;
@@ -2740,17 +2740,17 @@ var fingerStride = 0;
              const noteGrey = Math.abs(t-(6-twist/2.)+12)%12;
              if (t==7||t==5||t==2||t==0||t==10)
              {
-                 BlackOrWhite=-1.;
+                 BlackOrWhite=0.;
              }
-         if  ((noteGrey<.5 || noteGrey>11.5)&&uniforms.Character.value!=2&&BlackOrWhite!=-1.)
+         if  ((noteGrey<.5 || noteGrey>11.5)&&uniforms.Character.value!=2&&BlackOrWhite!=0.)
          {
              if(!uniforms.pixelSTARon.value)BlackOrWhite=.5;
              else BlackOrWhite=.25
         }
          else if( ((uniforms.Character.value==0&&(noteGrey<6.5&&noteGrey>5.5))&&BlackOrWhite!=1.) &&uniforms.colorCombo.value!=20&&!blankBackground&&starClover)
          {
-            if(!uniforms.pixelSTARon.value)BlackOrWhite=.5;
-             else BlackOrWhite=-1.;
+           // if(!uniforms.pixelSTARon.value)BlackOrWhite=.5;
+           //  else BlackOrWhite=0.;
          }
              
             else if(uniforms.colorCombo.value==20){
