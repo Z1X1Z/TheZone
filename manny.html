@@ -5480,13 +5480,13 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                         insideOut=faceBlackAndWhite(
                                                     //(-leaf-length(aroundEyes))*
                                                   
-                                                    (-vec2(-sin(outerMargin),-cos(outerMargin)).yx-aroundEyes)
+                                                    (-vec2(-sin(outerMargin),-cos(outerMargin)).yx*gr-aroundEyes*-leaf)
                                                     
-                                                    ,-vec2(moveDynamic.x,-moveDynamic.y)*gr,false, 3);
+                                                    ,-vec2(moveDynamic.x,-moveDynamic.y)*1.5,false, 3);
                         
                        if(insideOut.w==.5){
                           if(oneEye.r!=0.) oneEye/=2.;
-                           insideOut/=2.;
+                           insideOut/=1.5;
                            }
                        else insideOut=clamp(insideOut,-.5,.5);
                        }
