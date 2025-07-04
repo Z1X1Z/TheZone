@@ -3400,9 +3400,14 @@ vec4 tol(vec2 p, vec2 t){
                         //if(clvrVariant4!=0.)
                         p/=1.25;
                         if(externalCores==0.)p/=1.25;
-                        float outerMargin =atan(p.y,p.x);
-                        if(cloverso)p=
+                        if(cloverso)
+                        {
+                            float outerMargin =atan(p.y,p.x);
+
+                            p=
        (-vec2(-sin(outerMargin),-cos(outerMargin)).yx-(p));
+
+       }
                        // if(cloverso) p=(2./3.-length(p))*p;
 
                          vec2 pWithoutChiralizer = p;
@@ -3888,6 +3893,7 @@ vec2 lastS = s;
         else   s=vec2(pow(s.x,2.)*sign(s.y),pow(s.y,.5)*sign(s.x));
         }
                                    */
+                                       
         if(clvrVariant4!=0.) s*=1.-oneOverLeafTruncated;
 
         /*
@@ -3927,6 +3933,8 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
  //  s=vec2(-1./(s.x*s.x-s.y*s.y-p.x),2.0*s.x*s.y-p.y);
 
    s.x=log(abs(s.x))/log(base);
+   //float outerMargin =atan(s.y,s.x);
+ // s=(-vec2(-sin(outerMargin),-cos(outerMargin)).yx-(s));
    s /=texture2D(squirgleDynamic,vec2(mod((atan(s.y,s.x)+PIdiv2*3.+PI/12.)/PI2,1.),0.)).x;
    //traditionally be e or 3 probably 1.5 to 4
    if(cellularDivision==1||(cellularDivision==2&&counter>1.))      s=vec2(s.x,s.y-sign(s.y)/2.);
@@ -5487,7 +5495,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                     ,-vec2(moveDynamic.x,-moveDynamic.y*2.5),false, 3);
                         
                        if(insideOut.w==.5){
-                          if(oneEye.r!=0.) oneEye/=2.;
+                          if(oneEye.r!=0.) oneEye/=1.5;
                            insideOut/=1.5;
                            }
                        else insideOut=clamp(insideOut,-.5,.5);
