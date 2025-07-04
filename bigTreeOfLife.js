@@ -120,7 +120,7 @@ p= new THREE.Vector2(p.x-Math.sign(p.x)*regenerativeshift,p.y);
     if(((angle/Math.PI+2.)*6.+.5)%2.>1.)p=spin(p,Math.PI/6.);
            }
            
-var lfc = coords.length();//freed(coords).length();
+var lfc = constellationCoord.length();//freed(coords).length();
 
 
 
