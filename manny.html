@@ -4851,7 +4851,7 @@ const float brideWidth=1.27;
                                   float hyperCore=0.;
                                   float lfc = length(freed(coords));
                                   if(outerCoresOff) hyperCore=0.;
-                                  else if(!MetaCored)hyperCore=cored*twoThirds+log(lfc*3./2.)*0.9551195+.25/log(.5);//.9551195 is based on x=log3(x), x = .910239log3(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
+                                  else if(!MetaCored)hyperCore=cored*twoThirds+log(lfc*3./2.)*logStabilizationConstant+.25/log(.5);//.9551195 is based on x=log3(x), x = .910239log3(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
                                    // if(MetaCored&&morph>=.5)hyperCore*=4./3.;//engage overstable core if dancing
 
                                   float term=0.;
@@ -5474,8 +5474,8 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                  vec4 insideOut = vec4(0.);
                                                                  if(inseyedOut!=0){
                                                                  vec2 aroundEyes = characterOnTrailP;
-                                                                 if(inseyedOut==2) aroundEyes/=2.;
-                                                                 if( length   (aroundEyes)<-leaf*gr)                {
+                                                                 if(inseyedOut==2) aroundEyes/=1.75;
+                                                                 if( length   (aroundEyes)<-leaf*gr*log(3.))                {
                                                                      float outerMargin =atan(aroundEyes.y,aroundEyes.x);
                         insideOut=faceBlackAndWhite(
                                                     //(-leaf-length(aroundEyes))*
