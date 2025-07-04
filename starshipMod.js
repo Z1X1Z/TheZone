@@ -2158,7 +2158,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
 
 
     let metroPhase =-Math.sin(-uniforms[ "time" ].value*uniforms[ "metronome" ].value*pi)
-       let frameCount=((loopsRun%2)*2-1)*2;
+       let frameCount=((loopsRun%2)-.5)*2222222;
 
     if(spirographMODE==2){
     lineMat.color = colorSoundPURE;
