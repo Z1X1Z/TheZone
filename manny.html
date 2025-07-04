@@ -5473,14 +5473,16 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                                                                                               }
                                                                  vec4 insideOut = vec4(0.);
                                                                  if(inseyedOut!=0){
+                       float leafDivGR=leaf/gr;
                                                                  vec2 aroundEyes = characterOnTrailP;
                                                                  if(inseyedOut==2) aroundEyes/=1.75;
+                                                                 else aroundEyes*=-leafDivGR;
                                                                  if( length   (aroundEyes)<-leaf*gr*log(3.))                {
                                                                      float outerMargin =atan(aroundEyes.y,aroundEyes.x);
                         insideOut=faceBlackAndWhite(
                                                     //(-leaf-length(aroundEyes))*
                                                   
-                                                    (-vec2(-sin(outerMargin),-cos(outerMargin)).yx*gr/-leaf-aroundEyes*-leaf/gr)
+                                                    (-vec2(-sin(outerMargin),-cos(outerMargin)).yx/-leafDivGR-aroundEyes*-leafDivGR)
                                                     
                                                     ,-vec2(moveDynamic.x,-moveDynamic.y*2.5),false, 3);
                         
