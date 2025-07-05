@@ -5817,7 +5817,11 @@ if(starOnDot>=1){
 vec4 starBuffer = vec4(0.);
 for (float x = 0.; x<12.;x++) starBuffer+=starns(uVu,x);
 
-if (starBuffer.x==starBuffer.y&& starBuffer.y==starBuffer.z&&starBuffer.z!=0.&&isGrey==0.)pixelShipGrey=starBuffer.x;
+if (starBuffer.x==starBuffer.y&& starBuffer.y==starBuffer.z&&starBuffer.z!=0.){
+    
+if(isGrey==0.)pixelShipGrey=starBuffer.x;
+//if((bodyWithArms.r!=0.||bodyWithArms.g!=0.||bodyWithArms.b!=0.))bodyWithArms=vec4(vec3(pixelShipGrey*12.),1.);
+}
 if(pixelShipGrey!=0.)
 {
 if(isBlack==0.)pixelShipGrey=(.5+pixelShipGrey);
@@ -5910,7 +5914,6 @@ pixelStarship += starBuffer;
                        mny+=clamp(clothes-bodyWithArms.w*100.,0.,1.)+bodyWithArms.xyz*bodyWithArms.w*clamp(clothes*100000.,0.,1.);
                        }
                                  
-                                 
                                                   vec4 layeredOUT =vec4(0.);
                     if(constellation||squirgle==1)layeredOUT=vec4(zoomer,1.);
                                  else if((starship.x>1.&&starship.y>1.&&starship.z>1.)||(starship.x<.0&&starship.y<.0&&starship.z<.0)&&starship.w!=0.)layeredOUT=vec4(vec3(starship.r),1.);
@@ -5969,7 +5972,7 @@ else {
                                             +GOH.xyz)*(1.-pixelShipGrey*40.)
                                         +yourFace.xyz
                     +//clamp((
-                           (mny-oneEye*100.*mny)*(1.-isGrey)
+                           (mny-oneEye*100.*mny)*(1.-isGrey-pixelShipGrey)
                             +overchargeCharacter
                                            //-clamp(vec3(pixelStarship.b,pixelStarship.g-pixelStarship.g*pixelStarship.g,pixelStarship.r),0.,1.)*2.*mnyWhite
                                      // +(-hypnoticHarmonicCircles.x-hypnoticHarmonicCircles.y-hypnoticHarmonicCircles.z)*2.)*starshipMultiplier*(1.-isGrey-pixelShipGrey)
@@ -6000,7 +6003,7 @@ else {
                        -(creatures.r+creatures.g+creatures.b+b.b+b.g+b.r)*4.
                                                  
                                                 +( -pixelStarship.r-pixelStarship.g-pixelStarship.b)
-                                                 +(-bodyWithArms.r-bodyWithArms.g-bodyWithArms.b)*20.
+                                                 +(-mny.r-mny.g-mny.b)*(mannyFace.w+1.)*20.
                                                  
                                                  );
 float treeBrightner = 1.;
