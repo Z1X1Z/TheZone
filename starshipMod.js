@@ -661,8 +661,8 @@ function setFFTdependantSizes(){
      window.zoomOutRatchetThreshold=starSHIPVOLUMEdefaultLowVolume;//5./1024;////or 1/1024.//maybe shouldn't need to be here could be solved away
      
      
-      star= new Float32Array((numberOfBins>EldersLeg)?numberOfBins*3*3:EldersLeg*6*3);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
-      starColors= new Float32Array((numberOfBins>EldersLeg)?numberOfBins*3*4:EldersLeg*6*4);
+      star= new Float32Array((numberOfBins>EldersLeg)?numberOfBins*3*3:EldersLeg*3*2*3);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
+      starColors= new Float32Array((numberOfBins>EldersLeg)?numberOfBins*3*4:EldersLeg*6*4*3);
      
                         starArms = numberOfBins;
              window.starCount = Math.ceil(starArms*60*secondsToEdge);
@@ -2544,13 +2544,15 @@ else{//start drawing of just twenty four frets here
     let topNote = Math.round(-twist+60)%24;
 
     let inset = 14;
-let dep = (-starShipDepthInSet+(1.-starShipDepthInSet))/inset-1.+1./inset;
+let depBuffer = (-starShipDepthInSet+(1.-starShipDepthInSet))/inset-1.+1./inset;
     
 let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
             for (var g=oddSkew; g<fretMultiplied; g++) {
                 let incrementation = (EldersLeg%2==0)?g%2:(g+1)%2;
                 //incrementation/=2.;
                incrementation++;
+                let dep = depBuffer;
+
                 let arm =0;
                 let lengt =0;
                 let widt =0;
@@ -2559,14 +2561,11 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                     widt= starshipSize/(EldersLeg/24.)**.5/incrementation/2.;
                     if (g==bottomNote&&EldersLeg==24)widt*=2.;
                     else if (g==topNote&&EldersLeg==24)widt*=1.5;
-
                  arm =flip*(g*radialWarp+twist*EldersLeg/24.)%EldersLeg/EldersLeg*pi*2.;
                  lengt = ((testar[(g+EldersLeg/2.)%EldersLeg])-minTestar)/(maxTestar-minTestar);;
-                           
                 if(twoOr1) {
                     lengt/=2.**15./EldersLeg;
                     lengt=lengt**.25;
-                    
                 }
                                   }
                                   
@@ -2574,7 +2573,7 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                                   
                             if(g%2==0&&Oreo!=0)
                             {
-                                const nt = Math.round(g/EldersLeg*12+6+24*100)%12;
+                                const nt = Math.round(g/EldersLeg*12+6)%12;
                                 if ((nt==7||nt==5||nt==2||nt==0||nt==10)==(Oreo==1)) BlackOrWhiteFRET=-1.;
                                 else BlackOrWhiteFRET=.875;
                             }
@@ -2694,7 +2693,7 @@ let yr = lengt*-Math.cos(arm);
                  starPositionAttribute.setXYZ(starStride+3,-x+xBoost, -y+yBoost,  dep)
                  starPositionAttribute.setXYZ(starStride+4,(xr+x), (yr+y),  dep)
                  starPositionAttribute.setXYZ(starStride+5,(xr-x), (yr-y),  dep)
-                 
+              
                  
                  
                        starColorAttribute.setXYZW(starStride,.5,.5,.5,1.)
