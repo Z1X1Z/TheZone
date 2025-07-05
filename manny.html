@@ -5498,7 +5498,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                           if(oneEye.r!=0.) oneEye/=1.5;
                            insideOut/=1.5;
                            }
-                       else insideOut=clamp(insideOut,-.5,.5);
+                       else insideOut=vec4(clamp(insideOut.xyz,.25,.75),1.);
                        }
                                                                  }
                                                                  vec3 moreHorns = vec3(0.);
@@ -5983,7 +5983,7 @@ else {
                                                  -yourFace.xyz
                                                 // +(-HEART.b-HEART.r-HEART.g)/2.
                                                 // +(-HEART.b-HEART.r-HEART.g)/4.
-                                                 -clamp(AM.r*7.,0.,1.)
+                                                 -clamp(AM.r*9.,0.,1.)
                                                  +(-linearFrequency.r-linearFrequency.g-linearFrequency.b)*4.
                                                  -(pong.r+pong.g+pong.b)
                                                  +bigEyes.xyz*largeEyeColor
