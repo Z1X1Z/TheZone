@@ -2548,7 +2548,7 @@ return h;
                                     {
                                         if(wink)
                                         {
-                                           if( round(adjustedNote)==4.||floor(adjustedNote)==4.)
+                                           if( round(adjustedNote)==4.||floor(adjustedNote)==4.||ceil(adjustedNote)==4.)
                                            l=vec4(vec3(1.),0.);
                                            }
                                         else l = vec4( 1.-eyeColorCycler,eyeColorCycler,eyeColorCycler,.5);
@@ -2556,7 +2556,7 @@ return h;
                                     else
                                     {
                                         if(wink)
-                                        {                                           if(round(adjustedNote)==8.||ceil(adjustedNote)==8.)
+                                        {                                           if(round(adjustedNote)==8.||ceil(adjustedNote)==8.||floor(adjustedNote)==8.)
 
                                             l=vec4(vec3(1.),0.);
                                             }
@@ -2568,7 +2568,7 @@ return h;
                                     if(p.y<0.)
                                     {
                                         if(wink)
-                                        {                                           if(round(adjustedNote)==3.||round(adjustedNote)==2.)
+                                        {                                           if(ceil(adjustedNote)==3.||round(adjustedNote)==2.)
 
                                             l=vec4(vec3(1.),0.);
                                             }
@@ -2580,7 +2580,7 @@ return h;
                                        }
                                     else {
                                         if(wink)
-                                        {                                           if(round(adjustedNote)==9.||round(adjustedNote)==10.)
+                                        {                                           if(floor(adjustedNote)==9.||round(adjustedNote)==10.)
 
                                             l=vec4(vec3(1.),0.);
                                             }
