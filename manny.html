@@ -5470,6 +5470,15 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
     else if(largeEyeColor==4.)
                         bigEyes=faceBlackAndWhite(eyeMatch,moveDynamic*1.5,false, 0).xyz;
                                                                  
+                                                  if(musicAngelMan>0&&Character!=3&&Character!=4)
+                                                                       {
+                                                             float divisor = 1.;
+                                                             if(gameOn)divisor=1.5;
+                                                             AM+=faceFORWARD(characterOnTrailP*angelSize,moveDynamic)/divisor;
+                                                            if(mny.r!=0.||mny.g!=0.||mny.b!=0.) AM*=mny;
+                                                         //    mny+=AM;
+                                                             }
+                                                                 
                                                               //   eyeMatch*=1.5;
                                                                  vec3 unrolledEyes = vec3(0.);
                                                                                                     if (unroll==1){
@@ -5493,13 +5502,15 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                     (-vec2(-sin(outerMargin),-cos(outerMargin)).yx/-leafDivGR-aroundEyes*-leafDivGR)
                                                     
                                                     ,-vec2(moveDynamic.x,-moveDynamic.y*2.5),false, 3);
-                        
+                                                if(insideOut.w!=0.)    insideOut+=clamp(AM.r,0.,1.)/8.;
+
                        if(insideOut.w==.5){
                         //  if(oneEye.r!=0.) oneEye/=1.5;
-                           insideOut/=1.5;
+                           insideOut/=1.25;
                            }
-                       else insideOut=vec4(clamp(insideOut.xyz,.0,1.),1.);
+                       else insideOut=vec4(clamp(insideOut.xyz,.2,.8),1.);
                        }
+
                                                                  }
                                                                  vec3 moreHorns = vec3(0.);
                                                                  if (elderHorns)
@@ -5512,15 +5523,6 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                 // else if(abs(cross.x)<abs(cross.y))cross=cross.yx;
                                                                  moreHorns=-faceBlackAndWhite(cross*1.221221,-vec2(0.),false, 3).xyz;
                                                                  }
-                                                  if(musicAngelMan>0&&Character!=3&&Character!=4)
-                                                                       {
-                                                             float divisor = 1.;
-                                                             if(gameOn)divisor=1.5;
-                                                             AM+=faceFORWARD(characterOnTrailP*angelSize,moveDynamic)/divisor;
-                                                            if(mny.r!=0.||mny.g!=0.||mny.b!=0.) AM*=mny;
-                                                         //    mny+=AM;
-                                                             }
-                                                                 
                                  //          mny=clamp(mny,0.,1.);
                                                                  
                                                                  float frAMP=0.;
@@ -5984,7 +5986,7 @@ else {
                                                  -yourFace.xyz
                                                 // +(-HEART.b-HEART.r-HEART.g)/2.
                                                 // +(-HEART.b-HEART.r-HEART.g)/4.
-                                                 -clamp(AM.r*9.,0.,1.)
+                                                 -clamp(AM.r*14.,0.,1.)
                                                  +(-linearFrequency.r-linearFrequency.g-linearFrequency.b)*4.
                                                  -(pong.r+pong.g+pong.b)
                                                  +bigEyes.xyz*largeEyeColor
