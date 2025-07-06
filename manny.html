@@ -3970,14 +3970,14 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
 
    float angleToLittleClover =atan(lastS.x,lastS.y)-mod(atan(lastS.x,lastS.y),PI2/6.)+PI2/12.;//PI2/12.*4.;
  //  angleToLittleClover*=-1.;
-   float distanceFromCenter = 0.;
+   float distanceFromCenter = .5;
 if(clvrVariant4!=0.&&1==3)    distanceFromCenter =length(lastS-vec2(-sin(-angleToLittleClover),cos(angleToLittleClover))*-leafDivGR/(logStabilizationConstantB))/(1.+leafDivGR/(logStabilizationConstantA))/2.;///logStabilizationConstantA;
                                              
                 else distanceFromCenter =length(lastS+vec2(-sin(-angleToLittleClover),cos(angleToLittleClover)));
 
                                   if(distanceFromCenter<1.)//4./3.)
                                   {
-                                  s*=distanceFromCenter/length(lastS);
+                                  s*=distanceFromCenter/s*metaCoreDriveFactor;
                                   
                                  // hyperCoreBoosted+=pow(distanceFromCenter/length(lastS);
                                   //hyperCoreBoosted*=2.;
