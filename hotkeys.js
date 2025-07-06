@@ -175,8 +175,8 @@ squirgle:{value:0},
 cards:{value:false},
     inseyedOut:{value:1},
     elderHorns:{value:false},
-cloverso:{value:false}
-
+cloverso:{value:false},
+OrthoEvery:{value:1.}
 }
 window.uniforms={}
 
@@ -499,6 +499,16 @@ window.key = " ";
 
             else if(key == "U" && event.ctrlKey)
                  uniforms[ "Character" ].value = (uniforms[ "Character" ].value-1.+13)%13;
+                
+            else   if(key == "O" && event.ctrlKey)   //             uniforms.OrthoEvery.value=                !uniforms.OrthoEvery.value;
+                
+            {if(number!="no number")
+                uniforms.OrthoEvery.value=number;
+            else if( uniforms.OrthoEvery.value==1.)uniforms.OrthoEvery.value=0.
+                else  uniforms.OrthoEvery.value=1.;
+                console.log(uniforms.OrthoEvery.value)
+                
+            }
                 else if((key == "g"||key=="©") && event.altKey&&event.ctrlKey)
                     window.guitarMODE=!window.guitarMODE;
                 else if((key == "r"||key=="®") && event.altKey&&event.ctrlKey)
