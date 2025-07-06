@@ -31,7 +31,7 @@ pongOn:{value:true},
 heartStar:{value:0},
 superStable:{value:false},
 distributor:{value:true},
-oppositionalCoreFlop:{value:2},
+oppositionalCoreFlop:{value:0},
 micIn:{value:null},
     audioBuffer:{value:null},
     omniDynamic:{value:null},
@@ -176,7 +176,7 @@ cards:{value:false},
     inseyedOut:{value:1},
     elderHorns:{value:false},
 cloverso:{value:false},
-OrthoEvery:{value:1.}
+OrthoEvery:{value:2.}
 }
 window.uniforms={}
 
@@ -473,14 +473,14 @@ window.addEventListener('keydown', function(event) {callKey(event); return true;
 window.key = " ";
                                          function callKey(event){
                 window.lastKey = window.key;
-             /*   if(lastKey==","&&!runningHash)//key here is the last key
-                    event=new KeyboardEvent('keydown',
-                                            {"key":event.key,"keyCode":event.keyCode,"ctrlKey":true}
-                                            );
-                else if(lastKey=="."&&!runningHash)event=new KeyboardEvent('keydown',
-                                                                           {"key":event.key,"keyCode":event.keyCode,"altKey":true}//creating a new keypress because it's readonly
-                                                                           );
-                */
+                /*   if(lastKey==","&&!runningHash)//key here is the last key
+                 event=new KeyboardEvent('keydown',
+                 {"key":event.key,"keyCode":event.keyCode,"ctrlKey":true}
+                 );
+                 else if(lastKey=="."&&!runningHash)event=new KeyboardEvent('keydown',
+                 {"key":event.key,"keyCode":event.keyCode,"altKey":true}//creating a new keypress because it's readonly
+                 );
+                 */
                 key = event.key;
                 //number=Number(number);
                 if(key=="/"&&!event.shiftKey){  event.preventDefault(); event.stopImmediatePropagation();}
@@ -491,24 +491,24 @@ window.key = " ";
                 
                 //meta keys like ctrlKey must be processed first and should have symbol preferably
                 
-             if(key == "J" && event.ctrlKey)
-                uniforms.inseyedOut.value=(1+uniforms.inseyedOut.value)%3;
-             else   if(key == "G" && event.ctrlKey)                uniforms.cloverso.value=!uniforms.cloverso.value;
-
-             else   if(key == "L" && event.ctrlKey)                uniforms.elderHorns.value=!uniforms.elderHorns.value;
-
-            else if(key == "U" && event.ctrlKey)
-                 uniforms[ "Character" ].value = (uniforms[ "Character" ].value-1.+13)%13;
+                if(key == "J" && event.ctrlKey)
+                    uniforms.inseyedOut.value=(1+uniforms.inseyedOut.value)%3;
+                else   if(key == "G" && event.ctrlKey)                uniforms.cloverso.value=!uniforms.cloverso.value;
                 
-            else   if(key == "O" && event.ctrlKey)   //             uniforms.OrthoEvery.value=                !uniforms.OrthoEvery.value;
+                else   if(key == "L" && event.ctrlKey)                uniforms.elderHorns.value=!uniforms.elderHorns.value;
                 
-            {if(number!="no number")
-                uniforms.OrthoEvery.value=number;
-            else if( uniforms.OrthoEvery.value==1.)uniforms.OrthoEvery.value=0.
-                else  uniforms.OrthoEvery.value=1.;
-                console.log(uniforms.OrthoEvery.value)
+                else if(key == "U" && event.ctrlKey)
+                    uniforms[ "Character" ].value = (uniforms[ "Character" ].value-1.+13)%13;
                 
-            }
+                else   if(key == "O" && event.ctrlKey)   //             uniforms.OrthoEvery.value=                !uniforms.OrthoEvery.value;
+                    
+                {if(number!="no number")
+                    uniforms.OrthoEvery.value=number;
+                else if( uniforms.OrthoEvery.value==1.)uniforms.OrthoEvery.value=0.
+                    else  uniforms.OrthoEvery.value=1.;
+                    console.log(uniforms.OrthoEvery.value)
+                        
+                        }
                 else if((key == "g"||key=="©") && event.altKey&&event.ctrlKey)
                     window.guitarMODE=!window.guitarMODE;
                 else if((key == "r"||key=="®") && event.altKey&&event.ctrlKey)
@@ -520,26 +520,28 @@ window.key = " ";
                 else if((key == "c"||key=="ç") && event.altKey&&event.ctrlKey)
                 {
                     uniforms.constellation.value=!uniforms.constellation.value;
-           
+                    
                 }
                 else if((key == "s"||key=="ç") && event.altKey&&event.ctrlKey)
                 {
                     uniforms.constellation.value=!uniforms.constellation.value;
-           
+                    
                 } else if((key == "l"||key=="¬") && event.altKey&&event.ctrlKey)
                 {
-                   uniforms.squirgle.value=(uniforms.squirgle.value+=1)%3;
+                    uniforms.squirgle.value=(uniforms.squirgle.value+=1)%3;
                     if(uniforms.squirgle.value==0)squirgleData.fill(1.)
-           
-                }
+                        
+                        }
                 else if((key == "p"||key=="π") && event.altKey&&event.ctrlKey)
                     uniforms.squareGenesis.value=!uniforms.squareGenesis.value;
                 
                 
                 
                 
-            else if((key == "o"||key=="ø") && event.altKey&&event.ctrlKey)
-                uniforms.oppositionalCoreFlop.value=(uniforms.oppositionalCoreFlop.value+1)%3;
+                else if((key == "o"||key=="ø") && event.altKey&&event.ctrlKey)
+                { uniforms.oppositionalCoreFlop.value=(uniforms.oppositionalCoreFlop.value+1)%3;
+                    console.log(uniforms.oppositionalCoreFlop.value);
+            }
                 
                 else if((key == "h"||key=="˙") && event.altKey&&event.ctrlKey)
                         uniforms.dynamicOvercore.value=!uniforms.dynamicOvercore.value;
