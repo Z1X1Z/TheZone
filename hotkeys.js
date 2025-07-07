@@ -31,7 +31,7 @@ pongOn:{value:true},
 heartStar:{value:0},
 superStable:{value:false},
 distributor:{value:true},
-oppositionalCoreFlop:{value:0},
+oppositionalCoreFlop:{value:2},
 micIn:{value:null},
     audioBuffer:{value:null},
     omniDynamic:{value:null},
@@ -176,7 +176,7 @@ cards:{value:false},
     inseyedOut:{value:1},
     elderHorns:{value:false},
 cloverso:{value:false},
-OrthoEvery:{value:2.}
+OrthoEvery:{value:0.}
 }
 window.uniforms={}
 
