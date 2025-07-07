@@ -916,7 +916,7 @@ function init() {
 
      scene.add(harmonicPzyghtheMesh)
      scene.add(meshTrail)
-     scene.add(line);
+             shaderScene.add(line);
              scene.add(starMesh);
              scene.add(DAWstarMesh);
      scene.add(starsANDwitnessesMesh)
@@ -1166,7 +1166,7 @@ function onWindowResize() {
                 osmdResize();//osmdResize defined in fileSelectAndLoadOSMD.js
             }
         
-           if(typeof THREE=="object") adjustThreeJSWindow();
+           if(INITIALIZED) adjustThreeJSWindow();
      
      
      //menuBoxes declared in manny.html
@@ -1663,8 +1663,12 @@ function runOSMD (){
                         uniforms.STAR.value=null;
                         uniforms.EDEN.value=null;
                    freezeTop();
-                                                                         renderer.setRenderTarget (null)
+                   shaderScene.remove(line)
+
+                   renderer.setRenderTarget (null)
                                                                          renderer.render( shaderScene, camera );
+                   shaderScene.add(line)
+
                                                                      
                                                                    
                             if(textON)
@@ -3430,12 +3434,20 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
                                     else{
                                         renderer.setRenderTarget (null)
                                         
-                                        if(uniforms.MannyONtrail.value!=2) scene.add(radialLine);
+                                        if(uniforms.MannyONtrail.value!=2)
+                                            shaderScene.remove(line);
+                                            scene.add(line);
+
+                                            scene.add(radialLine);
+                                            
                                                            if(uniforms.MannyONtrail.value!=2) scene.add(circle);
                                         renderer.render( scene, camera );
                                         
                                         if(uniforms.MannyONtrail.value!=2) scene.remove(radialLine);
                                         if(uniforms.MannyONtrail.value!=2) scene.remove(circle);
+                                        scene.remove(line);
+                                        shaderScene.add(line);
+
                                     }
                                       scene.remove(shaderMeshClone);
                                      }

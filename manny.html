@@ -2694,7 +2694,11 @@ return h;
                             
                         }
                         if((l.r<.0||l.g<0.||l.b<0.)&&isEscaped!=-2.)l=vec4(0.);
-                            if(g.y==0.&&t.y==0.&&!wink)l=vec4(1.);
+                            if(g.y==0.&&t.y==0.&&!wink)
+                            {if(g.x<0.)
+                            l=vec4(-2.);
+                            else l = vec4(2.);
+                            }
                           if(l.w==1.||l.w==.25)
                         return -l;
                         else if(l.w==.5)return l;
