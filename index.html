@@ -70,7 +70,9 @@
                     //window.location.hash =hashExtension;
                     let hrefLocal = mee+"#"+hashExtension;
                     hashExtension=""
-                    window.location.href=hrefLocal;
+                    if(hashExtension!="")window.location.href=hrefLocal;
+                    else window.location.href = mee;
+                    
                   //  console.log(hrefLocal+" "+document.location.href)
                 }
                 
@@ -123,7 +125,7 @@
 "touchHash+='t'
 loadStarshipWithHash(this.name)"
       >Touch Navigation Only</a></li>
-   <li> <a class="onoffline2" onclick="hashExtension+='t,t'
+   <li> <a class="onoffline2" value="" onclick="hashExtension+='t,t'
 loadStarshipWithHash(this.name)" name="manny.html"> Touch with star</a></li>
 <p>
  May not work on all browsers with some Androids indicated by a white or mostly black screen once loaded.  If so try a different browser like Firefox or Opera.  For starship that should work, try one that's
