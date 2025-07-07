@@ -60,11 +60,12 @@
            
             <script>
                 var hashExtension="";
-
+                var touchHash = ""
                 function loadStarshipWithHash(mee){
                     if(document.getElementById("Genesis").checked){
                     hashExtension +=',.t(1).,b';
                     }
+                    hashExtension+=touchHash
                     //console.log(hashExtension)
                     //window.location.hash =hashExtension;
                     let hrefLocal = mee+"#"+hashExtension;
@@ -105,9 +106,21 @@
                 </figcaption>
                 </figure>
             </div>
-    
+            <p>
+    <input type="text" id = "configuration" onkeyup="        localStorage.setItem('config', this.value);
+        hashExtension=localStorage.getItem('config');
+        console.log(hashExtension)
+
+"
+>Configuration Hotkeys</input>
+    <script>
+        let hkConfig = localStorage.getItem('config');
+        document.getElementById('configuration').value=hkConfig;
+        hashExtension=hkConfig;
+                                </script>
+    <p>
    <li> <a class="onoffline2"  name="manny.html" onclick=
-"hashExtension+='t'
+"touchHash+='t'
 loadStarshipWithHash(this.name)"
       >Touch Navigation Only</a></li>
    <li> <a class="onoffline2" onclick="hashExtension+='t,t'
@@ -115,7 +128,7 @@ loadStarshipWithHash(this.name)" name="manny.html"> Touch with star</a></li>
 <p>
  May not work on all browsers with some Androids indicated by a white or mostly black screen once loaded.  If so try a different browser like Firefox or Opera.  For starship that should work, try one that's
  <a class="onoffline2"  name="manny.html" onclick=
-"hashExtension+='YO'
+"touchHash+='YO'
 loadStarshipWithHash(this.name)"
     >barebones</a>.
  
