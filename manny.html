@@ -4003,7 +4003,7 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
                                                                                                                                                                   //distanceFromCenter =length(lastS-vec2(-sin(-angleToLittleClover),cos(angleToLittleClover))*(1.+oneOverLeafTruncated));///(1.+oneOverLeafTruncated);
                                                                                                                                                                   //if (distanceFromCenter>.5)
  //distanceFromCenter =length(lastS-vec2(-sin(-angleToLittleClover),cos(angleToLittleClover)));
-                                  if(distanceFromCenter<.5)//4./3.)
+                                  if(distanceFromCenter<1./3.)//4./3.)
                                   {
                                   s*=distanceFromCenter/length(s)*2.;//var4Factor;//*metaCoreDriveFactor;
                                   //s=vec2(0.);

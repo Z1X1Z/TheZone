@@ -2746,8 +2746,9 @@ var fingerStride = 0;
              }
          if  ((noteGrey<.5 || noteGrey>11.5)&&uniforms.Character.value!=2&&BlackOrWhite!=0.)
          {
-             if(!uniforms.pixelSTARon.value)BlackOrWhite=.5;
-             else BlackOrWhite=.25
+            // if(!uniforms.pixelSTARon.value)
+             if(blankBackground&&!starClover)BlackOrWhite=1.;
+             else BlackOrWhite=.5
         }
          else if( ((uniforms.Character.value==0&&(noteGrey<6.5&&noteGrey>5.5))&&BlackOrWhite!=1.) &&uniforms.colorCombo.value!=20&&!blankBackground&&starClover)
          {
@@ -3134,7 +3135,8 @@ if (circleY>height)circleY=-height;
 else if (circleY<-height)circleY=height;
                                   circleMaterial.color=colorSound;
                                                                             if(uniforms.starOnDot.value==3)                circleMaterial.opacity=0.;
-                                                                                            else                       circleMaterial.opacity=.8;
+                                                                                            else if(uniforms.starOnDot.value>0)                circleMaterial.opacity=.5;
+                                                                                                            else                       circleMaterial.opacity=.8;
 
                                         const sides = (isFinite(note))? Math.round((Math.abs((note+.5)%1.-.5))*12.)%12+2. : 0.;
                                   circle.geometry=new THREE.CircleGeometry(dotSize,sides,0.);
