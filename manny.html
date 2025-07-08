@@ -5626,13 +5626,29 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                  vec3 moreHorns = vec3(0.);
                                                                  if (elderHorns)
                                                                  {
+                                                                
+                                                                
                                                                 vec2 cross = characterOnTrailP;
-                                                   
-                                                               if(characterOnTrailP.x>0.)cross.x = -cross.x;//abs(cross);
-                                                                // cross.x = cross.x;// -abs(cross);
-                                                                if((characterOnTrailP.x)<abs(characterOnTrailP.y))cross=-abs(cross.yx);
-                                                                if(characterOnTrailP.y<0.)cross.y = -cross.y;
 
+
+
+                                                                                                                                if(characterOnTrailP.y<0.);cross = -characterOnTrailP;
+
+
+                                                                                                                                if(abs(cross.x)<abs(cross.y))cross=cross.yx;
+
+
+                                                                                                                                if(cross.x>0.)cross.x = -cross.x;
+                                                                                                                                
+                                                                                                                                
+                                                              /*  float leafFactor =4./3./-leaf;//logStabilizationConstant;//;
+                                                            cross.x*=leafFactor;
+                                                              //  cross=spin2(cross,atan(cross.x,cross.y)*-(1.-log(3.)));
+                                                                cross.y/=leafFactor;
+                                                               if(characterOnTrailP.x>0.)cross.x = -cross.x;
+                                                       if((characterOnTrailP.x)<abs(characterOnTrailP.y))cross=-abs(cross.yx);
+                                                       //         if(characterOnTrailP.y<0.)cross.y = -cross.y;
+*/
                                                                 // else if(abs(cross.x)<abs(cross.y))cross=cross.yx;
                                                                  moreHorns=-faceBlackAndWhite(cross*1.221221,-vec2(0.),false, 3).xyz;
                                                                  }
