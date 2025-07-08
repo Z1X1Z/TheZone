@@ -5627,9 +5627,11 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                  if (elderHorns)
                                                                  {
                                                                 vec2 cross = characterOnTrailP;
-                                                                 if(characterOnTrailP.y<0.);cross = -characterOnTrailP;
-                                                                 if(abs(cross.x)<abs(cross.y))cross=cross.yx;
-                                                                 if(cross.x>0.)cross.x = -cross.x;
+                                                   
+                                                               if(characterOnTrailP.x>0.)cross.x = -cross.x;//abs(cross);
+                                                                // cross.x = cross.x;// -abs(cross);
+                                                                if((characterOnTrailP.x)<abs(characterOnTrailP.y))cross=-abs(cross.yx);
+                                                                if(characterOnTrailP.y<0.)cross.y = -cross.y;
 
                                                                 // else if(abs(cross.x)<abs(cross.y))cross=cross.yx;
                                                                  moreHorns=-faceBlackAndWhite(cross*1.221221,-vec2(0.),false, 3).xyz;
