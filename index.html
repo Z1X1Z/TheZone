@@ -77,7 +77,7 @@
             </script>
            
             <div id="centered">
-                <a class="onoffline2" name="manny.html" onclick="loadStarshipWithHash(this.name,'')">
+                <a class="onoffline2" name="manny.html" onclick="loadStarshipWithHash(this.name,localStorage.getItem('config'))">
                     <figure>
 
                 <div style="outline-style: double;  "  >
@@ -108,8 +108,7 @@
             </div>
             <p>
     <input type="text" id = "configuration" onkeyup="        localStorage.setItem('config', this.value);
-        hashExtension=localStorage.getItem('config');
-        console.log(hashExtension)
+
 
 "
 >Configuration Hotkeys</input>
