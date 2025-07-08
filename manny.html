@@ -631,7 +631,7 @@ radialWarp=b;
                    Oreo?![,j]</a><br>
                
                
-               <a id="Cancel Background Noise" name="t"  onclick= "
+               <a id="Cancel background Noise" name="t"  onclick= "
 
                    key  = 'p';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -1219,10 +1219,10 @@ Reset Zoom![L]</a><br>
                       <input type="checkbox" id="Quiet Sound" name="t"  onclick= "window.playQuietestSound =  !window.playQuietestSound;">
                        <label for="Quiet Sound">Quietest Sound![,.v]</label><br>
                       
-                     <input type="checkbox" id="Blank Background" name="t"  onclick= "
+                     <input type="checkbox" id="Blank background" name="t"  onclick= "
                          key  = 'Y';
                          callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                      <label for="Blank Background">Blank Background![Y]</label><br>
+                      <label for="Blank background">Blank background![Y]</label><br>
                       
                  <a id="Cycle Character" name="t"  onclick= "
                      key  = 'U';
@@ -1682,7 +1682,7 @@ Open MusicXML file
             }
           function toggleMenuCategory ()
           {
-          if(ae!=null&&!menuJustClosedByBackgroundPress&&ae.id!="load message"){
+          if(ae!=null&&!menuJustClosedBybackgroundPress&&ae.id!="load message"){
               
               closeMenus();
                
@@ -1716,16 +1716,16 @@ Open MusicXML file
 
                               }
 
-          menuJustClosedByBackgroundPress=false
+          menuJustClosedBybackgroundPress=false
 
           }
-        let menuJustClosedByBackgroundPress = false;
+        let menuJustClosedBybackgroundPress = false;
 
-        document.getElementById("container").addEventListener("pointerdown",(e)=>{aeid="";menuJustClosedByBackgroundPress=true;closeMenus();})
+        document.getElementById("container").addEventListener("pointerdown",(e)=>{aeid="";menuJustClosedBybackgroundPress=true;closeMenus();})
 
-        document.getElementById("menuDivider").addEventListener("pointerdown",(e)=>{aeid="";menuJustClosedByBackgroundPress=true;closeMenus();})
+        document.getElementById("menuDivider").addEventListener("pointerdown",(e)=>{aeid="";menuJustClosedBybackgroundPress=true;closeMenus();})
         
-        document.getElementById("textWindow").addEventListener("pointerdown",(e)=>{aeid="";menuJustClosedByBackgroundPress=true;closeMenus();})
+        document.getElementById("textWindow").addEventListener("pointerdown",(e)=>{aeid="";menuJustClosedBybackgroundPress=true;closeMenus();})
 
          addEventListener("pointerover",(e)=>{pointerInMenu(e)})
 
@@ -1734,7 +1734,7 @@ Open MusicXML file
 ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
           setTimeout(toggleMenuCategory,50)
           
-         })//setTimeout to give time for menuJustClosedByBackgroundPress
+         })//setTimeout to give time for menuJustClosedBybackgroundPress
 
     </script>
     
@@ -2056,7 +2056,7 @@ uniform float OrthoEvery;
 
     float zin(float x){return -sin(x);}
     float coz(float x){return -cos(x);}
-
+    float rnd(float x){return sign(x)*floor(abs(x)+.5);}
     
     //The below hsv2rgb function is:
     // The MIT License
@@ -2156,7 +2156,7 @@ vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
                      
                float freq =h.y*sampleRate;
              float noteLine =12.*log(freq/concertKeyTuning)/log(2.)+49.;
-                            //     if(mod(round(noteLine),12.)==6.)
+                            //     if(mod(rnd(noteLine),12.)==6.)
                                      {
               if (frAmp>h.x*1.5)  ret = vec4(hsv2rgb( vec3( mod((-noteLine)*brelued+4.,12.)/12. ,1.,1. )),0.); //vec4(mod(note,12.)/12.);
                     else if(frAmp>h.x) ret =vec4(sign(vUv.x-.5)*20.*flipStar*brelued);
@@ -2187,16 +2187,19 @@ float brightness=0.;
         //if (twistStar<24.)
          {
               float b =1./sampleRate*pow(2.,angle+n-1./12.)*concertKeyTuning;//440hz down one note is 415.305
+              if(b<1.){
               float frampBuffer = texture2D(micIn, vec2(b,0.)).r;
-               //if(round(angle*12.)==1.)
-               frAmp += frampBuffer;
+               //if(rnd(angle*12.)==1.)
+              //if(mod(rnd(angle*12.),12.)==1.)
+              frAmp += frampBuffer;
               //  brightness=10.;
 
-       // if(round(mod(angle*12.,12.))==1.)
-        brightness +=((n+12.+1.))*frampBuffer;
-
+       // if(rnd(mod(angle*12.,12.))==1.)
+        if(n<=10.&&n>=0.)brightness +=(n+1.)*frampBuffer;
+}
         }
-         brightness/=20.;
+         brightness/=4.;
+        // brightness=1.;
          //  frAmp/=255.;
          frAmp/=2.;
        //    frAmp=pow(frAmp,.888);
@@ -2288,9 +2291,9 @@ float brightness=0.;
         vec2(note1
         ,0.)).r;
                       // if(floor(oct)!=2.)noteAmp=0.;
-                   //  if(round(mod(note0*12.+12.*12.,12.))!=1.)noteAmp*=0.;
+                   //  if(rnd(mod(note0*12.+12.*12.,12.))!=1.)noteAmp*=0.;
                        noteAmp*=12.;
-                       // if(round(mod(note0*12.,12.))==0.)noteAmp=100.;//incomplete testing and
+                       // if(rnd(mod(note0*12.,12.))==0.)noteAmp=100.;//incomplete testing and
                        // else noteAmp=0.;
                        
        // noteAmp=pow(noteAmp,.5);
@@ -2412,8 +2415,11 @@ if(uv.x<1./3.&&maxSamp!=0.) //could 1./3. but then the spill over (if any) isn't
                                                            {
                                                                 float b =1./sampleRate*pow(2.,noteOfSide+n-1./12.)*concertKeyTuning;//this seems to be missing a 440, also missing in other pixelStar calculations
                                                                 float frampBuffer = texture2D(micIn, vec2(b,0.)).r;
-                                                              frAmp += frampBuffer;
+                                                    // if(mod(rnd((noteOfSide)*12.),12.)==1.)
+                                                     
+                                                         frAmp += frampBuffer;
                                                                   notesIncludedInPixel++;
+                                                                  
                                                                  // brightness +=(n+3.+1.)*frampBuffer;
                                                                  
                                                           }
@@ -2429,7 +2435,7 @@ else threshSide=uv.x;
  */
   
                                                          //  brightness/=10.;
-                                                     //    if(round(mod(noteOfSide+12.*12.,12.))==-3.)
+                                                     //    if(rnd(mod(noteOfSide+12.*12.,12.))==-3.)
                                                      if(threshSide>.9)
                                                                                           o=vec4(1.);
                      if(threshSide>1.)
@@ -2446,7 +2452,7 @@ else threshSide=uv.x;
                                                        else if(abs(sideSegmentMediated-5.)<.5)o*=-1.;
                                                        else if(abs(sideSegmentMediated-7.)<.5)o*=-1.;
                                                        else if(abs(sideSegmentMediated-10.)<.5)o*=-1.;
-                                                     //  if(mod(round(noteOfSide*12.)+12.*12.,12.)==0.)  return o;
+                                                     //  if(mod(rnd(noteOfSide*12.)+12.*12.,12.)==0.)  return o;
 
 }
                                                         return o;//vec4(0.);//o;//
@@ -2555,7 +2561,7 @@ return h;
                                     {
                                         if(wink)
                                         {
-                                           if( round(adjustedNote)==4.||floor(adjustedNote)==4.||ceil(adjustedNote)==4.)
+                                           if( rnd(adjustedNote)==4.||floor(adjustedNote)==4.||ceil(adjustedNote)==4.)
                                            l=vec4(vec3(1.),0.);
                                            }
                                         else l = vec4( 1.-eyeColorCycler,eyeColorCycler,eyeColorCycler,.5);
@@ -2563,7 +2569,7 @@ return h;
                                     else
                                     {
                                         if(wink)
-                                        {                                           if(round(adjustedNote)==8.||ceil(adjustedNote)==8.||floor(adjustedNote)==8.)
+                                        {                                           if(rnd(adjustedNote)==8.||ceil(adjustedNote)==8.||floor(adjustedNote)==8.)
 
                                             l=vec4(vec3(1.),0.);
                                             }
@@ -2575,7 +2581,7 @@ return h;
                                     if(p.y<0.)
                                     {
                                         if(wink)
-                                        {                                           if(ceil(adjustedNote)==3.||round(adjustedNote)==2.)
+                                        {                                           if(ceil(adjustedNote)==3.||rnd(adjustedNote)==2.)
 
                                             l=vec4(vec3(1.),0.);
                                             }
@@ -2587,7 +2593,7 @@ return h;
                                        }
                                     else {
                                         if(wink)
-                                        {                                           if(floor(adjustedNote)==9.||round(adjustedNote)==10.)
+                                        {                                           if(floor(adjustedNote)==9.||rnd(adjustedNote)==10.)
 
                                             l=vec4(vec3(1.),0.);
                                             }
@@ -2601,7 +2607,7 @@ return h;
                             
                       else if (f==17 &&p.x>.0&&p.x<.5&&s.x>-.2){
                           if(wink)
-                          {                                           if(round(abs(adjustedNote-6.)/1.5)==0.)                                            l=vec4(vec3(1.),0.);
+                          {                                           if(rnd(abs(adjustedNote-6.)/1.5)==0.)                                            l=vec4(vec3(1.),0.);
                               }
                           else
 
@@ -2617,9 +2623,9 @@ return h;
                                     if(wink)
                                     {
                                         if(p.y>0.){
-                                         if(round(adjustedNote)==11.||floor(adjustedNote)==11.)                                            l=vec4(vec3(1.),0.);
+                                         if(rnd(adjustedNote)==11.||floor(adjustedNote)==11.)                                            l=vec4(vec3(1.),0.);
                                          }
-                                        else  {  if(round(adjustedNote)==1.||ceil(adjustedNote)==1.)  l=vec4(vec3(1.),0.);}
+                                        else  {  if(rnd(adjustedNote)==1.||ceil(adjustedNote)==1.)  l=vec4(vec3(1.),0.);}
 
                                          
                                     }
@@ -5293,26 +5299,26 @@ vec2 spunC=coords.yx;
 //if(continuumClover&&colorCombo<=10)spunC*=1.5;
 if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time*rate,PI2));}
 
-vec2 backGround=p;
+vec2 background=p;
 
-if (colorCombo!=20)backGround=freed(backGround*zoom+spunC);
+if (colorCombo!=20)background=freed(background*zoom+spunC);
 
 float lfc=length(freed(constellationCoord));
 
-if(whirlpool!=0.) backGround=spin2(backGround,whirlpool*length(backGround)*.75/6.*PI/abs(zoom-lfc));
+if(whirlpool!=0.) background=spin2(background,whirlpool*length(background)*.75/6.*PI/abs(zoom-lfc));
 
 
-if(carousel!=0.)backGround=spin2(backGround,carousel*mod(time*rate,PI2));
+if(carousel!=0.)background=spin2(background,carousel*mod(time*rate,PI2));
 float xenOctaveFactor =4.;
 
-if(exponentialPetals!=0.)backGround=spin2(vec2(backGround.x,exponentialPetals*backGround.y),
+if(exponentialPetals!=0.)background=spin2(vec2(background.x,exponentialPetals*background.y),
                                                                                                 
                                           PI2*pow(2.,
-                                                  (xenOctaveFactor-(atan(backGround.x,exponentialPetals*backGround.y)/
+                                                  (xenOctaveFactor-(atan(background.x,exponentialPetals*background.y)/
                                                                     PI)*xenOctaveFactor-(petals)/
                                                     6.))/pow(2.,xenOctaveFactor));
 
-                   backGround=spin2(backGround,atan(backGround.y,backGround.x)*petals/6.);
+                   background=spin2(background,atan(background.y,background.x)*petals/6.);
                    
 
 
@@ -5343,18 +5349,18 @@ vec2 dance = vec2(0.);
          if(colorCombo<=10){
                       
                        vec4 tolOUT = vec4(0.);
-                       tolOUT=tol(backGround, dance2);
+                       tolOUT=tol(background, dance2);
                        zoomer=tolOUT.xyz;
                        
                        angleOfClover=tolOUT.w;
                        if(chirality==3){
                            if(!twelveGates)
                            {
-                               tolOUT=tol(backGround.yx,dance2);
+                               tolOUT=tol(background.yx,dance2);
                                zoomer+=tolOUT.xyz;
                                }
                            else
-                           { tolOUT=tol(spin2(backGround,PI2/24.),dance2);
+                           { tolOUT=tol(spin2(background,PI2/24.),dance2);
                                zoomer+=tolOUT.xyz;
                                }
                            angleOfClover+=tolOUT.w;
@@ -5364,35 +5370,35 @@ vec2 dance = vec2(0.);
                        
                    }
                             
-     else if (colorCombo==11||colorCombo==18)zoomer=heartZoom(backGround+driftCanceller, dance);
-    // else if (colorCombo==13)zoomer=tokogae(backGround,vec2(zoom));
+     else if (colorCombo==11||colorCombo==18)zoomer=heartZoom(background+driftCanceller, dance);
+    // else if (colorCombo==13)zoomer=tokogae(background,vec2(zoom));
                                  
-     else if (colorCombo==14)zoomer=TOLTOK(backGround,dance2);
-     else if (colorCombo==15)zoomer=xx(backGround,dance2);
-    // else if (colorCombo==16)zoomer=xtol(backGround,vec2(0.));
+     else if (colorCombo==14)zoomer=TOLTOK(background,dance2);
+     else if (colorCombo==15)zoomer=xx(background,dance2);
+    // else if (colorCombo==16)zoomer=xtol(background,vec2(0.));
                                  
      else if (colorCombo==17){
                        if(Character == 3||Character == 4){
-                           faceFORWARDbuffer =faceFORWARD(backGround*3.,vec2(0.));
-                           zoomer=faceFORWARD(backGround*3.,vec2(0.));
+                           faceFORWARDbuffer =faceFORWARD(background*3.,vec2(0.));
+                           zoomer=faceFORWARD(background*3.,vec2(0.));
                            }
-                       else zoomer=faceHeights(backGround,vec2(0.));
-                       zoomer = clamp(bod(backGround*2.,vec2(0.))-zoomer*50.,.0,1.)+zoomer;
+                       else zoomer=faceHeights(background,vec2(0.));
+                       zoomer = clamp(bod(background*2.,vec2(0.))-zoomer*50.,.0,1.)+zoomer;
                        }
      else if (colorCombo==20){
                        zoomer=vec3(0.);
                        if(Character!=3&&Character != 4)
-                           backgroundFace =clamp(face(backGround*1.75-vec2(1.,0.),vec2(0.))+.5,0.,1.);
+                           backgroundFace =clamp(face(background*1.75-vec2(1.,0.),vec2(0.))+.5,0.,1.);
                        else{
-                           if(musicAngelMan==0)backgroundFace =faceFORWARDstatic(backGround*1.75-vec2(1.,0.),vec2(0.));
-                           else backgroundFace =faceFORWARDstatic(backGround*4.,vec2(0.));
+                           if(musicAngelMan==0)backgroundFace =faceFORWARDstatic(background*1.75-vec2(1.,0.),vec2(0.));
+                           else backgroundFace =faceFORWARDstatic(background*4.,vec2(0.));
                         }
                        if(gameOn||scoreLoaded)
                        {    if(Character==3||Character==4&&gameOn) backgroundFace/=1.5;
                            backgroundFace+=.25;
                            }
                        }
-    else if (colorCombo==19)zoomer=acrostic(backGround);
+    else if (colorCombo==19)zoomer=acrostic(background);
     else if (colorCombo==100)zoomer=vec3(.5);
 
                                                  
@@ -5426,17 +5432,17 @@ vec2 dance = vec2(0.);
                  
                  if(helm)
                  {bridge=fourCreaturesSmall(characterPStatic,moveDynamic);
-                       if(colorCombo==20&&(helm&&(Character==3||Character==4))) cloud=clouds(backGround*4.,moveDynamic);
-                       else if(colorCombo==20)cloud=clouds(backGround*1.75-vec2(1.,0.),moveDynamic);
+                       if(colorCombo==20&&(helm&&(Character==3||Character==4))) cloud=clouds(background*4.,moveDynamic);
+                       else if(colorCombo==20)cloud=clouds(background*1.75-vec2(1.,0.),moveDynamic);
                        else  cloud=clouds(characterPStatic*1.2,moveDynamic);
                                     
                                                      cloud=clamp(cloud,0.,1.);
                                                      }
      if(fourCreats<0){
                        const float brideSize = 24.;
-                       creatures=fourCreatures(backGround*8.,vec2(0.)//t
+                       creatures=fourCreatures(background*8.,vec2(0.)//t
                                                );
-                                               vec2 bgBride = backGround*brideSize;
+                                               vec2 bgBride = background*brideSize;
                        if(length(bgBride)>4./3./brideSize)
                             b=bride(bgBride,vec2(0.))+heart(bgBride*2.,vec2(0.))+dress(bgBride*1.5/gr,vec2(0.))*2.;
      }
@@ -5588,18 +5594,18 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                  vec4 insideOut = vec4(0.);
                                                                  if(inseyedOut!=0){
                        float leafDivGR=leaf/gr;
-                                                                 vec2 aroundEyes = characterOnTrailP;
-                                                                 if(inseyedOut==2) aroundEyes/=1.75;
-                                                                 else aroundEyes*=-leafDivGR;
-                                                                 if( length   (aroundEyes)<-leaf*gr*log(3.))                {
-                                                                     float outerMargin =atan(aroundEyes.y,aroundEyes.x);
+                                                                 vec2 arndEyes = characterOnTrailP;
+                                                                 if(inseyedOut==2) arndEyes/=1.75;
+                                                                 else arndEyes*=-leafDivGR;
+                                                                 if( length   (arndEyes)<-leaf*gr*log(3.))                {
+                                                                     float outerMargin =atan(arndEyes.y,arndEyes.x);
                         insideOut=faceBlackAndWhite(
-                                                    //(-leaf-length(aroundEyes))*
+                                                    //(-leaf-length(arndEyes))*
                                                   
-                                                    (-vec2(-sin(outerMargin),-cos(outerMargin)).yx/-leafDivGR-aroundEyes*-leafDivGR)
+                                                    (-vec2(-sin(outerMargin),-cos(outerMargin)).yx/-leafDivGR-arndEyes*-leafDivGR)
                                                     
                                                     ,-vec2(moveDynamic.x,-moveDynamic.y*2.5),false, 3);
-                                                if(insideOut.w!=0.)    insideOut+=clamp(AM.r,0.,1.)/8.;
+                                                if(insideOut.w!=0.)    //insideOut+=clamp(AM.r,0.,1.)/8.;
 
                        if(insideOut.w==.5){
                         //  if(oneEye.r!=0.) oneEye/=1.5;
