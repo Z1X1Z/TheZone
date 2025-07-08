@@ -3134,6 +3134,9 @@ else if (circleX<-width)circleX=width;
 if (circleY>height)circleY=-height;
 else if (circleY<-height)circleY=height;
                                   circleMaterial.color=colorSound;
+                                                                            if(uniforms.starOnDot.value==3)                circleMaterial.opacity=0.;
+                                                                                            else                       circleMaterial.opacity=.8;
+
                                         const sides = (isFinite(note))? Math.round((Math.abs((note+.5)%1.-.5))*12.)%12+2. : 0.;
                                   circle.geometry=new THREE.CircleGeometry(dotSize,sides,0.);
 //circleGeometry.computeBoundingBox ();
@@ -3246,7 +3249,7 @@ for(let n = 0; n < polygons.length; n++)
                                                                  polygons[n].exited = false;}
                                                              else if (triggerDistance>polyRad+dotSize&&polygons[n].caughtByDot==false)polygons[n].exited = true;
                                                          }
-                                                        if(true)//disable dot from catching if false
+                                                        if(uniforms.starOnDot.value!=3)//disable dot from catching if false
                                                          {
                                                              if ( distDot<polyRad+dotSize &&polygons[n].exited){
                                                                  if (!polygons[n].caught)polygons[n].caught = true;

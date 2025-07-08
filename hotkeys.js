@@ -86,7 +86,7 @@ dilate:{value:true},
         time: {value:.0 },
         rate: {value: 1.},
 
-        zoom: {value:  .99},
+        zoom: {value:  1.},
 colorCombo: {value: -1 },
 colorCombo2: {value: -1 },
         free: {value: false },
@@ -676,7 +676,7 @@ window.key = " ";
         }
     }
     else if(key == "v" && event.ctrlKey) window.FeedbackSound =  !window.FeedbackSound;
-    else if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=(uniforms.starOnDot.value+1)%3;
+    else if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=(uniforms.starOnDot.value+1)%4;
     else if (key=="p" && event.ctrlKey)spirographMODE = (spirographMODE+1)%3;//color mode 3 seems obsolete
     //else if (key=="m" && event.ctrlKey)uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value;
 

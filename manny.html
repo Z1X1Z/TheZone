@@ -6060,6 +6060,9 @@ else {
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer+(-bodyWithArms.r-bodyWithArms.g-bodyWithArms.b)*20.
                                     +yourFace.xyzw-vec4(oneEye
                                                         ,0.)/2. -vec4(ARTICLE,1.),0.,1.);
+                                                                                float radialIntensity = length(r);
+                                if( moreHorns.r!=0.)ss+=moreHorns.r*radialIntensity*radialIntensity*radialIntensity;//*pow(radialIntensity,3.)/2.;
+                                    
                                 
                        vec4 faceFromShip = vec4(clamp(mannyFace.xyz,0.,1.)-backgroundFace*starshipMultiplier,0.)*(1.-isGreyISH*2.);
                        vec4 goodies =
@@ -6100,7 +6103,7 @@ else {
                                                  -(pong.r+pong.g+pong.b)
                                                  +bigEyes.xyz*largeEyeColor
                                                  +oneEye
-                                                 +moreHorns
+                                                // +moreHorns
                                                  -(yourFace.x+yourFace.y+yourFace.z)/256./3.
                         -(ARTICLE.x+ARTICLE.y+ARTICLE.z)*40.
                    
