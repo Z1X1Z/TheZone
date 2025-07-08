@@ -216,7 +216,7 @@ function resetAll(){
     }
     window.DAW=false;
     if(!("DAWSonicTouchArray" in window))    window.DAWSonicTouchArray=[];
-        window.osmdSound = false;
+        window.osmdSound = 0;
     window.playQuietestSound = false;
     window.guitarMODE=false;
     window.extremeFrets=true;
@@ -298,7 +298,7 @@ function resetAll(){
             window.haptic2 = false;
             window.zoomAtl41=false;//watch for the 1 and the l
 
-            window.onO = false;
+                                         window.onO = false;
     window.EldersLeg = 24;
                                          
                        window.coreData = new Float32Array(40).fill(1./-leaf);

@@ -436,7 +436,6 @@ let pushBackCounter = 0;
             colorSound.setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
             //angle-=1/radialWarp;
             pitchCol[f]  = colorSoundPURE;
-            if("osmd" in window&&osmd!=null)runOSMD();
 
             const nt = Math.round(note)%12;
             if (nt==7||nt==5||nt==2||nt==0||nt==10)BlackOrWhiteNOTE=0.;
@@ -1395,7 +1394,7 @@ let pG=[];
 let pM=[];
 let lastZoom=1.;
 let lastNoteTimeInScore=0;
-let noteHit=false;
+window.noteHit=false;
 let timeStampLastNoteEnded=0.;
 let currentMeasure=1;
 let cursorMeasure=1;
@@ -1476,18 +1475,18 @@ function runOSMD (){
                          let  notesDifferent = (nts[n].halfTone-8 != thelastnotehit);
                      if(
 
-                         (noteExpired|| !notesDifferent) //let you hit the next note before the last note finishes unless the notes are the same just once
-                       &&  (Math.round(note)%12 ==noteOfScore && on
+                         (noteExpired|| (!notesDifferent&&window.osmdSound==0)) //let you hit the next note before the last note finishes unless the notes are the same just once
+                       &&  ((Math.round(note)%12 ==noteOfScore && on
                            //-8 should callibrate from a halfstep count of 48 == C4 natural into concert pitch of A# == 49
                                ||osmd.cursor.NotesUnderCursor()[0].isRestFlag//exempt from having to hit the note if rest or cue
                                ||osmd.cursor.NotesUnderCursor()[0].isCueNote
-                           )
+                           )||window.osmdSound==2)
                        )
                                {
                              
                                            // singAlong2[o] =  new Wad({source : instrument2})
                                        
-                                   
+                                   c
                                  thelastnotehit = nts[n].halfTone-8;
                                  noteHit=true;
                                  break;
@@ -1499,9 +1498,7 @@ function runOSMD (){
 
 
            //https://github.com/opensheetmusicdisplay/opensheetmusicdisplay/issues/710
-
-           if(noteExpired&&noteHit){
-
+           if(noteExpired&&(noteHit||window.osmdSound==2)){
                
                
                
@@ -1533,7 +1530,7 @@ function runOSMD (){
                for(var n = 0.; n< notesUnderCursor.length; n++){
                    let noteOfScore=(notesUnderCursor[n].halfTone-8)%12;
                    
-                   if(window.osmdSound){
+                   if(window.osmdSound!=0){
                        let frequencyOfNote = Math.pow(2.,(((noteOfScore))-1.)/12.
                                                       )*window.ConcertKey;
                        
@@ -2050,6 +2047,8 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
        }
    }
     if(on)move();
+    if("osmd" in window&&osmd!=null)runOSMD();
+
     pongRoutine(d_x,d_y);
 
         spiral_compress();
