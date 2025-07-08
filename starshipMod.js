@@ -2093,6 +2093,8 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
 
     if (computeFPS)
     {
+        framesLong=FPS
+
         averageFrameTotalAmp.push(totalAMP);
         if (averageFrameTotalAmp.length>framesLong)computeFPS=false;
         if(computeFPS==false){

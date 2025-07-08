@@ -216,7 +216,7 @@ function resetAll(){
     }
     window.DAW=false;
     if(!("DAWSonicTouchArray" in window))    window.DAWSonicTouchArray=[];
-        window.osmdSound = 0;
+        window.osmdSound = false;
     window.playQuietestSound = false;
     window.guitarMODE=false;
     window.extremeFrets=true;
@@ -1127,7 +1127,7 @@ window.key = " ";
     else if (key=="O") window.starClover=!window.starClover;
     
     else if (key=="p"){
-        framesLong=FPS;
+        //framesLong=FPS;
         computeFPS=true;
     }
     else if (key=="P"){octaveStars=!octaveStars;
