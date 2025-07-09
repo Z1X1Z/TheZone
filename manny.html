@@ -3616,7 +3616,7 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
 
    if(clvrVariant4!=0.&&OrthoEvery==0.)
    {
-    hyperCore-=.5/log(.5);//1./(7.*log(.5));
+    hyperCore-=.4/log(.5);//1./(7.*log(.5));
     if(cloverSlide)hyperCore+=.5/log(.5);
     //if(wheel)hyperCore-=0./log(.5);
    // if(morph!=0.)hyperCore+=2.5/log(.5);
@@ -4116,7 +4116,7 @@ if(Spoker){
                  s*=spoke_factor;
                  float coreFactor =upSpoke;
                 // if(!inMainSpoke)
-              if(!wheel||1==1)coreFactor/=(1.+dstnce);
+           //   if(!wheel||1==1)coreFactor/=(1.+dstnce);
             hyperCoreOUTPUT+=coreFactor
             ;
             hyperCoreBoosted+=coreFactor;
@@ -5632,7 +5632,8 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
 
 
 
-                                                                                                                                if(characterOnTrailP.y<0.);cross = -characterOnTrailP;
+                                                                                                                                //if(characterOnTrailP.y<0.);
+                                                                                                                                cross = -characterOnTrailP;
 
 
                                                                                                                                 if(abs(cross.x)<abs(cross.y))cross=cross.yx;

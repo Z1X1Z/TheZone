@@ -257,7 +257,7 @@ hyperCore*=equilibriator;
   // hyperCore-=coreDilation
    if(clvrVariant4)
    {
-    hyperCore-=.5/Math.log(.5);//1./(7.*log(.5));
+    hyperCore-=.4/Math.log(.5);//1./(7.*log(.5));
     if(cloverSlide)hyperCore+=.5/Math.log(.5);
     //if(wheel)hyperCore-=0./Math.log(.5);
    // if(morph!=0.)hyperCore+=2.5/Math.log(.5);
@@ -565,7 +565,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
                     s.multiplyScalar(spoke_factor);//engage spokelover s/=2.+'superspokes'
                     let coreFactor =upSpoke;
                     //if (!inMainSpoke)
-                      if(!wheel||1==1)  coreFactor/=dstnce+1;
+                     // if(!wheel||1==1)  coreFactor/=dstnce+1;
                         hyperCoreOUTPUT+=coreFactor;
                         hyperCoreBoosted+=coreFactor;
                  //   }
