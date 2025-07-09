@@ -2667,7 +2667,10 @@ let yr = lengt*-Math.cos(arm);
                                                              {
                                    xr = -(lengt-1.)*-Math.sin(arm)*centerDisplacement;
                                    yr = -(lengt-1.)*-Math.cos(arm)*centerDisplacement;
-                                  
+                                        // if (g==bottomNote&&EldersLeg==24)   x/=2.;
+                                            //else
+                                            x/=2.;
+
                                   starPositionAttribute.setXYZ(starStride,-x+xBoost,    -y+yBoost,  dep)
                                   starPositionAttribute.setXYZ(starStride+1,x+xBoost,    y+yBoost,  dep)
                                   starPositionAttribute.setXYZ(starStride+2,(xr+x), (yr+y),  dep)
