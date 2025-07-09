@@ -1602,6 +1602,9 @@ function runOSMD (){
                    {
                        uniforms.d.value.x = 0.;
                        uniforms.d.value.y = 0.;
+                       uniforms.pongBallCoords.value.x=0.
+                       uniforms.pongBallCoords.value.y=window.innerHeight/gr;
+
                    }
                    let coordinator = pixelShaderSize/2./minimumDimension*movementRate;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
                    if(xTouch==0&&yTouch==0&&!TouchMicroizer)
