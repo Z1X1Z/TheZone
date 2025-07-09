@@ -214,6 +214,8 @@ function resetAll(){
         if(window.useCDN||location.hash.includes(".b")||location.hash.includes(".c"))
             callKey(new KeyboardEvent('keydown', {'key': "b", 'altKey':true, 'keyCode':key.charCodeAt(0)}));
     }
+    window.unitTest=false;
+
     window.DAW=false;
     if(!("DAWSonicTouchArray" in window))    window.DAWSonicTouchArray=[];
         window.osmdSound = false;

@@ -2256,7 +2256,7 @@ float brightness=0.;
         //uv=vec2(-uv.x,uv.y);
       //  float octaveSpin = 5./12.;
     
-        float angle1 = (noteOfStar/12.*PI2+twistStar+PI)*flipStar;//this is for the position from centerVV;
+        float angle1 =(noteOfStar/12.*PI2+twistStar+PI)*flipStar; //mod((noteOfStar/12.*PI2+twistStar+PI+PI2)*flipStar,PI2);//this is for the position from centerVV;
         uv.x += coz(angle1)*scalar;
        uv.y += zin(angle1)*scalar;//^^
        uv=spin2(uv,-angle1+PIdiv2
@@ -2265,7 +2265,7 @@ float brightness=0.;
        if(length(uv)<starnSize){
        //uv *=    26.5;
    // return vec4(angle1*divideByMultiplyingPi2+.5  );
-            float angle =witnessFlip* atan(uv.x,uv.y);//
+            float angle =witnessFlip*atan(uv.x,uv.y);// mod(atan(uv.x,uv.y)+PI2,PI2);//
           //       if(angle<0.)angle = PI-angle;
           //  angle += (PI2*(noteOfStar
 //this value is uncertain

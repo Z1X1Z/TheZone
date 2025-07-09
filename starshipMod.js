@@ -215,17 +215,31 @@ function spiral_compress(){
      else
         freq = audioX.sampleRate*n/numberOfBins
         //   freq = 440; //check for concert A
-            frequencies[n]=freq;
     var note24 =24*Math.log(freq/window.ConcertKey)/Math.log(2.)+49*2;
-                     
-                   /*
+                     if(unitTest)
+                            {
            freq = audioX.sampleRate*n/numberOfBins //ensures uses n not n adj for test
                      note24 =24*Math.log(freq/window.ConcertKey)/Math.log(2.)+49*2;
-                                         var noteToTest = 60;
-                           if(Math.abs(note24/2.-noteToTest)<.5//&&Math.abs(note24/2.-noteToTest)>.25
-                              ){ callibratorArray[n]=255.;console.log(note24/2.);}// test witness in pixel shader, add to setMicInputToPIXEL()
+                                         
+                                                             var noteToTest =(window.TIMESTAMP/1000.+20)%120.;
+                                         if(Math.abs(note24/2.-noteToTest)<=.5//&&Math.abs(note24/2.-noteToTest)>.25
+                              ){ callibratorArray[n]=1.;console.log(note24/2.);
+                         frequencies[n]=1.;
+                         z[n]=1
+                         dataArray[n]=1
 
-                            */
+
+                     }// test witness in pixel shader, add to setMicInputToPIXEL()
+                                         else {
+                         callibratorArray[n]=.0001;
+                         frequencies[n]=.0001;
+                                             z[n]=.0001
+                                             dataArray[n]=.0001
+                     }
+                                         }
+                                         else             frequencies[n]=freq;
+
+                            
        if(EldersLeg!=0.) testar[Math.round(note24*EldersLeg/24.)%EldersLeg] += Math.abs(z[n])*radialWarp;
                             stack12Array[Math.round(note24/2.)%12]+= Math.abs(z[n]);
       testarContinuous[n] = Math.abs(z[n]);
@@ -258,12 +272,12 @@ function fiveAndSeven(){
       let  starNote = 0 //ranges up to <12
         for(let n = 0; n<numberOfBins; n++)        {
             //mustard is in 24ths, here we want 12ths so we divide by two
-            let twelfths = (mustarD[n]/2.+12.)*radialWarp//A1 is 1 with +12
+            let twelfths = (mustarD[n]/2.+1)*radialWarp//A1 is 1 with +12
           // twelfths = 60.;
                 if( twelfths>=-.5){
                     starNote = Math.round(twelfths)%(12);
-                    finger = Math.floor(twelfths/10);
-                    if (finger<10&&isFinite(finger)&&isFinite(starNote)&&isFinite(dataArray[n])) twelve[starNote][finger] +=dataArray[n];
+                    finger = Math.floor((twelfths-.5)/12);
+                    if (finger<10&&finger>=0&&isFinite(finger)&&isFinite(starNote)&&isFinite(dataArray[n])) twelve[starNote][finger] +=dataArray[n];
                 }
                         
             
@@ -1069,7 +1083,10 @@ function setMicInputToStarPIXEL(){
                      for (var x = 0; x < numberOfBins; x++)dataArrayBuffer[x]=dataArray[x]/255.;
                      
                      // callibratorArray //dataArrayBuffer
-                     let micTexBuf = new THREE.DataTexture( dataArrayBuffer, size, 1, THREE.RedFormat,THREE.FloatType);
+                     let micThrough = null;
+                     if(unitTest)micThrough= callibratorArray;
+                         else micThrough= dataArrayBuffer;
+                     let micTexBuf = new THREE.DataTexture( micThrough, size, 1, THREE.RedFormat,THREE.FloatType);
                      micTexBuf.needsUpdate=true;
                      
                      uniforms[ "micIn" ].value = micTexBuf;
@@ -1414,7 +1431,7 @@ function takeNextScoreSlice(start){
                     
                     window.ChristoDecrypto = 0.;
                     window.timeRESET =0;
-                    window.TIMESTAMP;
+                    window.TIMESTAMP=0;
                     
                     /*
                     //https://www.khronos.org/webgl/wiki/HandlingContextLost
@@ -2306,7 +2323,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
                 if(testarContinuous[g]<minTestar) minTestar=testarContinuous[g];
             }
         }
-        
+        if (maxTestar==minTestar)minTestar=0;
         const fill =1000./(timestamp - timestamplast)*secondsToEdge;//This should be set to either sampleRate/fftSize or by predicted FPS
         timestamplast = timestamp;
         const waterRadiusScalar = 7./8.;
@@ -2533,7 +2550,8 @@ else{//start drawing of just twenty four frets here
                                  if(testar[g]>maxTestar){maxTestar=testar[g];}
                                  if(testar[g]<minTestar)minTestar=testar[g];
                              }
-                    
+                    if (maxTestar==minTestar)minTestar=0;
+
                     let maxFret = -1000000;
                     let minFret = 10000000;
                     
@@ -2541,6 +2559,8 @@ else{//start drawing of just twenty four frets here
                         if(innerFrets[g]>maxFret){maxFret=innerFrets[g];}
                         if(innerFrets[g]<minFret)minFret=innerFrets[g];
                     }
+                    if (maxFret==minFret)minFret=0;
+
                     let maxMinDiff  = maxFret-minFret;
     let twoOr1= EldersLeg<=2
     if(twoOr1){maxTestar=1;minTestar=0;}
@@ -2650,6 +2670,9 @@ let yr = lengt*-Math.cos(arm);
                                  
                                 x *=-centerDisplacement;
                                 y *=-centerDisplacement;
+                                        // if (g==bottomNote&&EldersLeg==24)   x/=2.;
+                                            //else
+                                            x/=2.;
                                    if(maxMinDiff!=0&&!twoOr1)
                                         {
                                         lengt = (innerFrets[(g+EldersLeg/2.)%EldersLeg]-minFret)/(maxFret-minFret);
@@ -2667,9 +2690,7 @@ let yr = lengt*-Math.cos(arm);
                                                              {
                                    xr = -(lengt-1.)*-Math.sin(arm)*centerDisplacement;
                                    yr = -(lengt-1.)*-Math.cos(arm)*centerDisplacement;
-                                        // if (g==bottomNote&&EldersLeg==24)   x/=2.;
-                                            //else
-                                            x/=2.;
+                                     
 
                                   starPositionAttribute.setXYZ(starStride,-x+xBoost,    -y+yBoost,  dep)
                                   starPositionAttribute.setXYZ(starStride+1,x+xBoost,    y+yBoost,  dep)
@@ -2740,8 +2761,8 @@ var fingerStride = 0;
 
              }}
     
-         for (var t=0; t<12; t++) {
-             
+         for (var ns=0; ns<12; ns++) {
+             let t = (ns+11)%12;//(t+10)%12;//(t+4)%12.
              var vop = new THREE.Color();
              let BlackOrWhite=1;
              const noteGrey = Math.abs(t-(6-twist/2.)+12)%12;
@@ -2774,8 +2795,8 @@ var fingerStride = 0;
 
              for (var g=0; g<10; g++) {
                  const widt = pi/120.;
-                 const finger = (isFinite(twelve[t][g]))?twelve[t][g]:0;
-                 let arm =(g+9)/10.*pi*2.*uniforms.witnessFlip.value;
+                 const finger = (isFinite(twelve[ns][g]))?twelve[ns][g]:0;
+                 let arm =((g+5)%10-.5)/10.*pi*2.*uniforms.witnessFlip.value;
 
                  const lengt =(isFinite(maxFinger)&&maxFinger!=0)? (finger)/maxFinger*(1.-pi/12.) : 0;
 
@@ -2783,11 +2804,11 @@ var fingerStride = 0;
                      for(var yy=0;yy<6;yy++)   starsANDwitnessesColorAttribute.setXYZ(fingerStride+yy,vop.r,vop.g,vop.b)
                     
                      const rpio2 =arm+pi/2.;
-                     const fingerTwist=(flip*(t-6)+twist/2.*flip+12)/12.*2.*pi;
-                                        const x = widt*-Math.sin(rpio2+fingerTwist+pi);
-                                        const y = widt*-Math.cos(rpio2+fingerTwist+pi);
-                                        const xr = pi/12.*lengt*-Math.sin(arm+fingerTwist+pi);
-                                        const yr = pi/12.*lengt*-Math.cos(arm+fingerTwist+pi);
+                     const fingerTwist=((flip*(ns+5.)+twist/2.*flip+12)%12)/12.*2.*pi;
+                                        const x = widt*-Math.sin(rpio2+fingerTwist);
+                                        const y = widt*-Math.cos(rpio2+fingerTwist);
+                                        const xr = pi/12.*lengt*-Math.sin(arm+fingerTwist);
+                                        const yr = pi/12.*lengt*-Math.cos(arm+fingerTwist);
                                         const offsetX=-Math.sin(fingerTwist)*(3./4.);//1.25
                                         const offsetY=-Math.cos(fingerTwist)*(3./4.);//1.25
                                         const depth = -1.;//this depth should mean that half the trail is above and half below
