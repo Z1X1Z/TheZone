@@ -1179,10 +1179,7 @@ Reset Zoom![L]</a><br>
                     key  = 'z';
                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                  <label for="Bridge">Bridge?![z]</label><br>
-                 <input type="checkbox" id="horns" name="t"  onclick= "
-                     key  = 'L';
-                     callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
-                  <label for="horns">Altar Horns![,L]</label><br>
+             
                  <input type="checkbox" id="cycler" name="t"  onclick= "
                      key  = 'b';
                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -1237,6 +1234,10 @@ Reset Zoom![L]</a><br>
                 key  = 'J';
                 callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
                 InseyedOut?![,J]</a><br>
+            <a  id="horns" name="t"  onclick= "
+                key  = 'L';
+                callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
+             Altar Horns![,L]</a><br>
        <a id="unrollEyes" name="t"  onclick= "
            key  = 'y';
            callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'altKey':true,'keyCode':key.charCodeAt(0)}));">
@@ -2032,7 +2033,7 @@ uniform float exponentialPetals;
 uniform float gr;
 uniform float leaf;
 uniform bool cloverArms;
-uniform bool elderHorns;
+uniform int elderHorns;
 uniform int inseyedOut;
 uniform bool cloverso;
 uniform float OrthoEvery;
@@ -2477,6 +2478,8 @@ else threshSide=uv.x;
 return h;
 }
                   vec4 faceBlackAndWhite(vec2 g, vec2 t, bool wink, int overrideEyes){
+                if(elderHorns==2&&!wink) g.y*=4./3./log(3.);
+
                               t/=2.5;
                               //g/=4.;
                               int eyeType = 0;
@@ -5624,33 +5627,18 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
 
                                                                  }
                                                                  vec3 moreHorns = vec3(0.);
-                                                                 if (elderHorns)
+                                                                 if (elderHorns>0)
                                                                  {
                                                                 
                                                                 
                                                                 vec2 cross = characterOnTrailP;
 
-
-
-                                                                                                                                //if(characterOnTrailP.y<0.);
-                                                                                                                                cross = -characterOnTrailP;
-
-
-                                                                                                                                if(abs(cross.x)<abs(cross.y))cross=cross.yx;
-
-
-                                                                                                                                if(cross.x>0.)cross.x = -cross.x;
-                                                                                                                                
-                                                                                                                                
-                                                              /*  float leafFactor =4./3./-leaf;//logStabilizationConstant;//;
-                                                            cross.x*=leafFactor;
-                                                              //  cross=spin2(cross,atan(cross.x,cross.y)*-(1.-log(3.)));
-                                                                cross.y/=leafFactor;
-                                                               if(characterOnTrailP.x>0.)cross.x = -cross.x;
-                                                       if((characterOnTrailP.x)<abs(characterOnTrailP.y))cross=-abs(cross.yx);
-                                                       //         if(characterOnTrailP.y<0.)cross.y = -cross.y;
-*/
-                                                                // else if(abs(cross.x)<abs(cross.y))cross=cross.yx;
+                                                                                                                                if(abs(cross.x)<abs(cross.y))
+                                                                                                      cross=cross.yx;
+                                                                                                                                if(cross.x>0.)
+                                                                                     cross.x = -cross.x;
+                                                                                                                                //cross.y*=4./3./log(3.);
+                                                                                             
                                                                  moreHorns=-faceBlackAndWhite(cross*1.221221,-vec2(0.),false, 3).xyz;
                                                                  }
                                  //          mny=clamp(mny,0.,1.);
