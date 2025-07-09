@@ -2,12 +2,15 @@ var THREE;
 
 if(window.useCDN)import("three").then(module => { THREE=module})
 .catch((err) => {
+    console.log(err)
+
     console.log("Error loading threeJS module;load old Threejs instead");
     document.getElementById("threeJSscript").src = "https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/three.min.js"//iOS needs a local module, so we give it this instead
-    
 })
-.finally((err) => {});
+.finally((err) => {    console.log(err)
+});
 else{
+
     console.log("load old Threejs for offline")
     document.getElementById("threeJSscript").src="three.js";
 }
@@ -222,7 +225,7 @@ function spiral_compress(){
                      note24 =24*Math.log(freq/window.ConcertKey)/Math.log(2.)+49*2;
                                          
                                                              var noteToTest =(window.TIMESTAMP/1000.+20)%120.;
-                                         if(Math.abs(note24/2.-noteToTest)<=.5//&&Math.abs(note24/2.-noteToTest)>.25
+                                         if(Math.abs(note24/2.-noteToTest)<=1.//&&Math.abs(note24/2.-noteToTest)>.25
                               ){ callibratorArray[n]=1.;console.log(note24/2.);
                          frequencies[n]=1.;
                          z[n]=1

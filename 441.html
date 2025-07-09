@@ -69,12 +69,18 @@ void main(){
             
             
             //vvvv women vvvv
-                int w=5;
+                /*int w=5;
             
             v-=vec2(1.,2.5);
         vec2 y=vec2(float(int(v.x)/w),float(int(v.y)/w));
             
-        v=mod(v,float(w));
+        v=mod(v,float(w));*/
+        float w=5.;
+    
+    v-=vec2(1.,2.5);
+vec2 y=vec2(((v.x)/w),((v.y)/w));
+    
+v=mod(v,(w));
                 v-=2.5;
         float h=0.;
         vec2 s=v;
