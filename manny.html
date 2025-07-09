@@ -2478,7 +2478,7 @@ else threshSide=uv.x;
 return h;
 }
                   vec4 faceBlackAndWhite(vec2 g, vec2 t, bool wink, int overrideEyes){
-                if(elderHorns==2&&!wink) g.y*=4./3./log(3.);
+                if(elderHorns==2&&overrideEyes==100) g.y*=4./3./log(3.);
 
                               t/=2.5;
                               //g/=4.;
@@ -5635,11 +5635,11 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
 
                                                                                                                                 if(abs(cross.x)<abs(cross.y))
                                                                                                       cross=cross.yx;
-                                                                                                                                if(cross.x>0.)
+                                                                                                      // cross.y*=4./3./log(3.);
+                                                      if(cross.x>0.)
                                                                                      cross.x = -cross.x;
-                                                                                                                                //cross.y*=4./3./log(3.);
-                                                                                             
-                                                                 moreHorns=-faceBlackAndWhite(cross*1.221221,-vec2(0.),false, 3).xyz;
+
+                                                                 moreHorns=-faceBlackAndWhite(cross*1.221221,-vec2(0.),false, 100).xyz;
                                                                  }
                                  //          mny=clamp(mny,0.,1.);
                                                                  
