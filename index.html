@@ -68,14 +68,16 @@
                     //console.log(hashExtension)
                     //window.location.hash =hashExtension;
                     let hrefLocal = mee+"#"+hashExtension;
-                    if(hashExtension!=""&&hashExtension!=null)window.location.href=hrefLocal;
-                    else window.location.href = mee;
+                    if(hashExtension!="")window.location.href=hrefLocal;
+                   else window.location.href = mee;
                     
                   //  console.log(hrefLocal+" "+document.location.href)
                 }
               function  loadWithBypass(nm,touchHash){
-                if(!document.getElementById('bypass').checked)
-loadStarshipWithHash(nm,touchHash+localStorage.getItem('config'));
+                  let ls = localStorage.getItem('config')
+                if(!document.getElementById('bypass').checked&&ls!=null)
+                loadStarshipWithHash(nm,touchHash+ls);
+
 else loadStarshipWithHash(nm,touchHash);
 }
             </script>
@@ -130,13 +132,14 @@ else loadStarshipWithHash(nm,touchHash);
         hashExtension=hkConfig;
                                 </script>
     <p>
+
+   <li> <a class="onoffline2" value="" onclick="
+                                 loadWithBypass(this.name,'t,t')" name="manny.html"> Touch with star</a></li>
    <li> <a class="onoffline2"  name="manny.html" onclick=
 "
 
                                  loadWithBypass(this.name,'t')"
       >Touch Navigation Only</a></li>
-   <li> <a class="onoffline2" value="" onclick="
-                                 loadWithBypass(this.name,'t,t')" name="manny.html"> Touch with star</a></li>
 <p>
  May not work on all browsers with some Androids indicated by a white or mostly black screen once loaded.  If so try a different browser like Firefox or Opera.  For starship that should work, try one that's
  <a class="onoffline2"  name="manny.html" onclick=
