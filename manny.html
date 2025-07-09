@@ -2478,7 +2478,7 @@ else threshSide=uv.x;
 return h;
 }
                   vec4 faceBlackAndWhite(vec2 g, vec2 t, bool wink, int overrideEyes){
-                if(elderHorns==2&&overrideEyes==100) g.y*=4./3./log(3.);
+                if(elderHorns==2&&(overrideEyes==100||overrideEyes==-1)) g.y*=4./3./log(3.);
 
                               t/=2.5;
                               //g/=4.;
