@@ -5583,6 +5583,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                              float divisor = 1.;
                                                              if(gameOn)divisor=1.5;
                                                              AM+=faceFORWARD(characterOnTrailP*angelSize,moveDynamic)/divisor;
+                                                             AM=clamp(AM,0.,1.);
                                                             if(mny.r!=0.||mny.g!=0.||mny.b!=0.) AM*=mny;
                                                          //    mny+=AM;
                                                              }
@@ -5610,7 +5611,6 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                     (-vec2(-sin(outerMargin),-cos(outerMargin)).yx/-leafDivGR-arndEyes*-leafDivGR)
                                                     
                                                     ,-vec2(moveDynamic.x,-moveDynamic.y*2.5),false, 3);
-                                                if(insideOut.w!=0.)    //insideOut+=clamp(AM.r,0.,1.)/8.;
 
                        if(insideOut.w==.5){
                         //  if(oneEye.r!=0.) oneEye/=1.5;
@@ -5622,7 +5622,10 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                           //insideOut=vec4(insideOut.r/1.3,insideOut.g,insideOut.b,insideOut.w);
                           // insideOut/=1.1;
                            }
-                       else insideOut=vec4(clamp(insideOut.xyz,.05,.9),1.);
+                       else
+                       {insideOut=vec4(clamp(insideOut.xyz,.05,.9),1.);
+                           insideOut+=clamp(AM.r,0.,1.)/2.;
+                           }
                        }
 
                                                                  }
@@ -5809,11 +5812,13 @@ if(starOnDot!=2){
                                  if(mny.z!=0.||mny.y!=0.||mny.x!=0.)mny+=starship.xyz;
                                  }
 
-                                 if(AM.x>0.)AM=clamp(AM+starship.xyz/3.,0.,1.);//-mny.x*.66;
 
                      if(starship.w>0.){starshipMultiplier=vec3(1.);
                      if(insideOut.w!=.5)insideOut*=starshipMultiplier.x*.75;
+                     AM*=starshipMultiplier.x*.75;
                      }
+                     if(AM.x>0.)AM=clamp(AM+starship.xyz/3.,0.,1.);//-mny.x*.66;
+
                                  if(mannyFace.z>0.&&mannyFace.x>0.)starshipMultiplier+=mannyFace.xyz;
                     if(mannyFace.z>0.&&mannyFace.x<0.)starshipMultiplier*=mannyFace.xyz;
     if (starship.x==0.&&starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=starship.x;
