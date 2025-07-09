@@ -5811,11 +5811,11 @@ if(starOnDot!=2){
 
                                  if(AM.x>0.)AM=clamp(AM+starship.xyz/3.,0.,1.);//-mny.x*.66;
 
-                     if(starship.w>0.)starshipMultiplier=vec3(1.);
-
+                     if(starship.w>0.){starshipMultiplier=vec3(1.);
+                     if(insideOut.w!=.5)insideOut*=starshipMultiplier.x*.75;
+                     }
                                  if(mannyFace.z>0.&&mannyFace.x>0.)starshipMultiplier+=mannyFace.xyz;
                     if(mannyFace.z>0.&&mannyFace.x<0.)starshipMultiplier*=mannyFace.xyz;
-  
     if (starship.x==0.&&starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=starship.x;
                                  if (starship.x==starship.y&& starship.y==starship.z&&starship.x<.51&&starship.x>.49)isGrey=starship.x;
                 if(starship.x*starship.w>=.5&&starship.y*starship.w>=.5&&starship.z*starship.w>=.5)isGreyISH=.5;
