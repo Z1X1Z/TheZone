@@ -5732,8 +5732,8 @@ vec2 heartField = characterPSpunToKey*heartSize
      {  if(volume!=1.)
          HEART = heart(heartField
                                                     ,//vec2(0.)
-                      heartPitch+
-                       heartField/frAMP*heartRate*vec2(1.,flipStar)// not working on some androids, may work with vec2(0.)
+                      heartPitch*vec2(1.,flipStar)+
+                       heartField/frAMP*heartRate//*flipStar//*vec2(1.,flipStar)// not working on some androids, may work with vec2(0.)
                                     );
                                     else         HEART = heart(heartField,vec2(0.));
                                     }
@@ -6113,7 +6113,7 @@ else {
                        vec3 awayFromTree =  vec3((-ss.xyz)*ss.w
                                                  -oneEye
                                                  -yourFace.xyz
-                                                // +(-HEART.b-HEART.r-HEART.g)/2.
+                                                 +(-HEART.b-HEART.r-HEART.g)
                                                 // +(-HEART.b-HEART.r-HEART.g)/4.
                                                  -clamp(AM.r*17.,0.,1.)
                                                  +(-linearFrequency.r-linearFrequency.g-linearFrequency.b)*4.
