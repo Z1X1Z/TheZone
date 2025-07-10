@@ -3810,7 +3810,7 @@ if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
 
     
-    float OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-1.)/40.,0.)).x;
+    float OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter)/40.,0.)).x;//maybe loops - 1
     float OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
     
   float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(loops+counter)/40.,0.)).x;
