@@ -2525,8 +2525,8 @@ return h;
                             
                             if(f==7&&s.x<0.)notEars=true;
                             else if(wink);
-                            else if((f==16)&&p.x>0.&&s.x<0.&&!notEars){l=lowColor;break;}
-                            else if((f==17)&&p.x>0.&&s.x<0.&&!notEars){l = lowColor;break;}
+                            else if((f==16)&&p.x>0.&&s.x<0.&&!notEars&&p.x<.35){l=lowColor;break;}
+                            else if((f==17)&&p.x>0.&&s.x<0.&&!notEars&&p.x<.35){l = lowColor;break;}
                             else if((f==14)&&s.x<-1.){l=vec4(vec3(.5),.5);
                                                      break;}
                             /*
@@ -5746,15 +5746,7 @@ vec2 heartField = characterPSpunToKey*heartSize
    if(mannyFace.z>0.)heartMultiplier*=mannyFace;
 */
                        //  heartWarmed = HEART/2.;
-                    if(AM.x!=0.)heartWarmed=clamp((AM*HEART+AM*mny)+(-mny.r-mny.g-mny.b)*4. ,0.,1.);
-                       else heartWarmed=HEART/2.;
-
-
-                        if(HEART.x==0.&&HEART.y==0.&&HEART.z==0.)
-                        {heartWarmed=AM;
-                            }
-                        if(heartWarmed.x!=0.&&heartWarmed.y!=0.&&heartWarmed.z!=0.&&oneEye.y!=0.)   heartWarmed-=oneEye/2.;
-
+          
                        // else   clothes*=HEART;
 
                             
@@ -5812,21 +5804,27 @@ if(starOnDot!=2){
                                  if(mny.z!=0.||mny.y!=0.||mny.x!=0.)mny+=starship.xyz;
                                  }
 
+                                 if(AM.x>0.)AM=clamp(AM*(.888+starship.xyz),0.,1.);//-mny.x*.66;
 
                      if(starship.w>0.){starshipMultiplier=vec3(1.);
-                     if(insideOut.w!=.5)insideOut*=starshipMultiplier.x*.75;
-                     AM*=starshipMultiplier.x*.75;
+                     if(insideOut.w!=.5)insideOut*=.888;
                      }
-                     if(AM.x>0.)AM=clamp(AM+starship.xyz/3.,0.,1.);//-mny.x*.66;
+                     if(AM.x!=0.)heartWarmed=clamp((AM*HEART+AM*mny)+(-mny.r-mny.g-mny.b)*4. ,0.,1.);
+                        else heartWarmed=HEART/2.;
 
-                                 if(mannyFace.z>0.&&mannyFace.x>0.&&mannyFace.z>0.)
-                                 starshipMultiplier+=mannyFace.xyz;
-                    if(mannyFace.z<0.&&mannyFace.x<0.&&mannyFace.y<0.)starshipMultiplier*=mannyFace.xyz;
+
+                         if(HEART.x==0.&&HEART.y==0.&&HEART.z==0.)
+                         {heartWarmed=AM;
+                             }
+                         if(heartWarmed.x!=0.&&heartWarmed.y!=0.&&heartWarmed.z!=0.&&oneEye.y!=0.)   heartWarmed-=oneEye/2.;
+
+                                 if(mannyFace.z>0.&&mannyFace.x>0.&&mannyFace.z>0.) starshipMultiplier=vec3(1.5);
+                    if(mannyFace.z<0.&&mannyFace.x<0.&&mannyFace.y<0.)starshipMultiplier=vec3(.5);
     if (starship.x==0.&&starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=starship.x;
                                  if (starship.x==starship.y&& starship.y==starship.z&&starship.x<.51&&starship.x>.49)isGrey=starship.x;
                 if(starship.x*starship.w>=.5&&starship.y*starship.w>=.5&&starship.z*starship.w>=.5)isGreyISH=.5;
                                  
-                             //    if (isGreyISH!=0.){mny=vec3(.5);starship=vec4(vec3(.5),1.);}
+                                 if (isGrey!=0.){mny=vec3(.5);}
 
      //if (starship.x!=0.&&starship.x!=1.&&starship.x!=.5&&(starship.x+starship.y>=255.-3.5||starship.y+starship.z>=255.-3.5||starship.z+starship.x>=255.-3.5)&&starship.w==1.)spirographTranslucer=.75-(starship.x+starship.y+starship.z)/2.;
                                  }
@@ -6114,7 +6112,7 @@ else {
                                                  -yourFace.xyz
                                                 // +(-HEART.b-HEART.r-HEART.g)/2.
                                                 // +(-HEART.b-HEART.r-HEART.g)/4.
-                                                 -clamp(AM.r*12.,0.,1.)
+                                                 -clamp(AM.r*17.,0.,1.)
                                                  +(-linearFrequency.r-linearFrequency.g-linearFrequency.b)*4.
                                                  -(pong.r+pong.g+pong.b)
                                                  +bigEyes.xyz*largeEyeColor

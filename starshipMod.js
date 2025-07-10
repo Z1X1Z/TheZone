@@ -2678,7 +2678,8 @@ let yr = lengt*-Math.cos(arm);
                                 y *=-centerDisplacement;
                                         // if (g==bottomNote&&EldersLeg==24)   x/=2.;
                                             //else
-                                            x/=2.;
+                                            x/=1.25;
+                                            y/=1.25;
                                    if(maxMinDiff!=0&&!twoOr1)
                                         {
                                         lengt = (innerFrets[(g+EldersLeg/2.)%EldersLeg]-minFret)/(maxFret-minFret);
@@ -3177,7 +3178,7 @@ else if (circleY<-height)circleY=height;
 circle.position.set(circleX,circleY,-.99);
 uniforms.dotCoord.value =new THREE.Vector2(circleX,circleY) ;
 
-                              if(isFinite(note)&&isFinite(lastNote))    circle.rotateZ(Math.abs((note%1)-1.)*Math.PI*2);
+                              if(isFinite(note))    circle.rotateZ(Math.abs((note%1)-1.)*Math.PI*2);
 
                    let colorBlack= new THREE.Color();
                    colorBlack.setStyle("black");
