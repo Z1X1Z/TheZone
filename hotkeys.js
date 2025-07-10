@@ -3,6 +3,9 @@ let leaf = leafPermanent;
 let grPermanent = 1.61803398874989484820458683436563811772030917980576286213544862270526046281890244970720720418939113748475408807538689175212663386222353693179318006076672635443338908659593958290563832266131992829026788067520876689250171169620703222104321626954862629631361443814975870122034080588795445474924618569536486444924104432077134494704956584678850987433944221254487706647
 let gr = grPermanent
 let leaf2 = - 1.3472963553338606977034332535386295920007513543681387744724827562641316442780294708430332263148;
+let leaf3 = -1.3372357014306894089011621;
+//x≈0.3181315052047641353126543 - 1.3372357014306894089011621 i
+//https://www.wolframalpha.com/input?i=x%3Dlog%28x%29
 let grgr2 = 2.62019731923500857743852103593773857662573285670168;
 //https://www.wolframalpha.com/input?i=a%3D%28%281-%28%281-%28%281-a%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29
 //base form of feedback equation is x = (1-x)^2-1
@@ -195,6 +198,8 @@ const starSHIPVOLUMEdefaultLowVolume = 5./1024.;//used in sstarshipmod
 
 
 function resetAll(){
+    window.unitTest=false;
+
     for(var nameOfUniform in uniformsInitial)
     {
         window.uniforms[nameOfUniform]={}
@@ -214,7 +219,6 @@ function resetAll(){
         if(window.useCDN||location.hash.includes(".b")||location.hash.includes(".c"))
             callKey(new KeyboardEvent('keydown', {'key': "b", 'altKey':true, 'keyCode':key.charCodeAt(0)}));
     }
-    window.unitTest=false;
 
     window.DAW=false;
     if(!("DAWSonicTouchArray" in window))    window.DAWSonicTouchArray=[];
@@ -602,20 +606,25 @@ window.key = " ";
                         }
                 else if((key == "z"||key == "Ω") && event.altKey&&event.ctrlKey)
                 {
-                    leafMode=(leafMode+1)%2.
+                    leafMode=(leafMode+1)%3.
                     if(leafMode==0)
                     {
                         leaf =leafPermanent
                     
                         uniforms.leaf.value=leaf;
                     }
-                    else
+                    else if (leafMode==1)
                     {
                         leaf =leaf2;// -leaf2/leaf*4./3.
                         
                         uniforms.leaf.value=leaf;
                     }
-                }
+                    else if (leafMode==2)
+                    {
+                        leaf =leaf3;// -leaf2/leaf*4./3.
+                        
+                        uniforms.leaf.value=leaf;
+                    }                }
                 else if((key == "x"||key==
                                          "≈")&& event.altKey&&event.ctrlKey)
                 {
