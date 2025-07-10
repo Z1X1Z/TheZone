@@ -1602,7 +1602,7 @@ function runOSMD (){
                    {
                        uniforms.d.value.x = 0.;
                        uniforms.d.value.y = 0.;
-                       uniforms.pongBallCoords.value.x=0.
+                       uniforms.pongBallCoords.value.x=-window.innerWidth/2.;
                        uniforms.pongBallCoords.value.y=window.innerHeight/gr;
 
                    }
