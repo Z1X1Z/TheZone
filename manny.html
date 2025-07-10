@@ -2112,7 +2112,7 @@ vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
                                           
 
 
-                                          else if(abs(vUv.y-mod(note/12.*flipStar+twistStar*divideByMultiplyingPi2,1.))<=1./12.)shade= sign(-vUvCentered.x)*170.*flipStar*brelued;
+                                          else if(mod(vUv.y-mod(note/12.*flipStar+twistStar*divideByMultiplyingPi2,1.)+1.+1./12.,1.)<=2./12.)shade= sign(-vUvCentered.x)*170.*flipStar*brelued;
                                           
                                           }
                                       

@@ -1341,7 +1341,7 @@ function zoomRoutine(){
              let xEdge = widthPX;
              let yEdge = heightPX;
              let paddleStrikePosition=uniforms.pongBallCoords.value.y/uniforms.resolution.value.y-((note*flip+twist/2.)+12*100)%12./12.;
-             let paddleHitBall=(Math.abs(paddleStrikePosition )<1./12.);
+             let paddleHitBall=((paddleStrikePosition +13./12.)%1<1./12.);
              if(uniforms.pongBallCoords.value.x>xEdge) {
                     if(paddleHitBall)
                     {
