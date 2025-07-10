@@ -3810,7 +3810,7 @@ if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
 
     
-    float OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter)/40.,0.)).x;
+    float OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-.5)/40.,0.)).x;
     float OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
     
   float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(loops+counter)/40.,0.)).x;
@@ -4348,7 +4348,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
 
     //if(float(i)>=hyperCoreBoosted)s-=vec2(-cos(d.y),-cos(d.x))*.5;
 
-OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter)/40.,0.)).x;
+OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-.5)/40.,0.)).x;
 OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
   if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spin2(s,atan(s.y,s.x)*OmniPetal);
   
