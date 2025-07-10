@@ -16,7 +16,7 @@ body
 .textSHADOW
 {
     
-    text-shadow: 0 0 2px purple, 1px 1px 4px red,-4px -4px 4px green;
+    text-shadow: 0 0 2px purple, 1px 1px 3px red,-2px -2px 2px yellow;
 
 }
 
