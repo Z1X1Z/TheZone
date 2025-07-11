@@ -3680,9 +3680,10 @@ let tolerance=0;//(1024-26)/10000
                                                                  // console.log(b)
                                                                  // console.log(tAScaled)
                                                                let grTimesLeaf =   grPermanent*-leafPermanent
-                                                                if(1==1) for(n=1;n<6            ;n++)//still runs at higher n (2000ish)
+                                                                if(0==1) for(n=1;n<4            ;n++)//still runs at higher n (2000ish)
                                                                  {
-                                                                     let plusOrMinusPowerSeries = -(tAScaled**(n*grTimesLeaf))*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
+                                                                     let plusOrMinusPowerSeries = -(tAScaled**(n//*grTimesLeaf
+                                                                                                               ))*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                     
                                                                      if(plusOrMinusPowerSeries!=0.)tolerance+=plusOrMinusPowerSeries;
                                                                      else{//console.log(n);
