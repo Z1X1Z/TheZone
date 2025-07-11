@@ -3684,7 +3684,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  if(0==1) for(n=2;n<7            ;n++)//still runs at higher n (2000ish)//seems to work better started at 2
                                                                  {
                                                   
-                                                                     let plusOrMinusPowerSeries = (tAScaled**(feedbackVal//*grTimesLeaf
+                                                                     let plusOrMinusPowerSeries = -(tAScaled**(n//*grTimesLeaf
                                                                                                                ))*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                     
                                                                      if(plusOrMinusPowerSeries!=0.)tolerance+=plusOrMinusPowerSeries;
@@ -3693,7 +3693,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  }
                                                                 else{
                                                                     // tolerance=tAScaled**(grPermanent*-leaf);
-                                                                     tolerance=tAScaled**(2**(1./3.));
+                                                                tolerance=tAScaled**(2**(1./3.)/1.5);
                                                                 }
                                                             }
                                                           else tolerance=0.;
