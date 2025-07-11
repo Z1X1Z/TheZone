@@ -3688,7 +3688,7 @@ let tolerance=0;//(1024-26)/10000
                                                                          break;}
                                                                  }
                                                                 else{
-                                                                    let plusOrMinusPowerSeries = (tAScaled**1.5);//x-x**2+x**3-x**4....//may have an algebraic solution
+                                                                    let plusOrMinusPowerSeries = (tAScaled**2);//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                     
                                                                     if(plusOrMinusPowerSeries!=0.)tolerance+=plusOrMinusPowerSeries;
                                                                     //tolerance=tAScaled-(tAScaled**2)+tAScaled**3
