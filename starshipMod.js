@@ -3680,9 +3680,11 @@ let tolerance=0;//(1024-26)/10000
                                                                  // console.log(b)
                                                                  // console.log(tAScaled)
                                                                let grTimesLeaf =   grPermanent*-leafPermanent
-                                                                if(0==1) for(n=1;n<4            ;n++)//still runs at higher n (2000ish)
+                                                       let feedbackVal = grTimesLeaf;
+                                                                 if(0==1) for(n=2;n<7            ;n++)//still runs at higher n (2000ish)//seems to work better started at 2
                                                                  {
-                                                                     let plusOrMinusPowerSeries = -(tAScaled**(n//*grTimesLeaf
+                                                  
+                                                                     let plusOrMinusPowerSeries = (tAScaled**(feedbackVal//*grTimesLeaf
                                                                                                                ))*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                     
                                                                      if(plusOrMinusPowerSeries!=0.)tolerance+=plusOrMinusPowerSeries;
@@ -3691,7 +3693,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  }
                                                                 else{
                                                                     // tolerance=tAScaled**(grPermanent*-leaf);
-                                                                     tolerance=tAScaled**(grPermanent*-leafPermanent);
+                                                                     tolerance=tAScaled**(2.**.75);
                                                                 }
                                                             }
                                                           else tolerance=0.;
