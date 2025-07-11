@@ -3472,10 +3472,9 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
                                     else{
                                         renderer.setRenderTarget (null)
                                         
-                                        if(uniforms.MannyONtrail.value!=2)
-                                            shaderScene.remove(line);
+                                      shaderScene.remove(line);
                                             scene.add(line);
-
+                                        
                                             scene.add(radialLine);
                                             
                                                            if(uniforms.MannyONtrail.value!=2) scene.add(circle);
@@ -3491,6 +3490,10 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
                                      }
                                  else
                                     {
+                                                         
+                                                       shaderScene.remove(line);
+                                                             scene.add(line);
+                                                         
                                     scene.background = new THREE.Color( 0x808080);
                                                          if(uniforms.MannyONtrail.value!=2) scene.add(radialLine);
                                     if(uniforms.MannyONtrail.value!=2) scene.add(circle);
@@ -3499,6 +3502,10 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
 
                                                          if(uniforms.MannyONtrail.value!=2) scene.remove(radialLine);
                                                          if(uniforms.MannyONtrail.value!=2) scene.remove(circle);
+                                                         
+                                                       shaderScene.add(line);
+                                                             scene.remove(line);
+                                                         
                                     }
                               
                      
