@@ -3693,7 +3693,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  }
                                                                 else{
                                                                     // tolerance=tAScaled**(grPermanent*-leaf);
-                                                                tolerance=tAScaled**(2**(1./3.));
+                                                                tolerance=tAScaled**(2**(.25));
                                                                 }
                                                             }
                                                           else tolerance=0.;
