@@ -3689,7 +3689,8 @@ let tolerance=0;//(1024-26)/10000
                                                                          break;}
                                                                  }
                                                                 else{
-                                                                    tolerance=tAScaled**grPermanent;
+                                                                    // tolerance=tAScaled**(grPermanent*-leaf);
+                                                                     tolerance=tAScaled**(grPermanent*-leafPermanent);
                                                                 }
                                                             }
                                                           else tolerance=0.;
