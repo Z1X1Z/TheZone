@@ -2001,6 +2001,7 @@ function runOSMD (){
     interpolation = (timestamp-lastFrameTime)/1000.*60.;
     if (!isFinite(interpolation))interpolation = 1.;
                         if(loopsRun<3)interpolation=0.;//this is to prevent frametime leak on mobile
+                                    
                         if(interpolation>60)interpolation=1.;//this is to prevent frametime leak on mobile
     if(!generated||bigCloverGapSync){interpolation=1;bigCloverGapSync=false;}
     lastFrameTime=timestamp;
@@ -2575,7 +2576,7 @@ else{//start drawing of just twenty four frets here
     let bottomNote = Math.round(-twist+24)%24;
     let topNote = Math.round(-twist+60)%24;
 
-    let inset = 14;
+    let inset = 1.;
 let depBuffer = (-starShipDepthInSet+(1.-starShipDepthInSet))/inset-1.+1./inset;
     
 let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
@@ -3027,7 +3028,7 @@ let s = f;
                      let seg = timeElapsedSinceRecording/((trailSecondsLong>0)?trailSecondsLong:1);
                      if(window.flame)seg*=seg;
                             z = (-1.+seg*.5);
-                        //   if (z>=-.153)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong);
+                           if (movementRate*timeElapsedSinceRecording>.75)z=.01*(-1.+timeElapsedSinceRecording/trailSecondsLong);
                             const transparencyOfTrailLast =transparencyOfTrail;
                             transparencyOfTrail =1.-seg;
                      
@@ -3062,14 +3063,14 @@ let s = f;
                          g2 = g1;
                          b2 = b1;
                          transparencyOfTrail=1.
-                         z=-1.
-                         zlast=-1.;
+                        // z=-1.
+                         //zlast=-1.;
                      }
                      else{
                          r1 = red1;
                          g1 = green1;
                          b1 = blue1;
-                         if((r2==0&&g2==0&&b2==0)||(r2==1&&g2==1&&b2==1)){//just to make sure that in the stylus the colored bands are clearly visible
+                         if((r1==0&&g1==0&&b1==0)||(r1==1&&g1==1&&b1==1)){//just to make sure that in the stylus the colored bands are clearly visible
                              r2=r1;
                              g2=g1;
                              b2=b1;
