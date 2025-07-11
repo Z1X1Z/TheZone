@@ -3222,8 +3222,8 @@ if(uniforms.gameOn.value&&allCaught)
 }
 else if(!uniforms.gameOn.value){polygons=[]; level = 1; metaLevel=1;}
                                         
-                                        const baseMag=(1.-(metaLevel-level)/(metaLevel))/8.88;
-                                        let compound = interpolation*baseMag/60.*window.movementRate/pixelShaderToStarshipRATIO;
+                                        const baseMag=(1.-(metaLevel-level)/(metaLevel));
+                                        let compound =baseMag/30.*window.movementRate/pixelShaderToStarshipRATIO;
 
 for(let n = 0; n < polygons.length; n++)
                                                        {
@@ -3662,7 +3662,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  tAScaled =(tAScaled!=0)? tAScaled:1;
                                                                  let tAScaledPermanent = tAScaled;
                                                                  let incrementToleranceFeedback =tAScaled;
-                                                                 let oolp =    1./-leafPermanent;
+                                                      //           let oolp =    1./-leafPermanent;
 
                                                                  
                                                                  if(tAScaled>0&&isFinite(tAScaled))
@@ -3679,8 +3679,8 @@ let tolerance=0;//(1024-26)/10000
                                                                  
                                                                  // console.log(b)
                                                                  // console.log(tAScaled)
-                                                               let grTimesLeaf =   grPermanent*-leafPermanent
-                                                       let feedbackVal = grTimesLeaf;
+                                                        //       let grTimesLeaf =   grPermanent*-leafPermanent
+                                                      // let feedbackVal = grTimesLeaf;
                                                                  if(0==1) for(n=2;n<7            ;n++)//still runs at higher n (2000ish)//seems to work better started at 2
                                                                  {
                                                   
