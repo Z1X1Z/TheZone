@@ -3681,13 +3681,13 @@ let tolerance=0;//(1024-26)/10000
                                                                  // console.log(tAScaled)
                                                         //       let grTimesLeaf =   grPermanent*-leafPermanent
                                                       // let feedbackVal = grTimesLeaf;
-                                                                 if(1==1) for(n=2;n<100            ;n++)//still runs at higher n (2000ish)//seems to work better started at 2
+                                                                 if(1==1) for(n=2;n<1000            ;n++)//still runs at higher n (2000ish)//seems to work better started at 2
                                                                  {
                                                   
                                                                      let plusOrMinusPowerSeries = -(tAScaled**(2**(-1./n)//*grTimesLeaf
                                                                                                                ))*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                     
-                                                                     if(plusOrMinusPowerSeries!=0.)tolerance+=plusOrMinusPowerSeries;
+                                                                     if(plusOrMinusPowerSeries!=1.)tolerance+=plusOrMinusPowerSeries;
                                                                      else{console.log(n);
                                                                          break;}
                                                                  }
