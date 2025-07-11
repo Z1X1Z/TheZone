@@ -3688,7 +3688,7 @@ let tolerance=0;//(1024-26)/10000
                                                                          break;}
                                                                  }
                                                                 else{
-                                                                    tolerance=tAScaled**1.5;
+                                                                    tolerance=tAScaled**1.75;
                                                                 }
                                                             }
                                                           else tolerance=0.;
