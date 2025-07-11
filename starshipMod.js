@@ -3267,7 +3267,7 @@ for(let n = 0; n < polygons.length; n++)
                                                          
                                                          // if (distanceFromCenter<=1)
                                                          {
-                                                             compound*=Math.abs(maximumDimension/minimumDimension-distanceFromCenter);
+                                                             compound*=Math.abs(1.-distanceFromCenter);
                                                              polygons[n].dx+=-Math.cos(angleTarget)*compound;
                                                              polygons[n].dy+=-Math.sin(angleTarget)*compound;
                                                          }
