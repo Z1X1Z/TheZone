@@ -3679,7 +3679,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  // console.log(b)
                                                                  // console.log(tAScaled)
                                                                  
-                                                                 for(n=2;n<3;n++)//higher n (2000ish)seems to improve results
+                                                                if(0==1) for(n=2;n<3;n++)//still runs at higher n (2000ish)
                                                                  {
                                                                      let plusOrMinusPowerSeries = (tAScaled)**n*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                     
@@ -3687,9 +3687,13 @@ let tolerance=0;//(1024-26)/10000
                                                                      else{//console.log(n);
                                                                          break;}
                                                                  }
-                                                                  
-                                                                 //tolerance=tAScaled-(tAScaled**2)+tAScaled**3
-                                                             }
+                                                                else{
+                                                                    let plusOrMinusPowerSeries = -(tAScaled)**1.5;//x-x**2+x**3-x**4....//may have an algebraic solution
+                                                                    
+                                                                    if(plusOrMinusPowerSeries!=0.)tolerance+=plusOrMinusPowerSeries;
+                                                                    //tolerance=tAScaled-(tAScaled**2)+tAScaled**3
+                                                                }
+                                                            }
                                                           else tolerance=0.;
                                                          }
 //.02134356(7)  solid guess//.0214284 easier reaching notes//n*2,n,n*2*2,n*2*2/2,n*2*2*2,n*2*2*2/2
