@@ -1209,7 +1209,7 @@ function onWindowResize() {
                   let lastPitch = 1;
 
                   let lastFrameTime=0.;
-                  let interpolation=0.;
+                  let interpolation=1.;
                   let finalAverageAmp=1.;
                   let averageFrameTotalAmp = [];
                        
@@ -2000,7 +2000,7 @@ function runOSMD (){
     lvs=document.visibilityState
     interpolation = (timestamp-lastFrameTime)/1000.*60.;
     if (!isFinite(interpolation))interpolation = 1.;
-                        if(loopsRun<3)interpolation=0.;//this is to prevent frametime leak on mobile
+                        if(loopsRun<3)interpolation=1.;//this is to prevent frametime leak on mobile
                                     
                         if(interpolation>60)interpolation=1.;//this is to prevent frametime leak on mobile
     if(!generated||bigCloverGapSync){interpolation=1;bigCloverGapSync=false;}
@@ -3223,7 +3223,7 @@ if(uniforms.gameOn.value&&allCaught)
 else if(!uniforms.gameOn.value){polygons=[]; level = 1; metaLevel=1;}
                                         
                                         const baseMag=(1.-(metaLevel-level)/(metaLevel));
-                                        let compound =baseMag/100.*window.movementRate/pixelShaderToStarshipRATIO;
+                                        let compound =baseMag/50./interpolation*window.movementRate/pixelShaderToStarshipRATIO;
 
 for(let n = 0; n < polygons.length; n++)
                                                        {
