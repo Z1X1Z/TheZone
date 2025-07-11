@@ -3668,7 +3668,10 @@ let tolerance=0;//(1024-26)/10000
                                                                  if(tAScaled>0&&isFinite(tAScaled))
                                                                      for(var reps=0; reps<1.;reps+=tAScaled)
                                                                      { tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaledPermanent))/(2.-tAScaledPermanent))
-                                                                         tAScaled=tAScaled**((1.-tAScaled)*(1.+tAScaledPermanent))**(1./-leafPermanent-(tAScaled)**(.5+tAScaled))
+                                                                         tAScaled=tAScaled**((1.-tAScaled)*(1.+tAScaledPermanent))**(
+                                                                                                                                     //1./-leafPermanent
+                                                                                                                                     .75
+                                                                                                                                     -(tAScaled)**(.5+tAScaled))
                                                                          //          b++
                                                                      }
                                                                  
@@ -3677,7 +3680,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  // console.log(b)
                                                                  // console.log(tAScaled)
                                                                  
-                                                                 for(n=2;n<7;n++)//higher n (2000ish)seems to improve results
+                                                                 for(n=2;n<6;n++)//higher n (2000ish)seems to improve results
                                                                  {
                                                                      let plusOrMinusPowerSeries = (tAScaled)**n*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                     
