@@ -3679,7 +3679,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  // console.log(b)
                                                                  // console.log(tAScaled)
                                                                  
-                                                                if(1==1) for(n=2;n<2000;n++)//still runs at higher n (2000ish)
+                                                                if(1==0) for(n=2;n<2000;n++)//still runs at higher n (2000ish)
                                                                  {
                                                                      let plusOrMinusPowerSeries = -(tAScaled**n)*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                     
@@ -3688,10 +3688,7 @@ let tolerance=0;//(1024-26)/10000
                                                                          break;}
                                                                  }
                                                                 else{
-                                                                    let plusOrMinusPowerSeries = (tAScaled**2);//x-x**2+x**3-x**4....//may have an algebraic solution
-                                                                    
-                                                                    if(plusOrMinusPowerSeries!=0.)tolerance+=plusOrMinusPowerSeries;
-                                                                    //tolerance=tAScaled-(tAScaled**2)+tAScaled**3
+                                                                    tolerance=tAScaled**1.5;
                                                                 }
                                                             }
                                                           else tolerance=0.;
