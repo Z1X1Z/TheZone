@@ -3676,7 +3676,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  // console.log(b)
                                                                  // console.log(tAScaled)
                                                                  
-                                                                 for(n=1;n<6;n++)
+                                                                 for(n=1;n<111;n++)
                                                                  {
                                                                      let plusOrMinusPowerSeries = (tAScaled)**n*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                      if(plusOrMinusPowerSeries!=0.)tolerance+=plusOrMinusPowerSeries;
