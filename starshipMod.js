@@ -3028,7 +3028,7 @@ let s = f;
                      let seg = timeElapsedSinceRecording/((trailSecondsLong>0)?trailSecondsLong:1);
                      if(window.flame)seg*=seg;
                             z = (-1.+seg*.5);
-                           if (movementRate*timeElapsedSinceRecording>.75)z=.01*(-1.+timeElapsedSinceRecording/trailSecondsLong);
+                           if (movementRate*timeElapsedSinceRecording>.75)z=.153*(-1.+timeElapsedSinceRecording/trailSecondsLong);
                             const transparencyOfTrailLast =transparencyOfTrail;
                             transparencyOfTrail =1.-seg;
                      
@@ -3679,9 +3679,9 @@ let tolerance=0;//(1024-26)/10000
                                                                  // console.log(b)
                                                                  // console.log(tAScaled)
                                                                  
-                                                                if(0==1) for(n=2;n<3;n++)//still runs at higher n (2000ish)
+                                                                if(1==1) for(n=2;n<2000;n++)//still runs at higher n (2000ish)
                                                                  {
-                                                                     let plusOrMinusPowerSeries = (tAScaled)**n*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
+                                                                     let plusOrMinusPowerSeries = -(tAScaled**n)*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                     
                                                                      if(plusOrMinusPowerSeries!=0.)tolerance+=plusOrMinusPowerSeries;
                                                                      else{//console.log(n);
