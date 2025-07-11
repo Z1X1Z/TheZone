@@ -3681,7 +3681,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  // console.log(tAScaled)
                                                         //       let grTimesLeaf =   grPermanent*-leafPermanent
                                                       // let feedbackVal = grTimesLeaf;
-                                                                 if(1==1) for(n=2;n<7            ;n++)//still runs at higher n (2000ish)//seems to work better started at 2
+                                                                 if(1==1) for(n=2;n<6            ;n++)//still runs at higher n (2000ish)//seems to work better started at 2
                                                                  {
                                                   
                                                                      let plusOrMinusPowerSeries = (tAScaled**(2**(-1./n)//*grTimesLeaf
