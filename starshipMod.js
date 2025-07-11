@@ -211,12 +211,12 @@ function spiral_compress(){
     //if ( z[n]>z[n-1] && z[n] > z[n+1] ){
     let d =1.;
     if(n!=0)   d = (z[n+1]-z[n-1])/(z[n-1]+z[n+1]);
-    else d = (z[n+1])/(z[n]+z[n+1])/2.;
-    const nAdj = n + d*4 ;
-      if (Math.abs(d)<4+1.&&isFinite(d))
+    else d = z[n+1]/z[n];
+    const nAdj = n + d *6. ;//seems like it should be times 4 for rationality, but 5 works better with continuous star, 6 seems effectively correct
+      //if (Math.abs(d)<4+1.&&isFinite(d))
         freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
-     else
-        freq = audioX.sampleRate*n/numberOfBins
+    // else
+    //    freq = audioX.sampleRate*n/numberOfBins
         //   freq = 440; //check for concert A
     var note24 =24*Math.log(freq/window.ConcertKey)/Math.log(2.)+49*2;
                      if(unitTest)
