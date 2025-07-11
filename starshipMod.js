@@ -3670,6 +3670,7 @@ let tolerance=0;//(1024-26)/10000
                                                                      { tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaledPermanent))/(2.-tAScaledPermanent))
                                                                          tAScaled=tAScaled**((1.-tAScaled)*(1.+tAScaledPermanent))**(
                                                                                                                                             .75
+                                                                                        //oolp
                                                                                                                                      -(tAScaled)**(.5+tAScaled))
                                                                          //          b++
                                                                      }
@@ -3688,7 +3689,7 @@ let tolerance=0;//(1024-26)/10000
                                                                          break;}
                                                                  }
                                                                 else{
-                                                                    tolerance=tAScaled**1.75;
+                                                                    tolerance=tAScaled**grPermanent;
                                                                 }
                                                             }
                                                           else tolerance=0.;
