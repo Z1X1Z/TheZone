@@ -3686,7 +3686,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  tAScaled=tAScaled**.5;
                                                                  let plusOrMinusPowerSeries=tAScaled;
                                                                  let loopsThresh = 1
-                                                                 if(1==1) for(n=1;n<11;n+=1)//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
+                                                                 if(1==1) for(n=1;n<50;n+=1)//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
                                                                  {
                                                                      let sig = Math.sign(n%2-.5);
                                                   console.log(n)
