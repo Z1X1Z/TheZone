@@ -3666,7 +3666,7 @@ let tolerance=0;//(1024-26)/10000
 
                                                                  
                                                                  if(tAScaled>0&&isFinite(tAScaled))
-                                                                     for(var reps=0; reps<1.;reps+=tAScaled)
+                                                                     for(var reps=0; reps<2.;reps+=1)
                                                                      { tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaledPermanent))/(2.-tAScaledPermanent))
                                                                          let taEX1 = ((1.-tAScaled)*(1.+tAScaledPermanent));
                                                                          tAScaled=tAScaled**(Math.sign(taEX1)*(Math.abs(taEX1))**(
