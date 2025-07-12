@@ -1,13 +1,13 @@
 var THREE;
 
-if(window.useCDN)import("three").then(module => { THREE=module})
+if(window.useCDN||true)import("three").then(module => { THREE=module})
 .catch((err) => {
     console.log(err)
 
     console.log("Error loading threeJS module;load old Threejs instead");
     document.getElementById("threeJSscript").src = "https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/three.min.js"//iOS needs a local module, so we give it this instead
 })
-.finally((err) => {    console.log(err)
+.finally((err) => {    //console.log(err)
 });
 else{
 
@@ -3681,7 +3681,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  // console.log(tAScaled)
                                                         //       let grTimesLeaf =   grPermanent*-leafPermanent
                                                       // let feedbackVal = grTimesLeaf;
-                                                                 if(1==1) for(n=3;n<75            ;n++)//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
+                                                                 if(1==1) for(n=3;n<73            ;n++)//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
                                                                  {
                                                   
                                                                      let plusOrMinusPowerSeries = (tAScaled**(2**(-1./n)//*grTimesLeaf
