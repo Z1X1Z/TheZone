@@ -509,11 +509,11 @@ let pushBackCounter = 0;
                  var spunD = [d_x,d_y];
                                
                             if(uniforms.carousel.value!=0.)         spunD=spin(spunD,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
-                  const d_xS=spunD[0];
-                  const d_yS=spunD[1];
+                  const d_xS=spunD[0]*interpolation;
+                  const d_yS=spunD[1]*interpolation;
 
-           const bx=coordX+d_xS*MR*zoom*interpolation;
-          const by=coordY+d_yS*MR*zoom*interpolation;
+           const bx=coordX+d_xS*MR*zoom;
+          const by=coordY+d_yS*MR*zoom;
                                
                             let preFromCenter= Math.sqrt(bx*bx+by*by);
 
@@ -3223,7 +3223,7 @@ if(uniforms.gameOn.value&&allCaught)
 else if(!uniforms.gameOn.value){polygons=[]; level = 1; metaLevel=1;}
                                         
                                         const baseMag=(1.-(metaLevel-level)/(metaLevel));
-                                        let compound =baseMag/72./interpolation*window.movementRate/pixelShaderToStarshipRATIO;
+                                        let compound =baseMag/24.*window.movementRate/pixelShaderToStarshipRATIO;
 
 for(let n = 0; n < polygons.length; n++)
                                                        {
@@ -3245,12 +3245,12 @@ for(let n = 0; n < polygons.length; n++)
                                                          
                                                          var neutralizer=1.;
                                                          if (!on)neutralizer=0.;
-                                                         polygons[n].centerX += (d_x*neutralizer-polygons[n].dx)*MR;
+                                                         polygons[n].centerX += (d_x*interpolation*neutralizer-polygons[n].dx)*MR;
                                                          
                                                          if(uniforms.colorCombo.value==20&&!(uniforms.musicAngelMan.value>0&&(uniforms.Character.value==3||uniforms.Character.value==4))){
                                                              distanceFromCenter= Math.pow((xFromCent*xFromCent+(yFromCent+.25)*(yFromCent+.25)),.5)/uniforms.shaderScale.value/1.75/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y));
                                                              triggerDistance=distanceFromCenter/(1./uniforms.shaderScale.value/1.75/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y)));
-                                                             polygons[n].centerY += (d_y*neutralizer-polygons[n].dy)*MR;
+                                                             polygons[n].centerY += (d_y*interpolation*neutralizer-polygons[n].dy)*MR;
                                                              
                                                          }
                                                          else {
