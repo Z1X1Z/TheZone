@@ -3655,7 +3655,7 @@ vec2 m=vec2(0.);
 
 float truncator=1.;
 bool truncated = true;
-if(zoom!=0.&&lfc!=0.&&truncated) truncator =log((lfc*lfc)/(zoom*zoom))/log(.5)*100.;
+if(zoom!=0.&&lfc!=0.&&truncated) truncator =log((lfc*lfc)/(zoom*zoom))/log(2.)*100.;
 //pow(abs(log(zoom/lfc),2.);//log truncation * factor is not known, may no longer be necesary
 //Maendel clover
 
@@ -3689,7 +3689,12 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
 
                                                       //pow(spoke_factor,(-leaf/gr)/truncator)*truncator)*(((1.+gr)/-leaf)/truncator)*truncator;
                           //   float upSpoke=pow(spoke_factor,((-leaf/gr)/truncator)*truncator)*1.5;//pow(spoke_factor,leaf);//seems to have many likes
-                           float   oneOverLeafTruncated=(clvrVariant4/truncator)*truncator;
+                                                      float        oneOverLeafTruncatedFactor=1.;
+                           if(  OrthoEvery!=0.)oneOverLeafTruncatedFactor=1./leaf;
+                                                      else
+                                                      oneOverLeafTruncatedFactor=clvrVariant4;
+                                                      
+                                                     float oneOverLeafTruncated=(oneOverLeafTruncatedFactor/truncator)*truncator;
                                                       //-0.748693232289164237654969328
                                                       //-0.755558243034340;
                                                      //((1./leaf)/truncator)*truncator;
@@ -3834,8 +3839,6 @@ s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
 //if(counter>0.)s=spin2(s,whirlpoolMeta*dstnce*.75/3.*PI);
 
 dstnce = length(s);
-
-        
                           vec2 cloverMAPNeutral = ((spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment)));
                                                     
                                vec2   cloverMAP = cloverMAPNeutral+.5;
@@ -3888,7 +3891,7 @@ dstnce = length(s);
    colorAccumulator+=s;
    if(Refractelate&&dstnce>refractelC){s/=refractelC;} //refractelC/=4./3.;}
    if((counter==1.&&oppositionalCoreFlop==1)||oppositionalCoreFlop==2)s=spin2(s,PI);
-vec2 lastS = s;
+vec2 lastS = deSplicedS;
 
 //if(mod(counter,2.)==1.&&colorCombo==0)s =abs(s);//supposed to make clover brighter and nothing else?;
 
