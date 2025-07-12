@@ -3686,7 +3686,7 @@ let tolerance=0;//(1024-26)/10000
 
                                                                  let plusOrMinusPowerSeries=tAScaled;
                                                                  let loopsThresh = 1
-                                                                 if(1==1) for(n=1;n<100;n++)//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
+                                                                 if(1==1) for(n=1;n<10;n++)//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
                                                                  {
                                                   
                                                                       plusOrMinusPowerSeries = (tAScaled**(2**(-1./(n+plusOrMinusPowerSeries-(plusOrMinusPowerSeries*tAScaled)))//*grTimesLeaf
