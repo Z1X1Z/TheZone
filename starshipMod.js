@@ -3683,7 +3683,7 @@ let tolerance=0;//(1024-26)/10000
                                                         //       let grTimesLeaf =   grPermanent*-leafPermanent
                                                       // let feedbackVal = grTimesLeaf;
                                                                 // console.log(tAScaled)
-
+                                                                 tAScaled=tAScaled**.5;
                                                                  let plusOrMinusPowerSeries=tAScaled;
                                                                  let loopsThresh = 1
                                                                  if(1==1) for(n=1;n<51;n+=1)//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
@@ -3691,7 +3691,7 @@ let tolerance=0;//(1024-26)/10000
                                                                      let sig = Math.sign(n%2-.5);
                                                   console.log(n)
                                                                 
-                                                                     plusOrMinusPowerSeries = (tAScaled**(2**(-1./(loopsThresh+1.
+                                                                     plusOrMinusPowerSeries = (tAScaled**(2**(-1.5/(loopsThresh
                                                                                         -(plusOrMinusPowerSeries+tAScaled*plusOrMinusPowerSeries)*sig))
                                                                  //     plusOrMinusPowerSeries = (tAScaled**(2**(-1.5/(loopsThresh-3.*(plusOrMinusPowerSeries-plusOrMinusPowerSeries*totalAMP)*sig))//*grTimesLeaf
                                                                                                                ))*sig;//x-x**2+x**3-x**4....//may have an algebraic solution
