@@ -3686,17 +3686,18 @@ let tolerance=0;//(1024-26)/10000
 
                                                                  let plusOrMinusPowerSeries=tAScaled;
                                                                  let loopsThresh = 1
-                                                                 if(1==1) for(n=1;n<10;n++)//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
+                                                                 if(1==1) for(n=1;n<50;n+=1)//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
                                                                  {
                                                   
-                                                                      plusOrMinusPowerSeries = (tAScaled**(2**(-1./(n+plusOrMinusPowerSeries-(plusOrMinusPowerSeries*tAScaled)))//*grTimesLeaf
+                                                                      plusOrMinusPowerSeries = (tAScaled**(2**(-1./(loopsThresh+plusOrMinusPowerSeries-(plusOrMinusPowerSeries*tAScaled)))//*grTimesLeaf
                                                                                                                ))*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
-                                                        //             loopsThresh++
+                                                                    loopsThresh++
                                                                      if(plusOrMinusPowerSeries!=1.)tolerance+=plusOrMinusPowerSeries;
                                                                      else{console.log(n);
                                                                          break;}
                                                                  }
-                                                                 
+                                                              //   tolerance-=1.;
+
                                                                  /*
                                                                 else{
                                                                     // tolerance=tAScaled**(grPermanent*-leaf);
@@ -3710,6 +3711,8 @@ let tolerance=0;//(1024-26)/10000
              else if(window.highORlow==2)tolerance=.49;
             else if(window.highORlow==1)
                 tolerance=0.;
+                                                         
+                                                        //   console.log(tolerance);
                 /*
                  for(n=0;n<111;n++)if(n!=0){
                  let plusOrMinusPowerSeries = totalAMP**n*Math.sign(n%2-.5);//x-x**2+x**3-x**4....
