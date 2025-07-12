@@ -398,7 +398,7 @@ for (var counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
         console.log(runTimes)
     }
     */
-var OmniDynamicPetalShift =omniData[(loops+counter-1.)];
+var OmniDynamicPetalShift =omniData[(loops+counter)];
 var OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
 
 var  CORE_DELIMITER=coreData[Math.floor(loops+counter)];
@@ -737,7 +737,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
     
 //if(i==0){float b = ;s*=b;dstnce*b;}
 
-OmniDynamicPetalShift =omniData[(loops+counter-1.)];
+OmniDynamicPetalShift =omniData[(loops+counter-.5)];
 OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
 
 if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spinVector(s,Math.atan(s.y,s.x)*OmniPetal);
