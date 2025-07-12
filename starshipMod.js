@@ -3690,7 +3690,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  {
                                                                      let sig = Math.sign(n%2-.5);
                                                   console.log(n)
-                                                                      plusOrMinusPowerSeries = (tAScaled**(2**(-1.5/(loopsThresh-3*tAScaled*sig))//*grTimesLeaf
+                                                                      plusOrMinusPowerSeries = (tAScaled**(2**(-1.5/(loopsThresh-(tAScaled-tAScaled*plusOrMinusPowerSeries)*sig))//*grTimesLeaf
                                                                                                                ))*sig;//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                     loopsThresh++
                                                                      if(plusOrMinusPowerSeries!=1.)tolerance+=plusOrMinusPowerSeries;
