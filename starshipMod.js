@@ -3684,12 +3684,13 @@ let tolerance=0;//(1024-26)/10000
                                                       // let feedbackVal = grTimesLeaf;
                                                                 // console.log(tAScaled)
 
-                                                                 let plusOrMinusPowerSeries=0.;tAScaled;
+                                                                 let plusOrMinusPowerSeries=tAScaled;
                                                                  let loopsThresh = 1
                                                                  if(1==1) for(n=1;n<2;n+=1)//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
                                                                  {
+                                                                     let sig = Math.sign(n%2-.5);
                                                   console.log(n)
-                                                                      plusOrMinusPowerSeries = (tAScaled**(2**(-1./(loopsThresh-tAScaled))//*grTimesLeaf
+                                                                      plusOrMinusPowerSeries = (tAScaled**(2**(-1./(loopsThresh-plusOrMinusPowerSeries*tAScaled))//*grTimesLeaf
                                                                                                                ))*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                     loopsThresh++
                                                                      if(plusOrMinusPowerSeries!=1.)tolerance+=plusOrMinusPowerSeries;
