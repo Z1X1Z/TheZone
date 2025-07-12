@@ -3689,7 +3689,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  if(1==1) for(n=1;n<51;n+=1)//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
                                                                  {
                                                   
-                                                                      plusOrMinusPowerSeries = (tAScaled**(2**(-1./(loopsThresh+plusOrMinusPowerSeries-tAScaled))//*grTimesLeaf
+                                                                      plusOrMinusPowerSeries = (tAScaled**(2**(-1./(loopsThresh+plusOrMinusPowerSeries-tAScaled*plusOrMinusPowerSeries))//*grTimesLeaf
                                                                                                                ))*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                     loopsThresh++
                                                                      if(plusOrMinusPowerSeries!=1.)tolerance+=plusOrMinusPowerSeries;
