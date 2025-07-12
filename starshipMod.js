@@ -3668,22 +3668,25 @@ let tolerance=0;//(1024-26)/10000
                                                                  if(tAScaled>0&&isFinite(tAScaled))
                                                                      for(var reps=0; reps<1.;reps+=tAScaled)
                                                                      { tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaledPermanent))/(2.-tAScaledPermanent))
-                                                                         tAScaled=tAScaled**((1.-tAScaled)*(1.+tAScaledPermanent))**(
+                                                                         let taEX1 = ((1.-tAScaled)*(1.+tAScaledPermanent));
+                                                                         tAScaled=tAScaled**(Math.sign(taEX1)*(Math.abs(taEX1))**(
                                                                                                                                             .75
                                                                                         //oolp
-                                                                                                                                     -(tAScaled)**(.5+tAScaled))
+                                                                                                                                     -(tAScaled)**(.5+tAScaled)))
                                                                          //          b++
                                                                      }
                                                                  
                                                                  // let b = 0.;
                                                                  
                                                                  // console.log(b)
-                                                        0         // console.log(tAScaled)
+                                                                 // console.log(tAScaled)
                                                         //       let grTimesLeaf =   grPermanent*-leafPermanent
                                                       // let feedbackVal = grTimesLeaf;
+                                                                // console.log(tAScaled)
+
                                                                  let plusOrMinusPowerSeries=tAScaled;
                                                                  let loopsThresh = 1
-                                                                 if(1==1) for(n=1;n<1001;n++)//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
+                                                                 if(1==1) for(n=1;n<65;n++)//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
                                                                  {
                                                   
                                                                       plusOrMinusPowerSeries = (tAScaled**(2**(-1./(n+(plusOrMinusPowerSeries*tAScaled)))//*grTimesLeaf
