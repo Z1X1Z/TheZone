@@ -3678,23 +3678,26 @@ let tolerance=0;//(1024-26)/10000
                                                                  // let b = 0.;
                                                                  
                                                                  // console.log(b)
-                                                                 // console.log(tAScaled)
+                                                        0         // console.log(tAScaled)
                                                         //       let grTimesLeaf =   grPermanent*-leafPermanent
                                                       // let feedbackVal = grTimesLeaf;
-                                                                 if(1==1) for(n=1;n<67            ;n++)//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
+                                                                 if(1==1) for(n=1;n<65;n++)//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
                                                                  {
                                                   
-                                                                     let plusOrMinusPowerSeries = (tAScaled**(2**(-1.5/(n+tAScaled*2.))//*grTimesLeaf
+                                                                     let plusOrMinusPowerSeries = (tAScaled**(2**(-1.5/(n+tAScaled*3.))//*grTimesLeaf
                                                                                                                ))*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                     
                                                                      if(plusOrMinusPowerSeries!=1.)tolerance+=plusOrMinusPowerSeries;
                                                                      else{console.log(n);
                                                                          break;}
                                                                  }
+                                                                 
+                                                                 /*
                                                                 else{
                                                                     // tolerance=tAScaled**(grPermanent*-leaf);
                                                                 tolerance=tAScaled**(1./    (2**(1./3.)));
                                                                 }
+                                                                   */
                                                             }
                                                           else tolerance=0.;
                                                          }
