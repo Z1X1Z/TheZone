@@ -3695,8 +3695,8 @@ let tolerance=0;//(1024-26)/10000
                                                   //console.log(plusOrMinusPowerSeries)
                                                                     
                                                                      plusOrMinusPowerSeries = (tAScaled**(2**(-1.5/(loopsThresh
-                                                                                                        -(plusOrMinusPowerSeries)//+tAScaled*plusOrMinusPowerSeries)
-                                                                                                                    *-sig*3.))
+                                                                                                        -(1.+plusOrMinusPowerSeries)//+tAScaled*plusOrMinusPowerSeries)
+                                                                                                                    *-sig*1.5))
                                                                                                       ))*sig;//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                     loopsThresh++
                                                                      if(plusOrMinusPowerSeries!=1.){//tolerance+=plusOrMinusPowerSeries;
