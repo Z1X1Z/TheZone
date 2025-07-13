@@ -3696,12 +3696,12 @@ let tolerance=0;//(1024-26)/10000
                                                   //console.log(plusOrMinusPowerSeries)
                                                                     
                                                                      plusOrMinusPowerSeries = (tAScaled**(2**(-1.5/(loopsThresh
-                                                                                                        -(tAScaled-1.)//+tAScaled*plusOrMinusPowerSeries)
+                                                                                                        -(tAScaled+plusOrMinusPowerSeries-1.)//+tAScaled*plusOrMinusPowerSeries)
                                                                                                                     *-sig*1.5))
                                                                                                       ))*sig;//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                     loopsThresh++
                                                                      if(plusOrMinusPowerSeries!=1.){//tolerance+=plusOrMinusPowerSeries;
-                                                                        plusOrMinusPowerSeriesMath=         Math.sign(plusOrMinusPowerSeries)*Math.abs(plusOrMinusPowerSeries)**2.;
+                                                                        plusOrMinusPowerSeries=         Math.sign(plusOrMinusPowerSeries)*Math.abs(plusOrMinusPowerSeries)**2.;
                                                                                    tolerance+=plusOrMinusPowerSeries;
                                                                      }
                                                                      else{console.log(n);
