@@ -3267,9 +3267,12 @@ for(let n = 0; n < polygons.length; n++)
                                                          
                                                          // if (distanceFromCenter<=1)
                                                          {
-                                                             compound*=Math.abs(maximumDimension/ minimumDimension-distanceFromCenter);
-                                                             polygons[n].dx+=-Math.cos(angleTarget)*compound;
-                                                             polygons[n].dy+=-Math.sin(angleTarget)*compound;
+                                                             compound*=Math.abs(minimumDimension/maximumDimension -distanceFromCenter);
+                                                    //if(Math.sqrt(polygons[n].dx*polygons[n].dx+polygons[n].dy+polygons[n].dy)<window.movementRate)
+                                                    {
+                                                        polygons[n].dx+=-Math.cos(angleTarget)*compound;
+                                                        polygons[n].dy+=-Math.sin(angleTarget)*compound;
+                                                    }
                                                          }
                                                          
                                                          
