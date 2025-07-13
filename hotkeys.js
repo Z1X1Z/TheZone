@@ -194,7 +194,7 @@ window.settingsSet = false
 
 
 
-const starSHIPVOLUMEdefaultLowVolume = 5./1024.;//used in sstarshipmod
+const starSHIPVOLUMEdefaultLowVolume = 3./1024.;//used in sstarshipmod
 
 
 function resetAll(){
