@@ -3691,7 +3691,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  let plusOrMinusPowerSeries=tAScaled;
                                                                  let plusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries;
                                                                  let loopsThresh = 1
-                                                                 if(totalAMP<.5) for(n=0;n<444;n+=2.-1./(1.-totalAMP))//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
+                                                                 if(totalAMP<.5-.1) for(n=0;n<444;n+=2.-1./(1.-totalAMP))//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
                                                                  {
                                                                      let sig = Math.sign(loopsThresh%2-.5);
                                                   //console.log(plusOrMinusPowerSeries)
