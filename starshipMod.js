@@ -3245,12 +3245,12 @@ for(let n = 0; n < polygons.length; n++)
                                                          
                                                          var neutralizer=1.;
                                                          if (!on)neutralizer=0.;
-                                                         polygons[n].centerX += (d_x*interpolation*neutralizer-polygons[n].dx)*MR;
+                                                         polygons[n].centerX += (d_x*neutralizer-polygons[n].dx)*MR*interpolation;
                                                          
                                                          if(uniforms.colorCombo.value==20&&!(uniforms.musicAngelMan.value>0&&(uniforms.Character.value==3||uniforms.Character.value==4))){
                                                              distanceFromCenter= Math.pow((xFromCent*xFromCent+(yFromCent+.25)*(yFromCent+.25)),.5)/uniforms.shaderScale.value/1.75/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y));
                                                              triggerDistance=distanceFromCenter/(1./uniforms.shaderScale.value/1.75/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y)));
-                                                             polygons[n].centerY += (d_y*interpolation*neutralizer-polygons[n].dy)*MR;
+                                                             polygons[n].centerY += (d_y*neutralizer-polygons[n].dy)*MR*interpolation;
                                                              
                                                          }
                                                          else {
@@ -3267,7 +3267,7 @@ for(let n = 0; n < polygons.length; n++)
                                                          
                                                          // if (distanceFromCenter<=1)
                                                          {
-                                                             compound*=Math.abs(minimumDimension/maximumDimension -distanceFromCenter);
+                                                             compound*=Math.abs(1. -distanceFromCenter);
                                                     //if(Math.sqrt(polygons[n].dx*polygons[n].dx+polygons[n].dy+polygons[n].dy)<window.movementRate)
                                                     {
                                                         polygons[n].dx+=-Math.cos(angleTarget)*compound;
