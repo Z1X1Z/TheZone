@@ -3028,7 +3028,7 @@ let s = f;
                      let seg = timeElapsedSinceRecording/((trailSecondsLong>0)?trailSecondsLong:1);
                      if(window.flame)seg*=seg;
                             z = (-1.+seg*.5);
-                           if (movementRate*timeElapsedSinceRecording>.75)z=.01*(-1.+timeElapsedSinceRecording/trailSecondsLong);
+                           if (movementRate*timeElapsedSinceRecording>.5)z=.01*(-1.+timeElapsedSinceRecording/trailSecondsLong);
                             const transparencyOfTrailLast =transparencyOfTrail;
                             transparencyOfTrail =1.-seg;
                      
