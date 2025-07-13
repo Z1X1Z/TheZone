@@ -356,7 +356,7 @@ let pitch = -1;
 let reset = 6;
 let on=false;
 let spirafreq=1;
-var totalAMP;
+var totalAMP=0;
 var angle=0.;//this has nothing to do with the spin function below, it's for the pitch
                            function spin(f, angle)
                            {    //https://en.wikipedia.org/wiki/Rotation_matrix
@@ -3689,8 +3689,9 @@ let tolerance=0;//(1024-26)/10000
                                                                 // console.log(tAScaled)
                                                         //       tAScaled=tAScaled**.5;
                                                                  let plusOrMinusPowerSeries=tAScaled;
+                                                                 let plusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries;
                                                                  let loopsThresh = 1
-                                                                 if(1==1) for(n=1;n<444;n+=1)//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
+                                                                 if(totalAMP<.5) for(n=0;n<444;n+=2.-1./(1.-totalAMP))//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
                                                                  {
                                                                      let sig = Math.sign(loopsThresh%2-.5);
                                                   //console.log(plusOrMinusPowerSeries)
@@ -3699,13 +3700,26 @@ let tolerance=0;//(1024-26)/10000
                                                                                                         -(tAScaled*plusOrMinusPowerSeries-1.)//+tAScaled*plusOrMinusPowerSeries)
                                                                                                                     *-sig*1.5))
                                                                                                       ))*sig;//x-x**2+x**3-x**4....//may have an algebraic solution
-                                                                    loopsThresh++
+                                                                
                                                                      if(plusOrMinusPowerSeries!=1.){//tolerance+=plusOrMinusPowerSeries;
-                                                           //             plusOrMinusPowerSeries=         Math.sign(plusOrMinusPowerSeries)*Math.abs(plusOrMinusPowerSeries)**2.;
-                                                                                   tolerance+=plusOrMinusPowerSeries;
+                                                                         //             plusOrMinusPowerSeries=         Math.sign(plusOrMinusPowerSeries)*Math.abs(plusOrMinusPowerSeries)**2.;
+                                                                         if(loopsThresh%2==1)               { tolerance+=plusOrMinusPowerSeriesBUFFER;
+                                                                             plusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries
+                                                                             
+                                                                           
+                                                                         }
+                                                                         
+                                                    else
+                                                    {
+                                                        tolerance+=plusOrMinusPowerSeries;
+                                                        
+                                                    }
+                                                                  //       console.log(n)
                                                                      }
                                                                      else{console.log(n);
                                                                          break;}
+                                                                     loopsThresh++
+
                                                                  }
                                                               //   tolerance-=1.;
 
