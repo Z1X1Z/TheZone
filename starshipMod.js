@@ -3696,7 +3696,7 @@ let tolerance=0;//(1024-26)/10000
                                                                                                       ))*sig;//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                     loopsThresh++
                                                                      if(plusOrMinusPowerSeries!=1.){//tolerance+=plusOrMinusPowerSeries;
-                                                                        plusOrMinusPowerSeriesMath=         Math.sign(plusOrMinusPowerSeries)*Math.abs(plusOrMinusPowerSeries)**.5;
+                                                                        plusOrMinusPowerSeriesMath=         Math.sign(plusOrMinusPowerSeries)*Math.abs(plusOrMinusPowerSeries)**2.;
                                                                                    tolerance+=plusOrMinusPowerSeries;
                                                                      }
                                                                      else{console.log(n);
