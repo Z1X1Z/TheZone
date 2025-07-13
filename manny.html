@@ -5830,7 +5830,11 @@ if(starOnDot!=2){
                                  if (starship.x==starship.y&& starship.y==starship.z&&starship.x<.51&&starship.x>.49)isGrey=starship.x;
                 if(starship.x*starship.w>=.5&&starship.y*starship.w>=.5&&starship.z*starship.w>=.5&&starship.x==starship.y)isGreyISH=.5;
                                  
-                               //  if (isGrey!=0.){mny=vec3(.5);}
+                                 if (isGrey!=0.){
+                                     if(mny.g!=0.)mny=vec3(.5);
+                                     if (insideOut.r!=0.||insideOut.g!=0.) insideOut=vec4(vec3(.5),1.);
+                                     if (heartWarmed.r!=0.||heartWarmed.g!=0.) heartWarmed=vec3(.5);
+                                 }
 
      //if (starship.x!=0.&&starship.x!=1.&&starship.x!=.5&&(starship.x+starship.y>=255.-3.5||starship.y+starship.z>=255.-3.5||starship.z+starship.x>=255.-3.5)&&starship.w==1.)spirographTranslucer=.75-(starship.x+starship.y+starship.z)/2.;
                                  }
