@@ -6069,9 +6069,9 @@ else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
     else layeredOUT=vec4(mannyFace.xyz,1.);
     //if(colorCombo==-1)layeredOUT=vec4(clamp(layeredOUT.xyz-zoomer,0.,1.)+zoomer/2.5,1.);
 }
-                                 else if (isGreyISH!=0.&&starship.w==1.)layeredOUT=vec4(vec3(.5),1.);
+                                 else if(isGreyISH!=0.&&isGreyISH!=1.&&isGreyISH!=.5&&starship.w==1.)layeredOUT=vec4(vec3(.5),1.);
 
-         else if (holyeyes==1&&Character==0&& !((HEART.x==0.&&HEART.y==0.)||(HEART.y==0.&&HEART.z==0.)||(HEART.z==0.&&HEART.x==0.))) layeredOUT=vec4(clamp(HEART-starship.xyz/3.,0.,1.)+starship.xyz+insideOut.xyz,1.);
+         else if (holyeyes==1&&Character==0&& !((HEART.x==0.&&HEART.y==0.)||(HEART.y==0.&&HEART.z==0.)||(HEART.z==0.&&HEART.x==0.))) layeredOUT=vec4(clamp(HEART-starship.xyz/3.-oneEye/2.,0.,1.)+starship.xyz+insideOut.xyz,1.);
                                  else if(oneEye.r!=0.){layeredOUT=vec4(vec3(.125)+starship.xyz/2.+bodyWithArms.xyz*bodyWithArms.w,1.);
                                 if(insideOut.w==.5)layeredOUT+=vec4(insideOut.xyz/3.,0.);
                        }
