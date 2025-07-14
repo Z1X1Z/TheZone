@@ -3675,7 +3675,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  if(tAScaled>0&&isFinite(tAScaled))
                                                                    //  for(var reps=0; reps<2.;reps+=1)
                                                                          if(totalAMP<.5-.01)
-                                                                              for(reps=0;reps<3;reps+=.75+1./(1.-totalAMP))
+                                                                              for(reps=0;reps<2;reps+=2./3.+1./(1.-totalAMP))
 
                                                                      { tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaledPermanent))/(2.-tAScaledPermanent))
                                                                          let taEX1 = ((1.-tAScaled)*(1.+tAScaledPermanent));
