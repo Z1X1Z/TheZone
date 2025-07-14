@@ -3673,11 +3673,8 @@ let tolerance=0;//(1024-26)/10000
 
                                                                  
                                                                  if(tAScaled>0&&isFinite(tAScaled))
-                                                                   //  for(var reps=0; reps<2.;reps+=1)
-                                                                      //   if(totalAMP<.5-.01)
-                                                                           //   for(reps=0;reps<3.;reps+=1.-1./(1.+totalAMP))
-                                                                     for(reps=0;reps<2.;reps+=1.)
-
+                                                                     //for(var reps=0; reps<2.;reps+=1)
+                                                                       for(reps=0;reps<5;reps+=1.+1./(1.-totalAMP))
 
                                                                      { tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaledPermanent))/(2.-tAScaledPermanent))
                                                                          let taEX1 = ((1.-tAScaled)*(1.+tAScaledPermanent));
@@ -3700,7 +3697,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  let plusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries;
                                                                  let loopsThresh = 1
                                                                 if(totalAMP<.5-.01)
-                                                                     for(n=0;n<445;n+=2.-1./(1.-totalAMP))
+                                                                     for(n=0;n< 445;n+=2.-1./(1.-totalAMP))
 
                                                                  
                                                                    //  for(n=0;n<444;n+=2.-totalAMP//1./(1.+1./totalAMP)
