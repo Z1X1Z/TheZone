@@ -3723,7 +3723,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  else
                                                        */
                                                     {
-                                                        tolerance+=plusOrMinusPowerSeries;
+                                                        tolerance+=plusOrMinusPowerSeries*3.;
                                                         
                                                     }
                                                                   //       console.log(n)
