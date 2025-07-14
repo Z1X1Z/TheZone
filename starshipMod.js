@@ -3246,7 +3246,11 @@ for(let n = 0; n < polygons.length; n++)
                                                          var neutralizer=1.;
                                                          if (!on)neutralizer=0.;
                                                          polygons[n].centerX += (d_x*neutralizer-polygons[n].dx)*MR*interpolation;
+                                                         polygons[n].dx*=.998;
                                                          
+                                                         polygons[n].centerY += (d_y*neutralizer-polygons[n].dy)*MR;
+                                                         polygons[n].dy*=.998;
+
                                                          if(uniforms.colorCombo.value==20&&!(uniforms.musicAngelMan.value>0&&(uniforms.Character.value==3||uniforms.Character.value==4))){
                                                              distanceFromCenter= Math.pow((xFromCent*xFromCent+(yFromCent+.25)*(yFromCent+.25)),.5)/uniforms.shaderScale.value/1.75/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y));
                                                              triggerDistance=distanceFromCenter/(1./uniforms.shaderScale.value/1.75/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y)));
@@ -3257,7 +3261,6 @@ for(let n = 0; n < polygons.length; n++)
                                                              distanceFromCenter= Math.pow(xFromCent*xFromCent+yFromCent*yFromCent,.5);
                                                              triggerDistance=distanceFromCenter;
                                                              
-                                                             polygons[n].centerY += (d_y*neutralizer-polygons[n].dy)*MR;
                                                          }
                                                          
                                                          
