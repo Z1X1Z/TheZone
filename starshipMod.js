@@ -3674,7 +3674,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  
                                                                  if(tAScaled>0&&isFinite(tAScaled))
                                                                      //for(var reps=0; reps<2.;reps+=1)
-                                                                       for(reps=0;reps<5;reps+=1.+1./(1.-totalAMP))
+                                                                       for(reps=0;reps<6.;reps+=1.+1./(1.-totalAMP))
 
                                                                      { tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaledPermanent))/(2.-tAScaledPermanent))
                                                                          let taEX1 = ((1.-tAScaled)*(1.+tAScaledPermanent));
@@ -3713,8 +3713,8 @@ let tolerance=0;//(1024-26)/10000
                                                                                                       ))*sig;//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                 
                                                                      if(plusOrMinusPowerSeries!=1.){//tolerance+=plusOrMinusPowerSeries;
-                                                                         //             plusOrMinusPowerSeries=         Math.sign(plusOrMinusPowerSeries)*Math.abs(plusOrMinusPowerSeries)**2.;
-                                                                         if(loopsThresh%2==1)               { tolerance+=plusOrMinusPowerSeriesBUFFER;
+                                                                                     //plusOrMinusPowerSeries=         Math.sign(plusOrMinusPowerSeries)*(Math.abs(plusOrMinusPowerSeries)**2.);
+                                                                        if(loopsThresh%2==1)               { tolerance+=plusOrMinusPowerSeriesBUFFER;
                                                                              plusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries
                                                                              
                                                                            
@@ -3726,9 +3726,11 @@ let tolerance=0;//(1024-26)/10000
                                                         
                                                     }
                                                                   //       console.log(n)
+                                                           
                                                                      }
                                                                      else{console.log(n);
                                                                          break;}
+                                                         //            plusOrMinusPowerSeries=         Math.sign(plusOrMinusPowerSeries)*(Math.abs(plusOrMinusPowerSeries)**(4./3.));
                                                                      loopsThresh++
 
                                                                  }
@@ -3743,6 +3745,7 @@ let tolerance=0;//(1024-26)/10000
                                                             }
                                                           else tolerance=0.;
                                                          }
+                                                       
 //.02134356(7)  solid guess//.0214284 easier reaching notes//n*2,n,n*2*2,n*2*2/2,n*2*2*2,n*2*2*2/2
              else if(window.highORlow==2)tolerance=.49;
             else if(window.highORlow==1)
