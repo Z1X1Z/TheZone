@@ -3624,8 +3624,8 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
  float petalNumber = petals+6.;
  if (feedTheLamb)
  {
- hyperCore-=-1.+1./((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
- ,1./petalNumber)-.5/petalNumber))*petalNumber*6.*2.);
+ hyperCore-=-1.+.5/((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
+ ,1./petalNumber)-.5/petalNumber))*petalNumber*6.);
  hyperCore+=.5/log(.5);//1./(7.*log(.5));
 }
    if(clvrVariant4!=0.&&OrthoEvery==0.)
@@ -4113,8 +4113,8 @@ if(Spoker){
 
                                 }
                             float superUpcore =0.;
-                            if(feedTheLamb)superUpcore =-1.+1./((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
-                            ,1./petalNumber)-.5/petalNumber))*petalNumber*6.*2.);
+                            if(feedTheLamb)superUpcore =-1.+.5/((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
+                            ,1./petalNumber)-.5/petalNumber))*petalNumber*6.);
                             
                             hyperCoreBoosted-=superUpcore;
                             hyperCoreOUTPUT-=superUpcore;
