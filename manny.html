@@ -4107,6 +4107,7 @@ if(Spoker){
                          else {
                               */
                             if(counter==0.)inMainSpoke=true;//this actually seems to be the not spoke part of spoker so boolean should be reversed to be accurate
+                           
                             if(distributor)//&&counter!=0.
                             {   if (inMainSpoke)//!inMainSpoke
                               //  s=spin2(s,distributorFACTORorth);
@@ -4114,17 +4115,18 @@ if(Spoker){
                                 s=spin2(s,distributorFACTOR);
 
                                 }
-
+                            float superUpcore =0.;
+                            if(feedTheLamb)superUpcore =-1.+1./((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
+                            ,1./petalNumber)-.5/petalNumber))*petalNumber*6.*2.);
+                            
+                            hyperCoreBoosted-=superUpcore;
+                            hyperCoreOUTPUT-=superUpcore;
                          if(!wheel||1==1) s/=spoke_factorLarge;//engage ; s/=2.+'superspokes'
                           
                          float coreFactor =downSpoke;
                        //  if(!inMainSpoke) coreFactor/=dstnce;
-                       float superUpcore =0.;
-                       if(feedTheLamb)superUpcore =-1.+1./((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
-                       ,1./petalNumber)-.5/petalNumber))*petalNumber*6.*2.);
                        
-                       hyperCoreBoosted-=superUpcore;
-                       hyperCoreOUTPUT-=superUpcore;
+                       
                        
                        hyperCoreOUTPUT-=downSpoke;
 
