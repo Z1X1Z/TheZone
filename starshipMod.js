@@ -3695,6 +3695,8 @@ let tolerance=0;//(1024-26)/10000
                                                         //       tAScaled=tAScaled**.5;
                                                                  let plusOrMinusPowerSeries=tAScaled;
                                                                  let plusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries;
+                                                                 let LastplusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries;
+
                                                                  let loopsThresh = 1
                                                                 
                                                         //        if(totalAMP<.5-.01)
@@ -3715,15 +3717,15 @@ let tolerance=0;//(1024-26)/10000
                                                                 
                                                                      if(plusOrMinusPowerSeries!=1.){//tolerance+=plusOrMinusPowerSeries;
                                                                                      //plusOrMinusPowerSeries=         Math.sign(plusOrMinusPowerSeries)*(Math.abs(plusOrMinusPowerSeries)**2.);
-                                                      /*                 if(loopsThresh%2==1)               { tolerance+=plusOrMinusPowerSeriesBUFFER;
-                                                                             plusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries
+                                                                      if(loopsThresh%2==1)               { tolerance+=plusOrMinusPowerSeriesBUFFER;
+LastplusOrMinusPowerSeriesBUFFER=  plusOrMinusPowerSeriesBUFFER;                                                                           plusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries
                                                                              
                                                                            
                                                                          }
                                                                  else
-                                                       */
+                                                    
                                                     {
-                                                        tolerance+=plusOrMinusPowerSeries*3.;
+                                                        tolerance+=plusOrMinusPowerSeries;
                                                         
                                                     }
                                                                   //       console.log(n)
@@ -3738,7 +3740,11 @@ let tolerance=0;//(1024-26)/10000
                                                                  }
                                                           
                                                         //       if(  loopsThresh%2==0 )
-                                                                 tolerance+=plusOrMinusPowerSeries
+                                                                tolerance+=plusOrMinusPowerSeriesBUFFER**3
+                                                                //tolerance-=plusOrMinusPowerSeries/2.
+
+                                                                  //  tolerance*=2.;
+
                                                               //   tolerance-=1.;
 
                                                                  /*

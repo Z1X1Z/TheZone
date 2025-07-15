@@ -1,5 +1,5 @@
 var shaderScale,dilate, coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
-,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta,spinTowardsMe,d,chop,cellularDivision,triogenesis,nGenesis,squareGenesis,constellationCoord,cloverso;
+,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta,spinTowardsMe,d,chop,cellularDivision,triogenesis,nGenesis,squareGenesis,constellationCoord,cloverso,feedTheLamb;
 function setUniformsToPlainName(){
     oppositionalCoreFlop=uniforms.oppositionalCoreFlop.value
     nGenesis=uniforms.nGenesis.value
@@ -62,6 +62,8 @@ function setUniformsToPlainName(){
     superStable=uniforms.superStable.value;
     distributor=uniforms.distributor.value;
     cloverso=uniforms.cloverso.value;
+    feedTheLamb=uniforms.feedTheLamb.value;
+
     constellationCoord=uniforms.constellationCoord.value;
 }
 
@@ -120,7 +122,7 @@ p= new THREE.Vector2(p.x-Math.sign(p.x)*regenerativeshift,p.y);
     if(((angle/Math.PI+2.)*6.+.5)%2.>1.)p=spin(p,Math.PI/6.);
            }
            
-var lfc = constellationCoord.length();//freed(coords).length();
+var lfc = freed(constellationCoord).length();//freed(coords).length();
 
 
 
@@ -255,6 +257,9 @@ hyperCore*=equilibriator;
 //  hyperCore-=.441/Math.log(.5)/equilibriator;
 //if(cloverSlide&&wheel)hyperCore+=1.75/Math.log(.5);
   // hyperCore-=coreDilation
+   let petalNumber = petals+6;
+   if(feedTheLamb)  hyperCore+=.5/Math.log(.5);
+
    if(clvrVariant4)
    {
     hyperCore-=.4/Math.log(.5);//1./(7.*log(.5));
@@ -414,10 +419,15 @@ dstnce = s.length();
 
 
 if(Refractelate&&dstnce>refractelC){s.divideScalar( refractelC);} //refractelC/=4./3.;}
-            if((counter==1.&&oppositionalCoreFlop==2)||oppositionalCoreFlop==1)s=spinVector(s,Math.PI);
+            if((counter==1.&&oppositionalCoreFlop==1)||oppositionalCoreFlop==2)s=spinVector(s,Math.PI);
 
 var lastS = s.clone();
-   
+            var superUpcorer = 0.;
+            if(feedTheLamb){superUpcorer =-1.+1./((Math.abs((Math.atan(s.y,s.x)/Math.PI/2+1.//+.5/petalNumber
+            %(1./petalNumber))-.5/petalNumber))*petalNumber*Math.PI/2*2.);
+            hyperCoreBoosted-=superUpcorer;
+            hyperCoreOUTPUT-=superUpcorer;
+            }
 s=new THREE.Vector2(
 s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
 -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
@@ -737,7 +747,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
     
 //if(i==0){float b = ;s*=b;dstnce*b;}
 
-OmniDynamicPetalShift =omniData[(loops+counter-.5)];
+OmniDynamicPetalShift =omniData[(loops+counter)];
 OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
 
 if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spinVector(s,Math.atan(s.y,s.x)*OmniPetal);
