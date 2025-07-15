@@ -916,6 +916,16 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                    key  = 'F';
                                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                                 <label for="SpokeLove">Spoke Love?![F]</label><br>
+                                <input type="checkbox" id="Distributor" name="t"  onclick= "
+
+
+                                                                  key  = 'c';
+
+
+                                                                  callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+
+
+                                                               <label for="Distributor">Distributor?![.c]</label><br>
                                 <input type="checkbox" id="Dilate" name="t"  onclick= "
                                     key  = 'o';
                                     callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
@@ -3898,9 +3908,12 @@ vec2 lastS = deSplicedS;
 
 //if(mod(counter,2.)==1.&&colorCombo==0)s =abs(s);//supposed to make clover brighter and nothing else?;
 float superUpcorer = 0.;
-if(feedTheLamb)superUpcorer =.5-.5/((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
-,1./petalNumber)-.5/petalNumber))*petalNumber*6.);
-hyperCoreBoosted+=superUpcorer;
+if(feedTheLamb){superUpcorer =-1.+1./((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
+,1./petalNumber)-.5/petalNumber))*petalNumber*6.*2.);
+//superUpcorer*=6.;
+hyperCoreBoosted-=superUpcorer;
+hyperCoreOUTPUT-=superUpcorer;
+}
    s=vec2(
         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
