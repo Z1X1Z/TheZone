@@ -3699,7 +3699,7 @@ let tolerance=0;//(1024-26)/10000
 
                                                                  let loopsThresh = 1
                                                                 
-                                                                     for(n=1;n< 445;n+=1.)
+                                                                     for(n=1;n< 444;n+=1.)
 
                                                            
                                                                  {
@@ -3738,7 +3738,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  }
                                                           
                                                         //       if(  loopsThresh%2==0 )
-                                                                tolerance-=plusOrMinusPowerSeriesBUFFER**2.
+                                                                tolerance-=plusOrMinusPowerSeriesBUFFER**3.
                                                                 
                                                                 //tolerance-=plusOrMinusPowerSeries/2.
 
