@@ -920,10 +920,14 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                     key  = 'o';
                                     callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
                                  <label for="Dilate">Dilate?![.o]</label><br>
-                                 <input type="checkbox" id="Distributor" name="t"  onclick= "
-                                     key  = 'c';
-                                     callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
-                                  <label for="Distributor">Distributor?![.c]</label><br>
+                                 <input type="checkbox" id="Dilate" name="t"  onclick= "
+                                     key  = 'o';
+                                     callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
+                                  <label for="Dilate">Dilate?![.o]</label><br>
+                                 <input type="checkbox" id="ftl" name="t"  onclick= "
+                                     key  = 'f';
+                                     callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
+                                     <label for="ftl">Feed the Lamb?![,.F]</label><br>
 
                                  <!--
                                  <input type="checkbox" id="super stability" name="t"  onclick= "
@@ -2036,6 +2040,7 @@ uniform bool cloverArms;
 uniform int elderHorns;
 uniform int inseyedOut;
 uniform bool cloverso;
+uniform bool feedTheLamb;
 uniform float OrthoEvery;
 
 
@@ -3619,7 +3624,13 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
   //  if(cloverSlide&&wheel)hyperCore+=1.75/log(.5);
 
  //if(chop) hyperCore-=.25/log(.5);//1./(7.*log(.5));
-
+ float petalNumber = petals+6.;
+ if (feedTheLamb)
+ {
+ hyperCore-=-1.+1./((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
+ ,1./petalNumber)-.5/petalNumber))*petalNumber*6.*2.);
+ hyperCore+=.5/log(.5);//1./(7.*log(.5));
+}
    if(clvrVariant4!=0.&&OrthoEvery==0.)
    {
     hyperCore-=.4/log(.5);//1./(7.*log(.5));
@@ -4108,7 +4119,14 @@ if(Spoker){
                           
                          float coreFactor =downSpoke;
                        //  if(!inMainSpoke) coreFactor/=dstnce;
-                         hyperCoreOUTPUT-=downSpoke;
+                       float superUpcore =0.;
+                       if(feedTheLamb)superUpcore =-1.+1./((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
+                       ,1./petalNumber)-.5/petalNumber))*petalNumber*6.*2.);
+                       
+                       hyperCoreBoosted-=superUpcore;
+                       hyperCoreOUTPUT-=superUpcore;
+                       
+                       hyperCoreOUTPUT-=downSpoke;
 
                          hyperCoreBoosted-=downSpoke;
                          //}

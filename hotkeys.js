@@ -179,7 +179,8 @@ cards:{value:false},
     inseyedOut:{value:1},
     elderHorns:{value:0},
 cloverso:{value:false},
-OrthoEvery:{value:0.}
+OrthoEvery:{value:0.},
+feedTheLamb:{value:true}
 }
 window.uniforms={}
 
@@ -604,6 +605,8 @@ window.key = " ";
                             window.playQuietestSound.value=!window.playQuietestSound.value;
                             
                         }
+                        else if((key == "f"||key == "ƒ") && event.altKey&&event.ctrlKey)
+uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                 else if((key == "z"||key == "Ω") && event.altKey&&event.ctrlKey)
                 {
                     leafMode=(leafMode+1)%3.
