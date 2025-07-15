@@ -3739,7 +3739,7 @@ let tolerance=0;//(1024-26)/10000
                                                           
                                                         //       if(  loopsThresh%2==0 )
                                                               
-                                                    tolerance=tolerance**(1.+totalAMP);
+                                                    tolerance=tolerance**(1.+tAScaled);
 
                                                                  /*
                                                                 else{
