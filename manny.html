@@ -3622,12 +3622,7 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
 
  //if(chop) hyperCore-=.25/log(.5);//1./(7.*log(.5));
  float petalNumber = petals+6.;
- if (feedTheLamb)
- {
- hyperCore-=-1.+.5/((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
- ,1./petalNumber)-.5/petalNumber))*petalNumber*6.);
- hyperCore+=.5/log(.5);//1./(7.*log(.5));
-}
+ 
    if(clvrVariant4!=0.&&OrthoEvery==0.)
    {
     hyperCore-=.4/log(.5);//1./(7.*log(.5));
@@ -3902,7 +3897,10 @@ dstnce = length(s);
 vec2 lastS = deSplicedS;
 
 //if(mod(counter,2.)==1.&&colorCombo==0)s =abs(s);//supposed to make clover brighter and nothing else?;
-
+float superUpcorer = 0.;
+if(feedTheLamb)superUpcorer =1.-1./((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
+,1./petalNumber)-.5/petalNumber))*petalNumber*6.);
+hyperCoreBoosted+=superUpcorer;
    s=vec2(
         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
@@ -4112,9 +4110,6 @@ if(Spoker){
                                 s=spin2(s,distributorFACTOR);
 
                                 }
-                            float superUpcore =0.;
-                            if(feedTheLamb)superUpcore =-1.+.5/((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
-                            ,1./petalNumber)-.5/petalNumber))*petalNumber*6.);
                             
                             hyperCoreBoosted-=superUpcore;
                             hyperCoreOUTPUT-=superUpcore;
@@ -4178,6 +4173,9 @@ if(counter+dstnce*dstnce //sqrt(sqrt(dstnce)*dstnce)*dstnce
          s=spin2(s,-distributorFACTORlove);
 
          }
+    
+     hyperCoreBoosted-=superUpcore;
+     hyperCoreOUTPUT-=superUpcore;
      s/=sqrt2;
      
      if(!wheel||1==1){
