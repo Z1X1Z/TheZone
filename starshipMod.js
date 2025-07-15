@@ -3695,17 +3695,13 @@ let tolerance=0;//(1024-26)/10000
                                                         //       tAScaled=tAScaled**.5;
                                                                  let plusOrMinusPowerSeries=tAScaled;
                                                                  let plusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries;
-                                                                 let LastplusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries;
+                                                            
 
                                                                  let loopsThresh = 1
                                                                 
-                                                        //        if(totalAMP<.5-.01)
-                                                                     for(n=0;n< 444;n+=1.)
+                                                                     for(n=1;n< 444;n+=1.)
 
-                                                                 
-                                                                   //  for(n=0;n<444;n+=2.-totalAMP//1./(1.+1./totalAMP)
-                                                                       //  )//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
-                                                                 
+                                                           
                                                                  {
                                                                      let sig = Math.sign(loopsThresh%2-.5);
                                                   //console.log(plusOrMinusPowerSeries)
@@ -3717,8 +3713,8 @@ let tolerance=0;//(1024-26)/10000
                                                                 
                                                                      if(plusOrMinusPowerSeries!=1.){//tolerance+=plusOrMinusPowerSeries;
                                                                                      //plusOrMinusPowerSeries=         Math.sign(plusOrMinusPowerSeries)*(Math.abs(plusOrMinusPowerSeries)**2.);
-                                                                      if(loopsThresh%2==1)               { tolerance+=plusOrMinusPowerSeriesBUFFER;
-LastplusOrMinusPowerSeriesBUFFER=  plusOrMinusPowerSeriesBUFFER;                                                                           plusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries
+                                                                      if(loopsThresh%2==0)               { tolerance+=plusOrMinusPowerSeriesBUFFER;
+                           plusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries
                                                                              
                                                                            
                                                                          }
@@ -3741,6 +3737,7 @@ LastplusOrMinusPowerSeriesBUFFER=  plusOrMinusPowerSeriesBUFFER;                
                                                           
                                                         //       if(  loopsThresh%2==0 )
                                                                 tolerance+=plusOrMinusPowerSeriesBUFFER**3
+                                                                
                                                                 //tolerance-=plusOrMinusPowerSeries/2.
 
                                                                   //  tolerance*=2.;
