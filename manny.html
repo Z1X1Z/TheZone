@@ -3898,7 +3898,7 @@ vec2 lastS = deSplicedS;
 
 //if(mod(counter,2.)==1.&&colorCombo==0)s =abs(s);//supposed to make clover brighter and nothing else?;
 float superUpcorer = 0.;
-if(feedTheLamb)superUpcorer =1.-1./((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
+if(feedTheLamb)superUpcorer =.5-.5/((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
 ,1./petalNumber)-.5/petalNumber))*petalNumber*6.);
 hyperCoreBoosted+=superUpcorer;
    s=vec2(
