@@ -3713,12 +3713,12 @@ let tolerance=0;//(1024-26)/10000
                                                                 
                                                                      if(plusOrMinusPowerSeries!=1.){//tolerance+=plusOrMinusPowerSeries;
                                                                                      //plusOrMinusPowerSeries=         Math.sign(plusOrMinusPowerSeries)*(Math.abs(plusOrMinusPowerSeries)**2.);
-                                                                      if(loopsThresh%2==1)               { tolerance+=plusOrMinusPowerSeriesBUFFER;
+                                                                      if(loopsThresh%2==0)               { //tolerance+=plusOrMinusPowerSeriesBUFFER;
                            plusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries
                                                                              
                                                                            
                                                                          }
-                                                                 else
+                                                  //               else
                                                     
                                                     {
                                                         tolerance+=plusOrMinusPowerSeries;
