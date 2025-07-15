@@ -3632,7 +3632,8 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
 
  //if(chop) hyperCore-=.25/log(.5);//1./(7.*log(.5));
  float petalNumber = petals+6.;
- 
+ if(feedTheLamb)  hyperCore+=.5/log(.5);
+
    if(clvrVariant4!=0.&&OrthoEvery==0.)
    {
     hyperCore-=.4/log(.5);//1./(7.*log(.5));
@@ -3910,7 +3911,6 @@ vec2 lastS = deSplicedS;
 float superUpcorer = 0.;
 if(feedTheLamb){superUpcorer =-1.+1./((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
 ,1./petalNumber)-.5/petalNumber))*petalNumber*PI2*2.);
-//superUpcorer*=2.;
 hyperCoreBoosted-=superUpcorer;
 hyperCoreOUTPUT-=superUpcorer;
 }
