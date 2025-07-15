@@ -3223,7 +3223,7 @@ if(uniforms.gameOn.value&&allCaught)
 else if(!uniforms.gameOn.value){polygons=[]; level = 1; metaLevel=1;}
                                         
                                         const baseMag=(1.-(metaLevel-level)/(metaLevel));
-                                        let compound =baseMag/75.*window.movementRate/pixelShaderToStarshipRATIO;
+                                        let compound =baseMag/100.*window.movementRate/pixelShaderToStarshipRATIO;
 
 for(let n = 0; n < polygons.length; n++)
                                                        {
@@ -3738,7 +3738,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  }
                                                           
                                                         //       if(  loopsThresh%2==0 )
-                                                                                                                     tolerance=tolerance**((totalAMP+tAScaled+plusOrMinusPowerSeries+tolerance));
+                                                                                                                     tolerance=tolerance**((totalAMP+tAScaled+tolerance));
 
                                                                  /*
                                                                 else{
