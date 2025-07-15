@@ -3223,7 +3223,7 @@ if(uniforms.gameOn.value&&allCaught)
 else if(!uniforms.gameOn.value){polygons=[]; level = 1; metaLevel=1;}
                                         
                                         const baseMag=(1.-(metaLevel-level)/(metaLevel));
-                                        let compound =baseMag/60.*window.movementRate/pixelShaderToStarshipRATIO;
+                                        let compound =baseMag/75.*window.movementRate/pixelShaderToStarshipRATIO;
 
 for(let n = 0; n < polygons.length; n++)
                                                        {
@@ -3269,7 +3269,7 @@ for(let n = 0; n < polygons.length; n++)
                                                          // if (distanceFromCenter<=1)
                                                          if(Math.sqrt(polygons[n].dx*polygons[n].dx+polygons[n].dy*polygons[n].dy)<window.movementRate)
                                                          {
-                                                             compound*=Math.abs(1. -distanceFromCenter);
+                                                             compound*=Math.abs(.5*minimumDimension/maximumDimension -distanceFromCenter);
                                                     
                                                     
                                                         polygons[n].dx+=-Math.cos(angleTarget)*compound;
