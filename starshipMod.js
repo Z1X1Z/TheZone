@@ -2680,8 +2680,8 @@ let yr = lengt*-Math.cos(arm);
                                 y *=-centerDisplacement;
                                         // if (g==bottomNote&&EldersLeg==24)   x/=2.;
                                             //else
-                                            x/=1.25;
-                                            y/=1.25;
+                                            //x/=1.25;
+                                            //y/=1.25;
                                    if(maxMinDiff!=0&&!twoOr1)
                                         {
                                         lengt = (innerFrets[(g+EldersLeg/2.)%EldersLeg]-minFret)/(maxFret-minFret);
