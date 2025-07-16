@@ -4225,8 +4225,8 @@ dstnce=length(s);
        if(loops+counter<=hyperCoreBoosted+continuumCounter)
        {
        //   if(dstnce<twoThirds) s-=length(coords.yx)*correction;
-       float dstlpcc = 1.;
-       if(!feedTheLamb)dstlpcc=dstnce*lpcc;
+       float dstlpcc = dstnce*lpcc;//(9./16.);
+       if(feedTheLamb)dstlpcc*=.5;
       // float dstADJUSTED = dstnce;
       /* float deDistortion = sqrt(dstlpcc)*sqrt(dstnce)*sqrt(lpcc) *lpcc2;
        if(dstlpcc<16./9.)
