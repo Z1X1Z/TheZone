@@ -5811,11 +5811,12 @@ vec2 heartField = characterPSpunToKey*heartSize
                                  float maxColorOfStarship=1.;
                                  float minColorOfStarship=0.00000001;
                                  float spirographTranslucer = 1.;
-
+                                                                 float shipSUM=0.;
 
 if(starOnDot!=2){
                                  if (starshipLOOKUP.x<1.&&starshipLOOKUP.y<1.&&starshipLOOKUP.x>0.&&starshipLOOKUP.y>0.)starship = texture2D(STAR,starshipLOOKUP);
-                                 
+                                  shipSUM = starship.x+starship.y+starship.z;
+
                                  if (starship.x!=0.||starship.y!=0.||starship.z!=0.)maxColorOfStarship=max(max(starship.x,starship.y),starship.z);
                                  if (starship.x!=0.||starship.y!=0.||starship.z!=0.)minColorOfStarship=min(min(starship.x,starship.y),starship.z);
                                  if (starship.x!=0.||starship.y!=0.||starship.z!=0.)isColoredMultiplier=(starship.xyz+(1.-starship.w)+1.)/2.;
@@ -5853,7 +5854,7 @@ if(starOnDot!=2){
                     if(mannyFace.z<0.&&mannyFace.x<0.&&mannyFace.y<0.)starshipMultiplier=starshipMultiplier=vec3(1.);//vec3(.75);
     if (starship.x==0.&&starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=starship.x;
                                  if (starship.x==starship.y&& starship.y==starship.z&&starship.x<.51&&starship.x>.49)isGrey=starship.x;
-                if(starship.x*starship.w>=.5&&starship.y*starship.w>=.5&&starship.z*starship.w>=.5&&starship.x==starship.y)isGreyISH=.5;
+                if(starship.x*starship.w>=.5&&starship.y*starship.w>=.5&&starship.z*starship.w>=.5&&starship.x==starship.y)isGreyISH=shipSUM/3.;
                                      
 
      //if (starship.x!=0.&&starship.x!=1.&&starship.x!=.5&&(starship.x+starship.y>=255.-3.5||starship.y+starship.z>=255.-3.5||starship.z+starship.x>=255.-3.5)&&starship.w==1.)spirographTranslucer=.75-(starship.x+starship.y+starship.z)/2.;
@@ -5905,7 +5906,6 @@ if(starOnDot==1||starOnDot==2){
                                  vec3 pillar = vec3(0.);
                                  pillar = sevenPillars(vUv.yx-vec2(0.,.5));
                                                      if(pillar.x!=0.||pillar.y!=0.||pillar.z!=0.)         pillar=   clamp(pillar+(-mny.x-mny.y-mny.z)*40.,0.,1.);
-                        float shipSUM = starship.x+starship.y+starship.z;
                                  vec3 hypnoticHarmonicCircles = vec3(0.);
                                                                  
                                  if(balloonsON!=0.||balloonsONexponential!=0.)
@@ -6065,8 +6065,9 @@ pixelStarship += starBuffer;
                                  {
                        if (clothes.r>=1.){mny=vec3(0.);if(bodyWithArms.w!=1.)bodyWithArms=vec4(0.);}
                        if (clothes.r!=0.&&starship.b!=0.)clothes*=starship.xyz+.25;
-                       mny+=clamp(clothes-bodyWithArms.w*100.,0.,1.)+bodyWithArms.xyz*bodyWithArms.w*clamp(clothes*100000.,0.,1.);
+                     
                        }
+                                 mny+=clamp(clothes-bodyWithArms.w*100.,0.,1.)+bodyWithArms.xyz*bodyWithArms.w*clamp(clothes*100000.,0.,1.);
                                  
                                                   vec4 layeredOUT =vec4(0.);
                     if(constellation||squirgle==1)layeredOUT=vec4(zoomer,1.);
@@ -6182,9 +6183,7 @@ vec4 tree = vec4( clamp(
           vec4 fin = (clamp(ss*vec4(starshipMultiplier,1.)-faceFromShip,0.,1.)+clamp(
                                                                                      goodies+
                                                                                      tree+pixelShipGrey,0.,1.))*isBlack*isBlackStaRivers*isBlackDOT+(isBlack-1.)+(isBlackDOT-1.)+(isBlackStaRivers-1.);
-                                                                                      if(isGrey!=0.&&pixelShipGrey!=0.)fin=vec4(.25);
-
-          else if(fin.r>=1.&&fin.g>=1.&&fin.b>=1.)fin-=(isGrey+isGreyDOT+pixelShipGrey+isGreyStaRivers+pixelShipGrey*1.5)*2.;
+                                                                               if(fin.r>=1.&&fin.g>=1.&&fin.b>=1.)fin-=(isGrey+isGreyDOT+pixelShipGrey+isGreyStaRivers+pixelShipGrey*1.5)*2.;
           else if(fin.r<=.0&&fin.g<=.0&&fin.b<=.0)fin+=(isGrey+isGreyDOT+isGreyStaRivers+pixelShipGrey)*1.5;
           vec3 confraculator = vec3(1.);
           if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
