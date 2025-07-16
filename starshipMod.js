@@ -2733,13 +2733,13 @@ let yr = lengt*-Math.cos(arm);
                  starPositionAttribute.setXYZ(starStride+5,(xr-x), (yr-y),  dep)
               
                  
-                 
-                       starColorAttribute.setXYZW(starStride,.51,.51,.51,1.)
-                       starColorAttribute.setXYZW(starStride+1,.51,.51,.51,1.)
-                       starColorAttribute.setXYZW(starStride+2,.51,.51,.51,1.)
-                       starColorAttribute.setXYZW(starStride+3,.51,.51,.51,1.)
-                       starColorAttribute.setXYZW(starStride+4,.51,.51,.51,1.)
-                       starColorAttribute.setXYZW(starStride+5,.51,.51,.51,1.)
+                 let boostedGrey = 129/255.
+                       starColorAttribute.setXYZW(starStride,boostedGrey,boostedGrey,boostedGrey,1.)
+                       starColorAttribute.setXYZW(starStride+1,boostedGrey,boostedGrey,boostedGrey,1.)
+                       starColorAttribute.setXYZW(starStride+2,boostedGrey,boostedGrey,boostedGrey,1.)
+                       starColorAttribute.setXYZW(starStride+3,boostedGrey,boostedGrey,boostedGrey,1.)
+                       starColorAttribute.setXYZW(starStride+4,boostedGrey,boostedGrey,boostedGrey,1.)
+                       starColorAttribute.setXYZW(starStride+5,boostedGrey,boostedGrey,boostedGrey,1.)
                                                           
                               starStride+=6;
                  
