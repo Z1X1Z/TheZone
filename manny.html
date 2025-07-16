@@ -3632,7 +3632,8 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
 
  //if(chop) hyperCore-=.25/log(.5);//1./(7.*log(.5));
  float petalNumber = petals+6.;
- if(feedTheLamb)  hyperCore+=.5/log(.5);
+ if(feedTheLamb)  {
+     }
 
    if(clvrVariant4!=0.&&OrthoEvery==0.)
    {
@@ -3910,9 +3911,11 @@ vec2 lastS = deSplicedS;
 //if(mod(counter,2.)==1.&&colorCombo==0)s =abs(s);//supposed to make clover brighter and nothing else?;
 float superUpcorer = 0.;
 if(feedTheLamb){superUpcorer =-1.+1./((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
-,1./petalNumber)-.5/petalNumber))*petalNumber*6.*2.);
+,1./petalNumber)-.5/petalNumber))*petalNumber*6.*2.)+ length(s)/log(2.)/2.;
+;
 hyperCoreBoosted-=superUpcorer;
 hyperCoreOUTPUT-=superUpcorer;
+
 }
    s=vec2(
         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,

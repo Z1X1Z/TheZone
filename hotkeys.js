@@ -34,7 +34,7 @@ pongOn:{value:true},
 heartStar:{value:0},
 superStable:{value:false},
 distributor:{value:true},
-oppositionalCoreFlop:{value:2},
+oppositionalCoreFlop:{value:1},
 micIn:{value:null},
     audioBuffer:{value:null},
     omniDynamic:{value:null},
@@ -195,7 +195,7 @@ window.settingsSet = false
 
 
 
-const starSHIPVOLUMEdefaultLowVolume = 3./1024.;//used in sstarshipmod
+const starSHIPVOLUMEdefaultLowVolume = 4./1024;//used in sstarshipmod
 
 
 function resetAll(){

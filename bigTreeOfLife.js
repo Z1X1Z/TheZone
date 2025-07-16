@@ -258,7 +258,10 @@ hyperCore*=equilibriator;
 //if(cloverSlide&&wheel)hyperCore+=1.75/Math.log(.5);
   // hyperCore-=coreDilation
    let petalNumber = petals+6;
-   if(feedTheLamb)  hyperCore+=.5/Math.log(.5);
+   if(feedTheLamb)  {
+ //   hyperCore+=s.length()/Math.log(.5)/2.;
+    
+}
 
    if(clvrVariant4)
    {
@@ -424,7 +427,7 @@ if(Refractelate&&dstnce>refractelC){s.divideScalar( refractelC);} //refractelC/=
 var lastS = s.clone();
             var superUpcorer = 0.;
             if(feedTheLamb){superUpcorer =-1.+1./((Math.abs((Math.atan(s.y,s.x)/Math.PI/2+1.//+.5/petalNumber
-            %(1./petalNumber))-.5/petalNumber))*petalNumber*Math.PI/2*2.);
+            %(1./petalNumber))-.5/petalNumber))*petalNumber*Math.PI/2*2.)+s.length()/Math.log(2.)/2.;
             hyperCoreBoosted-=superUpcorer;
             hyperCoreOUTPUT-=superUpcorer;
             }
