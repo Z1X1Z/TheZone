@@ -3637,7 +3637,7 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
 
    if(clvrVariant4!=0.&&OrthoEvery==0.)
    {
-    hyperCore-=.4/log(.5);//1./(7.*log(.5));
+       if(!feedTheLamb) hyperCore-=.4/log(.5);//1./(7.*log(.5));
     if(cloverSlide)hyperCore+=.5/log(.5);
     //if(wheel)hyperCore-=0./log(.5);
    // if(morph!=0.)hyperCore+=2.5/log(.5);
@@ -3910,7 +3910,7 @@ dstnce = length(s);
    if((counter==1.&&oppositionalCoreFlop==1)||oppositionalCoreFlop==2)s=spin2(s,PI);
 
 //if(mod(counter,2.)==1.&&colorCombo==0)s =abs(s);//supposed to make clover brighter and nothing else?;
-float superUpcorer = 0.;
+float superUpcorer = 0.;//before or after flop?
 if(feedTheLamb){superUpcorer =-1.+1./((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
 ,1./petalNumber)-.5/petalNumber))*petalNumber*6.*2.)+ length(s)/log(2.)/2.;
 ;
