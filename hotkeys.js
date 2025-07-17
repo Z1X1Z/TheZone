@@ -529,11 +529,7 @@ window.key = " ";
                     uniforms.constellation.value=!uniforms.constellation.value;
                     
                 }
-                else if((key == "s"||key=="ç") && event.altKey&&event.ctrlKey)
-                {
-                    uniforms.constellation.value=!uniforms.constellation.value;
-                    
-                } else if((key == "l"||key=="¬") && event.altKey&&event.ctrlKey)
+               else if((key == "l"||key=="¬") && event.altKey&&event.ctrlKey)
                 {
                     uniforms.squirgle.value=(uniforms.squirgle.value+=1)%3;
                     if(uniforms.squirgle.value==0)squirgleData.fill(1.)
