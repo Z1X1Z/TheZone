@@ -265,7 +265,7 @@ hyperCore*=equilibriator;
 
    if(clvrVariant4)
    {
-    hyperCore-=.4/Math.log(.5);//1./(7.*log(.5));
+    if(!feedTheLamb)hyperCore-=.4/Math.log(.5);//1./(7.*log(.5));
     if(cloverSlide)hyperCore+=.5/Math.log(.5);
     //if(wheel)hyperCore-=0./Math.log(.5);
    // if(morph!=0.)hyperCore+=2.5/Math.log(.5);
@@ -427,7 +427,7 @@ if(Refractelate&&dstnce>refractelC){s.divideScalar( refractelC);} //refractelC/=
 var lastS = s.clone();
             var superUpcorer = 0.;
             if(feedTheLamb){superUpcorer =-1.+1./((Math.abs((Math.atan(s.y,s.x)/Math.PI/2+1.//+.5/petalNumber
-            %(1./petalNumber))-.5/petalNumber))*petalNumber*Math.PI/2*2.)+s.length()/Math.log(2.)/2.;
+            %(1./petalNumber))-.5/petalNumber))*petalNumber*Math.PI/2*2.)+s.length()/Math.log(2.)/2.*petalNumber/6.;
             hyperCoreBoosted-=superUpcorer;
             hyperCoreOUTPUT-=superUpcorer;
             }
@@ -652,6 +652,7 @@ if(loops+counter<=hyperCoreBoosted+continuumCounter)
   //  if(dstnce<2./3.) s.addScalar( coords.yx*correction);
     //s=new THREE.Vector2(Math.abs(s.x),Math.abs(s.y))
     let dstlpcc = dstnce*lpcc;
+    if(feedTheLamb)dstlpcc*=.5;
    /* let deDistortion = Math.sqrt(dstlpcc)*Math.sqrt(dstnce)*Math.sqrt(lpcc)*lpcc2;
     if(dstlpcc<16./9.)
         deDistortion*=(1.-dstlpcc*9./16.)
