@@ -3700,7 +3700,9 @@ let tolerance=0;//(1024-26)/10000
                                                                  let plusOrMinusPowerSeries=tAScaled;
                                                                  let plusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries;
                                                                  let loopsThresh = 1
-                                                                
+                                                             
+                                                                 let cycleCount = 444;
+                                                                 if(window.highORlow==3)cycleCount=65
                                                         //        if(totalAMP<.5-.01)
                                                                      for(n=1;n< 444;n+=1.)
 
