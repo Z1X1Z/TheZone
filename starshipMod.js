@@ -3743,7 +3743,7 @@ let tolerance=0;//(1024-26)/10000
                                                            //      tolerance  *= 1.5;
                                                           
                                                                  
-                                                                 tolerance=tolerance**(.5+(totalAMP+ tAScaledPermanent+tolerance-plusOrMinusPowerSeries));
+                                                                 tolerance=tolerance**(.5+(totalAMP+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
                                                           
                                                                  /*
                                                                 else{
