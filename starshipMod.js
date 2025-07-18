@@ -3281,7 +3281,7 @@ for(let n = 0; n < polygons.length; n++)
                                                         polygons[n].dy+=-Math.sin(angleTarget)*compound;
                                                     
                                                          }
-                                                         var slowDown = .997**(1./interpolation);
+                                                         var slowDown = .999**(interpolation);
                                                          polygons[n].dx*=slowDown;
                                                          polygons[n].dy*=slowDown;
 
@@ -3649,7 +3649,7 @@ function calculatePitch ()
 {
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance=0;//(1024-26)/10000
-                                                         if(window.highORlow==0){
+                                                         if(window.highORlow==0||window.highORlow==3){
                                                              if(totalAMP>0&&isFinite(totalAMP))
                                                              {
                                                                  let proportion= fractionOfFrame/bufferSize;
@@ -3712,10 +3712,13 @@ let tolerance=0;//(1024-26)/10000
                                                                      let sig = Math.sign(loopsThresh%2-.5);
                                                   //console.log(plusOrMinusPowerSeries)
                                                                     
-                                                                     plusOrMinusPowerSeries = (tAScaled**(2**(-1.5/(loopsThresh
-                                                                                                        -(tAScaled*plusOrMinusPowerSeries-1.)//+tAScaled*plusOrMinusPowerSeries)
-                                                                                                                    *-sig*1.5))
-                                                                                                      ))*sig;//x-x**2+x**3-x**4....//may have an algebraic solution
+                                                                if(window.highORlow==0)
+                                                                    plusOrMinusPowerSeries = (tAScaled**(2**(-1.5/(loopsThresh-(tAScaled*plusOrMinusPowerSeries-1.)))
+                                                                                                             ))*sig
+                                                                                                                   else
+                                                                                                          plusOrMinusPowerSeries = (tAScaled**(2**(-1.5/(loopsThresh
+                                                                                                                                             -sig*3.))
+                                                                                                      ));//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                 
                                                                      if(plusOrMinusPowerSeries!=1.){//tolerance+=plusOrMinusPowerSeries;
                                                                                      //plusOrMinusPowerSeries=         Math.sign(plusOrMinusPowerSeries)*(Math.abs(plusOrMinusPowerSeries)**2.);
@@ -3747,7 +3750,7 @@ let tolerance=0;//(1024-26)/10000
                                                           
                                                        //    tolerance+=plusOrMinusPowerSeriesBUFFER*2+plusOrMinusPowerSeries
                                                             
-                                                                 tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMP+ tAScaledPermanent+tolerance-plusOrMinusPowerSeries));
+                                                     if  (window.highORlow==0)          tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMP+ tAScaledPermanent+tolerance-plusOrMinusPowerSeries));
                                                            //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMP+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
                                                           
                                                                  /*

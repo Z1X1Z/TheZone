@@ -529,7 +529,7 @@ window.key = " ";
                     uniforms.constellation.value=!uniforms.constellation.value;
                     
                 }
-               else if((key == "l"||key=="¬") && event.altKey&&event.ctrlKey)
+                else if((key == "l"||key=="¬") && event.altKey&&event.ctrlKey)
                 {
                     uniforms.squirgle.value=(uniforms.squirgle.value+=1)%3;
                     if(uniforms.squirgle.value==0)squirgleData.fill(1.)
@@ -544,13 +544,13 @@ window.key = " ";
                 else if((key == "o"||key=="ø") && event.altKey&&event.ctrlKey)
                 { uniforms.oppositionalCoreFlop.value=(uniforms.oppositionalCoreFlop.value+1)%3;
                     console.log(uniforms.oppositionalCoreFlop.value);
-            }
+                }
                 
                 else if((key == "h"||key=="˙") && event.altKey&&event.ctrlKey)
-                        uniforms.dynamicOvercore.value=!uniforms.dynamicOvercore.value;
+                    uniforms.dynamicOvercore.value=!uniforms.dynamicOvercore.value;
                 
                 else if((key == "b"||key=="∫") && event.altKey&&event.ctrlKey)
-                        uniforms.cellularDivision.value=(uniforms.cellularDivision.value+1.)%3;
+                    uniforms.cellularDivision.value=(uniforms.cellularDivision.value+1.)%3;
                 
                 
                 else if((key == "t"||key=="†") && event.altKey&&event.ctrlKey)
@@ -561,36 +561,36 @@ window.key = " ";
                     else if(uniforms.nGenesis.value==0) uniforms.nGenesis.value=1;
                     else if(uniforms.nGenesis.value==1) uniforms.nGenesis.value=0;
                 }
-                    else if((key == "p"||key=="π") && event.altKey&&event.ctrlKey){
-                        if          ( uniforms[ "colorCombo2" ].value >1)          uniforms[ "colorCombo2" ].value = -1;
-                        else uniforms[ "colorCombo2" ].value = -(Math.abs(uniforms[ "colorCombo2" ].value-1))%17;
-                    }
-                    
-                else if((key == "k"||key=="˚") && event.altKey&&event.ctrlKey)
-                uniforms.eyeSingle.value=!uniforms.eyeSingle.value;
-                else if((key == "m"||key=="µ") && event.altKey&&event.ctrlKey)
-                uniforms.cloverArms.value=!uniforms.cloverArms.value;
+                else if((key == "p"||key=="π") && event.altKey&&event.ctrlKey){
+                    if          ( uniforms[ "colorCombo2" ].value >1)          uniforms[ "colorCombo2" ].value = -1;
+                    else uniforms[ "colorCombo2" ].value = -(Math.abs(uniforms[ "colorCombo2" ].value-1))%17;
+                }
                 
-            else if((key == "s"||key=="ß") && event.altKey&&event.ctrlKey)
-            {
-                window.orderedStack=!window.orderedStack;
-                if (INITIALIZED)
+                else if((key == "k"||key=="˚") && event.altKey&&event.ctrlKey)
+                    uniforms.eyeSingle.value=!uniforms.eyeSingle.value;
+                else if((key == "m"||key=="µ") && event.altKey&&event.ctrlKey)
+                    uniforms.cloverArms.value=!uniforms.cloverArms.value;
+                
+                else if((key == "s"||key=="ß") && event.altKey&&event.ctrlKey)
                 {
-                    if(window.orderedStack)shaderScene.add(stackMesh)
-                                                           else             shaderScene.remove(stackMesh)
-
-                        }
-            }
+                    window.orderedStack=!window.orderedStack;
+                    if (INITIALIZED)
+                    {
+                        if(window.orderedStack)shaderScene.add(stackMesh)
+                            else             shaderScene.remove(stackMesh)
+                                
+                                }
+                }
                 else if((key == "e"||key=="´") && event.altKey&&event.ctrlKey)
                     window.extremeFrets=!window.extremeFrets;
                 else if((key == "w"||key=="∑") && event.altKey&&event.ctrlKey)
                     uniforms.pixelWitnesses.value=!uniforms.pixelWitnesses.value;
-                    
+                
                 else if((key == "i"||key=="ˆ") && event.altKey&&event.ctrlKey)
-                uniforms.icicle.value=!uniforms.icicle.value
+                    uniforms.icicle.value=!uniforms.icicle.value
                     
                     else if((key == "u"||key=="¨") && event.altKey&&event.ctrlKey)
-                uniforms.linearEQ.value=!uniforms.linearEQ.value
+                        uniforms.linearEQ.value=!uniforms.linearEQ.value
                         else if((key == "q"||key=="œ") && event.altKey&&event.ctrlKey)
                         {
                             uniforms.gates.value=!uniforms.gates.value
@@ -602,132 +602,132 @@ window.key = " ";
                             
                         }
                         else if((key == "f"||key == "ƒ") && event.altKey&&event.ctrlKey)
-uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
-                else if((key == "z"||key == "Ω") && event.altKey&&event.ctrlKey)
-                {
-                    leafMode=(leafMode+1)%3.
-                    if(leafMode==0)
-                    {
-                        leaf =leafPermanent
-                    
-                        uniforms.leaf.value=leaf;
-                    }
-                    else if (leafMode==1)
-                    {
-                        leaf =leaf2;// -leaf2/leaf*4./3.
-                        
-                        uniforms.leaf.value=leaf;
-                    }
-                    else if (leafMode==2)
-                    {
-                        leaf =leaf3;// -leaf2/leaf*4./3.
-                        
-                        uniforms.leaf.value=leaf;
-                    }                }
-                else if((key == "x"||key==
-                                         "≈")&& event.altKey&&event.ctrlKey)
-                {
-                    grMode=(grMode+1)%2.
-                    if(grMode==0)
-                    {
-                     
-                        gr = grPermanent
-                        uniforms.gr.value=gr;
-                    }
-                    else if(grMode==1)
-                    {
-                    gr = Math.sqrt(grgr2);
-                        
-                        uniforms.gr.value=gr;
-                    }
-                }
+                            uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
+                        else if((key == "z"||key == "Ω") && event.altKey&&event.ctrlKey)
+                        {
+                            leafMode=(leafMode+1)%3.
+                            if(leafMode==0)
+                            {
+                                leaf =leafPermanent
+                                
+                                uniforms.leaf.value=leaf;
+                            }
+                            else if (leafMode==1)
+                            {
+                                leaf =leaf2;// -leaf2/leaf*4./3.
+                                
+                                uniforms.leaf.value=leaf;
+                            }
+                            else if (leafMode==2)
+                            {
+                                leaf =leaf3;// -leaf2/leaf*4./3.
+                                
+                                uniforms.leaf.value=leaf;
+                            }                }
+                        else if((key == "x"||key==
+                                 "≈")&& event.altKey&&event.ctrlKey)
+                        {
+                            grMode=(grMode+1)%2.
+                            if(grMode==0)
+                            {
+                                
+                                gr = grPermanent
+                                uniforms.gr.value=gr;
+                            }
+                            else if(grMode==1)
+                            {
+                                gr = Math.sqrt(grgr2);
+                                
+                                uniforms.gr.value=gr;
+                            }
+                        }
                 
-            
-    else if(key == "o" && event.ctrlKey)
-    {
-        omniDynamicEngaged = !omniDynamicEngaged;
-        if(!omniDynamicEngaged)omniData.fill(uniforms[ "petals" ].value);
-    }
                 
-             else   if(key == "u" && event.ctrlKey)
-                    uniforms.pongOn.value = !uniforms.pongOn.value;
-    else if(key == "c" && event.ctrlKey){dynamicCoring=!dynamicCoring; if(!dynamicCoring)coreData.fill(document.getElementById('coringConstant').value);}
-               else if(key == "h" && event.ctrlKey)uniforms.spinTowardsMe.value=!uniforms.spinTowardsMe.value
-                   else if(key == "e" && event.ctrlKey)uniforms.chop.value=!uniforms.chop.value;
-    else if(key == "q" && event.ctrlKey)uniforms.squareClover.value=!uniforms.squareClover.value;
-    else if(key == "x" && event.ctrlKey)uniforms.fieldPowerBoost.value=!uniforms.fieldPowerBoost.value;
-    else if(key == "z" && event.ctrlKey)uniforms.fieldPowerBoostMeta.value=!uniforms.fieldPowerBoostMeta.value;
-    else if(key == "b" && event.ctrlKey){
-        uniforms.balloonsONexponential.value = 0.;
-        if(uniforms.balloonsON.value==0.)uniforms.balloonsON.value=1.
-            else if(uniforms.balloonsON.value==1.)uniforms.balloonsON.value=-1.
-                else  if(uniforms.balloonsON.value==-1.)uniforms.balloonsON.value=0.
-                    }
-    else if(key == "n" && event.ctrlKey){
-        uniforms.balloonsON.value=0.;
-        if(uniforms.balloonsONexponential.value==0.)uniforms.balloonsONexponential.value=1.
-            else if(uniforms.balloonsONexponential.value==1.)uniforms.balloonsONexponential.value=-1.
-                else  if(uniforms.balloonsONexponential.value==-1.)uniforms.balloonsONexponential.value=0.;
-                    }
-    else if(key == "s" && event.ctrlKey)uniforms.sparklesON.value=!uniforms.sparklesON.value;
-    else if(key == "f" && event.ctrlKey)uniforms.SPHEREofTheLORD.value=!uniforms.SPHEREofTheLORD.value;
-    else if(key == "k" && event.ctrlKey)
-    {
-        window.timeRESET= window.TIMESTAMP;
-        if(window.ChristoDecrypto==0.)
-        {
-            window.ChristoDecrypto = leaf;
-            if(uniforms.metaCarousel.value==0)uniforms.metaCarousel.value=0;
-        }
-        else
-        {
-            window.ChristoDecrypto = 0 ;
-            uniforms.metaCarousel.value=0.;
-        }
-    }
-    else if(key == "v" && event.ctrlKey) window.FeedbackSound =  !window.FeedbackSound;
-    else if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=(uniforms.starOnDot.value+1)%4;
-    else if (key=="p" && event.ctrlKey)spirographMODE = (spirographMODE+1)%3;//color mode 3 seems obsolete
-    //else if (key=="m" && event.ctrlKey)uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value;
-
-    else if (event.ctrlKey&&key=="a")uniforms[ "colorCombo" ].value = 11;
-    else if (event.ctrlKey&&key=="j")window.Oreo=(window.Oreo+1)%3;
-    else if (event.ctrlKey&&key=="t")window.shouldShowStar=!window.shouldShowStar;
-    else if (event.ctrlKey&&key=="r")window.flame=!window.flame;
-    else if (event.ctrlKey&&key=="l")         uniforms.holyeyes.value=(uniforms.holyeyes.value+1)%4;
-
-    else if (event.ctrlKey&&key=="g") {
-        if( uniforms.exponentialPetals.value==0.) uniforms.exponentialPetals.value=1.;
-        else if( uniforms.exponentialPetals.value==1.) uniforms.exponentialPetals.value=-1.;
-        else if( uniforms.exponentialPetals.value==-1.) uniforms.exponentialPetals.value=0.;
-        
-    }
-    else if (event.altKey&&(key=="i"||key=="ˆ"))//dead
-    {
-       if( uniforms.whirlpool.value==0) uniforms.whirlpool.value=1;
-        else if ( uniforms.whirlpool.value==1) uniforms.whirlpool.value=-1;
-        else if  (uniforms.whirlpool.value==-1) uniforms.whirlpool.value=0;
-    }
-
-    else if (event.altKey&&(key=="˜"||key=="ñ"||key=="n"))//dead
-        uniforms.twelveGates.value=!uniforms.twelveGates.value;
-    else if (event.altKey&&(key=="∆"||key=="j"))
-    {
-        uniforms.Pointers.value=!uniforms.Pointers.value;
-    }
-    else if (event.altKey&&(key=="ç"||key=="c"))uniforms.distributor.value = !uniforms.distributor.value;//hotkey seems to already be in use for bible chapter
-
-    else if (event.altKey&&(key=="µ"||key=="m"))
-    {if(number!="no number")
-        uniforms.twelveGatesMeta.value=number;
-    else if( uniforms.twelveGatesMeta.value==2.)uniforms.twelveGatesMeta.value=0
-        else  uniforms.twelveGatesMeta.value=2;
-        
-    }
-
-
-    else if (event.altKey&&(key=="∑"||key=="w"))window.DAW=!window.DAW;
-    else if (event.altKey&&(key=="´"||key=="e"))(window.highORlow=window.highORlow+1)%3;
+                        else if(key == "o" && event.ctrlKey)
+                        {
+                            omniDynamicEngaged = !omniDynamicEngaged;
+                            if(!omniDynamicEngaged)omniData.fill(uniforms[ "petals" ].value);
+                        }
+                
+                        else   if(key == "u" && event.ctrlKey)
+                            uniforms.pongOn.value = !uniforms.pongOn.value;
+                        else if(key == "c" && event.ctrlKey){dynamicCoring=!dynamicCoring; if(!dynamicCoring)coreData.fill(document.getElementById('coringConstant').value);}
+                        else if(key == "h" && event.ctrlKey)uniforms.spinTowardsMe.value=!uniforms.spinTowardsMe.value
+                            else if(key == "e" && event.ctrlKey)uniforms.chop.value=!uniforms.chop.value;
+                            else if(key == "q" && event.ctrlKey)uniforms.squareClover.value=!uniforms.squareClover.value;
+                            else if(key == "x" && event.ctrlKey)uniforms.fieldPowerBoost.value=!uniforms.fieldPowerBoost.value;
+                            else if(key == "z" && event.ctrlKey)uniforms.fieldPowerBoostMeta.value=!uniforms.fieldPowerBoostMeta.value;
+                            else if(key == "b" && event.ctrlKey){
+                                uniforms.balloonsONexponential.value = 0.;
+                                if(uniforms.balloonsON.value==0.)uniforms.balloonsON.value=1.
+                                    else if(uniforms.balloonsON.value==1.)uniforms.balloonsON.value=-1.
+                                        else  if(uniforms.balloonsON.value==-1.)uniforms.balloonsON.value=0.
+                                            }
+                            else if(key == "n" && event.ctrlKey){
+                                uniforms.balloonsON.value=0.;
+                                if(uniforms.balloonsONexponential.value==0.)uniforms.balloonsONexponential.value=1.
+                                    else if(uniforms.balloonsONexponential.value==1.)uniforms.balloonsONexponential.value=-1.
+                                        else  if(uniforms.balloonsONexponential.value==-1.)uniforms.balloonsONexponential.value=0.;
+                            }
+                            else if(key == "s" && event.ctrlKey)uniforms.sparklesON.value=!uniforms.sparklesON.value;
+                            else if(key == "f" && event.ctrlKey)uniforms.SPHEREofTheLORD.value=!uniforms.SPHEREofTheLORD.value;
+                            else if(key == "k" && event.ctrlKey)
+                            {
+                                window.timeRESET= window.TIMESTAMP;
+                                if(window.ChristoDecrypto==0.)
+                                {
+                                    window.ChristoDecrypto = leaf;
+                                    if(uniforms.metaCarousel.value==0)uniforms.metaCarousel.value=0;
+                                }
+                                else
+                                {
+                                    window.ChristoDecrypto = 0 ;
+                                    uniforms.metaCarousel.value=0.;
+                                }
+                            }
+                            else if(key == "v" && event.ctrlKey) window.FeedbackSound =  !window.FeedbackSound;
+                            else if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=(uniforms.starOnDot.value+1)%4;
+                            else if (key=="p" && event.ctrlKey)spirographMODE = (spirographMODE+1)%3;//color mode 3 seems obsolete
+                //else if (key=="m" && event.ctrlKey)uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value;
+                
+                            else if (event.ctrlKey&&key=="a")uniforms[ "colorCombo" ].value = 11;
+                            else if (event.ctrlKey&&key=="j")window.Oreo=(window.Oreo+1)%3;
+                            else if (event.ctrlKey&&key=="t")window.shouldShowStar=!window.shouldShowStar;
+                            else if (event.ctrlKey&&key=="r")window.flame=!window.flame;
+                            else if (event.ctrlKey&&key=="l")         uniforms.holyeyes.value=(uniforms.holyeyes.value+1)%4;
+                
+                            else if (event.ctrlKey&&key=="g") {
+                                if( uniforms.exponentialPetals.value==0.) uniforms.exponentialPetals.value=1.;
+                                else if( uniforms.exponentialPetals.value==1.) uniforms.exponentialPetals.value=-1.;
+                                else if( uniforms.exponentialPetals.value==-1.) uniforms.exponentialPetals.value=0.;
+                                
+                            }
+                            else if (event.altKey&&(key=="i"||key=="ˆ"))//dead
+                            {
+                                if( uniforms.whirlpool.value==0) uniforms.whirlpool.value=1;
+                                else if ( uniforms.whirlpool.value==1) uniforms.whirlpool.value=-1;
+                                else if  (uniforms.whirlpool.value==-1) uniforms.whirlpool.value=0;
+                            }
+                
+                            else if (event.altKey&&(key=="˜"||key=="ñ"||key=="n"))//dead
+                                uniforms.twelveGates.value=!uniforms.twelveGates.value;
+                            else if (event.altKey&&(key=="∆"||key=="j"))
+                            {
+                                uniforms.Pointers.value=!uniforms.Pointers.value;
+                            }
+                            else if (event.altKey&&(key=="ç"||key=="c"))uniforms.distributor.value = !uniforms.distributor.value;//hotkey seems to already be in use for bible chapter
+                
+                            else if (event.altKey&&(key=="µ"||key=="m"))
+                            {if(number!="no number")
+                                uniforms.twelveGatesMeta.value=number;
+                            else if( uniforms.twelveGatesMeta.value==2.)uniforms.twelveGatesMeta.value=0
+                                else  uniforms.twelveGatesMeta.value=2;
+                                
+                            }
+                
+                
+                            else if (event.altKey&&(key=="∑"||key=="w"))window.DAW=!window.DAW;
+                            else if (event.altKey&&(key=="´"||key=="e")){(window.highORlow=window.highORlow+1)%4;console.log(highORlow)}
 
     else if (event.altKey&&(key=="¥"||key=="y"))
     {
