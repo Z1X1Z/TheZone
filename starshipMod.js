@@ -2584,7 +2584,8 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                 let incrementation = (EldersLeg%2==0)?g%2:(g+1)%2;
                 //incrementation/=2.;
                incrementation++;
-                let dep = depBuffer;
+                let dep = depBuffer/1.02**g;
+;
 
                 let arm =0;
                 let lengt =0;
@@ -2725,7 +2726,7 @@ let yr = lengt*-Math.cos(arm);
                                   
                   x *= 1.4;
                   y *= 1.4;
-                                           dep/=1.1;
+                                           dep/=1.01;
                  starPositionAttribute.setXYZ(starStride,-x+xBoost,    -y+yBoost,  dep)
                  starPositionAttribute.setXYZ(starStride+1,x+xBoost,    y+yBoost,  dep)
                  starPositionAttribute.setXYZ(starStride+2,(xr+x), (yr+y),  dep)
