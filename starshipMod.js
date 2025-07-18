@@ -3278,8 +3278,9 @@ for(let n = 0; n < polygons.length; n++)
                                                         polygons[n].dy+=-Math.sin(angleTarget)*compound;
                                                     
                                                          }
-                                                         polygons[n].dx*=.999**interpolation;
-                                                         polygons[n].dy*=.999**interpolation;
+                                                         var slowDown = .999**(1./interpolation);
+                                                         polygons[n].dx*=slowDown;
+                                                         polygons[n].dy*=slowDown;
 
                                                          const ddX= circleX-polygons[n].centerX;
                                                          const ddY= circleY-polygons[n].centerY;
@@ -3738,7 +3739,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  }
                                                           
                                                         //       if(  loopsThresh%2==0 )
-                                                                                                                     tolerance=tolerance**(((.5+totalAMP+tAScaledPermanent+tolerance)));
+                                                                                                                     tolerance=tolerance**(.5+(totalAMP*2.+ tAScaledPermanent+tolerance));
 
                                                                  /*
                                                                 else{
