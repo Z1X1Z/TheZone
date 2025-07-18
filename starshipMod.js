@@ -3278,7 +3278,7 @@ for(let n = 0; n < polygons.length; n++)
                                                         polygons[n].dy+=-Math.sin(angleTarget)*compound;
                                                     
                                                          }
-                                                         var slowDown = .999**(1./interpolation);
+                                                         var slowDown = .998**(1./interpolation);
                                                          polygons[n].dx*=slowDown;
                                                          polygons[n].dy*=slowDown;
 
@@ -3742,8 +3742,8 @@ let tolerance=0;//(1024-26)/10000
                                                         //       if(  loopsThresh%2==0 )
                                                            //      tolerance  *= 1.5;
                                                           
-                                                                 
-                                                                 tolerance=tolerance**(.5+(totalAMP+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
+                                                                
+                                                                 tolerance=tolerance**(.5+(totalAMP+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER+plusOrMinusPowerSeries));
                                                           
                                                                  /*
                                                                 else{
