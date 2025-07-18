@@ -4019,8 +4019,8 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
                              (OrthoEvery>=1.&&mod(OrthOnTop,OrthoEvery)<1.))))
     {
         compensate=true;
-        float logStabilizationConstantA=logStabilizationConstantB;
-        logStabilizationConstantB=logStabilizationConstantB+(1.-logStabilizationConstantB)/2.;
+       // float logStabilizationConstantA=logStabilizationConstantB;
+       // logStabilizationConstantB=logStabilizationConstantB+(1.-logStabilizationConstantB)/2.;
 
    float angleToLittleClover =atan(lastS.x,lastS.y)-mod(atan(lastS.x,lastS.y),PI2/6.)+PI2/12.;//PI2/12.*4.;
  //  angleToLittleClover*=-1.;
@@ -5758,7 +5758,11 @@ if (Character==4||Character==3) {heartSize=2.;
                                                                 direction=-1.;
                                                                 }
                                                             vec2 heartPitch = vec2(0.);
-                                                            if(volume!=0.) heartPitch=-direction*spin2(-d.yx,-twistStar)/4.;
+                                                            if(volume!=0.)
+                                                            {
+                                                              float  noteAngle=(note/12.*PI2*flipStar+PIdiv2);
+                                                                heartPitch=-direction*spin2(vec2(-zin(-noteAngle),-coz(noteAngle)),-twistStar)/4.;
+                                                                                            }
                                                             
 vec2 heartField = characterPSpunToKey*heartSize
 +heartShift;
