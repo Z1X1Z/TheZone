@@ -3278,10 +3278,9 @@ for(let n = 0; n < polygons.length; n++)
                                                         polygons[n].dy+=-Math.sin(angleTarget)*compound;
                                                     
                                                          }
-                                                         polygons[n].dx*=.998;
-                                                         polygons[n].dy*=.998;
+                                                         polygons[n].dx*=.999**interpolation;
+                                                         polygons[n].dy*=.999**interpolation;
 
-                                                         
                                                          const ddX= circleX-polygons[n].centerX;
                                                          const ddY= circleY-polygons[n].centerY;
                                                          const distDot = Math.sqrt(ddX*ddX+ddY*ddY);
@@ -3544,8 +3543,7 @@ for(var n = 0; n<targets.length;n++){
                                                        
                      if (!iOS||(iOS&&dupered)) boot();//generate clover in 64 bit, duper Core, there is a bug after maybe half a day on iOS in bigTree.js (maybe also on safari Mac)
 
-                                                      // waitForOpenWindowToAnimate();
-                                                                                            animateLoopId= window.requestAnimationFrame( animate )
+                                                       waitForOpenWindowToAnimate();
                                                        
                             //  renderer.forceContextLoss ()
                             //  renderer.forceContextRestore ( )
