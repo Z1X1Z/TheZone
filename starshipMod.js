@@ -3719,8 +3719,8 @@ let tolerance=0;//(1024-26)/10000
                                                                                                                       
                                                                                                                    else
                                                                                                           plusOrMinusPowerSeries = (tAScaled**(2**(-1.5/(loopsThresh
-                                                                                                                                             -3.*sig))
-                                                                                                      ));//x-x**2+x**3-x**4....//may have an algebraic solution
+                                                                                                                                             +3.*tAScaled))
+                                                                                                      ))*sig;//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                 
                                                                      if(plusOrMinusPowerSeries!=1.){//tolerance+=plusOrMinusPowerSeries;
                                                                                      //plusOrMinusPowerSeries=         Math.sign(plusOrMinusPowerSeries)*(Math.abs(plusOrMinusPowerSeries)**2.);
