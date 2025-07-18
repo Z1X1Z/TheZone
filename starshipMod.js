@@ -3745,7 +3745,7 @@ let tolerance=0;//(1024-26)/10000
                                                         //       if(  loopsThresh%2==0 )
                                                            //      tolerance  *= 1.5;
                                                           
-                                                                tolerance+=plusOrMinusPowerSeriesBUFFER+plusOrMinusPowerSeries;
+                                                                tolerance+=plusOrMinusPowerSeriesBUFFER*2.+plusOrMinusPowerSeries;
                                                                  tolerance=(tolerance)**(.5+(totalAMP+ tAScaledPermanent+tolerance));
                                                           
                                                                  /*
