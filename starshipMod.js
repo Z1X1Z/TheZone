@@ -3713,11 +3713,13 @@ let tolerance=0;//(1024-26)/10000
                                                   //console.log(plusOrMinusPowerSeries)
                                                                     
                                                                 if(window.highORlow==0)
-                                                                    plusOrMinusPowerSeries = (tAScaled**(2**(-1.5/(loopsThresh-(tAScaled*plusOrMinusPowerSeries-1.)))
-                                                                                                             ))*sig
+                                                                                                                              plusOrMinusPowerSeries = (tAScaled**(2**(-1.5/(loopsThresh
+                                                                                                                                                                   -(tAScaled*plusOrMinusPowerSeries-1.)//+tAScaled*plusOrMinusPowerSeries)
+                                                                                                                                                                               *-sig*1.5))))*sig
+                                                                                                                      
                                                                                                                    else
                                                                                                           plusOrMinusPowerSeries = (tAScaled**(2**(-1.5/(loopsThresh
-                                                                                                                                             -sig*3.))
+                                                                                                                                             -3.*sig))
                                                                                                       ));//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                 
                                                                      if(plusOrMinusPowerSeries!=1.){//tolerance+=plusOrMinusPowerSeries;
