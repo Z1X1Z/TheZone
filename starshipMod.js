@@ -2577,6 +2577,11 @@ else{//start drawing of just twenty four frets here
     let bottomNote = Math.round(-twist+24)%24;
     let topNote = Math.round(-twist+60)%24;
 
+                    let centerDisplacement = .5;//4./7.;//9./14.;
+                                                         
+                                                         var TransparencyStar = 0.25;
+                                                         var TransparencyStar2 = 1.;
+
     let inset = 1.;
 let depBuffer = (-starShipDepthInSet+(1.-starShipDepthInSet))/inset-1.+1./inset;
     
@@ -2640,7 +2645,6 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                 
                                   //inner Star inspired by https://www.youtube.com/watch?v=_MTbjHKtobY Neffex song
 const rpio2 =arm+pi/2.;
-   let centerDisplacement = .5;//4./7.;//9./14.;
 let xBoost = -Math.sin(arm)*centerDisplacement;
 let yBoost = -Math.cos(arm)*centerDisplacement;
                 
@@ -2648,9 +2652,6 @@ let x = widt*-Math.sin(rpio2);
 let y = widt*-Math.cos(rpio2);
 let xr = lengt*-Math.sin(arm);
 let yr = lengt*-Math.cos(arm);
-                                        var TransparencyStar = -0.25;
-                                        var TransparencyStar2 = 1.;
-
                                        // if(vop.r==vop.g||vop.b==vop.g)TransparencyStar=.875;
                                       //  else
                                //         if(vop.g==0.)   TransparencyStar*=(vop.r+vop.b*2.)/Math.max(vop.b,vop.r)/3.;
@@ -2678,8 +2679,8 @@ let yr = lengt*-Math.cos(arm);
                                   
                 starStride+=6;
                                  
-                                x *=-centerDisplacement;
-                                y *=-centerDisplacement;
+                                x *=-centerDisplacement/2.;
+                                y *=-centerDisplacement/2.;
                                         // if (g==bottomNote&&EldersLeg==24)   x/=2.;
                                             //else
                                             //x/=1.25;
@@ -2725,8 +2726,8 @@ let yr = lengt*-Math.cos(arm);
                                                                            
                                                starStride+=6;
                                   
-                  x *= 1.4;
-                  y *= 1.4;
+                  x *= 1.75;
+                  y *= 1.75;
                                            dep/=1.01;
                  starPositionAttribute.setXYZ(starStride,-x+xBoost,    -y+yBoost,  dep)
                  starPositionAttribute.setXYZ(starStride+1,x+xBoost,    y+yBoost,  dep)
