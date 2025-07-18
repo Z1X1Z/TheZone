@@ -3720,8 +3720,8 @@ let tolerance=0;//(1024-26)/10000
                                                                                                                                                                                *-sig*1.5))))*sig
                                                                                                                       
                                                                                                                    else
-                                                                                                          plusOrMinusPowerSeries = (tAScaled**(2**(-1.5/(loopsThresh
-                                                                                                                                             +3.*tAScaled))
+                                                                                                          plusOrMinusPowerSeries = (tAScaled**(2**(-1./(loopsThresh
+                                                                                                                                                         +plusOrMinusPowerSeries*tAScaled))
                                                                                                       ))*sig;//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                 
                                                                      if(plusOrMinusPowerSeries!=1.){//tolerance+=plusOrMinusPowerSeries;
