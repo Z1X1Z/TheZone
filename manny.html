@@ -6107,7 +6107,7 @@ else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
     else if(starship.x==starship.y&&starship.y==starship.z&&starship.x>=1.)
              layeredOUT=vec4((mannyFace.xyz+starship.xyz/1.5),1.);
              else if(starship.y==0.&&starship.x==0.&&starship.z==0.&&starship.w>3.5/255.)layeredOUT=vec4(mannyFace.xyz*.25,1.);
-             else if (starship.w>0.&&shipSUM<1.01)layeredOUT=vec4(mannyFace.xyz+starship.xyz,1.);
+             else if (starship.w>0.&&shipSUM<341./255.)layeredOUT=vec4(mannyFace.xyz+starship.xyz,1.);
     else layeredOUT=vec4(mannyFace.xyz,1.);
     //if(colorCombo==-1)layeredOUT=vec4(clamp(layeredOUT.xyz-zoomer,0.,1.)+zoomer/2.5,1.);
 }
