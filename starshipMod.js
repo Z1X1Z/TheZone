@@ -2725,7 +2725,7 @@ let yr = lengt*-Math.cos(arm);
                                         starColorAttribute.setXYZW(starStride+5,pureColor.r,pureColor.g,pureColor.b,TransparencyStar2)
                                                                            
                                                starStride+=6;
-                          let greyBoost = .5+incrementation;
+                          let greyBoost = 1.5*incrementation;
                   x *= greyBoost;
                   y *= greyBoost;
 
