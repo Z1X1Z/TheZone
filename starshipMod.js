@@ -2726,8 +2726,8 @@ let yr = lengt*-Math.cos(arm);
                                                                            
                                                starStride+=6;
                                   
-                  x *= 1.75;
-                  y *= 1.75;
+                  x *= 2.;
+                  y *= 2.;
                                            dep/=1.01;
                  starPositionAttribute.setXYZ(starStride,-x+xBoost,    -y+yBoost,  dep)
                  starPositionAttribute.setXYZ(starStride+1,x+xBoost,    y+yBoost,  dep)
