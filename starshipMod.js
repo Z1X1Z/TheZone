@@ -3713,9 +3713,9 @@ let tolerance=0;//(1024-26)/10000
                                                                      let sig = Math.sign(loopsThresh%2-.5);
                                                   //console.log(plusOrMinusPowerSeries)
                                                                     
-                                                                                                                              plusOrMinusPowerSeries = (tAScaled**(2**(-1.5/(loopsThresh
-                                                                                                                                                                   -(tAScaled*plusOrMinusPowerSeries-1.)//+tAScaled*plusOrMinusPowerSeries)
-                                                                                                                                                                               *-sig*1.5))))*sig
+                                                                                                                              plusOrMinusPowerSeries = (tAScaled**(2**(-1./(loopsThresh
+                                                                                +1.                                                                            -(tAScaled*plusOrMinusPowerSeries-1.)//+tAScaled*plusOrMinusPowerSeries)
+                                                                                                                                                                               *-sig))))*sig
                                                                                                                                                           //plusOrMinusPowerSeries = (tAScaled**(2**(-1.49/(loopsThresh+2))))*sig
                                                                      if(plusOrMinusPowerSeries!=1.){//tolerance+=plusOrMinusPowerSeries;
                                                                                      //plusOrMinusPowerSeries=         Math.sign(plusOrMinusPowerSeries)*(Math.abs(plusOrMinusPowerSeries)**2.);
@@ -3741,21 +3741,10 @@ let tolerance=0;//(1024-26)/10000
                                                                      loopsThresh++
 
                                                                  }
-                                                       //   tolerance+=(plusOrMinusPowerSeries+plusOrMinusPowerSeriesBUFFER)
-                                                        //       if(  loopsThresh%2==0 )
-                                                           //      tolerance  *= 1.5;
-                                                          
-                                                       //    tolerance+=plusOrMinusPowerSeriesBUFFER*2+plusOrMinusPowerSeries
-                                                            
-                                                     if  (window.highORlow==0)          tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMP+ tAScaledPermanent+tolerance-plusOrMinusPowerSeries));
+                                                        tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMP+ tAScaledPermanent+tolerance-plusOrMinusPowerSeries));
                                                            //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMP+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
                                                           
-                                                                 /*
-                                                                else{
-                                                                    // tolerance=tAScaled**(grPermanent*-leaf);
-                                                                tolerance=tAScaled**(1./    (2**(1./3.)));
-                                                                }
-                                                                   */
+                                                             
                                                             }
                                                           else tolerance=0.;
                                                          }
