@@ -259,13 +259,12 @@ hyperCore*=equilibriator;
   // hyperCore-=coreDilation
    let petalNumber = petals+6;
    if(feedTheLamb)  {
- //   hyperCore+=s.length()/Math.log(.5)/2.;
-    
+   hyperCore-=1./3./Math.log(.5);   
 }
 
    if(clvrVariant4)
    {
-    hyperCore-=.5/Math.log(.5);//1./(7.*log(.5));
+    if(!feedTheLamb)hyperCore-=.4/Math.log(.5);//1./(7.*log(.5));
     if(cloverSlide)hyperCore+=.5/Math.log(.5);
     //if(wheel)hyperCore-=0./Math.log(.5);
    // if(morph!=0.)hyperCore+=2.5/Math.log(.5);

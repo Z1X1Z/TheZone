@@ -3636,12 +3636,12 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
  //if(chop) hyperCore-=.25/log(.5);//1./(7.*log(.5));
  float petalNumber = petals+6.;
  if(feedTheLamb)  {
-     
+     hyperCore-=1./3./log(.5);
      }
 
    if(clvrVariant4!=0.&&OrthoEvery==0.)
    {
-       hyperCore-=.5/log(.5);//1./(7.*log(.5));
+       if(!feedTheLamb) hyperCore-=.4/log(.5);//1./(7.*log(.5));
     if(cloverSlide)hyperCore+=.5/log(.5);
     //if(wheel)hyperCore-=0./log(.5);
    // if(morph!=0.)hyperCore+=2.5/log(.5);
