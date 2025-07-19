@@ -3714,7 +3714,7 @@ let tolerance=0;//(1024-26)/10000
                                                   //console.log(plusOrMinusPowerSeries)
                                                                     
                                                                                                                               plusOrMinusPowerSeries = (tAScaled**(2**(-1./(loopsThresh
-                                                                                +2.                                                                            -(tAScaled*plusOrMinusPowerSeries-1.)//+tAScaled*plusOrMinusPowerSeries)
+                                                                                +1.                                                                            -(tAScaled*plusOrMinusPowerSeries-1.)//+tAScaled*plusOrMinusPowerSeries)
                                                                                                                                                                                *-sig))))*sig
                                                                                                                                                           //plusOrMinusPowerSeries = (tAScaled**(2**(-1.49/(loopsThresh+2))))*sig
                                                                      if(plusOrMinusPowerSeries!=1.){//tolerance+=plusOrMinusPowerSeries;
