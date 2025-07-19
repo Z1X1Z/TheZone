@@ -2725,9 +2725,10 @@ let yr = lengt*-Math.cos(arm);
                                         starColorAttribute.setXYZW(starStride+5,pureColor.r,pureColor.g,pureColor.b,TransparencyStar2)
                                                                            
                                                starStride+=6;
-                                  
-                  x *= 2.;
-                  y *= 2.;
+                          let greyBoost = .5+incrementation;
+                  x *= greyBoost;
+                  y *= greyBoost;
+
                                            dep/=1.01;
                  starPositionAttribute.setXYZ(starStride,-x+xBoost,    -y+yBoost,  dep)
                  starPositionAttribute.setXYZ(starStride+1,x+xBoost,    y+yBoost,  dep)
