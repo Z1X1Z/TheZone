@@ -265,7 +265,7 @@ hyperCore*=equilibriator;
 
    if(clvrVariant4)
    {
-    if(!feedTheLamb)hyperCore-=.4/Math.log(.5);//1./(7.*log(.5));
+    hyperCore-=.5/Math.log(.5);//1./(7.*log(.5));
     if(cloverSlide)hyperCore+=.5/Math.log(.5);
     //if(wheel)hyperCore-=0./Math.log(.5);
    // if(morph!=0.)hyperCore+=2.5/Math.log(.5);
