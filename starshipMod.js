@@ -2590,7 +2590,6 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                 let incrementation = (EldersLeg%2==0)?g%2:(g+1)%2;
                 //incrementation/=2.;
                incrementation++;
-                let dep = depBuffer/1.02**g;
 ;
 
                 let arm =0;
@@ -2608,7 +2607,8 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                     lengt=lengt**.25;
                 }
                                   }
-                                  
+                                   let dep = depBuffer/1.001**(1.-lengt);
+
                             let BlackOrWhiteFRET = .5;
                                   
                             if(g%2==0&&Oreo!=0)
