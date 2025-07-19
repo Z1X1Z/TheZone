@@ -3720,10 +3720,11 @@ let tolerance=0;//(1024-26)/10000
                                                                                                                                                                                *-sig*1.5))))*sig
                                                                                                                       
                                                                                                                    else
-                                                                                                                                                                                     plusOrMinusPowerSeries = (tAScaled**(2**(-1./(loopsThresh
-                                                                                                                                                                                                                          -(tAScaled*plusOrMinusPowerSeries-1.)//+tAScaled*plusOrMinusPowerSeries)
-                                                                                                                                                                                                                                      ))))*sig
-                                                                                                                                  
+                                                        
+                                                                                                                        plusOrMinusPowerSeries = (tAScaled**(2**(-1.49/(loopsThresh+2))//*grTimesLeaf
+
+                                                                                                                                                                      ))
+                                                                                                                                                                                                                                                                                                                                                             *sig
                                                                      if(plusOrMinusPowerSeries!=1.){//tolerance+=plusOrMinusPowerSeries;
                                                                                      //plusOrMinusPowerSeries=         Math.sign(plusOrMinusPowerSeries)*(Math.abs(plusOrMinusPowerSeries)**2.);
                                                                     if(loopsThresh%2==0)               { //tolerance+=plusOrMinusPowerSeriesBUFFER;
