@@ -180,7 +180,8 @@ cards:{value:false},
     elderHorns:{value:0},
 cloverso:{value:false},
 OrthoEvery:{value:0.},
-feedTheLamb:{value:true}
+feedTheLamb:{value:true},
+noteFrozen:{value:0}
 }
 window.uniforms={}
 

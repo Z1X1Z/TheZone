@@ -440,7 +440,7 @@ let pushBackCounter = 0;
 
             if(on)
             {
-             
+             uniforms.noteFrozen.value=note;
                                 
             const t =  (note +twist/2)*flip;
                                 if(isFinite(t))angle = -(t*radialWarp);

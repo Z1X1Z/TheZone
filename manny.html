@@ -1871,6 +1871,7 @@ void main(){
     
     
     uniform float concertKeyTuning;
+    uniform float noteFrozen;
     uniform int cellularDivision;
     uniform bool triogenesis;
     
@@ -2110,26 +2111,28 @@ vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
                                                         
                                                         
                                                         
-                                                        
-    vec3 paddles(vec2 vUvCentered){
-                                      float shade = 0.;
-                                      if(abs(vUvCentered.x)>.47)
-                                      {
-                                          
-                                                        float incrementSize = 1./12.;
-                                                        float staff =mod(vUv.y*12.+.5+12.,1.)-.5;
-                                          if ( abs(staff)<=incrementSize)
-                                          return hsv2rgb( vec3(mod((-vUv.y+(6.-2.*brelued*flipStar)/12.+twistStar*divideByMultiplyingPi2)*flipStar*brelued+1.,1.) ,1.,1. )); //vec4(mod(note,12.)/12.);
-                                          else if ( abs(staff)<=incrementSize*2.)shade=.25;//(vUvCentered.x/2.-1.25);
-                                          
+                    
+                         
+vec3 paddles(vec2 vUvCentered){
+       float shade = 0.;
+       if(abs(vUvCentered.x)>.47)
+       {
+           
+                         float incrementSize = 1./12.;
+                         float staff =mod(vUv.y*12.+.5+12.,1.)-.5;
+           if ( abs(staff)<=incrementSize)
+           return hsv2rgb( vec3(mod((-vUv.y+(6.-2.*brelued*flipStar)/12.+twistStar*divideByMultiplyingPi2)*flipStar*brelued+1.,1.) ,1.,1. )); //vec4(mod(note,12.)/12.);
+           else if ( abs(staff)<=incrementSize*2.)shade=.25;//(vUvCentered.x/2.-1.25);
+           
 
 
-                                          else if(mod(vUv.y-mod(note/12.*flipStar+twistStar*divideByMultiplyingPi2,1.)+1.+1./12.,1.)<=2./12.)shade= sign(-vUvCentered.x)*170.*flipStar*brelued;
-                                          
-                                          }
-                                      
-                                      return vec3(shade);
-                                  }
+           else if(mod(vUv.y-mod(noteFrozen/12.*flipStar+twistStar*divideByMultiplyingPi2,1.)+1.+1./12.,1.)<=2./12.)shade= sign(-vUvCentered.x)*170.*flipStar*brelued;
+           
+           }
+       
+       return vec3(shade);
+   }
+                   
     vec3 ball(vec2 p){
     if (length(pongBallCoords-vUv*resolution)<length(resolution.y)/12.)
         if (vUv.x>.5)return vec3(10.);
@@ -5758,10 +5761,11 @@ if (Character==4||Character==3) {heartSize=2.;
                                                                 direction=-1.;
                                                                 }
                                                             vec2 heartPitch = vec2(0.);
-                                                            if(volume!=0.)
+                                                            if(volume!=0.&&volume!=1.)
                                                             {
                                                               float  noteAngle=(note/12.*PI2*flipStar+twistStar+PIdiv2);
                                                                 heartPitch=-direction*spin2(vec2(-zin(-noteAngle),-coz(noteAngle)),-twistStar)/4.;
+                                                                // heartPitch=-direction*spin2(-d.yx,-twistStar)/4.;
                                                                                             }
                                                             
 vec2 heartField = characterPSpunToKey*heartSize
