@@ -259,7 +259,7 @@ hyperCore*=equilibriator;
   // hyperCore-=coreDilation
    let petalNumber = petals+6;
    if(feedTheLamb)  {
-   hyperCore-=1./3./Math.log(.5);   
+   hyperCore-=.25/Math.log(.5);
 }
 
    if(clvrVariant4)
@@ -302,7 +302,7 @@ var m= new THREE.Vector2(0.,0.);
     var truncator=1.;
     var truncated = true;
     if(lfc!=0.&&zoom!=0.&&truncated)
-        truncator = Math.log((lfc*lfc)/(zoom*zoom))/Math.log(2.)*100.;
+        truncator = Math.log((lfc*lfc)/(zoom*zoom))/Math.log(2.);//*100
 
         //truncator = Math.log(zoom/lfc)**2.;
 //Maendel clover
@@ -405,10 +405,10 @@ for (var counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
         console.log(runTimes)
     }
     */
-var OmniDynamicPetalShift =omniData[(loops+counter)];
+var OmniDynamicPetalShift =omniData[0];
 var OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
 
-var  CORE_DELIMITER=coreData[Math.floor(loops+counter)];
+var  CORE_DELIMITER=coreData[0];
   
 //if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
 
@@ -750,7 +750,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
     
 //if(i==0){float b = ;s*=b;dstnce*b;}
 
-OmniDynamicPetalShift =omniData[(loops+counter)];
+OmniDynamicPetalShift =omniData[0];
 OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
 
 if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spinVector(s,Math.atan(s.y,s.x)*OmniPetal);

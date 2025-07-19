@@ -3636,7 +3636,7 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
  //if(chop) hyperCore-=.25/log(.5);//1./(7.*log(.5));
  float petalNumber = petals+6.;
  if(feedTheLamb)  {
-     hyperCore-=1./3./log(.5);
+     hyperCore-=.25/log(.5);
      }
 
    if(clvrVariant4!=0.&&OrthoEvery==0.)
@@ -3674,7 +3674,7 @@ vec2 m=vec2(0.);
 
 float truncator=1.;
 bool truncated = true;
-if(zoom!=0.&&lfc!=0.&&truncated) truncator =log((lfc*lfc)/(zoom*zoom))/log(2.)*100.;
+if(zoom!=0.&&lfc!=0.&&truncated) truncator =log((lfc*lfc)/(zoom*zoom))/log(2.);//*100
 //pow(abs(log(zoom/lfc),2.);//log truncation * factor is not known, may no longer be necesary
 //Maendel clover
 
