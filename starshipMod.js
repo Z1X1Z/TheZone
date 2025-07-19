@@ -3650,7 +3650,7 @@ function calculatePitch ()
 {
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance=0;//(1024-26)/10000
-                                                         if(window.highORlow==0||window.highORlow==3){
+                                                         if(window.highORlow==0){
                                                              if(totalAMP>0&&isFinite(totalAMP))
                                                              {
                                                                  let proportion= fractionOfFrame/bufferSize;
@@ -3702,10 +3702,8 @@ let tolerance=0;//(1024-26)/10000
                                                                  let plusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries;
                                                                  let loopsThresh = 1
                                                              
-                                                                 let cycleCount = 444;
-                                                                 if(window.highORlow==3)cycleCount=65
                                                         //        if(totalAMP<.5-.01)
-                                                                     for(n=1;n< cycleCount;n+=1.)
+                                                                     for(n=1;n< 444;n+=1.)
 
                                                                  
                                                                    //  for(n=0;n<444;n+=2.-totalAMP//1./(1.+1./totalAMP)
@@ -3715,17 +3713,10 @@ let tolerance=0;//(1024-26)/10000
                                                                      let sig = Math.sign(loopsThresh%2-.5);
                                                   //console.log(plusOrMinusPowerSeries)
                                                                     
-                                                                if(window.highORlow==0)
                                                                                                                               plusOrMinusPowerSeries = (tAScaled**(2**(-1.5/(loopsThresh
                                                                                                                                                                    -(tAScaled*plusOrMinusPowerSeries-1.)//+tAScaled*plusOrMinusPowerSeries)
                                                                                                                                                                                *-sig*1.5))))*sig
-                                                                                                                      
-                                                                                                                   else
-                                                        
-                                                                                                                        plusOrMinusPowerSeries = (tAScaled**(2**(-1.49/(loopsThresh+2))//*grTimesLeaf
-
-                                                                                                                                                                      ))
-                                                                                                                                                                                                                                                                                                                                                             *sig
+                                                                                                                                                          //plusOrMinusPowerSeries = (tAScaled**(2**(-1.49/(loopsThresh+2))))*sig
                                                                      if(plusOrMinusPowerSeries!=1.){//tolerance+=plusOrMinusPowerSeries;
                                                                                      //plusOrMinusPowerSeries=         Math.sign(plusOrMinusPowerSeries)*(Math.abs(plusOrMinusPowerSeries)**2.);
                                                                     if(loopsThresh%2==0)               { //tolerance+=plusOrMinusPowerSeriesBUFFER;
