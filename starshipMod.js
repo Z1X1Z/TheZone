@@ -2608,7 +2608,7 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                     lengt=lengt**.25;
                 }
                                   }
-                                   let dep = depBuffer/1.001**(1.-lengt);
+                                   let dep = depBuffer/1.001**(lengt);
 
                             let BlackOrWhiteFRET = .5;
                                   
