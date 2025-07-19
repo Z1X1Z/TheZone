@@ -551,7 +551,8 @@ let pushBackCounter = 0;
                             else trailWidth[f]=starshipSize;//0.;
                                trailTimeOfRecording[f]=uniforms["time"].value;
                                trailSegmentExpired[f]=false;
-        if(trailSecondsLong!=0&& trailDepth<trailLength||on)//||on
+        if(trailSecondsLong!=0&&// trailDepth<trailLength||
+           on)
                                
                               {
             
