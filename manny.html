@@ -5847,7 +5847,7 @@ if (Character==4||Character==3) {heartSize=2.;
 vec2 heartField = characterPSpunToKey*heartSize
 +heartShift;
      if(Character!=9&&(heartStar!=3))
-     {  if(volume!=1.)
+     {  if(volume!=1.&&volume!=0.)
          HEART = heart(heartField
                                                     ,//vec2(0.)
                       heartPitch*vec2(1.,flipStar)+
