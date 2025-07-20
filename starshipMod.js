@@ -2000,7 +2000,7 @@ function runOSMD (){
     if(document.visibilityState=="hidden"||lvs=="hidden")lastFrameTime=timestamp;
     lvs=document.visibilityState
     interpolation = (timestamp-lastFrameTime)/1000.*60.;
-    if (!isFinite(interpolation))interpolation = 1.;
+    if (!isFinite(interpolation)||interpolation==0.)interpolation = 1.;
                         if(loopsRun<3)interpolation=1.;//this is to prevent frametime leak on mobile
                                     
                         if(interpolation>60)interpolation=1.;//this is to prevent frametime leak on mobile
@@ -2050,7 +2050,7 @@ function runOSMD (){
                                     }else{aboveThreshold = false; on = false;if(!touchMode)uniforms.volume.value=0.00001}
 
                                     
-if(interpolation!=0.&& (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
+if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
 
     
     
