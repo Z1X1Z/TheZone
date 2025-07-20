@@ -2050,7 +2050,7 @@ function runOSMD (){
                                     }else{aboveThreshold = false; on = false;if(!touchMode)uniforms.volume.value=0.00001}
 
                                     
-if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
+if(interpolation!=0.&& (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
 
     
     
