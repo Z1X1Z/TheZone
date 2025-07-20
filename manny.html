@@ -6275,7 +6275,7 @@ vec4 tree = vec4( clamp(
           ,.0,1.)
               ,1.);
         
-          vec4 fin = (clamp(vec4(ss*starshipMultiplier
+          vec4 fin = (clamp(vec4(ss.xyz*starshipMultiplier
                                  ,1.)
                             -faceFromShip,0.,1.)+clamp(
                                                                                      goodies+
