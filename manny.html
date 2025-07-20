@@ -2497,7 +2497,8 @@ return h;
                     float squareUp=4./3./log(3.);
                     g.y*=squareUp;
                     t.y*=squareUp;}
-
+bool twelveLots = true;
+bool A=false,Bf=false,C=false,D=false,E=false,Fs=false,G=false;
                               t/=2.5;
                               //g/=4.;
                               int eyeType = 0;
@@ -2527,14 +2528,16 @@ return h;
                         // if(g.x*g.x+g.y*g.y<40.)
                         //if(abs(g.y)<9.)
                         float isEscaped = 0.;
-                        if(abs(g.y)<4.&&g.x<2.)for (int f=0;f<20;f+=1)if(abs(z.y)>17.7&&(f>3||f==1)){
+                        if(abs(g.y)<4.&&g.x<2.)for (int f=0;f<26;f+=1)if(abs(z.y)>17.7&&(f>3||f==1)){
                             if(!wink){
                                     if (f==1){l=vec4(0.);break;}
                                     l= vec4(vec3(-1.*(z.y)*sign(g.y)),1.);
                                     isEscaped=-2.;//length(z)/40.;//clouds and face
                            }
                             
-                            break;}
+                            break;
+                            
+                        }
                         else{
                             z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),2.0*z.x*z.y-g.y-t.y);
                             
@@ -2547,7 +2550,7 @@ return h;
                             else if((f==17)&&p.x>0.&&s.x<0.&&!notEars&&p.x<.35){l = lowColor;break;}
                             else if((f==14)&&s.x<-1.){l=vec4(vec3(.5),.5);
                                                      break;}
-                            /*
+                            /*should be restored?!
                             if( (f == 13||f==14)&&s.x<.0&&abs(p.y)>.68&&p.x>0.){l=vec4(vec3(.5),1.);break;}
                             else if(f<=15&&z.x>-.1){
                                 l=vec4(vec3(-z.x),1.);
@@ -2565,18 +2568,75 @@ return h;
                                     l=vec4(.5);
                                     break;
                                     }
+                              
                                   }
                             if((eyeType==0||eyeType==2)&&!wink);
 
                     else   if((twistStar == 0.||wink)&&s.x<0.){
                                     float eyeColorCycler = 0.;
-                           if (eyeType==1)eyeColorCycler=1.;
+                                    float eyeColorCyclerReversed = 0.;
+
+                           if (eyeType==1)
+                           {eyeColorCycler=1.;
+                               eyeColorCyclerReversed=1.;
+                               }
 
 
                                if (f==12 &&p.x<.0){
                                bfeye=true;
                            }
                          // else if(true);
+                         else if(f>=20&&abs(p.x)<.4&&twistStar==0.){
+                             float winkWhite = -1.;
+                             if(!C&&p.x>0.&&p.y<0.){
+                             if(wink&&rnd(adjustedNote)==5.)
+                                l=vec4(vec3(winkWhite),0.);
+
+                             else if(!wink)
+                             l=vec4(eyeColorCyclerReversed/2.+.5,1.-eyeColorCyclerReversed, eyeColorCyclerReversed/2.,.5);
+
+                             break;
+                             
+                             }
+                             else if (!E&&p.x>0.&&p.y>0.)
+                             {
+                                 if(wink&&rnd(adjustedNote)==7.)
+                                       l=vec4(vec3(winkWhite),0.);
+                                       else if(!wink)
+                                       
+                                       l=vec4( eyeColorCyclerReversed/2.,1.-eyeColorCyclerReversed,eyeColorCyclerReversed/2.+.5,.5);
+                                 break;
+                                 }
+                             else if(!G&&!A&&abs(p.x)>abs(p.y)&&p.x<0.){
+                                 
+                                        if(wink&&(rnd(adjustedNote)==12.||rnd(adjustedNote)==0.))
+                                           l=vec4(vec3(winkWhite),0.);
+                                        else if(!wink)
+                              l = vec4( 1.-eyeColorCyclerReversed,eyeColorCyclerReversed,1.-eyeColorCyclerReversed,.5);
+                             break;
+                             }
+                             else if(!A&&!Bf&&abs(p.x)<abs(p.y)&&p.x<0.&&p.y>0.){
+                                 
+                                        if(wink&&rnd(adjustedNote)==9.)
+                                           l=vec4(vec3(winkWhite),0.);
+                                        else if(!wink)
+                                        l = vec4(1.-eyeColorCyclerReversed,.5, eyeColorCyclerReversed,.5);
+                                 break;
+                                 }
+                             
+                             else if(!G&&!Fs&&abs(p.x)<abs(p.y)&&p.x<0.&&p.y<0.){
+                                 
+                                 if(wink&&rnd(adjustedNote)==3.)
+                                           l=vec4(vec3(winkWhite),0.);
+                                        else if(!wink)
+                                        l = vec4(eyeColorCyclerReversed,.5, 1.-eyeColorCyclerReversed,.5);
+                                 break;
+                                 }
+
+
+
+
+                             }
                                else if (f==16 &&p.x<.35){
                                 if (p.x>.0) {
                           
@@ -2585,7 +2645,9 @@ return h;
                                         if(wink)
                                         {
                                            if( rnd(adjustedNote)==4.||floor(adjustedNote)==4.||ceil(adjustedNote)==4.)
+                                           {
                                            l=vec4(vec3(1.),0.);
+                                           }
                                            }
                                         else l = vec4( 1.-eyeColorCycler,eyeColorCycler,eyeColorCycler,.5);
                                     }
@@ -2593,8 +2655,9 @@ return h;
                                     {
                                         if(wink)
                                         {                                           if(rnd(adjustedNote)==8.||ceil(adjustedNote)==8.||floor(adjustedNote)==8.)
-
+                                            {
                                             l=vec4(vec3(1.),0.);
+                                            }
                                             }
                                        else l = vec4( eyeColorCycler,eyeColorCycler,1.-eyeColorCycler,.5);
                                     }
@@ -2610,7 +2673,7 @@ return h;
                                             }
                                        else
                                        {
-                                        l = vec4( 1.-eyeColorCycler,.5,eyeColorCycler,.5);
+                                        l = vec4( 1.-eyeColorCycler,1.-eyeColorCycler,eyeColorCycler,.5);
                                         
                                         }
                                        }
@@ -2621,7 +2684,7 @@ return h;
                                             l=vec4(vec3(1.),0.);
                                             }
                                         else
-                                        l = vec4( eyeColorCycler,.5,1.-eyeColorCycler,.5);
+                                        l = vec4( eyeColorCycler,1.-eyeColorCycler,1.-eyeColorCycler,.5);
                                         }
                                 
                                 }
@@ -2722,7 +2785,7 @@ return h;
                       
                             
                         }
-                        if((l.r<.0||l.g<0.||l.b<0.)&&isEscaped!=-2.)l=vec4(0.);
+                        if((l.r<.0||l.g<0.||l.b<0.)&&isEscaped!=-2.&&!wink)l=vec4(0.);
                             if(g.y==0.&&t.y==0.&&!wink)
                             {if(g.x<0.)
                             l=vec4(-2.);
@@ -5606,7 +5669,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                              if(eyeSingle&&volume!=1.)
                                                                  {
                        oneEye =faceBlackAndWhite(eyeMatch,winkMotion,true,-1).xyz*winkColor;
-                                                                if(oneEye.x!=0.)mny=oneEye;
+                                                                if(oneEye.x!=0.&&mny.g!=0.)mny=oneEye;
                                                                 }
                                                                  
                                                                  vec3 bigEyes = vec3(0.);
@@ -5863,7 +5926,7 @@ if(starOnDot!=2){
                          if(HEART.x==0.&&HEART.y==0.&&HEART.z==0.)
                          {heartWarmed=AM;
                              }
-                         if(heartWarmed.x!=0.&&heartWarmed.y!=0.&&heartWarmed.z!=0.&&oneEye.y!=0.)   heartWarmed-=oneEye/1.5;
+                         if((heartWarmed.x!=0.||heartWarmed.y!=0.||heartWarmed.z!=0.)&&oneEye.y!=0.)   heartWarmed-=oneEye/1.5;
 
                                  if(mannyFace.z>0.&&mannyFace.x>0.&&mannyFace.z>0.) starshipMultiplier=vec3(1.);;//starshipMultiplier=vec3(1.25);
                     if(mannyFace.z<0.&&mannyFace.x<0.&&mannyFace.y<0.)starshipMultiplier=starshipMultiplier=vec3(1.);//vec3(.75);
@@ -6114,7 +6177,7 @@ else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
                                  else if(isGreyISH>=129./255.&&isGreyISH!=1.)layeredOUT=vec4(vec3(.5),1.);
 
          else if (holyeyes==1&&Character==0&& !((HEART.x==0.&&HEART.y==0.)||(HEART.y==0.&&HEART.z==0.)||(HEART.z==0.&&HEART.x==0.))) layeredOUT=vec4(clamp(HEART-(bodyWithArms.x+bodyWithArms.y+bodyWithArms.z)/2.-starship.xyz/3.-oneEye/1.5,0.,1.)+starship.xyz+insideOut.xyz+bodyWithArms.xyz,1.);
-                                 else if(oneEye.r!=0.){layeredOUT=vec4(vec3(.125)+starship.xyz/2.+bodyWithArms.xyz*bodyWithArms.w,1.);
+                                 else if(oneEye.r!=0.){layeredOUT=vec4(-oneEye.x*.75+starship.xyz+bodyWithArms.xyz*bodyWithArms.w,1.);
                                 if(insideOut.w==.5)layeredOUT+=vec4(insideOut.xyz/3.,0.);
                        }
                         else if (oopm.w!=0.)layeredOUT=oopm;
@@ -6131,9 +6194,13 @@ else {
                        vec4 goodies =
                        vec4(
                                            mnyX+
-                            clamp(heartWarmed*isColoredMultiplier,0.,1.)
+                            clamp(heartWarmed*isColoredMultiplier                            -(oneEye)*((isGrey+pixelShipGrey)/2.)*2.
+,0.,1.)
+
+                            +unrolledEyes+clamp(insideOut.xyz-(bodyWithArms.r+bodyWithArms.g+bodyWithArms.b)*20.                            -(oneEye)*((isGrey+pixelShipGrey)/2.)*2.
+,0.,1.)
                             -(oneEye)*((isGrey+pixelShipGrey)/2.)*2.
-                            +unrolledEyes+clamp(insideOut.xyz-(bodyWithArms.r+bodyWithArms.g+bodyWithArms.b)*20.,0.,1.)
+
                                            +largeEyeColor*clamp(bigEyes-vec3((ss.r+ss.g+ss.b)*ss.w),0.,1.)*1.*starshipMultiplier
                                           +(pillar
                                             +icicles.xyz
@@ -6157,7 +6224,6 @@ else {
                                                    +bridge*(1.-isGrey-pixelShipGrey)//+AM*(1.-isGrey-pixelShipGrey)
                                                     ,1.);
                        vec3 awayFromTree =  vec3((-ss.xyz)*ss.w
-                                                 -oneEye
                                                  -yourFace.xyz
                                                  +(-HEART.b-HEART.r-HEART.g)
                                                 // +(-HEART.b-HEART.r-HEART.g)/4.
@@ -6165,11 +6231,11 @@ else {
                                                  +(-linearFrequency.r-linearFrequency.g-linearFrequency.b)*4.
                                                  -(pong.r+pong.g+pong.b)
                                                  +bigEyes.xyz*largeEyeColor
-                                                 +oneEye
                                                 // +moreHorns
                                                  -(yourFace.x+yourFace.y+yourFace.z)/256./3.
                         -(ARTICLE.x+ARTICLE.y+ARTICLE.z)*40.
-                   
+                                                 -oneEye.r*10.
+
                        -(bridge.x+bridge.y+bridge.z)*4.
                        -(shipSUM)/maxColorOfStarship*starship.w
                                   
