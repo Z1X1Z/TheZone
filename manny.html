@@ -2499,6 +2499,7 @@ return h;
                     t.y*=squareUp;}
 bool twelveLots = true;
 bool A=false,Bf=false,C=false,D=false,E=false,Fs=false,G=false;
+bool isB=false, isF=false;
                               t/=2.5;
                               //g/=4.;
                               int eyeType = 0;
@@ -2615,7 +2616,7 @@ bool A=false,Bf=false,C=false,D=false,E=false,Fs=false,G=false;
                               l = vec4( 1.-eyeColorCyclerReversed,eyeColorCyclerReversed,1.-eyeColorCyclerReversed,.5);
                              break;
                              }
-                             else if(!A&&!Bf&&abs(p.x)<abs(p.y)&&p.x<0.&&p.y>0.){
+                             else if(!A&&!Bf&&(abs(p.x)<abs(p.y)&&p.x<0.&&p.y>0.||isB)){
                                  
                                         if(wink&&rnd(adjustedNote)==9.)
                                            l=vec4(vec3(winkWhite),0.);
@@ -2624,7 +2625,7 @@ bool A=false,Bf=false,C=false,D=false,E=false,Fs=false,G=false;
                                  break;
                                  }
                              
-                             else if(!G&&!Fs&&abs(p.x)<abs(p.y)&&p.x<0.&&p.y<0.){
+                             else if(!G&&!Fs&&(abs(p.x)<abs(p.y)&&p.x<0.&&p.y<0.||isF)){
                                  
                                  if(wink&&rnd(adjustedNote)==3.)
                                            l=vec4(vec3(winkWhite),0.);
@@ -2661,34 +2662,44 @@ bool A=false,Bf=false,C=false,D=false,E=false,Fs=false,G=false;
                                             }
                                        else l = vec4( eyeColorCycler,eyeColorCycler,1.-eyeColorCycler,.5);
                                     }
+                                    break;
                                 }
-                                else if(p.x>-.3&&s.x>-.1){
+                                else if(p.x>-.3){
                                     //squircle eyes orange and steel blue
                                     if(p.y<0.)
                                     {
+                                        if(s.x>-.1){
                                         if(wink)
-                                        {                                           if(ceil(adjustedNote)==3.||rnd(adjustedNote)==2.)
+                                        {            if(ceil(adjustedNote)==3.||rnd(adjustedNote)==2.)
 
                                             l=vec4(vec3(1.),0.);
                                             }
                                        else
                                        {
                                         l = vec4( 1.-eyeColorCycler,1.-eyeColorCycler,eyeColorCycler,.5);
-                                        
+                                        break;
                                         }
+                                       Bf=true;
+                                       }
+                                        else isB=true;
+
                                        }
                                     else {
+                                        if(s.x>-.1){
                                         if(wink)
-                                        {                                           if(floor(adjustedNote)==9.||rnd(adjustedNote)==10.)
+                                        {           if(floor(adjustedNote)==9.||rnd(adjustedNote)==10.)
 
                                             l=vec4(vec3(1.),0.);
                                             }
                                         else
                                         l = vec4( eyeColorCycler,1.-eyeColorCycler,1.-eyeColorCycler,.5);
+                                        break;
+                                        Fs=true;
                                         }
-                                
+                                        else isF=true;
+
                                 }
-                                break;
+}
                             }
                             
                       else if (f==17 &&p.x>.0&&p.x<.5&&s.x>-.2){
