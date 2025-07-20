@@ -2678,8 +2678,7 @@ bool isB=false, isF=false;
                                             }
                                        else
                                        {
-                                        l = vec4( 1.-eyeColorCycler,1.-eyeColorCycler,eyeColorCycler,.5);
-                                        break;
+                                           l = vec4( 1.-eyeColorCycler,.5,eyeColorCycler,.5);                                        break;
                                         }
                                        Bf=true;
                                        }
@@ -2696,8 +2695,7 @@ bool isB=false, isF=false;
 
                                             }
                                         else
-                                        l = vec4( eyeColorCycler,1.-eyeColorCycler,1.-eyeColorCycler,.5);
-                                        break;
+                                        l = vec4( eyeColorCycler,.5,1.-eyeColorCycler,.5);                                        break;
                                         Fs=true;
                                         }
                                         else isF=true;
@@ -2767,8 +2765,8 @@ bool isB=false, isF=false;
                                 }
                                 else if(p.x>-.3){
                                     //squircle eyes orange and steel blue
-                                    if(p.y>0.)l = vec4( hsv2rgb( vec3(mod(3./12.+eyeColorCycler,1.) ,.5,1. )),.5);
-                                    else l = vec4( hsv2rgb( vec3(mod(11./12.+eyeColorCycler,1.) ,.5,1. )),.5);
+                                    if(p.y>0.)l = vec4( hsv2rgb( vec3(mod(4./12.+eyeColorCycler,1.) ,.5,1. )),.5);
+                                    else l = vec4( hsv2rgb( vec3(mod(10./12.+eyeColorCycler,1.) ,.5,1. )),.5);
                                 
                                 }
                                 break;
