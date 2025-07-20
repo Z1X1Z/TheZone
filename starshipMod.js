@@ -3194,7 +3194,7 @@ uniforms.dotCoord.value =new THREE.Vector2(circleX,circleY) ;
 
 
                    let centerOfDotToEdge = [];
-                   centerOfDotToEdge.push( new THREE.Vector3(circleX-Math.sin(-angle)*dotSize*volume, circleY-Math.cos(-angle)*dotSize*volume, -1. ) );
+                   centerOfDotToEdge.push( new THREE.Vector3(circleX+Math.sin(note/12.*Math.PI*2)*dotSize*volume, circleY+Math.cos(note/12.*Math.PI*2)*dotSize*volume, -1. ) );
                    centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-1) );
 
                                   radialLine.geometry.setFromPoints( centerOfDotToEdge )
