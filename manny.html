@@ -2752,13 +2752,12 @@ bool A=false,Bf=false,C=false,D=false,E=false,Fs=false,G=false;
                                 }
                                 else if(p.x>-.3){
                                     //squircle eyes orange and steel blue
-                                    if(p.y>0.)l = vec4( hsv2rgb( vec3(mod(4./12.+eyeColorCycler,1.) ,.5,1. )),.5);
-                                    else l = vec4( hsv2rgb( vec3(mod(10./12.+eyeColorCycler,1.) ,.5,1. )),.5);
+                                    if(p.y>0.)l = vec4( hsv2rgb( vec3(mod(3./12.+eyeColorCycler,1.) ,.5,1. )),.5);
+                                    else l = vec4( hsv2rgb( vec3(mod(11./12.+eyeColorCycler,1.) ,.5,1. )),.5);
                                 
                                 }
                                 break;
                             }
-                            
                       else if (f==17 &&p.x>.0&&p.x<.5&&s.x>-.2){
                           l = vec4( hsv2rgb( vec3(mod(7./12.+eyeColorCycler,1.) ,.5,1. )),.5);//green nose
                           break;
@@ -6223,7 +6222,7 @@ else {
                                                     +ARTICLE
                                                    +bridge*(1.-isGrey-pixelShipGrey)//+AM*(1.-isGrey-pixelShipGrey)
                                                     ,1.);
-                       vec3 awayFromTree =  vec3((-ss.xyz)*pow(ss.w,2.-ss.w)
+                       vec3 awayFromTree =  vec3((-ss.xyz)*pow(ss.w,2.-ss.w*ss.w)
                                                  -yourFace.xyz
                                                  +(-HEART.b-HEART.r-HEART.g)
                                                 // +(-HEART.b-HEART.r-HEART.g)/4.
