@@ -437,22 +437,22 @@ let pushBackCounter = 0;
         lastNote = note;
          note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
                             uniforms.note.value=note;
+                            
+        const t =  (note +twist/2)*flip;
+                            if(isFinite(t))angle = -(t*radialWarp);
+                            let reversableColor=((uniforms.brelued.value*angle/12./((radialWarp>0)?radialWarp:1))*flip+twist/24.*uniforms.brelued.value+1./3.)%1.;
+             //if(uniforms.brelued.value==-1)reversableColor=.25-reversableColor;
 
+                           
+         
+        const colortone = note/lightingScaleTrail;
+        colorSound.setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
+        //angle-=1/radialWarp;
             if(on)
             {
              uniforms.noteFrozen.value=note;
-                                
-            const t =  (note +twist/2)*flip;
-                                if(isFinite(t))angle = -(t*radialWarp);
-                                let reversableColor=((uniforms.brelued.value*angle/12./((radialWarp>0)?radialWarp:1))*flip+twist/24.*uniforms.brelued.value+1./3.)%1.;
-                 //if(uniforms.brelued.value==-1)reversableColor=.25-reversableColor;
-
-                                colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);
-                                
+             colorSoundPURE =     new THREE.Color().setHSL(reversableColor,1.,.5);
              
-            const colortone = note/lightingScaleTrail;
-            colorSound.setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
-            //angle-=1/radialWarp;
             pitchCol[f]  = colorSoundPURE;
 
             const nt = Math.round(note)%12;
@@ -2193,7 +2193,7 @@ if(interpolation!=0.&& (!window.touchMode||(window.shouldShowStar))&&!window.tou
        let frameCount=((loopsRun%2)-.5)*2222222;
 
     if(spirographMODE==2){
-    lineMat.color = colorSoundPURE;
+    lineMat.color = colorSound;
   }
        else if (uniforms[ "metronome" ].value>1)lineMat.color  = new THREE.Color("").setRGB(metroPhase,metroPhase,metroPhase)
            else if(spirographMODE==1) lineMat.color = new THREE.Color("").setRGB(frameCount,frameCount,frameCount);
