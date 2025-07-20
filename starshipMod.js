@@ -436,8 +436,8 @@ let pushBackCounter = 0;
                                     
         lastNote = note;
          note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
-                            uniforms.note.value=note;
-                            
+                            if(isFinite(note)) uniforms.note.value=note;
+                                else uniforms.note.value=0;
         const t =  (note +twist/2)*flip;
                             if(isFinite(t))angle = -(t*radialWarp);
                             let reversableColor=((uniforms.brelued.value*angle/12./((radialWarp>0)?radialWarp:1))*flip+twist/24.*uniforms.brelued.value+1./3.)%1.;
@@ -489,19 +489,18 @@ let pushBackCounter = 0;
                             d_y*=flatline
                             if(on&&totalAMP>.000001)
                             {
-             if(interpolation!=0.)
+             
+             if(shouldShowStar&&touchMode)
              {
-                 if(shouldShowStar&&touchMode)
-                 {
-                     uniforms.d.value.x+=d_x;
-                     uniforms.d.value.y+=d_y;
-                 }
-                 else {
-                     
+                 uniforms.d.value.x+=d_x;
+                 uniforms.d.value.y+=d_y;
+             }
+             else {
+
                      uniforms.d.value.x=d_x;
                      uniforms.d.value.y=d_y;
-                 }
              }
+      
                                
                                FEEDBACKuniforms.d.value=new THREE.Vector2(d_x,d_y);
                                FEEDBACKuniformsFlip.d.value=new THREE.Vector2(d_x,d_y);
