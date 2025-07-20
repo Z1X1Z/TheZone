@@ -489,17 +489,19 @@ let pushBackCounter = 0;
                             d_y*=flatline
                             if(on&&totalAMP>.000001)
                             {
-             if(shouldShowStar&&touchMode)
+             if(interpolation!=0.)
              {
-                 uniforms.d.value.x+=d_x;
-                 uniforms.d.value.y+=d_y;
-             }
-             else {
-
+                 if(shouldShowStar&&touchMode)
+                 {
+                     uniforms.d.value.x+=d_x;
+                     uniforms.d.value.y+=d_y;
+                 }
+                 else {
+                     
                      uniforms.d.value.x=d_x;
                      uniforms.d.value.y=d_y;
+                 }
              }
-      
                                
                                FEEDBACKuniforms.d.value=new THREE.Vector2(d_x,d_y);
                                FEEDBACKuniformsFlip.d.value=new THREE.Vector2(d_x,d_y);
