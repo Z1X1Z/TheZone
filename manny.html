@@ -6223,7 +6223,7 @@ else {
                                                     +ARTICLE
                                                    +bridge*(1.-isGrey-pixelShipGrey)//+AM*(1.-isGrey-pixelShipGrey)
                                                     ,1.);
-                       vec3 awayFromTree =  vec3((-ss.xyz)*ss.w
+                       vec3 awayFromTree =  vec3((-ss.xyz)*pow(ss.w,2.-ss.w)
                                                  -yourFace.xyz
                                                  +(-HEART.b-HEART.r-HEART.g)
                                                 // +(-HEART.b-HEART.r-HEART.g)/4.
