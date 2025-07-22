@@ -3753,7 +3753,8 @@ let tolerance=0;//(1024-26)/10000
                                                                      loopsThresh++
 
                                                                  }
-                                                        tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMP+ tAScaledPermanent+tolerance-plusOrMinusPowerSeriesNorm));
+                                                                 tolerance=(tolerance-plusOrMinusPowerSeriesNorm)**(.75+(totalAMP+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
+                                                      //  tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMP+ tAScaledPermanent+tolerance-plusOrMinusPowerSeries));
                                                            //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMP+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
                                                           
                                                              
