@@ -3729,13 +3729,13 @@ let tolerance=0;//(1024-26)/10000
                                                                                                                                                           //plusOrMinusPowerSeries = (tAScaled**(2**(-1.49/(loopsThresh+2))))*sig
                                                                      if(plusOrMinusPowerSeries!=1.){//tolerance+=plusOrMinusPowerSeries;
                                                                                      //plusOrMinusPowerSeries=         Math.sign(plusOrMinusPowerSeries)*(Math.abs(plusOrMinusPowerSeries)**2.);
-                                                                    if(loopsThresh%2==0)               { tolerance+=plusOrMinusPowerSeriesBUFFER;
+                                                                    if(loopsThresh%2==0)               { //tolerance+=plusOrMinusPowerSeriesBUFFER;
                                                               
-                                                      //    plusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries
+                                                          plusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries
                                                                              
                                                                            
                                                                          }
-                                                                 else
+                                                        //         else
                                                        
                                                     {
                                                         plusOrMinusPowerSeriesNorm=plusOrMinusPowerSeries;
@@ -3753,7 +3753,8 @@ let tolerance=0;//(1024-26)/10000
                                                                      loopsThresh++
 
                                                                  }
-                                                        tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMP+ tAScaledPermanent+tolerance-plusOrMinusPowerSeries));
+                                                        tolerance=(tolerance//+plusOrMinusPowerSeriesBUFFER
+                                                                   )**(.75+(totalAMP+ tAScaledPermanent+tolerance-plusOrMinusPowerSeries));
                                                            //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMP+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
                                                           
                                                              
