@@ -3708,6 +3708,7 @@ let tolerance=0;//(1024-26)/10000
                                                         //       tAScaled=tAScaled**.5;
                                                                  let plusOrMinusPowerSeries=tAScaled;
                                                                  let plusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries;
+                                                                let plusOrMinusPowerSeriesNorm=plusOrMinusPowerSeries
                                                                  let loopsThresh = 1
                                                              
                                                         //        if(totalAMP<.5-.01)
@@ -3737,6 +3738,8 @@ let tolerance=0;//(1024-26)/10000
                                                                  else
                                                        
                                                     {
+                                                        plusOrMinusPowerSeriesNorm=plusOrMinusPowerSeries;
+                                                        
                                                         tolerance+=plusOrMinusPowerSeries;
                                                         
                                                     }
@@ -3750,7 +3753,7 @@ let tolerance=0;//(1024-26)/10000
                                                                      loopsThresh++
 
                                                                  }
-                                                        tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMP+ tAScaledPermanent+tolerance-plusOrMinusPowerSeries));
+                                                        tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMP+ tAScaledPermanent+tolerance-plusOrMinusPowerSeriesNorm));
                                                            //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMP+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
                                                           
                                                              
