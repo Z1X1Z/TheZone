@@ -3040,7 +3040,11 @@ let s = f;
                      transparencyOfTrail =1.-seg;
 
                            if (movementRate*timeElapsedSinceRecording>.5)z=.01*(-1.+timeElapsedSinceRecording/trailSecondsLong);
-                     else transparencyOfTrail=254./255.;
+                           else {
+                               transparencyOfTrail=254./255.;
+                               transparencyOfTrailLast=transparencyOfTrail;
+                           }
+                     
                                                
                      let stylus=.5;
                  
