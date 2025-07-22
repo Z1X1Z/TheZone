@@ -2534,9 +2534,10 @@ bool isB=false, isF=false;
                                     if (f==1){l=vec4(0.);break;}
                                     l= vec4(vec3(-1.*(z.y)*sign(g.y)),1.);
                                     isEscaped=-2.;//length(z)/40.;//clouds and face
+                                    break;
+
                            }
                             
-                            break;
                             
                         }
                         else{
@@ -4746,7 +4747,7 @@ vec3 robeL(vec2 g, vec2 t, vec2 d){
 
 
      vec3 heartZoom(vec2 p, vec2 t){
- 
+                    
  float c=3.58;
  p.y*=-1.;
  p*=2.;
@@ -4758,6 +4759,7 @@ if(f>iterations*(lerp(time/15.)*.5+.5)){if(length(z)>5.&&colorCombo!=18)break;
 else{
 if(colorCombo==18)if(length(z)>c)z/=c;
 z=vec2(z.x*z.x-z.y*z.y-p.x+t.x, 2.0*z.x*z.y-p.y+t.y);//this is {s=s^2-p}
+//z=spin2(p,(atan(z.y,z.x)+PI2)/2.);
 
 }}
 
@@ -5765,7 +5767,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                  float frAMP=1.;
                                                                  float heartRate =1./4.;
                                                                   float heartInEyeSize=gr*gr*-leaf;
-                                                                 float heartSize=heartInEyeSize;
+                                                                 float heartSize=heartInEyeSize*1.25;
 
                                                                  
                                                                  
@@ -6170,7 +6172,7 @@ pixelStarship += starBuffer;
                                                                  
 else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
 {
-    if(  heartSize>heartInEyeSize*heartInEyeSize*length(characterOnTrailP*vec2(4.,gr))&&
+    if(  heartSize>heartInEyeSize*heartInEyeSize*length(characterOnTrailP*(vec2(4.,gr)))&&
        
        
 !((HEART.x==0.&&HEART.y==0.)||(HEART.y==0.&&HEART.z==0.)||(HEART.z==0.&&HEART.x==0.))
@@ -6187,7 +6189,7 @@ else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
     //if(colorCombo==-1)layeredOUT=vec4(clamp(layeredOUT.xyz-zoomer,0.,1.)+zoomer/2.5,1.);
 }
                                  else if(isGreyISH>=129./255.&&isGreyISH!=1.)layeredOUT=vec4(vec3(.5),1.);
-
+else if (starship.w==254./255.)layeredOUT=starship;
          else if (holyeyes==1&&Character==0&& !((HEART.x==0.&&HEART.y==0.)||(HEART.y==0.&&HEART.z==0.)||(HEART.z==0.&&HEART.x==0.))) layeredOUT=vec4(clamp(HEART-(bodyWithArms.x+bodyWithArms.y+bodyWithArms.z)/2.-starship.xyz/3.-oneEye/1.5,0.,1.)+starship.xyz+insideOut.xyz+bodyWithArms.xyz,1.);
                                  else if(oneEye.r!=0.){layeredOUT=vec4(-oneEye.x*.25+starship.xyz/1.5+bodyWithArms.xyz*bodyWithArms.w,1.);
                                 if(insideOut.w==.5)layeredOUT+=vec4(insideOut.xyz/3.,0.);

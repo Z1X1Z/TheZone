@@ -3036,10 +3036,12 @@ let s = f;
                      let seg = timeElapsedSinceRecording/((trailSecondsLong>0)?trailSecondsLong:1);
                      if(window.flame)seg*=seg;
                             z = (-1.+seg*.5);
+                     const transparencyOfTrailLast =transparencyOfTrail;
+                     transparencyOfTrail =1.-seg;
+
                            if (movementRate*timeElapsedSinceRecording>.5)z=.01*(-1.+timeElapsedSinceRecording/trailSecondsLong);
-                            const transparencyOfTrailLast =transparencyOfTrail;
-                            transparencyOfTrail =1.-seg;
-                     
+                     else transparencyOfTrail=254./255.;
+                                               
                      let stylus=.5;
                  
                      let timeElapsedEXPONENTIAL = Math.log(24.-timeElapsedSinceRecording*12.)/LogTwoPowerOfTwelfth;
