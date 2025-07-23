@@ -6295,8 +6295,8 @@ vec4 tree = vec4( clamp(
                                                        ,0.,1.))*isBlack*isBlackStaRivers*isBlackDOT+(isBlack-1.)+(isBlackDOT-1.)+(isBlackStaRivers-1.);
                                                                                      if(isGrey!=.0&&pixelShipGrey!=0.)fin=vec4(vec3(.75),1.);
                                                                 else if (isGrey!=.0)fin=vec4(vec3(.5),1.);
-                                                                else if(isWhite==1.&&starship.w!=0.&&pixelShipGrey!=0.)fin=vec4(vec3(.6),1.);
-                                                                                    else if(isBlack==0.&&starship.w!=0.&&pixelShipGrey!=0. ){                         fin=vec4(vec3(.4),1.);
+                                                                else if(isWhite==1.&&starship.w!=0.&&pixelShipGrey!=0.)fin=vec4(vec3(.25),1.);
+                                                                                    else if(isBlack==0.&&starship.w!=0.&&pixelShipGrey!=0. ){                         fin=vec4(vec3(.75),1.);
                                                                                          }
                                                                                     else if (pixelShipGrey!=0.)
                                                                                     fin=vec4(pixelShipGrey+pixelShipGrey*fin.xyz,1.);
