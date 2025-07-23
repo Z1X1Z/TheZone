@@ -3712,7 +3712,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  let loopsThresh = 1
                                                              
                                                         //        if(totalAMP<.5-.01)
-                                                                     for(n=1;n< 445;n+=1.)
+                                                                     for(n=1;n< 444;n+=1.)
 
                                                                  
                                                                    //  for(n=0;n<444;n+=2.-totalAMP//1./(1.+1./totalAMP)
