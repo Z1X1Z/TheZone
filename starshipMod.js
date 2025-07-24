@@ -1650,7 +1650,7 @@ function runOSMD (){
                                     uniforms.d.value.y=0.;
                                     let touchMovement=[0,0];
                                      if(zoomRate!=0&&!zoomAtl41) touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
-                                        else touchMovement=[-xTouch/zoomFrames,yTouch/zoomFrames]
+                                        else touchMovement=[-xTouch/zoomFrames*zoom*interpolation,yTouch/zoomFrames*zoom*interpolation]
                                     if(!window.shouldShowStar||touchOnlyMode)uniforms[ "volume" ].value=1.;
                                     uniforms["zoomOutRatchetThreshold" ].value=0.;
                                     let dxVolumized =xTouchMicroBuffer
