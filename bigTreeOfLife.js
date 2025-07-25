@@ -406,7 +406,7 @@ for (var counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
     }
     */
 var OmniDynamicPetalShift =omniData[0];
-var OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
+var OmniPetal =OmniDynamicPetalShift*(petalNumber/6.);
 
 var  CORE_DELIMITER=coreData[0];
   
@@ -426,7 +426,7 @@ if(Refractelate&&dstnce>refractelC){s.divideScalar( refractelC);} //refractelC/=
 var lastS = s.clone();
             var superUpcorer = 0.;
             if(feedTheLamb){superUpcorer =-1.+1./((Math.abs((Math.atan(s.y,s.x)/Math.PI/2+1.//+.5/petalNumber
-            %(1./petalNumber))-.5/petalNumber))*petalNumber*Math.PI/2*2.)+s.length()/Math.log(2.)/2.*petalNumber/6.;
+            %(1./petalNumber))-.5/6.))*petalNumber*Math.PI/2*2.)+s.length()/Math.log(2.)/2.*petalNumber/6.;
             hyperCoreBoosted-=superUpcorer;
             hyperCoreOUTPUT-=superUpcorer;
             }
@@ -751,7 +751,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
 //if(i==0){float b = ;s*=b;dstnce*b;}
 
 OmniDynamicPetalShift =omniData[0];
-OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
+OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
 
 if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spinVector(s,Math.atan(s.y,s.x)*OmniPetal);
 

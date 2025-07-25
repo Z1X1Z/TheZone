@@ -3916,7 +3916,7 @@ else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter
 
     
     float OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter)/40.,0.)).x;
-    float OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
+    float OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
     
   float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(loops+counter)/40.,0.)).x;
 
@@ -4469,7 +4469,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
     //if(float(i)>=hyperCoreBoosted)s-=vec2(-cos(d.y),-cos(d.x))*.5;
 
 OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-.5)/40.,0.)).x;
-OmniPetal =OmniDynamicPetalShift*((petals+6.)/6.);
+OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
   if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spin2(s,atan(s.y,s.x)*OmniPetal);
   
 
@@ -4590,6 +4590,8 @@ vec3 o = vec3(abs(s.x)/s.y*sign(s.x*s.y));
                                                 *vec3(1.-s.x/20.,s.x/8.-s.y/s.x/2000.,s.y/35.-s.x*s.y/888.)
                                                 *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));//can swizzle this for new colormodes
                                               if(oppositionalCoreFlop==0) o.g*=1.2;//seems to need more green
+                                              else if (continuumClover==2)
+                                              o.g*=1.1;
                                               o.r/=1.05;
                                                 }
                                 else if(colorCombo==-8) {
