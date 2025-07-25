@@ -426,7 +426,7 @@ if(Refractelate&&dstnce>refractelC){s.divideScalar( refractelC);} //refractelC/=
 var lastS = s.clone();
             var superUpcorer = 0.;
             if(feedTheLamb){superUpcorer =-1.+1./((Math.abs((Math.atan(s.y,s.x)/Math.PI/2+1.//+.5/petalNumber
-            %(1./petalNumber))-.5/6.))*petalNumber*Math.PI/2*2.)+s.length()/Math.log(2.)/2.*petalNumber/6.;
+            %(1./6.))-.5/6.))*petalNumber*Math.PI/2*2.)+s.length()/Math.log(2.)/2.*petalNumber/6.;
             hyperCoreBoosted-=superUpcorer;
             hyperCoreOUTPUT-=superUpcorer;
             }
