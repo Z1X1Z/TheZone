@@ -856,10 +856,11 @@ return new THREE.Vector3(s.x,s.y,hyperCoreOUTPUT);}
                            
 window.generated = true
 window.bigCloverGapSync = false;
+            let coreSwipeData=new Float32Array(window.innerHeight*window.innerWidth*4).fill(0);
                            function boot (){
     setUniformsToPlainName()
 
-        let coreSwipeData=new Float32Array(window.innerHeight*window.innerWidth*4).fill(0);
+        
 
     let strideClover=0;
     //if(loopsRun>2) console.log(Number.MAX_VALUE==new THREE.Vector2(Number.MAX_VALUE,0.).x);
