@@ -92,7 +92,7 @@ function tol( j,  t){
                                            )/Math.PI/2
                                             )%1.// (petalNumber)/6.
                                             )*squirgleData.length)]);
-    */
+    
     for(var x=2.; x<102.;x+=1.)
     {
         if ((nGenesis)+2.>x)
