@@ -3446,7 +3446,18 @@ return vec3(l+b+r+h);}
                               
                               
 vec4 tol(vec2 p, vec2 t){
-    p /=texture2D(squirgleDynamic,vec2(mod((atan(p.y,p.x)+PIdiv2*3.+PI/12.)/PI2,1.),0.)).x;
+    float petalNumber = petals+6.;
+
+  //  if(mod(atan(p.x,p.y)/PI2+1.,1.)<.25)p=vec2(0.);
+    p /=texture2D(squirgleDynamic,vec2(mod((atan(p.y,p.x)/((petalNumber)/6.)//
+                                            +PI2*4.
+            +PI/petalNumber/2.
+                                //            *6./petalNumber
+                                            )/PI2//*(6.+petals)/6.
+                                           // -petals/petalNumber
+                                            ,1.// (petalNumber)/6.
+                                            )
+                                            ,0.)).x;
     //float angleToLittleClover = PI2/12.;
     //if (length(p-vec2(-sin(-angleToLittleClover),cos(angleToLittleClover))*1.25)
      //   <(.25))p=vec2(0.);
@@ -3718,7 +3729,6 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
   //  if(cloverSlide&&wheel)hyperCore+=1.75/log(.5);
 
  //if(chop) hyperCore-=.25/log(.5);//1./(7.*log(.5));
- float petalNumber = petals+6.;
  if(feedTheLamb)  {
      hyperCore-=.25/log(.5);
      }

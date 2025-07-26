@@ -905,7 +905,7 @@ let c = document.body;//document.getElementById("container")
                                                                               var selectedConstellation=0;
 var scaleCorrection = 3.5;
                                                                               function  squirglize(x,y){
-                                          squirgleData[Math.round((Math.atan2(y,x)+Math.PI)/(Math.PI*2.)*squirgleSize)]=((x/minimumDimension*scaleCorrection)**2+(y/minimumDimension*scaleCorrection)**2)**.5*3./2.
+                                          squirgleData[Math.round((-Math.atan2(-x,-y)+Math.PI)/(Math.PI*2.)*(uniforms.petals.value+6)*2)]=((x/minimumDimension*scaleCorrection)**2+(y/minimumDimension*scaleCorrection)**2)**.5*3./2.
                                           
                                       }
 

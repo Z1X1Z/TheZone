@@ -314,8 +314,8 @@ function resetAll(){
                                          window.constellationSize=50;
                                          window.constellationData = new Float32Array(constellationSize*2).fill(.0);
                                          window.cloverConstellation=Array(constellationSize)
-                                         window.squirgleSize=12;
-                                         window.squirgleData = new Float32Array(squirgleSize).fill(1.);
+                                        window.squirgleSize=12;
+                                         window.squirgleData = new Float32Array(window.squirgleSize).fill(1.);
 
                                          if(window.INITIALIZED)
                                          for(var b = 0; b<cloverConstellation.length; b++)cloverConstellation[b]=new THREE.Vector2(0.,0.);
@@ -1098,7 +1098,10 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
     else if (key=="K")uniforms.Inherited.value=!uniforms.Inherited.value;
     
     else if (key=="y") //uniforms[ "petals" ].value = 3.7082039325-6;//
-        uniforms[ "petals" ].value -= 1.;
+    { uniforms[ "petals" ].value -= 1.;
+        
+        window.squirgleData = new Float32Array((uniforms.petals.value+6)*2).fill(1.);
+    }
     else if (key=="Y"){
         window.blankBackground = !window.blankBackground;
         if(window.blankBackground)
@@ -1107,7 +1110,11 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
             uniforms[ "colorCombo" ].value = -1;
         
     }
-    else if (key=="u") uniforms[ "petals" ].value += 1.;
+    else if (key=="u") {
+        uniforms[ "petals" ].value += 1.;
+        
+        window.squirgleData = new Float32Array((uniforms.petals.value+6)*2).fill(1.);
+    }
     else if (key=="U") uniforms[ "Character" ].value = (uniforms[ "Character" ].value+1.)%13;
 
     else if (key=="?"){

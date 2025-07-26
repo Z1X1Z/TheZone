@@ -1064,7 +1064,7 @@ function setDynamicSampler2ds(){
             // console.log(uniforms.constellationDynamic)
              
             // loadData(cloverSquirgle,squirgleData);//defined in wad, transfers from Vector2 to array
-             let squirgleTexture = new THREE.DataTexture( window.squirgleData, window.squirgleSize, 1,THREE.RedFormat,THREE.FloatType);
+             let squirgleTexture = new THREE.DataTexture( window.squirgleData, window.squirgleData.length, 1,THREE.RedFormat,THREE.FloatType);
             // console.log(constellationTexture)
              squirgleTexture.unpackAlignment=1
              squirgleTexture.needsUpdate=true;
