@@ -84,7 +84,7 @@ function tol( j,  t){
     p = p.clone().multiplyScalar(zoom).add(new THREE.Vector2(-coords.y,-coords.x));
     let petalNumber = petals+6;
 
-    p.multiplyScalar(1./squirgleData[(((Math.atan(p.y,p.x)/((petalNumber)/6.)//
+    p.multiplyScalar(1./squirgleData[(((Math.atan2(p.y,p.x)/((petalNumber)/6.)//
                                             +Math.PI*2*4.
             +Math.PI/petalNumber/2.
                                            )/Math.PI/2
@@ -357,7 +357,7 @@ var hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreB
                            var multCrossTwist=new THREE.Vector2(0.,0.);
 if(multiplicatorNexus&&dstnce!=0)//doesn't seem to upcore spokes like intended
 {
-    let spunMCT=spinVector(s,Math.atan(s.x,s.y)*1.5*petals/(6.+petals))*Math.sign(.5-morph)//*equilibriator/CORE_DELIMITER
+    let spunMCT=spinVector(s,Math.atan2(s.x,s.y)*1.5*petals/(6.+petals))*Math.sign(.5-morph)//*equilibriator/CORE_DELIMITER
         /dstnce;
     
     multCrossTwist=new THREE.Vector2(spunMCT.x,spunMCT.y);
@@ -422,7 +422,7 @@ var  CORE_DELIMITER=coreData[0];
     dstnce = s.length();
 
 if(spirated!=0.&&dstnce<2./3.)//CORE_DELIMITER)  //works well<(n-1)/n
-s.multiplyScalar( dstnce*2.*Math.PI/(Math.atan(s.y,s.x)-Math.PI*spirated));
+s.multiplyScalar( dstnce*2.*Math.PI/(Math.atan2(s.y,s.x)-Math.PI*spirated));
 dstnce = s.length();
 
 
@@ -431,7 +431,7 @@ if(Refractelate&&dstnce>refractelC){s.divideScalar( refractelC);} //refractelC/=
 
 var lastS = s.clone();
             var superUpcorer = 0.;
-            if(feedTheLamb){superUpcorer =-1.+1./((Math.abs((Math.atan(s.y,s.x)/Math.PI/2+1.//+.5/petalNumber
+            if(feedTheLamb){superUpcorer =-1.+1./((Math.abs((Math.atan2(s.y,s.x)/Math.PI/2+1.//+.5/petalNumber
             %(1./6.))-.5/6.))*petalNumber*Math.PI/2*2.)+s.length()/Math.log(2.)/2.*petalNumber/6.;
             hyperCoreBoosted-=superUpcorer;
             hyperCoreOUTPUT-=superUpcorer;
@@ -686,11 +686,11 @@ dstnce = s.length();
 
  //              s*=refactorCores;c*=refactorCores;
  
- if(petals!=0.&&dstnce<4./3.)s=spinVector(s,Math.atan(s.y,s.x)*(petals)/6.);
+ if(petals!=0.&&dstnce<4./3.)s=spinVector(s,Math.atan2(s.y,s.x)*(petals)/6.);
         
         if(dstnce<4./
            3. &&exponentialPetals!=0.)
-            s=  spinVector(s,Math.pow(2.,(Math.atan(s.y,s.x)/Math.PI+1.)*2.));
+            s=  spinVector(s,Math.pow(2.,(Math.atan2(s.y,s.x)/Math.PI+1.)*2.));
     dstnce=s.length();
         if(dilate){
           
@@ -759,7 +759,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
 OmniDynamicPetalShift =omniData[0];
 OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
 
-if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spinVector(s,Math.atan(s.y,s.x)*OmniPetal);
+if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spinVector(s,Math.atan2(s.y,s.x)*OmniPetal);
 
 if (cloverSlide||dynamicOvercore)
 {
