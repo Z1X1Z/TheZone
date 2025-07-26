@@ -2535,8 +2535,9 @@ bool isB=false, isF=false;
                         //if(abs(g.y)<9.)
                         float isEscaped = 0.;
                         if(abs(g.y)<4.&&g.x<2.)for (int f=0;f<26;f+=1)if(abs(z.y)>17.7&&(f>3||f==1)){
+                            if (f==1){l=vec4(0.);break;}
+
                             if(!wink){
-                                    if (f==1){l=vec4(0.);break;}
                                     l= vec4(vec3(-1.*(z.y)*sign(g.y)),1.);
                                     isEscaped=-2.;//length(z)/40.;//clouds and face
                                     break;
@@ -2548,7 +2549,9 @@ bool isB=false, isF=false;
                         else{
                             z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),2.0*z.x*z.y-g.y-t.y);
                             
-                           if(!wink)l=vec4(pitchColor.xyz*(1.-abs(z.y)*6.),.25);//smooths middle horn, removes some clouds
+                           if(!wink&&
+                              f==4)l=vec4(pitchColor.xyz*(1.-abs(z.y)*6.),.25);//smooths middle horn, removes some clouds
+                               
                             vec2 s=z;//vec2(z.x,-z.y);
                             
                             if(f==7&&s.x<0.)notEars=true;
@@ -5769,8 +5772,8 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                                                       // cross.y*=4./3./log(3.);
                                                       if(cross.x>0.)
                                                                                      cross.x = -cross.x;
-
-                                                                 moreHorns=-faceBlackAndWhite(cross*1.221221,-vec2(0.),false, 100).xyz;
+                                                                        
+                                                                 moreHorns=mannyFace.xyz-faceBlackAndWhite(cross*1.221221,-vec2(0.),false, 100).xyz;
                                                                  }
                                  //          mny=clamp(mny,0.,1.);
                                                                  
@@ -6221,8 +6224,7 @@ else {
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer+(-bodyWithArms.r-bodyWithArms.g-bodyWithArms.b)*20.
                                     +yourFace.xyzw-vec4(oneEye
                                                         ,0.)/2. -vec4(ARTICLE,0.),0.,1.);
-                                                                                float radialIntensity = length(r);
-                                if( moreHorns.r!=0.)ss+=vec4(vec3(moreHorns.r*radialIntensity*radialIntensity*radialIntensity),0.);//*pow(radialIntensity,3.)/2.;
+                                           //*pow(radialIntensity,3.)/2.;
                                     
                                 
                        vec4 faceFromShip =vec4(0.);// vec4(clamp(mannyFace.xyz,0.,1.)-backgroundFace*starshipMultiplier,0.)*(1.-isGreyISH*2.);
@@ -6308,7 +6310,7 @@ vec4 tree = vec4( clamp(
                                                                                     else if(isBlack==0.&&starship.w!=0.&&pixelShipGrey!=0. ){                         fin=vec4(vec3(.75),1.);
                                                                                          }
                                                                                     else if (pixelShipGrey!=0.)
-                                                                                    fin=vec4(pixelShipGrey+pixelShipGrey*fin.xyz,1.);
+                                                                                    fin=vec4(pixelShipGrey+pixelShipGrey*fin.xyz*2.,1.);
                                                                                     //else if (isGreyStaRivers==.5)fin=vec4(1.);
                                                                                     //else if(isBlackStaRivers!=1.)fin=vec4(0.);
                                                         /*
@@ -6316,7 +6318,8 @@ vec4 tree = vec4( clamp(
           else if(fin.r>=1.&&fin.g>=1.&&fin.b>=1.)fin-=(isGrey+isGreyDOT+pixelShipGrey+isGreyStaRivers+pixelShipGrey*1.5)*2.;
           else if((fin.r<=.0&&fin.g<=.0&&fin.b<=.0))fin+=(isGrey+isGreyDOT+isGreyStaRivers+pixelShipGrey)*1.5;
                                                           */
-
+                                                        float radialIntensity = length(r);
+        if( moreHorns.r!=0.)fin+=vec4(ss.xyz+vec3(moreHorns.r*pow(radialIntensity,3.5)),0.);
           vec3 confraculator = vec3(1.);
           if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
           vec3 card = vec3(1.);
