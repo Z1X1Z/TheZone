@@ -84,14 +84,14 @@ function tol( j,  t){
     p = p.clone().multiplyScalar(zoom).add(new THREE.Vector2(-coords.y,-coords.x));
     let petalNumber = petals+6;
 
-   /* p.multiplyScalar(1./squirgleData[(((
+    p.multiplyScalar(1./squirgleData[Math.round((((
                                         Math.atan2(p.y,p.x)/(
                                                              (petalNumber)/6.)//
                                             +Math.PI*2*4.
             +Math.PI/petalNumber/2.
                                            )/Math.PI/2
                                             )%1.// (petalNumber)/6.
-                                            )*squirgleData.length]);
+                                            )*squirgleData.length)]);
     */
     for(var x=2.; x<102.;x+=1.)
     {
