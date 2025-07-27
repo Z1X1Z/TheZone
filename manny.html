@@ -5858,7 +5858,7 @@ if (Character==4||Character==3) {heartSize=1.5;
                                                             
                                                             float direction = 1.;
                                                             if (Character==0&&holyeyes==1)
-                                                            {//heartSize*=1.5;
+                                                            {heartSize*=1.25;
                                                                 direction=-1.;
                                                                 }
                                                             vec2 heartPitch = vec2(0.);
@@ -6226,7 +6226,7 @@ else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
 else if (starship.w==254./255.)layeredOUT=starship;
          else if (holyeyes==1&&Character==0&& !((HEART.x==0.&&HEART.y==0.)||(HEART.y==0.&&HEART.z==0.)||(HEART.z==0.&&HEART.x==0.)))
                                  {layeredOUT=vec4(clamp(HEART-(bodyWithArms.x+bodyWithArms.y+bodyWithArms.z)/2.-starship.xyz/3.+4.*(-pong.r-pong.g-pong.b-linearFrequency.r-linearFrequency.g-linearFrequency.b),0.,1.)+(GOH.xyz//+pixelStarship.xyz
-                                                                                                                                                                                                                                  +starship.xyz)/4.+pong.xyz+linearFrequency.xyz+pillar+insideOut.xyz+bodyWithArms.xyz+mannyFace.x/64.-oneEye.r*2.,1.);
+                                                                                                                                                                                                                                  )/4.+pong.xyz+linearFrequency.xyz+pillar+insideOut.xyz+starship.xyz+bodyWithArms.xyz+mannyFace.x/64.-oneEye.r*2.,1.);
                        if(pixelShipGrey!=0.)layeredOUT=layeredOUT*pixelShipGrey+pixelShipGrey;
                        }
                                  else if(oneEye.r!=0.){layeredOUT=vec4(-oneEye.x*.25+starship.xyz/1.5+bodyWithArms.xyz*bodyWithArms.w,1.);
