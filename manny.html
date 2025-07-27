@@ -2715,7 +2715,7 @@ bool isB=false, isF=false;
                             
                       else if (f==17 &&p.x>.0&&p.x<.5&&s.x>-.2){
                           if(wink)
-                          {                                           if(rnd(abs(adjustedNote-6.)/1.5)==0.)                                            l=vec4(vec3(1.),0.);
+                          {                                           if(abs(p.y)<p.x&&rnd(abs(adjustedNote-6.)/1.5)==0.)                                            l=vec4(vec3(1.),0.);
                               }
                           else
 
@@ -6225,8 +6225,8 @@ else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
                                  else if(isGreyISH>=129./255.&&isGreyISH!=1.)layeredOUT=vec4(vec3(.5),1.);
 else if (starship.w==254./255.)layeredOUT=starship;
          else if (holyeyes==1&&Character==0&& !((HEART.x==0.&&HEART.y==0.)||(HEART.y==0.&&HEART.z==0.)||(HEART.z==0.&&HEART.x==0.)))
-                                 {layeredOUT=vec4(clamp(HEART-(bodyWithArms.x+bodyWithArms.y+bodyWithArms.z)/2.-starship.xyz/3.-oneEye.r+4.*(-pong.r-pong.g-pong.b-linearFrequency.r-linearFrequency.g-linearFrequency.b),0.,1.)+(GOH.xyz//+pixelStarship.xyz
-                                                                                                                                                                                                                                  +starship.xyz)/4.+pong.xyz+linearFrequency.xyz+pillar+insideOut.xyz+bodyWithArms.xyz+mannyFace.x/64.,1.);
+                                 {layeredOUT=vec4(clamp(HEART-(bodyWithArms.x+bodyWithArms.y+bodyWithArms.z)/2.-starship.xyz/3.+4.*(-pong.r-pong.g-pong.b-linearFrequency.r-linearFrequency.g-linearFrequency.b),0.,1.)+(GOH.xyz//+pixelStarship.xyz
+                                                                                                                                                                                                                                  +starship.xyz)/4.+pong.xyz+linearFrequency.xyz+pillar+insideOut.xyz+bodyWithArms.xyz+mannyFace.x/64.-oneEye.r*2.,1.);
                        if(pixelShipGrey!=0.)layeredOUT=layeredOUT*pixelShipGrey+pixelShipGrey;
                        }
                                  else if(oneEye.r!=0.){layeredOUT=vec4(-oneEye.x*.25+starship.xyz/1.5+bodyWithArms.xyz*bodyWithArms.w,1.);
