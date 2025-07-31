@@ -3570,8 +3570,11 @@ vec4 tol(vec2 p, vec2 t){
                                 }
 
 
-vec2 colorAccumulator =vec2(1.);
-vec3 heartColors = vec3(0.);
+                         vec2 colorAccumulator =vec2(1.);
+
+                         float bubble =0.;
+
+                         vec3 heartColors = vec3(0.);
 float lfc = length(freed(constellationCoord));
 
    
@@ -3952,6 +3955,8 @@ s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
 //if(counter>0.)s=spin2(s,whirlpoolMeta*dstnce*.75/3.*PI);
 
 dstnce = length(s);
+if(dstnce<2./3.)bubble=dstnce;
+
                           vec2 cloverMAPNeutral = ((spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment)));
                                                     
                                vec2   cloverMAP = cloverMAPNeutral+.5;
@@ -4002,7 +4007,6 @@ dstnce = length(s);
             }
 //}
    colorAccumulator+=s;
-
    if(Refractelate&&dstnce>refractelC){s/=refractelC;} //refractelC/=4./3.;}
    if((counter==1.&&oppositionalCoreFlop==1)||oppositionalCoreFlop==2)s=spin2(s,PI);
    vec2 lastS = s;//before or after flop?
@@ -4676,6 +4680,12 @@ vec3 o = vec3(abs(s.x)/s.y*sign(s.x*s.y));
                                  }
                       o=beta*o;
 
+                    if(Inherited&& bubble<2./3.)
+                      {
+                      float bubbledOut = 1.5*bubble;
+                      o-=bubbledOut;
+                      //o=clamp(o,0.,1.);
+                      }
   float isBlack =1.;//or black
   if (starship.x==0.0&&starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=0.;
                       
