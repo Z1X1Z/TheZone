@@ -4685,6 +4685,7 @@ vec3 o = vec3(abs(s.x)/s.y*sign(s.x*s.y));
                       float bubbledOut = 1.5*bubble;
                       o-=bubbledOut;
                       //o=clamp(o,0.,1.);
+
                       }
   float isBlack =1.;//or black
   if (starship.x==0.0&&starship.x==starship.y&& starship.y==starship.z&&starship.w>3.5/255.)isBlack=0.;
@@ -4993,10 +4994,18 @@ const float brideWidth=1.27;
                   // g.x+=.5;
                    vec2 z=g;
                    for (int f=0;f<75;f+=1)if(abs(z.x+z.y)>20.&&f>4){x=z.y;break;}
+
+                   else {z=2.*vec2(-1./((1.2*z.x*z.x-(1.37-t.y*.37)
+                       *z.y*z.y)-g.x*1.2+t.x),((1.37-t.x*.37)
+                       *z.x*z.y-1.2*g.y+t.y));
+
+z.x=pow(abs(z.x),.777-t.x/49.);}
+                   /*
+                   for (int f=0;f<75;f+=1)if(abs(z.x+z.y)>20.&&f>4){x=z.y;break;}
                    else {z=2.*vec2(-1./(1.2*(z.x*z.x-1.37*z.y*z.y)-g.x*1.2+t.x),(1.37
                                                                                 *z.x*z.y-1.2*g.y+t.y));
 
-                         z.x=pow(abs(z.x),.777-t.x/49.);}
+                         z.x=pow(abs(z.x),.777-t.x/49.);}*/
                    float mingle = 22.5;
                    
                          if(x<0.) x+=mingle;
