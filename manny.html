@@ -3536,14 +3536,7 @@ vec4 tol(vec2 p, vec2 t){
                         //if(clvrVariant4!=0.)
                         p/=1.25;
                         if(externalCores==0.)p/=1.25;
-                        if(cloverso)
-                        {
-                            float outerMargin =atan(p.y,p.x);
-
-                            p=
-       (-vec2(-sin(outerMargin),-cos(outerMargin)).yx-(p));
-
-       }
+                   
                        // if(cloverso) p=(2./3.-length(p))*p;
 
                          vec2 pWithoutChiralizer = p;
@@ -3644,7 +3637,14 @@ const float crs = 60.;//this is the mandelbrot and original inheritance colormod
                         }
  else break;
  bool inCenterCore =c<twoThirds;
+ if(cloverso)
+ {
+     float outerMargin =atan(s.y,s.x);
 
+     s=
+(-vec2(-sin(outerMargin),-cos(outerMargin)).yx*2.-(s));
+
+}
 // if(refactorCores!=1.){s*=(1.+lfc/2.);c*=(1.+lfc/2.);}
 
 if(refactorCores>1.){
