@@ -4430,7 +4430,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
    */
    
 
-    if(spinTowardsMe) if(float(i)>=hyperCoreBoosted+.5)s=spin2(s,atan(d.y,d.x));
+    if(spinTowardsMe) if(float(i)>=hyperCoreBoosted-.5)s=spin2(s,atan(d.y,d.x));
 
    // if(distributor)s=spin2(s,distributorFACTOR);
    float cloverOrDaisyOnTop = counter;
@@ -6189,7 +6189,7 @@ if(mny.r!=0.||mny.g!=0.||mny.b!=0.)mny-=pixelShipGrey*12.;
                        }
                                  heartWarmed=clamp(heartWarmed,-1.5,1.5);
 
-                               if(heartWarmed.x!=0.)  heartWarmed-=zoomer/4.;
+                               if(heartWarmed.x!=0.)  heartWarmed-=zoomer/8.;
                                  mny=clamp(mny,-1.,1.);
                                  if(mny.x==mny.y&&mny.y==mny.z&&Character==0&&mannyFace.w!=-.25&&oneEye.r==0.)
                                  {
