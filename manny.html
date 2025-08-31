@@ -2411,6 +2411,8 @@ ret= vec4(clamp(
                            }
                        return h;
                        }
+                                     const    float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;
+
                        
                                                       vec4 gatesOfHeaven( vec2 uv, float noteskew )//Shekina Glory
                                                       {
@@ -2449,9 +2451,13 @@ if(uv.x<1./3.&&maxSamp!=0.) //could 1./3. but then the spill over (if any) isn't
                                                 //        frAmp-=minSamp;
                                               //  frAmp/=notesIncludedInPixel;
                                          //  frAmp/=255.;
- // frAmp/=(maxSamp);//-minSamp);
-float threshSide = pow(frAmp,1.75)/1.75*
-((1.-uv.x*3.))*min(resolution.x,resolution.y)/max(resolution.y,resolution.x);//the corners don't seem to match on adjacent sides
+                                         
+                                         // frAmp*=2.;
+                                          frAmp/=6.;
+ //if(maxSamp!=0.) frAmp/=(maxSamp);//-minSamp);
+float threshSide = 1.-(frAmp)//pow(frAmp,1.75)/1.75
+*((1.-
+  uv.x*3.))*min(resolution.x,resolution.y)/max(resolution.y,resolution.x);//the corners don't seem to match on adjacent sides
 /*
 if(min(resolution.x,resolution.y)==resolution.x)threshSide=uv.x;
 else threshSide=uv.x;
@@ -2459,11 +2465,10 @@ else threshSide=uv.x;
   
                                                          //  brightness/=10.;
                                                      //    if(rnd(mod(noteOfSide+12.*12.,12.))==-3.)
-                                                     if(threshSide>.9)
-                                                                                          o=vec4(1.);
-                     if(threshSide>1.)
-                                                          o=vec4(.5);
-                                                       
+             
+                                                                if(threshSide>1./log(3.))           o=vec4(1.);
+                                                                if(threshSide>logStabilizationConstant)
+                                                                                                     o=vec4(.5);
                                                        
                                                       float sideSegmentMediated = mod(noteOfSide*12.+12.*12.+.5,12.)-.5;
                                                       
@@ -3410,7 +3415,6 @@ return vec3(l+b+r+h);}
                }
             
                                   
-                              const    float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;
 
                               
                              vec2 starBirth(vec2 p){
@@ -3444,7 +3448,23 @@ return vec3(l+b+r+h);}
                               return p;
                             }
                               
+                              vec4 roundEyes(vec2 ff,vec2 moveDynamic){
+float leafDivGR=leaf/gr;
+
+                                     vec4 insideOut=vec4(0.);                                          vec2 arndEyes = ff;
+                                                                        if( length   (arndEyes)<-leaf*gr)                {
+                                                                            float outerMargin =atan(arndEyes.y,arndEyes.x);
+                               insideOut=faceBlackAndWhite(
+                                                           //(-leaf-length(arndEyes))*
+                                                         
+                                                           (-vec2(-sin(outerMargin),-cos(outerMargin)).yx/-leafDivGR-arndEyes*-leafDivGR)
+                                                           
+                                                           ,-vec2(moveDynamic.x,-moveDynamic.y*2.5),false, 3);
+
+                         }
+                              return insideOut;
                               
+                                                                        }
 vec4 tol(vec2 p, vec2 t){
     float petalNumber = petals+6.;
 
@@ -3926,6 +3946,7 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
                                                       bool compensate=false;
                                                     //  float  logStabilizationConstantA=logStabilizationConstant;//+(1.-logStabilizationConstant)/2.;
                                                      // float  logStabilizationConstantC=log(3.);//+(1.-logStabilizationConstant)/2.;
+                                                      vec4 eyeScroll= vec4(0.);
 if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
@@ -3990,7 +4011,7 @@ if(dstnce<2./3.)bubble=dstnce;
                        //*length((vUv-.5)*max(resolution.x,resolution.y)/min(resolution.x,resolution.y));//+texture2D(STAR,cloverMAP);
                             
                            }
-
+              //   eyeScroll= roundEyes(s,vec2(0.));
             if(onehundredfortyfourthousand)
             {
                  
@@ -4488,8 +4509,13 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
 OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-.5)/40.,0.)).x;
 OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
   if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spin2(s,atan(s.y,s.x)*OmniPetal);
-  
-
+  /*
+  float fanLoop = mod(loops,1.);
+ float v = atan(s.y,s.x)*fanLoop;
+  loops-=v;
+  hyperCoreBoosted+=v;
+  hyperCoreOUTPUT+=v;
+  */
  if (cloverSlide||dynamicOvercore)
    {
        //float bIs =dstnce*sqrt2;
@@ -4700,7 +4726,7 @@ vec3 o = vec3(abs(s.x)/s.y*sign(s.x*s.y));
                     //  if (starship.x!=0.&&starship.x!=1.&&starship.x!=.5&&(starship.x+starship.y>=255.-3.5||starship.y+starship.z>=255.-3.5||starship.z+starship.x>=255.-3.5)&&starship.w==1.)spirographTranslucer=.75-(starship.x+starship.y+starship.z)/2.;
                       
                       
-o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z)*7.*starship.w-(sevenSuns.x+sevenSuns.y+sevenSuns.z)*7.,0.,1.)+starship.xyz*spirographTranslucer+sevenSuns.xyz;
+o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo+eyeScroll.xyz)-(starship.x+starship.y+starship.z)*7.*starship.w-(sevenSuns.x+sevenSuns.y+sevenSuns.z)*7.,0.,1.)+starship.xyz*spirographTranslucer+sevenSuns.xyz;
                       o*=isBlack;
                       o+=(isBlack-1.)*100.;
                       o+=isGrey;
@@ -5449,7 +5475,9 @@ vec3 sevenPillars(vec2 p){
                   return vec3(s.y/s.x,-s.x*2.,-s.y*s.x);
                   }
     else return vec3(0.);
+    
 }
+                                                      
       void main(){
                       vec2 aspectRatio = resolution/max(resolution.x,resolution.y);
 
@@ -5759,36 +5787,29 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                                                                                               }
                                                                  vec4 insideOut = vec4(0.);
                                                                  if(inseyedOut!=0){
+                       vec2 bounce =characterP;
                        float leafDivGR=leaf/gr;
-                                                                 vec2 arndEyes = characterOnTrailP;
-                                                                 if(inseyedOut==2) arndEyes/=1.75;
-                                                                 else arndEyes*=-leafDivGR;
-                                                                 if( length   (arndEyes)<-leaf*gr)                {
-                                                                     float outerMargin =atan(arndEyes.y,arndEyes.x);
-                        insideOut=faceBlackAndWhite(
-                                                    //(-leaf-length(arndEyes))*
-                                                  
-                                                    (-vec2(-sin(outerMargin),-cos(outerMargin)).yx/-leafDivGR-arndEyes*-leafDivGR)
-                                                    
-                                                    ,-vec2(moveDynamic.x,-moveDynamic.y*2.5),false, 3);
 
-                       if(insideOut.w==.5){
-                        //  if(oneEye.r!=0.) oneEye/=1.5;
-                        if(insideOut.g==0.){
-                            if(insideOut.b==0.)insideOut.r/=1.5;
-                            else  if(insideOut.r==0.)insideOut.b/=1.33;}
-                        else if((insideOut.g>insideOut.b&&insideOut.r==0.)||(insideOut.g>insideOut.r&&insideOut.b==0.))insideOut/= 5./3.;
-                        
-                          //insideOut=vec4(insideOut.r/1.3,insideOut.g,insideOut.b,insideOut.w);
-                          // insideOut/=1.1;
-                           }
-                       else
-                       {insideOut=vec4(clamp(insideOut.xyz,.05,.9),1.);
-                           insideOut+=clamp(AM.r,0.,1.)/2.;
-                           }
-                       }
+                       if(inseyedOut==2) bounce/=1.75;
+                       else bounce*=-leafDivGR;
 
-                                                                 }
+                     insideOut= roundEyes(bounce,moveDynamic);
+                     if(insideOut.w==.5){
+                      //  if(oneEye.r!=0.) oneEye/=1.5;
+                      if(insideOut.g==0.){
+                          if(insideOut.b==0.)insideOut.r/=1.5;
+                          else  if(insideOut.r==0.)insideOut.b/=1.33;}
+                      else if((insideOut.g>insideOut.b&&insideOut.r==0.)||(insideOut.g>insideOut.r&&insideOut.b==0.))insideOut/= 5./3.;
+                      
+                        //insideOut=vec4(insideOut.r/1.3,insideOut.g,insideOut.b,insideOut.w);
+                        // insideOut/=1.1;
+                         }
+                     else
+                     {insideOut=vec4(clamp(insideOut.xyz,.05,.9),1.);
+                         insideOut+=clamp(AM.r,0.,1.)/2.;
+                         }
+                     }
+                                                                 
                                                                  vec3 moreHorns = vec3(0.);
                                                                  if (elderHorns>0)
                                                                  {
