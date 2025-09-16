@@ -23,6 +23,7 @@ window.uniformsInitial = {
 coreDilation:{value:0.},
 fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:44100./1024.},
     
+movieTime:{value:-1.},
 zoomOutRatchetThreshold:{value:0.},
 eyeSingle:{value:true},
 constellation:{value:false},
@@ -221,7 +222,9 @@ function resetAll(){
         if(window.useCDN||location.hash.includes(".b")||location.hash.includes(".c"))
             callKey(new KeyboardEvent('keydown', {'key': "b", 'altKey':true, 'keyCode':key.charCodeAt(0)}));
     }
-
+       window.playMovie=false;
+       window.movieStartTime=-1;
+                  
     window.DAW=false;
     if(!("DAWSonicTouchArray" in window))    window.DAWSonicTouchArray=[];
         window.osmdSound = false;
@@ -498,8 +501,14 @@ window.key = " ";
                 
                 
                 //meta keys like ctrlKey must be processed first and should have symbol preferably
-                
-                if(key == "J" && event.ctrlKey)
+                        if((key == "Z") && event.altKey&&event.ctrlKey)
+                    {window.playMovie=!window.playMovie;
+                     if(window.playMovie) {  window.movieStartTime= window.TIMESTAMP;
+                        uniforms.movieTime.value= window.TIMESTAMP/1000.;
+                     }
+                     else uniforms.movieTime.value=-1.;
+                    }
+                else if(key == "J" && event.ctrlKey)
                     uniforms.inseyedOut.value=(1+uniforms.inseyedOut.value)%3;
                 else   if(key == "G" && event.ctrlKey)                uniforms.cloverso.value=!uniforms.cloverso.value;
                 

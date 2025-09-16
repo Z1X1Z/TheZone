@@ -1631,8 +1631,12 @@ Open MusicXML file
     <script>
         if(window.readerSet)document.getElementById("menuDivider").style.width="50%"
     </script>
-    <div id="container"> </div>
-    
+
+  <div id="timeNumber" style="color:white;font-size:20em;text-align: center;   top: 0%;      width: 100%;z-index:5;position:absolute;"></div>
+  <div id="numberExplanation" style="color:white;font-size:7em;text-align: center;   top: 50%;      width: 100%;z-index:5;position:absolute;"></div>
+
+    <div id="container"> 
+      </div></div></div>
     <script src="wadLoader.js"> </script>
     <div>
     <div id="textWindow" class="onBottom" style="z-index:3;font-size:16;"></div>
@@ -1869,7 +1873,7 @@ void main(){
 <script id="fragmentShader" type="x-shader/x-fragment">
     varying vec2 vUv;
     
-    
+    uniform float movieTime;
     uniform float concertKeyTuning;
     uniform float noteFrozen;
     uniform int cellularDivision;
@@ -5477,6 +5481,23 @@ vec3 sevenPillars(vec2 p){
     else return vec3(0.);
     
 }
+ 
+vec3 movie(vec2 p){
+    vec3 MOVIE=vec3(0.);
+    if(movieTime>0.&&movieTime<2.)MOVIE=tol(p*zoom,vec2(0.)).xyz;
+    else if (movieTime>=2.&&movieTime<3.)MOVIE=torso(p,vec2(0.),false).xyz;
+    else if (movieTime>=3.&&movieTime<4.)
+    {
+        vec4 MOVIEbuffer= faceBlackAndWhite(p*1.221221,vec2(0.),false,-1);
+        if (MOVIEbuffer.w==-.25) MOVIE=vec3(1.);
+        else MOVIE=MOVIEbuffer.xyz;
+    }
+  else if (movieTime>=4.&&movieTime<5.)MOVIE= heart(p+vec2(0.5,0.),vec2(0.));
+    /*    else if (movieTime>=5.&&movieTime<6.)MOVIE=torso(p,vec2(0.),false).xyz;
+        else if (movieTime>=6.&&movieTime<7.)MOVIE=legs(p,vec2(0.));
+*/
+    return MOVIE;
+}
                                                       
       void main(){
                       vec2 aspectRatio = resolution/max(resolution.x,resolution.y);
@@ -5809,7 +5830,6 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                          insideOut+=clamp(AM.r,0.,1.)/2.;
                          }
                      }
-                                                                 
                                                                  vec3 moreHorns = vec3(0.);
                                                                  if (elderHorns>0)
                                                                  {
@@ -6150,6 +6170,8 @@ if(mny.r!=0.||mny.g!=0.||mny.b!=0.)mny-=pixelShipGrey*12.;
 
 }
 
+                                                            if(oneEye.r!=0.&&pixelShipGrey!=0.)oneEye=vec3(pixelShipGrey);
+
                                  heartWarmed-=(pillar.x+pillar.y+pillar.z)*100.;
             vec3 seeThrough = pixelStarship.xyz+(1.-pixelStarship.w*pixelStarship.w);
              
@@ -6232,7 +6254,9 @@ if(mny.r!=0.||mny.g!=0.||mny.b!=0.)mny-=pixelShipGrey*12.;
                        mny+=clamp(clothes-bodyWithArms.w*100.,0.,1.)+bodyWithArms.xyz*bodyWithArms.w*clamp(clothes*100000.,0.,1.);
                        }
                                                   vec4 layeredOUT =vec4(0.);
-                    if(constellation||squirgle==1)layeredOUT=vec4(zoomer,1.);
+                          // if (isBlack==1.&&starship.w==1.)layeredOUT=vec4(vec3(0.),1.);
+                          if(movieTime<=5.&&movieTime>=0.)layeredOUT=vec4(movie(characterP),1.);
+                   else if(constellation||squirgle==1)layeredOUT=vec4(zoomer,1.);
                             //     else if((starship.x>1.&&starship.y>1.&&starship.z>1.)||(starship.x<.0&&starship.y<.0&&starship.z<.0)&&starship.w!=0.)layeredOUT=vec4(vec3(starship.r),1.);
                                  else if(length(p)<2.*sqrt2/min(resolution.x,resolution.y)) layeredOUT=vec4(zoomer,1.);
                                 
@@ -6404,8 +6428,10 @@ fin/vec4(confraculator
        //  gl_FragColor= vec4(.5);
        
        
+
                    }
-                        gl_FragColor=layeredOUT;
+                   
+                        gl_FragColor=layeredOUT;//vec4(movie(characterP),1.);//
 //things known to cause bugs on some android chrome: heart (divides by zero), linear eq,waveform, "144000" men and women in clover, articles
                                                                  
                                          }

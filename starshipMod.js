@@ -1958,8 +1958,12 @@ function runOSMD (){
                                     
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
 
-    
-     
+     if(window.playMovie)
+     {
+uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000.;
+     }
+    // console.log(uniforms.movieTime.value)
+    // console.log(     window.playMovie)
      if(!sheetTranslucent&& bottomOfScreenHeight != document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight)onWindowResize();//readjust for verbose
     uniforms[ "time" ].value = timestamp/1000.+window.startTimeSecondMantissaMagnified;
 
@@ -3359,6 +3363,62 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
                                            */
    
                                      freezeTop();
+                                          if(window.playMovie)
+                                          {
+                                            if(uniforms.movieTime.value<1||(uniforms.movieTime.value>3&&uniforms.movieTime.value<5))
+                                            {
+                                                window.zoom = 1
+                                            uniforms.zoom.value=1;
+                                        
+                                    }
+                                    else  if(uniforms.movieTime.value<5)
+                                            {
+                                                window.zoom = .5
+                                            uniforms.zoom.value=.5;
+                                        
+                                    }
+                                    if(uniforms.movieTime.value<3)
+                                    {
+    uniforms.coords.value.x=0;
+                                            uniforms.coords.value.y=0;
+                                            coordX=0;
+                                            coordY=0;
+                                    }
+                                          }
+            if(uniforms.movieTime.value<7)
+            {
+/*const ctx = container.getContext("2d");
+
+ctx.font = "50px Arial";
+ctx.fillText("Hello World",10,80);*/
+          if (uniforms.movieTime.value<0.||uniforms.movieTime.value>5)  
+  {            
+                                    document.getElementById("numberExplanation").innerHTML="";
+                                    document.getElementById("timeNumber").innerHTML="";
+
+        }
+
+          else if(Math.floor(uniforms.movieTime.value)<=4)  
+            {
+              if(Math.floor(uniforms.movieTime.value)==0)  
+                                    document.getElementById("numberExplanation").innerHTML="x=log(x^3)=3"
+              if(Math.floor(uniforms.movieTime.value)==1)  
+                                    document.getElementById("numberExplanation").innerHTML="x*=2"
+                                              if(Math.floor(uniforms.movieTime.value)==2)  
+                                    document.getElementById("numberExplanation").innerHTML="x=√(2/(x^2+1))=1"
+                                              if(Math.floor(uniforms.movieTime.value)==3)  
+                                    document.getElementById("numberExplanation").innerHTML="x=-1/(0^2-∞)=0"
+                                    if(Math.floor(uniforms.movieTime.value)==4)  
+                                    document.getElementById("numberExplanation").innerHTML="0=0+0=<br>4*0=16*0=<br>0^2=1=0^2-1"
+              if(Math.floor(uniforms.movieTime.value)<=3)  
+                document.getElementById("timeNumber").innerHTML=Math.abs(3-Math.floor(uniforms.movieTime.value))
+
+           else if (Math.floor(uniforms.movieTime.value)==4)document.getElementById("timeNumber").innerHTML="0=1"
+         /*  else if (Math.floor(uniforms.movieTime.value)==5)document.getElementById("timeNumber").innerHTML="√2"
+           else if (Math.floor(uniforms.movieTime.value)==6)document.getElementById("timeNumber").innerHTML="3"
+           */
+            }
+        }
                                                        
    if(window.starClover)
                      {
