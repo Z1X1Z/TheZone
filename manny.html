@@ -1484,6 +1484,8 @@ Reset Zoom![L]</a><br>
         <script>
             document.getElementById("strings").value = "8 13 18 23 27 32"
             </script>
+             <input type="file" id="audioFile">
+             <br>
         <select name="song" id="song"
               onchange='
                 if(this.value!="none"){
@@ -6153,9 +6155,10 @@ if(starOnDot==1||starOnDot==2){
 vec4 starBuffer = vec4(0.);
 for (float x = 0.; x<12.;x++) starBuffer+=starns(uVu,x);
 
+//if(isGrey==0.)
+
 if (starBuffer.x==starBuffer.y&& starBuffer.y==starBuffer.z&&starBuffer.z!=0.){
     
-//if(isGrey==0.)
 pixelShipGrey=starBuffer.x;
 //if((bodyWithArms.r!=0.||bodyWithArms.g!=0.||bodyWithArms.b!=0.))bodyWithArms=vec4(vec3(pixelShipGrey*12.),1.);
 }

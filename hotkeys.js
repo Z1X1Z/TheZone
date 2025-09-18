@@ -18,7 +18,22 @@ let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   let mf = (Math.max(window.innerHeight,window.innerWidth)/Math.min(window.innerHeight,window.innerWidth));//advantage of translation over zoom (right?)
 let MR = mf/zoomFrames;
 const secondsToEdge=window.pixelShaderSize/4./pixelShaderToStarshipRATIO;
+async function loadAudioFile() {
+                                    arrayBufferAudioIn = await window.fileInput.arrayBuffer();
+                                    audioBufferFromFile = await audioX.decodeAudioData(arrayBufferAudioIn);
 
+                                    return "loaded"
+                                }
+async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
+              sourceAudioInput = audioX.createBufferSource();
+                        sourceAudioInput.buffer=audioBufferFromFile;
+                              source.disconnect(analyser);
+                              sourceAudioInput.connect(analyser)
+                                 
+                                                  sourceAudioInput.start();
+                                                  console.log(bb);
+                                                  return bb
+                           }
 window.uniformsInitial = {
 coreDilation:{value:0.},
 fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:44100./1024.},
@@ -311,7 +326,15 @@ function resetAll(){
 
                                          window.onO = false;
     window.EldersLeg = 24;
-                                         
+
+    
+                                       window.fileInput="no file";  
+                                       window.sourceAudioInput="none";
+                                       window.audioBufferFromFile = "no buffer";
+                                       window.arrayBufferAudioIn = "not loaded";
+
+
+
                        window.coreData = new Float32Array(40).fill(1./-leaf);
                        window.omniData = new Float32Array(40).fill(0.);
                                          window.constellationSize=50;
@@ -505,8 +528,18 @@ window.key = " ";
                     {window.playMovie=!window.playMovie;
                      if(window.playMovie) {  window.movieStartTime= window.TIMESTAMP;
                         uniforms.movieTime.value= window.TIMESTAMP/1000.;
+
+                        window.fileInput =  document.getElementById('audioFile');
+                        window.fileInput =  window.fileInput.files[window.fileInput.files.length-1];
+                        console.log(fileInput)
+                            let asyncDone =  finishLoadingAudioFile();
+                        console.log(asyncDone)
                      }
-                     else uniforms.movieTime.value=-1.;
+                     else {
+                        uniforms.movieTime.value=-1.;
+                           window.sourceAudioInput.disconnect(analyser);
+source.connect(analyser);
+                     }
                     }
                 else if(key == "J" && event.ctrlKey)
                     uniforms.inseyedOut.value=(1+uniforms.inseyedOut.value)%3;
