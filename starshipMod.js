@@ -1085,9 +1085,12 @@ function setMicInputToStarPIXEL(){
                  //console.log(nyq)
                  if(withinMaxsafeSizeBins){
                      let size = (withinMaxsafeSizeBins)?numberOfBins:1;
-                     let dataArrayBuff=dataArrayBuffer=new Float32Array( size ).fill(0.);
+                     let dataArrayBuffer=new Float32Array( size ).fill(0.);
+                   
+
                      for (var x = 0; x < numberOfBins; x++)dataArrayBuffer[x]=dataArray[x]/255.;
                      
+
                      // callibratorArray //dataArrayBuffer
                      let micThrough = null;
                      if(unitTest)micThrough= callibratorArray;
@@ -2017,8 +2020,19 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000.;
 
                                     
                                     if (window.micOn&&!touchOnlyMode){
-                                        analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
+                                  
+                                           // var inputData = new Float32Array(bufferSize);
+
+                                            analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
                                         analyser.getByteFrequencyData(  dataArray);
+
+
+                                       if(window.playMovie)
+                                        {
+                                            for(var n=0;n<dataArray.length;n++)dataArray[n]=dataArray[n]/2.;//quieter
+                                            for(var n=0;n<inputData.length;n++)inputData[n]=inputData[n]/2.;//quieter
+                                        }
+                                        
                                         setMicInputToStarPIXEL();
                                     }
                                          
