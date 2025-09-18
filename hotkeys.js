@@ -29,8 +29,9 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                         sourceAudioInput.buffer=audioBufferFromFile;
                               source.disconnect(analyser);
                               sourceAudioInput.connect(analyser)
-                                 
+                                     sourceAudioInput.connect(audioX.destination);
                                                   sourceAudioInput.start();
+                                                  
                                                   console.log(bb);
                                                   return bb
                            }
@@ -537,6 +538,8 @@ window.key = " ";
                      }
                      else {
                         uniforms.movieTime.value=-1.;
+                                                                          sourceAudioInput.stop();
+
                            window.sourceAudioInput.disconnect(analyser);
 source.connect(analyser);
                      }
