@@ -30,10 +30,10 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                               source.disconnect(analyser);
                               sourceAudioInput.connect(analyser)
                                      sourceAudioInput.connect(audioX.destination);
-                                                  sourceAudioInput.start();
-                                                  
-                                                  console.log(bb);
-                                                  return bb
+                                       window.needsToStart=true;
+
+                                                
+                                                  return audioBufferFromFile.duration
                            }
 window.uniformsInitial = {
 coreDilation:{value:0.},
@@ -330,7 +330,10 @@ function resetAll(){
 
     
                                        window.fileInput="no file";  
+                                         window.songDuration=-1;
                                        window.sourceAudioInput="none";
+                                       window.needsToStart=false;
+                                       window.movieSpeed=4.;
                                        window.audioBufferFromFile = "no buffer";
                                        window.arrayBufferAudioIn = "not loaded";
 
@@ -532,12 +535,12 @@ window.key = " ";
 
                         window.fileInput =  document.getElementById('audioFile');
                         window.fileInput =  window.fileInput.files[window.fileInput.files.length-1];
-                        console.log(fileInput)
-                            let asyncDone =  finishLoadingAudioFile();
-                        console.log(asyncDone)
+                          let finalization =  finishLoadingAudioFile();
                      }
                      else {
                         uniforms.movieTime.value=-1.;
+                                                               window.needsToStart=false;
+
                                                                           sourceAudioInput.stop();
 
                            window.sourceAudioInput.disconnect(analyser);

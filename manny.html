@@ -6258,7 +6258,8 @@ if(mny.r!=0.||mny.g!=0.||mny.b!=0.)mny-=pixelShipGrey*12.;
                        }
                                                   vec4 layeredOUT =vec4(0.);
                           // if (isBlack==1.&&starship.w==1.)layeredOUT=vec4(vec3(0.),1.);
-                          if(movieTime<=5.&&movieTime>=0.)layeredOUT=vec4(movie(characterP),1.);
+                          if(movieTime<=5.&&movieTime>=0.||movieTime==-2.)layeredOUT=vec4(movie(characterP),1.);
+                          else if(movieTime==-2.)layeredOUT=vec4(0.);
                    else if(constellation||squirgle==1)layeredOUT=vec4(zoomer,1.);
                             //     else if((starship.x>1.&&starship.y>1.&&starship.z>1.)||(starship.x<.0&&starship.y<.0&&starship.z<.0)&&starship.w!=0.)layeredOUT=vec4(vec3(starship.r),1.);
                                  else if(length(p)<2.*sqrt2/min(resolution.x,resolution.y)) layeredOUT=vec4(zoomer,1.);

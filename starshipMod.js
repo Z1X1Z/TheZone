@@ -1961,9 +1961,9 @@ function runOSMD (){
                                     
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
 
-     if(window.playMovie)
+     if(window.playMovie&&uniforms.movieTime.value!=-2)
      {
-uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000.;
+uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.movieSpeed;
      }
     // console.log(uniforms.movieTime.value)
     // console.log(     window.playMovie)
@@ -2032,12 +2032,9 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000.;
                                             for(var n=0;n<dataArray.length;n++)dataArray[n]=dataArray[n]/2.;//quieter
                                             for(var n=0;n<inputData.length;n++)inputData[n]=inputData[n]/2.;//quieter
                                         }
-                                        
+
                                         setMicInputToStarPIXEL();
                                     }
-                                         
-                                    
-                                    
                                     
                                     totalAMP = 0.;
                                     for(var n=0; n<inputData.length;n++)totalAMP+=Math.abs(inputData[n]);
@@ -2227,7 +2224,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
         //scene.add(line)
        let depthSpirograph =-1.;
 
-     if(spirographMODE!=0)   for (let r= 0.; r < bufferPortion; r +=1) {//spirray size supports upto r <buffersize*2
+     if(spirographMODE!=0&&(uniforms.movieTime.value==-1||uniforms.movieTime.value>5.) )  for (let r= 0.; r < bufferPortion; r +=1) {//spirray size supports upto r <buffersize*2
             const  txlast=tx;
             const  tylast=ty;
             tx = spirray0[r];
@@ -3379,7 +3376,7 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
                                      freezeTop();
                                           if(window.playMovie)
                                           {
-                                            if(uniforms.movieTime.value<1||(uniforms.movieTime.value>3&&uniforms.movieTime.value<5))
+                                            if(uniforms.movieTime.value<1||(uniforms.movieTime.value>3&&uniforms.movieTime.value<+1./movieSpeed))
                                             {
                                                 window.zoom = 1
                                             uniforms.zoom.value=1;
@@ -3391,16 +3388,20 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
                                             uniforms.zoom.value=.5;
                                         
                                     }
-                                    if(uniforms.movieTime.value<3)
+                                    if(uniforms.movieTime.value<5+1./movieSpeed)
                                     {
     uniforms.coords.value.x=0;
                                             uniforms.coords.value.y=0;
                                             coordX=0;
                                             coordY=0;
                                     }
+                                    else    if(window.needsToStart){
+                                    window.needsToStart=false;
+                                    sourceAudioInput.start();
+                                    }
+
                                           }
-            if(uniforms.movieTime.value<7)
-            {
+            if(uniforms.movieTime.value<6)         {
 /*const ctx = container.getContext("2d");
 
 ctx.font = "50px Arial";
@@ -3432,7 +3433,17 @@ ctx.fillText("Hello World",10,80);*/
            else if (Math.floor(uniforms.movieTime.value)==6)document.getElementById("timeNumber").innerHTML="3"
            */
             }
+
+                 
         }
+                             if(window.audioBufferFromFile.duration/window.movieSpeed
+                                        -uniforms.movieTime.value<0||uniforms.movieTime.value==-2)
+                                       {
+                                                    //    document.getElementById("timeNumber").innerHTML="www.<br>zonex<br>.space"
+                                                     document.getElementById("numberExplanation").innerHTML="www.zonex.space<br>Like, Subscribe, Share!"
+                                                     uniforms.movieTime.value=-2;
+
+                                       }
                                                        
    if(window.starClover)
                      {
