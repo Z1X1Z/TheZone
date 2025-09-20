@@ -2370,7 +2370,7 @@ float brightness=0.;
               else if   ( noteOfStar==mod(6. +rote-rnd(twistStar/PI2*12.),12.))
               ret=vec4(vec3(clamp(
                                                        noteAmpToLength
-                                                ,0.,1.)*-.25
+                                                ,0.,1.)*.25
                                                 ),1.);
         else{
             
@@ -6393,8 +6393,8 @@ vec4 tree = vec4( clamp(
                                                              float radialIntensity = length(r);
              if( moreHorns.r!=0.)fin+=vec4(ss.xyz+vec3(moreHorns.r*pow(radialIntensity,3.5)),0.);
                                                              
-                                                             
-                                                             if(isGrey!=.0&&pixelShipGrey!=0.)fin=vec4(vec3(.25),1.);
+                                                            /* if(isGrey!=0.&&isGrey!=1.&&pixelShipGrey==0.)fin=vec4(vec3(.25),1.);*/
+                                                              if(isGrey!=.0&&pixelShipGrey!=0.)fin=vec4(vec3(.25),1.);
                                                                 else if (isGrey!=.0)fin=vec4(vec3(.5),1.);
                                                                 else if(fin.r>=1.&&fin.g>=1.&&fin.b>=1.&&starship.w!=0.&&pixelShipGrey!=0.)fin=vec4(vec3(.25),1.);
                                                                                     else if(fin.r<=0.&&fin.g<=0.&&fin.b<=0.&&starship.w!=0.&&pixelShipGrey!=0. ){                         fin=vec4(vec3(.75),1.);
@@ -6424,7 +6424,7 @@ vec4 tree = vec4( clamp(
               card/=4.;
               */
           
-          fin=clamp(fin/vec4(card,1.) -(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z+ARTICLE.x+ARTICLE.y+ARTICLE.z)*4.,0.,1.)+vec4(clamp(hypnoticHarmonicCircles+ARTICLE-(isGrey+pixelShipGrey)*3.,0.,1.),1.);
+          fin=clamp(fin/vec4(card,1.) -(hypnoticHarmonicCircles.x+hypnoticHarmonicCircles.y+hypnoticHarmonicCircles.z+ARTICLE.x+ARTICLE.y+ARTICLE.z)*4.,0.,1.)+vec4(clamp(hypnoticHarmonicCircles+ARTICLE-(isGrey+pixelShipGrey),0.,1.),1.);
           layeredOUT=//vec4(mny,1.);
 fin/vec4(confraculator
                            ,1.);

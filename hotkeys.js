@@ -333,7 +333,8 @@ function resetAll(){
                                          window.songDuration=-1;
                                        window.sourceAudioInput="none";
                                        window.needsToStart=false;
-                                       window.movieSpeed=4.;
+                                       window.movieSpeed=3.;
+                                       window.trigger="first";
                                        window.audioBufferFromFile = "no buffer";
                                        window.arrayBufferAudioIn = "not loaded";
 
@@ -510,6 +511,7 @@ window.addEventListener('keydown', function(event) {callKey(event); return true;
     window.lastKey = "";
 window.key = " ";
                                          function callKey(event){
+                                            event.preventDefault(); event.stopImmediatePropagation();
                 window.lastKey = window.key;
                 /*   if(lastKey==","&&!runningHash)//key here is the last key
                  event=new KeyboardEvent('keydown',

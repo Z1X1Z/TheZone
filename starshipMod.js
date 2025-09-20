@@ -3199,7 +3199,7 @@ else if (circleX<-width)circleX=width;
 if (circleY>height)circleY=-height;
 else if (circleY<-height)circleY=height;
                                   circleMaterial.color=colorSound;
-                                                                            if(uniforms.starOnDot.value==3)                circleMaterial.opacity=0.;
+                                                                            if(uniforms.starOnDot.value==3||uniforms.movieTime.value<5)                circleMaterial.opacity=0.;
                                                                                             else if(uniforms.starOnDot.value>0)                circleMaterial.opacity=.5;
                                                                                                             else                       circleMaterial.opacity=.8;
 
@@ -3422,9 +3422,9 @@ ctx.fillText("Hello World",10,80);*/
                                               if(Math.floor(uniforms.movieTime.value)==2)  
                                     document.getElementById("numberExplanation").innerHTML="x=√(2/(x^2+1))=1"
                                               if(Math.floor(uniforms.movieTime.value)==3)  
-                                    document.getElementById("numberExplanation").innerHTML="x=-1/(0^2-∞)=0"
+                                    document.getElementById("numberExplanation").innerHTML="x=-1/(x^2±∞)=0"
                                     if(Math.floor(uniforms.movieTime.value)==4)  
-                                    document.getElementById("numberExplanation").innerHTML="0=0+0=<br>4*0=16*0=<br>0^2=1=0^2-1"
+                                    document.getElementById("numberExplanation").innerHTML="0=0+0=<br>4*0=16*0=<br>0^2=1=0^2-1=0"
               if(Math.floor(uniforms.movieTime.value)<=3)  
                 document.getElementById("timeNumber").innerHTML=Math.abs(3-Math.floor(uniforms.movieTime.value))
 
@@ -3436,8 +3436,23 @@ ctx.fillText("Hello World",10,80);*/
 
                  
         }
-                             if(window.audioBufferFromFile.duration/window.movieSpeed
-                                        -uniforms.movieTime.value<0||uniforms.movieTime.value==-2)
+                                               if(window.audioBufferFromFile.duration*3./4.
+                                        -(uniforms.movieTime.value*window.movieSpeed-(5+1./movieSpeed))<0&&window.trigger=="first"){
+
+                                 let hotkey  = 'J';
+                                 callKey(new KeyboardEvent('keydown', {'key': hotkey, 'keyCode':hotkey.charCodeAt(0)}));
+                                 window.trigger="second"
+                                               }
+     if(window.audioBufferFromFile.duration*4./5.  -(uniforms.movieTime.value*window.movieSpeed-(5+1./movieSpeed))<0//&&window.trigger=="second"
+                                ){
+
+                                 let hotkey  = 'n';
+                                 
+                                 20     callKey(new KeyboardEvent('keydown', {'key': hotkey, 'ctrlKey':true,keyCode:hotkey.charCodeAt(0)}));
+                                 window.trigger="third"
+                                               }
+                             if(window.audioBufferFromFile.duration
+                                        -(uniforms.movieTime.value-(5+1./movieSpeed))*window.movieSpeed<0||uniforms.movieTime.value==-2)
                                        {
                                                     //    document.getElementById("timeNumber").innerHTML="www.<br>zonex<br>.space"
                                                      document.getElementById("numberExplanation").innerHTML="www.zonex.space<br>Like, Subscribe, Share!"
