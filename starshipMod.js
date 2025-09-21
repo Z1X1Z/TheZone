@@ -1,6 +1,6 @@
 var THREE;
 
-if(window.useCDN||true)import("three").then(module => { THREE=module})
+if(window.useCDN)import("three").then(module => { THREE=module})
 .catch((err) => {
     console.log(err)
 
@@ -3422,7 +3422,7 @@ ctx.fillText("Hello World",10,80);*/
                                               if(Math.floor(uniforms.movieTime.value)==2)  
                                     document.getElementById("numberExplanation").innerHTML="x=√(2/(x^2+1))=1"
                                               if(Math.floor(uniforms.movieTime.value)==3)  
-                                    document.getElementById("numberExplanation").innerHTML="x=-1/(x^2±∞)=0"
+                                    document.getElementById("numberExplanation").innerHTML="x=-1/(x^2-∞)=0"
                                     if(Math.floor(uniforms.movieTime.value)==4)  
                                     document.getElementById("numberExplanation").innerHTML="0=0+0=<br>4*0=16*0=<br>0^2=1=0^2-1=0"
               if(Math.floor(uniforms.movieTime.value)<=3)  
@@ -3448,7 +3448,7 @@ ctx.fillText("Hello World",10,80);*/
 
                                  let hotkey  = 'n';
                                  
-                                 20     callKey(new KeyboardEvent('keydown', {'key': hotkey, 'ctrlKey':true,keyCode:hotkey.charCodeAt(0)}));
+                                  callKey(new KeyboardEvent('keydown', {'key': hotkey, 'ctrlKey':true,keyCode:hotkey.charCodeAt(0)}));
                                  window.trigger="third"
                                                }
                              if(window.audioBufferFromFile.duration
