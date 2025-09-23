@@ -3416,7 +3416,7 @@ ctx.fillText("Hello World",10,80);*/
           else if(Math.floor(uniforms.movieTime.value)<=4)  
             {
               if(Math.floor(uniforms.movieTime.value)==0)  
-                                    document.getElementById("numberExplanation").innerHTML="x=log(x^3)=3"
+                                    document.getElementById("numberExplanation").innerHTML="x=log3(x^3)=3"
               if(Math.floor(uniforms.movieTime.value)==1)  
                                     document.getElementById("numberExplanation").innerHTML="x*=2"
                                               if(Math.floor(uniforms.movieTime.value)==2)  
@@ -3424,7 +3424,7 @@ ctx.fillText("Hello World",10,80);*/
                                               if(Math.floor(uniforms.movieTime.value)==3)  
                                     document.getElementById("numberExplanation").innerHTML="x=-1/(x^2-∞)=0"
                                     if(Math.floor(uniforms.movieTime.value)==4)  
-                                    document.getElementById("numberExplanation").innerHTML="0=0+0=<br>4*0=16*0=<br>0^2=1=0^2-1=0"
+                                    document.getElementById("numberExplanation").innerHTML="0=0+0=4*0=16*0=<br>0=0^2=1=0^2-1"
               if(Math.floor(uniforms.movieTime.value)<=3)  
                 document.getElementById("timeNumber").innerHTML=Math.abs(3-Math.floor(uniforms.movieTime.value))
 
