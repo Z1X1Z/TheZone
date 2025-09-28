@@ -63,7 +63,8 @@ squirgleDynamic:{value:null},
 STAR:{value:null},
 EDEN:{value:null},
 uberDuper:{value:null},
-    
+twelveNotesTex:{value:null},
+    major:{value:0},
         eden:{value: 0},
         spokesVisualizeColors: {value: false    },
         note:{value: 48.},
@@ -342,7 +343,10 @@ function resetAll(){
 
                        window.coreData = new Float32Array(40).fill(1./-leaf);
                        window.omniData = new Float32Array(40).fill(0.);
+                       window.twelveNotesData = new Float32Array(12).fill(-1.);
+
                                          window.constellationSize=50;
+
                                          window.constellationData = new Float32Array(constellationSize*2).fill(.0);
                                          window.cloverConstellation=Array(constellationSize)
                                         window.squirgleSize=12;
@@ -511,7 +515,7 @@ window.addEventListener('keydown', function(event) {callKey(event); return true;
     window.lastKey = "";
 window.key = " ";
                                          function callKey(event){
-                                            event.preventDefault(); event.stopImmediatePropagation();
+                                          //  event.preventDefault(); event.stopImmediatePropagation();
                 window.lastKey = window.key;
                 /*   if(lastKey==","&&!runningHash)//key here is the last key
                  event=new KeyboardEvent('keydown',
@@ -549,6 +553,10 @@ window.key = " ";
 source.connect(analyser);
                      }
                     }
+                                          else  if((key == "M") && event.altKey&&event.ctrlKey)
+
+    uniforms.major.value=(uniforms.major.value+1)%4;
+
                 else if(key == "J" && event.ctrlKey)
                     uniforms.inseyedOut.value=(1+uniforms.inseyedOut.value)%3;
                 else   if(key == "G" && event.ctrlKey)                uniforms.cloverso.value=!uniforms.cloverso.value;

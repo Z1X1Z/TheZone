@@ -205,7 +205,7 @@ function spiral_compress(){
 
     const z = [...dataArray];
 
-    testarContinuous.fill(0); testar.fill(0); mustarD.fill(0);stack12Array.fill(0.);
+    testarContinuous.fill(0); testar.fill(0); mustarD.fill(0);stack12Array.fill(0.);twelveNotesData.fill(0.);
     for(let n=0; n<numberOfBins; n++)
     {
     //if ( z[n]>z[n-1] && z[n] > z[n+1] ){
@@ -242,12 +242,20 @@ function spiral_compress(){
                                          }
                                          else             frequencies[n]=freq;
 
+                         ///  if(Math.round(note24/2.)%12.==5.) 
+                         let toShift = 0.;
+                           if(uniforms.major.value<=2) toShift=-note;
+                           else if(uniforms.major.value==3) toShift=window.twist/2.;
+                           twelveNotesData[(Math.round(note24/2.+toShift//+6.-flip
+                            +12*10000 ))%12]+= Math.abs(z[n]);//this is for the twelve note texture
                             
-       if(EldersLeg!=0.) testar[Math.round(note24*EldersLeg/24.)%EldersLeg] += Math.abs(z[n])*radialWarp;
+       
+                            if(EldersLeg!=0.) testar[Math.round(note24*EldersLeg/24.)%EldersLeg] += Math.abs(z[n])*radialWarp;
                             stack12Array[Math.round(note24/2.)%12]+= Math.abs(z[n]);
       testarContinuous[n] = Math.abs(z[n]);
                           mustarD[n] = note24;
                             }
+
                             for (var g=0; g<EldersLeg; g++)   innerFrets[g] = testar[g];
 
                        if(window.extremeFrets&&EldersLeg>2)
@@ -258,7 +266,8 @@ function spiral_compress(){
                             
 };
                                       var exFactor=   100./255.;
-var innerFrets = new Float64Array((EldersLeg>0)?EldersLeg:0.);
+var innerFrets =  new Float64Array((EldersLeg>0)?EldersLeg:0.);//could be refactored
+
 
 
 const twelve = Array(12);
@@ -287,17 +296,17 @@ function fiveAndSeven(){
             
             }
 }
-                            var cx =new Float64Array(trailLength).fill(0);//c is the center of the frame moved from the origin
-                            var cy = new Float64Array(trailLength).fill(0);
-                            var xPerp= new Float64Array(trailLength).fill(0);//perp is the perpendicular from c
-                            var yPerp = new Float64Array(trailLength).fill(0);
-                            var trailWidth = new Float64Array(trailLength).fill(0);
-                            var trailTimeOfRecording = new Float64Array(trailLength).fill(0);
-                            var trailSegmentExpired = Array(trailLength).fill(false);
-var pitchCol = Array(trailLength);
+                            var cx =new Float64Array(0).fill(0);//c is the center of the frame moved from the origin
+                            var cy = new Float64Array(0).fill(0);
+                            var xPerp= new Float64Array(0).fill(0);//perp is the perpendicular from c
+                            var yPerp = new Float64Array(0).fill(0);
+                            var trailWidth = new Float64Array(0).fill(0);
+                            var trailTimeOfRecording = new Float64Array(0).fill(0);
+                            var trailSegmentExpired = Array(0).fill(false);
+var pitchCol = Array(0);
                             
-                                  var trail=new Float32Array(trailLength*3*6*2);
-                                   var trailColor=new Float32Array(trailLength*4*6*2);
+                                  var trail=new Float32Array(0*3*6*2);
+                                   var trailColor=new Float32Array(0*4*6*2);
                                 
             function setTrailSize(){
         
@@ -1117,6 +1126,40 @@ function setMicInputToStarPIXEL(){
                      uniforms["audioBuffer"].value = RAWaudioTexBuf;
                      uniforms.audioBuffer.needsUpdate = true;
                  }
+
+
+
+
+
+
+       
+   var maxNoteAmp=0.0000001;
+   var minNoteAmp=100000000000000;
+
+
+    
+
+    
+    
+    let starStride = 0;
+        for (var g=0; g<12; g++) {
+            if(isFinite(twelveNotesData[g])){
+                if(twelveNotesData[g]>maxNoteAmp) maxNoteAmp=twelveNotesData[g];
+                if(twelveNotesData[g]<minNoteAmp) minNoteAmp=twelveNotesData[g];
+            }
+        }
+        if (maxNoteAmp==minNoteAmp)minNoteAmp=0;
+                for (var g=0; g<12; g++) twelveNotesData[g]=(twelveNotesData[g]-minNoteAmp)/(maxNoteAmp-minNoteAmp);
+
+
+                     let twelveTexBuffer = new THREE.DataTexture(window.twelveNotesData , 12, 1, THREE.RedFormat,THREE.FloatType);
+                     twelveTexBuffer.needsUpdate=true;
+                     uniforms["twelveNotesTex"].value = twelveTexBuffer;
+                     uniforms.twelveNotesTex.needsUpdate = true;
+
+
+
+
              }
                  else{
                      //uniforms["volume"].value = 0.;
@@ -1126,6 +1169,9 @@ function setMicInputToStarPIXEL(){
                      
                      uniforms[ "micIn" ].value = null;
                      uniforms.micIn.needsUpdate = true;
+
+                     uniforms[ "twelveNotesTex" ].value = null;
+                     uniforms.twelveNotesTex.needsUpdate = true;
              }
 
              //console.log(uniforms.micIn.value[0])
