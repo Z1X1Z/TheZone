@@ -242,10 +242,11 @@ function spiral_compress(){
                                          }
                                          else             frequencies[n]=freq;
 
-                         ///  if(Math.round(note24/2.)%12.==5.) 
                          let toShift = 0.;
                            if(uniforms.major.value<=2) toShift=-note;
                            else if(uniforms.major.value==3) toShift=window.twist/2.;
+                            //                          if(Math.round(note24/2.)%12.==0.) 
+
                            twelveNotesData[(Math.round(note24/2.+toShift//+6.-flip
                             +12*10000 ))%12]+= Math.abs(z[n]);//this is for the twelve note texture
                             
@@ -1133,30 +1134,6 @@ function setMicInputToStarPIXEL(){
 
 
        
-   var maxNoteAmp=0.0000001;
-   var minNoteAmp=100000000000000;
-
-
-    
-
-    
-    
-    let starStride = 0;
-        for (var g=0; g<12; g++) {
-            if(isFinite(twelveNotesData[g])){
-                if(twelveNotesData[g]>maxNoteAmp) maxNoteAmp=twelveNotesData[g];
-                if(twelveNotesData[g]<minNoteAmp) minNoteAmp=twelveNotesData[g];
-            }
-        }
-        if (maxNoteAmp==minNoteAmp)minNoteAmp=0;
-                for (var g=0; g<12; g++) twelveNotesData[g]=(twelveNotesData[g]-minNoteAmp)/(maxNoteAmp-minNoteAmp);
-
-
-                     let twelveTexBuffer = new THREE.DataTexture(window.twelveNotesData , 12, 1, THREE.RedFormat,THREE.FloatType);
-                     twelveTexBuffer.needsUpdate=true;
-                     uniforms["twelveNotesTex"].value = twelveTexBuffer;
-                     uniforms.twelveNotesTex.needsUpdate = true;
-
 
 
 
@@ -1170,8 +1147,6 @@ function setMicInputToStarPIXEL(){
                      uniforms[ "micIn" ].value = null;
                      uniforms.micIn.needsUpdate = true;
 
-                     uniforms[ "twelveNotesTex" ].value = null;
-                     uniforms.twelveNotesTex.needsUpdate = true;
              }
 
              //console.log(uniforms.micIn.value[0])
@@ -1182,7 +1157,41 @@ function setMicInputToStarPIXEL(){
                                            let correlationForTextX = 0;
                                            let correlationForTextY = 0;
                             let maxToMin = 1;
+function setTwelveNotes()
+{
+ if(!touchMode//&&!DAW
+                ||(window.shouldShowStar)){
+   var maxNoteAmp=0.0000001;
+   var minNoteAmp=100000000000000;
 
+
+        for (var g=0; g<12; g++) {
+            if(isFinite(twelveNotesData[g])){
+                if(twelveNotesData[g]>maxNoteAmp) maxNoteAmp=twelveNotesData[g];
+                if(twelveNotesData[g]<minNoteAmp) minNoteAmp=twelveNotesData[g];
+            }
+        }
+        if (maxNoteAmp==minNoteAmp)minNoteAmp=0;
+                for (var g=0; g<12; g++){ 
+
+                    twelveNotesData[g]=(twelveNotesData[g]-minNoteAmp
+
+                    )/(maxNoteAmp-minNoteAmp);
+
+                }
+
+                     let twelveTexBuffer = new THREE.DataTexture(window.twelveNotesData , 12, 1, THREE.RedFormat,THREE.FloatType);
+                     twelveTexBuffer.needsUpdate=true;
+                     uniforms["twelveNotesTex"].value = twelveTexBuffer;
+                     uniforms.twelveNotesTex.needsUpdate = true;
+            }
+                     else{
+
+                     uniforms[ "twelveNotesTex" ].value = null;
+                     uniforms.twelveNotesTex.needsUpdate = true;
+             }
+
+}
 function adjustThreeJSWindow()
                     {
 
@@ -2144,7 +2153,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
         spiral_compress();
         
         vectorize4();
-    
+    setTwelveNotes();
     let lowNote = 10000000.;
      lowAmpFreq = 1;
 
