@@ -27,7 +27,6 @@ async function loadAudioFile() {
 async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
               sourceAudioInput = audioX.createBufferSource();
                         sourceAudioInput.buffer=audioBufferFromFile;
-                              source.disconnect(analyser);
                               sourceAudioInput.connect(analyser)
                                      sourceAudioInput.connect(audioX.destination);
                                        window.needsToStart=true;
@@ -539,9 +538,16 @@ window.key = " ";
                      if(window.playMovie) {  window.movieStartTime= window.TIMESTAMP;
                         uniforms.movieTime.value= window.TIMESTAMP/1000.;
 
+
+                                                      source.disconnect(analyser);
+
+                                                      
                         window.fileInput =  document.getElementById('audioFile');
                         window.fileInput =  window.fileInput.files[window.fileInput.files.length-1];
                           let finalization =  finishLoadingAudioFile();
+                                      clvrVariant4Type=0
+                                      uniforms.clvrVariant4.value=0;
+
                      }
                      else {
                         uniforms.movieTime.value=-1.;

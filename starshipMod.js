@@ -3474,8 +3474,13 @@ ctx.fillText("Hello World",10,80);*/
                                     document.getElementById("numberExplanation").innerHTML="x=log3(x^3)=3"
               if(Math.floor(uniforms.movieTime.value)==1)  
                                     document.getElementById("numberExplanation").innerHTML="x*=2"
-                                              if(Math.floor(uniforms.movieTime.value)==2)  
+                                              if(Math.floor(uniforms.movieTime.value)==2) 
+                                                {
                                     document.getElementById("numberExplanation").innerHTML="x=√(2/(x^2+1))=1"
+                                                    clvrVariant4Type=1
+                                                        uniforms.clvrVariant4.value=1./leafPermanent;
+
+                                                }
                                               if(Math.floor(uniforms.movieTime.value)==3)  
                                     document.getElementById("numberExplanation").innerHTML="x=-1/(x^2-∞)=0"
                                     if(Math.floor(uniforms.movieTime.value)==4)  
