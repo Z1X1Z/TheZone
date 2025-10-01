@@ -2669,7 +2669,7 @@ bool isB=false, isF=false;
                               l = vec4( 1.-eyeColorCyclerReversed,eyeColorCyclerReversed,1.-eyeColorCyclerReversed,.75);
                              break;
                              }
-                             else if(!A&&!Bf&&(abs(p.x)<abs(p.y)&&p.x<0.&&p.y>0.||(isB&&!WayTruthLight))){
+                             else if(!A&&!Bf&&(abs(p.x)<abs(p.y)&&p.x<0.&&p.y>0.||isB)){
                                  
                                         if(wink&&rnd(adjustedNote)==9.)
                                            l=vec4(vec3(winkWhite),0.);
@@ -2678,7 +2678,7 @@ bool isB=false, isF=false;
                                  break;
                                  }
                              
-                             else if(!G&&!Fs&&(abs(p.x)<abs(p.y)&&p.x<0.&&p.y<0.||(isF&&!WayTruthLight))){
+                             else if(!G&&!Fs&&(abs(p.x)<abs(p.y)&&p.x<0.&&p.y<0.||isF)){
                                  
                                  if(wink&&rnd(adjustedNote)==3.)
                                            l=vec4(vec3(winkWhite),0.);
@@ -5850,7 +5850,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
 
                                                                                         number =3.;
 
-                                                                eyeAMP= texture2D( twelveNotesTex, vec2((number/12.+.5),0)).x;
+                                                                eyeAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                                                                                                                                                                         majorP=majorPBaseline/eyeAMP;
 
                                                                                        oneEye +=faceBlackAndWhite(majorP,winkMotion,true,-1,true,number).xyz*winkColor;
@@ -5863,7 +5863,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
 
                                                                                         number =4.;
 
-                                                                eyeAMP= texture2D( twelveNotesTex, vec2((number/12.+.5),0)).x;
+                                                                eyeAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                                                                                                                                                                         majorP=majorPBaseline/eyeAMP;
 
                                                                                        oneEye +=faceBlackAndWhite(majorP,winkMotion,true,-1,true,number).xyz*winkColor;
