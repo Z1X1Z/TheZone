@@ -63,7 +63,7 @@ STAR:{value:null},
 EDEN:{value:null},
 uberDuper:{value:null},
 twelveNotesTex:{value:null},
-    major:{value:0},
+    major:{value:3},
         eden:{value: 0},
         spokesVisualizeColors: {value: false    },
         note:{value: 48.},
@@ -541,7 +541,7 @@ window.key = " ";
 
                                                       source.disconnect(analyser);
 
-                                                      
+
                         window.fileInput =  document.getElementById('audioFile');
                         window.fileInput =  window.fileInput.files[window.fileInput.files.length-1];
                           let finalization =  finishLoadingAudioFile();
