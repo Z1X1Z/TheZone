@@ -2669,7 +2669,7 @@ bool isB=false, isF=false;
                               l = vec4( 1.-eyeColorCyclerReversed,eyeColorCyclerReversed,1.-eyeColorCyclerReversed,.75);
                              break;
                              }
-                             else if(!A&&!Bf&&(abs(p.x)<abs(p.y)&&p.x<0.&&p.y>0.||isB)){
+                             else if(!A&&!Bf&&(abs(p.x)<abs(p.y)&&p.x<0.&&p.y>0.||(isB&&!wink))){
                                  
                                         if(wink&&rnd(adjustedNote)==9.)
                                            l=vec4(vec3(winkWhite),0.);
@@ -2678,7 +2678,7 @@ bool isB=false, isF=false;
                                  break;
                                  }
                              
-                             else if(!G&&!Fs&&(abs(p.x)<abs(p.y)&&p.x<0.&&p.y<0.||isF)){
+                             else if(!G&&!Fs&&(abs(p.x)<abs(p.y)&&p.x<0.&&p.y<0.||(isF&&!wink))){
                                  
                                  if(wink&&rnd(adjustedNote)==3.)
                                            l=vec4(vec3(winkWhite),0.);
