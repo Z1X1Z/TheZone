@@ -535,18 +535,23 @@ window.key = " ";
                 //meta keys like ctrlKey must be processed first and should have symbol preferably
                         if((key == "Z") && event.altKey&&event.ctrlKey)
                     {window.playMovie=!window.playMovie;
+                        
                      if(window.playMovie) {  window.movieStartTime= window.TIMESTAMP;
                         uniforms.movieTime.value= window.TIMESTAMP/1000.;
 
+       clvrVariant4Type=0
+                                      uniforms.clvrVariant4.value=0;
+                                      uniforms.baseN.value=3;
 
+
+                                      
                                                       source.disconnect(analyser);
 
 
                         window.fileInput =  document.getElementById('audioFile');
                         window.fileInput =  window.fileInput.files[window.fileInput.files.length-1];
                           let finalization =  finishLoadingAudioFile();
-                                      clvrVariant4Type=0
-                                      uniforms.clvrVariant4.value=0;
+                               
 
                      }
                      else {
