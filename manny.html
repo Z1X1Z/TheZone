@@ -934,7 +934,7 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                  <input type="checkbox" id="ftl" name="t"  onclick= "
                                      key  = 'f';
                                      callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
-                                     <label for="ftl">Feed the Lamb?![,.f]</label><br>
+                                     <label for="ftl">Feed the Lamb?![.,f]</label><br>
 
                                  <!--
                                  <input type="checkbox" id="super stability" name="t"  onclick= "
@@ -4246,7 +4246,8 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
    if(squareGenesis){
 
        float regenerativeLayers = 3.;
-           for(float x=2.; x<3.;x+=1.)
+      float x=2.;
+          // for(float x=2.; x<3.;x+=1.)
            {
            float regenerativeshift = 1./x;
        s.x-=regenerativeshift;
@@ -4254,7 +4255,7 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
              s= vec2(s.x-sign(s.x+regenerativeshift)*regenerativeshift,s.y);
                s.x+=regenerativeshift;
                }
-           for(float x=2.; x<regenerativeLayers;x+=1.)
+        //   for(float x=2.; x<regenerativeLayers;x+=1.)
            {
            float regenerativeshift = 1./x;
        s.y-=regenerativeshift;
@@ -4906,9 +4907,11 @@ return
                           
                           float rings = 1.;
                           if (chirality==3)rings=7.;
-                              
+                                                          float m=0.;
+
                           if (length(p)<3.)
-                              for(float m = 0.0; m < rings; m++){
+                            //  for(float m = 0.0; m < rings; m++)
+                            {
                                   if (m==0.)destColor=vec3(-1.);
                                   else destColor=vec3(1.);
                                   
