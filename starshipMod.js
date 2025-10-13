@@ -2265,11 +2265,11 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
     let metroPhase =-Math.sin(-uniforms[ "time" ].value*uniforms[ "metronome" ].value*pi)
        let frameCount=((loopsRun%2)-.5)*2222222;
 
-    if(spirographMODE==2){
+    if(spirographMODE==1){
     lineMat.color = colorSound;
   }
        else if (uniforms[ "metronome" ].value>1)lineMat.color  = new THREE.Color("").setRGB(metroPhase,metroPhase,metroPhase)
-           else if(spirographMODE==1) lineMat.color = new THREE.Color("").setRGB(frameCount,frameCount,frameCount);
+           else if(spirographMODE==2) lineMat.color = new THREE.Color("").setRGB(frameCount,frameCount,frameCount);
    
        
                             
