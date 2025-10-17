@@ -5825,24 +5825,36 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                 float number =0.;
                                                                 float eyeAMP = 1.;
 
-                                                                              if(major==3||majorPBaseline.x>0.)   {
+                                                                              if((major==3)||majorPBaseline.x>0.)   {
                                                                                                                                                                                                                                                   if(major==3||majorPBaseline.y*flipStar<0.)
 {
+
+     if(!(major==3)||p.x<0.){
                                                                                         number =0.;
                                                                 eyeAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                                                                                 majorP=majorPBaseline/eyeAMP;
       oneEye +=faceBlackAndWhite(majorP,winkMotion,true,-1,true,number).xyz*winkColor;
+}
                                                                               }
                                                                               
+                                                                                   if(!(major==3)||(p.x<0.&&p.y*flipStar<0.)){
+
                                                                                     number =1.;
                                                                 eyeAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                                                                                 majorP=majorPBaseline/eyeAMP;
 
                                                                                        oneEye +=faceBlackAndWhite(majorP,winkMotion,true,-1,true,number).xyz*winkColor;
+                                                                                   }
+                                                                                }
+                                                                                            if(!(major==3)||p.x<0.){
+
                                                                                     }
                                                                                     if(major==3||majorPBaseline.y*flipStar>0.){
                                                                                                                                                                                                                                                           if(major==3||majorPBaseline.x>0.)
 {
+
+                                                                                   if(!(major==3)||(p.x<0.&&p.y*flipStar<0.)){
+
                                                                                         number =2.;
 
                                                                 eyeAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
@@ -5850,6 +5862,9 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
 
                                                                                        oneEye +=faceBlackAndWhite(majorP,winkMotion,true,-1,true,number).xyz*winkColor;
                                                                                     
+                                                                                   }
+
+                                                                                   if(!(major==3)||(p.x<0.&&p.y*flipStar<0.)){
 
                                                                                         number =3.;
 
@@ -5857,12 +5872,15 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                                                                                                                                                                         majorP=majorPBaseline/eyeAMP;
 
                                                                                        oneEye +=faceBlackAndWhite(majorP,winkMotion,true,-1,true,number).xyz*winkColor;
-                                                            
+                                                                                   }
 }
                                                                                 }
                                                                                 if(major==3||majorPBaseline.x<0.){
 
                                                                                 if(major==3||majorPBaseline.y*flipStar>0.){
+
+                                                                                    
+                                                                                   if(!(major==3)||(p.x>0.&&p.y*flipStar<0.)){
 
                                                                                         number =4.;
 
@@ -5870,50 +5888,71 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                                                                                                                                                                         majorP=majorPBaseline/eyeAMP;
 
                                                                                        oneEye +=faceBlackAndWhite(majorP,winkMotion,true,-1,true,number).xyz*winkColor;
+                                                                                   }
+
+                                                                                   if(!(major==3)||(p.x>0.&&p.y*flipStar<0.)){
+
                                                                                         number =5.;
                                                                 eyeAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                                                                                 majorP=majorPBaseline/eyeAMP;
 
                                                                                        oneEye +=faceBlackAndWhite(majorP,winkMotion,true,-1,true,number).xyz*winkColor; 
-                                                                                  
+                                                                                   }
+
+                                                                                   if(!(major==3)||(p.x>0.)){
+
                                                                                         number =6.;
                                                                 eyeAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                  majorP=majorPBaseline/eyeAMP;
 
                                                                                        oneEye +=faceBlackAndWhite(majorP,winkMotion,true,-1,true,number).xyz*winkColor;
+                                                                                   }
                                                                                 }
+
+                                                                                   if(!(major==3)||(p.x>0.&&p.y*flipStar>0.)){
+
                                                                                         number =7.;
                                                                 eyeAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                  majorP=majorPBaseline/eyeAMP;
 
                                                                                        oneEye +=faceBlackAndWhite(majorP,winkMotion,true,-1,true,number).xyz*winkColor;   
-                                                                                   
+                                                                                   }
                                                                                 }
                                                                                 if(major==3||majorPBaseline.y*flipStar<0.){
                                                                                                                                                                     if(major==3||majorPBaseline.x<0.){
+
+                                                                                   if(!(major==3)||(p.x>0.&&p.y*flipStar>0.)){
 
                                                                                         number =8.;
                                                                 eyeAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
  majorP=majorPBaseline/eyeAMP;
                                                                                        oneEye +=faceBlackAndWhite(majorP,winkMotion,true,-1,true,number).xyz*winkColor;
                                                                                    
-                                                                                   
+                                                                                   }
+
+                                                                                   if(!(major==3)||(p.x<0.&&p.y*flipStar>0.)){
+
                                                                                         number =9.;
                                                                 eyeAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                  majorP=majorPBaseline/eyeAMP;
 
                                                                                        oneEye +=faceBlackAndWhite(majorP,winkMotion,true,-1,true,number).xyz*winkColor;
                                                                                    
-                                                                                   
+                                                                                   }
+
+                                                                                   if(!(major==3)||(p.x<0.&&p.y*flipStar>0.)){
+
                                                                                         number =10.;
                                                                 eyeAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                  majorP=majorPBaseline/eyeAMP;
 
                                                                                        oneEye +=faceBlackAndWhite(majorP,winkMotion,true,-1,true,number).xyz*winkColor;
-                                                                                                                                                                    }
+                                                                                                                                                    }                                                                 }
                                                                                 }
                                                                                 if(major==3||majorPBaseline.x>0.){
                                                                                                                                                                     if(major==3||majorPBaseline.y*flipStar<0.){
+
+                                                                                   if(!(major==3)||(p.x<0.&&p.y*flipStar>0.)){
 
                                                                                         number =11.;
                                                                 eyeAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
@@ -5921,6 +5960,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
 
                                                                                        oneEye +=faceBlackAndWhite(majorP,winkMotion,true,-1,true,number).xyz*winkColor;
                                                                             }
+                                                                        }
                                                                         }
                                                                                     
                                                                                      /*   number =12.;
@@ -6472,7 +6512,8 @@ else {
                        vec4 faceFromShip =vec4(0.);// vec4(clamp(mannyFace.xyz,0.,1.)-backgroundFace*starshipMultiplier,0.)*(1.-isGreyISH*2.);
                        vec4 goodies =
                        vec4(
-                                           mnyX+backgroundFace+
+                                           mnyX+
+                                           backgroundFace+//is this in the right layer?
                             clamp(heartWarmed*isColoredMultiplier                            -(oneEye)//*((isGrey+pixelShipGrey)/2.)*2.
 ,0.,1.)
 
