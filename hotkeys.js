@@ -161,7 +161,7 @@ duperZoom: {value:1.},
         MannyONtrail:{value:0},
         NightAndDay:{value:false},
         starOnDot:{value:0},
-        gameOn:{value:false},
+        gameOn:{value:true},
         scoreLoaded:{value:false},
         musicAngelMan:{value:2},
         refactorCores:{value:1.},
@@ -198,7 +198,21 @@ cards:{value:false},
 cloverso:{value:false},
 OrthoEvery:{value:0.},
 feedTheLamb:{value:true},
-noteFrozen:{value:0}
+noteFrozen:{value:0},
+
+    loudestFret1:{value:[0,0]},
+  loudestFret2:{value:[0,0]},
+  loudestFret3:{value:[0,0]},
+  loudestFret4:{value:[0,0]},
+      
+  volumeFret1:{value:0.},
+  volumeFret2:{value:0.},
+  volumeFret3:{value:0.},
+  volumeFret4:{value:0.},
+    armStar:{value:true},
+      smush:{value:0.}
+
+
 }
 window.uniforms={}
 
@@ -326,7 +340,7 @@ function resetAll(){
             window.zoomAtl41=false;//watch for the 1 and the l
 
                                          window.onO = false;
-    window.EldersLeg = 24;
+    window.EldersLeg = 0;
 
     
                                        window.fileInput="no file";  
@@ -568,6 +582,18 @@ source.connect(analyser);
 
     uniforms.major.value=(uniforms.major.value+1)%4;
 
+                                          else  if((key == "S") && event.altKey&&event.ctrlKey)
+                                          
+                {if(number!="no number")
+                    uniforms.smush.value=number;
+                else if( uniforms.smush.value!=0.)uniforms.smush.value=1.
+                    else  uniforms.smush.value=0.;
+                }
+
+
+                                          else  if((key == "R") && event.altKey&&event.ctrlKey)uniforms.starArms.value=!uniforms.starArms.value
+                                          
+            
                 else if(key == "J" && event.ctrlKey)
                     uniforms.inseyedOut.value=(1+uniforms.inseyedOut.value)%3;
                 else   if(key == "G" && event.ctrlKey)                uniforms.cloverso.value=!uniforms.cloverso.value;

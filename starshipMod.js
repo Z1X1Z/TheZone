@@ -466,8 +466,8 @@ let pushBackCounter = 0;
             pitchCol[f]  = colorSoundPURE;
 
             const nt = Math.round(note)%12;
-            if (nt==7||nt==5||nt==2||nt==0||nt==10)BlackOrWhiteNOTE=0.;
-            else BlackOrWhiteNOTE=1.;
+            if (nt==7||nt==5||nt==2||nt==0||nt==10)BlackOrWhiteNOTE=1./255.;
+            else BlackOrWhiteNOTE=254./255.;
 
 
             let bwPRIMER = .125;
@@ -802,6 +802,11 @@ uniforms.d.value = new THREE.Vector2(0.,1./10000.);
 uniforms.dotCoord.value = new THREE.Vector2(0.,0.);
   
    uniforms.pongBallCoords.value = new THREE.Vector2(0.,window.innerHeight/gr);
+    uniforms.loudestFret1.value=new THREE.Vector2( 0,0);
+                            uniforms.loudestFret2.value=new THREE.Vector2(0,0)
+                            uniforms.loudestFret3.value=new THREE.Vector2(0,0)
+                            uniforms.loudestFret4.value=new THREE.Vector2(0,0);
+                            
 
          }
 function init() {
@@ -2265,11 +2270,11 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
     let metroPhase =-Math.sin(-uniforms[ "time" ].value*uniforms[ "metronome" ].value*pi)
        let frameCount=((loopsRun%2)-.5)*2222222;
 
-    if(spirographMODE==1){
+    if(spirographMODE==2){
     lineMat.color = colorSound;
   }
        else if (uniforms[ "metronome" ].value>1)lineMat.color  = new THREE.Color("").setRGB(metroPhase,metroPhase,metroPhase)
-           else if(spirographMODE==2) lineMat.color = new THREE.Color("").setRGB(frameCount,frameCount,frameCount);
+           else if(spirographMODE==1) lineMat.color = new THREE.Color("").setRGB(frameCount,frameCount,frameCount);
    
        
                             
@@ -3448,6 +3453,8 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
                                     {
     uniforms.coords.value.x=0;
                                             uniforms.coords.value.y=0;
+                                            uniforms.constellationCoord.value.x=0
+                                            uniforms.constellationCoord.value.y=0
                                             coordX=0;
                                             coordY=0;
                                     }
@@ -3521,6 +3528,19 @@ uniforms.baseN.value=2.701002244218596767553929329640246633
 
                                        }
                                                        
+
+                                       uniforms.loudestFret1.value=new THREE.Vector2( loudestFret[0].x,loudestFret[0].y);
+                            uniforms.loudestFret2.value=new THREE.Vector2(loudestFret[1].x,loudestFret[1].y);
+                            uniforms.loudestFret3.value=new THREE.Vector2(loudestFret[2].x,loudestFret[2].y);
+                            uniforms.loudestFret4.value=new THREE.Vector2(loudestFret[3].x,loudestFret[3].y);
+                            
+                            uniforms.volumeFret1.value=1;
+                            uniforms.volumeFret2.value=loudestFret[1].volume/loudestFret[0].volume;
+                            uniforms.volumeFret3.value=loudestFret[2].volume/loudestFret[0].volume;
+                            uniforms.volumeFret4.value=loudestFret[3].volume/loudestFret[0].volume;
+
+
+
    if(window.starClover)
                      {
                 renderer.setRenderTarget (renderTarget)

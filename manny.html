@@ -1178,6 +1178,16 @@ Reset Zoom![L]</a><br>
         <div class="dropdown">
           <button class="dropbtn">Xtr
           <div  id="m5" class="dropdown-content">
+                <label for="smush">Smush!:[,.S]</label>
+                  <input type="number" id="smush" name="smush" class="num" onkeyup="
+                                                 number = 'no number'
+;
+                                 uniforms.smush.value=document.getElementById('smush').value
+                                 "><br>
+              <input type="checkbox" id="armStar" name="t"  onclick= "
+                  key  = 'R';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
+               <label for="wink">ArmStar?![,.R]</label><br>
               <input type="checkbox" id="wink" name="t"  onclick= "
                   key  = 'k';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
@@ -2069,6 +2079,17 @@ uniform bool feedTheLamb;
 uniform float OrthoEvery;
 
 
+        uniform vec2 loudestFret1;
+        uniform vec2 loudestFret2;
+        uniform vec2 loudestFret3;
+        uniform vec2 loudestFret4;
+        
+        uniform float volumeFret1;
+        uniform float volumeFret2;
+        uniform float volumeFret3;
+        uniform float volumeFret4;
+    uniform float smush;
+    uniform bool armStar;
                                   
                                   const float twoThirds = 2./3.;
                                   const float sqrt2 = sqrt(2.);
@@ -2669,7 +2690,7 @@ bool isB=false, isF=false;
                               l = vec4( 1.-eyeColorCyclerReversed,eyeColorCyclerReversed,1.-eyeColorCyclerReversed,.75);
                              break;
                              }
-                             else if(!A&&!Bf&&(abs(p.x)<abs(p.y)&&p.x<0.&&p.y>0.||(isB&&!wink))){
+                             else if(!A&&!Bf&&(abs(p.x)<abs(p.y)&&p.x<0.&&p.y>0.||((isB&&!wink)||(isF&&wink)))){
                                  
                                         if(wink&&rnd(adjustedNote)==9.)
                                            l=vec4(vec3(winkWhite),0.);
@@ -2678,7 +2699,7 @@ bool isB=false, isF=false;
                                  break;
                                  }
                              
-                             else if(!G&&!Fs&&(abs(p.x)<abs(p.y)&&p.x<0.&&p.y<0.||(isF&&!wink))){
+                             else if(!G&&!Fs&&(abs(p.x)<abs(p.y)&&p.x<0.&&p.y<0.||((isF&&!wink)||(isB&&wink)))){
                                  
                                  if(wink&&rnd(adjustedNote)==3.)
                                            l=vec4(vec3(winkWhite),0.);
@@ -3060,8 +3081,76 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                     }
                     return p;
                     }
+vec2 spinningArms(vec2 g, vec2 t, float angle,float amp){
 
+            float b = (0.);
+
+float arm = 0.;
+              vec2 elbow =vec2(-.5,1.)*1.25;
+                    float angleOffset1=0.,angleOffset2=0., angleDirection=1.;
+
+                    if(armsSpinning==0){
+                        //t=vec2(0.);
+                        //angle*=-1.*sign(-g.y);
+                        
+                    }
+                   // else if(armsSpinning==2){angle*=-1.*sign(g.y);}
+                   // else if(armsSpinning==3){angle=-abs(angle)*sign(-g.y);}
+                    //angle+=PI/2.;
+                                        //angle+=PI/2.;//-pi/4.;
+                                       else if(armsSpinning==1)
+                                        {
+                                                angleOffset1 =  PIdiv2;
+                                                angleOffset2=angleOffset1+PI;
+                                                
+                                            }
+                                        else if(armsSpinning==2)
+                                        {
+
+                                                angleOffset1 = -PIdiv2;
+                                                angleOffset2=angleOffset1+PI;
+                                            }
+                                        else if(armsSpinning==4)
+                                        {
+                                            angleDirection=-1.;
+                                            angle=-abs(angle)+PIdiv2;
+                                        }
+
+                    vec2 spinningArm=spin2((g-elbow)/amp,angle+angleOffset1//(atan(d.x,d.)
+                                           )/vec2(4.,2.)+elbow;//-spin2(elbow,angle);
+        
+
+                   vec2 z=spinningArm;
+                if(spinningArm.y>1.25)
+                    {
+                    for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;arm=1.;break;}
+                    else{
+                        z=2.*vec2(1./(z.x*z.x-z.y*z.y+spinningArm.x+t.x),(2.0*z.x*z.y+spinningArm.y+t.y));
+                       //if(z.x>0.)//likely clipped off headbody
+                        z.x=sqrt(abs(z.x));}
+                    }
+
+                    elbow =vec2(-.5,-1.)*1.25;
+            //    g=p;
+                    // angle = atan(d.x,d.y);//-PI*4./3.;
+                     spinningArm=spin2((g-elbow)/amp,angle*angleDirection+angleOffset2//
+                                           )/vec2(4.,2.)+elbow;//-spin2(elbow,angle);
+
+                    z=spinningArm;
+                if((spinningArm.y)<-1.25)
+                    {
+                    for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;arm=1.;break;}
+                    else{
+                        z=2.*vec2(1./(z.x*z.x-z.y*z.y+spinningArm.x+t.x),(2.0*z.x*z.y+spinningArm.y+t.y));
+                       //if(z.x>0.)//likely clipped off headbody
+                        z.x=sqrt(abs(z.x));}
+                    
+                }
+
+                return vec2 (b,arm);
+}
                     vec4 torso(vec2 g, vec2 t,bool spinning){
+                      
                                               if(armsSpinning==0)spinning=false;
                                               
                                               g.x*=-1.;
@@ -3081,72 +3170,40 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                         z.x=sqrt(abs(z.x));}
                     
                     }
-        if(spinning)
-        {
-              vec2 elbow =vec2(-.5,1.)*1.25;
-                    float angle =atan(d.x,d.y);
-                    float angleOffset1=0.,angleOffset2=0., angleDirection=1.;
+     vec4 arms = vec4(0.);
+     vec2 h = vec2(0.);
+       if(spinning){                    float angle =atan(d.x,d.y);
 
-                    if(armsSpinning==1){
-                        //t=vec2(0.);
-                        //angle*=-1.*sign(-g.y);
-                        
-                    }
-                   // else if(armsSpinning==2){angle*=-1.*sign(g.y);}
-                   // else if(armsSpinning==3){angle=-abs(angle)*sign(-g.y);}
-                    //angle+=PI/2.;
-                                        //angle+=PI/2.;//-pi/4.;
-                                       else if(armsSpinning==2)
-                                        {
-                                                t=vec2(0.);
-                                                angleOffset1 =  PIdiv2;
-                                                angleOffset2=angleOffset1+PI;
-                                                
-                                            }
-                                        else if(armsSpinning==3)
-                                        {
-                                            t=vec2(0.);
+         h = spinningArms(g,t,angle,1.);
+         b+=h.x;
+         arm+=h.y;
+       }
+       float extrArms = 0.;
+       if (armStar&&arm==0.&&armsSpinning!=0&&volume!=1.)
+       {
+          float angle =atan(loudestFret1.x,loudestFret1.y);
+                 h = spinningArms(g,t,angle,volumeFret1*4./3.);
+extrArms+=h.x;
+                 arm+=h.y;
 
-                                                angleOffset1 = -PIdiv2;
-                                                angleOffset2=angleOffset1+PI;
-                                            }
-                                        else if(armsSpinning==4)
-                                        {
-                                            angleDirection=-1.;
-                                            angle=-abs(angle)+PIdiv2;
-                                        }
+           angle =atan(loudestFret2.x,loudestFret2.y);
+                 h = spinningArms(g,t,angle,volumeFret2*4./3.);
+extrArms+=h.x;
+                 arm+=h.y;
 
-                    vec2 spinningArm=spin2(g-elbow,angle+angleOffset1//(atan(d.x,d.)
-                                           )/vec2(4.,2.)+elbow;//-spin2(elbow,angle);
+           angle =atan(loudestFret3.x,loudestFret3.y);
+                 h = spinningArms(g,t,angle,volumeFret3*4./3.);
+extrArms+=h.x;
+                 arm+=h.y;
+
+           angle =atan(loudestFret4.x,loudestFret4.y);
+                 h = spinningArms(g,t,angle,volumeFret4*4./3.);
+extrArms+=h.x;
+                 arm+=h.y;
+
         
-
-                    z=spinningArm;
-                if(spinningArm.y>1.25)
-                    {
-                    for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;arm=1.;break;}
-                    else{
-                        z=2.*vec2(1./(z.x*z.x-z.y*z.y+spinningArm.x+t.x),(2.0*z.x*z.y+spinningArm.y+t.y));
-                       //if(z.x>0.)//likely clipped off headbody
-                        z.x=sqrt(abs(z.x));}
-                    }
-
-                    elbow =vec2(-.5,-1.)*1.25;
-            //    g=p;
-                    // angle = atan(d.x,d.y);//-PI*4./3.;
-                     spinningArm=spin2(g-elbow,angle*angleDirection+angleOffset2//
-                                           )/vec2(4.,2.)+elbow;//-spin2(elbow,angle);
-
-                    z=spinningArm;
-                if((spinningArm.y)<-1.25)
-                    {
-                    for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;arm=1.;break;}
-                    else{
-                        z=2.*vec2(1./(z.x*z.x-z.y*z.y+spinningArm.x+t.x),(2.0*z.x*z.y+spinningArm.y+t.y));
-                       //if(z.x>0.)//likely clipped off headbody
-                        z.x=sqrt(abs(z.x));}
-                    }
-                }
-                    return vec4(b,b/2.5,0.,arm);
+       }
+                    return vec4(b,b/2.5,0.,arm)+vec4(vec3(extrArms,extrArms*.99,extrArms)*.75,0.);
                     }
     
                     vec3 musculature(vec2 g, vec2 t){
@@ -4566,7 +4623,7 @@ OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
        {
            float b = 0. ;
 
-           if(cloverSlide) b = dstnce;//may not be core stable try b=dstnce for trad
+           if(cloverSlide) b = -dstnce;//may not be core stable try b=dstnce for trad
            if(dynamicOvercore) b += 1./(dstnce/(lfc/(lfc-zoom)));
            loops-=b;
            hyperCoreBoosted+=b;
@@ -4578,7 +4635,7 @@ OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
            {
                
            float b = 0. ;
-b =dstnce/4.;;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
+b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
            loops-=b;
        hyperCoreBoosted+=b;
        hyperCoreOUTPUT+=b;
@@ -5598,8 +5655,8 @@ vec2 dance = vec2(0.);
                                  vec2 move = d.yx*volume;
                                  vec2 moveDynamic=vec2(0.);
                                  float angleOfClover = 0.;
-                                 if(dynamicDance) moveDynamic = (move/4.+t)/2.;
-                                 else  moveDynamic = move/4.;
+                                 if(dynamicDance) moveDynamic = (move/4.+t)/2.*smush;
+                                 else  moveDynamic = move/4.*smush;
                                  vec3 backgroundFace = vec3(0.);
          if(colorCombo<=10){
                       
@@ -6460,9 +6517,9 @@ if(mny.r!=0.||mny.g!=0.||mny.b!=0.)mny-=pixelShipGrey*12.;
                           if(movieTime<=5.&&movieTime>=0.||movieTime==-2.)layeredOUT=vec4(movie(characterP),1.);
                           else if(movieTime==-2.)layeredOUT=vec4(0.);
                    else if(constellation||squirgle==1)layeredOUT=vec4(zoomer,1.);
-                            //     else if((starship.x>1.&&starship.y>1.&&starship.z>1.)||(starship.x<.0&&starship.y<.0&&starship.z<.0)&&starship.w!=0.)layeredOUT=vec4(vec3(starship.r),1.);
                                  else if(length(p)<2.*sqrt2/min(resolution.x,resolution.y)) layeredOUT=vec4(zoomer,1.);
-                                
+                     else if(starship.x==starship.y&&starship.z==starship.x&&abs(starship.x-.5)!=.5&&starship.w!=0.)layeredOUT=vec4(vec3(starship.r+mannyFace*(starship.r/2.+.5)),1.);
+     
                    else if (mannyFace.w==.75)  {
                        if (starship.w>0.&&shipSUM<341./255.)layeredOUT=vec4(mannyFace.xyz+starship.xyz,1.);
 
