@@ -210,7 +210,7 @@ noteFrozen:{value:0},
   volumeFret3:{value:0.},
   volumeFret4:{value:0.},
     armStar:{value:true},
-      smush:{value:0.}
+      smush:{value:0.2}
 
 
 }
@@ -305,7 +305,7 @@ function resetAll(){
     window.videoCanvas2 = null;
     window.streaming=false;
     window.streaming2=false;
-    window.Oreo=0;
+    window.Oreo=1;
     window.stylusON=true;
             window.shouldShowStar = true;
             window.flame = false;
@@ -340,7 +340,7 @@ function resetAll(){
             window.zoomAtl41=false;//watch for the 1 and the l
 
                                          window.onO = false;
-    window.EldersLeg = 0;
+    window.EldersLeg = 12;
 
     
                                        window.fileInput="no file";  

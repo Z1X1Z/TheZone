@@ -2226,7 +2226,7 @@ vec3 paddles(vec2 vUvCentered){
     vec4 audioEq( vec2 uv )//Shekina Glory
     {
 
-        uv=uv.yx;
+        uv=uv.yx*1./2.;
         float angle = ((-atan(uv.y,uv.x)*flipStar-twistStar                    -PI+PIdiv2*flipStar)*divideByMultiplyingPi2
 );
                         //angle=mod(angle,1.);
@@ -2254,7 +2254,7 @@ float brightness=0.;
         if(n<=10.&&n>=0.)brightness +=(n+1.)*frampBuffer;
 }
         }
-         brightness/=4.;
+         brightness/=8.;
         // brightness=1.;
          //  frAmp/=255.;
          frAmp/=2.;
@@ -2290,7 +2290,7 @@ float brightness=0.;
                                                ,1.),.75,1.
                                            ))
                               ,.0,1.)/pow(2.,d)
-                   *brightness*brightness
+                   *brightness*(brightness)*frAmp/4.
                    , 1.);
         else ret= vec4(.0);
         return ret;

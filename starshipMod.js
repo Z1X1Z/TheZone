@@ -466,8 +466,8 @@ let pushBackCounter = 0;
             pitchCol[f]  = colorSoundPURE;
 
             const nt = Math.round(note)%12;
-            if (nt==7||nt==5||nt==2||nt==0||nt==10)BlackOrWhiteNOTE=1./255.;
-            else BlackOrWhiteNOTE=254./255.;
+            if (nt==7||nt==5||nt==2||nt==0||nt==10)BlackOrWhiteNOTE=0.;
+            else BlackOrWhiteNOTE=1.;
 
 
             let bwPRIMER = .125;
@@ -3133,7 +3133,7 @@ let s = f;
                          timeElapsedScaled*=2.;
                      }
                     let  timeMinusX = timeElapsedScaled-1.;
-                     if(timeMinusX<0.&&timeElapsedEXPONENTIAL%1.<Math.sign(timeMinusX)*timeMinusX%1.&&window.stylusON)stylus=BlackOrWhiteNOTE;
+                     if(timeMinusX<0.&&timeElapsedEXPONENTIAL%1.<Math.sign(timeMinusX)*timeMinusX%1.&&window.stylusON)stylus=BlackOrWhiteNOTE*254./255.;
 
                       red2  = red1;
                       green2  = green1;
