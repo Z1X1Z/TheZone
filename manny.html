@@ -6518,7 +6518,7 @@ if(mny.r!=0.||mny.g!=0.||mny.b!=0.)mny-=pixelShipGrey*12.;
                           else if(movieTime==-2.)layeredOUT=vec4(0.);
                    else if(constellation||squirgle==1)layeredOUT=vec4(zoomer,1.);
                                  else if(length(p)<2.*sqrt2/min(resolution.x,resolution.y)) layeredOUT=vec4(zoomer,1.);
-                     else if(starship.x==starship.y&&starship.z==starship.x&&abs(starship.x-.5)!=.5&&starship.w!=0.)layeredOUT=vec4(vec3(starship.r+mannyFace*(starship.r/2.+.5)),1.);
+                     else if(starship.x==starship.y&&starship.z==starship.x&&(starship.x==254./255.||starship.x==1./255.)&&starship.w!=0.)layeredOUT=vec4(vec3(starship.r+mannyFace*(starship.r/2.+.5)),1.);
      
                    else if (mannyFace.w==.75)  {
                        if (starship.w>0.&&shipSUM<341./255.)layeredOUT=vec4(mannyFace.xyz+starship.xyz,1.);
@@ -6652,7 +6652,7 @@ vec4 tree = vec4( clamp(
              if( moreHorns.r!=0.)fin+=vec4(ss.xyz+vec3(moreHorns.r*pow(radialIntensity,3.5)),0.);
                                                              
                                                             /* if(isGrey!=0.&&isGrey!=1.&&pixelShipGrey==0.)fin=vec4(vec3(.25),1.);*/
-                                                              if(isGrey!=.0&&pixelShipGrey!=0.)fin=vec4(vec3(.25),1.);
+                                                              if(isGrey!=.0&&pixelShipGrey!=0.)fin=vec4(vec3(.125),1.);
                                                                 else if (isGrey!=.0)fin=vec4(vec3(.5),1.);
                                                                 else if(fin.r>=1.&&fin.g>=1.&&fin.b>=1.&&starship.w!=0.&&pixelShipGrey!=0.)fin=vec4(vec3(.25),1.);
                                                                                     else if(fin.r<=0.&&fin.g<=0.&&fin.b<=0.&&starship.w!=0.&&pixelShipGrey!=0. ){                         fin=vec4(vec3(.75),1.);
