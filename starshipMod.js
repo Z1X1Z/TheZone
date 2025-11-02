@@ -3154,6 +3154,7 @@ let s = f;
                          g2 = g1;
                          b2 = b1;
                          transparencyOfTrail=1.
+                         transparencyOfTrailLast=1.
                         // z=-1.
                          //zlast=-1.;
                      }
