@@ -3261,7 +3261,7 @@ else if (circleX<-width)circleX=width;
 if (circleY>height)circleY=-height;
 else if (circleY<-height)circleY=height;
                                   circleMaterial.color=colorSound;
-                                                                            if(uniforms.starOnDot.value==3||uniforms.movieTime.value<5)                circleMaterial.opacity=0.;
+                                                                            if(uniforms.starOnDot.value==3||(uniforms.movieTime.value<5&&uniforms.movieTime.value!=-1))                circleMaterial.opacity=0.;
                                                                                             else if(uniforms.starOnDot.value>0)                circleMaterial.opacity=.5;
                                                                                                             else                       circleMaterial.opacity=.8;
 
