@@ -2690,7 +2690,7 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
 
                             let BlackOrWhiteFRET = .5;
                                //   lengt=1.;
-                            if((g%2==0||EldersLeg==12)&&
+                            if(EldersLeg%2==0&&
                                 Oreo!=0)
                             {
                                 const nt = Math.round(g/EldersLeg*12+6)%12;
@@ -3466,7 +3466,7 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
                                     }
 
                                           }
-            if(uniforms.movieTime.value<6)         {
+            if(uniforms.movieTime.value<6&&uniforms.movieTime.value!=-1)         {
 /*const ctx = container.getContext("2d");
 
 ctx.font = "50px Arial";
@@ -3821,8 +3821,8 @@ for(var m=0;m<cloverConstellation.length;m++)
                                                       
 
                                                          
-uniforms.constellationCoord.value=new THREE.Vector2( -coordX- uniforms.constellationCoord.value.x,coordY- uniforms.constellationCoord.value.y);
-                                                       
+uniforms.constellationCoord.value=new THREE.Vector2( -coordX- uniforms.constellationCoord.value.x,-coordY- uniforms.constellationCoord.value.y);
+                 console.log(uniforms.constellationCoord.value)                                      
                                                          
 /*
 if(uniforms.coords.value.y<-.5)
