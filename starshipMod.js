@@ -3805,7 +3805,7 @@ for(var n = 0; n<targets.length;n++){
                                                              uniforms.constellationCoord.value.x = 0;uniforms.constellationCoord.value.y = 0;
                                                              coordX=0;coordY=0}
                                                      }
-function constellationCoordFind(){
+function constellationCoordFind(){//needs to be tuned for ngenesis
 var min = 100000.;
 //cloverConstellation[1]=new THREE.Vector2(0,.5)
 //cloverConstellation[2]=new THREE.Vector2(.5,0.)
