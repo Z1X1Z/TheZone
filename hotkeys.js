@@ -307,7 +307,7 @@ function resetAll(){
     window.videoCanvas2 = null;
     window.streaming=false;
     window.streaming2=false;
-    window.Oreo=1;
+    window.Oreo=2;
     window.stylusON=true;
             window.shouldShowStar = true;
             window.flame = false;
