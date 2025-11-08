@@ -2262,7 +2262,7 @@ float brightness=0.;
         }
         */
          brightness/=8.;
-         brightness=1.25;
+         brightness=.9;
                              //  if(mod(angle+10.,1.)<1./12.)  
                                 frAmp = texture2D(radialFrequenciesSummed, vec2(mod(angle+10.-1./12.,1.),0.)).r;
 
@@ -2300,7 +2300,7 @@ float brightness=0.;
                                                ,1.),.75,1.
                                            ))
                               ,.0,1.)/pow(2.,d)
-                   *brightness*(brightness)*frAmp/4.
+                   *brightness*(brightness)
                    , 1.);
         else ret= vec4(.0);
         return ret;
