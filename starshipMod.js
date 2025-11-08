@@ -3329,7 +3329,7 @@ if(uniforms.gameOn.value&&allCaught)
     level +=1;
 
     polygons=[];
-    polyRad = 2.*Math.PI/(metaLevel)/minimumDimension*70.;
+    polyRad = 2.*Math.PI/(metaLevel)/(minimumDimension**2+maximumDimension**2)**.5*200.;
 
     for(let n = 0; n<metaLevel-level; n++)
     {
