@@ -4991,8 +4991,10 @@ return
            if(l!=0.) ret = vec3(1./l);
        return ret;
                                }
-vec3 ring(vec2 r, float amp, float number)
-{   amp=pow(amp,1./3.);
+vec3 ring(vec2 r, float number)
+{   
+    float amp= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
+    amp=pow(amp,1./3.);
    // r/=max(resolution.x,resolution.y)/min(resolution.x,resolution.y);
     vec3 ret = vec3(0.);
     float radius = length(r);
@@ -6399,55 +6401,42 @@ if(starOnDot==1||starOnDot==2){
                                  if(ringSpring)
                                  {
                                     vec2 rr = r;//* min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
-                                    float ringAMP=0.;
                                                             float number =0.;
-                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                
-                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    hypnoticHarmonicCircles+=ring(rr,number);
                                     number =1.;
-                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                
-                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    hypnoticHarmonicCircles+=ring(rr,number);
                                     number =2.;
-                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                
-                                    hypnoticHarmonicCircles+=ring(r,ringAMP,number);
+                                    hypnoticHarmonicCircles+=ring(r,number);
                                     number =3.;
-                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                
-                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    hypnoticHarmonicCircles+=ring(rr,number);
                                     number =4.;
-                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                
-                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    hypnoticHarmonicCircles+=ring(rr,number);
                                     number =5.;
-                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                
-                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    hypnoticHarmonicCircles+=ring(rr,number);
                                     number =6.;
-                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                
-                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    hypnoticHarmonicCircles+=ring(rr,number);
                                     number =7.;
-                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                
-                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    hypnoticHarmonicCircles+=ring(rr,number);
                                     number =8.;
-                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                
-                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    hypnoticHarmonicCircles+=ring(rr,number);
                                     number =9.;
-                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                
-                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    hypnoticHarmonicCircles+=ring(rr,number);
                                     number =10.;
-                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                
-                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    hypnoticHarmonicCircles+=ring(rr,number);
                                     number =11.;
-                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
                                                                
-                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    hypnoticHarmonicCircles+=ring(rr,number);
                                     
                                  }
                                  if(balloonsON!=0.||balloonsONexponential!=0.)
