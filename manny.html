@@ -2503,7 +2503,7 @@ if(uv.x<1./3.&&maxSamp!=0.) //could 1./3. but then the spill over (if any) isn't
                                          //  frAmp/=255.;
                                          
                                          // frAmp*=2.;
-                                          frAmp/=16.;
+                                          frAmp/=32.*min(resolution.x,resolution.y)/max(resolution.x,resolution.y     );
  //if(maxSamp!=0.) frAmp/=(maxSamp);//-minSamp);
 float threshSide = 1.-(frAmp)//pow(frAmp,1.75)/1.75
 *((1.-
