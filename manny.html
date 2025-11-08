@@ -2312,8 +2312,11 @@ float brightness=0.;
     
     float scalar =1./2.*3./4.;
 
-    vec4 starns ( vec2 uv,float noteOfStar)//Seven stars, two witnesses
+    vec4 starns ( vec2 uv//,float noteOfStar
+    )//Seven stars, two witnesses
     {
+       float noteOfStar = mod(rnd((atan(uv.y,uv.x)-twistStar*flipStar+PI2*4.)/PI2*12.*flipStar+12.*12.+6.),12.);
+     //  if(noteOfStar!=1.)noteOfStar=11.;
       //  float nyq =  fftSize/sampleRate/2.;
         
         //uv=vec2(-uv.x,uv.y);
@@ -6435,7 +6438,9 @@ if(starOnDot==1||starOnDot==2){
                                  
  if(pixelWitnesses){
 vec4 starBuffer = vec4(0.);
-for (float x = 0.; x<12.;x++) starBuffer+=starns(uVu,x);
+//for (float x = 0.; x<12.;x++) 
+starBuffer+=starns(uVu//,x
+);
 
 //if(isGrey==0.)
 
