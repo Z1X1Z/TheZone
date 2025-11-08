@@ -1054,6 +1054,38 @@ function init() {
 
 }
                                            window.INITIALIZED=false;
+
+function loadFrequencyTextures(){
+    let radialIncrements= Math.max(window.innerHeight,window.innerWidth);
+    uniforms.radialIncrements.value=radialIncrements
+        let radialAMP= new Float32Array(radialIncrements).fill(0.);
+        let bin;
+       // console.log(radialIncrements)
+    if(numberOfBins>0){
+    for (var ts=0.; ts<radialIncrements; ts++){
+         let angleb = ts*1./radialIncrements;
+        for(var y=-4; y<8;y++){
+                
+            let frequency= 2**(angleb+y)*window.ConcertKey;
+              bin= Math.round(frequency*numberOfBins/audioX.sampleRate);
+         //             freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
+
+            if(bin<numberOfBins&&bin>0)
+                if(isFinite(dataArray[bin]))radialAMP[ts]+=dataArray[bin];
+        }
+    }
+            for (var ts=0; ts<radialIncrements; ts++)radialAMP[ts]/=255.;
+           // console.log(bin)
+
+//console.log(radialAMP[100])
+     let radFreTexture = new THREE.DataTexture( radialAMP, radialIncrements, 1,THREE.RedFormat,THREE.FloatType);
+     radFreTexture.unpackAlignment=1
+     radFreTexture.needsUpdate=true;
+     uniforms.radialFrequenciesSummed.value=radFreTexture;
+     uniforms.radialFrequenciesSummed.needsUpdate = true;
+    }
+
+}
 function setDynamicSampler2ds(){
      let omniTexture = new THREE.DataTexture( omniData, 40, 1,THREE.RedFormat,THREE.FloatType);
      omniTexture.unpackAlignment=1
@@ -1855,6 +1887,7 @@ function runOSMD (){
      {    setDynamicSampler2ds();//normally does nothing
 
          setMicInputToStarPIXEL();
+         loadFrequencyTextures();
          setTwelveNotes();
          executeTouchRegime();
      }
@@ -2095,6 +2128,8 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                         }
 
                                         setMicInputToStarPIXEL();
+                                        loadFrequencyTextures();
+                                        
                                     }
                                     
                                     totalAMP = 0.;
@@ -3805,7 +3840,7 @@ for(var n = 0; n<targets.length;n++){
                                                              uniforms.constellationCoord.value.x = 0;uniforms.constellationCoord.value.y = 0;
                                                              coordX=0;coordY=0}
                                                      }
-function constellationCoordFind(){
+function constellationCoordFind(){//needs to be tuned for ngenesis
 var min = 100000.;
 //cloverConstellation[1]=new THREE.Vector2(0,.5)
 //cloverConstellation[2]=new THREE.Vector2(.5,0.)
