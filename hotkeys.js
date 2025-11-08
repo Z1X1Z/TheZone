@@ -212,7 +212,8 @@ noteFrozen:{value:0},
   volumeFret3:{value:0.},
   volumeFret4:{value:0.},
     armStar:{value:true},
-      smush:{value:0.2}
+      smush:{value:0.2},
+      ringSpring:{value:true}
 
 
 }
@@ -592,8 +593,9 @@ source.connect(analyser);
                     else  uniforms.smush.value=0.;
                 }
 
+                                          else  if((key == "U") && event.altKey&&event.ctrlKey)uniforms.ringSpring.value=!uniforms.ringSpring.value;
 
-                                          else  if((key == "R") && event.altKey&&event.ctrlKey)uniforms.starArms.value=!uniforms.starArms.value
+                                          else  if((key == "R") && event.altKey&&event.ctrlKey)uniforms.starArms.value=!uniforms.starArms.value;
                                           
             
                 else if(key == "J" && event.ctrlKey)

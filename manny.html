@@ -417,16 +417,21 @@ radialWarp=b;
 
                    key  = 't';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
-                   Touch Star![,t]</a><br>
-               <input type="checkbox" id="Note Stars" name="t"  onclick= "
-                   key  = 'P';
-                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                <label for="Note Stars">Note Stars![P]</label><br>
+                   Touch Star![,t]</a>
+               
                 
+                <input type="checkbox" id="Ring Spring" name="t"  onclick= "
+                    key  = 'U';
+                    callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                 <label for="Ring Spring">Ring Spring?![,.U]</label><br>
                 <input type="checkbox" id="Note Stack" name="t"  onclick= "
                     key  = 's';
                     callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
-                 <label for="Note Stack">Note Stack?![,.s]</label>
+                 <label for="Note Stack">Note Stack?![,.s]</label><br>
+                 <input type="checkbox" id="Note Stars" name="t"  onclick= "
+                   key  = 'P';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                <label for="Note Stars">Note Stars![P]</label><br>
                 <br>
                 <input type="checkbox" id="StarClover" name="t"  onclick= "
                     key  = 'O';
@@ -1947,6 +1952,8 @@ void main(){
     uniform sampler2D omniDynamic;
     uniform sampler2D constellationDynamic;
         uniform sampler2D twelveNotesTex;
+                uniform bool ringSpring;
+
         uniform sampler2D radialFrequenciesSummed;
 
     uniform int major;
@@ -3220,6 +3227,7 @@ extrArms+=h.x;
 
         
        }
+       arm=clamp(arm,0.,1.);
                     return vec4(b,b/2.5,0.,arm)+vec4(vec3(extrArms,extrArms*.99,extrArms)*.75,0.);
                     }
     
@@ -4983,7 +4991,18 @@ return
            if(l!=0.) ret = vec3(1./l);
        return ret;
                                }
-
+vec3 ring(vec2 r, float amp, float number)
+{   amp=pow(amp,1./3.);
+   // r/=max(resolution.x,resolution.y)/min(resolution.x,resolution.y);
+    vec3 ret = vec3(0.);
+    float radius = length(r);
+    if(abs(radius*2.-amp)<.01) 
+    {ret = hsv2rgb( vec3( mod((twistStar/PI2*12.-number)*brelued+4.,12.)/12. ,1.,1. ));
+   // if(abs(mod((atan(r.y,r.x))/PI2*12.+12.*12.+6.,12.)-number)<.5)ret=vec3(1.);
+    }
+;
+    return ret;
+}
                       vec3 wings (vec2 p){
                           
                           if(chirality==-1)p=p.yx;
@@ -6376,13 +6395,71 @@ if(starOnDot==1||starOnDot==2){
                                  pillar = sevenPillars(vUv.yx-vec2(0.,.5));
                                                      if(pillar.x!=0.||pillar.y!=0.||pillar.z!=0.)         pillar=   clamp(pillar+(-mny.x-mny.y-mny.z)*40.,0.,1.);
                                  vec3 hypnoticHarmonicCircles = vec3(0.);
-                                                                 
+                                                                
+                                 if(ringSpring)
+                                 {
+                                    vec2 rr = r;//* min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
+                                    float ringAMP=0.;
+                                                            float number =0.;
+                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    number =1.;
+                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    number =2.;
+                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(r,ringAMP,number);
+                                    number =3.;
+                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    number =4.;
+                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    number =5.;
+                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    number =6.;
+                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    number =7.;
+                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    number =8.;
+                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    number =9.;
+                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    number =10.;
+                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    number =11.;
+                                                                ringAMP= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,ringAMP,number);
+                                    
+                                 }
                                  if(balloonsON!=0.||balloonsONexponential!=0.)
                                  {
-                                    if(maxColorOfStarship!=1.) hypnoticHarmonicCircles=clamp(balloons(p)-shipSUM,0.,1.);
-                                    else hypnoticHarmonicCircles=balloons(p);
+                                    if(maxColorOfStarship!=1.) hypnoticHarmonicCircles+=clamp(balloons(p)-shipSUM,0.,1.);
+                                    else hypnoticHarmonicCircles+=balloons(p);
                                 }
-                                                                 
+                                                                                if(bodyWithArms.w==1.)hypnoticHarmonicCircles=bodyWithArms.xyz;
+                                                                                if(hypnoticHarmonicCircles.x!=0.||hypnoticHarmonicCircles.y!=0.||hypnoticHarmonicCircles.z!=0.)
+                                                                                {
+                                                                                   HEART=hypnoticHarmonicCircles;
+                                                                                }
                                                                  
                     vec4 pixelStarship=vec4(0.);
                                                                  float mnyWhite=1.;
