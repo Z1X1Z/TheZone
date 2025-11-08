@@ -14,7 +14,7 @@ jobs:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
       - name: Add Upstream Remote
-        run: git remote add upstream https://github.com/original-repo-owner/original-repo.git
+        run: git remote add upstream https://github.com/Z1X1Z/TheZone.git
 
       - name: Fetch Upstream Changes
         run: git fetch upstream
