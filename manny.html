@@ -5000,7 +5000,15 @@ vec3 ring(vec2 r, float number)
     float radius = length(r);
     if(abs(radius*2.-amp)<.01) 
     {ret = hsv2rgb( vec3( mod((twistStar/PI2*12.-number)*brelued+4.,12.)/12. ,1.,1. ));
-   if(abs(mod((atan(r.y,r.x))/PI2*12.+12.*12.+6.-number/12.+1./24.,1.))<1./12.)ret=vec3(-1.);
+        float increment = mod(mod((atan(r.y,r.x))/PI2*12.*2.+12.*12.+6.,1.)-number/12.,1.);
+        
+   if(increment<1./48.)ret=vec3(-1.*brelued);
+   else if(increment<3./48.)ret=vec3(1.*brelued);
+ 
+   else if(increment>47./48.)ret=vec3(-1.*brelued);
+   else if(increment>45./48.)ret=vec3(1.*brelued);
+  
+   
     }
 ;
     return ret;
