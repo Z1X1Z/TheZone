@@ -3604,15 +3604,13 @@ vec4 tol(vec2 p, vec2 t){
     float petalNumber = petals+6.;
 
   //  if(mod(atan(p.x,p.y)/PI2+1.,1.)<.25)p=vec2(0.);
-  if(petalNumber<=6.) p /=squirgleDynamic[int(mod((atan(p.y,p.x)/((petalNumber)/6.)//
+  if(petalNumber<=6.&&0==1) p /=squirgleDynamic[int((mod((atan(p.y,p.x)*6./petalNumber//
                                             +PI2*4.
-            +PI/petalNumber/2.
-                                //            *6./petalNumber
-                                            )/PI2//*(6.+petals)/6.
-                                           // -petals/petalNumber
-                                            ,1.// (petalNumber)/6.
-                                            )*12.*petalNumber/6.)];
-                                            
+           +PI/petalNumber/2.
+                                            )/PI2
+                                            ,1.
+                                            )*petalNumber*2.))];
+                                           
     //float angleToLittleClover = PI2/12.;
     //if (length(p-vec2(-sin(-angleToLittleClover),cos(angleToLittleClover))*1.25)
      //   <(.25))p=vec2(0.);
@@ -4286,7 +4284,15 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
 
    //float outerMargin =atan(s.y,s.x);
  // s=(-vec2(-sin(outerMargin),-cos(outerMargin)).yx-(s));
-  if(petalNumber<=6.)   s /=squirgleDynamic[int(mod((atan(s.y,s.x)+PIdiv2*3.+PI/12.)/PI2,1.)*12.*petalNumber/6.)];
+
+  if(petalNumber<=6.) s /=squirgleDynamic[int((mod((atan(s.y,s.x)*6./petalNumber//
+                                            +PI2*4.
+           +PI/petalNumber/2.
+                                            )/PI2
+                                            ,1.
+                                            )*petalNumber*2.))];
+                                           
+ // if(petalNumber<=6.)   s /=squirgleDynamic[int(mod((atan(s.y,s.x)+PIdiv2*3.+PI/12.)/PI2,1.)*12.*petalNumber/6.)];
  /*s/=squirgleDynamic[int(mod((atan(s.y,s.x)/((petalNumber)/6.)//
                                             +PI2*4.
             +PI/petalNumber/2.
