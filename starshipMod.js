@@ -1102,7 +1102,7 @@ function setDynamicSampler2ds(){
              
              
              loadData(cloverConstellation,constellationData);//defined in wad, transfers from Vector2 to array
-             let constellationTexture = new THREE.DataTexture( window.constellationData, window.constellationSize, 2,THREE.RedFormat,THREE.FloatType);
+            /* let constellationTexture = new THREE.DataTexture( window.constellationData, window.constellationSize, 2,THREE.RedFormat,THREE.FloatType);
             // console.log(constellationTexture)
              constellationTexture.unpackAlignment=1
              constellationTexture.needsUpdate=true;
@@ -1116,7 +1116,10 @@ function setDynamicSampler2ds(){
              squirgleTexture.unpackAlignment=1
              squirgleTexture.needsUpdate=true;
              uniforms.squirgleDynamic.value=squirgleTexture;
-             uniforms.squirgleDynamic.needsUpdate = true;
+             uniforms.squirgleDynamic.needsUpdate = true;*/
+              uniforms.constellationDynamic.value=cloverConstellation;
+              uniforms.squirgleDynamic.value=squirgleData;
+
  }
 function setMicInputToStarPIXEL(){
              if(!touchMode//&&!DAW

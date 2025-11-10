@@ -1950,7 +1950,7 @@ void main(){
     uniform sampler2D EDEN;
     uniform sampler2D coreTextureSampler;
     uniform sampler2D omniDynamic;
-    uniform sampler2D constellationDynamic;
+    uniform vec2[50] constellationDynamic;
         uniform sampler2D twelveNotesTex;
                 uniform bool ringSpring;
 
@@ -1960,7 +1960,7 @@ void main(){
 
     uniform bool constellation;
 
-    uniform sampler2D squirgleDynamic;
+    uniform float[12] squirgleDynamic;
     uniform int squirgle;
     uniform bool cards;
     uniform sampler2D uberDuper;
@@ -3551,16 +3551,20 @@ return vec3(l+b+r+h);}
                              vec2 starBirth(vec2 p){
                               bool originalClover = true;
                               //if(constellation)
-                              const float constellationSize = 50.;
-                              for(float cd = constellationSize;cd>=1.;cd--)
+                              const int constellationSize = 50;
+                              for(int cd = constellationSize;cd>=1;cd--)
                               {
-                                  float cdcs=cd/constellationSize;
+                               /*   float cdcs=cd/constellationSize;
                               float y =texture2D(constellationDynamic,vec2(cdcs,0.)).x;//thought the y argument would be 0, seems to be 1
                               float x =texture2D(constellationDynamic,vec2(cdcs,.5)).x;
+                              */
+                              vec2 xy = constellationDynamic[cd];
+                              float x = -xy.x;
+                              float y=xy.y;
 
                              if(originalClover&&(x!=0.||y!=0.))
                              {
-                                 float atanConstellation = atan(y,x);
+                                 float atanConstellation = atan(y,x)+PIdiv2;
                               p=spin2(p,atanConstellation);
                                float farness=length(vec2(x,y));
                                vec2 newClovers = p;
@@ -3600,15 +3604,15 @@ vec4 tol(vec2 p, vec2 t){
     float petalNumber = petals+6.;
 
   //  if(mod(atan(p.x,p.y)/PI2+1.,1.)<.25)p=vec2(0.);
-    p /=texture2D(squirgleDynamic,vec2(mod((atan(p.y,p.x)/((petalNumber)/6.)//
+   p /=squirgleDynamic[int(mod((atan(p.y,p.x)/((petalNumber)/6.)//
                                             +PI2*4.
             +PI/petalNumber/2.
                                 //            *6./petalNumber
                                             )/PI2//*(6.+petals)/6.
                                            // -petals/petalNumber
                                             ,1.// (petalNumber)/6.
-                                            )
-                                            ,0.)).x;
+                                            )*12.*petalNumber/6.)];
+                                            
     //float angleToLittleClover = PI2/12.;
     //if (length(p-vec2(-sin(-angleToLittleClover),cos(angleToLittleClover))*1.25)
      //   <(.25))p=vec2(0.);
@@ -4282,7 +4286,16 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
 
    //float outerMargin =atan(s.y,s.x);
  // s=(-vec2(-sin(outerMargin),-cos(outerMargin)).yx-(s));
-   s /=texture2D(squirgleDynamic,vec2(mod((atan(s.y,s.x)+PIdiv2*3.+PI/12.)/PI2,1.),0.)).x;
+   s /=squirgleDynamic[int(mod((atan(s.y,s.x)+PIdiv2*3.+PI/12.)/PI2,1.)*12.*petalNumber/6.)];
+ /*s/=squirgleDynamic[int(mod((atan(s.y,s.x)/((petalNumber)/6.)//
+                                            +PI2*4.
+            +PI/petalNumber/2.
+                                //            *6./petalNumber
+                                            )/PI2//*(6.+petals)/6.
+                                           // -petals/petalNumber
+                                            ,1.// (petalNumber)/6.
+                                            )*12.*petalNumber/6.)];
+                                            */
    //traditionally be e or 3 probably 1.5 to 4
    if(cellularDivision==1||(cellularDivision==2&&counter>1.))      s=vec2(s.x,s.y-sign(s.y)/2.);
 
