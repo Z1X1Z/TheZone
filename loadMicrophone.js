@@ -38,28 +38,26 @@ let analyser={};
     for(let b=0;b<location.hash.length;b++){
   if(location.hash[b]=="t")
   {
-  if(b==2)
-    {if(location.hash[b-1]==",")
-      {window.isTouch=false;
-        break;
-      }
-      else window.isTouch=true;
+            if(location.hash[b-1]==",")
+      {if(b>=2)
+        {if(location.hash[b-2]!=".")
+        {window.isTouch=false;
+        break;}
 
-  }
-        else if(b>=3)    
-          {
-            if(location.hash[b-1]==","&&location.hash[b-2]!=".")
-      {window.isTouch=false;
-        break;
-      }
-            if(location.hash[b-1]!="."&&location.hash[b-1]!=","&&location.hash[b-2]!="."&&location.hash[b-2]!=",")        window.isTouch=true;
-            window.isTouch=true;
+        
+        }
+        
+        }
+              else    if(location.hash[b-1]!=".")
+  window.isTouch=true;
+
+            }
     }
-}
-      else window.isTouch=true;
+    
+
 
   
-}
+
       
 function route(){
     if(!micOn&&!window.isTouch&&!userHasGestured){
