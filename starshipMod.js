@@ -3847,9 +3847,8 @@ function constellationCoordFind(){//needs to be tuned for ngenesis
 var min = 100000.;
 //cloverConstellation[1]=new THREE.Vector2(0,.5)
 //cloverConstellation[2]=new THREE.Vector2(.5,0.)
-let nGenesisModulodY=uniforms.coords.value.y;
-                                     if(uniforms.nGenesis.value>0)nGenesisModulodY=
-                 (-uniforms.coords.value.y-Math.sign(uniforms.coords.value.y)*Math.floor(-(Math.abs(uniforms.coords.value.y))/(2**(uniforms.nGenesis.value+1))));
+                 if(uniforms.nGenesis.value>0)nGenesisModulodY=
+                     uniforms.coords.value.y-(Math.round(((uniforms.coords.value.y))*(2**(uniforms.nGenesis.value-1.))))/(2**(uniforms.nGenesis.value-1));
 
     var bestFit=0;
 for(var m=0;m<cloverConstellation.length;m++)
