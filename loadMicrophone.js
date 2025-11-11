@@ -4,6 +4,7 @@ window.touchMode = false;
 
     window.micOn = false;
 window.audioX={};
+window.isTouch = false;
 
 let analyser={};
     window.source;
@@ -43,7 +44,6 @@ function route(){
 
 }
 document.getElementById( "load message").innerHTML = "Tap the screen or a key to load!";
-let isTouch = false;
 for(let b=0;b<location.hash.length;b++){
   if(location.hash[b]=="t")
   {
