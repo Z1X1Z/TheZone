@@ -35,16 +35,29 @@ let analyser={};
         micOn = true;
       });
     }
-      for(let b=0;b<location.hash.length;b++){
+    for(let b=0;b<location.hash.length;b++){
   if(location.hash[b]=="t")
   {
-  if(b>=2)
-    {if(location.hash[b-1]!="."&&location.hash[b-1]!=",")
-      
-        window.isTouch=true;
+  if(b==2)
+    {if(location.hash[b-1]==",")
+      {window.isTouch=false;
+        break;
+      }
+      else window.isTouch=true;
+
   }
+        else if(b>=3)    
+          {
+            if(location.hash[b-1]==","&&location.hash[b-2]!=".")
+      {window.isTouch=false;
+        break;
+      }
+            if(location.hash[b-1]!="."&&location.hash[b-1]!=","&&location.hash[b-2]!="."&&location.hash[b-2]!=",")        window.isTouch=true;
+            window.isTouch=true;
+    }
 }
-    else window.isTouch=true;
+      else window.isTouch=true;
+
   
 }
       
