@@ -3604,7 +3604,7 @@ vec4 tol(vec2 p, vec2 t){
     float petalNumber = petals+6.;
 
   //  if(mod(atan(p.x,p.y)/PI2+1.,1.)<.25)p=vec2(0.);
-  if(petalNumber<=6.&&0==1) p /=squirgleDynamic[int((mod((atan(p.y,p.x)*6./petalNumber//
+  if(petalNumber<=6.) p /=squirgleDynamic[int((mod((atan(p.y,p.x)*6./petalNumber//
                                             +PI2*4.
            +PI/petalNumber/2.
                                             )/PI2

@@ -3847,11 +3847,13 @@ function constellationCoordFind(){//needs to be tuned for ngenesis
 var min = 100000.;
 //cloverConstellation[1]=new THREE.Vector2(0,.5)
 //cloverConstellation[2]=new THREE.Vector2(.5,0.)
-
-                                                         var bestFit=0;
+let nGenesisModulodY=uniforms.coords.value.y;
+if(uniforms.nGenesis.value>0)nGenesisModulodY=
+(uniforms.coords.value.y-Math.floor(uniforms.coords.value.y/(2**(uniforms.nGenesis.value+1))));
+                                                         var bestFit=0
 for(var m=0;m<cloverConstellation.length;m++)
 {
-    let proximity = Math.sqrt((cloverConstellation[m].x+uniforms.coords.value.x)**2.+(cloverConstellation[m].y-uniforms.coords.value.y)**2.)
+    let proximity = Math.sqrt((cloverConstellation[m].x+uniforms.coords.value.x)**2.+(cloverConstellation[m].y-nGenesisModulodY)**2.)
     if(proximity<min&&isFinite(proximity)){min=proximity; bestFit=m;}
 }
                                                    
@@ -3859,8 +3861,8 @@ for(var m=0;m<cloverConstellation.length;m++)
                                                       
 
                                                          
-uniforms.constellationCoord.value=new THREE.Vector2( -coordX- uniforms.constellationCoord.value.x,-coordY- uniforms.constellationCoord.value.y);
-               //  console.log(uniforms.constellationCoord.value)                                      
+uniforms.constellationCoord.value=new THREE.Vector2( -uniforms.coords.value.x- uniforms.constellationCoord.value.x,-nGenesisModulodY- uniforms.constellationCoord.value.y);
+                 console.log(uniforms.constellationCoord.value)                                      
                                                          
 /*
 if(uniforms.coords.value.y<-.5)
