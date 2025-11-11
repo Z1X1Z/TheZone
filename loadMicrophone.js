@@ -43,8 +43,14 @@ function route(){
 
 }
 document.getElementById( "load message").innerHTML = "Tap the screen or a key to load!";
-
-if(location.hash.includes("t")&&!location.hash.includes(",t")&&!location.hash.includes(".t")){
+let isTouch = false;
+for(let b=0;b<location.hash.length;b++){
+  if(location.hash[b]=="t")
+  {
+  if(b<=1)if(location.hash[b-1]!="."&&location.hash[b-1]!=",")isTouch=true;
+  }
+}
+if(isTouch){
     
         document.getElementById( "load message").innerHTML = "";
         console.log("Touch only mode!")
