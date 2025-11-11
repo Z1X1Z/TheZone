@@ -4,7 +4,6 @@ window.touchMode = false;
 
     window.micOn = false;
 window.audioX={};
-window.isTouch = false;
 
 let analyser={};
     window.source;
@@ -35,8 +34,17 @@ let analyser={};
         micOn = true;
       });
     }
+      for(let b=0;b<location.hash.length;b++){
+  if(location.hash[b]=="t")
+  {
+  if(b>=1)
+    {if(location.hash[b-1]!="."&&location.hash[b-1]!=",")window.isTouch=true;
+    }
+    else window.isTouch=true;
+  }
+}
 function route(){
-    if(!micOn&&(!location.hash.includes("t")||location.hash.includes(",t")||location.hash.includes(".t"))&&!userHasGestured){
+    if(!micOn&&!window.isTouch&&!userHasGestured){
         document.getElementById( "load message").innerHTML = "";
         startMic();
     }
@@ -44,16 +52,8 @@ function route(){
 
 }
 document.getElementById( "load message").innerHTML = "Tap the screen or a key to load!";
-for(let b=0;b<location.hash.length;b++){
-  if(location.hash[b]=="t")
-  {
-  if(b>=1)
-    {if(location.hash[b-1]!="."&&location.hash[b-1]!=",")isTouch=true;
-    }
-    else isTouch=true;
-  }
-}
-if(isTouch){
+
+if(window.isTouch){
     
         document.getElementById( "load message").innerHTML = "";
         console.log("Touch only mode!")
