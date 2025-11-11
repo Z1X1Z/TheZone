@@ -47,7 +47,10 @@ let isTouch = false;
 for(let b=0;b<location.hash.length;b++){
   if(location.hash[b]=="t")
   {
-  if(b<=1)if(location.hash[b-1]!="."&&location.hash[b-1]!=",")isTouch=true;
+  if(b>=1)
+    {if(location.hash[b-1]!="."&&location.hash[b-1]!=",")isTouch=true;
+    }
+    else isTouch=true;
   }
 }
 if(isTouch){
