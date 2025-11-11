@@ -3848,8 +3848,9 @@ var min = 100000.;
 //cloverConstellation[1]=new THREE.Vector2(0,.5)
 //cloverConstellation[2]=new THREE.Vector2(.5,0.)
 let nGenesisModulodY=uniforms.coords.value.y;
-         if(uniforms.nGenesis.value>0)nGenesisModulodY=
-                 (Math.sign(-uniforms.coords.value.y)*Math.floor((Math.abs(uniforms.coords.value.y))/(2**(uniforms.nGenesis.value+1)-uniforms.coords.value.y)));
+                     if(uniforms.nGenesis.value>0)nGenesisModulodY=
+                 (Math.sign(uniforms.coords.value.y)*Math.floor((Math.abs(uniforms.coords.value.y))/(2**(uniforms.nGenesis.value+1)-uniforms.coords.value.y)));
+
     var bestFit=0;
 for(var m=0;m<cloverConstellation.length;m++)
 {
