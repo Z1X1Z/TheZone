@@ -3862,7 +3862,7 @@ for(var m=0;m<cloverConstellation.length;m++)
 
                                                          
 uniforms.constellationCoord.value=new THREE.Vector2( -uniforms.coords.value.x- uniforms.constellationCoord.value.x,-nGenesisModulodY- uniforms.constellationCoord.value.y);
-                 console.log(uniforms.constellationCoord.value)                                      
+            //     console.log(uniforms.constellationCoord.value)                                      
                                                          
 /*
 if(uniforms.coords.value.y<-.5)
