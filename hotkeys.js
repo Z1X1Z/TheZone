@@ -261,6 +261,7 @@ function resetAll(){
     window.DAW=false;
     if(!("DAWSonicTouchArray" in window))    window.DAWSonicTouchArray=[];
         window.osmdSound = false;
+        window.soundPermanentlyMuted=false;
     window.playQuietestSound = false;
     window.guitarMODE=false;
     window.extremeFrets=true;
@@ -851,8 +852,11 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
     else if (event.altKey&&(key=="π"||key=="p"))uniforms.pixelSTARon.value=!uniforms.pixelSTARon.value;
     else if (event.altKey&&(key=="©"||key=="g"))window.grabStar=!window.grabStar;
     else if (event.altKey&&(key=="ß"||key=="s")){
+        if(!soundPermanentlyMuted)
+        {
         if(window.touchMode||window.touchOnlyMode)window.muteTouchTouchVolume = !window.muteTouchTouchVolume;
         else window.muteVoiceTouchVolume = !window.muteVoiceTouchVolume;
+        }
     }
     else if (event.altKey&&(key=="∫"||key=="b")){
                  if(!muteToggle&&!runningHash)
@@ -1031,7 +1035,13 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                 else if((key=="…"||key==";")&&event.altKey&&!event.shiftKey) uniforms.superStable.value=!uniforms.superStable.value;
        
                 
-    else if (event.altKey&&key=="f")console.log("speakers disabled!");//speakers turned off in manny.html
+    else if (event.altKey&&key=="f")
+        {
+            console.log("speakers disabled!");//speakers turned off in manny.html
+            soundPermanentlyMuted=true;
+            muteTouchTouchVolume=true;
+            muteVoiceTouchVolume=true;
+        }
                 
     else if(event.ctrlKey||event.altKey);//swallow remaining possibilities, muting keypress
     /*if(key == "k" && event.ctrlKey)

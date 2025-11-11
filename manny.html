@@ -276,7 +276,7 @@ let maxLetterDepth=-1;
             if (userHasGestured)        loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")
             else        setTimeout(wrapperLurker,100);
         }
-        if(!location.hash.includes(".f"))   wrapperLurker();
+        wrapperLurker();
         </script>
 
         <!-- removing this script may fix android no load bug, but I'm testing z ordering in css        -->

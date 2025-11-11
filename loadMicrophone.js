@@ -1,6 +1,7 @@
 window.fftSize=2048
     window.touchOnlyMode = false;
 window.touchMode = false;
+    window.isTouch=false;
 
     window.micOn = false;
 window.audioX={};
@@ -37,12 +38,16 @@ let analyser={};
       for(let b=0;b<location.hash.length;b++){
   if(location.hash[b]=="t")
   {
-  if(b>=1)
-    {if(location.hash[b-1]!="."&&location.hash[b-1]!=",")window.isTouch=true;
-    }
-    else window.isTouch=true;
+  if(b>=2)
+    {if(location.hash[b-1]!="."&&location.hash[b-1]!=",")
+      
+        window.isTouch=true;
   }
 }
+    else window.isTouch=true;
+  
+}
+      
 function route(){
     if(!micOn&&!window.isTouch&&!userHasGestured){
         document.getElementById( "load message").innerHTML = "";
