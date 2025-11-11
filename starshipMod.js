@@ -19,12 +19,12 @@ else{
 
 function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
     if(!runningHash&&typeof THREE=="object" && document.visibilityState=="visible"
-       &&(window.micOn||(location.hash.includes("t")&&!location.hash.includes(",t")&&!location.hash.includes(".t")))){
+       &&(window.micOn||window.isTouch)){
        document.getElementById( "background_wrap").style =  "height: 0px; width: 0px;"
         //"background-image: none;";//turn off splash!
         document.getElementById( "load message").innerHTML = "";//turn off splash!
 
-                if(location.hash.includes("t")&&!location.hash.includes(",t")&&!location.hash.includes(".t"))
+                if(window.isTouch)
               {
                 window.touchOnlyMode=true;
               }
