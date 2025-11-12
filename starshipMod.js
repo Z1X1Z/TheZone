@@ -811,7 +811,8 @@ uniforms.dotCoord.value = new THREE.Vector2(0.,0.);
          }
 function init() {
              
-             for(var m=0;m<cloverConstellation.length;m++)cloverConstellation[m]=new THREE.Vector2(0.,0.)
+             for(var m=0;m<cloverConstellation.length;m++)cloverConstellation[m]=new THREE.Vector2(0.,0.);
+             for(var m=0;m<squirgleSize;m++)uniforms.squirgleDynamic.value[m]=0.;
                 // for(var m=0;m<cloverSquirgle.length;m++)cloverSquirgle[m]=new THREE.Vector2(0.,0.)
                  
              colorSound = new THREE.Color();
