@@ -6647,8 +6647,7 @@ if(mny.r!=0.||mny.g!=0.||mny.b!=0.)mny-=pixelShipGrey*12.;
 
                                                   vec4 layeredOUT =vec4(0.);
                           // if (isBlack==1.&&starship.w==1.)layeredOUT=vec4(vec3(0.),1.);
-                          //if(movieTime<=5.&&movieTime>=0.||movieTime==-2.)layeredOUT=vec4(movie(characterP),1.);
-                         // else if(movieTime==-2.)layeredOUT=vec4(0.);
+                   
                     if(constellation||squirgle==1)layeredOUT=vec4(zoomer,1.);
                                  else if(length(p)<2.*sqrt2/min(resolution.x,resolution.y)) layeredOUT=vec4(zoomer,1.);
                                               else if (hypnoticHarmonicCircles.x==hypnoticHarmonicCircles.y&&hypnoticHarmonicCircles.x==hypnoticHarmonicCircles.z&&hypnoticHarmonicCircles.x!=0.)layeredOUT=vec4(vec3(hypnoticHarmonicCircles.x),1.);
@@ -6832,6 +6831,8 @@ fin/vec4(confraculator
        
 
                    }
+           if(movieTime<=5.&&movieTime>=0.||movieTime==-2.)layeredOUT=vec4(movie(characterP),1.);
+                          else if(movieTime==-2.)layeredOUT=vec4(0.);
                    
                         gl_FragColor=layeredOUT;//vec4(movie(characterP),1.);//
 //things known to cause bugs on some android chrome: heart (divides by zero), linear eq,waveform, "144000" men and women in clover, articles
