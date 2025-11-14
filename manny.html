@@ -6551,6 +6551,12 @@ if(mny.r!=0.||mny.g!=0.||mny.b!=0.)mny-=pixelShipGrey*12.;
 
 
 }
+if ((HEART.x!=0.||HEART.y!=0.||HEART.z!=0.)&&oneEye.r!=0.)
+{
+    HEART=-oneEye;
+    heartWarmed=-oneEye;
+}
+if(oneEye.r!=0.)zoomer=-oneEye;
 
                                                             if(oneEye.r!=0.&&pixelShipGrey!=0.)oneEye=vec3(pixelShipGrey);
 
