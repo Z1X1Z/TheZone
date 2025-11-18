@@ -712,14 +712,18 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
    && 0.<=hyperCoreBoosted&&MetaCored)
 {
     if(spinTowardsMe) if(i>=hyperCoreBoosted)s=spin(s,Math.atan2(d.y,d.x));
+        var angleS = Math.atan2(s.y,s.x);
 
+                                                                if( (angleS+Math.PI*2-Math.PI*2/12.)%(Math.PI*2/3.)>Math.PI*2/6.) //p*=0.;
+                                                                {
+                                                                    s=spin(s,Math.PI);//balances inherited colors
+                                                                }
     var cloverOrDaisyOnTop = counter;
     if(twelveGates)cloverOrDaisyOnTop=counter+1.;
     
         if(twelveGatesMeta!=0.&&((twelveGatesMeta<1.&&(cloverOrDaisyOnTop-.5)%(1./twelveGatesMeta)>=1.)||
                                  (twelveGatesMeta>=1.&&cloverOrDaisyOnTop%twelveGatesMeta)<1.))
         {
-        var angleS = Math.atan2(s.y,s.x);
         if(((angleS/Math.PI+2.)*6.+.5)%2.>1.)s=spin(s,Math.PI/6.);
         }
    if(superStable)
