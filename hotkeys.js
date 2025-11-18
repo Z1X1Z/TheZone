@@ -596,7 +596,7 @@ source.connect(analyser);
 
                                           else  if((key == "U") && event.altKey&&event.ctrlKey)uniforms.ringSpring.value=!uniforms.ringSpring.value;
 
-                                          else  if((key == "R") && event.altKey&&event.ctrlKey)uniforms.starArms.value=!uniforms.starArms.value;
+                                          else  if((key == "R") && event.altKey&&event.ctrlKey)uniforms.armStar.value=!uniforms.armStar.value;
                                           
             
                 else if(key == "J" && event.ctrlKey)
