@@ -4726,9 +4726,9 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
 }
 else break;
 
-  vec2 deSplicedS =s;
+  vec2 deSplicedS =vec2(0.);
     if(length(pCenterCored)<2./3.&&length(s)<2./3.) deSplicedS=lastS;
-
+    else deSplicedS=s;
    if(unSwitch)   deSplicedS=spin2(deSplicedS,PI);
 
   if(gated)deSplicedS=spin2(deSplicedS,-PI/6.);
