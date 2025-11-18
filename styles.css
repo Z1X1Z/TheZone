@@ -1,7 +1,6 @@
 body
 {
     font-family: 'Courier New', monospace;
-    font-size: 1.2em;
     color:  #3baaff;
     background-color:black;
     margin-left: 7%;
@@ -62,14 +61,14 @@ a:visited {
 h1
 {
     line-height: 1.7em;
-    font-size: 2em;
+    font-size: 50px;
 
 }
 
 h2
 {
 
-    font-size: 1.5em;
+    font-size: 40px;
 
 }
 li {
