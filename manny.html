@@ -3704,15 +3704,15 @@ vec4 tol(vec2 p, vec2 t){
                          if(cloverOffset!=0.)p=spin2(p,cloverOffset*PI2);
                     
                     bool gated = false;
-                    float unSwitch=0.;
-                                             float angle = atan(p.y,p.x);
+                    bool unSwitch=false;
 
                                                                // if( mod(angle+PI2-PI2/12.,PI2/3.)>PI2/6.) //p*=0.;
                                                                // p=spin2(p,PI);
 
                          if(twelveGates)
                          {
-                             
+                                                                          float angle = atan(p.y,p.x);
+
 
                          if(mod((angle*divideByMultiplyingPi+2.)*6.+.5,2.)>1.){p=spin2(p,PI/6.);
                                 gated=true;
@@ -4574,8 +4574,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
                                                                 if( mod(angleS+PI2+PI2/12.,PI2/3.)>PI2/6.) //p*=0.;
                                                                 {
                                                                     s=spin2(s,PI);//balances inherited colors
-                                                                    if(unSwitch==0.) unSwitch= PI;
-                                                                    else unSwitch=0.;
+                                                                    unSwitch= !unSwitch;
                                                                 }
 
    float cloverOrDaisyOnTop = counter;
@@ -4723,7 +4722,7 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
 else break;
 
   vec2 deSplicedS =s;
-      deSplicedS=spin2(deSplicedS,unSwitch);
+   if(unSwitch)   deSplicedS=spin2(deSplicedS,PI);
 
   if(gated)deSplicedS=spin2(deSplicedS,-PI/6.);
 
