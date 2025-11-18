@@ -3706,12 +3706,17 @@ vec4 tol(vec2 p, vec2 t){
                     bool gated = false;
                     bool unSwitch=false;
 
-                                                               // if( mod(angle+PI2-PI2/12.,PI2/3.)>PI2/6.) //p*=0.;
-                                                               // p=spin2(p,PI);
+                    
+                                                                                              float angle = atan(p.y,p.x);
+
+                                                                if( morph==0.&&mod(angle+PI2-PI2/12.,PI2/3.)<PI2/6.) //p*=0.;
+                                                                {
+                                                                    p=spin2(p,PI);//balances inherited colors
+                                                                    unSwitch= !unSwitch;
+                                                                }
 
                          if(twelveGates)
                          {
-                                                                          float angle = atan(p.y,p.x);
 
 
                          if(mod((angle*divideByMultiplyingPi+2.)*6.+.5,2.)>1.){p=spin2(p,PI/6.);
@@ -4571,7 +4576,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
 
 
 
-                                                                if( morph==0.&&mod(angleS+PI2-PI2/12.,PI2/3.)>PI2/6.) //p*=0.;
+                                                                if( morph==0.&&mod(angleS+PI2+PI2/12.,PI2/3.)>PI2/6.) //p*=0.;
                                                                 {
                                                                     s=spin2(s,PI);//balances inherited colors
                                                                     unSwitch= !unSwitch;
@@ -4610,7 +4615,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
                 hyperCoreOUTPUT-=1.;
                 loops+=1.;
             }
-            
+
             hyperCoreBoosted-=.5;;
             hyperCoreOUTPUT-=.5;;
             loops+=.5;;
@@ -4722,6 +4727,8 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
 else break;
 
   vec2 deSplicedS =s;
+    if(length(pCenterCored)<2./3.) deSplicedS=lastS;
+
    if(unSwitch)   deSplicedS=spin2(deSplicedS,PI);
 
   if(gated)deSplicedS=spin2(deSplicedS,-PI/6.);
