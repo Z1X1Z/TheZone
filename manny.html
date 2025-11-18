@@ -3704,13 +3704,18 @@ vec4 tol(vec2 p, vec2 t){
                          if(cloverOffset!=0.)p=spin2(p,cloverOffset*PI2);
                     
                     bool gated = false;
+                                             float angle = atan(p.y,p.x);
+
+                                                               // if( mod(angle+PI2-PI2/12.,PI2/3.)>PI2/6.) //p*=0.;
+                                                               // p=spin2(p,PI);
 
                          if(twelveGates)
                          {
                              
-                         float angle = atan(p.y,p.x);
+
                          if(mod((angle*divideByMultiplyingPi+2.)*6.+.5,2.)>1.){p=spin2(p,PI/6.);
                                 gated=true;
+
                                 }
                                 }
 
@@ -4610,15 +4615,24 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
     if(spinTowardsMe) if(float(i)>=hyperCoreBoosted-.5)s=spin2(s,atan(d.y,d.x));
 
    // if(distributor)s=spin2(s,distributorFACTOR);
+
+       float angleS = atan(s.y,s.x);
+        // s=spin2(s,PI*sign(angleS));
+
+
+
+                                                                if( mod(angleS+PI2+PI2/12.,PI2/3.)>PI2/6.) //p*=0.;
+                                                                s=spin2(s,PI);//balances inherited colors
+
    float cloverOrDaisyOnTop = counter;
    if(twelveGates)cloverOrDaisyOnTop=counter+1.;
 
     if(twelveGatesMeta!=0.&&((twelveGatesMeta<1.&&mod(-.5+cloverOrDaisyOnTop,1./twelveGatesMeta)>=1.)||
                              (twelveGatesMeta>=1.&&mod(cloverOrDaisyOnTop,twelveGatesMeta)<1.)))
     {
-    float angleS = atan(s.y,s.x);
     if(mod((angleS*divideByMultiplyingPi+2.)*6.+.5,2.)>1.)
-    {s=spin2(s,PI/6.);
+    {
+        s=spin2(s,PI/6.);
            gated=true;
            }
 
