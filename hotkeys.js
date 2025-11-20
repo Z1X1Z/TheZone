@@ -213,7 +213,8 @@ noteFrozen:{value:0},
   volumeFret4:{value:0.},
     armStar:{value:true},
       smush:{value:0.2},
-      ringSpring:{value:true}
+      ringSpring:{value:true},
+      squeezeN:{value:1.}
 
 
 }
@@ -590,14 +591,22 @@ source.connect(analyser);
                                           
                 {if(number!="no number")
                     uniforms.smush.value=number;
-                else if( uniforms.smush.value!=0.)uniforms.smush.value=1.
+                else if( uniforms.smush.value!=0.)uniforms.smush.value=1.;
                     else  uniforms.smush.value=0.;
                 }
 
                                           else  if((key == "U") && event.altKey&&event.ctrlKey)uniforms.ringSpring.value=!uniforms.ringSpring.value;
 
                                           else  if((key == "R") && event.altKey&&event.ctrlKey)uniforms.armStar.value=!uniforms.armStar.value;
+
+                                          else  if(key == "Q" && event.altKey&&event.ctrlKey)
                                           
+                {
+                    if(number!="no number")
+                    uniforms.squeezeN.value=number;
+                else if( uniforms.squeezeN.value!=1.)uniforms.squeezeN.value=1.;
+                    else  uniforms.squeezeN.value=2.;
+                }
             
                 else if(key == "J" && event.ctrlKey)
                     uniforms.inseyedOut.value=(1+uniforms.inseyedOut.value)%3;

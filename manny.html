@@ -764,6 +764,13 @@ radialWarp=b;
   uniforms.nGenesis.value=document.getElementById('Ngenesis').value
   
   "><br>
+        <label for="squeezeN">Squeeze:[,.Q]</label>
+             <input type="number" id="squeezeN" name="squeezeN" class="num" onkeyup="
+                  number = 'no number'
+  ;
+  uniforms.squeezeN.value=document.getElementById('squeezeN').value
+  
+  "><br>
   
   
               <input type="checkbox"  id="Variant0" name="t"  onclick= "
@@ -1897,6 +1904,8 @@ void main(){
 <script id="fragmentShader" type="x-shader/x-fragment">
     varying vec2 vUv;
     
+        uniform float squeezeN;
+
     uniform float movieTime;
     uniform float concertKeyTuning;
     uniform float noteFrozen;
@@ -3600,6 +3609,7 @@ float leafDivGR=leaf/gr;
                               
                                                                         }
 vec4 tol(vec2 p, vec2 t){
+    p*=length(p);
     float petalNumber = petals+6.;
 
   //  if(mod(atan(p.x,p.y)/PI2+1.,1.)<.25)p=vec2(0.);
@@ -3745,6 +3755,7 @@ if(refactorCores!=1.)precores=-.0;
 float cored =0.;
 if(MetaCored)cored= log(zoom)/-log(2.)+precores;
 else cored = centralCores;
+cored*=2.;
 float loops=0.;
 if(cloverSlide)loops=-1.;
 
@@ -3877,8 +3888,7 @@ float hyperCore=0.;
 
    float dif = 1.;//3.-(1.-.47805268028830)/3.;
 if(MetaCored)hyperCore=
-   cored*twoThirds+log(lfc)*logStabilizationConstant;
-    
+   cored*twoThirds/2.+log(lfc*2.)*logStabilizationConstant;
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 
 //cored/1.5+log(length(coordSHIFT))*logStabilizationConstant+uber.z;
@@ -3887,7 +3897,8 @@ float equilibriator = 1.;
 if(dilate){
 if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
    //this is to allow top level core freeze for original clover
-  hyperCore*=equilibriator;
+ 
+   hyperCore*=equilibriator;
    }
     // hyperCore-=.441/log(.5)/equilibriator;
      
@@ -4092,15 +4103,19 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
                                                       vec4 eyeScroll= vec4(0.);
                                                       vec2 lastLastS = s;
                                                          vec2 lastS = s;
+bool squeezed=false;
+bool squeezed2=false;
+    float OmniDynamicPetalShift =0.;//texture2D(omniDynamic,vec2((loops+counter)/40.,0.)).x;
+     float OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
+    
+  float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(0.//floor(loops+counter)/40.
+  ,0.)).x;
+
+
 if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
 
-    
-    float OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter)/40.,0.)).x;
-    float OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
-    
-  float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(loops+counter)/40.,0.)).x;
 
    //      if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
 
@@ -4127,7 +4142,7 @@ if(dstnce<2./3.)bubble=dstnce;
    if(Refractelate&&dstnce>refractelC){s/=refractelC;} //refractelC/=4./3.;}
    if((counter==1.&&oppositionalCoreFlop==1)||oppositionalCoreFlop==2)s=spin2(s,PI);
    lastLastS=lastS;
-    lastS = s;//before or after flop?
+   lastS = s;//before or after flop?
 
 //if(mod(counter,2.)==1.&&colorCombo==0)s =abs(s);//supposed to make clover brighter and nothing else?;
 float superUpcorer = 0.;//before or after flop?
@@ -4228,6 +4243,20 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
   // dstnce = length(s);
    
    s.x=log(abs(s.x))/log(base);
+                    if(counter==0.)      hyperCoreBoosted*=2.;
+
+     // if(counter<4.) 
+     if(!squeezed||counter==0.) 
+      { 
+        if(counter!=0.)squeezed=true;
+        hyperCoreBoosted--;
+        s*=length(s);
+ //hyperCoreBoosted*=2.;
+     }
+    //else squeezed=false;
+   //  hyperCoreBoosted-=.5;
+
+hyperCoreBoosted-=2.;;
 
    //float trunc=1.;
    //if(lfc!=0.) trunc = log(zoom/dstnce)/100.;
@@ -4547,8 +4576,9 @@ dstnce = length(s);
                       
               //    }
               gated = false;
+  
 
-for(int i=0;i<40; i++)//metacoreloop
+for(int i=0;i<200; i++)//metacoreloop
 if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<twoThirds))
     )
     && 0.<=hyperCoreBoosted&&externalCores!=0.)
@@ -4636,8 +4666,8 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
 
     //if(float(i)>=hyperCoreBoosted)s-=vec2(-cos(d.y),-cos(d.x))*.5;
 
-OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-.5)/40.,0.)).x;
-OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
+//OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-.5)/40.,0.)).x;
+//OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
   if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spin2(s,atan(s.y,s.x)*OmniPetal);
   /*
   float fanLoop = mod(loops,1.);
@@ -4723,14 +4753,28 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
         
 
         }
-
+          if(squeezed2)  hyperCoreBoosted-=1.;
      
 }
 else break;
+ 
+    // hyperCoreBoosted+=.5;
 
-  vec2 deSplicedS =vec2(0.);
-    if(length(pCenterCored)<2./3.&&length(s)<2./3.) deSplicedS=pCenterCored;
-    else deSplicedS=s;
+          if(squeezed2)  hyperCoreBoosted+=1.;
+    if(squeezed)squeezed2=true;
+
+hyperCoreBoosted--;
+hyperCoreOUTPUT--;
+                             colorShift+=hyperCoreBoosted;
+                //             dstnce = length(s);
+
+                loopSolid++;
+
+}else break;
+     //  s/=length(s);
+/*
+  vec2 deSplicedS =lastS/loops;
+   if(length(pCenterCored)<2./3.&&length(s)<2./3.) deSplicedS=pCenterCored;
    if(unSwitch)   deSplicedS=spin2(deSplicedS,PI);
 
   if(gated)deSplicedS=spin2(deSplicedS,-PI/6.);
@@ -4785,14 +4829,7 @@ else break;
                  }
                                           
             }
-hyperCoreBoosted--;
-hyperCoreOUTPUT--;
-                             colorShift+=hyperCoreBoosted;
-                //             dstnce = length(s);
-
-                loopSolid++;
-
-}else break;
+            */
                   vec2 b = s;
 ///if(multiplicatorNexus)s*=colorShift/88.8;
 
