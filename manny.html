@@ -3609,7 +3609,6 @@ float leafDivGR=leaf/gr;
                               
                                                                         }
 vec4 tol(vec2 p, vec2 t){
-    p*=pow(length(p),squeezeN-1.);
     float petalNumber = petals+6.;
 
   //  if(mod(atan(p.x,p.y)/PI2+1.,1.)<.25)p=vec2(0.);
@@ -3669,6 +3668,7 @@ vec4 tol(vec2 p, vec2 t){
         else break;
         }
         if(constellation)p=starBirth(p);
+    p*=pow(length(p),squeezeN-1.);//may cause conflict with constellation
 
    //tricellular division core unstable
                
@@ -4247,7 +4247,6 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
 
           dstnce = length(s);
 
-       if(dstnce<2./3.)s*=pow(dstnce,squeezeN-1. );
              
    //float trunc=1.;
    //if(lfc!=0.) trunc = log(zoom/dstnce)/100.;
@@ -4360,6 +4359,7 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
    s=starBirth(s);
 
    dstnce = length(s);
+       if(dstnce<2./3.)s*=pow(dstnce,squeezeN-1. );
 
 
 if(Spoker){
