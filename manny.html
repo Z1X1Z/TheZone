@@ -4753,10 +4753,10 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
         
 
         }
-        // if(counter>0.)  
      
 }
 else break;
+
 hyperCoreBoosted--;
 hyperCoreOUTPUT--;
                              colorShift+=hyperCoreBoosted;
@@ -4764,10 +4764,7 @@ hyperCoreOUTPUT--;
 
                 loopSolid++;
 
-}else break;
-     //  s/=length(s);
-/*
-  vec2 deSplicedS =lastS/loops;
+  vec2 deSplicedS =s;
    if(length(pCenterCored)<2./3.&&length(s)<2./3.) deSplicedS=pCenterCored;
    if(unSwitch)   deSplicedS=spin2(deSplicedS,PI);
 
@@ -4795,7 +4792,7 @@ hyperCoreOUTPUT--;
                 //return beta;
         }
 
-                 if(dstnce<twoThirds||(spokesVisualizeColors&&dstnce<4./3.)) if(vUv.x!=0.&&vUv.y!=0.&&vUv.x!=1.&&vUv.y!=1.){
+             /*    if(dstnce<twoThirds||(spokesVisualizeColors&&dstnce<4./3.)) if(vUv.x!=0.&&vUv.y!=0.&&vUv.x!=1.&&vUv.y!=1.){
                     float decayCanceller=1.;
                     if(spokesVisualizeColors)decayCanceller = 2.;
                     //if(morph!=0.)decayCanceller=decayCanceller*decayCanceller;
@@ -4808,6 +4805,7 @@ hyperCoreOUTPUT--;
                        //*length((vUv-.5)*max(resolution.x,resolution.y)/min(resolution.x,resolution.y));//+texture2D(STAR,cloverMAP);
                             
                            }
+                           */
               //   eyeScroll= roundEyes(s,vec2(0.));
             if(onehundredfortyfourthousand)
             {
@@ -4823,7 +4821,9 @@ hyperCoreOUTPUT--;
                  }
                                           
             }
-            */
+}else break;
+
+        
                   vec2 b = s;
 ///if(multiplicatorNexus)s*=colorShift/88.8;
 
