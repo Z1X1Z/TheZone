@@ -3609,7 +3609,7 @@ float leafDivGR=leaf/gr;
                               
                                                                         }
 vec4 tol(vec2 p, vec2 t){
-    p*=length(p);
+    p*=pow(length(p),squeezeN-1.);
     float petalNumber = petals+6.;
 
   //  if(mod(atan(p.x,p.y)/PI2+1.,1.)<.25)p=vec2(0.);
@@ -3755,7 +3755,7 @@ if(refactorCores!=1.)precores=-.0;
 float cored =0.;
 if(MetaCored)cored= log(zoom)/-log(2.)+precores;
 else cored = centralCores;
-cored*=2.;
+cored*=squeezeN;
 float loops=0.;
 if(cloverSlide)loops=-1.;
 
@@ -3888,7 +3888,7 @@ float hyperCore=0.;
 
    float dif = 1.;//3.-(1.-.47805268028830)/3.;
 if(MetaCored)hyperCore=
-   cored*twoThirds/2.+log(lfc*2.)*logStabilizationConstant;
+   cored*twoThirds/squeezeN+log(lfc*squeezeN)*logStabilizationConstant;
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 
 //cored/1.5+log(length(coordSHIFT))*logStabilizationConstant+uber.z;
@@ -4243,20 +4243,21 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
   // dstnce = length(s);
    
    s.x=log(abs(s.x))/log(base);
-                    if(counter==0.)      hyperCoreBoosted*=2.;
+                    if(counter==0.)      hyperCoreBoosted*=squeezeN;
 
      // if(counter<4.) 
+     float squeezeDegree = squeezeN-1.;
      if(!squeezed||counter==0.) 
       { 
         if(counter!=0.)squeezed=true;
-        hyperCoreBoosted--;
-        s*=length(s);
+        hyperCoreBoosted-=squeezeDegree;
+        s*=pow(length(s),squeezeN-1.);
  //hyperCoreBoosted*=2.;
      }
     //else squeezed=false;
    //  hyperCoreBoosted-=.5;
 
-hyperCoreBoosted-=2.;;
+hyperCoreBoosted-=squeezeDegree*2.;
 
    //float trunc=1.;
    //if(lfc!=0.) trunc = log(zoom/dstnce)/100.;
@@ -4753,14 +4754,14 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
         
 
         }
-          if(squeezed2)  hyperCoreBoosted-=1.;
+          if(squeezed2)  hyperCoreBoosted-=squeezeDegree;
      
 }
 else break;
  
     // hyperCoreBoosted+=.5;
 
-          if(squeezed2)  hyperCoreBoosted+=1.;
+          if(squeezed2)  hyperCoreBoosted+=squeezeDegree;
     if(squeezed)squeezed2=true;
 
 hyperCoreBoosted--;
