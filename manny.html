@@ -3854,7 +3854,7 @@ else if (refactorCores==0.){//for double slide core
 
    if(seventhEYE&&zoom<.5&&(length(p)<2./3.||length(s)<2./3.))
 {
-    s=1./(2.5-vec2(-s.x,abs(s.y)));//this needs some exploration//here needs activation and new hotkey
+    s=1.5/(2.75-vec2(-s.x,abs(s.y)));//this needs some exploration//here needs activation and new hotkey
 
 }
 if(fieldPowerBoost){
@@ -3960,10 +3960,10 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
    if(multiplicatorNexus)hyperCore-=.5/log(.5);
    if(continuumClover!=0)hyperCore-=0./log(.5);
 
-   if(polyNomialStretch)hyperCore-=1./log(.5)/squeezeN;//for central polynomial
+   if(polyNomialStretch)hyperCore-=.5/log(.5)/squeezeN;//for central polynomial
 
    if(seventhEYE&&length(p)<2./3.
-   )hyperCore-=.75/log(.5);///squeezeN;//for central polynomial
+   )hyperCore-=1./log(.5);///squeezeN;//for central polynomial
    float lpcc=length(pCenterCored);
    float lpcc2=lpcc*lpcc;
 //if(fieldPowerBoost)hyperCore+=1./log(.5);

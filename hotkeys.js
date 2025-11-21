@@ -215,8 +215,8 @@ noteFrozen:{value:0},
       smush:{value:0.2},
       ringSpring:{value:true},
       squeezeN:{value:1.},
-seventhEYE:{value:false},
-polyNomialStretch:{value:false}
+seventhEYE:{value:true},
+polyNomialStretch:{value:true}
 
 }
 window.uniforms={}
@@ -608,7 +608,7 @@ source.connect(analyser);
                 else if( uniforms.squeezeN.value!=1.)uniforms.squeezeN.value=1.;
                     else  uniforms.squeezeN.value=2.;
                 }
-                                                      else  if(key == "P" && event.altKey&&event.ctrlKey)uniforms.polyNomialStretch.value=!uniforms.polyNomialStretch.valuej;
+                                                      else  if(key == "P" && event.altKey&&event.ctrlKey)uniforms.polyNomialStretch.value=!uniforms.polyNomialStretch.value;
                                           else  if(key == "O" && event.altKey&&event.ctrlKey)uniforms.seventhEYE.value=!uniforms.seventhEYE.value;
 
                 else if(key == "J" && event.ctrlKey)
