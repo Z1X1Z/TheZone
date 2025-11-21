@@ -3787,10 +3787,17 @@ if(refactorCores>1.)
         p/=2.;
     }
 else if (refactorCores==0.) p/=3.;
-   // for(float floop = 0.; floop<2.;floop++)
- //  if(seventhEYE&&zoom<.5&&length(p)<2./3.) p=1./(2.+abs(p));//this needs some exploration//here needs activation and new hotkey
+    float lengthP = length(p);
 
+   // for(float floop = 0.; floop<2.;floop++)
+
+  
 vec2 s=p;
+ if(seventhEYE&&zoom<.5&&(length(s)<2./3.))
+{
+    s=1.5/(2.5-vec2(-s.x,abs(s.y)+1./3.));//this needs some exploration//here needs activation and new hotkey
+
+}
                                 
                                 /*makes for a pretty fractal with odd symmetry
                                 if(true)
@@ -3852,7 +3859,7 @@ else if (refactorCores==0.){//for double slide core
     s*=1.5;c*=1.5;
 }
 
-   if(seventhEYE&&zoom<.5&&(length(p)<2./3.||length(s)<2./3.))
+   if(0==1&&seventhEYE&&zoom<.5&&(length(p)<2./3.||length(s)<2./3.))
 {
     s=1.5/(2.5-vec2(-s.x,abs(s.y)+1./3.));//this needs some exploration//here needs activation and new hotkey
 
@@ -3959,7 +3966,6 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
    
    if(multiplicatorNexus)hyperCore-=.5/log(.5);
    if(continuumClover!=0)hyperCore-=0./log(.5);
-    float lengthP = length(p);
    if(polyNomialStretch)
    {
    if(!seventhEYE||lengthP>2./3.    )   hyperCore-=.5/log(.5);
@@ -3968,7 +3974,7 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
    }
 
    if(seventhEYE&&lengthP<2./3.
-   )hyperCore-=.75/log(.5);///squeezeN;//for central polynomial
+   )hyperCore-=2.25/log(.5);///squeezeN;//for central polynomial
    float lpcc=length(pCenterCored);
    float lpcc2=lpcc*lpcc;
 //if(fieldPowerBoost)hyperCore+=1./log(.5);
