@@ -3963,7 +3963,7 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
    if(polyNomialStretch)hyperCore-=1./log(.5)/squeezeN;//for central polynomial
 
    if(seventhEYE&&length(p)<2./3.
-   )hyperCore-=1.25/log(.5);///squeezeN;//for central polynomial
+   )hyperCore-=.75/log(.5);///squeezeN;//for central polynomial
    float lpcc=length(pCenterCored);
    float lpcc2=lpcc*lpcc;
 //if(fieldPowerBoost)hyperCore+=1./log(.5);
