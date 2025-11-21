@@ -3962,8 +3962,8 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
     float lengthP = length(p);
    if(polyNomialStretch)
    {
-   if(!seventhEYE||lengthP>2./3.)   hyperCore-=.5/log(.5)/squeezeN;//for central polynomial
-    else hyperCore-=.25/log(.5)/squeezeN;//for central polynomial
+   if(!seventhEYE||lengthP>2./3.    )   hyperCore-=.5/log(.5);
+    else hyperCore-=.125/log(.5);//for central polynomial
 
    }
 
