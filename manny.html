@@ -1182,14 +1182,14 @@ callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}))
 Reset Zoom![L]</a><br>
 
         <input type="checkbox" id="seventhEYE" name="t"  onclick= "
-                  key  = 'R=O';
+                  key  = 'O';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
                <label for="seventhEYE">seventhEYE?![,.O]</label><br>
 
 
                
                <input type="checkbox" id="polyNomialStretch" name="t"  onclick= "
-                  key  = 'R=P';
+                  key  = 'P';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
                <label for="polyNomialStretch">polyNomialStretch?![,.P]</label><br>
         
@@ -3784,7 +3784,7 @@ if(refactorCores>1.)
     }
 else if (refactorCores==0.) p/=3.;
    // for(float floop = 0.; floop<2.;floop++)
-    if(seventhEYE&&length(p)<2./3.&&zoom<.5)p=1./(2.+abs(p));//this needs some exploration//here needs activation and new hotkey
+    if(length(p)<2./3.&&zoom<.5&&seventhEYE)p=1./(2.+abs(p));//this needs some exploration//here needs activation and new hotkey
 
 vec2 s=p;
                                 
@@ -3945,7 +3945,7 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
     if(wheel)hyperCore-=1./log(.5);
     if(morph!=0.) hyperCore-=1./log(.5);
     if(Spoker&&spokelover&&dilate) hyperCore-=.0/log(.5);
-    else if (dilate)hyperCore-=3./log(.5);
+    //else if (dilate)hyperCore-=.5/log(.5);
     if(clvrVariant2)hyperCore+=1./log(.5);
 
 }
@@ -5424,7 +5424,7 @@ z.x=pow(abs(z.x),.777-t.x/49.);}
                                   float hyperCore=0.;
                                   float lfc = length(freed(coords));
                                   if(outerCoresOff) hyperCore=0.;
-                                  else if(!MetaCored)hyperCore=cored*twoThirds+log(lfc*3./2.)*logStabilizationConstant;//.9551195 is based on x=log3(x), x = .910239log3(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
+                                  else if(!MetaCored)hyperCore=cored*twoThirds+log(lfc*3./2.)*logStabilizationConstant+.25/log(.5);//.9551195 is based on x=log3(x), x = .910239log3(x).  So (1.-.910239)/2+.910239=.9551195 may be incorrect but is close to right.
                                    // if(MetaCored&&morph>=.5)hyperCore*=4./3.;//engage overstable core if dancing
 
                                   float term=0.;

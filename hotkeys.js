@@ -608,8 +608,8 @@ source.connect(analyser);
                 else if( uniforms.squeezeN.value!=1.)uniforms.squeezeN.value=1.;
                     else  uniforms.squeezeN.value=2.;
                 }
-                                                      else  if(key == "" && event.altKey&&event.ctrlKey)uniform.polyNomialStretch.value=!uniform.polyNomialStretch.valuej;
-                                          else  if(key == "O" && event.altKey&&event.ctrlKey)uniform.seventhEYE.value=!uniform.seventhEYE.valuej;
+                                                      else  if(key == "P" && event.altKey&&event.ctrlKey)uniforms.polyNomialStretch.value=!uniforms.polyNomialStretch.valuej;
+                                          else  if(key == "O" && event.altKey&&event.ctrlKey)uniforms.seventhEYE.value=!uniforms.seventhEYE.value;
 
                 else if(key == "J" && event.ctrlKey)
                     uniforms.inseyedOut.value=(1+uniforms.inseyedOut.value)%3;
