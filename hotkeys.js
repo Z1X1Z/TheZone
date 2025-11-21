@@ -216,7 +216,7 @@ noteFrozen:{value:0},
       ringSpring:{value:true},
       squeezeN:{value:1.},
 seventhEYE:{value:true},
-polyNomialStretch:{value:false   }
+polyNomialStretch:{value:true   }
 
 }
 window.uniforms={}
