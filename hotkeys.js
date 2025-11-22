@@ -218,7 +218,7 @@ noteFrozen:{value:0},
       smush:{value:0.2},
       ringSpring:{value:true},
       squeezeN:{value:1.},
-seventhEYE:{value:true},
+seventhEYE:{value:1},
 polyNomialStretch:{value:true   }
 
 }
@@ -612,7 +612,7 @@ source.connect(analyser);
                     else  uniforms.squeezeN.value=2.;
                 }
                                                       else  if(key == "P" && event.altKey&&event.ctrlKey)uniforms.polyNomialStretch.value=!uniforms.polyNomialStretch.value;
-                                          else  if(key == "O" && event.altKey&&event.ctrlKey)uniforms.seventhEYE.value=!uniforms.seventhEYE.value;
+                                          else  if(key == "O" && event.altKey&&event.ctrlKey)uniforms.seventhEYE.value=(uniforms.seventhEYE.value-1.+3.)%3;
 
                 else if(key == "J" && event.ctrlKey)
                     uniforms.inseyedOut.value=(1+uniforms.inseyedOut.value)%3;
