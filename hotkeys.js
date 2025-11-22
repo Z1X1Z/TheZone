@@ -34,6 +34,9 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                                                 
                                                   return audioBufferFromFile.duration
                            }
+                         let  zoomINITiaLizer =1.;//1/2**27;//1.;//
+                         let xINITiaLizer=0.;//1./3.;
+                           let yINITiaLizer=0.;//1./3./2.;
 window.uniformsInitial = {
 coreDilation:{value:0.},
 fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:44100./1024.},
@@ -108,7 +111,7 @@ dilate:{value:true},
         time: {value:.0 },
         rate: {value: 1.},
 
-        zoom: {value:  1.},
+        zoom: {value:  zoomINITiaLizer},
 colorCombo: {value: -1 },
 colorCombo2: {value: -1 },
         free: {value: false },
@@ -140,10 +143,10 @@ colorCombo2: {value: -1 },
 
 
         resolution: {value:[window.innerWidth,window.innerHeight]},//these are later resolved to the THREE.vec2() uniforms
-coords: {value: [0.,0.]},//to prevent dividing by zero may be set to small value
-constellationCoord: {value: [0.,0.]},//to prevent dividing by zero may be set to small value
+coords: {value: [xINITiaLizer,yINITiaLizer]},//to prevent dividing by zero may be set to small value
+constellationCoord: {value: [xINITiaLizer,yINITiaLizer]},//to prevent dividing by zero may be set to small value
         coordSHIFT: {value: [0.,0.]},
-        d: {value:[.4,.7]},
+        d: {value:[.0,.0]},
 dotCoord:{value:[0.,0.]},
 pongBallCoords:{value:[0.,window.innerWidth/gr]},
 
@@ -244,7 +247,7 @@ function resetAll(){
         Object.assign(window.uniforms[nameOfUniform],window.uniformsInitial[nameOfUniform])
     }
     if(window.touchOnlyMode)window.uniforms.pongOn.value=false;
-    window.coordX=0.; window.coordY=0.;
+    window.coordX=xINITiaLizer; window.coordY=yINITiaLizer;
     
     
     if(!location.hash.includes(".b")&&!location.hash.includes(".c")) window.BibleON=1;
@@ -283,7 +286,7 @@ function resetAll(){
     window.cycleCores = false;
     window.sheetTranslucent=false;
             window.FPS=60;
-            window.zoom=1.;
+            window.zoom=zoomINITiaLizer;
             window.ISdilated=false;
             window.RockInTheWater=0;
             window.octaveStars=true;
