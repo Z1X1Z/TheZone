@@ -3824,7 +3824,7 @@ vec2 s=p;
                                  */
 float c = length(s);
 float coresIn = 0.;
-const float crs = 60.;//this is the mandelbrot and original inheritance colormode core range
+const float crs = 64.;//this is the mandelclover and original inheritance colormode core range
 // if(c>4./3.){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
  float centerslide = 0.;
  for(int i=0;i<int(crs);//crs+3=63
@@ -4642,6 +4642,8 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
     )
     && 0.<=hyperCoreBoosted&&externalCores!=0.)
 {
+           s=freed(s*1.5)/1.5;//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+
      if(dstnce<2./3.)
      {
         float squeezer =dstnce*(pow(2.,squeezeN)-2.);
