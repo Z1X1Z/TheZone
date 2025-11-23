@@ -4224,7 +4224,7 @@ hyperCoreOUTPUT-=superUpcorer;
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
        );
 if(zoom<=.5&&counter==0.&&polyNomialStretch){
-    s*=lfc/2.+2./4.;
+    s*=(lfc+1.)/2.;//maybe other values work?
 }
 
       // if (mod(counter,5.) == 4.)s =pCenterCored;
