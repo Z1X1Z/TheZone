@@ -485,8 +485,8 @@ if(//zoom<=.5&&counter==0.&&
             s.multiplyScalar((lfc+1.)/2.);//maybe other values work?
     else s.multiplyScalar(lfc/2.+1./4.);//maybe other values work?
     */
-                s.multiplyScalar(Math.pow(lfc,.5+1./24.)*2./3.+1.);//maybe other values work?
-
+                s.multiplyScalar(Math.pow(lfc,2./3.)*2./3.+1.);//maybe other values work?
+        
 }
 
         dstnce = s.length();
@@ -759,8 +759,11 @@ for(var i=0;i<200; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.)))
    && 0.<=hyperCoreBoosted&&MetaCored)
 {
-      if(dilate)    s=freed(s.multiplyScalar(dstnce*lfc)).divideScalar(dstnce*lfc);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+      if(dilate)   {
 
+       s=freed(s.multiplyScalar(2.)).divideScalar(2.);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+        dstnce=s.length();
+      }
      if(dstnce<2./3.)
      {
         var squeezer =dstnce*((2.**squeezeN)-2.);
