@@ -485,7 +485,7 @@ if(//zoom<=.5&&counter==0.&&
             s.multiplyScalar((lfc+1.)/2.);//maybe other values work?
     else s.multiplyScalar(lfc/2.+1./4.);//maybe other values work?
     */
-                s.multiplyScalar(lfc*2./3.+1.);//maybe other values work?
+                s.multiplyScalar(Math.sqrt(lfc)*2./3.+1.);//maybe other values work?
 
 }
 

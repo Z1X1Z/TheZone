@@ -4223,12 +4223,13 @@ hyperCoreOUTPUT-=superUpcorer;
         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
        );
-if(//zoom<=.5&&counter==0.&&
+if(//zoom<=.5&&
+counter==0.&&
 polyNomialStretch){
    // if(seventhEYE==0.||lfc>2./3.)s*=(lfc+1.)/2.;//maybe other values work?
 
    // else
-    s*=(lfc*twoThirds+1.);//maybe other values work?
+    s*=(sqrt(lfc)*twoThirds+1.);//maybe other values work?
 }
 
       // if (mod(counter,5.) == 4.)s =pCenterCored;
@@ -4649,7 +4650,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
     && 0.<=hyperCoreBoosted&&externalCores!=0.)
 {
       if(dilate)   {
-      //  if (counter==0.)      s=freed(s*4.)/4.;//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+      //  if (counter==0.)      s=freed(s*8.)/8.;//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
 //else 
        s=freed(s*6.)/6.;//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
 
