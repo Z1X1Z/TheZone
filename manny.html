@@ -1193,9 +1193,19 @@ Reset Zoom![L]</a><br>
 key  = 'O';
 callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
 seventhEYE?![,.O]</a><br>
-        
+          <label for="Budge">SeventhEYE Budge!:[,.B]</label>
+                  <input type="number" id="Budge" name="Budge" class="num" onkeyup="
+                                                 number = 'no number'
+;
+                                 uniforms.budge.value=document.getElementById('Budge').value
+                                 "><br>
+
+
+
+
+
         </div>
-                                 </button>
+                                         </button>
                                 </div>
         
         <div class="dropdown">
@@ -1925,7 +1935,10 @@ void main(){
     uniform bool triogenesis;
     
         uniform float seventhEYE;
-    uniform bool polyNomialStretch;
+
+        uniform float budge;
+
+        uniform bool polyNomialStretch;
 
 
 
@@ -3795,7 +3808,8 @@ else if (refactorCores==0.) p/=3.;
 vec2 s=p;
  if(seventhEYE>0.&&(length(s)<2./3.)&&lfc>zoom)
 {
-    s=1.5/(2.5-vec2(-s.x,abs(s.y)//+1./3.//plus one third is optional
+
+    s=1.5/(2.5-vec2(-s.x,abs(s.y)+budge//plus one third is optional
     ));//this needs some exploration//here needs activation and new hotkey
     if(seventhEYE==2.)s=vec2(s.y,abs(s.x));//more sign checks may help
    // try signs and swizzle!

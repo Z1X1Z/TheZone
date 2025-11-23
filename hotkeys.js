@@ -219,6 +219,7 @@ noteFrozen:{value:0},
       ringSpring:{value:true},
       squeezeN:{value:1.},
 seventhEYE:{value:1},
+budge:{value:1./3.},
 polyNomialStretch:{value:true   }
 
 }
@@ -597,6 +598,14 @@ source.connect(analyser);
                     uniforms.smush.value=number;
                 else if( uniforms.smush.value!=0.)uniforms.smush.value=1.;
                     else  uniforms.smush.value=0.;
+                }
+
+                                          else  if((key == "B") && event.altKey&&event.ctrlKey)
+                                          
+                {if(number!="no number")
+                    uniforms.budge.value=number;
+                else if( uniforms.budge.value!=.5)uniforms.budge.value=.5;
+                    else  uniforms.budge.value=1./3.;
                 }
 
                                           else  if((key == "U") && event.altKey&&event.ctrlKey)uniforms.ringSpring.value=!uniforms.ringSpring.value;
