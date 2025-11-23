@@ -219,7 +219,7 @@ noteFrozen:{value:0},
       ringSpring:{value:true},
       squeezeN:{value:1.},
 seventhEYE:{value:1},
-budge:{value:1./3.},
+budge:{value:.5},
 polyNomialStretch:{value:true   }
 
 }
