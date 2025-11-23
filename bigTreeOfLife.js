@@ -480,7 +480,9 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
 );
     
 if(zoom<=.5&&counter==0.&&polyNomialStretch){
-    s.multiplyScalar(lfc/2.+2./4.);
+     if(seventhEYE==0.||lfc>2./3.)s.multiplyScalar((lfc+1.)/2.);//maybe other values work?
+
+    else s.multiplyScalar(lfc/2.+1./4.);//maybe other values work?
 }
         dstnce = s.length();
             if(chop&&dstnce>2./3.)s=spinVector(s,Math.floor(dstnce)*Math.PI/2.);
