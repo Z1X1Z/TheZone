@@ -4644,7 +4644,12 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
     )
     && 0.<=hyperCoreBoosted&&externalCores!=0.)
 {
-      if(dilate)    s=freed(s*4.)/4.;//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+      if(dilate)   {
+      //  if (counter==0.)      s=freed(s*4.)/4.;//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+//else 
+       s=freed(s*6.)/6.;//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+
+      } 
 
      if(dstnce<2./3.)
      {
