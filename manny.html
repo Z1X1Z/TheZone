@@ -3981,12 +3981,14 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
    
    if(multiplicatorNexus)hyperCore-=.5/log(.5);
    if(continuumClover!=0)hyperCore-=0./log(.5);
-   if(polyNomialStretch)
+  /*if(polyNomialStretch)
    {
    if(!(seventhEYE>0.)||lengthP>2./3.    )   hyperCore-=.5/log(.5);
-    else hyperCore-=.125/log(.5);//for central polynomial
+    else
+     hyperCore-=.125/log(.5);//for central polynomial
 
    }
+   */
 
    if(seventhEYE>0.&&lengthP<2./3.
    )hyperCore-=2./log(.5);///squeezeN;//for central polynomial
@@ -4222,7 +4224,7 @@ hyperCoreOUTPUT-=superUpcorer;
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
        );
 if(zoom<=.5&&counter==0.&&polyNomialStretch){
-    s*=lfc/2.+1./4.;
+    s*=lfc/2.+2./4.;
 }
 
       // if (mod(counter,5.) == 4.)s =pCenterCored;
@@ -4642,7 +4644,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
     )
     && 0.<=hyperCoreBoosted&&externalCores!=0.)
 {
-          s=freed(s*2.)/2.;//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+      if(dilate)    s=freed(s*2.)/2.;//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
 
      if(dstnce<2./3.)
      {
