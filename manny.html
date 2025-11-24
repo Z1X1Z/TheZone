@@ -3762,14 +3762,15 @@ vec4 tol(vec2 p, vec2 t){
                                                                 
 */
 
-                                                                    /*
-                                                              if(abs(angle)>5.*PI/6.)
+                                                             /*       
+                                                              if(abs(angle)>5.*PI/6.||abs(angle)<PI/6.)
                                                               {
-                                                                   // p*=0.;
-                                                                    p=spin2(p,PI);//balances inherited colors
+                                                                    p*=0.;
+                                                                    p=spin2(p,PI/3.);//balances inherited colors
                                                                 //    unSwitch= !unSwitch;
                                                                 }
                                                                 */
+                                                                
                          if(twelveGates)
                          {
 
@@ -4237,10 +4238,12 @@ hyperCoreOUTPUT-=superUpcorer;
 
 
        if(//zoom<.5&&
-    //   lengthP<twoThirds&&
 counter==0.&&
-polyNomialStretch){
+polyNomialStretch
+       //&&lengthP<twoThirds
+){
     s*=(lfc/2.+1.);//maybe other values work?
+    
 }
 
 

@@ -483,7 +483,10 @@ if(//zoom<=.5&&counter==0.&&
    // lengthP<2./3.&&
 
     counter==0.&&
-    polyNomialStretch){
+    polyNomialStretch
+   // &&lengthP<2./3.
+
+){
     /* if(seventhEYE==0.||lfc>2./3.)
             s.multiplyScalar((lfc+1.)/2.);//maybe other values work?
     else s.multiplyScalar(lfc/2.+1./4.);//maybe other values work?

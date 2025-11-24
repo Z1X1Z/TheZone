@@ -3850,11 +3850,13 @@ var min = 100000.;
 //cloverConstellation[2]=new THREE.Vector2(.5,0.)
   let  nGenesisModulodY=
                      uniforms.coords.value.y;
-                 if(uniforms.nGenesis.value>0)nGenesisModulodY=
+                 if(uniforms.nGenesis.value>0)
+                 {nGenesisModulodY=
                      uniforms.coords.value.y-(Math.round(((uniforms.coords.value.y))*(2**(uniforms.nGenesis.value-1.))))/(2**(uniforms.nGenesis.value-1));
     
          if(Math.abs( uniforms.coords.value.y)-(2.-2**(-uniforms.nGenesis.value))>0){
              nGenesisModulodY+=Math.sign(uniforms.coords.value.y)*(2**(-uniforms.nGenesis.value+1));
+         }
          }
     var bestFit=0;
 for(var m=0;m<cloverConstellation.length;m++)
