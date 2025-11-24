@@ -334,6 +334,7 @@ else{
    hyperCore-=Math.log(Math.abs(squinch));
    else
   hyperCore+=8.*Math.log(2.);
+  //hyperCore-=1.;
 }
    }
 
