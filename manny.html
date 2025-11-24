@@ -4017,8 +4017,9 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
     hyperCore-=2.25/log(.5);///squeezeN;//for central polynomial
 else{
     float squinch = (lengthP-sqrt(zoom));
-  if(squinch>.0) 
+ if(squinch>.0) 
    hyperCore-=log(abs(squinch));
+   //else
   hyperCore+=log(2.);
 }
    }
