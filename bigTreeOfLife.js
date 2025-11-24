@@ -166,7 +166,8 @@ else if (refactorCores==0.) p.divideScalar(3.);
 var s= p.clone();
 var c = s.length();
 
- if(seventhEYE>0.&&c<2./3.&&lfc>zoom)
+ if(seventhEYE>0.&&c<2./3.&&zoom<.5//&&lfc>zoom
+    )
 {
 
     s=new THREE.Vector2(1.5/(2.5+s.x),1.5/(2.5-Math.abs(s.y)+budge));//plus one third is optional
@@ -324,6 +325,17 @@ if(continuumClover!=0)hyperCore-=0./Math.log(.5);
 */
    if(seventhEYE>0.&&lengthP<2./3.
    )hyperCore-=2./Math.log(.5)+lengthP;///squeezeN;//for central polynomial
+
+
+   if(seventhEYE>0.&&lengthP<2./3.
+   )
+   {
+    var squinch = (lengthP-Math.sqrt(zoom));
+   hyperCore-=Math.log(Math.abs(squinch));
+  hyperCore+=Math.log(2.);
+   }
+
+
      if(squeezeN>1.)hyperCore-=1.;
 
 
@@ -491,11 +503,11 @@ if(//zoom<=.5&&counter==0.&&
             s.multiplyScalar((lfc+1.)/2.);//maybe other values work?
     else s.multiplyScalar(lfc/2.+1./4.);//maybe other values work?
     */
-                s.multiplyScalar(lfc/2.+1.);//maybe other values work?
+                s.multiplyScalar(lfc+1.);//maybe other values work?
         
 }
 
-        dstnce = s.length();
+        //dstnce = s.length();
             if(chop&&dstnce>2./3.)s=spinVector(s,Math.floor(dstnce)*Math.PI/2.);
 
         if(dilate){//this is to allow top level core freeze for original clover
