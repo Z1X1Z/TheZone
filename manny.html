@@ -3991,7 +3991,7 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
    */
 
    if(seventhEYE>0.&&lengthP<2./3.
-   )hyperCore-=2./log(.5);///squeezeN;//for central polynomial
+   )hyperCore-=2./log(.5)+lengthP;///squeezeN;//for central polynomial
  // if(petals!=0.)
      if(squeezeN>1.)hyperCore-=1.;
    float lpcc=length(pCenterCored);
@@ -4229,7 +4229,7 @@ polyNomialStretch){
    // if(seventhEYE==0.||lfc>2./3.)s*=(lfc+1.)/2.;//maybe other values work?
 
    // else
-    s*=(pow(lfc,2./3.)*twoThirds+1.);//maybe other values work?
+    s*=(pow(lfc,twoThirds)*twoThirds+1.);//maybe other values work?
 }
 
       // if (mod(counter,5.) == 4.)s =pCenterCored;

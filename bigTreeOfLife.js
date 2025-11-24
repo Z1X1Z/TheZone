@@ -323,7 +323,7 @@ if(continuumClover!=0)hyperCore-=0./Math.log(.5);
    }
 */
    if(seventhEYE>0.&&lengthP<2./3.
-   )hyperCore-=2./Math.log(.5);///squeezeN;//for central polynomial
+   )hyperCore-=2./Math.log(.5)+lengthP;///squeezeN;//for central polynomial
      if(squeezeN>1.)hyperCore-=1.;
 
 
