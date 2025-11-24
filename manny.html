@@ -4223,13 +4223,13 @@ hyperCoreOUTPUT-=superUpcorer;
         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
        );
-if(//zoom<=.5&&
+if(//zoom<.5&&
 counter==0.&&
 polyNomialStretch){
    // if(seventhEYE==0.||lfc>2./3.)s*=(lfc+1.)/2.;//maybe other values work?
 
    // else
-    s*=(pow(lfc,twoThirds)*twoThirds+1.);//maybe other values work?
+    s*=(lfc+1.);//maybe other values work?
 }
 
       // if (mod(counter,5.) == 4.)s =pCenterCored;
