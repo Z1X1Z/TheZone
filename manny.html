@@ -4019,8 +4019,8 @@ else{
     float squinch = (lengthP-sqrt(zoom));
  if(squinch>.0) 
    hyperCore-=log(abs(squinch));
-   //else
-  hyperCore+=log(2.);
+   else
+  hyperCore+=8.*log(2.);
 }
    }
    //if(abs(coords.y)>1.)hyperCore+=1./log(.5);

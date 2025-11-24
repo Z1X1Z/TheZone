@@ -316,21 +316,26 @@ hyperCore*=equilibriator;
    
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
 if(continuumClover!=0)hyperCore-=0./Math.log(.5);
-  /*if(polyNomialStretch)
+     if(budge==1./3.&&polyNomialStretch)//I was flying into what I think was the top of the center clover around commit 8c6a4aae1986bddb05af5d8026505c63dd0ed8be when I had a feeling like faith was shaping the clover, then a black and blue biogenesis clover (I wasn't in biogenesis!)upcored and cored and I flew into it, Then I had a screen full of free floating tripolar clovers that seemed to extend forever in all directions fitting this same type of clover together.  Then after a minute the screen rotated and became half rez and half size.  The zoom in the dimension was a constant 1
    {
-   if(!(seventhEYE>0.)||lengthP>2./3.    )   hyperCore-=.5/Math.log(.5);
+   if(seventhEYE==0.||lengthP>2./3.    )  
+   hyperCore-=.5/log(.5);
     else hyperCore-=.125/Math.log(.5);//for central polynomial
 
    }
-*/
    if(seventhEYE>0.&&lengthP<2./3.
    )
    {
+    if(budge==1./3.)
+    hyperCore-=2.25/Math.log(.5);///squeezeN;//for central polynomial
+else{
     var squinch = (lengthP-Math.sqrt(zoom));
+ if(squinch>.0) 
    hyperCore-=Math.log(Math.abs(squinch));
-  hyperCore+=Math.log(2.);
+   else
+  hyperCore+=8.*Math.log(2.);
+}
    }
-
 
      if(squeezeN>1.)hyperCore-=1.;
 
@@ -487,22 +492,17 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
 -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
 );
     
-if(//zoom<=.5&&counter==0.&&
-   // lengthP<2./3.&&
 
-    counter==0.&&
-    polyNomialStretch
-   // &&lengthP<2./3.
-
+       if(//zoom<.5&&
+counter==0.&&
+polyNomialStretch
+       //&&lengthP<twoThirds
 ){
-    /* if(seventhEYE==0.||lfc>2./3.)
-            s.multiplyScalar((lfc+1.)/2.);//maybe other values work?
-    else s.multiplyScalar(lfc/2.+1./4.);//maybe other values work?
-    */
+    if  (budge==1./3.)                 s.multiplyScalar(lfc/2.+1./4.);//maybe other values work?
+    else
                 s.multiplyScalar(lfc+1.);//maybe other values work?
-        
+    
 }
-
         //dstnce = s.length();
             if(chop&&dstnce>2./3.)s=spinVector(s,Math.floor(dstnce)*Math.PI/2.);
 
