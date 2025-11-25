@@ -3045,8 +3045,8 @@ float corebase = log(zoom/coords.x)/log(.3247)*coreShift+coreShift;
            }
 
 int core = 9+6*int(corebase);
-for (int f=0;f<100;f+=1)
-if(f==core)break;
+for (int f=0;f<102;f+=1)
+if(f==core&&zoom!=1.)break;
 else if(abs(z.y)>17.7&&(f==1||f>3)){
     //if (f==1){l=0.;break;}
     l=1.-length(z)/40.;//clouds and face
@@ -3206,7 +3206,8 @@ float arm = 0.;
         
 
                    vec2 z=spinningArm;
-                if(spinningArm.y>1.25)
+                   float armSlice = abs(spinningArm.y)*pow(abs(spinningArm.x),1./.75);
+                if(armSlice>.7&&spinningArm.y>0.&&spinningArm.x>-1.)
                     {
                     for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;arm=1.;break;}
                     else{
@@ -3222,7 +3223,9 @@ float arm = 0.;
                                            )/vec2(4.,2.)+elbow;//-spin2(elbow,angle);
 
                     z=spinningArm;
-                if((spinningArm.y)<-1.25)
+                     armSlice = abs(spinningArm.y)*pow(abs(spinningArm.x),1./.75);
+
+                if(armSlice>.7&&spinningArm.y<0.&&spinningArm.x>-1.)
                     {
                     for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;arm=1.;break;}
                     else{
@@ -3243,8 +3246,9 @@ float arm = 0.;
                     float b = 0.;
                     vec2  z=g.xy;
                     float arm =0.;
-                    
-                    if((abs(g.y)<1.25||!spinning)&&g.x<0.)
+                                  float  armSlice = abs(g.y)*pow(abs(g.x),4./3.);
+
+                    if((armSlice<.5/.7||!spinning)&&g.x<0.)
 
                     {
                     if(g.x*g.x+g.y*g.y<40.)
@@ -3264,7 +3268,7 @@ float arm = 0.;
          arm+=h.y;
        }
        float extrArms = 0.;
-       if (armStar&&arm==0.&&armsSpinning!=0&&volume!=1.)
+       if (armStar&&arm==0.&&armsSpinning!=0&&spinning&&volume!=1.)
        {
           float angle =atan(loudestFret1.x,loudestFret1.y);
                  h = spinningArms(g,t,angle,volumeFret1*4./3.);
