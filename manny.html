@@ -3022,12 +3022,19 @@ float l = 1.;
 g*=4.;
 g=g.xy;
 vec2 z=g;
-           if(clvrVariant8)
+float coreSlide = 0.;
+float coreShift=1.;
+
+
+           if(clvrVariant8){
+            coreSlide = coords.x;
+            coreShift = .5;
 g.y*=coords.x;
+}
 //g.x*=coords.y;
 
+float corebase = log(zoom/coords.x)/log(.3247)*coreShift+coreShift;
 
-float corebase = log(zoom)/log(.3247);
            if(clvrVariant9)
            {z.x= -.25/(z.x);
             corebase*=abs(z.x);
