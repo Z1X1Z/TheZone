@@ -4068,7 +4068,7 @@ else{
 
    //if(abs(coords.y)>1.)hyperCore+=1.*LogHalfReciprocal;
  // if(petals!=0.)
-     if(squeezeN>1.)hyperCore-=log2/2.;
+     if(squeezeN>1.)hyperCore-=1.25;
 
 
       //  hyperCore-=1.;
@@ -4316,7 +4316,7 @@ polyNomialStretch
     else
     {
 
-    float stretch=lfc*twoThirds+1.;
+    float stretch=pow(lfc*twoThirds+1.,1./squeezeN);
     if(seventhEYE==0.||lengthP>2./3.)
       s/=stretch;//maybe other values work?
      else s*= stretch;

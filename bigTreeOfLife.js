@@ -349,7 +349,7 @@ else{
 }
    }
 
-     if(squeezeN>1.)hyperCore-=Math.log(2.)/2.;
+     if(squeezeN>1.)hyperCore-=1.25;
 //hyperCore-=1.;
 
 let lpcc = pCenterCored.length();
