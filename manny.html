@@ -6448,6 +6448,17 @@ if(heartStar==0){
      vec3 heartWarmed= vec3(0.);
      if (Character!=10&&colorCombo!=20&&colorCombo!=17){
                        
+if (Character==4||Character==3) {heartSize=1.5;
+    heartShift=vec2(.5,0.);}
+                                                            //else if(Character==2)heartSize=gr;
+                                                            
+                                                            float direction = 1.;
+                                                            if (Character==0&&holyeyes==1)
+                                                            {heartSize*=1.75;
+                                                                direction=-1.;
+                                                                }
+                                                                else heartSize*=6./5.;
+
 if(volume!=1.)
 {frAMP-=volume*(zoomOutRatchetThreshold)*16.;
 frAMP*=(.5+frAMP)/(1.+zoomOutRatchetThreshold);
@@ -6460,15 +6471,6 @@ else if(heartStar==1&&volume!=0.){
     }
 
 else if(heartStar==2) frAMP=1.;
-if (Character==4||Character==3) {heartSize=1.5;
-    heartShift=vec2(.5,0.);}
-                                                            //else if(Character==2)heartSize=gr;
-                                                            
-                                                            float direction = 1.;
-                                                            if (Character==0&&holyeyes==1)
-                                                            {heartSize*=1.75;
-                                                                direction=-1.;
-                                                                }
                                                             vec2 heartPitch = vec2(0.);
                                                             if(volume!=0.&&volume!=1.)
                                                             {

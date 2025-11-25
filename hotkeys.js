@@ -34,7 +34,7 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                                                 
                                                   return audioBufferFromFile.duration
                            }
-                         let  zoomINITiaLizer =1.;//1/2**27;//1.;//
+                         let  zoomINITiaLizer =1.;//    1/2**65.;//1.;//
                          let xINITiaLizer=0.;//1./3.;
                            let yINITiaLizer=0.;//1./3./2.;
 window.uniformsInitial = {
@@ -98,7 +98,7 @@ twelveGatesMeta:{value: .4    },
 Spoker:{value: true    },
         spokelover:{value: true    },
 largeEyeColor:{value:0.},
-holyeyes:{value:1},
+holyeyes:{value:3},
     
     
 dilate:{value:true},
