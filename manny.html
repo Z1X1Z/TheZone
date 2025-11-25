@@ -2659,7 +2659,7 @@ bool isB=false, isF=false;
                         // if(g.x*g.x+g.y*g.y<40.)
                         //if(abs(g.y)<9.)
                         float isEscaped = 0.;
-                        if(abs(g.y)<4.&&g.x<2.)for (int f=0;f<26;f+=1)if(abs(z.y)>17.7&&(f>3||f==1)){
+                        if(abs(g.y)<4.&&g.x<2.)for (int f=0;f<27;f+=1)if(abs(z.y)>17.7&&(f>3||f==1)){
                             if (f==1){l=vec4(0.);break;}
 
                             if(!wink){
@@ -2675,10 +2675,10 @@ bool isB=false, isF=false;
                             z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),2.0*z.x*z.y-g.y-t.y);
                             
                            if(!wink&&
-                              f==16)l=vec4(pitchColor.xyz*(1.-abs(z.y)*6.),.25);//smooths middle horn, removes some clouds
+                              f==16&&z.x<0.)l=vec4(pitchColor.xyz*(1.-abs(z.y)*6.),.25);//smooths middle horn, removes some clouds
                                
                             vec2 s=z;//vec2(z.x,-z.y);
-                            
+                            /*
                             if(f==7&&s.x<0.)notEars=true;
                             else if(wink);
                             else if((f==16)&&p.x>0.&&s.x<0.&&!notEars&&p.x<.35){l=lowColor;break;}
@@ -4290,7 +4290,7 @@ polyNomialStretch
 ){
     if  (budge==1./3.)  s*=lfc/2.+1./4.;
     else
-      s*=(lfc*sqrt(lfc)/2.+1.);//maybe other values work?
+      s*=(lfc*sqrt(lfc)+1.);//maybe other values work?
     
 }
 
