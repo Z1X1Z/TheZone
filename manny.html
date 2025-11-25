@@ -3021,8 +3021,10 @@ vec2 n=vec2(0.);
 float l = 1.;
 g*=4.;
 g=g.xy;
-
 vec2 z=g;
+           if(clvrVariant8)
+g.y*=coords.x;
+//g.x*=coords.y;
 
 
 float corebase = log(zoom)/log(.3247);
