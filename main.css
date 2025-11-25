@@ -21,9 +21,11 @@ body, head {
     touch-action: none;
 
 }
-input {
-  width: 40px;
+/*
+.num {
+  width: 50%;
 }
+  */
 #container{
     
     -moz-user-select: none;
@@ -56,9 +58,7 @@ input {
     background-color:rgba(127.5,127.5,127.5,0.5);
     font-size:24px;
 }
-#osmdCanvas{
-    
-}
+
 #score{
     pointer-events:none;
     background-color: rgba(127.5,127.5,127.5,0.);
