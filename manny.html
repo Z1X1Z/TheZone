@@ -3026,7 +3026,7 @@ float l = 1.;
 g*=4.;
 g=g.xy;
 vec2 z=g;
-float coreSlide = 0.;
+float coreSlide = 1.;
 float coreShift=1.;
 
 
@@ -3037,16 +3037,17 @@ g.y*=coreSlide;
 }
 //g.x*=coords.y;
 
-float corebase = log(zoom/coreShift)/log(.3247)*coreSlide;
+float corebase = log(zoom/coreSlide)/log(.3247)*coreShift+coreShift;
 
            if(clvrVariant9)
            {z.x= -.25/(z.x);
             corebase*=abs(z.x);
            }
-corebase+=+coreShift;
+
 int core = 9+6*int(corebase);
 for (int f=0;f<102;f+=1)
-if(f==core&&zoom!=1.)break;
+if(f==core//&&zoom!=1.
+)break;
 else if(abs(z.y)>17.7&&(f==1||f>3)){
     //if (f==1){l=0.;break;}
     l=1.-length(z)/40.;//clouds and face
