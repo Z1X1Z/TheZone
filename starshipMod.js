@@ -1327,6 +1327,8 @@ let lastVolume = 1.;
                        let cloverSuperCores = 0;
                        var singleHyperCoreDepth = 54.;//240/54=4.44444444.. I like this, also 240/48 = 5 that's okay too, since the 60th core is kindof gone to the hypercore dot
                             let expandedZoomCage=1.;
+                    let verticalStretch = 1.;
+
 
        function infinicore(){
             if(zoom<=1./2.**(singleHyperCoreDepth+3)){
@@ -1364,11 +1366,13 @@ let lastVolume = 1.;
         expandedZoomCage=1;
              if (uniforms.Spoker.value)expandedZoomCage*=2.
                  if (uniforms.continuumClover.value)expandedZoomCage/=1.5
+          
+    else expandedZoomCage = 1.;//logic here seems choppy
+             
+            if(uniforms.nGenesis>0.)verticalStretch*=2.;
+            if(uniforms.polyNomialStretch.value)expandedZoomCage*=1.25;
 
-    else expandedZoomCage = 1.;
-             
-             
-    if((fromCenter>=zoomCageSize*expandedZoomCage||zoom>=1.)&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
+    if(((coordX*coordX+(coordY/verticalStretch)**2)**.5>=zoomCageSize*expandedZoomCage||zoom>=1.)&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
         if(uniforms.wheel.value&&window.cycleCores)uniforms.upCoreCycler.value=(uniforms.upCoreCycler.value-1)%60;//this is for the heart to expand and contract//does modulo -60%60=0?-0 it seems
         else uniforms.upCoreCycler.value = 0.;
     }
