@@ -315,10 +315,10 @@ hyperCore*=equilibriator;
 }
    
 
-        if (dilate)hyperCore-=.5/log(.5);//for freed dilation
+        if (dilate)hyperCore-=.5/Math.log(.5);//for freed dilation
 
 
-        
+
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
 if(continuumClover!=0)hyperCore-=0./Math.log(.5);
 
