@@ -2725,7 +2725,7 @@ bool isB=false, isF=false;
                            }
                          // else if(true);
                          else if(f>=20&&abs(p.x)<.5){
-                             float winkWhite = -100.;
+                             float winkWhite = -1.;
                              if(!C&&!D&&p.x>0.&&p.y<0.){
                              if(wink&&rnd(adjustedNote)==5.)
                                 l=vec4(vec3(winkWhite),0.);
@@ -6902,9 +6902,9 @@ if(oneEye.r!=0.)zoomer=-oneEye;
                      if(constellation||squirgle==1)layeredOUT=vec4(zoomer,1.);
                                  else if(length(p)<2.*sqrt2/min(resolution.x,resolution.y)) layeredOUT=vec4(zoomer,1.);
                                               else if (hypnoticHarmonicCircles.x==hypnoticHarmonicCircles.y&&hypnoticHarmonicCircles.x==hypnoticHarmonicCircles.z&&hypnoticHarmonicCircles.x!=0.)layeredOUT=vec4(vec3(hypnoticHarmonicCircles.x),1.);
+                    else if(oneEye.r==-1.)layeredOUT=vec4(vec3(1.5),1.);
 
                                  else if(starship.x==starship.y&&starship.z==starship.x&&(starship.x==254./255.||starship.x==1./255.)&&starship.w!=0.)layeredOUT=vec4(vec3(starship.r+mannyFace*(starship.r/2.+.5)),1.);
-     
                    else if (mannyFace.w==.75)  {
                        if (starship.w>0.&&shipSUM<341./255.)layeredOUT=vec4(mannyFace.xyz+starship.xyz,1.);
 
