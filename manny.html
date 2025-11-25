@@ -3015,6 +3015,7 @@ bool isB=false, isF=false;
 vec3 faceHeights(vec2 g, vec2 t){
            // t/=gr;
 vec2 n=vec2(0.);
+//n=spin2(vec2(1.,0.),mod(atan(d.y,d.x)+1000.*PI2,PI2));
 //if(clvrVariant4==0.)n= coords.yx/2.;
 //else if(clvrVariant9)n= coords.yx*1.5;
 
@@ -3029,7 +3030,7 @@ float coreShift=1.;
            if(clvrVariant8){
             coreSlide = coords.x;
             coreShift = .5;
-g.y*=coords.x;
+g.y*=coreSlide;
 }
 //g.x*=coords.y;
 
@@ -4010,7 +4011,7 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
     if(clvrVariant2)hyperCore+=1./log(.5);
 
 }
-        if (dilate)hyperCore-=.5/log(.5);//for freed dilation
+        if (dilate)hyperCore-=.25/log(.5);//for freed dilation
 
    if(multiplicatorNexus)hyperCore-=.5/log(.5);
    if(continuumClover!=0)hyperCore-=0./log(.5);
@@ -4229,8 +4230,8 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
     
   float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(0.//floor(loops+counter)/40.
   ,0.)).x;
-
-
+vec2 window =s;
+bool gatedPass=false;
 if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
@@ -4253,8 +4254,11 @@ s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
 //if(counter>0.)s=spin2(s,whirlpoolMeta*dstnce*.75/3.*PI);
 
 dstnce = length(s);
-if(dstnce<2./3.)bubble=dstnce;
-
+if(dstnce<2./3.){
+window = s;
+gatedPass=gated;
+bubble=dstnce;
+}
 
 //}
    colorAccumulator+=s;
@@ -4911,11 +4915,15 @@ hyperCoreOUTPUT--;
 
                 loopSolid++;
 
-  vec2 deSplicedS =s;
-   if(length(pCenterCored)<2./3.&&length(s)<2./3.) deSplicedS=pCenterCored;
+            dstnce=length(s);
+}else break;
+
+        
+  vec2 deSplicedS =window;
+   if(length(pCenterCored)<2./3.&&length(window)<2./3.) deSplicedS=pCenterCored;
    if(unSwitch)   deSplicedS=spin2(deSplicedS,PI);
 
-  if(gated)deSplicedS=spin2(deSplicedS,-PI/6.);
+  if(gatedPass)deSplicedS=spin2(deSplicedS,-PI/6.);
 
       dstnce = length(deSplicedS);
 
@@ -4939,7 +4947,7 @@ hyperCoreOUTPUT--;
                 //return beta;
         }
 
-             /*    if(dstnce<twoThirds||(spokesVisualizeColors&&dstnce<4./3.)) if(vUv.x!=0.&&vUv.y!=0.&&vUv.x!=1.&&vUv.y!=1.){
+             if(dstnce<twoThirds||(spokesVisualizeColors&&dstnce<4./3.)) if(vUv.x!=0.&&vUv.y!=0.&&vUv.x!=1.&&vUv.y!=1.){
                     float decayCanceller=1.;
                     if(spokesVisualizeColors)decayCanceller = 2.;
                     //if(morph!=0.)decayCanceller=decayCanceller*decayCanceller;
@@ -4952,7 +4960,7 @@ hyperCoreOUTPUT--;
                        //*length((vUv-.5)*max(resolution.x,resolution.y)/min(resolution.x,resolution.y));//+texture2D(STAR,cloverMAP);
                             
                            }
-                           */
+                          
               //   eyeScroll= roundEyes(s,vec2(0.));
             if(onehundredfortyfourthousand)
             {
@@ -4968,10 +4976,6 @@ hyperCoreOUTPUT--;
                  }
                                           
             }
-            dstnce=length(s);
-}else break;
-
-        
                   vec2 b = s;
 ///if(multiplicatorNexus)s*=colorShift/88.8;
 
