@@ -501,7 +501,7 @@ polyNomialStretch
 ){
     if  (budge==1./3.)                 s.multiplyScalar(lfc/2.+1./4.);//maybe other values work?
     else
-                s.multiplyScalar(lfc+1.);//maybe other values work?
+                s.multiplyScalar(lfc*Math.sqrt(lfc)+1.);//maybe other values work?
     
 }
         //dstnce = s.length();
