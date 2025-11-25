@@ -18,12 +18,11 @@ body, head {
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    touch-action: none;//prevent zooming and panning
-
+    touch-action: none;
 
 }
-number {
-  width: 50%;
+input {
+  width: 40px;
 }
 #container{
     
@@ -31,7 +30,7 @@ number {
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    touch-action: none;//prevent zooming and panning
+    touch-action: none;
 
     z-index: 3; 
     width: 100%;
@@ -86,7 +85,7 @@ canvas {
     height: 80%;
     width: 100%;
     background-repeat: no-repeat;
-    #background-attachment: scroll;
+    /*background-attachment: scroll;*/
     background-size: contain;
     background-image: url('');
     background-position:center;
@@ -156,7 +155,7 @@ button {
 .dropdown-content {
     font-size:.441em;
     cursor: pointer;
-    font-color: white;
+    color: white;
 
     
     width:100%;
