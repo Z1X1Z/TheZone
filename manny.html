@@ -3015,13 +3015,23 @@ bool isB=false, isF=false;
 vec3 faceHeights(vec2 g, vec2 t){
            // t/=gr;
 vec2 n=vec2(0.);
-//if(!clvrVariant4)n= coords.yx/2.;
+//if(clvrVariant4==0.)n= coords.yx/2.;
 //else if(clvrVariant9)n= coords.yx*1.5;
-            
+
 float l = 1.;
 g*=4.;
-vec2 z=g.xy;
-int core = 9+6*int(log(zoom)/log(.3247));
+g=g.xy;
+
+vec2 z=g;
+
+
+float corebase = log(zoom)/log(.3247);
+           if(clvrVariant9)
+           {z.x= -.25/(z.x);
+            corebase*=abs(z.x);
+           }
+
+int core = 9+6*int(corebase);
 for (int f=0;f<100;f+=1)
 if(f==core)break;
 else if(abs(z.y)>17.7&&(f==1||f>3)){
