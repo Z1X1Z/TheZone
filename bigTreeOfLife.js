@@ -1,6 +1,10 @@
-var shaderScale,dilate, coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
+var shaderScale,dilate,squeezeN,seventhEYE,budge,polyNomialStretch, coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
 ,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta,spinTowardsMe,d,chop,cellularDivision,triogenesis,nGenesis,squareGenesis,constellationCoord,cloverso,feedTheLamb;
 function setUniformsToPlainName(){
+    squeezeN=uniforms.squeezeN.value;
+    seventhEYE=uniforms.seventhEYE.value;
+    budge=uniforms.budge.value;
+    polyNomialStretch=uniforms.polyNomialStretch.value;
     oppositionalCoreFlop=uniforms.oppositionalCoreFlop.value
     nGenesis=uniforms.nGenesis.value
     squareGenesis=uniforms.squareGenesis.value
@@ -76,12 +80,13 @@ var distributorFACTORloveORTH= distributorFACTORorth;//*Math.sqrt(2.)
 
 
 function tol( j,  t){
-
     
    var inMainSpoke = false;
   //  return p;
    let p = new THREE.Vector2(j.y,j.x);//
     p = p.clone().multiplyScalar(zoom).add(new THREE.Vector2(-coords.y,-coords.x));
+        var lengthP=p.length()
+
     let petalNumber = petals+6;
 
     p.multiplyScalar(1./squirgleData[Math.round((((
@@ -105,6 +110,8 @@ p= new THREE.Vector2(p.x-Math.sign(p.x)*regenerativeshift,p.y);
         }
     else break;
     }
+        p.multiplyScalar(p.length()**(squeezeN-1.));//may cause conflict with constellation
+
     
     if(clvrVariant4)
         p.divideScalar(1.25)
@@ -144,6 +151,8 @@ var precores = .25/Math.log(.5);
 var cored =0.;
 if(MetaCored)cored= Math.log(zoom)/-Math.log(2.)+precores;
 else cored = centralCores;
+cored*=squeezeN;
+
 var loops=0.;
 if(cloverSlide)loops=-1.;
 if(refactorCores>1.//||clvrVariant4
@@ -156,6 +165,17 @@ else if (refactorCores==0.) p.divideScalar(3.);
 
 var s= p.clone();
 var c = s.length();
+
+ if(seventhEYE>0.&&c<2./3.&&zoom<.5//&&lfc>zoom
+    )
+{
+
+    s=new THREE.Vector2(1.5/(2.5+s.x),1.5/(2.5-Math.abs(s.y)+budge));//plus one third is optional
+    ;//this needs some exploration//here needs activation and new hotkey
+    if(seventhEYE==2.)s=new THREE.Vector2(s.y,s.x);//more sign checks may help
+   // try signs and swizzle!
+}
+
 
 var coresIn = 0.;
 var crs = 57.;//this is the mandelbrot and original inheritance colormode core range
@@ -239,6 +259,7 @@ var hyperCore=0.;
 
 
 
+
 var logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;
 
 //.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
@@ -253,7 +274,7 @@ var logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;
 
 var dif = 1.;//3.-(1.-.47805268028830)/3.;
 if(MetaCored)hyperCore=
-cored/1.5+Math.log(lfc)*logStabilizationConstant;
+cored/1.5/squeezeN+Math.log(lfc*squeezeN)*logStabilizationConstant;
 
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 
@@ -293,8 +314,39 @@ hyperCore*=equilibriator;
 
 }
    
+
+        if (dilate)hyperCore-=.5/Math.log(.5);//for freed dilation
+
+
+
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
 if(continuumClover!=0)hyperCore-=0./Math.log(.5);
+
+     if(budge==1./3.&&polyNomialStretch)//I was flying into what I think was the top of the center clover around commit 8c6a4aae1986bddb05af5d8026505c63dd0ed8be when I had a feeling like faith was shaping the clover, then a black and blue biogenesis clover (I wasn't in biogenesis!)upcored and cored and I flew into it, Then I had a screen full of free floating tripolar clovers that seemed to extend forever in all directions fitting this same type of clover together.  Then after a minute the screen rotated and became half rez and half size.  The zoom in the dimension was a constant 1
+   {
+   if(seventhEYE==0.||lengthP>2./3.    )  
+   hyperCore-=.5/log(.5);
+    else hyperCore-=.125/Math.log(.5);//for central polynomial
+
+   }
+   if(seventhEYE>0.&&lengthP<2./3.
+   )
+   {
+    if(budge==1./3.)
+    hyperCore-=2.25/Math.log(.5);///squeezeN;//for central polynomial
+else{
+    var squinch = (lengthP-Math.sqrt(zoom));
+ if(squinch>.0) 
+   hyperCore-=Math.log(Math.abs(squinch));
+   else
+  hyperCore+=8.*Math.log(2.);
+  //hyperCore-=1.;
+}
+   }
+
+     if(squeezeN>1.)hyperCore-=2.;
+
+
 let lpcc = pCenterCored.length();
    let lpcc2=lpcc*lpcc;
 //if(fieldPowerBoost)hyperCore+=1./Math.log(.5);
@@ -407,6 +459,9 @@ let loopSolid = 0.
                                                         //hyperCoreBoosted++;
                                                         //hyperCoreOUTPUT++;
                                                         }
+
+                                                           hyperCoreBoosted*=squeezeN;
+        hyperCoreOUTPUT*=squeezeN;
 for (var counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
    /*
     if( loopSolid>=hyperCoreBoosted+1)
@@ -444,7 +499,18 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
 -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
 );
     
-        dstnce = s.length();
+
+       if(//zoom<.5&&
+counter==0.&&
+polyNomialStretch
+       //&&lengthP<twoThirds
+){
+    if  (budge==1./3.)                 s.multiplyScalar(lfc/2.+1./4.);//maybe other values work?
+    else
+                s.multiplyScalar(lfc*Math.sqrt(lfc)+1.);//maybe other values work?
+    
+}
+        //dstnce = s.length();
             if(chop&&dstnce>2./3.)s=spinVector(s,Math.floor(dstnce)*Math.PI/2.);
 
         if(dilate){//this is to allow top level core freeze for original clover
@@ -537,6 +603,9 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
                 }
 //traditionally be e or 3 probably 1.5 to 4
     dstnce = s.length();
+
+       if(dstnce<2./3.)s.multiplyScalar(dstnce**(squeezeN-1. ));
+
 
         if(Spoker){
           //  if(morph==0.)
@@ -707,19 +776,38 @@ dstnce = s.length();
 
         }
 
-for(var i=0;i<40; i++)//not sure if i is 20 or >20
+for(var i=0;i<200; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.)))
    && 0.<=hyperCoreBoosted&&MetaCored)
 {
-    if(spinTowardsMe) if(i>=hyperCoreBoosted)s=spin(s,Math.atan2(d.y,d.x));
+      if(dilate)   {
 
+       s=freed(s.multiplyScalar(2.)).divideScalar(2.);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+        dstnce=s.length();
+      }
+     if(dstnce<2./3.)
+     {
+        var squeezer =dstnce*((2.**squeezeN)-2.);
+        hyperCoreBoosted-=squeezer;
+    hyperCoreOUTPUT-=squeezer;
+     }
+
+     
+    if(spinTowardsMe) if(i>=hyperCoreBoosted)s=spin(s,Math.atan2(d.y,d.x));
+        var angleS = Math.atan2(s.y,s.x);
+
+                                                                if(distributor&&//not quite the same as distributor, but I don't want to add another button
+                                                                 //    morph==0.&&
+                                                                    (angleS+Math.PI*2+Math.PI*2/12.)%(Math.PI*2/3.)>Math.PI*2/6.) //p*=0.;
+                                                                {
+                                                                    s=spin(s,Math.PI);//balances inherited colors
+                                                                }
     var cloverOrDaisyOnTop = counter;
     if(twelveGates)cloverOrDaisyOnTop=counter+1.;
     
         if(twelveGatesMeta!=0.&&((twelveGatesMeta<1.&&(cloverOrDaisyOnTop-.5)%(1./twelveGatesMeta)>=1.)||
                                  (twelveGatesMeta>=1.&&cloverOrDaisyOnTop%twelveGatesMeta)<1.))
         {
-        var angleS = Math.atan2(s.y,s.x);
         if(((angleS/Math.PI+2.)*6.+.5)%2.>1.)s=spin(s,Math.PI/6.);
         }
    if(superStable)

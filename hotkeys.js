@@ -34,6 +34,9 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                                                 
                                                   return audioBufferFromFile.duration
                            }
+                         let  zoomINITiaLizer =1.;//1/2**27;//1.;//
+                         let xINITiaLizer=0.;//1./3.;
+                           let yINITiaLizer=0.;//1./3./2.;
 window.uniformsInitial = {
 coreDilation:{value:0.},
 fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:44100./1024.},
@@ -57,8 +60,8 @@ micIn:{value:null},
 videoTexture:{value:null},
 videoTexture2:{value:null},
 coreTextureSampler:{value:null},
-constellationDynamic:{value:null},
-squirgleDynamic:{value:null},
+constellationDynamic:{value:Array(50)},
+squirgleDynamic:{value:Array(12)},
 STAR:{value:null},
 EDEN:{value:null},
 uberDuper:{value:null},
@@ -108,7 +111,7 @@ dilate:{value:true},
         time: {value:.0 },
         rate: {value: 1.},
 
-        zoom: {value:  1.},
+        zoom: {value:  zoomINITiaLizer},
 colorCombo: {value: -1 },
 colorCombo2: {value: -1 },
         free: {value: false },
@@ -140,10 +143,10 @@ colorCombo2: {value: -1 },
 
 
         resolution: {value:[window.innerWidth,window.innerHeight]},//these are later resolved to the THREE.vec2() uniforms
-coords: {value: [0.,0.]},//to prevent dividing by zero may be set to small value
-constellationCoord: {value: [0.,0.]},//to prevent dividing by zero may be set to small value
+coords: {value: [xINITiaLizer,yINITiaLizer]},//to prevent dividing by zero may be set to small value
+constellationCoord: {value: [xINITiaLizer,yINITiaLizer]},//to prevent dividing by zero may be set to small value
         coordSHIFT: {value: [0.,0.]},
-        d: {value:[.4,.7]},
+        d: {value:[.0,.0]},
 dotCoord:{value:[0.,0.]},
 pongBallCoords:{value:[0.,window.innerWidth/gr]},
 
@@ -212,8 +215,12 @@ noteFrozen:{value:0},
   volumeFret3:{value:0.},
   volumeFret4:{value:0.},
     armStar:{value:true},
-      smush:{value:0.2}
-
+      smush:{value:0.2},
+      ringSpring:{value:true},
+      squeezeN:{value:1.},
+seventhEYE:{value:1},
+budge:{value:.5},
+polyNomialStretch:{value:true   }
 
 }
 window.uniforms={}
@@ -241,7 +248,7 @@ function resetAll(){
         Object.assign(window.uniforms[nameOfUniform],window.uniformsInitial[nameOfUniform])
     }
     if(window.touchOnlyMode)window.uniforms.pongOn.value=false;
-    window.coordX=0.; window.coordY=0.;
+    window.coordX=xINITiaLizer; window.coordY=yINITiaLizer;
     
     
     if(!location.hash.includes(".b")&&!location.hash.includes(".c")) window.BibleON=1;
@@ -260,6 +267,7 @@ function resetAll(){
     window.DAW=false;
     if(!("DAWSonicTouchArray" in window))    window.DAWSonicTouchArray=[];
         window.osmdSound = false;
+        window.soundPermanentlyMuted=false;
     window.playQuietestSound = false;
     window.guitarMODE=false;
     window.extremeFrets=true;
@@ -279,7 +287,7 @@ function resetAll(){
     window.cycleCores = false;
     window.sheetTranslucent=false;
             window.FPS=60;
-            window.zoom=1.;
+            window.zoom=zoomINITiaLizer;
             window.ISdilated=false;
             window.RockInTheWater=0;
             window.octaveStars=true;
@@ -307,7 +315,7 @@ function resetAll(){
     window.videoCanvas2 = null;
     window.streaming=false;
     window.streaming2=false;
-    window.Oreo=1;
+    window.Oreo=2;
     window.stylusON=true;
             window.shouldShowStar = true;
             window.flame = false;
@@ -588,14 +596,33 @@ source.connect(analyser);
                                           
                 {if(number!="no number")
                     uniforms.smush.value=number;
-                else if( uniforms.smush.value!=0.)uniforms.smush.value=1.
+                else if( uniforms.smush.value!=0.)uniforms.smush.value=1.;
                     else  uniforms.smush.value=0.;
                 }
 
-
-                                          else  if((key == "R") && event.altKey&&event.ctrlKey)uniforms.starArms.value=!uniforms.starArms.value
+                                          else  if((key == "B") && event.altKey&&event.ctrlKey)
                                           
-            
+                {if(number!="no number")
+                    uniforms.budge.value=number;
+                else if( uniforms.budge.value!=.5)uniforms.budge.value=.5;
+                    else  uniforms.budge.value=1./3.;
+                }
+
+                                          else  if((key == "U") && event.altKey&&event.ctrlKey)uniforms.ringSpring.value=!uniforms.ringSpring.value;
+
+                                          else  if((key == "R") && event.altKey&&event.ctrlKey)uniforms.armStar.value=!uniforms.armStar.value;
+
+                                          else  if(key == "Q" && event.altKey&&event.ctrlKey)
+                                          
+                {
+                    if(number!="no number")
+                    uniforms.squeezeN.value=number;
+                else if( uniforms.squeezeN.value!=1.)uniforms.squeezeN.value=1.;
+                    else  uniforms.squeezeN.value=2.;
+                }
+                                                      else  if(key == "P" && event.altKey&&event.ctrlKey)uniforms.polyNomialStretch.value=!uniforms.polyNomialStretch.value;
+                                          else  if(key == "O" && event.altKey&&event.ctrlKey)uniforms.seventhEYE.value=(uniforms.seventhEYE.value-1.+3.)%3;
+
                 else if(key == "J" && event.ctrlKey)
                     uniforms.inseyedOut.value=(1+uniforms.inseyedOut.value)%3;
                 else   if(key == "G" && event.ctrlKey)                uniforms.cloverso.value=!uniforms.cloverso.value;
@@ -849,8 +876,11 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
     else if (event.altKey&&(key=="π"||key=="p"))uniforms.pixelSTARon.value=!uniforms.pixelSTARon.value;
     else if (event.altKey&&(key=="©"||key=="g"))window.grabStar=!window.grabStar;
     else if (event.altKey&&(key=="ß"||key=="s")){
+        if(!soundPermanentlyMuted)
+        {
         if(window.touchMode||window.touchOnlyMode)window.muteTouchTouchVolume = !window.muteTouchTouchVolume;
         else window.muteVoiceTouchVolume = !window.muteVoiceTouchVolume;
+        }
     }
     else if (event.altKey&&(key=="∫"||key=="b")){
                  if(!muteToggle&&!runningHash)
@@ -1029,7 +1059,13 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                 else if((key=="…"||key==";")&&event.altKey&&!event.shiftKey) uniforms.superStable.value=!uniforms.superStable.value;
        
                 
-    else if (event.altKey&&key=="f")console.log("speakers disabled!");//speakers turned off in manny.html
+    else if (event.altKey&&key=="f")
+        {
+            console.log("speakers disabled!");//speakers turned off in manny.html
+            soundPermanentlyMuted=true;
+            muteTouchTouchVolume=true;
+            muteVoiceTouchVolume=true;
+        }
                 
     else if(event.ctrlKey||event.altKey);//swallow remaining possibilities, muting keypress
     /*if(key == "k" && event.ctrlKey)

@@ -19,12 +19,12 @@ else{
 
 function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
     if(!runningHash&&typeof THREE=="object" && document.visibilityState=="visible"
-       &&(window.micOn||(location.hash.includes("t")&&!location.hash.includes(",t")&&!location.hash.includes(".t")))){
+       &&(window.micOn||window.isTouch)){
        document.getElementById( "background_wrap").style =  "height: 0px; width: 0px;"
         //"background-image: none;";//turn off splash!
         document.getElementById( "load message").innerHTML = "";//turn off splash!
 
-                if(location.hash.includes("t")&&!location.hash.includes(",t")&&!location.hash.includes(".t"))
+                if(window.isTouch)
               {
                 window.touchOnlyMode=true;
               }
@@ -811,7 +811,8 @@ uniforms.dotCoord.value = new THREE.Vector2(0.,0.);
          }
 function init() {
              
-             for(var m=0;m<cloverConstellation.length;m++)cloverConstellation[m]=new THREE.Vector2(0.,0.)
+             for(var m=0;m<cloverConstellation.length;m++)cloverConstellation[m]=new THREE.Vector2(0.,0.);
+             for(var m=0;m<squirgleSize;m++)uniforms.squirgleDynamic.value[m]=0.;
                 // for(var m=0;m<cloverSquirgle.length;m++)cloverSquirgle[m]=new THREE.Vector2(0.,0.)
                  
              colorSound = new THREE.Color();
@@ -1102,7 +1103,7 @@ function setDynamicSampler2ds(){
              
              
              loadData(cloverConstellation,constellationData);//defined in wad, transfers from Vector2 to array
-             let constellationTexture = new THREE.DataTexture( window.constellationData, window.constellationSize, 2,THREE.RedFormat,THREE.FloatType);
+            /* let constellationTexture = new THREE.DataTexture( window.constellationData, window.constellationSize, 2,THREE.RedFormat,THREE.FloatType);
             // console.log(constellationTexture)
              constellationTexture.unpackAlignment=1
              constellationTexture.needsUpdate=true;
@@ -1116,7 +1117,10 @@ function setDynamicSampler2ds(){
              squirgleTexture.unpackAlignment=1
              squirgleTexture.needsUpdate=true;
              uniforms.squirgleDynamic.value=squirgleTexture;
-             uniforms.squirgleDynamic.needsUpdate = true;
+             uniforms.squirgleDynamic.needsUpdate = true;*/
+              uniforms.constellationDynamic.value=cloverConstellation;
+              uniforms.squirgleDynamic.value=squirgleData;
+
  }
 function setMicInputToStarPIXEL(){
              if(!touchMode//&&!DAW
@@ -3329,7 +3333,7 @@ if(uniforms.gameOn.value&&allCaught)
     level +=1;
 
     polygons=[];
-    polyRad = 2.*Math.PI/(metaLevel)/minimumDimension*70.;
+    polyRad = 2.*Math.PI/(metaLevel)/(minimumDimension**2+maximumDimension**2)**.5*200.;
 
     for(let n = 0; n<metaLevel-level; n++)
     {
@@ -3844,11 +3848,20 @@ function constellationCoordFind(){//needs to be tuned for ngenesis
 var min = 100000.;
 //cloverConstellation[1]=new THREE.Vector2(0,.5)
 //cloverConstellation[2]=new THREE.Vector2(.5,0.)
-
-                                                         var bestFit=0;
+  let  nGenesisModulodY=
+                     uniforms.coords.value.y;
+                 if(uniforms.nGenesis.value>0)
+                 {nGenesisModulodY=
+                     uniforms.coords.value.y-(Math.round(((uniforms.coords.value.y))*(2**(uniforms.nGenesis.value-1.))))/(2**(uniforms.nGenesis.value-1));
+    
+         if(Math.abs( uniforms.coords.value.y)-(2.-2**(-uniforms.nGenesis.value))>0){
+             nGenesisModulodY+=Math.sign(uniforms.coords.value.y)*(2**(-uniforms.nGenesis.value+1));
+         }
+         }
+    var bestFit=0;
 for(var m=0;m<cloverConstellation.length;m++)
 {
-    let proximity = Math.sqrt((cloverConstellation[m].x+uniforms.coords.value.x)**2.+(cloverConstellation[m].y-uniforms.coords.value.y)**2.)
+    let proximity = Math.sqrt((cloverConstellation[m].x+uniforms.coords.value.x)**2.+(cloverConstellation[m].y-nGenesisModulodY)**2.)
     if(proximity<min&&isFinite(proximity)){min=proximity; bestFit=m;}
 }
                                                    
@@ -3856,8 +3869,8 @@ for(var m=0;m<cloverConstellation.length;m++)
                                                       
 
                                                          
-uniforms.constellationCoord.value=new THREE.Vector2( -coordX- uniforms.constellationCoord.value.x,-coordY- uniforms.constellationCoord.value.y);
-               //  console.log(uniforms.constellationCoord.value)                                      
+uniforms.constellationCoord.value=new THREE.Vector2( -uniforms.coords.value.x- uniforms.constellationCoord.value.x,-nGenesisModulodY- uniforms.constellationCoord.value.y);
+            //     console.log(uniforms.constellationCoord.value)                                      
                                                          
 /*
 if(uniforms.coords.value.y<-.5)

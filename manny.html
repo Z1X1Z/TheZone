@@ -276,7 +276,8 @@ let maxLetterDepth=-1;
             if (userHasGestured)        loadScript("wadJSscript",cdnSwitchWAD,"wad.min.js")
             else        setTimeout(wrapperLurker,100);
         }
-        if(!location.hash.includes(".f"))   wrapperLurker();
+        //if(!location.hash.includes(".f")) //needs to be vetted
+        wrapperLurker();
         </script>
 
         <!-- removing this script may fix android no load bug, but I'm testing z ordering in css        -->
@@ -384,7 +385,7 @@ radialWarp=b;
               <input type="checkbox" id="Game On" name="t"  onclick= "
                   key  = 'e';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-               <label for="Game On">Game On![e]</label><br>
+               <label for="Game On">Game On?![e]</label><br>
               <input type="checkbox" id="Star Arms" name="t"  onclick= "
                   key  = '~';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -401,7 +402,7 @@ radialWarp=b;
                <input type="checkbox" id="Volume Speed" name="t"  onclick= "
                    key  = 'w';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                <label for="Volume Speed">Volume Speed?![w]</label><br>
+                <label for="Volume Speed">Volume Speed![w]</label><br>
 
 
                   <a id="disableVolume" name="t"  onclick= "
@@ -417,21 +418,25 @@ radialWarp=b;
 
                    key  = 't';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
-                   Touch Star![,t]</a><br>
-               <input type="checkbox" id="Note Stars" name="t"  onclick= "
-                   key  = 'P';
-                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                <label for="Note Stars">Note Stars![P]</label><br>
+                   Touch Star![,t]</a>
+               
                 
+                <input type="checkbox" id="Ring Spring" name="t"  onclick= "
+                    key  = 'U';
+                    callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                 <label for="Ring Spring">Ring Spring?![,.U]</label><br>
                 <input type="checkbox" id="Note Stack" name="t"  onclick= "
                     key  = 's';
                     callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
-                 <label for="Note Stack">Note Stack?![,.s]</label>
-                <br>
+                 <label for="Note Stack">Note Stack?![,.s]</label><br>
+                 <input type="checkbox" id="Note Stars" name="t"  onclick= "
+                   key  = 'P';
+                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                <label for="Note Stars">Note Stars?![P]</label><br>
                 <input type="checkbox" id="StarClover" name="t"  onclick= "
                     key  = 'O';
                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                 <label for="StarClover">Star in Clover![O]</label><br>
+                 <label for="StarClover">Star in Clover?![O]</label><br>
                  
 
                  <input type="checkbox" id="TrailOverflowsClover" name="t"  onclick= "
@@ -499,7 +504,7 @@ radialWarp=b;
 
                    key  = 'V';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                   Star Stream![V]</a><br>
+                   Star Stream!![V]</a><br>
                <a id="BulletMine" name="t"  onclick= "
 
                    key  = 'B';
@@ -648,12 +653,12 @@ radialWarp=b;
 
                Tolerance for Pitch [.e]<br>
                <input type="radio" id="High Tolerance" name="tolerance" onclick="window.highORlow = 2">
-               <label for="High Tolerance">Constant High</label><br>
+               <label for="High Tolerance">Constant High!</label><br>
            <input type="radio" id="Low Tolerance" name="tolerance" onclick="window.highORlow =1;">
-           <label for="Low Tolerance">Constant Low</label><br>
+           <label for="Low Tolerance">Constant Low!</label><br>
            
        <input type="radio" id="Perceptive Tolerance" name="tolerance" onclick="window.highORlow =0;">
-       <label for="Perceptive Tolerance">Dynamic Perceptive</label><br>
+       <label for="Perceptive Tolerance">Dynamic Perceptive?!</label><br>
            
            
                <a id="Faster" name="t"  onclick= "
@@ -735,7 +740,7 @@ radialWarp=b;
        <input type="checkbox"  id="pointers" name="t"  onclick= "
            key  = 'j';
            callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
-           <label for="pointers"> Pointer![.j]</label><br>
+           <label for="pointers"> Pointer?![.j]</label><br>
            
                      <input type="checkbox"  id="user camera" name="t"  onclick= "
                          key  = 'l';
@@ -758,6 +763,13 @@ radialWarp=b;
                   number = 'no number'
   ;
   uniforms.nGenesis.value=document.getElementById('Ngenesis').value
+  
+  "><br>
+        <label for="squeezeN">Squeeze:[,.Q]</label>
+             <input type="number" id="squeezeN" name="squeezeN" class="num" onkeyup="
+                  number = 'no number'
+  ;
+  uniforms.squeezeN.value=document.getElementById('squeezeN').value
   
   "><br>
   
@@ -997,14 +1009,14 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                       <input type="checkbox" id="squareTrioGenesisMeta" name="t"  onclick= "
                          key  = 'p';
                          callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
-                                       <label for="squareTrioGenesisMeta">nonaGenesisMeta?![,.p]</label><br>
+                                       <label for="squareTrioGenesisMeta">nonaGenesisMeta![,.p]</label><br>
                                      
 
                                  
                                  <a id="cellularDivision" name="t"  onclick= "
                          key  = 'b';
                          callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
-                                     Biogenesis?![.,b]</a><br>
+                                     Biogenesis![.,b]</a><br>
                                  
                                  <a id="Pie" name="t"  onclick= "
                          key  = 'l';
@@ -1073,7 +1085,7 @@ uniforms.baseN.value=document.getElementById('Base Number').value">
                   <label for="Glowing">Glowing!</label><br>
 
                     <input type="radio" id="Rainbow" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=-1;">
-                    <label for="Rainbow">Rainbow!</label><br>
+                    <label for="Rainbow">Rainbow?!</label><br>
 
                       <input type="radio" id="Inheritance" name="colorMode" onclick="uniforms[ 'colorCombo' ].value=-8;">
                       <label for="Inheritance">Inheritance!</label><br>
@@ -1170,10 +1182,31 @@ key  = 'L';
 callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
 Reset Zoom![L]</a><br>
 
-                      </div>
-                                 </button>
+
+               
+               <input type="checkbox" id="polyNomialStretch" name="t"  onclick= "
+                  key  = 'P';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
+               <label for="polyNomialStretch">polyNomialStretch?![,.P]</label><br>
+        
+<a id="seventhEYE" name="t"  onclick= "
+key  = 'O';
+callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+seventhEYE?![,.O]</a><br>
+          <label for="Budge">SeventhEYE Budge!:[,.B]</label>
+                  <input type="number" id="Budge" name="Budge" class="num" onkeyup="
+                                                 number = 'no number'
+;
+                                 uniforms.budge.value=document.getElementById('Budge').value
+                                 "><br>
+
+
+
+
 
         </div>
+                                         </button>
+                                </div>
         
         <div class="dropdown">
           <button class="dropbtn">Xtr
@@ -1262,7 +1295,7 @@ Reset Zoom![L]</a><br>
                      <a  id="major" name="t"  onclick= "
                 key  = 'M';
                 callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'altKey':true,'keyCode':key.charCodeAt(0)}));">
-             Major![,.M]</a><br>
+             Major?![,.M]</a><br>
 
        <a id="unrollEyes" name="t"  onclick= "
            key  = 'y';
@@ -1272,7 +1305,7 @@ Reset Zoom![L]</a><br>
             <a id="Heart Star" name="t"  onclick= "
                 key  = 'h';
                 callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
-                Heart Star![.h]</a><br>
+                Heart Star?![.h]</a><br>
                  
             <a id="BigEyes" name="t"  onclick= "
                 key  = 'y';
@@ -1281,7 +1314,7 @@ Reset Zoom![L]</a><br>
             <a id="Music Angel Man" name="t"  onclick= "
                 key  = 'a';
                 callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
-                Music Angel Man![.a]</a><br>
+                Music Angel Man?![.a]</a><br>
             <a id="spark" name="t"  onclick= "
                 key  = 's';
                 callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
@@ -1893,12 +1926,22 @@ void main(){
 <script id="fragmentShader" type="x-shader/x-fragment">
     varying vec2 vUv;
     
+        uniform float squeezeN;
+
     uniform float movieTime;
     uniform float concertKeyTuning;
     uniform float noteFrozen;
     uniform int cellularDivision;
     uniform bool triogenesis;
     
+        uniform float seventhEYE;
+
+        uniform float budge;
+
+        uniform bool polyNomialStretch;
+
+
+
     uniform bool squareGenesis;
     uniform int nGenesis;
     uniform bool eyeSingle;
@@ -1945,15 +1988,17 @@ void main(){
     uniform sampler2D EDEN;
     uniform sampler2D coreTextureSampler;
     uniform sampler2D omniDynamic;
-    uniform sampler2D constellationDynamic;
+    uniform vec2 constellationDynamic[50];
         uniform sampler2D twelveNotesTex;
+                uniform bool ringSpring;
+
         uniform sampler2D radialFrequenciesSummed;
 
     uniform int major;
 
     uniform bool constellation;
 
-    uniform sampler2D squirgleDynamic;
+    uniform float squirgleDynamic[12];
     uniform int squirgle;
     uniform bool cards;
     uniform sampler2D uberDuper;
@@ -2262,7 +2307,7 @@ float brightness=0.;
         }
         */
          brightness/=8.;
-         brightness=1.;
+         brightness=.9;
                              //  if(mod(angle+10.,1.)<1./12.)  
                                 frAmp = texture2D(radialFrequenciesSummed, vec2(mod(angle+10.-1./12.,1.),0.)).r;
 
@@ -2300,7 +2345,7 @@ float brightness=0.;
                                                ,1.),.75,1.
                                            ))
                               ,.0,1.)/pow(2.,d)
-                   *brightness*(brightness)*frAmp/4.
+                   *brightness*(brightness)
                    , 1.);
         else ret= vec4(.0);
         return ret;
@@ -2312,8 +2357,11 @@ float brightness=0.;
     
     float scalar =1./2.*3./4.;
 
-    vec4 starns ( vec2 uv,float noteOfStar)//Seven stars, two witnesses
+    vec4 starns ( vec2 uv//,float noteOfStar
+    )//Seven stars, two witnesses
     {
+       float noteOfStar = mod(rnd((atan(uv.y,uv.x)-twistStar*flipStar+PI2*4.)/PI2*12.*flipStar+12.*12.+6.),12.);
+     //  if(noteOfStar!=1.)noteOfStar=11.;
       //  float nyq =  fftSize/sampleRate/2.;
         
         //uv=vec2(-uv.x,uv.y);
@@ -2503,7 +2551,7 @@ if(uv.x<1./3.&&maxSamp!=0.) //could 1./3. but then the spill over (if any) isn't
                                          //  frAmp/=255.;
                                          
                                          // frAmp*=2.;
-                                          frAmp/=16.;
+                                          frAmp/=32.*min(resolution.x,resolution.y)/max(resolution.x,resolution.y     );
  //if(maxSamp!=0.) frAmp/=(maxSamp);//-minSamp);
 float threshSide = 1.-(frAmp)//pow(frAmp,1.75)/1.75
 *((1.-
@@ -3217,6 +3265,7 @@ extrArms+=h.x;
 
         
        }
+       arm=clamp(arm,0.,1.);
                     return vec4(b,b/2.5,0.,arm)+vec4(vec3(extrArms,extrArms*.99,extrArms)*.75,0.);
                     }
     
@@ -3540,16 +3589,20 @@ return vec3(l+b+r+h);}
                              vec2 starBirth(vec2 p){
                               bool originalClover = true;
                               //if(constellation)
-                              const float constellationSize = 50.;
-                              for(float cd = constellationSize;cd>=1.;cd--)
+                              const int constellationSize = 49;
+                              for(int cd = constellationSize;cd>=1;cd--)
                               {
-                                  float cdcs=cd/constellationSize;
+                               /*   float cdcs=cd/constellationSize;
                               float y =texture2D(constellationDynamic,vec2(cdcs,0.)).x;//thought the y argument would be 0, seems to be 1
                               float x =texture2D(constellationDynamic,vec2(cdcs,.5)).x;
+                              */
+                              vec2 xy = constellationDynamic[cd];
+                              float x = -xy.x;
+                              float y=xy.y;
 
                              if(originalClover&&(x!=0.||y!=0.))
                              {
-                                 float atanConstellation = atan(y,x);
+                                 float atanConstellation = atan(y,x)-PIdiv2;
                               p=spin2(p,atanConstellation);
                                float farness=length(vec2(x,y));
                                vec2 newClovers = p;
@@ -3586,18 +3639,21 @@ float leafDivGR=leaf/gr;
                               
                                                                         }
 vec4 tol(vec2 p, vec2 t){
+
+
+
+ //should be activated many ways
+
     float petalNumber = petals+6.;
 
   //  if(mod(atan(p.x,p.y)/PI2+1.,1.)<.25)p=vec2(0.);
-    p /=texture2D(squirgleDynamic,vec2(mod((atan(p.y,p.x)/((petalNumber)/6.)//
+  if(petalNumber<=6.) p /=squirgleDynamic[int((mod((atan(p.y,p.x)*6./petalNumber//
                                             +PI2*4.
-            +PI/petalNumber/2.
-                                //            *6./petalNumber
-                                            )/PI2//*(6.+petals)/6.
-                                           // -petals/petalNumber
-                                            ,1.// (petalNumber)/6.
-                                            )
-                                            ,0.)).x;
+           +PI/petalNumber/2.
+                                            )/PI2
+                                            ,1.
+                                            )*petalNumber*2.))];
+                                           
     //float angleToLittleClover = PI2/12.;
     //if (length(p-vec2(-sin(-angleToLittleClover),cos(angleToLittleClover))*1.25)
      //   <(.25))p=vec2(0.);
@@ -3647,6 +3703,7 @@ vec4 tol(vec2 p, vec2 t){
         else break;
         }
         if(constellation)p=starBirth(p);
+    p*=pow(length(p),squeezeN-1.);//may cause conflict with constellation
 
    //tricellular division core unstable
                
@@ -3692,13 +3749,35 @@ vec4 tol(vec2 p, vec2 t){
                          if(cloverOffset!=0.)p=spin2(p,cloverOffset*PI2);
                     
                     bool gated = false;
+                    bool unSwitch=false;
 
+                    
+                                                                                              float angle = atan(p.y,p.x);
+
+                                                             /*   if( morph==0.&&mod(angle+PI2-PI2/12.,PI2/3.)<PI2/6.) //p*=0.;
+                                                                {
+                                                                    p=spin2(p,PI);//balances inherited colors
+                                                                    unSwitch= !unSwitch;
+                                                                }
+                                                                
+*/
+
+                                                             /*       
+                                                              if(abs(angle)>5.*PI/6.||abs(angle)<PI/6.)
+                                                              {
+                                                                    p*=0.;
+                                                                    p=spin2(p,PI/3.);//balances inherited colors
+                                                                //    unSwitch= !unSwitch;
+                                                                }
+                                                                */
+                                                                
                          if(twelveGates)
                          {
-                             
-                         float angle = atan(p.y,p.x);
+
+
                          if(mod((angle*divideByMultiplyingPi+2.)*6.+.5,2.)>1.){p=spin2(p,PI/6.);
                                 gated=true;
+
                                 }
                                 }
 
@@ -3722,6 +3801,7 @@ if(refactorCores!=1.)precores=-.0;
 float cored =0.;
 if(MetaCored)cored= log(zoom)/-log(2.)+precores;
 else cored = centralCores;
+cored*=squeezeN;
 float loops=0.;
 if(cloverSlide)loops=-1.;
 
@@ -3731,8 +3811,22 @@ if(refactorCores>1.)
         p/=2.;
     }
 else if (refactorCores==0.) p/=3.;
+    float lengthP = length(p);
 
+   // for(float floop = 0.; floop<2.;floop++)
+
+  
 vec2 s=p;
+ if(seventhEYE>0.&&(lengthP<2./3.)&&zoom<.5
+ //&&lfc>zoom
+ )
+{
+
+    s=1.5/(2.5-vec2(-s.x,abs(s.y)+budge//plus one third is optional
+    ));//this needs some exploration//here needs activation and new hotkey
+    if(seventhEYE==2.)s=vec2(s.y,abs(s.x));//more sign checks may help
+   // try signs and swizzle!
+}
                                 
                                 /*makes for a pretty fractal with odd symmetry
                                 if(true)
@@ -3742,17 +3836,16 @@ vec2 s=p;
                                 }
                                  */
 float c = length(s);
-
 float coresIn = 0.;
-const float crs = 60.;//this is the mandelbrot and original inheritance colormode core range
+const float crs = 64.;//this is the mandelclover and original inheritance colormode core range
 // if(c>4./3.){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
  float centerslide = 0.;
-
  for(int i=0;i<int(crs);//crs+3=63
                   i++)if(c<twoThirds
                          &&loops+centerslide<cored
                          )
                         {
+                         
   if(i>1||!cloverSlide){s*=2.;c*=2.;}
 
   if (cloverSlide)
@@ -3795,6 +3888,9 @@ else if (refactorCores==0.){//for double slide core
     s*=1.5;c*=1.5;
 }
 
+   //if(0==1&&seventhEYE>0.&&zoom<.5&&(length(p)<2./3.||length(s)<2./3.))
+ //   s=1.5/(2.5-vec2(-s.x,abs(s.y)+1./3.));//this needs some exploration//here needs activation and new hotkey
+    
 
 if(fieldPowerBoost){
     float powerBoost =eConstant*(log(.5)/length(s));
@@ -3854,8 +3950,9 @@ float hyperCore=0.;
 
    float dif = 1.;//3.-(1.-.47805268028830)/3.;
 if(MetaCored)hyperCore=
-   cored*twoThirds+log(lfc)*logStabilizationConstant;
-    
+   cored* 
+   //(-cored*gr*leaf)//this is the core slider this dilates central core across metacore//here could use a hotkey//does it do anything useful?
+   twoThirds/squeezeN+log(lfc*squeezeN)*logStabilizationConstant;
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 
 //cored/1.5+log(length(coordSHIFT))*logStabilizationConstant+uber.z;
@@ -3864,7 +3961,8 @@ float equilibriator = 1.;
 if(dilate){
 if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
    //this is to allow top level core freeze for original clover
-  hyperCore*=equilibriator;
+ 
+   hyperCore*=equilibriator;
    }
     // hyperCore-=.441/log(.5)/equilibriator;
      
@@ -3889,13 +3987,47 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
     if(wheel)hyperCore-=1./log(.5);
     if(morph!=0.) hyperCore-=1./log(.5);
     if(Spoker&&spokelover&&dilate) hyperCore-=.0/log(.5);
-    else if (dilate)hyperCore-=.5/log(.5);
+    //else if (dilate)hyperCore-=.5/log(.5);
     if(clvrVariant2)hyperCore+=1./log(.5);
 
 }
-   
+        if (dilate)hyperCore-=.5/log(.5);//for freed dilation
+
    if(multiplicatorNexus)hyperCore-=.5/log(.5);
    if(continuumClover!=0)hyperCore-=0./log(.5);
+  /*if(polyNomialStretch)
+   {
+   if(!(seventhEYE>0.)||lengthP>2./3.    )   hyperCore-=.5/log(.5);
+    else
+     hyperCore-=.125/log(.5);//for central polynomial
+
+   }
+   */
+
+   if(budge==1./3.&&polyNomialStretch)//I was flying into what I think was the top of the center clover around commit 8c6a4aae1986bddb05af5d8026505c63dd0ed8be when I had a feeling like faith was shaping the clover, then a black and blue biogenesis clover (I wasn't in biogenesis!)upcored and cored and I flew into it, Then I had a screen full of free floating tripolar clovers that seemed to extend forever in all directions fitting this same type of clover together.  Then after a minute the screen rotated and became half rez and half size.  The zoom in the dimension was a constant 1
+   {
+   if(seventhEYE==0.||lengthP>2./3.    )  
+   hyperCore-=.5/log(.5);
+    else hyperCore-=.125/log(.5);//for central polynomial
+
+   }
+   if(seventhEYE>0.&&lengthP<2./3.
+   )
+   {
+    if(budge==1./3.)
+    hyperCore-=2.25/log(.5);///squeezeN;//for central polynomial
+else{
+    float squinch = (lengthP-sqrt(zoom));
+ if(squinch>.0) 
+   hyperCore-=log(abs(squinch));
+   else
+  hyperCore+=8.*log(2.);
+  //hyperCore-=.25;
+}
+   }
+   //if(abs(coords.y)>1.)hyperCore+=1./log(.5);
+ // if(petals!=0.)
+     if(squeezeN>1.)hyperCore-=2.;
    float lpcc=length(pCenterCored);
    float lpcc2=lpcc*lpcc;
 //if(fieldPowerBoost)hyperCore+=1./log(.5);
@@ -3917,7 +4049,7 @@ if(zoom!=0.&&lfc!=0.&&truncated) truncator =log((lfc*lfc)/(zoom*zoom))/log(2.);/
 
 //this is essentially just p as in the mandelbrot x <== x^2+
 
-                            const float iterations = 20.;//loops all escape delimiter so iterations aren't used unless needed
+                            const float iterations = 40.;//loops all escape delimiter so iterations aren't used unless needed
                             float refractelC=1.5;
                         //  p*=2.*refractelC;
 vec3 oo = vec3(0.);
@@ -4069,15 +4201,20 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
                                                       vec4 eyeScroll= vec4(0.);
                                                       vec2 lastLastS = s;
                                                          vec2 lastS = s;
+
+        hyperCoreBoosted*=squeezeN;
+        hyperCoreOUTPUT*=squeezeN;
+    float OmniDynamicPetalShift =0.;//texture2D(omniDynamic,vec2((loops+counter)/40.,0.)).x;
+     float OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
+    
+  float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(0.//floor(loops+counter)/40.
+  ,0.)).x;
+
+
 if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
 
-    
-    float OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter)/40.,0.)).x;
-    float OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
-    
-  float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(floor(loops+counter)/40.,0.)).x;
 
    //      if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
 
@@ -4104,7 +4241,7 @@ if(dstnce<2./3.)bubble=dstnce;
    if(Refractelate&&dstnce>refractelC){s/=refractelC;} //refractelC/=4./3.;}
    if((counter==1.&&oppositionalCoreFlop==1)||oppositionalCoreFlop==2)s=spin2(s,PI);
    lastLastS=lastS;
-    lastS = s;//before or after flop?
+   lastS = s;//before or after flop?
 
 //if(mod(counter,2.)==1.&&colorCombo==0)s =abs(s);//supposed to make clover brighter and nothing else?;
 float superUpcorer = 0.;//before or after flop?
@@ -4121,9 +4258,24 @@ hyperCoreOUTPUT-=superUpcorer;
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
        );
 
+
+       if(//zoom<.5&&
+counter==0.&&
+polyNomialStretch
+       //&&lengthP<twoThirds
+){
+    if  (budge==1./3.)  s*=lfc/2.+1./4.;
+    else
+      s*=(lfc*sqrt(lfc)/2.+1.);//maybe other values work?
+    
+}
+
+
+
       // if (mod(counter,5.) == 4.)s =pCenterCored;
        //x**3
-       dstnce = length(s);
+
+      // dstnce=length(s)
        if(chop&&dstnce>2./3.)s=spin2(s,floor(dstnce)*PIdiv2);
 
        if(dilate){
@@ -4140,6 +4292,7 @@ hyperCoreOUTPUT-=superUpcorer;
                
        }
        
+
 
        if(clvrVariant9) s+= coords*gr;
 
@@ -4206,6 +4359,12 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
    
    s.x=log(abs(s.x))/log(base);
 
+
+          dstnce = length(s);
+//if(dstnce<2./3.)s=1./(2.+abs(s));//this needs some exploration here
+
+
+             
    //float trunc=1.;
    //if(lfc!=0.) trunc = log(zoom/dstnce)/100.;
  //  s=vec2(-1./(s.x*s.x-s.y*s.y-p.x),2.0*s.x*s.y-p.y);
@@ -4271,7 +4430,24 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
 
    //float outerMargin =atan(s.y,s.x);
  // s=(-vec2(-sin(outerMargin),-cos(outerMargin)).yx-(s));
-   s /=texture2D(squirgleDynamic,vec2(mod((atan(s.y,s.x)+PIdiv2*3.+PI/12.)/PI2,1.),0.)).x;
+
+  if(petalNumber<=6.) s /=squirgleDynamic[int((mod((atan(s.y,s.x)*6./petalNumber//
+                                            +PI2*4.
+           +PI/petalNumber/2.
+                                            )/PI2
+                                            ,1.
+                                            )*petalNumber*2.))];
+                                           
+ // if(petalNumber<=6.)   s /=squirgleDynamic[int(mod((atan(s.y,s.x)+PIdiv2*3.+PI/12.)/PI2,1.)*12.*petalNumber/6.)];
+ /*s/=squirgleDynamic[int(mod((atan(s.y,s.x)/((petalNumber)/6.)//
+                                            +PI2*4.
+            +PI/petalNumber/2.
+                                //            *6./petalNumber
+                                            )/PI2//*(6.+petals)/6.
+                                           // -petals/petalNumber
+                                            ,1.// (petalNumber)/6.
+                                            )*12.*petalNumber/6.)];
+                                            */
    //traditionally be e or 3 probably 1.5 to 4
    if(cellularDivision==1||(cellularDivision==2&&counter>1.))      s=vec2(s.x,s.y-sign(s.y)/2.);
 
@@ -4297,8 +4473,10 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
                }
               
        }
-   s=starBirth(s);
+    if(constellation)s=starBirth(s);
 
+   dstnce = length(s);
+       if(dstnce<2./3.)s*=pow(dstnce,squeezeN-1. );
    dstnce = length(s);
 
 
@@ -4467,58 +4645,7 @@ dstnce=length(s);
     }
    
  //  if(length(s)<twoThirds)starship+=texture2D(STAR,cloverMAPadj)/decayCanceller;
-  vec2 deSplicedS = lastS;
-  if(gated)deSplicedS=spin2(deSplicedS,-PI/6.);
-      dstnce = length(deSplicedS);
-
-                          vec2 cloverMAPNeutral = ((spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment)));
-                                                    
-                               vec2   cloverMAP = cloverMAPNeutral+.5;
-                                vec2 cloverMAPadj =cloverMAPNeutral*dimensionFix+.5;
-                                                   vec2 ColorWheelClover=vec2(0.);
-                                                   float cycleShiftChiral = 0.;
-
-        if(NightAndDay){
-
-                ColorWheelClover=(spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)+atan(d.x,d.y)+PI2*(6.+2.*flipStar)/12.+chiralAdjustment-twistStar*flipStar));
-
-                float correctionBrueled = 0.;
-                if(brelued==-1.)correctionBrueled=atan(-ColorWheelClover.x,-ColorWheelClover.y)-PIdiv2;
-                else correctionBrueled=atan(ColorWheelClover.y,ColorWheelClover.x)+PIdiv2;
-
-                if(dstnce<4./3.)
-                beta   =  hsv2rgb(vec3(-correctionBrueled*divideByMultiplyingPi2*flipStar,1.,1.));
-                //return beta;
-        }
-
-                 if(dstnce<twoThirds||(spokesVisualizeColors&&dstnce<4./3.)) if(vUv.x!=0.&&vUv.y!=0.&&vUv.x!=1.&&vUv.y!=1.){
-                    float decayCanceller=1.;
-                    if(spokesVisualizeColors)decayCanceller = 2.;
-                    //if(morph!=0.)decayCanceller=decayCanceller*decayCanceller;
-                    
-                   sevenSuns+=texture2D(videoTexture,vec2(1.-cloverMAP.x,cloverMAP.y))+texture2D(videoTexture2,vec2(1.-cloverMAP.x,cloverMAP.y));
-
-                    
-                       if(eden==0)starship+=texture2D(STAR,cloverMAPadj)/decayCanceller;
-                       else if(eden==1)starship+=texture2D(EDEN,cloverMAPadj)/decayCanceller;
-                       //*length((vUv-.5)*max(resolution.x,resolution.y)/min(resolution.x,resolution.y));//+texture2D(STAR,cloverMAP);
-                            
-                           }
-              //   eyeScroll= roundEyes(s,vec2(0.));
-            if(onehundredfortyfourthousand)
-            {
-                 
-                 int march= int(mod(initialHyperCoreBoosted,4.));
-                 float color = 1.;
-                 if (march==1||march==3)color = -1.;
-                 if(dstnce<twoThirds)
-                 {
-                     vec2 move =-d.yx*volume/8.;
-                   if(march==0||march==3)oo+=color*(sealedMan(deSplicedS*5.,move)+faceFORWARDTWO(deSplicedS*5.+vec2(2.,0.),vec2(0.))*twoThirds);
-                   else oo+=color*(sealedWoman(deSplicedS*5.,move)+kissingEagles(deSplicedS*5.)*twoThirds);
-                 }
-                                          
-            }
+ 
    
        
   
@@ -4558,12 +4685,30 @@ dstnce = length(s);
                       
               //    }
               gated = false;
-
-for(int i=0;i<40; i++)//metacoreloop
+  
+dstnce=length(s);
+for(int i=0;i<200; i++)//metacoreloop used to be about 40 before squeezeN
 if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<twoThirds))
     )
     && 0.<=hyperCoreBoosted&&externalCores!=0.)
 {
+      if(dilate)   {
+      //  if (counter==0.)      s=freed(s*8.)/8.;//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+//else 
+     // s=freed(s*dstnce*lfc)/(dstnce*lfc);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+      s=freed(s*2.)/2.;///(dstnce*lfc);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+        dstnce=length(s);
+      } 
+
+     if(dstnce<2./3.)
+     {
+        float squeezer =dstnce*(pow(2.,squeezeN)-2.);
+        hyperCoreBoosted-=squeezer;
+    hyperCoreOUTPUT-=squeezer;
+     }
+
+
+
    float wise = 1.;
    /*
    if(whirlpool!=0.){
@@ -4581,15 +4726,30 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
     if(spinTowardsMe) if(float(i)>=hyperCoreBoosted-.5)s=spin2(s,atan(d.y,d.x));
 
    // if(distributor)s=spin2(s,distributorFACTOR);
+
+       float angleS = atan(s.y,s.x);
+        // s=spin2(s,PI*sign(angleS));
+
+
+
+
+                                                                if(distributor&&//not quite the same as distributor, but I don't want to add another button
+                                                                    //morph==0.&&
+                                                                mod(angleS+PI2+PI2/12.,PI2/3.)>PI2/6.) //p*=0.;
+                                                                {
+                                                                    s=spin2(s,PI);//balances inherited colors
+                                                                    unSwitch= !unSwitch;
+                                                                }
+
    float cloverOrDaisyOnTop = counter;
    if(twelveGates)cloverOrDaisyOnTop=counter+1.;
 
     if(twelveGatesMeta!=0.&&((twelveGatesMeta<1.&&mod(-.5+cloverOrDaisyOnTop,1./twelveGatesMeta)>=1.)||
                              (twelveGatesMeta>=1.&&mod(cloverOrDaisyOnTop,twelveGatesMeta)<1.)))
     {
-    float angleS = atan(s.y,s.x);
     if(mod((angleS*divideByMultiplyingPi+2.)*6.+.5,2.)>1.)
-    {s=spin2(s,PI/6.);
+    {
+        s=spin2(s,PI/6.);
            gated=true;
            }
 
@@ -4614,7 +4774,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
                 hyperCoreOUTPUT-=1.;
                 loops+=1.;
             }
-            
+
             hyperCoreBoosted-=.5;;
             hyperCoreOUTPUT-=.5;;
             loops+=.5;;
@@ -4633,8 +4793,8 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
 
     //if(float(i)>=hyperCoreBoosted)s-=vec2(-cos(d.y),-cos(d.x))*.5;
 
-OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-.5)/40.,0.)).x;
-OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
+//OmniDynamicPetalShift =texture2D(omniDynamic,vec2((loops+counter-.5)/40.,0.)).x;
+//OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
   if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spin2(s,atan(s.y,s.x)*OmniPetal);
   /*
   float fanLoop = mod(loops,1.);
@@ -4646,6 +4806,7 @@ OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
  if (cloverSlide||dynamicOvercore)
    {
        //float bIs =dstnce*sqrt2;
+    /* spokes slide
        if(float(i)>hyperCoreBoosted)
        {
            float b = 0. ;
@@ -4667,10 +4828,9 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
        hyperCoreBoosted+=b;
        hyperCoreOUTPUT+=b;
 }
-       }
+       }*/
         
-       //
-       /*the above before modifications is below
+       //the above before modifications is below
         if(float(i)>hyperCoreBoosted)
         {
             float b = dstnce;//may not be core stable
@@ -4685,7 +4845,7 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
         hyperCoreOUTPUT+=b;
 
         }
-        */
+        
         
         
         //this is different
@@ -4720,7 +4880,6 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
         
 
         }
-
      
 }
 else break;
@@ -4732,7 +4891,67 @@ hyperCoreOUTPUT--;
 
                 loopSolid++;
 
+  vec2 deSplicedS =s;
+   if(length(pCenterCored)<2./3.&&length(s)<2./3.) deSplicedS=pCenterCored;
+   if(unSwitch)   deSplicedS=spin2(deSplicedS,PI);
+
+  if(gated)deSplicedS=spin2(deSplicedS,-PI/6.);
+
+      dstnce = length(deSplicedS);
+
+                          vec2 cloverMAPNeutral = ((spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment)));
+                                                    
+                               vec2   cloverMAP = cloverMAPNeutral+.5;
+                                vec2 cloverMAPadj =cloverMAPNeutral*dimensionFix+.5;
+                                                   vec2 ColorWheelClover=vec2(0.);
+                                                   float cycleShiftChiral = 0.;
+
+        if(NightAndDay){
+
+                ColorWheelClover=(spin2(vec2(deSplicedS.y,-deSplicedS.x),-atan(deSplicedS.y,deSplicedS.x)*OmniPetal/(6.+OmniPetal)+atan(d.x,d.y)+PI2*(6.+2.*flipStar)/12.+chiralAdjustment-twistStar*flipStar));
+
+                float correctionBrueled = 0.;
+                if(brelued==-1.)correctionBrueled=atan(-ColorWheelClover.x,-ColorWheelClover.y)-PIdiv2;
+                else correctionBrueled=atan(ColorWheelClover.y,ColorWheelClover.x)+PIdiv2;
+
+                if(dstnce<4./3.)
+                beta   =  hsv2rgb(vec3(-correctionBrueled*divideByMultiplyingPi2*flipStar,1.,1.));
+                //return beta;
+        }
+
+             /*    if(dstnce<twoThirds||(spokesVisualizeColors&&dstnce<4./3.)) if(vUv.x!=0.&&vUv.y!=0.&&vUv.x!=1.&&vUv.y!=1.){
+                    float decayCanceller=1.;
+                    if(spokesVisualizeColors)decayCanceller = 2.;
+                    //if(morph!=0.)decayCanceller=decayCanceller*decayCanceller;
+                    
+                   sevenSuns+=texture2D(videoTexture,vec2(1.-cloverMAP.x,cloverMAP.y))+texture2D(videoTexture2,vec2(1.-cloverMAP.x,cloverMAP.y));
+
+                    
+                       if(eden==0)starship+=texture2D(STAR,cloverMAPadj)/decayCanceller;
+                       else if(eden==1)starship+=texture2D(EDEN,cloverMAPadj)/decayCanceller;
+                       //*length((vUv-.5)*max(resolution.x,resolution.y)/min(resolution.x,resolution.y));//+texture2D(STAR,cloverMAP);
+                            
+                           }
+                           */
+              //   eyeScroll= roundEyes(s,vec2(0.));
+            if(onehundredfortyfourthousand)
+            {
+                 
+                 int march= int(mod(initialHyperCoreBoosted,4.));
+                 float color = 1.;
+                 if (march==1||march==3)color = -1.;
+                 if(dstnce<twoThirds)
+                 {
+                     vec2 move =-d.yx*volume/8.;
+                   if(march==0||march==3)oo+=color*(sealedMan(deSplicedS*5.,move)+faceFORWARDTWO(deSplicedS*5.+vec2(2.,0.),vec2(0.))*twoThirds);
+                   else oo+=color*(sealedWoman(deSplicedS*5.,move)+kissingEagles(deSplicedS*5.)*twoThirds);
+                 }
+                                          
+            }
+            dstnce=length(s);
 }else break;
+
+        
                   vec2 b = s;
 ///if(multiplicatorNexus)s*=colorShift/88.8;
 
@@ -4980,7 +5199,28 @@ return
            if(l!=0.) ret = vec3(1./l);
        return ret;
                                }
-
+vec3 ring(vec2 r, float number)
+{   
+    float amp= texture2D( twelveNotesTex, vec2((number+.5)/12.,0)).x;
+    amp=pow(amp,1./3.);
+   // r/=max(resolution.x,resolution.y)/min(resolution.x,resolution.y);
+    vec3 ret = vec3(0.);
+    float radius = length(r);
+    if(abs(radius*2.-amp)<.01) 
+    {ret = hsv2rgb( vec3( mod((twistStar/PI2*12.-number)*brelued+4.,12.)/12. ,1.,1. ));
+        float increment = mod(mod((atan(r.y,r.x))/PI2*12.*2.+12.*12.+6.,1.)-number/12.,1.);
+        
+   if(increment<1./48.)ret=vec3(-1.*brelued);
+   else if(increment<3./48.)ret=vec3(1.*brelued);
+ 
+   else if(increment>47./48.)ret=vec3(-1.*brelued);
+   else if(increment>45./48.)ret=vec3(1.*brelued);
+  
+   
+    }
+;
+    return ret;
+}
                       vec3 wings (vec2 p){
                           
                           if(chirality==-1)p=p.yx;
@@ -6373,13 +6613,58 @@ if(starOnDot==1||starOnDot==2){
                                  pillar = sevenPillars(vUv.yx-vec2(0.,.5));
                                                      if(pillar.x!=0.||pillar.y!=0.||pillar.z!=0.)         pillar=   clamp(pillar+(-mny.x-mny.y-mny.z)*40.,0.,1.);
                                  vec3 hypnoticHarmonicCircles = vec3(0.);
-                                                                 
+                                                                
+                                 if(ringSpring)
+                                 {
+                                    vec2 rr = r;//* min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
+                                                            float number =0.;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,number);
+                                    number =1.;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,number);
+                                    number =2.;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(r,number);
+                                    number =3.;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,number);
+                                    number =4.;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,number);
+                                    number =5.;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,number);
+                                    number =6.;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,number);
+                                    number =7.;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,number);
+                                    number =8.;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,number);
+                                    number =9.;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,number);
+                                    number =10.;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,number);
+                                    number =11.;
+                                                               
+                                    hypnoticHarmonicCircles+=ring(rr,number);
+                                    
+                                 }
                                  if(balloonsON!=0.||balloonsONexponential!=0.)
                                  {
-                                    if(maxColorOfStarship!=1.) hypnoticHarmonicCircles=clamp(balloons(p)-shipSUM,0.,1.);
-                                    else hypnoticHarmonicCircles=balloons(p);
+                                    if(maxColorOfStarship!=1.) hypnoticHarmonicCircles+=clamp(balloons(p)-shipSUM,0.,1.);
+                                    else hypnoticHarmonicCircles+=balloons(p);
                                 }
-                                                                 
+                                                                                if(bodyWithArms.w==1.)hypnoticHarmonicCircles=bodyWithArms.xyz;
+                                                                                if(hypnoticHarmonicCircles.x!=0.||hypnoticHarmonicCircles.y!=0.||hypnoticHarmonicCircles.z!=0.)
+                                                                                {
+                                                                                   HEART=hypnoticHarmonicCircles;
+                                                                                }
                                                                  
                     vec4 pixelStarship=vec4(0.);
                                                                  float mnyWhite=1.;
@@ -6435,7 +6720,9 @@ if(starOnDot==1||starOnDot==2){
                                  
  if(pixelWitnesses){
 vec4 starBuffer = vec4(0.);
-for (float x = 0.; x<12.;x++) starBuffer+=starns(uVu,x);
+//for (float x = 0.; x<12.;x++) 
+starBuffer+=starns(uVu//,x
+);
 
 //if(isGrey==0.)
 
@@ -6454,6 +6741,13 @@ if(mny.r!=0.||mny.g!=0.||mny.b!=0.)mny-=pixelShipGrey*12.;
 
 
 }
+if ((HEART.x!=0.||HEART.y!=0.||HEART.z!=0.)&&oneEye.r!=0.)
+{
+    //oneEye=HEART/4.;
+    //HEART=-oneEye;
+  // heartWarmed=-oneEye;
+}
+if(oneEye.r!=0.)zoomer=-oneEye;
 
                                                             if(oneEye.r!=0.&&pixelShipGrey!=0.)oneEye=vec3(pixelShipGrey);
 
@@ -6549,11 +6843,12 @@ if(mny.r!=0.||mny.g!=0.||mny.b!=0.)mny-=pixelShipGrey*12.;
 
                                                   vec4 layeredOUT =vec4(0.);
                           // if (isBlack==1.&&starship.w==1.)layeredOUT=vec4(vec3(0.),1.);
-                          if(movieTime<=5.&&movieTime>=0.||movieTime==-2.)layeredOUT=vec4(movie(characterP),1.);
-                          else if(movieTime==-2.)layeredOUT=vec4(0.);
-                   else if(constellation||squirgle==1)layeredOUT=vec4(zoomer,1.);
+                   
+                     if(constellation||squirgle==1)layeredOUT=vec4(zoomer,1.);
                                  else if(length(p)<2.*sqrt2/min(resolution.x,resolution.y)) layeredOUT=vec4(zoomer,1.);
-                     else if(starship.x==starship.y&&starship.z==starship.x&&(starship.x==254./255.||starship.x==1./255.)&&starship.w!=0.)layeredOUT=vec4(vec3(starship.r+mannyFace*(starship.r/2.+.5)),1.);
+                                              else if (hypnoticHarmonicCircles.x==hypnoticHarmonicCircles.y&&hypnoticHarmonicCircles.x==hypnoticHarmonicCircles.z&&hypnoticHarmonicCircles.x!=0.)layeredOUT=vec4(vec3(hypnoticHarmonicCircles.x),1.);
+
+                                 else if(starship.x==starship.y&&starship.z==starship.x&&(starship.x==254./255.||starship.x==1./255.)&&starship.w!=0.)layeredOUT=vec4(vec3(starship.r+mannyFace*(starship.r/2.+.5)),1.);
      
                    else if (mannyFace.w==.75)  {
                        if (starship.w>0.&&shipSUM<341./255.)layeredOUT=vec4(mannyFace.xyz+starship.xyz,1.);
@@ -6733,6 +7028,9 @@ fin/vec4(confraculator
 
                    }
                    
+           if(movieTime<=5.&&movieTime>=0.)layeredOUT=vec4(movie(characterP),1.);
+                          else if(movieTime==-2.)layeredOUT=vec4(0.);
+    
                         gl_FragColor=layeredOUT;//vec4(movie(characterP),1.);//
 //things known to cause bugs on some android chrome: heart (divides by zero), linear eq,waveform, "144000" men and women in clover, articles
                                                                  
