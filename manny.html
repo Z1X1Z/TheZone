@@ -4017,17 +4017,18 @@ if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
     if(budge==1./3.)
     hyperCore-=2.25/log(.5);///squeezeN;//for central polynomial
 else{
-    float squinch = (lengthP-sqrt(zoom));
+    float squinch = pow(lengthP-sqrt(zoom),1./squeezeN);
  if(squinch>.0) 
    hyperCore-=log(abs(squinch));
    else
-  hyperCore+=8.*log(2.);
+  hyperCore+=(8.*log(2.)/squeezeN);
+  hyperCore+=(squeezeN-1.)*log(2.)/2.;
   //hyperCore-=.25;
 }
    }
    //if(abs(coords.y)>1.)hyperCore+=1./log(.5);
  // if(petals!=0.)
-     if(squeezeN>1.)hyperCore-=2.;
+     if(squeezeN>1.)hyperCore-=log(2.)/2.;
    float lpcc=length(pCenterCored);
    float lpcc2=lpcc*lpcc;
 //if(fieldPowerBoost)hyperCore+=1./log(.5);

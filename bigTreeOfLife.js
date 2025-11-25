@@ -335,16 +335,18 @@ if(continuumClover!=0)hyperCore-=0./Math.log(.5);
     if(budge==1./3.)
     hyperCore-=2.25/Math.log(.5);///squeezeN;//for central polynomial
 else{
-    var squinch = (lengthP-Math.sqrt(zoom));
+    var squinch = Math.pow(lengthP-Math.sqrt(zoom),1./squeezeN);
  if(squinch>.0) 
    hyperCore-=Math.log(Math.abs(squinch));
    else
-  hyperCore+=8.*Math.log(2.);
+  hyperCore+=8.*Math.log(2.)/squeezeN;
+  hyperCore+=(squeezeN-1.)*Math.log(2.)/2.;
+
   //hyperCore-=1.;
 }
    }
 
-     if(squeezeN>1.)hyperCore-=2.;
+     if(squeezeN>1.)hyperCore-=Math.log(2.)/2.;
 
 
 let lpcc = pCenterCored.length();
