@@ -387,6 +387,8 @@ let pushBackCounter = 0;
                                     let BlackOrWhiteNOTE = .5
                                     let starMajorMinor=.5;
                                     let fromCenter = 0;
+                           var cloverPerimeter=0.;
+
                                                   let radius = 0.;
         function  move()
         {
@@ -1372,7 +1374,8 @@ let lastVolume = 1.;
             if(uniforms.nGenesis>0.)verticalStretch*=2.;
             if(uniforms.polyNomialStretch.value)expandedZoomCage*=1.25;
 
-    if(((coordX*coordX+(coordY/verticalStretch)**2)**.5>=zoomCageSize*expandedZoomCage||zoom>=1.)&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
+    if((
+        cloverPerimeter*Math.log(3.)>=zoomCageSize*expandedZoomCage||zoom>=1.)&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
         if(uniforms.wheel.value&&window.cycleCores)uniforms.upCoreCycler.value=(uniforms.upCoreCycler.value-1)%60;//this is for the heart to expand and contract//does modulo -60%60=0?-0 it seems
         else uniforms.upCoreCycler.value = 0.;
     }
@@ -1782,6 +1785,8 @@ function runOSMD (){
                                                                         //else  uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
 
                                     fromCenter = (coordX*coordX+coordY*coordY)**.5;
+                                    cloverPerimeter=((uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.x  - 3.*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y)**2.
+       +(-uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y+ 3.*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.y)**2.)**.5
                                   }
 
                                   uniforms[ "zoom" ].value = zoom;
@@ -3337,7 +3342,7 @@ if(uniforms.gameOn.value&&allCaught)
     level +=1;
 
     polygons=[];
-    polyRad = 2.*Math.PI/(metaLevel)/(minimumDimension**2+maximumDimension**2)**.5*200.;
+    polyRad = 2.*Math.PI/(metaLevel)/(minimumDimension**2*2)**.5*200.;
 
     for(let n = 0; n<metaLevel-level; n++)
     {
@@ -3377,6 +3382,7 @@ for(let n = 0; n < polygons.length; n++)
                                                          const speedLimit = 1.;
                                                          
                                                          var distanceFromCenter;
+
                                                          var triggerDistanceAdjustment;
                                                          
                                                          var neutralizer=1.;
