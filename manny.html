@@ -3040,7 +3040,7 @@ g.y*=coreSlide;
 float corebase = log(zoom/coreSlide)/log(.3247)*coreShift+coreShift;
 
            if(clvrVariant9)
-           {z.x= -.25/(z.x);
+           {z.x= -1./(z.x);
             corebase*=abs(z.x);
            }
 
@@ -3054,7 +3054,7 @@ else if(abs(z.y)>17.7&&(f==1||f>3)){
     break;}
 else{
     z=vec2(-1./(z.x*z.x-z.y*z.y-g.x-t.x/3.-n.x),2.0*z.x*z.y-g.y+t.y/3.+n.y);//also try without coords for more classical
-    l=abs(z.y)*5.;//smooths middle horn, removes some clouds
+    if(!clvrVariant8) l=abs(z.y)*5.;//smooths middle horn, removes some clouds
     if(z.x>-.1)l=z.x*50.;}//face with closed small holes
 return vec3(clamp(1.-l,0.,1.));
 }
