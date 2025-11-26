@@ -3041,7 +3041,7 @@ float corebase = log(zoom/coreSlide)/log(.3247)*coreShift+coreShift;
 
            if(clvrVariant9)
            {z.x= -1./(z.x);
-            corebase*=abs(z.x);
+            corebase*=abs(z.x)/4.;
            }
 
 int core = 9+6*int(corebase);
