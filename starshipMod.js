@@ -3332,6 +3332,7 @@ uniforms.dotCoord.value =new THREE.Vector2(circleX,circleY) ;
                    centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-1) );
 
                                   radialLine.geometry.setFromPoints( centerOfDotToEdge )
+    polyRad = 2.*Math.PI/(metaLevel)*maximumDimension/minimumDimension/11;
 
 let allCaught = true;
 for (var n=0; n<polygons.length; n++) if(  polygons[n].caught == false) allCaught = false;
@@ -3342,7 +3343,6 @@ if(uniforms.gameOn.value&&allCaught)
     level +=1;
 
     polygons=[];
-    polyRad = 2.*Math.PI/(metaLevel)/(minimumDimension**2*2)**.5*200.;
 
     for(let n = 0; n<metaLevel-level; n++)
     {
@@ -3364,7 +3364,7 @@ if(uniforms.gameOn.value&&allCaught)
 else if(!uniforms.gameOn.value){polygons=[]; level = 1; metaLevel=1;}
                                         
                                         const baseMag=(1.-(metaLevel-level)/(metaLevel));
-                                        let compound =baseMag/120.*window.movementRate/pixelShaderToStarshipRATIO;
+                                        let compound =baseMag/150.*window.movementRate/pixelShaderToStarshipRATIO;
 
 for(let n = 0; n < polygons.length; n++)
                                                        {
@@ -3418,7 +3418,7 @@ for(let n = 0; n < polygons.length; n++)
                                                         polygons[n].dy+=-Math.sin(angleTarget)*compound;
                                                     
                                                          }
-                                                         var slowDown = .999**(interpolation);
+                                                         var slowDown = .997**(interpolation);
                                                          polygons[n].dx*=slowDown;
                                                          polygons[n].dy*=slowDown;
 
