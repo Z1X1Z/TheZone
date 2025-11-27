@@ -1187,7 +1187,7 @@ Reset Zoom![L]</a><br>
                <input type="checkbox" id="polyNomialStretch" name="t"  onclick= "
                   key  = 'P';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
-               <label for="polyNomialStretch">polyNomialStretch?![,.P]</label><br>
+               <label for="polyNomialStretch">polyNomialStretch![,.P]</label><br>
         
 <a id="seventhEYE" name="t"  onclick= "
 key  = 'O';
@@ -4064,6 +4064,7 @@ else{
   hyperCore+=(8.*log2/squeezeN);
   hyperCore+=(squeezeN-1.)*log2/2.;
   //hyperCore-=.25;
+  if(!polyNomialStretch)hyperCore+=log2*1.5;
 }
    }
 
