@@ -545,7 +545,7 @@ let pushBackCounter = 0;
 
                         
           // if (uniforms.Spoker.value)expandedZoomCage=4./3.
-           if(preFromCenter>=window.zoomCageSize*expandedZoomCage){//adjust back in if too far from the center
+           if(cloverPerimeter>=window.zoomCageSize*expandedZoomCage){//adjust back in if too far from the center
                 pushBackCounter+=60./FPS;
 
                 coordX*=window.zoomCageSize/fromCenter*expandedZoomCage;
@@ -1373,9 +1373,8 @@ let lastVolume = 1.;
              
             if(uniforms.nGenesis>0.)verticalStretch*=2.;
             if(uniforms.polyNomialStretch.value)expandedZoomCage*=1.25;
-console.log(fromCenter+" from Center + CloverPerimeter "+cloverPerimeter)
     if((
-        cloverPerimeter*Math.log(uniforms.baseN.value)/Math.log(3.)>=zoomCageSize*expandedZoomCage||zoom>=1.)&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
+        cloverPerimeter>=zoomCageSize*expandedZoomCage||zoom>=1.)&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
         if(uniforms.wheel.value&&window.cycleCores)uniforms.upCoreCycler.value=(uniforms.upCoreCycler.value-1)%60;//this is for the heart to expand and contract//does modulo -60%60=0?-0 it seems
         else uniforms.upCoreCycler.value = 0.;
     }
@@ -1903,7 +1902,7 @@ function runOSMD (){
                      
                                     fromCenter = (coordX*coordX+coordY*coordY)**.5;
                                                                         cloverPerimeter=((uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.x  - 3.*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y)**2.
-       +(-uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y+ 3.*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.y)**2.)**.5
+       +(-uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y+ 3.*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.y)**2.)**.5/2.
 
                                     
                                     
