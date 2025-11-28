@@ -1373,9 +1373,9 @@ let lastVolume = 1.;
              
             if(uniforms.nGenesis>0.)verticalStretch*=2.;
             if(uniforms.polyNomialStretch.value)expandedZoomCage*=1.25;
-
+console.log(fromCenter+" from Center + CloverPerimeter "+cloverPerimeter)
     if((
-        cloverPerimeter*Math.log(3.)>=zoomCageSize*expandedZoomCage||zoom>=1.)&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
+        cloverPerimeter*Math.log(uniforms.baseN.value)/Math.log(3.)>=zoomCageSize*expandedZoomCage||zoom>=1.)&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
         if(uniforms.wheel.value&&window.cycleCores)uniforms.upCoreCycler.value=(uniforms.upCoreCycler.value-1)%60;//this is for the heart to expand and contract//does modulo -60%60=0?-0 it seems
         else uniforms.upCoreCycler.value = 0.;
     }
@@ -1430,7 +1430,6 @@ function zoomRoutine(){
                   //else if(clvrVariant4)precores=0.;
                   
                   if(refactorCores!=1.)precores=-.0;
-                  const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
                   var equilibriator = 1.;
               
                  uniforms[ "centralCores" ].value = Math.log(zoom)/-Math.log(2.)+precores    ;
@@ -1784,9 +1783,6 @@ function runOSMD (){
                                     uniforms.maxSamp.value=0.;
                                                                         //else  uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
 
-                                    fromCenter = (coordX*coordX+coordY*coordY)**.5;
-                                    cloverPerimeter=((uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.x  - 3.*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y)**2.
-       +(-uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y+ 3.*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.y)**2.)**.5
                                   }
 
                                   uniforms[ "zoom" ].value = zoom;
@@ -1905,6 +1901,10 @@ function runOSMD (){
          executeTouchRegime();
      }
                      
+                                    fromCenter = (coordX*coordX+coordY*coordY)**.5;
+                                                                        cloverPerimeter=((uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.x  - 3.*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y)**2.
+       +(-uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y+ 3.*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.y)**2.)**.5
+
                                     
                                     
                                     
