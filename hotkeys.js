@@ -221,7 +221,7 @@ noteFrozen:{value:0},
       squeezeN:{value:1.},
 seventhEYE:{value:1},
 budge:{value:.5},
-polyNomialStretch:{value:false   }
+polyNomialStretch:{value:true   }
 
 }
 window.uniforms={}

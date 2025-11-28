@@ -1187,7 +1187,7 @@ Reset Zoom![L]</a><br>
                <input type="checkbox" id="polyNomialStretch" name="t"  onclick= "
                   key  = 'P';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
-               <label for="polyNomialStretch">polyNomialStretch![,.P]</label><br>
+               <label for="polyNomialStretch">polyNomialStretch?![,.P]</label><br>
         
 <a id="seventhEYE" name="t"  onclick= "
 key  = 'O';
@@ -4318,7 +4318,7 @@ polyNomialStretch
     else
     {
 
-    float stretch=pow(lfc*twoThirds+1.,1./squeezeN);
+    float stretch=pow(pow(lfc*twoThirds+1.,.75),1./squeezeN);
     if(seventhEYE==0.||lengthP>2./3.)
       s/=stretch;//maybe other values work?
      else s*= stretch;
