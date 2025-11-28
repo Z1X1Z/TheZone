@@ -513,7 +513,7 @@ polyNomialStretch
     if  (budge==1./3.)                 s.multiplyScalar(lfc/2.+1./4.);//maybe other values work?
     else
     {
-      var stretch=lfc*2./3+1.;
+      var stretch=(lfc*2./3+1.)**.75;
     if(seventhEYE==0.||lengthP>2./3.)
       s.multiplyScalar(1./stretch);//maybe other values work?
      else s.multiplyScalar(stretch);
