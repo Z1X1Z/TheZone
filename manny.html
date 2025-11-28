@@ -3208,7 +3208,7 @@ float arm = 0.;
 
                    vec2 z=spinningArm;
                    float armSlice = abs(spinningArm.y)*pow(abs(spinningArm.x),1./.75);
-                if(armSlice>.7&&spinningArm.y>0.&&spinningArm.x>-1.)
+                if(armSlice>sqrt2/2.&&spinningArm.y>0.&&spinningArm.x>-1.)
                     {
                     for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;arm=1.;break;}
                     else{
@@ -3226,7 +3226,7 @@ float arm = 0.;
                     z=spinningArm;
                      armSlice = abs(spinningArm.y)*pow(abs(spinningArm.x),1./.75);
 
-                if(armSlice>.7&&spinningArm.y<0.&&spinningArm.x>-1.)
+                if(armSlice>sqrt2/2.&&spinningArm.y<0.&&spinningArm.x>-1.)
                     {
                     for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;arm=1.;break;}
                     else{
@@ -3249,7 +3249,7 @@ float arm = 0.;
                     float arm =0.;
                                   float  armSlice = abs(g.y)*pow(abs(g.x),4./3.);
 
-                    if((armSlice<.5/.7||!spinning)&&g.x<0.)
+                    if((armSlice<1./sqrt2||!spinning)&&g.x<0.)
 
                     {
                     if(g.x*g.x+g.y*g.y<40.)
