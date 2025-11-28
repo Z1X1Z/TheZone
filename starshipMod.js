@@ -1372,7 +1372,7 @@ let lastVolume = 1.;
     else expandedZoomCage = 1.;//logic here seems choppy
              
             if(uniforms.nGenesis>0.)verticalStretch*=2.;
-            if(uniforms.polyNomialStretch.value)expandedZoomCage*=1.25;
+            if(uniforms.polyNomialStretch.value)expandedZoomCage*=4./3.;
     if((
         cloverPerimeter>=zoomCageSize*expandedZoomCage||zoom>=1.)&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
         if(uniforms.wheel.value&&window.cycleCores)uniforms.upCoreCycler.value=(uniforms.upCoreCycler.value-1)%60;//this is for the heart to expand and contract//does modulo -60%60=0?-0 it seems
