@@ -622,7 +622,7 @@ source.connect(analyser);
                     else  uniforms.squeezeN.value=2.;
                 }
                                                       else  if(key == "P" && event.altKey&&event.ctrlKey)uniforms.polyNomialStretch.value=!uniforms.polyNomialStretch.value;
-                                          else  if(key == "O" && event.altKey&&event.ctrlKey)uniforms.seventhEYE.value=(uniforms.seventhEYE.value-1.+3.)%3;
+                                          else  if(key == "O" && event.altKey&&event.ctrlKey)uniforms.seventhEYE.value=(uniforms.seventhEYE.value-1.+4.)%4;
 
                 else if(key == "J" && event.ctrlKey)
                     uniforms.inseyedOut.value=(1+uniforms.inseyedOut.value)%3;
