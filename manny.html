@@ -2646,7 +2646,9 @@ bool isB=false, isF=false;
                             //  adjustedNote=-1.;
                               
                               }
-                              vec4 lowColor=vec4( hsv2rgb( vec3(mod((-lownote*brelued-2.)/12.,1.) ,.5,1. )),.5);
+                              vec4 lowColor=vec4( hsv2rgb( vec3(
+                                mod((-0.*brelued-2.)/12.,1.) ,.5,1. )
+                              ),1.);
                               vec4 pitchColor=vec4(1.);
                               if (volume!=1.)pitchColor=vec4( hsv2rgb( vec3(mod((-note*brelued-2.)/12.,1.) ,.5,1. )),.5);
                               
@@ -2681,7 +2683,7 @@ bool isB=false, isF=false;
                               f==16&&z.x<0.)l=vec4(pitchColor.xyz*(1.-abs(z.y)*6.),.25);//smooths middle horn, removes some clouds
                                
                             vec2 s=z;//vec2(z.x,-z.y);
-                            /*
+                            
                             if(f==7&&s.x<0.)notEars=true;
                             else if(wink);
                             else if((f==16)&&p.x>0.&&s.x<0.&&!notEars&&p.x<.35){l=lowColor;break;}
