@@ -166,7 +166,7 @@ else if (refactorCores==0.) p.divideScalar(3.);
 var s= p.clone();
 var c = s.length();
 
- if(seventhEYE>0.&&c<2./3.&&zoom<.5//&&lfc>zoom
+        if(seventhEYE>0.&&seventhEYE!=3.&&(lengthP<2./3.)&&zoom<.5
     )
 {
 
@@ -178,13 +178,14 @@ var c = s.length();
 
 
 var coresIn = 0.;
-var crs = 57.;//this is the mandelbrot and original inheritance colormode core range
+var crs = 64.;//this is the mandelbrot and original inheritance colormode core range
 // if(c>4./3.){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
 var centerslide = 0.;
-
+let lfcOverZoom=lfc/zoom;
+ if(lfc>zoom||seventhEYE!=3.)
 for(var i=0;i<Math.floor(crs);//crs+3=63
 i++)if(c<2./3.
-&&loops+centerslide<cored
+&&loops+centerslide<cored&&(lfcOverZoom>2./3.||seventhEYE!=3.)
 )
 {
 if(i>1||!cloverSlide){s.multiplyScalar( 2.);c*=2.;}
@@ -343,10 +344,16 @@ else{
    hyperCore-=Math.log(Math.abs(squinch));
    else
   hyperCore+=8.*Math.log(2.)/squeezeN;
-  hyperCore+=(squeezeN-1.)*Math.log(2.)/2.;
 
-  //hyperCore-=1.;
+  hyperCore+=(squeezeN-1.)*Math.log(2)/2.;
+  //hyperCore-=.25;
+  if(!polyNomialStretch)
+  if (seventhEYE!=3.)hyperCore+=Math.log(2)*1.5;
+  else hyperCore+=Math.log(2)*1.;
+
 }
+      if (seventhEYE==3.) hyperCore+=Math.log(2)*1.5;
+
    }
 
      if(squeezeN>1.)hyperCore-=1.25;
