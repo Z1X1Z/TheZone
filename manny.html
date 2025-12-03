@@ -2646,9 +2646,7 @@ bool isB=false, isF=false;
                             //  adjustedNote=-1.;
                               
                               }
-                              vec4 lowColor=vec4( hsv2rgb( vec3(
-                                mod((-0.*brelued-2.)/12.,1.) ,.5,1. )
-                              ),1.);
+                              vec4 lowColor=vec4( hsv2rgb( vec3(mod((-lownote*brelued-2.)/12.,1.) ,.5,1. )),.5);
                               vec4 pitchColor=vec4(1.);
                               if (volume!=1.)pitchColor=vec4( hsv2rgb( vec3(mod((-note*brelued-2.)/12.,1.) ,.5,1. )),.5);
                               
@@ -2683,7 +2681,7 @@ bool isB=false, isF=false;
                               f==16&&z.x<0.)l=vec4(pitchColor.xyz*(1.-abs(z.y)*6.),.25);//smooths middle horn, removes some clouds
                                
                             vec2 s=z;//vec2(z.x,-z.y);
-                            
+                            /*
                             if(f==7&&s.x<0.)notEars=true;
                             else if(wink);
                             else if((f==16)&&p.x>0.&&s.x<0.&&!notEars&&p.x<.35){l=lowColor;break;}
@@ -3872,9 +3870,10 @@ const float crs = 64.;//this is the mandelclover and original inheritance colorm
 // if(c>4./3.){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
  float centerslide = 0.;
  float lfcOverZoom = lfc/zoom;
- if(lfc>zoom||seventhEYE!=3.)for(int i=0;i<int(crs);//crs+3=63
+// if(lfc>zoom&&seventhEYE!=3.)
+ for(int i=0;i<int(crs);//crs+3=63
                   i++)if(c<twoThirds
-                         &&loops+centerslide<cored&&(lfcOverZoom>twoThirds||seventhEYE!=3.)
+                         &&loops+centerslide<cored//&&(lfcOverZoom>twoThirds||seventhEYE!=3.)
                          )
                         {
                          
@@ -4086,13 +4085,8 @@ else{
   hyperCore+=(8.*log2/squeezeN);
   hyperCore+=(squeezeN-1.)*log2/2.;
   //hyperCore-=.25;
-  if(!polyNomialStretch)
-  if (seventhEYE!=3.)hyperCore+=log2*1.5;
-  else hyperCore+=log2*1.;
-
+  if(!polyNomialStretch)hyperCore+=log2*1.5;
 }
-      if (seventhEYE==3.) hyperCore+=log2*1.5;
-
    }
 
    //if(abs(coords.y)>1.)hyperCore+=1.*LogHalfReciprocal;

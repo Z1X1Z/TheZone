@@ -182,10 +182,10 @@ var crs = 64.;//this is the mandelbrot and original inheritance colormode core r
 // if(c>4./3.){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
 var centerslide = 0.;
 let lfcOverZoom=lfc/zoom;
- if(lfc>zoom||seventhEYE!=3.)
+ //if(lfc>zoom||seventhEYE!=3.)
 for(var i=0;i<Math.floor(crs);//crs+3=63
 i++)if(c<2./3.
-&&loops+centerslide<cored&&(lfcOverZoom>2./3.||seventhEYE!=3.)
+&&loops+centerslide<cored//&&(lfcOverZoom>2./3.||seventhEYE!=3.)
 )
 {
 if(i>1||!cloverSlide){s.multiplyScalar( 2.);c*=2.;}
