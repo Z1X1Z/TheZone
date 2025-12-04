@@ -1902,7 +1902,7 @@ function runOSMD (){
                      
                                     fromCenter = (coordX*coordX+coordY*coordY)**.5;
                                                                         cloverPerimeter=((uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.x  - 3.*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y)**2.
-       +(-uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y+ 3.*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.y)**2.)**.5/2.
+       +(-uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y+ 3.*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.y)**2.)**.5/3.
 
                                     
                                     
