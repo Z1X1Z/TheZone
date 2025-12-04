@@ -1263,6 +1263,7 @@ function adjustThreeJSWindow()
 
 }
 function shutdown(){
+    source.disconnect();
     audioX.close();
 }
 function onWindowResize() {
