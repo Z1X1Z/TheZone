@@ -8,7 +8,12 @@ window.audioX={};
     window.source={};
 
 let analyser={};
-    window.dataArray;
+
+var bufferSize=fftSize;
+var numberOfBins=bufferSize/2.;
+var inputData = new Float32Array(bufferSize);
+var dataArray = new Uint8Array(bufferSize/2);
+
     async function startMic() {
       //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
         navigator.mediaDevices.getUserMedia({

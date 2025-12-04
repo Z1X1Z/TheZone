@@ -72,10 +72,6 @@ let loopsRun =0;
 
 var zoomOutEngage=false;
 var pi = Math.PI;
-var bufferSize=fftSize;
-var numberOfBins=bufferSize/2.;
-var inputData = new Float32Array(bufferSize);
-var dataArray = new Uint8Array(bufferSize/2);
 const fractionOfFrame = 1024;//1024-26=998 seems not to skip much and has nice low ranges
 const yinData = new Float64Array(fractionOfFrame);
 
