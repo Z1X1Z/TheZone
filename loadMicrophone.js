@@ -9,10 +9,8 @@ window.audioX={};
 
 let analyser={};
 
-var bufferSize=fftSize;
-var numberOfBins=bufferSize/2.;
-var inputData = new Float32Array(bufferSize);
-var dataArray = new Uint8Array(bufferSize/2);
+window.bufferSize=fftSize;
+window.numberOfBins=bufferSize/2.;
 
     async function startMic() {
       //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
@@ -28,8 +26,12 @@ var dataArray = new Uint8Array(bufferSize/2);
           audioX = new AudioContext();
           analyser = audioX.createAnalyser();
           source = audioX.createMediaStreamSource( stream );
-          source.connect(analyser);
           analyser.fftSize = fftSize;
+
+window.inputData = new Float32Array(bufferSize);
+window.dataArray = new Uint8Array(bufferSize/2);
+
+          source.connect(analyser);
 
       }
       ).catch((err) => {// engage touch only mode
