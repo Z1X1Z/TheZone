@@ -7,11 +7,6 @@ window.touchMode = false;
 window.audioX={};
     window.source={};
 
-function shutdown(){
-    source.disconnect();
-    audioX.close();
-}
-
 let analyser={};
     window.dataArray;
     async function startMic() {
@@ -30,7 +25,6 @@ let analyser={};
           source = audioX.createMediaStreamSource( stream );
           source.connect(analyser);
           analyser.fftSize = fftSize;
-          window.addEventListener("beforeunload", shutdown, false);
 
       }
       ).catch((err) => {// engage touch only mode
