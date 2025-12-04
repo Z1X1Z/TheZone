@@ -5,9 +5,15 @@ window.touchMode = false;
 
     window.micOn = false;
 window.audioX={};
+    window.source={};
+
+function shutdown(){
+    source.disconnect();
+    audioX.close();
+}
+window.addEventListener("beforeunload", shutdown, false);
 
 let analyser={};
-    window.source;
     window.dataArray;
     async function startMic() {
       //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia

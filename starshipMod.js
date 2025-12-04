@@ -1262,10 +1262,6 @@ function adjustThreeJSWindow()
 
 
 }
-function shutdown(){
-    source.disconnect();
-    audioX.close();
-}
 function onWindowResize() {
 
                         if (!sheetTranslucent&&"osmd" in window &&osmd!=null)
@@ -1305,7 +1301,6 @@ function onWindowResize() {
   }
 window.addEventListener( 'resize', onWindowResize, false );
 window.addEventListener("orientationchange", onWindowResize, false);
-window.addEventListener("beforeunload", shutdown, false);
 
 
             let lastTime=0.;
