@@ -1262,9 +1262,9 @@ function adjustThreeJSWindow()
 
 
 }
-window.addEventListener( 'resize', onWindowResize, false );
-window.addEventListener("orientationchange", onWindowResize, false);
-
+function shutdown(){
+    audioX.close();
+}
 function onWindowResize() {
 
                         if (!sheetTranslucent&&"osmd" in window &&osmd!=null)
@@ -1302,6 +1302,10 @@ function onWindowResize() {
          numberInputElements[n].style.width=widthPX/(numberOfColumns+1.)+"px";
 
   }
+window.addEventListener( 'resize', onWindowResize, false );
+window.addEventListener("orientationchange", onWindowResize, false);
+window.addEventListener("beforeunload", shutdown, false);
+
 
             let lastTime=0.;
             let ticker = 0;
