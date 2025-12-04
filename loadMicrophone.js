@@ -11,7 +11,6 @@ function shutdown(){
     source.disconnect();
     audioX.close();
 }
-window.addEventListener("beforeunload", shutdown, false);
 
 let analyser={};
     window.dataArray;
@@ -31,6 +30,8 @@ let analyser={};
           source = audioX.createMediaStreamSource( stream );
           source.connect(analyser);
           analyser.fftSize = fftSize;
+          window.addEventListener("beforeunload", shutdown, false);
+
       }
       ).catch((err) => {// engage touch only mode
                         console.log("Touch only mode!")
