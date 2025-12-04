@@ -4339,7 +4339,7 @@ polyNomialStretch
     else
     {
 
-    float stretch=pow(pow(lfc*twoThirds+1.,.75),1./squeezeN);
+    float stretch=pow(pow(lfc*.5+1.,.5),1./squeezeN);
     if(seventhEYE==0.||lengthP>2./3.)
       s/=stretch;//maybe other values work?
      else s*= stretch;
