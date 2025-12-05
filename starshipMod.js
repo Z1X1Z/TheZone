@@ -2227,11 +2227,11 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
      lowAmpFreq = 1;
 
      lowAmpFreq = 1;
-    for(var kappa=0.;kappa<testarContinuous.length;kappa++)if (lowNote>testarContinuous[kappa]&&testarContinuous[kappa]>0.&&isFinite(testarContinuous[kappa])&&isFinite(mustarD[kappa])
+    for(var kappa=0.;kappa<EldersLeg;kappa++)if (lowNote>testar[kappa]&&isFinite(testar[kappa])
                                                                )
-    {lowNote=testarContinuous[kappa]
+    {lowNote=testar[kappa]
         lowAmpFreq =  frequencies[kappa]
-        uniforms.lownote.value=mustarD[kappa]/2.;
+        uniforms.lownote.value=kappa*12./EldersLeg;
     }
     if(    window.playQuietestSound){
         quietestSound.play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:lowAmpFreq,volume:1.})
