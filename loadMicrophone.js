@@ -7,7 +7,9 @@ window.touchMode = false;
 window.audioX={};
     window.source={};
 let micProcessing = false;//this was engaged to help cut down on noise, but no longer seems necessary, and the pitch is truer without
-  if(location.hash.includes('.,K')||location.hash.includes(',.K'))micProcessing=true;
+  if((location.hash.includes('.,K')||location.hash.includes(',.K'))!=iOS)
+    micProcessing=true;
+    
 function shutdown(){
     source.disconnect();
     audioX.close();
