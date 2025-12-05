@@ -6,12 +6,36 @@ window.touchMode = false;
     window.micOn = false;
 window.audioX={};
     window.source={};
-let micProcessing = false;//this was engaged to help cut down on noise, but no longer seems necessary, and the pitch is truer without
+
+window.bufferSize=fftSize;
+window.numberOfBins=bufferSize/2.;
+window.inputData = new Float32Array(bufferSize);
+window.dataArray = new Uint8Array(bufferSize/2);
+
+let micProcessing1 = true;//this was engaged to help cut down on noise, but no longer seems necessary, and the pitch is truer without
+let micProcessing2 = true;//this was engaged to help cut down on noise, but no longer seems necessary, and the pitch is truer without
+let micProcessing3 = true;//this was engaged to help cut down on noise, but no longer seems necessary, and the pitch is truer without
   if((location.hash.includes('.,K')||location.hash.includes(',.K'))
     //!=iOS
   )
-    micProcessing=true;
-    
+  for(var p =0;p<location.hash.length-2;p++)
+    {
+        var g= location.hash.slice(p,p+3)
+                   if(g==",.K"||g==".,K")
+                   {
+        if (location.hash[p+3]=="(")
+        {
+          if(location.hash[p+4]=="f")micProcessing1=false
+          if(location.hash[p+5]=="f")micProcessing2=false
+          if(location.hash[p+6]=="f")micProcessing3=false
+        }
+          else {
+            micProcessing3=false;
+          }
+            }
+          }
+          console.log(micProcessing1+"1"+micProcessing2+"2"+micProcessing3)
+       
 function shutdown(){
     source.disconnect();
     audioX.close();
@@ -22,9 +46,9 @@ let analyser={};
       //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
         navigator.mediaDevices.getUserMedia({
         audio:{
-        autoGainControl: micProcessing,
-        echoCancellation: micProcessing,
-        noiseSuppression:!micProcessing//https://stackoverflow.com/questions/71978189/lag-when-playing-mic-audio-directly-to-output-using-web-audio-api
+        autoGainControl: micProcessing1,
+        echoCancellation: micProcessing2,
+        noiseSuppression:micProcessing3//https://stackoverflow.com/questions/71978189/lag-when-playing-mic-audio-directly-to-output-using-web-audio-api
         }
         })
       .then((stream) => {
