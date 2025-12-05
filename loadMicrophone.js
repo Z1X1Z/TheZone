@@ -24,7 +24,7 @@ let analyser={};
         audio:{
         autoGainControl: micProcessing,
         echoCancellation: micProcessing,
-        noiseSuppression:false//https://stackoverflow.com/questions/71978189/lag-when-playing-mic-audio-directly-to-output-using-web-audio-api
+        noiseSuppression:!micProcessing//https://stackoverflow.com/questions/71978189/lag-when-playing-mic-audio-directly-to-output-using-web-audio-api
         }
         })
       .then((stream) => {
