@@ -35,9 +35,9 @@ let micProcessing3 = false;//this was engaged to help cut down on noise, but no 
 
         }
           else {
-            micProcessing1=false;
-            micProcessing2=false;
-            micProcessing3=false;
+            micProcessing1=true;
+            micProcessing2=true;
+            micProcessing3=true;
           }
             }
           }

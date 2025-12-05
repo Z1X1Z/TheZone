@@ -219,7 +219,7 @@ noteFrozen:{value:0},
       smush:{value:0.2},
       ringSpring:{value:false},
       squeezeN:{value:1.},
-seventhEYE:{value:1},
+seventhEYE:{value:0},
 budge:{value:.5},
 polyNomialStretch:{value:true   }
 
@@ -624,6 +624,7 @@ source.connect(analyser);
                 }
                                                       else  if(key == "P" && event.altKey&&event.ctrlKey)uniforms.polyNomialStretch.value=!uniforms.polyNomialStretch.value;
                                           else  if(key == "O" && event.altKey&&event.ctrlKey)uniforms.seventhEYE.value=(uniforms.seventhEYE.value-1.+4.)%4;
+                                          else  if(key == "K" && event.altKey&&event.ctrlKey);//enable mic processing in loadMicrophone.js
 
                 else if(key == "J" && event.ctrlKey)
                     uniforms.inseyedOut.value=(1+uniforms.inseyedOut.value)%3;
