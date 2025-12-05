@@ -25,9 +25,9 @@ let micProcessing3 = true;//this was engaged to help cut down on noise, but no l
                    {
         if (location.hash[p+3]=="(")
         {
-          if(location.hash[p+4]=="f")micProcessing1=false
-          if(location.hash[p+5]=="f")micProcessing2=false
-          if(location.hash[p+6]=="f")micProcessing3=false
+          if(location.hash[p+4]==",")micProcessing1=false
+          if(location.hash[p+5]==",")micProcessing2=false
+          if(location.hash[p+6]==",")micProcessing3=false
         }
           else {
             micProcessing1=false;
