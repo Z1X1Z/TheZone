@@ -1906,7 +1906,12 @@ function runOSMD (){
                                  cpX=uniforms.constellationCoord.value.y;
                                  cpY=uniforms.constellationCoord.value.x;
 }
-
+if(uniforms.cloverOffset.value!=0)
+{
+var cp = spin([cpX,cpY],uniforms.cloverOffset.value*Math.PI*2);
+cpX=cp[0]
+cpY=cp[1]
+}
                                 if(uniforms.chirality.value!=3)
 cloverPerimeter=((((cpX*cpX*cpX - 3.*cpX*cpY*cpY)**2.
        +(-cpY*cpY*cpY+ 3.*cpX*cpX*cpY)**2.)))**(.5)/3.
