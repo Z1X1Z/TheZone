@@ -331,7 +331,7 @@ if(polyNomialStretch)
     else hyperCore-=.125/Math.log(.5);//for central polynomial
 
    }
-   else hyperCore+=1.;
+   else hyperCore+=.75;
    }
    if(seventhEYE>0.&&lengthP<2./3.
    )
