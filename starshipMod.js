@@ -2227,7 +2227,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
      lowAmpFreq = 1;
 
      lowAmpFreq = 1;
-    for(var kappa=0.;kappa<testarContinuous.length;kappa++)if (lowNote>testarContinuous[kappa]&&testarContinuous[kappa]>0.&&isFinite(testarContinuous[kappa])
+    for(var kappa=0.;kappa<testarContinuous.length;kappa++)if (lowNote>testarContinuous[kappa]&&testarContinuous[kappa]>0.&&isFinite(testarContinuous[kappa])&&isFinite(mustarD[kappa])
                                                                )
     {lowNote=testarContinuous[kappa]
         lowAmpFreq =  frequencies[kappa]
