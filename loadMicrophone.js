@@ -6,8 +6,8 @@ window.touchMode = false;
     window.micOn = false;
 window.audioX={};
     window.source={};
-
-
+let micProcessing = true;
+  if(location.hash.includes('.,K')||location.hash.includes(',.K'))micProcessing=false
 function shutdown(){
     source.disconnect();
     audioX.close();
@@ -18,8 +18,8 @@ let analyser={};
       //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
         navigator.mediaDevices.getUserMedia({
         audio:{
-        autoGainControl: true,
-        echoCancellation: true,
+        autoGainControl: micProcessing,
+        echoCancellation: micProcessing,
         noiseSuppression:false//https://stackoverflow.com/questions/71978189/lag-when-playing-mic-audio-directly-to-output-using-web-audio-api
         }
         })
