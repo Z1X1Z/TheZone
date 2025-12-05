@@ -30,11 +30,12 @@ let micProcessing3 = true;//this was engaged to help cut down on noise, but no l
           if(location.hash[p+6]=="f")micProcessing3=false
         }
           else {
+            micProcessing1=false;
+            micProcessing2=false;
             micProcessing3=false;
           }
             }
           }
-          console.log(micProcessing1+"1"+micProcessing2+"2"+micProcessing3)
        
 function shutdown(){
     source.disconnect();
