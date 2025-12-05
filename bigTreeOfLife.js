@@ -331,7 +331,7 @@ if(polyNomialStretch)
     else hyperCore-=.125/Math.log(.5);//for central polynomial
 
    }
-   else hyperCore+=.5;
+   else hyperCore+=1.;
    }
    if(seventhEYE>0.&&lengthP<2./3.
    )
@@ -798,8 +798,8 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
 {
       if(dilate)   {
 
-       s=freed(s.multiplyScalar(2.)).divideScalar(2.);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
-        dstnce=s.length();
+      // s=freed(s.multiplyScalar(2.)).divideScalar(2.);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+     //   dstnce=s.length();
       }
      if(dstnce<2./3.)
      {

@@ -80,11 +80,17 @@
                   //  console.log(hrefLocal+" "+document.location.href)
                 }
               function  loadWithBypass(nm,touchHash){
-                  let ls = localStorage.getItem('config')
-                if(!document.getElementById('bypass').checked&&ls!=null)
-                loadStarshipWithHash(nm,touchHash+ls);
+                  let ls = localStorage.getItem('config1')
+                if(!document.getElementById('bypass1').checked&&ls!=null)
+                touchHash+=ls;
+            ls = localStorage.getItem('config2')
+                if(!document.getElementById('bypass2').checked&&ls!=null)
+                touchHash+=ls;
+            ls = localStorage.getItem('config3')
+                if(!document.getElementById('bypass3').checked&&ls!=null)
+                touchHash+=ls;
 
-else loadStarshipWithHash(nm,touchHash);
+ loadStarshipWithHash(nm,touchHash);
 }
             </script>
            
@@ -127,25 +133,7 @@ else loadStarshipWithHash(nm,touchHash);
             </div>
             <p>
             </h1>
-<h1>
-    <input type="text" id = "configuration" onkeyup="        localStorage.setItem('config', this.value);
 
-
-"
->Configuration</input>
-    <p>
-    <input type="checkbox" id="bypass"style="color:green" name="t"  onclick= "
-     
-
-">
-     <label for="bypass">Bypass</label><p>
-     </h1>
-    <script>
-        let hkConfig = localStorage.getItem('config');
-        document.getElementById('configuration').value=hkConfig;
-        hashExtension=hkConfig;
-                                </script>
-    <p>
 <h1>
    <li> <a class="onoffline2" value="" onclick="
                                  loadWithBypass(this.name,'t,t')" name="manny.html"> Touch with star</a></li>
@@ -156,6 +144,53 @@ else loadStarshipWithHash(nm,touchHash);
       >Touch Only</a></li>
    </h1>
 <p>
+    <h1>
+    <input type="text" id = "configuration1" onkeyup="        localStorage.setItem('config1', this.value);
+"
+>Config1</input>
+    <input type="checkbox" id="bypass1"style="color:green" name="t"  onclick= "
+        localStorage.setItem('bypass1', this.checked.toString());
+">
+     <label for="bypass1">Bypass1</label><p>
+
+
+          <input type="text" id = "configuration2" onkeyup="        localStorage.setItem('config2', this.value);
+"
+>Config2</input>
+    <input type="checkbox" id="bypass2"style="color:green" name="t"  onclick= "
+        localStorage.setItem('bypass2', this.checked.toString());
+">
+     <label for="bypass2">Bypass2</label><p>
+
+
+          <input type="text" id = "configuration3" onkeyup="        localStorage.setItem('config3', this.value);
+"
+>Config3</input>
+    <input type="checkbox" id="bypass3"style="color:green" name="t"  onclick= "
+        localStorage.setItem('bypass3', this.checked.toString());
+">
+     <label for="bypass3">Bypass3</label><p>
+     </h1>
+    <script>
+        let hkConfig = localStorage.getItem('config1');
+        document.getElementById('configuration1').value=hkConfig;
+        hkConfig = localStorage.getItem('config2');
+        document.getElementById('configuration2').value=hkConfig;
+        hkConfig = localStorage.getItem('config3');
+        document.getElementById('configuration3').value=hkConfig;
+       // hashExtension=hkConfig;
+          if( localStorage.getItem('bypass1')=="true")
+             document.getElementById("bypass1").checked = true
+             else document.getElementById("bypass1").checked = false
+            
+             if( localStorage.getItem('bypass2')=="true")
+             document.getElementById("bypass2").checked = true
+             else document.getElementById("bypass2").checked = false
+
+             if( localStorage.getItem('bypass3')=="true")
+             document.getElementById("bypass3").checked = true
+             else document.getElementById("bypass3").checked = false
+                                </script>
 <h2> May not work on all platforms indicated by a white or mostly black screen once loaded.  If so try a different browser like Firefox or Opera.  For starship that should work, try one that's
  <a class="onoffline2"  name="manny.html" onclick=
 "
