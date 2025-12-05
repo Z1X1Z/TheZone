@@ -166,7 +166,7 @@ else if (refactorCores==0.) p.divideScalar(3.);
 var s= p.clone();
 var c = s.length();
 
- if(seventhEYE>0.&&c<2./3.&&zoom<.5//&&lfc>zoom
+        if(seventhEYE>0.&&seventhEYE!=3.&&(lengthP<2./3.)&&zoom<.5
     )
 {
 
@@ -178,13 +178,14 @@ var c = s.length();
 
 
 var coresIn = 0.;
-var crs = 57.;//this is the mandelbrot and original inheritance colormode core range
+var crs = 64.;//this is the mandelbrot and original inheritance colormode core range
 // if(c>4./3.){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
 var centerslide = 0.;
-
+let lfcOverZoom=lfc/zoom;
+ //if(lfc>zoom||seventhEYE!=3.)
 for(var i=0;i<Math.floor(crs);//crs+3=63
 i++)if(c<2./3.
-&&loops+centerslide<cored
+&&loops+centerslide<cored//&&(lfcOverZoom>2./3.||seventhEYE!=3.)
 )
 {
 if(i>1||!cloverSlide){s.multiplyScalar( 2.);c*=2.;}
@@ -315,19 +316,22 @@ hyperCore*=equilibriator;
 }
    
 
-        if (dilate)hyperCore-=.5/Math.log(.5);//for freed dilation
+      //  if (dilate)hyperCore-=.25/Math.log(.5);//for freed dilation
 
 
 
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
 if(continuumClover!=0)hyperCore-=0./Math.log(.5);
-
-     if(budge==1./3.&&polyNomialStretch)//I was flying into what I think was the top of the center clover around commit 8c6a4aae1986bddb05af5d8026505c63dd0ed8be when I had a feeling like faith was shaping the clover, then a black and blue biogenesis clover (I wasn't in biogenesis!)upcored and cored and I flew into it, Then I had a screen full of free floating tripolar clovers that seemed to extend forever in all directions fitting this same type of clover together.  Then after a minute the screen rotated and became half rez and half size.  The zoom in the dimension was a constant 1
+if(polyNomialStretch)
+{
+     if(budge==1./3.)//I was flying into what I think was the top of the center clover around commit 8c6a4aae1986bddb05af5d8026505c63dd0ed8be when I had a feeling like faith was shaping the clover, then a black and blue biogenesis clover (I wasn't in biogenesis!)upcored and cored and I flew into it, Then I had a screen full of free floating tripolar clovers that seemed to extend forever in all directions fitting this same type of clover together.  Then after a minute the screen rotated and became half rez and half size.  The zoom in the dimension was a constant 1
    {
    if(seventhEYE==0.||lengthP>2./3.    )  
-   hyperCore-=.5/log(.5);
+   hyperCore-=.5/Math.log(.5);
     else hyperCore-=.125/Math.log(.5);//for central polynomial
 
+   }
+   else hyperCore+=.5;
    }
    if(seventhEYE>0.&&lengthP<2./3.
    )
@@ -335,17 +339,25 @@ if(continuumClover!=0)hyperCore-=0./Math.log(.5);
     if(budge==1./3.)
     hyperCore-=2.25/Math.log(.5);///squeezeN;//for central polynomial
 else{
-    var squinch = (lengthP-Math.sqrt(zoom));
+    var squinch = Math.pow(lengthP-Math.sqrt(zoom),1./squeezeN);
  if(squinch>.0) 
    hyperCore-=Math.log(Math.abs(squinch));
    else
-  hyperCore+=8.*Math.log(2.);
-  //hyperCore-=1.;
+  hyperCore+=8.*Math.log(2.)/squeezeN;
+
+  hyperCore+=(squeezeN-1.)*Math.log(2)/2.;
+  //hyperCore-=.25;
+  if(!polyNomialStretch)
+  if (seventhEYE!=3.)hyperCore+=Math.log(2)*1.5;
+  else hyperCore+=Math.log(2)*1.;
+
 }
+      if (seventhEYE==3.) hyperCore+=Math.log(2)*1.5;
+
    }
 
-     if(squeezeN>1.)hyperCore-=2.;
-
+     if(squeezeN>1.)hyperCore-=1.25;
+//hyperCore-=1.;
 
 let lpcc = pCenterCored.length();
    let lpcc2=lpcc*lpcc;
@@ -503,12 +515,16 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
        if(//zoom<.5&&
 counter==0.&&
 polyNomialStretch
-       //&&lengthP<twoThirds
+   //    &&lengthP<2./3.
 ){
     if  (budge==1./3.)                 s.multiplyScalar(lfc/2.+1./4.);//maybe other values work?
     else
-                s.multiplyScalar(lfc*Math.sqrt(lfc)+1.);//maybe other values work?
-    
+    {
+      var stretch=(lfc*.5+1.)**.5;
+    if(seventhEYE==0.||lengthP>2./3.)
+      s.multiplyScalar(1./stretch);//maybe other values work?
+     else s.multiplyScalar(stretch);
+}
 }
         //dstnce = s.length();
             if(chop&&dstnce>2./3.)s=spinVector(s,Math.floor(dstnce)*Math.PI/2.);

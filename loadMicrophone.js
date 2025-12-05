@@ -5,16 +5,25 @@ window.touchMode = false;
 
     window.micOn = false;
 window.audioX={};
-
+    window.source={};
+let micProcessing = false;//this was engaged to help cut down on noise, but no longer seems necessary, and the pitch is truer without
+  if((location.hash.includes('.,K')||location.hash.includes(',.K'))
+    //!=iOS
+  )
+    micProcessing=true;
+    
+function shutdown(){
+    source.disconnect();
+    audioX.close();
+}
 let analyser={};
-    window.source;
-    window.dataArray;
+
     async function startMic() {
       //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
         navigator.mediaDevices.getUserMedia({
         audio:{
-        autoGainControl: true,
-        echoCancellation: true,
+        autoGainControl: micProcessing,
+        echoCancellation: micProcessing,
         noiseSuppression:false//https://stackoverflow.com/questions/71978189/lag-when-playing-mic-audio-directly-to-output-using-web-audio-api
         }
         })
@@ -23,8 +32,12 @@ let analyser={};
           audioX = new AudioContext();
           analyser = audioX.createAnalyser();
           source = audioX.createMediaStreamSource( stream );
-          source.connect(analyser);
           analyser.fftSize = fftSize;
+
+window.addEventListener("beforeunload", shutdown, false);
+
+          source.connect(analyser);
+
       }
       ).catch((err) => {// engage touch only mode
                         console.log("Touch only mode!")

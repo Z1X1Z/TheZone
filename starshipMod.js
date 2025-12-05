@@ -59,7 +59,6 @@ let loopsRun =0;
 
 
                   var framesLong;
-                  let computeFPS=false;
 
 
             function disposeArray() {
@@ -72,10 +71,6 @@ let loopsRun =0;
 
 var zoomOutEngage=false;
 var pi = Math.PI;
-var bufferSize=fftSize;
-var numberOfBins=bufferSize/2.;
-var inputData = new Float32Array(bufferSize);
-var dataArray = new Uint8Array(bufferSize/2);
 const fractionOfFrame = 1024;//1024-26=998 seems not to skip much and has nice low ranges
 const yinData = new Float64Array(fractionOfFrame);
 
@@ -387,6 +382,8 @@ let pushBackCounter = 0;
                                     let BlackOrWhiteNOTE = .5
                                     let starMajorMinor=.5;
                                     let fromCenter = 0;
+                           var cloverPerimeter=0.;
+
                                                   let radius = 0.;
         function  move()
         {
@@ -543,7 +540,7 @@ let pushBackCounter = 0;
 
                         
           // if (uniforms.Spoker.value)expandedZoomCage=4./3.
-           if(preFromCenter>=window.zoomCageSize*expandedZoomCage){//adjust back in if too far from the center
+           if(cloverPerimeter>=window.zoomCageSize*expandedZoomCage){//adjust back in if too far from the center
                 pushBackCounter+=60./FPS;
 
                 coordX*=window.zoomCageSize/fromCenter*expandedZoomCage;
@@ -1260,9 +1257,6 @@ function adjustThreeJSWindow()
 
 
 }
-window.addEventListener( 'resize', onWindowResize, false );
-window.addEventListener("orientationchange", onWindowResize, false);
-
 function onWindowResize() {
 
                         if (!sheetTranslucent&&"osmd" in window &&osmd!=null)
@@ -1300,11 +1294,14 @@ function onWindowResize() {
          numberInputElements[n].style.width=widthPX/(numberOfColumns+1.)+"px";
 
   }
+window.addEventListener( 'resize', onWindowResize, false );
+window.addEventListener("orientationchange", onWindowResize, false);
+
 
             let lastTime=0.;
             let ticker = 0;
            // window.FPS=60; //declared in hotkeys
-
+                    let fpsSET=0;
                   const interval = 250.;//sample window of FPS meter for FPS frame averaging, think 1000/FPS. 1 is more or less off. Used to keep off jitter. Think 200ms maybe
                   let elapsedTimeBetweenFrames = 0.;
                   let lastPitch = 1;
@@ -1327,6 +1324,8 @@ let lastVolume = 1.;
                        let cloverSuperCores = 0;
                        var singleHyperCoreDepth = 54.;//240/54=4.44444444.. I like this, also 240/48 = 5 that's okay too, since the 60th core is kindof gone to the hypercore dot
                             let expandedZoomCage=1.;
+                    let verticalStretch = 1.;
+
 
        function infinicore(){
             if(zoom<=1./2.**(singleHyperCoreDepth+3)){
@@ -1358,17 +1357,21 @@ let lastVolume = 1.;
     
     
     
-    if (ONbypass||(on&&zoom<1.))preserveOuterCore=true;
+    if (ONbypass||(on&&
+        zoom<1.))preserveOuterCore=true;
     else preserveOuterCore = false
         
         expandedZoomCage=1;
              if (uniforms.Spoker.value)expandedZoomCage*=2.
                  if (uniforms.continuumClover.value)expandedZoomCage/=1.5
-
-    else expandedZoomCage = 1.;
+          
+    else expandedZoomCage = 1.;//logic here seems choppy
              
-             
-    if((fromCenter>=zoomCageSize*expandedZoomCage||zoom>=1.)&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
+            if(uniforms.nGenesis>0.)verticalStretch*=2.;
+            if(uniforms.polyNomialStretch.value)expandedZoomCage*=4./3.;
+    if((
+        cloverPerimeter>=zoomCageSize*expandedZoomCage||zoom>=1.
+    )&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
         if(uniforms.wheel.value&&window.cycleCores)uniforms.upCoreCycler.value=(uniforms.upCoreCycler.value-1)%60;//this is for the heart to expand and contract//does modulo -60%60=0?-0 it seems
         else uniforms.upCoreCycler.value = 0.;
     }
@@ -1423,7 +1426,6 @@ function zoomRoutine(){
                   //else if(clvrVariant4)precores=0.;
                   
                   if(refactorCores!=1.)precores=-.0;
-                  const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
                   var equilibriator = 1.;
               
                  uniforms[ "centralCores" ].value = Math.log(zoom)/-Math.log(2.)+precores    ;
@@ -1777,7 +1779,6 @@ function runOSMD (){
                                     uniforms.maxSamp.value=0.;
                                                                         //else  uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
 
-                                    fromCenter = (coordX*coordX+coordY*coordY)**.5;
                                   }
 
                                   uniforms[ "zoom" ].value = zoom;
@@ -1896,6 +1897,27 @@ function runOSMD (){
          executeTouchRegime();
      }
                      
+                                    fromCenter = (coordX*coordX+coordY*coordY)**.5;
+                                 
+                                let cpX=uniforms.constellationCoord.value.x;
+                                let cpY=uniforms.constellationCoord.value.y;
+                                if(uniforms.chirality.value==-1)
+{
+                                 cpX=uniforms.constellationCoord.value.y;
+                                 cpY=uniforms.constellationCoord.value.x;
+}
+if(uniforms.cloverOffset.value!=0)
+{
+var cp = spin([cpX,cpY],uniforms.cloverOffset.value*Math.PI*2);
+cpX=cp[0]
+cpY=cp[1]
+}
+                                if(uniforms.chirality.value!=3)
+cloverPerimeter=((((cpX*cpX*cpX - 3.*cpX*cpY*cpY)**2.
+       +(-cpY*cpY*cpY+ 3.*cpX*cpX*cpY)**2.)))**(.5)/3.
+       else cloverPerimeter=(cpY*cpY+cpX*cpX)**.5*1.5
+
+
                                     
                                     
                                     
@@ -2099,7 +2121,9 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                         if(loopsRun<3)elapsedTimeBetweenFrames = 0;
 
     if(elapsedTimeBetweenFrames>interval)
-    {FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
+    {FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;
+        if(fpsSET<10)fpsSET++;
+    };
     ticker++;
     
     
@@ -2235,7 +2259,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
    if(spirographMODE!=0)makeSpirograph();
 
 
-    if (computeFPS)
+    if (computeFPS&&fpsSET>1)
     {
         framesLong=FPS
 
@@ -3323,6 +3347,7 @@ uniforms.dotCoord.value =new THREE.Vector2(circleX,circleY) ;
                    centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-1) );
 
                                   radialLine.geometry.setFromPoints( centerOfDotToEdge )
+    polyRad = 2.*Math.PI/(metaLevel)*maximumDimension/minimumDimension/11;
 
 let allCaught = true;
 for (var n=0; n<polygons.length; n++) if(  polygons[n].caught == false) allCaught = false;
@@ -3333,7 +3358,6 @@ if(uniforms.gameOn.value&&allCaught)
     level +=1;
 
     polygons=[];
-    polyRad = 2.*Math.PI/(metaLevel)/(minimumDimension**2+maximumDimension**2)**.5*200.;
 
     for(let n = 0; n<metaLevel-level; n++)
     {
@@ -3355,7 +3379,7 @@ if(uniforms.gameOn.value&&allCaught)
 else if(!uniforms.gameOn.value){polygons=[]; level = 1; metaLevel=1;}
                                         
                                         const baseMag=(1.-(metaLevel-level)/(metaLevel));
-                                        let compound =baseMag/120.*window.movementRate/pixelShaderToStarshipRATIO;
+                                        let compound =baseMag/150.*window.movementRate/pixelShaderToStarshipRATIO;
 
 for(let n = 0; n < polygons.length; n++)
                                                        {
@@ -3373,6 +3397,7 @@ for(let n = 0; n < polygons.length; n++)
                                                          const speedLimit = 1.;
                                                          
                                                          var distanceFromCenter;
+
                                                          var triggerDistanceAdjustment;
                                                          
                                                          var neutralizer=1.;
@@ -3408,7 +3433,7 @@ for(let n = 0; n < polygons.length; n++)
                                                         polygons[n].dy+=-Math.sin(angleTarget)*compound;
                                                     
                                                          }
-                                                         var slowDown = .999**(interpolation);
+                                                         var slowDown = .997**(interpolation);
                                                          polygons[n].dx*=slowDown;
                                                          polygons[n].dy*=slowDown;
 
