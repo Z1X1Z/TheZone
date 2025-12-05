@@ -59,7 +59,6 @@ let loopsRun =0;
 
 
                   var framesLong;
-                  let computeFPS=false;
 
 
             function disposeArray() {
@@ -1302,7 +1301,7 @@ window.addEventListener("orientationchange", onWindowResize, false);
             let lastTime=0.;
             let ticker = 0;
            // window.FPS=60; //declared in hotkeys
-
+                    let fpsSET=0;
                   const interval = 250.;//sample window of FPS meter for FPS frame averaging, think 1000/FPS. 1 is more or less off. Used to keep off jitter. Think 200ms maybe
                   let elapsedTimeBetweenFrames = 0.;
                   let lastPitch = 1;
@@ -1370,7 +1369,8 @@ let lastVolume = 1.;
             if(uniforms.nGenesis>0.)verticalStretch*=2.;
             if(uniforms.polyNomialStretch.value)expandedZoomCage*=4./3.;
     if((
-        cloverPerimeter>=zoomCageSize*expandedZoomCage||zoom>=1.)&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
+        cloverPerimeter>=zoomCageSize*expandedZoomCage||zoom>=1.
+    )&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
         if(uniforms.wheel.value&&window.cycleCores)uniforms.upCoreCycler.value=(uniforms.upCoreCycler.value-1)%60;//this is for the heart to expand and contract//does modulo -60%60=0?-0 it seems
         else uniforms.upCoreCycler.value = 0.;
     }
@@ -1897,8 +1897,11 @@ function runOSMD (){
      }
                      
                                     fromCenter = (coordX*coordX+coordY*coordY)**.5;
-                                                                        cloverPerimeter=((uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.x  - 3.*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y)**2.
-       +(-uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y*uniforms.constellationCoord.value.y+ 3.*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.x*uniforms.constellationCoord.value.y)**2.)**.5/3.
+                                 
+                                let cpX=uniforms.constellationCoord.value.x;
+                                let cpY=uniforms.constellationCoord.value.y;
+                                    cloverPerimeter=((((cpX*cpX*cpX - 3.*cpX*cpY*cpY)**2.
+       +(-cpY*cpY*cpY+ 3.*cpX*cpX*cpY)**2.)))**(.5)/3.
 
                                     
                                     
@@ -2103,7 +2106,9 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                         if(loopsRun<3)elapsedTimeBetweenFrames = 0;
 
     if(elapsedTimeBetweenFrames>interval)
-    {FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;};
+    {FPS=ticker/elapsedTimeBetweenFrames*1000.; ticker=0.;lastTime = timestamp;
+        if(fpsSET<10)fpsSET++;
+    };
     ticker++;
     
     
@@ -2239,7 +2244,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
    if(spirographMODE!=0)makeSpirograph();
 
 
-    if (computeFPS)
+    if (computeFPS&&fpsSET>1)
     {
         framesLong=FPS
 
