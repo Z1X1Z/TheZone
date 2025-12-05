@@ -1357,7 +1357,8 @@ let lastVolume = 1.;
     
     
     
-    if (ONbypass||(on&&zoom<1.))preserveOuterCore=true;
+    if (ONbypass||(on&&
+        zoom<1.))preserveOuterCore=true;
     else preserveOuterCore = false
         
         expandedZoomCage=1;
@@ -1900,8 +1901,17 @@ function runOSMD (){
                                  
                                 let cpX=uniforms.constellationCoord.value.x;
                                 let cpY=uniforms.constellationCoord.value.y;
-                                    cloverPerimeter=((((cpX*cpX*cpX - 3.*cpX*cpY*cpY)**2.
+                                if(uniforms.chirality.value==-1)
+{
+                                 cpX=uniforms.constellationCoord.value.y;
+                                 cpY=uniforms.constellationCoord.value.x;
+}
+
+                                if(uniforms.chirality.value!=3)
+cloverPerimeter=((((cpX*cpX*cpX - 3.*cpX*cpY*cpY)**2.
        +(-cpY*cpY*cpY+ 3.*cpX*cpX*cpY)**2.)))**(.5)/3.
+       else cloverPerimeter=(cpY*cpY+cpX*cpX)**.5*1.5
+
 
                                     
                                     
