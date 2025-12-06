@@ -856,28 +856,18 @@ uniforms.cloverOffset.value=document.getElementById('CloverTwist').value/6.">
 uniforms.petals.value=document.getElementById('petalCount').value-6.">
                     </p>
                     
-                 <input type="checkbox" id="omniCore" name="t"  onclick= "
+          <!--       <input type="checkbox" id="omniCore" name="t"  onclick= "
               key  = 'o';
               callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
            <label for="omniCore">omniCORE![,o]</label><br>
-              
-                    <label for="coringConstant">Coring Value (>0.):</label>
-                   <input type="number" id="coringConstant" name="coringConstant" class="num" onkeyup="
-                number = 'no number'
-;
-                       var coreNUM=document.getElementById('coringConstant').value;
-                       if(coreNUM>0.)coreData.fill(Number(coreNUM));
-                       else coreData.fill(-1./leaf)
-
-
-">
-                       </p>
-
+                -->
+                 
+<!--
                        <input type="checkbox" id="dynamicCoring" name="t"  onclick= "
                     key  = 'c';
                     callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
                  <label for="dynamicCoring">Dynamic Coring[,c]</label><br>
-                 
+                 -->
                        <input type="checkbox" id="Center" name="t"  onclick= "
                     key  = 'c';
                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -1061,8 +1051,18 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                 number = 'no number'
 ;
 uniforms.baseN.value=document.getElementById('Base Number').value">
-                                        </br>
-                                        
+                                        <br>
+                                           <label for="coringConstant">Coring Value (>0.):</label>
+                   <input type="number" id="coringConstant" name="coringConstant" class="num" onkeyup="
+                number = 'no number'
+;
+                       var coreNUM=document.getElementById('coringConstant').value;
+                       if(coreNUM>0.)coreData.fill(Number(coreNUM));
+                       else coreData.fill(-1./leaf)
+
+
+">
+                       <br>
                                              <input type="checkbox" id="duperCore" name="t"  onclick= "
                                                                     window.dupered=!window.dupered;">
                                               <label for="duperCore">Duper Core!</label><br>
