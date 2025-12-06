@@ -12,8 +12,8 @@ window.numberOfBins=bufferSize/2.;
 window.inputData = new Float32Array(bufferSize);
 window.dataArray = new Uint8Array(bufferSize/2);
 
-let micProcessing1 = false;//this was engaged to help cut down on noise, but no longer seems necessary, and the pitch is truer without
-let micProcessing2 = true;//this was engaged to help cut down on noise, but no longer seems necessary, and the pitch is truer without
+let micProcessing1 = true;//this was engaged to help cut down on noise, but no longer seems necessary, and the pitch is truer without
+let micProcessing2 = false;//this was engaged to help cut down on noise, but no longer seems necessary, and the pitch is truer without
 let micProcessing3 = true;//this was engaged to help cut down on noise, but no longer seems necessary, and the pitch is truer without
   if((location.hash.includes('.,K')||location.hash.includes(',.K'))
     //!=iOS
