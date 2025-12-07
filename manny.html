@@ -6513,8 +6513,8 @@ if (Character==4||Character==3) {heartSize=1.5;
                                                             else heartSize*=6./5.;
 
 if(volume!=1.)
-{if(volume<zoomOutRatchetThreshold)frAMP-=volume*(zoomOutRatchetThreshold)*16.;
-frAMP*=(.5+frAMP)/(1.+zoomOutRatchetThreshold);
+{frAMP-=volume*(zoomOutRatchetThreshold)*16.;
+frAMP*=(1.+frAMP)/(1.+zoomOutRatchetThreshold);
 }
 if(heartStar==0)heartSize/=(1.+frAMP);//*8.;
 
