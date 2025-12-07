@@ -2236,7 +2236,7 @@ vec3 paddles(vec2 vUvCentered){
            
           // vec2 flatScreen=1.-vUv;
           // flatScreen*=2.;
-    float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*4.,2.)/4.,0.)).r;
+    float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*4.,2.)/4.,0.)).r/volume;
    // float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*2.,2.)/2./
                                             //  pow(2.,(note)/12.+4.)*440. ,0.)).r;//adjusted to pitch
 
@@ -6512,7 +6512,7 @@ if (Character==4||Character==3) {heartSize=1.5;
                                                                 else heartSize*=6./5.;
 
 if(volume!=1.)
-{frAMP-=volume*(zoomOutRatchetThreshold)*16.;
+{//frAMP-=volume*(zoomOutRatchetThreshold)*16.;
 frAMP*=(.5+frAMP)/(1.+zoomOutRatchetThreshold);
 }
 if(heartStar==0)heartSize/=(1.+frAMP);//*8.;
