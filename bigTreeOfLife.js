@@ -798,7 +798,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
 {
       if(dilate)   {
 
-      // s=freed(s.multiplyScalar(2.)).divideScalar(2.);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+       s=freed(s.multiplyScalar(1.)).divideScalar(1.);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
      //   dstnce=s.length();
       }
      if(dstnce<2./3.)
