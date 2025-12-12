@@ -6516,7 +6516,7 @@ if(volume!=1.)
 {//frAMP-=volume*(zoomOutRatchetThreshold)*16.;
 //frAMP*=(.5+frAMP)/(1.+zoomOutRatchetThreshold);
 }
-if(heartStar==0&&frAMP>0.)heartSize/=(1.+frAMP)/(1.+zoomOutRatchetThreshold)*4.;//*8.;
+if(heartStar==0&&frAMP>0.)heartSize/=(1.+frAMP)/(1.+zoomOutRatchetThreshold)*6.;//*8.;
 
 else if(heartStar==1&&volume!=0.){
     heartSize/=(1.+volume);//multiplied by two if heart argument is not vec2(0.)

@@ -796,7 +796,7 @@ for(var i=0;i<200; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.)))
    && 0.<=hyperCoreBoosted&&MetaCored)
 {
-      if(polyNomialStretch)   {
+      if(polyNomialStretch&&budge!=1./3.)   {
 
        s=freed(s.multiplyScalar(1.)).divideScalar(1.);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
      //   dstnce=s.length();
