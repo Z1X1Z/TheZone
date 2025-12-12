@@ -798,8 +798,8 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
 {
       if(polyNomialStretch&&budge!=1./3.)   {
 
-       s=freed(s.multiplyScalar(1.)).divideScalar(1.);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
-     //   dstnce=s.length();
+       s=freed(s.multiply(s)).divide(s);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+       dstnce=s.length();
       }
      if(dstnce<2./3.)
      {

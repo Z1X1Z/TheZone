@@ -3955,9 +3955,9 @@ let tolerance=0;//(1024-26)/10000
                                                                                         //oolp
                                                                                                                                      -(tAScaled)**(.5+tAScaled)))
                                                                          //          b++
-                                                                                  loopy++
+                                                             //                     loopy++
                                                                      }
-                                                   console.log(loopy) 
+                                                //  console.log(loopy) 
                                                                  // let b = 0.;
                                                                  
                                                                  // console.log(b)
