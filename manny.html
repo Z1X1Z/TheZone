@@ -4330,7 +4330,20 @@ hyperCoreOUTPUT-=superUpcorer;
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
        );
 
+ if(dilate){
+                 /* float sliceanddiceBoost=mod((atan(s.y,s.x)+chiralAdjustment)*divideByMultiplyingPi2*6.+1.,1.)*dstnce*dstnce;
+                  sliceanddiceBoost=sign(sliceanddiceBoost)*pow(abs(sliceanddiceBoost),.5);
+              hyperCoreBoosted-=sliceanddiceBoost;
+               hyperCoreOUTPUT-=sliceanddiceBoost;
+                  */
+                  float dst = length(s);
+               hyperCoreBoosted-=dst;
+                hyperCoreOUTPUT-=dst;
+              // hyperCoreBoosted-=dstnce;
+               // hyperCoreOUTPUT-=dstnce;
 
+               
+       }
        if(//zoom<.5&&
 counter==0.&&
 polyNomialStretch
@@ -4355,19 +4368,7 @@ polyNomialStretch
       // dstnce=length(s)
        if(chop&&dstnce>2./3.)s=spin2(s,floor(dstnce)*PIdiv2);
 
-       if(dilate){
-                 /* float sliceanddiceBoost=mod((atan(s.y,s.x)+chiralAdjustment)*divideByMultiplyingPi2*6.+1.,1.)*dstnce*dstnce;
-                  sliceanddiceBoost=sign(sliceanddiceBoost)*pow(abs(sliceanddiceBoost),.5);
-              hyperCoreBoosted-=sliceanddiceBoost;
-               hyperCoreOUTPUT-=sliceanddiceBoost;
-                  */
-               hyperCoreBoosted-=dstnce;
-                hyperCoreOUTPUT-=dstnce;
-              // hyperCoreBoosted-=dstnce;
-               // hyperCoreOUTPUT-=dstnce;
-
-               
-       }
+      
        
 
 

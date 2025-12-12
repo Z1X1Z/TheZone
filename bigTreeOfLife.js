@@ -511,6 +511,11 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
 -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
 );
     
+        if(dilate){//this is to allow top level core freeze for original clover
+         var dst = s.length();
+             hyperCoreBoosted-=dst;
+              hyperCoreOUTPUT-=dst;
+        }
 
        if(//zoom<.5&&
 counter==0.&&
@@ -529,11 +534,6 @@ polyNomialStretch
         //dstnce = s.length();
             if(chop&&dstnce>2./3.)s=spinVector(s,Math.floor(dstnce)*Math.PI/2.);
 
-        if(dilate){//this is to allow top level core freeze for original clover
-         
-             hyperCoreBoosted-=dstnce;
-              hyperCoreOUTPUT-=dstnce;
-        }
 
         if(clvrVariant9)  s=new THREE.Vector2(s.x+coords.y/gr,s.y+coords.x/gr);
         if(clvrVariant7)s.add(pcs);

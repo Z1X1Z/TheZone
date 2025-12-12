@@ -1891,9 +1891,11 @@ function runOSMD (){
         ||window.touchOnlyMode)
      {    setDynamicSampler2ds();//normally does nothing
 
-         setMicInputToStarPIXEL();
+        if(window.shouldShowStar) 
+            {setMicInputToStarPIXEL();
          loadFrequencyTextures();
          setTwelveNotes();
+            }
          executeTouchRegime();
      }
                      
