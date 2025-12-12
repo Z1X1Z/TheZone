@@ -3433,7 +3433,7 @@ for(let n = 0; n < polygons.length; n++)
                                                         polygons[n].dy+=-Math.sin(angleTarget)*compound;
                                                     
                                                          }
-                                                         var slowDown = .997**(interpolation);
+                                                         var slowDown = .984**(interpolation);
                                                          polygons[n].dx*=slowDown;
                                                          polygons[n].dy*=slowDown;
 
@@ -3940,21 +3940,24 @@ let tolerance=0;//(1024-26)/10000
                                                                  let tAScaledPermanent = tAScaled;
                                                                  let incrementToleranceFeedback =tAScaled;
                                                       //           let oolp =    1./-leafPermanent;
-
+                                                                 let loopy = 0;
                                                                  
                                                                  if(tAScaled>0&&isFinite(tAScaled))
-                                                                     for(var reps=0; reps<2.;reps+=1)
+                                                                     for(var reps=-(0); reps<totalAMP**2.;reps+=tAScaledPermanent**1.5)
+                                                                  //   for(var reps=0; reps<2.;reps+=1)
                                                       //                 for(reps=0;reps<5.;reps+=1.+1./(1.-totalAMP))
 
                                                                      { tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaledPermanent))/(2.-tAScaledPermanent))
                                                                          let taEX1 = ((1.-tAScaled)*(1.+tAScaledPermanent));
                                                                          tAScaled=tAScaled**(Math.sign(taEX1)*(Math.abs(taEX1))**(
-                                                                                                                                            .75
+                                                                                 
+                                                                                                                                           .75
                                                                                         //oolp
                                                                                                                                      -(tAScaled)**(.5+tAScaled)))
                                                                          //          b++
+                                                                           //       loopy++
                                                                      }
-                                                                 
+                                                 //   console.log(loopy) 
                                                                  // let b = 0.;
                                                                  
                                                                  // console.log(b)
