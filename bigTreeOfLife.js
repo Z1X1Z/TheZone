@@ -182,13 +182,14 @@ var crs = 64.;//this is the mandelbrot and original inheritance colormode core r
 // if(c>4./3.){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
 var centerslide = 0.;
 let lfcOverZoom=lfc/zoom;
+let scale=1.;
  //if(lfc>zoom||seventhEYE!=3.)
 for(var i=0;i<Math.floor(crs);//crs+3=63
 i++)if(c<2./3.
 &&loops+centerslide<cored//&&(lfcOverZoom>2./3.||seventhEYE!=3.)
 )
 {
-if(i>1||!cloverSlide){s.multiplyScalar( 2.);c*=2.;}
+if(i>1||!cloverSlide){s.multiplyScalar( 2.);c*=2.;scale*=2.;}
 
 if (cloverSlide)
 {
@@ -212,7 +213,7 @@ loops++;coresIn++;
 }
 else break;
 // if(refactorCores!=1.){s*=(1.+lfc/2.);c*=(1.+lfc/2.);}
-
+let lfcCenterCored = lfc*scale;
 if(refactorCores>1.){
 var shift = (1.25+.5*zoom/(zoom+lfc));//centered at 1.5, just a guess really
 s.multiplyScalar(shift);c*=shift;
@@ -525,7 +526,7 @@ polyNomialStretch
     if  (budge==1./3.)                 s.multiplyScalar(lfc/2.+1./4.);//maybe other values work?
     else
     {
-      var stretch=(length(s)*.5+1.)**.5;
+      var stretch=(lfcCenterCored*.5+1.)**.5;
     if(seventhEYE==0.||lengthP>2./3.)
       s.multiplyScalar(1./stretch);//maybe other values work?
      else s.multiplyScalar(stretch);
@@ -688,7 +689,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
         //dstnce=s.length();
         if(spokelover){
             
-            var powerOfSpokeCore = spoke_factorLarge*lfc/dstnce;
+            var powerOfSpokeCore = spoke_factorLarge*lfcCenterCored/dstnce;
 
 var spokeloverCoreShiftDown=Math.pow(upSpoke,powerOfSpokeCore)*logStabilizationConstant;            ;//logStabilizationConstant seems to cancel powerOfDynamicSokeCore=2;
 

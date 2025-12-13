@@ -3848,7 +3848,7 @@ else if (refactorCores==0.) p/=3.;
 vec2 s=p;
 
                     
-        if(seventhEYE>0.&&seventhEYE!=3.&&(lengthP<2./3.)&&zoom<.5
+        if(seventhEYE>0.&&seventhEYE!=3.&&(lengthP<twoThirds&&length(s)<twoThirds)&&zoom<.5
  //&&lfc>zoom
  )
 {
@@ -3866,6 +3866,7 @@ vec2 s=p;
                                 }
                                  */
 float c = length(s);
+float scale = 1.;
 float coresIn = 0.;
 const float crs = 64.;//this is the mandelclover and original inheritance colormode core range
 // if(c>4./3.){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
@@ -3878,7 +3879,7 @@ const float crs = 64.;//this is the mandelclover and original inheritance colorm
                          )
                         {
                          
-  if(i>1||!cloverSlide){s*=2.;c*=2.;}
+  if(i>1||!cloverSlide){s*=2.;c*=2.;scale*=2.;}
 
   if (cloverSlide)
     {
@@ -3902,6 +3903,7 @@ const float crs = 64.;//this is the mandelclover and original inheritance colorm
                         }
                   
  else break;
+ float lfcCenterCored=lfc*scale;
 
         if(seventhEYE==3.&&(lengthP<twoThirds)&&zoom<.5
  //&&lfc>zoom
@@ -3934,7 +3936,7 @@ else if (refactorCores==0.){//for double slide core
     s*=1.5;c*=1.5;
 }
 
-   //if(0==1&&seventhEYE>0.&&zoom<.5&&(length(p)<2./3.||length(s)<2./3.))
+   //if(0==1&&seventhEYE>0.&&zoom<.5&&(lengthP<2./3.))
  //   s=1.5/(2.5-vec2(-s.x,abs(s.y)+1./3.));//this needs some exploration//here needs activation and new hotkey
     
 
@@ -4007,12 +4009,14 @@ else hyperCore=externalCores;//hyperCore is really better thought of as hyperMet
 //cored/1.5+log(length(coordSHIFT))*logStabilizationConstant+uber.z;
 //float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
 float equilibriator = 1.;
-if(dilate){
-if(lfc>twoThirds)equilibriator=lfc/(lfc-zoom/dif)*dif;
+/*if(dilate){//should be re-enabled after checks
+//if(lfc>twoThirds)
+equilibriator=lfc/(lfc-zoom/dif)*dif;
    //this is to allow top level core freeze for original clover
  
    hyperCore*=equilibriator;
    }
+   */
     // hyperCore-=.441*LogHalfReciprocal/equilibriator;
      
     // hyperCore-=coreDilation;
@@ -4302,7 +4306,7 @@ s*=dstnce*2.*PI/(atan(s.y,s.x)-PI*spirated);
 //if(counter>0.)s=spin2(s,whirlpoolMeta*dstnce*.75/3.*PI);
 
 dstnce = length(s);
-if(dstnce<2./3.){
+if(dstnce<twoThirds){
 window = s;
 gatedPass=gated;
 bubble=dstnce;
@@ -4353,8 +4357,8 @@ polyNomialStretch
     else
     {
 
-    float stretch=pow(pow(length(s)*.5+1.,.5),1./squeezeN);
-    if(seventhEYE==0.||lengthP>2./3.)
+    float stretch=pow(pow(lfcCenterCored+.5,.5),1./squeezeN);
+    if(seventhEYE==0.||lengthP>twoThirds)
       s/=stretch;//maybe other values work?
      else s*= stretch;
 }
@@ -4366,7 +4370,7 @@ polyNomialStretch
        //x**3
 
       // dstnce=length(s)
-       if(chop&&dstnce>2./3.)s=spin2(s,floor(dstnce)*PIdiv2);
+       if(chop&&dstnce>twoThirds)s=spin2(s,floor(dstnce)*PIdiv2);
 
       
        
@@ -4554,7 +4558,7 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
     if(constellation)s=starBirth(s);
 
    dstnce = length(s);
-       if(dstnce<2./3.)s*=pow(dstnce,squeezeN-1. );
+       if(dstnce<twoThirds)s*=pow(dstnce,squeezeN-1. );
    dstnce = length(s);
 
 
@@ -4626,7 +4630,7 @@ hyperCoreBoosted-=spoke_factor;}
 if(spokelover)
 {
        
-float powerOfSpokeCore =spoke_factorLarge*lfc/dstnce;// uncertain value,takes large range, highly responsive on spokes PI*PI/gr*-leaf has nice outer main spokes
+float powerOfSpokeCore =spoke_factorLarge*lfcCenterCored /dstnce;// uncertain value,takes large range, highly responsive on spokes PI*PI/gr*-leaf has nice outer main spokes
 
 
 
@@ -4774,12 +4778,12 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
       //  if (counter==0.)      s=freed(s*8.)/8.;//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
 //else 
      // s=freed(s*dstnce*lfc)/(dstnce*lfc);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
-     vec2 s2 = s*s*s;
-     s=freed(s*s2)/(s2);///(dstnce*lfc);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+    // vec2 s2 = vec2(1.);
+     s=freed(s*1.)/(1.);///(dstnce*lfc);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
        dstnce=length(s);
       } 
 
-     if(dstnce<2./3.)
+     if(dstnce<twoThirds)
      {
         float squeezer =dstnce*(pow(2.,squeezeN)-2.);
         hyperCoreBoosted-=squeezer;
@@ -4975,7 +4979,7 @@ hyperCoreOUTPUT--;
 
         
   vec2 deSplicedS =window;
-   if(length(pCenterCored)<2./3.&&length(window)<2./3.) deSplicedS=pCenterCored;
+   if(lpcc<twoThirds&&length(window)<twoThirds) deSplicedS=pCenterCored;
    if(unSwitch)   deSplicedS=spin2(deSplicedS,PI);
 
   if(gatedPass)deSplicedS=spin2(deSplicedS,-PI/6.);
