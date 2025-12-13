@@ -798,8 +798,9 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
    && 0.<=hyperCoreBoosted&&MetaCored)
 {
       if(polyNomialStretch&&budge!=1./3.)   {
-        let s2 = s.clone().multiply(s).multiply(s)
-       s=freed(s.multiply(s2)).divide(s2);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+       // let s2 = s.clone().multiply(s).multiply(s)
+      // s=freed(s.multiply(s2)).divide(s2);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+       s=freed(s);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
        dstnce=s.length();
       }
      if(dstnce<2./3.)
