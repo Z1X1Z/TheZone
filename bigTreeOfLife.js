@@ -525,7 +525,7 @@ polyNomialStretch
     if  (budge==1./3.)                 s.multiplyScalar(lfc/2.+1./4.);//maybe other values work?
     else
     {
-      var stretch=(lfc*.5+1.)**.5;
+      var stretch=(length(s)*.5+1.)**.5;
     if(seventhEYE==0.||lengthP>2./3.)
       s.multiplyScalar(1./stretch);//maybe other values work?
      else s.multiplyScalar(stretch);
@@ -797,8 +797,8 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
    && 0.<=hyperCoreBoosted&&MetaCored)
 {
       if(polyNomialStretch&&budge!=1./3.)   {
-
-       s=freed(s.multiply(s)).divide(s);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+        let s2 = s.clone().multiply(s).multiply(s)
+       s=freed(s.multiply(s2)).divide(s2);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
        dstnce=s.length();
       }
      if(dstnce<2./3.)

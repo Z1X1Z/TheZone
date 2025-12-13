@@ -4353,7 +4353,7 @@ polyNomialStretch
     else
     {
 
-    float stretch=pow(pow(lfc*.5+1.,.5),1./squeezeN);
+    float stretch=pow(pow(length(s)*.5+1.,.5),1./squeezeN);
     if(seventhEYE==0.||lengthP>2./3.)
       s/=stretch;//maybe other values work?
      else s*= stretch;
@@ -4774,7 +4774,8 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
       //  if (counter==0.)      s=freed(s*8.)/8.;//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
 //else 
      // s=freed(s*dstnce*lfc)/(dstnce*lfc);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
-      s=freed(s*s)/(s);///(dstnce*lfc);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+     vec2 s2 = s*s*s;
+     s=freed(s*s2)/(s2);///(dstnce*lfc);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
        dstnce=length(s);
       } 
 
