@@ -696,7 +696,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
         //dstnce=s.length();
         if(spokelover){
             
-            var powerOfSpokeCore = spoke_factorLarge*lfcCenterCored/dstnce;
+            var powerOfSpokeCore = spoke_factorLarge*dstnce;
 
 var spokeloverCoreShiftDown=Math.pow(upSpoke,powerOfSpokeCore)*logStabilizationConstant;            ;//logStabilizationConstant seems to cancel powerOfDynamicSokeCore=2;
 
