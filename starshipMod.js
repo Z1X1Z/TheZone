@@ -3943,7 +3943,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  let loopy = 0;
                                                                  
                                                                  if(tAScaled>0&&isFinite(tAScaled))
-                                                                     for(var reps=  0.;  reps<totalAMP**2.;reps+=tAScaledPermanent**1.5)
+                                                                     for(var reps=  0.;  reps<totalAMP**grPermanent;reps+=tAScaledPermanent**(-leafPermanent))
                                                                   //   for(var reps=0; reps<2.;reps+=1)
                                                       //                 for(reps=0;reps<5.;reps+=1.+1./(1.-totalAMP))
 
@@ -3955,9 +3955,9 @@ let tolerance=0;//(1024-26)/10000
                                                                                         //oolp
                                                                                                                                      -(tAScaled)**(.5+tAScaled)))
                                                                          //          b++
-                                                             //                     loopy++
+                                                            //    loopy++
                                                                      }
-                                                //  console.log(loopy) 
+                                              //   console.log(loopy) 
                                                                  // let b = 0.;
                                                                  
                                                                  // console.log(b)
