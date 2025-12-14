@@ -1,6 +1,7 @@
 var shaderScale,dilate,squeezeN,seventhEYE,budge,polyNomialStretch, coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
-,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta,spinTowardsMe,d,chop,cellularDivision,triogenesis,nGenesis,squareGenesis,constellationCoord,cloverso,feedTheLamb;
+,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta,spinTowardsMe,d,chop,cellularDivision,triogenesis,nGenesis,squareGenesis,constellationCoord,cloverso,feedTheLamb,OrthoEvery;
 function setUniformsToPlainName(){
+    OrthoEvery==uniforms.OrthoEvery.value
     squeezeN=uniforms.squeezeN.value;
     seventhEYE=uniforms.seventhEYE.value;
     budge=uniforms.budge.value;
@@ -323,7 +324,7 @@ hyperCore*=equilibriator;
 
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
 if(continuumClover!=0)hyperCore-=0./Math.log(.5);
-if(polyNomialStretch)
+if(polyNomialStretch&&OrthoEvery==0.)
 {
      if(budge==1./3.)//I was flying into what I think was the top of the center clover around commit 8c6a4aae1986bddb05af5d8026505c63dd0ed8be when I had a feeling like faith was shaping the clover, then a black and blue biogenesis clover (I wasn't in biogenesis!)upcored and cored and I flew into it, Then I had a screen full of free floating tripolar clovers that seemed to extend forever in all directions fitting this same type of clover together.  Then after a minute the screen rotated and became half rez and half size.  The zoom in the dimension was a constant 1
    {
@@ -349,8 +350,9 @@ else{
   hyperCore+=(squeezeN-1.)*Math.log(2)/2.;
   //hyperCore-=.25;
   if(!polyNomialStretch)
-  if (seventhEYE!=3.)hyperCore+=Math.log(2)*1.5;
-  else hyperCore+=Math.log(2)*1.;
+ // if (seventhEYE!=3.)hyperCore+=Math.log(2)*1.5;
+ // else 
+    hyperCore+=Math.log(2)*1.;
 
 }
       if (seventhEYE==3.) hyperCore+=Math.log(2)*1.5;
@@ -804,7 +806,7 @@ for(var i=0;i<200; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.)))
    && 0.<=hyperCoreBoosted&&MetaCored)
 {
-      if(polyNomialStretch&&budge!=1./3.)   {
+      if(polyNomialStretch&&budge!=1./3.&&OrthoEvery==0.)   {
        // let s2 = s.clone().multiply(s).multiply(s)
       // s=freed(s.multiply(s2)).divide(s2);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
        s=freed(s);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
