@@ -37,7 +37,7 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                            }
                          let  zoomINITiaLizer =1.;//    1/2**65.;//1.;//
                          let xINITiaLizer=0.;//1./3.;
-                           let yINITiaLizer=0.;//1./3./2.;
+                           let yINITiaLizer=.0;//1./3./2.;
 window.uniformsInitial = {
 coreDilation:{value:0.},
 fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:44100./1024.},
@@ -105,7 +105,7 @@ holyeyes:{value:3},
 dilate:{value:true},
 
     
-        continuumClover:{value: 2    },
+        continuumClover:{value: 1    },
         Inherited:{value: true    },
         cloverSlide:{value: false    },
         Pointers:{value:true},
