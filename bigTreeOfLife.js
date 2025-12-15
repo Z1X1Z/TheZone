@@ -358,7 +358,7 @@ else{
       if (seventhEYE==3.) hyperCore+=Math.log(2)*1.5;
 
    }
-   var spokeloverON=spokelover&&zoom/lfc<1.5;
+   var spokeloverON=spokelover&&zoom/lfc<1.;
 
      if(spokeloverON)hyperCore-=Math.log(2);
 
