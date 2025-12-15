@@ -4565,7 +4565,6 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
        if(dstnce<twoThirds)s*=pow(dstnce,squeezeN-1. );
    dstnce = length(s);
 
-
 if(Spoker){
    // if(morph==0.)
     {
@@ -4631,7 +4630,7 @@ hyperCoreBoosted-=spoke_factor;}
  */
    }
 //dstnce=length(s);
-if(spokelover)
+if(spokelover&&zoom<.5)
 {
        float dstnceSquaredAndRooted=dstnce*dstnce*sqrt(dstnce) ;
 float powerOfSpokeCore =spoke_factorLarge*dstnceSquaredAndRooted;//*lfcCenterCored/dstnce;// uncertain value,takes large range, highly responsive on spokes PI*PI/gr*-leaf has nice outer main spokes
@@ -4685,6 +4684,7 @@ else //if(  0.>=hyperCoreBoosted)
              }
     }
  }
+
 dstnce=length(s);
    if(continuumClover!=0&&lfc!=0.){//engage continualization
        float continuumCore=(continuumCounter+hyperCoreOUTPUT)*correction;
@@ -4729,7 +4729,6 @@ dstnce=length(s);
        }
 
     }
-   
  //  if(length(s)<twoThirds)starship+=texture2D(STAR,cloverMAPadj)/decayCanceller;
  
    

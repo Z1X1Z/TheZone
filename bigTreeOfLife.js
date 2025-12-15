@@ -631,7 +631,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
     dstnce = s.length();
 
        if(dstnce<2./3.)s.multiplyScalar(dstnce**(squeezeN-1. ));
-
+                
 
         if(Spoker){
           //  if(morph==0.)
@@ -696,7 +696,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
             
         }
         //dstnce=s.length();
-        if(spokelover){
+        if(spokelover&&zoom<.5){
             var  dstnceSquaredAndRooted=dstnce*dstnce*Math.sqrt(dstnce) ;
 
             var powerOfSpokeCore = spoke_factorLarge*dstnceSquaredAndRooted;
