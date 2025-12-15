@@ -4094,8 +4094,8 @@ else{
 }
    }
 
-
-     if(spokelover)hyperCore-=log2;
+bool spokeloverON=spokelover&&zoom/lfc<twoThirds;
+     if(spokeloverON)hyperCore-=log2;
 
 
 
@@ -4635,7 +4635,7 @@ hyperCoreBoosted-=spoke_factor;}
  */
    }
 //dstnce=length(s);
-if(spokelover&&zoom<.5)
+if(spokeloverON)
 {
        float dstnceSquaredAndRooted=dstnce*dstnce*sqrt(dstnce) ;
 float powerOfSpokeCore =spoke_factorLarge*dstnceSquaredAndRooted;//*lfcCenterCored/dstnce;// uncertain value,takes large range, highly responsive on spokes PI*PI/gr*-leaf has nice outer main spokes

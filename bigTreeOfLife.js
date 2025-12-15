@@ -358,7 +358,9 @@ else{
       if (seventhEYE==3.) hyperCore+=Math.log(2)*1.5;
 
    }
-     if(spokelover)hyperCore-=Math.log(2);
+   var spokeloverON=spokelover&&zoom/lfc<2./3.;
+
+     if(spokeloverON)hyperCore-=Math.log(2);
 
      if(squeezeN>1.)hyperCore-=1.25;
 //hyperCore-=1.;
@@ -697,7 +699,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
             
         }
         //dstnce=s.length();
-        if(spokelover&&zoom<.5){
+        if(spokeloverON){
             var  dstnceSquaredAndRooted=dstnce*dstnce*Math.sqrt(dstnce) ;
 
             var powerOfSpokeCore = spoke_factorLarge*dstnceSquaredAndRooted;
