@@ -358,6 +358,7 @@ else{
       if (seventhEYE==3.) hyperCore+=Math.log(2)*1.5;
 
    }
+     if(spokelover)hyperCore-=Math.log(2);
 
      if(squeezeN>1.)hyperCore-=1.25;
 //hyperCore-=1.;
