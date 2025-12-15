@@ -535,7 +535,7 @@ polyNomialStretch
 
 var span=0.;
 
-if(seventhEYE==0.)span = lfcCenterCored
+if(seventhEYE==0.||seventhEYE==3.)span = lfcCenterCored
 else span = lfc;
     stretch=((span+.5)**.5)**(1./squeezeN);
 
