@@ -1914,7 +1914,7 @@ cpY=cp[1]
 }
                                 if(uniforms.chirality.value!=3)
 cloverPerimeter=((((cpX*cpX*cpX - 3.*cpX*cpY*cpY)**2.
-       +(-cpY*cpY*cpY+ 3.*cpX*cpX*cpY)**2.)))**(.5)/3.
+       +(-cpY*cpY*cpY+ 3.*cpX*cpX*cpY)**2.)))**(.5)/2.
        else cloverPerimeter=(cpY*cpY+cpX*cpX)**.5*1.5
 
 
