@@ -4703,15 +4703,15 @@ dstnce=length(s);
        if(loops+counter<=hyperCoreBoosted+continuumCounter)
        {
        //   if(dstnce<twoThirds) s-=length(coords.yx)*correction;
-       float dstlpcc = dstnce*lpcc;//(9./16.);
-       if(feedTheLamb)dstlpcc*=.5;
+       //float dstlpcc = dstnce*lpcc;//(9./16.);
+       //if(feedTheLamb)dstlpcc*=.5;
       // float dstADJUSTED = dstnce;
       /* float deDistortion = sqrt(dstlpcc)*sqrt(dstnce)*sqrt(lpcc) *lpcc2;
        if(dstlpcc<16./9.)
        deDistortion*=(1.-((dstlpcc*9./16.)));//*2.?:
        */
       //float deDistortion = sqrt(sqrt(dstlpcc*9./16.)*sqrt(dstnce*3./4.)*sqrt(3./4.*lpcc)*sqrt(1.-3./4.*lpcc));
-       float superBoostedContinuation = pow(.5,continuumCore)*sqrt(dstlpcc)
+       float superBoostedContinuation = pow(.5,continuumCore)*dstnce*dstnce;
                                                                   
  // pow(
   //  sqrt(  dstlpcc*9./16.)//,2.)
