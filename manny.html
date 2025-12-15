@@ -4633,13 +4633,13 @@ hyperCoreBoosted-=spoke_factor;}
 //dstnce=length(s);
 if(spokelover)
 {
-       
-float powerOfSpokeCore =spoke_factorLarge*dstnce;;//*lfcCenterCored/dstnce;// uncertain value,takes large range, highly responsive on spokes PI*PI/gr*-leaf has nice outer main spokes
+       float dstnceSquaredAndRooted=dstnce*dstnce*sqrt(dstnce) ;
+float powerOfSpokeCore =spoke_factorLarge*dstnceSquaredAndRooted;//*lfcCenterCored/dstnce;// uncertain value,takes large range, highly responsive on spokes PI*PI/gr*-leaf has nice outer main spokes
 
 
 
 
-if(counter+dstnce*dstnce //sqrt(sqrt(dstnce)*dstnce)*dstnce
+if(counter+dstnceSquaredAndRooted//sqrt(sqrt(dstnce)*dstnce)*dstnce
    <hyperCoreBoosted){
    //  if(continuumClover) s*=sqrt2;//engage shiny spokelover
      //else

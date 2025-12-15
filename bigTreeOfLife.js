@@ -697,14 +697,15 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
         }
         //dstnce=s.length();
         if(spokelover){
-            
-            var powerOfSpokeCore = spoke_factorLarge*dstnce;
+            var  dstnceSquaredAndRooted=dstnce*dstnce*Math.sqrt(dstnce) ;
+
+            var powerOfSpokeCore = spoke_factorLarge*dstnceSquaredAndRooted;
 
 var spokeloverCoreShiftDown=Math.pow(upSpoke,powerOfSpokeCore)*logStabilizationConstant;            ;//logStabilizationConstant seems to cancel powerOfDynamicSokeCore=2;
 
 var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpokeCore)*logStabilizationConstant;//for spokelover
             
-            if(counter+dstnce*dstnce<hyperCoreBoosted){
+            if(counter+dstnceSquaredAndRooted<hyperCoreBoosted){
                 //  if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
                 //else
                 
