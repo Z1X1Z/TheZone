@@ -6964,8 +6964,8 @@ if(oneEye.r!=0.)zoomer=-oneEye;
                                               else if(oneEye.r==-1.)
                                               {
                                                 if(oopm.r==.5&&oopm.b==.5)layeredOUT=vec4(vec3(.5),1.);
-                                                else
-                                                layeredOUT=vec4(vec3(2.),1.);
+                                                else if (starship.x!=0.||starship.y!=0.||starship.z!=0.)layeredOUT=vec4(starship.xyz+.25,1.);
+                                                else layeredOUT=vec4(vec3(2.),1.);
                                                 if(pixelShipGrey!=0.)
                                                 {layeredOUT*=pixelShipGrey;
                                                     layeredOUT-=pixelShipGrey;
@@ -7007,7 +7007,7 @@ else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
                                  else if(isGreyISH>=129./255.&&isGreyISH!=1.&&starship.x==starship.y&&starship.y==starship.z)layeredOUT=vec4(vec3(.5),1.);
                                                          else if (oopm.r!=0.||oopm.g!=0.)layeredOUT=oopm*(1.-pixelShipGrey) - pixelShipGrey;
 
-else if (starship.w==254./255.)layeredOUT=starship;
+else if (starship.w==254./255.)layeredOUT=starship-oneEye.r/3.;
          else if (holyeyes==1&&Character==0&& !((HEART.x==0.&&HEART.y==0.)||(HEART.y==0.&&HEART.z==0.)||(HEART.z==0.&&HEART.x==0.)))
                                  {layeredOUT=vec4(clamp(HEART-(bodyWithArms.x+bodyWithArms.y+bodyWithArms.z)/2.-starship.xyz/3.+4.*(-pong.r-pong.g-pong.b-linearFrequency.r-linearFrequency.g-linearFrequency.b),0.,1.)+(GOH.xyz//+pixelStarship.xyz
                                                                                                                                                                                                                                   )/4.+pong.xyz+linearFrequency.xyz+pillar+insideOut.xyz+starship.xyz+bodyWithArms.xyz+mannyFace.x/64.-oneEye.r*2.,1.);
@@ -7108,7 +7108,7 @@ vec4 tree = vec4( clamp(
                                                                                if ((starship.x!=starship.y||starship.y!=starship.x||starship.z!=starship.x||starship.z!=starship.y)&&shipSUM<126./255.&&starship.w==1.)fin*= shipSUM*4.;//to show black on oreo
 
                                                              float radialIntensity = length(r);
-             if( moreHorns.r!=0.)fin+=vec4(ss.xyz+vec3(moreHorns.r*pow(radialIntensity,3.5)),0.);
+             if( moreHorns.r!=0.)fin=vec4((fin.xyz-(ss.x-ss.y-ss.z)*10.)+ss.xyz+vec3(moreHorns.r*pow(radialIntensity,3.5)),0.);
                                                              
                                                             /* if(isGrey!=0.&&isGrey!=1.&&pixelShipGrey==0.)fin=vec4(vec3(.25),1.);*/
 
