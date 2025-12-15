@@ -768,7 +768,7 @@ if(loops+counter<=hyperCoreBoosted+continuumCounter)
     if(dstlpcc<16./9.)
         deDistortion*=(1.-dstlpcc*9./16.)
     */
-    let superBoostedContinuation = Math.pow(.5,continuumCore)*dstlpcc;//*deDistortion//*Math.sqrt(dstlpcc*9./16.)//*Math.sqrt(
+    let superBoostedContinuation = Math.pow(.5,continuumCore)*Math.sqrt(dstlpcc);//*deDistortion//*Math.sqrt(dstlpcc*9./16.)//*Math.sqrt(
                                                                                                   //lpcc*3./4.
                                                                         //)
                                                                         ;
