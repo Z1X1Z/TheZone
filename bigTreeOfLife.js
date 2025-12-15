@@ -534,10 +534,14 @@ polyNomialStretch
       var stretch=(lfcCenterCored*.5+1.)**.5;
 
 var span=0.;
-
-if(seventhEYE==0.||seventhEYE==3.)span = lfcCenterCored
-else span = lfc;
-    stretch=((span+.5)**.5)**(1./squeezeN);
+if(seventhEYE==3.)
+    {
+        if (lfc<2./3.)span = lfcCenterCored/2.;
+        else span = lfc+.5;
+    }
+else if(seventhEYE==0.)span = lfcCenterCored+.5;
+else span = lfc+.5;
+    stretch=((span)**.5)**(1./squeezeN);
 
     if(seventhEYE==0.||lengthP>2./3.)
       s.multiplyScalar(1./stretch);//maybe other values work?
