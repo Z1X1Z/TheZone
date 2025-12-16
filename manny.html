@@ -936,7 +936,7 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                  <input type="checkbox" id="ftl" name="t"  onclick= "
                                      key  = 'f';
                                      callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
-                                     <label for="ftl">Feed the Lamb?![.,f]</label><br>
+                                     <label for="ftl">Feed the Lamb![.,f]</label><br>
 
                                  <!--
                                  <input type="checkbox" id="super stability" name="t"  onclick= "
@@ -4026,6 +4026,8 @@ equilibriator=lfc/(lfc-zoom/dif)*dif;
  if(feedTheLamb)  {
      hyperCore-=.25*LogHalfReciprocal;
      }
+    // if(distributor)     hyperCore+=.25*LogHalfReciprocal;
+
 
    if(clvrVariant4!=0.&&OrthoEvery==0.)
    {
@@ -4166,7 +4168,7 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
                                                      //((1./leaf)/truncator)*truncator;
                                                       //https://www.wolframalpha.com/input?i=a%3D%28%281-%28%281-%28%281-%28%281-%28%281-%28%281-%28%281-%28%281-%28%281-%28%281-a%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29
             float downSpoke=oneOverLeafTruncated;//1./(((-leaf)*truncator)/truncator)/4.;
-                              float spoked = 2.;////spoke_factorLarge;
+                              float spoked = 1.;////spoke_factorLarge;
             float   spokedD=upSpoke*spoked;                         
                                float   spokedU=downSpoke*spoked;                         
               //vec2 coordsAltered=coords/gr;

@@ -411,7 +411,7 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
                            
                            var oneOverLeafTruncated = ((1./leaf)/truncator)*truncator;
            var downSpoke=oneOverLeafTruncated;//1./(((-leaf)*truncator)/truncator)/4.;
-                                      var spoked = 2.;//spoke_factorLarge;
+                                      var spoked = 1.;//spoke_factorLarge;
             var   spokedD=upSpoke*spoked;                         
                                var   spokedU=downSpoke*spoked; 
                           var variant4Correction=1.;
