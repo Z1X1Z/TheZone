@@ -724,6 +724,7 @@ var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpo
 
                 }
                     s.divideScalar( Math.sqrt(2.));
+                    if(counter!=0.)s.divideScalar( 2./3.);
                 if(!wheel||1==1)
                 {
                     
