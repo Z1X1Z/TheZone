@@ -358,9 +358,9 @@ else{
       if (seventhEYE==3.) hyperCore+=Math.log(2)*1.5;
 
    }
-   var spokeloverON=spokelover;//&&zoom/lfc<1.;
+   var spokeloverON=spokelover&&zoom/lfc<1.;
 
-    if(spokeloverON)hyperCore+=Math.log(2);
+    if(spokeloverON)hyperCore-=Math.log(2);
 
      if(squeezeN>1.)hyperCore-=1.25;
 //hyperCore-=1.;
@@ -706,13 +706,13 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
         }
         //dstnce=s.length();
         if(spokeloverON){
-            //var  dstnceSquaredAndRooted=dstnce*dstnce*Math.sqrt(dstnce) ;
+            var  dstnceSquaredAndRooted=dstnce*dstnce*Math.sqrt(dstnce) ;
 
-            var powerOfSpokeCore = spoke_factorLarge;//*dstnceSquaredAndRooted;
+            var powerOfSpokeCore = spoke_factorLarge*dstnceSquaredAndRooted;
 
-var spokeloverCoreShiftDown=spokedD;//Math.pow(downSpoke,powerOfSpokeCore); //was upSpoke           ;//logStabilizationConstant seems to cancel powerOfDynamicSokeCore=2;
+var spokeloverCoreShiftDown=Math.pow(upSpoke,powerOfSpokeCore);//spokedD;//Math.pow(downSpoke,powerOfSpokeCore); //was upSpoke           ;//logStabilizationConstant seems to cancel powerOfDynamicSokeCore=2;
 
-var       spokeloverCoreShiftUp   =   spokedU;//   Math.pow(Math.abs(downSpoke),powerOfSpokeCore);//for spokelover
+var       spokeloverCoreShiftUp   =  Math.pow(downSpoke,powerOfSpokeCore);// spokedU;//   Math.pow(Math.abs(downSpoke),powerOfSpokeCore);//for spokelover
             
             if(counter//+dstnceSquaredAndRooted
                 <hyperCoreBoosted){
@@ -726,15 +726,14 @@ var       spokeloverCoreShiftUp   =   spokedU;//   Math.pow(Math.abs(downSpoke),
                         s=spinVector(s,-distributorFACTORlove);
 
                 }
-               if( counter!=0.)
-               {
-                  s.divideScalar( Math.sqrt(2.));
-                    s.divideScalar( 2./3.);
-               }
-               else
+             //  if( counter!=0.)
+            //   {
+               //   s.divideScalar( Math.sqrt(2.));
+               //     s.divideScalar( 2./3.);
+             //  }
+              // else
                {
                 s.divideScalar(Math.sqrt(2.));
-                spokeloverCoreShiftUp*=2./3.;
                }
                 if(!wheel||1==1)
                 {
