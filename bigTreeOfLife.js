@@ -358,9 +358,9 @@ else{
       if (seventhEYE==3.) hyperCore+=Math.log(2)*1.5;
 
    }
-   var spokeloverON=spokelover&&zoom/lfc<1.;
+   var spokeloverON=spokelover;//&&zoom/lfc<1.;
 
-     if(spokeloverON)hyperCore+=Math.log(2);
+   //  if(spokeloverON)hyperCore+=Math.log(2);
 
      if(squeezeN>1.)hyperCore-=1.25;
 //hyperCore-=1.;
@@ -705,7 +705,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
             
         }
         //dstnce=s.length();
-        if(spokeloverON&&counter!=0.){
+        if(spokeloverON){
             //var  dstnceSquaredAndRooted=dstnce*dstnce*Math.sqrt(dstnce) ;
 
             var powerOfSpokeCore = spoke_factorLarge;//*dstnceSquaredAndRooted;
@@ -726,8 +726,16 @@ var       spokeloverCoreShiftUp   =   spokedU;//   Math.pow(Math.abs(downSpoke),
                         s=spinVector(s,-distributorFACTORlove);
 
                 }
-                    s.divideScalar( Math.sqrt(2.));
+               if( counter!=0.)
+               {
+                  s.divideScalar( Math.sqrt(2.));
                     s.divideScalar( 2./3.);
+               }
+               else
+               {
+                s.divideScalar(Math.sqrt(2.));
+                spokeloverCoreShiftUp*=2./3.;
+               }
                 if(!wheel||1==1)
                 {
                     

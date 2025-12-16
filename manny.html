@@ -4094,7 +4094,7 @@ else{
 }
    }
 
-bool spokeloverON=spokelover&&zoom/lfc<1.;//could be 1.5, could be 2/3, one is a compromise
+bool spokeloverON=spokelover;//&&zoom/lfc<1.;//could be 1.5, could be 2/3, one is a compromise
      if(spokeloverON)hyperCore+=log2;
 
 
@@ -4166,7 +4166,7 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
                                                      //((1./leaf)/truncator)*truncator;
                                                       //https://www.wolframalpha.com/input?i=a%3D%28%281-%28%281-%28%281-%28%281-%28%281-%28%281-%28%281-%28%281-%28%281-%28%281-a%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29%29%5E2-1%29
             float downSpoke=oneOverLeafTruncated;//1./(((-leaf)*truncator)/truncator)/4.;
-                              float spoked = 2.;//spoke_factorLarge;
+                              float spoked = 2.;////spoke_factorLarge;
             float   spokedD=upSpoke*spoked;                         
                                float   spokedU=downSpoke*spoked;                         
               //vec2 coordsAltered=coords/gr;
@@ -4642,15 +4642,15 @@ hyperCoreBoosted-=spoke_factor;}
  */
    }
 //dstnce=length(s);
-if(spokeloverON&&counter!=0.)
+if(spokeloverON)
 {
-       float dstnceSquaredAndRooted=1.;//dstnce;//*dstnce*sqrt(dstnce) ;
-float powerOfSpokeCore =spoke_factorLarge*dstnceSquaredAndRooted;//*lfcCenterCored/dstnce;// uncertain value,takes large range, highly responsive on spokes PI*PI/gr*-leaf has nice outer main spokes
+     //  float dstnceSquaredAndRooted=sqrt(dstnce)*dstnce*dstnce ;
+//float powerOfSpokeCore =spoke_factorLarge*dstnceSquaredAndRooted;//*lfcCenterCored/dstnce;// uncertain value,takes large range, highly responsive on spokes PI*PI/gr*-leaf has nice outer main spokes
 
 
 
 
-if(counter//+dstnceSquaredAndRooted//sqrt(sqrt(dstnce)*dstnce)*dstnce
+if(counter//sqrt(sqrt(dstnce)*dstnce)*dstnce
    <hyperCoreBoosted){
    //  if(continuumClover) s*=sqrt2;//engage shiny spokelover
      //else
@@ -4663,14 +4663,26 @@ if(counter//+dstnceSquaredAndRooted//sqrt(sqrt(dstnce)*dstnce)*dstnce
          s=spin2(s,-distributorFACTORlove);
 
          }
-    
-     s/=sqrt2*twoThirds;
+        float       spokeloverCoreShiftUp  =   spokedU;//spokedU;//   pow(abs(downSpoke),powerOfSpokeCore);
 
-     
+   if(counter!=0.) 
+  // { 
+    s/=sqrt2*twoThirds;
+       //  spokeloverCoreShiftUp  =   spokedU;//   pow(abs(downSpoke),powerOfSpokeCore);
+  // }
+
+     else{
+        s/=sqrt2;
+        spokeloverCoreShiftUp*=twoThirds;
+     }
+    //     {
+    //       s/=1.5;
+       //      spokeloverCoreShiftUp  =    pow(abs(downSpoke),powerOfSpokeCore)*logStabilizationConstant;
+
+     //    }
      if(!wheel||1==1){
      //float b =pow(pow(abs(downSpoke),powerOfDynamicSokeCoreUp),grOverLeaf);
     // dstnce=length(s);
-    float       spokeloverCoreShiftUp  =   spokedU;//   pow(abs(downSpoke),powerOfSpokeCore);
 
      float coreFactor =spokeloverCoreShiftUp;
     // if(!inMainSpoke) coreFactor/=dstnce;
@@ -4681,12 +4693,20 @@ if(counter//+dstnceSquaredAndRooted//sqrt(sqrt(dstnce)*dstnce)*dstnce
 
 else //if(  0.>=hyperCoreBoosted)
 {
+     float spokeloverCoreShiftDown=spokedD;//   pow(upSpoke,powerOfSpokeCore);
+   // if(true||counter!=0.) {
+             //    spokeloverCoreShiftDown=spokedD;//pow(upSpoke,powerOfSpokeCore);
+
     s*=sqrt2*twoThirds;
+   // }
+    //else {
+   // s*=sqrt2*twoThirds;
+       // spokeloverCoreShiftDown=pow(upSpoke,powerOfSpokeCore)*logStabilizationConstant;
+   // }
     // dstnce=length(s);
 
     if(!wheel||1==1)
     {
-        float spokeloverCoreShiftDown=spokedD;//pow(upSpoke,powerOfSpokeCore);
 
 
         float coreFactor =spokeloverCoreShiftDown;
