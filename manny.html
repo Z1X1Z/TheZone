@@ -4643,7 +4643,7 @@ hyperCoreBoosted-=spoke_factor;}
 if(spokeloverON)
 {
        float dstnceSquaredAndRooted=1.;//dstnce;//*dstnce*sqrt(dstnce) ;
-float powerOfSpokeCore =spoke_factorLarge*dstnceSquaredAndRooted;//*lfcCenterCored/dstnce;// uncertain value,takes large range, highly responsive on spokes PI*PI/gr*-leaf has nice outer main spokes
+float powerOfSpokeCore =spoke_factorLarge;//*dstnceSquaredAndRooted;//*lfcCenterCored/dstnce;// uncertain value,takes large range, highly responsive on spokes PI*PI/gr*-leaf has nice outer main spokes
 
 
 
@@ -4669,7 +4669,7 @@ if(counter//+dstnceSquaredAndRooted//sqrt(sqrt(dstnce)*dstnce)*dstnce
      if(!wheel||1==1){
      //float b =pow(pow(abs(downSpoke),powerOfDynamicSokeCoreUp),grOverLeaf);
     // dstnce=length(s);
-    float       spokeloverCoreShiftUp  =      pow(abs(downSpoke),powerOfSpokeCore)*logStabilizationConstant;
+    float       spokeloverCoreShiftUp  =      pow(abs(downSpoke),powerOfSpokeCore);
 
      float coreFactor =spokeloverCoreShiftUp;
     // if(!inMainSpoke) coreFactor/=dstnce;
@@ -4685,12 +4685,12 @@ else //if(  0.>=hyperCoreBoosted)
 
     if(!wheel||1==1)
     {
-        float spokeloverCoreShiftDown=pow(upSpoke,powerOfSpokeCore)*logStabilizationConstant;
+        float spokeloverCoreShiftDown=pow(downSpoke,powerOfSpokeCore);
 
 
         float coreFactor =spokeloverCoreShiftDown;
-       if(!inMainSpoke)
-       coreFactor/=dstnce;
+      // if(!inMainSpoke)
+     //  coreFactor/=dstnce;
               hyperCoreOUTPUT-=coreFactor;
               hyperCoreBoosted-=coreFactor;
              }
