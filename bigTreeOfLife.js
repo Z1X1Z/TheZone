@@ -360,7 +360,7 @@ else{
    }
    var spokeloverON=spokelover&&zoom/lfc<1.;
 
-     if(spokeloverON)hyperCore-=Math.log(2);
+     if(spokeloverON)hyperCore+=Math.log(2);
 
      if(squeezeN>1.)hyperCore-=1.25;
 //hyperCore-=1.;
