@@ -842,7 +842,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
     if(spinTowardsMe) if(i>=hyperCoreBoosted)s=spin(s,Math.atan2(d.y,d.x));
         var angleS = Math.atan2(s.y,s.x);
 
-                                                                if(distributor&&//not quite the same as distributor, but I don't want to add another button
+                                                                if(//distributor&&//not quite the same as distributor, but I don't want to add another button
                                                                  //    morph==0.&&
                                                                     (angleS+Math.PI*2+Math.PI*2/12.)%(Math.PI*2/3.)>Math.PI*2/6.) //p*=0.;
                                                                 {
