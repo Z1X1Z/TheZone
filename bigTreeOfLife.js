@@ -411,7 +411,9 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
                            
                            var oneOverLeafTruncated = ((1./leaf)/truncator)*truncator;
            var downSpoke=oneOverLeafTruncated;//1./(((-leaf)*truncator)/truncator)/4.;
-                          
+                                      var spoked = 2.;//spoke_factorLarge;
+            var   spokedD=upSpoke*spoked;                         
+                               var   spokedU=downSpoke*spoked; 
                           var variant4Correction=1.;
                           if(clvrVariant4)variant4Correction=(1.-oneOverLeafTruncated);
                                         
@@ -703,14 +705,14 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
             
         }
         //dstnce=s.length();
-        if(spokeloverON){
+        if(spokeloverON&&counter!=0.){
             //var  dstnceSquaredAndRooted=dstnce*dstnce*Math.sqrt(dstnce) ;
 
             var powerOfSpokeCore = spoke_factorLarge;//*dstnceSquaredAndRooted;
 
-var spokeloverCoreShiftDown=Math.pow(downSpoke,powerOfSpokeCore); //was upSpoke           ;//logStabilizationConstant seems to cancel powerOfDynamicSokeCore=2;
+var spokeloverCoreShiftDown=spokedD;//Math.pow(downSpoke,powerOfSpokeCore); //was upSpoke           ;//logStabilizationConstant seems to cancel powerOfDynamicSokeCore=2;
 
-var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpokeCore);//for spokelover
+var       spokeloverCoreShiftUp   =   spokedU;//   Math.pow(Math.abs(downSpoke),powerOfSpokeCore);//for spokelover
             
             if(counter//+dstnceSquaredAndRooted
                 <hyperCoreBoosted){
@@ -725,7 +727,7 @@ var       spokeloverCoreShiftUp   =      Math.pow(Math.abs(downSpoke),powerOfSpo
 
                 }
                     s.divideScalar( Math.sqrt(2.));
-                    if(counter!=0.)s.divideScalar( 2./3.);
+                    s.divideScalar( 2./3.);
                 if(!wheel||1==1)
                 {
                     
@@ -770,7 +772,7 @@ if(loops+counter<=hyperCoreBoosted+continuumCounter)
     if(dstlpcc<16./9.)
         deDistortion*=(1.-dstlpcc*9./16.)
     */
-    let superBoostedContinuation = Math.pow(.5,continuumCore)*dstnce*dstnce;//*deDistortion//*Math.sqrt(dstlpcc*9./16.)//*Math.sqrt(
+    let superBoostedContinuation = Math.pow(.5,continuumCore);//*dstnce;//*deDistortion//*Math.sqrt(dstlpcc*9./16.)//*Math.sqrt(
                                                                                                   //lpcc*3./4.
                                                                         //)
                                                                         ;
