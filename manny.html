@@ -2237,7 +2237,7 @@ vec3 paddles(vec2 vUvCentered){
           // vec2 flatScreen=1.-vUv;
           // flatScreen*=2.;
     float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*4.,2.)/4.,0.)).r;
-    if(volume>zoomOutRatchetThreshold/2.)frAmp/=volume;
+   // if(volume>zoomOutRatchetThreshold/2.)frAmp/=volume;
    // float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*2.,2.)/2./
                                             //  pow(2.,(note)/12.+4.)*440. ,0.)).r;//adjusted to pitch
 
@@ -6990,7 +6990,7 @@ if(oneEye.r!=0.)zoomer=-oneEye;
                                               else if(oneEye.r==-1.)
                                               {
                                                 if(oopm.r==.5&&oopm.b==.5)layeredOUT=vec4(vec3(.5),1.);
-                                                //else if (starship.x!=0.||starship.y!=0.||starship.z!=0.)layeredOUT=vec4(starship.xyz+.25,1.);
+                                                else if (starship.x!=0.||starship.y!=0.||starship.z!=0.)layeredOUT=vec4(starship.xyz+.25,1.);
                                                 else layeredOUT=vec4(vec3(2.),1.);
                                                 if(pixelShipGrey!=0.)
                                                 {layeredOUT*=pixelShipGrey;
