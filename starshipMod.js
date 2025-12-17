@@ -1892,7 +1892,7 @@ function runOSMD (){
      {    setDynamicSampler2ds();//normally does nothing
 
          setMicInputToStarPIXEL();
-         loadFrequencyTextures();
+         //loadFrequencyTextures();
          setTwelveNotes();
          executeTouchRegime();
      }
@@ -2156,7 +2156,7 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                         }
 
                                         setMicInputToStarPIXEL();
-                                        loadFrequencyTextures();
+                                        //loadFrequencyTextures();
                                         
                                     }
                                     
@@ -3440,7 +3440,7 @@ for(let n = 0; n < polygons.length; n++)
                                                          const ddX= circleX-polygons[n].centerX;
                                                          const ddY= circleY-polygons[n].centerY;
                                                          const distDot = Math.sqrt(ddX*ddX+ddY*ddY);
-                                                         if(uniforms.starOnDot.value!=2)
+                                                         if(uniforms.starOnDot.value!=2&&EldersLeg>=0)
                                                          {
                                                              if ( triggerDistance<polyRad+dotSize &&polygons[n].exited){
                                                                  if (!polygons[n].caught)polygons[n].caught = true;
