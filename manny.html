@@ -2237,7 +2237,7 @@ vec3 paddles(vec2 vUvCentered){
           // vec2 flatScreen=1.-vUv;
           // flatScreen*=2.;
     float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*4.,2.)/4.,0.)).r;
-   // if(volume>zoomOutRatchetThreshold/2.)frAmp/=volume;
+    if(volume>zoomOutRatchetThreshold/2.)frAmp/=volume;
    // float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*2.,2.)/2./
                                             //  pow(2.,(note)/12.+4.)*440. ,0.)).r;//adjusted to pitch
 
@@ -6557,10 +6557,10 @@ if (Character==4||Character==3) {heartSize=1.5;
                                                                 }
                                                             else heartSize*=6./5.;
 
-if(volume!=1.)
-{//frAMP-=volume*(zoomOutRatchetThreshold)*16.;
+//if(volume!=1.)
+//{//frAMP-=volume*(zoomOutRatchetThreshold)*16.;
 //frAMP*=(.5+frAMP)/(1.+zoomOutRatchetThreshold);
-}
+//}
 if(heartStar==0&&frAMP>0.&&volume!=1.)heartSize/=(1.+frAMP)/(1.+zoomOutRatchetThreshold)*6.;//*8.;
 
 else if(heartStar==1&&volume!=0.){
@@ -6738,7 +6738,7 @@ if(starOnDot==1||starOnDot==2){
                                                      if(pillar.x!=0.||pillar.y!=0.||pillar.z!=0.)         pillar=   clamp(pillar+(-mny.x-mny.y-mny.z)*40.,0.,1.);
                                  vec3 hypnoticHarmonicCircles = vec3(0.);
                                                                 
-                                 if(ringSpring)
+                                 if(ringSpring&&0==1)
                                  {
                                     vec2 rr = r;//* min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
                                                             float number =0.;
