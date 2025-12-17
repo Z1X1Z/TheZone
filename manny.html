@@ -2237,7 +2237,7 @@ vec3 paddles(vec2 vUvCentered){
           // vec2 flatScreen=1.-vUv;
           // flatScreen*=2.;
     float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*4.,2.)/4.,0.)).r;
-   // if(volume>zoomOutRatchetThreshold/2.)frAmp/=volume;
+    if(volume>zoomOutRatchetThreshold/2.)frAmp/=volume;
    // float frAmp = texture2D(audioBuffer, vec2(pow(abs(.5-vUv.x)*2.,2.)/2./
                                             //  pow(2.,(note)/12.+4.)*440. ,0.)).r;//adjusted to pitch
 
@@ -6557,14 +6557,13 @@ if (Character==4||Character==3) {heartSize=1.5;
                                                                 }
                                                             else heartSize*=6./5.;
 
-//if(volume!=1.)
-//{//frAMP-=volume*(zoomOutRatchetThreshold)*16.;
+if(volume!=1.)
+{//frAMP-=volume*(zoomOutRatchetThreshold)*16.;
 //frAMP*=(.5+frAMP)/(1.+zoomOutRatchetThreshold);
-//}
-//if(heartStar==0&&frAMP>0.&&volume!=1.)heartSize/=(1.+frAMP)/(1.+zoomOutRatchetThreshold)*6.;//*8.;
+}
+if(heartStar==0&&frAMP>0.&&volume!=1.)heartSize/=(1.+frAMP)/(1.+zoomOutRatchetThreshold)*6.;//*8.;
 
-//else
- if(heartStar==1&&volume!=0.){
+else if(heartStar==1&&volume!=0.){
     heartSize/=(1.+volume);//multiplied by two if heart argument is not vec2(0.)
     frAMP=volume*4.;
     }
@@ -6581,7 +6580,7 @@ else if(heartStar==2) frAMP=1.;
 vec2 heartField = characterPSpunToKey*heartSize
 +heartShift;
      if(Character!=9&&(heartStar!=3))
-     {  if(volume!=1.&&frAMP>0.)
+     {  if(volume!=1.)
          HEART = heart(heartField
                                                     ,//vec2(0.)
                       heartPitch*vec2(1.,flipStar)+
@@ -6987,11 +6986,11 @@ if(oneEye.r!=0.)zoomer=-oneEye;
                         }
                         else layeredOUT=vec4(pixelShipGrey+.25);
                     }                      else if (hypnoticHarmonicCircles.x==hypnoticHarmonicCircles.y&&hypnoticHarmonicCircles.x==hypnoticHarmonicCircles.z&&hypnoticHarmonicCircles.x!=0.)layeredOUT=vec4(vec3(hypnoticHarmonicCircles.x),1.);
-                  /*
+                  
                                               else if(oneEye.r==-1.)
                                               {
                                                 if(oopm.r==.5&&oopm.b==.5)layeredOUT=vec4(vec3(.5),1.);
-                                               // else if (starship.x!=0.||starship.y!=0.||starship.z!=0.)layeredOUT=vec4(starship.xyz+.25,1.);
+                                                else if (starship.x!=0.||starship.y!=0.||starship.z!=0.)layeredOUT=vec4(starship.xyz+.25,1.);
                                                 else layeredOUT=vec4(vec3(2.),1.);
                                                 if(pixelShipGrey!=0.)
                                                 {layeredOUT*=pixelShipGrey;
@@ -6999,7 +6998,7 @@ if(oneEye.r!=0.)zoomer=-oneEye;
                                                 }
     
                                               }
-                 */
+                 
                                  else if(starship.x==starship.y&&starship.z==starship.x&&(starship.x==254./255.||starship.x==1./255.)&&starship.w!=0.)layeredOUT=vec4(vec3(starship.r+mannyFace*(starship.r/2.+.5)),1.);
                    else if (mannyFace.w==.75)  {
                        if (starship.w>0.&&shipSUM<341./255.)layeredOUT=vec4(mannyFace.xyz+starship.xyz,1.);
