@@ -2647,7 +2647,7 @@ bool isB=false, isF=false;
                             //  adjustedNote=-1.;
                               
                               }
-                              vec4 lowColor=vec4(0.);//vec4( hsv2rgb( vec3(mod((lownote+6.*brelued-2.)/12.+100.,1.) ,.5,1. )),.5);
+                              vec4 lowColor=vec4( hsv2rgb( vec3(mod((lownote+6.*brelued-2.)/12.+100.,1.) ,.5,1. )),.5);
                               vec4 pitchColor=vec4(1.);
                               if (volume!=1.)pitchColor=vec4( hsv2rgb( vec3(mod((-note*brelued-2.)/12.,1.) ,.5,1. )),.5);
                               
@@ -3209,7 +3209,7 @@ float arm = 0.;
 
                    vec2 z=spinningArm;
                    float armSlice = abs(spinningArm.y)*pow(abs(spinningArm.x),1./.75);
-                if(armSlice>sqrt2/2.&&spinningArm.y>0.&&abs(spinningArm.x)<1.)
+                if(armSlice>sqrt2/2.&&spinningArm.y>0.&&(spinningArm.x)<1.&&(spinningArm.x)>-1.)
                     {
                     for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;arm=1.;break;}
                     else{
@@ -3227,7 +3227,7 @@ float arm = 0.;
                     z=spinningArm;
                      armSlice = abs(spinningArm.y)*pow(abs(spinningArm.x),1./.75);
 
-                if(armSlice>sqrt2/2.&&spinningArm.y<0.&&abs(spinningArm.x)<1.)
+                if(armSlice>sqrt2/2.&&spinningArm.y<0.&&(spinningArm.x)<1.&&(spinningArm.x)>-1.)
                     {
                     for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;arm=1.;break;}
                     else{
