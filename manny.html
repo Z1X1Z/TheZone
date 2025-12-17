@@ -6561,7 +6561,7 @@ if (Character==4||Character==3) {heartSize=1.5;
 //{//frAMP-=volume*(zoomOutRatchetThreshold)*16.;
 //frAMP*=(.5+frAMP)/(1.+zoomOutRatchetThreshold);
 //}
-if(heartStar==0&&frAMP>0.&&volume!=1.)heartSize/=(1.+frAMP)/(1.+zoomOutRatchetThreshold)*6.;//*8.;
+//if(heartStar==0&&frAMP>0.&&volume!=1.)heartSize/=(1.+frAMP)/(1.+zoomOutRatchetThreshold)*6.;//*8.;
 
 else if(heartStar==1&&volume!=0.){
     heartSize/=(1.+volume);//multiplied by two if heart argument is not vec2(0.)
@@ -6738,7 +6738,7 @@ if(starOnDot==1||starOnDot==2){
                                                      if(pillar.x!=0.||pillar.y!=0.||pillar.z!=0.)         pillar=   clamp(pillar+(-mny.x-mny.y-mny.z)*40.,0.,1.);
                                  vec3 hypnoticHarmonicCircles = vec3(0.);
                                                                 
-                                 if(ringSpring&&0==1)
+                                 if(ringSpring)
                                  {
                                     vec2 rr = r;//* min(resolution.x,resolution.y)/max(resolution.x,resolution.y);
                                                             float number =0.;
