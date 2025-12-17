@@ -1891,9 +1891,9 @@ function runOSMD (){
         ||window.touchOnlyMode)
      {    setDynamicSampler2ds();//normally does nothing
 
-         setMicInputToStarPIXEL();
+       //  setMicInputToStarPIXEL();
          //loadFrequencyTextures();
-         setTwelveNotes();
+        // setTwelveNotes();
          executeTouchRegime();
      }
                      
@@ -2155,7 +2155,7 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                             for(var n=0;n<inputData.length;n++)inputData[n]=inputData[n]/2.;//quieter
                                         }
 
-                                        setMicInputToStarPIXEL();
+                                   //     setMicInputToStarPIXEL();
                                         //loadFrequencyTextures();
                                         
                                     }
@@ -2222,7 +2222,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
         spiral_compress();
         
         vectorize4();
-    setTwelveNotes();
+   // setTwelveNotes();
     let lowNote = 10000000.;
      lowAmpFreq = 1;
 

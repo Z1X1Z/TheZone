@@ -6580,7 +6580,7 @@ else if(heartStar==2) frAMP=1.;
 vec2 heartField = characterPSpunToKey*heartSize
 +heartShift;
      if(Character!=9&&(heartStar!=3))
-     {  if(volume!=1.)
+     {  if(volume!=1.&&frAMP>0.)
          HEART = heart(heartField
                                                     ,//vec2(0.)
                       heartPitch*vec2(1.,flipStar)+
