@@ -281,7 +281,6 @@ function resetAll(){
     window.yTouch=0;
     window.xTouchMicroBuffer=0./10000.;
     window.yTouchMicroBuffer=-1./10000.;
-    window.touchVolume = .5;
     window.radialOctaveBoost = false;
     window.twist = 0.;
     window.skew = 0.;
@@ -343,8 +342,13 @@ function resetAll(){
             window.center = false;
             window.zoomOutRatchetThreshold= starSHIPVOLUMEdefaultLowVolume;//
 
-            window.ConcertKey = 440;
+            if(document.getElementById("ConcertKey").value>0
+            )window.ConcertKey = document.getElementById("ConcertKey").value;
+            else window.ConcertKey=440;
 
+            if(document.getElementById('TouchVolume').value>0)    
+                 window.touchVolume=document.getElementById('TouchVolume').value
+            else window.touchVolume = .5;
             window.textON=false;
             window.dupered = false;
             window.haptic = false;
