@@ -4393,7 +4393,7 @@ float stretch=pow(pow(span+.5,.5),1./squeezeN);
 
       
        
-
+/*
 
        if(clvrVariant9) s+= coords*gr;
 
@@ -4401,6 +4401,7 @@ float stretch=pow(pow(span+.5,.5),1./squeezeN);
         
 
         if(clvrVariant1)  s*=length(lastS);
+        */
       // if(counter==0.){ s/=2.;dstnce/=2.;}
 
         
@@ -4432,7 +4433,6 @@ float stretch=pow(pow(span+.5,.5),1./squeezeN);
 else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
   */
                                             /*
-
      if(clvrVariant2) {
          if (clvrVariant4) s*=1.5;
         else {
@@ -4446,7 +4446,7 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
      /* if(clvrVariant5)if(length(s)>0.) s = vec2(pow(s.x,-2.),pow(s.y,-2.));
       if(clvrVariant6)s=s-lastS.yx;
 */
-     if(clvrVariant8) if(length(s)<1.)s+=1.;
+  //   if(clvrVariant8) if(length(s)<1.)s+=1.;
 
        //if(dotted)s/=dot(-m,t)*dot(m,-t);
        if(morph!=0.&&!wheel)s-=t;
