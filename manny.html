@@ -3849,7 +3849,7 @@ else if (refactorCores==0.) p/=3.;
 vec2 s=p;
 
                     
-       /* if(seventhEYE>0.&&seventhEYE!=3.&&(lengthP<twoThirds&&length(s)<twoThirds)&&zoom<.5
+        if(seventhEYE>0.&&seventhEYE!=3.&&(lengthP<twoThirds&&length(s)<twoThirds)&&zoom<.5
  //&&lfc>zoom
  )
 {
@@ -3858,7 +3858,6 @@ vec2 s=p;
     if(seventhEYE==2.)s=vec2(s.y,abs(s.x));//more sign checks may help
    // try signs and swizzle!
 }
-*/
             
                                 /*makes for a pretty fractal with odd symmetry
                                 if(true)
@@ -3907,7 +3906,7 @@ const float crs = 64.;//this is the mandelclover and original inheritance colorm
  else break;
  float lfcCenterCored=lfc*scale;
 
-    /*    if(seventhEYE==3.&&(lengthP<twoThirds)&&zoom<.5
+        if(seventhEYE==3.&&(lengthP<twoThirds)&&zoom<.5
  //&&lfc>zoom
  )
 {
@@ -3917,7 +3916,7 @@ const float crs = 64.;//this is the mandelclover and original inheritance colorm
     if(seventhEYE==2.)s=vec2(s.y,abs(s.x));//more sign checks may help
    // try signs and swizzle!
 }
-*/
+
 
  bool inCenterCore =c<twoThirds;
  if(cloverso)
@@ -4394,7 +4393,7 @@ float stretch=pow(pow(span+.5,.5),1./squeezeN);
 
       
        
-/*
+
 
        if(clvrVariant9) s+= coords*gr;
 
@@ -4402,7 +4401,6 @@ float stretch=pow(pow(span+.5,.5),1./squeezeN);
         
 
         if(clvrVariant1)  s*=length(lastS);
-        */
       // if(counter==0.){ s/=2.;dstnce/=2.;}
 
         
@@ -4434,6 +4432,7 @@ float stretch=pow(pow(span+.5,.5),1./squeezeN);
 else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
   */
                                             /*
+
      if(clvrVariant2) {
          if (clvrVariant4) s*=1.5;
         else {
@@ -4447,15 +4446,15 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
      /* if(clvrVariant5)if(length(s)>0.) s = vec2(pow(s.x,-2.),pow(s.y,-2.));
       if(clvrVariant6)s=s-lastS.yx;
 */
-  //   if(clvrVariant8) if(length(s)<1.)s+=1.;
+     if(clvrVariant8) if(length(s)<1.)s+=1.;
 
        //if(dotted)s/=dot(-m,t)*dot(m,-t);
-   //    if(morph!=0.&&!wheel)s-=t;
-    //    else s+=t-m;
+       if(morph!=0.&&!wheel)s-=t;
+        else s+=t-m;
                              
                              
-       if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the body steps on the clover
-       else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only
+      // if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the body steps on the clover
+     //  else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only
    
   // dstnce = length(s);
    
