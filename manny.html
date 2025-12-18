@@ -4290,7 +4290,7 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
     float OmniDynamicPetalShift =0.;//texture2D(omniDynamic,vec2((loops+counter)/40.,0.)).x;
      float OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
     
-  float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(0.//floor(loops+counter)/40.
+  float  CORE_DELIMITER=2./3.;//texture2D(coreTextureSampler,vec2(0.//floor(loops+counter)/40.
   ,0.)).x;
 vec2 window =s;
 bool gatedPass=false;
@@ -4392,16 +4392,15 @@ float stretch=pow(pow(span+.5,.5),1./squeezeN);
        if(chop&&dstnce>twoThirds)s=spin2(s,floor(dstnce)*PIdiv2);
 
       
-      /* 
+       
 
 
        if(clvrVariant9) s+= coords*gr;
 
         if(clvrVariant7)s+=pcs;
-     
+        
 
         if(clvrVariant1)  s*=length(lastS);
-           */
       // if(counter==0.){ s/=2.;dstnce/=2.;}
 
         
@@ -4447,14 +4446,14 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
      /* if(clvrVariant5)if(length(s)>0.) s = vec2(pow(s.x,-2.),pow(s.y,-2.));
       if(clvrVariant6)s=s-lastS.yx;
 */
-  //   if(clvrVariant8) if(length(s)<1.)s+=1.;
+     if(clvrVariant8) if(length(s)<1.)s+=1.;
 
        //if(dotted)s/=dot(-m,t)*dot(m,-t);
-   //    if(morph!=0.&&!wheel)s-=t;
-    //    else s+=t-m;
+       if(morph!=0.&&!wheel)s-=t;
+        else s+=t-m;
                              
                              
-       if(true&&Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the body steps on the clover
+       if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the body steps on the clover
        else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only
    
   // dstnce = length(s);
