@@ -4010,14 +4010,14 @@ else hyperCore=externalCores;//hyperCore is really better thought of as hyperMet
 //cored/1.5+log(length(coordSHIFT))*logStabilizationConstant+uber.z;
 //float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
 float equilibriator = 1.;
-/*if(dilate){//should be re-enabled after checks
-//if(lfc>twoThirds)
+if(dilate){//should be re-enabled after checks
+if(lfc/zoom>1.5)
 equilibriator=lfc/(lfc-zoom/dif)*dif;
    //this is to allow top level core freeze for original clover
  
    hyperCore*=equilibriator;
    }
-   */
+   
     // hyperCore-=.441*LogHalfReciprocal/equilibriator;
      
     // hyperCore-=coreDilation;
@@ -4047,7 +4047,7 @@ equilibriator=lfc/(lfc-zoom/dif)*dif;
     if(clvrVariant2)hyperCore+=1.*LogHalfReciprocal;
 
 }
-      //  if (dilate)hyperCore-=.25*LogHalfReciprocal;//for freed dilation
+    //   if (dilate)hyperCore+=.25*LogHalfReciprocal;//for freed dilation
 
    if(multiplicatorNexus)hyperCore-=.5*LogHalfReciprocal;
    if(continuumClover!=0)hyperCore-=0.*LogHalfReciprocal;
@@ -4462,6 +4462,7 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
 
 
           dstnce = length(s);
+
 //if(dstnce<2./3.)s=1./(2.+abs(s));//this needs some exploration here
 
 
