@@ -4290,13 +4290,15 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
     float OmniDynamicPetalShift =0.;//texture2D(omniDynamic,vec2((loops+counter)/40.,0.)).x;
      float OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
     
-  float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(0.//floor(loops+counter)/40.
-  ,0.)).x;
+  float  CORE_DELIMITER=2./3.;
+  //texture2D(coreTextureSampler,vec2(0.//floor(loops+counter)/40.
+  //,0.)).x;
 vec2 window =s;
 bool gatedPass=false;
-if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
+//if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
-else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
+//else    
+  for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
 
 
    //      if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
