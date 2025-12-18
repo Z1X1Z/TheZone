@@ -3849,7 +3849,7 @@ else if (refactorCores==0.) p/=3.;
 vec2 s=p;
 
                     
-        if(seventhEYE>0.&&seventhEYE!=3.&&(lengthP<twoThirds&&length(s)<twoThirds)&&zoom<.5
+       /* if(seventhEYE>0.&&seventhEYE!=3.&&(lengthP<twoThirds&&length(s)<twoThirds)&&zoom<.5
  //&&lfc>zoom
  )
 {
@@ -3858,6 +3858,7 @@ vec2 s=p;
     if(seventhEYE==2.)s=vec2(s.y,abs(s.x));//more sign checks may help
    // try signs and swizzle!
 }
+*/
             
                                 /*makes for a pretty fractal with odd symmetry
                                 if(true)
@@ -3906,7 +3907,7 @@ const float crs = 64.;//this is the mandelclover and original inheritance colorm
  else break;
  float lfcCenterCored=lfc*scale;
 
-        if(seventhEYE==3.&&(lengthP<twoThirds)&&zoom<.5
+    /*    if(seventhEYE==3.&&(lengthP<twoThirds)&&zoom<.5
  //&&lfc>zoom
  )
 {
@@ -3916,7 +3917,7 @@ const float crs = 64.;//this is the mandelclover and original inheritance colorm
     if(seventhEYE==2.)s=vec2(s.y,abs(s.x));//more sign checks may help
    // try signs and swizzle!
 }
-
+*/
 
  bool inCenterCore =c<twoThirds;
  if(cloverso)
