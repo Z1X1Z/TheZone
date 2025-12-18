@@ -827,8 +827,8 @@ function init() {
     renderer.autoClear=true;//so the starship can be isolated
     renderer.setClearAlpha ( 0. )
 
-    renderer.debug.checkShaderErrors = false;
-    
+   // renderer.debug.checkShaderErrors = false;
+
     scene = new THREE.Scene();
      finalSceneRerenderedering= new THREE.Scene();
     feedbackScene = new THREE.Scene();
