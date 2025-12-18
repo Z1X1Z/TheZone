@@ -4290,15 +4290,13 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
     float OmniDynamicPetalShift =0.;//texture2D(omniDynamic,vec2((loops+counter)/40.,0.)).x;
      float OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
     
-  float  CORE_DELIMITER=2./3.;
-  //texture2D(coreTextureSampler,vec2(0.//floor(loops+counter)/40.
-  //,0.)).x;
+  float  CORE_DELIMITER=texture2D(coreTextureSampler,vec2(0.//floor(loops+counter)/40.
+  ,0.)).x;
 vec2 window =s;
 bool gatedPass=false;
-//if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
+if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
-//else    
-  for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
+else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
 
 
    //      if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
@@ -4346,20 +4344,6 @@ hyperCoreOUTPUT-=superUpcorer;
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
        );
 
- if(dilate){
-                 /* float sliceanddiceBoost=mod((atan(s.y,s.x)+chiralAdjustment)*divideByMultiplyingPi2*6.+1.,1.)*dstnce*dstnce;
-                  sliceanddiceBoost=sign(sliceanddiceBoost)*pow(abs(sliceanddiceBoost),.5);
-              hyperCoreBoosted-=sliceanddiceBoost;
-               hyperCoreOUTPUT-=sliceanddiceBoost;
-                  */
-                  float dst = length(s);
-               hyperCoreBoosted-=dst;
-                hyperCoreOUTPUT-=dst;
-              // hyperCoreBoosted-=dstnce;
-               // hyperCoreOUTPUT-=dstnce;
-
-               
-       }
        if(//zoom<.5&&
 counter==0.&&
 polyNomialStretch
@@ -4429,6 +4413,20 @@ float stretch=pow(pow(span+.5,.5),1./squeezeN);
                                        
         if(clvrVariant4!=0.&&OrthoEvery==0.) s*=1.-oneOverLeafTruncated;
 
+ if(dilate){
+                 /* float sliceanddiceBoost=mod((atan(s.y,s.x)+chiralAdjustment)*divideByMultiplyingPi2*6.+1.,1.)*dstnce*dstnce;
+                  sliceanddiceBoost=sign(sliceanddiceBoost)*pow(abs(sliceanddiceBoost),.5);
+              hyperCoreBoosted-=sliceanddiceBoost;
+               hyperCoreOUTPUT-=sliceanddiceBoost;
+                  */
+                  float dst = length(s);
+               hyperCoreBoosted-=dst;
+                hyperCoreOUTPUT-=dst;
+              // hyperCoreBoosted-=dstnce;
+               // hyperCoreOUTPUT-=dstnce;
+
+               
+       }
         /*
   if(mod(counter,2.)==1.)   s=vec2(pow(s.x,2.)*sign(s.x),pow(s.y,.5)*sign(s.y));
 else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));

@@ -518,13 +518,6 @@ s=new THREE.Vector2(
 s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
 -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
 );
-    
-        if(dilate){//this is to allow top level core freeze for original clover
-         var dst = s.length();
-             hyperCoreBoosted-=dst;
-              hyperCoreOUTPUT-=dst;
-        }
-
        if(//zoom<.5&&
 counter==0.&&
 polyNomialStretch
@@ -579,6 +572,13 @@ else span = lfc+.5;
      */
         if(clvrVariant4)  s.multiplyScalar( 1.-oneOverLeafTruncated);
     
+    
+        if(dilate){//this is to allow top level core freeze for original clover
+         var dst = s.length();
+             hyperCoreBoosted-=dst;
+              hyperCoreOUTPUT-=dst;
+        }
+
  if(clvrVariant2) {
      if (clvrVariant4) s.multiplyScalar(1.5);
     else {
