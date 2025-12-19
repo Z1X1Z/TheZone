@@ -482,7 +482,7 @@ let loopSolid = 0.
 
                                                            hyperCoreBoosted*=squeezeN;
         hyperCoreOUTPUT*=squeezeN;
-        var daisifier = 1.5;
+        var daisifier = 0.;
 
 for (var counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
    /*
@@ -544,6 +544,13 @@ else span = lfc+.5;
       s.multiplyScalar(1./stretch);//maybe other values work?
      else s.multiplyScalar(stretch);
 }
+
+    
+        if(dilate){//this is to allow top level core freeze for original clover
+         var dst = s.length();
+             hyperCoreBoosted-=dst;
+              hyperCoreOUTPUT-=dst;
+        }
 }
         //dstnce = s.length();
             if(chop&&dstnce>2./3.)s=spinVector(s,Math.floor(dstnce)*Math.PI/2.);
@@ -574,12 +581,6 @@ else span = lfc+.5;
      */
         if(clvrVariant4)  s.multiplyScalar( 1.-oneOverLeafTruncated);
     
-    
-        if(dilate){//this is to allow top level core freeze for original clover
-         var dst = s.length();
-             hyperCoreBoosted-=dst;
-              hyperCoreOUTPUT-=dst;
-        }
 
  if(clvrVariant2) {
      if (clvrVariant4) s.multiplyScalar(1.5);
@@ -647,7 +648,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
         if(Spoker){
           //  if(morph==0.)
             {
-               daisifier=counter+.5;
+               daisifier=counter;
 
                 if(//(!wheel &&
                    Math.sqrt(dstnce)*dstnce<=hyperCoreBoosted//)||(wheel&&1.<=hyperCoreBoosted)
@@ -851,7 +852,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
                                                                 {
                                                                     s=spin(s,Math.PI);//balances inherited colors
                                                                 }
-    var cloverOrDaisyOnTop = counter+daisifier+1.;//may be +0
+    var cloverOrDaisyOnTop = counter+daisifier;//may be +0
     if(twelveGates)cloverOrDaisyOnTop=counter+1.;
     
         if(twelveGatesMeta!=0.&&((twelveGatesMeta<1.&&(cloverOrDaisyOnTop-.5)%(1./twelveGatesMeta)>=1.)||

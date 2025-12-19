@@ -928,7 +928,7 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                                                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
 
 
-                                                               <label for="Distributor">Distributor![.c]</label><br>
+                                                               <label for="Distributor">Distributor?![.c]</label><br>
                                 <input type="checkbox" id="Dilate" name="t"  onclick= "
                                     key  = 'o';
                                     callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
@@ -4294,7 +4294,7 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
   ,0.)).x;
 vec2 window =s;
 bool gatedPass=false;
-float daisifier = 1.5;
+float daisifier = 0.;
 if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
@@ -4372,6 +4372,20 @@ float stretch=pow(pow(span+.5,.5),1./squeezeN);
 
 
 
+ if(dilate){
+                 /* float sliceanddiceBoost=mod((atan(s.y,s.x)+chiralAdjustment)*divideByMultiplyingPi2*6.+1.,1.)*dstnce*dstnce;
+                  sliceanddiceBoost=sign(sliceanddiceBoost)*pow(abs(sliceanddiceBoost),.5);
+              hyperCoreBoosted-=sliceanddiceBoost;
+               hyperCoreOUTPUT-=sliceanddiceBoost;
+                  */
+                  float dst = length(s);
+               hyperCoreBoosted-=dst;
+                hyperCoreOUTPUT-=dst;
+              // hyperCoreBoosted-=dstnce;
+               // hyperCoreOUTPUT-=dstnce;
+
+               
+       }
       // if (mod(counter,5.) == 4.)s =pCenterCored;
        //x**3
 
@@ -4450,20 +4464,6 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
 
           dstnce = length(s);
 
- if(dilate){
-                 /* float sliceanddiceBoost=mod((atan(s.y,s.x)+chiralAdjustment)*divideByMultiplyingPi2*6.+1.,1.)*dstnce*dstnce;
-                  sliceanddiceBoost=sign(sliceanddiceBoost)*pow(abs(sliceanddiceBoost),.5);
-              hyperCoreBoosted-=sliceanddiceBoost;
-               hyperCoreOUTPUT-=sliceanddiceBoost;
-                  */
-                  float dst = length(s);
-               hyperCoreBoosted-=dst;
-                hyperCoreOUTPUT-=dst;
-              // hyperCoreBoosted-=dstnce;
-               // hyperCoreOUTPUT-=dstnce;
-
-               
-       }
 //if(dstnce<2./3.)s=1./(2.+abs(s));//this needs some exploration here
 
 
@@ -4588,7 +4588,6 @@ if(Spoker){
         if(//!wheel
             dstnce*sqrt(dstnce)<=hyperCoreBoosted)//||(wheel&&1.<=hyperCoreBoosted))
                          {
-daisifier=counter+.5;
 
                              /*
                          if(wheel){
@@ -4623,6 +4622,8 @@ daisifier=counter+.5;
                          //}
                          }
         else  {
+            daisifier=counter;
+
             /*
                 if(wheel){
             hyperCoreOUTPUT+=logOfSpoke_Factor;
@@ -4669,7 +4670,7 @@ if(counter+dstnceSquaredAndRooted//sqrt(sqrt(dstnce)*dstnce)*dstnce
          s=spin2(s,-distributorFACTORlove);
 
          }
-        float       spokeloverCoreShiftUp  =   pow(abs(downSpoke),powerOfSpokeCore);//  spokedU;//spokedU;// 
+        float       spokeloverCoreShiftUp  =   pow(abs(downSpoke),powerOfSpokeCore)*logStabilizationConstant;//  spokedU;//spokedU;// 
 
  //  if(counter!=0.) 
   // { 
@@ -4700,7 +4701,7 @@ if(counter+dstnceSquaredAndRooted//sqrt(sqrt(dstnce)*dstnce)*dstnce
 
 else //if(  0.>=hyperCoreBoosted)
 {
-     float spokeloverCoreShiftDown= pow(upSpoke,powerOfSpokeCore);//spokedD;//  
+     float spokeloverCoreShiftDown= pow(upSpoke,powerOfSpokeCore)*logStabilizationConstant;//spokedD;//  
    // if(true||counter!=0.) {
              //    spokeloverCoreShiftDown=spokedD;//pow(upSpoke,powerOfSpokeCore);
 
@@ -4867,7 +4868,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
                                                                     unSwitch= !unSwitch;
                                                                 }
 
-   float cloverOrDaisyOnTop = counter+daisifier+1.;//may be +0
+   float cloverOrDaisyOnTop = counter+daisifier;//may be +0
    if(twelveGates)cloverOrDaisyOnTop=counter+1.;
 
     if(twelveGatesMeta!=0.&&((twelveGatesMeta<1.&&mod(-.5+cloverOrDaisyOnTop,1./twelveGatesMeta)>=1.)||
