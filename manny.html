@@ -4047,7 +4047,7 @@ equilibriator=lfc/(lfc-zoom/dif)*dif;
     if(clvrVariant2)hyperCore+=1.*LogHalfReciprocal;
 
 }
-    //   if (dilate)hyperCore+=.25*LogHalfReciprocal;//for freed dilation
+       if (dilate)hyperCore+=.25*LogHalfReciprocal;//for freed dilation
 
    if(multiplicatorNexus)hyperCore-=.5*LogHalfReciprocal;
    if(continuumClover!=0)hyperCore-=0.*LogHalfReciprocal;
@@ -4413,20 +4413,6 @@ float stretch=pow(pow(span+.5,.5),1./squeezeN);
                                        
         if(clvrVariant4!=0.&&OrthoEvery==0.) s*=1.-oneOverLeafTruncated;
 
- if(dilate){
-                 /* float sliceanddiceBoost=mod((atan(s.y,s.x)+chiralAdjustment)*divideByMultiplyingPi2*6.+1.,1.)*dstnce*dstnce;
-                  sliceanddiceBoost=sign(sliceanddiceBoost)*pow(abs(sliceanddiceBoost),.5);
-              hyperCoreBoosted-=sliceanddiceBoost;
-               hyperCoreOUTPUT-=sliceanddiceBoost;
-                  */
-                  float dst = length(s);
-               hyperCoreBoosted-=dst;
-                hyperCoreOUTPUT-=dst;
-              // hyperCoreBoosted-=dstnce;
-               // hyperCoreOUTPUT-=dstnce;
-
-               
-       }
         /*
   if(mod(counter,2.)==1.)   s=vec2(pow(s.x,2.)*sign(s.x),pow(s.y,.5)*sign(s.y));
 else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
@@ -4463,6 +4449,20 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
 
           dstnce = length(s);
 
+ if(dilate){
+                 /* float sliceanddiceBoost=mod((atan(s.y,s.x)+chiralAdjustment)*divideByMultiplyingPi2*6.+1.,1.)*dstnce*dstnce;
+                  sliceanddiceBoost=sign(sliceanddiceBoost)*pow(abs(sliceanddiceBoost),.5);
+              hyperCoreBoosted-=sliceanddiceBoost;
+               hyperCoreOUTPUT-=sliceanddiceBoost;
+                  */
+                  float dst = length(s);
+               hyperCoreBoosted-=dst;
+                hyperCoreOUTPUT-=dst;
+              // hyperCoreBoosted-=dstnce;
+               // hyperCoreOUTPUT-=dstnce;
+
+               
+       }
 //if(dstnce<2./3.)s=1./(2.+abs(s));//this needs some exploration here
 
 
@@ -4865,7 +4865,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
                                                                     unSwitch= !unSwitch;
                                                                 }
 
-   float cloverOrDaisyOnTop = counter;
+   float cloverOrDaisyOnTop = counter+1.5;//may be +0
    if(twelveGates)cloverOrDaisyOnTop=counter+1.;
 
     if(twelveGatesMeta!=0.&&((twelveGatesMeta<1.&&mod(-.5+cloverOrDaisyOnTop,1./twelveGatesMeta)>=1.)||

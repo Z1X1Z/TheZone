@@ -848,7 +848,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
                                                                 {
                                                                     s=spin(s,Math.PI);//balances inherited colors
                                                                 }
-    var cloverOrDaisyOnTop = counter;
+    var cloverOrDaisyOnTop = counter+2.;//may be +0
     if(twelveGates)cloverOrDaisyOnTop=counter+1.;
     
         if(twelveGatesMeta!=0.&&((twelveGatesMeta<1.&&(cloverOrDaisyOnTop-.5)%(1./twelveGatesMeta)>=1.)||
