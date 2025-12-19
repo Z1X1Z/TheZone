@@ -4294,6 +4294,7 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
   ,0.)).x;
 vec2 window =s;
 bool gatedPass=false;
+float daisifier = 1.5;
 if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
@@ -4587,6 +4588,8 @@ if(Spoker){
         if(//!wheel
             dstnce*sqrt(dstnce)<=hyperCoreBoosted)//||(wheel&&1.<=hyperCoreBoosted))
                          {
+daisifier=counter+.5;
+
                              /*
                          if(wheel){
                              s/=2.;
@@ -4620,7 +4623,6 @@ if(Spoker){
                          //}
                          }
         else  {
-
             /*
                 if(wheel){
             hyperCoreOUTPUT+=logOfSpoke_Factor;
@@ -4865,7 +4867,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
                                                                     unSwitch= !unSwitch;
                                                                 }
 
-   float cloverOrDaisyOnTop = counter+1.5;//may be +0
+   float cloverOrDaisyOnTop = counter+daisifier+1.;//may be +0
    if(twelveGates)cloverOrDaisyOnTop=counter+1.;
 
     if(twelveGatesMeta!=0.&&((twelveGatesMeta<1.&&mod(-.5+cloverOrDaisyOnTop,1./twelveGatesMeta)>=1.)||
