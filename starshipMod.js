@@ -3945,7 +3945,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  let loopy = 0;
                                                                  
                                                                  if(tAScaled>0&&isFinite(tAScaled))
-                                                                     for(var reps=  0.;  reps<totalAMP**(7-totalAMP);reps+=tAScaledPermanent**(3.5-tAScaledPermanent))
+                                                                     for(var reps=  0.;  reps<totalAMP**(7-totalAMP);reps+=tAScaledPermanent**(3.-tAScaledPermanent))
                                                                   //   for(var reps=0; reps<2.;reps+=1)
                                                       //                 for(reps=0;reps<5.;reps+=1.+1./(1.-totalAMP))
 
@@ -4017,7 +4017,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  }
                                                                //  tolerance+=plusOrMinusPowerSeriesBUFFER
                                                         tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMP+ tAScaledPermanent+tolerance-plusOrMinusPowerSeriesNorm));
-                                                                 
+                                                                 tolerance*=-1./leafPermanent;//makes over and under stable and greatly enhances accuracy
                                                            //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMP+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
                                                           
                                                              
