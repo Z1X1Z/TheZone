@@ -1201,7 +1201,12 @@ seventhEYE![,.O]</a><br>
                                  uniforms.budge.value=document.getElementById('Budge').value
                                  "><br>
 
-
+  
+               <input type="checkbox" id="seven2" name="t"  onclick= "
+                  key  = 'J';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
+               <label for="seven2">Seven Squared![,.J]</label><br>
+        
 
 
 
@@ -1958,6 +1963,7 @@ void main(){
     uniform bool spinTowardsMe;
     uniform float whirlpool;
     uniform bool distributor;
+    uniform bool sevenSquared;
     uniform float largeEyeColor;
     uniform float cloverOffset;
     
@@ -5080,6 +5086,13 @@ hyperCoreOUTPUT--;
                  }
                                           
             }
+            vec3 cloverEYES = vec3(0.);
+            if (sevenSquared)
+            {
+
+            if(dstnce<twoThirds)cloverEYES=roundEyes(deSplicedS*3.5,d.yx/2.).xyz;
+           // if(cloverEYES.r==cloverEYES.g && cloverEYES.g==cloverEYES.b)cloverEYES=vec3(0.);
+        }
                   vec2 b = s;
 ///if(multiplicatorNexus)s*=colorShift/88.8;
 
@@ -5205,7 +5218,7 @@ o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo+eyeScroll.xyz)-(starship.x+starship
                       o+=(isBlack-1.)*100.;
                       o+=isGrey;
                       if(length((vUv.yx-.5)/(resolution/max(resolution.x,resolution.y)))<2.*sqrt2/min(resolution.x,resolution.y))o=vec3(hyperCoreOUTPUT/255.*4.,cored/255.*4.,255.);
-return vec4(clamp(o,0.,1.),atan(b.y,b.x));}
+return vec4(clamp(o+cloverEYES,0.,1.),atan(b.y,b.x));}
 
                       
                       

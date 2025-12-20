@@ -54,6 +54,7 @@ pongOn:{value:true},
 heartStar:{value:0},
 superStable:{value:false},
 distributor:{value:true},
+sevenSquared:{value:false},
 oppositionalCoreFlop:{value:1},
 micIn:{value:null},
     audioBuffer:{value:null},
@@ -617,6 +618,7 @@ source.connect(analyser);
                                           else  if((key == "U") && event.altKey&&event.ctrlKey)uniforms.ringSpring.value=!uniforms.ringSpring.value;
 
                                           else  if((key == "R") && event.altKey&&event.ctrlKey)uniforms.armStar.value=!uniforms.armStar.value;
+                                          else  if(key == "J" && event.altKey&&event.ctrlKey)uniforms.sevenSquared.value=!uniforms.sevenSquared.value;
 
                                           else  if(key == "Q" && event.altKey&&event.ctrlKey)
                                           
