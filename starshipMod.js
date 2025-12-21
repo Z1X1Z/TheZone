@@ -2271,9 +2271,15 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
           for(var l=0.; l<averageFrameTotalAmp.length;l++)finalAverageAmp+=averageFrameTotalAmp[l];
               finalAverageAmp/=framesLong;
             zoomOutRatchetThreshold= finalAverageAmp;
-            averageFrameTotalAmp=[];
-        }
+            for(var g=0.; g<location.hash.length;g++)
+                {
+                    if(location.hash[g]=="o")zoomOutRatchetThreshold*=1.11111111;
+                    else if(location.hash[g]=="i")zoomOutRatchetThreshold/=1.11111111
+                }
+                    averageFrameTotalAmp=[];
+        
     }
+}
     if(Math.round(note) ==-854)note="undefined";
     const noteNameNumber=Math.floor(Math.round(note))%12;
     const noteTwisted = (note +twist*flip/2.+12*10000)%12
