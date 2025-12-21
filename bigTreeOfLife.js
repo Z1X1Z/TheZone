@@ -648,7 +648,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
         if(Spoker){
           //  if(morph==0.)
             {
-               daisifier=counter;
+               daisifier=0;
 
                 if(//(!wheel &&
                    Math.sqrt(dstnce)*dstnce<=hyperCoreBoosted//)||(wheel&&1.<=hyperCoreBoosted)
@@ -749,7 +749,7 @@ var       spokeloverCoreShiftUp   =  Math.pow(downSpoke,powerOfSpokeCore)*logSta
             
             else //if(  0.>=hyperCoreBoosted)
             {
-            daisifier+=2./3./twelveGatesMeta;
+            daisifier+=2.;
 
                 s.multiplyScalar( Math.sqrt(2.)/1.5);
 
@@ -854,7 +854,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
                                                                 {
                                                                     s=spin(s,Math.PI);//balances inherited colors
                                                                 }
-    var cloverOrDaisyOnTop = counter+daisifier;//may be +0
+    var cloverOrDaisyOnTop = daisifier;//may be +0
     if(twelveGates)cloverOrDaisyOnTop=counter+1.;
     
         if(twelveGatesMeta!=0.&&((twelveGatesMeta<1.&&(cloverOrDaisyOnTop-.5)%(1./twelveGatesMeta)>=1.)||
@@ -959,7 +959,7 @@ else{
 break;
 }
        // dstnce = s.length();
-
+daisifier+=1.;
  hyperCoreBoosted--;
  hyperCoreOUTPUT--;
     loopSolid++

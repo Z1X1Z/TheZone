@@ -4627,9 +4627,11 @@ if(Spoker){
 
                          hyperCoreBoosted-=downSpoke;
                          //}
+
                          }
+                         
         else  {
-            daisifier=counter;
+                                     daisifier=2.;
 
             /*
                 if(wheel){
@@ -4709,7 +4711,7 @@ if(counter+dstnceSquaredRooted//+dstnceSquaredAndRooted//sqrt(sqrt(dstnce)*dstnc
 
 else //if(  0.>=hyperCoreBoosted)
 {
-            daisifier+=twoThirds/twelveGatesMeta;
+           daisifier+=2.;
 
      float spokeloverCoreShiftDown= pow(upSpoke,powerOfSpokeCore)*logStabilizationConstant;//spokedD;//  
    // if(true||counter!=0.) {
@@ -4743,6 +4745,9 @@ dstnce=length(s);
 
        if(loops+counter<=hyperCoreBoosted+continuumCounter)
        {
+                 //   daisifier=0.;
+          //  daisifier+=counter;
+
        //   if(dstnce<twoThirds) s-=length(coords.yx)*correction;
        //float dstlpcc = dstnce*lpcc;//(9./16.);
        //if(feedTheLamb)dstlpcc*=.5;
@@ -4878,7 +4883,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
                                                                     unSwitch= !unSwitch;
                                                                 }
 
-   float cloverOrDaisyOnTop = counter+daisifier;//may be +0
+   float cloverOrDaisyOnTop = daisifier;//may be +0
    if(twelveGates)cloverOrDaisyOnTop=counter+1.;
 
     if(twelveGatesMeta!=0.&&((twelveGatesMeta<1.&&mod(-.5+cloverOrDaisyOnTop,1./twelveGatesMeta)>=1.)||
@@ -5020,7 +5025,7 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
      
 }
 else break;
-
+daisifier+=1.;
 hyperCoreBoosted--;
 hyperCoreOUTPUT--;
                              colorShift+=hyperCoreBoosted;
