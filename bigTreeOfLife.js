@@ -648,7 +648,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
         if(Spoker){
           //  if(morph==0.)
             {
-               daisifier=0;
+               daisifier=1;
 
                 if(//(!wheel &&
                    Math.sqrt(dstnce)*dstnce<=hyperCoreBoosted//)||(wheel&&1.<=hyperCoreBoosted)
@@ -749,7 +749,7 @@ var       spokeloverCoreShiftUp   =  Math.pow(downSpoke,powerOfSpokeCore)*logSta
             
             else //if(  0.>=hyperCoreBoosted)
             {
-            daisifier+=2.;
+            daisifier+=1.;
 
                 s.multiplyScalar( Math.sqrt(2.)/1.5);
 
