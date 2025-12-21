@@ -749,6 +749,8 @@ var       spokeloverCoreShiftUp   =  Math.pow(downSpoke,powerOfSpokeCore);// spo
             
             else //if(  0.>=hyperCoreBoosted)
             {
+                            daisifier+=1.;
+
                 s.multiplyScalar( Math.sqrt(2.)/1.5);
 
                 if(!wheel||1==1)
