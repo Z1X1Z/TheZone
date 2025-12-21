@@ -619,6 +619,7 @@ source.connect(analyser);
 
                                           else  if((key == "R") && event.altKey&&event.ctrlKey)uniforms.armStar.value=!uniforms.armStar.value;
                                           else  if(key == "J" && event.altKey&&event.ctrlKey)uniforms.sevenSquared.value=!uniforms.sevenSquared.value;
+   else  if(key == "D" && event.altKey&&event.ctrlKey)uniforms.distributor.value = !uniforms.distributor.value;//hotkey seems to already be in use for bible chapter
 
                                           else  if(key == "Q" && event.altKey&&event.ctrlKey)
                                           
@@ -849,7 +850,6 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
     {
         uniforms.Pointers.value=!uniforms.Pointers.value;
     }
-    else if (event.altKey&&(key=="ç"||key=="c"))uniforms.distributor.value = !uniforms.distributor.value;//hotkey seems to already be in use for bible chapter
 
     else if (event.altKey&&(key=="µ"||key=="m"))
     {if(number!="no number")
