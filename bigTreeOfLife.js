@@ -749,7 +749,7 @@ var       spokeloverCoreShiftUp   =  Math.pow(downSpoke,powerOfSpokeCore)*logSta
             
             else //if(  0.>=hyperCoreBoosted)
             {
-                            daisifier+=2.;
+            daisifier+=2./3./twelveGatesMeta;
 
                 s.multiplyScalar( Math.sqrt(2.)/1.5);
 
