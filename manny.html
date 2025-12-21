@@ -4054,7 +4054,7 @@ equilibriator=lfc/(lfc-zoom/dif)*dif;
     if(clvrVariant2)hyperCore+=1.*LogHalfReciprocal;
 
 }
-       if (dilate)hyperCore+=.25*LogHalfReciprocal;//for freed dilation
+       //if (dilate)hyperCore+=.25*LogHalfReciprocal;//for freed dilation
 
    if(multiplicatorNexus)hyperCore-=.5*LogHalfReciprocal;
    if(continuumClover!=0)hyperCore-=0.*LogHalfReciprocal;
@@ -4658,13 +4658,13 @@ hyperCoreBoosted-=spoke_factor;}
 //dstnce=length(s);
 if(spokeloverON)
 {
-      float dstnceSquared=dstnce*dstnce ;
-float powerOfSpokeCore =spoke_factorLarge*dstnceSquared;//*lfcCenterCored/dstnce;// uncertain value,takes large range, highly responsive on spokes PI*PI/gr*-leaf has nice outer main spokes
+      float dstnceSquaredRooted=dstnce*dstnce*sqrt(dstnce) ;
+float powerOfSpokeCore =spoke_factorLarge*dstnceSquaredRooted;//*lfcCenterCored/dstnce;// uncertain value,takes large range, highly responsive on spokes PI*PI/gr*-leaf has nice outer main spokes
 
 
 
 
-if(counter+sqrt(dstnce)//+dstnceSquaredAndRooted//sqrt(sqrt(dstnce)*dstnce)*dstnce
+if(counter+dstnceSquaredRooted//+dstnceSquaredAndRooted//sqrt(sqrt(dstnce)*dstnce)*dstnce
    <hyperCoreBoosted){
    //  if(continuumClover) s*=sqrt2;//engage shiny spokelover
      //else
@@ -4810,8 +4810,8 @@ dstnce = length(s);
                        hyperCoreBoosted-=sliceanddiceBoost;
                        hyperCoreOUTPUT-=sliceanddiceBoost;
                      */
-                        hyperCoreBoosted-=dstnce*dstnce;
-                         hyperCoreOUTPUT-=dstnce*dstnce;
+                        hyperCoreBoosted-=dstnce;
+                         hyperCoreOUTPUT-=dstnce;
                        }
                     
                 // if(superStable&&dstnce<1.5)

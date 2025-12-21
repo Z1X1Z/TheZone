@@ -710,15 +710,15 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
         }
         //dstnce=s.length();
         if(spokeloverON){
-            var  dstnceSquared=dstnce*dstnce ;
+            var  dstnceSquaredRooted=dstnce*dstnce*Math.sqrt(dstnce) ;
 
-            var powerOfSpokeCore = spoke_factorLarge*dstnceSquared;
+            var powerOfSpokeCore = spoke_factorLarge*dstnceSquaredRooted;
 
 var spokeloverCoreShiftDown=Math.pow(upSpoke,powerOfSpokeCore)*logStabilizationConstant;//spokedD;//Math.pow(downSpoke,powerOfSpokeCore); //was upSpoke           ;//logStabilizationConstant seems to cancel powerOfDynamicSokeCore=2;
 
 var       spokeloverCoreShiftUp   =  Math.pow(downSpoke,powerOfSpokeCore)*logStabilizationConstant;// spokedU;//   Math.pow(Math.abs(downSpoke),powerOfSpokeCore);//for spokelover
             
-            if(counter+Math.sqrt(dstnce)//+dstnceSquaredAndRooted
+            if(counter+dstnceSquaredRooted//+dstnceSquaredAndRooted
                 <hyperCoreBoosted){
                 //  if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
                 //else
@@ -817,8 +817,8 @@ dstnce = s.length();
     dstnce=s.length();
         if(dilate){
           
-            hyperCoreOUTPUT-=dstnce*dstnce;//dilate clover shift
-            hyperCoreBoosted-=dstnce*dstnce;//maybe times 1.5
+            hyperCoreOUTPUT-=dstnce;//dilate clover shift
+            hyperCoreBoosted-=dstnce;//maybe times 1.5
             
           //      var sliceanddiceBoost=           mod((Math.atan2(s.y,s.x)+chiralAdjustment)*(1./Math.PI/2.)*6.+.5,1.)*dstnce;
             
