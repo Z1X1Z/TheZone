@@ -2191,7 +2191,6 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                 else{aboveThreshold = false; on = false;if(!touchMode) uniforms.volume.value=0.00001}
 
                                     }else{aboveThreshold = false; on = false;if(!touchMode)uniforms.volume.value=0.00001}
-
                                     
 if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
 
@@ -2350,7 +2349,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
         //scene.add(line)
        let depthSpirograph =-1.;
 
-     if(spirographMODE!=0&&(uniforms.movieTime.value==-1||uniforms.movieTime.value>5.) )  for (let r= 0.; r < bufferPortion; r +=1) {//spirray size supports upto r <buffersize*2
+     if(spirographMODE!=0&&pitch!=lastPitch&&(uniforms.movieTime.value==-1||uniforms.movieTime.value>5.) )  for (let r= 0.; r < bufferPortion; r +=1) {//spirray size supports upto r <buffersize*2
             const  txlast=tx;
             const  tylast=ty;
             tx = spirray0[r];
