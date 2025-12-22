@@ -792,7 +792,7 @@ if(loops+counter<=hyperCoreBoosted+continuumCounter)
                                                                         ;
     if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation;
     
-    s.divideScalar( Math.pow(1./lpcc,superBoostedContinuation);
+    s.divideScalar( Math.pow(1./lpcc,superBoostedContinuation));
 
      hyperCoreBoosted+=continuumCore;
      hyperCoreOUTPUT+=continuumCore;
