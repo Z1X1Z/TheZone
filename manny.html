@@ -4815,8 +4815,8 @@ dstnce = length(s);
                        hyperCoreBoosted-=sliceanddiceBoost;
                        hyperCoreOUTPUT-=sliceanddiceBoost;
                      */
-                        hyperCoreBoosted-=dstnce*dstnce;
-                         hyperCoreOUTPUT-=dstnce*dstnce;
+                        hyperCoreBoosted-=sqrt(dstnce);
+                         hyperCoreOUTPUT-=sqrt(dstnce);
                        }
                     
                 // if(superStable&&dstnce<1.5)

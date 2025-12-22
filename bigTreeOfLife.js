@@ -818,8 +818,8 @@ dstnce = s.length();
     dstnce=s.length();
         if(dilate){
           
-            hyperCoreOUTPUT-=dstnce*dstnce;//dilate clover shift
-            hyperCoreBoosted-=dstnce*dstnce;//maybe times 1.5
+            hyperCoreOUTPUT-=Math.sqrt(dstnce);//dilate clover shift
+            hyperCoreBoosted-=Math.sqrt(dstnce);//maybe times 1.5
             
           //      var sliceanddiceBoost=           mod((Math.atan2(s.y,s.x)+chiralAdjustment)*(1./Math.PI/2.)*6.+.5,1.)*dstnce;
             
