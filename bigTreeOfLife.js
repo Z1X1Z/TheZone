@@ -548,7 +548,7 @@ else span = lfc+.5;
     
         if(dilate){//this is to allow top level core freeze for original clover
          var dst = s.length();
-         dst=sqrt(dst);
+         dst=Math.sqrt(dst);
              hyperCoreBoosted-=dst;
               hyperCoreOUTPUT-=dst;
         }
