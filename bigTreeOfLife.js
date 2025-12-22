@@ -449,13 +449,13 @@ coreBooster=multCrossTwist.length()/Math.log(.5)*lfc;
                                                                                   
                           
                           dstnce=s.length();
-                                                       
+                                     /*                  
                           if(dilate){
                             
                               hyperCoreOUTPUT-=dstnce*dstnce;//dilate clover shift
                               hyperCoreBoosted-=dstnce*dstnce;//maybe times 1.5
                           }
-                                                        
+                                  */                      
 
                           var    initialHyperCoreBoosted=hyperCoreBoosted;
                           //var lengthP = p.length(p);
@@ -548,6 +548,7 @@ else span = lfc+.5;
     
         if(dilate){//this is to allow top level core freeze for original clover
          var dst = s.length();
+         dst=sqrt(dst);
              hyperCoreBoosted-=dst;
               hyperCoreOUTPUT-=dst;
         }
