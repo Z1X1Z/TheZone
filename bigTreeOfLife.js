@@ -786,7 +786,8 @@ if(loops+counter<=hyperCoreBoosted+continuumCounter)
         deDistortion*=(1.-dstlpcc*9./16.)
     */
     let superBoostedContinuation = Math.pow(.5,continuumCore)*dstnce;//*dstnce;//*deDistortion//*Math.sqrt(dstlpcc*9./16.)//*Math.sqrt(
-                                                                                                  //lpcc*3./4.
+                                              //  daisifier+=1.;
+                                                              //lpcc*3./4.
                                                                         //)
                                                                         ;
     if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation;
@@ -817,8 +818,8 @@ dstnce = s.length();
     dstnce=s.length();
         if(dilate){
           
-            hyperCoreOUTPUT-=dstnce;//dilate clover shift
-            hyperCoreBoosted-=dstnce;//maybe times 1.5
+            hyperCoreOUTPUT-=dstnce*dstnce;//dilate clover shift
+            hyperCoreBoosted-=dstnce*dstnce;//maybe times 1.5
             
           //      var sliceanddiceBoost=           mod((Math.atan2(s.y,s.x)+chiralAdjustment)*(1./Math.PI/2.)*6.+.5,1.)*dstnce;
             
