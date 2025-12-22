@@ -4226,16 +4226,16 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
                              */
                              dstnce=length(s);
                                                            
-                         //    if(0==1&&dilate){
+                             if(dilate){
     /*  float dilation = dstnce*variant4Correction;
-                             hyperCoreOUTPUT-=dilation;//dilate clover shift
-                             hyperCoreBoosted-=dilation;//maybe times 1.5     */
+                             hyperCoreOUTPUT-=dilation*dilation;//dilate clover shift
+                             hyperCoreBoosted-=dilation*dilation;//maybe times 1.5     */
      //   float sliceanddiceBoost=mod((atan(p.y,p.x)+chiralAdjustment)*divideByMultiplyingPi2*6.+1.5,1.)*log(dstnce);
      //  sliceanddiceBoost=sign(sliceanddiceBoost)*pow(abs(sliceanddiceBoost),2.);
     //hyperCoreBoosted-=sliceanddiceBoost;
    //  hyperCoreOUTPUT-=sliceanddiceBoost;
      
-//}
+}
    
 
                             float initialHyperCoreBoosted = hyperCoreBoosted;

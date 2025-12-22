@@ -449,13 +449,13 @@ coreBooster=multCrossTwist.length()/Math.log(.5)*lfc;
                                                                                   
                           
                           dstnce=s.length();
-                                                       /*
+                                                       
                           if(dilate){
                             
-                              hyperCoreOUTPUT-=dstnce;//dilate clover shift
-                              hyperCoreBoosted-=dstnce;//maybe times 1.5
+                              hyperCoreOUTPUT-=dstnce*dstnce;//dilate clover shift
+                              hyperCoreBoosted-=dstnce*dstnce;//maybe times 1.5
                           }
-                                                        */
+                                                        
 
                           var    initialHyperCoreBoosted=hyperCoreBoosted;
                           //var lengthP = p.length(p);
