@@ -519,7 +519,7 @@ var lastS = s.clone();
 
         if(dilate){//this is to allow top level core freeze for original clover
          var dst = s.length();
-         dst=dst*Math.sqrt(dst);
+         dst=dst*dst*Math.sqrt(dst);
              hyperCoreBoosted-=dst;
               hyperCoreOUTPUT-=dst;
         }
@@ -817,7 +817,7 @@ dstnce = s.length();
         if(dstnce<4./
            3. &&exponentialPetals!=0.)
             s=  spinVector(s,Math.pow(2.,(Math.atan2(s.y,s.x)/Math.PI+1.)*2.));
-    //dstnce=s.length();
+    dstnce=s.length();
         if(dilate){
           
             hyperCoreOUTPUT-=Math.sqrt(dstnce);//dilate clover shift

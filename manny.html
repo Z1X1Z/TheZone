@@ -4355,7 +4355,7 @@ hyperCoreOUTPUT-=superUpcorer;
                hyperCoreOUTPUT-=sliceanddiceBoost;
                   */
                 float dst = length(s);
-                  dst=dst*sqrt(dst);//sqrt(dst);
+                  dst=dst*dst*sqrt(dst);//sqrt(dst);
                hyperCoreBoosted-=dst;
                 hyperCoreOUTPUT-=dst;
               // hyperCoreBoosted-=dstnce;
@@ -4812,7 +4812,7 @@ dstnce=length(s);
                       // hyperCoreOUTPUT-=dstnce;//dilate clover shift
                      //  hyperCoreBoosted-=dstnce;//maybe times 1.5
                    /*  float sliceanddiceBoost=mod((atan(s.y,s.x)+chiralAdjustment)*divideByMultiplyingPi2*6.+1.,1.)*dstnce*dstnce;
-
+t
                        hyperCoreBoosted-=sliceanddiceBoost;
                        hyperCoreOUTPUT-=sliceanddiceBoost;
                      */
