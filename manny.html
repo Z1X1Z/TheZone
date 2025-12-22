@@ -6829,10 +6829,10 @@ if(starOnDot==1||starOnDot==2){
          vec4 linearFrequency=vec4(0.);
                                                                  vec3 pong = vec3(0.);
                                                                  vec2 vUvCentered = (vUv.yx-.5);
-
+vec3 pongBall = vec3(0.);
                      if(pongOn){//may be useful to seperate pong from pixelStar
                           pong += paddles(vUvCentered.yx);
-                          pong += ball(p);
+                          pongBall += ball(p);
                           }
                                                                  
                                                                  
@@ -7072,6 +7072,7 @@ else if (starship.w==254./255.)layeredOUT=starship-oneEye.r/3.;
                                  else if(oneEye.r!=0.){layeredOUT=vec4(-oneEye.x*.25+starship.xyz/1.5+bodyWithArms.xyz*bodyWithArms.w,1.);
                                 if(insideOut.w==.5)layeredOUT+=vec4(insideOut.xyz/3.,0.);
                        }
+                       else if (pongBall.r!=0.)layeredOUT=vec4(pongBall,1.);
 else {
                   
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer+(-bodyWithArms.r-bodyWithArms.g-bodyWithArms.b)*20.
