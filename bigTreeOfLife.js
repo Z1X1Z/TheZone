@@ -708,7 +708,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
         //    }
             
         }
-        //dstnce=s.length();
+        dstnce=s.length();
         if(spokeloverON){
             var  dstnceSquaredRooted=dstnce*dstnce*Math.sqrt(dstnce) ;
 
@@ -785,14 +785,14 @@ if(loops+counter<=hyperCoreBoosted+continuumCounter)
     if(dstlpcc<16./9.)
         deDistortion*=(1.-dstlpcc*9./16.)
     */
-    let superBoostedContinuation = Math.pow(.5,continuumCore)*dstnce;//*dstnce;//*deDistortion//*Math.sqrt(dstlpcc*9./16.)//*Math.sqrt(
+    let superBoostedContinuation = Math.pow(.5,continuumCore)*Math.sqrt(dstnce);//*dstnce;//*deDistortion//*Math.sqrt(dstlpcc*9./16.)//*Math.sqrt(
                                               //  daisifier+=1.;
                                                               //lpcc*3./4.
                                                                         //)
                                                                         ;
     if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation;
     
-    s.divideScalar( Math.pow(1./lpcc,superBoostedContinuation));
+    s.divideScalar( Math.pow(1./lpcc,superBoostedContinuation);
 
      hyperCoreBoosted+=continuumCore;
      hyperCoreOUTPUT+=continuumCore;
@@ -815,7 +815,7 @@ dstnce = s.length();
         if(dstnce<4./
            3. &&exponentialPetals!=0.)
             s=  spinVector(s,Math.pow(2.,(Math.atan2(s.y,s.x)/Math.PI+1.)*2.));
-    dstnce=s.length();
+    //dstnce=s.length();
         if(dilate){
           
             hyperCoreOUTPUT-=Math.sqrt(dstnce);//dilate clover shift
