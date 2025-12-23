@@ -4354,7 +4354,7 @@ hyperCoreOUTPUT-=superUpcorer;
                hyperCoreOUTPUT-=sliceanddiceBoost;
                   */
                 float dst = length(s);
-                  dst=dst*sqrt(dst);//sqrt(dst);
+                  dst=sqrt(dst);//sqrt(dst);
                hyperCoreBoosted-=dst;
                 hyperCoreOUTPUT-=dst;
               // hyperCoreBoosted-=dstnce;
@@ -4632,7 +4632,8 @@ if(Spoker){
                          }
                          
         else  {
-                           daisifier=1.;
+               if(twelveGates)daisifier=0.;
+               else daisifier=1.;
 
             /*
                 if(wheel){
@@ -4816,7 +4817,7 @@ t
                        hyperCoreBoosted-=sliceanddiceBoost;
                        hyperCoreOUTPUT-=sliceanddiceBoost;
                      */
-                     float factor = dstnce*sqrt(dstnce);
+                     float factor = dstnce*dstnce*sqrt(dstnce);
                         hyperCoreBoosted-=factor;
                          hyperCoreOUTPUT-=factor;
                        }
@@ -4886,7 +4887,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
                                                                 }
 
    float cloverOrDaisyOnTop = daisifier;//may be +0
-   if(twelveGates)cloverOrDaisyOnTop=counter+1.;
+   if(twelveGates)cloverOrDaisyOnTop=daisifier+1.;
 
     if(twelveGatesMeta!=0.&&((twelveGatesMeta<1.&&mod(-.5+cloverOrDaisyOnTop,1./twelveGatesMeta)>=1.)||
                              (twelveGatesMeta>=1.&&mod(cloverOrDaisyOnTop,twelveGatesMeta)<1.)))

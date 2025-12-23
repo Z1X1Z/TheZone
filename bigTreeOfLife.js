@@ -519,7 +519,7 @@ var lastS = s.clone();
 
    if(counter!=0.&&dilate){//this is to allow top level core freeze for original clover
          var dst = s.length();
-         dst=dstnce*Math.sqrt(dst);
+         dst=dst*dst*Math.sqrt(dst);
              hyperCoreBoosted-=dst;
               hyperCoreOUTPUT-=dst;
         }
@@ -821,8 +821,8 @@ dstnce = s.length();
     dstnce=s.length();
         if(dilate){
           
-            hyperCoreOUTPUT-=dstnce*Math.sqrt(dstnce);//dilate clover shift
-            hyperCoreBoosted-=dstnce*Math.sqrt(dstnce);//maybe times 1.5
+            hyperCoreOUTPUT-=Math.sqrt(dstnce);//dilate clover shift
+            hyperCoreBoosted-=Math.sqrt(dstnce);//maybe times 1.5
             
           //      var sliceanddiceBoost=           mod((Math.atan2(s.y,s.x)+chiralAdjustment)*(1./Math.PI/2.)*6.+.5,1.)*dstnce;
             
