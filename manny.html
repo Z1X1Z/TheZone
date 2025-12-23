@@ -6476,7 +6476,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                                       if (vUv.x>.5)vUvSplit=vec2(abs(1.-vUv.x),vUv.y);
                                                                              if(vUvSplit.x<1./sidle) unrolledEyes=          faceBlackAndWhite(vec2(-sign(vUvSplit.y-.5)*
                                                                                                                                          (tan(abs(vUvSplit.y)*PI2+PI/2.))*vUvSplit.x,sign(vUvSplit.y-.5)*
-                                                                                                                                              vUvSplit.x*sidle*.5),-vec2(moveDynamic.x,-moveDynamic.y),false,3,false,-1.).xyz;
+                                                                                                                                              vUvSplit.x*sidle*.5),-vec2(moveDynamic.x,-moveDynamic.y),false,-2,false,-1.).xyz;
                                                                                                                                               }
                                                                  vec4 insideOut = vec4(0.);
                                                                  if(inseyedOut!=0){
