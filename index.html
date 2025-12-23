@@ -89,6 +89,9 @@
             ls = localStorage.getItem('config3')
                 if(document.getElementById('engage3').checked&&ls!=null)
                 touchHash+=ls;
+   ls = localStorage.getItem('config4')
+                if(document.getElementById('engage4').checked&&ls!=null)
+                touchHash+=ls;
 
  loadStarshipWithHash(nm,touchHash);
 }
@@ -173,6 +176,16 @@
         localStorage.setItem('engage3', this.checked.toString());
 ">
      <label for="engage3">engage3</label><p>
+
+
+          <input type="text" id = "configuration4" onkeyup="        localStorage.setItem('config4', this.value);
+"
+>Config4</input>
+<br>
+    <input type="checkbox" id="engage4"style="color:green" name="t"  onclick= "
+        localStorage.setItem('engage4', this.checked.toString());
+">
+     <label for="engage4">engage4</label><p>
      </h1>
     <script>
         let hkConfig = localStorage.getItem('config1');
@@ -181,6 +194,8 @@
         document.getElementById('configuration2').value=hkConfig;
         hkConfig = localStorage.getItem('config3');
         document.getElementById('configuration3').value=hkConfig;
+        hkConfig = localStorage.getItem('config4');
+        document.getElementById('configuration4').value=hkConfig;
        // hashExtension=hkConfig;
           if( localStorage.getItem('engage1')=="true")
              document.getElementById("engage1").checked = true
@@ -193,6 +208,10 @@
              if( localStorage.getItem('engage3')=="true")
              document.getElementById("engage3").checked = true
              else document.getElementById("engage3").checked = false
+
+             if( localStorage.getItem('engage4')=="true")
+             document.getElementById("engage4").checked = true
+             else document.getElementById("engage4").checked = false
                                 </script>
 <h2> May not work on all platforms indicated by a white or mostly black screen once loaded.  If so try a different browser like Firefox or Opera.  For starship that should work, try one that's
  <a class="onoffline2"  name="manny.html" onclick=
