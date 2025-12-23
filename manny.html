@@ -5100,7 +5100,7 @@ hyperCoreOUTPUT--;
             if (sevenSquared)
             {
                 vec2 es = vec2(0.);
-                if(volume> zoomOutRatchetThreshold) es=d.yx/volume;
+                if(volume> zoomOutRatchetThreshold) es=d.yx;
             if(dstnce<twoThirds)cloverEYES=roundEyes(deSplicedS*3.5,es).xyz;
            // if(cloverEYES.r==cloverEYES.g && cloverEYES.g==cloverEYES.b)cloverEYES=vec3(0.);
         }
@@ -6488,7 +6488,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
 
                        vec2 eyeSwivel = vec2(0.);
                        if (volume==1.)eyeSwivel=move/2.;
-                       else if (volume>zoomOutRatchetThreshold)eyeSwivel=d.yx/volume;
+                       else if (volume>zoomOutRatchetThreshold)eyeSwivel=d.yx;
                        else eyeSwivel=vec2(0.);
                      insideOut= roundEyes(bounce,eyeSwivel);
                      if(insideOut.w==.5){
