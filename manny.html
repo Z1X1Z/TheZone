@@ -4354,7 +4354,7 @@ hyperCoreOUTPUT-=superUpcorer;
                hyperCoreOUTPUT-=sliceanddiceBoost;
                   */
                 float dst = length(s);
-                  dst=sqrt(dst);//sqrt(dst);
+                  dst=dst*sqrt(dst);//sqrt(dst);
                hyperCoreBoosted-=dst;
                 hyperCoreOUTPUT-=dst;
               // hyperCoreBoosted-=dstnce;
@@ -4816,7 +4816,7 @@ t
                        hyperCoreBoosted-=sliceanddiceBoost;
                        hyperCoreOUTPUT-=sliceanddiceBoost;
                      */
-                     float factor = sqrt(dstnce);
+                     float factor = dstnce*sqrt(dstnce);
                         hyperCoreBoosted-=factor;
                          hyperCoreOUTPUT-=factor;
                        }
