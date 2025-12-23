@@ -517,6 +517,12 @@ var lastS = s.clone();
             hyperCoreOUTPUT-=superUpcorer;
             }
 
+   if(counter!=0.&&dilate){//this is to allow top level core freeze for original clover
+         var dst = s.length();
+         dst=dst*dst*Math.sqrt(dst);
+             hyperCoreBoosted-=dst;
+              hyperCoreOUTPUT-=dst;
+        }
      
 s=new THREE.Vector2(
 s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
@@ -549,12 +555,6 @@ else span = lfc+.5;
 
     
 }
-   if(dilate){//this is to allow top level core freeze for original clover
-         var dst = s.length();
-         dst=dst*dst*Math.sqrt(dst);
-             hyperCoreBoosted-=dst;
-              hyperCoreOUTPUT-=dst;
-        }
         //dstnce = s.length();
             if(chop&&dstnce>2./3.)s=spinVector(s,Math.floor(dstnce)*Math.PI/2.);
 
