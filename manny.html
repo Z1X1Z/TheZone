@@ -5090,17 +5090,18 @@ hyperCoreOUTPUT--;
                  if (march==1||march==3)color = -1.;
                  if(dstnce<twoThirds)
                  {
-                     vec2 move =-d.yx*volume/8.;
-                   if(march==0||march==3)oo+=color*(sealedMan(deSplicedS*5.,move)+faceFORWARDTWO(deSplicedS*5.+vec2(2.,0.),vec2(0.))*twoThirds);
-                   else oo+=color*(sealedWoman(deSplicedS*5.,move)+kissingEagles(deSplicedS*5.)*twoThirds);
+                     vec2 moveMen =-d.yx*volume/8.;
+                   if(march==0||march==3)oo+=color*(sealedMan(deSplicedS*5.,moveMen)+faceFORWARDTWO(deSplicedS*5.+vec2(2.,0.),vec2(0.))*twoThirds);
+                   else oo+=color*(sealedWoman(deSplicedS*5.,moveMen)+kissingEagles(deSplicedS*5.)*twoThirds);
                  }
                                           
             }
             vec3 cloverEYES = vec3(0.);
             if (sevenSquared)
             {
-
-            if(dstnce<twoThirds)cloverEYES=roundEyes(deSplicedS*3.5,d.yx/2.).xyz;
+                vec2 es = vec2(0.);
+                if(volume> zoomOutRatchetThreshold) es=d.yx/volume;
+            if(dstnce<twoThirds)cloverEYES=roundEyes(deSplicedS*3.5,es).xyz;
            // if(cloverEYES.r==cloverEYES.g && cloverEYES.g==cloverEYES.b)cloverEYES=vec3(0.);
         }
                   vec2 b = s;
@@ -6487,7 +6488,8 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
 
                        vec2 eyeSwivel = vec2(0.);
                        if (volume==1.)eyeSwivel=move/2.;
-                       else eyeSwivel=move/5.;
+                       else if (volume>zoomOutRatchetThreshold)eyeSwivel=d.yx/volume;
+                       else eyeSwivel=vec2(0.);
                      insideOut= roundEyes(bounce,eyeSwivel);
                      if(insideOut.w==.5){
                       //  if(oneEye.r!=0.) oneEye/=1.5;
