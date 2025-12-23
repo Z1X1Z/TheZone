@@ -4055,6 +4055,7 @@ equilibriator=lfc/(lfc-zoom/dif)*dif;
 
 }
       // if (dilate)hyperCore-=LogHalfReciprocal/3.;//for freed dilation
+   //  if(OrthoEvery!=0.) hyperCore+=1./OrthoEvery;//for freed dilation
 
    if(multiplicatorNexus)hyperCore-=.5*LogHalfReciprocal;
    if(continuumClover!=0)hyperCore-=0.*LogHalfReciprocal;
@@ -4280,11 +4281,12 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
                                          hyperCoreOUTPUT-=4.*LogHalfReciprocal;
                      }
                      //log(3.);//4./3./log(3.);
-                                                     if(OrthoEvery==1.&&1==3)
+                                                  /*   if(OrthoEvery==1.&&1==3)
                                                      {
                                                      hyperCoreBoosted*=OrthBoost;//1.75/log(3.);
-                                                     hyperCoreOUTPUT*=OrthBoost;}
+                                                     hyperCoreOUTPUT*=OrthBoost;}*/
                                                       }
+                                                      
                                                       bool compensate=false;
                                                     //  float  logStabilizationConstantA=logStabilizationConstant;//+(1.-logStabilizationConstant)/2.;
                                                      // float  logStabilizationConstantC=log(3.);//+(1.-logStabilizationConstant)/2.;
@@ -4347,7 +4349,7 @@ hyperCoreOUTPUT-=superUpcorer;
 
 }
 
- if(counter!=0.&&dilate&&morph==0.){
+ if(counter!=0.&&dilate&&morph==0.&&OrthoEvery==0.){
                  /* float sliceanddiceBoost=mod((atan(s.y,s.x)+chiralAdjustment)*divideByMultiplyingPi2*6.+1.,1.)*dstnce*dstnce;
                   sliceanddiceBoost=sign(sliceanddiceBoost)*pow(abs(sliceanddiceBoost),.5);
               hyperCoreBoosted-=sliceanddiceBoost;
@@ -4531,11 +4533,11 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
        compensate=false;
    }
                                                         
-                          if(OrthoEvery!=0.)
-                          {hyperCoreBoosted*=OrthBoost;
-                          hyperCoreOUTPUT*=OrthBoost;
+                         // if(OrthoEvery!=0.)
+                         // {hyperCoreBoosted*=OrthBoost;
+                         // hyperCoreOUTPUT*=OrthBoost;
 
-                          }
+                        //  }
                                                                                             //else   hyperCoreBoosted+=OrthBoost;
                                                                                                                                               //else
 
@@ -4808,7 +4810,7 @@ dstnce=length(s);
                              //if(dstnce<4./3.)s=spin2(s,pow(2.,atan(s.y,s.x)));
                               dstnce =length(s);
 
-                       if(dilate&&morph==0.){
+                       if(dilate&&morph==0.&&OrthoEvery==0.){
                            
                       // hyperCoreOUTPUT-=dstnce;//dilate clover shift
                      //  hyperCoreBoosted-=dstnce;//maybe times 1.5
