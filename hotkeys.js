@@ -276,6 +276,7 @@ function resetAll(){
     window.extremeFrets=true;
     window.orderedStack=true;
     window.clvrVariant4Type=1.;
+    window.ChristoDecrypto=1.;
     window.leafMode=0;
     window.grMode=0;
     window.xTouch=0;
