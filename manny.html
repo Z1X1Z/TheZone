@@ -4347,7 +4347,7 @@ hyperCoreOUTPUT-=superUpcorer;
 
 }
 
- if(counter!=0.&&dilate){
+ if(counter!=0.&&dilate&&morph==0.){
                  /* float sliceanddiceBoost=mod((atan(s.y,s.x)+chiralAdjustment)*divideByMultiplyingPi2*6.+1.,1.)*dstnce*dstnce;
                   sliceanddiceBoost=sign(sliceanddiceBoost)*pow(abs(sliceanddiceBoost),.5);
               hyperCoreBoosted-=sliceanddiceBoost;
@@ -4808,7 +4808,7 @@ dstnce=length(s);
                              //if(dstnce<4./3.)s=spin2(s,pow(2.,atan(s.y,s.x)));
                               dstnce =length(s);
 
-                       if(dilate){
+                       if(dilate&&morph==0.){
                            
                       // hyperCoreOUTPUT-=dstnce;//dilate clover shift
                      //  hyperCoreBoosted-=dstnce;//maybe times 1.5

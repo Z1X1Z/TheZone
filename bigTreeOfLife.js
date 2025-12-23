@@ -517,9 +517,9 @@ var lastS = s.clone();
             hyperCoreOUTPUT-=superUpcorer;
             }
 
-   if(counter!=0.&&dilate){//this is to allow top level core freeze for original clover
+   if(counter!=0.&&dilate&&morph==0.){//this is to allow top level core freeze for original clover
          var dst = s.length();
-         dst=dst*dst*Math.sqrt(dst);
+         dst=Math.sqrt(dst);
              hyperCoreBoosted-=dst;
               hyperCoreOUTPUT-=dst;
         }
@@ -819,10 +819,10 @@ dstnce = s.length();
            3. &&exponentialPetals!=0.)
             s=  spinVector(s,Math.pow(2.,(Math.atan2(s.y,s.x)/Math.PI+1.)*2.));
     dstnce=s.length();
-        if(dilate){
+        if(dilate&&morph==0.){
           
-            hyperCoreOUTPUT-=Math.sqrt(dstnce);//dilate clover shift
-            hyperCoreBoosted-=Math.sqrt(dstnce);//maybe times 1.5
+            hyperCoreOUTPUT-=dstnce*dstnce*Math.sqrt(dstnce);//dilate clover shift
+            hyperCoreBoosted-=dstnce*dstnce*Math.sqrt(dstnce);//maybe times 1.5
             
           //      var sliceanddiceBoost=           mod((Math.atan2(s.y,s.x)+chiralAdjustment)*(1./Math.PI/2.)*6.+.5,1.)*dstnce;
             
