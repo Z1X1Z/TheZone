@@ -4098,7 +4098,7 @@ else{
    hyperCore-=log(abs(squinch));
    else
   hyperCore+=(8.*log2/squeezeN);
-  hyperCore+=(squeezeN-1.)*log2/2.;
+  if(seventhEYE==3.)hyperCore+=(squeezeN)*log2/2.;
   //hyperCore-=.25;
   if(!polyNomialStretch)hyperCore+=log2*1.5;
 }

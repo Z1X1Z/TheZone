@@ -345,7 +345,7 @@ else{
  if(squinch>.0) 
    hyperCore-=Math.log(Math.abs(squinch));
    else
-  hyperCore+=8.*Math.log(2.)/squeezeN;
+  if(seventhEYE==3.)hyperCore+=(squeezeN)*Math.log(2)/2.;
 
   hyperCore+=(squeezeN-1.)*Math.log(2)/2.;
   //hyperCore-=.25;
