@@ -381,7 +381,7 @@ var m= new THREE.Vector2(0.,0.);
     var truncator=1.;
     var truncated = true;
     if(lfc!=0.&&zoom!=0.&&truncated)
-        truncator = Math.log((lfc*lfc)/(zoom*zoom))/Math.log(2.);//*100
+        truncator = Math.log((lfc*lfc)/(zoom*zoom))*2.;//*100
 
         //truncator = Math.log(zoom/lfc)**2.;
 //Maendel clover

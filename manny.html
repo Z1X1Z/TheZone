@@ -4131,8 +4131,8 @@ hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if d
 vec2 m=vec2(0.);
 
 float truncator=1.;
-bool truncated = true;
-if(zoom!=0.&&lfc!=0.&&truncated) truncator =log((lfc*lfc)/(zoom*zoom))/log2;//*100
+bool truncated = false;
+if(zoom!=0.&&lfc!=0.&&truncated) truncator =log((lfc*lfc)/(zoom*zoom))*2.;//*100
 //pow(abs(log(zoom/lfc),2.);//log truncation * factor is not known, may no longer be necesary
 //Maendel clover
 
