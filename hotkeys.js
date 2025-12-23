@@ -110,7 +110,7 @@ dilate:{value:true},
         Inherited:{value: true    },
         cloverSlide:{value: false    },
         Pointers:{value:true},
-        time: {value:.0 },
+        time: {value:1. },
         rate: {value: 1.},
 
         zoom: {value:  zoomINITiaLizer},
@@ -276,7 +276,6 @@ function resetAll(){
     window.extremeFrets=true;
     window.orderedStack=true;
     window.clvrVariant4Type=1.;
-    window.ChristoDecrypto=1.;
     window.leafMode=0;
     window.grMode=0;
     window.xTouch=0;

@@ -516,7 +516,7 @@ let pushBackCounter = 0;
                  d_y*=volume;
                  var spunD = [d_x,d_y];
                                
-                            if(uniforms.carousel.value!=0.)         spunD=spin(spunD,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
+                            if(uniforms.carousel.value!=0.&&uniforms[ "time" ].value>0)         spunD=spin(spunD,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                   const d_xS=spunD[0]*interpolation;
                   const d_yS=spunD[1]*interpolation;
 
@@ -1769,7 +1769,7 @@ function runOSMD (){
                                         uniforms.d.value.y+=-dyVolumized;
                                     
                                     var spunTouch=touchMovement;
-                                          if(uniforms.carousel.value!=0.)
+                                          if(uniforms.carousel.value!=0.&&uniforms[ "time" ].value>0)
                                               spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                                               coordX+= spunTouch[0];
                                               coordY+= spunTouch[1];
@@ -1828,6 +1828,12 @@ function runOSMD (){
                                           let lowAmpFreq = 1;
 
                                           function animate( timestamp ) {
+                                                                 
+                                    
+     window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
+    uniforms[ "time" ].value = timestamp/1000.+window.startTimeSecondMantissaMagnified;
+
+    
                                    // console.log('colorCombo '+uniforms.colorCombo.value+' colorCombo2 '+uniforms.colorCombo2.value)
                                     if(window.streaming)
                                     {
@@ -2079,10 +2085,7 @@ cloverPerimeter=((((cpX*cpX*cpX - 3.*cpX*cpY*cpY)**2.
                                     
                                     
                                     
-                                    
-                                    
-     window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
-
+               
      if(window.playMovie&&uniforms.movieTime.value!=-2)
      {
 uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.movieSpeed;
@@ -2090,7 +2093,6 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
     // console.log(uniforms.movieTime.value)
     // console.log(     window.playMovie)
      if(!sheetTranslucent&& bottomOfScreenHeight != document.getElementById("osmdCanvas").offsetHeight+document.getElementById("textWindow").offsetHeight)onWindowResize();//readjust for verbose
-    uniforms[ "time" ].value = timestamp/1000.+window.startTimeSecondMantissaMagnified;
 
     if(uniforms.starSpin.value!=0&&isFinite(uniforms[ "time" ].value)&&isFinite(lastTIMEUNIFORM))
     {let timeTwistIncrement=(( uniforms[ "time" ].value -lastTIMEUNIFORM)*uniforms[ "rate" ].value*-uniforms.starSpin.value*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel.
