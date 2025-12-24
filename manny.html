@@ -2305,7 +2305,7 @@ float brightness=0.;
 //not sure why it has negative range
         //if (twistStar<24.)
          {
-              float b =1./sampleRate*pow(2.,angle+n-1./12.)*concertKeyTuning;//440hz down one note is 415.305
+              float b =1./sampleRate*pow(2.,angle+n)*concertKeyTuning;//440hz down one note is 415.305
               if(b<1.){
               float frampBuffer = texture2D(micIn, vec2(b,0.)).r;
                //if(rnd(angle*12.)==1.)
@@ -2321,7 +2321,8 @@ float brightness=0.;
          brightness/=8.;
          brightness=.9;
                              //  if(mod(angle+10.,1.)<1./12.)  
-                                frAmp = texture2D(radialFrequenciesSummed, vec2(mod(angle+10.-1./12.,1.),0.)).r;
+                         //     if(rnd(mod(angle+10.,1.)*12.)==1.) 
+                          frAmp = texture2D(radialFrequenciesSummed, vec2(mod(angle+10.,1.),0.)).r;
 
          //  frAmp/=255.;
          frAmp/=2.;
@@ -2546,7 +2547,7 @@ if(uv.x<1./3.&&maxSamp!=0.) //could 1./3. but then the spill over (if any) isn't
                                                   //not sure why it has negative range
                                                           //if (twistStar<24.)
                                                            {
-                                                                float b =1./sampleRate*pow(2.,noteOfSide+n-1./12.)*concertKeyTuning;//this seems to be missing a 440, also missing in other pixelStar calculations
+                                                                float b =1./sampleRate*pow(2.,noteOfSide+n)*concertKeyTuning;//this seems to be missing a 440, also missing in other pixelStar calculations
                                                                 float frampBuffer = texture2D(micIn, vec2(b,0.)).r;
                                                     // if(mod(rnd((noteOfSide)*12.),12.)==1.)
                                                      
@@ -2556,7 +2557,8 @@ if(uv.x<1./3.&&maxSamp!=0.) //could 1./3. but then the spill over (if any) isn't
                                                                  // brightness +=(n+3.+1.)*frampBuffer;
                                                                  
                                                           }*/
-                                                                               frAmp = texture2D(radialFrequenciesSummed, vec2(mod(noteOfSide+10.-1./12.,1.),0.)).r;
+                                                                      //    if(rnd(mod(noteOfSide,1.)*12.)==1.)   
+                                                                            frAmp = texture2D(radialFrequenciesSummed, vec2(mod(noteOfSide+10.,1.),0.)).r;
 
                                                 //        frAmp-=minSamp;
                                               //  frAmp/=notesIncludedInPixel;
@@ -6549,13 +6551,13 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                  vec2 uvSwizzled=uVuCenterASKEWSpunToKey.yx;
 
 
-                                 
-                                 
-if(heartStar==0){
-            float angleASKEW = ((-atan(uvSwizzled.y,uvSwizzled.x)*flipStar-twistStar
-                                 +PIdiv2*flipStar)*divideByMultiplyingPi2);
+                                    float angleASKEW = ((-atan(uvSwizzled.y,uvSwizzled.x)*flipStar-twistStar
+                                 +PIdiv2*flipStar)*divideByMultiplyingPi2)+.5;
             //angle=mod(angle,1.);
 
+                                 
+if(heartStar==0){
+         
             //return vec4(angle);
             //   const float octBoost = 17.;
             //  float b =nyq*pow(2.,angle+octBoost);
@@ -6565,11 +6567,11 @@ if(heartStar==0){
             //not sure why it has negative range
             //if (twistStar<24.)
             {
-            float b =1./sampleRate*pow(2.,angleASKEW+n-1./12.)*concertKeyTuning;
+            float b =1./sampleRate*pow(2.,angleASKEW+n)*concertKeyTuning;
             frAMP += texture2D(micIn, vec2(b,0.)).r;
            }*/
           //  float     
-                     frAMP = texture2D(radialFrequenciesSummed, vec2(mod(angleASKEW+10.-1./12.,1.),0.)).r;
+                     frAMP = texture2D(radialFrequenciesSummed, vec2(mod(angleASKEW+10.,1.),0.)).r;
 
          //  if (abs(frAMP-frAMP2)<20./255.)mny+=1.;
             
@@ -6601,7 +6603,8 @@ if(volume!=1.)
 if(heartStar==0&&frAMP>0.&&volume!=1.&&maxSamp< volume*volume //&&minSamp*3.<maxSamp
 )
 {
-    heartSize/=frAMP/sqrt(volume)*note/(1.+gr);//*8.;
+  // if (rnd(mod(angleASKEW+10.,1.)*12.)==1.)
+ heartSize/=frAMP/sqrt(volume)*note/(1.+gr);//*8.;
     direction/=3.;}
 
 else if(heartStar==1&&volume!=0.){
@@ -6685,13 +6688,13 @@ vec2 uvSwizzled2=uVuCenterASKEWSpunToKey2.yx;
 
 
             float angleASKEW2 = ((-atan(uvSwizzled2.y,uvSwizzled2.x)*flipStar-twistStar
-                                 +PIdiv2*flipStar)*divideByMultiplyingPi2);
-float frAMP2 = texture2D(radialFrequenciesSummed, vec2(mod(angleASKEW2+10.-1./12.,1.),0.)).r;
-
+                                 +PIdiv2*flipStar)*divideByMultiplyingPi2)+.5;
+float frAMP2 = texture2D(radialFrequenciesSummed, vec2(mod(angleASKEW2+10.,1.),0.)).r;
+//if (rnd(mod(angleASKEW2+10.,1.)*12.)==1.)
 //if(frAMP2>0.&&volume!=1.&&maxSamp< volume*volume //&&minSamp*3.<maxSamp
 //)
 {
-    float shekinaSize=frAMP2*frAMP2/(sqrt(volume))*note/24.*length(uVuASKEW2);//*8.;
+    float shekinaSize=frAMP2*frAMP2/volume*note/24.*length(uVuASKEW2);//*8.;
     if (shekinaSize>.5&&shekinaSize<.6)Shekina=vec3(1.25-15.*(shekinaSize-.5));
     }
      
