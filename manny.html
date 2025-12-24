@@ -6600,7 +6600,7 @@ if(volume!=1.)
 {//frAMP-=volume*(zoomOutRatchetThreshold)*16.;
 //frAMP*=(.5+frAMP)/(1.+zoomOutRatchetThreshold);
 }
-if(heartStar==0&&frAMP>0.&&volume!=1.&&maxSamp< volume*volume //&&minSamp*3.<maxSamp
+if(heartStar==0&&frAMP>0.&&volume!=1.&&maxSamp*8.< volume*volume //&&minSamp*3.<maxSamp
 )
 {
   // if (rnd(mod(angleASKEW+10.,1.)*12.)==1.)
@@ -6691,8 +6691,8 @@ vec2 uvSwizzled2=uVuCenterASKEWSpunToKey2.yx;
                                  +PIdiv2*flipStar)*divideByMultiplyingPi2)+.5;
 float frAMP2 = texture2D(radialFrequenciesSummed, vec2(mod(angleASKEW2+10.-1./12.,1.),0.)).r;
 //if (rnd(mod(angleASKEW2+10.,1.)*12.)==1.)
-//if(frAMP2>0.&&volume!=1.&&maxSamp< volume*volume //&&minSamp*3.<maxSamp
-//)
+if(frAMP2>0.&&volume!=1.&&maxSamp*8.< volume*volume //&&minSamp*3.<maxSamp
+)
 {
     float shekinaSize=1./(frAMP2*frAMP2/volume*note)*1024.*length(uVuASKEW2);//*8.;
     if (shekinaSize>.5&&shekinaSize<.6)Shekina=vec3(1.25-15.*(shekinaSize-.5));
