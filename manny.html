@@ -6691,7 +6691,7 @@ float frAMP2 = texture2D(radialFrequenciesSummed, vec2(mod(angleASKEW2+10.-1./12
 //if(frAMP2>0.&&volume!=1.&&maxSamp< volume*volume //&&minSamp*3.<maxSamp
 //)
 {
-    float shekinaSize=frAMP2*sqrt(frAMP2)/(sqrt(volume))*note/24.*length(uVuASKEW2);//*8.;
+    float shekinaSize=frAMP2*(frAMP2)/(volume*(volume))*note/2.*length(uVuASKEW2);//*8.;
     if (shekinaSize>.5&&shekinaSize<.6)Shekina=vec3(1.25-15.*(shekinaSize-.5));
     }
      
