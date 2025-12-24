@@ -6589,17 +6589,20 @@ if (Character==4||Character==3) {heartSize=1.5;
                                                             
                                                             float direction = 1.;
                                                             if (Character==0&&holyeyes==1)
-                                                            {heartSize*=1.75;
+                                                            {//heartSize*=1.75;
                                                                 direction=-1.;
                                                                 }
-                                                            else heartSize*=6./5.;
+                                                          //  else heartSize*=6./5.;
 
 if(volume!=1.)
 {//frAMP-=volume*(zoomOutRatchetThreshold)*16.;
 //frAMP*=(.5+frAMP)/(1.+zoomOutRatchetThreshold);
 }
-if(heartStar==0&&frAMP>0.&&volume!=1.&&maxSamp/4.< volume*volume //&&minSamp*3.<maxSamp
-)heartSize/=frAMP/sqrt(volume)*note/2.;//*8.;
+if(heartStar==0&&frAMP>0.&&volume!=1.&&maxSamp< volume*volume //&&minSamp*3.<maxSamp
+)
+{
+    heartSize/=frAMP/sqrt(volume)*note/(1.+gr);//*8.;
+    direction/=3.;}
 
 else if(heartStar==1&&volume!=0.){
     heartSize/=(1.+volume);//multiplied by two if heart argument is not vec2(0.)
@@ -6610,7 +6613,7 @@ else if(heartStar==2) frAMP=1.;
                                                             vec2 heartPitch = vec2(0.);
                                                             if(volume!=0.&&volume!=1.)
                                                             {
-                                                              float  noteAngle=(note/12.*PI2*flipStar+twistStar+PIdiv2);
+                                                              float  noteAngle=(note/12.*PI2*flipStar*brelued+twistStar+PIdiv2);
                                                                 heartPitch=-direction*spin2(vec2(-zin(-noteAngle),-coz(noteAngle)),-twistStar)/4.;
                                                                 // heartPitch=-direction*spin2(-d.yx,-twistStar)/4.;
                                                                                             }
@@ -6649,7 +6652,58 @@ vec2 heartField = characterPSpunToKey*heartSize
                            }
 
                                                                  
-                                                                 
+                                           
+                           
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+vec3 Shekina = vec3(0.);
+
+
+vec2 vUvCenteredASKEW2 = (vUv.yx-.5);
+vec2 uVuASKEW2=-(vUvCenteredASKEW2)/aspectRatio;
+vec2 uVuCenterASKEWSpunToKey2=spin2(uVuASKEW2*vec2(1.,flipStar)///.8
+,
+twistStar)*8.;
+
+vec2 uvSwizzled2=uVuCenterASKEWSpunToKey2.yx;
+
+
+            float angleASKEW2 = ((-atan(uvSwizzled2.y,uvSwizzled2.x)*flipStar-twistStar
+                                 +PIdiv2*flipStar)*divideByMultiplyingPi2);
+float frAMP2 = texture2D(radialFrequenciesSummed, vec2(mod(angleASKEW2+10.-1./12.,1.),0.)).r;
+
+//if(frAMP2>0.&&volume!=1.//&&maxSamp< volume*volume //&&minSamp*3.<maxSamp
+//)
+{
+    float shekinaSize=frAMP2*frAMP2/sqrt(volume)*note/60.*length(uVuASKEW2);//*8.;
+    if (shekinaSize>.5&&shekinaSize<.6)Shekina=vec3(1.25-15.*(shekinaSize-.5));
+    }
+     
+
+
+
+
+
+
+
+
+
                 
                       
      
@@ -7023,7 +7077,9 @@ if(oneEye.r!=0.)zoomer=-oneEye;
                         else if(isGreyISH==0.) layeredOUT=vec4(.25);
                         }
                         else layeredOUT=vec4(pixelShipGrey+.25);
-                    }                      else if (hypnoticHarmonicCircles.x==hypnoticHarmonicCircles.y&&hypnoticHarmonicCircles.x==hypnoticHarmonicCircles.z&&hypnoticHarmonicCircles.x!=0.)layeredOUT=vec4(vec3(hypnoticHarmonicCircles.x),1.);
+                    }                     
+                    else if (Shekina.r!=0.)layeredOUT=vec4(Shekina.r);
+                     else if (hypnoticHarmonicCircles.x==hypnoticHarmonicCircles.y&&hypnoticHarmonicCircles.x==hypnoticHarmonicCircles.z&&hypnoticHarmonicCircles.x!=0.)layeredOUT=vec4(vec3(hypnoticHarmonicCircles.x),1.);
                   
                                               else if(oneEye.r==-1.)
                                               {
