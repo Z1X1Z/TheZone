@@ -6541,7 +6541,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                  twistStar*brelued));
 
                                                                  vec2 vUvCenteredASKEW = (vUv.yx-.5-d.yx*heartRate*aspectRatio);
-                                                                 vec2 uVuASKEW=-(vUvCenteredASKEW)/aspectRatio;
+                                                                 vec2 uVuASKEW=-(vUvCenteredASKEW)/(resolution,min(resolution.x,resolution.y));
                                                                 // vec2 uVuMinCenterASKEW=-vUvCenteredASKEW/(min(resolution.x,resolution.y)/resolution.yx);
 
                                                                  vec2 uVuCenterASKEWSpunToKey=spin2(uVuASKEW*vec2(1.,flipStar*brelued)///.8
@@ -6604,7 +6604,7 @@ if(heartStar==0&&frAMP>0.&&volume!=1.&&maxSamp*8.< volume*volume //&&minSamp*3.<
 )
 {
   // if (rnd(mod(angleASKEW+10.,1.)*12.)==1.)
- heartSize/=frAMP/sqrt(volume)*note/(1.+gr);//*8.;
+ heartSize/=frAMP/sqrt(volume)*note/(2.75);//*8.;
     direction/=3.;}
 
 else if(heartStar==1&&volume!=0.){
