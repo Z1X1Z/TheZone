@@ -3915,7 +3915,7 @@ const float crs = 64.;//this is the mandelclover and original inheritance colorm
  else break;
  float lfcCenterCored=lfc*scale;
 
-        if(seventhEYE==3.&&(lengthP<twoThirds)&&zoom<.5
+       /* if(seventhEYE==3.&&(lengthP<twoThirds)&&zoom<.5
  //&&lfc>zoom
  )
 {
@@ -3926,7 +3926,7 @@ const float crs = 64.;//this is the mandelclover and original inheritance colorm
    // try signs and swizzle!
 }
 
-
+*/
  bool inCenterCore =c<twoThirds;
  if(cloverso)
  {
@@ -6541,7 +6541,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                  twistStar*brelued));
 
                                                                  vec2 vUvCenteredASKEW = (vUv.yx-.5-d.yx*heartRate*aspectRatio);
-                                                                 vec2 uVuASKEW=-(vUvCenteredASKEW)/(resolution,min(resolution.x,resolution.y));
+                                                                 vec2 uVuASKEW=-(vUvCenteredASKEW)/(aspectRatio);
                                                                 // vec2 uVuMinCenterASKEW=-vUvCenteredASKEW/(min(resolution.x,resolution.y)/resolution.yx);
 
                                                                  vec2 uVuCenterASKEWSpunToKey=spin2(uVuASKEW*vec2(1.,flipStar*brelued)///.8
@@ -6679,7 +6679,7 @@ vec3 Shekina = vec3(0.);
 
 //recalculation
 vec2 vUvCenteredASKEW2 = (vUv.yx-.5);
-vec2 uVuASKEW2=-(vUvCenteredASKEW2)/(resolution/min(resolution.x,resolution.y));
+vec2 uVuASKEW2=-(vUvCenteredASKEW2)/(aspectRatio);
 vec2 uVuCenterASKEWSpunToKey2=spin2(uVuASKEW2*vec2(1.,flipStar)///.8
 ,
 twistStar);
