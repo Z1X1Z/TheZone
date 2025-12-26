@@ -3915,7 +3915,7 @@ const float crs = 64.;//this is the mandelclover and original inheritance colorm
  else break;
  float lfcCenterCored=lfc*scale;
 
-       /* if(seventhEYE==3.&&(lengthP<twoThirds)&&zoom<.5
+       if(seventhEYE==3.&&(lengthP<twoThirds)&&zoom<.5
  //&&lfc>zoom
  )
 {
@@ -3926,7 +3926,7 @@ const float crs = 64.;//this is the mandelclover and original inheritance colorm
    // try signs and swizzle!
 }
 
-*/
+
  bool inCenterCore =c<twoThirds;
  if(cloverso)
  {
@@ -6604,7 +6604,7 @@ if(heartStar==0&&frAMP>0.&&volume!=1.&&maxSamp< volume*volume //&&minSamp*3.<max
 )
 {
   // if (rnd(mod(angleASKEW+10.,1.)*12.)==1.)
- heartSize/=frAMP/(zoomOutRatchetThreshold+sqrt(volume))*note/(2.75);//*8.;
+ heartSize/=frAMP/(sqrt(volume)+zoomOutRatchetThreshold)*note/(3.);//*8.;
     direction/=3.;}
 
 else if(heartStar==1&&volume!=0.){
@@ -6691,8 +6691,7 @@ vec2 uvSwizzled2=uVuCenterASKEWSpunToKey2.yx;
                                  +PIdiv2*flipStar)*divideByMultiplyingPi2)+.5;
 float frAMP2 = texture2D(radialFrequenciesSummed, vec2(mod(angleASKEW2+10.-1./12.,1.),0.)).r;
 //if (rnd(mod(angleASKEW2+10.,1.)*12.)==1.)
-if(frAMP2>0.&&volume!=1.&&maxSamp< volume*volume //&&minSamp*3.<maxSamp
-)
+if(frAMP2>0.&&volume!=1.)//&&maxSamp< volume*volume //&&minSamp*3.<maxSamp)
 {
     float shekinaSize=1./(frAMP2*frAMP2/(volume)*note)*1024.*length(uVuASKEW2);//*8.;
     if (shekinaSize>.5&&shekinaSize<.6)Shekina=vec3(1.25-15.*(shekinaSize-.5));
