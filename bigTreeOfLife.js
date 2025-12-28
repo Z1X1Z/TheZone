@@ -858,7 +858,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
                                                                  //    morph==0.&&
                                                                     (angleS+Math.PI*2+Math.PI*2/12.)%(Math.PI*2/3.)>Math.PI*2/6.) //p*=0.;
                                                                 {
-                                                                    s=spin(s,Math.PI);//balances inherited colors
+                                                                    s=spin(Math.abs(s),Math.PI);//balances inherited colors
                                                                 }
     var cloverOrDaisyOnTop = daisifier;//may be +0
     if(twelveGates)cloverOrDaisyOnTop=counter+1.;
