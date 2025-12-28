@@ -4842,8 +4842,6 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
     )
     && 0.<=hyperCoreBoosted&&externalCores!=0.)
 {
-  //  s=abs(s);
-
       if(polyNomialStretch&&budge!=1./3.&&OrthoEvery==0.)   {
       //  if (counter==0.)      s=freed(s*8.)/8.;//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
 //else 
@@ -4890,8 +4888,10 @@ if(//counter>1.&&//removes asymmetry
 //morph==0.&&
 mod(angleS+PI2+PI2/12.,PI2/3.)>PI2/6.) //p*=0.;
 {
+s=abs(s);
+s=spin2(s,PI);//balances inherited colors
+   //s=abs(s);
 
-s=spin2(abs(s),PI);//balances inherited colors
 unSwitch= !unSwitch;
 }
 
