@@ -654,7 +654,7 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
                daisifier=1;
 
                 if(//(!wheel &&
-                   Math.sqrt(dstnce)*dstnce<=hyperCoreBoosted//)||(wheel&&1.<=hyperCoreBoosted)
+                   Math.sqrt(dstnce)*dstnce*dstnce<=hyperCoreBoosted//)||(wheel&&1.<=hyperCoreBoosted)
                     )
                 {
                    /* if(wheel){
