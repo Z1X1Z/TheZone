@@ -4060,7 +4060,7 @@ equilibriator=lfc/(lfc-zoom/dif)*dif;
    //  if(OrthoEvery!=0.) hyperCore+=1./OrthoEvery;//for freed dilation
 
    if(multiplicatorNexus)hyperCore-=.5*LogHalfReciprocal;
-   if(continuumClover!=0)hyperCore-=0.*LogHalfReciprocal;
+   if(continuumClover!=0)hyperCore+=.25*LogHalfReciprocal;
   /*if(polyNomialStretch&&OrthoEvery==0.)
    {
    if(!(seventhEYE>0.)||lengthP>2./3.    )   hyperCore-=.5*LogHalfReciprocal;
