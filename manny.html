@@ -4882,18 +4882,21 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
         // s=spin2(s,PI*sign(angleS));
 
 
-
 if(//counter>1.&&//removes asymmetry
 //distributor&&//not quite the same as distributor, but I don't want to add another button
 //morph==0.&&
 mod(angleS+PI2+PI2/12.,PI2/3.)>PI2/6.) //p*=0.;
 {
-s=abs(s);
+ //   s=abs(s);
+//s=-(s);
+
 s=spin2(s,PI);//balances inherited colors
+
    //s=abs(s);
 
 unSwitch= !unSwitch;
-}
+} else s=-(s);
+
 
    float cloverOrDaisyOnTop = daisifier;//may be +0
    if(twelveGates)cloverOrDaisyOnTop=daisifier+1.;
