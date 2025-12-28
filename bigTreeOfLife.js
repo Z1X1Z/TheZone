@@ -778,6 +778,9 @@ dstnce=s.length();
 if(continuumClover!=0&&lfc!=0){//engage continualization
   
 var continuumCore=(continuumCounter+hyperCoreOUTPUT)*correction;
+
+    var cc2=continuumCore*continuumCore;
+
 if(loops+counter<=hyperCoreBoosted+continuumCounter)
 {
   //  if(dstnce<2./3.) s.addScalar( coords.yx*correction);
@@ -788,17 +791,17 @@ if(loops+counter<=hyperCoreBoosted+continuumCounter)
     if(dstlpcc<16./9.)
         deDistortion*=(1.-dstlpcc*9./16.)
     */
-    let superBoostedContinuation = Math.pow(.5,continuumCore)*Math.sqrt(dstnce);//*dstnce;//*deDistortion//*Math.sqrt(dstlpcc*9./16.)//*Math.sqrt(
+
+    let superBoostedContinuation = Math.pow(.5,continuumCore)*dstnce;//Math.sqrt(dstnce);//*dstnce;//*deDistortion//*Math.sqrt(dstlpcc*9./16.)//*Math.sqrt(
                                               //  daisifier+=1.;
                                                               //lpcc*3./4.
                                                                         //)
-                                                                        ;
+                                                   ;
     if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation;
-    
     s.divideScalar( Math.pow(1./lpcc,superBoostedContinuation));
 
-     hyperCoreBoosted+=continuumCore;
-     hyperCoreOUTPUT+=continuumCore;
+     hyperCoreBoosted+=cc2;
+     hyperCoreOUTPUT+=cc2;
      }
      else{
     //     if(dstnce<2./3.) s.subScalar(coords.yx*correction);

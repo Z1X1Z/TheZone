@@ -4746,10 +4746,11 @@ else //if(  0.>=hyperCoreBoosted)
 
 dstnce=length(s);
    if(continuumClover!=0&&lfc!=0.){//engage continualization
-       float continuumCore=(continuumCounter+hyperCoreOUTPUT)*correction;
-      // float cc2 =(continuumCore);
+       float continuumCore=(continuumCounter+hyperCoreBoosted)*correction;
 
-       if(loops+counter<=hyperCoreBoosted+continuumCounter)
+       float cc2 =continuumCore*(continuumCore);
+
+       if(loops+counter<=continuumCounter+hyperCoreBoosted)
        {
                  //   daisifier=0.;
           //  daisifier+=counter;
@@ -4758,21 +4759,22 @@ dstnce=length(s);
        //float dstlpcc = dstnce*lpcc;//(9./16.);
        //if(feedTheLamb)dstlpcc*=.5;
       // float dstADJUSTED = dstnce;
-      /* float deDistortion = sqrt(dstlpcc)*sqrt(dstnce)*sqrt(lpcc) *lpcc2;
-       if(dstlpcc<16./9.)
+      /*  float deDistortion = sqrt(dstlpcc)*sqrt(dstnce)*sqrt(lpcc) *lpcc2;
+      if(dstlpcc<16./9.)
        deDistortion*=(1.-((dstlpcc*9./16.)));//*2.?:
        */
       //float deDistortion = sqrt(sqrt(dstlpcc*9./16.)*sqrt(dstnce*3./4.)*sqrt(3./4.*lpcc)*sqrt(1.-3./4.*lpcc));
-       float superBoostedContinuation = pow(.5,continuumCore)*sqrt(dstnce);//*dstnce;
-                                                                  
  // pow(
   //  sqrt(  dstlpcc*9./16.)//,2.)
   ;//*9./16.;//was sqrt(deDistortion)//why would dstnce*9/16 be right over 3/4? if so wouldn't 5/8 (10/16) be just slightly in recognition that really it should be 3*4 (12/16)? And yet 9/16s on the inner main spoke
-       if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation;//different solutions to sqrts squares and number of deDistortions may be viable//may be (and was before 1.-dstlpcc*9./16.) deDistortion**2 (or perhaps under circumstances just deDistortion?)
+                  float superBoostedContinuation = pow(.5,continuumCore)*sqrt(dstnce);//*sqrt(dstnce);
+   
+  if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation;//different solutions to sqrts squares and number of deDistortions may be viable//may be (and was before 1.-dstlpcc*9./16.) deDistortion**2 (or perhaps under circumstances just deDistortion?)
            //coords.yx*coords.yx*vec2(sign(coords.y),sign(coords.x))
-       s/=pow(1./lpcc,superBoostedContinuation);
-      hyperCoreBoosted+=continuumCore;
-       hyperCoreOUTPUT+=continuumCore;
+
+           s/=pow(1./lpcc,superBoostedContinuation);
+      hyperCoreBoosted+=cc2;//continuumCore
+       hyperCoreOUTPUT+=cc2;
        
        }
        else
@@ -4784,8 +4786,8 @@ dstnce=length(s);
 //if(dstnce<twoThirds)s-=dstnce;
    // float cc2 =continuumCore*continuumCore*lpcc2;
 
-    hyperCoreBoosted-=continuumCore;
-    hyperCoreOUTPUT-=continuumCore;
+    hyperCoreBoosted-=cc2;
+    hyperCoreOUTPUT-=cc2;
     
            
        }
