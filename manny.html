@@ -4750,7 +4750,7 @@ dstnce=length(s);
 
        float cc2 =continuumCore*(continuumCore);
 
-       if(loops+counter<=continuumCounter+hyperCoreBoosted)
+       if(loops<=continuumCounter+hyperCoreBoosted)
        {
                  //   daisifier=0.;
           //  daisifier+=counter;
@@ -4767,7 +4767,7 @@ dstnce=length(s);
  // pow(
   //  sqrt(  dstlpcc*9./16.)//,2.)
   ;//*9./16.;//was sqrt(deDistortion)//why would dstnce*9/16 be right over 3/4? if so wouldn't 5/8 (10/16) be just slightly in recognition that really it should be 3*4 (12/16)? And yet 9/16s on the inner main spoke
-                  float superBoostedContinuation = pow(.5,continuumCore)*sqrt(dstnce);//*sqrt(dstnce);
+                  float superBoostedContinuation = pow(.5,cc2)*dstnce;//*sqrt(dstnce);
    
   if(continuumClover==2)superBoostedContinuation*=superBoostedContinuation;//different solutions to sqrts squares and number of deDistortions may be viable//may be (and was before 1.-dstlpcc*9./16.) deDistortion**2 (or perhaps under circumstances just deDistortion?)
            //coords.yx*coords.yx*vec2(sign(coords.y),sign(coords.x))

@@ -792,7 +792,7 @@ if(loops+counter<=hyperCoreBoosted+continuumCounter)
         deDistortion*=(1.-dstlpcc*9./16.)
     */
 
-    let superBoostedContinuation = Math.pow(.5,continuumCore)*dstnce;//Math.sqrt(dstnce);//*dstnce;//*deDistortion//*Math.sqrt(dstlpcc*9./16.)//*Math.sqrt(
+    let superBoostedContinuation = Math.pow(.5,cc2)*dstnce;//Math.sqrt(dstnce);//*dstnce;//*deDistortion//*Math.sqrt(dstlpcc*9./16.)//*Math.sqrt(
                                               //  daisifier+=1.;
                                                               //lpcc*3./4.
                                                                         //)
@@ -805,7 +805,6 @@ if(loops+counter<=hyperCoreBoosted+continuumCounter)
      }
      else{
     //     if(dstnce<2./3.) s.subScalar(coords.yx*correction);
-         let cc2 =continuumCore*continuumCore;
 
         hyperCoreBoosted-=cc2;
          hyperCoreOUTPUT-=cc2;
