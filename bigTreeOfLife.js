@@ -323,7 +323,7 @@ hyperCore*=equilibriator;
 
 
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
-//if(continuumClover!=0)hyperCore+=.25/Math.log(.5);
+if(continuumClover!=0)hyperCore+=.5/Math.log(.5);
 if(polyNomialStretch&&OrthoEvery==0.)
 {
      if(budge==1./3.)//I was flying into what I think was the top of the center clover around commit 8c6a4aae1986bddb05af5d8026505c63dd0ed8be when I had a feeling like faith was shaping the clover, then a black and blue biogenesis clover (I wasn't in biogenesis!)upcored and cored and I flew into it, Then I had a screen full of free floating tripolar clovers that seemed to extend forever in all directions fitting this same type of clover together.  Then after a minute the screen rotated and became half rez and half size.  The zoom in the dimension was a constant 1
