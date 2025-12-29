@@ -1,0 +1,538 @@
+<?php header('Cache-Control: max-age=31536000');header('Cache-Control: public'); ?>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Lamb</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="main2.css">
+	</head>
+	<body>
+
+		<div id="container"></div>
+
+		<script id="vertexShader" type="x-shader/x-vertex">
+
+			varying vec2 vUv;
+        uniform vec2 resolution;
+			void main()	{
+
+				vUv = uv;
+				gl_Position = vec4( position, 1.0 );
+			}
+		</script>
+
+		<script id="fragmentShader" type="x-shader/x-fragment">
+			
+            
+            varying vec2 vUv;
+
+            
+            precision highp float;
+            uniform vec2 resolution;
+            uniform float time;
+            float brelued=1.;float flipStar=1.;float twistStar=0.; int holyeyes=1;float note=0.;float lownote=0.;float volume=1.;
+             int MannyONtrail=0;
+            vec2 d = vec2(0.);
+            float PI = 3.141592;
+            float divideByMultiplyingPi2=1./(3.141592*2.);
+            float rnd(float toRound){return round(toRound);}
+                vec3 hsv2rgb( vec3 c )//https://www.shadertoy.com/view/lsS3Wc
+                {
+                    vec3 rgb = clamp( abs(mod(c.x*6.0+vec3(0.0,4.0,2.0),6.0)-3.0)-1.0, 0.0, 1.0 );
+                    return c.z * mix( vec3(1.0), rgb, c.y);
+                }
+           // float round(float number){return sign(number)*floor(abs(number)+0.5);}
+            vec4 faceBlackAndWhite(vec2 g, vec2 t, bool wink, int overrideEyes){
+                                          t/=2.5;
+                                          //g/=4.;
+                                          int eyeType = 0;
+                                          if (overrideEyes==-1)eyeType=holyeyes;
+                                          else eyeType = overrideEyes;
+                                          if(eyeType==1) t.x*=-1.;
+                                          else if(eyeType==3)t*=-1.;
+                                          vec2 p = (vec2(g.x,g.y)-vec2(t.x,-t.y));//vec2(g.x,-g.y);
+
+                                          bool bfeye= false;
+                                          bool notEars= false;
+                                          bool twelveLots = true;
+                                          bool A=false,Bf=false,C=false,D=false,E=false,Fs=false,G=false;
+                                          bool isB=false, isF=false;
+                                          
+                                          float adjustedNote=0.;
+                                          if (wink)adjustedNote = mod(note+twistStar*divideByMultiplyingPi2*12.,12.);
+                                          vec4 lowColor=vec4(.5);
+                                          vec4 pitchColor=vec4(1.);
+                                          if (volume!=1.)
+                              {pitchColor=vec4( hsv2rgb( vec3(mod((-note*brelued-2.)/12.,1.) ,.5,1. )),.5);
+                lowColor=vec4( hsv2rgb( vec3(mod((-lownote*brelued-2.)/12.,1.) ,.5,1. )),.5);
+                                          }
+                                    vec4 l = vec4(0.);
+                                    if(brelued<0.)p.y*=-1.;
+                                    if(flipStar<0.)p.y*=-1.;
+                                    float angleColorShift = 0.;
+                                    if(MannyONtrail>0)
+                                    angleColorShift=(-atan(d.x,d.y)*flipStar+PI);
+
+                                    
+                                    vec2 z=g.xy;
+                                    // if(g.x*g.x+g.y*g.y<40.)
+                                    //if(abs(g.y)<9.)
+                                    float isEscaped = 0.;
+                                    if(abs(g.y)<4.&&g.x<2.)for (int f=0;f<26;f+=1)if(abs(z.y)>17.7&&(f>3||f==1)){
+                                        if(!wink){
+                                                if (f==1){l=vec4(0.);break;}
+                                                l= vec4(vec3(-1.*(z.y)*sign(g.y)),1.);
+                                                isEscaped=-2.;//length(z)/40.;//clouds and face
+                                       }
+                                        
+                                        break;}
+                                    else{
+                                        z=vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x),2.0*z.x*z.y-g.y-t.y);
+                                        
+                                       if(!wink&&f>=16)
+
+                               l=vec4(abs(-z.y)*7.);//vec4(pitchColor.xyz*(1.-abs(z.y)*6.),.25);//smooths middle horn, removes some clouds
+                           if(l.r>1.)l=vec4(0.);
+                                        vec2 s=z;//vec2(z.x,-z.y);
+                                        
+                                        if(f==7&&s.x<0.)notEars=true;
+
+                                        else if(wink);
+                                        
+                                        else if((f==16)&&p.x>0.&&s.x<0.&&!notEars){l=vec4(vec3(1.),-1.);//lowColor
+                                                   ;break;}
+                                        else if((f==17)&&p.x>0.&&s.x<0.&&!notEars){l=vec4(vec3(1.),1.);break;}
+                                        else if((f==14)&&s.x<-1.){l=vec4(vec3(.5),.5);
+                                                                 break;}
+                                         
+                                        /*
+                                        if( (f == 13||f==14)&&s.x<.0&&abs(p.y)>.68&&p.x>0.){l=vec4(vec3(.5),1.);break;}
+                                        else if(f<=15&&z.x>-.1){
+                                            l=vec4(vec3(-z.x),1.);
+                                           // if( f == 15&&z.x>-.10&&abs(p.y)>.75){l=vec4(vec3(z.x),.5);break;}
+                                        }
+                                         */
+                                        if(eyeType==0&&!wink);
+                                        else if(eyeType==2&&!wink)
+                                        {
+                                          if (f==17&&s.x<0.&&p.x>0.){
+                                              l=vec4(.5);
+                                              break;
+                                                }
+                                            else if (eyeType==2&&f==19&&abs(p.y)<1.&&s.x>-.1&&abs(s.y*s.y/s.x)>144.){
+                                                l=vec4(.5);
+                                                break;
+                                                }
+                                              }
+                                        if((eyeType==0||eyeType==2)&&!wink);
+                                        
+                                        else   if((twistStar == 0.||wink)&&s.x<0.){
+                                                        float eyeColorCycler = 0.;
+                                                        float eyeColorCyclerReversed = 0.;
+
+                                               if (eyeType==1)
+                                               {eyeColorCycler=1.;
+                                                   eyeColorCyclerReversed=1.;
+                                                   }
+
+
+                                                   if (f==12 &&p.x<.0){
+                                                   bfeye=true;
+                                               }
+                                           if (f==12 ){
+                                           bfeye=true;
+                                       }
+                                     // else if(true);
+                                     
+                                     else if(f>=20&&twistStar==0.){
+                                         float winkWhite = -100.;
+                                         if(!C&&p.x>0.&&p.y<0.){
+                                         if(wink&&rnd(adjustedNote)==5.)
+                                            l=vec4(vec3(winkWhite),0.);
+
+                                         else if(!wink)
+                                         l=vec4(eyeColorCyclerReversed/2.+.5,1.-eyeColorCyclerReversed, eyeColorCyclerReversed/2.,.75);
+
+                                         break;
+                                         
+                                         }
+                                         else if (!E&&p.x>0.&&p.y>0.)
+                                         {
+                                             if(wink&&rnd(adjustedNote)==7.)
+                                                   l=vec4(vec3(winkWhite),0.);
+                                                   else if(!wink)
+                                                   
+                                                   l=vec4( eyeColorCyclerReversed/2.,1.-eyeColorCyclerReversed,eyeColorCyclerReversed/2.+.5,.75);
+                                             break;
+                                             }
+                                         else if(!G&&!A&&abs(p.x)>abs(p.y)&&p.x<0.){
+                                             
+                                                    if(wink&&(rnd(adjustedNote)==12.||rnd(adjustedNote)==0.))
+                                                       l=vec4(vec3(winkWhite),0.);
+                                                    else if(!wink)
+                                          l = vec4( 1.-eyeColorCyclerReversed,eyeColorCyclerReversed,1.-eyeColorCyclerReversed,.75);
+                                         break;
+                                         }
+                                         else if(!A&&!Bf&&(abs(p.x)<abs(p.y)&&p.x<0.&&p.y>0.||isB)){
+                                             
+                                                    if(wink&&rnd(adjustedNote)==9.)
+                                                       l=vec4(vec3(winkWhite),0.);
+                                                    else if(!wink)
+                                                    l = vec4(1.-eyeColorCyclerReversed,.5, eyeColorCyclerReversed,.75);
+                                             break;
+                                             }
+                                         
+                                         else if(!G&&!Fs&&(abs(p.x)<abs(p.y)&&p.x<0.&&p.y<0.||isF)){
+                                             
+                                             if(wink&&rnd(adjustedNote)==3.)
+                                                       l=vec4(vec3(winkWhite),0.);
+                                                    else if(!wink)
+                                                    l = vec4(eyeColorCyclerReversed,.5, 1.-eyeColorCyclerReversed,.75);
+                                             break;
+                                             }
+
+
+
+
+                                         }
+                                           else if (f==16){
+                                            if (p.x>.0)
+                                   {
+                                      
+                                                if(p.y<0.)
+                                                {
+                                                    if(wink)
+                                                    {
+                                                       if( round(adjustedNote)==4.||floor(adjustedNote)==4.||ceil(adjustedNote)==4.)
+                                                       l=vec4(vec3(1.),0.);
+                                                       }
+                                                    else l = vec4( 1.-eyeColorCycler,eyeColorCycler,eyeColorCycler,.5);
+                                                }
+                                                else
+                                                {
+                                                    if(wink)
+                                                    {                                           if(round(adjustedNote)==8.||ceil(adjustedNote)==8.||floor(adjustedNote)==8.)
+
+                                                        l=vec4(vec3(1.),0.);
+                                                        }
+                                                   else l = vec4( eyeColorCycler,eyeColorCycler,1.-eyeColorCycler,.5);
+                                                }
+                                            }
+                                            else if(s.x>-.16){
+                                                //squircle eyes orange and steel blue
+                                                if(p.y<0.)
+                                                {
+                                                    if(wink)
+                                                    {                                           if(ceil(adjustedNote)==3.||round(adjustedNote)==2.)
+
+                                                        l=vec4(vec3(1.),0.);
+                                                        }
+                                                   else
+                                                   {
+                                                    l = vec4( 1.-eyeColorCycler,.5,eyeColorCycler,.5);
+                                                    
+                                                    }
+                                                   }
+                                                else {
+                                                    if(wink)
+                                                    {                                           if(floor(adjustedNote)==9.||round(adjustedNote)==10.)
+
+                                                        l=vec4(vec3(1.),0.);
+                                                        }
+                                                    else
+                                                    l = vec4( eyeColorCycler,.5,1.-eyeColorCycler,.5);
+                                                    }
+                                            
+                                            }
+                                            break;
+                                        }
+                                        
+                                             // else if(true);
+                                                   else if (f==16 &&p.x<.35){
+                                                    if (p.x>.0) {
+                                              
+                                                        if(p.y<0.)
+                                                        {
+                                                            if(wink)
+                                                            {
+                                                               if( rnd(adjustedNote)==4.||floor(adjustedNote)==4.||ceil(adjustedNote)==4.)
+                                                               {
+                                                               l=vec4(vec3(1.),0.);
+                                                               }
+                                                               }
+                                                            else l = vec4( 1.-eyeColorCycler,eyeColorCycler,eyeColorCycler,.5);
+                                                        }
+                                                        else
+                                                        {
+                                                            if(wink)
+                                                            {                                           if(rnd(adjustedNote)==8.||ceil(adjustedNote)==8.||floor(adjustedNote)==8.)
+                                                                {
+                                                                l=vec4(vec3(1.),0.);
+                                                                }
+                                                                }
+                                                           else l = vec4( eyeColorCycler,eyeColorCycler,1.-eyeColorCycler,.5);
+                                                        }
+                                                        break;
+                                                    }
+                                                    else if(p.x>-.3){
+                                                        //squircle eyes orange and steel blue
+                                                        if(p.y<0.)
+                                                        {
+                                                            if(s.x>-.1){
+                                                            if(wink)
+                                                            {            if(ceil(adjustedNote)==3.||rnd(adjustedNote)==2.)
+
+                                                                l=vec4(vec3(1.),0.);
+                                                                break;
+
+                                                                }
+                                                           else
+                                                           {
+                                                               l = vec4( 1.-eyeColorCycler,.5,eyeColorCycler,.5);                                        break;
+                                                            }
+                                                           Bf=true;
+                                                           }
+                                                            else isB=true;
+
+                                                           }
+                                                        else {
+                                                            if(s.x>-.1){
+                                                            if(wink)
+                                                            {           if(floor(adjustedNote)==9.||rnd(adjustedNote)==10.)
+
+                                                                l=vec4(vec3(1.),0.);
+                                                                break;
+
+                                                                }
+                                                            else
+                                                            l = vec4( eyeColorCycler,.5,1.-eyeColorCycler,.5);                                        break;
+                                                            Fs=true;
+                                                            }
+                                                            else isF=true;
+
+                                                    }
+                    }
+                                                }
+                                                
+                                  else if (f==17 ){
+                                      if(wink)
+                                      {                                           if(round(abs(adjustedNote-6.)/1.5)==0.)                                            l=vec4(vec3(1.),0.);
+                                          }
+                                      else
+
+                                      l = vec4( 1.-eyeColorCycler,eyeColorCycler,1.-eyeColorCycler,.5);//green nose
+                                      break;
+                                  }
+                                  else if ((f==15)&&s.x<-.7)
+                                  {
+
+                                      if(bfeye||wink)
+                                            {
+                                                //diagonal diamond eyes
+                                                if(wink)
+                                                {
+                                                    if(p.y>0.){
+                                                     if(round(adjustedNote)==11.||floor(adjustedNote)==11.)                                            l=vec4(vec3(1.),0.);
+                                                     }
+                                                    else  {  if(round(adjustedNote)==1.||ceil(adjustedNote)==1.)  l=vec4(vec3(1.),0.);}
+
+                                                     
+                                                }
+                                                else if(!wink){
+                                      if(p.y*(.5-eyeColorCycler)>0.)
+                                      l=vec4( eyeColorCycler/2.,1.-eyeColorCycler,eyeColorCycler/2.+.5,.5);
+                                  else l=vec4(eyeColorCycler/2.+.5,1.-eyeColorCycler, eyeColorCycler/2.,.5);
+                                  }
+                                            }
+                                      else {
+                                          //opening side eyes
+
+                                                if(p.y>0.)l = vec4( 1.-eyeColorCycler,.5,eyeColorCycler,.5);
+                                                else l = vec4( eyeColorCycler,.5,1.-eyeColorCycler,.5);
+                                      }
+                                  break;
+                                  }
+                                            
+                                            
+                                            
+                                            
+                                  
+                                    }
+                                        //eyesopposite
+                                  else if((eyeType==1||eyeType==3)&&s.x<0.)
+                                  {
+                                       float eyeColorCycler = -3./12.+(twistStar+angleColorShift)*divideByMultiplyingPi2*brelued+10.;
+                                           if (eyeType==3)eyeColorCycler+=.5;
+
+                                           if (f==12 &&p.x<.0){
+                                           bfeye=true;
+                                       }
+                                     // else if(true);
+                                           else if (f==16 &&p.x<.35){
+                                            if (p.x>.0) {
+                                                if(p.y<0.)l = vec4( hsv2rgb( vec3(mod(9./12.+eyeColorCycler,1.) ,.5,1. )),.5);
+                                                else l = vec4( hsv2rgb( vec3(mod(5./12.+eyeColorCycler,1.) ,.5,1. )),.5);
+                                            }
+                                            else if(p.x>-.3){
+                                                //squircle eyes orange and steel blue
+                                                if(p.y>0.)l = vec4( hsv2rgb( vec3(mod(4./12.+eyeColorCycler,1.) ,.5,1. )),.5);
+                                                else l = vec4( hsv2rgb( vec3(mod(10./12.+eyeColorCycler,1.) ,.5,1. )),.5);
+                                            
+                                            }
+                                            break;
+                                        }
+                                        
+                                  else if (f==17 &&p.x>.0&&p.x<.5&&s.x>-.2){
+                                      l = vec4( hsv2rgb( vec3(mod(7./12.+eyeColorCycler,1.) ,.5,1. )),.5);//green nose
+                                      break;
+                                  }
+                                  else if ((f==15)&&p.x>-.3&&p.x<0.)
+                                  {
+
+                                                if(bfeye)
+                                            {
+                                                //diagonal diamond eyes
+
+                                      if(p.y>0.)l=vec4( hsv2rgb( vec3(mod(2./12.+eyeColorCycler,1.) ,.5,1. )),.5);
+                                  else l=vec4( hsv2rgb( vec3(mod(0./12.+eyeColorCycler,1.) ,.5,1. )),.5);
+                                            }
+                                      else {
+                                          //opening side eyes
+
+                                                if(p.y<0.)l = vec4( hsv2rgb( vec3(mod(4./12.+eyeColorCycler,1.) ,.5,1. )),.5);
+                                                else l = vec4( hsv2rgb( vec3(mod(10./12.+eyeColorCycler,1.) ,.5,1. )),.5);
+                                      }
+                                  break;
+                                  }
+                                  }
+                                  
+                                        
+                                    }
+                                    if((l.r<.0||l.g<0.||l.b<0.)&&isEscaped!=-2.)l=vec4(0.);
+                                    if(g.y==0.&&g.x<0.)l=vec4(vec3(-1.),.5);
+/*
+                                        if(g.y==0.&&0==1)
+                                        {
+                                        if (g.x>0.)
+                                        {
+                                            if (g.x<.35)
+                                            l=vec4(0.,1.,0.,.5);
+                                            
+                                        else                                             l=vec4(0.);
+                                        }
+                                        else if (g.x<0.)
+                                         l=vec4(-1.);
+                                        
+}*/
+                                        
+                                      if(l.w==1.||l.w==.25)
+                                    return -l;
+                                    else if(l.w==.5||l.w==.75)return l;
+                                    else return l;
+                                    }
+
+
+
+
+            void main(){
+                vec2 p=(-(vUv.yx-.5)/resolution*max(resolution.x,resolution.y))*6.3;
+                p.x-=1.25;
+               // p.y*=-1.;
+                         
+            vec4 face=faceBlackAndWhite(p,vec2(0.,.0),false,-1);
+            if( face.w==0.)face +=vec4(163.)/255.;
+            gl_FragColor=vec4(face.xyz,1.);}
+
+		</script>
+        <script src="OFFLINEonlineSwitch.js"></script>
+        <script>
+            //vvvvmodified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
+            function loadScript(url, callback)
+            {
+                // Adding the script tag to the head as suggested before
+                var head = document.head;
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = url;
+                // Then bind the event to the callback function.
+                // There are several events for cross browser compatibility.
+                script.onreadystatechange = callback;
+                script.onload = callback;
+                // Fire the loading
+                head.appendChild(script);
+            }
+            var load = function() {
+                init();
+                animate();
+            };
+        loadScript(window.three,load);
+        //^^^^modified from https://stackoverflow.com/questions/950087/how-do-i-include-a-javascript-file-in-another-javascript-file
+        
+
+
+			var container;
+			var camera, scene, renderer;
+			var uniforms;
+
+
+
+var rez = 1.;//window.devicePixelRatio;
+window.addEventListener('keydown', function(event) {
+var x = parseInt(String.fromCharCode(event.which || event.keyCode));
+if (x==1){rez = window.devicePixelRatio /x; renderer.setPixelRatio( rez);}
+else if (String.fromCharCode(event.which || event.keyCode)=="À")
+	{rez=window.devicePixelRatio*2.;renderer.setPixelRatio( rez);
+	}
+	animate();
+}, false);
+			function init() {
+
+				container = document.getElementById( 'container' );
+				camera = new THREE.OrthographicCamera( - 1, 1, 1, - 1, 0, 1 );
+				scene = new THREE.Scene();
+				var geometry = new THREE.PlaneGeometry( 2, 2 );
+
+				uniforms = {
+        resolution: {value: new THREE.Vector2() }
+      };
+
+      uniforms.resolution.value.x = window.innerWidth;
+      uniforms.resolution.value.y = window.innerHeight;
+				var material = new THREE.ShaderMaterial( {
+					uniforms: uniforms,
+					vertexShader: document.getElementById( 'vertexShader' ).textContent,
+					fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+				} );
+				var mesh = new THREE.Mesh( geometry, material );
+				scene.add( mesh );
+				renderer = new THREE.WebGLRenderer();
+
+
+
+                renderer.setSize( window.innerWidth, window.innerHeight );
+
+				renderer.setPixelRatio(1.)// window.devicePixelRatio );//this will pixelate if changed
+
+				container.appendChild( renderer.domElement );
+				onWindowResize();
+				window.addEventListener( 'resize', onWindowResize, false );
+								
+			}
+			function onWindowResize() {
+
+      uniforms.resolution.value.x = window.innerWidth;
+      uniforms.resolution.value.y = window.innerHeight;
+				renderer.setSize( window.innerWidth, window.innerHeight );
+                animate();
+			}
+			//
+			function animate( timestamp ) {
+			//	requestAnimationFrame( animate );
+				
+				renderer.render( scene, camera );
+			}
+		</script>
+
+	</body>
+</html>
