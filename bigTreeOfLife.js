@@ -1,4 +1,4 @@
-var shaderScale,dilate,squeezeN,seventhEYE,budge,polyNomialStretch, coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
+var shaderScale,distributor,dilate,squeezeN,seventhEYE,budge,polyNomialStretch, coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
 ,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta,spinTowardsMe,d,chop,cellularDivision,triogenesis,nGenesis,squareGenesis,constellationCoord,cloverso,feedTheLamb,OrthoEvery;
 function setUniformsToPlainName(){
     OrthoEvery==uniforms.OrthoEvery.value
@@ -66,6 +66,7 @@ function setUniformsToPlainName(){
     mandelCloverFactor=uniforms.mandelCloverFactor.value;
     superStable=uniforms.superStable.value;
     distributor=uniforms.distributor.value;
+    swap=uniforms.swap.value;
     cloverso=uniforms.cloverso.value;
     feedTheLamb=uniforms.feedTheLamb.value;
 
@@ -854,15 +855,16 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
     if(spinTowardsMe) if(i>=hyperCoreBoosted)s=spin(s,Math.atan2(d.y,d.x));
         var angleS = Math.atan2(s.y,s.x);
 
-                                                                if(//counter>1.&&//distributor&&//not quite the same as distributor, but I don't want to add another button
-                                                                 //    morph==0.&&
-                                                                    (angleS+Math.PI*2+Math.PI*2/12.)%(Math.PI*2/3.)>Math.PI*2/6.) //p*=0.;
-                                                                {
-                                                                  //  s=new THREE.Vector2(Math.abs(s.x),Math.abs(s.y))
-                                                                    s=spin(s,Math.PI);//balances inherited colors
-                                                                }else s.multiplyScalar(-1.)
-                                                                s.multiplyScalar(-1.)
-    var cloverOrDaisyOnTop = daisifier;//may be +0
+if(swap>0&&//counter>1.&&//distributor&&//not quite the same as distributor, but I don't want to add another button
+//    morph==0.&&
+(angleS+Math.PI*2+Math.PI*2/12.)%(Math.PI*2/3.)>Math.PI*2/6.) //p*=0.;
+{
+//  s=new THREE.Vector2(Math.abs(s.x),Math.abs(s.y))
+s=spin(s,Math.PI);//balances inherited colors
+if(swap==1)s.multiplyScalar(-1.)
+
+}
+                                                                    var cloverOrDaisyOnTop = daisifier;//may be +0
 
     if(twelveGates)cloverOrDaisyOnTop=counter+1.;
     

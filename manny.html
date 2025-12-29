@@ -984,6 +984,11 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                      key  = 'r';
                                      callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'keyCode':key.charCodeAt(0)}));">
                                  ReFactor Clover![.r]</a><br>
+
+                                 <a id="swap" name="t"  onclick= "
+                                     key  = 'N';
+                                     callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                                 Swap?![,.N]</a><br>
                                  
                                <a id="Continuum Clover" name="t"  onclick= "
                                    key  = '&';
@@ -1109,6 +1114,11 @@ uniforms.baseN.value=document.getElementById('Base Number').value">
                       key  = 'K';
                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                    <label for="Inherited Colors">Inherited Colors?![K]</label><br>
+
+                  <input type="checkbox" id="Black" name="t"  onclick= "
+                      key  = 'T';
+                      callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
+                   <label for="Black">black![,.B]</label><br>
 
 
                    <input type="checkbox" id="Radial Rainbow Clover" name="t"  onclick= "
@@ -1945,6 +1955,8 @@ void main(){
         uniform float budge;
 
         uniform bool polyNomialStretch;
+        uniform bool Black;
+        uniform int swap;
 
 
 
@@ -4881,8 +4893,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
        float angleS = atan(s.y,s.x);
         // s=spin2(s,PI*sign(angleS));
 
-
-if(//counter>1.&&//removes asymmetry
+if(swap>0&&//counter>1.&&//removes asymmetry
 //distributor&&//not quite the same as distributor, but I don't want to add another button
 //morph==0.&&
 mod(angleS+PI2+PI2/12.,PI2/3.)>PI2/6.) //p*=0.;
@@ -4893,11 +4904,9 @@ mod(angleS+PI2+PI2/12.,PI2/3.)>PI2/6.) //p*=0.;
 s=spin2(s,PI);//balances inherited colors
 
    //s=abs(s);
-
+if(swap==1)s*=-1.;
 unSwitch= !unSwitch;
-} else s=-(s);
-s=-(s);
-
+} 
    float cloverOrDaisyOnTop = daisifier;//may be +0
    if(twelveGates)cloverOrDaisyOnTop=daisifier+1.;
 
@@ -5201,10 +5210,12 @@ vec3 o = vec3(abs(s.x)/s.y*sign(s.x*s.y));
                                    *vec3(s.y/40.-s.x*s.y/888.,1.-s.x/21.,s.x/6.-s.y/s.x/2000.)));
                       */
                       if(Inherited)o*=1.-colorAccumulator.x/colorAccumulator.y*3.;
+          
+                     if(Black)     o-=1.;
 
-          if(colorInverter==true){
+                      if(colorInverter==true){
                       o*=-1.;
-                
+
                       o.r*=-sin(time);
                       o.g*=abs(-sin(time*gr));
                       o.b*=-sin(time*1./gr);
