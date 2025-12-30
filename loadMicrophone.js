@@ -78,6 +78,7 @@ window.addEventListener("beforeunload", shutdown, false);
         micOn = true;
       });
     }
+    let letTouchThrough = true;
     for(let b=0;b<location.hash.length;b++){
   if(location.hash[b]=="t")
   {
@@ -85,19 +86,22 @@ window.addEventListener("beforeunload", shutdown, false);
       {if(b>=2)
         {if(location.hash[b-2]!=".")
         {window.isTouch=false;
+                      letTouchThrough=false;
+
         break;}
 
         
         }
-        
+
         }
               else    if(location.hash[b-1]!=".")
   window.isTouch=true;
-    userHasGestured=true;
 
             }
+
     }
     
+               if(letTouchThrough) userHasGestured=true;
 
 
   
