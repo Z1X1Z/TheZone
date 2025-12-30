@@ -859,7 +859,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
     if(spinTowardsMe) if(i>=hyperCoreBoosted)s=spin(s,Math.atan2(d.y,d.x));
         var angleS = Math.atan2(s.y,s.x);
   var alternator=1.;
-if(swap==1)alternator = (((i)%2.)-.5)*2.;
+if(swap==1&&petals==0.)alternator = (((i)%2.)-.5)*2.;
 
 if(swap>0&&//counter>1.&&//distributor&&//not quite the same as distributor, but I don't want to add another button
 //    morph==0.&&
