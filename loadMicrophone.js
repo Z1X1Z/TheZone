@@ -103,7 +103,7 @@ letTouchThrough=false;
 
     }
     
-               if(letTouchThrough) userHasGestured=true;
+               if(letTouchThrough&&letTouchThrough != "inactive") userHasGestured=true;
 
 
   
