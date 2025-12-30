@@ -860,7 +860,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
 
 if(swap>0&&//counter>1.&&//distributor&&//not quite the same as distributor, but I don't want to add another button
 //    morph==0.&&
-(angleS+Math.PI*2+Math.PI*2/12.*((counter+i)%2-.5)*2.)%(Math.PI*2/3.)>Math.PI*2/6.) //p*=0.;
+(angleS+Math.PI*2-Math.PI*2/12.*((counter+i)%2-.5)*2.)%(Math.PI*2/3.)>Math.PI*2/6.) //p*=0.;
 {
 //  s=new THREE.Vector2(Math.abs(s.x),Math.abs(s.y))
 s=spin(s,Math.PI);//balances inherited colors
