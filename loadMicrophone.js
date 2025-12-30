@@ -93,6 +93,7 @@ window.addEventListener("beforeunload", shutdown, false);
         }
               else    if(location.hash[b-1]!=".")
   window.isTouch=true;
+    userHasGestured=true;
 
             }
     }
