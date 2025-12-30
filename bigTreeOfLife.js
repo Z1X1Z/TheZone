@@ -783,7 +783,8 @@ if(continuumClover!=0&&lfc!=0){//engage continualization
   
 var continuumCore=(continuumCounter+hyperCoreOUTPUT)*correction;
 
-    var cc2=continuumCore*continuumCore;
+    var cc2=continuumCore;
+       if(seventhEYE==0.)cc2*=(continuumCore);
 
 if(loops+counter<=hyperCoreBoosted+continuumCounter)
 {

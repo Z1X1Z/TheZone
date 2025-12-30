@@ -4759,7 +4759,8 @@ dstnce=length(s);
    if(continuumClover!=0&&lfc!=0.){//engage continualization
        float continuumCore=(continuumCounter+hyperCoreBoosted)*correction;
 
-       float cc2 =continuumCore*(continuumCore);
+       float cc2 =continuumCore;
+       if(seventhEYE==0.)cc2*=(continuumCore);
 
        if(loops<=continuumCounter+hyperCoreBoosted)
        {
