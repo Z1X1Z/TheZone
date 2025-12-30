@@ -620,7 +620,9 @@ else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (withou
         //var trunc=1.;
         //if(lfc!=0.) trunc = Math.log(zoom/dstnce)/100.;
 s.x=Math.log(Math.abs(s.x))/Math.log(base);
-            if(cellularDivision==1||(cellularDivision==2&&counter>1.))s=new THREE.Vector2(s.x,s.y-Math.sign(s.y)/2.);
+              dstnce = s.length();
+
+if(cellularDivision==1||(cellularDivision==2&&counter>1.))s=new THREE.Vector2(s.x,s.y-Math.sign(s.y)/2.);
 
             if(squareGenesis){
 
@@ -647,7 +649,8 @@ s.x=Math.log(Math.abs(s.x))/Math.log(base);
     dstnce = s.length();
 
        if(dstnce<2./3.)s.multiplyScalar(dstnce**(squeezeN-1. ));
-                
+                    dstnce = s.length();
+
 
         if(Spoker){
           //  if(morph==0.)
@@ -857,7 +860,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
 
 if(swap>0&&//counter>1.&&//distributor&&//not quite the same as distributor, but I don't want to add another button
 //    morph==0.&&
-(angleS+Math.PI*2+Math.PI*2/12.)%(Math.PI*2/3.)>Math.PI*2/6.) //p*=0.;
+(angleS+Math.PI*2+Math.PI*2/12.*((counter+i)%2-.5)*2.)%(Math.PI*2/3.)>Math.PI*2/6.) //p*=0.;
 {
 //  s=new THREE.Vector2(Math.abs(s.x),Math.abs(s.y))
 s=spin(s,Math.PI);//balances inherited colors

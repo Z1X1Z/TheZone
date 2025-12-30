@@ -3755,7 +3755,6 @@ vec4 tol(vec2 p, vec2 t){
         }
         if(constellation)p=starBirth(p);
     p*=pow(length(p),squeezeN-1.);//may cause conflict with constellation
-
    //tricellular division core unstable
                
 //p.x+=.5;
@@ -4717,7 +4716,7 @@ if(counter+dstnceSquaredRooted//+dstnceSquaredAndRooted//sqrt(sqrt(dstnce)*dstnc
 
      if(!wheel||1==1){
      //float b =pow(pow(abs(downSpoke),powerOfDynamicSokeCoreUp),grOverLeaf);
-     dstnce=length(s);
+    // dstnce=length(s);
 
      float coreFactor =spokeloverCoreShiftUp;
     // if(!inMainSpoke) coreFactor/=dstnce;
@@ -4810,7 +4809,7 @@ dstnce=length(s);
    
        
   
-//dstnce= length(s);
+dstnce= length(s);
 
                              //              s*=refactorCores;c*=refactorCores;
                              
@@ -4896,11 +4895,12 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
 if(swap>0&&//counter>1.&&//removes asymmetry
 //distributor&&//not quite the same as distributor, but I don't want to add another button
 //morph==0.&&
-mod(angleS+PI2+PI2/12.,PI2/3.)>PI2/6.) //p*=0.;
+mod(angleS+PI2+PI2/12.*(mod(float(i)+counter,2.)-.5)*2.,//try switching signs on pi2/12.
+PI2/3.)>PI2/6.) //p*=0.;
 {
  //   s=abs(s);
 //s=-(s);
-
+//s*=0.;
 s=spin2(s,PI);//balances inherited colors
 
    //s=abs(s);
