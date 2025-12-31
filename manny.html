@@ -4907,7 +4907,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
         // s=spin2(s,PI*sign(angleS));
 
         float alternator=1.;
-if(swap==1&&petals==0.)alternator = (-mod(float(i)+counter+1.,2.)-.5)*2.;
+if(swap==1&&petals==0.)alternator = -(mod(+float(i)-counter,2.)-.5)*2.;
 if(swap>0&&//counter>1.&&//removes asymmetry
 //distributor&&//not quite the same as distributor, but I don't want to add another button
 //morph==0.&&
