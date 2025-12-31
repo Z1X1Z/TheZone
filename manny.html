@@ -4351,7 +4351,7 @@ bubble=dstnce;
    if((counter==1.&&oppositionalCoreFlop==1)||oppositionalCoreFlop==2)
    {
    // if(mod(counter,2.)==0.)
-   // s=spin2(s,PI);
+ //  s=spin2(s,PI);
    // else 
        //if(morph==0.&&petals==0.)
 
@@ -4859,6 +4859,7 @@ t
               gated = false;
   
 //dstnce=length(s);
+//s*=-1.;cool colors
 for(int i=0;i<200; i++)//metacoreloop used to be about 40 before squeezeN
 if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<twoThirds))
     )
@@ -4901,7 +4902,10 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
    // if(distributor)s=spin2(s,distributorFACTOR);
 
        float angleS = atan(s.y,s.x);
+                  if(swap==1&&petals==0.)s*=-1.;
+
         // s=spin2(s,PI*sign(angleS));
+
         float alternator=1.;
 if(swap==1&&petals==0.)alternator = (mod(float(i),2.)-.5)*2.;
 if(swap>0&&//counter>1.&&//removes asymmetry
@@ -4913,13 +4917,12 @@ PI2/3.)>PI2/6.) //p*=0.;
  //   s=abs(s);
 //-s=-(s);
 //s*=0.;
-s=spin2(s,PI);//balances inherited colors
-
+//s=spin2(s,PI);//balances inherited colors
    //s=abs(s);
+s=spin2(s,PI);
 
 unSwitch= !unSwitch;
 } 
-   if(swap==1&&petals==0.)s*=-1.;
 
    float cloverOrDaisyOnTop = daisifier;//may be +0
    if(twelveGates)cloverOrDaisyOnTop=daisifier+1.;
