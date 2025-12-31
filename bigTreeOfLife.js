@@ -508,7 +508,11 @@ dstnce = s.length();
 
 
 if(Refractelate&&dstnce>refractelC){s.divideScalar( refractelC);} //refractelC/=4./3.;}
-            if((counter==1.&&oppositionalCoreFlop==1)||oppositionalCoreFlop==2)s=spinVector(s,Math.PI).multiplyScalar(-1.);
+            if((counter==1.&&oppositionalCoreFlop==1)||oppositionalCoreFlop==2)
+                {s=spinVector(s,Math.PI);
+                if(morph==0.&&petals==0.)s.multiplyScalar(-1.);
+                }
+
 
 var lastS = s.clone();
             var superUpcorer = 0.;

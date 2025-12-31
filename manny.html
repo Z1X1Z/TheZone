@@ -4348,7 +4348,11 @@ bubble=dstnce;
 //}
    colorAccumulator+=s;
    if(Refractelate&&dstnce>refractelC){s/=refractelC;} //refractelC/=4./3.;}
-   if((counter==1.&&oppositionalCoreFlop==1)||oppositionalCoreFlop==2)s=-spin2(s,PI);
+   if((counter==1.&&oppositionalCoreFlop==1)||oppositionalCoreFlop==2)
+   {
+    s=spin2(s,PI);
+    if(morph==0.&&petals==0.)s*=-1.;//may not be petals==0.
+   }
    lastLastS=lastS;
    lastS = s;//before or after flop?
 
