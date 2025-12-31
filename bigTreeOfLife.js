@@ -509,8 +509,9 @@ dstnce = s.length();
 
 if(Refractelate&&dstnce>refractelC){s.divideScalar( refractelC);} //refractelC/=4./3.;}
             if((counter==1.&&oppositionalCoreFlop==1)||oppositionalCoreFlop==2)
-                {s=spinVector(s,Math.PI);
-                if(morph==0.&&petals==0.)s.multiplyScalar(-1.);
+                {//s=spinVector(s,Math.PI);
+               // if(morph==0.&&petals==0.)
+                    s.multiplyScalar(-1.);
                 }
 
 
@@ -871,10 +872,10 @@ if(swap>0&&//counter>1.&&//distributor&&//not quite the same as distributor, but
 {
 //  s=new THREE.Vector2(Math.abs(s.x),Math.abs(s.y))
 s=spin(s,Math.PI);//balances inherited colors
-   //               if(swap==1&&petals==0.)s.multiplyScalar(-1.)
 
 }
-                                                  var cloverOrDaisyOnTop = daisifier;//may be +0
+if(swap==1&&petals==0.)s.multiplyScalar(-1.)
+                                   var cloverOrDaisyOnTop = daisifier;//may be +0
 
     if(twelveGates)cloverOrDaisyOnTop=counter+1.;
     
