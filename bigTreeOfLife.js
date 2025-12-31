@@ -869,7 +869,7 @@ if(swap>0&&//counter>1.&&//distributor&&//not quite the same as distributor, but
 s=spin(s,Math.PI);//balances inherited colors
 
 }
-                  if(swap==1)s.multiplyScalar(-1.)
+                  if(swap==1&&petals==0.)s.multiplyScalar(-1.)
                                                   var cloverOrDaisyOnTop = daisifier;//may be +0
 
     if(twelveGates)cloverOrDaisyOnTop=counter+1.;
