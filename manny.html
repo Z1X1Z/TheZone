@@ -4901,12 +4901,12 @@ mod(angleS+PI2+PI2/12.*alternator,//try switching signs on pi2/12.
 PI2/3.)>PI2/6.) //p*=0.;
 {
  //   s=abs(s);
-//s=-(s);
+//-s=-(s);
 //s*=0.;
 s=spin2(s,PI);//balances inherited colors
 
    //s=abs(s);
-//if(swap==1)s*=-1.;
+if(swap==1)s*=-1.;
 unSwitch= !unSwitch;
 } 
    float cloverOrDaisyOnTop = daisifier;//may be +0
