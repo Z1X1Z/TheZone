@@ -866,7 +866,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
         if(swap==1&&petals==0.)s.multiplyScalar(-1.)
 
   var alternator=1.;
-if(swap==1&&petals==0.)alternator = (((-i-counter)%2.)-.5)*2.;
+if(swap==1&&petals==0.)alternator = (((-i+counter)%2.)-.5)*2.;
 
 if(swap>0&&//counter>1.&&//distributor&&//not quite the same as distributor, but I don't want to add another button
 //    morph==0.&&

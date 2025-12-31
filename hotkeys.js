@@ -123,7 +123,7 @@ colorCombo2: {value: -1 },
         outerCoresOff: {value: false},
         upCoreCycler: {value: 0. },
 
-        morph: {value: 0.0 },
+        morph: {value: .0 },
 
         fourCreats: {value: 1 },
         Character: {value: 0 },
