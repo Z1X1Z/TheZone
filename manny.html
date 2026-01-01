@@ -4907,11 +4907,10 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
         // s=spin2(s,PI*sign(angleS));
 
         float alternator=1.;
-if(swap==1&&petals==0.)alternator = (mod(counter-loops,2.)-.5)*2.;
-
-
-if(swap==1&&petals==0.)s*=alternator;
-
+if(swap==1&&petals==0.)
+{alternator = (mod(counter-loops,2.)-.5)*2.;
+    s*=alternator;
+}
 
 
 
@@ -4926,8 +4925,8 @@ PI2/3.)>PI2/6.) //p*=0.;
 //s*=0.;
 //s=spin2(s,PI);//balances inherited colors
    //s=abs(s);
-s=spin2(s,PI);
-
+//s=spin2(s,PI);
+s*=-1.;
 unSwitch= !unSwitch;
 } 
 
