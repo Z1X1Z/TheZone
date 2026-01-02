@@ -877,7 +877,7 @@ if(swap==1&&petals==0.)
 (angleS+Math.PI*2+Math.PI*2/12.*alternator)%(Math.PI*2/3.)>Math.PI*2/6.) //p*=0.;
 {
 //  s=new THREE.Vector2(Math.abs(s.x),Math.abs(s.y))
-s=spin(s,Math.PI);//balances inherited colors
+//s=spin(s,Math.PI);//balances inherited colors
 //s.multiplyScalar(-1.);
 }
                                    var cloverOrDaisyOnTop = daisifier;//may be +0
