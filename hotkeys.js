@@ -106,7 +106,7 @@ holyeyes:{value:3},
 dilate:{value:true},
 
     
-        continuumClover:{value: 1    },
+        continuumClover:{value: 2    },
         Inherited:{value: true    },
         cloverSlide:{value: false    },
         Pointers:{value:true},
