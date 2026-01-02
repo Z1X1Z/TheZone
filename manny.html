@@ -4930,14 +4930,17 @@ s*=-1.;
 unSwitch= !unSwitch;
 } 
 
+
    float cloverOrDaisyOnTop = daisifier;//may be +0
    if(twelveGates)cloverOrDaisyOnTop=daisifier+1.;
 
     if(twelveGatesMeta!=0.&&((twelveGatesMeta<1.&&mod(-.5+cloverOrDaisyOnTop,1./twelveGatesMeta)>=1.)||
                              (twelveGatesMeta>=1.&&mod(cloverOrDaisyOnTop,twelveGatesMeta)<1.)))
     {
-    if(mod((angleS*divideByMultiplyingPi+2.)*6.+.5,2.)>1.)
-    {
+
+        float switch2 = mod((angleS*divideByMultiplyingPi+2.)*6.+.5,2.);
+    if(switch2>1.)
+     {
         s=spin2(s,PI/6.);
            gated=true;
            }
@@ -5251,7 +5254,7 @@ vec3 o = vec3(abs(s.x)/s.y*sign(s.x*s.y));
                                  }
                       o=beta*o;
 
-                    if(Inherited&& bubble<2./3.)
+                    if(Inherited&& !Inherited&& bubble<2./3.)
                       {
                       float bubbledOut = 1.5*bubble;
                       o-=bubbledOut;
