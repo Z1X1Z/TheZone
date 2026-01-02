@@ -511,8 +511,8 @@ if(Refractelate&&dstnce>refractelC){s.divideScalar( refractelC);} //refractelC/=
             if((counter==1.&&oppositionalCoreFlop==1)||oppositionalCoreFlop==2)
                 {//s=spinVector(s,Math.PI);
                // if(morph==0.&&petals==0.)
-                    s.multiplyScalar(-1.);
-             //  s=spin(s,Math.PI);
+                  //  s.multiplyScalar(-1.);
+               s=spin(s,Math.PI);
                 }
 
 
@@ -870,7 +870,7 @@ if(swap==1&&petals==0.)
 {
     alternator = (((counter-loops)%2.)-.5)*2.;
   // if (alternator==-1.)s=spin(s,Math.PI);
-    //s.multiplyScalar(alternator);
+s.multiplyScalar(alternator);
 }
     if(swap>0&&//counter>1.&&//distributor&&//not quite the same as distributor, but I don't want to add another button
 //    morph==0.&&
