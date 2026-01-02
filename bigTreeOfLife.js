@@ -511,7 +511,8 @@ if(Refractelate&&dstnce>refractelC){s.divideScalar( refractelC);} //refractelC/=
             if((counter==1.&&oppositionalCoreFlop==1)||oppositionalCoreFlop==2)
                 {//s=spinVector(s,Math.PI);
                // if(morph==0.&&petals==0.)
-                    s.multiplyScalar(-1.);
+                  //  s.multiplyScalar(-1.);
+               s=spin(s,Math.PI);
                 }
 
 
@@ -865,9 +866,13 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
         var angleS = Math.atan2(s.y,s.x);
 
   var alternator=1.;
-if(swap==1&&petals==0.)alternator = (((counter-loops)%2.)-.5)*2.;
-        if(swap==1&&petals==0.)s.multiplyScalar(alternator);
-if(swap>0&&//counter>1.&&//distributor&&//not quite the same as distributor, but I don't want to add another button
+if(swap==1&&petals==0.)
+{
+    alternator = (((counter-loops)%2.)-.5)*2.;
+   if (alternator==-1.)s=spin(s,Math.PI);
+    //s.multiplyScalar(alternator);
+}
+    if(swap>0&&//counter>1.&&//distributor&&//not quite the same as distributor, but I don't want to add another button
 //    morph==0.&&
 (angleS+Math.PI*2+Math.PI*2/12.*alternator)%(Math.PI*2/3.)>Math.PI*2/6.) //p*=0.;
 {

@@ -4354,8 +4354,8 @@ bubble=dstnce;
  //  s=spin2(s,PI);
    // else 
        //if(morph==0.&&petals==0.)
-
-   s*=-1.;//may not be petals==0.
+spin2(s,PI);
+  // s*=-1.;//may not be petals==0.
    }
    lastLastS=lastS;
    lastS = s;//before or after flop?
@@ -4900,7 +4900,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
     if(spinTowardsMe) if(float(i)>=hyperCoreBoosted-.5)s=spin2(s,atan(d.y,d.x));
 
    // if(distributor)s=spin2(s,distributorFACTOR);
-
+    s*=-1.;
        float angleS = atan(s.y,s.x);
 
 
@@ -4908,8 +4908,11 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
 
         float alternator=1.;
 if(swap==1&&petals==0.)
-{alternator = (mod(counter-loops,2.)-.5)*2.;
-    s*=alternator;
+{
+    
+    alternator = (mod(counter-loops,2.)-.5)*2.;
+   // s*=alternator;
+    if(alternator==-1.)spin2(s,PI);
 }
 
 
