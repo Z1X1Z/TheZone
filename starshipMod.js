@@ -3434,9 +3434,9 @@ for(let n = 0; n < polygons.length; n++)
                                                          
                                                          
                                                          // if (distanceFromCenter<=1)
-                                                         if(Math.sqrt(polygons[n].dx*polygons[n].dx+polygons[n].dy*polygons[n].dy)/((Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y)))<window.movementRate)
+                                                         if(Math.sqrt(polygons[n].dx*polygons[n].dx+polygons[n].dy*polygons[n].dy)<window.movementRate)
                                                          {
-                                                             compound*=Math.abs(.5*minimumDimension/maximumDimension -distanceFromCenter);
+                                                             compound*=((.5-xFromCent)**2+(.5-yFromCent)**2)**.5;
                                                     
                                                     
                                                         polygons[n].dx+=-Math.cos(angleTarget)*compound;
