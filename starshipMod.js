@@ -1064,6 +1064,7 @@ function loadFrequencyTextures(){
     if(numberOfBins>0){
     for (var ts=0.; ts<radialIncrements; ts++){
          let angleb = ts*1./radialIncrements;
+        // if(Math.round(angleb*12.)==0.)
         for(var y=-4; y<8;y++){
                 
             let frequency= 2**(angleb+y)*window.ConcertKey;
@@ -3388,7 +3389,7 @@ if(uniforms.gameOn.value&&allCaught)
 else if(!uniforms.gameOn.value){polygons=[]; level = 1; metaLevel=1;}
                                         
                                         const baseMag=(1.-(metaLevel-level)/(metaLevel));
-                                        let compound =baseMag/100.*window.movementRate/pixelShaderToStarshipRATIO;
+                                        let compound =baseMag/100.*window.movementRate;
 
 for(let n = 0; n < polygons.length; n++)
                                                        {
@@ -3442,7 +3443,7 @@ for(let n = 0; n < polygons.length; n++)
                                                         polygons[n].dy+=-Math.sin(angleTarget)*compound;
                                                     
                                                          }
-                                                         var slowDown = .987654321**(interpolation);
+                                                         var slowDown = .987654321;//**(interpolation);
                                                          polygons[n].dx*=slowDown;
                                                          polygons[n].dy*=slowDown;
 
