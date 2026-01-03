@@ -3434,7 +3434,7 @@ for(let n = 0; n < polygons.length; n++)
                                                          
                                                          
                                                          // if (distanceFromCenter<=1)
-                                                         if(Math.sqrt(polygons[n].dx*polygons[n].dx+polygons[n].dy*polygons[n].dy)<minimumDimension/maximumDimension)
+                                                         if(Math.sqrt(polygons[n].dx*polygons[n].dx+polygons[n].dy*polygons[n].dy)*maximumDimension/minimumDimension<window.movementRate)
                                                          {
                                                              compound*=Math.abs(.5*minimumDimension/maximumDimension -distanceFromCenter);
                                                     
@@ -3444,7 +3444,6 @@ for(let n = 0; n < polygons.length; n++)
                                                     
                                                          }
                                                          var slowDown = .987654321**(interpolation);
-                                                         console.log(slowDown)
                                                          polygons[n].dx*=slowDown;
                                                          polygons[n].dy*=slowDown;
 
