@@ -3389,7 +3389,7 @@ if(uniforms.gameOn.value&&allCaught)
 else if(!uniforms.gameOn.value){polygons=[]; level = 1; metaLevel=1;}
                                         
                                         const baseMag=(1.-(metaLevel-level)/(metaLevel));
-                                        let compound =baseMag/100.*window.movementRate;
+                                        let compound =baseMag/100.*window.movementRate/pixelShaderToStarshipRATIO;
 
 for(let n = 0; n < polygons.length; n++)
                                                        {
@@ -3412,9 +3412,9 @@ for(let n = 0; n < polygons.length; n++)
                                                          
                                                          var neutralizer=1.;
                                                          if (!on)neutralizer=0.;
-                                                         polygons[n].centerX += (d_x*neutralizer-polygons[n].dx)/1000.*interpolation;
+                                                         polygons[n].centerX += (d_x*neutralizer-polygons[n].dx)*MR*interpolation;
                                                        
-                                                         polygons[n].centerY += (d_y*neutralizer-polygons[n].dy)/1000.*interpolation;
+                                                         polygons[n].centerY += (d_y*neutralizer-polygons[n].dy)*MR*interpolation;
 
                                                          if(uniforms.colorCombo.value==20&&!(uniforms.musicAngelMan.value>0&&(uniforms.Character.value==3||uniforms.Character.value==4))){
                                                              distanceFromCenter= Math.pow((xFromCent*xFromCent+(yFromCent+.25)*(yFromCent+.25)),.5)/uniforms.shaderScale.value/1.75/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y));
@@ -3443,7 +3443,7 @@ for(let n = 0; n < polygons.length; n++)
                                                         polygons[n].dy+=-Math.sin(angleTarget)*compound;
                                                     
                                                          }
-                                                         var slowDown = .98**(interpolation);
+                                                         var slowDown = .987654321**(interpolation);
                                                          polygons[n].dx*=slowDown;
                                                          polygons[n].dy*=slowDown;
 
