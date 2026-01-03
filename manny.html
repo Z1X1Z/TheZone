@@ -4351,11 +4351,11 @@ bubble=dstnce;
    if((counter==1.&&oppositionalCoreFlop==1)||oppositionalCoreFlop==2)
    {
    // if(mod(counter,2.)==0.)
- //  s=spin2(s,PI);
+   //s=spin2(s,PI);
    // else 
        //if(morph==0.&&petals==0.)
 //s=spin2(s,PI);
-  s*=-1.;//may not be petals==0.
+  s*=-1.;
    }
    lastLastS=lastS;
    lastS = s;//before or after flop?
@@ -4931,6 +4931,8 @@ PI2/3.)>PI2/6.) //p*=0.;
 //s=spin2(s,PI);
 //s*=-1.;
 s*=alternator;
+    //if(alternator==-1.)s=spin2(s,PI);
+
 unSwitch= !unSwitch;
 } 
 
