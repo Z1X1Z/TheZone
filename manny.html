@@ -7020,7 +7020,7 @@ if ((HEART.x!=0.||HEART.y!=0.||HEART.z!=0.)&&oneEye.r!=0.)
 }
 if(oneEye.r!=0.)zoomer=-oneEye;
 
-   if(oneEye.r>0.&&pixelShipGrey!=0.)oneEye=vec3(pixelShipGrey);
+   if(oneEye.r!=0.&&pixelShipGrey!=0.)oneEye=vec3(-pixelShipGrey);
 
                                  heartWarmed-=(pillar.x+pillar.y+pillar.z)*100.;
             vec3 seeThrough = pixelStarship.xyz+(1.-pixelStarship.w*pixelStarship.w);
