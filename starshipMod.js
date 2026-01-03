@@ -3389,7 +3389,7 @@ if(uniforms.gameOn.value&&allCaught)
 else if(!uniforms.gameOn.value){polygons=[]; level = 1; metaLevel=1;}
                                         
                                         const baseMag=(1.-(metaLevel-level)/(metaLevel));
-                                        let compound =baseMag/150.*window.movementRate/pixelShaderToStarshipRATIO;
+                                        let compound =baseMag/100.*window.movementRate/pixelShaderToStarshipRATIO;
 
 for(let n = 0; n < polygons.length; n++)
                                                        {
@@ -3423,7 +3423,7 @@ for(let n = 0; n < polygons.length; n++)
                                                              
                                                          }
                                                          else {
-                                                             distanceFromCenter= Math.pow(xFromCent*xFromCent+yFromCent*yFromCent,.5)/(Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y));
+                                                             distanceFromCenter= Math.pow(xFromCent*xFromCent+yFromCent*yFromCent,.5);
                                                              triggerDistance=distanceFromCenter;
                                                              
                                                          }
@@ -3434,7 +3434,7 @@ for(let n = 0; n < polygons.length; n++)
                                                          
                                                          
                                                          // if (distanceFromCenter<=1)
-                                                         if(Math.sqrt(polygons[n].dx*polygons[n].dx+polygons[n].dy*polygons[n].dy)<window.movementRate)
+                                                         if(Math.sqrt(polygons[n].dx*polygons[n].dx+polygons[n].dy*polygons[n].dy)/((Math.min(uniforms.resolution.value.x,uniforms.resolution.value.y)/Math.max(uniforms.resolution.value.x,uniforms.resolution.value.y)))<window.movementRate)
                                                          {
                                                              compound*=Math.abs(.5*minimumDimension/maximumDimension -distanceFromCenter);
                                                     
