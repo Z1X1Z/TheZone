@@ -359,7 +359,7 @@ function resetAll(){
             window.zoomAtl41=false;//watch for the 1 and the l
 
                                          window.onO = false;
-    window.EldersLeg = 12;
+    window.EldersLeg = 24;
 
     
                                        window.fileInput="no file";  
