@@ -4041,7 +4041,14 @@ let tolerance=0;//(1024-26)/10000
                                                         tolerance/=(-leafPermanent/trunc)*trunc;//makes over and under stable and greatly enhances accuracy
                                                            //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMP+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
                                                            tolerance=(tolerance/trunc)*trunc
-                                                           tolerance=(tolerance)**(1.+tolerance)
+                                                           var toleranceFixed = tolerance;
+                                                           var ll = 0.
+                                                           for(var vvv = 0.; vvv<1.;vvv+=tolerance)
+                                                           {
+                                                            tolerance=(toleranceFixed)**((1+tolerance))
+                                                          //  ll++
+                                                           }
+                                                           // console.log(ll)
 
                                                             }
                                                           else tolerance=0.;
