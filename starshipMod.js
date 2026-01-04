@@ -3937,8 +3937,10 @@ function calculatePitch ()
 {
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance=0;//(1024-26)/10000
-//let preTrunc = Math.log(totalAMP)*-leafPermanent/2.
+let preTrunc = Math.log(totalAMP)*-leafPermanent/2.
 let totalAMPmodified = totalAMP
+totalAMPmodified = (((totalAMP)/preTrunc)*preTrunc)
+
 totalAMPmodified=(totalAMPmodified/((-leafPermanent)));
 //totalAMPmodified = (((totalAMP)/preTrunc)*preTrunc)
                                                          if(window.highORlow==0){
@@ -4059,12 +4061,12 @@ totalAMPmodified=(totalAMPmodified/((-leafPermanent)));
                                                             toleranceFixed = tolerance;
                                                     for(var vvv = 0.; vvv<1.5;vvv+=tAScaledPermanent)
                                                            {
-                                                            tolerance=(tolerance)**((1-toleranceFixed))
+                                                            tolerance=(toleranceFixed)**((1-tolerance))
                                                            // ll++
                                                            }
                                                 tolerance=((tolerance)/trunc)*trunc
 
-                                                           tolerance/=2.;
+                                                             tolerance/=2.;
 
                                                 tolerance=((tolerance)/trunc)*trunc
 
