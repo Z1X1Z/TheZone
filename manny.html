@@ -3800,6 +3800,7 @@ vec4 tol(vec2 p, vec2 t){
                     
                     bool gated = false;
                     bool unSwitch=false;
+                    bool unSwitch2=false;
 
                     
                                                                                               float angle = atan(p.y,p.x);
@@ -4935,7 +4936,11 @@ PI2/3.)>PI2/6.) //p*=0.;
 s*=alternator;
     //if(alternator==-1.)s=spin2(s,PI);
 
-if(alternator==-1.)unSwitch= !unSwitch;
+if(alternator==-1.)
+unSwitch= !unSwitch;
+//else
+unSwitch2= !unSwitch2;
+
 } 
 
 
@@ -5099,6 +5104,8 @@ hyperCoreOUTPUT--;
    if(lpcc<twoThirds&&length(window)<twoThirds) deSplicedS=pCenterCored;
    if(unSwitch)   deSplicedS=spin2(deSplicedS,PI);
 
+
+                       
   if(gatedPass)deSplicedS=spin2(deSplicedS,-PI/6.);
 
       dstnce = length(deSplicedS);
@@ -5130,8 +5137,16 @@ hyperCoreOUTPUT--;
                     
                    sevenSuns+=texture2D(videoTexture,vec2(1.-cloverMAP.x,cloverMAP.y))+texture2D(videoTexture2,vec2(1.-cloverMAP.x,cloverMAP.y));
 
-                    
-                       if(eden==0)starship+=texture2D(STAR,cloverMAPadj)/decayCanceller;
+  vec2 deSplicedS2 =window;
+
+                       if(unSwitch2)   deSplicedS2=spin2(deSplicedS2,PI);
+  if(gatedPass)deSplicedS2=spin2(deSplicedS2,-PI/6.);
+
+                          vec2 cloverMAPNeutral2 = ((spin2(vec2(deSplicedS2.y,-deSplicedS2.x),-atan(deSplicedS2.y,deSplicedS2.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment)));
+                                                    
+                               vec2   cloverMAP2 = cloverMAPNeutral2+.5;
+                                vec2 cloverMAPadj =cloverMAPNeutral*dimensionFix+.5;  
+                                                     if(eden==0)starship+=texture2D(STAR,cloverMAPadj)/decayCanceller;
                        else if(eden==1)starship+=texture2D(EDEN,cloverMAPadj)/decayCanceller;
                        //*length((vUv-.5)*max(resolution.x,resolution.y)/min(resolution.x,resolution.y));//+texture2D(STAR,cloverMAP);
                             
