@@ -3367,7 +3367,7 @@ uniforms.dotCoord.value =new THREE.Vector2(circleX,circleY) ;
                    centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-1) );
 
                                   radialLine.geometry.setFromPoints( centerOfDotToEdge )
-    polyRad = 2.*Math.PI/(metaLevel)*maximumDimension/minimumDimension/11;
+    polyRad = 2.*Math.PI/(metaLevel)*maximumDimension/minimumDimension/8;
 
 let allCaught = true;
 for (var n=0; n<polygons.length; n++) if(  polygons[n].caught == false) allCaught = false;
@@ -4040,8 +4040,8 @@ let tolerance=0;//(1024-26)/10000
                                                                 let trunc=  Math.log(totalAMP)*-leafPermanent/2.
                                                         tolerance/=(-leafPermanent/trunc)*trunc;//makes over and under stable and greatly enhances accuracy
                                                            //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMP+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
-                                                          tolerance=(tolerance/trunc)*trunc
-                                                             
+                                                           tolerance=(tolerance/trunc)*trunc
+
                                                             }
                                                           else tolerance=0.;
                                                          }
