@@ -4027,8 +4027,8 @@ let tolerance=0;//(1024-26)/10000
                                                                  }
                                                                //  tolerance+=plusOrMinusPowerSeriesBUFFER
                                                         tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMP+ tAScaledPermanent+tolerance-plusOrMinusPowerSeriesNorm));
-                                                                let trunc=  Math.log(totalAMP)*2.
-                                                        tolerance/=(-leafPermanent);//makes over and under stable and greatly enhances accuracy
+                                                                let trunc=  Math.log(totalAMP)*-leafPermanent*2.
+                                                        tolerance/=(-leafPermanent/trunc)*trunc;//makes over and under stable and greatly enhances accuracy
                                                            //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMP+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
                                                           tolerance=(tolerance/trunc)*trunc
                                                              
