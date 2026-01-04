@@ -440,10 +440,6 @@ radialWarp=b;
                  <label for="StarClover">Star in Clover?![O]</label><br>
                  
 
-                 <input type="checkbox" id="TrailOverflowsClover" name="t"  onclick= "
-                     key  = 'Z';
-                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                     <label for="TrailOverflowsClover">Trail Overflows Clover![Z]</label><br>
                      
                      <input type="checkbox" id="flameOrRiver" name="t"  onclick= "
                          key  = 'r';
@@ -481,11 +477,17 @@ radialWarp=b;
                                              <label for="lfeq">Linear Frequency?![,.q]</label><br>
 
 
-                     <a id="spirograph" name="t"  onclick= "
+                     <a id="TrailOverflowsClover" name="t"  onclick= "
+                     
+                     key  = 'Z';
+                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                        Trail Overflows![Z]</a><br>
+                     <a id="TrailOverflowsClover" name="t"  onclick= "
                      
                      key  = 'p';
                       callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
                          Spirograph?![,p]</a><br>
+
                <a id="pzyghthe" name="t"  onclick= "
 
                    key  = 't';
@@ -2064,7 +2066,7 @@ void main(){
     uniform float baseN;
     
     uniform bool Inherited;
-    uniform bool spokesVisualizeColors;
+    uniform int spokesVisualizeColors;
     uniform vec2 coords;
     uniform vec2 constellationCoord;
     uniform int starOnDot;
@@ -5130,16 +5132,18 @@ hyperCoreOUTPUT--;
                 //return beta;
         }
 
-             if(dstnce<twoThirds||(spokesVisualizeColors&&dstnce<4./3.)) if(vUv.x!=0.&&vUv.y!=0.&&vUv.x!=1.&&vUv.y!=1.){
+                           sevenSuns+=texture2D(videoTexture,vec2(1.-cloverMAP.x,cloverMAP.y))+texture2D(videoTexture2,vec2(1.-cloverMAP.x,cloverMAP.y));
+
+         if(spokesVisualizeColors>0)    if(dstnce<twoThirds||((spokesVisualizeColors==4||spokesVisualizeColors==3)&&dstnce<4./3.)) if(vUv.x!=0.&&vUv.y!=0.&&vUv.x!=1.&&vUv.y!=1.){
                     float decayCanceller=1.;
-                    if(spokesVisualizeColors)decayCanceller = 2.;
+                    if(spokesVisualizeColors==4||spokesVisualizeColors==3)decayCanceller = 2.;
                     //if(morph!=0.)decayCanceller=decayCanceller*decayCanceller;
                     
-                   sevenSuns+=texture2D(videoTexture,vec2(1.-cloverMAP.x,cloverMAP.y))+texture2D(videoTexture2,vec2(1.-cloverMAP.x,cloverMAP.y));
 
   vec2 deSplicedS2 =window;
 
-                       if(unSwitch2)   deSplicedS2=spin2(deSplicedS2,PI);
+                       if(unSwitch2&&(spokesVisualizeColors==2||spokesVisualizeColors==4))   deSplicedS2=spin2(deSplicedS2,PI);
+                       else if(unSwitch&&(spokesVisualizeColors==1||spokesVisualizeColors==3))   deSplicedS2=spin2(deSplicedS,PI);
   if(gatedPass)deSplicedS2=spin2(deSplicedS2,-PI/6.);
 
                           vec2 cloverMAPNeutral2 = ((spin2(vec2(deSplicedS2.y,-deSplicedS2.x),-atan(deSplicedS2.y,deSplicedS2.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment)));
