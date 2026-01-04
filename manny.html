@@ -4911,6 +4911,8 @@ if(swap==1&&petals==0.)
     
     alternator = (mod(counter-loops,2.)-.5)*2.;
     s*=alternator;
+    if(alternator==-1.)unSwitch= !unSwitch;
+
     //if(alternator==-1.)s=spin2(s,PI);
     // s*=-1.;
 }
@@ -4933,7 +4935,7 @@ PI2/3.)>PI2/6.) //p*=0.;
 s*=alternator;
     //if(alternator==-1.)s=spin2(s,PI);
 
-unSwitch= !unSwitch;
+if(alternator==-1.)unSwitch= !unSwitch;
 } 
 
 
