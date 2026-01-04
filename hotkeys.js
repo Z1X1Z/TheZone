@@ -72,7 +72,7 @@ radialFrequenciesSummed:{value:null},
 radialIncrements:{value:1},
     major:{value:3},
         eden:{value: 0},
-        spokesVisualizeColors: {value: 2    },
+        spokesVisualizeColors: {value: 1    },
         note:{value: 48.},
         brelued:{value: 1.},
         balloonsON:{value: 0.},
@@ -1227,7 +1227,7 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
         RockInTheWater+=1;RockInTheWater=RockInTheWater%3;}
     
     else if (key=="z")uniforms[ "helm" ].value = !uniforms[ "helm" ].value;
-    else if (key=="Z")uniforms[ "spokesVisualizeColors" ].value = (uniforms[ "spokesVisualizeColors" ].value+1.)%4;
+    else if (key=="Z")uniforms[ "spokesVisualizeColors" ].value = (uniforms[ "spokesVisualizeColors" ].value+1.)%5;
     
     else if (key=="j"){
         if(uniforms[ "carousel" ].value==0)uniforms[ "carousel" ].value=-1.;
