@@ -4043,7 +4043,7 @@ let tolerance=0;//(1024-26)/10000
                                                            tolerance=(tolerance/trunc)*trunc
                                                            var toleranceFixed = tolerance;
                                                            var ll = 0.
-                                                           for(var vvv = 0.; vvv<1.;vvv+=tolerance)
+                                                           for(var vvv = 0.; vvv<1.;vvv+=toleranceFixed)
                                                            {
                                                             tolerance=(toleranceFixed)**((1+tolerance))
                                                           //  ll++
