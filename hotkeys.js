@@ -241,7 +241,7 @@ window.settingsSet = false
                  window.computeFPS=false;
 
 
-const starSHIPVOLUMEdefaultLowVolume = 1./1024;//used in sstarshipmod
+const starSHIPVOLUMEdefaultLowVolume = 1./2048;//used in sstarshipmod
 
 
 function resetAll(){
