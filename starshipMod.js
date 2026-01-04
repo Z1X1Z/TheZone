@@ -4055,7 +4055,7 @@ let tolerance=0;//(1024-26)/10000
                                                             tolerance=(toleranceFixed)**((1+tolerance))
                                                            // ll++
                                                            }
-                                            tolerance*=(((-leafPermanent*2.)/trunc)*trunc);//makes over and under stable and greatly enhances accuracy
+                                            tolerance*=(((-leafPermanent*2.)));//makes over and under stable and greatly enhances accuracy
 
                                                 tolerance=(tolerance/trunc)*trunc
 
