@@ -4049,6 +4049,7 @@ let tolerance=0;//(1024-26)/10000
                                                            // ll++
                                                            }
                                                 tolerance=(tolerance/trunc)*trunc
+                                                            toleranceFixed = tolerance;
                                                     for(var vvv = 0.; vvv<1.;vvv+=tAScaledPermanent)
                                                            {
                                                             tolerance=(toleranceFixed)**((1+tolerance))
