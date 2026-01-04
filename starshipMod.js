@@ -2731,7 +2731,7 @@ else{//start drawing of just twenty four frets here
 
                     let centerDisplacement = .5;//4./7.;//9./14.;
                                                          
-                                                         var TransparencyStar = 0.25;
+                                                         var TransparencyStar = .75;//.5?
                                                          var TransparencyStar2 = 1.;
 
     let inset = 1.;
@@ -2869,15 +2869,25 @@ let yr = lengt*-Math.cos(arm);
                                   starPositionAttribute.setXYZ(starStride+5,(xr-x), (yr-y),  dep)
                                   
                                   
-                                  
+                                /*
                                         starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,TransparencyStar)
                                         starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,TransparencyStar)
                                         starColorAttribute.setXYZW(starStride+2,pureColor.r,pureColor.g,pureColor.b,TransparencyStar2)
                                         starColorAttribute.setXYZW(starStride+3,vop.r,vop.g,vop.b,TransparencyStar)
                                         starColorAttribute.setXYZW(starStride+4,pureColor.r,pureColor.g,pureColor.b,TransparencyStar2)
                                         starColorAttribute.setXYZW(starStride+5,pureColor.r,pureColor.g,pureColor.b,TransparencyStar2)
-                                                                           
+                                             */                              
+
+
+                                        starColorAttribute.setXYZW(starStride,pureColor.r,pureColor.g,pureColor.b,TransparencyStar)
+                                        starColorAttribute.setXYZW(starStride+1,pureColor.r,pureColor.g,pureColor.b,TransparencyStar)
+                                        starColorAttribute.setXYZW(starStride+2,pureColor.r,pureColor.g,pureColor.b,TransparencyStar2)
+                                        starColorAttribute.setXYZW(starStride+3,pureColor.r,pureColor.g,pureColor.b,TransparencyStar)
+                                        starColorAttribute.setXYZW(starStride+4,pureColor.r,pureColor.g,pureColor.b,TransparencyStar2)
+                                        starColorAttribute.setXYZW(starStride+5,pureColor.r,pureColor.g,pureColor.b,TransparencyStar2)
+                                                                       
                                                starStride+=6;
+
                           let greyBoost = (1.+incrementation/2.)*1.1;
                   x *= greyBoost;
                   y *= greyBoost;
