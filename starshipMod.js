@@ -4041,6 +4041,7 @@ let tolerance=0;//(1024-26)/10000
                                                         tolerance/=(-leafPermanent/trunc)*trunc;//makes over and under stable and greatly enhances accuracy
                                                            //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMP+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
                                                            tolerance=(tolerance/trunc)*trunc
+                                                           tolerance=(tolerance)**(1.+tolerance)
 
                                                             }
                                                           else tolerance=0.;
