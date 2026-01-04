@@ -3939,7 +3939,7 @@ function calculatePitch ()
 let tolerance=0;//(1024-26)/10000
 let preTrunc = Math.log(totalAMP)*-leafPermanent/2.
 let totalAMPmodified = totalAMP
-totalAMPmodified = (((totalAMP)/preTrunc)*preTrunc)
+//totalAMPmodified = (((totalAMP)/preTrunc)*preTrunc)
 
 totalAMPmodified=(totalAMPmodified/((-leafPermanent)));
 //totalAMPmodified = (((totalAMP)/preTrunc)*preTrunc)
@@ -4044,7 +4044,7 @@ totalAMPmodified=(totalAMPmodified/((-leafPermanent)));
                                                                //  tolerance+=plusOrMinusPowerSeriesBUFFER
                                                         tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMPmodified+ tAScaledPermanent+tolerance-plusOrMinusPowerSeriesNorm));
                                                                 let trunc=  Math.log(totalAMPmodified)*-leafPermanent/2.
-                                                        tolerance/=(-leafPermanent/trunc)*trunc;//makes over and under stable and greatly enhances accuracy
+                                                    //    tolerance/=(-leafPermanent/trunc)*trunc;//makes over and under stable and greatly enhances accuracy
                                                            //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMPmodified+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
                                                            tolerance=(tolerance/trunc)*trunc
                                                            var toleranceFixed = tolerance;
@@ -4061,12 +4061,12 @@ totalAMPmodified=(totalAMPmodified/((-leafPermanent)));
                                                             toleranceFixed = tolerance;
                                                     for(var vvv = 0.; vvv<1.5;vvv+=tAScaledPermanent)
                                                            {
-                                                            tolerance=(toleranceFixed)**((1-tolerance))
+                                                            tolerance=(tolerance)**((1-toleranceFixed))
                                                            // ll++
                                                            }
-                                                tolerance=((tolerance)/trunc)*trunc
+                                               tolerance=((tolerance)/trunc)*trunc
 
-                                                             tolerance/=2.;
+                                                           tolerance/=2.;
 
                                                 tolerance=((tolerance)/trunc)*trunc
 
