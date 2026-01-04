@@ -3389,7 +3389,7 @@ if(uniforms.gameOn.value&&allCaught)
 else if(!uniforms.gameOn.value){polygons=[]; level = 1; metaLevel=1;}
                                         
                                         const baseMag=(1.-(metaLevel-level)/(metaLevel));
-                                        let compound =baseMag/50.*window.movementRate/pixelShaderToStarshipRATIO;
+                                        let compound =baseMag/100.*window.movementRate/pixelShaderToStarshipRATIO;
 
 for(let n = 0; n < polygons.length; n++)
                                                        {
@@ -3443,10 +3443,12 @@ for(let n = 0; n < polygons.length; n++)
                                                         polygons[n].dy+=-Math.sin(angleTarget)*compound;
                                                     
                                                          }
-                                                         var slowDown = .987654321**(1./interpolation);
+                                                         if(isFinite(interpolation)&&interpolation>0.)
+                                                         {
+                                                         var slowDown = .99**(1./interpolation);
                                                          polygons[n].dx*=slowDown;
                                                          polygons[n].dy*=slowDown;
-
+                                                         }
                                                          const ddX= circleX-polygons[n].centerX;
                                                          const ddY= circleY-polygons[n].centerY;
                                                          const distDot = Math.sqrt(ddX*ddX+ddY*ddY);
