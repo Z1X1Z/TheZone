@@ -3937,15 +3937,19 @@ function calculatePitch ()
 {
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance=0;//(1024-26)/10000
+let preTrunc = Math.log(totalAMP)*-leafPermanent/2.
+let totalAMPmodified = totalAMP
+totalAMPmodified=(totalAMPmodified/((-leafPermanent)))**2;
+totalAMPmodified = (((totalAMP)/preTrunc)*preTrunc)
                                                          if(window.highORlow==0){
-                                                             if(totalAMP>0&&isFinite(totalAMP))
+                                                             if(totalAMPmodified>0&&isFinite(totalAMPmodified))
                                                              {
                                                                  let proportion= fractionOfFrame/bufferSize;
-                                                                 let tAScaled=0.;//totalAMP*proportion;
+                                                                 let tAScaled=0.;//totalAMPmodified*proportion;
                                                                  
                                                                  
                                                                 /* for(n=2;n<4;n++)if(n!=0){
-                                                                     let plusOrMinusPowerSeries = (totalAMP)**(1./n)*-Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
+                                                                     let plusOrMinusPowerSeries = (totalAMPmodified)**(1./n)*-Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                      if(plusOrMinusPowerSeries!=0.)tAScaled+=plusOrMinusPowerSeries;
                                                                      else break;
                                                                  }
@@ -3953,7 +3957,7 @@ let tolerance=0;//(1024-26)/10000
                                                                  for(n=1;n<111;n++)
                                                                     // for(n=1;n<111;n++)
                                                                  {
-                                                                     let plusOrMinusPowerSeries = (totalAMP)**n*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
+                                                                     let plusOrMinusPowerSeries = (totalAMPmodified)**n*Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
                                                                      if(plusOrMinusPowerSeries!=0.)tAScaled+=plusOrMinusPowerSeries;
                                                                      else break;
                                                                  }
@@ -3965,9 +3969,9 @@ let tolerance=0;//(1024-26)/10000
                                                                  let loopy = 0;
                                                                  
                                                                  if(tAScaled>0&&isFinite(tAScaled))
-                                                                     for(var reps=  0.;  reps<totalAMP**(7-totalAMP);reps+=tAScaledPermanent**(3.-tAScaledPermanent))
+                                                                     for(var reps=  0.;  reps<totalAMPmodified**(7-totalAMPmodified);reps+=tAScaledPermanent**(3.-tAScaledPermanent))
                                                                   //   for(var reps=0; reps<2.;reps+=1)
-                                                      //                 for(reps=0;reps<5.;reps+=1.+1./(1.-totalAMP))
+                                                      //                 for(reps=0;reps<5.;reps+=1.+1./(1.-totalAMPmodified))
 
                                                                      { tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaledPermanent))/(2.-tAScaledPermanent))
                                                                          let taEX1 = ((1.-tAScaled)*(1.+tAScaledPermanent));
@@ -3993,11 +3997,11 @@ let tolerance=0;//(1024-26)/10000
                                                                 let plusOrMinusPowerSeriesNorm=plusOrMinusPowerSeries
                                                                  let loopsThresh = 1
                                                              
-                                                        //        if(totalAMP<.5-.01)
+                                                        //        if(totalAMPmodified<.5-.01)
                                                                      for(n=1;n< 445;n+=1.)
 
                                                                  
-                                                                   //  for(n=0;n<444;n+=2.-totalAMP//1./(1.+1./totalAMP)
+                                                                   //  for(n=0;n<444;n+=2.-totalAMPmodified//1./(1.+1./totalAMPmodified)
                                                                        //  )//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
                                                                  
                                                                  {
@@ -4005,7 +4009,7 @@ let tolerance=0;//(1024-26)/10000
                                                   //console.log(plusOrMinusPowerSeries)
                                                                     
                                                                                                                               plusOrMinusPowerSeries = (tAScaled**(2**(-1./(loopsThresh
-                                                                                                                                                                              +.5+(1.5+ totalAMP+plusOrMinusPowerSeries)**loopsThresh
+                                                                                                                                                                              +.5+(1.5+ totalAMPmodified+plusOrMinusPowerSeries)**loopsThresh
                                                                                                                                                                          +(tAScaled*plusOrMinusPowerSeries-1.)//+tAScaled*plusOrMinusPowerSeries)
                                                                                                                                                                                *sig))))*sig
                                                                                                                                                           //plusOrMinusPowerSeries = (tAScaled**(2**(-1.49/(loopsThresh+2))))*sig
@@ -4036,10 +4040,10 @@ let tolerance=0;//(1024-26)/10000
 
                                                                  }
                                                                //  tolerance+=plusOrMinusPowerSeriesBUFFER
-                                                        tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMP+ tAScaledPermanent+tolerance-plusOrMinusPowerSeriesNorm));
-                                                                let trunc=  Math.log(totalAMP)*-leafPermanent/2.
+                                                        tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMPmodified+ tAScaledPermanent+tolerance-plusOrMinusPowerSeriesNorm));
+                                                                let trunc=  Math.log(totalAMPmodified)*-leafPermanent/2.
                                                         tolerance/=(-leafPermanent/trunc)*trunc;//makes over and under stable and greatly enhances accuracy
-                                                           //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMP+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
+                                                           //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMPmodified+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
                                                            tolerance=(tolerance/trunc)*trunc
                                                            var toleranceFixed = tolerance;
                                                            var ll = 0.
@@ -4078,7 +4082,7 @@ let tolerance=0;//(1024-26)/10000
                                                         //   console.log(tolerance);
                 /*
                  for(n=0;n<111;n++)if(n!=0){
-                 let plusOrMinusPowerSeries = totalAMP**n*Math.sign(n%2-.5);//x-x**2+x**3-x**4....
+                 let plusOrMinusPowerSeries = totalAMPmodified**n*Math.sign(n%2-.5);//x-x**2+x**3-x**4....
                  if(plusOrMinusPowerSeries!=0.)tolerance+=plusOrMinusPowerSeries;
                  else break;
                  };
