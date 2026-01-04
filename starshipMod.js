@@ -4051,11 +4051,11 @@ let tolerance=0;//(1024-26)/10000
                                                            // ll++
                                                            }
                                                            
-                                                tolerance=(tolerance/trunc)*trunc
+                                            //    tolerance=(tolerance/trunc)*trunc
                                                             toleranceFixed = tolerance;
                                                     for(var vvv = 0.; vvv<2.;vvv+=tAScaledPermanent)
                                                            {
-                                                            tolerance=(toleranceFixed)**((1-tolerance))
+                                                            tolerance=(tolerance)**((1-toleranceFixed))
                                                            // ll++
                                                            }
 
