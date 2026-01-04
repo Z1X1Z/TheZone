@@ -4048,6 +4048,7 @@ let tolerance=0;//(1024-26)/10000
                                                             tolerance=(toleranceFixed)**((1+tolerance))
                                                            // ll++
                                                            }
+
                                                 tolerance=(tolerance/trunc)*trunc
                                                             toleranceFixed = tolerance;
                                                     for(var vvv = 0.; vvv<1.;vvv+=tAScaledPermanent)
@@ -4055,7 +4056,10 @@ let tolerance=0;//(1024-26)/10000
                                                             tolerance=(toleranceFixed)**((1+tolerance))
                                                            // ll++
                                                            }
+                                                        tolerance*=(-leafPermanent/trunc)*trunc;//makes over and under stable and greatly enhances accuracy
+
                                                 tolerance=(tolerance/trunc)*trunc
+
 
                                                          //   console.log(ll)
 
