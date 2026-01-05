@@ -3939,9 +3939,9 @@ function calculatePitch ()
 let tolerance=0;//(1024-26)/10000
 let preTrunc = Math.log(totalAMP)*-leafPermanent/2.
 let totalAMPmodified = totalAMP
-
-totalAMPmodified=(totalAMPmodified/((-leafPermanent)));
 totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
+
+totalAMPmodified=(totalAMPmodified/((-leafPermanent/preTrunc)*preTrunc));
 
 //totalAMPmodified = (((totalAMP)/preTrunc)*preTrunc)
                                                          if(window.highORlow==0){
