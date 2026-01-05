@@ -239,6 +239,9 @@ if(squareClover)s.divide( new THREE.Vector2(Math.sqrt(2.-s.x*s.x),Math.sqrt(2.-s
     var dstnce = s.length();//"distance" may be reserved keyword
   var  pCenterCored = s.clone();
 
+   var lpcc=pCenterCored.length();
+   var lpcc2=lpcc*lpcc;
+
 
 var  pcs= new THREE.Vector2(
 pCenterCored.x*pCenterCored.x*pCenterCored.x  - 3.*pCenterCored.x*pCenterCored.y*pCenterCored.y,
@@ -279,13 +282,13 @@ var logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;
 var dif = 1.;//3.-(1.-.47805268028830)/3.;
 if(MetaCored)hyperCore=
 cored/1.5/squeezeN+Math.log(lfc*squeezeN)*logStabilizationConstant;
-
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 
 //float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
 var equilibriator = 1.
     if(dilate){
-if(lfc>2./3.)equilibriator=lfc/(lfc-zoom/dif)*dif;
+if(lfc/zoom>1.5)
+    equilibriator=lfc/(lfc-zoom/dif)*dif;
    //this is to allow top level core freeze for original clover
 hyperCore*=equilibriator;
    }
@@ -370,8 +373,6 @@ else{
  //     if(squeezeN>1.)hyperCore-=1.25;
 //hyperCore-=1.;
 
-let lpcc = pCenterCored.length();
-   let lpcc2=lpcc*lpcc;
 //if(fieldPowerBoost)hyperCore+=1./Math.log(.5);
 
 if(outerCoresOff)hyperCore=0.;
@@ -496,6 +497,7 @@ for (var counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
         console.log(runTimes)
     }
     */
+  // console.log(hyperCoreOUTPUT)
 var OmniDynamicPetalShift =omniData[0];
 var OmniPetal =OmniDynamicPetalShift*(petalNumber/6.);
 
@@ -529,15 +531,19 @@ if(feedTheLamb){
         (Math.abs((Math.atan(s.y,s.x)/Math.PI/2+1.//+.5/petalNumber
     )%(1./6.)-.5/6.))*petalNumber*6.*2.)+s.length()/Math.log(2.)*petalNumber/6./2.;
 ;
+
+hyperCoreBoosted-=superUpcorer;
+hyperCoreOUTPUT-=superUpcorer;
 }
 
    if(counter!=0.&&dilate&&morph==0.){//this is to allow top level core freeze for original clover
          var dst = s.length();
          dst=Math.sqrt(dst);
+
              hyperCoreBoosted-=dst;
               hyperCoreOUTPUT-=dst;
         }
-     
+
 s=new THREE.Vector2(
 s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
 -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
@@ -550,7 +556,6 @@ polyNomialStretch
     if  (budge==1./3.)                 s.multiplyScalar(lfc/2.+1./4.);//maybe other values work?
     else
     {
-      var stretch=(lfcCenterCored*.5+1.)**.5;
 
 var span=0.;
 if(seventhEYE==3.)
@@ -560,7 +565,7 @@ if(seventhEYE==3.)
     }
 else if(seventhEYE==0.)span = lfcCenterCored;
 else span = lfc;
-    stretch=((span+.5)**.5)**(1./squeezeN);
+    var stretch=((span+.5)**.5)**(1./squeezeN);
 
     if(seventhEYE==0.||lengthP>2./3.)
       s.multiplyScalar(1./stretch);//maybe other values work?
@@ -668,13 +673,13 @@ if(cellularDivision==1||(cellularDivision==2&&counter>1.))s=new THREE.Vector2(s.
         if(Spoker){
           //  if(morph==0.)
             {
-               daisifier=1;
 
                 if(//(!wheel &&
                    Math.sqrt(dstnce)*dstnce<=hyperCoreBoosted//)||(wheel&&1.<=hyperCoreBoosted)
                     )
                 {
-                   /* if(wheel){
+                    /*
+                   if(wheel){
                         s.divideScalar(2.);
                         
                         hyperCoreOUTPUT-=logOfSpoke_Factor;
@@ -682,10 +687,10 @@ if(cellularDivision==1||(cellularDivision==2&&counter>1.))s=new THREE.Vector2(s.
                         hyperCoreBoosted-=logOfSpoke_Factor;
                     }
                     else{
+                
                     */
-                    
                                   
-                    if(counter<=2.)inMainSpoke=true;
+                    if(counter==0.)inMainSpoke=true;
                     if(distributor)
                     {   if (inMainSpoke)
                        // s=spinVector(s,distributorFACTORorth);
@@ -703,6 +708,8 @@ if(cellularDivision==1||(cellularDivision==2&&counter>1.))s=new THREE.Vector2(s.
                    // }
                 }
                 else  {
+                     if(twelveGates)daisifier=0.;
+               else daisifier=1.;
                     /*
                     if(wheel){
                         hyperCoreOUTPUT+=logOfSpoke_Factor;
@@ -729,7 +736,10 @@ if(cellularDivision==1||(cellularDivision==2&&counter>1.))s=new THREE.Vector2(s.
             
         }
       //  dstnce=s.length();
+            //                                              console.log(counter+" here "+dstnce)
+
         if(spokeloverON){
+
             var  dstnceSquaredRooted=dstnce*dstnce*Math.sqrt(dstnce) ;
 
             var powerOfSpokeCore = spoke_factorLarge*dstnceSquaredRooted;
@@ -737,8 +747,8 @@ if(cellularDivision==1||(cellularDivision==2&&counter>1.))s=new THREE.Vector2(s.
 var spokeloverCoreShiftDown=Math.pow(upSpoke,powerOfSpokeCore)*logStabilizationConstant;//spokedD;//Math.pow(downSpoke,powerOfSpokeCore); //was upSpoke           ;//logStabilizationConstant seems to cancel powerOfDynamicSokeCore=2;
 
 var       spokeloverCoreShiftUp   =  Math.pow(downSpoke,powerOfSpokeCore)*logStabilizationConstant;// spokedU;//   Math.pow(Math.abs(downSpoke),powerOfSpokeCore);//for spokelover
-            
-            if(counter+dstnceSquaredRooted//+dstnceSquaredAndRooted
+
+            if(isFinite(spokeloverCoreShiftUp)&&counter+dstnceSquaredRooted//+dstnceSquaredAndRooted
                 <hyperCoreBoosted){
                 //  if(continuumClover) s*=sqrt(2.);//engage shiny spokelover
                 //else
@@ -767,7 +777,7 @@ var       spokeloverCoreShiftUp   =  Math.pow(downSpoke,powerOfSpokeCore)*logSta
                 }
             }
             
-            else //if(  0.>=hyperCoreBoosted)
+            else    if (isFinite(spokeloverCoreShiftDown)) //if(  0.>=hyperCoreBoosted)
             {
             daisifier+=1.;
 
@@ -775,10 +785,10 @@ var       spokeloverCoreShiftUp   =  Math.pow(downSpoke,powerOfSpokeCore)*logSta
 
                 if(!wheel||1==1)
                 {
-                    let coreFactor =spokeloverCoreShiftDown;
-                    if (!inMainSpoke)coreFactor/=spokeloverCoreShiftDown;
-                    hyperCoreOUTPUT-=coreFactor;
-                    hyperCoreBoosted-=coreFactor;
+                  //  let coreFactor =spokeloverCoreShiftDown;
+                //    if (!inMainSpoke)coreFactor/=spokeloverCoreShiftDown;
+                    hyperCoreOUTPUT-=spokeloverCoreShiftDown;
+                    hyperCoreBoosted-=spokeloverCoreShiftDown;
                 }
             }
             
@@ -892,14 +902,14 @@ else s=spin(s,Math.PI);
 
                                    var cloverOrDaisyOnTop = daisifier;//may be +0
 
-    if(twelveGates)cloverOrDaisyOnTop=counter+1.;
+    if(twelveGates)cloverOrDaisyOnTop=daisifier+1.;
     
         if(twelveGatesMeta!=0.&&((twelveGatesMeta<1.&&(cloverOrDaisyOnTop-.5)%(1./twelveGatesMeta)>=1.)||
                                  (twelveGatesMeta>=1.&&cloverOrDaisyOnTop%twelveGatesMeta)<1.))
         {
         if(((angleS/Math.PI+2.)*6.+.5)%2.>1.)s=spin(s,Math.PI/6.);
         }
-   if(superStable)
+ /*  if(superStable)
     {
                 if(i==0){
  if(counter==0.) { s.divideScalar(4.);dstnce/=4.;
@@ -927,7 +937,7 @@ else s=spin(s,Math.PI);
 
 }
     
-  else  { s.multiplyScalar( metaCoreDriveFactor);dstnce*=metaCoreDriveFactor;
+  else */ { s.multiplyScalar( metaCoreDriveFactor);dstnce*=metaCoreDriveFactor;
       hyperCoreBoosted--;
       hyperCoreOUTPUT--;
       loops++;
@@ -943,7 +953,7 @@ if(dstnce<4./3.&&OmniDynamicPetalShift!=0.)s=spinVector(s,Math.atan2(s.y,s.x)*Om
 
 if (cloverSlide||dynamicOvercore)
 {
-if((i)>hyperCoreBoosted)
+/*if((i)>hyperCoreBoosted)
 {
 var b = 0;
     if(cloverSlide)b+=dstnce;
@@ -953,15 +963,24 @@ var b = 0;
 //    hyperCoreOUTPUT+=b;
 
 }
-else{
-    if(cloverSlide){
-        var b = 0;
+else
+    */{
+    if(i>hyperCoreBoosted){
+        var b = dstnce;
         
-        b =dstnce/4.;//may not be core stable
+      //  b =dstnce/4.;//may not be core stable
         loops-=b;
         hyperCoreBoosted+=b;//doesn't work with duper core
         hyperCoreOUTPUT+=b;//doesn't work with duper core
     }
+        else{
+            var b =dstnce/4.;//may not be core stable
+            loops-=b;
+        hyperCoreBoosted+=b;
+        hyperCoreOUTPUT+=b;
+
+        }
+        
 }
     /*
 
@@ -1090,11 +1109,10 @@ window.bigCloverGapSync = false;
                                     
      
             let coreImplosion = Math.abs(Math.floor(coreTriggered)-Math.floor(tree.z));
-            
-            if(coreImplosion>.5//&&Math.round(tree.z)-tree.z<0.
+
+            if(tree.z<1.&&coreImplosion>.5//&&Math.round(tree.z)-tree.z<0.
                )//due to the cycling upcore, it triggers twice per core
             {
-                
                 
                 
                 
