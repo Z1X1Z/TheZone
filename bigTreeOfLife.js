@@ -126,7 +126,7 @@ p= new THREE.Vector2(p.x-Math.sign(p.x)*regenerativeshift,p.y);
     var pWithoutChiralizer = p.clone();
     var chiralAdjustment = 0.;
     if(chirality==-1&&twelveGates){
-    chiralAdjustment=-Math.PI2/24.;
+    chiralAdjustment=-Math.PI*2/24.;
     p=spin(p,-chiralAdjustment);}
     else if(chirality==-1){
     chiralAdjustment=-Math.PI/2.;
@@ -342,13 +342,18 @@ if(polyNomialStretch&&OrthoEvery==0.)
     if(budge==1./3.)
     hyperCore-=2.25/Math.log(.5);///squeezeN;//for central polynomial
 else{
-    var squinch = Math.pow(lengthP-Math.sqrt(zoom),1./squeezeN);
+    var squinch = 0.;
+ if(squinch>.0)      
+    squinch = Math.pow(lpcc/4.-sqrt(lfc*zoom),1./squeezeN);
+     else      squinch = Math.pow(lengthP-Math.sqrt(zoom),1./squeezeN);
+
+
  if(squinch>.0) 
    hyperCore-=Math.log(Math.abs(squinch));
    else
-  hyperCore+=8.*Math.log(2.)/squeezeN;
+  hyperCore+=(8.*Math.log(2.)/squeezeN);
 
-  if(seventhEYE==3.)hyperCore+=(squeezeN)*Math.log2/2.;
+  if(seventhEYE==3.)hyperCore+=(squeezeN)*Math.log(2.)/2.;
   //hyperCore-=.25;
   if(!polyNomialStretch)
  // if (seventhEYE!=3.)hyperCore+=Math.log(2)*1.5;
@@ -521,9 +526,10 @@ var lastS = s.clone();
 if(feedTheLamb){
     superUpcorer =
     -1.+1./(
-        (Math.abs((Math.atan(s.y,s.x)/PI2+1.//+.5/petalNumber
+        (Math.abs((Math.atan(s.y,s.x)/Math.PI/2+1.//+.5/petalNumber
     )%(1./6.)-.5/6.))*petalNumber*6.*2.)+s.length()/Math.log(2.)*petalNumber/6./2.;
 ;
+}
 
    if(counter!=0.&&dilate&&morph==0.){//this is to allow top level core freeze for original clover
          var dst = s.length();
@@ -552,9 +558,9 @@ if(seventhEYE==3.)
         if (lfc<2./3.)span = lfcCenterCored/2.;
         else span = lfc+.5;
     }
-else if(seventhEYE==0.)span = lfcCenterCored+.5;
-else span = lfc+.5;
-    stretch=((span)**.5)**(1./squeezeN);
+else if(seventhEYE==0.)span = lfcCenterCored;
+else span = lfc;
+    stretch=((span+.5)**.5)**(1./squeezeN);
 
     if(seventhEYE==0.||lengthP>2./3.)
       s.multiplyScalar(1./stretch);//maybe other values work?
