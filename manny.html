@@ -7228,7 +7228,7 @@ else if (starship.w==254./255.)layeredOUT=starship-oneEye.r/3.;
                                 if(insideOut.w==.5)layeredOUT+=vec4(insideOut.xyz/3.,0.);
                        }
                        else if (pongBall.r!=0.)layeredOUT=vec4(pongBall,1.);
-                       else if(mannyFace.w==-.25&&isGrey!=1.&&pixelShipGrey==0.)layeredOUT=vec4(1.+clamp(mannyFace.xyz,-1.,0.)+starship.xyz/4.,1.);
+                       else if(mannyFace.w==-.25&&isGrey!=1.&&pixelShipGrey==0.&&bodyWithArms.w==0.)layeredOUT=vec4(1.+clamp(mannyFace.xyz,-1.,0.)+starship.xyz/4.,1.);
 
 else {
                   
