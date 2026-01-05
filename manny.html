@@ -4148,7 +4148,11 @@ vec2 m=vec2(0.);
 
 float truncator=1.;
 bool truncated = true;
-if(zoom!=0.&&lfc!=0.&&truncated) truncator =log((lfcCenterCored))*-leaf/2.;//*100//log((lfc*lfc)/(zoom*zoom))
+if(zoom!=0.&&lfc!=0.&&truncated)
+{
+truncator =log((lfcCenterCored))*-leaf/2.;//*100//log((lfc*lfc)/(zoom*zoom))
+
+}
 //pow(abs(log(zoom/lfc),2.);//log truncation * factor is not known, may no longer be necesary
 //Maendel clover
 
@@ -4358,7 +4362,10 @@ bubble=dstnce;
    // else 
        //if(morph==0.&&petals==0.)
 //s=spin2(s,PI);
-  s*=-1.;
+
+if(morph==0.)  s*=-1.;
+
+else s=spin2(s,PI);
    }
    lastLastS=lastS;
    lastS = s;//before or after flop?
@@ -4798,9 +4805,10 @@ dstnce=length(s);
            //coords.yx*coords.yx*vec2(sign(coords.y),sign(coords.x))
 
            s/=pow(1./lpcc,superBoostedContinuation);
+         
       hyperCoreBoosted+=cc2;//continuumCore
        hyperCoreOUTPUT+=cc2;
-       
+        
        }
        else
 {
@@ -4811,9 +4819,10 @@ dstnce=length(s);
 //if(dstnce<twoThirds)s-=dstnce;
    // float cc2 =continuumCore*continuumCore*lpcc2;
 
-    hyperCoreBoosted-=cc2;
-    hyperCoreOUTPUT-=cc2;
-    
+          
+      hyperCoreBoosted-=cc2;//continuumCore
+       hyperCoreOUTPUT-=cc2;
+          
            
        }
 
@@ -4935,8 +4944,8 @@ PI2/3.)>PI2/6.) //p*=0.;
    //s=abs(s);
 //s=spin2(s,PI);
 //s*=-1.;
-s*=alternator;
-    //if(alternator==-1.)s=spin2(s,PI);
+if(morph==0.)s*=alternator;
+else s=spin2(s,PI);
 
 if(alternator==-1.)
 unSwitch= !unSwitch;

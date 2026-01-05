@@ -879,8 +879,8 @@ s.multiplyScalar(alternator);
 //  s=new THREE.Vector2(Math.abs(s.x),Math.abs(s.y))
 //s=spin(s,Math.PI);//balances inherited colors
 //s.multiplyScalar(-1.);
-s.multiplyScalar(alternator);
-
+if(morph==0.)s.multiplyScalar(alternator);
+else s=spin(s,Math.PI);
 }
 
                                    var cloverOrDaisyOnTop = daisifier;//may be +0
