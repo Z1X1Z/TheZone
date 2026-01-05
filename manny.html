@@ -5104,7 +5104,7 @@ hyperCoreOUTPUT--;
         
   vec2 deSplicedS =window;
    if(lpcc<twoThirds&&length(window)<twoThirds) deSplicedS=pCenterCored;
-   if(unSwitch)   deSplicedS=spin2(deSplicedS,PI);
+   if(unSwitch)   deSplicedS*=-1.;//=spin2(deSplicedS,PI);
 
 
                        
@@ -5136,14 +5136,14 @@ hyperCoreOUTPUT--;
 
          if(spokesVisualizeColors>0)    if(dstnce<twoThirds||((spokesVisualizeColors==4||spokesVisualizeColors==3)&&dstnce<4./3.)) if(vUv.x!=0.&&vUv.y!=0.&&vUv.x!=1.&&vUv.y!=1.){
                     float decayCanceller=1.;
-                    if(spokesVisualizeColors==4||spokesVisualizeColors==3)decayCanceller = 2.;
+                    if(spokesVisualizeColors==4||spokesVisualizeColors==3)decayCanceller = 1.5;
                     //if(morph!=0.)decayCanceller=decayCanceller*decayCanceller;
                     
 
   vec2 deSplicedS2 =window;
 
-                       if(unSwitch2&&(spokesVisualizeColors==1||spokesVisualizeColors==3))   deSplicedS2=spin2(deSplicedS2,PI);
-                       else if(unSwitch&&(spokesVisualizeColors==2||spokesVisualizeColors==4))   deSplicedS2=spin2(deSplicedS,PI);
+                       if(unSwitch2&&(spokesVisualizeColors==1||spokesVisualizeColors==3))   deSplicedS2*=spin2(deSplicedS2,PI);
+                       else if(unSwitch&&(spokesVisualizeColors==2||spokesVisualizeColors==4))   deSplicedS2*=-1.;//=spin2(deSplicedS,PI);
   if(gatedPass)deSplicedS2=spin2(deSplicedS2,-PI/6.);
 
                           vec2 cloverMAPNeutral2 = ((spin2(vec2(deSplicedS2.y,-deSplicedS2.x),-atan(deSplicedS2.y,deSplicedS2.x)*OmniPetal/(6.+OmniPetal)-atan(d.x,d.y)+PI+chiralAdjustment)));
@@ -6813,21 +6813,21 @@ if(starOnDot!=2){
                                  if (starship.x!=0.||starship.y!=0.||starship.z!=0.)maxColorOfStarship=max(max(starship.x,starship.y),starship.z);
                                  if (starship.x!=0.||starship.y!=0.||starship.z!=0.)minColorOfStarship=min(min(starship.x,starship.y),starship.z);
                                  if (starship.x!=0.||starship.y!=0.||starship.z!=0.)isColoredMultiplier=(starship.xyz+(1.-starship.w)+1.)/2.;
-                                 if(starship.w>3.5/255.)
+                                 /*if(starship.w>3.5/255.)
                                  {
                                      
-                                             if(mannyFace.w==-.25&&starship.g==1.&&starship.r==0.)starship/=8.;
+                                             if(mannyFace.w==-.25&&starship.g==1.&&starship.r==0.)starship/=2.;
                                                
                                  if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.)
                                  {
                                      if(mny.x>0.)mny*=starship.xyz*+(1.-starship.w);//-mny.x*.66;
-                                     else if(mny.x<0.)mny+=starship.xyz*2.;
+                                    // else if(mny.x<0.)mny+=starship.xyz*2.;
                                      
                                          
                                      
                                      }
                                  if(mny.z!=0.||mny.y!=0.||mny.x!=0.)mny+=starship.xyz;
-                                 }
+                                 }*/
 
                                  if(AM.x>0.)AM=clamp(AM*(.888+starship.xyz),0.,1.);//-mny.x*.66;
 
@@ -7206,7 +7206,6 @@ else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
                                                          else layeredOUT=oopm;
 
                                                          }
-
 else if (starship.w==254./255.)layeredOUT=starship-oneEye.r/3.;
          else if (holyeyes==1&&Character==0&& !((HEART.x==0.&&HEART.y==0.)||(HEART.y==0.&&HEART.z==0.)||(HEART.z==0.&&HEART.x==0.)))
                                  {layeredOUT=vec4(clamp(HEART-(bodyWithArms.x+bodyWithArms.y+bodyWithArms.z)/2.-starship.xyz/3.+4.*(-pong.r-pong.g-pong.b-linearFrequency.r-linearFrequency.g-linearFrequency.b),0.,1.)+(GOH.xyz//+pixelStarship.xyz
@@ -7217,6 +7216,8 @@ else if (starship.w==254./255.)layeredOUT=starship-oneEye.r/3.;
                                 if(insideOut.w==.5)layeredOUT+=vec4(insideOut.xyz/3.,0.);
                        }
                        else if (pongBall.r!=0.)layeredOUT=vec4(pongBall,1.);
+                       else if(mannyFace.w==-.25&&isGrey!=1.&&pixelShipGrey==0.)layeredOUT=vec4(1.+clamp(mannyFace.xyz,-1.,0.)+starship.xyz/4.,1.);
+
 else {
                   
                        vec4 ss =clamp(StaRivers*spirographTranslucerStaRivers+DOTstarship*spirographTranslucerDOT+starship*spirographTranslucer+(-bodyWithArms.r-bodyWithArms.g-bodyWithArms.b)*20.
