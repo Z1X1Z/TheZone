@@ -3937,12 +3937,14 @@ function calculatePitch ()
 {
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance=0;//(1024-26)/10000
-let preTrunc = Math.log(totalAMP)/-leafPermanent*2
+let preTrunc = Math.log(totalAMP)*-leafPermanent/2
 let totalAMPmodified = totalAMP
 
 //totalAMPmodified=(totalAMPmodified/((-leafPermanent)/))///preTrunc)*preTrunc));
 totalAMPmodified = (((totalAMPmodified*(-(leafPermanent/preTrunc)*preTrunc))))
-//totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
+ preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2
+
+totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                                                          if(window.highORlow==0){
                                                              if(totalAMPmodified>0&&isFinite(totalAMPmodified))
