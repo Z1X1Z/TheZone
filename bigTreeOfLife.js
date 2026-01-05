@@ -305,13 +305,13 @@ hyperCore*=equilibriator;
 
 }
    else {
-    hyperCore-=.5/Math.log(.5);
+    //hyperCore-=.5/Math.log(.5);
     if(cloverSlide)hyperCore+=.5/Math.log(.5);
     if(wheel)hyperCore-=1./Math.log(.5);
     if(morph!=0.) hyperCore-=1./Math.log(.5);
     
     if(Spoker&&spokelover&&dilate) hyperCore-=.0/Math.log(.5);
-    else if (!dilate)hyperCore+=.5/Math.log(.5);
+   // else if (!dilate)hyperCore+=.5/Math.log(.5);
     
     if(clvrVariant2)hyperCore+=1./Math.log(.5);
     
@@ -319,7 +319,7 @@ hyperCore*=equilibriator;
 }
    
 
-      if (dilate)hyperCore-=1./2.5/Math.log(.5);//for freed dilation
+   //   if (dilate)hyperCore-=1./2.5/Math.log(.5);//for freed dilation
 
 
 
@@ -363,7 +363,7 @@ else{
 
     if(spokeloverON)hyperCore-=Math.log(2);
 
-     if(squeezeN>1.)hyperCore-=1.25;
+ //    if(squeezeN>1.)hyperCore-=1.25;
 //hyperCore-=1.;
 
 let lpcc = pCenterCored.length();
