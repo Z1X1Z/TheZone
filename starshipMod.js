@@ -3939,9 +3939,9 @@ function calculatePitch ()
 let tolerance=0;//(1024-26)/10000
 let preTrunc = Math.log(totalAMP)*-leafPermanent/2.
 let totalAMPmodified = totalAMP
-totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
-totalAMPmodified=(totalAMPmodified/((-leafPermanent/preTrunc)*preTrunc));
+totalAMPmodified=(totalAMPmodified/((-leafPermanent)))///preTrunc)*preTrunc));
+//totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
 //totalAMPmodified = (((totalAMP)/preTrunc)*preTrunc)
                                                          if(window.highORlow==0){
@@ -4045,7 +4045,7 @@ totalAMPmodified=(totalAMPmodified/((-leafPermanent/preTrunc)*preTrunc));
                                                                //  tolerance+=plusOrMinusPowerSeriesBUFFER
                                                         tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMPmodified+ tAScaledPermanent+tolerance-plusOrMinusPowerSeriesNorm));
                                                                 let trunc=  Math.log(totalAMPmodified)*-leafPermanent/2.
-                                                    //    tolerance/=(-leafPermanent/trunc)*trunc;//makes over and under stable and greatly enhances accuracy
+                                                        tolerance/=(-leafPermanent/trunc)*trunc;//makes over and under stable and greatly enhances accuracy
                                                            //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMPmodified+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
                                                            tolerance=(tolerance/trunc)*trunc
                                                            var toleranceFixed = tolerance;
