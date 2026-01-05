@@ -3941,7 +3941,7 @@ let preTrunc = Math.log(totalAMP)*-leafPermanent/2.
 let totalAMPmodified = totalAMP
 
 //totalAMPmodified=(totalAMPmodified/((-leafPermanent)/))///preTrunc)*preTrunc));
-totalAMPmodified = (((totalAMPmodified*-(leafPermanent/preTrunc)*preTrunc)))
+totalAMPmodified = (((totalAMPmodified*(-(leafPermanent/preTrunc)*preTrunc))))
 totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                                                          if(window.highORlow==0){
