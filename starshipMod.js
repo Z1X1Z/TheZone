@@ -3942,7 +3942,7 @@ let totalAMPmodified = totalAMP
 
 //totalAMPmodified=(totalAMPmodified/((-leafPermanent)/))///preTrunc)*preTrunc));
 totalAMPmodified = (((totalAMPmodified*(-(leafPermanent/preTrunc)*preTrunc))))
-totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
+//totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                                                          if(window.highORlow==0){
                                                              if(totalAMPmodified>0&&isFinite(totalAMPmodified))
