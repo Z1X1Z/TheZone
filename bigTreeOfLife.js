@@ -356,14 +356,13 @@ else{
     hyperCore+=Math.log(2)*1.;
 
 }
-      if (seventhEYE==3.) hyperCore+=Math.log(2)*1.5;
 
    }
    var spokeloverON=spokelover&&zoom/lfc<1.;
 
     if(spokeloverON)hyperCore-=Math.log(2);
 
- //    if(squeezeN>1.)hyperCore-=1.25;
+ //     if(squeezeN>1.)hyperCore-=1.25;
 //hyperCore-=1.;
 
 let lpcc = pCenterCored.length();
@@ -518,11 +517,13 @@ if(Refractelate&&dstnce>refractelC){s.divideScalar( refractelC);} //refractelC/=
 
 var lastS = s.clone();
             var superUpcorer = 0.;
-            if(feedTheLamb){superUpcorer =-1.+1./((Math.abs((Math.atan2(s.y,s.x)/Math.PI/2+1.//+.5/petalNumber
-            %(1./6.))-.5/6.))*petalNumber*Math.PI/2*2.)+s.length()/Math.log(2.)/2.*petalNumber/6.;
-            hyperCoreBoosted-=superUpcorer;
-            hyperCoreOUTPUT-=superUpcorer;
-            }
+
+if(feedTheLamb){
+    superUpcorer =
+    -1.+1./(
+        (Math.abs((Math.atan(s.y,s.x)/PI2+1.//+.5/petalNumber
+    )%(1./6.)-.5/6.))*petalNumber*6.*2.)+s.length()/Math.log(2.)*petalNumber/6./2.;
+;
 
    if(counter!=0.&&dilate&&morph==0.){//this is to allow top level core freeze for original clover
          var dst = s.length();
