@@ -3942,9 +3942,11 @@ let totalAMPmodified = totalAMP
 
 //totalAMPmodified=(totalAMPmodified/((-leafPermanent)/))///preTrunc)*preTrunc));
 totalAMPmodified = (((totalAMPmodified*(-(leafPermanent/preTrunc)*preTrunc))))
- preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2
-
+ //preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2
+//totalAMPmodified=totalAMPmodified**1.5;
 totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
+//totalAMPmodified/=2.;
+
 
                                                          if(window.highORlow==0){
                                                              if(totalAMPmodified>0&&isFinite(totalAMPmodified))
@@ -4069,7 +4071,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                            }
                                                tolerance=((tolerance)/trunc)*trunc
 
-                                                           tolerance/=2.;
+                                                           tolerance/=3.;//2 or 1.5? 3?
 
                                                 tolerance=((tolerance)/trunc)*trunc
 
