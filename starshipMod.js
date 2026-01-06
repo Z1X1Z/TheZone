@@ -4066,14 +4066,16 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                             toleranceFixed = tolerance;
                                                     for(var vvv = 0.; vvv<1.5;vvv+=tAScaledPermanent)
                                                            {
-                                                            tolerance=(tolerance)**((1-toleranceFixed))
+                                                            tolerance=(toleranceFixed)**((1-toleranceFixed))
                                                            // ll++
                                                            }
                                                tolerance=((tolerance)/trunc)*trunc
 
-                                                           tolerance/=6;//2 or 1.5? 3?
+                                                           tolerance/=2;//2 or 1.5? 3?
 
                                                 tolerance=((tolerance)/trunc)*trunc
+                                                          tolerance=tolerance**.5
+                                                         //                                                  tolerance=((tolerance)/trunc)*trunc
 
                                                          //   console.log(ll)
 
