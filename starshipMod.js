@@ -3367,7 +3367,7 @@ uniforms.dotCoord.value =new THREE.Vector2(circleX,circleY) ;
                    centerOfDotToEdge.push( new THREE.Vector3(circleX,circleY,-1) );
 
                                   radialLine.geometry.setFromPoints( centerOfDotToEdge )
-    polyRad = 1.5/(metaLevel);
+    polyRad = 4./3./(metaLevel);
 
 let allCaught = true;
 for (var n=0; n<polygons.length; n++) if(  polygons[n].caught == false) allCaught = false;
