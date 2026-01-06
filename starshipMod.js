@@ -4074,7 +4074,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                            tolerance/=2;//2 or 1.5? 3?
 
                                                 tolerance=((tolerance)/trunc)*trunc
-                                                          tolerance=tolerance**.5
+                                                          tolerance=tolerance**(.5-tolerance)
                                                          //                                                  tolerance=((tolerance)/trunc)*trunc
 
                                                          //   console.log(ll)
