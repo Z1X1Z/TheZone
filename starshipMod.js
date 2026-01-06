@@ -4071,7 +4071,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                            }
                                                tolerance=((tolerance)/trunc)*trunc
 
-                                                           tolerance/=4;//2 or 1.5? 3?
+                                                           tolerance/=6;//2 or 1.5? 3?
 
                                                 tolerance=((tolerance)/trunc)*trunc
 
