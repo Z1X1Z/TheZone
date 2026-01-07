@@ -4021,7 +4021,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                                                                                                                                 +plusOrMinusPowerSeries)**loopsThresh
                                                                                                                                                                          +(tAScaled*plusOrMinusPowerSeries-1.)//+tAScaled*plusOrMinusPowerSeries)
                                                                                                                                                                                *sig
-                                                                    innerPolynomial=Math.abs(innerPolynomial**innerPolynomial)//this is new
+                                                                    innerPolynomial=innerPolynomial**innerPolynomial//this is new
 
 
                                                                                                                                                                          //      innerPolynomial=innerPolynomial**innerPolynomial
