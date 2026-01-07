@@ -4017,11 +4017,17 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                  {
                                                                      let sig = Math.sign(loopsThresh%2-.5);
                                                   //console.log(plusOrMinusPowerSeries)
-                                                                    
-                                                                                                                              plusOrMinusPowerSeries = (tAScaled**(2**(-1./(loopsThresh
-                                                                                                                                                                              +.5+(1.5+ totalAMPmodified+plusOrMinusPowerSeries)**loopsThresh
+                                                  var innerPolynomial = loopsThresh                                        +.5+(1.5+ totalAMPmodified//totalAMP**x
+                                                                                                                                                                                +plusOrMinusPowerSeries)**loopsThresh
                                                                                                                                                                          +(tAScaled*plusOrMinusPowerSeries-1.)//+tAScaled*plusOrMinusPowerSeries)
-                                                                                                                                                                               *sig))))*sig
+                                                                                                                                                                               *sig
+                                                                    innerPolynomial=Math.abs(innerPolynomial**innerPolynomial)//this is new
+
+
+                                                                                                                                                                         //      innerPolynomial=innerPolynomial**innerPolynomial
+                                                                                                                              plusOrMinusPowerSeries = (tAScaled**(2**(-((1./((innerPolynomial)))
+                                                                                                                              **(innerPolynomial)//this is new
+                                                                                                                            ))))*sig
                                                                                                                                                           //plusOrMinusPowerSeries = (tAScaled**(2**(-1.49/(loopsThresh+2))))*sig
                                                                      if(plusOrMinusPowerSeries!=1.){//tolerance+=plusOrMinusPowerSeries;
                                                                                      //plusOrMinusPowerSeries=         Math.sign(plusOrMinusPowerSeries)*(Math.abs(plusOrMinusPowerSeries)**2.);
@@ -4105,6 +4111,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 let period;
 let delta = 0.0, runningSum = 0.0;
 yinData[0] = 1.0;
+//if (tolerance>.01)
 for (let tau = 1; tau < fractionOfFrame; tau++)
 {
 
