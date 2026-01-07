@@ -3948,6 +3948,9 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 //totalAMPmodified/=2.;
 
 
+                        
+
+
                                                          if(window.highORlow==0){
                                                              if(totalAMPmodified>0&&isFinite(totalAMPmodified))
                                                              {
@@ -4076,7 +4079,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                 tolerance=((tolerance)/trunc)*trunc
                                                 toleranceFixed=tolerance;
 
-                                                          tolerance=tolerance**(.5-totalAMPmodified+tolerance)//not totalAMPmodified!?
+                                                          tolerance=tolerance**(.5-totalAMP+tolerance)//not totalAMPmodified!?
 
                                                          //                                                  tolerance=((tolerance)/trunc)*trunc
 
