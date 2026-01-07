@@ -4025,8 +4025,8 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
 
                                                                                                                                                                          //      innerPolynomial=innerPolynomial**innerPolynomial
-                                                                                                                              plusOrMinusPowerSeries = (tAScaled**(2**(-((((1./((innerPolynomial)))
-                                                                                                                              **(innerPolynomial))**innerPolynomial)//this is new
+                                                                                                                              plusOrMinusPowerSeries = (tAScaled**(2**(-Math.sign(innerPolynomial)*((((1./(Math.abs(innerPolynomial)))
+                                                                                                                              **Math.abs(innerPolynomial))**Math.abs(innerPolynomial))//this is new
                                                                                                                             ))))*sig
                                                                                                                                                           //plusOrMinusPowerSeries = (tAScaled**(2**(-1.49/(loopsThresh+2))))*sig
                                                                      if(plusOrMinusPowerSeries!=1.){//tolerance+=plusOrMinusPowerSeries;
