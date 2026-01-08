@@ -4023,13 +4023,17 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                                                                                                                                *sig
                                                                //     innerPolynomial=innerPolynomial**innerPolynomial//this is new
 
+                                                               var innerPolynomialProcessed = innerPolynomial;
+                                                               for (var yy=0.;yy<100;yy++)//correct loop count unknown, seems stable
+                                                                {
+                                                                   innerPolynomialProcessed =  Math.sign(innerPolynomialProcessed)*Math.abs(innerPolynomialProcessed)**innerPolynomial                                                                                                                          
+                                                                }
 
                                                                                                                                                                          //      innerPolynomial=innerPolynomial**innerPolynomial
                                                                                                                               plusOrMinusPowerSeries = 
                                                                                                                               (tAScaled**(2**
-                                                                                                                                (-Math.sign(innerPolynomial)*((((1./(Math.abs(innerPolynomial)))
-                                                                                                                              **(Math.sign(innerPolynomial)*(Math.abs(innerPolynomial)))
-                                                                                                                              **innerPolynomial))//this is new
+                                                                                                                                (-Math.sign(innerPolynomial)*((((1./(Math.abs(innerPolynomialProcessed)))
+                                                                                                                              **innerPolynomialProcessed))//this is new
                                                                                                                             ))))*sig
                                                                                                                                                           //plusOrMinusPowerSeries = (tAScaled**(2**(-1.49/(loopsThresh+2))))*sig
                                                                      if(plusOrMinusPowerSeries!=1.){//tolerance+=plusOrMinusPowerSeries;
