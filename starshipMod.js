@@ -4088,7 +4088,9 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                 tolerance=((tolerance)/trunc)*trunc
                                                 toleranceFixed=tolerance;
                                                           tolerance=tolerance**(Math.abs((.5-(Math.abs(totalAMP)**.5-(Math.abs(tolerance)**.5))**2.)))//not totalAMPmodified!? abs to prevent some crashing, unverified fix
-                                                        console.log(tolerance)
+                                                                                                                tolerance/=2;//2 or 1.5? 3?
+
+                                                          console.log(tolerance)
                                                          //                                                  tolerance=((tolerance)/trunc)*trunc
 
                                                          //   console.log(ll)
