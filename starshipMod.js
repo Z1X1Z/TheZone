@@ -4074,7 +4074,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                            // ll++
                                                            }
                                                            
-                                         //      tolerance=(tolerance/trunc)*trunc
+                                              tolerance=(tolerance/trunc)*trunc//may be helpful, may not be
                                                             toleranceFixed = tolerance;
                                                     for(var vvv = 0.; vvv<1.5;vvv+=tAScaledPermanent)
                                                            {
