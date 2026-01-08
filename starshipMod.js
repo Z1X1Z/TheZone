@@ -3455,7 +3455,7 @@ for(let n = 0; n < polygons.length; n++)
                                                          }
                                                          if(isFinite(interpolation)&&interpolation>0.)
                                                          {
-                                                         var slowDown = .99**(1./interpolation);
+                                                         var slowDown = .98**(1./interpolation);
                                                          polygons[n].dx*=slowDown;
                                                          polygons[n].dy*=slowDown;
                                                          }
