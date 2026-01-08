@@ -4081,11 +4081,11 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                             tolerance=(toleranceFixed)**((1-tolerance))
                                                            // ll++
                                                            }
-                                               tolerance=((tolerance)/trunc)*trunc
+                                     /*          tolerance=((tolerance)/trunc)*trunc
 
                                                            tolerance/=2;//2 or 1.5? 3?
 
-                                                tolerance=((tolerance)/trunc)*trunc
+                                                tolerance=((tolerance)/trunc)*trunc*/
                                                 toleranceFixed=tolerance;
                                                           tolerance=tolerance**(Math.abs((.5-(Math.abs(totalAMP)**.5-(Math.abs(tolerance)**.5))**2.)))//not totalAMPmodified!? abs to prevent some crashing, unverified fix
                                                                                                  tolerance=((tolerance)/trunc)*trunc
