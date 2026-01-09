@@ -4023,12 +4023,12 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                                                                                                                                *sig
                                                                //     innerPolynomial=innerPolynomial**innerPolynomial//this is new
 
-                                                       var innerPolynomialExp=        (Math.sign(innerPolynomial)*(Math.abs(innerPolynomial)))      **innerPolynomial
+                                                       var innerPolynomialExp=        Math.sign(innerPolynomial)*(Math.abs(innerPolynomial))      **innerPolynomial
 
                                                                                                                                                                          //      innerPolynomial=innerPolynomial**innerPolynomial
                                                                                                                               plusOrMinusPowerSeries = 
                                                                                                                               (tAScaled**(2**
-                                                                                                                                (-Math.sign(innerPolynomial)*((((1./(Math.abs(innerPolynomialExp)))
+                                                                                                                                (-Math.sign(innerPolynomialExp)*((((1./(Math.abs(innerPolynomialExp)))
                                                                                                                               **innerPolynomialExp))//this is new
                                                                                                                             ))))*sig
                                                                                                                                                           //plusOrMinusPowerSeries = (tAScaled**(2**(-1.49/(loopsThresh+2))))*sig
