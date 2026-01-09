@@ -3937,7 +3937,17 @@ function calculatePitch ()
 {
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance=0;//(1024-26)/10000
-let preTrunc = Math.log(totalAMP)*-leafPermanent/2
+
+
+
+                                                         if(window.highORlow==0){
+                                                             if(totalAMP>0&&isFinite(totalAMP))
+                                                             {
+                                                                 let proportion= fractionOfFrame/bufferSize;
+                                                                 let tAScaled=0.;//totalAMPmodified*proportion;
+                                                                 
+
+                                                                 let preTrunc = Math.log(totalAMP)*-leafPermanent/2
 let totalAMPmodified = totalAMP
 
 //totalAMPmodified=(totalAMPmodified/((-leafPermanent)/))///preTrunc)*preTrunc));
@@ -3951,12 +3961,6 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                         
 
 
-                                                         if(window.highORlow==0){
-                                                             if(totalAMPmodified>0&&isFinite(totalAMPmodified))
-                                                             {
-                                                                 let proportion= fractionOfFrame/bufferSize;
-                                                                 let tAScaled=0.;//totalAMPmodified*proportion;
-                                                                 
                                                                  
                                                                 /* for(n=2;n<4;n++)if(n!=0){
                                                                      let plusOrMinusPowerSeries = (totalAMPmodified)**(1./n)*-Math.sign(n%2-.5);//x-x**2+x**3-x**4....//may have an algebraic solution
@@ -3964,6 +3968,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                      else break;
                                                                  }
                                                                  */
+
                                                                  for(n=1;n<111;n++)
                                                                     // for(n=1;n<111;n++)
                                                                  {
@@ -4028,7 +4033,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                                                                                                                          //      innerPolynomial=innerPolynomial**innerPolynomial
                                                                                                                               plusOrMinusPowerSeries = 
                                                                                                                               (tAScaled**(2**
-                                                                                                                                (-Math.sign(innerPolynomialExp)*((((1./(Math.abs(innerPolynomialExp)))
+                                                                                                                                (-Math.sign(innerPolynomialExp)*((1./(Math.abs(innerPolynomialExp)
                                                                                                                               **innerPolynomialExp))//this is new
                                                                                                                             ))))*sig
                                                                                                                                                           //plusOrMinusPowerSeries = (tAScaled**(2**(-1.49/(loopsThresh+2))))*sig
@@ -4057,7 +4062,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                          //            plusOrMinusPowerSeries=         Math.sign(plusOrMinusPowerSeries)*(Math.abs(plusOrMinusPowerSeries)**(4./3.));
                                                                      loopsThresh++
 
-                                                                 }
+                                                                 }  
                                                                //  tolerance+=plusOrMinusPowerSeriesBUFFER
                                                         tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMPmodified+ tAScaledPermanent+tolerance-plusOrMinusPowerSeriesNorm));
                                                                 let trunc=  Math.log(totalAMPmodified)*-leafPermanent/2.
