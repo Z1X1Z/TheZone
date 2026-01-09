@@ -4029,11 +4029,14 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                //     innerPolynomial=innerPolynomial**innerPolynomial//this is new
 
                                                        var innerPolynomialExp=        Math.sign(innerPolynomial)*(Math.abs(innerPolynomial))      **innerPolynomial
+                                       //             var innerPolynomialExpBUffer = innerPolynomialExp;
+                                               //        for(var tt = 0.; tt<100.;tt++)innerPolynomialExp=   Math.sign(innerPolynomialExp)*(Math.abs(innerPolynomialExp))      **innerPolynomialExp
 
                                                                                                                                                                          //      innerPolynomial=innerPolynomial**innerPolynomial
                                                                                                                               plusOrMinusPowerSeries = 
                                                                                                                               (tAScaled**(2**
-                                                                                                                                (-Math.sign(innerPolynomialExp)*((1./(Math.abs(innerPolynomialExp)
+                                                                                                                                (-Math.sign(innerPolynomialExp)*
+                                                                                                                                ((1./(Math.abs(innerPolynomialExp)
                                                                                                                               **innerPolynomialExp))//this is new
                                                                                                                             ))))*sig
                                                                                                                                                           //plusOrMinusPowerSeries = (tAScaled**(2**(-1.49/(loopsThresh+2))))*sig
@@ -4092,7 +4095,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                                                 tolerance=((tolerance)/trunc)*trunc*/
                                                 toleranceFixed=tolerance;
-                                                          tolerance=tolerance**(Math.abs((.5-(Math.abs(totalAMP)**.5-(Math.abs(tolerance)**.5))**2.)))//not totalAMPmodified!? abs to prevent some crashing, unverified fix
+                                                          tolerance=tolerance**(Math.abs((.5-(Math.abs(totalAMPmodified)**.5-(Math.abs(tolerance)**.5))**2.)))//not totalAMPmodified!? abs to prevent some crashing, unverified fix
                                                                                                  tolerance=((tolerance)/trunc)*trunc
 
                                                            tolerance/=2;//2 or 1.5? 3?
