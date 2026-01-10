@@ -4028,8 +4028,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                                                                                                                                *sig
                                                                //     innerPolynomial=innerPolynomial**innerPolynomial//this is new
 
-                                                       var innerPolynomialExp=        Math.sign(innerPolynomial)*(Math.abs(innerPolynomial))      **innerPolynomial
-                                       //             var innerPolynomialExpBUffer = innerPolynomialExp;
+                                                       var innerPolynomialExp=        Math.sign(innerPolynomial)*(Math.abs(innerPolynomial))  **innerPolynomial
                                                //        for(var tt = 0.; tt<100.;tt++)innerPolynomialExp=   Math.sign(innerPolynomialExp)*(Math.abs(innerPolynomialExp))      **innerPolynomialExp
 
                                                                                                                                                                          //      innerPolynomial=innerPolynomial**innerPolynomial
@@ -4066,9 +4065,12 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                      loopsThresh++
 
                                                                  }  
-                                                               //  tolerance+=plusOrMinusPowerSeriesBUFFER
+                                //  tolerance+=plusOrMinusPowerSeriesBUFFER
+                                let trunc=  Math.log(totalAMPmodified)*-leafPermanent/2.
+                                tolerance=(tolerance/trunc)*trunc
+
                                                         tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMPmodified+ tAScaledPermanent+tolerance-plusOrMinusPowerSeriesNorm));
-                                                                let trunc=  Math.log(totalAMPmodified)*-leafPermanent/2.
+                                                        
                                                         tolerance/=(-leafPermanent/trunc)*trunc;//makes over and under stable and greatly enhances accuracy
                                                            //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMPmodified+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
                                                            tolerance=(tolerance/trunc)*trunc
@@ -4094,7 +4096,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                          tolerance/=2;//2 or 1.5? 3?
 
                                                 tolerance=((tolerance)/trunc)*trunc*/
-                                                toleranceFixed=tolerance;
+                                              //  toleranceFixed=tolerance;
                                                           tolerance=tolerance**(Math.abs((.5-(Math.abs(totalAMPmodified)**.5-(Math.abs(tolerance)**.5))**2.)))//not totalAMPmodified!? abs to prevent some crashing, unverified fix
                                                                                                  tolerance=((tolerance)/trunc)*trunc
 
