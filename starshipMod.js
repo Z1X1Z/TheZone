@@ -3990,7 +3990,8 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                   //   for(var reps=0; reps<2.;reps+=1)
                                                       //                 for(reps=0;reps<5.;reps+=1.+1./(1.-totalAMPmodified))
 
-                                                                     { tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaledPermanent))/(2.-tAScaledPermanent))
+                                                                     { 
+                                                                        tAScaled=((tAScaled**(1.-tAScaled)+tAScaled**(1.+tAScaledPermanent))/(2.-tAScaledPermanent))
                                                                          let taEX1 = ((1.-tAScaled)*(1.+tAScaledPermanent));
                                                                          tAScaled=tAScaled**(Math.sign(taEX1)*(Math.abs(taEX1))**(
                                                                                  
@@ -4010,6 +4011,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                       // let feedbackVal = grTimesLeaf;
                                                                 // console.log(tAScaled)
                                                         //       tAScaled=tAScaled**.5;
+                                                        
                                                                  let plusOrMinusPowerSeries=tAScaled;
                                                                  let plusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries;
                                                                 let plusOrMinusPowerSeriesNorm=plusOrMinusPowerSeries
@@ -4071,6 +4073,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                                                                  }  
                                 //  tolerance+=plusOrMinusPowerSeriesBUFFER
+
                                 let trunc=  Math.log(totalAMPmodified)*-leafPermanent/2.
                                 tolerance=(tolerance/trunc)*trunc
 
@@ -4079,6 +4082,9 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                         tolerance/=(-leafPermanent/trunc)*trunc;//makes over and under stable and greatly enhances accuracy
                                                            //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMPmodified+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
                                                            tolerance=(tolerance/trunc)*trunc
+                                                                                                                      tolerance*=2.;
+                                  //                        tolerance=(tolerance/trunc)*trunc
+
                                                            var toleranceFixed = tolerance;
                                                            var ll = 0.
                                                            for(var vvv = 0.; vvv<1.5;vvv+=tAScaledPermanent)
@@ -4088,7 +4094,6 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                          //   tolerance=(toleranceFixed)**((1-tolerance))
                                                            // ll++
                                                            }
-
                                               tolerance=(tolerance/trunc)*trunc//may be helpful, may not be
                                                             toleranceFixed = tolerance;
                                                     for(var vvv = 0.; vvv<1.5;vvv+=tAScaledPermanent)
