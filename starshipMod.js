@@ -4071,7 +4071,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                  }  
                                 //  tolerance+=plusOrMinusPowerSeriesBUFFER
                                 let trunc=  Math.log(totalAMPmodified)*-leafPermanent/2.
-                                tolerance=(tolerance/trunc)*trunc
+                             //   tolerance=(tolerance/trunc)*trunc
 
                                                         tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMPmodified+ tAScaledPermanent+tolerance-plusOrMinusPowerSeriesNorm));
                                                         
