@@ -3938,7 +3938,6 @@ function calculatePitch ()
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance=0;//(1024-26)/10000
 
-                                                            console.log("here"+totalAMP)
 
 
                                                          if(window.highORlow==0){
@@ -4026,10 +4025,10 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                  {
                                                                      let sig = Math.sign(loopsThresh%2-.5);
                                                   //console.log(plusOrMinusPowerSeries)
-                                                  var innerPolynomial = loopsThresh                                        +.5+(1.5+ totalAMPmodified//totalAMP**x
-                                                                                                                                                                                +plusOrMinusPowerSeries)**loopsThresh
-                                                                                                                                                                         +(tAScaled*plusOrMinusPowerSeries-1.)//+tAScaled*plusOrMinusPowerSeries)
-                                                                                                                                                                               *sig
+                                                  var innerPolynomial = (1.5+ totalAMPmodified//totalAMP**x
+                                                                    +plusOrMinusPowerSeries)**loopsThresh
+                                                                +(tAScaled*plusOrMinusPowerSeries-1.)//+tAScaled*plusOrMinusPowerSeries)
+                                                                    *sig
                                                                //     innerPolynomial=innerPolynomial**innerPolynomial//this is new
 
                                                        var innerPolynomialExp=        Math.sign(innerPolynomial)*(Math.abs(innerPolynomial))  **innerPolynomial
@@ -4039,7 +4038,9 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                                                                               plusOrMinusPowerSeries = 
                                                                                                                               (tAScaled**(2**
                                                                                                                                 (-Math.sign(innerPolynomialExp)*
-                                                                                                                                ((1./(Math.abs(innerPolynomialExp)
+                                                                                                                                ((1./(Math.abs(
+                                                                                                                                    loopsThresh +.5+
+                                                                                                                                    innerPolynomialExp)
                                                                                                                               **innerPolynomialExp))//this is new
                                                                                                                             ))))*sig
                                                                                                                                                           //plusOrMinusPowerSeries = (tAScaled**(2**(-1.49/(loopsThresh+2))))*sig
@@ -4071,7 +4072,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                  }  
                                 //  tolerance+=plusOrMinusPowerSeriesBUFFER
                                 let trunc=  Math.log(totalAMPmodified)*-leafPermanent/2.
-                             //   tolerance=(tolerance/trunc)*trunc
+                                tolerance=(tolerance/trunc)*trunc
 
                                                         tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMPmodified+ tAScaledPermanent+tolerance-plusOrMinusPowerSeriesNorm));
                                                         
