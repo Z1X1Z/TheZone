@@ -3938,10 +3938,13 @@ function calculatePitch ()
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance=0;//(1024-26)/10000
 
+                                                            console.log("here"+totalAMP)
 
 
                                                          if(window.highORlow==0){
-                                                             if(totalAMP>0&&isFinite(totalAMP))
+                                                             if(totalAMP>0&&isFinite(totalAMP)
+                                                                &&totalAMP<=.7// when I get loud it seems to freeze
+                                                             )
                                                              {
                                                                  let proportion= fractionOfFrame/bufferSize;
                                                                  let tAScaled=0.;//totalAMPmodified*proportion;
@@ -3976,7 +3979,8 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                      if(plusOrMinusPowerSeries!=0.)tAScaled+=plusOrMinusPowerSeries;
                                                                      else break;
                                                                  }
-                                                                 
+                                                                                                                             console.log("here2"+tAScaled)
+
                                                                  tAScaled =(tAScaled!=0)? tAScaled:1;
                                                                  let tAScaledPermanent = tAScaled;
                                                                  let incrementToleranceFeedback =tAScaled;
@@ -3998,6 +4002,8 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                          //          b++
                                                             //    loopy++
                                                                      }
+                                                                                                                                 console.log("here3"+tAScaled)
+
                                               //   console.log(loopy) 
                                                                  // let b = 0.;
                                                                  
@@ -4011,7 +4017,8 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                  let plusOrMinusPowerSeriesBUFFER=plusOrMinusPowerSeries;
                                                                 let plusOrMinusPowerSeriesNorm=plusOrMinusPowerSeries
                                                                  let loopsThresh = 1
-                                                             
+                                                            console.log("before 445 "+tolerance)
+
                                                         //        if(totalAMPmodified<.5-.01)
                                                                      for(n=1;n< 445;n+=1.)
 
@@ -4083,7 +4090,8 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                          //   tolerance=(toleranceFixed)**((1-tolerance))
                                                            // ll++
                                                            }
-                                                           
+                                                                                                                     console.log("before second ^1 "+tolerance)
+
                                               tolerance=(tolerance/trunc)*trunc//may be helpful, may not be
                                                             toleranceFixed = tolerance;
                                                     for(var vvv = 0.; vvv<1.5;vvv+=tAScaledPermanent)
@@ -4099,6 +4107,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                 tolerance=((tolerance)/trunc)*trunc*/
                                               //  toleranceFixed=tolerance;
                                               //                                              tolerance=(tolerance/trunc)*trunc//may be helpful, may not be
+                                                          console.log("before root "+tolerance)
 
                                                           tolerance=tolerance**(Math.abs((.5-(Math.abs(totalAMPmodified)**.5-(Math.abs(tolerance)**.5))**2.)))//not totalAMPmodified!? abs to prevent some crashing, unverified fix
                                                                                                  tolerance=((tolerance)/trunc)*trunc
