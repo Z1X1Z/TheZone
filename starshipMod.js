@@ -510,6 +510,8 @@ let pushBackCounter = 0;
                                              
                                      window.spinnerTwist = (-rotation/Math.PI*12.+12*12.)%24.;
 window.twist-=window.spinnerTwist
+    uniforms.twistStar.value=(window.twist/24.+1.)%1.*2.*Math.PI;
+
   spunD=spin(spunD,twist/12.*Math.PI+Math.PI);
 
                                     }
