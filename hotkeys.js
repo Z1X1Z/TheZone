@@ -133,7 +133,9 @@ colorCombo2: {value: -1 },
         Refractelate: {value: false },
         petals: {value:  .0 },
 
-        carousel: {value: 0.0 },
+                spinner: {value: false},
+
+        carousel: {value: .0 },
         metaCarousel: {value: 0. },
         spirated: {value: 0. },
         hearTOL: {value: false},
@@ -246,7 +248,7 @@ const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 
 function resetAll(){
     window.unitTest=false;
-
+window.spinnerTwist = 0.;
     for(var nameOfUniform in uniformsInitial)
     {
         window.uniforms[nameOfUniform]={}
@@ -597,6 +599,8 @@ window.key = " ";
 source.connect(analyser);
                      }
                     }
+                     else  if((key == "C") && event.altKey&&event.ctrlKey)uniforms.spinner.value=!uniforms.spinner.value;
+
                                           else  if((key == "M") && event.altKey&&event.ctrlKey)
 
     uniforms.major.value=(uniforms.major.value+1)%4;

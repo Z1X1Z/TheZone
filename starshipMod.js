@@ -494,8 +494,26 @@ let pushBackCounter = 0;
                  d_y = -Math.cos(-angle);
                             d_x*=flatline;
                             d_y*=flatline
+
+
+                                                                  var spunD = [d_x,d_y];
+
+                                     
                             if(on&&totalAMP>.000001)
                             {
+                                                          
+
+                                                     if(uniforms.spinner.value)                 {
+
+                           
+                                       let rotation = (Math.atan2(d_y,d_x)+Math.PI*2+Math.PI/2.)%(Math.PI*2);
+                                             
+                                     window.spinnerTwist = (-rotation/Math.PI*12.+12*12.)%24.;
+window.twist-=window.spinnerTwist
+  spunD=spin(spunD,twist/12.*Math.PI+Math.PI);
+
+                                    }
+
              
              if(shouldShowStar&&touchMode)
              {
@@ -514,8 +532,7 @@ let pushBackCounter = 0;
          }
                  d_x*=volume;
                  d_y*=volume;
-                 var spunD = [d_x,d_y];
-                               
+
                             if(uniforms.carousel.value!=0.&&uniforms[ "time" ].value>0)         spunD=spin(spunD,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                   const d_xS=spunD[0]*interpolation;
                   const d_yS=spunD[1]*interpolation;
@@ -1829,7 +1846,8 @@ function runOSMD (){
                                           let lowAmpFreq = 1;
 
                                           function animate( timestamp ) {
-                                                                 
+   //                                                            if(on&&totalAMP>.000001)
+ //window.twist-=window.spinnerTwist                     
                                     
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
     uniforms[ "time" ].value = timestamp/1000.+window.startTimeSecondMantissaMagnified;
@@ -2098,7 +2116,6 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
     if(uniforms.starSpin.value!=0&&isFinite(uniforms[ "time" ].value)&&isFinite(lastTIMEUNIFORM))
     {let timeTwistIncrement=(( uniforms[ "time" ].value -lastTIMEUNIFORM)*uniforms[ "rate" ].value*-uniforms.starSpin.value*12./Math.PI)%24.;//Needs 12/PI to synchronize with carousel.
         window.twist-=timeTwistIncrement;
-        
         for(var v = 0; v<maxTouchSoundCount;v++){
             
            // SonicTouchArray[v].initialTwist[v]-=timeTwistIncrement;

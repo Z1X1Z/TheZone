@@ -1134,6 +1134,11 @@ uniforms.baseN.value=document.getElementById('Base Number').value">
                         callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
                      <label for="Spin Towards Me">Spin Towards Me![,h]</label><br>
  
+                    <input type="checkbox" id="spinner" name="t"  onclick= "
+                        key  = 'C';
+                        callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                     <label for="spinner">Relativity![,.C]</label><br>
+ 
 
 
 
@@ -2103,6 +2108,7 @@ void main(){
     uniform bool free;
 
     uniform float morph;
+    uniform bool spinner;
 
     uniform float carousel;
     uniform float metaCarousel;
@@ -2756,7 +2762,10 @@ bool isB=false, isF=false;
                                 l=vec4(vec3(winkWhite),0.);
 
                              else if(!wink)
+                             if (holyeyes==1)
                              l=vec4(eyeColorCyclerReversed/2.+.5,1.-eyeColorCyclerReversed, eyeColorCyclerReversed/2.,.75);
+                                else if (holyeyes==3)
+                                 l=vec4( eyeColorCyclerReversed/2.,1.-eyeColorCyclerReversed,eyeColorCyclerReversed/2.+.5,.75);
 
                              break;
                              
@@ -2767,7 +2776,10 @@ bool isB=false, isF=false;
                                        l=vec4(vec3(winkWhite),0.);
                                        else if(!wink)
                                        
-                                       l=vec4( eyeColorCyclerReversed/2.,1.-eyeColorCyclerReversed,eyeColorCyclerReversed/2.+.5,.75);
+  if (holyeyes==3)
+                             l=vec4(eyeColorCyclerReversed/2.+.5,1.-eyeColorCyclerReversed, eyeColorCyclerReversed/2.,.75);
+                                else if (holyeyes==1)
+                                 l=vec4( eyeColorCyclerReversed/2.,1.-eyeColorCyclerReversed,eyeColorCyclerReversed/2.+.5,.75);
                                  break;
                                  }
                              else if(!G&&!A&&abs(p.x)>abs(p.y)&&p.x<0.){
@@ -6120,7 +6132,8 @@ oopm=oppositeOfPitchMarker(r);//seems like volume should be zero if touchmode, i
 
 vec2 spunC=coords.yx;
 //if(continuumClover&&colorCombo<=10)spunC*=1.5;
-if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time*rate,PI2));}
+if (spinner){spunC*=-1.;spunC=spin2(spunC,twistStar);}
+ if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time*rate,PI2));}
 
 vec2 background=p;
 
@@ -6130,6 +6143,7 @@ float lfc=length(freed(constellationCoord));
 
 if(whirlpool!=0.) background=spin2(background,whirlpool*length(background)*.75/6.*PI/abs(zoom-lfc));
 
+if (spinner){background=spin2(background,-twistStar);}
 
 if(carousel!=0.)background=spin2(background,carousel*mod(time*rate,PI2));
 float xenOctaveFactor =4.;
