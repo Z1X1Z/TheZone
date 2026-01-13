@@ -6666,7 +6666,7 @@ float outerARMS = 0.;
 if(handOfGod)
 {
         float angle =atan(d.x,d.y);
-                outerARMS = spinningArms(characterP*vec2(1.,(-upOrDown)*flipStar),d,angle*upOrDown*flipStar,1.,true).x;
+              if(length(characterP)>1.25)  outerARMS = spinningArms(characterP*vec2(1.,(-upOrDown)*flipStar),d,angle*upOrDown*flipStar,1.,true).x;
               //                  outerARMS = spinningArms(characterP,d,-angle,1.,true).x;
 
 }
