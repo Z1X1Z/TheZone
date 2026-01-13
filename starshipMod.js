@@ -4130,7 +4130,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                               //  toleranceFixed=tolerance;
                                               //                                              tolerance=(tolerance/trunc)*trunc//may be helpful, may not be
 
-                                                                                                         for (var bb =0; bb<1.5; bb+=tAScaledPermanent)//not thoroughly vetted
+                                                                                                   //      for (var bb =0; bb<1.5; bb+=tAScaledPermanent )//not thoroughly vetted
 {
                                                           tolerance=tolerance**(Math.abs((.5-(Math.abs(totalAMPmodified)**.5-(Math.abs(tolerance)**.5))**2.)))//not totalAMPmodified!? abs to prevent some crashing, unverified fix
 }
