@@ -4101,9 +4101,10 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                         tolerance/=(-leafPermanent/trunc)*trunc;//makes over and under stable and greatly enhances accuracy
                                                            //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMPmodified+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
                                                            tolerance=(tolerance/trunc)*trunc
-                                                                                                                      tolerance*=2.;
-                                  //                        tolerance=(tolerance/trunc)*trunc
 
+                                                                                                                      tolerance*=2.;
+
+                                  //                        tolerance=(tolerance/trunc)*trunc
                                                            var toleranceFixed = tolerance;
                                                            var ll = 0.
                                                            for(var vvv = 0.; vvv<1.5;vvv+=tAScaledPermanent)
@@ -4129,12 +4130,16 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                               //  toleranceFixed=tolerance;
                                               //                                              tolerance=(tolerance/trunc)*trunc//may be helpful, may not be
 
+                                                                                                         for (var bb =0; bb<1.5; bb+=tAScaledPermanent)//not thoroughly vetted
+{
                                                           tolerance=tolerance**(Math.abs((.5-(Math.abs(totalAMPmodified)**.5-(Math.abs(tolerance)**.5))**2.)))//not totalAMPmodified!? abs to prevent some crashing, unverified fix
-                                                                                                 tolerance=((tolerance)/trunc)*trunc
+}
+                                                          tolerance=((tolerance)/trunc)*trunc
 
                                                            tolerance/=2;//2 or 1.5? 3?
 
                                                 tolerance=((tolerance)/trunc)*trunc
+                                                        
                                                       //    console.log(tolerance)
                                                          //                                                  tolerance=((tolerance)/trunc)*trunc
 
