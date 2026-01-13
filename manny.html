@@ -1398,6 +1398,12 @@ seventhEYE![,.O]</a><br>
                         callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'keyCode':key.charCodeAt(0)}));"
 >
                Arms?![.d]</a><br>
+                                     
+                      <input type="checkbox" id="nabaoth" name="t"  onclick= "
+                          key  = 'H';
+                          callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
+                       <label for="nabaoth">Hand Of God?![,.H]</label><br>
+               
 <!--
          <a id="ToLX" name="t"  onclick= "
              key  = 'b';
@@ -2043,6 +2049,8 @@ void main(){
     uniform bool sparklesON;
     uniform bool SPHEREofTheLORD;
     uniform float note;
+    uniform float upOrDown;
+    uniform bool handOfGod;
     uniform vec2 pongBallCoords;
 
     uniform float refactorCores;
@@ -3204,7 +3212,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                     }
                     return p;
                     }
-vec2 spinningArms(vec2 g, vec2 t, float angle,float amp){
+vec2 spinningArms(vec2 g, vec2 t, float angle,float amp, bool HandOfGod){
 
             float b = (0.);
 
@@ -3239,13 +3247,31 @@ float arm = 0.;
                                             angle=-abs(angle)+PIdiv2;
                                         }
 
-                    vec2 spinningArm=spin2((g-elbow)/amp,angle+angleOffset1//(atan(d.x,d.)
-                                           )/vec2(4.,2.)+elbow;//-spin2(elbow,angle);
+                                        vec2 nabaoth = (g);
+                                     if(HandOfGod) 
+                                      {
+                                        nabaoth*=2./(2.-pow(length(nabaoth),2.)*1.);
+                                        t*=0.;
+                                     //   nabaoth=nabaoth*sign(note-lastNote);
+                                     //   angle*=sign(note-lastNote);
+                                      }
+                                      else nabaoth-=elbow;
+
+                                      
+                    vec2 spinningArm=spin2((nabaoth)/amp,angle+angleOffset1//(atan(d.x,d.)
+                                           )/vec2(4.,2.);//-spin2(elbow,angle);
+                                          // if(!HandOfGod)
+
+                                       spinningArm+=elbow;
+                                 //     spinningArm.y+=elbow.y;
+
         
 
                    vec2 z=spinningArm;
+                          //if(HandOfGod)
+
                    float armSlice = abs(spinningArm.y)*pow(abs(spinningArm.x),1./.75);
-                if(armSlice>sqrt2/2.&&spinningArm.y>0.&&(spinningArm.x)<1.&&(spinningArm.x)>-1.)
+              if( armSlice>sqrt2/2.&&spinningArm.y>0.&&(spinningArm.x)<1.&&(spinningArm.x)>-1.)
                     {
                     for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;arm=1.;break;}
                     else{
@@ -3257,9 +3283,32 @@ float arm = 0.;
                     elbow =vec2(-.5,-1.)*1.25;
             //    g=p;
                     // angle = atan(d.x,d.y);//-PI*4./3.;
-                     spinningArm=spin2((g-elbow)/amp,angle*angleDirection+angleOffset2//
+
+
+
+
+      nabaoth = (g);
+                                                    
+
+                                     if(HandOfGod) 
+                                      {
+                                        nabaoth.y*=-1.;
+                                                    angle*=-1.;
+                                                    angle+=PI;
+
+                                        nabaoth*=2./(2.-pow(length(nabaoth),2.)*1.);
+                                        t*=0.;
+                                     //   nabaoth=nabaoth*sign(note-lastNote);
+                                     //   angle*=sign(note-lastNote);
+                                      }
+                                      else nabaoth-=elbow;
+
+
+
+                     spinningArm=spin2((nabaoth)/amp,angle*angleDirection+angleOffset2//
                                            )/vec2(4.,2.)+elbow;//-spin2(elbow,angle);
 
+//
                     z=spinningArm;
                      armSlice = abs(spinningArm.y)*pow(abs(spinningArm.x),1./.75);
 
@@ -3301,30 +3350,32 @@ float arm = 0.;
      vec2 h = vec2(0.);
        if(spinning){                    float angle =atan(d.x,d.y);
 
-         h = spinningArms(g,t,angle,1.);
+         h = spinningArms(g,t,angle,1.,false);
          b+=h.x;
          arm+=h.y;
        }
+       
+
        float extrArms = 0.;
        if (armStar&&arm==0.&&armsSpinning!=0&&spinning&&volume!=1.)
        {
           float angle =atan(loudestFret1.x,loudestFret1.y);
-                 h = spinningArms(g,t,angle,volumeFret1*4./3.);
+                 h = spinningArms(g,t,angle,volumeFret1*4./3.,false);
 extrArms+=h.x;
                  arm+=h.y;
 
            angle =atan(loudestFret2.x,loudestFret2.y);
-                 h = spinningArms(g,t,angle,volumeFret2*4./3.);
+                 h = spinningArms(g,t,angle,volumeFret2*4./3.,false);
 extrArms+=h.x;
                  arm+=h.y;
 
            angle =atan(loudestFret3.x,loudestFret3.y);
-                 h = spinningArms(g,t,angle,volumeFret3*4./3.);
+                 h = spinningArms(g,t,angle,volumeFret3*4./3.,false);
 extrArms+=h.x;
                  arm+=h.y;
 
            angle =atan(loudestFret4.x,loudestFret4.y);
-                 h = spinningArms(g,t,angle,volumeFret4*4./3.);
+                 h = spinningArms(g,t,angle,volumeFret4*4./3.,false);
 extrArms+=h.x;
                  arm+=h.y;
 
@@ -6611,6 +6662,15 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                          insideOut+=clamp(AM.r,0.,1.)/2.;
                          }
                      }
+float outerARMS = 0.;
+if(handOfGod)
+{
+        float angle =atan(d.x,d.y);
+                outerARMS = spinningArms(characterP*vec2(1.,(-upOrDown)*flipStar),d,angle*upOrDown*flipStar,1.,true).x;
+              //                  outerARMS = spinningArms(characterP,d,-angle,1.,true).x;
+
+}
+
                                                                  vec3 moreHorns = vec3(0.);
                                                                  if (elderHorns>0)
                                                                  {
@@ -7248,6 +7308,7 @@ else if (starship.w==254./255.)layeredOUT=starship-oneEye.r/3.;
                     {
                      layeredOUT=vec4(1.+clamp(mannyFace.xyz,-1.,0.)+starship.xyz/4.+bodyWithArms.xyz,1.);
                     }
+                                           else if(outerARMS!=0.&&pixelShipGrey==0.&&isBlack!=0.&&isWhite!=1.)layeredOUT=vec4(0.);
 
 else {
                   

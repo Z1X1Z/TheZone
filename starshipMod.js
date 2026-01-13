@@ -445,6 +445,11 @@ let pushBackCounter = 0;
          note = 12*Math.log(pitch/window.ConcertKey)/Math.log(2.)+49;//https://en.wikipedia.org/wiki/Piano_key_frequencies
                             if(!isFinite(note))note=0.;
                             uniforms.note.value=note;
+                           if(Math.abs(window.noteWhenDirectionSet-note)>.5&&on)
+                            {
+                             uniforms.upOrDown.value=Math.sign(note-window.noteWhenDirectionSet);
+                             window.noteWhenDirectionSet=note;
+                            }
         const t =  (note +twist/2)*flip;
                             if(isFinite(t))angle = -(t*radialWarp);
                             let reversableColor=((uniforms.brelued.value*angle/12./((radialWarp>0)?radialWarp:1))*flip+twist/24.*uniforms.brelued.value+1./3.)%1.;

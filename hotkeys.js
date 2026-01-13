@@ -74,6 +74,8 @@ radialIncrements:{value:1},
         eden:{value: 0},
         spokesVisualizeColors: {value: 1    },
         note:{value: 48.},
+        upOrDown:{value: 1.},
+        handOfGod:{value: false},
         brelued:{value: 1.},
         balloonsON:{value: 0.},
         balloonsONexponential:{value: 0.},
@@ -249,7 +251,9 @@ const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 function resetAll(){
     window.unitTest=false;
 window.spinnerTwist = 0.;
-    for(var nameOfUniform in uniformsInitial)
+window.noteWhenDirectionSet = 0.;
+
+for(var nameOfUniform in uniformsInitial)
     {
         window.uniforms[nameOfUniform]={}
         Object.assign(window.uniforms[nameOfUniform],window.uniformsInitial[nameOfUniform])
@@ -599,7 +603,13 @@ window.key = " ";
 source.connect(analyser);
                      }
                     }
-                     else  if((key == "C") && event.altKey&&event.ctrlKey)uniforms.spinner.value=!uniforms.spinner.value;
+                                         else  if((key == "H") && event.altKey&&event.ctrlKey)uniforms.handOfGod.value=!uniforms.handOfGod.value;
+
+                     else  if((key == "C") && event.altKey&&event.ctrlKey)
+                        {
+                            uniforms.spinner.value=!uniforms.spinner.value;
+                            if(!uniforms.spinner.value)window.twist=0.;
+                        }
 
                                           else  if((key == "M") && event.altKey&&event.ctrlKey)
 
