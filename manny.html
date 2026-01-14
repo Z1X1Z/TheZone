@@ -4279,7 +4279,7 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
        //     if (wheel) logOfSpoke_Factor=log(spoke_factor);
                              
 float hyperCoreOUTPUT =hyperCore*log2/log(metaCoreDriveFactor)+loops;
-                                                           hyperCoreOUTPUT-=2.*((6.+petals)/6.-1.);//upcore for higher omniclover counts, multiplied by two!!
+                                                           hyperCoreOUTPUT-=((6.+petals)/6.-1.);//upcore for higher omniclover counts, multiplied by two!!
 
 float hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if
                           //   hyperCoreBoosted-=(6.+petals)/6.-1.;//upcore for higher omniclover counts
@@ -4440,7 +4440,7 @@ if(feedTheLamb){superUpcorer =
     -1.+1./((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
 ,1./6.)-.5/6.))*petalNumber*6.*2.)+ length(s)/log2*petalNumber/6./2.;
 ;
-if(squeezeN>1.)superUpcorer*=petals;
+//superUpcorer*=pow(petals,squeezeN-1.);
 hyperCoreBoosted-=superUpcorer;
 hyperCoreOUTPUT-=superUpcorer;
 
