@@ -531,7 +531,9 @@ if(feedTheLamb){
         (Math.abs((Math.atan(s.y,s.x)/Math.PI/2+1.//+.5/petalNumber
     )%(1./6.)-.5/6.))*petalNumber*6.*2.)+s.length()/Math.log(2.)*petalNumber/6./2.;
 ;
-superUpcorer*=(petals)**(squeezeN-1.);
+let clampedSqueeze = squeezeN;
+if(clampedSqueeze>2.)clampedSqueeze=2.;
+if(petals>0.)superUpcorer*=(petals)**(squeezeN-1.);
 
 
 hyperCoreBoosted-=superUpcorer;

@@ -4440,7 +4440,7 @@ if(feedTheLamb){superUpcorer =
     -1.+1./((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
 ,1./6.)-.5/6.))*petalNumber*6.*2.)+ length(s)/log2*petalNumber/6./2.;
 ;
-//superUpcorer*=pow(petals,squeezeN-1.);
+if(petals>0.)superUpcorer*=pow(petals,clamp(squeezeN-1.,0.,1.));
 hyperCoreBoosted-=superUpcorer;
 hyperCoreOUTPUT-=superUpcorer;
 
