@@ -1728,6 +1728,7 @@ function runOSMD (){
         //function    OSMDUPDATER(){   runOSMD();  setTimeout(OSMDUPDATER,1000/60.);}
         //OSMDUPDATER();
                                 let TouchMicroizer = false;
+                                 let lastTouchAngle = 0.;
                function executeTouchRegime(){
                    
                    if(!shouldShowStar||touchOnlyMode)
@@ -1752,6 +1753,12 @@ function runOSMD (){
                        yTouch += screenPressCoordY[n]*coordinator;
                    }
                    
+                   let touchAngle =  Math.atan2(yTouch,xTouch)
+                                 if(touchAngle!=lastTouchAngle)     uniforms.upOrDown.value=-Math.sign(touchAngle-lastTouchAngle)
+
+
+                   lastTouchAngle=touchAngle
+
                    if(xTouch!=0)
                    {xTouchMicroBuffer=xTouch;
                        TouchMicroizer=false;

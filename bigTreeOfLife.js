@@ -531,6 +531,7 @@ if(feedTheLamb){
         (Math.abs((Math.atan(s.y,s.x)/Math.PI/2+1.//+.5/petalNumber
     )%(1./6.)-.5/6.))*petalNumber*6.*2.)+s.length()/Math.log(2.)*petalNumber/6./2.;
 ;
+if(squeezeN>1.)superUpcorer*=petals;
 
 hyperCoreBoosted-=superUpcorer;
 hyperCoreOUTPUT-=superUpcorer;
