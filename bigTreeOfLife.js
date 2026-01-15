@@ -512,7 +512,7 @@ var OmniPetal =OmniDynamicPetalShift*(petalNumber/6.);
 
 
  if(petals>0.&&squeezeN>=2.) 
-  hyperCoreBoosted+=(petalNumber/6.-1.)**2*3.;
+  hyperCoreBoosted+=(petalNumber/6.-1.)**2*3.-squeezeN;
 
 
 
