@@ -31,7 +31,7 @@
             precision highp float;
             uniform vec2 resolution;
             uniform float time;
-            float brelued=1.;float flipStar=1.;float twistStar=0.; int holyeyes=1;float note=0.;float lownote=0.;float volume=1.;
+            float brelued=1.;float flipStar=1.;float twistStar=0.; int holyeyes=3;float note=0.;float lownote=0.;float volume=1.;
              int MannyONtrail=0;
             vec2 d = vec2(0.);
             float PI = 3.141592;
@@ -151,10 +151,13 @@
                                          if(wink&&rnd(adjustedNote)==5.)
                                             l=vec4(vec3(winkWhite),0.);
 
-                                         else if(!wink)
-                                         l=vec4(eyeColorCyclerReversed/2.+.5,1.-eyeColorCyclerReversed, eyeColorCyclerReversed/2.,.75);
+                             else if(!wink)
+                             if (holyeyes==1)
+                             l=vec4(eyeColorCyclerReversed/2.+.5,1.-eyeColorCyclerReversed, eyeColorCyclerReversed/2.,.75);
+                                else if (holyeyes==3)
+                                 l=vec4( eyeColorCyclerReversed/2.,1.-eyeColorCyclerReversed,eyeColorCyclerReversed/2.+.5,.75);
 
-                                         break;
+                             break;
                                          
                                          }
                                          else if (!E&&p.x>0.&&p.y>0.)
@@ -163,8 +166,11 @@
                                                    l=vec4(vec3(winkWhite),0.);
                                                    else if(!wink)
                                                    
-                                                   l=vec4( eyeColorCyclerReversed/2.,1.-eyeColorCyclerReversed,eyeColorCyclerReversed/2.+.5,.75);
-                                             break;
+  if (holyeyes==3)
+                             l=vec4(eyeColorCyclerReversed/2.+.5,1.-eyeColorCyclerReversed, eyeColorCyclerReversed/2.,.75);
+                                else if (holyeyes==1)
+                                 l=vec4( eyeColorCyclerReversed/2.,1.-eyeColorCyclerReversed,eyeColorCyclerReversed/2.+.5,.75);
+                                 break;
                                              }
                                          else if(!G&&!A&&abs(p.x)>abs(p.y)&&p.x<0.){
                                              
