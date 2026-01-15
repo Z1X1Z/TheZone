@@ -496,8 +496,8 @@ let loopSolid = 0.
         hyperCoreOUTPUT*=squeezeN;
         var daisifier = 0.;
 
-let clampedSqueeze = squeezeN;
-if(clampedSqueeze>2.)clampedSqueeze=2.;
+let clampedSqueeze = 0;
+if(clampedSqueeze>2.)clampedSqueeze=1.;
 
 for (var counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
    /*
@@ -511,7 +511,7 @@ var OmniDynamicPetalShift =omniData[0];
 var OmniPetal =OmniDynamicPetalShift*(petalNumber/6.);
 
 
- if(petals>6.&&squeezeN>=2.) 
+ if(petals>0.&&squeezeN>=2.) 
   hyperCoreBoosted+=(petalNumber/6.-1.)**2*3.;
 
 

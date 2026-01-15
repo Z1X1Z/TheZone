@@ -4394,7 +4394,7 @@ if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
 
- if(petals>6.&&squeezeN>=2.) 
+ if(petals>0.&&squeezeN>=2.) 
  {
   hyperCoreBoosted+=pow(petalNumber/6.-1., 2.)*3.;
  }
@@ -4446,7 +4446,12 @@ if(feedTheLamb){superUpcorer =
     -1.+1./((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
 ,1./6.)-.5/6.))*petalNumber*6.*2.)+ length(s)/log2*petalNumber/6./2.;
 ;
-if(petals>0.)superUpcorer*=pow(petals,clamp(squeezeN-1.,0.,1.));//was pow(petals,clamp(squeezeN-1.,0.,1.))
+if(petals>0.)
+{
+    float superUpcorerboost=pow(petals,clamp(squeezeN-1.,0.,1.));//was pow(petals,clamp(squeezeN-1.,0.,1.))
+    //if (squeezeN>=2.) superUpcorerboost=squeezeN;
+    superUpcorer*=superUpcorerboost;
+}
 hyperCoreBoosted-=superUpcorer;
 hyperCoreOUTPUT-=superUpcorer;
 
