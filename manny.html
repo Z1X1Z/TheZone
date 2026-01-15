@@ -4279,9 +4279,11 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
        //     if (wheel) logOfSpoke_Factor=log(spoke_factor);
                              
 float hyperCoreOUTPUT =hyperCore*log2/log(metaCoreDriveFactor)+loops;
-                                                           hyperCoreOUTPUT-=((6.+petals)/6.-1.);//upcore for higher omniclover counts, multiplied by two!!
+float omniboost = (6.+petals)/6.-1.;
+if(petals>0.)omniboost=sqrt(omniboost);
+                                                       hyperCoreOUTPUT-=omniboost;//upcore for higher omniclover counts, multiplied by two!!
 
-float hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if
+                                                           float hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if
                           //   hyperCoreBoosted-=(6.+petals)/6.-1.;//upcore for higher omniclover counts
                         
                              //metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
@@ -4392,6 +4394,10 @@ if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
 
+ if(petals>6.&&squeezeN>=2.) 
+ {
+  hyperCoreBoosted+=pow(petalNumber/6.-1., 2.)*3.;
+ }
 
    //      if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
 
@@ -4440,7 +4446,7 @@ if(feedTheLamb){superUpcorer =
     -1.+1./((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
 ,1./6.)-.5/6.))*petalNumber*6.*2.)+ length(s)/log2*petalNumber/6./2.;
 ;
-if(petals>0.)superUpcorer*=pow(petals,clamp(squeezeN-1.,0.,1.));
+if(petals>0.)superUpcorer*=pow(petals,clamp(squeezeN-1.,0.,1.));//was pow(petals,clamp(squeezeN-1.,0.,1.))
 hyperCoreBoosted-=superUpcorer;
 hyperCoreOUTPUT-=superUpcorer;
 
@@ -4938,7 +4944,7 @@ t
                       
               //    }
               gated = false;
-  
+
 //dstnce=length(s);
 //s*=-1.;cool colors
 for(int i=0;i<200; i++)//metacoreloop used to be about 40 before squeezeN
@@ -5168,6 +5174,7 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
      
 }
 else break;
+
 daisifier+=1.;
 hyperCoreBoosted--;
 hyperCoreOUTPUT--;

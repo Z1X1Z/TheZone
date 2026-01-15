@@ -430,7 +430,13 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
   // var logOfSpoke_Factor=0.;
                           // if (wheel) logOfSpoke_Factor=Math.log(spoke_factor);
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
-                           hyperCoreOUTPUT-=(6.+petals)/6.-1.;
+
+
+                           var omniboost = (6.+petals)/6.-1.;
+if(petals>0.)omniboost=Math.sqrt(omniboost);
+                                                       hyperCoreOUTPUT-=omniboost;//upcore for higher omniclover counts, multiplied by two!!
+
+
 
 var hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
               //            hyperCoreBoosted-=(6.+petals)/6.-1.;//upcore for higher omniclover counts
@@ -490,6 +496,9 @@ let loopSolid = 0.
         hyperCoreOUTPUT*=squeezeN;
         var daisifier = 0.;
 
+let clampedSqueeze = squeezeN;
+if(clampedSqueeze>2.)clampedSqueeze=2.;
+
 for (var counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
    /*
     if( loopSolid>=hyperCoreBoosted+1)
@@ -500,6 +509,12 @@ for (var counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
   // console.log(hyperCoreOUTPUT)
 var OmniDynamicPetalShift =omniData[0];
 var OmniPetal =OmniDynamicPetalShift*(petalNumber/6.);
+
+
+ if(petals>6.&&squeezeN>=2.) 
+  hyperCoreBoosted+=(petalNumber/6.-1.)**2*3.;
+
+
 
 var  CORE_DELIMITER=coreData[0];
   
@@ -531,9 +546,7 @@ if(feedTheLamb){
         (Math.abs((Math.atan(s.y,s.x)/Math.PI/2+1.//+.5/petalNumber
     )%(1./6.)-.5/6.))*petalNumber*6.*2.)+s.length()/Math.log(2.)*petalNumber/6./2.;
 ;
-let clampedSqueeze = squeezeN;
-if(clampedSqueeze>2.)clampedSqueeze=2.;
-if(petals>0.)superUpcorer*=(petals)**(squeezeN-1.);
+if(petals>0.)superUpcorer*=(petals)**(clampedSqueeze);
 
 
 hyperCoreBoosted-=superUpcorer;
