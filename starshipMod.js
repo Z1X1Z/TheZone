@@ -540,6 +540,9 @@ window.twist-=window.spinnerTwist
                  d_x*=volume;
                  d_y*=volume;
 
+               //  d_x*=zoomBoost;
+               //  d_y*=zoomBoost;
+
                             if(uniforms.carousel.value!=0.&&uniforms[ "time" ].value>0)         spunD=spin(spunD,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                   const d_xS=spunD[0]*interpolation;
                   const d_yS=spunD[1]*interpolation;
@@ -1423,7 +1426,7 @@ function zoomRoutine(){
         zoomOutEngage = false;
     if(!isFinite(ZR))ZR=1;
     if(!zoomOutEngage&&zoomRate>0.){
-        if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(on&&!window.touchMode))||xTouch+yTouch!=0)zoom *=ZR;
+        if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(on&&!window.touchMode))||xTouch+yTouch!=0)zoom *=ZR**zoomBoost;
         else if(uniforms.MetaCored.value||zoom<1.){
             zoom /= ZR;
             if(center&&zoom<1.){coordX*=ZR*2./3.;; coordY*=ZR*2./3.;}

@@ -696,6 +696,15 @@ radialWarp=b;
                            }
                                                    ">
                        <br>
+                              <label for="inBoost">In Boost[,.I]</label>
+                   <input type="number" id="inBoost" name="inBoost" class="num" onkeyup="
+                           number = document.getElementById('inBoost').value;
+                           key  = 'I';
+                           if(!isNaN(number)){
+                               callKey(new KeyboardEvent('keydown', {'key':key, 'altKey':true, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));
+                           }
+                                                   ">
+                       <br>
                        <a id="FasterZoom" name="t"  onclick= "
                            key  = ']';
                            callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">

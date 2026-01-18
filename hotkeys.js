@@ -252,7 +252,7 @@ function resetAll(){
     window.unitTest=false;
 window.spinnerTwist = 0.;
 window.noteWhenDirectionSet = 0.;
-
+window.zoomBoost = 1.;
 for(var nameOfUniform in uniformsInitial)
     {
         window.uniforms[nameOfUniform]={}
@@ -646,6 +646,14 @@ source.connect(analyser);
                     uniforms.squeezeN.value=number;
                 else if( uniforms.squeezeN.value!=1.)uniforms.squeezeN.value=1.;
                     else  uniforms.squeezeN.value=2.;
+                }  
+                else  if(key == "I" && event.altKey&&event.ctrlKey)
+                                          
+                {
+                    if(number!="no number")
+                    zoomBoost=number;
+                else if( zoomBoost!=1.)zoomBoost=1.;
+                    else  zoomBoost=1.75;
                 }
                                                       else  if(key == "P" && event.altKey&&event.ctrlKey)uniforms.polyNomialStretch.value=!uniforms.polyNomialStretch.value;
                                           else  if(key == "O" && event.altKey&&event.ctrlKey)uniforms.seventhEYE.value=(uniforms.seventhEYE.value-1.+4.)%4;
