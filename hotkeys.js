@@ -149,6 +149,12 @@ colorCombo2: {value: -1 },
 
 
         resolution: {value:[window.innerWidth,window.innerHeight]},//these are later resolved to the THREE.vec2() uniforms
+        pitchHandsFingers: {value:null},
+        firstHandsFingers: {value:null},
+        secondHandsFingers: {value:null},
+        thirdHandsFingers: {value:null},
+        fourthHandsFingers: {value:null},
+        
 coords: {value: [xINITiaLizer,yINITiaLizer]},//to prevent dividing by zero may be set to small value
 constellationCoord: {value: [xINITiaLizer,yINITiaLizer]},//to prevent dividing by zero may be set to small value
         coordSHIFT: {value: [0.,0.]},

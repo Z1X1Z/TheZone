@@ -144,11 +144,13 @@ loudestFret[2].note = mustarD[g]
     {
         var arm =(flip*mustarD[loudestFret[g].index]+twist+12)%24./24.*pi*2.;
         //var rpio2 = arm+pi;
+        loudestNote[g]=mustarD[loudestFret[g].index]/2.;
         loudestFret[g].x = -Math.sin(arm);//*loudestFret[g].volume;
         loudestFret[g].y = -Math.cos(arm);//*loudestFret[g].volume;
 
     }
 }
+let loudestNote=Array(4).fill(0.)
 let averagedAmp =  0;
 let len=0;
                             let phase = 0;
@@ -267,7 +269,15 @@ var innerFrets =  new Float64Array((EldersLeg>0)?EldersLeg:0.);//could be refact
 
 
 const twelve = Array(12);
-for(let n = 0; n<12; n++)twelve[n] = new Float64Array(10).fill(0);
+for(let n = 0; n<12; n++)twelve[n] = new Float32Array(10).fill(0);
+
+
+let pitchHandsFingersArray = new Float32Array(10).fill(0);
+let firstHandsFingersArray = new Float32Array(10).fill(0);
+let secondHandsFingersArray = new Float32Array(10).fill(0);
+let thirdHandsFingersArray = new Float32Array(10).fill(0);
+let fourthHandsFingersArray = new Float32Array(10).fill(0);
+
 
 var smoothTwelve =false;
 function fiveAndSeven(){
@@ -277,8 +287,27 @@ function fiveAndSeven(){
             twelve[n][m]=0;
     
     
+        for(let m = 0; m<10; m++)
+        {
+
+        
+pitchHandsFingersArray[m]=0.    
+firstHandsFingersArray[m]=0.    
+secondHandsFingersArray[m]=0.    
+thirdHandsFingersArray[m]=0.    
+fourthHandsFingersArray[m]=0.    
+        }
+                 let binsInFingerP = Array(10).fill(1.);
+                 let binsInFinger1 = Array(10).fill(1.);
+                 let binsInFinger2 = Array(10).fill(1.);
+                 let binsInFinger3 = Array(10).fill(1.);
+                 let binsInFinger4 = Array(10).fill(1.);
+
+
       let finger = 0 //ranges up to <10
       let  starNote = 0 //ranges up to <12
+        let   fingerPitch =0.;
+
         for(let n = 0; n<numberOfBins; n++)        {
             //mustard is in 24ths, here we want 12ths so we divide by two
             let twelfths = (mustarD[n]/2.+1)*radialWarp//A1 is 1 with +12
@@ -286,12 +315,95 @@ function fiveAndSeven(){
                 if( twelfths>=-.5){
                     starNote = Math.round(twelfths)%(12);
                     finger = Math.floor((twelfths-.5)/12);
-                    if (finger<10&&finger>=0&&isFinite(finger)&&isFinite(starNote)&&isFinite(dataArray[n])) twelve[starNote][finger] +=dataArray[n];
-                }
+                     fingerPitch = Math.floor((twelfths-.5-6.)/12);
+                    if (finger<10&&finger>=0&&isFinite(finger)&&isFinite(starNote)&&isFinite(dataArray[n])) 
+                        {
+                            
+                            twelve[starNote][finger] +=dataArray[n];
+                            if(Math.abs(twelfths%12.-loudestNote[0]%12.)<.5)
+                            {
+                                binsInFinger1[finger]++
+                            firstHandsFingersArray[finger]+=dataArray[n];
+                            }
+                                  if(Math.abs(twelfths%12.-loudestNote[1]%12.)<.5)
+                            {
+                                binsInFinger2[finger]++
+                            secondHandsFingersArray[finger]+=dataArray[n];
+                            }
+                                  if(Math.abs(twelfths%12.-loudestNote[2]%12.)<.5)
+                            {
+                                binsInFinger3[finger]++
+                            thirdHandsFingersArray[finger]+=dataArray[n];
+                            }
+                                  if(Math.abs(twelfths%12.-loudestNote[3]%12.)<.5)
+                            {
+                                binsInFinger4[finger]++
+                            fourthHandsFingersArray[finger]+=dataArray[n];
+                            }
+                        }
+                     if (fingerPitch<10&&fingerPitch>=0&&isFinite(fingerPitch)&&isFinite(starNote)&&isFinite(dataArray[n])) 
+
+                           {
+                        pitchHandsFingersArray[finger] +=dataArray[n];
+                    binsInFingerP[finger]+=1.;
+                           }
+                        
+                
                         
             
             }
+
+        }
+
+        for(let m = 0; m<10; m++)
+        {
+pitchHandsFingersArray[m]/=binsInFingerP[m]*255.    
+firstHandsFingersArray[m]/=binsInFinger1[m]*255.    
+secondHandsFingersArray[m]/=binsInFinger2[m]*255.    
+thirdHandsFingersArray[m]/=binsInFinger3[m]*255.    
+fourthHandsFingersArray[m]/=binsInFinger4[m]*255.    
+        }
+
+           let pitchFingerTexture = new THREE.DataTexture( pitchHandsFingersArray, 10, 1,THREE.RedFormat,THREE.FloatType);
+     pitchFingerTexture.unpackAlignment=1
+     pitchFingerTexture.needsUpdate=true;
+     uniforms.pitchHandsFingers.value=pitchFingerTexture;
+     uniforms.pitchHandsFingers.needsUpdate = true;
+
+           let firstFingerTexture = new THREE.DataTexture( firstHandsFingersArray, 10, 1,THREE.RedFormat,THREE.FloatType);
+     firstFingerTexture.unpackAlignment=1
+     firstFingerTexture.needsUpdate=true;
+     uniforms.firstHandsFingers.value=firstFingerTexture;
+     uniforms.firstHandsFingers.needsUpdate = true;
+
+
+
+           let secondFingerTexture = new THREE.DataTexture( secondHandsFingersArray, 10, 1,THREE.RedFormat,THREE.FloatType);
+     secondFingerTexture.unpackAlignment=1
+     secondFingerTexture.needsUpdate=true;
+     uniforms.secondHandsFingers.value=secondFingerTexture;
+     uniforms.secondHandsFingers.needsUpdate = true;
+
+
+
+
+           let thirdFingerTexture = new THREE.DataTexture( thirdHandsFingersArray, 10, 1,THREE.RedFormat,THREE.FloatType);
+    thirdFingerTexture.unpackAlignment=1
+     thirdFingerTexture.needsUpdate=true;
+     uniforms.thirdHandsFingers.value=thirdFingerTexture;
+     uniforms.thirdHandsFingers.needsUpdate = true;
+
+
+           let fourthFingerTexture = new THREE.DataTexture( fourthHandsFingersArray, 10, 1,THREE.RedFormat,THREE.FloatType);
+     fourthFingerTexture.unpackAlignment=1
+     fourthFingerTexture.needsUpdate=true;
+     uniforms.fourthHandsFingers.value=fourthFingerTexture;
+     uniforms.fourthHandsFingers.needsUpdate = true;
+        //    console.log(uniforms.pitchHandsFingers.value);
 }
+
+
+
                             var cx =new Float64Array(0).fill(0);//c is the center of the frame moved from the origin
                             var cy = new Float64Array(0).fill(0);
                             var xPerp= new Float64Array(0).fill(0);//perp is the perpendicular from c
@@ -2961,7 +3073,6 @@ let yr = lengt*-Math.cos(arm);
              
 var fingerStride = 0;
              fiveAndSeven();
-
          let maxFinger = 0;
          let minFinger = 100000000;
          for (var t=0; t<12; t++) {

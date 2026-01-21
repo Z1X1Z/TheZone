@@ -2030,6 +2030,12 @@ void main(){
     uniform sampler2D coreTextureSampler;
     uniform sampler2D omniDynamic;
     uniform vec2 constellationDynamic[50];
+    uniform sampler2D pitchHandsFingers;
+    uniform sampler2D firstHandsFingers;
+    uniform sampler2D secondHandsFingers;
+    uniform sampler2D thirdHandsFingers;
+    uniform sampler2D fourthHandsFingers;
+    
         uniform sampler2D twelveNotesTex;
                 uniform bool ringSpring;
 
@@ -3221,8 +3227,8 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                     }
                     return p;
                     }
-vec2 spinningArms(vec2 g, vec2 t, float angle,float amp, bool HandOfGod){
-
+vec2 spinningArms(vec2 g, vec2 t, float angle,float amp, bool HandOfGod, float finger1 ,float finger2,float finger3 ,float finger4 ,float finger5 ,float finger6,float finger7,float finger8,float finger9 ,float finger10){
+t*=0.;//should be conditionallized
             float b = (0.);
 
 float arm = 0.;
@@ -3276,25 +3282,83 @@ float arm = 0.;
 
         
 
+
+           float growng5= finger9;
+           vec2 thumbJoint = vec2(-.625,1.75);
+           
+	   if(spinningArm.x>thumbJoint.x&&spinningArm.y>thumbJoint.y&&spinningArm.y<2.25)
+       {
+                thumbJoint.y+=.15;
+
+        spinningArm=(spinningArm-thumbJoint)/growng5+thumbJoint;//g/=growng5;
+
+       }
                    vec2 z=spinningArm;
+
+	    		   vec2 growng=z;
+	    
+		vec2 lastZ = z;
+		   	vec2 h = z;
+
+
+           vec2 growng1= spinningArm*finger1;
+           vec2 growng2= spinningArm*finger3;
+           vec2 growng3= spinningArm*finger5;
+           vec2 growng4= spinningArm*finger7;
+
+
                           //if(HandOfGod)
 
                    float armSlice = abs(spinningArm.y)*pow(abs(spinningArm.x),1./.75);
               if( armSlice>sqrt2/2.&&spinningArm.y>0.&&(spinningArm.x)<1.&&(spinningArm.x)>-1.)
                     {
-                    for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;arm=1.;break;}
-                    else{
-                        z=2.*vec2(1./(z.x*z.x-z.y*z.y+spinningArm.x+t.x),(2.0*z.x*z.y+spinningArm.y+t.y));
-                       //if(z.x>0.)//likely clipped off headbody
-                        z.x=sqrt(abs(z.x));}
-                    }
+                    for(int f=0;f<12;f+=1)
+                    {
+	    
+		 lastZ = z;
+		   	 h = z;
 
+	//   if(g.x<1.25&&g.y<-3.75)  
+	   
+	      if(f>3&&f<8)
+	      {
+                                  if(f==4)   growng=growng4;
+                                  if(f==5)   growng=growng3;
+                                  if(f==6)   growng=growng2;
+                                  if(f==7)   growng=growng1;
+
+		          h=2.*vec2(-1./(h.x*h.x-h.y*h.y+growng.x+t.x),(2.0*h.x*h.y+growng.y+t.y));//z<=z^2-g; z.real<=-1/z.real; z*=2;
+		          h.x=sqrt(abs(h.x));
+	      }
+ if((abs(h.y)>52.&&f>3))
+	   {
+        arm=1.;
+		   b=abs(h.y)/77.;
+		   break;		   
+	   }
+
+
+z=2.*vec2(-1./(z.x*z.x-z.y*z.y+spinningArm.x+t.x),(2.0*z.x*z.y+spinningArm.y+t.y));//z<=z^2-g; z.real<=-1/z.real; z*=2;
+z.x=sqrt(abs(z.x));
+
+
+	   if((abs(z.y)>52.&&f>3))
+   {
+        arm=1.;
+
+	  b=abs(z.y)/77.;
+	   break;
+   }
+}
+}
+                    
                     elbow =vec2(-.5,-1.)*1.25;
             //    g=p;
                     // angle = atan(d.x,d.y);//-PI*4./3.;
 
 
 
+                    
 
       nabaoth = (g);
                                                     
@@ -3318,18 +3382,78 @@ float arm = 0.;
                                            )/vec2(4.,2.)+elbow;//-spin2(elbow,angle);
 
 //
+
+
+
+            growng5= finger10;
+            thumbJoint = vec2(-.625,-1.75);
+           
+	   if(spinningArm.x>thumbJoint.x&&spinningArm.y>thumbJoint.y&&spinningArm.y<2.25)
+       {
+        thumbJoint.y-=.15;
+        spinningArm=(spinningArm-thumbJoint)/growng5+thumbJoint;//g/=growng5;
+       }
+
+
                     z=spinningArm;
+
+	    		    growng=z;
+	    
+		 lastZ = z;
+		   	 h = z;
+
+
+            growng1= spinningArm*finger2;
+            growng2= spinningArm*finger4;
+            growng3= spinningArm*finger6;
+            growng4= spinningArm*finger8;
+
+
+
+
                      armSlice = abs(spinningArm.y)*pow(abs(spinningArm.x),1./.75);
 
                 if(armSlice>sqrt2/2.&&spinningArm.y<0.&&(spinningArm.x)<1.&&(spinningArm.x)>-1.)
+                              {
+                    for(int f=0;f<12;f+=1)
                     {
-                    for(int f=0;f<12;f+=1)if(abs(z.y)>52.&&f>4){b=abs(z.y)/77.;arm=1.;break;}
-                    else{
-                        z=2.*vec2(1./(z.x*z.x-z.y*z.y+spinningArm.x+t.x),(2.0*z.x*z.y+spinningArm.y+t.y));
-                       //if(z.x>0.)//likely clipped off headbody
-                        z.x=sqrt(abs(z.x));}
-                    
-                }
+	    
+		 lastZ = z;
+		   	 h = z;
+
+	//   if(g.x<1.25&&g.y<-3.75)  
+	   
+	      if(f>3&&f<8)
+	      {
+                                  if(f==4)   growng=growng4;
+                                  if(f==5)   growng=growng3;
+                                  if(f==6)   growng=growng2;
+                                  if(f==7)   growng=growng1;
+
+		          h=2.*vec2(-1./(h.x*h.x-h.y*h.y+growng.x+t.x),(2.0*h.x*h.y+growng.y+t.y));//z<=z^2-g; z.real<=-1/z.real; z*=2;
+		          h.x=sqrt(abs(h.x));
+	      }
+ if((abs(h.y)>52.&&f>3))
+	   {
+        arm=1.;
+		   b=abs(h.y)/77.;
+		   break;		   
+	   }
+
+
+z=2.*vec2(-1./(z.x*z.x-z.y*z.y+spinningArm.x+t.x),(2.0*z.x*z.y+spinningArm.y+t.y));//z<=z^2-g; z.real<=-1/z.real; z*=2;
+z.x=sqrt(abs(z.x));
+
+
+	   if((abs(z.y)>52.&&f>3))
+   {
+        arm=1.;
+
+	  b=abs(z.y)/77.;
+	   break;
+   }
+}
+}
 
                 return vec2 (b,arm);
 }
@@ -3359,7 +3483,18 @@ float arm = 0.;
      vec2 h = vec2(0.);
        if(spinning){                    float angle =atan(d.x,d.y);
 
-         h = spinningArms(g,t,angle,1.,false);
+        float finger1 = texture2D(pitchHandsFingers,vec2(0.5/10.)).r*4.;
+        float finger2 = texture2D(pitchHandsFingers,vec2(1.5/10.)).r*4.;
+        float finger3 = texture2D(pitchHandsFingers,vec2(2.5/10.)).r*4.;
+        float finger4 = texture2D(pitchHandsFingers,vec2(3.5/10.)).r*4.;
+        float finger5 = texture2D(pitchHandsFingers,vec2(4.5/10.)).r*4.;
+        float finger6 = texture2D(pitchHandsFingers,vec2(5.5/10.)).r*4.;
+        float finger7 = texture2D(pitchHandsFingers,vec2(6.5/10.)).r*4.;
+        float finger8 = texture2D(pitchHandsFingers,vec2(7.5/10.)).r*4.;
+        float finger9 = texture2D(pitchHandsFingers,vec2(8.5/10.)).r*4.;
+        float finger10 = texture2D(pitchHandsFingers,vec2(9.5/10.)).r*4.;
+
+         h = spinningArms(g,t,angle,1.,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
          b+=h.x;
          arm+=h.y;
        }
@@ -3368,23 +3503,71 @@ float arm = 0.;
        float extrArms = 0.;
        if (armStar&&arm==0.&&armsSpinning!=0&&spinning&&volume!=1.)
        {
+        
+
+        float finger1 = texture2D(firstHandsFingers,vec2(0.5/10.)).r*4.;
+        float finger2 = texture2D(firstHandsFingers,vec2(1.5/10.)).r*4.;
+        float finger3 = texture2D(firstHandsFingers,vec2(2.5/10.)).r*4.;
+        float finger4 = texture2D(firstHandsFingers,vec2(3.5/10.)).r*4.;
+        float finger5 = texture2D(firstHandsFingers,vec2(4.5/10.)).r*4.;
+        float finger6 = texture2D(firstHandsFingers,vec2(5.5/10.)).r*4.;
+        float finger7 = texture2D(firstHandsFingers,vec2(6.5/10.)).r*4.;
+        float finger8 = texture2D(firstHandsFingers,vec2(7.5/10.)).r*4.;
+        float finger9 = texture2D(firstHandsFingers,vec2(8.5/10.)).r*4.;
+        float finger10 = texture2D(firstHandsFingers,vec2(9.5/10.)).r*4.;
           float angle =atan(loudestFret1.x,loudestFret1.y);
-                 h = spinningArms(g,t,angle,volumeFret1*4./3.,false);
+                h = spinningArms(g,t,angle,volumeFret1*4./3.,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
 extrArms+=h.x;
                  arm+=h.y;
 
+
+         finger1 = texture2D(secondHandsFingers,vec2(0.5/10.)).r*4.;
+         finger2 = texture2D(secondHandsFingers,vec2(1.5/10.)).r*4.;
+         finger3 = texture2D(secondHandsFingers,vec2(2.5/10.)).r*4.;
+         finger4 = texture2D(secondHandsFingers,vec2(3.5/10.)).r*4.;
+         finger5 = texture2D(secondHandsFingers,vec2(4.5/10.)).r*4.;
+         finger6 = texture2D(secondHandsFingers,vec2(5.5/10.)).r*4.;
+         finger7 = texture2D(secondHandsFingers,vec2(6.5/10.)).r*4.;
+         finger8 = texture2D(secondHandsFingers,vec2(7.5/10.)).r*4.;
+         finger9 = texture2D(secondHandsFingers,vec2(8.5/10.)).r*4.;
+         finger10 = texture2D(secondHandsFingers,vec2(9.5/10.)).r*4.;
+         
            angle =atan(loudestFret2.x,loudestFret2.y);
-                 h = spinningArms(g,t,angle,volumeFret2*4./3.,false);
+               h = spinningArms(g,t,angle,volumeFret2*4./3.,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
 extrArms+=h.x;
                  arm+=h.y;
+
+         finger1 = texture2D(thirdHandsFingers,vec2(0.5/10.)).r*4.;
+         finger2 = texture2D(thirdHandsFingers,vec2(1.5/10.)).r*4.;
+         finger3 = texture2D(thirdHandsFingers,vec2(2.5/10.)).r*4.;
+         finger4 = texture2D(thirdHandsFingers,vec2(3.5/10.)).r*4.;
+         finger5 = texture2D(thirdHandsFingers,vec2(4.5/10.)).r*4.;
+         finger6 = texture2D(thirdHandsFingers,vec2(5.5/10.)).r*4.;
+         finger7 = texture2D(thirdHandsFingers,vec2(6.5/10.)).r*4.;
+         finger8 = texture2D(thirdHandsFingers,vec2(7.5/10.)).r*4.;
+         finger9 = texture2D(thirdHandsFingers,vec2(8.5/10.)).r*4.;
+         finger10 = texture2D(thirdHandsFingers,vec2(9.5/10.)).r*4.;
 
            angle =atan(loudestFret3.x,loudestFret3.y);
-                 h = spinningArms(g,t,angle,volumeFret3*4./3.,false);
+                h = spinningArms(g,t,angle,volumeFret3*4./3.,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
 extrArms+=h.x;
                  arm+=h.y;
 
+
+         finger1 = texture2D(fourthHandsFingers,vec2(0.5/10.)).r*4.;
+         finger2 = texture2D(fourthHandsFingers,vec2(1.5/10.)).r*4.;
+         finger3 = texture2D(fourthHandsFingers,vec2(2.5/10.)).r*4.;
+         finger4 = texture2D(fourthHandsFingers,vec2(3.5/10.)).r*4.;
+         finger5 = texture2D(fourthHandsFingers,vec2(4.5/10.)).r*4.;
+         finger6 = texture2D(fourthHandsFingers,vec2(5.5/10.)).r*4.;
+         finger7 = texture2D(fourthHandsFingers,vec2(6.5/10.)).r*4.;
+         finger8 = texture2D(fourthHandsFingers,vec2(7.5/10.)).r*4.;
+         finger9 = texture2D(fourthHandsFingers,vec2(8.5/10.)).r*4.;
+         finger10 = texture2D(fourthHandsFingers,vec2(9.5/10.)).r*4.;
+
+
            angle =atan(loudestFret4.x,loudestFret4.y);
-                 h = spinningArms(g,t,angle,volumeFret4*4./3.,false);
+               h = spinningArms(g,t,angle,volumeFret4*4./3.,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
 extrArms+=h.x;
                  arm+=h.y;
 
@@ -6689,8 +6872,8 @@ float outerARMS = 0.;
 if(handOfGod)
 {
         float angle =atan(d.x,d.y);
-              if(length(characterP)>1.25)  outerARMS = spinningArms(characterP*vec2(1.,(-upOrDown)*flipStar),d,angle*upOrDown*flipStar,1.,true).x;
-              //                  outerARMS = spinningArms(characterP,d,-angle,1.,true).x;
+             if(length(characterP)>1.25)  outerARMS = spinningArms(characterP*vec2(1.,(-upOrDown)*flipStar),d,angle*upOrDown*flipStar,1.,true,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.).x;
+                      //        outerARMS = spinningArms(characterP,d,-angle,1.,true,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.).x;
 
 }
 
@@ -7263,6 +7446,8 @@ if(oneEye.r!=0.)zoomer=-oneEye;
                         else if(isGreyISH==0.) layeredOUT=vec4(.25);
                         }
                         else layeredOUT=vec4(pixelShipGrey+.25);
+                        layeredOUT=layeredOUT*.75+bodyWithArms;
+                        
                     }                     
                     else if (Shekina.r!=0.)layeredOUT=vec4(Shekina.r);
                      else if (hypnoticHarmonicCircles.x==hypnoticHarmonicCircles.y&&hypnoticHarmonicCircles.x==hypnoticHarmonicCircles.z&&hypnoticHarmonicCircles.x!=0.)layeredOUT=vec4(vec3(hypnoticHarmonicCircles.x),1.);
