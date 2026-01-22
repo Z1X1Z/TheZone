@@ -269,7 +269,13 @@ var innerFrets =  new Float64Array((EldersLeg>0)?EldersLeg:0.);//could be refact
 
 
 const twelve = Array(12);
-for(let n = 0; n<12; n++)twelve[n] = new Float32Array(10).fill(0);
+                 let binsInFingerStarWitnesses = Array(12);
+
+for(let n = 0; n<12; n++)
+    {
+        twelve[n] = new Float32Array(10).fill(0);
+        binsInFingerStarWitnesses[n]=Array(10).fill(1.)
+    }
 
 
 let pitchHandsFingersArray = new Float32Array(10).fill(0);
@@ -284,9 +290,12 @@ function fiveAndSeven(){
     
     for(let n = 0; n<12; n++)
         for(let m = 0; m<10; m++)
+    {
             twelve[n][m]=0;
     
-    
+            binsInFingerStarWitnesses[n][m]=1;
+}
+
         for(let m = 0; m<10; m++)
         {
 
@@ -319,7 +328,9 @@ fourthHandsFingersArray[m]=0.
                     if (finger<10&&finger>=0&&isFinite(finger)&&isFinite(starNote)&&isFinite(dataArray[n])) 
                         {
                             
-                            twelve[starNote][finger] +=dataArray[n];
+                            twelve[starNote][finger] +=dataArray[n]///twelfths;
+                            binsInFingerStarWitnesses[starNote][finger]++
+                            
                             if(Math.abs(twelfths%12.-loudestNote[0]%12.)<.5)
                             {
                                 binsInFinger1[finger]++
@@ -354,9 +365,9 @@ fourthHandsFingersArray[m]=0.
             }
 
         }
-
+        let cutoff = 1.;
         let shrink = 255.;
-        if (zoomOutRatchetThreshold>totalAMP)shrink*=totalAMP;
+        if (zoomOutRatchetThreshold*2.<totalAMP)shrink*=totalAMP*8.;
         for(let m = 0; m<10; m++)
         {
 pitchHandsFingersArray[m]/=binsInFingerP[m]*shrink
@@ -364,6 +375,14 @@ firstHandsFingersArray[m]/=binsInFinger1[m]    *shrink
 secondHandsFingersArray[m]/=binsInFinger2[m]    *shrink
 thirdHandsFingersArray[m]/=binsInFinger3[m]    *shrink
 fourthHandsFingersArray[m]/=binsInFinger4[m]    *shrink
+
+//for(var c = 0; c<12;c++)twelve[c][m]/= binsInFingerStarWitnesses[c][m]
+
+if(pitchHandsFingersArray[m]>cutoff)pitchHandsFingersArray[m]=0;
+if(firstHandsFingersArray[m]>cutoff)firstHandsFingersArray[m]=.0;
+if(secondHandsFingersArray[m]>cutoff)secondHandsFingersArray[m]=.0;
+if(thirdHandsFingersArray[m]>cutoff)thirdHandsFingersArray[m]=.0;
+if(fourthHandsFingersArray[m]>cutoff)fourthHandsFingersArray[m]=.0;
         }
 
            let pitchFingerTexture = new THREE.DataTexture( pitchHandsFingersArray, 10, 1,THREE.RedFormat,THREE.FloatType);
@@ -1937,6 +1956,13 @@ function runOSMD (){
                                     constellationCoordFind();
                         uniforms.STAR.value=null;
                         uniforms.EDEN.value=null;
+
+     uniforms.pitchHandsFingers.value=null;
+     uniforms.firstHandsFingers.value=null;
+     uniforms.secondHandsFingers.value=null;
+     uniforms.thirdHandsFingers.value=null;
+          uniforms.fourthHandsFingers.value=null;
+
                    freezeTop();
                    shaderScene.remove(line)
 
