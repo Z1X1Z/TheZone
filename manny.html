@@ -3285,12 +3285,11 @@ float arm = 0.;
 
            float growng5= finger9;
            vec2 thumbJoint = vec2(-.625,1.75);
-           
-	   if(spinningArm.x>thumbJoint.x&&spinningArm.y>thumbJoint.y&&spinningArm.y<2.25)
+	   if(spinningArm.x>thumbJoint.x&&spinningArm.y>thumbJoint.y&&spinningArm.y<2.5)
        {
                 thumbJoint.y+=.15;
 
-        spinningArm=(spinningArm-thumbJoint)/growng5+thumbJoint;//g/=growng5;
+        spinningArm=(spinningArm-thumbJoint)/(1.+growng5)+thumbJoint;//g/=growng5;
 
        }
                    vec2 z=spinningArm;
@@ -3388,10 +3387,10 @@ z.x=sqrt(abs(z.x));
             growng5= finger10;
             thumbJoint = vec2(-.625,-1.75);
            
-	   if(spinningArm.x>thumbJoint.x&&spinningArm.y>thumbJoint.y&&spinningArm.y<2.25)
+	   if(spinningArm.x>thumbJoint.x&&spinningArm.y>thumbJoint.y&&spinningArm.y<2.5)
        {
         thumbJoint.y-=.15;
-        spinningArm=(spinningArm-thumbJoint)/growng5+thumbJoint;//g/=growng5;
+        spinningArm=(spinningArm-thumbJoint)/(1.+growng5)+thumbJoint;//g/=growng5;
        }
 
 
