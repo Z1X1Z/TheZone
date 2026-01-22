@@ -355,8 +355,8 @@ fourthHandsFingersArray[m]=0.
 
         }
 
-        let shrink = 255.*1.5;
-        if (zoomOutRatchetThreshold>totalAMP)shrink/=totalAMP;
+        let shrink = 255.;
+        if (zoomOutRatchetThreshold>totalAMP)shrink*=totalAMP;
         for(let m = 0; m<10; m++)
         {
 pitchHandsFingersArray[m]/=binsInFingerP[m]*shrink
