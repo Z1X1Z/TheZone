@@ -365,9 +365,10 @@ fourthHandsFingersArray[m]=0.
             }
 
         }
-        let cutoff = 1.;
+        let cutoff = 1.5;
+        let cutoff2 = .75;
         let shrink = 255.;
-        if (zoomOutRatchetThreshold*2.<totalAMP)shrink*=totalAMP*8.;
+        if (zoomOutRatchetThreshold*2.<totalAMP)shrink*=totalAMP*4.;
         for(let m = 0; m<10; m++)
         {
 pitchHandsFingersArray[m]/=binsInFingerP[m]*shrink
@@ -379,10 +380,18 @@ fourthHandsFingersArray[m]/=binsInFinger4[m]    *shrink
 //for(var c = 0; c<12;c++)twelve[c][m]/= binsInFingerStarWitnesses[c][m]
 
 if(pitchHandsFingersArray[m]>cutoff)pitchHandsFingersArray[m]=0;
-if(firstHandsFingersArray[m]>cutoff)firstHandsFingersArray[m]=.0;
-if(secondHandsFingersArray[m]>cutoff)secondHandsFingersArray[m]=.0;
-if(thirdHandsFingersArray[m]>cutoff)thirdHandsFingersArray[m]=.0;
-if(fourthHandsFingersArray[m]>cutoff)fourthHandsFingersArray[m]=.0;
+if(firstHandsFingersArray[m]>cutoff)firstHandsFingersArray[m]=0.;
+if(secondHandsFingersArray[m]>cutoff)secondHandsFingersArray[m]=0;
+if(thirdHandsFingersArray[m]>cutoff)thirdHandsFingersArray[m]=0;
+if(fourthHandsFingersArray[m]>cutoff)fourthHandsFingersArray[m]=0;
+
+if(pitchHandsFingersArray[m]>cutoff2)pitchHandsFingersArray[m]=cutoff2;
+if(firstHandsFingersArray[m]>cutoff2)firstHandsFingersArray[m]=cutoff2;
+if(secondHandsFingersArray[m]>cutoff2)secondHandsFingersArray[m]=cutoff2;
+if(thirdHandsFingersArray[m]>cutoff2)thirdHandsFingersArray[m]=cutoff2;
+if(fourthHandsFingersArray[m]>cutoff2)fourthHandsFingersArray[m]=cutoff2;
+
+
         }
 
            let pitchFingerTexture = new THREE.DataTexture( pitchHandsFingersArray, 10, 1,THREE.RedFormat,THREE.FloatType);
