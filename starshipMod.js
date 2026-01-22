@@ -355,13 +355,15 @@ fourthHandsFingersArray[m]=0.
 
         }
 
+        let shrink = 255.*1.5;
+        if (zoomOutRatchetThreshold>totalAMP)shrink/=totalAMP;
         for(let m = 0; m<10; m++)
         {
-pitchHandsFingersArray[m]/=binsInFingerP[m]*255.    
-firstHandsFingersArray[m]/=binsInFinger1[m]*255.    
-secondHandsFingersArray[m]/=binsInFinger2[m]*255.    
-thirdHandsFingersArray[m]/=binsInFinger3[m]*255.    
-fourthHandsFingersArray[m]/=binsInFinger4[m]*255.    
+pitchHandsFingersArray[m]/=binsInFingerP[m]*shrink
+firstHandsFingersArray[m]/=binsInFinger1[m]    *shrink
+secondHandsFingersArray[m]/=binsInFinger2[m]    *shrink
+thirdHandsFingersArray[m]/=binsInFinger3[m]    *shrink
+fourthHandsFingersArray[m]/=binsInFinger4[m]    *shrink
         }
 
            let pitchFingerTexture = new THREE.DataTexture( pitchHandsFingersArray, 10, 1,THREE.RedFormat,THREE.FloatType);
