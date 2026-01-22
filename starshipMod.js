@@ -368,7 +368,7 @@ fourthHandsFingersArray[m]=0.
         let cutoff = 1.5;
         let cutoff2 = .75;
         let shrink = 255.;
-        if (zoomOutRatchetThreshold*2.<totalAMP)shrink*=totalAMP*4.;
+        if (zoomOutRatchetThreshold*2.<totalAMP)shrink*=totalAMP*16.;
         for(let m = 0; m<10; m++)
         {
 pitchHandsFingersArray[m]/=binsInFingerP[m]*shrink
