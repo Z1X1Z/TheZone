@@ -324,7 +324,7 @@ fourthHandsFingersArray[m]=0.
                 if( twelfths>=-.5){
                     starNote = Math.round(twelfths)%(12);
                     finger = Math.floor((twelfths-.5)/12);
-                     fingerPitch = Math.floor((twelfths-.5-6.)/12);
+                    // fingerPitch = Math.floor((twelfths-.5-6.)/12);
                     if (finger<10&&finger>=0&&isFinite(finger)&&isFinite(starNote)&&isFinite(dataArray[n])) 
                         {
                             
@@ -352,7 +352,7 @@ fourthHandsFingersArray[m]=0.
                             fourthHandsFingersArray[finger]+=dataArray[n];
                             }
                         }
-                     if (fingerPitch<10&&fingerPitch>=0&&isFinite(fingerPitch)&&isFinite(starNote)&&isFinite(dataArray[n])) 
+                     if (finger<10&&finger>=0&&isFinite(finger)&&isFinite(starNote)&&isFinite(dataArray[n])) 
 
                            {
                         pitchHandsFingersArray[finger] +=dataArray[n];

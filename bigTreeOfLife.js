@@ -512,7 +512,7 @@ var OmniPetal =OmniDynamicPetalShift*(petalNumber/6.);
 
 
  if(petals>0.&&squeezeN>=2.) 
-  hyperCoreBoosted+=(petalNumber/6.-1.)**2*3.-squeezeN*2;
+  hyperCoreBoosted+=(petalNumber/6.-1.)**2*3.-squeezeN*2.;
 
 
 
@@ -902,9 +902,10 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
   var alternator=1.;
 if(swap==1&&petals==0.)
 {
-    alternator = (((counter-loops)%2.)-.5)*2.;
+    alternator = -(((counter-loops)%2.)-.5)*2.;
   // if (alternator==-1.)s=spin(s,Math.PI);
 s.multiplyScalar(alternator);
+s.multiplyScalar(-1.);
 }
     if(swap>0&&//counter>1.&&//distributor&&//not quite the same as distributor, but I don't want to add another button
 //    morph==0.&&

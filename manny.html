@@ -5193,8 +5193,9 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
 if(swap==1&&petals==0.)
 {
     
-    alternator = (mod(counter-loops,2.)-.5)*2.;
+    alternator = -(mod(counter-loops,2.)-.5)*2.;
     s*=alternator;
+s*=-1.;
    // if(alternator==-1.)unSwitch= !unSwitch;
 
     //if(alternator==-1.)s=spin2(s,PI);
@@ -5218,6 +5219,7 @@ PI2/3.)>PI2/6.) //p*=0.;
 //s*=-1.;
 if(morph==0.)s*=alternator;
 else s=spin2(s,PI);
+//s*=-1.;
 
 if(alternator==-1.)
 unSwitch= !unSwitch;
