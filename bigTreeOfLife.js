@@ -909,7 +909,7 @@ if(swap!=3)
     {s.multiplyScalar(-1.);
 
    if(alternator==1.)
-    s=spin(s,Math.PI/3.);
+    s=spin(s,Math.PI/3);
 else 
 {
     s.multiplyScalar(alternator);
@@ -926,7 +926,7 @@ else
 //s.multiplyScalar(-1.);
 if(morph==0.)
     {
-        if (alternator==1)s=spin(s,Math.PI/3.*5.);
+        if (alternator==1)s=spin(s,Math.PI*4./3.);
        else s.multiplyScalar(alternator);
     }
 else s=spin(s,Math.PI);
