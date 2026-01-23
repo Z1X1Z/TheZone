@@ -5190,6 +5190,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
         // s=spin2(s,PI*sign(angleS));
 
         float alternator=1.;
+      //  float alternate = -1.;
 if((swap==1||swap==3)&&petals==0.)
 {
     
@@ -5197,9 +5198,18 @@ if((swap==1||swap==3)&&petals==0.)
     s*=alternator;
     if(swap!=3)
     {
-    if(alternator==1.)s=spin2(s,PI/3.);
-else s*=-1.;
-        angleS*=alternator;
+      //  float alt2 =        mod(counter-loops,4.);
+    if(alternator==1.)
+    {s=spin2(s,PI/3.);
+//alternate*=-1.;
+    }
+   // else     if(alt2==3.)s=spin2(s,PI);
+
+else{s*=-1.;
+                    angleS*=-alternator;
+
+}
+
     }
    // if(alternator==-1.)unSwitch= !unSwitch;
 
@@ -5224,7 +5234,14 @@ PI2/3.)>PI2/6.) //p*=0.;
 //s*=-1.;
 if(morph==0.)
 {
-    s*=alternator;
+   // s*=alternator;
+    
+    if(alternator==1.)
+    {s=spin2(s,PI/3.*5.);
+    }
+   // else     if(alt2==3.)s=spin2(s,PI);
+else s*=alternator;
+
 }
 else s=spin2(s,PI);
 

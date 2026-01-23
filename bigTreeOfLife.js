@@ -908,11 +908,13 @@ s.multiplyScalar(alternator);
 if(swap!=3)
     {s.multiplyScalar(-1.);
 
-   if(alternator==1.)s=spin(s,Math.PI/3.);
+   if(alternator==1.)
+    s=spin(s,Math.PI/3.);
 else 
+{
     s.multiplyScalar(alternator);
-
         angleS*=alternator;
+}
     }
 }
     if(swap>0&&//counter>1.&&//distributor&&//not quite the same as distributor, but I don't want to add another button
@@ -922,7 +924,11 @@ else
 //  s=new THREE.Vector2(Math.abs(s.x),Math.abs(s.y))
 //s=spin(s,Math.PI);//balances inherited colors
 //s.multiplyScalar(-1.);
-if(morph==0.)s.multiplyScalar(alternator);
+if(morph==0.)
+    {
+        if (alternator==1)s=spin(s,Math.PI/3.*5.);
+       else s.multiplyScalar(alternator);
+    }
 else s=spin(s,Math.PI);
 }
 
