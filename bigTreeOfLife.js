@@ -905,7 +905,10 @@ if(swap==1&&petals==0.)
     alternator = -(((counter-loops)%2.)-.5)*2.;
   // if (alternator==-1.)s=spin(s,Math.PI);
 s.multiplyScalar(alternator);
-s.multiplyScalar(-1.);
+if(swap!=3)
+    {s.multiplyScalar(-1.);
+        angleS*=alternator;
+    }
 }
     if(swap>0&&//counter>1.&&//distributor&&//not quite the same as distributor, but I don't want to add another button
 //    morph==0.&&

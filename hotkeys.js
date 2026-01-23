@@ -639,7 +639,7 @@ source.connect(analyser);
 
                                           else  if((key == "U") && event.altKey&&event.ctrlKey)uniforms.ringSpring.value=!uniforms.ringSpring.value;
                                           else  if((key == "T") && event.altKey&&event.ctrlKey)uniforms.Black.value=!uniforms.Black.value;
-                                          else  if((key == "N") && event.altKey&&event.ctrlKey)uniforms.swap.value=(uniforms.swap.value+1)%3;
+                                          else  if((key == "N") && event.altKey&&event.ctrlKey)uniforms.swap.value=(uniforms.swap.value+1)%4;
 
                                           else  if((key == "R") && event.altKey&&event.ctrlKey)uniforms.armStar.value=!uniforms.armStar.value;
                                           else  if(key == "J" && event.altKey&&event.ctrlKey)uniforms.sevenSquared.value=!uniforms.sevenSquared.value;
