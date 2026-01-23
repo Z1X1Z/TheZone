@@ -5197,7 +5197,8 @@ if((swap==1||swap==3)&&petals==0.)
     s*=alternator;
     if(swap!=3)
     {
-        s*=-1.;
+    if(alternator==1.)s=spin2(s,PI/3.);
+else s*=-1.;
         angleS*=alternator;
     }
    // if(alternator==-1.)unSwitch= !unSwitch;

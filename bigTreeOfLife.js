@@ -907,6 +907,11 @@ if(swap==1&&petals==0.)
 s.multiplyScalar(alternator);
 if(swap!=3)
     {s.multiplyScalar(-1.);
+
+   if(alternator==1.)s=spin(s,Math.PI/3.);
+else 
+    s.multiplyScalar(alternator);
+
         angleS*=alternator;
     }
 }
