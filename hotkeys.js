@@ -659,7 +659,7 @@ source.connect(analyser);
                     if(number!="no number")
                     zoomBoost=number;
                 else if( zoomBoost!=1.)zoomBoost=1.;
-                    else  zoomBoost=1.75;
+                    else  zoomBoost=1.5;
                 }
                                                       else  if(key == "P" && event.altKey&&event.ctrlKey)uniforms.polyNomialStretch.value=!uniforms.polyNomialStretch.value;
                                           else  if(key == "O" && event.altKey&&event.ctrlKey)uniforms.seventhEYE.value=(uniforms.seventhEYE.value-1.+4.)%4;

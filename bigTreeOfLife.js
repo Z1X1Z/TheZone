@@ -900,16 +900,19 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
         var angleS = Math.atan2(s.y,s.x);
 
   var alternator=1.;
-if(swap==1&&petals==0.)
+if((swap==1||swap==3)&&petals==0.)
 {
-    alternator = -(((counter-loops)%2.)-.5)*2.;
+    alternator = (((counter-loops)%2.)-.5)*2.;
+
+            if(swap==1)alternator*=-1.;
+    s.multiplyScalar(alternator);
+
   // if (alternator==-1.)s=spin(s,Math.PI);
-s.multiplyScalar(alternator);
-if(swap!=3)
+if(swap==1)
     {s.multiplyScalar(-1.);
 
-   if(alternator==-1.)
-    s=spin(s,Math.PI/3*4.);
+   if(alternator==1.)
+    s=spin(s,Math.PI/1*4.);
 else 
 {
     s.multiplyScalar(-1);
@@ -926,9 +929,9 @@ else
 //s.multiplyScalar(-1.);
 if(morph==0.)
     {
-        if(swap!=3)
+        if(swap==1)
         {
-        if (alternator==-1)s=spin(s,Math.PI*1./3.);
+        if (alternator==-1)s=spin(s,Math.PI*4./3.);
        else s.multiplyScalar(-1);
         }
                else s.multiplyScalar(alternator);
