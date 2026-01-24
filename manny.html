@@ -5202,7 +5202,7 @@ if((swap==1||swap==3)&&petals==0.)
  
         if(swap==1)alternator*=-1.;
         s*=alternator;
-   if(alternator==-1.) 
+   if(alternator==1.) 
     {unSwitch=!unSwitch;
       //  unTwist*=-1.;
     }
@@ -5219,14 +5219,18 @@ if((swap==1||swap==3)&&petals==0.)
        unTwist+=PI/3.*1.;
        */
 
-       if(unSwitch)unTwist-=PI/3.*1.;//check
+    //  if(unSwitch)
+      unTwist-=PI/3.*1.;
+     // else   
+      //   unTwist+=PI/3.*1.;
+
 //unSwitch=!unSwitch;
 
     }
 
     
 else{s*=-1.;
-unSwitch=!unSwitch;
+//unSwitch=!unSwitch;
  //unTwist*=-1.;
                  //   angleS*=-1.;
 }
@@ -5262,13 +5266,17 @@ if(swap==1)
          //unTwist-=PI/3.*4.;     
 
 /* 
-if(!unSwitch)unTwist-=PI/3.*4.;  
+if(unSwitch)unTwist-=PI/3.*4.;  
 else unTwist+=PI/3.*4.; 
 */
- if(unSwitch)unTwist-=PI/3.*4.;     //check
+// if(!unSwitch)
+ unTwist-=PI/3.*4.;     
+  //     else       unTwist+=PI/3.*4.;
+
           }
 else 
 {s*=-1.;
+    
     unSwitch= !unSwitch;
  // unTwist*=-1.;
 
@@ -5289,7 +5297,7 @@ else s=spin2(s,PI);
 //if(alternator==-1.)
 //unSwitch= !unSwitch;
 //else
-unSwitch2= !unSwitch2;
+//unSwitch2= !unSwitch2;
 
 } 
 
@@ -5493,7 +5501,7 @@ hyperCoreOUTPUT--;
 
   vec2 deSplicedS2 =window;
 
-                       if(unSwitch2&&(spokesVisualizeColors==1||spokesVisualizeColors==3))  
+                       if(unSwitch&&(spokesVisualizeColors==1||spokesVisualizeColors==3))  
                         deSplicedS2*=spin2(deSplicedS2,PI);
                        else if(unSwitch&&(spokesVisualizeColors==2||spokesVisualizeColors==4))   deSplicedS2*=-1.;//=spin2(deSplicedS,PI);
         deSplicedS2=spin2(deSplicedS2,unTwist);//not built for unswitch2
