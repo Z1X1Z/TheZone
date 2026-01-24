@@ -908,12 +908,12 @@ s.multiplyScalar(alternator);
 if(swap!=3)
     {s.multiplyScalar(-1.);
 
-   if(alternator==1.)
-    s=spin(s,Math.PI/3);
+   if(alternator==-1.)
+    s=spin(s,Math.PI/3*4.);
 else 
 {
-    s.multiplyScalar(alternator);
-        angleS*=alternator;
+    s.multiplyScalar(-1);
+   //     angleS*=-1;
 }
     }
 }
@@ -926,8 +926,14 @@ else
 //s.multiplyScalar(-1.);
 if(morph==0.)
     {
-        if (alternator==1)s=spin(s,Math.PI*4./3.);
-       else s.multiplyScalar(alternator);
+        if(swap!=3)
+        {
+        if (alternator==-1)s=spin(s,Math.PI*1./3.);
+       else s.multiplyScalar(-1);
+        }
+               else s.multiplyScalar(alternator);
+
+
     }
 else s=spin(s,Math.PI);
 }
