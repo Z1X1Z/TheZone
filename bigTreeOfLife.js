@@ -909,7 +909,8 @@ if((swap==1||swap==3)&&petals==0.)
 
             if(swap==1)
                 {alternator*=-1.;
-                         angleS*=-1;}
+                    //     angleS*=-1;
+                    }
 
     s.multiplyScalar(alternator);
 
