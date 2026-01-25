@@ -928,7 +928,7 @@ if(swap==1)
 else 
 {
     s.multiplyScalar(-1);
-   //     angleS*=-1;
+        angleS*=-1;
 }
     }
 }
