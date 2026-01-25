@@ -5358,9 +5358,9 @@ else if(isSplit&&swap==1)
 
            {//s*=0.;
         if(sBuffer.y>0.
-        &&length(p)>0.//this is to prevent overoptimizing
-        &&length(s)>0.//this is to prevent overoptimizing
-        &&length(sBuffer)>0.//this is to prevent overoptimizing
+        &&(length(p)>0.//this is to prevent overoptimizing
+        ||length(s)>0.//this is to prevent overoptimizing
+        ||length(sBuffer)>0.)//this is to prevent overoptimizing
         )
            unTwist-=PI/3.*2.;
          isSplit=false;
