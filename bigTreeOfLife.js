@@ -904,7 +904,10 @@ if((swap==1||swap==3)&&petals==0.)
 {
     alternator = (((counter-loops)%2.)-.5)*2.;
 
-            if(swap==1)alternator*=-1.;
+            if(swap==1)
+                {alternator*=-1.;
+                         angleS*=-alternator;}
+
     s.multiplyScalar(alternator);
 
   // if (alternator==-1.)s=spin(s,Math.PI);
