@@ -920,7 +920,7 @@ if(swap==1)
    if(alternator==1.)
    {
     s=spin(s,Math.PI/1*3.);
-                        angleS+=1./3.*PI;
+                        angleS+=1./3.*Math.PI;
 
                     }
 
