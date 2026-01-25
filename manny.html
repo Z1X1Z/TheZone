@@ -5226,7 +5226,8 @@ if((swap==1||swap==3)&&petals==0.)
 
         if(swap==1)
         {alternator*=-1.;
-             angleS*=-alternator;}
+             angleS*=-1.;
+            }
         s*=alternator;
    if(alternator==1.) 
     {unSwitch=!unSwitch;
@@ -5252,7 +5253,7 @@ if((swap==1||swap==3)&&petals==0.)
     //  unTwist-=PI/3.*1.;
      // else   
          unTwist+=PI/3.*1.;
-
+angleS*=-1.;
 //unSwitch=!unSwitch;
 
     }

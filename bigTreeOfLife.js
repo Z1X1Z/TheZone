@@ -906,7 +906,7 @@ if((swap==1||swap==3)&&petals==0.)
 
             if(swap==1)
                 {alternator*=-1.;
-                         angleS*=-alternator;}
+                         angleS*=-1;}
 
     s.multiplyScalar(alternator);
 
@@ -915,7 +915,10 @@ if(swap==1)
     {s.multiplyScalar(-1.);
 
    if(alternator==1.)
-    s=spin(s,Math.PI/1*4.);
+   {
+    s=spin(s,Math.PI/1*3.);
+                         angleS*=-1;}
+
 else 
 {
     s.multiplyScalar(-1);
