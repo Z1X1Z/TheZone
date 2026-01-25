@@ -877,6 +877,7 @@ dstnce = s.length();
            //  hyperCoreOUTPUT-=sliceanddiceBoost;
 
         }
+if (counter==0.&&swap==1)s.multiplyScalar(-1.)
 
 for(var i=0;i<200; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.)))
@@ -897,7 +898,9 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
 
      
     if(spinTowardsMe) if(i>=hyperCoreBoosted)s=spin(s,Math.atan2(d.y,d.x));
-        var angleS = Math.atan2(s.y,s.x);
+    let angleSs=s.clone();
+   if (swap==1)angleSs.x*=-1.;
+        var angleS = Math.atan2(angleSs.y,angleSs.x);
 
   var alternator=1.;
 if((swap==1||swap==3)&&petals==0.)

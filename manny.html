@@ -4634,9 +4634,12 @@ bubble=dstnce;
    //s=spin2(s,PI);
    // else 
        //if(morph==0.&&petals==0.)
-//s=spin2(s,PI);
 
-if(morph==0.)  s*=-1.;
+
+if(morph==0.)  
+{
+ s*=-1.;
+}
 
 else s=spin2(s,PI);
    }
@@ -4680,7 +4683,6 @@ hyperCoreOUTPUT-=superUpcorer;
         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
        );
-
        if(//zoom<.5&&
 counter==0.&&
 polyNomialStretch
@@ -5059,6 +5061,7 @@ else if(!isinf(spokeloverCoreShiftDown))
  }
 
 dstnce=length(s);
+if(counter==0.&&swap==1)s*=-1.;
    if(continuumClover!=0&&lfc!=0.){//engage continualization
        float continuumCore=(continuumCounter+hyperCoreBoosted)*correction;
 
@@ -5197,7 +5200,9 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
     if(spinTowardsMe) if(float(i)>=hyperCoreBoosted-.5)s=spin2(s,atan(d.y,d.x));
 
    // if(distributor)s=spin2(s,distributorFACTOR);
-       float angleS = atan(s.y,s.x);
+   vec2 angleSs = s;
+   if (swap==1)angleSs.x*=-1.;
+       float angleS = atan(angleSs.y,angleSs.x);
 
 
         // s=spin2(s,PI*sign(angleS));
