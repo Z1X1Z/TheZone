@@ -4056,7 +4056,9 @@ vec4 tol(vec2 p, vec2 t){
                     bool gated = false;
                     bool unSwitch=false;
                     bool unSwitch2=false;
+
                     bool isSplit=false;
+
                     float unTwist = 0.;
 
                     
@@ -4585,6 +4587,11 @@ float daisifier = 0.;
 //if(s.y>0.)s.y*=0.;  
   //      s.y=abs(s.y)*-sign(s.x*s.y);
 
+
+                                           vec2 sBuffer = s;
+
+
+                                           
 if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
@@ -5145,7 +5152,7 @@ t
                       
               //    }
               gated = false;
-              vec2 sBuffer = s;
+               sBuffer = s;
 //isSplit=false;
 //dstnce=length(s);
 //s*=-1.;cool colors
@@ -5350,7 +5357,10 @@ else s=spin2(s,PI);
 else if(isSplit&&swap==1)
 
            {//s*=0.;
-        if(sBuffer.y>0.)
+        if(sBuffer.y>0.
+        &&(p.y>0.||p.y<0.||p.x<0.||p.x>0.)//this is to prevent overoptimizing
+        &&(s.y>0.||s.y<0.||s.x<0.||s.x>0.)//this is to prevent overoptimizing
+        )
            unTwist-=PI/3.*2.;
          isSplit=false;
 
