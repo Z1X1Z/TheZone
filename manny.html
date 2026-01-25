@@ -5153,6 +5153,7 @@ t
               //    }
               gated = false;
                sBuffer = s;
+               vec2 overOptimizationResistor = vec2(1.,1.);
 //isSplit=false;
 //dstnce=length(s);
 //s*=-1.;cool colors
@@ -5268,7 +5269,6 @@ else{s*=-1.;
 }
 
 
-
 if(swap>0&&//counter>1.&&//removes asymmetry
 //distributor&&//not quite the same as distributor, but I don't want to add another button
 //morph==0.&&
@@ -5356,17 +5356,25 @@ else s=spin2(s,PI);
         }
 else if(isSplit&&swap==1)
 
-           {//s*=0.;
+           {
+
         if(sBuffer.y>0.
-        &&(
-        s.y>0.||s.y<0.  ||s.x>0.||s.x<0.
-        ||p.y>0.||p.y<0.  ||p.x>0.||p.x<0.
-        ||sBuffer.y>0.||sBuffer.y<0.  ||sBuffer.x>0.||sBuffer.x<0.)
-        )
+
+
+        ){
+
            unTwist-=PI/3.*2.;
-         isSplit=false;
+                            isSplit=false;
 
         }
+        else   if(!isSplit
+        )  {
+           isSplit=true;
+            unSwitch=!unSwitch;
+        }
+
+
+    }
     /*
     if(superStable)
     {
