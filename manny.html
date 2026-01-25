@@ -5360,6 +5360,7 @@ else if(isSplit&&swap==1)
         if(sBuffer.y>0.
         &&(p.y>0.||p.y<0.||p.x<0.||p.x>0.)//this is to prevent overoptimizing
         &&(s.y>0.||s.y<0.||s.x<0.||s.x>0.)//this is to prevent overoptimizing
+        &&(sBuffer.y>0.||sBuffer.y<0.||sBuffer.x<0.||sBuffer.x>0.)//this is to prevent overoptimizing
         )
            unTwist-=PI/3.*2.;
          isSplit=false;
