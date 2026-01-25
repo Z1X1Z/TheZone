@@ -5061,7 +5061,6 @@ else if(!isinf(spokeloverCoreShiftDown))
  }
 
 dstnce=length(s);
-if(counter==0.&&swap==1)s*=-1.;
    if(continuumClover!=0&&lfc!=0.){//engage continualization
        float continuumCore=(continuumCounter+hyperCoreBoosted)*correction;
 
@@ -5157,6 +5156,8 @@ t
               gated = false;
                sBuffer = s;
                vec2 overOptimizationResistor = vec2(1.,1.);
+               if(counter==0.&&swap==1)s*=-1.;
+
 //isSplit=false;
 //dstnce=length(s);
 //s*=-1.;cool colors
