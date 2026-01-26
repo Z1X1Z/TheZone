@@ -2251,13 +2251,13 @@ vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
                                                         
                     
                                                  const float ballPortion = 1./12.;
-                                               const float paddleWidth = .5-.25*ballPortion;
+                                               const float paddleWidth = 6.*ballPortion;
 vec3 paddles(vec2 vUvCentered){
 
        float shade = 0.;
                    vec3 ret = vec3(0.);
 
-       if(abs(vUvCentered.x)>paddleWidth)
+       if(abs(vUvCentered.x)>.46)
        {
                          float incrementSize = 1./12.;
                          float staff =mod(vUv.y*12.+.5+12.,1.)-.5;
