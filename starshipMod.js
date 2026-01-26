@@ -4131,7 +4131,8 @@ let tolerance=0;//(1024-26)/10000
                                                                  let proportion= fractionOfFrame/bufferSize;
                                                                  let tAScaled=0.;//totalAMPmodified*proportion;
                                                                  let totalAMPmodified =totalAMP;
-                                                                 let preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2
+
+                                                                 let preTrunc = Math.log(totalAMP)*-leafPermanent/2
 
 //totalAMPmodified=(totalAMPmodified/((-leafPermanent)/))///preTrunc)*preTrunc));
 totalAMPmodified = (((totalAMPmodified*(-(leafPermanent/preTrunc)*preTrunc))))
@@ -4294,11 +4295,11 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 {
                                                           tolerance=tolerance**(Math.abs((.5-(Math.abs(totalAMPmodified)**.5-(Math.abs(tolerance)**.5))**2.)))//not totalAMPmodified!? abs to prevent some crashing, unverified fix
 }
-                                                         // tolerance=((tolerance)/trunc)*trunc
+                                                          tolerance=((tolerance)/trunc)*trunc
 
-                                                         //  tolerance/=2;//2 or 1.5? 3?
+                                                           tolerance/=2;//2 or 1.5? 3?
 
-                                              //  tolerance=((tolerance)/trunc)*trunc
+                                                tolerance=((tolerance)/trunc)*trunc
                                                 
                                                        tolerance=(tolerance)**(((((-leafPermanent+1)*(grPermanent+1))/trunc)*trunc)) // this greatly improves trueness
                                                       //    console.log(tolerance)
