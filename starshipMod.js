@@ -4122,6 +4122,7 @@ let tolerance=0;//(1024-26)/10000
 
 
 
+
                                                          if(window.highORlow==0){
                                                              if(totalAMP>0&&isFinite(totalAMP)
                                                                 &&totalAMP<=.7// when I get loud it seems to freeze
@@ -4129,10 +4130,8 @@ let tolerance=0;//(1024-26)/10000
                                                              {
                                                                  let proportion= fractionOfFrame/bufferSize;
                                                                  let tAScaled=0.;//totalAMPmodified*proportion;
-                                                                 
-
-                                                                 let preTrunc = Math.log(totalAMP)*-leafPermanent/2
-let totalAMPmodified = totalAMP
+                                                                 let totalAMPmodified =totalAMP;
+                                                                 let preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2
 
 //totalAMPmodified=(totalAMPmodified/((-leafPermanent)/))///preTrunc)*preTrunc));
 totalAMPmodified = (((totalAMPmodified*(-(leafPermanent/preTrunc)*preTrunc))))
@@ -4141,8 +4140,6 @@ totalAMPmodified = (((totalAMPmodified*(-(leafPermanent/preTrunc)*preTrunc))))
 totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 //totalAMPmodified/=2.;
 
-
-                        
 
 
                                                                  
@@ -4302,7 +4299,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                            tolerance/=2;//2 or 1.5? 3?
 
                                                 tolerance=((tolerance)/trunc)*trunc
-                                                        
+                                                       tolerance=tolerance**((-leafPermanent+1)*(grPermanent+1)) // this greatly improves trueness
                                                       //    console.log(tolerance)
                                                          //                                                  tolerance=((tolerance)/trunc)*trunc
 
