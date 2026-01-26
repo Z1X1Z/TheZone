@@ -4299,11 +4299,6 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 }
                                                           tolerance=((tolerance)/trunc)*trunc
 
-                                                           tolerance/=2;//2 or 1.5? 3?
-
-                                                tolerance=((tolerance)/trunc)*trunc
-                                                
-
                                                        tolerance=(tolerance )**(((((-leafPermanent+1)*(grPermanent+1))/trunc)*trunc)) // this greatly improves trueness
                                                       //    console.log(tolerance)
                                                          //                                                  tolerance=((tolerance)/trunc)*trunc
