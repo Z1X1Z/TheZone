@@ -643,7 +643,6 @@ let pushBackCounter = 0;
                             d_y*=flatline
 
 
-                                                                  var spunD = [d_x,d_y];
 
                                      
                             if(on&&totalAMP>.000001)
@@ -652,14 +651,13 @@ let pushBackCounter = 0;
 
                                                      if(uniforms.spinner.value)                 {
 
-                           
+
                                        let rotation = (Math.atan2(d_y,d_x)+Math.PI*2+Math.PI/2.)%(Math.PI*2);
                                              
                                      window.spinnerTwist = (-rotation/Math.PI*12.+12*12.)%24.;
 window.twist-=window.spinnerTwist
     uniforms.twistStar.value=(window.twist/24.+1.)%1.*2.*Math.PI;
-
-  spunD=spin(spunD,twist/12.*Math.PI+Math.PI);
+                                                               
 
                                     }
 
@@ -682,12 +680,16 @@ window.twist-=window.spinnerTwist
                  d_x*=volume;
                  d_y*=volume;
 
+                                                var spunD = [d_x,d_y];
+
+    if(uniforms.spinner.value)  spunD=spin(spunD,twist/12.*Math.PI+Math.PI);
                //  d_x*=zoomBoost;
                //  d_y*=zoomBoost;
 
                             if(uniforms.carousel.value!=0.&&uniforms[ "time" ].value>0)         spunD=spin(spunD,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                   const d_xS=spunD[0]*interpolation;
                   const d_yS=spunD[1]*interpolation;
+
 
            const bx=coordX+d_xS*MR*zoom;
           const by=coordY+d_yS*MR*zoom;
@@ -1568,7 +1570,7 @@ function zoomRoutine(){
         zoomOutEngage = false;
     if(!isFinite(ZR))ZR=1;
     if(!zoomOutEngage&&zoomRate>0.){
-        if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(on&&!window.touchMode))||xTouch+yTouch!=0)zoom *=ZR**(1.5*zoomBoost);
+        if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(on&&!window.touchMode))||xTouch+yTouch!=0)zoom *=ZR**(4./3.*zoomBoost);
         else if(uniforms.MetaCored.value||zoom<1.){
             zoom /= ZR;
             if(center&&zoom<1.){coordX*=ZR*2./3.;; coordY*=ZR*2./3.;}
@@ -4301,7 +4303,8 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                                                 tolerance=((tolerance)/trunc)*trunc
                                                 
-                                                       tolerance=(tolerance)**(((((-leafPermanent+1)*(grPermanent+1))/trunc)*trunc)) // this greatly improves trueness
+
+                                                       tolerance=(tolerance )**(((((-leafPermanent+1)*(grPermanent+1))/trunc)*trunc)) // this greatly improves trueness
                                                       //    console.log(tolerance)
                                                          //                                                  tolerance=((tolerance)/trunc)*trunc
 
