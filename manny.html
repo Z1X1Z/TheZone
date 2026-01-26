@@ -2275,9 +2275,9 @@ vec3 paddles(vec2 vUvCentered){
     vec3 ball(vec2 p){
         vec3 ret = vec3(0.);
     if (length(pongBallCoords-vUv*resolution)<length(resolution.y)/12.)
-    //    if (vUv.x>.5)ret= vec3(10.);
-    //    else ret= vec3(-10.);
-    ret= vec3(.5);
+        if (vUv.x>.5)ret= vec3(1./3.);
+        else ret= vec3(2./3.);
+    //ret= vec3(.5);
     else ret=vec3(0.);
     return ret;
     }
