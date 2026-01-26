@@ -4294,13 +4294,13 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 {
                                                           tolerance=tolerance**(Math.abs((.5-(Math.abs(totalAMPmodified)**.5-(Math.abs(tolerance)**.5))**2.)))//not totalAMPmodified!? abs to prevent some crashing, unverified fix
 }
-                                                          tolerance=((tolerance)/trunc)*trunc
+                                                         // tolerance=((tolerance)/trunc)*trunc
 
-                                                           tolerance/=2;//2 or 1.5? 3?
+                                                         //  tolerance/=2;//2 or 1.5? 3?
 
-                                                tolerance=((tolerance)/trunc)*trunc
+                                              //  tolerance=((tolerance)/trunc)*trunc
                                                 
-                                                       tolerance=tolerance**(((-leafPermanent/trunc)*trunc+1)*(grPermanent+1)) // this greatly improves trueness
+                                                       tolerance=(tolerance)**(((((-leafPermanent+1)*(grPermanent+1))/trunc)*trunc)) // this greatly improves trueness
                                                       //    console.log(tolerance)
                                                          //                                                  tolerance=((tolerance)/trunc)*trunc
 
