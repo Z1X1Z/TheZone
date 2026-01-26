@@ -4264,6 +4264,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                            tolerance=(tolerance/trunc)*trunc
 
                                                                                                                       tolerance*=2.;
+                                                           tolerance=(tolerance/trunc)*trunc
 
                                   //                        tolerance=(tolerance/trunc)*trunc
                                                            var toleranceFixed = tolerance;
