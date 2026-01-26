@@ -1569,7 +1569,7 @@ function zoomRoutine(){
         zoomOutEngage = false;
     if(!isFinite(ZR))ZR=1;
     if(!zoomOutEngage&&zoomRate>0.){
-        if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(on&&!window.touchMode))||xTouch+yTouch!=0)zoom *=ZR**(1.5*zoomBoost);
+        if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(on&&!window.touchMode))||xTouch+yTouch!=0)zoom *=ZR**(4./3.*zoomBoost);
         else if(uniforms.MetaCored.value||zoom<1.){
             zoom /= ZR;
             if(center&&zoom<1.){coordX*=ZR*2./3.;; coordY*=ZR*2./3.;}
@@ -4301,7 +4301,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                                               tolerance=((tolerance)/trunc)*trunc
 
-                                                       tolerance=(tolerance)**(((((-leafPermanent+1)*(grPermanent+1))/trunc)*trunc)*(totalAMPmodified+totalAMP)/2.*+(totalAMPmodified*totalAMP)/2.) // this greatly improves trueness
+                                                       tolerance=(tolerance)**(((((-leafPermanent+1)*(grPermanent+1))/trunc)*trunc)*(totalAMPmodified+totalAMP)/2+(totalAMPmodified+totalAMP)/2.) // this greatly improves trueness
                                                        
                                                        //    console.log(tolerance)
                                                          //                                                  tolerance=((tolerance)/trunc)*trunc
