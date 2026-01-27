@@ -4299,18 +4299,24 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                                               tolerance=((tolerance)/trunc)*trunc
                                                        tolerance=(tolerance)**((((((-leafPermanent+1)*(grPermanent+1))/trunc)*trunc)*((totalAMPmodified**.5+totalAMP**.5)/2.)**2.+(((totalAMPmodified**2+totalAMP**2)/2.))**.5)) // this greatly improves trueness
-                                                           let phrase = 0;//((tolerance+totalAMPmodified))**2-((tolerance+totalAMPmodified))**4+((tolerance+totalAMPmodified))**8;
 
                                                        let plusOrMinus = 1;
                               let term = 1;
                               let sum =tolerance+totalAMPmodified+tAScaledPermanent
+
+                              let phrase = 0;//((tolerance+totalAMPmodified))**2-((tolerance+totalAMPmodified))**4+((tolerance+totalAMPmodified))**8;
+
                               for(var b = 1;b<10000;b++)
                                 {
                                      term = (sum)**(b)*plusOrMinus;
+                                     term=((term)/trunc)*trunc
+
                                     phrase+=term
+
                                     plusOrMinus*=-1
                                     if(term==0)break
                                 }
+
                                                                                      tolerance=(tolerance)**((Math.E)**((phrase**phrase)))
                                   
 
