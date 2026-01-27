@@ -4305,7 +4305,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                                                        let plusOrMinus = 1;
                               let term = 1;
-                              let sum =((totalAMPmodified**.5+tolerance**.5)/2.)**2.//(tolerance+totalAMPmodified+tAScaledPermanent)
+                              let sum =((totalAMPmodified+tolerance))//(tolerance+totalAMPmodified+tAScaledPermanent)
 
 /*
                               let phrase = 0;//((tolerance+totalAMPmodified))**2-((tolerance+totalAMPmodified))**4+((tolerance+totalAMPmodified))**8;
@@ -4323,14 +4323,14 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
     let loops = 0;
                                                               let phrase =0;//((tolerance+totalAMPmodified+tAScaledPermanent))**2+((tolerance+totalAMPmodified+tAScaledPermanent))**4;
-       for(var b = 2;b<10000;b+=4)
+       for(var b = 2;b<4;b+=1)
                                 {
-                                     term = (sum)**(b)*plusOrMinus/2;
+                                     term = (sum)**(b)*plusOrMinus;
                                //  term=((term)/trunc)*trunc
                                     phrase+=term
                                                    //                phrase=((phrase)/trunc)*trunc
 
-                                  // plusOrMinus*=-1
+                                 // plusOrMinus*=-1
                                     if(term==0)
                                         { loops = b
                                             break
