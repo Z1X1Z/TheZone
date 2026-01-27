@@ -4337,7 +4337,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                                                                phrase=((phrase)/trunc)*trunc
                              phrase=(phrase)/2
-                                                                                    //            phrase=((phrase)/trunc)*trunc
+                                                                                              phrase=((phrase)/trunc)*trunc
                               //  phrase/=2
                                                            //    tolerance=((tolerance)/trunc)*trunc
 
