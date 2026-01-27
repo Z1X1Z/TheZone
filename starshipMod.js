@@ -4320,7 +4320,17 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                     if(term==0)break
                                 }
                                     */
-                                                              let phrase =((tolerance+totalAMPmodified+tAScaledPermanent))**2+((tolerance+totalAMPmodified+tAScaledPermanent))**4;
+                                                              let phrase =0.;//((tolerance+totalAMPmodified+tAScaledPermanent))**2+((tolerance+totalAMPmodified+tAScaledPermanent))**4;
+       for(var b = 2;b<10000;b+=2)
+                                {
+                                     term = (sum)**(b)*plusOrMinus;
+                                    //term=((term)/trunc)*trunc
+
+                                    phrase+=term
+
+                                   // plusOrMinus*=-1
+                                    if(term==0)break
+                                }
 
                                                //                      phrase=((phrase)/trunc)*trunc
                               //  phrase=phrase*2
