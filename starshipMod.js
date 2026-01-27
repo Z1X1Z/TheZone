@@ -4327,7 +4327,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                 {
                                      term = (sum)**(b);//*plusOrMinus;
                                //    term=((term)/trunc)*trunc
-
+                                    if((b)%4==1)term*=-1
                                     phrase+=term
                                                    //                phrase=((phrase)/trunc)*trunc
 
@@ -4346,7 +4346,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                          //tolerance=((tolerance)/trunc)*trunc
 
                                          tolerance*=2
-                                        //                                          tolerance=((tolerance)/trunc)*trunc
+                                        //                                         tolerance=((tolerance)/trunc)*trunc
 
                                                        //    console.log(tolerance)
                                                          //                                                  tolerance=((tolerance)/trunc)*trunc
