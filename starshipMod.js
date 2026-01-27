@@ -4305,7 +4305,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                                                        let plusOrMinus = 1;
                               let term = 1;
-                              let sum =tolerance+totalAMPmodified
+                              let sum =tolerance+totalAMPmodified+tAScaledPermanent
 
 /*
                               let phrase = 0;//((tolerance+totalAMPmodified))**2-((tolerance+totalAMPmodified))**4+((tolerance+totalAMPmodified))**8;
@@ -4338,17 +4338,18 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                             }
                             console.log(loops)
 
-                            //                                  phrase=((phrase)/trunc)*trunc
-                          //   phrase=(phrase)*2
-                              //                                                     phrase=((phrase)/trunc)*trunc
+                           // phrase=((phrase)/trunc)*trunc
                                 phrase/=2
                                                            //    tolerance=((tolerance)/trunc)*trunc
+                            phrase= phrase**phrase
+                            phrase=phrase**.5
 
+                          
 
-                                                                                     tolerance=(tolerance)**((Math.E)**((phrase**phrase)))
+                                                                                     tolerance=(tolerance)**((Math.E)**((phrase)))
                                          tolerance=((tolerance)/trunc)*trunc
 
-                                        tolerance*=2.
+                                        tolerance*=2
                                               //                         tolerance=((tolerance)/trunc)*trunc
 
                                                        //    console.log(tolerance)
