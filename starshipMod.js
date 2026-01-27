@@ -4308,7 +4308,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                               let phrase = 0;//((tolerance+totalAMPmodified))**2-((tolerance+totalAMPmodified))**4+((tolerance+totalAMPmodified))**8;
 
-                              for(var b = 1;b<10000;b++)
+                              for(var b = 2;b<10000;b++)
                                 {
                                      term = (sum)**(b)*plusOrMinus;
                                      //term=((term)/trunc)*trunc
