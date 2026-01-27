@@ -4323,19 +4323,19 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
 
                                                               let phrase =0;//((tolerance+totalAMPmodified+tAScaledPermanent))**2+((tolerance+totalAMPmodified+tAScaledPermanent))**4;
-       for(var b = 1;b<10000;b+=2)
+       for(var b = 2;b<10000;b+=2)
                                 {
-                                     term = (sum)**(b);//*plusOrMinus;
+                                     term = (sum)**(b)*plusOrMinus;
                                //    term=((term)/trunc)*trunc
                                     phrase+=term
                                                    //                phrase=((phrase)/trunc)*trunc
 
-                                   // plusOrMinus*=-1
+                                    plusOrMinus*=-1
                                     if(term==0)break
                                 }
 
-                                                               phrase=((phrase)/trunc)*trunc
-                             phrase=(phrase)/2
+                             //                                  phrase=((phrase)/trunc)*trunc
+                            // phrase=(phrase)/2
                                       //                                                        phrase=((phrase)/trunc)*trunc
                               //  phrase/=2
                                                            //    tolerance=((tolerance)/trunc)*trunc
