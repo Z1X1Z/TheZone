@@ -4300,6 +4300,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                               tolerance=((tolerance)/trunc)*trunc
                                                        tolerance=(tolerance)**((((((-leafPermanent+1)*(grPermanent+1))/trunc)*trunc)*((totalAMPmodified**.5+totalAMP**.5)/2.)**2.+(((totalAMPmodified**2+totalAMP**2)/2.))**.5)) // this greatly improves trueness
 
+                                 tolerance=((tolerance)/trunc)*trunc
 
 
                                                        let plusOrMinus = 1;
@@ -4308,22 +4309,24 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                               let phrase = 0;//((tolerance+totalAMPmodified))**2-((tolerance+totalAMPmodified))**4+((tolerance+totalAMPmodified))**8;
 
-                              for(var b = 2;b<10000;b++)
+                              for(var b = 1;b<10000;b++)
                                 {
                                      term = (sum)**(b)*plusOrMinus;
-                                     //term=((term)/trunc)*trunc
+                                    //term=((term)/trunc)*trunc
 
                                     phrase+=term
 
                                     plusOrMinus*=-1
                                     if(term==0)break
                                 }
-                                                   //                  phrase=((phrase)/trunc)*trunc
+                                               //                      phrase=((phrase)/trunc)*trunc
                                 phrase*=2.;
-                                  //  tolerance=((tolerance)/trunc)*trunc
+                                                                                                    phrase=((phrase)/trunc)*trunc
+
+                                // tolerance=((tolerance)/trunc)*trunc
 
                                                                                      tolerance=(tolerance)**((Math.E)**((phrase**phrase)))
-                                             // tolerance=((tolerance)/trunc)*trunc
+                                         // tolerance=((tolerance)/trunc)*trunc
 
                                                        //    console.log(tolerance)
                                                          //                                                  tolerance=((tolerance)/trunc)*trunc
