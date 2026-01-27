@@ -4329,15 +4329,15 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                //    term=((term)/trunc)*trunc
 
                                     phrase+=term
-                                                                   phrase=((phrase)/trunc)*trunc
+                                                   //                phrase=((phrase)/trunc)*trunc
 
                                    // plusOrMinus*=-1
                                     if(term==0)break
                                 }
 
                                               //                     phrase=((phrase)/trunc)*trunc
-                               phrase=phrase/2
-                                                                //                                    phrase=((phrase)/trunc)*trunc
+                             phrase=(phrase)/2
+                                                                                                phrase=((phrase)/trunc)*trunc
                               //  phrase/=2
                                                            //    tolerance=((tolerance)/trunc)*trunc
 
