@@ -4334,7 +4334,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                     if(term==0)break
                                 }
 
-                             //                                  phrase=((phrase)/trunc)*trunc
+                                                              phrase=((phrase)/trunc)*trunc
                             // phrase=(phrase)/2
                                       //                                                        phrase=((phrase)/trunc)*trunc
                               //  phrase/=2
@@ -4344,8 +4344,8 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                                      tolerance=(tolerance)**((Math.E)**((phrase**phrase)))
                                          tolerance=((tolerance)/trunc)*trunc
 
-                                       //  tolerance*=2
-                                                  //                       tolerance=((tolerance)/trunc)*trunc
+                                        tolerance*=2
+                                              //                         tolerance=((tolerance)/trunc)*trunc
 
                                                        //    console.log(tolerance)
                                                          //                                                  tolerance=((tolerance)/trunc)*trunc
