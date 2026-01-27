@@ -4320,7 +4320,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                 }
                                                    //                  phrase=((phrase)/trunc)*trunc
                                 phrase*=2.;
-                                    tolerance=((tolerance)/trunc)*trunc
+                                  //  tolerance=((tolerance)/trunc)*trunc
 
                                                                                      tolerance=(tolerance)**((Math.E)**((phrase**phrase)))
                                              // tolerance=((tolerance)/trunc)*trunc
