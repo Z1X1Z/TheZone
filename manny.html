@@ -4591,6 +4591,7 @@ float daisifier = 0.;
   //      s.y=abs(s.y)*-sign(s.x*s.y);
 
 
+                                           vec2 sBuffer = s;
 
 
                                            
@@ -5156,9 +5157,10 @@ t
                       
               //    }
               gated = false;
-                                           vec2 sBuffer = s;
                vec2 overOptimizationResistor = vec2(1.,1.);
                if(counter==0.&&swap==1)s*=-1.;
+                              sBuffer = s;
+
 
 //isSplit=false;
 //dstnce=length(s);
