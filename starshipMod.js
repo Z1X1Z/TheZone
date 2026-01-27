@@ -4305,7 +4305,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                                                        let plusOrMinus = 1;
                               let term = 1;
-                              let sum =(tolerance+totalAMPmodified+tAScaledPermanent)/1.5
+                              let sum =(tolerance+totalAMPmodified+tAScaledPermanent)
 
 /*
                               let phrase = 0;//((tolerance+totalAMPmodified))**2-((tolerance+totalAMPmodified))**4+((tolerance+totalAMPmodified))**8;
@@ -4325,12 +4325,12 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                               let phrase =0;//((tolerance+totalAMPmodified+tAScaledPermanent))**2+((tolerance+totalAMPmodified+tAScaledPermanent))**4;
        for(var b = 2;b<10000;b+=2)
                                 {
-                                     term = (sum)**(b)*plusOrMinus;
+                                     term = (sum)**(b)*plusOrMinus/2;
                                //  term=((term)/trunc)*trunc
                                     phrase+=term
                                                    //                phrase=((phrase)/trunc)*trunc
 
-                                   plusOrMinus*=-1
+                                 //  plusOrMinus*=-1
                                     if(term==0)
                                         { loops = b
                                             break
@@ -4341,15 +4341,15 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                            // phrase=((phrase)/trunc)*trunc
                              //   phrase/=2
                                                            //    tolerance=((tolerance)/trunc)*trunc
-                            // phrase= phrase**phrase
-                            //phrase=phrase**(1./2)
+                            phrase= phrase**phrase
+                          //  phrase=phrase*(2)
 
                           
 
                                                                                      tolerance=(tolerance)**((Math.E)**((phrase)))
                                          tolerance=((tolerance)/trunc)*trunc
 
-                                    //    tolerance*=2
+                                      tolerance*=2
                                               //                         tolerance=((tolerance)/trunc)*trunc
 
                                                        //    console.log(tolerance)
