@@ -4300,7 +4300,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                               tolerance=((tolerance)/trunc)*trunc
                                                        tolerance=(tolerance)**((((((-leafPermanent+1)*(grPermanent+1))/trunc)*trunc)*((totalAMPmodified**.5+totalAMP**.5)/2.)**2.+(((totalAMPmodified**2+totalAMP**2)/2.))**.5)) // this greatly improves trueness
 
-                               tolerance=((tolerance)/trunc)*trunc
+                             //  tolerance=((tolerance)/trunc)*trunc
 
 
                                                        let plusOrMinus = 1;
@@ -4336,7 +4336,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                             break
                                 }
                             }
-                            console.log(loops)
+                         //   console.log(loops)
 
                            // phrase=((phrase)/trunc)*trunc
                              //  phrase/=2
@@ -4344,10 +4344,11 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                             phrase= phrase**phrase
                           //  phrase=phrase*(2)
 
-                          
+                                                     // phrase=((phrase)/trunc)*trunc
+
 
                                                                                      tolerance=(tolerance)**((Math.E)**((phrase)))
-                                         tolerance=((tolerance)/trunc)*trunc
+                                      //   tolerance=((tolerance)/trunc)*trunc
 
                                   //    tolerance*=2
                                               //                         tolerance=((tolerance)/trunc)*trunc
