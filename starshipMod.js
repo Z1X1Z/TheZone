@@ -4320,9 +4320,9 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                     if(term==0)break
                                 }
                                                //                      phrase=((phrase)/trunc)*trunc
-                                phrase*=2.;
+                                phrase=(phrase*2.)**2;
                                                                                                     phrase=((phrase)/trunc)*trunc
-
+                              //  phrase/=2
                                 // tolerance=((tolerance)/trunc)*trunc
 
                                                                                      tolerance=(tolerance)**((Math.E)**((phrase**phrase)))
