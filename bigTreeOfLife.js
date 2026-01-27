@@ -899,7 +899,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
      
     if(spinTowardsMe) if(i>=hyperCoreBoosted)s=spin(s,Math.atan2(d.y,d.x));
     let angleSs=s.clone();
-   if (swap==1)angleSs.x*=-1.;
+   if (swap==1)angleSs.multiplyScalar(-1.);
         var angleS = Math.atan2(angleSs.y,angleSs.x);
 
   var alternator=1.;

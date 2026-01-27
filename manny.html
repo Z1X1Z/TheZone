@@ -5206,7 +5206,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
 
    // if(distributor)s=spin2(s,distributorFACTOR);
    vec2 angleSs = s;
-   if (swap==1)angleSs.x*=-1.;
+  if (swap==1)angleSs*=-1.;//also works with angleSs.x*=-1.;
        float angleS = -atan(angleSs.y,angleSs.x);
 
 
@@ -5270,7 +5270,7 @@ angleS+=1./3.*PI;
 
     
 else{s*=-1.;
-//unSwitch=!unSwitch;
+unSwitch=!unSwitch;
  //unTwist*=-1.;
                     angleS*=-1.;
 }
@@ -5308,7 +5308,7 @@ if(swap==1)
 if(unSwitch)unTwist-=PI/3.*4.;  
 else unTwist+=PI/3.*4.; 
 */
-// if(!unSwitch)
+if(!unSwitch)
  unTwist-=PI/3.*4.;     
   //     else       unTwist+=PI/3.*4.;
 
@@ -5367,6 +5367,7 @@ else s=spin2(s,PI);
 
 
         }
+        /*
 else if(isSplit&&swap==1)
 
            {
@@ -5388,6 +5389,7 @@ else if(isSplit&&swap==1)
 
 
     }
+    */
     /*
     if(superStable)
     {
@@ -5639,7 +5641,7 @@ vec3 o = vec3(abs(s.x)/s.y*sign(s.x*s.y));
                                               if(oppositionalCoreFlop==0) o.g*=1.2;//seems to need more green
                                               else if (continuumClover==2)
                                               o.g*=1.1;
-                                              if (continuumClover!=2) o.r/=1.025;
+                                              if (continuumClover!=2) o.r/=1.05;
                                                 }
                                 else if(colorCombo==-8) {
                                             s=-colorAccumulator*(coresIn+1.)*((coresIn+2.)/(60.+1.)-.5);
