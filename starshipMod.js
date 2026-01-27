@@ -4321,18 +4321,22 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                 }
                                     */
 
-
+    let loops = 0;
                                                               let phrase =0;//((tolerance+totalAMPmodified+tAScaledPermanent))**2+((tolerance+totalAMPmodified+tAScaledPermanent))**4;
        for(var b = 1;b<10000;b+=2)
                                 {
                                      term = (sum)**(2**b)*plusOrMinus;
-                                 term=((term)/trunc)*trunc
+                               //  term=((term)/trunc)*trunc
                                     phrase+=term
                                                    //                phrase=((phrase)/trunc)*trunc
 
                                    // plusOrMinus*=-1
-                                    if(term==0)break
+                                    if(term==0)
+                                        { loops = b
+                                            break
                                 }
+                            }
+                            console.log(loops)
 
                             //                                  phrase=((phrase)/trunc)*trunc
                           //   phrase=(phrase)*2
