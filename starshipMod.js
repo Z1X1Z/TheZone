@@ -4343,10 +4343,10 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
 
                                                                                      tolerance=(tolerance)**((Math.E)**((phrase**phrase)))
-                                         tolerance=((tolerance)/trunc)*trunc
+                                         //tolerance=((tolerance)/trunc)*trunc
 
                                          tolerance*=2
-                                                                                  tolerance=((tolerance)/trunc)*trunc
+                                        //                                          tolerance=((tolerance)/trunc)*trunc
 
                                                        //    console.log(tolerance)
                                                          //                                                  tolerance=((tolerance)/trunc)*trunc
