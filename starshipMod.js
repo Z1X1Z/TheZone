@@ -4309,7 +4309,6 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                     phrase+=term
                                     plusOrMinus*=-1
                                     if(term==0)break
-                                    loops++
                                 }
                                                                                      tolerance=(tolerance)**((Math.E)**((phrase**phrase)))
                                   
