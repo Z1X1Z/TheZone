@@ -4300,12 +4300,12 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                               tolerance=((tolerance)/trunc)*trunc
                                                        tolerance=(tolerance)**((((((-leafPermanent+1)*(grPermanent+1))/trunc)*trunc)*((totalAMPmodified**.5+totalAMP**.5)/2.)**2.+(((totalAMPmodified**2+totalAMP**2)/2.))**.5)) // this greatly improves trueness
 
-                                 tolerance=((tolerance)/trunc)*trunc
+                               tolerance=((tolerance)/trunc)*trunc
 
 
                                                        let plusOrMinus = 1;
                               let term = 1;
-                              let sum =tolerance+totalAMPmodified//+tAScaledPermanent
+                              let sum =tolerance+tAScaledPermanent//+totalAMPmodified//+tAScaledPermanent
 
 /*
                               let phrase = 0;//((tolerance+totalAMPmodified))**2-((tolerance+totalAMPmodified))**4+((tolerance+totalAMPmodified))**8;
@@ -4320,11 +4320,12 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                     if(term==0)break
                                 }
                                     */
+
                                                               let phrase =0.;//((tolerance+totalAMPmodified+tAScaledPermanent))**2+((tolerance+totalAMPmodified+tAScaledPermanent))**4;
        for(var b = 2;b<10000;b+=2)
                                 {
                                      term = (sum)**(b)*plusOrMinus;
-                                    //term=((term)/trunc)*trunc
+                                  //  term=((term)/trunc)*trunc
 
                                     phrase+=term
 
@@ -4332,14 +4333,15 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                     if(term==0)break
                                 }
 
-                                               //                      phrase=((phrase)/trunc)*trunc
-                              //  phrase=phrase*2
+                                                                   phrase=((phrase)/trunc)*trunc
+                              // phrase=phrase*2
                                                                 //                                    phrase=((phrase)/trunc)*trunc
                               //  phrase/=2
-                                // tolerance=((tolerance)/trunc)*trunc
+                                                           //    tolerance=((tolerance)/trunc)*trunc
+
 
                                                                                      tolerance=(tolerance)**((Math.E)**((phrase**phrase)))
-                                         // tolerance=((tolerance)/trunc)*trunc
+                                         tolerance=((tolerance)/trunc)*trunc
 
                                                        //    console.log(tolerance)
                                                          //                                                  tolerance=((tolerance)/trunc)*trunc
