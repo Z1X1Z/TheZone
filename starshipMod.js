@@ -4311,7 +4311,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                               for(var b = 1;b<10000;b++)
                                 {
                                      term = (sum)**(b)*plusOrMinus;
-                                     term=((term)/trunc)*trunc
+                                     //term=((term)/trunc)*trunc
 
                                     phrase+=term
 
