@@ -4305,7 +4305,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                                                        let plusOrMinus = 1;
                               let term = 1;
-                              let sum =tolerance+totalAMPmodified+tAScaledPermanent
+                              let sum =tolerance+totalAMPmodified
 
 /*
                               let phrase = 0;//((tolerance+totalAMPmodified))**2-((tolerance+totalAMPmodified))**4+((tolerance+totalAMPmodified))**8;
@@ -4330,7 +4330,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                     phrase+=term
                                                    //                phrase=((phrase)/trunc)*trunc
 
-                                    plusOrMinus*=-1
+                                   // plusOrMinus*=-1
                                     if(term==0)
                                         { loops = b
                                             break
