@@ -4300,6 +4300,8 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                               tolerance=((tolerance)/trunc)*trunc
                                                        tolerance=(tolerance)**((((((-leafPermanent+1)*(grPermanent+1))/trunc)*trunc)*((totalAMPmodified**.5+totalAMP**.5)/2.)**2.+(((totalAMPmodified**2+totalAMP**2)/2.))**.5)) // this greatly improves trueness
 
+
+
                                                        let plusOrMinus = 1;
                               let term = 1;
                               let sum =tolerance+totalAMPmodified+tAScaledPermanent
@@ -4316,10 +4318,10 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                     plusOrMinus*=-1
                                     if(term==0)break
                                 }
-                                                                     phrase=((phrase)/trunc)*trunc
+                                                   //                  phrase=((phrase)/trunc)*trunc
 
+                                    tolerance=((tolerance)/trunc)*trunc
 
-                                                                              tolerance=((tolerance)/trunc)*trunc
                                                                                      tolerance=(tolerance)**((Math.E)**((phrase**phrase)))
                                               tolerance=((tolerance)/trunc)*trunc
 
