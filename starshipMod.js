@@ -4330,7 +4330,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                     phrase+=term
                                                    //                phrase=((phrase)/trunc)*trunc
 
-                                   // plusOrMinus*=-1
+                                    plusOrMinus*=-1
                                     if(term==0)
                                         { loops = b
                                             break
@@ -4340,7 +4340,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                             //                                  phrase=((phrase)/trunc)*trunc
                           //   phrase=(phrase)*2
-                              //                                                            phrase=((phrase)/trunc)*trunc
+                              //                                                     phrase=((phrase)/trunc)*trunc
                                 phrase/=2
                                                            //    tolerance=((tolerance)/trunc)*trunc
 
