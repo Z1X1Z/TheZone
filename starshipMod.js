@@ -4334,11 +4334,11 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                                  // plusOrMinus*=-1
                                     if(term==0)
-                                        { loops = power
+                                        { //loops = power
                                             break
                                 }
                             }
-                           console.log(loops)
+                         //  console.log(loops)
 
                            // phrase=((phrase)/trunc)*trunc
                              //  phrase/=2
@@ -4352,7 +4352,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                                      tolerance=(tolerance)**((Math.E)**((phrase)))
                                          tolerance=((tolerance)/trunc)*trunc
 
-                                  //    tolerance*=2
+                                     tolerance*=2
                                               //                         tolerance=((tolerance)/trunc)*trunc
 
                                                        //    console.log(tolerance)
