@@ -4330,9 +4330,9 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                                 {
                                      term = (sum)**(2**power)*plusOrMinus;
-                           //  term=((term)/trunc)*trunc
+                         term=((term)/trunc)*trunc
                                     phrase+=term
-                                                                  // phrase=((phrase)/trunc)*trunc
+                                                                  phrase=((phrase)/trunc)*trunc
                                                                    loops = power
 
                                     power++;
@@ -4346,7 +4346,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                            // phrase=((phrase)/trunc)*trunc
                                phrase/=2
-                                                        //   tolerance=((tolerance)/trunc)*trunc
+                                                          tolerance=((tolerance)/trunc)*trunc
                             phrase= phrase**phrase
                           //  phrase=phrase*(2)
 
