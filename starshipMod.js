@@ -4325,7 +4325,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                               let phrase =0;//((tolerance+totalAMPmodified+tAScaledPermanent))**2+((tolerance+totalAMPmodified+tAScaledPermanent))**4;
        let power = 0.
     
-                                                              for(var b = 0;b<1.;b+=totalAMP)
+                                                              for(var b = 0;b<1.;b+=totalAMPmodified)
                                                              // for(var b = 0;b<2.;b++)
 
                                 {
@@ -4342,10 +4342,10 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                             break
                                 }
                             }
-                        //   console.log(loops)
+                          console.log(loops)
 
                            // phrase=((phrase)/trunc)*trunc
-                             //  phrase/=2
+                               phrase/=2
                                                         //   tolerance=((tolerance)/trunc)*trunc
                             phrase= phrase**phrase
                           //  phrase=phrase*(2)
