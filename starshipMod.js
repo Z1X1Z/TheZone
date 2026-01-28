@@ -4325,7 +4325,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                               let phrase =0;//((tolerance+totalAMPmodified+tAScaledPermanent))**2+((tolerance+totalAMPmodified+tAScaledPermanent))**4;
        let power = 0.
     
-                                                              for(var b = 0;b<totalAMP;b+=tAScaledPermanent)
+                                                              for(var b = 0;b<1.;b+=totalAMP)
                                                              // for(var b = 0;b<2.;b++)
 
                                 {
