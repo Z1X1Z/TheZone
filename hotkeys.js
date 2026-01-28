@@ -234,8 +234,8 @@ seventhEYE:{value:0},
 budge:{value:.5},
 polyNomialStretch:{value:true   },
 Black:{value:false   },
-swap:{value:  1 }
-
+swap:{value:  1 },
+gigaLeap:{value:true}
 }
 window.uniforms={}
 
@@ -644,6 +644,7 @@ source.connect(analyser);
                                           else  if((key == "R") && event.altKey&&event.ctrlKey)uniforms.armStar.value=!uniforms.armStar.value;
                                           else  if(key == "J" && event.altKey&&event.ctrlKey)uniforms.sevenSquared.value=!uniforms.sevenSquared.value;
    else  if(key == "D" && event.altKey&&event.ctrlKey)uniforms.distributor.value = !uniforms.distributor.value;//hotkey seems to already be in use for bible chapter
+                                          else  if(key == "G" && event.altKey&&event.ctrlKey)uniforms.gigaLeap.value=!uniforms.gigaLeap.value;
 
                                           else  if(key == "Q" && event.altKey&&event.ctrlKey)
                                           

@@ -2187,6 +2187,7 @@ uniform float OrthoEvery;
         uniform float volumeFret4;
     uniform float smush;
     uniform bool armStar;
+    uniform bool gigaLeap;
                                   
                                   const float twoThirds = 2./3.;
                                   const float sqrt2 = sqrt(2.);
@@ -3950,7 +3951,6 @@ float leafDivGR=leaf/gr;
                                                                         }
 vec4 tol(vec2 p, vec2 t){
 
-
  //should be activated many ways
 
     float petalNumber = petals+6.;
@@ -4162,7 +4162,6 @@ const float crs = 64.;//this is the mandelclover and original inheritance colorm
                          &&loops+centerslide<cored//&&(lfcOverZoom>twoThirds||seventhEYE!=3.)
                          )
                         {
-                         
   if(i>1||!cloverSlide){s*=2.;c*=2.;scale*=2.;}
 
   if (cloverSlide)
@@ -4588,7 +4587,22 @@ vec2 window =s;
 bool gatedPass=false;
 float daisifier = 0.;
 //if(s.y>0.)s.y*=0.;  
-  //      s.y=abs(s.y)*-sign(s.x*s.y);
+  //      s.y=abs(s.y)*-sign(s.x*s.y);a*divi
+   float toEDGE =abs(mod((atan(s.y,s.x)*divideByMultiplyingPi+2.)*3.-.5,1.)-.5);
+   toEDGE*=2.;
+ //if( toEDGE>.5)s*=0.;
+
+                    if(dstnce>2./3.&&gigaLeap)
+                    {
+                       // float toEDGE = 0.; 
+                        float borderGap =8. ;
+                        float outerCloudShift = (1.+
+                        (borderGap*borderGap/2.-borderGap*2.5+2.)/pow(2.,borderGap)
+                        /((2.-toEDGE
+                        )));
+                        s*=outerCloudShift    ;  
+                        //hyperCoreBoosted*=outerCloudShift;       
+                    }
 
 
                                            vec2 sBuffer = s;
@@ -4598,6 +4612,8 @@ float daisifier = 0.;
 if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
+
+
 
  if(petals>0.&&squeezeN>=2.) 
  {
