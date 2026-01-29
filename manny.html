@@ -4586,24 +4586,8 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
 vec2 window =s;
 bool gatedPass=false;
 float daisifier = 0.;
-//if(s.y>0.)s.y*=0.;  
-  //      s.y=abs(s.y)*-sign(s.x*s.y);a*divi
-   float toEDGE =abs(mod((atan(s.y,s.x)*divideByMultiplyingPi+2.)*3.-.5,1.)-.5);
-   toEDGE*=2.;
- //if( toEDGE>.5)s*=0.;
 
-                    if(dstnce>2./3.&&gigaLeap)
-                    {
-                       // float toEDGE = 0.; 
-                        float borderGap =8. ;
-                        float outerCloudShift = (1.+
-                        (borderGap*borderGap/2.-borderGap*2.5+2.)/pow(2.,borderGap)
-                        /((2.-toEDGE
-                        )));
-                        s*=outerCloudShift    ;  
-                        //hyperCoreBoosted*=outerCloudShift;       
-                    }
-
+                
 
                                            vec2 sBuffer = s;
 
@@ -4612,7 +4596,7 @@ float daisifier = 0.;
 if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
-
+ 
 
 
  if(petals>0.&&squeezeN>=2.) 
@@ -4697,6 +4681,22 @@ hyperCoreOUTPUT-=superUpcorer;
 
                
        }
+
+          if(dstnce> twoThirds &&gigaLeap)
+                    {
+   float toEDGE =abs(mod((atan(s.y,s.x)*divideByMultiplyingPi+2.)*3.-.5,1.)-.5);
+   toEDGE*=2.;
+                        float borderGap =8. ;
+                        float outerCloudShift = (1.+
+                        (borderGap*borderGap/2.-borderGap*2.5+2.)/pow(2.,borderGap)
+                        /((2.-toEDGE    
+                        )));
+                        
+                        s*=outerCloudShift    ;  
+                        dstnce*=outerCloudShift;
+                        //hyperCoreBoosted*=outerCloudShift;       
+                    }
+
 
    s=vec2(
         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,

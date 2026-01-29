@@ -4342,7 +4342,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                             break
                                 }
                             }
-                          console.log(loops)
+                         // console.log(loops)
 
                            // phrase=((phrase)/trunc)*trunc
                                phrase/=2
