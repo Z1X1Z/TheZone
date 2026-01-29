@@ -164,21 +164,22 @@ let updateInstant = false;
                             const spirray1 = new Float64Array(bufferPortion).fill(.5);
                           const   point = new Float32Array(bufferPortion*3*2);
                           const   pointColor = new Float32Array(bufferPortion*4*2);
+                              const adjConstant =2*Math.PI*window.ConcertKey/512.*2**(1./3.)/1.5;//shouldn't be buffersize needs to be revised
+
 function makeSpirograph(){
       phase = phase % (pi*2);
         phase2 =  phase2 % (pi*2);
       len = 0;
-    const adjConstant =2*Math.PI*window.ConcertKey/pitch/512.*2**(1./3.)/1.5;//shouldn't be buffersize needs to be revised
     var maxSamp=0.;
     for(var t=0; t<bufferPortion;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
                                                                   uniforms.maxSamp.value=maxSamp;
-  
+  let adjAdjusted = adjConstant/pitch;
   var minSamp=100000000.;
   for(var t=0; t<bufferPortion;t++) if(inputData[t]<maxSamp)minSamp=inputData[t];
                                                                 uniforms.minSamp.value=minSamp;
     for(var m = 0; m < bufferPortion; m++)
       {
-              phase += adjConstant;//spira_pitch;
+              phase += adjAdjusted;//spira_pitch;
         let dilation =inputData[m]/maxSamp/2.;
             let outside = (1+dilation)/2.;
             let inside  = (1.-dilation)/2.;
@@ -4355,7 +4356,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                                                                                      tolerance=(tolerance)**((Math.E)**((phrase)))
                                          tolerance=((tolerance)/trunc)*trunc
-                                    tolerance+=(totalAMP**2/2/fractionOfFrame)**2 ;
+                                    tolerance+=totalAMP*adjConstant/2. ;
                                                                 //             tolerance=((tolerance)/trunc)*trunc
 
                                     // tolerance*=2
