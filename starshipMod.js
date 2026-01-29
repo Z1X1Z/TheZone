@@ -4355,7 +4355,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                                                                                      tolerance=(tolerance)**((Math.E)**((phrase)))
                                          tolerance=((tolerance)/trunc)*trunc
-                                    tolerance+=totalAMP/2/(fractionOfFrame) ;
+                                    tolerance+=totalAMP**2/2/(fractionOfFrame) ;
                                                                 //             tolerance=((tolerance)/trunc)*trunc
 
                                     // tolerance*=2
