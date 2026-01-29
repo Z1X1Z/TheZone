@@ -164,7 +164,7 @@ let updateInstant = false;
                             const spirray1 = new Float64Array(bufferPortion).fill(.5);
                           const   point = new Float32Array(bufferPortion*3*2);
                           const   pointColor = new Float32Array(bufferPortion*4*2);
-                              const adjConstant =2**(1./3.)/1.5;//shouldn't be buffersize needs to be revised
+                              const adjConstant =Math.PI**(1./3);//shouldn't be buffersize needs to be revised
 
 function makeSpirograph(){
       phase = phase % (pi*2);
@@ -173,7 +173,7 @@ function makeSpirograph(){
     var maxSamp=0.;
     for(var t=0; t<bufferPortion;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
                                                                   uniforms.maxSamp.value=maxSamp;
-  let adjAdjusted = 2*Math.PI*adjConstant/pitch;
+  let adjAdjusted = adjConstant/pitch*2;
   var minSamp=100000000.;
   for(var t=0; t<bufferPortion;t++) if(inputData[t]<maxSamp)minSamp=inputData[t];
                                                                 uniforms.minSamp.value=minSamp;
