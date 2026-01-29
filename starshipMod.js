@@ -1012,7 +1012,7 @@ function init() {
        //vertexColors: true,
            color: 0xffffff,
          // opacity: .5,
-          linewidth: 2,//ignored by WebGLRenderer
+          linewidth: 3,//ignored by some WebGLRenderer
           linecap: 'round', //ignored by WebGLRenderer
           linejoin:  'round' //ignored by WebGLRenderer
     } );
