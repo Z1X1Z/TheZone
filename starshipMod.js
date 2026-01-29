@@ -164,7 +164,7 @@ let updateInstant = false;
                             const spirray1 = new Float64Array(bufferPortion).fill(.5);
                           const   point = new Float32Array(bufferPortion*3*2);
                           const   pointColor = new Float32Array(bufferPortion*4*2);
-                              const adjConstant =2**(1./3.)/2;//shouldn't be buffersize needs to be revised
+                              const adjConstant =2**(1./3.);//shouldn't be buffersize needs to be revised
 
 function makeSpirograph(){
       phase = phase % (pi*2);
