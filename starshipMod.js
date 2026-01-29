@@ -1558,7 +1558,7 @@ let       preserveOuterCore = true;
                        
                        
                        const zoomCap32 =.00000075;
-                        const  INcreaseBoost = 1./3.;
+                        const  INcreaseBoost = 0.;//1./3.;
 function zoomRoutine(){
     const metaDepth=(!dupered)?zoomCap32:zoomCap32**2;//due to pixelization limits
     let zoomCone=metaDepth*fromCenter;
@@ -1569,7 +1569,7 @@ function zoomRoutine(){
         zoomOutEngage = false;
     if(!isFinite(ZR))ZR=1;
     if(!zoomOutEngage&&zoomRate>0.){
-        if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(on&&!window.touchMode))||xTouch+yTouch!=0)zoom *=ZR**((1.+INcreaseBoost)*zoomBoost);
+        if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(on&&!window.touchMode))||xTouch+yTouch!=0)zoom *=ZR**((1.+1./3.+INcreaseBoost)*zoomBoost);
         else if(uniforms.MetaCored.value||zoom<1.){
             zoom /= ZR;
             if(center&&zoom<1.){coordX*=ZR*2./3.;; coordY*=ZR*2./3.;}
