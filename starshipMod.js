@@ -164,7 +164,7 @@ let updateInstant = false;
                             const spirray1 = new Float64Array(bufferPortion).fill(.5);
                           const   point = new Float32Array(bufferPortion*3*2);
                           const   pointColor = new Float32Array(bufferPortion*4*2);
-                              const adjConstant =2*Math.PI*window.ConcertKey/512.*2**(1./3.)/1.5;//shouldn't be buffersize needs to be revised
+                              const adjConstant =2**(1./3.)/2;//shouldn't be buffersize needs to be revised
 
 function makeSpirograph(){
       phase = phase % (pi*2);
@@ -173,7 +173,7 @@ function makeSpirograph(){
     var maxSamp=0.;
     for(var t=0; t<bufferPortion;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
                                                                   uniforms.maxSamp.value=maxSamp;
-  let adjAdjusted = adjConstant/pitch;
+  let adjAdjusted = 2*Math.PI*adjConstant/pitch;
   var minSamp=100000000.;
   for(var t=0; t<bufferPortion;t++) if(inputData[t]<maxSamp)minSamp=inputData[t];
                                                                 uniforms.minSamp.value=minSamp;
@@ -1012,7 +1012,7 @@ function init() {
        //vertexColors: true,
            color: 0xffffff,
          // opacity: .5,
-          linewidth: 1,//ignored by WebGLRenderer
+          linewidth: 2,//ignored by WebGLRenderer
           linecap: 'round', //ignored by WebGLRenderer
           linejoin:  'round' //ignored by WebGLRenderer
     } );
@@ -4356,7 +4356,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                                                                                      tolerance=(tolerance)**((Math.E)**((phrase)))
                                          tolerance=((tolerance)/trunc)*trunc
-                                    tolerance+=totalAMP*adjConstant/2. ;
+                                    tolerance+=totalAMP*adjConstant ;
                                                                 //             tolerance=((tolerance)/trunc)*trunc
 
                                     // tolerance*=2
