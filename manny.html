@@ -4682,20 +4682,29 @@ hyperCoreOUTPUT-=superUpcorer;
                
        }
 
-          if(dstnce> twoThirds &&gigaLeap)
+
+
+          if(dstnce> twoThirds &&
+          gigaLeap)
                     {
    float toEDGE =abs(mod((atan(s.y,s.x)*divideByMultiplyingPi+2.)*3.-.5,1.)-.5);
    toEDGE*=2.;
-                        float borderGap =8. ;
+                        float borderGap =9. ;
+                        float border = (borderGap*borderGap/2.-borderGap*2.5+2.)/pow(2.,borderGap);
+                        
                         float outerCloudShift = (1.+
-                        (borderGap*borderGap/2.-borderGap*2.5+2.)/pow(2.,borderGap)
+                        border
                         /((2.-toEDGE    
                         )));
-                        
+                       // if(length(s)>pow(outerCloudShift,3.))
+                        {
+                      //    s*=0.;
                         s*=outerCloudShift    ;  
                         dstnce*=outerCloudShift;
+                        }
                         //hyperCoreBoosted*=outerCloudShift;       
                     }
+
 
 
    s=vec2(
