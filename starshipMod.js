@@ -4359,7 +4359,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                          //console.log(adjConstant)
                                          let powerAMP = totalAMP+1.;
                                          
-                               tolerance*=((totalAMP)**(powerAMP/3.)+(totalAMP)**(powerAMP/2.)+totalAMP**totalAMP);
+                               tolerance*=((totalAMP)**(powerAMP/3.)+(totalAMP)**(powerAMP/2.)+totalAMP**powerAMP);
 
                             //           tolerance=((tolerance)/trunc)*trunc
 
