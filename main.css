@@ -98,7 +98,7 @@ canvas {
 /* Navbar container */
 .navbar {
  overflow: hidden;
- background-color:rgba(127.5,127.5,127.5,0.5);
+ background-color:rgba(0,0,0,0.5);
  position: fixed;
  
 
@@ -109,7 +109,7 @@ t{ text-align: left;
 }
 .navbar {
  float: left;
- background-color:rgba(127.5,127.5,127.5,0.5);
+ background-color:rgba(0,0,0,0.5);
  padding: 0px 0px;
  text-decoration: none;
 
@@ -165,7 +165,7 @@ button {
     column-rule: 2.5px solid white;
  display: none;
  position: fixed;
- background-color: rgba(127.5,127.5,127.5,.5);
+ background-color:rgba(0,0,0,0.5);
  min-width: auto;
  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
