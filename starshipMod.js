@@ -4357,16 +4357,16 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                                      tolerance=(tolerance)**((Math.E)**((phrase)))
                                          tolerance=((tolerance)/trunc)*trunc
                                          //console.log(adjConstant)
-                                         let powerAMP = totalAMP+1.;
+                                         let powerAMP = totalAMPmodified+1.;
                                          
                                tolerance*=((totalAMP)**(powerAMP/3.)+(totalAMP)**(powerAMP/2.)+totalAMP**totalAMP);
 
-                            //             tolerance=((tolerance)/trunc)*trunc
+                            //           tolerance=((tolerance)/trunc)*trunc
 
-                                    tolerance+=totalAMP**(powerAMP/4.)//*totalAMP**(powerAMP/3).;///4./fractionOfFrame may actually be a fixed 256 bytes
+                                    tolerance+=(totalAMP)**(powerAMP/4.)*totalAMP//*totalAMP**(powerAMP/3).;///4./fractionOfFrame may actually be a fixed 256 bytes
                                                                 //             tolerance=((tolerance)/trunc)*trunc
 
-                                                   //                  tolerance=((tolerance)/trunc)*trunc
+                                                   //                 tolerance=((tolerance)/trunc)*trunc
 
                                                        //    console.log(tolerance)
                                                          //                                                  tolerance=((tolerance)/trunc)*trunc
