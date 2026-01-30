@@ -1202,11 +1202,25 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
     }
     
     else if (key=="Q") {
+        
+        if(number!="no number")
+        {
+            if(number<=0)
+            {
+                let randomnessInterval = Math.abs(number);
+                if(number==0.)randomnessInterval=144000.
+                 window.twist = (Date.now()%randomnessInterval)/(randomnessInterval/12)*2
+                 console.log(twist)
+            }
+          else  window.twist =number;
+}
+else
+        {
         window.twist = window.skew;
         if( uniforms.starSpin.value==0) uniforms.starSpin.value=1;
         else if( uniforms.starSpin.value==1) uniforms.starSpin.value=-1;
         else if( uniforms.starSpin.value==-1) uniforms.starSpin.value=0;
-        
+        }
     }
     else if (key==";") uniforms[ "colorInverter" ].value = !uniforms[ "colorInverter" ].value;
     else if (key=="t"){
@@ -1273,10 +1287,13 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
     else if (key=="K")uniforms.Inherited.value=!uniforms.Inherited.value;
     
     else if (key=="y") //uniforms[ "petals" ].value = 3.7082039325-6;//
-    { uniforms[ "petals" ].value -= 1.;
+       {
+
+ uniforms[ "petals" ].value -= 1.;
         
         window.squirgleData = new Float32Array((uniforms.petals.value+6)*2).fill(1.);
-    }
+
+}
     else if (key=="Y"){
         window.blankBackground = !window.blankBackground;
         if(window.blankBackground)
@@ -1348,12 +1365,16 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
     }
     else if (key=="w")window.volumeSpeed=!window.volumeSpeed;
     
-    else if (key=="W"){
+    else if (key=="W")
+    {
+                if(number!="no number")window.twist =(Date.now()%12)*2
+    +number;
+else{
         //window.twist-=window.skew;
         if(window.twist-Math.floor(window.twist)>0.)window.twist=window.skew;
         window.twist+=2; window.twist = window.twist%24;
         //window.twist+=window.skew;
-
+}
         if("osmd" in window&&osmd!=null)
         {
             osmd.Sheet.Transpose = twist/2.;
@@ -1364,10 +1385,14 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
     
     else if (key=="S"){
 
+                 if(number!="no number")window.twist =(Date.now()%12)*2
+    +number;
+else
+    {
         if(window.twist-Math.floor(window.twist)>0.)window.twist=window.skew;
             
         window.twist-=2; window.twist = (window.twist+24)%24;
-
+    }
         if("osmd" in window&&osmd!=null)
         {
             osmd.Sheet.Transpose = twist/2.;
@@ -1375,15 +1400,23 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
             osmd.render();
         }
     }
-    else if (key=="A"){
-        if(flip!=-1)uniforms.witnessFlip.value*=-1.;
 
-        window.flip = -1;uniforms.flipStar.value=-1.;
+    else if (key=="A"){
+        let flipsign = -1.;
+        if(number!="no number")flipsign=(Date.now()%2-.5)*2
+
+        uniforms.witnessFlip.value=flipsign;
+
+        window.flip = flipsign;uniforms.flipStar.value=flipsign;
     }
     else if (key=="D"){
-        if(flip!=1)uniforms.witnessFlip.value*=-1.;
 
-        window.flip = 1;uniforms.flipStar.value=1.;
+        let flipsign = 1.;
+        if(number!="no number")flipsign=(Date.now()%2-.5)*2
+
+        uniforms.witnessFlip.value=flipsign;
+
+        window.flip = flipsign;uniforms.flipStar.value=flipsign;
     }
 
       else if (key=="R")   uniforms[ "remediatedColors" ].value=!uniforms[ "remediatedColors" ].value  ;
