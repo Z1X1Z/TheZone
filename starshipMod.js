@@ -4363,7 +4363,10 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                             //           tolerance=((tolerance)/trunc)*trunc
 
-                                    tolerance+=(totalAMP)**(totalAMP/4.)*totalAMP**powerAMP//*totalAMP**(powerAMP/3).;///4./fractionOfFrame may actually be a fixed 256 bytes
+                            let nudgeAdjust = totalAMP;
+                            
+                            for (var na = 0; na<5; na+=totalAMP)nudgeAdjust=nudgeAdjust**totalAMP
+                                    tolerance+=(totalAMP)**(totalAMP/4.)*nudgeAdjust//*totalAMP**(powerAMP/3).;///4./fractionOfFrame may actually be a fixed 256 bytes
                                                                 //             tolerance=((tolerance)/trunc)*trunc
 
                                                    //                 tolerance=((tolerance)/trunc)*trunc
