@@ -290,16 +290,21 @@ let maxLetterDepth=-1;
         <script>
             //splash
             let nf = document.getElementById('background_wrap');
+                            let thismoment = Date.now();
+
             if(window.online)
             {
-                if(Date.now()%2==1) nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6/z1xlogo.png');"
-                else nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/pentaloctalwtlzonexmonogram.jpeg');"
-           }
+                if(thismoment%3==1) nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6/z1xlogo.png');"
+                else if(thismoment%3==2)nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/pentaloctalwtlzonexmonogram.jpeg');"
+                      else  if(thismoment%3==0) nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/thunderbird.png');"
+            }
             else
             {
-                if(Date.now()%2==1)nf.style = "background-image: url('z1xlogo.png');"
-                else nf.style = "background-image: url('pentaloctalwtlzonexmonogram.jpeg');"
-                }
+                if(thismoment%3==1)nf.style = "background-image: url('z1xlogo.png');"
+                else if(thismoment%3==2) nf.style = "background-image: url('pentaloctalwtlzonexmonogram.jpeg');"
+                else if(thismoment%3==0)  nf.style = "background-image: url('thunderbird.png');"
+        
+            }
             
         </script>
            
@@ -4691,7 +4696,7 @@ hyperCoreOUTPUT-=superUpcorer;
 
 
 
-          if(dstnce> twoThirds &&
+          if(//dstnce> twoThirds &&
           gigaLeap)
                     {
    float toEDGE =abs(mod((atan(s.y,s.x)*divideByMultiplyingPi+2.)*3.-.5,1.)-.5);
@@ -5423,7 +5428,7 @@ else s=spin2(s,PI);
                             isSplit=false;
 
         }
-                              if(i%2==0&&isSplit&&boolean)
+                              if(mod(float(i),2.)==0.&&isSplit&&boolean)
                               {unTwist+=2./3.*PI;
                                 boolean = false;
                               }
