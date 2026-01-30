@@ -4363,7 +4363,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
 
                             //             tolerance=((tolerance)/trunc)*trunc
 
-                                    tolerance+=totalAMP**(powerAMP/4.)*totalAMP**totalAMP;///4./fractionOfFrame may actually be a fixed 256 bytes
+                                    tolerance+=totalAMP**(powerAMP/4.)//*totalAMP**(powerAMP/3).;///4./fractionOfFrame may actually be a fixed 256 bytes
                                                                 //             tolerance=((tolerance)/trunc)*trunc
 
                                                    //                  tolerance=((tolerance)/trunc)*trunc
