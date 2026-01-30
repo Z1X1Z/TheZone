@@ -2576,6 +2576,7 @@ ret= vec4(clamp(
                               /iterations*twoThirds*timesForBottom;//*(1.-length(g));
                               
                            }
+                           if(volume!=1.)h*=length(g)*2.;
                        return h;
                        }
                                      const    float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;
