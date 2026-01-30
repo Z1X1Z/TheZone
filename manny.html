@@ -850,7 +850,7 @@ radialWarp=b;
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                   Flop Chirality![|]</a><br>
               
-              <label for="CloverTwist">Twist offset:</label>
+              <label for="CloverTwist">Twist offset:[|]</label>
              <input type="number" id="CloverTwist" name="CloverTwist" class="num" onkeyup="
                 number = 'no number'
 ;
@@ -4067,7 +4067,9 @@ vec4 tol(vec2 p, vec2 t){
                          p=spin2(p,-chiralAdjustment);}
                          else if(chirality==-1){
                          chiralAdjustment=-PIdiv2;
-                         p=spin2(p,-chiralAdjustment);}
+                         p=spin2(p,-chiralAdjustment);
+                         p*=-1.;//may cause loss of coordination? For balance
+                        }
                          if(cloverOffset!=0.)p=spin2(p,cloverOffset*PI2);
                     
                     bool gated = false;

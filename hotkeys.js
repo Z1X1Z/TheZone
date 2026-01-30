@@ -681,7 +681,6 @@ source.connect(analyser);
                     uniforms.OrthoEvery.value=number;
                 else if( uniforms.OrthoEvery.value==1.)uniforms.OrthoEvery.value=0.
                     else  uniforms.OrthoEvery.value=1.;
-                    console.log(uniforms.OrthoEvery.value)
                         
                         }
                 else if((key == "g"||key=="©") && event.altKey&&event.ctrlKey)
@@ -711,7 +710,6 @@ source.connect(analyser);
                 
                 else if((key == "o"||key=="ø") && event.altKey&&event.ctrlKey)
                 { uniforms.oppositionalCoreFlop.value=(uniforms.oppositionalCoreFlop.value+1)%3;
-                    console.log(uniforms.oppositionalCoreFlop.value);
             }
                 
                 else if((key == "h"||key=="˙") && event.altKey&&event.ctrlKey)
@@ -1210,7 +1208,6 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                 let randomnessInterval = Math.abs(number);
                 if(number==0.)randomnessInterval=144000.
                  window.twist = (Date.now()%randomnessInterval)/(randomnessInterval/12)*2
-                 console.log(twist)
             }
           else  window.twist =number;
 }
@@ -1316,10 +1313,24 @@ else
     }
     
     else if (key=="|") {
+
+        if(number!="no number")
+        {
+            if(number<=0)
+            {
+                let randomnessInterval = Math.abs(number);
+                if(number==0.)randomnessInterval=144000.
+                         uniforms.cloverOffset.value
+ = (Date.now()%randomnessInterval)/(randomnessInterval/12)/4.
+            }
+          else          uniforms.cloverOffset.value
+ =-number/4;
+}
+else{
         if(uniforms.chirality.value==3)uniforms.chirality.value=1;
         else if(uniforms.chirality.value==1)uniforms.chirality.value=-1;
         else if(uniforms.chirality.value==-1)uniforms.chirality.value=3;
-
+}
     }
     else if (key=="{"){
         if(uniforms.eden.value!=4)uniforms.eden.value=(uniforms.eden.value+1)%3;
