@@ -4357,7 +4357,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                                      tolerance=(tolerance)**((Math.E)**((phrase)))
                                          tolerance=((tolerance)/trunc)*trunc
                                          //console.log(adjConstant)
-                                    tolerance+=totalAMP*adjConstant*2 ;
+                                    tolerance+=totalAMP*adjConstant*2**.5;
                                                                 //             tolerance=((tolerance)/trunc)*trunc
 
                                     // tolerance*=2
