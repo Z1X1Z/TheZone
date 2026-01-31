@@ -19,11 +19,7 @@ else{
 
 function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
     if(!runningHash&&typeof THREE=="object" && document.visibilityState=="visible"
-       &&(window.micOn||window.isTouch)){
-       document.getElementById( "background_wrap").style =  "height: 0px; width: 0px;"
-        //"background-image: none;";//turn off splash!
-        document.getElementById( "load message").innerHTML = "";//turn off splash!
-
+       ){
                 if(window.isTouch)
               {
                 window.touchOnlyMode=true;
@@ -35,6 +31,21 @@ function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js lo
     }//setTimeout waits for 10ms then runs stallTillTHREELoaded()
 stallTillTHREELoaded();
 
+
+
+function waitForMic(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
+    if(document.visibilityState=="visible"
+       &&(window.micOn||window.isTouch)){
+
+       document.getElementById( "background_wrap").style =  "height: 0px; width: 0px;"
+        //"background-image: none;";//turn off splash!
+        document.getElementById( "load message").innerHTML = "";//turn off splash!
+
+       animate()
+     }
+    else setTimeout(waitForMic,100);
+
+    }//setTimeout waits for 10ms then runs stallTillTHREELoaded()
 
 const dotSize = starshipSize;
 
@@ -1211,7 +1222,8 @@ function init() {
                         for(var n = 0; n<trailLength; n++)
                           {pitchCol[n]  = new THREE.Color()
                           }
-     window.INITIALIZED =true;
+
+             window.INITIALIZED =true;
              setDAWdependantSize();
 
      setFFTdependantSizes();
@@ -1221,8 +1233,7 @@ function init() {
   renderer.setPixelRatio( rez);
      onWindowResize();
      adjustThreeJSWindow();
-    animate();
-
+waitForMic()
 }
                                            window.INITIALIZED=false;
 
@@ -1456,7 +1467,6 @@ function onWindowResize() {
             }
         
            if(INITIALIZED) adjustThreeJSWindow();
-     
      
      //menuBoxes declared in manny.html
      let numberOfColumns=Math.round(widthPX/heightPX*4.)
