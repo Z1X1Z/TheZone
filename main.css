@@ -80,7 +80,7 @@ canvas {
 #background_wrap {
     z-index: -2;
     position: fixed;
-    top: 100px;
+    top: 17%;
     right:0%;
     height: 80%;
     width: 100%;
