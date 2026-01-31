@@ -107,7 +107,7 @@ letTouchThrough=false;
 
 
     document.getElementById( "load message").style.textAlign="center"
-            document.getElementById( "load message").innerHTML = "Press to open (when loaded)!";//turn off splash!
+            document.getElementById( "load message").innerHTML = "Press to open (as soon as loaded)";//turn off splash!
 
 
 function route(){
