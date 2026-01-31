@@ -434,6 +434,8 @@ var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
 
                            var omniboost = (6.+petals)/6.-1.;
 if(petals>0.)omniboost=Math.sqrt(omniboost);
+else if (petals<0.)hyperCoreOUTPUT-=Math.log(2.)*2.;
+
                                                        hyperCoreOUTPUT-=omniboost;//upcore for higher omniclover counts, multiplied by two!!
 
 
@@ -511,10 +513,11 @@ var OmniDynamicPetalShift =omniData[0];
 var OmniPetal =OmniDynamicPetalShift*(petalNumber/6.);
 
 
- if(petals>0.&&squeezeN>=2.) 
+ if(petals>0.&&squeezeN>=2.)
+    {if (petals>0) 
   hyperCoreBoosted+=(petalNumber/6.-1.)**2*3.-squeezeN*2.;
-
-
+    else if (petals==0.)hyperCoreBoosted-=2.;
+}
 
 var  CORE_DELIMITER=coreData[0];
   
@@ -920,7 +923,7 @@ if(swap==1)
 
    if(alternator==1.)
    {
-    s=spin(s,Math.PI/1*3.);
+    s=spin(s,Math.PI/3*1.);
                         angleS+=1./3.*Math.PI;
 
                     }

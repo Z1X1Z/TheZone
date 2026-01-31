@@ -4535,7 +4535,8 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
                              
 float hyperCoreOUTPUT =hyperCore*log2/log(metaCoreDriveFactor)+loops;
 float omniboost = (6.+petals)/6.-1.;
-if(petals>=0.)omniboost=sqrt(omniboost);
+if(petals>0.)omniboost=sqrt(omniboost);
+else if (petals<0.)hyperCoreOUTPUT-=log2*2.;
                                                        hyperCoreOUTPUT-=omniboost;//upcore for higher omniclover counts, multiplied by two!!
 
                                                            float hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if
@@ -4650,17 +4651,19 @@ float daisifier = 0.;
 
                                            vec2 sBuffer = s;
 
-
+bool squeezeDIlate = petals>0.;
                                            
 if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
  
 
- if(petals>=0.&&squeezeN>=2.) 
+ if(squeezeN>=2.) 
  {
+    if(petals>0.)
   hyperCoreBoosted+=pow((petalNumber/6.-1.), 2.)*3.-squeezeN*2.;//coefficient on squeezeN varies
 
+else  if(petals==0.)hyperCoreBoosted-=2.;
  }
 
    //      if(multiplicatorNexus)hyperCoreBoosted = hyperCore+coreBooster*dstnce;
@@ -4713,7 +4716,7 @@ if(feedTheLamb){superUpcorer =
     -1.+1./((abs(mod(atan(s.y,s.x)/PI2+1.//+.5/petalNumber
 ,1./6.)-.5/6.))*petalNumber*6.*2.)+ length(s)/log2*petalNumber/6./2.;
 ;
-if(petals>0.)
+if(squeezeDIlate)
 {
     float superUpcorerboost=pow(petals,clamp(squeezeN-1.,0.,1.));//was pow(petals,clamp(squeezeN-1.,0.,1.))
   //  if (squeezeN>=2.) superUpcorerboost+=squeezeN;
