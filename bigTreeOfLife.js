@@ -394,7 +394,7 @@ var m= new THREE.Vector2(0.,0.);
                                      
 //this is essentially just p as in the mandelbrot x <== x^2+
 
-var iterations = 100.;//loops all escape delimiter so iterations aren't used unless needed
+var iterations = 15.;//loops all escape delimiter so iterations aren't used unless needed
 var refractelC=1.5;
 //  p*=2.*refractelC;
 var continuumCounter=0.;
@@ -435,6 +435,8 @@ var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
                            var omniboost = (6.+petals)/6.-1.;
 if(petals>0.)omniboost=Math.sqrt(omniboost);
 else if (petals<0.)hyperCoreOUTPUT-=Math.log(2.)*2.;
+else if (petals==0.)hyperCoreOUTPUT+=Math.log(2.)*2.;
+
 
                                                        hyperCoreOUTPUT-=omniboost;//upcore for higher omniclover counts, multiplied by two!!
 
@@ -1076,7 +1078,11 @@ daisifier+=1.;
  hyperCoreOUTPUT--;
     loopSolid++
 
-}else break;
+}else 
+    {   //console.log(counter)
+        break;
+
+    }
                     //  console.log("out"+loopSolid)
 return new THREE.Vector3(s.x,s.y,hyperCoreOUTPUT);}
                            

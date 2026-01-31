@@ -4537,6 +4537,8 @@ float hyperCoreOUTPUT =hyperCore*log2/log(metaCoreDriveFactor)+loops;
 float omniboost = (6.+petals)/6.-1.;
 if(petals>0.)omniboost=sqrt(omniboost);
 else if (petals<0.)hyperCoreOUTPUT-=log2*2.;
+else if (petals==0.)hyperCoreOUTPUT+=log2*2.;
+
                                                        hyperCoreOUTPUT-=omniboost;//upcore for higher omniclover counts, multiplied by two!!
 
                                                            float hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if
