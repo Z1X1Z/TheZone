@@ -128,6 +128,7 @@ vec4 loopNZ(vec2 p, bool flop, vec4 colour1, vec4 colour2, vec4 colour3)
 				 			 if(flop&&p.x<-0.+lineWidth*1.&&p.y>.125&&abs(p.x)<.5+lineWidth&&abs(p.y)<.5+lineWidth
 							     )ret*=0.;
 			  			 p*=2.;
+				 				 if(p.x<lineWidth-.5&&p.y>-.25)ret*=0.;
 			  p+=vec2(.75-lineWidth,-.5);
 			  			  if(flop)p.y+=.5;
 			 // if(p.x<.5)ret*=0.;
@@ -158,8 +159,15 @@ void main(){
 					vec4 red = vec4(1.,.0,.0,1.);
 		vec4 pink = vec4 (1.,0.,1.,1.);
 		vec4 green = vec4(0.,1.,0.,1.);
-		n+=MIDDLEnz((Z+vec2(i*1.+lineWidth/2.,0)),true	, green, pink, green);
-			n+=loopNZ((Z*2.+vec2(i*2.,0)),false	, pink, green, pink);
+			vec4 white = vec4(1.,1.,1.,1.);
+			vec4 lightgreen = vec4(.5,1.,.0,1.);
+				vec4 seagreen = vec4(.0,1.,.5,1.);
+		n+=MIDDLEnz((Z+vec2(i*1.+lineWidth/2.,0)),true	, pink, green, pink);
+			
+	//if(p.x>-.375+lineWidth/2.)
+	//n+=loopNZ((Z*2.+vec2(i*2.,0)),false	,white , white, white );
+	//else 
+		n+=loopNZ((Z*2.+vec2(i*2.,0)),false	, seagreen, lightgreen, seagreen);
 
 	n+=O(Z	, orange, orange, orange);//center Z
 	n+=loopNZ((Z*4.-vec2(i*3.,i*5.)),true	, purple, purple, purple);//christmas tree Z
@@ -206,6 +214,9 @@ void main(){
 		n+=3./5.;
 		 if(n.r>=1.0&&n.g>=1.0&&n.b>=1.)
 		 {
+			 
+			 if( p.x>-.125)
+			 {
 			 	 if(p.x<-0.25)n=vec4(0.);
 			 else if (p.y<0.)n=vec4(0.);
 			//else  if (p.x>0.&&p.y<0.
@@ -213,7 +224,15 @@ void main(){
 				 if(p.x<0.&&p.y<0.&&p.x>-lineWidth)n=vec4(1.);
 				 if(p.x>-.125&&p.x<0.)n=vec4(1.);
 				  if(p.y>0.06125&&p.x>0.)n=vec4(0.);
+				 if(p.x>-.125-lineWidth/2.)
+				  if(n.r==0.)n=vec4(1.);
+					 else n=vec4(0.);
+					 if(p.x<-.375)n=vec4(2./5.);
+						 }
+					 	else if(p.x>-.5)n=vec4(2./5.);
+				 
 		 }
+
 
 
 
