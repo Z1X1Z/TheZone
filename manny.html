@@ -12,7 +12,7 @@
         <link type="text/css" rel="stylesheet" href="main.css">
 </head>
         
-        <body oncontextmenu="return false;">
+        <body  oncontextmenu="return false;">
             <!--disable right click solution from
                                         https://stackoverflow.com/questions/381795/how-to-disable-right-click-context-menu-in-javascript  -->
             <script src="OFFLINEonlineSwitch.js">
@@ -296,18 +296,57 @@ let maxLetterDepth=-1;
 
             if(window.online)
             {
-                if(thismoment%4==1) nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6/z1xlogo.png');"
-                else if(thismoment%4==2)nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/pentaloctalwtlzonexmonogram.jpeg');"
-                      else  if(thismoment%4==0) nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/thunderbird.png');"
-                      else  if(thismoment%4==3) nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@14/thundeRainbow.png');"
+                if(thismoment%4==1) 
+                {
+                    nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6/z1xlogo.png');"
+                                    document.body.style="background-color:white";
+               
+                }
+                    else if(thismoment%4==2)
+            {
+                nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/pentaloctalwtlzonexmonogram.jpeg');"
+                                document.body.style="background-color:white";
+
             }
+                else  if(thismoment%4==0)
+                      {
+                         nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/thunderbird.png');"
+                                         document.body.style="background-color:black";
+
+                        }
+                     
+                      else  if(thismoment%4==3) 
+                      {
+                        nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@14/thundeRainbow.png');"
+                                      document.body.style="#999";
+
+                    }
+                    }
             else
             {
-                if(thismoment%4==1)nf.style = "background-image: url('z1xlogo.png');"
-                else if(thismoment%4==2) nf.style = "background-image: url('pentaloctalwtlzonexmonogram.jpeg');"
-                else if(thismoment%4==0)  nf.style = "background-image: url('thunderbird.png');"
-                else if(thismoment%4==3)  nf.style = "background-image: url('thundeRainbow.png');"
+                if(thismoment%4==1)
+                {nf.style = "background-image: url('z1xlogo.png');"
+                                    document.body.style="background-color:white";
+            }
+                else if(thismoment%4==2) 
+                {
+                    nf.style = "background-image: url('pentaloctalwtlzonexmonogram.jpeg');"
+                    document.body.style="background-color:white;"
+
+                    }
+                else if(thismoment%4==0)  
+                {
+                    nf.style = "background-image: url('thunderbird.png');"
+                    document.body.style="background-color:black";
+
+                }
+                else if(thismoment%4==3)  
+                {nf.style = "background-image: url('thundeRainbow.png');"
+                 document.body.style="background-color:#999";
+
+            }
         
+
             }
             
         </script>
