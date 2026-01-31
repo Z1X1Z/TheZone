@@ -494,10 +494,6 @@ radialWarp=b;
                          callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
                          <label for="flameOrRiver">Flame or River?[,r]</label><br>
                          
-                         <input type="checkbox" id="PixelStar" name="t"  onclick= "
-                             key  = 'p';
-                             callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
-                             <label for="PixelStar">PixelStar![.p]</label><br>
                              
                              <input type="checkbox" id="pong" name="t"  onclick= "
                                  key  = 'u';
@@ -527,7 +523,7 @@ radialWarp=b;
 
                      <a id="TrailOverflowsClover" name="t"  onclick= "
                      
-                     key  = 'Z';
+                     key  = 'Z'
                      callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                         Trail Overflows![Z]</a><br>
                      <a id="TrailOverflowsClover" name="t"  onclick= "
@@ -1780,7 +1776,7 @@ Open MusicXML file
   <div id="timeNumber" style="color:white;font-size:20em;text-align: center;   top: 0%;      width: 100%;z-index:5;position:absolute;"></div>
   <div id="numberExplanation" style="color:white;font-size:7em;text-align: center;   top: 55%;      width: 100%;z-index:5;position:absolute;"></div>
 
-    <div id="container"> 
+    <div id="container" style="z-index:-3"> 
       </div></div></div>
     <script src="wadLoader.js"> </script>
     <div>
@@ -1904,7 +1900,7 @@ ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
     
     
     
-    <script id="vertexShader" type="x-shader/x-vertex" >
+    <script id="vertexShader" type="x-shader/x-vertex" src="vshader">
 
         varying vec2 vUv;
 
@@ -1916,7 +1912,7 @@ ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
 </script>
 
 
-    <script id="wipeFragmentShader" type="x-shader/x-fragment">
+    <script id="wipeFragmentShader" type="x-shader/x-fragment" >
         varying vec2 vUv;
         uniform sampler2D cloverSampler;
         uniform vec2 resolution;
@@ -2056,7 +2052,7 @@ void main(){
     uniform float cloverOffset;
     
     uniform bool Pointers;
-    uniform bool pixelSTARon;
+    uniform int pixelSTAR;
     uniform bool pixelWitnesses;
     uniform bool icicle;
     uniform bool linearEQ;
@@ -3636,7 +3632,7 @@ extrArms+=h.x;
         
        }
        arm=clamp(arm,0.,1.);
-                    return vec4(b,b/2.5,0.,arm)+vec4(vec3(extrArms,extrArms*.99,extrArms),0.);
+                    return vec4(b,b/2.5,0.,arm)+vec4(vec3(extrArms,extrArms*.99,extrArms)*.75,0.);
                     }
     
                     vec3 musculature(vec2 g, vec2 t){
@@ -7301,6 +7297,7 @@ vec2 heartField = characterPSpunToKey*heartSize
 
 vec3 Shekina = vec3(0.);
 
+if(pixelSTAR==1||pixelSTAR==2){
 //recalculation
 vec2 vUvCenteredASKEW2 = (vUv.yx-.5);
 vec2 uVuASKEW2=-(vUvCenteredASKEW2)/(aspectRatio);
@@ -7321,7 +7318,7 @@ if(frAMP2>0.&&volume!=1.&&maxSamp< volume*volume )//&&minSamp*3.<maxSamp)
     if (shekinaSize>.5&&shekinaSize<.6)Shekina=vec3(1.25-15.*(shekinaSize-.5));
     }
      
-
+}
 
 
 
@@ -7545,7 +7542,7 @@ vec3 pongBall = vec3(0.);
                                                                  vec2 uVu=-(vUvCentered)/aspectRatio;
                                                                  vec2 uVuMinCenter=-vUvCentered/(min(resolution.x,resolution.y)/resolution.yx);
                          
-         if (pixelSTARon) pixelStarship = audioEq(uVuMinCenter);
+         if (pixelSTAR==2||pixelSTAR==3) pixelStarship = audioEq(uVuMinCenter);
             if(linearEQ){
                                  
              linearFrequency=linearFrequencyEQ(adjustedvUv);

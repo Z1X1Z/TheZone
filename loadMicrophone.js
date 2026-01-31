@@ -106,18 +106,17 @@ letTouchThrough=false;
                if(letTouchThrough&&letTouchThrough != "inactive") userHasGestured=true;
 
 
-  
 
-      
+
 function route(){
     if(!micOn&&!window.isTouch&&!userHasGestured){
-        document.getElementById( "load message").innerHTML = "";
         startMic();
     }
+          document.getElementById( "load message").innerHTML = "";
+
     userHasGestured=true;
 
 }
-document.getElementById( "load message").innerHTML = "Tap the screen or a key to load!";
 
 if(window.isTouch){
     

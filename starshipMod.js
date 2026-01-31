@@ -42,8 +42,8 @@ function waitForMic(){//this is a lurker. it waits for the three.js loader to re
         document.getElementById( "load message").innerHTML = "";//turn off splash!
                                             document.body.style="background-color:black";
 
-
-       animate()
+renderer.setAnimationLoop(animate)
+      // animate()
      }
     else setTimeout(waitForMic,100);
 
@@ -1006,7 +1006,6 @@ function init() {
 
     renderer = new THREE.WebGLRenderer();
      
-    container.appendChild( renderer.domElement );//engage THREEJS visual out
 
     renderer.autoClear=true;//so the starship can be isolated
     renderer.setClearAlpha ( 0. )
@@ -1235,14 +1234,30 @@ function init() {
   renderer.setPixelRatio( rez);
      onWindowResize();
      adjustThreeJSWindow();
-  const b =   async () => {
+         container.appendChild( renderer.domElement );//engage THREEJS visual out
+             document.getElementById( "load message").style.textAlign="center"
 
-                     renderer.render( shaderScene, camera );
+            document.getElementById( "load message").innerHTML = "Loading....Press to get mic!";//turn off splash!
 
-                     renderer.render( scene, camera );
-}
-b()
+renderer.setAnimationLoop(bootSHADERS);
+renderer.setAnimationLoop(null);
+
+            document.getElementById( "load message").innerHTML = "Press to open!";//turn off splash!
+
+ 
 waitForMic()
+
+}
+function bootSHADERS (){
+
+                 renderer.render( scene, camera );
+                                  renderer.render( feedbackSceneFlip, camera );
+
+
+                 renderer.render( finalSceneRerenderedering, camera );
+                 
+                     renderer.render( shaderScene, camera );
+renderer.clearColor()
 
 }
                                            window.INITIALIZED=false;
@@ -3154,13 +3169,13 @@ var fingerStride = 0;
              }
          if  ((noteGrey<.5 || noteGrey>11.5)&&uniforms.Character.value!=2&&BlackOrWhite!=0.)
          {
-            // if(!uniforms.pixelSTARon.value)
+            // if(!uniforms.pixelSTAR.value)
              if(blankBackground&&!starClover)BlackOrWhite=1.;
              else BlackOrWhite=.5
         }
          else if( ((uniforms.Character.value==0&&(noteGrey<6.5&&noteGrey>5.5))&&BlackOrWhite!=1.) &&uniforms.colorCombo.value!=20&&!blankBackground&&starClover)
          {
-           // if(!uniforms.pixelSTARon.value)BlackOrWhite=.5;
+           // if(!uniforms.pixelSTAR.value)BlackOrWhite=.5;
            //  else BlackOrWhite=0.;
          }
              
@@ -4052,7 +4067,7 @@ for(var n = 0; n<targets.length;n++){
                                                                                  )
                                                        function waitForOpenWindowToAnimate(){
                                                          if(document.visibilityState=="hidden") setTimeout(waitForOpenWindowToAnimate,100);
-                                                         else animateLoopId= window.requestAnimationFrame( animate );
+                                                      //   else animateLoopId= animate( );
                                                          
                                                      }
                                                        
