@@ -1369,7 +1369,11 @@ else{
         else closeFullscreen();
     }
     else if (key=="H")uniforms.cloverSlide.value=!uniforms.cloverSlide.value;
-    else if (key==" ") resetAll();
+    else if (key==" ") 
+        {
+            settingsSet = false;
+            resetAll();
+        }
     else if (key=="~")
     {
         onO=!onO;

@@ -40,6 +40,8 @@ function waitForMic(){//this is a lurker. it waits for the three.js loader to re
        document.getElementById( "background_wrap").style =  "height: 0px; width: 0px;"
         //"background-image: none;";//turn off splash!
         document.getElementById( "load message").innerHTML = "";//turn off splash!
+                                            document.body.style="background-color:black";
+
 
        animate()
      }
@@ -4376,7 +4378,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                            // let nudgeAdjust = totalAMP;
                             
                            // for (var na = 0; na<3; na+=1)nudgeAdjust=totalAMP**nudgeAdjust
-                                    tolerance+=(totalAMP)**(totalAMP/4.)*totalAMP//*totalAMP**(powerAMP/3).;///4./fractionOfFrame may actually be a fixed 256 bytes
+                                    tolerance+=(totalAMP)**(totalAMP/4.)*totalAMP+tolerance//*totalAMP**(powerAMP/3).;///4./fractionOfFrame may actually be a fixed 256 bytes
                                                                 //             tolerance=((tolerance)/trunc)*trunc
 
                                                    //                 tolerance=((tolerance)/trunc)*trunc
