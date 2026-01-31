@@ -106,6 +106,8 @@ letTouchThrough=false;
                if(letTouchThrough&&letTouchThrough != "inactive") userHasGestured=true;
 
 
+    document.getElementById( "load message").style.textAlign="center"
+            document.getElementById( "load message").innerHTML = "Press to open (when loaded)!";//turn off splash!
 
 
 function route(){
