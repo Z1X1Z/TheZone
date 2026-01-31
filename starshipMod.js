@@ -1235,7 +1235,10 @@ function init() {
   renderer.setPixelRatio( rez);
      onWindowResize();
      adjustThreeJSWindow();
+                     renderer.render( scene, camera );
+
 waitForMic()
+
 }
                                            window.INITIALIZED=false;
 
