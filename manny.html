@@ -3574,8 +3574,7 @@ z.x=sqrt(abs(z.x));
         float finger9 = texture2D(firstHandsFingers,vec2(8.5/10.)).r*4.;
         float finger10 = texture2D(firstHandsFingers,vec2(9.5/10.)).r*4.;
           float angle =atan(loudestFret1.x,loudestFret1.y);
-                h = spinningArms(g,t,angle,1.25//volumeFret1*4./3.
-                ,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
+                h = spinningArms(g,t,angle,1.//volumeFret1*4./3.,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
 extrArms+=h.x;
                  arm+=h.y;
 
@@ -3592,7 +3591,7 @@ extrArms+=h.x;
          finger10 = texture2D(secondHandsFingers,vec2(9.5/10.)).r*4.;
          
            angle =atan(loudestFret2.x,loudestFret2.y);
-               h = spinningArms(g,t,angle,1.25//volumeFret2*4./3.
+               h = spinningArms(g,t,angle,1.//volumeFret2*4./3.
                ,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
 extrArms+=h.x;
                  arm+=h.y;
@@ -3628,7 +3627,7 @@ extrArms+=h.x;
 
 
            angle =atan(loudestFret4.x,loudestFret4.y);
-               h = spinningArms(g,t,angle,1.25//volumeFret4*4./3.
+               h = spinningArms(g,t,angle,1.//volumeFret4*4./3.
                ,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
 extrArms+=h.x;
                  arm+=h.y;
