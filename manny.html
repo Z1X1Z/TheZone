@@ -3574,7 +3574,8 @@ z.x=sqrt(abs(z.x));
         float finger9 = texture2D(firstHandsFingers,vec2(8.5/10.)).r*4.;
         float finger10 = texture2D(firstHandsFingers,vec2(9.5/10.)).r*4.;
           float angle =atan(loudestFret1.x,loudestFret1.y);
-                h = spinningArms(g,t,angle,volumeFret1*4./3.,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
+                h = spinningArms(g,t,angle,1.25//volumeFret1*4./3.
+                ,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
 extrArms+=h.x;
                  arm+=h.y;
 
@@ -3591,7 +3592,8 @@ extrArms+=h.x;
          finger10 = texture2D(secondHandsFingers,vec2(9.5/10.)).r*4.;
          
            angle =atan(loudestFret2.x,loudestFret2.y);
-               h = spinningArms(g,t,angle,volumeFret2*4./3.,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
+               h = spinningArms(g,t,angle,1.25//volumeFret2*4./3.
+               ,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
 extrArms+=h.x;
                  arm+=h.y;
 
@@ -3607,7 +3609,8 @@ extrArms+=h.x;
          finger10 = texture2D(thirdHandsFingers,vec2(9.5/10.)).r*4.;
 
            angle =atan(loudestFret3.x,loudestFret3.y);
-                h = spinningArms(g,t,angle,volumeFret3*4./3.,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
+                h = spinningArms(g,t,angle,1.//volumeFret3*4./3.
+                ,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
 extrArms+=h.x;
                  arm+=h.y;
 
@@ -3625,14 +3628,15 @@ extrArms+=h.x;
 
 
            angle =atan(loudestFret4.x,loudestFret4.y);
-               h = spinningArms(g,t,angle,volumeFret4*4./3.,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
+               h = spinningArms(g,t,angle,1.25//volumeFret4*4./3.
+               ,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
 extrArms+=h.x;
                  arm+=h.y;
 
         
        }
        arm=clamp(arm,0.,1.);
-                    return vec4(b,b/2.5,0.,arm)+vec4(vec3(extrArms,extrArms*.99,extrArms)*.75,0.);
+                    return vec4(b,b/2.5,0.,arm)+vec4(vec3(extrArms,extrArms*.99,extrArms),0.);
                     }
     
                     vec3 musculature(vec2 g, vec2 t){
@@ -7498,9 +7502,8 @@ if(starOnDot==1||starOnDot==2){
                                     if(maxColorOfStarship!=1.) hypnoticHarmonicCircles+=clamp(balloons(p)-shipSUM,0.,1.);
                                     else hypnoticHarmonicCircles+=balloons(p);
                                 }
-                                                                                if(bodyWithArms.w==1.)
-                                                                                {hypnoticHarmonicCircles=bodyWithArms.xyz;
-                                                                                }
+                                                                                if(bodyWithArms.w==1.)//hypnoticHarmonicCircles=bodyWithArms.xyz;
+                                                        
                                                                                 if(hypnoticHarmonicCircles.x!=0.||hypnoticHarmonicCircles.y!=0.||hypnoticHarmonicCircles.z!=0.)
                                                                                 {
                                                                                    HEART=hypnoticHarmonicCircles;
@@ -7762,8 +7765,10 @@ else if (starship.w==254./255.)layeredOUT=starship-oneEye.r/3.;
                                                                                                                                                                                                                                   )/4.+pong.xyz+linearFrequency.xyz+pillar+insideOut.xyz+starship.xyz+bodyWithArms.xyz+mannyFace.x/64.-oneEye.r*2.,1.);
                        if(pixelShipGrey!=0.)layeredOUT=layeredOUT*pixelShipGrey+pixelShipGrey;
                        }
-                                 else if(oneEye.r!=0.){layeredOUT=vec4(-oneEye.x*.25+starship.xyz/1.5+bodyWithArms.xyz*bodyWithArms.w,1.);
-                                if(insideOut.w==.5)layeredOUT+=vec4(insideOut.xyz/3.,0.);
+                                 else if(oneEye.r!=0.)
+                                 {layeredOUT=vec4(-oneEye.x*.25+starship.xyz/1.5+bodyWithArms.xyz*bodyWithArms.w,1.);
+                              
+                                    if(insideOut.w==.5)layeredOUT+=vec4(insideOut.xyz/3.,0.);
                        }
                        else if (pongBall.r!=0.)layeredOUT=vec4(pongBall,1.);
                        else if(mannyFace.w==-.25&&pixelShipGrey==0.&&isBlack!=0.&&isWhite!=1.)
