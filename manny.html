@@ -4535,7 +4535,7 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
                              
 float hyperCoreOUTPUT =hyperCore*log2/log(metaCoreDriveFactor)+loops;
 float omniboost = (6.+petals)/6.-1.;
-if(petals>0.)omniboost=sqrt(omniboost);
+if(petals>=0.)omniboost=sqrt(omniboost);
                                                        hyperCoreOUTPUT-=omniboost;//upcore for higher omniclover counts, multiplied by two!!
 
                                                            float hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if
@@ -4657,7 +4657,7 @@ if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
  
 
- if(petals>0.&&squeezeN>=2.) 
+ if(petals>=0.&&squeezeN>=2.) 
  {
   hyperCoreBoosted+=pow((petalNumber/6.-1.), 2.)*3.-squeezeN*2.;//coefficient on squeezeN varies
 
