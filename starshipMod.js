@@ -1235,8 +1235,13 @@ function init() {
   renderer.setPixelRatio( rez);
      onWindowResize();
      adjustThreeJSWindow();
-                     renderer.render( scene, camera );
+  const b =   async () => {
 
+                     renderer.render( shaderScene, camera );
+
+                     renderer.render( scene, camera );
+}
+b()
 waitForMic()
 
 }
