@@ -47,7 +47,7 @@ zoomOutRatchetThreshold:{value:0.},
 eyeSingle:{value:true},
 constellation:{value:false},
 radialWarp:{value:1.},
-pixelSTARon:{value:false},
+pixelSTAR:{value:1},
 icicle:{value:true},
 linearEQ:{value:true},
 pongOn:{value:true},
@@ -106,6 +106,7 @@ holyeyes:{value:3},
     
     
 dilate:{value:true},
+coreShift:{value:0.},
 
     
         continuumClover:{value: 1    },
@@ -616,6 +617,13 @@ source.connect(analyser);
                             uniforms.spinner.value=!uniforms.spinner.value;
                             if(!uniforms.spinner.value)window.twist=0.;
                         }
+                     else  if((key == "R") && event.altKey&&event.ctrlKey)
+                                        {if(number!="no number")
+                    uniforms.coreShift.value=number;
+                else if( uniforms.coreShift.value!=0.)uniforms.coreShift.value=1.;
+                    else  uniforms.coreShift.value=0.;
+                }
+
 
                                           else  if((key == "M") && event.altKey&&event.ctrlKey)
 
@@ -913,7 +921,7 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
 
     else if (event.altKey&&(key=="≈"||key=="x")){ if(!runningHash||!window.online) uniforms.brelued.value*=-1;}
     else if (event.altKey&&(key=="Ω"||key=="z"))uniforms.witnessFlip.value*=-1.;
-    else if (event.altKey&&(key=="π"||key=="p"))uniforms.pixelSTARon.value=!uniforms.pixelSTARon.value;
+    else if (event.altKey&&(key=="π"||key=="p"))uniforms.pixelSTAR.value=(uniforms.pixelSTAR.value+1)%4;
     else if (event.altKey&&(key=="©"||key=="g"))window.grabStar=!window.grabStar;
     else if (event.altKey&&(key=="ß"||key=="s")){
         if(!soundPermanentlyMuted)
@@ -1285,9 +1293,12 @@ else
     
     else if (key=="y") //uniforms[ "petals" ].value = 3.7082039325-6;//
        {
+                if(number!="no number")uniforms[ "petals" ].value=-number;
+
+                    else
 
  uniforms[ "petals" ].value -= 1.;
-        
+
         window.squirgleData = new Float32Array((uniforms.petals.value+6)*2).fill(1.);
 
 }
@@ -1300,6 +1311,8 @@ else
         
     }
     else if (key=="u") {
+                        if(number!="no number")uniforms[ "petals" ].value=number;
+else
         uniforms[ "petals" ].value += 1.;
         
         window.squirgleData = new Float32Array((uniforms.petals.value+6)*2).fill(1.);

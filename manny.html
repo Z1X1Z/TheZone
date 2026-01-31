@@ -1119,7 +1119,14 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
 ;
 uniforms.baseN.value=document.getElementById('Base Number').value">
                                         <br>
-                                           <label for="coringConstant">Coring Value (>0.):</label>
+                                                <label for="shift">Shift Core Up:[,.R]</label>
+                                    <input type="number" id="shift" name="shift" class="num" onkeyup="
+                number = 'no number'
+;
+uniforms.coreShift.value=document.getElementById('shift').value">
+                                        <br>
+                                        
+                                           <label for="coringConstant">Coring Ratio:</label>
                    <input type="number" id="coringConstant" name="coringConstant" class="num" onkeyup="
                 number = 'no number'
 ;
@@ -1129,6 +1136,7 @@ uniforms.baseN.value=document.getElementById('Base Number').value">
 
 
 ">
+
                        <br>
                                              <input type="checkbox" id="duperCore" name="t"  onclick= "
                                                                     window.dupered=!window.dupered;">
@@ -2137,6 +2145,7 @@ void main(){
     uniform bool twelveGates;
     uniform float twelveGatesMeta;
     uniform bool dilate;
+    uniform float coreShift;
 
     uniform int continuumClover;
     uniform bool cloverSlide;
@@ -3142,17 +3151,17 @@ g*=4.;
 g=g.xy;
 vec2 z=g;
 float coreSlide = 1.;
-float coreShift=1.;
+float coreShifter=1.;
 
 
            if(clvrVariant8){
             coreSlide = abs(coords.x);
-            coreShift = .5;
+            coreShifter= .5;
 g.y*=coreSlide;
 }
 //g.x*=coords.y;
 
-float corebase = log(zoom/coreSlide)/log(.3247)*coreShift+coreShift;
+float corebase = log(zoom/coreSlide)/log(.3247)*coreShifter+coreShifter;
 
            if(clvrVariant9)
            {z.x= -1./(z.x);
@@ -4347,9 +4356,10 @@ if(MetaCored)hyperCore=
    //(-cored*gr*leaf)//this is the core slider this dilates central core across metacore//here could use a hotkey//does it do anything useful?
    twoThirds/squeezeN+log(lfc*squeezeN)*logStabilizationConstant;
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
-
 //cored/1.5+log(length(coordSHIFT))*logStabilizationConstant+uber.z;
 //float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
+hyperCore+=coreShift;
+
 float equilibriator = 1.;
 if(dilate){//should be re-enabled after checks
 if(lfc/zoom>1.5)

@@ -1,4 +1,4 @@
-var shaderScale,distributor,swap,dilate,squeezeN,seventhEYE,budge,polyNomialStretch, coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
+var shaderScale,distributor,swap,dilate,squeezeN,seventhEYE,budge,polyNomialStretch, externalCores,centralCores,coreShift,coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
 ,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta,spinTowardsMe,d,chop,cellularDivision,triogenesis,nGenesis,squareGenesis,constellationCoord,cloverso,feedTheLamb,OrthoEvery;
 function setUniformsToPlainName(){
     OrthoEvery==uniforms.OrthoEvery.value
@@ -62,6 +62,7 @@ function setUniformsToPlainName(){
     shaderScale =uniforms.shaderScale.value;
     centralCores=uniforms.centralCores.value;
     externalCores=uniforms.externalCores.value;
+    coreShift=uniforms.coreShift.value;
     exponentialPetals=uniforms.exponentialPetals.value;
     mandelCloverFactor=uniforms.mandelCloverFactor.value;
     superStable=uniforms.superStable.value;
@@ -283,7 +284,6 @@ var dif = 1.;//3.-(1.-.47805268028830)/3.;
 if(MetaCored)hyperCore=
 cored/1.5/squeezeN+Math.log(lfc*squeezeN)*logStabilizationConstant;
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
-
 //float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
 var equilibriator = 1.
     if(dilate){
@@ -292,6 +292,8 @@ if(lfc/zoom>1.5)
    //this is to allow top level core freeze for original clover
 hyperCore*=equilibriator;
    }
+   hyperCore+=coreShift;
+
 //  hyperCore-=.441/Math.log(.5)/equilibriator;
 //if(cloverSlide&&wheel)hyperCore+=1.75/Math.log(.5);
   // hyperCore-=coreDilation
