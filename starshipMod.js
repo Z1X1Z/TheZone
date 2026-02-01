@@ -1686,7 +1686,7 @@ let isFinished = false;
 
 
         function pongRoutine(x,y){
-             let diag = (uniforms.resolution.value.x**2+uniforms.resolution.value.y**2)**.5*window.movementRate*interpolation/60./4./1.5;
+             let diag = (uniforms.resolution.value.x**2+uniforms.resolution.value.y**2)**.5*window.movementRate*interpolation/60./4.;
              uniforms.pongBallCoords.value.x+=diag*ballVectorX;//-.1*ballVectorX;//
              uniforms.pongBallCoords.value.y+=diag*ballVectorY//=d_y/minimumDimension*50;//0.;//
              let xEdge = widthPX;
