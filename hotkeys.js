@@ -108,6 +108,7 @@ holyeyes:{value:3},
 dilate:{value:true},
 coreShift:{value:0.},
 Redux:{value:false},
+pongIntercept:{value:-1000},
 
     
         continuumClover:{value: 1    },
@@ -162,7 +163,7 @@ constellationCoord: {value: [xINITiaLizer,yINITiaLizer]},//to prevent dividing b
         coordSHIFT: {value: [0.,0.]},
         d: {value:[.0,.0]},
 dotCoord:{value:[0.,0.]},
-pongBallCoords:{value:[0.,window.innerWidth/gr]},
+pongBallCoords:{value:[0.,100]},
 
 duperZoom: {value:1.},
 
