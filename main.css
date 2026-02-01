@@ -78,7 +78,7 @@ canvas {
 
 /*https://stackoverflow.com/questions/3011226/using-background-attachmentfixed-in-safari-on-the-ipad*/
 #background_wrap {
-    z-index: -2;
+    z-index: -1;
     position: fixed;
     top: 19%;
     right:0%;

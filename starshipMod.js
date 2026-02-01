@@ -1488,7 +1488,7 @@ function onWindowResize() {
             }
         
            if(INITIALIZED) adjustThreeJSWindow();
-     
+     resizeMessage()
      //menuBoxes declared in manny.html
      let numberOfColumns=Math.round(widthPX/heightPX*4.)
     for(var box=0.;box<menuBoxes.length;box++)menuBoxes[box].style.columnCount=numberOfColumns;

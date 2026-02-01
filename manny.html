@@ -214,8 +214,13 @@ let maxLetterDepth=-1;
         <div id="load message" style=" background-color:blue;">     </div>
               
         <script>
-    document.getElementById("load message").style.fontSize=String(window.innerHeight**.5*2.)+"px"
 
+function resizeMessage()    {
+                        document.getElementById( "load message").style.zIndex="10"
+
+    document.getElementById("load message").style.fontSize=String(window.innerHeight**.5*5./3.)+"px"
+}
+resizeMessage()
             function loadScript(element, url, offlineURL)
             {
                 // Adding the script tag to the head as suggested before
