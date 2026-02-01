@@ -84,7 +84,7 @@ let loopsRun =0;
 
 var zoomOutEngage=false;
 var pi = Math.PI;
-const fractionOfFrame = 1024;//1024-26=998 seems not to skip much and has nice low ranges
+const fractionOfFrame = 1024*1.5;//hears low ranges better when times 1.5
 const yinData = new Float64Array(fractionOfFrame);
 
 var frequencies,
@@ -1252,7 +1252,6 @@ function bootSHADERS (){
 
                  renderer.render( scene, camera );
                                   renderer.render( feedbackSceneFlip, camera );
-
 
                  renderer.render( finalSceneRerenderedering, camera );
                  
@@ -2779,7 +2778,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
                 //var widt =starshipSize;
 
                 const vop = new THREE.Color();
-                vop.setHSL(((-mustarD[g]+8*uniforms.brelued.value)*uniforms.brelued.value)%24/24., mustarD[g]/lightingScaleStar,mustarD[g]/lightingScaleStar);//297 is around the highest heard note
+                vop.setHSL(((-mustarD[g]+8*uniforms.brelued.value)*uniforms.brelued.value)%24/24., mustarD[g]/lightingScaleStar*2,mustarD[g]/lightingScaleStar);//297 is around the highest heard note
                 
                 const rpio2 =arm+pi/2.;
                 if(RockInTheWater==0||RockInTheWater==1)
@@ -2794,18 +2793,19 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
                     
                     if (RockInTheWater==1)
                     {    let greyTone=(mustarD[g]+72)/lightingScaleStar;//may not be an exact value
-                        let maxVop = Math.max(vop.r,Math.max(vop.g,vop.b))*2.
+                        let maxVop = Math.max(vop.r,Math.max(vop.g,vop.b))
                         let vopr=vop.r/maxVop;
                         let vopg=vop.g/maxVop;
                         let vopb=vop.b/maxVop;
                         //for(var yy=0;yy<3;yy++)
-                        starColorAttribute.setXYZW(starStride+0,vopr, vopg, vopb,1.)
-                        starColorAttribute.setXYZW(starStride+1,greyTone,greyTone,greyTone,1.)
-                        starColorAttribute.setXYZW(starStride+2,vopr, vopg, vopb,1.)
+                        starColorAttribute.setXYZW(starStride+0,vop.r, vop.g, vop.b,1.)
+                        starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,.5)
+                        starColorAttribute.setXYZW(starStride+2,vop.r, vop.g, vop.b,1.)
+                    
                     }
                     else{
                         starColorAttribute.setXYZW(starStride,vop.r,vop.g,vop.b,1.)
-                        starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,.0)
+                        starColorAttribute.setXYZW(starStride+1,vop.r,vop.g,vop.b,-1.5)
                         starColorAttribute.setXYZW(starStride+2,vop.r,vop.g,vop.b,1.)
                     }
                     starPositionAttribute.setXYZ(starStride,(xr-x), (yr-y),  depth)
@@ -4452,7 +4452,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                            // let nudgeAdjust = totalAMP;
                             
                            // for (var na = 0; na<3; na+=1)nudgeAdjust=totalAMP**nudgeAdjust
-                                    tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))+(-leafPermanent+grPermanent+2**.5)/fractionOfFrame/6//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
+                                    tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))+(-leafPermanent+grPermanent+2**.5)/fractionOfFrame/4//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
                                     //alsotolerance**(powerAMP**2*6) ; //*totalAMP**(powerAMP/3).;///4./fractionOfFrame may actually be a fixed 256 bytes
                                                                 //             tolerance=((tolerance)/trunc)*trunc
 
