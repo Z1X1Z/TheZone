@@ -1,4 +1,4 @@
-var shaderScale,distributor,swap,dilate,squeezeN,seventhEYE,budge,polyNomialStretch, externalCores,centralCores,coreShift,coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
+var shaderScale,distributor,swap,dilate,squeezeN,seventhEYE,budge,polyNomialStretch, externalCores,centralCores,coreShift,Redux,coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
 ,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta,spinTowardsMe,d,chop,cellularDivision,triogenesis,nGenesis,squareGenesis,constellationCoord,cloverso,feedTheLamb,OrthoEvery;
 function setUniformsToPlainName(){
     OrthoEvery==uniforms.OrthoEvery.value
@@ -63,6 +63,7 @@ function setUniformsToPlainName(){
     centralCores=uniforms.centralCores.value;
     externalCores=uniforms.externalCores.value;
     coreShift=uniforms.coreShift.value;
+    redux=uniforms.Redux.value;
     exponentialPetals=uniforms.exponentialPetals.value;
     mandelCloverFactor=uniforms.mandelCloverFactor.value;
     superStable=uniforms.superStable.value;
@@ -568,10 +569,16 @@ hyperCoreOUTPUT-=superUpcorer;
               hyperCoreOUTPUT-=dst;
         }
 
+        for(var redo = 0; redo<2; redo++)
+        {
 s=new THREE.Vector2(
 s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
 -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
 );
+
+       if(!Redux)break;
+       else hyperCoreBoosted-=baseN;
+        }
        if(//zoom<.5&&
 counter==0.&&
 polyNomialStretch
@@ -890,6 +897,8 @@ for(var i=0;i<200; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.)))
    && 0.<=hyperCoreBoosted&&MetaCored)
 {
+       if(Redux) hyperCoreBoosted-=(1.-logStabilizationConstant )/2.  ;
+
       if(polyNomialStretch&&budge!=1./3.&&OrthoEvery==0.)   {
        // let s2 = s.clone().multiply(s).multiply(s)
       // s=freed(s.multiply(s2)).divide(s2);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler

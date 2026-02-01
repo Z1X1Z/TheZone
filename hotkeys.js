@@ -107,6 +107,7 @@ holyeyes:{value:3},
     
 dilate:{value:true},
 coreShift:{value:0.},
+Redux:{value:false},
 
     
         continuumClover:{value: 1    },
@@ -649,7 +650,7 @@ source.connect(analyser);
                                           else  if((key == "T") && event.altKey&&event.ctrlKey)uniforms.Black.value=!uniforms.Black.value;
                                           else  if((key == "N") && event.altKey&&event.ctrlKey)uniforms.swap.value=(uniforms.swap.value+1)%4;
 
-                                          else  if((key == "R") && event.altKey&&event.ctrlKey)uniforms.armStar.value=!uniforms.armStar.value;
+                                          else  if((key == "W") && event.altKey&&event.ctrlKey)uniforms.armStar.value=!uniforms.armStar.value;
                                           else  if(key == "J" && event.altKey&&event.ctrlKey)uniforms.sevenSquared.value=!uniforms.sevenSquared.value;
    else  if(key == "D" && event.altKey&&event.ctrlKey)uniforms.distributor.value = !uniforms.distributor.value;//hotkey seems to already be in use for bible chapter
                                           else  if(key == "G" && event.altKey&&event.ctrlKey)uniforms.gigaLeap.value=!uniforms.gigaLeap.value;
@@ -672,6 +673,12 @@ source.connect(analyser);
                 }
                                                       else  if(key == "P" && event.altKey&&event.ctrlKey)uniforms.polyNomialStretch.value=!uniforms.polyNomialStretch.value;
                                           else  if(key == "O" && event.altKey&&event.ctrlKey)uniforms.seventhEYE.value=(uniforms.seventhEYE.value-1.+4.)%4;
+                                          else  if(key == "L" && event.altKey&&event.ctrlKey)
+                                            {uniforms.Redux.value=!uniforms.Redux.value;
+                                                if(uniforms.Redux.value)uniforms.squeezeN.value=2.;
+                                                else uniforms.squeezeN.value=1.;
+
+                                            }
                                           else  if(key == "K" && event.altKey&&event.ctrlKey);//enable mic processing in loadMicrophone.js
 
                 else if(key == "J" && event.ctrlKey)
@@ -1312,7 +1319,7 @@ else
     }
     else if (key=="u") {
                         if(number!="no number")uniforms[ "petals" ].value=number;
-else
+else    
         uniforms[ "petals" ].value += 1.;
         
         window.squirgleData = new Float32Array((uniforms.petals.value+6)*2).fill(1.);
