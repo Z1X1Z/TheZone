@@ -1652,7 +1652,7 @@ function zoomRoutine(){
 function zoomPong(BallCoordsx,BallCoordsy){//this could be done with algebraic intercepts too, but that's harder
     let VectorY=ballVectorY
 let isFinished = false;
-     let diag = 1.;//higher values reduce precision of trace
+     let diag = innerHeight/1000;//higher values reduce precision of trace
          while(!isFinished)
 {
              BallCoordsx+=diag*ballVectorX;//-.1*ballVectorX;//
