@@ -84,8 +84,8 @@ let loopsRun =0;
 
 var zoomOutEngage=false;
 var pi = Math.PI;
-const fractionOfFrame = 1024*1.5;//hears low ranges better when times 1.5
-const yinData = new Float64Array(fractionOfFrame);
+const fractionOfFrame = 1024*-leafPermanent;//hears low ranges better when times >1
+const yinData = new Float32Array(fractionOfFrame);
 
 var frequencies,
                             
