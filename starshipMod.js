@@ -982,7 +982,11 @@ uniforms.resolution.value = new THREE.Vector2(window.innerWidth,window.innerHeig
 uniforms.d.value = new THREE.Vector2(0.,1./10000.);
 uniforms.dotCoord.value = new THREE.Vector2(0.,0.);
   
-   uniforms.pongBallCoords.value = new THREE.Vector2(0.,window.innerHeight/gr);
+
+   uniforms.pongBallCoords.value = new THREE.Vector2(0.,Date.now()%innerHeight);
+   ballVectorY=(Date.now()%2-.5)*2
+    zoomPong(uniforms.pongBallCoords.value.x,uniforms.pongBallCoords.value.y)
+
     uniforms.loudestFret1.value=new THREE.Vector2( 0,0);
                             uniforms.loudestFret2.value=new THREE.Vector2(0,0)
                             uniforms.loudestFret3.value=new THREE.Vector2(0,0)
@@ -1642,8 +1646,47 @@ function zoomRoutine(){
              }
              
 }
+
+
+
+function zoomPong(BallCoordsx,BallCoordsy){//this could be done with algebraic intercepts too, but that's harder
+    let VectorY=ballVectorY
+let isFinished = false;
+     let diag = 1.;//higher values reduce precision of trace
+         while(!isFinished)
+{
+             BallCoordsx+=diag*ballVectorX;//-.1*ballVectorX;//
+             BallCoordsy+=diag*VectorY//=d_y/minimumDimension*50;//0.;/
+
+             if(BallCoordsx>innerWidth) {
+             isFinished=true;
+                }
+            else if (BallCoordsx<0){
+               isFinished=true;
+            }
+                                    
+           if(BallCoordsy<0){
+                    VectorY*=-1.;
+                    BallCoords=0
+                    
+                }
+            else if(BallCoordsy>innerHeight){
+                    VectorY*=-1.;
+                   BallCoordsy=innerHeight
+
+                }
+
+            }
+                                        uniforms.pongIntercept.value = BallCoordsy
+
+        }
+
+
+
+
+
         function pongRoutine(x,y){
-             let diag = (uniforms.resolution.value.x**2+uniforms.resolution.value.y**2)**.5*window.movementRate*interpolation/60./4.;
+             let diag = (uniforms.resolution.value.x**2+uniforms.resolution.value.y**2)**.5*window.movementRate*interpolation/60./4./1.5;
              uniforms.pongBallCoords.value.x+=diag*ballVectorX;//-.1*ballVectorX;//
              uniforms.pongBallCoords.value.y+=diag*ballVectorY//=d_y/minimumDimension*50;//0.;//
              let xEdge = widthPX;
@@ -1657,8 +1700,12 @@ function zoomRoutine(){
                         uniforms.pongBallCoords.value.x=xEdge;
                         ballVectorX*=-1
                         ballVectorY=Math.sign(ballVectorY)*-paddleStrikePosition*12.;
+                 
                     }
                     else uniforms.pongBallCoords.value.x=0.
+                     
+                        zoomPong(uniforms.pongBallCoords.value.x,uniforms.pongBallCoords.value.y)
+
                 }
             else if (uniforms.pongBallCoords.value.x<0){
                 if(paddleHitBall)
@@ -1666,18 +1713,25 @@ function zoomRoutine(){
                     uniforms.pongBallCoords.value.x=0;
                     ballVectorX*=-1
                     ballVectorY=Math.sign(ballVectorY)*-paddleStrikePosition*12.;
+                 
+
                 }                else uniforms.pongBallCoords.value.x=xEdge
-                    
+                
+                                     zoomPong(uniforms.pongBallCoords.value.x,uniforms.pongBallCoords.value.y)
+
             }
                                     
            if(uniforms.pongBallCoords.value.y<0){
                     ballVectorY*=-1.;
                     uniforms.pongBallCoords.value.y=0
+                    
                 }
             else if(uniforms.pongBallCoords.value.y>yEdge){
                     ballVectorY*=-1.;
                     uniforms.pongBallCoords.value.y=yEdge
+
                 }
+
                                     
          }
                        
@@ -1913,6 +1967,7 @@ function runOSMD (){
                    {
                        uniforms.d.value.x = 0.;
                        uniforms.d.value.y = 0.;
+
                        uniforms.pongBallCoords.value.x=-window.innerWidth/2.;
                        uniforms.pongBallCoords.value.y=window.innerHeight/gr;
 
