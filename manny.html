@@ -2055,6 +2055,7 @@ void main(){
     uniform int nGenesis;
     uniform bool eyeSingle;
     uniform int unroll;
+    uniform float pongIntercept;
 
     uniform float coreDilation;
     uniform bool gates;
@@ -2324,12 +2325,13 @@ vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
                     
                                                  const float ballPortion = 1./12.;
                                                const float paddleWidth = 6.*ballPortion;
+                                               const float borderPong = .04;
 vec3 paddles(vec2 vUvCentered){
 
        float shade = 0.;
                    vec3 ret = vec3(0.);
 
-       if(abs(vUvCentered.x)>.46)
+       if(abs(vUvCentered.x)>.5-borderPong)
        {
                          float incrementSize = 1./12.;
                          float staff =mod(vUv.y*12.+.5+12.,1.)-.5;
@@ -2342,7 +2344,11 @@ vec3 paddles(vec2 vUvCentered){
            else if(mod(vUv.y-mod(noteFrozen/12.*flipStar+twistStar*divideByMultiplyingPi2,1.)+1.+1./12.,1.)<=2./12.)shade= sign(-vUvCentered.x)*170.*flipStar*brelued;
            
            }
-       if(ret.x==0.&&ret.y==0.&&ret.z==0.)ret+=shade;
+       if(ret.x==0.&&ret.y==0.&&ret.z==0.){
+        ret+=shade;
+        if(abs(pongIntercept-vUv.y*resolution.y)<10.&&abs(vUvCentered.x)>.5-borderPong*1.75) ret = vec3(sign(vUvCentered.x)*4.);
+       }
+
        return ret;
    }
                    
