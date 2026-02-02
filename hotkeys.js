@@ -917,7 +917,7 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
 
 
     else if (event.altKey&&(key=="∑"||key=="w"))window.DAW=!window.DAW;
-    else if (event.altKey&&(key=="´"||key=="e"))(window.highORlow=window.highORlow+1)%3;
+    else if (event.altKey&&(key=="´"||key=="e"))(window.highORlow=window.highORlow+1)%4;
 
     else if (event.altKey&&(key=="¥"||key=="y"))
     {

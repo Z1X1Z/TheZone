@@ -84,8 +84,6 @@ let loopsRun =0;
 
 var zoomOutEngage=false;
 var pi = Math.PI;
-const fractionOfFrame = -3.+1024*(-leafPermanent*grPermanent*(2**.5)-2)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
-const yinData = new Float64Array(fractionOfFrame);
 var frequencies,
                             
                           
@@ -4185,20 +4183,25 @@ if(uniforms.coords.value.y<-.5)
                                                      }
                                                        
                                                        
+       const frameRation = -3.+1024*(-leafPermanent*grPermanent*(2**.5)-2)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
+                                                
                                                        
-                                                       
-                                                       
+         var fractionOfFrame =frameRation                                              
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
 function calculatePitch ()
 {
+
+ fractionOfFrame = frameRation;
+ if(highORlow!=0)fractionOfFrame=1024;
+const yinData = new Float64Array(fractionOfFrame);
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance=0;//(1024-26)/10000
 
 
 
 
-                                                         if(window.highORlow==0){
+                                                         if(window.highORlow==0||window.highORlow==3){
                                                              if(totalAMP>0&&isFinite(totalAMP)
                                                                 &&totalAMP<=.7// when I get loud it seems to freeze
                                                              )
@@ -4206,13 +4209,13 @@ let tolerance=0;//(1024-26)/10000
                                                                  let proportion= fractionOfFrame/bufferSize;
                                                                  let tAScaled=0.;//totalAMPmodified*proportion;
                                                                  let totalAMPmodified =totalAMP;
-                                                                 let preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2
+                                let trunc=  Math.log(totalAMPmodified)*-leafPermanent/2.
 
 //totalAMPmodified=(totalAMPmodified/((-leafPermanent)/))///preTrunc)*preTrunc));
-totalAMPmodified = (((totalAMPmodified*(-(leafPermanent/preTrunc)*preTrunc))))
+totalAMPmodified = (((totalAMPmodified*(-(leafPermanent/trunc)*trunc))))
  //preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2
 //totalAMPmodified=totalAMPmodified**1.5;
-totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
+totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
 //totalAMPmodified/=2.;
 
                                                                  
@@ -4326,11 +4329,10 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                                  }  
                                 //  tolerance+=plusOrMinusPowerSeriesBUFFER
 
-                                let trunc=  Math.log(totalAMPmodified)*-leafPermanent/2.
-                                tolerance=(tolerance/trunc)*trunc
+                             //   tolerance=(tolerance/trunc)*trunc
 
                                                         tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMPmodified+ tAScaledPermanent+tolerance-plusOrMinusPowerSeriesNorm));
-                                                        
+
                                                         tolerance/=(-leafPermanent/trunc)*trunc;//makes over and under stable and greatly enhances accuracy
                                                            //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMPmodified+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
                                                            tolerance=(tolerance/trunc)*trunc
@@ -4377,6 +4379,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                tolerance=((tolerance)/trunc)*trunc
                       //         tolerance=((tolerance)/trunc)*trunc
 //
+       
                                                        let plusOrMinus = 1;
                               let term = 1;
                               let sum =((totalAMPmodified+tolerance+tAScaledPermanent))//(tolerance+totalAMPmodified+tAScaledPermanent)
@@ -4394,6 +4397,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                     if(term==0)break
                                 }
                                     */
+                                                                                  if(window.highORlow==0)  {    
 
     let loops = 0;
                                                               let phrase =0;//((tolerance+totalAMPmodified+tAScaledPermanent))**2+((tolerance+totalAMPmodified+tAScaledPermanent))**4;
@@ -4427,13 +4431,13 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                      // phrase=((phrase)/trunc)*trunc
 
 
-                                                                                     tolerance=(tolerance)**((Math.E)**((phrase)))
+                                                                   tolerance=(tolerance)**((Math.E)**((phrase)))
                                          tolerance=((tolerance)/trunc)*trunc
+                                         
                                          //console.log(adjConstant)
                                          let powerAMP = totalAMP+1.;
-                                         
-                               tolerance*=((totalAMP)**(powerAMP/3.)+(totalAMP)**(powerAMP/2.)+totalAMP**powerAMP);
-
+                                          tolerance*=((totalAMP)**(powerAMP/3.)+(totalAMP)**(powerAMP/2.)+totalAMP**powerAMP);
+                          
                             //           tolerance=((tolerance)/trunc)*trunc
 
                            // let nudgeAdjust = totalAMP;
@@ -4450,7 +4454,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                                                          //                                                  tolerance=((tolerance)/trunc)*trunc
 
                                                          //   console.log(ll)
-
+                        }
                                                             }
                                                           else tolerance=0.;
                                                          }

@@ -721,6 +721,8 @@ radialWarp=b;
            
        <input type="radio" id="Perceptive Tolerance" name="tolerance" onclick="window.highORlow =0;">
        <label for="Perceptive Tolerance">Dynamic Perceptive?!</label><br>
+       <input type="radio" id="Resistant Tolerance" name="tolerance" onclick="window.highORlow =3;">
+       <label for="Resistant Tolerance">Dynamic Resistant?!</label><br>
            
            
                <a id="Faster" name="t"  onclick= "
@@ -7614,7 +7616,7 @@ if(oneEye.r!=0.)zoomer=-oneEye;
 
    if(oneEye.r!=0.&&pixelShipGrey!=0.)oneEye=vec3(-pixelShipGrey*2.);
   // if((starship.r!=0.||starship.g!=0.||starship.b!=0.)&&isGreyISH!=0.&&pixelShipGrey!=0.)starship=vec4(vec3(pixelShipGrey),1.);
-  //  if(bodyWithArms.z!=0.&&pixelShipGrey!=0.)bodyWithArms=vec4(vec3(pixelShipGrey),bodyWithArms.z);
+    if(bodyWithArms.z!=0.&&pixelShipGrey!=0.)bodyWithArms=vec4(vec3(pixelShipGrey),bodyWithArms.z);
                                  heartWarmed-=(pillar.x+pillar.y+pillar.z)*100.;
             vec3 seeThrough = pixelStarship.xyz+(1.-pixelStarship.w*pixelStarship.w);
              
