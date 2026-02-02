@@ -113,8 +113,8 @@ letTouchThrough=false;
 function route(){
     if(!micOn&&!window.isTouch&&!userHasGestured){
         startMic();
+
     }
-          document.getElementById( "load message").innerHTML = "";
 
     userHasGestured=true;
 
@@ -122,7 +122,7 @@ function route(){
 
 if(window.isTouch){
     
-        document.getElementById( "load message").innerHTML = "";
+        document.getElementById( "load message").innerHTML = "Will open when loaded (:";
         console.log("Touch only mode!")
         window.touchOnlyMode=true;
         window.touchMode = true;}
