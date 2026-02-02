@@ -1,7 +1,8 @@
-var shaderScale,distributor,swap,dilate,squeezeN,seventhEYE,budge,polyNomialStretch, externalCores,centralCores,coreShift,Redux,coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
+var shaderScale,distributor,swap,dilate,squeezeN,seventhEYE,budge,polyNomialStretch, gigaLeap,externalCores,centralCores,coreShift,Redux,coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
 ,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta,spinTowardsMe,d,chop,cellularDivision,triogenesis,nGenesis,squareGenesis,constellationCoord,cloverso,feedTheLamb,OrthoEvery;
 function setUniformsToPlainName(){
-    OrthoEvery==uniforms.OrthoEvery.value
+    OrthoEvery=uniforms.OrthoEvery.value
+    gigaLeap=uniforms.gigaLeap.value
     squeezeN=uniforms.squeezeN.value;
     seventhEYE=uniforms.seventhEYE.value;
     budge=uniforms.budge.value;
@@ -569,15 +570,44 @@ hyperCoreOUTPUT-=superUpcorer;
               hyperCoreOUTPUT-=dst;
         }
 
-        for(var redo = 0; redo<2; redo++)
-        {
+
+          if(//dstnce> twoThirds &&
+          gigaLeap)
+                    {
+                        
+   var toEDGE =Math.abs(((Math.atan(s.y,s.x)/Math.PI+2.)*3.-.5)%1-.5);
+   toEDGE*=2.;
+                        var borderGap =9. ;
+                        var border = (borderGap*borderGap/2.-borderGap*3.+1.5)/Math.pow(2.,borderGap);
+                        
+                        var outerCloudShift = (1.+
+                        border
+                        /((2.-toEDGE    
+                        )));
+                       // if(length(s)>pow(outerCloudShift,3.))
+                        {
+                      //    s*=0.;
+                        s*=outerCloudShift    ;  
+                        dstnce*=outerCloudShift;
+                        }
+                        //hyperCoreBoosted*=outerCloudShift;       
+                    }
+                    
+
 s=new THREE.Vector2(
 s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
 -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
 );
 
-       if(!Redux)break;
-       else hyperCoreBoosted-=baseN;
+       if(Redux)
+       {
+
+s=new THREE.Vector2(
+s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
+-s.y*s.y*s.y+ 3.*s.x*s.x*s.y
+);
+
+        hyperCoreBoosted-=baseN;
         }
        if(//zoom<.5&&
 counter==0.&&
