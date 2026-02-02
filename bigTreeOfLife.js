@@ -577,7 +577,7 @@ hyperCoreOUTPUT-=superUpcorer;
                         
    var toEDGE =Math.abs(((Math.atan(s.y,s.x)/Math.PI+2.)*3.-.5)%1-.5);
    toEDGE*=2.;
-                        var borderGap =9. ;
+                        var borderGap =7. ;
                         var border = (borderGap*borderGap/2.-borderGap*3.+1.5)/Math.pow(2.,borderGap);
                         
                         var outerCloudShift = (1.+
