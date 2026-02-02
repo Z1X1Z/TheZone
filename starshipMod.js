@@ -2991,7 +2991,7 @@ else{//start drawing of just twenty four frets here
                     let centerDisplacement = .5;//4./7.;//9./14.;
                                                          
                                                          var TransparencyStar = 1.;//.5?
-                                                         var TransparencyStar2 = .75;
+                                                         var TransparencyStar2 = .77;
 
     let inset = 1.;
 let depBuffer = (-starShipDepthInSet+(1.-starShipDepthInSet))/inset-1.+1./inset;
