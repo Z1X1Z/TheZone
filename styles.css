@@ -1,6 +1,11 @@
+@font-face {
+    font-family: 'MOONGLADE';
+    src: url('MoongladeDemoBold-jOzM.ttf') format('woff2');
+}
+
 body
 {
-    font-family: 'Courier New', monospace;
+    font-family: 'MOONGLADE', monospace;
     font-size: 1.75em;
     color:  #3baaff;
     background-color:black;
