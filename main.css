@@ -3,7 +3,7 @@ body, head {
     margin: 0;
     background-color: #000;
     color: #fff;
-    font-family: Garamond;
+    font-family: Georgia, 'Times New Roman', Times, serif
     font-size: 17px;
     width: 100%;
     line-height: 1.;
@@ -34,7 +34,6 @@ body, head {
     user-select: none;
     touch-action: none;
 
-    z-index: 3; 
     width: 100%;
 
 
