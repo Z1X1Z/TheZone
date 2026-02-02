@@ -3147,7 +3147,7 @@ let yr = lengt*-Math.cos(arm);
                                                                        
                                                starStride+=6;
 
-                          let greyBoost = (1.+incrementation/2.)*1.1;
+                          let greyBoost = (1.+incrementation/2.)*((Math.log(3)-1)/2.+1);
                   x *= greyBoost;
                   y *= greyBoost;
 
@@ -4440,7 +4440,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                             
                            // for (var na = 0; na<3; na+=1)nudgeAdjust=totalAMP**nudgeAdjust
                                     tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))+(-leafPermanent+grPermanent+2**.5)/fractionOfFrame/4-window.nudge/Number.MAX_VALUE//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
-                       console.log(tolerance)
+                       //console.log(7.5*Number.MIN_VALUE)
                                     //alsotolerance**(powerAMP**2*6) ; //*totalAMP**(powerAMP/3).;///4./fractionOfFrame may actually be a fixed 256 bytes
                                                                 //             tolerance=((tolerance)/trunc)*trunc
 
