@@ -86,7 +86,7 @@ var zoomOutEngage=false;
 var pi = Math.PI;
 const fractionOfFrame = -3.+1024*(-leafPermanent*grPermanent*(2**.5)-2)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
 const yinData = new Float64Array(fractionOfFrame);
-
+console.log(fractionOfFrame)
 var frequencies,
                             
                           
@@ -2519,7 +2519,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
     if(true//||!DAW
 )setDynamicSampler2ds();
 
-   if(spirographMODE!=0)makeSpirograph();
+   if(spirographMODE!=0&&pitch!=lastPitch)makeSpirograph();
 
 
     if (computeFPS&&fpsSET>1)
@@ -4440,7 +4440,7 @@ totalAMPmodified = (((totalAMPmodified)/preTrunc)*preTrunc)
                            // let nudgeAdjust = totalAMP;
                             
                            // for (var na = 0; na<3; na+=1)nudgeAdjust=totalAMP**nudgeAdjust
-                                    tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))+(-leafPermanent+grPermanent+2**.5)/fractionOfFrame/4//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
+                                    tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))+(-leafPermanent+grPermanent+2**.5)/fractionOfFrame/4-7.5/Number.MAX_VALUE//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
                                     //alsotolerance**(powerAMP**2*6) ; //*totalAMP**(powerAMP/3).;///4./fractionOfFrame may actually be a fixed 256 bytes
                                                                 //             tolerance=((tolerance)/trunc)*trunc
 

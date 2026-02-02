@@ -163,7 +163,7 @@ constellationCoord: {value: [xINITiaLizer,yINITiaLizer]},//to prevent dividing b
         coordSHIFT: {value: [0.,0.]},
         d: {value:[.0,.0]},
 dotCoord:{value:[0.,0.]},
-pongBallCoords:{value:[0.,100]},
+pongBallCoords:{value:[0.,0]},
 
 duperZoom: {value:1.},
 
@@ -258,6 +258,8 @@ const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 
 
 function resetAll(){
+        window.nudge=7.5;
+
     window.unitTest=false;
 window.spinnerTwist = 0.;
 window.noteWhenDirectionSet = 0.;
@@ -624,6 +626,14 @@ source.connect(analyser);
                     uniforms.coreShift.value=number;
                 else if( uniforms.coreShift.value!=0.)uniforms.coreShift.value=1.;
                     else  uniforms.coreShift.value=0.;
+                }
+
+                     else  if((key == "V") && event.altKey&&event.ctrlKey)
+                                        {if(number!="no number")
+                    window.nudge=number;
+                    else window.nudge=Date.now()%24+(Date.now()%2)/2
+                                        console.log(window.nudge)
+
                 }
 
 
