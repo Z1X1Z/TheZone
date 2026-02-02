@@ -7539,7 +7539,7 @@ if(starOnDot==1||starOnDot==2){
                                                                  vec3 pong = vec3(0.);
                                                                  vec2 vUvCentered = (vUv.yx-.5);
 vec3 pongBall = vec3(0.);
-                     if(pongOn){//may be useful to seperate pong from pixelStar
+                     if(pongOn&&volume!=1.){//may be useful to seperate pong from pixelStar
                           pong += paddles(vUvCentered.yx);
                           pongBall += ball(p);
                           }
