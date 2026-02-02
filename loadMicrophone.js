@@ -43,8 +43,8 @@ let micProcessing3 = true;//this was engaged to help cut down on noise, but no l
           }
        
 function shutdown(){
-   // source.disconnect();
-   // audioX.close();
+    source.disconnect();
+    audioX.close();
 }
 let analyser={};
 
