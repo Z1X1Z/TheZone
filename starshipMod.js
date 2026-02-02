@@ -3002,7 +3002,7 @@ else{//start drawing of just twenty four frets here
 
                     let centerDisplacement = .5;//4./7.;//9./14.;
                                                          
-                                                         var TransparencyStar = .75;//.5?
+                                                         var TransparencyStar = 1.;//.5?
                                                          var TransparencyStar2 = 1.;
 
     let inset = 1.;
