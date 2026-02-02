@@ -632,7 +632,6 @@ source.connect(analyser);
                                         {if(number!="no number")
                     window.nudge=number;
                     else window.nudge=Date.now()%24+(Date.now()%2)/2
-                                        console.log(window.nudge)
 
                 }
 
