@@ -623,7 +623,7 @@ source.connect(analyser);
                         }
                      else  if((key == "R") && event.altKey&&event.ctrlKey)
                                         {if(number!="no number")
-                    uniforms.coreShift.value=number;
+                    uniforms.coreShift.value=-number;
                 else if( uniforms.coreShift.value!=0.)uniforms.coreShift.value=1.;
                     else  uniforms.coreShift.value=0.;
                 }
