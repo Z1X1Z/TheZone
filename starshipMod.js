@@ -41,8 +41,8 @@ function waitForMic(){//this is a lurker. it waits for the three.js loader to re
         //"background-image: none;";//turn off splash!
         document.getElementById( "load message").innerHTML = "";//turn off splash!
                                             document.body.style="background-color:black";
-
-renderer.setAnimationLoop(animate)
+started = true;
+//renderer.setAnimationLoop(animate)
       // animate()
      }
     else setTimeout(waitForMic,100);
@@ -1239,26 +1239,15 @@ function init() {
      onWindowResize();
      adjustThreeJSWindow();
          container.appendChild( renderer.domElement );//engage THREEJS visual out
-         
-renderer.setAnimationLoop(bootSHADERS);
-renderer.setAnimationLoop(null);
+
+renderer.setAnimationLoop(animate);
 
 
  
 waitForMic()
 
 }
-function bootSHADERS (){
-
-                 renderer.render( scene, camera );
-                                  renderer.render( feedbackSceneFlip, camera );
-
-                 renderer.render( finalSceneRerenderedering, camera );
-                 
-                     renderer.render( shaderScene, camera );
-renderer.clearColor()
-
-}
+var started = false;
                                            window.INITIALIZED=false;
 
 function loadFrequencyTextures(){
@@ -4095,8 +4084,11 @@ for(var n = 0; n<targets.length;n++){
                                                        
                                                        
                      if (!iOS||(iOS&&dupered)) boot();//generate clover in 64 bit, duper Core, there is a bug after maybe half a day on iOS in bigTree.js (maybe also on safari Mac)
-
-                                                       waitForOpenWindowToAnimate();
+if(!started)
+    {
+        document.getElementById( "load message").innerHTML = "Loaded, press to open!";//turn off splash!
+        renderer.clearColor()
+    }
                                                        
                             //  renderer.forceContextLoss ()
                             //  renderer.forceContextRestore ( )
@@ -4116,11 +4108,7 @@ for(var n = 0; n<targets.length;n++){
                                                                  }
                                                      }
                                                                                  )
-                                                       function waitForOpenWindowToAnimate(){
-                                                         if(document.visibilityState=="hidden") setTimeout(waitForOpenWindowToAnimate,100);
-                                                      //   else animateLoopId= animate( );
-                                                         
-                                                     }
+                                                     
                                                        
                                                        
                                                        let wakeLock;
