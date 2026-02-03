@@ -258,7 +258,7 @@ const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 
 
 function resetAll(){
-        window.nudge=7.557;
+        window.nudge=7.5;
 
     window.unitTest=false;
 window.spinnerTwist = 0.;
