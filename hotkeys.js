@@ -354,8 +354,10 @@ for(var nameOfUniform in uniformsInitial)
             window.starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;
             window.starCount = Math.ceil(starArms*60*secondsToEdge);
 
-           // if(!window.touchOnlyMode||location.hash.includes("t"))
+            if(!window.touchOnlyMode)
                                          window.touchMode=false;
+else                                          window.touchMode=true;
+
             window.volumeSpeed = false;//this could be true for creativity, but for beginners and consistency it may be false.
              window.totalAMP=1;
                                          window.front = 1;
@@ -1402,9 +1404,9 @@ else{
     else if (key==" ") 
         {
             settingsSet = false;
-                        checkForTouchHash();
 
             resetAll();
+
         }
     else if (key=="~")
     {
