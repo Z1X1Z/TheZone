@@ -1402,6 +1402,8 @@ else{
     else if (key==" ") 
         {
             settingsSet = false;
+                        checkForTouchHash();
+
             resetAll();
         }
     else if (key=="~")

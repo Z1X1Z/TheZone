@@ -78,7 +78,9 @@ window.addEventListener("beforeunload", shutdown, false);
         micOn = true;
       });
     }
-    let letTouchThrough = "inactive";
+        let letTouchThrough = "inactive";
+
+    function checkForTouchHash(){
     for(let b=0;b<location.hash.length;b++){
   if(location.hash[b]=="t")
   {
@@ -91,7 +93,7 @@ letTouchThrough=false;
 
         
         }
-
+      }
         }
               else    if(location.hash[b-1]!=".")
   {window.isTouch=true;
@@ -102,6 +104,7 @@ letTouchThrough=false;
             }
 
     }
+    checkForTouchHash();
     
                if(letTouchThrough&&letTouchThrough != "inactive") userHasGestured=true;
 
