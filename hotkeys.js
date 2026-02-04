@@ -354,10 +354,8 @@ for(var nameOfUniform in uniformsInitial)
             window.starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/trailSecondsLong;
             window.starCount = Math.ceil(starArms*60*secondsToEdge);
 
-            if(!window.touchOnlyMode)
+           // if(!window.touchOnlyMode||location.hash.includes("t"))
                                          window.touchMode=false;
-else                                          window.touchMode=true;
-
             window.volumeSpeed = false;//this could be true for creativity, but for beginners and consistency it may be false.
              window.totalAMP=1;
                                          window.front = 1;
@@ -451,7 +449,8 @@ else                                          window.touchMode=true;
                                          runningHash = true;
                                          window.number = "no number";
 
-                                       if(window.settingsSet)  readHash()
+                                     //  if(window.settingsSet) 
+                                         readHash()
                                          
                                          let n = document.getElementsByName('t');
                                           for(var p = 0; p<n.length;p++)n[p].checked  = false;
@@ -465,7 +464,7 @@ resetAll();
 let osmdStaffsVisible = 0;
 window.number = "no number";
                                          
-                               let          hashHasRun = false;
+                               var          hashHasRun = false;
 function readHash(){
         let hashindex = 0;
         while (hashindex<location.hash.length)
@@ -510,7 +509,7 @@ function readHash(){
         runningHash=false;
                 hashHasRun = true;
 }
-readHash();
+//readHash();
 function hk() {
   var x = document.createElement("INPUT");
   x.setAttribute("type", "text");
@@ -617,7 +616,11 @@ source.connect(analyser);
                      }
                     }
                                          else  if((key == "H") && event.altKey&&event.ctrlKey)uniforms.handOfGod.value=!uniforms.handOfGod.value;
-
+                else if((key == "Z") && event.altKey&&event.ctrlKey)
+                {
+                    uniforms.constellation.value=!uniforms.constellation.value;
+                    
+                }
                      else  if((key == "C") && event.altKey&&event.ctrlKey)
                         {
                             uniforms.spinner.value=!uniforms.spinner.value;
@@ -718,11 +721,7 @@ source.connect(analyser);
                     uniforms.cards.value=!uniforms.cards.value;
                 else if((key == "y"||key=="¥") && event.altKey&&event.ctrlKey)
                     uniforms.unroll.value=(1+uniforms.unroll.value)%2;
-                else if((key == "c"||key=="ç") && event.altKey&&event.ctrlKey)
-                {
-                    uniforms.constellation.value=!uniforms.constellation.value;
-                    
-                }
+
                else if((key == "l"||key=="¬") && event.altKey&&event.ctrlKey)
                 {
                     uniforms.squirgle.value=(uniforms.squirgle.value+=1)%3;
@@ -1251,6 +1250,8 @@ else
         window.touchMode = !window.touchMode;
         if (window.touchMode)window.shouldShowStar =false;
         else window.shouldShowStar = true;
+               
+
     }
     else if (key=="T") uniforms.Spoker.value=!uniforms.Spoker.value;
     else if (key=="f") uniforms[ "fourCreats" ].value *= -1;
@@ -1404,9 +1405,9 @@ else{
     else if (key==" ") 
         {
             settingsSet = false;
+             runningHash = true;
 
             resetAll();
-
         }
     else if (key=="~")
     {
@@ -1480,7 +1481,7 @@ else
 
       if(uniforms.free.value) window.zoomCageSize=100000000000000000.;
       else window.zoomCageSize=1.5;
-        
+      
         number="no number";
     }
 
