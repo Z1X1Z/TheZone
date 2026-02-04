@@ -2447,10 +2447,10 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                       //   console.log(uniforms.coreDilation.value)
                                          else             uniforms.coreDilation.value=0.;
                                     
-                                    
+                                                                            lastPitch = pitch;
+
                                     if(totalAMP>.000001)
                                     {
-                                        lastPitch = pitch;
                                         // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
                                         pitch = audioX.sampleRate/calculatePitch();
                                         const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
