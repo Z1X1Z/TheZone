@@ -115,6 +115,7 @@ function route(){
         startMic();
 
     }
+            document.getElementById( "load message").innerHTML = "";//turn off splash!
 
     userHasGestured=true;
 
