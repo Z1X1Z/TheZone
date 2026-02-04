@@ -26,12 +26,16 @@ function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js lo
               }
             init();
      }
-    else setTimeout(stallTillTHREELoaded,100);
+    else setTimeout(stallTillTHREELoaded,10);
 
     }//setTimeout waits for 10ms then runs stallTillTHREELoaded()
 stallTillTHREELoaded();
 
 
+var LOADEDa = false;
+var LOADEDb = false;
+var LOADEDc = false;
+var LOADEDd = false;
 
 function waitForMic(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
     if(document.visibilityState=="visible"
@@ -39,15 +43,17 @@ function waitForMic(){//this is a lurker. it waits for the three.js loader to re
 
        document.getElementById( "background_wrap").style =  "height: 0px; width: 0px;"
         //"background-image: none;";//turn off splash!
-        document.getElementById( "load message").innerHTML = "";//turn off splash!
                                             document.body.style="background-color:black";
 //if(started)
-    renderer.setAnimationLoop(animate)
+let b = async()=>{
+   await renderer.setAnimationLoop(animate)
+}
+b();
     started = true;
 
       // animate()
      }
-    else setTimeout(waitForMic,100);
+    else setTimeout(waitForMic,10);
 
     }//setTimeout waits for 10ms then runs stallTillTHREELoaded()
 
@@ -1240,12 +1246,14 @@ function init() {
          container.appendChild( renderer.domElement );//engage THREEJS visual out
 
 //renderer.setAnimationLoop(bootShaders);
+
+
     renderer.compile(  scene, camera )
     renderer.compile(  shaderScene, camera )
     renderer.compile(  feedbackScene, camera )
     renderer.compile(  feedbackSceneFlip, camera )
-        document.getElementById( "load message").innerHTML = "Loaded, press to open!";//turn off splash!
 
+    document.getElementById( "load message").innerHTML = "Loaded, press to open!";
 
  
 waitForMic()
