@@ -41,8 +41,10 @@ function waitForMic(){//this is a lurker. it waits for the three.js loader to re
         //"background-image: none;";//turn off splash!
         document.getElementById( "load message").innerHTML = "";//turn off splash!
                                             document.body.style="background-color:black";
-started = true;
-//renderer.setAnimationLoop(animate)
+//if(started)
+    renderer.setAnimationLoop(animate)
+    started = true;
+
       // animate()
      }
     else setTimeout(waitForMic,100);
@@ -1237,7 +1239,12 @@ function init() {
      adjustThreeJSWindow();
          container.appendChild( renderer.domElement );//engage THREEJS visual out
 
-renderer.setAnimationLoop(animate);
+//renderer.setAnimationLoop(bootShaders);
+    renderer.compile(  scene, camera )
+    renderer.compile(  shaderScene, camera )
+    renderer.compile(  feedbackScene, camera )
+    renderer.compile(  feedbackSceneFlip, camera )
+        document.getElementById( "load message").innerHTML = "Loaded, press to open!";//turn off splash!
 
 
  
@@ -4081,11 +4088,7 @@ for(var n = 0; n<targets.length;n++){
                                                        
                                                        
                      if (!iOS||(iOS&&dupered)) boot();//generate clover in 64 bit, duper Core, there is a bug after maybe half a day on iOS in bigTree.js (maybe also on safari Mac)
-if(!started)
-    {
-        document.getElementById( "load message").innerHTML = "Loaded, press to open!";//turn off splash!
-        renderer.clearColor()
-    }
+
                                                        
                             //  renderer.forceContextLoss ()
                             //  renderer.forceContextRestore ( )
@@ -4329,7 +4332,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                                                  }  
                                 //  tolerance+=plusOrMinusPowerSeriesBUFFER
 
-                             //   tolerance=(tolerance/trunc)*trunc
+                             //  tolerance=(tolerance/trunc)*trunc
 
                                                         tolerance=(tolerance+plusOrMinusPowerSeriesBUFFER)**(.75+(totalAMPmodified+ tAScaledPermanent+tolerance-plusOrMinusPowerSeriesNorm));
 
