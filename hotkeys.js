@@ -634,6 +634,7 @@ source.connect(analyser);
                 else if( uniforms.coreShift.value!=0.)uniforms.coreShift.value=1.;
                     else  uniforms.coreShift.value=0.;
                 }
+                /*
 
                      else  if((key == "V") && event.altKey&&event.ctrlKey)
                                         {if(number!="no number")
@@ -642,7 +643,7 @@ source.connect(analyser);
                     console.log(nudge)
 
                 }
-
+*/
 
                 else if((key == "A") && event.altKey&&event.ctrlKey)
                         uniforms.cellularDivision.value=(uniforms.cellularDivision.value+1.)%3;
