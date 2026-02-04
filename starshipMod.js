@@ -4219,6 +4219,7 @@ let tolerance=0;//(1024-26)/10000
                                                              {
                                                                  let proportion= fractionOfFrame/bufferSize;
                                                                  let tAScaled=0.;//totalAMPmodified*proportion;
+                                                                // totalAMP=.25
                                                                  let totalAMPmodified =totalAMP;
                                 let trunc=  Math.log(totalAMPmodified)*-leafPermanent/2.
 
@@ -4454,8 +4455,10 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                            // let nudgeAdjust = totalAMP;
                             
                            // for (var na = 0; na<3; na+=1)nudgeAdjust=totalAMP**nudgeAdjust
-                                    tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))+(-leafPermanent+grPermanent+2**.5)/fractionOfFrame/4-window.nudge/Number.MAX_VALUE//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
-                       //console.log(7.5*Number.MIN_VALUE)
+                                    tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))+(-leafPermanent+grPermanent+2**.5)/fractionOfFrame/4//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
+                     tolerance-=window.nudge/fractionOfFrame
+                                     
+                                    //console.log(7.5*Number.MIN_VALUE)
                                     //alsotolerance**(powerAMP**2*6) ; //*totalAMP**(powerAMP/3).;///4./fractionOfFrame may actually be a fixed 256 bytes
                                                                 //             tolerance=((tolerance)/trunc)*trunc
 

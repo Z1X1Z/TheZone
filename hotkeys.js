@@ -258,7 +258,7 @@ const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 
 
 function resetAll(){
-        window.nudge=7.5;
+        window.nudge=(grPermanent+1);
 
     window.unitTest=false;
 window.spinnerTwist = 0.;
@@ -566,6 +566,7 @@ window.addEventListener('keydown', function(event) {callKey(event); return true;
     window.lastKey = "";
 window.key = " ";
                                          function callKey(event){
+                                       if(number!="no number")     number = Number(number)
                                           //  event.preventDefault(); event.stopImmediatePropagation();
                 window.lastKey = window.key;
                 /*   if(lastKey==","&&!runningHash)//key here is the last key
@@ -638,6 +639,7 @@ source.connect(analyser);
                                         {if(number!="no number")
                     window.nudge=number;
                     else window.nudge=Date.now()%24+(Date.now()%2)/2
+                    console.log(nudge)
 
                 }
 
