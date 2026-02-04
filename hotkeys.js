@@ -450,8 +450,9 @@ for(var nameOfUniform in uniformsInitial)
                                          window.number = "no number";
 
                                      //  if(window.settingsSet) 
+                                     
                                          readHash()
-                                         
+                                  
                                          let n = document.getElementsByName('t');
                                           for(var p = 0; p<n.length;p++)n[p].checked  = false;
                                          
@@ -641,6 +642,10 @@ source.connect(analyser);
                 }
 
 
+                else if((key == "A") && event.altKey&&event.ctrlKey)
+                        uniforms.cellularDivision.value=(uniforms.cellularDivision.value+1.)%3;
+                
+
                                           else  if((key == "M") && event.altKey&&event.ctrlKey)
 
     uniforms.major.value=(uniforms.major.value+1)%4;
@@ -713,6 +718,9 @@ source.connect(analyser);
                     else  uniforms.OrthoEvery.value=1.;
                         
                         }
+                                        else if((key == "c") && event.altKey&&event.ctrlKey);//load bible
+                                        else if((key == "b") && event.altKey&&event.ctrlKey);//load bible
+
                 else if((key == "g"||key=="©") && event.altKey&&event.ctrlKey)
                     window.guitarMODE=!window.guitarMODE;
                 else if((key == "r"||key=="®") && event.altKey&&event.ctrlKey)
@@ -740,9 +748,6 @@ source.connect(analyser);
                 
                 else if((key == "h"||key=="˙") && event.altKey&&event.ctrlKey)
                         uniforms.dynamicOvercore.value=!uniforms.dynamicOvercore.value;
-                
-                else if((key == "b"||key=="∫") && event.altKey&&event.ctrlKey)
-                        uniforms.cellularDivision.value=(uniforms.cellularDivision.value+1.)%3;
                 
                 
                 else if((key == "t"||key=="†") && event.altKey&&event.ctrlKey)
@@ -833,7 +838,8 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                         uniforms.gr.value=gr;
                     }
                 }
-                
+    
+    else if (event.altKey);
             
     else if(key == "o" && event.ctrlKey)
     {
