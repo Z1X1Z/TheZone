@@ -1255,7 +1255,7 @@ function init() {
     renderer.compile(  feedbackSceneFlip, camera )
 
     document.getElementById( "load message").innerHTML = "Loaded, press to open!";
-
+onWindowResize();
  
 waitForMic()
 
