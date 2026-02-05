@@ -504,6 +504,12 @@ let loopSolid = 0.
         hyperCoreOUTPUT*=squeezeN;
         var daisifier = 0.;
 
+
+        var borderGap =7.5 ;
+        var border = (borderGap*borderGap/2.-borderGap*3.+1.5)/Math.pow(2.,borderGap);
+        
+
+        
 let clampedSqueeze = 0;
 if(clampedSqueeze>2.)clampedSqueeze=1.;
 
@@ -577,8 +583,6 @@ hyperCoreOUTPUT-=superUpcorer;
                         
    var toEDGE =Math.abs(((Math.atan(s.y,s.x)/Math.PI+2.)*3.-.5)%1-.5);
    toEDGE*=2.;
-                        var borderGap =7.5 ;
-                        var border = (borderGap*borderGap/2.-borderGap*3.+1.5)/Math.pow(2.,borderGap);
                         
                         var outerCloudShift = (1.+
                         border
@@ -932,7 +936,8 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
       if(polyNomialStretch&&budge!=1./3.&&OrthoEvery==0.)   {
        // let s2 = s.clone().multiply(s).multiply(s)
       // s=freed(s.multiply(s2)).divide(s2);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
-      const repTrun = 2./3.;
+      var repTrun = twoThirds-border;
+     if(!gigaLeap)repTrun = twoThirds;
       s=freed(s*repTrun)/repTrun;//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
        dstnce=s.length();
       }
