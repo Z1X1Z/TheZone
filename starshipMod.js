@@ -4461,7 +4461,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                            // let nudgeAdjust = totalAMP;
                             
                            // for (var na = 0; na<3; na+=1)nudgeAdjust=totalAMP**nudgeAdjust
-                                    tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))+(-leafPermanent+grPermanent+2**.5+1.-totalAMP/2.-totalAMPmodified)/fractionOfFrame/2//-totalAMPmodified/fractionOfFrame/2//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
+                                    tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))+(-leafPermanent+grPermanent+2**.5-totalAMP/2.-totalAMPmodified)/fractionOfFrame/2//-totalAMPmodified/fractionOfFrame/2//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
                                      
                                     //console.log(7.5*Number.MIN_VALUE)
                                     //alsotolerance**(powerAMP**2*6) ; //*totalAMP**(powerAMP/3).;///4./fractionOfFrame may actually be a fixed 256 bytes
