@@ -932,7 +932,8 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
       if(polyNomialStretch&&budge!=1./3.&&OrthoEvery==0.)   {
        // let s2 = s.clone().multiply(s).multiply(s)
       // s=freed(s.multiply(s2)).divide(s2);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
-       s=freed(s);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+      const repTrun = 2./3.;
+      s=freed(s*repTrun)/repTrun;//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
        dstnce=s.length();
       }
      if(dstnce<2./3.)

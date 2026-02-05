@@ -5312,7 +5312,8 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
 //else 
      // s=freed(s*dstnce*lfc)/(dstnce*lfc);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
     // vec2 s2 = vec2(1.);
-     s=freed(s*1.)/(1.);///(dstnce*lfc);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+    const float repTrun = 1./1.5;
+     s=freed(s*repTrun)/(repTrun);///(dstnce*lfc);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
        dstnce=length(s);
       } 
 
