@@ -842,7 +842,7 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                     }
                 }
     
-    else if (event.altKey);
+   // else if (event.altKey);
             
     else if(key == "o" && event.ctrlKey)
     {
@@ -1110,11 +1110,13 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
     
     else if((key=="å"||key=="a")&&event.altKey&&!event.shiftKey)// is alt+a
         uniforms.musicAngelMan.value=(uniforms.musicAngelMan.value+1)%3;
+       
     else if((key=="®"||key=="r")&&event.altKey&&!event.shiftKey)//® is alt+r
     {
         if(uniforms.refactorCores.value==2)uniforms.refactorCores.value=1;
         else if(uniforms.refactorCores.value==1)uniforms.refactorCores.value=0;
         else uniforms.refactorCores.value=2;
+
     }
                 
                 else if (event.altKey&&(key=="∂"||key=="d"))//∂ is alt+d
