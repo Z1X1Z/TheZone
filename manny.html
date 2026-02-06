@@ -4067,9 +4067,10 @@ vec4 tol(vec2 p, vec2 t){
   if(p.x>0.)
     {
         p=-(p);
-    }
+    
     float negAtan = atan(-p.y,-p.x);
    p=spin2(p,floor(mod(negAtan-PIdiv3 ,PIdiv3))*PIdiv3);
+    }
   }
 
   //  if(swap==1&&p.x>0.)p=-p;
@@ -5338,7 +5339,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
    // if(inMainSpoke)borderBuffer=borderBuffer*twoThirds;
           float repTrun = 8.-border*6.;
      if(!gigaLeap)repTrun = 1.;
-     s=freed(s*repTrun)/(repTrun);///(dstnce*lfc);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+     s=(s*repTrun)/(repTrun);///(dstnce*lfc);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
        dstnce=length(s);
       } 
 
