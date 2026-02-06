@@ -54,7 +54,11 @@ b();
 
       // animate()
      }
-    else setTimeout(waitForMic,10);
+    else{
+             resizeMessage()
+
+    setTimeout(waitForMic,10);
+    }
 
     }//setTimeout waits for 10ms then runs stallTillTHREELoaded()
 
@@ -1262,7 +1266,7 @@ function init() {
 animate();
 renderer.clear();
     document.getElementById( "load message").innerHTML = "Loaded, press to open!";
-onWindowResize();
+     resizeMessage()
 
 waitForMic()
 
