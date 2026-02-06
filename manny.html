@@ -4066,7 +4066,7 @@ vec4 tol(vec2 p, vec2 t){
 
   if(p.x>0.)
     {
-        p=-abs(p);
+        p=-(p);
     }
     float negAtan = atan(-p.y,-p.x);
    p=spin2(p,floor(mod(negAtan-PIdiv3 ,PIdiv3))*PIdiv3);
