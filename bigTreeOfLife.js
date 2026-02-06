@@ -1221,10 +1221,9 @@ window.bigCloverGapSync = false;
      
             let coreImplosion = Math.abs(Math.floor(coreTriggered)-Math.floor(tree.z));
 
-            if(tree.z<1.&&coreImplosion>.5//&&Math.round(tree.z)-tree.z<0.
+            if(tree.z<2.&&coreImplosion>1.//&&Math.round(tree.z)-tree.z<0.
                )//due to the cycling upcore, it triggers twice per core
             {
-                
                 
                 
                 
@@ -1242,8 +1241,8 @@ window.bigCloverGapSync = false;
 
                        // for(var t = 0; t<3; t++)
                         {
-                            vibrateArrayNew.push(50);//coreImplosion*
-                            vibrateArrayNew.push(50);//coreImplosion*
+                            vibrateArrayNew.push(100);//coreImplosion*
+                            vibrateArrayNew.push(100);//coreImplosion*
                             
                                                            try{error = navigator.vibrate(vibrateArrayNew );}
                                                            catch(e){ error+=e;}

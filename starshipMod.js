@@ -1253,12 +1253,14 @@ function init() {
     renderer.compile(  shaderScene, camera );
     renderer.compile(  feedbackScene, camera );
     renderer.compile(  feedbackSceneFlip, camera );
-*/
+*//*
     renderer.render(  scene, camera );
     renderer.render(  shaderScene, camera );
     renderer.render(  feedbackScene, camera );
     renderer.render(  feedbackSceneFlip, camera );
-
+*/
+animate();
+renderer.clear();
     document.getElementById( "load message").innerHTML = "Loaded, press to open!";
 onWindowResize();
 
