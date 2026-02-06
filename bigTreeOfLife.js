@@ -89,6 +89,8 @@ function tol( j,  t){
    var inMainSpoke = false;
   //  return p;
    let p = new THREE.Vector2(j.y,j.x);//
+       if(swap==1.&&p.x>0.)p.multiplyScalar(-1);
+
     p = p.clone().multiplyScalar(zoom).add(new THREE.Vector2(-coords.y,-coords.x));
         var lengthP=p.length()
 
