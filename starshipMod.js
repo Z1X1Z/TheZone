@@ -55,7 +55,7 @@ b();
       // animate()
      }
     else{
-             resizeMessage()
+             onWindowResize()
 
     setTimeout(waitForMic,10);
     }
