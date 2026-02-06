@@ -499,6 +499,10 @@ radialWarp=b;
                    key  = 'P';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                 <label for="Note Stars">Note Stars?![P]</label><br>
+                             <input type="checkbox" id="StarShader" name="t"  onclick= "
+                    key  = 'S';
+                    callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
+                 <label for="StarShader">Star in Shader?![.S]</label><br>
                 <input type="checkbox" id="StarClover" name="t"  onclick= "
                     key  = 'O';
                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -2154,6 +2158,8 @@ void main(){
     uniform vec2 pongBallCoords;
 
     uniform float refactorCores;
+        uniform bool starInShader;
+
     uniform bool clvrVariant1;
     uniform bool clvrVariant2;
     uniform bool clvrVariant3;
@@ -5721,8 +5727,10 @@ hyperCoreOUTPUT--;
                                                     
                                vec2   cloverMAP2 = cloverMAPNeutral2+.5;
                                 vec2 cloverMAPadj =cloverMAPNeutral*dimensionFix+.5;  
-                                                     if(eden==0)starship+=texture2D(STAR,cloverMAPadj)/decayCanceller;
+                       
+                              if(starInShader&&eden==0)starship+=texture2D(STAR,cloverMAPadj)/decayCanceller;
                        else if(eden==1)starship+=texture2D(EDEN,cloverMAPadj)/decayCanceller;
+                       
                        //*length((vUv-.5)*max(resolution.x,resolution.y)/min(resolution.x,resolution.y));//+texture2D(STAR,cloverMAP);
                             
                            }

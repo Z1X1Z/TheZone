@@ -85,6 +85,7 @@ cellularDivision: {value: 0 },//one is . two is mostly top center core level wit
 triogenesis:{value:false},
 squareGenesis:{value:false},
 nGenesis:{value:0},
+starInShader:{value:true},
 
         clvrVariant1:{value: false},
         clvrVariant2:{value: false},
@@ -704,23 +705,7 @@ source.connect(analyser);
                                             }
                                           else  if(key == "K" && event.altKey&&event.ctrlKey);//enable mic processing in loadMicrophone.js
 
-                else if(key == "J" && event.ctrlKey)
-                    uniforms.inseyedOut.value=(1+uniforms.inseyedOut.value)%3;
-                else   if(key == "G" && event.ctrlKey)                uniforms.cloverso.value=!uniforms.cloverso.value;
-                
-                else   if(key == "L" && event.ctrlKey)                uniforms.elderHorns.value=(uniforms.elderHorns.value+1)%3;
-                
-                else if(key == "U" && event.ctrlKey)
-                    uniforms[ "Character" ].value = (uniforms[ "Character" ].value-1.+13)%13;
-                
-                else   if(key == "O" && event.ctrlKey)   //             uniforms.OrthoEvery.value=                !uniforms.OrthoEvery.value;
-                    
-                {if(number!="no number")
-                    uniforms.OrthoEvery.value=number;
-                else if( uniforms.OrthoEvery.value==1.)uniforms.OrthoEvery.value=0.
-                    else  uniforms.OrthoEvery.value=1.;
-                        
-                        }
+   
                                         else if((key == "c") && event.altKey&&event.ctrlKey);//load bible
                                         else if((key == "b") && event.altKey&&event.ctrlKey);//load bible
 
@@ -843,7 +828,24 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                 }
     
    // else if (event.altKey);
-            
+                  else if(key == "J" && event.ctrlKey)
+                    uniforms.inseyedOut.value=(1+uniforms.inseyedOut.value)%3;
+                else   if(key == "G" && event.ctrlKey)                uniforms.cloverso.value=!uniforms.cloverso.value;
+                else   if(key == "S" && event.ctrlKey)                uniforms.starInShader.value=!uniforms.starInShader.value;
+                
+                else   if(key == "L" && event.ctrlKey)                uniforms.elderHorns.value=(uniforms.elderHorns.value+1)%3;
+                
+                else if(key == "U" && event.ctrlKey)
+                    uniforms[ "Character" ].value = (uniforms[ "Character" ].value-1.+13)%13;
+                
+                else   if(key == "O" && event.ctrlKey)   //             uniforms.OrthoEvery.value=                !uniforms.OrthoEvery.value;
+                    
+                {if(number!="no number")
+                    uniforms.OrthoEvery.value=number;
+                else if( uniforms.OrthoEvery.value==1.)uniforms.OrthoEvery.value=0.
+                    else  uniforms.OrthoEvery.value=1.;
+                        
+                        }       
     else if(key == "o" && event.ctrlKey)
     {
         omniDynamicEngaged = !omniDynamicEngaged;
