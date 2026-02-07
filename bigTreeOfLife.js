@@ -390,10 +390,12 @@ var term=0.;
 
 var m= new THREE.Vector2(0.,0.);
 
+var truncNonLeaf = 1.;
     var truncator=1.;
     var truncated = true;
     if(lfc!=0.&&zoom!=0.&&truncated)
-        truncator = Math.log(lfcCenterCored)*-leaf/2.;//*100
+        truncNonLeaf=Math.log(lfcCenterCored);
+        truncator = truncNonLeaf*-leaf/2.;//*100
 
         //truncator = Math.log(zoom/lfc)**2.;
 //Maendel clover
@@ -940,7 +942,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
       // s=freed(s.multiply(s2)).divide(s2);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
       //var repTrun = 24.-border*6.;
       var repTrun=8;
-      repTrun*=truncator;
+      repTrun*=truncNonLeaf;
      if(!gigaLeap)repTrun = 1.;
       s=freed(s.multiplyScalar(repTrun)).multiplyScalar(1./repTrun);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
        dstnce=s.length();
