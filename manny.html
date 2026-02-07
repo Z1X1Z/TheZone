@@ -7580,7 +7580,7 @@ vec3 pongBall = vec3(0.);
                                  {
                                  pillar = sevenPillars(vUv.yx-vec2(0.,.5));
                                                      if(pillar.x!=0.||pillar.y!=0.||pillar.z!=0.)         pillar=   clamp(pillar+(-mny.x-mny.y-mny.z)*40.,0.,1.);
-                                 if(pong.x!=0.||pong.y!=0.||pong.z!=0.)pillar=pong;
+                                 if((pong.x!=0.||pong.y!=0.||pong.z!=0.)&&(pillar.x!=0.||pillar.y!=0.||pillar.z!=0.))pillar=pong;
                                                     }              
                                                                  
                                                                  
