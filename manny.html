@@ -7505,13 +7505,6 @@ if(starOnDot==1||starOnDot==2){
 
                                  if (StaRivers.x==StaRivers.y&& StaRivers.y==StaRivers.z&&StaRivers.x<.51&&StaRivers.x>.49)isGreyStaRivers=StaRivers.x;
 
-                                 
-                                 vec3 pillar = vec3(0.);
-                                 if(volume!=1.)
-                                 {
-                                 pillar = sevenPillars(vUv.yx-vec2(0.,.5));
-                                                     if(pillar.x!=0.||pillar.y!=0.||pillar.z!=0.)         pillar=   clamp(pillar+(-mny.x-mny.y-mny.z)*40.,0.,1.);
-                                 }
                                                      vec3 hypnoticHarmonicCircles = vec3(0.);
                                                                 
                                  if(ringSpring)
@@ -7580,7 +7573,15 @@ vec3 pongBall = vec3(0.);
                           pongBall += ball(p);
                           }
                                                                  
-                                                                 
+                                                   
+                                 
+                                 vec3 pillar = vec3(0.);
+                                 if(volume!=1.)
+                                 {
+                                 pillar = sevenPillars(vUv.yx-vec2(0.,.5));
+                                                     if(pillar.x!=0.||pillar.y!=0.||pillar.z!=0.)         pillar=   clamp(pillar+(-mny.x-mny.y-mny.z)*40.,0.,1.);
+                                 if(pong.x!=0.||pong.y!=0.||pong.z!=0.)pillar=pong;
+                                                    }              
                                                                  
                                                                  
                  float sevenPillarShrink = pillarScale*2./max(resolution.x,resolution.y);
