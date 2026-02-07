@@ -1266,7 +1266,6 @@ function init() {
 animate();
 renderer.clear();
     document.getElementById( "load message").innerHTML = "Loaded, press to open!";
-     resizeMessage()
 
 waitForMic()
 
