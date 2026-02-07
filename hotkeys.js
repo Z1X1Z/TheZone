@@ -85,7 +85,7 @@ cellularDivision: {value: 0 },//one is . two is mostly top center core level wit
 triogenesis:{value:false},
 squareGenesis:{value:false},
 nGenesis:{value:0},
-starInShader:{value:false},
+starInShader:{value:true},
 
         clvrVariant1:{value: false},
         clvrVariant2:{value: false},

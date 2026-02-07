@@ -4060,16 +4060,16 @@ vec4 tol(vec2 p, vec2 t){
                         float unTwist = 0.;
 
     vec2 signP = sign(p);
-    if(!starInShader&&!NightAndDay&&!onehundredfortyfourthousand&&!sevenSquared&&!(texture2D(videoTexture,vec2(.5,.5)).x>0.))
+   // if(!starInShader&&!NightAndDay&&!onehundredfortyfourthousand&&!sevenSquared&&!(texture2D(videoTexture,vec2(.5,.5)).x>0.))
   
   {
 
   if(p.x>0.)
     {
         p=-(p);
-    
-    float negAtan = atan(-p.y,-p.x);
-   p=spin2(p,floor(mod(negAtan-PIdiv3 ,PIdiv3))*PIdiv3);
+    unSwitch=!unSwitch;
+ //   float negAtan = atan(p.y,p.x);
+  // p=spin2(p,floor(mod(negAtan +PIdiv3,PIdiv3))*PIdiv3);
     }
   }
 
