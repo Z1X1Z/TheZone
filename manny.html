@@ -5337,7 +5337,8 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
     // vec2 s2 = vec2(1.);
     float borderBuffer = border;
    // if(inMainSpoke)borderBuffer=borderBuffer*twoThirds;
-          float repTrun = 8.-border*6.;
+          float repTrun = 6.-2.*border;//without *=truncator:8.-6.*border;
+          repTrun*= truncator;
      if(!gigaLeap)repTrun = 1.;
      s=(s*repTrun)/(repTrun);///(dstnce*lfc);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
        dstnce=length(s);
