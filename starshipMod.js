@@ -4467,7 +4467,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                            // let nudgeAdjust = totalAMP;
                             
                            // for (var na = 0; na<3; na+=1)nudgeAdjust=totalAMP**nudgeAdjust
-                     //          if (   !window.iOS )
+                               if (   !window.iOS )
                                {
                                   tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))//-totalAMPmodified/fractionOfFrame/2//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
                                     tolerance +=((-leafPermanent+grPermanent+2**.5)*totalAMPmodified-totalAMP)/fractionOfFrame//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
