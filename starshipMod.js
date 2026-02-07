@@ -55,7 +55,7 @@ b();
       // animate()
      }
     else{
-             onWindowResize()
+           //  onWindowResize()
 
     setTimeout(waitForMic,10);
     }
@@ -1266,6 +1266,8 @@ function init() {
 animate();
 renderer.clear();
     document.getElementById( "load message").innerHTML = "Loaded, press to open!";
+                 onWindowResize()
+
 
 waitForMic()
 
