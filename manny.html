@@ -4702,7 +4702,11 @@ float daisifier = 0.;
                 
                         float borderGap =7.5;
                         float border = (borderGap*borderGap/2.-borderGap*3.+1.5)/pow(2.,borderGap);
-                        
+                           
+
+                       // s/=truncator;
+                       //     s*=truncator;
+
 
                                            vec2 sBuffer = s;
 
@@ -4712,7 +4716,6 @@ if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
  
-
  if(squeezeN>=2.) 
  {
     if(petals>0.)
@@ -5337,7 +5340,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
     // vec2 s2 = vec2(1.);
     float borderBuffer = border;
    // if(inMainSpoke)borderBuffer=borderBuffer*twoThirds;
-          float repTrun = 9.-3.*border;//without *=truncator:8.-6.*border;
+          float repTrun = 9.-4.*border;//without *=truncator:8.-6.*border;
           repTrun*= truncator;
      if(!gigaLeap)repTrun = 1.;
      s=(s*repTrun)/(repTrun);///(dstnce*lfc);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
