@@ -4216,6 +4216,7 @@ function calculatePitch ()
 
  fractionOfFrame = frameRation;
  if(highORlow!=0)fractionOfFrame=1024;
+ fractionOfFrame=1024;
 const yinData = new Float64Array(fractionOfFrame);
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance=0;//(1024-26)/10000
