@@ -4698,7 +4698,7 @@ bool gatedPass=false;
 float daisifier = 0.;
 
                 
-                        float borderGap =7.;
+                        float borderGap =8.;
                         float border = (borderGap*borderGap/2.-borderGap*3.+1.5)/pow(2.,borderGap);
                            
 
@@ -5343,7 +5343,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
 
             s=(s*repTrun)/(repTrun);///(dstnce*lfc);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
 */
-     float  repTrun =4.;// this is 6 with bordergap of 7.5, and 3 with bordergap of 8 // and 4(2,3?) with border gap of 7
+     float  repTrun =3.;// this is 6 with bordergap of 7.5, and 3 with bordergap of 8 // and 4(2,3?) with border gap of 7
 
         repTrun*= truncNonLeaf;
      s=(s/repTrun)*(repTrun);

@@ -509,7 +509,7 @@ let loopSolid = 0.
         var daisifier = 0.;
 
 
-        var borderGap =7. ;
+        var borderGap =8. ;
         var border = (borderGap*borderGap/2.-borderGap*3.+1.5)/Math.pow(2.,borderGap);
         
 
@@ -941,7 +941,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
        // let s2 = s.clone().multiply(s).multiply(s)
       // s=freed(s.multiply(s2)).divide(s2);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
       //var repTrun = 24.-border*6.;
-      var repTrun=4;
+      var repTrun=3;
       repTrun*=truncNonLeaf;
       s=freed(s.multiplyScalar(repTrun)).multiplyScalar(1./repTrun);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
        dstnce=s.length();
