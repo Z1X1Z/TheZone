@@ -1113,8 +1113,8 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                  <div  id="m4" class="dropdown-content">
                                      <input type="checkbox" id="stellarNursery" name="t"  onclick= "
                                          key  = 'Z';
-                                         callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
-                                      <label for="stellarNursery">Stellar Nursery![.,Z]</label><br>
+                                         callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                                      <label for="stellarNursery">Stellar Nursery![,Z]</label><br>
                                       
                                       
                                       
@@ -4061,12 +4061,6 @@ vec4 tol(vec2 p, vec2 t){
 
    
 
-  if(p.x>0.)
-    {
-        p*=-1.;
-    unSwitch=!unSwitch;
-
- }
 
   //  if(swap==1&&p.x>0.)p=-p;
     bool kaleidascope1=false;
@@ -4132,7 +4126,7 @@ vec4 tol(vec2 p, vec2 t){
             }
         else break;
         }
-        if(constellation)p=starBirth(p);
+        p=starBirth(p);
     p*=pow(length(p),squeezeN-1.);//may cause conflict with constellation
    //tricellular division core unstable
                
@@ -4150,6 +4144,12 @@ vec4 tol(vec2 p, vec2 t){
                         
                         
           
+  if(p.x>0.)
+    {
+        p*=-1.;
+    unSwitch=!unSwitch;
+
+ }
                         
                float distributorFACTOR=PI/gr;
                          float distributorFACTORlove= distributorFACTOR/leaf;//*sqrt(2)
@@ -5055,7 +5055,7 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
                }
               
        }
-    if(constellation)s=starBirth(s);
+    s=starBirth(s);
 
    dstnce = length(s);
        if(dstnce<twoThirds)s*=pow(dstnce,squeezeN-1. );

@@ -619,11 +619,7 @@ source.connect(analyser);
                      }
                     }
                                          else  if((key == "H") && event.altKey&&event.ctrlKey)uniforms.handOfGod.value=!uniforms.handOfGod.value;
-                else if((key == "Z") && event.altKey&&event.ctrlKey)
-                {
-                    uniforms.constellation.value=!uniforms.constellation.value;
-                    
-                }
+          
                      else  if((key == "C") && event.altKey&&event.ctrlKey)
                         {
                             uniforms.spinner.value=!uniforms.spinner.value;
@@ -846,6 +842,11 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                     else  uniforms.OrthoEvery.value=1.;
                         
                         }       
+                              else if(key == "Z"&&event.ctrlKey)
+                {
+                    uniforms.constellation.value=!uniforms.constellation.value;
+                    
+                }
     else if(key == "o" && event.ctrlKey)
     {
         omniDynamicEngaged = !omniDynamicEngaged;
