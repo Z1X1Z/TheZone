@@ -4473,7 +4473,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                if (   !window.iOS )
                                {
                                   tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))//-totalAMPmodified/fractionOfFrame/2//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
-                                    tolerance +=((-leafPermanent+grPermanent+2**.5-2.)*totalAMPmodified-2.*totalAMP)/fractionOfFrame*(-leafPermanent-1.+grPermanent-1)*2**.5//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
+                                    tolerance +=((-leafPermanent+grPermanent+2**.5-2.)*totalAMPmodified-2.*totalAMP)/fractionOfFrame*(-leafPermanent+grPermanent)*2**.5//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                                }
                                     //console.log(7.5*Number.MIN_VALUE)
                                     //alsotolerance**(powerAMP**2*6) ; //*totalAMP**(powerAMP/3).;///4./fractionOfFrame may actually be a fixed 256 bytes
