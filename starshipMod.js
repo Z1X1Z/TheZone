@@ -46,7 +46,10 @@ function waitForMic(){//this is a lurker. it waits for the three.js loader to re
         //"background-image: none;";//turn off splash!
                                             document.body.style="background-color:black";
 //if(started)
+  
+
 let b = async()=>{
+
    await renderer.setAnimationLoop(animate)
 }
 b();
@@ -55,13 +58,18 @@ b();
       // animate()
      }
     else{
-           //  onWindowResize()
-
+           
+          if(occasionToResize==20) //don't feel like using extra power for something that hardly ever helps!
+            {   onWindowResize()
+                occasionToResize=0
+            }
+            else                 occasionToResize++
+            
     setTimeout(waitForMic,10);
     }
 
     }//setTimeout waits for 10ms then runs stallTillTHREELoaded()
-
+var occasionToResize = 0;
 const dotSize = starshipSize;
 
 let coringValue = 1./-leaf/gr;
@@ -851,6 +859,7 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
 
         function setDAWdependantSize()
         {
+
              window.dawNODES = (DAWSonicTouchArray.length)
              if(dawNODES<0)dawNODES=0;
              DAWstar= new Float32Array(dawNODES*3*6);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
@@ -1264,9 +1273,11 @@ function init() {
     renderer.render(  feedbackSceneFlip, camera );
 */
 animate();
+scene.background =null;//to make logo visible again if blank background
+renderer.render( scene, camera );
+
 renderer.clear();
     document.getElementById( "load message").innerHTML = "Loaded, press to open!";
-                 onWindowResize()
 
 
 waitForMic()
