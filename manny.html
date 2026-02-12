@@ -3256,11 +3256,11 @@ vec3 faceFORWARD(vec2 p,vec2 t){
 
                if( abs(l)<abs(p.x)*abs(p.y)/17.)l=0.;
                        //      if(p.x>-.75&&p.x<.5&&t.x>.01)l*=16.*t.x+1.;//turns black wings white when activated
-                       else     if(l!=0.&&p.x>-.6-abs(t.x)-t.y*sign(-p.y)&&p.x<.5)
+                       else     if(l!=0.&&p.x>-.6-abs(t.x)-t.y*sign(p.y)&&p.x<.5)
                             {
                             
-                       if(abs(atan(d.y,d.x))<PI/12.&&p.y<0.)l=1.;//l*=12.;//turn one black wing white when activated
-                      else if(abs(atan(d.y,-d.x))<PI/12.&&p.y>0.)l=1.;//l*=12.;//turn one black wing white when activated
+                       if(abs(atan(d.y,d.x))<PI/12.&&p.y>0.)l=1.;//l*=12.;//turn one black wing white when activated
+                      else if(abs(atan(d.y,-d.x))<PI/12.&&p.y<0.)l=1.;//l*=12.;//turn one black wing white when activated
                 }
                 }
                 }
