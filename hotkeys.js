@@ -320,6 +320,7 @@ for(var nameOfUniform in uniformsInitial)
             window.twist = 0.;
             window.flip = 1.;
             window.highORlow=0.;
+            if(iOS)highORlow=3.;
             window.FeedbackSound = false;
             window.spirographMODE = 1;
             window.pzyghthe=0;

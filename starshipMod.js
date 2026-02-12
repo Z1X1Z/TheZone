@@ -32,11 +32,6 @@ function stallTillTHREELoaded(){//this is a lurker. it waits for the three.js lo
 stallTillTHREELoaded();
 
 
-var LOADEDa = false;
-var LOADEDb = false;
-var LOADEDc = false;
-var LOADEDd = false;
-
 function waitForMic(){//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
     if(document.visibilityState=="visible"
        &&(window.micOn||window.isTouch)){
@@ -58,13 +53,13 @@ b();
       // animate()
      }
     else{
-           
+           /*
           if(occasionToResize==20) //don't feel like using extra power for something that hardly ever helps!
             {   onWindowResize()
                 occasionToResize=0
             }
             else                 occasionToResize++
-            
+            */
     setTimeout(waitForMic,10);
     }
 
@@ -4481,14 +4476,14 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                            // let nudgeAdjust = totalAMP;
                             
                            // for (var na = 0; na<3; na+=1)nudgeAdjust=totalAMP**nudgeAdjust
-                               if (   !window.iOS )
-                               {
+  if(window.highORlow!=3)
+                                   {
                                   tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))//-totalAMPmodified/fractionOfFrame/2//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
-{
+
                                   let toleranceNudge =((-leafPermanent+grPermanent+2**.5-3.)*totalAMPmodified-1.*totalAMP)/fractionOfFrame//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
-                         if(window.highORlow!=3)  toleranceNudge*=2./(grPermanent-leafPermanent+1);
+                         toleranceNudge*=2./(grPermanent-leafPermanent+1);
                                    tolerance+=toleranceNudge;
-}
+
                                }
 
                                     //console.log(7.5*Number.MIN_VALUE)
