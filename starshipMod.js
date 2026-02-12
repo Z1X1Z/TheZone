@@ -4476,15 +4476,16 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                            // let nudgeAdjust = totalAMP;
                             
                            // for (var na = 0; na<3; na+=1)nudgeAdjust=totalAMP**nudgeAdjust
-  if(window.highORlow!=3)
-                                   {
-                                  tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))//-totalAMPmodified/fractionOfFrame/2//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
-
+//odd conditionals
+                                   
+                      if(!iOS)      tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))//-totalAMPmodified/fractionOfFrame/2//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
+if(window!=3.)//odd conditionals
+{
                                   let toleranceNudge =((-leafPermanent+grPermanent+2**.5-3.)*totalAMPmodified-1.*totalAMP)/fractionOfFrame//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                          toleranceNudge*=2./(grPermanent-leafPermanent+1);
                                    tolerance+=toleranceNudge;
-
-                               }
+}
+                               
 
                                     //console.log(7.5*Number.MIN_VALUE)
                                     //alsotolerance**(powerAMP**2*6) ; //*totalAMP**(powerAMP/3).;///4./fractionOfFrame may actually be a fixed 256 bytes
