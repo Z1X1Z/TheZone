@@ -309,8 +309,8 @@ resizeMessage()
                 }
                     else if(thismoment%4==2)
             {
-                nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/pentaloctalwtlzonexmonogram.jpeg');"
-                                document.body.style="background-color:white";
+                nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@16/pentaloctalwtlzonexmonogram.jpeg');"
+                                document.body.style="background-color:#8b8b8b";
 
             }
                 else  if(thismoment%4==0)
@@ -336,7 +336,7 @@ resizeMessage()
                 else if(thismoment%4==2) 
                 {
                     nf.style = "background-image: url('pentaloctalwtlzonexmonogram.jpeg');"
-                    document.body.style="background-color:white;"
+                    document.body.style="background-color:#8b8b8b;"
 
                     }
                 else if(thismoment%4==0)  
@@ -1368,10 +1368,17 @@ seventhEYE![,.O]</a><br>
                                  uniforms.mandelCloverFactor.value=document.getElementById('mandelCloverSize').value
                                  "><br>
                       
+
+                  <input type="checkbox" id="BlackTraction" name="t"  onclick= "
+                      key  = 'B';
+                      callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                   <label for="BlackTraction">Black Traction![,B]</label><br>
+
                   <input type="checkbox" id="Articles" name="t"  onclick= "
                       key  = 'G';
                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                    <label for="Articles">Articles![G]</label><br>
+
                    
                <input type="checkbox" id="cloverArms" name="t"  onclick= "
                    key  = 'm';
@@ -2066,6 +2073,8 @@ void main(){
 
         uniform bool polyNomialStretch;
         uniform bool Black;
+        uniform bool BlackTraction;
+        
         uniform int swap;
 
 
@@ -7144,7 +7153,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                   if(musicAngelMan>0&&Character!=3&&Character!=4)
                                                                        {
                                                              float divisor = 1.;
-                                                             if(gameOn)divisor=1.5;
+                                                            // if(gameOn)divisor=1.5;
                                                              AM+=faceFORWARD(characterOnTrailP*angelSize,moveDynamic)/divisor;
                                                              AM=clamp(AM,0.,1.);
                                                             if(mny.r!=0.||mny.g!=0.||mny.b!=0.) AM*=mny;
@@ -7736,13 +7745,18 @@ if(oneEye.r!=0.)zoomer=-oneEye;
                       // float zoomerSum = zoomer.r+zoomer.g+zoomer.b;
 
                                 // if(isGreyISH==129./255.&&starship.w==1.)bodyWithArms=vec4(vec3(.5)+bodyWithArms.xyz/2.,1.);
-
                                  if(colorCombo!=17&&colorCombo!=20)
                                  {
+
                        if (clothes.r>=1.){mny=vec3(0.);if(bodyWithArms.w!=1.)bodyWithArms=vec4(0.);}
                        if (clothes.r!=0.&&starship.b!=0.)clothes*=starship.xyz+.25;
                        mny+=clamp(clothes-bodyWithArms.w*100.,0.,1.)+bodyWithArms.xyz*bodyWithArms.w*clamp(clothes*100000.,0.,1.);
-                       }
+                     if(BlackTraction&&(mny.r!=0.||mny.g!=0.||mny.b!=0.))
+                      {
+                       mny=(zoomer-hsv2rgb(vec3(mod((atan(-d.x,d.y)*flipStar+twistStar)/PI2*12.*brelued+4.,12.)/12.,1.,1.)));//here for negaManny//AKA BLACK ICE or Black Traction;
+        
+                      }
+                    }
 
                                               if(oopm.x!=0.||oopm.y!=0.){HEART=oopm.xyz;heartWarmed=oopm.xyz;}
                                        /*       float insideOutSUM = insideOut.x+insideOut.y+insideOut.z;

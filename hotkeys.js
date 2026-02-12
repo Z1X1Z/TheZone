@@ -234,12 +234,13 @@ noteFrozen:{value:0},
       smush:{value:0.2},
       ringSpring:{value:false},
       squeezeN:{value:1.},
-seventhEYE:{value:0},
+seventhEYE:{value:3},
 budge:{value:.5},
 polyNomialStretch:{value:true   },
 Black:{value:false   },
 swap:{value:  1 },
-gigaLeap:{value:true}
+gigaLeap:{value:true},
+BlackTraction:{value:false}
 }
 window.uniforms={}
 
@@ -692,7 +693,7 @@ source.connect(analyser);
                     else  zoomBoost=1.5;
                 }
                                                       else  if(key == "P" && event.altKey&&event.ctrlKey)uniforms.polyNomialStretch.value=!uniforms.polyNomialStretch.value;
-                                          else  if(key == "O" && event.altKey&&event.ctrlKey)uniforms.seventhEYE.value=(uniforms.seventhEYE.value-1.+4.)%4;
+                                          else  if(key == "O" && event.altKey&&event.ctrlKey)uniforms.seventhEYE.value=(uniforms.seventhEYE.value+1)%4;
                                           else  if(key == "L" && event.altKey&&event.ctrlKey)
                                             {uniforms.Redux.value=!uniforms.Redux.value;
                                                 if(uniforms.Redux.value)uniforms.squeezeN.value=2.;
@@ -824,6 +825,9 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                 }
     
    // else if (event.altKey);
+
+                  else if(key == "B" && event.ctrlKey)
+                    uniforms.BlackTraction.value=!uniforms.BlackTraction.value;
                   else if(key == "J" && event.ctrlKey)
                     uniforms.inseyedOut.value=(1+uniforms.inseyedOut.value)%3;
                 else   if(key == "G" && event.ctrlKey)                uniforms.cloverso.value=!uniforms.cloverso.value;
