@@ -3255,8 +3255,8 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                 else if((Character==4||musicAngelMan==2)){
 
                if( abs(l)<abs(p.x)*abs(p.y)/12.)l=0.;
-                       else     if(l!=0.&&p.x>-.6//+(-abs(t.x)-t.y)/2.*sign(p.y)
-                       &&p.x<.5)
+                       else     if(l!=0.&&p.x>-.625//+(-abs(t.x)-t.y)/2.*sign(p.y)
+                       &&p.x<.5&&abs(p.x)*3.<abs(p.y))
                             {
                             
                        if(abs(atan(d.y,d.x))<PI/12.&&p.y>0.)l=1.;//l*=12.;//turn one black wing white when activated
