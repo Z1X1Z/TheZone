@@ -1347,7 +1347,9 @@ function setDynamicSampler2ds(){
               uniforms.constellationDynamic.value=cloverConstellation;
               uniforms.squirgleDynamic.value=squirgleData;
 
+
  }
+ var nyquistFilter=true;
 function setMicInputToStarPIXEL(){
              if(!touchMode//&&!DAW
                 ||(window.shouldShowStar))
@@ -2472,8 +2474,8 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                     {
                                         // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
                                         pitch = audioX.sampleRate/calculatePitch();
-                                        const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins/2.)>1.;
-                                        if(!notNyquist&&totalAMP>0.) pitch = lastPitch;
+                                        const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins)>2.;
+                                        if(!notNyquist&&nyquistFilter&&totalAMP>0.) pitch = lastPitch;
                                    
                                     
                                     
@@ -2482,12 +2484,12 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                     on = true;
                                 }
                                 else{aboveThreshold = false; on = false;if(!touchMode) uniforms.volume.value=0.00001}
+    if(!notNyquist)console.log(on)
 
                                     }else{aboveThreshold = false; on = false;if(!touchMode)uniforms.volume.value=0.00001}
                                     
 if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
 
-    
     
            if(window.volumeSpeed&&on)
            {
@@ -4213,7 +4215,8 @@ if(uniforms.coords.value.y<-.5)
                                                      }
                                                        
                                                        
-       const frameRation = -3.+1024*(-leafPermanent*grPermanent*(2**.5)-2)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
+       const frameRation =-1+1024*(-leafPermanent*grPermanent*(2**.5)//was -2, caused nyquist locking
+    )-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
                                                 
                                                        
          var fractionOfFrame =frameRation                                              
@@ -4483,8 +4486,11 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
 {
                                   let toleranceNudge =((-leafPermanent+grPermanent+2**.5-3)*totalAMPmodified-1.*totalAMP)/fractionOfFrame//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                         toleranceNudge*=(2.)/(grPermanent-leafPermanent+1);
-                  toleranceNudge+=(totalAMP)**(.5)**totalAMP**(1./totalAMP)**(totalAMP);
-                         tolerance+=toleranceNudge;
+                        
+                  //toleranceNudge+=(totalAMP)**(.5)**(totalAMP)**(1./totalAMP)**(totalAMP);
+                        //last line working on nyquist filtering, added
+                        nyquistFilter = true;//turn off to debug nyquists
+                  tolerance+=toleranceNudge;
 
 }
                                
