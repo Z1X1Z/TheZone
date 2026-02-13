@@ -1,6 +1,7 @@
-var shaderScale,distributor,swap,dilate,squeezeN,seventhEYE,budge,polyNomialStretch, gigaLeap,externalCores,centralCores,coreShift,Redux,coreDilation, chirality,coords,morph,refactorCores,MetaCored,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
+var shaderScale,distributor,swap,dilate,squeezeN,seventhEYE,budge,polyNomialStretch, gigaLeap,externalCores,centralCores,coreShift,Redux,coreDilation, chirality,coords,morph,refactorCores,MetaCored,jubileyes,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
 ,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta,spinTowardsMe,d,chop,cellularDivision,triogenesis,nGenesis,squareGenesis,constellationCoord,cloverso,feedTheLamb,OrthoEvery;
 function setUniformsToPlainName(){
+    jubileyes=uniforms.jubileyes.value
     OrthoEvery=uniforms.OrthoEvery.value
     gigaLeap=uniforms.gigaLeap.value
     squeezeN=uniforms.squeezeN.value;
@@ -1061,6 +1062,18 @@ else s=spin(s,Math.PI);
  
     
 //if(i==0){float b = ;s*=b;dstnce*b;}
+         if(jubileyes>0.&&
+       s.length()<1./3.//2./3.
+ )
+{
+    s=new THREE.Vector2(1.5/(2.5+s.x),1.5/(2.5-Math.abs(s.y)+budge-.5));
+    if(jubileyes==2.)s=new THREE.Vector2(s.y,Math.abs(s.x));//more sign checks may help
+   // try signs and swizzle!
+hyperCoreBoosted++;//before or after *=log(3.)?
+   hyperCoreBoosted*=Math.log(3.);
+         break;
+  // breakNext=true;
+}
 
 OmniDynamicPetalShift =omniData[0];
 OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);

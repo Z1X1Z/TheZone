@@ -1216,7 +1216,7 @@ uniforms.coreShift.value=-document.getElementById('shift').value">
                   <input type="checkbox" id="Black" name="t"  onclick= "
                       key  = 'T';
                       callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
-                   <label for="Black">black![,.B]</label><br>
+                   <label for="Black">black![,.T]</label><br>
 
 
                    <input type="checkbox" id="Radial Rainbow Clover" name="t"  onclick= "
@@ -1296,13 +1296,23 @@ key  = 'L';
 callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
 Reset Zoom![L]</a><br>
 
-
+  
                
                <input type="checkbox" id="polyNomialStretch" name="t"  onclick= "
                   key  = 'P';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
                <label for="polyNomialStretch">polyNomialStretch?![,.P]</label><br>
         
+<a id="glyph" name="t"  onclick= "
+key  = 'Y';
+callKey(new KeyboardEvent('keydown', {'key': key,  'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+Glyph![,Y]</a><br>
+
+<a id="jubileye" name="t"  onclick= "
+key  = 'N';
+callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+Jubileyes![,N]</a><br>
+
 <a id="seventhEYE" name="t"  onclick= "
 key  = 'O';
 callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
@@ -1314,7 +1324,6 @@ seventhEYE![,.O]</a><br>
                                  uniforms.budge.value=document.getElementById('Budge').value
                                  "><br>
 
-  
                <input type="checkbox" id="seven2" name="t"  onclick= "
                   key  = 'J';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
@@ -2273,6 +2282,9 @@ uniform float leaf;
 uniform bool cloverArms;
 uniform int elderHorns;
 uniform int inseyedOut;
+uniform float glyph;
+uniform float jubileyes;
+
 uniform bool cloverso;
 uniform bool feedTheLamb;
 uniform float OrthoEvery;
@@ -4320,7 +4332,7 @@ const float crs = 64.;//this is the mandelclover and original inheritance colorm
     s/=4.;
     s=1.5/(2.5-vec2(-s.x,abs(s.y)+budge//plus one third is optional
     ));//this needs some exploration//here needs activation and new hotkey
-    if(seventhEYE==2.)s=vec2(s.y,abs(s.x));//more sign checks may help
+   // if(seventhEYE==2.)s=vec2(s.y,abs(s.x));//more sign checks may help
    // try signs and swizzle!
 }
 
@@ -4547,7 +4559,7 @@ truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoom*zoom))
 
 //this is essentially just p as in the mandelbrot x <== x^2+
 
-                            const float iterations = 12.;//loops all escape delimiter so iterations aren't used unless needed
+                            const float iterations = 40.;//loops all escape delimiter so iterations aren't used unless needed
                             float refractelC=1.5;
                         //  p*=2.*refractelC;
 vec3 oo = vec3(0.);
@@ -4731,7 +4743,7 @@ float daisifier = 0.;
                                            vec2 sBuffer = s;
 
 bool squeezeDIlate = petals>0.;
-                                           
+                            bool breakNext = false;               
 if(zoom<.00000075*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
@@ -4841,7 +4853,10 @@ hyperCoreOUTPUT-=superUpcorer;
                         }
                         //hyperCoreBoosted*=outerCloudShift;       
                     }
-                    
+
+//if(breakNext)break;
+
+
    s=vec2(
         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
@@ -4853,7 +4868,19 @@ hyperCoreOUTPUT-=superUpcorer;
        );
         hyperCoreBoosted-=baseN;
        }
-
+       
+                    /*orange               if(length(s)<1./3.
+ )
+{
+   // s*=2.;
+   // s/=2.;
+    s=1.5/(2.5-vec2(-s.x,abs(s.y)+.5//+budge//plus one third is optional
+    ));//this needs some exploration//here needs activation and new hotkey
+    if(seventhEYE==2.)s=vec2(s.y,abs(s.x));//more sign checks may help
+   // try signs and swizzle!
+   //breakNext=true;
+}
+*/
 
        bool kaleidascope3 = false;
            // if(kaleidascope3&&counter<2.)s=abs(vec2(mod(abs(s.y),1.),mod(abs(s.x),1.))-.5)*sign(s);//really cool needs to be engaged
@@ -4957,8 +4984,22 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
        if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the body steps on the clover
        else if(colorCombo==8||colorCombo==9)s.x=-1./s.x;//this is just the face (without or with +c), inheritance is the only
    
-  // dstnce = length(s);
-   
+   dstnce = length(s);
+   /*  orbs  */
+            if(glyph>0.&&dstnce<1./3.//2./3.
+ )
+{
+    //s*=2.;
+   // s/=2.;
+    s=1.5/(2.5-vec2(-s.x,abs(s.y)+budge//plus one third is optional
+    ));//this needs some exploration//here needs activation and new hotkey
+    if(glyph==2.)s=vec2(s.y,abs(s.x));//more sign checks may help
+   // try signs and swizzle!
+   //breakNext;
+}
+  
+
+
    s.x=log(abs(s.x))/log(base);
         
 //if(s.x<0.)s.x*=0.;
@@ -5330,8 +5371,15 @@ t
                       
               //    }
               gated = false;
-               vec2 overOptimizationResistor = vec2(1.,1.);
-               if(counter==0.&&swap==1)s*=-1.;
+
+
+
+              
+
+
+
+
+if(counter==0.&&swap==1)s*=-1.;
                               sBuffer = s;
 
 bool boolean = true;
@@ -5345,6 +5393,9 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
     )
     && 0.<=hyperCoreBoosted&&externalCores!=0.)
 {
+    if(   breakNext)break;
+ 
+
    if(Redux) hyperCoreBoosted-=(1.-logStabilizationConstant )/2.  ;
     //if(counter==1.)
     //s*=4.;
@@ -5680,7 +5731,20 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
        hyperCoreOUTPUT+=b;
        */
    }
-   
+         if(jubileyes>0.&&
+       dstnce<1./3.//2./3.
+ )
+{
+    s=1.5/(2.5-vec2(-s.x,abs(s.y)+budge-.5//plus one third is optional
+    ));//this needs some exploration//here needs activation and new hotkey
+    if(jubileyes==2.)s=vec2(s.y,abs(s.x));//more sign checks may help
+   // try signs and swizzle!
+hyperCoreBoosted++;//before or after *=log(3.)?
+   hyperCoreBoosted*=log(3.);
+         break;
+  // breakNext=true;
+}
+  
    if(fieldPowerBoostMeta&&(float(i)>=hyperCoreBoosted)){
        float powerBoost =eConstant*(log(.5)*dstnce*(sqrt2)*twoThirds);
        s*=pow(dstnce,powerBoost);
@@ -5706,6 +5770,36 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
      
 }
 else break;
+/*
+            if(length(s)<2./3.
+ )
+{
+    //s*=2.;
+   // s/=2.;
+    s=1.5/(2.5-vec2(-s.x,abs(s.y)+.5//+budge//plus one third is optional
+    ));//this needs some exploration//here needs activation and new hotkey
+    if(seventhEYE==2.)s=vec2(s.y,abs(s.x));//more sign checks may help
+   // try signs and swizzle!
+ //  breakNext;
+}*/
+
+/*
+       if((1==1||seventhEYE==3.)
+       &&(length(s)<twoThirds)//&&length(s)>1./3.)//&&zoom<.5
+ //&&lfc>zoom
+ )
+{
+  // s*=2.;
+  // s/=4.;
+    s=1.5/(2.5-vec2(-s.x,abs(s.y)+budge//plus one third is optional
+    ));//this needs some exploration//here needs activation and new hotkey
+   // if(seventhEYE==2.)s=vec2(s.y,abs(s.x));//more sign checks may help
+   // try signs and swizzle!
+}
+*/
+
+
+
 
 daisifier+=1.;
 hyperCoreBoosted--;

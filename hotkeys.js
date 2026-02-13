@@ -38,6 +38,8 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                          let  zoomINITiaLizer =1.;//    1/2**65.;//1.;//
                          let xINITiaLizer=0.;//1./3.;
                            let yINITiaLizer=.0;//1./3./2.;
+                           const coreFlopConstant = 2;
+                           const swapConstant = 1;
 window.uniformsInitial = {
 coreDilation:{value:0.},
 fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:44100./1024.},
@@ -55,7 +57,7 @@ heartStar:{value:0},
 superStable:{value:false},
 distributor:{value:true},
 sevenSquared:{value:false},
-oppositionalCoreFlop:{value:2},
+oppositionalCoreFlop:{value:coreFlopConstant},
 micIn:{value:null},
     audioBuffer:{value:null},
     omniDynamic:{value:null},
@@ -216,6 +218,9 @@ squirgle:{value:0},
 cards:{value:false},
     inseyedOut:{value:1},
     elderHorns:{value:0},
+    glyph:{value:0.},
+    jubileyes:{value:0.},
+    
 cloverso:{value:false},
 OrthoEvery:{value:0.},
 feedTheLamb:{value:true},
@@ -238,7 +243,7 @@ seventhEYE:{value:0},
 budge:{value:.5},
 polyNomialStretch:{value:true   },
 Black:{value:false   },
-swap:{value:  1 },
+swap:{value:  swapConstant },
 gigaLeap:{value:true},
 BlackTraction:{value:false}
 }
@@ -825,12 +830,31 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                 }
     
    // else if (event.altKey);
+                  else if(key == "N" && event.ctrlKey)
+                    {
+                        uniforms.jubileyes.value=(uniforms.jubileyes.value+1)%3;
 
+                        if(uniforms.jubileyes.value)
+                        {
+uniforms.oppositionalCoreFlop.value=0
+//uniforms.swap.value=1
+
+                        }
+                        else
+                        {
+uniforms.oppositionalCoreFlop.value= coreFlopConstant;
+                            
+//uniforms.swap.value=swapConstant;
+
+
+                        }
+                    }
                   else if(key == "B" && event.ctrlKey)
                     uniforms.BlackTraction.value=!uniforms.BlackTraction.value;
                   else if(key == "J" && event.ctrlKey)
                     uniforms.inseyedOut.value=(1+uniforms.inseyedOut.value)%3;
                 else   if(key == "G" && event.ctrlKey)                uniforms.cloverso.value=!uniforms.cloverso.value;
+                else   if(key == "Y" && event.ctrlKey)                uniforms.glyph.value=(uniforms.glyph.value+1)%3;
                 else   if(key == "S" && event.ctrlKey)                uniforms.starInShader.value=!uniforms.starInShader.value;
                 
                 else   if(key == "L" && event.ctrlKey)                uniforms.elderHorns.value=(uniforms.elderHorns.value+1)%3;
