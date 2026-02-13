@@ -2377,7 +2377,7 @@ vec3 paddles(vec2 vUvCentered){
            }
        if(ret.x==0.&&ret.y==0.&&ret.z==0.){
         ret+=shade;
-        if(abs(pongIntercept-vUv.y*resolution.y)<10.&&abs(vUvCentered.x)>.5-borderPong*(1.+13./16.)) ret = vec3(sign(vUvCentered.x)*4.);
+        if(abs(pongIntercept-vUv.y*resolution.y)<10.&&abs(vUvCentered.x)>.5-borderPong*(1.+27./32.)) ret = vec3(sign(vUvCentered.x)*4.);
        }
 
        return ret;
@@ -5365,7 +5365,7 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
 
             s=(s*repTrun)/(repTrun);///(dstnce*lfc);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
 */
-     float  repTrun =4.5;// this is 6 with bordergap of 7.5, and 3 (6?) with bordergap of 8 // and 4(2,3?) with border gap of 7
+     float  repTrun =1.5;// this is 6 with bordergap of 7.5, and 3 (6? 4.5!1.5!!) with bordergap of 8 // and 4(2,3?) with border gap of 7
 
         repTrun*= truncNonLeaf;
      s=(s/repTrun)*(repTrun);
