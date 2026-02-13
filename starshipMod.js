@@ -4215,9 +4215,9 @@ if(uniforms.coords.value.y<-.5)
                                                      }
                                                        
                                                        
-       const frameRation =-1+1024*(-leafPermanent*grPermanent*(2**.5)//was -2, caused nyquist locking
-    )-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
-                                                
+       var frameRation =0.+1024*(-leafPermanent*grPermanent*(2**.5) -1)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
+                 //            frameRation=1024;
+      // console.log(frameRation)        
                                                        
          var fractionOfFrame =frameRation                                              
 //begin MIT license, code from https://github.com/adamski/pitch_detector
@@ -4489,7 +4489,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                         
                   //toleranceNudge+=(totalAMP)**(.5)**(totalAMP)**(1./totalAMP)**(totalAMP);
                         //last line working on nyquist filtering, added
-                        nyquistFilter = true;//turn off to debug nyquists
+                        nyquistFilter = false;//turn off to debug nyquists
                   tolerance+=toleranceNudge;
 
 }
