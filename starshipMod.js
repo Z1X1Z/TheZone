@@ -4478,11 +4478,13 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                            // for (var na = 0; na<3; na+=1)nudgeAdjust=totalAMP**nudgeAdjust
 //odd conditionals
                                    
-                      if(!iOS)      tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))//-totalAMPmodified/fractionOfFrame/2//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
+                      if(!iOS)      tolerance+=(totalAMP)**(totalAMP/4)*totalAMP
+                      tolerance+=(totalAMP)**((totalAMP)*((2**.5)*3*4))//iOS may only have a problem with one of these terms//-totalAMPmodified/fractionOfFrame/2//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
 if(window!=3.)//odd conditionals
 {
-                                  let toleranceNudge =((-leafPermanent+grPermanent+2**.5-3.)*totalAMPmodified-1.*totalAMP)/fractionOfFrame//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
-                         toleranceNudge*=(totalAMPmodified+totalAMP*2)/(grPermanent-leafPermanent);
+                                  let toleranceNudge =((-leafPermanent+grPermanent+2**.5-3)*totalAMPmodified-1.*totalAMP)/fractionOfFrame//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
+                        toleranceNudge*=(2.)/(grPermanent-leafPermanent+1);
+                         toleranceNudge+=(totalAMP)**(2./3.);
                          tolerance+=toleranceNudge;
 }
                                
