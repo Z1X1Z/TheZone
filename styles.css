@@ -12,7 +12,17 @@ body
     text-indent: 3.4%;
 }
 
+.configuration{
+    height: 50px;
+    width:50%;
+    font-size: 50px;
+}
+.engage{
 
+    height: 50px;
+    width:50px;
+}
+}
 
 
 .textSHADOW

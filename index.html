@@ -146,47 +146,48 @@
                                  loadWithBypass(this.name,'t')"
       >Touch Only</a></li>
    </h1>
+<h2>
+
 <p>
-    <h1>
-    <input type="text" id = "configuration1" onkeyup="        localStorage.setItem('config1', this.value);
+    <input class="configuration" type="text" id = "configuration1" onkeyup="        localStorage.setItem('config1', this.value);
 "
->Config1</input>
-<br>
-    <input type="checkbox" id="engage1"style="color:green" name="t"  onclick= "
+></input>
+
+    <input class="engage" type="checkbox" id="engage1"style="color:green" name="t"  onclick= "
         localStorage.setItem('engage1', this.checked.toString());
 ">
      <label for="engage1">engage1</label><p>
 
 
-          <input type="text" id = "configuration2" onkeyup="        localStorage.setItem('config2', this.value);
+          <input class="configuration" type="text" id = "configuration2" onkeyup="        localStorage.setItem('config2', this.value);
 "
->Config2</input>
-<br>
-    <input type="checkbox" id="engage2"style="color:green" name="t"  onclick= "
+></input>
+
+    <input class="engage"  type="checkbox" id="engage2"style="color:green" name="t"  onclick= "
         localStorage.setItem('engage2', this.checked.toString());
 ">
-     <label for="engage2">engage2</label><p>
+     <label  for="engage2">engage2</label><p>
 
 
-          <input type="text" id = "configuration3" onkeyup="        localStorage.setItem('config3', this.value);
+          <input class="configuration" type="text" id = "configuration3" onkeyup="        localStorage.setItem('config3', this.value);
 "
->Config3</input>
-<br>
-    <input type="checkbox" id="engage3"style="color:green" name="t"  onclick= "
+></input>
+
+    <input class="engage" type="checkbox" id="engage3"style="color:green" name="t"  onclick= "
         localStorage.setItem('engage3', this.checked.toString());
 ">
-     <label for="engage3">engage3</label><p>
+     <label  for="engage3">engage3</label><p>
 
 
-          <input type="text" id = "configuration4" onkeyup="        localStorage.setItem('config4', this.value);
+          <input class="configuration" type="text" id = "configuration4" onkeyup="        localStorage.setItem('config4', this.value);
 "
->Config4</input>
-<br>
-    <input type="checkbox" id="engage4"style="color:green" name="t"  onclick= "
+></input>
+
+    <input class="engage" type="checkbox" id="engage4"style="color:green" name="t"  onclick= "
         localStorage.setItem('engage4', this.checked.toString());
 ">
      <label for="engage4">engage4</label><p>
-     </h1>
+     </h2>
     <script>
         let hkConfig = localStorage.getItem('config1');
         document.getElementById('configuration1').value=hkConfig;
