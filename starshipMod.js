@@ -4479,11 +4479,13 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
 //odd conditionals
                                    
                       if(!iOS)      tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))//iOS may only have a problem with one of these terms//-totalAMPmodified/fractionOfFrame/2//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
+ if(window.highORlow!=3.)
 {
                                   let toleranceNudge =((-leafPermanent+grPermanent+2**.5-3)*totalAMPmodified-1.*totalAMP)/fractionOfFrame//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                         toleranceNudge*=(2.)/(grPermanent-leafPermanent+1);
-                  if(window.highORlow!=3.) toleranceNudge+=(totalAMP)**(.5)**totalAMP**(1./totalAMP)**totalAMP;
+                  toleranceNudge+=(totalAMP)**(.5)**totalAMP**(1./totalAMP)**(totalAMP);
                          tolerance+=toleranceNudge;
+
 }
                                
 
