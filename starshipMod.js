@@ -4482,7 +4482,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
 {
                                   let toleranceNudge =((-leafPermanent+grPermanent+2**.5-3)*totalAMPmodified-1.*totalAMP)/fractionOfFrame//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                         toleranceNudge*=(2.)/(grPermanent-leafPermanent+1);
-                  if(window.highORlow!=3.) toleranceNudge+=(totalAMP)**(.5)**powerAMP**(1./totalAMP);
+                  if(window.highORlow!=3.) toleranceNudge+=(totalAMP)**(.5)**totalAMP**(1./(totalAMP**.5));
                          tolerance+=toleranceNudge;
 }
                                
