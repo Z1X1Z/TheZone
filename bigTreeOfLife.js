@@ -184,9 +184,10 @@ else if (refactorCores==0.) p.divideScalar(3.);
 
 var swapped=swap;
 var flopped=oppositionalCoreFlop;
+       var seventhEYEandJubileye = (seventhEYE==3.&&jubileyes!=0.);
 
 //goes with swapSettingsForJubileyes() in hotkey for jubileyes
-if(jubileyes!=0.&&seventhEYE>0.&&p.length()>2./3.)
+if(seventhEYEandJubileye&&p.length()>2./3.)
 {swapped=(swap-swapJUBILEE+swapDEFAULT)%4.;
    flopped =(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT)%3;
 }
@@ -916,7 +917,7 @@ if(continuumClover!=0&&lfc!=0){//engage continualization
 var continuumCore=(continuumCounter+hyperCoreOUTPUT)*correction;
 
     var cc2=continuumCore;
-       if(seventhEYE==0.)cc2*=(continuumCore);
+       if((seventhEYE==0.||(!seventhEYEandJubileye&&s.length>2./3.))||(seventhEYEandJubileye&&s.length()>1./3.))cc2*=(continuumCore);
 
 if(loops+counter<=hyperCoreBoosted+continuumCounter)
 {
