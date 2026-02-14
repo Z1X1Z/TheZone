@@ -1,6 +1,10 @@
-var shaderScale,distributor,swap,dilate,squeezeN,seventhEYE,budge,polyNomialStretch, gigaLeap,externalCores,centralCores,coreShift,Redux,coreDilation, chirality,coords,morph,refactorCores,MetaCored,jubileyes,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
+var shaderScale,swapJUBILEE,swapDEFAULT,oppositionalCoreFlopJUBILEE,oppositionalCoreFlopDEFAULT,distributor,swap,dilate,squeezeN,seventhEYE,budge,polyNomialStretch, gigaLeap,externalCores,centralCores,coreShift,Redux,coreDilation, chirality,coords,morph,refactorCores,MetaCored,jubileyes,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
 ,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta,spinTowardsMe,d,chop,cellularDivision,triogenesis,nGenesis,squareGenesis,constellationCoord,cloverso,feedTheLamb,OrthoEvery;
 function setUniformsToPlainName(){
+    oppositionalCoreFlopDEFAULT=uniforms.oppositionalCoreFlopDEFAULT.value
+    oppositionalCoreFlopJUBILEE=uniforms.oppositionalCoreFlopJUBILEE.value
+    swapDEFAULT=uniforms.swapDEFAULT.value
+    swapJUBILEE=uniforms.swapJUBILEE.value
     jubileyes=uniforms.jubileyes.value
     OrthoEvery=uniforms.OrthoEvery.value
     gigaLeap=uniforms.gigaLeap.value
@@ -94,11 +98,12 @@ function tol( j,  t){
 
 var swapped=swap;
 var flopped=oppositionalCoreFlop;
+/*
 //goes with swapSettingsForJubileyes() in hotkey for jubileyes
 if(jubileyes!=0.&&seventhEYE>0.&&lfc/zoom>2./3.)
 {swapped=(swap-swapJUBILEE+swapDEFAULT)%4.;
    flopped =(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT)%3;
-}
+}*/
 
   if(p.x>0.)
     {
@@ -642,10 +647,11 @@ polyNomialStretch
     {
 
 var span=0.;
-if(seventhEYE==3.)
+if(seventhEYE==3.&&lengthP<2./3.)
     {
-        if (lengthP<2./3.)span = lfcCenterCored/2.;
-        else span = lfc+.5;
+        //if (lengthP<2./3.)
+        span = lfcCenterCored/2.;
+        //else span = lfc+.5;
     }
 else if(seventhEYE==0.)span = lfcCenterCored;
 else span = lfc;

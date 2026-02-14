@@ -43,7 +43,7 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
 
                            const coreFlopConstant = 2;
                            const swapConstant = 1;
-                              const JubileeCoreFlop = 1;
+                              const JubileeCoreFlop = 0;
                            const JubileeSwap = 3;
 
 window.uniformsInitial = {
@@ -468,7 +468,7 @@ for(var nameOfUniform in uniformsInitial)
                                          
                                          runningHash = true;
                                          window.number = "no number";
-
+                                                 swapSettingsForJubileyes()
                                      //  if(window.settingsSet) 
                                      
                                          readHash()
@@ -687,7 +687,18 @@ source.connect(analyser);
 
                                           else  if((key == "U") && event.altKey&&event.ctrlKey)uniforms.ringSpring.value=!uniforms.ringSpring.value;
                                           else  if((key == "T") && event.altKey&&event.ctrlKey)uniforms.Black.value=!uniforms.Black.value;
-                                          else  if((key == "N") && event.altKey&&event.ctrlKey)uniforms.swap.value=(uniforms.swap.value+1)%4;
+                                          else  if((key == "N") && event.altKey&&event.ctrlKey)
+                                            {
+                                                 if(number!="no number")
+        {
+            if(number<0)
+            {
+                 uniforms.swap.value = Date.now()%4.
+            }
+          else  uniforms.swap.value =Math.floor(number)%4;
+        }
+                                     else           uniforms.swap.value=(uniforms.swap.value+1)%4;
+                                            }
 
                                           else  if((key == "W") && event.altKey&&event.ctrlKey)uniforms.armStar.value=!uniforms.armStar.value;
                                           else  if(key == "J" && event.altKey&&event.ctrlKey)uniforms.sevenSquared.value=!uniforms.sevenSquared.value;
@@ -1572,4 +1583,3 @@ uniforms.oppositionalCoreFlop.value= coreFlopConstant;
 uniforms.swap.value=swapConstant;
                         }
             }
-                                                 swapSettingsForJubileyes()
