@@ -95,16 +95,6 @@ function tol( j,  t){
   //  return p;
    let p = new THREE.Vector2(j.y,j.x);//
 
-
-var swapped=swap;
-var flopped=oppositionalCoreFlop;
-/*
-//goes with swapSettingsForJubileyes() in hotkey for jubileyes
-if(jubileyes==Math.floor(jubileyes)&&seventhEYE>0.&&lfc/zoom>2./3.)
-{swapped=(swap-swapJUBILEE+swapDEFAULT)%4.;
-   flopped =(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT)%3;
-}*/
-
   if(p.x>0.)
     {
         p.multiplyScalar(-1.);
@@ -190,6 +180,18 @@ p.divideScalar( 2.);
 }
 else if (refactorCores==0.) p.divideScalar(3.);
 
+
+
+var swapped=swap;
+var flopped=oppositionalCoreFlop;
+
+//goes with swapSettingsForJubileyes() in hotkey for jubileyes
+if(jubileyes!=0.&&seventhEYE>0.&&p.length()>2./3.)
+{swapped=(swap-swapJUBILEE+swapDEFAULT)%4.;
+   flopped =(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT)%3;
+}
+
+
 var s= p.clone();
 var c = s.length();
 
@@ -239,6 +241,23 @@ centerslide-=c/2.;
 loops++;coresIn++;
 }
 else break;
+
+
+var seventhEYEthree = (seventhEYE==3.&&((jubileyes!=0.&&lengthP<4./9.)||(jubileyes==0.&&lengthP<2./3.))&&zoom<.5
+ &&lfc/zoom>2./3.);
+       if(seventhEYEthree
+ )
+{
+    s/=4.;
+    s=new THREE.Vector2( 1.5/(2.5-(-s.x)), 1.5/(2.5-((Math.abs(s.y)+budge))//plus one third is optional
+    ));//this needs some exploration//here needs activation and new hotkey
+   // if(seventhEYE==2.)s=vec2(s.y,abs(s.x));//more sign checks may help
+   // try signs and swizzle!
+}
+
+
+
+
 // if(refactorCores!=1.){s*=(1.+lfc/2.);c*=(1.+lfc/2.);}
 let lfcCenterCored = lfc*scale;
 if(refactorCores>1.){
@@ -365,7 +384,7 @@ if(polyNomialStretch&&OrthoEvery==0.)
    }
    else hyperCore+=.5;
    }
-   if(seventhEYE>0.&&lengthP<2./3.&&zoom<.5
+   if(seventhEYE>0.&&(seventhEYE!=3.||seventhEYEthree)&&lengthP<2./3.&&zoom<.5
    )
    {
     if(budge==1./3.)
@@ -657,7 +676,7 @@ else if(seventhEYE==0.)span = lfcCenterCored;
 else span = lfc;
     var stretch=((span+.5)**.5)**(1./squeezeN);
 
-    if(seventhEYE==0.||lengthP>2./3.)
+    if(seventhEYE==0.||(seventhEYE==3.&&!seventhEYEthree)||lengthP>2./3.)
       s.multiplyScalar(1./stretch);//maybe other values work?
      else s.multiplyScalar(stretch);
 }
@@ -1078,7 +1097,9 @@ else s=spin(s,Math.PI);
 
 
          if(i-(counter)==Math.abs(jubileyes)&&
-jubileyes==Math.floor(jubileyes)&&
+jubileyes!=0.&&
+       ( (seventhEYE==3.&&lengthP<2./3.)||seventhEYE==0.)&&
+
        s.length()<1./3.//2./3.
  )
 {

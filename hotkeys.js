@@ -244,7 +244,7 @@ noteFrozen:{value:0},
       squeezeN:{value:1.},
 
     glyph:{value:0.},
-    jubileyes:{value:1.},
+    jubileyes:{value:2.},
 seventhEYE:{value:3},
 budge:{value:.5},
 polyNomialStretch:{value:true   },
@@ -468,11 +468,11 @@ for(var nameOfUniform in uniformsInitial)
                                          
                                          runningHash = true;
                                          window.number = "no number";
-                                                 swapSettingsForJubileyes()
                                      //  if(window.settingsSet) 
                                      
                                          readHash()
-                                  
+                                    swapSettingsForJubileyes()
+
                                          let n = document.getElementsByName('t');
                                           for(var p = 0; p<n.length;p++)n[p].checked  = false;
                                          
@@ -861,8 +861,8 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
 
                 {if(number!="no number")
                     uniforms.jubileyes.value=number;
-                else if( uniforms.jubileyes.value!=.5)uniforms.jubileyes.value=.5;
-                    else  uniforms.jubileyes.value=.0;
+                else if( uniforms.jubileyes.value!=.0)uniforms.jubileyes.value=.0;
+                    else  uniforms.jubileyes.value=2.;
                        swapSettingsForJubileyes()
                         }       
 
@@ -1572,7 +1572,7 @@ else
 
             function swapSettingsForJubileyes(){
                  
-                        if(Math.floor(uniforms.jubileyes.value)==uniforms.jubileyes.value)
+                        if(0.!=uniforms.jubileyes.value)
                         {
 uniforms.oppositionalCoreFlop.value=JubileeCoreFlop;
 uniforms.swap.value=JubileeSwap;
