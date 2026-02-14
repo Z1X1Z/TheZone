@@ -1066,8 +1066,6 @@ else s=spin(s,Math.PI);
        s.length()<1./3.//2./3.
  )
 {
-    s=new THREE.Vector2(1.5/(2.5+s.x),1.5/(2.5-Math.abs(s.y)+budge-.5));
-    if(jubileyes==2.)s=new THREE.Vector2(s.y,Math.abs(s.x));//more sign checks may help
    // try signs and swizzle!
 hyperCoreBoosted++;//before or after *=log(3.)?
    hyperCoreBoosted*=Math.log(3.);
@@ -1075,6 +1073,20 @@ hyperCoreBoosted++;//before or after *=log(3.)?
   // breakNext=true;
 }
 
+
+         if((i)-(counter)==Math.abs(jubileyes)&&Math.floor(jubileyes)==jubileyes&&
+       s.length()<1./3.//2./3.
+ )
+{
+    s.multiplyScalar(1./2.);
+    s=new THREE.Vector2(1.5/(2.5+s.x),1.5/(2.5-Math.abs(s.y)+budge-.5));
+        if(jubileyes<0.)s=new THREE.Vector2(s.y,Math.abs(s.x));//more sign checks may help
+
+   // try signs and swizzle!
+hyperCoreBoosted+=squeezeN*4.;//before or after *=log(3.)?
+  hyperCoreBoosted*=pow(log(3.),squeezeN);
+         break;
+}
 OmniDynamicPetalShift =omniData[0];
 OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
 

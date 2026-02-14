@@ -219,7 +219,7 @@ cards:{value:false},
     inseyedOut:{value:1},
     elderHorns:{value:0},
     glyph:{value:0.},
-    jubileyes:{value:0.},
+    jubileyes:{value:.5},
     
 cloverso:{value:false},
 OrthoEvery:{value:0.},
@@ -832,22 +832,17 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
    // else if (event.altKey);
                   else if(key == "N" && event.ctrlKey)
                     {
-                        uniforms.jubileyes.value=(uniforms.jubileyes.value+1)%3;
+                       /* uniforms.jubileyes.value=(uniforms.jubileyes.value+1)%3;
+*/
 
-                        if(uniforms.jubileyes.value)
-                        {
-uniforms.oppositionalCoreFlop.value=0
-//uniforms.swap.value=1
-
-                        }
-                        else
-                        {
-uniforms.oppositionalCoreFlop.value= coreFlopConstant;
-                            
-//uniforms.swap.value=swapConstant;
+                {if(number!="no number")
+                    uniforms.jubileyes.value=number;
+                else if( uniforms.jubileyes.value==1.)uniforms.jubileyes.value=.5
+                    else  uniforms.jubileyes.value=1.;
+                       swapSettingsForJubileyes()
+                        }       
 
 
-                        }
                     }
                   else if(key == "B" && event.ctrlKey)
                     uniforms.BlackTraction.value=!uniforms.BlackTraction.value;
@@ -1551,3 +1546,17 @@ else
               }
             }
 
+
+            function swapSettingsForJubileyes(){
+                 
+                        if(Math.floor(uniforms.jubileyes.value)==uniforms.jubileyes.value)
+                        {
+uniforms.oppositionalCoreFlop.value=0
+uniforms.swap.value=3
+                        }
+                        else
+                        {
+uniforms.oppositionalCoreFlop.value= coreFlopConstant;    
+uniforms.swap.value=swapConstant;
+                        }
+            }
