@@ -1549,7 +1549,7 @@ else
 
             function swapSettingsForJubileyes(){
                  
-                        if(Math.floor(uniforms.jubileyes.value)==uniforms.jubileyes.value)
+                        if(0!=uniforms.jubileyes.value)
                         {
 uniforms.oppositionalCoreFlop.value=0
 uniforms.swap.value=3
