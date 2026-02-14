@@ -311,7 +311,7 @@ else hyperCore=externalCores;//hyperCore is really better thought of as hyperMet
 //float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
 var equilibriator = 1.
     if(dilate){
-if(lfc/zoom>1.5)
+if(lfc/zoom>1.)
     equilibriator=lfc/(lfc-zoom/dif)*dif;
    //this is to allow top level core freeze for original clover
 hyperCore*=equilibriator;
@@ -365,7 +365,7 @@ if(polyNomialStretch&&OrthoEvery==0.)
    }
    else hyperCore+=.5;
    }
-   if(seventhEYE>0.&&lengthP<2./3.
+   if(seventhEYE>0.&&lengthP<2./3.&&zoom<.5
    )
    {
     if(budge==1./3.)
