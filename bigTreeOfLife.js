@@ -1074,7 +1074,7 @@ hyperCoreBoosted++;//before or after *=log(3.)?
 }
 
 
-         if((i)-(counter)==Math.abs(jubileyes)&&Math.floor(jubileyes)==jubileyes&&
+         if((i)-(counter)==Math.abs(jubileyes)&&jubileyes!=0.&&
        s.length()<1./3.//2./3.
  )
 {
@@ -1084,7 +1084,7 @@ hyperCoreBoosted++;//before or after *=log(3.)?
 
    // try signs and swizzle!
 hyperCoreBoosted+=squeezeN*4.;//before or after *=log(3.)?
-  hyperCoreBoosted*=pow(log(3.),squeezeN);
+  hyperCoreBoosted*=(log(3.)**squeezeN);
          break;
 }
 OmniDynamicPetalShift =omniData[0];
