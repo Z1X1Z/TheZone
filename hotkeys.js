@@ -219,7 +219,7 @@ cards:{value:false},
     inseyedOut:{value:1},
     elderHorns:{value:0},
     glyph:{value:0.},
-    jubileyes:{value:.5},
+    jubileyes:{value:1.},
     
 cloverso:{value:false},
 OrthoEvery:{value:0.},
@@ -239,7 +239,7 @@ noteFrozen:{value:0},
       smush:{value:0.2},
       ringSpring:{value:false},
       squeezeN:{value:1.},
-seventhEYE:{value:0},
+seventhEYE:{value:3},
 budge:{value:.5},
 polyNomialStretch:{value:true   },
 Black:{value:false   },
@@ -698,7 +698,7 @@ source.connect(analyser);
                     else  zoomBoost=1.5;
                 }
                                                       else  if(key == "P" && event.altKey&&event.ctrlKey)uniforms.polyNomialStretch.value=!uniforms.polyNomialStretch.value;
-                                          else  if(key == "O" && event.altKey&&event.ctrlKey)uniforms.seventhEYE.value=(uniforms.seventhEYE.value+1)%4;
+                                          else  if(key == "O" && event.altKey&&event.ctrlKey)uniforms.seventhEYE.value=(uniforms.seventhEYE.value+1.)%4;
                                           else  if(key == "L" && event.altKey&&event.ctrlKey)
                                             {uniforms.Redux.value=!uniforms.Redux.value;
                                                 if(uniforms.Redux.value)uniforms.squeezeN.value=2.;
@@ -837,9 +837,9 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
 
                 {if(number!="no number")
                     uniforms.jubileyes.value=number;
-                else if( uniforms.jubileyes.value==1.)uniforms.jubileyes.value=.5
+                else if( uniforms.jubileyes.value==1.)uniforms.jubileyes.value=.0
                     else  uniforms.jubileyes.value=1.;
-                       swapSettingsForJubileyes()
+                       if(seventhEYE!=3.)swapSettingsForJubileyes()
                         }       
 
 
@@ -1552,7 +1552,7 @@ else
                         if(0!=uniforms.jubileyes.value)
                         {
 uniforms.oppositionalCoreFlop.value=0
-uniforms.swap.value=3
+uniforms.swap.value=2
                         }
                         else
                         {
