@@ -35,11 +35,17 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                                                 
                                                   return audioBufferFromFile.duration
                            }
-                         let  zoomINITiaLizer =1.;//    1/2**65.;//1.;//
+              
+
+           let  zoomINITiaLizer =1.;//    1/2**65.;//1.;//
                          let xINITiaLizer=0.;//1./3.;
                            let yINITiaLizer=.0;//1./3./2.;
+
                            const coreFlopConstant = 2;
                            const swapConstant = 1;
+                              const JubileeCoreFlop = 1;
+                           const JubileeSwap = 3;
+
 window.uniformsInitial = {
 coreDilation:{value:0.},
 fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:44100./1024.},
@@ -57,7 +63,6 @@ heartStar:{value:0},
 superStable:{value:false},
 distributor:{value:true},
 sevenSquared:{value:false},
-oppositionalCoreFlop:{value:coreFlopConstant},
 micIn:{value:null},
     audioBuffer:{value:null},
     omniDynamic:{value:null},
@@ -218,8 +223,6 @@ squirgle:{value:0},
 cards:{value:false},
     inseyedOut:{value:1},
     elderHorns:{value:0},
-    glyph:{value:0.},
-    jubileyes:{value:1.},
     
 cloverso:{value:false},
 OrthoEvery:{value:0.},
@@ -239,11 +242,21 @@ noteFrozen:{value:0},
       smush:{value:0.2},
       ringSpring:{value:false},
       squeezeN:{value:1.},
+
+    glyph:{value:0.},
+    jubileyes:{value:1.},
 seventhEYE:{value:3},
 budge:{value:.5},
 polyNomialStretch:{value:true   },
 Black:{value:false   },
 swap:{value:  swapConstant },
+swapDEFAULT:{value:  swapConstant },
+swapJUBILEE:{value:  JubileeSwap },
+
+oppositionalCoreFlop:{value:coreFlopConstant},
+oppositionalCoreFlopDEFAULT:{value:coreFlopConstant},
+oppositionalCoreFlopJUBILEE:{value:JubileeCoreFlop},
+
 gigaLeap:{value:true},
 BlackTraction:{value:false}
 }
@@ -837,9 +850,9 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
 
                 {if(number!="no number")
                     uniforms.jubileyes.value=number;
-                else if( uniforms.jubileyes.value==1.)uniforms.jubileyes.value=.0
-                    else  uniforms.jubileyes.value=1.;
-                       if(seventhEYE!=3.)swapSettingsForJubileyes()
+                else if( uniforms.jubileyes.value==0.)uniforms.jubileyes.value=1.
+                    else  uniforms.jubileyes.value=0.;
+                       swapSettingsForJubileyes()
                         }       
 
 
@@ -1546,13 +1559,12 @@ else
               }
             }
 
-
             function swapSettingsForJubileyes(){
                  
                         if(0!=uniforms.jubileyes.value)
                         {
-uniforms.oppositionalCoreFlop.value=0
-uniforms.swap.value=2
+uniforms.oppositionalCoreFlop.value=JubileeCoreFlop;
+uniforms.swap.value=JubileeSwap;
                         }
                         else
                         {
@@ -1560,3 +1572,4 @@ uniforms.oppositionalCoreFlop.value= coreFlopConstant;
 uniforms.swap.value=swapConstant;
                         }
             }
+                                                 swapSettingsForJubileyes()

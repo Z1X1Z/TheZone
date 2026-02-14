@@ -92,11 +92,19 @@ function tol( j,  t){
    let p = new THREE.Vector2(j.y,j.x);//
 
 
+var swapped=swap;
+var flopped=oppositionalCoreFlop;
+//goes with swapSettingsForJubileyes() in hotkey for jubileyes
+if(jubileyes!=0.&&seventhEYE>0.&&lfc/zoom>2./3.)
+{swapped=(swap-swapJUBILEE+swapDEFAULT)%4.;
+   flopped =(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT%3;
+}
+
   if(p.x>0.)
     {
         p.multiplyScalar(-1.);
  }
-     //  if(swap==1.&&p.x>0.)p.multiplyScalar(-1);
+     //  if(swapped==1.&&p.x>0.)p.multiplyScalar(-1);
 
     p = p.clone().multiplyScalar(zoom).add(new THREE.Vector2(-coords.y,-coords.x));
         var lengthP=p.length()
@@ -555,7 +563,7 @@ dstnce = s.length();
 
 
 if(Refractelate&&dstnce>refractelC){s.divideScalar( refractelC);} //refractelC/=4./3.;}
-            if((counter==1.&&oppositionalCoreFlop==1)||oppositionalCoreFlop==2)
+            if((counter==1.&&flopped==1)||flopped==2)
                 {//s=spinVector(s,Math.PI);
                // if(morph==0.&&petals==0.)
                   //  s.multiplyScalar(-1.);
@@ -636,7 +644,7 @@ polyNomialStretch
 var span=0.;
 if(seventhEYE==3.)
     {
-        if (lfc<2./3.)span = lfcCenterCored/2.;
+        if (lengthP<2./3.)span = lfcCenterCored/2.;
         else span = lfc+.5;
     }
 else if(seventhEYE==0.)span = lfcCenterCored;
@@ -936,7 +944,7 @@ dstnce = s.length();
            //  hyperCoreOUTPUT-=sliceanddiceBoost;
 
         }
-if (counter==0.&&swap==1)s.multiplyScalar(-1.)
+if (counter==0.&&swapped==1)s.multiplyScalar(-1.)
 
 for(var i=0;i<200; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.)))
@@ -963,15 +971,15 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
      
     if(spinTowardsMe) if(i>=hyperCoreBoosted)s=spin(s,Math.atan2(d.y,d.x));
     let angleSs=s.clone();
-   if (swap==1)angleSs.multiplyScalar(-1.);
+   if (swapped==1)angleSs.multiplyScalar(-1.);
         var angleS = Math.atan2(angleSs.y,angleSs.x);
 
   var alternator=1.;
-if((swap==1||swap==3)&&petals==0.)
+if((swapped==1||swapped==3)&&petals==0.)
 {
     alternator = (((counter-loops)%2.)-.5)*2.;
 
-            if(swap==1)
+            if(swapped==1)
                 {alternator*=-1.;
                     //     angleS*=-1;
                     }
@@ -979,7 +987,7 @@ if((swap==1||swap==3)&&petals==0.)
     s.multiplyScalar(alternator);
 
   // if (alternator==-1.)s=spin(s,Math.PI);
-if(swap==1)
+if(swapped==1)
     {s.multiplyScalar(-1.);
 
    if(alternator==1.)
@@ -996,7 +1004,7 @@ else
 }
     }
 }
-    if(swap>0&&//counter>1.&&//distributor&&//not quite the same as distributor, but I don't want to add another button
+    if(swapped>0&&//counter>1.&&//distributor&&//not quite the same as distributor, but I don't want to add another button
 //    morph==0.&&
 (angleS+Math.PI*2+Math.PI*2/12.*alternator)%(Math.PI*2/3.)>Math.PI*2/6.) //p*=0.;
 {
@@ -1005,7 +1013,7 @@ else
 //s.multiplyScalar(-1.);
 if(morph==0.)
     {
-        if(swap==1)
+        if(swapped==1)
         {
         if (alternator==-1)s=spin(s,Math.PI*4./3.);
        else s.multiplyScalar(-1);
@@ -1063,7 +1071,7 @@ else s=spin(s,Math.PI);
     
 //if(i==0){float b = ;s*=b;dstnce*b;}
          if(jubileyes>0.&&
-       s.length()<1./3.//2./3.
+       s.length()<1./3.//2./3.seventhEYE
  )
 {
    // try signs and swizzle!
@@ -1075,6 +1083,8 @@ hyperCoreBoosted++;//before or after *=log(3.)?
 
 
          if((i)-(counter)==Math.abs(jubileyes)&&jubileyes!=0.&&
+                 ( lengthP<2./3.||seventhEYE==0.)
+&&
        s.length()<1./3.//2./3.
  )
 {
