@@ -97,7 +97,7 @@ var flopped=oppositionalCoreFlop;
 //goes with swapSettingsForJubileyes() in hotkey for jubileyes
 if(jubileyes!=0.&&seventhEYE>0.&&lfc/zoom>2./3.)
 {swapped=(swap-swapJUBILEE+swapDEFAULT)%4.;
-   flopped =(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT%3;
+   flopped =(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT)%3;
 }
 
   if(p.x>0.)
