@@ -4247,7 +4247,7 @@ int swapped=swap;
 int flopped=oppositionalCoreFlop;
 /*
 //goes with swapSettingsForJubileyes() in hotkey for jubileyes
-if(jubileyes!=0.&&seventhEYE>0.&&lfc/zoom>2./3.)
+if(floor(jubileyes)==jubileyes&&seventhEYE>0.&&lfc/zoom>2./3.)
 {swapped=int(mod(float(swap-swapJUBILEE+swapDEFAULT) ,4.));
    flopped = int(mod(float(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT ),3.));
 }
@@ -4731,7 +4731,7 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
                                                       vec4 eyeScroll= vec4(0.);
                                                       vec2 lastLastS = s;
                                                          vec2 lastS = s;
-//if(jubileyes==0.)
+//if(floor(jubileyes)==jubileyes)
 {
         hyperCoreBoosted*=squeezeN;
         hyperCoreOUTPUT*=squeezeN;
@@ -5745,10 +5745,12 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
        */
    }
    
-         if(0.!=jubileyes
+         if(floor(jubileyes)==jubileyes&&
        //&& ( (seventhEYE>0.&&lengthP<2./3.)||seventhEYE==0.)
          
-         &&float(i)-(counter)==abs(jubileyes)&&
+        float(i)-counter==abs(jubileyes)  &&//try counter - i and i - counter
+         
+      
        dstnce<1./3.//2./3.
  )
 {

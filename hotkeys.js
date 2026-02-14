@@ -861,8 +861,8 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
 
                 {if(number!="no number")
                     uniforms.jubileyes.value=number;
-                else if( uniforms.jubileyes.value==0.)uniforms.jubileyes.value=1.
-                    else  uniforms.jubileyes.value=0.;
+                else if( uniforms.jubileyes.value!=.5)uniforms.jubileyes.value=.5;
+                    else  uniforms.jubileyes.value=.0;
                        swapSettingsForJubileyes()
                         }       
 
@@ -1572,7 +1572,7 @@ else
 
             function swapSettingsForJubileyes(){
                  
-                        if(0!=uniforms.jubileyes.value)
+                        if(Math.floor(uniforms.jubileyes.value)==uniforms.jubileyes.value)
                         {
 uniforms.oppositionalCoreFlop.value=JubileeCoreFlop;
 uniforms.swap.value=JubileeSwap;

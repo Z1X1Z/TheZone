@@ -100,7 +100,7 @@ var swapped=swap;
 var flopped=oppositionalCoreFlop;
 /*
 //goes with swapSettingsForJubileyes() in hotkey for jubileyes
-if(jubileyes!=0.&&seventhEYE>0.&&lfc/zoom>2./3.)
+if(jubileyes==Math.floor(jubileyes)&&seventhEYE>0.&&lfc/zoom>2./3.)
 {swapped=(swap-swapJUBILEE+swapDEFAULT)%4.;
    flopped =(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT)%3;
 }*/
@@ -1075,22 +1075,10 @@ else s=spin(s,Math.PI);
     }
  
     
-//if(i==0){float b = ;s*=b;dstnce*b;}
-         if(jubileyes>0.&&
-       s.length()<1./3.//2./3.seventhEYE
- )
-{
-   // try signs and swizzle!
-hyperCoreBoosted++;//before or after *=log(3.)?
-   hyperCoreBoosted*=Math.log(3.);
-         break;
-  // breakNext=true;
-}
 
 
-         if((i)-(counter)==Math.abs(jubileyes)&&jubileyes!=0.&&
-                 ( lengthP<2./3.||seventhEYE==0.)
-&&
+         if(i-(counter)==Math.abs(jubileyes)&&
+jubileyes==Math.floor(jubileyes)&&
        s.length()<1./3.//2./3.
  )
 {
@@ -1099,8 +1087,8 @@ hyperCoreBoosted++;//before or after *=log(3.)?
         if(jubileyes<0.)s=new THREE.Vector2(s.y,Math.abs(s.x));//more sign checks may help
 
    // try signs and swizzle!
-hyperCoreBoosted+=squeezeN*4.;//before or after *=log(3.)?
-  hyperCoreBoosted*=(log(3.)**squeezeN);
+hyperCoreBoosted+=squeezeN*3.;//before or after *=log(3.)?
+  hyperCoreBoosted*=(Math.log(3.)**squeezeN);
          break;
 }
 OmniDynamicPetalShift =omniData[0];
