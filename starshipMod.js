@@ -2484,7 +2484,9 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                     on = true;
                                 }
                                 else{aboveThreshold = false; on = false;if(!touchMode) uniforms.volume.value=0.00001}
-    if(!notNyquist)console.log(on)
+    
+    
+    //                            if(!notNyquist)console.log(on)
 
                                     }else{aboveThreshold = false; on = false;if(!touchMode)uniforms.volume.value=0.00001}
                                     
@@ -4217,7 +4219,7 @@ if(uniforms.coords.value.y<-.5)
                                                        
        var frameRation =0.+1024*(-leafPermanent*grPermanent*(2**.5) -1)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
                  //            frameRation=1024;
-      // console.log(frameRation)        
+     // console.log(frameRation)        
                                                        
          var fractionOfFrame =frameRation                                              
 //begin MIT license, code from https://github.com/adamski/pitch_detector
