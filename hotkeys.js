@@ -245,7 +245,7 @@ noteFrozen:{value:0},
 
     glyph:{value:0.},
     jubileyes:{value:2.},
-    negative:{value:false},
+    negative:{value:0},
 seventhEYE:{value:3},
 budge:{value:.5},
 polyNomialStretch:{value:true   },
@@ -869,7 +869,7 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                         }       
 
                     }
-                                      else if(key == "V" && event.ctrlKey)uniforms.negative.value=!uniforms.negative.value;
+                                      else if(key == "V" && event.ctrlKey)uniforms.negative.value=(uniforms.negative.value+1)%3;
 
                                       else if(key == "W" && event.ctrlKey)uniforms.seventhOUTside.value=!uniforms.seventhOUTside.value;
 
