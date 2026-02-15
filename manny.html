@@ -1386,6 +1386,11 @@ seventhEYE?![,.O]</a><br>
                       callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
                    <label for="BlackTraction">Black Traction![,B]</label><br>
 
+                  <input type="checkbox" id="negative" name="t"  onclick= "
+                      key  = 'V';
+                      callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                   <label for="negative">Photo Negative![,V]</label><br>
+
                   <input type="checkbox" id="Articles" name="t"  onclick= "
                       key  = 'G';
                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -2091,6 +2096,7 @@ void main(){
         uniform int swapDEFAULT;
         uniform int swapJUBILEE;
         uniform bool seventhOUTside;
+        uniform bool negative;
 
 
 
@@ -8209,8 +8215,8 @@ fin/vec4(confraculator
                    
            if(movieTime<=5.&&movieTime>=0.)layeredOUT=vec4(movie(characterP),1.);
                           else if(movieTime==-2.)layeredOUT=vec4(0.);
-    
-                        gl_FragColor=layeredOUT;//vec4(movie(characterP),1.);//
+                   if(negative)layeredOUT=1.-layeredOUT;
+                        gl_FragColor=vec4(layeredOUT.xyz,1.);//vec4(movie(characterP),1.);//
 //things known to cause bugs on some android chrome: heart (divides by zero), linear eq,waveform, "144000" men and women in clover, articles
                                                                  
                                          }
