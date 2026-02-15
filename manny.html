@@ -7041,7 +7041,7 @@ vec2 dance = vec2(0.);
                        }
     else if (colorCombo==19)zoomer=acrostic(background);
     else if (colorCombo==100)zoomer=vec3(.5);
-    if(negative==2)zoomer = 1.-zoomer;
+    if(negative>=2)zoomer = 1.-zoomer;
                                                  
                                  
          vec2 characterP = p*2.;
@@ -8216,7 +8216,7 @@ fin/vec4(confraculator
                    
            if(movieTime<=5.&&movieTime>=0.)layeredOUT=vec4(movie(characterP),1.);
                           else if(movieTime==-2.)layeredOUT=vec4(0.);
-                   if(negative>0)layeredOUT=1.-layeredOUT;
+                   if(negative==1||negative==2)layeredOUT=1.-layeredOUT;
                         gl_FragColor=vec4(layeredOUT.xyz,1.);//vec4(movie(characterP),1.);//
 //things known to cause bugs on some android chrome: heart (divides by zero), linear eq,waveform, "144000" men and women in clover, articles
                                                                  
