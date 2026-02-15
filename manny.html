@@ -4977,7 +4977,7 @@ else span = lfc;
 
 float stretch=pow(pow(span+.5,.5),1./squeezeN);
 
-    if(((seventhEYE==0.)||(seventhEYE==3.&&!seventhEYEthree)||lengthP>2./3.)&&(!seventhOUTside||!(SEVEYEStartAdj+ sevMargin >lengthP) ))//1./3. supercharges upper level
+    if(((seventhEYE==0.)||(seventhEYE==3.&&!seventhEYEthree)||lengthP>2./3.)&&(!seventhOUTside||(!(SEVEYEStartAdj+ sevMargin >lengthP)||lengthP< SEVEYEStartAdj)))//1./3. supercharges upper level
       s/=stretch;//maybe other values work?
      else s*= stretch;
 }
