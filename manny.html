@@ -4300,11 +4300,11 @@ vec2 s=p;
 
 
 
-float SEVEYEpow = (gr*-leaf);
+float SEVEYEpow = (gr)*(-leaf+1.);
 float SEVEYEPush = pow(2.,SEVEYEpow);
 
 
-float SEVEYEStart=4./3.;
+float SEVEYEStart=5./3.;
 float SEVEYEStartAdj=SEVEYEStart;
 float sevMargin = 1./SEVEYEPush;
 if(clvrVariant4!=0.)

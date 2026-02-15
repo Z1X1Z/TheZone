@@ -210,11 +210,11 @@ var c = s.length();
 
 
 
-var SEVEYEpow = gr*-leaf;
+var SEVEYEpow = gr*(-leaf+1);
 var SEVEYEPush = 2.**SEVEYEpow;
 
 
-var SEVEYEStart=4./3.;
+var SEVEYEStart=5./3.;
 var SEVEYEStartAdj=SEVEYEStart;
 var sevMargin = 1./SEVEYEPush;
 if(clvrVariant4!=0.)
