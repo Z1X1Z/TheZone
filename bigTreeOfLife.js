@@ -223,6 +223,14 @@ else if(seventhOUTside)
 
 }
 
+
+if(morph!=0.)
+{
+    swapped=(swap-swapJUBILEE+swapDEFAULT+1+4*10)%4.;
+   flopped =(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10)%3.;
+}
+
+
 var s= p.clone();
 var c = s.length();
 
