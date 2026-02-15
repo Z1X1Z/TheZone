@@ -188,7 +188,7 @@ var SEVEYEpow = gr*(-leaf+1);
 var SEVEYEPush = 2.**SEVEYEpow;
 
 
-var SEVEYEStart=5./3.;
+var SEVEYEStart=1.75;
 var SEVEYEStartAdj=SEVEYEStart;
 var sevMargin = 1./SEVEYEPush;
 var lfcAdj=lfc ;
