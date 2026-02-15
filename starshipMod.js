@@ -737,7 +737,9 @@ window.twist-=window.spinnerTwist
 
                         
           // if (uniforms.Spoker.value)expandedZoomCage=4./3.
-           if(cloverPerimeter>=window.zoomCageSize*expandedZoomCage){//adjust back in if too far from the center
+       if(!uniforms.seventhOUTside.value)
+       {
+          if(cloverPerimeter>=window.zoomCageSize*expandedZoomCage){//adjust back in if too far from the center
                 pushBackCounter+=60./FPS;
 
                 coordX*=window.zoomCageSize/fromCenter*expandedZoomCage;
@@ -745,7 +747,7 @@ window.twist-=window.spinnerTwist
             }
             else pushBackCounter = 0
             if(pushBackCounter>0.){coordX=0;coordY=0;}//teleport to center if continuously flying into perimeter, set to 0 for off
-
+        }
                                
                                
                     if (trailDepth<trailLength)trailDepth++;
@@ -1599,7 +1601,7 @@ let lastVolume = 1.;
              
             if(uniforms.nGenesis>0.)verticalStretch*=2.;
             if(uniforms.polyNomialStretch.value)expandedZoomCage*=4./3.;
-    if((
+    if((!uniforms.seventhOUTside.value&&
         cloverPerimeter>=zoomCageSize*expandedZoomCage||zoom>=1.
     )&&!zoomOutEngage&&uniforms.MetaCored.value&&!(preserveOuterCore)){coordX=(coordX/2.)%1.; coordY=(coordY/2.)%1.;zoom=(zoom/2.)%1.;
         if(uniforms.wheel.value&&window.cycleCores)uniforms.upCoreCycler.value=(uniforms.upCoreCycler.value-1)%60;//this is for the heart to expand and contract//does modulo -60%60=0?-0 it seems

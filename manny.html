@@ -2087,6 +2087,7 @@ void main(){
         uniform int swap;
         uniform int swapDEFAULT;
         uniform int swapJUBILEE;
+        uniform bool seventhOUTside;
 
 
 
@@ -4285,11 +4286,40 @@ if(seventhEYEandJubileye&&lengthP>2./3.)
 
 vec2 s=p;
 
-                    
         if(seventhEYE>0.&&seventhEYE!=3.&&(lengthP<twoThirds&&length(s)<twoThirds)&&zoom<.5
  //&&lfc>zoom
  )
 {
+    //s*=1.125;
+    s=1.5/(2.5-vec2(-s.x,abs(s.y)+budge//plus one third is optional
+    ));//this needs some exploration//here needs activation and new hotkey
+    if(seventhEYE==2.)s=vec2(s.y,abs(s.x));//more sign checks may help
+   // try signs and swizzle!
+}
+
+
+
+
+float SEVEYEpow = 4.;
+float SEVEYEPush = pow(2.,SEVEYEpow);
+
+
+float SEVEYEStart=1.75;
+float SEVEYEStartAdj=SEVEYEStart;
+float sevMargin = 1./SEVEYEPush;
+if(clvrVariant4!=0.)
+{
+    SEVEYEStartAdj*=- clvrVariant4;
+    sevMargin*=-clvrVariant4;
+}
+sevMargin*=SEVEYEStart/2.;
+sevMargin/=8./SEVEYEPush;
+
+        if(seventhOUTside&&(lfc>zoom)&&(lengthP>SEVEYEStartAdj)
+ //&&lfc>zoom
+ )
+{
+    s/=SEVEYEPush;
     //s*=1.125;
     s=1.5/(2.5-vec2(-s.x,abs(s.y)+budge//plus one third is optional
     ));//this needs some exploration//here needs activation and new hotkey
@@ -4538,6 +4568,10 @@ else{
 }
 
    }
+
+
+
+
 if(gigaLeap)hyperCore-=.5;
 bool spokeloverON=spokelover&&zoom/lfc<1.;//could be 1.5, could be 2/3, one is a compromise
      if(spokeloverON)hyperCore-=log2;
@@ -4626,6 +4660,17 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
                    float variant4Correction=1.;
                                                            if(clvrVariant4!=0.&&OrthoEvery==0.)variant4Correction=(1.-oneOverLeafTruncated);
                                                            float correction = zoom/(zoom-lfc*variant4Correction);
+
+
+   
+
+ if(seventhOUTside&&lengthP>SEVEYEStartAdj)
+ {
+        if (SEVEYEStartAdj>lengthP-sevMargin)hyperCore+=lfc*SEVEYEpow/2.;
+
+    else 
+  hyperCore+=8./lfc;
+ }
 
                if(wheel)m =  ((pWithoutChiralizer/lfc)
                                                         -coords.yx*2.*variant4Correction)*abs(coresIn/crs*2.-1.)
@@ -4923,12 +4968,13 @@ if(seventhEYEthree)
         span = lfcCenterCored/2.;
       //  else span = lfc+.5;
     }
+    else if(lengthP>SEVEYEStartAdj)span = lfc/ SEVEYEPush/2.;
 else if(seventhEYE==0.||(seventhEYE==3.&&!seventhEYEthree)||lengthP>2./3.)span = lfcCenterCored;
 else span = lfc;
 
 float stretch=pow(pow(span+.5,.5),1./squeezeN);
 
-    if(seventhEYE==0.||(seventhEYE==3.&&!seventhEYEthree)||lengthP>2./3.)//1./3. supercharges upper level
+    if(((seventhEYE==0.)||(seventhEYE==3.&&!seventhEYEthree)||lengthP>2./3.)&&(!seventhOUTside||!(SEVEYEStartAdj+ sevMargin >lengthP) ))//1./3. supercharges upper level
       s/=stretch;//maybe other values work?
      else s*= stretch;
 }

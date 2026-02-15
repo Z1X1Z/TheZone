@@ -252,6 +252,7 @@ Black:{value:false   },
 swap:{value:  swapConstant },
 swapDEFAULT:{value:  swapConstant },
 swapJUBILEE:{value:  JubileeSwap },
+seventhOUTside:{value:  true },
 
 oppositionalCoreFlop:{value:coreFlopConstant},
 oppositionalCoreFlopDEFAULT:{value:coreFlopConstant},
