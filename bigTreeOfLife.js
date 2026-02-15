@@ -183,32 +183,6 @@ else if (refactorCores==0.) p.divideScalar(3.);
 
 
 
-var swapped=swap;
-var flopped=oppositionalCoreFlop;
-       var seventhEYEandJubileye = (seventhEYE==3.&&jubileyes!=0.);
-
-//goes with swapSettingsForJubileyes() in hotkey for jubileyes
-if(seventhEYEandJubileye&&p.length()>2./3.)
-{swapped=(swap-swapJUBILEE+swapDEFAULT)%4.;
-   flopped =(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT)%3;
-}
-
-
-var s= p.clone();
-var c = s.length();
-
-        if(seventhEYE>0.&&seventhEYE!=3.&&(lengthP<2./3.)&&zoom<.5
-    )
-{
-
-    s=new THREE.Vector2(1.5/(2.5+s.x),1.5/(2.5-Math.abs(s.y)+budge));//plus one third is optional
-    ;//this needs some exploration//here needs activation and new hotkey
-    if(seventhEYE==2.)s=new THREE.Vector2(s.y,s.x);//more sign checks may help
-   // try signs and swizzle!
-}
-
-
-
 
 var SEVEYEpow = gr*(-leaf+1);
 var SEVEYEPush = 2.**SEVEYEpow;
@@ -226,6 +200,44 @@ if(clvrVariant4!=0.)
 }
 sevMargin*=SEVEYEStart/2.;
 sevMargin/=8./SEVEYEPush;
+
+
+
+var swapped=swap;
+var flopped=oppositionalCoreFlop;
+       var seventhEYEandJubileye = (seventhEYE==3.&&jubileyes!=0.);
+
+
+if(seventhEYEandJubileye&&p.length()>2./3.)
+{
+    if (lengthP< SEVEYEStartAdj)
+    {
+    swapped=(swap-swapJUBILEE+swapDEFAULT+4*10)%4.;
+   flopped =(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10)%3.;
+}
+else 
+{
+    swapped=(swap-swapJUBILEE+swapDEFAULT+2+4*10)%4.;
+   flopped = (oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10)%3.;
+}
+
+}
+
+var s= p.clone();
+var c = s.length();
+
+        if(seventhEYE>0.&&seventhEYE!=3.&&(lengthP<2./3.)&&zoom<.5
+    )
+{
+
+    s=new THREE.Vector2(1.5/(2.5+s.x),1.5/(2.5-Math.abs(s.y)+budge));//plus one third is optional
+    ;//this needs some exploration//here needs activation and new hotkey
+    if(seventhEYE==2.)s=new THREE.Vector2(s.y,s.x);//more sign checks may help
+   // try signs and swizzle!
+}
+
+
+
 
         if(seventhOUTside&&(lfcAdj>(SEVEYEStartAdj-sevMargin)*.75)&&(lengthP>SEVEYEStartAdj)
  )

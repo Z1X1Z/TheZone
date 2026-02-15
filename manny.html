@@ -4273,32 +4273,6 @@ else if (refactorCores==0.) p/=3.;
           float lengthP = length(p);
 
    
-int swapped=swap;
-int flopped=oppositionalCoreFlop;
-
-//goes with swapSettingsForJubileyes() in hotkey for jubileyes
-       bool seventhEYEandJubileye = (seventhEYE==3.&&jubileyes!=0.);
-
-if(seventhEYEandJubileye&&lengthP>2./3.)
-{swapped=int(mod(float(swap-swapJUBILEE+swapDEFAULT+4*10) ,4.));
-   flopped = int(mod(float(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10),3.));
-}
-
-
-
-
-vec2 s=p;
-
-        if(seventhEYE>0.&&seventhEYE!=3.&&(lengthP<twoThirds&&length(s)<twoThirds)&&zoom<.5
- //&&lfc>zoom
- )
-{
-    //s*=1.125;
-    s=1.5/(2.5-vec2(-s.x,abs(s.y)+budge//plus one third is optional
-    ));//this needs some exploration//here needs activation and new hotkey
-    if(seventhEYE==2.)s=vec2(s.y,abs(s.x));//more sign checks may help
-   // try signs and swizzle!
-}
 
 
 
@@ -4319,6 +4293,46 @@ if(clvrVariant4!=0.)
 }
 sevMargin*=SEVEYEStart/2.;
 sevMargin/=8./SEVEYEPush;
+
+
+int swapped=swap;
+int flopped=oppositionalCoreFlop;
+
+//goes with swapSettingsForJubileyes() in hotkey for jubileyes
+       bool seventhEYEandJubileye = (seventhEYE==3.&&jubileyes!=0.);
+
+if(seventhEYEandJubileye&&lengthP>2./3.)
+{
+    if (lengthP< SEVEYEStartAdj)
+    {
+    swapped=int(mod(float(swap-swapJUBILEE+swapDEFAULT+4*10) ,4.));
+   flopped = int(mod(float(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10),3.));
+}
+else 
+{
+    swapped=int(mod(float(swap-swapJUBILEE+swapDEFAULT+2+4*10) ,4.));
+   flopped = int(mod(float(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10),3.));
+}
+
+}
+
+
+
+
+vec2 s=p;
+
+        if(seventhEYE>0.&&seventhEYE!=3.&&(lengthP<twoThirds&&length(s)<twoThirds)&&zoom<.5
+ //&&lfc>zoom
+ )
+{
+    //s*=1.125;
+    s=1.5/(2.5-vec2(-s.x,abs(s.y)+budge//plus one third is optional
+    ));//this needs some exploration//here needs activation and new hotkey
+    if(seventhEYE==2.)s=vec2(s.y,abs(s.x));//more sign checks may help
+   // try signs and swizzle!
+}
+
+
 
         if(seventhOUTside&&(lfcAdj>(SEVEYEStartAdj-sevMargin)*.75)&&(lengthP>SEVEYEStartAdj)
  //&&lfc>zoom
@@ -4603,11 +4617,12 @@ hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if d
 
 vec2 m=vec2(0.);
 
+
 float truncNonLeaf=1.;
 
 float truncator=1.;
 bool truncated = true;
-if(zoom!=0.&&lfc!=0.&&truncated&&lengthP<SEVEYEStartAdj)
+if(zoom!=0.&&lfc!=0.&&truncated&&lengthP<SEVEYEStartAdj)//may or may not include 
 {
     truncNonLeaf=log((lfcCenterCored));
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoom*zoom))
