@@ -530,6 +530,13 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
   hyperCore+=SEVEYEpow*2./lfc;
  }
 
+if(jubileyes!=0.) 
+{
+if(seventhEYE!=3.||((jubileyes!=0.&&lengthP<1./3.)))
+hyperCore+=1.;
+else if (seventhEYE!=3.||(jubileyes==0.&&lengthP<2./3.))
+hyperCore+=.5;
+}
  
                           if(wheel)m =  pWithoutChiralizer.clone().sub(new THREE.Vector2(coords.y,coords.x).multiplyScalar(variant4Correction).multiplyScalar(2.))//try signs with for fibonacci ring pairing and movement distortion #syyym
                           .multiplyScalar(Math.abs(coresIn/crs*2.-1.)).multiplyScalar(mandelCloverFactor);
