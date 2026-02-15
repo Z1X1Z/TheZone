@@ -1641,7 +1641,7 @@ function zoomRoutine(){
                                             cloverSuperCores<-.5)
                             ){
                             zoomOutEngage = true;}
-                         if (zoomOutEngage == true) zoom *= 1.44/ZR;
+                         if (zoomOutEngage == true) zoom *= 1.5/ZR;
                     
 
                         //  if(zoom<1./2**singleHyperCoreDepth*metaDepth)zoom = 1.;
