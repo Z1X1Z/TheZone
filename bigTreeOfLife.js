@@ -225,7 +225,7 @@ if(clvrVariant4!=0.)
 sevMargin*=SEVEYEStart/2.;
 sevMargin/=8./SEVEYEPush;
 
-        if(seventhOUTside&&(lfc>zoom)&&(lengthP>SEVEYEStartAdj)
+        if(seventhOUTside&&(lfc>SEVEYEStartAdj)&&(lengthP>SEVEYEStartAdj)
  //&&lfc>zoom
  )
 {
