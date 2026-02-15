@@ -210,11 +210,11 @@ var c = s.length();
 
 
 
-var SEVEYEpow = 3.;
+var SEVEYEpow = gr*-leaf;
 var SEVEYEPush = 2.**SEVEYEpow;
 
 
-var SEVEYEStart=1.75;
+var SEVEYEStart=4./3.;
 var SEVEYEStartAdj=SEVEYEStart;
 var sevMargin = 1./SEVEYEPush;
 if(clvrVariant4!=0.)
@@ -445,7 +445,7 @@ else{
 }
 
    }
-   var spokeloverON=spokelover&&zoom/lfc<1.;
+   var spokeloverON=spokelover&&zoom/lfc<.5;
 
     if(spokeloverON)hyperCore-=Math.log(2);
 
