@@ -575,14 +575,14 @@ let pushBackCounter = 0;
                     
                     
                     
-                    feedbackPitchsound[4].play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:pitch,volume:(totalAMP<1.)?totalAMP/feedBackReduction:1.})
+                    feedbackPitchsound[4].play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:pitch,volume:(totalAMP<1.)?totalAMP/feedBackReduction*window.touchVolume:window.touchVolume})
                     
                     for (var v = 0; v < 4; v++)
                     {
                         
                          ///  feedbackPitchsound[v].stop();
                             feedbackPitchsound[v].play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:loudestFret[v].frequency,volume://loudestFret[v].volume
-                                1./feedBackReduction/(4-v)})
+                                1./feedBackReduction/(4-v)*window.touchVolume})
                             
                     }
                      
@@ -2534,8 +2534,8 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
         uniforms.lownote.value=kappa*12./EldersLeg;
     }
     if(    window.playQuietestSound){
-        quietestSound.play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:lowAmpFreq,volume:1.})
-        quietestSound2.play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:lowAmpFreq,volume:1.})
+        quietestSound.play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:lowAmpFreq,volume:window.touchVolume})
+        quietestSound2.play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:lowAmpFreq,volume:window.touchVolume})
     }
     //uniforms.lownote.value=lowNote;
     let coreShift=0;
