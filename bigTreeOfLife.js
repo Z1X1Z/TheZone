@@ -1,6 +1,7 @@
-var shaderScale,swapJUBILEE,swapDEFAULT,oppositionalCoreFlopJUBILEE,oppositionalCoreFlopDEFAULT,distributor,swap,dilate,squeezeN,seventhEYE,budge,polyNomialStretch, gigaLeap,externalCores,centralCores,coreShift,Redux,coreDilation, chirality,coords,morph,refactorCores,MetaCored,jubileyes,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
+var shaderScale,seventhOUTside,swapJUBILEE,swapDEFAULT,oppositionalCoreFlopJUBILEE,oppositionalCoreFlopDEFAULT,distributor,swap,dilate,squeezeN,seventhEYE,budge,polyNomialStretch, gigaLeap,externalCores,centralCores,coreShift,Redux,coreDilation, chirality,coords,morph,refactorCores,MetaCored,jubileyes,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
 ,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta,spinTowardsMe,d,chop,cellularDivision,triogenesis,nGenesis,squareGenesis,constellationCoord,cloverso,feedTheLamb,OrthoEvery;
 function setUniformsToPlainName(){
+    seventhOUTside=uniforms.seventhOUTside.value;
     oppositionalCoreFlopDEFAULT=uniforms.oppositionalCoreFlopDEFAULT.value
     oppositionalCoreFlopJUBILEE=uniforms.oppositionalCoreFlopJUBILEE.value
     swapDEFAULT=uniforms.swapDEFAULT.value
@@ -205,6 +206,38 @@ var c = s.length();
     if(seventhEYE==2.)s=new THREE.Vector2(s.y,s.x);//more sign checks may help
    // try signs and swizzle!
 }
+
+
+
+
+var SEVEYEpow = 3.;
+var SEVEYEPush = 2.**SEVEYEpow;
+
+
+var SEVEYEStart=1.75;
+var SEVEYEStartAdj=SEVEYEStart;
+var sevMargin = 1./SEVEYEPush;
+if(clvrVariant4!=0.)
+{
+    SEVEYEStartAdj*=- clvrVariant4;
+    sevMargin*=-clvrVariant4;
+}
+sevMargin*=SEVEYEStart/2.;
+sevMargin/=8./SEVEYEPush;
+
+        if(seventhOUTside&&(lfc>zoom)&&(lengthP>SEVEYEStartAdj)
+ //&&lfc>zoom
+ )
+{
+    s/=SEVEYEPush;
+
+    s=new THREE.Vector2(1.5/(2.5+s.x),1.5/(2.5-Math.abs(s.y)+budge));//plus one third is optional
+    ;//this needs some exploration//here needs activation and new hotkey
+    if(seventhEYE==2.)s=new THREE.Vector2(s.y,s.x);//more sign checks may help
+   // try signs and swizzle!
+}
+
+
 
 
 var coresIn = 0.;
@@ -472,6 +505,19 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
                           if(clvrVariant4)variant4Correction=(1.-oneOverLeafTruncated);
                                         
                                     correction = zoom/(zoom-lfc*variant4Correction);
+
+
+
+
+ if(seventhOUTside&&lengthP>SEVEYEStartAdj)
+ {
+        if (SEVEYEStartAdj>lengthP-sevMargin)hyperCore+=lfc*SEVEYEpow/2.;
+
+    else 
+  hyperCore+=SEVEYEpow*2./lfc;
+ }
+
+ 
                           if(wheel)m =  pWithoutChiralizer.clone().sub(new THREE.Vector2(coords.y,coords.x).multiplyScalar(variant4Correction).multiplyScalar(2.))//try signs with for fibonacci ring pairing and movement distortion #syyym
                           .multiplyScalar(Math.abs(coresIn/crs*2.-1.)).multiplyScalar(mandelCloverFactor);
 
@@ -667,23 +713,30 @@ polyNomialStretch
     {
 
 var span=0.;
-if(seventhEYE==3.&&lengthP<2./3.)
-    {
-        //if (lengthP<2./3.)
-        span = lfcCenterCored/2.;
-        //else span = lfc+.5;
-    }
-else if(seventhEYE==0.)span = lfcCenterCored;
-else span = lfc;
-    var stretch=((span+.5)**.5)**(1./squeezeN);
 
-    if(seventhEYE==0.||(seventhEYE==3.&&!seventhEYEthree)||lengthP>2./3.)
+
+if(seventhEYEthree)
+    {
+        //if (lengthP<twoThirds)
+        span = lfcCenterCored/2.;
+      //  else span = lfc+.5;
+    }
+    else if(lengthP>SEVEYEStartAdj)span = lfc/ SEVEYEPush/2.;
+else if(seventhEYE==0.||(seventhEYE==3.&&!seventhEYEthree)||lengthP>2./3.)span = lfcCenterCored;
+else span = lfc;
+
+
+    var stretch=((span+.5)**.5)**(1./squeezeN);
+    if(((seventhEYE==0.)||(seventhEYE==3.&&!seventhEYEthree)||lengthP>2./3.)&&(!seventhOUTside||!(SEVEYEStartAdj+ sevMargin >lengthP) ))//1./3. supercharges upper level
       s.multiplyScalar(1./stretch);//maybe other values work?
      else s.multiplyScalar(stretch);
 }
 
     
 }
+
+
+
         //dstnce = s.length();
             if(chop&&dstnce>2./3.)s=spinVector(s,Math.floor(dstnce)*Math.PI/2.);
 

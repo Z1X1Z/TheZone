@@ -4300,7 +4300,7 @@ vec2 s=p;
 
 
 
-float SEVEYEpow = 4.;
+float SEVEYEpow = 3.;
 float SEVEYEPush = pow(2.,SEVEYEpow);
 
 
@@ -4669,7 +4669,7 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
         if (SEVEYEStartAdj>lengthP-sevMargin)hyperCore+=lfc*SEVEYEpow/2.;
 
     else 
-  hyperCore+=8./lfc;
+  hyperCore+=SEVEYEpow*2./lfc;
  }
 
                if(wheel)m =  ((pWithoutChiralizer/lfc)
