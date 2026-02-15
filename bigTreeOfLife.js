@@ -218,7 +218,7 @@ if(seventhEYEandJubileye&&p.length()>2./3.)
 else 
 {
     swapped=(swap-swapJUBILEE+swapDEFAULT+2+4*10)%4.;
-   flopped = (oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10)%3.;
+   flopped = (oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+1+3*10)%3.;
 }
 
 }
