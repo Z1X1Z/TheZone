@@ -722,7 +722,7 @@ if(seventhEYEthree)
         span = lfcCenterCored/2.;
       //  else span = lfc+.5;
     }
-    else if(lengthP>SEVEYEStartAdj)span = lfc/ SEVEYEPush/2.;
+    else if(seventhOUTside&&lengthP>SEVEYEStartAdj)span = lfc/ SEVEYEPush/2.;
 else if(seventhEYE==0.||(seventhEYE==3.&&!seventhEYEthree)||lengthP>2./3.)span = lfcCenterCored;
 else span = lfc;
 
@@ -1265,7 +1265,7 @@ return new THREE.Vector3(s.x,s.y,hyperCoreOUTPUT);}
                            
                            
                            function freed( p){
-                               if(free){
+                               if(free&&!seventhOUTside){
                                    var shift = 3.;
                                    p.addScalar( shift/2.);
                                    p=new THREE.Vector2( Math.abs(p.x)%shift,Math.abs(p.y)%shift);

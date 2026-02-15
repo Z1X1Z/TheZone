@@ -1322,7 +1322,10 @@ seventhEYE?![,.O]</a><br>
                <input type="checkbox" id="seven2" name="t"  onclick= "
                   key  = 'J';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
-               <label for="seven2">Seven Squared![,.J]</label><br>
+               <label for="seven2">Seven Squared![,.J]</label><br>  <input type="checkbox" id="wrap" name="t"  onclick= "
+                  key  = 'W';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
+               <label for="wrap">Wrap?![,W]</label><br>
          <label for="JI">Jubileye?:[,N]</label>
                   <input type="number" id="JubileeInset" name="JubileeInset" class="num" onkeyup="
                                                  number = 'no number';
@@ -3363,7 +3366,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
 
 
                 vec2 freed(vec2 p){
-                    if(free){
+                    if(free&&!seventhOUTside){
                         float shift = 3.;
                         p+=shift/2.;
                         p=(mod(abs(p),shift));
@@ -4968,7 +4971,7 @@ if(seventhEYEthree)
         span = lfcCenterCored/2.;
       //  else span = lfc+.5;
     }
-    else if(lengthP>SEVEYEStartAdj)span = lfc/ SEVEYEPush/2.;
+    else if(seventhOUTside&&lengthP>SEVEYEStartAdj)span = lfc/ SEVEYEPush/2.;
 else if(seventhEYE==0.||(seventhEYE==3.&&!seventhEYEthree)||lengthP>2./3.)span = lfcCenterCored;
 else span = lfc;
 

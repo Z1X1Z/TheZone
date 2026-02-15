@@ -867,8 +867,9 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                        swapSettingsForJubileyes()
                         }       
 
-
                     }
+                                      else if(key == "W" && event.ctrlKey)uniforms.seventhOUTside.value=!uniforms.seventhOUTside.value;
+
                   else if(key == "B" && event.ctrlKey)
                     uniforms.BlackTraction.value=!uniforms.BlackTraction.value;
                   else if(key == "J" && event.ctrlKey)
