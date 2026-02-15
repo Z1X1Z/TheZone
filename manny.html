@@ -4310,15 +4310,17 @@ float SEVEYEPush = pow(2.,SEVEYEpow);
 float SEVEYEStart=5./3.;
 float SEVEYEStartAdj=SEVEYEStart;
 float sevMargin = 1./SEVEYEPush;
+float lfcAdj = lfc;
 if(clvrVariant4!=0.)
 {
     SEVEYEStartAdj*=- clvrVariant4;
     sevMargin*=-clvrVariant4;
+    lfcAdj*=.75;
 }
 sevMargin*=SEVEYEStart/2.;
 sevMargin/=8./SEVEYEPush;
 
-        if(seventhOUTside&&(lfc>SEVEYEStart-sevMargin)&&(lengthP>SEVEYEStartAdj)
+        if(seventhOUTside&&(lfcAdj>(SEVEYEStartAdj-sevMargin)*.75)&&(lengthP>SEVEYEStartAdj)
  //&&lfc>zoom
  )
 {
@@ -4605,7 +4607,7 @@ float truncNonLeaf=1.;
 
 float truncator=1.;
 bool truncated = true;
-if(zoom!=0.&&lfc!=0.&&truncated)
+if(zoom!=0.&&lfc!=0.&&truncated&&lengthP<SEVEYEStartAdj)
 {
     truncNonLeaf=log((lfcCenterCored));
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoom*zoom))
@@ -4669,12 +4671,13 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
 
  if(seventhOUTside&&lengthP>SEVEYEStartAdj&&lfc>zoom)
  {
-        if (SEVEYEStartAdj>lengthP-sevMargin)hyperCore+=lfc*SEVEYEpow/2.;
+        if (SEVEYEStartAdj>lengthP-sevMargin)hyperCore+=lfc*SEVEYEpow/1.5;
 
     else 
   hyperCore+=SEVEYEpow*2./lfc;
  }
 
+if(jubileyes!=0.&&(seventhEYE!=3.||lengthP<2./3.)) hyperCore+=1.;
                if(wheel)m =  ((pWithoutChiralizer/lfc)
                                                         -coords.yx*2.*variant4Correction)*abs(coresIn/crs*2.-1.)
                                            *mandelCloverFactor//(1.-1./(leaf/truncator)*truncator)//uncertain term
@@ -4813,7 +4816,7 @@ float daisifier = 0.;
                                            vec2 sBuffer = s;
 
 bool squeezeDIlate = petals>0.;
-if(zoom<.0000005*lfc)  s = uber.xy;//engage super duper core!
+if(zoom<.000005*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
  

@@ -217,16 +217,17 @@ var SEVEYEPush = 2.**SEVEYEpow;
 var SEVEYEStart=5./3.;
 var SEVEYEStartAdj=SEVEYEStart;
 var sevMargin = 1./SEVEYEPush;
+var lfcAdj=lfc ;
 if(clvrVariant4!=0.)
 {
     SEVEYEStartAdj*=- clvrVariant4;
     sevMargin*=-clvrVariant4;
+    lfcAdj*=.75;
 }
 sevMargin*=SEVEYEStart/2.;
 sevMargin/=8./SEVEYEPush;
 
-        if(seventhOUTside&&(lfc>SEVEYEStart-sevMargin)&&(lengthP>SEVEYEStartAdj)
- //&&lfc>zoom
+        if(seventhOUTside&&(lfcAdj>(SEVEYEStartAdj-sevMargin)*.75)&&(lengthP>SEVEYEStartAdj)
  )
 {
     s/=SEVEYEPush;
@@ -466,7 +467,7 @@ var m= new THREE.Vector2(0.,0.);
 var truncNonLeaf = 1.;
     var truncator=1.;
     var truncated = true;
-    if(lfc!=0.&&zoom!=0.&&truncated)
+    if(lfc!=0.&&zoom!=0.&&truncated&&lengthP<SEVEYEStartAdj)
         truncNonLeaf=Math.log(lfcCenterCored);
         truncator = truncNonLeaf*-leaf/2.;//*100
 
@@ -509,9 +510,9 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
 
 
 
- if(seventhOUTside&&lengthP>SEVEYEStartAdj&&lfc>zoom)
+ if(seventhOUTside&&lengthP>SEVEYEStartAdj-sevMargin&&lfc>zoom)
  {
-        if (SEVEYEStartAdj>lengthP-sevMargin)hyperCore+=lfc*SEVEYEpow/2.;
+        if (SEVEYEStartAdj>lengthP-sevMargin)hyperCore+=lfc*SEVEYEpow/1.5;
 
     else 
   hyperCore+=SEVEYEpow*2./lfc;

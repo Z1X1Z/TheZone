@@ -1616,7 +1616,7 @@ let       preserveOuterCore = true;
                        
                        
                        
-                       const zoomCap32 =.0000005;
+                       const zoomCap32 =.000005;
                         const  INcreaseBoost = 0.;//1./3.;
 function zoomRoutine(){
     const metaDepth=(!dupered)?zoomCap32:zoomCap32**2;//due to pixelization limits
