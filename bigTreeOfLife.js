@@ -184,7 +184,7 @@ else if (refactorCores==0.) p.divideScalar(3.);
 
 
 
-var SEVEYEpow = gr*(-leaf+1);
+var SEVEYEpow = gr*(-leaf);
 var SEVEYEPush = 2.**SEVEYEpow;
 
 
