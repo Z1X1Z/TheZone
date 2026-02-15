@@ -4664,7 +4664,7 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
 
    
 
- if(seventhOUTside&&lengthP>SEVEYEStartAdj)
+ if(seventhOUTside&&lengthP>SEVEYEStartAdj&&lfc>zoom)
  {
         if (SEVEYEStartAdj>lengthP-sevMargin)hyperCore+=lfc*SEVEYEpow/2.;
 
@@ -4956,7 +4956,7 @@ if(petals>0.)
 counter==0.&&
 polyNomialStretch
 &&OrthoEvery==0.
-      
+      &&lfc>zoom
 ){
     if  (budge==1./3.)  s*=lfc/2.+1./4.;
     else
