@@ -99,10 +99,6 @@ function tol( j,  t){
   //  return p;
    let p = new THREE.Vector2(j.y,j.x);//
 
-  if(p.x>0.)
-    {
-        p.multiplyScalar(-1.);
- }
      //  if(swapped==1.&&p.x>0.)p.multiplyScalar(-1);
 
     p = p.clone().multiplyScalar(zoom).add(new THREE.Vector2(-coords.y,-coords.x));
@@ -134,6 +130,11 @@ p= new THREE.Vector2(p.x-Math.sign(p.x)*regenerativeshift,p.y);
         p.multiplyScalar(p.length()**(squeezeN-1.));//may cause conflict with constellation
 
     
+  if(p.x>0.)
+    {
+        p.multiplyScalar(-1.);
+ }
+ 
     if(clvrVariant4)
         p.divideScalar(1.25)
         var outerMargin =Math.atan2(p.y,p.x);
@@ -268,6 +269,7 @@ var centerslide = 0.;
 let lfcOverZoom=lfc/zoom;
 let scale=1.;
  //if(lfc>zoom||seventhEYE!=3.)
+ 
 for(var i=0;i<Math.floor(crs);//crs+3=63
 i++)if(c<2./3.
 &&loops+centerslide<cored//&&(lfcOverZoom>2./3.||seventhEYE!=3.)
@@ -278,17 +280,6 @@ if(i>1||!cloverSlide){s.multiplyScalar( 2.);c*=2.;scale*=2.;}
 if (cloverSlide)
 {
 
-/*if(refactorCores>0.)
-{
-if(loops+centerslide>cored-1.)
-
-centerslide-=c*2.;
-else
-centerslide-=c/4.;
-}
-else if()        centerslide-=c*2.;
-
-*/
 centerslide-=c/2.;
 
 }
@@ -466,7 +457,7 @@ else{
 }
 
    }
-   var spokeloverON=spokelover&&zoom/lfc<.5;
+   var spokeloverON=spokelover&&zoom/lfc<1.5;
 
     if(spokeloverON)hyperCore-=Math.log(2);
 
@@ -535,7 +526,7 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
         if (SEVEYEStartAdj>lengthP-sevMargin)hyperCore+=lfc*SEVEYEpow/1.5;
 
     else 
-  hyperCore+=SEVEYEpow*(-leaf+1)/lfc;
+  hyperCore+=SEVEYEpow*(2.5)/lfc;
  }
 
 if(jubileyes!=0.) 
@@ -677,7 +668,7 @@ var lastS = s.clone();
 if(feedTheLamb){
     superUpcorer =
     -1.+1./(
-        (Math.abs((Math.atan(s.y,s.x)/Math.PI/2+1.//+.5/petalNumber
+        (Math.abs((Math.atan2(s.y,s.x)/Math.PI/2+1.//+.5/petalNumber
     )%(1./6.)-.5/6.))*petalNumber*6.*2.)+s.length()/Math.log(2.)*petalNumber/6./2.;
 ;
 if(petals>0.)superUpcorer*=(petals)**(clampedSqueeze);
@@ -700,7 +691,7 @@ hyperCoreOUTPUT-=superUpcorer;
           gigaLeap)
                     {
                         
-   var toEDGE =Math.abs(((Math.atan(s.y,s.x)/Math.PI+2.)*3.-.5)%1-.5);
+   var toEDGE =Math.abs(((Math.atan2(s.y,s.x)/Math.PI+2.)*3.-.5)%1-.5);
    toEDGE*=2.;
                         
                         var outerCloudShift = (1.+
@@ -1067,7 +1058,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
       //var repTrun = 24.-border*6.;
       var repTrun=1.5;
       repTrun*=truncNonLeaf;
-      s=freed(s.multiplyScalar(repTrun)).multiplyScalar(1./repTrun);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
+      (s.multiplyScalar(repTrun)).multiplyScalar(1./repTrun);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
        dstnce=s.length();
       }
      if(dstnce<2./3.)
@@ -1194,6 +1185,8 @@ jubileyes!=0.&&
    // try signs and swizzle!
 hyperCoreBoosted+=squeezeN*3.;//before or after *=log(3.)?
   hyperCoreBoosted*=(Math.log(3.)**squeezeN);
+    dstnce = s.length();
+
          break;
 }
 OmniDynamicPetalShift =omniData[0];
@@ -1276,7 +1269,7 @@ daisifier+=1.;
 
     }
                     //  console.log("out"+loopSolid)
-return new THREE.Vector3(s.x,s.y,hyperCoreOUTPUT);}
+return new THREE.Vector3(s.x,s.y,hyperCoreBoosted);}
                            
                            function coz( x){return -Math.cos(x);}
                            function zin( x){return -Math.sin(x);}
@@ -1307,7 +1300,10 @@ return new THREE.Vector3(s.x,s.y,hyperCoreOUTPUT);}
                            let coreSwipeTexture;
                            const can = document.getElementById("CANVAS");
                            
-window.generated = true
+
+
+                           var duperOVERengage = false;
+window.generated = !duperOVERengage
 window.bigCloverGapSync = false;
             let coreSwipeData=new Float32Array(window.innerHeight*window.innerWidth*4).fill(0);
                            function boot (){
@@ -1318,7 +1314,8 @@ window.bigCloverGapSync = false;
     let strideClover=0;
     //if(loopsRun>2) console.log(Number.MAX_VALUE==new THREE.Vector2(Number.MAX_VALUE,0.).x);
     if(loopsRun>1){
-        if(!generated&&dupered&&zoom<zoomCap32*coords.length())
+        if(!generated&&(dupered&&zoom<zoomCap32*coords.length()||duperOVERengage)
+            )
         {
             console.log("swapping");
             bigCloverGapSync = true;
@@ -1354,13 +1351,17 @@ window.bigCloverGapSync = false;
             let tree=tol(  new THREE.Vector2(0,0), new THREE.Vector2(0,0) );
             
             let duperDepth = 2**4;
-                            if(dupered&&zoom<zoomCap32*coords.length()&&zoom<lastDuper/duperDepth)
+                            if(((dupered&&zoom<zoomCap32*coords.length())||duperOVERengage)&&
+                            zoom<lastDuper/duperDepth)
                             {   lastDuper = zoom
                                 generated = false;
                             }
-                            else if(dupered&&zoom>zoomCap32*coords.length())
-                                lastDuper=zoom*duperDepth
-                                    
+                            else if(((dupered&&zoom<zoomCap32*coords.length())||duperOVERengage)&&zoom>lastDuper)
+                            {
+                                lastDuper = zoom*duperDepth
+                                generated = false;
+                            }
+                            
      
             let coreImplosion = Math.abs(Math.floor(coreTriggered)-Math.floor(tree.z));
 
