@@ -1616,11 +1616,11 @@ let       preserveOuterCore = true;
                        
                        
                        
-                       const zoomCap32 =.000005;
+                       const zoomCap32 =.000001;
                         const  INcreaseBoost = 0.;//1./3.;
 function zoomRoutine(){
     var metaDepth=(!dupered)?zoomCap32:zoomCap32**2;//due to pixelization limits
-    if(seventhOUTside&&fromCenter>uniforms.SEVEYEStart.value-1./2**uniforms.SEVEYEpow.value)metaDepth=metaDepth*2**(uniforms.SEVEYEpow.value)
+    if(seventhOUTside&&fromCenter>uniforms.SEVEYEStart.value-1./2**uniforms.SEVEYEpow.value)metaDepth=metaDepth*2**(uniforms.SEVEYEpow.value+1)
 
 
     let zoomCone=metaDepth*fromCenter;
