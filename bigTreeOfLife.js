@@ -540,11 +540,12 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
 
 if(jubileyes!=0.) 
 {
-if(seventhEYE!=3.||((jubileyes!=0.&&lengthP<1./3.)))
+if(seventhEYE==3.&&lengthP<1./3.)
 hyperCore+=1.;
-else if (seventhEYE!=3.||(jubileyes==0.&&lengthP<2./3.))
+else if (seventhEYE!=3.||lengthP<2./3.)
 hyperCore+=.5;
 }
+
  
                           if(wheel)m =  pWithoutChiralizer.clone().sub(new THREE.Vector2(coords.y,coords.x).multiplyScalar(variant4Correction).multiplyScalar(2.))//try signs with for fibonacci ring pairing and movement distortion #syyym
                           .multiplyScalar(Math.abs(coresIn/crs*2.-1.)).multiplyScalar(mandelCloverFactor);
@@ -1181,7 +1182,7 @@ else s=spin(s,Math.PI);
 
          if(i-(counter)==Math.abs(jubileyes)&&
 jubileyes!=0.&&
-       ( (seventhEYE==3.&&lengthP<2./3.)||seventhEYE==0.)&&
+       ( (seventhEYE==3.&&lengthP<2./3.)||seventhEYE!=3.)&&
 
        s.length()<1./3.//2./3.
  )
