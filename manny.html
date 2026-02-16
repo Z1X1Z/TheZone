@@ -2100,6 +2100,9 @@ void main(){
         uniform bool seventhOUTside;
         uniform int negative;
 
+                uniform float SEVEYEpow;
+                uniform float SEVEYEStart;
+
 
 
     uniform bool squareGenesis;
@@ -4285,11 +4288,8 @@ else if (refactorCores==0.) p/=3.;
 
 
 
-float SEVEYEpow =(gr)*2.-leaf;//gr*3. and gr*2-leaf work well with start of 1.75
 float SEVEYEPush = pow(2.,SEVEYEpow);
 
-
-float SEVEYEStart=1.75;
 float SEVEYEStartAdj=SEVEYEStart;
 float sevMargin = 1./SEVEYEPush;
 float lfcAdj = lfc;

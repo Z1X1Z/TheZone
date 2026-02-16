@@ -1,6 +1,9 @@
-var shaderScale,seventhOUTside,swapJUBILEE,swapDEFAULT,oppositionalCoreFlopJUBILEE,oppositionalCoreFlopDEFAULT,distributor,swap,dilate,squeezeN,seventhEYE,budge,polyNomialStretch, gigaLeap,externalCores,centralCores,coreShift,Redux,coreDilation, chirality,coords,morph,refactorCores,MetaCored,jubileyes,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
+var  SEVEYEpow, SEVEYEStart,shaderScale,seventhOUTside,swapJUBILEE,swapDEFAULT,oppositionalCoreFlopJUBILEE,oppositionalCoreFlopDEFAULT,distributor,swap,dilate,squeezeN,seventhEYE,budge,polyNomialStretch, gigaLeap,externalCores,centralCores,coreShift,Redux,coreDilation, chirality,coords,morph,refactorCores,MetaCored,jubileyes,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
 ,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta,spinTowardsMe,d,chop,cellularDivision,triogenesis,nGenesis,squareGenesis,constellationCoord,cloverso,feedTheLamb,OrthoEvery;
 function setUniformsToPlainName(){
+    
+    SEVEYEpow=uniforms.SEVEYEpow.value;
+    SEVEYEStart=uniforms.SEVEYEStart.value;
     seventhOUTside=uniforms.seventhOUTside.value;
     oppositionalCoreFlopDEFAULT=uniforms.oppositionalCoreFlopDEFAULT.value
     oppositionalCoreFlopJUBILEE=uniforms.oppositionalCoreFlopJUBILEE.value
@@ -184,10 +187,7 @@ else if (refactorCores==0.) p.divideScalar(3.);
 
 
 
-var SEVEYEpow = gr*2-leaf;
-var SEVEYEPush = 2.**SEVEYEpow;
-
-
+seventhEYEPush = 2**(SEVEYEpow)
 var SEVEYEStart=1.75;
 var SEVEYEStartAdj=SEVEYEStart;
 var sevMargin = 1./SEVEYEPush;
