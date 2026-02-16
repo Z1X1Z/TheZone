@@ -47,6 +47,11 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                            const JubileeSwap = 3;
 
 window.uniformsInitial = {
+
+ SEVEYEpow:{value:(grPermanent)*2.-leafPermanent},//gr*3. and gr*2-leaf work well with start of 1.75
+
+ SEVEYEStart:{value:1.75},
+
 coreDilation:{value:0.},
 fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:44100./1024.},
     
@@ -869,7 +874,7 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                         }       
 
                     }
-                                      else if(key == "V" && event.ctrlKey)uniforms.negative.value=(uniforms.negative.value+1)%3;
+                                      else if(key == "V" && event.ctrlKey)uniforms.negative.value=(uniforms.negative.value+1)%4;
 
                                       else if(key == "W" && event.ctrlKey)uniforms.seventhOUTside.value=!uniforms.seventhOUTside.value;
 
