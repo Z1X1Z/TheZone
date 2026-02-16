@@ -187,7 +187,7 @@ else if (refactorCores==0.) p.divideScalar(3.);
 
 
 
-seventhEYEPush = 2**(SEVEYEpow)
+var SEVEYEPush = 2**(SEVEYEpow)
 var SEVEYEStart=1.75;
 var SEVEYEStartAdj=SEVEYEStart;
 var sevMargin = 1./SEVEYEPush;
