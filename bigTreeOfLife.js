@@ -526,7 +526,7 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
         if (SEVEYEStartAdj>lengthP-sevMargin)hyperCore+=lfc*SEVEYEpow/1.5;
 
     else 
-  hyperCore+=SEVEYEpow*(2.5)/lfc;
+  hyperCore+=SEVEYEpow*(2.125)/lfc;
  }
 
 if(jubileyes!=0.) 
