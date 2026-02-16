@@ -534,7 +534,7 @@ if(jubileyes!=0.)
 if(seventhEYE==3.&&lengthP<1./3.)
 hyperCore+=1.;
 else if (seventhEYE!=3.||lengthP<2./3.)
-hyperCore+=.5;
+hyperCore+=.0;
 }
 
  
