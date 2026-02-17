@@ -209,13 +209,23 @@ var flopped=oppositionalCoreFlop;
        var seventhEYEandJubileye = (seventhEYE==3.&&jubileyes!=0.);
 
 
-if(seventhEYEandJubileye&&p.length()>2./3.)
+if(seventhEYEandJubileye)
 {
+
     if (lengthP< SEVEYEStartAdj)
     {
+
+         if(lengthP<1./3.)
+     {
+    swapped=(swap-swapJUBILEE+swapDEFAULT+4*10)%4.;
+   flopped =(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+1+3*10)%3.;
+}
+        else if (lengthP>2./3.)
+        {
     swapped=(swap-swapJUBILEE+swapDEFAULT+4*10)%4.;
    flopped =(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10)%3.;
 }
+    }
 else if(seventhOUTside&&lengthP>2./3.&&lfc>zoom)
 {
     swapped=(swap-swapJUBILEE+swapDEFAULT+2+4*10)%4.;
