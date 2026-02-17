@@ -14,7 +14,9 @@ window.pixelShaderSize = 7;
 const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
 const movementRateORIGINAL = 1.;
 const starshipSize = Math.E**leaf/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
-                            const zoomFrames = 60;//frames to double zoom
+const  INcreaseBoost = 1./3.;//1./3.;
+
+const zoomFrames = 60*(INcreaseBoost+1);//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   let mf = (Math.max(window.innerHeight,window.innerWidth)/Math.min(window.innerHeight,window.innerWidth));//advantage of translation over zoom (right?)
 let MR = mf/zoomFrames;

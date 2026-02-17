@@ -669,7 +669,8 @@ let pushBackCounter = 0;
                             d_x*=flatline;
                             d_y*=flatline
 
-
+d_x*=(1.+INcreaseBoost/2.);
+d_y*=(1.+INcreaseBoost/2.);
 
                                      
                             if(on&&totalAMP>.000001)
@@ -717,8 +718,8 @@ window.twist-=window.spinnerTwist
                   const d_xS=spunD[0]*interpolation;
                   const d_yS=spunD[1]*interpolation;
 
-           const bx=coordX+d_xS*(1.+INcreaseBoost/2.)*MR*zoom;
-          const by=coordY+d_yS*(1.+INcreaseBoost/2.)*MR*zoom;
+           const bx=coordX+d_xS*MR*zoom;
+          const by=coordY+d_yS*MR*zoom;
                                
                             let preFromCenter= Math.sqrt(bx*bx+by*by);
 
@@ -1617,7 +1618,6 @@ let       preserveOuterCore = true;
                        
                        
                        const zoomCap32 =.000001;
-                        const  INcreaseBoost = 1./3.;//1./3.;
 function zoomRoutine(){
     var metaDepth=(!dupered)?zoomCap32:zoomCap32**2;//due to pixelization limits
     if(seventhOUTside&&fromCenter>uniforms.SEVEYEStart.value)metaDepth=metaDepth*2**(uniforms.SEVEYEpow.value+1)
