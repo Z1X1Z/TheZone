@@ -4323,7 +4323,7 @@ if(seventhEYEandJubileye&&lfc>zoom)
         if(lengthP<1./3.)
             {
     swapped=int(mod(float(swap-swapJUBILEE+swapDEFAULT+4*10) ,4.));
-   flopped = int(mod(float(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+1+3*10),3.));
+   flopped = int(mod(float(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+2+3*10),3.));
         }
         else if (lengthP>2./3.)
         {
@@ -7664,11 +7664,29 @@ if(frAMP2>0.&&volume!=1.&&maxSamp< volume*volume )//&&minSamp*3.<maxSamp)
                                  float maxColorOfStarship=1.;
                                  float minColorOfStarship=0.00000001;
                                  float spirographTranslucer = 1.;
+                                 vec2 starshipSpin = vec2(0.);
+bool twelveTREE = true;
+if(twelveTREE)
+{
+    float treeSize = 2.;
+    vec2 treeShift = vec2(0.,.5-.5);
+    treeShift=spin2(treeShift,PI);
 
+starshipSpin =((vUv*treeSize+treeShift)-1.5);
+starship+=texture2D(STAR,starshipSpin);
+/*
+
+treeShift=spin2(treeShift,PI2/12.);
+starshipSpin =((vUv+treeShift)*2.-.5);
+starship+=texture2D(STAR,starshipSpin);
+*/
+}
 
 if(starOnDot!=2){
-                                 if (starshipLOOKUP.x<1.&&starshipLOOKUP.y<1.&&starshipLOOKUP.x>0.&&starshipLOOKUP.y>0.)starship = texture2D(STAR,starshipLOOKUP);
+                          if(!twelveTREE)       if (starshipLOOKUP.x<1.&&starshipLOOKUP.y<1.&&starshipLOOKUP.x>0.&&starshipLOOKUP.y>0.)starship += texture2D(STAR,starshipLOOKUP);
                                  
+
+                                
                                  if (starship.x!=0.||starship.y!=0.||starship.z!=0.)maxColorOfStarship=max(max(starship.x,starship.y),starship.z);
                                  if (starship.x!=0.||starship.y!=0.||starship.z!=0.)minColorOfStarship=min(min(starship.x,starship.y),starship.z);
                                  if (starship.x!=0.||starship.y!=0.||starship.z!=0.)isColoredMultiplier=(starship.xyz+(1.-starship.w)+1.)/2.;
