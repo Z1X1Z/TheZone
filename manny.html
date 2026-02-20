@@ -7665,6 +7665,39 @@ if(frAMP2>0.&&volume!=1.&&maxSamp< volume*volume )//&&minSamp*3.<maxSamp)
                                  float minColorOfStarship=0.00000001;
                                  float spirographTranslucer = 1.;
                                  vec2 starshipSpin = vec2(0.);
+
+
+                                       vec4 DOTstarship=vec4(0.);
+                                 float isBlackDOT =1.;
+                                 float spirographTranslucerDOT = 1.;
+                                 float DOTmaxColorOfStarship=1.;
+
+
+                                 float isGreyDOT =0.;
+
+if(starOnDot==1||starOnDot==2){
+                       float dotstarscale = 1.;
+                       vec2  DOTstarshipLOOKUP = mod((vUv)-(dotCoord)/2.*resolution.yx/max(resolution.x,resolution.y)-.5+.5/dotstarscale,1.);//-.125-.25
+        if (DOTstarshipLOOKUP.x<1.&&DOTstarshipLOOKUP.y<1.&&DOTstarshipLOOKUP.x>0.&&DOTstarshipLOOKUP.y>0.)starship
+           // DOTstarship
+        += texture2D(STAR,DOTstarshipLOOKUP);
+        
+/*
+
+        if (DOTstarship.x==0.&&DOTstarship.x==DOTstarship.y&& DOTstarship.y==DOTstarship.z&&DOTstarship.w>3.5/255.)isBlackDOT=DOTstarship.x;
+        
+        if (DOTstarship.x==DOTstarship.y&& DOTstarship.y==DOTstarship.z&&DOTstarship.x<.51&&DOTstarship.x>.49)isGreyDOT=DOTstarship.x;
+
+        
+        if(DOTstarship.x!=0.||DOTstarship.y!=0.||DOTstarship.z!=0.)DOTmaxColorOfStarship=max(max(DOTstarship.x,DOTstarship.y),DOTstarship.z);
+        
+*/
+      //  if(DOTstarship.x!=0.&&DOTstarship.x!=1.&&DOTstarship.x!=.5&&(DOTstarship.x+DOTstarship.y>=255.-3.5||DOTstarship.y+DOTstarship.z>=255.-3.5||DOTstarship.z+DOTstarship.x>=255.-3.5)&&DOTstarship.w==1.)spirographTranslucerDOT=.75-(DOTstarship.x+DOTstarship.y+DOTstarship.z)/2.;
+      
+                   }
+
+
+
 bool twelveTREE = false;
 if(twelveTREE)
 {
@@ -7684,7 +7717,7 @@ starship+=texture2D(STAR,starshipSpin);
 
 if(starOnDot!=2){
                           if(!twelveTREE)       if (starshipLOOKUP.x<1.&&starshipLOOKUP.y<1.&&starshipLOOKUP.x>0.&&starshipLOOKUP.y>0.)starship += texture2D(STAR,starshipLOOKUP);
-                                 
+}         
 
                                 
                                  if (starship.x!=0.||starship.y!=0.||starship.z!=0.)maxColorOfStarship=max(max(starship.x,starship.y),starship.z);
@@ -7731,33 +7764,8 @@ if(starOnDot!=2){
                                      if (starship.x==starship.y&& starship.y==starship.z&&starship.x==1.)isWhite=starship.x;
 
      //if (starship.x!=0.&&starship.x!=1.&&starship.x!=.5&&(starship.x+starship.y>=255.-3.5||starship.y+starship.z>=255.-3.5||starship.z+starship.x>=255.-3.5)&&starship.w==1.)spirographTranslucer=.75-(starship.x+starship.y+starship.z)/2.;
-                                 }
-                                 vec4 DOTstarship=vec4(0.);
-                                 float isBlackDOT =1.;
-                                 float spirographTranslucerDOT = 1.;
-                                 float DOTmaxColorOfStarship=1.;
-
-
-                                 float isGreyDOT =0.;
-
-if(starOnDot==1||starOnDot==2){
-                       float dotstarscale = 1.;
-                       vec2  DOTstarshipLOOKUP = mod((vUv)-(dotCoord)/2.*resolution.yx/max(resolution.x,resolution.y)-.5+.5/dotstarscale,1.);//-.125-.25
-        if (DOTstarshipLOOKUP.x<1.&&DOTstarshipLOOKUP.y<1.&&DOTstarshipLOOKUP.x>0.&&DOTstarshipLOOKUP.y>0.)DOTstarship = texture2D(STAR,DOTstarshipLOOKUP);
-        
-
-
-        if (DOTstarship.x==0.&&DOTstarship.x==DOTstarship.y&& DOTstarship.y==DOTstarship.z&&DOTstarship.w>3.5/255.)isBlackDOT=DOTstarship.x;
-        
-        if (DOTstarship.x==DOTstarship.y&& DOTstarship.y==DOTstarship.z&&DOTstarship.x<.51&&DOTstarship.x>.49)isGreyDOT=DOTstarship.x;
-
-        
-        if(DOTstarship.x!=0.||DOTstarship.y!=0.||DOTstarship.z!=0.)DOTmaxColorOfStarship=max(max(DOTstarship.x,DOTstarship.y),DOTstarship.z);
-        
-
-      //  if(DOTstarship.x!=0.&&DOTstarship.x!=1.&&DOTstarship.x!=.5&&(DOTstarship.x+DOTstarship.y>=255.-3.5||DOTstarship.y+DOTstarship.z>=255.-3.5||DOTstarship.z+DOTstarship.x>=255.-3.5)&&DOTstarship.w==1.)spirographTranslucerDOT=.75-(DOTstarship.x+DOTstarship.y+DOTstarship.z)/2.;
-      
-                   }
+                                 
+                           
                                  vec4 StaRivers=vec4(0.);
                                  if(eden==2||eden==4)
                                  {
