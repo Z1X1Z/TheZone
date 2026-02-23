@@ -208,7 +208,7 @@ var swapped=swap;
 var flopped=oppositionalCoreFlop;
        var seventhEYEandJubileye = (seventhEYE==3.&&jubileyes!=0.);
 
-
+var pollen = polyNomialStretch;
 if(seventhEYEandJubileye)
 {
 
@@ -217,6 +217,7 @@ if(seventhEYEandJubileye)
 
          if(lengthP<1./3.)
      {
+        pollen=false;
     swapped=(swap-swapJUBILEE+swapDEFAULT+3)%4.;
    flopped =(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+0)%3.;
 }
@@ -429,7 +430,7 @@ hyperCore*=equilibriator;
 
 if(multiplicatorNexus)hyperCore-=.5/Math.log(.5);
 if(continuumClover!=0)hyperCore+=.25/Math.log(.5);
-if(polyNomialStretch&&OrthoEvery==0.)
+if(pollen&&OrthoEvery==0.)
 {
      if(budge==1./3.)//I was flying into what I think was the top of the center clover around commit 8c6a4aae1986bddb05af5d8026505c63dd0ed8be when I had a feeling like faith was shaping the clover, then a black and blue biogenesis clover (I wasn't in biogenesis!)upcored and cored and I flew into it, Then I had a screen full of free floating tripolar clovers that seemed to extend forever in all directions fitting this same type of clover together.  Then after a minute the screen rotated and became half rez and half size.  The zoom in the dimension was a constant 1
    {
@@ -459,7 +460,7 @@ else{
 
   if(seventhEYE==3.)hyperCore+=(squeezeN)*Math.log(2.)/2.;
   //hyperCore-=.25;
-  if(!polyNomialStretch)
+  if(!pollen)
  // if (seventhEYE!=3.)hyperCore+=Math.log(2)*1.5;
  // else 
     hyperCore+=Math.log(2)*1.;
@@ -735,7 +736,7 @@ s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
         }
        if(//zoom<.5&&
 counter==0.&&
-polyNomialStretch
+pollen
 &&lfc>zoom
    //    &&lengthP<2./3.
 ){
@@ -1062,7 +1063,7 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
 {
        if(Redux) hyperCoreBoosted-=(1.-logStabilizationConstant )/2.  ;
 
-      if(gigaLeap&&polyNomialStretch&&budge!=1./3.&&OrthoEvery==0.)   {
+      if(gigaLeap&&pollen&&budge!=1./3.&&OrthoEvery==0.)   {
        // let s2 = s.clone().multiply(s).multiply(s)
       // s=freed(s.multiply(s2)).divide(s2);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
       //var repTrun = 24.-border*6.;
