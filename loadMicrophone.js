@@ -4,7 +4,7 @@ window.touchMode = false;
     window.isTouch=false;
 
     window.micOn = false;
-window.audioX={};
+window.audioX={sampleRate:44100};
     window.source={};
 
 window.bufferSize=fftSize;
