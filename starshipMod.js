@@ -2620,7 +2620,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
       else document.getElementById("textWindow").innerHTML = "";
 
     
-        uniforms[ "time2dance" ].value += audioX.sampleRate/bufferSize*totalAMP;
+      if(isFinite(audioX.sampleRate))  uniforms[ "time2dance" ].value += audioX.sampleRate/bufferSize*totalAMP;
     uniforms["zoomOutRatchetThreshold" ].value=zoomOutRatchetThreshold;
 
         if(!shouldShowStar||totalAMP>zoomOutRatchetThreshold&&on) uniforms["volume" ].value = audioX.sampleRate/bufferSize*totalAMP/(1.+zoomOutRatchetThreshold);
