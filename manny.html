@@ -4323,13 +4323,13 @@ if(seventhEYEandJubileye&&lfc>zoom)
         if(lengthP<1./3.)
             {
                 pollen=false;
-    swapped=int(mod(float(swap-swapJUBILEE+swapDEFAULT+3) ,4.));
-   flopped = int(mod(float(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+0),3.));
+    swapped=int(mod(float(swap-swapJUBILEE+swapDEFAULT+2) ,4.));
+   flopped = int(mod(float(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+1),3.));
         }
         else if (lengthP>2./3.)
         {
     swapped=int(mod(float(swap-swapJUBILEE+swapDEFAULT+4*10) ,4.));
-   flopped = int(mod(float(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+1+3*10),3.));
+   flopped = int(mod(float(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10),3.));
         }
 }
 else if(seventhOUTside)
@@ -7702,11 +7702,13 @@ if(starOnDot==1||starOnDot==2){
 bool twelveTREE = false;
 if(twelveTREE)
 {
-    float treeSize = 2.;
-    vec2 treeShift = vec2(0.,.5-.5);
+    
+    float treeSize = 36./PI2;
+    vec2 treeShift = vec2(0.,.5-treeSize);
     treeShift=spin2(treeShift,PI);
+          starshipSpin = ((vUv-.5)+treeShift)*treeSize+.5;
 
-starshipSpin =((vUv*treeSize+treeShift)-1.5);
+//starshipSpin =((vUv-.5)*treeSize+treeShift);
 starship+=texture2D(STAR,starshipSpin);
 /*
 
