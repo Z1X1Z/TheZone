@@ -7415,7 +7415,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
 
                        vec2 eyeSwivel = vec2(0.);
                        if (volume==1.)eyeSwivel=move/2.;
-                       else if (volume>zoomOutRatchetThreshold)eyeSwivel=d.yx;
+                       else if (volume>zoomOutRatchetThreshold&&volume!=0.)eyeSwivel=d.yx;
                        else eyeSwivel=vec2(0.);
                      insideOut= roundEyes(bounce,eyeSwivel);
                      if(insideOut.w==.5){
