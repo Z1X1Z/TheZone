@@ -5549,13 +5549,6 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
        dstnce=length(s);
       } 
 
-     if(dstnce<twoThirds)
-     {
-        float squeezer =dstnce*(pow(2.,squeezeN)-2.);
-        hyperCoreBoosted-=squeezer;
-    hyperCoreOUTPUT-=squeezer;
-     }
-
 
 
    float wise = 1.;
@@ -5877,6 +5870,13 @@ hyperCoreBoosted+=squeezeN*3.;pow(squeezeN,squeezeN*2.);//before or after *=log(
          break;
 }
   
+     if(dstnce<twoThirds)
+     {
+        float squeezer =dstnce*(pow(2.,squeezeN)-2.);
+        hyperCoreBoosted-=squeezer;
+    hyperCoreOUTPUT-=squeezer;
+     }
+
    if(fieldPowerBoostMeta&&(float(i)>=hyperCoreBoosted)){
        float powerBoost =eConstant*(log(.5)*dstnce*(sqrt2)*twoThirds);
        s*=pow(dstnce,powerBoost);

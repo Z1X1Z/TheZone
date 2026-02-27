@@ -1072,12 +1072,6 @@ if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.
       (s.multiplyScalar(repTrun)).multiplyScalar(1./repTrun);//not sure this does anything, seems to improve vibrancy and vivacity and makes spokes much stabler
        dstnce=s.length();
       }
-     if(dstnce<2./3.)
-     {
-        var squeezer =dstnce*((2.**squeezeN)-2.);
-        hyperCoreBoosted-=squeezer;
-    hyperCoreOUTPUT-=squeezer;
-     }
 
      
     if(spinTowardsMe) if(i>=hyperCoreBoosted)s=spin(s,Math.atan2(d.y,d.x));
@@ -1200,6 +1194,13 @@ hyperCoreBoosted+=squeezeN*3.;//before or after *=log(3.)?
 
          break;
 }
+
+     if(dstnce<2./3.)
+     {
+        var squeezer =dstnce*((2.**squeezeN)-2.);
+        hyperCoreBoosted-=squeezer;
+    hyperCoreOUTPUT-=squeezer;
+     }
 OmniDynamicPetalShift =omniData[0];
 OmniPetal =OmniDynamicPetalShift*((petalNumber)/6.);
 
