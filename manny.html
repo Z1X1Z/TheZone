@@ -5506,8 +5506,9 @@ t
 
 
 
-if(counter==0.&&swapped==1)s*=-1.;//counter==0. may be slightly stabler, but less colorful than counter<=1
-                              sBuffer = s;
+if(counter==0.&&swapped==1)s=spin2(s,PI);//can also be *=-1, I think spin has brighter colors
+ 
+sBuffer = s;
 
 bool boolean = true;
 //isSplit=false;
