@@ -1055,7 +1055,7 @@ dstnce = s.length();
            //  hyperCoreOUTPUT-=sliceanddiceBoost;
 
         }
-if (counter<=1.&&swapped==1)s.multiplyScalar(-1.)
+if (counter==0.&&swapped==1)s.multiplyScalar(-1.)
 
 for(var i=0;i<200; i++)//not sure if i is 20 or >20
 if(dstnce<CORE_DELIMITER||((superStable&&((counter==0.&&dstnce<1.)||dstnce<2./3.)))
