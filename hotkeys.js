@@ -288,6 +288,8 @@ const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 
 function resetAll(){
         window.nudge=13;
+        window.frenzy=false;
+        window.buildUp=1;
 
     window.unitTest=false;
 window.spinnerTwist = 0.;
@@ -880,6 +882,8 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
 
                                       else if(key == "W" && event.ctrlKey)uniforms.seventhOUTside.value=!uniforms.seventhOUTside.value;
 
+                  else if(key == "F" && event.ctrlKey)
+                    window.frenzy=!window.frenzy;
                   else if(key == "B" && event.ctrlKey)
                     uniforms.BlackTraction.value=!uniforms.BlackTraction.value;
                   else if(key == "J" && event.ctrlKey)

@@ -629,6 +629,23 @@ let pushBackCounter = 0;
         const colortone = note/lightingScaleTrail;
         colorSound.setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
         //angle-=1/radialWarp;
+let speed = 0.;
+if(window.frenzy)
+{
+                   speed =  ((d_x**2+d_y**2)**.5)
+                  if(speed>1.)speed=speed**(1.-108./window.buildUp)
+                  if(speed==0.)speed=.5
+                  if(!on)
+                    {
+                        let slowDown = .987**(interpolation);
+                        d_x*=slowDown;d_y*=slowDown;
+                        
+                window.buildUp*=slowDown;
+                 if(window.buildUp>1.)  window.buildUp-=interpolation;
+                 else window.buildUp=1.;
+                    }
+                    else window.buildUp+=interpolation
+                }
             if(on)
             {
              uniforms.noteFrozen.value=note;
@@ -664,8 +681,18 @@ let pushBackCounter = 0;
                             
                             
                  angle = ((angle+6*radialWarp)/12.)%1*2*pi;
+              if(!window.frenzy)
+              {
                  d_x = -Math.sin(-angle);
                  d_y = -Math.cos(-angle);
+              }
+
+else                 {
+
+                 d_x = -Math.sin(-angle)*(.5+speed);
+                 d_y = -Math.cos(-angle)*(.5+speed);
+             
+                 }
                             d_x*=flatline;
                             d_y*=flatline
 

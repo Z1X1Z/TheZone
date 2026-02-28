@@ -726,6 +726,12 @@ radialWarp=b;
                    callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                listen In![i]</a><br>
 
+               <input type="checkbox"  id="frenzied" name="t"  onclick= "
+            
+                       key  = 'F';
+                       callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
+                   <label for="frenzied"> Frenzy![,F]</label><br>
+
                Tolerance for Pitch [.e]<br>
                <input type="radio" id="High Tolerance" name="tolerance" onclick="window.highORlow = 2">
                <label for="High Tolerance">Constant High!</label><br>
