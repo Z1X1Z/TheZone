@@ -633,11 +633,13 @@ let speed = 0.;
 if(window.frenzy)
 {
                    speed =  ((d_x**2+d_y**2)**.5)
-                  if(speed>1.)speed=speed**(1.-108./window.buildUp)
+                   let rate = 108.;
+                  if(speed>1.)speed=speed**(1.-rate/window.buildUp)
+
                   if(speed==0.)speed=.5
                   if(!on)
                     {
-                        let slowDown = .987**(interpolation);
+                        let slowDown = (1.-1/rate)**(interpolation);
                         d_x*=slowDown;d_y*=slowDown;
                         
                 window.buildUp*=slowDown;
@@ -646,6 +648,8 @@ if(window.frenzy)
                     }
                     else window.buildUp+=interpolation
                 }
+                                                       console.log(speed)
+
             if(on)
             {
              uniforms.noteFrozen.value=note;
