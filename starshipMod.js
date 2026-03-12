@@ -648,6 +648,7 @@ if(window.frenzy)
                     }
                     else window.buildUp+=interpolation
                 }
+                    if(!isFinite(window.buildUp))window.buildUp=1.
 
             if(on)
             {
