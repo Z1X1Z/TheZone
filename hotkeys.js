@@ -111,7 +111,7 @@ starInShader:{value:true},
 clvrVariant8:{value: false},
 clvrVariant9:{value: false},
 clvrVariant0:{value: false},
-explodo:{value: false    },
+explodo:{value: true    },
 
 twelveGates:{value: false    },
 twelveGatesMeta:{value: .4    },

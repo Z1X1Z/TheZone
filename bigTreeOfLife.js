@@ -1252,7 +1252,7 @@ dstnce*=Math.pow(dstnce,powerBoost);
 
 }
 if(metaCarousel!=0.
-   &&((i)>=hyperCoreBoosted+1.))  {   //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
+   &&0>=hyperCoreBoosted-1.)  {   //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
     
     var wise = 1.;
     
