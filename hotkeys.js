@@ -39,9 +39,9 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                            }
               
 
-           let  zoomINITiaLizer =1.;//    1/2**65.;//1.;//
-                         let xINITiaLizer=0.;//1./3.;
-                           let yINITiaLizer=.0;//1./3./2.;
+           let  zoomINITiaLizer =1.;//.05;//    1/2**65.;//1.;//
+                         let xINITiaLizer=0.;//0.0001;   //1./3.;
+                           let yINITiaLizer=0.;//-.225;   //1./3./2.;
 
                            const coreFlopConstant = 2;
                            const swapConstant = 1;
@@ -111,6 +111,7 @@ starInShader:{value:true},
 clvrVariant8:{value: false},
 clvrVariant9:{value: false},
 clvrVariant0:{value: false},
+explodo:{value: false    },
 
 twelveGates:{value: false    },
 twelveGatesMeta:{value: .4    },
@@ -882,6 +883,8 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
 
                                       else if(key == "W" && event.ctrlKey)uniforms.seventhOUTside.value=!uniforms.seventhOUTside.value;
 
+                  else if(key == "X" && event.ctrlKey)
+                    uniforms.explodo.value=!uniforms.explodo.value;
                   else if(key == "F" && event.ctrlKey)
                     window.frenzy=!window.frenzy;
                   else if(key == "B" && event.ctrlKey)

@@ -960,6 +960,10 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                     callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
                  <label for="dynamicCoring">Dynamic Coring[,c]</label><br>
                  -->
+                       <input type="checkbox" id="explode" name="t"  onclick= "
+                    key  = 'X';
+                    callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+             <label for="explode">Piñata![,X]</label><br>
                        <input type="checkbox" id="Center" name="t"  onclick= "
                     key  = 'c';
                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -2140,7 +2144,8 @@ void main(){
     uniform bool sevenSquared;
     uniform float largeEyeColor;
     uniform float cloverOffset;
-    
+        uniform bool explodo;
+
     uniform bool Pointers;
     uniform int pixelSTAR;
     uniform bool pixelWitnesses;
@@ -4391,6 +4396,7 @@ vec2 s=p;
 float c = length(s);
 float scale = 1.;
 float coresIn = 0.;
+bool coreChanger = true; 
 const float crs = 64.;//this is the mandelclover and original inheritance colormode core range
 // if(c>4./3.){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
  float centerslide = 0.;
@@ -4402,7 +4408,8 @@ const float crs = 64.;//this is the mandelclover and original inheritance colorm
                          )
                         {
   if(i>1||!cloverSlide){s*=2.;c*=2.;scale*=2.;}
-
+                            if(seventhEYEandJubileye&&mod(float(i),2.)<1.)coreChanger=false;
+                            else coreChanger = true;
   if (cloverSlide)
     {
         
@@ -4623,8 +4630,7 @@ else{
 
    }
 
-
-
+//if(explodo)hyperCore+=.5;
 
 if(gigaLeap)hyperCore-=.5;
 bool spokeloverON=spokelover&&zoom/lfc<1.5;//could be 1.5, could be 2/3, one is a compromise
@@ -5520,6 +5526,7 @@ bool boolean = true;
 //isSplit=false;
 //dstnce=length(s);
 //s*=-1.;cool colors
+                    bool wasDaisy = false;
 
 
 for(int i=0;i<200; i++)//metacoreloop used to be about 40 before squeezeN
@@ -5527,8 +5534,6 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
     )
     && 0.<=hyperCoreBoosted&&externalCores!=0.)
 {
- 
-
    if(Redux) hyperCoreBoosted-=(1.-logStabilizationConstant )/2.  ;
     //if(counter==1.)
     //s*=4.;
@@ -5703,7 +5708,6 @@ else s=spin2(s,PI);
    float cloverOrDaisyOnTop = daisifier;//may be +0
    if(twelveGates)cloverOrDaisyOnTop=daisifier+1.;
        float switch2 = mod((angleS*divideByMultiplyingPi+2.)*6.+.5,2.);
-
     if(twelveGatesMeta!=0.&&((twelveGatesMeta<1.&&mod(-.5+cloverOrDaisyOnTop,1./twelveGatesMeta)>=1.)||
                              (twelveGatesMeta>=1.&&mod(cloverOrDaisyOnTop,twelveGatesMeta)<1.)))
     
@@ -5718,6 +5722,7 @@ else s=spin2(s,PI);
         s=spin2(s,PI/6.);
            gated=true;
            }    
+        wasDaisy=true;
 
 
 
@@ -5755,6 +5760,7 @@ else s=spin2(s,PI);
 */
 
     }
+    else if(length(s)<2./3.)wasDaisy=false;
     /*
     if(superStable)
     {
@@ -5857,9 +5863,19 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
        hyperCoreOUTPUT+=b;
        */
    }
+
+   
+
+
+
+
+
+
    
          if(0.!=jubileyes&&
-       ( (seventhEYE==3.&&lengthP<2./3.)||seventhEYE!=3.)&&
+       ( (seventhEYE==3.&&lengthP<2./3.
+       //&&coreChanger
+       )||seventhEYE!=3.)&&
          
         float(i)-counter==abs(jubileyes)-1.  &&//try counter - i and i - counter
          
@@ -5890,8 +5906,119 @@ hyperCoreBoosted+=squeezeN*3.;pow(squeezeN,squeezeN*2.);//before or after *=log(
        dstnce*=pow(dstnce,powerBoost);
 
    }
+/*vectorized petals, not working but fuller theory*/
+if(explodo)
+{
+    float ExplodingProgression = (hyperCoreBoosted - floor(hyperCoreBoosted));
+        float petalIsolated =(mod((atan(sBuffer.y,sBuffer.x)*divideByMultiplyingPi+2.)*3.-.5,1.)-.5);
+        
+        float petalIsolatedDaisy =(mod((atan(sBuffer.y,sBuffer.x)*divideByMultiplyingPi+2.)*6.-.5,1.)-.5);
+
+        float direction = floor(atan(s.y,s.x)/PI2*6.+.5)*PI2/6.-PI/2.;
+   // float direction = floor(atan(s.y,s.x)/PI2*6.)*PI2/6.;//swirlpool
+           vec2  spunCloverBurst = s;
+           if(!wasDaisy)spunCloverBurst=spin2(s,PI/6.*sign(-petalIsolated));
+           else 
+{
+    spunCloverBurst=spin2(s,PI/12.*sign(-petalIsolatedDaisy));
+    spunCloverBurst*=1.5;
+}
+            
+        vec2 petalPlucked = (spunCloverBurst)-ExplodingProgression*vec2(-zin(-direction),-coz(direction));
+     petalPlucked*=3.;
+        //   petalPlucked = spin2(petalPlucked,PI/6.);
+  //  vec2 petalPlucked = (s)-ExplodingProgression*vec2(-zin(-direction),-coz(direction));stable swirlpool
+   // vec2 petalPlucked = (s)-ExplodingProgression*-vec2(-zin(-direction),-coz(-direction));//implosion swirlpool
+   // petalPlucked/=length(s);
+   // if(petalIsolated>.25)
+   if(length(petalPlucked)<2./3.)
+
+    if(
+2.>=hyperCoreBoosted&&mod(floor(hyperCoreBoosted),2.)==0.//+2./3.&&abs(length(s))>ExplodingProgression
+) 
+{
+     //  petalPlucked=spin2(petalPlucked, -(1.+ExplodingProgression)*petalIsolated);
+
+
+    //if(length(s)>2./3.)
+ //   s-=ExplodingProgression*s ;//s.x+=.25;//length(s+vec2(1.)))>1.)
+  //hyperCoreBoosted +=1.;
+//petalPlucked=spin2(petalPlucked,-petalIsolated);
+  {
+
+   // petalPlucked=spin2(petalPlucked,PI/6.);
+        s=petalPlucked;//*(hyperCoreBoosted-float(i));
+            break;
+
+    }
+    
+}
+//else s*=2.;
+}
+
+/*
+
+
+if(explodo)
+{
+    float ExplodingProgression = (hyperCoreBoosted - floor(hyperCoreBoosted));
+        float petalIsolated =abs(mod((atan(sBuffer.y,sBuffer.x)*divideByMultiplyingPi+2.)*3.-.5,1.)-.5);
+    float direction = floor(atan(s.y,s.x)/PI2*6.)*PI2/6.;
+    vec2 petalPlucked = (s)-ExplodingProgression*-vec2(zin(-direction),coz(direction));
+   // petalPlucked/=length(s);
+ //   if(abs(petalIsolated)<ExplodingProgression/2.)
+ //  if(length(petalPlucked)<1.)
+
+    if(
+0.>=hyperCoreBoosted//+2./3.&&abs(length(s))>ExplodingProgression
+) 
+{
+     //  petalPlucked=spin2(petalPlucked, -(1.+ExplodingProgression)*petalIsolated);
+
+
+    //if(length(s)>2./3.)
+ //   s-=ExplodingProgression*s ;//s.x+=.25;//length(s+vec2(1.)))>1.)
+  //hyperCoreBoosted +=1.;
+//petalPlucked=spin2(petalPlucked,-petalIsolated);
+  {
+
+   // petalPlucked=spin2(petalPlucked,PI/6.);
+        s=petalPlucked;//*(hyperCoreBoosted-float(i));
+            break;
+
+    }
+    
+}
+//else s*=2.;
+}
+
+*/
+
+/*working doorlike
+
+   
+    float ExplodingProgression = (hyperCoreBoosted - floor(hyperCoreBoosted))*.5;
+      float petalPlucked = s.x-sign(s.x)*ExplodingProgression;
+
+    if(length(vec2(s.y,petalPlucked))<2./3.)
+
+    if(
+0.>=hyperCoreBoosted&&abs(s.x)>ExplodingProgression//+2./3.&&abs(length(s))>ExplodingProgression
+) 
+{
+    //if(length(s)>2./3.)
+ //   s-=ExplodingProgression*s ;//s.x+=.25;//length(s+vec2(1.)))>1.)
+  //hyperCoreBoosted +=1.;
+
+    {
+        s.x=petalPlucked;//*(hyperCoreBoosted-float(i));
+            break;
+
+    }
+    
+}*/
   if(metaCarousel!=0.
-     &&(float(i)>=hyperCoreBoosted+1.))  {   //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
+     &&(0.>=hyperCoreBoosted-1.))  {   //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
       
       
       
@@ -6315,7 +6442,8 @@ vec3 ring(vec2 r, float number)
                           vec2 reincrementation = vec2 (0.);
                           
                           float rings = 1.;
-                          if (chirality==3)rings=7.;
+                          if (chirality==3)
+                          rings=7.;
                                                           float m=0.;
 
                           if (length(p)<3.)
@@ -6326,8 +6454,8 @@ vec3 ring(vec2 r, float number)
                                   
                           for(float i = 0.0; i < 6.; i++){
                               
-                              float s = -sin(PIdiv3);
-                              float c = -cos(PIdiv3);
+                              float s = -sin(PIdiv3*i);
+                              float c = -cos(PIdiv3*i);
 
                               float val = pow((p.y+s+reincrementation.y)*(p.y+s+reincrementation.y)+(p.x+c+reincrementation.x)*(p.x+c+reincrementation.x),.5);
                               if (val>1.&& val<1.05)

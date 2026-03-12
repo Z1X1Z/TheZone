@@ -648,7 +648,6 @@ if(window.frenzy)
                     }
                     else window.buildUp+=interpolation
                 }
-                                                       console.log(speed)
 
             if(on)
             {
@@ -1652,7 +1651,7 @@ let       preserveOuterCore = true;
 function zoomRoutine(){
     var metaDepth=(!dupered)?zoomCap32:zoomCap32**2;//due to pixelization limits
     if(seventhOUTside&&fromCenter>uniforms.SEVEYEStart.value)metaDepth=metaDepth*2**(uniforms.SEVEYEpow.value+1)
-    else if(seventhOUTside&&fromCenter>uniforms.SEVEYEStart.value-1./2**uniforms.SEVEYEpow.value)metaDepth=metaDepth*2**(uniforms.SEVEYEpow.value+2)
+    else if(seventhOUTside&&fromCenter>uniforms.SEVEYEStart.value-1./2**uniforms.SEVEYEpow.value*uniforms.SEVEYEpow.value/2.)metaDepth=metaDepth*2**(uniforms.SEVEYEpow.value+2.)
         else if (uniforms.seventhEYE.value==3.&&uniforms.jubileyes.value!=0.&&fromCenter<1./3.)metaDepth*=8.;
 
     let zoomCone=metaDepth*fromCenter;
