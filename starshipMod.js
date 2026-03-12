@@ -640,14 +640,17 @@ if(window.frenzy)
                   if(!on)
                     {
                         let slowDown = (1.-1/rate)**(interpolation);
-                        d_x*=slowDown;d_y*=slowDown;
+                       if(isFinite(slowDown)) 
+                        {d_x*=slowDown;d_y*=slowDown;
+                        }
                         
                 window.buildUp*=slowDown;
                  if(window.buildUp>1.)  window.buildUp-=interpolation;
-                 else window.buildUp=1.;
+               //  else window.buildUp=1.;
                     }
                     else window.buildUp+=interpolation
                 }
+                console.log(window.buildUp)
                     if(!isFinite(window.buildUp))window.buildUp=1.
 
             if(on)
