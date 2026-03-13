@@ -105,7 +105,7 @@ function tol( j,  t){
         var lengthP=p.length()
 
     let petalNumber = petals+6;
-
+/*causing slice in original clover
     p.multiplyScalar(1./squirgleData[Math.round((((
                                         Math.atan2(p.y,p.x)/(
                                                              (petalNumber)/6.)//
@@ -114,7 +114,7 @@ function tol( j,  t){
                                            )/Math.PI/2
                                             )%1.// (petalNumber)/6.
                                             )*squirgleData.length)]);
-    
+     */
     for(var x=2.; x<102.;x+=1.)
     {
         if ((nGenesis)+2.>x)
@@ -127,6 +127,7 @@ p= new THREE.Vector2(p.x-Math.sign(p.x)*regenerativeshift,p.y);
         }
     else break;
     }
+   
         p.multiplyScalar(p.length()**(squeezeN-1.));//may cause conflict with constellation
 
     
@@ -298,10 +299,12 @@ centerslide-=c/2.;
 loops++;coresIn++;
 }
 else break;
+let lfcCenterCored = lfc*scale;
 
 
-var seventhEYEthree = (seventhEYE==3.&&((jubileyes!=0.&&lengthP<4./9.)||(jubileyes==0.&&lengthP<2./3.))&&zoom<.5
- &&lfc/zoom>2./3.);
+var seventhEYEthree = (seventhEYE==3.&&((jubileyes!=0.&&lengthP<1./3.)||
+(jubileyes==0.&&lengthP<2./3.))&&zoom<.5 &&lfc/zoom>2./3.
+);
        if(seventhEYEthree
  )
 {
@@ -316,7 +319,6 @@ var seventhEYEthree = (seventhEYE==3.&&((jubileyes!=0.&&lengthP<4./9.)||(jubiley
 
 
 // if(refactorCores!=1.){s*=(1.+lfc/2.);c*=(1.+lfc/2.);}
-let lfcCenterCored = lfc*scale;
 if(refactorCores>1.){
 var shift = (1.25+.5*zoom/(zoom+lfc));//centered at 1.5, just a guess really
 s.multiplyScalar(shift);c*=shift;
@@ -441,30 +443,24 @@ if(pollen&&OrthoEvery==0.)
    }
    else hyperCore+=.5;
    }
-   if(seventhEYE>0.&&(seventhEYE!=3.||seventhEYEthree)&&lengthP<2./3.&&zoom<.5
+   if(seventhEYE>0.&&(seventhEYE!=3.||seventhEYEthree)&&lengthP<2./3.&&zoom<.5//&&(lfc/zoom<2./3.||seventhEYE!=3.)
    )
    {
     if(budge==1./3.)
-    hyperCore-=2.25/Math.log(.5);///squeezeN;//for central polynomial
+    hyperCore-=2.25*Math.log(.5);///squeezeN;//for central polynomial
 else{
-    var squinch = 0.;
- if(squinch>.0)      
-    squinch = Math.pow(lpcc/4.-sqrt(lfc*zoom),1./squeezeN);
+      var squinch =0.;
+    if (seventhEYE==3.)
+     squinch = Math.pow(lpcc/4.-Math.sqrt(lfc*zoom),1./squeezeN);
      else      squinch = Math.pow(lengthP-Math.sqrt(zoom),1./squeezeN);
-
 
  if(squinch>.0) 
    hyperCore-=Math.log(Math.abs(squinch));
    else
   hyperCore+=(8.*Math.log(2.)/squeezeN);
-
   if(seventhEYE==3.)hyperCore+=(squeezeN)*Math.log(2.)/2.;
   //hyperCore-=.25;
-  if(!pollen)
- // if (seventhEYE!=3.)hyperCore+=Math.log(2)*1.5;
- // else 
-    hyperCore+=Math.log(2)*1.;
-
+  if(!pollen)hyperCore+=Math.log(2.)*1.;
 }
 
    }
@@ -1179,7 +1175,7 @@ else s=spin(s,Math.PI);
          if(i-(counter)==Math.abs(jubileyes)&&
 jubileyes!=0.&&
        ( (seventhEYE==3.&&lengthP<2./3.)||seventhEYE!=3.)&&
-
+ (i)-counter==Math.abs(jubileyes)-1.&&
        s.length()<1./3.//2./3.
  )
 {
@@ -1272,6 +1268,7 @@ break;
        // dstnce = s.length();
 daisifier+=1.;
  hyperCoreBoosted--;
+ //console.log(hyperCoreBoosted)
  hyperCoreOUTPUT--;
     loopSolid++
 
