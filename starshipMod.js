@@ -650,7 +650,7 @@ if(window.frenzy)
                     }
                     else window.buildUp+=interpolation
                 }
-                console.log(window.buildUp)
+               // console.log(window.buildUp)
                     if(!isFinite(window.buildUp))window.buildUp=1.
 
             if(on)
