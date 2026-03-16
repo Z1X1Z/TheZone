@@ -645,6 +645,7 @@ if(window.frenzy)
                         }
                         
                 window.buildUp*=slowDown;
+                if(window.buildUp<.5)window.buildUp=.5;
                  if(window.buildUp>1.)  window.buildUp-=interpolation;
                //  else window.buildUp=1.;
                     }
@@ -652,7 +653,6 @@ if(window.frenzy)
                 }
                // console.log(window.buildUp)
                     if(!isFinite(window.buildUp))window.buildUp=1.
-
             if(on)
             {
              uniforms.noteFrozen.value=note;
