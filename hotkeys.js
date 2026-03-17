@@ -46,7 +46,7 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                            const coreFlopConstant = 2;
                            const swapConstant = 1;
                               const JubileeCoreFlop = 0;
-                           const JubileeSwap = 3;
+                           const JubileeSwap = 1;
 
 window.uniformsInitial = {
 
