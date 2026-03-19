@@ -1128,6 +1128,12 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                <div class="dropdown">
                                  <button class="dropbtn">Clvr2
                                  <div  id="m4" class="dropdown-content">
+                                      <input type="checkbox" id="stellarNursery" name="t"  onclick= "
+                                         key  = 'E';
+                                         callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                                      <label for="stellarNursery">IsoEngine![,E]</label><br>
+                                    
+
                                      <input type="checkbox" id="stellarNursery" name="t"  onclick= "
                                          key  = 'Z';
                                          callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
@@ -2102,6 +2108,8 @@ void main(){
     uniform float noteFrozen;
     uniform int cellularDivision;
     uniform bool triogenesis;
+    uniform bool iso_engine;
+
     
         uniform float seventhEYE;
 
@@ -4125,6 +4133,34 @@ float leafDivGR=leaf/gr;
                               return insideOut;
                               
                                                                         }
+
+
+                      vec2 engine(vec2 p){
+                        p=p.yx;
+                          vec2 destColor = vec2(.0);
+                                             float size = 1.5;
+                                             vec2 booyah=p;
+                                              vec2 booya=vec2(0.);
+                                    //         for(int b = 0; b<2; b++)
+                                   //          {
+                          for(float i = 0.0; i < 6.; i++){
+                              
+                              float s = -sin(PIdiv3*i);
+                              float c = -cos(PIdiv3*i);
+                            booya= booyah-vec2(s,c);
+                            float lengthb = length(booya);
+                            float lengthd= length(destColor);
+                            if(lengthb<1./size&&(lengthd==0.||lengthb<lengthd)) destColor= booya*size;
+                          }
+
+                        //  booyah=booya*4.;
+                     //   }
+                     
+                        destColor*=2.;
+                          return destColor;
+                      }
+                      
+
 vec4 tol(vec2 p, vec2 t){
 
                         bool unSwitch=false;
@@ -4994,6 +5030,7 @@ if(petals>0.)
 
 
 //s=abs(s)-abs(p);//goes with +abs(p)
+if(!iso_engine){
    s=vec2(
         s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
@@ -5004,8 +5041,10 @@ if(petals>0.)
        -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
        );
         hyperCoreBoosted-=baseN;
+ 
        }
-       
+
+
    //    s+=abs(p);
                     /*orange               if(length(s)<1./3.
  )
@@ -5139,8 +5178,11 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
   
 
 
-   s.x=log(abs(s.x))/log(base);
-        
+  if(!iso_engine) s.x=log(abs(s.x))/log(base);
+              }
+       else if(length(s)<1.5)s=engine(s);
+     // if(counter>1.) return vec4(vec3(s,0.),1.);
+
 //if(s.x<0.)s.x*=0.;
       //  s.y=abs(s.y); //looks like heatvision
       //    dstnce = length(s);
@@ -6467,7 +6509,6 @@ vec3 ring(vec2 r, float number)
                           return f*destColor;
                       }
                           
-                      
      vec3 man(vec2 p,vec2 t) {
          p*=-1.75;
          vec2 s = p;
@@ -8401,7 +8442,8 @@ fin/vec4(confraculator
                           else if(movieTime==-2.)layeredOUT=vec4(0.);
                    if(negative==1||negative==2)layeredOUT=1.-layeredOUT;
                         gl_FragColor=vec4(layeredOUT.xyz,1.);//vec4(movie(characterP),1.);//
-//things known to cause bugs on some android chrome: heart (divides by zero), linear eq,waveform, "144000" men and women in clover, articles
+ //gl_FragColor=vec4(vec3(length(engine(p))),1.);
+                        //things known to cause bugs on some android chrome: heart (divides by zero), linear eq,waveform, "144000" men and women in clover, articles
                                                                  
                                          }
 
