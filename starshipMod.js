@@ -632,10 +632,11 @@ let pushBackCounter = 0;
 let speed = 0.;
 if(window.frenzy)
 {
+                let lastSpeed = speed;
                    speed =  ((d_x**2+d_y**2)**.5)
                    let rate = 108.;
                   if(speed>1.)speed=speed**(1.-rate/window.buildUp)
-
+                    if(!isFinite(speed))speed=lastSpeed;
                   if(speed==0.)speed=.5
                   if(!on)
                     {
@@ -4335,7 +4336,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                                             //    loopy++
                                                                      }
 
-                                                                     
+
                                               //   console.log(loopy) 
                                                                  // let b = 0.;
                                                                  
