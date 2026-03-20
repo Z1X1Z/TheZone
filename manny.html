@@ -4138,7 +4138,7 @@ float leafDivGR=leaf/gr;
                       vec2 engine(vec2 p){
                        // p=p.yx;
                           vec2 destColor = vec2(.0);
-                                             float size = 1.5;
+                                             float size = 5./3.;
                                              vec2 booyah=p;
                                               vec2 booya=vec2(0.);
                                     //         for(int b = 0; b<2; b++)
@@ -4147,7 +4147,7 @@ float leafDivGR=leaf/gr;
                               
                               float s = -sin(PIdiv3*i);
                               float c = -cos(PIdiv3*i);
-                            booya= booyah-vec2(s,c);
+                            booya= booyah-vec2(c,s);
                             float lengthb = length(booya);
                             float lengthd= length(destColor);
                             if(lengthb<1./size&&(lengthd==0.||lengthb<lengthd)) destColor= booya*size;
@@ -4667,7 +4667,7 @@ else{
    }
 
 //if(explodo)hyperCore+=.5;
-if(iso_engine)hyperCore+=2.;
+if(iso_engine)hyperCore+=1.5;
 
 if(gigaLeap)hyperCore-=.5;
 bool spokeloverON=spokelover&&zoom/lfc<1.5;//could be 1.5, could be 2/3, one is a compromise
@@ -5181,10 +5181,10 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
 
   if(!iso_engine) s.x=log(abs(s.x))/log(base);
               }
-       else if(length(s)<1.5)
+       else if(length(s)<4./3.)
        {
        // if(mod(counter,2.) == 0.) 
-       s = s.yx;
+       //s = s.yx;
         s=engine(s);
        }
      // if(counter>1.) return vec4(vec3(s,0.),1.);
