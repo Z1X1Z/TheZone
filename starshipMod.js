@@ -629,15 +629,14 @@ let pushBackCounter = 0;
         const colortone = note/lightingScaleTrail;
         colorSound.setHSL(reversableColor,1.,(colortone<=.875)?((colortone>.125)?colortone:.25):.875);//lighting {note/x} should be 120 but it's out of the vocal range
         //angle-=1/radialWarp;
-let speed = 0.;
+let speedy = 0.;
 if(window.frenzy)
 {
-                let lastSpeed = speed;
-                   speed =  ((d_x**2+d_y**2)**.5)
+                   speedy =  ((d_x**2+d_y**2)**.5)
                    let rate = 108.;
-                  if(speed>1.)speed=speed**(1.-rate/window.buildUp)
-                    if(!isFinite(speed))speed=lastSpeed;
-                  if(speed==0.)speed=.5
+                  if(speedy>1.)speedy=speedy**(1.-rate/window.buildUp)
+                  if(speedy==0.)speedy=.5
+                  let interpSmoothed = interpolation
                   if(!on)
                     {
                         let slowDown = (1.-1/rate)**(interpolation);
@@ -653,7 +652,7 @@ if(window.frenzy)
                     else window.buildUp+=interpolation
                 }
                // console.log(window.buildUp)
-                    if(!isFinite(window.buildUp))window.buildUp=1.
+                    if(!isFinite(window.buildUp)||window.buildUp<=0.)window.buildUp=1.
             if(on)
             {
              uniforms.noteFrozen.value=note;
@@ -697,9 +696,9 @@ if(window.frenzy)
 
 else                 {
 
-                 d_x = -Math.sin(-angle)*(.5+speed);
-                 d_y = -Math.cos(-angle)*(.5+speed);
-             
+                 d_x = -Math.sin(-angle)*(.5+speedy);
+                 d_y = -Math.cos(-angle)*(.5+speedy);
+              
                  }
                             d_x*=flatline;
                             d_y*=flatline
