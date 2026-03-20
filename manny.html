@@ -4667,7 +4667,7 @@ else{
    }
 
 //if(explodo)hyperCore+=.5;
-if(iso_engine)hyperCore+=1.;
+if(iso_engine)hyperCore+=2.;
 
 if(gigaLeap)hyperCore-=.5;
 bool spokeloverON=spokelover&&zoom/lfc<1.5;//could be 1.5, could be 2/3, one is a compromise
@@ -5183,7 +5183,8 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
               }
        else if(length(s)<1.5)
        {
-        if(counter == 0.) s = s.yx;
+       // if(mod(counter,2.) == 0.) 
+       s = s.yx;
         s=engine(s);
        }
      // if(counter>1.) return vec4(vec3(s,0.),1.);
