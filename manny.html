@@ -4138,7 +4138,7 @@ float leafDivGR=leaf/gr;
                       vec2 engine(vec2 p){
                         p=p.yx;
                           vec2 destColor = vec2(.0);
-                                             float size = 1.5;
+                                             float size = 1.623204;
                                              vec2 booyah=p;
                                               vec2 booya=vec2(0.);
                                     //         for(int b = 0; b<2; b++)
@@ -4667,6 +4667,7 @@ else{
    }
 
 //if(explodo)hyperCore+=.5;
+if(iso_engine)hyperCore+=1.;
 
 if(gigaLeap)hyperCore-=.5;
 bool spokeloverON=spokelover&&zoom/lfc<1.5;//could be 1.5, could be 2/3, one is a compromise
