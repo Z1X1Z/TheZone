@@ -4141,7 +4141,7 @@ float leafDivGR=leaf/gr;
                                              float size = 5./3.;
                                              vec2 booyah=p;
                                               vec2 booya=vec2(0.);
-                                              float angleModded = mod(floor((atan(p.y,p.x)+PI)/PI2*6.+.5),6.);
+                                             // float angleModded = mod(floor((atan(p.y,p.x)+PI)/PI2*6.+.5),6.);
                                     //         for(int b = 0; b<2; b++)
                                    //          {
                           for(float i = 0.0; i < 6.; i++){
@@ -4151,8 +4151,8 @@ float leafDivGR=leaf/gr;
                             booya= booyah-vec2(c,s);
                             float lengthb = length(booya);
                             float lengthd= length(destColor);
-                            if(angleModded==i&&
-                            lengthb<1./size&&(lengthd==0.||lengthb<lengthd)) destColor= booya*size;
+                            if(//angleModded==i&&
+                            lengthb<1./size&&(lengthd==0.||lengthb*size<lengthd)) destColor= booya*size;
                           }
 
                         //  booyah=booya*4.;
