@@ -4136,9 +4136,9 @@ float leafDivGR=leaf/gr;
 
 
                       vec2 engine(vec2 p){
-                        p=p.yx;
+                       // p=p.yx;
                           vec2 destColor = vec2(.0);
-                                             float size = 1.623204;
+                                             float size = 1.5;
                                              vec2 booyah=p;
                                               vec2 booya=vec2(0.);
                                     //         for(int b = 0; b<2; b++)
@@ -5181,7 +5181,11 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
 
   if(!iso_engine) s.x=log(abs(s.x))/log(base);
               }
-       else if(length(s)<1.5)s=engine(s);
+       else if(length(s)<1.5)
+       {
+        if(counter == 0.) s = s.yx;
+        s=engine(s);
+       }
      // if(counter>1.) return vec4(vec3(s,0.),1.);
 
 //if(s.x<0.)s.x*=0.;
