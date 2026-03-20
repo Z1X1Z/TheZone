@@ -4534,8 +4534,9 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                         //last line working on nyquist filtering, added
                         nyquistFilter = false;//turn off to debug nyquists
                   tolerance+=toleranceNudge;
-
+            tolerance=tolerance**(2**.5)**totalAMP;
 }
+
                                
 
                                     //console.log(7.5*Number.MIN_VALUE)
