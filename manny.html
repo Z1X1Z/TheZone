@@ -4365,7 +4365,7 @@ int flopped=oppositionalCoreFlop;
 //goes with swapSettingsForJubileyes() in hotkey for jubileyes
        bool seventhEYEandJubileye = (seventhEYE==3.&&jubileyes!=0.);
 bool pollen = polyNomialStretch;
-if(seventhEYEandJubileye&&lfc>zoom)
+if(seventhEYEandJubileye&&lfc>zoom&&morph==0.)
 {
     if (lengthP< SEVEYEStartAdj)
     {
@@ -4388,11 +4388,13 @@ else if(seventhOUTside)
 }
 
 }
+/*bugged
 if(morph!=0.)
 {
  swapped=int(mod(float(swap-swapJUBILEE+swapDEFAULT+1+4*10) ,4.));
    flopped = int(mod(float(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10),3.));
 }
+*/
 
 
 
@@ -4610,7 +4612,7 @@ equilibriator=lfc/(lfc-zoom/dif)*dif;
    else {
     if(cloverSlide)hyperCore+=.5*LogHalfReciprocal;
     if(wheel)hyperCore-=1.*LogHalfReciprocal;
-    if(morph!=0.) hyperCore-=1.*LogHalfReciprocal;
+    //if(morph!=0.) hyperCore-=1.*LogHalfReciprocal;
     if(Spoker&&spokelover&&dilate) hyperCore-=.0*LogHalfReciprocal;
     //else if (dilate)hyperCore-=.5*LogHalfReciprocal;
     if(clvrVariant2)hyperCore+=1.*LogHalfReciprocal;

@@ -236,12 +236,14 @@ else if(seventhOUTside&&lengthP>2./3.&&lfc>zoom)
 
 }
 
+/*
 
 if(morph!=0.)
 {
     swapped=(swap-swapJUBILEE+swapDEFAULT+1+4*10)%4.;
    flopped =(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10)%3.;
 }
+   */
 
 
 var s= p.clone();
@@ -415,7 +417,7 @@ hyperCore*=equilibriator;
     //hyperCore-=.5/Math.log(.5);
     if(cloverSlide)hyperCore+=.5/Math.log(.5);
     if(wheel)hyperCore-=1./Math.log(.5);
-    if(morph!=0.) hyperCore-=1./Math.log(.5);
+   // if(morph!=0.) hyperCore-=1./Math.log(.5);
     
     if(Spoker&&spokelover&&dilate) hyperCore-=.0/Math.log(.5);
    // else if (!dilate)hyperCore+=.5/Math.log(.5);
