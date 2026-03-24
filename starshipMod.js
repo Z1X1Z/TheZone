@@ -1615,6 +1615,14 @@ let lastVolume = 1.;
                 
             }
 
+            if(uniforms.seventhEYE.value==3.&&zoom<1/2.**5.&&fromCenter/zoom<1.5)
+                {
+                    zoom*=2.;
+                    coordX*=2.;
+                    coordY*=2.;
+                        fromCenter*=2.;
+                    lastZoom*=2.;
+                }
             if(!isFinite(cloverSuperCores))
             {cloverSuperCores=0;
             zoom=1.;
