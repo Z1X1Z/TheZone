@@ -1128,10 +1128,10 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                <div class="dropdown">
                                  <button class="dropbtn">Clvr2
                                  <div  id="m4" class="dropdown-content">
-                                      <input type="checkbox" id="stellarNursery" name="t"  onclick= "
+                                      <input type="checkbox" id="Iso" name="t"  onclick= "
                                          key  = 'E';
                                          callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
-                                      <label for="stellarNursery">IsoEngine![,E]</label><br>
+                                      <label for="Iso">IsoEngine![,E]</label><br>
                                     
 
                                      <input type="checkbox" id="stellarNursery" name="t"  onclick= "
@@ -4140,6 +4140,8 @@ float leafDivGR=leaf/gr;
                           vec2 destColor = vec2(.0);
                           
                                              float size = 2.;
+                                             float v4 = 1.;
+                           //     if(clvrVariant4!=0.) v4 = clvrVariant4;
                                              vec2 booyah=p;
                                               vec2 booya=vec2(0.);
                                              // float angleModded = mod(floor((atan(p.y,p.x)+PI)/PI2*6.+.5),6.);
@@ -4153,9 +4155,9 @@ float leafDivGR=leaf/gr;
                             float lengthb = length(booya);
                             float lengthd= length(destColor);
                             if(//angleModded==i&&
-                            lengthb<1./size&&(lengthd==0.||lengthb*size<lengthd)) destColor= booya*size;
+                            lengthb<1./size&&(lengthd==0.||lengthb*size<lengthd)) destColor= booya*size*v4;
                           }
-                          if(length(destColor)==0.)destColor=p;
+                          if(length(destColor)==0.)destColor=p*v4;
                           if(length(p)<2./3.)destColor=vec2(0.);
                         //  booyah=booya*4.;
                      //   }
