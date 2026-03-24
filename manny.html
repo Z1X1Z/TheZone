@@ -4138,6 +4138,7 @@ float leafDivGR=leaf/gr;
                       vec2 engine(vec2 p){
                        // p=p.yx;
                           vec2 destColor = vec2(.0);
+                          
                                              float size = 2.;
                                              vec2 booyah=p;
                                               vec2 booya=vec2(0.);
@@ -4155,6 +4156,7 @@ float leafDivGR=leaf/gr;
                             lengthb<1./size&&(lengthd==0.||lengthb*size<lengthd)) destColor= booya*size;
                           }
                           if(length(destColor)==0.)destColor=p;
+                          if(length(p)<2./3.)destColor=vec2(0.);
                         //  booyah=booya*4.;
                      //   }
                      
