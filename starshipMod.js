@@ -1615,7 +1615,7 @@ let lastVolume = 1.;
                 
             }
 
-            if(uniforms.seventhEYE.value==3.&&zoom<1/2.**5.&&fromCenter/zoom<1.5)
+            if(uniforms.seventhEYE.value==3.&&zoom<1/2.**4.5&&fromCenter/zoom<1.5)
                 {
                     zoom*=2.;
                     coordX*=2.;
