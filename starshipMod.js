@@ -4547,7 +4547,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
 
             tolerance=(tolerance/trunc)*trunc
 
-                    tolerance*=(grPermanent/-leafPermanent);
+                    tolerance*=((grPermanent/trunc)*trunc)/((-leafPermanent/trunc)*trunc);
 
 
 }
