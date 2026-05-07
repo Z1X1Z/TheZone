@@ -301,26 +301,27 @@ resizeMessage()
 
             if(window.online)
             {
-                if(thismoment%4==1) 
+                if(thismoment%3==1) 
                 {
                     nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@6/z1xlogo.png');"
                                     document.body.style="background-color:white";
                
                 }
-                    else if(thismoment%4==2)
+                    else if(thismoment%3==2)
             {
                 nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@16/pentaloctalwtlzonexmonogram.jpeg');"
                                 document.body.style="background-color:#8b8b8b";
 
             }
-                else  if(thismoment%4==0)
+            /*
+                else  if(thismoment%4==3)
                       {
                          nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr/thunderbird.png');"
                                          document.body.style="background-color:black";
 
                         }
-                     
-                      else  if(thismoment%4==3) 
+                     */
+                      else  if(thismoment%3==0) 
                       {
                         nf.style = "background-image: url('https://cdn.jsdelivr.net/gh/Z1X1Z/zonex_jsdelivr@15/thundeRainbow.png');"
                                       document.body.style="background-color:#999";
@@ -329,23 +330,25 @@ resizeMessage()
                     }
             else
             {
-                if(thismoment%4==1)
+                if(thismoment%3==1)
                 {nf.style = "background-image: url('z1xlogo.png');"
                                     document.body.style="background-color:white";
             }
-                else if(thismoment%4==2) 
+                else if(thismoment%3==2) 
                 {
                     nf.style = "background-image: url('pentaloctalwtlzonexmonogram.jpeg');"
                     document.body.style="background-color:#8b8b8b;"
 
                     }
-                else if(thismoment%4==0)  
+                    /*
+                else if(thismoment%4==3)  
                 {
                     nf.style = "background-image: url('thunderbird.png');"
                     document.body.style="background-color:black";
 
                 }
-                else if(thismoment%4==3)  
+                    */
+                else if(thismoment%3==0)  
                 {nf.style = "background-image: url('thundeRainbow.png');"
                  document.body.style="background-color:#999";
 
