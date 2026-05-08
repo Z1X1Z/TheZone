@@ -4549,10 +4549,12 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
 
             tolerance=(tolerance/trunc)*trunc
                     tolerance*=((((grPermanent)/trunc)*trunc)/(((-leafPermanent/trunc)*trunc)*(2**.5/trunc)*trunc)/trunc)*trunc;
+                    
                     for(var m=0;m<1.;m+=totalAMP) 
-                    {tolerance=(tolerance)**(tolerance+.5+totalAMP);
+                    {tolerance=tolerance**(tolerance+2**.5/2.+totalAMP);
                     }
                           tolerance=(tolerance/trunc)*trunc
+                        
 
 }
 
