@@ -1768,7 +1768,8 @@ let isFinished = false;
                     {
                         uniforms.pongBallCoords.value.x=xEdge;
                         ballVectorX*=-1
-                        ballVectorY=Math.sign(ballVectorY)*-paddleStrikePosition*12.;
+                        ballVectorY=//Math.sign(ballVectorY)*
+                        (paddleStrikePosition*12.-1);
                  
                     }
                     else uniforms.pongBallCoords.value.x=0.
@@ -1781,8 +1782,9 @@ let isFinished = false;
                 {
                     uniforms.pongBallCoords.value.x=0;
                     ballVectorX*=-1
-                    ballVectorY=Math.sign(ballVectorY)*-paddleStrikePosition*12.;
-                 
+                    ballVectorY=//Math.sign(ballVectorY)*
+                    (paddleStrikePosition*12.-1);
+
 
                 }                else uniforms.pongBallCoords.value.x=xEdge
                 
