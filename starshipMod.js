@@ -4559,9 +4559,14 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
 
                     }
 
-                          tolerance=(tolerance/trunc)*trunc
-}
 
+                         // tolerance=(tolerance/trunc)*trunc
+
+                                      tolerance*=
+                                    (((((-leafPermanent/trunc)*trunc)*((grPermanent/trunc)*trunc))/trunc)*trunc)**(totalAMP)*2.;//not completely exhaustively checked, but works well for singing words
+                          tolerance=(tolerance/trunc)*trunc
+
+}
                                
 
                                     //console.log(7.5*Number.MIN_VALUE)
