@@ -4563,7 +4563,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                          // tolerance=(tolerance/trunc)*trunc
 
                                       tolerance*=
-                                    ((((((-leafPermanent/trunc)*trunc)*((grPermanent/trunc)*trunc))/trunc)*trunc))**(totalAMP)*(1+totalAMP);//not completely exhaustively checked, but works well for singing words
+                                    ((((-leafPermanent/trunc)*trunc)*((grPermanent/trunc)*trunc)))**(totalAMP)*(((1+totalAMP)/trunc)*trunc);//not completely exhaustively checked, but works well for singing words
                           tolerance=(tolerance/trunc)*trunc
 
 }
