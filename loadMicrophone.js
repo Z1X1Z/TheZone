@@ -14,7 +14,7 @@ window.dataArray = new Uint8Array(bufferSize/2);
 
 let micProcessing1 = true;//autoGainControl//this was engaged to help cut down on noise, but no longer seems necessary, and the pitch is truer without
 let micProcessing2 = false;//echoCancellation//this was engaged to help cut down on noise, but no longer seems necessary, and the pitch is truer without
-let micProcessing3 = true;//noiseSuppression//this was engaged to help cut down on noise, but no longer seems necessary, and the pitch is truer without
+let micProcessing3 = false;//noiseSuppression//this was engaged to help cut down on noise, but no longer seems necessary, and the pitch is truer without
   if((location.hash.includes('.,K')||location.hash.includes(',.K'))
     //!=iOS
   )
