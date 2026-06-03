@@ -4535,8 +4535,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
 //odd conditionals
                                    
                       if(!iOS)      tolerance+=(totalAMP)**(totalAMP/((-leaf+(gr)+2**.5+1)**(.75)*2+1.))*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))//iOS may only have a problem with one of these terms//-totalAMPmodified/fractionOfFrame/2//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
- if(window.highORlow!=3.)
-{
+
                                   let toleranceNudge =((-leafPermanent+grPermanent+2**.5-3)*totalAMPmodified-1.*totalAMP)/fractionOfFrame//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                         toleranceNudge*=(2.)/(grPermanent-leafPermanent+1);
                         
@@ -4565,7 +4564,10 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                       tolerance*=
                                     ((((-leafPermanent/trunc)*trunc)*((grPermanent/trunc)*trunc)))**(totalAMP)*(((1+totalAMP)/trunc)*trunc);//not completely exhaustively checked, but works well for singing words
                           tolerance=(tolerance/trunc)*trunc
+                           if(window.highORlow!=3.)
+{
                           tolerance*=totalAMP**totalAMP;
+                          
                           
 
 }
