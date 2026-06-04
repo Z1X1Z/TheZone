@@ -292,7 +292,12 @@ document.getElementById('nameOfConfig').value ='';
                              </script>
         <input class="configuration" type="text" id = "nameOfConfig" style = "width:100%;"
         onkeyup="  
+        var lastName = '';
+        while (lastName!=this.value)
+        {
+                   lastName = document.getElementById('nameOfConfig').value
                    document.getElementById('nameOfConfig').value = this.value.replace(',' , '')
+        }
 
               var namesOfConfigs = localStorage.getItem('configNames')
                               var newName = true;
