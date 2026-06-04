@@ -52,7 +52,7 @@
             </div>
             <p>
             
-            <input class="engage"type="checkbox" id="Genesis"style="color:green" name="t"  onclick= "
+            <input class="engage" type="checkbox" id="Genesis"style="color:green" name="t"  onclick= "
              
 
 ">
@@ -71,6 +71,16 @@
                     hashExtension +=',.t(1).,A';
                     }
                     hashExtension+=touchHash
+
+                                  var namesOfConfigs = localStorage.getItem('buttonNames').split(',')
+                    for(var v = 0; v<namesOfConfigs.length;v++)if(namesOfConfigs[v]!='')
+                    {
+                        var lsNoC = localStorage.getItem(namesOfConfigs[v])
+                        if(lsNoc!='null')
+                        hashExtension+=localStorage.getItem(namesOfConfigs[v])
+                    }
+
+
                     //console.log(hashExtension)
                     //window.location.hash =hashExtension;
                     let hrefLocal = mee+"#"+hashExtension;
@@ -214,16 +224,257 @@
              document.getElementById("engage4").checked = true
              else document.getElementById("engage4").checked = false
                                 </script>
+
+<p>
+<script>
+        //    localStorage.removeItem('configNames')
+          //  localStorage.removeItem('buttonNames')
+
+        var menuEntryNames = localStorage.getItem('configNames');
+        if (menuEntryNames==null)localStorage.setItem('configNames','');
+
+         var bn = localStorage.getItem('buttonNames');
+         if(bn==null)localStorage.setItem('buttonNames','')
+
+
+
+</script>
+
+      <h2>  Name:       <select name="configDropDown"  id="configurations" style="font-size:.5em; width:75%;"
+                  onchange="
+                                var cn =    document.getElementById('configurations').options[document.getElementById('configurations').selectedIndex].text;
+
+                 if(cn!='New Entry')
+                  {
+
+document.getElementById('nameOfConfig').value =cn;
+window.lastConfigName = cn;
+
+   document.getElementById('configurer').value =  localStorage.getItem(cn)
+//   console.log(localStorage.getItem(cn))
+   //                 window.lastConfigName = this.value;
+                  }
+                  else {
+
+ // var opt = document.createElement('option');
+ // opt.value = -3;
+  
+     document.getElementById('configurer').value =  ''
+var opt = new Option('', 1000000, false, true)
+var opt2 = new Option('', 1000000, false, false)
+
+    document.getElementById('configurations').add(opt);
+    document.getElementById('selectConfigs').add(opt2);
+    
+  //  document.getElementById('configurations').selectedIndex=-2
+ 
+
+document.getElementById('nameOfConfig').value ='';
+//window.lastConfigName = '';
+
+   document.getElementById('configurer').value =  ''
+                       window.lastConfigName = this.value;
+
+}
+
+
+"
+
+            >
+                            <option >New Entry</option>
+                            <option id = "blankSelection" value="1000000" selected="selected"></option>
+
+                            </select>
+
+                            <script>
+ document.getElementById('blankSelection').selected="selected"
+ 
+                             </script>
+        <input class="configuration" type="text" id = "nameOfConfig" style = "width:100%;"
+        onkeyup="  
+                   document.getElementById('nameOfConfig').value = this.value.replace(',' , '')
+
+              var namesOfConfigs = localStorage.getItem('configNames')
+                              var newName = true;
+             if(namesOfConfigs!=null)
+              {
+            namesOfConfigs=namesOfConfigs.split(',');
+              for(var index = 0; index<namesOfConfigs.length; index++)
+              {
+              if(window.lastConfigName == namesOfConfigs[index]){
+                    namesOfConfigs.splice(index, 1)
+                    localStorage.removeItem(window.lastConfigName)
+                    if(document.getElementById('configurer')!=null)
+                        localStorage.setItem(this.value,document.getElementById('configurer').value);
+                    if(this.value!=null&&this.value!='')  namesOfConfigs.push(this.value)
+                    localStorage.setItem('configNames', namesOfConfigs.join());
+
+                    newName=false
+                        break;
+                    }
+            }
+        }
+
+                  namesOfConfigs = localStorage.getItem('buttonNames')
+          //   if(namesOfConfigs!=null)
+              {
+            namesOfConfigs=namesOfConfigs.split(',');
+            var index = 0;
+            var indexLength = namesOfConfigs.length
+            while (index<indexLength)
+              {
+                
+              if(window.lastConfigName == namesOfConfigs[index]){
+                    namesOfConfigs.splice(index, 1)
+                    if(this.value!=null&&this.value!='')  namesOfConfigs.push(this.value)
+                   localStorage.setItem('buttonNames', namesOfConfigs.join());
+indexLength--
+index--
+                    
+            }
+index++
+document.getElementById('selectionButtons').innerHTML=' ';
+              var buttonNames = localStorage.getItem('buttonNames').split(',')
+
+for(var m = 0; m<buttonNames.length;m++)
+    makeButton(buttonNames[m])
+
+        }
+
+              if(newName)  
+              {
+                var namesBuffer = localStorage.getItem('configNames');
+              localStorage.setItem('configNames', namesBuffer+','+this.value);
+              }
+              
+            }
+
+    document.getElementById('configurations').options[document.getElementById('configurations').selectedIndex].text = this.value;
+    document.getElementById('selectConfigs').options[document.getElementById('configurations').selectedIndex-1].text = this.value;
+
+                    window.lastConfigName = this.value;
+
+        "
+
+></input>
+
+    <script>window.lastConfigName = document.getElementById("nameOfConfig")</script>
+Combo: 
+        <input class="configuration" type="text" id = "configurer" style = "width:100%;"onkeyup="               
+
+
+              localStorage.setItem(window.lastConfigName, document.getElementById('configurer').value);
+              
+"
+></input>
+<br>
+<script>  
+function makeButton (buttonText)
+{
+                if(buttonText!='')
+                {
+                  var buttons= document.getElementById('selectionButtons')
+                   var button = document.createElement('button')
+                   button.style.fontSize='.75em'
+    button.addEventListener('click', function() {
+              var namesOfConfigs = localStorage.getItem('buttonNames').split(',')
+
+              for(var index = 0; index<namesOfConfigs.length; index++)
+              {
+              if(this.innerHTML == namesOfConfigs[index])
+              {
+                    namesOfConfigs.splice(index, 1)
+                   localStorage.setItem('buttonNames',namesOfConfigs)
+
+                break;
+              }
+            }
+
+        this.remove();
+    
+    });
+                button.innerHTML = buttonText;
+
+                   buttons.append(button)
+}
+
+}
+
+
+
+
+</script>
+ <select name="configDropDown"  id="selectConfigs" style="font-size: .5em; width:75%;"
+                  onchange="
+                var buttonText = document.getElementById('selectConfigs').options[document.getElementById('selectConfigs').selectedIndex].text;
+                                                 localStorage.setItem('buttonNames',buttonText+','+localStorage.getItem('buttonNames'))
+
+makeButton (buttonText)
+
+                  "
+            >
+                            <option value="1000000" selected="selected"></option>
+            </select>
+
+<div id="selectionButtons">
+    
+</div>
+
+<script>
+        var buttonNames = localStorage.getItem('buttonNames').split(',');
+for(var m = 0; m<buttonNames.length;m++)
+    makeButton(buttonNames[m])
+
+   // document.getElementById('configurations').options[document.getElementById('configurations').selectedIndex].text = "Bowser"
+</script>
+
+
+
+
+<script>
+    
+    var menuEntryNames = localStorage.getItem('configNames').split(',');
+    for(var m = 0; m<menuEntryNames.length; m++)if(menuEntryNames[m]=='')
+    {menuEntryNames.splice(m, 1)
+                            localStorage.setItem('configNames', menuEntryNames.join());
+    }
+     menuEntryNames = localStorage.getItem('configNames').split(',');
+
+    for (var entryIndex = 0; entryIndex<menuEntryNames.length; entryIndex++)
+{
+  var opt = document.createElement("option");
+  opt.value = entryIndex;
+  opt.text=menuEntryNames[entryIndex];
+    document.getElementById('configurations').add(opt);
+
+    
+
+
+  var opt2 = document.createElement("option");
+  opt2.value = entryIndex;
+  opt2.text=menuEntryNames[entryIndex];
+    document.getElementById('selectConfigs').add(opt2);
+
+
+}
+
+
+</script>
+
+
 <h2> May not work on all platforms indicated by a white or mostly black screen once loaded.  If so try a different browser like Firefox or Opera.  For starship that should work, try one that's
  <a class="onoffline2"  name="manny.html" onclick=
 "
 loadStarshipWithHash(this.name,'YO2~')"
     >barebones</a>.
     <p> <a href="keys.html">Hotkeys</a></p>
+
+    
 </p>
 For a musicXML score file to upload you can visit <a href = "https://hymnary.org/browse/popular/tunes"> hymnary.org</a> there are some pretty impressive features @ the <a href="https://hymnary.org/explore">explore page</a> on that site.
 
 </li>
+
 <p>
 <li>He is a seven eyed\seven horned living Lamb as has been slain!
 <a href="https://biblehub.com/niv/revelation/5.htm"><p></p>The Revelation of John, Chapter 5:6-10, The Holy Bible</a>:
