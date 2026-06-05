@@ -4566,7 +4566,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                           tolerance=(tolerance/trunc)*trunc
                            if(window.highORlow!=3.)
 {
-                          tolerance*=totalAMP**totalAMP;
+                          tolerance*=(totalAMP**totalAMP)**(1.+totalAMP-tolerance);//not exhaustively optimized, but intuitive and effective
 
 }
                                
