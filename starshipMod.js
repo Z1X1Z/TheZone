@@ -199,7 +199,7 @@ function makeSpirograph(){
     var maxSamp=0.;
     for(var t=0; t<bufferPortion;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
                                                                   uniforms.maxSamp.value=maxSamp;
-  let adjAdjusted = adjConstant/pitch;
+  let adjAdjusted = pitch/2**14;
   var minSamp=100000000.;
   for(var t=0; t<bufferPortion;t++) if(inputData[t]<maxSamp)minSamp=inputData[t];
                                                                 uniforms.minSamp.value=minSamp;
