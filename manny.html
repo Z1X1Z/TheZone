@@ -1085,6 +1085,19 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                        key  = 'h';
                                        callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
                                     <label for="dynamicOvercore">dynamic Overcore![,.h]</label><br>
+
+                                       
+                                      <input type="checkbox" id="chop" name="t"  onclick= "
+                                          key  = 'e';
+                                          callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                                       <label for="chop">Chop![,e]</label><br>
+                                       
+                                      <input type="checkbox" id="redo" name="t"  onclick= "
+                                          key  = 'L';
+                                          callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
+                                       <label for="redo">REDUX![,.L]</label><br>
+                                       
+
                                  <a id="ReFactor" name="t"  onclick= "
                                      key  = 'r';
                                      callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'keyCode':key.charCodeAt(0)}));">
@@ -1156,17 +1169,6 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                                           callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
                                        <label for="sphereClover">Sphere Clover![,f]</label><br>
                                        
-                                       
-                                      <input type="checkbox" id="redo" name="t"  onclick= "
-                                          key  = 'L';
-                                          callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
-                                       <label for="redo">REDUX![,.L]</label><br>
-                                       
-                                       
-                                      <input type="checkbox" id="chop" name="t"  onclick= "
-                                          key  = 'e';
-                                          callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
-                                       <label for="chop">Chop![,e]</label><br>
                                        
                                        
                                      <label for="Base Number">Log base this of x^3 (maybe 1.5-4):</label>
