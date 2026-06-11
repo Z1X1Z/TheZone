@@ -3346,6 +3346,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                    if(p.y==0.&&p.x>0.&&t.y==0.)l=0.;
                    ret=vec3(l);
                }
+               if(holyeyes==0&&!((p.x>1.||p.x<-0.)||abs(p.y)>.75))ret=vec3(0.);
          return ret;//return red if run in  error
     }
     vec3 faceFORWARDstatic(vec2 p,vec2 t){
