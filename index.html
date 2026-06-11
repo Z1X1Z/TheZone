@@ -249,7 +249,7 @@
 
 document.getElementById('nameOfConfig').value =cn;
 window.lastConfigName = cn;
-
+                    
    document.getElementById('configurer').value =  localStorage.getItem(cn)
 //   console.log(localStorage.getItem(cn))
    //                 window.lastConfigName = this.value;
@@ -331,15 +331,15 @@ document.getElementById('nameOfConfig').value ='';
                 
               if(window.lastConfigName == namesOfConfigs[index]){
                     namesOfConfigs.splice(index, 1)
-                    if(this.value!=null&&this.value!='')  namesOfConfigs.push(this.value)
+                    if(this.value!=null&&this.value!=''&&lastConfigName!='')  namesOfConfigs.push(this.value)
                    localStorage.setItem('buttonNames', namesOfConfigs.join());
 indexLength--
 index--
                     
             }
 index++
-document.getElementById('selectionButtons').innerHTML=' ';
-              var buttonNames = localStorage.getItem('buttonNames').split(',')
+  document.getElementById('selectionButtons').innerHTML=' ';
+            var buttonNames = localStorage.getItem('buttonNames').split(',')
 
 for(var m = 0; m<buttonNames.length;m++)
     makeButton(buttonNames[m])
