@@ -112,6 +112,7 @@ clvrVariant8:{value: false},
 clvrVariant9:{value: false},
 clvrVariant0:{value: false},
 explodo:{value: true    },
+BORE:{value: false    },
 
 twelveGates:{value: false    },
 twelveGatesMeta:{value: .4    },
@@ -885,6 +886,8 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
 
                   else if(key == "X" && event.ctrlKey)
                     uniforms.explodo.value=!uniforms.explodo.value;
+                  else if(key == "Q" && event.ctrlKey)
+                    uniforms.BORE.value=!uniforms.BORE.value;
                   else if(key == "F" && event.ctrlKey)
                     window.frenzy=!window.frenzy;
                   else if(key == "B" && event.ctrlKey)

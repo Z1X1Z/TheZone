@@ -1257,6 +1257,12 @@ uniforms.coreShift.value=-document.getElementById('shift').value">
                         callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
                      <label for="Spin Towards Me">Spin Towards Me![,h]</label><br>
  
+
+                    <input type="checkbox" id="BORE" name="t"  onclick= "
+                        key  = 'Q';
+                        callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
+                     <label for="BORE">BORE![,Q]</label><br>
+ 
                     <input type="checkbox" id="spinner" name="t"  onclick= "
                         key  = 'C';
                         callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'altKey':true,'keyCode':key.charCodeAt(0)}));">
@@ -2157,6 +2163,7 @@ void main(){
     uniform float largeEyeColor;
     uniform float cloverOffset;
         uniform bool explodo;
+        uniform bool BORE;
 
     uniform bool Pointers;
     uniform int pixelSTAR;
@@ -6019,6 +6026,9 @@ if(explodo)
 //else s*=2.;
 }
 
+
+
+
 /*
 
 
@@ -6099,6 +6109,8 @@ if(explodo)
      
 }
 else break;
+if(BORE&&dstnce<twoThirds&&cored>1.)s = spin2(s,hyperCoreBoosted*(mod(counter,1.)-.5)*2.);
+
 /*
             if(length(s)<2./3.
  )
