@@ -14,7 +14,7 @@ window.dataArray = new Uint8Array(bufferSize/2);
 
 let micProcessing1 = false;//autoGainControl
 let micProcessing2 = false;//echoCancellation
-let micProcessing3 = true;//noiseSuppression
+let micProcessing3 = false;//noiseSuppression
   if((location.hash.includes('.,K')||location.hash.includes(',.K'))
     //!=iOS
   )
