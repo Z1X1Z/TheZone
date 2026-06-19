@@ -689,7 +689,7 @@ hyperCoreOUTPUT-=superUpcorer;
 
    if(counter!=0.&&dilate&&morph==0.){//this is to allow top level core freeze for original clover
          var dst = s.length();
-         dst=Math.sqrt(dst);
+         dst=Math.sqrt(dst)*dst*dst;
 
              hyperCoreBoosted-=dst;
               hyperCoreOUTPUT-=dst;

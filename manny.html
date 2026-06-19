@@ -4943,7 +4943,7 @@ bool squeezeDIlate = petals>0.;
 if(zoom<.000001*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
- 
+ //s/=log(3.);
  if(squeezeN>=2.) 
  {
     if(petals>0.)
@@ -5022,7 +5022,7 @@ if(petals>0.)
                hyperCoreOUTPUT-=sliceanddiceBoost;
                   */
                 float dst = length(s);
-                  dst=sqrt(dst);//sqrt(dst);
+                  dst=sqrt(dst)*dst*dst;//sqrt(dst);
                hyperCoreBoosted-=dst;
                 hyperCoreOUTPUT-=dst;
               // hyperCoreBoosted-=dstnce;
@@ -5032,6 +5032,9 @@ if(petals>0.)
        }
 
 
+
+// dstnce = length(s);
+//s/= 1.+(log(3.)-1.)*dstnce;
 
           if(//dstnce> twoThirds &&
           gigaLeap)
@@ -5051,7 +5054,6 @@ if(petals>0.)
                         }
                         //hyperCoreBoosted*=outerCloudShift;       
                     }
-
 
 //s=abs(s)-abs(p);//goes with +abs(p)
 if(!iso_engine){
