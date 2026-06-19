@@ -624,7 +624,7 @@ let loopSolid = 0.
         var daisifier = 0.;
 
 
-        var borderGap =7. ;
+        var borderGap =9. ;
         var border = (borderGap*borderGap/2.-borderGap*3.+1.5)/Math.pow(2.,borderGap);
         
 
