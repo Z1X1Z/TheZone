@@ -624,7 +624,7 @@ let loopSolid = 0.
         var daisifier = 0.;
 
 
-        var borderGap =8. ;
+        var borderGap =7. ;
         var border = (borderGap*borderGap/2.-borderGap*3.+1.5)/Math.pow(2.,borderGap);
         
 
@@ -687,6 +687,18 @@ hyperCoreBoosted-=superUpcorer;
 hyperCoreOUTPUT-=superUpcorer;
 }
 
+   if(counter!=0.&&dilate&&morph==0.){//this is to allow top level core freeze for original clover
+         var dst = s.length();
+         dst=Math.sqrt(dst)
+       //  dst=(Math.sqrt(dst)/truncator)*truncator;
+                           dst=Math.pow(dst,(((gr/truncator)*truncator*-leaf)/truncator)*truncator);//sqrt(dst);
+
+
+             hyperCoreBoosted-=dst;
+              hyperCoreOUTPUT-=dst;
+        }
+
+
           if(//dstnce> twoThirds &&
           gigaLeap)
                     {
@@ -707,18 +719,6 @@ hyperCoreOUTPUT-=superUpcorer;
                         //hyperCoreBoosted*=outerCloudShift;       
                     }
                     
-
-   if(counter!=0.&&dilate&&morph==0.){//this is to allow top level core freeze for original clover
-         var dst = s.length();
-         dst=Math.sqrt(dst)
-       //  dst=(Math.sqrt(dst)/truncator)*truncator;
-                    //       dst=Math.pow(dst,(((gr/truncator)*truncator*-leaf)/truncator)*truncator);//sqrt(dst);
-
-
-             hyperCoreBoosted-=dst;
-              hyperCoreOUTPUT-=dst;
-        }
-
 
 s=new THREE.Vector2(
 s.x*s.x*s.x  - 3.*s.x*s.y*s.y,

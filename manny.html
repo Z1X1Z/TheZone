@@ -4929,7 +4929,7 @@ bool gatedPass=false;
 float daisifier = 0.;
 
                 
-                        float borderGap =8.;
+                        float borderGap =7.;
                         float border = (borderGap*borderGap/2.-borderGap*3.+1.5)/pow(2.,borderGap);
                            
 
@@ -5021,6 +5021,24 @@ if(petals>0.)
 // dstnce = length(s);
 //s/= 1.+(log(3.)-1.)*dstnce;
 
+
+ if(counter!=0.&&dilate&&morph==0.&&OrthoEvery==0.){
+                 /* float sliceanddiceBoost=mod((atan(s.y,s.x)+chiralAdjustment)*divideByMultiplyingPi2*6.+1.,1.)*dstnce*dstnce;
+                  sliceanddiceBoost=sign(sliceanddiceBoost)*pow(abs(sliceanddiceBoost),.5);
+              hyperCoreBoosted-=sliceanddiceBoost;
+               hyperCoreOUTPUT-=sliceanddiceBoost;
+                  */
+                float dst = length(s);
+                dst =sqrt(dst);//odd that this seems to be truncated, raises questions about truncating other dstnces!
+              //   dst=pow(dst*dst,(((gr/truncator)*truncator*-leaf)/truncator)*truncator);//sqrt(dst);
+               hyperCoreBoosted-=dst;
+                hyperCoreOUTPUT-=dst;
+              // hyperCoreBoosted-=dstnce;
+               // hyperCoreOUTPUT-=dstnce;
+
+               
+       }    
+
           if(//dstnce> twoThirds &&
           gigaLeap)
                     {
@@ -5040,22 +5058,6 @@ if(petals>0.)
                         //hyperCoreBoosted*=outerCloudShift;       
                     }
 
- if(counter!=0.&&dilate&&morph==0.&&OrthoEvery==0.){
-                 /* float sliceanddiceBoost=mod((atan(s.y,s.x)+chiralAdjustment)*divideByMultiplyingPi2*6.+1.,1.)*dstnce*dstnce;
-                  sliceanddiceBoost=sign(sliceanddiceBoost)*pow(abs(sliceanddiceBoost),.5);
-              hyperCoreBoosted-=sliceanddiceBoost;
-               hyperCoreOUTPUT-=sliceanddiceBoost;
-                  */
-                float dst = length(s);
-                dst =sqrt(dst);//odd that this seems to be truncated, raises questions about truncating other dstnces!
-              //   dst=pow(dst*dst,(((gr/truncator)*truncator*-leaf)/truncator)*truncator);//sqrt(dst);
-               hyperCoreBoosted-=dst;
-                hyperCoreOUTPUT-=dst;
-              // hyperCoreBoosted-=dstnce;
-               // hyperCoreOUTPUT-=dstnce;
-
-               
-       }    
 //s=abs(s)-abs(p);//goes with +abs(p)
 if(!iso_engine){
    s=vec2(
