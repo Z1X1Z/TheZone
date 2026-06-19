@@ -5022,7 +5022,8 @@ if(petals>0.)
                hyperCoreOUTPUT-=sliceanddiceBoost;
                   */
                 float dst = length(s);
-                  dst=sqrt(dst)*dst*dst;//sqrt(dst);
+                dst =(sqrt(dst)/truncator)*truncator;//odd that this seems to be truncated, raises questions about truncating other dstnces!
+              //   dst=pow(dst*dst,(((gr/truncator)*truncator*-leaf)/truncator)*truncator);//sqrt(dst);
                hyperCoreBoosted-=dst;
                 hyperCoreOUTPUT-=dst;
               // hyperCoreBoosted-=dstnce;
