@@ -293,7 +293,7 @@ document.getElementById('nameOfConfig').value ='';
  
                              </script>
         <input class="configuration" type="text" id = "nameOfConfig" style = "width:100%;"
-        onkeyup="  
+        onchange="  
         var lastName = '';
         while (lastName!=this.value)
         {
@@ -367,10 +367,16 @@ for(var m = 0; m<buttonNames.length;m++)
 
     <script>window.lastConfigName = document.getElementById("nameOfConfig")</script>
 Combo: 
-        <input class="configuration" type="text" id = "configurer" style = "width:100%;"onkeyup="               
+        <input class="configuration" type="text" id = "configurer" style = "width:100%;"onchange="               
 
 
-              localStorage.setItem(window.lastConfigName, document.getElementById('configurer').value);
+setTimeout(
+             ()=>{localStorage.setItem(window.lastConfigName, document.getElementById('configurer').value);}
+              ,10
+
+        )
+                      console.log('here')
+
               
 "
 ></input>
