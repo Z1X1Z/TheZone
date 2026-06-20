@@ -370,12 +370,7 @@ Combo:
         <input class="configuration" type="text" id = "configurer" style = "width:100%;"onchange="               
 
 
-setTimeout(
-             ()=>{localStorage.setItem(window.lastConfigName, document.getElementById('configurer').value);}
-              ,10
-
-        )
-                      console.log('here')
+localStorage.setItem(window.lastConfigName, document.getElementById('configurer').value);
 
               
 "
