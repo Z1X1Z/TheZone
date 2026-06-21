@@ -132,6 +132,17 @@ button {
  font-family: monospace; /* Important for vertical align on mobile phones */
  margin: 0; /* Important for vertical align on mobile phones */
 }
+ .xyzbtn {
+    font-size: 24px;/*reset from button parent*/
+ border: solid;
+ color: white;
+ text-align: left;
+
+ 
+ background-color: inherit;
+ font-family: monospace; /* Important for vertical align on mobile phones */
+ margin: 0; /* Important for vertical align on mobile phones */
+}
 
 /* The dropdown container */
 .dropdown {
