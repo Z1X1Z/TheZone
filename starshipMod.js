@@ -1673,7 +1673,7 @@ function zoomRoutine(){
     if (zoom>=1.)//could work as one (also below) but my phone was partially crashing on continuum clover zoomout
         zoomOutEngage = false;
     if(!isFinite(ZR))ZR=1;
-    if(!zoomOutEngage&&zoomRate>0.){
+    if(!zoomAtl41&&!zoomOutEngage&&zoomRate>0.){
         if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(on&&!window.touchMode))||xTouch+yTouch!=0)zoom *=ZR**((1.+INcreaseBoost)*zoomBoost);
         else if(uniforms.MetaCored.value||zoom<1.){
             zoom /= ZR;
@@ -2072,7 +2072,7 @@ function runOSMD (){
                        TouchMicroizer=false;
 
                    }
-                        if(!zoomAtl41)
+                        if(true||!zoomAtl41)
                             {
                               lastZoom = zoom;
                               zoomRoutine();
@@ -4567,8 +4567,10 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                            if(window.highORlow!=3.)
 {
                           tolerance*=((totalAMP**tolerance)**((1.+totalAMP)**totalAMP-tolerance))**((1-tolerance)**tolerance+totalAMP)///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
+                            
                           //tolerance*=((totalAMP**totalAMP)**((1.-tolerance)**tolerance+totalAMP)**((1.+totalAMP)**totalAMP-tolerance))///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
                           //tolerance=(tolerance/trunc)*trunc
+
 
                           
 }

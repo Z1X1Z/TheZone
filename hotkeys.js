@@ -39,7 +39,7 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                            }
               
 
-           let  zoomINITiaLizer =1.;//.05;//    1/2**65.;//1.;//
+           let  zoomINITiaLizer =.9999;//.05;//    1/2**65.;//1.;//
                          let xINITiaLizer=0.;//0.0001;   //1./3.;
                            let yINITiaLizer=0.;//-.225;   //1./3./2.;
 
@@ -599,9 +599,72 @@ window.addEventListener('keydown', function(event) {callKey(event); return true;
     window.lastKey = "";
 window.key = " ";
                                          function callKey(event){
-                                       if(number!="no number")     number = Number(number)
+        window.lastKey = window.key;
+                                key = event.key;
+
+                      if(key == "X" && event.altKey&&!event.ctrlKey)
+                   {
+                    var indexOfNumber = 0;    
+                    var xyzcswitch = 0;
+                    var x = ''
+                    var y = ''
+                    var z = ''
+                    var c = ''
+                    while(indexOfNumber<number.length)
+                    {
+                        if(number[indexOfNumber]==')')break;
+                        if(number[indexOfNumber]==','&&xyzcswitch<=3)
+                            {
+                                xyzcswitch++;
+                                indexOfNumber++;
+                            }
+                        if(xyzcswitch==0) x+=String(number[indexOfNumber])
+                        if(xyzcswitch==1) y+=String(number[indexOfNumber])
+                        if(xyzcswitch==2) z+=String(number[indexOfNumber])
+                        if(xyzcswitch==3) c+=String(number[indexOfNumber])
+                            indexOfNumber++
+                    }
+                   
+if(x!='')
+{
+x=Number(x);
+uniforms.coords.value.x=x
+uniforms.constellationCoord.value.x=x
+window.coordX=x
+
+if(y!='')
+{
+    y=Number(y);
+
+uniforms.coords.value.y=y
+uniforms.constellationCoord.value.y=y
+window.coordY=y
+}
+}
+ 
+if(z!='')
+{
+z=Number(z);
+uniforms.zoom.value=z
+window.zoom=z
+}
+if(c!='')
+{
+    c=Number(c)
+uniforms["upCoreCycler"].value=c;
+}
+//to prevent dividing by zero may be set to small value
+                    return 1;
+                   }
+                   
+                                       if(number!="no number") {
+
+                                       number = Number(number)
+
+                }
+
                                           //  event.preventDefault(); event.stopImmediatePropagation();
-                window.lastKey = window.key;
+        
                 /*   if(lastKey==","&&!runningHash)//key here is the last key
                  event=new KeyboardEvent('keydown',
                  {"key":event.key,"keyCode":event.keyCode,"ctrlKey":true}
@@ -610,7 +673,6 @@ window.key = " ";
                  {"key":event.key,"keyCode":event.keyCode,"altKey":true}//creating a new keypress because it's readonly
                  );
                  */
-                key = event.key;
                 //number=Number(number);
                 if(key=="/"&&!event.shiftKey){  event.preventDefault(); event.stopImmediatePropagation();}
                 
@@ -867,6 +929,8 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                 }
     
    // else if (event.altKey);
+
+
                   else if(key == "N" && event.ctrlKey)
                     {
                        /* uniforms.jubileyes.value=(uniforms.jubileyes.value+1)%3;

@@ -1828,7 +1828,10 @@ Open MusicXML file
                   </div>
         
         
-     
+
+        <div class="dropdown">
+          <button class="xyzbtn" onclick="location.hash+='.X('+window.coordX+','+window.coordY+','+zoom+','+uniforms.upCoreCycler.value+')'  ">XYZC
+               </button></div>
 
         </div>
         <script src="fileSelectAndLoadOSMD.js"></script>
@@ -1898,6 +1901,7 @@ Open MusicXML file
 
     </div>
     </div id="score">
+
     </div>
         <script>
         document.getElementById("files").addEventListener("change", handleFileSelect, false);
@@ -1909,7 +1913,6 @@ Open MusicXML file
         };
  */
         </script>
-    
     
     
     <script>//used for resetting column counts for screen porportion in onWindowResize in starshipMod
