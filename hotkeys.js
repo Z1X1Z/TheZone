@@ -1108,6 +1108,10 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
         if(runningHash
            
            );//dynamic href for iFrame doesn't seem to work on mobile
+               else   if (number == 9)
+        
+            window.frames["TheBible"].location = "https://openbible.com/audio/";
+        
         else if (number == 8)
         
             window.frames["TheBible"].location = "https://openbible.com/audio/gilbert_music/";
