@@ -306,14 +306,14 @@ for(var nameOfUniform in uniformsInitial)
     window.coordX=xINITiaLizer; window.coordY=yINITiaLizer;
     
     
-    if(!location.hash.includes(".b")&&!location.hash.includes(".c")) window.BibleON=1;
+    if(!location.hash.includes(".b")&&!location.hash.includes(".c")&&!location.hash.includes(".B")) window.BibleON=1;
     else window.BibleON=0;
     if(settingsSet)
     {
-        if(location.hash.includes(".b")||location.hash.includes(".c")) window.BibleON=1;
+        if(location.hash.includes(".b")||location.hash.includes(".c")||location.hash.includes(".B")) window.BibleON=1;
         else window.BibleON=0;
         
-        if(window.useCDN||location.hash.includes(".b")||location.hash.includes(".c"))
+        if(window.useCDN||location.hash.includes(".b")||location.hash.includes(".c")||location.hash.includes(".B"))
             callKey(new KeyboardEvent('keydown', {'key': "b", 'altKey':true, 'keyCode':key.charCodeAt(0)}));
     }
        window.playMovie=false;
@@ -513,6 +513,7 @@ function readHash(){
                  CTRL = location.hash[hashindex-1]==","||location.hash[hashindex-2]==",";
             }
             let bibleReaderCode =(location.hash[hashindex-2]=="c"&&location.hash[hashindex-3]==".")
+                                ||(location.hash[hashindex-2]=="B"&&location.hash[hashindex-3]==".")
                                 ||(location.hash[hashindex-1]=="b"&&location.hash[hashindex-2]==".")
             if(location.hash[hashindex+1]=="(")
             {            hashindex++;hashindex++;
@@ -809,6 +810,7 @@ source.connect(analyser);
 
    
                                         else if((key == "c") && event.altKey&&event.ctrlKey);//load bible
+                                        else if((key == "B") && event.altKey&&event.ctrlKey);//load bible
                                         else if((key == "b") && event.altKey&&event.ctrlKey);//load bible
 
                 else if((key == "g"||key=="©") && event.altKey&&event.ctrlKey)

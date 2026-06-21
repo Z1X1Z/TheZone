@@ -53,11 +53,11 @@
                     let bibleWithText = false;
                     window.muteToggle = false
 
-                if(true||location.hash.includes(".b")||location.hash.includes(".c("))
+                if(location.hash.includes(".B")||location.hash.includes(".b")||location.hash.includes(".c("))
                 {
-                    if (location.hash.includes(".c("))
+                    if (location.hash.includes(".c(")||location.hash.includes(".B("))
                     {let c = 0;
-                        while (location.hash.slice(c-3,c)!=".c("&&c<location.hash.length)
+                        while (location.hash.slice(c-3,c)!=".c("&&location.hash.slice(c-3,c)!=".B("&&c<location.hash.length)
                         {
                             c++;
                                }
@@ -173,9 +173,9 @@ let maxLetterDepth=-1;
         book=(place-1)+'_'+book.slice(place,book.length)
         }
 }
-         urlAppend = "chapter/"+book+"/"+chapter+".htm"
+         urlAppend = book+"/"+chapter+".htm"
 }
-                    if( location.hash.includes(".c")||location.hash.includes(".b"))window.readerSet=true;
+                    if( location.hash.includes(".c")||location.hash.includes(".b")||location.hash.includes(".B"))window.readerSet=true;
                      if (location.hash.includes(".b8"))
                     iframe.setAttribute("src", "https://openbible.com/audio/gilbert_music/");
                             else if(location.hash.includes(".b7"))   iframe.setAttribute("src","https://openbible.com/audio/gilbert_music_books/");
@@ -189,6 +189,8 @@ let maxLetterDepth=-1;
                      else
                      {
                          if( location.hash.includes(".c")||location.hash.includes(".b")) iframe.setAttribute("src",  "https://www.biblehub.com/audio/"+urlAppend);
+                         else if( location.hash.includes(".B")) iframe.setAttribute("src",  "https://www.biblehub.com/nkjv/"+urlAppend);
+                         console.log(iframe.src)
                          bibleWithText = true;}
                 iframe.setAttribute("height", "100%");
                 iframe.setAttribute("width", "100%");
@@ -204,7 +206,7 @@ let maxLetterDepth=-1;
                // iframe.setAttribute("style", "position:fixed");
                 iframe.setAttribute("Id","Bible");
                 document.body.appendChild(iframe);
-        if(!location.hash.includes(".c")&&!location.hash.includes(".b")){
+        if(!location.hash.includes(".c")&&!location.hash.includes(".b")&&!location.hash.includes(".B")){
                 iframe.setAttribute("width", "0");
                 iframe.setAttribute("height", "0");
 }
@@ -1697,6 +1699,9 @@ Negative![,V]</a><br>
                       </option>
                       <option value='8'>
                           Gilbert w/ music by chapter[#.b8]
+                      </option>
+                       <option value='9'>
+                          Read the Bible!
                       </option>
                       
               </select>
