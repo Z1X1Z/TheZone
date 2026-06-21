@@ -253,7 +253,7 @@ noteFrozen:{value:0},
       squeezeN:{value:1.},
 
     glyph:{value:0.},
-    jubileyes:{value:2.},
+    jubileyes:{value:1.},
     negative:{value:0},
 seventhEYE:{value:3},
 budge:{value:.5},
@@ -758,6 +758,7 @@ source.connect(analyser);
                     uniforms.budge.value=number;
                 else if( uniforms.budge.value!=.5)uniforms.budge.value=.5;
                     else  uniforms.budge.value=1./3.;
+                    
                 }
 
                                           else  if((key == "U") && event.altKey&&event.ctrlKey)uniforms.ringSpring.value=!uniforms.ringSpring.value;
@@ -939,7 +940,7 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                 {if(number!="no number")
                     uniforms.jubileyes.value=number;
                 else if( uniforms.jubileyes.value!=.0)uniforms.jubileyes.value=.0;
-                    else  uniforms.jubileyes.value=2.;
+                    else  uniforms.jubileyes.value=1.;
                        swapSettingsForJubileyes()
                         }       
 
