@@ -291,14 +291,14 @@ document.getElementById('nameOfConfig').value ='';
                             <script>
  document.getElementById('blankSelection').selected="selected"
  
-                             </script>
-        <input class="configuration" type="text" id = "nameOfConfig" style = "width:100%;"
-        onchange="  
-        var lastName = '';
-        while (lastName!=this.value)
+
+ function setName(val)
+ {
+       var lastName = '';
+        while (lastName!=val)
         {
                    lastName = document.getElementById('nameOfConfig').value
-                   document.getElementById('nameOfConfig').value = this.value.replace(',' , '')
+                   document.getElementById('nameOfConfig').value = val.replace(',' , '')
         }
 
               var namesOfConfigs = localStorage.getItem('configNames')
@@ -312,7 +312,8 @@ document.getElementById('nameOfConfig').value ='';
                     namesOfConfigs.splice(index, 1)
                     localStorage.removeItem(window.lastConfigName)
                     if(document.getElementById('configurer')!=null)
-                    if(this.value!=null&&this.value!='')  namesOfConfigs.push(this.value)
+                        localStorage.setItem(val,document.getElementById('configurer').value);
+                    if(val!=null&&val!='')  namesOfConfigs.push(val)
                     localStorage.setItem('configNames', namesOfConfigs.join());
 
                     newName=false
@@ -332,7 +333,7 @@ document.getElementById('nameOfConfig').value ='';
                 
               if(window.lastConfigName == namesOfConfigs[index]){
                     namesOfConfigs.splice(index, 1)
-                    if(this.value!=null&&this.value!=''&&lastConfigName!='')  namesOfConfigs.push(this.value)
+                    if(val!=null&&val!=''&&lastConfigName!='')  namesOfConfigs.push(val)
                    localStorage.setItem('buttonNames', namesOfConfigs.join());
 indexLength--
 index--
@@ -350,27 +351,37 @@ for(var m = 0; m<buttonNames.length;m++)
               if(newName)  
               {
                 var namesBuffer = localStorage.getItem('configNames');
-              localStorage.setItem('configNames', namesBuffer+','+this.value);
+              localStorage.setItem('configNames', namesBuffer+','+val);
               }
               
             }
 
-                                    localStorage.setItem(this.value,document.getElementById('configurer').value);
+    document.getElementById('configurations').options[document.getElementById('configurations').selectedIndex].text = val;
+    document.getElementById('selectConfigs').options[document.getElementById('configurations').selectedIndex-1].text = val;
 
-                                    
-    document.getElementById('configurations').options[document.getElementById('configurations').selectedIndex].text = this.value;
-    document.getElementById('selectConfigs').options[document.getElementById('configurations').selectedIndex-1].text = this.value;
-            
-                    window.lastConfigName = this.value;
+                    window.lastConfigName = val;
+ }
 
+                             </script>
+        <input class="configuration" type="text" id = "nameOfConfig" style = "width:100%;"
+        onchange="  
+     setName(this.value)
 
         "
+        onkeyup="setName(this.value)"
 
 ></input>
 
     <script>window.lastConfigName = document.getElementById("nameOfConfig")</script>
 Combo: 
         <input class="configuration" type="text" id = "configurer" style = "width:100%;"onchange="               
+
+
+localStorage.setItem(window.lastConfigName, document.getElementById('configurer').value);
+
+              
+"
+onkeyup="               
 
 
 localStorage.setItem(window.lastConfigName, document.getElementById('configurer').value);
