@@ -235,6 +235,7 @@
 
          var bn = localStorage.getItem('buttonNames');
          if(bn==null)localStorage.setItem('buttonNames','')
+//localStorage.setItem('nameStored','')
 
 
 
@@ -290,7 +291,7 @@ document.getElementById('nameOfConfig').value ='';
 
                             <script>
  document.getElementById('blankSelection').selected="selected"
- 
+
 
  function setName(val)
  {
@@ -300,8 +301,13 @@ document.getElementById('nameOfConfig').value ='';
                    lastName = document.getElementById('nameOfConfig').value
                    document.getElementById('nameOfConfig').value = val.replace(',' , '')
         }
+        
+        var reset=localStorage.getItem('nameStored');
+        if(!("lastConfigName" in window)&&window.lastConfigName!=""&&document.getElementById('nameOfConfig').value!="")
+        {window.lastConfigName=reset;
+        }
 
-              var namesOfConfigs = localStorage.getItem('configNames')
+        var namesOfConfigs = localStorage.getItem('configNames')
                               var newName = true;
              if(namesOfConfigs!=null)
               {
@@ -332,8 +338,9 @@ document.getElementById('nameOfConfig').value ='';
               {
                 
               if(window.lastConfigName == namesOfConfigs[index]){
+
                     namesOfConfigs.splice(index, 1)
-                    if(val!=null&&val!=''&&lastConfigName!='')  namesOfConfigs.push(val)
+                    if(val!=null&&val!=''&&window.lastConfigName!='')  namesOfConfigs.push(val)
                    localStorage.setItem('buttonNames', namesOfConfigs.join());
 indexLength--
 index--
@@ -360,6 +367,7 @@ for(var m = 0; m<buttonNames.length;m++)
     document.getElementById('selectConfigs').options[document.getElementById('configurations').selectedIndex-1].text = val;
 
                     window.lastConfigName = val;
+                                       localStorage.setItem('nameStored',val);
  }
 
                              </script>
@@ -371,8 +379,12 @@ for(var m = 0; m<buttonNames.length;m++)
         onkeyup="setName(this.value)"
 
 ></input>
+    
+<script>
+    if(document.getElementById('nameOfConfig').value=="")localStorage.setItem('nameStored',"");
 
-    <script>window.lastConfigName = document.getElementById("nameOfConfig")</script>
+        
+    </script>
 Combo: 
         <input class="configuration" type="text" id = "configurer" style = "width:100%;"onchange="               
 
@@ -487,7 +499,7 @@ for(var m = 0; m<buttonNames.length;m++)
 </script>
 
 
-<h2> May not work on all platforms indicated by a white or mostly black screen once loaded.  If so try a different browser like Firefox or Opera.  For starship that should work, try one that's
+<h2> May not work on all platforms indicated by a white or mostly black screen once loaded.  If so: try a different browser like Firefox or Opera.  For starship that should work, try one that's
  <a class="onoffline2"  name="manny.html" onclick=
 "
 loadStarshipWithHash(this.name,'YO2~')"
