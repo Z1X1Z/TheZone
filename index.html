@@ -312,7 +312,6 @@ document.getElementById('nameOfConfig').value ='';
                     namesOfConfigs.splice(index, 1)
                     localStorage.removeItem(window.lastConfigName)
                     if(document.getElementById('configurer')!=null)
-                        localStorage.setItem(this.value,document.getElementById('configurer').value);
                     if(this.value!=null&&this.value!='')  namesOfConfigs.push(this.value)
                     localStorage.setItem('configNames', namesOfConfigs.join());
 
@@ -356,10 +355,14 @@ for(var m = 0; m<buttonNames.length;m++)
               
             }
 
+                                    localStorage.setItem(this.value,document.getElementById('configurer').value);
+
+                                    
     document.getElementById('configurations').options[document.getElementById('configurations').selectedIndex].text = this.value;
     document.getElementById('selectConfigs').options[document.getElementById('configurations').selectedIndex-1].text = this.value;
-
+            
                     window.lastConfigName = this.value;
+
 
         "
 
