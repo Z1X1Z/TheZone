@@ -1657,8 +1657,16 @@ let lastVolume = 1.;
                        
 let       preserveOuterCore = true;
                        
-                       
-                       
+                       window.railX = 0.
+                       window.railY = 0.;
+                       window.railZ = 0.;
+                       window.railC = 0.;
+
+                       window.lastRailX = 0.
+                       window.lastRailY = 0.;
+                       window.lastRailZ = 0.;
+                       window.lastRailC = 0.;
+                       var triggerRailSet = false
                        const zoomCap32 =.000001;
 function zoomRoutine(){
     var metaDepth=(!dupered)?zoomCap32:zoomCap32**2;//due to pixelization limits
@@ -1677,6 +1685,7 @@ function zoomRoutine(){
         if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(on&&!window.touchMode))||xTouch+yTouch!=0)zoom *=ZR**((1.+INcreaseBoost)*zoomBoost);
         else if(uniforms.MetaCored.value||zoom<1.){
             zoom /= ZR;
+            triggerRailSet=true
             if(center&&zoom<1.){coordX*=ZR*2./3.;; coordY*=ZR*2./3.;}
         }
     }
@@ -1687,8 +1696,22 @@ function zoomRoutine(){
                                             cloverSuperCores<-.5)
                             ){
                             zoomOutEngage = true;}
-                         if (zoomOutEngage == true) zoom *= 1.5/ZR;
-                    
+                         if (zoomOutEngage == true)
+                            {
+                                if(triggerRailSet)
+                                {
+                                window.railX=window.lastRailX
+                                window.railY=window.lastRailY
+                                window.railZ=window.lastRailZ
+                                window.railC=window.lastRailC
+                                }
+                                triggerRailSet=false;
+                             zoom *= 1.5/ZR;
+                            }
+                    window.lastRailX=window.coordX
+                    window.lastRailY=window.coordY
+                    window.lastRailZ=window.zoom
+                    window.lastRailC=uniforms["upCoreCycler"].value
 
                         //  if(zoom<1./2**singleHyperCoreDepth*metaDepth)zoom = 1.;
     
