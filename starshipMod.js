@@ -53,13 +53,13 @@ b();
       // animate()
      }
     else{
-           
+       /*    
           if(occasionToResize==20) //don't feel like using extra power for something that hardly ever helps!
             {   onWindowResize()
                 occasionToResize=0
             }
-            else                 occasionToResize++
-            
+                 occasionToResize++
+           */ 
     setTimeout(waitForMic,10);
     }
 

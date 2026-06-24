@@ -214,32 +214,6 @@ let maxLetterDepth=-1;
         
                 }
                 </script>
-        <div id="load message" style=" background-color:#C8F;">     </div>
-              
-        <script>
-
-function resizeMessage()    {
-                 //       document.getElementById( "load message").style.zIndex="10"
-
-    document.getElementById("load message").style.fontSize=String(window.innerHeight**.5*5./3.)+"px"
-}
-resizeMessage()
-            function loadScript(element, url, offlineURL)
-            {
-                // Adding the script tag to the head as suggested before
-                var scriptElement = document.getElementById(element);//document.createElement("script");//
-                scriptElement.type = 'text/javascript';
-                scriptElement.src = url;
-                //script.onreadystatechange = callback;                // Then bind the event to the callback function.  or at least that's how it goes without the stallLurker in the sonicstarship.  it's stabler. maybe
-                //script.onload = callback;                // There are multiple callbacks for cross browser compatibility.
-                scriptElement.onerror=function(){
-                    var s = document.createElement("script");//document.getElementById('threeJSscript');
-                    s.type = 'text/javascript';
-                    s.src = offlineURL;
-                    document.head.appendChild(s);
-                    }
-            }
-          </script>
 
 
 
@@ -1888,7 +1862,35 @@ Open MusicXML file
   <div id="timeNumber" style="color:white;font-size:20em;text-align: center;   top: 0%;      width: 100%;z-index:5;position:absolute;"></div>
   <div id="numberExplanation" style="color:white;font-size:7em;text-align: center;   top: 55%;      width: 100%;z-index:5;position:absolute;"></div>
 
+  
     <div id="container" style="z-index:-3"> 
+                <div id="load message" style=" background-color:#C8F;">     </div>
+              
+        <script>
+
+function resizeMessage()    {
+                 //       document.getElementById( "load message").style.zIndex="10"
+
+    document.getElementById("load message").style.fontSize=String(window.innerHeight**.5*5./3.)+"px"
+}
+resizeMessage()
+            function loadScript(element, url, offlineURL)
+            {
+                // Adding the script tag to the head as suggested before
+                var scriptElement = document.getElementById(element);//document.createElement("script");//
+                scriptElement.type = 'text/javascript';
+                scriptElement.src = url;
+                //script.onreadystatechange = callback;                // Then bind the event to the callback function.  or at least that's how it goes without the stallLurker in the sonicstarship.  it's stabler. maybe
+                //script.onload = callback;                // There are multiple callbacks for cross browser compatibility.
+                scriptElement.onerror=function(){
+                    var s = document.createElement("script");//document.getElementById('threeJSscript');
+                    s.type = 'text/javascript';
+                    s.src = offlineURL;
+                    document.head.appendChild(s);
+                    }
+            }
+          </script>
+
       </div></div></div>
     <script src="wadLoader.js"> </script>
     <div>
