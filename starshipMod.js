@@ -4351,7 +4351,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                                                  let loopy = 0;
                                                                  
                                                                  if(tAScaled>0&&isFinite(tAScaled))
-                                                                     for(var reps=  0.;  reps<totalAMPmodified**(7-totalAMPmodified);
+                                                                     for(var reps=  0.;  reps<totalAMP**(7-totalAMPmodified);//these may be totalAMP or totalAMPmodified
                                                                     reps+=tAScaledPermanent**(3.-totalAMPmodified))//reps+=tAScaledPermanent**(3.-tAScaledPermanent))
                                                                   //   for(var reps=0; reps<2.;reps+=1)
                                                       //                 for(reps=0;reps<5.;reps+=1.+1./(1.-totalAMPmodified))
