@@ -4351,8 +4351,8 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                                                  let loopy = 0;
                                                                  
                                                                  if(tAScaled>0&&isFinite(tAScaled))
-                                                                     for(var reps=  0.;  reps<totalAMP**(7-totalAMP);
-                                                                    reps+=tAScaledPermanent**(3.-totalAMP))//reps+=tAScaledPermanent**(3.-tAScaledPermanent))
+                                                                     for(var reps=  0.;  reps<totalAMPmodified**(7-totalAMPmodified);
+                                                                    reps+=tAScaledPermanent**(3.-totalAMPmodified))//reps+=tAScaledPermanent**(3.-tAScaledPermanent))
                                                                   //   for(var reps=0; reps<2.;reps+=1)
                                                       //                 for(reps=0;reps<5.;reps+=1.+1./(1.-totalAMPmodified))
 
@@ -4578,7 +4578,6 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                     var tolFixed=(tolerance)**(3.5-tolerance+totalAMP);
                     for(var m=0;m<tolFixed;m+=totalAMP) 
                     {tolerance=tolerance**(tolerance+.5+totalAMP);
-
                     }
 
 
@@ -4589,8 +4588,8 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                           tolerance=(tolerance/trunc)*trunc
                            if(window.highORlow!=3.)
 {
+
                           tolerance*=((totalAMP**tolerance)**((1.+totalAMP)**totalAMP-tolerance))**((1-tolerance)**tolerance+totalAMP)///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
-                            
                           //tolerance*=((totalAMP**totalAMP)**((1.-tolerance)**tolerance+totalAMP)**((1.+totalAMP)**totalAMP-tolerance))///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
                           //tolerance=(tolerance/trunc)*trunc
 
