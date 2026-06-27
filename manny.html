@@ -8172,7 +8172,8 @@ if(oneEye.r!=0.)zoomer=-oneEye;
 
    if(oneEye.r!=0.&&pixelShipGrey!=0.)oneEye=vec3(-pixelShipGrey*2.);
   // if((starship.r!=0.||starship.g!=0.||starship.b!=0.)&&isGreyISH!=0.&&pixelShipGrey!=0.)starship=vec4(vec3(pixelShipGrey),1.);
-    if(bodyWithArms.z!=0.&&pixelShipGrey!=0.)bodyWithArms=vec4(vec3(pixelShipGrey),bodyWithArms.z);
+    if(bodyWithArms.z!=0.&&pixelShipGrey>.5)bodyWithArms=vec4(vec3(pixelShipGrey),bodyWithArms.z);
+    else if(bodyWithArms.x!=0.&&pixelShipGrey<.5)bodyWithArms=vec4(bodyWithArms.xyz*.25,bodyWithArms.w);
                                  heartWarmed-=(pillar.x+pillar.y+pillar.z)*100.;
             vec3 seeThrough = pixelStarship.xyz+(1.-pixelStarship.w*pixelStarship.w);
              
@@ -8312,7 +8313,8 @@ if(oneEye.r!=0.)zoomer=-oneEye;
                                  layeredOUT=vec4(mannyFace.xyz+HEART-oneEye.r,1.);
                                  else                                layeredOUT=vec4(mannyFace.xyz-oneEye.r,1.);
                                  }
-                                                                 
+                                                         else if((((mannyFace.w==.5&&mannyFace.r==.5&&mannyFace.g==.5&&mannyFace.b==.5)||(mannyFace.w!=0.&&mannyFace.r!=0.&&mannyFace.g!=0.&&mannyFace.b!=0.)))&&bodyWithArms.w!=.0)layeredOUT=bodyWithArms;
+                               
 else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
 {
     
