@@ -538,13 +538,15 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
   hyperCore+=SEVEYEpow*4./3./Math.sqrt(lfc);
  }
 
+
 if(jubileyes!=0.) 
 {
-if(seventhEYE==3.&&lengthP<1./3.)
+if(seventhEYEandJubileye&&lengthP<1./3.)
 hyperCore+=1.;
-else if (seventhEYE!=3.||lengthP<2./3.)
-hyperCore+=.0;
+//else if (seventhEYE!=3.||lengthP<2./3.)
+else if(seventhEYE==0.||(seventhEYEandJubileye&&lengthP<2./3.)) hyperCore-=.75;
 }
+
 
  
                           if(wheel)m =  pWithoutChiralizer.clone().sub(new THREE.Vector2(coords.y,coords.x).multiplyScalar(variant4Correction).multiplyScalar(2.))//try signs with for fibonacci ring pairing and movement distortion #syyym
