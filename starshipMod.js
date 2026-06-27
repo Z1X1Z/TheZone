@@ -4290,20 +4290,22 @@ if(uniforms.coords.value.y<-.5)
                                                      }
                                                        
                                                        
-       var frameRation =0.+1024*(-leafPermanent*grPermanent*(2**.5) -1)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
+       var frameRation =1024*(-leafPermanent*grPermanent*(2**.5) -1)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
                  //            frameRation=1024;
      // console.log(frameRation)        
                                                        
-         var fractionOfFrame =frameRation                                              
+         var fractionOfFrame =1024 
+         const yinData = new Float64Array(fractionOfFrame);
+                                             
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
 function calculatePitch ()
 {
 
- fractionOfFrame = frameRation;
- if(highORlow!=0|| window.iOS )   
-fractionOfFrame=1024;
-const yinData = new Float64Array(fractionOfFrame);
+// fractionOfFrame = Math.ceil(frameRation);
+//if(highORlow!=0|| window.iOS )  // caused freezing at f# with totalAMP**tolerance
+//fractionOfFrame=1024;
+//const yinData = new Float64Array(fractionOfFrame);
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance=0;//(1024-26)/10000
 
@@ -4559,7 +4561,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                    
                       if(!iOS)      tolerance+=(totalAMP)**(totalAMP/((-leaf+(gr)+2**.5+1)**(.75)*2+1.))*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))//iOS may only have a problem with one of these terms//-totalAMPmodified/fractionOfFrame/2//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
 
-                                  let toleranceNudge =((-leafPermanent+grPermanent+2**.5-3)*totalAMPmodified-1.*totalAMP)/fractionOfFrame//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
+                                  let toleranceNudge =((-leafPermanent+grPermanent+2**.5-3)*totalAMPmodified-1.*totalAMP)/fractionOfFrame// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                         toleranceNudge*=(2.)/(grPermanent-leafPermanent+1);
                         
                   //toleranceNudge+=(totalAMP)**(.5)**(totalAMP)**(1./totalAMP)**(totalAMP);
@@ -4588,8 +4590,18 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                           tolerance=(tolerance/trunc)*trunc
                            if(window.highORlow!=3.)
 {
+                    var adjuster = 0;
+                          adjuster=totalAMP**tolerance;///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
+                          var c = 0;
+                          for(var d = 0; d<3; d+=tolerance)
+                          {
+                          adjuster=(adjuster)**((1.+totalAMP)**totalAMP-tolerance)**((1-tolerance)**tolerance+totalAMP)
+                          c++
+                          }
+                          console.log(c);                         
+                          console.log(adjuster);
 
-                          tolerance*=((totalAMP**tolerance)**((1.+totalAMP)**totalAMP-tolerance))**((1-tolerance)**tolerance+totalAMP)///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
+                          tolerance*=adjuster;
                           //tolerance*=((totalAMP**totalAMP)**((1.-tolerance)**tolerance+totalAMP)**((1.+totalAMP)**totalAMP-tolerance))///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
                           //tolerance=(tolerance/trunc)*trunc
 
