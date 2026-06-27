@@ -4948,7 +4948,8 @@ bool gatedPass=false;
 float daisifier = 0.;
 
                        float borderGap =((((gr*4.)/truncator)*truncator-((leaf*2.)/truncator)*truncator));//about 9, but this is a little uncertain, just sort of made sense!
-                        float border = (borderGap*borderGap/2.-borderGap*3.+1.5)/pow(2.,borderGap);
+                       if ((seventhEYEandJubileye&&lengthP<twoThirds)||(!seventhEYEandJubileye&&jubileyes!=0.)) borderGap=9.;
+                       float border = (borderGap*borderGap/2.-borderGap*3.+1.5)/pow(2.,borderGap);
                            
 
                        // s/=truncator;

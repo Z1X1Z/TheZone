@@ -626,6 +626,7 @@ let loopSolid = 0.
 
       //  var borderGap =9. ;
                                var borderGap =((((gr*4.)/truncator)*truncator-((leaf*2.)/truncator)*truncator));
+                       if ((seventhEYEandJubileye&&lengthP<2./3.)||(!seventhEYEandJubileye&&jubileyes!=0.)) borderGap=9.;
 
         var border = (borderGap*borderGap/2.-borderGap*3.+1.5)/Math.pow(2.,borderGap);
         
