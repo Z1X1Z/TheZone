@@ -4301,11 +4301,12 @@ if(uniforms.coords.value.y<-.5)
 /** Full YIN algorithm */
 function calculatePitch ()
 {
-
-// fractionOfFrame = Math.ceil(frameRation);
-//if(highORlow!=0|| window.iOS )  // caused freezing at f# with totalAMP**tolerance
-//fractionOfFrame=1024;
-//const yinData = new Float64Array(fractionOfFrame);
+/*
+fractionOfFrame = (frameRation);
+if(highORlow!=0|| window.iOS )  // caused freezing at f# with totalAMP**tolerance
+fractionOfFrame=1024;
+const yinData = new Float64Array(fractionOfFrame);
+*/
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance=0;//(1024-26)/10000
 
@@ -4590,16 +4591,17 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                           tolerance=(tolerance/trunc)*trunc
                            if(window.highORlow!=3.)
 {
-                    var adjuster = 0;
-                          adjuster=totalAMP**tolerance;///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
+                          
+                        var adjuster=totalAMP**tolerance;///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
+                          var powerUP = ((1.+totalAMP)**totalAMP-tolerance)**((1-tolerance)**tolerance+totalAMP);
                           var c = 0;
-                          for(var d = 0; d<3; d+=tolerance)
+                          for(var d = 0; d<7.-totalAMP; d+=tolerance)
                           {
-                          adjuster=(adjuster)**((1.+totalAMP)**totalAMP-tolerance)**((1-tolerance)**tolerance+totalAMP)
-                          c++
+                          adjuster=(adjuster)**powerUP
+                         // c++
                           }
-                          console.log(c);                         
-                          console.log(adjuster);
+                         // console.log(c);                         
+                         // console.log(adjuster);
 
                           tolerance*=adjuster;
                           //tolerance*=((totalAMP**totalAMP)**((1.-tolerance)**tolerance+totalAMP)**((1.+totalAMP)**totalAMP-tolerance))///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
