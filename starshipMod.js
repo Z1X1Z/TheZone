@@ -4601,7 +4601,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                           adjuster=(adjuster)**powerUP
                          // c++
                           }
-                          adjuster=adjuster**tolerance**totalAMP
+                          adjuster=adjuster**(totalAMP**tolerance)
                          // console.log(c);                         
                          // console.log(adjuster);
 
