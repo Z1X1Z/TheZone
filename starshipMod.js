@@ -4597,9 +4597,11 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                           var c = 0;
                           for(var d = 0; d<7.-totalAMP; d+=tolerance)
                           {
+                            
                           adjuster=(adjuster)**powerUP
                          // c++
                           }
+                          adjuster=adjuster**tolerance**totalAMP
                          // console.log(c);                         
                          // console.log(adjuster);
 
