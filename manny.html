@@ -53,7 +53,7 @@
                     let bibleWithText = false;
                     window.muteToggle = false
 
-                if(location.hash.includes(".B")||location.hash.includes(".b")||location.hash.includes(".c("))
+                if(true||location.hash.includes(".B")||location.hash.includes(".b")||location.hash.includes(".c("))
                 {
                     if (location.hash.includes(".c(")||location.hash.includes(".B("))
                     {let c = 0;
@@ -191,7 +191,6 @@ let maxLetterDepth=-1;
                      {
                          if( location.hash.includes(".c")||location.hash.includes(".b")) iframe.setAttribute("src",  "https://www.biblehub.com/audio/"+urlAppend);
                          else if( location.hash.includes(".B")) iframe.setAttribute("src",  "https://www.biblehub.com/nkjv/"+urlAppend);
-                         console.log(iframe.src)
                          bibleWithText = true;}
                 iframe.setAttribute("height", "100%");
                 iframe.setAttribute("width", "100%");

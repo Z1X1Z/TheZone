@@ -4597,14 +4597,16 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                           var c = 0;
                            var tolTot = tolerance/totalAMP*7;//coefficients effective but not exhaustive
                           var totTol =totalAMP/tolerance*3;//coefficient effective but not exhaustive
-                          for(var d = 0; d<tolTot; d+=totTol)
+                         if(tolerance!=0.&&totalAMP!=0.) 
+                            for(var d = 0; d<tolTot; d+=totTol)
                           {
                             
                           adjuster=(adjuster)**powerUP
-                        //  c++
+                          c++
+                          if(c>100000)break;
                           }
                           adjuster=adjuster**(totalAMP**tolerance)
-                         // console.log(c);                         
+                          //console.log(c);                         
                          // console.log(adjuster);
 
                           tolerance*=adjuster;
