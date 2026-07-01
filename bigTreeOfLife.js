@@ -536,6 +536,7 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
 
     else 
   hyperCore+=SEVEYEpow*4./3./Math.sqrt(lfc);
+hyperCore+=.5;
  }
 
 
@@ -544,8 +545,10 @@ if(jubileyes!=0.)
 if(seventhEYEandJubileye&&lengthP<1./3.)
 hyperCore+=1.;
 //else if (seventhEYE!=3.||lengthP<2./3.)
-else if(seventhEYE==0.||(seventhEYEandJubileye&&lengthP<2./3.)&&(lengthP<SEVEYEStartAdj||!seventhOUTside)) hyperCore-=lfcCenterCored-2./3.;
+//else if(seventhEYE==0.||(seventhEYEandJubileye&&lengthP<2./3.)&&(lengthP<SEVEYEStartAdj||!seventhOUTside)) hyperCore-=lfcCenterCored-2./3.;
 }
+if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside))  hyperCore-=lfcCenterCored*variant4Correction-1.;
+
 
 
  
