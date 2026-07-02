@@ -4658,7 +4658,7 @@ equilibriator=lfc/(lfc-zoom/dif)*dif;
    //  if(OrthoEvery!=0.) hyperCore+=1./OrthoEvery;//for freed dilation
 
    if(multiplicatorNexus)hyperCore-=.5*LogHalfReciprocal;
-   if(continuumClover!=0)hyperCore+=.25*LogHalfReciprocal;
+   if(continuumClover!=0)hyperCore+=.25*LogHalfReciprocal;//does this need a more 'correct' value?
   /*if(pollen&&OrthoEvery==0.)
    {
    if(!(seventhEYE>0.)||lengthP>2./3.    )   hyperCore-=.5*LogHalfReciprocal;
@@ -4822,8 +4822,9 @@ else if((seventhEYE==0.||(seventhEYEandJubileye&&lengthP<twoThirds))&&(lengthP<S
 hyperCore+=.5;
 // hyperCore-=lfcCenterCored-twoThirds;
 }
-if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside))
-{hyperCore-=lfcCenterCored*variant4Correction-1.;
+if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside)&&((seventhEYE!=1.&&seventhEYE!=2.)||lengthP>2./3.)
+    &&squeezeN==1.)//could use refinement to work with squeezeN but not with seventhEYE==3
+{hyperCore-=(lfcCenterCored*variant4Correction-1.);
  hyperCore+=1.;
 }
                if(wheel)m =  ((pWithoutChiralizer/lfc)

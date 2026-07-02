@@ -548,11 +548,12 @@ else if((seventhEYE==0.||(seventhEYEandJubileye&&lengthP<2./3.))&&(lengthP<SEVEY
 hyperCore+=.5;
 // hyperCore-=lfcCenterCored-twoThirds;
 }
-if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside)&&((seventhEYE!=1.&&seventhEYE!=2.)||lengthP>2./3.))
-{hyperCore-=lfcCenterCored*variant4Correction-1.;
+
+if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside)&&((seventhEYE!=1.&&seventhEYE!=2.)||lengthP>2./3.)
+    &&squeezeN==1.)//could use refinement to work with squeezeN but not with seventhEYE==3
+{hyperCore-=(lfcCenterCored*variant4Correction-1.);
  hyperCore+=1.;
 }
-
 
 
  
