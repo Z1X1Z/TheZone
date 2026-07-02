@@ -542,10 +542,10 @@ hyperCore+=.5;
 if(jubileyes!=0.) 
 {
 if((seventhEYEandJubileye&&lengthP<1./3.)||(!seventhEYEandJubileye&&seventhEYE==3.&&lengthP<2./3.))
-hyperCore+=4./3.;
+hyperCore+=1.;
 //else if (seventhEYE!=3.||lengthP<2./3.)
 else if((seventhEYE==0.||(seventhEYEandJubileye&&lengthP<2./3.))&&(lengthP<SEVEYEStartAdj||!seventhOUTside))
-hyperCore+=.5;
+hyperCore+=1./3.;
 // hyperCore-=lfcCenterCored-twoThirds;
 }
 
