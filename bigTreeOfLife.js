@@ -551,7 +551,7 @@ hyperCore+=.5;
 if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside)) 
  {
     hyperCore-=lfcCenterCored*variant4Correction-1.;
-    hyperCore+=1.;
+    hyperCore+=1.5;
  }
 
 
