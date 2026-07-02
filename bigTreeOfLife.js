@@ -542,7 +542,7 @@ hyperCore+=.5;
 if(jubileyes!=0.) 
 {
 if((seventhEYEandJubileye&&lengthP<1./3.)||(!seventhEYEandJubileye&&seventhEYE==3.&&lengthP<2./3.))
-hyperCore+=1.;
+hyperCore+=2./3.;
 //else if (seventhEYE!=3.||lengthP<2./3.)
 else if((seventhEYE==0.||(seventhEYEandJubileye&&lengthP<2./3.))&&(lengthP<SEVEYEStartAdj||!seventhOUTside))
 hyperCore+=.5;
@@ -550,7 +550,7 @@ hyperCore+=.5;
 }
 
 if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside)&&((seventhEYE!=1.&&seventhEYE!=2.)||lengthP>2./3.)
-    &&squeezeN==1.)//could use refinement to work with squeezeN but not with seventhEYE==3
+    &&squeezeN==1.&&(seventhEYE==0.||seventhEYE==3.))//could use refinement to work with squeezeN but not with seventhEYE==3
 {hyperCore-=(lfcCenterCored*variant4Correction-1.);
  hyperCore+=2./3.;
 }
