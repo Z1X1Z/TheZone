@@ -552,7 +552,7 @@ hyperCore+=.5;
 if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside)&&((seventhEYE!=1.&&seventhEYE!=2.)||lengthP>2./3.)
     &&squeezeN==1.)//could use refinement to work with squeezeN but not with seventhEYE==3
 {hyperCore-=(lfcCenterCored*variant4Correction-1.);
- hyperCore+=1.;
+ hyperCore+=2./3.;
 }
 
 
