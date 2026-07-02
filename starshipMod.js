@@ -4592,7 +4592,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                            if(window.highORlow!=3.)
 {
                           
-                        var adjuster=totalAMP**tolerance;///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
+                        var adjuster=(totalAMP)**tolerance;///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
                           var powerUP = ((1.+totalAMP)**totalAMP-tolerance)**((1-tolerance)**tolerance+totalAMP);
                           var c = 0;
                            var tolTot = tolerance/totalAMP*7;//coefficients effective but not exhaustive
@@ -4605,11 +4605,18 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                           c++
                           if(c>100000)break;
                           }
-                          adjuster=adjuster**(totalAMP**tolerance)
+                          adjuster=adjuster**(totalAMP**tolerance)**powerUP
+
                           //console.log(c);                         
                          // console.log(adjuster);
 
-                          tolerance*=adjuster;
+                         tolerance*=adjuster
+                          //tolerance*=(adjuster/trunc)*trunc
+                                                 //  tolerance=(tolerance/trunc)*trunc
+
+                         // tolerance*=2**.5;
+                              //(                      tolerance=(tolerance/trunc)*trunc
+
                           //tolerance*=((totalAMP**totalAMP)**((1.-tolerance)**tolerance+totalAMP)**((1.+totalAMP)**totalAMP-tolerance))///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
                           //tolerance=(tolerance/trunc)*trunc
 
