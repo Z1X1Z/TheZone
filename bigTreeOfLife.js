@@ -538,21 +538,19 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
   hyperCore+=SEVEYEpow*4./3./Math.sqrt(lfc);
 hyperCore+=.5;
  }
-
 if(jubileyes!=0.) 
 {
-if((seventhEYEandJubileye&&lengthP<1./3.)||(!seventhEYEandJubileye&&seventhEYE==3.&&lengthP<2./3.   ))
-hyperCore+=1.;
+if((seventhEYEandJubileye&&lengthP<1./3.)||(!seventhEYEandJubileye&&seventhEYE==3.&&lengthP<2./3.))
+hyperCore+=2./3.;
 //else if (seventhEYE!=3.||lengthP<2./3.)
-else if((seventhEYE==0.||(seventhEYEandJubileye&&lengthP<2./3.))&&(lengthP<SEVEYEStartAdj||!seventhOUTside))
-hyperCore+=.5;
+//else if((seventhEYE==0.||(seventhEYEandJubileye&&lengthP<twoThirds))&&(lengthP<SEVEYEStartAdj||!seventhOUTside))
+//hyperCore+=.5;
 // hyperCore-=lfcCenterCored-twoThirds;
 }
-if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside)) 
- {
-    hyperCore-=lfcCenterCored*variant4Correction-1.;
-    hyperCore+=1.5;
- }
+if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside)&&((seventhEYE!=1.&&seventhEYE!=2.)||lengthP>2./3.))
+{hyperCore-=lfcCenterCored*variant4Correction-1.;
+ hyperCore+=1.5;
+}
 
 
 
