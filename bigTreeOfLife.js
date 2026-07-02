@@ -545,7 +545,7 @@ if((seventhEYEandJubileye&&lengthP<1./3.)||(!seventhEYEandJubileye&&seventhEYE==
 hyperCore+=1.;
 //else if (seventhEYE!=3.||lengthP<2./3.)
 else if((seventhEYE==0.||(seventhEYEandJubileye&&lengthP<2./3.))&&(lengthP<SEVEYEStartAdj||!seventhOUTside))
-hyperCore+=1./3.;
+hyperCore+=.5;
 // hyperCore-=lfcCenterCored-twoThirds;
 }
 
