@@ -210,7 +210,7 @@ var flopped=oppositionalCoreFlop;
        var seventhEYEandJubileye = (seventhEYE==3.&&jubileyes!=0.);
 
 var pollen = polyNomialStretch;
-if(seventhEYEandJubileye&&morph==0.)
+if(seventhEYEandJubileye&&lfc>zoom&&morph==0.)
 {
 
     if (lengthP< SEVEYEStartAdj)
