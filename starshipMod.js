@@ -4590,24 +4590,26 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                     ((((-leafPermanent/trunc)*trunc)*((grPermanent/trunc)*trunc)))**(totalAMP)*(((1+totalAMP)/trunc)*trunc);//not completely exhaustively checked, but works well for singing words
                           tolerance=(tolerance/trunc)*trunc
                            if(window.highORlow!=3.)
+                                 if(tolerance!=0.&&totalAMP!=0.) 
+
 {
-                          
+
                         var adjuster=(totalAMP)**tolerance;///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
                           var powerUP = ((1.+totalAMP)**totalAMP-tolerance)**((1-tolerance)**tolerance+totalAMP);
                           var c = 0;
                            var tolTot = tolerance/totalAMP*7;//coefficients effective but not exhaustive
                           var totTol =totalAMP/tolerance*3;//coefficient effective but not exhaustive
-                         if(tolerance!=0.&&totalAMP!=0.) 
-                            for(var d = 0; d<tolTot; d+=totTol)
+                            for(var d = 0; d<7-totalAMP; d+=tolerance)
+                           // for(var d = 0; d<tolTot; d+=totTol)
                           {
                             
                           adjuster=(adjuster)**powerUP
                           c++
-                          if(c>100000)break;
+                          if(c>20000)break;
                           }
                           adjuster=(adjuster**(totalAMP**tolerance))**powerUP
 
-                          //console.log(c);                         
+                        // console.log(c);                         
                          // console.log(adjuster);
 
                          tolerance*=adjuster
