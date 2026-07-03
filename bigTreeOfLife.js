@@ -210,13 +210,16 @@ var flopped=oppositionalCoreFlop;
        var seventhEYEandJubileye = (seventhEYE==3.&&jubileyes!=0.);
 
 var pollen = polyNomialStretch;
-if(seventhEYEandJubileye&&lfc/zoom<2./3.&&morph==0.)
+if(seventhEYEandJubileye&&morph==0.)
 {
 
     if (lengthP< SEVEYEStartAdj)
     {
 
-         if(lengthP<1./3.)
+         if(lengthP<1./3.
+            &&
+        lfc<1./3.
+         )
      {
       //  pollen=false;
     swapped=(swap-swapJUBILEE+swapDEFAULT+2)%4.;

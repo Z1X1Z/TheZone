@@ -4403,11 +4403,12 @@ int flopped=oppositionalCoreFlop;
 bool pollen = polyNomialStretch;
  float lfcOverZoom = lfc/zoom;
 
-if(seventhEYEandJubileye&&lfcOverZoom<twoThirds&&morph==0.)
+if(seventhEYEandJubileye&&morph==0.)
 {
     if (lengthP< SEVEYEStartAdj)
     {
-        if(lengthP<1./3.)
+        if(lengthP<1./3.&&
+        lfc<1./3.)
             {
               //  pollen=false;
     swapped=int(mod(float(swap-swapJUBILEE+swapDEFAULT+2) ,4.));
