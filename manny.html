@@ -4826,8 +4826,10 @@ hyperCore+=.5;
 }
 if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside)&&((seventhEYE!=1.&&seventhEYE!=2.)||lengthP>twoThirds)
     &&squeezeN==1.
+    &&(seventhEYE!=3.||lpcc>1.)
     )
-{hyperCore-=(lfcCenterCored*variant4Correction-1.);
+{
+    hyperCore-=(lfcCenterCored*variant4Correction-1.);
  hyperCore+=2./3.;
 }
                if(wheel)m =  ((pWithoutChiralizer/lfc)
