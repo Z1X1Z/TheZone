@@ -4826,12 +4826,13 @@ hyperCore+=.5;
 }
 if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside)&&((seventhEYE!=1.&&seventhEYE!=2.)||lengthP>twoThirds)
     &&squeezeN==1.
-    &&(seventhEYE!=3.||lpcc>1.)
+    &&(lpcc>1.||((seventhEYEandJubileye&&lengthP>1./3.)||(!seventhEYEandJubileye&&seventhEYE==3.&&lengthP>twoThirds)||seventhEYE!=3.))
     )
 {
     hyperCore-=(lfcCenterCored*variant4Correction-1.);
  hyperCore+=2./3.;
 }
+//else s*=0.;
                if(wheel)m =  ((pWithoutChiralizer/lfc)
                                                         -coords.yx*2.*variant4Correction)*abs(coresIn/crs*2.-1.)
                                            *mandelCloverFactor//(1.-1./(leaf/truncator)*truncator)//uncertain term
