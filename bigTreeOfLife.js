@@ -210,7 +210,7 @@ var flopped=oppositionalCoreFlop;
        var seventhEYEandJubileye = (seventhEYE==3.&&jubileyes!=0.);
 
 var pollen = polyNomialStretch;
-if(seventhEYEandJubileye)
+if(seventhEYEandJubileye&&lfc/zoom<2./3.&&morph==0.)
 {
 
     if (lengthP< SEVEYEStartAdj)
@@ -391,7 +391,7 @@ else hyperCore=externalCores;//hyperCore is really better thought of as hyperMet
 //float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
 var equilibriator = 1.
     if(dilate){
-if(lfc/zoom>1.)
+if(lfc/zoom>2./3.)
     equilibriator=lfc/(lfc-zoom/dif)*dif;
    //this is to allow top level core freeze for original clover
 hyperCore*=equilibriator;
