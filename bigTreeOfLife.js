@@ -218,7 +218,7 @@ if(seventhEYEandJubileye&&lfc>zoom&&morph==0.)
 
          if(lengthP<1./3.
             &&
-        lfc<1./3.
+        lfc<2./3.
          )
      {
       //  pollen=false;
