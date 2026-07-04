@@ -7715,7 +7715,7 @@ if(handOfGod)
                                                                  
                                                                  float frAMP=1.;
                                                                  float heartRate =1./4.;
-                                                                  float heartInEyeSize=gr*gr*-leaf*3.;
+                                                                  float heartInEyeSize=gr*gr*-leaf*4.;
                                                                  float heartSize=heartInEyeSize;
 
                                                                  
@@ -7794,7 +7794,7 @@ if(heartStar==0&&frAMP>0.&&volume!=1.&&maxSamp< volume*volume //&&minSamp*3.<max
 
 else if(heartStar==1&&volume!=0.){
     heartSize/=(1.+volume);//multiplied by two if heart argument is not vec2(0.)
-    frAMP=volume;
+    frAMP=volume*4.;
     }
 
 else if(heartStar==2) frAMP=1.;
