@@ -234,8 +234,8 @@ if(seventhEYEandJubileye&&lfc>zoom&&morph==0.)
 
         else if(lengthP<2./3.&&lengthP>1./3.)
 {
-    swapped=int(mod(float(swap+1) ,4.));
-   flopped = int(mod(float(oppositionalCoreFlop+3*10),3.));
+    swapped=(swap+1+4*10)%4.;
+   flopped = (oppositionalCoreFlop+3*10);
 }
     }
 else if(seventhOUTside&&lengthP>2./3.&&lfc>zoom)
