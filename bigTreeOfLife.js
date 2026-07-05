@@ -223,12 +223,19 @@ if(seventhEYEandJubileye&&lfc>zoom&&morph==0.)
      {
       //  pollen=false;
     swapped=(swap-swapJUBILEE+swapDEFAULT+2)%4.;
-   flopped =(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3)%3.;
+   flopped =(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3+1)%3.;
 }
         else if (lengthP>2./3.)
         {
     swapped=(swap-swapJUBILEE+swapDEFAULT+4*10)%4.;
    flopped =(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10)%3.;
+}
+
+
+        else if(lengthP<2./3.&&lengthP>1./3.)
+{
+    swapped=int(mod(float(swap+1) ,4.));
+   flopped = int(mod(float(oppositionalCoreFlop+3*10),3.));
 }
     }
 else if(seventhOUTside&&lengthP>2./3.&&lfc>zoom)
@@ -558,7 +565,7 @@ if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside)&&((seventhEYE!=1.
 {
     
     if(((seventhEYEandJubileye&&lengthP<1./3.)||
-    (!seventhEYEandJubileye&&seventhEYE==3.&&lengthP<twoThirds)))
+    (!seventhEYEandJubileye&&seventhEYE==3.&&lengthP<2./3.)))
 
     hyperCore-=(lpcc*variant4Correction-1.);
 else
