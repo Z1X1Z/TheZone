@@ -342,6 +342,9 @@ for(var nameOfUniform in uniformsInitial)
     window.sheetTranslucent=false;
             window.FPS=60;
             window.zoom=zoomINITiaLizer;
+            window.lastZoom=zoomINITiaLizer;
+            window.fromCenter = 0;
+
             window.ISdilated=false;
             window.RockInTheWater=0;
             window.octaveStars=true;
@@ -551,6 +554,7 @@ function hk() {
   x.setAttribute("id", "hotkeys");
   x.setAttribute("placeholder", "Hotkeys!");
   x.setAttribute("oninput", "getKey()");
+
   document.getElementById("hotkeyHolder").appendChild(x);
 
 }
@@ -648,12 +652,15 @@ if(z!='')
 z=Number(z);
 uniforms.zoom.value=z
 window.zoom=z
+window.lastZoom =z;
 }
 if(c!='')
 {
     c=Number(c)
 uniforms["upCoreCycler"].value=c;
 }
+                                    window.fromCenter = (coordX*coordX+coordY*coordY)**.5;
+
 //to prevent dividing by zero may be set to small value
                     return 1;
                    }

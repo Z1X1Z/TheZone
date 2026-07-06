@@ -550,7 +550,6 @@ let pushBackCounter = 0;
                                     let BlackOrWhiteTrail=.5;//also for star
                                     let BlackOrWhiteNOTE = .5
                                     let starMajorMinor=.5;
-                                    let fromCenter = 0;
                            var cloverPerimeter=0.;
 
                                                   let radius = 0.;
@@ -1870,7 +1869,6 @@ let isFinished = false;
 let targets=[];
 let pG=[];
 let pM=[];
-let lastZoom=1.;
 let lastNoteTimeInScore=0;
 window.noteHit=false;
 let timeStampLastNoteEnded=0.;
@@ -4597,9 +4595,10 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                         var adjuster=(totalAMP)**tolerance;///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
                           var powerUP = ((1.+totalAMP)**totalAMP-tolerance)**((1-tolerance)**tolerance+totalAMP);
                           var c = 0;
-                           var tolTot = tolerance/totalAMP*7;//coefficients effective but not exhaustive
-                          var totTol =totalAMP/tolerance*3;//coefficient effective but not exhaustive
-                            for(var d = 0; d<7-totalAMP; d+=tolerance)
+                        //   var tolTot = tolerance/totalAMP*7;//coefficients effective but not exhaustive
+                       //   var totTol =totalAMP/tolerance*3;//coefficient effective but not exhaustive
+                          
+                       for(var d = 0; d<7-totalAMP; d+=tolerance)
                            // for(var d = 0; d<tolTot; d+=totTol)
                           {
                             
