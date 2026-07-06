@@ -1220,8 +1220,8 @@ jubileyes!=0.&&
     s.multiplyScalar(1./2.);
 
         if(seventhEYEthree||(seventhEYE==3.&&lengthP<1./3.))s=new THREE.Vector2(s.x,abs(s.y));
-        else s=new THREE.Vector2(s.x,abs(s.y)-.5);
-    s=new THREE.Vector2(1.5/(2.5-Math.abs(s.x)),1.5/(2.5-Math.abs(s.y)+budge-.5));
+        else s=new THREE.Vector2(Math.abs(s.x),abs(s.y)-.5);
+    s=new THREE.Vector2(1.5/(2.5-s.x),1.5/(2.5-Math.abs(s.y)+budge-.5));
         if(jubileyes<0.)s=new THREE.Vector2(s.y,Math.abs(s.x));//more sign checks may help
 
    // try signs and swizzle!
