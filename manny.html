@@ -6004,8 +6004,12 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
  )
 {
     s*=1./2.;
-    s=1.5/(2.5-vec2(-s.x,abs(s.y)+budge//-.5?
+        if(seventhEYEthree||(seventhEYE==3.&&lengthP<1./3.))s.y=abs(s.y);
+        else s.y=abs(s.y)-.5;
+
+    s=1.5/(2.5-vec2(-(s.x),s.y+budge
     ));
+    //s=vec2(-(s.x),abs(s.y));
     if(jubileyes<0.)s=vec2(s.y,abs(s.x));//more sign checks may help
    // try signs and swizzle!
 hyperCoreBoosted+=squeezeN*3.;pow(squeezeN,squeezeN*2.);//before or after *=log(3.)?
