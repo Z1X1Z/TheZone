@@ -2672,8 +2672,9 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
           "<div sytle='font-size: 16px;'>"+
           "<p style='margin : 0px'></p>"+
           "quietest: "+notes[Math.round(uniforms.lownote.value)%12] +" _ "+uniforms.lownote.value+"<p style='margin : 0px'></p>"+
-          " note: "+noteName+", cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
-          "note number: "+n_n+", time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
+          " note: "+noteName+", noteNum: "+n_n+"<p style='margin : 0px'></p>"
+          +"cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
+          "time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
           "cores: "+cores+", metaCores: "+ uniforms.externalCores.value + "<p style='margin : 0px'></p>"+
           "zoom: "+zoom/2.**(singleHyperCoreDepth*cloverSuperCores)+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
           "InOutThresh: "+zoomOutRatchetThreshold+"<p style='margin : 0px'></p>"+
@@ -4591,9 +4592,9 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                  if(tolerance!=0.&&totalAMP!=0.) 
 
 {
+                          var powerUP = ((1.+totalAMP)**totalAMP-tolerance)**((1-tolerance)**tolerance+totalAMP);
 
                         var adjuster=(totalAMP)**tolerance;///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
-                          var powerUP = ((1.+totalAMP)**totalAMP-tolerance)**((1-tolerance)**tolerance+totalAMP);
                           var c = 0;
                         //   var tolTot = tolerance/totalAMP*7;//coefficients effective but not exhaustive
                        //   var totTol =totalAMP/tolerance*3;//coefficient effective but not exhaustive
