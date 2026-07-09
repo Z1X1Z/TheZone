@@ -4558,7 +4558,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                             
                            // for (var na = 0; na<3; na+=1)nudgeAdjust=totalAMP**nudgeAdjust
 //odd conditionals
-                                   
+                   /*                
                       if(!iOS)      tolerance+=(totalAMP)**(totalAMP/((-leaf+(gr)+2**.5+1)**(.75)*2+1.))*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))//iOS may only have a problem with one of these terms//-totalAMPmodified/fractionOfFrame/2//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
 
                                   let toleranceNudge =((-leafPermanent+grPermanent+2**.5-3)*totalAMPmodified-1.*totalAMP)/fractionOfFrame// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
@@ -4568,7 +4568,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                         //last line working on nyquist filtering, added
                         nyquistFilter = false;//turn off to debug nyquists
                   tolerance+=toleranceNudge;
-
+*/
             tolerance=tolerance**((2**.5/trunc)*trunc)**tolerance;
 
            // tolerance=(tolerance/trunc)*trunc
@@ -4585,8 +4585,9 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
 
                          // tolerance=(tolerance/trunc)*trunc
 
-                                     // tolerance*=((((-leafPermanent/trunc)*trunc)*((grPermanent/trunc)*trunc)))**(totalAMP)*(((1+totalAMP)/trunc)*trunc);//not completely exhaustively checked, but works well for singing words
-                         // tolerance=(tolerance/trunc)*trunc
+                                      tolerance*=
+                                    ((((-leafPermanent/trunc)*trunc)*((grPermanent/trunc)*trunc)))**(totalAMP)*(((1+totalAMP)/trunc)*trunc);//not completely exhaustively checked, but works well for singing words
+                          tolerance=(tolerance/trunc)*trunc
                            if(window.highORlow!=3.)
                                  if(tolerance!=0.&&totalAMP!=0.) 
 
