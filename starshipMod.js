@@ -4575,7 +4575,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
 
             tolerance=(tolerance/trunc)*trunc
 
-            tolerance=(tolerance/trunc)*trunc
+            //tolerance=(tolerance/trunc)*trunc
                     tolerance*=((((grPermanent)/trunc)*trunc)/(((-leafPermanent/trunc)*trunc)*(2**.5/trunc)*trunc)/trunc)*trunc;
                                 tolerance=(tolerance/trunc)*trunc
 
@@ -4585,7 +4585,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                     }
 
 
-                         // tolerance=(tolerance/trunc)*trunc
+                          tolerance=(tolerance/trunc)*trunc
 
                                       tolerance*=
                                     ((((-leafPermanent/trunc)*trunc)*((grPermanent/trunc)*trunc)))**(totalAMP)*(((1+totalAMP)/trunc)*trunc);//not completely exhaustively checked, but works well for singing words
