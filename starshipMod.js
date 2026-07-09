@@ -2530,7 +2530,6 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                     
                                     totalAMP = 0.;
                                     for(var n=0; n<inputData.length-1;n++)totalAMP+=(Math.abs(inputData[n]-inputData[n+1]));
-                                   
                                         totalAMP/=inputData.length-1;
                                                        // if(window.android)totalAMP=totalAMP**.5/8.;//may not work as intended on all platforms, if at all
                                                      //   else if(iOS)totalAMP=totalAMP*2.;//may not work as intended on all platforms, if at all
@@ -4586,9 +4585,8 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
 
                          // tolerance=(tolerance/trunc)*trunc
 
-                                      tolerance*=
-                                    ((((-leafPermanent/trunc)*trunc)*((grPermanent/trunc)*trunc)))**(totalAMP)*(((1+totalAMP)/trunc)*trunc);//not completely exhaustively checked, but works well for singing words
-                          tolerance=(tolerance/trunc)*trunc
+                                     // tolerance*=((((-leafPermanent/trunc)*trunc)*((grPermanent/trunc)*trunc)))**(totalAMP)*(((1+totalAMP)/trunc)*trunc);//not completely exhaustively checked, but works well for singing words
+                         // tolerance=(tolerance/trunc)*trunc
                            if(window.highORlow!=3.)
                                  if(tolerance!=0.&&totalAMP!=0.) 
 
