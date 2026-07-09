@@ -4563,12 +4563,12 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
 
                                   let toleranceNudge =((-leafPermanent+grPermanent+2**.5-3)*totalAMPmodified-1.*totalAMP)/fractionOfFrame// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                         toleranceNudge*=(2.)/(grPermanent-leafPermanent+1);
-                        toleranceNudge=(toleranceNudge/trunc)*trunc
+                   //     toleranceNudge=(toleranceNudge/trunc)*trunc
                   //toleranceNudge+=(totalAMP)**(.5)**(totalAMP)**(1./totalAMP)**(totalAMP);
                         //last line working on nyquist filtering, added
                         nyquistFilter = false;//turn off to debug nyquists
                   tolerance+=toleranceNudge;
-
+                            tolerance=(tolerance/trunc)*trunc
             tolerance=tolerance**((2**.5/trunc)*trunc)**tolerance;
 
            // tolerance=(tolerance/trunc)*trunc
