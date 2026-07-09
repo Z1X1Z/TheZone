@@ -4561,7 +4561,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                    
                       if(!iOS)      tolerance+=(totalAMP)**(totalAMP/((-leaf+(gr)+2**.5+1)**(.75)*2+1.))*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))//iOS may only have a problem with one of these terms//-totalAMPmodified/fractionOfFrame/2//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
 
-                                  let toleranceNudge =(((-leafPermanent+grPermanent+2**.5-3.5))*totalAMPmodified-1.*totalAMP)/fractionOfFrame// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
+                                  let toleranceNudge =(((-leafPermanent+grPermanent+2**.5-3.25))*totalAMPmodified-1.*totalAMP)/fractionOfFrame// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                         toleranceNudge*=(2.)/(grPermanent-leafPermanent+1);
                         //console.log(toleranceNudge)
                         //toleranceNudge=(toleranceNudge/trunc)*trunc
