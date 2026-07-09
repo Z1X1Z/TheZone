@@ -4568,7 +4568,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                         //last line working on nyquist filtering, added
                         nyquistFilter = false;//turn off to debug nyquists
                   tolerance+=toleranceNudge;
-            tolerance=(tolerance/trunc)*trunc
+          //  tolerance=(tolerance/trunc)*trunc
 
             tolerance=tolerance**((2**.5/trunc)*trunc)**tolerance;
 
