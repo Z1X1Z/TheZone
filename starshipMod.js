@@ -4300,12 +4300,12 @@ if(uniforms.coords.value.y<-.5)
 /** Full YIN algorithm */
 function calculatePitch ()
 {
-
+/*
 fractionOfFrame = (frameRation);
 if(highORlow!=0|| window.iOS )  // caused freezing at f# with totalAMP**tolerance//bug not replicated when nudge truncated
 fractionOfFrame=1024;
 const yinData = new Float64Array(fractionOfFrame);
-
+*/
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance=0;//(1024-26)/10000
 
@@ -4568,6 +4568,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                         //last line working on nyquist filtering, added
                         nyquistFilter = false;//turn off to debug nyquists
                   tolerance+=toleranceNudge;
+            tolerance=(tolerance/trunc)*trunc
 
             tolerance=tolerance**((2**.5/trunc)*trunc)**tolerance;
 
