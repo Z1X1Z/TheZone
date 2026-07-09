@@ -4294,18 +4294,18 @@ if(uniforms.coords.value.y<-.5)
      // console.log(frameRation)        
                                                        
          var fractionOfFrame =1024 
-         //const yinData = new Float64Array(fractionOfFrame);
+         const yinData = new Float64Array(fractionOfFrame);
                                              
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
 function calculatePitch ()
 {
-
+/*
 fractionOfFrame = (frameRation);
 if(highORlow!=0|| window.iOS )  // caused freezing at f# with totalAMP**tolerance//bug not replicated when nudge truncated
 fractionOfFrame=1024;
 const yinData = new Float64Array(fractionOfFrame);
-
+*/
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance=0;//(1024-26)/10000
 
@@ -4561,7 +4561,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                    
                       if(!iOS)      tolerance+=(totalAMP)**(totalAMP/((-leaf+(gr)+2**.5+1)**(.75)*2+1.))*totalAMP+(totalAMP)**((totalAMP)*((2**.5)*3*4))//iOS may only have a problem with one of these terms//-totalAMPmodified/fractionOfFrame/2//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
 
-                                  let toleranceNudge =((-leafPermanent+grPermanent+2**.5-3)*totalAMPmodified-1.*totalAMP)/frameRation// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
+                                  let toleranceNudge =((-leafPermanent+grPermanent+2**.5-3)*totalAMPmodified-1.*totalAMP)/fractionOfFrame// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                         toleranceNudge*=(2.)/(grPermanent-leafPermanent+1);
                         toleranceNudge=(toleranceNudge/trunc)*trunc
                   //toleranceNudge+=(totalAMP)**(.5)**(totalAMP)**(1./totalAMP)**(totalAMP);
