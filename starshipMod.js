@@ -4623,9 +4623,6 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
 
                           //tolerance*=((totalAMP**totalAMP)**((1.-tolerance)**tolerance+totalAMP)**((1.+totalAMP)**totalAMP-tolerance))///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
                           //tolerance=(tolerance/trunc)*trunc
-
-
-                          
 }
                                
 
@@ -4641,7 +4638,9 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                                          //   console.log(ll)
                         }
                                                             }
-                                                          else tolerance=0.;
+                                                          else
+                                                            {tolerance=(-leafPermanent+grPermanent+2**.5-4.25)
+                                                            }
                                                          }
                                                        
 //.02134356(7)  solid guess//.0214284 easier reaching notes//n*2,n,n*2*2,n*2*2/2,n*2*2*2,n*2*2*2/2
@@ -4657,6 +4656,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                  else break;
                  };
                  */
+                        // console.log(tolerance)
 
 let period;
 let delta = 0.0, runningSum = 0.0;
