@@ -2529,8 +2529,7 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                     }
                                     
                                     totalAMP = 0.;
-                                    for(var n=0; n<inputData.length-1;n++)totalAMP+=(Math.abs(inputData[n]*2-inputData[n+1]));
-                                    totalAMP/=2.;
+                                    for(var n=0; n<inputData.length-1;n++)totalAMP+=(Math.abs(inputData[n]-inputData[n+1]))*2;
                                         totalAMP/=inputData.length-1;
                                                        // if(window.android)totalAMP=totalAMP**.5/8.;//may not work as intended on all platforms, if at all
                                                      //   else if(iOS)totalAMP=totalAMP*2.;//may not work as intended on all platforms, if at all
