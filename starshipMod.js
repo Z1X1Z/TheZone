@@ -4644,7 +4644,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                                          }
                                                        
 //.02134356(7)  solid guess//.0214284 easier reaching notes//n*2,n,n*2*2,n*2*2/2,n*2*2*2,n*2*2*2/2
-             else if(window.highORlow==2)tolerance=.49;
+             else if(window.highORlow==2)tolerance=tolerance=((-leafPermanent+grPermanent+2**.5-4.25))*(2.)/(grPermanent-leafPermanent+1);//.49;
             else if(window.highORlow==1)
                 tolerance=0.;
                                                          
