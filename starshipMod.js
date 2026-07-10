@@ -4639,7 +4639,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                         }
                                                             }
                                                           else
-                                                            {tolerance=(-leafPermanent+grPermanent+2**.5-4.25)
+                                                            {tolerance=((-leafPermanent+grPermanent+2**.5-3.25)*-leaf-1)
                                                             }
                                                          }
                                                        
