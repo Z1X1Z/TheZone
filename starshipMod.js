@@ -395,7 +395,7 @@ fourthHandsFingersArray[m]=0.
         let cutoff = 1.5;
         let cutoff2 = .75;
         let shrink = 255.;
-        if (zoomOutRatchetThreshold*2.<totalAMP)shrink*=totalAMP*32.;
+        if (zoomOutRatchetThreshold*2.<ampThresh)shrink*=ampThresh*32.;
         for(let m = 0; m<10; m++)
         {
 pitchHandsFingersArray[m]/=binsInFingerP[m]*shrink
@@ -530,7 +530,6 @@ let pitch = -1;
 let reset = 6;
 let on=false;
 let spirafreq=1;
-var totalAMP=0;
 var angle=0.;//this has nothing to do with the spin function below, it's for the pitch
                            function spin(f, angle)
                            {    //https://en.wikipedia.org/wiki/Rotation_matrix
@@ -574,7 +573,7 @@ let pushBackCounter = 0;
                     
                     
                     
-                    feedbackPitchsound[4].play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:pitch,volume:(totalAMP<1.)?totalAMP/feedBackReduction*window.touchVolume:window.touchVolume})
+                    feedbackPitchsound[4].play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:pitch,volume:(ampThresh<1.)?ampThresh/feedBackReduction*window.touchVolume:window.touchVolume})
                     
                     for (var v = 0; v < 4; v++)
                     {
@@ -706,7 +705,7 @@ d_x*=(1.+INcreaseBoost/2.);
 d_y*=(1.+INcreaseBoost/2.);
 
                                      
-                            if(on&&totalAMP>.000001)
+                            if(on&&ampThresh>.000001)
                             {
                                                           
 
@@ -756,7 +755,7 @@ window.twist-=window.spinnerTwist
                                
                             let preFromCenter= Math.sqrt(bx*bx+by*by);
 
-             if(isFinite(d_x)&&isFinite(d_y)&&totalAMP>zoomOutRatchetThreshold&&on){
+             if(isFinite(d_x)&&isFinite(d_y)&&ampThresh>zoomOutRatchetThreshold&&on){
                           fromCenter = preFromCenter;
 
                                 if( !window.touchMode//&&!DAW
@@ -1681,7 +1680,7 @@ function zoomRoutine(){
         zoomOutEngage = false;
     if(!isFinite(ZR))ZR=1;
     if(!zoomAtl41&&!zoomOutEngage&&zoomRate>0.){
-        if ((zoom>zoomCone && totalAMP>zoomOutRatchetThreshold&&(on&&!window.touchMode))||xTouch+yTouch!=0)zoom *=ZR**((1.+INcreaseBoost)*zoomBoost);
+        if ((zoom>zoomCone && ampThresh>zoomOutRatchetThreshold&&(on&&!window.touchMode))||xTouch+yTouch!=0)zoom *=ZR**((1.+INcreaseBoost)*zoomBoost);
         else if(uniforms.MetaCored.value||zoom<1.){
             zoom /= ZR;
             triggerRailSet=true
@@ -2192,7 +2191,7 @@ function runOSMD (){
                                           let lowAmpFreq = 1;
 
                                           function animate( timestamp ) {
-   //                                                            if(on&&totalAMP>.000001)
+   //                                                            if(on&&ampThresh>.000001)
  //window.twist-=window.spinnerTwist                     
                                     
      window.TIMESTAMP=timestamp;//used in hotkeys to set window.timeRESET
@@ -2529,33 +2528,36 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                     }
                                     
                                     totalAMP = 0.;
+                                    ampThresh=0;
 
-
+                                                                        
                                     for(var n=0; n<inputData.length-1;n++)totalAMP+=Math.abs(inputData[n])+Math.sign(inputData[n])*Math.abs(inputData[n])**.5-Math.sign(inputData[n+1])*(inputData[n+1]**2);
                                     totalAMP=Math.abs(totalAMP);
+                                    totalAMP/=inputData.length-1;
+                                    
+                                    for(var n=0; n<inputData.length;n++)ampThresh+=Math.abs(inputData[n]);
+                                     ampThresh/=inputData.length;
 
-
-                                        totalAMP/=inputData.length-1;
-                                                       // if(window.android)totalAMP=totalAMP**.5/8.;//may not work as intended on all platforms, if at all
-                                                     //   else if(iOS)totalAMP=totalAMP*2.;//may not work as intended on all platforms, if at all
-                                    uniforms["totalAmp" ].value=totalAMP;
+                                                       // if(window.android)ampThresh=ampThresh**.5/8.;//may not work as intended on all platforms, if at all
+                                                     //   else if(iOS)ampThresh=ampThresh*2.;//may not work as intended on all platforms, if at all
+                                    uniforms["totalAmp" ].value=ampThresh;
                                      if(window.ISdilated)
-                                     uniforms.coreDilation.value=.5+.5*totalAMP**2.*Math.sqrt(24.)*2.;
+                                     uniforms.coreDilation.value=.5+.5*ampThresh**2.*Math.sqrt(24.)*2.;
                                       //   console.log(uniforms.coreDilation.value)
                                          else             uniforms.coreDilation.value=0.;
                                     
                                                                             lastPitch = pitch;
 
-                                    if(totalAMP>.000001)
+                                    if(ampThresh>.000001)
                                     {
                                         // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
                                         pitch = audioX.sampleRate/calculatePitch();
                                         const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins)>2.;
-                                        if(!notNyquist&&nyquistFilter&&totalAMP>0.) pitch = lastPitch;
+                                        if(!notNyquist&&nyquistFilter&&ampThresh>0.) pitch = lastPitch;
                                    
                                     
                                     
-                                if (isFinite(pitch) &&pitch>0&& notNyquist &&pitch!=-1&&totalAMP>zoomOutRatchetThreshold) {
+                                if (isFinite(pitch) &&pitch>0&& notNyquist &&pitch!=-1&&ampThresh>zoomOutRatchetThreshold) {
                                     aboveThreshold = true;
                                     on = true;
                                 }
@@ -2572,7 +2574,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
            if(window.volumeSpeed&&on)
            {
                    if(lastVolume!=0.) lastVolume=volume;
-               volume = (totalAMP-zoomOutRatchetThreshold)*audioX.sampleRate/bufferSize;
+               volume = (ampThresh-zoomOutRatchetThreshold)*audioX.sampleRate/bufferSize;
                if(volume<0.)volume=0.;
                if(lastVolume==0.) lastVolume=volume;
                        }
@@ -2637,7 +2639,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
     {
         framesLong=FPS
 
-        averageFrameTotalAmp.push(totalAMP);
+        averageFrameTotalAmp.push(ampThresh);
         if (averageFrameTotalAmp.length>framesLong)computeFPS=false;
         if(computeFPS==false){
              finalAverageAmp = 0.;
@@ -2677,24 +2679,27 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
           "<div sytle='font-size: 16px;'>"+
           "<p style='margin : 0px'></p>"+
           "quietest: "+notes[Math.round(uniforms.lownote.value)%12] +" _ "+uniforms.lownote.value+"<p style='margin : 0px'></p>"+
-          " note: "+noteName+", noteNum: "+n_n+"<p style='margin : 0px'></p>"
-          +"cents: "+cents+", freq: "+fr+"<p style='margin : 0px'></p>"+
+          "note: "+noteName+", noteNum: "+n_n+"<p style='margin : 0px'></p>"
+          +"cents: "+cents+"<p style='margin : 0px'></p>"+
+          "freq: "+fr+"<p style='margin : 0px'></p>"+
           "time: "+timeOfTheSound+"<p style='margin : 0px'></p>"+
           "cores: "+cores+", metaCores: "+ uniforms.externalCores.value + "<p style='margin : 0px'></p>"+
           "zoom: "+zoom/2.**(singleHyperCoreDepth*cloverSuperCores)+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
           "InOutThresh: "+zoomOutRatchetThreshold+"<p style='margin : 0px'></p>"+
-          "amplitude: "+totalAMP+"<p style='margin : 0px'></p>"+
-          "FPS: "+Math.round(FPS)+ ", above threshold: "+aboveThreshold+"<p style='margin : 0px'></p>"
+          "amplitude: "+ampThresh+"<p style='margin : 0px'></p>"+
+          "FPS: "+Math.round(FPS)+ ", above threshold: "+aboveThreshold+"<p style='margin : 0px'></p>"+
+                   "hears:"+totalAMP+"<p style='margin : 0px'></p>"
+
           //+"<p style='margin : 0px'></p>"+"X: "+String(-coordX)+" Y: "+String(-coordY);
           +"<p></div>";
       }
       else document.getElementById("textWindow").innerHTML = "";
 
     
-      if(isFinite(audioX.sampleRate))  uniforms[ "time2dance" ].value += audioX.sampleRate/bufferSize*totalAMP;
+      if(isFinite(audioX.sampleRate))  uniforms[ "time2dance" ].value += audioX.sampleRate/bufferSize*ampThresh;
     uniforms["zoomOutRatchetThreshold" ].value=zoomOutRatchetThreshold;
 
-        if(!shouldShowStar||totalAMP>zoomOutRatchetThreshold&&on) uniforms["volume" ].value = audioX.sampleRate/bufferSize*totalAMP/(1.+zoomOutRatchetThreshold);
+        if(!shouldShowStar||ampThresh>zoomOutRatchetThreshold&&on) uniforms["volume" ].value = audioX.sampleRate/bufferSize*ampThresh/(1.+zoomOutRatchetThreshold);
         uniforms[ "zoom" ].value = zoom;
     
     
@@ -2931,7 +2936,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
                         starPositionAttribute.setXYZ(starStride+1, 0., 0.,  0.)
                         starPositionAttribute.setXYZ(starStride+2,0,0,0)
                     }
-                    var wideness =(testarContinuous[g]/255*totalAMP**.5-zoomOutRatchetThreshold)*starshipSize;//totalAMP is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
+                    var wideness =(testarContinuous[g]/255*ampThresh**.5-zoomOutRatchetThreshold)*starshipSize;//ampThresh is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
                     if(wideness<=0)wideness=1./255.*starshipSize;
                     var xyStarParticle={};
                     xyStarParticle.x=wideness*-Math.sin(rpio2);//this is the

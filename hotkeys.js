@@ -394,7 +394,8 @@ for(var nameOfUniform in uniformsInitial)
                                          window.touchMode=false;
             window.volumeSpeed = false;//this could be true for creativity, but for beginners and consistency it may be false.
              window.totalAMP=1;
-                                         window.front = 1;
+             
+            window.ampThresh=1;
             window.center = false;
             window.zoomOutRatchetThreshold= starSHIPVOLUMEdefaultLowVolume;//
 
