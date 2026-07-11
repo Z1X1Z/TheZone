@@ -2529,8 +2529,8 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                     }
                                     
                                     totalAMP = 0.;
-                                    for(var n=0; n<inputData.length;n++)totalAMP+=inputData[n]+(Math.sign(inputData[n])*Math.abs(inputData[n])**.5)+Math.sign(inputData[n])*(inputData[n]**2);
-                                    totalAMP=Math.abs(totalAMP)/2.;
+                                    for(var n=0; n<inputData.length;n++)totalAMP+=(Math.sign(inputData[n])*Math.abs(inputData[n])**.5)+Math.sign(inputData[n])*(inputData[n]**2);
+                                    totalAMP=Math.abs(totalAMP);
                                         totalAMP/=inputData.length;
                                                        // if(window.android)totalAMP=totalAMP**.5/8.;//may not work as intended on all platforms, if at all
                                                      //   else if(iOS)totalAMP=totalAMP*2.;//may not work as intended on all platforms, if at all
