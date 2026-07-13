@@ -2532,10 +2532,12 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
 
                                                                         
                                     for(var n=0; n<inputData.length-1;n++)
-                                        totalAMP+=Math.abs(inputData[n])
-                                        -(Math.abs(inputData[n])**.5)//*Math.sign(inputData[n])
-                                        +(Math.abs(inputData[n+1])**2)//Math.sign(inputData[n+1]);
-                                    totalAMP+=Math.abs(inputData[inputData.length-1])-(Math.abs(inputData[inputData.length-1])**.5)+(Math.abs(inputData[0])**2); 
+                                        totalAMP+=-Math.abs(inputData[n])
+                                        +(Math.abs(inputData[n])**.5)*Math.sign(inputData[n])
+                                        -(Math.abs(inputData[n+1])**2)*Math.sign(inputData[n+1]);
+                                    totalAMP+=-Math.abs(inputData[inputData.length-1])
+                                    +(Math.abs(inputData[inputData.length-1])**.5)*Math.sign(inputData[inputData.length-1])
+                                    -(Math.abs(inputData[0])**2)*Math.sign(inputData[0]); 
                                     totalAMP=Math.abs(totalAMP);
                                     totalAMP/=inputData.length;
                                     
