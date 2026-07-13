@@ -12,9 +12,9 @@ window.numberOfBins=bufferSize/2.;
 window.inputData = new Float32Array(bufferSize);
 window.dataArray = new Uint8Array(bufferSize/2);
 
-let micProcessing1 = false;//autoGainControl
-let micProcessing2 = false;//echoCancellation
-let micProcessing3 = false;//noiseSuppression
+let micProcessing1 = true;//autoGainControl
+let micProcessing2 = true;//echoCancellation
+let micProcessing3 = true;//noiseSuppression
   if((location.hash.includes('.,K')||location.hash.includes(',.K'))
     //!=iOS
   )
