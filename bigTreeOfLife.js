@@ -240,7 +240,7 @@ if(seventhEYEandJubileye&&lfc>zoom&&morph==0.)
     }
 else if(seventhOUTside&&lengthP>2./3.&&lfc>zoom)
 {
-    swapped=(swap-swapJUBILEE+swapDEFAULT+4*10)%4.;
+    swapped=(swap-swapJUBILEE+swapDEFAULT+4*10+3)%4.;
    flopped = (oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10+2)%3.;
 }
 
