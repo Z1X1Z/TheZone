@@ -1838,8 +1838,10 @@ let isFinished = false;
              if(on){
                  for(var t = 0; t<4; t++)
                  {
-                     vibrateArrayNew.push(vibFreq*.9);
-                     vibrateArrayNew.push(vibFreq*.1);
+                     vibrateArrayNew.push(vibFreq);
+                     vibrateArrayNew.push(vibFreq);
+                     vibrateArrayNew.push(vibFreq);
+                     vibrateArrayNew.push(vibFreq);
                  }
              }
              else {
