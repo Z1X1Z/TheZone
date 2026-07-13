@@ -2693,8 +2693,8 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
           "zoom: "+zoom/2.**(singleHyperCoreDepth*cloverSuperCores)+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
           "InOutThresh: "+zoomOutRatchetThreshold+"<p style='margin : 0px'></p>"+
           "amplitude: "+ampThresh+"<p style='margin : 0px'></p>"+
-          "FPS: "+Math.round(FPS)+ ", above threshold: "+aboveThreshold+"<p style='margin : 0px'></p>"
-                   //+"hears:"+totalAMP+"<p style='margin : 0px'></p>"
+          "FPS: "+Math.round(FPS)+ ", above threshold: "+aboveThreshold
+                   //+"<p style='margin : 0px'></p>"+"hears:"+totalAMP+"<p style='margin : 0px'></p>"
 
           //+"<p style='margin : 0px'></p>"+"X: "+String(-coordX)+" Y: "+String(-coordY);
           +"<p></div>";
