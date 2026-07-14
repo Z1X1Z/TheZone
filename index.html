@@ -7,7 +7,7 @@
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <meta name="description" content="Zone:X">
   <meta name="author" content="Xevin" >
-       <meta name="viewport" content="user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+       <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     
       <link rel="stylesheet" href="styles.css">
 
@@ -190,7 +190,7 @@
      <label  for="engage3">engage3</label><p>
 
 
-          <input class="configuration" type="text" id = "configuration4" onkeyup="        localStorage.setItem('config4', this.value);
+          <input class="configuration"   type="text" id = "configuration4" onkeyup="        localStorage.setItem('config4', this.value);
 "
 ></input>
 
@@ -242,7 +242,7 @@
 
 </script>
 
-      <h2>  Name:       <select name="configDropDown"  id="configurations" style="font-size:.5em; width:75%;"
+      <h2>  Name:       <select name="configDropDown"  id="configurations" style="font-size:24px; width:75%;"
                   onchange="
                                 var cn =    document.getElementById('configurations').options[document.getElementById('configurations').selectedIndex].text;
 
@@ -439,7 +439,7 @@ function makeButton (buttonText)
 
 
 </script>
- <select name="configDropDown"  id="selectConfigs" style="font-size: .5em; width:75%;"
+ <select name="configDropDown"  id="selectConfigs" style="font-size: 24px; width:75%;"
                   onchange="
                 var buttonText = document.getElementById('selectConfigs').options[document.getElementById('selectConfigs').selectedIndex].text;
                                                  localStorage.setItem('buttonNames',buttonText+','+localStorage.getItem('buttonNames'))
