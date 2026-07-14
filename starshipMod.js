@@ -2640,7 +2640,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
     if(true//||!DAW
 )setDynamicSampler2ds();
 
-   if(spirographMODE!=0&&pitch!=lastPitch)makeSpirograph();
+   if(spirographMODE!=0&&pitch!=lastPitch&&on)makeSpirograph();
 
 
     if (computeFPS&&fpsSET>1)
@@ -2742,7 +2742,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
         //scene.add(line)
        let depthSpirograph =-1.;
 
-     if(spirographMODE!=0&&pitch!=lastPitch&&(uniforms.movieTime.value==-1||uniforms.movieTime.value>5.) )  for (let r= 0.; r < bufferPortion; r +=1) {//spirray size supports upto r <buffersize*2
+     if(on&&spirographMODE!=0&&pitch!=lastPitch&&(uniforms.movieTime.value==-1||uniforms.movieTime.value>5.) )  for (let r= 0.; r < bufferPortion; r +=1) {//spirray size supports upto r <buffersize*2
             const  txlast=tx;
             const  tylast=ty;
             tx = spirray0[r];
