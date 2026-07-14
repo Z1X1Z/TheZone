@@ -4581,7 +4581,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
 
                       //            let toleranceNudge =(((-leafPermanent+grPermanent+2**.5-4.25))*totalAMP)/fractionOfFrame// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                       //  toleranceNudge*=(2.)/(grPermanent-leafPermanent+1);
-                                                          let toleranceNudge =2./fractionOfFrame*(((-leafPermanent+grPermanent+2**.5-4.251)))*totalAMP/(grPermanent-leafPermanent+1)// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
+                                                          let toleranceNudge =2./fractionOfFrame*(((-leafPermanent+grPermanent+2**.5-4.2508742)))*totalAMP/(grPermanent-leafPermanent+1)// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                            // console.log(toleranceNudge/toleranceNudge2)
                         //console.log(toleranceNudge)
                         //toleranceNudge=(toleranceNudge/trunc)*trunc
@@ -4659,7 +4659,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                         }
                                                             }
                                                           else
-                                                            {tolerance=((-leafPermanent+grPermanent+2**.5-4.25))*(2.)/(grPermanent-leafPermanent+1)
+                                                            {tolerance=((-leafPermanent+grPermanent+2**.5-4.2508742))*(2.)/(grPermanent-leafPermanent+1)
                                                             }
                                                          }
                                                        
