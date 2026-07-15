@@ -4313,7 +4313,7 @@ if(uniforms.coords.value.y<-.5)
                                                        
          var fractionOfFrame =1024 
          const yinData = new Float64Array(fractionOfFrame);
-                                             const wingsOfRighteousness=4.250874236524140987789605055037000007000700703;
+                                             const wingsOfRighteousness=4.2508742365241409877896050550370000070007007037;
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
 function calculatePitch ()
@@ -4657,7 +4657,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
 
                                                          //   console.log(ll)
                         }
-                        if(!isFinite(tolerance)||tolerance>1)tolerance= ((-leafPermanent+grPermanent+2**.5-wingsOfRighteousness))*(2.)/(grPermanent-leafPermanent+1)
+                        if(!isFinite(tolerance)||tolerance>1||tolerance<0)tolerance= ((-leafPermanent+grPermanent+2**.5-wingsOfRighteousness))*(2.)/(grPermanent-leafPermanent+1)
 
                                                             }
                                                           else
