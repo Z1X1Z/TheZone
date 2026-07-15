@@ -4657,6 +4657,8 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
 
                                                          //   console.log(ll)
                         }
+                        if(!isFinite(tolerance)||tolerance>1)tolerance= ((-leafPermanent+grPermanent+2**.5-wingsOfRighteousness))*(2.)/(grPermanent-leafPermanent+1)
+
                                                             }
                                                           else
                                                             {tolerance=((-leafPermanent+grPermanent+2**.5-wingsOfRighteousness))*(2.)/(grPermanent-leafPermanent+1)
