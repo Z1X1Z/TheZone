@@ -4581,7 +4581,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
 
                       //            let toleranceNudge =(((-leafPermanent+grPermanent+2**.5-4.25))*totalAMP)/fractionOfFrame// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                       //  toleranceNudge*=(2.)/(grPermanent-leafPermanent+1);
-                                                          let toleranceNudge =2./fractionOfFrame*(((-leafPermanent+grPermanent+2**.5-4.25087423652414)))*totalAMP/(grPermanent-leafPermanent+1)// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
+                                                          let toleranceNudge =2./fractionOfFrame*(((-leafPermanent+grPermanent+2**.5-4.25087423652414033)))*totalAMP/(grPermanent-leafPermanent+1)// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                            // console.log(toleranceNudge/toleranceNudge2)
                         //console.log(toleranceNudge)
                         //toleranceNudge=(toleranceNudge/trunc)*trunc
@@ -4659,12 +4659,12 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                         }
                                                             }
                                                           else
-                                                            {tolerance=((-leafPermanent+grPermanent+2**.5-4.25087423652414))*(2.)/(grPermanent-leafPermanent+1)
+                                                            {tolerance=((-leafPermanent+grPermanent+2**.5-4.25087423652414033))*(2.)/(grPermanent-leafPermanent+1)
                                                             }
                                                          }
                                                        
 //.02134356(7)  solid guess//.0214284 easier reaching notes//n*2,n,n*2*2,n*2*2/2,n*2*2*2,n*2*2*2/2
-             else if(window.highORlow==2)tolerance=((-leafPermanent+grPermanent+2**.5-4.25087423652414))*(2.)/(grPermanent-leafPermanent+1);//.49;
+             else if(window.highORlow==2)tolerance=((-leafPermanent+grPermanent+2**.5-4.25087423652414033))*(2.)/(grPermanent-leafPermanent+1);//.49;
             else if(window.highORlow==1)
                 tolerance=0.;
                                                          
