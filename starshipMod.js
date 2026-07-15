@@ -4313,7 +4313,7 @@ if(uniforms.coords.value.y<-.5)
                                                        
          var fractionOfFrame =1024 
          const yinData = new Float64Array(fractionOfFrame);
-                                             const wingsOfRighteousness=4.2508742365241409877896050550373;
+                                             const wingsOfRighteousness=4.2508742365241409877896050550733;
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
 function calculatePitch ()
