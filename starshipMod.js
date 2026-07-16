@@ -2542,9 +2542,9 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                     -(Math.abs(inputData[0])**2)*Math.sign(inputData[0]); 
                                     totalAMP=Math.abs(totalAMP);
                                     totalAMP/=inputData.length;
-                                    ampThresh=totalAMP;
-                                  //  for(var n=0; n<inputData.length;n++)ampThresh+=Math.abs(inputData[n]);
-                                    // ampThresh/=inputData.length;
+                                  //  ampThresh=totalAMP;
+                                  for(var n=0; n<inputData.length;n++)ampThresh+=Math.abs(inputData[n]);
+                                    ampThresh/=inputData.length;
 
                                                        // if(window.android)ampThresh=ampThresh**.5/8.;//may not work as intended on all platforms, if at all
                                                      //   else if(iOS)ampThresh=ampThresh*2.;//may not work as intended on all platforms, if at all
