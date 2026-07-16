@@ -4377,7 +4377,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                                       //           let oolp =    1./-leafPermanent;
                                                                  let loopy = 0;
                                                                  
-                                                                 if(tAScaled>0&&isFinite(tAScaled))
+                                                                 if(tAScaled>0&&isFinite(tAScaled)&&isFinite(totalAMP))
                                                                      for(var reps=  0.;  reps<totalAMP**(7-totalAMPmodified);//these may be totalAMP or totalAMPmodified
                                                                     reps+=tAScaledPermanent**(3.-totalAMP))//reps+=tAScaledPermanent**(3.-tAScaledPermanent))
                                                                   //   for(var reps=0; reps<2.;reps+=1)
@@ -4481,7 +4481,8 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                   //                        tolerance=(tolerance/trunc)*trunc
                                                            var toleranceFixed = tolerance;
                                                            var ll = 0.
-                                                           for(var vvv = 0.; vvv<1.5;vvv+=tAScaledPermanent)
+                                                          if(isFinite(tAScaledPermanent))
+                                                             for(var vvv = 0.; vvv<1.5;vvv+=tAScaledPermanent)
                                                            {
                                                             tolerance=(toleranceFixed)**((1+tolerance))
 
@@ -4490,6 +4491,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                                            }
                                               tolerance=(tolerance/trunc)*trunc//may be helpful, may not be
                                                             toleranceFixed = tolerance;
+                                                if(isFinite(tAScaledPermanent))
                                                     for(var vvv = 0.; vvv<1.5;vvv+=tAScaledPermanent)
                                                            {
                                                             tolerance=(toleranceFixed)**((1-tolerance))
@@ -4503,6 +4505,8 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                                 tolerance=((tolerance)/trunc)*trunc*/
                                               //  toleranceFixed=tolerance;
                                               //                                              tolerance=(tolerance/trunc)*trunc//may be helpful, may not be
+
+                                                                                              if(isFinite(tAScaledPermanent))
 
                                                                                                          for (var bb =0; bb<1.5; bb+=tAScaledPermanent )//not thoroughly vetted
 {
@@ -4607,7 +4611,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                tolerance=(tolerance/trunc)*trunc//just this one works nicely
 
                     var tolFixed=(tolerance)**(3.5-tolerance+totalAMP);
-                    for(var m=0;m<tolFixed;m+=totalAMP) 
+                                                                    if(isFinite(tolFixed))for(var m=0;m<tolFixed;m+=totalAMP) 
                     {tolerance=tolerance**(tolerance+.5+totalAMP);
                     }
 
@@ -4627,7 +4631,8 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                           var c = 0;
                         //   var tolTot = tolerance/totalAMP*7;//coefficients effective but not exhaustive
                        //   var totTol =totalAMP/tolerance*3;//coefficient effective but not exhaustive
-                          
+                                                                          if(isFinite(tolerance))
+
                        for(var d = 0; d<7-totalAMP; d+=tolerance)
                            // for(var d = 0; d<tolTot; d+=totTol)
                           {
