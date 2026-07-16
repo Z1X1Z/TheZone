@@ -513,6 +513,7 @@ var pitchCol = Array(0);
                                 
                             }
                                                   trailDepth=0.;
+                                                  f = 0;
 
                            }
 let trailLoaded = false;
