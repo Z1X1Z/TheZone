@@ -493,10 +493,11 @@ var pitchCol = Array(0);
                                     scene.remove(meshTrail)
                                 geomeTrail.dispose();
                                  geomeTrail = new THREE.BufferGeometry();
-                                 geomeTrail.dynamic = true;
                                  geomeTrail.setAttribute( 'position', new THREE.Float32BufferAttribute( trail, 3 ) );
                                   geomeTrail.setAttribute( 'color', new THREE.Float32BufferAttribute( trailColor, 4 ));
-                                 meshTrail = new THREE.Mesh(geomeTrail, materialTrail);
+                                                           geomeTrail.dynamic = true;
+
+                                  meshTrail = new THREE.Mesh(geomeTrail, materialTrail);
                                 scene.add(meshTrail)
 
                                 
