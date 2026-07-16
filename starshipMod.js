@@ -4316,7 +4316,7 @@ if(uniforms.coords.value.y<-.5)
 
          
      //  const wingsOfRighteousness=4.250874236524140987789605055037000007000707000039000005;
-        const wingsOfRighteousness=4.2508742365242291;
+        const wingsOfRighteousness=4.2508742365242192;
 
 
 
