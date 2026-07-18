@@ -701,7 +701,12 @@ else                 {
               
                  }
                             d_x*=flatline;
-                            d_y*=flatline
+                            d_y*=flatline;
+                if((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value)
+                    wrapMovementBoost=2;
+                else wrapMovementBoost = 1;
+        d_x*=wrapMovementBoost;
+        d_y*=wrapMovementBoost;
 
 d_x*=(1.+INcreaseBoost/2.);
 d_y*=(1.+INcreaseBoost/2.);
@@ -722,6 +727,7 @@ window.twist-=window.spinnerTwist
                                                     
 
                                     }
+
 
              
              if(shouldShowStar&&touchMode)
@@ -2056,8 +2062,11 @@ function runOSMD (){
         //OSMDUPDATER();
                                 let TouchMicroizer = false;
                                  let lastTouchAngle = 0.;
+                                 window.wrapMovementBoost=1
                function executeTouchRegime(){
                    
+                if((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value)wrapMovementBoost=2;
+                else wrapMovementBoost = 1;
                    if(!shouldShowStar||touchOnlyMode)
                    {
                        uniforms.d.value.x = 0.;
@@ -2067,7 +2076,7 @@ function runOSMD (){
                        uniforms.pongBallCoords.value.y=window.innerHeight/gr;
 
                    }
-                   let coordinator = pixelShaderSize/2./minimumDimension*movementRate;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
+                   let coordinator = pixelShaderSize/2./minimumDimension*movementRate*wrapMovementBoost;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
                    if(xTouch==0&&yTouch==0&&!TouchMicroizer)
                    {
                        xTouchMicroBuffer=xTouchMicroBuffer/10000.;
@@ -2195,6 +2204,8 @@ function runOSMD (){
                                           let lowAmpFreq = 1;
 
                                           function animate( timestamp ) {
+
+
    //                                                            if(on&&ampThresh>.000001)
  //window.twist-=window.spinnerTwist                     
                                     
