@@ -1601,8 +1601,9 @@ let lastVolume = 1.;
 
 
        function infinicore(){
+
             if(zoom<=1./2.**(singleHyperCoreDepth+3)){
-                let lastCoord=coordX
+                let lastCoord=coordXf
                 zoom*=2.**(singleHyperCoreDepth);coordY*=2.**(singleHyperCoreDepth);coordX*=2.**(singleHyperCoreDepth);
                 fromCenter*=2.**(singleHyperCoreDepth);
                 lastZoom*=2.**singleHyperCoreDepth;
@@ -1629,6 +1630,7 @@ let lastVolume = 1.;
                         fromCenter*=2.;
                     lastZoom*=2.;
                 }
+                
             if(!isFinite(cloverSuperCores))
             {cloverSuperCores=0;
             zoom=1.;
@@ -2109,7 +2111,8 @@ function runOSMD (){
                             {
                               lastZoom = zoom;
                               zoomRoutine();
-                                infinicore();
+                     if((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)]
+                        infinicore();
 
                             }
                             else lastZoom=zoom;
@@ -2607,7 +2610,8 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
    {
        if(!zoomAtl41&&zoomRate!=0.)
        {zoomRoutine();
-           infinicore();
+                          if((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)
+ infinicore();
        }
    }
     //if(on)
