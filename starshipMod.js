@@ -2065,7 +2065,7 @@ function runOSMD (){
                                  window.wrapMovementBoost=1
                function executeTouchRegime(){
                    
-                if((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value)wrapMovementBoost=2;
+                if((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)wrapMovementBoost=2;
                 else wrapMovementBoost = 1;
                    if(!shouldShowStar||touchOnlyMode)
                    {
