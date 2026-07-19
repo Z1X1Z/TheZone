@@ -2111,7 +2111,7 @@ function runOSMD (){
                             {
                               lastZoom = zoom;
                               zoomRoutine();
-                     if((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)]
+                     if((coordX**2+coordY**2)**.5/zoom<uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)
                         infinicore();
 
                             }
@@ -2610,7 +2610,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
    {
        if(!zoomAtl41&&zoomRate!=0.)
        {zoomRoutine();
-                          if((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)
+                          if((coordX**2+coordY**2)**.5/zoom<uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)
  infinicore();
        }
    }
