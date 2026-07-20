@@ -3820,10 +3820,12 @@ extrArms+=h.x;
                     return vec3(r);
                     }
                     vec3 legs(vec2 g, vec2 t){
+                        g.x-=lerp(log(zoom)/log(2.)*2.+sign(g.y)/2.+abs(g.y)
+                        )/2.;
                     float b=0.;
                     g/=2.;
                     vec2 z=g.xy;
-                    if(g.x>.75&&g.x<1.7&&abs(g.y*g.x)<.58)for(int f=0;f<18;f+=1)if(abs(z.x)>52.&&f>1){b=abs(z.x)/70.;break;}
+                    if(g.x>.75&&g.x<1.7&&abs(g.y*g.x)<.58)for(int f=0;f<18;f+=1)if(abs(z.x)>52.&&f>1){b=abs(z.x)/100.;break;}
                     else{
                         z=3.*vec2(-1./(z.x*z.x-z.y*z.y-g.x+t.x*sign(-g.y)),77.*z.x*z.y-g.y+t.y);
                         z.y=-1./z.y;}
