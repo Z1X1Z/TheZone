@@ -1603,7 +1603,7 @@ let lastVolume = 1.;
        function infinicore(){
 
             if(zoom<=1./2.**(singleHyperCoreDepth+3)){
-                let lastCoord=coordXf
+                let lastCoord=coordX
                 zoom*=2.**(singleHyperCoreDepth);coordY*=2.**(singleHyperCoreDepth);coordX*=2.**(singleHyperCoreDepth);
                 fromCenter*=2.**(singleHyperCoreDepth);
                 lastZoom*=2.**singleHyperCoreDepth;
