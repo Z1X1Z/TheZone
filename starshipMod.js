@@ -712,7 +712,7 @@ d_x*=(1.+INcreaseBoost/2.);
 d_y*=(1.+INcreaseBoost/2.);
 
                                      
-                            if(on&&ampThresh>.000001)
+                            if(on&&ampThresh>.0000001)
                             {
                                                           
 
@@ -1473,8 +1473,8 @@ function setTwelveNotes()
 {
  if(!touchMode//&&!DAW
                 ||(window.shouldShowStar)){
-   var maxNoteAmp=0.0000001;
-   var minNoteAmp=100000000000000;
+   var maxNoteAmp=Number.MIN_VALUE;
+   var minNoteAmp=Number.MAX_VALUE;
 
 
         for (var g=0; g<12; g++) {
@@ -2572,7 +2572,7 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                     
                                                                             lastPitch = pitch;
 
-                                    if(ampThresh>.000001)
+                                    if(ampThresh>.000002)
                                     {
                                         // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
                                         pitch = audioX.sampleRate/calculatePitch();
@@ -2624,7 +2624,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
         
         vectorize4();
     setTwelveNotes();
-    let lowNote = 10000000.;
+    let lowNote = Number.MAX_VALUESS;
      lowAmpFreq = 1;
 
      lowAmpFreq = 1;
@@ -2790,8 +2790,8 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
 
 
        
-       var maxStack=0.0000001;
-       var minStack=100000000000000;
+       var maxStack=Number.MIN_VALUE;
+       var minStack=Number.MAX_VALUE;
 
 
         
@@ -2869,8 +2869,8 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
        
        
        
-   var maxTestar=0.0000001;
-   var minTestar=100000000000000;
+   var maxTestar=Number.MIN_VALUE;
+   var minTestar=Number.MAX_VALUE;
 
 
     
