@@ -2711,7 +2711,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
           "cores: "+cores+", metaCores: "+ uniforms.externalCores.value + "<p style='margin : 0px'></p>"+
           "zoom: "+zoom/2.**(singleHyperCoreDepth*cloverSuperCores)+"<p style='margin : 0px'></p>"+                // style='margin : 0px'
           "InOutThresh: "+zoomOutRatchetThreshold+"<p style='margin : 0px'></p>"+
-          "amplitude: "+totalAMP+"<p style='margin : 0px'></p>"+
+          "amplitude: "+ampThresh+"<p style='margin : 0px'></p>"+
           "FPS: "+Math.round(FPS)+ ", above threshold: "+aboveThreshold
                    //+"<p style='margin : 0px'></p>"+"hears:"+totalAMP+"<p style='margin : 0px'></p>"
 
