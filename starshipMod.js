@@ -712,7 +712,7 @@ d_x*=(1.+INcreaseBoost/2.);
 d_y*=(1.+INcreaseBoost/2.);
 
                                      
-                            if(on&&ampThresh>.0000001)
+                            if(on&&totalAMP>.000001)
                             {
                                                           
 
