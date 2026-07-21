@@ -702,11 +702,6 @@ else                 {
                  }
                             d_x*=flatline;
                             d_y*=flatline;
-                if(((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0))
-                    wrapMovementBoost=2;
-                else wrapMovementBoost = 1;
-        d_x*=wrapMovementBoost;
-        d_y*=wrapMovementBoost;
 
 d_x*=(1.+INcreaseBoost/2.);
 d_y*=(1.+INcreaseBoost/2.);
@@ -758,8 +753,12 @@ window.twist-=window.spinnerTwist
                   const d_xS=spunD[0]*interpolation;
                   const d_yS=spunD[1]*interpolation;
 
-           const bx=coordX+d_xS*MR*zoom;
-          const by=coordY+d_yS*MR*zoom;
+                if(((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0))
+                    wrapMovementBoost=2;
+                else wrapMovementBoost = 1;
+                
+           const bx=coordX+d_xS*MR*zoom*wrapMovementBoost;
+          const by=coordY+d_yS*MR*zoom*wrapMovementBoost;
                                
                             let preFromCenter= Math.sqrt(bx*bx+by*by);
 
