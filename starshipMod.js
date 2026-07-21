@@ -702,7 +702,7 @@ else                 {
                  }
                             d_x*=flatline;
                             d_y*=flatline;
-                if((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)
+                if(((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)||!uniforms.seventhOUTside.value)
                     wrapMovementBoost=2;
                 else wrapMovementBoost = 1;
         d_x*=wrapMovementBoost;
@@ -2067,7 +2067,7 @@ function runOSMD (){
                                  window.wrapMovementBoost=1
                function executeTouchRegime(){
                    
-                if((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)wrapMovementBoost=2;
+                if(((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)||!uniforms.seventhOUTside.value)wrapMovementBoost=2;
                 else wrapMovementBoost = 1;
                    if(!shouldShowStar||touchOnlyMode)
                    {
@@ -2111,7 +2111,7 @@ function runOSMD (){
                             {
                               lastZoom = zoom;
                               zoomRoutine();
-                     if((coordX**2+coordY**2)**.5/zoom<uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)
+                     if(((coordX**2+coordY**2)**.5/zoom<uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)||!uniforms.seventhOUTside.value)
                         infinicore();
 
                             }
@@ -2610,7 +2610,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
    {
        if(!zoomAtl41&&zoomRate!=0.)
        {zoomRoutine();
-                          if((coordX**2+coordY**2)**.5/zoom<uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)
+                          if(((coordX**2+coordY**2)**.5/zoom<uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)||!uniforms.seventhOUTside.value)
  infinicore();
        }
    }
