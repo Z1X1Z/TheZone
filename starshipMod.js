@@ -2572,7 +2572,7 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                     
                                                                             lastPitch = pitch;
 
-                                    if(ampThresh>.000002)
+                                    if(ampThresh>.0000001)
                                     {
                                         // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
                                         pitch = audioX.sampleRate/calculatePitch();
