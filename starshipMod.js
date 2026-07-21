@@ -4364,7 +4364,7 @@ let tolerance=0;//(1024-26)/10000
                                                                 // totalAMP=.25
                                                                  let totalAMPmodified =totalAMP;
                                 let trunc=  Math.log(totalAMPmodified)*-leafPermanent/2.
-
+                             if(!isFinite(trunc))trunc=1
 //totalAMPmodified=(totalAMPmodified/((-leafPermanent)/))///preTrunc)*preTrunc));
 totalAMPmodified = (((totalAMPmodified*(-(leafPermanent/trunc)*trunc))))
  //preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2
