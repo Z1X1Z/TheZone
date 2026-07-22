@@ -6108,6 +6108,7 @@ hyperCoreBoosted+=squeezeN*3.;pow(squeezeN,squeezeN*2.);//before or after *=log(
 /*vectorized petals, not working but fuller theory*/
 
 dstnce=length(s);
+float inImplosion = 1.;
     if(cloverSlide2!=0&&dstnce<.5&&
 2.>=hyperCoreBoosted&&mod(floor(hyperCoreBoosted),2.)==0.//+2./3.&&abs(length(s))>ExplodingProgression
 ) 
@@ -6120,34 +6121,48 @@ dstnce=length(s);
         shrink=sqrt(1.-sqrt(mod(hyperCoreBoosted,1.)));//1.-(1.-log(3.))/2.
     }
    if(dstnce/shrink<1.)
+   {
     s/=shrink;
+    inImplosion=4./3.;
+   }
 }
 dstnce=length(s);
 
-
 if(explodo)
 {
-    float ExplodingProgression = (hyperCoreBoosted - floor(hyperCoreBoosted));
-    if(cloverSlide2!=0)ExplodingProgression=sqrt(ExplodingProgression);
-        float petalIsolated =(mod((atan(sBuffer.y,sBuffer.x)*divideByMultiplyingPi+2.)*3.-.5,1.)-.5);
-        
-        float petalIsolatedDaisy =(mod((atan(sBuffer.y,sBuffer.x)*divideByMultiplyingPi+2.)*6.-.5,1.)-.5);
+    vec2 sBypass = s;
+    vec2 sBufferBypass = sBuffer;
 
-        float direction = floor(atan(s.y,s.x)/PI2*6.+.5)*PI2/6.-PI/2.;
+    bool breaker = false;
+    for(int v = 0;v<2;v++)
+    {
+    float ExplodingProgression = (hyperCoreBoosted - floor(hyperCoreBoosted));
+    if(cloverSlide2!=0&&v==0)ExplodingProgression=sqrt(ExplodingProgression);
+        float petalIsolated =(mod((atan(sBufferBypass.y,sBufferBypass.x)*divideByMultiplyingPi+2.)*3.-.5,1.)-.5);
+        
+        float petalIsolatedDaisy =(mod((atan(sBufferBypass.y,sBufferBypass.x)*divideByMultiplyingPi+2.)*6.-.5,1.)-.5);
+
+        float direction = floor(atan(sBypass.y,sBypass.x)/PI2*6.+.5)*PI2/6.-PI/2.;
    // float direction = floor(atan(s.y,s.x)/PI2*6.)*PI2/6.;//swirlpool
-           vec2  spunCloverBurst = s;
-           if(!wasDaisy)spunCloverBurst=spin2(s,PI/6.*sign(-petalIsolated));
+           vec2  spunCloverBurst = sBypass;
+           if(v==0)
+           {
+           if(!wasDaisy)
+           {
+            spunCloverBurst=spin2(sBypass,PI/6.*sign(-petalIsolated));
+           }
            else 
 {
-    spunCloverBurst=spin2(s,PI/12.*sign(-petalIsolatedDaisy));
+    spunCloverBurst=spin2(sBypass,PI/12.*sign(-petalIsolatedDaisy));
     spunCloverBurst*=1.5;
     ExplodingProgression*=1.5;
+
 }
+           }
             
-
-
         vec2 petalPlucked = (spunCloverBurst)-ExplodingProgression*vec2(-zin(-direction),-coz(direction));
      petalPlucked*=3.;
+
         //   petalPlucked = spin2(petalPlucked,PI/6.);
   //  vec2 petalPlucked = (s)-ExplodingProgression*vec2(-zin(-direction),-coz(direction));stable swirlpool
    // vec2 petalPlucked = (s)-ExplodingProgression*-vec2(-zin(-direction),-coz(-direction));//implosion swirlpool
@@ -6155,7 +6170,6 @@ if(explodo)
    // if(petalIsolated>.25)
 
 
-   if(length(petalPlucked)<twoThirds)
 
     if(
 2.>=hyperCoreBoosted&&mod(floor(hyperCoreBoosted),2.)==0.//+2./3.&&abs(length(s))>ExplodingProgression
@@ -6171,9 +6185,21 @@ if(explodo)
   {
 
    // petalPlucked=spin2(petalPlucked,PI/6.);
-        s=petalPlucked;//*(hyperCoreBoosted-float(i));
-           
-            break;
+
+        if(v==1)
+        {
+          petalPlucked*=inImplosion;
+        }
+        sBypass=petalPlucked;//*(hyperCoreBoosted-float(i));
+        sBufferBypass = petalPlucked;
+        float lengthPlucked = length(petalPlucked);
+           if(lengthPlucked<twoThirds)
+           {
+           s=petalPlucked;
+           }
+         else if(lengthPlucked>3.)break;
+        
+        if(lengthPlucked<twoThirds)   breaker = true;
 
     }
     
@@ -6181,7 +6207,11 @@ if(explodo)
 //else s*=2.;
 }
 
-
+  // if(length(sBypass)<twoThirds)
+  {// s=sBypass;
+if(breaker)break;
+   }
+}
 
 /*
 
