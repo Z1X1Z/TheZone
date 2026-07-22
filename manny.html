@@ -942,7 +942,13 @@ uniforms.cloverOffset.value=document.getElementById('CloverTwist').value/6.">
                 number = 'no number'
 ;
 uniforms.petals.value=document.getElementById('petalCount').value-6.">
-                    </p>
+
+                          
+              <a id="Chirality" name="t"  onclick= "
+                  key  = 'H';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                  Clovers Slide?![H]</a><br>
+              
                     
           <!--       <input type="checkbox" id="omniCore" name="t"  onclick= "
               key  = 'o';
@@ -973,11 +979,6 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                    <label for="Clovers Pop">Clovers Pop?![n]</label><br>
                    
-                   <input type="checkbox" id="Clovers Slide" name="t"  onclick= "
-                       key  = 'H';
-                       callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                    <label for="Clovers Slide">Clovers Slide![H]</label><br>
-                    
                     <input type="checkbox" id="Dancer" name="t"  onclick= "
                        key  = 's';
                        callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -2276,6 +2277,7 @@ void main(){
 
     uniform int continuumClover;
     uniform bool cloverSlide;
+    uniform int cloverSlide2;
     uniform bool dynamicOvercore;
     uniform float baseN;
     
@@ -4920,7 +4922,8 @@ else if (petals==0.)hyperCoreOUTPUT+=log2*2.;
                                                        hyperCoreOUTPUT-=omniboost;//upcore for higher omniclover counts, multiplied by two!!
 
                                                            float hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if
-                          //   hyperCoreBoosted-=(6.+petals)/6.-1.;//upcore for higher omniclover counts
+                         float hyperCoreStored = hyperCoreBoosted;
+                                                           //   hyperCoreBoosted-=(6.+petals)/6.-1.;//upcore for higher omniclover counts
                         
                              //metaCoreDriveFactor==2.: hyperCoreBoosted=hyperCore;
                                                            
@@ -6024,7 +6027,7 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
             hyperCoreBoosted+=b;
             hyperCoreOUTPUT+=b;
         }
-        else{
+        else if (0==1){
             float b =dstnce/4.;//may not be core stable
             loops-=b;
         hyperCoreBoosted+=b;
@@ -6095,9 +6098,28 @@ hyperCoreBoosted+=squeezeN*3.;pow(squeezeN,squeezeN*2.);//before or after *=log(
 
    }
 /*vectorized petals, not working but fuller theory*/
+
+dstnce=length(s);
+    if(cloverSlide2!=0&&dstnce<.5&&
+1.>=hyperCoreBoosted&&mod(floor(hyperCoreBoosted),2.)==0.//+2./3.&&abs(length(s))>ExplodingProgression
+) 
+{   float shrink = 1.;
+    if(cloverSlide2==1)
+    {
+        shrink=(1.-pow(mod(hyperCoreBoosted,1.),.75));//1.-(1.-log(3.))/2.
+    }
+    else if (cloverSlide2==2)
+    shrink = 1.-(mod(hyperCoreBoosted,1.))*dstnce;//slide
+   if(dstnce/shrink<1.5)
+    s/=shrink;
+}
+dstnce=length(s);
+
+
 if(explodo)
 {
     float ExplodingProgression = (hyperCoreBoosted - floor(hyperCoreBoosted));
+    if(cloverSlide2==1)ExplodingProgression=sqrt(ExplodingProgression);
         float petalIsolated =(mod((atan(sBuffer.y,sBuffer.x)*divideByMultiplyingPi+2.)*3.-.5,1.)-.5);
         
         float petalIsolatedDaisy =(mod((atan(sBuffer.y,sBuffer.x)*divideByMultiplyingPi+2.)*6.-.5,1.)-.5);
@@ -6112,6 +6134,8 @@ if(explodo)
     spunCloverBurst*=1.5;
 }
             
+
+
         vec2 petalPlucked = (spunCloverBurst)-ExplodingProgression*vec2(-zin(-direction),-coz(direction));
      petalPlucked*=3.;
         //   petalPlucked = spin2(petalPlucked,PI/6.);
@@ -6119,6 +6143,8 @@ if(explodo)
    // vec2 petalPlucked = (s)-ExplodingProgression*-vec2(-zin(-direction),-coz(-direction));//implosion swirlpool
    // petalPlucked/=length(s);
    // if(petalIsolated>.25)
+
+
    if(length(petalPlucked)<twoThirds)
 
     if(
@@ -6136,6 +6162,7 @@ if(explodo)
 
    // petalPlucked=spin2(petalPlucked,PI/6.);
         s=petalPlucked;//*(hyperCoreBoosted-float(i));
+           
             break;
 
     }
@@ -6143,7 +6170,6 @@ if(explodo)
 }
 //else s*=2.;
 }
-
 
 
 
@@ -6482,7 +6508,8 @@ o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo+eyeScroll.xyz)-(starship.x+starship
                       o+=(isBlack-1.)*100.;
                       o+=isGrey;
                     //  if(length((vUv.yx-.5)/(resolution/max(resolution.x,resolution.y)))<2.*sqrt2/min(resolution.x,resolution.y))o=vec3(hyperCoreOUTPUT/255.*4.,cored/255.*4.,255.);
-return vec4(clamp(o+cloverEYES,0.,1.),atan(b.y,b.x));}
+                   //if(abs(vUv.x-.5)*2.<mod(hyperCoreStored,1.)&&vUv.y<.06125&&hyperCoreStored>5.)o=vec3(sign(mod(hyperCoreStored,2.)-1.)*sign(vUv.x-.5));
+                    return vec4(clamp(o+cloverEYES,0.,1.),atan(b.y,b.x));}
 
                       
                       

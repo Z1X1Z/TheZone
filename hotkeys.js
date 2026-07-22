@@ -39,8 +39,8 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                            }
               
 
-           let  zoomINITiaLizer =.9999;//.05;//    1/2**65.;//1.;//
-                         let xINITiaLizer=0.;//0.0001;   //1./3.;
+           let  zoomINITiaLizer =.75//.05;//    1/2**65.;//1.;//
+                         let xINITiaLizer=0;//0.0001;   //1./3.;
                            let yINITiaLizer=0.;//-.225;   //1./3./2.;
 
                            const coreFlopConstant = 2;
@@ -131,6 +131,7 @@ pongIntercept:{value:-1000},
         continuumClover:{value: 1    },
         Inherited:{value: true    },
         cloverSlide:{value: false    },
+        cloverSlide2:{value: 1    },
         Pointers:{value:true},
         time: {value:1. },
         rate: {value: 1.},
@@ -1572,7 +1573,8 @@ else{
         if(fullscreen)openFullscreen();
         else closeFullscreen();
     }
-    else if (key=="H")uniforms.cloverSlide.value=!uniforms.cloverSlide.value;
+    else if (key=="H")uniforms.cloverSlide2.value=(uniforms.cloverSlide2.value+1)%3;
+    //else if (key=="H")uniforms.cloverSlide.value=!uniforms.cloverSlide.value;
     else if (key==" ") 
         {
             settingsSet = false;
