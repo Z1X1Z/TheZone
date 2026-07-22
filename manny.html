@@ -4925,7 +4925,7 @@ if(squeezeN!=1.)
 if(petals>0.)omniboost=sqrt(omniboost);
 else if (petals<0.)hyperCoreOUTPUT-=log2*2.;
 }
- if (petals==0.)hyperCoreOUTPUT+=log2*2.;
+ if (petals==0.)hyperCoreOUTPUT+=log2*3.;
 
                                                        hyperCoreOUTPUT-=omniboost;//upcore for higher omniclover counts, multiplied by two!!
 
@@ -6114,7 +6114,8 @@ dstnce=length(s);
 {   float shrink = 1.;
     if (cloverSlide2==2||(seventhEYEandJubileye&&lengthP<2./3.&&cloverSlide2!=0))
     shrink = 1.-(mod(hyperCoreBoosted,1.))*dstnce;//slide
-    else if(cloverSlide2==1)
+   else 
+    if(cloverSlide2==1)
     {
         shrink=sqrt(1.-sqrt(mod(hyperCoreBoosted,1.)));//1.-(1.-log(3.))/2.
     }
@@ -6140,6 +6141,7 @@ if(explodo)
 {
     spunCloverBurst=spin2(s,PI/12.*sign(-petalIsolatedDaisy));
     spunCloverBurst*=1.5;
+    ExplodingProgression*=1.5;
 }
             
 
