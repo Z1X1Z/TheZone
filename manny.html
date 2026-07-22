@@ -6108,12 +6108,12 @@ dstnce=length(s);
 2.>=hyperCoreBoosted&&mod(floor(hyperCoreBoosted),2.)==0.//+2./3.&&abs(length(s))>ExplodingProgression
 ) 
 {   float shrink = 1.;
-    if(cloverSlide2==1)
+    if (cloverSlide2==2||(seventhEYEandJubileye&&lengthP<2./3.&&cloverSlide2!=0))
+    shrink = 1.-(mod(hyperCoreBoosted,1.))*dstnce;//slide
+    else if(cloverSlide2==1)
     {
         shrink=sqrt(1.-sqrt(mod(hyperCoreBoosted,1.)));//1.-(1.-log(3.))/2.
     }
-    else if (cloverSlide2==2)
-    shrink = 1.-(mod(hyperCoreBoosted,1.))*dstnce;//slide
    if(dstnce/shrink<1.)
     s/=shrink;
 }
