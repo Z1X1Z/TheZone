@@ -756,7 +756,7 @@ window.twist-=window.spinnerTwist
                 if(((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0))
                     wrapMovementBoost=2;
                 else wrapMovementBoost = 1;
-                
+
            const bx=coordX+d_xS*MR*zoom*wrapMovementBoost;
           const by=coordY+d_yS*MR*zoom*wrapMovementBoost;
                                
@@ -2125,8 +2125,10 @@ function runOSMD (){
                                     let touchMovement=[0,0];
                                      if(zoomRate!=0&&!zoomAtl41) touchMovement = [-Math.abs(zoom-lastZoom)*xTouch, Math.abs(zoom-lastZoom)*yTouch];
                                         else touchMovement=[-xTouch/zoomFrames*zoom*interpolation,yTouch/zoomFrames*zoom*interpolation]
-                                    if(!window.shouldShowStar||touchOnlyMode)uniforms[ "volume" ].value=1.;
-                                    uniforms["zoomOutRatchetThreshold" ].value=0.;
+                                    if(!window.shouldShowStar||touchOnlyMode)
+                                        {uniforms[ "volume" ].value=1.;
+                                  uniforms["zoomOutRatchetThreshold" ].value=0.;
+                                        }
                                     let dxVolumized =xTouchMicroBuffer
                                     let dyVolumized =yTouchMicroBuffer
 
@@ -2149,7 +2151,7 @@ function runOSMD (){
                                                 uniforms.coordSHIFT.value.y+=spunTouch[1];
                                                                             
                                                                         
-                                    uniforms.maxSamp.value=0.;
+                                   if(!window.shouldShowStar) uniforms.maxSamp.value=0.;
                                                                         //else  uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
 
                                   }
@@ -2584,12 +2586,12 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                     aboveThreshold = true;
                                     on = true;
                                 }
-                                else{aboveThreshold = false; on = false;if(!touchMode) uniforms.volume.value=0.00001}
+                                else{aboveThreshold = false; on = false;if(!touchMode||window.shouldShowStar) uniforms.volume.value=0.00001}
     
     
     //                            if(!notNyquist)console.log(on)
 
-                                    }else{aboveThreshold = false; on = false;if(!touchMode)uniforms.volume.value=0.00001}
+                                    }else{aboveThreshold = false; on = false;if(!touchMode||window.shouldShowStar)uniforms.volume.value=0.00001}
                                     
 if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
 
