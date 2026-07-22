@@ -241,7 +241,7 @@ if(seventhEYEandJubileye&&lfc>zoom&&morph==0.)
 else if(seventhOUTside&&lengthP>2./3.&&lfc>zoom)
 {
     swapped=(swap-swapJUBILEE+swapDEFAULT+4*10+3)%4.;
-   flopped = (oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10+2)%3.;
+   flopped = (oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10)%3.;
 }
 
 }
@@ -583,13 +583,17 @@ else
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
 
 
-                           var omniboost = (6.+petals)/6.-1.;
+                           if(squeezeN!=1.)
+                           {
+var omniboost = (6.+petals)/6.-1.;
+
 if(petals>0.)omniboost=Math.sqrt(omniboost);
 else if (petals<0.)hyperCoreOUTPUT-=Math.log(2.)*2.;
-else if (petals==0.)hyperCoreOUTPUT+=Math.log(2.)*2.;
+hyperCoreOUTPUT-=omniboost;//upcore for higher omniclover counts, multiplied by two!!
 
+                           }
+                           if (petals==0.)hyperCoreOUTPUT+=Math.log(2.)*2.;
 
-                                                       hyperCoreOUTPUT-=omniboost;//upcore for higher omniclover counts, multiplied by two!!
 
 
 
