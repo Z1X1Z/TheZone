@@ -6101,16 +6101,16 @@ hyperCoreBoosted+=squeezeN*3.;pow(squeezeN,squeezeN*2.);//before or after *=log(
 
 dstnce=length(s);
     if(cloverSlide2!=0&&dstnce<.5&&
-1.>=hyperCoreBoosted&&mod(floor(hyperCoreBoosted),2.)==0.//+2./3.&&abs(length(s))>ExplodingProgression
+2.>=hyperCoreBoosted&&mod(floor(hyperCoreBoosted),2.)==0.//+2./3.&&abs(length(s))>ExplodingProgression
 ) 
 {   float shrink = 1.;
     if(cloverSlide2==1)
     {
-        shrink=(1.-pow(mod(hyperCoreBoosted,1.),.75));//1.-(1.-log(3.))/2.
+        shrink=sqrt(1.-sqrt(mod(hyperCoreBoosted,1.)));//1.-(1.-log(3.))/2.
     }
     else if (cloverSlide2==2)
     shrink = 1.-(mod(hyperCoreBoosted,1.))*dstnce;//slide
-   if(dstnce/shrink<1.5)
+   if(dstnce/shrink<1.)
     s/=shrink;
 }
 dstnce=length(s);
