@@ -6140,7 +6140,7 @@ if(explodo)
     {
     float ExplodingProgression = (hyperCoreBoosted - floor(hyperCoreBoosted));
     if(cloverSlide2!=0
-   // &&v==0
+    &&(v==0||inImplosion!=1.)
     )ExplodingProgression=sqrt(ExplodingProgression);
     
         float petalIsolated =(mod((atan(sBufferBypass.y,sBufferBypass.x)*divideByMultiplyingPi+2.)*3.-.5,1.)-.5);
