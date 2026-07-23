@@ -1365,8 +1365,22 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
     /*else if (x==0&& document.activeElement.className!="num"&&!event.shiftKey&&!event.altKey)
      {rez = window.devicePixelRatio/10.; renderer.setPixelRatio( rez);}
      */
-    else if (key=="+"){rez /=1.1; if(window.INITIALIZED) renderer.setPixelRatio( rez);}
-    else if (key=="_"){rez *=1.1; if(window.INITIALIZED) renderer.setPixelRatio( rez);}
+    else if (key=="+"){
+        if(number!="no number")
+            {
+                rez /=1.1; 
+                if(window.INITIALIZED) renderer.setPixelRatio( rez);
+            }
+        else if(window.INITIALIZED) renderer.setPixelRatio( number);
+    }
+    else if (key=="_")
+    {
+        if(number!="no number")
+            {
+                rez *=1.1; 
+                if(window.INITIALIZED) renderer.setPixelRatio( rez);
+            }
+        }
     
     else if (key=="À"||key=="`")
     {rez=window.devicePixelRatio*2.;
