@@ -6133,10 +6133,11 @@ if(explodo)
     vec2 sBypass = s;
     vec2 sBufferBypass = sBuffer;
   //  float flight = 1.5;
-   float inImplosionSquared =1.06125;
+   float inImplosionSquared =1.125;
 
     bool breaker = false;
-    for(int v = 0;v<4;v++)
+    const int vmax = 4;
+    for(int v = 0;v<vmax;v++)
     {
     float ExplodingProgression = (hyperCoreBoosted - floor(hyperCoreBoosted));
     if(cloverSlide2!=0
@@ -6167,12 +6168,20 @@ if(explodo)
 }
            }
             
-
+if(vmax>1)
        if(v==0)
         {
             spunCloverBurst*=inImplosionSquared;
     ExplodingProgression*=inImplosionSquared;
-    inImplosionSquared*=inImplosionSquared;
+  //  inImplosionSquared*=inImplosionSquared;
+        }
+        else if(v==1)
+        {
+
+            spunCloverBurst/=inImplosionSquared;
+    ExplodingProgression/=inImplosionSquared;
+   // inImplosionSquared*=inImplosionSquared;
+
         }
    
         vec2 petalPlucked = (spunCloverBurst)-ExplodingProgression*vec2(-zin(-direction),-coz(direction));
