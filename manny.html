@@ -6123,7 +6123,7 @@ float inImplosion = 1.;
    if(dstnce/shrink<1.)
    {
     s/=shrink;
-    inImplosion=1.25;
+    inImplosion=1.06125;
    }
 }
 dstnce=length(s);
@@ -6132,6 +6132,8 @@ if(explodo)
 {
     vec2 sBypass = s;
     vec2 sBufferBypass = sBuffer;
+    float flight = 1.5;
+    float inImplosionSquared =inImplosion;
 
     bool breaker = false;
     for(int v = 0;v<4;v++)
@@ -6167,8 +6169,8 @@ if(explodo)
       // if(v==0)
         {
             spunCloverBurst*=inImplosion;
-    ExplodingProgression*=inImplosion;
-    inImplosion*=inImplosion;
+    ExplodingProgression*=inImplosionSquared;
+   // inImplosionSquared*=inImplosionSquared;
         }
    
         vec2 petalPlucked = (spunCloverBurst)-ExplodingProgression*vec2(-zin(-direction),-coz(direction));
