@@ -278,13 +278,6 @@ let runningHash = true;
 window.settingsSet = false
 
 
-window.rez=1.;
-
-                                             if (   window.iOS )window.rez=window.devicePixelRatio/4.;
-                                               else if(window.android)window.rez=window.devicePixelRatio/4.;
-                                               else   window.rez=window.devicePixelRatio/2.;
-                                                   
-
 
 
                  window.computeFPS=false;
@@ -294,6 +287,14 @@ const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 
 
 function resetAll(){
+
+window.rez=1.;
+
+                                             if (   window.iOS )window.rez=window.devicePixelRatio/4.;
+                                               else if(window.android)window.rez=window.devicePixelRatio/4.;
+                                               else   window.rez=window.devicePixelRatio/2.;
+                                                   
+
         window.nudge=13;
         window.frenzy=false;
         window.buildUp=1;
