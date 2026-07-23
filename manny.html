@@ -6120,14 +6120,20 @@ bool inImplosion = false;
     {
         shrink=sqrt(1.-sqrt(mod(hyperCoreBoosted,1.)));//1.-(1.-log(3.))/2.
     }
-   if(dstnce/shrink<1.)
+   if(dstnce/shrink<
+   //.5
+   1.
+   )//may be to do with variant4Correction
    {
-    s/=shrink;
+    s/=shrink
+    // /2.
+    
+    ;
     inImplosion=true;
    }
-}
+   
 dstnce=length(s);
-
+}
 if(explodo)
 {
     vec2 sBypass = s;

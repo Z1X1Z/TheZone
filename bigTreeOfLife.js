@@ -570,7 +570,7 @@ if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside)&&((seventhEYE!=1.
     hyperCore-=(lpcc*variant4Correction-1.);
 else
     hyperCore-=(lfcCenterCored*variant4Correction-1.);
- hyperCore+=1./3.;
+ hyperCore+=2./3.;
 }
 
 
@@ -592,7 +592,7 @@ else if (petals<0.)hyperCoreOUTPUT-=Math.log(2.)*2.;
 hyperCoreOUTPUT-=omniboost;//upcore for higher omniclover counts, multiplied by two!!
 
                            }
-                           if (petals==0.)hyperCoreOUTPUT+=Math.log(2.)*3.;
+                           if (petals==0.)hyperCoreOUTPUT+=Math.log(2.)*2.;
 
 
 
