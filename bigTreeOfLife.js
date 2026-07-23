@@ -570,7 +570,7 @@ if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside)&&((seventhEYE!=1.
     hyperCore-=(lpcc*variant4Correction-1.);
 else
     hyperCore-=(lfcCenterCored*variant4Correction-1.);
- hyperCore+=.25;
+ hyperCore+=1./3.;
 }
 
 
