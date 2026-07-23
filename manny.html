@@ -6164,10 +6164,11 @@ if(explodo)
            }
             
 
-        if(v==0)
+      // if(v==0)
         {
             spunCloverBurst*=inImplosion;
     ExplodingProgression*=inImplosion;
+    inImplosion*=inImplosion;
         }
    
         vec2 petalPlucked = (spunCloverBurst)-ExplodingProgression*vec2(-zin(-direction),-coz(direction));
