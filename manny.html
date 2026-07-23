@@ -4906,7 +4906,7 @@ if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside)&&((seventhEYE!=1.
     hyperCore-=(lpcc*variant4Correction-1.);
 else
     hyperCore-=(lfcCenterCored*variant4Correction-1.);
-  hyperCore+=1./3.;
+  hyperCore+=2./3.;
 }
 //else s*=0.;
                if(wheel)m =  ((pWithoutChiralizer/lfc)
@@ -4925,7 +4925,7 @@ if(squeezeN!=1.)
 if(petals>0.)omniboost=sqrt(omniboost);
 else if (petals<0.)hyperCoreOUTPUT-=log2*2.;
 }
- if (petals==0.)hyperCoreOUTPUT+=log2*3.;
+ if (petals==0.)hyperCoreOUTPUT+=log2*2.;
 
                                                        hyperCoreOUTPUT-=omniboost;//upcore for higher omniclover counts, multiplied by two!!
 
@@ -6108,7 +6108,7 @@ hyperCoreBoosted+=squeezeN*3.;pow(squeezeN,squeezeN*2.);//before or after *=log(
 /*vectorized petals, not working but fuller theory*/
 
 dstnce=length(s);
-float inImplosion = 1.;
+bool inImplosion = false;
     if(cloverSlide2!=0&&dstnce<.5&&
 2.>=hyperCoreBoosted&&mod(floor(hyperCoreBoosted),2.)==0.//+2./3.&&abs(length(s))>ExplodingProgression
 ) 
@@ -6123,7 +6123,7 @@ float inImplosion = 1.;
    if(dstnce/shrink<1.)
    {
     s/=shrink;
-    inImplosion=1.125;
+    inImplosion=true;
    }
 }
 dstnce=length(s);
@@ -6133,14 +6133,16 @@ if(explodo)
     vec2 sBypass = s;
     vec2 sBufferBypass = sBuffer;
   //  float flight = 1.5;
-   // float inImplosionSquared =inImplosion;
+   float inImplosionSquared =1.06125;
 
     bool breaker = false;
     for(int v = 0;v<4;v++)
     {
     float ExplodingProgression = (hyperCoreBoosted - floor(hyperCoreBoosted));
     if(cloverSlide2!=0
-    &&(v==0||inImplosion!=1.)
+    &&(v==0
+    //||inImplosion
+    )
     )ExplodingProgression=sqrt(ExplodingProgression);
     
         float petalIsolated =(mod((atan(sBufferBypass.y,sBufferBypass.x)*divideByMultiplyingPi+2.)*3.-.5,1.)-.5);
@@ -6168,10 +6170,9 @@ if(explodo)
 
        if(v==0)
         {
-            spunCloverBurst*=inImplosion;
-    ExplodingProgression*=inImplosion;
-    inImplosion*=inImplosion;
-   // inImplosionSquared*=inImplosionSquared;
+            spunCloverBurst*=inImplosionSquared;
+    ExplodingProgression*=inImplosionSquared;
+    inImplosionSquared*=inImplosionSquared;
         }
    
         vec2 petalPlucked = (spunCloverBurst)-ExplodingProgression*vec2(-zin(-direction),-coz(direction));
