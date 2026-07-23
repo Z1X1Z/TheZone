@@ -2142,10 +2142,11 @@ function runOSMD (){
                                     var spunTouch=touchMovement;
                                           if(uniforms.carousel.value!=0.&&uniforms[ "time" ].value>0)
                                               spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
-                                              coordX+= spunTouch[0]*wrapMovementBoost;
                                              
                 if(((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.))wrapMovementBoost=2.;
                 else wrapMovementBoost = 1;
+                                                              coordX+= spunTouch[0]*wrapMovementBoost;
+
                                               coordY+= spunTouch[1]*wrapMovementBoost;
                                     
                                                 uniforms.coordSHIFT.value.x+=spunTouch[0];
