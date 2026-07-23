@@ -2066,8 +2066,6 @@ function runOSMD (){
                                  window.wrapMovementBoost=1
                function executeTouchRegime(){
                    
-                if(((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.))wrapMovementBoost=2;
-                else wrapMovementBoost = 1;
                    if(!shouldShowStar||touchOnlyMode)
                    {
                        uniforms.d.value.x = 0.;
@@ -2077,7 +2075,7 @@ function runOSMD (){
                        uniforms.pongBallCoords.value.y=window.innerHeight/gr;
 
                    }
-                   let coordinator = pixelShaderSize/2./minimumDimension*movementRate*wrapMovementBoost;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
+                   let coordinator = pixelShaderSize/2./minimumDimension*movementRate;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
                    if(xTouch==0&&yTouch==0&&!TouchMicroizer)
                    {
                        xTouchMicroBuffer=xTouchMicroBuffer/10000.;
@@ -2144,8 +2142,11 @@ function runOSMD (){
                                     var spunTouch=touchMovement;
                                           if(uniforms.carousel.value!=0.&&uniforms[ "time" ].value>0)
                                               spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
-                                              coordX+= spunTouch[0];
-                                              coordY+= spunTouch[1];
+                                              coordX+= spunTouch[0]*wrapMovementBoost;
+                                             
+                if(((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.))wrapMovementBoost=2.;
+                else wrapMovementBoost = 1;
+                                              coordY+= spunTouch[1]*wrapMovementBoost;
                                     
                                                 uniforms.coordSHIFT.value.x+=spunTouch[0];
                                                 uniforms.coordSHIFT.value.y+=spunTouch[1];
