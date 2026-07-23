@@ -4906,7 +4906,7 @@ if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside)&&((seventhEYE!=1.
     hyperCore-=(lpcc*variant4Correction-1.);
 else
     hyperCore-=(lfcCenterCored*variant4Correction-1.);
- hyperCore+=2./3.;
+ hyperCore+=.25;
 }
 //else s*=0.;
                if(wheel)m =  ((pWithoutChiralizer/lfc)
@@ -6161,7 +6161,8 @@ if(explodo)
            }
             
         vec2 petalPlucked = (spunCloverBurst)-ExplodingProgression*vec2(-zin(-direction),-coz(direction));
-     petalPlucked*=3.;
+  
+   petalPlucked*=3.;
 
         //   petalPlucked = spin2(petalPlucked,PI/6.);
   //  vec2 petalPlucked = (s)-ExplodingProgression*vec2(-zin(-direction),-coz(direction));stable swirlpool
