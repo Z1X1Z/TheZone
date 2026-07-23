@@ -2143,8 +2143,8 @@ function runOSMD (){
                                           if(uniforms.carousel.value!=0.&&uniforms[ "time" ].value>0)
                                               spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                                              
-                if(((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.))wrapMovementBoost=2.;
-                else wrapMovementBoost = 1;
+                if(((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)&&spunTouch[0]!=0&&spunTouch[1]!=0)wrapMovementBoost=2;
+
                                                               coordX+= spunTouch[0]*wrapMovementBoost;
 
                                               coordY+= spunTouch[1]*wrapMovementBoost;
@@ -4336,7 +4336,7 @@ if(uniforms.coords.value.y<-.5)
 
          
      //  const wingsOfRighteousness=4.250874236524140987789605055037000007000707000039000005;
-        const wingsOfRighteousness=4.2508742365242192;
+        const wingsOfRighteousness=4.2508742365242194;
 
 
 
