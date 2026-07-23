@@ -6123,7 +6123,7 @@ float inImplosion = 1.;
    if(dstnce/shrink<1.)
    {
     s/=shrink;
-    inImplosion=1.06125;
+    inImplosion=1.25;
    }
 }
 dstnce=length(s);
@@ -6132,15 +6132,15 @@ if(explodo)
 {
     vec2 sBypass = s;
     vec2 sBufferBypass = sBuffer;
-    float flight = 1.5;
-    float inImplosionSquared =inImplosion;
+  //  float flight = 1.5;
+   // float inImplosionSquared =inImplosion;
 
     bool breaker = false;
     for(int v = 0;v<4;v++)
     {
     float ExplodingProgression = (hyperCoreBoosted - floor(hyperCoreBoosted));
     if(cloverSlide2!=0
-    &&v==0
+   // &&v==0
     )ExplodingProgression=sqrt(ExplodingProgression);
     
         float petalIsolated =(mod((atan(sBufferBypass.y,sBufferBypass.x)*divideByMultiplyingPi+2.)*3.-.5,1.)-.5);
@@ -6166,10 +6166,11 @@ if(explodo)
            }
             
 
-      // if(v==0)
+       if(v==0)
         {
             spunCloverBurst*=inImplosion;
-    ExplodingProgression*=inImplosionSquared;
+    ExplodingProgression*=inImplosion;
+   // inImplosion*=inImplosion;
    // inImplosionSquared*=inImplosionSquared;
         }
    
