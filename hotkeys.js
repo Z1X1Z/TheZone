@@ -278,8 +278,12 @@ let runningHash = true;
 window.settingsSet = false
 
 
+window.rez=1.;
 
-
+                                             if (   window.iOS )window.rez=window.devicePixelRatio/4.;
+                                               else if(window.android)window.rez=window.devicePixelRatio/4.;
+                                               else   window.rez=window.devicePixelRatio/2.;
+                                                   
 
 
 
@@ -443,10 +447,6 @@ for(var nameOfUniform in uniformsInitial)
                                          for(var b = 0; b<cloverConstellation.length; b++)cloverConstellation[b]=new THREE.Vector2(0.,0.);
 
                                          
-                                             if (   window.iOS )window.rez=window.devicePixelRatio/4.;
-                                               else if(window.android)window.rez=window.devicePixelRatio/4.;
-                                               else   window.rez=window.devicePixelRatio/2.;
-                                                   
     if(window.INITIALIZED){
                 setVectors();
         setFFTdependantSizes();
@@ -1366,19 +1366,28 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
      {rez = window.devicePixelRatio/10.; renderer.setPixelRatio( rez);}
      */
     else if (key=="+"){
-        if(number!="no number")
+        if(number=="no number")
             {
                 rez /=1.1; 
                 if(window.INITIALIZED) renderer.setPixelRatio( rez);
             }
-        else if(window.INITIALIZED) renderer.setPixelRatio( number);
+        else
+            {
+                window.rez=window.devicePixelRatio/number;
+                 if(window.INITIALIZED) renderer.setPixelRatio( rez);
+            }
     }
     else if (key=="_")
     {
-        if(number!="no number")
+        if(number=="no number")
             {
                 rez *=1.1; 
                 if(window.INITIALIZED) renderer.setPixelRatio( rez);
+            }
+            else
+            {
+                window.rez=window.devicePixelRatio/number;
+                 if(window.INITIALIZED) renderer.setPixelRatio( rez);
             }
         }
     
