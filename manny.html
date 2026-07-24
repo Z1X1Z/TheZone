@@ -5770,9 +5770,9 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
 
 
     if(spinTowardsMe) if(0.>=hyperCoreBoosted-.5)s=spin2(s,atan(d.y,d.x));
-
-  if(metaCarousel!=0.
-     &&0.>=hyperCoreBoosted-.5){   //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
+ if(metaCarousel!=0.
+     &&(0.>=hyperCoreBoosted-1.))  
+     {   //this clause establishes that the loop only be run on the last iterational loops, showing some sort of terminal core number as hyperCore-loops-counter maybe
       
       
       
@@ -5787,7 +5787,6 @@ if((dstnce<CORE_DELIMITER//||(superStable&&((counter==0.&&dstnce<1.)||dstnce<two
         
 
         }
-     
    // if(distributor)s=spin2(s,distributorFACTOR);
    vec2 angleSs = s;
    if (swap==1)angleSs*=-1.;
@@ -6318,6 +6317,8 @@ if(explodo)
     }
     
 }*/
+ 
+     
 }
 else break;
 if(BORE&&dstnce<twoThirds&&cored>1.)s = spin2(s,hyperCoreBoosted*(mod(counter,1.)-.5)*2.);
