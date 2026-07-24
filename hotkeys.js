@@ -111,7 +111,7 @@ starInShader:{value:true},
 clvrVariant8:{value: false},
 clvrVariant9:{value: false},
 clvrVariant0:{value: false},
-explodo:{value: true    },
+explodo:{value: 1    },
 BORE:{value: false    },
 
 twelveGates:{value: false    },
@@ -131,7 +131,7 @@ pongIntercept:{value:-1000},
         continuumClover:{value: 1    },
         Inherited:{value: true    },
         cloverSlide:{value: false    },
-        cloverSlide2:{value: 1    },
+        cloverSlide2:{value: 0    },
         Pointers:{value:true},
         time: {value:1. },
         rate: {value: 1.},
@@ -962,7 +962,7 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                                       else if(key == "W" && event.ctrlKey)uniforms.seventhOUTside.value=!uniforms.seventhOUTside.value;
 
                   else if(key == "X" && event.ctrlKey)
-                    uniforms.explodo.value=!uniforms.explodo.value;
+                    uniforms.explodo.value=(uniforms.explodo.value+1)%3;
                   else if(key == "Q" && event.ctrlKey)
                     uniforms.BORE.value=!uniforms.BORE.value;
                   else if(key == "F" && event.ctrlKey)

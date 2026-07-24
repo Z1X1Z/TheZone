@@ -944,12 +944,17 @@ uniforms.cloverOffset.value=document.getElementById('CloverTwist').value/6.">
 uniforms.petals.value=document.getElementById('petalCount').value-6.">
 
                           
-              <a id="Chirality" name="t"  onclick= "
+              <a id="slide2" name="t"  onclick= "
                   key  = 'H';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                   Clovers Slide?![H]</a><br>
               
                     
+              <a id="explode" name="t"  onclick= "
+                  key  = 'XH';
+                    callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                  Piñata?![,X]</a><br>
+              
           <!--       <input type="checkbox" id="omniCore" name="t"  onclick= "
               key  = 'o';
               callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
@@ -962,10 +967,6 @@ uniforms.petals.value=document.getElementById('petalCount').value-6.">
                     callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
                  <label for="dynamicCoring">Dynamic Coring[,c]</label><br>
                  -->
-                       <input type="checkbox" id="explode" name="t"  onclick= "
-                    key  = 'X';
-                    callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
-             <label for="explode">Piñata?![,X]</label><br>
                        <input type="checkbox" id="Center" name="t"  onclick= "
                     key  = 'c';
                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -2181,7 +2182,7 @@ void main(){
     uniform bool sevenSquared;
     uniform float largeEyeColor;
     uniform float cloverOffset;
-        uniform bool explodo;
+        uniform int explodo;
         uniform bool BORE;
 
     uniform bool Pointers;
@@ -6150,7 +6151,7 @@ bool inImplosion = false;
    
 dstnce=length(s);
 }
-if(explodo)
+if(explodo>0)
 {
     vec2 sBypass = s;
     vec2 sBufferBypass = sBuffer;
@@ -6190,7 +6191,7 @@ if(explodo)
 }
            }
             
-if(vmax>1)
+if(explodo>1)
        if(v==0)
         {
             spunCloverBurst*=inImplosionSquared;
@@ -6245,6 +6246,7 @@ if(vmax>1)
         if(lengthPlucked<twoThirds)   breaker = true;
 
     }
+    if(explodo==1)break;
     
 }
 //else s*=2.;
