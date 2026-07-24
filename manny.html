@@ -6118,7 +6118,7 @@ bool inImplosion = false;
    else 
     if(cloverSlide2==1)
     {
-        shrink=sqrt(1.-sqrt(mod(hyperCoreBoosted,1.)));//1.-(1.-log(3.))/2.
+        shrink=sqrt(1.-sqrt(mod(hyperCoreBoosted,1.)));
     }
    if(dstnce/shrink<
    //.5
@@ -6142,7 +6142,7 @@ if(explodo)
    float inImplosionSquared =1.125;
 
     bool breaker = false;
-    const int vmax = 4;
+    const int vmax = 2;
     for(int v = 0;v<vmax;v++)
     {
     float ExplodingProgression = (hyperCoreBoosted - floor(hyperCoreBoosted));
