@@ -3888,7 +3888,7 @@ extrArms+=h.x;
                     return vec3(r);
                     }
                     vec3 legs(vec2 g, vec2 t){
-                        g.x-=lerp(log(zoom)/log(2.)*2.+sign(g.y)/2.+abs(g.y)
+                      if(armsSpinning!=0) g.x-=lerp(log(zoom)/log(2.)*2.+sign(g.y)/2.+abs(g.y)
                         )/2.;
                     float b=0.;
                     g/=2.;
@@ -7553,7 +7553,7 @@ vec2 dance = vec2(0.);
 if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                  else if(Character==1){
                        
-                       vec2 lerper = vec2(lerp(time2dance));//,lerp(time2dance));
+                       vec2 lerper = vec2(lerp(log(zoom)/log(2.)*2.));//,lerp(time2dance));
                        
                         elbowed = -lerper.y*lerper.y+(-1.+lerper.y*lerper.y)*abs(characterOnTrailP.y*characterOnTrailP.y)*twoThirds;
                        if (elbowed<-1.)elbowed=-1.;
