@@ -3741,7 +3741,6 @@ z.x=sqrt(abs(z.x));
                 return vec2 (b,arm);
 }
                     vec4 torso(vec2 g, vec2 t,bool spinning){
-                      
                                               if(armsSpinning==0)spinning=false;
                                               
                                               g.x*=-1.;
@@ -3749,9 +3748,9 @@ z.x=sqrt(abs(z.x));
                     float b = 0.;
                     vec2  z=g.xy;
                     float arm =0.;
-                                  float  armSlice = abs(g.y)*pow(abs(g.x),4./3.);
+                                  float  armSlice = abs(g.y)*pow(abs(g.x),1.25);
 
-                    if((armSlice<1./elbowJoint||!spinning)&&g.x<0.)
+                    if((armSlice<elbowJoint/2.||!spinning)&&g.x<0.)
 
                     {
                     if(g.x*g.x+g.y*g.y<40.)
@@ -8691,10 +8690,12 @@ fin/vec4(confraculator
        
 
                    }
-                   
+                        //                             if(layeredOUT.r!=zoomer.r&&layeredOUT.g!=zoomer.g&&layeredOUT.b!=zoomer.b&&mannyFace.w!=.75&&mannyFace.w!=-.25&&mannyFace.w!=.5&&starship.w==0.&&StaRivers.w==0.&&bodyWithArms.w==.0)    layeredOUT=vec4(layeredOUT.xyz*2./3.+zoomer/3.,1.);
+
            if(movieTime<=5.&&movieTime>=0.)layeredOUT=vec4(movie(characterP),1.);
                           else if(movieTime==-2.)layeredOUT=vec4(0.);
                    if(negative==1||negative==2)layeredOUT=1.-layeredOUT;
+
                         gl_FragColor=vec4(layeredOUT.xyz,1.);//vec4(movie(characterP),1.);//
  //gl_FragColor=vec4(vec3(length(engine(p))),1.);
                         //things known to cause bugs on some android chrome: heart (divides by zero), linear eq,waveform, "144000" men and women in clover, articles
