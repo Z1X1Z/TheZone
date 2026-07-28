@@ -4327,18 +4327,17 @@ if(uniforms.coords.value.y<-.5)
                                                      }
                                                        
                                                        
-       var frameRation =1030*(-leafPermanent*grPermanent*(2**.5) -1)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
+       var frameRation =1028*(-leafPermanent*grPermanent*(2**.5) -1)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
                  //            frameRation=1024;
      // console.log(frameRation)        
-                                                       
-         var fractionOfFrame =1030;//seems to hear all around better than 1024 
+         var fractionOfFrame =1024;
       //  fractionOfFrame=(frameRation);
          const yinData = new Float64Array(Math.ceil(fractionOfFrame));
 
          
      //  const wingsOfRighteousness=4.250874236524140987789605055037000007000707000039000005;
         const wingsOfRighteousness=4.2508742365242194;
-
+        
 
 
      //   console.log(wingsOfRighteousness)
@@ -4347,18 +4346,20 @@ if(uniforms.coords.value.y<-.5)
 function calculatePitch ()
 {
 
+     let   frameRationFull;
 
 if(!window.irrationalFraction)  // caused freezing at f# with totalAMP**tolerance//bug not replicated when nudge truncated
 
 {
-    if(iOS)
     fractionOfFrame=1024;
-    else 
-    fractionOfFrame=1030;
+    frameRationFull = fractionOfFrame;
 
 }
-else fractionOfFrame = (frameRation);
-const yinData = new Float64Array(Math.ceil(fractionOfFrame));
+else {
+    fractionOfFrame = Math.floor(frameRation);
+    frameRationFull=frameRation
+}
+const yinData = new Float64Array(fractionOfFrame);
 
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance=0;//(1024-26)/10000
@@ -4621,7 +4622,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
 
                       //            let toleranceNudge =(((-leafPermanent+grPermanent+2**.5-4.25))*totalAMP)/fractionOfFrame// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                       //  toleranceNudge*=(2.)/(grPermanent-leafPermanent+1);
-                                                          let toleranceNudge =2./fractionOfFrame*(((-leafPermanent+grPermanent+2**.5-wingsOfRighteousness)))*totalAMP/(grPermanent-leafPermanent+1)// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
+                                                          let toleranceNudge =2./frameRationFull*(((-leafPermanent+grPermanent+2**.5-wingsOfRighteousness)))*totalAMP/(grPermanent-leafPermanent+1)// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                            // console.log(toleranceNudge/toleranceNudge2)
                         //console.log(toleranceNudge)
                         //toleranceNudge=(toleranceNudge/trunc)*trunc
