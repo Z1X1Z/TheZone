@@ -4366,7 +4366,7 @@ let tolerance=0;//(1024-26)/10000
 
 
 
-                                              false           if(window.highORlow==0||window.highORlow==3){
+                                                         if(window.highORlow==0||window.highORlow==3){
                                                              if(totalAMP>0&&isFinite(totalAMP)
                                                                 &&totalAMP<=.7// when I get loud it seems to freeze
                                                              )
