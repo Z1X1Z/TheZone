@@ -4647,7 +4647,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                tolerance=(tolerance/trunc)*trunc//just this one works nicely
 
                     var tolFixed=(tolerance)**(3.5-tolerance+totalAMP);
-                    if(!iOs)  
+                    if(!iOS)  
 {
                                                                     if(isFinite(tolFixed)&&tolFixed>0&&tolFixed<1)for(var m=0;m<tolFixed;m+=totalAMP) 
                     {tolerance=tolerance**(tolerance+.5+totalAMP);
