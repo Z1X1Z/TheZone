@@ -4647,7 +4647,8 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                tolerance=(tolerance/trunc)*trunc//just this one works nicely
 
                     var tolFixed=(tolerance)**(3.5-tolerance+totalAMP);
-
+                    if(!iOs)  
+{
                                                                     if(isFinite(tolFixed)&&tolFixed>0&&tolFixed<1)for(var m=0;m<tolFixed;m+=totalAMP) 
                     {tolerance=tolerance**(tolerance+.5+totalAMP);
                     }
@@ -4658,6 +4659,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                       tolerance*=
                                     ((((-leafPermanent/trunc)*trunc)*((grPermanent/trunc)*trunc)))**(totalAMP)*(((1+totalAMP)/trunc)*trunc);//not completely exhaustively checked, but works well for singing words
                           tolerance=(tolerance/trunc)*trunc
+                }
                          //  if(window.highORlow!=3.)
                                  if(tolerance!=0.&&totalAMP!=0.) 
 
@@ -4668,7 +4670,6 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                           var c = 0;
                         //   var tolTot = tolerance/totalAMP*7;//coefficients effective but not exhaustive
                        //   var totTol =totalAMP/tolerance*3;//coefficient effective but not exhaustive
-                      
                        if(isFinite(tolerance)&&tolerance<1&&tolerance>0.)
 
                        for(var d = 0; d<7-totalAMP; d+=tolerance)
