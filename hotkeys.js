@@ -331,7 +331,7 @@ for(var nameOfUniform in uniformsInitial)
         window.soundPermanentlyMuted=false;
     window.playQuietestSound = false;
     window.guitarMODE=false;
-    window.irrationalFraction = true;
+    window.irrationalFraction = false;
     window.extremeFrets=true;
     window.orderedStack=true;
     window.clvrVariant4Type=1.;
