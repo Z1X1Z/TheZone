@@ -4332,8 +4332,11 @@ if(uniforms.coords.value.y<-.5)
  */
                                                      }
                                                        
-       const frameBoosted = 1028              
-       var frameRation =frameBoosted*(-leafPermanent*grPermanent*(2**.5) -1)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
+       const frameBoosted = 1028 
+               const wingsOfRighteousness=4.2508742365242194;
+             
+       var frameRation =wingsOfRighteousness-4.+
+       1024*(-leafPermanent*grPermanent*(2**.5)-2.)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
                  //            frameRation=1024;
      // console.log(frameRation)        
          var fractionOfFrame =frameBoosted;
@@ -4342,7 +4345,6 @@ if(uniforms.coords.value.y<-.5)
 
          
      //  const wingsOfRighteousness=4.250874236524140987789605055037000007000707000039000005;
-        const wingsOfRighteousness=4.2508742365242194;
         
 
 
