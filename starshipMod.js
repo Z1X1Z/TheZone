@@ -4327,12 +4327,12 @@ if(uniforms.coords.value.y<-.5)
                                                      }
                                                        
                                                        
-       var frameRation =1028*(-leafPermanent*grPermanent*(2**.5) -1)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
+       var frameRation =1026*(-leafPermanent*grPermanent*(2**.5) -1)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
                  //            frameRation=1024;
      // console.log(frameRation)        
                                                        
          var fractionOfFrame =1030;//seems to hear all around better than 1024 
-         fractionOfFrame=frameRation;
+       // fractionOfFrame=Math.ceil(frameRation);
          const yinData = new Float64Array(fractionOfFrame);
 
          
