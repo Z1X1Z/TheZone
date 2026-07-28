@@ -4332,7 +4332,7 @@ if(uniforms.coords.value.y<-.5)
      // console.log(frameRation)        
          var fractionOfFrame =1032;
       //  fractionOfFrame=(frameRation);
-         const yinData = new Float64Array(fractionOfFrame);
+         //const yinData = new Float64Array(fractionOfFrame);
 
          
      //  const wingsOfRighteousness=4.250874236524140987789605055037000007000707000039000005;
@@ -4346,7 +4346,7 @@ if(uniforms.coords.value.y<-.5)
 function calculatePitch ()
 {
 
-     let   frameRationFull=1032;
+     let   frameRationFull=2048;
 
 if(!window.irrationalFraction)  // caused freezing at f# with totalAMP**tolerance//bug not replicated when nudge truncated
 
