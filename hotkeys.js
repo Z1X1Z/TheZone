@@ -331,6 +331,7 @@ for(var nameOfUniform in uniformsInitial)
         window.soundPermanentlyMuted=false;
     window.playQuietestSound = false;
     window.guitarMODE=false;
+    window.irrationalFraction = true;
     window.extremeFrets=true;
     window.orderedStack=true;
     window.clvrVariant4Type=1.;
@@ -772,6 +773,8 @@ source.connect(analyser);
                     
                 }
 
+                else if(key == "F"&& event.altKey&&event.ctrlKey)window.irrationalFraction=!window.irrationalFraction;
+                    
                                           else  if((key == "U") && event.altKey&&event.ctrlKey)uniforms.ringSpring.value=!uniforms.ringSpring.value;
                                           else  if((key == "T") && event.altKey&&event.ctrlKey)uniforms.Black.value=!uniforms.Black.value;
                                           else  if((key == "N") && event.altKey&&event.ctrlKey)
@@ -923,6 +926,7 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                         
                         uniforms.leaf.value=leaf;
                     }                }
+
                 else if((key == "x"||key==
                                          "≈")&& event.altKey&&event.ctrlKey)
                 {
@@ -1079,7 +1083,7 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
 
 
     else if (event.altKey&&(key=="∑"||key=="w"))window.DAW=!window.DAW;
-    else if (event.altKey&&(key=="´"||key=="e"))(window.highORlow=window.highORlow+1)%4;
+    else if (event.altKey&&(key=="´"||key=="e"))(window.highORlow=window.highORlow+1)%3;
 
     else if (event.altKey&&(key=="¥"||key=="y"))
     {

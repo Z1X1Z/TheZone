@@ -4327,13 +4327,13 @@ if(uniforms.coords.value.y<-.5)
                                                      }
                                                        
                                                        
-       var frameRation =1026*(-leafPermanent*grPermanent*(2**.5) -1)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
+       var frameRation =1030*(-leafPermanent*grPermanent*(2**.5) -1)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
                  //            frameRation=1024;
      // console.log(frameRation)        
                                                        
          var fractionOfFrame =1030;//seems to hear all around better than 1024 
-       // fractionOfFrame=Math.ceil(frameRation);
-         const yinData = new Float64Array(fractionOfFrame);
+      //  fractionOfFrame=(frameRation);
+         const yinData = new Float64Array(Math.ceil(fractionOfFrame));
 
          
      //  const wingsOfRighteousness=4.250874236524140987789605055037000007000707000039000005;
@@ -4347,13 +4347,12 @@ if(uniforms.coords.value.y<-.5)
 function calculatePitch ()
 {
 
-    /*
 
 fractionOfFrame = (frameRation);
-if(highORlow!=0|| window.iOS )  // caused freezing at f# with totalAMP**tolerance//bug not replicated when nudge truncated
-fractionOfFrame=1024;
-const yinData = new Float64Array(fractionOfFrame);
-*/
+if(!window.irrationalFraction)  // caused freezing at f# with totalAMP**tolerance//bug not replicated when nudge truncated
+fractionOfFrame=1030;
+const yinData = new Float64Array(Math.ceil(fractionOfFrame));
+
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
 let tolerance=0;//(1024-26)/10000
 
@@ -4645,7 +4644,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                       tolerance*=
                                     ((((-leafPermanent/trunc)*trunc)*((grPermanent/trunc)*trunc)))**(totalAMP)*(((1+totalAMP)/trunc)*trunc);//not completely exhaustively checked, but works well for singing words
                           tolerance=(tolerance/trunc)*trunc
-                           if(window.highORlow!=3.)
+                         //  if(window.highORlow!=3.)
                                  if(tolerance!=0.&&totalAMP!=0.) 
 
 {

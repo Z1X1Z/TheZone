@@ -736,9 +736,15 @@ radialWarp=b;
            <label for="Low Tolerance">Constant Zero!</label><br>
                <input type="radio" id="High Tolerance" name="tolerance" onclick="window.highORlow = 2">
                <label for="High Tolerance">Constant Irrational!</label><br>
-       <input type="radio" id="Resistant Tolerance" name="tolerance" onclick="window.highORlow =3;">
+       <!--<input type="radio" id="Resistant Tolerance" name="tolerance" onclick="window.highORlow =3;">
        <label for="Resistant Tolerance">Dynamic Resistant!</label><br>
-           
+                        -->
+
+               <input type="checkbox"  id="irrationalFraction" name="t"  onclick= "
+            
+                       key  = 'F';
+                       callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                   <label for="irrationalFraction"> Irrational Frame![,.F]</label><br>
            
                <a id="Faster" name="t"  onclick= "
                    key  = '=';
