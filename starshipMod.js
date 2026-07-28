@@ -4637,8 +4637,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                         nyquistFilter = false;//turn off to debug nyquists
                   tolerance+=toleranceNudge;
          // tolerance=(tolerance/trunc)*trunc
-                    if(!iOS)  
-{
+               
      
             tolerance=tolerance**((2**.5/trunc)*trunc)**(tolerance);
 
@@ -4655,7 +4654,8 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
 
 
                          // tolerance=(tolerance/trunc)*trunc
-
+     if(!iOS)  
+{
                                       tolerance*=
                                     ((((-leafPermanent/trunc)*trunc)*((grPermanent/trunc)*trunc)))**(totalAMP)*(((1+totalAMP)/trunc)*trunc);//not completely exhaustively checked, but works well for singing words
                           tolerance=(tolerance/trunc)*trunc
