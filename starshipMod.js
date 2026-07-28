@@ -2553,15 +2553,16 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                     ampThresh=0;
 
                                                                         
-                                    for(var n=0; n<inputData.length-1;n++)
+                                    for(var n=0; n<fractionOfFrame;n++)
                                         totalAMP+=-Math.abs(inputData[n])
                                         +(Math.abs(inputData[n])**.5)*Math.sign(inputData[n])
                                         -(Math.abs(inputData[n+1])**2)*Math.sign(inputData[n+1]);
-                                    totalAMP+=-Math.abs(inputData[inputData.length-1])
+                                   /* totalAMP+=-Math.abs(inputData[inputData.length-1])
                                     +(Math.abs(inputData[inputData.length-1])**.5)*Math.sign(inputData[inputData.length-1])
                                     -(Math.abs(inputData[0])**2)*Math.sign(inputData[0]); 
+                                    */
                                     totalAMP=Math.abs(totalAMP);
-                                    totalAMP/=inputData.length;
+                                    totalAMP/=fractionOfFrame;
                                   //  ampThresh=totalAMP;
                                   for(var n=0; n<inputData.length;n++)ampThresh+=Math.abs(inputData[n]);
                                     ampThresh/=inputData.length;
@@ -4327,10 +4328,10 @@ if(uniforms.coords.value.y<-.5)
                                                      }
                                                        
                                                        
-       var frameRation =1028*(-leafPermanent*grPermanent*(2**.5) -1)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
+       var frameRation =1030*(-leafPermanent*grPermanent*(2**.5) -1)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
                  //            frameRation=1024;
      // console.log(frameRation)        
-         var fractionOfFrame =1032;
+         var fractionOfFrame =1024;
       //  fractionOfFrame=(frameRation);
          //const yinData = new Float64Array(fractionOfFrame);
 
@@ -4346,12 +4347,12 @@ if(uniforms.coords.value.y<-.5)
 function calculatePitch ()
 {
 
-     let   frameRationFull=2048;
+     let   frameRationFull;
 
 if(!window.irrationalFraction)  // caused freezing at f# with totalAMP**tolerance//bug not replicated when nudge truncated
 
 {
-    fractionOfFrame=1032;
+    fractionOfFrame=1024;
     frameRationFull = fractionOfFrame;
 
 }
