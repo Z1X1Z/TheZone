@@ -4332,11 +4332,11 @@ if(uniforms.coords.value.y<-.5)
  */
                                                      }
                                                        
-                                                       
-       var frameRation =1026*(-leafPermanent*grPermanent*(2**.5) -1)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
+       const frameBoosted = 1028              
+       var frameRation =frameBoosted*(-leafPermanent*grPermanent*(2**.5) -1)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
                  //            frameRation=1024;
      // console.log(frameRation)        
-         var fractionOfFrame =1026;
+         var fractionOfFrame =frameBoosted;
       //  fractionOfFrame=(frameRation);
          //const yinData = new Float64Array(fractionOfFrame);
 
@@ -4357,7 +4357,7 @@ function calculatePitch ()
 if(!window.irrationalFraction)  // caused freezing at f# with totalAMP**tolerance//bug not replicated when nudge truncated
 
 {
-   if(!iOS) fractionOfFrame=1026;
+   if(!iOS) fractionOfFrame=frameBoosted;
    else fractionOfFrame=1024;
     frameRationFull = fractionOfFrame;
 
