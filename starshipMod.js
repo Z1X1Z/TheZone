@@ -4668,7 +4668,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                           var c = 0;
                         //   var tolTot = tolerance/totalAMP*7;//coefficients effective but not exhaustive
                        //   var totTol =totalAMP/tolerance*3;//coefficient effective but not exhaustive
-                    if(!iOS)  
+                      
                        if(isFinite(tolerance)&&tolerance<1&&tolerance>0.)
 
                        for(var d = 0; d<7-totalAMP; d+=tolerance)
