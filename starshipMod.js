@@ -4348,9 +4348,16 @@ function calculatePitch ()
 {
 
 
-fractionOfFrame = (frameRation);
 if(!window.irrationalFraction)  // caused freezing at f# with totalAMP**tolerance//bug not replicated when nudge truncated
-fractionOfFrame=1030;
+
+{
+    if(iOS)
+    fractionOfFrame=1024;
+    else 
+    fractionOfFrame=1030;
+
+}
+else fractionOfFrame = (frameRation);
 const yinData = new Float64Array(Math.ceil(fractionOfFrame));
 
                        // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
@@ -4359,7 +4366,7 @@ let tolerance=0;//(1024-26)/10000
 
 
 
-                                                         if(window.highORlow==0||window.highORlow==3){
+                                              false           if(window.highORlow==0||window.highORlow==3){
                                                              if(totalAMP>0&&isFinite(totalAMP)
                                                                 &&totalAMP<=.7// when I get loud it seems to freeze
                                                              )
