@@ -4332,7 +4332,7 @@ if(uniforms.coords.value.y<-.5)
  */
                                                      }
                                                        
-       const frameBoosted = 1028
+       const frameBoosted = 1024
                const wingsOfRighteousness=4.2508742365242194;
              
        var frameRation =(wingsOfRighteousness+
