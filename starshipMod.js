@@ -4635,7 +4635,8 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                   //toleranceNudge+=(totalAMP)**(.5)**(totalAMP)**(1./totalAMP)**(totalAMP);
                         //last line working on nyquist filtering, added
                         nyquistFilter = false;//turn off to debug nyquists
-                                                                              if(!iOS)  
+                                                                              if(!iOS) 
+                                                                                {
 tolerance+=toleranceNudge;
          // tolerance=(tolerance/trunc)*trunc
                
@@ -4650,7 +4651,6 @@ tolerance+=toleranceNudge;
 
                     var tolFixed=(tolerance)**(3.5-tolerance+totalAMP);
                                                             if(!iOS)  
-    if(isFinite(tolFixed)&&tolFixed>0&&tolFixed<1)for(var m=0;m<tolFixed;m+=totalAMP) 
                     {tolerance=tolerance**(tolerance+.5+totalAMP);
                     }
 
@@ -4660,7 +4660,7 @@ tolerance+=toleranceNudge;
                                       tolerance*=
                                     ((((-leafPermanent/trunc)*trunc)*((grPermanent/trunc)*trunc)))**(totalAMP)*(((1+totalAMP)/trunc)*trunc);//not completely exhaustively checked, but works well for singing words
                           tolerance=(tolerance/trunc)*trunc
-                
+                                                                                }
                          //  if(window.highORlow!=3.)
                                  if(tolerance!=0.&&totalAMP!=0.) 
 
