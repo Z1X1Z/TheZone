@@ -4635,7 +4635,8 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                   //toleranceNudge+=(totalAMP)**(.5)**(totalAMP)**(1./totalAMP)**(totalAMP);
                         //last line working on nyquist filtering, added
                         nyquistFilter = false;//turn off to debug nyquists
-                  tolerance+=toleranceNudge;
+                                                                              if(!iOS)  
+tolerance+=toleranceNudge;
          // tolerance=(tolerance/trunc)*trunc
                
      
