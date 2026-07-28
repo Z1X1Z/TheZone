@@ -2558,7 +2558,7 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                         +(Math.abs(inputData[n])**.5)*Math.sign(inputData[n])
                                         -(Math.abs(inputData[n+1])**2)*Math.sign(inputData[n+1]);
                                                                         */
-                                    for(var n=0; n<inputData.length/2.;n++)
+                                    for(var n=0; n<fractionOfFrame;n++)
                                         totalAMP+=-Math.abs(inputData[n])
                                         +(Math.abs(inputData[n])**.5)*Math.sign(inputData[n])
                                         -(Math.abs(inputData[n])**2)*Math.sign(inputData[n]);
@@ -2567,7 +2567,7 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                     -(Math.abs(inputData[0])**2)*Math.sign(inputData[0]); 
                                     */
                                     totalAMP=Math.abs(totalAMP);
-                                    totalAMP/=inputData.length/2.;
+                                    totalAMP/=fractionOfFrame;
                                   //  ampThresh=totalAMP;
                                   for(var n=0; n<inputData.length;n++)ampThresh+=Math.abs(inputData[n]);
                                     ampThresh/=inputData.length;
@@ -4357,7 +4357,7 @@ function calculatePitch ()
 if(!window.irrationalFraction)  // caused freezing at f# with totalAMP**tolerance//bug not replicated when nudge truncated
 
 {
-   if(!iOS) fractionOfFrame=1030;
+   if(!iOS) fractionOfFrame=1026;
    else fractionOfFrame=1024;
     frameRationFull = fractionOfFrame;
 
