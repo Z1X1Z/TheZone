@@ -4637,7 +4637,9 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                         nyquistFilter = false;//turn off to debug nyquists
                   tolerance+=toleranceNudge;
          // tolerance=(tolerance/trunc)*trunc
-
+                    if(!iOS)  
+{
+     
             tolerance=tolerance**((2**.5/trunc)*trunc)**(tolerance);
 
          //   tolerance=(tolerance/trunc)*trunc
@@ -4647,9 +4649,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                tolerance=(tolerance/trunc)*trunc//just this one works nicely
 
                     var tolFixed=(tolerance)**(3.5-tolerance+totalAMP);
-                    if(!iOS)  
-{
-                                                                    if(isFinite(tolFixed)&&tolFixed>0&&tolFixed<1)for(var m=0;m<tolFixed;m+=totalAMP) 
+                                                               if(isFinite(tolFixed)&&tolFixed>0&&tolFixed<1)for(var m=0;m<tolFixed;m+=totalAMP) 
                     {tolerance=tolerance**(tolerance+.5+totalAMP);
                     }
 
