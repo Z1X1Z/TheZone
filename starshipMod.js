@@ -4635,12 +4635,9 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                   //toleranceNudge+=(totalAMP)**(.5)**(totalAMP)**(1./totalAMP)**(totalAMP);
                         //last line working on nyquist filtering, added
                         nyquistFilter = false;//turn off to debug nyquists
-                                                                              if(!iOS) 
-                                                                                {
-tolerance+=toleranceNudge;
+                  tolerance+=toleranceNudge;
          // tolerance=(tolerance/trunc)*trunc
-               
-     
+
             tolerance=tolerance**((2**.5/trunc)*trunc)**(tolerance);
 
          //   tolerance=(tolerance/trunc)*trunc
@@ -4650,17 +4647,17 @@ tolerance+=toleranceNudge;
                                tolerance=(tolerance/trunc)*trunc//just this one works nicely
 
                     var tolFixed=(tolerance)**(3.5-tolerance+totalAMP);
-                                                            if(!iOS)  
+
+                                                                    if(isFinite(tolFixed)&&tolFixed>0&&tolFixed<1)for(var m=0;m<tolFixed;m+=totalAMP) 
                     {tolerance=tolerance**(tolerance+.5+totalAMP);
                     }
 
 
                          // tolerance=(tolerance/trunc)*trunc
-  
+
                                       tolerance*=
                                     ((((-leafPermanent/trunc)*trunc)*((grPermanent/trunc)*trunc)))**(totalAMP)*(((1+totalAMP)/trunc)*trunc);//not completely exhaustively checked, but works well for singing words
                           tolerance=(tolerance/trunc)*trunc
-                                                                                }
                          //  if(window.highORlow!=3.)
                                  if(tolerance!=0.&&totalAMP!=0.) 
 
@@ -4671,7 +4668,7 @@ tolerance+=toleranceNudge;
                           var c = 0;
                         //   var tolTot = tolerance/totalAMP*7;//coefficients effective but not exhaustive
                        //   var totTol =totalAMP/tolerance*3;//coefficient effective but not exhaustive
-                       if(isFinite(tolerance)&&tolerance<1&&tolerance>0.)
+                                                                          if(isFinite(tolerance)&&tolerance<1&&tolerance>0.)
 
                        for(var d = 0; d<7-totalAMP; d+=tolerance)
                            // for(var d = 0; d<tolTot; d+=totTol)
