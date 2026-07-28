@@ -4330,9 +4330,9 @@ if(uniforms.coords.value.y<-.5)
        var frameRation =1028*(-leafPermanent*grPermanent*(2**.5) -1)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
                  //            frameRation=1024;
      // console.log(frameRation)        
-         var fractionOfFrame =1024;
+         var fractionOfFrame =1032;
       //  fractionOfFrame=(frameRation);
-         const yinData = new Float64Array(Math.ceil(fractionOfFrame));
+         const yinData = new Float64Array(fractionOfFrame);
 
          
      //  const wingsOfRighteousness=4.250874236524140987789605055037000007000707000039000005;
@@ -4346,17 +4346,17 @@ if(uniforms.coords.value.y<-.5)
 function calculatePitch ()
 {
 
-     let   frameRationFull;
+     let   frameRationFull=1032;
 
 if(!window.irrationalFraction)  // caused freezing at f# with totalAMP**tolerance//bug not replicated when nudge truncated
 
 {
-    fractionOfFrame=1024;
+    fractionOfFrame=1032;
     frameRationFull = fractionOfFrame;
 
 }
 else {
-    fractionOfFrame = Math.floor(frameRation);
+    fractionOfFrame = Math.ceil(frameRation);
     frameRationFull=frameRation
 }
 const yinData = new Float64Array(fractionOfFrame);
@@ -4372,7 +4372,7 @@ let tolerance=0;//(1024-26)/10000
                                                                 &&totalAMP<=.7// when I get loud it seems to freeze
                                                              )
                                                              {
-                                                                 let proportion= fractionOfFrame/bufferSize;
+                                                                 let proportion= frameRationFull/bufferSize;
                                                                  let tAScaled=0.;//totalAMPmodified*proportion;
                                                                 // totalAMP=.25
                                                                  let totalAMPmodified =totalAMP;
