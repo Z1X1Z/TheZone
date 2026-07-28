@@ -14,6 +14,7 @@ window.dataArray = new Uint8Array(bufferSize/2);
 
 let micProcessing1 = false;//autoGainControl
 let micProcessing2 = false;//echoCancellation
+if(iOS)micProcessing2=true//iOS seems to need for hearing through background music
 let micProcessing3 = false;//noiseSuppression
   if((location.hash.includes('.,K')||location.hash.includes(',.K'))
     //!=iOS
