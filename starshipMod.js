@@ -4357,7 +4357,8 @@ function calculatePitch ()
 if(!window.irrationalFraction)  // caused freezing at f# with totalAMP**tolerance//bug not replicated when nudge truncated
 
 {
-    fractionOfFrame=1024;
+   if(!iOS) fractionOfFrame=1030;
+   else fractionOfFrame=1024;
     frameRationFull = fractionOfFrame;
 
 }
