@@ -4313,8 +4313,7 @@ for(var m=0;m<cloverConstellation.length;m++)
 }
                                                    
          uniforms.constellationCoord.value=cloverConstellation[bestFit].clone()//.multiplyScalar(2);
-                                                      
-
+                                                    28;//seems to hear all around better than 1024
                                                          
 uniforms.constellationCoord.value=new THREE.Vector2( -uniforms.coords.value.x- uniforms.constellationCoord.value.x,-nGenesisModulodY- uniforms.constellationCoord.value.y);
             //     console.log(uniforms.constellationCoord.value)                                      
@@ -4328,11 +4327,12 @@ if(uniforms.coords.value.y<-.5)
                                                      }
                                                        
                                                        
-       var frameRation =1024*(-leafPermanent*grPermanent*(2**.5) -1)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
+       var frameRation =1028*(-leafPermanent*grPermanent*(2**.5) -1)-leafPermanent-1.+grPermanent-1+2**.5-1.+(-leafPermanent-1)*(grPermanent-1.)*(2**.5);//hears low ranges better when times >1
                  //            frameRation=1024;
      // console.log(frameRation)        
                                                        
-         var fractionOfFrame =1024 
+         var fractionOfFrame =1030;//seems to hear all around better than 1024 
+         fractionOfFrame=frameRation;
          const yinData = new Float64Array(fractionOfFrame);
 
          
@@ -4346,7 +4346,9 @@ if(uniforms.coords.value.y<-.5)
 /** Full YIN algorithm */
 function calculatePitch ()
 {
-/*
+
+    /*
+
 fractionOfFrame = (frameRation);
 if(highORlow!=0|| window.iOS )  // caused freezing at f# with totalAMP**tolerance//bug not replicated when nudge truncated
 fractionOfFrame=1024;
