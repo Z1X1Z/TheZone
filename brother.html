@@ -3218,7 +3218,7 @@ float powerOfSpokeCore =spoke_factorLarge*dstnceSquaredRooted;//*lfcCenterCored/
         float       spokeloverCoreShiftUp  =   pow(abs(downSpoke),powerOfSpokeCore);//  spokedU;//spokedU;// 
      float spokeloverCoreShiftDown= pow(upSpoke,powerOfSpokeCore);//spokedD;//  
 
-if(counter+dstnceSquaredRooted <hyperCoreBoosted &&!isinf(spokeloverCoreShiftUp)
+if(counter+dstnceSquaredRooted <hyperCoreBoosted //&&!isinf(spokeloverCoreShiftUp)
  ){
      if (inMainSpoke)
          s=spin2(s,-distributorFACTORlove);
@@ -3229,7 +3229,7 @@ if(counter+dstnceSquaredRooted <hyperCoreBoosted &&!isinf(spokeloverCoreShiftUp)
 
      }
 
-else if(!isinf(spokeloverCoreShiftDown))
+else //if(!isinf(spokeloverCoreShiftDown))
 {
            daisifier+=1.;
 
