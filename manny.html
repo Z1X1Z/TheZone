@@ -6247,7 +6247,7 @@ if(explodo>1)
         sBypass=petalPlucked;//*(hyperCoreBoosted-float(i));
         sBufferBypass = petalPlucked;
         float lengthPlucked = length(petalPlucked);
-           if(lengthPlucked<twoThirds&&length(s)<twoThirds)//length(s)<twoThirds solves windows bug
+           if(lengthPlucked<twoThirds&&length(s)<4./3.)//length(s)<twoThirds solves windows bug, does <4./3.?
            {
            s=petalPlucked;
            }
