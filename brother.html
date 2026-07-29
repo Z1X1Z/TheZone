@@ -3497,7 +3497,7 @@ dstnce=length(s);
         sBypass=petalPlucked;//*(hyperCoreBoosted-float(i));
         sBufferBypass = petalPlucked;
         float lengthPlucked = length(petalPlucked);
-           if(lengthPlucked<twoThirds)
+           if(lengthPlucked<twoThirds&&length(s)<twoThirds)//length(s)<twoThirds solves windows bug
            {
            s=petalPlucked;
            }
