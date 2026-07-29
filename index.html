@@ -52,24 +52,45 @@
             </div>
             <p>
             
-            <input class="engage" type="checkbox" id="Genesis"style="color:green" name="t"  onclick= "
-             
+            <input class="engage" type="checkbox" id="Fast"style="color:green" name="t"  onchange= "
+             document.getElementById('Full').checked = false;
+            if(!document.getElementById('Fast').checked) document.getElementById('Fast').checked = true;
+             localStorage.setItem('Fast',String(document.getElementById('Fast').checked))
 
 ">
-             <label for="Genesis" style="color: greenyellow;">Biotriogenesis!</label>
-             <p>
+             <label for="Fast" style="color: greenyellow;">Fast!</label>
+
+
+
+            <input class="engage" type="checkbox" id="Full"style="color:green" name="t"  onchange= "
+             
+             document.getElementById('Fast').checked = false;
+                         if(!document.getElementById('Full').checked) document.getElementById('Full').checked = true;
+             localStorage.setItem('Fast',String(!document.getElementById('Full').checked))
+
+
+">
+             <label for="Full" style="color: greenyellow;">Full!</label>
                 <div style="color:rgba(0,0,0,0); text-shadow:none">.
 
 
-                </div><p>
              
            
             <script>
-                function loadStarshipWithHash(mee,touchHash){
+                console.log(localStorage.getItem('Fast')==null)
+           if (localStorage.getItem('Fast')==null) localStorage.setItem('Fast',String(true))
+ if (localStorage.getItem('Fast')==String(true)) document.getElementById('Fast').checked = true;
+
+ else             document.getElementById('Full').checked = true;
+
+
+                window.PageToLoad = ""
+                function loadStarshipWithHash(touchHash){
                     var hashExtension="";
-                    if(document.getElementById("Genesis").checked){
-                    hashExtension +=',.t(1).,A';
+                    if(document.getElementById("Fast").checked){
+                           window.PageToLoad = "brother.html"
                     }
+                    else    window.PageToLoad = "manny.html"
                     hashExtension+=touchHash
 
                                   var namesOfConfigs = localStorage.getItem('buttonNames').split(',')
@@ -83,13 +104,13 @@
 
                     //console.log(hashExtension)
                     //window.location.hash =hashExtension;
-                    let hrefLocal = mee+"#"+hashExtension;
+                    let hrefLocal = window.PageToLoad+"#"+hashExtension;
                     if(hashExtension!="")window.location.href=hrefLocal;
-                   else window.location.href = mee;
+                   else window.location.href = window.PageToLoad;
                     
                   //  console.log(hrefLocal+" "+document.location.href)
                 }
-              function  loadWithBypass(nm,touchHash){
+              function  loadWithBypass(touchHash){
                   let ls = localStorage.getItem('config1')
                 if(document.getElementById('engage1').checked&&ls!=null)
                 touchHash+=ls;
@@ -103,13 +124,13 @@
                 if(document.getElementById('engage4').checked&&ls!=null)
                 touchHash+=ls;
 
- loadStarshipWithHash(nm,touchHash);
+ loadStarshipWithHash(touchHash);
 }
             </script>
            
             <div id="centered">
                 <a class="onoffline2" name="manny.html" onclick="
-                                 loadWithBypass(this.name,'');
+                                 loadWithBypass('');
 ">
                     <figure>
 
@@ -149,11 +170,11 @@
 
 <h1>
    <li> <a class="onoffline2" value="" onclick="
-                                 loadWithBypass(this.name,'t,t')" name="manny.html"> Touch with star</a></li>
+                                 loadWithBypass('t,t')" name="manny.html"> Touch with star</a></li>
    <li> <a class="onoffline2"  name="manny.html" onclick=
 "
 
-                                 loadWithBypass(this.name,'t')"
+                                 loadWithBypass('t')"
       >Touch Only</a></li>
    </h1>
 <h2>
@@ -510,7 +531,7 @@ for(var m = 0; m<buttonNames.length;m++)
 <h2> May not work on all platforms indicated by a white or mostly black screen once loaded.  If so: try a different browser like Firefox or Opera.  For starship that should work, try one that's
  <a class="onoffline2"  name="manny.html" onclick=
 "
-loadStarshipWithHash(this.name,'YO2~')"
+loadStarshipWithHash('YO2~')"
     >barebones</a>.
     <p> <a href="keys.html">Hotkeys</a></p>
 
