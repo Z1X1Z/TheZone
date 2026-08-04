@@ -2973,9 +2973,8 @@ truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoom*zoom))
 
 }
 
-     hyperCore+=(((gr/truncator)*truncator+-(leaf/truncator)*truncator+(sqrt2/truncator)*truncator)/truncator)*truncator-4.25;
-
-   if(seventhEYEthree&&lengthP<twoThirds&&zoom<.5
+  hyperCore+=((((gr)+-(leaf)+(sqrt2)))-4.25);//I don't know if this is making much of a difference
+  if(seventhEYEthree&&lengthP<twoThirds&&zoom<.5
    )
    {
       float squinch =0.;
