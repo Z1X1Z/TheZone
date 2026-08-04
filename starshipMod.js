@@ -2744,6 +2744,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
     uniforms["zoomOutRatchetThreshold" ].value=zoomOutRatchetThreshold;
 
         if(!shouldShowStar||ampThresh>zoomOutRatchetThreshold&&on) uniforms["volume" ].value = audioX.sampleRate/bufferSize*ampThresh/(1.+zoomOutRatchetThreshold);
+       uniforms["volume" ].value = .5;
         uniforms[ "zoom" ].value = zoom;
     
     

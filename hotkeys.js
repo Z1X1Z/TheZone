@@ -179,7 +179,7 @@ colorCombo2: {value: -1 },
 coords: {value: [xINITiaLizer,yINITiaLizer]},//to prevent dividing by zero may be set to small value
 constellationCoord: {value: [xINITiaLizer,yINITiaLizer]},//to prevent dividing by zero may be set to small value
         coordSHIFT: {value: [0.,0.]},
-        d: {value:[1.,.0]},
+        d: {value:[.0,.0]},
 dotCoord:{value:[0.,0.]},
 pongBallCoords:{value:[0.,0]},
 
