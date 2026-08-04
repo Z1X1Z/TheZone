@@ -2958,7 +2958,6 @@ float  equilibriator=lfc/(lfc-zoom/dif)*dif;
 
 hyperCore+=.25*LogHalfReciprocal;//continuumClover boost
 
-  if(lengthP<twoThirds)hyperCore+=.125*LogHalfReciprocal;
 if(pollen)
 {
      hyperCore+=.5;
@@ -2990,7 +2989,8 @@ truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoom*zoom))
    }
 hyperCore-=.5;//for gigaLeap
 bool spokeloverON=zoom/lfc<1.5;//could be 1.5, could be 2/3, one is a compromise
-     if(spokeloverON)hyperCore-=log2;
+   //  if(spokeloverON)hyperCore-=log2;
+  //hyperCore+=.5;
 
 
 hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
@@ -3039,7 +3039,6 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
 
     else 
   hyperCore+=SEVEYEpow*4./3./sqrt(lfc);
-  hyperCore+=.5;
  }
 
 
@@ -3055,10 +3054,9 @@ if(lengthP<SEVEYEStartAdj)
     hyperCore-=(lpcc*variant4Correction-1.);
 else
     hyperCore-=(lfcCenterCored*variant4Correction-1.);
-  hyperCore+=2./3.;
 }               
 float hyperCoreOUTPUT =hyperCore*log2/log(metaCoreDriveFactor)+loops;
- if (petals==0.)hyperCoreOUTPUT+=log2*2.;
+ if (petals==0.)hyperCoreOUTPUT+=log2;
 
                                                         float hyperCoreBoosted = hyperCoreOUTPUT;//if metaCoreDriveFactor==1.5: hyperCoreBoosted=hyperCore*1.75 else if
                          float hyperCoreStored = hyperCoreBoosted;

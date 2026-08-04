@@ -468,7 +468,7 @@ var truncNonLeaf = 1.;
         truncator = truncNonLeaf*-leaf/2.;//*100
     }
         hyperCore+=(((gr/truncator)*truncator+-(leaf/truncator)*truncator+(Math.sqrt(2)/truncator)*truncator)/truncator)*truncator-4.25;
-
+//hyperCore+=.5;
 
    if(seventhEYE>0.&&(seventhEYE!=3.||seventhEYEthree)&&lengthP<2./3.&&zoom<.5//&&(lfc/zoom<2./3.||seventhEYE!=3.)
    )
@@ -493,7 +493,23 @@ else{
    }
    var spokeloverON=spokelover&&zoom/lfc<1.5;
 
-    if(spokeloverON)hyperCore-=Math.log(2);
+
+
+                           if(squeezeN!=1.)
+                           {
+var omniboost = (6.+petals)/6.-1.;
+
+if(petals>0.)omniboost=Math.sqrt(omniboost);
+else if (petals<0.)hyperCoreOUTPUT-=Math.log(2.)*2.;
+hyperCoreOUTPUT-=omniboost;//upcore for higher omniclover counts, multiplied by two!!
+
+                           }
+                         //  if (petals==0.)hyperCore+=Math.log(2.);
+
+
+
+
+  //  if(spokeloverON)hyperCore-=Math.log(2);
 
  //     if(squeezeN>1.)hyperCore-=1.25;
 //hyperCore-=1.;
@@ -555,7 +571,6 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
 
     else 
   hyperCore+=SEVEYEpow*4./3./Math.sqrt(lfc);
-hyperCore+=.5;
  }
 
 if(jubileyes!=0.) 
@@ -579,7 +594,6 @@ if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside)&&((seventhEYE!=1.
     hyperCore-=(lpcc*variant4Correction-1.);
 else
     hyperCore-=(lfcCenterCored*variant4Correction-1.);
- hyperCore+=2./3.;
 }
 
 
@@ -590,19 +604,6 @@ else
   // var logOfSpoke_Factor=0.;
                           // if (wheel) logOfSpoke_Factor=Math.log(spoke_factor);
 var hyperCoreOUTPUT =hyperCore*Math.log(2.)/Math.log(metaCoreDriveFactor)+loops;
-
-
-                           if(squeezeN!=1.)
-                           {
-var omniboost = (6.+petals)/6.-1.;
-
-if(petals>0.)omniboost=Math.sqrt(omniboost);
-else if (petals<0.)hyperCoreOUTPUT-=Math.log(2.)*2.;
-hyperCoreOUTPUT-=omniboost;//upcore for higher omniclover counts, multiplied by two!!
-
-                           }
-                           if (petals==0.)hyperCoreOUTPUT+=Math.log(2.)*2.;
-
 
 
 
