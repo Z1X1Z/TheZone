@@ -2534,7 +2534,7 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                            // var inputData = new Float32Array(bufferSize);
 
                                             analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
-                                        analyser.getByteFrequencyData(  dataArray);
+                                   //     analyser.getByteFrequencyData(  dataArray);
                                         
 
                                        if(window.playMovie)
