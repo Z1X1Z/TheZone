@@ -2672,7 +2672,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
     for(var t=0; t<bufferPortion;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
                                                               if(isFinite(maxSamp)&&maxSamp!=0)    uniforms.maxSamp.value=maxSamp;
 
-   minSamp=Number.MAX_VALUE;
+   minSamp=100000;
   for(var t=0; t<bufferPortion;t++) if(inputData[t]<maxSamp)minSamp=inputData[t];
                                              if(isFinite(minSamp))                   uniforms.minSamp.value=minSamp;
 
