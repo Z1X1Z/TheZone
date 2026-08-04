@@ -2579,14 +2579,14 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                       //   console.log(uniforms.coreDilation.value)
                                          else             uniforms.coreDilation.value=0.;
                                     
-                                                                            lastPitch = pitch;
+                                                                          lastPitch = pitch;
 
                                     if(ampThresh>.0000001)
                                     {
                                         // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
                                         pitch = audioX.sampleRate/calculatePitch();
                                         const notNyquist = Math.abs(pitch-audioX.sampleRate/numberOfBins)>2.;
-                                        if(!notNyquist&&nyquistFilter&&ampThresh>0.) pitch = lastPitch;
+                                        if((!notNyquist&&nyquistFilter&&ampThresh>0.)||!isFinite(pitch)) pitch = lastPitch;
                                    
                                     
                                     
@@ -2610,6 +2610,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
                volume = (ampThresh-zoomOutRatchetThreshold)*audioX.sampleRate/bufferSize;
                if(volume<0.)volume=0.;
                if(lastVolume==0.) lastVolume=volume;
+               if(!isFinite(volume)){volume=1.;lastVolume=1.}
                        }
            else {volume=1.; lastVolume=1.; }
     
