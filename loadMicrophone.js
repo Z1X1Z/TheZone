@@ -9,8 +9,8 @@ window.audioX={sampleRate:44100};
 
 window.bufferSize=fftSize;
 window.numberOfBins=bufferSize/2.;
-window.inputData = new Float32Array(bufferSize);
-window.dataArray = new Uint8Array(bufferSize/2);
+window.inputData = new Float32Array(bufferSize).fill(1.);
+window.dataArray = new Uint8Array(bufferSize/2).fill(1.);
 
 let micProcessing1 = false;//autoGainControl
 let micProcessing2 = false;//echoCancellation
