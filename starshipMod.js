@@ -2633,7 +2633,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
         
         vectorize4();
     setTwelveNotes();
-    let lowNote = Number.MAX_VALUESS;
+    let lowNote = Number.MAX_VALUE;
      lowAmpFreq = 1;
 
      lowAmpFreq = 1;
@@ -2641,7 +2641,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
                                                                )
     {lowNote=testar[kappa]
         lowAmpFreq =  frequencies[kappa]
-        uniforms.lownote.value=kappa*12./EldersLeg;
+        if(isFinite(kappa)&&kappa!=0.)uniforms.lownote.value=kappa*12./EldersLeg;
     }
     if(    window.playQuietestSound){
         quietestSound.play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:lowAmpFreq,volume:window.touchVolume})
