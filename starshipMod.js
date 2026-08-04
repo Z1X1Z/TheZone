@@ -2573,7 +2573,7 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
 
                                                        // if(window.android)ampThresh=ampThresh**.5/8.;//may not work as intended on all platforms, if at all
                                                      //   else if(iOS)ampThresh=ampThresh*2.;//may not work as intended on all platforms, if at all
-                                    uniforms["totalAmp" ].value=ampThresh;
+                                   if(isFinite(ampThresh)) uniforms["totalAmp" ].value=ampThresh;
                                      if(window.ISdilated)
                                      uniforms.coreDilation.value=.5+.5*ampThresh**2.*Math.sqrt(24.)*2.;
                                       //   console.log(uniforms.coreDilation.value)
@@ -2671,7 +2671,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
     for(var t=0; t<bufferPortion;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
                                                               if(isFinite(maxSamp)&&maxSamp!=0)    uniforms.maxSamp.value=maxSamp;
 
-   minSamp=100000;
+   minSamp=Number.MAX_VALUE;
   for(var t=0; t<bufferPortion;t++) if(inputData[t]<maxSamp)minSamp=inputData[t];
                                              if(isFinite(minSamp))                   uniforms.minSamp.value=minSamp;
 
@@ -2744,7 +2744,6 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
     uniforms["zoomOutRatchetThreshold" ].value=zoomOutRatchetThreshold;
 
         if(!shouldShowStar||ampThresh>zoomOutRatchetThreshold&&on) uniforms["volume" ].value = audioX.sampleRate/bufferSize*ampThresh/(1.+zoomOutRatchetThreshold);
-      
         uniforms[ "zoom" ].value = zoom;
     
     
