@@ -453,7 +453,7 @@ if(pollen&&OrthoEvery==0.)
     else hyperCore-=.125/Math.log(.5);//for central polynomial
 
    }
-   else hyperCore+=.75;
+   else hyperCore+=Math.sqrt(2.)/2.;
    }
    if(seventhEYE>0.&&(seventhEYE!=3.||seventhEYEthree)&&lengthP<2./3.&&zoom<.5//&&(lfc/zoom<2./3.||seventhEYE!=3.)
    )
