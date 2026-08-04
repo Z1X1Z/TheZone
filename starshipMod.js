@@ -2144,7 +2144,7 @@ function runOSMD (){
                                               spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                                              
                 if(((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)&&spunTouch[0]!=0&&spunTouch[1]!=0)
-                    wrapMovementBoost=4.;
+                    wrapMovementBoost=2.;
                     else wrapMovementBoost=1;
 
                                                               coordX+= spunTouch[0]*wrapMovementBoost;
