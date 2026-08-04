@@ -2961,7 +2961,7 @@ hyperCore+=.25*LogHalfReciprocal;//continuumClover boost
   if(lengthP<twoThirds)hyperCore+=.125*LogHalfReciprocal;
 if(pollen)
 {
-     hyperCore+=.5;
+     hyperCore+=.75;
 }
 
    if(seventhEYEthree&&lengthP<twoThirds&&zoom<.5
@@ -2976,7 +2976,7 @@ if(pollen)
   hyperCore+=(8.*log2);
   hyperCore+=log2/2.;
    }
-hyperCore-=.5;
+hyperCore-=.5;//for gigaLeap
 bool spokeloverON=zoom/lfc<1.5;//could be 1.5, could be 2/3, one is a compromise
      if(spokeloverON)hyperCore-=log2;
 
@@ -4264,7 +4264,6 @@ if(oneEye.r!=0.)zoomer=-oneEye;
                        if (clothes.r>=1.){mny=vec3(0.);if(bodyWithArms.w!=1.)bodyWithArms=vec4(0.);}
                        if (clothes.r!=0.&&starship.b!=0.)clothes*=starship.xyz+.25;
                        mny+=clamp(clothes-bodyWithArms.w*100.,0.,1.)+bodyWithArms.xyz*bodyWithArms.w*clamp(clothes*100000.,0.,1.);
-                
                     
 
                                               if(oopm.x!=0.||oopm.y!=0.){HEART=oopm.xyz;heartWarmed=oopm.xyz;}
