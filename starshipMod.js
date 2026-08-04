@@ -191,18 +191,16 @@ let updateInstant = false;
                           const   point = new Float32Array(bufferPortion*3*2);
                           const   pointColor = new Float32Array(bufferPortion*4*2);
                               const adjConstant =2.;//shouldn't be buffersize needs to be revised
-
+    var maxSamp=0.;
+ var minSamp=Number.MAX_VALUE
 function makeSpirograph(){
       phase = phase % (pi*2);
         phase2 =  phase2 % (pi*2);
       len = 0;
-    var maxSamp=0.;
-    for(var t=0; t<bufferPortion;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
-                                                                  uniforms.maxSamp.value=maxSamp;
+     
   let adjAdjusted = pitch/2**14;
-  var minSamp=100000000.;
-  for(var t=0; t<bufferPortion;t++) if(inputData[t]<maxSamp)minSamp=inputData[t];
-                                                                uniforms.minSamp.value=minSamp;
+
+  
     for(var m = 0; m < bufferPortion; m++)
       {
               phase += adjAdjusted;//spira_pitch;
@@ -2668,6 +2666,16 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
     if(true//||!DAW
 )setDynamicSampler2ds();
 
+
+   maxSamp=0.;
+    for(var t=0; t<bufferPortion;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
+                                                                  uniforms.maxSamp.value=maxSamp;
+
+   minSamp=Number.MAX_VALUE;
+  for(var t=0; t<bufferPortion;t++) if(inputData[t]<maxSamp)minSamp=inputData[t];
+                                                                uniforms.minSamp.value=minSamp;
+
+                                                                
    if(spirographMODE!=0&&pitch!=lastPitch&&on)makeSpirograph();
 
 
