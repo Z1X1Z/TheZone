@@ -4047,7 +4047,10 @@ uniforms.baseN.value=2.701002244218596767553929329640246633
                             uniforms.volumeFret3.value=loudestFret[2].volume/loudestFret[0].volume;
                             uniforms.volumeFret4.value=loudestFret[3].volume/loudestFret[0].volume;
 
-
+uniforms.volume.value=.5;
+uniforms.minSamp.value=.5;
+uniforms.maxSamp.value=.5;
+uniforms.totalAmp.value=.5;
 
    if(window.starClover)
                      {
