@@ -4038,7 +4038,7 @@ uniforms.baseN.value=2.701002244218596767553929329640246633
                                        }
                                                        
 
-                           /*            uniforms.loudestFret1.value=new THREE.Vector2( loudestFret[0].x,loudestFret[0].y);
+                                       uniforms.loudestFret1.value=new THREE.Vector2( loudestFret[0].x,loudestFret[0].y);
                             uniforms.loudestFret2.value=new THREE.Vector2(loudestFret[1].x,loudestFret[1].y);
                             uniforms.loudestFret3.value=new THREE.Vector2(loudestFret[2].x,loudestFret[2].y);
                             uniforms.loudestFret4.value=new THREE.Vector2(loudestFret[3].x,loudestFret[3].y);
@@ -4048,7 +4048,7 @@ uniforms.baseN.value=2.701002244218596767553929329640246633
                             uniforms.volumeFret3.value=loudestFret[2].volume/loudestFret[0].volume;
                             uniforms.volumeFret4.value=loudestFret[3].volume/loudestFret[0].volume;
 
-*/
+
    if(window.starClover)
                      {
                 renderer.setRenderTarget (renderTarget)
