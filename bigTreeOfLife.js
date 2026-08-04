@@ -453,8 +453,23 @@ if(pollen&&OrthoEvery==0.)
     else hyperCore-=.125/Math.log(.5);//for central polynomial
 
    }
-   else hyperCore+=Math.sqrt(2.)/2.;
+   else hyperCore+=.5;
    }
+
+
+
+
+var truncNonLeaf = 1.;
+    var truncator=1.;
+    var truncated = true;
+    if(lfc!=0.&&zoom!=0.&&truncated&&lengthP<SEVEYEStartAdj)
+    {
+        truncNonLeaf=Math.log(lfcCenterCored);
+        truncator = truncNonLeaf*-leaf/2.;//*100
+    }
+        hyperCore+=(((gr/truncator)*truncator+-(leaf/truncator)*truncator+(Math.sqrt(2)/truncator)*truncator)/truncator)*truncator-4.25;
+
+
    if(seventhEYE>0.&&(seventhEYE!=3.||seventhEYEthree)&&lengthP<2./3.&&zoom<.5//&&(lfc/zoom<2./3.||seventhEYE!=3.)
    )
    {
@@ -494,12 +509,6 @@ var term=0.;
 
 var m= new THREE.Vector2(0.,0.);
 
-var truncNonLeaf = 1.;
-    var truncator=1.;
-    var truncated = true;
-    if(lfc!=0.&&zoom!=0.&&truncated&&lengthP<SEVEYEStartAdj)
-        truncNonLeaf=Math.log(lfcCenterCored);
-        truncator = truncNonLeaf*-leaf/2.;//*100
 
         //truncator = Math.log(zoom/lfc)**2.;
 //Maendel clover

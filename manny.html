@@ -4764,11 +4764,24 @@ if(pollen&&OrthoEvery==0.)
    }
    else 
    {
-     hyperCore+=sqrt2/2.;
+     hyperCore+=.5;
  //  if(seventhEYE>0.||lengthP>twoThirds)hyperCore+=1.;
   // //else hyperCore+=lfc/log2;
    }
 }
+
+float truncNonLeaf=1.;
+
+float truncator=1.;
+bool truncated = true;
+if(zoom!=0.&&lfc!=0.&&truncated&&lengthP<SEVEYEStartAdj)//may or may not include 
+{
+    truncNonLeaf=log((lfcCenterCored));
+truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoom*zoom))
+
+}
+     hyperCore+=(((gr/truncator)*truncator+-(leaf/truncator)*truncator+(sqrt2/truncator)*truncator)/truncator)*truncator-4.25;
+
 
    if(seventhEYE>0.&&(seventhEYE!=3.||seventhEYEthree)&&lengthP<twoThirds&&zoom<.5//&&(lfcOverZoom<twoThirds||seventhEYE!=3.)
    )
@@ -4822,16 +4835,6 @@ hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if d
 vec2 m=vec2(0.);
 
 
-float truncNonLeaf=1.;
-
-float truncator=1.;
-bool truncated = true;
-if(zoom!=0.&&lfc!=0.&&truncated&&lengthP<SEVEYEStartAdj)//may or may not include 
-{
-    truncNonLeaf=log((lfcCenterCored));
-truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoom*zoom))
-
-}
 //pow(abs(log(zoom/lfc),2.);//log truncation * factor is not known, may no longer be necesary
 //Maendel clover
 
