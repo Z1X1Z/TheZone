@@ -2669,11 +2669,11 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
 
    maxSamp=0.;
     for(var t=0; t<bufferPortion;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
-                                                              if(isFinite)    uniforms.maxSamp.value=maxSamp;
+                                                              if(isFinite(maxSamp))    uniforms.maxSamp.value=maxSamp;
 
    minSamp=Number.MAX_VALUE;
   for(var t=0; t<bufferPortion;t++) if(inputData[t]<maxSamp)minSamp=inputData[t];
-                                             if(isFinite)                   uniforms.minSamp.value=minSamp;
+                                             if(isFinite(minSamp))                   uniforms.minSamp.value=minSamp;
 
                                                                 
    if(spirographMODE!=0&&pitch!=lastPitch&&on)makeSpirograph();
