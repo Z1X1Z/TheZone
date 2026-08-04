@@ -175,7 +175,7 @@ loudestFret[2].note = mustarD[g]
         loudestFret[g].y = -Math.cos(arm);//*loudestFret[g].volume;
 
     }
-    for(var bn = 0.; bn<loudestFret.length;bn++)loudestFret[bn]=1.;
+
 }
 let loudestNote=Array(4).fill(0.)
 let averagedAmp =  0;
@@ -919,9 +919,9 @@ function setFFTdependantSizes(){
      analyser.fftSize=fftSize;
       bufferSize = fftSize;
       numberOfBins = fftSize/2.;
-      frequencies= new Float64Array(numberOfBins);
-     inputData = new Float32Array(bufferSize);
-      dataArray = new Uint8Array( numberOfBins );
+      frequencies= new Float64Array(numberOfBins).fill(0);
+     inputData = new Float32Array(bufferSize).fill(0);
+      dataArray = new Uint8Array( numberOfBins ).fill(0);
 
      window.zoomOutRatchetThreshold=starSHIPVOLUMEdefaultLowVolume;//5./1024;////or 1/1024.//maybe shouldn't need to be here could be solved away
      
@@ -4038,7 +4038,7 @@ uniforms.baseN.value=2.701002244218596767553929329640246633
                                        }
                                                        
 
-                                       uniforms.loudestFret1.value=new THREE.Vector2( loudestFret[0].x,loudestFret[0].y);
+                           /*            uniforms.loudestFret1.value=new THREE.Vector2( loudestFret[0].x,loudestFret[0].y);
                             uniforms.loudestFret2.value=new THREE.Vector2(loudestFret[1].x,loudestFret[1].y);
                             uniforms.loudestFret3.value=new THREE.Vector2(loudestFret[2].x,loudestFret[2].y);
                             uniforms.loudestFret4.value=new THREE.Vector2(loudestFret[3].x,loudestFret[3].y);
@@ -4048,7 +4048,7 @@ uniforms.baseN.value=2.701002244218596767553929329640246633
                             uniforms.volumeFret3.value=loudestFret[2].volume/loudestFret[0].volume;
                             uniforms.volumeFret4.value=loudestFret[3].volume/loudestFret[0].volume;
 
-
+*/
    if(window.starClover)
                      {
                 renderer.setRenderTarget (renderTarget)
