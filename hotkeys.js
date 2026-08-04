@@ -165,7 +165,7 @@ colorCombo2: {value: -1 },
         colorInverter: {value:false},
         metronome: {value: .99 },
         time2dance: {value: 0.0 },
-        volume: {value: 1. },
+        volume: {value: .5 },
         totalAmp: {value: 1.0 },
 
 
