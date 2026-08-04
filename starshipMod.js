@@ -754,7 +754,7 @@ window.twist-=window.spinnerTwist
                   const d_yS=spunD[1]*interpolation;
 
                 if(((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0))
-                    wrapMovementBoost=1.5;
+                    wrapMovementBoost=2.;
                 else wrapMovementBoost = 1;
 
            const bx=coordX+d_xS*MR*zoom*wrapMovementBoost;
@@ -2143,7 +2143,7 @@ function runOSMD (){
                                           if(uniforms.carousel.value!=0.&&uniforms[ "time" ].value>0)
                                               spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                                              
-                if(((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)&&spunTouch[0]!=0&&spunTouch[1]!=0)wrapMovementBoost=1.5;
+                if(((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)&&spunTouch[0]!=0&&spunTouch[1]!=0)wrapMovementBoost=2.;
                     else wrapMovementBoost=1;
 
                                                               coordX+= spunTouch[0]*wrapMovementBoost;
