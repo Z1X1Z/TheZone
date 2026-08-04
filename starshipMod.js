@@ -175,7 +175,6 @@ loudestFret[2].note = mustarD[g]
         loudestFret[g].y = -Math.cos(arm);//*loudestFret[g].volume;
 
     }
-
 }
 let loudestNote=Array(4).fill(0.)
 let averagedAmp =  0;
@@ -919,9 +918,9 @@ function setFFTdependantSizes(){
      analyser.fftSize=fftSize;
       bufferSize = fftSize;
       numberOfBins = fftSize/2.;
-      frequencies= new Float64Array(numberOfBins).fill(0);
-     inputData = new Float32Array(bufferSize).fill(0);
-      dataArray = new Uint8Array( numberOfBins ).fill(0);
+      frequencies= new Float64Array(numberOfBins);
+     inputData = new Float32Array(bufferSize);
+      dataArray = new Uint8Array( numberOfBins );
 
      window.zoomOutRatchetThreshold=starSHIPVOLUMEdefaultLowVolume;//5./1024;////or 1/1024.//maybe shouldn't need to be here could be solved away
      
@@ -2536,7 +2535,7 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
 
                                             analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
                                         analyser.getByteFrequencyData(  dataArray);
-                                        
+
 
                                        if(window.playMovie)
                                         {
@@ -2642,7 +2641,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
                                                                )
     {lowNote=testar[kappa]
         lowAmpFreq =  frequencies[kappa]
-        uniforms.lownote.value=kappa*12./EldersLeg;
+            uniforms.lownote.value=kappa*12./EldersLeg;
     }
     if(    window.playQuietestSound){
         quietestSound.play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:lowAmpFreq,volume:window.touchVolume})
