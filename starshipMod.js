@@ -2671,7 +2671,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
     for(var t=0; t<bufferPortion;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
                                                               if(isFinite(maxSamp)&&maxSamp!=0)    uniforms.maxSamp.value=maxSamp;
 
-   minSamp=Number.MAX_VALUE;
+   minSamp=100000;
   for(var t=0; t<bufferPortion;t++) if(inputData[t]<maxSamp)minSamp=inputData[t];
                                              if(isFinite(minSamp))                   uniforms.minSamp.value=minSamp;
 
@@ -2744,7 +2744,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
     uniforms["zoomOutRatchetThreshold" ].value=zoomOutRatchetThreshold;
 
         if(!shouldShowStar||ampThresh>zoomOutRatchetThreshold&&on) uniforms["volume" ].value = audioX.sampleRate/bufferSize*ampThresh/(1.+zoomOutRatchetThreshold);
-       uniforms["volume" ].value = .5;
+      
         uniforms[ "zoom" ].value = zoom;
     
     
