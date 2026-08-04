@@ -175,6 +175,7 @@ loudestFret[2].note = mustarD[g]
         loudestFret[g].y = -Math.cos(arm);//*loudestFret[g].volume;
 
     }
+    for(var bn = 0.; bn<loudestFret.length;bn++)loudestFret[bn]=1.;
 }
 let loudestNote=Array(4).fill(0.)
 let averagedAmp =  0;
@@ -2534,7 +2535,7 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                            // var inputData = new Float32Array(bufferSize);
 
                                             analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
-                                   //     analyser.getByteFrequencyData(  dataArray);
+                                        analyser.getByteFrequencyData(  dataArray);
                                         
 
                                        if(window.playMovie)
