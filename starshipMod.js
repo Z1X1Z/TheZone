@@ -1407,7 +1407,7 @@ function setMicInputToStarPIXEL(){
                      let dataArrayBuffer=new Float32Array( size ).fill(0.);
                    
 
-                     for (var x = 0; x < numberOfBins; x++)dataArrayBuffer[x]=dataArray[x]/255.;
+                     for (var x = 0; x < numberOfBins; x++)if(isFinite(dataArray[x]))dataArrayBuffer[x]=dataArray[x]/255.;
                      
 
                      // callibratorArray //dataArrayBuffer
@@ -4041,7 +4041,7 @@ uniforms.baseN.value=2.701002244218596767553929329640246633
                             uniforms.loudestFret2.value=new THREE.Vector2(loudestFret[1].x,loudestFret[1].y);
                             uniforms.loudestFret3.value=new THREE.Vector2(loudestFret[2].x,loudestFret[2].y);
                             uniforms.loudestFret4.value=new THREE.Vector2(loudestFret[3].x,loudestFret[3].y);
-                            
+                            if(loudestFret[0].volume==0)loudestFret[0].volume=1.;
                             uniforms.volumeFret1.value=1;
                             uniforms.volumeFret2.value=loudestFret[1].volume/loudestFret[0].volume;
                             uniforms.volumeFret3.value=loudestFret[2].volume/loudestFret[0].volume;
