@@ -2533,9 +2533,9 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                   
                                            // var inputData = new Float32Array(bufferSize);
 
-                                            analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
-                                        analyser.getByteFrequencyData(  dataArray);
-
+                                        //    analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
+                                      //  analyser.getByteFrequencyData(  dataArray);
+                                        
 
                                        if(window.playMovie)
                                         {
@@ -2641,7 +2641,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
                                                                )
     {lowNote=testar[kappa]
         lowAmpFreq =  frequencies[kappa]
-        if(isFinite(kappa)&&kappa!=0.)uniforms.lownote.value=kappa*12./EldersLeg;
+        uniforms.lownote.value=kappa*12./EldersLeg;
     }
     if(    window.playQuietestSound){
         quietestSound.play({env:{attack: 0.,hold:interpolation/60.*2, release:FPS/60.},pitch:lowAmpFreq,volume:window.touchVolume})
