@@ -2452,8 +2452,8 @@ vec3 faceFORWARD(vec2 p,vec2 t){
          return ret;//return red if run in  error
     }
                     const float elbowJoint = sqrt2;//may be 1.44?
-vec2 spinningArms(vec2 g, vec2 t, float angle,float amp, bool HandOfGod){
-t*=0.;//should be conditionallized
+vec2 spinningArms(vec2 g, float angle,float amp, bool HandOfGod){
+//t*=0.;//should be conditionallized
             float b = (0.);
 
 float arm = 0.;
@@ -2487,7 +2487,7 @@ float arm = 0.;
                                      if(HandOfGod) 
                                       {
                                         nabaoth*=2./(2.-pow(length(nabaoth),2.)*1.);
-                                        t*=0.;
+                                     //   t*=0.;
                                      //   nabaoth=nabaoth*sign(note-lastNote);
                                      //   angle*=sign(note-lastNote);
                                       }
@@ -2532,7 +2532,7 @@ float arm = 0.;
 	      if(f>3&&f<8)
 	      {
 
-		          h=2.*vec2(-1./(h.x*h.x-h.y*h.y+growng.x+t.x),(2.0*h.x*h.y+growng.y+t.y));//z<=z^2-g; z.real<=-1/z.real; z*=2;
+		          h=2.*vec2(-1./(h.x*h.x-h.y*h.y+growng.x),(2.0*h.x*h.y+growng.y));//z<=z^2-g; z.real<=-1/z.real; z*=2;
 		          h.x=sqrt(abs(h.x));
 	      }
  if((abs(h.y)>52.&&f>3))
@@ -2543,7 +2543,7 @@ float arm = 0.;
 	   }
 
 
-z=2.*vec2(-1./(z.x*z.x-z.y*z.y+spinningArm.x+t.x),(2.0*z.x*z.y+spinningArm.y+t.y));//z<=z^2-g; z.real<=-1/z.real; z*=2;
+z=2.*vec2(-1./(z.x*z.x-z.y*z.y+spinningArm.x),(2.0*z.x*z.y+spinningArm.y));//z<=z^2-g; z.real<=-1/z.real; z*=2;
 z.x=sqrt(abs(z.x));
 
 
@@ -2575,7 +2575,7 @@ z.x=sqrt(abs(z.x));
                                                     angle+=PI;
 
                                         nabaoth*=2./(2.-pow(length(nabaoth),2.)*1.);
-                                        t*=0.;
+                                     //   t*=0.;
                                      //   nabaoth=nabaoth*sign(note-lastNote);
                                      //   angle*=sign(note-lastNote);
                                       }
@@ -2615,7 +2615,7 @@ z.x=sqrt(abs(z.x));
 	   
 	      if(f>3&&f<8)
 	      {
-		          h=2.*vec2(-1./(h.x*h.x-h.y*h.y+growng.x+t.x),(2.0*h.x*h.y+growng.y+t.y));//z<=z^2-g; z.real<=-1/z.real; z*=2;
+		          h=2.*vec2(-1./(h.x*h.x-h.y*h.y+growng.x),(2.0*h.x*h.y+growng.y));//z<=z^2-g; z.real<=-1/z.real; z*=2;
 		          h.x=sqrt(abs(h.x));
 	      }
  if((abs(h.y)>52.&&f>3))
@@ -2626,7 +2626,7 @@ z.x=sqrt(abs(z.x));
 	   }
 
 
-z=2.*vec2(-1./(z.x*z.x-z.y*z.y+spinningArm.x+t.x),(2.0*z.x*z.y+spinningArm.y+t.y));//z<=z^2-g; z.real<=-1/z.real; z*=2;
+z=2.*vec2(-1./(z.x*z.x-z.y*z.y+spinningArm.x),(2.0*z.x*z.y+spinningArm.y));//z<=z^2-g; z.real<=-1/z.real; z*=2;
 z.x=sqrt(abs(z.x));
 
 
@@ -2669,7 +2669,7 @@ z.x=sqrt(abs(z.x));
      vec2 h = vec2(0.);
        if(spinning){                    float angle =atan(d.x,d.y);
 
-         h = spinningArms(g,t,angle,1.,false);
+         h = spinningArms(g,angle,1.,false);
          b+=h.x;
          arm+=h.y;
        }
@@ -2679,28 +2679,28 @@ z.x=sqrt(abs(z.x));
        if (armStar&&arm==0.&&armsSpinning!=0&&spinning&&volume!=1.)
        {
         
-          float angle =atan(loudestFret1.x,loudestFret1.y);
-                h = spinningArms(g,t,angle,volumeFret1*4./3.
+          float angle1 =atan(loudestFret1.x,loudestFret1.y);
+                h = spinningArms(g,angle1,volumeFret1*4./3.
                 ,false);
 extrArms+=h.x;
                  arm+=h.y;
 
 
-           angle =atan(loudestFret2.x,loudestFret2.y);
-               h = spinningArms(g,t,angle,volumeFret2*4./3.
+           float angle2 =atan(loudestFret2.x,loudestFret2.y);
+               h = spinningArms(g,angle2,volumeFret2*4./3.
                ,false);
 extrArms+=h.x;
                  arm+=h.y;
 
-           angle =atan(loudestFret3.x,loudestFret3.y);
-                h = spinningArms(g,t,angle,volumeFret3*4./3.
+           float angle3 =atan(loudestFret3.x,loudestFret3.y);
+                h = spinningArms(g,angle3,volumeFret3*4./3.
                 ,false);
 extrArms+=h.x;
                  arm+=h.y;
 
 
-           angle =atan(loudestFret4.x,loudestFret4.y);
-               h = spinningArms(g,t,angle,volumeFret4*4./3.
+           float angle4 =atan(loudestFret4.x,loudestFret4.y);
+               h = spinningArms(g,angle4,volumeFret4*4./3.
                ,false);
 extrArms+=h.x;
                  arm+=h.y;
@@ -3919,7 +3919,7 @@ float outerARMS = 0.;
 if(handOfGod)
 {
         float angle =atan(d.x,d.y);
-             if(length(characterP)>1.25)  outerARMS = spinningArms(characterP*vec2(1.,(-upOrDown)*flipStar),d,angle*upOrDown*flipStar,1.,true).x;
+             if(length(characterP)>1.25)  outerARMS = spinningArms(characterP*vec2(1.,(-upOrDown)*flipStar),angle*upOrDown*flipStar,1.,true).x;
 
 }
 
