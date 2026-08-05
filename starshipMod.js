@@ -168,11 +168,14 @@ loudestFret[2].note = mustarD[g]
     }
     for(var g = 0;g<loudestFret.length;g++)
     {
+        if(loudestFret[g].index!=null)
+        {
         var arm =(flip*mustarD[loudestFret[g].index]+twist+12)%24./24.*pi*2.;
         //var rpio2 = arm+pi;
         loudestNote[g]=mustarD[loudestFret[g].index]/2.;
         loudestFret[g].x = -Math.sin(arm);//*loudestFret[g].volume;
         loudestFret[g].y = -Math.cos(arm);//*loudestFret[g].volume;
+        }
 
     }
 }
@@ -351,7 +354,7 @@ fourthHandsFingersArray[m]=0.
                     starNote = Math.round(twelfths)%(12);
                     finger = Math.floor((twelfths-.5)/12);
                     // fingerPitch = Math.floor((twelfths-.5-6.)/12);
-                    if (finger<10&&finger>=0&&isFinite(finger)&&isFinite(starNote)&&isFinite(dataArray[n])) 
+                    if (finger<10&&finger>=0&&isFinite(finger)&&isFinite(starNote)&&isFinite(dataArray[n])&&isFinite(twelfths)) 
                         {
                             
                             twelve[starNote][finger] +=dataArray[n]///twelfths;
