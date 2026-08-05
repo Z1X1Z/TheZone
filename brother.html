@@ -2451,7 +2451,8 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                
                if(holyeyes==0&&!((p.x>1.||p.x<-0.)||abs(p.y)>.75))ret=vec3(0.);
          return ret;//return red if run in  error
-    }                   const float shrug = 1.+(1.-0.978318343478516)/sqrt(2.);//https://www.wolframalpha.com/input?i=sqrt%282%2F%28-x%5E2%2B1%29%29%3D-%28x%29
+    }                   
+    const float shrug = 1.+(1.-sqrt(1.+2.*sqrt(2.))/2.)/sqrt(2.);//1.+(1.-0.978318343478516)/sqrt(2.);//https://www.wolframalpha.com/input?i=sqrt%282%2F%28-x%5E2%2B1%29%29%3D-%28x%29
 
                     const float elbowJoint = sqrt2*shrug;//may be 1.44?
 vec2 spinningArms(vec2 g, float angle,float amp, bool HandOfGod){
@@ -3029,7 +3030,9 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
         if (SEVEYEStartAdj>lengthP-sevMargin)hyperCore+=lfc*SEVEYEpow/1.5;
 
     else 
-  hyperCore+=SEVEYEpow*4./3./sqrt(lfc);
+  hyperCore+=SEVEYEpow/sqrt(lfc);//  hyperCore+=SEVEYEpow*4./3../sqrt(lfc);
+
+  //hyperCore+=.5;
  }
 
 
