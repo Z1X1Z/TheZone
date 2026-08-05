@@ -289,7 +289,7 @@ function spiral_compress(){
                 }
                             
 };
-                                      var exFactor=   1./3.;
+                                      var exFactor=   1;
 var innerFrets =  new Float64Array((EldersLeg>0)?EldersLeg:0.);//could be refactored
 
 
@@ -2560,7 +2560,7 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                         +(Math.abs(inputData[n])**.5)*Math.sign(inputData[n])
                                         -(Math.abs(inputData[n+1])**2)*Math.sign(inputData[n+1]);
                                                                         */
-                                    for(var n=0; n<fractionOfFrame;n++)if(isFinite(inputData[n]))
+                                    for(var n=0; n<fractionOfFrame;n++)
                                         totalAMP+=-Math.abs(inputData[n])
                                         +(Math.abs(inputData[n])**.5)*Math.sign(inputData[n])
                                         -(Math.abs(inputData[n])**2)*Math.sign(inputData[n]);
@@ -2571,8 +2571,7 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                     totalAMP=Math.abs(totalAMP);
                                     totalAMP/=fractionOfFrame;
                                   //  ampThresh=totalAMP;
-                                  for(var n=0; n<inputData.length;n++)if(isFinite(inputData[n]))
-                                    ampThresh+=Math.abs(inputData[n]);
+                                  for(var n=0; n<inputData.length;n++)ampThresh+=Math.abs(inputData[n]);
                                     ampThresh/=inputData.length;
 
                                                        // if(window.android)ampThresh=ampThresh**.5/8.;//may not work as intended on all platforms, if at all
@@ -2749,7 +2748,6 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
     uniforms["zoomOutRatchetThreshold" ].value=zoomOutRatchetThreshold;
 
         if(!shouldShowStar||ampThresh>zoomOutRatchetThreshold&&on) uniforms["volume" ].value = audioX.sampleRate/bufferSize*ampThresh/(1.+zoomOutRatchetThreshold);
-        
         uniforms[ "zoom" ].value = zoom;
     
     
