@@ -218,8 +218,8 @@ spinTowardsMe:{value:false},
 chop:{value:false},
 whirlpool:{value:0},
 armsSpinning:{value:1},
-maxSamp:{value:1.},
-minSamp:{value:1.},
+maxSamp:{value:0.},
+minSamp:{value:0.},
 lownote:{value:0.},
 concertKeyTuning:{value:440.},
 gates:{value:false},
@@ -351,7 +351,7 @@ for(var nameOfUniform in uniformsInitial)
             window.zoom=zoomINITiaLizer;
             window.lastZoom=zoomINITiaLizer;
             window.fromCenter = 0;
-
+            window.preFromCenter=0;
             window.ISdilated=false;
             window.RockInTheWater=0;
             window.octaveStars=true;
@@ -664,7 +664,7 @@ if(c!='')
 uniforms["upCoreCycler"].value=c;
 }
                                     window.fromCenter = (coordX*coordX+coordY*coordY)**.5;
-
+                                window.preFromCenter=window.fromCenter;
 //to prevent dividing by zero may be set to small value
                     return 1;
                    }
