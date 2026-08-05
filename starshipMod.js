@@ -703,7 +703,8 @@ else                 {
 
 d_x*=(1.+INcreaseBoost/2.);
 d_y*=(1.+INcreaseBoost/2.);
-
+if(!isFinite(d_x))d_x=0;
+if(!isFinite(d_y))d_y=0;
                                      
                             if(on&&totalAMP>.000001)
                             {
@@ -758,7 +759,7 @@ window.twist-=window.spinnerTwist
            const bx=coordX+d_xS*MR*zoom*wrapMovementBoost;
           const by=coordY+d_yS*MR*zoom*wrapMovementBoost;
                                
-                            let preFromCenter= Math.sqrt(bx*bx+by*by);
+                             preFromCenter= Math.sqrt(bx*bx+by*by);
 
              if(isFinite(d_x)&&isFinite(d_y)&&ampThresh>zoomOutRatchetThreshold&&on){
                           fromCenter = preFromCenter;
@@ -1603,6 +1604,7 @@ let lastVolume = 1.;
                 let lastCoord=coordX
                 zoom*=2.**(singleHyperCoreDepth);coordY*=2.**(singleHyperCoreDepth);coordX*=2.**(singleHyperCoreDepth);
                 fromCenter*=2.**(singleHyperCoreDepth);
+                preFromCenter*=2.**(singleHyperCoreDepth);
                 lastZoom*=2.**singleHyperCoreDepth;
 
                 cloverSuperCores++;
@@ -1613,6 +1615,7 @@ let lastVolume = 1.;
             if(zoom>1./2**2&&cloverSuperCores>0){
                 zoom/=2.**singleHyperCoreDepth;coordY/=2.**singleHyperCoreDepth;coordX/=2.**singleHyperCoreDepth;
                 fromCenter/=2.**singleHyperCoreDepth;
+                preFromCenter/=2.**singleHyperCoreDepth;
                     lastZoom/=2.**singleHyperCoreDepth;
                 cloverSuperCores--;
 
@@ -1625,6 +1628,7 @@ let lastVolume = 1.;
                     coordX*=2.;
                     coordY*=2.;
                         fromCenter*=2.;
+                        preFromCenter*=2.;
                     lastZoom*=2.;
                 }
                 
@@ -2291,7 +2295,7 @@ function runOSMD (){
      }
                      
                                     fromCenter = (coordX*coordX+coordY*coordY)**.5;
-                                 
+                                        preFromCenter=fromCenter;
                                 let cpX=uniforms.constellationCoord.value.x;
                                 let cpY=uniforms.constellationCoord.value.y;
                                 if(uniforms.chirality.value==-1)
@@ -2594,7 +2598,7 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                     aboveThreshold = true;
                                     on = true;
                                 }
-                                else{aboveThreshold = false; on = false;pitch=lastPitch; if(!touchMode||window.shouldShowStar) uniforms.volume.value=0.00001}
+                                else{aboveThreshold = false; on = false; if(!touchMode||window.shouldShowStar) uniforms.volume.value=0.00001}
     
     
     //                            if(!notNyquist)console.log(on)
