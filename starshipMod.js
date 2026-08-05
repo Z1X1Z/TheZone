@@ -123,7 +123,7 @@ const loudestFret=Array(4).fill(Fret);
         else fretCount=1024;
     
     let minDifference = 1.7;
-    for (var g=0; g<fretCount; g++)if(isFinite(mustarD[g]))
+    for (var g=0; g<fretCount; g++)if(isFinite(mustarD[g])&&isFinite(frequencies[g])&&isFinite(dataArray[g]))
     {
         
         if (Math.abs(mustarD[g]%24-loudestFret[0].note%24)>minDifference&&dataArray[g]>loudestFret[0].volume)
