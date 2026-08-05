@@ -493,6 +493,9 @@ for(var nameOfUniform in uniformsInitial)
                                          readHash()
                                     swapSettingsForJubileyes()
 
+                                    if(iOS&&
+                                        "brother" in window)
+                                        uniforms.armStar.value=!uniforms.armStar.value
                                          let n = document.getElementsByName('t');
                                           for(var p = 0; p<n.length;p++)n[p].checked  = false;
                                          
