@@ -924,8 +924,6 @@ function setFFTdependantSizes(){
       frequencies= new Float64Array(numberOfBins).fill(0);
      inputData = new Float32Array(bufferSize).fill(0);
       dataArray = new Uint8Array( numberOfBins ).fill(0);
-
-     window.zoomOutRatchetThreshold=starSHIPVOLUMEdefaultLowVolume;//5./1024;////or 1/1024.//maybe shouldn't need to be here could be solved away
      
      
       star= new Float32Array((numberOfBins>EldersLeg)?numberOfBins*3*3:EldersLeg*3*2*3);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
