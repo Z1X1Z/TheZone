@@ -2594,7 +2594,7 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                     aboveThreshold = true;
                                     on = true;
                                 }
-                                else{aboveThreshold = false; on = false;if(!touchMode||window.shouldShowStar) uniforms.volume.value=0.00001}
+                                else{aboveThreshold = false; on = false;pitch=lastPitch; if(!touchMode||window.shouldShowStar) uniforms.volume.value=0.00001}
     
     
     //                            if(!notNyquist)console.log(on)
@@ -2669,10 +2669,10 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
 
 
    maxSamp=0.;
-    for(var t=0; t<bufferPortion;t++) if(inputData[t]>maxSamp)maxSamp=inputData[t];
+    for(var t=0; t<bufferPortion;t++) if(inputData[t]>Math.abs(maxSamp))maxSamp=Math.abs(inputData[t]);
                                                               if(isFinite(maxSamp)&&maxSamp!=0)    uniforms.maxSamp.value=maxSamp;
 
-   minSamp=100000;
+   minSamp=Number.MAX_VALUE;
   for(var t=0; t<bufferPortion;t++) if(inputData[t]<maxSamp)minSamp=inputData[t];
                                              if(isFinite(minSamp))                   uniforms.minSamp.value=minSamp;
 
