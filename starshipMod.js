@@ -110,7 +110,7 @@ star,starColors;
 let testarContinuous=[];//
 
 var  DAWstar,DAWstarColors;
-let Fret = {x:null,y:null,index:null,volume:1.,note:-12};
+let Fret = {x:0,y:0,index:null,volume:1.,note:-12};
 const loudestFret=Array(4).fill(Fret);
 //uniform.
 
