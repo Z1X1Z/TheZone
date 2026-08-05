@@ -234,7 +234,7 @@ function spiral_compress(){
     let d =1.;
     if(n!=0)   d = (z[n+1]-z[n-1])/(z[n-1]+z[n+1]);
     else d = z[n+1]/z[n];
-   // if (Math.abs(d)>4.||!isFinite(d))
+    if (Math.abs(d)>4.||!isFinite(d))
         d=0.;
     const nAdj = n + d *6. ;//seems like it should be times 4 for rationality, but 5 works better with continuous star, 6 seems effectively correct
       //if (Math.abs(d)<4+1.&&isFinite(d))
@@ -4650,7 +4650,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                         //toleranceNudge=(toleranceNudge/trunc)*trunc
                   //toleranceNudge+=(totalAMP)**(.5)**(totalAMP)**(1./totalAMP)**(totalAMP);
                         //last line working on nyquist filtering, added
-                        nyquistFilter = false;//turn off to debug nyquists
+                        nyquistFilter = true;//turn off to debug nyquists
                   tolerance+=toleranceNudge;
          // tolerance=(tolerance/trunc)*trunc
 
