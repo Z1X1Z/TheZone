@@ -3030,9 +3030,12 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
         if (SEVEYEStartAdj>lengthP-sevMargin)hyperCore+=lfc*SEVEYEpow/1.5;
 
     else 
-  hyperCore+=SEVEYEpow/sqrt(lfc);//  hyperCore+=SEVEYEpow*4./3../sqrt(lfc);
+    {
+  hyperCore+=SEVEYEpow*4./3./sqrt(lfc);//  hyperCore+=SEVEYEpow*4./3../sqrt(lfc);
+  if(length(constellationCoord)>90.)hyperCore-=log(2.)*2.;
 
-  //hyperCore+=.5;
+ // hyperCore-=1./lfc;
+    }
  }
 
 

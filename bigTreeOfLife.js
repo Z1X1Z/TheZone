@@ -570,7 +570,11 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
         if (SEVEYEStartAdj>lengthP-sevMargin)hyperCore+=lfc*SEVEYEpow/1.5;
 
     else 
-  hyperCore+=SEVEYEpow/Math.sqrt(lfc);
+    {
+  hyperCore+=SEVEYEpow*4./3./Math.sqrt(lfc);
+  if(length(constellationCoord)>90.)hyperCore-=log(2.)*2.;
+    }
+
  }
 
 if(jubileyes!=0.) 

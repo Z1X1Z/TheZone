@@ -753,8 +753,9 @@ window.twist-=window.spinnerTwist
                             if(uniforms.carousel.value!=0.&&uniforms[ "time" ].value>0)         spunD=spin(spunD,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                   const d_xS=spunD[0]*interpolation;
                   const d_yS=spunD[1]*interpolation;
+                                         var location = (uniforms.constellationCoord.value.x**2+uniforms.constellationCoord.value.y**2.)**.5    
 
-                if(((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0))
+                if((location<90&&location>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0))
                     wrapMovementBoost=2.;
                 else wrapMovementBoost = 1;
 
@@ -2146,8 +2147,8 @@ function runOSMD (){
                                     var spunTouch=touchMovement;
                                           if(uniforms.carousel.value!=0.&&uniforms[ "time" ].value>0)
                                               spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
-                                             
-                if(((coordX**2+coordY**2)**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)&&spunTouch[0]!=0&&spunTouch[1]!=0)
+                                         var location = (uniforms.constellationCoord.value.x**2+uniforms.constellationCoord.value.y**2.)**.5    
+                if((location<90.&&location>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)&&spunTouch[0]!=0&&spunTouch[1]!=0)
                     wrapMovementBoost=2.;
                     else wrapMovementBoost=1;
 
