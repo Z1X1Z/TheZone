@@ -192,7 +192,7 @@ let updateInstant = false;
                           const   pointColor = new Float32Array(bufferPortion*4*2);
                               const adjConstant =2.;//shouldn't be buffersize needs to be revised
     var maxSamp=0.;
- var minSamp=Number.MAX_VALUE
+ var minSamp=100000
 function makeSpirograph(){
       phase = phase % (pi*2);
         phase2 =  phase2 % (pi*2);
@@ -739,9 +739,11 @@ window.twist-=window.spinnerTwist
                                FEEDBACKuniforms.d.value=new THREE.Vector2(d_x,d_y);
                                FEEDBACKuniformsFlip.d.value=new THREE.Vector2(d_x,d_y);
          }
+         if(isFinite(volume)&&volume>0)
+         {
                  d_x*=volume;
                  d_y*=volume;
-
+         }
               var spunD = [d_x,d_y];
 
   if(uniforms.spinner.value)  spunD=spin(spunD,twist/12.*Math.PI+Math.PI);
@@ -1471,8 +1473,8 @@ function setTwelveNotes()
 {
  if(!touchMode//&&!DAW
                 ||(window.shouldShowStar)){
-   var maxNoteAmp=Number.MIN_VALUE;
-   var minNoteAmp=Number.MAX_VALUE;
+   var maxNoteAmp=0;
+   var minNoteAmp=100000;
 
 
         for (var g=0; g<12; g++) {
@@ -2539,8 +2541,6 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
 
                                             analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
                                         analyser.getByteFrequencyData(  dataArray);
-
-
                                        if(window.playMovie)
                                         {
                                             for(var n=0;n<dataArray.length;n++)dataArray[n]=dataArray[n]/2.;//quieter
@@ -2638,7 +2638,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
         
         vectorize4();
     setTwelveNotes();
-    let lowNote = Number.MAX_VALUE;
+    let lowNote = 100000;
      lowAmpFreq = 1;
 
      lowAmpFreq = 1;
@@ -2676,7 +2676,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
     for(var t=0; t<bufferPortion;t++) if(inputData[t]>Math.abs(maxSamp))maxSamp=Math.abs(inputData[t]);
                                                               if(isFinite(maxSamp)&&maxSamp!=0)    uniforms.maxSamp.value=maxSamp;
 
-   minSamp=Number.MAX_VALUE;
+   minSamp=100000;
   for(var t=0; t<bufferPortion;t++) if(inputData[t]<maxSamp)minSamp=inputData[t];
                                              if(isFinite(minSamp))                   uniforms.minSamp.value=minSamp;
 
@@ -2814,8 +2814,8 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
 
 
        
-       var maxStack=Number.MIN_VALUE;
-       var minStack=Number.MAX_VALUE;
+       var maxStack=0;
+       var minStack=100000;
 
 
         
@@ -2893,8 +2893,8 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
        
        
        
-   var maxTestar=Number.MIN_VALUE;
-   var minTestar=Number.MAX_VALUE;
+   var maxTestar=0;
+   var minTestar=100000;
 
 
     
