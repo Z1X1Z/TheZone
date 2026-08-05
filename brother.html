@@ -2452,7 +2452,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
          return ret;//return red if run in  error
     }
                     const float elbowJoint = sqrt2;//may be 1.44?
-vec2 spinningArms(vec2 g, vec2 t, float angle,float amp, bool HandOfGod, float finger1 ,float finger2,float finger3 ,float finger4 ,float finger5 ,float finger6,float finger7,float finger8,float finger9 ,float finger10){
+vec2 spinningArms(vec2 g, vec2 t, float angle,float amp, bool HandOfGod){
 t*=0.;//should be conditionallized
             float b = (0.);
 
@@ -2664,22 +2664,12 @@ z.x=sqrt(abs(z.x));
                     
                     }
 
-        float finger1 = 1.;
-        float finger2 =1.;
-        float finger3 = 1.;
-        float finger4 = 1.;
-        float finger5 = 1.;
-        float finger6 = 1.;
-        float finger7 = 1.;
-        float finger8 = 1.;
-        float finger9 = 1.;
-        float finger10 = 1.;
 
      vec4 arms = vec4(0.);
      vec2 h = vec2(0.);
        if(spinning){                    float angle =atan(d.x,d.y);
 
-         h = spinningArms(g,t,angle,1.,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
+         h = spinningArms(g,t,angle,1.,false);
          b+=h.x;
          arm+=h.y;
        }
@@ -2691,27 +2681,27 @@ z.x=sqrt(abs(z.x));
         
           float angle =atan(loudestFret1.x,loudestFret1.y);
                 h = spinningArms(g,t,angle,volumeFret1*4./3.
-                ,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
+                ,false);
 extrArms+=h.x;
                  arm+=h.y;
 
 
            angle =atan(loudestFret2.x,loudestFret2.y);
                h = spinningArms(g,t,angle,volumeFret2*4./3.
-               ,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
+               ,false);
 extrArms+=h.x;
                  arm+=h.y;
 
            angle =atan(loudestFret3.x,loudestFret3.y);
                 h = spinningArms(g,t,angle,volumeFret3*4./3.
-                ,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
+                ,false);
 extrArms+=h.x;
                  arm+=h.y;
 
 
            angle =atan(loudestFret4.x,loudestFret4.y);
                h = spinningArms(g,t,angle,volumeFret4*4./3.
-               ,false,finger1,finger2,finger3,finger4,finger5,finger6,finger7,finger8,finger9,finger10);
+               ,false);
 extrArms+=h.x;
                  arm+=h.y;
 
@@ -3929,7 +3919,7 @@ float outerARMS = 0.;
 if(handOfGod)
 {
         float angle =atan(d.x,d.y);
-             if(length(characterP)>1.25)  outerARMS = spinningArms(characterP*vec2(1.,(-upOrDown)*flipStar),d,angle*upOrDown*flipStar,1.,true,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.).x;
+             if(length(characterP)>1.25)  outerARMS = spinningArms(characterP*vec2(1.,(-upOrDown)*flipStar),d,angle*upOrDown*flipStar,1.,true).x;
 
 }
 

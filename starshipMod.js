@@ -110,7 +110,7 @@ star,starColors;
 let testarContinuous=[];//
 
 var  DAWstar,DAWstarColors;
-let Fret = {x:0,y:0,index:null,volume:1.,note:-12};
+let Fret = {x:null,y:null,index:null,volume:1.,note:-12};
 const loudestFret=Array(4).fill(Fret);
 //uniform.
 
@@ -123,7 +123,7 @@ const loudestFret=Array(4).fill(Fret);
         else fretCount=1024;
     
     let minDifference = 1.7;
-    for (var g=0; g<fretCount; g++)if(isFinite(mustarD[g])&&isFinite(frequencies[g])&&isFinite(dataArray[g]))
+    for (var g=0; g<fretCount; g++)if(isFinite(mustarD[g]))
     {
         
         if (Math.abs(mustarD[g]%24-loudestFret[0].note%24)>minDifference&&dataArray[g]>loudestFret[0].volume)
@@ -168,14 +168,11 @@ loudestFret[2].note = mustarD[g]
     }
     for(var g = 0;g<loudestFret.length;g++)
     {
-        if(loudestFret[g].index!=null)
-        {
         var arm =(flip*mustarD[loudestFret[g].index]+twist+12)%24./24.*pi*2.;
         //var rpio2 = arm+pi;
         loudestNote[g]=mustarD[loudestFret[g].index]/2.;
         loudestFret[g].x = -Math.sin(arm);//*loudestFret[g].volume;
         loudestFret[g].y = -Math.cos(arm);//*loudestFret[g].volume;
-        }
 
     }
 }
@@ -195,7 +192,7 @@ let updateInstant = false;
                           const   pointColor = new Float32Array(bufferPortion*4*2);
                               const adjConstant =2.;//shouldn't be buffersize needs to be revised
     var maxSamp=0.;
- var minSamp=100000
+ var minSamp=Number.MAX_VALUE
 function makeSpirograph(){
       phase = phase % (pi*2);
         phase2 =  phase2 % (pi*2);
@@ -237,7 +234,6 @@ function spiral_compress(){
     let d =1.;
     if(n!=0)   d = (z[n+1]-z[n-1])/(z[n-1]+z[n+1]);
     else d = z[n+1]/z[n];
-    if (Math.abs(d)>4.||!isFinite(d))d=0.;
     const nAdj = n + d *6. ;//seems like it should be times 4 for rationality, but 5 works better with continuous star, 6 seems effectively correct
       //if (Math.abs(d)<4+1.&&isFinite(d))
         freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
@@ -287,12 +283,12 @@ function spiral_compress(){
 
                        if(window.extremeFrets&&EldersLeg>2)
                             {
-        for(var b = 0; b<EldersLeg; b++)if(testar[b]!=0.) testar[b]=(1.-1./(testar[b]*exFactor)**(1./Math.E))**(Math.E)//not sure this is right
+        for(var b = 0; b<EldersLeg; b++)if(testar[b]!=0.) testar[b]=(1.-1./(testar[b]*exFactor)**(1./Math.E))**(Math.E)
         //    for(var b = 0; b<12; b++)if(testar[b]!=0.) stack12Array[b]=(1.-1./stack12Array[b]**(1./Math.E))**(Math.E)
                 }
                             
 };
-                                      var exFactor=   1;
+                                      var exFactor=   1.;
 var innerFrets =  new Float64Array((EldersLeg>0)?EldersLeg:0.);//could be refactored
 
 
@@ -354,7 +350,7 @@ fourthHandsFingersArray[m]=0.
                     starNote = Math.round(twelfths)%(12);
                     finger = Math.floor((twelfths-.5)/12);
                     // fingerPitch = Math.floor((twelfths-.5-6.)/12);
-                    if (finger<10&&finger>=0&&isFinite(finger)&&isFinite(starNote)&&isFinite(dataArray[n])&&isFinite(twelfths)) 
+                    if (finger<10&&finger>=0&&isFinite(finger)&&isFinite(starNote)&&isFinite(dataArray[n])) 
                         {
                             
                             twelve[starNote][finger] +=dataArray[n]///twelfths;
@@ -928,6 +924,8 @@ function setFFTdependantSizes(){
       frequencies= new Float64Array(numberOfBins).fill(0);
      inputData = new Float32Array(bufferSize).fill(0);
       dataArray = new Uint8Array( numberOfBins ).fill(0);
+
+    // window.zoomOutRatchetThreshold=starSHIPVOLUMEdefaultLowVolume;//5./1024;////or 1/1024.//maybe shouldn't need to be here could be solved away
      
      
       star= new Float32Array((numberOfBins>EldersLeg)?numberOfBins*3*3:EldersLeg*3*2*3);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
@@ -1475,8 +1473,8 @@ function setTwelveNotes()
 {
  if(!touchMode//&&!DAW
                 ||(window.shouldShowStar)){
-   var maxNoteAmp=0;
-   var minNoteAmp=100000;
+   var maxNoteAmp=Number.MIN_VALUE;
+   var minNoteAmp=Number.MAX_VALUE;
 
 
         for (var g=0; g<12; g++) {
@@ -2640,7 +2638,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
         
         vectorize4();
     setTwelveNotes();
-    let lowNote = 100000;
+    let lowNote = Number.MAX_VALUE;
      lowAmpFreq = 1;
 
      lowAmpFreq = 1;
@@ -2678,7 +2676,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
     for(var t=0; t<bufferPortion;t++) if(inputData[t]>Math.abs(maxSamp))maxSamp=Math.abs(inputData[t]);
                                                               if(isFinite(maxSamp)&&maxSamp!=0)    uniforms.maxSamp.value=maxSamp;
 
-   minSamp=100000;
+   minSamp=Number.MAX_VALUE;
   for(var t=0; t<bufferPortion;t++) if(inputData[t]<maxSamp)minSamp=inputData[t];
                                              if(isFinite(minSamp))                   uniforms.minSamp.value=minSamp;
 
@@ -2816,8 +2814,8 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
 
 
        
-       var maxStack=0;
-       var minStack=100000;
+       var maxStack=Number.MIN_VALUE;
+       var minStack=Number.MAX_VALUE;
 
 
         
@@ -2895,8 +2893,8 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
        
        
        
-   var maxTestar=0;
-   var minTestar=100000;
+   var maxTestar=Number.MIN_VALUE;
+   var minTestar=Number.MAX_VALUE;
 
 
     
