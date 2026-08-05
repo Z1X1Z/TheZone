@@ -755,7 +755,7 @@ window.twist-=window.spinnerTwist
                   const d_yS=spunD[1]*interpolation;
                                          var location = (uniforms.constellationCoord.value.x**2+uniforms.constellationCoord.value.y**2.)**.5    
 
-                if((location<90&&location>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0))
+                if((location<81&&location>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0))
                     wrapMovementBoost=2.;
                 else wrapMovementBoost = 1;
 
@@ -2148,7 +2148,7 @@ function runOSMD (){
                                           if(uniforms.carousel.value!=0.&&uniforms[ "time" ].value>0)
                                               spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                                          var location = (uniforms.constellationCoord.value.x**2+uniforms.constellationCoord.value.y**2.)**.5    
-                if((location<90.&&location>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)&&spunTouch[0]!=0&&spunTouch[1]!=0)
+                if((location<81.&&location>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)&&spunTouch[0]!=0&&spunTouch[1]!=0)
                     wrapMovementBoost=2.;
                     else wrapMovementBoost=1;
 
