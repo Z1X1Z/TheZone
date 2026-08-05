@@ -234,8 +234,7 @@ function spiral_compress(){
     let d =1.;
     if(n!=0)   d = (z[n+1]-z[n-1])/(z[n-1]+z[n+1]);
     else d = z[n+1]/z[n];
-    if (Math.abs(d)>4.||!isFinite(d))
-        d=0.;
+    if (Math.abs(d)>4.||!isFinite(d))d=0.;
     const nAdj = n + d *6. ;//seems like it should be times 4 for rationality, but 5 works better with continuous star, 6 seems effectively correct
       //if (Math.abs(d)<4+1.&&isFinite(d))
         freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
@@ -285,7 +284,7 @@ function spiral_compress(){
 
                        if(window.extremeFrets&&EldersLeg>2)
                             {
-        for(var b = 0; b<EldersLeg; b++)if(testar[b]!=0.) testar[b]=(1.-1./(testar[b]*exFactor)**(1./Math.E))**(Math.E)
+        for(var b = 0; b<EldersLeg; b++)if(testar[b]!=0.) testar[b]=(1.-1./(testar[b]*exFactor)**(1./Math.E))**(Math.E)//not sure this is right
         //    for(var b = 0; b<12; b++)if(testar[b]!=0.) stack12Array[b]=(1.-1./stack12Array[b]**(1./Math.E))**(Math.E)
                 }
                             
@@ -2561,7 +2560,7 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                         +(Math.abs(inputData[n])**.5)*Math.sign(inputData[n])
                                         -(Math.abs(inputData[n+1])**2)*Math.sign(inputData[n+1]);
                                                                         */
-                                    for(var n=0; n<fractionOfFrame;n++)
+                                    for(var n=0; n<fractionOfFrame;n++)if(isFinite(inputData[n]))
                                         totalAMP+=-Math.abs(inputData[n])
                                         +(Math.abs(inputData[n])**.5)*Math.sign(inputData[n])
                                         -(Math.abs(inputData[n])**2)*Math.sign(inputData[n]);
@@ -2572,7 +2571,8 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                     totalAMP=Math.abs(totalAMP);
                                     totalAMP/=fractionOfFrame;
                                   //  ampThresh=totalAMP;
-                                  for(var n=0; n<inputData.length;n++)ampThresh+=Math.abs(inputData[n]);
+                                  for(var n=0; n<inputData.length;n++)if(isFinite(inputData[n]))
+                                    ampThresh+=Math.abs(inputData[n]);
                                     ampThresh/=inputData.length;
 
                                                        // if(window.android)ampThresh=ampThresh**.5/8.;//may not work as intended on all platforms, if at all
@@ -2749,6 +2749,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
     uniforms["zoomOutRatchetThreshold" ].value=zoomOutRatchetThreshold;
 
         if(!shouldShowStar||ampThresh>zoomOutRatchetThreshold&&on) uniforms["volume" ].value = audioX.sampleRate/bufferSize*ampThresh/(1.+zoomOutRatchetThreshold);
+        
         uniforms[ "zoom" ].value = zoom;
     
     
@@ -4650,7 +4651,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                         //toleranceNudge=(toleranceNudge/trunc)*trunc
                   //toleranceNudge+=(totalAMP)**(.5)**(totalAMP)**(1./totalAMP)**(totalAMP);
                         //last line working on nyquist filtering, added
-                        nyquistFilter = true;//turn off to debug nyquists
+                        nyquistFilter = false;//turn off to debug nyquists
                   tolerance+=toleranceNudge;
          // tolerance=(tolerance/trunc)*trunc
 
