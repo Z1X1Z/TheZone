@@ -2452,7 +2452,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                if(holyeyes==0&&!((p.x>1.||p.x<-0.)||abs(p.y)>.75))ret=vec3(0.);
          return ret;//return red if run in  error
     }
-                    const float elbowJoint = sqrt2;//may be 1.44?
+                    const float elbowJoint = sqrt2*1.012;//may be 1.44?
 vec2 spinningArms(vec2 g, float angle,float amp, bool HandOfGod){
 //t*=0.;//should be conditionallized
             float b = (0.);
@@ -2653,7 +2653,7 @@ z.x=sqrt(abs(z.x));
                     float arm =0.;
                                   float  armSlice = abs(g.y)*pow(abs(g.x),1.25);
 
-                    if((armSlice<elbowJoint/2.||!spinning)&&g.x<0.)
+                    if((armSlice<elbowJoint/2.*1.012||!spinning)&&g.x<0.)
 
                     {
                     if(g.x*g.x+g.y*g.y<40.)
