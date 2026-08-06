@@ -3155,8 +3155,8 @@ else{//start drawing of just twenty four frets here
     let oddSkew =EldersLeg%2/2;
     let bottomNote = Math.round(-twist+24)%24;
     let topNote = Math.round(-twist+60)%24;
-
-                    let centerDisplacement = 7./16.;//4./7.;//9./14.;
+                    let bigness = .5;
+                    let centerDisplacement = 1./2*bigness;//4./7.;//9./14.;
                                                          
                                                          var TransparencyStar = 1.;//.5?
                                                          var TransparencyStar2 = .77;
@@ -3228,10 +3228,10 @@ const rpio2 =arm+pi/2.;
 let xBoost = -Math.sin(arm)*centerDisplacement;
 let yBoost = -Math.cos(arm)*centerDisplacement;
                 
-let x = widt*-Math.sin(rpio2);
-let y = widt*-Math.cos(rpio2);
-let xr = lengt*-Math.sin(arm);
-let yr = lengt*-Math.cos(arm);
+let x = widt*-Math.sin(rpio2)*bigness;
+let y = widt*-Math.cos(rpio2)*bigness;
+let xr = lengt*-Math.sin(arm)*bigness;
+let yr = lengt*-Math.cos(arm)*bigness;
                                        // if(vop.r==vop.g||vop.b==vop.g)TransparencyStar=.875;
                                       //  else
                                //         if(vop.g==0.)   TransparencyStar*=(vop.r+vop.b*2.)/Math.max(vop.b,vop.r)/3.;
@@ -3259,8 +3259,8 @@ let yr = lengt*-Math.cos(arm);
                                   
                 starStride+=6;
                                  
-                                x *=-centerDisplacement/2.;
-                                y *=-centerDisplacement/2.;
+                                x *=-centerDisplacement/2./bigness;
+                                y *=-centerDisplacement/2./bigness;
                                         // if (g==bottomNote&&EldersLeg==24)   x/=2.;
                                             //else
                                             //x/=1.25;
