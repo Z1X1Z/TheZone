@@ -4366,7 +4366,7 @@ vec4 tol(vec2 p, vec2 t){
           
   if(p.x>0.)
     {
-        p*=-1.;
+     if(externalCores!=0.)   p*=-1.;
     unSwitch=!unSwitch;
 
  }
