@@ -3140,8 +3140,8 @@ else{//start drawing of just twenty four frets here
                              }
                     if (maxTestar==minTestar)minTestar=0;
 
-                    let maxFret = -1000000;
-                    let minFret = 10000000;
+                    let maxFret = Number.MIN_VALUE;
+                    let minFret = Number.MAX_VALUE;
                     
                     for (var g=0; g<EldersLeg; g++) {
                         if(innerFrets[g]>maxFret){maxFret=innerFrets[g];}
@@ -3156,7 +3156,7 @@ else{//start drawing of just twenty four frets here
     let bottomNote = Math.round(-twist+24)%24;
     let topNote = Math.round(-twist+60)%24;
 
-                    let centerDisplacement = .5;//4./7.;//9./14.;
+                    let centerDisplacement = 7./16.;//4./7.;//9./14.;
                                                          
                                                          var TransparencyStar = 1.;//.5?
                                                          var TransparencyStar2 = .77;
