@@ -567,7 +567,12 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
 
  if(seventhOUTside&&lengthP>SEVEYEStartAdj-sevMargin&&lfc>zoom)
  {
-        if (SEVEYEStartAdj>lengthP-sevMargin)hyperCore+=lfc*SEVEYEpow/1.5;
+        if (SEVEYEStartAdj>lengthP-sevMargin)
+            {
+                hyperCore+=lfc*SEVEYEpow/1.5;
+                            hyperCore-=.1;
+
+            }
 
     else 
     {
