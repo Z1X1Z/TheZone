@@ -572,7 +572,7 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
     else 
     {
   hyperCore+=SEVEYEpow*4./3./Math.sqrt(lfc);
-  if(length(constellationCoord)>81.)hyperCore-=log(2.)*2.;
+  if(lfc>81.)hyperCore-=log(2.)*2.+1;
     }
 
  }
