@@ -4930,7 +4930,8 @@ hyperCore+=2./3.;
 //else if (seventhEYE!=3.||lengthP<twoThirds)
 else if((seventhEYE==0.||(seventhEYEandJubileye&&lengthP<twoThirds))&&(lengthP<SEVEYEStartAdj||!seventhOUTside))
 hyperCore+=.5;
-// hyperCore-=lfcCenterCored-twoThirds;
+
+if(lengthP<2./3.)        hyperCore+=.5;
 }
 if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside)&&((seventhEYE!=1.&&seventhEYE!=2.)||lengthP>twoThirds)
     &&squeezeN==1.
@@ -6104,7 +6105,7 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
 
    
          if(0.!=jubileyes&&
-       ( (seventhEYE==3.&&lengthP<twoThirds
+       ( (seventhEYE==3.&&lengthP<twoThirds&&mod(coresIn,2.)==1.
        //&&coreChanger
        )||seventhEYE!=3.)&&
          

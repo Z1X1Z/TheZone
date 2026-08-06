@@ -584,6 +584,8 @@ hyperCore+=2./3.;
 //else if (seventhEYE!=3.||lengthP<2./3.)
 else if((seventhEYE==0.||(seventhEYEandJubileye&&lengthP<2./3.))&&(lengthP<SEVEYEStartAdj||!seventhOUTside))
 hyperCore+=.5;
+if(lengthP<2./3.)        hyperCore+=.5;
+
 // hyperCore-=lfcCenterCored-twoThirds;
 }
 
@@ -1230,7 +1232,8 @@ else s=spin(s,Math.PI);
 
          if(i-(counter)==Math.abs(jubileyes)&&
 jubileyes!=0.&&
-       ( (seventhEYE==3.&&lengthP<2./3.)||seventhEYE!=3.)&&
+       ( (seventhEYE==3.&&lengthP<2./3.&& coresIn%2==1
+)||seventhEYE!=3.)&&
  (i)-counter==Math.abs(jubileyes)-1.&&
        s.length()<1./3.//2./3.
  )
