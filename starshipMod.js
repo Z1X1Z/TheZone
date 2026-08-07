@@ -3153,6 +3153,7 @@ else{//start drawing of just twenty four frets here
                     if (maxFret==minFret)minFret=0;
 
                     let maxMinDiff  = maxFret-minFret;
+                    let growTopAndBottom=false;
     let twoOr1= EldersLeg<=2
     if(twoOr1){maxTestar=1;minTestar=0;}
     let oddSkew =EldersLeg%2/2;
@@ -3180,8 +3181,12 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                 if(EldersLeg>0.)
                 {
                     widt= starshipSize/(EldersLeg/24.)**.5/incrementation/2.;
+                                                                if(growTopAndBottom)
+{
                     if (g==bottomNote&&EldersLeg==24)widt*=2.;
                     else if (g==topNote&&EldersLeg==24)widt*=1.5;
+}
+                
                  arm =flip*(g*radialWarp+twist*EldersLeg/24.)%EldersLeg/EldersLeg*pi*2.;
                  lengt = ((testar[(g+EldersLeg/2.)%EldersLeg])-minTestar)/(maxTestar-minTestar);;
                 if(twoOr1) {
@@ -3285,11 +3290,12 @@ let yr = lengt*-Math.cos(arm)*bigness;
                                                              {
                                    xr = -(lengt-1.)*-Math.sin(arm)*centerDisplacement;
                                    yr = -(lengt-1.)*-Math.cos(arm)*centerDisplacement;
-                                            
+                                            if(growTopAndBottom)
+                                            {
                                                       if (g==bottomNote&&EldersLeg==24)
                                                       {x/=1.5;y/=1.5}
                                                       else if (g==topNote&&EldersLeg==24) {x/=1.25;y/=1.25}
-
+                                            }
                                   starPositionAttribute.setXYZ(starStride,-x+xBoost,    -y+yBoost,  dep)
                                   starPositionAttribute.setXYZ(starStride+1,x+xBoost,    y+yBoost,  dep)
                                   starPositionAttribute.setXYZ(starStride+2,(xr+x), (yr+y),  dep)
@@ -3318,7 +3324,7 @@ let yr = lengt*-Math.cos(arm)*bigness;
                                                                        
                                                starStride+=6;
 
-                          let greyBoost = (1.+incrementation/2.)*((Math.log(3)-1)*.5+1);
+                          let greyBoost = (1.+incrementation/2.)*Math.log(3);
                   x *= greyBoost;
                   y *= greyBoost;
 
