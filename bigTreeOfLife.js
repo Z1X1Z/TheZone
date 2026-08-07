@@ -1058,7 +1058,7 @@ var       spokeloverCoreShiftUp   =  Math.pow(downSpoke,powerOfSpokeCore)*logSta
 //}
 
 dstnce=s.length();
-if(continuumClover!=0&&lfc!=0){//engage continualization
+if(continuumClover!=0&&lfcOverZoom>.5){//engage continualization
   
 var continuumCore=(continuumCounter+hyperCoreOUTPUT)*correction;
 
