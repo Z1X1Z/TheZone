@@ -1335,14 +1335,17 @@ function loadFrequencyTextures(){
     for (var ts=0.; ts<radialIncrements; ts++){
          let angleb = ts*1./radialIncrements;
         // if(Math.round(angleb*12.)==0.)
-        for(var y=-4; y<8;y++){
+        for(var y=-5; y<8;y++){
                 
             let frequency= 2**(angleb+y)*window.ConcertKey;
               bin= Math.round(frequency*numberOfBins/audioX.sampleRate);
          //             freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
 
             if(bin<numberOfBins&&bin>0)
+            {
                 if(isFinite(dataArray[bin]))radialAMP[ts]+=dataArray[bin];
+            }
+           // else console.log(y)
         }
     }
             for (var ts=0; ts<radialIncrements; ts++)radialAMP[ts]/=255.;
