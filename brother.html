@@ -4462,7 +4462,7 @@ vec4 tree = vec4( clamp(
 
                    }
                    
-                   if(starship.w==1.)layeredOUT=vec4(clamp(clamp(layeredOUT.xyz,0.,1.)+(-starship.x-starship.y-starship.z)/2.,0.,1.)+starship.xyz,1.);
+                   if(starship.w==1.&&!(starship.x==starship.y&&starship.y==starship.x))layeredOUT=vec4(clamp(clamp(layeredOUT.xyz,0.,1.)+(-starship.x-starship.y-starship.z)/2.,0.,1.)+starship.xyz,1.);
                         gl_FragColor=vec4(layeredOUT.xyz,1.);//vec4(movie(characterP),1.);//
                         //things known to cause bugs on some android chrome: heart (divides by zero), linear eq,waveform, "144000" men and women in clover, articles
                                                                  
