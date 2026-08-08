@@ -767,7 +767,7 @@ window.twist-=window.spinnerTwist
                 if((location>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0))
 {
                    if(location<81.)
-                            wrapMovementBoost=2.;
+                            wrapMovementBoost=7.*fromCenter**.5/fromCenter;
                         else
                                                         wrapMovementBoost=4./3.;
                                     }
@@ -2169,7 +2169,7 @@ function runOSMD (){
                          if((location>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)&&spunTouch[0]!=0&&spunTouch[1]!=0)
                    {
                    if(location<81.)
-                            wrapMovementBoost=2.;
+                            wrapMovementBoost=7.*fromCenter**.5/fromCenter;
                         else
                                                         wrapMovementBoost=4./3.;
 
