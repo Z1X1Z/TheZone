@@ -288,7 +288,7 @@ function spiral_compress(){
                 }
                             
 };
-                                      var exFactor=   .5;
+                                      var exFactor=   .75;
 var innerFrets =  new Float64Array((EldersLeg>0)?EldersLeg:0.);//could be refactored
 
 
