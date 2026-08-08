@@ -283,7 +283,15 @@ function spiral_compress(){
 
                        if(window.extremeFrets&&EldersLeg>2)
                             {
-        for(var b = 0; b<EldersLeg; b++)if(testar[b]!=0.) testar[b]=(1.-1./(testar[b])**(.5)/exFactor)**(2)
+        for(var b = 0; b<EldersLeg; b++)if(testar[b]!=0.) 
+            {
+
+                testar[b]=(1.-1./(testar[b])**(.5)/exFactor)
+                if(testar[b]<0.)
+                    {testar[b]=0.
+                        console.log("woops");
+                    }
+            }
         //    for(var b = 0; b<12; b++)if(testar[b]!=0.) stack12Array[b]=(1.-1./stack12Array[b]**(1./Math.E))**(Math.E)
                 }
                             
@@ -925,7 +933,7 @@ function setFFTdependantSizes(){
       frequencies= new Float64Array(numberOfBins).fill(0);
      inputData = new Float32Array(bufferSize).fill(0);
       dataArray = new Uint8Array( numberOfBins ).fill(0);
-
+babyBuffer = new Uint8Array( bufferSize ).fill(0);
     // window.zoomOutRatchetThreshold=starSHIPVOLUMEdefaultLowVolume;//5./1024;////or 1/1024.//maybe shouldn't need to be here could be solved away
      
      
@@ -2543,8 +2551,12 @@ uniforms.movieTime.value=(window.TIMESTAMP-window.movieStartTime)/1000./window.m
                                   
                                            // var inputData = new Float32Array(bufferSize);
 
-                                            analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
-                                        analyser.getByteFrequencyData(  dataArray);
+                                         //   analyser.getByteTimeDomainData(babyBuffer); // fill the Float32Array with data returned from getFloatTimeDomainData()
+                                        // for(var n=0;n<inputData.length;n++)inputData[n]=babyBuffer[n]/255.*2-1.  ;//if getByteTimeDomainData not getFloatTimeDomainData
+                                        analyser.getFloatTimeDomainData(inputData); // fill the Float32Array with data returned from getFloatTimeDomainData()
+                                      //     for(var n=0;n<inputData.length;n++)inputData[n]-=babyBuffer[n]/255.*2-1.  ;//look for close to zero amplitude!
+
+                                            analyser.getByteFrequencyData(  dataArray);
                                        if(window.playMovie)
                                         {
                                             for(var n=0;n<dataArray.length;n++)dataArray[n]=dataArray[n]/2.;//quieter
