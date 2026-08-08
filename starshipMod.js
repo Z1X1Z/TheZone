@@ -764,9 +764,14 @@ window.twist-=window.spinnerTwist
                   const d_yS=spunD[1]*interpolation;
                                          var location = (uniforms.constellationCoord.value.x**2+uniforms.constellationCoord.value.y**2.)**.5    
 
-                if((location<81&&location>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0))
-                    wrapMovementBoost=2.;
-                else wrapMovementBoost = 1;
+                if((location>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0))
+{
+                   if(location<81.)
+                            wrapMovementBoost=2.5;
+                        else
+                                                        wrapMovementBoost=4./3.;
+                                    }
+                                                    else wrapMovementBoost = 1;
 
            const bx=coordX+d_xS*MR*zoom*wrapMovementBoost;
           const by=coordY+d_yS*MR*zoom*wrapMovementBoost;
@@ -1710,7 +1715,7 @@ function zoomRoutine(){
         else if(uniforms.MetaCored.value||zoom<1.){
             zoom /= ZR;
             triggerRailSet=true
-            if(center&&zoom<1.){coordX*=ZR*2./3.;; coordY*=ZR*2./3.;}
+            if(center){coordX*=ZR*2./3.;; coordY*=ZR*2./3.;}
         }
     }
 
@@ -2160,8 +2165,15 @@ function runOSMD (){
                                           if(uniforms.carousel.value!=0.&&uniforms[ "time" ].value>0)
                                               spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                                          var location = (uniforms.constellationCoord.value.x**2+uniforms.constellationCoord.value.y**2.)**.5    
-                if((location<81.&&location>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)&&spunTouch[0]!=0&&spunTouch[1]!=0)
-                    wrapMovementBoost=2.;
+                
+                         if((location>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)&&spunTouch[0]!=0&&spunTouch[1]!=0)
+                   {
+                   if(location<81.)
+                            wrapMovementBoost=2.5;
+                        else
+                                                        wrapMovementBoost=4./3.;
+
+                   }
                     else wrapMovementBoost=1;
 
                                                               coordX+= spunTouch[0]*wrapMovementBoost;

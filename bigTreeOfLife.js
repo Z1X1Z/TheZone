@@ -576,9 +576,10 @@ var spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
 
     else 
     {
-  hyperCore+=SEVEYEpow*1.5/Math.sqrt(1.5*lfc);//SEVEYEpow*4./3./Math.sqrt(lfc);
-  if(lfc>81.)hyperCore-=Math.log(2.)*2.+1;
-    else hyperCore-=.25;
+  hyperCore+=SEVEYEpow/Math.sqrt(lfc-1.);//SEVEYEpow*4./3./Math.sqrt(lfc);
+  
+  if(lfc>81.)hyperCore-=Math.log(2.)*2.;
+    hyperCore-=1./3.;
 
     }
 
