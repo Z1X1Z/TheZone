@@ -283,12 +283,12 @@ function spiral_compress(){
 
                        if(window.extremeFrets&&EldersLeg>2)
                             {
-        for(var b = 0; b<EldersLeg; b++)if(testar[b]!=0.) testar[b]=(1.-1./(testar[b]*exFactor)**(.5))**(2)
+        for(var b = 0; b<EldersLeg; b++)if(testar[b]!=0.) testar[b]=(1.-1./(testar[b])**(.5)/exFactor)**(2)
         //    for(var b = 0; b<12; b++)if(testar[b]!=0.) stack12Array[b]=(1.-1./stack12Array[b]**(1./Math.E))**(Math.E)
                 }
                             
 };
-                                      var exFactor=   1.;
+                                      var exFactor=   .75;
 var innerFrets =  new Float64Array((EldersLeg>0)?EldersLeg:0.);//could be refactored
 
 
