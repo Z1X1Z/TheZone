@@ -283,10 +283,12 @@ function spiral_compress(){
 
                        if(window.extremeFrets&&EldersLeg>2)
                             {
+
         for(var b = 0; b<EldersLeg; b++)if(testar[b]!=0.) 
             {
 
-                testar[b]=(1.-1./(testar[b])**(.5)/exFactor)
+            //  for(var g =0; g<2; g++)  
+                testar[b]=(1.-1./testar[b]**(.5)/exFactor)**2.
                 if(testar[b]<0.)
                     {testar[b]=0.
                         console.log("woops");
