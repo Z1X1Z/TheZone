@@ -8672,6 +8672,8 @@ vec4 tree = vec4( clamp(
                                                                                if ((starship.x!=starship.y||starship.y!=starship.x||starship.z!=starship.x||starship.z!=starship.y)&&shipSUM<126./255.&&starship.w==1.)fin*= shipSUM*4.;//to show black on oreo
 
                                                              float radialIntensity = length(r);
+                                                                                if(starship.x==1.&&starship.y==1.&&starship.z==1.)fin=vec4(1.);
+
              if( moreHorns.r!=0.)fin=vec4((fin.xyz-(ss.x-ss.y-ss.z)*10.)+ss.xyz+vec3(moreHorns.r*pow(radialIntensity,3.5)),0.);
                                                              
                                                             /* if(isGrey!=0.&&isGrey!=1.&&pixelShipGrey==0.)fin=vec4(vec3(.25),1.);*/
