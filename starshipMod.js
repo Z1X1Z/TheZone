@@ -287,8 +287,7 @@ function spiral_compress(){
         for(var b = 0; b<EldersLeg; b++)if(testar[b]!=0.) 
             {
 
-            //  for(var g =0; g<2; g++)  
-                testar[b]=(1.-1./testar[b]**(.5)/exFactor)**2.
+                testar[b]=(1.-1./testar[b]**(.5)/exFactor)**.5
                 if(testar[b]<0.)
                     {testar[b]=0.
                         console.log("woops");
