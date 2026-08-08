@@ -4315,7 +4315,8 @@ if(oneEye.r!=0.)zoomer=-oneEye;
                  
                                  else if(starship.x==starship.y&&starship.z==starship.x&&(starship.x==254./255.||starship.x==1./255.)&&starship.w!=0.)layeredOUT=vec4(vec3(starship.r+mannyFace*(starship.r/2.+.5)),1.);
                    else if (mannyFace.w==.75)  {
-                       if (starship.w>0.&&shipSUM<341./255.)layeredOUT=vec4(mannyFace.xyz+starship.xyz,1.);
+                       if (starship.w>0.&&shipSUM<341./255.)
+                       layeredOUT=vec4(mannyFace.xyz+starship.xyz,1.);
 
                                  else      if(  !((HEART.x==0.&&HEART.y==0.)||(HEART.y==0.&&HEART.z==0.)||(HEART.z==0.&&HEART.x==0.)))
                                  layeredOUT=vec4(mannyFace.xyz+HEART-oneEye.r,1.);
@@ -4351,14 +4352,15 @@ else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
                                                          else layeredOUT=oopm;
 
                                                          }
-else if (starship.w==254./255.)layeredOUT=starship-oneEye.r/3.;
+//else if (starship.w==254./255.)layeredOUT=starship-oneEye.r/3.;
          else if (holyeyes==1&& !((HEART.x==0.&&HEART.y==0.)||(HEART.y==0.&&HEART.z==0.)||(HEART.z==0.&&HEART.x==0.)))
                                  {layeredOUT=vec4(clamp(HEART-(bodyWithArms.x+bodyWithArms.y+bodyWithArms.z)/2.-starship.xyz/3.+4.*(-pong.r-pong.g-pong.b-linearFrequency.r-linearFrequency.g-linearFrequency.b),0.,1.)+(GOH.xyz//+pixelStarship.xyz
                                                                                                                                                                                                                                   )/4.+pong.xyz+linearFrequency.xyz+pillar+insideOut.xyz+starship.xyz+bodyWithArms.xyz+mannyFace.x/64.-oneEye.r*2.,1.);
                        if(pixelShipGrey!=0.)layeredOUT=layeredOUT*pixelShipGrey+pixelShipGrey;
                        }
                                  else if(oneEye.r!=0.)
-                                 {layeredOUT=vec4(-oneEye.x*.25+starship.xyz/1.5+bodyWithArms.xyz*bodyWithArms.w,1.);
+                                 {layeredOUT=vec4(-oneEye.x*.25+starship.xyz/1.5
+                                    +bodyWithArms.xyz*bodyWithArms.w,1.);
                               
                                     if(insideOut.w==.5)layeredOUT+=vec4(insideOut.xyz/3.,0.);
                        }
@@ -4462,13 +4464,20 @@ vec4 tree = vec4( clamp(
 
                                                                                         }
                    
+
+
                    if(!(starship.x==starship.y&&starship.y==starship.z)&&oopm.w==0.)
                    {
                     if(starship.w==1.)
                    layeredOUT=vec4(clamp(clamp(layeredOUT.xyz,0.,1.)+(-starship.x-starship.y-starship.z)/2.,0.,1.)+starship.xyz,1.);
-                  else if (starship.w!=0.&&!(isGrey!=.0||pixelShipGrey!=0.)&&mannyFace.w==0.)layeredOUT =vec4(layeredOUT.xyz*(1.-starship.w*starship.w)+starship.xyz*sqrt(starship.w),1.);
+                   else if (starship.w!=0.&&!(isGrey!=.0||pixelShipGrey!=0.)&&mannyFace.w==0.)
+                   {
+                    layeredOUT =vec4(layeredOUT.xyz*(1.-starship.w*starship.w)+starship.xyz*sqrt(starship.w),1.);
+                   if(oneEye.r!=0.)layeredOUT=vec4(clamp(layeredOUT.xyz*-oneEye.r+-oneEye.r,0.,1.)+starship.xyz/2.,1.);
+                   }
                 }
                    else if(starship.x==129./255.&&starship.y==129./255.&&starship.z==129./255.)layeredOUT*=vec4(vec3(.5),1.);
+                  
                    gl_FragColor=vec4(layeredOUT.xyz,1.);//vec4(movie(characterP),1.);//
                         //things known to cause bugs on some android chrome: heart (divides by zero), linear eq,waveform, "144000" men and women in clover, articles
                                                                  

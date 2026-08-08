@@ -8562,7 +8562,7 @@ else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
                                                          else layeredOUT=oopm;
 
                                                          }
-else if (starship.w==254./255.)layeredOUT=starship-oneEye.r/3.;
+//else if (starship.w==254./255.)layeredOUT=starship-oneEye.r/3.;
          else if (holyeyes==1&&Character==0&& !((HEART.x==0.&&HEART.y==0.)||(HEART.y==0.&&HEART.z==0.)||(HEART.z==0.&&HEART.x==0.)))
                                  {layeredOUT=vec4(clamp(HEART-(bodyWithArms.x+bodyWithArms.y+bodyWithArms.z)/2.-starship.xyz/3.+4.*(-pong.r-pong.g-pong.b-linearFrequency.r-linearFrequency.g-linearFrequency.b),0.,1.)+(GOH.xyz//+pixelStarship.xyz
                                                                                                                                                                                                                                   )/4.+pong.xyz+linearFrequency.xyz+pillar+insideOut.xyz+starship.xyz+bodyWithArms.xyz+mannyFace.x/64.-oneEye.r*2.,1.);
@@ -8623,7 +8623,7 @@ else {
                                                     +ARTICLE
                                                    +bridge//*(1.-isGrey-pixelShipGrey)//+AM*(1.-isGrey-pixelShipGrey)
                                                     ,1.);
-                       vec3 awayFromTree =  vec3((-ss.x-ss.y-ss.z)*starship.w
+                       vec3 awayFromTree =  vec3(//(-ss.x-ss.y-ss.z)*starship.w
                                                  -yourFace.xyz
                                                  +(-pixelStarship.x-pixelStarship.y-pixelStarship.z)/2.
 
@@ -8663,8 +8663,8 @@ vec4 tree = vec4( clamp(
           ,.0,1.)
               ,1.);
 
-          vec4 fin = (clamp(vec4(ss.xyz*starshipMultiplier
-                                 ,1.)
+          vec4 fin = (clamp(vec4(0.//ss.xyz*starshipMultiplier,1.
+          )
                             -faceFromShip,0.,1.)+clamp(
                                                                                      goodies+
                                                                                      tree//+pixelShipGrey
@@ -8718,14 +8718,20 @@ fin/vec4(confraculator
        
 
                    }   
+
+
                    if(!(starship.x==starship.y&&starship.y==starship.z)&&oopm.w==0.)
                    {
                     if(starship.w==1.)
                    layeredOUT=vec4(clamp(clamp(layeredOUT.xyz,0.,1.)+(-starship.x-starship.y-starship.z)/2.,0.,1.)+starship.xyz,1.);
-                  else if (starship.w!=0.&&!(isGrey!=.0||pixelShipGrey!=0.)&&mannyFace.w==0.)layeredOUT =vec4(layeredOUT.xyz*(1.-starship.w*starship.w)+starship.xyz*sqrt(starship.w),1.);
+                   else if (starship.w!=0.&&!(isGrey!=.0||pixelShipGrey!=0.)&&mannyFace.w==0.)
+                   {
+                    layeredOUT =vec4(layeredOUT.xyz*(1.-starship.w*starship.w)+starship.xyz*sqrt(starship.w),1.);
+                   if(oneEye.r!=0.)layeredOUT=vec4(clamp(layeredOUT.xyz*-oneEye.r+-oneEye.r,0.,1.)+starship.xyz/2.,1.);
+                   }
                 }
                    else if(starship.x==129./255.&&starship.y==129./255.&&starship.z==129./255.)layeredOUT*=vec4(vec3(.5),1.);
-                 
+            
                         //                             if(layeredOUT.r!=zoomer.r&&layeredOUT.g!=zoomer.g&&layeredOUT.b!=zoomer.b&&mannyFace.w!=.75&&mannyFace.w!=-.25&&mannyFace.w!=.5&&starship.w==0.&&StaRivers.w==0.&&bodyWithArms.w==.0)    layeredOUT=vec4(layeredOUT.xyz*2./3.+zoomer/3.,1.);
 
            if(movieTime<=5.&&movieTime>=0.)layeredOUT=vec4(movie(characterP),1.);
