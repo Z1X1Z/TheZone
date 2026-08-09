@@ -4493,7 +4493,7 @@ vec4 tree = vec4( clamp(
                 }
                    else if (starship.w!=0.&&!(isGrey!=.0||pixelShipGrey!=0.)&&(mannyFace.w==0.||mannyFace.w==-1.))
                    {
-                   layeredOUT =vec4(layeredOUT.xyz*(1.-starship.w*starship.w)+starship.xyz*sqrt(starship.w),1.);
+                   layeredOUT =vec4(layeredOUT.xyz*(1.-starship.w)+starship.xyz,1.);
                    if(oneEye.r!=0.&&mannyFace.w!=.75)layeredOUT=vec4(clamp(layeredOUT.xyz*clamp(-oneEye.r,-.0,1.)+clamp(-oneEye.r,-.5,.5)+AM.r*1.5,0.,1.)+starship.xyz/2.,1.);
                    }
                 }
