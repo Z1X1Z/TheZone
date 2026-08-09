@@ -1811,14 +1811,16 @@ float brightness=0.;
        // else return vec4(0.);
        //return vec4(noteAmpToLength);
     
-            if
-                       ((noteAmpToLength>.5|| noteAmpByLength>.25)
-                          &&(noteAmpToLength<1.||(noteAmpToLength>2.
-                                                &&noteAmpToLength<4.||(noteAmpToLength>8.
-                                                   &&noteAmpToLength<16.||(noteAmpToLength>32.
-                                                      &&noteAmpToLength<64.||(noteAmpToLength>128.
+            
+            if(
+                       //(noteAmpToLength>.5|| noteAmpByLength>.25)  &&
+                          (noteAmpToLength<0.||(noteAmpToLength>1.
+                                               &&noteAmpToLength<1.||(noteAmpToLength>16.
+                                                   &&noteAmpToLength<32.||(noteAmpToLength>128.
+                                                  //    &&noteAmpToLength<64.||(noteAmpToLength>128.
                                                       &&noteAmpToLength<256.||(noteAmpToLength>512.
-                                                      ))))))
+                                                      
+                                                      )))))//)
                              || (noteAmpByLength>.75)
                          )
                
