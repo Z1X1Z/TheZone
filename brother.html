@@ -1740,7 +1740,7 @@ float brightness=0.;
 
 
 
-    float starnSize = PI/120.*2.*7./8.*2.;
+    float starnSize = PI/120.*7./8.*2.*2.;
     
     float scalar =1./2.*3./4.;
 
@@ -1822,8 +1822,9 @@ float brightness=0.;
                                                    &&noteAmpToLength<16./1.25||(noteAmpToLength>32./1.5
                                                       &&noteAmpToLength<64./1.5||(noteAmpToLength>128./1.75
                                                       &&noteAmpToLength<256./1.75||(noteAmpToLength>512./2.
-                                                      
-                                                      ))))))))
+                                                       &&noteAmpToLength<512./1.75||(noteAmpToLength>512.
+
+                                                      )))))))))
                              || (noteAmpByLength>.5)
                          )
                
