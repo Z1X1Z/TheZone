@@ -7850,7 +7850,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                                                        {
                                                              float divisor = 1.;
                                                             // if(gameOn)divisor=1.5;
-                                                             AM+=faceFORWARD(characterOnTrailP*angelSize,moveDynamic)/divisor;
+                                                             AM+=faceFORWARD(characterOnTrailP*angelSize,moveDynamic)/divisor/1.5;
                                                              AM=clamp(AM,0.,1.);
                                                             if(mny.r!=0.||mny.g!=0.||mny.b!=0.) AM*=mny;
                                                          //    mny+=AM;
@@ -7890,7 +7890,7 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                          }
                      else
                      {insideOut=vec4(clamp(insideOut.xyz,.05,.9),1.);
-                         insideOut+=clamp(AM.r,0.,1.);
+                         if(insideOut.r!=0.||insideOut.g!=0.||insideOut.b!=0.)insideOut+=clamp(AM.r,0.,1.);
                          }
                      }
 float outerARMS = 0.;
@@ -8640,7 +8640,7 @@ else {
 
                                                  +(-HEART.b*2.5-HEART.r-HEART.g)/3.
                                                 // +(-HEART.b-HEART.r-HEART.g)/4.
-                                                 -clamp(AM.r*13.,0.,1.)
+                                                 -clamp(AM.r*13.*1.5,0.,1.)
                                                  +(-linearFrequency.r-linearFrequency.g-linearFrequency.b)*4.
                                                  -(pong.r+pong.g+pong.b)
                                                  +bigEyes.xyz*largeEyeColor
