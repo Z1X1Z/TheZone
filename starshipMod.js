@@ -3664,19 +3664,20 @@ let s = f;
                                                                                   
           while(loopLimit>0&&r!=f){
                  if(!trailSegmentExpired[r]&&timeElapsedSinceRecording<=trailSecondsLong){
-                        // timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
+                         timeElapsedSinceRecording=  uniforms["time"].value-trailTimeOfRecording[r];
                             let zlast = z;
                      let seg = timeElapsedSinceRecording/((trailSecondsLong>0)?trailSecondsLong:1);
-                     if(window.flame)seg*=seg;
+                     if(window.flame)
+                        seg*=seg;
                             z = (-.5+seg*.5);
                      let transparencyOfTrailLast =transparencyOfTrail;
                      transparencyOfTrail =1.-seg;
 
-                           if (movementRate*timeElapsedSinceRecording>.5)z=.01*(-1.+timeElapsedSinceRecording/trailSecondsLong);
+                          /* if (movementRate*timeElapsedSinceRecording>.5);//z=.01*(-1.+timeElapsedSinceRecording/trailSecondsLong);
                            else {
                                transparencyOfTrail=254./255.;
                                transparencyOfTrailLast=transparencyOfTrail;
-                           }
+                           }*/
                      
                                                
                      let stylus=.5;
@@ -3776,7 +3777,7 @@ let s = f;
              r--;
              if(r<0)r+=trailDepth;
                          loopLimit--;
-                         timeElapsedSinceRecording=     uniforms["time"].value-trailTimeOfRecording[r];
+                       //  timeElapsedSinceRecording=     uniforms["time"].value-trailTimeOfRecording[r];
                          
          }
 
