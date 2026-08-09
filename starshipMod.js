@@ -229,7 +229,7 @@ function makeSpirograph(){
               }
       }
 
-      if(averageSwitches/lps<2.)
+      if(averageSwitches/lps<3.)
     for(var m = 0; m < bufferPortion; m++)
       {
               spirray0[m]=0
