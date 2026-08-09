@@ -3935,7 +3935,7 @@ float xenOctaveFactor =4.;
                       
                          }
                      else
-                     {insideOut=vec4(clamp(insideOut.xyz,.05,.9),1.);
+                     {insideOut=vec4(clamp(insideOut.xyz,.05,.5),1.);
                             if(insideOut.r!=0.||insideOut.g!=0.||insideOut.b!=0.)   insideOut+=clamp(AM.r,0.,1.);
                          }
                      }
