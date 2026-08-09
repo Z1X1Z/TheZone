@@ -234,6 +234,9 @@ let callibratorArray = new Float32Array(1024).fill(0);
                                                                   let stack12Array = new Float32Array(12).fill(0);
 function spiral_compress(){
     let freq = 0;
+   // let freqUnInterpolated = 0;
+    //let interval = 2**(13./12.)
+    //let interval2 = 2**(11./12.)
   //  notesAverage = 0.;
   //  let notesAverageCOUNTER = 0.;
 
@@ -247,10 +250,17 @@ function spiral_compress(){
     if(n!=0)   d = (z[n+1]-z[n-1])/(z[n-1]+z[n+1]);
     else d = z[n+1]/z[n];
     const nAdj = n + d *6. ;//seems like it should be times 4 for rationality, but 5 works better with continuous star, 6 seems effectively correct
-      //if (Math.abs(d)<4+1.&&isFinite(d))
+     // if (Math.abs(d)<2&&isFinite(d))
         freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
-    // else
-    //    freq = audioX.sampleRate*n/numberOfBins
+     
+     //  freqUnInterpolated = audioX.sampleRate*n/numberOfBins
+       //let freqRation = freq/freqUnInterpolated;
+      // if (!((freqRation>1&&freqRation<interval)||(freqRation<1.&&freqRation>interval2)))
+    /*if(Math.abs(d)>1.5)
+        {freq = freqUnInterpolated;
+            console.log("here")
+        }
+            */
         //   freq = 440; //check for concert A
     var note24 =24*Math.log(freq/window.ConcertKey)/Math.log(2.)+49*2;
                      if(unitTest)
@@ -339,7 +349,7 @@ function fiveAndSeven(){
     {
             twelve[n][m]=0;
     
-            binsInFingerStarWitnesses[n][m]=1;
+            binsInFingerStarWitnesses[n][m]=0;
 }
 
         for(let m = 0; m<10; m++)
@@ -352,11 +362,11 @@ secondHandsFingersArray[m]=0.
 thirdHandsFingersArray[m]=0.    
 fourthHandsFingersArray[m]=0.    
         }
-                 let binsInFingerP = Array(10).fill(1.);
-                 let binsInFinger1 = Array(10).fill(1.);
-                 let binsInFinger2 = Array(10).fill(1.);
-                 let binsInFinger3 = Array(10).fill(1.);
-                 let binsInFinger4 = Array(10).fill(1.);
+                 let binsInFingerP = Array(10).fill(0.);
+                 let binsInFinger1 = Array(10).fill(0.);
+                 let binsInFinger2 = Array(10).fill(0.);
+                 let binsInFinger3 = Array(10).fill(0.);
+                 let binsInFinger4 = Array(10).fill(0.);
 
 
       let finger = 0 //ranges up to <10
@@ -409,9 +419,43 @@ fourthHandsFingersArray[m]=0.
                         
             
             }
-
         }
-        let cutoff = 1.5;
+                    for(let finger = 0; finger<10; finger++)
+
+                     {
+                            
+                            if(binsInFinger1[finger]!=0.)
+                            
+                            firstHandsFingersArray[finger]/=binsInFinger1[finger];
+                            
+                                  if(binsInFinger2[finger]!=0.)
+                            
+                                
+                            secondHandsFingersArray[finger]/=binsInFinger2[finger];
+                            
+                                  if( binsInFinger3[finger]!=0.)
+                            
+                               
+                            thirdHandsFingersArray[finger]/=binsInFinger3[finger];
+                            
+                            if(binsInFinger4[finger]!=0.)
+                            
+                            fourthHandsFingersArray[finger]/=binsInFinger4[finger];
+                            
+                            if(binsInFingerP[finger]!=0.)
+                        pitchHandsFingersArray[finger]/=binsInFingerP[finger];
+
+                           }
+        
+
+    for(let n = 0; n<12; n++)
+        for(let m = 0; m<10; m++)
+    {
+          if(binsInFingerStarWitnesses[n][m]!=0.)  twelve[n][m]/=binsInFingerStarWitnesses[n][m];
+    
+}
+/*
+let cutoff = 1.5;
         let cutoff2 = .75;
         let shrink = 255.;
         if (zoomOutRatchetThreshold*2.<ampThresh)shrink*=ampThresh*32.;
@@ -439,7 +483,7 @@ if(fourthHandsFingersArray[m]>cutoff2)fourthHandsFingersArray[m]=cutoff2;
 
 
         }
-
+*/
            let pitchFingerTexture = new THREE.DataTexture( pitchHandsFingersArray, 10, 1,THREE.RedFormat,THREE.FloatType);
      pitchFingerTexture.unpackAlignment=1
      pitchFingerTexture.needsUpdate=true;
