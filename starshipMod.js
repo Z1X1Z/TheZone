@@ -3656,7 +3656,7 @@ let s = f;
                             let zlast = z;
                      let seg = timeElapsedSinceRecording/((trailSecondsLong>0)?trailSecondsLong:1);
                      if(window.flame)seg*=seg;
-                            z = (-1.+seg*.5);
+                            z = (-.5+seg*.5);
                      let transparencyOfTrailLast =transparencyOfTrail;
                      transparencyOfTrail =1.-seg;
 
