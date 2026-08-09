@@ -216,7 +216,7 @@ function makeSpirograph(){
                 lps++;
                 phase = phase % (pi*2);
               }
-              if(lps>24)//only allow 24 circuits
+              if(lps>12)//only allow lps number of circuits
               {
             spirray0[m]=0
              spirray1[m]=0
