@@ -222,11 +222,14 @@ function makeSpirograph(){
               if(phase>Math.PI*2)
               {
                 averageSwitches+=signSwitched;
+                signSwitched=0.;
+                      phase = phase % (pi*2);
+
                 lps++;
               }
       }
 
-      if(averageSwitches/lps<8.)
+      if(averageSwitches/lps<2.)
     for(var m = 0; m < bufferPortion; m++)
       {
               spirray0[m]=0
