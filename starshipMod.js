@@ -200,16 +200,37 @@ function makeSpirograph(){
      
   let adjAdjusted = pitch/2**14;
 
-  
+  let signSwitched = 0;
+  let averageSwitches = 0.;
+  let lps = 0;
+  let signSwitcher = Math.sign(inputData[0]);
     for(var m = 0; m < bufferPortion; m++)
       {
               phase += adjAdjusted;//spira_pitch;
         let dilation =inputData[m]/maxSamp/2.;
+
             let outside = (1+dilation)/2.;
             let inside  = (1.-dilation)/2.;
                 var size =outside+inputData[m]*inside;// inputData[m]/maxSamp;//.75+inputData[m]/4./maxSamp;
               spirray0[m]=-Math.sin(-phase)*size;
               spirray1[m]=-Math.cos(-phase)*size;
+              if(Math.sign(inputData[m])!=signSwitcher)
+                {signSwitcher = Math.sign(inputData[m])
+                    signSwitched+=1;
+                }
+
+              if(phase>Math.PI*2)
+              {
+                averageSwitches+=signSwitched;
+                lps++;
+              }
+      }
+
+      if(averageSwitches/lps<2.)
+    for(var m = 0; m < bufferPortion; m++)
+      {
+              spirray0[m]=0
+              spirray1[m]=0
       }
                                                                   spirray0[0]=spirray0[1];
                                                                   spirray1[0]=spirray1[1];//remove line from center
