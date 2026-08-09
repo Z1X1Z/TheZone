@@ -4367,7 +4367,7 @@ else if(mannyFace.w==.5)//detect if in eyeHolies, if so output grey
                        }
                                  else if(oneEye.r!=0.)
                                  {layeredOUT=vec4(clamp(-oneEye.x,-.5,1.)//*.25+starship.xyz/1.5
-                                    +AM.r*1.5
+                                    +AM.r
                                     +bodyWithArms.xyz*bodyWithArms.w,1.);
                               
                                     if(insideOut.w==.5)layeredOUT+=vec4(insideOut.xyz/3.,0.);
