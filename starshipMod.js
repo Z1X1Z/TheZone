@@ -424,6 +424,16 @@ fourthHandsFingersArray[m]=0.
 
                      {
                             
+                                          if(extremeFrets)    
+                                            {
+
+                                            firstHandsFingersArray[finger]=(1.-1./(firstHandsFingersArray[finger]*ampThresh)**(.5))**2.
+                                            secondHandsFingersArray[finger]=(1.-1./(secondHandsFingersArray[finger]*ampThresh)**(.5))**2.
+                                            thirdHandsFingersArray[finger]=(1.-1./(thirdHandsFingersArray[finger]*ampThresh)**(.5))**2.
+                                            fourthHandsFingersArray[finger]=(1.-1./(fourthHandsFingersArray[finger]*ampThresh)**(.5))**2.
+                                            pitchHandsFingersArray[finger]=(1.-1./(pitchHandsFingersArray[finger]*ampThresh)**(.5))**2.
+                                            
+                                        }
                             if(binsInFinger1[finger]!=0.)
                             
                             firstHandsFingersArray[finger]/=binsInFinger1[finger];
