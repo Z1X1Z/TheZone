@@ -451,6 +451,8 @@ fourthHandsFingersArray[m]=0.
     for(let n = 0; n<12; n++)
         for(let m = 0; m<10; m++)
     {
+                  if(extremeFrets)      twelve[n][m]=(1.-1./(twelve[n][m]*ampThresh)**(.5))**2.
+
           if(binsInFingerStarWitnesses[n][m]!=0.)  twelve[n][m]/=binsInFingerStarWitnesses[n][m];
     
 }
