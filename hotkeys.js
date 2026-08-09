@@ -380,7 +380,7 @@ for(var nameOfUniform in uniformsInitial)
     window.streaming=false;
     window.streaming2=false;
     window.Oreo=0;
-    window.stylusON=true;
+    window.stylusON=false;
             window.shouldShowStar = true;
             window.flame = false;
             window.muteTouchTouchVolume = true;

@@ -483,7 +483,7 @@ var pitchCol = Array(0);
             function setTrailSize(){
         
                              trailLength = Math.ceil(zoomFrames*trailSecondsLong);
-                            starShipDepthInSet = (trailSecondsLong-pixelShaderToStarshipRATIO/2.)/((trailSecondsLong>0)?trailSecondsLong:1);//base Z value
+                            starShipDepthInSet = (trailSecondsLong)/((trailSecondsLong>0)?trailSecondsLong:1);//base Z value
                               cx =new Float64Array(trailLength).fill(0);//c is the center of the frame moved from the origin
                               cy = new Float64Array(trailLength).fill(0);
                               xPerp= new Float64Array(trailLength).fill(0);//perp is the perpendicular from c
@@ -3219,7 +3219,7 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
                     lengt=lengt**.25;
                 }
                                   }
-                                   let dep = depBuffer/1.001**(lengt);
+                                   let dep = -1.;//depBuffer/1.001**(lengt);
 
                             let BlackOrWhiteFRET = .5;
                                //   lengt=1.;
