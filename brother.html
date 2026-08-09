@@ -4213,7 +4213,7 @@ if(pixelShipGrey!=0.)
 if(isBlack==0.)pixelShipGrey=(.5+pixelShipGrey);
 //if(isGrey>0.)pixelShipGrey=-1.;;
 }
-if(mny.r!=0.||mny.g!=0.||mny.b!=0.)mny*=.5;
+if((mny.r!=0.||mny.g!=0.||mny.b!=0.)&&pixelShipGrey!=0.)mny*=.5;
 //pixelStarship += starBuffer;
 
 
