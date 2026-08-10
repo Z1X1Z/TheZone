@@ -470,7 +470,7 @@ var truncNonLeaf = 1.;
 
 var howToBoost = wingsOfRighteousness;
 
- if(SEVEYEStartAdj>lengthP-sevMargin&&SEVEYEStartAdj<lengthP&&seventhOUTside)howToBoost =4.25;
+ if(SEVEYEStartAdj>lengthP-sevMargin&&seventhOUTside)howToBoost =4.25;
             hyperCore+=((((gr)+-(leaf)+(2**.5)))-howToBoost);
             //hyperCore+=.5;
 
