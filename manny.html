@@ -2067,7 +2067,7 @@ ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
 
         const float PI = 3.14159274;
         
-        
+
         
         
        // const float gr = -cos(216.*PI/180.)/-cos(612.*PI/180.)-1.;
@@ -2404,6 +2404,7 @@ uniform float OrthoEvery;
                                //   const float gr = -cos(216.*PI/180.)/-cos(612.*PI/180.)-1.;
   //  const float leaf = -1.3247179;//5724474;
     const float eConstant = 2.71828182;
+                  const float wingsOfRighteousness =  4.2508742365242194;
                                                         
     float lerp(float a) {return -abs(mod(a,2.)-1.);}
     float lerp2(float a) {return -abs(mod(a,4.)-2.)+1.;}
@@ -4803,7 +4804,7 @@ else if (petals<0.)hyperCore-=log2*2.;
 
 
 
-     hyperCore+=((((gr)+-(leaf)+(sqrt2)))-4.25);
+     hyperCore+=((((gr)+-(leaf)+(sqrt2)))-wingsOfRighteousness);
 
 hyperCore+=.5;
    if(seventhEYE>0.&&(seventhEYE!=3.||seventhEYEthree)&&lengthP<twoThirds&&zoom<.5//&&(lfcOverZoom<twoThirds||seventhEYE!=3.)

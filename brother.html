@@ -1526,6 +1526,8 @@ uniform int inseyedOut;
     const float leaf = -1.3247179;//5724474;
             const float clvrVariant4 = 1./leaf;
 
+          const float wingsOfRighteousness =  4.2508742365242194;
+
     const float eConstant = 2.71828182;
                                                         
     float lerp(float a) {return -abs(mod(a,2.)-1.);}
@@ -2973,7 +2975,7 @@ truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoom*zoom))
 
 }
 
-  hyperCore+=((((gr)+-(leaf)+(sqrt2)))-4.25);//I don't know if this is making much of a difference
+  hyperCore+=((((gr)+-(leaf)+(sqrt2)))-wingsOfRighteousness);//I don't know if this is making much of a difference
   if(seventhEYEthree&&lengthP<twoThirds&&zoom<.5
    )
    {
