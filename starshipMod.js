@@ -309,7 +309,7 @@ function spiral_compress(){
         for(var b = 0; b<EldersLeg; b++)if(testar[b]!=0.) 
             {
 
-                testar[b]=(1.-1./(testar[b]*ampThresh)**(.5))**2.
+                testar[b]=(1.-1./(testar[b]/ampThresh)**(.5))**2.
                 if(testar[b]<0.)
                     {testar[b]=0.
                         console.log("woops");
@@ -426,7 +426,7 @@ fourthHandsFingersArray[m]=0.
     for(let n = 0; n<12; n++)
         for(let m = 0; m<10; m++)
     {
-                  if(extremeFrets)      twelve[n][m]=(1.-1./(twelve[n][m]*ampThresh)**(.5))**2.
+                 // if(extremeFrets)      twelve[n][m]=(1.-1./(twelve[n][m]/ampThresh)**(.5))**2.
 
           if(binsInFingerStarWitnesses[n][m]!=0.)  twelve[n][m]/=binsInFingerStarWitnesses[n][m];
     
