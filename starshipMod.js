@@ -420,42 +420,7 @@ fourthHandsFingersArray[m]=0.
             
             }
         }
-                    for(let finger = 0; finger<10; finger++)
-
-                     {
-                            
-                                          if(extremeFrets)    
-                                            {
-
-                                            firstHandsFingersArray[finger]=(1.-1./(firstHandsFingersArray[finger]*ampThresh)**(.5))**2.
-                                            secondHandsFingersArray[finger]=(1.-1./(secondHandsFingersArray[finger]*ampThresh)**(.5))**2.
-                                            thirdHandsFingersArray[finger]=(1.-1./(thirdHandsFingersArray[finger]*ampThresh)**(.5))**2.
-                                            fourthHandsFingersArray[finger]=(1.-1./(fourthHandsFingersArray[finger]*ampThresh)**(.5))**2.
-                                            pitchHandsFingersArray[finger]=(1.-1./(pitchHandsFingersArray[finger]*ampThresh)**(.5))**2.
-                                            
-                                        }
-                            if(binsInFinger1[finger]!=0.)
-                            
-                            firstHandsFingersArray[finger]/=binsInFinger1[finger];
-                            
-                                  if(binsInFinger2[finger]!=0.)
-                            
-                                
-                            secondHandsFingersArray[finger]/=binsInFinger2[finger];
-                            
-                                  if( binsInFinger3[finger]!=0.)
-                            
-                               
-                            thirdHandsFingersArray[finger]/=binsInFinger3[finger];
-                            
-                            if(binsInFinger4[finger]!=0.)
-                            
-                            fourthHandsFingersArray[finger]/=binsInFinger4[finger];
-                            
-                            if(binsInFingerP[finger]!=0.)
-                        pitchHandsFingersArray[finger]/=binsInFingerP[finger];
-
-                           }
+                                         
         
 
     for(let n = 0; n<12; n++)
@@ -466,27 +431,37 @@ fourthHandsFingersArray[m]=0.
           if(binsInFingerStarWitnesses[n][m]!=0.)  twelve[n][m]/=binsInFingerStarWitnesses[n][m];
     
 }
-/*
+
 let cutoff = 1.5;
         let cutoff2 = .75;
-        let shrink = 255.;
-        if (zoomOutRatchetThreshold*2.<ampThresh)shrink*=ampThresh*32.;
+        let shrink = ampThresh*255.*2.;//32.;//255.;
+       // if (zoomOutRatchetThreshold*2.<ampThresh)shrink*=ampThresh*32.;
         for(let m = 0; m<10; m++)
         {
+             if(extremeFrets&&0==1)    
+                                            {
+
+                                            firstHandsFingersArray[finger]=(1.-1./(firstHandsFingersArray[finger]*ampThresh)**(.5))**2.
+                                            secondHandsFingersArray[finger]=(1.-1./(secondHandsFingersArray[finger]*ampThresh)**(.5))**2.
+                                            thirdHandsFingersArray[finger]=(1.-1./(thirdHandsFingersArray[finger]*ampThresh)**(.5))**2.
+                                            fourthHandsFingersArray[finger]=(1.-1./(fourthHandsFingersArray[finger]*ampThresh)**(.5))**2.
+                                            pitchHandsFingersArray[finger]=(1.-1./(pitchHandsFingersArray[finger]*ampThresh)**(.5))**2.
+                                            
+                                        }
 pitchHandsFingersArray[m]/=binsInFingerP[m]*shrink
 firstHandsFingersArray[m]/=binsInFinger1[m]    *shrink
 secondHandsFingersArray[m]/=binsInFinger2[m]    *shrink
 thirdHandsFingersArray[m]/=binsInFinger3[m]    *shrink
 fourthHandsFingersArray[m]/=binsInFinger4[m]    *shrink
-
+console.log(pitchHandsFingersArray[m])
 //for(var c = 0; c<12;c++)twelve[c][m]/= binsInFingerStarWitnesses[c][m]
-
+/*
 if(pitchHandsFingersArray[m]>cutoff)pitchHandsFingersArray[m]=0;
 if(firstHandsFingersArray[m]>cutoff)firstHandsFingersArray[m]=0.;
 if(secondHandsFingersArray[m]>cutoff)secondHandsFingersArray[m]=0;
 if(thirdHandsFingersArray[m]>cutoff)thirdHandsFingersArray[m]=0;
 if(fourthHandsFingersArray[m]>cutoff)fourthHandsFingersArray[m]=0;
-
+*/
 if(pitchHandsFingersArray[m]>cutoff2)pitchHandsFingersArray[m]=cutoff2;
 if(firstHandsFingersArray[m]>cutoff2)firstHandsFingersArray[m]=cutoff2;
 if(secondHandsFingersArray[m]>cutoff2)secondHandsFingersArray[m]=cutoff2;
@@ -495,7 +470,7 @@ if(fourthHandsFingersArray[m]>cutoff2)fourthHandsFingersArray[m]=cutoff2;
 
 
         }
-*/
+
            let pitchFingerTexture = new THREE.DataTexture( pitchHandsFingersArray, 10, 1,THREE.RedFormat,THREE.FloatType);
      pitchFingerTexture.unpackAlignment=1
      pitchFingerTexture.needsUpdate=true;
