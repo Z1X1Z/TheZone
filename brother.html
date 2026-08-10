@@ -2974,8 +2974,10 @@ if(zoom!=0.&&lfc!=0.&&lengthP<SEVEYEStartAdj)//may or may not include
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoom*zoom))
 
 }
+float howToBoost = wingsOfRighteousness;
 
-  hyperCore+=((((gr)+-(leaf)+(sqrt2)))-wingsOfRighteousness);//I don't know if this is making much of a difference
+ if(SEVEYEStartAdj>lengthP-sevMargin&&SEVEYEStartAdj<lengthP)howToBoost =4.;
+            hyperCore+=((((gr)+-(leaf)+(sqrt2)))-howToBoost);
   if(seventhEYEthree&&lengthP<twoThirds&&zoom<.5
    )
    {

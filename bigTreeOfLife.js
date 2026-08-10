@@ -467,8 +467,12 @@ var truncNonLeaf = 1.;
         truncNonLeaf=Math.log(lfcCenterCored);
         truncator = truncNonLeaf*-leaf/2.;//*100
     }
-        hyperCore+=(((gr)+-(leaf)+(Math.sqrt(2))))-4.25;
-//hyperCore+=.5;
+
+var howToBoost = wingsOfRighteousness;
+
+ if(SEVEYEStartAdj>lengthP-sevMargin&&SEVEYEStartAdj<lengthP)howToBoost =4.;
+            hyperCore+=((((gr)+-(leaf)+(2**.5)))-howToBoost);
+            //hyperCore+=.5;
 
    if(seventhEYE>0.&&(seventhEYE!=3.||seventhEYEthree)&&lengthP<2./3.&&zoom<.5//&&(lfc/zoom<2./3.||seventhEYE!=3.)
    )
