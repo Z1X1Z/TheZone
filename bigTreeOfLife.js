@@ -471,7 +471,7 @@ var truncNonLeaf = 1.;
 var howToBoost = wingsOfRighteousness;
 
  if(SEVEYEStartAdj>lengthP-sevMargin&&seventhOUTside)howToBoost =4.25;
-            hyperCore+=((((gr)+-(leaf)+(2**.5)))-howToBoost);
+            hyperCore+=((((gr)+-(leaf)+(2**.5)))-howToBoost)/(gr-leaf+1.);
             //hyperCore+=.5;
 
    if(seventhEYE>0.&&(seventhEYE!=3.||seventhEYEthree)&&lengthP<2./3.&&zoom<.5//&&(lfc/zoom<2./3.||seventhEYE!=3.)

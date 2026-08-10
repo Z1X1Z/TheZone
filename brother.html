@@ -2976,8 +2976,9 @@ truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoom*zoom))
 }
 float howToBoost = wingsOfRighteousness;
 
- if(SEVEYEStartAdj>lengthP-sevMargin)howToBoost =4.25;
-            hyperCore+=((((gr)+-(leaf)+(sqrt2)))-howToBoost);
+ if(SEVEYEStartAdj>lengthP-sevMargin)
+ howToBoost =4.25;
+            hyperCore+=((((gr)+-(leaf)+(sqrt2)))-howToBoost)/(gr-leaf+1.);
   if(seventhEYEthree&&lengthP<twoThirds&&zoom<.5
    )
    {
