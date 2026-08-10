@@ -4708,6 +4708,7 @@ else hyperCore=externalCores;//hyperCore is really better thought of as hyperMet
 //cored/1.5+log(length(coordSHIFT))*logStabilizationConstant+uber.z;
 //float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
 hyperCore+=coreShift;
+hyperCore+=.25;//seems to be a bug fix to synchronize (almost) core depth with with brother.html
 
 float equilibriator = 1.;
 if(dilate){//should be re-enabled after checks
@@ -4809,8 +4810,7 @@ float howToBoost = wingsOfRighteousness;
 
  if(SEVEYEStartAdj>lengthP-sevMargin&&seventhOUTside)howToBoost =4.25;
             hyperCore+=((((gr)+-(leaf)+(sqrt2)))-howToBoost)/(gr-leaf+1.);
-
-hyperCore+=.5;
+//hyperCore+=.5;
    if(seventhEYE>0.&&(seventhEYE!=3.||seventhEYEthree)&&lengthP<twoThirds&&zoom<.5//&&(lfcOverZoom<twoThirds||seventhEYE!=3.)
    )
    {
@@ -4922,7 +4922,7 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
 
  if(seventhOUTside&&lengthP>SEVEYEStartAdj&&lfc>zoom)
  {
-        if (SEVEYEStartAdj>lengthP-sevMargin)
+        if (SEVEYEStartAdj>lengthP-sevMargin)//very strange that this runs at all given above conditional, though the fifth core is mostly inexplicable
         {
             hyperCore+=lfc*SEVEYEpow/1.5;
                         hyperCore-=.1;
