@@ -2658,7 +2658,7 @@ float brightness=0.;
           angleExpanded10-6.
         );
         ;
-        float noteBend = angleExpanded10-floor(angleExpanded10)+.5;//angle*10.-floor(angle*10.-.5)-.5; seems to be the least overflow between notes, thereby seems correct
+        float noteBend = angleExpanded10-floor(angleExpanded10);//angle*10.-floor(angle*10.-.5)-.5; seems to be the least overflow between notes, thereby seems correct
         float note0 = (-oct+(noteOfStar-noteBend)/12.);
       //  return vec4(note0/72.);
        // return vec4(note0/144.);
