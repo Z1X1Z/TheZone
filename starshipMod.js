@@ -3722,8 +3722,8 @@ let s = f;
                         seg*=seg;
                             z = (-.5+seg*.5);
                      let transparencyOfTrailLast =transparencyOfTrail;
-                     transparencyOfTrail =1.-seg;
-
+                     transparencyOfTrail =(1.-seg);
+                        if(transparencyOfTrail>=254.5/255.)transparencyOfTrail=254.49/255.;
                           /* if (movementRate*timeElapsedSinceRecording>.5);//z=.01*(-1.+timeElapsedSinceRecording/trailSecondsLong);
                            else {
                                transparencyOfTrail=254./255.;
