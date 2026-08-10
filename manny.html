@@ -2617,7 +2617,7 @@ float brightness=0.;
 
 
 
-    float starnSize = PI/120.*2.*7./8.*2.;
+    float starnSize = PI/120.*2.*53./64.*((1.-log(3.))/2.+1.)*2.;
     
     float scalar =1./2.*3./4.;
 
@@ -8711,6 +8711,13 @@ vec4 tree = vec4( clamp(
           else if((fin.r<=.0&&fin.g<=.0&&fin.b<=.0))fin+=(isGrey+isGreyDOT+isGreyStaRivers+pixelShipGrey)*1.5;
                                                           */
                                                       
+                                                            if ((pixelShipGrey!=0.||isGrey!=0.)&&bodyWithArms.w!=0.)
+                                 {
+                                    if(pixelShipGrey>.5||isGrey>.5)
+                                    fin+=bodyWithArms;
+                                    else fin = fin*bodyWithArms*.75 + fin*.25;
+                                 }
+
           vec3 confraculator = vec3(1.);
           if(sparklesON)confraculator=sparkles(p*length(vec2(length(vec2(fin.x,fin.y)),fin.z)));
           vec3 card = vec3(1.);

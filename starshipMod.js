@@ -3490,13 +3490,14 @@ var fingerStride = 0;
                  }
              vop.setRGB(BlackOrWhite,BlackOrWhite,BlackOrWhite);
              
-
+            let     starWitnessSize =53./64.*((1.-Math.log(3.))/2.+1.)
              for (var g=0; g<10; g++) {
                  const widt = pi/120.;
                  const finger = (isFinite(twelve[ns][g]))?twelve[ns][g]:0;
                  let arm =((g+5)%10-.5)/10.*pi*2.*uniforms.witnessFlip.value;
 
-                 const lengt =(isFinite(maxFinger)&&maxFinger!=0)? (finger)/maxFinger*(1.-pi/12.) : 0;
+                 var lengt =(isFinite(maxFinger)&&maxFinger!=0)? (finger)/maxFinger*(1.-pi/12.) : 0;
+                lengt*=starWitnessSize;
 
 
                      for(var yy=0;yy<6;yy++)   starsANDwitnessesColorAttribute.setXYZ(fingerStride+yy,vop.r,vop.g,vop.b)
