@@ -311,7 +311,7 @@ function spiral_compress(){
 
                testar[b]=(1.-1./(testar[b]*ampThresh)**(.5))**2.
               //  testar[b]=(1.-1./(testar[b]*ampThresh)**(.5))**2.
-                if(testar[b]<0.)
+                if(!isFinite(testar[b])||testar[b]<0.)
                     {testar[b]=0.
                         console.log("woops");
                     }
@@ -409,7 +409,7 @@ fourthHandsFingersArray[m]=0.
                             fourthHandsFingersArray[finger]+=dataArray[n];
                             }
                         }
-                     if (finger<10&&finger>=0&&isFinite(finger)&&isFinite(starNote)&&isFinite(dataArray[n])) 
+                     if (finger<10&&finger>=0&&isFinite(finger)&&isFinite(starNote)) 
 
                            {
                         pitchHandsFingersArray[finger] +=dataArray[n];
