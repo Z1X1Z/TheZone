@@ -433,11 +433,12 @@ fourthHandsFingersArray[m]=0.
 }
 
 let cutoff = 1.5;
-        let cutoff2 = .75;
-        let shrink = ampThresh*255.*2.;//32.;//255.;
+        let cutoff2 = .5;
+        let shrink = ampThresh*255.*6.;//32.;//255.;
        // if (zoomOutRatchetThreshold*2.<ampThresh)shrink*=ampThresh*32.;
         for(let m = 0; m<10; m++)
         {
+            
              if(extremeFrets&&0==1)    
                                             {
 
@@ -448,12 +449,28 @@ let cutoff = 1.5;
                                             pitchHandsFingersArray[finger]=(1.-1./(pitchHandsFingersArray[finger]*ampThresh)**(.5))**2.
                                             
                                         }
+                                        if(ampThresh!=0.){
+
+                                        
 pitchHandsFingersArray[m]/=binsInFingerP[m]*shrink
 firstHandsFingersArray[m]/=binsInFinger1[m]    *shrink
 secondHandsFingersArray[m]/=binsInFinger2[m]    *shrink
 thirdHandsFingersArray[m]/=binsInFinger3[m]    *shrink
 fourthHandsFingersArray[m]/=binsInFinger4[m]    *shrink
-console.log(pitchHandsFingersArray[m])
+
+if(!isFinite(pitchHandsFingersArray[m]))
+pitchHandsFingersArray[m]=0.;
+if(!isFinite(firstHandsFingersArray[m]))
+firstHandsFingersArray[m]=0.;
+if(!isFinite(secondHandsFingersArray[m]))
+secondHandsFingersArray[m]=0.;
+if(!isFinite(thirdHandsFingersArray[m]))
+thirdHandsFingersArray[m]=0.;
+if(!isFinite(fourthHandsFingersArray[m]))
+fourthHandsFingersArray[m]=0.;
+                                        }
+//console.log(pitchHandsFingersArray[m])
+
 //for(var c = 0; c<12;c++)twelve[c][m]/= binsInFingerStarWitnesses[c][m]
 /*
 if(pitchHandsFingersArray[m]>cutoff)pitchHandsFingersArray[m]=0;
