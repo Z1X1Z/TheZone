@@ -825,7 +825,7 @@ window.twist-=window.spinnerTwist
                   const d_xS=spunD[0]*interpolation;
                   const d_yS=spunD[1]*interpolation;
 
-                if((fromCenter*(1.-zoom)-zoom**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0))
+                if((fromCenter*(1.-zoom)-zoom>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0))
 {
                    if(fromCenter<81.)
                             wrapMovementBoost=4.*fromCenter**.5/fromCenter;
@@ -2231,11 +2231,11 @@ function runOSMD (){
                                     var spunTouch=touchMovement;
                                           if(uniforms.carousel.value!=0.&&uniforms[ "time" ].value>0)
                                               spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
-                         if((fromCenter*(1.-zoom)-zoom>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)&&spunTouch[0]!=0&&spunTouch[1]!=0)
+                         if((fromCenter*(1.-zoom)-zoom  >uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)&&spunTouch[0]!=0&&spunTouch[1]!=0)
                    {
                    if(fromCenter<81.)
                    {
-                    console.log(true)
+                  //  console.log(true)
                             wrapMovementBoost=4.*fromCenter**.5/fromCenter;
 }
                         else
