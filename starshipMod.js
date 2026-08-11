@@ -1779,6 +1779,8 @@ function zoomRoutine(){
             triggerRailSet=true
             if(center){coordX*=ZR*2./3.;; coordY*=ZR*2./3.;}
         }
+                        uniforms.SEVEYEStart.value=1.75+zoom;
+
     }
 
     
@@ -2227,7 +2229,6 @@ function runOSMD (){
                                           if(uniforms.carousel.value!=0.&&uniforms[ "time" ].value>0)
                                               spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                                          var location = (uniforms.constellationCoord.value.x**2+uniforms.constellationCoord.value.y**2.)**.5    
-                
                          if((location>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)&&spunTouch[0]!=0&&spunTouch[1]!=0)
                    {
                    if(location<81.)
