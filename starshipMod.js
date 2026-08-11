@@ -2193,7 +2193,7 @@ function runOSMD (){
                             {
                               lastZoom = zoom;
                               zoomRoutine();
-                     if(((coordX**2+coordY**2)**.5/zoom**.5<uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)||!uniforms.seventhOUTside.value)
+                     if((((coordX**2+coordY**2)**.5/zoom**.5<uniforms.SEVEYEStart.value||fromCenter==0.)&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)||!uniforms.seventhOUTside.value)
                         infinicore();
 
                             }
@@ -2716,7 +2716,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
    {
        if(!zoomAtl41&&zoomRate!=0.)
        {zoomRoutine();
-                          if(((coordX**2+coordY**2)**.5/zoom**.5<uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)||!uniforms.seventhOUTside.value)
+                          if((((coordX**2+coordY**2)**.5/zoom**.5<uniforms.SEVEYEStart.value||fromCenter==0.)&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)||!uniforms.seventhOUTside.value)
  infinicore();
        }
    }
