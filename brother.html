@@ -2955,15 +2955,18 @@ float  equilibriator=lfc/(lfc-zoom/dif)*dif;
    hyperCore*=equilibriator;
 }
    
+/*
    
      hyperCore-=.25*LogHalfReciprocal;//feed the lamb boost
 
 hyperCore+=.25*LogHalfReciprocal;//continuumClover boost
-
+*/
 if(pollen)
 {
      hyperCore+=.5;
 }
+     hyperCore+=.25;//for function setSevStart() in hotkeys using Math.log(uniforms.baseN.value)
+
 
 float truncNonLeaf=1.;
 
@@ -3041,7 +3044,7 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
  {
         if (SEVEYEStartAdj>lengthP-sevMargin)
         {hyperCore+=lfc*SEVEYEpow/1.5;
-            hyperCore-=.1;
+         //   hyperCore-=.1;
         }
 
     else 
@@ -3112,6 +3115,7 @@ float daisifier = 0.;
                        borderGap=((((gr*4.)/truncator)*truncator-((leaf*2.)/truncator)*truncator));//about 9, but this is a little uncertain, just sort of made sense!
                       
                        float border = (borderGap*borderGap/2.-borderGap*3.+1.5)/pow(2.,borderGap);
+                      // float border = (borderGap*borderGap/2.-borderGap*3.+1.5)/pow(2.,borderGap);
                            
 
                                            vec2 sBuffer = s;

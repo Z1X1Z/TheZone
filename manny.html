@@ -4778,7 +4778,7 @@ if(pollen&&OrthoEvery==0.)
   // //else hyperCore+=lfc/log2;
    }
 }
-
+   hyperCore+=.25;//for function setSevStart() in hotkeys using Math.log(uniforms.baseN.value)
 
 
 float truncNonLeaf=1.;
@@ -4925,7 +4925,7 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
         if (SEVEYEStartAdj>lengthP-sevMargin)//very strange that this runs at all given above conditional, though the fifth core is mostly inexplicable
         {
             hyperCore+=lfc*SEVEYEpow/1.5;
-                        hyperCore-=.1;
+             //           hyperCore-=.1;
 
         }
 
