@@ -1778,8 +1778,8 @@ function zoomRoutine(){
             triggerRailSet=true
             if(center){coordX*=ZR*2./3.;; coordY*=ZR*2./3.;}
         }
-                        uniforms.SEVEYEStart.value=1.75+(zoom*fromCenter**.5/fromCenter**2*2)**.5*2;
-    }
+        setSevStart()
+        }
 
     
     //.000000000000000000000001
