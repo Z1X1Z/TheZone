@@ -52,7 +52,7 @@ window.uniformsInitial = {
 iso_engine:{value:false},
  SEVEYEpow:{value:(grPermanent)*2.-leafPermanent},//gr*3. and gr*2-leaf work well with start of 1.75
 
- SEVEYEStart:{value:1.75},
+ SEVEYEStart:{value:1.75  },
 
 coreDilation:{value:0.},
 fftSize:{value:2048.},sampleRate:{value:44100.}, nyq:{value:44100./1024.},
@@ -660,6 +660,8 @@ z=Number(z);
 uniforms.zoom.value=z
 window.zoom=z
 window.lastZoom =z;
+                        uniforms.SEVEYEStart.value=1.75+(zoom*fromCenter**.5/fromCenter**2*2)**.5*2;
+
 }
 if(c!='')
 {

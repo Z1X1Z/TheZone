@@ -824,11 +824,10 @@ window.twist-=window.spinnerTwist
                             if(uniforms.carousel.value!=0.&&uniforms[ "time" ].value>0)         spunD=spin(spunD,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
                   const d_xS=spunD[0]*interpolation;
                   const d_yS=spunD[1]*interpolation;
-                                         var location = (uniforms.constellationCoord.value.x**2+uniforms.constellationCoord.value.y**2.)**.5    
 
-                if((location>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0))
+                if((fromCenter>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0))
 {
-                   if(location<81.)
+                   if(fromCenter<81.)
                             wrapMovementBoost=4.*fromCenter**.5/fromCenter;
                         else
                                                         wrapMovementBoost=4./3.;
@@ -1779,8 +1778,7 @@ function zoomRoutine(){
             triggerRailSet=true
             if(center){coordX*=ZR*2./3.;; coordY*=ZR*2./3.;}
         }
-                        uniforms.SEVEYEStart.value=1.75+zoom;
-
+                        uniforms.SEVEYEStart.value=1.75+(zoom*fromCenter**.5/fromCenter**2*2)**.5*2;
     }
 
     
@@ -2150,6 +2148,7 @@ function runOSMD (){
                                 let TouchMicroizer = false;
                                  let lastTouchAngle = 0.;
                                  window.wrapMovementBoost=1
+                                 var loc = 0.;
                function executeTouchRegime(){
                    
                    if(!shouldShowStar||touchOnlyMode)
@@ -2194,7 +2193,7 @@ function runOSMD (){
                             {
                               lastZoom = zoom;
                               zoomRoutine();
-                     if(((coordX**2+coordY**2)**.5/zoom<uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)||!uniforms.seventhOUTside.value)
+                     if(((coordX**2+coordY**2)**.5/zoom**.5<uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)||!uniforms.seventhOUTside.value)
                         infinicore();
 
                             }
@@ -2228,11 +2227,12 @@ function runOSMD (){
                                     var spunTouch=touchMovement;
                                           if(uniforms.carousel.value!=0.&&uniforms[ "time" ].value>0)
                                               spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
-                                         var location = (uniforms.constellationCoord.value.x**2+uniforms.constellationCoord.value.y**2.)**.5    
-                         if((location>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)&&spunTouch[0]!=0&&spunTouch[1]!=0)
+                         if((fromCenter>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)&&spunTouch[0]!=0&&spunTouch[1]!=0)
                    {
-                   if(location<81.)
+                   if(fromCenter<81.)
+                   {
                             wrapMovementBoost=4.*fromCenter**.5/fromCenter;
+}
                         else
                                                         wrapMovementBoost=4./3.;
 
@@ -2716,7 +2716,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
    {
        if(!zoomAtl41&&zoomRate!=0.)
        {zoomRoutine();
-                          if(((coordX**2+coordY**2)**.5/zoom<uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)||!uniforms.seventhOUTside.value)
+                          if(((coordX**2+coordY**2)**.5/zoom**.5<uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)||!uniforms.seventhOUTside.value)
  infinicore();
        }
    }
