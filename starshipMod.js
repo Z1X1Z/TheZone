@@ -825,7 +825,7 @@ window.twist-=window.spinnerTwist
                   const d_xS=spunD[0]*interpolation;
                   const d_yS=spunD[1]*interpolation;
 
-                if((fromCenter*(1.-zoom)>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0))
+                if((fromCenter*(1.-zoom)-zoom**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0))
 {
                    if(fromCenter<81.)
                             wrapMovementBoost=4.*fromCenter**.5/fromCenter;
@@ -1760,9 +1760,12 @@ let       preserveOuterCore = true;
                        const zoomCap32 =.000001;
 function zoomRoutine(){
     var metaDepth=(!dupered)?zoomCap32:zoomCap32**2;//due to pixelization limits
-    if(seventhOUTside&&fromCenter*(1.-zoom)>uniforms.SEVEYEStart.value)metaDepth=metaDepth*2**(uniforms.SEVEYEpow.value/(coordX**2+coordY**2)**.5+1)
-    else if(seventhOUTside&&fromCenter>(uniforms.SEVEYEStart.value-1./2**uniforms.SEVEYEpow.value*uniforms.SEVEYEpow.value/2.)*(1.+zoom))
+    if(seventhOUTside&&fromCenter*(1.-zoom)-zoom**.5>uniforms.SEVEYEStart.value)metaDepth=metaDepth*2**(uniforms.SEVEYEpow.value/(coordX**2+coordY**2)**.5+1)
+    else if(seventhOUTside&&fromCenter*(1.-zoom)-zoom**.5>(uniforms.SEVEYEStart.value-1./2**uniforms.SEVEYEpow.value*uniforms.SEVEYEpow.value/2.)
+)
+{
     metaDepth=metaDepth*2**(uniforms.SEVEYEpow.value+2.)
+}
         else if (uniforms.seventhEYE.value==3.&&uniforms.jubileyes.value!=0.&&fromCenter<1./3.)metaDepth*=8.;
 
     let zoomCone=metaDepth*fromCenter;
@@ -1779,7 +1782,6 @@ function zoomRoutine(){
             triggerRailSet=true
             if(center){coordX*=ZR*2./3.;; coordY*=ZR*2./3.;}
         }
-        setSevStart();
                 //        uniforms.SEVEYEStart.value=1.75+(zoom/fromCenter)**.5*fromCenter;
     }
 
@@ -2229,10 +2231,11 @@ function runOSMD (){
                                     var spunTouch=touchMovement;
                                           if(uniforms.carousel.value!=0.&&uniforms[ "time" ].value>0)
                                               spunTouch=spin(touchMovement,-uniforms.carousel.value*(uniforms[ "time" ].value*uniforms[ "rate" ].value+Math.PI)%(Math.PI*2.));
-                         if((fromCenter*(1.-zoom)>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)&&spunTouch[0]!=0&&spunTouch[1]!=0)
+                         if((fromCenter*(1.-zoom)-zoom**.5>uniforms.SEVEYEStart.value&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0.)&&spunTouch[0]!=0&&spunTouch[1]!=0)
                    {
                    if(fromCenter<81.)
                    {
+                    console.log(true)
                             wrapMovementBoost=4.*fromCenter**.5/fromCenter;
 }
                         else
@@ -2307,6 +2310,7 @@ function runOSMD (){
 
                                           function animate( timestamp ) {
 
+        setSevStart();
 
    //                                                            if(on&&ampThresh>.000001)
  //window.twist-=window.spinnerTwist                     
