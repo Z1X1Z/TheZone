@@ -38,6 +38,11 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                                                   return audioBufferFromFile.duration
                            }
 
+                                function setSevStart()
+                                {
+                                     uniforms.SEVEYEStart.value=.5+(fromCenter)**(1./3.);
+                                }
+              
 
            let  zoomINITiaLizer =.75//.05;//    1/2**65.;//1.;//
                          let xINITiaLizer=0;//0.0001;   //1./3.;
@@ -660,7 +665,7 @@ z=Number(z);
 uniforms.zoom.value=z
 window.zoom=z
 window.lastZoom =z;
-                        uniforms.SEVEYEStart.value=1.75+(zoom/fromCenter)**.5*fromCenter;
+setSevStart()
 }
 if(c!='')
 {
