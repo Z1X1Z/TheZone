@@ -116,11 +116,17 @@
                         setMaximize();
 
              //   console.log(localStorage.getItem('Fast')==null)
-           if (localStorage.getItem('Fast')==null) localStorage.setItem('Fast',String(true))
- if (localStorage.getItem('Fast')==String(true)) document.getElementById('Fast').checked = true;
-
- else             document.getElementById('Full').checked = true;
-
+           if (localStorage.getItem('Fast')==null) 
+           {
+            localStorage.setItem('Fast',String(true))
+            document.getElementById('Fast').checked = true;
+            document.getElementById('Full').checked = false;
+           }
+ if (localStorage.getItem('Fast')==String(true)) 
+ {
+ document.getElementById('Fast').checked = true;
+ document.getElementById('Full').checked = false;
+ }
 
                 window.PageToLoad = ""
                 function loadStarshipWithHash(touchHash){
