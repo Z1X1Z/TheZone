@@ -3066,13 +3066,15 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
  }
 
 
-
 if(lengthP<1./3.)
-hyperCore+=2./3.;
+ 
+{
+   if( mod(coresIn,2.)==1.)
+hyperCore+=2.;
+else hyperCore+=4./3.;
+}
 else if(lengthP<twoThirds)
-hyperCore+=.5;
-
-if(lengthP<2./3.)        hyperCore+=.5;
+hyperCore+=4./3.;
 
 if(lengthP<SEVEYEStartAdj)
 {
@@ -3464,7 +3466,7 @@ else
 
     s=1.5/(2.5-vec2(s.x,s.y+budge
     ));
-hyperCoreBoosted+=3.;//+3?
+//hyperCoreBoosted+=.25;//+3?
   hyperCoreBoosted*=pow(log(3.),1.);//these had squeezeN, probably need to be factored out
   dstnce = length(s);
          break;
