@@ -50,6 +50,22 @@
 
         Welcome in The Name of the LORD.     <a href="stretchy.html">This is Manny,</a> short for Immanuel.  He appeared face (of God) first from the Mandelbrot fractal while I was developing this singing game.  This website comes with love from and for Jesus who came in the flesh and in the blood and in the spirit.  To play cleave with love to good and hate evil.  Please share this gem of a game paid for by Jesus Christ on the Cross with everyone in the spirit of the gospel: in truth and love and with much good cheer.
             </div>
+
+                     <p>
+                      <input class="engage" type="checkbox" id="Full Screen"style="color:green" name="t"  onchange= "
+             
+                         if(document.getElementById('Full Screen').checked) 
+                         {
+                            localStorage.setItem('fullScreen','full screen')
+                            localStorage.setItem('rememberedFullScreen','do it again')
+                         }
+                        else 
+                    {localStorage.setItem('fullScreen','nope')
+                     localStorage.setItem('rememberedFullScreen','fuhgetaboudit')
+                     }
+">
+             <label for="Full Screen" style="color: rgb(255, 47, 238);">Maximize Screen!</label>
+
             <p>
             
             <input class="engage" type="checkbox" id="Fast"style="color:green" name="t"  onchange= "
@@ -76,21 +92,7 @@
 
                     <br>
 
-            <input class="engage" type="checkbox" id="Full Screen"style="color:green" name="t"  onchange= "
-             
-                         if(document.getElementById('Full Screen').checked) 
-                         {
-                            localStorage.setItem('fullScreen','full screen')
-                            localStorage.setItem('rememberedFullScreen','do it again')
-                         }
-                        else 
-                    {localStorage.setItem('fullScreen','nope')
-                     localStorage.setItem('rememberedFullScreen','fuhgetaboudit')
-                     }
-">
-             <label for="Full Screen" style="color: rgb(255, 47, 238);">Maximize Screen!</label>
-
-                     <p>
+  
            
             <script>
                 function setMaximize(){
