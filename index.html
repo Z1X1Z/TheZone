@@ -90,7 +90,7 @@
 ">
              <label for="Full Screen" style="color: rgb(255, 47, 238);">Maximize Screen!</label>
 
-                     <p></p>
+                     <p>
            
             <script>
                 function setMaximize(){
@@ -101,9 +101,11 @@
                     localStorage.setItem('fullScreen','full screen')
                 }
                 else   localStorage.setItem('fullScreen','nope')
+                               console.log(                    localStorage.getItem('fullScreen')
+)
 
                 }
-                            document.getElementById("body").addEventListener('pointerdown',
+                            document.body.addEventListener('pointerdown',
                              ()=>
                             {
                                setMaximize();
