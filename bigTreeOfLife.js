@@ -597,8 +597,8 @@ if((seventhEYEandJubileye&&lengthP<1./3.)||(!seventhEYEandJubileye&&seventhEYE==
 
 {
 if( (coresIn%2.)==1.)
-hyperCore+=2.;
-else hyperCore+=1./3.;
+hyperCore+=1.75;
+else hyperCore+=.25;
 }
 
 //else if (seventhEYE!=3.||lengthP<2./3.)
