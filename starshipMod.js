@@ -1396,6 +1396,11 @@ renderer.clear();
 
 waitForMic()
 
+                  console.log(localStorage.getItem('fullScreen'))
+
+                  if(localStorage.getItem('fullScreen')=='full screen')openFullscreen();
+                  localStorage.setItem('fullScreen','nope')
+
 }
 var started = false;
                                            window.INITIALIZED=false;

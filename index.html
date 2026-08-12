@@ -74,9 +74,33 @@
                 <div style="color:rgba(0,0,0,0); text-shadow:none">.
 
 
+
+            <input class="engage" type="checkbox" id="Full Screen"style="color:green" name="t"  onchange= "
              
+                         if(document.getElementById('Full Screen').checked) 
+                         {
+                            localStorage.setItem('fullScreen','full screen')
+                            localStorage.setItem('rememberedFullScreen','do it again')
+console.log(localStorage.getItem('fullScreen'))
+                         }
+                        else 
+                    {localStorage.setItem('fullScreen','nope')
+                     localStorage.setItem('rememberedFullScreen','fuhgetaboudit')
+                     }
+">
+             <label for="Full Screen" style="color: rgb(255, 47, 238);">Full Screen!</label>
+
+                     
            
             <script>
+                if (localStorage.getItem('rememberedFullScreen')=='do it again') 
+                {
+                    document.getElementById('Full Screen').checked = true;
+                    localStorage.setItem('fullScreen','full screen')
+                    console.log("here")
+                }
+                else                            localStorage.setItem('fullScreen','nope')
+
              //   console.log(localStorage.getItem('Fast')==null)
            if (localStorage.getItem('Fast')==null) localStorage.setItem('Fast',String(true))
  if (localStorage.getItem('Fast')==String(true)) document.getElementById('Fast').checked = true;
