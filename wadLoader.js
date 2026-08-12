@@ -967,6 +967,19 @@ var scaleCorrection = 3.5;
 
                                       }
                                       let hasMaximized = false
+            c.addEventListener('pointerdown', function(e)
+                               {
+
+                                if(!hasMaximized)
+                                {
+                  console.log("Go full screen? "+localStorage.getItem('fullScreen'))
+
+                if(window.maximizeScreen)openFullscreen();
+                  hasMaximized=true;
+                                }
+                            }
+                        )
+                        
  function attachListeners(){
             c.addEventListener('pointerdown', function(e)
                                {
@@ -975,7 +988,7 @@ var scaleCorrection = 3.5;
                                 {
                   console.log("Go full screen? "+localStorage.getItem('fullScreen'))
 
-                  if(window.maximizeScreen)openFullscreen();
+                if(window.maximizeScreen)openFullscreen();
                   hasMaximized=true;
                                 }
 
