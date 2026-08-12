@@ -9,7 +9,9 @@ let instrument2 = "triangle"
 let instrumentGuitar = "triangle"
 
 
-function stallTillWad(){if(typeof(Wad)=="function"&&userHasGestured){initialize();} else  setTimeout(stallTillWad,100);}
+function stallTillWad(){
+    if(typeof(Wad)=="function"&&userHasGestured){initialize();} 
+    else  setTimeout(stallTillWad,100);}
 stallTillWad()//lurker
 
 let hyperdriveTUNA = {
@@ -959,9 +961,20 @@ var scaleCorrection = 3.5;
                                           }
 
                                       }
+                                      let hasMaximized = false
  function attachListeners(){
             c.addEventListener('pointerdown', function(e)
                                {
+
+                                if(!hasMaximized)
+                                {
+                  console.log(localStorage.getItem('fullScreen'))
+
+                  if(localStorage.getItem('fullScreen')=='full screen')openFullscreen();
+                  localStorage.setItem('fullScreen','nope')
+                  hasMaximized=true;
+                                }
+
                 if(typeof requestWakeLock=="function")requestWakeLock();
 //console.log   ( e.srcElement.nodeName)
                 if(e.srcElement.nodeName=="CANVAS"  ||
