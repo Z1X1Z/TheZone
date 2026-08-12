@@ -3071,10 +3071,11 @@ if(lengthP<1./3.)
 {
    if( mod(coresIn,2.)==1.)
 hyperCore+=2.;
-else hyperCore+=4./3.;
+else
+hyperCore+=1./3.;
 }
-//else if(lengthP<twoThirds)
-//hyperCore+=.25;
+else if(lengthP<twoThirds)
+hyperCore+=1.5;
 
 if(lengthP<SEVEYEStartAdj)
 {
