@@ -840,6 +840,12 @@ radialWarp=b;
                     <label for="Radial Rainbow Clover">Radial Rainbow Clover![M]</label><br>
 
 
+                   <input type="checkbox" id="SuperSeal" name="t"  onclick= "
+                       key  = 'S';
+                       callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                    <label for="SuperSeal">Super Seal![.S]</label><br>
+
+
  
 
 
@@ -2948,7 +2954,7 @@ hyperCore=
    //(-cored*gr*leaf)//this is the core slider this dilates central core across metacore//here could use a hotkey//does it do anything useful?
    twoThirds+log(lfc)*logStabilizationConstant;
     hyperCore+=.5/-log(zoom/(lfc));//not quite right for keeping central outer clover same size
-
+    hyperCore+=.5;//to compensate for fifth core
 if(lfcOverZoom>twoThirds)
 {
     float dif = 1.;
@@ -2971,7 +2977,7 @@ if(pollen)
 float truncNonLeaf=1.;
 
 float truncator=1.;
-if(zoom!=0.&&lfc!=0.&&lengthP<SEVEYEStartAdj)//may or may not include 
+if(zoom!=0.&&lfc!=0.)//may or may not include 
 {
     truncNonLeaf=log((lfcCenterCored));
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoom*zoom))

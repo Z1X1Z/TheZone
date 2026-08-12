@@ -194,7 +194,7 @@ var SEVEYEStart=1.75;
 var SEVEYEStartAdj=SEVEYEStart;
 var sevMargin = 1./SEVEYEPush;
 var lfcAdj=lfc ;
-if(clvrVariant4!=0.)
+if(clvrVariant4!=0.&&seventhOUTside)
 {
     SEVEYEStartAdj*=- clvrVariant4;
     sevMargin*=-clvrVariant4;
@@ -213,7 +213,7 @@ var pollen = polyNomialStretch;
 if(seventhEYEandJubileye&&lfc>zoom&&morph==0.)
 {
 
-    if (lengthP< SEVEYEStartAdj)
+    if (lengthP< SEVEYEStartAdj||!seventhOUTside)
     {
 
          if(lengthP<1./3.
@@ -400,7 +400,7 @@ cored/1.5/squeezeN+Math.log(lfc*squeezeN)*logStabilizationConstant;
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 //float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
     hyperCore+=.5/-Math.log(zoom/(lfc));//not quite right for keeping central outer clover same size
-
+hyperCore+=.5;
 var equilibriator = 1.
     if(dilate){
 if(lfc/zoom>2./3.)
@@ -464,7 +464,7 @@ if(pollen&&OrthoEvery==0.)
 var truncNonLeaf = 1.;
     var truncator=1.;
     var truncated = true;
-    if(lfc!=0.&&zoom!=0.&&truncated&&lengthP<SEVEYEStartAdj)
+    if(lfc!=0.&&zoom!=0.&&truncated)
     {
         truncNonLeaf=Math.log(lfcCenterCored);
         truncator = truncNonLeaf*-leaf/2.;//*100

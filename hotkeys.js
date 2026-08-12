@@ -41,12 +41,21 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                                 function setSevStart()
                                 {
                                     var zb = zoom;
-                                    if(zb>1.)zb=1.;
-                                   // if(zb<1.)
+                                    if(zb>.75)zb=.75;
+                                    if(window.superseal)
+                                    {
+                                   if(fromCenter/zoom>2.&& (zoom<.5||fromCenter>1.5)
+                                   )
+                                   {
                                      uniforms.SEVEYEStart.value=((Math.log(uniforms.baseN.value*(1.+zb**4./3.)+zoom)-1.)/2.+1.
                                     )/2.+//((Math.log(3.)-1.)/2.+1.)/2.+Math.log(uniforms.baseN.value))/2.
                                      (fromCenter*(1.+zb**4./3.) 
-                                    +zoom)**(1./3.);
+                                    +zoom)**(1./3.)-zoom;
+                                     uniforms.SEVEYEStart.value*=(1.-zb**(4./3.)) ;
+                                     }
+                               else uniforms.SEVEYEStart.value= 1.5;
+                                    }
+                               else uniforms.SEVEYEStart.value= 1.75;
                                //    if(!isFinite(uniforms.SEVEYEStart.value)||uniforms.SEVEYEStart.value<0.)
                                // uniforms.SEVEYEStart.value=1.75;
                                      //   console.log(uniforms.SEVEYEStart.value)
@@ -302,7 +311,7 @@ const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 
 
 function resetAll(){
-
+window.superseal=true;
 window.rez=1.;
 
                                              if (   window.iOS )window.rez=window.devicePixelRatio/4.;
@@ -965,6 +974,7 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                 }
     
    // else if (event.altKey);
+                  else if(key == "S" && event.altKey)window.superseal = !window.superseal;
 
 
                   else if(key == "N" && event.ctrlKey)
