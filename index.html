@@ -93,12 +93,21 @@
                      <p></p>
            
             <script>
+                function setMaximize(){
+
                 if (localStorage.getItem('rememberedFullScreen')=='do it again') 
                 {
                     document.getElementById('Full Screen').checked = true;
                     localStorage.setItem('fullScreen','full screen')
                 }
                 else   localStorage.setItem('fullScreen','nope')
+
+                }
+                            document.getElementById("body").addEventListener('pointerdown', function(e)
+                            {
+setMaximize();
+                            }
+                        )
 
              //   console.log(localStorage.getItem('Fast')==null)
            if (localStorage.getItem('Fast')==null) localStorage.setItem('Fast',String(true))
