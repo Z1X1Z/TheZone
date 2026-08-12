@@ -1694,9 +1694,27 @@ let lastVolume = 1.;
              if(cloverSuperCores<0.) cloverSuperCores=0.;
 
             if(zoom>1./2**2&&cloverSuperCores>0){
-                zoom/=2.**singleHyperCoreDepth;coordY/=2.**singleHyperCoreDepth;coordX/=2.**singleHyperCoreDepth;
+                zoom/=2.**singleHyperCoreDepth;
+                if(zoom<1.)
+                    {coordY/=2.**singleHyperCoreDepth;coordX/=2.**singleHyperCoreDepth;
                 fromCenter/=2.**singleHyperCoreDepth;
                 preFromCenter/=2.**singleHyperCoreDepth;
+                    }
+                    else{
+                        coordY*=2.
+                        coordX*=2.
+                        fromCenter*=2.
+                        preFromCenter*=2.;
+                        if(fromCenter<2./3.)
+                        {
+                                                    coordY*=2.
+                        coordX*=2.
+                        fromCenter*=2.
+                        preFromCenter*=2.;
+                                                
+                        }
+
+                    }
                     lastZoom/=2.**singleHyperCoreDepth;
                 cloverSuperCores--;
 
@@ -2197,7 +2215,7 @@ function runOSMD (){
                             {
                               lastZoom = zoom;
                               zoomRoutine();
-                     if((((coordX**2+coordY**2)**.5/zoom**.5<uniforms.SEVEYEStart.value||fromCenter==0.)&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)||!uniforms.seventhOUTside.value)
+                     if((((coordX**2+coordY**2)**.5/(zoom)**.5<uniforms.SEVEYEStart.value||fromCenter==0.)&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)||!uniforms.seventhOUTside.value)
                         infinicore();
 
                             }
@@ -2243,7 +2261,6 @@ function runOSMD (){
 
                    }
                     else wrapMovementBoost=1;
-
                                                               coordX+= spunTouch[0]*wrapMovementBoost;
 
                                               coordY+= spunTouch[1]*wrapMovementBoost;
@@ -2722,7 +2739,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
    {
        if(!zoomAtl41&&zoomRate!=0.)
        {zoomRoutine();
-                          if((((coordX**2+coordY**2)**.5/zoom**.5<uniforms.SEVEYEStart.value||fromCenter==0.)&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)||!uniforms.seventhOUTside.value)
+                          if((((coordX**2+coordY**2)**.5/(zoom)**.5<uniforms.SEVEYEStart.value||fromCenter==0.)&&uniforms.seventhOUTside.value&&uniforms.colorCombo.value<=0)||!uniforms.seventhOUTside.value)
  infinicore();
        }
    }
