@@ -968,7 +968,7 @@ var scaleCorrection = 3.5;
 
                                 if(!hasMaximized)
                                 {
-                  console.log(localStorage.getItem('fullScreen'))
+                  console.log("Go full screen? "+localStorage.getItem('fullScreen'))
 
                   if(localStorage.getItem('fullScreen')=='full screen')openFullscreen();
                   localStorage.setItem('fullScreen','nope')
