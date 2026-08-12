@@ -2310,6 +2310,7 @@ function runOSMD (){
 
                                           function animate( timestamp ) {
 
+        setSevStart();
 
    //                                                            if(on&&ampThresh>.000001)
  //window.twist-=window.spinnerTwist                     
@@ -4157,7 +4158,6 @@ uniforms.baseN.value=2.701002244218596767553929329640246633
                             uniforms.volumeFret2.value=loudestFret[1].volume/loudestFret[0].volume;
                             uniforms.volumeFret3.value=loudestFret[2].volume/loudestFret[0].volume;
                             uniforms.volumeFret4.value=loudestFret[3].volume/loudestFret[0].volume;
-        setSevStart();
 
 
    if(window.starClover)
