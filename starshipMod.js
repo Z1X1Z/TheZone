@@ -1706,7 +1706,7 @@ let lastVolume = 1.;
                         coordX*=2.
                         fromCenter*=2.
                         preFromCenter*=2.;
-                        /*
+                        
                         if(fromCenter<2./3.)
                         {
                                                     coordY*=2.
@@ -1715,7 +1715,7 @@ let lastVolume = 1.;
                         preFromCenter*=2.;
                                                 
                         }
-                        */
+                        
 
                     }
                     lastZoom/=2.**singleHyperCoreDepth;
