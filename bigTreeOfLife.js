@@ -597,13 +597,13 @@ if((seventhEYEandJubileye&&lengthP<1./3.)||(!seventhEYEandJubileye&&seventhEYE==
 
 {
 if( (coresIn%2.)==1.)
-hyperCore+=1.75;
+hyperCore+=4./3.;
 else hyperCore+=.25;
 }
 
 //else if (seventhEYE!=3.||lengthP<2./3.)
 else if((seventhEYE==0.||(seventhEYEandJubileye&&lengthP<2./3.))&&(lengthP<SEVEYEStartAdj||!seventhOUTside))
-hyperCore+=1.5;
+hyperCore+=4./3.;
 
 // hyperCore-=lfcCenterCored-twoThirds;
 }
@@ -1265,7 +1265,7 @@ jubileyes!=0.&&
         if(jubileyes<0.)s=new THREE.Vector2(s.y,Math.abs(s.x));//more sign checks may help
 
    // try signs and swizzle!
-hyperCoreBoosted+=squeezeN*3.;//before or after *=log(3.)?
+hyperCoreBoosted+=squeezeN*4.;//before or after *=log(3.)?
   //hyperCoreBoosted*=(Math.log(3.)**squeezeN);
     dstnce = s.length();
 
