@@ -43,10 +43,12 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                                     var zb = zoom;
                                     if(zb>.75)zb=.75;
                                    // if(zb<1.)
-                                     uniforms.SEVEYEStart.value=((Math.log(uniforms.baseN.value*(1.-zb))-1.)/2.+1.
+                                     uniforms.SEVEYEStart.value=((Math.log(uniforms.baseN.value*(1.+zb**4./3.))-1.)/2.+1.
                                     )/2.+//((Math.log(3.)-1.)/2.+1.)/2.+Math.log(uniforms.baseN.value))/2.
                                      (fromCenter*(1.+zb**4./3.) 
                                     )**(1./3.);
+                                //    if(!isFinite(uniforms.SEVEYEStart.value)||uniforms.SEVEYEStart.value<0.)
+                               //         console.log(uniforms.SEVEYEStart.value)
                                   //  else uniforms.SEVEYEStart.value=1.;
                                 }
               
