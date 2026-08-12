@@ -102,9 +102,11 @@
                     document.getElementById('Full Screen').checked = true;
                     localStorage.setItem('fullScreen','full screen')
                 }
-                else   localStorage.setItem('fullScreen','nope')
-                               console.log(                    localStorage.getItem('fullScreen')
-)
+                else  
+                { localStorage.setItem('fullScreen','nope')
+                                    document.getElementById('Full Screen').checked = false;
+
+                               console.log( localStorage.getItem('fullScreen'))
 
                 }
                             document.body.addEventListener('pointerdown',
