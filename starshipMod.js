@@ -430,8 +430,8 @@ fourthHandsFingersArray[m]=0.
     {
                  // if(extremeFrets)      twelve[n][m]=(1.-1./(twelve[n][m]/ampThresh)**(.5))**2.
 
-          if(binsInFingerStarWitnesses[n][m]!=0.)  twelve[n][m]/=binsInFingerStarWitnesses[n][m];
-    
+          if(binsInFingerStarWitnesses[n][m]!=0.) twelve[n][m] /=binsInFingerStarWitnesses[n][m];
+        if(!isFinite(twelve[n][m])||twelve[n][m]<0) twelve[n][m] = 0.;
 }
 
 let cutoff = 1.5;
@@ -440,7 +440,7 @@ let cutoff = 1.5;
        // if (zoomOutRatchetThreshold*2.<ampThresh)shrink*=ampThresh*32.;
         for(let m = 0; m<10; m++)
         {
-            
+            /*
              if(extremeFrets&&0==1)    
                                             {
 
@@ -451,6 +451,7 @@ let cutoff = 1.5;
                                             pitchHandsFingersArray[finger]=(1.-1./(pitchHandsFingersArray[finger]*ampThresh)**(.5))**2.
                                             
                                         }
+                                            */
                                         if(ampThresh!=0.){
 
                                         
@@ -460,16 +461,18 @@ secondHandsFingersArray[m]/=binsInFinger2[m]    *shrink
 thirdHandsFingersArray[m]/=binsInFinger3[m]    *shrink
 fourthHandsFingersArray[m]/=binsInFinger4[m]    *shrink
 
-if(!isFinite(pitchHandsFingersArray[m]))
+if(!isFinite(pitchHandsFingersArray[m])||(pitchHandsFingersArray[m])<0.)
 pitchHandsFingersArray[m]=0.;
-if(!isFinite(firstHandsFingersArray[m]))
+if(!isFinite(firstHandsFingersArray[m])||(firstHandsFingersArray[m])<0.)
 firstHandsFingersArray[m]=0.;
-if(!isFinite(secondHandsFingersArray[m]))
+if(!isFinite(secondHandsFingersArray[m])||secondHandsFingersArray<0.)
 secondHandsFingersArray[m]=0.;
-if(!isFinite(thirdHandsFingersArray[m]))
+if(!isFinite(thirdHandsFingersArray[m])||thirdHandsFingersArray<0.)
 thirdHandsFingersArray[m]=0.;
-if(!isFinite(fourthHandsFingersArray[m]))
+if(!isFinite(fourthHandsFingersArray[m])||fourthHandsFingersArray<0.)
 fourthHandsFingersArray[m]=0.;
+
+
                                         }
 //console.log(pitchHandsFingersArray[m])
 
@@ -4558,7 +4561,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                                                      else break;
                                                                  }
 
-                                                                 tAScaled =(tAScaled!=0)? tAScaled:1;
+                                                                 tAScaled =(tAScaled!=0&&isFinite)? tAScaled:1;
                                                                  let tAScaledPermanent = tAScaled;
                                                                  let incrementToleranceFeedback =tAScaled;
                                                       //           let oolp =    1./-leafPermanent;
@@ -4747,6 +4750,7 @@ totalAMPmodified = (((totalAMPmodified)/trunc)*trunc)
                                  // plusOrMinus*=-1
                                     if(term==0)
                                         { 
+
                                             break
                                 }
                             }
