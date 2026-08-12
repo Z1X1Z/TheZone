@@ -2947,6 +2947,7 @@ hyperCore=
    cored* 
    //(-cored*gr*leaf)//this is the core slider this dilates central core across metacore//here could use a hotkey//does it do anything useful?
    twoThirds+log(lfc)*logStabilizationConstant;
+    hyperCore+=.5/-log(zoom/(lfc));//not quite right for keeping central outer clover same size
 
 if(lfcOverZoom>twoThirds)
 {
@@ -2965,7 +2966,6 @@ if(pollen)
 {
      hyperCore+=.5;
 }
-   //  hyperCore+=.25;//for function setSevStart() in hotkeys using Math.log(uniforms.baseN.value)
 
 
 float truncNonLeaf=1.;
@@ -3095,7 +3095,6 @@ float hyperCoreOUTPUT =hyperCore*log2/log(metaCoreDriveFactor)+loops;
        float delimiter = baseDelimiter;
       delimiter=baseDelimiter/colorComputationBoost;
                                                           float base=2.701002244218596767553929329640246633;
-                                                      
                                                       
                                                                                          float  logStabilizationConstantB=0.;
                                                                                          float leafDivGR = 0.;
