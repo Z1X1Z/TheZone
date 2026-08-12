@@ -49,11 +49,11 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                                    )
                                    {
                                      uniforms.SEVEYEStart.value=((Math.log(uniforms.baseN.value*(1.+zb**4./3.)**zb**zb
-                                     +zb/.75
+                                     +zb
                                     )-1.)/2.+1.
                                     )/2.+//((Math.log(3.)-1.)/2.+1.)/2.+Math.log(uniforms.baseN.value))/2.
                                      (fromCenter*(1.+zb**4./3.)**zb**zb
-                                    +zb/.75
+                                    +zb*2.
                                 )**(1./3.)//-zb**fromCenter;
                                      uniforms.SEVEYEStart.value*=(1.-zb**(4./3.))**zb**zb ;
                                     // uniforms.SEVEYEStart.value-=zoom**fromCenter;
