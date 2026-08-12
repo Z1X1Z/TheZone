@@ -4712,7 +4712,7 @@ hyperCore+=.25;//seems to be a bug fix to synchronize (almost) core depth with w
 
     hyperCore+=.5/-log(zoom/(lfc));//not quite right for keeping central outer clover same size
 
-    
+
 float equilibriator = 1.;
 if(dilate){//should be re-enabled after checks
 if(lfcOverZoom>twoThirds)
@@ -4781,7 +4781,6 @@ if(pollen&&OrthoEvery==0.)
   // //else hyperCore+=lfc/log2;
    }
 }
-   hyperCore+=1./6.;//for function setSevStart() in hotkeys using Math.log(uniforms.baseN.value)
 
 
 float truncNonLeaf=1.;
