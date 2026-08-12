@@ -1785,7 +1785,10 @@ function zoomRoutine(){
     var metaDepth=(!dupered)?zoomCap32:zoomCap32**2;//due to pixelization limits
 
     if(seventhOUTside&&(fromCenter-zoom)*(1.-zoom)>uniforms.SEVEYEStart.value)
+    {
             metaDepth=metaDepth*2**(uniforms.SEVEYEpow.value/(coordX**2+coordY**2)**.5+7-sealBoost )
+            metaDepth*=2**4
+    }
     else if(seventhOUTside&&fromCenter*(1.-zoom)-zoom**.5>(uniforms.SEVEYEStart.value-1./2**uniforms.SEVEYEpow.value*uniforms.SEVEYEpow.value/2.))
         metaDepth=metaDepth*2**(uniforms.SEVEYEpow.value+6.-sealBoost)
     else if (uniforms.seventhEYE.value==3.&&uniforms.jubileyes.value!=0.&&fromCenter<1./3.)
