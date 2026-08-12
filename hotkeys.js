@@ -47,12 +47,15 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                                    if(fromCenter/zoom>2.&& (zoom<.5||fromCenter>1.5)
                                    )
                                    {
-                                     uniforms.SEVEYEStart.value=((Math.log(uniforms.baseN.value*(1.+zb**4./3.)+zoom)-1.)/2.+1.
+                                     uniforms.SEVEYEStart.value=((Math.log(uniforms.baseN.value*(1.+zb**4./3.)
+                                     +zb
+                                    )-1.)/2.+1.
                                     )/2.+//((Math.log(3.)-1.)/2.+1.)/2.+Math.log(uniforms.baseN.value))/2.
                                      (fromCenter*(1.+zb**4./3.) 
-                                    +zoom)**(1./3.)-zoom**fromCenter;
-                                     uniforms.SEVEYEStart.value*=(1.-zb**(4./3.))**(zoom) ;
-                                    //  uniforms.SEVEYEStart.value-=zoom;
+                                    +zb
+                                )**(1./3.)//-zb**fromCenter;
+                                     uniforms.SEVEYEStart.value*=(1.-zb**(4./3.))**zb**zb ;
+                                    // uniforms.SEVEYEStart.value-=zoom**fromCenter;
                                      }
                                else uniforms.SEVEYEStart.value= 1.5;
                                     }
