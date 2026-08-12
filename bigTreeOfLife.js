@@ -399,7 +399,7 @@ if(MetaCored)hyperCore=
 cored/1.5/squeezeN+Math.log(lfc*squeezeN)*logStabilizationConstant;
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 //float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
-    hyperCore+=.5/-log(zoom/(lfc));//not quite right for keeping central outer clover same size
+    hyperCore+=.5/-Math.log(zoom/(lfc));//not quite right for keeping central outer clover same size
 
 var equilibriator = 1.
     if(dilate){
