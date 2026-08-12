@@ -975,7 +975,7 @@ numberOfTouches++
                                 {
                   console.log("Go full screen? "+window.maximizeScreen)
 
-                if(window.maximizeScreen&&(numberOfTouches>1))
+                if(window.maximizeScreen&&(numberOfTouches>1||!touchOnlyMode))
                     {openFullscreen();
                   hasMaximized=true;
                     }
