@@ -6163,8 +6163,8 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
     //s=vec2(-(s.x),abs(s.y));
     if(jubileyes<0.)s=vec2(s.y,abs(s.x));//more sign checks may help
    // try signs and swizzle!
-//hyperCoreBoosted+=squeezeN*3.;pow(squeezeN,squeezeN*2.);//before or after *=log(3.)?
-  hyperCoreBoosted*=pow(log(3.),squeezeN);
+hyperCoreBoosted+=squeezeN*3.;//pow(squeezeN,squeezeN*2.);//before or after *=log(3.)?
+ // hyperCoreBoosted*=pow(log(3.),squeezeN);
   dstnce = length(s);
          break;
 }

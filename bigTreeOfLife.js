@@ -1265,8 +1265,8 @@ jubileyes!=0.&&
         if(jubileyes<0.)s=new THREE.Vector2(s.y,Math.abs(s.x));//more sign checks may help
 
    // try signs and swizzle!
-//hyperCoreBoosted+=squeezeN*3.;//before or after *=log(3.)?
-  hyperCoreBoosted*=(Math.log(3.)**squeezeN);
+hyperCoreBoosted+=squeezeN*3.;//before or after *=log(3.)?
+  //hyperCoreBoosted*=(Math.log(3.)**squeezeN);
     dstnce = s.length();
 
          break;
