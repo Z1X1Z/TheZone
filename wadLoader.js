@@ -2,7 +2,6 @@
                 if(localStorage.getItem('fullScreen')=='full screen')window.maximizeScreen = true
                 else window.maximizeScreen = false;
                   localStorage.setItem('fullScreen','nope')
-
 const maxTouchSoundCount = 24;
 window.osmdOscillators = 15;
 let touchNumber=new Map();
@@ -967,16 +966,19 @@ var scaleCorrection = 3.5;
 
                                       }
                                       let hasMaximized = false
+                                      let numberOfTouches = 0;
  function attachListeners(){
             c.addEventListener('pointerdown', function(e)
                                {
-
+numberOfTouches++
                                 if(!hasMaximized)
                                 {
                   console.log("Go full screen? "+window.maximizeScreen)
 
-                if(window.maximizeScreen)openFullscreen();
+                if(window.maximizeScreen&&(numberOfTouches>1))
+                    {openFullscreen();
                   hasMaximized=true;
+                    }
                                 }
 
                 if(typeof requestWakeLock=="function")requestWakeLock();
