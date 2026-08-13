@@ -1792,7 +1792,7 @@ function zoomRoutine(){
 
     if(seventhOUTside&&(fromCenter-zoom)*(1.-zoom)>uniforms.SEVEYEStart.value)
     {
-            metaDepth=metaDepth*2**(uniforms.SEVEYEpow.value/(coordX**2+coordY**2)**.5+4)
+            metaDepth=metaDepth*2**(uniforms.SEVEYEpow.value/(coordX**2+coordY**2)**.5+4-uniforms.squeezeN.value)
             
     }
     else if(seventhOUTside&&fromCenter*(1.-zoom)-zoom**.5>(uniforms.SEVEYEStart.value-1./2**uniforms.SEVEYEpow.value*uniforms.SEVEYEpow.value/2.))

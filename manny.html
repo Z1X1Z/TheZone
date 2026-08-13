@@ -4806,6 +4806,13 @@ if(squeezeN!=1.)
 {
 if(petals>0.)omniboost=sqrt(omniboost);
 else if (petals<=0.)hyperCore-=log2*2.;
+
+ if(SEVEYEStartAdj<lengthP&&seventhOUTside&&squeezeN>=2.)
+ hyperCore-=squeezeN*2./3.;
+  
+    //if(SEVEYEStartAdj<lengthP+sevMargin&&SEVEYEStartAdj>lengthP-sevMargin&&seventhOUTside)//how interesting!  Try with squeezeN.
+    //hyperCore+=log2*4.*-sign(.5*sign(lengthP-sevMargin)-abs(lengthP-sevMargin));
+
 }
 // if (petals==0.)hyperCoreOUTPUT+=log2;
 
