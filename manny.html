@@ -4805,7 +4805,7 @@ float omniboost = (6.+petals)/6.-1.;
 if(squeezeN!=1.)
 {
 if(petals>0.)omniboost=sqrt(omniboost);
-else if (petals<0.)hyperCore-=log2*2.;
+else if (petals<=0.)hyperCore-=log2*2.;
 }
 // if (petals==0.)hyperCoreOUTPUT+=log2;
 
@@ -6163,8 +6163,14 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
     //s=vec2(-(s.x),abs(s.y));
     if(jubileyes<0.)s=vec2(s.y,abs(s.x));//more sign checks may help
    // try signs and swizzle!
-hyperCoreBoosted+=squeezeN*4.;//pow(squeezeN,squeezeN*2.);//before or after *=log(3.)?
- // hyperCoreBoosted*=pow(log(3.),squeezeN);
+
+   if(squeezeN>=2.)
+   {
+hyperCoreBoosted+=4.+.5/(pow(squeezeN,squeezeN)*squeezeN);//pow(squeezeN,squeezeN*2.);//before or after *=log(3.)?
+     hyperCoreBoosted*=1.+.5/squeezeN;//pow(log(3.),squeezeN);
+   }
+   else hyperCoreBoosted+=4.;
+
   dstnce = length(s);
          break;
 }
