@@ -879,6 +879,10 @@ Reset Zoom![L]</a><br>
                   key  = 'W';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
                <label for="armStar">ArmStar?![,.W]</label><br>
+                   <input type="checkbox" id="wink" name="t"  onclick= "
+                  key  = 'k';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
+               <label for="wink">Wink?![,.k]</label><br>
                     <input type="checkbox" id="Dynamic Dance" name="t"  onclick= "
                         key  = 'X';
                         callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -1513,6 +1517,8 @@ uniform int inseyedOut;
     uniform float smush;
     uniform bool armStar;
     uniform bool gigaLeap;
+    uniform bool eyeSingle;
+
                                   
                                   const float twoThirds = 2./3.;
                                   const float sqrt2 = sqrt(2.);
@@ -3784,7 +3790,8 @@ float xenOctaveFactor =4.;
                                                                  
                                                             float winkColor = 1.;
                                                              vec2     winkMotion = vec2(0.);
-                                                            
+                                    if(eyeSingle&&volume!=1.)
+
                                                             {   vec2 majorPBaseline= characterP/5.;
                                                                 if(major==2)majorPBaseline=spin2(majorPBaseline,   atan(d.y,d.x)-PIdiv2*3.-PI/12.*flipStar);
 
