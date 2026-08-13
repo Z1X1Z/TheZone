@@ -1792,7 +1792,7 @@ function zoomRoutine(){
 
     if(seventhOUTside&&(fromCenter-zoom)*(1.-zoom)>uniforms.SEVEYEStart.value)
     {
-            metaDepth=metaDepth*2**(uniforms.SEVEYEpow.value/(coordX**2+coordY**2)**.5+4-uniforms.squeezeN.value)
+            metaDepth=metaDepth*2**(uniforms.SEVEYEpow.value/(coordX**2+coordY**2)**.5+4-uniforms.squeezeN.value+1)
             
     }
     else if(seventhOUTside&&fromCenter*(1.-zoom)-zoom**.5>(uniforms.SEVEYEStart.value-1./2**uniforms.SEVEYEpow.value*uniforms.SEVEYEpow.value/2.))
@@ -3255,7 +3255,7 @@ if( (!window.touchMode||(window.shouldShowStar))&&!window.touchOnlyMode) {
              
 
 
-else{//start drawing of just twenty four frets here
+else{//start drawing of just twenty four frets here 
     for (var g=0; g<starArms*3; g++) {//wipe out the after image of the 1024 frets
         starColorAttribute.setXYZW(g,0,0,0,0.)
         starPositionAttribute.setXYZ(g,0,0,0)
@@ -3313,7 +3313,8 @@ let fretMultiplied = oddSkew+EldersLeg/((radialWarp<1)?radialWarp:1);
 }
                 
                  arm =flip*(g*radialWarp+twist*EldersLeg/24.)%EldersLeg/EldersLeg*pi*2.;
-                 lengt = ((testar[(g+EldersLeg/2.)%EldersLeg])-minTestar)/(maxTestar-minTestar);;
+                 lengt = ((testar[(g+EldersLeg/2.)%EldersLeg])-minTestar)/(maxTestar-minTestar);
+                 if(minTestar==testar[(g+EldersLeg/2.)%EldersLeg])testar[(g+EldersLeg/2.)%EldersLeg]=0.;//cull miniumum throughput
                 if(twoOr1) {
                     lengt/=2.**15./EldersLeg;
                     lengt=lengt**.25;
@@ -4402,6 +4403,7 @@ for(var n = 0; n<targets.length;n++){
                                                          }
                                                          else {
                                                              //requestWakeLock();
+                                                            if(!INITIALIZED)resizeMessage()
                                                              if(!window.touchOnlyMode)audioX.resume();
                                                              if(typeof Wad=="function")Wad.audioContext.resume()
                                                                  }
