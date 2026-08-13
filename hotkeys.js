@@ -140,7 +140,7 @@ starInShader:{value:true},
 clvrVariant8:{value: false},
 clvrVariant9:{value: false},
 clvrVariant0:{value: false},
-explodo:{value: 1    },
+explodo:{value: 2    },
 BORE:{value: false    },
 
 twelveGates:{value: false    },
@@ -1635,7 +1635,7 @@ else{
         if(fullscreen)openFullscreen();
         else closeFullscreen();
     }
-    else if (key=="H")uniforms.cloverSlide2.value=(uniforms.cloverSlide2.value+1)%3;
+    else if (key=="H")uniforms.cloverSlide2.value=(uniforms.cloverSlide2.value+1)%4;
     //else if (key=="H")uniforms.cloverSlide.value=!uniforms.cloverSlide.value;
     else if (key==" ") 
         {

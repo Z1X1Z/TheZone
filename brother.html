@@ -2781,6 +2781,7 @@ extrArms+=h.x;
                       
 float petals = 0.;
 
+ bool BURSTING = true;
 vec4 tol(vec2 p, vec2 t){
 
                float distributorFACTOR=PI/gr;
@@ -3007,7 +3008,8 @@ bool spokeloverON=zoom/lfc<1.5;//could be 1.5, could be 2/3, one is a compromise
 
 
 hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
- float term=0.;
+
+float term=0.;
 
 vec2 m=vec2(0.);
 
@@ -3472,9 +3474,27 @@ hyperCoreBoosted+=4.;//+3?
   dstnce = length(s);
          break;
 }
-  
-
+if(BURSTING)
+{
 dstnce=length(s);
+bool inSlide= false;
+    if(dstnce<.5&&
+    2.>=hyperCoreBoosted&&mod(floor(hyperCoreBoosted),2.)==0.) 
+{   float shrink = 1.;
+       float slide = 1.;
+
+       slide = .75-(mod(hyperCoreBoosted,1.))*dstnce;//slide
+               slide = sqrt (slide);
+
+            shrink=sqrt(1.-sqrt(mod(hyperCoreBoosted,1.)));
+
+    if(dstnce/slide<1.)
+        s/=slide;
+    
+   if(dstnce/shrink<.75)//may be to do with variant4Correction
+        s/=shrink;
+dstnce=length(s);
+}
     vec2 sBypass = s;
     vec2 sBufferBypass = sBuffer;
    float inImplosionSquared =1.125;
@@ -3484,13 +3504,14 @@ dstnce=length(s);
     for(int v = 0;v<vmax;v++)
     {
     float ExplodingProgression = (hyperCoreBoosted - floor(hyperCoreBoosted));
+    if(v==0)
+    ExplodingProgression=sqrt(ExplodingProgression);
     
         float petalIsolated =(mod((atan(sBufferBypass.y,sBufferBypass.x)*divideByMultiplyingPi+2.)*3.-.5,1.)-.5);
         
         float petalIsolatedDaisy =(mod((atan(sBufferBypass.y,sBufferBypass.x)*divideByMultiplyingPi+2.)*6.-.5,1.)-.5);
 
         float direction = floor(atan(sBypass.y,sBypass.x)/PI2*6.+.5)*PI2/6.-PI/2.;
-   // float direction = floor(atan(s.y,s.x)/PI2*6.)*PI2/6.;//swirlpool
            vec2  spunCloverBurst = sBypass;
            if(v==0)
            {
@@ -3510,26 +3531,26 @@ dstnce=length(s);
        if(v==0)
         {
             spunCloverBurst*=inImplosionSquared;
-            ExplodingProgression*=inImplosionSquared;
+    ExplodingProgression*=inImplosionSquared;
         }
         else if(v==1)
         {
+
             spunCloverBurst/=inImplosionSquared;
     ExplodingProgression/=inImplosionSquared;
+
         }
    
         vec2 petalPlucked = (spunCloverBurst)-ExplodingProgression*vec2(-zin(-direction),-coz(direction));
   
    petalPlucked*=3.;
-
     if(
 2.>=hyperCoreBoosted&&mod(floor(hyperCoreBoosted),2.)==0.//+2./3.&&abs(length(s))>ExplodingProgression
 ) 
-{
   {
 
 
-        sBypass=petalPlucked;//*(hyperCoreBoosted-float(i));
+        sBypass=petalPlucked;
         sBufferBypass = petalPlucked;
         float lengthPlucked = length(petalPlucked);
            if(lengthPlucked<twoThirds&&length(s)<2.)//length(s)<twoThirds solves windows bug, does <4./3.?
@@ -3543,14 +3564,13 @@ dstnce=length(s);
     }
     
 }
-}
 
+
+ 
 if(breaker)break;
-   
-
 }
 else break;
-
+}
 
 
 daisifier+=1.;

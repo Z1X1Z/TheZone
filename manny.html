@@ -4873,7 +4873,8 @@ if(outerCoresOff)hyperCore=0.;
 
 if(Spoker)
 hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
- //if(morph>.5&&!wheel)hyperCore+=4.;
+
+//if(morph>.5&&!wheel)hyperCore+=4.;
  float term=0.;
 
 vec2 m=vec2(0.);
@@ -6203,16 +6204,26 @@ bool inImplosion = false;
 2.>=hyperCoreBoosted&&mod(floor(hyperCoreBoosted),2.)==0.//+2./3.&&abs(length(s))>ExplodingProgression
 ) 
 {   float shrink = 1.;
-    if (cloverSlide2==2||(seventhEYEandJubileye&&lengthP<2./3.&&cloverSlide2!=0))
-    shrink = 1.-(mod(hyperCoreBoosted,1.))*dstnce;//slide
-   else 
-    if(cloverSlide2==1)
+       float slide = 1.;
+
+
+   if(dstnce/shrink<.75)//may be to do with variant4Correction
+        s/=shrink;
+    if (cloverSlide2==2||cloverSlide2==3)
+    {
+       slide = .75-(mod(hyperCoreBoosted,1.))*dstnce;//slide
+                      slide = sqrt (slide);
+
+    }
+   if(cloverSlide2==1||cloverSlide2==3)
     {
         shrink=sqrt(1.-sqrt(mod(hyperCoreBoosted,1.)));
     }
+    if(dstnce/slide<1.)
+   s/=slide;
    if(dstnce/shrink<
    //.5
-   1.
+   .75
    )//may be to do with variant4Correction
    {
     s/=shrink
