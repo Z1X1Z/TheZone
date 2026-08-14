@@ -931,6 +931,11 @@ let lineMat, lineGeometry, line;
                     
                             let meshTrail, materialTrail, geomeTrail;
                             let stackMesh, stackMaterial, stackGeometry;
+                            let numberOfMetaTriangles = 4;
+                            let fibgeMesh=Array(numberOfMetaTriangles), 
+                            fibgeMaterial=Array(numberOfMetaTriangles), 
+                            fibgeGeometry=Array(numberOfMetaTriangles);
+                            
                             let starMesh,starGeometry,starMaterial;
                             let DAWstarMesh,DAWstarGeometry,DAWstarMaterial;
 
@@ -961,8 +966,27 @@ let  FEEDBACKuniforms, FEEDBACKuniformsFlip,wipeUniforms;
                             
                                                                 const stackVertices = new Float32Array(12*3*6*2)
                                                                 const stackColor = new Float32Array(12*4*6*2)
-                            
-                    
+
+                                                                var fibgeTriangles = Array(numberOfMetaTriangles).fill(0);
+                                                                var fr = 1.;
+                                                                //if(0==1)
+                                                                for(var fmt = 0; fmt<numberOfMetaTriangles; fmt++)
+                                                                {
+                                                                    for (var fibGen = 0; fibGen<=fmt;fibGen++)
+                                                                {
+                                                                    fibgeTriangles[fmt]+=fr
+                                                                    fr+=2;
+                                                                }
+                                                                fr=1;
+                                                            }
+                                                                var fibgeVertices=Array(numberOfMetaTriangles)
+                                                                var fibgeColor=Array(numberOfMetaTriangles)
+
+for(var yo = 0.;yo<numberOfMetaTriangles; yo++)
+                    {
+                          fibgeVertices[yo] = new Float32Array(fibgeTriangles[yo]*3*3)
+                          fibgeColor[yo] = new Float32Array(fibgeTriangles[yo]*4*3)                                       
+                    }
                                            const starsANDwitnessesPoints=new Float32Array(120*3*6);
                                            const starsANDwitnessesColors=new Float32Array(120*3*6);
 
@@ -1074,7 +1098,9 @@ babyBuffer = new Uint8Array( bufferSize ).fill(0);
                             let harmonicColorAttribute;
                             let stackPositionAttribute;
                             let stackColorAttribute;
-                                
+                            let fibgePositionAttribute=Array(numberOfMetaTriangles)
+                            let fibgeColorAttribute=Array(numberOfMetaTriangles)
+
                                            let trailPositionAttribute;
                                            let trailColorAttribute;
                                            
@@ -1090,6 +1116,11 @@ babyBuffer = new Uint8Array( bufferSize ).fill(0);
              stackPositionAttribute = stackGeometry.getAttribute( 'position' );
              stackColorAttribute = stackGeometry.getAttribute( 'color' );
   
+             for(var go = 0.; go<numberOfMetaTriangles; go++)
+             {
+             fibgePositionAttribute[go] = fibgeGeometry[go].getAttribute( 'position' );
+             fibgeColorAttribute[go] = fibgeGeometry[go].getAttribute( 'color' );
+             }
              starPositionAttribute = starGeometry.getAttribute( 'position' );
              starColorAttribute = starGeometry.getAttribute( 'color' );
              
@@ -1259,6 +1290,21 @@ function init() {
              stackMesh= new THREE.Mesh( stackGeometry,  stackMaterial);
              
              
+                          for(var go = 0.; go<numberOfMetaTriangles; go++)
+{
+             fibgeMaterial[go]= new THREE.MeshBasicMaterial({
+                           opacity: 1.,
+                         transparent: true,
+                           vertexColors: true,
+                          // side: THREE.DoubleSide
+                       });
+             fibgeGeometry[go] = new THREE.BufferGeometry();
+             fibgeGeometry[go].dynamic = true;
+             fibgeGeometry[go].setAttribute( 'position', new THREE.Float32BufferAttribute( fibgeVertices[go], 3 ) );
+             fibgeGeometry[go].setAttribute( 'color', new THREE.Float32BufferAttribute( fibgeColor[go], 4 ));
+             fibgeMesh[go]= new THREE.Mesh( fibgeGeometry[go],  fibgeMaterial[go]);
+                    }
+             
      
      circleMaterial = new THREE.MeshBasicMaterial(    { opacity: .8,
          transparent: true});
@@ -1270,6 +1316,9 @@ function init() {
      
                         loadAttributes();
              shaderScene.add(stackMesh)
+             for(var ko = 0.; ko<numberOfMetaTriangles; ko++)
+                          shaderScene.add(fibgeMesh[ko])
+
 
      scene.add(harmonicPzyghtheMesh)
      scene.add(meshTrail)
@@ -4063,7 +4112,7 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
 
 }
 
-
+//binTriBundle()
 //if(cellularDivision)
                                      /*
                                                        uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.coords.value.x)
@@ -4957,3 +5006,164 @@ return pos + 0.5 * (s0 - s2 ) / (s0 - 2.* s1 + s2);
 
 
 
+            let scl =.5
+
+    var equilateralHeightKeep = 1.25**.5;
+    var fibgeWidthKeep = 1./equilateralHeightKeep;
+    var fibgeCenterKeep = (equilateralHeightKeep**2+fibgeWidthKeep**2.)**.5/2.;
+
+function binaryTriangle(findgex,xFibge,yFibge,drawUpsideDown)
+{
+    xFibge*=scl
+    yFibge*=scl
+    var  dep = -1.;
+        var fibgeTransparency=1.;
+        var fibgeStride = 0.;
+        
+    let equilateralHeight = equilateralHeightKeep
+    let fibgeWidth = fibgeWidthKeep
+    let fibgeCenter = fibgeCenterKeep
+            var bw = 1.*drawUpsideDown;
+            let fibgeRows=0.;
+            let inRow = 1.;
+            let fibgeTabulator = 0;
+            let place = 1.
+            while (fibgeTabulator<fibgeTriangles[findgex])
+            {
+                
+               if(place==inRow)
+                { fibgeRows++
+                    inRow+=2;
+                place=1
+                }
+                else place++
+                                fibgeTabulator++
+
+            }
+                      if(loopsRun==0)console.log(fibgeRows)
+
+            let fibgeScale =scl/(fibgeRows);
+            let fidgeShiftX = -0;
+                                                            if(0==1&&loopsRun==0)
+                                                            {
+console.log(fibgeCenterKeep)
+console.log(equilateralHeightKeep)
+                                                            }
+                                                            
+                                                fibgeWidth*=fibgeScale
+                                    fibgeCenter*=fibgeScale
+
+                                    let fidgeShiftY =-fibgeCenter+(fibgeWidth+fibgeCenter)*fibgeRows/3**.5*2.
+                                          //    if(loopsRun==0)console.log("  fibdgeWidth "+fibgeWidth)
+
+
+                                 //   fidgeShiftY*=2.;
+                                    //  let fidgeShiftY =-fibgeCenter*fibgeScale+1./3**.5*fibgeWidth/fibgeCenter*2.; 3**.5/6/scl;
+
+fidgeShiftX+=xFibge;
+fidgeShiftY+=yFibge;
+
+if(drawUpsideDown==-1)
+{
+    
+             //                fidgeShiftY *=-1;
+                        fibgeWidth*=-1;
+                                    fibgeCenter*=-1;
+// f/idgeShiftX*=-1;
+//fidgeShiftY*=-1;
+
+}
+var upsideDown=1;
+var newLine = true;
+var inLine = 1;
+var placeInLine = 1.
+var currentRow = 1;
+
+
+   for (var fs=0; fs<fibgeTriangles[findgex];fs++)
+    {
+                fibgeColorAttribute[findgex].setXYZW(fibgeStride,bw,bw,bw,fibgeTransparency)
+                fibgeColorAttribute[findgex].setXYZW(fibgeStride+1,bw,bw,bw,fibgeTransparency)
+                fibgeColorAttribute[findgex].setXYZW(fibgeStride+2,bw,bw,bw,fibgeTransparency)
+        
+
+                
+               fibgePositionAttribute[findgex].setXYZ(fibgeStride,fidgeShiftX,fibgeCenter*upsideDown+fidgeShiftY,  dep)
+               fibgePositionAttribute[findgex].setXYZ(fibgeStride+1, -fibgeWidth*upsideDown+fidgeShiftX, -fibgeCenter*upsideDown+fidgeShiftY,  dep)
+               fibgePositionAttribute[findgex].setXYZ(fibgeStride+2,fibgeWidth*upsideDown+fidgeShiftX, -fibgeCenter*upsideDown+fidgeShiftY,  dep)
+                       fibgeStride+=3;
+
+                                   placeInLine+=1;
+
+                       if(inLine==placeInLine)
+                        {
+                            newLine=true
+                            fidgeShiftX-=fibgeWidth*currentRow*2.;
+                            currentRow++
+                        }
+                    if(newLine)
+                    {
+                        fidgeShiftX-=fibgeWidth;
+                        fidgeShiftY-=fibgeCenter*2.;
+                        newLine=false;
+                        inLine+=2
+                        placeInLine=0
+                    }
+                    else
+                       {
+                        bw*=-1;
+                        upsideDown*=-1.;
+                        fidgeShiftX+=fibgeWidth;
+                       }
+               }
+                
+            fibgePositionAttribute[findgex].needsUpdate = true; // required after the first render
+            fibgeColorAttribute[findgex].needsUpdate = true; // required after the first render
+          //if(loopsRun==0) console.log("Final value/2+ "+fidgeShiftY)
+            
+       
+}
+
+
+function binTriBundle(){
+
+let fsX = 0.;
+let fsY = 0.;
+//let currentRow = 1.;
+
+binaryTriangle(0,fsX,fsY,1)
+
+                        {//move down line
+                         //   newLine=true
+                            //fsX-=fibgeWidthKeep*currentRow*2.;
+                          //  currentRow++
+                        }
+                    {//newLine
+                      //  fsX-=fibgeWidthKeep;
+                        fsY=-fibgeCenterKeep*4.;
+                       // newLine=false;
+                        //inLine+=2
+                       // placeInLine=0
+                    }
+                //    binaryTriangle(1,fsX*scl,fsY*scl,-1) 
+
+
+{//newLine
+                        fsX=-fibgeWidthKeep;
+                        fsY=-fibgeCenterKeep*2.;
+                       // newLine=false;
+                        //inLine+=2
+                       // placeInLine=0
+                    }
+binaryTriangle(2,fsX,fsY,true)
+
+
+{//newLine
+                        fsX=fibgeWidthKeep;
+                        fsY=-fibgeCenterKeep*2.;
+                       // newLine=false;
+                        //inLine+=2
+                       // placeInLine=0
+                    }
+binaryTriangle(3,fsX,fsY,true)
+                }

@@ -278,7 +278,7 @@ noteFrozen:{value:48},
   volumeFret3:{value:0.},
   volumeFret4:{value:0.},
     armStar:{value:true},
-      smush:{value:0.2},
+      smush:{value:1./3.},
       ringSpring:{value:false},
       squeezeN:{value:1.},
 
