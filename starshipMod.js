@@ -1175,7 +1175,7 @@ function init() {
               setVectors();
      setRenderTargetSize(window.innerWidth,window.innerHeight)
 
-    renderer = new THREE.WebGLRenderer();
+ renderer = new THREE.WebGLRenderer({ antialias: true });
      
 
     renderer.autoClear=true;//so the starship can be isolated
@@ -1424,7 +1424,9 @@ function init() {
      onWindowResize();
      adjustThreeJSWindow();
          container.appendChild( renderer.domElement );//engage THREEJS visual out
-
+//renderer.compile(scene).then(() => {
+    // Code to execute after shaders are compiled
+//});
 //renderer.setAnimationLoop(bootShaders);
 /*
 
@@ -4112,7 +4114,7 @@ else targets[n].rotateZ(-timestamp/1000.*Math.PI*2.)
 
 }
 
-//binTriBundle()
+//binTriBundle(-1)
 //if(cellularDivision)
                                      /*
                                                        uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.coords.value.x)
@@ -5012,7 +5014,7 @@ return pos + 0.5 * (s0 - s2 ) / (s0 - 2.* s1 + s2);
     var fibgeWidthKeep = 1./equilateralHeightKeep;
     var fibgeCenterKeep = (equilateralHeightKeep**2+fibgeWidthKeep**2.)**.5/2.;
 
-function binaryTriangle(findgex,xFibge,yFibge,drawUpsideDown)
+function binaryTriangle(findgex,xFibge,yFibge,drawUpsideDown,rotateDirection)
 {
     xFibge*=scl
     yFibge*=scl
@@ -5053,8 +5055,13 @@ console.log(equilateralHeightKeep)
                                                 fibgeWidth*=fibgeScale
                                     fibgeCenter*=fibgeScale
 
-                                    let fidgeShiftY =-fibgeCenter+(fibgeWidth+fibgeCenter)*fibgeRows/3**.5*2.
-                                          //    if(loopsRun==0)console.log("  fibdgeWidth "+fibgeWidth)
+                                    let fidgeShiftYPerm =-fibgeCenter*drawUpsideDown+(fibgeWidth+fibgeCenter)*fibgeRows/3**.5*2.
+                                      let fidgeShiftY=0
+                                     // if(rotateDirection==-1)
+                                        fidgeShiftY=fidgeShiftYPerm;
+                                      //else fidgeShiftY=fibgeCenter*drawUpsideDown+(fibgeWidth+fibgeCenter)*fibgeRows*3**.5/6*2.
+                                  
+                                    //    if(loopsRun==0)console.log("  fibdgeWidth "+fibgeWidth)
 
 
                                  //   fidgeShiftY*=2.;
@@ -5078,8 +5085,7 @@ var newLine = true;
 var inLine = 1;
 var placeInLine = 1.
 var currentRow = 1;
-
-
+ let spunFibge = []
    for (var fs=0; fs<fibgeTriangles[findgex];fs++)
     {
                 fibgeColorAttribute[findgex].setXYZW(fibgeStride,bw,bw,bw,fibgeTransparency)
@@ -5088,6 +5094,7 @@ var currentRow = 1;
         
 
                 
+var angleToSpin=Math.PI/3.;
                fibgePositionAttribute[findgex].setXYZ(fibgeStride,fidgeShiftX,fibgeCenter*upsideDown+fidgeShiftY,  dep)
                fibgePositionAttribute[findgex].setXYZ(fibgeStride+1, -fibgeWidth*upsideDown+fidgeShiftX, -fibgeCenter*upsideDown+fidgeShiftY,  dep)
                fibgePositionAttribute[findgex].setXYZ(fibgeStride+2,fibgeWidth*upsideDown+fidgeShiftX, -fibgeCenter*upsideDown+fidgeShiftY,  dep)
@@ -5116,7 +5123,20 @@ var currentRow = 1;
                         fidgeShiftX+=fibgeWidth;
                        }
                }
-                
+                                     
+               if(rotateDirection==1) 
+                {
+                  
+                 let shiftFibge =(fibgeCenter*drawUpsideDown+(fibgeWidth+-fibgeCenter)*fibgeRows/3**.5*2)/12
+
+                    fibgeMesh[findgex].geometry.translate(  0,shiftFibge, 0 ) 
+              if(isFinite(uniforms.time.value))fibgeMesh[findgex].geometry.rotateZ(uniforms.time.value%(Math.PI*2))
+                         fibgeMesh[findgex].geometry.translate( 0,-shiftFibge, 0 ) 
+                }
+                      //  fibgeGeometry[findgex].rotateZ(Math.PI/2.)
+
+          //  fibgeGeometry[findgex].normalizeNormals() 
+             fibgeGeometry[findgex].needsUpdate = true;
             fibgePositionAttribute[findgex].needsUpdate = true; // required after the first render
             fibgeColorAttribute[findgex].needsUpdate = true; // required after the first render
           //if(loopsRun==0) console.log("Final value/2+ "+fidgeShiftY)
@@ -5125,13 +5145,13 @@ var currentRow = 1;
 }
 
 
-function binTriBundle(){
+function binTriBundle(rotateDirection){
 
 let fsX = 0.;
 let fsY = 0.;
 //let currentRow = 1.;
 
-binaryTriangle(0,fsX,fsY,1)
+binaryTriangle(0,fsX,fsY,1,rotateDirection)
 
                         {//move down line
                          //   newLine=true
@@ -5145,7 +5165,7 @@ binaryTriangle(0,fsX,fsY,1)
                         //inLine+=2
                        // placeInLine=0
                     }
-                //    binaryTriangle(1,fsX*scl,fsY*scl,-1) 
+                    binaryTriangle(1,fsX,fsY,-1,-rotateDirection) 
 
 
 {//newLine
@@ -5155,7 +5175,7 @@ binaryTriangle(0,fsX,fsY,1)
                         //inLine+=2
                        // placeInLine=0
                     }
-binaryTriangle(2,fsX,fsY,true)
+binaryTriangle(2,fsX,fsY,1,rotateDirection)
 
 
 {//newLine
@@ -5165,5 +5185,5 @@ binaryTriangle(2,fsX,fsY,true)
                         //inLine+=2
                        // placeInLine=0
                     }
-binaryTriangle(3,fsX,fsY,true)
+binaryTriangle(3,fsX,fsY,1,rotateDirection)
                 }
