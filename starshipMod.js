@@ -46,9 +46,9 @@ function waitForMic() {//this is a lurker. it waits for the three.js loader to r
         //if(started)
 
 
-        b();
-        started = true;
-
+renderer.setAnimationLoop(null)     
+    started = true;
+b();
         // animate()
     }
     else {
@@ -1280,11 +1280,12 @@ fibgetScene= new THREE.Scene();
     shaderScene.add(stackMesh)
 
     for (var ko = 0.; ko < numberOfMetaTriangles; ko++)
-           if(!("brother" in window))//temporary
+    {
+        if(!("brother" in window))//temporary
         scene.add(fibgeMesh[ko])//fibgetScene
-    else 
-        shaderScene.add(fibgeMesh[ko])
-
+        else 
+       shaderScene.add(fibgeMesh[ko])
+    }
     scene.add(harmonicPzyghtheMesh)
     scene.add(meshTrail)
     shaderScene.add(line);
@@ -1400,6 +1401,11 @@ fibgetScene= new THREE.Scene();
         renderer.compile(  feedbackScene, camera );
         renderer.compile(  feedbackSceneFlip, camera );
     */
+       
+    animate();
+
+    scene.background = null;//to make logo visible again if blank background
+
    if(!("brother" in window))
    {
         renderer.render(  scene, camera );
@@ -1409,10 +1415,6 @@ fibgetScene= new THREE.Scene();
 
            }
     else        renderer.render(scene, camera);
-
-       
-    animate();
-    scene.background = null;//to make logo visible again if blank background
 
     renderer.clear();
     document.getElementById("load message").innerHTML = "Loaded, press to open!";
@@ -4351,20 +4353,17 @@ if(window.fibgetti) {
 
     //  renderer.forceContextLoss ()
     //  renderer.forceContextRestore ( )
-       if(stop)
-       {console.log("waiting")
-        return true;
-       }
+      
 
 }
-var stop  = false;
 document.addEventListener("visibilityChange", () => {
     if (document.hidden) {
 
         if (!window.touchOnlyMode) audioX.suspend();
         if (typeof Wad == "function") Wad.audioContext.suspend();
         if (typeof wakeLock == "object") wakeLock.release();
-        stop=true;
+console.log("waiting")
+renderer.setAnimationLoop(null)
     }
     else {
         //requestWakeLock();
@@ -4372,7 +4371,8 @@ document.addEventListener("visibilityChange", () => {
         if (!window.touchOnlyMode) audioX.resume();
         if (typeof Wad == "function") Wad.audioContext.resume()
             stop=false
-                    b();
+
+b();
 
     }
 }
