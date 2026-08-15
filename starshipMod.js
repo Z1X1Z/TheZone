@@ -5103,21 +5103,18 @@ else            INcolor.setRGB(.25,.25,.25)
         }
     }
 
-
-    if(lastExtendedTRIANGLEcOUNT[findgex]>extendedTRIANGLEcOUNT)
+console.log(binString.length)
+    if(lastExtendedTRIANGLEcOUNT[findgex]>binString.length)
     {
 
-    for(var clnr = 0; clnr<numberOfMetaTriangles;clnr++)
-    {
-
-            for(var cleaner = loopydo+1; cleaner<fibgeTriangles[clnr];cleaner++)
+            for(var cleaner = binString.length+1; cleaner<fibgeTriangles[findgex];cleaner++)
 
                 {
 
                     
-        fibgePositionAttribute[clnr].setXYZ(fibgeStride,0,0,0)
-        fibgePositionAttribute[clnr].setXYZ(fibgeStride + 1, 0,0,0)
-        fibgePositionAttribute[clnr].setXYZ(fibgeStride + 2, 0,0,0)
+        fibgePositionAttribute[findgex].setXYZ(fibgeStride,0,0,0)
+        fibgePositionAttribute[findgex].setXYZ(fibgeStride + 1, 0,0,0)
+        fibgePositionAttribute[findgex].setXYZ(fibgeStride + 2, 0,0,0)
 
         fibgeColorAttribute[findgex].setXYZW(fibgeStride, .25,.25,.25,1.)
                           
@@ -5128,7 +5125,7 @@ else            INcolor.setRGB(.25,.25,.25)
 
         fibgeColorAttribute[findgex].setXYZW(fibgeStride+2, .25,.25,.25,1.)
        fibgeStride+=3
-                }
+                
             }    
             }
             lastExtendedTRIANGLEcOUNT[findgex]=extendedTRIANGLEcOUNT
