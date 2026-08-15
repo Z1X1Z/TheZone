@@ -931,7 +931,7 @@ const stackColor = new Float32Array(12 * 4 * 6 * 2)
 var fr = 1.;
 //if (0 == 1)
 var safeNumberOfFibgeTriangles = 0;
-var rowsOfTrianglesToGenerate = 34;
+var rowsOfTrianglesToGenerate = 8;
       //  for (var fibGen = 0; fibGen <= rowsOfTrianglesToGenerate; fibGen++) {
 
     for (var fmt = 0; fmt < rowsOfTrianglesToGenerate; fmt++) {
@@ -943,7 +943,7 @@ var rowsOfTrianglesToGenerate = 34;
     var fibgeTriangles = Array(numberOfMetaTriangles).fill(0);
     for (var kc = 0;kc<numberOfMetaTriangles;kc++)
         fibgeTriangles[kc]=safeNumberOfFibgeTriangles
-    safeNumberOfFibgeTriangles-=fr*2
+  //  safeNumberOfFibgeTriangles-=fr*3
 
 var fibgeVertices = Array(numberOfMetaTriangles)
 var fibgeColor = Array(numberOfMetaTriangles)
@@ -1278,9 +1278,12 @@ fibgetScene= new THREE.Scene();
 
     loadAttributes();
     shaderScene.add(stackMesh)
-    for (var ko = 0.; ko < numberOfMetaTriangles; ko++)
-        scene.add(fibgeMesh[ko])//fibgetScene
 
+    for (var ko = 0.; ko < numberOfMetaTriangles; ko++)
+           if(!("brother" in window))//temporary
+        scene.add(fibgeMesh[ko])//fibgetScene
+    else 
+        shaderScene.add(fibgeMesh[ko])
 
     scene.add(harmonicPzyghtheMesh)
     scene.add(meshTrail)
@@ -1396,15 +1399,20 @@ fibgetScene= new THREE.Scene();
         renderer.compile(  shaderScene, camera );
         renderer.compile(  feedbackScene, camera );
         renderer.compile(  feedbackSceneFlip, camera );
-    *//*
+    */
+   if(!("brother" in window))
+   {
         renderer.render(  scene, camera );
         renderer.render(  shaderScene, camera );
         renderer.render(  feedbackScene, camera );
         renderer.render(  feedbackSceneFlip, camera );
-    */
+
+           }
+    else        renderer.render(scene, camera);
+
+       
     animate();
     scene.background = null;//to make logo visible again if blank background
-    renderer.render(scene, camera);
 
     renderer.clear();
     document.getElementById("load message").innerHTML = "Loaded, press to open!";
@@ -5119,15 +5127,14 @@ var rotateDirectionArray = [1,-1,1,1,1]
 var deltaSpun = 0;
 var shiftFibgeARRAY= Array(numberOfMetaTriangles).fill(0);
 function binTriBundle(rotateDirection) {
-    /*
-    while(theWORDtoGOD.length<3000&&loopsRun==0)
+    while(theWORDtoGOD.length<=2950&&loopsRun==0)
     {
 
 fibonacciEngine()
 stringArray[ABC]=binaryConverter(fibArray[ABC])
 theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
 
-    }*/
+    }
 
 var delta = interpolation/60;//Math.abs(note-lastNote)/12*3;
 //if(delta>.25)delta=0.;
@@ -5146,7 +5153,6 @@ var safetyThird=safeNumberOfFibgeTriangles/1.
 if(fibgeBase!=2n)
     {
         safetyThird*=3;
-                safetyThird=safetyThird-fr;
 
     }
 console.log(theWORDtoGOD.length)
@@ -5161,7 +5167,22 @@ console.log(theWORDtoGOD.length)
             stringArray[ABC]="0"
             stringArray[(ABC+1)%3]="0"
             stringArray[(ABC+2)%3]="0"
-spins=0n
+    for(var clnr = 0; clnr<numberOfMetaTriangles;clnr++)
+    {
+                   let fibgeStride = 0.;
+
+            for(var cleaner = 0; cleaner<fibgeTriangles[clnr];cleaner++)
+
+                {
+
+                    
+        fibgePositionAttribute[clnr].setXYZ(fibgeStride,0,0,0)
+        fibgePositionAttribute[clnr].setXYZ(fibgeStride + 1, 0,0,0)
+        fibgePositionAttribute[clnr].setXYZ(fibgeStride + 2, 0,0,0)
+       fibgeStride+=3
+                }
+            }
+                spins=0n
 fibonacciEngine()
 stringArray[ABC]=binaryConverter(fibArray[ABC])
 theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
