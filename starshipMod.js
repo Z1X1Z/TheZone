@@ -30,6 +30,10 @@ function stallTillTHREELoaded() {//this is a lurker. it waits for the three.js l
 }//setTimeout waits for 10ms then runs stallTillTHREELoaded()
 stallTillTHREELoaded();
 
+        let b = async () => {
+
+            await renderer.setAnimationLoop(animate)
+        }
 
 function waitForMic() {//this is a lurker. it waits for the three.js loader to resolve to a loaded library, then initializes the game.
     if (document.visibilityState == "visible"
@@ -42,10 +46,6 @@ function waitForMic() {//this is a lurker. it waits for the three.js loader to r
         //if(started)
 
 
-        let b = async () => {
-
-            await renderer.setAnimationLoop(animate)
-        }
         b();
         started = true;
 
@@ -904,7 +904,7 @@ let radialMaterial, radialLine, radialGeometry;
 let starsANDwitnessesMesh, starsANDwitnessesGeometry;
 let starStreamColors, starStreamPoints;//window.starCount
 let starStreamMesh, starStreamMaterial, starStreamGeometry;
-let scene, shaderScene, feedbackScene, feedbackSceneFlip;
+let scene, shaderScene, feedbackScene, feedbackSceneFlip,fibgetScene;
 
 
 
@@ -931,7 +931,7 @@ const stackColor = new Float32Array(12 * 4 * 6 * 2)
 var fr = 1.;
 //if (0 == 1)
 var safeNumberOfFibgeTriangles = 0;
-var rowsOfTrianglesToGenerate = 28;
+var rowsOfTrianglesToGenerate = 14;
       //  for (var fibGen = 0; fibGen <= rowsOfTrianglesToGenerate; fibGen++) {
 
     for (var fmt = 0; fmt < rowsOfTrianglesToGenerate; fmt++) {
@@ -1143,7 +1143,7 @@ function init() {
     renderer.setClearAlpha(0.)
 
     // renderer.debug.checkShaderErrors = false;
-
+fibgetScene= new THREE.Scene();
     scene = new THREE.Scene();
     finalSceneRerenderedering = new THREE.Scene();
     feedbackScene = new THREE.Scene();
@@ -1279,7 +1279,7 @@ function init() {
     loadAttributes();
     shaderScene.add(stackMesh)
     for (var ko = 0.; ko < numberOfMetaTriangles; ko++)
-        shaderScene.add(fibgeMesh[ko])
+        scene.add(fibgeMesh[ko])//fibgetScene
 
 
     scene.add(harmonicPzyghtheMesh)
@@ -4326,7 +4326,13 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
     }
 
 
+if(window.fibgetti) {
+            fibgetScene.background = new THREE.Color(0x808080);
 
+        binTriBundle(-1)
+                   // renderer.render(fibgetScene, camera);
+
+       }
 
     loopsRun++;
     //   if(dupered&&zoom<zoomCap32)
@@ -4337,21 +4343,29 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
 
     //  renderer.forceContextLoss ()
     //  renderer.forceContextRestore ( )
-       if(window.fibgetti) binTriBundle(-1)
+       if(stop)
+       {console.log("waiting")
+        return true;
+       }
 
 }
+var stop  = false;
 document.addEventListener("visibilityChange", () => {
     if (document.hidden) {
 
         if (!window.touchOnlyMode) audioX.suspend();
         if (typeof Wad == "function") Wad.audioContext.suspend();
         if (typeof wakeLock == "object") wakeLock.release();
+        stop=true;
     }
     else {
         //requestWakeLock();
         if (INITIALIZED) resizeMessage()
         if (!window.touchOnlyMode) audioX.resume();
         if (typeof Wad == "function") Wad.audioContext.resume()
+            stop=false
+                    b();
+
     }
 }
 )
@@ -4892,7 +4906,7 @@ function quadraticPeakPosition(d, pos) {
 
 let scl = 1;//.125
 
-var fibgeWidthKeep = .5 ;
+var fibgeWidthKeep = 3**.5/6*1.5 ;
 
 var equilateralHeightKeep =fibgeWidthKeep*3**.5;
 var fibgeCenterKeep =equilateralHeightKeep/2. ;
@@ -4923,7 +4937,6 @@ function binaryTriangle(findgex,toRotate, xFibge, yFibge,zORD, drawUpsideDown, r
      //binString = "1,0,0,0,0"
     // binString = "1"
     var extendedTRIANGLEcOUNT =  binString.length;//bigString.length
-console.log(extendedTRIANGLEcOUNT)
     if(fibgeBase!=2n&&extendedTRIANGLEcOUNT>3){
         extendedTRIANGLEcOUNT/=3.;
 
@@ -4948,7 +4961,6 @@ console.log(extendedTRIANGLEcOUNT)
         }
     else{
     }
-    console.log(fibgeRows)
 
         //if (loopsRun == 0) console.log(fibgeRows)
 
