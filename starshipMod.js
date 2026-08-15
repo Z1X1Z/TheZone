@@ -4003,8 +4003,6 @@ function animate(timestamp) {
 
 
         }
-
-        //binTriBundle(-1)
         //if(cellularDivision)
         /*
                           uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.coords.value.x)
@@ -4112,6 +4110,25 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
             uniforms.movieTime.value = -2;
 
         }
+
+
+
+
+
+
+
+
+
+
+       if(window.fibgetti) binTriBundle(-1)
+
+
+
+
+
+
+
+
 
 
         uniforms.loudestFret1.value = new THREE.Vector2(loudestFret[0].x, loudestFret[0].y);
@@ -4866,15 +4883,16 @@ function quadraticPeakPosition(d, pos) {
 
 
 
-let scl = .5;//.125
+let scl = 1;//.125
 
-var equilateralHeightKeep = 1.25 ** .5;
-var fibgeWidthKeep = 1. / equilateralHeightKeep;
-var fibgeCenterKeep = (equilateralHeightKeep ** 2 + fibgeWidthKeep ** 2.) ** .5 / 2.;
+var fibgeWidthKeep = .25 ;
+
+var equilateralHeightKeep =fibgeWidthKeep*3**.5;
+var fibgeCenterKeep =equilateralHeightKeep/2. ;
 
 var totalRotation = 0.;
 
-function binaryTriangle(findgex, xFibge, yFibge,zORD, drawUpsideDown, rotateDirection,binString) {
+function binaryTriangle(findgex,toRotate, xFibge, yFibge,zORD, drawUpsideDown, rotateDirection,binString) {
 
     xFibge *= scl
     yFibge *= scl
@@ -4894,10 +4912,9 @@ function binaryTriangle(findgex, xFibge, yFibge,zORD, drawUpsideDown, rotateDire
     let place = 1.
     let complete = false
    // if (isFinite(uniforms.time.value))
-         var bigString = binaryConverter(BigInt(DIVINE_PROPORTION
-            //parseInt(Math.floor(uniforms.time.value))
-            ))
-    //else bigString = ""
+        
+     //binString = "1,0,0,0,0"
+    // binString = "1"
     var extendedTRIANGLEcOUNT =  binString.length;//bigString.length
     while (fibgeTabulator < binString.length//fibgeTriangles[findgex]
     ) {extendedTRIANGLEcOUNT
@@ -4926,11 +4943,17 @@ function binaryTriangle(findgex, xFibge, yFibge,zORD, drawUpsideDown, rotateDire
         console.log(equilateralHeightKeep)
     }
 */
+window.doRotation = 1==1
+
+//console.log(fibgeWidth+"actual ; 3**.5  "+3**.5/3)
+    let fidgeShiftYPerm =0
+     if(rotateDirection==1||fibgeRows==1)
+        fidgeShiftYPerm=(-fibgeCenter)/fibgeRows+fibgeCenter*(2.+2./3.);//fibgeCenter/1.5;//fibgeCenter/2.;;//-fibgeCenter/2.+fibgeWidth/3**.5*2;//  (fibgeWidth)/ 3**.5 /2.
+ else  fidgeShiftYPerm=fibgeCenter;
     fibgeWidth *= fibgeScale
+ ///   console.log(fibgeWidth)
     fibgeCenter *= fibgeScale
 
-    let fidgeShiftYPerm = -fibgeCenter * drawUpsideDown + (fibgeWidth + fibgeCenter) * fibgeRows / 3 ** .5 * 2.
-    let fidgeShiftY = 0
     // if(rotateDirection==-1)
     fidgeShiftY = fidgeShiftYPerm;
     //else fidgeShiftY=fibgeCenter*drawUpsideDown+(fibgeWidth+fibgeCenter)*fibgeRows*3**.5/6*2.
@@ -4996,51 +5019,64 @@ function binaryTriangle(findgex, xFibge, yFibge,zORD, drawUpsideDown, rotateDire
         }
     }
 
-  //  if (rotateDirection == -1) 
-        {
-        let shiftFibge=0; 
-        (fibgeCenter * drawUpsideDown*rotateDirection + (fibgeWidth + -fibgeCenter*rotateDirection) * fibgeRows / 3 ** .5 * 2) / 12
-if(rotateDirection == 1)shiftFibge =        - (fibgeCenter  + (fibgeWidth - fibgeCenter) * fibgeRows / 3 ** .5 ) / 12.
-elseshiftFibge =        - (fibgeCenter  + (fibgeWidth - fibgeCenter) * fibgeRows / 3 ** .5 ) / 12.
 
-        //let shiftFibge = 
-        //(fibgeCenter * drawUpsideDown*rotateDirection + (fibgeWidth + -fibgeCenter*rotateDirection) * fibgeRows / 3 ** .5 * 2) / 12
 
-        fibgeMesh[findgex].geometry.translate(0, shiftFibge, 0)
-       if (isFinite(uniforms.time.value)) fibgeMesh[findgex].geometry.rotateZ(//Math.PI/3.);//
-       totalRotation *rotateDirection)
-       fibgeMesh[findgex].geometry.translate(0, -shiftFibge, 0)
-    }
-    //  fibgeGeometry[findgex].rotateZ(Math.PI/2.)
 
-    //  fibgeGeometry[findgex].normalizeNormals() 
+
+
+
+    
+   if(toRotate!=0) 
+   {
+           var rotatedX =fibgeWidthKeep*Math.sign(toRotate)
+           var rotatedY =-(3**.5)/6*fibgeWidthKeep*2
+    fibgeMesh[findgex].geometry.translate(-rotatedX, -rotatedY, 0)
+    fibgeMesh[findgex].geometry.rotateZ(toRotate*Math.PI)
+    fibgeMesh[findgex].geometry.translate(rotatedX, rotatedY, 0)
+   }
+
+
+
+
+
+
+
+
+
+
+       if (doRotation&&isFinite(uniforms.time.value)) fibgeMesh[findgex].geometry.rotateZ(
+      //  Math.PI/2);//
+      totalRotation%(Math.PI*2)*rotateDirection  )
+    
+
     fibgeGeometry[findgex].needsUpdate = true;
     fibgePositionAttribute[findgex].needsUpdate = true; // required after the first render
     fibgeColorAttribute[findgex].needsUpdate = true; // required after the first render
-    //if(loopsRun==0) console.log("Final value/2+ "+fidgeShiftY)
 
 
 }
 var stringArray = Array(3).fill("")
 var theWORDtoGOD = ""
 var lastANGLEmodulo = 0
+var rotateDirectionArray = [1,-1,1,1,1]
+var deltaSpun = 0;
+var shiftFibgeARRAY= Array(numberOfMetaTriangles).fill(0);
 function binTriBundle(rotateDirection) {
 
-var delta = Math.abs(note-lastNote)/12*3;
-if(delta>.25)delta=0.;
+var delta = interpolation/60;//Math.abs(note-lastNote)/12*3;
+//if(delta>.25)delta=0.;
     totalRotation+=delta
+    //totalRotation=.1
     //console.log(totalRotation)
-    if (totalRotation>=lastANGLEmodulo)
+    if (totalRotation>lastANGLEmodulo)
     {
-        lastANGLEmodulo++
-        console.log(note)
+        deltaSpun=totalRotation;
+        lastANGLEmodulo+=Math.PI/3;
 fibonacciEngine()
 stringArray[ABC]=binaryConverter(fibArray[ABC])
 theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
 console.log(stringArray[ABC])
  //   console.log("here")
-
-    }
     
     let depth1 = -1;
     let depth2 = -.999
@@ -5048,7 +5084,7 @@ console.log(stringArray[ABC])
     let fsY = 0.;
     //let currentRow = 1.;
 //console.log(stringArray[0])
-    binaryTriangle(0, fsX, fsY,depth2, 1, rotateDirection,stringArray[0])
+    binaryTriangle(0,0, fsX, fsY,depth2, 1, rotateDirectionArray[0],stringArray[2])
 
     {//move down line
         //   newLine=true
@@ -5056,33 +5092,52 @@ console.log(stringArray[ABC])
         //  currentRow++
     }
     {//newLine
-        //  fsX-=fibgeWidthKeep;
-        fsY = -fibgeCenterKeep * 4.;
+       //   fsX-=fibgeWidthKeep*2;
+  fsY = -fibgeCenterKeep*2 ;
         // newLine=false;
         //inLine+=2
         // placeInLine=0
     }
-    binaryTriangle(1, fsX, fsY,depth1, -1, -rotateDirection,theWORDtoGOD)
+   binaryTriangle(1,0, fsX, fsY,depth1, -1, rotateDirectionArray[1],theWORDtoGOD)
 
 
     {//newLine
         fsX = -fibgeWidthKeep;
-        fsY = -fibgeCenterKeep * 2.;
+        fsY = -fibgeCenterKeep*2 ;
         // newLine=false;
         //inLine+=2
         // placeInLine=0
     }
-    binaryTriangle(2, fsX, fsY,depth2,  1,rotateDirection,stringArray[2])
+    binaryTriangle(2, -4./3.,fsX, fsY,depth2,  1,rotateDirectionArray[2],stringArray[1])
 
 
     {//newLine
         fsX = fibgeWidthKeep;
-        fsY = -fibgeCenterKeep * 2.;
+       fsY = -fibgeCenterKeep*2 ;
         // newLine=false;
         //inLine+=2
         // placeInLine=0
     }
-    binaryTriangle(3, fsX, fsY,depth2, 1, rotateDirection,stringArray[1])
+ binaryTriangle(3, 4./3.,fsX, fsY,depth2, 1, rotateDirectionArray[3],stringArray[0])
+    }else 
+    {
+  for(var br=0; br<numberOfMetaTriangles;br++)
+  {
+      if (isFinite(uniforms.time.value)&&doRotation) fibgeMesh[br].geometry.rotateZ(//Math.PI/3.);//
+       (totalRotation-deltaSpun)%(Math.PI*2)*rotateDirectionArray[br])
+    
+
+
+    fibgeGeometry[br].needsUpdate = true;
+    fibgePositionAttribute[br].needsUpdate = true; // required after the first render
+    fibgeColorAttribute[br].needsUpdate = true; // required after the first render
+      }
+
+    
+            deltaSpun=totalRotation
+
+}
+
 }
 var DIVINE_PROPORTION = 161803n
 
@@ -5114,6 +5169,7 @@ fibArray[0]=1n
 fibArray[1]=1n
 fibArray[2]=0n
 function fibonacciEngine(){
+    spins++
 //while(fib1<100000000000000000000000000n)
 {
   //  loopsFIB++
@@ -5122,22 +5178,24 @@ function fibonacciEngine(){
     fibArray[(ABC+1)%3]+=fibArray[ABC]
     fibArray[(ABC+2)%3]=fibBuffer
 }
-
+/*
 console.log(fibArray[ABC])
 console.log(fibArray[(ABC+1)%3])
 console.log(fibArray[(ABC+2)%3])
+*/
 ABC=(ABC+1)%3
 console.log(ABC)
 
 }
+var spins = 0n
 function BigDIV (num1,num2)
 {
+
     var stringDivided=""
     var enough = 0
-    while(enough<50&&num1!=0n)
+    while(enough<=spins&&num1!=0n)
     {
         enough++
-        console.log(num1)
         var numBuffer = num1;
     numBuffer/=num2
     num1-=num2*numBuffer
@@ -5147,16 +5205,3 @@ function BigDIV (num1,num2)
     }
     return stringDivided;
 }
-fibonacciEngine()
-fibonacciEngine()
-fibonacciEngine()
-fibonacciEngine()
-fibonacciEngine()
-fibonacciEngine()
-fibonacciEngine()
-fibonacciEngine()
-//DIVINE_PROPORTION=BigDIV(fibArray[ABC],fibArray[(ABC+1)%3])
-console.log(50/17.)
-    console.log(DIVINE_PROPORTION)
-
-//binaryConverter()
