@@ -4885,7 +4885,7 @@ function quadraticPeakPosition(d, pos) {
 
 let scl = 1;//.125
 
-var fibgeWidthKeep = .25 ;
+var fibgeWidthKeep = .5 ;
 
 var equilateralHeightKeep =fibgeWidthKeep*3**.5;
 var fibgeCenterKeep =equilateralHeightKeep/2. ;
@@ -4947,9 +4947,11 @@ window.doRotation = 1==1
 
 //console.log(fibgeWidth+"actual ; 3**.5  "+3**.5/3)
     let fidgeShiftYPerm =0
-     if(rotateDirection==1||fibgeRows==1)
+     if(rotateDirection==1
+        //||fibgeRows==1
+        )
         fidgeShiftYPerm=(-fibgeCenter)/fibgeRows+fibgeCenter*(2.+2./3.);//fibgeCenter/1.5;//fibgeCenter/2.;;//-fibgeCenter/2.+fibgeWidth/3**.5*2;//  (fibgeWidth)/ 3**.5 /2.
- else  fidgeShiftYPerm=fibgeCenter;
+ else  fidgeShiftYPerm=fibgeCenter/fibgeRows+fibgeCenter*2./3.;
     fibgeWidth *= fibgeScale
  ///   console.log(fibgeWidth)
     fibgeCenter *= fibgeScale
@@ -5045,8 +5047,8 @@ window.doRotation = 1==1
 
 
        if (doRotation&&isFinite(uniforms.time.value)) fibgeMesh[findgex].geometry.rotateZ(
-      //  Math.PI/2);//
-      totalRotation%(Math.PI*2)*rotateDirection  )
+       //Math.PI/6.*rotateDirection );
+      totalRotation%(Math.PI*2)*rotateDirection )
     
 
     fibgeGeometry[findgex].needsUpdate = true;
@@ -5123,7 +5125,7 @@ console.log(stringArray[ABC])
     {
   for(var br=0; br<numberOfMetaTriangles;br++)
   {
-      if (isFinite(uniforms.time.value)&&doRotation) fibgeMesh[br].geometry.rotateZ(//Math.PI/3.);//
+     if (isFinite(uniforms.time.value)&&doRotation) fibgeMesh[br].geometry.rotateZ(//Math.PI/3.);//
        (totalRotation-deltaSpun)%(Math.PI*2)*rotateDirectionArray[br])
     
 
