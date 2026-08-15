@@ -4920,7 +4920,8 @@ var equilateralHeightKeep =fibgeWidthKeep*3**.5;
 var fibgeCenterKeep =equilateralHeightKeep/2. ;
 
 var totalRotation = 0.;
-
+    let lastFibgeRows = Array(numberOfMetaTriangles).fill(0);
+    let lastExtendedTRIANGLEcOUNT= Array(numberOfMetaTriangles).fill(0);
 function binaryTriangle(findgex,toRotate, xFibge, yFibge,zORD, drawUpsideDown, rotateDirection,binString) {
 
     xFibge *= scl
@@ -4970,7 +4971,26 @@ function binaryTriangle(findgex,toRotate, xFibge, yFibge,zORD, drawUpsideDown, r
         }
     else{
     }
+    if(lastExtendedTRIANGLEcOUNT[findgex]>extendedTRIANGLEcOUNT)
+    {
 
+
+    for(var clnr = 0; clnr<numberOfMetaTriangles;clnr++)
+    {
+                   let fibgeStride = 0.;
+
+            for(var cleaner = 0; cleaner<fibgeTriangles[clnr];cleaner++)
+
+                {
+
+                    
+        fibgePositionAttribute[clnr].setXYZ(fibgeStride,0,0,0)
+        fibgePositionAttribute[clnr].setXYZ(fibgeStride + 1, 0,0,0)
+        fibgePositionAttribute[clnr].setXYZ(fibgeStride + 2, 0,0,0)
+       fibgeStride+=3
+                }
+            }    }
+lastExtendedTRIANGLEcOUNT[findgex]=extendedTRIANGLEcOUNT
         //if (loopsRun == 0) console.log(fibgeRows)
 
     let fibgeScale = scl / (fibgeRows);
@@ -5149,14 +5169,18 @@ var delta = interpolation/60;//Math.abs(note-lastNote)/12*3;
    
 fibonacciEngine()
 stringArray[ABC]=binaryConverter(fibArray[ABC])
+
+if(fibArray[(ABC+2)%3]!=fibArray[ABC])
 theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
+//console.log(theWORDtoGOD.length)
+//console.log(Number(fibArray[ABC])+" "+Number(fibArray[(ABC+2)%3]))
+
 var safetyThird=safeNumberOfFibgeTriangles/1.
 if(fibgeBase!=2n)
     {
         safetyThird*=3;
 
     }
-console.log(theWORDtoGOD.length)
      if(theWORDtoGOD.length>=safetyThird||stringArray[ABC].length>=safetyThird)
         {
             console.log("Resetting Fibgetti Spinner")
@@ -5325,3 +5349,4 @@ function BigDIV (num1,num2)
 
     return stringDivided.split(",");
 }
+console.log(BigDIV(8n,5n).join())
