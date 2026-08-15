@@ -5110,7 +5110,7 @@ else            INcolor.setRGB(.25,.25,.25)
     for(var clnr = 0; clnr<numberOfMetaTriangles;clnr++)
     {
 
-            for(var cleaner = loopydo; cleaner<fibgeTriangles[clnr];cleaner++)
+            for(var cleaner = loopydo+1; cleaner<fibgeTriangles[clnr];cleaner++)
 
                 {
 
@@ -5119,14 +5119,14 @@ else            INcolor.setRGB(.25,.25,.25)
         fibgePositionAttribute[clnr].setXYZ(fibgeStride + 1, 0,0,0)
         fibgePositionAttribute[clnr].setXYZ(fibgeStride + 2, 0,0,0)
 
-        fibgeColorAttribute[findgex].setXYZW(fibgeStride, .5,.5,.5,1.)
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride, .25,.25,.25,1.)
                           
 
 
-        fibgeColorAttribute[findgex].setXYZW(fibgeStride+1, .5,.5,.5,1.)
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride+1, .25,.25,.25,1.)
                            
 
-        fibgeColorAttribute[findgex].setXYZW(fibgeStride+2, .5,.5,.5,1.)
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride+2, .25,.25,.25,1.)
        fibgeStride+=3
                 }
             }    
