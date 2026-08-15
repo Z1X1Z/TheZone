@@ -5193,7 +5193,7 @@ if(fibgeBase!=2n)
             stringArray[(ABC+2)%3]="0"
     for(var clnr = 0; clnr<numberOfMetaTriangles;clnr++)
     {
-                   let fibgeStride = 0.;
+                   let fstride = 0.;
 
             for(var cleaner = 0; cleaner<fibgeTriangles[clnr];cleaner++)
 
@@ -5203,7 +5203,7 @@ if(fibgeBase!=2n)
         fibgePositionAttribute[clnr].setXYZ(fibgeStride,0,0,0)
         fibgePositionAttribute[clnr].setXYZ(fibgeStride + 1, 0,0,0)
         fibgePositionAttribute[clnr].setXYZ(fibgeStride + 2, 0,0,0)
-       fibgeStride+=3
+       fstride+=3
                 }
             }
                 spins=0n
