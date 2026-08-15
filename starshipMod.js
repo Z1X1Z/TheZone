@@ -931,7 +931,7 @@ const stackColor = new Float32Array(12 * 4 * 6 * 2)
 var fr = 1.;
 //if (0 == 1)
 var safeNumberOfFibgeTriangles = 0;
-var rowsOfTrianglesToGenerate = 8;
+var rowsOfTrianglesToGenerate = 100;
       //  for (var fibGen = 0; fibGen <= rowsOfTrianglesToGenerate; fibGen++) {
 
     for (var fmt = 0; fmt < rowsOfTrianglesToGenerate; fmt++) {
@@ -5127,6 +5127,7 @@ var rotateDirectionArray = [1,-1,1,1,1]
 var deltaSpun = 0;
 var shiftFibgeARRAY= Array(numberOfMetaTriangles).fill(0);
 function binTriBundle(rotateDirection) {
+    /*
     while(theWORDtoGOD.length<=2950&&loopsRun==0)
     {
 
@@ -5135,7 +5136,7 @@ stringArray[ABC]=binaryConverter(fibArray[ABC])
 theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
 
     }
-
+*/
 var delta = interpolation/60;//Math.abs(note-lastNote)/12*3;
 //if(delta>.25)delta=0.;
     totalRotation+=delta
