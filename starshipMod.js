@@ -4946,7 +4946,7 @@ function binaryTriangle(findgex,toRotate, xFibge, yFibge,zORD, drawUpsideDown, r
      //binString = "1,0,0,0,0"
     // binString = "1"
     var extendedTRIANGLEcOUNT =  binString.length;//bigString.length
-    if(fibgeBase!=2n){
+    if(fibgeBase!=2n&&window.blendFibge){
         extendedTRIANGLEcOUNT/=3.;
 
 
@@ -5023,7 +5023,11 @@ window.doRotation = 1==1
     var currentRow = 1;
     let spunFibge = []
     let INcolor = new THREE.Color();
+
+    let correction = 2./Number(fibgeBase)
+
     let loopydo=0;
+    
     for (var fs = 0; fs < (extendedTRIANGLEcOUNT)//fibgeTriangles[findgex]
         ; fs++) 
         {
@@ -5040,19 +5044,31 @@ window.doRotation = 1==1
         }
         else
         {
+let hue=4./3.-1./(Number(fibgeBase))+1./Number(fibgeBase)*1.*Number(binString[fs])
+let hue1=0
+let hue2=0
+let hue3=0
+if(window.blendFibge)
+{
+hue1 =hue
+hue2=4./3.-1./(Number(fibgeBase))+1./Number(fibgeBase)*1.*Number(binString[fs+1])
+hue3=4./3.-1./(Number(fibgeBase))+1./Number(fibgeBase)*1.*Number(binString[fs+2])
+
+}
 
             if(extendedTRIANGLEcOUNT>fs)
-            INcolor.setHSL(1./Number(fibgeBase)*Number(binString[fs]), 1 ,.5);
+            INcolor.setHSL(hue1, 1 ,.5);
 else            INcolor.setRGB(.5,.5,.5)
 
         fibgeColorAttribute[findgex].setXYZW(fibgeStride, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
                               if(extendedTRIANGLEcOUNT>fs+1)
-  INcolor.setHSL(1./Number(fibgeBase)*Number(binString[fs+1]), 1 ,.5);
+  INcolor.setHSL(hue2, 1 ,.5);
 else            INcolor.setRGB(.5,.5,.5)
 
 
         fibgeColorAttribute[findgex].setXYZW(fibgeStride+1, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
-                             if(extendedTRIANGLEcOUNT>fs+2)   INcolor.setHSL(1./Number(fibgeBase)*Number(binString[fs+2]), 1 ,.5);
+                             if(extendedTRIANGLEcOUNT>fs+2)   
+INcolor.setHSL(hue3, 1 ,.5);
 else            INcolor.setRGB(.5,.5,.5)
 
         fibgeColorAttribute[findgex].setXYZW(fibgeStride+2, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
@@ -5103,14 +5119,14 @@ else            INcolor.setRGB(.5,.5,.5)
         fibgePositionAttribute[clnr].setXYZ(fibgeStride + 1, 0,0,0)
         fibgePositionAttribute[clnr].setXYZ(fibgeStride + 2, 0,0,0)
 
-        fibgeColorAttribute[findgex].setXYZW(fibgeStride, 0,0,o,0)
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride, .5,.5,.5,0)
                           
 
 
-        fibgeColorAttribute[findgex].setXYZW(fibgeStride+1, 0,0,o,0)
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride+1, .5,.5,.5,0)
                            
 
-        fibgeColorAttribute[findgex].setXYZW(fibgeStride+2, 0,0,o,0)
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride+2, .5,.5,.5,0)
        fibgeStride+=3
                 }
             }    
@@ -5158,6 +5174,7 @@ var lastANGLEmodulo = 0
 var rotateDirectionArray = [1,-1,1,1,1]
 var deltaSpun = 0;
 var shiftFibgeARRAY= Array(numberOfMetaTriangles).fill(0);
+window.blendFibge = true;
 function binTriBundle(rotateDirection) {
     /*
     while(theWORDtoGOD.length<=2950&&loopsRun==0)
@@ -5187,7 +5204,7 @@ theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
 //console.log(Number(fibArray[ABC])+" "+Number(fibArray[(ABC+2)%3]))
 
 var safetyThird=safeNumberOfFibgeTriangles/1.
-if(fibgeBase!=2n)
+if(fibgeBase!=2n&&window.blendFibge)
     {
         safetyThird*=3;
 
