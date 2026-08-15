@@ -5170,7 +5170,6 @@ var delta = interpolation/60;//Math.abs(note-lastNote)/12*3;
 fibonacciEngine()
 stringArray[ABC]=binaryConverter(fibArray[ABC])
 
-if(fibArray[(ABC+2)%3]!=fibArray[ABC])
 theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
 //console.log(theWORDtoGOD.length)
 //console.log(Number(fibArray[ABC])+" "+Number(fibArray[(ABC+2)%3]))
@@ -5349,4 +5348,3 @@ function BigDIV (num1,num2)
 
     return stringDivided.split(",");
 }
-console.log(BigDIV(8n,5n).join())
