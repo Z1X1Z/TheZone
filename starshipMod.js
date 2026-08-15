@@ -5283,7 +5283,7 @@ let ABC = 0;
 fibArray = Array(3)
 fibArray[0]=1n
 fibArray[1]=1n
-fibArray[2]=1n
+fibArray[2]=0n
 function fibonacciEngine(){
     //if(fibgeBase!=2n)
     spins+=9n;
