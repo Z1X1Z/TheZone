@@ -5047,7 +5047,7 @@ window.doRotation = 1==1
 let hue=4./3.-1./(Number(fibgeBase))+1./Number(fibgeBase)*1.*Number(binString[fs])
 let hue1=hue
 let hue2=hue
-let hue3=hue
+let hue3=hue    
 if(window.blendFibge)
 {
 hue1 =hue
@@ -5056,20 +5056,20 @@ hue3=4./3.-1./(Number(fibgeBase))+1./Number(fibgeBase)*1.*Number(binString[fs+2]
 
 }
 
-            if(extendedTRIANGLEcOUNT>fs)
+            if(binString.length>fs)
             INcolor.setHSL(hue1, 1 ,.5);
-else            INcolor.setRGB(.5,.5,.5)
+else            INcolor.setRGB(.25,.25,.25)
 
         fibgeColorAttribute[findgex].setXYZW(fibgeStride, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
-                              if(extendedTRIANGLEcOUNT>fs+1)
+                              if(binString.length>fs+1)
   INcolor.setHSL(hue2, 1 ,.5);
-else            INcolor.setRGB(.5,.5,.5)
+else            INcolor.setRGB(.25,.25,.25)
 
 
         fibgeColorAttribute[findgex].setXYZW(fibgeStride+1, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
-                             if(extendedTRIANGLEcOUNT>fs+2)   
+                             if(binString.length>fs+2)   
 INcolor.setHSL(hue3, 1 ,.5);
-else            INcolor.setRGB(.5,.5,.5)
+else            INcolor.setRGB(.25,.25,.25)
 
         fibgeColorAttribute[findgex].setXYZW(fibgeStride+2, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
         }
@@ -5119,14 +5119,14 @@ else            INcolor.setRGB(.5,.5,.5)
         fibgePositionAttribute[clnr].setXYZ(fibgeStride + 1, 0,0,0)
         fibgePositionAttribute[clnr].setXYZ(fibgeStride + 2, 0,0,0)
 
-        fibgeColorAttribute[findgex].setXYZW(fibgeStride, .5,.5,.5,0)
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride, .5,.5,.5,1.)
                           
 
 
-        fibgeColorAttribute[findgex].setXYZW(fibgeStride+1, .5,.5,.5,0)
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride+1, .5,.5,.5,1.)
                            
 
-        fibgeColorAttribute[findgex].setXYZW(fibgeStride+2, .5,.5,.5,0)
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride+2, .5,.5,.5,1.)
        fibgeStride+=3
                 }
             }    
