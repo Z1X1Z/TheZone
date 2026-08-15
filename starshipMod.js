@@ -5045,9 +5045,9 @@ window.doRotation = 1==1
         else
         {
 let hue=4./3.-1./(Number(fibgeBase))+1./Number(fibgeBase)*1.*Number(binString[fs])
-let hue1=0
-let hue2=0
-let hue3=0
+let hue1=hue
+let hue2=hue
+let hue3=hue
 if(window.blendFibge)
 {
 hue1 =hue
@@ -5174,7 +5174,6 @@ var lastANGLEmodulo = 0
 var rotateDirectionArray = [1,-1,1,1,1]
 var deltaSpun = 0;
 var shiftFibgeARRAY= Array(numberOfMetaTriangles).fill(0);
-window.blendFibge = true;
 function binTriBundle(rotateDirection) {
     /*
     while(theWORDtoGOD.length<=2950&&loopsRun==0)

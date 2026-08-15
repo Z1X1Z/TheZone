@@ -319,6 +319,7 @@ function resetAll(){
 window.superseal=true;
 window.fibgetti = false;
 window.fibgeBase = 2n
+window.blendFibge = true;
 window.rez=1.;
 
                                              if (   window.iOS )window.rez=window.devicePixelRatio/4.;
@@ -983,7 +984,14 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
    // else if (event.altKey);
                   else if(key == "S" && event.altKey)window.superseal = !window.superseal;
                   else if(key == "G" && event.altKey){
-                    if(number!="no number")window.fibgeBase=BigInt(Math.ceil(number))
+                    if(number!="no number")
+                        {
+                            window.fibgeBase=BigInt(Math.ceil(number))
+                                                        if(number-Math.floor(number)!=0)window.blendFibge = false
+                                                        else window.blendFibge = true
+
+
+                        }
                         if(window.fibgeBase<2n)window.fibgeBase=2n
                     window.fibgetti = !window.fibgetti;
                   }
