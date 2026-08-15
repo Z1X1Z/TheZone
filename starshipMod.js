@@ -931,7 +931,7 @@ const stackColor = new Float32Array(12 * 4 * 6 * 2)
 var fr = 1.;
 //if (0 == 1)
 var safeNumberOfFibgeTriangles = 0;
-var rowsOfTrianglesToGenerate = 14;
+var rowsOfTrianglesToGenerate = 34;
       //  for (var fibGen = 0; fibGen <= rowsOfTrianglesToGenerate; fibGen++) {
 
     for (var fmt = 0; fmt < rowsOfTrianglesToGenerate; fmt++) {
@@ -1279,7 +1279,7 @@ fibgetScene= new THREE.Scene();
     loadAttributes();
     shaderScene.add(stackMesh)
     for (var ko = 0.; ko < numberOfMetaTriangles; ko++)
-        scene.add(fibgeMesh[ko])//fibgetScene
+        shaderScene.add(fibgeMesh[ko])//fibgetScene
 
 
     scene.add(harmonicPzyghtheMesh)
@@ -5118,7 +5118,15 @@ var rotateDirectionArray = [1,-1,1,1,1]
 var deltaSpun = 0;
 var shiftFibgeARRAY= Array(numberOfMetaTriangles).fill(0);
 function binTriBundle(rotateDirection) {
-    
+    /*
+    while(theWORDtoGOD.length<20000&&loopsRun==0)
+    {
+
+fibonacciEngine()
+stringArray[ABC]=binaryConverter(fibArray[ABC])
+theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
+
+    }*/
 
 var delta = interpolation/60;//Math.abs(note-lastNote)/12*3;
 //if(delta>.25)delta=0.;
@@ -5133,7 +5141,9 @@ var delta = interpolation/60;//Math.abs(note-lastNote)/12*3;
 fibonacciEngine()
 stringArray[ABC]=binaryConverter(fibArray[ABC])
 theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
-     if(theWORDtoGOD.length>=safeNumberOfFibgeTriangles||stringArray[ABC].length>=safeNumberOfFibgeTriangles)
+var safetyThird=safeNumberOfFibgeTriangles
+if(fibgeBase!=2n)safetyThird*=3;
+     if(theWORDtoGOD.length>=safetyThird||stringArray[ABC].length>=safetyThird)
         {
             console.log("Resetting Fibgetti Spinner")
             
@@ -5141,6 +5151,9 @@ theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
             fibArray[(ABC+1)%3]=1n
             fibArray[(ABC+2)%3]=0n
             theWORDtoGOD="0"
+            stringArray[ABC]="0"
+            stringArray[(ABC+1)%3]="0"
+            stringArray[(ABC+2)%3]="0"
 spins=0n
 fibonacciEngine()
 stringArray[ABC]=binaryConverter(fibArray[ABC])
@@ -5244,7 +5257,7 @@ fibArray[1]=1n
 fibArray[2]=0n
 function fibonacciEngine(){
     //if(fibgeBase!=2n)
-    spins+=BigInt(Math.floor(Math.log(Number(fibgeBase))/Math.log(grPermanent)))
+    spins+=2n;//BigInt(Math.floor(Math.log(Number(fibgeBase))/Math.log(grPermanent)))
 //else spins++
 //while(fib1<100000000000000000000000000n)
 {
@@ -5274,9 +5287,12 @@ function BigDIV (num1,num2)
         var numBuffer = num1;
     numBuffer/=num2
     num1-=num2*numBuffer
-    num1*=10n;
+    num1*=fibgeBase;
     
     stringDivided+=numBuffer.toString();
+    stringDivided+=","
     }
-    return stringDivided;
+    stringDivided=stringDivided.slice(0,stringDivided.length-1)
+
+    return stringDivided.split(",");
 }
