@@ -931,7 +931,7 @@ const stackColor = new Float32Array(12 * 4 * 6 * 2)
 var fr = 1.;
 //if (0 == 1)
 var safeNumberOfFibgeTriangles = 0;
-var rowsOfTrianglesToGenerate = 50;
+var rowsOfTrianglesToGenerate = 28;
       //  for (var fibGen = 0; fibGen <= rowsOfTrianglesToGenerate; fibGen++) {
 
     for (var fmt = 0; fmt < rowsOfTrianglesToGenerate; fmt++) {
@@ -944,7 +944,6 @@ var rowsOfTrianglesToGenerate = 50;
     for (var kc = 0;kc<numberOfMetaTriangles;kc++)
         fibgeTriangles[kc]=safeNumberOfFibgeTriangles
     safeNumberOfFibgeTriangles-=fr
-        console.log(fibgeTriangles[0].length)
 
 var fibgeVertices = Array(numberOfMetaTriangles)
 var fibgeColor = Array(numberOfMetaTriangles)
@@ -4924,10 +4923,16 @@ function binaryTriangle(findgex,toRotate, xFibge, yFibge,zORD, drawUpsideDown, r
      //binString = "1,0,0,0,0"
     // binString = "1"
     var extendedTRIANGLEcOUNT =  binString.length;//bigString.length
-    while (fibgeTabulator < binString.length//fibgeTriangles[findgex]
-    ) {extendedTRIANGLEcOUNT
+console.log(extendedTRIANGLEcOUNT)
+    if(fibgeBase!=2n&&extendedTRIANGLEcOUNT>3){
+        extendedTRIANGLEcOUNT/=3.;
+
+
+    }
+    while (fibgeTabulator < (extendedTRIANGLEcOUNT)//fibgeTriangles[findgex]
+    ) {
         complete = false
-        if (place == inRow) {extendedTRIANGLEcOUNT
+        if (place == inRow) {
             fibgeRows++
             inRow += 2;
             place = 1
@@ -4935,14 +4940,17 @@ function binaryTriangle(findgex,toRotate, xFibge, yFibge,zORD, drawUpsideDown, r
         }
         else place++
         fibgeTabulator++
-
     }
     if (!complete) 
         {
-            extendedTRIANGLEcOUNT+=inRow-place+1
+            extendedTRIANGLEcOUNT+=(inRow-place+1)
             fibgeRows++
         }
-    //if (loopsRun == 0) console.log(fibgeRows)
+    else{
+    }
+    console.log(fibgeRows)
+
+        //if (loopsRun == 0) console.log(fibgeRows)
 
     let fibgeScale = scl / (fibgeRows);
     let fidgeShiftX = -0;
@@ -4955,7 +4963,7 @@ window.doRotation = 1==1
 
 //console.log(fibgeWidth+"actual ; 3**.5  "+3**.5/3)
     let fidgeShiftYPerm =0
-     if(rotateDirection==1
+     if(drawUpsideDown==1
         //||fibgeRows==1
         )
         fidgeShiftYPerm=(-fibgeCenter)/fibgeRows+fibgeCenter*(2.+2./3.);//fibgeCenter/1.5;//fibgeCenter/2.;;//-fibgeCenter/2.+fibgeWidth/3**.5*2;//  (fibgeWidth)/ 3**.5 /2.
@@ -4992,17 +5000,43 @@ window.doRotation = 1==1
     var placeInLine = 1.
     var currentRow = 1;
     let spunFibge = []
-    for (var fs = 0; fs < extendedTRIANGLEcOUNT//fibgeTriangles[findgex]
-        ; fs++) {
-        if (binString[fs] == "1") bw = 0;
-        else bw = 1;
-        fibgeColorAttribute[findgex].setXYZW(fibgeStride, bw, bw, bw, fibgeTransparency)
-        fibgeColorAttribute[findgex].setXYZW(fibgeStride + 1, bw, bw, bw, fibgeTransparency)
-        fibgeColorAttribute[findgex].setXYZW(fibgeStride + 2, bw, bw, bw, fibgeTransparency)
+    let INcolor = new THREE.Color();
+    for (var fs = 0; fs < (extendedTRIANGLEcOUNT)//fibgeTriangles[findgex]
+        ; fs++) 
+        {
+    if(fibgeBase==2n) 
+        {
+        if (binString[fs] == "1")
+            INcolor.setRGB(0,0,0)
+        else     INcolor.setRGB(1,1,1)
+
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride+1, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride+2, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
+        }
+        else
+        {
+
+            if(extendedTRIANGLEcOUNT>fs)
+            INcolor.setHSL(1./Number(fibgeBase)*Number(binString[fs]), 1 ,.5);
+else            INcolor.setRGB(.5,.5,.5)
+
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
+                              if(extendedTRIANGLEcOUNT>fs+1)
+  INcolor.setHSL(1./Number(fibgeBase)*Number(binString[fs+1]), 1 ,.5);
+else            INcolor.setRGB(.5,.5,.5)
 
 
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride+1, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
+                             if(extendedTRIANGLEcOUNT>fs+2)   INcolor.setHSL(1./Number(fibgeBase)*Number(binString[fs+2]), 1 ,.5);
+else            INcolor.setRGB(.5,.5,.5)
 
-        var angleToSpin = Math.PI / 3.;
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride+2, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
+        }
+
+
+       
+
         fibgePositionAttribute[findgex].setXYZ(fibgeStride, fidgeShiftX, fibgeCenter * upsideDown + fidgeShiftY, dep)
         fibgePositionAttribute[findgex].setXYZ(fibgeStride + 1, -fibgeWidth * upsideDown + fidgeShiftX, -fibgeCenter * upsideDown + fidgeShiftY, dep)
         fibgePositionAttribute[findgex].setXYZ(fibgeStride + 2, fibgeWidth * upsideDown + fidgeShiftX, -fibgeCenter * upsideDown + fidgeShiftY, dep)
@@ -5072,6 +5106,7 @@ var rotateDirectionArray = [1,-1,1,1,1]
 var deltaSpun = 0;
 var shiftFibgeARRAY= Array(numberOfMetaTriangles).fill(0);
 function binTriBundle(rotateDirection) {
+    
 
 var delta = interpolation/60;//Math.abs(note-lastNote)/12*3;
 //if(delta>.25)delta=0.;
@@ -5088,13 +5123,12 @@ stringArray[ABC]=binaryConverter(fibArray[ABC])
 theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
      if(theWORDtoGOD.length>=safeNumberOfFibgeTriangles||stringArray[ABC].length>=safeNumberOfFibgeTriangles)
         {
-            console.log("here")
+            console.log("Resetting Fibgetti Spinner")
             
             fibArray[ABC]=1n
             fibArray[(ABC+1)%3]=1n
             fibArray[(ABC+2)%3]=0n
             theWORDtoGOD="0"
-enough=0n
 spins=0n
 fibonacciEngine()
 stringArray[ABC]=binaryConverter(fibArray[ABC])
@@ -5174,15 +5208,20 @@ function binaryConverter(numberToTurnIntoBinary) {
     while (whole != half) {
 
         whole = half;
-        half = whole / 2n;
+        half = whole / fibgeBase;
 
-        var isONE = whole - half * 2n;
+        var isONE = whole - half * fibgeBase;
        // console.log(isONE)
-        if (isONE == 1n)
-            bigString += "1"
-        else bigString += "0"
+       for(var baseF = 0n; baseF<fibgeBase; baseF++)
+       {
+        
+          if(baseF==isONE)  bigString += String(baseF)
     }
-    bigString = bigString.slice(0, bigString.length - 1)
+bigString+=","
+}
+    bigString = bigString.slice(0, bigString.length - 2)
+         bigString = bigString.split(",")
+
     return bigString
 }
 
@@ -5192,7 +5231,9 @@ fibArray[0]=1n
 fibArray[1]=1n
 fibArray[2]=0n
 function fibonacciEngine(){
-    spins++
+    //if(fibgeBase!=2n)
+    spins+=BigInt(Math.floor(Math.log(Number(fibgeBase))/Math.log(grPermanent)))
+//else spins++
 //while(fib1<100000000000000000000000000n)
 {
   //  loopsFIB++
@@ -5207,7 +5248,6 @@ console.log(fibArray[(ABC+1)%3])
 console.log(fibArray[(ABC+2)%3])
 */
 ABC=(ABC+1)%3
-console.log(ABC)
 
 }
 var spins = 0n
@@ -5215,7 +5255,7 @@ function BigDIV (num1,num2)
 {
 
     var stringDivided=""
-    var enough = 0
+    var enough = 0n
     while(enough<=spins&&num1!=0n)
     {
         enough++
