@@ -4937,11 +4937,12 @@ function binaryTriangle(findgex,toRotate, xFibge, yFibge,zORD, drawUpsideDown, r
      //binString = "1,0,0,0,0"
     // binString = "1"
     var extendedTRIANGLEcOUNT =  binString.length;//bigString.length
-    if(fibgeBase!=2n&&extendedTRIANGLEcOUNT>3){
+    if(fibgeBase!=2n){
         extendedTRIANGLEcOUNT/=3.;
 
 
     }
+    console.log(extendedTRIANGLEcOUNT)
     while (fibgeTabulator < (extendedTRIANGLEcOUNT)//fibgeTriangles[findgex]
     ) {
         complete = false
@@ -5254,11 +5255,11 @@ let ABC = 0;
 fibArray = Array(3)
 fibArray[0]=1n
 fibArray[1]=1n
-fibArray[2]=0n
+fibArray[2]=1n
 function fibonacciEngine(){
     //if(fibgeBase!=2n)
-    spins+=2n;//BigInt(Math.floor(Math.log(Number(fibgeBase))/Math.log(grPermanent)))
-//else spins++
+    spins+=3n;
+      //else spins++
 //while(fib1<100000000000000000000000000n)
 {
   //  loopsFIB++
