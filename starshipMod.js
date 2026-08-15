@@ -4971,26 +4971,7 @@ function binaryTriangle(findgex,toRotate, xFibge, yFibge,zORD, drawUpsideDown, r
         }
     else{
     }
-    if(lastExtendedTRIANGLEcOUNT[findgex]>extendedTRIANGLEcOUNT)
-    {
 
-
-    for(var clnr = 0; clnr<numberOfMetaTriangles;clnr++)
-    {
-                   let fibgeStride = 0.;
-
-            for(var cleaner = 0; cleaner<fibgeTriangles[clnr];cleaner++)
-
-                {
-
-                    
-        fibgePositionAttribute[clnr].setXYZ(fibgeStride,0,0,0)
-        fibgePositionAttribute[clnr].setXYZ(fibgeStride + 1, 0,0,0)
-        fibgePositionAttribute[clnr].setXYZ(fibgeStride + 2, 0,0,0)
-       fibgeStride+=3
-                }
-            }    }
-lastExtendedTRIANGLEcOUNT[findgex]=extendedTRIANGLEcOUNT
         //if (loopsRun == 0) console.log(fibgeRows)
 
     let fibgeScale = scl / (fibgeRows);
@@ -5042,9 +5023,11 @@ window.doRotation = 1==1
     var currentRow = 1;
     let spunFibge = []
     let INcolor = new THREE.Color();
+    let loopydo=0;
     for (var fs = 0; fs < (extendedTRIANGLEcOUNT)//fibgeTriangles[findgex]
         ; fs++) 
         {
+        loopydo=fs
     if(fibgeBase==2n) 
         {
         if (binString[fs] == "1")
@@ -5104,6 +5087,35 @@ else            INcolor.setRGB(.5,.5,.5)
         }
     }
 
+
+    if(lastExtendedTRIANGLEcOUNT[findgex]>extendedTRIANGLEcOUNT)
+    {
+
+    for(var clnr = 0; clnr<numberOfMetaTriangles;clnr++)
+    {
+
+            for(var cleaner = loopydo; cleaner<fibgeTriangles[clnr];cleaner++)
+
+                {
+
+                    
+        fibgePositionAttribute[clnr].setXYZ(fibgeStride,0,0,0)
+        fibgePositionAttribute[clnr].setXYZ(fibgeStride + 1, 0,0,0)
+        fibgePositionAttribute[clnr].setXYZ(fibgeStride + 2, 0,0,0)
+
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride, 0,0,o,0)
+                          
+
+
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride+1, 0,0,o,0)
+                           
+
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride+2, 0,0,o,0)
+       fibgeStride+=3
+                }
+            }    
+            }
+            lastExtendedTRIANGLEcOUNT[findgex]=extendedTRIANGLEcOUNT
 
 
 
@@ -5193,7 +5205,7 @@ if(fibgeBase!=2n)
             stringArray[(ABC+2)%3]="0"
     for(var clnr = 0; clnr<numberOfMetaTriangles;clnr++)
     {
-                   let fstride = 0.;
+                   let fibgeStride = 0.;
 
             for(var cleaner = 0; cleaner<fibgeTriangles[clnr];cleaner++)
 
@@ -5203,7 +5215,7 @@ if(fibgeBase!=2n)
         fibgePositionAttribute[clnr].setXYZ(fibgeStride,0,0,0)
         fibgePositionAttribute[clnr].setXYZ(fibgeStride + 1, 0,0,0)
         fibgePositionAttribute[clnr].setXYZ(fibgeStride + 2, 0,0,0)
-       fstride+=3
+       fibgeStride+=3
                 }
             }
                 spins=0n
