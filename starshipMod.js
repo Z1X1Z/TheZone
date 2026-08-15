@@ -928,16 +928,24 @@ const harmonicPzyghtheColor = new Float32Array(xenOctaveFactor * 12 * 4 * 6)
 const stackVertices = new Float32Array(12 * 3 * 6 * 2)
 const stackColor = new Float32Array(12 * 4 * 6 * 2)
 
-var fibgeTriangles = Array(numberOfMetaTriangles).fill(1000);
 var fr = 1.;
-if (0 == 1)
-    for (var fmt = 0; fmt < numberOfMetaTriangles; fmt++) {
-        for (var fibGen = 0; fibGen <= fmt; fibGen++) {
-            fibgeTriangles[fmt] += fr
+//if (0 == 1)
+var safeNumberOfFibgeTriangles = 0;
+var rowsOfTrianglesToGenerate = 50;
+      //  for (var fibGen = 0; fibGen <= rowsOfTrianglesToGenerate; fibGen++) {
+
+    for (var fmt = 0; fmt < rowsOfTrianglesToGenerate; fmt++) {
+                                safeNumberOfFibgeTriangles += fr
+
             fr += 2;
+
         }
-        fr = 1;
-    }
+    var fibgeTriangles = Array(numberOfMetaTriangles).fill(0);
+    for (var kc = 0;kc<numberOfMetaTriangles;kc++)
+        fibgeTriangles[kc]=safeNumberOfFibgeTriangles
+    safeNumberOfFibgeTriangles-=fr
+        console.log(fibgeTriangles[0].length)
+
 var fibgeVertices = Array(numberOfMetaTriangles)
 var fibgeColor = Array(numberOfMetaTriangles)
 
@@ -5074,10 +5082,25 @@ var delta = interpolation/60;//Math.abs(note-lastNote)/12*3;
     {
         deltaSpun=totalRotation;
         lastANGLEmodulo+=Math.PI/3;
+   
 fibonacciEngine()
 stringArray[ABC]=binaryConverter(fibArray[ABC])
 theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
-console.log(stringArray[ABC])
+     if(theWORDtoGOD.length>=safeNumberOfFibgeTriangles||stringArray[ABC].length>=safeNumberOfFibgeTriangles)
+        {
+            console.log("here")
+            
+            fibArray[ABC]=1n
+            fibArray[(ABC+1)%3]=1n
+            fibArray[(ABC+2)%3]=0n
+            theWORDtoGOD="0"
+enough=0n
+spins=0n
+fibonacciEngine()
+stringArray[ABC]=binaryConverter(fibArray[ABC])
+theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
+        }
+//console.log(stringArray[ABC])
  //   console.log("here")
     
     let depth1 = -1;
@@ -5141,7 +5164,6 @@ console.log(stringArray[ABC])
 }
 
 }
-var DIVINE_PROPORTION = 161803n
 
 function binaryConverter(numberToTurnIntoBinary) {
     var bigString = ""
@@ -5163,7 +5185,6 @@ function binaryConverter(numberToTurnIntoBinary) {
     bigString = bigString.slice(0, bigString.length - 1)
     return bigString
 }
-var DIVINE_PROPORTION = 161803n
 
 let ABC = 0;
 fibArray = Array(3)
