@@ -4942,7 +4942,7 @@ function binaryTriangle(findgex,toRotate, xFibge, yFibge,zORD, drawUpsideDown, r
 
 
     }
-    console.log(extendedTRIANGLEcOUNT)
+   // console.log(extendedTRIANGLEcOUNT)
     while (fibgeTabulator < (extendedTRIANGLEcOUNT)//fibgeTriangles[findgex]
     ) {
         complete = false
@@ -5119,15 +5119,15 @@ var rotateDirectionArray = [1,-1,1,1,1]
 var deltaSpun = 0;
 var shiftFibgeARRAY= Array(numberOfMetaTriangles).fill(0);
 function binTriBundle(rotateDirection) {
-    /*
-    while(theWORDtoGOD.length<20000&&loopsRun==0)
+    
+    while(theWORDtoGOD.length<200&&loopsRun==0)
     {
 
 fibonacciEngine()
 stringArray[ABC]=binaryConverter(fibArray[ABC])
 theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
 
-    }*/
+    }
 
 var delta = interpolation/60;//Math.abs(note-lastNote)/12*3;
 //if(delta>.25)delta=0.;
@@ -5143,7 +5143,7 @@ fibonacciEngine()
 stringArray[ABC]=binaryConverter(fibArray[ABC])
 theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
 var safetyThird=safeNumberOfFibgeTriangles
-if(fibgeBase!=2n)safetyThird*=3;
+//if(fibgeBase!=2n)safetyThird*=3;
      if(theWORDtoGOD.length>=safetyThird||stringArray[ABC].length>=safetyThird)
         {
             console.log("Resetting Fibgetti Spinner")
@@ -5258,7 +5258,7 @@ fibArray[1]=1n
 fibArray[2]=1n
 function fibonacciEngine(){
     //if(fibgeBase!=2n)
-    spins+=3n;
+    spins+=9n;
       //else spins++
 //while(fib1<100000000000000000000000000n)
 {
