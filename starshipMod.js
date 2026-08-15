@@ -5030,17 +5030,17 @@ window.doRotation = 1==1
         {
 
             if(extendedTRIANGLEcOUNT>fs)
-            INcolor.setHSL(1./Number(fibgeBase)*Number(binString[fs])+1./3., 1 ,.5);
+            INcolor.setHSL(1./Number(fibgeBase)*Number(binString[fs]), 1 ,.5);
 else            INcolor.setRGB(.5,.5,.5)
 
         fibgeColorAttribute[findgex].setXYZW(fibgeStride, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
                               if(extendedTRIANGLEcOUNT>fs+1)
-  INcolor.setHSL(1./Number(fibgeBase)*Number(binString[fs+1])+1./3., 1 ,.5);
+  INcolor.setHSL(1./Number(fibgeBase)*Number(binString[fs+1]), 1 ,.5);
 else            INcolor.setRGB(.5,.5,.5)
 
 
         fibgeColorAttribute[findgex].setXYZW(fibgeStride+1, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
-                             if(extendedTRIANGLEcOUNT>fs+2)   INcolor.setHSL(1./Number(fibgeBase)*Number(binString[fs+2])+1./3., 1 ,.5);
+                             if(extendedTRIANGLEcOUNT>fs+2)   INcolor.setHSL(1./Number(fibgeBase)*Number(binString[fs+2]), 1 ,.5);
 else            INcolor.setRGB(.5,.5,.5)
 
         fibgeColorAttribute[findgex].setXYZW(fibgeStride+2, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
