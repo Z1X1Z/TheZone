@@ -4120,7 +4120,6 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
 
 
 
-       if(window.fibgetti) binTriBundle(-1)
 
 
 
@@ -4331,6 +4330,7 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
 
     //  renderer.forceContextLoss ()
     //  renderer.forceContextRestore ( )
+       if(window.fibgetti) binTriBundle(-1)
 
 }
 document.addEventListener("visibilityChange", () => {
@@ -4342,7 +4342,7 @@ document.addEventListener("visibilityChange", () => {
     }
     else {
         //requestWakeLock();
-        if (!INITIALIZED) resizeMessage()
+        if (INITIALIZED) resizeMessage()
         if (!window.touchOnlyMode) audioX.resume();
         if (typeof Wad == "function") Wad.audioContext.resume()
     }
