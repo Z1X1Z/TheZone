@@ -1279,7 +1279,7 @@ fibgetScene= new THREE.Scene();
     loadAttributes();
     shaderScene.add(stackMesh)
     for (var ko = 0.; ko < numberOfMetaTriangles; ko++)
-        shaderScene.add(fibgeMesh[ko])//fibgetScene
+        scene.add(fibgeMesh[ko])//fibgetScene
 
 
     scene.add(harmonicPzyghtheMesh)
