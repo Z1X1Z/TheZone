@@ -943,7 +943,7 @@ var rowsOfTrianglesToGenerate = 34;
     var fibgeTriangles = Array(numberOfMetaTriangles).fill(0);
     for (var kc = 0;kc<numberOfMetaTriangles;kc++)
         fibgeTriangles[kc]=safeNumberOfFibgeTriangles
-    safeNumberOfFibgeTriangles-=fr
+    safeNumberOfFibgeTriangles-=fr*2
 
 var fibgeVertices = Array(numberOfMetaTriangles)
 var fibgeColor = Array(numberOfMetaTriangles)
@@ -5119,15 +5119,15 @@ var rotateDirectionArray = [1,-1,1,1,1]
 var deltaSpun = 0;
 var shiftFibgeARRAY= Array(numberOfMetaTriangles).fill(0);
 function binTriBundle(rotateDirection) {
-    
-    while(theWORDtoGOD.length<200&&loopsRun==0)
+    /*
+    while(theWORDtoGOD.length<3000&&loopsRun==0)
     {
 
 fibonacciEngine()
 stringArray[ABC]=binaryConverter(fibArray[ABC])
 theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
 
-    }
+    }*/
 
 var delta = interpolation/60;//Math.abs(note-lastNote)/12*3;
 //if(delta>.25)delta=0.;
@@ -5142,8 +5142,14 @@ var delta = interpolation/60;//Math.abs(note-lastNote)/12*3;
 fibonacciEngine()
 stringArray[ABC]=binaryConverter(fibArray[ABC])
 theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
-var safetyThird=safeNumberOfFibgeTriangles
-//if(fibgeBase!=2n)safetyThird*=3;
+var safetyThird=safeNumberOfFibgeTriangles/1.
+if(fibgeBase!=2n)
+    {
+        safetyThird*=3;
+                safetyThird=safetyThird-fr;
+
+    }
+console.log(theWORDtoGOD.length)
      if(theWORDtoGOD.length>=safetyThird||stringArray[ABC].length>=safetyThird)
         {
             console.log("Resetting Fibgetti Spinner")
