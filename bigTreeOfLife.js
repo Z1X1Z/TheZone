@@ -525,7 +525,7 @@ if(outerCoresOff)hyperCore=0.;
 
 if(Spoker)
 hyperCore*=4./3./(1./Math.log(3.)+(1.-1./Math.log(3.))/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
-    hyperCore+=.5/-log(zoom);//right for keeping central outer clover same size
+    hyperCore+=.5/-Math.log(zoom);//right for keeping central outer clover same size
 
 //if(morph>.5&&!wheel)hyperCore+=4.;
 var term=0.;
