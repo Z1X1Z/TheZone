@@ -1445,7 +1445,7 @@ function loadFrequencyTextures() {
                 //             freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
 
                 if (bin < numberOfBins ) {
-                    if (isFinite(dataArray[bin])) radialAMP[ts] += dataArray[bin]*(bin/numberOfBins)**(1./3.)*6.5;
+                    if (isFinite(dataArray[bin])) radialAMP[ts] += dataArray[bin]*(bin/numberOfBins)**(1./3.)*6.421;
                 }
                 // else console.log(y)
             }
@@ -1804,10 +1804,13 @@ function zoomRoutine() {
     let sealBoost = 0.
     if(!window.superseal)sealBoost=4.;
 */
+let jesusJetsBoost = 0;
+            if (fromCenter > 81.) jesusJetsBoost+=4;
+
     var metaDepth = (!dupered) ? zoomCap32 : zoomCap32 ** 2;//due to pixelization limits
 
     if (seventhOUTside && (fromCenter - zoom) * (1. - zoom) > uniforms.SEVEYEStart.value) {
-        metaDepth = metaDepth * 2 ** (uniforms.SEVEYEpow.value / (coordX ** 2 + coordY ** 2) ** .5 + 4 - uniforms.squeezeN.value + 1)
+        metaDepth = metaDepth * 2 ** (uniforms.SEVEYEpow.value / (coordX ** 2 + coordY ** 2) ** .5 + 4 - uniforms.squeezeN.value + 1-jesusJetsBoost)
 
     }
     else if (seventhOUTside && fromCenter * (1. - zoom) - zoom ** .5 > (uniforms.SEVEYEStart.value - 1. / 2 ** uniforms.SEVEYEpow.value * uniforms.SEVEYEpow.value / 2.))
