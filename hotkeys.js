@@ -144,7 +144,7 @@ explodo:{value: 2    },
 BORE:{value: false    },
 
 twelveGates:{value: false    },
-twelveGatesMeta:{value: .35    },
+twelveGatesMeta:{value: .34    },
 Spoker:{value: true    },
         spokelover:{value: true    },
 largeEyeColor:{value:0.},
