@@ -322,9 +322,11 @@ window.fibgetti = false;
 window.fibgeBase = 2n
 window.blendFibge = true;
 window.rez=1.;
+const wingsOfRighteousness2 = 4.2508742365242194;
 
-                                             if (   window.iOS )window.rez=window.devicePixelRatio/4.25;
-                                               else if(window.android)window.rez=window.devicePixelRatio/4.25;
+
+                                             if (   window.iOS )window.rez=window.devicePixelRatio/wingsOfRighteousness2;
+                                               else if(window.android)window.rez=window.devicePixelRatio/wingsOfRighteousness2;
                                                else   window.rez=window.devicePixelRatio/2.;
                                                    
 
