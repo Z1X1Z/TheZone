@@ -409,6 +409,7 @@ function fiveAndSeven() {
             // if(extremeFrets)      twelve[n][m]=(1.-1./(twelve[n][m]/ampThresh)**(.5))**2.
 
             if (binsInFingerStarWitnesses[n][m] != 0.) twelve[n][m] /= binsInFingerStarWitnesses[n][m];
+            twelve[n][m]=twelve[n][m]**2
             if (!isFinite(twelve[n][m]) || twelve[n][m] < 0) twelve[n][m] = 0.;
         }
 
