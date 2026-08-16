@@ -1723,12 +1723,9 @@ function infinicore() {
         }
         else {
             while (zoom > 1. && isFinite(zoom)) zoom /= 2.;
-            coordY *= 2.
-            coordX *= 2.
-            fromCenter *= 2.
-            preFromCenter *= 2.;
+         
 
-            if (fromCenter < 2. / 3.) {
+            while (fromCenter < 2. / 3.&&isFinite(fromCenter)&&fromCenter>0) {
                 coordY *= 2.
                 coordX *= 2.
                 fromCenter *= 2.
