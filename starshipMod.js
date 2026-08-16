@@ -1442,8 +1442,8 @@ function loadFrequencyTextures() {
                 bin = Math.round(frequency * numberOfBins / audioX.sampleRate);
                 //             freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
 
-                if (bin < numberOfBins && bin > 0) {
-                    if (isFinite(dataArray[bin])) radialAMP[ts] += dataArray[bin];
+                if (bin < numberOfBins ) {
+                    if (isFinite(dataArray[bin])) radialAMP[ts] += dataArray[bin]*(bin/numberOfBins)**(1./3.)*6.5;
                 }
                 // else console.log(y)
             }
@@ -3024,6 +3024,7 @@ function animate(timestamp) {
 
 
             let starStride = 0;
+            
             if (onO) {
                 for (var g = 0; g < starArms; g++) {
                     if (isFinite(testarContinuous[g])) {
