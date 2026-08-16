@@ -323,8 +323,8 @@ window.fibgeBase = 2n
 window.blendFibge = true;
 window.rez=1.;
 
-                                             if (   window.iOS )window.rez=window.devicePixelRatio/4.;
-                                               else if(window.android)window.rez=window.devicePixelRatio/4.;
+                                             if (   window.iOS )window.rez=window.devicePixelRatio/4.25;
+                                               else if(window.android)window.rez=window.devicePixelRatio/4.25;
                                                else   window.rez=window.devicePixelRatio/2.;
                                                    
 
