@@ -2960,7 +2960,6 @@ hyperCore=
    cored* 
    //(-cored*gr*leaf)//this is the core slider this dilates central core across metacore//here could use a hotkey//does it do anything useful?
    twoThirds+log(lfc)*logStabilizationConstant;
-    hyperCore+=.5/-log(zoom/(lfc));//not quite right for keeping central outer clover same size
     hyperCore+=1./3.;//to compensate for fifth core
 if(lfcOverZoom>twoThirds)
 {
@@ -3014,6 +3013,7 @@ bool spokeloverON=zoom/lfc<1.5;//could be 1.5, could be 2/3, one is a compromise
 
 
 hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
+    hyperCore+=.5/-log(zoom);//right for keeping central outer clover same size
 
 float term=0.;
 
