@@ -5056,20 +5056,22 @@ hue3=4./3.-1./(Number(fibgeBase))+1./Number(fibgeBase)*1.*Number(binString[fs+2]
 
 }
 
+let blackWhite = (fs+1)%2;
             if(binString.length>fs)
             INcolor.setHSL(hue1, 1 ,.5);
-else            INcolor.setRGB(.25,.25,.25)
+else                   INcolor.setRGB(blackWhite,blackWhite,blackWhite)
+
 
         fibgeColorAttribute[findgex].setXYZW(fibgeStride, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
                               if(binString.length>fs+1)
   INcolor.setHSL(hue2, 1 ,.5);
-else            INcolor.setRGB(.25,.25,.25)
+else            INcolor.setRGB(blackWhite,blackWhite,blackWhite)
 
 
         fibgeColorAttribute[findgex].setXYZW(fibgeStride+1, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
                              if(binString.length>fs+2)   
 INcolor.setHSL(hue3, 1 ,.5);
-else            INcolor.setRGB(.25,.25,.25)
+else            INcolor.setRGB(blackWhite,blackWhite,blackWhite)
 
         fibgeColorAttribute[findgex].setXYZW(fibgeStride+2, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
         }
@@ -5110,20 +5112,21 @@ console.log(binString.length)
             for(var cleaner = binString.length+1; cleaner<fibgeTriangles[findgex];cleaner++)
 
                 {
-
-                    
+                    let blackWhite = .75;
+                    if(fibgeBase!=2n)
+                        blackWhite=(cleaner+1)%2
         fibgePositionAttribute[findgex].setXYZ(fibgeStride,0,0,0)
         fibgePositionAttribute[findgex].setXYZ(fibgeStride + 1, 0,0,0)
         fibgePositionAttribute[findgex].setXYZ(fibgeStride + 2, 0,0,0)
 
-        fibgeColorAttribute[findgex].setXYZW(fibgeStride, .25,.25,.25,1.)
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride, blackWhite,blackWhite,blackWhite,1.)
                           
 
 
-        fibgeColorAttribute[findgex].setXYZW(fibgeStride+1, .25,.25,.25,1.)
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride+1,blackWhite,blackWhite,blackWhite,1.)
                            
 
-        fibgeColorAttribute[findgex].setXYZW(fibgeStride+2, .25,.25,.25,1.)
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride+2,blackWhite,blackWhite,blackWhite,1.)
        fibgeStride+=3
                 
             }    
