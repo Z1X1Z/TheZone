@@ -144,7 +144,7 @@ explodo:{value: 2    },
 BORE:{value: false    },
 
 twelveGates:{value: false    },
-twelveGatesMeta:{value: .34    },
+twelveGatesMeta:{value: .66    },
 Spoker:{value: true    },
         spokelover:{value: true    },
 largeEyeColor:{value:0.},
@@ -322,7 +322,7 @@ window.fibgetti = false;
 window.fibgeBase = 2n
 window.blendFibge = true;
 window.rez=1.;
-const wingsOfRighteousness2 = (-.0008742365242193+(gr+leaf+2**.5))*2/2**.5;
+const wingsOfRighteousness2 = (-Number(".000874236524219"+"7")+(gr+leaf+2**.5))*2;
 
 /*
                                              if (   window.iOS )window.rez=window.devicePixelRatio/wingsOfRighteousness2;
