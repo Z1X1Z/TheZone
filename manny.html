@@ -2410,7 +2410,7 @@ uniform float OrthoEvery;
                                //   const float gr = -cos(216.*PI/180.)/-cos(612.*PI/180.)-1.;
   //  const float leaf = -1.3247179;//5724474;
     const float eConstant = 2.71828182;
-                  const float wingsOfRighteousness =  4.2508742365242194;
+                  const float wingsOfRighteousness =  4.2508742365242177;
                                                         
     float lerp(float a) {return -abs(mod(a,2.)-1.);}
     float lerp2(float a) {return -abs(mod(a,4.)-2.)+1.;}
@@ -4823,11 +4823,6 @@ else if (petals<=0.)hyperCore-=log2*2.;
 
 
 
-
-float howToBoost = wingsOfRighteousness;
-
- if(SEVEYEStartAdj>lengthP-sevMargin&&seventhOUTside)howToBoost =4.25;
-            hyperCore+=((((gr)+-(leaf)+(sqrt2)))-howToBoost)/(gr-leaf+1.);
 //hyperCore+=.5;
    if(seventhEYE>0.&&(seventhEYE!=3.||seventhEYEthree)&&lengthP<twoThirds&&zoom<.5//&&(lfcOverZoom<twoThirds||seventhEYE!=3.)
    )
@@ -4877,6 +4872,12 @@ if(outerCoresOff)hyperCore=0.;
 if(Spoker)
 hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
    if(zoom<.5)  hyperCore+=.5/-log(zoom);//right for keeping central outer clover same size
+
+float howToBoost = wingsOfRighteousness;
+
+ if(SEVEYEStartAdj>lengthP-sevMargin&&seventhOUTside)howToBoost =4.25;
+            hyperCore+=((((gr)+-(leaf)+(sqrt2)))-howToBoost)/(gr-leaf+1.);
+
 
 //if(morph>.5&&!wheel)hyperCore+=4.;
  float term=0.;
