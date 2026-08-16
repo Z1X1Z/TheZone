@@ -5339,7 +5339,7 @@ fibArray[2]=0n
 function fibonacciEngine(){
     if(window.blendFibge)
     spins+=9n;
-else spins+=3n
+else spins+=2n
       //else spins++
 //while(fib1<100000000000000000000000000n)
 {
@@ -5363,7 +5363,8 @@ function BigDIV (num1,num2)
 
     var stringDivided=""
     var enough = 0n
-    while(enough<=spins&&num1!=0n)
+    let localSpins = spins/BigInt(Math.floor(Math.log(Number(fibgeBase))/Math.log(2.)));
+    while(enough<=localSpins&&num1!=0n)
     {
         enough++
         var numBuffer = num1;
