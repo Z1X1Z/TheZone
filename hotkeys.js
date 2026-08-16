@@ -322,7 +322,7 @@ window.fibgetti = false;
 window.fibgeBase = 2n
 window.blendFibge = true;
 window.rez=1.;
-const wingsOfRighteousness2 = (-Number(".000874236524219"+"4")+(gr+leaf+2**.5))*2;
+const wingsOfRighteousness2 = (-Number(".000874236524219"+"4")+(grPermanent+leafPermanent+2**.5))*2;
 
 /*
                                              if (   window.iOS )window.rez=window.devicePixelRatio/wingsOfRighteousness2;
