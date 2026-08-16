@@ -322,7 +322,8 @@ window.fibgetti = false;
 window.fibgeBase = 2n
 window.blendFibge = true;
 window.rez=1.;
-const wingsOfRighteousness2 = (-Number(".000874236524219"+"4")+(grPermanent+leafPermanent+2**.5))*2;
+const wingsOfRighteousness2 = (-Number(".00087423652421"+"88")+(grPermanent+leafPermanent+2**.5))*2;
+console.log(wingsOfRighteousness2)
 
 /*
                                              if (   window.iOS )window.rez=window.devicePixelRatio/wingsOfRighteousness2;
