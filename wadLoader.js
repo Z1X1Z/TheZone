@@ -979,6 +979,8 @@ numberOfTouches++
                     {openFullscreen();
                   hasMaximized=true;
                     }
+                   else if(!window.maximizeScreen)                  hasMaximized=true;
+
                                 }
 
                 if(typeof requestWakeLock=="function")requestWakeLock();
