@@ -5337,8 +5337,9 @@ fibArray[0]=1n
 fibArray[1]=1n
 fibArray[2]=0n
 function fibonacciEngine(){
-    //if(fibgeBase!=2n)
+    if(window.blendFibge)
     spins+=9n;
+else spins+=3n
       //else spins++
 //while(fib1<100000000000000000000000000n)
 {
