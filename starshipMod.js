@@ -299,7 +299,7 @@ function spiral_compress() {
 
         for (var b = 0; b < EldersLeg; b++)if (testar[b] != 0.) {
 
-            testar[b] = (.5 - .5 / (testar[b]* ampThresh) ** (.5)) ** 2.
+            testar[b] = ((.5 - .5 / (testar[b]* totalAMP) ** (.5))) ** 2.*2
             //  testar[b]=(1.-1./(testar[b]*ampThresh)**(.5))**2.
             if (!isFinite(testar[b]) || testar[b] < 0.) {
                 testar[b] = 0.
