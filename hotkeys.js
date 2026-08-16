@@ -994,6 +994,12 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                         }
                         if(window.fibgeBase<2n)window.fibgeBase=2n
                     window.fibgetti = !window.fibgetti;
+                    if(window.INITIALIZED)       
+                        {
+                            console.log("here")
+                        clearFib(true)
+                        }
+
                   }
 
 

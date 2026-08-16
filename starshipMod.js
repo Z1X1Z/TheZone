@@ -299,7 +299,7 @@ function spiral_compress() {
 
         for (var b = 0; b < EldersLeg; b++)if (testar[b] != 0.) {
 
-            testar[b] = (1. - 1. / (testar[b] * ampThresh) ** (.5)) ** 2.
+            testar[b] = (.5 - .5 / (testar[b]* ampThresh) ** (.5)) ** 2.
             //  testar[b]=(1.-1./(testar[b]*ampThresh)**(.5))**2.
             if (!isFinite(testar[b]) || testar[b] < 0.) {
                 testar[b] = 0.
@@ -4160,7 +4160,9 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
 
         if (window.starClover) {
             renderer.setRenderTarget(renderTarget)
+            renderer.antialias=false
             renderer.render(scene, camera);
+            renderer.antialias=true
 
             //begin the feedback of the starRivers of eden
             if (uniforms.eden.value >= 1.) {
@@ -5202,44 +5204,7 @@ stringArray[ABC]=binaryConverter(fibArray[ABC])
 theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
 //console.log(theWORDtoGOD.length)
 //console.log(Number(fibArray[ABC])+" "+Number(fibArray[(ABC+2)%3]))
-
-var safetyThird=safeNumberOfFibgeTriangles/1.
-if(fibgeBase!=2n&&window.blendFibge)
-    {
-        safetyThird*=3;
-
-    }
-     if(theWORDtoGOD.length>=safetyThird||stringArray[ABC].length>=safetyThird)
-        {
-            console.log("Resetting Fibgetti Spinner")
-            
-            fibArray[ABC]=1n
-            fibArray[(ABC+1)%3]=1n
-            fibArray[(ABC+2)%3]=0n
-            theWORDtoGOD="0"
-            stringArray[ABC]="0"
-            stringArray[(ABC+1)%3]="0"
-            stringArray[(ABC+2)%3]="0"
-    for(var clnr = 0; clnr<numberOfMetaTriangles;clnr++)
-    {
-                   let fibgeStride = 0.;
-
-            for(var cleaner = 0; cleaner<fibgeTriangles[clnr];cleaner++)
-
-                {
-
-                    
-        fibgePositionAttribute[clnr].setXYZ(fibgeStride,0,0,0)
-        fibgePositionAttribute[clnr].setXYZ(fibgeStride + 1, 0,0,0)
-        fibgePositionAttribute[clnr].setXYZ(fibgeStride + 2, 0,0,0)
-       fibgeStride+=3
-                }
-            }
-                spins=0n
-fibonacciEngine()
-stringArray[ABC]=binaryConverter(fibArray[ABC])
-theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
-        }
+ clearFib(false);
 //console.log(stringArray[ABC])
  //   console.log("here")
     
@@ -5331,11 +5296,11 @@ bigString+=","
     return bigString
 }
 
-let ABC = 0;
+let ABC = 1;
 fibArray = Array(3)
-fibArray[0]=1n
+fibArray[0]=0n
 fibArray[1]=1n
-fibArray[2]=0n
+fibArray[2]=1n
 function fibonacciEngine(){
     if(window.blendFibge)
     spins+=9n;
@@ -5378,4 +5343,50 @@ function BigDIV (num1,num2)
     stringDivided=stringDivided.slice(0,stringDivided.length-1)
 
     return stringDivided.split(",");
+}
+
+
+function clearFib(autoBypass)
+{
+
+var safetyThird=safeNumberOfFibgeTriangles/1.
+if(fibgeBase!=2n&&window.blendFibge)
+    {
+        safetyThird*=3;
+
+    }
+
+     if(theWORDtoGOD.length>=safetyThird||stringArray[ABC].length>=safetyThird||autoBypass)
+        {
+            console.log("Resetting Fibgetti Spinner")
+
+            fibArray[ABC]=1n
+            fibArray[(ABC+1)%3]=0n
+            fibArray[(ABC+2)%3]=1n
+            theWORDtoGOD="1"
+            stringArray[ABC]="1"
+            stringArray[(ABC+1)%3]="0"
+            stringArray[(ABC+2)%3]="1"
+    for(var clnr = 0; clnr<numberOfMetaTriangles;clnr++)
+    {
+                   let fibgeStride = 0.;
+
+            for(var cleaner = 0; cleaner<fibgeTriangles[clnr];cleaner++)
+
+                {
+
+                    
+        fibgePositionAttribute[clnr].setXYZ(fibgeStride,0,0,0)
+        fibgePositionAttribute[clnr].setXYZ(fibgeStride + 1, 0,0,0)
+        fibgePositionAttribute[clnr].setXYZ(fibgeStride + 2, 0,0,0)
+       fibgeStride+=3
+                }
+            }
+                spins=0n
+                totalRotation=0
+                lastANGLEmodulo=0
+fibonacciEngine()
+stringArray[ABC]=binaryConverter(fibArray[ABC])
+theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
+        }
 }
