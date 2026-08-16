@@ -1797,7 +1797,7 @@ window.lastRailY = 0.;
 window.lastRailZ = 0.;
 window.lastRailC = 0.;
 var triggerRailSet = false
-const zoomCap32 = .00000075;
+const zoomCap32 = .000001;
 
 function zoomRoutine() {
     /*
@@ -4467,7 +4467,7 @@ function constellationCoordFind() {//needs to be tuned for ngenesis
 }
 
 const frameBoosted = 1024
-const wingsOfRighteousness = 4.2508742365242194;
+const wingsOfRighteousness = 4.2508742365242188;//88 hears low ranges better than 87
 
 var frameRation = (wingsOfRighteousness +
     1024) * (-leafPermanent * grPermanent * (2 ** .5) - 2.) - leafPermanent - 1. + grPermanent - 1 + 2 ** .5 - 1. + (-leafPermanent - 1) * (grPermanent - 1.) * (2 ** .5);//hears low ranges better when times >1
