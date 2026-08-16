@@ -314,7 +314,7 @@ window.settingsSet = false
 
 const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 
-const wingsOfRighteousness2 =(-Number(".00087423652421"+"88")+(grPermanent-leafPermanent-2**.5))*2;
+const wingsOfRighteousness2 =(-Number(".00087423652421"+"87")+(grPermanent-leafPermanent-2**.5))*2;
 
 function resetAll(){
 
@@ -337,7 +337,7 @@ window.rez=1.;
                                                else if(window.android)window.rez=window.devicePixelRatio/wingsOfRighteousness2;
                                                else   window.rez=window.devicePixelRatio/wingsOfRighteousness2;
                                                    */
-                                                  window.rez= window.devicePixelRatio/3
+                                                  window.rez= window.devicePixelRatio/wingsOfRighteousness2
 
         window.nudge=13;
         window.frenzy=false;
