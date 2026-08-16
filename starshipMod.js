@@ -5309,10 +5309,12 @@ fibArray = Array(3)
 fibArray[0]=0n
 fibArray[1]=1n
 fibArray[2]=0n
+let everyOther = 1n;
 function fibonacciEngine(){
+
     if(window.blendFibge)
     spins+=9n;
-else spins+=2n
+else spins+=3n
       //else spins++
 //while(fib1<100000000000000000000000000n)
 {

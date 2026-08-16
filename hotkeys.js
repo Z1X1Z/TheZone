@@ -314,23 +314,30 @@ window.settingsSet = false
 
 const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 
+const wingsOfRighteousness2 =(-Number(".00087423652421"+"88")+(grPermanent-leafPermanent-2**.5))*2;
 
 function resetAll(){
+
+for(var nameOfUniform in uniformsInitial)
+    {
+        window.uniforms[nameOfUniform]={}
+        Object.assign(window.uniforms[nameOfUniform],window.uniformsInitial[nameOfUniform])
+    }
+
+    
     window.touchAndSing = false;
 window.superseal=true;
 window.fibgetti = false;
 window.fibgeBase = 2n
-window.blendFibge = true;
+window.blendFibge = false;
 window.rez=1.;
-const wingsOfRighteousness2 = (-Number(".00087423652421"+"88")+(grPermanent+leafPermanent+2**.5))*2;
-console.log(wingsOfRighteousness2)
 
 /*
                                              if (   window.iOS )window.rez=window.devicePixelRatio/wingsOfRighteousness2;
                                                else if(window.android)window.rez=window.devicePixelRatio/wingsOfRighteousness2;
                                                else   window.rez=window.devicePixelRatio/wingsOfRighteousness2;
                                                    */
-                                                  window.rez= window.devicePixelRatio/wingsOfRighteousness2
+                                                  window.rez= window.devicePixelRatio/3
 
         window.nudge=13;
         window.frenzy=false;
@@ -340,11 +347,6 @@ console.log(wingsOfRighteousness2)
 window.spinnerTwist = 0.;
 window.noteWhenDirectionSet = 0.;
 window.zoomBoost = 1.;
-for(var nameOfUniform in uniformsInitial)
-    {
-        window.uniforms[nameOfUniform]={}
-        Object.assign(window.uniforms[nameOfUniform],window.uniformsInitial[nameOfUniform])
-    }
     if(window.touchOnlyMode)window.uniforms.pongOn.value=false;
     window.coordX=xINITiaLizer; window.coordY=yINITiaLizer;
     
@@ -1003,11 +1005,15 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
 
 
                         }
-                        if(window.fibgeBase<2n)window.fibgeBase=2n
+                        if(window.fibgeBase<2n)
+                            {
+                                window.fibgeBase=2n
+                                window.blendFibge = false
+                            }
                     window.fibgetti = !window.fibgetti;
+
                     if(window.INITIALIZED)       
                         {
-                            console.log("here")
                         clearFib(true)
                         }
 
