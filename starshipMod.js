@@ -4165,9 +4165,9 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
 
         if (window.starClover) {
             renderer.setRenderTarget(renderTarget)
-            renderer.antialias=false
+           // renderer.antialias=false
             renderer.render(scene, camera);
-            renderer.antialias=true
+           // renderer.antialias=true
 
             //begin the feedback of the starRivers of eden
             if (uniforms.eden.value >= 1.) {
