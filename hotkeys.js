@@ -987,7 +987,7 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                     if(number!="no number")
                         {
                             window.fibgeBase=BigInt(Math.ceil(number))
-                                                        if(number-Math.floor(number)!=0)window.blendFibge = false
+                                                        if( window.fibgeBase!=2n&&number-Math.floor(number)!=0)window.blendFibge = false
                                                         else window.blendFibge = true
 
 
