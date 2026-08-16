@@ -5023,6 +5023,9 @@ window.doRotation = 1==1
     var currentRow = 1;
     let spunFibge = []
     let INcolor = new THREE.Color();
+    let INcolor1 = new THREE.Color();
+    let INcolor2 = new THREE.Color();
+    let INcolor3 = new THREE.Color();
 
     let correction = 2./Number(fibgeBase)
 
@@ -5044,37 +5047,35 @@ window.doRotation = 1==1
         }
         else
         {
-let hue=4./3.-1./(Number(fibgeBase))+1./Number(fibgeBase)*1.*Number(binString[fs])
-let hue1=hue
-let hue2=hue
-let hue3=hue    
+let blackWhite=(fs+1)%2;
+ if(binString.length>fs)
+    {
+        INcolor.setHSL(4./3.-1./(Number(fibgeBase))+1./Number(fibgeBase)*1.*Number(binString[fs]),1.,.5)
+    }
+    else INcolor.setRGB(blackWhite,blackWhite,blackWhite)
+    
+ INcolor1=  INcolor
 if(window.blendFibge)
 {
-hue1 =hue
-hue2=4./3.-1./(Number(fibgeBase))+1./Number(fibgeBase)*1.*Number(binString[fs+1])
-hue3=4./3.-1./(Number(fibgeBase))+1./Number(fibgeBase)*1.*Number(binString[fs+2])
+ if(binString.length>fs+1)
+     
+         INcolor2.setHSL(4./3.-1./(Number(fibgeBase))+1./Number(fibgeBase)*1.*Number(binString[fs+1]), 1 ,.5);
+          if(binString.length>fs+2)
 
-}
+         INcolor3.setHSL(4./3.-1./(Number(fibgeBase))+1./Number(fibgeBase)*1.*Number(binString[fs+2]), 1 ,.5);
+               
+    }
+    else{
 
-let blackWhite = (fs+1)%2;
-            if(binString.length>fs)
-            INcolor.setHSL(hue1, 1 ,.5);
-else                   INcolor.setRGB(blackWhite,blackWhite,blackWhite)
-
-
-        fibgeColorAttribute[findgex].setXYZW(fibgeStride, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
-                              if(binString.length>fs+1)
-  INcolor.setHSL(hue2, 1 ,.5);
-else            INcolor.setRGB(blackWhite,blackWhite,blackWhite)
+ INcolor2=INcolor
+ INcolor3=INcolor
 
 
-        fibgeColorAttribute[findgex].setXYZW(fibgeStride+1, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
-                             if(binString.length>fs+2)   
-INcolor.setHSL(hue3, 1 ,.5);
-else            INcolor.setRGB(blackWhite,blackWhite,blackWhite)
-
-        fibgeColorAttribute[findgex].setXYZW(fibgeStride+2, INcolor.r, INcolor.g, INcolor.b, fibgeTransparency)
-        }
+    }
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride, INcolor1.r, INcolor1.g, INcolor1.b, fibgeTransparency)
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride+1, INcolor2.r, INcolor2.g, INcolor2.b, fibgeTransparency)
+        fibgeColorAttribute[findgex].setXYZW(fibgeStride+2, INcolor3.r, INcolor3.g, INcolor3.b, fibgeTransparency)
+        }        
 
 
        
@@ -5109,7 +5110,7 @@ console.log(binString.length)
     if(lastExtendedTRIANGLEcOUNT[findgex]>binString.length)
     {
 
-            for(var cleaner = binString.length+1; cleaner<fibgeTriangles[findgex];cleaner++)
+            for(var cleaner = binString.length; cleaner<fibgeTriangles[findgex];cleaner++)
 
                 {
                     let blackWhite = .75;
