@@ -5219,7 +5219,7 @@ theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
     let fsY = 0.;
     //let currentRow = 1.;
 //console.log(stringArray[0])
-    binaryTriangle(0,0, fsX, fsY,depth2, 1, rotateDirectionArray[0],stringArray[2])
+    binaryTriangle(0,0, fsX, fsY,depth2, 1, rotateDirectionArray[0],stringArray[0])
 
     {//move down line
         //   newLine=true
@@ -5243,7 +5243,7 @@ theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
         //inLine+=2
         // placeInLine=0
     }
-    binaryTriangle(2, -4./3.,fsX, fsY,depth2,  1,rotateDirectionArray[2],stringArray[1])
+    binaryTriangle(2, -4./3.,fsX, fsY,depth2,  1,rotateDirectionArray[2],stringArray[2])
 
 
     {//newLine
@@ -5253,7 +5253,7 @@ theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
         //inLine+=2
         // placeInLine=0
     }
- binaryTriangle(3, 4./3.,fsX, fsY,depth2, 1, rotateDirectionArray[3],stringArray[0])
+ binaryTriangle(3, 4./3.,fsX, fsY,depth2, 1, rotateDirectionArray[3],stringArray[1])
     }else 
     {
   for(var br=0; br<numberOfMetaTriangles;br++)
@@ -5305,7 +5305,7 @@ let ABC = 1;
 fibArray = Array(3)
 fibArray[0]=0n
 fibArray[1]=1n
-fibArray[2]=1n
+fibArray[2]=0n
 function fibonacciEngine(){
     if(window.blendFibge)
     spins+=9n;
@@ -5366,8 +5366,8 @@ if(fibgeBase!=2n&&window.blendFibge)
             console.log("Resetting Fibgetti Spinner")
 
             fibArray[ABC]=1n
-            fibArray[(ABC+1)%3]=0n
-            fibArray[(ABC+2)%3]=1n
+            fibArray[(ABC+1)%3]=1n
+            fibArray[(ABC+2)%3]=0n
             theWORDtoGOD="1"
             stringArray[ABC]="1"
             stringArray[(ABC+1)%3]="0"
