@@ -1137,6 +1137,7 @@ function init() {
     setRenderTargetSize(window.innerWidth, window.innerHeight)
 
     renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.antialias=true
 
 
     renderer.autoClear = true;//so the starship can be isolated
@@ -4162,12 +4163,12 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
         uniforms.volumeFret3.value = loudestFret[2].volume / loudestFret[0].volume;
         uniforms.volumeFret4.value = loudestFret[3].volume / loudestFret[0].volume;
 
-            renderer.antialias=true
 
         if (window.starClover) {
             renderer.setRenderTarget(renderTarget)
-           // renderer.antialias=false
+            //renderer.antialias=false
             renderer.render(scene, camera);
+           // renderer.antialias=true
 
             //begin the feedback of the starRivers of eden
             if (uniforms.eden.value >= 1.) {
