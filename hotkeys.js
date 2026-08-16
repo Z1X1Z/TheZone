@@ -316,6 +316,7 @@ const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 
 
 function resetAll(){
+    window.touchAndSing = false;
 window.superseal=true;
 window.fibgetti = false;
 window.fibgeBase = 2n
@@ -983,6 +984,12 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
     
    // else if (event.altKey);
                   else if(key == "S" && event.altKey)window.superseal = !window.superseal;
+                                    else if(key == "J" && event.altKey)
+                                        {
+                                            window.touchAndSing=!window.touchAndSing
+                                            
+
+                                        }
                   else if(key == "G" && event.altKey){
                     if(number!="no number")
                         {

@@ -810,7 +810,7 @@ function move() {
     if (isFinite(d_x) && isFinite(d_y) && ampThresh > zoomOutRatchetThreshold && on) {
         fromCenter = preFromCenter;
 
-        if (!window.touchMode//&&!DAW
+        if (!TaS&&!window.touchMode//&&!DAW
         ) {
             coordX = bx;
             coordY = by;
@@ -1818,8 +1818,7 @@ function zoomRoutine() {
 
     let zoomCone = metaDepth * fromCenter;
     if (uniforms["colorCombo"].value == 16) zoomCone /= 1.33333333 / 2.;
-
-    ZR = setZoomRate();
+  ZR = setZoomRate();
     if (zoom >= 1.)//could work as one (also below) but my phone was partially crashing on continuum clover zoomout
         zoomOutEngage = false;
     if (!isFinite(ZR)) ZR = 1;
@@ -2195,9 +2194,9 @@ let TouchMicroizer = false;
 let lastTouchAngle = 0.;
 window.wrapMovementBoost = 1
 var loc = 0.;
+var TaS = false
 function executeTouchRegime() {
-
-    if (!shouldShowStar || touchOnlyMode) {
+    if (!shouldShowStar|| touchOnlyMode) {
         uniforms.d.value.x = 0.;
         uniforms.d.value.y = 0.;
 
@@ -2210,6 +2209,7 @@ function executeTouchRegime() {
         xTouchMicroBuffer = xTouchMicroBuffer / 10000.;
         yTouchMicroBuffer = yTouchMicroBuffer / 10000.;
         TouchMicroizer = true;
+
     }
     xTouch = 0;
     yTouch = 0;
@@ -2227,12 +2227,17 @@ function executeTouchRegime() {
     if (xTouch != 0) {
         xTouchMicroBuffer = xTouch;
         TouchMicroizer = false;
+                        TaS = true
+
     }
     if (yTouch != 0) {
         yTouchMicroBuffer = yTouch;
         TouchMicroizer = false;
+                        TaS = true
+
 
     }
+    if(TaS||!window.touchAndSing)
     if (true || !zoomAtl41) {
         lastZoom = zoom;
         zoomRoutine();
@@ -2241,7 +2246,7 @@ function executeTouchRegime() {
 
     }
     else lastZoom = zoom;
-    setZoomRate();
+;
 
     //if(pointerZoom)
     {
@@ -2251,7 +2256,7 @@ function executeTouchRegime() {
         let touchMovement = [0, 0];
         if (zoomRate != 0 && !zoomAtl41) touchMovement = [-Math.abs(zoom - lastZoom) * xTouch, Math.abs(zoom - lastZoom) * yTouch];
         else touchMovement = [-xTouch / zoomFrames * zoom * interpolation, yTouch / zoomFrames * zoom * interpolation]
-        if (!window.shouldShowStar || touchOnlyMode) {
+        if (!window.shouldShowStar || touchOnlyMode||TaS) {
             uniforms["volume"].value = 1.;
             uniforms["zoomOutRatchetThreshold"].value = 0.;
         }
@@ -2279,6 +2284,7 @@ function executeTouchRegime() {
 
         }
         else wrapMovementBoost = 1;
+        
         coordX += spunTouch[0] * wrapMovementBoost;
 
         coordY += spunTouch[1] * wrapMovementBoost;
@@ -2410,8 +2416,10 @@ function animate(timestamp) {
 
 
     ONbypass = false;
+            TaS = false
+
     if (window.touchMode//&&!DAW
-        || window.touchOnlyMode) {
+        || window.touchOnlyMode||window.touchAndSing) {
         setDynamicSampler2ds();//normally does nothing
 
         setMicInputToStarPIXEL();
@@ -2736,12 +2744,13 @@ function animate(timestamp) {
         else { volume = 1.; lastVolume = 1.; }
 
 
-        if (!window.touchMode//&&!DAW
+        if ((!TaS)&&!window.touchMode//&&!DAW
         ) {
             if (!zoomAtl41 && zoomRate != 0.) {
-                zoomRoutine();
+                    {zoomRoutine();
                 if ((((coordX ** 2 + coordY ** 2) ** .5 / (zoom) ** .5 < uniforms.SEVEYEStart.value || fromCenter == 0.) && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0) || !uniforms.seventhOUTside.value)
                     infinicore();
+            }   
             }
         }
         //if(on)
@@ -2864,7 +2873,6 @@ function animate(timestamp) {
 
         if (!shouldShowStar || ampThresh > zoomOutRatchetThreshold && on) uniforms["volume"].value = audioX.sampleRate / bufferSize * ampThresh / (1. + zoomOutRatchetThreshold);
         uniforms["zoom"].value = zoom;
-
 
 
         uniforms.coordSHIFT.value.x += d_x;
@@ -4145,7 +4153,7 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
 
 
 
-
+        if(TaS)uniforms.volume.value = 1.;
 
         uniforms.loudestFret1.value = new THREE.Vector2(loudestFret[0].x, loudestFret[0].y);
         uniforms.loudestFret2.value = new THREE.Vector2(loudestFret[1].x, loudestFret[1].y);
