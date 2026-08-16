@@ -2237,10 +2237,9 @@ function executeTouchRegime() {
 
 
     }
-    if(TaS||!window.touchAndSing)
     if (true || !zoomAtl41) {
         lastZoom = zoom;
-        zoomRoutine();
+          if(TaS||!window.touchAndSing)  zoomRoutine();
         if ((((coordX ** 2 + coordY ** 2) ** .5 / (zoom) ** .5 < uniforms.SEVEYEStart.value || fromCenter == 0.) && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0) || !uniforms.seventhOUTside.value)
             infinicore();
 

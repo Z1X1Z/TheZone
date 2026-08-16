@@ -2440,6 +2440,8 @@ uniform float OrthoEvery;
 
 vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
     float angle =  atan(r.y,r.x)-atan(d.x,d.y);
+        if(volume==1.)angle +=PI;
+
     vec4 ret = vec4(0.);
     float angleAsOne = angle*divideByMultiplyingPi2;
     float wedge = (mod(angleAsOne+2.+.5,1.)-.5)*12.;
