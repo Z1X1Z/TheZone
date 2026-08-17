@@ -2901,7 +2901,7 @@ vec2 s=p;
 
 
 
-        if(lfcAdj>(SEVEYEStartAdj-sevMargin)&&lengthP>SEVEYEStartAdj)
+        if(lfcAdj>(SEVEYEStartAdj-sevMargin)/log(3.)&&lengthP>SEVEYEStartAdj)
 {
     s/=SEVEYEPush;
     s=1.5/(2.5-vec2(-s.x,abs(s.y)+budge//plus one third is optional

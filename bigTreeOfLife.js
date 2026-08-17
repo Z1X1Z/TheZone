@@ -272,7 +272,7 @@ var c = s.length();
 
 
 
-        if(seventhOUTside&&(lfcAdj>(SEVEYEStartAdj-sevMargin))&&(lengthP>SEVEYEStartAdj)
+        if(seventhOUTside&&(lfcAdj>(SEVEYEStartAdj-sevMargin)/Math.log(3.))&&(lengthP>SEVEYEStartAdj)
  )
 {
     s/=SEVEYEPush;
