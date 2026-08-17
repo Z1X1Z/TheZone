@@ -469,7 +469,7 @@ var truncNonLeaf = 1.;
         truncator = truncNonLeaf*-leaf/2.;//*100
     }
 
-var howToBoost =  4.2508742365242187487;
+var howToBoost =  4.25087423652421874877;
 
  if(SEVEYEStartAdj>lengthP-sevMargin&&seventhOUTside)howToBoost =4.25;
             hyperCore+=((((gr)+-(leaf)+(2**.5)))-howToBoost)/(gr-leaf+1.);

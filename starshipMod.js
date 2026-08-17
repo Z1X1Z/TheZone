@@ -4467,7 +4467,7 @@ function constellationCoordFind() {//needs to be tuned for ngenesis
 }
 
 const frameBoosted = 1024
-const wingsOfRighteousness =4.2508742365242187487777;
+const wingsOfRighteousness =4.25087423652421874876;
 //console.log(wingsOfRighteousness)
 var frameRation = (wingsOfRighteousness +
     1024) * (-leafPermanent * grPermanent * (2 ** .5) - 2.) - leafPermanent - 1. + grPermanent - 1 + 2 ** .5 - 1. + (-leafPermanent - 1) * (grPermanent - 1.) * (2 ** .5);//hears low ranges better when times >1
