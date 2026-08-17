@@ -259,7 +259,7 @@ if(morph!=0.)
 var s= p.clone();
 var c = s.length();
 
-        if(seventhEYE>0.&&seventhEYE!=3.&&(lengthP<2./3.)&&zoom<.5
+        if(seventhEYE>0.&&seventhEYE!=3.&&(lengthP<2./3.)&&zoom<.25
     )
 {
 
@@ -315,7 +315,7 @@ let lfcCenterCored = lfc*scale;
 
 
 var seventhEYEthree = (seventhEYE==3.&&((jubileyes!=0.&&lengthP<1./3.)||
-(jubileyes==0.&&lengthP<2./3.))&&zoom<.5 &&lfc/zoom>2./3.
+(jubileyes==0.&&lengthP<2./3.))&&zoom<.25 &&lfc/zoom>2./3.
 );
        if(seventhEYEthree
  )
@@ -496,7 +496,7 @@ else{
 }
 
    }
-   var spokeloverON=spokelover&&zoom/lfc<1.5;
+   var spokeloverON=spokelover&&zoom/lfc<2./3.;
 
 
 
@@ -525,7 +525,7 @@ if(outerCoresOff)hyperCore=0.;
 
 if(Spoker)
 hyperCore*=4./3./(1./Math.log(3.)+(1.-1./Math.log(3.))/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
-    if(zoom<.25&&(!seventhEYE==2.&&seventhEYE==1.||lengthP>2./3.)) hyperCore+=.5/-Math.log(zoom);//right for keeping central outer clover same size
+    if(zoom<.25&&lfc<SEVEYEStartAdj&&(!seventhEYE==2.&&seventhEYE==1.||lengthP>2./3.)) hyperCore+=.5/-Math.log(zoom);//right for keeping central outer clover same size
 
 //if(morph>.5&&!wheel)hyperCore+=4.;
 var term=0.;
@@ -1071,7 +1071,7 @@ var       spokeloverCoreShiftUp   =  Math.pow(downSpoke,powerOfSpokeCore)*logSta
 //}
 
 dstnce=s.length();
-if(continuumClover!=0&&lfcOverZoom>.5){//engage continualization
+if(continuumClover!=0&&lfcOverZoom>1.5){//engage continualization
   
 var continuumCore=(continuumCounter+hyperCoreOUTPUT)*correction;
 
