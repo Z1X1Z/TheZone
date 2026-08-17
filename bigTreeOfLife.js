@@ -272,7 +272,7 @@ var c = s.length();
 
 
 
-        if(seventhOUTside&&(lfcAdj>(SEVEYEStartAdj-sevMargin)*.75)&&(lengthP>SEVEYEStartAdj)
+        if(seventhOUTside&&(lfcAdj>(SEVEYEStartAdj-sevMargin))&&(lengthP>SEVEYEStartAdj)
  )
 {
     s/=SEVEYEPush;
@@ -522,7 +522,9 @@ if(Spoker)
 hyperCore*=4./3./(1./Math.log(3.)+(1.-1./Math.log(3.))/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
     if(zoom<.25&&lfc<SEVEYEStartAdj&&(!seventhEYE==2.&&seventhEYE==1.||lengthP>2./3.)) hyperCore+=.5/-Math.log(zoom*coresIn);//right for keeping central outer clover same size
 
-    
+var howToBoost =  4.;
+
+ if(SEVEYEStartAdj>lengthP-sevMargin&&seventhOUTside)howToBoost =4.25;
             hyperCore+=((((gr)+-(leaf)+(2**.5)))-25087423652421874869)/(gr-leaf+1.);
             //hyperCore+=.5;
 //if(morph>.5&&!wheel)hyperCore+=4.;

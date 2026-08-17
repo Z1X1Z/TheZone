@@ -1388,7 +1388,11 @@ fibgetScene= new THREE.Scene();
     setTrailSize();
 
     setDynamicSampler2ds();
-    renderer.setPixelRatio(rez);
+         if(!window.rezUpgradeBypass)    renderer.setPixelRatio(wingsOfRighteousness2);
+         
+        if(rez!=wingsOfRighteousness2)    renderer.setPixelRatio(rez);
+
+
     onWindowResize();
     adjustThreeJSWindow();
     container.appendChild(renderer.domElement);//engage THREEJS visual out
