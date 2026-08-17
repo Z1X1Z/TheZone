@@ -2242,7 +2242,7 @@ function executeTouchRegime() {
     if (true || !zoomAtl41) {
         lastZoom = zoom;
           if(TaS||!window.touchAndSing)  zoomRoutine();
-        if ((((coordX ** 2 + coordY ** 2) ** .5 / (zoom) ** .5 < uniforms.SEVEYEStart.value || fromCenter == 0.) && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0) || !uniforms.seventhOUTside.value)
+        if (((((coordX ** 2 + coordY ** 2) ** .5 / (zoom) ** .5 < uniforms.SEVEYEStart.value || fromCenter == 0.) && uniforms.seventhOUTside.value ) || !uniforms.seventhOUTside.value|| uniforms.colorCombo.value > 0))
             infinicore();
 
     }
@@ -2749,7 +2749,7 @@ function animate(timestamp) {
         ) {
             if (!zoomAtl41 && zoomRate != 0.) {
                     {zoomRoutine();
-                if ((((coordX ** 2 + coordY ** 2) ** .5 / (zoom) ** .5 < uniforms.SEVEYEStart.value || fromCenter == 0.) && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0) || !uniforms.seventhOUTside.value)
+                if ((((coordX ** 2 + coordY ** 2) ** .5 / (zoom) ** .5 < uniforms.SEVEYEStart.value || fromCenter == 0.) && uniforms.seventhOUTside.value ) || !uniforms.seventhOUTside.value|| uniforms.colorCombo.value > 0)
                     infinicore();
             }   
             }
@@ -4467,8 +4467,8 @@ function constellationCoordFind() {//needs to be tuned for ngenesis
 }
 
 const frameBoosted = 1024
-const wingsOfRighteousness = 4.250874236524218742365242187423652421874236524218742365242187423652421;//88 hears low ranges better than 87, but 87 is more astute
-console.log(wingsOfRighteousness)
+const wingsOfRighteousness =4.2508742365242187487777;
+//console.log(wingsOfRighteousness)
 var frameRation = (wingsOfRighteousness +
     1024) * (-leafPermanent * grPermanent * (2 ** .5) - 2.) - leafPermanent - 1. + grPermanent - 1 + 2 ** .5 - 1. + (-leafPermanent - 1) * (grPermanent - 1.) * (2 ** .5);//hears low ranges better when times >1
 //            frameRation=1024;

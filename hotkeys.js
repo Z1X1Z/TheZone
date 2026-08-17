@@ -314,8 +314,8 @@ window.settingsSet = false
 
 const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 
-const wingsOfRighteousness2 =(-Number(".00087423652421"+"87")+(grPermanent-leafPermanent-2**.5))*2;
-
+const wingsOfRighteousness2 =(-Number(".00087423652421"+"87487")+(grPermanent-leafPermanent-2**.5))*2;
+//87498
 function resetAll(){
 
 for(var nameOfUniform in uniformsInitial)

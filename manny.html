@@ -2410,7 +2410,7 @@ uniform float OrthoEvery;
                                //   const float gr = -cos(216.*PI/180.)/-cos(612.*PI/180.)-1.;
   //  const float leaf = -1.3247179;//5724474;
     const float eConstant = 2.71828182;
-                  const float wingsOfRighteousness =  4.2508742365242187;
+                  const float wingsOfRighteousness =  4.2508742365242187487;
                                                         
     float lerp(float a) {return -abs(mod(a,2.)-1.);}
     float lerp2(float a) {return -abs(mod(a,4.)-2.)+1.;}
@@ -3310,6 +3310,12 @@ vec2 n=vec2(0.);
 
 float l = 1.;
 g*=4.;
+
+if(clvrVariant1)
+{
+    //vec2 inverseg= 1./g;
+	//  if(length(inverseg)<4.)
+		  p=1.-1./(vec2(pow(abs(g.x),.5),pow(abs(g.y),.5)))*length(g);}
 g=g.xy;
 vec2 z=g;
 float coreSlide = 1.;
