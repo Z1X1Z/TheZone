@@ -4877,12 +4877,9 @@ if(outerCoresOff)hyperCore=0.;
 
 if(Spoker)
 hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
-   if(zoom<.25&&(seventhEYE!=1.&&seventhEYE!=2.||lengthP>2./3.))  hyperCore+=.5/-log(zoom);//right for keeping central outer clover same size
+   if(zoom<.25&&(seventhEYE!=1.&&seventhEYE!=2.||lengthP>2./3.))  hyperCore+=.5/-log(zoom*coresIn);//right for keeping central outer clover same size
 
-float howToBoost = wingsOfRighteousness;
-
- if(SEVEYEStartAdj>lengthP-sevMargin&&seventhOUTside)howToBoost =4.25;
-            hyperCore+=((((gr)+-(leaf)+(sqrt2)))-howToBoost)/(gr-leaf+1.);
+            hyperCore+=((((gr)+-(leaf)+(sqrt2)))-wingsOfRighteousness)/(gr-leaf+1.);
 
 
 //if(morph>.5&&!wheel)hyperCore+=4.;

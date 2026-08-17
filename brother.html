@@ -2993,7 +2993,6 @@ if(zoom!=0.&&lfc!=0.)//may or may not include
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoom*zoom))
 
 }
-float howToBoost = wingsOfRighteousness;
 
   if(seventhEYEthree&&lengthP<twoThirds&&zoom<.25
    )
@@ -3014,11 +3013,9 @@ bool spokeloverON=zoom/lfc<2./3.;//could be 1.5, could be 2/3, one is a compromi
 
 
 hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
-  if(zoom<.25)  hyperCore+=.5/-log(zoom);//right for keeping central outer clover same size
-
- if(SEVEYEStartAdj>lengthP-sevMargin)
- howToBoost =4.25;
-            hyperCore+=((((gr)+-(leaf)+(sqrt2)))-howToBoost)/(gr-leaf+1.);
+  if(zoom<.25)  hyperCore+=.5/-log(zoom*coresIn);//right for keeping central outer clover same size
+  
+            hyperCore+=((((gr)+-(leaf)+(sqrt2)))-wingsOfRighteousness)/(gr-leaf+1.);
 float term=0.;
 
 vec2 m=vec2(0.);
