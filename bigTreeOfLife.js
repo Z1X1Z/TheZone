@@ -475,7 +475,7 @@ var howToBoost =  4.25087423652421874877;
             hyperCore+=((((gr)+-(leaf)+(2**.5)))-howToBoost)/(gr-leaf+1.);
             //hyperCore+=.5;
 
-   if(seventhEYE>0.&&(seventhEYE!=3.||seventhEYEthree)&&lengthP<2./3.&&zoom<.5//&&(lfc/zoom<2./3.||seventhEYE!=3.)
+   if(seventhEYE>0.&&(seventhEYE!=3.||seventhEYEthree)&&lengthP<2./3.&&zoom<.25//&&(lfc/zoom<2./3.||seventhEYE!=3.)
    )
    {
     if(budge==1./3.)
@@ -525,7 +525,7 @@ if(outerCoresOff)hyperCore=0.;
 
 if(Spoker)
 hyperCore*=4./3./(1./Math.log(3.)+(1.-1./Math.log(3.))/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
-    if(zoom<.5) hyperCore+=.5/-Math.log(zoom);//right for keeping central outer clover same size
+    if(zoom<.25&&(!seventhEYE==2.&&seventhEYE==1.||lengthP>2./3.)) hyperCore+=.5/-Math.log(zoom);//right for keeping central outer clover same size
 
 //if(morph>.5&&!wheel)hyperCore+=4.;
 var term=0.;

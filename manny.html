@@ -3315,7 +3315,7 @@ if(clvrVariant1)
 {
     //vec2 inverseg= 1./g;
 	//  if(length(inverseg)<4.)
-		  p=1.-1./(vec2(pow(abs(g.x),.5),pow(abs(g.y),.5)))*length(g);}
+		  g=1.-1./(vec2(pow(abs(g.x),.5),pow(abs(g.y),.5)))*length(g);}
 g=g.xy;
 vec2 z=g;
 float coreSlide = 1.;
@@ -4545,7 +4545,7 @@ if(morph!=0.)
 
 vec2 s=p;
 
-        if(seventhEYE>0.&&seventhEYE!=3.&&(lengthP<twoThirds&&length(s)<twoThirds)&&zoom<.5
+        if(seventhEYE>0.&&seventhEYE!=3.&&(lengthP<twoThirds&&length(s)<twoThirds)&&zoom<.25
  //&&lfc>zoom
  )
 {
@@ -4617,7 +4617,7 @@ const float crs = 64.;//this is the mandelclover and original inheritance colorm
  else break;
  float lfcCenterCored=lfc*scale;
 bool seventhEYEthree = (seventhEYE==3.&&((jubileyes!=0.&&lengthP<1./3.)||
-(jubileyes==0.&&lengthP<twoThirds))&&zoom<.5 &&lfcOverZoom>twoThirds
+(jubileyes==0.&&lengthP<twoThirds))&&zoom<.25 &&lfcOverZoom>twoThirds
 );
        if(seventhEYEthree
        
@@ -4652,7 +4652,7 @@ else if (refactorCores==0.){//for double slide core
     s*=1.5;c*=1.5;
 }
 
-   //if(0==1&&seventhEYE>0.&&zoom<.5&&(lengthP<2./3.))
+   //if(0==1&&seventhEYE>0.&&zoom<.25&&(lengthP<2./3.))
  //   s=1.5/(2.5-vec2(-s.x,abs(s.y)+1./3.));//this needs some exploration//here needs activation and new hotkey
     
 
@@ -4830,7 +4830,7 @@ else if (petals<=0.)hyperCore-=log2*2.;
 
 
 //hyperCore+=.5;
-   if(seventhEYE>0.&&(seventhEYE!=3.||seventhEYEthree)&&lengthP<twoThirds&&zoom<.5//&&(lfcOverZoom<twoThirds||seventhEYE!=3.)
+   if(seventhEYE>0.&&(seventhEYE!=3.||seventhEYEthree)&&lengthP<twoThirds&&zoom<.25//&&z(lfcOverZoom<twoThirds||seventhEYE!=3.)
    )
    {
     if(budge==1./3.)
@@ -4857,7 +4857,7 @@ if(iso_engine)hyperCore+=1.5;
 
 if(gigaLeap)hyperCore-=.5;
 //hyperCore+=.5;
-bool spokeloverON=spokelover&&zoom/lfc<1.5;//could be 1.5, could be 2/3, one is a compromise
+bool spokeloverON=spokelover&&zoom/lfc<1./3.;//could be 1.5, could be 2/3, one is a compromise
     // if(spokeloverON)hyperCore-=log2;
 
 
@@ -4877,7 +4877,7 @@ if(outerCoresOff)hyperCore=0.;
 
 if(Spoker)
 hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
-   if(zoom<.5)  hyperCore+=.5/-log(zoom);//right for keeping central outer clover same size
+   if(zoom<.25&&(seventhEYE!=1.&&seventhEYE!=2.||lengthP>2./3.))  hyperCore+=.5/-log(zoom);//right for keeping central outer clover same size
 
 float howToBoost = wingsOfRighteousness;
 
