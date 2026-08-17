@@ -1389,6 +1389,7 @@ fibgetScene= new THREE.Scene();
 
     setDynamicSampler2ds();
          if(!window.rezUpgradeBypass)    renderer.setPixelRatio(wingsOfRighteousness2);
+        else  if (rez!=wingsOfRighteousness2)    renderer.setPixelRatio(rez);
 
 
 
@@ -1420,7 +1421,7 @@ fibgetScene= new THREE.Scene();
 
            }
     else        renderer.render(scene, camera);
-        if(rez!=wingsOfRighteousness2)    renderer.setPixelRatio(rez);
+       renderer.setPixelRatio(rez);
 
     renderer.clear();
     document.getElementById("load message").innerHTML = "Loaded, press to open!";

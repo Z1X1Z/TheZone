@@ -330,14 +330,14 @@ window.superseal=true;
 window.fibgetti = false;
 window.fibgeBase = 2n
 window.blendFibge = false;
-window.rez=1.;
+window.rez=3.;
 
 /*
                                              if (   window.iOS )window.rez=window.devicePixelRatio/wingsOfRighteousness2;
                                                else if(window.android)window.rez=window.devicePixelRatio/wingsOfRighteousness2;
                                                else   window.rez=window.devicePixelRatio/wingsOfRighteousness2;
                                                    */
-                                                  window.rez= window.devicePixelRatio/wingsOfRighteousness2
+                                               //   window.rez= window.devicePixelRatio/wingsOfRighteousness2
 
         window.nudge=13;
         window.frenzy=false;
