@@ -525,7 +525,7 @@ hyperCore*=4./3./(1./Math.log(3.)+(1.-1./Math.log(3.))/1.75);//engage overstable
 var howToBoost =  4.;
 
  if(SEVEYEStartAdj>lengthP-sevMargin&&seventhOUTside)howToBoost =4.25;
-            hyperCore+=((((gr)+-(leaf)+(2**.5)))-25087423652421874869)/(gr-leaf+1.);
+            hyperCore+=((((gr)+-(leaf)+(2**.5)))-wingsOfRighteousness2)/(gr-leaf+1.);
             //hyperCore+=.5;
 //if(morph>.5&&!wheel)hyperCore+=4.;
 var term=0.;
