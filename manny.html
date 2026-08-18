@@ -4625,14 +4625,14 @@ vec2 s=p;
    // try signs and swizzle!
 }
 
-float hyperCore = 0.;
+float hyperCore= 0.;
 
         if(seventhOUTside&&(lfcAdj>(SEVEYEStartAdj-sevMargin)/log(3.))&&(lengthP>SEVEYEStartAdj)
  //&&lfc>zoom
  )
 {
     
-   if(lengthP>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoom),zoom*zoom)+zoom*zoom/lfc+2./sqrt(lfc)-1./3.;
+   if(lengthP>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoom),zoom*zoom)+zoom*zoom/(lfc*lfc)+2./sqrt(lfc)-1./3.;
 
     s/=SEVEYEPush;
     //s*=1.125;
