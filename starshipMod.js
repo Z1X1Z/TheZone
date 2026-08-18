@@ -1824,7 +1824,7 @@ let jesusJetsBoost = 0;
 
     }
     else if (seventhOUTside && fromCenter * (1. - zoom) - zoom ** .5 > (uniforms.SEVEYEStart.value - 1. / 2 ** uniforms.SEVEYEpow.value * uniforms.SEVEYEpow.value / 2.))
-        metaDepth = metaDepth * 2 ** (uniforms.SEVEYEpow.value + 4.)
+        metaDepth = metaDepth * 2 ** (uniforms.SEVEYEpow.value + 1.)
     else if (uniforms.seventhEYE.value == 3. && uniforms.jubileyes.value != 0. && fromCenter < 1. / 3.)
         metaDepth *= 2 ** (5);
 
