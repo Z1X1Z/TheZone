@@ -2252,7 +2252,7 @@ function executeTouchRegime() {
     if (true || !zoomAtl41) {
         lastZoom = zoom;
           if(TaS||!window.touchAndSing)  zoomRoutine();
-        if (((((coordX ** 2 + coordY ** 2) ** .5 / (zoom) ** .5 < uniforms.SEVEYEStart.value || fromCenter == 0.) && uniforms.seventhOUTside.value ) || !uniforms.seventhOUTside.value|| uniforms.colorCombo.value > 0))
+        if (((((coordX ** 2 + coordY ** 2) ** .5 / zoom < uniforms.SEVEYEStart.value || fromCenter == 0.) && uniforms.seventhOUTside.value ) || !uniforms.seventhOUTside.value|| uniforms.colorCombo.value > 0))
             infinicore();
 
     }
@@ -2759,7 +2759,7 @@ function animate(timestamp) {
         ) {
             if (!zoomAtl41 && zoomRate != 0.) {
                     {zoomRoutine();
-                if ((((coordX ** 2 + coordY ** 2) ** .5 / (zoom) ** .5 < uniforms.SEVEYEStart.value || fromCenter == 0.) && uniforms.seventhOUTside.value ) || !uniforms.seventhOUTside.value|| uniforms.colorCombo.value > 0)
+                if ((((coordX ** 2 + coordY ** 2) ** .5/ zoom < uniforms.SEVEYEStart.value || fromCenter == 0.) && uniforms.seventhOUTside.value ) || !uniforms.seventhOUTside.value|| uniforms.colorCombo.value > 0)
                     infinicore();
             }   
             }
