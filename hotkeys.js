@@ -1062,11 +1062,12 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                                 uniforms.fibge5.value=!uniforms.fibge5.value;
                                 window.fibge5=false;
                                 changingQuadrants = true;
-
                             }
-                           if(!changingQuadrants||!window.INITIALIZED) window.fibgetti = !window.fibgetti;
-                            if(!window.INITIALIZED&&!window.fibge5&&!window.fibge4&&!window.fibge3&&!window.fibge2&&!window.fibge1)    uniforms.fibge4.value=true;
-
+                           if(!window.fibge5&&!window.fibge4&&!window.fibge3&&!window.fibge2&&!window.fibge1) 
+                            {
+                            window.fibgetti = !window.fibgetti;
+                            if(!window.INITIALIZED)uniforms.fibge4.value=true;
+                            }
                     if(window.INITIALIZED&&!changingQuadrants)       
                         {
                         clearFib(true)
