@@ -110,6 +110,13 @@ squirgleDynamic:{value:Array(12)},
 STAR:{value:null},
 EDEN:{value:null},
 FIBGE:{value:null},
+fibge1:{value:false},
+fibge2:{value:false},
+fibge3:{value:false},
+fibge4:{value:false},
+fibge5:{value:false},
+split1:{value:false},
+split2:{value:false},
 uberDuper:{value:null},
 twelveNotesTex:{value:null},
 radialFrequenciesSummed:{value:null},
@@ -527,6 +534,7 @@ window.zoomBoost = 1.;
                                          
                                          runningHash = true;
                                          window.number = "no number";
+                                         window.stringofnumber = "no number";
                                      //  if(window.settingsSet) 
                                      
                                          readHash()
@@ -546,6 +554,8 @@ resetAll();
 
 let osmdStaffsVisible = 0;
 window.number = "no number";
+window.stringofnumber = "no string"
+
                                          
                                var          hashHasRun = false;
 function readHash(){
@@ -607,6 +617,7 @@ function hk() {
 let hotkeyInputWindowActive = false;
 if(mobile)
     hk();
+
 
 
 
@@ -713,8 +724,16 @@ uniforms["upCoreCycler"].value=c;
                    }
                    
                                        if(number!="no number") {
-
-                                       number = Number(number)
+                                        stringofnumber = String(number).split(",")
+                                        if(stringofnumber.length>1)
+                                        {
+                            if(stringofnumber[1].includes("1")) window.fibge1=true;
+                            if(stringofnumber[1].includes("2")) window.fibge2=true;
+                            if(stringofnumber[1].includes("3")) window.fibge3=true;
+                            if(stringofnumber[1].includes("4")) window.fibge4=true;
+                            if(stringofnumber[1].includes("5")) window.fibge5=true;
+                                        }
+                                       number = Number(stringofnumber[0])
 
                 }
 
@@ -996,23 +1015,57 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                                             
 
                                         }
+                                         else if(key == "U" && event.altKey)uniforms.split1.value=!uniforms.split1.value;
+                                         else if(key == "Y" && event.altKey)uniforms.split2.value=!uniforms.split2.value;
                   else if(key == "G" && event.altKey){
                     if(number!="no number")
                         {
-                            window.fibgeBase=BigInt(Math.ceil(number))
-                                                        if( window.fibgeBase!=2n&&number-Math.floor(number)!=0)window.blendFibge = false
+                            window.fibgeBase=BigInt(Math.ceil((number)))
+                                                        if( window.fibgeBase!=2n&&(number)-Math.floor((number))!=0)window.blendFibge = false
                                                         else window.blendFibge = true
-
-
+                                                  // console.log(window.fibge1)
                         }
                         if(window.fibgeBase<2n)
                             {
                                 window.fibgeBase=2n
                                 window.blendFibge = false
                             }
-                    window.fibgetti = !window.fibgetti;
+                            let changingQuadrants = false;
+                            if(window.fibge1) {
+                                uniforms.fibge1.value=!uniforms.fibge1.value;
+                                window.fibge1=false;
+                                changingQuadrants = true;
+                            console.log("f1")
+                            }
+                            if(window.fibge2)
+                                { uniforms.fibge2.value=!uniforms.fibge2.value;
+                                    window.fibge2=false;
+                                    changingQuadrants = true;
 
-                    if(window.INITIALIZED)       
+                                }
+                            if(window.fibge3) 
+                                {
+                                    uniforms.fibge3.value=!uniforms.fibge3.value;
+                                    window.fibge3=false;
+                                     changingQuadrants = true;
+
+                                }
+                            if(window.fibge4) 
+                                {
+                                    uniforms.fibge4.value=!uniforms.fibge4.value;
+                                    window.fibge4=false;
+                                      changingQuadrants = true;
+
+                                }
+                            if(window.fibge5) 
+                            {
+                                uniforms.fibge5.value=!uniforms.fibge5.value;
+                                window.fibge5=false;
+                                changingQuadrants = true;
+
+                            }
+                           if(!changingQuadrants||!window.INITIALIZED) window.fibgetti = !window.fibgetti;
+                    if(window.INITIALIZED&&!changingQuadrants)       
                         {
                         clearFib(true)
                         }
