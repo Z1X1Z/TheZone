@@ -3229,7 +3229,6 @@ s*=1.-oneOverLeafTruncated;//clvrVariant4
    dstnce = length(s);
   s.x=log(abs(s.x))/log(base);
             
-
    dstnce = length(s);
 
         if(
@@ -4546,15 +4545,13 @@ vec4 tree = vec4( clamp(
 
 
 
-
-
                 if(mannyFace.w!=.5)
                 {
-                     vec4 fibge = texture2D(FIBGE, (vUv)*2.-.5);
-                         fibge += texture2D(FIBGE, (vUv)*3.);
+                     vec4 fibge = texture2D(FIBGE, (1.-vUv)*2.-.5);
+                         fibge += texture2D(FIBGE, vUv*3.);
                       fibge += texture2D(FIBGE, (vUv-2./3.)*3.);
-                      fibge += texture2D(FIBGE, (vUv-vec2(2./3.,0.))*3.);
-                      fibge += texture2D(FIBGE, (vUv-vec2(0.,2./3.))*3.);
+                      fibge += texture2D(FIBGE, (vec2(vUv.x,1.-vUv.y)-2./3.)*3.);
+                      fibge += texture2D(FIBGE, (vec2(1.-vUv.x,vUv.y)-2./3.)*3.);
                   if(fibge.r==fibge.g&&fibge.b==fibge.g) layeredOUT+=fibge;
                   else layeredOUT=fibge;
                   if(fibge.w!=0.&&fibge.r==fibge.g&&fibge.b==fibge.g)layeredOUT*=fibge.r;

@@ -1428,7 +1428,6 @@ fibgetScene= new THREE.Scene();
            }
     else        renderer.render(scene, camera);
      if(!window.rezUpgradeBypass)   renderer.setPixelRatio(rez);
-
     renderer.clear();
     document.getElementById("load message").innerHTML = "Loaded, press to open!";
 
@@ -2315,7 +2314,6 @@ function executeTouchRegime() {
     constellationCoordFind();
     uniforms.STAR.value = null;
     uniforms.EDEN.value = null;
-    uniforms.FIBGE.value = null;
 
     uniforms.pitchHandsFingers.value = null;
     uniforms.firstHandsFingers.value = null;
@@ -4180,19 +4178,6 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
         uniforms.volumeFret4.value = loudestFret[3].volume / loudestFret[0].volume;
 
 
-if(window.fibgetti) {
-           // fibgetScene.background = new THREE.Color(0x808080);
-console.log("fibge")
-        binTriBundle(-1)
-
-    renderer.setRenderTarget(fibgeRenderTarget)
-                     renderer.render(fibgetScene, camera);
-                    uniforms.FIBGE.value = fibgeRenderTarget.texture;
-
-    renderer.setRenderTarget(null)
-
-
-       }
         if (window.starClover) {
             renderer.setRenderTarget(renderTarget)
             //renderer.antialias=false
@@ -4376,7 +4361,20 @@ console.log("fibge")
             }
 
     }
+    uniforms.FIBGE.value = null;
+    
+if(window.fibgetti) {
+           // fibgetScene.background = new THREE.Color(0x808080);
+        binTriBundle(-1)
 
+    renderer.setRenderTarget(fibgeRenderTarget)
+                     renderer.render(fibgetScene, camera);
+                    uniforms.FIBGE.value = fibgeRenderTarget.texture;
+
+    renderer.setRenderTarget(null)
+
+
+       }
 
 
     loopsRun++;
