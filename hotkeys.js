@@ -1025,6 +1025,7 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                                                         else window.blendFibge = true
                                                   // console.log(window.fibge1)
                         }
+                        
                         if(window.fibgeBase<2n)
                             {
                                 window.fibgeBase=2n
@@ -1035,7 +1036,6 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                                 uniforms.fibge1.value=!uniforms.fibge1.value;
                                 window.fibge1=false;
                                 changingQuadrants = true;
-                            console.log("f1")
                             }
                             if(window.fibge2)
                                 { uniforms.fibge2.value=!uniforms.fibge2.value;
@@ -1065,6 +1065,8 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
 
                             }
                            if(!changingQuadrants||!window.INITIALIZED) window.fibgetti = !window.fibgetti;
+                            if(!window.INITIALIZED&&!window.fibge5&&!window.fibge4&&!window.fibge3&&!window.fibge2&&!window.fibge1)    uniforms.fibge4.value=true;
+
                     if(window.INITIALIZED&&!changingQuadrants)       
                         {
                         clearFib(true)
