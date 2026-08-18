@@ -4594,15 +4594,20 @@ vec4 tree = vec4( clamp(
 
 
 
-                if(mannyFace.w!=.5&&vUv.x>.01&&vUv.x<.99&&vUv.y>.01&&vUv.y<.99)
+                if(mannyFace.w!=.5)
                 {
                                          vec4 fibge =vec4(0.);
-
-                    if(fibge5) fibge+= texture2D(FIBGE, (vUv)*1.5-.25);
-                       if(fibge3)    fibge += texture2D(FIBGE, (1.-vUv-2./3.)*3.);
-                      if(fibge1)  fibge += texture2D(FIBGE, (1.-vUv)*3.);
-                       if(fibge4) fibge += texture2D(FIBGE, (vec2(1.-vUv.x,vUv.y))*3.);
-                       if(fibge2) fibge += texture2D(FIBGE, (vec2(1.-vUv.x,vUv.y)-2./3.)*3.);
+                        vec2 locFib5=(vUv)*1.5-.25;
+                        vec2 locFib1=(1.-vUv)*3.;
+                        vec2 locFib2=(vec2(1.-vUv.x,vUv.y)-2./3.)*3.;
+                        vec2 locFib3=(1.-vUv-2./3.)*3.;
+                        vec2 locFib4=(vec2(1.-vUv.x,vUv.y))*3.;
+                        
+                    if(fibge5&&locFib5.x>0.&&locFib5.y>0.&&locFib5.x<1.&&locFib5.y<1.) fibge+= texture2D(FIBGE, locFib5);
+                    if(fibge1&&locFib1.x>0.&&locFib1.y>0.&&locFib1.x<1.&&locFib1.y<1.)  fibge += texture2D(FIBGE, locFib1);
+                    if(fibge2&&locFib2.x>0.&&locFib2.y>0.&&locFib2.x<1.&&locFib2.y<1.) fibge += texture2D(FIBGE, locFib2);
+                    if(fibge3&&locFib3.x>0.&&locFib3.y>0.&&locFib3.x<1.&&locFib3.y<1.)    fibge += texture2D(FIBGE, locFib3);
+                    if(fibge4&&locFib4.x>0.&&locFib4.y>0.&&locFib4.x<1.&&locFib4.y<1.) fibge += texture2D(FIBGE, locFib4);
                   if(fibge.r==fibge.g&&fibge.b==fibge.g) layeredOUT+=fibge;
                   else layeredOUT=fibge;
                   if(fibge.w!=0.&&fibge.r==fibge.g&&fibge.b==fibge.g)layeredOUT*=fibge.r;
