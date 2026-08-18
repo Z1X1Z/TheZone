@@ -8877,14 +8877,13 @@ fin/vec4(confraculator
 
 
 
-
-                if(mannyFace.w!=.5&&vUv.x>.01&&vUv.x<.99&&vUv.y>.01&&vUv.y<.99)
+                if(mannyFace.w!=.5&&vUv.x>.1&&vUv.x<.9&&vUv.y>.1&&vUv.y<.9)
                 {
                                          vec4 fibge =vec4(0.);
 
                     if(fibge5) fibge+= texture2D(FIBGE, (vUv)*1.5-.25);
-                       if(fibge3)    fibge += texture2D(FIBGE, vUv*3.);
-                      if(fibge1)  fibge += texture2D(FIBGE, (vUv-2./3.)*3.);
+                       if(fibge3)    fibge += texture2D(FIBGE, (1.-vUv-2./3.)*3.);
+                      if(fibge1)  fibge += texture2D(FIBGE, (1.-vUv)*3.);
                        if(fibge4) fibge += texture2D(FIBGE, (vec2(1.-vUv.x,vUv.y))*3.);
                        if(fibge2) fibge += texture2D(FIBGE, (vec2(1.-vUv.x,vUv.y)-2./3.)*3.);
                   if(fibge.r==fibge.g&&fibge.b==fibge.g) layeredOUT+=fibge;
