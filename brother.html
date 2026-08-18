@@ -3069,7 +3069,7 @@ bool spokeloverON=zoom/lfc<2./3.;//could be 1.5, could be 2/3, one is a compromi
 
 
 hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
-  if(zoom<.25)  hyperCore+=.5/-log(zoom*coresIn);//right for keeping central outer clover same size
+  if(zoom<.25||(    SEVEYEStartAdj>lengthP&&lfc<81.))  hyperCore+=.5/-log(zoom*coresIn);//right for keeping central outer clover same size
   
 float howToBoost = wingsOfRighteousness;
 
