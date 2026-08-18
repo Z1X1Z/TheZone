@@ -1066,8 +1066,7 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                            if(uniforms.fibge5.value||uniforms.fibge4.value||uniforms.fibge3.value||uniforms.fibge2.value||uniforms.fibge1.value) window.fibgetti = true;
                            else window.fibgetti = false;
                     if(!window.INITIALIZED&&!(uniforms.fibge4.value||uniforms.fibge3.value||uniforms.fibge2.value||uniforms.fibge1.value)) uniforms.fibge4.value=true;
-                            
-                    if(window.INITIALIZED&&!changingQuadrants)       
+                    if(!changingQuadrants)       
                         {
                         clearFib(true)
                         }
