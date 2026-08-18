@@ -917,7 +917,7 @@ var maximumDimension = Math.max(window.innerHeight, window.innerWidth);
 var heightPX = window.innerHeight, widthPX = window.innerWidth;
 var height = heightPX / minimumDimension, width = window.innerWidth / minimumDimension;
 
-let renderTarget, cloverRenderTarget;
+let renderTarget, cloverRenderTarget,fibgeRenderTarget;
 let backBufferFlip = false;
 let FeedbackrenderTarget, FeedbackrenderTargetFlipSide;
 
@@ -1041,6 +1041,7 @@ function setFFTdependantSizes() {
 function setRenderTargetSize(w, h) {
     renderTarget = new THREE.WebGLRenderTarget(w, h);
     cloverRenderTarget = new THREE.WebGLRenderTarget(w, h);
+    fibgeRenderTarget = new THREE.WebGLRenderTarget(w, h);
     FeedbackrenderTarget = new THREE.WebGLRenderTarget(w, h);
     FeedbackrenderTargetFlipSide = new THREE.WebGLRenderTarget(w, h);
 }
@@ -1283,10 +1284,14 @@ fibgetScene= new THREE.Scene();
 
     for (var ko = 0.; ko < numberOfMetaTriangles; ko++)
     {
+                fibgetScene.add(fibgeMesh[ko])//
+
+        /*
         if(!("brother" in window))//temporary
-        scene.add(fibgeMesh[ko])//fibgetScene
+        scene.add(fibgeMesh[ko])//
         else 
        shaderScene.add(fibgeMesh[ko])
+    */
     }
     scene.add(harmonicPzyghtheMesh)
     scene.add(meshTrail)
@@ -1304,6 +1309,7 @@ fibgetScene= new THREE.Scene();
         THREE.UniformsLib.lights,
         {
             STAR: { value: null },
+            FIBGE: { value: null },
             EDEN: { value: null },
             eden: { value: 0 },
             loudestFret1: { value: new THREE.Vector2(0., 0.) },
@@ -2309,6 +2315,7 @@ function executeTouchRegime() {
     constellationCoordFind();
     uniforms.STAR.value = null;
     uniforms.EDEN.value = null;
+    uniforms.FIBGE.value = null;
 
     uniforms.pitchHandsFingers.value = null;
     uniforms.firstHandsFingers.value = null;
@@ -4173,6 +4180,19 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
         uniforms.volumeFret4.value = loudestFret[3].volume / loudestFret[0].volume;
 
 
+if(window.fibgetti) {
+           // fibgetScene.background = new THREE.Color(0x808080);
+console.log("fibge")
+        binTriBundle(-1)
+
+    renderer.setRenderTarget(fibgeRenderTarget)
+                     renderer.render(fibgetScene, camera);
+                    uniforms.FIBGE.value = fibgeRenderTarget.texture;
+
+    renderer.setRenderTarget(null)
+
+
+       }
         if (window.starClover) {
             renderer.setRenderTarget(renderTarget)
             //renderer.antialias=false
@@ -4184,7 +4204,7 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
 
                 var firStaRivers = true;
                 FEEDBACKuniforms.STAR.value = renderTarget.texture;
-
+                FEEDBACKuniforms.FIBGE.value = fibgeRenderTarget.texture;
                 FEEDBACKuniforms.eden.value = uniforms.eden.value;
                 FEEDBACKuniformsFlip.eden.value = uniforms.eden.value;
 
@@ -4219,14 +4239,17 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
 
                         if (firStaRivers == true)
                             firStaRivers = false;
-                        else FEEDBACKuniforms.STAR.value = FeedbackrenderTargetFlipSide.texture;
+                        else {FEEDBACKuniforms.STAR.value = FeedbackrenderTargetFlipSide.texture;
+                                        FEEDBACKuniforms.FIBGE.value = FeedbackrenderTargetFlipSide.texture;
+                        }
+
                         renderer.render(feedbackScene, camera);
 
                     }
                     else {
                         renderer.setRenderTarget(FeedbackrenderTargetFlipSide)
 
-
+                                        FEEDBACKuniforms.FIBGE.value = FeedbackrenderTargetFlipSide.texture;
                         FEEDBACKuniformsFlip.STAR.value = FeedbackrenderTarget.texture;
                         renderer.render(feedbackSceneFlip, camera);
 
@@ -4250,6 +4273,7 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
         }
 
         scene.background = null;
+
         if (starClover) {
 
             uniforms.STAR.value = renderTarget.texture;
@@ -4337,6 +4361,7 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
 
 
 
+
         circle.geometry.dispose();
         radialLine.geometry.dispose();
         if (RockInTheWater == 2 || RockInTheWater == 1) scene.remove(starStreamMesh);
@@ -4353,13 +4378,6 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
     }
 
 
-if(window.fibgetti) {
-            fibgetScene.background = new THREE.Color(0x808080);
-
-        binTriBundle(-1)
-                   // renderer.render(fibgetScene, camera);
-
-       }
 
     loopsRun++;
     //   if(dupered&&zoom<zoomCap32)
