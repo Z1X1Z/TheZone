@@ -1063,11 +1063,11 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                                 window.fibge5=false;
                                 changingQuadrants = true;
                             }
-                           if(!window.fibge5&&!window.fibge4&&!window.fibge3&&!window.fibge2&&!window.fibge1) 
-                            {
-                            if(number=="no number")window.fibgetti = !window.fibgetti;
-                            if(!window.INITIALIZED)uniforms.fibge4.value=true;
-                            }
+                           if(uniforms.fibge5.value||uniforms.fibge4.value||uniforms.fibge3.value||uniforms.fibge2.value||uniforms.fibge1.value) window.fibgetti = true;
+                           else window.fibgetti = false;
+                                                       if(!window.fibge5&&!window.fibge4&&!window.fibge3&&!window.fibge2&&!window.fibge1) 
+if(!window.INITIALIZED)uniforms.fibge4.value=true;
+                            
                     if(window.INITIALIZED&&!changingQuadrants)       
                         {
                         clearFib(true)

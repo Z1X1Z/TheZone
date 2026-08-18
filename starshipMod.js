@@ -1673,7 +1673,7 @@ function onWindowResize() {
     let numberOfColumns = Math.round(widthPX / heightPX * 4.)
     for (var box = 0.; box < menuBoxes.length; box++)menuBoxes[box].style.columnCount = numberOfColumns;
     rezBox.style.columnCount = 1;//this is a bit repetitious
-    scoreBox.style.columnCount = 1;//this is a bit repetitious
+    scoreBox.style.columnCount = 2;//this is a bit repetitious
     let numberInputElements = document.getElementsByClassName("num")
     for (var n = 0; n < numberInputElements.length; n++)
         numberInputElements[n].style.width = widthPX / (numberOfColumns + 1.) + "px";
