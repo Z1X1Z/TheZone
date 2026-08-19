@@ -1428,7 +1428,7 @@ fibgetScene= new THREE.Scene();
            }
     else        renderer.render(scene, camera);
      if(!window.rezUpgradeBypass)   renderer.setPixelRatio(rez);
-     else  renderer.setPixelRatio(wingsOfRighteousness);
+    // else  renderer.setPixelRatio(wingsOfRighteousness);
     renderer.clear();
     document.getElementById("load message").innerHTML = "Loaded, press to open!";
 
@@ -4489,7 +4489,7 @@ function constellationCoordFind() {//needs to be tuned for ngenesis
 }
 
 const frameBoosted = 1024
-const wingsOfRighteousness =4.25087423652421874876;
+const wingsOfRighteousness =4.25087423652421874877;
 //console.log(wingsOfRighteousness)
 var frameRation = (wingsOfRighteousness +
     1024) * (-leafPermanent * grPermanent * (2 ** .5) - 2.) - leafPermanent - 1. + grPermanent - 1 + 2 ** .5 - 1. + (-leafPermanent - 1) * (grPermanent - 1.) * (2 ** .5);//hears low ranges better when times >1
