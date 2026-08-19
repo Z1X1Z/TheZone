@@ -3246,7 +3246,7 @@ float daisifier = 0.;
                if(wheel)m =  ((pWithoutChiralizer/lfc)
                                                         -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
                                            *mandelCloverFactor;
-                                           if(length(coords)>interSection)m/=pow(length(coords),4./3.);
+                                           if(length(coords)>interSection)m/=(length(coords))*log(3.);
 
 
 

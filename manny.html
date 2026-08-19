@@ -5107,7 +5107,7 @@ else
                                            *mandelCloverFactor
                                            //(1.-1./(leaf/truncator)*truncator)//uncertain term
                                            ;
-                        if(length(coords)>interSection)m/=pow(length(coords),4./3.);
+                        if(length(coords)>interSection)m/=(length(coords))*log(3.);
 
                          
        //     float logOfSpoke_Factor = 0.;
