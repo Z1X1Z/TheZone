@@ -886,6 +886,18 @@ Reset Zoom![L]</a><br>
                   key  = 'k';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
                <label for="wink">Wink?![,.k]</label><br>
+
+                 <input type="checkbox" id="Wheel" name="t"  onclick= "
+                     key  = 'm';
+                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                  <label for="Wheel">Wheel![m]</label><br>
+                  <label for="mandelCloverSize">Wheel Degree:[m]</label>
+                  <input type="number" id="mandelCloverSize" name="mandelCloverSize" class="num" onkeyup="
+                                                 number = 'no number'
+;
+                                 uniforms.mandelCloverFactor.value=document.getElementById('mandelCloverSize').value
+                                 "><br>
+                     
                     <input type="checkbox" id="Dynamic Dance" name="t"  onclick= "
                         key  = 'X';
                         callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -1568,7 +1580,9 @@ uniform int inseyedOut;
     uniform bool armStar;
     uniform bool gigaLeap;
     uniform bool eyeSingle;
-    
+
+    uniform bool wheel;
+        uniform float mandelCloverFactor;
 
                                   
                                   const float twoThirds = 2./3.;
@@ -2845,6 +2859,7 @@ float petals = 0.;
 
  bool BURSTING = true;
 vec4 tol(vec2 p, vec2 t){
+    vec2 coordsB = coords;
     float hyperCore=0.;
 
 float lfc = length(constellationCoord);
@@ -2895,7 +2910,7 @@ p*=interSection*4.;
                         
                         
           
-  if(p.x>0.)
+  if(p.x>0.&&!wheel)
     {
         p*=-1.;
     unSwitch=!unSwitch;
@@ -2994,7 +3009,7 @@ float c = length(s);
    //pow(sqrt(1./zoomB),zoomB)+2./lfc-1.;
   // hyperCore-=pow(sqrt(zoomB),zoomB);
    s/=SEVEYEPush;
-
+coordsB/=SEVEYEPush;
     s=1.5/(2.5-vec2(-s.x,abs(s.y)+budge//plus one third is optional
     ));
 }
@@ -3227,6 +3242,14 @@ float daisifier = 0.;
                       // float border = (borderGap*borderGap/2.-borderGap*3.+1.5)/pow(2.,borderGap);
                            
 
+
+               if(wheel)m =  ((pWithoutChiralizer/lfc)
+                                                        -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
+                                           *mandelCloverFactor;
+                                           if(length(coords)>interSection)m/=pow(length(coords),4./3.);
+
+
+
                                            vec2 sBuffer = s;
 float petalNumber=6.;
  for (float counter=0.;counter<40.;counter++)if(dstnce<delimiter){
@@ -3311,7 +3334,8 @@ s*=1.-oneOverLeafTruncated;//clvrVariant4
 
    dstnce = length(s);
   s.x=log(abs(s.x))/log(base);
-            
+  vec2 t=vec2(0.);
+             s+=t-m;
    dstnce = length(s);
 
         if(
