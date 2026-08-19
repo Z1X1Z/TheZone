@@ -5327,7 +5327,7 @@ bigString+=","
 
 let ABC = 1;
 fibArray = Array(3)
-fibArray[0]=0n
+fibArray[0]=1n
 fibArray[1]=1n
 fibArray[2]=0n
 let everyOther = 1n;
