@@ -1823,7 +1823,7 @@ let jesusJetsBoost = 0;
             if (fromCenter > 81.&&fromCenter<2.**8.) jesusJetsBoost+=4;
 
     var metaDepth = (!dupered) ? zoomCap32 : zoomCap32 ** 2;//due to pixelization limits
-    if(fromCenter>2.**8.)metaDepth=metaDepth*2**(1./fromCenter);
+    if(fromCenter>2.**8.)metaDepth=metaDepth*2**(3.+1./fromCenter);
     else if (seventhOUTside && (fromCenter - zoom) * (1. - zoom) > uniforms.SEVEYEStart.value) {
         metaDepth = metaDepth * 2 ** (uniforms.SEVEYEpow.value / (coordX ** 2 + coordY ** 2) ** .5 + 4 - uniforms.squeezeN.value + 1-jesusJetsBoost)
 
