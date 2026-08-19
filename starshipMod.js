@@ -796,7 +796,7 @@ function move() {
     const d_yS = spunD[1] * interpolation;
 
  if(fromCenter>2.**8.)
-                wrapMovementBoost=2.5
+                wrapMovementBoost=1.5
                 
         else 
     if (((fromCenter - zoom) * (1. - zoom) - zoom > uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0)) {
@@ -2291,7 +2291,7 @@ function executeTouchRegime() {
         if (uniforms.carousel.value != 0. && uniforms["time"].value > 0)
             spunTouch = spin(touchMovement, -uniforms.carousel.value * (uniforms["time"].value * uniforms["rate"].value + Math.PI) % (Math.PI * 2.));
           if(fromCenter>2.**8.)
-                wrapMovementBoost=2.5
+                wrapMovementBoost=1.5
                 
         else if (((fromCenter - zoom) * (1. - zoom) > uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0.) && spunTouch[0] != 0 && spunTouch[1] != 0) {
           
