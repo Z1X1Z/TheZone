@@ -1036,11 +1036,14 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                                 uniforms.fibge1.value=!uniforms.fibge1.value;
                                 window.fibge1=false;
                                 changingQuadrants = true;
+                                if(!window.INITIALIZED) document.getElementById("spinner1").checked=true;
                             }
                             if(window.fibge2)
                                 { uniforms.fibge2.value=!uniforms.fibge2.value;
                                     window.fibge2=false;
                                     changingQuadrants = true;
+                                    if(!window.INITIALIZED) document.getElementById("spinner2").checked=true;
+
 
                                 }
                             if(window.fibge3) 
@@ -1048,6 +1051,8 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                                     uniforms.fibge3.value=!uniforms.fibge3.value;
                                     window.fibge3=false;
                                      changingQuadrants = true;
+                                     if(!window.INITIALIZED) document.getElementById("spinner3").checked=true;
+
 
                                 }
                             if(window.fibge4) 
@@ -1055,6 +1060,8 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                                     uniforms.fibge4.value=!uniforms.fibge4.value;
                                     window.fibge4=false;
                                       changingQuadrants = true;
+                                      if(!window.INITIALIZED) document.getElementById("spinner4").checked=true;
+
 
                                 }
                             if(window.fibge5) 
@@ -1062,6 +1069,7 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                                 uniforms.fibge5.value=!uniforms.fibge5.value;
                                 window.fibge5=false;
                                 changingQuadrants = true;
+                                if(!window.INITIALIZED) document.getElementById("spinner5").checked=true;
                             }
                            if(uniforms.fibge5.value||uniforms.fibge4.value||uniforms.fibge3.value||uniforms.fibge2.value||uniforms.fibge1.value) window.fibgetti = true;
                            else window.fibgetti = false;
