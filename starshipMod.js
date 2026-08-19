@@ -795,6 +795,10 @@ function move() {
     const d_xS = spunD[0] * interpolation;
     const d_yS = spunD[1] * interpolation;
 
+ if(fromCenter>2.**8.)
+                wrapMovementBoost=2.5
+                
+        else 
     if (((fromCenter - zoom) * (1. - zoom) - zoom > uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0)) {
         if (fromCenter < 81.)
             wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter;
@@ -1729,13 +1733,13 @@ function infinicore() {
 
     if (zoom > 1. / 2 ** 2 && cloverSuperCores > 0) {
         zoom /= 2. ** singleHyperCoreDepth;
-        if (zoom < 1.) {
+        if (zoom < 1.&&!(fromCenter>2.**8.)) {
             coordY /= 2. ** singleHyperCoreDepth; coordX /= 2. ** singleHyperCoreDepth;
             fromCenter /= 2. ** singleHyperCoreDepth;
             preFromCenter /= 2. ** singleHyperCoreDepth;
         }
         else {
-            while (zoom > 1. && isFinite(zoom)) zoom /= 2.;
+            while (zoom > 1. && isFinite(zoom)&&!(fromCenter>2.**8.)) zoom /= 2.;
          
 
             while (fromCenter < 2. / 3.&&isFinite(fromCenter)&&fromCenter>0) {
@@ -1816,11 +1820,11 @@ function zoomRoutine() {
     if(!window.superseal)sealBoost=4.;
 */
 let jesusJetsBoost = 0;
-            if (fromCenter > 81.) jesusJetsBoost+=4;
+            if (fromCenter > 81.&&fromCenter<2.**8.) jesusJetsBoost+=4;
 
     var metaDepth = (!dupered) ? zoomCap32 : zoomCap32 ** 2;//due to pixelization limits
-
-    if (seventhOUTside && (fromCenter - zoom) * (1. - zoom) > uniforms.SEVEYEStart.value) {
+    if(fromCenter>2.**8.)metaDepth=metaDepth*2**(1./fromCenter);
+    else if (seventhOUTside && (fromCenter - zoom) * (1. - zoom) > uniforms.SEVEYEStart.value) {
         metaDepth = metaDepth * 2 ** (uniforms.SEVEYEpow.value / (coordX ** 2 + coordY ** 2) ** .5 + 4 - uniforms.squeezeN.value + 1-jesusJetsBoost)
 
     }
@@ -1832,12 +1836,12 @@ let jesusJetsBoost = 0;
     let zoomCone = metaDepth * fromCenter;
     if (uniforms["colorCombo"].value == 16) zoomCone /= 1.33333333 / 2.;
   ZR = setZoomRate();
-    if (zoom >= 1.)//could work as one (also below) but my phone was partially crashing on continuum clover zoomout
+    if (zoom >= 1.&&(fromCenter<2.**8.||zoom>=fromCenter))//could work as one (also below) but my phone was partially crashing on continuum clover zoomout
         zoomOutEngage = false;
     if (!isFinite(ZR)) ZR = 1;
     if (!zoomAtl41 && !zoomOutEngage && zoomRate > 0.) {
         if ((zoom > zoomCone && ampThresh > zoomOutRatchetThreshold && (on && !window.touchMode)) || xTouch + yTouch != 0) zoom *= ZR ** ((1. + INcreaseBoost) * zoomBoost);
-        else if (uniforms.MetaCored.value || zoom < 1.) {
+        else if (uniforms.MetaCored.value || zoom < 1.||(fromCenter>2.**8.&&zoom<fromCenter)) {
             zoom /= ZR;
             triggerRailSet = true
             if (center) { coordX *= ZR * 2. / 3.;; coordY *= ZR * 2. / 3.; }
@@ -2286,8 +2290,13 @@ function executeTouchRegime() {
         var spunTouch = touchMovement;
         if (uniforms.carousel.value != 0. && uniforms["time"].value > 0)
             spunTouch = spin(touchMovement, -uniforms.carousel.value * (uniforms["time"].value * uniforms["rate"].value + Math.PI) % (Math.PI * 2.));
-        if (((fromCenter - zoom) * (1. - zoom) > uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0.) && spunTouch[0] != 0 && spunTouch[1] != 0) {
-            if (fromCenter < 81.) {
+          if(fromCenter>2.**8.)
+                wrapMovementBoost=2.5
+                
+        else if (((fromCenter - zoom) * (1. - zoom) > uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0.) && spunTouch[0] != 0 && spunTouch[1] != 0) {
+          
+            
+                if (fromCenter < 81.) {
                 //  console.log(true)
                 wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter;
             }

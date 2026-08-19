@@ -2845,6 +2845,37 @@ float petals = 0.;
 
  bool BURSTING = true;
 vec4 tol(vec2 p, vec2 t){
+    float hyperCore=0.;
+
+float lfc = length(constellationCoord);
+
+float lengthP = length(p);
+
+  float interSection = pow(2.,8.);
+
+float scale = 1.;
+float coresIn = 0.;
+const float crs = 64.;//this is the mandelclover and original inheritance colormode core range
+ float centerslide = 0.;
+
+ float zoomB = zoom;
+if(lengthP>interSection)
+{
+    hyperCore-=log2;
+lengthP*=interSection*4.;
+p*=interSection*4.;
+ for(int i=0;i<int(crs);//crs+3=63
+                  i++)if(lengthP>1./3.
+                  
+                         )
+                        {p/=4.;lengthP/=4.;scale/=4.;
+                            zoomB/=4.;
+                            lfc/=4.;
+                           //hyperCore+=log2;
+                        }
+                    }
+                
+
 
                float distributorFACTOR=PI/gr;
                          float distributorFACTORlove= distributorFACTOR/leaf;//*sqrt(2)
@@ -2888,13 +2919,12 @@ vec4 tol(vec2 p, vec2 t){
                          float bubble =0.;
 
                          vec3 heartColors = vec3(0.);
-float lfc = length(constellationCoord);
 
    
 float precores = .25*LogHalfReciprocal;
-float cored = log(zoom)/-log2+precores;
+float cored = log(zoomB)/-log2+precores;
 float loops=0.;
-float lengthP = length(p);
+ lengthP = length(p);
 
 
 
@@ -2916,9 +2946,9 @@ int flopped=oppositionalCoreFlop;
 
        bool seventhEYEandJubileye = true;
 bool pollen = true;
- float lfcOverZoom = lfc/zoom;
+ float lfcOverzoomB = lfc/zoomB;
 
-if(lfc>zoom)
+if(lfc>zoomB)
 {
     if (lengthP< SEVEYEStartAdj)
     {
@@ -2951,26 +2981,24 @@ else
 
 
 vec2 s=p;
-float hyperCore=0.;
+float c = length(s);
+
+
 
 
         if(lfcAdj>(SEVEYEStartAdj-sevMargin)/log(3.)&&lengthP>SEVEYEStartAdj)
 {
-   //if(!(zoom/lfc<log(3.)*2.-2.))
-   if(lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoom),zoom*zoom)+zoom*zoom/(lfc*lfc)+(7./3.)/lfc+.125+zoom;
-   //pow(sqrt(1./zoom),zoom)+2./lfc-1.;
-  // hyperCore-=pow(sqrt(zoom),zoom);
+   //if(!(zoomB/lfc<log(3.)*2.-2.))
+   if(lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(7./3.)/lfc+.125+zoomB;
+   //pow(sqrt(1./zoomB),zoomB)+2./lfc-1.;
+  // hyperCore-=pow(sqrt(zoomB),zoomB);
    s/=SEVEYEPush;
 
     s=1.5/(2.5-vec2(-s.x,abs(s.y)+budge//plus one third is optional
     ));
 }
             
-float c = length(s);
-float scale = 1.;
-float coresIn = 0.;
-const float crs = 64.;//this is the mandelclover and original inheritance colormode core range
- float centerslide = 0.;
+
  for(int i=0;i<int(crs);//crs+3=63
                   i++)if(c<twoThirds
                          &&loops+centerslide<cored
@@ -2979,9 +3007,13 @@ const float crs = 64.;//this is the mandelclover and original inheritance colorm
                       loops++;coresIn++;
                         }
  else break;
+ 
+
+ 
  float lfcCenterCored=lfc*scale;
  
-bool seventhEYEthree = lengthP<1./3.&&zoom<.25 &&lfcOverZoom>twoThirds;
+bool seventhEYEthree = (lengthP<1./3.)&&zoomB<.25;//&&lfcOverzoomB>twoThirds;
+
        if(seventhEYEthree
        
  )
@@ -3022,10 +3054,10 @@ hyperCore+=
    //(-cored*gr*leaf)//this is the core slider this dilates central core across metacore//here could use a hotkey//does it do anything useful?
    twoThirds+log(lfc)*logStabilizationConstant;
     hyperCore+=1./3.;//to compensate for fifth core
-if(lfcOverZoom>twoThirds)
+if(lfcOverzoomB>twoThirds)
 {
     float dif = 1.;
-float  equilibriator=lfc/(lfc-zoom/dif)*dif;
+float  equilibriator=lfc/(lfc-zoomB/dif)*dif;
    hyperCore*=equilibriator;
 }
    
@@ -3044,18 +3076,18 @@ if(pollen)
 float truncNonLeaf=1.;
 
 float truncator=1.;
-if(zoom!=0.&&lfc!=0.)//may or may not include 
+if(zoomB!=0.&&lfc!=0.)//may or may not include 
 {
     truncNonLeaf=log((lfcCenterCored));
-truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoom*zoom))
+truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 
 }
 
-  if(seventhEYEthree&&lengthP<twoThirds&&zoom<.25
+  if(seventhEYEthree&&lengthP<twoThirds&&zoomB<.25
    )
    {
       float squinch =0.;
-     squinch = lpcc/4.-sqrt(lfc*zoom);
+     squinch = lpcc/4.-sqrt(lfc*zoomB);
 
  if(squinch>.0) 
    hyperCore-=log(abs(squinch));
@@ -3064,13 +3096,13 @@ truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoom*zoom))
   hyperCore+=log2/2.;
    }
 hyperCore-=.5;//for gigaLeap
-bool spokeloverON=zoom/lfc<2./3.;//could be 1.5, could be 2/3, one is a compromise
+bool spokeloverON=zoomB/lfc<2./3.;//could be 1.5, could be 2/3, one is a compromise
    //  if(spokeloverON)hyperCore-=log2;
   //hyperCore+=.5;
 
 
 hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
-  if(zoom<.25||(    SEVEYEStartAdj>lfc&&lfc<81.))  hyperCore+=.5/-log(zoom*coresIn);//right for keeping central outer clover same size
+  if(zoomB<.25||(    SEVEYEStartAdj>lfc&&lfc<81.))  hyperCore+=.5/-log(zoomB*coresIn);//right for keeping central outer clover same size
   
 float howToBoost = wingsOfRighteousness;
 
@@ -3110,12 +3142,12 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
                
                    float variant4Correction=1.;
                                             variant4Correction=(1.-oneOverLeafTruncated);
-                                                           float correction = zoom/(zoom-lfc*variant4Correction);
+                                                           float correction = zoomB/(zoomB-lfc*variant4Correction);
 
 
    
 
- if(lengthP>SEVEYEStartAdj&&lfc>zoom)
+ if(lengthP>SEVEYEStartAdj&&lfc>zoomB)
  {
         if (SEVEYEStartAdj>lengthP-sevMargin)
         {hyperCore+=lfc*SEVEYEpow/1.5;
@@ -3249,7 +3281,7 @@ float outerCloudShift = (1.+border/((2.-toEDGE)));
         if(
 counter==0.&&
 pollen
-      &&lfc>zoom
+      &&lfc>zoomB
 ){
     if  (budge==1./3.)  s*=lfc/2.+1./4.;
     else
@@ -3341,7 +3373,7 @@ else if(!isinf(spokeloverCoreShiftDown))
  }
 
 dstnce=length(s);
-   if(lfcOverZoom>1.5*log(3.)){//engage continualization
+   if(lfcOverzoomB>1.5*log(3.)){//engage continualization
        float continuumCore=(continuumCounter+hyperCoreBoosted)*correction;
 
        float cc2 =continuumCore;
