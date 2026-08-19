@@ -2957,7 +2957,7 @@ float hyperCore=0.;
         if(lfcAdj>(SEVEYEStartAdj-sevMargin)/log(3.)&&lengthP>SEVEYEStartAdj)
 {
    //if(!(zoom/lfc<log(3.)*2.-2.))
-   if(lengthP>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoom),zoom*zoom)+zoom*zoom/(lfc*lfc)+2.5/lfc+zoom;
+   if(lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoom),zoom*zoom)+zoom*zoom/(lfc*lfc)+2.5/lfc+zoom;
    //pow(sqrt(1./zoom),zoom)+2./lfc-1.;
   // hyperCore-=pow(sqrt(zoom),zoom);
    s/=SEVEYEPush;
@@ -3070,7 +3070,7 @@ bool spokeloverON=zoom/lfc<2./3.;//could be 1.5, could be 2/3, one is a compromi
 
 
 hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
-  if(zoom<.25||(    SEVEYEStartAdj>lengthP&&lfc<81.))  hyperCore+=.5/-log(zoom*coresIn);//right for keeping central outer clover same size
+  if(zoom<.25||(    SEVEYEStartAdj>lfc&&lfc<81.))  hyperCore+=.5/-log(zoom*coresIn);//right for keeping central outer clover same size
   
 float howToBoost = wingsOfRighteousness;
 

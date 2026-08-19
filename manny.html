@@ -4632,7 +4632,7 @@ float hyperCore= 0.;
  )
 {
     
-   if(lengthP>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoom),zoom*zoom)+zoom*zoom/(lfc*lfc)+2.5/lfc+zoom;
+   if(lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoom),zoom*zoom)+zoom*zoom/(lfc*lfc)+2.5/lfc+zoom;
 
     s/=SEVEYEPush;
     //s*=1.125;
@@ -4948,7 +4948,7 @@ if(outerCoresOff)hyperCore=0.;
 
 if(Spoker)
 hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
-   if(zoom<.25&&(seventhEYE!=1.&&seventhEYE!=2.||lengthP>2./3.)||(seventhOUTside&&SEVEYEStartAdj>lengthP&&lfc<81.))  hyperCore+=.5/-log(zoom*coresIn);//right for keeping central outer clover same size
+   if(zoom<.25&&(seventhEYE!=1.&&seventhEYE!=2.||lengthP>2./3.)||(seventhOUTside&&SEVEYEStartAdj>lfc&&lfc<81.))  hyperCore+=.5/-log(zoom*coresIn);//right for keeping central outer clover same size
 float howToBoost = wingsOfRighteousness;
 
  //if(SEVEYEStartAdj>lengthP&&seventhOUTside)howToBoost =4.25;
