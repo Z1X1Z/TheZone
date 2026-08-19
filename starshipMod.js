@@ -1739,7 +1739,7 @@ function infinicore() {
             preFromCenter /= 2. ** singleHyperCoreDepth;
         }
         else {
-            while (zoom > 1. && isFinite(zoom)&&!(fromCenter>2.**8.)) zoom /= 2.;
+            while (zoom > 1. && isFinite(zoom)) zoom /= 2.;
          
 
             while (fromCenter < 2. / 3.&&isFinite(fromCenter)&&fromCenter>0) {
