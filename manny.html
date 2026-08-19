@@ -501,11 +501,11 @@ radialWarp=b;
                              <input type="checkbox" id="StarShader" name="t"  onclick= "
                     key  = 'S';
                     callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
-                 <label for="StarShader">Star in Clovers![,S]</label><br>//names are backwards
+                 <label for="StarShader">Star in Clovers![,S]</label><br><!--names are backwards-->
                 <input type="checkbox" id="StarClover" name="t"  onclick= "
                     key  = 'O';
                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
-                 <label for="StarClover">Star in Shader?![O]</label><br>//names are backwards
+                 <label for="StarClover">Star in Shader?![O]</label><br><!--names are backwards-->
                  
 
                      
@@ -4632,7 +4632,7 @@ float hyperCore= 0.;
  )
 {
     
-   if(lengthP>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoom),zoom*zoom)+zoom*zoom/(lfc*lfc)+1./lfc+zoom;
+   if(lengthP>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoom),zoom*zoom)+zoom*zoom/(lfc*lfc)+(7./3.)/lfc+zoom;
 
     s/=SEVEYEPush;
     //s*=1.125;
