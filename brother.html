@@ -2957,7 +2957,7 @@ float hyperCore=0.;
         if(lfcAdj>(SEVEYEStartAdj-sevMargin)/log(3.)&&lengthP>SEVEYEStartAdj)
 {
    //if(!(zoom/lfc<log(3.)*2.-2.))
-   if(lengthP>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoom),zoom*zoom)+zoom*zoom/(lfc*lfc)+(7./3.)/lfc+zoom;
+   if(lengthP>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoom),zoom*zoom)+zoom*zoom/(lfc*lfc)+2.5/lfc+zoom;
    //pow(sqrt(1./zoom),zoom)+2./lfc-1.;
   // hyperCore-=pow(sqrt(zoom),zoom);
    s/=SEVEYEPush;
