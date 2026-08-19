@@ -4382,11 +4382,13 @@ float scale = 1.;
 float coresIn = 0.;
 const float crs = 64.;//this is the mandelclover and original inheritance colormode core range
  float centerslide = 0.;
+bool pollen = polyNomialStretch;
 
  float zoomB = zoom;
 if(lengthP>interSection)
 {
-    hyperCore-=log2;
+    pollen=false;
+    //hyperCore-=log2;
 lengthP*=interSection*4.;
 p*=interSection*4.;
  for(int i=0;i<int(crs);//crs+3=63
@@ -4601,7 +4603,6 @@ int flopped=oppositionalCoreFlop;
 
 //goes with swapSettingsForJubileyes() in hotkey for jubileyes
        bool seventhEYEandJubileye = (seventhEYE==3.&&jubileyes!=0.);
-bool pollen = polyNomialStretch;
  float lfcOverzoomB = lfc/zoomB;
 
 if(seventhEYEandJubileye&&lfc>zoomB&&morph==0.)
