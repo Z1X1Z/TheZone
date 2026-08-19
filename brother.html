@@ -2878,7 +2878,7 @@ bool pollen = true;
 if(lengthP>interSection)
 {
     pollen=false;
-    hyperCore-=log2/2.;
+  //  hyperCore-=log2/2.;
 lengthP*=interSection*2.;
 p*=interSection*2.;
  for(int i=0;i<int(crs);//crs+3=63
@@ -3122,7 +3122,7 @@ hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if d
   
 float howToBoost = wingsOfRighteousness;
 
- //if(SEVEYEStartAdj>lengthP)howToBoost =4.25;
+ if(SEVEYEStartAdj>lengthP)howToBoost =4.25;
             hyperCore+=((((gr)+-(leaf)+(sqrt2)))-howToBoost)/(gr-leaf+1.);
 float term=0.;
 

@@ -4985,7 +4985,7 @@ hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if d
    if(zoomB<.25&&(seventhEYE!=1.&&seventhEYE!=2.||lengthP>2./3.)||(seventhOUTside&&SEVEYEStartAdj>lfc&&lfc<81.))  hyperCore+=.5/-log(zoomB*coresIn);//right for keeping central outer clover same size
 float howToBoost = wingsOfRighteousness;
 
- //if(SEVEYEStartAdj>lengthP&&seventhOUTside)howToBoost =4.25;
+if(SEVEYEStartAdj>lengthP&&seventhOUTside)howToBoost =4.25;
             hyperCore+=((((gr)+-(leaf)+(sqrt2)))-howToBoost)/(gr-leaf+1.);
 
 
