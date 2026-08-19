@@ -1428,7 +1428,7 @@ fibgetScene= new THREE.Scene();
            }
     else        renderer.render(scene, camera);
      if(!window.rezUpgradeBypass)   renderer.setPixelRatio(rez);
-     else  renderer.setPixelRatio(uniforms.baseN.value);
+     else  renderer.setPixelRatio(uniforms.baseN.value  );
     renderer.clear();
     document.getElementById("load message").innerHTML = "Loaded, press to open!";
 
@@ -5225,8 +5225,6 @@ var delta = interpolation/60;//Math.abs(note-lastNote)/12*3;
     //console.log(totalRotation)
     if (totalRotation>lastANGLEmodulo)
     {
-        deltaSpun=totalRotation;
-        lastANGLEmodulo+=Math.PI/3;
    
 fibonacciEngine()
 stringArray[ABC]=binaryConverter(fibArray[ABC])
@@ -5235,6 +5233,9 @@ theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
 //console.log(theWORDtoGOD.length)
 //console.log(Number(fibArray[ABC])+" "+Number(fibArray[(ABC+2)%3]))
  clearFib(false);
+         deltaSpun=totalRotation;
+         lastANGLEmodulo+=Math.PI/3;
+
 //console.log(stringArray[ABC])
  //   console.log("here")
     
