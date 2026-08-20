@@ -4567,38 +4567,6 @@ p*=interSection*2.;
 
                          vec3 heartColors = vec3(0.);
 
-   
-float precores = .25*LogHalfReciprocal;
-//if(clvrVariant4!=0.&&cloverSlide) precores=precores-.25*LogHalfReciprocal;
-//else if(clvrVariant4!=0.)precores=0.;
-if(morph!=0.)
-{
-    if(spirated!=0.)precores-=3.*LogHalfReciprocal;
-    else hyperCore+=1.;
-}
-
-if(refactorCores!=1.)precores=-.0;
-
-float cored =0.;
-if(MetaCored)cored= log(zoomB)/-log2+precores;
-else cored = centralCores;
-cored*=squeezeN;
-float loops=0.;
-if(cloverSlide)loops=-1.;
-
-if(refactorCores>1.)
-    {
-        if(cloverSlide)p/=2.;
-        p/=2.;
-    }
-else if (refactorCores==0.) p/=3.;
-
-   // for(float floop = 0.; floop<2.;floop++)
-
-           lengthP = length(p);
-
-   
-
 
 
 
@@ -4744,6 +4712,53 @@ if(morph!=0.)
    flopped = int(mod(float(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10),3.));
 }
 */
+
+
+
+
+   
+float precores = .25*LogHalfReciprocal;
+//if(clvrVariant4!=0.&&cloverSlide) precores=precores-.25*LogHalfReciprocal;
+//else if(clvrVariant4!=0.)precores=0.;
+if(morph!=0.)
+{
+    if(spirated!=0.)
+    {
+        precores-=3.*LogHalfReciprocal;
+
+if(length(coords)<interSection&&lengthP>SEVEYEStartAdj)
+{
+    if(spirated!=0.)
+    precores-=2.*LogHalfReciprocal;
+}
+    }
+    else hyperCore+=1.;
+
+}
+
+if(refactorCores!=1.)precores=-.0;
+
+float cored =0.;
+if(MetaCored)cored= log(zoomB)/-log2+precores;
+else cored = centralCores;
+cored*=squeezeN;
+float loops=0.;
+if(cloverSlide)loops=-1.;
+
+if(refactorCores>1.)
+    {
+        if(cloverSlide)p/=2.;
+        p/=2.;
+    }
+else if (refactorCores==0.) p/=3.;
+
+   // for(float floop = 0.; floop<2.;floop++)
+
+           lengthP = length(p);
+
+   
+
+
 
 
 
@@ -5170,12 +5185,6 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
     {
         
       hyperCore+=SEVEYEpow/sqrt(lfc-1.);
-if(morph!=0.&&length(coords)<interSection)
-{
-    if(spirated!=0.)
-    precores-=2.*LogHalfReciprocal;
-}
-
   if(lfc>81.)hyperCore-=log2+1./3.;
   //hyperCore-=1./3.;
 
