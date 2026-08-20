@@ -4685,8 +4685,17 @@ if(seventhEYEandJubileye&&lfc>zoomB)
 {
     swapped=int(mod(float(swap) ,4.));
    flopped = int(mod(float(oppositionalCoreFlop+3*10),3.));
-}
+   if(morph!=0.&&!wheel)  
+   { flopped = int(mod(float(flopped+2+3*10),3.));
+        if(spirated==0.)swapped=int(mod(float(swap+1) ,4.));
+        else swapped=int(mod(float(swap) ,4.));
+   }
 
+
+}
+{
+    if(morph!=0.);
+} 
 }
 else if(seventhOUTside)
 {
