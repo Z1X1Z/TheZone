@@ -4639,6 +4639,7 @@ if(seventhEYEandJubileye&&lfc>zoomB)
                     
     swapped=int(mod(float(swap-swapJUBILEE+swapDEFAULT) ,4.));
        flopped = int(mod(float(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3+1),3.));
+       
                 }
                 else
                 {
@@ -4653,9 +4654,16 @@ if(seventhEYEandJubileye&&lfc>zoomB)
 
     else
     {
+           
         swapped=int(mod(float(swap-swapJUBILEE+swapDEFAULT+2) ,4.));
 
    flopped = int(mod(float(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3),3.));
+    if(wheel)  
+          {
+          //  swapped=int(mod(float(swapped+4*10+3) ,4.));
+                       flopped = int(mod(float(flopped+1),3.));
+
+          }
     }
         }
 
