@@ -4561,7 +4561,7 @@ p*=interSection*2.;
 float precores = .25*LogHalfReciprocal;
 //if(clvrVariant4!=0.&&cloverSlide) precores=precores-.25*LogHalfReciprocal;
 //else if(clvrVariant4!=0.)precores=0.;
-if(morph!=0.)precores-=3.*LogHalfReciprocal;
+if(morph!=0.)precores-=5.*LogHalfReciprocal;
 
 if(refactorCores!=1.)precores=-.0;
 
@@ -4671,7 +4671,7 @@ vec2 s=p;
  )
 {
     
-   if(lfc>SEVEYEStartAdj&&morph==0.)hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(7./3.)/lfc+.125+zoomB;
+   if(lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(7./3.)/lfc+.125+zoomB;
 coordsB/=SEVEYEPush;
     s/=SEVEYEPush;
     //s*=1.125;
