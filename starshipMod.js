@@ -1820,6 +1820,11 @@ function zoomRoutine() {
     if(!window.superseal)sealBoost=4.;
 */
 let jesusJetsBoost = 0;
+if(zoom>2**64)
+    {zoom=1.;
+        coordX=0.;
+        coordY=0.
+    }
             if (fromCenter > 81.&&fromCenter<2.**8.) jesusJetsBoost+=4;
 
     var metaDepth = (!dupered) ? zoomCap32 : zoomCap32 ** 2;//due to pixelization limits
