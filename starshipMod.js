@@ -1740,7 +1740,7 @@ function infinicore() {
         }
         else {
             while (zoom > 1. && isFinite(zoom)) zoom /= 2.;
-         
+         zoom /= 2.;
 
             while (fromCenter < 2. / 3.&&isFinite(fromCenter)&&fromCenter>0) {
                 coordY *= 2.
@@ -1831,7 +1831,7 @@ if(zoom>2**64)
     if(fromCenter>2.**8.)metaDepth=metaDepth*2**(3.+1./fromCenter);
     else if (seventhOUTside && (fromCenter - zoom) * (1. - zoom) > uniforms.SEVEYEStart.value) {
         metaDepth = metaDepth * 2 ** (uniforms.SEVEYEpow.value / (coordX ** 2 + coordY ** 2) ** .5 + 3 - uniforms.squeezeN.value + 1-jesusJetsBoost)
-
+ 
     }
     else if (seventhOUTside && fromCenter * (1. - zoom) - zoom ** .5 > (uniforms.SEVEYEStart.value - 1. / 2 ** uniforms.SEVEYEpow.value * uniforms.SEVEYEpow.value / 2.))
         metaDepth = metaDepth * 2 ** (uniforms.SEVEYEpow.value + 1.)
@@ -1840,9 +1840,10 @@ if(zoom>2**64)
 
     let zoomCone = metaDepth * fromCenter;
     if (uniforms["colorCombo"].value == 16) zoomCone /= 1.33333333 / 2.;
-  ZR = setZoomRate();
-    if (zoom >= 1.&&(fromCenter<2.**8.||zoom>=fromCenter))//could work as one (also below) but my phone was partially crashing on continuum clover zoomout
+    if (zoom >= 1.&&(fromCenter<2.**8.||zoom>=fromCenter*ZR))//could work as one (also below) but my phone was partially crashing on continuum clover zoomout
         zoomOutEngage = false;
+    ZR = setZoomRate();
+
     if (!isFinite(ZR)) ZR = 1;
     if (!zoomAtl41 && !zoomOutEngage && zoomRate > 0.) {
         if ((zoom > zoomCone && ampThresh > zoomOutRatchetThreshold && (on && !window.touchMode)) || xTouch + yTouch != 0) zoom *= ZR ** ((1. + INcreaseBoost) * zoomBoost);
