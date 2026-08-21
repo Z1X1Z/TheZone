@@ -3046,7 +3046,7 @@ float c = length(s);
         if(lfcAdj>(SEVEYEStartAdj-sevMargin)/l3&&lengthP>SEVEYEStartAdj)
 {
    //if(!(zoomB/lfc<l3*2.-2.))
-   if(lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(7./3.)/lfc+.125+zoomB;
+   if(lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(2.)/lfc+.25+zoomB;
    //pow(sqrt(1./zoomB),zoomB)+2./lfc-1.;
   // hyperCore-=pow(sqrt(zoomB),zoomB);
        if(lfcC<interSection)
@@ -3072,7 +3072,7 @@ coordsB/=SEVEYEPush;
  
  float lfcCenterCored=lfc*scale;
  
-bool seventhEYEthree = (lengthP<1./3.)&&zoomB<.25;//&&lfcOverzoomB>twoThirds;
+bool seventhEYEthree = (lengthP<1./3.)&&zoomB<.2;//&&lfcOverzoomB>twoThirds;
 
        if(seventhEYEthree
        
@@ -3143,7 +3143,7 @@ truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 
 }
 
-  if(seventhEYEthree&&lengthP<twoThirds&&zoomB<.25
+  if(seventhEYEthree&&lengthP<twoThirds&&zoomB<.2
    )
    {
       float squinch =0.;
@@ -3162,7 +3162,7 @@ bool spokeloverON=zoomB/lfc<2./3.;//could be 1.5, could be 2/3, one is a comprom
 
 
 hyperCore*=4./3./(1./l3+(1.-1./l3)/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
-  if(zoomB<.25||(    SEVEYEStartAdj>lfc&&lfc<81.))  hyperCore+=.5/-log(zoomB*coresIn);//right for keeping central outer clover same size
+  if(zoomB<.2||(    SEVEYEStartAdj>lfc&&lfc<81.))  hyperCore+=.5/-log(zoomB*coresIn);//right for keeping central outer clover same size
   
 float howToBoost = wingsOfRighteousness;
 
@@ -3218,7 +3218,7 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
     {
       hyperCore+=SEVEYEpow/sqrt(lfc-1.);
 
-  if(lfc>81.)hyperCore-=log2+1./3.;
+  if(lfc>81.)hyperCore-=log2*2.;
  //hyperCore-=1./3.;
   
 
