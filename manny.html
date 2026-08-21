@@ -2465,6 +2465,8 @@ uniform float OrthoEvery;
                                   
                                   const float twoThirds = 2./3.;
                                   const float sqrt2 = sqrt(2.);
+                                 const float l3 = log(3.);
+
 
                                   const float PI = 3.14159274;
                                   const float PI2 = PI*2.;
@@ -2698,7 +2700,7 @@ float brightness=0.;
 
 
 
-    float starnSize = PI/120.*2.*53./64.*((1.-log(3.))/2.+1.)*2.;
+    float starnSize = PI/120.*2.*53./64.*((1.-l3)/2.+1.)*2.;
     
     float scalar =1./2.*3./4.;
 
@@ -2859,7 +2861,7 @@ ret= vec4(clamp(
                            if(volume!=1.)h*=length(g*g)*4.;
                        return h;
                        }
-                                     const    float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;
+                                     const    float logStabilizationConstant = 1./l3+(1.-1./l3)/2.;
 
                        
                                                       vec4 gatesOfHeaven( vec2 uv, float noteskew )//Shekina Glory
@@ -2917,7 +2919,7 @@ else threshSide=uv.x;
                                                          //  brightness/=10.;
                                                      //    if(rnd(mod(noteOfSide+12.*12.,12.))==-3.)
              
-                                                                if(threshSide>1./log(3.))           o=vec4(1.);
+                                                                if(threshSide>1./l3)           o=vec4(1.);
                                                                 if(threshSide>logStabilizationConstant)
                                                                                                      o=vec4(.5);
                                                        
@@ -2955,7 +2957,7 @@ return h;
 }
                   vec4 faceBlackAndWhite(vec2 g, vec2 t, bool wink, int overrideEyes, bool WayTruthLight, float noteOfEye){
                 if(elderHorns==2&&(overrideEyes==100||overrideEyes==-1)){
-                    float squareUp=4./3./log(3.);
+                    float squareUp=4./3./l3;
                     g.y*=squareUp;
                     t.y*=squareUp;}
 bool twelveLots = true;
@@ -4366,9 +4368,9 @@ float leafDivGR=leaf/gr;
                         destColor*=2.;
                           return destColor;
                       }
-                      
 
 vec4 tol(vec2 p, vec2 t){
+
 vec2 coordsB = coords.yx;
 
      float hyperCore=0.;
@@ -4376,6 +4378,17 @@ vec2 coordsB = coords.yx;
 float lfc = length(constellationCoord);
 
 float lengthP = length(p);
+ float zoomB = zoom;
+
+
+    if(lengthP>3.*3.*3.*l3)
+    {
+        p*=3.;
+        lengthP*=3.;
+        coordsB*=3.;
+        lfc*=3.;
+        zoom*=3.;
+    }
 
   float interSection = pow(2.,8.);
 
@@ -4385,7 +4398,6 @@ const float crs = 64.;//this is the mandelclover and original inheritance colorm
  float centerslide = 0.;
 bool pollen = polyNomialStretch;
 
- float zoomB = zoom;
 if(lengthP>interSection)
 {
     pollen=false;
@@ -4778,7 +4790,7 @@ vec2 s=p;
 }
 
 
-        if(seventhOUTside&&(lfcAdj>(SEVEYEStartAdj-sevMargin)/log(3.))&&(lengthP>SEVEYEStartAdj)
+        if(seventhOUTside&&(lfcAdj>(SEVEYEStartAdj-sevMargin)/l3)&&(lengthP>SEVEYEStartAdj)
  //&&lfc>zoomB
  )
 {
@@ -4931,8 +4943,8 @@ loops=0.;
 
 
 
-//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
-//log stabalization constant seems to be 1./log(3.)+(1.-1./log(3.))/1.5 from 1./log(3.)+(1.-1./log(3.))/2.
+//.9551195 is based on 1./l3==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
+//log stabalization constant seems to be 1./l3+(1.-1./l3)/1.5 from 1./l3+(1.-1./l3)/2.
 //if(morph!=0.)cored*=3./2.;//stabilize morph dance collaboration
 
 //2.47805268028830 and 3 are solutions to x=log3(x**3)
@@ -5102,7 +5114,7 @@ bool spokeloverON=spokelover&&zoomB/lfc<2./3.;//could be 1.5, could be 2/3, one 
 if(outerCoresOff)hyperCore=0.;
 
 if(Spoker)
-hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
+hyperCore*=4./3./(1./l3+(1.-1./l3)/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
    if(zoomB<.25&&(seventhEYE!=1.&&seventhEYE!=2.||lengthP>2./3.)||(seventhOUTside&&SEVEYEStartAdj>lfc&&lfc<81.))  hyperCore+=.5/-log(zoomB*coresIn);//right for keeping central outer clover same size
 float howToBoost = wingsOfRighteousness;
 
@@ -5230,7 +5242,7 @@ else
                                            ;
                         if(length(coords)>interSection)
                         {
-                            m/=length(coords)*log(3.);
+                            m/=length(coords)*l3;
                         }
 
                          
@@ -5264,7 +5276,7 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
                         /*  hyperCoreBoosted=uber.z+
                             (
                              log(duperZoom)*LogHalfReciprocal*twoThirds+log(length(coordSHIFT))
-                             *4./3./(1./log(3.)+(1.-1./log(3.)  ))/1.75
+                             *4./3./(1./l3+(1.-1./l3  ))/1.75
                              )*log2/log(metaCoreDriveFactor)+loops;
                              */
                              dstnce=length(s);
@@ -5316,22 +5328,22 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
                                                    //  if(clvrVariant4!=0.&&1==3)
  //OrthBoost =-leaf;//(1.-1./leaf)*logStabilizationConstant;
  //else
- {OrthBoost=log(3.);//1./logStabilizationConstant;////the values for orthBoost seem incorrectish
+ {OrthBoost=l3;//1./logStabilizationConstant;////the values for orthBoost seem incorrectish
                      
                      
                                          hyperCoreBoosted-=4.*LogHalfReciprocal;
                                          hyperCoreOUTPUT-=4.*LogHalfReciprocal;
                      }
-                     //log(3.);//4./3./log(3.);
+                     //l3;//4./3./l3;
                                                   /*   if(OrthoEvery==1.&&1==3)
                                                      {
-                                                     hyperCoreBoosted*=OrthBoost;//1.75/log(3.);
+                                                     hyperCoreBoosted*=OrthBoost;//1.75/l3;
                                                      hyperCoreOUTPUT*=OrthBoost;}*/
                                                       }
                                                       
                                                       bool compensate=false;
                                                     //  float  logStabilizationConstantA=logStabilizationConstant;//+(1.-logStabilizationConstant)/2.;
-                                                     // float  logStabilizationConstantC=log(3.);//+(1.-logStabilizationConstant)/2.;
+                                                     // float  logStabilizationConstantC=l3;//+(1.-logStabilizationConstant)/2.;
                                                       vec4 eyeScroll= vec4(0.);
                                                       vec2 lastLastS = s;
                                                          vec2 lastS = s;
@@ -5367,7 +5379,7 @@ bool squeezeDIlate = petals>0.;
 if(zoomB<.000001*lfc)  s = uber.xy;//engage super duper core!
 
 else      for (float counter=0.;counter<iterations;counter++)if(dstnce<delimiter){
- //s/=log(3.);
+ //s/=l3;
  if(squeezeN>=2.) 
  {
     if(petals>0.)
@@ -5443,7 +5455,7 @@ if(petals>0.)
 
 
 // dstnce = length(s);
-//s/= 1.+(log(3.)-1.)*dstnce;
+//s/= 1.+(l3-1.)*dstnce;
 
 
  if(counter!=0.&&dilate&&morph==0.&&OrthoEvery==0.){
@@ -5920,7 +5932,7 @@ else if(!isinf(spokeloverCoreShiftDown))
  }
 
 dstnce=length(s);
-   if(continuumClover!=0&&lfcOverzoomB>1.5*log(3.)){//engage continualization
+   if(continuumClover!=0&&lfcOverzoomB>1.5*l3){//engage continualization
 
        float continuumCore=(continuumCounter+hyperCoreBoosted)*correction;
 
@@ -6418,8 +6430,8 @@ b =dstnce/2.;//(*sqrt2);//dstnce/(gr*-leaf);//may not be core stable
 
    if(squeezeN>=2.)
    {
-hyperCoreBoosted+=4.+.5/(pow(squeezeN,squeezeN)*squeezeN);//pow(squeezeN,squeezeN*2.);//before or after *=log(3.)?
-     hyperCoreBoosted*=1.+.5/squeezeN;//pow(log(3.),squeezeN);
+hyperCoreBoosted+=4.+.5/(pow(squeezeN,squeezeN)*squeezeN);//pow(squeezeN,squeezeN*2.);//before or after *=l3?
+     hyperCoreBoosted*=1.+.5/squeezeN;//pow(l3,squeezeN);
    }
    else hyperCoreBoosted+=4.;
 
@@ -8204,7 +8216,7 @@ if(handOfGod)
 
                                                                                                                                 if(abs(cross.x)<abs(cross.y))
                                                                                                       cross=cross.yx;
-                                                                                                      // cross.y*=4./3./log(3.);
+                                                                                                      // cross.y*=4./3./l3;
                                                       if(cross.x>0.)
                                                                                      cross.x = -cross.x;
                                                                         

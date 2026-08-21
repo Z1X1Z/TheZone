@@ -1587,6 +1587,7 @@ uniform int inseyedOut;
                                   
                                   const float twoThirds = 2./3.;
                                   const float sqrt2 = sqrt(2.);
+                                    const float l3 = log(3.);       
 
                                   const float PI = 3.14159274;
                                   const float PI2 = PI*2.;
@@ -1823,7 +1824,7 @@ float brightness=0.;
 
 
 
-    float starnSize = PI/120.*53./64.*((1.-log(3.))/2.+1.)*2.*2.;
+    float starnSize = PI/120.*53./64.*((1.-l3)/2.+1.)*2.*2.;
     
     float scalar =1./2.*3./4.;
 
@@ -1984,7 +1985,7 @@ ret= vec4(clamp(
                            if(volume!=1.)h*=length(g*g)*4.;
                        return h;
                        }
-                                     const    float logStabilizationConstant = 1./log(3.)+(1.-1./log(3.))/2.;
+                                     const    float logStabilizationConstant = 1./l3+(1.-1./l3)/2.;
 
                        
                                                       vec4 gatesOfHeaven( vec2 uv, float noteskew )//Shekina Glory
@@ -2042,7 +2043,7 @@ else threshSide=uv.x;
                                                          //  brightness/=10.;
                                                      //    if(rnd(mod(noteOfSide+12.*12.,12.))==-3.)
              
-                                                                if(threshSide>1./log(3.))           o=vec4(1.);
+                                                                if(threshSide>1./l3)           o=vec4(1.);
                                                                 if(threshSide>logStabilizationConstant)
                                                                                                      o=vec4(.5);
                                                        
@@ -2067,7 +2068,7 @@ else threshSide=uv.x;
        
                   vec4 faceBlackAndWhite(vec2 g, vec2 t, bool wink, int overrideEyes, bool WayTruthLight, float noteOfEye){
                 if(elderHorns==2&&(overrideEyes==100||overrideEyes==-1)){
-                    float squareUp=4./3./log(3.);
+                    float squareUp=4./3./l3;
                     g.y*=squareUp;
                     t.y*=squareUp;}
 bool twelveLots = true;
@@ -2854,7 +2855,6 @@ extrArms+=h.x;
 
 const float base=2.701002244218596767553929329640246633;
 
-                      
 float petals = 0.;
 
  bool BURSTING = true;
@@ -2866,6 +2866,19 @@ float lfc = length(constellationCoord);
 
 float lengthP = length(p);
 
+ float zoomB = zoom;
+
+    if(lengthP>3.*3.*3.*l3)
+    {
+        p*=3.;
+        lengthP*=3.;
+        coordsB*=3.;
+        lfc*=3.;
+        zoomB*=3.;
+    }
+
+
+
   float interSection = pow(2.,8.);
 
 float scale = 1.;
@@ -2874,7 +2887,6 @@ const float crs = 64.;//this is the mandelclover and original inheritance colorm
  float centerslide = 0.;
 bool pollen = true;
 
- float zoomB = zoom;
 if(lengthP>interSection)
 {
     pollen=false;
@@ -3002,9 +3014,9 @@ float c = length(s);
 
 
 
-        if(lfcAdj>(SEVEYEStartAdj-sevMargin)/log(3.)&&lengthP>SEVEYEStartAdj)
+        if(lfcAdj>(SEVEYEStartAdj-sevMargin)/l3&&lengthP>SEVEYEStartAdj)
 {
-   //if(!(zoomB/lfc<log(3.)*2.-2.))
+   //if(!(zoomB/lfc<l3*2.-2.))
    if(lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(7./3.)/lfc+.125+zoomB;
    //pow(sqrt(1./zoomB),zoomB)+2./lfc-1.;
   // hyperCore-=pow(sqrt(zoomB),zoomB);
@@ -3117,7 +3129,7 @@ bool spokeloverON=zoomB/lfc<2./3.;//could be 1.5, could be 2/3, one is a comprom
   //hyperCore+=.5;
 
 
-hyperCore*=4./3./(1./log(3.)+(1.-1./log(3.))/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
+hyperCore*=4./3./(1./l3+(1.-1./l3)/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
   if(zoomB<.25||(    SEVEYEStartAdj>lfc&&lfc<81.))  hyperCore+=.5/-log(zoomB*coresIn);//right for keeping central outer clover same size
   
 float howToBoost = wingsOfRighteousness;
@@ -3246,7 +3258,7 @@ float daisifier = 0.;
                if(wheel)m =  ((pWithoutChiralizer/lfc)
                                                         -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
                                            *mandelCloverFactor;
-                                           if(length(coords)>interSection)m/=(length(coords))*log(3.);
+                                           if(length(coords)>interSection)m/=(length(coords))*l3;
 
 
 
@@ -3281,7 +3293,7 @@ hyperCoreOUTPUT-=superUpcorer;
 
 
 // dstnce = length(s);
-//s/= 1.+(log(3.)-1.)*dstnce;
+//s/= 1.+(l3-1.)*dstnce;
 
 
  if(counter!=0.){
@@ -3398,7 +3410,7 @@ else if(!isinf(spokeloverCoreShiftDown))
  }
 
 dstnce=length(s);
-   if(lfcOverzoomB>1.5*log(3.)){//engage continualization
+   if(lfcOverzoomB>1.5*l3){//engage continualization
        float continuumCore=(continuumCounter+hyperCoreBoosted)*correction;
 
        float cc2 =continuumCore;
@@ -3592,7 +3604,7 @@ else
     s=1.5/(2.5-vec2(s.x,s.y+budge
     ));
 hyperCoreBoosted+=4.;//+3?
-// hyperCoreBoosted*=pow(log(3.),1.);//these had squeezeN, probably need to be factored out
+// hyperCoreBoosted*=pow(l3,1.);//these had squeezeN, probably need to be factored out
   dstnce = length(s);
          break;
 }
@@ -4120,7 +4132,7 @@ if(handOfGod)
 
                                                                                                                                 if(abs(cross.x)<abs(cross.y))
                                                                                                       cross=cross.yx;
-                                                                                                      // cross.y*=4./3./log(3.);
+                                                                                                      // cross.y*=4./3./l3;
                                                       if(cross.x>0.)
                                                                                      cross.x = -cross.x;
                                                                         
