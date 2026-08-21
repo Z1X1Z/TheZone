@@ -4393,6 +4393,9 @@ float lengthP = length(p);
 
   float interSection = pow(2.,8.);
 
+  if(lengthP>81.&&lengthP<interSection)coordsB/=3.*3.*3.*l3;
+
+
 float scale = 1.;
 float coresIn = 0.;
 const float crs = 64.;//this is the mandelclover and original inheritance colormode core range
