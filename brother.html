@@ -3642,6 +3642,7 @@ hyperCoreBoosted+=4.;//+3?
   dstnce = length(s);
          break;
 }
+bool inSLIDE = false;
 if(BURSTING)
 {
 dstnce=length(s);
@@ -3657,7 +3658,11 @@ bool inSlide= false;
             shrink=sqrt(1.-sqrt(mod(hyperCoreBoosted,1.)));
 
     if(dstnce/slide<1.)
+    
+    {
         s/=slide;
+        inSLIDE = true;
+    }
     
    if(dstnce/shrink<.75)//may be to do with variant4Correction
         s/=shrink;
@@ -3672,9 +3677,12 @@ dstnce=length(s);
     for(int v = 0;v<vmax;v++)
     {
     float ExplodingProgression = (hyperCoreBoosted - floor(hyperCoreBoosted));
+            if(inSlide)    ExplodingProgression=ExplodingProgression*.75;
+
     if(v==0)
     ExplodingProgression=sqrt(ExplodingProgression);
-    
+
+
         float petalIsolated =(mod((atan(sBufferBypass.y,sBufferBypass.x)*divideByMultiplyingPi+2.)*3.-.5,1.)-.5);
         
         float petalIsolatedDaisy =(mod((atan(sBufferBypass.y,sBufferBypass.x)*divideByMultiplyingPi+2.)*6.-.5,1.)-.5);

@@ -6491,6 +6491,7 @@ hyperCoreBoosted+=4.+.5/(pow(squeezeN,squeezeN)*squeezeN);//pow(squeezeN,squeeze
 
 dstnce=length(s);
 bool inImplosion = false;
+bool inSlide = false;
     if(cloverSlide2!=0&&dstnce<.5&&
 2.>=hyperCoreBoosted&&mod(floor(hyperCoreBoosted),2.)==0.//+2./3.&&abs(length(s))>ExplodingProgression
 ) 
@@ -6502,6 +6503,7 @@ bool inImplosion = false;
         s/=shrink;
     if (cloverSlide2==2||cloverSlide2==3)
     {
+        inSlide = true;
        slide = .75-(mod(hyperCoreBoosted,1.))*dstnce;//slide
                       slide = sqrt (slide);
 
@@ -6538,6 +6540,8 @@ if(explodo>0)
     for(int v = 0;v<vmax;v++)
     {
     float ExplodingProgression = (hyperCoreBoosted - floor(hyperCoreBoosted));
+                if(inSlide)    ExplodingProgression=ExplodingProgression*.75;
+
     if(cloverSlide2!=0
     &&(v==0
     //||inImplosion
