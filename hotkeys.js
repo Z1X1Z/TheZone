@@ -77,6 +77,7 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                               const JubileeCoreFlop = 0;
                            const JubileeSwap = 1;
 
+                           const piE =2.701002244218596767553929329640246633;
 window.uniformsInitial = {
 iso_engine:{value:false},
  SEVEYEpow:{value:(grPermanent)*2.-leafPermanent},//gr*3. and gr*2-leaf work well with start of 1.75
@@ -227,7 +228,7 @@ duperZoom: {value:1.},
 
         Clovoid:{value:false},
         dotted:{value:false},
-    baseN:{value: 2.701002244218596767553929329640246633},//e=2.718281828},2.84657807422=pi*e/3//2.7010022442185967675539293296402466332894763318949646518637734692=(pi*e)^2/3^3
+    baseN:{value: piE},//e=2.718281828},2.84657807422=pi*e/3//2.7010022442185967675539293296402466332894763318949646518637734692=(pi*e)^2/3^3
 
         onehundredfortyfourthousand:{value:false},
         shaderScale:{value:window.pixelShaderSize},
@@ -344,7 +345,7 @@ window.blendFibge = false;
                                                else if(window.android)window.rez=window.devicePixelRatio/wingsOfRighteousness2;
                                                else   window.rez=window.devicePixelRatio/wingsOfRighteousness2;
                                                    */
-                                                  window.rez= window.devicePixelRatio/wingsOfRighteousness2
+                                                  window.rez= window.devicePixelRatio/piE
 
         window.nudge=13;
         window.frenzy=false;
