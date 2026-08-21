@@ -2858,6 +2858,8 @@ const float base=2.701002244218596767553929329640246633;
 float petals = 0.;
 
  bool BURSTING = true;
+
+ const float tinsel_limit = 1.25*.5;
 vec4 tol(vec2 p, vec2 t){
     vec2 coordsB = coords;
     float hyperCore=0.;
@@ -3072,7 +3074,7 @@ coordsB/=SEVEYEPush;
  
  float lfcCenterCored=lfc*scale;
  
-bool seventhEYEthree = (lengthP<1./3.)&&zoomB<.2;//&&lfcOverzoomB>twoThirds;
+bool seventhEYEthree = (lengthP<1./3.)&&zoomB<tinsel_limit;//&&lfcOverzoomB>twoThirds;
 
        if(seventhEYEthree
        
@@ -3143,7 +3145,7 @@ truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 
 }
 
-  if(seventhEYEthree&&lengthP<twoThirds&&zoomB<.2
+  if(seventhEYEthree&&lengthP<twoThirds&&zoomB<tinsel_limit
    )
    {
       float squinch =0.;
@@ -3162,7 +3164,7 @@ bool spokeloverON=zoomB/lfc<2./3.;//could be 1.5, could be 2/3, one is a comprom
 
 
 hyperCore*=4./3./(1./l3+(1.-1./l3)/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
-  if(zoomB<.2||(    SEVEYEStartAdj>lfc&&lfc<81.))  hyperCore+=.5/-log(zoomB*coresIn);//right for keeping central outer clover same size
+  if(zoomB<tinsel_limit||(    SEVEYEStartAdj>lfc&&lfc<81.))  hyperCore+=.5/-log(zoomB*coresIn);//right for keeping central outer clover same size
   
 float howToBoost = wingsOfRighteousness;
 
