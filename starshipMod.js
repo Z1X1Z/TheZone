@@ -1740,7 +1740,10 @@ function infinicore() {
         }
         else {
             while (zoom > 1. && isFinite(zoom)) zoom /= 2.;
-       if(fromCenter < 2. / 3.)  zoom /= 2.;
+       if(fromCenter < 2. / 3.) 
+        {triggerRailSet=false
+     zoom /= 2.;
+        }
 
             while (fromCenter < 2. / 3.&&isFinite(fromCenter)&&fromCenter>0) {
                 coordY *= 2.
