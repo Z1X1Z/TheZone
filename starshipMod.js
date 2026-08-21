@@ -1841,7 +1841,7 @@ if(zoom>2**64)
 
     let zoomCone = metaDepth * fromCenter;
     if (uniforms["colorCombo"].value == 16) zoomCone /= 1.33333333 / 2.;
-    if (zoom >= 1.&&(fromCenter<skyInterSection||zoom>=fromCenter*ZR))//could work as one (also below) but my phone was partially crashing on continuum clover zoomout
+    if (zoom >= 1.&&(fromCenter<skyInterSection||zoom>=fromCenter*ZR*ZR))//could work as one (also below) but my phone was partially crashing on continuum clover zoomout
         zoomOutEngage = false;
     ZR = setZoomRate();
 
@@ -2311,7 +2311,6 @@ function executeTouchRegime() {
             else
             {
                 wrapMovementBoost = 4. / 3.;
-                                 console.log(true)
 
             }
 
