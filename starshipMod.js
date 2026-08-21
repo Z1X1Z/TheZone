@@ -1841,7 +1841,7 @@ if(zoom>2**64)
 
     let zoomCone = metaDepth * fromCenter;
     if (uniforms["colorCombo"].value == 16) zoomCone /= 1.33333333 / 2.;
-    if (zoom >= 1.&&(fromCenter<skyInterSection||zoom>=fromCenter/Math.log(3.)))//could work as one (also below) but my phone was partially crashing on continuum clover zoomout
+    if (zoom >= 1.&&(fromCenter<skyInterSection||zoom>=fromCenter*.75))//could work as one (also below) but my phone was partially crashing on continuum clover zoomout
         zoomOutEngage = false;
     ZR = setZoomRate();
 
