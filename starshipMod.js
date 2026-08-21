@@ -800,7 +800,7 @@ function move() {
                 
         else 
     if (((fromCenter - zoom) * (1. - zoom) - zoom > uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0)) {
-        if (fromCenter < 81.)
+        if (fromCenter < jesusJetsThreshold)
             wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter;
         else
             wrapMovementBoost = 4. / 3.;
@@ -1814,6 +1814,7 @@ window.lastRailC = 0.;
 var triggerRailSet = false
 const zoomCap32 = .000001;
 const skyInterSection = 2**8/3.
+const jesusJetsThreshold = 81./3;
 function zoomRoutine() {
     /*
     let sealBoost = 0.
@@ -1825,7 +1826,7 @@ if(zoom>2**64)
         coordX=0.;
         coordY=0.
     }
-            if (fromCenter > 81.&&fromCenter<skyInterSection) jesusJetsBoost+=4;
+            if (fromCenter > jesusJetsThreshold&&fromCenter<skyInterSection) jesusJetsBoost+=4;
 
     var metaDepth = (!dupered) ? zoomCap32 : zoomCap32 ** 2;//due to pixelization limits
     if(fromCenter>skyInterSection)metaDepth=metaDepth*2**(3.+1./fromCenter);
@@ -2299,18 +2300,20 @@ function executeTouchRegime() {
           if(fromCenter>skyInterSection)
           {
                 wrapMovementBoost=1.5
-                console.log('sky')
           }
                 
         else if (((fromCenter - zoom) * (1. - zoom) > uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0.) && spunTouch[0] != 0 && spunTouch[1] != 0) {
           
             
-                if (fromCenter < 81.) {
-                //  console.log(true)
+                if (fromCenter < jesusJetsThreshold) {
                 wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter;
             }
             else
+            {
                 wrapMovementBoost = 4. / 3.;
+                                 console.log(true)
+
+            }
 
         }
         else wrapMovementBoost = 1;
