@@ -4998,7 +4998,7 @@ else hyperCore+=externalCores;//hyperCore is really better thought of as hyperMe
 //float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
 hyperCore+=coreShift;
 hyperCore +=  .25;//seems to be a bug fix to synchronize (almost) core depth with with brother.html
-   hyperCore+=1./3.;//for fifth seal (super seal)
+   hyperCore+=.25;//for fifth seal (super seal), and adjusted from 1./3. for megaExplosions
 
 float equilibriator = 1.;
 if(dilate){//should be re-enabled after checks

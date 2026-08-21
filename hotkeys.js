@@ -1626,7 +1626,7 @@ else
          if(uniforms[ "morph" ].value == 0.)
                 uniforms[ "morph" ].value = 1.;
          else uniforms[ "morph" ].value = 0.;
-        if(uniforms.morph.value==1)setTimeout(()=>{uniforms.swap.value = 2.,100});
+        if(uniforms.morph.value==1)setTimeout(()=>{uniforms.swap.value = 2.,250});
         else uniforms.swap.value = swapConstant;
     }
     else if (key=="n") uniforms[ "MetaCored" ].value = !uniforms[ "MetaCored" ].value;
