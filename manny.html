@@ -4393,7 +4393,15 @@ float lengthP = length(p);
 
   float interSection = pow(2.,8.);
 
-  if(lengthP>81.&&lengthP<interSection)coordsB/=3.*3.*3.*l3;
+  if(lengthP>81.&&lengthP<interSection)
+  {coordsB/=3.*3.*3.*l3;
+        if(morph!=0.)
+        {
+            //zoomB/=3.*3.*3.*l3;
+            lfc/=3.*3.*3.*l3;
+        }
+
+  }
 
 
 float scale = 1.;
