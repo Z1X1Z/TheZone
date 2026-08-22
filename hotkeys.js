@@ -12,11 +12,11 @@ let grgr2 = 2.62019731923500857743852103593773857662573285670168;
 //base form of feedback equation is x = (1-x)^2-1
 window.pixelShaderSize = 7;
 const pixelShaderToStarshipRATIO = pixelShaderSize/4.;//don't change from 7./4. or some factor of 7 seems right;
-const movementRateORIGINAL = 1.;
+const movementRateORIGINAL = 1.5;//with wingsofrighteousness2=".25087423652421874869" is 1 but increased to 1.5 with 25087423652421874877777769755559
 const starshipSize = Math.E**leaf/Math.sqrt(2.);//divided by Math.sqrt(2.) to set trail to equilateral,other coefficients are scale (size)
 const  INcreaseBoost = 1./3.;//1./3.;
 const netspeedChanger = 2./3.;
-const zoomFrames = (60*logStabilizationConstant)//as in 60 seconds
+const zoomFrames = (60*Math.log(3.)**2)//as in 60 seconds
 *(INcreaseBoost*netspeedChanger+1);//frames to double zoom
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   let mf = (Math.max(window.innerHeight,window.innerWidth)/Math.min(window.innerHeight,window.innerWidth));//advantage of translation over zoom (right?)
@@ -325,7 +325,8 @@ window.settingsSet = false
 
 const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 
-const wingsOfRighteousness2 =(-Number(".00087423652421"+"874869")+(grPermanent-leafPermanent-2**.5))*2;
+const wingsOfRighteousness2 =(-Number(".25087423652421874877777769755559"//+"874869"
+    )+(grPermanent-leafPermanent-2**.5))*2;
 function resetAll(){
 
 for(var nameOfUniform in uniformsInitial)
