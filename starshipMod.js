@@ -298,17 +298,18 @@ function spiral_compress() {
     if (window.extremeFrets && EldersLeg > 2) {
 
         for (var b = 0; b < EldersLeg; b++)if (testar[b] != 0.) {
-                        if (testar[b]*totalAMP< 1.) 
+                       /* if (testar[b]*totalAMP< 1.&&loopsRun>100) 
                             {
                                 testar[b]=1./totalAMP
                                 console.log("under one")
                             }
+                                */
 
             testar[b] = ((.5 - .5 / (testar[b]* totalAMP) ** (.5))) ** 2.*2
             //  testar[b]=(1.-1./(testar[b]*ampThresh)**(.5))**2.
             if (!isFinite(testar[b]) || testar[b] < 0.) {
                 testar[b] = 0.
-              //  console.log("woops");
+                console.log("woops");
             }
         }
         //    for(var b = 0; b<12; b++)if(testar[b]!=0.) stack12Array[b]=(1.-1./stack12Array[b]**(1./Math.E))**(Math.E)
