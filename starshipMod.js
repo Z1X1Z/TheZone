@@ -801,7 +801,7 @@ function move() {
         else 
     if (((fromCenter - zoom**1.5)> uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0)) {
         if (fromCenter < jesusJetsThreshold)
-            wrapMovementBoost = 3. * fromCenter ** .5 / fromCenter;
+            wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter;
         else
             wrapMovementBoost = 4. / 3.;
     }
@@ -2308,7 +2308,7 @@ function executeTouchRegime() {
         else if (((fromCenter - zoom**.5)  > uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0.) && spunTouch[0] != 0 && spunTouch[1] != 0) {
             
                 if (fromCenter < jesusJetsThreshold) {
-                wrapMovementBoost = 3. * fromCenter ** .5 / fromCenter;
+                wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter;
             }
             else
             {
