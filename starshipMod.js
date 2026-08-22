@@ -799,7 +799,7 @@ function move() {
                 wrapMovementBoost=1.5
                 
         else 
-    if (((fromCenter - zoom**1.5)> uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0)) {
+    if (((fromCenter - zoom**.5)> uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0)) {
         if (fromCenter < jesusJetsThreshold)
             wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter;
         else
