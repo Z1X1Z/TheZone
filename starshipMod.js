@@ -800,7 +800,7 @@ function move() {
     if (uniforms.carousel.value != 0. && uniforms["time"].value > 0) spunD = spin(spunD, -uniforms.carousel.value * (uniforms["time"].value * uniforms["rate"].value + Math.PI) % (Math.PI * 2.));
     const d_xS = spunD[0] * interpolation;
     const d_yS = spunD[1] * interpolation;
-    if(fromCenter>skyInterSection)
+      if(fromCenter>skyInterSection)
           {
                 wrapMovementBoost=logStabilizationConstant
           }
@@ -810,19 +810,21 @@ function move() {
             if (fromCenter < jesusJetsThreshold)
         {
                 if(!window.rezUpgradeBypass)
-                wrapMovementBoost = 4./Math.log(3) / fromCenter ** .5 ;
+                wrapMovementBoost = 4.*Math.log(3)/logStabilizationConstant / fromCenter ** .5 ;
                 else  wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter; 
 } 
                       else
 
                         {
                 if(!window.rezUpgradeBypass)
-                wrapMovementBoost = .75/logStabilizationConstant;
+                wrapMovementBoost = .75*Math.log(3.)**2;
                 else              wrapMovementBoost = 4. / 3.;
 }
         }
             else
              wrapMovementBoost = 1;
+        
+
 
     const bx = coordX + d_xS * MR * zoom * wrapMovementBoost;
     const by = coordY + d_yS * MR * zoom * wrapMovementBoost;
@@ -2248,7 +2250,7 @@ function executeTouchRegime() {
         uniforms.pongBallCoords.value.y = window.innerHeight / gr;
 
     }
-    let coordinator = pixelShaderSize / maximumDimension * movementRate;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
+    let coordinator = pixelShaderSize / minimumDimension/2. * movementRate;//pixelShaderSize/2 is the frame size in the shader: "p=vec2(...."
     if (xTouch == 0 && yTouch == 0 && !TouchMicroizer) {
         xTouchMicroBuffer = xTouchMicroBuffer / 10000.;
         yTouchMicroBuffer = yTouchMicroBuffer / 10000.;
@@ -2327,14 +2329,14 @@ function executeTouchRegime() {
             if (fromCenter < jesusJetsThreshold)
         {
                 if(!window.rezUpgradeBypass)
-                wrapMovementBoost = 4./Math.log(3) / fromCenter ** .5 ;
+                wrapMovementBoost = 4.*Math.log(3)/logStabilizationConstant / fromCenter ** .5 ;
                 else  wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter; 
 } 
                       else
 
                         {
                 if(!window.rezUpgradeBypass)
-                wrapMovementBoost = .75/logStabilizationConstant;
+                wrapMovementBoost = .75*Math.log(3.)**2;
                 else              wrapMovementBoost = 4. / 3.;
 }
         }

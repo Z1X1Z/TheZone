@@ -3176,7 +3176,7 @@ hyperCore*=4./3./(1./l3+(1.-1./l3)/1.75);//engage overstable core if dancing log
   
 float howToBoost = wingsOfRighteousness;
 
- if(SEVEYEStartAdj>lengthP)howToBoost =4.250987654321;
+ if(SEVEYEStartAdj>lengthP&&lengthP<interSection)howToBoost =4.250987654321;
             hyperCore+=((((gr)+-(leaf)+(sqrt2)))-howToBoost)/(gr-leaf+1.);
 float term=0.;
 
@@ -3685,7 +3685,8 @@ dstnce=length(s);
     for(int v = 0;v<vmax;v++)
     {
     float ExplodingProgression = (hyperCoreBoosted - floor(hyperCoreBoosted));
-            if(inSlide)    ExplodingProgression=ExplodingProgression*.75;
+           // if(inSlide)   
+             ExplodingProgression=ExplodingProgression*.75;
 
   //  if(v==0)//taken off for megaExplosions
     ExplodingProgression=sqrt(ExplodingProgression);
