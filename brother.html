@@ -2871,7 +2871,7 @@ float lengthP = length(p);
 
  float zoomB = zoom;
 float lfcC = length(coords);
-    if(lengthP>3.*3.*3.*l3)
+    if(lengthP>3.*3.*3.)
     {
         
         p*=3.;
@@ -2887,7 +2887,8 @@ float lfcC = length(coords);
 
 if(lengthP>81.&&lengthP<interSection)
 {
-    coordsB/=3.*3.*3.*l3;
+    coordsB/=3.*3.*3.;
+    hyperCore -= 1./(lengthP-3.*3.*3.);
 }
 
 float scale = 1.;
@@ -3366,7 +3367,7 @@ if(seventhEYEthree)
         span = lfcCenterCored/2.;
       //  else span = lfc+.5;
     }
-    else if(lengthP>SEVEYEStartAdj&&lengthP<interSection)span = lfc/ SEVEYEPush/2.;
+    else if(lengthP>SEVEYEStartAdj)span = lfc/ SEVEYEPush/2.;
 else if(seventhEYE==0.||(seventhEYE==3.&&!seventhEYEthree)||lengthP>twoThirds)span = lfcCenterCored;
 else span = lfc;
 
