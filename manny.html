@@ -1402,8 +1402,10 @@ seventhEYE?![,.O]</a><br>
                 <label for="smush">Smush!:[,.S]</label>
                   <input type="number" id="smush" name="smush" class="num" onkeyup="
                                                  number = 'no number'
-;
-                                 uniforms.smush.value=document.getElementById('smush').value
+                    smushFactor=document.getElementById('smush').value
+
+                    uniforms.smush.value = minimumDimension/maximumDimension*Math.log(3.)*smushFactor;
+
                                  "><br>
               <input type="checkbox" id="armStar" name="t"  onclick= "
                   key  = 'W';

@@ -20,7 +20,7 @@ var zoomFrames = 60//(60*Math.log(3.)**3)//as in 60 seconds
 *(INcreaseBoost*netspeedChanger+1);//frames to double zoom
 
 var movementRateORIGINAL = Math.log(3);//with wingsofrighteousness2=".25087423652421874869" is 1 but increased to 1.5 with 25087423652421874877777769755559
-
+var smushFactor = 1.;
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   let mf = (Math.max(window.innerHeight,window.innerWidth)/Math.min(window.innerHeight,window.innerWidth));//advantage of translation over zoom (right?)
 let MR = mf/zoomFrames;
@@ -344,7 +344,7 @@ window.superseal=true;
 window.fibgetti = false;
 window.fibgeBase = 2n
 window.blendFibge = false;
-
+smushFactor=1.;
 /*
                                              if (   window.iOS )window.rez=window.devicePixelRatio/wingsOfRighteousness2;
                                                else if(window.android)window.rez=window.devicePixelRatio/wingsOfRighteousness2;
@@ -827,9 +827,11 @@ source.connect(analyser);
                                           else  if((key == "S") && event.altKey&&event.ctrlKey)
                                           
                 {if(number!="no number")
-                    uniforms.smush.value=number;
-                else if( uniforms.smush.value!=0.)uniforms.smush.value=1.;
-                    else  uniforms.smush.value=0.;
+                   smushFactor=number;
+                else if( smushFactor!=0.)smushFactor=1.;
+                    else  smushFactor=0.;
+                    uniforms.smush.value = minimumDimension/maximumDimension*Math.log(3.)*smushFactor;
+
                 }
 
                                           else  if((key == "B") && event.altKey&&event.ctrlKey)
