@@ -2859,8 +2859,9 @@ float petals = 0.;
 
  bool BURSTING = true;
 
- const float tinsel_limit = 1.25*.5;
 vec4 tol(vec2 p, vec2 t){
+      float tinsel_limit = 1.25*.5;
+
     vec2 coordsB = coords;
     float hyperCore=0.;
 
@@ -2977,7 +2978,6 @@ float lfcAdj = lfc;
 sevMargin*=SEVEYEStart/2.;
 sevMargin/=8./SEVEYEPush;
 
-
 int swapped=swap;
 int flopped=oppositionalCoreFlop;
 
@@ -3047,8 +3047,9 @@ float c = length(s);
 
         if(lfcAdj>(SEVEYEStartAdj-sevMargin)/l3&&lengthP>SEVEYEStartAdj)
 {
+    //tinsel_limit/=8.;
    //if(!(zoomB/lfc<l3*2.-2.))
-   if(lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(2.)/lfc+.25+zoomB;
+   if((lfc>SEVEYEStartAdj-sevMargin&&zoom<1.)||lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(2.)/lfc+.25+zoomB;
    //pow(sqrt(1./zoomB),zoomB)+2./lfc-1.;
   // hyperCore-=pow(sqrt(zoomB),zoomB);
        if(lfcC<interSection)
