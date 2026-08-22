@@ -7,10 +7,14 @@ window.touchMode = false;
 window.audioX={sampleRate:44100};
     window.source={};
 
+
+
+
 window.bufferSize=fftSize;
 window.numberOfBins=bufferSize/2.;
 window.inputData = new Float32Array(bufferSize).fill(1.);
 window.dataArray = new Uint8Array(bufferSize/2).fill(1.);
+window.babyBuffer = new Uint8Array(bufferSize).fill(0);
 
 let micProcessing1 = false;//autoGainControl
 let micProcessing2 = false;//echoCancellation
@@ -45,7 +49,7 @@ let micProcessing3 = false;//noiseSuppression
        
 function shutdown(){
     source.disconnect();
-    audioX.close();
+    //audioX.close();
 }
 let analyser={};
 
@@ -104,7 +108,10 @@ letTouchThrough=false;
 
     }
     
-               if(letTouchThrough&&letTouchThrough != "inactive") userHasGestured=true;
+               if(letTouchThrough&&letTouchThrough != "inactive")
+                {
+                  userHasGestured=true;
+                }
 
 
     document.getElementById( "load message").style.textAlign="center"
