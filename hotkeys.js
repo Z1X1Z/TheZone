@@ -328,7 +328,7 @@ window.settingsSet = false
 
 const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 
-const wingsOfRighteousness2 =(-Number(".250874236524218748777777697555594242"//+".25087423652421"+"874869"
+const wingsOfRighteousness2 =(-Number(".2508742365242187487777776975555942422424"//+".25087423652421"+"874869"
     )+(grPermanent-leafPermanent-2**.5))*2;
 function resetAll(){
 
