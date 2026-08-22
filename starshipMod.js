@@ -1667,7 +1667,7 @@ function adjustThreeJSWindow() {
 
 }
 function onWindowResize() {
-uniforms.smush.value = minimumDimension/maximumDimension;
+uniforms.smush.value = minimumDimension/maximumDimension*Math.log(3.);
     if (!sheetTranslucent && "osmd" in window && osmd != null) {
         correlationForTextY = document.getElementById("osmdCanvas").offsetHeight + document.getElementById("textWindow").offsetHeight
         bottomOfScreenHeight = correlationForTextY;
