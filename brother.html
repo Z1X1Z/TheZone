@@ -2932,8 +2932,7 @@ p=1./(1.-abs(p));
   // p=1.5/(2.5-vec2(-p.x,abs(p.y)+budge));
         p/=32.;
         lengthP=length(p);
-
-        hyperCore-=sqrt(16./(8.+lengthP));
+        hyperCore-=sqrt(lengthP)*4.;
 
 }
 

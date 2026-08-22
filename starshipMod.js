@@ -1866,14 +1866,14 @@ if(zoom>2**64)
 
     let zoomCone = metaDepth * fromCenter;
     if (uniforms["colorCombo"].value == 16) zoomCone /= 1.33333333 / 2.;
-    if (zoom >= 1.&&(fromCenter<skyInterSection||zoom>=fromCenter*.5))//could work as one (also below) but my phone was partially crashing on continuum clover zoomout
+    if (zoom >= 1.&&(fromCenter<skyInterSection||zoom>=fromCenter*.5)&&(fromCenter<upperJesusJets&&("brother" in window)||zoom>=fromCenter/4))//could work as one (also below) but my phone was partially crashing on continuum clover zoomout
         zoomOutEngage = false;
     ZR = setZoomRate();
 
     if (!isFinite(ZR)) ZR = 1;
     if (!zoomAtl41 && !zoomOutEngage && zoomRate > 0.) {
         if ((zoom > zoomCone && ampThresh > zoomOutRatchetThreshold && (on && !window.touchMode)) || xTouch + yTouch != 0) zoom *= ZR ** ((1. + INcreaseBoost) * zoomBoost);
-        else if (uniforms.MetaCored.value || zoom < 1.||(fromCenter>skyInterSection&&zoom<fromCenter*.5)) {
+        else if (uniforms.MetaCored.value || zoom < 1.||(fromCenter>skyInterSection&&zoom<fromCenter*.5)&&(fromCenter>upperJesusJets&&("brother" in window)||zoom<fromCenter/4)) {
             zoom /= ZR;
             triggerRailSet = true
             if (center) { coordX *= ZR * 2. / 3.;; coordY *= ZR * 2. / 3.; }
