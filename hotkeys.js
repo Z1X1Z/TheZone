@@ -16,10 +16,10 @@ const starshipSize = Math.E**leaf/Math.sqrt(2.);//divided by Math.sqrt(2.) to se
 const  INcreaseBoost = 1./3.;//1./3.;
 const netspeedChanger = 2./3.;
 
-var zoomFrames = (60/Math.log(3.)**4)//as in 60 seconds
+var zoomFrames = 60//(60*Math.log(3.)**3)//as in 60 seconds
 *(INcreaseBoost*netspeedChanger+1);//frames to double zoom
 
-var movementRateORIGINAL = .75*Math.log(3);//with wingsofrighteousness2=".25087423652421874869" is 1 but increased to 1.5 with 25087423652421874877777769755559
+var movementRateORIGINAL = .75/logStabilizationConstant;//with wingsofrighteousness2=".25087423652421874869" is 1 but increased to 1.5 with 25087423652421874877777769755559
 
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   let mf = (Math.max(window.innerHeight,window.innerWidth)/Math.min(window.innerHeight,window.innerWidth));//advantage of translation over zoom (right?)
@@ -442,7 +442,7 @@ window.zoomBoost = 1.;
 
 
             window.movementRate=movementRateORIGINAL;
-            window.zoomRate=movementRateORIGINAL;
+            window.zoomRate=1.;
             window.radialWarp=1.;
             window.trailSecondsLong = secondsToEdge/movementRate*7.;
             window.trailLength = Math.ceil(zoomFrames*trailSecondsLong);
