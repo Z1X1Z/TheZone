@@ -1604,7 +1604,7 @@ uniform int inseyedOut;
     const float leaf = -1.3247179;//5724474;
             const float clvrVariant4 = 1./leaf;
 
-          const float wingsOfRighteousness =   4.25087423652421874877777769755559;
+          const float wingsOfRighteousness =   4.250874236524218748777777697555594242;//4.25087423652421874877777769755558742365242187487777776975555
           //          const float wingsOfRighteousness =   4.25087423652421874869;
 
 
@@ -2342,8 +2342,11 @@ bool isB=false, isF=false;
                           else {
                               //opening side eyes
 
+                              {
                                     if(p.y>0.)l = vec4( 1.-eyeColorCycler,1.,eyeColorCycler,.5);
                                     else l = vec4( eyeColorCycler,1.,1.-eyeColorCycler,.5);
+                              }
+
                           }
                       break;
                       }
