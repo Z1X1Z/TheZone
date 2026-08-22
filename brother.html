@@ -3049,7 +3049,7 @@ float c = length(s);
 {
     //tinsel_limit/=8.;
    //if(!(zoomB/lfc<l3*2.-2.))
-   if((lfc>SEVEYEStartAdj-sevMargin&&zoom<1.)||lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(2.)/lfc+zoomB;
+   if((lfc>SEVEYEStartAdj-sevMargin&&zoom<1.)||lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(2.)/lfc-.25+zoomB;
    //pow(sqrt(1./zoomB),zoomB)+2./lfc-1.;
   // hyperCore-=pow(sqrt(zoomB),zoomB);
        if(lfcC<interSection)
