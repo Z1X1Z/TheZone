@@ -2933,7 +2933,7 @@ p=1./(1.-abs(p));
         p/=32.;
         lengthP=length(p);
 
-        hyperCore+=lengthP;
+        hyperCore-=sqrt(16./(8.+lengthP));
 
 }
 
