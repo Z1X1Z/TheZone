@@ -16,10 +16,10 @@ const starshipSize = Math.E**leaf/Math.sqrt(2.);//divided by Math.sqrt(2.) to se
 const  INcreaseBoost = 1./3.;//1./3.;
 const netspeedChanger = 2./3.;
 
-var zoomFrames = (60)//as in 60 seconds
+var zoomFrames = (60*Math.log(3.)**2)//as in 60 seconds
 *(INcreaseBoost*netspeedChanger+1);//frames to double zoom
 
-var movementRateORIGINAL = 1.;//with wingsofrighteousness2=".25087423652421874869" is 1 but increased to 1.5 with 25087423652421874877777769755559//and then back to one with 24422442
+var movementRateORIGINAL = 1.5;//with wingsofrighteousness2=".25087423652421874869" is 1 but increased to 1.5 with 25087423652421874877777769755559
 
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   let mf = (Math.max(window.innerHeight,window.innerWidth)/Math.min(window.innerHeight,window.innerWidth));//advantage of translation over zoom (right?)
@@ -328,7 +328,7 @@ window.settingsSet = false
 
 const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 
-const wingsOfRighteousness2 =(-Number(".2508742365242187487777776975555924422442"//+".25087423652421"+"874869"
+const wingsOfRighteousness2 =(-Number(".25087423652421874877777769755559"//+".25087423652421"+"874869"
     )+(grPermanent-leafPermanent-2**.5))*2;
 function resetAll(){
 
