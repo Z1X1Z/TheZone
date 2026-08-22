@@ -19,7 +19,7 @@ const netspeedChanger = 2./3.;
 var zoomFrames = (60/Math.log(3.)**4)//as in 60 seconds
 *(INcreaseBoost*netspeedChanger+1);//frames to double zoom
 
-var movementRateORIGINAL = .75;//with wingsofrighteousness2=".25087423652421874869" is 1 but increased to 1.5 with 25087423652421874877777769755559
+var movementRateORIGINAL = .75*Math.log(3);//with wingsofrighteousness2=".25087423652421874869" is 1 but increased to 1.5 with 25087423652421874877777769755559
 
 let ZR = Math.E**(Math.log(.5)/zoomFrames);
                   let mf = (Math.max(window.innerHeight,window.innerWidth)/Math.min(window.innerHeight,window.innerWidth));//advantage of translation over zoom (right?)
@@ -1538,17 +1538,18 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
     {
         if(number=="no number")
             {
-                        window.rezUpgradeBypass=true;
 
-
- zoomFrames = (60)//as in 60 seconds
- movementRateORIGINAL = 1.;//with wingsofrighteousness2=".25087423652421874869" is 1 but increased to 1.5 with 25087423652421874877777769755559
 
                 rez *=1.1; 
                 if(window.INITIALIZED) renderer.setPixelRatio( rez);
             }
             else
             {
+                                        window.rezUpgradeBypass=true;
+
+ zoomFrames = (60)//as in 60 seconds
+ movementRateORIGINAL = 1.;//with wingsofrighteousness2=".25087423652421874869" is 1 but increased to 1.5 with 25087423652421874877777769755559
+
                 window.rez=window.devicePixelRatio/number;
                  if(window.INITIALIZED) renderer.setPixelRatio( rez);
             }
