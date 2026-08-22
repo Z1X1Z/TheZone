@@ -801,9 +801,18 @@ function move() {
         else 
     if (((fromCenter - zoom**(logStabilizationConstant))> uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0)) {
         if (fromCenter < jesusJetsThreshold)
-            wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter;
-        else
-            wrapMovementBoost = 4. / 3.;
+        {
+                if(!window.rezUpgradeBypass)
+                wrapMovementBoost = 3.5 * fromCenter ** .5 / fromCenter;
+                else  wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter; 
+} 
+                      else
+
+                        {
+                if(!window.rezUpgradeBypass)
+                wrapMovementBoost = 1.;
+                else              wrapMovementBoost = 4. / 3.;
+}
     }
     else wrapMovementBoost = 1;
 
@@ -2307,15 +2316,19 @@ function executeTouchRegime() {
                 
         else if (((fromCenter - zoom**(logStabilizationConstant))  > uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0.) && spunTouch[0] != 0 && spunTouch[1] != 0) {
             
-                if (fromCenter < jesusJetsThreshold) {
-                wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter;
-            }
-            else
-            {
-                wrapMovementBoost = 4. / 3.;
+            if (fromCenter < jesusJetsThreshold)
+        {
+                if(!window.rezUpgradeBypass)
+                wrapMovementBoost = 3.5 * fromCenter ** .5 / fromCenter;
+                else  wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter; 
+} 
+                      else
 
-            }
-
+                        {
+                if(!window.rezUpgradeBypass)
+                wrapMovementBoost = 1.;
+                else              wrapMovementBoost = 4. / 3.;
+}
         }
         else wrapMovementBoost = 1;
         
