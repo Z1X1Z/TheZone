@@ -2877,7 +2877,6 @@ float lfc = length(constellationCoord);
 float lengthP = length(p);
 
  float zoomB = zoom;
-float lfcC = length(coords);
     if(lengthP>3.*3.*3.)
     {
         
@@ -2885,7 +2884,6 @@ float lfcC = length(coords);
         lengthP*=3.;
         coordsB*=3.;
         lfc*=3.;
-        lfcC*=3.;
         zoomB*=3.;
     }
 
@@ -2904,6 +2902,41 @@ const float crs = 64.;//this is the mandelclover and original inheritance colorm
  float centerslide = 0.;
 bool pollen = true;
 
+
+float SEVEYEPush = pow(2.,SEVEYEpow);
+
+float SEVEYEStartAdj=SEVEYEStart;
+float sevMargin = 1./SEVEYEPush;
+float lfcAdj = lfc;
+    SEVEYEStartAdj*=- clvrVariant4;
+    sevMargin*=-clvrVariant4;
+    lfcAdj*=.75;
+
+sevMargin*=SEVEYEStart/2.;
+sevMargin/=8./SEVEYEPush;
+
+float upperOuterLimit = pow(2.,61.);
+    
+
+                   if(lengthP>(upperOuterLimit-sevMargin*2.)/l3&&lengthP>upperOuterLimit)
+
+{
+
+//   if((lfc>SEVEYEStartAdj-sevMargin&&zoom<1.)||lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(2.)/lfc-.125+zoomB;
+ 
+  p/=upperOuterLimit/32.;
+coordsB/=upperOuterLimit/32.;
+zoomB/=interSection/32.;
+
+p=1./(1.-abs(p));
+  // p=1.5/(2.5-vec2(-p.x,abs(p.y)+budge));
+        p/=32.;
+        lengthP=length(p);
+
+        hyperCore+=lengthP;
+
+}
+
 if(lengthP>interSection)
 {
     pollen=false;
@@ -2920,6 +2953,8 @@ p*=interSection*2.;
                            //hyperCore+=log2;
                         }
                     }
+             
+
                 
 
 
@@ -2974,18 +3009,6 @@ float loops=0.;
 
 
 
-float SEVEYEPush = pow(2.,SEVEYEpow);
-
-float SEVEYEStartAdj=SEVEYEStart;
-float sevMargin = 1./SEVEYEPush;
-float lfcAdj = lfc;
-    SEVEYEStartAdj*=- clvrVariant4;
-    sevMargin*=-clvrVariant4;
-    lfcAdj*=.75;
-
-sevMargin*=SEVEYEStart/2.;
-sevMargin/=8./SEVEYEPush;
-
 int swapped=swap;
 int flopped=oppositionalCoreFlop;
 
@@ -3035,7 +3058,7 @@ else
 }
 
 
-if(lfcC>interSection)
+if(lfc>interSection)
 {
        if(wheel) 
      {swapped=int(mod(float(swapped+2+4*10) ,4.));
@@ -3060,7 +3083,7 @@ float c = length(s);
    if((lfc>SEVEYEStartAdj-sevMargin&&zoom<1.)||lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(2.)/lfc-.125+zoomB;
    //pow(sqrt(1./zoomB),zoomB)+2./lfc-1.;
   // hyperCore-=pow(sqrt(zoomB),zoomB);
-       if(lfcC<interSection)
+       if(lfc<interSection)
 {
    s/=SEVEYEPush;
 coordsB/=SEVEYEPush;
@@ -3302,7 +3325,7 @@ float daisifier = 0.;
                if(wheel)m =  ((pWithoutChiralizer/lfc)
                                                         -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
                                            *mandelCloverFactor;
-                                           if(lfcC>interSection)m/=lfcC*l3;
+                                           if(lfc>interSection)m/=lfc*l3;
 
 
 
