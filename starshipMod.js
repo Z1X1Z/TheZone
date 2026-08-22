@@ -799,9 +799,9 @@ function move() {
                 wrapMovementBoost=1.5
                 
         else 
-    if (((fromCenter - zoom) * (1. - zoom) - zoom > uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0)) {
+    if (((fromCenter - zoom)> uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0)) {
         if (fromCenter < jesusJetsThreshold)
-            wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter;
+            wrapMovementBoost = 3. * fromCenter ** .5 / fromCenter;
         else
             wrapMovementBoost = 4. / 3.;
     }
@@ -2305,11 +2305,11 @@ function executeTouchRegime() {
                 wrapMovementBoost=1.5
           }
                 
-        else if (((fromCenter - zoom) * (1. - zoom) > uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0.) && spunTouch[0] != 0 && spunTouch[1] != 0) {
+        else if (((fromCenter - zoom)  > uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0.) && spunTouch[0] != 0 && spunTouch[1] != 0) {
           
             
                 if (fromCenter < jesusJetsThreshold) {
-                wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter;
+                wrapMovementBoost = 3. * fromCenter ** .5 / fromCenter;
             }
             else
             {
@@ -4512,7 +4512,7 @@ function constellationCoordFind() {//needs to be tuned for ngenesis
 }
 
 const frameBoosted = 1024
-const wingsOfRighteousness =4.2508742365242187487777776975555924424224;//4242244224
+const wingsOfRighteousness =4.2508742365242187487777776975555942242442;//42242442
 //const wingsOfRighteousness =4.25087423652421874877777769;
 //console.log(wingsOfRighteousness)
 var frameRation = (wingsOfRighteousness +
