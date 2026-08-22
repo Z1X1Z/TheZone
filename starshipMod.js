@@ -802,21 +802,21 @@ function move() {
     const d_yS = spunD[1] * interpolation;
 
  if(fromCenter>skyInterSection)
-                wrapMovementBoost=1.5
+                wrapMovementBoost=1.
                 
         else 
     if (((fromCenter - zoom**(logStabilizationConstant))> uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0)) {
         if (fromCenter < jesusJetsThreshold)
         {
                 if(!window.rezUpgradeBypass)
-                wrapMovementBoost = 3.5 * fromCenter ** .5 / fromCenter;
+                wrapMovementBoost = 4./Math.log(3) * fromCenter ** .5 / fromCenter;
                 else  wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter; 
 } 
                       else
 
                         {
                 if(!window.rezUpgradeBypass)
-                wrapMovementBoost = 1.;
+                wrapMovementBoost = logStabilizationConstant;
                 else              wrapMovementBoost = 4. / 3.;
 }
     }
@@ -2317,7 +2317,7 @@ function executeTouchRegime() {
             spunTouch = spin(touchMovement, -uniforms.carousel.value * (uniforms["time"].value * uniforms["rate"].value + Math.PI) % (Math.PI * 2.));
           if(fromCenter>skyInterSection)
           {
-                wrapMovementBoost=1.5
+                wrapMovementBoost=1.
           }
                 
         else if (((fromCenter - zoom**(logStabilizationConstant))  > uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0.) && spunTouch[0] != 0 && spunTouch[1] != 0) {
@@ -2325,14 +2325,14 @@ function executeTouchRegime() {
             if (fromCenter < jesusJetsThreshold)
         {
                 if(!window.rezUpgradeBypass)
-                wrapMovementBoost = 3.5 * fromCenter ** .5 / fromCenter;
+                wrapMovementBoost = 4./Math.log(3) * fromCenter ** .5 / fromCenter;
                 else  wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter; 
 } 
                       else
 
                         {
                 if(!window.rezUpgradeBypass)
-                wrapMovementBoost = 1.;
+                wrapMovementBoost = logStabilizationConstant;
                 else              wrapMovementBoost = 4. / 3.;
 }
         }
