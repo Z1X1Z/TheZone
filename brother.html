@@ -2877,13 +2877,17 @@ float lfc = length(constellationCoord);
 float lengthP = length(p);
 
  float zoomB = zoom;
+ float lfcB = lfc;
+ float lengthB = lengthP;
     if(lengthP>3.*3.*3.)
     {
         
         p*=3.;
         lengthP*=3.;
+        lengthB*=3.;
         coordsB*=3.;
         lfc*=3.;
+        lfcB*=3.;
         zoomB*=3.;
     }
 
@@ -2921,7 +2925,7 @@ float upperOuterLimit = pow(2.,61.);
                    if(lengthP>(upperOuterLimit-sevMargin*2.)/l3&&lengthP>upperOuterLimit)
 
 {
-
+ 
 //   if((lfc>SEVEYEStartAdj-sevMargin&&zoom<1.)||lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(2.)/lfc-.125+zoomB;
  
   p/=upperOuterLimit/32.;
@@ -2939,9 +2943,12 @@ p=1./(1.-abs(p));
 if(lengthP>interSection)
 {
     pollen=false;
-    hyperCore-=log2/2.;
+  if(!wheel)  hyperCore-=log2/2.;
+  else hyperCore+=log2/2.;
 lengthP*=interSection*2.;
 p*=interSection*2.;
+                                   //     if(morph!=0.)      hyperCore+=1.*LogHalfReciprocal;
+
  for(int i=0;i<int(crs);//crs+3=63
                   i++)if(lengthP>1./3.  
                   
@@ -3043,21 +3050,20 @@ if(lfc>zoomB)
 }
 }
 else 
-{
+{  
     swapped=int(mod(float(swap-swapJUBILEE+swapDEFAULT+4*10+3) ,4.));
    flopped = int(mod(float(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10),3.));
-     if(wheel)
-        {
+
                  flopped = int(mod(float(flopped+2+3*10),3.));
       swapped=int(mod(float(swapped+4*10+3) ,4.));
 
-}    
 }
 
 }
 
 
-if(lfc>interSection)
+
+if(lfcB>interSection)
 {
        if(wheel) 
      {swapped=int(mod(float(swapped+2+4*10) ,4.));
@@ -3065,6 +3071,8 @@ if(lfc>interSection)
 
 
      }
+
+     swapped=int(mod(float(swapped+2+4*10) ,4.));
     }
 
 
@@ -3163,7 +3171,7 @@ hyperCore+=.25*LogHalfReciprocal;//continuumClover boost
 
 if(pollen&&!BURSTING)
 {
-     hyperCore+=.5;
+    // hyperCore+=.5;
 }
 
 
@@ -3321,10 +3329,19 @@ float daisifier = 0.;
                            
 
 
-               if(wheel)m =  ((pWithoutChiralizer/lfc)
+
+               if(wheel)
+               {
+                if(lengthP>81.)
+                 m=((pWithoutChiralizer/lfc)
                                                         -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
                                            *mandelCloverFactor;
-                                           if(lfc>interSection)m/=lfc*l3;
+                                           else
+                m =  ((pWithoutChiralizer)
+                                                        -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
+                                           *mandelCloverFactor;
+                                           if(lfcB>interSection)m/=lfcB*2.;
+               }
 
 
 
