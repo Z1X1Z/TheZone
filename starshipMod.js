@@ -4538,7 +4538,7 @@ function constellationCoordFind() {//needs to be tuned for ngenesis
 }
 
 const frameBoosted = 1024
-const wingsOfRighteousness =4.250874236524218748777777697555542242442933777;//42242442
+const wingsOfRighteousness =4.250874236524218748777777697555542242442977373;//2508742365242187487777776975555422424429377373
 //const wingsOfRighteousness =4.2508742365242187487777776975555924422442;////
 //const wingsOfRighteousness =4.25087423652421874877777769;
 //console.log(wingsOfRighteousness)
