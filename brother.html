@@ -3171,7 +3171,7 @@ hyperCore+=.25*LogHalfReciprocal;//continuumClover boost
 
 if(pollen&&!BURSTING)
 {
-    // hyperCore+=.5;
+     hyperCore+=.5;
 }
 
 
@@ -3353,7 +3353,7 @@ float daisifier = 0.;
                 m =  ((pWithoutChiralizer)
                                                         -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
                                            *mandelCloverFactor/lfc;
-                                      //     if(lfcB>interSection)
+                                           if(lfcB>interSection&&lfcB>2./3.)
                                       m/=lfcB*2.;
                }
             }

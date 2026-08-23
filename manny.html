@@ -5337,7 +5337,7 @@ else
                 m =  ((pWithoutChiralizer)
                                                         -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
                                            *mandelCloverFactor/lfc;
-                                           //if(lfcB>interSection)
+                                           if(lfcB>interSection&&lfcB>2./3.)
                                            m/=lfcB*2.;
                }
             }
