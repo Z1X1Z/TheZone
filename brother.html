@@ -3052,10 +3052,13 @@ if(lfc>zoomB)
 else 
 {  
     swapped=int(mod(float(swap-swapJUBILEE+swapDEFAULT+4*10+3) ,4.));
-   flopped = int(mod(float(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10),3.));
+       flopped = int(mod(float(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10),3.));
+
+    if(wheel){
 
                  flopped = int(mod(float(flopped+2+3*10),3.));
       swapped=int(mod(float(swapped+4*10+3) ,4.));
+    }
 
 }
 
@@ -3066,13 +3069,13 @@ else
 if(lfcB>interSection)
 {
        if(wheel) 
-     {swapped=int(mod(float(swapped+2+4*10) ,4.));
+     {//swapped=int(mod(float(swapped+2+4*10) ,4.));
      flopped = int(mod(float(flopped+3*10),3.));
 
 
      }
 
-     swapped=int(mod(float(swapped+2+4*10) ,4.));
+    // swapped=int(mod(float(swapped+2+4*10) ,4.));
     }
 
 
@@ -3334,7 +3337,7 @@ float daisifier = 0.;
                {
 
 
- if(lengthP>SEVEYEStartAdj&&SEVEYEStartAdj>lengthP-sevMargin)
+ if(lengthP>SEVEYEStartAdj&&SEVEYEStartAdj>lengthP-sevMargin&&lfcB<interSection)
  {
  
                  m=((pWithoutChiralizer)
@@ -3348,12 +3351,20 @@ float daisifier = 0.;
                                                         -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
                                            *mandelCloverFactor;
                }
-                                           else
+                                           else if (lengthP> interSection)
                                            {
-                m =  ((pWithoutChiralizer)
+                m =  ((pWithoutChiralizer/lfc)
                                                         -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
-                                           *mandelCloverFactor/lfc;
-                                           if(lfcB>interSection&&lfcB>2./3.)
+                                           *mandelCloverFactor;
+                                           if(lfcB>2./3.)
+                                      m/=lfcB*2.;
+               }
+
+                else  {
+                m =  ((pWithoutChiralizer/lfc)
+                                                        -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
+                                           *mandelCloverFactor;
+                                           if(lfcB>2./3.)
                                       m/=lfcB*2.;
                }
             }

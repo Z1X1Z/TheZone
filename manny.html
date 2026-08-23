@@ -4509,8 +4509,9 @@ else if(seventhOUTside)
 }    
 }
 else  {  swapped=int(mod(float(swap-swapJUBILEE+swapDEFAULT+4*10+3) ,4.));
+   flopped = int(mod(float(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10),3.));
 
-   flopped = int(mod(float(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10+1),3.));
+   if(wheel||spirated!=0.)flopped = int(mod(float(oppositionalCoreFlop- oppositionalCoreFlopJUBILEE+ oppositionalCoreFlopDEFAULT+3*10+1),3.));
          if(spirated!=0.)    swapped=int(mod(float(swapped+1) ,4.));
 
 }
@@ -4544,8 +4545,11 @@ if(lfcB>interSection)
 
 
      }
-     else if  (morph!=0.) swapped=int(mod(float(swapped+2+4*10) ,4.));
-      if(spirated!=0.)    swapped=int(mod(float(swapped+2) ,4.));
+     else if  (morph!=0.)
+     { swapped=int(mod(float(swapped+2+4*10) ,4.));
+              if(spirated!=0.)    swapped=int(mod(float(swapped+2) ,4.));
+
+     }
 
 }
 /*bugged
@@ -4630,7 +4634,8 @@ if(lengthP>interSection)
     pollen=false;
 
   if(!wheel)  hyperCore-=log2/2.;
-  else hyperCore+=log2/2.;lengthP*=interSection*2.;
+  //else hyperCore+=log2/2.;
+  lengthP*=interSection*2.;
 p*=interSection*2.;
 
 
@@ -5316,8 +5321,7 @@ else
            if(wheel)
                {
 /*
-
- if(lengthP>SEVEYEStartAdj&&SEVEYEStartAdj>lengthP-sevMargin)
+ if(lengthP>SEVEYEStartAdj&&SEVEYEStartAdj>lengthP-sevMargin&&lfcB<interSection)
  {
  
                  m=((pWithoutChiralizer)
@@ -5325,22 +5329,32 @@ else
                                            *mandelCloverFactor;
               //  if(lengthP>SEVEYEStartAdj-sevMargin)
  }
-          else   // doesn't work with manny.html, works with brother!*/ 
-           if(lengthP>SEVEYEStartAdj-sevMargin)
+          else    */  if(lengthP>SEVEYEStartAdj-sevMargin)
                 {
                  m=((pWithoutChiralizer/lfc)
                                                         -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
                                            *mandelCloverFactor;
                }
-                                           else
+                                           else if (lengthP> interSection)
                                            {
-                m =  ((pWithoutChiralizer)
+                m =  ((pWithoutChiralizer/lfc)
                                                         -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
-                                           *mandelCloverFactor/lfc;
-                                           if(lfcB>interSection&&lfcB>2./3.)
-                                           m/=lfcB*2.;
+                                           *mandelCloverFactor;
+                                           if(lfcB>2./3.)
+                                      m/=lfcB*2.;
+               }
+
+                else  {
+                m =  ((pWithoutChiralizer/lfc)
+                                                        -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
+                                           *mandelCloverFactor;
+                                           if(lfcB>2./3.)
+                                      m/=lfcB*2.;
                }
             }
+
+
+            
 
 
 
@@ -5721,7 +5735,10 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
        if(morph==1.&&!wheel)s-=t;
 
      //  else if(morph==2.&&!wheel)s+=t;
-       else s+=t-m;
+       else{
+         s+=t;
+         s-=m;
+       }
                              
                              
        if(Clovoid)s.x=(sqrt(2.*abs(1./s.x)));//this is the body steps on the clover
