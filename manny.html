@@ -5313,20 +5313,34 @@ else
 //else s*=0.;
 
 
-
-               if(wheel)
+           if(wheel)
                {
-                if(lengthP>SEVEYEStartAdj-sevMargin)
+/*
+
+ if(lengthP>SEVEYEStartAdj&&SEVEYEStartAdj>lengthP-sevMargin)
+ {
+ 
+                 m=((pWithoutChiralizer)
+                                                        -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
+                                           *mandelCloverFactor;
+              //  if(lengthP>SEVEYEStartAdj-sevMargin)
+ }
+          else   // doesn't work with manny.html, works with brother!*/ 
+           if(lengthP>SEVEYEStartAdj-sevMargin)
+                {
                  m=((pWithoutChiralizer/lfc)
                                                         -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
                                            *mandelCloverFactor;
+               }
                                            else
+                                           {
                 m =  ((pWithoutChiralizer)
                                                         -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
-                                           *mandelCloverFactor;
-                                           if(lfcB>interSection)m/=lfcB*2.;
+                                           *mandelCloverFactor/lfc;
+                                           //if(lfcB>interSection)
+                                           m/=lfcB*2.;
                }
-
+            }
 
 
 
