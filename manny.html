@@ -4536,9 +4536,11 @@ if(lfcB>interSection)
        if(wheel) 
      {
       if(morph==0.) 
-      swapped=int(mod(float(swapped+4*10) ,4.));
-      else swapped=int(mod(float(swapped+2+4*10) ,4.));
-     flopped = int(mod(float(flopped+1+3*10),3.));
+      swapped=int(mod(float(swapped+2+4*10) ,4.));
+      else 
+      {swapped=int(mod(float(swapped+2+4*10) ,4.));
+             flopped = int(mod(float(flopped+1+3*10),3.));
+      }
 
 
      }
