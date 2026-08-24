@@ -2879,20 +2879,48 @@ float lengthP = length(p);
  float zoomB = zoom;
  float lfcB = lfc;
  float lengthB = lengthP;
-    if(lengthP>3.*3.*3.*l3  )
+
+   float interSection = pow(2.,8.);
+
+ if(lengthP>interSection/1.5);
+  else  if(abs(p.y)>27./logStabilizationConstant&&!(abs(p.x)>27.&&abs(p.x)>27.))
     {
         
-        p*=3.;
-        lengthP*=3.;
-        lengthB*=3.;
-        coordsB*=3.;
-        lfc*=3.;
-        lfcB*=3.;
+        p.y*=3.;
+        p.x*=3.;
+        coordsB.y*=3.;
+        coordsB.x*=3.;
         zoomB*=3.;
     }
 
 
-  float interSection = pow(2.,8.);
+   else if(abs(p.x)>27.&&!(abs(p.x)>27.))
+    {
+        float collapsment = 3.*1.5;//sqrt(3.)
+        
+        p.x*=collapsment;
+        p.y*=collapsment;
+     
+        coordsB.x*=collapsment;
+        coordsB.y*=collapsment;
+        zoomB*=collapsment;
+    }
+else if((abs(p.x)>27.&&abs(p.x)>27.))
+  {
+        float collapsment = 4.;//sqrt(3.)
+        
+        p.x*=collapsment;
+        p.y*=collapsment;
+     
+        coordsB.x*=collapsment;
+        coordsB.y*=collapsment;
+        zoomB*=collapsment;
+    }
+
+lengthP=length(p);
+lengthB=lengthP;
+    lfc=length(coordsB);
+    lfcB=lfc;
 
 if(lengthP>81.&&lengthP<interSection)
 {

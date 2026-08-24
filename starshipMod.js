@@ -1840,7 +1840,9 @@ window.lastRailC = 0.;
 var triggerRailSet = false
 const zoomCap32 = .000001;
 const skyInterSection = 2**8/3.
-const jesusJetsThreshold = 81.*Math.log(3.)/3;
+const jesusJetsThresholdY =3*3*3/logStabilizationConstant;
+const jesusJetsThresholdX = 3*3*3;
+const jesusJetsThreshold = 3*3*3*Math.log(3);
 const upperJesusJets = 2**61/3.;
 function zoomRoutine() {
     /*
@@ -1854,8 +1856,10 @@ if(zoom>2**64)
         coordY=0.
 
     }
-            if (fromCenter > jesusJetsThreshold&&fromCenter<skyInterSection)
+            if ((Math.abs(coordX) > jesusJetsThresholdY||Math.abs(coordY) > jesusJetsThresholdX)&&fromCenter<skyInterSection)
+            {
                 jesusJetsBoost+=4;
+            }
                 
     var metaDepth = (!dupered) ? zoomCap32 : zoomCap32 ** 2;//due to pixelization limits
      if(fromCenter>upperJesusJets&&("brother" in window))metaDepth=metaDepth*2**(1./fromCenter);
@@ -2335,7 +2339,7 @@ function executeTouchRegime() {
                 
         else if (((fromCenter - zoom**(logStabilizationConstant))  > uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0.) && spunTouch[0] != 0 && spunTouch[1] != 0) {
             
-            if (fromCenter < jesusJetsThreshold)
+            if(Math.abs(coordX) < jesusJetsThresholdY||Math.abs(coordY) < jesusJetsThresholdX)
         {
                 if(!window.rezUpgradeBypass)
                 wrapMovementBoost = 4.*Math.log(3)/logStabilizationConstant / fromCenter ** .5 ;
