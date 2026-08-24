@@ -3090,8 +3090,12 @@ float c = length(s);
 {
     //tinsel_limit/=8.;
    //if(!(zoomB/lfc<l3*2.-2.))
-  if((lfc>SEVEYEStartAdj-sevMargin)||lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(1.)/lfc+zoomB;
-  if(lfc<81.)hyperCore-=sqrt(lengthP)-SEVEYEStartAdj;
+  if((lfc>SEVEYEStartAdj-sevMargin)||lfc>SEVEYEStartAdj)
+  {
+    hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(1.)/lfc
+  +zoomB+.25;
+    if(lfc<81.) hyperCore -= (3.*3.)/(3.*3.*3.*l3-lengthP);
+  }
    //pow(sqrt(1./zoomB),zoomB)+2./lfc-1.;
   // hyperCore-=pow(sqrt(zoomB),zoomB);
        if(lfc<interSection)
