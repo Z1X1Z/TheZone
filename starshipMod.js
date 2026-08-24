@@ -1754,12 +1754,14 @@ function infinicore() {
 
     if (zoom > 1. / 2 ** 2 && cloverSuperCores > 0) {
         zoom /= 2. ** singleHyperCoreDepth;
-        if (zoom < 1.&&!(fromCenter>skyInterSection)) {
+        if (zoom < 1.&&!(uniforms.SEVEYEStart.value<fromCenter&&fromCenter/ zoom ** .5< uniforms.SEVEYEStart.value)
+&&!(fromCenter>skyInterSection)) {
             coordY /= 2. ** singleHyperCoreDepth; coordX /= 2. ** singleHyperCoreDepth;
             fromCenter /= 2. ** singleHyperCoreDepth;
             preFromCenter /= 2. ** singleHyperCoreDepth;
         }
         else {
+            
             while (zoom > 1. && isFinite(zoom)) zoom /= 2.;
        if(fromCenter < 2. / 3.) 
         {triggerRailSet=false
@@ -1838,7 +1840,7 @@ window.lastRailC = 0.;
 var triggerRailSet = false
 const zoomCap32 = .000001;
 const skyInterSection = 2**8/3.
-const jesusJetsThreshold = 81./3;
+const jesusJetsThreshold = 81.*Math.log(3.)/3;
 const upperJesusJets = 2**61/3.;
 function zoomRoutine() {
     /*
@@ -1852,8 +1854,9 @@ if(zoom>2**64)
         coordY=0.
 
     }
-            if (fromCenter > jesusJetsThreshold&&fromCenter<skyInterSection) jesusJetsBoost+=4;
-
+            if (fromCenter > jesusJetsThreshold&&fromCenter<skyInterSection)
+                jesusJetsBoost+=4;
+                
     var metaDepth = (!dupered) ? zoomCap32 : zoomCap32 ** 2;//due to pixelization limits
      if(fromCenter>upperJesusJets&&("brother" in window))metaDepth=metaDepth*2**(1./fromCenter);
      else if(fromCenter>skyInterSection)metaDepth=metaDepth*2**(3.+1./fromCenter);
@@ -1870,12 +1873,13 @@ if(zoom>2**64)
     if (uniforms["colorCombo"].value == 16) zoomCone /= 1.33333333 / 2.;
     if (zoom >= 1.&&(fromCenter<skyInterSection||zoom>=fromCenter*.5)&&(fromCenter<upperJesusJets&&("brother" in window)||zoom>=fromCenter/4))//could work as one (also below) but my phone was partially crashing on continuum clover zoomout
         zoomOutEngage = false;
-    ZR = setZoomRate();
-
+    ZR=setZoomRate();
     if (!isFinite(ZR)) ZR = 1;
     if (!zoomAtl41 && !zoomOutEngage && zoomRate > 0.) {
         if ((zoom > zoomCone && ampThresh > zoomOutRatchetThreshold && (on && !window.touchMode)) || xTouch + yTouch != 0) zoom *= ZR ** ((1. + INcreaseBoost) * zoomBoost);
-        else if (uniforms.MetaCored.value || zoom < 1.||(fromCenter>skyInterSection&&zoom<fromCenter*.5)&&(fromCenter>upperJesusJets&&("brother" in window)||zoom<fromCenter/4)) {
+        else if (uniforms.MetaCored.value || zoom < 1.&&
+//||(fromCenter<skyInterSection&&uniforms.SEVEYEStart.value<fromCenter&&fromCenter/ zoom ** .5> uniforms.SEVEYEStart.value)||
+(fromCenter>skyInterSection&&zoom<fromCenter*.5)&&(fromCenter>upperJesusJets&&("brother" in window)||zoom<fromCenter/4)) {
             zoom /= ZR;
             triggerRailSet = true
             if (center) { coordX *= ZR * 2. / 3.;; coordY *= ZR * 2. / 3.; }
@@ -2288,7 +2292,7 @@ function executeTouchRegime() {
 
 
     }
-    if (true || !zoomAtl41) {
+    if ( !zoomAtl41) {
         lastZoom = zoom;
           if(TaS||!window.touchAndSing)  zoomRoutine();
         if (((((coordX ** 2 + coordY ** 2) ** .5 / zoom ** .5< uniforms.SEVEYEStart.value || fromCenter == 0.) && uniforms.seventhOUTside.value ) || !uniforms.seventhOUTside.value|| uniforms.colorCombo.value > 0))
