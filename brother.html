@@ -1590,6 +1590,7 @@ uniform int inseyedOut;
                                   const float twoThirds = 2./3.;
                                   const float sqrt2 = sqrt(2.);
                                     const float l3 = log(3.);       
+                                     const    float logStabilizationConstant = 1./l3+(1.-1./l3)/2.;
 
                                   const float PI = 3.14159274;
                                   const float PI2 = PI*2.;
@@ -1848,7 +1849,20 @@ float brightness=0.;
        uv=spin2(uv,-angle1+PIdiv2
                 );
        vec4 ret = vec4(0.);
-       if(length(uv)<starnSize){
+float dd = length(uv);
+        float rote = -0.;
+
+float black_note=1.;
+        if(
+                  noteOfStar==mod(0. +rote,12.)||
+              noteOfStar==mod(2. +rote,12.) ||
+              noteOfStar==mod(5.  +rote,12.)||
+              noteOfStar== mod(7. +rote,12.)||
+              noteOfStar== mod(10. +rote,12.)
+        )black_note=-1.;
+
+
+       if(dd<starnSize){
        //uv *=    26.5;
    // return vec4(angle1*divideByMultiplyingPi2+.5  );
             float angle =witnessFlip*atan(uv.x,uv.y);// mod(atan(uv.x,uv.y)+PI2,PI2);//
@@ -1888,11 +1902,10 @@ float brightness=0.;
        // noteAmp=pow(noteAmp,.5);
        // noteAmp/=255.;
       // return vec4(noteAmp);
-        float d = length( uv);///16.;
+        float d = dd;///16.;
         //fr=(fr)*(fr)/3.;
       //  float power = 5.;
       // float b = pow(noteAmp,power)/pow(d*6.,power*.5);
-        float rote = -0.;
         float noteAmpToLength=noteAmp/d;
        float noteAmpByLength = noteAmp*d;
        // if(noteOfStar==0.)return vec4(1.);
@@ -1927,33 +1940,34 @@ float brightness=0.;
                     ret=vec4(.25
                              );
                    */
-               if(
-                  noteOfStar==mod(0. +rote,12.)||
-              noteOfStar==mod(2. +rote,12.) ||
-              noteOfStar==mod(5.  +rote,12.)||
-              noteOfStar== mod(7. +rote,12.)||
-              noteOfStar== mod(10. +rote,12.))
+               if(black_note==-1.)
               {
                ret=vec4(clamp(
-                                                        noteAmpToLength
+
+                pow(1.-noteAmp/16.,2. )
                                                  ,0.,1.)
-                                                 )*.125;
+                                                 )/3.;//*.125;
             }
               else if   ( noteOfStar==mod(6. +rote-rnd(twistStar/PI2*12.),12.))
               ret=vec4(vec3(clamp(
-                                                       noteAmpToLength
-                                                ,0.,1.)*.25
-                                                ),1.);
+                pow(noteAmp/16.,2. )
+
+                                                ,0.,1.)
+                                                ),1.);//*.25;
         else{
             
                       
 ret= vec4(clamp(
-                noteAmpToLength
-            ,0. ,1.)*.75
+              ( 1.- pow(1.-noteAmp/32.,2. ))
+            ,0. ,1.)*1.5
        );
            }
            }
+
 }
+                  // if(dd>starnSize&&dd<starnSize*(2.-logStabilizationConstant))ret = vec4(black_note);
+
+
         return ret;
     }
 
@@ -1989,7 +2003,6 @@ ret= vec4(clamp(
                            if(volume!=1.)h*=length(g*g)*4.;
                        return h;
                        }
-                                     const    float logStabilizationConstant = 1./l3+(1.-1./l3)/2.;
 
                        
                                                       vec4 gatesOfHeaven( vec2 uv, float noteskew )//Shekina Glory
