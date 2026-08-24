@@ -4425,7 +4425,7 @@ int flopped=oppositionalCoreFlop;
 
 
  float lfcB = lfc;
-    if(lengthP>3.*3.*3.)
+    if(lengthP>3.*3.*3.*l3)
     {
         
         p*=3.;
@@ -4474,7 +4474,7 @@ float precores = .25*LogHalfReciprocal;
                 
   if(lengthP>81.&&lengthP<interSection)
   {
-        hyperCore -= 1./(lengthP-3.*3.*3.);
+    hyperCore -= (3.*3.*3.*3.)/(lfc-3.*3.*3.*l3);
 
     if(morph==0.)coordsB/=3.*3.*3.;
       
@@ -4884,7 +4884,8 @@ vec2 s=p;
  )
 {
     
-   if((lfc>SEVEYEStartAdj-sevMargin&&zoom<1.)||lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(2.)/lfc-.125+zoomB;
+  if((lfc>SEVEYEStartAdj-sevMargin)||lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(1.)/lfc+zoomB;
+  if(lfc<81.)hyperCore-=sqrt(lengthP)-SEVEYEStartAdj;
 
      if(lfc<interSection)
      {
@@ -5345,7 +5346,7 @@ else
                 m =  ((pWithoutChiralizer/lfc)
                                                         -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
                                            *mandelCloverFactor;
-                                           if(lfcB>2./3.)
+                                     //      if(lfcB>2./3.)
                                       m/=lfcB*2.;
                }
 

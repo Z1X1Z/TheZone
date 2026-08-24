@@ -2879,7 +2879,7 @@ float lengthP = length(p);
  float zoomB = zoom;
  float lfcB = lfc;
  float lengthB = lengthP;
-    if(lengthP>3.*3.*3.)
+    if(lengthP>3.*3.*3.*l3  )
     {
         
         p*=3.;
@@ -2897,7 +2897,7 @@ float lengthP = length(p);
 if(lengthP>81.&&lengthP<interSection)
 {
     coordsB/=3.*3.*3.;
-    hyperCore -= 1./(lengthP-3.*3.*3.);
+    hyperCore -= (3.*3.*3.*3.)/(lfc-3.*3.*3.*l3);
 }
 
 float scale = 1.;
@@ -2926,7 +2926,7 @@ float upperOuterLimit = pow(2.,61.);
 
 {
  
-//   if((lfc>SEVEYEStartAdj-sevMargin&&zoom<1.)||lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(2.)/lfc-.125+zoomB;
+//   if((lfc>SEVEYEStartAdj-sevMargin&&zoom<1.)||lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(1.)/lfc+zoomB;
  
   p/=upperOuterLimit/32.;
 coordsB/=upperOuterLimit/32.;
@@ -3090,7 +3090,8 @@ float c = length(s);
 {
     //tinsel_limit/=8.;
    //if(!(zoomB/lfc<l3*2.-2.))
-   if((lfc>SEVEYEStartAdj-sevMargin&&zoom<1.)||lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(2.)/lfc-.125+zoomB;
+  if((lfc>SEVEYEStartAdj-sevMargin)||lfc>SEVEYEStartAdj)hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(1.)/lfc+zoomB;
+  if(lfc<81.)hyperCore-=sqrt(lengthP)-SEVEYEStartAdj;
    //pow(sqrt(1./zoomB),zoomB)+2./lfc-1.;
   // hyperCore-=pow(sqrt(zoomB),zoomB);
        if(lfc<interSection)
@@ -3200,7 +3201,7 @@ truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
   hyperCore+=(8.*log2);
   hyperCore+=log2/2.;
    }
-hyperCore-=.5;//for gigaLeap
+//hyperCore-=.5;//for gigaLeap
 bool spokeloverON=zoomB/lfc<2./3.;//could be 1.5, could be 2/3, one is a compromise
    //  if(spokeloverON)hyperCore-=log2;
   //hyperCore+=.5;
