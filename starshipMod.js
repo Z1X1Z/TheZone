@@ -2328,8 +2328,8 @@ function executeTouchRegime() {
     //if(pointerZoom)
     {
         ONbypass = true;
-        uniforms.d.value.x = 0.;
-        uniforms.d.value.y = 0.;
+        //uniforms.d.value.x = 0.;
+        //uniforms.d.value.y = 0.;
         let touchMovement = [0, 0];
         if (zoomRate != 0 && !zoomAtl41) touchMovement = [-Math.abs(zoom - lastZoom) * xTouch, Math.abs(zoom - lastZoom) * yTouch];
         else touchMovement = [-xTouch / zoomFrames * zoom * interpolation, yTouch / zoomFrames * zoom * interpolation]
@@ -5317,7 +5317,7 @@ theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
 
     }
 */
-var delta = interpolation/60;//Math.abs(note-lastNote)/12*3;
+var delta = interpolation/60*50;//Math.abs(note-lastNote)/12*3;
 //if(delta>.25)delta=0.;
     totalRotation+=delta
     //totalRotation=.1
@@ -5492,13 +5492,15 @@ if(fibgeBase!=2n&&window.blendFibge)
         {
             console.log("Resetting Fibgetti Spinner")
 
+                            ABC = 1;
+
             fibArray[ABC]=1n
             fibArray[(ABC+1)%3]=1n
             fibArray[(ABC+2)%3]=0n
             theWORDtoGOD="1"
             stringArray[ABC]="1"
-            stringArray[(ABC+1)%3]="0"
-            stringArray[(ABC+2)%3]="1"
+            stringArray[(ABC+1)%3]="1"
+            stringArray[(ABC+2)%3]="0"
     for(var clnr = 0; clnr<numberOfMetaTriangles;clnr++)
     {
                    let fibgeStride = 0.;
@@ -5517,7 +5519,6 @@ if(fibgeBase!=2n&&window.blendFibge)
                 spins=0n
                 totalRotation=0
                 lastANGLEmodulo=0
-                ABC = 1;
 fibonacciEngine()
 stringArray[ABC]=binaryConverter(fibArray[ABC])
 theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
