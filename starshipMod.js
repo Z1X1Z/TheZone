@@ -1195,7 +1195,7 @@ fibgetScene= new THREE.Scene();
             //vertexColors: true,
             color: 0xffffff,
             // opacity: .5,
-            linewidth: 3,//ignored by some WebGLRenderer
+            linewidth: 3.5,//ignored by some WebGLRenderer
             linecap: 'round', //ignored by WebGLRenderer
             linejoin: 'round' //ignored by WebGLRenderer
         });
@@ -2988,10 +2988,11 @@ function animate(timestamp) {
 
 
             let metroPhase = -Math.sin(-uniforms["time"].value * uniforms["metronome"].value * pi)
-            let frameCount = ((loopsRun % 2) - .5) * 2222222;
+            let frameCount = ((loopsRun % 2) - .5) * 2;
 
             if (spirographMODE == 1) {
-                lineMat.color = colorSound;
+
+                lineMat.color = colorSoundPURE
             }
             else if (uniforms["metronome"].value > 1) lineMat.color = new THREE.Color("").setRGB(metroPhase, metroPhase, metroPhase)
             else if (spirographMODE == 2) lineMat.color = new THREE.Color("").setRGB(frameCount, frameCount, frameCount);
