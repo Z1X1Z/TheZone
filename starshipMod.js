@@ -5317,7 +5317,7 @@ theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
 
     }
 */
-var delta = interpolation/60*50;//Math.abs(note-lastNote)/12*3;
+var delta = interpolation/60;//Math.abs(note-lastNote)/12*3;
 //if(delta>.25)delta=0.;
     totalRotation+=delta
     //totalRotation=.1
