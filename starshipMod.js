@@ -800,19 +800,32 @@ function move() {
     if (uniforms.carousel.value != 0. && uniforms["time"].value > 0) spunD = spin(spunD, -uniforms.carousel.value * (uniforms["time"].value * uniforms["rate"].value + Math.PI) % (Math.PI * 2.));
     const d_xS = spunD[0] * interpolation;
     const d_yS = spunD[1] * interpolation;
-      if(fromCenter>skyInterSection)
+    
+        if(fromCenter>skyInterSection||(fromCenter>skyInterSection/1.5&&Math.abs(coordY) > jesusJetsThresholdY&&!(Math.abs(coordX) > jesusJetsThresholdX&&Math.abs(coordY) < jesusJetsThresholdY)))
           {
                 wrapMovementBoost=logStabilizationConstant
           }
                 
     if (((fromCenter - zoom**(logStabilizationConstant))> uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0)) {
             
-            if (fromCenter < jesusJetsThreshold)
+            if(Math.abs(coordX) < jesusJetsThresholdX&&Math.abs(coordY) < jesusJetsThresholdY)
         {
                 if(!window.rezUpgradeBypass)
                 wrapMovementBoost = 4.*Math.log(3)/logStabilizationConstant / fromCenter ** .5 ;
                 else  wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter; 
 } 
+
+
+                      else if (Math.abs(coordY) > jesusJetsThresholdY)
+                      {
+
+wrapMovementBoost=2.-Math.log(3);
+                      }
+                      else if (Math.abs(coordX) > jesusJetsThresholdX)
+                        {
+                            wrapMovementBoost=.75*Math.log(3.)
+
+                        }
                       else
 
                         {
@@ -823,7 +836,7 @@ function move() {
         }
             else
              wrapMovementBoost = 1;
-        
+
 
 
     const bx = coordX + d_xS * MR * zoom * wrapMovementBoost;
@@ -1840,8 +1853,8 @@ window.lastRailC = 0.;
 var triggerRailSet = false
 const zoomCap32 = .000001;
 const skyInterSection = 2**8/3.
-const jesusJetsThresholdY =3*3*3/logStabilizationConstant;
-const jesusJetsThresholdX = 3*3*3;
+const jesusJetsThresholdX =3*3*3;
+const jesusJetsThresholdY = 3*3*3/logStabilizationConstant;
 const jesusJetsThreshold = 3*3*3*Math.log(3);
 const upperJesusJets = 2**61/3.;
 function zoomRoutine() {
@@ -1856,7 +1869,7 @@ if(zoom>2**64)
         coordY=0.
 
     }
-            if ((Math.abs(coordX) > jesusJetsThresholdY||Math.abs(coordY) > jesusJetsThresholdX)&&fromCenter<skyInterSection)
+            if ((Math.abs(coordX) > jesusJetsThresholdX||Math.abs(coordY) > jesusJetsThresholdY)&&fromCenter<skyInterSection)
             {
                 jesusJetsBoost+=4;
             }
@@ -2332,19 +2345,35 @@ function executeTouchRegime() {
         var spunTouch = touchMovement;
         if (uniforms.carousel.value != 0. && uniforms["time"].value > 0)
             spunTouch = spin(touchMovement, -uniforms.carousel.value * (uniforms["time"].value * uniforms["rate"].value + Math.PI) % (Math.PI * 2.));
-          if(fromCenter>skyInterSection)
+    
+    
+    
+    
+        if(fromCenter>skyInterSection||(fromCenter>skyInterSection/1.5&&Math.abs(coordY) > jesusJetsThresholdY&&!(Math.abs(coordX) > jesusJetsThresholdX&&Math.abs(coordY) < jesusJetsThresholdY)))
           {
                 wrapMovementBoost=logStabilizationConstant
           }
                 
         else if (((fromCenter - zoom**(logStabilizationConstant))  > uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0.) && spunTouch[0] != 0 && spunTouch[1] != 0) {
             
-            if(Math.abs(coordX) < jesusJetsThresholdY||Math.abs(coordY) < jesusJetsThresholdX)
+            if(Math.abs(coordX) < jesusJetsThresholdX&&Math.abs(coordY) < jesusJetsThresholdY)
         {
                 if(!window.rezUpgradeBypass)
                 wrapMovementBoost = 4.*Math.log(3)/logStabilizationConstant / fromCenter ** .5 ;
                 else  wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter; 
 } 
+
+
+                      else if (Math.abs(coordY) > jesusJetsThresholdY)
+                      {
+
+wrapMovementBoost=2.-Math.log(3);
+                      }
+                      else if (Math.abs(coordX) > jesusJetsThresholdX)
+                        {
+                            wrapMovementBoost=.75*Math.log(3.)
+
+                        }
                       else
 
                         {
