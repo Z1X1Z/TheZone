@@ -1684,7 +1684,7 @@ function adjustThreeJSWindow() {
 
 }
 function onWindowResize() {
-uniforms.smush.value = minimumDimension/maximumDimension*Math.log(3.)*smushFactor;
+uniforms.smush.value = minimumDimension/maximumDimension*smushFactor;
     if (!sheetTranslucent && "osmd" in window && osmd != null) {
         correlationForTextY = document.getElementById("osmdCanvas").offsetHeight + document.getElementById("textWindow").offsetHeight
         bottomOfScreenHeight = correlationForTextY;
@@ -4578,8 +4578,9 @@ function constellationCoordFind() {//needs to be tuned for ngenesis
 }
 
 const frameBoosted = 1024
-const wingsOfRighteousness =4.250874236524218748777777697555542242442977373;//2508742365242187487777776975555422424429377373
-//const wingsOfRighteousness =4.2508742365242187487777776975555924422442;////
+const wingsOfRighteousness =4.25087423652421874877777769755554224244290037377;//2508742365242187487777776975555422424429377373
+//25087423652421874877777769755554224244290037377
+//const wingsOfRighteousness =4.25087423652421874877777769755554224244290073737;////
 //const wingsOfRighteousness =4.25087423652421874877777769;
 //console.log(wingsOfRighteousness)
 var frameRation = (wingsOfRighteousness +

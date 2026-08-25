@@ -328,7 +328,7 @@ window.settingsSet = false
 
 const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 
-const wingsOfRighteousness2 =(-Number(".250874236524218748777777697555542242442977373"//+".25087423652421"+"874869"
+const wingsOfRighteousness2 =(-Number(".25087423652421874877777769755554224244290037377"//+".25087423652421"+"874869"
     )+(grPermanent-leafPermanent-2**.5))*2;
 function resetAll(){
 
@@ -830,7 +830,7 @@ source.connect(analyser);
                    smushFactor=number;
                 else if( smushFactor!=0.)smushFactor=1.;
                     else  smushFactor=0.;
-                    uniforms.smush.value = minimumDimension/maximumDimension*Math.log(3.)*smushFactor;
+                    uniforms.smush.value = minimumDimension/maximumDimension*smushFactor;
 
                 }
 
