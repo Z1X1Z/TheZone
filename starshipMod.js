@@ -610,8 +610,8 @@ var cloverPerimeter = 0.;
 
 let radius = 0.;
 function move() {
-    if (isNaN(coordX) || (!zoomAtl41 && coordX > 4.)) coordX = 0.;
-    if (isNaN(coordY) || (!zoomAtl41 && coordY > 4.)) coordY = 0.;
+ //   if (isNaN(coordX) || (!zoomAtl41 && coordX > 4.)) coordX = 0.;
+  //  if (isNaN(coordY) || (!zoomAtl41 && coordY > 4.)) coordY = 0.;
 
 
 
@@ -801,12 +801,16 @@ function move() {
     const d_xS = spunD[0] * interpolation;
     const d_yS = spunD[1] * interpolation;
     
+    
         if(fromCenter>skyInterSection||(fromCenter>skyInterSection/1.5&&Math.abs(coordY) > jesusJetsThresholdY&&!(Math.abs(coordX) > jesusJetsThresholdX&&Math.abs(coordY) < jesusJetsThresholdY)))
           {
+               if(!window.rezUpgradeBypass)
+
                 wrapMovementBoost=logStabilizationConstant
+                else wrapMovementBoost=2.-logStabilizationConstant
           }
                 
-    if (((fromCenter - zoom**(logStabilizationConstant))> uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0)) {
+        else if (((fromCenter - zoom**(logStabilizationConstant))  > uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0.)) {
             
             if(Math.abs(coordX) < jesusJetsThresholdX&&Math.abs(coordY) < jesusJetsThresholdY)
         {
@@ -819,11 +823,17 @@ function move() {
                       else if (Math.abs(coordY) > jesusJetsThresholdY)
                       {
 
+   if(!window.rezUpgradeBypass)
 wrapMovementBoost=2.-Math.log(3);
-                      }
+                else wrapMovementBoost=logStabilizationConstant;
+                   }
                       else if (Math.abs(coordX) > jesusJetsThresholdX)
                         {
+                               if(!window.rezUpgradeBypass)
+
                             wrapMovementBoost=.75*Math.log(3.)
+                            else wrapMovementBoost=.75*Math.log(3.)**2
+
 
                         }
                       else
@@ -2357,10 +2367,13 @@ function executeTouchRegime() {
     
         if(fromCenter>skyInterSection||(fromCenter>skyInterSection/1.5&&Math.abs(coordY) > jesusJetsThresholdY&&!(Math.abs(coordX) > jesusJetsThresholdX&&Math.abs(coordY) < jesusJetsThresholdY)))
           {
+               if(!window.rezUpgradeBypass)
+
                 wrapMovementBoost=logStabilizationConstant
+                else wrapMovementBoost=2.-logStabilizationConstant
           }
                 
-        else if (((fromCenter - zoom**(logStabilizationConstant))  > uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0.) && spunTouch[0] != 0 && spunTouch[1] != 0) {
+        else if (((fromCenter - zoom**(logStabilizationConstant))  > uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0.)) {
             
             if(Math.abs(coordX) < jesusJetsThresholdX&&Math.abs(coordY) < jesusJetsThresholdY)
         {
@@ -2373,11 +2386,17 @@ function executeTouchRegime() {
                       else if (Math.abs(coordY) > jesusJetsThresholdY)
                       {
 
+   if(!window.rezUpgradeBypass)
 wrapMovementBoost=2.-Math.log(3);
-                      }
+                else wrapMovementBoost=logStabilizationConstant;
+                   }
                       else if (Math.abs(coordX) > jesusJetsThresholdX)
                         {
+                               if(!window.rezUpgradeBypass)
+
                             wrapMovementBoost=.75*Math.log(3.)
+                            else wrapMovementBoost=.75*Math.log(3.)**2
+
 
                         }
                       else
