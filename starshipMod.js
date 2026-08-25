@@ -4611,10 +4611,11 @@ function calculatePitch() {
 
     }
     else {
-        fractionOfFrame = Math.ceil(frameRation);
+        fractionOfFrame = //Math.ceil
+        (frameRation);
         frameRationFull = frameRation
     }
-    const yinData = new Float64Array(fractionOfFrame);
+    const yinData = new Float64Array(Math.ceil(fractionOfFrame));
 
     // return Math.abs(inputData[0]-inputData[1])/audioX.sampleRate*4.
     let tolerance = 0;//(1024-26)/10000
@@ -4660,10 +4661,10 @@ function calculatePitch() {
             let incrementToleranceFeedback = tAScaled;
             //           let oolp =    1./-leafPermanent;
             let loopy = 0;
-
+            let taTRUNC = (tAScaled/trunc)*trunc
             if (tAScaled > 0 && isFinite(tAScaled) && tAScaled < 1.)
-                for (var reps = 0.; reps < totalAMP ** (7 - totalAMPmodified);//these may be totalAMP or totalAMPmodified
-                    reps += tAScaledPermanent ** (3. - totalAMP))//reps+=tAScaledPermanent**(3.-tAScaledPermanent))
+                for (var reps = 0.; reps < taTRUNC ** (7 + totalAMPmodified);//these may be totalAMP or totalAMPmodified
+                    reps += taTRUNC ** (3. - totalAMPmodified))//reps+=tAScaledPermanent**(3.-tAScaledPermanent))
                 //   for(var reps=0; reps<2.;reps+=1)
                 //                 for(reps=0;reps<5.;reps+=1.+1./(1.-totalAMPmodified))
 
