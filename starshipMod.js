@@ -1195,7 +1195,7 @@ fibgetScene= new THREE.Scene();
             //vertexColors: true,
             color: 0xffffff,
             // opacity: .5,
-            linewidth: 3.5,//ignored by some WebGLRenderer
+            linewidth: 3.,//ignored by some WebGLRenderer
             linecap: 'round', //ignored by WebGLRenderer
             linejoin: 'round' //ignored by WebGLRenderer
         });
