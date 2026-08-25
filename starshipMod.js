@@ -1894,16 +1894,22 @@ if(zoom>2**64)
     if (!isFinite(ZR)) ZR = 1;
     if (!zoomAtl41 && !zoomOutEngage && zoomRate > 0.) {
         if ((zoom > zoomCone && ampThresh > zoomOutRatchetThreshold && (on && !window.touchMode)) || xTouch + yTouch != 0) zoom *= ZR ** ((1. + INcreaseBoost) * zoomBoost);
+       
         else if (uniforms.MetaCored.value || zoom < 1.&&
 //||(fromCenter<skyInterSection&&uniforms.SEVEYEStart.value<fromCenter&&fromCenter/ zoom ** .5> uniforms.SEVEYEStart.value)||
-(fromCenter>skyInterSection&&zoom<fromCenter*.5)&&(fromCenter>upperJesusJets&&("brother" in window)||zoom<fromCenter/4)) {
+(fromCenter>skyInterSection&&zoom<fromCenter*.5)) {
             zoom /= ZR;
             triggerRailSet = true
             if (center) { coordX *= ZR * 2. / 3.;; coordY *= ZR * 2. / 3.; }
         }
         //        uniforms.SEVEYEStart.value=1.75+(zoom/fromCenter)**.5*fromCenter;
     }
-
+  if (fromCenter>upperJesusJets&&("brother" in window)&&zoom>fromCenter*16){
+            zoom = zoomINITiaLizer;
+            lastZoom = zoomINITiaLizer;
+            coordX = 0.;
+            coordY=0.;
+        }
 
     //.000000000000000000000001
     if (zoom < zoomCone || (zoom < 1. / 2 ** singleHyperCoreDepth * metaDepth &&
