@@ -4967,7 +4967,7 @@ function calculatePitch() {
 
                             //tolerance *= adjuster**3
 
-                           // tolFixed=tolerance
+                            tolFixed=tolerance
 
  c = 0;
 
@@ -4979,13 +4979,13 @@ function calculatePitch() {
                          {
 
                               adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
-                                                                                   tolerance *= adjuster**3
+                                                                                   tolerance *= adjuster**adjuster
                                                                        c++
                                                                        if(c>1000)break;
                                         
 
                     }
-                    console.log(c)
+                  //  console.log(c)
                     //tolerance*=(adjuster/trunc)*trunc
                    //  tolerance=(tolerance/trunc)*trunc
 
