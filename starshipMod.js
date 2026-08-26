@@ -4960,9 +4960,11 @@ function calculatePitch() {
                                 }
                         }
 
-                                 tolerance *= adjuster
+                                 tolerance *= (adjuster**adjuster)**3
+                                                 tolerance=(tolerance/trunc)*trunc
 
                             adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
+
                             let adjusterFixed = adjuster;
                              //  tolerance *= adjuster
 
