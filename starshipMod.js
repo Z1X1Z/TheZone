@@ -4889,10 +4889,10 @@ function calculatePitch() {
                 tolerance = ((tolerance) / trunc) * trunc
 
                 //console.log(adjConstant)
-                let powerAMP = totalAMPtrunc + 1.;
-                tolerance *= ((totalAMP) ** (powerAMP / 3.) + (totalAMPtrunc) ** (powerAMP / 2.) + totalAMPtrunc ** powerAMP);
+                let powerAMP = totalAMP + 1.;
+                tolerance *= ((totalAMP) ** (powerAMP / 3.) + (totalAMP) ** (powerAMP / 2.) + totalAMP ** powerAMP);
 
-                //           tolerance=((tolerance)/trunc)*trunc
+                       tolerance=((tolerance)/trunc)*trunc
 
                 // let nudgeAdjust = totalAMP;
 
