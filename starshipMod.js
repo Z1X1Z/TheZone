@@ -4603,7 +4603,7 @@ function constellationCoordFind() {//needs to be tuned for ngenesis
 }
 
 const frameBoosted = 1024
-const wingsOfRighteousness =4.25087423652421874877777769755554224244290037377;//2508742365242187487777776975555422424429377373
+const wingsOfRighteousness =4.25087423652421874877777769755554224244290370377;//2508742365242187487777776975555422424429377373
 //25087423652421874877777769755554224244290037377
 //const wingsOfRighteousness =4.25087423652421874877777769755554224244290073737;////
 //const wingsOfRighteousness =4.25087423652421874877777769;
@@ -4960,7 +4960,7 @@ function calculatePitch() {
                                 }
                         }
 
-                                 tolerance *= (adjuster**3)
+                                 tolerance *= (adjuster)**3
                                                //  tolerance=(tolerance/trunc)*trunc
 
                             adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
@@ -4992,6 +4992,7 @@ function calculatePitch() {
                                         
 
                     }
+                    
                                             
                   //  console.log(c)
                     //tolerance*=(adjuster/trunc)*trunc
