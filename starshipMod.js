@@ -4693,7 +4693,7 @@ function calculatePitch() {
 
                  // for (var reps = 0.; reps < totalAMP ** (7 - totalAMPmodified);//these may be totalAMP or totalAMPmodified
                 //    reps += tAScaledPermanent ** (3. - totalAMP))//reps+=tAScaledPermanent**(3.-tAScaledPermanent))
-                for (var reps = 0.; reps < taTRUNC ** (7 + totalAMPmodified);//these may be totalAMP or totalAMPmodified
+                for (var reps = 0.; reps < taTRUNC ** (7 + totalAMP );//these may be totalAMP or totalAMPmodified
                     reps += taTRUNC ** (3. - totalAMP))//reps+=tAScaledPermanent**(3.-tAScaledPermanent))
                 //   for(var reps=0; reps<2.;reps+=1)
                 //                 for(reps=0;reps<5.;reps+=1.+1./(1.-totalAMPmodified))
