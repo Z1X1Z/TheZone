@@ -4690,10 +4690,8 @@ function calculatePitch() {
             let totalAMPtrunc = (totalAMP/trunc)*trunc;
             let taTRUNC = (tAScaled/trunc)*trunc
             if (tAScaled > 0 && isFinite(tAScaled) && tAScaled < 1.)
-                            for (var reps = 0.; reps < totalAMP ** (7 - totalAMPmodified);//these may be totalAMP or totalAMPmodified
-                    reps += tAScaledPermanent ** (3. - totalAMP))//reps+=tAScaledPermanent**(3.-tAScaledPermanent))
-             //   for (var reps = 0.; reps < taTRUNC ** (7 + totalAMPmodified);//these may be totalAMP or totalAMPmodified
-              //      reps += taTRUNC ** (3. - totalAMPmodified))//reps+=tAScaledPermanent**(3.-tAScaledPermanent))
+                for (var reps = 0.; reps < taTRUNC ** (7 + totalAMPmodified);//these may be totalAMP or totalAMPmodified
+                    reps += taTRUNC ** (3. - totalAMPmodified))//reps+=tAScaledPermanent**(3.-tAScaledPermanent))
                 //   for(var reps=0; reps<2.;reps+=1)
                 //                 for(reps=0;reps<5.;reps+=1.+1./(1.-totalAMPmodified))
 
@@ -4955,12 +4953,13 @@ function calculatePitch() {
                             c++
                             if (c > 100000) break;
                         }
+                        let adjusterFixed = adjuster;
 
-                         for (var d = 0; d < 7+totalAMP; d += tolerance) if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
+                         for (var d = 0; d < 7+adjusterFixed; d += tolerance) if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
 
                          {
                               adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
-                             tolerance *= adjuster
+                         tolerance *= adjuster
                     }
                     //tolerance*=(adjuster/trunc)*trunc
                     // == tolerance=(tolerance/trunc)*trunc
