@@ -4911,6 +4911,7 @@ function calculatePitch() {
                 //last line working on nyquist filtering, added
                 nyquistFilter = false;//turn off to debug nyquists
                 tolerance += toleranceNudge;
+                //tolerance += wingsOfRighteousness/Number.MAX_VALUE;
                 // tolerance=(tolerance/trunc)*trunc
 
                 tolerance = tolerance ** ((2 ** .5 / trunc) * trunc) ** (tolerance);
@@ -4948,15 +4949,17 @@ function calculatePitch() {
                         {
 
                             adjuster = (adjuster) ** powerUP
+
                             c++
-                            if (c > 20000) break;
+                            if (c > 100000) break;
                         }
-                    adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
 
-                    // console.log(c);                         
-                    // console.log(adjuster);
+                         for (var d = 0; d < 7+totalAMP; d += tolerance) if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
 
-                    tolerance *= adjuster
+                         {
+                              adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
+                             tolerance *= adjuster
+                    }
                     //tolerance*=(adjuster/trunc)*trunc
                     // == tolerance=(tolerance/trunc)*trunc
 
