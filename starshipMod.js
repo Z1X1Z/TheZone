@@ -4954,6 +4954,9 @@ function calculatePitch() {
                             if (c > 100000) break;
                         }
                         let adjusterFixed = adjuster;
+                                                 tolerance *= adjuster
+
+                        tolFixed=tolerance
 
                          for (var d = 0; d < 7+adjusterFixed; d += tolerance) if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
 
