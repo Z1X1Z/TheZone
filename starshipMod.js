@@ -4954,7 +4954,10 @@ function calculatePitch() {
                             adjuster = (adjuster) ** powerUP
 
                             c++
-                            if (c > 100000) break;
+                            if (c > 100000) 
+                                {break;
+                                    console.log("broke")
+                                }
                         }
 
 
@@ -4962,11 +4965,11 @@ function calculatePitch() {
                             adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
                             let adjusterFixed = adjuster;
 
-                            tolerance *= adjuster
+                            //tolerance *= adjuster**3
 
                            // tolFixed=tolerance
 
-
+ c = 0;
 
                                                   //    adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
 
@@ -4976,11 +4979,15 @@ function calculatePitch() {
                          {
 
                               adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
-                                                                                   tolerance *= adjuster
+                                                                                   tolerance *= adjuster**3
+                                                                       c++
+                                                                       if(c>1000)break;
+                                        
 
                     }
+                    console.log(c)
                     //tolerance*=(adjuster/trunc)*trunc
-                    // == tolerance=(tolerance/trunc)*trunc
+                   //  tolerance=(tolerance/trunc)*trunc
 
                     // tolerance*=2**.5;
                     //(                      tolerance=(tolerance/trunc)*trunc
