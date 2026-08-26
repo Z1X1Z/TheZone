@@ -2355,8 +2355,8 @@ function executeTouchRegime() {
             dyVolumized /= uniforms["volume"].value
         }
         else uniforms["volume"].value = 1.;
-        uniforms.d.value.x += dxVolumized;
-        uniforms.d.value.y += -dyVolumized;
+        uniforms.d.value.x = dxVolumized;
+        uniforms.d.value.y = -dyVolumized;
 
         var spunTouch = touchMovement;
         if (uniforms.carousel.value != 0. && uniforms["time"].value > 0)
