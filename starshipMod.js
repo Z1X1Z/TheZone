@@ -4955,13 +4955,15 @@ function calculatePitch() {
                         }
 
                         tolFixed=tolerance
+                                                                              adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
 
-                                                      adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
                                                  tolerance *= adjuster
+
+                                                  //    adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
 
                         let adjusterFixed = adjuster;
 
-                         for (var d = 0; d < 7+adjusterFixed; d += tolFixed) if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
+                         for (var d = 0; d < 7+adjusterFixed; d += tolerance) if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
 
                          {
 
