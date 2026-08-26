@@ -4951,7 +4951,7 @@ function calculatePitch() {
                         // for(var d = 0; d<tolTot; d+=totTol)
                         {
 
-                            adjuster = (adjuster) ** powerUP
+                            adjuster = (adjuster**adjuster) ** powerUP
 
                             c++
                             if (c > 100000) 
@@ -4960,7 +4960,7 @@ function calculatePitch() {
                                 }
                         }
 
-                                 tolerance *= (adjuster**adjuster)**3
+                                 tolerance *= (adjuster**3)
                                                //  tolerance=(tolerance/trunc)*trunc
 
                             adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
