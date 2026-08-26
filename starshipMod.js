@@ -4687,6 +4687,7 @@ function calculatePitch() {
             let incrementToleranceFeedback = tAScaled;
             //           let oolp =    1./-leafPermanent;
             let loopy = 0;
+            let totalAMPtrunc = (totalAMP/trunc)*trunc;
             let taTRUNC = (tAScaled/trunc)*trunc
             if (tAScaled > 0 && isFinite(tAScaled) && tAScaled < 1.)
                 for (var reps = 0.; reps < taTRUNC ** (7 + totalAMPmodified);//these may be totalAMP or totalAMPmodified
@@ -4827,7 +4828,7 @@ function calculatePitch() {
             tolerance /= 2;//2 or 1.5? 3?
 
             tolerance = ((tolerance) / trunc) * trunc
-            tolerance = (tolerance) ** ((((((-leafPermanent + 1) * (grPermanent + 1)) / trunc) * trunc) * ((totalAMPmodified ** .5 + totalAMP ** .5) / 2.) ** 2. + (((totalAMPmodified ** 2 + totalAMP ** 2) / 2.)) ** .5)) // this greatly improves trueness
+            tolerance = (tolerance) ** ((((((-leafPermanent + 1) * (grPermanent + 1)) / trunc) * trunc) * ((totalAMPmodified ** .5 + totalAMPtrunc ** .5) / 2.) ** 2. + (((totalAMPmodified ** 2 + totalAMPtrunc ** 2) / 2.)) ** .5)) // this greatly improves trueness
 
             tolerance = ((tolerance) / trunc) * trunc
             //         tolerance=((tolerance)/trunc)*trunc
@@ -4888,8 +4889,8 @@ function calculatePitch() {
                 tolerance = ((tolerance) / trunc) * trunc
 
                 //console.log(adjConstant)
-                let powerAMP = totalAMP + 1.;
-                tolerance *= ((totalAMP) ** (powerAMP / 3.) + (totalAMP) ** (powerAMP / 2.) + totalAMP ** powerAMP);
+                let powerAMP = totalAMPtrunc + 1.;
+                tolerance *= ((totalAMP) ** (powerAMP / 3.) + (totalAMPtrunc) ** (powerAMP / 2.) + totalAMPtrunc ** powerAMP);
 
                 //           tolerance=((tolerance)/trunc)*trunc
 
