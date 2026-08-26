@@ -4977,9 +4977,9 @@ function calculatePitch() {
                          for (var d = 0; d < 7+adjusterFixed; d += tolerance) if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
 
                          {
+                                                                                   tolerance *= adjuster**adjuster
 
                               adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
-                                                                                   tolerance *= adjuster**adjuster
                                                                        c++
                                                                        if(c>1000)break;
                                         
