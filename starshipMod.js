@@ -4953,20 +4953,21 @@ function calculatePitch() {
                             c++
                             if (c > 100000) break;
                         }
-                                                 tolerance *= adjuster
 
                         tolFixed=tolerance
 
                                                       adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
+                                                 tolerance *= adjuster
 
                         let adjusterFixed = adjuster;
 
-                         for (var d = 0; d < 7+adjusterFixed; d += tolerance) if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
+                         for (var d = 0; d < 7+adjusterFixed; d += tolFixed) if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
 
                          {
-                                                     tolerance *= adjuster
 
                               adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
+                                                                                   tolerance *= adjuster
+
                     }
                     //tolerance*=(adjuster/trunc)*trunc
                     // == tolerance=(tolerance/trunc)*trunc
