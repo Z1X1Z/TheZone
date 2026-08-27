@@ -4966,9 +4966,9 @@ function calculatePitch() {
                                 }
                         }
 
-                                 adjuster *= (adjuster**(adjuster**adjuster)**adjuster)**3**powerUP
+                                 adjuster *= (adjuster**(adjuster**adjuster)**adjuster)**3
 
-                                 tolerance *= (adjuster)
+                                 tolerance *= (adjuster)**powerUP
                                                //  tolerance=(tolerance/trunc)*trunc
 
 
@@ -5001,6 +5001,62 @@ function calculatePitch() {
                     }
 
 
+
+                    /*
+                       if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
+
+                        for (var d = 0; d < 7 - totalAMP; d += tolerance)
+                        // for(var d = 0; d<tolTot; d+=totTol)
+                        {
+
+                            adjuster = (adjuster**adjuster) ** powerUP
+
+                            c++
+                            if (c > 100000) 
+                                {break;
+                                    console.log("broke")
+                                }
+                        }
+
+                                 adjuster *= (adjuster**(adjuster**adjuster)**adjuster)**powerUP
+
+                                 tolerance *= (adjuster)
+                                               //  tolerance=(tolerance/trunc)*trunc
+
+
+                            let adjusterFixed = adjuster;
+                             //  tolerance *= adjuster
+
+                            //tolerance *= adjuster**3
+
+                            tolFixed=tolerance
+
+ c = 0;
+
+                                                  //    adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
+
+
+                         for (var d = 0; d < 7+adjusterFixed; d += tolerance) if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
+
+                         {
+
+                              adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
+                                 tolerance *=(((adjuster**(adjuster**adjuster)**adjuster)))**3
+
+                                                                       c++
+                                                                       if(c>1000){
+                                                                        console.log("b2")
+                                                                        break;
+                                                                       }
+                                        
+
+                    }
+
+
+
+                    */
+                    
+                                            
                   //  console.log(c)
                     //tolerance*=(adjuster/trunc)*trunc
                    //  tolerance=(tolerance/trunc)*trunc
