@@ -4966,9 +4966,9 @@ function calculatePitch() {
                                 }
                         }
 
-                                 adjuster *= (adjuster**(adjuster**adjuster)**adjuster)**3
+                                 adjuster *= (adjuster**(adjuster**adjuster)**adjuster)
 
-                                 tolerance *= (adjuster)
+                                 tolerance *= (adjuster**powerUP)
                                                //  tolerance=(tolerance/trunc)*trunc
 
 
@@ -4989,7 +4989,7 @@ function calculatePitch() {
                          {
 
                               adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
-                                 tolerance *= (adjuster**(adjuster**adjuster)**adjuster)**3
+                                 tolerance *=((adjuster**(adjuster**adjuster)**adjuster))**3
 
                                                                        c++
                                                                        if(c>1000){
