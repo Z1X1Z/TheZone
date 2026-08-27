@@ -613,7 +613,7 @@ function move() {
  //   if (isNaN(coordX) || (!zoomAtl41 && coordX > 4.)) coordX = 0.;
   //  if (isNaN(coordY) || (!zoomAtl41 && coordY > 4.)) coordY = 0.;
 
-  if(!TaS)
+  if(TaS)
   {yTouchMicroBuffer=0
     xTouchMicroBuffer=0
   }
