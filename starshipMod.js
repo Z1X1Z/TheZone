@@ -4968,7 +4968,7 @@ function calculatePitch() {
 
                                  adjuster *= (adjuster**(adjuster**adjuster)**adjuster)**3**powerUP
 
-                                 tolerance *= (adjuster**adjuster)
+                                    tolerance *= (adjuster**adjuster)
                                                //  tolerance=(tolerance/trunc)*trunc
 
 
@@ -4989,8 +4989,9 @@ function calculatePitch() {
                          {
 
                               adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
-                                 tolerance *=(((adjuster**(adjuster**adjuster)**adjuster)))**3**powerUP
+                              let adjustment = (((adjuster**(adjuster**adjuster)**adjuster)))**3**powerUP
 
+                                 tolerance *=adjustment**adjustment
                                                                        c++
                                                                        if(c>1000){
                                                                         console.log("b2")
