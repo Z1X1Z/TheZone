@@ -4966,9 +4966,9 @@ function calculatePitch() {
                                 }
                         }
 
-                                 adjuster *= (adjuster**(adjuster**adjuster)**adjuster)
+                                 adjuster *= (adjuster**(adjuster**adjuster)**adjuster)**3**powerUP
 
-                                 tolerance *= (adjuster**powerUP)
+                                 tolerance *= (adjuster)
                                                //  tolerance=(tolerance/trunc)*trunc
 
 
@@ -4989,7 +4989,7 @@ function calculatePitch() {
                          {
 
                               adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
-                                 tolerance *=((adjuster**(adjuster**adjuster)**adjuster))**3
+                                 tolerance *=(((adjuster**(adjuster**adjuster)**adjuster)))**3**powerUP
 
                                                                        c++
                                                                        if(c>1000){
@@ -4999,8 +4999,8 @@ function calculatePitch() {
                                         
 
                     }
-                    
-                                            
+
+
                   //  console.log(c)
                     //tolerance*=(adjuster/trunc)*trunc
                    //  tolerance=(tolerance/trunc)*trunc
