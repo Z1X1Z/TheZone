@@ -344,6 +344,10 @@ window.superseal=true;
 window.fibgetti = false;
 window.fibgeBase = 2n
 window.blendFibge = false;
+window.fibjVal1 = 1n;
+window.fibjVal2 = 1n;
+window.fibjVal3 = 0n;
+
 smushFactor=1.;
 /*
                                              if (   window.iOS )window.rez=window.devicePixelRatio/wingsOfRighteousness2;
@@ -741,6 +745,18 @@ uniforms["upCoreCycler"].value=c;
                             if(stringofnumber[1].includes("4")) window.fibge4=true;
                             if(stringofnumber[1].includes("5")) window.fibge5=true;
                                         }
+                                        if(stringofnumber.length>2)
+                                        {
+                                            if(stringofnumber[2]>=1)  window.fibjVal1=BigInt(Math.floor(stringofnumber[2]))
+                                            }
+                                        if(stringofnumber.length>3)
+                                        {
+                                            if(stringofnumber[3]>=1)  window.fibjVal2=BigInt(Math.floor(stringofnumber[3]))
+                                            }
+                                        if(stringofnumber.length>4)
+                                        {
+                                           if(stringofnumber[4]>=0)  window.fibjVal3=BigInt(Math.floor(stringofnumber[4]))
+                                           }
                                        number = Number(stringofnumber[0])
 
                 }
@@ -1098,8 +1114,9 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                         }
                     if(!changingQuadrants&&window.INITIALIZED)
                         {
-                        clearFib(true)
+                        clearFib(true,window.fibjVal1,window.fibjVal2,window.fibjVal3)
                         }
+                        
 
                   }
 

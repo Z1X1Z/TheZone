@@ -983,7 +983,7 @@ const stackColor = new Float32Array(12 * 4 * 6 * 2)
 var fr = 1.;
 //if (0 == 1)
 var safeNumberOfFibgeTriangles = 0;
-var rowsOfTrianglesToGenerate = 28;
+var rowsOfTrianglesToGenerate = 34;
       //  for (var fibGen = 0; fibGen <= rowsOfTrianglesToGenerate; fibGen++) {
 
     for (var fmt = 0; fmt < rowsOfTrianglesToGenerate; fmt++) {
@@ -1189,8 +1189,9 @@ function init() {
     setVectors();
     setRenderTargetSize(window.innerWidth, window.innerHeight)
 
-    renderer = new THREE.WebGLRenderer({ antialias: true });
-            renderer.antialias=true
+    renderer = new THREE.WebGLRenderer({// antialias: true
+         });
+        //    renderer.antialias=true
 
 
     renderer.autoClear = true;//so the starship can be isolated
@@ -5394,7 +5395,8 @@ stringArray[ABC]=binaryConverter(fibArray[ABC])
 theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
 //console.log(theWORDtoGOD.length)
 //console.log(Number(fibArray[ABC])+" "+Number(fibArray[(ABC+2)%3]))
- clearFib(false);
+ 
+clearFib(false,window.fibjVal1,window.fibjVal2,window.fibjVal3);
          deltaSpun=totalRotation;
          lastANGLEmodulo+=Math.PI/3;
 
@@ -5491,9 +5493,9 @@ bigString+=","
 
 let ABC = 1;
 fibArray = Array(3)
-fibArray[0]=1n
-fibArray[1]=1n
-fibArray[2]=0n
+fibArray[0]=window.fibjVal1
+fibArray[1]=window.fibjVal2
+fibArray[2]=window.fibjVal3
 let everyOther = 1n;
 function fibonacciEngine(){
 
@@ -5541,7 +5543,7 @@ function BigDIV (num1,num2)
 }
 
 
-function clearFib(autoBypass)
+function clearFib(autoBypass,starterValue1,starterValue2,starterValue3)
 {
 
 var safetyThird=safeNumberOfFibgeTriangles/1.
@@ -5557,9 +5559,9 @@ if(fibgeBase!=2n&&window.blendFibge)
 
                             ABC = 1;
 
-            fibArray[ABC]=1n
-            fibArray[(ABC+1)%3]=1n
-            fibArray[(ABC+2)%3]=0n
+            fibArray[ABC]=starterValue1
+            fibArray[(ABC+1)%3]=starterValue2
+            fibArray[(ABC+2)%3]=starterValue3
             theWORDtoGOD="1"
             stringArray[ABC]="1"
             stringArray[(ABC+1)%3]="1"
