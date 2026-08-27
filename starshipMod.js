@@ -4966,7 +4966,7 @@ function calculatePitch() {
                                 }
                         }
 
-                                                    adjuster = (adjuster**adjuster)**3
+                                 adjuster *= (adjuster**(adjuster**adjuster)**adjuster)**3
 
                                  tolerance *= (adjuster)
                                                //  tolerance=(tolerance/trunc)*trunc
