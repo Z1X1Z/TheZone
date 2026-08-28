@@ -3144,9 +3144,9 @@ float c = length(s);
    //if(!(zoomB/lfc<l3*2.-2.))
   if((lfc>SEVEYEStartAdj-sevMargin)||lfc>SEVEYEStartAdj)
   {
-    hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(1.)/(lfc-SEVEYEStartAdj)-.75
+    hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(1.)/(lfc-SEVEYEStartAdj)
   +zoomB;
-    if(lfc<81.) hyperCore -= (3.*3.)/(3.*3.*3.*l3-lengthP);
+    if(lfc<81.) hyperCore -= (3.*3.)/(3.*3.*3.*l3-lengthP)-.75;
   }
    //pow(sqrt(1./zoomB),zoomB)+2./lfc-1.;
   // hyperCore-=pow(sqrt(zoomB),zoomB);

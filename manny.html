@@ -4950,9 +4950,9 @@ vec2 s=p;
 {
   if((lfc>SEVEYEStartAdj-sevMargin)||lfc>SEVEYEStartAdj)
   {
-    hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(1.)/(lfc-SEVEYEStartAdj)-.75
+    hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(1.)/(lfc-SEVEYEStartAdj)
   +zoomB;
-    if(lfc<81.) hyperCore -= (3.*3.)/(3.*3.*3.*l3-lengthP);
+    if(lfc<81.) hyperCore -= (3.*3.)/(3.*3.*3.*l3-lengthP)-.75;
   }
 
      if(lfc<interSection)
