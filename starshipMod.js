@@ -2297,8 +2297,11 @@ function executeTouchRegime() {
     if (xTouch == 0 && yTouch == 0 && !TouchMicroizer) {
         xTouchMicroBuffer = xTouchMicroBuffer / 10000.;
         yTouchMicroBuffer = yTouchMicroBuffer / 10000.;
+        if(window.touchAndSing)
+        {
                 uniforms.d.value.x = xTouchMicroBuffer;
         uniforms.d.value.y = -yTouchMicroBuffer;
+        }
 
         TouchMicroizer = true;
 
@@ -2359,7 +2362,7 @@ function executeTouchRegime() {
             dyVolumized /= uniforms["volume"].value
         }
         else uniforms["volume"].value = 1.;
-        if(!TouchMicroizer)
+        if(!TouchMicroizer||window.touchMode||window.touchOnlyMode)
         {
         uniforms.d.value.x = dxVolumized;
         uniforms.d.value.y = -dyVolumized;
