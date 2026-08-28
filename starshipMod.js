@@ -613,11 +613,6 @@ function move() {
     if (isNaN(coordX) ) coordX = 0.;
     if (isNaN(coordY) ) coordY = 0.;
 
-  if(TaS)
-  {yTouchMicroBuffer=coordY
-    xTouchMicroBuffer=coordX
-  }
-
 
 
 
@@ -2302,6 +2297,9 @@ function executeTouchRegime() {
     if (xTouch == 0 && yTouch == 0 && !TouchMicroizer) {
         xTouchMicroBuffer = xTouchMicroBuffer / 10000.;
         yTouchMicroBuffer = yTouchMicroBuffer / 10000.;
+                uniforms.d.value.x = xTouchMicroBuffer;
+        uniforms.d.value.y = -yTouchMicroBuffer;
+
         TouchMicroizer = true;
 
     }
@@ -2361,8 +2359,11 @@ function executeTouchRegime() {
             dyVolumized /= uniforms["volume"].value
         }
         else uniforms["volume"].value = 1.;
+        if(!TouchMicroizer)
+        {
         uniforms.d.value.x = dxVolumized;
         uniforms.d.value.y = -dyVolumized;
+        }
 
         var spunTouch = touchMovement;
         if (uniforms.carousel.value != 0. && uniforms["time"].value > 0)
