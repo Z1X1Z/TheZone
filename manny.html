@@ -4950,7 +4950,7 @@ vec2 s=p;
 {
   if((lfc>SEVEYEStartAdj-sevMargin)||lfc>SEVEYEStartAdj)
   {
-    hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(1.)/lfc
+    hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(.5)/(lfc-SEVEYEStartAdj)
   +zoomB;
     if(lfc<81.) hyperCore -= (3.*3.)/(3.*3.*3.*l3-lengthP);
   }
@@ -5375,7 +5375,7 @@ hyperCore+=.25;
 
 //else if (seventhEYE!=3.||lengthP<twoThirds)
 else if((seventhEYE==0.||(seventhEYEandJubileye&&lengthP<twoThirds))&&(lengthP<SEVEYEStartAdj||!seventhOUTside))
-hyperCore+=1.;
+hyperCore+=.5;
 
 }
 if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside)&&((seventhEYE!=1.&&seventhEYE!=2.)||lengthP>twoThirds)

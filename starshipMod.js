@@ -610,8 +610,8 @@ var cloverPerimeter = 0.;
 
 let radius = 0.;
 function move() {
- //   if (isNaN(coordX) || (!zoomAtl41 && coordX > 4.)) coordX = 0.;
-  //  if (isNaN(coordY) || (!zoomAtl41 && coordY > 4.)) coordY = 0.;
+    if (isNaN(coordX) ) coordX = 0.;
+    if (isNaN(coordY) ) coordY = 0.;
 
   if(TaS)
   {yTouchMicroBuffer=0
