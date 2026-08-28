@@ -3138,19 +3138,17 @@ float c = length(s);
 
 
 
-        if(lfcAdj>(SEVEYEStartAdj-sevMargin)/l3&&lengthP>SEVEYEStartAdj)
+        if(lengthP>(SEVEYEStartAdj-sevMargin)/l3&&lengthP>SEVEYEStartAdj&&lfc>1.5)
 {
-    //tinsel_limit/=8.;
-   //if(!(zoomB/lfc<l3*2.-2.))
-  if((lfc>SEVEYEStartAdj-sevMargin)||lfc>SEVEYEStartAdj)
+  if(lengthP>SEVEYEStartAdj)
   {
-    hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)+(1.)/(lfc-SEVEYEStartAdj)
+    hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)
   +zoomB;
-    if(lfc<81.) hyperCore -= (3.*3.)/(3.*3.*3.*l3-lengthP)-.75;
+  if(lengthP>SEVEYEStartAdj)hyperCore-=(1.)/(lfc-SEVEYEStartAdj+sevMargin);
+    if(lengthP<81.) hyperCore -= (3.*3.)/(3.*3.*3.*l3-lengthP)-.75;
   }
-   //pow(sqrt(1./zoomB),zoomB)+2./lfc-1.;
-  // hyperCore-=pow(sqrt(zoomB),zoomB);
-       if(lfc<interSection)
+
+       if(lengthP<interSection)
 {
    s/=SEVEYEPush;
 coordsB/=SEVEYEPush;
@@ -3158,6 +3156,8 @@ coordsB/=SEVEYEPush;
     s=1.5/(2.5-vec2(-s.x,abs(s.y)+budge//plus one third is optional
     ));
 }
+ else if(lengthP>SEVEYEStartAdj)hyperCore-=1.5/(lengthP-SEVEYEStartAdj);
+
             
 
  for(int i=0;i<int(crs);//crs+3=63
