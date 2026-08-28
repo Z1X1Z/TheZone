@@ -4952,7 +4952,7 @@ vec2 s=p;
   {
     hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)
   +zoomB;
-    if(lengthP>SEVEYEStartAdj)hyperCore-=(1.)/(lfc-SEVEYEStartAdj+sevMargin);
+    if(lengthP>SEVEYEStartAdj)hyperCore-=(1.)/(lfc-SEVEYEStartAdj+sevMargin)-.5;
 
     if(lengthP<81.) hyperCore -= (3.*3.)/(3.*3.*3.*l3-lengthP);
   }
