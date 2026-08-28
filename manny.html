@@ -4955,7 +4955,7 @@ vec2 s=p;
   
   float edgeBoost = 0.;
   if(lengthP>SEVEYEStartAdj)edgeBoost=1./(lfc-SEVEYEStartAdj);
-  if(zoom<.25)edgeBoost*=sqrt(zoom*4.);
+  if(zoomB<.25)edgeBoost*=sqrt(zoomB*4.);
   hyperCore-=edgeBoost;
     if(lengthP<81.) hyperCore -= (3.*3.)/(3.*3.*3.*l3-lengthP)-1./3.;
   }
@@ -5352,7 +5352,7 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
         if (SEVEYEStartAdj>lengthP-sevMargin)//very strange that this runs at all given above conditional, though the fifth core is mostly inexplicable
         {
             hyperCore+=lfc*SEVEYEpow/1.5;
-             //           hyperCore-=.1;
+              hyperCore-=.1;
 
         }
 
