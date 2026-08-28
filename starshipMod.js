@@ -614,8 +614,8 @@ function move() {
     if (isNaN(coordY) ) coordY = 0.;
 
   if(TaS)
-  {yTouchMicroBuffer=0
-    xTouchMicroBuffer=0
+  {yTouchMicroBuffer=coordY
+    xTouchMicroBuffer=coordX
   }
 
 
