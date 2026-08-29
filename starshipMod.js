@@ -4599,8 +4599,9 @@ function constellationCoordFind() {//needs to be tuned for ngenesis
     }
 
     uniforms.constellationCoord.value = cloverConstellation[bestFit].clone()//.multiplyScalar(2);
-    28;//seems to hear all around better than 1024
-
+     uniforms.constellationCoord.value.x*=-1.;
+ //console.log(uniforms.constellationCoord.value) 
+  //  console.log( uniforms.coords.value)
     uniforms.constellationCoord.value = new THREE.Vector2(-uniforms.coords.value.x - uniforms.constellationCoord.value.x, -nGenesisModulodY - uniforms.constellationCoord.value.y);
     //     console.log(uniforms.constellationCoord.value)                                      
 
@@ -4989,11 +4990,12 @@ function calculatePitch() {
                                                   //    adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
 
 
-                         for (var d = 0; d < 7+adjusterFixed; d += tolerance) if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
+                         for (var d = 0; d < 7+totalAMP; d += tolerance) if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
 
                          {
 
                               adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
+                              
                               let adjustment = (((adjuster**(adjuster**adjuster)**adjuster)))**3**powerUP
 
                                  tolerance *=(adjustment**adjustment)
