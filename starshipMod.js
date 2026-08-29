@@ -305,7 +305,7 @@ function spiral_compress() {
                             }
                                 */
 
-            testar[b] = ((.5 - .5 / (testar[b]* totalAMP) ** (.5))) ** 2.*2./EldersLeg
+            testar[b] = ((.5 - .5 / (testar[b]* totalAMP*2.) ** (.5))) ** 2.*.5
             //  testar[b]=(1.-1./(testar[b]*ampThresh)**(.5))**2.
             if (!isFinite(testar[b]) || testar[b] < 0.) {
                 testar[b] = 0.
