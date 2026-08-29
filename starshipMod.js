@@ -4704,8 +4704,8 @@ function calculatePitch() {
 
                  // for (var reps = 0.; reps < totalAMP ** (7 - totalAMPmodified);//these may be totalAMP or totalAMPmodified
                 //    reps += tAScaledPermanent ** (3. - totalAMP))//reps+=tAScaledPermanent**(3.-tAScaledPermanent))
-                for (var reps = 0.; reps < taTRUNC ** (7 + totalAMP );//these may be totalAMP or totalAMPmodified
-                    reps += taTRUNC ** (3. - totalAMP))//reps+=tAScaledPermanent**(3.-tAScaledPermanent))
+                for (var reps = 0.; reps < taTRUNC ** (7 + totalAMPtrunc );//these may be totalAMP or totalAMPmodified
+                    reps += taTRUNC ** (3. - totalAMPtrunc))//reps+=tAScaledPermanent**(3.-tAScaledPermanent))
                 //   for(var reps=0; reps<2.;reps+=1)
                 //                 for(reps=0;reps<5.;reps+=1.+1./(1.-totalAMPmodified))
 
@@ -4738,7 +4738,7 @@ function calculatePitch() {
             let loopsThresh = 1
 
             //        if(totalAMPmodified<.5-.01)
-            for (n = 1; n < 445; n += 1.)
+            for (n = 0; n < 444; n += 1.)
 
 
             //  for(n=0;n<444;n+=2.-totalAMPmodified//1./(1.+1./totalAMPmodified)
