@@ -4974,8 +4974,7 @@ function calculatePitch() {
 
 
                              //    adjuster *= (adjuster**(adjuster**adjuster)**adjuster)**3**powerUP
-
-                                    tolerance *= (adjuster)
+                                    tolerance *= (adjuster**adjuster)
                                                //  tolerance=(tolerance/trunc)*trunc
 
                 // powerUP = ((1. + totalAMP) ** totalAMP - tolerance) ** ((1 - tolerance) ** tolerance + totalAMP);
