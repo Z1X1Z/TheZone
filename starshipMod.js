@@ -4970,20 +4970,22 @@ function calculatePitch() {
                                     console.log("broke")
                                 }
                         }
+                                  //                          tolerance *= (adjuster**adjuster)
 
-                                 adjuster *= (adjuster**(adjuster**adjuster)**adjuster)**3**powerUP
 
-                                    tolerance *= (adjuster**adjuster)
+                             //    adjuster *= (adjuster**(adjuster**adjuster)**adjuster)**3**powerUP
+
+                                    tolerance *= (adjuster)
                                                //  tolerance=(tolerance/trunc)*trunc
 
                 // powerUP = ((1. + totalAMP) ** totalAMP - tolerance) ** ((1 - tolerance) ** tolerance + totalAMP);
 
-                            let adjusterFixed = adjuster;
+                         //   let adjusterFixed = adjuster;
                              //  tolerance *= adjuster
 
                             //tolerance *= adjuster**3
 
-                            tolFixed=tolerance
+                       //     tolFixed=tolerance
 
  c = 0;
 
