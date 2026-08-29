@@ -305,7 +305,7 @@ function spiral_compress() {
                             }
                                 */
 
-            testar[b] = ((1. - .5 / (testar[b]* totalAMP*2.) ** (.5))/2.) ** 2.*.5
+            testar[b] = ((1. - 1. / (testar[b]* totalAMP*2.) ** (1./2.))/2.) ** 2./2.
             //  testar[b]=(1.-1./(testar[b]*ampThresh)**(.5))**2.
             if (!isFinite(testar[b]) || testar[b] < 0.) {
                 testar[b] = 0.
