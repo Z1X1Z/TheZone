@@ -4316,7 +4316,8 @@ return vec3(l+b+r+h);}
                                   
 
                               
-                             vec2 starBirth(vec2 p){
+                             vec3 starBirth(vec2 p){
+                                float noConstellation = 0.;
                               bool originalClover = true;
                               //if(constellation)
                               const int constellationSize = 49;
@@ -4331,7 +4332,7 @@ return vec3(l+b+r+h);}
                               float y=xy.y;
 
                              if(originalClover&&(x!=0.||y!=0.))
-                             {
+                             { noConstellation++;
                                  float atanConstellation = atan(y,x)-PIdiv2;
                               p=spin2(p,atanConstellation);
                                float farness=length(vec2(x,y));
@@ -4348,7 +4349,7 @@ return vec3(l+b+r+h);}
                              if(originalClover)  p=spin2(p,-atanConstellation);
                              }
                               }
-                              return p;
+                              return vec3(p,noConstellation);
                             }
                               
                               vec4 roundEyes(vec2 ff,vec2 moveDynamic){
@@ -4704,8 +4705,11 @@ p*=interSection*2.;
             }
         else break;
         }
-        p=starBirth(p);
-    p*=pow(length(p),squeezeN-1.);//may cause conflict with constellation
+        vec3 sb = starBirth(p);
+        float noConstellation=sb.z;
+            p=sb.xy;
+            lengthP=length(p);
+   // p*=pow(length(p),squeezeN-1.);//may cause conflict with constellation
    //tricellular division core unstable
                
 //p.x+=.5;
@@ -5722,6 +5726,7 @@ if(!iso_engine){
            // if(kaleidascope3&&counter<2.)s=abs(vec2(mod(abs(s.y),1.),mod(abs(s.x),1.))-.5)*sign(s);//really cool needs to be engaged
 
        if(//zoomB<.5&&
+       noConstellation == 0.&&
 counter==0.&&
 pollen
 &&OrthoEvery==0.
@@ -5970,7 +5975,7 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
                }
               
        }
-    s=starBirth(s);
+    s=starBirth(s).xy;
 
    dstnce = length(s);
        if(dstnce<twoThirds)s*=pow(dstnce,squeezeN-1. );
