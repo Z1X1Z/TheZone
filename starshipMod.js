@@ -1476,7 +1476,7 @@ fibgetScene= new THREE.Scene();
     else        renderer.render(scene, camera);
      if(!window.rezUpgradeBypass) 
      {
-            renderer.setPixelRatio(window.devicePixelRatio/piE);
+            renderer.setPixelRatio(window.devicePixelRatio/Number(piE));
         }
     renderer.clear();
     document.getElementById("load message").innerHTML = "Loaded, press to open!";
@@ -2484,6 +2484,15 @@ let lastTIMEUNIFORM = 0.;
 let lowAmpFreq = 1;
 
 function animate(timestamp) {
+
+
+     if(!window.rezUpgradeBypass) 
+     {    var pieTRUNCED = piE;
+if(zoom<1./3.)pieTRUNCED=(pieTRUNCED.slice(0,Math.floor(Math.log(piE)/zoom)))
+            renderer.setPixelRatio(window.devicePixelRatio/pieTRUNCED);
+            uniforms.baseN.value = pieTRUNCED
+        }
+
 
     setSevStart();
 
