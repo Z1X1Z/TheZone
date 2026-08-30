@@ -802,11 +802,13 @@ function move() {
     const d_yS = spunD[1] * interpolation;
     
     
+    
+    
         if(fromCenter>skyInterSection||(fromCenter>skyInterSection/1.5&&Math.abs(coordY) > jesusJetsThresholdY&&!(Math.abs(coordX) > jesusJetsThresholdX&&Math.abs(coordY) < jesusJetsThresholdY)))
           {
                if(!window.rezUpgradeBypass)
 
-                wrapMovementBoost=logStabilizationConstant
+                wrapMovementBoost=1.
                 else wrapMovementBoost=2.-logStabilizationConstant
           }
                 
@@ -815,8 +817,8 @@ function move() {
             if(Math.abs(coordX) < jesusJetsThresholdX&&Math.abs(coordY) < jesusJetsThresholdY)
         {
                 if(!window.rezUpgradeBypass)
-                wrapMovementBoost = 4.*Math.log(3)/logStabilizationConstant / fromCenter ** .5 ;
-                else  wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter; 
+                wrapMovementBoost =1.75/Math.log(3.);
+                else  wrapMovementBoost =1.75/Math.log(3.)*logStabilizationConstant; 
 } 
 
 
@@ -831,8 +833,8 @@ wrapMovementBoost=2.-Math.log(3);
                         {
                                if(!window.rezUpgradeBypass)
 
-                            wrapMovementBoost=.75*Math.log(3.)
-                            else wrapMovementBoost=.75*Math.log(3.)**2
+                            wrapMovementBoost=.75*Math.log(3.)**2
+                            else wrapMovementBoost=.75*Math.log(3.)**2/logStabilizationConstant
 
 
                         }
@@ -841,7 +843,7 @@ wrapMovementBoost=2.-Math.log(3);
                         {
                 if(!window.rezUpgradeBypass)
                 wrapMovementBoost = .75*Math.log(3.)**2;
-                else              wrapMovementBoost = 4. / 3.;
+                else              wrapMovementBoost = 1.25/Math.log(3.);
 }
         }
             else
@@ -2379,7 +2381,7 @@ function executeTouchRegime() {
           {
                if(!window.rezUpgradeBypass)
 
-                wrapMovementBoost=logStabilizationConstant
+                wrapMovementBoost=1.
                 else wrapMovementBoost=2.-logStabilizationConstant
           }
                 
@@ -2388,8 +2390,8 @@ function executeTouchRegime() {
             if(Math.abs(coordX) < jesusJetsThresholdX&&Math.abs(coordY) < jesusJetsThresholdY)
         {
                 if(!window.rezUpgradeBypass)
-                wrapMovementBoost = 4.*Math.log(3)/logStabilizationConstant / fromCenter ** .5 ;
-                else  wrapMovementBoost = 4. * fromCenter ** .5 / fromCenter; 
+                wrapMovementBoost =1.75/Math.log(3.);
+                else  wrapMovementBoost =1.75/Math.log(3.)*logStabilizationConstant; 
 } 
 
 
@@ -2404,8 +2406,8 @@ wrapMovementBoost=2.-Math.log(3);
                         {
                                if(!window.rezUpgradeBypass)
 
-                            wrapMovementBoost=.75*Math.log(3.)
-                            else wrapMovementBoost=.75*Math.log(3.)**2
+                            wrapMovementBoost=.75*Math.log(3.)**2
+                            else wrapMovementBoost=.75*Math.log(3.)**2/logStabilizationConstant
 
 
                         }
@@ -2414,7 +2416,7 @@ wrapMovementBoost=2.-Math.log(3);
                         {
                 if(!window.rezUpgradeBypass)
                 wrapMovementBoost = .75*Math.log(3.)**2;
-                else              wrapMovementBoost = 4. / 3.;
+                else              wrapMovementBoost = 1.25/Math.log(3.);
 }
         }
             else
@@ -2488,7 +2490,7 @@ function animate(timestamp) {
 
      if(!window.rezUpgradeBypass) 
      {    var pieTRUNCED = piE;
-if(zoom<.5)pieTRUNCED=(pieTRUNCED.slice(0,Math.ceil(Math.log(piE)/zoom)))
+if(zoom<.5)pieTRUNCED=Number(pieTRUNCED.slice(0,Math.ceil(Math.log(Number(piE))/zoom)))//1./Math.log(piE)/zoom has auto aim for spokes and Math.log(piE)/zoom has auto aim for clovers
             renderer.setPixelRatio(window.devicePixelRatio/pieTRUNCED);
             uniforms.baseN.value = pieTRUNCED
         }
