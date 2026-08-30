@@ -3432,7 +3432,7 @@ function animate(timestamp) {
                         }
 
                         arm = flip * (g * radialWarp + twist * EldersLeg / 24.) % EldersLeg / EldersLeg * pi * 2.;
-                        lengt = ((testar[(g + EldersLeg / 2.) % EldersLeg]) - minTestar) / (maxTestar - minTestar);
+                       if(maxTestar!=minTestar) lengt = ((testar[(g + EldersLeg / 2.) % EldersLeg]) - minTestar) / (maxTestar - minTestar);
                         if (minTestar == testar[(g + EldersLeg / 2.) % EldersLeg] || testar[(g + EldersLeg / 2.) % EldersLeg] < 0.) lengt = 0.;//cull miniumum throughput
                         if (twoOr1) {
                             lengt /= 2. ** 15. / EldersLeg;
