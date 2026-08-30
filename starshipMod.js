@@ -2488,7 +2488,7 @@ function animate(timestamp) {
 
      if(!window.rezUpgradeBypass) 
      {    var pieTRUNCED = piE;
-if(zoom<1./3.)pieTRUNCED=(pieTRUNCED.slice(0,Math.floor(Math.log(piE)/zoom)))
+if(zoom<.5)pieTRUNCED=(pieTRUNCED.slice(0,Math.ceil(Math.log(piE)/zoom)))
             renderer.setPixelRatio(window.devicePixelRatio/pieTRUNCED);
             uniforms.baseN.value = pieTRUNCED
         }
