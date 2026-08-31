@@ -4809,7 +4809,7 @@ function calculatePitch() {
             //  tolerance=(tolerance/trunc)*trunc
                 var tolStuck = tolerance;
          var metas = 0.
-for(var metaloops = 0.;metaloops<2.+tAScaled;metaloops+=taTRUNC)if(metas<20.)
+for(var metaloops = 0.;metaloops<2.+totalAMP;metaloops+=totalAMPmodified)if(metas<20.)
 {
     metas++
             tolerance = (tolerance + plusOrMinusPowerSeriesBUFFER) ** (.75 + (totalAMPmodified + tAScaledPermanent + tolerance - plusOrMinusPowerSeriesNorm));
@@ -5101,7 +5101,7 @@ for(var metaloops = 0.;metaloops<2.+tAScaled;metaloops+=taTRUNC)if(metas<20.)
                     //tolerance=(tolerance/trunc)*trunc
                 }
 
-   // console.log(metas)
+    console.log(metas)
 
                 //console.log(7.5*Number.MIN_VALUE)
                 //alsotolerance**(powerAMP**2*6) ; //*totalAMP**(powerAMP/3).;///4./fractionOfFrame may actually be a fixed 256 bytes
