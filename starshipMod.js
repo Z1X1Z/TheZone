@@ -4809,7 +4809,7 @@ function calculatePitch() {
             //  tolerance=(tolerance/trunc)*trunc
                 var tolStuck = tolerance;
          var metas = 0.
-for(var metaloops = 0.;metaloops<2.+totalAMPtrunc;metaloops+=totalAMPmodified)if(metas<34)
+for(var metaloops = 0.;metaloops<2.+tAScaled;metaloops+=tolerance)if(metas<20)
 {
     metas++
             tolerance = (tolerance + plusOrMinusPowerSeriesBUFFER) ** (.75 + (totalAMPmodified + tAScaledPermanent + tolerance - plusOrMinusPowerSeriesNorm));
@@ -4995,7 +4995,6 @@ for(var metaloops = 0.;metaloops<2.+totalAMPtrunc;metaloops+=totalAMPmodified)if
                                 }
                         }
                                   //                          tolerance *= (adjuster**adjuster)
-
 
                              //    adjuster *= (adjuster**(adjuster**adjuster)**adjuster)**3**powerUP
                                     tolerance *= (adjuster**adjuster)
