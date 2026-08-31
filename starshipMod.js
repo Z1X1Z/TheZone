@@ -5114,7 +5114,7 @@ for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+tAScaled;meta
             }
             
              tolerance=(tolerance/trunc)*trunc
-             tolerance*=totalAMP    
+             tolerance*=totalAMP**tolerance
              tolerance=(tolerance/trunc)*trunc
 
 
