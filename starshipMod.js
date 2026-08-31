@@ -5114,7 +5114,8 @@ for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+tAScaled;meta
             }
             
              tolerance=(tolerance/trunc)*trunc
-             tolerance*=totalAMP
+             tolerance*=totalAMP    
+             tolerance=(tolerance/trunc)*trunc
 
 
             if (!isFinite(tolerance) || tolerance > 1 || tolerance < 0) tolerance = ((-leafPermanent + grPermanent + 2 ** .5 - wingsOfRighteousness)) * (2.) / (grPermanent - leafPermanent + 1)
