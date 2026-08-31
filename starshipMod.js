@@ -4809,11 +4809,11 @@ function calculatePitch() {
             //  tolerance=(tolerance/trunc)*trunc
                 var tolStuck = tolerance;
          var metas = 0.
+            tolerance = (tolerance + plusOrMinusPowerSeriesBUFFER) ** (.75 + (totalAMPmodified + tAScaledPermanent + tolerance - plusOrMinusPowerSeriesNorm));
+
 for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+tAScaled;metaloops+=tolerance)if(metas<20)
 {
     metas++
-            tolerance = (tolerance + plusOrMinusPowerSeriesBUFFER) ** (.75 + (totalAMPmodified + tAScaledPermanent + tolerance - plusOrMinusPowerSeriesNorm));
-
             tolerance /= (-leafPermanent / trunc) * trunc;//makes over and under stable and greatly enhances accuracy
             //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMPmodified+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
             tolerance = (tolerance / trunc) * trunc
@@ -5099,7 +5099,6 @@ for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+tAScaled;meta
                     //tolerance*=((totalAMP**totalAMP)**((1.-tolerance)**tolerance+totalAMP)**((1.+totalAMP)**totalAMP-tolerance))///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
                     //tolerance=(tolerance/trunc)*trunc
                 }
-   // console.log(metas)
 
                 //console.log(7.5*Number.MIN_VALUE)
                 //alsotolerance**(powerAMP**2*6) ; //*totalAMP**(powerAMP/3).;///4./fractionOfFrame may actually be a fixed 256 bytes
@@ -5112,10 +5111,11 @@ for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+tAScaled;meta
 
                 //   console.log(ll)
             }
-            
-             tolerance=(tolerance/trunc)*trunc
-             tolerance*=totalAMP**tolerance
-             tolerance=(tolerance/trunc)*trunc
+        // console.log(metas)
+
+           // tolerance=(tolerance/trunc)*trunc
+           // tolerance*=totalAMP
+            // tolerance=(tolerance/trunc)*trunc
 
 
             if (!isFinite(tolerance) || tolerance > 1 || tolerance < 0) tolerance = ((-leafPermanent + grPermanent + 2 ** .5 - wingsOfRighteousness)) * (2.) / (grPermanent - leafPermanent + 1)
