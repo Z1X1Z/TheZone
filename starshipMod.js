@@ -5099,7 +5099,6 @@ for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+tAScaled;meta
                     //tolerance*=((totalAMP**totalAMP)**((1.-tolerance)**tolerance+totalAMP)**((1.+totalAMP)**totalAMP-tolerance))///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
                     //tolerance=(tolerance/trunc)*trunc
                 }
-
    // console.log(metas)
 
                 //console.log(7.5*Number.MIN_VALUE)
@@ -5113,6 +5112,11 @@ for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+tAScaled;meta
 
                 //   console.log(ll)
             }
+            
+             tolerance=(tolerance/trunc)*trunc
+             tolerance*=totalAMP
+
+
             if (!isFinite(tolerance) || tolerance > 1 || tolerance < 0) tolerance = ((-leafPermanent + grPermanent + 2 ** .5 - wingsOfRighteousness)) * (2.) / (grPermanent - leafPermanent + 1)
 
         }
