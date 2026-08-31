@@ -4807,18 +4807,25 @@ function calculatePitch() {
             //  tolerance+=plusOrMinusPowerSeriesBUFFER
 
             //  tolerance=(tolerance/trunc)*trunc
-
+                var tolStuck = tolerance;
+         var metas = 0.
+for(var metaloops = 0.;metaloops<2.+totalAMP;metaloops+=tAScaled)if(metas<50.)
+{
+    metas++
             tolerance = (tolerance + plusOrMinusPowerSeriesBUFFER) ** (.75 + (totalAMPmodified + tAScaledPermanent + tolerance - plusOrMinusPowerSeriesNorm));
 
             tolerance /= (-leafPermanent / trunc) * trunc;//makes over and under stable and greatly enhances accuracy
             //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMPmodified+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
             tolerance = (tolerance / trunc) * trunc
-
+   
             tolerance *= 2.;
 
             //                        tolerance=(tolerance/trunc)*trunc
+
+        
             var toleranceFixed = tolerance;
             var ll = 0.
+            
             if (isFinite(tAScaledPermanent) && tAScaledPermanent > 0 && tAScaledPermanent < 1)
                 for (var vvv = 0.; vvv < 1.5; vvv += tAScaledPermanent) {
                     tolerance = (toleranceFixed) ** ((1 + tolerance))
@@ -4834,6 +4841,9 @@ function calculatePitch() {
 
                     // ll++
                 }
+                
+                
+
             /*    tolerance=((tolerance)/trunc)*trunc
 
                         tolerance/=2;//2 or 1.5? 3?
@@ -4853,6 +4863,9 @@ function calculatePitch() {
             tolerance /= 2;//2 or 1.5? 3?
 
             tolerance = ((tolerance) / trunc) * trunc
+
+                
+                
             tolerance = (tolerance) ** ((((((-leafPermanent + 1) * (grPermanent + 1)) / trunc) * trunc) * ((totalAMPmodified ** .5 + totalAMPtrunc ** .5) / 2.) ** 2. + (((totalAMPmodified ** 2 + totalAMPtrunc ** 2) / 2.)) ** .5)) // this greatly improves trueness
 
             tolerance = ((tolerance) / trunc) * trunc
@@ -5020,7 +5033,7 @@ function calculatePitch() {
 
                     }
 
-
+                }
 
                     /*
                        if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
@@ -5088,6 +5101,7 @@ function calculatePitch() {
                     //tolerance=(tolerance/trunc)*trunc
                 }
 
+    console.log(metas)
 
                 //console.log(7.5*Number.MIN_VALUE)
                 //alsotolerance**(powerAMP**2*6) ; //*totalAMP**(powerAMP/3).;///4./fractionOfFrame may actually be a fixed 256 bytes
