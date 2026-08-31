@@ -2490,7 +2490,7 @@ function animate(timestamp) {
 
      if(!window.rezUpgradeBypass) 
      {    var pieTRUNCED = piE;
-if(zoom<.5)pieTRUNCED=Number(pieTRUNCED.slice(0,Math.ceil(Math.log(Number(piE))/zoom)))//1./Math.log(piE)/zoom has auto aim for spokes and Math.log(piE)/zoom has auto aim for clovers
+if(zoom<.5)pieTRUNCED=(pieTRUNCED.slice(0,Math.ceil(Math.log((piE))/zoom)))//1./Math.log(piE)/zoom has auto aim for spokes and Math.log(piE)/zoom has auto aim for clovers
             renderer.setPixelRatio(window.devicePixelRatio/pieTRUNCED);
             uniforms.baseN.value = pieTRUNCED
         }
