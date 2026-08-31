@@ -4814,7 +4814,7 @@ function calculatePitch() {
          var metas = 0.
             tolerance = (tolerance + plusOrMinusPowerSeriesBUFFER) ** (.75 + (totalAMPmodified + tAScaledPermanent + tolerance - plusOrMinusPowerSeriesNorm));
 
-for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+tAScaled;metaloops+=tolerance)if(metas<20)
+for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMP+taTRUNC;metaloops+=tolerance)if(metas<20)
 {
     metas++
             tolerance /= (-leafPermanent / trunc) * trunc;//makes over and under stable and greatly enhances accuracy
