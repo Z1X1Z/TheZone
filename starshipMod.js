@@ -5113,10 +5113,12 @@ for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+tAScaled;meta
                 //                                                  tolerance=((tolerance)/trunc)*trunc
 
                 //   console.log(ll)
+                            tolerance=(tolerance/trunc)*trunc
+
             }
         // console.log(metas)
 
-            tolerance=(tolerance/trunc)*trunc
+           // tolerance=(tolerance/trunc)*trunc
            // tolerance*=totalAMP
             // tolerance=(tolerance/trunc)*trunc
 
