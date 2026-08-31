@@ -4809,7 +4809,7 @@ function calculatePitch() {
             //  tolerance=(tolerance/trunc)*trunc
                 var tolStuck = tolerance;
          var metas = 0.
-for(var metaloops = 0.;metaloops<2.+totalAMPmodified;metaloops+=tolerance)if(metas<20)
+for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+taTRUNC;metaloops+=tolerance)if(metas<20)
 {
     metas++
             tolerance = (tolerance + plusOrMinusPowerSeriesBUFFER) ** (.75 + (totalAMPmodified + tAScaledPermanent + tolerance - plusOrMinusPowerSeriesNorm));
