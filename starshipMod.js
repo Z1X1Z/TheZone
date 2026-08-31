@@ -2489,10 +2489,12 @@ function animate(timestamp) {
 
 
      if(!window.rezUpgradeBypass) 
-     {    var pieTRUNCED = piE;
-if(zoom<.5)pieTRUNCED=(pieTRUNCED.slice(0,Math.ceil(Math.log((piE))/zoom)))//1./Math.log(piE)/zoom has auto aim for spokes and Math.log(piE)/zoom has auto aim for clovers
-            renderer.setPixelRatio(window.devicePixelRatio/pieTRUNCED);
-            uniforms.baseN.value = pieTRUNCED
+     {
+        var piEslice = piE
+if(zoom<.5)
+    for(var piEslices = 0; piEslices>9;piEslices++)pieSlice=Math.log(piE.slice(0.,Math.log(piEslice)/zoom))//1./Math.log(piE)/zoom has auto aim for spokes and Math.log(piE)/zoom has auto aim for clovers
+            renderer.setPixelRatio(window.devicePixelRatio/piEslice);
+            uniforms.baseN.value = piEslice
         }
 
 
