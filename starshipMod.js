@@ -4717,7 +4717,7 @@ function calculatePitch() {
                 else break;
             }
 
-            tAScaled = (tAScaled != 0 && isFinite) ? tAScaled : 1;
+            tAScaled = (tAScaled != 0 && isFinite(tAScaled)) ? tAScaled : 1;
             let tAScaledPermanent = tAScaled;
             let incrementToleranceFeedback = tAScaled;
             //           let oolp =    1./-leafPermanent;
@@ -4745,6 +4745,7 @@ function calculatePitch() {
                     //    loopy++
                 }
 
+            tAScaled = (tAScaled != 0 && isFinite(tAScaled)) ? tAScaled : 1;
 
             //   console.log(loopy) 
             // let b = 0.;
