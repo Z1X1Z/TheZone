@@ -2488,9 +2488,10 @@ let lowAmpFreq = 1;
 function animate(timestamp) {
 
 
-     if(!window.rezUpgradeBypass) 
+     if(!window.rezUpgradeBypass&&!window.reZSet) 
      {
         var piEslice = piE;
+        
 if(zoom<.5)
 {
     for(var piEslices = 0; piEslices>9;piEslices++)pieSlice=Math.log(piE.slice(0.,Math.log(piEslice)/zoom))//1./Math.log(piE)/zoom has auto aim for spokes and Math.log(piE)/zoom has auto aim for clovers

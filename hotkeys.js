@@ -105,7 +105,7 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                             "694508642740978140225293857251747947616172332340505259510482929746568318720191287806204977407744540358218526165916703452128297979641431797260780719883706560335632639406995986450172964155900"+
                             "804857101227380226242257129189469595007446931648615898582134162634538963230739825192184795339831603946490511261354151124713476503388626539683392348824994027048811670511305876162140547826998"+
                             "32898923012347857026447491672006496756571990974778003178918656584406632155093051647351024721496897500250261151198991"+
-                            "2751689219849142679663103590775616510889115928294183696236325231475434981154629558945712133667959984863363114241051651280987160008448856"
+                            "2751689219849142679663103590775616510889115928294183696236325231475434981154629558945712133667959984863363114241051651280987160008"
                            
                            window.uniformsInitial = {
 iso_engine:{value:false},
@@ -349,6 +349,7 @@ window.settingsSet = false
 
                  window.computeFPS=false;
                  window.rezUpgradeBypass = false
+                 window.reZSet = false;
 
 
 const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
@@ -1556,6 +1557,7 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
     else if (x==0)
     {window.movementRate=movementRateORIGINAL; uniforms[ "rate" ].value=movementRateORIGINAL;
         if(number!="no number"){window.movementRate=number*1.; uniforms[ "rate" ].value=number*1.;};
+        reZSet=true;
     }
     
     else if (document.activeElement.className=="num");//don't take number hotkey's while menu number selector engaged
@@ -1563,12 +1565,14 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
     else if (x>0&&x<=9&& document.activeElement.className!="num"&&!event.shiftKey&&!event.altKey)
     {rez = window.devicePixelRatio/x;
         if(window.INITIALIZED) renderer.setPixelRatio( rez);
+        reZSet=true;
     }
     
     /*else if (x==0&& document.activeElement.className!="num"&&!event.shiftKey&&!event.altKey)
      {rez = window.devicePixelRatio/10.; renderer.setPixelRatio( rez);}
      */
     else if (key=="+"){
+        reZSet=true;
         if(number=="no number")
             {
                 rez /=1.1; 
@@ -1582,6 +1586,7 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
     }
     else if (key=="_")
     {
+        reZSet = true;
         if(number=="no number")
             {
 
