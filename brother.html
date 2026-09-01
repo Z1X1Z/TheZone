@@ -2929,18 +2929,15 @@ float lengthP = length(p);
         coordsB.y*=collapsment;
         zoomB*=collapsment;
     }
-else if((abs(p.x)>27.&&abs(p.x)>27.))
-  {
-        float collapsment = 4.;//sqrt(3.)
-        
-        p.x*=collapsment;
-        p.y*=collapsment;
-     
-        coordsB.x*=collapsment;
-        coordsB.y*=collapsment;
-        zoomB*=collapsment;
-    }
 
+  else  
+  {
+    float cornerBoost = 343./pow(abs((p.x*p.y))-52.5,.5);
+    if((p.x)<(p.y)-52.5)hyperCore-=cornerBoost;
+  else if(p.x>p.y+52.5)hyperCore-=cornerBoost;
+  else if(p.x<-p.y-52.5)hyperCore-=cornerBoost;
+  else if(p.x>-p.y+52.5)hyperCore-=cornerBoost;
+  }
 lengthP=length(p);
 lengthB=lengthP;
     lfc=length(coordsB);
