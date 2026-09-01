@@ -2501,7 +2501,6 @@ function animate(timestamp) {
      if(!window.rezUpgradeBypass&&!window.reZSet) 
      {
         var piEslice = piE;
-        
 if(zoom<.5)
 {
     for(var piEslices = 0; piEslices>9;piEslices++)pieSlice=Math.log(piE.slice(0.,Math.log(piEslice)/zoom))//1./Math.log(piE)/zoom has auto aim for spokes and Math.log(piE)/zoom has auto aim for clovers
@@ -4823,11 +4822,12 @@ function calculatePitch() {
             //  tolerance=(tolerance/trunc)*trunc
          var metas = 0.
             tolerance = (tolerance + plusOrMinusPowerSeriesBUFFER) ** (.75 + (totalAMPmodified + tAScaledPermanent + tolerance - plusOrMinusPowerSeriesNorm));
-                var tolStuck = tolerance;
+                var tolStuck = (tolerance);
 
-for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+tAScaled;metaloops+=tolStuck)if(metas<20)
+for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+taTRUNC+tolStuck;metaloops+=(tolStuck/trunc)*trunc)if(metas<20)
 {
     metas++
+    
             tolerance /= (-leafPermanent / trunc) * trunc;//makes over and under stable and greatly enhances accuracy
             //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMPmodified+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
             tolerance = (tolerance / trunc) * trunc
