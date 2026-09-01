@@ -524,7 +524,7 @@ hyperCore*=4./3./(1./Math.log(3.)+(1.-1./Math.log(3.))/1.75);//engage overstable
 
 var howToBoost =  4.;
 
- if(SEVEYEStartAdj>lengthP&&lengthP<skyInterSection&&seventhOUTside)howToBoost =4.250987654321;
+ if(SEVEYEStartAdj>lengthP&&lengthP<skyInterSection&&seventhOUTside)howToBoost =4.25098765432100123456789;
             hyperCore+=((((gr)+-(leaf)+(2**.5)))-wingsOfRighteousness2)/(gr-leaf+1.);
             //hyperCore+=.5;
 //if(morph>.5&&!wheel)hyperCore+=4.;
@@ -604,7 +604,7 @@ else hyperCore+=.25;
 
 //else if (seventhEYE!=3.||lengthP<2./3.)
 else if((seventhEYE==0.||(seventhEYEandJubileye&&lengthP<2./3.))&&(lengthP<SEVEYEStartAdj||!seventhOUTside))
-hyperCore+=1.;
+hyperCore+=.5;
 
 // hyperCore-=lfcCenterCored-twoThirds;
 }
