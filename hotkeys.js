@@ -348,8 +348,6 @@ window.settingsSet = false
 
 
                  window.computeFPS=false;
-                 window.rezUpgradeBypass = false
-                 window.reZSet = false;
 
 
 const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
@@ -357,6 +355,10 @@ const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 const wingsOfRighteousness2 =(-Number(".2508742365242187487777776975555422424429370377"//+".25087423652421"+"874869"
     )+(grPermanent-leafPermanent-2**.5))*2;
 function resetAll(){
+
+
+                 window.rezUpgradeBypass = false
+                 window.reZSet = false;
 
 for(var nameOfUniform in uniformsInitial)
     {
