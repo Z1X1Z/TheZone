@@ -804,12 +804,13 @@ function move() {
     
     
     
+    
         if(fromCenter>skyInterSection||(fromCenter>skyInterSection/1.5&&Math.abs(coordY) > jesusJetsThresholdY&&!(Math.abs(coordX) > jesusJetsThresholdX&&Math.abs(coordY) < jesusJetsThresholdY)))
           {
                if(!window.rezUpgradeBypass)
 
                 wrapMovementBoost=1.
-                else wrapMovementBoost=2.-logStabilizationConstant
+                else wrapMovementBoost=1.
           }
                 
         else if (((fromCenter - zoom**(logStabilizationConstant))  > uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0.)) {
@@ -817,8 +818,8 @@ function move() {
             if(Math.abs(coordX) < jesusJetsThresholdX&&Math.abs(coordY) < jesusJetsThresholdY)
         {
                 if(!window.rezUpgradeBypass)
-                wrapMovementBoost =1.75/Math.log(3.);
-                else  wrapMovementBoost =1.75/Math.log(3.)*logStabilizationConstant; 
+                wrapMovementBoost =4*Math.log(3.)/fromCenter**.5;
+                else  wrapMovementBoost =4*Math.log(3.)/fromCenter**.5 
 } 
 
 
@@ -827,28 +828,32 @@ function move() {
 
    if(!window.rezUpgradeBypass)
 wrapMovementBoost=2.-Math.log(3);
-                else wrapMovementBoost=logStabilizationConstant;
+                else wrapMovementBoost=wrapMovementBoost=2.-Math.log(3);
+
                    }
                       else if (Math.abs(coordX) > jesusJetsThresholdX)
                         {
+
                                if(!window.rezUpgradeBypass)
 
                             wrapMovementBoost=.75*Math.log(3.)**2
-                            else wrapMovementBoost=.75*Math.log(3.)**2/logStabilizationConstant
+                            else   wrapMovementBoost=.75*Math.log(3.)**2
+
 
 
                         }
+                        /*
                       else
 
                         {
+                            console.log("there")
                 if(!window.rezUpgradeBypass)
                 wrapMovementBoost = .75*Math.log(3.)**2;
-                else              wrapMovementBoost = 1.25/Math.log(3.);
-}
+                else              wrapMovementBoost = .75*Math.log(3.)**2;
+}*/
         }
             else
              wrapMovementBoost = 1;
-
 
 
     const bx = coordX + d_xS * MR * zoom * wrapMovementBoost;
@@ -2382,7 +2387,7 @@ function executeTouchRegime() {
                if(!window.rezUpgradeBypass)
 
                 wrapMovementBoost=1.
-                else wrapMovementBoost=2.-logStabilizationConstant
+                else wrapMovementBoost=1.
           }
                 
         else if (((fromCenter - zoom**(logStabilizationConstant))  > uniforms.SEVEYEStart.value && uniforms.seventhOUTside.value && uniforms.colorCombo.value <= 0.)) {
@@ -2390,8 +2395,8 @@ function executeTouchRegime() {
             if(Math.abs(coordX) < jesusJetsThresholdX&&Math.abs(coordY) < jesusJetsThresholdY)
         {
                 if(!window.rezUpgradeBypass)
-                wrapMovementBoost =1.75/Math.log(3.);
-                else  wrapMovementBoost =1.75/Math.log(3.)*logStabilizationConstant; 
+                wrapMovementBoost =4*Math.log(3.)/fromCenter**.5;
+                else  wrapMovementBoost =4*Math.log(3.)/fromCenter**.5 
 } 
 
 
@@ -2400,24 +2405,29 @@ function executeTouchRegime() {
 
    if(!window.rezUpgradeBypass)
 wrapMovementBoost=2.-Math.log(3);
-                else wrapMovementBoost=logStabilizationConstant;
+                else wrapMovementBoost=wrapMovementBoost=2.-Math.log(3);
+
                    }
                       else if (Math.abs(coordX) > jesusJetsThresholdX)
                         {
+
                                if(!window.rezUpgradeBypass)
 
                             wrapMovementBoost=.75*Math.log(3.)**2
-                            else wrapMovementBoost=.75*Math.log(3.)**2/logStabilizationConstant
+                            else   wrapMovementBoost=.75*Math.log(3.)**2
+
 
 
                         }
+                        /*
                       else
 
                         {
+                            console.log("there")
                 if(!window.rezUpgradeBypass)
                 wrapMovementBoost = .75*Math.log(3.)**2;
-                else              wrapMovementBoost = 1.25/Math.log(3.);
-}
+                else              wrapMovementBoost = .75*Math.log(3.)**2;
+}*/
         }
             else
              wrapMovementBoost = 1;

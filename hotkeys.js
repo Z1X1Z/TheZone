@@ -1598,9 +1598,6 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
             {
                                         window.rezUpgradeBypass=true;
 
- zoomFrames = (60)//as in 60 seconds
- movementRateORIGINAL = 1.;//with wingsofrighteousness2=".25087423652421874869" is 1 but increased to 1.5 with 25087423652421874877777769755559
-
                 window.rez=window.devicePixelRatio/number;
                  if(window.INITIALIZED) renderer.setPixelRatio( rez);
             }
