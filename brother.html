@@ -4091,14 +4091,14 @@ float xenOctaveFactor =4.;
                        if(cloverArms) morphDance = vec2(-sin(-angleOfClover),1.-cos(-angleOfClover));
                        else morphDance=moveDynamic;
                        
-                       vec4 bodyWithArms = vec4(0.);/*bodyPlayer(characterOnTrailP,morphDance);
+                       vec4 bodyWithArms = bodyPlayer(characterOnTrailP,morphDance);
                        clothes=robe(characterOnTrailP,morphDance);
                                      
                        mannyFace = (faceBlackAndWhite(characterOnTrailP*1.221221,moveDynamic,false,-1,false,-1.));//,0.,1.);
                        
                          
                        mny=bodyWithArms.xyz+mannyFace.xyz*(1.-bodyWithArms.w);
-                   */
+                
                             
                                                                  float sidle =4.;
 
