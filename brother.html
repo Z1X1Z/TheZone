@@ -1611,8 +1611,8 @@ uniform int inseyedOut;
 
                                   const float LogHalfReciprocal = 1./log(.5);
                                   const float log2 = log(2.);
-                                  const float gr = 1.6180339887498948482045868343656381177203091798057628621354486227052604628189024497072072041893911374847540880753868917521266338622235369317931800607667263544333890;//1.6180339887498948482045868343;
-    const float leaf = -1.324717957244746025960908854478097340734404056901733364534015050302827851245547594054699347981787280329910920994742207425  ;
+const float gr =    1.6180339887498948482045868343656381177203091798057628621354486227052604628189024497072072041893911374847540880753868917521266338622235369317931800607667263544333890;//1.6180339887498948482045868343;
+const float leaf = -1.324717957244746025960908854478097340734404056901733364534015050302827851245547594054699347981787280329910920994742207425  ;
     const float clvrVariant4 = 1./leaf;
 
             
@@ -2891,7 +2891,7 @@ float petals = 0.;
  bool BURSTING = true;
 
 vec4 tol(vec2 p, vec2 t){
-      float tinsel_limit = 1.25*.5;
+      float tinsel_limit = .2;
 
     vec2 coordsB = coords;
     float hyperCore=0.;
@@ -3135,7 +3135,7 @@ float c = length(s);
 
 
 
-        if(lengthP>(SEVEYEStartAdj-sevMargin)/l3&&lengthP>SEVEYEStartAdj&&lfc>1.5)
+        if(lengthP>(SEVEYEStartAdj-sevMargin)/l3&&lengthP>SEVEYEStartAdj&&lfc>1.5/l3)
 {
   if(lengthP>SEVEYEStartAdj)
   {
@@ -4091,15 +4091,14 @@ float xenOctaveFactor =4.;
                        if(cloverArms) morphDance = vec2(-sin(-angleOfClover),1.-cos(-angleOfClover));
                        else morphDance=moveDynamic;
                        
-                       vec4 bodyWithArms = bodyPlayer(characterOnTrailP,morphDance);
+                       vec4 bodyWithArms = vec4(0.);/*bodyPlayer(characterOnTrailP,morphDance);
                        clothes=robe(characterOnTrailP,morphDance);
                                      
                        mannyFace = (faceBlackAndWhite(characterOnTrailP*1.221221,moveDynamic,false,-1,false,-1.));//,0.,1.);
                        
                          
                        mny=bodyWithArms.xyz+mannyFace.xyz*(1.-bodyWithArms.w);
-                   
-                  
+                   */
                             
                                                                  float sidle =4.;
 
