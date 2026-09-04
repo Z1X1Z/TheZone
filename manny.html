@@ -4935,9 +4935,9 @@ else if(morph!=0.) {  swapped=int(mod(float(swap-swapJUBILEE+swapDEFAULT+4*10+3)
 
 
 vec2 s=p;
-                                 float c = length(s);
 
-        if(seventhEYE>0.&&seventhEYE!=3.&&(lengthP<twoThirds&&length(s)<twoThirds)&&zoomB<tinsel_limit
+//lengthP=length(p);
+        if(seventhEYE>0.&&seventhEYE!=3.&&(lengthP<twoThirds&&length(s)<twoThirds)&&zoomB<.5
  //&&lfc>zoomB
  )
 {
@@ -4947,6 +4947,9 @@ vec2 s=p;
     if(seventhEYE==2.)s=vec2(s.y,abs(s.x));//more sign checks may help
    // try signs and swizzle!
 }
+
+
+                                 float c = length(s);
 
 
         if(seventhOUTside&&(lengthP>(SEVEYEStartAdj-sevMargin)/l3)&&(lengthP>SEVEYEStartAdj)&&lfc>1.5/l3
@@ -4993,6 +4996,8 @@ coordsB/=SEVEYEPush;
 bool coreChanger = true; 
 // if(c>4./3.){s/=2.;c/=2.;}//Engage one UpCore, the rest of zoom cycle in StarshipMod.js
 // if(lfc>zoom&&seventhEYE!=3.)
+
+                               //   bool inCenterCore =c<twoThirds;
  for(int i=0;i<int(crs);//crs+3=63
                   i++)if(c<twoThirds
                          &&loops+centerslide<cored//&&(lfcOverzoomB>twoThirds||seventhEYE!=3.)
@@ -5026,7 +5031,7 @@ bool coreChanger = true;
  else break;
  float lfcCenterCored=lfc*scale;
 bool seventhEYEthree = (seventhEYE==3.&&((jubileyes!=0.&&lengthP<1./3.)||
-(jubileyes==0.&&lengthP<twoThirds))&&zoomB<tinsel_limit 
+(jubileyes==0.&&lengthP<twoThirds))&&zoomB<.5 
 );
        if(seventhEYEthree
        
@@ -5042,7 +5047,6 @@ bool seventhEYEthree = (seventhEYE==3.&&((jubileyes!=0.&&lengthP<1./3.)||
 }
 
 
- bool inCenterCore =c<twoThirds;
  if(cloverso)
  {
      float outerMargin =atan(s.y,s.x);
@@ -5237,7 +5241,7 @@ else if (petals<=0.)hyperCore-=log2;
 
 
 //hyperCore+=.5;
-   if(seventhEYE>0.&&(seventhEYE!=3.||seventhEYEthree)&&lengthP<twoThirds&&zoomB<tinsel_limit//&&z(lfcOverzoomB<twoThirds||seventhEYE!=3.)
+   if(seventhEYE>0.&&(seventhEYE!=3.||seventhEYEthree)&&lengthP<twoThirds&&zoomB<.5//&&z(lfcOverzoomB<twoThirds||seventhEYE!=3.)
    )
    {
     if(budge==1./3.)
@@ -5284,7 +5288,7 @@ if(outerCoresOff)hyperCore=0.;
 
 if(Spoker)
 hyperCore*=4./3./(1./l3+(1.-1./l3)/1.75);//engage overstable core if dancing log terms based on logStabilizationConstant may or may not be accurate
-   if(zoomB<tinsel_limit&&(seventhEYE!=1.&&seventhEYE!=2.||lengthP>2./3.)||(seventhOUTside&&(SEVEYEStartAdj>lfc&&lfc<81.)))  hyperCore+=.5/-log(zoomB*coresIn);//right for keeping central outer clover same size
+   if(zoomB<tinsel_limit&&(seventhEYE!=1.&&seventhEYE!=2.||lengthP>2./3.)||(seventhOUTside&&(SEVEYEStartAdj<lfc&&lfc<81.)))  hyperCore+=.5/-log(zoomB*coresIn);//right for keeping central outer clover same size
 float howToBoost = wingsOfRighteousness;
 
 if(SEVEYEStartAdj>lengthP&&lengthP<interSection&&seventhOUTside)howToBoost =4.25098765432100123456789;
