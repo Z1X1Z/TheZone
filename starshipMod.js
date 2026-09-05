@@ -1919,9 +1919,9 @@ if(zoom>2**64)
             coordY=0.;
         }
 
-        else if (uniforms.MetaCored.value || zoom < 1.&&
+        else if (uniforms.MetaCored.value ||(zoom < 1.||
 //||(fromCenter<skyInterSection&&uniforms.SEVEYEStart.value<fromCenter&&fromCenter/ zoom ** .5> uniforms.SEVEYEStart.value)||
-(fromCenter>skyInterSection&&zoom<fromCenter*.5)) {
+(fromCenter>skyInterSection&&zoom<fromCenter*.5))) {
             zoom /= ZR;
             triggerRailSet = true
             if (center) { coordX *= ZR * 2. / 3.;; coordY *= ZR * 2. / 3.; }
