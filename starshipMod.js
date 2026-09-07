@@ -5013,6 +5013,7 @@ for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+taTRUNC+tolSt
                                   //                          tolerance *= (adjuster**adjuster)
 
                              //    adjuster *= (adjuster**(adjuster**adjuster)**adjuster)**3**powerUP
+                             
                                     tolerance *= (adjuster**adjuster)
                                                //  tolerance=(tolerance/trunc)*trunc
 
@@ -5028,17 +5029,22 @@ for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+taTRUNC+tolSt
  c = 0;
 
                                                   //    adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
+                              //   tolerance=(tolerance/trunc)*trunc
+                            //     tolerance=(tolerance/trunc)*trunc
 
 if(isFinite(tolerance)&&tolerance>0.)
                          for (var d = 0; d < 7+totalAMP; d += tolerance) if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
 
                          {
 
+                                                             tolerance=(tolerance/trunc)*trunc
+
                               adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
                               
                               let adjustment = (((adjuster**(adjuster**adjuster)**adjuster)))**3**powerUP
 
                                  tolerance *=(adjustment**adjustment)
+                                 
                                                                        c++
                                                                        if(c>1000){
                                                                         console.log("b2")
@@ -5048,8 +5054,13 @@ if(isFinite(tolerance)&&tolerance>0.)
 
                     }
                     else break;
+                    
+                         if(!isFinite(tolerance))break;
+                            //     tolerance=(tolerance/trunc)*trunc
+
 
                 }
+
 
                     /*
                        if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
