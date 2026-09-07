@@ -5054,7 +5054,8 @@ if(isFinite(tolerance)&&tolerance>0.)
 
                     }
                     else break;
-                    
+                                                                                 tolerance=(tolerance/trunc)*trunc
+
                          if(!isFinite(tolerance))break;
                             //     tolerance=(tolerance/trunc)*trunc
 
