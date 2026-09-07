@@ -5029,7 +5029,7 @@ for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+taTRUNC+tolSt
 
                                                   //    adjuster = (adjuster ** (totalAMP ** (tolerance * adjuster))) ** powerUP
 
-
+if(isFinite(tolerance)&&tolerance>0.)
                          for (var d = 0; d < 7+totalAMP; d += tolerance) if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
 
                          {
