@@ -893,7 +893,7 @@ wrapMovementBoost=2.-Math.log(3);
     yPerp[f] = -Math.cos(-angle + pi / 2) * volume * flatline;
     if (!window.flame) trailWidth[f] = 0;
     else trailWidth[f] = starshipSize;//0.;
-    trailTimeOfRecording[f] = uniforms["time"].value;
+    trailTimeOfRecording[f] = uniforms["time"].value-audioX.baseLatency;
     trailSegmentExpired[f] = false;
     if (trailSecondsLong != 0 &&// trailDepth<trailLength||
         on) {
