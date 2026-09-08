@@ -5054,7 +5054,6 @@ if(isFinite(tolerance)&&tolerance>0.)
 
                     }
                     else break;
-                                                                                 tolerance=(tolerance/trunc)*trunc
 
                          if(!isFinite(tolerance))break;
                             //     tolerance=(tolerance/trunc)*trunc
@@ -5128,6 +5127,7 @@ if(isFinite(tolerance)&&tolerance>0.)
                     //tolerance*=((totalAMP**totalAMP)**((1.-tolerance)**tolerance+totalAMP)**((1.+totalAMP)**totalAMP-tolerance))///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
                     //tolerance=(tolerance/trunc)*trunc
                 }
+                                                                                 tolerance=(tolerance/trunc)*trunc
 
                 //console.log(7.5*Number.MIN_VALUE)
                 //alsotolerance**(powerAMP**2*6) ; //*totalAMP**(powerAMP/3).;///4./fractionOfFrame may actually be a fixed 256 bytes
