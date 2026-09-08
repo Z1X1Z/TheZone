@@ -5013,8 +5013,10 @@ for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+taTRUNC+tolSt
                                   //                          tolerance *= (adjuster**adjuster)
 
                              //    adjuster *= (adjuster**(adjuster**adjuster)**adjuster)**3**powerUP
-                             
+                                                                                                              tolerance=(tolerance/trunc)*trunc
+
                                     tolerance *= (adjuster**adjuster)
+                                    
                                                //  tolerance=(tolerance/trunc)*trunc
 
                 // powerUP = ((1. + totalAMP) ** totalAMP - tolerance) ** ((1 - tolerance) ** tolerance + totalAMP);
