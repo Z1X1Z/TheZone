@@ -1062,6 +1062,19 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                 }
     
    // else if (event.altKey);
+                     else if(key == "F" && event.altKey)
+                     {
+                    if(number!="no number")
+                        if(window.touchVolume<=1.)window.touchVolume=number;
+                     }
+
+                     else if(key == "N" && event.altKey)
+                     {
+                    if(number!="no number")
+                        uniforms.baseN.value=number;
+
+                    }
+
                   else if(key == "S" && event.altKey)window.superseal = !window.superseal;
                                     else if(key == "J" && event.altKey)
                                         {
