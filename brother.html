@@ -3173,8 +3173,7 @@ coordsB/=SEVEYEPush;
  
 
  
- float lfcCenterCored=lfc;
- if(lengthP<SEVEYEStartAdj)lfcCenterCored*=scale;
+ float lfcCenterCored=lfc*scale;
  
 bool seventhEYEthree = (lengthP<1./3.)&&zoomB<.5;//&&lfcOverzoomB>twoThirds;
 
@@ -3243,7 +3242,7 @@ float truncNonLeaf=1.;
 float truncator=1.;
 if(zoomB!=0.&&lfc!=0.)//may or may not include 
 {
-  truncNonLeaf=log(pow(lfcCenterCored,lfcCenterCored));
+ if(lfc<27.) truncNonLeaf=log(pow(lfcCenterCored,lfcCenterCored));
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 
 }
