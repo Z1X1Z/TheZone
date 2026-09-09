@@ -484,7 +484,7 @@ radialWarp=b;
                  <input type="checkbox" id="Touchnsing" name="t"  onclick= "
                       key  = 'J';
                       callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true, 'keyCode':key.charCodeAt(0)}));">
-               <label for="Touchnsing">Touch 'n' Sing[.J]</label><br>
+               <label for="Touchnsing">Touch'n'Sing[.J]</label><br>
                 
                 <input type="checkbox" id="Ring Spring" name="t"  onclick= "
                     key  = 'U';
@@ -5214,7 +5214,7 @@ float truncNonLeaf=1.;
 float truncator=1.;
 if(zoomB!=0.&&lfc!=0.)//may or may not include 
 {
-    truncNonLeaf=log((lfcCenterCored));
+    truncNonLeaf=log(pow(lfcCenterCored,lfcCenterCored));
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 
 }
