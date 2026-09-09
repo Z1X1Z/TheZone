@@ -5052,7 +5052,8 @@ if(isFinite(tolerance)&&tolerance>0.)
                                                                         console.log("b2")
                                                                         break;
                                                                        }
-                                        
+                                                                 if(!isFinite(tolerance))break;
+
 
                     }
                     else break;
