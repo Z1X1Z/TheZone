@@ -3240,7 +3240,7 @@ if(pollen&&!BURSTING)
 float truncNonLeaf=1.;
 
 float truncator=1.;
-if(zoomB!=0.&&lfc!=0.)//may or may not include 
+if(zoomB!=0.&&lfc!=0.&&lfc<SEVEYEStartAdj)//may or may not include 
 {
     truncNonLeaf=log(pow(lfcCenterCored,lfcCenterCored));
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))

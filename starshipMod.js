@@ -4718,7 +4718,7 @@ function calculatePitch() {
                 else break;
             }
 
-            tAScaled = (tAScaled != 0 && isFinite(tAScaled)) ? tAScaled : 1;
+            tAScaled = (tAScaled != 0 && isFinite(tAScaled)) ? tAScaled : .25;
             let tAScaledPermanent = tAScaled;
             let incrementToleranceFeedback = tAScaled;
             //           let oolp =    1./-leafPermanent;
