@@ -2902,7 +2902,7 @@ float lengthP = length(p);
  float zoomB = zoom;
  float lfcB = lfc;
  float lengthB = lengthP;
-
+float lengthABSOLUTE = lengthP;
    float interSection = pow(2.,8.);
 
  if(lengthP>interSection/1.5);
@@ -2941,13 +2941,12 @@ lengthP=length(p);
 lengthB=lengthP;
     lfc=length(coordsB);
     lfcB=lfc;
-bool Inside = false;
+
 if(lengthP>81.&&lengthP<interSection)
 {
     coordsB/=3.*3.*3.;
     hyperCore -= (3.*3.*3.*3.)/(lfc-3.*3.*3.*l3);
 }
-else Inside = true;
 
 float scale = 1.;
 float coresIn = 0.;
@@ -3241,7 +3240,7 @@ if(pollen&&!BURSTING)
 float truncNonLeaf=1.;
 
 float truncator=1.;
-if(zoomB!=0.&&lfc!=0.&&Inside)//may or may not include 
+if(zoomB!=0.&&lfc!=0.&&lengthABSOLUTE<27.)//may or may not include 
 {
   truncNonLeaf=log(pow(lfcCenterCored,lfcCenterCored));
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
