@@ -2971,7 +2971,6 @@ float upperOuterLimit = pow(2.,61.);
     
       float tinsel_limit = .125;
       if(lfc<SEVEYEStartAdj)tinsel_limit*=lfc;
-      else if(lfc>81.) tinsel_limit=2.;
 
                    if(lengthP>(upperOuterLimit-sevMargin*2.)/l3&&lengthP>upperOuterLimit)
 
@@ -3174,7 +3173,8 @@ coordsB/=SEVEYEPush;
  
 
  
- float lfcCenterCored=lfc*scale;
+ float lfcCenterCored=lfc;
+ if(lengthP<SEVEYEStartAdj)lfcCenterCored*=scale;
  
 bool seventhEYEthree = (lengthP<1./3.)&&zoomB<.5;//&&lfcOverzoomB>twoThirds;
 
@@ -3243,7 +3243,7 @@ float truncNonLeaf=1.;
 float truncator=1.;
 if(zoomB!=0.&&lfc!=0.)//may or may not include 
 {
-    truncNonLeaf=log(pow(lfcCenterCored,lfcCenterCored));
+  truncNonLeaf=log(pow(lfcCenterCored,lfcCenterCored));
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 
 }
