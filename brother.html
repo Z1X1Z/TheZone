@@ -2941,12 +2941,13 @@ lengthP=length(p);
 lengthB=lengthP;
     lfc=length(coordsB);
     lfcB=lfc;
-
+bool Inside = false;
 if(lengthP>81.&&lengthP<interSection)
 {
     coordsB/=3.*3.*3.;
     hyperCore -= (3.*3.*3.*3.)/(lfc-3.*3.*3.*l3);
 }
+else Inside = true;
 
 float scale = 1.;
 float coresIn = 0.;
@@ -3240,9 +3241,9 @@ if(pollen&&!BURSTING)
 float truncNonLeaf=1.;
 
 float truncator=1.;
-if(zoomB!=0.&&lfc!=0.)//may or may not include 
+if(zoomB!=0.&&lfc!=0.&&Inside)//may or may not include 
 {
- if(length(constellationCoord)<27.) truncNonLeaf=log(pow(lfcCenterCored,lfcCenterCored));
+  truncNonLeaf=log(pow(lfcCenterCored,lfcCenterCored));
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 
 }
