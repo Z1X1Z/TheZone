@@ -5036,6 +5036,7 @@ for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+taTRUNC+tolSt
                               //   tolerance=(tolerance/trunc)*trunc
                             //     tolerance=(tolerance/trunc)*trunc
 
+                                                          tolerance=(tolerance/trunc)*trunc
 
 if(isFinite(tolerance)&&tolerance>0.)
                          for (var d = 0; d < 7+totalAMP; d += tolerance) if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
@@ -5049,6 +5050,7 @@ if(isFinite(tolerance)&&tolerance>0.)
                               let adjustment = (((adjuster**(adjuster**adjuster)**adjuster)))**3**powerUP
 
                                  tolerance *=(adjustment**adjustment)
+                                                       //   tolerance=(tolerance/trunc)*trunc
 
                                                                        c++
                                                                        if(c>1000){
