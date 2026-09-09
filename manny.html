@@ -4419,7 +4419,7 @@ float lfc = length(constellationCoord);
 float lengthP = length(p);
  float zoomB = zoom;
 
-
+float lengthABSOLUTE = lengthP;
 
 float SEVEYEPush = pow(2.,SEVEYEpow);
 
@@ -5212,7 +5212,7 @@ if(pollen&&OrthoEvery==0.)
 float truncNonLeaf=1.;
 
 float truncator=1.;
-if(zoomB!=0.&&lfc!=0.&&lfc<SEVEYEStartAdj)//may or may not include 
+if(zoomB!=0.&&lfc!=0.&&lengthABSOLUTE<27.&&length(constellationCoord)<27.)//may or may not include 
 {
     truncNonLeaf=log(pow(lfcCenterCored,lfcCenterCored));
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
