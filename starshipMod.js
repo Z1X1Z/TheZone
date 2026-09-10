@@ -107,9 +107,13 @@ var frequencies,
     mustarD,
     star, starColors,
     crownBar, crownBarColors;
-    var crownBarBoost = Array(EldersLeg).fill(0);
-    var lastTestar = Array(EldersLeg).fill(0.);
-    var crownBarDegree = Array(EldersLeg).fill(.5);
+
+                          var crownHeadBoost= Array(EldersLeg*2).fill(0);
+                         var  timeOfCast= Array(EldersLeg*2).fill(0);
+    var crownBarBoost = Array(EldersLeg*2).fill(0);
+    var twoOctaves = Array(EldersLeg*2).fill(0);
+    var lastTestar = Array(EldersLeg*2).fill(0.);
+    var crownBarDegree = Array(EldersLeg*2).fill(.5);
 let testarContinuous = [];//
 
 var DAWstar, DAWstarColors;
@@ -228,6 +232,56 @@ function makeSpirograph() {
 }
 let callibratorArray = new Float32Array(1024).fill(0);
 let stack12Array = new Float32Array(12).fill(0);
+function build_staff(){
+
+                let maxtwoOctaves = Number.MIN_VALUE;
+                let mintwoOctaves = Number.MAX_VALUE;
+
+                for (var g = 0; g < EldersLeg*2; g++) {
+                    if (twoOctaves[g] > maxtwoOctaves) { maxtwoOctaves = twoOctaves[g]; }
+                    if (twoOctaves[g] < mintwoOctaves) mintwoOctaves = twoOctaves[g];
+                }
+                if (maxtwoOctaves == mintwoOctaves) mintwoOctaves = 0;
+                for (var g = 0; g < EldersLeg*2; g++)                     
+{
+                    let incrementation = (EldersLeg % 2 == 0) ? g % 2 : (g + 1) % 2;
+                    //incrementation/=2.;
+                    incrementation++;
+                    ;
+
+                    let lengt = 0;
+
+                       if(maxtwoOctaves!=mintwoOctaves) lengt = ((twoOctaves[(g + EldersLeg / 2.) % EldersLeg]) - mintwoOctaves) / (maxtwoOctaves - mintwoOctaves);
+                        if (mintwoOctaves == twoOctaves[(g + EldersLeg / 2.) % EldersLeg] || twoOctaves[(g + EldersLeg / 2.) % EldersLeg] < 0.) lengt = 0.;//cull miniumum throughput
+                      
+                    var interpDth = interpolation;
+                        if(crownBarDegree[g]>.5)
+
+                    {
+                                            if(lengt>.5)
+
+     crownBarDegree[g] *=2**interpDth*crownBarDegree[g]
+     
+    else
+             crownBarDegree[g] /=2**interpDth * crownBarDegree[g]
+
+                    }
+                    else
+                    {
+                                            if(lengt>.5)
+
+     crownBarDegree[g] *=2**interpDth/crownBarDegree[g]
+     
+    else
+             crownBarDegree[g] /=2**interpDth / crownBarDegree[g]
+                    }
+                                        if(crownBarDegree[g]<.125)crownBarDegree[g]=.125;
+                                        else if(crownBarDegree[g]>1.)crownBarDegree[g]=1.;    
+                                        else if (!isFinite(crownBarDegree[g]))crownBarDegree[g]=.5;
+                                       // if(g==44)crownBarDegree[g]=2
+
+                }
+}
 function spiral_compress() {
     let freq = 0;
     // let freqUnInterpolated = 0;
@@ -238,7 +292,7 @@ function spiral_compress() {
 
     const z = [...dataArray];
 
-    testarContinuous.fill(0); testar.fill(0); mustarD.fill(0); stack12Array.fill(0.); twelveNotesData.fill(0.);
+    testarContinuous.fill(0); testar.fill(0); mustarD.fill(0); stack12Array.fill(0.); twelveNotesData.fill(0.);twoOctaves.fill(0.)
     for (let n = 0; n < numberOfBins; n++) {
         //if ( z[n]>z[n-1] && z[n] > z[n+1] ){
         let d = 1.;
@@ -292,6 +346,10 @@ function spiral_compress() {
 
 
         if (EldersLeg != 0.) testar[Math.round(note24 * EldersLeg / 24.) % EldersLeg] += Math.abs(z[n]) * radialWarp;
+        
+            
+
+        if (EldersLeg != 0.) twoOctaves[Math.round((note24) * EldersLeg / 24.) % (EldersLeg*2)] += Math.abs(z[n]) * radialWarp;
         stack12Array[Math.round(note24 / 2.) % 12] += Math.abs(z[n]);
         testarContinuous[n] = Math.abs(z[n]);
         mustarD[n] = note24;
@@ -1059,9 +1117,14 @@ function setFFTdependantSizes() {
     crownBar = new Float32Array( EldersLeg * 3 * 2*3 );//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
     crownBarColors = new Float32Array( EldersLeg * 6 * 4 *3);
 
-     crownBarBoost = Array(EldersLeg).fill(0)
-     lastTestar = Array(EldersLeg).fill(0)
-     crownBarDegree = Array(EldersLeg).fill(.5)
+     crownBarBoost = Array(EldersLeg*2).fill(0)
+
+crownHeadBoost = Array(EldersLeg*2).fill(0);
+      timeOfCast = Array(EldersLeg*2).fill(0);
+                              crownBarDegree = Array(EldersLeg*2).fill(.5)
+     twoOctaves = Array(EldersLeg*2).fill(0)
+
+
     starArms = numberOfBins;
     window.starCount = Math.ceil(starArms * 60 * secondsToEdge);
 
@@ -1096,6 +1159,22 @@ function setFFTdependantSizes() {
         crownBarGeometry.setAttribute('color', new THREE.Float32BufferAttribute(crownBarColors, 4));
         crownBarMesh = new THREE.Mesh(crownBarGeometry, crownBarMaterial);
         shaderScene.add(crownBarMesh)
+
+
+        for (var n = 0; n < EldersLeg; n++) {
+            shaderScene.remove(crownHead[n])
+            crownHeadGeometry[n] = new THREE.CircleGeometry(0, 24, 1);
+
+            let c = new THREE.Color;
+            c.setStyle("white");
+            crownHeadMaterial[n] = new THREE.MeshBasicMaterial({ color: c });
+            crownHead[n] = new THREE.Mesh(crownHeadGeometry[n], crownHeadMaterial[n]);
+            //crownHead[n].position.set(polygons[n].centerX, polygons[n].centerY, -.99);
+            shaderScene.add(crownHead[n]);
+
+
+        }
+
 
 
         //if(RockInTheWater==1||RockInTheWater==2) scene.remove(starStreamMesh);
@@ -1274,6 +1353,20 @@ fibgetScene= new THREE.Scene();
     crownBarGeometry = new THREE.BufferGeometry();
     crownBarGeometry.dynamic = true;
     crownBarMesh = new THREE.Mesh(crownBarGeometry, crownBarMaterial);
+
+
+        for (var n = 0; n < EldersLeg; n++) {
+            crownHeadGeometry[n] = new THREE.CircleGeometry(0, 24, 1);
+
+            let c = new THREE.Color;
+            c.setStyle("white");
+            crownHeadMaterial[n] = new THREE.MeshBasicMaterial({ color: c });
+            crownHead[n] = new THREE.Mesh(crownHeadGeometry[n], crownHeadMaterial[n]);
+            //crownHead[n].position.set(polygons[n].centerX, polygons[n].centerY, -.99);
+            shaderScene.add(crownHead[n]);
+
+
+        }
 
 
 
@@ -2147,6 +2240,9 @@ let polyRad = .1;
 let targets = [];
 let pG = [];
 let pM = [];
+let crownHead = [];
+let crownHeadGeometry = [];
+let crownHeadMaterial = [];
 let lastNoteTimeInScore = 0;
 window.noteHit = false;
 let timeStampLastNoteEnded = 0.;
@@ -2622,6 +2718,23 @@ if(zoom<.5)
 
     if (window.touchMode//&&!DAW
         || window.touchOnlyMode||window.touchAndSing) {
+
+                 for (let r = 0.; r < EldersLeg * 3 * 2*3; r++)
+                {crownBarPositionAttribute.setXYZ(r, 0, 0, 0);
+                    crownBarColorAttribute.setXYZ(r, 0, 0, 0,0);
+                }
+            for (let e = 0; e < 12 * 6; e++)  stackPositionAttribute.setXYZ(e, 0, 0, 0);
+
+        for (var n = 0; n < EldersLeg; n++) {
+
+         crownHead[n].position.set(2,2,1);;         
+     crownHead[n].needsUpdate=true;
+
+            }
+            crownBarPositionAttribute.needsUpdate = true;
+
+            stackPositionAttribute.needsUpdate = true;
+
         setDynamicSampler2ds();//normally does nothing
 
         setMicInputToStarPIXEL();
@@ -2962,7 +3075,7 @@ if(zoom<.5)
         pongRoutine(d_x, d_y);
 
         spiral_compress();
-
+if(window.staff)build_staff();
         vectorize4();
         setTwelveNotes();
         let lowNote = Number.MAX_VALUE;
@@ -3106,7 +3219,7 @@ if(zoom<.5)
             var lineStride = 0;
 
             //scene.add(line)
-            let depthSpirograph = -1.;
+            let depthSpirograph = -.98;
 
             if (on && spirographMODE != 0 && pitch != lastPitch && (uniforms.movieTime.value == -1 || uniforms.movieTime.value > 5.)) for (let r = 0.; r < bufferPortion; r += 1) {//spirray size supports upto r <buffersize*2
                 const txlast = tx;
@@ -3510,33 +3623,19 @@ if(zoom<.5)
                     }
 
                     if(lengt>crownBarBoost[g])
+                    {
                            crownBarBoost[g]=lengt
-                    else crownBarBoost[g] -= interpolation/15.
-
-                    var interpDth = interpolation;
-                        if(crownBarDegree[g]>.5)
-
-                    {
-                                            if(lengt>.5)
-
-     crownBarDegree[g] *=2**interpDth*crownBarDegree[g]
-     
-    else
-             crownBarDegree[g] /=2**interpDth * crownBarDegree[g]
-
+                           crownHeadBoost[g]=lengt
+                           timeOfCast[g]=uniforms.time.value
                     }
-                    else
-                    {
-                                            if(lengt>.5)
 
-     crownBarDegree[g] *=2**interpDth/crownBarDegree[g]
-     
-    else
-             crownBarDegree[g] /=2**interpDth / crownBarDegree[g]
-                    }
-                                        if(crownBarDegree[g]<.125)crownBarDegree[g]=.125;
-                                        else if(crownBarDegree[g]>1.)crownBarDegree[g]=1.;    
-                                        else if (!isFinite(crownBarDegree[g]))crownBarDegree[g]=.5;
+                    else 
+                        {
+                            crownBarBoost[g] -= interpolation/15.
+                            if(timeOfCast[g]-uniforms.time.value>1.)
+                            crownHeadBoost[g]-= interpolation/30.
+
+                        }
 
                     let dep = -.99;//depBuffer/1.001**(lengt);
 
@@ -3608,14 +3707,42 @@ if(zoom<.5)
 
 
                     starStride += 6;
-
-                    let crownHeight = (1.-logStabilizationConstant);
+if(window.staff)
+{
+                    let crownHeight = (1.-logStabilizationConstant)/Math.log(3.);
                              let xBoostCrown = -Math.sin(arm) * (centerDisplacement+crownBarBoost[g]/4.);
                     let yBoostCrown = -Math.cos(arm) * (centerDisplacement+crownBarBoost[g]/4.);
 
                     let xCrown = widt * -Math.sin(rpio2) * bigness*crownBarDegree[g];
                     let yCrown = widt * -Math.cos(rpio2) * bigness*crownBarDegree[g];
-                    
+
+                             let xBoostHead = -Math.sin(arm) * (centerDisplacement+crownHeadBoost[g]/4.+crownHeight*2);
+                    let yBoostHead = -Math.cos(arm) * (centerDisplacement+crownHeadBoost[g]/4.+crownHeight*2);
+
+
+
+                    crownHead[g].geometry.dispose();
+            let c = new THREE.Color;
+
+                    let lineOrSpace =1;
+                    if(g>EldersLeg/4.&&g<EldersLeg*3./4.)
+                    {
+                        lineOrSpace*=-1;
+
+                    }
+                    if(g%4==0)lineOrSpace*=-1;
+                    else if((g+1)%2==0)lineOrSpace=.5
+
+                    if(lineOrSpace==-1)  c.setStyle("white");
+                    else if (lineOrSpace==.5)  c.setStyle("grey");
+                    else                         c.setStyle("black");
+
+
+            crownHead[g].material.color=c;
+                                crownHead[g].geometry = new THREE.CircleGeometry((1.-logStabilizationConstant)*(crownBarDegree[(g+EldersLeg)%(EldersLeg*2)]/2+1./3.)/incrementation, 24, 1);
+
+                                crownHead[g].position.set(xBoostHead, yBoostHead, -.99);
+     crownHead[g].needsUpdate=true;
                    // let xrCrown = (lengt) * -Math.sin(arm) * (bigness+crownHeight);
                    // let yrCrown = (lengt) * -Math.cos(arm) * (bigness+crownHeight);
 
@@ -3629,7 +3756,7 @@ if(zoom<.5)
 
                     //else TransparencyStar/=2.;
 
-                    let staffColor = .0;
+                    let staffColor = lineOrSpace;
                     let staffAlpha = 1.;
 
   /*
@@ -3658,7 +3785,7 @@ if(zoom<.5)
 
 
                     crownBarStride+=6;
-
+}
 
                     x *= -centerDisplacement / 2. / bigness;
                     y *= -centerDisplacement / 2. / bigness;
@@ -4142,18 +4269,23 @@ if(zoom<.5)
         else//clear starship
         {
             for (let u = 0.; u < bufferPortion * 2; u += 1) linePositionAttribute.setXYZ(u, 0, 0, 0);
-            for (var v = 0; v < 6 * trailDepth; v++) trailPositionAttribute.setXYZ(v, 0, 0, 0);
+            for (let v = 0; v < 6 * trailDepth; v++) trailPositionAttribute.setXYZ(v, 0, 0, 0);
             for (let r = 0.; r < starArms * 3; r++)starPositionAttribute.setXYZ(r, 0, 0, 0);
-            for (let r = 0.; r < starArms * 3; r++)crownBarPositionAttribute.setXYZ(r, 0, 0, 0);
-            for (var g = 0; g < 12 * xenOctaveFactor * 6; g++) harmonicPositionAttribute.setXYZ(g, 0, 0, 0);
-            for (var e = 0; e < xyStarParticleArray.length * 3 * 2; e++)starStreamPositionAttribute.setXYZ(e, 0, 0, 0);
-            for (var e = 0; e < 120 * 6; e++)  starsANDwitnessesPositionAttribute.setXYZ(e, 0, 0, 0);
-            for (var e = 0; e < 12 * 6; e++)  stackPositionAttribute.setXYZ(e, 0, 0, 0);
+            for (let r = 0.; r < EldersLeg * 3 * 2*3; r++)crownBarPositionAttribute.setXYZ(r, 0, 0, 0);
+                    crownBarColorAttribute.setXYZ(r, 0, 0, 0,0);
+            for (let g = 0; g < 12 * xenOctaveFactor * 6; g++) harmonicPositionAttribute.setXYZ(g, 0, 0, 0);
+            for (let e = 0; e < xyStarParticleArray.length * 3 * 2; e++)starStreamPositionAttribute.setXYZ(e, 0, 0, 0);
+            for (let e = 0; e < 120 * 6; e++)  starsANDwitnessesPositionAttribute.setXYZ(e, 0, 0, 0);
+                for (let r = 0.; r < EldersLeg * 3 * 2*3; r++)
+                {crownBarPositionAttribute.setXYZ(r, 0, 0, 0);
+                    crownBarColorAttribute.setXYZ(r, 0, 0, 0,0);
+                }
+            for (let e = 0; e < 12 * 6; e++)  stackPositionAttribute.setXYZ(e, 0, 0, 0);
+            crownBarPositionAttribute.needsUpdate = true;
 
             stackPositionAttribute.needsUpdate = true;
             linePositionAttribute.needsUpdate = true;
             starPositionAttribute.needsUpdate = true;
-            crownBarPositionAttribute.needsUpdate = true;
             trailPositionAttribute.needsUpdate = true;
             harmonicPositionAttribute.needsUpdate = true;
             starStreamPositionAttribute.needsUpdate = true;

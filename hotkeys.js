@@ -355,7 +355,7 @@ const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 const wingsOfRighteousness2 =(-Number(".2508742365242187487777776975555422424429370377"//+".25087423652421"+"874869"
     )+(grPermanent-leafPermanent-2**.5))*2;
 function resetAll(){
-
+window.staff=true;
 
                  window.rezUpgradeBypass = false
                  window.reZSet = false;
@@ -1076,6 +1076,29 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                     }
 
                   else if(key == "S" && event.altKey)window.superseal = !window.superseal;
+                  else if(key == "P" && event.altKey)
+                    {window.staff = !window.staff;
+                        if(window.INITIALIZED)
+                        {
+
+                 for (let r = 0.; r < EldersLeg * 3 * 2*3; r++)
+                {crownBarPositionAttribute.setXYZ(r, 0, 0, 0);
+                    crownBarColorAttribute.setXYZ(r, 0, 0, 0,0);
+                }
+            for (let e = 0; e < 12 * 6; e++)  stackPositionAttribute.setXYZ(e, 0, 0, 0);
+
+        for (var n = 0; n < EldersLeg; n++) {
+
+         crownHead[n].position.set(2,2,1);;         
+     crownHead[n].needsUpdate=true;
+
+            }
+            crownBarPositionAttribute.needsUpdate = true;
+
+            stackPositionAttribute.needsUpdate = true;
+
+                        }
+                    }
                                     else if(key == "J" && event.altKey)
                                         {
                                             window.touchAndSing=!window.touchAndSing
