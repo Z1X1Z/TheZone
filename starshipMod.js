@@ -3731,10 +3731,11 @@ if(window.staff)
 
                     }
                     if(g%4==0)lineOrSpace*=-1;
-                    else if((g+1)%2==0)lineOrSpace=.5
+                    else if((g+1)%2==0)lineOrSpace=.25
 
                     if(lineOrSpace==-1)  c.setStyle("white");
-                    else if (lineOrSpace==.5)  c.setStyle("grey");
+                    else if (lineOrSpace==.25)                      c.setRGB(lineOrSpace,lineOrSpace,lineOrSpace)
+
                     else                         c.setStyle("black");
 
 
