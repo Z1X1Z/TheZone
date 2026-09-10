@@ -3736,7 +3736,6 @@ if(window.staff)
 
                     else if((g+halfWayBump)%8==0)lineOrSpace*=-1;
                     else if((g+1)%2==0)lineOrSpace=.2
-
                     if(lineOrSpace==-1)  c.setStyle("white");
                     else if (Math.abs(lineOrSpace)!=1.)                      c.setRGB(lineOrSpace,lineOrSpace,lineOrSpace)
 
@@ -3762,6 +3761,8 @@ if(window.staff)
                     //else TransparencyStar/=2.;
 
                     let staffColor = lineOrSpace;
+                                         if(g==0)staffColor=2./3.;
+
                     let staffAlpha = 1.;
 
   /*
