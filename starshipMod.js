@@ -258,22 +258,22 @@ function build_staff(){
                         if(crownBarDegree[g]>.5)
 
                     {
-                                            if(lengt>.5)
+                                          //  if(lengt>.5)
 
-     crownBarDegree[g] *=(2*crownBarDegree[g])**interpDth
-     
+     crownBarDegree[g] *=((2*crownBarDegree[g])**(lengt*2-1.))**interpDth
+     /*
     else
              crownBarDegree[g] /=(2*crownBarDegree[g])**interpDth
-
+*/
                     }
                     else
                     {
-                                            if(lengt>.5)
+                                         //   if(lengt>.5)
 
-     crownBarDegree[g] *=(2/crownBarDegree[g])**interpDth
+     crownBarDegree[g] *=((2/crownBarDegree[g])**(lengt*2-1.))**interpDth
      
-    else
-             crownBarDegree[g] /=(2/crownBarDegree[g])**interpDth
+  //  else
+        //     crownBarDegree[g] /=(2/crownBarDegree[g])**interpDth
                     }
                                         if(crownBarDegree[g]<.125)crownBarDegree[g]=.125;
                                         else if(crownBarDegree[g]>1.)crownBarDegree[g]=1.;    
