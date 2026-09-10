@@ -275,7 +275,7 @@ function build_staff(){
   //  else
         //     crownBarDegree[g] /=(2/crownBarDegree[g])**interpDth
                     }
-                                        if(crownBarDegree[g]<.125)crownBarDegree[g]=.125;
+                                        if(crownBarDegree[g]<.125)crownBarDegree[g]=.2;
                                         else if(crownBarDegree[g]>1.)crownBarDegree[g]=1.;    
                                         else if (!isFinite(crownBarDegree[g]))crownBarDegree[g]=.5;
                                        // if(g==44)crownBarDegree[g]=2
