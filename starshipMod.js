@@ -3722,19 +3722,23 @@ if(window.staff)
 
 
                     crownHead[g].geometry.dispose();
+                    var halfWayBump = 0;
             let c = new THREE.Color;
 
-                    let lineOrSpace =1;
-                    if(g>EldersLeg/4.&&g<EldersLeg*3./4.)
+                    let lineOrSpace =-1;
+                    if(g>=EldersLeg/4.&&g<=EldersLeg*3./4.)
                     {
                         lineOrSpace*=-1;
+                        halfWayBump+=2.;
 
                     }
-                    if(g%4==0)lineOrSpace*=-1;
+                    if((g+2+halfWayBump)%4==0)lineOrSpace=.5;
+
+                    else if(g%8==0)lineOrSpace*=-1;
                     else if((g+1)%2==0)lineOrSpace=.25
 
                     if(lineOrSpace==-1)  c.setStyle("white");
-                    else if (lineOrSpace==.25)                      c.setRGB(lineOrSpace,lineOrSpace,lineOrSpace)
+                    else if (Math.abs(lineOrSpace)!=1.)                      c.setRGB(lineOrSpace,lineOrSpace,lineOrSpace)
 
                     else                         c.setStyle("black");
 
