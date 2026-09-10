@@ -105,7 +105,11 @@ var frequencies,
     testar,
 
     mustarD,
-    star, starColors;
+    star, starColors,
+    crownBar, crownBarColors;
+    var crownBarBoost = Array(EldersLeg).fill(0);
+    var lastTestar = Array(EldersLeg).fill(0.);
+    var crownBarDegree = Array(EldersLeg).fill(.5);
 let testarContinuous = [];//
 
 var DAWstar, DAWstarColors;
@@ -952,6 +956,7 @@ let fibgeMesh = Array(numberOfMetaTriangles),
     fibgeGeometry = Array(numberOfMetaTriangles);
 
 let starMesh, starGeometry, starMaterial;
+let crownBarMesh, crownBarGeometry, crownBarMaterial;
 let DAWstarMesh, DAWstarGeometry, DAWstarMaterial;
 
 let radialMaterial, radialLine, radialGeometry;
@@ -1051,6 +1056,12 @@ function setFFTdependantSizes() {
     star = new Float32Array((numberOfBins > EldersLeg) ? numberOfBins * 3 * 3 : EldersLeg * 3 * 2 * 3);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
     starColors = new Float32Array((numberOfBins > EldersLeg) ? numberOfBins * 3 * 4 : EldersLeg * 6 * 4 * 3);
 
+    crownBar = new Float32Array( EldersLeg * 3 * 2*3 );//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
+    crownBarColors = new Float32Array( EldersLeg * 6 * 4 *3);
+
+     crownBarBoost = Array(EldersLeg).fill(0)
+     lastTestar = Array(EldersLeg).fill(0)
+     crownBarDegree = Array(EldersLeg).fill(.5)
     starArms = numberOfBins;
     window.starCount = Math.ceil(starArms * 60 * secondsToEdge);
 
@@ -1075,6 +1086,17 @@ function setFFTdependantSizes() {
         starGeometry.setAttribute('color', new THREE.Float32BufferAttribute(starColors, 4));
         starMesh = new THREE.Mesh(starGeometry, starMaterial);
         scene.add(starMesh)
+
+
+              shaderScene.remove(crownBarMesh)
+        crownBarGeometry.dispose();
+        crownBarGeometry = new THREE.BufferGeometry();
+        crownBarGeometry.dynamic = true;
+        crownBarGeometry.setAttribute('position', new THREE.Float32BufferAttribute(crownBar, 3));
+        crownBarGeometry.setAttribute('color', new THREE.Float32BufferAttribute(crownBarColors, 4));
+        crownBarMesh = new THREE.Mesh(crownBarGeometry, crownBarMaterial);
+        shaderScene.add(crownBarMesh)
+
 
         //if(RockInTheWater==1||RockInTheWater==2) scene.remove(starStreamMesh);
         starStreamGeometry.dispose();
@@ -1104,6 +1126,9 @@ let lineColorAttribute;
 
 let starPositionAttribute;
 let starColorAttribute;
+let crownBarPositionAttribute;
+
+let crownBarColorAttribute;
 
 let DAWstarPositionAttribute;
 let DAWstarColorAttribute;
@@ -1139,6 +1164,9 @@ function loadAttributes() {
     }
     starPositionAttribute = starGeometry.getAttribute('position');
     starColorAttribute = starGeometry.getAttribute('color');
+
+    crownBarPositionAttribute = crownBarGeometry.getAttribute('position');
+    crownBarColorAttribute = crownBarGeometry.getAttribute('color');
 
     DAWstarPositionAttribute = DAWstarGeometry.getAttribute('position');
     DAWstarColorAttribute = DAWstarGeometry.getAttribute('color');
@@ -1235,6 +1263,18 @@ fibgetScene= new THREE.Scene();
     starGeometry = new THREE.BufferGeometry();
     starGeometry.dynamic = true;
     starMesh = new THREE.Mesh(starGeometry, starMaterial);
+
+
+    crownBarMaterial = new THREE.MeshBasicMaterial({
+        opacity: 1.,
+        transparent: true,
+        vertexColors: true,
+        // side: THREE.DoubleSide
+    });
+    crownBarGeometry = new THREE.BufferGeometry();
+    crownBarGeometry.dynamic = true;
+    crownBarMesh = new THREE.Mesh(crownBarGeometry, crownBarMaterial);
+
 
 
 
@@ -1335,6 +1375,7 @@ fibgetScene= new THREE.Scene();
 
     loadAttributes();
     shaderScene.add(stackMesh)
+    shaderScene.add(crownBarMesh)
 
     for (var ko = 0.; ko < numberOfMetaTriangles; ko++)
     {
@@ -1350,7 +1391,9 @@ fibgetScene= new THREE.Scene();
     scene.add(harmonicPzyghtheMesh)
     scene.add(meshTrail)
     shaderScene.add(line);
-    scene.add(starMesh);
+    scene.add(starMesh);    
+   // scene.add(crownBarMesh);
+
     scene.add(DAWstarMesh);
     scene.add(starsANDwitnessesMesh)
     //scene.add(starStreamMesh)
@@ -2194,7 +2237,7 @@ function runOSMD() {
 
             // singAlong2[o] =  new Wad({source : instrument2})
 
-            c
+            
             thelastnotehit = nts[n].halfTone - 8;
             noteHit = true;
             break;
@@ -3401,6 +3444,7 @@ if(zoom<.5)
 
 
             else {//start drawing of just twenty four frets here 
+
                 for (var g = 0; g < starArms * 3; g++) {//wipe out the after image of the 1024 frets
                     starColorAttribute.setXYZW(g, 0, 0, 0, 0.)
                     starPositionAttribute.setXYZ(g, 0, 0, 0)
@@ -3439,6 +3483,7 @@ if(zoom<.5)
                 let depBuffer = (-starShipDepthInSet + (1. - starShipDepthInSet)) / inset - 1. + 1. / inset;
 
                 let fretMultiplied = oddSkew + EldersLeg / ((radialWarp < 1) ? radialWarp : 1);
+                let crownBarStride = 0;
                 for (var g = oddSkew; g < fretMultiplied; g++) {
                     let incrementation = (EldersLeg % 2 == 0) ? g % 2 : (g + 1) % 2;
                     //incrementation/=2.;
@@ -3463,6 +3508,36 @@ if(zoom<.5)
                             lengt = lengt ** .25;
                         }
                     }
+
+                    if(lengt>crownBarBoost[g])
+                           crownBarBoost[g]=lengt
+                    else crownBarBoost[g] -= interpolation/15.
+
+                    var interpDth = interpolation;
+                        if(crownBarDegree[g]>.5)
+
+                    {
+                                            if(lengt>.5)
+
+     crownBarDegree[g] *=2**interpDth*crownBarDegree[g]
+     
+    else
+             crownBarDegree[g] /=2**interpDth * crownBarDegree[g]
+
+                    }
+                    else
+                    {
+                                            if(lengt>.5)
+
+     crownBarDegree[g] *=2**interpDth/crownBarDegree[g]
+     
+    else
+             crownBarDegree[g] /=2**interpDth / crownBarDegree[g]
+                    }
+                                        if(crownBarDegree[g]<.125)crownBarDegree[g]=.125;
+                                        else if(crownBarDegree[g]>1.)crownBarDegree[g]=1.;    
+                                        else if (!isFinite(crownBarDegree[g]))crownBarDegree[g]=.5;
+
                     let dep = -.99;//depBuffer/1.001**(lengt);
 
                     let BlackOrWhiteFRET = .5;
@@ -3533,6 +3608,57 @@ if(zoom<.5)
 
 
                     starStride += 6;
+
+                    let crownHeight = (1.-logStabilizationConstant);
+                             let xBoostCrown = -Math.sin(arm) * (centerDisplacement+crownBarBoost[g]/4.);
+                    let yBoostCrown = -Math.cos(arm) * (centerDisplacement+crownBarBoost[g]/4.);
+
+                    let xCrown = widt * -Math.sin(rpio2) * bigness*crownBarDegree[g];
+                    let yCrown = widt * -Math.cos(rpio2) * bigness*crownBarDegree[g];
+                    
+                   // let xrCrown = (lengt) * -Math.sin(arm) * (bigness+crownHeight);
+                   // let yrCrown = (lengt) * -Math.cos(arm) * (bigness+crownHeight);
+
+
+                             let xrCrown = -Math.sin(arm) * (centerDisplacement+crownBarBoost[g]/4.+crownHeight);
+                    let yrCrown = -Math.cos(arm) * (centerDisplacement+crownBarBoost[g]/4.+crownHeight);
+                    let depCrown = dep;//*crownBarDegree;
+                    // if(vop.r==vop.g||vop.b==vop.g)TransparencyStar=.875;
+                    //  else
+                    //         if(vop.g==0.)   TransparencyStar*=(vop.r+vop.b*2.)/Math.max(vop.b,vop.r)/3.;
+
+                    //else TransparencyStar/=2.;
+
+                    let staffColor = .0;
+                    let staffAlpha = 1.;
+
+  /*
+                    crownBarColorAttribute.setXYZW(crownBarStride, pureColor.r, pureColor.g, pureColor.b, 1.)
+                    crownBarColorAttribute.setXYZW(crownBarStride + 1, pureColor.r, pureColor.g, pureColor.b, 1.)
+                    crownBarColorAttribute.setXYZW(crownBarStride + 2, vop.r, vop.g, vop.b, 1.)
+                    crownBarColorAttribute.setXYZW(crownBarStride + 3, pureColor.r, pureColor.g, pureColor.b, 1.)
+                    crownBarColorAttribute.setXYZW(crownBarStride + 4, vop.r, vop.g, vop.b, 1.)
+                    crownBarColorAttribute.setXYZW(crownBarStride + 5, vop.r, vop.g, vop.b, 1.)
+               */   
+                    crownBarColorAttribute.setXYZW( crownBarStride, staffColor, staffColor, staffColor, staffAlpha)
+                     crownBarColorAttribute.setXYZW( crownBarStride + 1,staffColor, staffColor, staffColor, staffAlpha)
+                     crownBarColorAttribute.setXYZW( crownBarStride + 2, staffColor, staffColor, staffColor, staffAlpha)
+                     crownBarColorAttribute.setXYZW( crownBarStride + 3,staffColor, staffColor, staffColor, staffAlpha)
+                     crownBarColorAttribute.setXYZW( crownBarStride + 4, staffColor, staffColor, staffColor, staffAlpha)
+                     crownBarColorAttribute.setXYZW( crownBarStride + 5, staffColor, staffColor, staffColor, staffAlpha)
+
+                     crownBarPositionAttribute.setXYZ( crownBarStride, -xCrown + xBoostCrown, -yCrown + yBoostCrown, depCrown)
+                     crownBarPositionAttribute.setXYZ( crownBarStride + 1, xCrown + xBoostCrown, yCrown + yBoostCrown, depCrown)
+                     crownBarPositionAttribute.setXYZ( crownBarStride + 2, (xrCrown + xCrown), (yrCrown + yCrown), depCrown)
+
+                     crownBarPositionAttribute.setXYZ( crownBarStride + 3, -xCrown + xBoostCrown, -yCrown + yBoostCrown, depCrown)
+                     crownBarPositionAttribute.setXYZ( crownBarStride + 4, (xrCrown + xCrown), (yrCrown + yCrown), depCrown)
+                    crownBarPositionAttribute.setXYZ( crownBarStride + 5, (xrCrown - xCrown), (yrCrown - yCrown), depCrown)
+
+
+
+                    crownBarStride+=6;
+
 
                     x *= -centerDisplacement / 2. / bigness;
                     y *= -centerDisplacement / 2. / bigness;
@@ -3617,6 +3743,9 @@ if(zoom<.5)
                 }
 
             }
+
+                        crownBarPositionAttribute.needsUpdate = true; // required after the first render
+            crownBarColorAttribute.needsUpdate = true; // required after the first render
 
             starPositionAttribute.needsUpdate = true; // required after the first render
             starColorAttribute.needsUpdate = true; // required after the first render
@@ -4015,6 +4144,7 @@ if(zoom<.5)
             for (let u = 0.; u < bufferPortion * 2; u += 1) linePositionAttribute.setXYZ(u, 0, 0, 0);
             for (var v = 0; v < 6 * trailDepth; v++) trailPositionAttribute.setXYZ(v, 0, 0, 0);
             for (let r = 0.; r < starArms * 3; r++)starPositionAttribute.setXYZ(r, 0, 0, 0);
+            for (let r = 0.; r < starArms * 3; r++)crownBarPositionAttribute.setXYZ(r, 0, 0, 0);
             for (var g = 0; g < 12 * xenOctaveFactor * 6; g++) harmonicPositionAttribute.setXYZ(g, 0, 0, 0);
             for (var e = 0; e < xyStarParticleArray.length * 3 * 2; e++)starStreamPositionAttribute.setXYZ(e, 0, 0, 0);
             for (var e = 0; e < 120 * 6; e++)  starsANDwitnessesPositionAttribute.setXYZ(e, 0, 0, 0);
@@ -4023,6 +4153,7 @@ if(zoom<.5)
             stackPositionAttribute.needsUpdate = true;
             linePositionAttribute.needsUpdate = true;
             starPositionAttribute.needsUpdate = true;
+            crownBarPositionAttribute.needsUpdate = true;
             trailPositionAttribute.needsUpdate = true;
             harmonicPositionAttribute.needsUpdate = true;
             starStreamPositionAttribute.needsUpdate = true;
