@@ -3631,9 +3631,9 @@ if(window.staff)build_staff();
 
                     else 
                         {
-                            crownBarBoost[g] -= interpolation/15.
+                            crownBarBoost[g] -= interpolation/45.
                             if(timeOfCast[g]-uniforms.time.value>1.)
-                            crownHeadBoost[g]-= interpolation/30.
+                            crownHeadBoost[g]-= interpolation/45.
 
                         }
 
