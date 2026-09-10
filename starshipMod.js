@@ -3732,7 +3732,7 @@ if(window.staff)
                         halfWayBump+=2.;
 
                     }
-                    if((g+2+halfWayBump)%4==0)lineOrSpace=.5;
+                    if((g+2+halfWayBump)%4==0)lineOrSpace=.4;
 
                     else if(g%8==0)lineOrSpace*=-1;
                     else if((g+1)%2==0)lineOrSpace=.25
