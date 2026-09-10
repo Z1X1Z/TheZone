@@ -260,7 +260,7 @@ function build_staff(){
                     {
                                           //  if(lengt>.5)
 
-     crownBarDegree[g] *=(((2*(crownBarDegree[g]**(crownBarDegree[g]*2-1.))))**(lengt*2-1.))**interpDth
+     crownBarDegree[g] *=((((2*((Math.abs(.5-crownBarDegree[g])*2))**(crownBarDegree[g]*2-1.))))**(lengt*2-1.))**interpDth
      /*
     else
              crownBarDegree[g] /=(2*crownBarDegree[g])**interpDth
