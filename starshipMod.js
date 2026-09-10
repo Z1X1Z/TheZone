@@ -3732,10 +3732,10 @@ if(window.staff)
                         halfWayBump+=2.;
 
                     }
-                    if((g+2+halfWayBump)%4==0)lineOrSpace=.4;
+                    if((g+2+halfWayBump)%4==0)lineOrSpace=1./3.;
 
                     else if(g%8==0)lineOrSpace*=-1;
-                    else if((g+1)%2==0)lineOrSpace=.25
+                    else if((g+1)%2==0)lineOrSpace=.2
 
                     if(lineOrSpace==-1)  c.setStyle("white");
                     else if (Math.abs(lineOrSpace)!=1.)                      c.setRGB(lineOrSpace,lineOrSpace,lineOrSpace)
