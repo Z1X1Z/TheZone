@@ -254,23 +254,23 @@ function build_staff(){
                        if(maxtwoOctaves!=mintwoOctaves) lengt = ((twoOctaves[(g + EldersLeg / 2.) % EldersLeg]) - mintwoOctaves) / (maxtwoOctaves - mintwoOctaves);
                         if (mintwoOctaves == twoOctaves[(g + EldersLeg / 2.) % EldersLeg] || twoOctaves[(g + EldersLeg / 2.) % EldersLeg] < 0.) lengt = 0.;//cull miniumum throughput
                       
-                    var interpDth = 1./interpolation;
-                        if(crownBarDegree[g]>.5)
+                    var interpDth = 1./2./interpolation;
+                     //   if(crownBarDegree[g]>.5)
 
                     {
                                           //  if(lengt>.5)
 
-     crownBarDegree[g] *=((2*crownBarDegree[g])**(lengt*2-1.))**interpDth
+     crownBarDegree[g] *=(((2*(crownBarDegree[g]**(crownBarDegree[g]*2-1.))))**(lengt*2-1.))**interpDth
      /*
     else
              crownBarDegree[g] /=(2*crownBarDegree[g])**interpDth
 */
                     }
-                    else
+               //     else
                     {
                                          //   if(lengt>.5)
 
-     crownBarDegree[g] *=((2/crownBarDegree[g])**(lengt*2-1.))**interpDth
+    // crownBarDegree[g] *=((2/crownBarDegree[g])**(lengt*2-1.))**interpDth
      
   //  else
         //     crownBarDegree[g] /=(2/crownBarDegree[g])**interpDth
