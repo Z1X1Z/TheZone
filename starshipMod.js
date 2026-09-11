@@ -273,7 +273,7 @@ let fulcrum = 1.//1 is middle, .8 works well
         //     crownBarDegree[g] /=(2/crownBarDegree[g])**interpDth
                     }
                     
-                                        if(crownBarDegree[G]<.125)crownBarDegree[G]=.2;
+                                        if(crownBarDegree[G]<.125)crownBarDegree[G]=.25;
                                         else if(crownBarDegree[G]>1.)crownBarDegree[G]=1.;    
                                         else if (!isFinite(crownBarDegree[G]))crownBarDegree[G]=.49;
                                        // if(g==44)crownBarDegree[g]=2
