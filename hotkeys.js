@@ -1569,6 +1569,29 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
      } the bass staff doesn't include the lyrics so it's not included
      */
     else  if (key=="a"){if(number!="no number"){
+
+        if(window.INITIALIZED)
+{//not sure why staff is not resetting properly
+                 for (let r = 0.; r < EldersLeg * 3 * 2*3; r++)
+                {crownBarPositionAttribute.setXYZ(r, 0, 0, 0);
+                    crownBarColorAttribute.setXYZ(r, 0, 0, 0,0);
+                }
+
+        for (var n = 0; n < EldersLeg; n++) {
+
+                        crownHead[n].material.dispose();
+                        crownHead[n].geometry.dispose();
+                    crownHeadGeometry[n].dispose();
+                    crownHeadMaterial[n].dispose();
+         crownHead[n].position.set(2,2,1);;         
+     crownHead[n].needsUpdate=true;
+        }
+        
+
+ crownHead = Array(EldersLeg).fill(0);
+ crownHeadGeometry =Array(EldersLeg).fill(0);
+ crownHeadMaterial =Array(EldersLeg).fill(0);
+    }   
         if(number>=1.)
         EldersLeg=Math.round(number)*1.;
         else if(number!=0.) EldersLeg=-1;
