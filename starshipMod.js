@@ -3755,7 +3755,7 @@ let fulcrum = .8
                     let lineOrSpace =-1;
                     let boost = crownBarBoost[gEven];
                     let boostalternated = crownHeadBoost[gEven]
-                    
+                    let octaveSwitch = EldersLeg*2;
                     if(g>=EldersLeg/4.&&g<=EldersLeg*3./4.)
                     {
                      // lineOrSpace*=-1;
@@ -3765,13 +3765,14 @@ let fulcrum = .8
                         let boostbuffer = boost;
                         boost=boostalternated;
                         boostalternated=boostbuffer;
+                        octaveSwitch=EldersLeg*3;
 
                     }
                              let xBoostCrown = -Math.sin(arm) * (centerDisplacement+boost/4.+headCrownAlternator);
                     let yBoostCrown = -Math.cos(arm) * (centerDisplacement+boost/4.+headCrownAlternator);
 
-                    let xCrown = widt * -Math.sin(rpio2) * bigness*crownBarDegree[gEven];
-                    let yCrown = widt * -Math.cos(rpio2) * bigness*crownBarDegree[gEven];
+                    let xCrown = widt * -Math.sin(rpio2) * bigness*crownBarDegree[(gEven+octaveSwitch-EldersLeg)%(EldersLeg*2)];
+                    let yCrown = widt * -Math.cos(rpio2) * bigness*crownBarDegree[(gEven+octaveSwitch-EldersLeg)%(EldersLeg*2)];
 
                              let xrCrown = -Math.sin(arm) * (centerDisplacement+boost/4.+headCrownAlternator+crownHeightFixed);
                     let yrCrown = -Math.cos(arm) * (centerDisplacement+boost/4.+headCrownAlternator+crownHeightFixed);
@@ -3803,7 +3804,7 @@ let fulcrum = .8
                     let yBoostHead = -Math.cos(arm) * (centerDisplacement+boostalternated/4.+crownHeight*2);
                     crownHead[gEven].geometry.dispose();
             crownHead[gEven].material.color=c;
-                                crownHead[gEven].geometry = new THREE.CircleGeometry((1.-logStabilizationConstant)*(crownBarDegree[gEven*2]/2+1./3.)/incrementation, 24, 1);
+                                crownHead[gEven].geometry = new THREE.CircleGeometry((1.-logStabilizationConstant)*(crownBarDegree[(gEven+octaveSwitch)%(EldersLeg*2)]/2+1./3.)/incrementation, 24, 1);
                                 crownHead[gEven].position.set(xBoostHead, yBoostHead, -.99);
      crownHead[gEven].needsUpdate=true;
 
