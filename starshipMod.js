@@ -244,15 +244,12 @@ function build_staff(){
                 if (maxtwoOctaves == mintwoOctaves) mintwoOctaves = 0;
                 for (var g = 0; g < EldersLeg*2; g++)                     
 {
-                    let incrementation = (EldersLeg % 2 == 0) ? g % 2 : (g + 1) % 2;
-                    //incrementation/=2.;
-                    incrementation++;
-                    ;
+                    let G=(g + EldersLeg / 2.)%(EldersLeg*2)
 
                     let lengt = 0;
 
-                       if(maxtwoOctaves!=mintwoOctaves) lengt = ((twoOctaves[(g + EldersLeg / 2.) % EldersLeg]) - mintwoOctaves) / (maxtwoOctaves - mintwoOctaves);
-                        if (mintwoOctaves == twoOctaves[(g + EldersLeg / 2.) % EldersLeg] || twoOctaves[(g + EldersLeg / 2.) % EldersLeg] < 0.) lengt = 0.;//cull miniumum throughput
+                       if(maxtwoOctaves!=mintwoOctaves) lengt = ((twoOctaves[G % EldersLeg]) - mintwoOctaves) / (maxtwoOctaves - mintwoOctaves);
+                        if (mintwoOctaves == twoOctaves[G % EldersLeg] || twoOctaves[G % EldersLeg] < 0.) lengt = 0.;//cull miniumum throughput
                       
                     var interpDth = 1./2./interpolation;
                      //   if(crownBarDegree[g]>.5)
@@ -260,7 +257,7 @@ function build_staff(){
                     {
                                           //  if(lengt>.5)
 let fulcrum = .8
-     crownBarDegree[g] *=((((2*((Math.abs(.5-crownBarDegree[g])*2))**(crownBarDegree[g]*2-1.))))**(lengt*2-fulcrum))**interpDth
+     crownBarDegree[G] *=((((2*((Math.abs(.5-crownBarDegree[G])*2))**(crownBarDegree[G]*2-1.))))**(lengt*2-fulcrum))**interpDth
      /*
     else
              crownBarDegree[g] /=(2*crownBarDegree[g])**interpDth
@@ -275,9 +272,9 @@ let fulcrum = .8
   //  else
         //     crownBarDegree[g] /=(2/crownBarDegree[g])**interpDth
                     }
-                                        if(crownBarDegree[g]<.125)crownBarDegree[g]=.2;
-                                        else if(crownBarDegree[g]>1.)crownBarDegree[g]=1.;    
-                                        else if (!isFinite(crownBarDegree[g]))crownBarDegree[g]=.5;
+                                        if(crownBarDegree[G]<.125)crownBarDegree[G]=.2;
+                                        else if(crownBarDegree[G]>1.)crownBarDegree[G]=1.;    
+                                        else if (!isFinite(crownBarDegree[G]))crownBarDegree[G]=.5;
                                        // if(g==44)crownBarDegree[g]=2
 
                 }
@@ -1116,15 +1113,7 @@ function setFFTdependantSizes() {
 
     crownBar = new Float32Array( EldersLeg * 3 * 2*3 );//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
     crownBarColors = new Float32Array( EldersLeg * 6 * 4 *3);
-
-     crownBarBoost = Array(EldersLeg*2).fill(0)
-
-crownHeadBoost = Array(EldersLeg*2).fill(0);
-      timeOfCast = Array(EldersLeg*2).fill(0);
-                              crownBarDegree = Array(EldersLeg*2).fill(.5)
-     twoOctaves = Array(EldersLeg*2).fill(0)
-
-
+    
     starArms = numberOfBins;
     window.starCount = Math.ceil(starArms * 60 * secondsToEdge);
 
@@ -1141,6 +1130,7 @@ crownHeadBoost = Array(EldersLeg*2).fill(0);
     testarContinuous = new Float64Array(starArms);
     mustarD = new Float64Array(starArms);
     if (window.INITIALIZED) {
+        
         scene.remove(starMesh)
         starGeometry.dispose();
         starGeometry = new THREE.BufferGeometry();
@@ -1161,12 +1151,47 @@ crownHeadBoost = Array(EldersLeg*2).fill(0);
         shaderScene.add(crownBarMesh)
 
 
+
+
+
+
+    crownBar = new Float32Array( EldersLeg * 3 * 2*3 );//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
+    crownBarColors = new Float32Array( EldersLeg * 6 * 4 *3);
+
+     crownBarBoost = Array(EldersLeg*2).fill(0)
+
+crownHeadBoost = Array(EldersLeg*2).fill(0);
+      timeOfCast = Array(EldersLeg*2).fill(0);
+                              crownBarDegree = Array(EldersLeg*2).fill(.5)
+     twoOctaves = Array(EldersLeg*2).fill(0)
+
         for (var n = 0; n < EldersLeg; n++) {
-            shaderScene.remove(crownHead[n])
-            crownHeadGeometry[n] = new THREE.CircleGeometry(0, 24, 1);
+
+            if(crownHead[n]!=0.&&typeof myVar !== 'undefined')
+            {
+                        crownHead[n].material.dispose();
+                        crownHead[n].geometry.dispose();
+                    crownHeadGeometry[n].dispose();
+                    crownHeadMaterial[n].dispose();
+                         crownHead[n].needsUpdate=true;
+
+            }
+    }
+ crownHead = Array(EldersLeg).fill(0);
+ crownHeadGeometry =Array(EldersLeg).fill(0);
+ crownHeadMaterial =Array(EldersLeg).fill(0);
+
+
+ 
+
+        for (var n = 0; n < EldersLeg; n++) {
+
+                        shaderScene.remove(crownHead[n]);
 
             let c = new THREE.Color;
             c.setStyle("white");
+                        crownHeadGeometry[n] = new THREE.CircleGeometry(0, 24, 1);
+
             crownHeadMaterial[n] = new THREE.MeshBasicMaterial({ color: c });
             crownHead[n] = new THREE.Mesh(crownHeadGeometry[n], crownHeadMaterial[n]);
             //crownHead[n].position.set(polygons[n].centerX, polygons[n].centerY, -.99);
@@ -2240,9 +2265,9 @@ let polyRad = .1;
 let targets = [];
 let pG = [];
 let pM = [];
-let crownHead = [];
-let crownHeadGeometry = [];
-let crownHeadMaterial = [];
+let crownHead = Array(EldersLeg).fill(0);
+let crownHeadGeometry =Array(EldersLeg).fill(0);
+let crownHeadMaterial =Array(EldersLeg).fill(0);
 let lastNoteTimeInScore = 0;
 window.noteHit = false;
 let timeStampLastNoteEnded = 0.;
@@ -3621,19 +3646,19 @@ if(window.staff)build_staff();
                             lengt = lengt ** .25;
                         }
                     }
-
-                    if(lengt>crownBarBoost[g])
+                    gEven=(Math.round(g-oddSkew)%EldersLeg);
+                    if(lengt>crownBarBoost[gEven])
                     {
-                           crownBarBoost[g]=lengt
-                           crownHeadBoost[g]=lengt
-                           timeOfCast[g]=uniforms.time.value
+                           crownBarBoost[gEven]=lengt
+                           crownHeadBoost[gEven]=lengt
+                           timeOfCast[gEven]=uniforms.time.value
                     }
 
                     else 
                         {
-                            crownBarBoost[g] -= interpolation/45.
-                            if(timeOfCast[g]-uniforms.time.value>1.)
-                            crownHeadBoost[g]-= interpolation/45.
+                            crownBarBoost[gEven] -= interpolation/45.
+                            if(timeOfCast[gEven]-uniforms.time.value>1.)
+                            crownHeadBoost[gEven]-= interpolation/45.
 
                         }
 
@@ -3709,61 +3734,69 @@ if(window.staff)build_staff();
                     starStride += 6;
 if(window.staff)
 {
-                    let crownHeight = (1.-logStabilizationConstant)/Math.log(3.);
-                             let xBoostCrown = -Math.sin(arm) * (centerDisplacement+crownBarBoost[g]/4.);
-                    let yBoostCrown = -Math.cos(arm) * (centerDisplacement+crownBarBoost[g]/4.);
 
-                    let xCrown = widt * -Math.sin(rpio2) * bigness*crownBarDegree[g];
-                    let yCrown = widt * -Math.cos(rpio2) * bigness*crownBarDegree[g];
-
-                             let xBoostHead = -Math.sin(arm) * (centerDisplacement+crownHeadBoost[g]/4.+crownHeight*2);
-                    let yBoostHead = -Math.cos(arm) * (centerDisplacement+crownHeadBoost[g]/4.+crownHeight*2);
-
-
-
-                    crownHead[g].geometry.dispose();
                     var halfWayBump = 0;
             let c = new THREE.Color;
-
+                    let crownHeightFixed = (1.-logStabilizationConstant)/Math.log(3.);
+                    let crownHeight =crownHeightFixed;
+                    let headCrownAlternator = 0;
                     let lineOrSpace =-1;
+                    let boost = crownBarBoost[gEven];
+                    let boostalternated = crownHeadBoost[gEven]
+                    
                     if(g>=EldersLeg/4.&&g<=EldersLeg*3./4.)
                     {
-                        lineOrSpace*=-1;
+                     // lineOrSpace*=-1;
                         halfWayBump+=2.;
+                        headCrownAlternator=crownHeight;
+                        crownHeight=0;
+                        let boostbuffer = boost;
+                        boost=boostalternated;
+                        boostalternated=boostbuffer;
 
                     }
-                    if((g+2+halfWayBump)%4==0)lineOrSpace=1./3.;
+                             let xBoostCrown = -Math.sin(arm) * (centerDisplacement+boost/4.+headCrownAlternator);
+                    let yBoostCrown = -Math.cos(arm) * (centerDisplacement+boost/4.+headCrownAlternator);
 
-                    else if((g+halfWayBump)%8==0)lineOrSpace*=-1;
-                    else if((g+1)%2==0)lineOrSpace=.2
+                    let xCrown = widt * -Math.sin(rpio2) * bigness*crownBarDegree[gEven];
+                    let yCrown = widt * -Math.cos(rpio2) * bigness*crownBarDegree[gEven];
+
+                             let xrCrown = -Math.sin(arm) * (centerDisplacement+boost/4.+headCrownAlternator+crownHeightFixed);
+                    let yrCrown = -Math.cos(arm) * (centerDisplacement+boost/4.+headCrownAlternator+crownHeightFixed);
+                    let depCrown = dep;//*crownBarDegree;
+
+                    {
+                    if((EldersLeg==24)&&(g+2+halfWayBump)%(EldersLeg/6.)==0)lineOrSpace=1./3.;
+
+                    else if((g+halfWayBump)%(EldersLeg/3.)==0)lineOrSpace*=-1;
+                    else if((EldersLeg==24)&&incrementation==2)lineOrSpace=.2
                     if(lineOrSpace==-1)  c.setStyle("white");
                     else if (Math.abs(lineOrSpace)!=1.)                      c.setRGB(lineOrSpace,lineOrSpace,lineOrSpace)
 
                     else                         c.setStyle("black");
+                    }
 
+                    let staffColor = lineOrSpace;
+                           if(g==0)staffColor=2./3.;
+                    let staffAlpha = 1.;
 
-            crownHead[g].material.color=c;
-                                crownHead[g].geometry = new THREE.CircleGeometry((1.-logStabilizationConstant)*(crownBarDegree[(g+EldersLeg)%(EldersLeg*2)]/2+1./3.)/incrementation, 24, 1);
-
-                                crownHead[g].position.set(xBoostHead, yBoostHead, -.99);
-     crownHead[g].needsUpdate=true;
-                   // let xrCrown = (lengt) * -Math.sin(arm) * (bigness+crownHeight);
-                   // let yrCrown = (lengt) * -Math.cos(arm) * (bigness+crownHeight);
-
-
-                             let xrCrown = -Math.sin(arm) * (centerDisplacement+crownBarBoost[g]/4.+crownHeight);
-                    let yrCrown = -Math.cos(arm) * (centerDisplacement+crownBarBoost[g]/4.+crownHeight);
-                    let depCrown = dep;//*crownBarDegree;
+                    
                     // if(vop.r==vop.g||vop.b==vop.g)TransparencyStar=.875;
                     //  else
                     //         if(vop.g==0.)   TransparencyStar*=(vop.r+vop.b*2.)/Math.max(vop.b,vop.r)/3.;
 
                     //else TransparencyStar/=2.;
 
-                    let staffColor = lineOrSpace;
-                                         if(g==0)staffColor=2./3.;
+                             let xBoostHead = -Math.sin(arm) * (centerDisplacement+boostalternated/4.+crownHeight*2);
+                    let yBoostHead = -Math.cos(arm) * (centerDisplacement+boostalternated/4.+crownHeight*2);
+                    console.log(gEven)
+                    crownHead[gEven].geometry.dispose();
+            crownHead[gEven].material.color=c;
+                                crownHead[gEven].geometry = new THREE.CircleGeometry((1.-logStabilizationConstant)*(crownBarDegree[gEven*2]/2+1./3.)/incrementation, 24, 1);
+                                crownHead[gEven].position.set(xBoostHead, yBoostHead, -.99);
+     crownHead[gEven].needsUpdate=true;
 
-                    let staffAlpha = 1.;
+
 
   /*
                     crownBarColorAttribute.setXYZW(crownBarStride, pureColor.r, pureColor.g, pureColor.b, 1.)

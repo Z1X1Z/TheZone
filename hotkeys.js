@@ -355,7 +355,7 @@ const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 const wingsOfRighteousness2 =(-Number(".2508742365242187487777776975555422424429370377"//+".25087423652421"+"874869"
     )+(grPermanent-leafPermanent-2**.5))*2;
 function resetAll(){
-window.staff=true;
+window.staff=false;
 
                  window.rezUpgradeBypass = false
                  window.reZSet = false;
@@ -1853,6 +1853,28 @@ else{
             settingsSet = false;
              runningHash = true;
 
+        if(window.INITIALIZED)
+{//not sure why staff is not resetting properly
+                 for (let r = 0.; r < EldersLeg * 3 * 2*3; r++)
+                {crownBarPositionAttribute.setXYZ(r, 0, 0, 0);
+                    crownBarColorAttribute.setXYZ(r, 0, 0, 0,0);
+                }
+
+        for (var n = 0; n < EldersLeg; n++) {
+
+                        crownHead[n].material.dispose();
+                        crownHead[n].geometry.dispose();
+                    crownHeadGeometry[n].dispose();
+                    crownHeadMaterial[n].dispose();
+         crownHead[n].position.set(2,2,1);;         
+     crownHead[n].needsUpdate=true;
+        }
+        
+
+ crownHead = Array(EldersLeg).fill(0);
+ crownHeadGeometry =Array(EldersLeg).fill(0);
+ crownHeadMaterial =Array(EldersLeg).fill(0);
+    }   
             resetAll();
         }
     else if (key=="~")
