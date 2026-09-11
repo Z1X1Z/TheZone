@@ -4977,7 +4977,7 @@ var startTime = performance.now();
 var newStartTime = startTime;
 function takingToLong()
 {
-    if(performance.now()-newStartTime>100){
+    if(performance.now()-newStartTime>50){
         console.log("didn't complete tolerance finding")
         return true;
 
