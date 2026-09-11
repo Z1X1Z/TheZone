@@ -355,7 +355,7 @@ const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 const wingsOfRighteousness2 =(-Number(".2508742365242187487777776975555422424429370377"//+".25087423652421"+"874869"
     )+(grPermanent-leafPermanent-2**.5))*2;
 function resetAll(){
-window.staff=false;
+window.staff=true;
 
                  window.rezUpgradeBypass = false
                  window.reZSet = false;
