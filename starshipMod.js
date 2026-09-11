@@ -254,10 +254,10 @@ function build_staff(){
 
                     {
                                           //  if(lengt>.5)
-let fulcrum = .8
+let fulcrum = 1.//1 is middle, .8 works well
      crownBarDegree[G] *=((((2*(crownBarDegree[G])**(crownBarDegree[G]*2-1.)
         )
-        ))**(lengt*2-1))**interpDth
+        ))**(lengt*2-fulcrum))**interpDth
      /*
     else
              crownBarDegree[g] /=(2*crownBarDegree[g])**interpDth
@@ -4973,8 +4973,19 @@ var fractionOfFrame = frameBoosted;
 //   console.log(wingsOfRighteousness)
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
-function calculatePitch() {
+var startTime = performance.now();
+var newStartTime = startTime;
+function takingToLong()
+{
+    if(performance.now()-newStartTime>100){
+        console.log("didn't complete tolerance finding")
+        return true;
 
+    }
+    else return false;
+}
+function calculatePitch() {
+        newStartTime = performance.now();
     let frameRationFull;
 
     if (!window.irrationalFraction)  // caused freezing at f# with totalAMP**tolerance//bug not replicated when nudge truncated
@@ -5030,6 +5041,8 @@ function calculatePitch() {
                 let plusOrMinusPowerSeries = (totalAMPmodified) ** n * Math.sign(n % 2 - .5);//x-x**2+x**3-x**4....//may have an algebraic solution
                 if (plusOrMinusPowerSeries != 0.) tAScaled += plusOrMinusPowerSeries;
                 else break;
+                if(takingToLong())break;
+
             }
 
             tAScaled = (tAScaled != 0 && isFinite(tAScaled)) ? tAScaled : .25;
@@ -5056,6 +5069,8 @@ function calculatePitch() {
                         .75
                         //oolp
                         - (tAScaled) ** (.5 + tAScaled)))
+                        if(takingToLong())break;
+
                     //          b++
                     //    loopy++
                 }
@@ -5086,6 +5101,8 @@ function calculatePitch() {
             //  )//still runs as n gets very large, maybe 2 to odd?even?//14 works well, 4 doesn;t
 
             {
+            if(takingToLong())break;
+
                 let sig = Math.sign(loopsThresh % 2 - .5);
                 //console.log(plusOrMinusPowerSeries)
                 var innerPolynomial = (1.5 + totalAMPmodified//totalAMP**x
@@ -5143,6 +5160,8 @@ function calculatePitch() {
 if(isFinite(tolStuck)&&isFinite(taTRUNC)&&isFinite(tolStuck)&&tolStuck>0)
 for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+taTRUNC+tolStuck;metaloops+=(tolStuck/trunc)*trunc)if(metas<20)
 {
+if(takingToLong())break;
+
     metas++
     
             tolerance /= (-leafPermanent / trunc) * trunc;//makes over and under stable and greatly enhances accuracy
@@ -5159,6 +5178,8 @@ for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+taTRUNC+tolSt
             
             if (isFinite(tAScaledPermanent) && tAScaledPermanent > 0 && tAScaledPermanent < 1)
                 for (var vvv = 0.; vvv < 1.5; vvv += tAScaledPermanent) {
+                if(takingToLong())break;
+
                     tolerance = (toleranceFixed) ** ((1 + tolerance))
 
                     //   tolerance=(toleranceFixed)**((1-tolerance))
@@ -5168,6 +5189,8 @@ for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+taTRUNC+tolSt
             toleranceFixed = tolerance;
             if (isFinite(tAScaledPermanent) && tAScaledPermanent > 0 && tAScaledPermanent < 1)
                 for (var vvv = 0.; vvv < 1.5; vvv += tAScaledPermanent) {
+                if(takingToLong())break;
+
                     tolerance = (toleranceFixed) ** ((1 - tolerance))
 
                     // ll++
@@ -5187,6 +5210,8 @@ for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+taTRUNC+tolSt
 
                 for (var bb = 0; bb < 1.5; bb += tAScaledPermanent)//not thoroughly vetted
                 {
+                if(takingToLong())break;
+
                     tolerance = tolerance ** (Math.abs((.5 - (Math.abs(totalAMPmodified) ** .5 - (Math.abs(tolerance) ** .5)) ** 2.)))//not totalAMPmodified!? abs to prevent some crashing, unverified fix
                 }
             tolerance = ((tolerance) / trunc) * trunc
@@ -5230,6 +5255,8 @@ for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+taTRUNC+tolSt
                 // for(var b = 0;b<2.;b++)
 
                 {
+                if(takingToLong())break;
+
                     term = (sum) ** (2 ** power) * plusOrMinus;
                     //  term=((term)/trunc)*trunc
                     phrase += term
@@ -5294,6 +5321,8 @@ for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+taTRUNC+tolSt
                 var tolFixed = (tolerance) ** (3.5 - tolerance + totalAMP);
 
                 if (isFinite(tolFixed) && tolFixed > 0 && tolFixed < 1) for (var m = 0; m < tolFixed; m += totalAMP) {
+                if(takingToLong())break;
+
                     tolerance = tolerance ** (tolerance + .5 + totalAMP);
                 }
 
@@ -5305,6 +5334,8 @@ for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+taTRUNC+tolSt
                 tolerance = (tolerance / trunc) * trunc
                 //  if(window.highORlow!=3.)
                 if (tolerance != 0. && totalAMP != 0.) {
+                if(takingToLong())break;
+
                     var powerUP = ((1. + totalAMP) ** totalAMP - tolerance) ** ((1 - tolerance) ** tolerance + totalAMP);
 
                     var adjuster = (totalAMP) ** tolerance;///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
@@ -5316,6 +5347,7 @@ for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+taTRUNC+tolSt
                         for (var d = 0; d < 7 - totalAMP; d += tolerance)
                         // for(var d = 0; d<tolTot; d+=totTol)
                         {
+if(takingToLong())break;
 
                             adjuster = (adjuster**adjuster) ** powerUP
 
@@ -5356,6 +5388,8 @@ if(isFinite(tolerance)&&tolerance>0.)
                          for (var d = 0; d < 7+totalAMP; d += tolerance) if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
 
                          {
+                         if(takingToLong())break;
+
 
                                                           tolerance=(tolerance/trunc)*trunc
 
