@@ -244,10 +244,10 @@ function build_staff(){
                 if (maxtwoOctaves == mintwoOctaves) mintwoOctaves = 0;
                 for (var g = 0; g < EldersLeg*2; g++)              
                   {
-                                        let G=(g + EldersLeg / 2.)%(EldersLeg*2)
+                                        let G=g;//(g + EldersLeg / 2.)%(EldersLeg*2)
 
-                       if(maxtwoOctaves!=mintwoOctaves) lengt = ((twoOctaves[G % EldersLeg]) - mintwoOctaves) / (maxtwoOctaves - mintwoOctaves);
-                        if (mintwoOctaves == twoOctaves[G % EldersLeg] || twoOctaves[G % EldersLeg] < 0.) lengt = 0.;//cull miniumum throughput
+                       if(maxtwoOctaves!=mintwoOctaves) lengt = ((twoOctaves[(G+EldersLeg/2.) % (EldersLeg*2)]) - mintwoOctaves) / (maxtwoOctaves - mintwoOctaves);
+                        if (mintwoOctaves == twoOctaves[G % EldersLeg] || twoOctaves[G % (EldersLeg*2)] < 0.) lengt = 0.;//cull miniumum throughput
                       
                     var interpDth = 1./2./interpolation;
                      //   if(crownBarDegree[g]>.5)
@@ -255,9 +255,9 @@ function build_staff(){
                     {
                                           //  if(lengt>.5)
 let fulcrum = .8
-     crownBarDegree[G] *=((((2*((Math.abs(.5-crownBarDegree[G])*2))**(crownBarDegree[G]*2-1.)
+     crownBarDegree[G] *=((((2*(crownBarDegree[G])**(crownBarDegree[G]*2-1.)
         )
-        ))**(lengt-fulcrum/2.))**interpDth
+        ))**(lengt*2-1))**interpDth
      /*
     else
              crownBarDegree[g] /=(2*crownBarDegree[g])**interpDth
@@ -3101,7 +3101,7 @@ if(zoom<.5)
         pongRoutine(d_x, d_y);
 
         spiral_compress();
-//if(window.staff)build_staff();
+if(window.staff)build_staff();
         vectorize4();
         setTwelveNotes();
         let lowNote = Number.MAX_VALUE;
@@ -3736,12 +3736,13 @@ if(window.staff)
 {
                     var interpDth = 1./2./interpolation;
 
-
+/*
 let fulcrum = .8
      crownBarDegree[gEven] *=((((2*crownBarDegree[gEven]//((Math.abs(.5-crownBarDegree[gEven])*2))
      **(crownBarDegree[gEven]*2-1.)
         )
         ))**(lengt-fulcrum/2.))**interpDth
+        */
                                         if(crownBarDegree[gEven]<.125)crownBarDegree[gEven]=.2;
                                         else if(crownBarDegree[gEven]>1.)crownBarDegree[gEven]=1.;    
                                         else if (!isFinite(crownBarDegree[gEven]))crownBarDegree[gEven]=.49;
@@ -3802,7 +3803,7 @@ let fulcrum = .8
                     let yBoostHead = -Math.cos(arm) * (centerDisplacement+boostalternated/4.+crownHeight*2);
                     crownHead[gEven].geometry.dispose();
             crownHead[gEven].material.color=c;
-                                crownHead[gEven].geometry = new THREE.CircleGeometry((1.-logStabilizationConstant)*(crownBarDegree[gEven]/2+1./3.)/incrementation, 24, 1);
+                                crownHead[gEven].geometry = new THREE.CircleGeometry((1.-logStabilizationConstant)*(crownBarDegree[gEven*2]/2+1./3.)/incrementation, 24, 1);
                                 crownHead[gEven].position.set(xBoostHead, yBoostHead, -.99);
      crownHead[gEven].needsUpdate=true;
 
