@@ -3663,7 +3663,7 @@ if(window.staff)build_staff();
                            timeOfCast[gEven]=uniforms.time.value
                     }
 
-                    else if(uniforms.time.value-timeOfCast[gEven]>.5 )
+                    else if(uniforms.time.value-timeOfCast[gEven]>2./3. )
                             crownHeadBoost[gEven]-= interpolation/75.;
 
                     let dep = -.99;//depBuffer/1.001**(lengt);
