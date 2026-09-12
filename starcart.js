@@ -4359,7 +4359,7 @@ let fulcrum = .8
         else if (circleY < -height) circleY = height;
         circleMaterial.color = colorSound;
         if (uniforms.starOnDot.value == 3 || (uniforms.movieTime.value < 5 && uniforms.movieTime.value != -1)) circleMaterial.opacity = 0.;
-        else if (uniforms.starOnDot.value > 0) circleMaterial.opacity = .5;
+        else if (uniforms.starOnDot.value > 0) circleMaterial.opacity = .75;
         else circleMaterial.opacity = .8;
 
         const sides = (isFinite(note)) ? Math.round((Math.abs((note + .5) % 1. - .5)) * 12.) % 12 + 2. : 0.;

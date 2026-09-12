@@ -775,7 +775,8 @@ uniforms["upCoreCycler"].value=c;
                                         }
                                         if(stringofnumber.length>2)
                                         {
-                                            if(stringofnumber[2]>=1)  window.fibjVal1=BigInt(Math.floor(stringofnumber[2]))
+                                            if(stringofnumber[2]>=1) 
+                                            window.fibjVal1=BigInt(Math.floor(stringofnumber[2]))
                                             }
                                         if(stringofnumber.length>3)
                                         {
@@ -785,6 +786,13 @@ uniforms["upCoreCycler"].value=c;
                                         {
                                            if(stringofnumber[4]>=0)  window.fibjVal3=BigInt(Math.floor(stringofnumber[4]))
                                            }
+                                        if(stringofnumber.length>4)
+                                        if(stringofnumber[2]==0&&stringofnumber[3]==0&&stringofnumber[4]==0)
+                                        {
+                                              window.fibjVal1=BigInt(Math.floor(Math.random()*12)+1)
+                                              window.fibjVal2=BigInt(Math.floor(Math.random()*12)+1)
+                                              window.fibjVal3=BigInt(Math.floor(Math.random()*12)+1)
+                                        }
                                        number = Number(stringofnumber[0])
 
                 }
