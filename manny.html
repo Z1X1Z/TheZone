@@ -3465,6 +3465,12 @@ vec3 faceFORWARD(vec2 p,vec2 t){
    // t.x*=-1.;
     //t*=2.;
     t=vec2(3.*t.x,2.*(t.y));
+
+                float hover = p.x-3.;
+                float hoverheight = 4.;
+                if(hover>0.&&hover<hoverheight)
+                    p.y-=hover/hoverheight*-sign(p.y);
+                
     vec2 s=p;
         float l=0.;
         for (int f=0;f<3+6*52;f+=1)
