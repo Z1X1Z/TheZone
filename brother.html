@@ -2584,7 +2584,6 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                 float hoverheight = 4.;
                 if(hover>0.&&hover<hoverheight)
                     p.y-=hover/hoverheight*-sign(p.y);
-                
     vec2 s=p;
         float l=0.;
 
@@ -2597,6 +2596,8 @@ vec3 faceFORWARD(vec2 p,vec2 t){
         float centralPowerInverter=(s.x/s.y)*sign(s.x)*sign(s.y);
             //I was studying this function without the face and a power short ocurred and on firefox window restore and caused a semi-reversion hybridization
            centralPowerInverter+=s.x;//-abs(s.x);
+                            if(hover/hoverheight>.75) centralPowerInverter*=0.;
+
         l=
             centralPowerInverter;
 
