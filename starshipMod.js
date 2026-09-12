@@ -3650,17 +3650,21 @@ if(window.staff)build_staff();
                     if(lengt>crownBarBoost[gEven])
                     {
                            crownBarBoost[gEven]=lengt
-                           crownHeadBoost[gEven]=lengt
-                           timeOfCast[gEven]=uniforms.time.value
                     }
 
                     else 
                         {
                             crownBarBoost[gEven] -= interpolation/45.
-                            if(timeOfCast[gEven]-uniforms.time.value>1.)
-                            crownHeadBoost[gEven]-= interpolation/45.
 
                         }
+                           if(lengt>crownHeadBoost[gEven])
+                    {
+                           crownHeadBoost[gEven]=lengt
+                           timeOfCast[gEven]=uniforms.time.value
+                    }
+
+                    else if(uniforms.time.value-timeOfCast[gEven]>.5 )
+                            crownHeadBoost[gEven]-= interpolation/75.;
 
                     let dep = -.99;//depBuffer/1.001**(lengt);
 
