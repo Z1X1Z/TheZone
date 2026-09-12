@@ -108,12 +108,18 @@ var frequencies,
     star, starColors,
     crownBar, crownBarColors;
 
-                          var crownHeadBoost= Array(EldersLeg*2).fill(0);
-                         var  timeOfCast= Array(EldersLeg*2).fill(0);
-    var crownBarBoost = Array(EldersLeg*2).fill(0);
-    var twoOctaves = Array(EldersLeg*2).fill(0);
-    var lastTestar = Array(EldersLeg*2).fill(0.);
-    var crownBarDegree = Array(EldersLeg*2).fill(.5);
+                          var crownHeadBoost,timeOfCast,crownBarBoost , twoOctaves, lastTestar ;
+                          if(EldersLeg>0.){
+
+                           crownHeadBoost= Array(EldersLeg*2).fill(0);
+                           timeOfCast= Array(EldersLeg*2).fill(0);
+     crownBarBoost = Array(EldersLeg*2).fill(0);
+     twoOctaves = Array(EldersLeg*2).fill(0);
+     lastTestar = Array(EldersLeg*2).fill(0.);
+     crownBarDegree = Array(EldersLeg*2).fill(.5);
+
+                          }
+
 let testarContinuous = [];//
 
 var DAWstar, DAWstarColors;
@@ -290,7 +296,8 @@ function spiral_compress() {
 
     const z = [...dataArray];
 
-    testarContinuous.fill(0); testar.fill(0); mustarD.fill(0); stack12Array.fill(0.); twelveNotesData.fill(0.);twoOctaves.fill(0.)
+    testarContinuous.fill(0); testar.fill(0); mustarD.fill(0); stack12Array.fill(0.); twelveNotesData.fill(0.);
+    if(EldersLeg>0.)twoOctaves.fill(0.)
     for (let n = 0; n < numberOfBins; n++) {
         //if ( z[n]>z[n-1] && z[n] > z[n+1] ){
         let d = 1.;
@@ -347,7 +354,7 @@ function spiral_compress() {
         
             
 
-        if (EldersLeg != 0.) twoOctaves[Math.round((note24) * EldersLeg / 24.) % (EldersLeg*2)] += Math.abs(z[n]) * radialWarp;
+        if (EldersLeg > 0.) twoOctaves[Math.round((note24) * EldersLeg / 24.) % (EldersLeg*2)] += Math.abs(z[n]) * radialWarp;
         stack12Array[Math.round(note24 / 2.) % 12] += Math.abs(z[n]);
         testarContinuous[n] = Math.abs(z[n]);
         mustarD[n] = note24;
@@ -1112,9 +1119,11 @@ function setFFTdependantSizes() {
     star = new Float32Array((numberOfBins > EldersLeg) ? numberOfBins * 3 * 3 : EldersLeg * 3 * 2 * 3);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
     starColors = new Float32Array((numberOfBins > EldersLeg) ? numberOfBins * 3 * 4 : EldersLeg * 6 * 4 * 3);
 
+    if(EldersLeg>0)
+    {
     crownBar = new Float32Array( EldersLeg * 3 * 2*3 );//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
     crownBarColors = new Float32Array( EldersLeg * 6 * 4 *3);
-    
+    }
     starArms = numberOfBins;
     window.starCount = Math.ceil(starArms * 60 * secondsToEdge);
 
@@ -1154,6 +1163,8 @@ function setFFTdependantSizes() {
 
 
 
+if(EldersLeg>0.)
+{
 
 
     crownBar = new Float32Array( EldersLeg * 3 * 2*3 );//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
@@ -1165,7 +1176,7 @@ crownHeadBoost = Array(EldersLeg*2).fill(0);
       timeOfCast = Array(EldersLeg*2).fill(0);
                               crownBarDegree = Array(EldersLeg*2).fill(.5)
      twoOctaves = Array(EldersLeg*2).fill(0)
-
+}
         for (var n = 0; n < EldersLeg; n++) {
 
             if(crownHead[n]!=0.&&typeof myVar !== 'undefined')
@@ -1178,10 +1189,15 @@ crownHeadBoost = Array(EldersLeg*2).fill(0);
 
             }
     }
+
+
+if(EldersLeg>0.)
+{
+
  crownHead = Array(EldersLeg).fill(0);
  crownHeadGeometry =Array(EldersLeg).fill(0);
  crownHeadMaterial =Array(EldersLeg).fill(0);
-
+}
 
  
 
@@ -2266,9 +2282,14 @@ let polyRad = .1;
 let targets = [];
 let pG = [];
 let pM = [];
-let crownHead = Array(EldersLeg).fill(0);
-let crownHeadGeometry =Array(EldersLeg).fill(0);
-let crownHeadMaterial =Array(EldersLeg).fill(0);
+let crownHead ;
+let crownHeadGeometry;
+let crownHeadMaterial;
+if(EldersLeg>0){
+ crownHead = Array(EldersLeg).fill(0);
+ crownHeadGeometry =Array(EldersLeg).fill(0);
+ crownHeadMaterial =Array(EldersLeg).fill(0);
+}
 let lastNoteTimeInScore = 0;
 window.noteHit = false;
 let timeStampLastNoteEnded = 0.;
@@ -4326,12 +4347,14 @@ let fulcrum = .8
             for (let u = 0.; u < bufferPortion * 2; u += 1) linePositionAttribute.setXYZ(u, 0, 0, 0);
             for (let v = 0; v < 6 * trailDepth; v++) trailPositionAttribute.setXYZ(v, 0, 0, 0);
             for (let r = 0.; r < starArms * 3; r++)starPositionAttribute.setXYZ(r, 0, 0, 0);
-            for (let r = 0.; r < EldersLeg * 3 * 2*3; r++)crownBarPositionAttribute.setXYZ(r, 0, 0, 0);
+            if(EldersLeg>=0)for (let r = 0.; r < EldersLeg * 3 * 2*3; r++)
+                {crownBarPositionAttribute.setXYZ(r, 0, 0, 0);
                     crownBarColorAttribute.setXYZ(r, 0, 0, 0,0);
+                }
             for (let g = 0; g < 12 * xenOctaveFactor * 6; g++) harmonicPositionAttribute.setXYZ(g, 0, 0, 0);
             for (let e = 0; e < xyStarParticleArray.length * 3 * 2; e++)starStreamPositionAttribute.setXYZ(e, 0, 0, 0);
             for (let e = 0; e < 120 * 6; e++)  starsANDwitnessesPositionAttribute.setXYZ(e, 0, 0, 0);
-                for (let r = 0.; r < EldersLeg * 3 * 2*3; r++)
+             if(EldersLeg>=0)   for (let r = 0.; r < EldersLeg * 3 * 2*3; r++)
                 {crownBarPositionAttribute.setXYZ(r, 0, 0, 0);
                     crownBarColorAttribute.setXYZ(r, 0, 0, 0,0);
                 }
