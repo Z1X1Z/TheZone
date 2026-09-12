@@ -9314,7 +9314,7 @@ fin/vec4(confraculator
                     if(starship.x==129./255.&&starship.y==129./255.&&starship.z==129./255.)layeredOUT*=vec4(vec3(.5),1.);
                    
                         //                             if(layeredOUT.r!=zoomer.r&&layeredOUT.g!=zoomer.g&&layeredOUT.b!=zoomer.b&&mannyFace.w!=.75&&mannyFace.w!=-.25&&mannyFace.w!=.5&&starship.w==0.&&StaRivers.w==0.&&bodyWithArms.w==.0)    layeredOUT=vec4(layeredOUT.xyz*2./3.+zoomer/3.,1.);
-if(bookEyes.x!=0.||bookEyes.y!=0.||bookEyes.z!=0.)layeredOUT=vec4(clamp(bookEyes+3.*(-mny.x-mny.y-mny.b),0.,1.)+mny,1.);
+if((bookEyes.x!=0.||bookEyes.y!=0.||bookEyes.z!=0.)&&pixelShipGrey==0.&&isGrey==0.)layeredOUT=vec4(clamp(bookEyes+3.*(-mny.x-mny.y-mny.b),0.,1.)+mny,1.);
 
            if(movieTime<=5.&&movieTime>=0.)layeredOUT=vec4(movie(characterP),1.);
                           else if(movieTime==-2.)layeredOUT=vec4(0.);

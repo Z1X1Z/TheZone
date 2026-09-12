@@ -5027,7 +5027,7 @@ vec4 tree = vec4( clamp(
                     if(pOsition.y>-2.25)womanny=bride(pOsition,moveDynamic)+dress(pOsition,moveDynamic);
                   if(womanny.x+womanny.y+womanny.z!=0.)layeredOUT = vec4(womanny,1.);
                                       */
-if(bookEyes.x!=0.||bookEyes.y!=0.||bookEyes.z!=0.)layeredOUT=vec4(clamp(bookEyes+3.*(-mny.x-mny.y-mny.b),0.,1.)+mny,1.);
+if((bookEyes.x!=0.||bookEyes.y!=0.||bookEyes.z!=0.)&&pixelShipGrey==0.&&isGrey==0.)layeredOUT=vec4(clamp(bookEyes+3.*(-mny.x-mny.y-mny.b),0.,1.)+mny,1.);
                     gl_FragColor=vec4(layeredOUT.xyz,1.);//vec4(movie(characterP),1.);//
 
                         //things known to cause bugs on some android chrome: heart (divides by zero), linear eq,waveform, "144000" men and women in clover, articles
