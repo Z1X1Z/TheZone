@@ -3361,7 +3361,9 @@ float truncNonLeaf=1.;
 float truncator=1.;
 if(zoomB!=0.&&lfc!=0.&&lengthABSOLUTE<27.&&length(constellationCoord)<27.&&lfc>zoom)//may or may not include 
 {
-  truncNonLeaf=log(pow(lfcCenterCored,lfcCenterCored));
+ if(!(lengthABSOLUTE<2./3.)) 
+ truncNonLeaf=log(pow(lfcCenterCored,lfcCenterCored));
+ else  truncNonLeaf=log((lfcCenterCored));
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 
 }

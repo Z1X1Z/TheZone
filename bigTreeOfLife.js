@@ -1,7 +1,7 @@
-var  SEVEYEpow, SEVEYEStart,shaderScale,seventhOUTside,swapJUBILEE,swapDEFAULT,oppositionalCoreFlopJUBILEE,oppositionalCoreFlopDEFAULT,distributor,swap,dilate,squeezeN,seventhEYE,budge,polyNomialStretch, gigaLeap,externalCores,centralCores,coreShift,Redux,coreDilation, chirality,coords,morph,refactorCores,MetaCored,jubileyes,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
+var  SEVEYEpow, SEVEYEStart,seventhEYE,shaderScale,seventhOUTside,swapJUBILEE,swapDEFAULT,oppositionalCoreFlopJUBILEE,oppositionalCoreFlopDEFAULT,distributor,swap,dilate,squeezeN,seventhEYE,budge,polyNomialStretch, gigaLeap,externalCores,centralCores,coreShift,Redux,coreDilation, chirality,coords,morph,refactorCores,MetaCored,jubileyes,cloverSlide,dynamicOvercore,fieldPowerBoost,upCoreCycler,squareClover,wheel,multiplicatorNexus,continuumClover,outerCoresOff,Spoker,resolution,spirated,Clovoid,colorCombo,spokelover,petals,metaCarousel,rate,free,SPHEREofTheLORD,baseN,Refractelate,fieldPowerBoostMeta,exponentialPetals,oppositionalCoreFlop
 ,clvrVariant4,clvrVariant3,clvrVariant2,clvrVariant1,clvrVariant5,clvrVariant6,clvrVariant7,clvrVariant8,clvrVariant9,Inherited,superStable, cloverOffset,twelveGates,twelveGatesMeta,spinTowardsMe,d,chop,cellularDivision,triogenesis,nGenesis,squareGenesis,constellationCoord,cloverso,feedTheLamb,OrthoEvery;
 function setUniformsToPlainName(){
-    
+    seventhEYE=uniforms.seventhEYE.value;
     SEVEYEpow=uniforms.SEVEYEpow.value;
     SEVEYEStart=uniforms.SEVEYEStart.value;
     seventhOUTside=uniforms.seventhOUTside.value;
@@ -94,10 +94,10 @@ var distributorFACTORloveORTH= distributorFACTORorth;//*Math.sqrt(2.)
 
 
 function tol( j,  t){
-    
    var inMainSpoke = false;
   //  return p;
    let p = new THREE.Vector2(j.y,j.x);//
+   var lengthABSOLUTE=p.length()
 
      //  if(swapped==1.&&p.x>0.)p.multiplyScalar(-1);
 
@@ -463,11 +463,15 @@ if(pollen&&OrthoEvery==0.)
 var truncNonLeaf = 1.;
     var truncator=1.;
     var truncated = true;
-    if(lfc!=0.&&zoom!=0.&&truncated)
-    {
-        truncNonLeaf=Math.log(lfcCenterCored);
-        truncator = truncNonLeaf*-leaf/2.;//*100
-    }
+if(zoom!=0.&&lfc!=0.&&lengthABSOLUTE<27.&&length(constellationCoord)<27.&&lfc>zoom)//may or may not include 
+{
+
+ if(!(seventhEYE==3.&&lengthABSOLUTE<2./3.)) 
+ truncNonLeaf=Math.log(Math.pow(lfcCenterCored,lfcCenterCored));
+ else  truncNonLeaf=Math.log((lfcCenterCored));
+ truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
+
+}
 
 
    if(seventhEYE>0.&&(seventhEYE!=3.||seventhEYEthree)&&lengthP<2./3.&&zoom<.25//&&(lfc/zoom<2./3.||seventhEYE!=3.)

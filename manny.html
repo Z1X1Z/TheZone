@@ -3482,7 +3482,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
             //I was studying this function without the face and a power short ocurred and on firefox window restore and caused a semi-reversion hybridization
             if(Character==3||musicAngelMan==1)centralPowerInverter*=.5;
             else if(Character==4||musicAngelMan==2)centralPowerInverter+=s.x;//-abs(s.x);
-            
+
                                         if(hover/hoverheight>.75) centralPowerInverter*=0.;
 
         l=
@@ -5231,8 +5231,12 @@ float truncNonLeaf=1.;
 float truncator=1.;
 if(zoomB!=0.&&lfc!=0.&&lengthABSOLUTE<27.&&length(constellationCoord)<27.&&lfc>zoom)//may or may not include 
 {
-  truncNonLeaf=log(pow(lfcCenterCored,lfcCenterCored));
-truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
+
+ if(!(seventhEYE==3.&&lengthABSOLUTE<2./3.)) 
+ truncNonLeaf=log(pow(lfcCenterCored,lfcCenterCored));
+ else  truncNonLeaf=log((lfcCenterCored));
+ 
+ truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 
 }
 
