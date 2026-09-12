@@ -2100,6 +2100,108 @@ else threshSide=uv.x;
                                                          }
                              
        
+  
+const float brideWidth=1.27;
+
+        vec3 bride(vec2 p,vec2 t){
+                   float c=0.,l=0.,x=0.;
+                   vec3 e = vec3(0.);
+  if(abs(p.y*p.y)+abs(p.x*p.x)<49.){
+    p+= vec2(.8787878787878,0.);
+               //vv body vv
+                   vec2 g=p/2.;
+                   g.y/=brideWidth;
+                  // g.x+=.5;
+                   vec2 z=g;
+                   for (int f=0;f<75;f+=1)if(abs(z.x+z.y)>20.&&f>4){x=z.y;break;}
+
+                   else {z=2.*vec2(-1./((1.2*z.x*z.x-(1.37-t.y*.37)
+                       *z.y*z.y)-g.x*1.2+t.x),((1.37-t.x*.37)
+                       *z.x*z.y-1.2*g.y+t.y));
+
+z.x=pow(abs(z.x),.777-t.x/49.);}
+                   /*
+                   for (int f=0;f<75;f+=1)if(abs(z.x+z.y)>20.&&f>4){x=z.y;break;}
+                   else {z=2.*vec2(-1./(1.2*(z.x*z.x-1.37*z.y*z.y)-g.x*1.2+t.x),(1.37
+                                                                                *z.x*z.y-1.2*g.y+t.y));
+
+                         z.x=pow(abs(z.x),.777-t.x/49.);}*/
+                   float mingle = 22.5;
+                   
+                         if(x<0.) x+=mingle;
+                          else if(x>0.)x-=mingle;
+               //vv legs vv
+                   g=p/3.5;
+                   //g.x-=.5;
+                   z=g;
+                   for (int f=0;f<70;f+=1)if(abs(z.x+z.y)>200.&&f>4){c=1.;break;}
+                   else {z=3.*vec2(-1./((z.x*z.x-z.y*z.y)-g.x+t.x/40.),(77.0*z.x*z.y-2.*g.y+t.y/40.));
+                         z.y = -1./z.y;}
+               //vv head vv
+                   g=p;
+                  // g.x-=.1;
+                   z=g;
+                   for (int f=0;f<10;f+=1)if(abs(z.x+abs(z.y))>27.&&f>4){l=1.;break;}
+                   else{z=vec2(-1./((z.x*z.x-z.y*z.y)-g.x+t.x/8.),(2.0*z.x*z.y-g.y+t.y/8.));
+                        z*=pow(abs(z.x),z.x);}
+                   /*
+               //vv mandelbrot\heart vv
+                   g=p*2.;
+                   g.x-=6.;
+                   z=g;
+                   for (int f=0;f<50;f+=1)if(abs(z.x+z.y)>20.)break;
+                   else {z=vec2(((z.x*z.x-z.y*z.y)-g.x-t.x/4.),(2.0*z.x*z.y-g.y-t.y/4.));
+                                if(f>2)k+=0.02;}*/
+               //vv eye lights vv
+                   g=p;
+                   z=g;
+                   
+                   for (int f=0;f<5;f+=1)if(abs(z.x+z.y)>20.)break;
+                   else {z=vec2((1./(z.x*z.x-z.y*z.y)-g.x-t.x/4.),(4.0*z.x*z.y-g.y-t.y/4.));
+                         if(f>2)
+                         {if(p.y>0.)e+=vec3(0.45,.3,0.);
+                            else e+=vec3(0.,.3,.45);
+                         }
+                         }
+}
+
+  if(x<0.)x+=l*100.;
+  return vec3(l+c,x+c,c)+e;}
+
+
+  vec3 dress(vec2 p,vec2 t){
+          //            vec2 o=vec2(p*vec2(1.26,1.)/(1.5/gr)/2.-vec2(1.,0.));
+    p-= vec2(.5,0.);
+
+  p/=2.5;
+
+   p.x*=1.77;
+
+   p.y/=brideWidth;
+   vec2 z=p;
+   float l = 0.;
+  const float iterations =  71.;
+  if ((p.x-1.)*(p.x-1.)+p.y*p.y*3.*brideWidth<2.)
+       for (float f=0.;f<iterations;f+=1.)
+{
+               //if(length(z)>c)z/=c;//this refracts the Mandelbrot outwards
+
+           z=2.*vec2(-1./(z.x*z.x-z.y*z.y-p.x+t.x), 2.0*z.x*z.y-p.y+t.y);//this is {s=s^2-p;s.real=-1./s.real}
+          // for (float f=0.;f<iterations;f+=1.){
+           // o = z;
+        //   o=vec2(-1./(o.x*o.x-o.y*o.y-p.x), 2.0*o.x*o.y-p.y)-vec2(o.x*o.x*o.x  - 3.*o.x*o.y*o.y, -o.y*o.y*o.y+ 3.*o.x*o.x*o.y);//this is {s=s^2-p;s.real=-1./s.real}
+                       
+   z.x=sqrt(abs(z.x));
+   l=z.x;
+  }
+//float cpi=0.;
+      //         if(p.y!=0.)cpi=(o.x/o.y)*sign(o.x*o.y)+o.x*2.;
+   return vec3(l
+               //+cpi
+               );}
+                                                                                      
+                                            
+
                   vec4 faceBlackAndWhite(vec2 g, vec2 t, bool wink, int overrideEyes, bool WayTruthLight, float noteOfEye){
                 if(elderHorns==2&&(overrideEyes==100||overrideEyes==-1)){
                     float squareUp=4./3./l3;
@@ -4288,7 +4390,7 @@ float xenOctaveFactor =4.;
                                                                                       if (vUv.x>.5)vUvSplit=vec2(abs(1.-vUv.x),vUv.y);
                                                                              if(vUvSplit.x<1./sidle) unrolledEyes=          faceBlackAndWhite(vec2(-sign(vUvSplit.y-.5)*
                                                                                                                                          (tan(abs(vUvSplit.y)*PI2+PI/2.))*vUvSplit.x,sign(vUvSplit.y-.5)*
-                                                                                                                                              vUvSplit.x*sidle*.5),-vec2(moveDynamic.x,-moveDynamic.y),false,-2,false,-1.).xyz;
+                                                                                                                                              vUvSplit.x*sidle*.5),-vec2(-moveDynamic.x,moveDynamic.y),false,-2,false,-1.).xyz;
                                                                                                                                               }
                                                                  vec4 insideOut = vec4(0.);
                                                                  if(inseyedOut!=0){
@@ -4521,17 +4623,31 @@ vec3 pongBall = vec3(0.);
                           }
                                                                  
                                                    
-                                 
+                                                                                                 float Xbookishness = 6.;
+                                                                float Ybookishness = 4.;
+
                                  vec3 pillar = vec3(0.);
                                  if(volume!=1.)
                                  {
-                                 pillar = sevenPillars(vUv.yx-vec2(0.,.5));
+                                    vec2 pillarStretch = vec2(vUv.y,(vUv.x-.5-sign(vUv.x-.5)/Ybookishness/2.));//*(bookishness-1.)/bookishness);
+                                 pillar = sevenPillars(pillarStretch);
                                                      if(pillar.x!=0.||pillar.y!=0.||pillar.z!=0.)         pillar=   clamp(pillar+(-mny.x-mny.y-mny.z)*40.,0.,1.);
                                  if((pong.x!=0.||pong.y!=0.||pong.z!=0.)&&(pillar.x!=0.||pillar.y!=0.||pillar.z!=0.))pillar=pong;
                                                     }              
                                                                  
-                                                                 
-                 float sevenPillarShrink = pillarScale*2./max(resolution.x,resolution.y);
+                                                 float sevenPillarShrink = pillarScale*2./max(resolution.x,resolution.y);
+
+                                                                 vec3 bookEyes = vec3(0.);
+                                                                vec2 bookUV = (vec2(-vUv.y,vUv.x));
+                                                                bookUV.y=(bookUV.y-.5)*Ybookishness+.5;
+                                                                bookUV.x=(bookUV.x)*Xbookishness;
+                                                                 float bookThickness = 4.;
+                                                                               // if (vUv.y>.5)bookUV=vec2(bookishness,1.)-bookUV;
+                                                                             if(vUv.y<sevenPillarShrink&&abs(bookUV.y-.5)<.5) bookEyes=          
+                                                                             faceBlackAndWhite(vec2(-sign(bookUV.y-.5)*
+                                                                                                                                         (tan(abs(bookUV.y)*PI2+PI/2.))*bookUV.x,sign(bookUV.y-.5)*
+                                                                                                                                              bookUV.x*bookThickness*.5),-vec2(-moveDynamic.x,moveDynamic.y),false,-2,false,-1.).xyz;
+                                                                                                                                              
                  vec2 adjustedvUv=vec2(vUv.x,(vUv.y-sevenPillarShrink)/(1.-sevenPillarShrink));
                                                                  vec4 GOH =vec4(0.);
                                                                  if(gates)
@@ -4898,7 +5014,12 @@ vec4 tree = vec4( clamp(
                    }
                 }
                     if(starship.x==129./255.&&starship.y==129./255.&&starship.z==129./255.)layeredOUT*=vec4(vec3(.5),1.);
-                  
+                 /*   vec2 pOsition = (p+vec2(0.,-1.75))*20.;
+                    vec3 womanny = vec3(0.);
+                    if(pOsition.y>-2.25)womanny=bride(pOsition,moveDynamic)+dress(pOsition,moveDynamic);
+                  if(womanny.x+womanny.y+womanny.z!=0.)layeredOUT = vec4(womanny,1.);
+                                      */
+if(bookEyes.x!=0.||bookEyes.y!=0.||bookEyes.z!=0.)layeredOUT=vec4(bookEyes,1.);
                     gl_FragColor=vec4(layeredOUT.xyz,1.);//vec4(movie(characterP),1.);//
 
                         //things known to cause bugs on some android chrome: heart (divides by zero), linear eq,waveform, "144000" men and women in clover, articles
