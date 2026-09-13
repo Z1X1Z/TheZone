@@ -272,7 +272,7 @@
 <h2>
 
 <p>
-    <input class="configuration" type="text" id = "configuration1" onkeyup="        localStorage.setItem('config1', this.value);
+    <input class="configuration" type="text" id = "configuration1" onkeyup="        localStorage.setItem('config1', String(this.value));
 "
 ></input>
 
@@ -282,7 +282,7 @@
      <label for="engage1">engage1</label><p>
 
 
-          <input class="configuration" type="text" id = "configuration2" onkeyup="        localStorage.setItem('config2', this.value);
+          <input class="configuration" type="text" id = "configuration2" onkeyup="        localStorage.setItem('config2',  String(this.value));
 "
 ></input>
 
@@ -292,7 +292,7 @@
      <label  for="engage2">engage2</label><p>
 
 
-          <input class="configuration" type="text" id = "configuration3" onkeyup="        localStorage.setItem('config3', this.value);
+          <input class="configuration" type="text" id = "configuration3" onkeyup="        localStorage.setItem('config3',  String(this.value));
 "
 ></input>
 
@@ -302,7 +302,7 @@
      <label  for="engage3">engage3</label><p>
 
 
-          <input class="configuration"   type="text" id = "configuration4" onkeyup="        localStorage.setItem('config4', this.value);
+          <input class="configuration"   type="text" id = "configuration4" onkeyup="        localStorage.setItem('config4', String( this.value));
 "
 ></input>
 
@@ -313,13 +313,13 @@
      </h2>
     <script>
         let hkConfig = localStorage.getItem('config1');
-        document.getElementById('configuration1').value=hkConfig;
+        document.getElementById('configuration1').value= String(hkConfig);
         hkConfig = localStorage.getItem('config2');
-        document.getElementById('configuration2').value=hkConfig;
+        document.getElementById('configuration2').value= String(hkConfig);
         hkConfig = localStorage.getItem('config3');
-        document.getElementById('configuration3').value=hkConfig;
+        document.getElementById('configuration3').value= String(hkConfig);
         hkConfig = localStorage.getItem('config4');
-        document.getElementById('configuration4').value=hkConfig;
+        document.getElementById('configuration4').value= String(hkConfig);
        // hashExtension=hkConfig;
           if( localStorage.getItem('engage1')=="true")
              document.getElementById("engage1").checked = true
@@ -366,15 +366,15 @@ localStorage.setItem('meta','(Bursting,EyesSentOut,SevenSeals),ra(16),.r/(20)')
 
       <h2>  Name:       <select name="configDropDown"  id="configurations" style="font-size:24px; width:75%;"
                   onchange="
-                                var cn =    document.getElementById('configurations').options[document.getElementById('configurations').selectedIndex].text;
+                                var cn =   String(document.getElementById('configurations').options[document.getElementById('configurations').selectedIndex].text);
 
                  if(cn!='New Entry')
                   {
 
-document.getElementById('nameOfConfig').value =cn;
+document.getElementById('nameOfConfig').value =String(cn);
 window.lastConfigName = cn;
                     
-   document.getElementById('configurer').value =  localStorage.getItem(cn)
+   document.getElementById('configurer').value =  String(localStorage.getItem(cn))
 //   console.log(localStorage.getItem(cn))
    //                 window.lastConfigName = this.value;
                   }
@@ -397,7 +397,7 @@ document.getElementById('nameOfConfig').value ='';
 //window.lastConfigName = '';
 
    document.getElementById('configurer').value =  ''
-                       window.lastConfigName = this.value;
+                       window.lastConfigName =  String(this.value);
 
 }
 
@@ -421,7 +421,7 @@ document.getElementById('nameOfConfig').value ='';
        var lastName = '';
         while (lastName!=val)
         {
-                   lastName = document.getElementById('nameOfConfig').value
+                   lastName = String(document.getElementById('nameOfConfig').value)
                    document.getElementById('nameOfConfig').value = val.replace(',' , '')
         }
         
@@ -441,7 +441,7 @@ document.getElementById('nameOfConfig').value ='';
                     namesOfConfigs.splice(index, 1)
                     localStorage.removeItem(window.lastConfigName)
                     if(document.getElementById('configurer')!=null)
-                        localStorage.setItem(val,document.getElementById('configurer').value);
+                        localStorage.setItem(val, String(document.getElementById('configurer').value));
                     if(val!=null&&val!='')  namesOfConfigs.push(val)
                     localStorage.setItem('configNames', namesOfConfigs.join());
 
@@ -486,8 +486,8 @@ for(var m = 0; m<buttonNames.length;m++)
               
             }
 
-    document.getElementById('configurations').options[document.getElementById('configurations').selectedIndex].text = val;
-    document.getElementById('selectConfigs').options[document.getElementById('configurations').selectedIndex-1].text = val;
+   document.getElementById('configurations').options[document.getElementById('configurations').selectedIndex].text = String(val);
+   document.getElementById('selectConfigs').options[document.getElementById('configurations').selectedIndex-1].text = String(val);
 
                     window.lastConfigName = val;
                                        localStorage.setItem('nameStored',val);
@@ -496,10 +496,10 @@ for(var m = 0; m<buttonNames.length;m++)
                              </script>
         <input class="configuration" type="text" id = "nameOfConfig" style = "width:100%;"
         onchange="  
-     setName(this.value)
+     setName(String(this.value))
 
         "
-        onkeyup="setName(this.value)"
+        onkeyup="setName(String(this.value))"
 
 ></input>
     
@@ -509,17 +509,17 @@ for(var m = 0; m<buttonNames.length;m++)
         
     </script>
 Combo: 
-        <input class="configuration" type="text" id = "configurer" style = "width:100%;"onchange="               
+        <input class="configuration" type="text" id = "configurer" style = "width:100%;" onchange="               
 
 
-localStorage.setItem(window.lastConfigName, document.getElementById('configurer').value);
+localStorage.setItem(window.lastConfigName,  String(document.getElementById('configurer').value));
 
               
 "
 onkeyup="               
 
 
-localStorage.setItem(window.lastConfigName, document.getElementById('configurer').value);
+localStorage.setItem(window.lastConfigName, String( document.getElementById('configurer').value));
 
               
 "
@@ -563,7 +563,7 @@ function makeButton (buttonText)
 </script>
  <select name="configDropDown"  id="selectConfigs" style="font-size: 24px; width:75%;"
                   onchange="
-                var buttonText = document.getElementById('selectConfigs').options[document.getElementById('selectConfigs').selectedIndex].text;
+                var buttonText = String(document.getElementById('selectConfigs').options[document.getElementById('selectConfigs').selectedIndex].text);
                                                  localStorage.setItem('buttonNames',buttonText+','+localStorage.getItem('buttonNames'))
 
 makeButton (buttonText)
@@ -603,16 +603,16 @@ for(var m = 0; m<buttonNames.length;m++)
     for (var entryIndex = 0; entryIndex<menuEntryNames.length; entryIndex++)
 {
   var opt = document.createElement("option");
-  opt.value = entryIndex;
-  opt.text=menuEntryNames[entryIndex];
+  opt.value = String(entryIndex);
+  opt.text=String(menuEntryNames[entryIndex]);
     document.getElementById('configurations').add(opt);
 
     
 
 
   var opt2 = document.createElement("option");
-  opt2.value = entryIndex;
-  opt2.text=menuEntryNames[entryIndex];
+  opt2.value = String(entryIndex);
+  opt2.text=String(menuEntryNames[entryIndex]);
     document.getElementById('selectConfigs').add(opt2);
 
 
