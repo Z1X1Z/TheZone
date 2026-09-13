@@ -476,7 +476,7 @@ Math.abs(pABSOLUTE.x)>27.
 {
 // if(!(lengthABSOLUTE<2./3.)) 
  truncNonLeaf=Math.log(Math.pow(lfcCenterCored,-1./lfcCenterCored-1.-lfcCenterCored*lfcCenterCored-(lfcCenterCored**.5)-lfcCenterCored ));
-            truncNonLeaf=truncNonLeaf**(-1./truncNonLeaf-truncNonLeaf**.5)
+            truncNonLeaf=truncNonLeaf**(-1./truncNonLeaf-(truncNonLeaf**.5))
 
 // else  truncNonLeaf=Math.log((lfcCenterCored));
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
