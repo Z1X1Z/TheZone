@@ -272,7 +272,11 @@
 <h2>
 
 <p>
-    <input class="configuration" type="text" id = "configuration1" onkeyup="        localStorage.setItem('config1', String(this.value));
+    <input class="configuration" type="text" id = "configuration1" onkeyup="       
+    var valueToSet = String(this.value);
+    console.log(valueToSet)
+   // if(valueToSet!='null')
+     localStorage.setItem('config1',valueToSet );
 "
 ></input>
 
@@ -282,7 +286,10 @@
      <label for="engage1">engage1</label><p>
 
 
-          <input class="configuration" type="text" id = "configuration2" onkeyup="        localStorage.setItem('config2',  String(this.value));
+          <input class="configuration" type="text" id = "configuration2" onkeyup="  
+           var valueToSet = String(this.value);
+  //  if(valueToSet!='null')
+     localStorage.setItem('config2',valueToSet );
 "
 ></input>
 
@@ -292,7 +299,10 @@
      <label  for="engage2">engage2</label><p>
 
 
-          <input class="configuration" type="text" id = "configuration3" onkeyup="        localStorage.setItem('config3',  String(this.value));
+          <input class="configuration" type="text" id = "configuration3" onkeyup="        
+           var valueToSet = String(this.value);
+   // if(valueToSet!='null')
+     localStorage.setItem('config3',valueToSet );
 "
 ></input>
 
@@ -302,7 +312,10 @@
      <label  for="engage3">engage3</label><p>
 
 
-          <input class="configuration"   type="text" id = "configuration4" onkeyup="        localStorage.setItem('config4', String( this.value));
+          <input class="configuration"   type="text" id = "configuration4" onkeyup="      
+           var valueToSet = String(this.value);
+  //  if(valueToSet!='null')
+     localStorage.setItem('config4',valueToSet );
 "
 ></input>
 
@@ -313,12 +326,19 @@
      </h2>
     <script>
         let hkConfig = localStorage.getItem('config1');
+        if(String(hkConfig)=="null")hkConfig=""
         document.getElementById('configuration1').value= String(hkConfig);
         hkConfig = localStorage.getItem('config2');
+                if(String(hkConfig)=="null")hkConfig=""
+
         document.getElementById('configuration2').value= String(hkConfig);
         hkConfig = localStorage.getItem('config3');
+                if(String(hkConfig)=="null")hkConfig=""
+
         document.getElementById('configuration3').value= String(hkConfig);
         hkConfig = localStorage.getItem('config4');
+                if(String(hkConfig)=="null")hkConfig=""
+
         document.getElementById('configuration4').value= String(hkConfig);
        // hashExtension=hkConfig;
           if( localStorage.getItem('engage1')=="true")
