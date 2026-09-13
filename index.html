@@ -444,6 +444,7 @@ document.getElementById('nameOfConfig').value ='';
 
  function setName(val)
  {
+    val=String(val);
        var lastName = '';
         while (lastName!=val)
         {
@@ -564,7 +565,7 @@ function makeButton (buttonText)
 
               for(var index = 0; index<namesOfConfigs.length; index++)
               {
-              if(this.innerHTML == namesOfConfigs[index])
+              if(this.innerHTML == String(namesOfConfigs[index]))
               {
                     namesOfConfigs.splice(index, 1)
                    localStorage.setItem('buttonNames',namesOfConfigs)
