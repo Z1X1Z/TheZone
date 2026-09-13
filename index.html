@@ -186,7 +186,7 @@ beginningBeforeFirstExtendedComma =metaCleaned.slice(s+1,metaCleaned.length);
                         break;
                     }
                         var lsNoCMeta = localStorage.getItem(metaCleaned)
-                        if(lsNoCMeta!='null')
+                       // if(lsNoCMeta!='null')
                                                 hashExtension+=lsNoCMeta
                                             if(breakOut)
                                             {
@@ -555,6 +555,7 @@ localStorage.setItem(window.lastConfigName, valToSet);
 <script>  
 function makeButton (buttonText)
 {
+    buttonText=String(buttonText)
                 if(buttonText!='')
                 {
                   var buttons= document.getElementById('selectionButtons')
@@ -568,7 +569,7 @@ function makeButton (buttonText)
               if(this.innerHTML == String(namesOfConfigs[index]))
               {
                     namesOfConfigs.splice(index, 1)
-                   localStorage.setItem('buttonNames',namesOfConfigs)
+                   localStorage.setItem('buttonNames',String(namesOfConfigs))
 
                 break;
               }
@@ -610,7 +611,7 @@ makeButton (buttonText)
 <script>
         var buttonNames = localStorage.getItem('buttonNames').split(',');
 for(var m = 0; m<buttonNames.length;m++)
-    makeButton(buttonNames[m])
+    makeButton(String(buttonNames[m]))
 
    // document.getElementById('configurations').options[document.getElementById('configurations').selectedIndex].text = "Bowser"
 </script>
