@@ -4143,6 +4143,8 @@ vec3 ret = vec3(0.);
     p.x-=screenBase;
     if(p.x<pillarHeight)
     {
+                p.y*=sign(-p.x*brelued*flipStar);
+
         const float pillarDepth = 3333.;
        float pillars=0.;
        if (p.x>0.) pillars = totalAmp*pillarDepth;
