@@ -148,9 +148,9 @@
                     }
                     else    window.PageToLoad = "manny.html"
                     hashExtension+=touchHash
+                    var beginningBeforeFirstExtendedComma = ""
 
                                   var namesOfConfigs = localStorage.getItem('buttonNames').split(',')
-                                                      for(var v = 0; v<namesOfConfigs.length;v++)namesOfConfigs[v]=String(namesOfConfigs[v])
 
                     for(var v = 0; v<namesOfConfigs.length;v++)if(namesOfConfigs[v]!='')
                     {
@@ -169,13 +169,16 @@
                         if(metaCleaned[0]=="(")metaCleaned=metaCleaned.slice(1,metaCleaned.length)
                         for(var s = 0.; s<metaCleaned.length;s++)if(metaCleaned[s]==")")
                     {   
+beginningBeforeFirstExtendedComma =metaCleaned.slice(s+1,metaCleaned.length);
+
                                                 metaCleaned=metaCleaned.slice(0,s);
 
                         if(s>=metaCleaned.length-1)
                     for(var z = v+1; z<metaName.length;z++)
                 {
                     
-                   postString+="," + metaName[z];
+                   postString+="," + metaName[z];                   
+
                                         breakOut=true;
 
                 }
@@ -187,7 +190,7 @@
                                                 hashExtension+=lsNoCMeta
                                             if(breakOut)
                                             {
-                                                hashExtension+=postString;
+                                                hashExtension+=beginningBeforeFirstExtendedComma+postString;
                                                 break;
                                             }
 
@@ -196,7 +199,6 @@
                         else
 
                         hashExtension+=lsNoC
-                    
 
                 }
                     //console.log(hashExtension)
@@ -279,7 +281,6 @@
 <p>
     <input class="configuration" type="text" id = "configuration1" onkeyup="       
     var valueToSet = String(this.value);
-    console.log(valueToSet)
    // if(valueToSet!='null')
      localStorage.setItem('config1',valueToSet );
 "
