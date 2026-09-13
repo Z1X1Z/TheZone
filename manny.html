@@ -5239,6 +5239,8 @@ abs(pABSOLUTE.x)>27.
 {
 // if(!(lengthABSOLUTE<2./3.)) 
  truncNonLeaf=log(pow(lfcCenterCored,-1./lfcCenterCored-1.-lfcCenterCored*lfcCenterCored-sqrt(lfcCenterCored)-lfcCenterCored));
+             truncNonLeaf=pow(truncNonLeaf,(-1./truncNonLeaf-1.-truncNonLeaf*truncNonLeaf-sqrt(truncNonLeaf)-truncNonLeaf));
+
 // else  truncNonLeaf=log((lfcCenterCored));
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 

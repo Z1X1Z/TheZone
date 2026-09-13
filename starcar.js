@@ -5044,8 +5044,9 @@ function calculatePitch() {
             let tAScaled = 0.;//totalAMPmodified*proportion;
             // totalAMP=.25
             let totalAMPmodified = totalAMP;
-            let trunc = Math.log((totalAMPmodified)**(-1./(totalAMPmodified)-1-totalAMPmodified*totalAMPmodified-(totalAMPmodified**.5)-totalAMPmodified))* 
-            -leafPermanent / 2.
+            let trunc = Math.log((totalAMPmodified)**((-1./(totalAMPmodified)-1-totalAMPmodified*totalAMPmodified-(totalAMPmodified**.5)-totalAMPmodified)))
+           trunc=trunc**(-1./trunc-1-trunc*trunc-(trunc**.5)-trunc)
+            trunc*=-leafPermanent / 2.
             if (!isFinite(trunc))trunc = 1
             //totalAMPmodified=(totalAMPmodified/((-leafPermanent)/))///preTrunc)*preTrunc));
             totalAMPmodified = (((totalAMPmodified * (-(leafPermanent / trunc) * trunc))))
