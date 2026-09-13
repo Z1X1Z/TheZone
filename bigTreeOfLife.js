@@ -475,7 +475,7 @@ Math.abs(pABSOLUTE.x)>27.
 &&Math.abs(constellationCoord.x)<27.&&lfc>zoom)//may or may not include 
 {
 // if(!(lengthABSOLUTE<2./3.)) 
- truncNonLeaf=Math.log(Math.pow(lfcCenterCored,-1./lfcCenterCored-1.));
+ truncNonLeaf=Math.log(Math.pow(lfcCenterCored,-1./lfcCenterCored-1.-lfcCenterCored));
 // else  truncNonLeaf=Math.log((lfcCenterCored));
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 
