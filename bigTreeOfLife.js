@@ -98,6 +98,8 @@ function tol( j,  t){
   //  return p;
    let p = new THREE.Vector2(j.y,j.x);//
    var lengthABSOLUTE=p.length()
+   var pABSOLUTE = p;
+
 
      //  if(swapped==1.&&p.x>0.)p.multiplyScalar(-1);
 
@@ -463,13 +465,19 @@ if(pollen&&OrthoEvery==0.)
 var truncNonLeaf = 1.;
     var truncator=1.;
     var truncated = true;
-if(zoom!=0.&&lfc!=0.&&lengthABSOLUTE<27.&&length(constellationCoord)<27.&&lfc>zoom)//may or may not include 
-{
 
- if(!(seventhEYE==3.&&lengthABSOLUTE<2./3.)) 
- truncNonLeaf=Math.log(Math.pow(lfcCenterCored,lfcCenterCored));
+
+if(zoom!=0.&&lfc!=0.&&//lengthABSOLUTE<27.
+Math.abs(pABSOLUTE.y)>27./logStabilizationConstant&&
+Math.abs(pABSOLUTE.x)>27.
+&&Math.abs(constellationCoord.y)>27./logStabilizationConstant
+
+&&Math.abs(constellationCoord.x)<27.&&lfc>zoom)//may or may not include 
+{
+ if(!(lengthABSOLUTE<2./3.)) 
+ truncNonLeaf=Math.log(Math.pow(lfcCenterCored,1.-lfcCenterCored));
  else  truncNonLeaf=Math.log((lfcCenterCored));
- truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
+truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 
 }
 

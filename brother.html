@@ -3025,6 +3025,7 @@ float lengthP = length(p);
  float lfcB = lfc;
  float lengthB = lengthP;
 float lengthABSOLUTE = lengthP;
+vec2 pABSOLUTE = p;
    float interSection = pow(2.,8.);
 
  if(lengthP>interSection/1.5);
@@ -3364,10 +3365,15 @@ if(pollen&&!BURSTING)
 float truncNonLeaf=1.;
 
 float truncator=1.;
-if(zoomB!=0.&&lfc!=0.&&lengthABSOLUTE<27.&&length(constellationCoord)<27.&&lfc>zoom)//may or may not include 
+if(zoomB!=0.&&lfc!=0.&&//lengthABSOLUTE<27.
+abs(pABSOLUTE.y)>27./logStabilizationConstant&&
+abs(pABSOLUTE.x)>27.
+&&abs(constellationCoord.y)>27./logStabilizationConstant
+
+&&abs(constellationCoord.x)<27.&&lfc>zoom)//may or may not include 
 {
  if(!(lengthABSOLUTE<2./3.)) 
- truncNonLeaf=log(pow(lfcCenterCored,lfcCenterCored));
+ truncNonLeaf=log(pow(lfcCenterCored,1.-lfcCenterCored));
  else  truncNonLeaf=log((lfcCenterCored));
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 
@@ -5054,7 +5060,7 @@ if((bookEyes.x!=0.||bookEyes.y!=0.||bookEyes.z!=0.)&&pixelShipGrey==0.&&isGrey==
 
 <script src="loadMicrophone.js"></script>
 <script src="hotkeys.js" ></script>
-<script src="starcart.js"></script>
+<script src="starcar.js"></script>
 <script src="bigTreeOfLife.js"></script>
 
     </body>
