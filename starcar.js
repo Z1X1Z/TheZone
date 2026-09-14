@@ -390,7 +390,7 @@ var innerFrets = new Float64Array((EldersLeg > 0) ? EldersLeg : 0.);//could be r
 
 const twelve = Array(12);
 let binsInFingerStarWitnesses = Array(12);
-
+if(!touchOnlyMode)
 for (let n = 0; n < 12; n++) {
     twelve[n] = new Float32Array(10).fill(0);
     binsInFingerStarWitnesses[n] = Array(10).fill(1.)
@@ -677,8 +677,8 @@ var cloverPerimeter = 0.;
 
 let radius = 0.;
 function move() {
-    if (isNaN(coordX) ) coordX = 0.;
-    if (isNaN(coordY) ) coordY = 0.;
+    if (!isFinite(coordX) ) coordX = 0.;
+    if (!isFinite(coordY) ) coordY = 0.;
 
 
 
@@ -2785,7 +2785,7 @@ if(zoom<.5)
         setDynamicSampler2ds();//normally does nothing
 
         setMicInputToStarPIXEL();
-        loadFrequencyTextures();
+       if(!touchOnlyMode) loadFrequencyTextures();
         setTwelveNotes();
         executeTouchRegime();
     }
@@ -3037,7 +3037,7 @@ if(zoom<.5)
         }
 
         setMicInputToStarPIXEL();
-        loadFrequencyTextures();
+      if(!touchOnlyMode)  loadFrequencyTextures();
 
     }
 
@@ -5045,7 +5045,9 @@ function calculatePitch() {
             // totalAMP=.25
             let totalAMPmodified = totalAMP;
             let trunc = Math.log((totalAMPmodified)**((-1./(totalAMPmodified)-1-totalAMPmodified*totalAMPmodified-(totalAMPmodified**.5)-totalAMPmodified)))
-           trunc=trunc**(-1./trunc-(trunc**.5))
+
+            trunc=trunc**(-1./trunc-(trunc**.5))
+
             trunc*=-leafPermanent / 2.
             if (!isFinite(trunc))trunc = 1
             //totalAMPmodified=(totalAMPmodified/((-leafPermanent)/))///preTrunc)*preTrunc));
