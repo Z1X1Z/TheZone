@@ -3370,8 +3370,8 @@ lfc>zoom)//may or may not include
 {
  //if(!(lengthABSOLUTE<2./3.)) 
  {
- truncNonLeaf=log(pow(lfcCenterCored,(-1./lfcCenterCored)));
-           //truncNonLeaf=pow(truncNonLeaf,(-1./truncNonLeaf-sqrt(truncNonLeaf)));
+ truncNonLeaf=log(pow(lfcCenterCored,(-1./lfcCenterCored-1.-lfcCenterCored*lfcCenterCored-sqrt(lfcCenterCored)-lfcCenterCored)));
+         // truncNonLeaf=pow(truncNonLeaf,(-1./truncNonLeaf-sqrt(truncNonLeaf)));
  }
  //else  truncNonLeaf=log((lfcCenterCored));
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
@@ -4702,12 +4702,12 @@ vec3 pongBall = vec3(0.);
              }
             // linearFrequency/=2.;
           
-    if ( icicle)icicles = waveForm();
+    if ( icicle&&volume!=1.)icicles = waveForm();
             
              //if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.&&pixelStarship.w>0.)
             // mny*=pixelStarship.xyz;//-mny.x*.66;
                                  
- if(pixelWitnesses){
+ if(pixelWitnesses&&volume!=1.){
 vec4 starBuffer = vec4(0.);
 //for (float x = 0.; x<12.;x++) 
 starBuffer+=starns(uVu//,x
