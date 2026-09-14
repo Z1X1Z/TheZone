@@ -468,15 +468,17 @@ var truncNonLeaf = 1.;
 
 
 if(zoom!=0.&&lfc!=0.&&//lengthABSOLUTE<27.
+    /*
 Math.abs(pABSOLUTE.y)>27./logStabilizationConstant&&
 Math.abs(pABSOLUTE.x)>27.
 &&Math.abs(constellationCoord.y)>27./logStabilizationConstant
 
-&&Math.abs(constellationCoord.x)<27.&&lfc>zoom)//may or may not include 
+&&Math.abs(constellationCoord.x)<27.&&*/
+lfc>zoom)//may or may not include 
 {
 // if(!(lengthABSOLUTE<2./3.)) 
- truncNonLeaf=Math.log(Math.pow(lfcCenterCored,-1./lfcCenterCored-1.-lfcCenterCored*lfcCenterCored-(lfcCenterCored**.5)-lfcCenterCored ));
-            truncNonLeaf=truncNonLeaf**(-1./truncNonLeaf-(truncNonLeaf**.5))
+ truncNonLeaf=Math.log(Math.pow(lfcCenterCored,-1./lfcCenterCored-lfcCenterCored ));
+           /// truncNonLeaf=truncNonLeaf**(-1./truncNonLeaf-(truncNonLeaf**.5))
 
 // else  truncNonLeaf=Math.log((lfcCenterCored));
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))

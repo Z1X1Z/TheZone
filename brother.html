@@ -3366,16 +3366,13 @@ float truncNonLeaf=1.;
 
 float truncator=1.;
 if(zoomB!=0.&&lfc!=0.&&//lengthABSOLUTE<27.
-abs(pABSOLUTE.y)>27./logStabilizationConstant&&
-abs(pABSOLUTE.x)>27.
-&&abs(constellationCoord.y)>27./logStabilizationConstant
-
-&&abs(constellationCoord.x)<27.&&lfc>zoom)//may or may not include 
+lfc>zoom)//may or may not include 
 {
-// if(!(lengthABSOLUTE<2./3.)) 
- truncNonLeaf=log(pow(lfcCenterCored,(-1./lfcCenterCored-1.-lfcCenterCored*lfcCenterCored-sqrt(lfcCenterCored)-lfcCenterCored)));
-            truncNonLeaf=pow(truncNonLeaf,(-1./truncNonLeaf-sqrt(truncNonLeaf)));
-
+ //if(!(lengthABSOLUTE<2./3.)) 
+ {
+ truncNonLeaf=log(pow(lfcCenterCored,(-1./lfcCenterCored-(truncNonLeaf))));
+           //truncNonLeaf=pow(truncNonLeaf,(-1./truncNonLeaf-sqrt(truncNonLeaf)));
+ }
  //else  truncNonLeaf=log((lfcCenterCored));
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 
