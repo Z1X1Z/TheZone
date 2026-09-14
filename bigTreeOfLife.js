@@ -468,12 +468,12 @@ var truncNonLeaf = 1.;
 
 
 if(zoom!=0.&&lfc!=0.&&//lengthABSOLUTE<27.
-    /*
-Math.abs(pABSOLUTE.y)>27./logStabilizationConstant&&
-Math.abs(pABSOLUTE.x)>27.
-&&Math.abs(constellationCoord.y)>27./logStabilizationConstant
+    
+Math.abs(pABSOLUTE.y)<27./logStabilizationConstant&&
+Math.abs(pABSOLUTE.x)<27.
+&&Math.abs(constellationCoord.y)<27./logStabilizationConstant
 
-&&Math.abs(constellationCoord.x)<27.&&*/
+&&Math.abs(constellationCoord.x)<27.&&
 lfc>zoom)//may or may not include 
 {
 // if(!(lengthABSOLUTE<2./3.)) 
