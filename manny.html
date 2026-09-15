@@ -4975,7 +4975,7 @@ vec2 s=p;
   if(lengthP>SEVEYEStartAdj)
   {
     hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)
-  +zoomB+1./(1.-1./(SEVEYEStartAdj-lfc));
+  +zoomB+.125/(1.-1./(SEVEYEStartAdj-lfc));
   
   float edgeBoost = 0.;
   if(lengthP>SEVEYEStartAdj)edgeBoost=1./(lfc-SEVEYEStartAdj);
