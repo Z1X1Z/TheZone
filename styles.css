@@ -9,12 +9,11 @@ body
     margin-left: 7%;
     margin-right: 7%;
     margin-top: 5%;
-    text-indent: 3.4%;
 }
 
 .configuration{
     height: 50px;
-    width:400px;
+    width:50%;
     font-size: 50px;
 }
 .engage{
@@ -86,7 +85,6 @@ h2
 
 #centered{
     text-align: center;
-text-indent: 0em;
 }
 figure {
     margin-top: 0%;
