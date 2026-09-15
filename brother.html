@@ -3361,7 +3361,7 @@ if(pollen&&!BURSTING)
      hyperCore+=.5;
 }
 
-float zoomOverLFC =     zoomB/lfc;
+float zoomOverLFC =     zoom/lfc;
 float truncNonLeaf=1.;
 
 float truncator=1.;
@@ -3374,6 +3374,8 @@ abs(pABSOLUTE.x)<27.
 &&abs(constellationCoord.x)<27.&&
 */
 lfc>zoom
+
+&&zoom<1.
 )//may or may not include 
 {
  //if(!(lengthABSOLUTE<2./3.)) 

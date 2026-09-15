@@ -5226,7 +5226,7 @@ if(pollen&&OrthoEvery==0.)
    }
 }
 
-float zoomOverLFC = zoomB/lfc;
+float zoomOverLFC = zoom/lfc;
 float truncNonLeaf=1.;
 
 float truncator=1.;
@@ -5238,7 +5238,10 @@ abs(pABSOLUTE.x)<27.
 
 &&abs(constellationCoord.x)<27.&&
 */
-lfc>zoom)//may or may not include 
+lfc>zoom
+&&zoom<1.
+
+)//may or may not include 
 
 {
     /*
