@@ -480,12 +480,7 @@ lengthABSOLUTE<SEVEYEStartAdj&&
 lfc>zoom)//may or may not include 
 {
 // if(!(lengthABSOLUTE<2./3.)) 
-
-if(
-lengthABSOLUTE<SEVEYEStartAdj&&
-lfc<SEVEYEStartAdj)
- truncNonLeaf=Math.log(Math.pow(lfcCenterCored,-1./lfcCenterCored-1.-lfcCenterCored*lfcCenterCored-lfcCenterCored**.5-lfcCenterCored));
- else if
+ if
 (
 Math.abs(pABSOLUTE.y)<27./logStabilizationConstant&&
 Math.abs(pABSOLUTE.x)<27.
@@ -496,6 +491,12 @@ Math.abs(pABSOLUTE.x)<27.
   truncNonLeaf=Math.log(Math.pow(lfcCenterCored,(-1./(lfc)-Math.sqrt(lfc))));
 
  }
+ 
+if(
+lengthABSOLUTE<SEVEYEStartAdj&&
+lfc<SEVEYEStartAdj)
+ truncNonLeaf=Math.log(Math.pow(lfcCenterCored,-1./lfcCenterCored-1.-lfcCenterCored*lfcCenterCored-lfcCenterCored**.5-lfcCenterCored));
+ 
            /// truncNonLeaf=truncNonLeaf**(-1./truncNonLeaf-(truncNonLeaf**.5))
 
 // else  truncNonLeaf=Math.log((lfcCenterCored));
