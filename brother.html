@@ -3565,16 +3565,16 @@ float daisifier = 0.;
                                            *mandelCloverFactor;
               //  if(lengthP>SEVEYEStartAdj-sevMargin)
  }
-          else      if(lengthP>SEVEYEStartAdj-sevMargin)
+          else      if(lengthP>SEVEYEStartAdj-sevMargin&&lengthP< interSection)
                 {
                  m=((pWithoutChiralizer/lfc)
-                                                        -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
+                                                      )//*abs(coresIn/crs*2.-1.)//upcorecycler
                                            *mandelCloverFactor;
                }
                                            else if (lengthP> interSection)
                                            {
                 m =  ((pWithoutChiralizer/lfc)
-                                                        -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
+                                                        -coordsB.yx*4.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
                                            *mandelCloverFactor;
                                         //   if(lfcB>2./3.)
                                       m/=lfcB*2.;

@@ -5463,9 +5463,10 @@ else
 //else s*=0.;
 
 
-           if(wheel)
+               if(wheel)
                {
-/*
+
+
  if(lengthP>SEVEYEStartAdj&&SEVEYEStartAdj>lengthP-sevMargin&&lfcB<interSection)
  {
  
@@ -5474,18 +5475,18 @@ else
                                            *mandelCloverFactor;
               //  if(lengthP>SEVEYEStartAdj-sevMargin)
  }
-          else    */  if(lengthP>SEVEYEStartAdj-sevMargin)
+          else      if(lengthP>SEVEYEStartAdj-sevMargin&&lengthP< interSection)
                 {
                  m=((pWithoutChiralizer/lfc)
-                                                        -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
+                                                      )//*abs(coresIn/crs*2.-1.)//upcorecycler
                                            *mandelCloverFactor;
                }
                                            else if (lengthP> interSection)
                                            {
                 m =  ((pWithoutChiralizer/lfc)
-                                                        -coordsB.yx*2.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
+                                                        -coordsB.yx*4.*variant4Correction)//*abs(coresIn/crs*2.-1.)//upcorecycler
                                            *mandelCloverFactor;
-                                     //      if(lfcB>2./3.)
+                                        //   if(lfcB>2./3.)
                                       m/=lfcB*2.;
                }
 
@@ -5879,7 +5880,7 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
 
        //if(dotted)s/=dot(-m,t)*dot(m,-t);
        if(morph==1.&&!wheel)s-=t;
-
+         else if(wheel&&morph==0.)s+=m;//different from brother.html 
      //  else if(morph==2.&&!wheel)s+=t;
        else{
          s+=t;
