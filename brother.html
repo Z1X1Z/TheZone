@@ -3390,6 +3390,8 @@ abs(pABSOLUTE.x)<27.
 &&abs(constellationCoord.y)<27./logStabilizationConstant
 
 &&abs(constellationCoord.x)<27.
+&&zoom<sqrt(lfc)
+
 )
  {
   truncNonLeaf=log(pow(zoom,(-1./zoom-1.-zoom*zoom-sqrt(zoom)-zoom)));

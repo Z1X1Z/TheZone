@@ -5254,14 +5254,16 @@ abs(pABSOLUTE.y)<27./logStabilizationConstant&&
 abs(pABSOLUTE.x)<27.
 &&abs(constellationCoord.y)<27./logStabilizationConstant
 
-&&abs(constellationCoord.x)<27.)
+&&abs(constellationCoord.x)<27.
+&&zoom<sqrt(lfc)
+)
  {
   truncNonLeaf=log(pow(zoomB,(-1./zoom-1.-zoom*zoom-sqrt(zoom)-zoom)));
 
  }
           //   truncNonLeaf=pow(truncNonLeaf,(-1./truncNonLeaf-sqrt(truncNonLeaf)));
 // else  truncNonLeaf=log((lfcCenterCored));
-*/
+
 
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 
