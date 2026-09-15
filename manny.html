@@ -5238,15 +5238,24 @@ abs(pABSOLUTE.x)<27.
 
 &&abs(constellationCoord.x)<27.&&
 */
-lengthABSOLUTE<SEVEYEStartAdj&&
-lfc<SEVEYEStartAdj&&
 lfc>zoom)//may or may not include 
 
 {
-// if(!(lengthABSOLUTE<2./3.)) 
- //truncNonLeaf=log(pow(lfcCenterCored,-1./lfcCenterCored));
-  truncNonLeaf=log(pow(lfcCenterCored,(-1./lfcCenterCored-1.-lfcCenterCored*lfcCenterCored-sqrt(lfcCenterCored)-lfcCenterCored)));
+if(
+lengthABSOLUTE<SEVEYEStartAdj&&
+lfc<SEVEYEStartAdj)
+ truncNonLeaf=log(pow(lfcCenterCored,(-1./lfcCenterCored-1.-lfcCenterCored*lfcCenterCored-sqrt(lfcCenterCored)-lfcCenterCored)));
+ else if
+(
+abs(pABSOLUTE.y)<27./logStabilizationConstant&&
+abs(pABSOLUTE.x)<27.
+&&abs(constellationCoord.y)<27./logStabilizationConstant
 
+&&abs(constellationCoord.x)<27.)
+ {
+  truncNonLeaf=log(pow(lfcCenterCored,(-1./(lfc)-sqrt(lfc))));
+
+ }
           //   truncNonLeaf=pow(truncNonLeaf,(-1./truncNonLeaf-sqrt(truncNonLeaf)));
 
 // else  truncNonLeaf=log((lfcCenterCored));
