@@ -4975,7 +4975,7 @@ vec2 s=p;
   if(lengthP>SEVEYEStartAdj)
   {
     hyperCore-=.25/pow(sqrt(zoomB),zoomB*zoomB)+zoomB*zoomB/(lfc*lfc)
-  +zoomB;
+  +zoomB+1./(1.-1./(SEVEYEStartAdj-lfc));
   
   float edgeBoost = 0.;
   if(lengthP>SEVEYEStartAdj)edgeBoost=1./(lfc-SEVEYEStartAdj);
@@ -5226,7 +5226,7 @@ if(pollen&&OrthoEvery==0.)
    }
 }
 
-
+float zoomOverLFC = zoomB/lfc;
 float truncNonLeaf=1.;
 
 float truncator=1.;
@@ -5241,6 +5241,7 @@ abs(pABSOLUTE.x)<27.
 lfc>zoom)//may or may not include 
 
 {
+    /*
 if(
 lengthABSOLUTE<SEVEYEStartAdj&&
 lfc<SEVEYEStartAdj)
@@ -5257,8 +5258,10 @@ abs(pABSOLUTE.x)<27.
 
  }
           //   truncNonLeaf=pow(truncNonLeaf,(-1./truncNonLeaf-sqrt(truncNonLeaf)));
-
 // else  truncNonLeaf=log((lfcCenterCored));
+*/
+  truncNonLeaf=log(pow(zoomOverLFC,(-1./zoomOverLFC-1.-zoomOverLFC*zoomOverLFC-sqrt(zoomOverLFC)-zoomOverLFC)));
+
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 
 }

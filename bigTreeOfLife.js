@@ -460,7 +460,7 @@ if(pollen&&OrthoEvery==0.)
    }
 
 
-
+var zoomOverLFC = zoom/lfc;
 
 var truncNonLeaf = 1.;
     var truncator=1.;
@@ -480,7 +480,7 @@ lengthABSOLUTE<SEVEYEStartAdj&&
 lfc>zoom)//may or may not include 
 {
 // if(!(lengthABSOLUTE<2./3.)) 
-
+/*
 if(
 lengthABSOLUTE<SEVEYEStartAdj&&
 lfc<SEVEYEStartAdj)
@@ -499,6 +499,9 @@ Math.abs(pABSOLUTE.x)<27.
            /// truncNonLeaf=truncNonLeaf**(-1./truncNonLeaf-(truncNonLeaf**.5))
 
 // else  truncNonLeaf=Math.log((lfcCenterCored));
+*/
+ truncNonLeaf=Math.log(Math.pow(zoomOverLFC,-1./zoomOverLFC-1.-zoomOverLFC*zoomOverLFC-zoomOverLFC**.5-zoomOverLFC));
+
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 
 }
