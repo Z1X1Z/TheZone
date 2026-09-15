@@ -500,7 +500,8 @@ Math.abs(pABSOLUTE.x)<27.
 
 // else  truncNonLeaf=Math.log((lfcCenterCored));
 */
- truncNonLeaf=Math.log(Math.pow(zoomOverLFC,-1./zoomOverLFC-1.-zoomOverLFC*zoomOverLFC-zoomOverLFC**.5-zoomOverLFC));
+ //truncNonLeaf=Math.log(Math.pow(zoomOverLFC,-1./zoomOverLFC-1.-zoomOverLFC*zoomOverLFC-zoomOverLFC**.5-zoomOverLFC));
+  truncNonLeaf=Math.log(Math.pow(lfcOverZoom,(-1./lfcOverZoom-1.-lfcOverZoom*lfcOverZoom-Math.sqrt(lfcOverZoom)-lfcOverZoom)));
 
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 

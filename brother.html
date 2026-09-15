@@ -3379,10 +3379,11 @@ lfc>zoom
 {
  //if(!(lengthABSOLUTE<2./3.)) 
   
-if(
+/*if(
 lengthABSOLUTE<SEVEYEStartAdj&&
 lfc<SEVEYEStartAdj)
-  truncNonLeaf=log(pow(zoomOverLFC,(-1./zoomOverLFC-1.-zoomOverLFC*zoomOverLFC-sqrt(zoomOverLFC)-zoomOverLFC)));
+  truncNonLeaf=log(pow(lfcOverzoomB,(-1./lfcOverzoomB-1.-lfcOverzoomB*lfcOverzoomB-sqrt(lfcOverzoomB)-lfcOverzoomB)));
+
  else if
 (
 abs(pABSOLUTE.y)<27./logStabilizationConstant&&
@@ -3394,12 +3395,15 @@ abs(pABSOLUTE.x)<27.
 
 )
  {
-  truncNonLeaf=log(zoom);
+  truncNonLeaf=log(pow(zoom,(-1./zoom-1.-sqrt(zoom)-zoom)));
 
  }
+ */
 //  truncNonLeaf=pow(truncNonLeaf,(-1./truncNonLeaf-sqrt(truncNonLeaf)));
 
          // truncNonLeaf=pow(truncNonLeaf,(-1./truncNonLeaf-sqrt(truncNonLeaf)));
+           truncNonLeaf=log(pow(lfcOverzoomB,(-1./lfcOverzoomB-1.-lfcOverzoomB*lfcOverzoomB-sqrt(lfcOverzoomB)-lfcOverzoomB)));
+
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 
 }
