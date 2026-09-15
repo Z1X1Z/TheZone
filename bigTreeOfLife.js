@@ -501,8 +501,26 @@ Math.abs(pABSOLUTE.x)<27.
 // else  truncNonLeaf=Math.log((lfcCenterCored));
 */
  //truncNonLeaf=Math.log(Math.pow(zoomOverLFC,-1./zoomOverLFC-1.-zoomOverLFC*zoomOverLFC-zoomOverLFC**.5-zoomOverLFC));
-  truncNonLeaf=Math.log(Math.pow(lfcOverZoom,(-1./lfcOverZoom-1.-lfcOverZoom*lfcOverZoom-Math.sqrt(lfcOverZoom)-lfcOverZoom)));
+/*
+if(
+lengthABSOLUTE<SEVEYEStartAdj&&
+lfc<SEVEYEStartAdj)
+  truncNonLeaf=Math.log(Math.pow(lfcCenterCored,(-1./lfcCenterCored)));
 
+ else if
+(
+abs(pABSOLUTE.y)<27./logStabilizationConstant&&
+abs(pABSOLUTE.x)<27.
+&&abs(constellationCoord.y)<27./logStabilizationConstant
+
+&&abs(constellationCoord.x)<27.
+&&zoom<sqrt(lfc)
+
+)*/
+ {
+  truncNonLeaf=Math.log(lfc/zoom);
+
+ }
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 
 }
