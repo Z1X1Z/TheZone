@@ -460,7 +460,7 @@ if(pollen&&OrthoEvery==0.)
    }
 
 
-var zoomOverLFC = zoom/lfc;
+var LFCoverZoom = lfc/zoom;
 
 var truncNonLeaf = 1.;
     var truncator=1.;
@@ -518,7 +518,7 @@ abs(pABSOLUTE.x)<27.
 
 )*/
  {
-  truncNonLeaf=Math.log(lfc/zoom);
+  truncNonLeaf=Math.log(LFCoverZoom*LFCoverZoom+Math.sqrt(LFCoverZoom)+LFCoverZoom+1./LFCoverZoom);
 
  }
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))

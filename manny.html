@@ -5226,7 +5226,7 @@ if(pollen&&OrthoEvery==0.)
    }
 }
 
-float zoomOverLFC = zoomB/lfc;
+float LFCoverZoom = lfc/zoom;
 float truncNonLeaf=1.;
 
 float truncator=1.;
@@ -5259,7 +5259,7 @@ abs(pABSOLUTE.x)<27.
 
 )*/
  {
-  truncNonLeaf=log(lfc/zoom);
+  truncNonLeaf=log(LFCoverZoom*LFCoverZoom+sqrt(LFCoverZoom)+LFCoverZoom+1./LFCoverZoom);
 
  }
           //   truncNonLeaf=pow(truncNonLeaf,(-1./truncNonLeaf-sqrt(truncNonLeaf)));
