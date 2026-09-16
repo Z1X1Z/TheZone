@@ -5046,10 +5046,11 @@ function calculatePitch() {
             let totalAMPmodified = totalAMP;
             let trunc = Math.log((totalAMPmodified)**((-1./(totalAMPmodified)-1-totalAMPmodified*totalAMPmodified-(totalAMPmodified**.5)-totalAMPmodified)))
 
-            trunc=(trunc-trunc**2.)**(-1./trunc-(trunc**.5))
+            trunc=(trunc-trunc**.5)**(trunc+trunc*trunc)-((trunc**2.-trunc))**(-1./trunc-(trunc**.5))
 
-            trunc*=-leafPermanent / 2.
-            if (!isFinite(trunc))trunc = 1
+                trunc*=-leafPermanent / 2.
+
+                if (!isFinite(trunc))trunc = 1
             //totalAMPmodified=(totalAMPmodified/((-leafPermanent)/))///preTrunc)*preTrunc));
             totalAMPmodified = (((totalAMPmodified * (-(leafPermanent / trunc) * trunc))))
             //preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2
