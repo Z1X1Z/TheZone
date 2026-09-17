@@ -518,7 +518,7 @@ abs(pABSOLUTE.x)<27.
 
 )*/
  {  
-  truncNonLeaf=Math.log((1./LFCoverZoom+(1.+LFCoverZoom)/(LFCoverZoom*LFCoverZoom-Math.sqrt(LFCoverZoom))));
+  truncNonLeaf=Math.log((1./LFCoverZoom+1.+(LFCoverZoom)/(LFCoverZoom*LFCoverZoom-Math.sqrt(LFCoverZoom))));
 }
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 
