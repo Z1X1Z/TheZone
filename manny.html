@@ -8942,12 +8942,12 @@ vec3 pongBall = vec3(0.);
              }
             // linearFrequency/=2.;
           
-    if ( icicle&&volume!=1.)icicles = waveForm();
+    if ( icicle)icicles = waveForm();
             
              //if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.&&pixelStarship.w>0.)
             // mny*=pixelStarship.xyz;//-mny.x*.66;
                                  
- if(pixelWitnesses&&volume!=1.){
+ if(pixelWitnesses){
 vec4 starBuffer = vec4(0.);
 //for (float x = 0.; x<12.;x++) 
 starBuffer+=starns(uVu//,x

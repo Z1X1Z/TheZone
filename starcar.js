@@ -1110,8 +1110,8 @@ function setFFTdependantSizes() {
     bufferSize = fftSize;
     numberOfBins = fftSize / 2.;
     frequencies = new Float64Array(numberOfBins).fill(1);
-    inputData = new Float32Array(bufferSize).fill(1);
-    dataArray = new Uint8Array(numberOfBins).fill(1);
+    inputData = new Float32Array(bufferSize).fill(0);
+    dataArray = new Uint8Array(numberOfBins).fill(0);
     babyBuffer = new Uint8Array(bufferSize).fill(0);
     // window.zoomOutRatchetThreshold=starSHIPVOLUMEdefaultLowVolume;//5./1024;////or 1/1024.//maybe shouldn't need to be here could be solved away
 
