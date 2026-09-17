@@ -3073,6 +3073,7 @@ if(zoom<.5)
     else uniforms.coreDilation.value = 0.;
 
     lastPitch = pitch;
+    if ((!window.touchMode || (window.shouldShowStar)) && !window.touchOnlyMode) {
 
     if (ampThresh > .0000001) {
         // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
@@ -3093,7 +3094,6 @@ if(zoom<.5)
 
     } else { aboveThreshold = false; on = false; if (!touchMode || window.shouldShowStar) uniforms.volume.value = 0.00001 }
 
-    if ((!window.touchMode || (window.shouldShowStar)) && !window.touchOnlyMode) {
 
 
         if (window.volumeSpeed && on) {
@@ -5049,8 +5049,8 @@ function calculatePitch() {
             trunc=(trunc-trunc**.5)**(trunc+trunc*trunc)-((trunc**2.-trunc))**(-1./trunc-(trunc**.5))
 
                 trunc*=-leafPermanent / 2.
-
-                if (!isFinite(trunc))trunc = 1
+           // console.log(trunc)
+            if (!isFinite(trunc))trunc = 1
             //totalAMPmodified=(totalAMPmodified/((-leafPermanent)/))///preTrunc)*preTrunc));
             totalAMPmodified = (((totalAMPmodified * (-(leafPermanent / trunc) * trunc))))
             //preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2

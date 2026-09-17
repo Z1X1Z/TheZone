@@ -5259,7 +5259,7 @@ abs(pABSOLUTE.x)<27.
 
 )*/
  {
-  truncNonLeaf=log((LFCoverZoom/(LFCoverZoom*LFCoverZoom-sqrt(LFCoverZoom))));
+  truncNonLeaf=log((1./LFCoverZoom+(1.+LFCoverZoom)/(LFCoverZoom*LFCoverZoom-sqrt(LFCoverZoom))));
 
  }
           //   truncNonLeaf=pow(truncNonLeaf,(-1./truncNonLeaf-sqrt(truncNonLeaf)));
