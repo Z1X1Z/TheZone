@@ -1,10 +1,14 @@
  const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
 //let leafPermanent = -1.3247179572447460259609088544780973407344040569017333645340150503028278512455475940546993479817872803299109209947422074251089026390458977955943147570967234717541668390388674187517369315842535499082466223545337273504589879909568150627745509802486213012169894157524574548625075626524610368938904839932269952074975962828868556908150704513696109853352577281586033441141927828273765296032993584674231028483241695239006108543338219;
 let leafPermanent = -1.324717957244746025960908854478097340734404056901733364534015050302827851245547594054699347981787280329910920994742207425;
-let leaf = leafPermanent;
 //let grPermanent = 1.61803398874989484820458683436563811772030917980576286213544862270526046281890244970720720418939113748475408807538689175212663386222353693179318006076672635443338908659593958290563832266131992829026788067520876689250171169620703222104321626954862629631361443814975870122034080588795445474924618569536486444924104432077134494704956584678850987433944221254487706647
 let grPermanent =1.6180339887498948482045868343656381177203091798057628621354486227052604628189024497072072041893911374847540880753868917521266338622235369317931800607667263544333890;
-let gr = grPermanent
+let grSHADER = 1.6180339887498948482045868343656381177203091798
+let leafSHADER = -1.32471795724474602596090885447809
+let leaf = leafSHADER;
+
+let gr = grSHADER
+
 let leaf2 = - 1.3472963553338606977034332535386295920007513543681387744724827562641316442780294708430332263148;
 let leaf3 = -1.3372357014306894089011621;
 //x≈0.3181315052047641353126543 - 1.3372357014306894089011621 i
@@ -150,7 +154,7 @@ split2:{value:false},
 uberDuper:{value:null},
 twelveNotesTex:{value:null},
 radialFrequenciesSummed:{value:null},
-radialIncrements:{value:1},
+radialIncrements:{value:null},
     major:{value:3},
         eden:{value: 0},
         spokesVisualizeColors: {value: 1    },
@@ -1034,7 +1038,7 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                     leafMode=(leafMode+1)%3.
                     if(leafMode==0)
                     {
-                        leaf =leafPermanent
+                        leaf =leafSHADER
                     
                         uniforms.leaf.value=leaf;
                     }
@@ -1058,7 +1062,7 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                     if(grMode==0)
                     {
                      
-                        gr = grPermanent
+                        gr = grShader
                         uniforms.gr.value=gr;
                     }
                     else if(grMode==1)
@@ -1626,7 +1630,6 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
     else if (x==0)
     {window.movementRate=movementRateORIGINAL; uniforms[ "rate" ].value=movementRateORIGINAL;
         if(number!="no number"){window.movementRate=number*1.; uniforms[ "rate" ].value=number*1.;};
-        reZSet=true;
     }
     
     else if (document.activeElement.className=="num");//don't take number hotkey's while menu number selector engaged
