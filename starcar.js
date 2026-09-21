@@ -5906,6 +5906,8 @@ var delta = interpolation/60;//Math.abs(note-lastNote)/12*3;
    
 fibonacciEngine()
 stringArray[ABC]=binaryConverter(fibArray[ABC])
+if(stringArray[(ABC+1)%3]=="")stringArray[(ABC+1)%3]=binaryConverter(fibArray[(ABC+1)%3])
+if(stringArray[(ABC+2)%3]=="")stringArray[(ABC+2)%3]=binaryConverter(fibArray[(ABC+2)%3])
 
 theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
 //console.log(theWORDtoGOD.length)
