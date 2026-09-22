@@ -1,0 +1,18 @@
+
+
+
+precision highp float;
+uniform vec2 resolution;
+uniform float time;
+void main(){vec2 p=-(gl_FragCoord.yx/resolution.yx-.5)/resolution*max(resolution.x,resolution.y)*9.;
+
+	    p/=10.;
+	    	    p.x+=1.;
+	   vec2 s=p;
+    float l=0.;
+    for (int f=0;f<21;f+=1)if(abs(s.y)<19.){
+	    if(mod(float(f),2.)==1.)s.x=-1./s.x;
+        s=vec2(-1./(s.x*s.x-s.y*s.y-p.x), 2.0*s.x*s.y-p.y);//this is {s=s^2-p;s.real=-1./s.real}
+        if(s.x>-.1&&f!=0)l=s.x*(120.-sin(time)*80.);}
+gl_FragColor=vec4(l);}
+

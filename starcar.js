@@ -6074,7 +6074,7 @@ if(fibgeBase!=2n&&window.blendFibge)
         {
             console.log("Resetting Fibgetti Spinner")
 
-                            ABC = 1;
+                            ABC = 0;
 
             fibArray[ABC]=starterValue1
             fibArray[(ABC+1)%3]=starterValue2
