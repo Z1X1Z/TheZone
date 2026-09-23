@@ -5053,6 +5053,17 @@ function calculatePitch() {
             if (!isFinite(trunc))trunc = 1
             //totalAMPmodified=(totalAMPmodified/((-leafPermanent)/))///preTrunc)*preTrunc));
             totalAMPmodified = (((totalAMPmodified * (-(leafPermanent / trunc) * trunc))))
+            totalAMPmodified=totalAMPmodified**
+            (1.+totalAMPmodified**
+                (1.-totalAMPmodified**
+                    (
+                        ((1.-totalAMPmodified**(1.+totalAMPmodified**totalAMPmodified)
+                        **(totalAMPmodified**totalAMPmodified)))**
+                       ((1.+totalAMPmodified**(1.-totalAMPmodified**totalAMPmodified)
+                       **(totalAMPmodified**totalAMPmodified)))
+                    )**totalAMPmodified
+                ) **(totalAMPmodified**totalAMPmodified)
+          ) 
             //preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2
             //totalAMPmodified=totalAMPmodified**1.5;
             totalAMPmodified = (((totalAMPmodified) / trunc) * trunc)
