@@ -5067,6 +5067,8 @@ function calculatePitch() {
             //preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2
             //totalAMPmodified=totalAMPmodified**1.5;
             totalAMPmodified = (((totalAMPmodified) / trunc) * trunc)
+                        if (!isFinite(totalAMPmodified)||totalAMPmodified<0.)totalAMPmodified = 1
+
             //totalAMPmodified/=2.;
 
 
