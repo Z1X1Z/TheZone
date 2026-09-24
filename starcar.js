@@ -5058,7 +5058,7 @@ function calculatePitch() {
             var tamStuck = (totalAMPmodified/trunc)*trunc ;
         for(var taloop = 0.; taloop<3.5-(totalAMP/trunc)*trunc ;taloop+=tamStuck)   
             {
-                
+                                if(takingToLong())break;
                 totalAMPmodified=totalAMPmodified**
         ((1.+totalAMPmodified**
                         (1.-totalAMPmodified**
@@ -5077,7 +5077,7 @@ function calculatePitch() {
             //preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2
             //totalAMPmodified=totalAMPmodified**1.5;
             }
-                        if (!isFinite(totalAMPmodified)||totalAMPmodified<0.)totalAMPmodified = totalAMP;
+                        if (!isFinite(totalAMPmodified)||totalAMPmodified<0.||totalAMPmodified>1.)totalAMPmodified = totalAMP;
 
             //totalAMPmodified/=2.;
 
