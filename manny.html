@@ -2985,7 +2985,41 @@ else threshSide=uv.x;
                                     )/length(z)/iterations;}
 return h;
 }
+
+
+                                            vec2 collapseHorn (vec2 g,bool exponential)
+
+{
+                float hover = g.x+2.;
+                float hoverheight = 8.;
+               // if(                g.x<-2.)
+               // g.y=0.;
+                if(!exponential&&hover<0.
+                )
+                                    g.y-=hover/hoverheight*sign(g.y);
+
+                                                                         if(exponential&&g.x<0.)g.y/=1.5;
+
+                 if(exponential&&
+                                g.x<-1.&&abs(g.y)<1.)
+                    { if(1./abs(g.y)>2.)
+                 g.y*=abs(g.x);
+                 else g.y*=1000.;
+                    }
+
+                
+
+                
+return g;
+}
+
+
+
                   vec4 faceBlackAndWhite(vec2 g, vec2 t, bool wink, int overrideEyes, bool WayTruthLight, float noteOfEye){
+
+ if(armsSpinning!=0)g = collapseHorn(g,false);
+
+
                 if(elderHorns==2&&(overrideEyes==100||overrideEyes==-1)){
                     float squareUp=4./3./l3;
                     g.y*=squareUp;
@@ -3462,6 +3496,8 @@ return vec3(clamp(1.-l,0.,1.));
 }
     
 vec3 faceFORWARD(vec2 p,vec2 t){
+       if(armsSpinning!=0)  p=collapseHorn(p,true);
+
    // t.x*=-1.;
     //t*=2.;
     t=vec2(3.*t.x,2.*(t.y));
