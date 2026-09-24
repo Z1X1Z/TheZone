@@ -5052,9 +5052,15 @@ function calculatePitch() {
            // console.log(trunc)
             if (!isFinite(trunc))trunc = 1
             //totalAMPmodified=(totalAMPmodified/((-leafPermanent)/))///preTrunc)*preTrunc));
+
+            
             totalAMPmodified = (((totalAMPmodified * (-(leafPermanent / trunc) * trunc))))
             var tamStuck = (totalAMPmodified/trunc)*trunc ;
-        for(var taloop = 0.; taloop<3.5-(totalAMP/trunc)*trunc ;taloop+=tamStuck)    totalAMPmodified=totalAMPmodified**
+        for(var taloop = 0.; taloop<3.5-(totalAMP/trunc)*trunc ;taloop+=tamStuck)   
+            {
+                            totalAMPmodified = (((totalAMPmodified) / trunc) * trunc)
+
+                totalAMPmodified=totalAMPmodified**
         ((1.+totalAMPmodified**
                         (1.-totalAMPmodified**
                             (
@@ -5068,8 +5074,9 @@ function calculatePitch() {
                 )
             //preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2
             //totalAMPmodified=totalAMPmodified**1.5;
-            totalAMPmodified = (((totalAMPmodified) / trunc) * trunc)
+            }
                         if (!isFinite(totalAMPmodified)||totalAMPmodified<0.)totalAMPmodified = totalAMP;
+            totalAMPmodified = (((totalAMPmodified) / trunc) * trunc)
 
             //totalAMPmodified/=2.;
 
