@@ -6098,15 +6098,15 @@ if(fibgeBase!=2n&&window.blendFibge)
         {
             console.log("Resetting Fibgetti Spinner")
 
-                            ABC = 0;
+                            ABC = 1;
 
-            fibArray[ABC]=starterValue1
-            fibArray[(ABC+1)%3]=starterValue2
-            fibArray[(ABC+2)%3]=starterValue3
+            fibArray[0]=starterValue1
+            fibArray[1]=starterValue2
+            fibArray[2]=starterValue3
             theWORDtoGOD="1"
-            stringArray[ABC]="1"
-            stringArray[(ABC+1)%3]="1"
-            stringArray[(ABC+2)%3]="0"
+stringArray[0]=binaryConverter(fibArray[0])
+stringArray[1]=binaryConverter(fibArray[1])
+stringArray[2]=binaryConverter(fibArray[2])
     for(var clnr = 0; clnr<numberOfMetaTriangles;clnr++)
     {
                    let fibgeStride = 0.;
