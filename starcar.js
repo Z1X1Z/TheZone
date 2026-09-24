@@ -5058,16 +5058,18 @@ function calculatePitch() {
             var tamStuck = (totalAMPmodified/trunc)*trunc ;
         for(var taloop = 0.; taloop<3.5-(totalAMP/trunc)*trunc ;taloop+=tamStuck)   
             {
-                            totalAMPmodified = (((totalAMPmodified) / trunc) * trunc)
-
+                
                 totalAMPmodified=totalAMPmodified**
         ((1.+totalAMPmodified**
                         (1.-totalAMPmodified**
                             (
-                                ((1.-totalAMPmodified**(1.+totalAMPmodified**totalAMPmodified)
+                                (
+                                   ( (1.-totalAMPmodified**(1.+totalAMPmodified**totalAMPmodified)
                                 **(totalAMPmodified**totalAMPmodified)))**
                             ((1.+totalAMPmodified**(1.-totalAMPmodified**totalAMPmodified)
-                            **(totalAMPmodified**totalAMPmodified)))
+                            **(totalAMPmodified**totalAMPmodified))
+                                )**totalAMPmodified
+                        )
                             )**((totalAMPmodified**totalAMPmodified)**totalAMPmodified)
                         ) **((totalAMPmodified)**(totalAMPmodified**totalAMPmodified))  
                     )
@@ -5076,7 +5078,6 @@ function calculatePitch() {
             //totalAMPmodified=totalAMPmodified**1.5;
             }
                         if (!isFinite(totalAMPmodified)||totalAMPmodified<0.)totalAMPmodified = totalAMP;
-            totalAMPmodified = (((totalAMPmodified) / trunc) * trunc)
 
             //totalAMPmodified/=2.;
 
