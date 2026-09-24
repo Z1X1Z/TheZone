@@ -3017,7 +3017,7 @@ return g;
 
                   vec4 faceBlackAndWhite(vec2 g, vec2 t, bool wink, int overrideEyes, bool WayTruthLight, float noteOfEye){
 
- if(armsSpinning!=0)g = collapseHorn(g,false);
+ if(armsSpinning!=0&&Character==0)g = collapseHorn(g,false);
 
 
                 if(elderHorns==2&&(overrideEyes==100||overrideEyes==-1)){
@@ -3496,7 +3496,7 @@ return vec3(clamp(1.-l,0.,1.));
 }
     
 vec3 faceFORWARD(vec2 p,vec2 t){
-       if(armsSpinning!=0)  p=collapseHorn(p,true);
+       if(armsSpinning!=0&&Character==0)  p=collapseHorn(p,true);
 
    // t.x*=-1.;
     //t*=2.;
