@@ -5073,7 +5073,11 @@ function calculatePitch() {
                             )**((totalAMPmodified**totalAMPmodified)**totalAMPmodified)
                         ) **((totalAMPmodified)**(totalAMPmodified**totalAMPmodified))  
                     )  **(totalAMPmodified**totalAMPmodified)
-                )**totalAMPmodified
+                )
+
+                                                totalAMPmodified=totalAMPmodified**totalAMPmodified
+
+                //**totalAMPmodified
             //preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2
             //totalAMPmodified=totalAMPmodified**1.5;
             }
