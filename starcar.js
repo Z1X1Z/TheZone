@@ -5076,7 +5076,7 @@ function calculatePitch() {
                 )
 
                                                 totalAMPmodified=totalAMPmodified**totalAMPmodified**totalAMPmodified
-
+ if (!isFinite(totalAMPmodified)||totalAMPmodified<0.)break;
                 //**totalAMPmodified
             //preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2
             //totalAMPmodified=totalAMPmodified**1.5;
@@ -5239,7 +5239,11 @@ if(takingToLong())break;
                 if(takingToLong())break;
 
                     tolerance = (toleranceFixed) ** ((1 + tolerance))
-
+ if (!isFinite(tolerance)||tolerance<0.)
+    {
+        tolerance=totalAMPmodified;
+        break;
+    }
                     //   tolerance=(toleranceFixed)**((1-tolerance))
                     // ll++
                 }
@@ -5250,7 +5254,11 @@ if(takingToLong())break;
                 if(takingToLong())break;
 
                     tolerance = (toleranceFixed) ** ((1 - tolerance))
-
+ if (!isFinite(tolerance)||tolerance<0.)
+    {
+        tolerance=totalAMPmodified;
+        break;
+    }
                     // ll++
                 }
                 
@@ -5271,6 +5279,11 @@ if(takingToLong())break;
                 if(takingToLong())break;
 
                     tolerance = tolerance ** (Math.abs((.5 - (Math.abs(totalAMPmodified) ** .5 - (Math.abs(tolerance) ** .5)) ** 2.)))//not totalAMPmodified!? abs to prevent some crashing, unverified fix
+ if (!isFinite(tolerance)||tolerance<0.)
+    {
+        tolerance=totalAMPmodified;
+        break;
+    }
                 }
             tolerance = ((tolerance) / trunc) * trunc
 
@@ -5382,6 +5395,11 @@ if(takingToLong())break;
                 if(takingToLong())break;
 
                     tolerance = tolerance ** (tolerance + .5 + totalAMP);
+                     if (!isFinite(tolerance)||tolerance<0.)
+                            {
+                                tolerance=totalAMPmodified;
+                                break;
+                            }
                 }
 
 
@@ -5422,6 +5440,7 @@ if(takingToLong())break;
 
                                     tolerance *= (adjuster**adjuster)
                                                                                                                       tolerance=(tolerance/trunc)*trunc
+          
                                     
                                                //  tolerance=(tolerance/trunc)*trunc
 
@@ -5456,6 +5475,11 @@ if(isFinite(tolerance)&&tolerance>0.)
                               let adjustment = (((adjuster**(adjuster**adjuster)**adjuster)))**3**powerUP
 
                                  tolerance *=(adjustment**adjustment)
+                                 if (!isFinite(tolerance)||tolerance<0.)
+                            {
+                                tolerance=totalAMPmodified;
+                                break;
+                            }
                                                        //   tolerance=(tolerance/trunc)*trunc
 
                                                                        c++
