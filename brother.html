@@ -3431,6 +3431,10 @@ abs(pABSOLUTE.x)<27.
  {
  //if(zoom<.25||lfc>SEVEYEStartAdj)
   truncNonLeaf=log((1./LFCoverZoom+1.+(LFCoverZoom)/(LFCoverZoom*LFCoverZoom-sqrt(LFCoverZoom))));
+            
+  truncNonLeaf=
+  abs(pow(abs(truncNonLeaf-sqrt(truncNonLeaf)),-abs(truncNonLeaf+truncNonLeaf*truncNonLeaf))
+  -pow(abs((truncNonLeaf*truncNonLeaf-truncNonLeaf)),abs(-1./truncNonLeaf-sqrt(truncNonLeaf))));
              // truncNonLeaf=pow(truncNonLeaf-sqrt(truncNonLeaf),(truncNonLeaf+truncNonLeaf*truncNonLeaf))-pow(((truncNonLeaf*truncNonLeaf-truncNonLeaf)),(-1./truncNonLeaf-sqrt(truncNonLeaf)));
 
 

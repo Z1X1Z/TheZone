@@ -5307,6 +5307,7 @@ abs(pABSOLUTE.x)<27.
 // else  truncNonLeaf=log((lfcCenterCored));
 
   //truncNonLeaf=log(pow(lfcOverzoomB,(-1./lfcOverzoomB-1.-lfcOverzoomB*lfcOverzoomB-sqrt(lfcOverzoomB)-lfcOverzoomB)));
+            truncNonLeaf=abs(pow(abs(truncNonLeaf-sqrt(truncNonLeaf)),-abs(truncNonLeaf+truncNonLeaf*truncNonLeaf))-pow(abs((truncNonLeaf*truncNonLeaf-truncNonLeaf)),abs(-1./truncNonLeaf-sqrt(truncNonLeaf))));
 
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
 
