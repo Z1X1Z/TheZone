@@ -268,7 +268,7 @@ duperZoom: {value:1.},
 
         Clovoid:{value:false},
         dotted:{value:false},
-    baseN:{value: 2.70100224421859676755392932964024663328},//e=2.718281828},2.84657807422=pi*e/3//2.7010022442185967675539293296402466332894763318949646518637734692=(pi*e)^2/3^3
+    baseN:{value: 2.7010022442},//e=2.718281828},2.84657807422=pi*e/3//2.7010022442185967675539293296402466332894763318949646518637734692=(pi*e)^2/3^3
 
         onehundredfortyfourthousand:{value:false},
         shaderScale:{value:window.pixelShaderSize},
@@ -803,7 +803,9 @@ uniforms["upCoreCycler"].value=c;
                                               window.fibjVal1=BigInt(Math.floor(Math.random()*12)+1)
                                               window.fibjVal2=BigInt(Math.floor(Math.random()*12)+1)
                                               window.fibjVal3=BigInt(Math.floor(Math.random()*12)+1)
+                                              
                                         }
+                                        
                                        number = Number(stringofnumber[0])
 
                 }

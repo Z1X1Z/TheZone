@@ -4598,7 +4598,7 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
                     document.getElementById("numberExplanation").innerHTML = "x=√(2/(x^2+1))=1"
                     clvrVariant4Type = 1
                     uniforms.clvrVariant4.value = 1. / leafPermanent;
-                    uniforms.baseN.value = 2.701002244218596767553929329640246633
+                    uniforms.baseN.value = 2.7010022442
                 }
                 if (Math.floor(uniforms.movieTime.value) == 3)
                     document.getElementById("numberExplanation").innerHTML = "x=-1/(x^2-∞)=0"
