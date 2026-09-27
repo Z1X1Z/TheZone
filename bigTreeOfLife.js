@@ -401,7 +401,7 @@ if(MetaCored)hyperCore=
 cored/1.5/squeezeN+Math.log(lfc*squeezeN)*logStabilizationConstant;
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 //float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
-hyperCore+=1./13.;
+hyperCore+=1./15.;
 var equilibriator = 1.
     if(dilate){
 if(lfc/zoom>2./3.)
