@@ -5056,6 +5056,7 @@ function calculatePitch() {
             
             totalAMPmodified = (((totalAMPmodified * (-(leafPermanent / trunc) * trunc))))
             var tamStuck = (totalAMPmodified/trunc)*trunc ;
+            
         for(var taloop = 0.; taloop<3.5-(totalAMP/trunc)*trunc ;taloop+=tamStuck)   
             {
                                 if(takingToLong())break;
@@ -5073,6 +5074,7 @@ function calculatePitch() {
                         ) **((totalAMPmodified)**(totalAMPmodified**totalAMPmodified))  
                     )  **(totalAMPmodified**totalAMPmodified)
                 )
+                                                totalAMPmodified=(totalAMPmodified/trunc)*trunc
 
                                                 totalAMPmodified=totalAMPmodified**totalAMPmodified**totalAMPmodified
                                                 totalAMPmodified=(totalAMPmodified/trunc)*trunc
