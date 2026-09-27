@@ -5063,19 +5063,19 @@ function calculatePitch() {
         (1.+totalAMPmodified**
                         (1.-totalAMPmodified**
                             (
-                                (
-                                   ( (1.-totalAMPmodified**(1.+totalAMPmodified**totalAMPmodified)
-                                **(totalAMPmodified**totalAMPmodified)))**
-                            ((1.+totalAMPmodified**(1.-totalAMPmodified**totalAMPmodified)
-                            **(totalAMPmodified**totalAMPmodified))
+                                ((1.-totalAMPmodified**(1.+totalAMPmodified**totalAMPmodified)
+                                    **(totalAMPmodified**totalAMPmodified)))
+                                    **((1.+totalAMPmodified**(1.-totalAMPmodified**totalAMPmodified)
+                                    **(totalAMPmodified**totalAMPmodified))
                                 )**totalAMPmodified
-                        )
+                        
                             )**((totalAMPmodified**totalAMPmodified)**totalAMPmodified)
                         ) **((totalAMPmodified)**(totalAMPmodified**totalAMPmodified))  
                     )  **(totalAMPmodified**totalAMPmodified)
                 )
 
                                                 totalAMPmodified=totalAMPmodified**totalAMPmodified**totalAMPmodified
+                                                totalAMPmodified=(totalAMPmodified/trunc)*trunc
  if (!isFinite(totalAMPmodified)||totalAMPmodified<0.)break;
                 //**totalAMPmodified
             //preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2
