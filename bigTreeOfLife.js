@@ -401,7 +401,7 @@ if(MetaCored)hyperCore=
 cored/1.5/squeezeN+Math.log(lfc*squeezeN)*logStabilizationConstant;
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 //float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
-       hyperCore+=1./(gr*6.-leaf*3.);//for fifth seal (super seal), and adjusted from 1./3. for megaExplosions
+    if (SEVEYEStartAdj>lengthP) hyperCore+=1./(gr*6.-leaf*3.);//added after superseal
 var equilibriator = 1.
     if(dilate){
 if(lfc/zoom>2./3.)
