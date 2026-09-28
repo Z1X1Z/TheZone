@@ -5060,7 +5060,7 @@ function calculatePitch() {
 
             var tamStuck = totalAMPmodified;//(totalAMPmodified/trunc)*trunc ;
             
-        for(var taloop = 0.; taloop<3.5-tamStuck+totalAMPmodified;taloop+=tamStuck+totalAMPmodified)   
+        for(var taloop = 0.; taloop<3.5+tamStuck+totalAMPmodified;taloop+=tamStuck+totalAMPmodified)   
             {
                                 if(takingToLong())break;
                 totalAMPmodified=(totalAMPmodified**
