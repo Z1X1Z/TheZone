@@ -402,6 +402,10 @@ cored/1.5/squeezeN+Math.log(lfc*squeezeN)*logStabilizationConstant;
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 //float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
     if (SEVEYEStartAdj>lengthP) hyperCore+=1./(gr*6.-leaf*3.);//added after superseal
+       else if(
+Math.abs(pABSOLUTE.y)<27./logStabilizationConstant&&
+Math.abs(pABSOLUTE.x)<27.)hyperCore+=.25;
+
 var equilibriator = 1.
     if(dilate){
 if(lfc/zoom>2./3.)

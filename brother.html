@@ -3377,7 +3377,9 @@ hyperCore+=
    //(-cored*gr*leaf)//this is the core slider this dilates central core across metacore//here could use a hotkey//does it do anything useful?
    twoThirds+log(lfc)*logStabilizationConstant;
     if (SEVEYEStartAdj>lengthP) hyperCore+=1./(gr*6.-leaf*3.);//added after superseal
-                      ;//to compensate for fifth core
+    else if(
+abs(pABSOLUTE.y)<27./logStabilizationConstant&&
+abs(pABSOLUTE.x)<27.)hyperCore+=.25;
 if(lfcOverzoomB>twoThirds)
 {
     float dif = 1.;
