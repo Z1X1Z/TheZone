@@ -5077,13 +5077,16 @@ function calculatePitch() {
                         ) **((totalAMPmodified)**(totalAMPmodified**totalAMPmodified))  
                     )  **(totalAMPmodified**totalAMPmodified)
                 )
+                 if (!isFinite(totalAMPmodified)||totalAMPmodified<0.)break;
+
                                                 totalAMPmodified=(totalAMPmodified/trunc)*trunc
 
                                                 totalAMPmodified=totalAMPmodified**totalAMPmodified**totalAMPmodified
 
                                                 totalAMPmodified=(totalAMPmodified/trunc)*trunc
+                                                                 if (!isFinite(totalAMPmodified)||totalAMPmodified<0.)break;
+
                                                 
- if (!isFinite(totalAMPmodified)||totalAMPmodified<0.)break;
                 //**totalAMPmodified
             //preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2
             //totalAMPmodified=totalAMPmodified**1.5;
@@ -5134,6 +5137,10 @@ function calculatePitch() {
                         .75
                         //oolp
                         - (tAScaled) ** (.5 + tAScaled)))
+                                         if (!isFinite(tAScaled)||tAScaled<0.)
+                                                break;
+                                            
+
                         if(takingToLong())break;
 
                     //          b++
@@ -5211,6 +5218,7 @@ function calculatePitch() {
                     console.log(n);
                     break;
                 }
+                if(!isFinite(tolerance))break;
 
                 //            plusOrMinusPowerSeries=         Math.sign(plusOrMinusPowerSeries)*(Math.abs(plusOrMinusPowerSeries)**(4./3.));
                 loopsThresh++
