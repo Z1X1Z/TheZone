@@ -5051,7 +5051,7 @@ function calculatePitch() {
                 
            // console.log(trunc)
            
-            if (!isFinite(trunc))trunc = 1
+            if (!isFinite(trunc)||trunc==0.)trunc = 1
             //totalAMPmodified=(totalAMPmodified/((-leafPermanent)/))///preTrunc)*preTrunc));
 
                                                            totalAMPmodified=(totalAMPmodified/trunc)*trunc
