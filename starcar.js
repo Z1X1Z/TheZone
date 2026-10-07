@@ -5087,7 +5087,8 @@ function calculatePitch() {
                                                 
 
             totalAMPmodified=totalAMPmodified**(totalAMPmodified**(totalAMPmodified**totalAMPmodified))
-            
+                                                            totalAMPmodified=(totalAMPmodified/trunc)*trunc
+
                         totalAMPmodified=totalAMPmodified**totalAMPmodified
 
                                                 totalAMPmodified=(totalAMPmodified/trunc)*trunc
@@ -5095,7 +5096,6 @@ function calculatePitch() {
 
 
             totalAMPmodified=(totalAMPmodified**totalAMPmodified)**totalAMPmodified**totalAMPmodified**(totalAMPmodified**totalAMPmodified)**totalAMPmodified
-                                                            totalAMPmodified=(totalAMPmodified/trunc)*trunc
 
                                                                              if (!isFinite(totalAMPmodified)||totalAMPmodified<0.)break;
 
