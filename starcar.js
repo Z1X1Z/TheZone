@@ -5078,7 +5078,6 @@ function calculatePitch() {
                     )  **(totalAMPmodified**totalAMPmodified)
                 )
                  if (!isFinite(totalAMPmodified)||totalAMPmodified<0.)break;
-                                                totalAMPmodified=(totalAMPmodified/trunc)*trunc
 
                                                 totalAMPmodified=totalAMPmodified**(totalAMPmodified**totalAMPmodified)
 
