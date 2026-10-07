@@ -5088,17 +5088,17 @@ function calculatePitch() {
                                                                  if (!isFinite(totalAMPmodified)||totalAMPmodified<0.)break;
 
                                                 
-                //**totalAMPmodified
-            //preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2
-            //totalAMPmodified=totalAMPmodified**1.5;
-            }
-
 
             totalAMPmodified=totalAMPmodified**(totalAMPmodified**(totalAMPmodified**totalAMPmodified))
                         totalAMPmodified=totalAMPmodified**totalAMPmodified
 
             totalAMPmodified=(totalAMPmodified**totalAMPmodified)**totalAMPmodified**totalAMPmodified**(totalAMPmodified**totalAMPmodified)**totalAMPmodified
             
+                //**totalAMPmodified
+            //preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2
+            //totalAMPmodified=totalAMPmodified**1.5;
+            }
+
              //           totalAMPmodified=totalAMPmodified**totalAMPmodified
 
                         if (!isFinite(totalAMPmodified)||totalAMPmodified<0.||totalAMPmodified>1.)totalAMPmodified = totalAMP;
