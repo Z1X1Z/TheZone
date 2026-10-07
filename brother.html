@@ -1707,7 +1707,7 @@ vec3 paddles(vec2 vUvCentered){
            }
        if(ret.x==0.&&ret.y==0.&&ret.z==0.){
         ret+=shade;
-        if(abs(pongIntercept-vUv.y*resolution.y)<10.&&abs(vUvCentered.x)>.25+3./16.) ret = vec3(sign(vUvCentered.x)*4.);
+        if(abs(pongIntercept-vUv.y*resolution.y)<10.&&abs(vUvCentered.x)>.25+11./64.) ret = vec3(sign(vUvCentered.x)*4.);
        }
 
        return ret;
