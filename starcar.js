@@ -5072,7 +5072,7 @@ function calculatePitch() {
                                     **(totalAMPmodified**totalAMPmodified)))
                                     **((1.+totalAMPmodified**(1.-totalAMPmodified**totalAMPmodified)
                                     **(totalAMPmodified**totalAMPmodified))
-                                )**totalAMPmodified
+                                )**totalAMPmodified**totalAMPmodified
                         
                             )**((totalAMPmodified**totalAMPmodified)**totalAMPmodified)
                         ) **((totalAMPmodified)**(totalAMPmodified**totalAMPmodified))  
