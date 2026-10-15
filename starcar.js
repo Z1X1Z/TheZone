@@ -3131,7 +3131,7 @@ if(window.staff)build_staff();
         lowAmpFreq = 1;
         for (var kappa = 0.; kappa < EldersLeg; kappa++)if (lowNote > testar[kappa] && isFinite(testar[kappa] && testar[kappa] != 0.)
         ) {
-            lowNote = testar[kappa]
+            lowNote = testar[kappa]/kappa
             lowAmpFreq = frequencies[kappa]
             uniforms.lownote.value = kappa * 12. / EldersLeg;
         }
@@ -5068,10 +5068,13 @@ function calculatePitch() {
         (1.+totalAMPmodified**
                         (1.-totalAMPmodified**
                             (
-                                ((1.-totalAMPmodified**(1.+totalAMPmodified**totalAMPmodified)
+                                ((1.-totalAMPmodified**
+                                    (1.+totalAMPmodified**totalAMPmodified)
                                     **(totalAMPmodified**totalAMPmodified)))
-                                    **((1.+totalAMPmodified**(1.-totalAMPmodified**totalAMPmodified)
-                                    **(totalAMPmodified**totalAMPmodified))
+                                  
+                                    **((1.+totalAMPmodified
+                                        **(1.-totalAMPmodified**totalAMPmodified)
+                                      **(totalAMPmodified**totalAMPmodified))
                                 )**totalAMPmodified**totalAMPmodified
                         
                             )**((totalAMPmodified**totalAMPmodified)**totalAMPmodified)
