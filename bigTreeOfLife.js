@@ -401,11 +401,7 @@ if(MetaCored)hyperCore=
 cored/1.5/squeezeN+Math.log(lfc*squeezeN)*logStabilizationConstant;
 else hyperCore=externalCores;//hyperCore is really better thought of as hyperMetaCore
 //float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
-    if (SEVEYEStartAdj>lengthP) hyperCore+=1./(gr*6.-leaf*3.);//added after superseal
-       else if(
-Math.abs(pABSOLUTE.y)<27./logStabilizationConstant&&
-Math.abs(pABSOLUTE.x)<27.)hyperCore+=.25;
-
+    
 var equilibriator = 1.
     if(dilate){
 if(lfc/zoom>2./3.)
@@ -523,7 +519,9 @@ abs(pABSOLUTE.x)<27.
 )*/
  {  
   truncNonLeaf=Math.log((1./LFCoverZoom+1.+(LFCoverZoom)/(LFCoverZoom*LFCoverZoom-Math.sqrt(LFCoverZoom))));
-              truncNonLeaf=Math.abs(Math.pow(Math.abs(truncNonLeaf-Math.sqrt(truncNonLeaf)),-Math.abs(truncNonLeaf+truncNonLeaf*truncNonLeaf))-Math.pow(Math.abs((truncNonLeaf*truncNonLeaf-truncNonLeaf)),Math.abs(-1./truncNonLeaf-Math.sqrt(truncNonLeaf))));
+                                truncNonLeaf=(truncNonLeaf*truncNonLeaf)/truncNonLeaf;
+
+  truncNonLeaf=Math.abs(Math.pow(Math.abs(truncNonLeaf-Math.sqrt(truncNonLeaf)),-Math.abs(truncNonLeaf+truncNonLeaf*truncNonLeaf))-Math.pow(Math.abs((truncNonLeaf*truncNonLeaf-truncNonLeaf)),Math.abs(-1./truncNonLeaf-Math.sqrt(truncNonLeaf))));
 
 }
 
@@ -532,6 +530,11 @@ abs(pABSOLUTE.x)<27.
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
          truncator=(truncator*truncator)/truncator;
 }
+
+    if (SEVEYEStartAdj>lengthP) hyperCore+=(((((1./((((((gr*truncator)/truncator)*6.-((leaf*3.*truncator)/truncator)))*truncator)/truncator)))))*truncator)/truncator;//added after superseal
+       else if(
+Math.abs(pABSOLUTE.y)<27./logStabilizationConstant&&
+Math.abs(pABSOLUTE.x)<27.)hyperCore+=.25;
 
 
    if(seventhEYE>0.&&(seventhEYE!=3.||seventhEYEthree)&&lengthP<2./3.&&zoom<.25//&&(lfc/zoom<2./3.||seventhEYE!=3.)

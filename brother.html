@@ -577,6 +577,11 @@ radialWarp=b;
                                              callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true,'keyCode':key.charCodeAt(0)}));">
                                              <label for="staff">Staff?![.P]</label><br>
 
+                                         <input type="checkbox" id="pebbles" name="t"  onclick= "
+                                             key  = 'm';
+                                             callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
+                                             <label for="pebbles">Pebbles?![,m]</label><br>
+
                </div>
           </button>
           </div>
@@ -838,6 +843,18 @@ radialWarp=b;
               
                                   
                           
+              <a id="Chirality" name="t"  onclick= "
+                  key  = '|';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
+                  Flop Chirality![|]</a><br>
+                          
+              <label for="CloverTwist">Twist offset:[|]</label>
+             <input type="number" id="CloverTwist" name="CloverTwist" class="num" onkeyup="
+                number = 'no number'
+;
+uniforms.cloverOffset.value=document.getElementById('CloverTwist').value/6.">
+                 </p>
+
                        <input type="checkbox" id="Center" name="t"  onclick= "
                     key  = 'c';
                     callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
@@ -861,6 +878,11 @@ radialWarp=b;
 
 
  
+<a id="whirl" name="t"  onclick= "
+key  = 'i';
+callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
+    Cyclone![.i]</a><br>
+
 
 
 <a id="leapIn" name="t"  onclick= "
@@ -1510,8 +1532,10 @@ ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
     uniform bool gates;
     uniform int armsSpinning;
     uniform float lownote;
+    uniform float whirlpool;
 
-                          
+                              uniform float cloverOffset;
+
     const int oppositionalCoreFlop=0;
     const int oppositionalCoreFlopDEFAULT=2;
     const int oppositionalCoreFlopJUBILEE=0;
@@ -1578,6 +1602,8 @@ ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
     uniform float time2dance;
 
 uniform float shaderScale;
+
+uniform int chirality;
 
 uniform float twistStar;
 uniform float flipStar;
@@ -3203,6 +3229,14 @@ p*=interSection*2.;
                          
       float chiralAdjustment = 0.;
 
+                        if(chirality==-1){
+                         chiralAdjustment=-PIdiv2;
+                         p=spin2(p,-chiralAdjustment);
+                         p*=-1.;//may cause loss of coordination? For balance
+                        }
+                        else if(chirality==3)p.x*=-1.;
+                         if(cloverOffset!=0.)p=spin2(p,cloverOffset*PI2);
+                    
                     bool gated = false;
 
                     bool isSplit=false;
@@ -3376,10 +3410,7 @@ hyperCore+=
    cored* 
    //(-cored*gr*leaf)//this is the core slider this dilates central core across metacore//here could use a hotkey//does it do anything useful?
    twoThirds+log(lfc)*logStabilizationConstant;
-    if (SEVEYEStartAdj>lengthP) hyperCore+=1./(gr*6.-leaf*3.);//added after superseal
-    else if(
-abs(pABSOLUTE.y)<27./logStabilizationConstant&&
-abs(pABSOLUTE.x)<27.)hyperCore+=.25;
+
 if(lfcOverzoomB>twoThirds)
 {
     float dif = 1.;
@@ -3422,7 +3453,7 @@ lengthABSOLUTE<SEVEYEStartAdj&&
 lfc<SEVEYEStartAdj)
   truncNonLeaf=log(pow(lfcCenterCored,(-1./lfcCenterCored)));
 
- elseif
+ else if
 (
 abs(pABSOLUTE.y)<27./logStabilizationConstant&&
 abs(pABSOLUTE.x)<27.
@@ -3436,10 +3467,10 @@ abs(pABSOLUTE.x)<27.
  //if(zoom<.25||lfc>SEVEYEStartAdj)
   truncNonLeaf=log((1./LFCoverZoom+1.+(LFCoverZoom)/(LFCoverZoom*LFCoverZoom-sqrt(LFCoverZoom))));
          //truncNonLeaf=(truncNonLeaf*truncNonLeaf)/truncNonLeaf;
+                    truncNonLeaf=(truncNonLeaf*truncNonLeaf)/truncNonLeaf;
   truncNonLeaf=
   abs(pow(abs(truncNonLeaf-sqrt(truncNonLeaf)),-abs(truncNonLeaf+truncNonLeaf*truncNonLeaf))
   -pow(abs((truncNonLeaf*truncNonLeaf-truncNonLeaf)),abs(-1./truncNonLeaf-sqrt(truncNonLeaf))));
-           truncNonLeaf=(truncNonLeaf*truncNonLeaf)/truncNonLeaf;
 
              // truncNonLeaf=pow(truncNonLeaf-sqrt(truncNonLeaf),(truncNonLeaf+truncNonLeaf*truncNonLeaf))-pow(((truncNonLeaf*truncNonLeaf-truncNonLeaf)),(-1./truncNonLeaf-sqrt(truncNonLeaf)));
 
@@ -3449,12 +3480,15 @@ abs(pABSOLUTE.x)<27.
 //  truncNonLeaf=pow(truncNonLeaf,(-1./truncNonLeaf-sqrt(truncNonLeaf)));
 
          // truncNonLeaf=pow(truncNonLeaf,(-1./truncNonLeaf-sqrt(truncNonLeaf)));
+           truncNonLeaf=(truncNonLeaf*truncNonLeaf)/truncNonLeaf;
 
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
          truncator=(truncator*truncator)/truncator;
-
 }
-
+    if (SEVEYEStartAdj>lengthP) hyperCore+=(((((1./((((((gr*truncator)/truncator)*6.-((leaf*3.*truncator)/truncator)))*truncator)/truncator)))))*truncator)/truncator;//added after superseal
+    else if(
+abs(pABSOLUTE.y)<27./logStabilizationConstant&&
+abs(pABSOLUTE.x)<27.)hyperCore+=.25;
   if(seventhEYEthree&&lengthP<twoThirds&&zoomB<.5
    )
    {
@@ -4256,6 +4290,7 @@ vec2 background=p;
 background=background*zoom+spunC;
 
 float lfc=length(constellationCoord);
+if(whirlpool!=0.) background=spin2(background,whirlpool*length(background)*.75/6.*PI/abs(zoom-lfc));
 
 
 

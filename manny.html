@@ -590,6 +590,10 @@ radialWarp=b;
                                              callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true,'keyCode':key.charCodeAt(0)}));">
                                              <label for="staff">Staff?![.P]</label><br>
 
+                                         <input type="checkbox" id="pebbles" name="t"  onclick= "
+                                             key  = 'm';
+                                             callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true,'keyCode':key.charCodeAt(0)}));">
+                                             <label for="pebbles">Pebbles?![,m]</label><br>
                </div>
           </button>
           </div>
@@ -1325,12 +1329,12 @@ uniforms.coreShift.value=-document.getElementById('shift').value">
                 <br>
 
             <form>
-              <input type="radio" id="SpirallizeOriginal" name="Spirallize" onclick="uniforms[ 'spirated' ].value=1;">
-              <label for="SpirallizeOriginal">Spirallize Original!</label><br>
-              <input type="radio" id="SpirallizeMirror" name="Spirallize" onclick="uniforms[ 'spirated' ].value=-1;">
-              <label for="SpirallizeMirror">Spirallize Mirror!</label><br>
-              <input type="radio" id="SpirallizeOff" name="Spirallize" onclick="uniforms[ 'spirated' ].value=0;">
-              <label for="SpirallizeOff">Spirallize Off</label>
+              <input type="radio" id="SpirallizeOriginal" name="Spiralize" onclick="uniforms[ 'spirated' ].value=1;">
+              <label for="SpirallizeOriginal">Spiralize Original!</label><br>
+              <input type="radio" id="SpirallizeMirror" name="Spiralize" onclick="uniforms[ 'spirated' ].value=-1;">
+              <label for="SpirallizeMirror">Spiralize Mirror!</label><br>
+              <input type="radio" id="SpirallizeOff" name="Spiralize" onclick="uniforms[ 'spirated' ].value=0;">
+              <label for="SpirallizeOff">Spiralize Off</label>
 
             </form>
 [?]
@@ -1339,7 +1343,7 @@ uniforms.coreShift.value=-document.getElementById('shift').value">
 <a id="whirl" name="t"  onclick= "
 key  = 'i';
 callKey(new KeyboardEvent('keydown', {'key': key,'altKey':true, 'keyCode':key.charCodeAt(0)}));">
-    Whirlpool![.i]</a><br>
+    Cyclone![.i]</a><br>
 
 <a id="leaf" name="t"  onclick= "
 key  = 'z';
@@ -5196,12 +5200,7 @@ else hyperCore+=externalCores;//hyperCore is really better thought of as hyperMe
 //float  CORE_DELIMITEReq=texture2D(coreTextureSampler,vec2(floor(0.)/40.,0.)).x;
 hyperCore+=coreShift;
 hyperCore +=  .25;//seems to be a bug fix to synchronize (almost) core depth with with brother.html
-    if (SEVEYEStartAdj>lengthP) hyperCore+=1./(gr*6.-leaf*3.);//added after superseal
-   else if(
-abs(pABSOLUTE.y)<27./logStabilizationConstant&&
-abs(pABSOLUTE.x)<27.)hyperCore+=.25;
-
-
+  
 float equilibriator = 1.;
 if(dilate){//should be re-enabled after checks
 if(lfcOverzoomB>twoThirds)
@@ -5314,10 +5313,18 @@ abs(pABSOLUTE.x)<27.
            //not working on android
            //truncNonLeaf=abs(pow(abs(truncNonLeaf-sqrt(truncNonLeaf)),-abs(truncNonLeaf+truncNonLeaf*truncNonLeaf))-pow(abs((truncNonLeaf*truncNonLeaf-truncNonLeaf)),abs(-1./truncNonLeaf-sqrt(truncNonLeaf))));
 
+                      truncNonLeaf=(truncNonLeaf*truncNonLeaf)/truncNonLeaf;
+
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
+         truncator=(truncator*truncator)/truncator;
 
 }
 
+
+    if (SEVEYEStartAdj>lengthP) hyperCore+=(((((1./((((((gr*truncator)/truncator)*6.-((leaf*3.*truncator)/truncator)))*truncator)/truncator)))))*truncator)/truncator;//added after superseal
+    else if(
+abs(pABSOLUTE.y)<27./logStabilizationConstant&&
+abs(pABSOLUTE.x)<27.)hyperCore+=.25;
 
 
 float omniboost = (6.+petals)/6.-1.;

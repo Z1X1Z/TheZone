@@ -106,6 +106,8 @@ var frequencies,
 
     mustarD,
     star, starColors,
+    starAndDots, starColorsAndDots,
+    
     crownBar, crownBarColors;
 
                           var crownHeadBoost,timeOfCast,crownBarBoost , twoOctaves, lastTestar ;
@@ -251,7 +253,6 @@ function build_staff(){
                 for (var g = 0; g < EldersLeg*2; g++)              
                   {
                                         let G=g;//(g + EldersLeg / 2.)%(EldersLeg*2)
-
                        if(maxtwoOctaves!=mintwoOctaves) lengt = ((twoOctaves[(G+EldersLeg/2.) % (EldersLeg*2)]) - mintwoOctaves) / (maxtwoOctaves - mintwoOctaves);
                         if (mintwoOctaves == twoOctaves[G % EldersLeg] || twoOctaves[G % (EldersLeg*2)] < 0.) lengt = 0.;//cull miniumum throughput
                       
@@ -264,6 +265,8 @@ let fulcrum = 1.//1 is middle, .8 works well
      crownBarDegree[G] *=((((2*(crownBarDegree[G])**(crownBarDegree[G]*2-1.)
         )
         ))**(lengt*2-fulcrum))**interpDth
+                //                if(G>EldersLeg) crownBarDegree[G] =0.;
+
      /*
     else
              crownBarDegree[g] /=(2*crownBarDegree[g])**interpDth
@@ -1019,6 +1022,8 @@ let fibgeMesh = Array(numberOfMetaTriangles),
     fibgeGeometry = Array(numberOfMetaTriangles);
 
 let starMesh, starGeometry, starMaterial;
+let starAndDotsMesh, starAndDotsGeometry, starAndDotsMaterial;
+
 let crownBarMesh, crownBarGeometry, crownBarMaterial;
 let DAWstarMesh, DAWstarGeometry, DAWstarMaterial;
 
@@ -1116,8 +1121,11 @@ function setFFTdependantSizes() {
     // window.zoomOutRatchetThreshold=starSHIPVOLUMEdefaultLowVolume;//5./1024;////or 1/1024.//maybe shouldn't need to be here could be solved away
 
 
-    star = new Float32Array((numberOfBins > EldersLeg) ? numberOfBins * 3 * 3 : EldersLeg * 3 * 2 * 3);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
-    starColors = new Float32Array((numberOfBins > EldersLeg) ? numberOfBins * 3 * 4 : EldersLeg * 6 * 4 * 3);
+    star = new Float32Array(EldersLeg * 3 * 2 * 3*3);//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
+    starColors = new Float32Array(EldersLeg * 6 * 4 * 3*3);
+
+    starAndDots = new Float32Array(numberOfBins * 3 * 3 );//Elders take EldersLeg*3*2*2 and that as it stands is always less than numberOfBins
+    starAndDotsColors = new Float32Array(numberOfBins * 3 * 4 );
 
     if(EldersLeg>0)
     {
@@ -1150,6 +1158,15 @@ function setFFTdependantSizes() {
         starMesh = new THREE.Mesh(starGeometry, starMaterial);
         scene.add(starMesh)
 
+
+        scene.remove(starAndDotsMesh)
+        starAndDotsGeometry.dispose();
+        starAndDotsGeometry = new THREE.BufferGeometry();
+        starAndDotsGeometry.dynamic = true;
+        starAndDotsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starAndDots, 3));
+        starAndDotsGeometry.setAttribute('color', new THREE.Float32BufferAttribute(starAndDotsColors, 4));
+        starAndDotsMesh = new THREE.Mesh(starAndDotsGeometry, starAndDotsMaterial);
+        scene.add(starAndDotsMesh)
 
               shaderScene.remove(crownBarMesh)
         crownBarGeometry.dispose();
@@ -1247,6 +1264,8 @@ let lineColorAttribute;
 
 let starPositionAttribute;
 let starColorAttribute;
+let starAndDotsPositionAttribute;
+let starAndDotsColorAttribute;
 let crownBarPositionAttribute;
 
 let crownBarColorAttribute;
@@ -1285,6 +1304,9 @@ function loadAttributes() {
     }
     starPositionAttribute = starGeometry.getAttribute('position');
     starColorAttribute = starGeometry.getAttribute('color');
+
+    starAndDotsPositionAttribute = starAndDotsGeometry.getAttribute('position');
+    starAndDotsColorAttribute = starAndDotsGeometry.getAttribute('color');
 
     crownBarPositionAttribute = crownBarGeometry.getAttribute('position');
     crownBarColorAttribute = crownBarGeometry.getAttribute('color');
@@ -1385,6 +1407,16 @@ fibgetScene= new THREE.Scene();
     starGeometry.dynamic = true;
     starMesh = new THREE.Mesh(starGeometry, starMaterial);
 
+
+    starAndDotsMaterial = new THREE.MeshBasicMaterial({
+        opacity: 1.,
+        transparent: true,
+        vertexColors: true,
+        // side: THREE.DoubleSide
+    });
+    starAndDotsGeometry = new THREE.BufferGeometry();
+    starAndDotsGeometry.dynamic = true;
+    starAndDotsMesh = new THREE.Mesh(starAndDotsGeometry, starMaterial);
 
     crownBarMaterial = new THREE.MeshBasicMaterial({
         opacity: 1.,
@@ -1527,6 +1559,8 @@ fibgetScene= new THREE.Scene();
     scene.add(meshTrail)
     shaderScene.add(line);
     scene.add(starMesh);    
+    scene.add(starAndDotsMesh);    
+    
    // scene.add(crownBarMesh);
 
     scene.add(DAWstarMesh);
@@ -3389,12 +3423,13 @@ if(window.staff)build_staff();
 
             let starStride = 0;
             
-            if (onO) {
+            if (onO||pebbles) {
                 for (var g = 0; g < starArms; g++) {
                     if (isFinite(testarContinuous[g])) {
                         if (testarContinuous[g] > maxTestar) maxTestar = testarContinuous[g];
                         if (testarContinuous[g] < minTestar) minTestar = testarContinuous[g];
                     }
+
                 }
                 if (maxTestar == minTestar) minTestar = 0;
                 const fill = 1000. / (timestamp - timestamplast) * secondsToEdge;//This should be set to either sampleRate/fftSize or by predicted FPS
@@ -3423,33 +3458,69 @@ if(window.staff)build_staff();
                         const rpio2 = arm + pi / 2.;
                         if (RockInTheWater == 0 || RockInTheWater == 1) {
 
-                            const x = widt * -Math.sin(rpio2);
-                            const y = widt * -Math.cos(rpio2);
+                            let x=-Math.sin(rpio2);
+                            let y=-Math.cos(rpio2);
+                            let pebbleSize = .1;
+                            if(onO)
+                            {
+                             x *= widt ;
+                             y *= widt ;
+                            }
+                            else
+                            {
+                                x*=pebbleSize/2;
+                                y*=pebbleSize/2;
+                            }
                             const xr = lengtOriginal * -Math.sin(arm);
                             const yr = lengtOriginal * -Math.cos(arm);
                             const depth = -1. + lengtOriginal / maxToMin * waterRadiusScalar * starShipDepthInSet;//shortest bar on top
 
+                            if (pebbles&&!onO)
+                            {
+                                let greenT = 1.;
+                                let rType=1;
+                                let bType=0
+                                if(uniforms.brelued.value!=1)
+                                {
+                                    rType=0;
+                                 bType=1
+                                }
+                                starAndDotsColorAttribute.setXYZW(starStride + 0, rType,0,bType, 1.)
+                                starAndDotsColorAttribute.setXYZW(starStride + 1, 0,greenT,0, .999)
+                                starAndDotsColorAttribute.setXYZW(starStride + 2, bType,0,rType, 1.)
 
-                            if (RockInTheWater == 1) {
+                            }
+                            else if (RockInTheWater == 1) {
                                 let greyTone = (mustarD[g] + 72) / lightingScaleStar;//may not be an exact value
                                 let maxVop = Math.max(vop.r, Math.max(vop.g, vop.b))
                                 let vopr = vop.r / maxVop;
                                 let vopg = vop.g / maxVop;
                                 let vopb = vop.b / maxVop;
                                 //for(var yy=0;yy<3;yy++)
-                                starColorAttribute.setXYZW(starStride + 0, vop.r, vop.g, vop.b, 1.)
-                                starColorAttribute.setXYZW(starStride + 1, vop.r, vop.g, vop.b, .5)
-                                starColorAttribute.setXYZW(starStride + 2, vop.r, vop.g, vop.b, 1.)
+                                starAndDotsColorAttribute.setXYZW(starStride + 0, vop.r, vop.g, vop.b, 1.)
+                                starAndDotsColorAttribute.setXYZW(starStride + 1, vop.r, vop.g, vop.b, .5)
+                                starAndDotsColorAttribute.setXYZW(starStride + 2, vop.r, vop.g, vop.b, 1.)
 
                             }
                             else {
-                                starColorAttribute.setXYZW(starStride, vop.r, vop.g, vop.b, 1.)
-                                starColorAttribute.setXYZW(starStride + 1, vop.r, vop.g, vop.b, -1.5)
-                                starColorAttribute.setXYZW(starStride + 2, vop.r, vop.g, vop.b, 1.)
+                                starAndDotsColorAttribute.setXYZW(starStride, vop.r, vop.g, vop.b, 1.)
+                                starAndDotsColorAttribute.setXYZW(starStride + 1, vop.r, vop.g, vop.b, -1.5)
+                                starAndDotsColorAttribute.setXYZW(starStride + 2, vop.r, vop.g, vop.b, 1.)
                             }
-                            starPositionAttribute.setXYZ(starStride, (xr - x), (yr - y), depth)
-                            starPositionAttribute.setXYZ(starStride + 1, 0., 0., 0.)
-                            starPositionAttribute.setXYZ(starStride + 2, (xr + x), (yr + y), depth)
+
+                            if(pebbles&&!onO)
+                            {
+                            starAndDotsPositionAttribute.setXYZ(starStride, (xr - x), (yr - y), depth)
+                            starAndDotsPositionAttribute.setXYZ(starStride + 1, xr*(1.-pebbleSize), yr*(1.-pebbleSize), 0.)
+                            starAndDotsPositionAttribute.setXYZ(starStride + 2, (xr + x), (yr + y), depth)
+                            }
+                            else
+                            {
+
+                            starAndDotsPositionAttribute.setXYZ(starStride, (xr - x), (yr - y), depth)
+                            starAndDotsPositionAttribute.setXYZ(starStride + 1, 0., 0., 0.)
+                            starAndDotsPositionAttribute.setXYZ(starStride + 2, (xr + x), (yr + y), depth)
+                            }
                         }
                         /* rectangular star    star.push(
                          
@@ -3464,9 +3535,9 @@ if(window.staff)build_staff();
                         if (RockInTheWater == 1 || RockInTheWater == 2) {
                             if (RockInTheWater == 2) {
 
-                                starPositionAttribute.setXYZ(starStride, 0, 0, 0)
-                                starPositionAttribute.setXYZ(starStride + 1, 0., 0., 0.)
-                                starPositionAttribute.setXYZ(starStride + 2, 0, 0, 0)
+                                starAndDotsPositionAttribute.setXYZ(starStride, 0, 0, 0)
+                                starAndDotsPositionAttribute.setXYZ(starStride + 1, 0., 0., 0.)
+                                starAndDotsPositionAttribute.setXYZ(starStride + 2, 0, 0, 0)
                             }
                             var wideness = (testarContinuous[g] / 255 * ampThresh ** .5 - zoomOutRatchetThreshold) * starshipSize;//ampThresh is signal average, it may or may not be an equivalent to fft bin amp/255, but it works to prevent jamming at high volumes
                             if (wideness <= 0) wideness = 1. / 255. * starshipSize;
@@ -3492,13 +3563,13 @@ if(window.staff)build_staff();
 
                     }
                     else {
-                        starColorAttribute.setXYZW(starStride, 0, 0, 0, 0)
-                        starColorAttribute.setXYZW(starStride + 1, 0, 0, 0, 0)
-                        starColorAttribute.setXYZW(starStride + 2, 0, 0, 0, 0)
+                        starAndDotsColorAttribute.setXYZW(starStride, 0, 0, 0, 0)
+                        starAndDotsColorAttribute.setXYZW(starStride + 1, 0, 0, 0, 0)
+                        starAndDotsColorAttribute.setXYZW(starStride + 2, 0, 0, 0, 0)
 
-                        starPositionAttribute.setXYZ(starStride, 0, 0, 0)
-                        starPositionAttribute.setXYZ(starStride + 1, 0, 0, 0)
-                        starPositionAttribute.setXYZ(starStride + 2, 0, 0, 0)
+                        starAndDotsPositionAttribute.setXYZ(starStride, 0, 0, 0)
+                        starAndDotsPositionAttribute.setXYZ(starStride + 1, 0, 0, 0)
+                        starAndDotsPositionAttribute.setXYZ(starStride + 2, 0, 0, 0)
                         starStride += 3;
 
                     }
@@ -3598,17 +3669,31 @@ if(window.staff)build_staff();
                     starStreamColorAttribute.needsUpdate = true;
                 }
 
+                    starAndDotsPositionAttribute.needsUpdate = true;
+                    starAndDotsColorAttribute.needsUpdate = true;
 
             }
 
 
 
-            else {//start drawing of just twenty four frets here 
 
+             maxTestar = Number.MIN_VALUE;
+             minTestar = Number.MAX_VALUE;
+
+
+            starStride = 0;
+            if(!onO) {//start drawing of just twenty four frets here 
+
+                if(!pebbles||onO)
+                {
                 for (var g = 0; g < starArms * 3; g++) {//wipe out the after image of the 1024 frets
-                    starColorAttribute.setXYZW(g, 0, 0, 0, 0.)
-                    starPositionAttribute.setXYZ(g, 0, 0, 0)
+                    starAndDotsColorAttribute.setXYZW(g, 0, 0, 0, 0.)
+                    starAndDotsPositionAttribute.setXYZ(g, 0, 0, 0)
                 }
+
+                    starAndDotsPositionAttribute.needsUpdate = true;
+                    starAndDotsColorAttribute.needsUpdate = true;
+            }
 
 
                 for (var g = 0; g < EldersLeg; g++) {
@@ -3829,6 +3914,7 @@ let fulcrum = .8
                     let yBoostHead = -Math.cos(arm) * (centerDisplacement+boostalternated/4.+crownHeight*2);
                     crownHead[gEven].geometry.dispose();
             crownHead[gEven].material.color=c;
+            
                                 crownHead[gEven].geometry = new THREE.CircleGeometry((1.-logStabilizationConstant)*(crownBarDegree[(gEven+octaveSwitch)%(EldersLeg*2)]/2+1./3.)/incrementation, 24, 1);
                                 crownHead[gEven].position.set(xBoostHead, yBoostHead, -.99);
      crownHead[gEven].needsUpdate=true;
@@ -3843,6 +3929,7 @@ let fulcrum = .8
                     crownBarColorAttribute.setXYZW(crownBarStride + 4, vop.r, vop.g, vop.b, 1.)
                     crownBarColorAttribute.setXYZW(crownBarStride + 5, vop.r, vop.g, vop.b, 1.)
                */   
+              
                     crownBarColorAttribute.setXYZW( crownBarStride, staffColor, staffColor, staffColor, staffAlpha)
                      crownBarColorAttribute.setXYZW( crownBarStride + 1,staffColor, staffColor, staffColor, staffAlpha)
                      crownBarColorAttribute.setXYZW( crownBarStride + 2, staffColor, staffColor, staffColor, staffAlpha)
@@ -3944,6 +4031,30 @@ let fulcrum = .8
 
                     }
                 }
+
+            }
+            else
+            {
+
+                for(let bg=0.;bg<EldersLeg*18;bg++)
+                {
+                    starColorAttribute.setXYZW(bg, 0, 0, 0, 0.)
+
+                    starPositionAttribute.setXYZ(bg, 0, 0, 0, 0.)
+                }
+                                for(let bg=0.;bg<EldersLeg*6;bg++)
+                {
+                     crownBarColorAttribute.setXYZW( bg, 0, 0, 0, 0.)
+                     crownBarPositionAttribute.setXYZ( bg, 0, 0, 0, 0.)
+                }
+
+                                    for(let bg=0.;bg<EldersLeg;bg++)
+                {
+                                crownHead[bg].geometry = new THREE.CircleGeometry(0.,0.,0.,3., 1);
+                                crownHead[bg].position.set(0, 0, 1);
+     crownHead[bg].needsUpdate=true;
+                }
+
 
             }
 
@@ -4852,7 +4963,7 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
 
     }
     uniforms.FIBGE.value = null;
-    
+
 if(window.fibgetti) {
            // fibgetScene.background = new THREE.Color(0x808080);
         binTriBundle(-1)

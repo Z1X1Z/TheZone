@@ -366,6 +366,7 @@ const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 const wingsOfRighteousness2 =(-Number(".2508742365242187487777776975555422424429370377"//+".25087423652421"+"874869"
     )+(grPermanent-leafPermanent-2**.5))*2;
 function resetAll(){
+    window.pebbles=true;
 window.staff=true;
 
                  window.rezUpgradeBypass = false
@@ -1303,7 +1304,7 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
     else if(key == "v" && event.ctrlKey) window.FeedbackSound =  !window.FeedbackSound;
     else if(key == "d" && event.ctrlKey)uniforms.starOnDot.value=(uniforms.starOnDot.value+1)%4;
     else if (key=="p" && event.ctrlKey)spirographMODE = (spirographMODE+1)%3;//color mode 3 seems obsolete
-    //else if (key=="m" && event.ctrlKey)uniforms.multiplicatorNexus.value=!uniforms.multiplicatorNexus.value;
+    else if (key=="m" && event.ctrlKey) window.pebbles=!window.pebbles;
 
     else if (event.ctrlKey&&key=="a")uniforms[ "colorCombo" ].value = 11;
     else if (event.ctrlKey&&key=="j")window.Oreo=(window.Oreo+1)%3;
