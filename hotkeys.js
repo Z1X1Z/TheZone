@@ -1601,18 +1601,15 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
 
         for (var n = 0; n < EldersLeg; n++) {
 
-                        crownHead[n].material.dispose();
-                        crownHead[n].geometry.dispose();
-                    crownHeadGeometry[n].dispose();
-                    crownHeadMaterial[n].dispose();
+                      //  crownHead[n].material.dispose();
+                      //  crownHead[n].geometry.dispose();
+                    //crownHeadGeometry[n].dispose();
+                  //  crownHeadMaterial[n].dispose();
          crownHead[n].position.set(2,2,1);;         
      crownHead[n].needsUpdate=true;
         }
         
-
- crownHead = Array(EldersLeg).fill(0);
- crownHeadGeometry =Array(EldersLeg).fill(0);
- crownHeadMaterial =Array(EldersLeg).fill(0);
+h
     }   
         if(number>=1.)
         EldersLeg=Math.round(number)*1.;
