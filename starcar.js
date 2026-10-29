@@ -1019,7 +1019,10 @@ let stackMesh, stackMaterial, stackGeometry;
 let numberOfMetaTriangles = 4;
 let fibgeMesh = Array(numberOfMetaTriangles),
     fibgeMaterial = Array(numberOfMetaTriangles),
-    fibgeGeometry = Array(numberOfMetaTriangles);
+    fibgeGeometry = Array(numberOfMetaTriangles),
+            fibgeFixedGeometry = Array(numberOfMetaTriangles);
+
+    ;
 
 let starMesh, starGeometry, starMaterial;
 let starAndDotsMesh, starAndDotsGeometry, starAndDotsMaterial;
@@ -1522,6 +1525,7 @@ fibgetScene= new THREE.Scene();
             vertexColors: true,
             // side: THREE.DoubleSide
         });
+        fibgeFixedGeometry[go] = new THREE.BufferGeometry();
         fibgeGeometry[go] = new THREE.BufferGeometry();
         fibgeGeometry[go].dynamic = true;
         fibgeGeometry[go].setAttribute('position', new THREE.Float32BufferAttribute(fibgeVertices[go], 3));
@@ -6075,9 +6079,15 @@ if(window.blendFibge)
       totalRotation%(Math.PI*2)*rotateDirection )
     
 
+
     fibgeGeometry[findgex].needsUpdate = true;
     fibgePositionAttribute[findgex].needsUpdate = true; // required after the first render
     fibgeColorAttribute[findgex].needsUpdate = true; // required after the first render
+
+
+fibgeFixedGeometry[findgex].dispose()
+fibgeFixedGeometry[findgex] =fibgeGeometry[findgex].clone()
+deltaSpun=totalRotation
 
 
 }
@@ -6116,7 +6126,7 @@ theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
 //console.log(Number(fibArray[ABC])+" "+Number(fibArray[(ABC+2)%3]))
  
 clearFib(false,window.fibjVal1,window.fibjVal2,window.fibjVal3);
-         deltaSpun=totalRotation;
+         //deltaSpun=totalRotation;
          lastANGLEmodulo+=Math.PI/3;
 
 //console.log(stringArray[ABC])
@@ -6166,9 +6176,9 @@ clearFib(false,window.fibjVal1,window.fibjVal2,window.fibjVal3);
     }else 
     {
   for(var br=0; br<numberOfMetaTriangles;br++)
-  {
-    // if (isFinite(uniforms.time.value)&&doRotation) fibgeMesh[br].geometry.rotateZ(//Math.PI/3.);//
-      // (totalRotation-deltaSpun)%(Math.PI*2)*rotateDirectionArray[br])
+  {fibgeMesh[br].geometry.dispose();
+     if (isFinite(uniforms.time.value)&&doRotation) fibgeMesh[br].geometry=fibgeFixedGeometry[br].clone().rotateZ(//Math.PI/3.);//
+       (totalRotation-deltaSpun)%(Math.PI*2)*rotateDirectionArray[br])
     
 
 
@@ -6178,7 +6188,7 @@ clearFib(false,window.fibjVal1,window.fibjVal2,window.fibjVal3);
       }
 
     
-            deltaSpun=totalRotation
+         //   deltaSpun=totalRotation
 
 }
 
