@@ -6167,8 +6167,8 @@ clearFib(false,window.fibjVal1,window.fibjVal2,window.fibjVal3);
     {
   for(var br=0; br<numberOfMetaTriangles;br++)
   {
-     if (isFinite(uniforms.time.value)&&doRotation) fibgeMesh[br].geometry.rotateZ(//Math.PI/3.);//
-       (totalRotation-deltaSpun)%(Math.PI*2)*rotateDirectionArray[br])
+    // if (isFinite(uniforms.time.value)&&doRotation) fibgeMesh[br].geometry.rotateZ(//Math.PI/3.);//
+      // (totalRotation-deltaSpun)%(Math.PI*2)*rotateDirectionArray[br])
     
 
 
