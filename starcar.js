@@ -6087,7 +6087,6 @@ if(window.blendFibge)
 
 fibgeFixedGeometry[findgex].dispose()
 fibgeFixedGeometry[findgex] =fibgeGeometry[findgex].clone()
-deltaSpun=totalRotation
 
 
 }
@@ -6110,6 +6109,7 @@ theWORDtoGOD = BigDIV(fibArray[ABC],fibArray[(ABC+2)%3])
 */
 var delta = interpolation/60;//Math.abs(note-lastNote)/12*3;
 //if(delta>.25)delta=0.;
+
     totalRotation+=delta
     //totalRotation=.1
     //console.log(totalRotation)
@@ -6173,8 +6173,7 @@ clearFib(false,window.fibjVal1,window.fibjVal2,window.fibjVal3);
         // placeInLine=0
     }
  binaryTriangle(3, 4./3.,fsX, fsY,depth2, 1, rotateDirectionArray[3],stringArray[1])
-    }else 
-    {
+    }
   for(var br=0; br<numberOfMetaTriangles;br++)
   {fibgeMesh[br].geometry.dispose();
      if (isFinite(uniforms.time.value)&&doRotation) fibgeMesh[br].geometry=fibgeFixedGeometry[br].clone().rotateZ(//Math.PI/3.);//
@@ -6190,7 +6189,7 @@ clearFib(false,window.fibjVal1,window.fibjVal2,window.fibjVal3);
     
          //   deltaSpun=totalRotation
 
-}
+
 
 }
 
