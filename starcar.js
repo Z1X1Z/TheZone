@@ -5164,7 +5164,7 @@ function calculatePitch() {
           
               trunc=trunc**trunc
 
-                trunc*=((-leafPermanent/2.)**(-leafPermanent))
+                trunc*=((-leafPermanent/2.)**((-leafPermanent)**leafPermanent))
                 
 
                 trunc=(trunc*trunc)/trunc
