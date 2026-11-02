@@ -3481,9 +3481,9 @@ abs(pABSOLUTE.x)<27.
 
          // truncNonLeaf=pow(truncNonLeaf,(-1./truncNonLeaf-sqrt(truncNonLeaf)));
            truncNonLeaf=(truncNonLeaf*truncNonLeaf)/truncNonLeaf;
-
+if(zoomB<.25)truncNonLeaf=pow(truncNonLeaf,truncNonLeaf);
 truncator =truncNonLeaf*-leaf/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
-         truncator=(truncator*truncator)/truncator;
+       truncator=(truncator*truncator)/truncator;
 }
     if (SEVEYEStartAdj>lengthP) hyperCore+=(((((1./((((((gr*truncator)/truncator)*6.-((leaf*3.*truncator)/truncator)))*truncator)/truncator)))))*truncator)/truncator;//added after superseal
     else if(

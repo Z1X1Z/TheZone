@@ -5160,14 +5160,20 @@ function calculatePitch() {
             // totalAMP=.25
             let totalAMPmodified = totalAMP;
             let trunc = Math.log((totalAMPmodified)**((-1./(totalAMPmodified)-1-totalAMPmodified*totalAMPmodified-(totalAMPmodified**.5)-totalAMPmodified)))
-                            trunc=(trunc*trunc)/trunc
+               
+          
+            trunc=(trunc*trunc)/trunc
+              trunc=trunc**trunc
 
                 trunc*=-leafPermanent / 2.
+                
+
                 trunc=(trunc*trunc)/trunc
+                
 
             trunc=(((trunc-trunc**.5)*trunc)/trunc)**(trunc+trunc*trunc)-(((trunc**2.-trunc)*trunc)/trunc)**(-1./trunc-(trunc**.5))
                             trunc=(trunc*trunc)/trunc
-
+                            
            // console.log(trunc)
            
             if (!isFinite(trunc)||trunc==0.)trunc = 1
@@ -6173,7 +6179,8 @@ clearFib(false,window.fibjVal1,window.fibjVal2,window.fibjVal3);
         // placeInLine=0
     }
  binaryTriangle(3, 4./3.,fsX, fsY,depth2, 1, rotateDirectionArray[3],stringArray[1])
-    }
+    }else 
+    {
   for(var br=0; br<numberOfMetaTriangles;br++)
   {fibgeMesh[br].geometry.dispose();
      if (isFinite(uniforms.time.value)&&doRotation) fibgeMesh[br].geometry=fibgeFixedGeometry[br].clone().rotateZ(//Math.PI/3.);//
@@ -6189,7 +6196,7 @@ clearFib(false,window.fibjVal1,window.fibjVal2,window.fibjVal3);
     
          //   deltaSpun=totalRotation
 
-
+}
 
 }
 
