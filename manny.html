@@ -5316,7 +5316,7 @@ abs(pABSOLUTE.x)<27.
                       truncNonLeaf=(truncNonLeaf*truncNonLeaf)/truncNonLeaf;
 
 if(lfc/zoomB<.25)truncNonLeaf=pow(truncNonLeaf,truncNonLeaf);
-truncator =truncNonLeaf*pow(-leaf,-leaf)/2.;//*100//log((lfc*lfc)/(zoomB*zoomB))
+truncator =truncNonLeaf*pow(-leaf/2.,-leaf);//*100//log((lfc*lfc)/(zoomB*zoomB))
          truncator=(truncator*truncator)/truncator;
 
 }
