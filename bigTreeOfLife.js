@@ -526,9 +526,9 @@ abs(pABSOLUTE.x)<27.
 }
 
                     //  truncNonLeaf=(truncNonLeaf*truncNonLeaf)/truncNonLeaf;
-if(zoom<.25){truncNonLeaf=Math.pow(truncNonLeaf,truncNonLeaf**(zoom**zoom));
+if(zoom<.25){truncNonLeaf=Math.pow(truncNonLeaf,truncNonLeaf**(zoom**.5));
 
-truncator =truncNonLeaf*(-leaf/2.)**((-leaf)**(zoom*zoom));}//*100//log((lfc*lfc)/(zoomB*zoomB))
+truncator =truncNonLeaf*(-leaf/2.)**((-leaf)**(zoom**(zoom**2.)));}//*100//log((lfc*lfc)/(zoomB*zoomB))
          truncator=(truncator*truncator)/truncator;
 }
 

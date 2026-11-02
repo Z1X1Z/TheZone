@@ -5315,10 +5315,13 @@ abs(pABSOLUTE.x)<27.
 
                 //      truncNonLeaf=(truncNonLeaf*truncNonLeaf)/truncNonLeaf;
 
-if(lfc/zoomB<.25){truncNonLeaf=pow(truncNonLeaf,pow(truncNonLeaf,pow(zoomB,zoomB));
+if(lfc/zoomB<.25){
+         //  truncator=(truncator*truncator)/truncator;
 
-truncator =truncNonLeaf*pow(-leaf/2.,pow(-leaf,pow(zoomB,zoomB)));//*100//log((lfc*lfc)/(zoomB*zoomB));
-}
+    truncNonLeaf=pow(truncNonLeaf,pow(truncNonLeaf,pow(zoomB,sqrt(zoomB))));
+  truncator=(truncator*truncator)/truncator;
+truncator =truncNonLeaf*pow(-leaf/2.,pow(-leaf,(pow(zoomB,zoomB*zoomB))));}
+
          truncator=(truncator*truncator)/truncator;
 
 }
