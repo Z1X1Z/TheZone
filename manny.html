@@ -5313,9 +5313,10 @@ abs(pABSOLUTE.x)<27.
            //not working on android
            //truncNonLeaf=abs(pow(abs(truncNonLeaf-sqrt(truncNonLeaf)),-abs(truncNonLeaf+truncNonLeaf*truncNonLeaf))-pow(abs((truncNonLeaf*truncNonLeaf-truncNonLeaf)),abs(-1./truncNonLeaf-sqrt(truncNonLeaf))));
 
-                      truncNonLeaf=(truncNonLeaf*truncNonLeaf)/truncNonLeaf;
+                //      truncNonLeaf=(truncNonLeaf*truncNonLeaf)/truncNonLeaf;
 
 if(lfc/zoomB<.25)truncNonLeaf=pow(truncNonLeaf,truncNonLeaf);
+
 truncator =truncNonLeaf*pow(-leaf/2.,-leaf);//*100//log((lfc*lfc)/(zoomB*zoomB))
          truncator=(truncator*truncator)/truncator;
 
