@@ -6179,7 +6179,7 @@ clearFib(false,window.fibjVal1,window.fibjVal2,window.fibjVal3);
         // placeInLine=0
     }
  binaryTriangle(3, 4./3.,fsX, fsY,depth2, 1, rotateDirectionArray[3],stringArray[1])
-    }else 
+    }//else 
     {
   for(var br=0; br<numberOfMetaTriangles;br++)
   {fibgeMesh[br].geometry.dispose();
