@@ -5163,10 +5163,11 @@ function calculatePitch() {
                
             let truncstuck = trunc
              for(var h=0.;h<1.;h+=truncstuck) 
-                trunc=trunc**(trunc**(totalAMP**totalAMP))
+                
+                trunc=trunc**(trunc**(totalAMP**(totalAMP**.5)))
                           trunc=(trunc*trunc)/trunc
 
-                trunc*=((-leafPermanent/2.)**((-leafPermanent)**(leafPermanent)**(totalAMP**totalAMP)))
+                trunc*=((-leafPermanent/2.)**((-leafPermanent)**(leafPermanent)**(totalAMP**(totalAMP*totalAMP))))
                 
 
                 trunc=(trunc*trunc)/trunc
