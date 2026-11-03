@@ -3114,8 +3114,8 @@ if(zoom<.5)
     if ((!window.touchMode || (window.shouldShowStar)) && !window.touchOnlyMode) {
 
     if (ampThresh > .0000001) {
-        // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/calculatePitch():pitch;
-        pitch = audioX.sampleRate / calculatePitch();
+        // pitch =   (totalAMP>zoomOutRatchetThreshold)? audioX.sampleRate/tone2note():pitch;
+        pitch = audioX.sampleRate / tone2note();
         const notNyquist = Math.abs(pitch - audioX.sampleRate / numberOfBins) > 2.;
         if ((!notNyquist && nyquistFilter && ampThresh > 0.) || !isFinite(pitch)) pitch = lastPitch;
 
@@ -5126,7 +5126,7 @@ function takingToLong()
     }
     else return false;
 }
-function calculatePitch() {
+function tone2note() {
         newStartTime = performance.now();
     let frameRationFull;
 
