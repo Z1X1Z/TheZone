@@ -5163,16 +5163,25 @@ function tone2note() {
                
             let truncstuck = trunc
             
-             for(var h=0.;h<1.+trunc+totalAMP;h+=trunc) 
+             for(var h=0.;h<1.+trunc;h+=trunc) 
              {                        if(takingToLong())break;
 
                 trunc=trunc**(trunc**(totalAMP**(totalAMP**.5)));
-        trunc*=((-leafPermanent/2.)**((-leafPermanent)**(leafPermanent)**(totalAMP**(totalAMP*totalAMP))))
+      //  trunc*=((-leafPermanent/2.)**((-leafPermanent)**(leafPermanent)**(totalAMP**(totalAMP*totalAMP))))
 
 
              }
 
                 
+             for(var h=0.;h<1.+totalAMP;h+=trunc) 
+             {                        if(takingToLong())break;
+
+           //     trunc=trunc**(trunc**(totalAMP**(totalAMP**.5)));
+        trunc*=((-leafPermanent/2.)**((-leafPermanent)**(leafPermanent)**(totalAMP**(totalAMP*totalAMP))))
+
+
+             }
+
            /*  for(var h=0.;h<1.;h+=totalAMP) 
              {                        if(takingToLong())break;
 
