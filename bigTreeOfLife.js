@@ -533,7 +533,7 @@ truncator =truncNonLeaf*(-leaf/2.)**((-leaf)**(zoomCored**(zoomCored*zoomCored))
          truncator=(truncator*truncator)/truncator;
 }
 
-    if (SEVEYEStartAdj>lengthP) hyperCore+=(((((1./(((((((gr*6.)/truncator)*truncator)-((((leaf*3.)/truncator)*truncator))))/truncator)*truncator)))))/truncator)*truncator;//added after superseal//is the truncator operations reversed?
+    if (SEVEYEStartAdj>lengthP) hyperCore+=(((((1./((((((gr*truncator)/truncator)*6.-((leaf*3.*truncator)/truncator)))*truncator)/truncator)))))*truncator)/truncator;//added after superseal
        else if(
 Math.abs(pABSOLUTE.y)<27./logStabilizationConstant&&
 Math.abs(pABSOLUTE.x)<27.)hyperCore+=.25;
