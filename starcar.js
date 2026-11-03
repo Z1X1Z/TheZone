@@ -5163,8 +5163,10 @@ function calculatePitch() {
                
             let truncstuck = trunc
              for(var h=0.;h<1.;h+=truncstuck) 
-                
+             {                        if(takingToLong())break;
+
                 trunc=trunc**(trunc**(totalAMP**(totalAMP**.5)))
+             }
                           trunc=(trunc*trunc)/trunc
 
                 trunc*=((-leafPermanent/2.)**((-leafPermanent)**(leafPermanent)**(totalAMP**(totalAMP*totalAMP))))
@@ -5253,10 +5255,11 @@ function calculatePitch() {
             for (n = 1; n < 111; n++)
             // for(n=1;n<111;n++)
             {
+                                if(takingToLong())break;
+
                 let plusOrMinusPowerSeries = (totalAMPmodified) ** n * Math.sign(n % 2 - .5);//x-x**2+x**3-x**4....//may have an algebraic solution
                 if (plusOrMinusPowerSeries != 0.) tAScaled += plusOrMinusPowerSeries;
                 else break;
-                if(takingToLong())break;
 
             }
 
@@ -5277,6 +5280,8 @@ function calculatePitch() {
                 //                 for(reps=0;reps<5.;reps+=1.+1./(1.-totalAMPmodified))
 
                 {
+                                            if(takingToLong())break;
+
                     tAScaled = ((tAScaled ** (1. - tAScaled) + tAScaled ** (1. + tAScaledPermanent)) / (2. - tAScaledPermanent))
                     let taEX1 = ((1. - tAScaled) * (1. + tAScaledPermanent));
                     tAScaled = tAScaled ** (Math.sign(taEX1) * (Math.abs(taEX1)) ** (
@@ -5288,7 +5293,6 @@ function calculatePitch() {
                                                 break;
                                             
 
-                        if(takingToLong())break;
 
                     //          b++
                     //    loopy++
