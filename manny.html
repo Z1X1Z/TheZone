@@ -5330,7 +5330,7 @@ truncator =truncNonLeaf*pow(-leaf/2.,pow(-leaf,(pow(zoomCored,zoomCored*zoomCore
 
 
 
-    if (SEVEYEStartAdj>lengthP) hyperCore+=(((((1./((((((gr*truncator)/truncator)*6.-((leaf*3.*truncator)/truncator)))*truncator)/truncator)))))*truncator)/truncator;//added after superseal
+    if (SEVEYEStartAdj>lengthP) hyperCore+=(((((1./(((((((gr*6.)/truncator)*truncator)-((((leaf*3.)/truncator)*truncator))))/truncator)*truncator)))))/truncator)*truncator;//added after superseal//is the truncator operations reversed?
     else if(
 abs(pABSOLUTE.y)<27./logStabilizationConstant&&
 abs(pABSOLUTE.x)<27.)hyperCore+=.25;
