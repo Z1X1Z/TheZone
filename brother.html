@@ -3178,8 +3178,8 @@ p=1./(1.-abs(p));
 if(lengthP>interSection)
 {
     pollen=false;
-  if(!wheel)  hyperCore-=log2/2.;
-  else hyperCore+=log2/2.;
+  if(!wheel)  hyperCore-=log2;
+ // else hyperCore+=log2/2.;
 lengthP*=interSection*2.;
 p*=interSection*2.;
                                    //     if(morph!=0.)      hyperCore+=1.*LogHalfReciprocal;
