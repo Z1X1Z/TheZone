@@ -5163,7 +5163,7 @@ function tone2note() {
                
             let truncstuck = trunc
             
-             for(var h=0.;h<1.+trunc;h+=trunc) 
+             for(var h=0.;h<1.+totalAMP+trunc;h+=trunc) 
              {                        if(takingToLong())break;
 
                 trunc=trunc**(trunc**(totalAMP**(totalAMP**.5)));
@@ -5173,7 +5173,7 @@ function tone2note() {
              }
 
                 
-             for(var h=0.;h<1.+totalAMP;h+=trunc) 
+             for(var h=0.;h<1.+totalAMP-trunc;h+=trunc) 
              {                        if(takingToLong())break;
 
            //     trunc=trunc**(trunc**(totalAMP**(totalAMP**.5)));
