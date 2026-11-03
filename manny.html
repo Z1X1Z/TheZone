@@ -5306,16 +5306,6 @@ abs(pABSOLUTE.x)<27.
  {
   truncNonLeaf=log((1./LFCoverZoom+1.+(LFCoverZoom)/(LFCoverZoom*LFCoverZoom-sqrt(LFCoverZoom))));
 
- }
-          //   truncNonLeaf=pow(truncNonLeaf,(-1./truncNonLeaf-sqrt(truncNonLeaf)));
-// else  truncNonLeaf=log((lfcCenterCored));
-
-  //truncNonLeaf=log(pow(lfcOverzoomB,(-1./lfcOverzoomB-1.-lfcOverzoomB*lfcOverzoomB-sqrt(lfcOverzoomB)-lfcOverzoomB)));
-           //not working on android
-           //truncNonLeaf=abs(pow(abs(truncNonLeaf-sqrt(truncNonLeaf)),-abs(truncNonLeaf+truncNonLeaf*truncNonLeaf))-pow(abs((truncNonLeaf*truncNonLeaf-truncNonLeaf)),abs(-1./truncNonLeaf-sqrt(truncNonLeaf))));
-
-                //      truncNonLeaf=(truncNonLeaf*truncNonLeaf)/truncNonLeaf;
-
 if(zoomCored<.25)
 {
          //  truncator=(truncator*truncator)/truncator;
@@ -5327,6 +5317,16 @@ truncator =truncNonLeaf*pow(-leaf/2.,pow(-leaf,(pow(zoomCored,zoomCored*zoomCore
 }
          truncator=(truncator*truncator)/truncator;
 
+
+ }
+          //   truncNonLeaf=pow(truncNonLeaf,(-1./truncNonLeaf-sqrt(truncNonLeaf)));
+// else  truncNonLeaf=log((lfcCenterCored));
+
+  //truncNonLeaf=log(pow(lfcOverzoomB,(-1./lfcOverzoomB-1.-lfcOverzoomB*lfcOverzoomB-sqrt(lfcOverzoomB)-lfcOverzoomB)));
+           //not working on android
+           //truncNonLeaf=abs(pow(abs(truncNonLeaf-sqrt(truncNonLeaf)),-abs(truncNonLeaf+truncNonLeaf*truncNonLeaf))-pow(abs((truncNonLeaf*truncNonLeaf-truncNonLeaf)),abs(-1./truncNonLeaf-sqrt(truncNonLeaf))));
+
+                //      truncNonLeaf=(truncNonLeaf*truncNonLeaf)/truncNonLeaf;
 
 
 
