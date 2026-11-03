@@ -5093,6 +5093,7 @@ bool coreChanger = true;
                   
  else break;
  float lfcCenterCored=lfc*scale;
+ float zoomCored=zoom*scale;
 bool seventhEYEthree = (seventhEYE==3.&&((jubileyes!=0.&&lengthP<1./3.)||
 (jubileyes==0.&&lengthP<twoThirds))&&zoomB<.5 
 );
@@ -5272,7 +5273,7 @@ if(pollen&&OrthoEvery==0.)
 
 float LFCoverZoom = lfc/zoom;
 float truncNonLeaf=1.;
-
+float ZoomOverLFC = zoom/lfc;
 float truncator=1.;
 if(zoomB!=0.&&lfc!=0.&&//lengthABSOLUTE<27.
 /*
@@ -5315,13 +5316,15 @@ abs(pABSOLUTE.x)<27.
 
                 //      truncNonLeaf=(truncNonLeaf*truncNonLeaf)/truncNonLeaf;
 
-if(lfc/zoomB<.25){
+if(zoomCored<.25)
+{
          //  truncator=(truncator*truncator)/truncator;
 
-    truncNonLeaf=pow(truncNonLeaf,pow(truncNonLeaf,pow(zoom,sqrt(zoom))));
+    truncNonLeaf=pow(truncNonLeaf,pow(truncNonLeaf,pow(zoomCored,sqrt(zoomCored))));
  // truncator=(truncator*truncator)/truncator;
-truncator =truncNonLeaf*pow(-leaf/2.,pow(-leaf,(pow(zoom,zoom*zoom))));}
-
+truncator =truncNonLeaf*pow(-leaf/2.,pow(-leaf,(pow(zoomCored,zoomCored*zoomCored))));}//*100//log((lfc*lfc)/(zoomB*zoomB))
+       truncator=(truncator*truncator)/truncator;
+}
          truncator=(truncator*truncator)/truncator;
 
 }

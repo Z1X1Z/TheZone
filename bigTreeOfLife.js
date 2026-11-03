@@ -314,6 +314,7 @@ loops++;coresIn++;
 }
 else break;
 let lfcCenterCored = lfc*scale;
+let zoomCored = zoom*scale;
 
 
 var seventhEYEthree = (seventhEYE==3.&&((jubileyes!=0.&&lengthP<1./3.)||
@@ -526,9 +527,9 @@ abs(pABSOLUTE.x)<27.
 }
 
                     //  truncNonLeaf=(truncNonLeaf*truncNonLeaf)/truncNonLeaf;
-if(zoom<.25){truncNonLeaf=Math.pow(truncNonLeaf,truncNonLeaf**(zoom**.5));
+if(zoomCored<.25){truncNonLeaf=Math.pow(truncNonLeaf,truncNonLeaf**(zoomCored**(zoomCored**.5)));
 
-truncator =truncNonLeaf*(-leaf/2.)**((-leaf)**(zoom**(zoom**2.)));}//*100//log((lfc*lfc)/(zoomB*zoomB))
+truncator =truncNonLeaf*(-leaf/2.)**((-leaf)**(zoomCored**(zoomCored*zoomCored)));}//*100//log((lfc*lfc)/(zoomB*zoomB))
          truncator=(truncator*truncator)/truncator;
 }
 

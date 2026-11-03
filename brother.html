@@ -3368,6 +3368,7 @@ coordsB/=SEVEYEPush;
 
  
  float lfcCenterCored=lfc*scale;
+ float zoomCored = zoom*scale;
  
 bool seventhEYEthree = (lengthP<1./3.)&&zoomB<.5;//&&lfcOverzoomB>twoThirds;
 
@@ -3431,6 +3432,7 @@ if(pollen&&!BURSTING)
 }
 
 float LFCoverZoom =     lfc/zoom;
+float ZoomOverLFC= zoom/lfc;
 float truncNonLeaf=1.;
 
 float truncator=1.;
@@ -3482,12 +3484,13 @@ abs(pABSOLUTE.x)<27.
          // truncNonLeaf=pow(truncNonLeaf,(-1./truncNonLeaf-sqrt(truncNonLeaf)));
                     //  truncNonLeaf=(truncNonLeaf*truncNonLeaf)/truncNonLeaf;
 
-if(lfc/zoomB<.25){
+if(zoomCored<.25)
+{
          //  truncator=(truncator*truncator)/truncator;
 
-    truncNonLeaf=pow(truncNonLeaf,pow(truncNonLeaf,pow(zoomB,sqrt(zoomB))));
+    truncNonLeaf=pow(truncNonLeaf,pow(truncNonLeaf,pow(zoomCored,sqrt(zoomCored))));
  // truncator=(truncator*truncator)/truncator;
-truncator =truncNonLeaf*pow(-leaf/2.,pow(-leaf,(pow(zoomB,zoomB*zoomB))));}//*100//log((lfc*lfc)/(zoomB*zoomB))
+truncator =truncNonLeaf*pow(-leaf/2.,pow(-leaf,(pow(zoomCored,zoomCored*zoomCored))));}//*100//log((lfc*lfc)/(zoomB*zoomB))
        truncator=(truncator*truncator)/truncator;
 }
     if (SEVEYEStartAdj>lengthP) hyperCore+=(((((1./((((((gr*truncator)/truncator)*6.-((leaf*3.*truncator)/truncator)))*truncator)/truncator)))))*truncator)/truncator;//added after superseal
