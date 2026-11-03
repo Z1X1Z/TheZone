@@ -5162,14 +5162,15 @@ function calculatePitch() {
             let trunc = Math.log((totalAMPmodified)**((-1./(totalAMPmodified)-1-totalAMPmodified*totalAMPmodified-(totalAMPmodified**.5)-totalAMPmodified)))
                
             let truncstuck = trunc
-             for(var h=0.;h<1.;h+=truncstuck) 
+            
+             for(var h=0.;h<-leafPermanent;h+=truncstuck) 
              {                        if(takingToLong())break;
 
                 trunc=trunc**(trunc**(totalAMP**(totalAMP**.5)))
-             }
-                          trunc=(trunc*trunc)/trunc
+                                trunc*=((-leafPermanent/2.)**((-leafPermanent)**(leafPermanent)**(totalAMP**(totalAMP*totalAMP))))
 
-                trunc*=((-leafPermanent/2.)**((-leafPermanent)**(leafPermanent)**(totalAMP**(totalAMP*totalAMP))))
+             }
+
                 
 
                 trunc=(trunc*trunc)/trunc
