@@ -866,6 +866,14 @@ radialWarp=b;
         <div class="dropdown">
           <button class="dropbtn">Clvr
           <div  id="m3" class="dropdown-content">
+
+
+              <input type="checkbox"  id="Variant0" name="t"  onclick= "
+                  key  = 'V';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                  <label for="Variant0"> Varify![.0]</label><br>
+
+
               <label for="Ngenesis">Ngenesis:[,.t]</label>
              <input type="number" id="Ngenesis" name="Ngenesis" class="num" onkeyup="
                   number = 'no number'
@@ -5980,6 +5988,7 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
        }
            if(split2)s.y=1./6.-abs(s.y);
         if(split1&&s.x!=0.)s.x=1./6.-abs(s.x);
+ if(counter == 0.) s=spin2(s,float(upCoreCycler)*PI2/gr);
 
      // if(counter>1.) return vec4(vec3(s,0.),1.);
 

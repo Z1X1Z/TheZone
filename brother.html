@@ -841,7 +841,12 @@ radialWarp=b;
           <button class="dropbtn">Clvr
           <div  id="m3" class="dropdown-content">
               
-                                  
+                     
+
+              <input type="checkbox"  id="Variant0" name="t"  onclick= "
+                  key  = 'V';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                  <label for="Variant0"> Varify![.V]</label><br>             
                           
               <a id="Chirality" name="t"  onclick= "
                   key  = '|';
@@ -1630,7 +1635,7 @@ uniform int inseyedOut;
 
     uniform bool wheel;
         uniform float mandelCloverFactor;
-
+uniform int upCoreCycler;
                                   
                                   const float twoThirds = 2./3.;
                                   const float sqrt2 = sqrt(2.);
@@ -3777,6 +3782,7 @@ s*=1.-oneOverLeafTruncated;//clvrVariant4
 s.y=syb;
 *///split in two like an orange
   s.x=log(abs(s.x))/log(base);
+ if(counter == 0.) s=spin2(s,float(upCoreCycler)*PI2/gr);
  // vec2 t=vec2(0.);
            //  s+=t-m;
            s-=m;
