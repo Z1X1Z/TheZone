@@ -347,6 +347,9 @@ oppositionalCoreFlop:{value:coreFlopConstant},
 oppositionalCoreFlopDEFAULT:{value:coreFlopConstant},
 oppositionalCoreFlopJUBILEE:{value:JubileeCoreFlop},
 
+
+upCoreCycler:{value:0},
+
 gigaLeap:{value:true},
 BlackTraction:{value:false}
 }
@@ -1259,6 +1262,11 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                     uniforms.constellation.value=!uniforms.constellation.value;
                     
                 }
+                                  else if(key == "V" && event.altKey)
+                                    {window.cycleCores=!window.cycleCores
+                                        uniforms.upCoreCycler.value=0;
+                                    }
+
     else if(key == "o" && event.ctrlKey)
     {
         omniDynamicEngaged = !omniDynamicEngaged;
@@ -1753,7 +1761,7 @@ else
         window.date = Date.now();
         window.startTimeSecondMantissaMagnified = ((date/1000.-Math.round(date)/1000.)-.5)*144000;//for orienting the dance to time
     }
-    else if (key=="b") window.cycleCores = !window.cycleCores;
+  //  else if (key=="b") window.cycleCores = !window.cycleCores;
     else if (key=="B") {
         if(BulletMine == 0) BulletMine = 1;
         else if(BulletMine==1) BulletMine = -.5;
