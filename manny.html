@@ -5318,9 +5318,10 @@ if(zoomCored<.125)
 {
          //  truncator=(truncator*truncator)/truncator;
 
-    truncNonLeaf=pow(truncNonLeaf,pow(truncNonLeaf,pow(zoomCored,sqrt(zoomCored))));
+
+    truncNonLeaf=pow(truncNonLeaf/2.,pow(pow(truncNonLeaf,leaf),pow(zoomCored,sqrt(zoomCored))));
  // truncator=(truncator*truncator)/truncator;
-truncator =truncNonLeaf*pow(-leaf/2.,pow(-leaf,(pow(zoomCored,zoomCored*zoomCored))));}//*100//log((lfc*lfc)/(zoomB*zoomB))
+truncator =truncNonLeaf*pow(-leaf/2.,pow(pow(-leaf,-truncNonLeaf),(pow(zoomCored,zoomCored*zoomCored))));}//*100//log((lfc*lfc)/(zoomB*zoomB))
        truncator=(truncator*truncator)/truncator;
 }
          truncator=(truncator*truncator)/truncator;
