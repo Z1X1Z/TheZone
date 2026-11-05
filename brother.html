@@ -3684,6 +3684,7 @@ float daisifier = 0.;
                                       m/=lfcB*2.;
                }
             }
+float veriation=float(upCoreCycler)*PI2/gr;
 
                                            vec2 sBuffer = s;
 float petalNumber=6.;
@@ -3782,7 +3783,7 @@ s*=1.-oneOverLeafTruncated;//clvrVariant4
 s.y=syb;
 *///split in two like an orange
   s.x=log(abs(s.x))/log(base);
- if(counter == 0.) s=spin2(s,float(upCoreCycler)*PI2/gr);
+ if(counter == 0.) s=spin2(s,veriation);
  // vec2 t=vec2(0.);
            //  s+=t-m;
            s-=m;

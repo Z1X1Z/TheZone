@@ -5702,7 +5702,7 @@ float daisifier = 0.;
 
                        // s/=truncator;
                        //     s*=truncator;
-
+float veriation=float(upCoreCycler)*PI2/gr;
 
                                            vec2 sBuffer = s;
 
@@ -5988,7 +5988,7 @@ else s=vec2(pow(s.x,.5)*sign(s.x),pow(s.y,2.)*sign(s.y));
        }
            if(split2)s.y=1./6.-abs(s.y);
         if(split1&&s.x!=0.)s.x=1./6.-abs(s.x);
- if(counter == 0.) s=spin2(s,float(upCoreCycler)*PI2/gr);
+ if(counter == 0.) s=spin2(s,veriation);
 
      // if(counter>1.) return vec4(vec3(s,0.),1.);
 
