@@ -5168,7 +5168,7 @@ function tone2note() {
 
                 trunc=(trunc/2)**(trunc**(-trunc)**(totalAMP**(totalAMP**.5)));
       //  trunc*=((-leafPermanent/2.)**((-leafPermanent)**(leafPermanent)**(totalAMP**(totalAMP*totalAMP))))
-
+                
 
              }
 
@@ -5189,7 +5189,7 @@ function tone2note() {
              }
 */
 
-                trunc=(trunc*trunc)/trunc
+              //  trunc=(trunc*trunc)/trunc
                 
 
             trunc=(((trunc-trunc**.5)*trunc)/trunc)**(trunc+trunc*trunc)-(((trunc**2.-trunc)*trunc)/trunc)**(-1./trunc-(trunc**.5))
