@@ -4637,7 +4637,8 @@ let fulcrum = .8
             pM[n] = new THREE.MeshBasicMaterial({ color: c });
             targets[n] = new THREE.Mesh(pG[n], pM[n]);
             targets[n].position.set(polygons[n].centerX, polygons[n].centerY, -.99);
-            if (polygons[n].caught) targets[n].rotateZ(timestamp / 1000. * Math.PI * 2.)
+            if (polygons[n].caught) 
+                targets[n].rotateZ(timestamp / 1000. * Math.PI * 2.)
             else targets[n].rotateZ(-timestamp / 1000. * Math.PI * 2.)
 
             if (!blankBackground) shaderScene.add(targets[n]);
@@ -5189,7 +5190,7 @@ function tone2note() {
              }
 */
 
-              //  trunc=(trunc*trunc)/trunc
+                trunc=(trunc*trunc)/trunc
                 
 
             trunc=(((trunc-trunc**.5)*trunc)/trunc)**(trunc+trunc*trunc)-(((trunc**2.-trunc)*trunc)/trunc)**(-1./trunc-(trunc**.5))
