@@ -1264,7 +1264,12 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                 }
                                   else if(key == "V" && event.altKey)
                                     {window.cycleCores=!window.cycleCores
-                                        uniforms.upCoreCycler.value=0;
+                                      if(!window.cycleCores)  uniforms.upCoreCycler.value=0;
+                                      else (number!="no number")
+                                      {
+                                        if(number>0)uniforms.upCoreCycler.value=number;
+                                        else uniforms.upCoreCycler.value=Math.floor(Math.random()*144441)
+                                      }
                                     }
 
     else if(key == "o" && event.ctrlKey)
