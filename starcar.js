@@ -835,7 +835,7 @@ function move() {
             let rotation = (Math.atan2(d_y, d_x) + Math.PI * 2 + Math.PI / 2.) % (Math.PI * 2);
 
             window.spinnerTwist = (-rotation / Math.PI * 12. + 12 * 12.) % 24.;
-            window.twist -= window.spinnerTwist
+            window.twist -= window.spinnerTwist*window.flip
             uniforms.twistStar.value = (window.twist / 24. + 1.) % 1. * 2. * Math.PI;
 
 

@@ -2539,6 +2539,8 @@ uniform float OrthoEvery;
 
 vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
     float deNote = mod((mod(noteFrozen+12.*12.*12.,12.)/12.*PI2+twistStar)*flipStar+PI2,PI2);
+        if(spinner) deNote += mod((note*flipStar+6.)/12.,1.)*PI2;
+
     float angle = atan(r.y,r.x)-deNote;//+atan(r.y,r.x)-atan(d.x,d.y);
     //if(volume==1.)angle +=PI;
     vec4 ret = vec4(0.);

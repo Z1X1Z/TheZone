@@ -876,11 +876,28 @@ uniforms.cloverOffset.value=document.getElementById('CloverTwist').value/6.">
                     <label for="Radial Rainbow Clover">Radial Rainbow Clover![M]</label><br>
 
 
+                    <input type="checkbox" id="spinner" name="t"  onclick= "
+                        key  = 'C';
+                        callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                     <label for="spinner">Relativity![,.C]</label><br>
+ 
                    <input type="checkbox" id="SuperSeal" name="t"  onclick= "
                        key  = 'S';
                        callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
                     <label for="SuperSeal">Super Seal?![.S]</label><br>
 
+
+                <form>
+                  <input type="radio" id="Up" name="carousel" onclick="uniforms[ 'carousel' ].value=-1;">
+                  <label for="Up">Carousel Up!</label><br>
+                  <input type="radio" id="Down" name="carousel" onclick="uniforms[ 'carousel' ].value=1;">
+                  <label for="Down">Carousel Down!</label><br>
+                  <input type="radio" id="Off" name="carousel" onclick="uniforms[ 'carousel' ].value=0;">
+                  <label for="Off">Carousel Off</label>
+
+                </form>
+                [j]
+                <br>
 
  
 <a id="whirl" name="t"  onclick= "
@@ -1637,6 +1654,10 @@ uniform int inseyedOut;
         uniform float mandelCloverFactor;
 uniform int upCoreCycler;
                                   
+    uniform bool spinner;
+        uniform float carousel;
+
+
                                   const float twoThirds = 2./3.;
                                   const float sqrt2 = sqrt(2.);
                                     const float l3 = log(3.);       
@@ -1693,6 +1714,7 @@ const float leaf = -1.3247179572447460259609088544780973407344 ;
 
 vec4 oppositeOfPitchMarker (vec2 r){//pitch pointer
     float deNote = mod((mod(noteFrozen+12.*12.*12.,12.)/12.*PI2+twistStar)*flipStar+PI2,PI2);
+    if(spinner) deNote += mod((note*flipStar+6.)/12.,1.)*PI2;
     float angle = atan(r.y,r.x)-deNote;//+atan(r.y,r.x)-atan(d.x,d.y);
     //if(volume==1.)angle +=PI;
     vec4 ret = vec4(0.);
@@ -4299,6 +4321,9 @@ if((volume!=1.&&Pointers)||(volume==1.&&!Pointers))
 oopm=oppositeOfPitchMarker(r);//seems like volume should be zero if touchmode, it's not, and causes black screen
 
 vec2 spunC=coords.yx;
+//if(continuumClover&&colorCombo<=10)spunC*=1.5;
+if (spinner){spunC*=-1.;spunC=spin2(spunC,twistStar);}
+ if(carousel!=0.){spunC*=-1.;spunC=spin2(spunC,-carousel*mod(time*rate,PI2));}
 
 vec2 background=p;
 
@@ -4308,6 +4333,7 @@ float lfc=length(constellationCoord);
 if(whirlpool!=0.) background=spin2(background,whirlpool*length(background)*.75/6.*PI/abs(zoom-lfc));
 
 
+if (spinner){background=spin2(background,-twistStar);}
 
 float xenOctaveFactor =4.;
 
