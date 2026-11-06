@@ -4334,6 +4334,7 @@ if(whirlpool!=0.) background=spin2(background,whirlpool*length(background)*.75/6
 
 
 if (spinner){background=spin2(background,-twistStar);}
+if(carousel!=0.)background=spin2(background,carousel*mod(time*rate,PI2));
 
 float xenOctaveFactor =4.;
 
