@@ -5167,7 +5167,7 @@ function tone2note() {
              for(var h=0.;h<1.+totalAMP**.5+trunc;h+=(trunc*trunc)/trunc) 
              {                        if(takingToLong())break;
 
-                trunc=((trunc*-leafPermanent)/2.)**((trunc)**(-trunc)**(totalAMP**(totalAMP**.5)));
+                trunc=((trunc)**.5/2.)**((trunc)**(-trunc)**(totalAMP**(totalAMP**.5)));
       //  trunc*=((-leafPermanent/2.)**((-leafPermanent)**(leafPermanent)**(totalAMP**(totalAMP*totalAMP))))
                 
 
@@ -5179,7 +5179,7 @@ function tone2note() {
              {                        if(takingToLong())break;
 
            //     trunc=trunc**(trunc**(totalAMP**(totalAMP**.5)));
-        trunc*=(((-leafPermanent*trunc)/2.)**((-leafPermanent)**(leafPermanent)**(totalAMP**(totalAMP*totalAMP))))
+        trunc*=(((-leafPermanent)**.5/2.)**((-leafPermanent)**(leafPermanent)**(totalAMP**(totalAMP*totalAMP))))
 
                 
              }
