@@ -3503,8 +3503,6 @@ abs(pABSOLUTE.x)<27.
 
              // truncNonLeaf=pow(truncNonLeaf-sqrt(truncNonLeaf),(truncNonLeaf+truncNonLeaf*truncNonLeaf))-pow(((truncNonLeaf*truncNonLeaf-truncNonLeaf)),(-1./truncNonLeaf-sqrt(truncNonLeaf)));
 
-
- }
  
 //  truncNonLeaf=pow(truncNonLeaf,(-1./truncNonLeaf-sqrt(truncNonLeaf)));
 
@@ -3519,6 +3517,7 @@ if(zoomCored<.125)
  // truncator=(truncator*truncator)/truncator;
 truncator =truncNonLeaf*pow(-leaf/2.,pow(pow(truncNonLeaf,leaf),(pow(zoomCored,zoomCored*zoomCored))));}//*100//log((lfc*lfc)/(zoomB*zoomB))
        truncator=(truncator*truncator)/truncator;
+}
 }
     if (SEVEYEStartAdj>lengthP) hyperCore+=((((((1./((((((gr*truncator)/truncator)*6.-((leaf*3.*truncator)/truncator)))*truncator)/truncator))*truncator)/truncator)))*truncator)/truncator;//added after superseal//is the truncator operations reversed?
     else if(
