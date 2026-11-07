@@ -5174,7 +5174,7 @@ function tone2note() {
 
              }
 
-                                            trunc=(trunc*trunc)/trunc
+                                      //      trunc=(trunc*trunc)/trunc
 
        //      for(var h=0.;h<1.+totalAMP*totalAMP-trunc;h+=(trunc*trunc)/trunc) 
              {                    //    if(takingToLong())break;
