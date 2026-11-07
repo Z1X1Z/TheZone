@@ -5163,26 +5163,28 @@ function tone2note() {
             let trunc = Math.log((totalAMPmodified)**((-1./(totalAMPmodified)-1-totalAMPmodified*totalAMPmodified-(totalAMPmodified**.5)-totalAMPmodified)))
                
             let truncstuck = trunc
-            
-             for(var h=0.;h<1.+totalAMP**.5+trunc;h+=(trunc*trunc)/trunc) 
-             {                        if(takingToLong())break;
+            var loopdido = 0
+           //  for(var h=0.;h<1.+totalAMP**.5+trunc;h+=(trunc*trunc)/trunc) 
+             {                      //  if(takingToLong())break;
+//loopdido++
 
                 trunc=((trunc)**2.)**((trunc)**(-trunc)**(totalAMP**(totalAMP**.5)));
       //  trunc*=((-leafPermanent/2.)**((-leafPermanent)**(leafPermanent)**(totalAMP**(totalAMP*totalAMP))))
                 
-h
+
              }
 
                                             trunc=(trunc*trunc)/trunc
 
-             for(var h=0.;h<1.+totalAMP*totalAMP-trunc;h+=(trunc*trunc)/trunc) 
-             {                        if(takingToLong())break;
+       //      for(var h=0.;h<1.+totalAMP*totalAMP-trunc;h+=(trunc*trunc)/trunc) 
+             {                    //    if(takingToLong())break;
 
            //     trunc=trunc**(trunc**(totalAMP**(totalAMP**.5)));
         trunc*=(((-leafPermanent)**.5)**((-leafPermanent)**(leafPermanent)**(totalAMP**(totalAMP*totalAMP))))
 
                 
              }
+         //    console.log("l:  "+loopdido)
 
            /*  for(var h=0.;h<1.;h+=totalAMP) 
              {                        if(takingToLong())break;
