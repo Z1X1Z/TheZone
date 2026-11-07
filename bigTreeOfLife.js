@@ -529,11 +529,15 @@ abs(pABSOLUTE.x)<27.
                     //  truncNonLeaf=(truncNonLeaf*truncNonLeaf)/truncNonLeaf;
 if(zoomCored<.125)
 {
+        truncNonLeaf=Math.pow(Math.sqrt(truncNonLeaf)*leaf*leaf/2.,Math.pow(Math.pow(-leaf,-truncNonLeaf),Math.pow(zoomCored,Math.sqrt(zoomCored)*zoomCored)));
+/*
     
     truncNonLeaf=Math.pow((truncNonLeaf)**2.,Math.pow(Math.pow(truncNonLeaf,-truncNonLeaf),Math.pow(zoomCored,Math.sqrt(zoomCored))));
  // truncator=(truncator*truncator)/truncator;
-truncator *=truncNonLeaf*Math.pow((-leaf)**.5,Math.pow(Math.pow(-leaf,leaf),(Math.pow(zoomCored,zoomCored*zoomCored))));}//*100//log((lfc*lfc)/(zoomB*zoomB))
+//truncator *=truncNonLeaf*Math.pow((-leaf)**.5,Math.pow(Math.pow(-leaf,leaf),(Math.pow(zoomCored,zoomCored*zoomCored))));}//*100//log((lfc*lfc)/(zoomB*zoomB))
        truncator=(truncator*truncator)/truncator;
+       */
+}
 }
 
     if (SEVEYEStartAdj>lengthP) hyperCore+=((((((1./((((((gr*truncator)/truncator)*6.-((leaf*3.*truncator)/truncator)))*truncator)/truncator))*truncator)/truncator)))*truncator)/truncator;//added after superseal//is the truncator operations reversed?

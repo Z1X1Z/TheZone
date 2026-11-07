@@ -5320,13 +5320,16 @@ if(zoomCored<.125)
 {
          //  truncator=(truncator*truncator)/truncator;
 
+    truncNonLeaf=pow(sqrt(truncNonLeaf)*leaf*leaf/2.,pow(pow(-leaf,-truncNonLeaf),pow(zoomCored,sqrt(zoomCored)*zoomCored)));
 
-
+/*
     truncNonLeaf=pow((truncNonLeaf*truncNonLeaf),pow(truncNonLeaf,pow(zoomCored,sqrt(zoomCored))));
     //truncNonLeaf=pow(truncNonLeaf/2.,pow(pow(truncNonLeaf,leaf),pow(zoomCored,sqrt(zoomCored))));//works better, but causes blackouts deep in outer core only on manny.html // truncator=(truncator*truncator)/truncator;
 truncator =truncNonLeaf*pow(sqrt(-leaf),pow(pow(truncNonLeaf,leaf),(pow(zoomCored,zoomCored*zoomCored))));}//*100//log((lfc*lfc)/(zoomB*zoomB))
+*/
+ }
 }
-         truncator=(truncator*truncator)/truncator;
+       //  truncator=(truncator*truncator)/truncator;
 
 
  }

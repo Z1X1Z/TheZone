@@ -5168,7 +5168,7 @@ function tone2note() {
              {                      //  if(takingToLong())break;
 //loopdido++
 
-                trunc=((trunc)**2.)**((trunc)**(-trunc)**(totalAMP**(totalAMP**.5)));
+                trunc=((trunc)**.5*leafPermanent**2./2.)**(((-leafPermanent)**.5)**(-trunc*trunc)**((totalAMP**.5)**(totalAMP**1.5)));
       //  trunc*=((-leafPermanent/2.)**((-leafPermanent)**(leafPermanent)**(totalAMP**(totalAMP*totalAMP))))
                 
 
@@ -5180,7 +5180,7 @@ function tone2note() {
              {                    //    if(takingToLong())break;
 
            //     trunc=trunc**(trunc**(totalAMP**(totalAMP**.5)));
-        trunc*=(((-leafPermanent)**.5)**((-leafPermanent)**(leafPermanent)**(totalAMP**(totalAMP*totalAMP))))
+       // trunc*=(((-leafPermanent)**2.*trunc**.5)**((-leafPermanent)**(leafPermanent)**(totalAMP**(totalAMP*totalAMP))))
 
                 
              }
