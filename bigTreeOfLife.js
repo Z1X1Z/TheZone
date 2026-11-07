@@ -530,9 +530,9 @@ abs(pABSOLUTE.x)<27.
 if(zoomCored<.125)
 {
     
-    truncNonLeaf=Math.pow(truncNonLeaf/2.,Math.pow(Math.pow(-leaf,-truncNonLeaf),Math.pow(zoomCored,Math.sqrt(zoomCored))));
+    truncNonLeaf=Math.pow((truncNonLeaf*-leaf)**.5,Math.pow(Math.pow(-leaf,-truncNonLeaf),Math.pow(zoomCored,Math.sqrt(zoomCored))));
  // truncator=(truncator*truncator)/truncator;
-truncator *=truncNonLeaf*Math.pow(-leaf/2.,Math.pow(Math.pow(truncNonLeaf,leaf),(Math.pow(zoomCored,zoomCored*zoomCored))));}//*100//log((lfc*lfc)/(zoomB*zoomB))
+truncator *=truncNonLeaf*Math.pow((-leaf*truncNonLeaf)**.5,Math.pow(Math.pow(truncNonLeaf,leaf),(Math.pow(zoomCored,zoomCored*zoomCored))));}//*100//log((lfc*lfc)/(zoomB*zoomB))
        truncator=(truncator*truncator)/truncator;
 }
 
