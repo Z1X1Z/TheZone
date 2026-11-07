@@ -5168,7 +5168,7 @@ function tone2note() {
              {                      //  if(takingToLong())break;
 //loopdido++
 
-                trunc=((trunc)**.5*leafPermanent**2./2.)**(((-leafPermanent)**.5)**(-trunc*trunc)**((totalAMP)**(totalAMP**1.5)));
+                trunc=((trunc)**.5*leafPermanent**2./2.)**((((-leafPermanent)**.5)**(-trunc*trunc))**(((totalAMP)**(totalAMP**1.5))));
       //  trunc*=((-leafPermanent/2.)**((-leafPermanent)**(leafPermanent)**(totalAMP**(totalAMP*totalAMP))))
                 
 
