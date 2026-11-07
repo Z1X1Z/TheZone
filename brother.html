@@ -3513,9 +3513,9 @@ if(zoomCored<.125)
 {
          //  truncator=(truncator*truncator)/truncator;
 
-    truncNonLeaf=pow(sqrt(truncNonLeaf)/2.,pow(pow(truncNonLeaf,-truncNonLeaf),pow(zoomCored,sqrt(zoomCored))));
+    truncNonLeaf=pow(sqrt(truncNonLeaf*truncNonLeaf)/2.,pow(pow(truncNonLeaf,-truncNonLeaf),pow(zoomCored,sqrt(zoomCored))));
  // truncator=(truncator*truncator)/truncator;
-truncator =truncNonLeaf*pow(sqrt(-leaf)/2.,pow(pow(-leaf,leaf),(pow(zoomCored,zoomCored*zoomCored))));}//*100//log((lfc*lfc)/(zoomB*zoomB))
+truncator =truncNonLeaf*pow(-sqrt(leaf)/2.,pow(pow(-leaf,leaf),(pow(zoomCored,zoomCored*zoomCored))));}//*100//log((lfc*lfc)/(zoomB*zoomB))
        truncator=(truncator*truncator)/truncator;
 }
 }
