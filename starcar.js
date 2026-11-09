@@ -5291,7 +5291,8 @@ function tone2note() {
                 else break;
 
             }
-
+            tAScaled=tAScaled**.5-tAScaled*tAScaled
+            
             tAScaled = (tAScaled != 0 && isFinite(tAScaled)) ? tAScaled : .25;
             let tAScaledPermanent = tAScaled;
             let incrementToleranceFeedback = tAScaled;
