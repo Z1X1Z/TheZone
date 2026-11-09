@@ -5295,6 +5295,7 @@ function tone2note() {
 
             for(var bv=0.;bv<1;bv+=tAScaled)
             {
+            tAScaled=tAScaled**tAScaled**tAScaled
            // tAScaled=Math.abs(-(tAScaled**.5)+tAScaled*tAScaled-(tAScaled-tAScaled**tAScaled))
             tAScaled=Math.abs((tAScaled**.5)-tAScaled*tAScaled+tAScaled**tAScaled-tAScaled)
            // tAScaled=Math.abs(-(tAScaled**.5)+tAScaled*tAScaled-(tAScaled-tAScaled**tAScaled))
