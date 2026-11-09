@@ -3919,7 +3919,8 @@ let fulcrum = .8
                     crownHead[gEven].geometry.dispose();
             crownHead[gEven].material.color=c;
             
-                                crownHead[gEven].geometry = new THREE.CircleGeometry((1.-logStabilizationConstant)*(crownBarDegree[(gEven+octaveSwitch)%(EldersLeg*2)]/2+1./3.)/incrementation, 24, 1);
+                                crownHead[gEven].geometry = new THREE.CircleGeometry((1.-logStabilizationConstant)*(crownBarDegree[(gEven
+                                    +octaveSwitch)%(EldersLeg*2)]/2+1./3.)/incrementation, 24, 1);
                                 crownHead[gEven].position.set(xBoostHead, yBoostHead, -.99);
      crownHead[gEven].needsUpdate=true;
 
@@ -5198,16 +5199,19 @@ function tone2note() {
 
             trunc=(((trunc-trunc**.5)*trunc)/trunc)**(trunc+trunc*trunc)-(((trunc**2.-trunc)*trunc)/trunc)**(-1./trunc-(trunc**.5))
                             trunc=(trunc*trunc)/trunc
-                            
            // console.log(trunc)
            
             if (!isFinite(trunc)||trunc==0.)trunc = 1
             //totalAMPmodified=(totalAMPmodified/((-leafPermanent)/))///preTrunc)*preTrunc));
-
-                                                           totalAMPmodified=(totalAMPmodified*trunc)/trunc
                                                            totalAMPmodified=(totalAMPmodified/trunc)*trunc
 
+                                                           totalAMPmodified=(totalAMPmodified*trunc)/trunc
+
             totalAMPmodified = (((totalAMPmodified * (-(leafPermanent / trunc) * trunc))))
+
+                                                           totalAMPmodified=(totalAMPmodified/trunc)*trunc
+                                                           totalAMPmodified=(totalAMPmodified*trunc)/trunc
+
             if(totalAMPmodified>0&&isFinite(totalAMPmodified))totalAMPmodified=totalAMP
 
             var tamStuck = totalAMPmodified;//(totalAMPmodified/trunc)*trunc ;
