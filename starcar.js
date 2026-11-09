@@ -5291,7 +5291,13 @@ function tone2note() {
                 else break;
 
             }
-            tAScaled=tAScaled**.5-tAScaled*tAScaled
+            //var taLocked = tAScaled;
+
+            for(var bv=0.;bv<1;bv+=tAScaled)
+            {
+            tAScaled=(tAScaled**.5-tAScaled*tAScaled)
+            tAScaled=tAScaled**tAScaled**tAScaled
+            }
             
             tAScaled = (tAScaled != 0 && isFinite(tAScaled)) ? tAScaled : .25;
             let tAScaledPermanent = tAScaled;
