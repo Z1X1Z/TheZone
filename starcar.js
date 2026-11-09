@@ -5414,8 +5414,13 @@ function tone2note() {
             //  tolerance=(tolerance/trunc)*trunc
          var metas = 0.
          
+          tolerance = (tolerance * trunc) / trunc
+          tolerance = (tolerance / trunc) * trunc
+          
             tolerance = (tolerance + plusOrMinusPowerSeriesBUFFER) ** (.75 + (totalAMPmodified + tAScaledPermanent + tolerance - plusOrMinusPowerSeriesNorm));
 
+            tolerance = (tolerance * trunc) / trunc
+          tolerance = (tolerance / trunc) * trunc
             var tolStuck = (tolerance);
 if(isFinite(tolStuck)&&isFinite(taTRUNC)&&isFinite(tolStuck)&&tolStuck>0)
 for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+taTRUNC+tolStuck;metaloops+=(tolStuck/trunc)*trunc)if(metas<20)
