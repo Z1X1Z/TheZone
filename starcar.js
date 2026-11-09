@@ -5203,19 +5203,22 @@ function tone2note() {
            
             if (!isFinite(trunc)||trunc==0.)trunc = 1
             //totalAMPmodified=(totalAMPmodified/((-leafPermanent)/))///preTrunc)*preTrunc));
-                                                           totalAMPmodified=(totalAMPmodified/trunc)*trunc
 
                                                            totalAMPmodified=(totalAMPmodified*trunc)/trunc
+                                                           totalAMPmodified=(totalAMPmodified/trunc)*trunc
 
             totalAMPmodified = (((totalAMPmodified * (-(leafPermanent / trunc) * trunc))))
+            
+                                                           totalAMPmodified=(totalAMPmodified*totalAMPmodified)/totalAMPmodified
 
-                                                           totalAMPmodified=(totalAMPmodified/trunc)*trunc
                                                            totalAMPmodified=(totalAMPmodified*trunc)/trunc
+                                                           totalAMPmodified=(totalAMPmodified/trunc)*trunc
 
             if(totalAMPmodified>0&&isFinite(totalAMPmodified))totalAMPmodified=totalAMP
 
             var tamStuck = totalAMPmodified;//(totalAMPmodified/trunc)*trunc ;
-            
+                                      
+
         for(var taloop = 0.; taloop<3.5+(totalAMP/trunc)*trunc;taloop+=tamStuck+totalAMPmodified)   
             {
                                 if(takingToLong())break;
