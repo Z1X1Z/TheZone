@@ -5415,7 +5415,7 @@ function tone2note() {
          var metas = 0.
          
             tolerance = (tolerance + plusOrMinusPowerSeriesBUFFER) ** (.75 + (totalAMPmodified + tAScaledPermanent + tolerance - plusOrMinusPowerSeriesNorm));
-             
+
             var tolStuck = (tolerance);
 if(isFinite(tolStuck)&&isFinite(taTRUNC)&&isFinite(tolStuck)&&tolStuck>0)
 for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+taTRUNC+tolStuck;metaloops+=(tolStuck/trunc)*trunc)if(metas<20)
@@ -5424,14 +5424,21 @@ if(takingToLong())break;
 
     metas++
     
-    
+
+          tolerance = (tolerance * trunc) / trunc
+
             tolerance /= (-leafPermanent / trunc) * trunc;//makes over and under stable and greatly enhances accuracy
             //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMPmodified+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
-          //  tolerance = (tolerance / trunc) * trunc
-    tolerance = (tolerance * trunc) / trunc
+                            //       
+
+          tolerance = (tolerance / trunc) * trunc
+
+
 
             tolerance *= 2.;
+
                             tolerance=(tolerance*tolerance)/tolerance
+
 
             //                        tolerance=(tolerance/trunc)*trunc
 
