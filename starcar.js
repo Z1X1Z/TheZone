@@ -5327,6 +5327,11 @@ function tone2note() {
                     //    loopy++
                 }
 
+                                        //                   totalAMPmodified=(totalAMPmodified*totalAMPmodified)/totalAMPmodified
+
+                                                   //        totalAMPmodified=(totalAMPmodified*trunc)/trunc
+
+
             tAScaled = (tAScaled != 0 && isFinite(tAScaled)) ? tAScaled : 1;
 
             //   console.log(loopy) 
@@ -5408,8 +5413,10 @@ function tone2note() {
 
             //  tolerance=(tolerance/trunc)*trunc
          var metas = 0.
+         
             tolerance = (tolerance + plusOrMinusPowerSeriesBUFFER) ** (.75 + (totalAMPmodified + tAScaledPermanent + tolerance - plusOrMinusPowerSeriesNorm));
-                var tolStuck = (tolerance);
+             
+            var tolStuck = (tolerance);
 if(isFinite(tolStuck)&&isFinite(taTRUNC)&&isFinite(tolStuck)&&tolStuck>0)
 for(var metaloops = 0.;metaloops<2.+totalAMPmodified+totalAMPtrunc+taTRUNC+tolStuck;metaloops+=(tolStuck/trunc)*trunc)if(metas<20)
 {
@@ -5417,11 +5424,14 @@ if(takingToLong())break;
 
     metas++
     
+    
             tolerance /= (-leafPermanent / trunc) * trunc;//makes over and under stable and greatly enhances accuracy
             //      tolerance=(tolerance-plusOrMinusPowerSeries)**(.5+(totalAMPmodified+ tAScaledPermanent+tolerance+plusOrMinusPowerSeriesBUFFER));
-            tolerance = (tolerance / trunc) * trunc
-   
+          //  tolerance = (tolerance / trunc) * trunc
+    tolerance = (tolerance * trunc) / trunc
+
             tolerance *= 2.;
+                            tolerance=(tolerance*tolerance)/tolerance
 
             //                        tolerance=(tolerance/trunc)*trunc
 
@@ -5689,7 +5699,9 @@ if(isFinite(tolerance)&&tolerance>0.)
                     else break;
 
                          if(!isFinite(tolerance))break;
-                                                                                          tolerance=(tolerance/trunc)*trunc
+                         
+                                                    tolerance=(tolerance/trunc)*trunc
+
            // tolerance*=totalAMP
 
                     //            tolerance=(tolerance/trunc)*trunc
