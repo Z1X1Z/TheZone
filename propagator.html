@@ -86,7 +86,16 @@ window.OLDmodeActivation=new Map();
 
 
 
-var copyEdited=bigBlockOfText
+         document.getElementById("AlreadyModesTEXT").innerText = bigBlockOfText
+         console.log("renewed")
+        }
+        function refresh()
+        {
+ renewCurrentModes();
+                let modesTOadd = document.getElementById("NewModesTEXTAREA");
+//document.getElementById("choices").innerHTML=""
+    
+var copyEdited=modesTOadd
 for (var u =0; u<copyEdited.length;u++)
 {
 if (copyEdited[u]=="\'"||copyEdited[u]=="\"")
@@ -97,16 +106,7 @@ if (copyEdited[u]=="\'"||copyEdited[u]=="\"")
 }
 }
 
-bigBlockOfText=copyEdited
-         document.getElementById("AlreadyModesTEXT").innerText = bigBlockOfText
-         console.log("renewed")
-        }
-        function refresh()
-        {
- renewCurrentModes();
-                let modesTOadd = document.getElementById("NewModesTEXTAREA");
-//document.getElementById("choices").innerHTML=""
-    
+modesTOadd=copyEdited;
      window.namesANDcombos = modesTOadd.value.split("木")
     var newModeName = ""
   var tableOfNameConflicts = '<table style="width:100%">'
@@ -491,7 +491,8 @@ if (confirm("You are going to add the selected modes! This is PERMANENT."))
        let NEWisSelected = window.modeActivation.get(window.namesANDcombos[p])
        let OLDisSelected = window.OLDmodeActivation.get(new2old.get(window.namesANDcombos[p]))
        console.log("sort: "+sort)
-
+       console.log(OLDmodeActivation)
+console.log(OLDisSelected)
        if(NEWisSelected)
        {
        if (sort=="none")
@@ -503,8 +504,8 @@ if (confirm("You are going to add the selected modes! This is PERMANENT."))
        else if (sort=="name")
        {
         console.log("OLD" + OLDisSelected)
-        if(typeof OLDisSelected !="undefined")
-         if (!OLDisSelected&&NEWisSelected);
+       
+         if (!OLDisSelected&&NEWisSelected)
                    {
                    for(var o = 0; o<window.namesOfConfigs.length;o++)
                    {
@@ -547,7 +548,8 @@ if (confirm("You are going to add the selected modes! This is PERMANENT."))
                   localStorage.setItem("configNames",localStorage.getItem("configNames")+","+window.namesANDcombos[p])
 
                 }
-              }
+                
+              
               
                   
         else if (OLDisSelected&&NEWisSelected)
@@ -556,7 +558,8 @@ if (confirm("You are going to add the selected modes! This is PERMANENT."))
                 localStorage.setItem("configNames",localStorage.getItem("configNames")+",+"+window.namesANDcombos[p])
 
         }
-
+      }
+    
       
        else if (sort=="combo")
        {
@@ -567,7 +570,6 @@ if (confirm("You are going to add the selected modes! This is PERMANENT."))
        }
 
       }
-    
   }
                     var filteredModes = [...new Set(localStorage.getItem("configNames").split(","))];
                   
