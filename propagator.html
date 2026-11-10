@@ -1,0 +1,581 @@
+<?php header('Cache-Control: max-age=31536000');header('Cache-Control: public'); ?>
+<!doctype html>
+
+<html lang="en">
+<head>
+<title>Propagate</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+  <meta charset="utf-8">
+<meta name="author" content="Xevin" >
+<link rel="stylesheet" href="styles2.css">
+</head>
+<body style="user-select: none;">
+
+<textarea id="NewModesTEXTAREA" 
+ cols="50" rows="10" style="
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+"></textarea>
+    <button onClick=" renewCurrentModes();refresh()" style="margin-left:12.5%;width:75%;font-size:20px;">Refresh!</button>
+
+<p>
+  
+<div style="font-size:24px; color:greenyellow;">No Conflict</div>
+
+
+    <div id="noConflict" style="width:100%;"></div>
+      <div style="font-size:24px;color:greenyellow;">New Combo </div>
+
+
+    <div id="comboConflict" style="width:100%;"></div>
+      <div style="font-size:24px;color:greenyellow;">New Name</div>
+    <div id="nameConflict" style="width:100%;"></div>
+
+<!--
+<div style="font-size:24px; color:greenyellow;">Brand New</div>
+
+
+    <div id="noConflict" style="width:100%;"></div>
+      <div style="font-size:24px;color:greenyellow;">Conflicting Names</div>
+
+
+    <div id="comboConflict" style="width:100%;"></div>
+      <div style="font-size:24px;color:greenyellow;">Matching Combo</div>
+    <div id="nameConflict" style="width:100%;"></div>
+
+<div style="font-size:24px; color:greenyellow;"></div>
+-->
+
+<div id="AlreadyModesTEXT" style="    color:orange;"></div>
+
+<button onClick='
+var copyEdited = document.getElementById("AlreadyModesTEXT").innerText;
+navigator.clipboard.writeText(copyEdited) '>Copy Current Named Modes</button>
+
+
+    <script>
+var highlightCOLOR="yellow";
+var startingColor=document.body.style.color;
+function makeSelection(element, setColumn=false, allSelected=false)
+      {
+                console.log(localStorage.getItem("configNames"))
+
+        if(element.style.color!=highlightCOLOR||(setColumn&&!allSelected)) element.style="color:"+highlightCOLOR+";"
+else   element.style="color:"+startingColor+";"
+      }
+      function  renewCurrentModes(){
+window.branch=new Map();
+window.new2old=new Map();
+
+window.modeActivation=new Map();
+window.OLDmodeActivation=new Map();
+        window.namesOfConfigs = localStorage.getItem('configNames').split(',')
+        console.log("HERE")
+ window.bigBlockOfText = ""
+         for(var v = 0; v<namesOfConfigs.length;v++)
+         {
+       //  if(localStorage.getItem(namesOfConfigs[v])!=null)
+         bigBlockOfText+=namesOfConfigs[v]+"木"+localStorage.getItem(namesOfConfigs[v])+"木"
+         window.OLDmodeActivation.set(namesOfConfigs[v],false);
+
+         }
+
+
+
+var copyEdited=bigBlockOfText
+for (var u =0; u<copyEdited.length;u++)
+{
+if (copyEdited[u]=="\'"||copyEdited[u]=="\"")
+{   var copyBuffer = copyEdited
+    if(u>0)copyBuffer=copyEdited.slice(0,u)
+    copyEdited=copyBuffer+"\\"+copyEdited[u]+copyEdited.slice(u+1,copyEdited.length)
+  u++
+}
+}
+
+bigBlockOfText=copyEdited
+         document.getElementById("AlreadyModesTEXT").innerText = bigBlockOfText
+         console.log("renewed")
+        }
+        function refresh()
+        {
+ renewCurrentModes();
+                let modesTOadd = document.getElementById("NewModesTEXTAREA");
+//document.getElementById("choices").innerHTML=""
+    
+     window.namesANDcombos = modesTOadd.value.split("木")
+    var newModeName = ""
+  var tableOfNameConflicts = '<table style="width:100%">'
+  var tableWithoutConflicts = '<table style="width:100%">'
+  var tableConflictingCombos = '<table style="width:100%">'
+
+
+   //   document.getElementById("choices").innerHTML+='<table style="width:100%">'
+    tableOfNameConflicts+='<tr>'
+    tableWithoutConflicts+='<tr>'
+    tableConflictingCombos+='<tr>'
+      
+var listOfChanges = [];
+var listOfChangesIndex = [];
+var listOfNamesChanged = [];
+var withoutConflictIndex = [];
+var conflictingCombosIndex = [];
+var correctedLIST = []
+console.log("1")
+ for(var b = 0; b<namesANDcombos.length-1;b+=2){//console.log(namesANDcombos[b])
+      var quotesOnlyDifference = 0
+
+
+for(var c = 0.;c<namesOfConfigs.length; c++)
+{
+  var pickedBin = false;
+var procCount= 0;
+     quotesOnlyDifference = 0
+     var y = 0;
+while( y<namesANDcombos[b+1].length|| y<localStorage.getItem(namesOfConfigs[c]).length)
+   {
+    if(namesANDcombos[b+1][y]=="\\"){
+procCount++    
+  y++;
+    }
+   else if (namesANDcombos[b+1][y]==localStorage.getItem(namesOfConfigs[c])[y])quotesOnlyDifference++
+   
+y++
+  }
+  var same = namesANDcombos[b+1].length-procCount==localStorage.getItem(namesOfConfigs[c]).length;
+  if(namesANDcombos[b]==namesOfConfigs[c])
+  
+ // if(namesANDcombos[b+1]==localStorage.getItem(namesOfConfigs[c])&&(namesANDcombos[b])==(namesOfConfigs[c]))break;
+// else
+if((same||namesANDcombos[b+1]==localStorage.getItem(namesOfConfigs[c]))&&namesANDcombos[b]==namesOfConfigs[c])//&&quotesOnlyDifference!=0)
+{
+      window.branch.set(namesANDcombos[b],"identical")
+
+  pickedBin=true;
+  
+  break;
+}
+ if((namesANDcombos[b]==namesOfConfigs[c]&& (namesANDcombos[b+1]==localStorage.getItem(namesOfConfigs[c]))))
+{
+    window.branch.set(namesANDcombos[b],"identical")
+
+  pickedBin=true;
+  break;
+}
+
+  else if((namesANDcombos[b+1]==localStorage.getItem(namesOfConfigs[c]||same)
+ )
+&&namesANDcombos[b]!=namesOfConfigs[c])
+{
+  pickedBin=true;
+  listOfNamesChanged.push(namesOfConfigs[c])
+window.branch.set(namesANDcombos[b],"name")
+window.new2old.set(namesANDcombos[b],String(namesOfConfigs[c]))
+        correctedLIST.push(namesANDcombos[b])
+
+  //  var decision2make = document.createElement("button");
+  //  decision2make.innerHTML = namesANDcombos[b]
+        listOfChanges.push(String(namesANDcombos[b]));
+        listOfChangesIndex.push(b);
+        break;
+}
+ else if((!same||namesANDcombos[b+1]!=localStorage.getItem(namesOfConfigs[c]))&&(namesANDcombos[b])==(namesOfConfigs[c])
+
+)
+
+{pickedBin=true;
+  window.branch.set(namesANDcombos[b],"combo")
+
+  conflictingCombosIndex.push(b);
+  break;
+  
+}
+
+
+
+}
+if(!pickedBin
+)
+{
+    window.branch.set(namesANDcombos[b],"none")
+
+          withoutConflictIndex.push(b);
+        //  break;
+}
+}
+for (var k = 0; k<namesANDcombos.length-1; k+=2)
+      {window.modeActivation.set(namesANDcombos[k],false);
+}
+//document.getElementById
+//document.getElementById("choices").innerHTML=' <th>Current</th><th>New</th> <th>Both</th></tr><tr id = "modename"></tr><tr><td>Eve</td><td>Jackson</td><td>94</td></tr><tr><td>John</td><td>Doe</td><td>80</td></tr></table>'
+           tableOfNameConflicts+='<th class = "title" id=\"New Name\"><b>New Name</b></th>'
+      tableOfNameConflicts+='<th class = "title" id=\"Combo\"><b>Combo</b></th>'
+tableOfNameConflicts+='<th class = "title" id=\"Old Name\"><b>Keep Current Name</b></th>'
+    //  tableOfNameConflicts+='<th id=\"Both\">Both</th>'
+    tableOfNameConflicts+='</tr>'
+
+    tableWithoutConflicts+='<th class = "title" id=\"New Namewoc\"><b>New Name</b></th>'
+      tableWithoutConflicts+='<th class = "title" id=\"Combowoc\"><b>Combo</b></th>'
+    //  tableWithoutConflicts+='<th id=\"Both\">Both</th>'
+    tableWithoutConflicts+='</tr>'
+      for (let e = 0.; e<withoutConflictIndex.length;e++)
+{
+                  var nameofmode =namesANDcombos[withoutConflictIndex[e]]
+            tableWithoutConflicts+='<tr>'
+
+          tableWithoutConflicts+='<th   id=\"'+nameofmode+'0'+String(e)+'\">'+ String(namesANDcombos[withoutConflictIndex[e]])+'</th>'
+          tableWithoutConflicts+='<th id=\"'+nameofmode+'1'+String(e)+'\">'+ String(namesANDcombos[withoutConflictIndex[e]+1])+'</th>'
+        tableOfNameConflicts+='</tr>'
+
+
+}
+
+
+
+    tableConflictingCombos+='<th class = "title" id=\"New Namecc\"><b>New Name</b></th>'
+      tableConflictingCombos+='<th class = "title" id=\"Combocc\"><b>Combo</b></th>'
+      
+    //  tableConflictingCombos+='<th id=\"Both\">Both</th>'
+    tableConflictingCombos+='</tr>'
+      for (let e = 0.; e<conflictingCombosIndex.length;e++)
+{
+                    var nameofmode =namesANDcombos[conflictingCombosIndex[e]]
+
+  
+            tableConflictingCombos+='<tr>'
+
+          tableConflictingCombos+='<th id=\"'+nameofmode+"0"+String(e)+'\">'+"+"+String(namesANDcombos[conflictingCombosIndex[e]])+'</th>'
+          tableConflictingCombos+='<th id=\"'+nameofmode+"1"+String(e)+'\">'+ String(namesANDcombos[conflictingCombosIndex[e]+1])+'</th>'
+        tableOfNameConflicts+='</tr>'
+
+
+}
+
+
+console.log("2")
+
+
+  for (let e = 0.; e<listOfChanges.length;e++)
+  {
+        tableOfNameConflicts+='<tr>'
+            var nameofmode =correctedLIST[e]
+                        var comboString =localStorage.getItem(listOfNamesChanged[e])
+
+        tableOfNameConflicts+='<th id=\"'+nameofmode+'2'+String(e)+'\">'+"+"+  String(listOfChanges[e]) +'</th>'
+             nameofmode =listOfNamesChanged[e]
+
+  
+        let wrappedCombo = "";
+        var wrapSize = 12;
+            var wrapTimes = 0.
+
+        var lpd = 0;
+        while(lpd<comboString.length)
+        {
+             wrappedCombo+= comboString[lpd]
+        if(lpd%wrapSize==wrapSize-1)wrappedCombo+="<br>"
+        lpd++
+        }
+        tableOfNameConflicts+='<th id=\"'+nameofmode+'1'+String(e)+'\">'+ wrappedCombo+'</th>'
+
+         wrappedCombo = "";
+         lpd = 0;
+         /*
+        while(lpd<comboString.length)
+        {
+             wrappedCombo+= namesANDcombos[listOfChangesIndex[e]+1][lpd]
+        if(lpd%wrapSize==wrapSize-1)wrappedCombo+="<br>"
+        lpd++
+        }*/
+       // tableOfNameConflicts+='<th id=\"'+nameofmode+'2'+String(e)+'\">'+ wrappedCombo+'</th>'
+   
+
+        tableOfNameConflicts+='<th id=\"'+nameofmode+'0'+String(e)+'\">'+ String(listOfNamesChanged[e])+'</th>'
+
+       
+        tableOfNameConflicts+='</tr>'
+
+  //  tableOfNameConflicts+='<th id=\"'+localStorage.getItem(String(namesOfConfigs[e]))+'1\">'+  localStorage.getItem(String(namesOfConfigs[e])) +':</th>'
+  }
+
+
+
+    tableOfNameConflicts+='</table>'
+    tableWithoutConflicts+='</table>'
+    tableConflictingCombos+='</table>'
+
+    document.getElementById("nameConflict").innerHTML=tableOfNameConflicts
+    document.getElementById("noConflict").innerHTML=tableWithoutConflicts
+    document.getElementById("comboConflict").innerHTML=tableConflictingCombos
+
+
+  var arrayFixer
+
+    function  selectALL(column,list,lister=false,abbreviatedLength=list.length, TYPEactivation=window.modeActivation){
+      var allSelected = 0;
+      var openedList =(e=-1,list1=list,list2=lister)=>{
+        if(e==-1)
+        {
+      if (list2) return list2;
+         else return list;
+        }
+       var abbreviatedLength=openedList().length
+       console.log(abbreviatedLength)
+    if (list2) return list1[list2[e]];
+    else return list1[e];
+  } ;
+      for (let e = 0.; e<abbreviatedLength;e++)
+      {
+          var nameofmode =openedList(e);
+          var element=document.getElementById(nameofmode+String(column)+String(e));
+          if(element.style.color==highlightCOLOR)allSelected++
+      }
+      
+            if(allSelected==abbreviatedLength)allSelected=true;
+              else allSelected=false;
+
+
+
+        for (let e = 0.; e<abbreviatedLength;e++)
+        {
+            var nameofmode =openedList(e);
+            var element=document.getElementById(nameofmode+String(column)+String(e));
+              makeSelection(  (element),true,allSelected)
+              TYPEactivation.set(nameofmode,!TYPEactivation.get(nameofmode));
+
+          }
+  }
+
+
+  for (let e = 0.; e<listOfChanges.length;e++)
+  {
+            var nameofmode =listOfNamesChanged[e];
+
+    document.getElementById(nameofmode+"0"+String(e)).addEventListener('pointerdown', function(){
+//this.style="color:green;"  
+makeSelection(this)
+window.OLDmodeActivation.set(listOfNamesChanged[e],!window.OLDmodeActivation.get(listOfNamesChanged[e]));
+          })
+/*
+  document.getElementById(nameofmode+"1"+String(e)).addEventListener('pointerdown', function(e){
+this.style="color:red;"    })
+*/
+         //  document.getElementById(nameofmode+"2"+String(e)).addEventListener('pointerdown', function(e){
+//this.style="color:red;"    })
+             nameofmode =correctedLIST[e];
+
+      document.getElementById(nameofmode+"2"+String(e)).addEventListener('pointerdown', function(){
+makeSelection(this)
+           window.modeActivation.set(correctedLIST[e],!window.modeActivation.get(correctedLIST[e]));
+
+          })
+
+
+
+      }
+
+
+
+    document.getElementById("Old Name").addEventListener('pointerdown', function(){
+selectALL(0,listOfNamesChanged,false,listOfNamesChanged.length,window.OLDmodeActivation) 
+   })
+        
+/*
+    document.getElementById("Combo").addEventListener('pointerdown', function(e){
+selectALL(1) 
+   })
+*/
+        
+    document.getElementById("New Name").addEventListener('pointerdown', function(){
+   
+      
+selectALL(2,correctedLIST,false,listOfNamesChanged.length)   
+})
+
+
+  for (let e = 0.; e<conflictingCombosIndex.length;e++)
+  {
+
+             var nameofmode =namesANDcombos[conflictingCombosIndex[e]];
+    document.getElementById(nameofmode+"0"+String(e)).addEventListener('pointerdown', function(){
+makeSelection(this)
+
+           window.modeActivation.set(nameofmode,!window.modeActivation.get(nameofmode));
+})
+
+ /* document.getElementById(nameofmode+"1"+String(e)).addEventListener('pointerdown', function(e){
+this.style="color:red;"    })
+
+*/
+
+/*
+    document.getElementById("Combocc").addEventListener('pointerdown', function(e){
+selectCC(1,columNAME) 
+   })
+*/
+
+
+         //  document.getElementById(nameofmode+"2"+String(e)).addEventListener('pointerdown', function(e){
+//this.style="color:red;"    })
+  }
+
+
+    document.getElementById("New Namecc").addEventListener('pointerdown', function(){
+selectALL(0,namesANDcombos,conflictingCombosIndex,conflictingCombosIndex.length)  
+
+})
+        
+      
+  for (let e = 0.; e<withoutConflictIndex.length;e++)
+  {
+
+             var nameofmode =namesANDcombos[withoutConflictIndex[e]];
+    document.getElementById(nameofmode+"0"+String(e)).addEventListener('pointerdown', function(){
+  makeSelection(this)
+
+           window.modeActivation.set(nameofmode,!window.modeActivation.get(nameofmode));
+  })
+  /*document.getElementById(nameofmode+"1"+String(e)).addEventListener('pointerdown', function(e){
+this.style="color:red;"    })
+*/
+         //  document.getElementById(nameofmode+"2"+String(e)).addEventListener('pointerdown', function(e){
+//this.style="color:red;"    })
+  }
+
+
+var columNAME=namesANDcombos
+    document.getElementById("New Namewoc").addEventListener('pointerdown', function(e){
+selectALL(0,columNAME,withoutConflictIndex,withoutConflictIndex.length)   
+
+ })
+        /*
+
+    document.getElementById("Combowoc").addEventListener('pointerdown', function(e){
+selectWOC(1,columNAME) 
+    })
+*/
+
+}
+
+
+        
+    
+  refresh()
+        </script>
+        <div style="text-align: right;">
+          
+        <button onClick='
+if (confirm("You are goinng to delete all your modes!")
+&&document.getElementById("deleteConfirmation").value =="delete") 
+ localStorage.clear()
+ else console.log("Auto-DESTRUCT aborted")'>
+ Delete All Modes</button>
+<input id="deleteConfirmation"></input>Type delete into the box to enable auto-destruct
+
+</div>
+❤︎ ❤
+<button onClick='
+if (confirm("You are going to add the selected modes! This is PERMANENT."))
+{
+     for(var p=0; p<window.namesANDcombos.length-1;p+=2) 
+  {
+        console.log("modeBeingADDED :" +window.namesANDcombos[p])
+
+    console.log(window.branch.get(window.namesANDcombos[p]))
+    console.log(    window.modeActivation.get(window.namesANDcombos[p]))
+       let sort = window.branch.get(window.namesANDcombos[p]);
+       let NEWisSelected = window.modeActivation.get(window.namesANDcombos[p])
+       let OLDisSelected = window.OLDmodeActivation.get(new2old.get(window.namesANDcombos[p]))
+       console.log("sort: "+sort)
+
+       if(NEWisSelected)
+       {
+       if (sort=="none")
+       {
+        localStorage.setItem(window.namesANDcombos[p],window.namesANDcombos[p+1])
+        localStorage.setItem("configNames",localStorage.getItem("configNames")+","+window.namesANDcombos[p])
+
+       }
+       else if (sort=="name")
+       {
+        console.log("OLD" + OLDisSelected)
+        if(typeof OLDisSelected !="undefined")
+         if (!OLDisSelected&&NEWisSelected);
+                   {
+                   for(var o = 0; o<window.namesOfConfigs.length;o++)
+                   {
+                      let comboy = localStorage.getItem(window.namesOfConfigs[o]);
+                      for(var oo = 0; oo<window.namesOfConfigs.length;oo++)
+                      {
+                          if(comboy[oo]=="\u0028")
+                          {
+                          var maybeIt = (comboy.slice(o,window.namesOfConfigs[oo].length))
+                            if(maybeIt==window.namesOfConfigs[o])
+                          {
+                              let newCombo = comboy.slice(0,o)+window.namesANDcombos[p]+ comboy.slice(o+window.namesOfConfigs[oo].length)
+                          
+                          }
+                            }
+                      }
+                  }
+                  console.log("WKEJRWEL:KJRWE:LRKJJWE")
+                  localStorage.removeItem( window.branch.get(window.namesANDcombos[p]))
+                  var brokenUPnames = localStorage.getItem("configNames").split(",")
+                  var indexToRemove = brokenUPnames.indexOf(new2old.get(window.namesANDcombos[p]))
+                  brokenUPnames.splice(indexToRemove,1)
+                  console.log(brokenUPnames)
+               /*   for (let bun = 0;bun<brokenUPnames.length;bun++)
+                  if (brokenUPnames[bun]== window.new2old.get(window.namesANDcombos[p]))
+                  {
+                    console.log("inloop")
+                                        console.log(brokenUPnames)
+
+                    brokenUPnames=brokenUPnames.splice(bun,bun)
+                    console.log(brokenUPnames)
+                    console.log(bun)
+                    break;
+                  }
+                  */
+                   localStorage.setItem("configNames",brokenUPnames.join(","))
+
+                  localStorage.removeItem( window.branch.get(window.namesANDcombos[p]))
+                  localStorage.setItem(window.namesANDcombos[p],window.namesANDcombos[p+1],)
+                  localStorage.setItem("configNames",localStorage.getItem("configNames")+","+window.namesANDcombos[p])
+
+                }
+              }
+              
+                  
+        else if (OLDisSelected&&NEWisSelected)
+        {
+        localStorage.setItem("+"+window.namesANDcombos[p],window.namesANDcombos[p+1]);
+                localStorage.setItem("configNames",localStorage.getItem("configNames")+",+"+window.namesANDcombos[p])
+
+        }
+
+      
+       else if (sort=="combo")
+       {
+        console.log("here")
+        localStorage.setItem("+"+window.namesANDcombos[p],window.namesANDcombos[p+1])
+        localStorage.setItem("configNames",localStorage.getItem("configNames")+",+"+window.namesANDcombos[p])
+       }
+       }
+
+      }
+    
+  }
+                    var filteredModes = [...new Set(localStorage.getItem("configNames").split(","))];
+                  
+                  localStorage.setItem("configNames",filteredModes)
+        console.log(localStorage.getItem("configNames"))
+
+  renewCurrentModes();refresh();
+
+'>Import Selected Modes</button> ❤︎ ❤︎
+</body>
+</html>

@@ -7,11 +7,20 @@
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
   <meta name="description" content="Zone:X">
   <meta name="author" content="Xevin" >
-    
-      <link rel="stylesheet" href="styles.css">
+
+      <link rel="stylesheet" href="styles2.css">
 </head>
 <body class="textSHADOW">
-  <script src="OFFLINEonlineSwitch.js"></script>
+    <!--
+
+       <div style="font-size: 2em; color:red; background-color: green; text-align: center; width: 100%; margin-left: 0%;">
+        ♥ ❣︎ ♥ Merry ✶ Christmas  ♥ ❣︎ ♥</div>
+        -->
+    <div style="
+    margin-left: 7%;
+    margin-right: 7%;
+">
+ <script src="OFFLINEonlineSwitch.js"></script>
     <div class=onofflineBG id="background_wrap"></div>
     <script>
         nf = document.querySelectorAll('.onofflineBG');
@@ -150,6 +159,8 @@
                     var beginningBeforeFirstExtendedComma = ""
 
                                   var namesOfConfigs = localStorage.getItem('buttonNames').split(',')
+                                  console.log(localStorage.getItem('buttonNames').split(',')
+)
 
                     for(var v = 0; v<namesOfConfigs.length;v++)if(namesOfConfigs[v]!='')
                     {
@@ -409,7 +420,20 @@ localStorage.setItem('meta','(EyesSentOut,SevenSeals),ra(16),.r/(20)')
 
 document.getElementById('nameOfConfig').value =String(cn);
 window.lastConfigName = cn;
-                    
+/*
+                            var namesOfConfigs = localStorage.getItem('configNames').split(',')
+var hasDuplicate = 0;
+                       for(var index1 = 0; index1<namesOfConfigs.length; index1++)
+                            if(window.lastConfigName==namesOfConfigs[index1])
+                            {
+                            hasDuplicate++;
+                            if(hasDuplicate>=2)
+                            {namesOfConfigs[index1]='2'+namesOfConfigs[index1]
+                            localStorage.setItem('configNames',namesOfConfigs.join(','))
+                            }
+                            
+                            }
+*/
    document.getElementById('configurer').value =  String(localStorage.getItem(cn))
 //   console.log(localStorage.getItem(cn))
    //                 window.lastConfigName = this.value;
@@ -476,9 +500,20 @@ document.getElementById('nameOfConfig').value ='';
               {
               if(window.lastConfigName == namesOfConfigs[index]){
                     namesOfConfigs.splice(index, 1)
-                    localStorage.removeItem(window.lastConfigName)
-                    if(document.getElementById('configurer')!=null)
-                        localStorage.setItem(val, String(document.getElementById('configurer').value));
+                       if(document.getElementById('configurer').value!=null
+                     &&document.getElementById('configurer').value!="") 
+                     {
+                       var hasDuplicate = false;
+                      
+var hasDuplicate = 0;
+                       for(var index1 = 0; index1<namesOfConfigs.length; index1++)
+                            if(window.lastConfigName==namesOfConfigs[index1])hasDuplicate++;
+
+//if(hasDuplicate>=2) 
+                      if(
+                     (document.getElementById('configurer').value)!=""
+                      &&(document.getElementById('configurer').value)!=null) localStorage.setItem(val, (document.getElementById('configurer').value));
+                     }
                     if(val!=null&&val!='')  namesOfConfigs.push(val)
                     localStorage.setItem('configNames', namesOfConfigs.join());
 
@@ -549,14 +584,31 @@ Combo:
         <input class="configuration" type="text" id = "configurer" style = "width:100%;" onchange="               
 
 var valToSet =  String(document.getElementById('configurer').value);
+
+              var namesOfConfigs = localStorage.getItem('buttonNames').split(',')
+
+var hasDuplicate = 0;
+                       for(var index1 = 0; index1<namesOfConfigs.length; index1++)
+                            if(window.lastConfigName==namesOfConfigs[index1])hasDuplicate++;
+
+if(hasDuplicate>=2) 
 if(valToSet!='null')
 localStorage.setItem(window.lastConfigName, valToSet);
 
               
 "
 onkeyup="               
-
 var valToSet =  String(document.getElementById('configurer').value);
+
+
+              var namesOfConfigs = localStorage.getItem('buttonNames').split(',')
+
+var hasDuplicate = 0;
+                       for(var index1 = 0; index1<namesOfConfigs.length; index1++)
+                            if(window.lastConfigName==namesOfConfigs[index1])hasDuplicate++;
+
+//if(hasDuplicate>=2) 
+
 if(valToSet!='null')
 localStorage.setItem(window.lastConfigName, valToSet);
 "
@@ -667,13 +719,14 @@ for(var m = 0; m<buttonNames.length;m++)
                   "
     >barebones</a>.
     <p> <a href="keys.html">Hotkeys</a></p>
+    <p><a href="propagator.html">Import Named Modes</a>
+
 
     
 </p>
 For a musicXML score file to upload you can visit <a href = "https://hymnary.org/browse/popular/tunes"> hymnary.org</a> there are some pretty impressive features @ the <a href="https://hymnary.org/explore">explore page</a> on that site.
 
 </li>
-
 <p>
 <li>He is a seven eyed\seven horned living Lamb as has been slain!
 <a href="https://biblehub.com/niv/revelation/5.htm"><p></p>The Revelation of John, Chapter 5:6-10, The Holy Bible</a>:
@@ -872,6 +925,6 @@ nf = document.querySelectorAll('.onoffline2');
 */
 </script>
 
-
+</div>
 </body>
 </html>

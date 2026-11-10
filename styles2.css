@@ -1,31 +1,107 @@
+
+
 body
 {
-    font-size: 1.2em;
-    color: black;
-    background-color:white;
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 5%;
-    text-indent: 3.4%;
+    font-family: Tahoma, Helvetica, sans-serif, monospace;
+    font-size: 1.75em;
+    color:  #3baaff;
+    background-color:black;
+  
+}
 
+table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+th, td {
+    font-size: 16px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 7px;
+  padding-right: 7px;
+}
+.configuration{
+    height: 50px;
+    width:50%;
+    font-size: 50px;
+}
+.engage{
+
+    height: 50px;
+    width:50px;
+}
+
+
+.textSHADOW
+{
+    
+    text-shadow: 0 0 2px purple, 1px 1px 3px red,-2px -2px 2px yellow;
+
+}
+
+.weeks
+{
+    text-align: center;
+
+    color:red;
+    text-shadow: 1px 1px 4px blue, 0 0 1em white, 0 0 .2em green;
+
+}
+.title
+{
+    color:salmon;
+}
+
+.onofflinescaled{
+    
+    width: 100%;
+}
+img{
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 3px;
+
+}
+/*https://stackoverflow.com/questions/3011226/using-background-attachmentfixed-in-safari-on-the-ipad*/
+#background_wrap {
+    z-index: -1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-size: contain;
+    background-image: url('');
+    background-position:center;
+
+}
+a {
+  color: yellow;
+}
+a:visited {
+  color: orange;
 }
 h1
 {
-	line-height: 1.7em;
-    font-size: 2em;
+    line-height: 75px;
+    font-size: 60px;
 
 }
-ul{
-text-indent: 2em;
-}
+
 h2
 {
-	
-    font-size: 1.5em;
+
+    font-size: 50px;
 
 }
-ul {    margin-top: 0%;}
-figure { 
+
+#centered{
+    text-align: center;
+}
+figure {
     margin-top: 0%;
     display: inline-block;
-}
+    }
+
