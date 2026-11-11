@@ -5341,10 +5341,11 @@ function tone2note() {
                                         //                   totalAMPmodified=(totalAMPmodified*totalAMPmodified)/totalAMPmodified
 
                                                    //        totalAMPmodified=(totalAMPmodified*trunc)/trunc
-var taf = tAScaled
-for(var t=0; t <1.; t+=taf**.5)tAScaled=1./(tAScaled*tAScaled-taf)
-            tAScaled = (tAScaled != 0 &&tAScaled>.005&& Math.abs(tAScaled)<1.&& isFinite(tAScaled)) ? tAScaled : 1;
 
+                                                   var taf = tAScaled
+for(var t=0; t <1.; t+=taf**.5)tAScaled=1./(tAScaled*tAScaled-taf)
+    tAScaled*=Math.PI/logStabilizationConstant
+           tAScaled = (tAScaled != 0 &&tAScaled>.005&& Math.abs(tAScaled)<1.&& isFinite(tAScaled)) ? tAScaled : 1;
             //   console.log(loopy) 
             // let b = 0.;
 
