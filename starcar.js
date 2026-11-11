@@ -5344,15 +5344,18 @@ function tone2note() {
 
                                                    var taf = tAScaled
 for(var t=0; t <1.; t+=taf**.5)tAScaled=1./(tAScaled*tAScaled-taf)
-    tAScaled*=Math.PI/logStabilizationConstant
+    tAScaled*=Math.PI*(logStabilizationConstant*Math.log(3))
 
+tAScaled-=(wingsOfRighteousness-4.25)/10
 
-tAScaled-=(wingsOfRighteousness-4.25)*100
+tAScaled-=(grPermanent-leafPermanent+2**.5-4.25)
+    tAScaled*=Math.PI*(Math.log(3)*logStabilizationConstant)
+   // tAScaled=Math.abs(tAScaled)
+//tAScaled-=Math.log(3)/100
 
-tAScaled-=(grPermanent-leafPermanent+2**.5-4.25)/10.
 //tAScaled-=(wingsOfRighteousness-4.25)
 
-           tAScaled = (tAScaled != 0 &&tAScaled>.005&& Math.abs(tAScaled)<1.&& isFinite(tAScaled)) ? tAScaled : 1;
+           tAScaled = (tAScaled != 0 &&Math.abs(tAScaled)>.0005&& Math.abs(tAScaled)<1.&& isFinite(tAScaled)) ? tAScaled : 1;
            //   console.log(loopy) 
             // let b = 0.;
 
