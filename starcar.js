@@ -5302,7 +5302,7 @@ function tone2note() {
             //tAScaled=((tAScaled**.5)-tAScaled*tAScaled+(tAScaled-tAScaled**tAScaled))
             tAScaled=tAScaled**tAScaled**tAScaled
             }
-            
+    
             tAScaled = (tAScaled != 0 && isFinite(tAScaled)) ? tAScaled : .25;
             let tAScaledPermanent = tAScaled;
             let incrementToleranceFeedback = tAScaled;
@@ -5341,9 +5341,9 @@ function tone2note() {
                                         //                   totalAMPmodified=(totalAMPmodified*totalAMPmodified)/totalAMPmodified
 
                                                    //        totalAMPmodified=(totalAMPmodified*trunc)/trunc
-
-
-            tAScaled = (tAScaled != 0 && isFinite(tAScaled)) ? tAScaled : 1;
+var taf = tAScaled
+for(var t=0; t <1.; t+=taf**.5)tAScaled=1./(tAScaled*tAScaled-taf)
+            tAScaled = (tAScaled != 0 &&tAScaled>.005&& Math.abs(tAScaled)<1.&& isFinite(tAScaled)) ? tAScaled : 1;
 
             //   console.log(loopy) 
             // let b = 0.;
@@ -5424,6 +5424,7 @@ function tone2note() {
 
             //  tolerance=(tolerance/trunc)*trunc
          var metas = 0.
+
          
           tolerance = (tolerance * trunc) / trunc
           tolerance = (tolerance / trunc) * trunc
@@ -5440,7 +5441,6 @@ if(takingToLong())break;
 
     metas++
     
-
           tolerance = (tolerance * trunc) / trunc
 
             tolerance /= (-leafPermanent / trunc) * trunc;//makes over and under stable and greatly enhances accuracy
@@ -5454,6 +5454,7 @@ if(takingToLong())break;
             tolerance *= 2.;
 
                             tolerance=(tolerance*tolerance)/tolerance
+
 
 
             //                        tolerance=(tolerance/trunc)*trunc
@@ -5722,7 +5723,7 @@ if(isFinite(tolerance)&&tolerance>0.)
                     else break;
 
                          if(!isFinite(tolerance))break;
-                         
+
                                                     tolerance=(tolerance/trunc)*trunc
 
            // tolerance*=totalAMP
@@ -5731,7 +5732,6 @@ if(isFinite(tolerance)&&tolerance>0.)
 
 
                 }
-
 
                     /*
                        if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
@@ -5798,6 +5798,7 @@ if(isFinite(tolerance)&&tolerance>0.)
                     //tolerance*=((totalAMP**totalAMP)**((1.-tolerance)**tolerance+totalAMP)**((1.+totalAMP)**totalAMP-tolerance))///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
                     //tolerance=(tolerance/trunc)*trunc
                 }
+
                                               //                                   tolerance=(tolerance/trunc)*trunc
 
                 //console.log(7.5*Number.MIN_VALUE)
