@@ -5345,16 +5345,19 @@ function tone2note() {
                                                    var taf = tAScaled
 for(var t=0; t <1.; t+=taf**.5)tAScaled=1./(tAScaled*tAScaled-taf)
     tAScaled*=Math.PI/logStabilizationConstant
-tAScaled-=(wingsOfRighteousness-4.25)*10
 
-tAScaled-=(grPermanent-leafPermanent+2**.5-4.25)/100.
+
+tAScaled-=(wingsOfRighteousness-4.25)*100
+
+tAScaled-=(grPermanent-leafPermanent+2**.5-4.25)/10.
+//tAScaled-=(wingsOfRighteousness-4.25)
 
            tAScaled = (tAScaled != 0 &&tAScaled>.005&& Math.abs(tAScaled)<1.&& isFinite(tAScaled)) ? tAScaled : 1;
-            //   console.log(loopy) 
+           //   console.log(loopy) 
             // let b = 0.;
 
             // console.log(b)
-           // console.log(tAScaled)
+           console.log(tAScaled)
             //       let grTimesLeaf =   grPermanent*-leafPermanent
             // let feedbackVal = grTimesLeaf;
             // console.log(tAScaled)
