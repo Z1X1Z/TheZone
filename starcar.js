@@ -5621,6 +5621,7 @@ if(takingToLong())break;
                 //last line working on nyquist filtering, added
                 nyquistFilter = false;//turn off to debug nyquists
                 tolerance += toleranceNudge;
+                tolerance += 11./Number.MAX_VALUE;
                 //tolerance += wingsOfRighteousness/Number.MAX_VALUE;
                 // tolerance=(tolerance/trunc)*trunc
 
