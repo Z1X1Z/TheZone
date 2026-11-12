@@ -5205,11 +5205,12 @@ function tone2note() {
             //totalAMPmodified=(totalAMPmodified/((-leafPermanent)/))///preTrunc)*preTrunc));
 
                                                            totalAMPmodified=(totalAMPmodified*trunc)/trunc
-                                                           totalAMPmodified=(totalAMPmodified/trunc)*trunc
+                                                         //  totalAMPmodified=(totalAMPmodified/trunc)*trunc
 
             totalAMPmodified = (((totalAMPmodified * (-(leafPermanent / trunc) * trunc))))
             
                                                            totalAMPmodified=(totalAMPmodified*totalAMPmodified)/totalAMPmodified
+                                                           totalAMPmodified=(totalAMPmodified/totalAMPmodified)*totalAMPmodified
 
                                                            totalAMPmodified=(totalAMPmodified*trunc)/trunc
                                                            totalAMPmodified=(totalAMPmodified/trunc)*trunc
@@ -5465,8 +5466,11 @@ if(takingToLong())break;
             tolerance *= 2.;
 
                             tolerance=(tolerance*tolerance)/tolerance
+                            
+                            tolerance=(tolerance/tolerance)*tolerance
 
-
+                            tolerance=(tolerance/trunc)*trunc
+                            tolerance=(tolerance*trunc)/trunc
 
             //                        tolerance=(tolerance/trunc)*trunc
 
