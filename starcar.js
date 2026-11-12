@@ -5345,11 +5345,10 @@ function tone2note() {
 
                                                    var taf = tAScaled
 for(var t=0; t <1.; t+=taf**.5)tAScaled=1./(tAScaled*tAScaled-taf)
-        
     tAScaled*=Math.PI*(logStabilizationConstant*Math.log(3))
     tAScaled-=(wingsOfRighteousness-4.25)/10
     tAScaled-=(grPermanent-leafPermanent+2**.5-4.25)
-         //   tolerance +=8./Number.MAX_VALUE;
+            tolerance +=24./Number.MAX_VALUE;
     tAScaled*=Math.PI*(Math.log(3)*logStabilizationConstant)
 
    // tAScaled=Math.abs(tAScaled)
