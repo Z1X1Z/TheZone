@@ -519,7 +519,7 @@ radialWarp=b;
                                  <input type="checkbox" id="gatesofheaven" name="t"  onclick= "
                                      key  = 'q';
                                      callKey(new KeyboardEvent('keydown', {'key': key, 'ctrlKey':true,'altKey':true,'keyCode':key.charCodeAt(0)}));">
-                                     <label for="gatesofheaven">GatesofHeaven![,.q]</label><br>
+                                     <label for="gatesofheaven">GatesofHeaven?![,.q]</label><br>
                                      
                                      <input type="checkbox" id="pixelWitness" name="t"  onclick= "
                                          key  = 'w';
@@ -2082,13 +2082,22 @@ ret= vec4(clamp(
                        
                                                       vec4 gatesOfHeaven( vec2 uv, float noteskew )//Shekina Glory
                                                       {
-                                              vec4 o=vec4(0.);
+                                                       // if(resolution.x>resolution.y)uv.x=(uv.x-.5)*resolution.y/resolution.x+.5;
+                                                
+                                                /*        float resize = 2.;
+                                                        uv=(uv-.5)*resize+.5;
+                                                        */
+                                                        vec4 o=vec4(0.);
 
+    
+                                                        if(!(uv.x<0.||uv.x>1.)
+                                                        &&!(uv.y<.0||uv.y>1.))
+                                                            {
 if(uv.x<1./3.&&maxSamp!=0.) //could 1./3. but then the spill over (if any) isn't visible
 {
                                                          // uv=uv.yx;
                                                           float sideSegment = mod(mod(3.-uv.y*3.,3.)+noteskew+12.*12.,12.);
-                                                
+                                            
                                                                           //angle=mod(angle,1.);
                                                                           
                                                           float frAmp=0.;
@@ -2122,11 +2131,12 @@ if(uv.x<1./3.&&maxSamp!=0.) //could 1./3. but then the spill over (if any) isn't
                                          //  frAmp/=255.;
                                          
                                          // frAmp*=2.;
-                                          frAmp/=32.*min(resolution.x,resolution.y)/max(resolution.x,resolution.y     );
+                                          frAmp/=64.;//*min(resolution.x,resolution.y)/max(resolution.x,resolution.y     );
  //if(maxSamp!=0.) frAmp/=(maxSamp);//-minSamp);
 float threshSide = 1.-(frAmp)//pow(frAmp,1.75)/1.75
 *((1.-
-  uv.x*3.))*min(resolution.x,resolution.y)/max(resolution.y,resolution.x);//the corners don't seem to match on adjacent sides
+  uv.x*3.))//*min(resolution.x,resolution.y)/max(resolution.y,resolution.x)
+  ;//the corners don't seem to match on adjacent sides
 /*
 if(min(resolution.x,resolution.y)==resolution.x)threshSide=uv.x;
 else threshSide=uv.x;
@@ -2140,11 +2150,11 @@ else threshSide=uv.x;
                                                                                                      o=vec4(.5);
                                                        
                                                       float sideSegmentMediated = mod(noteOfSide*12.+12.*12.+.5,12.)-.5;
-                                                      
-                                                      // if(abs(sideSegmentMediated-1.)<.5)o*=-1.;
+                                                      //sideSegmentMediated=mod(sideSegmentMediated+3.,12.);
+                                                      // if(abs(sideSegmentMediated-1.)<.5.5)o*=-1.;
                                                       // else if(abs(sideSegmentMediated-11.)<.5)o*=-1.;
                                                       // else
-                                                       if(abs(sideSegmentMediated-0.)<.5)o*=-1.;
+                                                       if(abs(sideSegmentMediated-0.)<.5||sideSegmentMediated-0.>11.5)o*=-1.;
                                                        else if(abs(sideSegmentMediated-2.)<.5)o*=-1.;
                                                        else if(abs(sideSegmentMediated-5.)<.5)o*=-1.;
                                                        else if(abs(sideSegmentMediated-7.)<.5)o*=-1.;
@@ -2152,6 +2162,7 @@ else threshSide=uv.x;
                                                      //  if(mod(rnd(noteOfSide*12.)+12.*12.,12.)==0.)  return o;
 
 }
+                                                      }
                                                         return o;//vec4(0.);//o;//
 
                                                        
@@ -4831,13 +4842,13 @@ vec3 pongBall = vec3(0.);
                                                                  vec4 GOH =vec4(0.);
                                                                  if(gates)
                                                                  {
+                                                                    vec2 tt = (-r.yx*2./logStabilizationConstant +.5);
                             GOH=
                    
-                                                            gatesOfHeaven(vec2(vUv.x,1.-vUv.y),9.)
-                                                                 +gatesOfHeaven(vec2(1.-vUv.y,1.-vUv.x),0.)
-                                                               //   +gatesOfHeaven(vec2(adjustedvUv.y,adjustedvUv.x),6.)
-                                                                  +gatesOfHeaven(vec2(vUv.y,vUv.x),6.)
-                                                                 +gatesOfHeaven(vec2(1.-vUv.x,vUv.y),3.)
+                                                      gatesOfHeaven(vec2(tt.x,1.-tt.y),9.)
+                                                                 +gatesOfHeaven(vec2(1.-tt.y,1.-tt.x),0.)
+                                                              +gatesOfHeaven(vec2(tt.y,tt.x),6.)
+                                                                +gatesOfHeaven(vec2(1.-tt.x,tt.y),3.)
                                                                  ;
                                                                  }
                                                                  
@@ -5085,7 +5096,8 @@ else {
                                         +linearFrequency.w
                                             +pong
                                             
-                                            +GOH.xyz)*(1.-pixelShipGrey*40.)
+                                         //   +GOH.xyz
+                                            )*(1.-pixelShipGrey*40.)
                     +//clamp((
                            (mny-oneEye*100.*mny)//*(1.-isGrey-pixelShipGrey)
                             +overchargeCharacter
@@ -5199,7 +5211,10 @@ vec4 tree = vec4( clamp(
                   if(womanny.x+womanny.y+womanny.z!=0.)layeredOUT = vec4(womanny,1.);
                                       */
 if((bookEyes.x!=0.||bookEyes.y!=0.||bookEyes.z!=0.)&&pixelShipGrey==0.&&isGrey==0.)layeredOUT=vec4(clamp(bookEyes+3.*(-mny.x-mny.y-mny.b),0.,1.)+mny,1.);
-                    gl_FragColor=vec4(layeredOUT.xyz,1.);//vec4(movie(characterP),1.);//
+                
+
+if(GOH.x!=0.)layeredOUT=layeredOUT+GOH/2.;
+gl_FragColor=vec4(layeredOUT.xyz,1.);//vec4(movie(characterP),1.);//
 
                         //things known to cause bugs on some android chrome: heart (divides by zero), linear eq,waveform, "144000" men and women in clover, articles
                                                                  
