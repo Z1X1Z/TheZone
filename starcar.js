@@ -5350,6 +5350,8 @@ for(var t=0; t <1.; t+=taf**.5)tAScaled=1./(tAScaled*tAScaled-taf)
 tAScaled-=(wingsOfRighteousness-4.25)/10
 
 tAScaled-=(grPermanent-leafPermanent+2**.5-4.25)
+                tolerance +=6./Number.MAX_VALUE;
+
     tAScaled*=Math.PI*(Math.log(3)*logStabilizationConstant)
    // tAScaled=Math.abs(tAScaled)
 //tAScaled-=Math.log(3)/100
@@ -5621,7 +5623,7 @@ if(takingToLong())break;
                 //last line working on nyquist filtering, added
                 nyquistFilter = false;//turn off to debug nyquists
                 tolerance += toleranceNudge;
-                tolerance += 11./Number.MAX_VALUE;
+                tolerance +=11./Number.MAX_VALUE;
                 //tolerance += wingsOfRighteousness/Number.MAX_VALUE;
                 // tolerance=(tolerance/trunc)*trunc
 
