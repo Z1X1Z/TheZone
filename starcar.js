@@ -5361,7 +5361,7 @@ tAScaled-=(grPermanent-leafPermanent+2**.5-4.25)
             // let b = 0.;
 
             // console.log(b)
-           console.log(tAScaled)
+          // console.log(tAScaled)
             //       let grTimesLeaf =   grPermanent*-leafPermanent
             // let feedbackVal = grTimesLeaf;
             // console.log(tAScaled)
@@ -5465,8 +5465,9 @@ if(takingToLong())break;
 
             tolerance *= 2.;
 
-                            tolerance=(tolerance*tolerance)/tolerance
                             tolerance=(tolerance/tolerance)*tolerance
+                                                        tolerance=(tolerance*tolerance)/tolerance
+
                             tolerance=(tolerance/trunc)*trunc
                             tolerance=(tolerance*trunc)/trunc
 
