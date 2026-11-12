@@ -5466,9 +5466,7 @@ if(takingToLong())break;
             tolerance *= 2.;
 
                             tolerance=(tolerance*tolerance)/tolerance
-                            
                             tolerance=(tolerance/tolerance)*tolerance
-
                             tolerance=(tolerance/trunc)*trunc
                             tolerance=(tolerance*trunc)/trunc
 
