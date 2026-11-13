@@ -2083,15 +2083,15 @@ ret= vec4(clamp(
                                                       vec4 gatesOfHeaven( vec2 uv, float noteskew )//Shekina Glory
                                                       {
                                                        // if(resolution.x>resolution.y)uv.x=(uv.x-.5)*resolution.y/resolution.x+.5;
-                                                
-                                                /*        float resize = 2.;
+                                                   float resize = .5*logStabilizationConstant;
+                                                    /*    
                                                         uv=(uv-.5)*resize+.5;
                                                         */
                                                         vec4 o=vec4(0.);
-
+                                                        vec2 uvCentered = uv-.5;
     
-                                                        if(!(uv.x<0.||uv.x>1.)
-                                                        &&!(uv.y<.0||uv.y>1.))
+                                                        if(!(uvCentered.x<-resize||uvCentered.x>resize)
+                                                        &&!(uvCentered.y<-resize||uvCentered.y>resize))
                                                             {
 if(uv.x<1./3.&&maxSamp!=0.) //could 1./3. but then the spill over (if any) isn't visible
 {
