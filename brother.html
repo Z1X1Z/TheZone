@@ -2134,7 +2134,7 @@ if(uv.x<1./3.&&maxSamp!=0.) //could 1./3. but then the spill over (if any) isn't
                                      // frAmp-=2.;
                                           frAmp/=16.;//*min(resolution.x,resolution.y)/max(resolution.x,resolution.y     );
 
- frAmp=(frAmp+frAmp*frAmp*.5)*(frAmp+.5)*(frAmp+sqrt(frAmp)*.5)/2.;
+ frAmp=(frAmp+frAmp*frAmp*.75)*(frAmp+.5)*(frAmp+sqrt(frAmp)*.25)/2.;
 
                                           //frAmp=pow((-(frAmp*frAmp)+sqrt(frAmp)),2.);
 
