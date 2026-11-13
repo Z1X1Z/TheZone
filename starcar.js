@@ -1726,6 +1726,7 @@ function loadFrequencyTextures() {
                 let frequency = 2 ** (angleb + y) * window.ConcertKey;
                 bin = Math.round(frequency * numberOfBins / audioX.sampleRate);
                 //             freq =((( audioX.sampleRate)*(nAdj))/numberOfBins);
+               // if(Math.round(angleb)%12==1)
 
                 if (bin < numberOfBins ) {
                     if (isFinite(dataArray[bin])) radialAMP[ts] += dataArray[bin]*(bin/numberOfBins)**(1./3.)*6.421;
@@ -5296,6 +5297,7 @@ function tone2note() {
 
             for(var bv=0.;bv<1;bv+=tAScaled)
             {
+            if(takingToLong())break;
             tAScaled=tAScaled**tAScaled**tAScaled
            // tAScaled=Math.abs(-(tAScaled**.5)+tAScaled*tAScaled-(tAScaled-tAScaled**tAScaled))
             tAScaled=Math.abs((tAScaled**.5)-tAScaled*tAScaled+tAScaled**tAScaled-tAScaled)
@@ -5344,7 +5346,11 @@ function tone2note() {
                                                    //        totalAMPmodified=(totalAMPmodified*trunc)/trunc
 
                                                    var taf = tAScaled
-for(var t=0; t <1.; t+=2.*taf**.5)tAScaled=1./(tAScaled*tAScaled-taf)
+for(var t=0; t <1.; t+=2.*taf**.5)
+    {
+        if(takingToLong())break;
+        tAScaled=1./(tAScaled*tAScaled-taf)
+    }
     tAScaled*=Math.PI*(logStabilizationConstant*Math.log(3))
     tAScaled-=(wingsOfRighteousness-4.25)/10
     tAScaled-=(grPermanent-leafPermanent+2**.5-4.25)
