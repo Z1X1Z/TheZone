@@ -2495,7 +2495,7 @@ uniform float OrthoEvery;
                                      const    float logStabilizationConstant = 1./l3+(1.-1./l3)/2.;
 
 
-                                  const float PI = 3.14159274;
+                                  const float PI = 3.1415926535897932384626433832795028841971693993749718;//May very from PI in final digits
                                   const float PI2 = PI*2.;
                                   const float divideByMultiplyingPi = 1./PI;
 
@@ -2961,7 +2961,7 @@ if(uv.x<1./3.&&maxSamp!=0.) //could 1./3. but then the spill over (if any) isn't
                                          // frAmp*=2.;
    frAmp/=16.;//*min(resolution.x,resolution.y)/max(resolution.x,resolution.y     );
 
- frAmp=(frAmp+frAmp*frAmp)*(frAmp+1.)*(frAmp+sqrt(frAmp))/3.;
+ frAmp=(frAmp+frAmp*frAmp)*(frAmp+1.)*(frAmp+sqrt(frAmp))/PI;
  //if(maxSamp!=0.) frAmp/=(maxSamp);//-minSamp);
 float threshSide = 1.-(frAmp)//pow(frAmp,1.75)/1.75
 *((1.-
