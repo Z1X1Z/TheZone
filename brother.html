@@ -5221,8 +5221,8 @@ if((bookEyes.x!=0.||bookEyes.y!=0.||bookEyes.z!=0.)&&pixelShipGrey==0.&&isGrey==
                 
 
 if(GOH.x!=0.)
-{   if(GOH.x>0.)GOH*=1.25;
-    layeredOUT=(layeredOUT*1.+GOH*.5);
+{ //  if(GOH.x>0.)GOH*=1.25;
+    layeredOUT=(layeredOUT*1.+GOH*twoThirds);
 }
 gl_FragColor=vec4(layeredOUT.xyz,1.);//vec4(movie(characterP),1.);//
 
