@@ -9467,11 +9467,17 @@ if((bookEyes.x!=0.||bookEyes.y!=0.||bookEyes.z!=0.)&&pixelShipGrey==0.&&isGrey==
                           else if(movieTime==-2.)layeredOUT=vec4(0.);
                    if(negative==1||negative==2)layeredOUT=1.-layeredOUT;
 
+
 if(GOH.x!=0.)
 { //  if(GOH.x>0.)GOH*=1.25;
-    if(GOH.w==.2)layeredOUT*=twoThirds;
-    else
-    layeredOUT=(layeredOUT*1.+GOH*twoThirds);
+    if(GOH.w==.2)
+    {
+        if(GOH.x==1.)layeredOUT=vec4(.25)*layeredOUT+.25;
+else layeredOUT=vec4(.5)*layeredOUT+.5;    
+  
+}
+else     layeredOUT=(layeredOUT*1.+GOH*twoThirds);
+
 }
                         gl_FragColor=vec4(layeredOUT.xyz,1.);//vec4(movie(characterP),1.);//
  //gl_FragColor=vec4(vec3(length(engine(p))),1.);
