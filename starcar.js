@@ -5356,7 +5356,7 @@ for(var t=0; t <1.; t+=taf**.5)
     tAScaled-=(grPermanent-leafPermanent+root2-4.25)
             tolerance +=24./Number.MAX_VALUE;
     tAScaled*=Math.PI*(Math.log(3)*logStabilizationConstant)
-tAScaled/=(((((root2)/grPermanent))*leafPermanent)*grPermanent)/leafPermanent;
+tAScaled/=(((((((root2/grPermanent)/trunc)*leafPermanent))*grPermanent)*trunc)/leafPermanent);
    // tAScaled=Math.abs(tAScaled)
 //tAScaled-=Math.log(3)/100
 
