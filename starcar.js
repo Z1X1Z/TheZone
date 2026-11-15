@@ -2119,7 +2119,7 @@ if(zoom>2**64)
     else if (seventhOUTside && fromCenter * (1. - zoom) - zoom ** .5 > (uniforms.SEVEYEStart.value - 1. / 2 ** uniforms.SEVEYEpow.value * uniforms.SEVEYEpow.value / 2.))
         metaDepth = metaDepth * 2 ** (uniforms.SEVEYEpow.value + 1.)
     else if (uniforms.seventhEYE.value == 3. && uniforms.jubileyes.value != 0. && fromCenter < 1. / 3.)
-        metaDepth *= 2 ** (5);
+        metaDepth *= root2;
 
     let zoomCone = metaDepth * fromCenter;
     if (uniforms["colorCombo"].value == 16) zoomCone /= 1.33333333 / 2.;
@@ -5103,7 +5103,7 @@ const wingsOfRighteousness =4.2508742365242187487777776975555422424429370377;//2
 //const wingsOfRighteousness =4.25087423652421874877777769;
 //console.log(wingsOfRighteousness)
 var frameRation = (wingsOfRighteousness +
-    1024) * (-leafPermanent * grPermanent * (2 ** .5) - 2.) - leafPermanent - 1. + grPermanent - 1 + 2 ** .5 - 1. + (-leafPermanent - 1) * (grPermanent - 1.) * (2 ** .5);//hears low ranges better when times >1
+    1024) * (-leafPermanent * grPermanent * (root2) - 2.) - leafPermanent - 1. + grPermanent - 1 + root2 - 1. + (-leafPermanent - 1) * (grPermanent - 1.) * (root2);//hears low ranges better when times >1
 //            frameRation=1024;
 // console.log(frameRation)        
 var fractionOfFrame = frameBoosted;
@@ -5353,7 +5353,7 @@ for(var t=0; t <1.; t+=2.*taf**.5)
     }
     tAScaled*=Math.PI*(logStabilizationConstant*Math.log(3))
     tAScaled-=(wingsOfRighteousness-4.25)/10
-    tAScaled-=(grPermanent-leafPermanent+2**.5-4.25)
+    tAScaled-=(grPermanent-leafPermanent+root2-4.25)
             tolerance +=24./Number.MAX_VALUE;
     tAScaled*=Math.PI*(Math.log(3)*logStabilizationConstant)
 tAScaled/=-leafPermanent;
@@ -5615,11 +5615,11 @@ if(takingToLong())break;
                 // for (var na = 0; na<3; na+=1)nudgeAdjust=totalAMP**nudgeAdjust
                 //odd conditionals
 
-                if (!iOS) tolerance += (totalAMP) ** (totalAMP / ((-leaf + (gr) + 2 ** .5 + 1) ** (.75) * 2 + 1.)) * totalAMP + (totalAMP) ** ((totalAMP) * ((2 ** .5) * 3 * 4))//iOS may only have a problem with one of these terms//-totalAMPmodified/fractionOfFrame/2//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(2**.5)))
+                if (!iOS) tolerance += (totalAMP) ** (totalAMP / ((-leaf + (gr) + root2 + 1) ** (.75) * 2 + 1.)) * totalAMP + (totalAMP) ** ((totalAMP) * ((root2) * 3 * 4))//iOS may only have a problem with one of these terms//-totalAMPmodified/fractionOfFrame/2//tolerance+=(totalAMP)**(totalAMP/4)*totalAMP+totalAMP**((totalAMP)*(6*2*(root2)))
 
-                //            let toleranceNudge =(((-leafPermanent+grPermanent+2**.5-4.25))*totalAMP)/fractionOfFrame// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
+                //            let toleranceNudge =(((-leafPermanent+grPermanent+root2-4.25))*totalAMP)/fractionOfFrame// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+root2)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                 //  toleranceNudge*=(2.)/(grPermanent-leafPermanent+1);
-                let toleranceNudge = 2. / frameRationFull * (((-leafPermanent + grPermanent + 2 ** .5 - wingsOfRighteousness))) * totalAMP / (grPermanent - leafPermanent + 1)// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+2**.5)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
+                let toleranceNudge = 2. / frameRationFull * (((-leafPermanent + grPermanent + root2 - wingsOfRighteousness))) * totalAMP / (grPermanent - leafPermanent + 1)// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+root2)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                 // console.log(toleranceNudge/toleranceNudge2)
                 //console.log(toleranceNudge)
                 //toleranceNudge=(toleranceNudge/trunc)*trunc
@@ -5631,12 +5631,12 @@ if(takingToLong())break;
                 //tolerance += wingsOfRighteousness/Number.MAX_VALUE;
                 // tolerance=(tolerance/trunc)*trunc
 
-                tolerance = tolerance ** ((2 ** .5 / trunc) * trunc) ** (tolerance);
+                tolerance = tolerance ** ((root2 / trunc) * trunc) ** (tolerance);
 
                 //   tolerance=(tolerance/trunc)*trunc
 
                 // tolerance=(tolerance/trunc)*trunc
-                tolerance *= ((((grPermanent) / trunc) * trunc) / (((-leafPermanent / trunc) * trunc) * (2 ** .5 / trunc) * trunc) / trunc) * trunc;
+                tolerance *= ((((grPermanent) / trunc) * trunc) / (((-leafPermanent / trunc) * trunc) * (root2 / trunc) * trunc) / trunc) * trunc;
                 tolerance = (tolerance / trunc) * trunc//just this one works nicely
 
                 var tolFixed = (tolerance) ** (3.5 - tolerance + totalAMP);
@@ -5813,7 +5813,7 @@ if(isFinite(tolerance)&&tolerance>0.)
                     //tolerance*=(adjuster/trunc)*trunc
                    //  tolerance=(tolerance/trunc)*trunc
 
-                    // tolerance*=2**.5;
+                    // tolerance*=root2;
                     //(                      tolerance=(tolerance/trunc)*trunc
 
                     //tolerance*=((totalAMP**totalAMP)**((1.-tolerance)**tolerance+totalAMP)**((1.+totalAMP)**totalAMP-tolerance))///trunc)*trunc;//not exhaustively optimized, but intuitive and effective
@@ -5842,16 +5842,16 @@ if(isFinite(tolerance)&&tolerance>0.)
             // tolerance=(tolerance/trunc)*trunc
 
 
-            if (!isFinite(tolerance) || tolerance > 1 || tolerance < 0) tolerance = ((-leafPermanent + grPermanent + 2 ** .5 - wingsOfRighteousness)) * (2.) / (grPermanent - leafPermanent + 1)
+            if (!isFinite(tolerance) || tolerance > 1 || tolerance < 0) tolerance = ((-leafPermanent + grPermanent + root2 - wingsOfRighteousness)) * (2.) / (grPermanent - leafPermanent + 1)
 
         }
         else {
-            tolerance = ((-leafPermanent + grPermanent + 2 ** .5 - wingsOfRighteousness)) * (2.) / (grPermanent - leafPermanent + 1)
+            tolerance = ((-leafPermanent + grPermanent + root2 - wingsOfRighteousness)) * (2.) / (grPermanent - leafPermanent + 1)
         }
     }
 
     //.02134356(7)  solid guess//.0214284 easier reaching notes//n*2,n,n*2*2,n*2*2/2,n*2*2*2,n*2*2*2/2
-    else if (window.highORlow == 2) tolerance = ((-leafPermanent + grPermanent + 2 ** .5 - wingsOfRighteousness)) * (2.) / (grPermanent - leafPermanent + 1);//.49;
+    else if (window.highORlow == 2) tolerance = ((-leafPermanent + grPermanent + root2 - wingsOfRighteousness)) * (2.) / (grPermanent - leafPermanent + 1);//.49;
     else if (window.highORlow == 1)
         tolerance = 0.;
 
