@@ -12,8 +12,8 @@ window.audioX={sampleRate:44100};
 
 window.bufferSize=fftSize;
 window.numberOfBins=bufferSize/2.;
-window.inputData = new Float32Array(bufferSize).fill(1.);
-window.dataArray = new Uint8Array(bufferSize/2).fill(1.);
+window.inputData = new Float32Array(bufferSize).fill(0.);
+window.dataArray = new Uint8Array(bufferSize/2).fill(0.);
 window.babyBuffer = new Uint8Array(bufferSize).fill(0);
 
 let micProcessing1 = false;//autoGainControl
@@ -49,7 +49,7 @@ let micProcessing3 = false;//noiseSuppression
        
 function shutdown(){
     source.disconnect();
-    //audioX.close();
+    audioX.close();
 }
 let analyser={};
 
