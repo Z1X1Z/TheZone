@@ -1,0 +1,26 @@
+
+
+
+precision highp float;
+uniform vec2 resolution;
+uniform float time;
+const float gr =    1.6180339887498948482045868343656381177203091798057628621;//1.6180339887498948482045868343;
+const float leaf = -1.3247179572447460259609088544780973407344 ;
+const float PI = 3.1415926535897932384626433832795028841971693993749718;//May very from PI in final digits
+          const float wingsOfRighteousness =   4.2508742365242187487777776975555422424429370377;//4.25087423652421874877777769755558742365242187487777776975555
+  const float l3 = log(3.);       
+                                     const    float logStabilizationConstant = 1./l3+(1.-1./l3)/2.;
+
+void main(){vec2 p=-(gl_FragCoord.yx/resolution.yx-.5)/resolution*max(resolution.x,resolution.y)*9.,s=p;
+    float l=0.;
+    for (int f=0;f<21;f+=1)if(abs(s.y)<19.){
+        s=vec2(-1./(s.x*s.x-s.y*s.y-p.x), 2.0*s.x*s.y-p.y);//this is {s=s^2-p;s.real=-1./s.real}
+        if(s.x>-.1&&f!=0)l=s.x*(120.-sin(time)*80.);}
+
+    s*=(logStabilizationConstant*log(3.));
+    s-=(wingsOfRighteousness-4.25)/10.;
+    s-=(gr-leaf+sqrt(2.)-4.25);
+    s*=PI*(log(3.)*logStabilizationConstant);
+gl_FragColor=vec4(s.y/-leaf);}
+
+
