@@ -5413,7 +5413,13 @@ if(tAScaled == 1)console.log("Manny Harmonizer Bypassed");
                                 innerPolynomialExp)
                                 ** innerPolynomialExp))//this is new
                             )))) * sig
-plusOrMinusPowerSeries/=gris;
+
+    plusOrMinusPowerSeries=(plusOrMinusPowerSeries/plusOrMinusPowerSeries)*plusOrMinusPowerSeries;
+    plusOrMinusPowerSeries=(plusOrMinusPowerSeries*plusOrMinusPowerSeries)/plusOrMinusPowerSeries;
+    plusOrMinusPowerSeries/=gris;
+    plusOrMinusPowerSeries=(plusOrMinusPowerSeries/plusOrMinusPowerSeries)*plusOrMinusPowerSeries;
+    plusOrMinusPowerSeries=(plusOrMinusPowerSeries*plusOrMinusPowerSeries)/plusOrMinusPowerSeries;
+
 
                 //plusOrMinusPowerSeries = (tAScaled**(2**(-1.49/(loopsThresh+2))))*sig
                 if (plusOrMinusPowerSeries != 1.) {//tolerance+=plusOrMinusPowerSeries;
