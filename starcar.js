@@ -5382,6 +5382,7 @@ if(tAScaled == 1)console.log("Manny Harmonizer Bypassed");
             let loopsThresh = 1
 
             //        if(totalAMPmodified<.5-.01)
+            const gris = (((((((((grPermanent/grPermanent)*grPermanent)/root2)/trunc)/leafPermanent))*root2)*trunc)*leafPermanent);
             if(isFinite(tAScaled)&&tAScaled>0.)
             for (n = 0; n < 444; n += 1.)
 
@@ -5412,6 +5413,8 @@ if(tAScaled == 1)console.log("Manny Harmonizer Bypassed");
                                 innerPolynomialExp)
                                 ** innerPolynomialExp))//this is new
                             )))) * sig
+plusOrMinusPowerSeries/=gris;
+
                 //plusOrMinusPowerSeries = (tAScaled**(2**(-1.49/(loopsThresh+2))))*sig
                 if (plusOrMinusPowerSeries != 1.) {//tolerance+=plusOrMinusPowerSeries;
                     //plusOrMinusPowerSeries=         Math.sign(plusOrMinusPowerSeries)*(Math.abs(plusOrMinusPowerSeries)**2.);
