@@ -5416,7 +5416,7 @@ if(tAScaled == 1)console.log("Manny Harmonizer Bypassed");
     plusOrMinusPowerSeries=(plusOrMinusPowerSeries*plusOrMinusPowerSeries)/plusOrMinusPowerSeries;
 
     plusOrMinusPowerSeries=(plusOrMinusPowerSeries/plusOrMinusPowerSeries)*plusOrMinusPowerSeries;
-    plusOrMinusPowerSeries/=((((((gris*trunc)))/trunc))/trunc)*trunc;
+    plusOrMinusPowerSeries/=((((((((((gris/gris)*gris)*trunc))/trunc))/trunc)*trunc)*gris)/gris);
 
     plusOrMinusPowerSeries=(plusOrMinusPowerSeries/plusOrMinusPowerSeries)*plusOrMinusPowerSeries;
         plusOrMinusPowerSeries=(plusOrMinusPowerSeries*plusOrMinusPowerSeries)/plusOrMinusPowerSeries;
