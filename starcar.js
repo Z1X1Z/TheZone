@@ -888,8 +888,8 @@ function move() {
             if(Math.abs(coordX) < jesusJetsThresholdX&&Math.abs(coordY) < jesusJetsThresholdY)
         {
                 if(!window.rezUpgradeBypass)
-                wrapMovementBoost =4*Math.log(3.)/fromCenter**.5;
-                else  wrapMovementBoost =4*Math.log(3.)/fromCenter**.5 
+                wrapMovementBoost =4*l3/fromCenter**.5;
+                else  wrapMovementBoost =4*l3/fromCenter**.5 
 } 
 
 
@@ -906,8 +906,8 @@ wrapMovementBoost=2.-Math.log(3);
 
                                if(!window.rezUpgradeBypass)
 
-                            wrapMovementBoost=.75*Math.log(3.)**2
-                            else   wrapMovementBoost=.75*Math.log(3.)**2
+                            wrapMovementBoost=.75*l3**2
+                            else   wrapMovementBoost=.75*l3**2
 
 
 
@@ -918,8 +918,8 @@ wrapMovementBoost=2.-Math.log(3);
                         {
                             console.log("there")
                 if(!window.rezUpgradeBypass)
-                wrapMovementBoost = .75*Math.log(3.)**2;
-                else              wrapMovementBoost = .75*Math.log(3.)**2;
+                wrapMovementBoost = .75*l3**2;
+                else              wrapMovementBoost = .75*l3**2;
 }*/
         }
             else
@@ -2620,8 +2620,8 @@ function executeTouchRegime() {
             if(Math.abs(coordX) < jesusJetsThresholdX&&Math.abs(coordY) < jesusJetsThresholdY)
         {
                 if(!window.rezUpgradeBypass)
-                wrapMovementBoost =4*Math.log(3.)/fromCenter**.5;
-                else  wrapMovementBoost =4*Math.log(3.)/fromCenter**.5 
+                wrapMovementBoost =4*l3/fromCenter**.5;
+                else  wrapMovementBoost =4*l3/fromCenter**.5 
 } 
 
 
@@ -2638,8 +2638,8 @@ wrapMovementBoost=2.-Math.log(3);
 
                                if(!window.rezUpgradeBypass)
 
-                            wrapMovementBoost=.75*Math.log(3.)**2
-                            else   wrapMovementBoost=.75*Math.log(3.)**2
+                            wrapMovementBoost=.75*l3**2
+                            else   wrapMovementBoost=.75*l3**2
 
 
 
@@ -2650,8 +2650,8 @@ wrapMovementBoost=2.-Math.log(3);
                         {
                             console.log("there")
                 if(!window.rezUpgradeBypass)
-                wrapMovementBoost = .75*Math.log(3.)**2;
-                else              wrapMovementBoost = .75*Math.log(3.)**2;
+                wrapMovementBoost = .75*l3**2;
+                else              wrapMovementBoost = .75*l3**2;
 }*/
         }
             else
@@ -3864,7 +3864,7 @@ let fulcrum = .8
 
                     var halfWayBump = 0;
             let c = new THREE.Color;
-                    let crownHeightFixed = (1.-logStabilizationConstant)/Math.log(3.);
+                    let crownHeightFixed = (1.-logStabilizationConstant)/l3;
                     let crownHeight =crownHeightFixed;
                     let headCrownAlternator = 0;
                     let lineOrSpace =-1;
@@ -4114,7 +4114,7 @@ let fulcrum = .8
                     }
                     vop.setRGB(BlackOrWhite, BlackOrWhite, BlackOrWhite);
 
-                    let starWitnessSize = 53. / 64. * ((1. - Math.log(3.)) / 2. + 1.)
+                    let starWitnessSize = 53. / 64. * ((1. - l3) / 2. + 1.)
                     for (var g = 0; g < 10; g++) {
                         const widt = pi / 120.;
                         const finger = (isFinite(twelve[ns][g])) ? twelve[ns][g] : 0;
