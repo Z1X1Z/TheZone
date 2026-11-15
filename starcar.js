@@ -5346,7 +5346,7 @@ function tone2note() {
                                                    //        totalAMPmodified=(totalAMPmodified*trunc)/trunc
 
                                                    var taf = tAScaled
-for(var t=0; t <1.; t+=2.*taf**.5)
+for(var t=0; t <1.; t+=taf**.5)
     {
         if(takingToLong())break;
         tAScaled=1./(tAScaled*tAScaled-taf)
@@ -5356,13 +5356,16 @@ for(var t=0; t <1.; t+=2.*taf**.5)
     tAScaled-=(grPermanent-leafPermanent+root2-4.25)
             tolerance +=24./Number.MAX_VALUE;
     tAScaled*=Math.PI*(Math.log(3)*logStabilizationConstant)
-tAScaled/=-leafPermanent;
+tAScaled/=(((((root2)/grPermanent))*leafPermanent)*grPermanent)/leafPermanent;
    // tAScaled=Math.abs(tAScaled)
 //tAScaled-=Math.log(3)/100
 
 //tAScaled-=(wingsOfRighteousness-4.25)
 
-           tAScaled = (tAScaled != 0 &&Math.abs(tAScaled)>.0005&& Math.abs(tAScaled)<1.&& isFinite(tAScaled)) ? tAScaled : 1;
+           tAScaled = (tAScaled != 0 &&//(tAScaled)>.0005&& Math.abs(tAScaled)<1.&&
+             isFinite(tAScaled)) ? tAScaled : 1;
+if(tAScaled == 1)console.log("Manny Harmonizer Bypassed");
+
            //   console.log(loopy) 
             // let b = 0.;
 
