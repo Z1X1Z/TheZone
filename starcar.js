@@ -5424,9 +5424,9 @@ plusOrMinusPowerSeries=(plusOrMinusPowerSeries/trunc)*trunc
     plusOrMinusPowerSeries/=(((gris/plusOrMinusPowerSeries)*plusOrMinusPowerSeries)*plusOrMinusPowerSeries)/plusOrMinusPowerSeries;
 
     plusOrMinusPowerSeries=(plusOrMinusPowerSeries/plusOrMinusPowerSeries)*plusOrMinusPowerSeries;
-
-plusOrMinusPowerSeries=(plusOrMinusPowerSeries*plusOrMinusPowerSeries)/plusOrMinusPowerSeries;
+    plusOrMinusPowerSeries=(plusOrMinusPowerSeries*plusOrMinusPowerSeries)/plusOrMinusPowerSeries;
 plusOrMinusPowerSeries=(plusOrMinusPowerSeries/trunc)*trunc
+plusOrMinusPowerSeries=(plusOrMinusPowerSeries*trunc)/trunc
 
 
                 //plusOrMinusPowerSeries = (tAScaled**(2**(-1.49/(loopsThresh+2))))*sig
