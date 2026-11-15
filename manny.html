@@ -2490,8 +2490,8 @@ uniform float OrthoEvery;
     uniform bool gigaLeap;
                                   
                                   const float twoThirds = 2./3.;
-                                  const float sqrt2 = sqrt(2.);
-                                 const float l3 = 1.098612288668109691395245236922525704647490557822749451734694333637494;
+                                  const float sqrt2 = 4142135623730950488016887242096980785696718753769480731766797379907324784621070388503875343276415727350138462309122970249248360558507372126441214970999358314132226659275055927557999505013;
+                                 const float l3 = 1.0986122886681096913952452369225257046474905578227494517346943336374942;//log(3.)
                                      const    float logStabilizationConstant = 1./l3+(1.-1./l3)/2.;
 
 
@@ -3730,7 +3730,7 @@ vec3 faceFORWARD(vec2 p,vec2 t){
                     }
                     return p;
                     }
-    const float shrug = 1.+(1.-sqrt(1.+2.*sqrt(2.))/2.)/sqrt(2.);//1.+(1.-0.978318343478516)/sqrt(2.);//https://www.wolframalpha.com/input?i=sqrt%282%2F%28-x%5E2%2B1%29%29%3D-%28x%29
+    const float shrug = 1.+(1.-sqrt(1.+2.*sqrt2)/2.)/sqrt2;//1.+(1.-0.978318343478516)/sqrt2;//https://www.wolframalpha.com/input?i=sqrt%282%2F%28-x%5E2%2B1%29%29%3D-%28x%29
 
                     const float elbowJoint = sqrt2*shrug;//may be 1.44?
 vec2 spinningArms(vec2 g, vec2 t, float angle,float amp, bool HandOfGod, float finger1 ,float finger2,float finger3 ,float finger4 ,float finger5 ,float finger6,float finger7,float finger8,float finger9 ,float finger10){
