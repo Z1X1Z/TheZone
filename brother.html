@@ -3953,7 +3953,12 @@ if(dstnce<CORE_DELIMITER
      float  repTrun =1.5;// this is 6 with bordergap of 7.5, and 3 (6? 4.5!1.5!!) with bordergap of 8 // and 4(2,3?) with border gap of 7
 
         repTrun*= truncNonLeaf;
+                       s=(s*s)/s;
+
      s=(s/repTrun)*(repTrun);
+                       s=(s*s)/s;
+
+
        dstnce=length(s);
 
 
