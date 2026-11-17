@@ -5639,7 +5639,7 @@ if(takingToLong())break;
 
                 //            let toleranceNudge =(((-leafPermanent+grPermanent+root2-4.25))*totalAMP)/fractionOfFrame// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+root2)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                 //  toleranceNudge*=(2.)/(grPermanent-leafPermanent+1);
-                let toleranceNudge = 2. / frameRationFull * (((-leafPermanent + grPermanent + root2 - wingsOfRighteousness))) * totalAMP / (grPermanent - leafPermanent + 1)// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+root2)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
+                let toleranceNudge = 2. / frameRationFull * (((wingsOfRighteousness-(-leafPermanent + grPermanent + root2)))) * totalAMP / (grPermanent - leafPermanent + 1)// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+root2)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                 // console.log(toleranceNudge/toleranceNudge2)
                 //console.log(toleranceNudge)
                 //toleranceNudge=(toleranceNudge/trunc)*trunc
@@ -5880,8 +5880,7 @@ tolerance=(((((((tolerance**tolerance)**tolerance)**tolerance)**tolerance)**tole
 tolerance=((((((((tolerance**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance
 tolerance-=.25
 tolerance*=.25;
-//tolerance=tolerance**.5
-
+//tolerance=(tolerance*tolerance)+tolerance**.5
 
 //tolerance*=tolerance
 //tolerance*=-leafPermanent
