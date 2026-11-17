@@ -5853,9 +5853,39 @@ if(isFinite(tolerance)&&tolerance>0.)
 
                 //   console.log(ll)
                        //     tolerance=(tolerance/trunc)*trunc
-
+totalAMP
             }
         // console.log(metas)
+
+
+
+
+
+
+
+
+            tolerance=(tolerance**tolerance)
+        tolerance=(tolerance**tolerance**tolerance)
+                tolerance=(tolerance**tolerance)**(tolerance**tolerance)
+
+             //    tolerance  = toleranceMAXIMALove
+
+console.log(tolerance)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
            // tolerance=(tolerance/trunc)*trunc
            // tolerance*=totalAMP
