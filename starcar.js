@@ -5867,6 +5867,12 @@ totalAMP
             tolerance=(tolerance**tolerance)
         tolerance=(tolerance**tolerance)**tolerance
                 tolerance=((tolerance**tolerance)**tolerance)**tolerance
+                tolerance=(((tolerance**tolerance)**tolerance)**tolerance)**tolerance
+                tolerance=((((tolerance**tolerance)**tolerance)**tolerance)**tolerance)**tolerance
+                tolerance=(((((tolerance**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance
+                tolerance=((((((tolerance**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance
+                tolerance=(((((((tolerance**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance
+                tolerance=((((((((tolerance**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance
 
              //    tolerance  = toleranceMAXIMALove
 
