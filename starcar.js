@@ -5570,7 +5570,7 @@ if(takingToLong())break;
 
             let plusOrMinus = 1;
             let term = 1;
-            let sum = ((totalAMPmodified + tolerance + tAScaledPermanent))//(tolerance+totalAMPmodified+tAScaledPermanent)
+            let sum = ((totalAMPmodified+ tAScaledPermanent + tolerance ))//(tolerance+totalAMPmodified+tAScaledPermanent)
 
             /*
                                           let phrase = 0;//((tolerance+totalAMPmodified))**2-((tolerance+totalAMPmodified))**4+((tolerance+totalAMPmodified))**8;
@@ -5639,7 +5639,7 @@ if(takingToLong())break;
 
                 //            let toleranceNudge =(((-leafPermanent+grPermanent+root2-4.25))*totalAMP)/fractionOfFrame// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+root2)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                 //  toleranceNudge*=(2.)/(grPermanent-leafPermanent+1);
-                let toleranceNudge = 2. / frameRationFull * (((wingsOfRighteousness-(-leafPermanent + grPermanent + root2)))) * totalAMP / (grPermanent - leafPermanent + 1)// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+root2)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
+                let toleranceNudge = 2. / frameRationFull * (((wingsOfRighteousness-(-leafPermanent + grPermanent + root2)))) * totalAMP / (-leafPermanent+grPermanent + 1)// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+root2)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                 // console.log(toleranceNudge/toleranceNudge2)
                 //console.log(toleranceNudge)
                 //toleranceNudge=(toleranceNudge/trunc)*trunc
@@ -5664,7 +5664,7 @@ if(takingToLong())break;
                 if (isFinite(tolFixed) && tolFixed > 0 && tolFixed < 1) for (var m = 0; m < tolFixed; m += totalAMP) {
                 if(takingToLong())break;
 
-                    tolerance = tolerance ** (tolerance + .5 + totalAMP);
+                    tolerance = tolerance ** (.5+tolerance  + totalAMP);
                      if (!isFinite(tolerance)||tolerance<0.)
                             {
                                 tolerance=totalAMPmodified;
