@@ -5351,11 +5351,11 @@ for(var t=0; t <1.; t+=taf**.5)
         if(takingToLong())break;
         tAScaled=1./(tAScaled*tAScaled-taf)
     }
-    tAScaled*=Math.PI*(logStabilizationConstant*Math.log(3))
+    tAScaled*=(Math.log(3)*logStabilizationConstant)*Math.PI
     tAScaled-=(wingsOfRighteousness-4.25)/10
     tAScaled-=(grPermanent-leafPermanent+root2-4.25)
             tolerance +=24./Number.MAX_VALUE;
-    tAScaled*=Math.PI*(Math.log(3)*logStabilizationConstant)
+    tAScaled*=(Math.log(3)*logStabilizationConstant)*Math.PI
 tAScaled/=(((((((((root2/root2)*root2)/grPermanent)/trunc)*leafPermanent))*grPermanent)*trunc)/leafPermanent);
    // tAScaled=Math.abs(tAScaled)
 //tAScaled-=Math.log(3)/100
@@ -5570,7 +5570,7 @@ if(takingToLong())break;
 
             let plusOrMinus = 1;
             let term = 1;
-            let sum = ((totalAMPmodified+ tAScaledPermanent + tolerance ))//(tolerance+totalAMPmodified+tAScaledPermanent)
+            let sum = ((totalAMPmodified + tolerance + tAScaledPermanent))//(tolerance+totalAMPmodified+tAScaledPermanent)
 
             /*
                                           let phrase = 0;//((tolerance+totalAMPmodified))**2-((tolerance+totalAMPmodified))**4+((tolerance+totalAMPmodified))**8;
@@ -5639,7 +5639,7 @@ if(takingToLong())break;
 
                 //            let toleranceNudge =(((-leafPermanent+grPermanent+root2-4.25))*totalAMP)/fractionOfFrame// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+root2)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                 //  toleranceNudge*=(2.)/(grPermanent-leafPermanent+1);
-                let toleranceNudge = 2. / frameRationFull * (((wingsOfRighteousness-(-leafPermanent + grPermanent + root2)))) * totalAMP / (-leafPermanent+grPermanent + 1)// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+root2)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
+                let toleranceNudge = 2. / frameRationFull * (((-leafPermanent + grPermanent + root2 - wingsOfRighteousness))) * totalAMP / (grPermanent - leafPermanent + 1)// maybe frameRation, maybe fractionOfFrame(1024)//this line is uncertain, particularly coefficients///tolerance +=((-leafPermanent+grPermanent+root2)-(totalAMP/2.+totalAMPmodified))/fractionOfFrame
                 // console.log(toleranceNudge/toleranceNudge2)
                 //console.log(toleranceNudge)
                 //toleranceNudge=(toleranceNudge/trunc)*trunc
@@ -5664,7 +5664,7 @@ if(takingToLong())break;
                 if (isFinite(tolFixed) && tolFixed > 0 && tolFixed < 1) for (var m = 0; m < tolFixed; m += totalAMP) {
                 if(takingToLong())break;
 
-                    tolerance = tolerance ** (.5+tolerance  + totalAMP);
+                    tolerance = tolerance ** ( .5 + tolerance +totalAMP);
                      if (!isFinite(tolerance)||tolerance<0.)
                             {
                                 tolerance=totalAMPmodified;
