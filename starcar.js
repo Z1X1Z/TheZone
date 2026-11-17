@@ -5878,8 +5878,8 @@ tolerance=(((((tolerance**tolerance)**tolerance)**tolerance)**tolerance)**tolera
 tolerance=((((((tolerance**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance
 tolerance=(((((((tolerance**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance
 tolerance=((((((((tolerance**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance
-
-tolerance*=.5;
+tolerance-=.25
+tolerance*=.25;
 //tolerance=tolerance**.5
 
 
