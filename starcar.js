@@ -5885,7 +5885,9 @@ tolerance*=.25;
 tolerance = tolerance**.5
 tolerance=Math.sqrt(tolerance)+tolerance*tolerance
 tolerance=tolerance**(-tolerance)-1.
-
+//tolerance-=.15
+tolerance=tolerance-.16+.25
+tolerance=Math.abs(tolerance)
 //tolerance=Math.sqrt(tolerance)+(tolerance*tolerance)
 
 //tolerance*=tolerance
@@ -5915,7 +5917,7 @@ console.log(tolerance)
             // tolerance=(tolerance/trunc)*trunc
 
 
-            if (!isFinite(tolerance) || tolerance > 1 || tolerance < 0) tolerance = ((-leafPermanent + grPermanent + root2 - wingsOfRighteousness)) * (2.) / (grPermanent - leafPermanent + 1)
+            if (!isFinite(tolerance) || tolerance >= 1 || tolerance <= 0) tolerance = ((-leafPermanent + grPermanent + root2 - wingsOfRighteousness)) * (2.) / (grPermanent - leafPermanent + 1)
 
         }
         else {
