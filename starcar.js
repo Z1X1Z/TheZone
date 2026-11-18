@@ -5866,7 +5866,7 @@ totalAMP
 //tolerance*=1.221
 //tolerance/=2.
 //console.log(tolerance)
-tolerance=Math.sqrt(tolerance)+(tolerance*tolerance)
+tolerance=(tolerance*tolerance)+Math.sqrt(tolerance)
 
 tolerance=tolerance*tolerance
 tolerance/=(root2*grPermanent*-leafPermanent)//order of multiplication matters!
