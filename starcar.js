@@ -2119,7 +2119,7 @@ if(zoom>2**64)
     else if (seventhOUTside && fromCenter * (1. - zoom) - zoom ** .5 > (uniforms.SEVEYEStart.value - 1. / 2 ** uniforms.SEVEYEpow.value * uniforms.SEVEYEpow.value / 2.))
         metaDepth = metaDepth * 2 ** (uniforms.SEVEYEpow.value + 1.)
     else if (uniforms.seventhEYE.value == 3. && uniforms.jubileyes.value != 0. && fromCenter < 1. / 3.)
-        metaDepth *= root2;
+        metaDepth *= 2**.5;
 
     let zoomCone = metaDepth * fromCenter;
     if (uniforms["colorCombo"].value == 16) zoomCone /= 1.33333333 / 2.;
