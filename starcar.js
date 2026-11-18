@@ -5909,7 +5909,7 @@ tolerance=(-.16+.25)+tolerance
             tolerance=(tolerance/2.)*2.
         tolerance=(tolerance/trunc)*trunc
 
-tolerance*=(((((gris**(-1)*gris)*(gris*gris))*(1./gris))))
+tolerance*=(((((gris**(-2)*(gris*gris))*(gris))*((1./gris)*gris**2))))
 
 //tolerance=Math.sqrt(tolerance)+(tolerance*tolerance)
 //tolerance*=tolerance
