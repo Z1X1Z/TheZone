@@ -5890,8 +5890,12 @@ tolerance=(-.16+.25)+tolerance
 
 //tolerance=(tolerance*.5)*2.
     tolerance=Math.log(tolerance**tolerance)/Math.log(tolerance)
+tolerance=(tolerance**(-1.)*tolerance**2)
 
+tolerance=(tolerance*tolerance)*(1./(tolerance))
 tolerance=(tolerance**2*(tolerance**(-1)))
+tolerance=(1./(tolerance))*(tolerance*tolerance)
+
 
             tolerance=(tolerance/2.)/.5
         tolerance=(tolerance*tolerance)/tolerance
@@ -5901,6 +5905,7 @@ tolerance=(tolerance**2*(tolerance**(-1)))
         tolerance=(tolerance/tolerance)*tolerance
             tolerance=(tolerance*2.)/2.
         tolerance=(tolerance*trunc)/trunc
+
             tolerance=(tolerance*2.)*.5
         tolerance=(tolerance*trunc)/trunc
             tolerance=(tolerance/.5)*.5
@@ -5909,8 +5914,8 @@ tolerance=(tolerance**2*(tolerance**(-1)))
         tolerance=(tolerance*tolerance)/tolerance
             tolerance=(tolerance/2.)*2.
         tolerance=(tolerance/trunc)*trunc
-tolerance=(Math.sqrt(tolerance)*tolerance**.5)
 
+tolerance=(Math.sqrt(tolerance)*tolerance**.5)
 tolerance*=(((((gris**(-1)*(gris))*(gris*gris))*((1./gris/gris)*gris**2))))
  
     tolerance=Math.log(tolerance**tolerance)/Math.log(tolerance)
