@@ -48,6 +48,7 @@ let micProcessing3 = false;//noiseSuppression
           }
        
 function shutdown(){
+            source.disconnect(analyser);
     source.disconnect();
     audioX.close();
 }
