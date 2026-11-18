@@ -642,22 +642,22 @@ function setTrailSize() {
     f = 0;
 
 }
-let trailLoaded = false;
-let trailDepth = 0;
+var trailLoaded = false;
+var trailDepth = 0;
 
-let d_x = 0, d_y = 0;
-let staticX = 0, staticY = 0;
+var d_x = 0, d_y = 0;
+var staticX = 0, staticY = 0;
 
-let circleX = 0., circleY = .5;
-let f = 0;
+var circleX = 0., circleY = .5;
+var f = 0;
 
 
 
-let pitch = -1;
+var pitch = -1;
 
-let reset = 6;
-let on = false;
-let spirafreq = 1;
+var reset = 6;
+var on = false;
+var spirafreq = 1;
 var angle = 0.;//this has nothing to do with the spin function below, it's for the pitch
 function spin(f, angle) {    //https://en.wikipedia.org/wiki/Rotation_matrix
     const fxb = f[0];
