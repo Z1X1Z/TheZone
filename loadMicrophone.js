@@ -16,10 +16,10 @@ window.inputData = new Float32Array(bufferSize).fill(0.);
 window.dataArray = new Uint8Array(bufferSize/2).fill(0.);
 window.babyBuffer = new Uint8Array(bufferSize).fill(0);
 
-let micProcessing1 = false;//autoGainControl
-let micProcessing2 = false;//echoCancellation
+var micProcessing1 = false;//autoGainControl
+var micProcessing2 = false;//echoCancellation
 if(iOS)micProcessing2=true//iOS seems to need for hearing through background music
-let micProcessing3 = false;//noiseSuppression
+var micProcessing3 = false;//noiseSuppression
   if((location.hash.includes('.,K')||location.hash.includes(',.K'))
     //!=iOS
   )
@@ -61,8 +61,9 @@ function shutdown(){
       }
 
 }
-let usingWadContext = false;
-let analyser={};
+var usingWadContext = false;
+var alreadyLoaded = false;
+var analyser={};
 
     async function startMic() {
       //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
@@ -75,6 +76,10 @@ let analyser={};
         })
       .then((stream) => {
         /* use the stream */
+
+        if(!alreadyLoaded)
+        {
+          /*
           if(typeof(Wad)=="function")     
             {
               audioX = Wad.audioContext;
@@ -82,6 +87,7 @@ let analyser={};
               console.log("wadAUDIO")
             }
             else 
+              */
           audioX = new AudioContext();
           analyser = audioX.createAnalyser();
           source = audioX.createMediaStreamSource( stream );
@@ -90,6 +96,7 @@ let analyser={};
 window.addEventListener("beforeunload", shutdown, false);
 
           source.connect(analyser);
+}
 
       }
       ).catch((err) => {// engage touch only mode
