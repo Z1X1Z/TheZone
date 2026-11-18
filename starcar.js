@@ -5884,7 +5884,7 @@ tolerance-=.25
 tolerance*=.25;
 tolerance = tolerance**.5
 tolerance=Math.sqrt(tolerance)+tolerance*tolerance
-tolerance=1.-tolerance**(1.+tolerance)
+tolerance=tolerance**(-tolerance)-1.
 
 //tolerance=Math.sqrt(tolerance)+(tolerance*tolerance)
 
