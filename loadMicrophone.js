@@ -51,7 +51,10 @@ function shutdown(){
             source.disconnect(analyser);
     source.disconnect();
     audioX.close();
-     if(typeof(Wad)=="function")Wad.audioContext.close();
+     if(typeof(Wad)=="function")
+      {Wad.audioContext.close();
+        Wad = null;
+      }
 }
 let analyser={};
 
