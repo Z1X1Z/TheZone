@@ -51,6 +51,7 @@ function shutdown(){
             source.disconnect(analyser);
     source.disconnect();
     audioX.close();
+     if(typeof(Wad)=="function")Wad.audioContext.close();
 }
 let analyser={};
 
