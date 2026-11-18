@@ -5884,12 +5884,34 @@ tolerance-=.25
 tolerance*=.25;
 tolerance = tolerance**.5
 tolerance=Math.sqrt(tolerance)+tolerance*tolerance
-tolerance=tolerance**(-tolerance)-1.
-//tolerance-=.15
-tolerance=tolerance-.16+.25
-tolerance=Math.abs(tolerance)
-//tolerance=Math.sqrt(tolerance)+(tolerance*tolerance)
+tolerance=(tolerance)**(-tolerance)-1.
+tolerance=(-.16+.25)+tolerance
 
+//tolerance=(tolerance*.5)*2.
+
+
+            tolerance=(tolerance/2.)/.5
+        tolerance=(tolerance*tolerance)/tolerance
+            tolerance=(tolerance*.5)/.5
+        tolerance=(tolerance/trunc)*trunc
+            tolerance=(tolerance/.5)/2.
+        tolerance=(tolerance/tolerance)*tolerance
+            tolerance=(tolerance*2.)/2.
+        tolerance=(tolerance*trunc)/trunc
+
+            tolerance=(tolerance*2.)*.5
+        tolerance=(tolerance*trunc)/trunc
+            tolerance=(tolerance/.5)*.5
+        tolerance=(tolerance/tolerance)*tolerance
+            tolerance=(tolerance*.5)*2.
+        tolerance=(tolerance*tolerance)/tolerance
+            tolerance=(tolerance/2.)*2.
+        tolerance=(tolerance/trunc)*trunc
+
+        tolerance=Math.log(tolerance**tolerance)/Math.log(tolerance)
+
+
+//tolerance=Math.sqrt(tolerance)+(tolerance*tolerance)
 //tolerance*=tolerance
 //tolerance*=-leafPermanent
 //tolerance *=gris
