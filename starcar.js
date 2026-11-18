@@ -5909,14 +5909,14 @@ tolerance=(-.16+.25)+tolerance
             tolerance=(tolerance/2.)*2.
         tolerance=(tolerance/trunc)*trunc
 
-tolerance*=(((((gris**(-1)*(gris))*(gris*gris))*((1./gris)*gris**2))))
-
+tolerance*=(((((gris**(-1)*(gris))*(gris*gris))*((1./gris/gris)*gris**2))))
+//tolerance=.5-tolerance
 //tolerance=Math.sqrt(tolerance)+(tolerance*tolerance)
 //tolerance*=tolerance
 //tolerance*=-leafPermanent
              //    tolerance  = toleranceMAXIMALove
 
-console.log(tolerance)
+//console.log(tolerance)
 
 
 
