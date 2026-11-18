@@ -5664,7 +5664,7 @@ if(takingToLong())break;
                 if (isFinite(tolFixed) && tolFixed > 0 && tolFixed < 1) for (var m = 0; m < tolFixed; m += totalAMP) {
                 if(takingToLong())break;
 
-                    tolerance = tolerance ** ( .5 + tolerance +totalAMP);
+                    tolerance = tolerance ** ( .5 +totalAMP+ tolerance );
                      if (!isFinite(tolerance)||tolerance<0.)
                             {
                                 tolerance=totalAMPmodified;
