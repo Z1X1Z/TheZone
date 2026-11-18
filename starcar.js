@@ -5914,7 +5914,7 @@ tolerance*=(((((gris**(-1)*(gris))*(gris*gris))*((1./gris/gris)*gris**2))))
 
 tolerance=(1.-tolerance**.5)**(1.+tolerance**2)**((-tolerance)**2.)**((tolerance**.5))
 
-tolerance=tolerance**tolerance**(tolerance**tolerance*tolerance**.5)*tolerance
+tolerance=(tolerance**.5*tolerance**(tolerance*tolerance**tolerance*tolerance))
 //    tolerance  = toleranceMAXIMALove
 
 //console.log(tolerance)
