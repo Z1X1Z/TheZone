@@ -5909,12 +5909,11 @@ tolerance=(-.16+.25)+tolerance
             tolerance=(tolerance/2.)*2.
         tolerance=(tolerance/trunc)*trunc
 
-
+tolerance*=(((((gris**(-1)*gris)*(gris*gris))*(1./gris))))
 
 //tolerance=Math.sqrt(tolerance)+(tolerance*tolerance)
 //tolerance*=tolerance
 //tolerance*=-leafPermanent
-//tolerance *=gris
              //    tolerance  = toleranceMAXIMALove
 
 console.log(tolerance)
