@@ -48,14 +48,20 @@ let micProcessing3 = false;//noiseSuppression
           }
        
 function shutdown(){
-            source.disconnect(analyser);
-    source.disconnect();
-    audioX.close();
+       
      if(typeof(Wad)=="function")
       {Wad.audioContext.close();
         Wad = null;
       }
+      if(!usingWadContext)
+      {
+             source.disconnect(analyser);
+    source.disconnect();
+    audioX.close();
+      }
+
 }
+let usingWadContext = false;
 let analyser={};
 
     async function startMic() {
@@ -69,6 +75,13 @@ let analyser={};
         })
       .then((stream) => {
         /* use the stream */
+          if(typeof(Wad)=="function")     
+            {
+              audioX = Wad.audioContext;
+              usingWadContext = true
+              console.log("wadAUDIO")
+            }
+            else 
           audioX = new AudioContext();
           analyser = audioX.createAnalyser();
           source = audioX.createMediaStreamSource( stream );
