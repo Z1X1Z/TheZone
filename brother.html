@@ -3125,6 +3125,7 @@ vec4 tol(vec2 p, vec2 t){
 float lfc = length(constellationCoord);
 
 float lengthP = length(p);
+bool inCorner = false;
 
  float zoomB = zoom;
  float lfcB = lfc;
@@ -3158,7 +3159,7 @@ vec2 pABSOLUTE = p;
     }
 
   else  
-  {
+  {inCorner=true;
     float cornerBoost = 343./pow(abs((p.x*p.y))-52.5,.5);
     if((p.x)<(p.y)-52.5)hyperCore-=cornerBoost;
   else if(p.x>p.y+52.5)hyperCore-=cornerBoost;
@@ -3958,6 +3959,8 @@ if(dstnce<CORE_DELIMITER
                           s=(s/s)*s;
 */
 
+if(!inCorner)
+{
           s=(s*repTrun)/(repTrun);
      s=(s/repTrun)*(repTrun);
 
@@ -4075,7 +4078,7 @@ oneOf=pow(pow(oneOf,1.),1.);
 
             //           s=(s*s)/s;
             //      s=(s/s)*s;
-
+}
 
        dstnce=length(s);
 
