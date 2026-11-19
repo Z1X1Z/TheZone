@@ -5891,28 +5891,25 @@ tolerance=(-.16+.25)+tolerance
 //tolerance=(tolerance*.5)*2.
     tolerance=Math.log(tolerance**tolerance)/Math.log(tolerance)
 
-tolerance=((tolerance/tolerance)*(tolerance))
 
 tolerance*=(tolerance*((1./(tolerance*tolerance))*tolerance))
-
 tolerance=((tolerance*tolerance)*(1./tolerance))
-    
- tolerance=((tolerance**(-1)*tolerance**2))
+tolerance=((tolerance/tolerance)*(tolerance))
+
  
-        tolerance*=(tolerance**-2*(tolerance**(1)))
-        
+        tolerance/=((tolerance**(1)*tolerance**-2))
+    tolerance=((tolerance**(-1)*tolerance**2))
     tolerance=(tolerance**2*(tolerance**(-1)))
-    
-        tolerance*=((tolerance**(1)*tolerance**-2))
-
-
-tolerance*=(1./(tolerance))*(tolerance*tolerance)
-
-
-tolerance*=((tolerance*(1./(tolerance*tolerance)))*tolerance)
+        tolerance/=(tolerance**-2*(tolerance**(1)))
 
 tolerance=((tolerance)*(tolerance/tolerance))
-                
+tolerance=(1./(tolerance))*(tolerance*tolerance)
+tolerance*=((tolerance*(1./(tolerance*tolerance)))*tolerance)
+
+               //     tolerance=Math.log(tolerance**tolerance)/Math.log(tolerance)
+tolerance=(tolerance**.5*Math.sqrt(tolerance))
+
+tolerance*=(((((gris**(-1)*(gris))*(gris*gris))*((1./gris/gris)*gris**2))))
 
 
             tolerance=(tolerance/2.)/.5
@@ -5951,12 +5948,14 @@ let tolerance_difference=0.
 let tolBuff = tolerance;
 let tolStart = tolerance;
 */
+
+
 for(let yu = 0.; yu<21; yu+=1)
     {
  //tolBuff = tolerance;
 tolerance=(tolerance**1)
-tolerance=(1./tolerance**-1)
-tolerance=((1./tolerance)**-1)
+tolerance=(1./tolerance**(-1))
+tolerance=((1./tolerance)**(-1))
 tolerance=(tolerance**1)**1
 //tolerance_difference=Math.abs(tolerance-tolBuff)
     }
