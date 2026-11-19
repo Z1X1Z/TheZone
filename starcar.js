@@ -5942,28 +5942,28 @@ tolerance=(1.-tolerance**.5)**(1.+tolerance**2)**((tolerance)**2.)**((tolerance*
 tolerance=(tolerance**.5*tolerance**(tolerance*(tolerance**tolerance*tolerance)))
 
 tolerance=Math.abs(tolerance**2.-tolerance**.5)
-/*
-
-let tolerance_difference=0.
-let tolBuff = tolerance;
-let tolStart = tolerance;
-*/
-        tolerance=tolerance**(tolerance/Number.MAX_VALUE)*tolerance
 
 
+
+
+     
 for(let yu = 0.; yu<21; yu+=1)
     {
- //tolBuff = tolerance;
-tolerance=(tolerance**1)
-tolerance=(1./tolerance**(-1))
-tolerance=((1./tolerance)**(-1))
-tolerance=(tolerance**1)**1
-//tolerance_difference=Math.abs(tolerance-tolBuff)
+tolerance=(tolerance**1.)
+
+tolerance=(1./tolerance**(-1.))
+
+        tolerance=tolerance**(-tolerance/Number.MAX_VALUE)*tolerance
+                tolerance=tolerance*tolerance**(tolerance/Number.MAX_VALUE)
+tolerance=(tolerance**(-1.))**(-1.)
+                tolerance=tolerance*tolerance**(-tolerance/Number.MAX_VALUE)
+        tolerance=tolerance**(tolerance/Number.MAX_VALUE)*tolerance
+
+tolerance=((1./tolerance)**(-1.))
+
+tolerance=(tolerance**1.)**1.
+
     }
-
-        tolerance=tolerance*tolerance**(tolerance/Number.MAX_VALUE)
-
-
 
 
 //    tolerance  = toleranceMAXIMALove
