@@ -5897,8 +5897,12 @@ tolerance*=(tolerance*((1./(tolerance*tolerance))*tolerance))
 
 tolerance=((tolerance*tolerance)*(1./tolerance))
     
+ tolerance=((tolerance**(-1)*tolerance**2))
+ 
         tolerance*=(tolerance**-2*(tolerance**(1)))
+        
     tolerance=(tolerance**2*(tolerance**(-1)))
+    
         tolerance*=((tolerance**(1)*tolerance**-2))
 
 
@@ -5941,6 +5945,16 @@ tolerance=(1.-tolerance**.5)**(1.+tolerance**2)**((tolerance)**2.)**((tolerance*
 tolerance=(tolerance**.5*tolerance**(tolerance*(tolerance**tolerance*tolerance)))
 
 tolerance=Math.abs(tolerance**2.-tolerance**.5)
+
+
+
+
+tolerance=tolerance**1
+tolerance=(1./tolerance**-1)
+tolerance=(1./tolerance)**-1
+tolerance=tolerance**1
+
+
 
 
 //    tolerance  = toleranceMAXIMALove
