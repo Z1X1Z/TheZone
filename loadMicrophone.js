@@ -79,7 +79,7 @@ var analyser={};
 
         if(!alreadyLoaded)
         {
-          /*
+          
           if(typeof(Wad)=="function")     
             {
               audioX = Wad.audioContext;
@@ -87,7 +87,7 @@ var analyser={};
               console.log("wadAUDIO")
             }
             else 
-              */
+              
           audioX = new AudioContext();
           analyser = audioX.createAnalyser();
           source = audioX.createMediaStreamSource( stream );
