@@ -5896,8 +5896,11 @@ tolerance=((tolerance/tolerance)*(tolerance))
 tolerance*=(tolerance*((1./(tolerance*tolerance))*tolerance))
 
 tolerance=((tolerance*tolerance)*(1./tolerance))
-
+    
+        tolerance*=(tolerance**-2*(tolerance**(1)))
     tolerance=(tolerance**2*(tolerance**(-1)))
+        tolerance*=((tolerance**(1)*tolerance**-2))
+
 
 tolerance*=(1./(tolerance))*(tolerance*tolerance)
 
