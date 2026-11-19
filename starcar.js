@@ -5891,15 +5891,21 @@ tolerance=(-.16+.25)+tolerance
 //tolerance=(tolerance*.5)*2.
     tolerance=Math.log(tolerance**tolerance)/Math.log(tolerance)
 
-        tolerance*=((tolerance/tolerance)*(tolerance))
+tolerance=((tolerance/tolerance)*(tolerance))
 
-    tolerance*=((tolerance*tolerance)*(tolerance/tolerance))
-tolerance=(tolerance*tolerance)*(1./(tolerance))
-tolerance=(tolerance**2*(tolerance**(-1)))
-tolerance=(1./(tolerance))*(tolerance*tolerance)
-    tolerance*=((tolerance)*(tolerance/tolerance))
+tolerance*=(tolerance*((1./(tolerance*tolerance))*tolerance))
+
+tolerance=((tolerance*tolerance)*(1./tolerance))
+
+    tolerance=(tolerance**2*(tolerance**(-1)))
+
+tolerance*=(1./(tolerance))*(tolerance*tolerance)
 
 
+tolerance*=((tolerance*(1./(tolerance*tolerance)))*tolerance)
+
+tolerance=((tolerance)*(tolerance/tolerance))
+                
 
 
             tolerance=(tolerance/2.)/.5
