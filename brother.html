@@ -842,19 +842,18 @@ radialWarp=b;
           <div  id="m3" class="dropdown-content">
               
                      
+
               <a id="Chirality" name="t"  onclick= "
                   key  = '|';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'keyCode':key.charCodeAt(0)}));">
                   Flop Chirality![|]</a><br>
                           
-
-              <input type="checkbox"  id="Variant0" name="t"  onclick= "
+              <input type="checkbox"  id="vari" name="t"  onclick= "
                   key  = 'V';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
-                  <label for="Variant0"> Varify![.V]</label><br>             
+                  <label for="vari"> Varify![.V]</label><br>             
                           
               <label for="CloverTwist">Twist offset:[|]</label>
-              
              <input type="number" id="CloverTwist" name="CloverTwist" class="num" onkeyup="
                 number = 'no number'
 ;
@@ -3126,7 +3125,6 @@ vec4 tol(vec2 p, vec2 t){
 float lfc = length(constellationCoord);
 
 float lengthP = length(p);
-bool inCorner = false;
 
  float zoomB = zoom;
  float lfcB = lfc;
@@ -3160,7 +3158,7 @@ vec2 pABSOLUTE = p;
     }
 
   else  
-  {inCorner=true;
+  {
     float cornerBoost = 343./pow(abs((p.x*p.y))-52.5,.5);
     if((p.x)<(p.y)-52.5)hyperCore-=cornerBoost;
   else if(p.x>p.y+52.5)hyperCore-=cornerBoost;
@@ -3960,8 +3958,6 @@ if(dstnce<CORE_DELIMITER
                           s=(s/s)*s;
 */
 
-if(!inCorner)
-{
           s=(s*repTrun)/(repTrun);
      s=(s/repTrun)*(repTrun);
 
@@ -4079,7 +4075,7 @@ oneOf=pow(pow(oneOf,1.),1.);
 
             //           s=(s*s)/s;
             //      s=(s/s)*s;
-}
+
 
        dstnce=length(s);
 
