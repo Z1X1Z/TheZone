@@ -5964,6 +5964,7 @@ tolerance=((1./tolerance)**(-1.))
 tolerance=(tolerance**1.)**1.
 
     }
+tolerance=(1./(tolerance**1.))
 
 
 //    tolerance  = toleranceMAXIMALove
