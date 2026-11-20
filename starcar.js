@@ -5871,7 +5871,7 @@ if(isFinite(tolerance)&&tolerance>0.)
 //tolerance=tolerance*tolerance+Math.sqrt(tolerance)
 tolerance=tolerance*tolerance+Math.sqrt(tolerance)
 
-tolerance=tolerance*tolerance
+tolerance=tolerance
 tolerance/=(root2*grPermanent*-leafPermanent)//order of multiplication matters!
 
 tolerance=(tolerance**tolerance)
@@ -5949,10 +5949,13 @@ tolerance=Math.abs(Math.pow(tolerance,2.)-Math.sqrt(tolerance))
 
 
 
+if (!isFinite(tolerance) || tolerance >= 1 || tolerance <= 0) tolerance = ((-leafPermanent + grPermanent + root2 - wingsOfRighteousness)) * (2.) / (grPermanent - leafPermanent + 1)
 
 
 for(let yu = 0.; yu<21; yu+=1)
     {
+                                 if(takingToLong())break;
+
         
 
 tolerance=(tolerance**1.)
