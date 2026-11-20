@@ -5855,7 +5855,7 @@ if(isFinite(tolerance)&&tolerance>0.)
 
                 //   console.log(ll)
                        //     tolerance=(tolerance/trunc)*trunc
-totalAMP
+
             }
         // console.log(metas)
 
@@ -5885,8 +5885,8 @@ tolerance=(((((((tolerance**tolerance)**tolerance)**tolerance)**tolerance)**tole
 tolerance=((((((((tolerance**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance)**tolerance
 tolerance-=.25
 tolerance*=.25;
-tolerance = tolerance**.5
-tolerance=Math.sqrt(tolerance)+tolerance*tolerance
+tolerance = Math.pow(tolerance,.5)
+tolerance=Math.sqrt(tolerance)+Math.pow(tolerance,2.)
 tolerance=(tolerance)**(-tolerance)-1.
 tolerance=(-.16+.25)+tolerance
 
@@ -5902,7 +5902,6 @@ tolerance=((tolerance/tolerance)*(tolerance))
         tolerance/=((tolerance**(1)*tolerance**-2))
     tolerance=((tolerance**(-1)*tolerance**2))
         oneOf=(Math.pow(Math.sqrt(tolerance),2.));
-
     tolerance=(tolerance**2*(tolerance**(-1)))
         tolerance/=(tolerance**-2*(tolerance**(1)))
 
@@ -5941,12 +5940,12 @@ tolerance*=(((((gris**(-1)*(gris))*(gris*gris))*((1./gris/gris)*gris**2))))
     tolerance=Math.log(tolerance**tolerance)/Math.log(tolerance)
 
 
-tolerance=Math.abs(tolerance**.5-tolerance*tolerance)
+tolerance=Math.abs(Math.sqrt(tolerance)-Math.pow(tolerance,2.))
 
 tolerance=(1.-tolerance**.5)**(1.+tolerance**2)**((tolerance)**2.)**((tolerance**.5))
 tolerance=(tolerance**.5*tolerance**(tolerance*(tolerance**tolerance*tolerance)))
 
-tolerance=Math.abs(tolerance**2.-tolerance**.5)
+tolerance=Math.abs(Math.pow(tolerance,2.)-Math.sqrt(tolerance))
 
 
 
