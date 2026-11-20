@@ -169,6 +169,7 @@
                         if(lsNoC[0]=="(")
                     {
                            var metaName = lsNoC.split(',')
+                           console.log(metaName)
                             for(var v = 0; v<metaName.length;v++)metaName[v]=String(metaName[v])
 
                            var postString = "";
@@ -196,8 +197,9 @@ beginningBeforeFirstExtendedComma =metaCleaned.slice(s+1,metaCleaned.length);
                         break;
                     }
                         var lsNoCMeta = localStorage.getItem(metaCleaned)
-                       // if(lsNoCMeta!='null')
-                                                hashExtension+=lsNoCMeta
+                        console.log( localStorage.getItem(metaCleaned))
+                        if(lsNoCMeta!=null)
+                       //console.log(lsNoC)
                                             if(breakOut)
                                             {
                                                 hashExtension+=beginningBeforeFirstExtendedComma+postString;
