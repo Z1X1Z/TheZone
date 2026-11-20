@@ -1667,6 +1667,8 @@ fibgetScene= new THREE.Scene();
          if(!window.rezUpgradeBypass)    renderer.setPixelRatio(wingsOfRighteousness2);
         else    renderer.setPixelRatio(rez);
 
+        if(window.reZSet&&!window.rezUpgradeBypass)   renderer.setPixelRatio(rez);
+
 
 
     onWindowResize();
@@ -1697,7 +1699,7 @@ fibgetScene= new THREE.Scene();
 
            }
     else        renderer.render(scene, camera);
-     if(!window.rezUpgradeBypass) 
+     if(!window.rezUpgradeBypass&&!window.reZSet) 
      {
             renderer.setPixelRatio(window.devicePixelRatio/Number(piE));
         }
@@ -5907,10 +5909,11 @@ tolerance=(1./(tolerance))*(tolerance*tolerance)
 tolerance*=((tolerance*(1./(tolerance*tolerance)))*tolerance)
 
                //     tolerance=Math.log(tolerance**tolerance)/Math.log(tolerance)
-tolerance=(tolerance**.5*Math.sqrt(tolerance))
+tolerance=(Math.sqrt(tolerance)*tolerance**.5)
 
 tolerance*=(((((gris**(-1)*(gris))*(gris*gris))*((1./gris/gris)*gris**2))))
 
+tolerance=(tolerance**2.)**.5
 
             tolerance=(tolerance/2.)/.5
         tolerance=(tolerance*tolerance)/tolerance
