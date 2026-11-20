@@ -5901,6 +5901,8 @@ tolerance=((tolerance/tolerance)*(tolerance))
  
         tolerance/=((tolerance**(1)*tolerance**-2))
     tolerance=((tolerance**(-1)*tolerance**2))
+        oneOf=(Math.pow(Math.sqrt(tolerance),2.));
+
     tolerance=(tolerance**2*(tolerance**(-1)))
         tolerance/=(tolerance**-2*(tolerance**(1)))
 
@@ -5909,11 +5911,11 @@ tolerance=(1./(tolerance))*(tolerance*tolerance)
 tolerance*=((tolerance*(1./(tolerance*tolerance)))*tolerance)
 
                //     tolerance=Math.log(tolerance**tolerance)/Math.log(tolerance)
-tolerance=(Math.sqrt(tolerance)*tolerance**.5)
+tolerance=(Math.sqrt(tolerance)*Math.pow(tolerance,.5))
 
 tolerance*=(((((gris**(-1)*(gris))*(gris*gris))*((1./gris/gris)*gris**2))))
 
-tolerance=(tolerance**2.)**.5
+//tolerance=(tolerance**2.)**.5
 
             tolerance=(tolerance/2.)/.5
         tolerance=(tolerance*tolerance)/tolerance
@@ -5933,7 +5935,7 @@ tolerance=(tolerance**2.)**.5
             tolerance=(tolerance/2.)*2.
         tolerance=(tolerance/trunc)*trunc
 
-tolerance=(Math.sqrt(tolerance)*tolerance**.5)
+tolerance=(Math.sqrt(tolerance)*Math.pow(tolerance,.5))
 tolerance*=(((((gris**(-1)*(gris))*(gris*gris))*((1./gris/gris)*gris**2))))
  
     tolerance=Math.log(tolerance**tolerance)/Math.log(tolerance)
