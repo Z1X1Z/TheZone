@@ -5886,7 +5886,7 @@ tolerance=((((((((tolerance**tolerance)**tolerance)**tolerance)**tolerance)**tol
 tolerance-=.25
 tolerance*=.25;
 tolerance = Math.pow(tolerance,.5)
-tolerance=Math.sqrt(tolerance)+Math.pow(tolerance,2.)
+tolerance=Math.sqrt(tolerance)+tolerance**2.
 tolerance=(tolerance)**(-tolerance)-1.
 tolerance=(-.16+.25)+tolerance
 
