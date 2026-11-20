@@ -1,20 +1,17 @@
-window.fftSize=2048
+var fftSize=2048
     window.touchOnlyMode = false;
 window.touchMode = false;
     window.isTouch=false;
 
     window.micOn = false;
-window.audioX={sampleRate:44100};
-    window.source={};
 
 
 
-
-window.bufferSize=fftSize;
-window.numberOfBins=bufferSize/2.;
-window.inputData = new Float32Array(bufferSize).fill(0.);
-window.dataArray = new Uint8Array(bufferSize/2).fill(0.);
-window.babyBuffer = new Uint8Array(bufferSize).fill(0);
+var bufferSize=fftSize;
+var numberOfBins=bufferSize/2.;
+var inputData = new Float32Array(bufferSize).fill(0.);
+var dataArray = new Uint8Array(bufferSize/2).fill(0.);
+var babyBuffer = new Uint8Array(bufferSize).fill(0);
 
 var micProcessing1 = false;//autoGainControl
 var micProcessing2 = false;//echoCancellation
@@ -55,15 +52,14 @@ function shutdown(){
       }
       if(!usingWadContext)
       {
-             source.disconnect(analyser);
+            source.disconnect(analyser);
     source.disconnect();
     audioX.close();
       }
 
 }
 var usingWadContext = false;
-var alreadyLoaded = false;
-var analyser={};
+window.alreadyLoaded = false;
 
     async function startMic() {
       //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
@@ -76,26 +72,25 @@ var analyser={};
         })
       .then((stream) => {
         /* use the stream */
-
+        streamy=stream;
+        
         if(!alreadyLoaded)
         {
           
-          if(typeof(Wad)=="function")     
-            {
-              audioX = Wad.audioContext;
-              usingWadContext = true
-              console.log("wadAUDIO")
-            }
-            else 
-              
+              if(soundPermanentlyMuted){
+                alreadyLoaded=true;
           audioX = new AudioContext();
           analyser = audioX.createAnalyser();
           source = audioX.createMediaStreamSource( stream );
           analyser.fftSize = fftSize;
+                    source.connect(analyser);
+                micOn = true;
+
+              }
+
 
 window.addEventListener("beforeunload", shutdown, false);
 
-          source.connect(analyser);
 }
 
       }
@@ -103,9 +98,13 @@ window.addEventListener("beforeunload", shutdown, false);
                         console.log("Touch only mode!")
                         window.touchOnlyMode=true;
                         window.touchMode = true;
+                                        micOn = true;
+
                         })
       .finally((err) => {
-        micOn = true;
+
+
+
       });
     }
     let letTouchThrough = "inactive";

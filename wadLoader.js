@@ -1,20 +1,51 @@
 
+var audioX={sampleRate:44100};
+var  source={};
+var analyser={};
+var streamy=null;
+
+
+
+
                 if(localStorage.getItem('fullScreen')=='full screen')window.maximizeScreen = true
                 else window.maximizeScreen = false;
                   localStorage.setItem('fullScreen','nope')
+
+                  
 const maxTouchSoundCount = 24;
 window.osmdOscillators = 15;
-let touchNumber=new Map();
-for(var v = 0; v<maxTouchSoundCount;v++)touchNumber.set(v,"off")
 let pressIndex=new Map();
+let touchNumber=new Map();
+    for(var v = 0; v<maxTouchSoundCount;v++)touchNumber.set(v,"off")
 
 let instrument1 = "square"
 let instrument2 = "triangle"
 let instrumentGuitar = "triangle"
 
-
 function stallTillWad(){
-    if(typeof(Wad)=="function"&&userHasGestured){initialize();} 
+    if(typeof(Wad)=="function"&&userHasGestured&&(streamy!=null||touchOnlyMode)){
+        
+        if(streamy!=null)
+            
+        {
+
+              audioX = Wad.audioContext;
+              usingWadContext = true
+
+              console.log("wadAUDIO2")
+                alreadyLoaded=true
+
+            analyser = audioX.createAnalyser();
+            source = audioX.createMediaStreamSource( streamy );
+          analyser.fftSize = fftSize;
+                 source.connect(analyser);
+
+                                        micOn = true;
+
+        }
+
+              
+              initialize();} 
     else  setTimeout(stallTillWad,100);}
 stallTillWad()//lurker
 
