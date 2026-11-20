@@ -5158,7 +5158,7 @@ function tone2note() {
 
     if (window.highORlow == 0 || window.highORlow == 3) {
         if (totalAMP > 0 && isFinite(totalAMP)
-            && totalAMP <= .7// when I get loud it seems to freeze
+            && totalAMP <= .69// when I get loud it seems to freeze
         ) {
             let proportion = frameRationFull / bufferSize;
             let tAScaled = 0.;//totalAMPmodified*proportion;
@@ -5527,7 +5527,7 @@ if(takingToLong())break;
                     tolerance = (toleranceFixed) ** ((1 - tolerance))
  if (!isFinite(tolerance)||tolerance<0.)
     {
-        tolerance=totalAMPmodified;
+        tolerance=totalAMP;
         break;
     }
                     // ll++
@@ -5663,7 +5663,7 @@ if(takingToLong())break;
 
                 var tolFixed = (tolerance) ** (3.5  + totalAMP- tolerance);
 
-                if (isFinite(tolFixed) && tolFixed > 0 && tolFixed < 1) for (var m = 0; m < tolFixed; m += totalAMP) {
+                if (isFinite(tolFixed) && tolFixed > 0 &&tolerance<1 && tolFixed < 1) for (var m = 0; m < tolFixed; m += totalAMP) {
                 if(takingToLong())break;
 
                     tolerance = tolerance ** ( .5 +totalAMP+ tolerance );
@@ -5775,6 +5775,8 @@ if(isFinite(tolerance)&&tolerance>0.)
 
 
                 }
+                if (!isFinite(tolerance) || tolerance >= 1 || tolerance <= 0) tolerance = totalAMP;
+
 
                     /*
                        if (isFinite(tolerance) && tolerance < 1 && tolerance > 0.)
@@ -5949,7 +5951,7 @@ tolerance=Math.abs(Math.pow(tolerance,2.)-Math.sqrt(tolerance))
 
 
 
-if (!isFinite(tolerance) || tolerance >= 1 || tolerance <= 0) tolerance = ((-leafPermanent + grPermanent + root2 - wingsOfRighteousness)) * (2.) / (grPermanent - leafPermanent + 1)
+if (!isFinite(tolerance) || tolerance >= 1 || tolerance <= 0) tolerance = totalAMP;
 
 
 for(let yu = 0.; yu<21; yu+=1)
