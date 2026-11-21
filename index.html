@@ -31,10 +31,10 @@
     <h2>
     <div id="weeks" class="weeks"></div>
     </h2>
-                                        <img id="displayimage" src = "game.png" style="width:0%;"></img>
+                                        <img id="displayimage" src = "game.png" style="width:0%;" onload='document.getElementById("displayimage").remove()'onerror='document.getElementById("displayimage").remove()'></img>
 
     <script>
-        document.getElementById("displayimage").remove()
+    //    document.getElementById("displayimage").addEventListener(onload,()=>{document.getElementById("displayimage").remove()})
 
         //https://stackoverflow.com/questions/8619879/javascript-calculate-the-day-of-the-year-1-366
         var now = new Date();
