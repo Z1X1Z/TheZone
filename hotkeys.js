@@ -355,6 +355,7 @@ oppositionalCoreFlopJUBILEE:{value:JubileeCoreFlop},
 
 
 upCoreCycler:{value:0},
+askyou:{value:0},
 
 gigaLeap:{value:true},
 BlackTraction:{value:false}
@@ -1278,6 +1279,11 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
                                       }
                                     }
 
+                                  else if(key == "M" && event.altKey)
+                                    {
+                                        uniforms.askyou.value=(uniforms.askyou.value+1)%2;
+                                    }
+
     else if(key == "o" && event.ctrlKey)
     {
         omniDynamicEngaged = !omniDynamicEngaged;
@@ -1580,6 +1586,10 @@ uniforms.feedTheLamb.value=!uniforms.feedTheLamb.value;
             soundPermanentlyMuted=true;
             muteTouchTouchVolume=true;
             muteVoiceTouchVolume=true;
+
+
+
+          
         }
                 
     else if(event.ctrlKey||event.altKey);//swallow remaining possibilities, muting keypress

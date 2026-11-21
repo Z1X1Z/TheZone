@@ -852,6 +852,12 @@ radialWarp=b;
                   key  = 'V';
                   callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
                   <label for="vari"> Varify![.V]</label><br>             
+
+
+              <input type="checkbox"  id="ask" name="t"  onclick= "
+                  key  = 'M';
+                  callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                  <label for="ask"> ask![.M]</label><br>             
                           
               <label for="CloverTwist">Twist offset:[|]</label>
              <input type="number" id="CloverTwist" name="CloverTwist" class="num" onkeyup="
@@ -1653,6 +1659,7 @@ uniform int inseyedOut;
     uniform bool wheel;
         uniform float mandelCloverFactor;
 uniform int upCoreCycler;
+uniform float askyou;
                                   
     uniform bool spinner;
         uniform float carousel;
@@ -3730,7 +3737,16 @@ float daisifier = 0.;
                }
             }
 float veriation=float(upCoreCycler)*PI2/gr;
+float you =
+askyou* 
+(
+    
+ (leaf*sqrt2*gr)*(
 
+    (-leaf+sqrt2+gr)-wingsOfRighteousness
+
+
+    ))/(PI);
                                            vec2 sBuffer = s;
 float petalNumber=6.;
  for (float counter=0.;counter<40.;counter++)if(dstnce<delimiter){
@@ -3839,14 +3855,7 @@ s.y=syb;
 *///split in two like an orange
   s.x=log(abs(s.x))/log(base);
  if(counter == 0.) s=spin2(s,veriation);
- if(counter == 0. ) s=spin2(s,(
-    
- (leaf*sqrt2*gr)*(
-
-    (-leaf+sqrt2+gr)-wingsOfRighteousness
-
-
-    ))/(PI));
+ if(counter == 0. ) s=spin2(s,you);
 
 /*if(counter == 0.) s=spin2(s,(
     
