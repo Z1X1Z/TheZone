@@ -2157,7 +2157,7 @@ ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
         uniform int eden;
 
 
-                                  const float PI = 3.14159265358979323846264338327950288419716939937497180817;//May very from PI in final digits (particularly uncertain is the "0817" after 718
+                                  const float PI = 3.14159265358979323846264338327950288419716939937497182817;//May very from PI in final digits (particularly uncertain is the "0817" after 718
         
 
         
@@ -5853,14 +5853,18 @@ if(petals>0.)
 
 //s=abs(s)-abs(p);//goes with +abs(p)
 if(!iso_engine){
+  
    s=vec2(
-        s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
-       -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
+
+    -((s.x*s.y)*s.y)*3. +  (s.x*s.x)*s.x ,
+     -s.y*(s.y*s.y)  +3.*(s.x*(s.x*s.y))
        );
        if(Redux) 
-       { s=vec2(
-        s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
-       -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
+       { 
+   s=vec2(
+
+    -((s.x*s.y)*s.y)*3. +  (s.x*s.x)*s.x ,
+     -s.y*(s.y*s.y)  +3.*(s.x*(s.x*s.y))
        );
         hyperCoreBoosted-=baseN;
  
