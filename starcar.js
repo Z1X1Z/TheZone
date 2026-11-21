@@ -5994,6 +5994,8 @@ tolerance=(tolerance**1.)**1.
     }
     
 tolerance=Math.pow(tolerance,1.)
+tolerance=Math.pow(tolerance**1.)
+tolerance=Math.pow(tolerance,1.)
 
 
 //    tolerance  = toleranceMAXIMALove
