@@ -5959,7 +5959,7 @@ for(let yu = 0.; yu<21; yu+=1)
                                  if(takingToLong())break;
 
         
-tolerance=Math.pow(tolerance,2.)+Math.sqrt(tolerance)
+tolerance=Math.pow(tolerance,2.)+Math.pow(tolerance,.5);
 
 tolerance=(tolerance**1.)
 
