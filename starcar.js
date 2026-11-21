@@ -5872,8 +5872,6 @@ if(isFinite(tolerance)&&tolerance>0.)
 //console.log(tolerance)
 //tolerance=tolerance*tolerance+Math.sqrt(tolerance)
 tolerance=tolerance*tolerance+Math.sqrt(tolerance)
-
-tolerance=tolerance
 tolerance/=(root2*grPermanent*-leafPermanent)//order of multiplication matters!
 
 tolerance=(tolerance**tolerance)
@@ -5945,10 +5943,12 @@ tolerance*=(((((gris**(-1)*(gris))*(gris*gris))*((1./gris/gris)*gris**2))))
 tolerance=Math.abs(Math.sqrt(tolerance)-Math.pow(tolerance,2.))
 
 tolerance=(1.-tolerance**.5)**(1.+tolerance**2)**((tolerance)**2.)**((tolerance**.5))
+
 tolerance=(tolerance**.5*tolerance**(tolerance*(tolerance**tolerance*tolerance)))
 
 tolerance=Math.abs(Math.pow(tolerance,2.)-Math.sqrt(tolerance))
 
+tolerance=Math.pow(tolerance,2.)+Math.pow(tolerance,.5);
 
 
 if (!isFinite(tolerance) || tolerance >= 1 || tolerance <= 0) tolerance = totalAMP;
@@ -5959,7 +5959,6 @@ for(let yu = 0.; yu<21; yu+=1)
                                  if(takingToLong())break;
 
         
-tolerance=Math.pow(tolerance,2.)+Math.pow(tolerance,.5);
 
 tolerance=(tolerance**1.)
 
