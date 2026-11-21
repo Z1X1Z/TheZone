@@ -4093,8 +4093,7 @@ oneOf=(sqrt(oneOf)*pow(oneOf,.5));
 
 
 /*
-   float gris = (((((((((gr/gr)*gr)/sqrt2)/truncNonLeaf)/leaf))*sqrt2)*truncNonLeaf)*leaf);
-            gris = ((((((((((gris/gris)*gris)*truncNonLeaf))/truncNonLeaf))/truncNonLeaf)*truncNonLeaf)*gris)/gris);
+   float gris = (((((((((gr/gr)*gr)/sqrt2)/truncNonLeaf)/leaf))*sqrt2)*truncNonLeaf)*leaf); 5           gris = ((((((((((gris/gris)*gris)*truncNonLeaf))/truncNonLeaf))/truncNonLeaf)*truncNonLeaf)*gris)/gris);
 */
 
 
@@ -4119,16 +4118,16 @@ oneOf=(pow(oneOf,.5)*pow(oneOf,(oneOf*(pow(oneOf,oneOf)*oneOf))));
 
 oneOf=abs(pow(oneOf,2.)-pow(oneOf,.5));
 
+*/
+/*
 
-
+     //   if(lengthP<SEVEYEStartAdj-sevMargin)
+if(length(s)>1.5)
+  {
+  oneOf=(+pow(oneOf,.5)+oneOf*oneOf)*.5;
+  }
 
 */
-
-
-
-
-
-
 
 
 for(int yu = 0; yu<21; yu+=1)
@@ -4162,8 +4161,10 @@ oneOf=pow(pow(oneOf,1.),1.);
 
 //tolerance_difference=Math.abs(tolerance-tolBuff)
     }
-oneOf=pow(pow(pow(oneOf,1.),1.),1.);
+//oneOf=pow(pow(pow(oneOf,1.),1.),1.);
+oneOf=pow(pow(oneOf,1.),1.);
 
+//oneOf=pow(oneOf,1.);
 
     s*=oneOf/oneOff;
 }
