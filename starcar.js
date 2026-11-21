@@ -5959,6 +5959,7 @@ for(let yu = 0.; yu<21; yu+=1)
                                  if(takingToLong())break;
 
         
+tolerance=Math.pow(tolerance,2.)+Math.sqrt(tolerance)
 
 tolerance=(tolerance**1.)
 
@@ -5992,7 +5993,9 @@ tolerance=(tolerance**1.)**1.
 
 
     }
+    
 tolerance=((tolerance**1.)**1.)**1.
+
 
 
 //    tolerance  = toleranceMAXIMALove
