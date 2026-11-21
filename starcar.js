@@ -5172,7 +5172,7 @@ function tone2note() {
              {                      //  if(takingToLong())break;
 //loopdido++
 
-                trunc=((trunc)**.5*leafPermanent**2./2.)**((((-leafPermanent)**.5)**(-trunc*trunc))**(((totalAMP)**(totalAMP**1.5))));
+                trunc=((trunc)**.5*Math.pow(leafPermanent,2.)*.5)**((((-leafPermanent)**.5)**(-trunc*trunc))**(((totalAMP)**(totalAMP**1.5))));
       //  trunc*=((-leafPermanent/2.)**((-leafPermanent)**(leafPermanent)**(totalAMP**(totalAMP*totalAMP))))
                 
 
@@ -5558,7 +5558,7 @@ if(takingToLong())break;
                 }
             tolerance = ((tolerance) / trunc) * trunc
 
-            tolerance /= 2;//2 or 1.5? 3?
+            tolerance *= .5;//2 or 1.5? 3?
 
             tolerance = ((tolerance) / trunc) * trunc
 
