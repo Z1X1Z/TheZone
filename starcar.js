@@ -5948,7 +5948,7 @@ tolerance=(tolerance**.5*tolerance**(tolerance*(tolerance**tolerance*tolerance))
 
 tolerance=Math.abs(Math.pow(tolerance,2.)-Math.sqrt(tolerance))
 
-tolerance=Math.pow(tolerance,2.)+Math.pow(tolerance,.5);
+tolerance=(Math.pow(tolerance,2.)+Math.pow(tolerance,.5))/2.;
 
 
 if (!isFinite(tolerance) || tolerance >= 1 || tolerance <= 0) tolerance = totalAMP;
