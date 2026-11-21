@@ -6337,9 +6337,9 @@ if(window.blendFibge)
    {
            var rotatedX =fibgeWidthKeep*Math.sign(toRotate)
            var rotatedY =-(3**.5)/6*fibgeWidthKeep*2
-    fibgeMesh[findgex].geometry.translate(-rotatedX, -rotatedY, 0)
-    fibgeMesh[findgex].geometry.rotateZ(toRotate*Math.PI)
-    fibgeMesh[findgex].geometry.translate(rotatedX, rotatedY, 0)
+    fibgeGeometry[findgex].translate(-rotatedX, -rotatedY, 0)
+    fibgeGeometry[findgex].rotateZ(toRotate*Math.PI)
+    fibgeGeometry[findgex].translate(rotatedX, rotatedY, 0)
    }
 
 
