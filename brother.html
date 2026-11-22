@@ -1670,7 +1670,7 @@ uniform float askyou;
                                     const float l3 = 1.0986122886681096913952452369225257046474905578227494517346943336374942;      //log(3) 
                                      const    float logStabilizationConstant = 1./l3+(1.-1./l3)/2.;
 
-                                  const float PI = 3.1415926535897932384626433832795028841971693993749738493847;//May very from PI in final digits (particularly uncertain is the "0817" after 718
+                                  const float PI = 3.1415926535897932384626433832795028841971693993864847393748;//May very from PI in final digits (particularly uncertain is the "0817" after 718
                                   const float PI2 = PI*2.;
                                   const float divideByMultiplyingPi = 1./PI;
 
@@ -5116,14 +5116,18 @@ vec3 pongBall = vec3(0.);
                           pongBall += ball(p);
                           }
                                                                  
-                                                   
                                                                                                  float Xbookishness = 8.;
                                                                 float Ybookishness = 5.;
+                                                                                                              
+
 
                                  vec3 pillar = vec3(0.);
                                  if(volume!=1.)
                                  {
+                                    
                                     vec2 pillarStretch = vec2(vUv.y,(vUv.x-.5-sign(vUv.x-.5)/Ybookishness/2.));//*(bookishness-1.)/bookishness);
+                                if(inseyedOut==0)pillarStretch = vec2(vUv.y,(vUv.x-.5));
+
                                  pillar = sevenPillars(pillarStretch);
                                                      if(pillar.x!=0.||pillar.y!=0.||pillar.z!=0.)         pillar=   clamp(pillar+(-mny.x-mny.y-mny.z)*40.,0.,1.);
                                  if((pong.x!=0.||pong.y!=0.||pong.z!=0.)&&(pillar.x!=0.||pillar.y!=0.||pillar.z!=0.))pillar=pong;
@@ -5138,7 +5142,7 @@ vec3 pongBall = vec3(0.);
                                                                 bookUV.x=(bookUV.x)*Xbookishness;
                                                                  float bookThickness = 4.;
                                                                                // if (vUv.y>.5)bookUV=vec2(bookishness,1.)-bookUV;
-                                                                             if(vUv.y<sevenPillarShrink&&abs(bookUV.y-.5)<.5) bookEyes=          
+                                                                          if(inseyedOut!=0&&vUv.y<sevenPillarShrink&&abs(bookUV.y-.5)<.5) bookEyes=          
                                                                              faceBlackAndWhite(vec2(-sign(bookUV.y-.5)*
                                                                                                                                          (tan(abs(bookUV.y)*PI2+PI/2.))*bookUV.x,sign(bookUV.y-.5)*
                                                                                                                                               bookUV.x*bookThickness*.5),-vec2(-moveDynamic.x,moveDynamic.y),false,-2,false,-1.).xyz;
