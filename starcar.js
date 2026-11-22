@@ -5357,7 +5357,7 @@ function tone2note() {
                 }
 
 
-
+                tAScaled=(1+tAScaled)*.5
                 tAScaled=(tAScaled**(1.-tAScaled**2))**.5//helps hear quieter song
 
 
