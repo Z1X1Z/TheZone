@@ -5853,7 +5853,7 @@ if(petals>0.)
 
 //s=abs(s)-abs(p);//goes with +abs(p)
 if(!iso_engine){
-    //   s*=s/s;
+      s*=s/s;
  
 
    s=vec2(
@@ -5878,8 +5878,9 @@ if(!iso_engine){
 
  
        }
+              s=(vec2(sqrt(abs(s))*sqrt(abs(s))))*sign(s); 
+
        s/=s/s;
-       s=(vec2(sqrt(abs(s))*sqrt(abs(s))))*sign(s); 
 
       // s=(vec2(pow(abs(s.x),.5),pow(abs(s.y),.5))*sqrt(s))*sign(s); 
 
