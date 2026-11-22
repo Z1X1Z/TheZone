@@ -5206,6 +5206,7 @@ function tone2note() {
            
             if (!isFinite(trunc)||trunc==0.)trunc = 1
             //totalAMPmodified=(totalAMPmodified/((-leafPermanent)/))///preTrunc)*preTrunc));
+                                             totalAMPmodified=Math.sqrt(totalAMPmodified)*((totalAMPmodified/totalAMPmodified)*((totalAMPmodified*totalAMPmodified)));
 
                                                            totalAMPmodified=(totalAMPmodified*trunc)/trunc
                                                            totalAMPmodified=(totalAMPmodified/trunc)*trunc
@@ -5219,7 +5220,6 @@ function tone2note() {
                                                            totalAMPmodified=(totalAMPmodified/trunc)*trunc
 
             if(totalAMPmodified>0&&isFinite(totalAMPmodified))totalAMPmodified=totalAMP
-                                             totalAMPmodified=Math.sqrt(totalAMPmodified)*((totalAMPmodified/totalAMPmodified)*(totalAMPmodified));
 
             var tamStuck = totalAMPmodified;//(totalAMPmodified/trunc)*trunc ;
   
@@ -5273,7 +5273,7 @@ function tone2note() {
             }
                       //  totalAMPmodified=totalAMPmodified*(totalAMPmodified/totalAMPmodified);
 
-                                                totalAMPmodified/=Math.pow(totalAMPmodified,.5)*((totalAMPmodified/totalAMPmodified)*totalAMPmodified)
+                                                totalAMPmodified/=Math.pow(totalAMPmodified,.5)*((totalAMPmodified/totalAMPmodified)*(totalAMPmodified*totalAMPmodified))
 
             
              //           totalAMPmodified=totalAMPmodified**totalAMPmodified
