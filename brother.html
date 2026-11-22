@@ -1670,7 +1670,7 @@ uniform float askyou;
                                     const float l3 = 1.0986122886681096913952452369225257046474905578227494517346943336374942;      //log(3) 
                                      const    float logStabilizationConstant = 1./l3+(1.-1./l3)/2.;
 
-                                  const float PI = 3.14159265358979323846264338327950288419716939937497180817;//May very from PI in final digits (particularly uncertain is the "0817" after 718
+                                  const float PI = 3.1415926535897932384626433832795028841971693993749718393817;//May very from PI in final digits (particularly uncertain is the "0817" after 718
                                   const float PI2 = PI*2.;
                                   const float divideByMultiplyingPi = 1./PI;
 
@@ -3800,21 +3800,53 @@ float outerCloudShift = (1.+border/((2.-toEDGE)));
             
 
     //if(lengthP>1./3. )   
-   // if(mod(counter,2.)==0.)   
-     
+    //if(mod(counter,3.)==0.)   
+   //if(mod(counter,3.)!=1.)  
+
+      // s/=s/s;
+
+          s*=s/s;
+ 
+
    s=vec2(
 
-    -((s.x*s.y)*s.y)*3. +  (s.x*s.x)*s.x ,
+    -(s.y*(s.x*s.y))*3. +  s.x*(s.x*s.x),
      -s.y*(s.y*s.y)  +3.*(s.x*(s.x*s.y))
        );
-     /*  else
+
+       s/=s/s;
+      //        s*=s/s;
+
+       s=(vec2(pow(s.x,.5),pow(s.y,.5))*sqrt(s))*sign(s); 
+
+
+
+
+
+
+/*
+
 
    s=vec2(
-        s.x*s.x*s.x  - 3.*s.x*s.y*s.y,
-       -s.y*s.y*s.y+ 3.*s.x*s.x*s.y
+
+    -(s.y*(s.x*s.y))*3. +  (s.x*s.x)*s.x,
+     -s.y*(s.y*s.y)  +3.*((s.x*s.y)*s.x)
        );
+
 */
 
+
+
+
+       /*
+       else
+
+   s=vec2(
+
+   +  s.x*(s.x*s.x) -3.*(s.x*(s.y*s.y))  ,
+   +((s.x*s.x)*s.y)*3.  -((s.y*s.y)*s.y)  
+       );
+*/
        /*
    s=vec2(
 
@@ -4184,9 +4216,13 @@ oneOf=(1./pow(oneOf,-1.));
 oneOf=pow(1./oneOf,-1.);
 //oneOf=(1./pow(oneOf,-1.));
 
+
       s*=1.;
 
            s/=1.;
+              //  s*=s/s;
+              //  s/=s/s;
+
 
 oneOf=pow(oneOf,1.);
 
@@ -4204,7 +4240,10 @@ oneOf=pow(oneOf,1.);
 
 //oneOf=pow(oneOf,1.);
 
+
+
     s*=oneOf/oneOff;
+
 }
             //           s=(s*s)/s;
             //      s=(s/s)*s;
