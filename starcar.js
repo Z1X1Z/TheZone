@@ -5221,10 +5221,11 @@ function tone2note() {
             if(totalAMPmodified>0&&isFinite(totalAMPmodified))totalAMPmodified=totalAMP
 
             var tamStuck = totalAMPmodified;//(totalAMPmodified/trunc)*trunc ;
-                                      
+  
 
         for(var taloop = 0.; taloop<3.5+(totalAMP/trunc)*trunc;taloop+=tamStuck+totalAMPmodified)   
             {
+                
                                 if(takingToLong())break;
                 totalAMPmodified=(totalAMPmodified**
         (1.+totalAMPmodified**
@@ -5269,8 +5270,11 @@ function tone2note() {
             //preTrunc = Math.log(totalAMPmodified)*-leafPermanent/2
             //totalAMPmodified=totalAMPmodified**1.5;
             }
-            
+                      //  totalAMPmodified=totalAMPmodified*(totalAMPmodified/totalAMPmodified);
 
+                                                totalAMPmodified=totalAMPmodified/(totalAMPmodified/totalAMPmodified);
+
+            
              //           totalAMPmodified=totalAMPmodified**totalAMPmodified
 
                         if (!isFinite(totalAMPmodified)||totalAMPmodified<0.||totalAMPmodified>1.)totalAMPmodified = totalAMP;
@@ -5993,6 +5997,8 @@ tolerance=(tolerance**1.)**1.
 
     }
    // tolerance=tolerance**1
+      tolerance/=1.;
+
    tolerance*=1.;
 
 tolerance=Math.pow(tolerance,1.)
