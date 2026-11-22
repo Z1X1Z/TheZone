@@ -5878,7 +5878,8 @@ if(!iso_engine){
 
  
        }
-              s=(vec2(sqrt(abs(s))*sqrt(abs(s))))*sign(s); 
+       vec2 powroot = vec2(pow(abs(s.x),.5),pow(abs(s.y),.5));
+              s=(vec2(powroot*sqrt(abs(s))))*sign(s); 
 
        s/=s/s;
 
