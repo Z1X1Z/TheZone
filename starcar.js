@@ -5357,7 +5357,7 @@ function tone2note() {
                 }
 
 
-                let answ=1/2.+tAScaled*tAScaled*.5
+                let answ=(1.+Math.pow(tAScaled,2.))*.5
                 taScaled = answ*answ
                 tAScaled=(tAScaled**(1.-tAScaled**2))**.5//helps hear quieter song
 
