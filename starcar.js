@@ -4351,7 +4351,7 @@ let fulcrum = .8
                          transparencyOfTrail=254./255.;
                          transparencyOfTrailLast=transparencyOfTrail;
                      }*/
- if(timeElapsedSinceRecording<.5/window.movementRate)
+ if(timeElapsedSinceRecording<.25/window.movementRate)
                     {if(!window.flame)
                         {transparencyOfTrail=1;
                              z =-1.;
@@ -5366,8 +5366,8 @@ function tone2note() {
 
 
                 let answ=(.125+Math.pow(tAScaled,2.))*.25
-                taScaled = answ*answ
-                tAScaled=(tAScaled**(1.-tAScaled**2))**.5//helps hear quieter song
+                tAScaled = answ*answ
+                tAScaled=(Math.pow(tAScaled,(1.-tAScaled*tAScaled)))**.5//helps hear quieter song
 
 
                                         //                   totalAMPmodified=(totalAMPmodified*totalAMPmodified)/totalAMPmodified
