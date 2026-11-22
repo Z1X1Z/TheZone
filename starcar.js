@@ -5315,7 +5315,7 @@ function tone2note() {
             if(takingToLong())break;
             tAScaled=tAScaled**tAScaled**tAScaled
            // tAScaled=Math.abs(-(tAScaled**.5)+tAScaled*tAScaled-(tAScaled-tAScaled**tAScaled))
-            tAScaled=Math.abs(Math.sqrt(tAScaled)-tAScaled**2.+(Math.pow(tAScaled,tAScaled))-tAScaled)
+            tAScaled=Math.abs(Math.sqrt(tAScaled)-tAScaled**2.+(Math.pow(tAScaled,tAScaled)-tAScaled))
            // tAScaled=Math.abs(-(tAScaled**.5)+tAScaled*tAScaled-(tAScaled-tAScaled**tAScaled))
             //tAScaled=((tAScaled**.5)-tAScaled*tAScaled+(tAScaled-tAScaled**tAScaled))
             tAScaled=tAScaled**tAScaled**tAScaled
@@ -5356,6 +5356,11 @@ function tone2note() {
                     //    loopy++
                 }
 
+
+
+                tAScaled=(tAScaled**(1.-tAScaled**2))**.5//helps hear quieter song
+
+
                                         //                   totalAMPmodified=(totalAMPmodified*totalAMPmodified)/totalAMPmodified
 
                                                    //        totalAMPmodified=(totalAMPmodified*trunc)/trunc
@@ -5390,7 +5395,6 @@ if(tAScaled == 1)console.log("Manny Harmonizer Bypassed");
             // let feedbackVal = grTimesLeaf;
             // console.log(tAScaled)
             //       tAScaled=tAScaled**.5;
-
             let plusOrMinusPowerSeries = tAScaled;
             let plusOrMinusPowerSeriesBUFFER = plusOrMinusPowerSeries;
             let plusOrMinusPowerSeriesNorm = plusOrMinusPowerSeries
