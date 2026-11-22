@@ -5315,7 +5315,7 @@ function tone2note() {
             if(takingToLong())break;
             tAScaled=tAScaled**tAScaled**tAScaled
            // tAScaled=Math.abs(-(tAScaled**.5)+tAScaled*tAScaled-(tAScaled-tAScaled**tAScaled))
-            tAScaled=Math.abs((tAScaled**.5)-tAScaled*tAScaled+Math.pow(tAScaled,tAScaled)-tAScaled)
+            tAScaled=Math.abs(Math.sqrt(tAScaled**.5)-Math.pow(tAScaled,2.)+(tAScaled**tAScaled)-tAScaled)
            // tAScaled=Math.abs(-(tAScaled**.5)+tAScaled*tAScaled-(tAScaled-tAScaled**tAScaled))
             //tAScaled=((tAScaled**.5)-tAScaled*tAScaled+(tAScaled-tAScaled**tAScaled))
             tAScaled=tAScaled**tAScaled**tAScaled
