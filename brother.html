@@ -3803,7 +3803,6 @@ float outerCloudShift = (1.+border/((2.-toEDGE)));
     //if(mod(counter,3.)==0.)   
    //if(mod(counter,3.)!=1.)  
 
-      // s/=s/s;
 
           s*=s/s;
  
@@ -3815,9 +3814,8 @@ float outerCloudShift = (1.+border/((2.-toEDGE)));
        );
 
        s/=s/s;
-      //        s*=s/s;
 
-       s=(vec2(pow(s.x,.5),pow(s.y,.5))*sqrt(s))*sign(s); 
+       s=(vec2(sqrt(abs(s))*sqrt(abs(s))))*sign(s); 
 
 
 
