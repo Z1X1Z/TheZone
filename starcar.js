@@ -1152,16 +1152,6 @@ function setFFTdependantSizes() {
     mustarD = new Float64Array(starArms);
     if (window.INITIALIZED) {
         
-        scene.remove(starMesh)
-        starGeometry.dispose();
-        starGeometry = new THREE.BufferGeometry();
-        starGeometry.dynamic = true;
-        starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(star, 3));
-        starGeometry.setAttribute('color', new THREE.Float32BufferAttribute(starColors, 4));
-        starMesh = new THREE.Mesh(starGeometry, starMaterial);
-        scene.add(starMesh)
-
-
         scene.remove(starAndDotsMesh)
         starAndDotsGeometry.dispose();
         starAndDotsGeometry = new THREE.BufferGeometry();
@@ -1171,6 +1161,7 @@ function setFFTdependantSizes() {
         starAndDotsMesh = new THREE.Mesh(starAndDotsGeometry, starAndDotsMaterial);
         scene.add(starAndDotsMesh)
 
+
               shaderScene.remove(crownBarMesh)
         crownBarGeometry.dispose();
         crownBarGeometry = new THREE.BufferGeometry();
@@ -1179,6 +1170,16 @@ function setFFTdependantSizes() {
         crownBarGeometry.setAttribute('color', new THREE.Float32BufferAttribute(crownBarColors, 4));
         crownBarMesh = new THREE.Mesh(crownBarGeometry, crownBarMaterial);
         shaderScene.add(crownBarMesh)
+
+
+        scene.remove(starMesh)
+        starGeometry.dispose();
+        starGeometry = new THREE.BufferGeometry();
+        starGeometry.dynamic = true;
+        starGeometry.setAttribute('position', new THREE.Float32BufferAttribute(star, 3));
+        starGeometry.setAttribute('color', new THREE.Float32BufferAttribute(starColors, 4));
+        starMesh = new THREE.Mesh(starGeometry, starMaterial);
+        scene.add(starMesh)
 
 
 
@@ -3492,9 +3493,9 @@ if(window.staff)build_staff();
                                     rType=0;
                                  bType=1
                                 }
-                                starAndDotsColorAttribute.setXYZW(starStride + 0, rType,0,bType, 1.)
-                                starAndDotsColorAttribute.setXYZW(starStride + 1, 0,greenT,0, .999)
-                                starAndDotsColorAttribute.setXYZW(starStride + 2, bType,0,rType, 1.)
+                                starAndDotsColorAttribute.setXYZW(starStride + 0, rType,0,bType, .99)
+                                starAndDotsColorAttribute.setXYZW(starStride + 1, 0,greenT,0, .9)
+                                starAndDotsColorAttribute.setXYZW(starStride + 2, bType,0,rType, .99)
 
                             }
                             else if (RockInTheWater == 1) {
@@ -3779,7 +3780,7 @@ if(window.staff)build_staff();
                     else if(uniforms.time.value-timeOfCast[gEven]>2./3. )
                             crownHeadBoost[gEven]-= interpolation/75.;
 
-                    let dep = -.99;//depBuffer/1.001**(lengt);
+                    let dep = depBuffer;//depBuffer/1.001**(lengt);
 
                     let BlackOrWhiteFRET = .5;
                     //   lengt=1.;
@@ -4346,6 +4347,10 @@ let fulcrum = .8
                     let transparencyOfTrailLast = transparencyOfTrail;
                     transparencyOfTrail = (1. - seg);
                     if (transparencyOfTrail >= 254.5 / 255.) transparencyOfTrail = 254.49 / 255.;
+                    if(timeElapsedSinceRecording<.5/window.movementRate)
+                        {transparencyOfTrail=1;
+                             z =-1.;
+                        }
                     /* if (movementRate*timeElapsedSinceRecording>.5);//z=.01*(-1.+timeElapsedSinceRecording/trailSecondsLong);
                      else {
                          transparencyOfTrail=254./255.;
