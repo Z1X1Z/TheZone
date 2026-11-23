@@ -6030,6 +6030,7 @@ tolerance=tolerance**1.
 
 //    tolerance  = toleranceMAXIMALove
 123*5**4
+tolerance+=Number.MIN_VALUE
 console.log(tolerance)
 
 
