@@ -6026,7 +6026,7 @@ tolerance=Math.pow(tolerance,1.)
 tolerance=tolerance**1.
 
 //.09182507
-tolerance=(.125+(Math.pow(Number.MIN_VALUE*.5,2.)*(1./2.))**.5)+(tolerance);
+tolerance=(.125+(Math.pow(Number.MIN_VALUE*.5,2.)*(.5))**.5)+(tolerance);
 
 //    tolerance  = toleranceMAXIMALove
 123*5**4
