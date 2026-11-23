@@ -3052,7 +3052,7 @@ return g;
                   vec4 faceBlackAndWhite(vec2 g, vec2 t, bool wink, int overrideEyes, bool WayTruthLight, float noteOfEye){
 if(wink) 
 {  float sending=mod((noteOfEye/12.+.25+2.),1.)*PI2;
-    g+=vec2(-zin(sending+PI2),-coz(sending+PI))/(-leaf+1.);//*sign(.5-mod(.75+noteOfEye,1.)
+    g+=vec2(-zin(sending+PI2),-coz(sending+PI))/(PI*l3);
 
 }   
  if(armsSpinning!=0&&Character==0)g = collapseHorn(g,false);
