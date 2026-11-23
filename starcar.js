@@ -4182,10 +4182,10 @@ let fulcrum = .8
                             , 1., .5);
 
                         //   for(var yy=0;yy<6;yy++)   harmonicColorAttribute.setXYZW(hpStride+yy,vop.r,vop.g,vop.b,1.)
-                        harmonicColorAttribute.setXYZW(hpStride + 0, vop.r, vop.g, vop.b, 1.)
-                        harmonicColorAttribute.setXYZW(hpStride + 1, vop.r, vop.g, vop.b, 1.)
+                        harmonicColorAttribute.setXYZW(hpStride + 0, vop.r, vop.g, vop.b, 1)
+                        harmonicColorAttribute.setXYZW(hpStride + 1, vop.r, vop.g, vop.b, 1)
                         harmonicColorAttribute.setXYZW(hpStride + 2, vop.r, vop.g, vop.b, 1.)
-                        harmonicColorAttribute.setXYZW(hpStride + 3, vop.r, vop.g, vop.b, 1.)
+                        harmonicColorAttribute.setXYZW(hpStride + 3, vop.r, vop.g, vop.b, 1)
                         harmonicColorAttribute.setXYZW(hpStride + 4, vop.r, vop.g, vop.b, 1.)
                         harmonicColorAttribute.setXYZW(hpStride + 5, vop.r, vop.g, vop.b, 1.)
                         let wisdom;
@@ -6026,7 +6026,7 @@ tolerance=Math.pow(tolerance,1.)
 tolerance=tolerance**1.
 
 //.09182507
-tolerance=(.125+(Math.pow(Number.MIN_VALUE*.5,2.)*(.5))**.5)+(tolerance);
+tolerance=(.125+(Math.pow(Number.MIN_VALUE*.5,2.)*(1./2.))**.5)+(tolerance);
 
 //    tolerance  = toleranceMAXIMALove
 123*5**4
