@@ -6026,12 +6026,12 @@ tolerance=Math.pow(tolerance,1.)
 tolerance=tolerance**1.
 
 
-//  tolerance=1./2**8+tolerance;
+//tolerance=.125+tolerance;
 
 //    tolerance  = toleranceMAXIMALove
 123*5**4
 
-tolerance+=Number.MIN_VALUE*7.
+tolerance+=Number.MIN_VALUE*(2./3.)
 console.log(tolerance)
 
 
