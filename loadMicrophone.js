@@ -47,14 +47,22 @@ var micProcessing3 = false;//noiseSuppression
 function shutdown(){
        
      if(typeof(Wad)=="function")
-      {Wad.audioContext.close();
+      {
+        try{
+          Wad.audioContext.disconnect(analyser);
+     Wad.audioContext.disconnect();
+        }
+        catch{}
+        Wad.audioContext.close();
         Wad = null;
+        
       }
       if(!usingWadContext)
       {
             source.disconnect(analyser);
     source.disconnect();
     audioX.close();
+    audioX=null
       }
 
 }
@@ -143,6 +151,29 @@ letTouchThrough=false;
 
 
 function route(){
+       
+        if(alreadyLoaded&&!userHasGestured)
+        {
+       
+      shutdown()
+var yxzuv = null
+     if(typeof(Wad)=="function")
+     {
+         yxzuv= Wad.audioContext
+     }
+      if(!usingWadContext){
+        yxzuv=audioX
+}
+                alreadyLoaded=true;
+          yxzuv = new AudioContext();
+          analyser = yxzuv.createAnalyser();
+          source = yxzuv.createMediaStreamSource( stream );
+          analyser.fftSize = fftSize;
+                    source.connect(analyser);
+                micOn = true;
+
+              }
+            
     if(!micOn&&!window.isTouch&&!userHasGestured){
         startMic();
 

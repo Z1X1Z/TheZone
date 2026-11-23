@@ -32,7 +32,7 @@ function stallTillWad(){
               audioX = Wad.audioContext;
               usingWadContext = true
 
-              console.log("wadAUDIO2")
+              console.log("WAD_audioContext")
                 alreadyLoaded=true
 
             analyser = audioX.createAnalyser();
