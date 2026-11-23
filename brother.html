@@ -2309,8 +2309,11 @@ return g;
 }
 
                   vec4 faceBlackAndWhite(vec2 g, vec2 t, bool wink, int overrideEyes, bool WayTruthLight, float noteOfEye){
+if(wink) 
+{  float sending=mod((noteOfEye/12.+.25+2.),1.)*PI2;
+    g+=vec2(-zin(sending+PI2),-coz(sending+PI))/(-leaf+1.);//*sign(.5-mod(.75+noteOfEye,1.)
 
-
+}
  if(armsSpinning!=0)g = collapseHorn(g,false);
 
                 if(elderHorns==2&&(overrideEyes==100||overrideEyes==-1)){
@@ -3816,7 +3819,7 @@ float outerCloudShift = (1.+border/((2.-toEDGE)));
        vec2 powroot = vec2(pow(abs(s.x),.5),pow(abs(s.y),.5));
               s=(vec2(sqrt(abs(s))*powroot))*sign(s); 
 
-       s/=s/s;
+       s=s*(s/s);
 
 
 
