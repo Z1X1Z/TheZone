@@ -560,7 +560,16 @@ radialWarp=b;
                    key  = 't';
                    callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
                    Harmonic Scythe![.t]</a><br>
-            
+             <a id="balloons" name="t"  onclick= "
+
+                   key  = 'b';
+                   callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                   Harmonic Balloons![,b]</a><br>
+               <a id="balloonsExponential" name="t"  onclick= "
+
+                   key  = 'n';
+                   callKey(new KeyboardEvent('keydown', {'key': key,'ctrlKey':true, 'keyCode':key.charCodeAt(0)}));">
+                   Harmonic Spiralloons Exponential![,n]</a><br>
                <a id="Star Stream" name="t"  onclick= "
 
                    key  = 'V';
@@ -1602,6 +1611,12 @@ ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
 
 
     uniform int musicAngelMan;
+
+
+    uniform float balloonsON;
+    uniform float balloonsONexponential;
+
+
     uniform float note;
     uniform float upOrDown;
     uniform bool handOfGod;
@@ -2442,6 +2457,45 @@ z.x=pow(abs(z.x),.777-t.x/49.);}
 return g;
 }
 
+
+
+
+
+    vec3 balloons(vec2 p){
+        vec3 balloon=vec3(0.);
+        vec2 vUvCentered =(vUv-.5)*resolution/min(resolution.x,resolution.y);
+        if(length(vUvCentered)<.5)
+        {
+        float sizeReset = 480.;
+        if (balloonsONexponential!=0.)
+        sizeReset = 960.;
+          float x =  length(vUvCentered);
+          float increment =0.;
+         // vec2 spinningSpiraloon  =  spin2(vUvCentered,time*PI*4.);
+         float bruedCorrection =0.;
+         if(brelued==-1.)
+         {
+             if(balloonsON!=0.)bruedCorrection=1.;//a bit awkward
+             else if (balloonsONexponential!=0.)bruedCorrection=4.;
+             }
+          if(balloonsON!=0.) increment =((-note)*balloonsON//-(-3.+4.*balloonsON)*brelued+bruedCorrection
+                                         +480.  - x*48.);
+          else if(balloonsONexponential!=0.)
+              increment= (-note)*balloonsONexponential+log(x*24.)/log(pow(2.,1./12.))-.25*balloonsONexponential;
+        
+               
+                   if(abs(mod(increment+atan(vUvCentered.y,vUvCentered.x)*balloonsONexponential*divideByMultiplyingPi2,1.))<1./(increment+sizeReset)*280.)
+                          {
+                       if(balloonsON!=0.)
+                       balloon=hsv2rgb(vec3((mod((4.*balloonsON+bruedCorrection*balloonsON+increment*brelued)*balloonsON+24.,12.))/12.,.5,1.));
+                       else if(balloonsONexponential!=0.)
+                       balloon=hsv2rgb(vec3((mod((-2.-balloonsONexponential+bruedCorrection+increment*balloonsONexponential)*brelued+24.,12.))/12.,.5,1.));
+                       }
+                    }
+        return balloon;
+
+        
+                    }
                   vec4 faceBlackAndWhite(vec2 g, vec2 t, bool wink, int overrideEyes, bool WayTruthLight, float noteOfEye){
 if(wink) 
 {  float sending=mod((noteOfEye/12.+.25+2.),1.)*PI2;
@@ -5418,6 +5472,18 @@ if(oneEye.r!=0.)zoomer=-oneEye;
 
 
                                                   vec4 layeredOUT =vec4(0.0);
+                                                  
+
+vec3 hypnoticHarmonicCircles = vec3(0.);
+                                 if(balloonsON!=0.||balloonsONexponential!=0.)
+                                 {
+                                   // if(maxColorOfStarship!=1.) hypnoticHarmonicCircles+=clamp(balloons(p)-shipSUM,0.,1.);
+                                    //else
+                                                      hypnoticHarmonicCircles+=balloons(p);
+                                if(mny.r>0.&&mny.b>0.)hypnoticHarmonicCircles=clamp(hypnoticHarmonicCircles+(-mny.x-mny.y-mny.z)*10.,0.,1.);
+                                }
+
+                                
                           // if (isBlack==1.&&starship.w==1.)layeredOUT=vec4(vec3(0.),1.);
                    
                            //      else if(length(p)<2.*sqrt2/min(resolution.x,resolution.y)) layeredOUT=vec4(zoomer,1.);
@@ -5565,12 +5631,9 @@ else {
 float treeBrightner = 1.;
 treeBrightner=-leaf;
 vec4 tree = vec4( clamp(
-                     clamp(
-                           +(zoomer
+                          ( zoomer
                            +awayFromTree)*treeBrightner
-                           
-                                              ,0.,1.)
-                        
+                     
                    
           ,.0,1.)
               ,1.);
@@ -5581,6 +5644,10 @@ vec4 tree = vec4( clamp(
                                                                                      tree//+pixelShipGrey
                                                        ,0.,1.))*isBlack+(isBlack-1.);
                                                        
+
+                       fin=vec4(clamp(fin.xyz                  +(-hypnoticHarmonicCircles.x-hypnoticHarmonicCircles.z-hypnoticHarmonicCircles.y)*100.
+                  ,0.,1.)      +hypnoticHarmonicCircles,1.);
+                        
                                                                                if ((starship.x!=starship.y||starship.y!=starship.x||starship.z!=starship.x||starship.z!=starship.y)&&shipSUM<126./255.&&starship.w==1.)fin*= shipSUM*4.;//to show black on oreo
 
                                                              float radialIntensity = length(r);

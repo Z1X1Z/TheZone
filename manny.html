@@ -4154,11 +4154,12 @@ extrArms+=h.x;
     
     
     
-                       
-                                             
+
     vec3 balloons(vec2 p){
         vec3 balloon=vec3(0.);
         vec2 vUvCentered =(vUv-.5)*resolution/min(resolution.x,resolution.y);
+        if(length(vUvCentered)<.5)
+        {
         float sizeReset = 480.;
         if (balloonsONexponential!=0.)
         sizeReset = 960.;
@@ -4184,8 +4185,11 @@ extrArms+=h.x;
                        else if(balloonsONexponential!=0.)
                        balloon=hsv2rgb(vec3((mod((-2.-balloonsONexponential+bruedCorrection+increment*balloonsONexponential)*brelued+24.,12.))/12.,.5,1.));
                        }
+                    }
         return balloon;
-    }
+
+        
+                    }
     
                                      
                                      vec3 lamb(vec2 p) {

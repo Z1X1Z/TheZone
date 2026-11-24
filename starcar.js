@@ -3294,12 +3294,12 @@ if(window.staff)build_staff();
             let metroPhase = -Math.sin(-uniforms["time"].value * uniforms["metronome"].value * pi)
             let frameCount = ((loopsRun % 2) - .5) * 2;
 
-            if (spirographMODE == 1) {
+            if (spirographMODE == 2) {
 
                 lineMat.color = colorSoundPURE
             }
             else if (uniforms["metronome"].value > 1) lineMat.color = new THREE.Color("").setRGB(metroPhase, metroPhase, metroPhase)
-            else if (spirographMODE == 2) lineMat.color = new THREE.Color("").setRGB(frameCount, frameCount, frameCount);
+            else if (spirographMODE == 1) lineMat.color = new THREE.Color("").setRGB(frameCount, frameCount, frameCount);
 
 
 
@@ -4177,12 +4177,27 @@ let fulcrum = .8
                         const widt = (2.-starWitnessSize)/(circumscription*2);
                         //const lengt =starshipSize/(t+(g+1.)/12)**.5/7.;
                         var vop;
-
+    let wisdom;
+                        if (window.pzyghthe == 1) wisdom = 1;
+                        else if (window.pzyghthe == 2) wisdom = -1;
+                        else if (window.pzyghthe == 3) wisdom = upOrDown;
+                        else if (window.pzyghthe == 4) wisdom = -upOrDown;
+                        console.log("brued"+uniforms.brelued.value)
+                        if(wisdom == uniforms.brelued.value)
+                        {
                         if(g%2==0)
                          vop = new THREE.Color("black");
                         else if(g%2==1)
-                         vop = new THREE.Color("white");                      //  vop.setHSL((-note + (-g + 4) * uniforms.brelued.value) % 12 / 12. * uniforms.brelued.value
-                      //      , 1., .5);
+                         vop = new THREE.Color("white");
+                    }
+                    else 
+                    {
+
+                        if(g%2==0)
+                         vop = new THREE.Color("white");
+                        else if(g%2==1)
+                         vop = new THREE.Color("black");
+                    }
 
                         //   for(var yy=0;yy<6;yy++)   harmonicColorAttribute.setXYZW(hpStride+yy,vop.r,vop.g,vop.b,1.)
                         harmonicColorAttribute.setXYZW(hpStride + 0, vop.r, vop.g, vop.b, 1)
@@ -4191,11 +4206,7 @@ let fulcrum = .8
                         harmonicColorAttribute.setXYZW(hpStride + 3, vop.r, vop.g, vop.b, 1)
                         harmonicColorAttribute.setXYZW(hpStride + 4, vop.r, vop.g, vop.b, 1.)
                         harmonicColorAttribute.setXYZW(hpStride + 5, vop.r, vop.g, vop.b, 1.)
-                        let wisdom;
-                        if (window.pzyghthe == 1) wisdom = 1;
-                        else if (window.pzyghthe == 2) wisdom = -1;
-                        else if (window.pzyghthe == 3) wisdom = upOrDown;
-                        else if (window.pzyghthe == 4) wisdom = -upOrDown;
+                    
                         let intervalCount = 4;
                         let radialHarmonicInterval = Math.PI*intervalCount*(1/(1.+g+t*12))*1.5/2**(7/12.)*wisdom
 
