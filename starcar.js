@@ -4182,7 +4182,6 @@ let fulcrum = .8
                         else if (window.pzyghthe == 2) wisdom = -1;
                         else if (window.pzyghthe == 3) wisdom = upOrDown;
                         else if (window.pzyghthe == 4) wisdom = -upOrDown;
-                        console.log("brued"+uniforms.brelued.value)
                         if(wisdom == uniforms.brelued.value)
                         {
                         if(g%2==0)

@@ -4550,6 +4550,7 @@ if(clvrVariant4!=0.&&seventhOUTside)
 
       float tinsel_limit = .125;
       if(lfc<SEVEYEStartAdj)tinsel_limit*=lfc;
+     else tinsel_limit/=4.;
 
 sevMargin*=SEVEYEStart/2.;
 sevMargin/=8./SEVEYEPush;
@@ -5099,7 +5100,12 @@ coordsB/=SEVEYEPush;
    // try signs and swizzle!
 }
 
- else if(seventhOUTside&&lengthP>SEVEYEStartAdj)hyperCore-=1.5/(lengthP-SEVEYEStartAdj);
+ else if(seventhOUTside&&lengthP>SEVEYEStartAdj)
+ {
+ hyperCore-=1.5/(lengthP-SEVEYEStartAdj);
+             if(zoomB*lfc>.25)hyperCore =hyperCore*hyperCore*hyperCore;
+
+}
 
             
 
