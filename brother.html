@@ -2464,7 +2464,7 @@ return g;
     vec3 balloons(vec2 p){
         vec3 balloon=vec3(0.);
         vec2 vUvCentered =(vUv-.5)*resolution/min(resolution.x,resolution.y);
-        if(length(vUvCentered)<.5)
+        if(length(vUvCentered)<.5&&volume!=1.)
         {
         float sizeReset = 480.;
         if (balloonsONexponential!=0.)
