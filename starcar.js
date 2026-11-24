@@ -65,6 +65,7 @@ b();
 }//setTimeout waits for 10ms then runs stallTillTHREELoaded()
 var occasionToResize = 0;
 const dotSize = starshipSize;
+                    let starWitnessSize = 53. / 64. * ((1. - l3) / 2. + 1.)
 
 let coringValue = 1. / -leaf / gr;
 window.pointerZoom = false;
@@ -1051,7 +1052,7 @@ let backBufferFlip = false;
 let FeedbackrenderTarget, FeedbackrenderTargetFlipSide;
 
 
-const xenOctaveFactor = 12;
+const xenOctaveFactor = 4.;
 const harmonicPzyghtheVertices = new Float32Array(xenOctaveFactor * 12 * 3 * 6)
 const harmonicPzyghtheColor = new Float32Array(xenOctaveFactor * 12 * 4 * 6)
 
@@ -4116,7 +4117,6 @@ let fulcrum = .8
                     }
                     vop.setRGB(BlackOrWhite, BlackOrWhite, BlackOrWhite);
 
-                    let starWitnessSize = 53. / 64. * ((1. - l3) / 2. + 1.)
                     for (var g = 0; g < 10; g++) {
                         const widt = pi / 120.;
                         const finger = (isFinite(twelve[ns][g])) ? twelve[ns][g] : 0;
@@ -4173,13 +4173,16 @@ let fulcrum = .8
 
                 for (var t = 0; t < xenOctaveFactor; t++) {
                     for (var g = 0; g < 12; g++) {
-                        const widt = 1. / 3.;
+                        const circumscription = 8.
+                        const widt = (2.-starWitnessSize)/(circumscription*2);
                         //const lengt =starshipSize/(t+(g+1.)/12)**.5/7.;
+                        var vop;
 
-
-                        var vop = new THREE.Color();
-                        vop.setHSL((-note + (-g + 4) * uniforms.brelued.value) % 12 / 12. * uniforms.brelued.value
-                            , 1., .5);
+                        if(g%2==0)
+                         vop = new THREE.Color("black");
+                        else if(g%2==1)
+                         vop = new THREE.Color("white");                      //  vop.setHSL((-note + (-g + 4) * uniforms.brelued.value) % 12 / 12. * uniforms.brelued.value
+                      //      , 1., .5);
 
                         //   for(var yy=0;yy<6;yy++)   harmonicColorAttribute.setXYZW(hpStride+yy,vop.r,vop.g,vop.b,1.)
                         harmonicColorAttribute.setXYZW(hpStride + 0, vop.r, vop.g, vop.b, 1)
@@ -4193,36 +4196,45 @@ let fulcrum = .8
                         else if (window.pzyghthe == 2) wisdom = -1;
                         else if (window.pzyghthe == 3) wisdom = upOrDown;
                         else if (window.pzyghthe == 4) wisdom = -upOrDown;
+                        let intervalCount = 4;
+                        let radialHarmonicInterval = Math.PI*intervalCount*(1/(1.+g+t*12))*1.5/2**(7/12.)*wisdom
 
+                            /*
                         let radialHarmonicInterval =
                             wisdom * 2. * Math.PI * 2 ** (xenOctaveFactor - (t + (g) / 12.)) / 2 ** xenOctaveFactor;
-                        const lengt = radialHarmonicInterval / 144.;
+                            */
+                        const lengt = radialHarmonicInterval /(Math.PI*16.);
                         radialHarmonicInterval += angle;
+                        
                         const xr = widt * -Math.sin(-radialHarmonicInterval);
                         const yr = widt * -Math.cos(-radialHarmonicInterval);
                         const x = wisdom * lengt * -Math.cos(radialHarmonicInterval);
                         const y = wisdom * lengt * -Math.sin(radialHarmonicInterval);
                         const depth = -1;
 
-                        let hollowCenterSize = 2.;
-                        if (g == 0) hollowCenterSize = 1.75;
+                      //  let hollowCenterSize = 2.;
+                      //  if (g == 0) hollowCenterSize = 1.75;
+
+                        var hollowCenterSize = 2.;
+                        hollowCenterSize *= starWitnessSize*(23/24.)*circumscription;
+                       // if (g == 0)hollowCenterSize*
 
                         const outSetX = xr * hollowCenterSize;
                         const outSetY = yr * hollowCenterSize;
 
                         const nx = -x + outSetX
                         const ny = -y + outSetY
-                        const xShift = x + outSetX;
+                        const xShift = x + outSetX;//breadth
                         const yShift = y + outSetY;
-                        const xrShifted = xr + xShift;
-                        const yrShifted = yr + yShift;
+                        const xrShifted = (xr + xShift)
+                        const yrShifted = (yr + yShift)
 
                         harmonicPositionAttribute.setXYZ(hpStride, nx, ny, depth)
                         harmonicPositionAttribute.setXYZ(hpStride + 1, xShift, yShift, depth)
                         harmonicPositionAttribute.setXYZ(hpStride + 2, xrShifted, yrShifted, depth)
                         harmonicPositionAttribute.setXYZ(hpStride + 3, nx, ny, depth)
                         harmonicPositionAttribute.setXYZ(hpStride + 4, xrShifted, yrShifted, depth)
-                        harmonicPositionAttribute.setXYZ(hpStride + 5, xr + nx, yr + ny, depth)
+                        harmonicPositionAttribute.setXYZ(hpStride + 5, (xr + nx), yr + ny, depth)
 
                         hpStride += 6;
                     }
@@ -6026,7 +6038,7 @@ tolerance=Math.pow(tolerance,1.)
 tolerance=tolerance**1.
 
 //.09182507
-tolerance=(.125+(Math.pow(Number.MIN_VALUE*(1/3.),2.)*(3./5.))**.5/2.)+(tolerance);
+tolerance=(.125+(Math.pow(Number.MIN_VALUE*(1/3.),2.)*(4./5.))**.5/2.)+(tolerance);
 
 //    tolerance  = toleranceMAXIMALove
 123*5**4

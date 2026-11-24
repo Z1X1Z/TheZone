@@ -471,7 +471,7 @@ window.zoomBoost = 1.;
             window.highORlow=0.;
             window.FeedbackSound = false;
             window.spirographMODE = 1;
-            window.pzyghthe=0;
+            window.pzyghthe=3   ;
             window.dynamicCoring=false;
             window.omniDynamicEngaged=false;
 
