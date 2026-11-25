@@ -3597,7 +3597,7 @@ if(window.staff)build_staff();
                     let loopsToCull = 0;
                     let loopOfCulling = 0;
 
-                    if (xyStarParticleArray[loopOfCulling] != null) while (xyStarParticleArray[(loopOfCulling - 1 + starCount) % starCount] != null && uniforms["time"].value - xyStarParticleArray[loopOfCulling].time<=secondsToEdge
+                    if (xyStarParticleArray[loopOfCulling] != null) while (xyStarParticleArray[(loopOfCulling - 1 + starCount) % starCount] != null && uniforms["time"].value - xyStarParticleArray[loopOfCulling].time<=secondsToEdge/2.
                     && loopsToCull <= 0) {starCount
                         // xyStarParticleArray.shift();
                         xyStarParticleArray[loopOfCulling] = null;
