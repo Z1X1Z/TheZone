@@ -3644,7 +3644,7 @@ let sizeSpeed =1./3./logStabilizationConstant;//theres no way this math is right
 
 
 
-                            if (timeShift>0//&&timeShift<1.
+                            if (timeShift>1.-sizeSpeed//&&timeShift<1.
                                 &&
                                 withinRadialDelimiter) {
                                 let bulletY = 0;
@@ -3657,7 +3657,7 @@ let sizeSpeed =1./3./logStabilizationConstant;//theres no way this math is right
                                 const outSetX = (w * m.xr - bulletX)*sizeSpeed;;//apparently something is flipped
                                 const outSetY = (w * m.yr - bulletY)*sizeSpeed;
                                 //let alph = timeShift*starShipDepthInSet;
-                                for (var yy = 0; yy < 6; yy++) starStreamColorAttribute.setXYZW(starStreamStride + yy, m.vop.r, m.vop.g, m.vop.b, timeShift / OUTERSHELL/.35 )//alpha is beta
+                                for (var yy = 0; yy < 6; yy++) starStreamColorAttribute.setXYZW(starStreamStride + yy, m.vop.r, m.vop.g, m.vop.b, timeShift / OUTERSHELL*.35 )//alpha is beta
                                 //if(xyStarParticleArray[(starMoment-1+starCount)%starCount])console.log(timeShift)
                                 const nx = -m.x + outSetX
                                 const ny = -m.y + outSetY
