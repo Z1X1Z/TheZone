@@ -4732,7 +4732,8 @@ hyperCoreOUTPUT--;
 
 }else break;
 
-        
+                   vec2 circumscribe = window;
+//if(length(circumscribe)>2./3.)circumscribe=s;
   vec2 deSplicedS =window;
    if(lpcc<twoThirds&&length(window)<twoThirds) deSplicedS=pCenterCored;
 
@@ -4774,7 +4775,6 @@ hyperCoreOUTPUT--;
                                  
                            }
                           
-           
                   vec2 b = s;
 
                                                     s/=  pow(colorComputationBoost,1./baseDelimiter);
@@ -4818,7 +4818,9 @@ o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo)-(starship.x+starship.y+starship.z)
                       o*=isBlack;
                       o+=(isBlack-1.)*100.;
                       o+=isGrey;
-                  return vec4(clamp(o,0.,1.),atan(b.y,b.x));}
+               //   return vec4(clamp(o,0.,1.),atan(b.y,b.x));
+               return vec4(clamp(o,0.,1.),length(circumscribe));
+            }
 
                       
                       
@@ -4900,8 +4902,9 @@ float xenOctaveFactor =4.;
                                  if(dynamicDance) moveDynamic = (move/4.+t)/2.*smush;
                                  else  moveDynamic = move/4.*smush;
                                  vec3 backgroundFace = vec3(0.);
-                                                        zoomer=tol(background, vec2(0.)).xyz;
-
+                                 vec4 FullTOL = tol(background, vec2(0.));
+                                    zoomer=FullTOL.xyz;
+float circumscription=FullTOL.w;
          vec2 characterP = p*2.;
                                  
          vec2 characterPSpunToKey=spin2(characterP*vec2(1.,flipStar*brelued)///.8
@@ -5513,7 +5516,7 @@ if(oneEye.r!=0.)zoomer=-oneEye;
 
 
                                                   vec4 layeredOUT =vec4(0.0);
-                                                  
+                            vec4 treeCache = vec4(0.);                      
 
 vec3 hypnoticHarmonicCircles = vec3(0.);
                                  if(balloonsON!=0.||balloonsONexponential!=0.)
@@ -5717,10 +5720,8 @@ vec4 tree = vec4( clamp(
           
           fin=clamp(fin,0.,1.);
           layeredOUT=fin;
-                       
-       
-
-                                                                                        }
+                        treeCache = layeredOUT;
+                                                                               }
 
 
 
@@ -5778,6 +5779,14 @@ else layeredOUT=vec4(.5)*layeredOUT+.5;
 else     layeredOUT=(layeredOUT*1.+GOH*twoThirds);
 
 }
+if(//(starship.w==1.)&&//
+//circumscription<twoThirds//&&circumscription>.4&&
+ circumscription<twoThirds&&
+  mannyFace.w!=.5&&
+(true&&
+//layeredOUT.xyz!=treeCache.xyz//||
+(hypnoticHarmonicCircles.r!=0.||hypnoticHarmonicCircles.g!=0.||hypnoticHarmonicCircles.b!=0.)
+))layeredOUT*=pow(1.-(circumscription)/1.5,2.)*2.;
 gl_FragColor=vec4(layeredOUT.xyz,1.);//vec4(movie(characterP),1.);//
 
                         //things known to cause bugs on some android chrome: heart (divides by zero), linear eq,waveform, "144000" men and women in clover, articles
