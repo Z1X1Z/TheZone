@@ -3463,7 +3463,7 @@ if(window.staff)build_staff();
                         //var widt =starshipSize;
 
                         const vop = new THREE.Color();
-                        vop.setHSL(((-mustarD[g] + 8 * uniforms.brelued.value) * uniforms.brelued.value) % 24 / 24., mustarD[g] / lightingScaleStar * 2, mustarD[g] / lightingScaleStar);//297 is around the highest heard note
+                        vop.setHSL(((-mustarD[g] + 8 * uniforms.brelued.value) * uniforms.brelued.value) % 24 / 24., 1., Math.pow(mustarD[g] / lightingScaleStar,2));//297 is around the highest heard note
 
                         const rpio2 = arm + pi / 2.;
                         if (pebbles||RockInTheWater == 0 || RockInTheWater == 1) {
@@ -3562,7 +3562,7 @@ if(window.staff)build_staff();
                             xyStarParticle.time = uniforms["time"].value;
                             xyStarParticle.interpolation = interpolation;
                             xyStarParticle.interpolationFramesScaled = interpolation / 60. / 4.;
-                            xyStarParticle.amp = (testarContinuous[g] )**2;
+                            xyStarParticle.amp = testarContinuous[g]/255.
                             xyStarParticle.staticX = staticX;
                             xyStarParticle.staticY = staticY;
 
@@ -3612,7 +3612,7 @@ loopOfCulling=starStreamIndex
                         loopsToCull--
 
                     }
-console.log("loopOfCullin+ "+loopOfCulling)
+//console.log("loopOfCullin+ "+loopOfCulling)
                     let OUTERSHELL = maxToMin * secondsToEdge;
                     let m = xyStarParticleArray[starStreamIndex];
                     if (m != null) {
@@ -3647,7 +3647,8 @@ let sizeSpeed =1./3.;//theres no way this math is right! Yet it's so close to ex
 
 
                             if (timeShift>(l3-sizeSpeed)*shellBoost //&&timeShift<1.
-                              //  &&m.interpolationFramesScaled<.0125
+                              &&m.interpolation<30
+                            //  &&m.interpolationFramesScaled<.0125
                                 &&
                                 withinRadialDelimiter) {
                                 let bulletY = 0;
