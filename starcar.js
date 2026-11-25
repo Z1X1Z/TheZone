@@ -3620,7 +3620,6 @@ if(window.staff)build_staff();
                         let depthINNER = (-starShipDepthInSet + timeShift / OUTERSHELL) * starShipDepthInSet;
                         let depthOUTER = depthINNER + m.lengt;
                         let starStreamStride = 0;
-                            let deltaT = 0.;
 
                         let starMoment = starStreamIndex;
                         while (xyStarParticleArray[starMoment] != null && starMoment != (starStreamIndex + 1) % starCount) {
@@ -3628,8 +3627,11 @@ if(window.staff)build_staff();
 let sizeSpeed =1./3.;//theres no way this math is right! Yet it's so close to exactly right that I don't want to strive against the wind
                             m = xyStarParticleArray[starMoment];
                             if (lastLoopTime != m.time) {
-                                  deltaT=uniforms["time"].value - m.time
-                                            timeShift = (-(deltaT/grPermanent-1.)*sizeSpeed+1.+.5/sizeSpeed);
+                                if(RockInTheWater!=3)
+                                {
+                              //    sizeSpeed = .5;
+                            }                
+                                            timeShift = (-((uniforms["time"].value - m.time)/2.-1.)*sizeSpeed+1.+.5/sizeSpeed);
 
                                     w = timeShift / m.lengt / secondsToEdge;
                                 withinRadialDelimiter = timeShift + m.lengt < OUTERSHELL * shellBoost;// OUTERSHELL times 1.1 to prevent remnant pieces around edge
@@ -3640,8 +3642,9 @@ let sizeSpeed =1./3.;//theres no way this math is right! Yet it's so close to ex
                             }
 
 
+
                             if (timeShift>(l3-sizeSpeed)*shellBoost //&&timeShift<1.
-                                &&deltaT<400.
+                              //  &&m.interpolationFramesScaled<.0125
                                 &&
                                 withinRadialDelimiter) {
                                 let bulletY = 0;
@@ -6057,10 +6060,6 @@ tolerance=(.125+(Math.pow(Number.MIN_VALUE*(1/3.),2.)*(2/3.))**.5/.5)+(tolerance
 
 123*5**4
 tolerance=(1.-Math.sqrt(tolerance)/2.)**2
-//tolerance/=2.;
-//tolerance*=-1.0;
-
-//tolerance=+tolerance
 console.log(tolerance)
 
 
