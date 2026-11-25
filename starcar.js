@@ -186,16 +186,18 @@ function vectorize4() {
 
     }
 }
-                    let shellBoost =3.;
+                    var shellBoost =3.;
 
-let loudestNote = Array(4).fill(0.)
-let averagedAmp = 0;
-let len = 0;
-let phase = 0;
-let phase2 = 0;
+                                        var loopOfCulling = 0;
+
+var loudestNote = Array(4).fill(0.)
+var averagedAmp = 0;
+var len = 0;
+var phase = 0;
+var phase2 = 0;
 var colorInstant = 0.;
-let updateInstant = false;
-let innerSpirographFractionalSize = 0;
+var updateInstant = false;
+var innerSpirographFractionalSize = 0;
 
 const bufferPortion = 2048;//should be 2048
 const spirray0 = new Float64Array(bufferPortion).fill(.5);
@@ -3595,10 +3597,9 @@ if(window.staff)build_staff();
 
 
                     let loopsToCull = 0;
-                    let loopOfCulling = 0;
-
-                    if (xyStarParticleArray[loopOfCulling] != null) while (xyStarParticleArray[(loopOfCulling - 1 + starCount) % starCount] != null && uniforms["time"].value - xyStarParticleArray[loopOfCulling].time<=secondsToEdge
-                    && loopsToCull <= 0) {starCount
+loopOfCulling=starStreamIndex
+                    if (xyStarParticleArray[loopOfCulling] != null) while (xyStarParticleArray[(loopOfCulling - 1 + starCount) % starCount] != null && (uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)/1000.>=secondsToEdge
+                    && loopsToCull < starCount) {starCount
                         // xyStarParticleArray.shift();
                         xyStarParticleArray[loopOfCulling] = null;
 
@@ -3606,12 +3607,12 @@ if(window.staff)build_staff();
                             starStreamPositionAttribute.setXYZ(loopOfCulling * 3 + e, 0, 0, 0)
                             starStreamColorAttribute.setXYZW(loopOfCulling * 3 + e, 0, 0, 0, 0)
                         }
-                        loopOfCulling = (loopOfCulling - 1 + starCount) % starCount;
+                        loopOfCulling = (loopOfCulling +-1+ starCount) % starCount;
 
-                        loopsToCull--;
+                        loopsToCull--
 
                     }
-
+console.log("loopOfCullin+ "+loopOfCulling)
                     let OUTERSHELL = maxToMin * secondsToEdge;
                     let m = xyStarParticleArray[starStreamIndex];
                     if (m != null) {
