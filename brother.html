@@ -3472,20 +3472,57 @@ p*=interSection*2.;
                          
       float chiralAdjustment = 0.;
 
-                        if(chirality==-1){
+                 bool  twelveGates=1==2;
+                         if(chirality==-1&&twelveGates){
+                         chiralAdjustment=-PI2/24.;
+                         p=spin2(p,-chiralAdjustment);}
+                         else if(chirality==-1){
                          chiralAdjustment=-PIdiv2;
                          p=spin2(p,-chiralAdjustment);
                          p*=-1.;//may cause loss of coordination? For balance
                         }
-                        else if(chirality==3)p.x*=-1.;
                          if(cloverOffset!=0.)p=spin2(p,cloverOffset*PI2);
                     
                     bool gated = false;
 
                     bool isSplit=false;
-                                            float angle = atan(p.y,p.x);
 
 
+
+float daisifier = 0.;
+
+
+float angle = atan(p.y,p.x);//+PI/6.;
+angle=abs(angle);
+float angleBuffer = angle + PI/8.;//.;
+if(angleBuffer<PI&&angleBuffer>PI/4.*3.&&p.x*p.y>0.)
+{angle-=PI/4.;
+   //p*=0.;
+}
+if(SEVEYEStartAdj<lfc&&
+
+
+abs(pABSOLUTE.y)<27./logStabilizationConstant&&
+abs(pABSOLUTE.x)<27.
+&&abs(constellationCoord.y)<27./logStabilizationConstant
+&&abs(constellationCoord.x)<27.
+
+
+
+)
+           //              if(twelveGates)
+                         {
+
+
+                         if(mod((angle*divideByMultiplyingPi+2.)*4.+.5,2.)>1.){
+                            p=spin2(p,PI/4.);
+
+
+daisifier++;
+                                gated=true;
+
+                                }
+                                }
 
                          vec2 colorAccumulator =vec2(1.);
 
@@ -3884,8 +3921,6 @@ float hyperCoreOUTPUT =hyperCore*log2/log(metaCoreDriveFactor)+loops;
   float  CORE_DELIMITER=1./-leaf;
 vec2 window =s;
 bool gatedPass=false;
-float daisifier = 0.;
-
                        float borderGap =0.;
                       if (lengthP<twoThirds) borderGap=9.;
                        else 
@@ -3946,6 +3981,8 @@ askyou*
                                            vec2 sBuffer = s;
 float petalNumber=6.;
  for (float counter=0.;counter<40.;counter++)if(dstnce<delimiter){
+
+
   dstnce = length(s);
 if(dstnce<twoThirds){
 window = s;
@@ -4500,6 +4537,7 @@ else
 } 
 
    float cloverOrDaisyOnTop = daisifier;//may be +0
+
        float switch2 = mod((angleS*divideByMultiplyingPi+2.)*6.+.5,2.);
       float twelveGatesMeta = .4;
     if(twelveGatesMeta!=0.&&((twelveGatesMeta<1.&&mod(-.5+cloverOrDaisyOnTop,1./twelveGatesMeta)>=1.)||

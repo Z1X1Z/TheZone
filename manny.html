@@ -4884,17 +4884,66 @@ p*=interSection*2.;
 
 
                     
-                                                                                              float angle = atan(p.y,p.x);
-
-                         if(twelveGates)
+            float angle = atan(p.y,p.x);
+bool withInTwelveGates = false;
+                         if(twelveGates&&SEVEYEStartAdj>lfc)
                          {
-
+withInTwelveGates=true;
 
                          if(mod((angle*divideByMultiplyingPi+2.)*6.+.5,2.)>1.){p=spin2(p,PI/6.);
                                 gated=true;
 
                                 }
                                 }
+
+
+
+
+
+
+
+
+ angle = atan(p.y,p.x);//+PI/6.;
+angle=abs(angle);
+float angleBuffer = angle + PI/8.;//.;
+if(angleBuffer<PI&&angleBuffer>PI/4.*3.&&p.x*p.y>0.)
+{angle-=PI/4.;
+   //p*=0.;
+}
+
+
+
+
+float daisifier = 0.;
+
+
+
+if(SEVEYEStartAdj<lfc&&!twelveGates&&seventhOUTside&&
+
+
+abs(pABSOLUTE.y)<27./logStabilizationConstant&&
+abs(pABSOLUTE.x)<27.
+&&abs(constellationCoord.y)<27./logStabilizationConstant
+&&abs(constellationCoord.x)<27.
+
+
+
+)
+           //              if(twelveGates)
+                         {
+
+
+                         if(mod((angle*divideByMultiplyingPi+2.)*4.+.5,2.)>1.){
+                            p=spin2(p,PI/4.);
+
+
+daisifier++;
+                                gated=true;
+
+                                }
+                                }
+
+
 
 
                          vec2 colorAccumulator =vec2(1.);
@@ -5746,8 +5795,6 @@ if(multiplicatorNexus&&dstnce!=0.)//doesn't seem to upcore spokes like intended
   ,0.)).x;
 vec2 window =s;
 bool gatedPass=false;
-float daisifier = 0.;
-
                        float borderGap =0.;
                       if ((seventhEYEandJubileye&&lengthP<twoThirds)||(!seventhEYEandJubileye&&jubileyes!=0.)) borderGap=9.;
                        else 
@@ -6231,7 +6278,7 @@ if(Spoker){
                          }
                          
         else  {
-               if(twelveGates)daisifier=0.;
+               if(withInTwelveGates)daisifier=0.;
                else daisifier=1.;
 
             /*
@@ -6895,7 +6942,7 @@ else s=spin2(s,PI);
 } 
 
    float cloverOrDaisyOnTop = daisifier;//may be +0
-   if(twelveGates)cloverOrDaisyOnTop=daisifier+1.;
+   if(withInTwelveGates)cloverOrDaisyOnTop=daisifier+1.;
        float switch2 = mod((angleS*divideByMultiplyingPi+2.)*6.+.5,2.);
     if(twelveGatesMeta!=0.&&((twelveGatesMeta<1.&&mod(-.5+cloverOrDaisyOnTop,1./twelveGatesMeta)>=1.)||
                              (twelveGatesMeta>=1.&&mod(cloverOrDaisyOnTop,twelveGatesMeta)<1.)))
