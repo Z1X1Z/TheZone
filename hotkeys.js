@@ -14,7 +14,7 @@ const freshPI = 3.14159265358979323846264338327960284841971693991835239637471826
 var pi = Math.PI;
 
 
- const  logStabilizationConstant = 1./l3+(1.-1./l3)/2.;
+ const  logStabilizationConstant = 1./Math.log(3)+(1.-1./Math.log(3))/2.;
  //const logStabilizationConstant = 1./Math.log(3.)+(1.-1./Math.log(3.))/2.;//.9551195 is based on 1./log(3.)==0.910239 So (1.-.910239)/2+.910239=.9551195 May be incorrect but is close to right.
 
 const leafPermanent = -1.32471795724474602596090885447809734073440;
