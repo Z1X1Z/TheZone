@@ -6060,7 +6060,7 @@ tolerance=(.125+(Math.pow(Number.MIN_VALUE*(1/3.),2.)*(2/3.))**.5/.5)+(tolerance
 123*5**4
 tolerance=(1.-tolerance)
 tolerance*=-1.0;
-tolerance-=.125;
+tolerance=tolerance-.25;
 //tolerance=+tolerance
 console.log(tolerance)
 
