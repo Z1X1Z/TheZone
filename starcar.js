@@ -6056,9 +6056,10 @@ tolerance=tolerance**1.
 tolerance=(.125+(Math.pow(Number.MIN_VALUE*(1/3.),2.)*(2/3.))**.5/.5)+(tolerance);
 
 123*5**4
-tolerance=(1.-tolerance)
-tolerance*=-1.0;
-tolerance=tolerance-.25;
+tolerance=(1.-Math.sqrt(tolerance)/2.)**2
+//tolerance/=2.;
+//tolerance*=-1.0;
+
 //tolerance=+tolerance
 console.log(tolerance)
 
