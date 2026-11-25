@@ -4550,8 +4550,9 @@ if(clvrVariant4!=0.&&seventhOUTside)
 }
 
       float tinsel_limit = .125;
-      if(lfc<SEVEYEStartAdj)tinsel_limit*=lfc;
-     else tinsel_limit/=4.;
+     if(lengthP<SEVEYEStartAdj)tinsel_limit*=lfc;
+     else tinsel_limit*=(lfc-SEVEYEStartAdj);
+
 
 sevMargin*=SEVEYEStart/2.;
 sevMargin/=8./SEVEYEPush;
@@ -4898,28 +4899,43 @@ withInTwelveGates=true;
                                 }
 
 
+
+
+
+
+
+
+
 float daisifier = 0.;
 
 
+
 if(SEVEYEStartAdj<lfc&&!twelveGates&&seventhOUTside&&
+
 
 abs(pABSOLUTE.y)<27./logStabilizationConstant&&
 abs(pABSOLUTE.x)<27.
 &&abs(constellationCoord.y)<27./logStabilizationConstant
 &&abs(constellationCoord.x)<27.
 
+
+
 )
-            {
-                        p = vec2(-abs(p.x),abs(p.y));
-                        float angle = atan(p.y,p.x);
+                         {
 
-                        if(mod((angle*divideByMultiplyingPi+2.)*4.+.5,2.)>1.){
-                        p=spin2(p,PI/4.);
+p = vec2(-abs(p.x),abs(p.y));
+float angle = atan(p.y,p.x);
 
-                        daisifier++;
-                        gated=true;
 
-            }
+                         if(mod((angle*divideByMultiplyingPi+2.)*4.+.5,2.)>1.){
+                            p=spin2(p,PI/4.);
+
+
+daisifier++;
+                                gated=true;
+
+                                }
+                                }
 
 
 
