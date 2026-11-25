@@ -3414,6 +3414,7 @@ if(window.staff)build_staff();
 
 
 
+     newStartTime = performance.now();
 
 
 
@@ -3430,7 +3431,7 @@ if(window.staff)build_staff();
 
             let starStride = 0;
             
-            if (onO||pebbles) {
+            if (onO||(pebbles)||RockInTheWater==3) {
                 for (var g = 0; g < starArms; g++) {
                     if (isFinite(testarContinuous[g])) {
                         if (testarContinuous[g] > maxTestar) maxTestar = testarContinuous[g];
@@ -3442,7 +3443,6 @@ if(window.staff)build_staff();
                 const fill = 1000. / (timestamp - timestamplast) * secondsToEdge;//This should be set to either sampleRate/fftSize or by predicted FPS
                 timestamplast = timestamp;
                 const waterRadiusScalar = 7. / 8.;
-
 
 
 
@@ -3463,12 +3463,12 @@ if(window.staff)build_staff();
                         vop.setHSL(((-mustarD[g] + 8 * uniforms.brelued.value) * uniforms.brelued.value) % 24 / 24., mustarD[g] / lightingScaleStar * 2, mustarD[g] / lightingScaleStar);//297 is around the highest heard note
 
                         const rpio2 = arm + pi / 2.;
-                        if (RockInTheWater == 0 || RockInTheWater == 1) {
+                        if (pebbles||RockInTheWater == 0 || RockInTheWater == 1) {
 
                             let x=-Math.sin(rpio2);
                             let y=-Math.cos(rpio2);
                             let pebbleSize = .1;
-                            if(onO)
+                            if(onO&&!pebbles)
                             {
                              x *= widt ;
                              y *= widt ;
@@ -3539,7 +3539,7 @@ if(window.staff)build_staff();
                          (xr-x), (yr-y),  depth,
                          ) ;
                          */
-                        if (RockInTheWater == 1 || RockInTheWater == 2) {
+                        if (RockInTheWater == 1 || RockInTheWater == 2||RockInTheWater==3) {
                             if (RockInTheWater == 2) {
 
                                 starAndDotsPositionAttribute.setXYZ(starStride, 0, 0, 0)
@@ -3588,14 +3588,14 @@ if(window.staff)build_staff();
 
 
 
-                if ((RockInTheWater == 1 || RockInTheWater == 2)) {
+                if ((RockInTheWater == 1 || RockInTheWater == 2||RockInTheWater == 3)) {
 
                     scene.add(starStreamMesh)
 
 
                     let loopsToCull = starCount;
                     let loopOfCulling = starStreamIndex;
-                    let shellBoost = 1.5;
+                    let shellBoost =3.;
 
                     if (xyStarParticleArray[loopOfCulling] != null) while (xyStarParticleArray[(loopOfCulling - 1 + starCount) % starCount] != null && uniforms["time"].value - xyStarParticleArray[loopOfCulling].time > maxToMin * secondsToEdge * shellBoost && loopsToCull > 0) {
                         // xyStarParticleArray.shift();
@@ -3624,10 +3624,17 @@ if(window.staff)build_staff();
 
                         let starMoment = starStreamIndex;
                         while (xyStarParticleArray[starMoment] != null && starMoment != (starStreamIndex + 1) % starCount) {
+                   if(takingToLong(20))break;
+let sizeSpeed =1./3./logStabilizationConstant;//theres no way this math is right! Yet it's so close to exactly right that I don't want to strive against the wind
                             m = xyStarParticleArray[starMoment];
                             if (lastLoopTime != m.time) {
-                                timeShift = uniforms["time"].value - m.time;
-                                w = timeShift / m.lengt / secondsToEdge;
+                                if(RockInTheWater!=3)
+                                {
+                              //    sizeSpeed = .5;
+                            }                
+                                            timeShift = (-((uniforms["time"].value - m.time)-1.)*sizeSpeed+1.+.5/sizeSpeed);
+
+                                    w = timeShift / m.lengt / secondsToEdge;
                                 withinRadialDelimiter = timeShift + m.lengt < OUTERSHELL * shellBoost;// OUTERSHELL times 1.1 to prevent remnant pieces around edge
                                 depthINNER = -starShipDepthInSet + timeShift / OUTERSHELL * (1. - starShipDepthInSet);
                                 depthOUTER = depthINNER + m.lengt;
@@ -3637,7 +3644,9 @@ if(window.staff)build_staff();
 
 
 
-                            if (withinRadialDelimiter) {
+                            if (timeShift>0//&&timeShift<1.
+                                &&
+                                withinRadialDelimiter) {
                                 let bulletY = 0;
                                 let bulletX = 0;
                                 if (window.BulletMine != 0) {
@@ -3645,8 +3654,8 @@ if(window.staff)build_staff();
                                     bulletY = (m.staticY - staticY) * blt;
                                     bulletX = (m.staticX - staticX) * blt;
                                 }
-                                const outSetX = w * m.xr - bulletX;//apparently something is flipped
-                                const outSetY = w * m.yr - bulletY;
+                                const outSetX = (w * m.xr - bulletX)*sizeSpeed;;//apparently something is flipped
+                                const outSetY = (w * m.yr - bulletY)*sizeSpeed;
                                 //let alph = timeShift*starShipDepthInSet;
                                 for (var yy = 0; yy < 6; yy++) starStreamColorAttribute.setXYZW(starStreamStride + yy, m.vop.r, m.vop.g, m.vop.b, 1. - timeShift / OUTERSHELL * .5)//alpha is beta
                                 //if(xyStarParticleArray[(starMoment-1+starCount)%starCount])console.log(timeShift)
@@ -3665,7 +3674,7 @@ if(window.staff)build_staff();
                                 starStreamPositionAttribute.setXYZ(starStreamStride + 5, m.xr + nx, m.yr + ny, depthOUTER)
 
                             }
-                            else break;
+                            else if(timeShift>0) break;
                             starStreamStride += 6;
                             starMoment = (starMoment - 1 + starCount) % starCount;
 
@@ -3691,7 +3700,7 @@ if(window.staff)build_staff();
             starStride = 0;
             if(!onO) {//start drawing of just twenty four frets here 
 
-                if(!pebbles||onO)
+                if((!pebbles)||onO)
                 {
                 for (var g = 0; g < starArms * 3; g++) {//wipe out the after image of the 1024 frets
                     starAndDotsColorAttribute.setXYZW(g, 0, 0, 0, 0.)
@@ -4988,7 +4997,7 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
 
         circle.geometry.dispose();
         radialLine.geometry.dispose();
-        if (RockInTheWater == 2 || RockInTheWater == 1) scene.remove(starStreamMesh);
+        if (RockInTheWater == 2 || RockInTheWater == 1|| RockInTheWater == 3) scene.remove(starStreamMesh);
         if (pzyghthe >= 1) scene.remove(harmonicPzyghtheMesh)
         if (uniforms.gameOn.value)
             for (var n = 0; n < targets.length; n++) {
@@ -5151,17 +5160,17 @@ var fractionOfFrame = frameBoosted;
 /** Full YIN algorithm */
 var startTime = performance.now();
 var newStartTime = startTime;
-function takingToLong()
-{
-    if(performance.now()-newStartTime>50){
-        console.log("didn't complete tolerance finding")
+function takingToLong(a=51)
+{ 
+    if(performance.now()-newStartTime>a){
+      if(a==51)  console.log("didn't complete tolerance finding")
+        else  console.log("something Took TOolong")
         return true;
 
     }
     else return false;
 }
 function tone2note() {
-        newStartTime = performance.now();
     let frameRationFull;
 
     if (!window.irrationalFraction)  // caused freezing at f# with totalAMP**tolerance//bug not replicated when nudge truncated

@@ -463,7 +463,7 @@ window.zoomBoost = 1.;
             window.fromCenter = 0;
             window.preFromCenter=0;
             window.ISdilated=false;
-            window.RockInTheWater=0;
+            window.RockInTheWater=3;
             window.octaveStars=true;
             window.BulletMine=0;
             window.starClover=true;
@@ -1812,9 +1812,9 @@ else
     
     else if (key=="c")center=!center;
     else if (key=="v"){textON=!textON;}
-    else if (key=="V"){        if (!onO)onO=true;
+    else if (key=="V"){     //   if (!onO)onO=true;
         
-        RockInTheWater+=1;RockInTheWater=RockInTheWater%3;}
+        RockInTheWater+=1;RockInTheWater=RockInTheWater%4;}
     
     else if (key=="z")uniforms[ "helm" ].value = !uniforms[ "helm" ].value;
     else if (key=="Z")uniforms[ "spokesVisualizeColors" ].value = (uniforms[ "spokesVisualizeColors" ].value+1.)%5;
