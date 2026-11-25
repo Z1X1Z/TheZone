@@ -4733,7 +4733,7 @@ hyperCoreOUTPUT--;
 }else break;
 
                    vec2 circumscribe = window;
-//if(length(circumscribe)>2./3.)circumscribe=s;
+if(length(circumscribe)>2./3.)circumscribe=s;
   vec2 deSplicedS =window;
    if(lpcc<twoThirds&&length(window)<twoThirds) deSplicedS=pCenterCored;
 
@@ -5783,7 +5783,7 @@ if(//(starship.w==1.)&&//
 //circumscription<twoThirds//&&circumscription>.4&&
  circumscription<twoThirds&&
   mannyFace.w!=.5&&
-(true&&
+(true||
 //layeredOUT.xyz!=treeCache.xyz//||
 (hypnoticHarmonicCircles.r!=0.||hypnoticHarmonicCircles.g!=0.||hypnoticHarmonicCircles.b!=0.)
 ))layeredOUT*=pow(1.-(circumscription)/1.5,2.)*2.;

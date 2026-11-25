@@ -3414,7 +3414,7 @@ if(window.staff)build_staff();
 
 
 
-     newStartTime = performance.now();
+   window.newStartTime = performance.now();
 
 
 
@@ -5159,7 +5159,8 @@ var fractionOfFrame = frameBoosted;
 //begin MIT license, code from https://github.com/adamski/pitch_detector
 /** Full YIN algorithm */
 var startTime = performance.now();
-var newStartTime = startTime;
+window.newStartTime = startTime;
+
 function takingToLong(a=51)
 { 
     if(performance.now()-newStartTime>a){
@@ -5172,6 +5173,7 @@ function takingToLong(a=51)
 }
 function tone2note() {
     let frameRationFull;
+window.newStartTime = performance.now();
 
     if (!window.irrationalFraction)  // caused freezing at f# with totalAMP**tolerance//bug not replicated when nudge truncated
 
@@ -6060,7 +6062,7 @@ tolerance=(.125+(tolerance));
 
 123*5**4
 tolerance=(1.-Math.sqrt(tolerance)/2.)**2
-tolerance=(Math.pow(Number.MIN_VALUE*(1/3.),2.)*(2/3.))**.5/.5+tolerance
+tolerance=tolerance+(Math.pow(Number.MIN_VALUE*(1/3.),2.)*(2/3.))**.5/.5
 tolerance*=-1
 console.log(tolerance)
 
