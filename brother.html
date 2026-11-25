@@ -5783,11 +5783,12 @@ if(//(starship.w==1.)&&//
 //circumscription<twoThirds//&&circumscription>.4&&
  circumscription<twoThirds&&
   mannyFace.w!=.5&&
-  oopm.w==0.&&
+  oopm.w==0.
+  &&length(r)<.5&&
 (true||
 //layeredOUT.xyz!=treeCache.xyz//||
 (hypnoticHarmonicCircles.r!=0.||hypnoticHarmonicCircles.g!=0.||hypnoticHarmonicCircles.b!=0.)
-))layeredOUT*=pow(1.-(circumscription)/1.5,2.)*1.5;
+))layeredOUT*=pow(1.-(circumscription)/1.5,2.)*7./4.;
 
 if(  starship.w>252./255.&&starship.w<254./255.)layeredOUT=starship;
 
