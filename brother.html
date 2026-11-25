@@ -5409,7 +5409,8 @@ vec3 pongBall = vec3(0.);
             // linearFrequency/=2.;
           
     if ( icicle)icicles = waveForm();
-            
+          if(icicles.x!=0.&&!(starship.r==starship.g&&starship.r==starship.b))
+            starship*=icicles;
              //if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.&&pixelStarship.w>0.)
             // mny*=pixelStarship.xyz;//-mny.x*.66;
                                  
