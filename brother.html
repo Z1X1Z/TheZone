@@ -3495,10 +3495,13 @@ float daisifier = 0.;
 
 float angle = atan(p.x,p.y)-PI/2.;//+PI/6.;
 angle=abs(angle);
-float angleBuffer = angle + PI/8.;//.;
-if(angleBuffer<PI&&angleBuffer>PI/4.*3.&&p.x*p.y>0.)
+
+float angleBuffer = angle - PI/8.;//.;
+if(angleBuffer>PI*8./8.&&angleBuffer<PI*10./8.
+&&
+p.x*p.y>0.)
 {angle-=PI/4.;
-   //p*=0.;
+  // p*=0.;
 }
 if(SEVEYEStartAdj<lfc&&
 
