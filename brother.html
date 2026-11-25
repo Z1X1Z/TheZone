@@ -3493,7 +3493,7 @@ p*=interSection*2.;
 float daisifier = 0.;
 
 
-float angle = atan(p.y,p.x);//+PI/6.;
+float angle = atan(p.x,p.y)-PI/2.;//+PI/6.;
 angle=abs(angle);
 float angleBuffer = angle + PI/8.;//.;
 if(angleBuffer<PI&&angleBuffer>PI/4.*3.&&p.x*p.y>0.)

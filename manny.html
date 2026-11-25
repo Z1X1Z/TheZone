@@ -4158,9 +4158,8 @@ extrArms+=h.x;
     vec3 balloons(vec2 p){
         vec3 balloon=vec3(0.);
         vec2 vUvCentered =(vUv-.5)*resolution/min(resolution.x,resolution.y);
- float sizer = 1.25;
-        vUvCentered*=sizer;
-        if(length(vUvCentered)<.5/sizer&&volume!=1.)
+vUvCentered/=1.5;
+        if(length(vUvCentered)<.25&&volume!=1.)
         {
         float sizeReset = 480.;
         if (balloonsONexponential!=0.)
@@ -4905,7 +4904,7 @@ withInTwelveGates=true;
 
 
 
- angle = atan(p.y,p.x);//+PI/6.;
+ angle = atan(p.x,p.y)-PI/2.;//+PI/6.;
 angle=abs(angle);
 float angleBuffer = angle + PI/8.;//.;
 if(angleBuffer<PI&&angleBuffer>PI/4.*3.&&p.x*p.y>0.)
