@@ -3492,17 +3492,8 @@ p*=interSection*2.;
 
 float daisifier = 0.;
 
+//angle=mod(abs(angle)+2.*PI,PI/4.);
 
-float angle = atan(p.x,p.y)-PI/2.;//+PI/6.;
-angle=abs(angle);
-
-float angleBuffer = angle - PI/8.;//.;
-if(angleBuffer>PI*8./8.&&angleBuffer<PI*10./8.
-&&
-p.x*p.y>0.)
-{angle-=PI/4.;
-  // p*=0.;
-}
 if(SEVEYEStartAdj<lfc&&
 
 
@@ -3515,7 +3506,10 @@ abs(pABSOLUTE.x)<27.
 
 )
            //              if(twelveGates)
-                         {
+                       {
+
+p = vec2(-abs(p.x),abs(p.y));
+float angle = atan(p.y,p.x);
 
 
                          if(mod((angle*divideByMultiplyingPi+2.)*4.+.5,2.)>1.){

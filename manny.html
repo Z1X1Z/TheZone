@@ -4898,55 +4898,28 @@ withInTwelveGates=true;
                                 }
 
 
-
-
-
-
-
-
-
- angle = atan(p.x,p.y)-PI/2.;//+PI/6.;
-angle=abs(angle);
-
-float angleBuffer = angle - PI/8.;//.;
-if(angleBuffer>PI*8./8.&&angleBuffer<PI*10./8.
-&&
-p.x*p.y>0.)
-{angle-=PI/4.;
-  // p*=0.;
-}
-
-
-
-
 float daisifier = 0.;
 
 
-
 if(SEVEYEStartAdj<lfc&&!twelveGates&&seventhOUTside&&
-
 
 abs(pABSOLUTE.y)<27./logStabilizationConstant&&
 abs(pABSOLUTE.x)<27.
 &&abs(constellationCoord.y)<27./logStabilizationConstant
 &&abs(constellationCoord.x)<27.
 
-
-
 )
-           //              if(twelveGates)
-                         {
+            {
+                        p = vec2(-abs(p.x),abs(p.y));
+                        float angle = atan(p.y,p.x);
 
+                        if(mod((angle*divideByMultiplyingPi+2.)*4.+.5,2.)>1.){
+                        p=spin2(p,PI/4.);
 
-                         if(mod((angle*divideByMultiplyingPi+2.)*4.+.5,2.)>1.){
-                            p=spin2(p,PI/4.);
+                        daisifier++;
+                        gated=true;
 
-
-daisifier++;
-                                gated=true;
-
-                                }
-                                }
+            }
 
 
 
