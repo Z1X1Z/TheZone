@@ -3598,7 +3598,7 @@ if(window.staff)build_staff();
                     let loopOfCulling = 0;
 
                     if (xyStarParticleArray[loopOfCulling] != null) while (xyStarParticleArray[(loopOfCulling - 1 + starCount) % starCount] != null && uniforms["time"].value - xyStarParticleArray[loopOfCulling].time<=secondsToEdge
-                    && loopsToCull <= starCount) {
+                    && loopsToCull <= 0) {starCount
                         // xyStarParticleArray.shift();
                         xyStarParticleArray[loopOfCulling] = null;
 
@@ -3606,7 +3606,7 @@ if(window.staff)build_staff();
                             starStreamPositionAttribute.setXYZ(loopOfCulling * 3 + e, 0, 0, 0)
                             starStreamColorAttribute.setXYZW(loopOfCulling * 3 + e, 0, 0, 0, 0)
                         }
-                        loopOfCulling = (loopOfCulling  + starCount) % starCount;
+                        loopOfCulling = (loopOfCulling - 1 + starCount) % starCount;
 
                         loopsToCull--;
 
