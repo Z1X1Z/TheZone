@@ -218,7 +218,7 @@ function makeSpirograph() {
         let dilation = inputData[m] / maxSamp / 2.;
 
         let outside = (1 + dilation) / 2.;
-        let inside = (1. - dilation) / 2.;
+        let inside = (1. - dilation) / 8.;
         var size = outside + inputData[m] * inside;// inputData[m]/maxSamp;//.75+inputData[m]/4./maxSamp;
         spirray0[m] = -Math.sin(-phase) * size;
         spirray1[m] = -Math.cos(-phase) * size;
@@ -1562,6 +1562,7 @@ fibgetScene= new THREE.Scene();
     scene.add(harmonicPzyghtheMesh)
     scene.add(meshTrail)
     shaderScene.add(line);
+    //scene.add(line);
     scene.add(starMesh);    
     scene.add(starAndDotsMesh);    
     
@@ -4381,14 +4382,14 @@ let fulcrum = .8
                          transparencyOfTrail=254./255.;
                          transparencyOfTrailLast=transparencyOfTrail;
                      }*/
- if(timeElapsedSinceRecording<.25/window.movementRate)
+ if(timeElapsedSinceRecording<2./3./l3*logStabilizationConstant/window.movementRate)
                     {if(!window.flame)
-                        {transparencyOfTrail=1;
+                        {transparencyOfTrail=253./255.;
                              z =-1.;
                         }
                         else
                         {transparencyOfTrail=254./255.;
-                             z =1.;}
+                             z =-1.;}
                     }
 
                     let stylus = .5;
@@ -4967,8 +4968,8 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
 
                 if (uniforms.MannyONtrail.value != 2) scene.remove(radialLine);
                 if (uniforms.MannyONtrail.value != 2) scene.remove(circle);
-                scene.remove(line);
-                shaderScene.add(line);
+            scene.remove(line);
+               shaderScene.add(line);
 
             }
             scene.remove(shaderMeshClone);
@@ -4988,7 +4989,7 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
             if (uniforms.MannyONtrail.value != 2) scene.remove(circle);
 
             shaderScene.add(line);
-            scene.remove(line);
+         scene.remove(line);
 
         }
 
@@ -6062,7 +6063,7 @@ tolerance=(.125+(tolerance));
 
 123*5**4
 tolerance=(1.-Math.sqrt(tolerance)/2.)**2
-tolerance=tolerance+(Math.pow(Number.MIN_VALUE*(1/3.),2.)*(2/3.))**.5/.5
+tolerance=(Math.pow(Number.MIN_VALUE*(1/3.),2.)*(2/3.))**.5/.5+tolerance
 tolerance*=-1
 console.log(tolerance)
 
