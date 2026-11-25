@@ -3594,10 +3594,11 @@ if(window.staff)build_staff();
                     scene.add(starStreamMesh)
 
 
-                    let loopsToCull = starCount;
+                    let loopsToCull = 0;
                     let loopOfCulling = starStreamIndex;
 
-                    if (xyStarParticleArray[loopOfCulling] != null) while (xyStarParticleArray[(loopOfCulling - 1 + starCount) % starCount] != null && uniforms["time"].value - xyStarParticleArray[loopOfCulling].time > secondsToEdge/2. && loopsToCull >= 0) {
+                    if (xyStarParticleArray[loopOfCulling] != null) while (xyStarParticleArray[(loopOfCulling - 1 + starCount) % starCount] != null && uniforms["time"].value -secondsToEdge >xyStarParticleArray[loopOfCulling].time
+                    && loopsToCull <= starCount) {
                         // xyStarParticleArray.shift();
                         xyStarParticleArray[loopOfCulling] = null;
 
@@ -3605,9 +3606,9 @@ if(window.staff)build_staff();
                             starStreamPositionAttribute.setXYZ(loopOfCulling * 3 + e, 0, 0, 0)
                             starStreamColorAttribute.setXYZW(loopOfCulling * 3 + e, 0, 0, 0, 0)
                         }
-                        loopOfCulling = (loopOfCulling - 1 + starCount) % starCount;
+                        loopOfCulling = (loopOfCulling + 1 + starCount) % starCount;
 
-                        loopsToCull--;
+                        loopsToCull++;
 
                     }
 
