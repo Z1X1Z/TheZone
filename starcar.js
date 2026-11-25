@@ -186,6 +186,8 @@ function vectorize4() {
 
     }
 }
+                    let shellBoost =3.;
+
 let loudestNote = Array(4).fill(0.)
 let averagedAmp = 0;
 let len = 0;
@@ -1136,9 +1138,7 @@ function setFFTdependantSizes() {
     crownBarColors = new Float32Array( EldersLeg * 6 * 4 *3);
     }
     starArms = numberOfBins;
-    window.starCount = Math.ceil(starArms * 60 * secondsToEdge);
-
-    starCount = Math.ceil(starArms * 60 * secondsToEdge);
+    window.starCount = Math.ceil(starArms * 60 * secondsToEdge*shellBoost*2.);
     xyStarParticleArray = Array(starCount).fill(null)
     starStreamPoints = new Float32Array(starCount * 3 * 6);
     starStreamColors = new Float32Array(starCount * 4 * 6);
@@ -3559,7 +3559,7 @@ if(window.staff)build_staff();
                             xyStarParticle.time = uniforms["time"].value;
                             xyStarParticle.interpolation = interpolation;
                             xyStarParticle.interpolationFramesScaled = interpolation / 60. / 4.;
-                            xyStarParticle.amp = testarContinuous[g] / 255.;
+                            xyStarParticle.amp = (testarContinuous[g] )**2;
                             xyStarParticle.staticX = staticX;
                             xyStarParticle.staticY = staticY;
 
@@ -3595,7 +3595,6 @@ if(window.staff)build_staff();
 
                     let loopsToCull = starCount;
                     let loopOfCulling = starStreamIndex;
-                    let shellBoost =3.;
 
                     if (xyStarParticleArray[loopOfCulling] != null) while (xyStarParticleArray[(loopOfCulling - 1 + starCount) % starCount] != null && uniforms["time"].value - xyStarParticleArray[loopOfCulling].time > maxToMin * secondsToEdge * shellBoost && loopsToCull > 0) {
                         // xyStarParticleArray.shift();
@@ -3625,7 +3624,7 @@ if(window.staff)build_staff();
                         let starMoment = starStreamIndex;
                         while (xyStarParticleArray[starMoment] != null && starMoment != (starStreamIndex + 1) % starCount) {
                    if(takingToLong(20))break;
-let sizeSpeed =1./3./logStabilizationConstant;//theres no way this math is right! Yet it's so close to exactly right that I don't want to strive against the wind
+let sizeSpeed =1./3.;//theres no way this math is right! Yet it's so close to exactly right that I don't want to strive against the wind
                             m = xyStarParticleArray[starMoment];
                             if (lastLoopTime != m.time) {
                                 if(RockInTheWater!=3)
@@ -3644,8 +3643,8 @@ let sizeSpeed =1./3./logStabilizationConstant;//theres no way this math is right
 
 
 
-                            if (timeShift>1.-sizeSpeed//&&timeShift<1.
-                                &&
+                            if (timeShift>(1.-sizeSpeed)*shellBoost*l3 //&&timeShift<1.
+                                &&m.interpolationFramesScaled<.25&&
                                 withinRadialDelimiter) {
                                 let bulletY = 0;
                                 let bulletX = 0;
@@ -6060,8 +6059,9 @@ tolerance=(.125+(Math.pow(Number.MIN_VALUE*(1/3.),2.)*(2/3.))**.5/.5)+(tolerance
 
 //    tolerance  = toleranceMAXIMALove
 123*5**4
-
-t//olerance=+tolerance
+tolerance=(1.-tolerance)
+tolerance*=-1.0;
+//tolerance=+tolerance
 console.log(tolerance)
 
 
