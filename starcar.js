@@ -4420,7 +4420,7 @@ let fulcrum = .8
                          transparencyOfTrail=254./255.;
                          transparencyOfTrailLast=transparencyOfTrail;
                      }*/
- if(timeElapsedSinceRecording<2./3./l3*logStabilizationConstant/window.movementRate)
+ if(timeElapsedSinceRecording<1./3./window.movementRate)
                     {if(!window.flame)
                         {transparencyOfTrail=253./255.;
                              z =-1.;
@@ -6101,7 +6101,6 @@ tolerance=(.125-(+Math.pow(Number.MIN_VALUE*(1/3.),2.)*(2/3.))**.5/.5+(tolerance
 
 123*5**4
 tolerance=(1.-Math.sqrt(tolerance)/2.)**2+(+Math.pow(Number.MIN_VALUE*(1/3.),2.)*(2/3.))**.5/.5
-tolerance=+tolerance
 //tolerance*=-1
 
 console.log(tolerance)
