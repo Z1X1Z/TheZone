@@ -3600,18 +3600,20 @@ if(window.staff)build_staff();
                     
 loopOfCulling=starStreamIndex
 //console.log(xyStarParticleArray[loopOfCulling] )
+
 for(let jkl = 0.; jkl<starCount*2; jkl++)
 {
-                            starStreamPositionAttribute.setXYZ(jkl*lkj *3 , 0, 0, 0)
+                            starStreamPositionAttribute.setXYZ(jkl *3 , 0, 0, 0)
                             starStreamColorAttribute.setXYZW(jkl *3 + 1, 0, 0, 0, 0)
 
-                            starStreamPositionAttribute.setXYZ(jkl*lkj *3 +1, 0, 0, 0)
+                            starStreamPositionAttribute.setXYZ(jkl *3 +1, 0, 0, 0)
                             starStreamColorAttribute.setXYZW(jkl *3 + 1, 0, 0, 0, 0)
 
-                            starStreamPositionAttribute.setXYZ(jkl*lkj *3 +2, 0, 0, 0)
+                            starStreamPositionAttribute.setXYZ(jkl *3 +2, 0, 0, 0)
                             starStreamColorAttribute.setXYZW(jkl *3 + 2, 0, 0, 0, 0)
 
     }
+                
 let speed = 2.
                     if (xyStarParticleArray[loopOfCulling] != null) 
 while (loopsToCull >0) {

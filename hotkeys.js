@@ -1828,11 +1828,12 @@ for(let jkl = 0.; jkl<starCount*2; jkl++)
                             starStreamColorAttribute.setXYZW(jkl *3 + 2, 0, 0, 0, 0)
 
     }
-                }
+                
 
                     starStreamPositionAttribute.needsUpdate = true;
                     starStreamColorAttribute.needsUpdate = true;
             }
+        }
     
     
     else if (key=="z")uniforms[ "helm" ].value = !uniforms[ "helm" ].value;
