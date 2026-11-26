@@ -6109,7 +6109,7 @@ tolerance=(1.-Math.sqrt(tolerance)/2.)**2+(+Math.pow(Number.MIN_VALUE*(1/3.),2.)
 let toll = tolerance
 tolerance =tolerance-( ((toll*toll)/2.)**(Math.sqrt(toll)/.5)-(Math.pow(toll,.5)*2.)**(Math.pow(toll,2.)*.5))
 //tolerance-=1.
-tolerance-=1.4341
+tolerance-=1.443441
 //tolerance-=1.440001000441
 //tolerance=uniforms.baseN.value*(tolerance*uniforms.baseN.value)
 
