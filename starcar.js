@@ -3597,12 +3597,23 @@ if(window.staff)build_staff();
 
                     let loopsToCull = starCount;
                     
-loopOfCulling=starStreamIndex
+loopOfCulling=starStreamIndex-1
 //console.log(xyStarParticleArray[loopOfCulling] )
+
+
+                        for (var em = 0; em < starCount; em++) 
+
+                        for (var e = 0; e < 3; e++) {
+                            starStreamPositionAttribute.setXYZ(loopOfCulling * 3 + e, 0, 0, 0)
+                            starStreamColorAttribute.setXYZW(loopOfCulling * 3 + e, 0, 0, 0, 0)
+                        }
+
+
+/*
                     if (xyStarParticleArray[loopOfCulling] != null) 
 while (loopsToCull >= 0) {
                         // xyStarParticleArray.shift();
-                        if ((uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)/1000. >secondsToEdge*2.)
+                        if ((uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)/1000./60 >secondsToEdge*.5)
 {
                         xyStarParticleArray[loopOfCulling] = null;
 
@@ -3611,7 +3622,7 @@ while (loopsToCull >= 0) {
                             starStreamColorAttribute.setXYZW(loopOfCulling * 3 + e, 0, 0, 0, 0)
                         }
                     }
-
+                   
                         loopOfCulling = (loopOfCulling -1+ starCount) % starCount;
 //console.log("HERE")
 
@@ -3619,6 +3630,11 @@ while (loopsToCull >= 0) {
                                              if (xyStarParticleArray[loopOfCulling] == null) break ;
 
                     }
+
+
+
+                         */
+
 //console.log("loopOfCullin+ "+loopOfCulling)
                     let OUTERSHELL = maxToMin * secondsToEdge;
                     let m = xyStarParticleArray[starStreamIndex];
