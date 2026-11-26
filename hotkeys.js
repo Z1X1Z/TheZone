@@ -463,7 +463,7 @@ window.zoomBoost = 1.;
             window.fromCenter = 0;
             window.preFromCenter=0;
             window.ISdilated=false;
-            window.RockInTheWater=3;
+            window.RockInTheWater=0;
             window.octaveStars=true;
             window.BulletMine=0;
             window.starClover=true;
@@ -1814,24 +1814,26 @@ else
     else if (key=="v"){textON=!textON;}
     else if (key=="V"){     //   if (!onO)onO=true;
         
-        RockInTheWater+=1;RockInTheWater=RockInTheWater%4;
+        RockInTheWater-=1;RockInTheWater=(RockInTheWater+4)%4;
 if(window.INITIALIZED){
-for(let jkl = 0.; jkl<starCount; jkl++)
+for(let jkl = 0.; jkl<starCount*2; jkl++)
 {
-                            starStreamPositionAttribute.setXYZ(jkl *6 , 0, 0, 0)
-                            starStreamColorAttribute.setXYZW(jkl *6 + 1, 0, 0, 0, 0)
+                            starStreamPositionAttribute.setXYZ(jkl *3 , 0, 0, 0)
+                            starStreamColorAttribute.setXYZW(jkl *3 + 1, 0, 0, 0, 0)
 
-                            starStreamPositionAttribute.setXYZ(jkl *6 +2, 0, 0, 0)
-                            starStreamColorAttribute.setXYZW(jkl *6 + 3, 0, 0, 0, 0)
+                            starStreamPositionAttribute.setXYZ(jkl *3 +1, 0, 0, 0)
+                            starStreamColorAttribute.setXYZW(jkl *3 + 1, 0, 0, 0, 0)
 
-                            starStreamPositionAttribute.setXYZ(jkl *6 +4, 0, 0, 0)
-                            starStreamColorAttribute.setXYZW(jkl *6 + 5, 0, 0, 0, 0)
+                            starStreamPositionAttribute.setXYZ(jkl *3 +2, 0, 0, 0)
+                            starStreamColorAttribute.setXYZW(jkl *3 + 2, 0, 0, 0, 0)
+
+    }
                 }
 
                     starStreamPositionAttribute.needsUpdate = true;
                     starStreamColorAttribute.needsUpdate = true;
             }
-    }
+    
     
     else if (key=="z")uniforms[ "helm" ].value = !uniforms[ "helm" ].value;
     else if (key=="Z")uniforms[ "spokesVisualizeColors" ].value = (uniforms[ "spokesVisualizeColors" ].value+1.)%5;

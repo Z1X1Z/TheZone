@@ -3600,24 +3600,27 @@ if(window.staff)build_staff();
                     
 loopOfCulling=starStreamIndex
 //console.log(xyStarParticleArray[loopOfCulling] )
-
-
-for(let jkl = 0.; jkl<starCount; jkl++)
+for(let jkl = 0.; jkl<starCount*2; jkl++)
 {
-                            starStreamPositionAttribute.setXYZ(jkl *6 , 0, 0, 0)
-                            starStreamColorAttribute.setXYZW(jkl *6 + 1, 0, 0, 0, 0)
+                            starStreamPositionAttribute.setXYZ(jkl*lkj *3 , 0, 0, 0)
+                            starStreamColorAttribute.setXYZW(jkl *3 + 1, 0, 0, 0, 0)
 
-                            starStreamPositionAttribute.setXYZ(jkl *6 +2, 0, 0, 0)
-                            starStreamColorAttribute.setXYZW(jkl *6 + 3, 0, 0, 0, 0)
+                            starStreamPositionAttribute.setXYZ(jkl*lkj *3 +1, 0, 0, 0)
+                            starStreamColorAttribute.setXYZW(jkl *3 + 1, 0, 0, 0, 0)
 
-                            starStreamPositionAttribute.setXYZ(jkl *6 +4, 0, 0, 0)
-                            starStreamColorAttribute.setXYZW(jkl *6 + 5, 0, 0, 0, 0)
-                }
+                            starStreamPositionAttribute.setXYZ(jkl*lkj *3 +2, 0, 0, 0)
+                            starStreamColorAttribute.setXYZW(jkl *3 + 2, 0, 0, 0, 0)
+
+    }
 let speed = 2.
                     if (xyStarParticleArray[loopOfCulling] != null) 
 while (loopsToCull >0) {
                         // xyStarParticleArray.shift();
-                        if ((uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)>secondsToEdge*1.5*speed)
+                        if ((
+                            (uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)
+                            >secondsToEdge*1.5*speed&&RockInTheWater == 3) || 
+                                 ((RockInTheWater == 1||RockInTheWater==2.)&&uniforms["time"].value - xyStarParticleArray[loopOfCulling].time > maxToMin * secondsToEdge * shellBoost)
+                    )
 {
  // console.log("val :" + (uniforms["time"].value - xyStarParticleArray[loopOfCulling].time))
                         xyStarParticleArray[loopOfCulling] = null;
@@ -3667,12 +3670,10 @@ let fitin =l3/logStabilizationConstant/logStabilizationConstant
                    if(takingToLong(100))break;
                             m = xyStarParticleArray[starMoment];
                             if (lastLoopTime != m.time) {
-                                if(RockInTheWater!=3)
-                                {
-                              //    sizeSpeed = .5;
-                            }                
+                              if(RockInTheWater == 1||RockInTheWater==2.)
+                                timeShift = uniforms["time"].value - m.time;
+else
                                             timeShift = (-((uniforms["time"].value - m.time)/speed-1.)*sizeSpeed+1.+.5/sizeSpeed);
-
                                     w = timeShift / m.lengt / secondsToEdge;
                                 withinRadialDelimiter = timeShift + m.lengt < OUTERSHELL * shellBoost;// OUTERSHELL times 1.1 to prevent remnant pieces around edge
                                 depthINNER = -starShipDepthInSet + timeShift / OUTERSHELL * (1. - starShipDepthInSet);
@@ -3693,8 +3694,13 @@ let fitin =l3/logStabilizationConstant/logStabilizationConstant
                                     bulletY = (m.staticY - staticY) * blt;
                                     bulletX = (m.staticX - staticX) * blt;
                                 }
-                                const outSetX = (w * m.xr - bulletX)*sizeSpeed;;//apparently something is flipped
-                                const outSetY = (w * m.yr - bulletY)*sizeSpeed;
+                                var outSetX = (w * m.xr - bulletX);;//apparently something is flipped
+                                var outSetY = (w * m.yr - bulletY);
+                               if(RockInTheWater==3)
+                               {
+                                outSetX*=sizeSpeed
+                                outSetY*=sizeSpeed
+                               }
                                 //let alph = timeShift*starShipDepthInSet;
                                 for (var yy = 0; yy < 6; yy++) starStreamColorAttribute.setXYZW(starStreamStride + yy, m.vop.r, m.vop.g, m.vop.b, timeShift*.32 )//alpha is beta
                                 //if(xyStarParticleArray[(starMoment-1+starCount)%starCount])console.log(timeShift)
