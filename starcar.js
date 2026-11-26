@@ -3644,18 +3644,19 @@ while (loopsToCull >= 0) {
                         let depthINNER = (-starShipDepthInSet + timeShift / OUTERSHELL) * starShipDepthInSet;
                         let depthOUTER = depthINNER + m.lengt;
                         let starStreamStride = 0;
-let fitin =l3*l3
+let fitin =l3/logStabilizationConstant/logStabilizationConstant
                         let starMoment = starStreamIndex;
+                        let sizeSpeed =1./3.*logStabilizationConstant;//theres no way this math is right! Yet it's so close to exactly right that I don't want to strive against the wind
+
                         while (xyStarParticleArray[starMoment] != null && starMoment != (starStreamIndex + 1) % starCount) {
                    if(takingToLong(20))break;
-let sizeSpeed =1./3.;//theres no way this math is right! Yet it's so close to exactly right that I don't want to strive against the wind
                             m = xyStarParticleArray[starMoment];
                             if (lastLoopTime != m.time) {
                                 if(RockInTheWater!=3)
                                 {
                               //    sizeSpeed = .5;
                             }                
-                                            timeShift = (-((uniforms["time"].value - m.time)/4.-1.)*sizeSpeed+1.+.5/sizeSpeed);
+                                            timeShift = (-((uniforms["time"].value - m.time)/3.-1.)*sizeSpeed+1.+.5/sizeSpeed);
 
                                     w = timeShift / m.lengt / secondsToEdge;
                                 withinRadialDelimiter = timeShift + m.lengt < OUTERSHELL * shellBoost;// OUTERSHELL times 1.1 to prevent remnant pieces around edge
