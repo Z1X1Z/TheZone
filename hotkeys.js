@@ -1814,7 +1814,24 @@ else
     else if (key=="v"){textON=!textON;}
     else if (key=="V"){     //   if (!onO)onO=true;
         
-        RockInTheWater+=1;RockInTheWater=RockInTheWater%4;}
+        RockInTheWater+=1;RockInTheWater=RockInTheWater%4;
+if(window.INITIALIZED){
+for(let jkl = 0.; jkl<starCount; jkl++)
+{
+                            starStreamPositionAttribute.setXYZ(jkl *6 , 0, 0, 0)
+                            starStreamColorAttribute.setXYZW(jkl *6 + 1, 0, 0, 0, 0)
+
+                            starStreamPositionAttribute.setXYZ(jkl *6 +2, 0, 0, 0)
+                            starStreamColorAttribute.setXYZW(jkl *6 + 3, 0, 0, 0, 0)
+
+                            starStreamPositionAttribute.setXYZ(jkl *6 +4, 0, 0, 0)
+                            starStreamColorAttribute.setXYZW(jkl *6 + 5, 0, 0, 0, 0)
+                }
+
+                    starStreamPositionAttribute.needsUpdate = true;
+                    starStreamColorAttribute.needsUpdate = true;
+            }
+    }
     
     else if (key=="z")uniforms[ "helm" ].value = !uniforms[ "helm" ].value;
     else if (key=="Z")uniforms[ "spokesVisualizeColors" ].value = (uniforms[ "spokesVisualizeColors" ].value+1.)%5;

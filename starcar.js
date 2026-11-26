@@ -1241,14 +1241,14 @@ if(EldersLeg>0.)
 
 
 
-        //if(RockInTheWater==1||RockInTheWater==2) scene.remove(starStreamMesh);
+      if(RockInTheWater==1||RockInTheWater==2||RockInTheWater==3) scene.remove(starStreamMesh);
         starStreamGeometry.dispose();
         starStreamGeometry = new THREE.BufferGeometry();
         starStreamGeometry.dynamic = true;
         starStreamGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starStreamPoints, 3));
         starStreamGeometry.setAttribute('color', new THREE.Float32BufferAttribute(starStreamColors, 4));
         starStreamMesh = new THREE.Mesh(starStreamGeometry, starStreamMaterial);
-        //scene.add(starStreamMesh);
+        scene.add(starStreamMesh);
 
         loadAttributes();
 
@@ -1572,7 +1572,7 @@ fibgetScene= new THREE.Scene();
 
     scene.add(DAWstarMesh);
     scene.add(starsANDwitnessesMesh)
-    //scene.add(starStreamMesh)
+    scene.add(starStreamMesh)
 
     // shaderScene.add( circle );
     // shaderScene.add(radialLine);
@@ -3593,7 +3593,7 @@ if(window.staff)build_staff();
 
                 if ((RockInTheWater == 1 || RockInTheWater == 2||RockInTheWater == 3)) {
 
-                    scene.add(starStreamMesh)
+                    //scene.add(starStreamMesh)
 
                     let loopsToCull = starCount;
                     
@@ -5036,7 +5036,7 @@ uniforms.coords.value= new THREE.Vector2  ( uniforms.coords.value.y, uniforms.co
 
         circle.geometry.dispose();
         radialLine.geometry.dispose();
-        if (RockInTheWater == 2 || RockInTheWater == 1|| RockInTheWater == 3) scene.remove(starStreamMesh);
+        //if (RockInTheWater == 2 || RockInTheWater == 1|| RockInTheWater == 3) scene.remove(starStreamMesh);
         if (pzyghthe >= 1) scene.remove(harmonicPzyghtheMesh)
         if (uniforms.gameOn.value)
             for (var n = 0; n < targets.length; n++) {
