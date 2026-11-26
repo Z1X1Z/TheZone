@@ -3612,11 +3612,11 @@ for(let jkl = 0.; jkl<starCount; jkl++)
                             starStreamPositionAttribute.setXYZ(jkl *6 +4, 0, 0, 0)
                             starStreamColorAttribute.setXYZW(jkl *6 + 5, 0, 0, 0, 0)
                 }
-
+let speed = 2.
                     if (xyStarParticleArray[loopOfCulling] != null) 
 while (loopsToCull >0) {
                         // xyStarParticleArray.shift();
-                        if ((uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)>secondsToEdge*1.5)
+                        if ((uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)>secondsToEdge*1.5*speed)
 {
  // console.log("val :" + (uniforms["time"].value - xyStarParticleArray[loopOfCulling].time))
                         xyStarParticleArray[loopOfCulling] = null;
@@ -3670,7 +3670,7 @@ let fitin =l3/logStabilizationConstant/logStabilizationConstant
                                 {
                               //    sizeSpeed = .5;
                             }                
-                                            timeShift = (-((uniforms["time"].value - m.time)-1.)*sizeSpeed+1.+.5/sizeSpeed);
+                                            timeShift = (-((uniforms["time"].value - m.time)/speed-1.)*sizeSpeed+1.+.5/sizeSpeed);
 
                                     w = timeShift / m.lengt / secondsToEdge;
                                 withinRadialDelimiter = timeShift + m.lengt < OUTERSHELL * shellBoost;// OUTERSHELL times 1.1 to prevent remnant pieces around edge
@@ -6097,12 +6097,13 @@ tolerance=Math.pow(tolerance,1.)
 tolerance=tolerance**1.
 
 //.09182507
-tolerance=(.125+(tolerance));
+tolerance=(.125-(+Math.pow(Number.MIN_VALUE*(1/3.),2.)*(2/3.))**.5/.5+(tolerance));
 
 123*5**4
-tolerance=(1.-Math.sqrt(tolerance)/2.)**2
-tolerance=(Math.pow(Number.MIN_VALUE*(1/3.),2.)*(2/3.))**.5/.5+tolerance
-tolerance*=-1
+tolerance=(1.-Math.sqrt(tolerance)/2.)**2+(+Math.pow(Number.MIN_VALUE*(1/3.),2.)*(2/3.))**.5/.5
+tolerance=+tolerance
+//tolerance*=-1
+
 console.log(tolerance)
 
 
