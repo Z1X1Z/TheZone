@@ -3599,18 +3599,29 @@ if(window.staff)build_staff();
                     
 loopOfCulling=starStreamIndex
 //console.log(xyStarParticleArray[loopOfCulling] )
-                    if (xyStarParticleArray[loopOfCulling] != null) 
-while (loopsToCull >= 0) {
-                        // xyStarParticleArray.shift();
-                        if ((uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)>=secondsToEdge*3.)
-{
-  // console.log("val :" + (uniforms["time"].value - xyStarParticleArray[loopOfCulling].time))
-                        xyStarParticleArray[loopOfCulling] = null;
 
+
+                        for (var em = 0; em < starCount; em++)
                         for (var e = 0; e < 3; e++) {
                             starStreamPositionAttribute.setXYZ(loopOfCulling * 3 + e, 0, 0, 0)
                             starStreamColorAttribute.setXYZW(loopOfCulling * 3 + e, 0, 0, 0, 0)
                         }
+
+
+
+                    if (xyStarParticleArray[loopOfCulling] != null) 
+while (loopsToCull >= 0) {
+                        // xyStarParticleArray.shift();
+                        if ((uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)>=secondsToEdge)
+{
+  // console.log("val :" + (uniforms["time"].value - xyStarParticleArray[loopOfCulling].time))
+                        xyStarParticleArray[loopOfCulling] = null;
+/*
+                        for (var e = 0; e < 3; e++) {
+                            starStreamPositionAttribute.setXYZ(loopOfCulling * 3 + e, 0, 0, 0)
+                            starStreamColorAttribute.setXYZW(loopOfCulling * 3 + e, 0, 0, 0, 0)
+                        }
+                            */
                     }   if (xyStarParticleArray[(loopOfCulling-1+starCount)%starCount] == null) break ;
 
                    // else if (xyStarParticleArray[loopOfCulling] != null) break ;
@@ -3633,7 +3644,7 @@ while (loopsToCull >= 0) {
                         let depthINNER = (-starShipDepthInSet + timeShift / OUTERSHELL) * starShipDepthInSet;
                         let depthOUTER = depthINNER + m.lengt;
                         let starStreamStride = 0;
-
+let fitin =l3*l3
                         let starMoment = starStreamIndex;
                         while (xyStarParticleArray[starMoment] != null && starMoment != (starStreamIndex + 1) % starCount) {
                    if(takingToLong(20))break;
@@ -3644,7 +3655,7 @@ let sizeSpeed =1./3.;//theres no way this math is right! Yet it's so close to ex
                                 {
                               //    sizeSpeed = .5;
                             }                
-                                            timeShift = (-((uniforms["time"].value - m.time)/2.-1.)*sizeSpeed+1.+.5/sizeSpeed);
+                                            timeShift = (-((uniforms["time"].value - m.time)/4.-1.)*sizeSpeed+1.+.5/sizeSpeed);
 
                                     w = timeShift / m.lengt / secondsToEdge;
                                 withinRadialDelimiter = timeShift + m.lengt < OUTERSHELL * shellBoost;// OUTERSHELL times 1.1 to prevent remnant pieces around edge
@@ -3675,11 +3686,12 @@ let sizeSpeed =1./3.;//theres no way this math is right! Yet it's so close to ex
                                 //if(xyStarParticleArray[(starMoment-1+starCount)%starCount])console.log(timeShift)
                                 const nx = -m.x + outSetX
                                 const ny = -m.y + outSetY
-                                const xShift = m.x + outSetX;
-                                const yShift = m.y + outSetY;
-                                const xrShifted = m.xr + xShift;
-                                const yrShifted = m.yr + yShift;
-
+                                var xShift = m.x + outSetX;
+                                var yShift = m.y + outSetY;
+                                var xrShifted = m.xr + xShift;
+                                var yrShifted = m.yr + yShift;
+xShift/=fitin;
+yShift/=fitin;
                                 starStreamPositionAttribute.setXYZ(starStreamStride, nx, ny, depthINNER)
                                 starStreamPositionAttribute.setXYZ(starStreamStride + 1, xShift, yShift, depthINNER)
                                 starStreamPositionAttribute.setXYZ(starStreamStride + 2, xrShifted, yrShifted, depthOUTER)
