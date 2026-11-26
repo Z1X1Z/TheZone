@@ -3601,6 +3601,11 @@ loopOfCulling=starStreamIndex
 //console.log(xyStarParticleArray[loopOfCulling] )
 
 
+for (var em = 0; em < fftSize; em++) 
+for (var e = 0; e < 3; e++) {
+                            starStreamPositionAttribute.setXYZ(loopOfCulling * 3 + e, 0, 0, 0)
+                            starStreamColorAttribute.setXYZW(loopOfCulling * 3 + e, 0, 0, 0, 0)
+                        }
 
 
 
