@@ -6096,15 +6096,24 @@ tolerance=(tolerance**1.)**1.
 tolerance=Math.pow(tolerance,1.)
 tolerance=tolerance**1.
 
+
+
+
 //.09182507
 tolerance=(.125-(+Math.pow(Number.MIN_VALUE*(1/3.),2.)*(2/3.))**.5/.5+(tolerance));
 
 123*5**4
 tolerance=(1.-Math.sqrt(tolerance)/2.)**2+(+Math.pow(Number.MIN_VALUE*(1/3.),2.)*(2/3.))**.5/.5
-let toll = tolerance
-tolerance -= ((toll*toll)/2.)**(Math.sqrt(toll)/.5)
 
-        //tolerance*=-1
+let toll = tolerance
+tolerance =tolerance-( ((toll*toll)/2.)**(Math.sqrt(toll)/.5)-(Math.pow(toll,.5)*2.)**(Math.pow(toll,2.)*.5))
+//tolerance-=1.
+tolerance-=1.440001000441
+//tolerance=uniforms.baseN.value*(tolerance*uniforms.baseN.value)
+
+
+
+    //tolerance*=-1
 
 console.log(tolerance)
 
