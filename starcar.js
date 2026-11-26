@@ -3599,42 +3599,29 @@ if(window.staff)build_staff();
                     
 loopOfCulling=starStreamIndex-1
 //console.log(xyStarParticleArray[loopOfCulling] )
-
-
-                        for (var em = 0; em < starCount; em++) 
-
-                        for (var e = 0; e < 3; e++) {
-                            starStreamPositionAttribute.setXYZ(loopOfCulling * 3 + e, 0, 0, 0)
-                            starStreamColorAttribute.setXYZW(loopOfCulling * 3 + e, 0, 0, 0, 0)
-                        }
-
-
-/*
                     if (xyStarParticleArray[loopOfCulling] != null) 
 while (loopsToCull >= 0) {
                         // xyStarParticleArray.shift();
-                        if ((uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)/1000./60 >secondsToEdge*.5)
+                        if ((uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)>=secondsToEdge*3.)
 {
+  //  console.log("val :" + (uniforms["time"].value - xyStarParticleArray[loopOfCulling].time))
                         xyStarParticleArray[loopOfCulling] = null;
 
                         for (var e = 0; e < 3; e++) {
                             starStreamPositionAttribute.setXYZ(loopOfCulling * 3 + e, 0, 0, 0)
                             starStreamColorAttribute.setXYZW(loopOfCulling * 3 + e, 0, 0, 0, 0)
                         }
-                    }
-                   
+                    }   if (xyStarParticleArray[(loopOfCulling-1+starCount)%starCount] == null) break ;
+
+                   // else if (xyStarParticleArray[loopOfCulling] != null) break ;
+
+
                         loopOfCulling = (loopOfCulling -1+ starCount) % starCount;
 //console.log("HERE")
 
                         loopsToCull--
-                                             if (xyStarParticleArray[loopOfCulling] == null) break ;
 
                     }
-
-
-
-                         */
-
 //console.log("loopOfCullin+ "+loopOfCulling)
                     let OUTERSHELL = maxToMin * secondsToEdge;
                     let m = xyStarParticleArray[starStreamIndex];
