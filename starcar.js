@@ -3601,22 +3601,21 @@ loopOfCulling=starStreamIndex
 //console.log(xyStarParticleArray[loopOfCulling] )
 
 
-                        for (var em = 0; em < starCount; em++)
-                        for (var e = 0; e < 3; e++) {
-                            starStreamPositionAttribute.setXYZ(loopOfCulling * 3 + e, 0, 0, 0)
-                            starStreamColorAttribute.setXYZW(loopOfCulling * 3 + e, 0, 0, 0, 0)
-                        }
 
 
 
                     if (xyStarParticleArray[loopOfCulling] != null) 
-while (loopsToCull >= 0) {
+while (loopsToCull >0) {
                         // xyStarParticleArray.shift();
                         if ((uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)>=secondsToEdge)
 {
   // console.log("val :" + (uniforms["time"].value - xyStarParticleArray[loopOfCulling].time))
                         xyStarParticleArray[loopOfCulling] = null;
-/*
+for (var e = 0; e < 3; e++) {
+                            starStreamPositionAttribute.setXYZ(loopOfCulling * 3 + e, 0, 0, 0)
+                            starStreamColorAttribute.setXYZW(loopOfCulling * 3 + e, 0, 0, 0, 0)
+                        }
+                        /*
                         for (var e = 0; e < 3; e++) {
                             starStreamPositionAttribute.setXYZ(loopOfCulling * 3 + e, 0, 0, 0)
                             starStreamColorAttribute.setXYZW(loopOfCulling * 3 + e, 0, 0, 0, 0)
