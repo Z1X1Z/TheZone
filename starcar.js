@@ -6101,7 +6101,10 @@ tolerance=(.125-(+Math.pow(Number.MIN_VALUE*(1/3.),2.)*(2/3.))**.5/.5+(tolerance
 
 123*5**4
 tolerance=(1.-Math.sqrt(tolerance)/2.)**2+(+Math.pow(Number.MIN_VALUE*(1/3.),2.)*(2/3.))**.5/.5
-//tolerance*=-1
+let toll = tolerance
+tolerance -= ((toll*toll)/2.)**(Math.sqrt(toll)/.5)
+
+        //tolerance*=-1
 
 console.log(tolerance)
 
