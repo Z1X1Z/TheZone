@@ -3587,7 +3587,7 @@ if(window.staff)build_staff();
 
 
 
-
+5
 
 
 
@@ -3602,7 +3602,7 @@ loopOfCulling=starStreamIndex-1
                     if (xyStarParticleArray[loopOfCulling] != null) 
 while (loopsToCull >= 0) {
                         // xyStarParticleArray.shift();
-                        if ((uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)>=secondsToEdge*3.)
+                        if ((uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)>=secondsToEdge*3.*logStabilizationConstant)
 {
   //  console.log("val :" + (uniforms["time"].value - xyStarParticleArray[loopOfCulling].time))
                         xyStarParticleArray[loopOfCulling] = null;
