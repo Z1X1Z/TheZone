@@ -3595,21 +3595,28 @@ if(window.staff)build_staff();
 
                     scene.add(starStreamMesh)
 
-
-                    let loopsToCull = 0;
+                    let loopsToCull = starCount;
+                    
 loopOfCulling=starStreamIndex
-                    if (xyStarParticleArray[loopOfCulling] != null) while (xyStarParticleArray[(loopOfCulling - 1 + starCount) % starCount] != null && (uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)/1000.>=secondsToEdge
-                    && loopsToCull < starCount) {starCount
+//console.log(xyStarParticleArray[loopOfCulling] )
+                    if (xyStarParticleArray[loopOfCulling] != null) 
+while (loopsToCull > 0) {
                         // xyStarParticleArray.shift();
+                        if ((uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)/1000. >secondsToEdge)
+{
                         xyStarParticleArray[loopOfCulling] = null;
 
                         for (var e = 0; e < 3; e++) {
                             starStreamPositionAttribute.setXYZ(loopOfCulling * 3 + e, 0, 0, 0)
                             starStreamColorAttribute.setXYZW(loopOfCulling * 3 + e, 0, 0, 0, 0)
                         }
-                        loopOfCulling = (loopOfCulling +-1+ starCount) % starCount;
+                    }
+
+                        loopOfCulling = (loopOfCulling -1+ starCount) % starCount;
+//console.log("HERE")
 
                         loopsToCull--
+                                             if (xyStarParticleArray[(loopOfCulling + starCount) % starCount] == null) break ;
 
                     }
 //console.log("loopOfCullin+ "+loopOfCulling)
@@ -3647,7 +3654,7 @@ let sizeSpeed =1./3.;//theres no way this math is right! Yet it's so close to ex
 
 
                             if (timeShift>(l3-sizeSpeed)*shellBoost //&&timeShift<1.
-                              &&m.interpolation<30
+                              &&m.interpolation<20&&m.interpolation!=1
                             //  &&m.interpolationFramesScaled<.0125
                                 &&
                                 withinRadialDelimiter) {
