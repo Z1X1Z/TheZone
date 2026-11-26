@@ -3600,7 +3600,7 @@ if(window.staff)build_staff();
 loopOfCulling=starStreamIndex
 //console.log(xyStarParticleArray[loopOfCulling] )
 
-/*
+
 for(let jkl = 0.; jkl<starCount; jkl++)
 {
                             starStreamPositionAttribute.setXYZ(jkl *6 , 0, 0, 0)
@@ -3611,14 +3611,14 @@ for(let jkl = 0.; jkl<starCount; jkl++)
 
                             starStreamPositionAttribute.setXYZ(jkl *6 +4, 0, 0, 0)
                             starStreamColorAttribute.setXYZW(jkl *6 + 5, 0, 0, 0, 0)
-                }*/
+                }
 
                     if (xyStarParticleArray[loopOfCulling] != null) 
 while (loopsToCull >0) {
                         // xyStarParticleArray.shift();
-                        if ((uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)>secondsToEdge*2/l3)
+                        if ((uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)>secondsToEdge*1.5)
 {
-  console.log("val :" + (uniforms["time"].value - xyStarParticleArray[loopOfCulling].time))
+ // console.log("val :" + (uniforms["time"].value - xyStarParticleArray[loopOfCulling].time))
                         xyStarParticleArray[loopOfCulling] = null;
                         /*
                             starStreamPositionAttribute.setXYZ(loopOfCulling * 6 , 0, 0, 0)
@@ -3663,7 +3663,7 @@ let fitin =l3/logStabilizationConstant/logStabilizationConstant
                         let sizeSpeed =1./3.*logStabilizationConstant;//theres no way this math is right! Yet it's so close to exactly right that I don't want to strive against the wind
 
                         while (xyStarParticleArray[starMoment] != null && starMoment != (starStreamIndex + 1) % starCount) {
-                   if(takingToLong(20))break;
+                   if(takingToLong(100))break;
                             m = xyStarParticleArray[starMoment];
                             if (lastLoopTime != m.time) {
                                 if(RockInTheWater!=3)
