@@ -1241,7 +1241,8 @@ if(EldersLeg>0.)
 
 
 
-      if(RockInTheWater==1||RockInTheWater==2||RockInTheWater==3) scene.remove(starStreamMesh);
+    //  if(RockInTheWater==1||RockInTheWater==2||RockInTheWater==3) 
+        scene.remove(starStreamMesh);
         starStreamGeometry.dispose();
         starStreamGeometry = new THREE.BufferGeometry();
         starStreamGeometry.dynamic = true;
