@@ -3600,32 +3600,42 @@ if(window.staff)build_staff();
 loopOfCulling=starStreamIndex
 //console.log(xyStarParticleArray[loopOfCulling] )
 
+/*
+for(let jkl = 0.; jkl<starCount; jkl++)
+{
+                            starStreamPositionAttribute.setXYZ(jkl *6 , 0, 0, 0)
+                            starStreamColorAttribute.setXYZW(jkl *6 + 1, 0, 0, 0, 0)
 
-for (var em = 0; em < fftSize; em++) 
-for (var e = 0; e < 3; e++) {
-                            starStreamPositionAttribute.setXYZ(loopOfCulling * 3 + e, 0, 0, 0)
-                            starStreamColorAttribute.setXYZW(loopOfCulling * 3 + e, 0, 0, 0, 0)
-                        }
+                            starStreamPositionAttribute.setXYZ(jkl *6 +2, 0, 0, 0)
+                            starStreamColorAttribute.setXYZW(jkl *6 + 3, 0, 0, 0, 0)
 
-
+                            starStreamPositionAttribute.setXYZ(jkl *6 +4, 0, 0, 0)
+                            starStreamColorAttribute.setXYZW(jkl *6 + 5, 0, 0, 0, 0)
+                }*/
 
                     if (xyStarParticleArray[loopOfCulling] != null) 
 while (loopsToCull >0) {
                         // xyStarParticleArray.shift();
-                        if ((uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)>=secondsToEdge)
+                        if ((uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)>secondsToEdge*2/l3)
 {
-  // console.log("val :" + (uniforms["time"].value - xyStarParticleArray[loopOfCulling].time))
+  console.log("val :" + (uniforms["time"].value - xyStarParticleArray[loopOfCulling].time))
                         xyStarParticleArray[loopOfCulling] = null;
-for (var e = 0; e < 3; e++) {
-                            starStreamPositionAttribute.setXYZ(loopOfCulling * 3 + e, 0, 0, 0)
-                            starStreamColorAttribute.setXYZW(loopOfCulling * 3 + e, 0, 0, 0, 0)
-                        }
                         /*
-                        for (var e = 0; e < 3; e++) {
+                            starStreamPositionAttribute.setXYZ(loopOfCulling * 6 , 0, 0, 0)
+                            starStreamColorAttribute.setXYZW(loopOfCulling * 6 + 1, 0, 0, 0, 0)
+
+                            starStreamPositionAttribute.setXYZ(loopOfCulling * 6 + 2, 0, 0, 0)
+                            starStreamColorAttribute.setXYZW(loopOfCulling * 6 + 3, 0, 0, 0, 0)
+
+                            starStreamPositionAttribute.setXYZ(loopOfCulling * 6 + 4, 0, 0, 0)
+                            starStreamColorAttribute.setXYZW(loopOfCulling * 6 + 5, 0, 0, 0, 0)
+                            */
+                            /*
+                        for (var e = 0; e < 3; e+=2) {
                             starStreamPositionAttribute.setXYZ(loopOfCulling * 3 + e, 0, 0, 0)
                             starStreamColorAttribute.setXYZW(loopOfCulling * 3 + e, 0, 0, 0, 0)
                         }
-                            */
+                        */
                     }   if (xyStarParticleArray[(loopOfCulling-1+starCount)%starCount] == null) break ;
 
                    // else if (xyStarParticleArray[loopOfCulling] != null) break ;
@@ -3660,7 +3670,7 @@ let fitin =l3/logStabilizationConstant/logStabilizationConstant
                                 {
                               //    sizeSpeed = .5;
                             }                
-                                            timeShift = (-((uniforms["time"].value - m.time)/3.-1.)*sizeSpeed+1.+.5/sizeSpeed);
+                                            timeShift = (-((uniforms["time"].value - m.time)-1.)*sizeSpeed+1.+.5/sizeSpeed);
 
                                     w = timeShift / m.lengt / secondsToEdge;
                                 withinRadialDelimiter = timeShift + m.lengt < OUTERSHELL * shellBoost;// OUTERSHELL times 1.1 to prevent remnant pieces around edge
@@ -3672,10 +3682,8 @@ let fitin =l3/logStabilizationConstant/logStabilizationConstant
 
 
 
-                            if (timeShift>(l3-sizeSpeed)*shellBoost //&&timeShift<1.
-                              &&m.interpolation<20&&m.interpolation!=1
-                            //  &&m.interpolationFramesScaled<.0125
-                                &&
+                            if (m.interpolation<20&&m.interpolation!=1&&
+                          
                                 withinRadialDelimiter) {
                                 let bulletY = 0;
                                 let bulletX = 0;
@@ -3695,8 +3703,8 @@ let fitin =l3/logStabilizationConstant/logStabilizationConstant
                                 var yShift = m.y + outSetY;
                                 var xrShifted = m.xr + xShift;
                                 var yrShifted = m.yr + yShift;
-xShift/=fitin;
-yShift/=fitin;
+//xShift/=fitin;
+//yShift/=fitin;
                                 starStreamPositionAttribute.setXYZ(starStreamStride, nx, ny, depthINNER)
                                 starStreamPositionAttribute.setXYZ(starStreamStride + 1, xShift, yShift, depthINNER)
                                 starStreamPositionAttribute.setXYZ(starStreamStride + 2, xrShifted, yrShifted, depthOUTER)
