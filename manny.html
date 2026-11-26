@@ -5602,7 +5602,7 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
 
  }
 
-
+/*
 if(jubileyes!=0.) 
 {
 if((seventhEYEandJubileye&&lengthP<1./3.)||(!seventhEYEandJubileye&&seventhEYE==3.&&lengthP<twoThirds))
@@ -5614,7 +5614,7 @@ else
 hyperCore+=.25;
 }
 
-
+*/
 //else if (seventhEYE!=3.||lengthP<twoThirds)
 else if((seventhEYE==0.||(seventhEYEandJubileye&&lengthP<twoThirds))&&(lengthP<SEVEYEStartAdj||!seventhOUTside))
 hyperCore+=.5;
@@ -7397,7 +7397,11 @@ hyperCoreOUTPUT--;
             dstnce=length(s);
 }else break;
 
-        
+
+
+                   vec2 circumscribe = window;
+if(length(circumscribe)>2./3.)circumscribe=s;
+
   vec2 deSplicedS =window;
    if(lpcc<twoThirds&&length(window)<twoThirds) deSplicedS=pCenterCored;
 
@@ -7611,7 +7615,11 @@ o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo+eyeScroll.xyz)-(starship.x+starship
                       o+=isGrey;
                     //  if(length((vUv.yx-.5)/(resolution/max(resolution.x,resolution.y)))<2.*sqrt2/min(resolution.x,resolution.y))o=vec3(hyperCoreOUTPUT/255.*4.,cored/255.*4.,255.);
                    //if(abs(vUv.x-.5)*2.<mod(hyperCoreStored,1.)&&vUv.y<.06125&&hyperCoreStored>5.)o=vec3(sign(mod(hyperCoreStored,2.)-1.)*sign(vUv.x-.5));
-                    return vec4(clamp(o+cloverEYES,0.,1.),atan(b.y,b.x));}
+                  
+                  
+                   return vec4(clamp(o+cloverEYES,0.,1.),atan(b.y,b.x))
+                    //return vec4(clamp(o+cloverEYES,0.,1.),circumscribe)
+                    ;}
 
                       
                       
@@ -8469,12 +8477,13 @@ vec2 dance = vec2(0.);
                                  if(dynamicDance) moveDynamic = (move/4.+t)/2.*smush;
                                  else  moveDynamic = move/4.*smush;
                                  vec3 backgroundFace = vec3(0.);
+                                 float circumscription = 0.;
          if(colorCombo<=10){
                       
                        vec4 tolOUT = vec4(0.);
                        tolOUT=tol(background, dance2);
                        zoomer=tolOUT.xyz;
-                       
+                       circumscription = tolOUT.w;
                        angleOfClover=tolOUT.w;
                        if(chirality==3){
                            if(!twelveGates)
@@ -8486,7 +8495,7 @@ vec2 dance = vec2(0.);
                            { tolOUT=tol(spin2(background,PI2/24.),dance2);
                                zoomer+=tolOUT.xyz;
                                }
-                           angleOfClover+=tolOUT.w;
+                         //  angleOfClover+=tolOUT.w;
                            zoomer/=2.;
                            
                        }
@@ -8596,8 +8605,9 @@ if(Character==2)clothes=dress(characterOnTrailP*1.5,-moveDynamic/7.);
                                             else if(Character<=10)
                                                                  {
                        vec2 morphDance = vec2(0.);
-                       if(cloverArms) morphDance = vec2(-sin(-angleOfClover),1.-cos(-angleOfClover));
-                       else morphDance=moveDynamic;
+                       //if(cloverArms) morphDance = vec2(-sin(-angleOfClover),1.-cos(-angleOfClover));
+                      // else 
+                       morphDance=moveDynamic;
                        
                        bodyWithArms = bodyPlayer(characterOnTrailP,morphDance);
                        clothes=robe(characterOnTrailP,morphDance);
@@ -9792,7 +9802,7 @@ fin/vec4(confraculator
 
                    if(!(starship.x==starship.y&&starship.y==starship.z)&&oopm.w==0.)
                    {
-                    if(starship.w==1.)
+                    if(starship.w==1.||starship.w==253./255.)
                     {
                   if(mannyFace.w!=.5) layeredOUT=vec4(clamp(clamp(layeredOUT.xyz,0.,1.)+(-starship.x-starship.y-starship.z)/2.,0.,1.)+starship.xyz,1.);
                    else layeredOUT = vec4(starship.xyz*.5+layeredOUT.xyz*.5,1.);
@@ -9825,6 +9835,19 @@ else layeredOUT=vec4(.5)*layeredOUT+.5;
 else     layeredOUT=(layeredOUT*1.+GOH*twoThirds);
 
 }
+/*
+if(//(starship.w==1.)&&//
+//circumscription<twoThirds//&&circumscription>.4&&
+ circumscription<twoThirds&&
+  mannyFace.w!=.5&&
+(true||
+//layeredOUT.xyz!=treeCache.xyz//||
+(hypnoticHarmonicCircles.r!=0.||hypnoticHarmonicCircles.g!=0.||hypnoticHarmonicCircles.b!=0.)
+))layeredOUT*=pow(1.-(circumscription)/1.5,2.)*2.;
+*/
+gl_FragColor=vec4(layeredOUT.xyz,1.);//vec4(movie(characterP),1.);//
+
+
                         gl_FragColor=vec4(layeredOUT.xyz,1.);//vec4(movie(characterP),1.);//
  //gl_FragColor=vec4(vec3(length(engine(p))),1.);
                         //things known to cause bugs on some android chrome: heart (divides by zero), linear eq,waveform, "144000" men and women in clover, articles
