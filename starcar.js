@@ -3600,9 +3600,9 @@ if(window.staff)build_staff();
 loopOfCulling=starStreamIndex
 //console.log(xyStarParticleArray[loopOfCulling] )
                     if (xyStarParticleArray[loopOfCulling] != null) 
-while (loopsToCull > 0) {
+while (loopsToCull >= 0) {
                         // xyStarParticleArray.shift();
-                        if ((uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)/1000. >secondsToEdge)
+                        if ((uniforms["time"].value - xyStarParticleArray[loopOfCulling].time)/1000. >secondsToEdge*2.)
 {
                         xyStarParticleArray[loopOfCulling] = null;
 
@@ -3616,7 +3616,7 @@ while (loopsToCull > 0) {
 //console.log("HERE")
 
                         loopsToCull--
-                                             if (xyStarParticleArray[(loopOfCulling + starCount) % starCount] == null) break ;
+                                             if (xyStarParticleArray[loopOfCulling] == null) break ;
 
                     }
 //console.log("loopOfCullin+ "+loopOfCulling)
