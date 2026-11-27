@@ -4272,7 +4272,8 @@ let fulcrum = .8
                             wisdom * 2. * Math.PI * 2 ** (xenOctaveFactor - (t + (g) / 12.)) / 2 ** xenOctaveFactor;
                             */
                         const lengt = radialHarmonicInterval /(Math.PI*16.);
-                        radialHarmonicInterval += angle;
+                        console.log("twist :"+window.twist)
+                        radialHarmonicInterval += -((note+window.twist/2.)/12 +.5)*pi*2*window.flip;
                         
                         const xr = widt * -Math.sin(-radialHarmonicInterval);
                         const yr = widt * -Math.cos(-radialHarmonicInterval);
