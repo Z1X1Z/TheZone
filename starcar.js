@@ -1,5 +1,4 @@
 var THREE;
-
 if (window.useCDN) import("three").then(module => { THREE = module })
     .catch((err) => {
         console.log(err)
@@ -1140,7 +1139,8 @@ function setFFTdependantSizes() {
     crownBarColors = new Float32Array( EldersLeg * 6 * 4 *3);
     }
     starArms = numberOfBins;
-    window.starCount = Math.ceil(starArms * 60 * secondsToEdge*shellBoost*2.);
+    window.starCount = Math.ceil(starArms * 60 * secondsToEdge//*shellBoost*2.
+        );
     xyStarParticleArray = Array(starCount).fill(null)
     starStreamPoints = new Float32Array(starCount * 3 * 6);
     starStreamColors = new Float32Array(starCount * 4 * 6);
@@ -1244,6 +1244,7 @@ if(EldersLeg>0.)
     //  if(RockInTheWater==1||RockInTheWater==2||RockInTheWater==3) 
         scene.remove(starStreamMesh);
         starStreamGeometry.dispose();
+         starStreamMesh=null;
         starStreamGeometry = new THREE.BufferGeometry();
         starStreamGeometry.dynamic = true;
         starStreamGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starStreamPoints, 3));
@@ -3569,7 +3570,8 @@ if(window.staff)build_staff();
 
                             starStreamIndex = (starStreamIndex + 1) % starCount;
                             xyStarParticleArray[starStreamIndex] = xyStarParticle;
-                        }
+                       
+                          }
                         starStride += 3;
 
                     }
