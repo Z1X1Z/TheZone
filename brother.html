@@ -900,6 +900,10 @@ uniforms.cloverOffset.value=document.getElementById('CloverTwist').value/6.">
                        key  = 'S';
                        callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
                     <label for="SuperSeal">Super Seal?![.S]</label><br>
+         <input type="checkbox" id="blitz" name="t"  onclick= "
+                       key  = 'E';
+                       callKey(new KeyboardEvent('keydown', {'key': key, 'altKey':true,'keyCode':key.charCodeAt(0)}));">
+                    <label for="blitz">Blitz![.E]</label><br>
 
 
                 <form>
@@ -1547,6 +1551,7 @@ ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
 <script id="fragmentShader" type="x-shader/x-fragment">
     varying vec2 vUv;
     
+    uniform bool blitz;
 
     uniform float movieTime;
     uniform float concertKeyTuning;
@@ -3317,15 +3322,52 @@ const float base=2.7010022442;
 float petals = 0.;
 
  bool BURSTING = true;
-
 vec4 tol(vec2 p, vec2 t){
+
+    /*
+
+for (float oo = 0.; oo<eframe; oo++)
+{
+}*/
 
     vec2 coordsB = coords;
     float hyperCore=0.;
 
 float lfc = length(constellationCoord);
 
+
+float SEVEYEPush = pow(2.,SEVEYEpow);
+
+float SEVEYEStartAdj=SEVEYEStart;
+    SEVEYEStartAdj*=- clvrVariant4;
+
+float sevMargin = 1./SEVEYEPush;
+float lfcAdj = lfc;
+    sevMargin*=-clvrVariant4;
+    lfcAdj*=.75;
+
+sevMargin*=SEVEYEStart/2.;
+sevMargin/=8./SEVEYEPush;
+
+
+
 float lengthP = length(p);
+
+ float reframe =   1.;
+ float reFrameSign = 0.;
+if(blitz){
+//if(SEVEYEStartAdj<lengthP)
+{
+  reframe =   sqrt2;
+  reFrameSign = 1.;
+//  if(reFrameSign>0.)
+                  p*=1./reframe;//if reFrameSign negative this should be 1./reframe else reframe
+            //  else   
+      //                          p*=reframe;//if reFrameSign negative this should be 1./reframe else reframe
+ 
+}
+}
+
 
  float zoomB = zoom;
  float lfcB = lfc;
@@ -3382,19 +3424,6 @@ float coresIn = 0.;
 const float crs = 60.;//this is the mandelclover and original inheritance colormode core range
  float centerslide = 0.;
 bool pollen = true;
-
-
-float SEVEYEPush = pow(2.,SEVEYEpow);
-
-float SEVEYEStartAdj=SEVEYEStart;
-float sevMargin = 1./SEVEYEPush;
-float lfcAdj = lfc;
-    SEVEYEStartAdj*=- clvrVariant4;
-    sevMargin*=-clvrVariant4;
-    lfcAdj*=.75;
-
-sevMargin*=SEVEYEStart/2.;
-sevMargin/=8./SEVEYEPush;
 
 float upperOuterLimit = pow(2.,61.);
     
@@ -3495,14 +3524,21 @@ p*=interSection*2.;
 float daisifier = 0.;
 
 //angle=mod(abs(angle)+2.*PI,PI/4.);
+if(((blitz&&
+SEVEYEStartAdj/2.<=lengthP*2.&&SEVEYEStartAdj<=lfc&&//changes if x<y or y>x
+abs(pABSOLUTE.y/2.)<=27./logStabilizationConstant&&
+abs(pABSOLUTE.x/2.)<=27.
+)
 
-if(SEVEYEStartAdj/2.<=lengthP*2.&&SEVEYEStartAdj<=lfc&&//changes if x<y or y>x
+||
+(!blitz&&
+lengthP>SEVEYEStartAdj*2.&&lfc>SEVEYEStartAdj&&//changes if x<y or y>x
+abs(pABSOLUTE.y)<=27./logStabilizationConstant&&
+abs(pABSOLUTE.x)<=27.
 
-
-abs(pABSOLUTE.y)<27./logStabilizationConstant&&
-abs(pABSOLUTE.x)<27.
-&&abs(constellationCoord.y)<27./logStabilizationConstant
-&&abs(constellationCoord.x)<27.
+))
+&&abs(constellationCoord.y)<=27./logStabilizationConstant
+&&abs(constellationCoord.x)<=27.
 
 
 
@@ -3532,7 +3568,7 @@ daisifier++;
 
    
 float precores = .25*LogHalfReciprocal;
-float cored = log(zoomB)/-log2+precores;
+float cored = log(zoomB)/-log2+precores-(reframe-1.)/LogHalfReciprocal*reFrameSign;
 float loops=0.;
  lengthP = length(p);
 
@@ -3692,8 +3728,7 @@ loops=0.;
 hyperCore+=
    cored* 
    //(-cored*gr*leaf)//this is the core slider this dilates central core across metacore//here could use a hotkey//does it do anything useful?
-   twoThirds+log(lfc)*logStabilizationConstant;
-
+   twoThirds+log(lfc+pow(2.,reframe-1.)-1.)*logStabilizationConstant;//reframe
 if(lfcOverzoomB>twoThirds)
 {
     float dif = 1.;
@@ -3777,6 +3812,8 @@ if(zoomCored<.125)
 
 }
 }
+
+
     if (SEVEYEStartAdj>lengthP) hyperCore+=((((((1./((((((gr*truncator)/truncator)*6.-((leaf*3.*truncator)/truncator)))*truncator)/truncator))*truncator)/truncator)))*truncator)/truncator;//added after superseal//is the truncator operations reversed?
     else if(
 abs(pABSOLUTE.y)<27./logStabilizationConstant&&
@@ -3855,7 +3892,8 @@ float spoke_factorLarge =spoke_factor*grPlusOneOverLeaf;
  if(lengthP>SEVEYEStartAdj&&lfc>zoomB)
  {
         if (SEVEYEStartAdj>lengthP-sevMargin)
-        {hyperCore+=lfc*SEVEYEpow/1.5;
+        {if(blitz)hyperCore+=lfc*SEVEYEpow/3.;//   /1.5
+          else hyperCore+=lfc*SEVEYEpow/1.5;
             hyperCore-=.1;
         }
 
@@ -4163,19 +4201,16 @@ s.y=syb;
            //  s+=t-m;
            s-=m;
    dstnce = length(s);
-
         if(
             sqrt(dstnce)*dstnce<=hyperCoreBoosted)
                          {
 
                             if(counter==0.)inMainSpoke=true;//this actually seems to be the not spoke part of spoker so boolean should be reversed to be accurate
-                           
+             
   if (inMainSpoke) s=spin2(s,distributorFACTOR);
 
-                                
                              s/=spoke_factorLarge;//engage ; s/=2.+'superspokes'
-                          
-                       
+
                        hyperCoreOUTPUT-=downSpoke;
 
                          hyperCoreBoosted-=downSpoke;
@@ -4186,6 +4221,7 @@ s.y=syb;
 daisifier=1.;
 
                  s*=spoke_factor;
+
                  float coreFactor =upSpoke;
              
             hyperCoreOUTPUT+=coreFactor
@@ -4293,6 +4329,9 @@ if(dstnce<CORE_DELIMITER
 
                           s=(s/s)*s;
 */
+
+
+
 
 if(length(p)>1./3.){
 

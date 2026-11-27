@@ -826,6 +826,14 @@ function move() {
 
     d_x *= (1. + INcreaseBoost / 2.);
     d_y *= (1. + INcreaseBoost / 2.);
+
+    if  ( uniforms.blitz.value)
+    {
+
+    d_x /= window.reframe;
+    d_y /= window.reframe;
+
+    }
     if (!isFinite(d_x)) d_x = 0;
     if (!isFinite(d_y)) d_y = 0;
 
@@ -2676,9 +2684,9 @@ wrapMovementBoost=2.-Math.log(3);
         //else  uniforms.coordSHIFT.value=new THREE.Vector2(0,0);
 
     }
-
-    uniforms["zoom"].value = zoom;
-    uniforms.coords.value = new THREE.Vector2(coordX, coordY);
+    
+    uniforms["zoom"].value = zoom/reframe;
+    uniforms.coords.value = new THREE.Vector2(coordX/reframe, coordY/reframe);
     constellationCoordFind();
     uniforms.STAR.value = null;
     uniforms.EDEN.value = null;
@@ -4272,8 +4280,7 @@ let fulcrum = .8
                             wisdom * 2. * Math.PI * 2 ** (xenOctaveFactor - (t + (g) / 12.)) / 2 ** xenOctaveFactor;
                             */
                         const lengt = radialHarmonicInterval /(Math.PI*16.);
-                        console.log("twist :"+window.twist)
-                        radialHarmonicInterval += -((note+window.twist/2.)/12 +.5)*pi*2*window.flip;
+                        radialHarmonicInterval += -((note+window.twist/2.)/12 +.5)*pi*2*window.flip;//angle
                         
                         const xr = widt * -Math.sin(-radialHarmonicInterval);
                         const yr = widt * -Math.cos(-radialHarmonicInterval);
