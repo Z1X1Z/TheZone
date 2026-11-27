@@ -133,7 +133,7 @@ async function finishLoadingAudioFile(){const bb=await  loadAudioFile ();
                            
                            window.uniformsInitial = {
                             
-blitz:{value:true},
+blitz:{value:false},
 iso_engine:{value:false},
  SEVEYEpow:{value:(grPermanent)*2.-leafPermanent},//gr*3. and gr*2-leaf work well with start of 1.75
 
@@ -385,7 +385,7 @@ const starSHIPVOLUMEdefaultLowVolume = 1./4096;//used in starshipmod
 const wingsOfRighteousness2 =(-Number(".2508742365242187487777776975555422424429370377"//+".25087423652421"+"874869"
     )+(grPermanent-leafPermanent-1.41421356237309504880168872420969807856967187537694807317667973799073247846210703885038753432764157273501384623091229702492483605585073721264412149709993583141322266592750559275579995050123421188800011002200444158132480000000126621881244215009878888284))*2;
 function resetAll(){
-    window.reframe=root2
+    window.reframe=1.
     window.pebbles=true;
 window.staff=true;
 
