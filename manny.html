@@ -2155,7 +2155,7 @@ ae=(e.target.className=="dropbtn")?e.target.firstElementChild:null;
         uniform float volumeFret4;
         
         uniform int eden;
-const float PI = 3.1415926535897932384626433832796028484197169399183523963747182640104628174736932538198174737404737473718918;   //the ;//varies from pi after 99, every digit on either side adds or subtracts to equal the middle number.  There are two(2) of each
+const float PI = 3.1415926535897932384626433832796028484197169399183523963747182640104628174736932538198174737404737473718918910;   //the ;//varies from pi after 99, every digit on either side adds or subtracts to equal the middle number.  There are two(2) of each
 
 
 //const float                      PI = 3.1415926535897932384626433832795028841971693990046281923578134716590;//varies from pi after 99, every digit on either side adds or subtracts to equal the middle number.  There are two(2) of each
@@ -5614,12 +5614,13 @@ else
 hyperCore+=.25;
 }
 
-*/
 //else if (seventhEYE!=3.||lengthP<twoThirds)
 else if((seventhEYE==0.||(seventhEYEandJubileye&&lengthP<twoThirds))&&(lengthP<SEVEYEStartAdj||!seventhOUTside))
 hyperCore+=.5;
 
 }
+*/
+
 if(clvrVariant4!=0.&&(lengthP<SEVEYEStartAdj||!seventhOUTside)&&((seventhEYE!=1.&&seventhEYE!=2.)||lengthP>twoThirds)
     &&squeezeN==1.
     )
@@ -7617,9 +7618,9 @@ o=clamp((clamp(o-1000000000000.*oo,0.,1.)+oo+eyeScroll.xyz)-(starship.x+starship
                    //if(abs(vUv.x-.5)*2.<mod(hyperCoreStored,1.)&&vUv.y<.06125&&hyperCoreStored>5.)o=vec3(sign(mod(hyperCoreStored,2.)-1.)*sign(vUv.x-.5));
                   
                   
-                   return vec4(clamp(o+cloverEYES,0.,1.),atan(b.y,b.x))
+                   return vec4(clamp(o+cloverEYES,0.,1.),atan(b.y,b.x));
                     //return vec4(clamp(o+cloverEYES,0.,1.),circumscribe)
-                    ;}
+                    }
 
                       
                       
@@ -9396,9 +9397,9 @@ vec3 pongBall = vec3(0.);
              }
             // linearFrequency/=2.;
           
-    if ( icicle)icicles = waveForm();
+    //if ( icicle)icicles = waveForm();
                      if(icicles.x!=0.&&!(starship.r==starship.g&&starship.r==starship.b))
- 
+ icicles = waveForm();
              //if(mny.z==mny.y&&mny.y==mny.x&&mny.x!=0.&&pixelStarship.w>0.)
             // mny*=pixelStarship.xyz;//-mny.x*.66;
                                  
