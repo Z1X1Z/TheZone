@@ -5479,11 +5479,20 @@ var toleranceTOL = tolerance;
     tAScaled-=(grPermanent-leafPermanent+root2-4.25)
             tolerance +=24./Number.MAX_VALUE;
     tAScaled*=(Math.log(3.)*logStabilizationConstant)*Math.PI
-    if(tolerance>toleranceTOL)
+    var mcdf=(((1.-leaf)/trunc)*trunc)/gr
+  if(tolerance<toleranceTOL/(1.-1./(leafPermanent)))
         {
-            tolerance*=2.;
-           // toleranceTOL=tolerance
+            tolerance*=mcdf;
+      //     toleranceTOL=tolerance
         }
+        else if(tolerance>toleranceTOL)
+        {
+          tolerance/=mcdf;
+      //               toleranceTOL=tolerance
+
+
+        }
+      // tolerance/=2.;
         
 }
 tAScaled/=(((((((((root2/root2)*root2)/grPermanent)/trunc)*leafPermanent))*grPermanent)*trunc)/leafPermanent);
