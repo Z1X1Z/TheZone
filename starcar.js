@@ -5471,6 +5471,8 @@ for(var t=0; t <1.; t+=taf**.5)
         tAScaled=1./(tAScaled*tAScaled-taf)
     }
 var toleranceTOL = tolerance;
+    var mcdf=(((1.-leaf)/trunc)*trunc)/gr
+
     for(var l=0.; l<3.; l+=totalAMPmodified){
 
     tAScaled*=(Math.log(3.)*logStabilizationConstant)*Math.PI
@@ -5479,19 +5481,19 @@ var toleranceTOL = tolerance;
     tAScaled-=(grPermanent-leafPermanent+root2-4.25)
             tolerance +=24./Number.MAX_VALUE;
     tAScaled*=(Math.log(3.)*logStabilizationConstant)*Math.PI
-    var mcdf=(((1.-leaf)/trunc)*trunc)/gr
-  if(tolerance<toleranceTOL/(1.-1./(leafPermanent)))
+  if(tolerance<toleranceTOL*1.5)
         {
             tolerance*=mcdf;
       //     toleranceTOL=tolerance
         }
-        else if(tolerance>toleranceTOL)
+        else if(tolerance>toleranceTOL*(2./3.))
         {
           tolerance/=mcdf;
       //               toleranceTOL=tolerance
 
 
         }
+       // tolerance*=1.-1./(leafPermanent)
       // tolerance/=2.;
         
 }
