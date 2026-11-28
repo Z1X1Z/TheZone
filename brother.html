@@ -3922,17 +3922,23 @@ if(lfc>81.)hyperCore-=log2;
     }
  }
 
-/*
-if(lengthP<1./3.)
+
+if(lengthP<1./3.&&blitz)
  
 {
-    
+                    if(mod(crs,2.)==0.)
+                          hyperCore-=log2*2.25;
+                    if(mod(crs,2.)==1.)
+                          hyperCore-=log2*3.25;//jubileye
+                    
+    /*
    if( mod(coresIn,2.)==1.)
 hyperCore+=1./3.;
 else
 hyperCore+=.25;
-
+*/
 }
+/*
 else if(lengthP<twoThirds)
 hyperCore+=.5;
 */
