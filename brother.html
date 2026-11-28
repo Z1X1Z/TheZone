@@ -3549,10 +3549,11 @@ lengthP>SEVEYEStartAdj/.5&&SEVEYEStartAdj<lfc&&//changes if x<y or y>x
 abs(pABSOLUTE.y)<=27./logStabilizationConstant&&
 abs(pABSOLUTE.x)<=27.
 
-))
 &&abs(constellationCoord.y)<=27./logStabilizationConstant
 &&abs(constellationCoord.x)<=27.
 
+))
+||(interSection*interSection*interSection*interSection<length(p))
 
 
 )

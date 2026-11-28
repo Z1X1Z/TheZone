@@ -4912,7 +4912,14 @@ float daisifier = 0.;
 
 if(SEVEYEStartAdj<lfc&&!twelveGates&&seventhOUTside&&
 
+/*(blitz&&
+SEVEYEStartAdj/2.<=lengthP*2.&&SEVEYEStartAdj<=lfc&&//changes if x<y or y>x
+abs(pABSOLUTE.y/2.)<=27./logStabilizationConstant&&
+abs(pABSOLUTE.x/2.)<=27.
+||(interSection*interSection*interSection*interSection<length(p))
 
+)
+*/
 abs(pABSOLUTE.y)<27./logStabilizationConstant&&
 abs(pABSOLUTE.x)<27.
 &&abs(constellationCoord.y)<27./logStabilizationConstant
