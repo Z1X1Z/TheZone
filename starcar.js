@@ -5481,14 +5481,14 @@ var toleranceTOL = tolerance;
     tAScaled-=(grPermanent-leafPermanent+root2-4.25)
             tolerance +=24./Number.MAX_VALUE;
     tAScaled*=(Math.log(3.)*logStabilizationConstant)*Math.PI
-  if(tolerance<toleranceTOL*1.5)
+  if(tolerance<toleranceTOL/1.5)
         {
-            tolerance*=mcdf;
+            tolerance*=2;
       //         toleranceTOL=tolerance
         }
-        else if(tolerance>toleranceTOL*(2./3.))
+        else if(tolerance>toleranceTOL*1.5)
         {
-          tolerance/=mcdf;
+          tolerance*=.5;
       //               toleranceTOL=tolerance
 
 
@@ -6153,7 +6153,7 @@ tolerance-=1.443441
 //tolerance-=1.440001000441
 //tolerance=uniforms.baseN.value*(tolerance*uniforms.baseN.value)
 
-tolerance=-tolerance
+    tolerance  =  -tolerance
 
     //tolerance*=-1
 
