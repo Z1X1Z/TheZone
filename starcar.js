@@ -5484,7 +5484,7 @@ var toleranceTOL = tolerance;
   if(tolerance<toleranceTOL*1.5)
         {
             tolerance*=mcdf;
-      //     toleranceTOL=tolerance
+      //         toleranceTOL=tolerance
         }
         else if(tolerance>toleranceTOL*(2./3.))
         {
@@ -6153,7 +6153,7 @@ tolerance-=1.443441
 //tolerance-=1.440001000441
 //tolerance=uniforms.baseN.value*(tolerance*uniforms.baseN.value)
 
-
+tolerance=-tolerance
 
     //tolerance*=-1
 
