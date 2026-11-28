@@ -5470,14 +5470,17 @@ for(var t=0; t <1.; t+=taf**.5)
         if(takingToLong())break;
         tAScaled=1./(tAScaled*tAScaled-taf)
     }
+var toleranceTOL = tolerance;
+    for(var l=0.; l<3.; l+=totalAMPmodified){
+
     tAScaled*=(Math.log(3.)*logStabilizationConstant)*Math.PI
     tAScaled-=(wingsOfRighteousness-4.25)/10
+        tolerance=Math.log(tolerance*(tolerance*tolerance))/Math.log(uniforms.baseN.value)
     tAScaled-=(grPermanent-leafPermanent+root2-4.25)
             tolerance +=24./Number.MAX_VALUE;
     tAScaled*=(Math.log(3.)*logStabilizationConstant)*Math.PI
-
-    tolerance=Math.log(tolerance*(tolerance*tolerance))/Math.log(uniforms.baseN.value)
-
+        
+}
 tAScaled/=(((((((((root2/root2)*root2)/grPermanent)/trunc)*leafPermanent))*grPermanent)*trunc)/leafPermanent);
    // tAScaled=Math.abs(tAScaled)
 //tAScaled-=Math.log(3)/100
